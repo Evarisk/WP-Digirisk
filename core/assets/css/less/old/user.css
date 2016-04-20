@@ -1,0 +1,111 @@
+/**	Styles pour les utilisateurs / User's styles	*/
+#wp-digi-user-main-container {
+	display: flex;
+	width: 100%;
+	margin: 10px 0 0 0;
+}
+#wp-digi-user-main-container > div {
+	width: 50%;
+	float: left;
+}
+#wp-digi-user-main-container > div:first-child {
+	margin-right: 20px;
+}
+input.wp-digi-user-search-input {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 0 0 10px;
+}
+.wp-digi-user-list-table {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	margin: 0;
+}
+.wp-digi-user-list-table li.wp-digi-user-list-table-header {
+	background-color: #000;
+	color: #FFF;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+}
+.wp-digi-user-list-table > li {
+	display: table-row;
+}
+.wp-digi-user-list-table > li span {
+	display: table-cell;
+}
+.wp-digi-user-avatar {
+	width: 50px;
+}
+.wp-digi-user-identifier {
+	width: auto;
+}
+input.wp-digi-affectation-duration {
+	width: 30px;
+}
+.wp-digi-user-minilist li {
+	display: inline-block;
+}
+.wp-digi-user-avatar {
+	color: #fff;
+	position: relative;
+	transition: all 0.2s ease-out 0s;
+}
+.wp-digi-user-avatar img {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+.wp-digi-user-avatar-initial {
+	display: block;
+	height: 50px;
+}
+.wp-digi-user-avatar-initial span {
+	width: 50px;
+	text-align: center;
+	font-weight: bold;
+	color: #FFF;
+	font-size: 15px;
+}
+.wp-eo-user-list-footer:after {
+	clear: both;
+	display: table;
+	content: "";
+}
+.wp-eo-user-list-footer > div {
+	float: left;
+}
+.wp-eo-user-list-footer button {
+	float: right;
+}
+
+.wp-digi-user-list-pagination .page-numbers, .wp-digi-user-list-pagination .page-numbers .dashicons {
+	height: 32px;
+	line-height: 32px;
+}
+
+.wp-digi-user-list > li span {
+	height: 50px;
+	line-height: 50px;
+}
+#wp-digi-user-affected-container ul, #wp-digi-user-affected-container ul li {
+	margin: 0;
+}
+#wp-digi-user-affected-container > ul {
+	border: 1px solid #E6E6E6;
+}
+#wp-digi-user-affected-container > ul li span.wp-digi-user-affectation-type-container {
+	width: 100px;
+	text-align: center;
+}
+#wp-digi-user-affected-container ul li > span.wp-digi-user-affectation-type-container .dashicons {
+	font-size: 35px;
+	margin: 0 0 0 -10px;
+	width: 30px;
+}
+
+.wp-digi-affected-user-list li {
+	display: inline-block;
+}

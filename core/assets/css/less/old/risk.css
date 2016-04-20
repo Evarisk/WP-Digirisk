@@ -1,0 +1,79 @@
+/**	Styles pour les risques / Risk listing styles	*/
+.wp-digi-risk-list-header {
+	background-color: #424242;
+	height: 25px;
+}
+.wp-digi-risk-list-header span {
+	color: #FFF;
+	font-weight: bold;
+	line-height: 25px;
+}
+.wp-digi-risk-item {
+	display: table-row;
+	border-bottom: 1px solid #000;
+}
+.wp-digi-risk-item > span {
+	display: table-cell;
+	line-height: 50px;
+}
+.wp-digi-risk-list-header.wp-digi-risk-list-column-thumbnail, .wp-digi-risk-list-column-cotation, .wp-digi-risk-list-header.wp-digi-risk-list-column-actions {
+	width: 50px;
+	text-align: center;
+}
+.wp-digi-risk-list-column-actions {
+	width: 105px;
+}
+.wp-digi-risk-list-column-reference {
+	text-align: center;
+}
+li.wp-digi-risk-item span img.wp-digi-risk-thumbnail {
+	max-width: 48px;
+	vertical-align: top;
+}
+li.wp-digi-risk-item span i.dashicons.wp-digi-element-thumbnail {
+	color: #888888;
+	line-height: 50px;
+	font-size: 45px;
+}
+.wp-digi-risk-item .wp-digi-risk-comment ul li {
+	padding: 0;
+	margin: 0;
+	line-height: 25px;
+}
+.wp-digi-risk-level-1 {
+	background-color: #FFF;
+}
+.wp-digi-risk-level-2 {
+	background-color: orange;
+	color: #FFF;
+}
+.wp-digi-risk-level-3 {
+	background-color: red;
+	color: #FFF;
+}
+.wp-digi-risk-level-4 {
+	background-color: black;
+	color: #FFF;
+}
+
+li.wp-digi-risk-item-new span.wp-digi-risk-comment textarea {
+	margin: 0px;
+	width: 90%;
+	vertical-align: middle;
+	height: 45px;
+	line-height: 1;
+}
+.wp-digi-risk-list-column-cotation {
+	z-index: 598;
+}
+.wp-digi-risk-list-column-cotation ul li {
+	width: 50px;
+	margin: 0px;
+}
+.wp-digi-risk-cotation-chooser {
+	display: none;
+	z-index: 896585;
+}
+.wp-digi-risk-cotation-chooser li {
+	display: inline-block;
+}

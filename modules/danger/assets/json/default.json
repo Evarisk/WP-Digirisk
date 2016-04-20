@@ -1,0 +1,358 @@
+[ {
+	"name": "Accident de plain-pied",
+	"name_thumbnail": "chutePP_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers chute de plain-pied",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Activité physique",
+	"name_thumbnail": "activitePhysique.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers activité physique",
+			"option": {
+				"status": "valid"
+			}
+		},
+		{
+			"name": "Travail sur écran",
+			"name_thumbnail": "travailEcran.png",
+			"option": {
+				"status": "valid"
+			}
+		}]
+	}
+},
+{
+	"name": "Agents biologique",
+	"name_thumbnail": "manqueHygiene_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers manque d'hygiène",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Ambiances climatiques",
+	"name_thumbnail": "climat_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers ambiances climatiques",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Amiante",
+	"name_thumbnail": "amiante.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers amiante",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Autres",
+	"name_thumbnail": "autre_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers autres",
+			"option": {
+				"status": "valid"
+			}
+		},
+		{
+			"name": "Manque de formation",
+			"name_thumbnail": "manqueFormation_PictoCategorie.png",
+			"option": {
+				"status": "valid"
+			}
+		},
+		{
+			"name": "Société extérieure",
+			"name_thumbnail": "societeExt_PictoCategorie.png",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Chute de hauteur",
+	"name_thumbnail": "chuteH_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers chute de hauteur",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Circulation, déplacements",
+	"name_thumbnail": "circulation_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers circulation, déplacements",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Circulations internes",
+	"name_thumbnail": "circulation.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers circulations internes",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Eclairage",
+	"name_thumbnail": "eclairage_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers eclairage",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Effondrements, chute d'objet",
+	"name_thumbnail": "effondrement_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers effrondrements, chute d'objet",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Electricité",
+	"name_thumbnail": "electricite_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers electricité",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Équipements de travail",
+	"name_thumbnail": "machine_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers machines et outils",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Incendie, explosion",
+	"name_thumbnail": "incendies_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers incendie, explostion",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Manque de formation",
+	"option": {
+		"status": "deleted",
+		"danger": [ {
+			"name": "Divers ambiances climatiques",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Manutention manuelle",
+	"name_thumbnail": "manutentionMa_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers manutention manuelle",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Manutention mécanique",
+	"name_thumbnail": "manutentionMe_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers manutention mécanique",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Nuisances sonores",
+	"name_thumbnail": "nuisances_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers nuisances sonores",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Postures penibles",
+	"name_thumbnail": "posturePenible.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers postures penibles",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Produits, émissions et déchets",
+	"name_thumbnail": "produitsC_PictoCategorie.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers produits chimiques, déchets",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Rayonnements",
+	"name_thumbnail": "rayonnement.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers rayonnements",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Risques psychosociaux",
+	"name_thumbnail": "rps.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers risques psychosociaux",
+			"option": {
+				"status": "valid"
+			}
+		},
+		{
+			"name": "Travail de nuit",
+			"name_thumbnail": "travailDeNuit.png",
+			"option": {
+				"status": "valid"
+			}
+		},
+		{
+			"name": "Travail en équipe successives alternantes",
+			"name_thumbnail": "travailEquipeAlternance.png",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Société extérieure",
+	"option": {
+		"status": "deleted",
+		"danger": [ {
+			"name": "Divers ambiances climatiques",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Travail sur écran",
+	"option": {
+		"status": "deleted",
+		"danger": [ {
+			"name": "Divers ambiances climatiques",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+},
+{
+	"name": "Vibrations",
+	"name_thumbnail": "vibrations.png",
+	"option": {
+		"status": "valid",
+		"danger": [ {
+			"name": "Divers vibrations",
+			"option": {
+				"status": "valid"
+			}
+		} ]
+	}
+}
+]

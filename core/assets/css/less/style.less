@@ -1,0 +1,96 @@
+//@import 'digirisk/assets/css/less/user.css';
+//@import 'digirisk/assets/css/less/unitetravail.css';
+//@import 'digirisk/assets/css/less/risk.css';
+
+@import 'digirisk/core/assets/css/less/admin.css';
+@import 'digirisk/core/assets/css/less/interface.less';
+@import 'digirisk/core/assets/css/less/table.less';
+@import 'digirisk/core/assets/css/less/pagination.less';
+@import 'digirisk/core/assets/css/less/list.less';
+@import 'digirisk/core/assets/css/less/form.less';
+@import 'digirisk/core/assets/css/less/evaluation-method.less';
+@import 'digirisk/core/assets/css/less/installer.less';
+@import 'digirisk/core/assets/css/less/responsive.less'; 
+@import 'digirisk/core/assets/css/less/gallery.less'; 
+ 
+@c1: #3495f0; 
+@dark_c1: #1360c8; 
+@c2: #272a35;  
+@dark_c2: #1c1e26;
+
+@red: #e05353; @yellow: #e9ad4f; @green: #47e58e; @pink: #e454a2; @purple: #734fe9;
+
+
+
+/* -------------------------------------
+		FUNCTIONS
+------------------------------------- */
+.cls { 
+	&:after {
+		display: table;
+		content: '';
+		clear: both;
+	}
+}
+.transition(@what: all, @time: 0.4s, @transition: cubic-bezier(0.190, 1.000, 0.220, 1.000)) {
+	-webkit-transition: @what @time @transition;
+	-moz-transition:    @what @time @transition;
+	-ms-transition:     @what @time @transition;
+	-o-transition:      @what @time @transition;
+	transition:         @what @time @transition;
+}
+input, input:focus {
+	outline: none;
+	box-shadow: none;
+} 
+[class *='gridwrapper'] > * { 
+	float: left;
+	padding: 0 5px 0 5px;
+	.cls;
+	box-sizing: border-box;
+} 
+/* Padding précis pour que le contenu soit aligné avec le reste */
+[class *='gridwrapper'] > *:first-child {
+	padding: 0 5px 0 0 !important;
+}
+[class *='gridwrapper'] > *:last-child {
+	padding: 0 0 0 5px !important;
+}
+.gridwrapper2 > * {
+	width: 50%;
+}
+.gridwrapper3 > * {
+	width: 33.333%;
+}
+.gridwrapper4 > * {
+	width: 25%;
+}
+.float {
+	float: left;
+	.cls;
+	&.right {
+		float: right;
+	}
+}
+.wp-list-search {
+	display: block;
+	width: 100%;
+	background: rgba(0,0,0,0.2) !important;
+	padding: 10px 16px;
+	i {
+		color: rgba(0,0,0,0.6);
+	}
+	input {
+		width: 90%;
+		border: 0 !important;
+		margin: 0 !important;
+		background: none !important;
+		box-shadow: none;
+		&:focus {
+			box-shadow: none;
+		}
+	}
+	&:hover {
+		cursor: text;
+	}
+}

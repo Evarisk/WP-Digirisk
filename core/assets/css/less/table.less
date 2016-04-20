@@ -1,0 +1,368 @@
+
+/* -------------------------------------
+		TABLE INTERFACE
+------------------------------------- */
+
+.wp-digi-table {
+	width: 100%;
+	margin: 0;
+	display: table;
+	li {
+		margin: 0;
+	}
+	.wp-digi-table-header {
+		background: @c2 !important;
+		color: #fff !important;
+		height: 40px;
+		font-weight: bold;
+		span:first-child {
+			padding-left: 10px;
+		}
+		span:last-child {
+			padding-right: 10px;
+		}
+	}
+	> * {
+		&:nth-of-type(even) {
+			background: #fff;
+			.wp-digi-action-delete {
+				background: rgba(0,0,0,0.05);
+			}
+		}
+		&:nth-of-type(odd) {
+			background: rgba(0,0,0,0.05);
+			.wp-digi-action-delete {
+				background: rgba(0,0,0,0.05);
+			}
+		}
+	}
+	> * {
+		display: table-row;
+		height: 50px;
+		> span {
+			display: table-cell;
+			vertical-align: middle;
+			//padding: 0 4px;
+		}
+		> span:last-child {
+			padding: 0;
+		}
+		> span.padded {
+			padding: 0 10px;
+		}
+		.wp-avatar {
+			width: 50px;
+			margin: auto;
+			text-align: center;
+			text-transform: uppercase;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 300;
+		}
+	}
+	.wp-digi-table-item-edit {
+		display: table-row !important;
+		span {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.wp-digi-risk-comment ul li {
+			display: flex;
+			flex-direction: row;
+			.wpdigi_date {
+				width: 120px;
+			}
+			.wpdigi_comment {
+				width: 100%;
+			}
+		}
+		.wp-digi-action {
+			width: 50px !important;
+			a {
+				right: 0;
+				background: @green;
+				color: #fff;
+			}
+		}
+	}
+	.wp-digi-action {
+		width: 50px;
+		position: relative;
+		> a {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			color: rgba(0,0,0,0.2);
+			.transition;
+			display: flex;
+			&:before {
+				margin: auto;
+			}
+			&.wp-digi-action-delete {
+				&:hover {
+					color: @red;
+				}
+			}
+			&.wp-digi-action-load {
+				&:hover {
+					color: @c1;
+				} 
+			}
+		}
+		&.wp-digi-action-new {
+			background: @c1;
+			.transition;
+			a {
+				color: #fff;
+			}
+			&:hover {
+				background: @dark_c1;
+			}
+		}
+	}
+	input[type="text"], textarea {
+		background: none;
+		border: 0;
+		border-bottom: 1px solid rgba(0,0,0,0.4);
+		box-shadow: none;
+		outline: none;
+		margin: 0;
+		padding: 0 4px;
+		//width: 100%;
+		//float: left;
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+}
+
+/* -------------------------------------
+		RISK INTERFACE
+------------------------------------- */
+
+.wp-digi-risk-item {
+	/* Thumbnail */
+	.wp-digi-risk-thumbnail {
+		width: 50px;
+		height: 50px;
+		text-align: center;
+		img {
+			float: left;
+		}
+	}
+	/* Quotation */
+	.wp-digi-risk-list-column-cotation {
+		position: relative;
+		width: 50px;
+		div, .wp-digi-risk-cotation-chooser li {
+			width: 50px;
+			height: 100%;
+			color: #fff;
+			line-height: 50px;
+			text-align: center;
+		}
+		div.wp-digi-risk-level-new {
+			height: 50px; 
+			&:hover {
+				cursor: pointer;
+			} 
+		}
+		.wp-digi-risk-cotation-chooser {
+			z-index: 600;
+			width: 250px;
+			position: absolute;
+			top: 50px;
+			border: 4px solid @c2;
+			box-sizing: content-box;
+			&:before {
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				position: absolute;
+				top: -10px;
+				border-style: solid;
+				border-width: 0 10px 10px 10px;
+				border-color: transparent transparent @c2 transparent;
+			}
+			li {
+				float: left;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+		.wp-digi-risk-level-1 {
+			background: #fff;
+			color: rgba(0,0,0,0.6);
+		}
+		.wp-digi-risk-level-2 {
+			background: @yellow;
+		}
+		.wp-digi-risk-level-3 {
+			background: @red;
+		}
+		.wp-digi-risk-level-4 {
+			background: #2b2b2b;
+		}
+		.open-method-evaluation-render {
+			background: @c1;
+			text-align: center;
+			span {
+				color: #fff;
+				line-height: 50px; 
+				height: 100%;
+				width: 100%;
+				display: block;
+			}
+		}
+	}
+	/* Reference */
+	.wp-digi-risk-list-column-reference:not(.header) {
+		color: @c1;
+	}
+	/* Danger */
+	.wp-digi-risk-list-column-danger {
+		font-weight: bold;
+	}
+	/* Comment */
+	.wp-digi-risk-comment {
+		li {
+			padding: 4px 0;
+		}
+	}
+	/* Action */
+	.wp-digi-action {
+		width: 100px !important;
+		&.wp-digi-action-new {
+			width: 50px !important;
+			a {
+				width: 100% !important;
+				height: 100%;
+				line-height: 50px;
+			}
+		}
+		.wp-digi-action-load, .wp-digi-action-delete {
+			width: 50% !important;
+		}
+		.wp-digi-action-delete {
+			left: 50%;
+		}
+		.wp-digi-action-new a {
+			width: 50px;
+			height: 50px;
+			margin-left: auto;
+		}
+	}
+	.wp-digi-risk-date {
+		//width: 10%;
+	}
+	.wp-digi-risk-select {
+		//width: 20%;
+	}
+	.wp-digi-risk-comment {
+		//width: 40%;
+	}
+}
+
+.wp-digi-risk-item-new {
+	input, textarea {
+		width: 100%;
+		line-height: 1.1;
+		display: inline-block;
+	}
+	textarea {
+		padding: 2px;
+	}
+	.wp-digi-risk-date {
+		padding-right: 6px;
+		width: 100px;
+	}
+}
+
+
+/* -------------------------------------
+		USER INTERFACE
+------------------------------------- */
+
+.wp-digi-user-list {
+	.wp-digi-risk-list-header {
+		input {
+			background: #fff !important;
+			float: right !important;
+			width: 40px !important;
+		}
+	}
+	input[type="text"], textarea {
+		width: 100%;
+	}
+}
+
+.wp-digi-evaluator-list, .wp-digi-list {
+	.wpdigi_date {
+		width: 100%;
+	}
+}
+
+/* -------------------------------------
+		EVALUATOR INTERFACE
+------------------------------------- */
+
+.wp-digi-evaluator-list {
+	.wp-digi-table-header {
+		input[type="text"] {
+		color: @c1;
+		}
+	}
+	.period-assign {
+		width: 40px;
+		padding-left: 6px;
+	}
+}
+
+/* -------------------------------------
+		LIST INTERFACE
+------------------------------------- */
+
+.wp-digi-list-document {
+	margin-top: 10px;
+	a {
+		margin: 0;
+	}
+	.wp-digi-reference {
+		color: @c1;
+		padding-left: 8px;
+	}
+	.wp-digi-print {
+		text-align: right;
+	}
+}
+
+
+/* -------------------------------------
+		RECOMMENDATION INTERFACE
+------------------------------------- */
+
+.wp-digi-recommendation {
+	.wp-digi-action {
+		width: 100px !important;
+		a {
+			width: 50% !important;
+			&:last-child {
+				right: 0;
+			}
+		}
+	}
+}
+.wp-digi-recommendation-item, .wp-digi-recommendation {
+	.wp-digi-comment {
+		padding: 0 10px;
+		width: 400px;
+		input {
+			width: 100%;
+			font-size: 13px;
+		}
+	}
+}

@@ -1,0 +1,677 @@
+<?php if ( !defined( 'ABSPATH' ) ) exit;
+/* PRODEST-MASTER:
+{
+	"name": "TransferData_common.controller.01.php",
+	"description": "Fichier contenant les utilitaires pour les tranferts communs à tous les éléments / File with all utilities for all elements common transfer",
+	"type": "file",
+	"check": true,
+	"author":
+	{
+		"email": "dev@evarisk.com",
+		"name": "Alexandre T"
+	},
+	"version": 1.0
+}
+*/
+
+/* PRODEST:
+{
+	"name": "TransferData_common_controller",
+	"description": "Classe contenant les utilitaires pour les tranferts communs à tous les éléments / Class with all utilities for all elements common transfer",
+	"type": "class",
+	"check": true,
+	"author":
+	{
+		"email": "dev@evarisk.com",
+		"name": "Alexandre T"
+	},
+	"version": 1.0
+}
+*/
+class TransferData_common_controller extends TransferData_controller_01 {
+
+	/* PRODEST:
+	{
+		"name": "__construct",
+		"description": "Instanciation des outils pour les transferts communs / Instanciate the common transfer utilities",
+		"type": "function",
+		"check": false,
+		"author":
+		{
+		"email": "dev@evarisk.com",
+		"name": "Alexandre T"
+		},
+		"version": 1.0
+	}
+	*/
+	function __construct() { }
+
+	/* PRODEST:
+	{
+		"name": "transfer",
+		"description": "Traitement du transfert pour un élément donné / Treat the transfer for a given element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$element_type": {"type": "string", "description": "Le type de l'élément a transférer / The element type to transfer", "default": "null"},
+			"$element": {"type": "object", "description": "L'élément a transférer / The element to transfer", "default": "null"}
+			"$element_parent": {"type": "integer", "description": "L'identifiant du `nouveau` parent de l'élément a transférer / The `new` parent identifier for element being transfered", "default": "null"}
+		},
+		"return":
+		{
+			"$count" : {"type": "integer", "description": "L'identifiant du nouvel élément créé si pas d'erreur. Un object WP_Error dans le cas inverse / Le new element identifier if creation is OK. Otherwiwe return a WP_Error object" }
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer( $element_type, $element, $element_parent = null ) {
+		global $wpdb;
+		$element_id = 0;
+
+		/**	Define the fields that have to be treated for wordpress element creation from evarisk internal element	*/
+		$custom_fields = array();
+		$custom_fields[ 'post_title' ] = 'nom';
+		$custom_fields[ 'post_content' ] = 'description';
+		switch( $element_type ) {
+			case TABLE_TACHE:
+			case TABLE_ACTIVITE:
+				$custom_fields[ 'post_author' ] = 'idCreateur';
+				$custom_fields[ 'post_date' ]	= 'firstInsert';
+				break;
+
+			case TABLE_GROUPEMENT:
+			case TABLE_UNITE_TRAVAIL:
+				$custom_fields[ 'post_date' ]	= 'creation_date';
+				break;
+		}
+
+		/**	Get already transfered elements	*/
+		$digirisk_transfer_options = get_option( '_wpdigirisk-dtransfert', array() );
+
+		/**	Define the default field for new element into wordpress	*/
+		$element_wp_definition = array(
+			'post_type' => $this->post_type[ $element_type ],
+		);
+		if ( !empty( $element_parent ) ) {
+			$element_wp_definition[ 'post_parent' ] = $element_parent;
+		}
+
+		/**	In case the element is already transfered don't treat it	*/
+		if ( empty( $digirisk_transfer_options ) || empty( $digirisk_transfer_options[ $element_type ] ) || !in_array( $element->id, $digirisk_transfer_options[ $element_type ]) ) {
+			/**	Define the post status from the current one	*/
+			$element_wp_definition[ 'post_status' ] = ( $element->Status == 'Valid' ? 'publish' : ( $element->Status == 'Moderated' ? 'draft' : 'trash' ) );
+
+			if ( !empty( $custom_fields ) ) {
+				foreach ( $custom_fields as $post_field => $custom_field ) {
+					$specific = false;
+					if ( 'idCreateur' == $custom_field ) {
+						$idCreateur = ( 0 == $element->$custom_field ) ? 1 : $element->$custom_field;
+						if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idCreateur ] ) ) {
+							$element_wp_definition[ $post_field ] = $_POST[ 'wp_new_user' ][ $idCreateur ];
+							$specific = true;
+						}
+					}
+
+					if ( !$specific ) {
+						$element_wp_definition[ $post_field ] = null !== $element->$custom_field ? $element->$custom_field : "";
+					}
+
+					unset( $element->$custom_field );
+				}
+			}
+
+			/**	Create element into wordpress database */
+			$element_id = wp_insert_post( $element_wp_definition, true );
+
+			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
+			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
+				/**	Log creation	*/
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), ), 0 );
+
+				/**	Store an option to avoid multiple transfer	*/
+				$digirisk_transfer_options[ $element_type ][] = $element->id;
+				update_option( '_wpdigirisk-dtransfert', $digirisk_transfer_options );
+
+				/**	Start transfering user notification if exists	*/
+				$this->transfer_notification( $element->id, $element_type, $element_id, '' );
+
+				/**	Start transfering survey that have been done with wp-easy-survey	*/
+				$this->transfer_surveys( $element->id, $element_type, $element_id, '' );
+
+				/**	Check curren type of element to launch specific transfer	*/
+				switch( $element_type ) {
+					case TABLE_TACHE:
+					case TABLE_ACTIVITE:
+						$task_transfer = new TransferData_task_controller();
+						$task_transfer->transfer( $element, $element_type, $element_id );
+					break;
+
+					case TABLE_GROUPEMENT:
+						/**
+						 * Risques
+						 * Preconisations
+* Accidents de travail
+						 * Produits
+						 */
+
+						$groupement_transfer = new wpdigi_transferdata_society_ctr_01();
+						$groupement_transfer->transfer_groupement( $element, $element_type, $element_id );
+					break;
+
+					case TABLE_UNITE_TRAVAIL:
+						/**
+						 * Risques
+						 * Preconisations
+* Accidents de travail
+						 * Produits
+						 */
+
+						$groupement_transfer = new wpdigi_transferdata_society_ctr_01();
+						$groupement_transfer->transfer_unite( $element, $element_type, $element_id );
+					break;
+				}
+
+				/**	Store the other data into meta	*/
+				update_post_meta( $element_id, '_wpdigi_element_computed_identifier', $element_type . '#value_sep#' . $element->id );
+				update_post_meta( $element_id, '_wpdigi_element_old_definition', json_encode( array( $element_type, serialize( $element ) ) ) );
+
+				/**	Lauch transfer for current element direct children of same type	*/
+				if ( property_exists( $element, 'limiteGauche') ) {
+					$query = "
+						SELECT *
+						FROM {$element_type} AS table1
+						WHERE table1.limiteGauche > " . $element->limiteGauche . "
+							AND table1.limiteDroite < " . $element->limiteDroite . "
+							AND NOT EXISTS (
+								SELECT *
+								FROM {$element_type} AS table2
+								WHERE table2.limiteGauche > " . $element->limiteGauche . "
+									AND table2.limiteDroite < " . $element->limiteDroite . "
+									AND table1.limiteGauche > table2.limiteGauche
+									AND table1.limiteDroite < table2.limiteDroite
+							)
+						ORDER BY limiteGauche ASC";
+					$sub_elements = $wpdb->get_results($query);
+					foreach ( $sub_elements as $element ) {
+						$new_children_id = $this->transfer( $element_type, $element, $element_id );
+					}
+				}
+			}
+			else {
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), ), 2 );
+			}
+		}
+
+		return $element_id;
+	}
+
+	/* PRODEST:
+	{
+		"name": "transfer_orphelan",
+		"description": "Traitement du transfert pour les éléments non transférés à cause de leur `orphelinat` / Treat the transfer for an `orphelan` element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$element_type": {"type": "string", "description": "Le type de l'élément a transférer / The element type to transfer", "default": "null"},
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer_orphelan( $element_type ) {
+		global $wpdb;
+		$treated_element = 0;
+
+		/**	Do a final check for element possibly not transfer	*/
+		$query = $wpdb->prepare( "
+			SELECT T.*
+			FROM {$element_type} AS T
+			WHERE T.id NOT IN (
+				SELECT PM.meta_value
+				FROM {$wpdb->postmeta} AS PM
+					INNER JOIN {$wpdb->postmeta} AS PM2 ON (PM2.post_id = PM.post_id)
+				WHERE PM.meta_key = %s
+					AND PM2.meta_key = %s
+					AND PM2.meta_value = '{$element_type}'
+			)
+			AND T.id != %d", '_wpdigi_element_unique_key', '_wpdigi_element_old_type', 1 );
+
+		$not_transfered_element = $wpdb->get_results( $query );
+		if ( !empty( $not_transfered_element ) ) {
+			foreach ( $not_transfered_element as $element ) {
+				$new_element_id = $this->transfer( $element_type, $element );
+				if ( !is_wp_error( $new_element_id ) ) {
+					$treated_element += 1;
+				}
+			}
+		}
+
+		return $treated_element;
+	}
+
+	/* PRODEST:
+	{
+		"name": "transfer_users",
+		"description": "Traitement du transfert pour les utilisateurs associés à un élément / Treat the transfer for users associated to an element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément a transférer / Element to transfer identifier", "default": "null"},
+			"$old_element_type": {"type": "string", "description": "Le type de l'élément a transférer / Element type to transfer", "default": "null"},
+			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré / Transfered element identifier", "default": "null"},
+			"$user_role": {"type": "string", "description": "Rôle spécifique pour les utilisateurs à transférer sur le nouvel élément / Specific role for users to transfert on new element", "default": "null"},
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer_users( $old_element_id, $old_element_type, $user_role = '', $element_new_type = '', $element_new_id = 0 ) {
+		$currently_affected_user = array();
+		global $wpdb;
+
+		$query = $wpdb->prepare(
+				"SELECT *, DATEDIFF( date_desaffectation_reelle, date_affectation_reelle ) AS duration_in_days, TIMEDIFF( date_desaffectation_reelle, date_affectation_reelle ) AS duration_in_hour, TIMESTAMPDIFF( MINUTE, date_affectation_reelle, date_desaffectation_reelle ) AS duration_in_minute
+			FROM " . TABLE_LIAISON_USER_ELEMENT . "
+			WHERE id_element = '%s'
+				AND table_element = '%s'
+				AND status IN ( 'valid', 'moderated', 'deleted') "
+				, $old_element_id, $old_element_type
+		);
+		$currently_affected_users_old = $wpdb->get_results( $query );
+		if ( !empty( $currently_affected_users_old ) ) {
+			foreach ( $currently_affected_users_old as $currently_affected_users ) {
+
+				$idUser = ( 0 == $currently_affected_users->id_user ) ? 1 : $currently_affected_users->id_user;
+				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idUser ] ) ) {
+					$idUser = (int)$_POST[ 'wp_new_user' ][ $idUser ];
+				}
+				$idAttributeur = ( 0 == $currently_affected_users->id_attributeur ) ? 1 : $currently_affected_users->id_attributeur;
+				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idAttributeur ] ) ) {
+					$idAttributeur = (int)$_POST[ 'wp_new_user' ][ $i ][ $idAttributeur ];
+				}
+				$idDesAttributeur = ( 0 == $currently_affected_users->id_desAttributeur ) ? 1 : $currently_affected_users->id_desAttributeur;
+				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idDesAttributeur ] ) ) {
+					$idDesAttributeur = (int)$_POST[ 'wp_new_user' ][ $i ][ $idDesAttributeur ];
+				}
+
+				$currently_affected_user[ $idUser ][ 'status' ] = ( 'valid' == $currently_affected_users->status ) ? 'valid' : 'deleted';
+
+				$currently_affected_user[ $idUser ][ 'start' ][ 'date' ] = $currently_affected_users->date_affectation_reelle;
+				$currently_affected_user[ $idUser ][ 'start' ][ 'by' ] = $idAttributeur;
+				$currently_affected_user[ $idUser ][ 'start' ][ 'on' ] = $currently_affected_users->date_affectation;
+
+				$currently_affected_user[ $idUser ][ 'end' ][ 'date' ] = $currently_affected_users->date_desaffectation_reelle;
+				$currently_affected_user[ $idUser ][ 'end' ][ 'by' ] = $idDesAttributeur;
+				$currently_affected_user[ $idUser ][ 'end' ][ 'on' ] = $currently_affected_users->date_desAffectation;
+
+				if ( !empty( $user_role ) ) {
+					$currently_affected_user[ $idUser ][ 'role' ] = $user_role;
+				}
+			}
+		}
+
+		return $currently_affected_user;
+	}
+
+	/* PRODEST:
+	 {
+		"name": "transfer_surveys",
+		"description": "Traitement du transfert pour les formulaires associés à un élément / Treat the transfer for surveys associated to an element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément a transférer / Element to transfer identifier", "default": "null"},
+			"$old_element_type": {"type": "string", "description": "Le type de l'élément a transférer / Element type to transfer", "default": "null"},
+			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré / Transfered element identifier", "default": "null"}
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer_surveys( $old_element_id, $old_element_type, $new_element_id ) {
+		global $wpdb;
+		$survey_results = array();
+
+		/**	Get existing surveys	*/
+		$query = $wpdb->prepare( "SELECT * FROM " .  TABLE_FORMULAIRE_LIAISON . " WHERE tableElement = %s AND idELement = %d ", $old_element_type, $old_element_id );
+		$surveys = $wpdb->get_results( $query );
+
+		/**	Check if there are surveys to transfer from evarisk storage way to wordpress storage way	*/
+		if ( !empty( $surveys ) ) {
+			foreach ( $surveys as $survey ) {
+				$survey_results[ $survey->idFormulaire ][ $survey->state ][] = array(
+					'date_started' => $survey->date_started,
+					'date_closed' => $survey->date_closed,
+					'state' => $survey->state,
+					'user' => $survey->user,
+					'user_closed' => $survey->user_closed,
+					'survey_id' => $survey->survey_id,
+				);
+			}
+		}
+
+		/**	Save survey datas into the associated element	*/
+		if ( !empty( $survey_results ) ) {
+			foreach ( $survey_results as $original_survey_id => $final_survey ) {
+				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), ), 0 );
+			}
+		}
+	}
+
+	/* PRODEST:
+	 {
+		"name": "transfer_document",
+		"description": "Traitement du transfert des medias associés à un élément / Treat the transfer for medias associated to an element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$document": {"type": "integer", "description": "Définition complète du media a transférer / Complete definition for the media to transfer", "default": "null"},
+			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel est associé le média / Transfered element identifier to which media is associated", "default": "null"},
+			"$document_origin": {"type": "string", "description": "Le type du media a transférer / Media type to transfer", "default": "picture"}
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer_document( $document, $new_element_id, $document_origin = 'picture', $main_file_directory = EVA_GENERATED_DOC_DIR ) {
+		if ( !function_exists( 'wp_generate_attachment_metadata' ) )
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+		/**	Get wordpress uploads directory	*/
+		$wp_upload_dir = wp_upload_dir();
+		$associate_document_list = array();
+		$attach_id = null;
+
+		/**	Get associated picture list	*/
+		$main_type = $document_origin;
+		switch ( $document_origin ) {
+			case 'picture':
+				$field_name = 'photo';
+				break;
+			case 'document':
+			case 'document_model':
+			case 'printed_duer':
+			case 'printed_sheet':
+				$main_type = 'document';
+				break;
+		}
+
+		$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
+		/**	Get the file content - force error ignore	*/
+		$filename = ( 'document' == $main_type ? ( 'printed_fiche_action' == $document->categorie ? 'results/' : '' ) . $document->chemin . $document->nom : str_replace( 'medias/images/Pictos', 'core/assets/images', $document->$field_name ) );
+		$file = $main_file_directory . $filename;
+		if ( !is_file( $file ) && ( $main_file_directory != EVA_GENERATED_DOC_DIR ) ) {
+			$file = EVA_GENERATED_DOC_DIR . $filename;
+		}
+		$the_file_content = @file_get_contents( $file );
+
+		/**	Check if file is a valid one	*/
+		if ( $the_file_content !== FALSE ) {
+			$attachment_args = array();
+
+			/**	Get associated picture list	*/
+			switch ( $main_type ) {
+				case 'document':
+					/**	Start by coping picture into wordpress uploads directory	*/
+					$document_controller = new document_controller_01();
+					$default_upload_directory = get_option( 'upload_path', '' );
+					$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
+					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_document_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
+					update_option( 'uploads_use_yearmonth_folders', false );
+					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
+					update_option( 'upload_path' , $default_upload_directory );
+					update_option( 'uploads_use_yearmonth_folders', true );
+
+					$idCreateur = !isset( $document->idCreateur ) && ( 0 == $document->idCreateur ) ? 1 : $document->idCreateur;
+					if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idCreateur ] ) ) {
+						$idCreateur = $_POST[ 'wp_new_user' ][ $idCreateur ];
+					}
+					$attachment_args[ 'post_author' ] = $idCreateur;
+					$attachment_args[ 'post_date' ] = $document->dateCreation;
+				break;
+
+				default:
+					/**	Start by coping picture into wordpress uploads directory	*/
+					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
+				break;
+			}
+
+			/**	Get informations about the picture	*/
+			$filetype = wp_check_filetype( basename( $upload_result[ 'file' ] ), null );
+			/**	Set the default values for the current attachement	*/
+			$attachment_default_args = array(
+				'guid'           => $wp_upload_dir['url'] . '/' . basename( $upload_result[ 'file' ] ),
+				'post_mime_type' => $filetype['type'],
+				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $upload_result[ 'file' ] ) ),
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+			);
+
+			/**	Save new picture into database	*/
+			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $upload_result[ 'file' ], $new_element_id );
+
+			/**	Create the different size for the given picture and get metadatas for this picture	*/
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $upload_result[ 'file' ] );
+			/**	Finaly save pictures metadata	*/
+			wp_update_attachment_metadata( $attach_id, $attach_data );
+
+			/**	Set the post thumbnail in case it is the case	*/
+			if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
+				set_post_thumbnail( $new_element_id, $attach_id );
+			}
+
+			if ( 'valid' == $document->status ) {
+				$associate_document_list[] = $attach_id;
+			}
+
+			/**	store old document complete definition	*/
+			switch ( $main_type ) {
+				case 'document':
+					update_post_meta( $attach_id, '_wpeo_digidoc_old', $document );
+					$document_meta = array();
+					if ( isset( $document->meta ) ) {
+						foreach ( $document->meta as $doc_meta ) {
+							$document_meta[ $doc_meta->meta_key ] = maybe_unserialize( $doc_meta->meta_value );
+						}
+					}
+					update_post_meta( $attach_id, '_wpeo_document', json_encode( $document_meta ) );
+				break;
+			}
+
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), ), 0 );
+			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
+		}
+		else {
+			$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
+			if ( 'picture' == $main_type ) {
+				$tocheck = $document->tableElement;
+			}
+			else {
+				$tocheck = $document->table_element;
+			}
+
+			switch ( $tocheck ) {
+				case TABLE_TACHE:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_T;
+					break;
+				case TABLE_ACTIVITE:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_ST;
+					break;
+				case TABLE_GROUPEMENT:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_GP;
+					break;
+				case TABLE_UNITE_TRAVAIL:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_UT;
+					break;
+				case TABLE_DANGER:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_D;
+					break;
+				case TABLE_CATEGORIE_DANGER:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_CD;
+					break;
+				case TABLE_PRECONISATION:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_P;
+					break;
+				case TABLE_CATEGORIE_PRECONISATION:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_CP;
+					break;
+				case TABLE_METHODE:
+					$old_evarisk_element = ELEMENT_IDENTIFIER_ME;
+					break;
+			}
+
+			if ( ( 'all' != $tocheck ) && !empty( $old_evarisk_element ) ) {
+				$old_evarisk_element .= ( 'picture' == $main_type  ? $document->idElement : $document->id_element );
+			}
+			else {
+				$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
+			}
+
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
+		}
+
+		/**	Set the new list of element treated	*/
+		update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
+
+		return $attach_id;
+	}
+
+	/* PRODEST:
+	 {
+		"name": "transfert_picture_linked_to_element",
+		"description": "Traitement du transfert des médias associés à une taxonomy / Treat tthe media transfer associated to taxonomy",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$element_type": {"type": "string", "description": "Type de l'élément pour lequel on doit transférer les médias et le transformer en taxonomie / Type of element we have to transfer into taxonomy and to transfer media for", "default": "null"},
+			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément dont on veut transférer les médias / ELement identifier we want to transfer medias for", "default": "null"},
+			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel sont associés les médias / Transfered element identifier to which medias are associated", "default": "null"}
+		},
+		"version": 1.0
+	}
+	*/
+	function transfert_picture_linked_to_element( $element_type, $old_element_id, $new_element_id = null ) {
+		global $wpdb;
+		$associated_document_list = array(
+			'_thumbnail' => null,
+			'associated_list' => array(),
+		);
+
+		$query = $wpdb->prepare(
+				"SELECT PICTURE.*, PICTURE_LINK.isMainPicture, PICTURE_LINK.idElement, PICTURE_LINK.tableElement
+					FROM " . TABLE_PHOTO . " AS PICTURE
+						INNER JOIN " . TABLE_PHOTO_LIAISON . " AS PICTURE_LINK ON (PICTURE_LINK.idPhoto = PICTURE.id)
+					WHERE PICTURE_LINK.tableElement = %s
+						AND PICTURE_LINK.idElement = %d
+					ORDER BY PICTURE.id ASC",
+				$element_type, $old_element_id );
+		$pictures = $wpdb->get_results( $query );
+		if ( !empty( $pictures ) ) {
+			foreach ( $pictures as $picture ) {
+				$document_id = $this->transfer_document( $picture, $new_element_id, 'picture', WPDIGI_PATH . '/' );
+				if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
+					if ( 'yes' == $picture->isMainPicture ) {
+						$associated_document_list[ '_thumbnail' ] = $document_id;
+					}
+					$associated_document_list[ 'associated_list' ][] = $document_id;
+				}
+			}
+		}
+
+		return $associated_document_list;
+	}
+
+	/* PRODEST:
+	 {
+		"name": "transfer_notification",
+		"description": "Traitement du transfert des notifications associées à un élément / Treat the transfer for notifications associated to an element",
+		"type": "function",
+		"check": true,
+		"author":
+		{
+			"email": "dev@evarisk.com",
+			"name": "Alexandre T"
+		},
+		"param":
+		{
+			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément pour lequel il faut récupérer les notifications et les transférer / Element identifier for which we have to get notifications for and transfer them into new storage way", "default": "null"},
+			"$old_element_type": {"type": "string", "description": "Le type de l'élément pour lequel il faut récupèrer les notifications / Element type we had to get notifications for", "default": "picture"},
+			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel sont associés les notifications / Transfered element identifier to which notifications are associated", "default": "null"}
+		},
+		"version": 1.0
+	}
+	*/
+	function transfer_notification( $old_element_id, $old_element_type, $new_element_id ) {
+		global $wpdb;
+
+		/**	Get the current user notification list for current element being transfered	*/
+		$query = $wpdb->prepare("
+SELECT LUN.*, NOTI.action, NOTI.message_to_send, NOTI.message_subject
+FROM " . DIGI_DBT_LIAISON_USER_NOTIFICATION_ELEMENT . " AS LUN
+	INNER JOIN " . DIGI_DBT_ELEMENT_NOTIFICATION . " AS NOTI ON (NOTI.id = LUN.id_notification)
+WHERE LUN.status = 'valid'
+	AND LUN.table_element = %s
+	AND LUN.id_element = %d", array( $old_element_type, $old_element_id ) );
+		$current_user_notification_list = $wpdb->get_results( $query );
+
+		/**	If there are notification setted transfer them to new element	*/
+		if ( !empty( $current_user_notification_list ) ) {
+			$notifications = array();
+			$n = 0;
+			foreach ( $current_user_notification_list as $notification ) {
+				$notifications[ $n ][ 'status' ] = $notification->status;
+				$notifications[ $n ][ 'date_affectation' ] = $notification->date_affectation;
+
+				$idAttributeur = ( 0 == $notification->id_attributeur ) ? 1 : $notification->id_attributeur;
+				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idAttributeur ] ) ) {
+					$idAttributeur = (int)$_POST[ 'wp_new_user' ][ $idAttributeur ];
+				}
+				$notifications[ $n ][ 'id_attributeur' ] = $idAttributeur;
+				$notifications[ $n ][ 'date_desAffectation' ] = $notification->date_desAffectation;
+
+				$idDesAttributeur = ( 0 == $notification->id_desAttributeur ) ? 1 : $notification->id_desAttributeur;
+				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idDesAttributeur ] ) ) {
+					$idDesAttributeur = (int)$_POST[ 'wp_new_user' ][ $idDesAttributeur ];
+				}
+				$notifications[ $n ][ 'id_desAttributeur' ] = $idDesAttributeur;
+				$notifications[ $n ][ 'id_user' ] = $notification->id_user;
+				$notifications[ $n ][ 'id_notification' ] = $notification->id_notification;
+			}
+			update_post_meta( $new_element_id, '_wpeo_element_notification', $notifications );
+		}
+	}
+
+}

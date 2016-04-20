@@ -1,0 +1,82 @@
+
+/* -------------------------------------
+		FORM INTERFACE
+------------------------------------- */
+
+[class*="gridwrapper"] {
+	&.wp-digi-form {
+		display: flex;
+		.form-element {
+			display: inline-flex !important;
+			label {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.wp-digi-form {
+	&.no-form {
+		.form-element {
+			span {
+				font-size: 14px;
+				line-height: 1.4;
+				padding: 0 0 6px 0;
+				margin: 0;
+				border-bottom: 2px solid @c2;
+				color: rgba(0,0,0,0.6);
+				width: 100%;
+				display: block;
+			}
+		}
+	}
+	.form-element {
+		display: inline-block;	
+		position: relative;
+		padding-right: 10px;
+		margin-bottom: 20px;
+		label {
+			display: block;
+			text-transform: uppercase;
+			font-weight: bold;
+			&:focus {
+				opacity: 0;
+			}
+		}
+	}
+	.single-line {
+		li {
+			margin-bottom: 0;
+		}
+	}
+	.block {
+		width: 100%;
+	}
+	label, input, textarea {
+		font-size: 14px;
+		line-height: 1.4;
+		padding-bottom: 6px;
+	}
+	input, textarea {
+		background: none;
+		border: 0;
+		box-shadow: none;
+		width: 100%;
+		border-bottom: 2px solid @c2;
+		color: rgba(0,0,0,0.6);
+		.transition;
+		&:focus {
+			outline: none;
+			box-shadow: none;
+			border-bottom: 2px solid @c1;
+		}
+	}
+	input[type="button"].float {
+		width: auto;
+		padding: 14px;
+	}
+}
+.wp-digi-sheet-generation-button {
+	clear: both;
+	float: right;
+}

@@ -1,0 +1,1006 @@
+/*[class^=wp-digi] {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+[class^=wp-digi]:before,
+[class^=wp-digi]:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}*/
+[class*="wp-digi-"][class*="alignRight"] {
+  float: right;
+  margin-left: 1em;
+}
+[class*="wp-digi-"][class*="alignLeft"] {
+  float: left;
+  margin-right: 1em;
+}
+[class*="wp-digi-"][class*="-helper"] {
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+       -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: translate(60px, -50%);
+      -ms-transform: translate(60px, -50%);
+       -o-transform: translate(60px, -50%);
+          transform: translate(60px, -50%);
+  font-size: 13px;
+  line-height: 18px;
+  background: #8fa9c4;
+  color: #ffffff;
+  padding: 8px 14px;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  display: block;
+  min-width: 250px;
+  visibility: hidden;
+  text-align: left;
+  font-style: italic;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  font-weight: normal;
+}
+[class*="wp-digi-"][class*="-helper"]:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #8fa9c4;
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+       -o-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+[class*="wp-"][class*="rotate_90"] {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+[class*="wp-"][class*="rounded"] {
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+}
+[class*="wp-"][class*="fullrounded"] {
+  -webkit-border-radius: 2em;
+          border-radius: 2em;
+}
+[class*="wp-"][class*="circlerounded"] {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
+.wp-digi-bloc-loader {
+  position: relative;
+  /*overflow: hidden;*/
+  -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+       -o-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+          transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.wp-digi-bloc-loader:before {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform-origin: top left;
+      -ms-transform-origin: top left;
+       -o-transform-origin: top left;
+          transform-origin: top left;
+  -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+       -o-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 99999;
+  top: -3em;
+  left: 50%;
+  width: 2em;
+  height: 2em;
+  border-top: solid 3px rgba(0, 0, 0, 0.7);
+  border-right: solid 3px rgba(0, 0, 0, 0.7);
+  border-bottom: solid 3px rgba(255, 255, 255, 0.7);
+  border-left: solid 3px rgba(255, 255, 255, 0.7);
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-animation: loadingcentered .3s infinite linear;
+       -o-animation: loadingcentered .3s infinite linear;
+          animation: loadingcentered .3s infinite linear;
+}
+.wp-digi-bloc-loading {
+  opacity: .3;
+  filter: alpha(opacity=30);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /></filter></svg>#filter');
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+  pointer-events: none;
+  -webkit-transition: all 0.2s ease;
+       -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+}
+.wp-digi-bloc-loading:before {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+       -o-transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+          transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+  top: 50%;
+  left: 50%;
+}
+
+@media (max-width: 1100px) {
+  
+}
+@media (max-width: 1100px) {
+  
+}
+@media (max-width: 960px) {
+  
+  
+}
+@media (max-width: 800px) {
+  
+  [class*=wp-digi][class*="boxed"] {
+    float: none !important;
+    width: 100% !important;
+  }
+  .wp-digi-table {
+    border: none;
+    display: block;
+  }
+  .wp-digi-table .wp-digi-table-header {
+    display: none;
+  }
+  .wp-digi-table .wp-digi-table-content {
+    margin-bottom: 1em;
+    border: solid #e6e6e6 1px;
+    background: none;
+  }
+  .wp-digi-table label {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    padding: 0 1em;
+    width: 30%;
+    float: left;
+  }
+  .wp-digi-table > div {
+    display: block;
+  }
+  .wp-digi-table > div > div {
+    text-align: right;
+    display: block;
+    border: none;
+    border-bottom: dashed #dfdfdf 1px !important;
+  }
+  .wp-digi-table > div > div:last-child {
+    border-bottom: none !important;
+  }
+  [class*="paddedh"] {
+    padding: 0;
+  }
+}
+@media (max-width: 500px) {
+  .wp-digi-table label {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: .4em !important;
+  }
+  .wp-digi-table > div {
+    display: block;
+  }
+  .wp-digi-table > div > div {
+    text-align: center;
+    display: block;
+    border: none;
+    border-bottom: dashed #dfdfdf 1px;
+  }
+}
+
+[class*="wp-digi-bton"] {
+  background: none;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  -webkit-appearance: none;
+  display: inline-block;
+  margin: 12px 0;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 16px;
+  outline: none;
+  -webkit-transition: padding 0.4s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s cubic-bezier(0.19, 1, 0.22, 1), color 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+       -o-transition: padding 0.4s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s cubic-bezier(0.19, 1, 0.22, 1), color 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+          transition: padding 0.4s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s cubic-bezier(0.19, 1, 0.22, 1), color 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+[class*="wp-digi-bton"]:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -18px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid rgba(0, 0, 0, 0.5) !important;
+  border-right: 2px solid rgba(0, 0, 0, 0.5) !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5) !important;
+  border-left: 2px solid rgba(255, 255, 255, 0.5) !important;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  -webkit-transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+       -o-transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+          transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-animation: loading .5s infinite linear;
+       -o-animation: loading .5s infinite linear;
+          animation: loading .5s infinite linear;
+}
+[class*="wp-digi-bton"] i {
+  margin-right: 1em;
+}
+[class*="wp-digi-bton"][class*="-loading"] {
+  padding-right: 40px;
+  -webkit-animation: blink 2s infinite linear;
+       -o-animation: blink 2s infinite linear;
+          animation: blink 2s infinite linear;
+  pointer-events: none;
+}
+[class*="wp-digi-bton"][class*="-loading"]:after {
+  right: 16px;
+}
+[class*="wp-digi-bton"][class*="mini"] {
+  font-size: 10px;
+  line-height: 28px;
+  padding: 0 10px;
+}
+[class*="wp-digi-bton"][class*="mini"]:after {
+  width: 10px;
+  height: 10px;
+  top: 9px;
+}
+[class*="wp-digi-bton"][class*="mini"][class*="-loading"] {
+  padding-right: 34px;
+}
+[class*="wp-digi-bton"][class*="mini"][class*="-loading"]:after {
+  right: 14px;
+}
+/*[class*="wp-digi-bton"]:active {
+  -webkit-transform: translate(0, 2px);
+      -ms-transform: translate(0, 2px);
+       -o-transform: translate(0, 2px);
+          transform: translate(0, 2px);
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}*/
+
+
+
+[class*="wp-digi-bton"][class*="circled"] {
+  -webkit-box-shadow: inset 0 0 0 20px #ffffff;
+          box-shadow: inset 0 0 0 20px #ffffff;
+  padding: 0;
+  background: none;
+  color: #303030;
+}
+[class*="wp-digi-bton"][class*="fullwidth"] {
+  width: 100%;
+  display: block;
+}
+[class*="wp-digi-bton"][class*="halfwidth"] {
+  width: 50%;
+  float: left;
+  display: block;
+  margin: 0;
+}
+[class*="wp-digi"][class*="bton"][class*="disabled"] {
+  cursor: context-menu;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes loading {
+  0% {
+    -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+       transform: rotate(360deg);
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+         -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loadingcentered {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-50%, -50%);
+            transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-50%, -50%);
+            transform: rotate(360deg) translate(-50%, -50%);
+  }
+}
+@-o-keyframes loadingcentered {
+  0% {
+    -o-transform: rotate(0deg) translate(-50%, -50%);
+       transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    -o-transform: rotate(360deg) translate(-50%, -50%);
+       transform: rotate(360deg) translate(-50%, -50%);
+  }
+}
+@keyframes loadingcentered {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-50%, -50%);
+         -o-transform: rotate(0deg) translate(-50%, -50%);
+            transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-50%, -50%);
+         -o-transform: rotate(360deg) translate(-50%, -50%);
+            transform: rotate(360deg) translate(-50%, -50%);
+  }
+}
+@-webkit-keyframes blink {
+  
+  50% {
+    opacity: .85;
+    filter: alpha(opacity=85);
+  }
+}
+@-o-keyframes blink {
+  
+  50% {
+    opacity: .85;
+    filter: alpha(opacity=85);
+  }
+}
+@keyframes blink {
+  
+  50% {
+    opacity: .85;
+    filter: alpha(opacity=85);
+  }
+}
+@-webkit-keyframes boxPlusUn {
+  0% {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+  }
+  20% {
+    -webkit-transform: rotateY(0) scale(1) translate(-50%, -50%);
+            transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  85% {
+    -webkit-transform: rotateY(0) scale(1) translate(-50%, -50%);
+            transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg) scale(0.5) translate(-50%, -50%);
+            transform: rotateY(180deg) scale(0.5) translate(-50%, -50%);
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+@-o-keyframes boxPlusUn {
+  0% {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+  }
+  20% {
+    transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  85% {
+    transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    transform: rotateY(180deg) scale(0.5) translate(-50%, -50%);
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+@keyframes boxPlusUn {
+  0% {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+  }
+  20% {
+    -webkit-transform: rotateY(0) scale(1) translate(-50%, -50%);
+            transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  85% {
+    -webkit-transform: rotateY(0) scale(1) translate(-50%, -50%);
+            transform: rotateY(0) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg) scale(0.5) translate(-50%, -50%);
+            transform: rotateY(180deg) scale(0.5) translate(-50%, -50%);
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+[class*="wp-digi-alert"] {
+  padding: 16px;
+  padding: 1rem;
+  margin: 16px 0;
+  margin: 1rem 0;
+  overflow: hidden;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-clip: padding-box;
+  border: solid #cccccc 1px;
+}
+[class*="wp-digi-alert"][class*="center"] {
+  text-align: center;
+}
+[class*="wp-digi-alert"] [class*="wp-digi-h1"],
+[class*="wp-digi-alert"] [class*="wp-digi-h2"],
+[class*="wp-digi-alert"] [class*="wp-digi-h3"],
+[class*="wp-digi-alert"] [class*="wp-digi-h4"],
+[class*="wp-digi-alert"] [class*="wp-digi-h5"],
+[class*="wp-digi-alert"] [class*="wp-digi-h6"] {
+  margin-top: 0;
+}
+[class*="wp-digi-alert"] [class*="wp-digi-bton-icon-close"] {
+  float: right;
+  padding: 6px;
+  margin-top: -10px;
+  margin-right: -10px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+[class*="wp-digi-alert"] [class*="wp-digi-bton-icon-close"]:before {
+  font-size: 12px;
+  background: none;
+}
+[class*="wp-digi-alert"][class*="info"] {
+  background: #f0f6fc;
+  color: #2e75bf;
+  border: solid #e0ecf8 1px;
+}
+[class*="wp-digi-alert"][class*="info"] h4,
+[class*="wp-digi-alert"][class*="info"] p,
+[class*="wp-digi-alert"][class*="info"] button {
+  color: #2e75bf;
+}
+[class*="wp-digi-alert"][class*="info"] strong {
+  font-weight: bold;
+  color: #1a436d;
+}
+[class*="wp-digi-alert"][class*="info"] a {
+  color: #1a436d;
+}
+[class*="wp-digi-alert"][class*="info"] a:hover {
+  color: #1a436d;
+  text-decoration: underline;
+}
+[class*="wp-digi-alert"][class*="info"] [class*="wp-digi-bton"] {
+  background: #245c96;
+  color: #f0f6fc;
+}
+[class*="wp-digi-alert"][class*="info"] [class*="wp-digi-bton"]:after {
+  border-color: #f0f6fc;
+}
+[class*="wp-digi-alert"][class*="info"] [class*="wp-digi-bton"]:hover {
+  background: #2e75bf;
+  color: #ffffff;
+}
+[class*="wp-digi-alert"][class*="info"] [class*="wp-digi-bton-icon-close"] {
+  background: none;
+  color: #2e75bf;
+}
+[class*="wp-digi-alert"][class*="info"] [class*="wp-digi-bton-icon-close"]:hover {
+  background: none;
+  color: #75a8de;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+[class*="wp-digi-alert"][class*="error"] {
+  background: #fbebeb;
+  color: #bf2828;
+  border: solid #f7dada 1px;
+}
+[class*="wp-digi-alert"][class*="error"] h4,
+[class*="wp-digi-alert"][class*="error"] p,
+[class*="wp-digi-alert"][class*="error"] button {
+  color: #bf2828;
+}
+[class*="wp-digi-alert"][class*="error"] strong {
+  font-weight: bold;
+  color: #6b1616;
+}
+[class*="wp-digi-alert"][class*="error"] a {
+  color: #6b1616;
+}
+[class*="wp-digi-alert"][class*="error"] a:hover {
+  color: #6b1616;
+  text-decoration: underline;
+}
+[class*="wp-digi-alert"][class*="error"] [class*="wp-digi-bton"] {
+  background: #951f1f;
+  color: #fbebeb;
+}
+[class*="wp-digi-alert"][class*="error"] [class*="wp-digi-bton"]:after {
+  border-color: #fbebeb;
+}
+[class*="wp-digi-alert"][class*="error"] [class*="wp-digi-bton"]:hover {
+  background: #bf2828;
+  color: #ffffff;
+}
+[class*="wp-digi-alert"][class*="error"] [class*="wp-digi-bton-icon-close"] {
+  background: none;
+  color: #bf2828;
+}
+[class*="wp-digi-alert"][class*="error"] [class*="wp-digi-bton-icon-close"]:hover {
+  background: none;
+  color: #e06d6d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+[class*="wp-digi-alert"][class*="success"] {
+  background: #dfeedf;
+  color: #468847;
+  border: solid #d1e7d2 1px;
+}
+[class*="wp-digi-alert"][class*="success"] h4,
+[class*="wp-digi-alert"][class*="success"] p,
+[class*="wp-digi-alert"][class*="success"] button {
+  color: #468847;
+}
+[class*="wp-digi-alert"][class*="success"] strong {
+  font-weight: bold;
+  color: #234524;
+}
+[class*="wp-digi-alert"][class*="success"] a {
+  color: #234524;
+}
+[class*="wp-digi-alert"][class*="success"] a:hover {
+  color: #234524;
+  text-decoration: underline;
+}
+[class*="wp-digi-alert"][class*="success"] [class*="wp-digi-bton"] {
+  background: #356635;
+  color: #dfeedf;
+}
+[class*="wp-digi-alert"][class*="success"] [class*="wp-digi-bton"]:after {
+  border-color: #dfeedf;
+}
+[class*="wp-digi-alert"][class*="success"] [class*="wp-digi-bton"]:hover {
+  background: #468847;
+  color: #ffffff;
+}
+[class*="wp-digi-alert"][class*="success"] [class*="wp-digi-bton-icon-close"] {
+  background: none;
+  color: #468847;
+}
+[class*="wp-digi-alert"][class*="success"] [class*="wp-digi-bton-icon-close"]:hover {
+  background: none;
+  color: #7aba7b;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+[class*="wp-digi-alert"][class*="warning"] {
+  background: #fef3e2;
+  color: #dd8904;
+  border: solid #feebcd 1px;
+}
+[class*="wp-digi-alert"][class*="warning"] h4,
+[class*="wp-digi-alert"][class*="warning"] p,
+[class*="wp-digi-alert"][class*="warning"] button {
+  color: #dd8904;
+}
+[class*="wp-digi-alert"][class*="warning"] strong {
+  font-weight: bold;
+  color: #794b02;
+}
+[class*="wp-digi-alert"][class*="warning"] a {
+  color: #794b02;
+}
+[class*="wp-digi-alert"][class*="warning"] a:hover {
+  color: #794b02;
+  text-decoration: underline;
+}
+[class*="wp-digi-alert"][class*="warning"] [class*="wp-digi-bton"] {
+  background: #ab6a03;
+  color: #fef3e2;
+}
+[class*="wp-digi-alert"][class*="warning"] [class*="wp-digi-bton"]:after {
+  border-color: #fef3e2;
+}
+[class*="wp-digi-alert"][class*="warning"] [class*="wp-digi-bton"]:hover {
+  background: #dd8904;
+  color: #ffffff;
+}
+[class*="wp-digi-alert"][class*="warning"] [class*="wp-digi-bton-icon-close"] {
+  background: none;
+  color: #dd8904;
+}
+[class*="wp-digi-alert"][class*="warning"] [class*="wp-digi-bton-icon-close"]:hover {
+  background: none;
+  color: #fcb74b;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+[class*="wp-digi"][class*="bton"][class*="first"] {
+  text-decoration: none;
+  color: #ffffff;
+  background: #2e75bf;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="first"] > [class*="icon"] {
+  color: #ffffff;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="first"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="first"]:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background: #4c8fd4;
+}
+[class*="wp-digi"][class*="bton"][class*="first"]:hover i {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="first"]:active {
+  text-decoration: none;
+}
+[class*="wp-digi"][class*="bton"][class*="second"] {
+  text-decoration: none;
+  color: #ffffff;
+  background: #65c2ee;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="second"] > [class*="icon"] {
+  color: #ffffff;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="second"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="second"]:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background: #93d4f3;
+}
+[class*="wp-digi"][class*="bton"][class*="second"]:hover i {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="second"]:active {
+  text-decoration: none;
+}
+[class*="wp-digi"][class*="bton"][class*="third"] {
+  text-decoration: none;
+  color: #ffffff;
+  background: #fba319;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="third"] > [class*="icon"] {
+  color: #ffffff;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="third"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="third"]:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background: #fcb74b;
+}
+[class*="wp-digi"][class*="bton"][class*="third"]:hover i {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="third"]:active {
+  text-decoration: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"] {
+  text-decoration: none;
+  color: #ffffff;
+  background: #47e58e;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"] > [class*="icon"] {
+  color: #ffffff;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"]:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background: #19cb69;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"]:hover i {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="fourth"]:active {
+  text-decoration: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"] {
+  text-decoration: none;
+  color: #ffffff;
+  background: #e05353;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"] > [class*="icon"] {
+  color: #ffffff;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"]:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background: #e05353;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"]:hover i {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="fifth"]:active {
+  text-decoration: none;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"] {
+  text-decoration: none;
+  color: #534301;
+  background: #fdce09;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"] > [class*="icon"] {
+  color: #534301;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"]:hover {
+  text-decoration: none;
+  color: #000000;
+  background: #ebbe02;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"]:hover i {
+  color: #000000;
+}
+[class*="wp-digi"][class*="bton"][class*="sixth"]:active {
+  text-decoration: none;
+  top: .125em;
+  position: relative;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"] {
+  text-decoration: none;
+  color: #848484;
+  background: #dddddd;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"] > [class*="icon"] {
+  color: #848484;
+  text-shadow: none;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"] > [class*="icon"]:hover {
+  color: #ffffff;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"]:hover {
+  text-decoration: none;
+  color: #444444;
+  background: #d0d0d0;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"]:hover i {
+  color: #444444;
+}
+[class*="wp-digi"][class*="bton"][class*="seve"]:active {
+  text-decoration: none;
+  top: .125em;
+  position: relative;
+}
+[class*="wp-digi"][class*="bton"][class*="disabled"] {
+  background: #efefef;
+  color: #ccc;
+  border: solid #ddd 1px;
+  text-shadow: 1px 1px 0 #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+[class*="wp-digi"][class*="bton"][class*="disabled"]:active {
+  top: 0;
+}
+[class*="wp-digi"][class*="bton"][class*="disabled"] i {
+  color: #ccc;
+}
+
+[class*="wp-digi-catalog"] a {
+  text-decoration: none;
+}
+.wp-digi-catalog-hover {
+  background: #65c2ee;
+}
+[class*="wp-digi"][class*="pagination-current"] {
+  background: #65c2ee;
+  color: #ffffff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+
+[class*="wp-digi-tag"] > span {
+  background: #cccccc;
+}
+[class*="wp-digi-tag"] > span:after {
+  border-left: 1em solid #cccccc;
+}
+[class*="wp-digi-tag-first"] {
+  color: #ffffff;
+  background: #2e75bf;
+}
+[class*="wp-digi-tag-first"] i {
+  color: #ffffff;
+}
+[class*="wp-digi-tag-first"] > span {
+  background: #b3cfed;
+  color: #2e75bf;
+}
+[class*="wp-digi-tag-first"] > span:after {
+  border-left: 1em solid #b3cfed;
+}
+[class*="wp-digi-tag-second"] {
+  color: #ffffff;
+  background: #65c2ee;
+}
+[class*="wp-digi-tag-second"] i {
+  color: #ffffff;
+}
+[class*="wp-digi-tag-second"] > span {
+  background: #ffffff;
+  color: #65c2ee;
+}
+[class*="wp-digi-tag-second"] > span:after {
+  border-left: 1em solid #ffffff;
+}
+
+[class*="wp-digi-"][class*="-h1"] {
+  color: #555555;
+  font-size: 1.6em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+[class*="wp-digi-"][class*="-h2"] {
+  color: #555555;
+  font-size: 1.5em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+[class*="wp-digi-"][class*="-h3"] {
+  color: #555555;
+  font-size: 1.4em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+[class*="wp-digi-"][class*="-h4"] {
+  color: #555555;
+  font-size: 1.3em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+[class*="wp-digi-"][class*="-h5"] {
+  color: #555555;
+  font-size: 1.2em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+[class*="wp-digi-"][class*="-h6"] {
+  color: #555555;
+  font-size: 1em;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+
+[class*="wp-digi-"][class*="boxed"] {
+  padding: 16px;
+  padding: 1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  border: solid rgba(0, 0, 0, 0.05) 1px;
+  background: #fafafa;
+}
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h1"],
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h2"],
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h3"],
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h4"],
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h5"],
+[class*="wp-digi-"][class*="boxed"] [class*="wp-digi-"][class*="h6"] {
+  border-bottom: dashed #cccccc 1px;
+  padding-bottom: .6em;
+}
+.wp-digi-tabled {
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  -webkit-box-shadow: inset 0 0 0 0.25rem #ebebeb;
+  box-shadow: inset 0 0 0 0.25rem #ebebeb;
+  background: #fafafa;
+}
+[class*="wp-digi-"][class*="bordered"] {
+  border: solid #cccccc 1px;
+  padding: 8px;
+  padding: 0.5rem;
+  margin: 8px;
+  margin: 0.5rem;
+}
+
+/**	Digirisk datatable styles	*/
+.dataTables_scrollBody {
+	overflow-x: hidden !important;
+}
+.dataTables_wrapper:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+.dataTables_processing {
+	top: 200% !important;
+	z-index: 9999999;
+}
+.digi-datatable-user-checkbox-column {
+	width: 5px !important;
+}
+.digi-datatable-user-id-column {
+	width: 40px !important;
+}
+.digi-datatable-user-hiringdate-column, .digi-datatable-user-hiringdate-column sorting {
+	width: 140px !important;
+}

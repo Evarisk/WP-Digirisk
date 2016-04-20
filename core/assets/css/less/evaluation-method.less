@@ -1,0 +1,109 @@
+
+/* -------------------------------------
+		EVALUATION METHOD
+------------------------------------- */
+#adminmenuwrap {
+	z-index: 6000 !important;
+}
+.wp-digi-eval-mask {
+	background: @c2;
+	opacity: 0.9;
+	z-index: 9997;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.wp-digi-eval-evarisk {
+
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: rgba(39, 42, 53, 0.9);
+
+	h2 {
+		font-size: 26px;
+		font-weight: 300;
+		margin: 0;
+	}
+	h3 {
+		font-weight: 800;
+		margin: 6px 0 20px 0;
+	}
+	h2, h3 {
+		line-height: 1;
+	}
+	i {
+		position: absolute;
+		top: 16px;
+		right: 20px;
+		font-size: 30px;
+		color: rgba(0,0,0,0.2);
+		.transition;
+		&:hover {
+			color: @c1;
+			cursor: pointer;
+		}
+	}
+	> div {
+		z-index: 9998;
+		padding: 20px;
+		position: absolute;
+		display: block;
+		max-width: 1000px;
+		width: 100%;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		background: #fff;
+		//transition: top 0.8s ease-out;
+		&.animate {
+			//opacity: 1;
+		}
+	}
+	.wp-digi-eval-header {
+		text-align: center;
+
+	}
+	.wp-digi-eval-table {
+		display: table;
+		border-collapse: collapse;
+		vertical-align: middle;
+		> ul {
+			display: table-row;
+			text-align: center;
+			&.header {
+				li {
+					background: @c2 !important;
+					color: #fff;
+				}
+			}
+			&:not(.header) li:first-child {
+				background: @c1 !important;
+				color: #fff;
+			}
+			li {
+				padding: 20px;
+				border: 1px solid rgba(0,0,0,0.05);
+				display: table-cell;
+				vertical-align: middle;
+				&:nth-of-type(odd) {
+					background: #fff;
+				}
+				&:nth-of-type(even) {
+					background: rgba(0,0,0,0.1);
+				}
+				&.active {
+					background: @c1 !important;
+					color: #fff;
+				}
+			}
+		}
+	}
+}

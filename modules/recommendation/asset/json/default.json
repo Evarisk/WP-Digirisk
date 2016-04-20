@@ -1,0 +1,377 @@
+[ {
+  "name": "avertissements",
+  "name_thumbnail": "avertissements/dangerGeneral_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "textandpicture",
+      "size": "0.80"
+    },
+    "recommendation": [
+      {
+        "name": "Basse température",
+        "name_thumbnail": "avertissements/dangerBasseTemperature_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Champ magnétique important",
+        "name_thumbnail": "avertissements/dangerChampMagnetiqueImportant_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Charges suspendues",
+        "name_thumbnail": "avertissements/dangerChargesSuspendues_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Danger électrique",
+        "name_thumbnail": "avertissements/dangerElectrique_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Emplacement où une atmosphère explosible peut se présenter",
+        "name_thumbnail": "avertissements/dangerEX_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières comburantes",
+        "name_thumbnail": "avertissements/dangerMatieresComburantes_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières corrosives",
+        "name_thumbnail": "avertissements/dangerMatieresCorrosives_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières inflammables ou haute température",
+        "name_thumbnail": "avertissements/dangerMatieresInflammables_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières nocives ou irritantes",
+        "name_thumbnail": "avertissements/dangerMatieresNocivesIrritantes_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières radioactives radiations ionisantes",
+        "name_thumbnail": "avertissements/dangerRayonnementIonisantes_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Matières toxiques",
+        "name_thumbnail": "avertissements/dangerMatieresToxiques_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Radiations non ionisantes",
+        "name_thumbnail": "avertissements/dangerRayonnementNonIonisantes_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Rayonnement laser",
+        "name_thumbnail": "avertissements/dangerRayonnementLaser_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Risque biologique",
+        "name_thumbnail": "avertissements/dangerRisqueBiologique_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Trébuchement",
+        "name_thumbnail": "avertissements/dangerTrebuchement_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Véhicules de manutention",
+        "name_thumbnail": "avertissements/dangerVehiculeManutention_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Divers danger",
+        "name_thumbnail": "avertissements/dangerGeneral_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      }
+    ]
+  }
+},
+{
+  "name": "Équipement de protection collective",
+  "name_thumbnail": "epc/preconisations_epc_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "textandpicture",
+      "size": "0.80"
+    },
+    "recommendation": [
+      {
+        "name": "Divers équipement de protection collective",
+        "name_thumbnail": "epc/preconisations_epc_s.png",
+        "option": {
+          "type": "collectives"
+        }
+      }
+    ]
+  }
+},
+{
+  "name": "équipements de protection individuelle",
+  "name_thumbnail": "obligations/preconisationEPI_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "pictureonly",
+      "size": "2.00"
+    },
+    "recommendation": [
+      {
+        "name": "Protection individuelle obligatoire contre les chutes",
+        "name_thumbnail": "obligations/obligationChute_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire de l'ouïe",
+        "name_thumbnail": "obligations/obligationOuie_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire de la figure",
+        "name_thumbnail": "obligations/obligationFigure_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire de la tête",
+        "name_thumbnail": "obligations/obligationTete_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire de la vue",
+        "name_thumbnail": "obligations/obligationVue_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire des mains",
+        "name_thumbnail": "obligations/obligationMains_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire des pieds",
+        "name_thumbnail": "obligations/obligationPieds_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire des voies respiratoires",
+        "name_thumbnail": "obligations/obligationVoiesRespiratoires_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire du corps",
+        "name_thumbnail": "obligations/obligationCorps_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Protection obligatoire pour piétons",
+        "name_thumbnail": "obligations/obligationPietons_s.png",
+        "option": {
+          "type": "individuelles"
+        }
+      },
+      {
+        "name": "Divers équipement de protection individuelle",
+        "name_thumbnail": "obligations/preconisationEPI_s.png",
+        "option": {
+          "type": "collectives"
+        }
+      }
+    ]
+  }
+},
+{
+  "name": "interdictions",
+  "name_thumbnail": "interdictions/interdictionGenerale_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "textandpicture",
+      "size": "0.80"
+    },
+    "recommendation": [
+      {
+        "name": "Défense d'éteindre avec de l'eau",
+        "name_thumbnail": "interdictions/interdictionEteindreAvecEau_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Défense de fumer",
+        "name_thumbnail": "interdictions/interdictionFumer_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Eau non potable",
+        "name_thumbnail": "interdictions/interdictionEauNonPotable_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Entrée interdite aux personnes non autorisées",
+        "name_thumbnail": "interdictions/interdictionPersonnesNonAutorisees_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Flamme nue interdite et défense de fumer",
+        "name_thumbnail": "interdictions/interdictionFlammeNue_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Interdit aux piétons",
+        "name_thumbnail": "interdictions/interdictionPietons_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Interdit aux véhicules de manutention",
+        "name_thumbnail": "interdictions/interdictionVehiculesManutention_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Ne pas toucher",
+        "name_thumbnail": "interdictions/interdictionToucher_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      },
+      {
+        "name": "Divers interdiction",
+        "name_thumbnail": "interdictions/interdictionGenerale_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      }
+    ]
+  }
+},
+{
+  "name": "obligations",
+  "name_thumbnail": "obligations/obligationGenerale_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "textandpicture",
+      "size": "0.80"
+    },
+    "recommendation": [
+      {
+        "name": "Divers obligation",
+        "name_thumbnail": "obligations/obligationGenerale_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      }
+    ]
+  }
+},
+{
+  "name": "recommandations",
+  "name_thumbnail": "recommandations/recommandationsGenerale_s.png",
+  "option": {
+    "recommendation_category_print_option": {
+      "type": "textandpicture",
+      "size": "2.00"
+    },
+    "recommendation_print_option": {
+      "type": "textandpicture",
+      "size": "0.80"
+    },
+    "recommendation": [
+      {
+        "name": "Divers recommandations",
+        "name_thumbnail": "recommandations/recommandationsGenerale_s.png",
+        "option": {
+          "type": "organisationnelles"
+        }
+      }
+    ]
+  }
+}
+]
