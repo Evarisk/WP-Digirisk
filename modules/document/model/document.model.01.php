@@ -36,14 +36,6 @@ class wpdigi_document_mdl_01 extends post_mdl_01 {
 			'default'			=> 0,
 			'required'		=> true,
 		),
-		'unique_identifier' => array(
-			'type' 				=> 'string',
-			'field_type'	=> 'meta',
-			'field'				=> '_wpdigi_unique_identifier',
-			'function'		=> '',
-			'default'			=> 0,
-			'required'		=> true,
-		),
 		'model_id' => array(
 			'type' 				=> 'integer',
 			'field_type'	=> 'meta',

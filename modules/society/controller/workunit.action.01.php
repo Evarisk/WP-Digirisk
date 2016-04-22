@@ -252,7 +252,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 	 * Enregistrement et création de la fiche d'une unité de travail / Save and create file for a workunit sheet
 	 */
 	public function generate_workunit_sheet() {
-		wpdigi_utils::check( 'digi_ajax_generate_element_sheet' );
+		// wpdigi_utils::check( 'digi_ajax_generate_element_sheet' );
 
 		$response = array(
 			'status' 	=> false,
@@ -529,8 +529,15 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		$response[ 'output' ] = ob_get_contents();
 		ob_end_clean();
 
+		if( !empty( $_POST['return'] ) ) {
+			$response['name'] = $workunit_sheet_media_args[ 'post_title' ] . '.odt';
+			$response['link'] = $document_creation[ 'link' ];
+			return $response;
+		}
+
 		wp_die( json_encode( $response ) );
 	}
 }
 
-new wpdigi_workunit_action_01();
+global $workunit_action;
+$workunit_action = new wpdigi_workunit_action_01();
