@@ -278,6 +278,23 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 				'value'	=> array(),
 			),
 
+			'risqPA'									=> array(
+				'type'	=> 'segment',
+				'value'	=> array(),
+			),
+			'risqPA48'								=> array(
+				'type'	=> 'segment',
+				'value'	=> array(),
+			),
+			'risqPA51'								=> array(
+				'type'	=> 'segment',
+				'value'	=> array(),
+			),
+			'risqPA80'								=> array(
+				'type'	=> 'segment',
+				'value'	=> array(),
+			),
+
 			'planDactionRisq'				=> array(
 				'type'	=> 'segment',
 				'value'	=> array(),
@@ -313,6 +330,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 		foreach ( $risk_details as $risk_for_export ) {
 			$final_level = !empty( $result_treshold[ $risk_for_export[ 'niveauRisque' ] ] ) ? $result_treshold[ $risk_for_export[ 'niveauRisque' ] ] : '';
 			$element_file_details[ 'risq' . $final_level ][ 'value' ][] = $risk_for_export;
+			$element_file_details[ 'risqPA' . $final_level ][ 'value' ][] = $risk_for_export;
 
 			if ( !isset( $risk_per_element[ $risk_for_export[ 'idElement' ] ] ) ) {
 				$risk_per_element[ $risk_for_export[ 'idElement' ] ][ 'quotationTotale' ] = 0;
@@ -379,100 +397,100 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 
 		// Generate children
 
-		$list_id = array();
-		if( empty($_POST['return']) ) {
-			$list_id = $this->get_element_sub_tree_id( $element->id, $list_id );
-
-			$response['file'] = array();
-
-			global $workunit_action;
-
-			if ( !empty( $list_id ) ) {
-				foreach( $list_id as $element ) {
-					if( !empty( $element['workunit'] ) ) {
-						foreach( $element['workunit'] as $workunit_id ) {
-							if( !empty( $element['id'] ) ) {
-								$_POST['element_id'] = $element['id'];
-								$_POST['element_type'] = 'digi-group';
-								$_POST['return'] = true;
-								$response['file'][] = $this->ajax_generate_duer();
-								// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
-							}
-							$_POST['element_id'] = $workunit_id['id'];
-							$_POST['element_type'] = 'digi-workunit';
-							$_POST['return'] = true;
-							$response['file'][] = $workunit_action->generate_workunit_sheet();
-							// do_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit' );
-						}
-					}
-					else {
-						if( !empty( $element['id'] ) ) {
-							$_POST['element_id'] = $element['id'];
-							$_POST['element_type'] = 'digi-group';
-							$_POST['return'] = true;
-							$response['file'][] = $this->ajax_generate_duer();
-							// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
-						}
-					}
-				}
-			}
-
-			unset( $_POST['return'] );
-		}
-
-		if( !empty($_POST['return']) ) {
-			$response['link'] = $document_creation[ 'link' ];
-			return $response;
-		}
-
-		$response['link'] = $document_creation[ 'link' ];
-
-		$upload_dir = wp_upload_dir();
-		$path = $upload_dir[ 'basedir' ] . '/digirisk/' . $element_duer_media_args['type'] . '/' . $element_duer_media_args['id'] . '/' . $element_duer_media_args[ 'post_title' ] . '_merged.zip';
-
-		$zip = new ZipArchive();
-
-
-
-		if( $zip->open( $path, ZipArchive::CREATE) !== TRUE ) {
-			$response['status'] = false;
-			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' );
-		}
-
-		$zip->addFile( $response['link'], $response['name'] );
-
-		if( !empty( $response['file'] ) ) {
-			foreach( $response['file'] as $file ) {
-					$zip->addFile( $file['link'], $file['name'] );
-			}
-		}
-		$zip->close();
-
-		$element_zip_id = wp_insert_attachment( $element_duer_media_args, '', $element_duer_media_args['id'] );
-
-		$element_file_details['zip'] = true;
-
-		$work_unit_sheet_args = array(
-			'id'					=> $element_zip_id,
-			'status'    	=> 'inherit',
-			'author_id'		=> get_current_user_id(),
-			'date'			 	=> current_time( 'mysql', 0 ),
-			'mime_type'		=> $filetype[ 'type' ],
-			'option'			=> array (
-				'unique_key'					=> $next_document_key,
-				'unique_identifier' 	=> 'ZIP' . $next_document_key,
-				'model_id' 						=> $element_model_to_use,
-				'document_meta' 			=> json_encode( $element_file_details ),
-			),
-		);
-		$document = $document_controller->update( $work_unit_sheet_args );
-
-		if ( !empty( $element_zip_id ) ) {
-			$element = $this->show( $element_duer_media_args['id'] );
-			$element->option[ 'associated_document_id' ][ 'document' ][] = $element_zip_id;
-			$element = $this->update( $element );
-			wp_set_object_terms( $element_zip_id, array( 'printed', 'document_unique', ), $document_controller->attached_taxonomy_type );
-		}
+		// $list_id = array();
+		// if( empty($_POST['return']) ) {
+		// 	$list_id = $this->get_element_sub_tree_id( $element->id, $list_id );
+		//
+		// 	$response['file'] = array();
+		//
+		// 	global $workunit_action;
+		//
+		// 	if ( !empty( $list_id ) ) {
+		// 		foreach( $list_id as $element ) {
+		// 			if( !empty( $element['workunit'] ) ) {
+		// 				foreach( $element['workunit'] as $workunit_id ) {
+		// 					if( !empty( $element['id'] ) ) {
+		// 						$_POST['element_id'] = $element['id'];
+		// 						$_POST['element_type'] = 'digi-group';
+		// 						$_POST['return'] = true;
+		// 						$response['file'][] = $this->ajax_generate_duer();
+		// 						// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
+		// 					}
+		// 					$_POST['element_id'] = $workunit_id['id'];
+		// 					$_POST['element_type'] = 'digi-workunit';
+		// 					$_POST['return'] = true;
+		// 					$response['file'][] = $workunit_action->generate_workunit_sheet();
+		// 					// do_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit' );
+		// 				}
+		// 			}
+		// 			else {
+		// 				if( !empty( $element['id'] ) ) {
+		// 					$_POST['element_id'] = $element['id'];
+		// 					$_POST['element_type'] = 'digi-group';
+		// 					$_POST['return'] = true;
+		// 					$response['file'][] = $this->ajax_generate_duer();
+		// 					// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		//
+		// 	unset( $_POST['return'] );
+		// }
+		//
+		// if( !empty($_POST['return']) ) {
+		// 	$response['link'] = $document_creation[ 'link' ];
+		// 	return $response;
+		// }
+		//
+		// $response['link'] = $document_creation[ 'link' ];
+		//
+		// $upload_dir = wp_upload_dir();
+		// $path = $upload_dir[ 'basedir' ] . '/digirisk/' . $element_duer_media_args['type'] . '/' . $element_duer_media_args['id'] . '/' . $element_duer_media_args[ 'post_title' ] . '_merged.zip';
+		//
+		// $zip = new ZipArchive();
+		//
+		//
+		//
+		// if( $zip->open( $path, ZipArchive::CREATE) !== TRUE ) {
+		// 	$response['status'] = false;
+		// 	$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' );
+		// }
+		//
+		// $zip->addFile( $response['link'], $response['name'] );
+		//
+		// if( !empty( $response['file'] ) ) {
+		// 	foreach( $response['file'] as $file ) {
+		// 			$zip->addFile( $file['link'], $file['name'] );
+		// 	}
+		// }
+		// $zip->close();
+		//
+		// $element_zip_id = wp_insert_attachment( $element_duer_media_args, '', $element_duer_media_args['id'] );
+		//
+		// $element_file_details['zip'] = true;
+		//
+		// $work_unit_sheet_args = array(
+		// 	'id'					=> $element_zip_id,
+		// 	'status'    	=> 'inherit',
+		// 	'author_id'		=> get_current_user_id(),
+		// 	'date'			 	=> current_time( 'mysql', 0 ),
+		// 	'mime_type'		=> $filetype[ 'type' ],
+		// 	'option'			=> array (
+		// 		'unique_key'					=> $next_document_key,
+		// 		'unique_identifier' 	=> 'ZIP' . $next_document_key,
+		// 		'model_id' 						=> $element_model_to_use,
+		// 		'document_meta' 			=> json_encode( $element_file_details ),
+		// 	),
+		// );
+		// $document = $document_controller->update( $work_unit_sheet_args );
+		//
+		// if ( !empty( $element_zip_id ) ) {
+		// 	$element = $this->show( $element_duer_media_args['id'] );
+		// 	$element->option[ 'associated_document_id' ][ 'document' ][] = $element_zip_id;
+		// 	$element = $this->update( $element );
+		// 	wp_set_object_terms( $element_zip_id, array( 'printed', 'document_unique', ), $document_controller->attached_taxonomy_type );
+		// }
 
 		wp_die(json_encode( $response ) );
 	}
@@ -599,12 +617,13 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 
 			$element_duer_details[] = array(
 				'idElement'					=> $element->option[ 'unique_identifier' ],
-				'nomElement'				=> $element->title,
+				'nomElement'				=> $element->option[ 'unique_identifier'] . ' - ' . $element->title,
 				'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
 				'quotationRisque'		=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
 				'niveauRisque'			=> $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ],
 				'nomDanger'					=> $complete_risk->danger->name,
 				'commentaireRisque'	=> $comment_list,
+				'est' => 'hahaha',
 			);
 		}
 
@@ -612,6 +631,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
 				$final_level = !empty( $result_treshold[ $risk_level ] ) ? $result_treshold[ $risk_level ] : '';
 				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
+				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
 			}
 		}
 

@@ -72,6 +72,7 @@ class DigiOdf
  			}
 
 
+
         $this->file->close();
 
         $tmp = tempnam($this->config['PATH_TO_TMP'], md5(uniqid()));
@@ -194,6 +195,7 @@ IMG;
         $this->contentXml = preg_replace($reg, $digi_segment->getXmlParsed(), $this->contentXml);
 		foreach ($digi_segment->manif_vars as $val)
 		$this->manif_vars[] = $val;   //copy all digi_segment image names into current array
+
         return $this;
     }
     /**

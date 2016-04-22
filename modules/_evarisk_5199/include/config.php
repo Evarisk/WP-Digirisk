@@ -71,6 +71,12 @@ $typeRisque['risq51'] = SEUIL_BAS_ATRAITER;
 $typeRisque['risq48'] = SEUIL_BAS_APLANIFIER;
 $typeRisque['risq'] = SEUIL_BAS_FAIBLE;
 
+$typeRisquePA = array();
+$typeRisquePA['risqPA80'] = SEUIL_BAS_INACCEPTABLE;
+$typeRisquePA['risqPA51'] = SEUIL_BAS_ATRAITER;
+$typeRisquePA['risqPA48'] = SEUIL_BAS_APLANIFIER;
+$typeRisquePA['risqPA'] = SEUIL_BAS_FAIBLE;
+
 $typeRisquePlanAction = array();
 $typeRisquePlanAction['planDactionRisq80'] = SEUIL_BAS_INACCEPTABLE;
 $typeRisquePlanAction['planDactionRisq51'] = SEUIL_BAS_ATRAITER;
