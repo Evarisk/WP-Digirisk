@@ -8,7 +8,7 @@ define('END_TEST', "/^.*\.test\.php$/");
 echo "[+] Starting Unit Tests" . PHP_EOL . PHP_EOL;
 
 // Search for test files
-$unitList = searchFiles('..' . DIRECTORY_SEPARATOR, END_TEST);
+$unitList = searchFiles('.' . DIRECTORY_SEPARATOR, END_TEST);
 
 // Loop on unitList
 foreach($unitList as $test)
