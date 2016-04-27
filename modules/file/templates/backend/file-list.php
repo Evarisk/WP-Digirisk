@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <?php if ( !empty( $files ) ) : ?>
 	<?php foreach ( $files as $file_id ) : ?>
-		<?php $file_id = (int)$file_id;
+		<?php $file_id = (int)$file_id; ?>
 		<?php if ( !empty( $file_id ) && ( empty( $params ) || empty( $params[ 'type' ] ) || ( 'image' == $params[ 'type' ] && wp_attachment_is_image( $file_id ) ) ) ) : ?>
 		<?php require( wpdigi_utils::get_template_part( WPEOMTM_FILES_DIR, WPEOMTM_FILES_TEMPLATES_MAIN_DIR, 'backend', 'file' ) ); ?>
 		<?php endif; ?>
