@@ -103,36 +103,37 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 	public function display_society_tree( $mode = 'simple', $default_selected_group_id = null ) {
 		/**	Get existing groups for main selector display	*/
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
-
-		//global $default_selected_group_id;
-		global $wpdigi_workunit_ctr;
 		$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
+		// //global $default_selected_group_id;
+		// global $wpdigi_workunit_ctr;
 
-		$workunit_id = 0;
-		global $wpdb;
-		$workunit_id = $wpdb->get_var( $wpdb->prepare( "SELECT P.ID FROM {$wpdb->posts} as P JOIN {$wpdb->postmeta} as PM ON P.ID=PM.post_id WHERE P.post_type=%s AND PM.meta_key=%s AND PM.meta_value=%s", array( $wpdigi_workunit_ctr->get_post_type(), '_wpdigi_unique_identifier', 'UT1' ) ) );
-
-		if ( !empty( $_REQUEST['current_workunit_id'] ) ) {
-			$workunit_id = $_REQUEST['current_workunit_id'];
-		}
-
-		if ( !empty( $_REQUEST['current_group_id'] ) ) {
-			$default_selected_group_id = $_REQUEST['current_group_id'];
-		}
+		//
+		// $workunit_id = 0;
+		// global $wpdb;
+		// $workunit_id = $wpdb->get_var( $wpdb->prepare( "SELECT P.ID FROM {$wpdb->posts} as P JOIN {$wpdb->postmeta} as PM ON P.ID=PM.post_id WHERE P.post_type=%s AND PM.meta_key=%s AND PM.meta_value=%s", array( $wpdigi_workunit_ctr->get_post_type(), '_wpdigi_unique_identifier', 'UT1' ) ) );
+		//
+		// if ( !empty( $_REQUEST['current_workunit_id'] ) ) {
+		// 	$workunit_id = $_REQUEST['current_workunit_id'];
+		// }
+		//
+		// if ( !empty( $_REQUEST['current_group_id'] ) ) {
+		// 	$default_selected_group_id = $_REQUEST['current_group_id'];
+		// }
 
 		add_filter( 'wpdigi_default_dashboard_content', function( $default ){
-			global $default_selected_group_id;
-			global $wpdigi_workunit_ctr;
-
-			global $wpdb;
-			$workunit_id = $wpdb->get_var( $wpdb->prepare( "SELECT P.ID FROM {$wpdb->posts} as P JOIN {$wpdb->postmeta} as PM ON P.ID=PM.post_id WHERE P.post_type=%s AND PM.meta_key=%s AND PM.meta_value=%s", array( $wpdigi_workunit_ctr->get_post_type(), '_wpdigi_unique_identifier', 'UT1' ) ) );
-
-			if ( !empty( $_REQUEST['current_workunit_id'] ) ) {
-				$workunit_id = $_REQUEST['current_workunit_id'];
-			}
+			$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
+			$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
+			// global $wpdigi_workunit_ctr;
+			//
+			// global $wpdb;
+			// $workunit_id = $wpdb->get_var( $wpdb->prepare( "SELECT P.ID FROM {$wpdb->posts} as P JOIN {$wpdb->postmeta} as PM ON P.ID=PM.post_id WHERE P.post_type=%s AND PM.meta_key=%s AND PM.meta_value=%s", array( $wpdigi_workunit_ctr->get_post_type(), '_wpdigi_unique_identifier', 'UT1' ) ) );
+			//
+			// if ( !empty( $_REQUEST['current_workunit_id'] ) ) {
+			// 	$workunit_id = $_REQUEST['current_workunit_id'];
+			// }
 
 			ob_start();
-			$wpdigi_workunit_ctr->display( $workunit_id );
+			$this->display( $default_selected_group_id );
 			$default = ob_get_clean();
 
 			return $default;

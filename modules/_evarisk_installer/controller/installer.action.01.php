@@ -83,21 +83,6 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 
 		$groupement = $wpdigi_group_ctr->create( $groupment );
 
-		global $wpdigi_workunit_ctr;
-
-		$next_identifier = wpdigi_utils::get_last_unique_key( 'post', $wpdigi_workunit_ctr->get_post_type() );
-		$unique_key = ( $next_identifier + 1 );
-		$unique_identifier = $wpdigi_workunit_ctr->element_prefix . ( $next_identifier + 1 );
-
-		$wpdigi_workunit_ctr->create( array(
-			'title'	=>	__( 'Workunit', 'wpdigi-i18n' ),
-			'parent_id' => $groupement->id,
-			'option' => array(
-				'unique_key'		=> $unique_key,
-				'unique_identifier' => $unique_identifier,
-			),
-		) );
-
 		/** On crée les dangers */
 		global $wpdigi_danger_ctr;
 		$wpdigi_danger_ctr->create_default_data();
