@@ -21,6 +21,9 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 		add_action( 'wp_ajax_wpdigi-installer-step-1', array( $this, 'ajax_installer_step_1' ) );
 
 		add_action( 'wp_ajax_wpdigi-installer-add-user', array( $this, 'ajax_installer_add_user' ) );
+		add_action( 'wp_ajax_wpdigi-installer-load-user', array( $this, 'ajax_installer_load_user' ) );
+		add_action( 'wp_ajax_wpdigi-installer-edit-user', array( $this, 'ajax_installer_edit_user' ) );
+		add_action( 'wp_ajax_wpdigi-installer-delete-user', array( $this, 'ajax_installer_delete_user' ) );
 
 		add_action( 'admin_post_wpdigi-installer-import-staff', array( $this, 'admin_post_installer_import_staff' ) );
 
@@ -126,6 +129,64 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 		ob_start();
 		require_once( wpdigi_utils::get_template_part( DIGI_INSTAL_DIR, DIGI_INSTAL_TEMPLATES_MAIN_DIR, 'backend', 'list', 'item' ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function ajax_installer_load_user() {
+		if ( 0 === (int)$_POST['user_id'] )
+			wp_send_json_error( );
+		else
+			$user_id = (int)$_POST['user_id'];
+
+		wpdigi_utils::check( 'ajax_installer_load_user_' . $user_id );
+
+		global $wpdigi_user_ctr;
+
+		$user = $wpdigi_user_ctr->show( $user_id );
+
+		ob_start();
+		require_once( wpdigi_utils::get_template_part( DIGI_INSTAL_DIR, DIGI_INSTAL_TEMPLATES_MAIN_DIR, 'backend', 'list-item-edit' ) );
+		$template = ob_get_clean();
+
+		wp_send_json_success( array( 'template' => $template ) );
+	}
+
+	public function ajax_installer_edit_user() {
+		if ( 0 === (int)$_POST['user_id'] )
+			wp_send_json_error( );
+		else
+			$user_id = (int)$_POST['user_id'];
+
+		wpdigi_utils::check( 'ajax_installer_edit_user_' . $user_id );
+
+		global $wpdigi_user_ctr;
+
+		$user = $wpdigi_user_ctr->show( $user_id );
+
+		$user->email = sanitize_email( $_POST['user']['email'] );
+		$user->option['user_info']['lastname'] = sanitize_text_field( $_POST['user']['option']['user_info']['lastname'] );
+		$user->option['user_info']['firstname'] = sanitize_text_field( $_POST['user']['option']['user_info']['firstname'] );
+		$user->login = trim( strtolower( remove_accents( sanitize_user( $user->option['user_info']['firstname'] . '.' . $user->option['user_info']['lastname'] ) ) ) );
+
+		$user = $wpdigi_user_ctr->update( $user );
+
+		ob_start();
+		require_once( wpdigi_utils::get_template_part( DIGI_INSTAL_DIR, DIGI_INSTAL_TEMPLATES_MAIN_DIR, 'backend', 'list', 'item' ) );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function ajax_installer_delete_user() {
+		if ( 0 === (int)$_POST['user_id'] )
+			wp_send_json_error();
+		else
+			$user_id = (int)$_POST['user_id'];
+
+		wpdigi_utils::check( 'ajax_installer_delete_user_' . $user_id );
+
+		global $wpdigi_user_ctr;
+
+		$wpdigi_user_ctr->delete( $user_id );
+
+		wp_send_json_success();
 	}
 
 	// public function ajax_update_option_domain_mail() {

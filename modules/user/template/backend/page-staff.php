@@ -16,20 +16,13 @@
 			<span><?php _e('Lastname', 'wpdigi-i18n'); ?></span>
 			<span><?php _e('Firtname', 'wpdigi-i18n'); ?></span>
 			<span><?php _e('Email', 'wpdigi-i18n'); ?></span>
+			<span></span>
 		</li>
 
 		<?php
 		if ( !empty( $list_user ) ):
 			foreach ( $list_user as $user ):
-				?>
-				<li class="wp-digi-list-item">
-					<span class="wp-avatar" style="background: #<?php echo $user->option['user_info']['avatar_color']; ?>;" ><?php echo $user->option['user_info']['initial']; ?></span>
-					<span><strong>U<?php echo $user->id; ?></strong></span>
-					<span><?php echo $user->option['user_info']['lastname']; ?></span>
-					<span><?php echo $user->option['user_info']['firstname']; ?></span>
-					<span><?php echo $user->email; ?></span>
-				</li>
-				<?php
+				require( wpdigi_utils::get_template_part( DIGI_INSTAL_DIR, DIGI_INSTAL_TEMPLATES_MAIN_DIR, 'backend', 'list', 'item' ) );
 			endforeach;
 		endif;
 		?>

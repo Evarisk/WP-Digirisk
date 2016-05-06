@@ -125,6 +125,11 @@ var digi_installer = {
 
 		/** Ajouter un personnel */
 		jQuery( document ).on( 'click', '.wpdigi-staff .add-staff', function( event ) { digi_installer.add_staff( event, jQuery( this ) ); } );
+    /** Modifier un personnel */
+    jQuery( document ).on( 'click', '.wpdigi-staff .wp-digi-action-load', function( event ) { digi_installer.load_staff( event, jQuery( this ) ); } );
+    jQuery( document ).on( 'click', '.wpdigi-staff .wp-digi-action-edit', function( event ) { digi_installer.edit_staff( event, jQuery( this ) ); } );
+    /** Supprimer un personnel */
+    jQuery( document ).on( 'click', '.wpdigi-staff .wp-digi-action-delete', function( event ) { digi_installer.delete_staff( event, jQuery( this ) ); } );
 
 		/** Enregister dernière étape */
 		jQuery( document ).on( 'click', '.wpdigi-installer div:last a:last', function( event ) { digi_installer.save_last_step( event, jQuery( this ) ); } );
@@ -165,6 +170,61 @@ var digi_installer = {
 			} );
 		}
 	},
+
+  load_staff: function( event, element ) {
+    event.preventDefault();
+
+		var user_id = jQuery( element ).data( 'id' );
+		jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
+
+		var data = {
+			action: 'wpdigi-installer-load-user',
+			_wpnonce: jQuery( element ).data( 'nonce' ),
+			user_id: user_id,
+		};
+
+		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
+			jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).replaceWith( response.data.template );
+		} );
+  },
+
+  edit_staff: function( event, element ) {
+    var user_id = jQuery( element ).closest( 'form' ).data( 'id' );
+		if( jQuery( element ).closest( 'form' ).find( 'input[name="option[user_info][lastname]"]' ).val() != '') {
+			jQuery( element ).closest( 'form' ).addClass( 'wp-digi-bloc-loading' );
+			jQuery( element ).closest( 'form' ).ajaxSubmit( {
+				beforeSubmit: function() {
+					if( !validateEmail( jQuery( element ).closest( 'form' ).find( 'input[name="user[email]"]' ).val() ) ) {
+						jQuery( element ).closest( 'form' ).removeClass( 'wp-digi-bloc-loading' );
+						return false;
+					}
+				},
+				success: function( response ) {
+          jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
+    			jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).replaceWith( response.data.template );
+				}
+			} );
+		}
+  },
+
+  delete_staff: function( event, element ) {
+    event.preventDefault();
+
+    if( confirm( digi_confirm_delete ) ) {
+  		var user_id = jQuery( element ).data( 'id' );
+
+  		jQuery( '.wp-digi-list-staff .wp-digi-list-item[data-id="'+ user_id +'"]' ).fadeOut();
+
+  		var data = {
+  			action: 'wpdigi-installer-delete-user',
+  			_wpnonce: jQuery( element ).data( 'nonce' ),
+  			user_id: user_id,
+  		};
+
+  		jQuery.post( ajaxurl, data, function() {} );
+    }
+  },
 
 	toggle_form: function( event, element ) {
 		event.preventDefault();
