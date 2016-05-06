@@ -235,8 +235,19 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 		/**	Définition de la révision du document / Define the document version	*/
 		$document_revision = $document_controller->get_document_type_next_revision( array( 'document_unique' ), $element->id );
 
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+
 		/**	Définition de la structure des données du document par défaut / Define the default data structure for document	*/
 		$element_file_details = array(
+			'a' => array(
+				'type'		=> 'picture',
+				'value'		=> str_replace( site_url( '/' ), ABSPATH, $src_logo[0] ),
+				'option'	=> array(
+					'size'	=> 2,
+				),
+			),
+
 			'identifiantElement'		=> $element->option[ 'unique_identifier' ],
 			'nomEntreprise'					=> !empty( $_POST ) && !empty( $_POST[ 'wpdigi_duer' ] ) && !empty( $_POST[ 'wpdigi_duer' ][ 'company_name' ] ) ? sanitize_text_field( strip_tags( $_POST[ 'wpdigi_duer' ][ 'company_name' ] ) ) : $element->title,
 			'dateAudit'							=> $audit_date,
