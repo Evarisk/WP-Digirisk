@@ -3,4 +3,4 @@
 	url = https://github.com/Eoxia/wpeo_model.git
 [submodule "core/wpeo_log"]
 	path = core/wpeo_log
-	url = https://github.com/Eoxia/wpeo_log.git
+	url = https://github.com/Eoxia/wpeo_logs.git
