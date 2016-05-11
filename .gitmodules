@@ -1,6 +1,6 @@
 [submodule "core/wpeo_model"]
 	path = core/wpeo_model
 	url = https://github.com/Eoxia/wpeo_model.git
-[submodule "core/wpeo_log"]
-	path = core/wpeo_log
+[submodule "core/wpeo_logs"]
+	path = core/wpeo_logs
 	url = https://github.com/Eoxia/wpeo_log.git
