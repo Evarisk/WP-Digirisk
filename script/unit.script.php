@@ -1,5 +1,5 @@
 <?php
-
+define("UNIT_TESTING", 1);
 // include wp emulation
 include('wp-emulator.script.php');
 

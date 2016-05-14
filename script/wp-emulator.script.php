@@ -1,5 +1,6 @@
 <?php 
-
+	if(!defined("UNIT_TESTING")) die();
+	
 	function load_plugin_textdomain($name, $bool, $path)
 	{
 		echo "[+] Loading plugin -> " . $path . $name . PHP_EOL;
