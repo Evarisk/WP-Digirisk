@@ -14,6 +14,9 @@
 	else if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
 		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
 	}
+	else if ( is_file( get_attached_file( $document_id ) ) ) {
+		$document_full_path = get_attached_file( $document_id );
+	}
 
 	require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
 ?>
