@@ -3,7 +3,7 @@
 <ul class="wp-digi-list wp-digi-table wp-digi-list-document" >
 <?php foreach ( $list_document_id as $document_id ) : ?>
 <?php if ( has_term( 'printed', 'attachment_category', $document_id ) ) : ?>
-<?php
+<?php 
 	$document = $this->show( $document_id );
 	$document->option['document_meta'] = json_decode( $document->option['document_meta' ] );
 	$document_full_path = null;

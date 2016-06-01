@@ -232,7 +232,6 @@ class document_controller_01 extends post_ctr_01 {
 				}
 			}
 		}
-
 		return $response;
 	}
 
@@ -427,4 +426,5 @@ class document_controller_01 extends post_ctr_01 {
 
 }
 
-return new document_controller_01();
+global $document_controller;
+$document_controller = new document_controller_01();

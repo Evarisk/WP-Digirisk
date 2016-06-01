@@ -521,11 +521,11 @@ var digi_workunit = {
 	        success:       function( responseText, statusText, xhr, $form ) {
 	        	jQuery( element ).removeClass( "wp-digi-loading" );
 	        	if ( responseText.status && ( undefined != responseText.output ) ) {
-	        		if ( undefined != jQuery( ".wp-digi-workunit-sheet-content ul.wp-digi-list-document" ).html() ) {
-	        			jQuery( ".wp-digi-workunit-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
+	        		if ( undefined != jQuery( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
+	        			jQuery( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
 	        		}
 	        		else {
-	        			jQuery( ".wp-digi-workunit-sheet-tab li.wp-digi-sheet-generation-button" ).click();
+	        			jQuery( ".wp-digi-global-sheet-tab li.wp-digi-sheet-generation-button" ).click();
 	        		}
 	        	}
 	        	else {
