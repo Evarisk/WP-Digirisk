@@ -321,6 +321,7 @@ var digi_workunit = {
 				}
 				else {
 					alert( "Please fill in all fields" );
+          return false;
 				}
 			},
 			'success' : function( response, status, xhr, $form ){
