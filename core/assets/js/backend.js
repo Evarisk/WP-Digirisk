@@ -122,6 +122,7 @@ var digi_installer = {
 		jQuery( document ).on( 'keyup', '.wpdigi-staff .input-domain-mail', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
 		jQuery( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[option][user_info][lastname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
 		jQuery( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[option][user_info][firstname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
+    jQuery( document ).on( 'click', '.wp-digi-action-save-domain-mail', function( event ) { digi_installer.save_domain_mail( event, jQuery( this ) ); } );
 
 		/** Ajouter un personnel */
 		jQuery( document ).on( 'click', '.wpdigi-staff .add-staff', function( event ) { digi_installer.add_staff( event, jQuery( this ) ); } );
@@ -240,6 +241,18 @@ var digi_installer = {
 			jQuery( ".wpdigi-staff .add-staff" ).click();
 		}
 	},
+
+  save_domain_mail: function( event, element ) {
+    event.preventDefault();
+
+    var data = {
+      action: 'save_domain_mail',
+      _wpnonce: jQuery( element ).data( 'nonce' ),
+      domain_mail: jQuery( element ).closest( '.form-element' ).find( 'input' ).val(),
+    };
+
+    jQuery.post( ajaxurl, data, function() { } );
+  },
 
 	save_last_step: function( event, element ) {
 		jQuery( '.wpdigi-installer .dashicons-plus:last' ).click();

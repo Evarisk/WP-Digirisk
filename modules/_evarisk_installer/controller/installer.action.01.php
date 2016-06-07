@@ -27,7 +27,7 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 
 		add_action( 'admin_post_wpdigi-installer-import-staff', array( $this, 'admin_post_installer_import_staff' ) );
 
-		add_action( 'wp_ajax_update_option_domain_mail', array( $this, 'ajax_update_option_domain_mail' ) );
+		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
 
 		add_action( 'admin_post_last_step', array( $this, 'admin_post_last_step' ) );
 	}
@@ -189,16 +189,19 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 		wp_send_json_success();
 	}
 
-	// public function ajax_update_option_domain_mail() {
-	// 	if( empty( $_POST['domain_mail'] ) )
-	// 		wp_send_json_error();
-	//
-	// 	$domain_mail = sanitize_text_field( $domain_mail );
-	//
-	// 	update_option( 'digirisk_domain_mail', $domain_mail );
-	//
-	// 	wp_send_json_success();
-	// }
+	public function ajax_save_domain_mail() {
+		check_ajax_referer( 'save_domain_mail' );
+
+		$domain_mail = !empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+
+		if ( $domain_mail === '' ) {
+			wp_send_json_error();
+		}
+
+		update_option( 'digirisk_domain_mail', $domain_mail );
+
+		wp_send_json_success();
+	}
 
 	public function admin_post_installer_import_staff() {
 		if ( ( empty( $_FILES ) || empty( $_FILES['csv' ] ) || $_FILES['csv']['error'] != 0 ) && empty( $_POST['content_csv'] ) )
