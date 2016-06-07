@@ -30,6 +30,10 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			add_filter( 'wpdigi_workunit_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
 			/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
 			add_filter( 'wpdigi_workunit_sheet_content', array( $this, 'filter_display_evaluator_in_element' ), 10, 3 );
+
+			/** Pour la recherche */
+			add_filter( 'wpdigi_search_evaluator_affected', array( $this, 'callback_wpdigi_search_evaluator_affected' ), 10, 3 );
+			add_filter( 'wpdigi_search_evaluator_to_assign', array( $this, 'callback_wpdigi_search_evaluator_to_assign' ), 10, 4 );
 		}
 
 		/**
@@ -246,6 +250,94 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			$minutes += $interval->format( '%i' );
 
 			return $minutes;
+		}
+
+		public function callback_wpdigi_search_evaluator_affected( $string, $workunit_id, $list_id ) {
+			global $wpdigi_evaluator_ctr;
+			global $wpdigi_workunit_ctr;
+
+			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
+
+			if ( empty( $workunit ) )
+				wp_send_json_error();
+
+			$list_evaluator = array();
+			if ( !empty( $workunit->option['user_info']['affected_id']['evaluator'] ) ) {
+				foreach ( $workunit->option['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+					if ( !empty( $array_value ) && in_array( $evaluator_id, $list_id ) ) {
+						foreach ( $array_value as $index => $sub_array_value ) {
+							if ( !empty( $sub_array_value['status'] ) && $sub_array_value['status'] == 'valid' ) {
+								$list_evaluator[ $evaluator_id ][ $index ][ 'user_info' ] = $wpdigi_evaluator_ctr->show( $evaluator_id );
+								$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ] = $sub_array_value;
+								$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ][ 'id' ] = $index;
+							}
+						}
+					}
+				}
+			}
+
+			$list_affected_evaluator = array();
+
+			foreach ( $list_evaluator as $evaluator_id => $array_evaluator ) {
+				if ( !empty( $array_evaluator ) ) {
+					foreach( $array_evaluator as $index => $evaluator ) {
+						$list_affected_evaluator[$evaluator['affectation_info']['start']['date']][$index] = $evaluator;
+					}
+				}
+			}
+
+			arsort( $list_affected_evaluator );
+
+			ob_start();
+			require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+			$string .= ob_get_clean();
+			return $string;
+		}
+
+		public function callback_wpdigi_search_evaluator_to_assign( $string, $workunit_id, $list_id, $term ) {
+			global $wpdigi_user_ctr;
+			global $wpdigi_workunit_ctr;
+
+			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
+
+			if ( empty( $workunit ) )
+				wp_send_json_error();
+
+			if ( !empty( $term ) ) {
+				$list_evaluator_to_assign = array();
+
+				if ( !empty( $list_id ) ) {
+					foreach ( $list_id as $user_id ) {
+						if ( $user_id != 1 )
+							$list_evaluator_to_assign[] = $wpdigi_user_ctr->show( $user_id );
+					}
+				}
+			}
+			else {
+				$current_page = 1;
+				$args_where_user = array(
+					'offset' => 0,
+					'number' => $wpdigi_user_ctr->limit_user,
+					'exclude' => array( 1 ),
+					'meta_query' => array(
+						'relation' => 'OR',
+					),
+				);
+
+				$list_evaluator_to_assign = $wpdigi_user_ctr->index( $args_where_user );
+
+				// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+				unset( $args_where_user['offset'] );
+				unset( $args_where_user['number'] );
+				$args_where_user['fields'] = array( 'ID' );
+				$count_user = count( $wpdigi_user_ctr->index( $args_where_user ) );
+				$number_page = ceil( $count_user / $wpdigi_user_ctr->limit_user );
+			}
+
+			ob_start();
+			require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+			$string .= ob_get_clean();
+			return $string;
 		}
 
 	}

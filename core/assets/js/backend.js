@@ -56,7 +56,6 @@ var digi_global = {
 					jQuery( jQuery ( element ).data( 'append-to' ) ).addClass( 'wp-digi-bloc-loading' );
 				}
 				list_option.response = function( event, ui ) {
-          console.log( ui.content );
 					jQuery( jQuery ( element ).data( 'append-to' ) ).replaceWith( ui.content[0].value );
 				}
 				list_option.open = function( event, ui ) {
