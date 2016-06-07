@@ -120,8 +120,8 @@ var digi_installer = {
 		jQuery( document ).on( 'click', '.wpdigi-staff .more-option', function( event ) { digi_installer.toggle_form( event, jQuery( this ) ); } );
 
 		jQuery( document ).on( 'keyup', '.wpdigi-staff .input-domain-mail', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'keyup', '.wpdigi-staff input[name="user[option][user_info][lastname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'keyup', '.wpdigi-staff input[name="user[option][user_info][firstname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
+		jQuery( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[option][user_info][lastname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
+		jQuery( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[option][user_info][firstname]"]', function( event ) { digi_installer.keyp_update_email( event, jQuery( this ) ); } );
 
 		/** Ajouter un personnel */
 		jQuery( document ).on( 'click', '.wpdigi-staff .add-staff', function( event ) { digi_installer.add_staff( event, jQuery( this ) ); } );
