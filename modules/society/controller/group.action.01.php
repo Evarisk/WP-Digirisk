@@ -179,6 +179,9 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 	public function ajax_generate_duer() {
 		// wpdigi_utils::check( 'digi_ajax_generate_element_duer' );
 
+		ini_set('display_errors', true);
+		error_reporting(E_ALL);
+
 		$response = array(
 			'status' 	=> false,
 			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
@@ -240,13 +243,13 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 
 		/**	Définition de la structure des données du document par défaut / Define the default data structure for document	*/
 		$element_file_details = array(
-			'a' => array(
-				'type'		=> 'picture',
-				'value'		=> str_replace( site_url( '/' ), ABSPATH, $src_logo[0] ),
-				'option'	=> array(
-					'size'	=> 2,
-				),
-			),
+// 			'a' => array(
+// 				'type'		=> 'picture',
+// 				'value'		=> str_replace( site_url( '/' ), ABSPATH, $src_logo[0] ),
+// 				'option'	=> array(
+// 					'size'	=> 2,
+// 				),
+// 			),
 
 			'identifiantElement'		=> $element->option[ 'unique_identifier' ],
 			'nomEntreprise'					=> !empty( $_POST ) && !empty( $_POST[ 'wpdigi_duer' ] ) && !empty( $_POST[ 'wpdigi_duer' ][ 'company_name' ] ) ? sanitize_text_field( strip_tags( $_POST[ 'wpdigi_duer' ][ 'company_name' ] ) ) : $element->title,
