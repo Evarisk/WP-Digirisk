@@ -415,6 +415,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 			$response['file'] = array();
 
 			global $workunit_action;
+			global $sheet_groupment_action;
 
 			if ( !empty( $list_id ) ) {
 				foreach( $list_id as $element ) {
@@ -423,7 +424,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 							$_POST['element_id'] = $element['id'];
 							$_POST['element_type'] = 'digi-group';
 							$_POST['return'] = true;
-							$response['file'][] = $this->ajax_generate_duer();
+							$response['file'][] = $sheet_groupment_action->generate_sheet();
 							// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
 						}
 						foreach( $element['workunit'] as $workunit_id ) {
@@ -440,7 +441,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 							$_POST['element_id'] = $element['id'];
 							$_POST['element_type'] = 'digi-group';
 							$_POST['return'] = true;
-							$response['file'][] = $this->ajax_generate_duer();
+							$response['file'][] = $sheet_groupment_action->generate_sheet();
 							// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
 						}
 					}

@@ -229,4 +229,5 @@ class sheet_groupment_action_01 {
 	}
 }
 
-new sheet_groupment_action_01();
+global $sheet_groupment_action;
+$sheet_groupment_action = new sheet_groupment_action_01();
