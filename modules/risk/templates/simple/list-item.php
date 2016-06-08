@@ -16,8 +16,11 @@ if ( $risk != null ):
 			<?php if ( !empty( $risk->comment ) ) : ?>
 				<ul>
 			<?php foreach ( $risk->comment as $comment ) : ?>
-					<?php if ( $comment->status != '-34071' ): ?>
-						<li><strong><?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?></strong> : <?php echo $comment->content; ?></li>
+					<?php if ( $comment->status == '-34070' ): ?>
+						<li>
+							<strong><?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?></strong> :
+							<?php echo $comment->content; ?>
+							</li>
 					<?php endif; ?>
 			<?php endforeach; ?>
 

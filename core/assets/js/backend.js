@@ -617,6 +617,9 @@ var digi_risk = {
 			jQuery( this ).closest( '.wp-digi-list-item' ).find( 'input[name="digi_method"]' ).val( jQuery( this ).closest( '.wp-digi-list-item' ).find( 'input.digi-method-simple' ).val() );
 		} );
 
+    // Supprimer un commentaire
+    jQuery( document ).on( 'click', '.wp-digi-action-comment-delete', function( event ) { digi_risk.delete_comment( event, jQuery( this ) ); } );
+
 	},
 
 	show_simple_cotation: function( element ) {
@@ -770,7 +773,22 @@ var digi_risk = {
 			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).html( response.data.equivalence );
 			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-' + response.data.scale );
 		} );
-	}
+	},
+
+  delete_comment: function( event, element ) {
+    if( confirm( digi_confirm_delete ) ) {
+      var data = {
+        action: 'delete_comment',
+        _wpnonce: jQuery( element ).data( 'nonce' ),
+        risk_id: jQuery( element ).data( 'risk-id' ),
+        id: jQuery( element ).data( 'id' ),
+      };
+
+      jQuery( element ).closest( 'li' ).remove();
+
+      jQuery.post( ajaxurl, data, function() {} );
+    }
+  }
 };
 
 var digi_group = {

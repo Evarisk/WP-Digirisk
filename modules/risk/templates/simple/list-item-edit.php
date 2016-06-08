@@ -1,4 +1,4 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; 
+<?php if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( $risk_definition != null ):
 ?>
@@ -38,7 +38,12 @@ if ( $risk_definition != null ):
 			<ul>
 				<?php if ( !empty( $risk_definition->comment ) ) : ?>
 					<?php foreach ( $risk_definition->comment as $comment ) : ?>
-							<li><input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][comment_date]" value="<?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?>" /> : <input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][comment_content]" value="<?php echo $comment->content; ?>" /></li>
+						<?php if ( $comment->status == '-34070' ): ?>
+							<li>
+								<input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][comment_date]" value="<?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?>" /> : <input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][comment_content]" value="<?php echo $comment->content; ?>" />
+								<a href="#" data-id="<?php echo $comment->id; ?>" data-risk-id="<?php echo $risk_id; ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_delete_risk_comment_' . $risk_id . '_' . $comment->id ); ?>" class="wp-digi-action wp-digi-action-comment-delete dashicons dashicons-no-alt" ></a>
+							</li>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				<?php endif;?>
 				<!-- Ajouter un commentaire -->

@@ -23,6 +23,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
 		add_action( 'wp_ajax_wpfile_associate_file_digi-risk', array( $this, 'ajax_associate_file_to_risk' ) );
+		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 	}
 
 	function ajax_create_risk() {
@@ -543,6 +544,20 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		echo do_shortcode( "[wpeo_gallery element_id='" . $risk_id . "' global='wpdigi_risk_ctr' ]" );
 
 		wp_send_json_success( array( 'id' => $risk->id, 'template' => ob_get_clean() ) );
+	}
+
+	public function callback_delete_comment() {
+		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$risk_id = !empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
+
+		check_ajax_referer( 'ajax_delete_risk_comment_' . $risk_id . '_' . $id );
+
+		global $wpdigi_risk_evaluation_comment_ctr;
+		$risk_evaluation_comment = $wpdigi_risk_evaluation_comment_ctr->show( $id );
+		$risk_evaluation_comment->status = 'trash';
+		$wpdigi_risk_evaluation_comment_ctr->update( $risk_evaluation_comment );
+
+		wp_send_json_success();
 	}
 }
 
