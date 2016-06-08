@@ -360,22 +360,25 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 			foreach ( $_POST['list_comment'] as $comment_id => $comment ) {
 				$risk_evaluation_comment = array(
 					'id' 		=> $comment_id,
-					'status'	=> '-34071',
+					'type'		=> $wpdigi_risk_evaluation_comment_ctr->get_type(),
+					'parent_id' => $risk->option['current_evaluation_id'],
+					'post_id'	=> $risk_id,
+					'date'		=> sanitize_text_field( date( 'Y-m-d', strtotime( str_replace( '/', '-', $comment['comment_date'] ) ) ) . ' ' . current_time( 'H:i:s' ) ),
+					'content'	=> sanitize_text_field( $comment['comment_content'] ),
 				);
 
 				$wpdigi_risk_evaluation_comment_ctr->update( $risk_evaluation_comment );
 
-				$risk_evaluation_comment = array(
-						'type'		=> $wpdigi_risk_evaluation_comment_ctr->get_type(),
-						'author_id'	=> get_current_user_id(),
-						'parent_id' => $risk->option['current_evaluation_id'],
-						'post_id'	=> $risk_id,
-						'status'	=> '-34070',
-						'date'		=> sanitize_text_field( date( 'Y-m-d', strtotime( str_replace( '/', '-', $comment['comment_date'] ) ) ) . ' ' . current_time( 'H:i:s' ) ),
-						'content'	=> sanitize_text_field( $comment['comment_content'] ),
-				);
+				// $risk_evaluation_comment = array(
+				// 		'type'		=> $wpdigi_risk_evaluation_comment_ctr->get_type(),
+				// 		'parent_id' => $risk->option['current_evaluation_id'],
+				// 		'post_id'	=> $risk_id,
+				// 		'status'	=> '-34070',
+				// 		'date'		=> sanitize_text_field( date( 'Y-m-d', strtotime( str_replace( '/', '-', $comment['comment_date'] ) ) ) . ' ' . current_time( 'H:i:s' ) ),
+				// 		'content'	=> sanitize_text_field( $comment['comment_content'] ),
+				// );
 
-				$wpdigi_risk_evaluation_comment_ctr->create( $risk_evaluation_comment );
+				// $wpdigi_risk_evaluation_comment_ctr->create( $risk_evaluation_comment );
 			}
 		}
 

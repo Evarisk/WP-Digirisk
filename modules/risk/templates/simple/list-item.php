@@ -18,6 +18,9 @@ if ( $risk != null ):
 			<?php foreach ( $risk->comment as $comment ) : ?>
 					<?php if ( $comment->status == '-34070' ): ?>
 						<li>
+							<?php
+							$userdata = get_userdata( $comment->author_id );
+							echo $userdata->display_name; ?>
 							<strong><?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?></strong> :
 							<?php echo $comment->content; ?>
 							</li>
