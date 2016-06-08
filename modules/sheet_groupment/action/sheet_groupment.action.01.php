@@ -86,11 +86,24 @@ class sheet_groupment_action_01 {
 
 		$group = $wpdigi_group_ctr->show( $group->id );
 
+		// $picture = __( 'No picture defined', 'wpdigi-i18n' );
+		// if ( !empty( $group->thumbnail_id ) && ( true === is_int( (int)$group->thumbnail_id ) ) ) {
+		// 	$picture_definition = wp_get_attachment_image_src( $group->thumbnail_id, 'digirisk-element-thumbnail' );
+		// 	$picture = array(
+		// 		'type'		=> 'picture',
+		// 		'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
+		// 		'option'	=> array(
+		// 			'size'	=> 8,
+		// 		),
+		// 	);
+		// }
+
+
 		/**	Définition finale de l'unité de travail / Final definition for group	*/
 		$group_sheet_details = array(
 			'reference'	=> $group->option[ 'unique_identifier' ],
 			'nom'				=> $group->title,
-			'photoDefault'		=> $picture,
+			'photoDefault'		=> '',
 			'description'			=> $group->content,
 			'adresse'					=> $option[ 'address' ],
 			'telephone'				=> implode( ', ', $group->option[ 'contact' ][ 'phone' ] ),

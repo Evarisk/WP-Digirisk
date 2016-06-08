@@ -415,10 +415,28 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 		if( empty($_POST['return']) ) {
 			$list_id = $this->get_element_sub_tree_id( $element->id, $list_id );
 
+			global $wpdigi_workunit_ctr;
+			$work_unit_list = $wpdigi_workunit_ctr->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+
 			$response['file'] = array();
 
 			global $workunit_action;
 			global $sheet_groupment_action;
+
+			$_POST['element_id'] = $element->id;
+			$_POST['element_type'] = 'digi-group';
+			$_POST['return'] = true;
+			$response['file'][] = $sheet_groupment_action->generate_sheet();
+
+			foreach( $work_unit_list as $workunit ) {
+
+				$_POST['element_id'] = $workunit->id;
+				$_POST['element_type'] = 'digi-workunit';
+				$_POST['return'] = true;
+				$response['file'][] = $workunit_action->generate_workunit_sheet();
+				// do_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit' );
+			}
+
 
 			if ( !empty( $list_id ) ) {
 				foreach( $list_id as $element ) {
