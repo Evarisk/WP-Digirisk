@@ -341,10 +341,12 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 					'type'	=> 'segment',
 					'value'	=> $user_affectation_for_export[ 'affected' ],
 				);
-				$workunit_sheet_details[ 'utilisateursDesaffectes' ] = array(
-					'type'	=> 'segment',
-					'value'	=> $user_affectation_for_export[ 'unaffected' ],
-				);
+				if ( !empty( $user_affectation_for_export[ 'unaffected' ] ) ) {
+					$workunit_sheet_details[ 'utilisateursDesaffectes' ] = array(
+						'type'	=> 'segment',
+						'value'	=> $user_affectation_for_export[ 'unaffected' ],
+					);
+				}
 			}
 		}
 
