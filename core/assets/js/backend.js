@@ -16,6 +16,7 @@ jQuery( document ).ready( function(){
 	digi_user.event();
 	digi_evaluator.event();
 	digi_recommendation.init();
+  digi_tools.event();
 });
 
 var digi_global = {
@@ -1139,3 +1140,32 @@ var digi_recommendation = {
     }
 	}
 };
+
+var digi_tools = {
+  event: function() {
+    jQuery( document ).on( 'click', '.reset-method-evaluation', function( event ) { digi_tools.reset( event, jQuery( this ) ); } );
+  },
+
+  reset: function( event, element ) {
+    event.preventDefault();
+
+    if ( confirm ( digi_tools_confirm ) ) {
+      jQuery( element ).addClass( "wp-digi-loading" );
+      jQuery( element ).closest( '.wrap' ).find( 'ul' ).html('');
+
+      var li = document.createElement( 'li' );
+      li.innerHTML = digi_tools_in_progress;
+      jQuery( element ).closest( '.wrap' ).find( 'ul' ).append( li );
+
+      var data = {
+        action: 'reset_method_evaluation',
+        _wpnonce: jQuery( element ).data( 'nonce' )
+      };
+
+      jQuery.post( ajaxurl, data, function() {
+        jQuery( element ).removeClass( "wp-digi-loading" );
+        li.innerHTML += ' ' + digi_tools_done;
+      } );
+    }
+  }
+}

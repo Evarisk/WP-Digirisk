@@ -245,7 +245,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 					$transfer_response[ 'old_sub_action' ] = $sub_action;
 
 					global $wpdigi_evaluation_method_controller;
-					$wpdigi_evaluation_method_controller->create_default_data();
+					// $wpdigi_evaluation_method_controller->create_default_data();
 
 					/**	Build an output for component box	*/
 					ob_start();
