@@ -3,7 +3,7 @@
 Plugin Name: Digirisk
 Plugin URI:  http://www.evarisk.com/document-unique-logiciel
 Description: Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
-Version:     6.1.0.0
+Version:     6.1.1.0
 Author:      Evarisk
 Author URI:  http://www.evarisk.com
 License:     GPL2
@@ -12,7 +12,7 @@ Domain Path: /core/assets/languages
 Text Domain: wpdigi-i18n
 */
 
-DEFINE( 'EVA_PLUGIN_VERSION', '6.1.0.0');
+DEFINE( 'EVA_PLUGIN_VERSION', '6.1.1.0');
 
 /**	New plugin definition way	*/
 DEFINE( 'WPDIGI_VERSION', EVA_PLUGIN_VERSION );
