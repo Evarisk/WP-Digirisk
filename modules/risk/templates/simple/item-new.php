@@ -18,10 +18,10 @@
 				<span data-risk_level="1" data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation wp-digi-risk-level-1" >
 					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new" ><?php echo $wpdigi_evaluation_method_controller->get_value_treshold( 1 ); ?></div>
 					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
-						<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >&nbsp;</li>
-						<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >&nbsp;</li>
-						<li data-risk_level="3" data-value="51" data-risk-text="51" class="wp-digi-risk-level-3" >&nbsp;</li>
-						<li data-risk_level="4" data-value="80" data-risk-text="80" class="wp-digi-risk-level-4" >&nbsp;</li>
+						<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >1</li>
+						<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >48</li>
+						<li data-risk_level="3" data-value="51" data-risk-text="51" class="wp-digi-risk-level-3" >51</li>
+						<li data-risk_level="4" data-value="80" data-risk-text="80" class="wp-digi-risk-level-4" >80</li>
 						<li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic"></span></li>
 					</ul>
 				</span>

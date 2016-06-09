@@ -1706,6 +1706,10 @@
      -moz-box-sizing: content-box;
           box-sizing: content-box;
 }
+.wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser .wp-digi-risk-level-1 {
+  background: #fff;
+  color: rgba(0, 0, 0, 0.6);
+}
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser:before {
   display: block;
   content: '';
@@ -1722,6 +1726,9 @@
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser li:hover {
   cursor: pointer;
+}
+.wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser.simple {
+  width: 200px;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-1 {
   background: #fff;

@@ -107,7 +107,7 @@
 			&.wp-digi-action-load {
 				&:hover {
 					color: @c1;
-				} 
+				}
 			}
 		}
 		&.wp-digi-action-new {
@@ -164,10 +164,10 @@
 			text-align: center;
 		}
 		div.wp-digi-risk-level-new {
-			height: 50px; 
+			height: 50px;
 			&:hover {
 				cursor: pointer;
-			} 
+			}
 		}
 		.wp-digi-risk-cotation-chooser {
 			z-index: 600;
@@ -176,6 +176,10 @@
 			top: 50px;
 			border: 4px solid @c2;
 			box-sizing: content-box;
+			.wp-digi-risk-level-1 {
+				background: #fff;
+				color: rgba(0,0,0,0.6);
+			}
 			&:before {
 				display: block;
 				content: '';
@@ -192,6 +196,9 @@
 				&:hover {
 					cursor: pointer;
 				}
+			}
+			&.simple {
+				width: 200px;
 			}
 		}
 		.wp-digi-risk-level-1 {
@@ -212,7 +219,7 @@
 			text-align: center;
 			span {
 				color: #fff;
-				line-height: 50px; 
+				line-height: 50px;
 				height: 100%;
 				width: 100%;
 				display: block;
