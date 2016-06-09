@@ -23,7 +23,7 @@ if ( $risk_definition != null ):
 		<span data-target="wp-digi-risk-cotation-chooser" data-risk_level="<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?>" class="<?php echo $risk_definition->taxonomy['digi-method'][0] == $term_evarisk_simple->term_id ? 'digi-toggle' : 'open-method-evaluation-render'; ?> wp-digi-risk-list-column-cotation wp-digi-cotation wp-digi-risk-level-<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?>" >
 			<div class="wp-digi-risk-level-<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?> wp-digi-risk-list-column-danger" ><?php echo $risk_definition->evaluation->option['risk_level']['equivalence']; ?></div>
 			<?php if ( $risk_definition->taxonomy['digi-method'][0] == $term_evarisk_simple->term_id ): ?>
-				<ul class="digi-popup wp-digi-risk-cotation-chooser" style="display: none;" >
+				<ul class="digi-popup wp-digi-risk-cotation-chooser digi-risk-cotation-chooser-simple" style="display: none;" >
 					<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >&nbsp;</li>
 					<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >&nbsp;</li>
 					<li data-risk_level="3" data-value="51" data-risk-text="51" class="wp-digi-risk-level-3" >&nbsp;</li>
