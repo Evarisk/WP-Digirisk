@@ -84,6 +84,11 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 			),
 		);
 
+		if ( !empty( $_POST['owner_id'] ) ) {
+      $owner_id = (int) $_POST['owner_id'];
+      $groupment->option['user_info']['owner_id'] = $owner_id;
+    }
+
 		$groupement = $wpdigi_group_ctr->create( $groupment );
 
 		/** On crée les dangers */
