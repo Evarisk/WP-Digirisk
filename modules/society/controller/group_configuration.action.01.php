@@ -21,6 +21,11 @@ class wpdigi_group_configuration_action {
     $groupment->option['identity']['siren'] = !empty( $_POST['groupement']['option']['identity']['siren'] ) ? sanitize_text_field( $_POST['groupement']['option']['identity']['siren'] ) : $groupment->option['identity']['siren'];
     $groupment->option['identity']['siret'] = !empty( $_POST['groupement']['option']['identity']['siret'] ) ? sanitize_text_field( $_POST['groupement']['option']['identity']['siret'] ) : $groupment->option['identity']['siret'];
 
+    if ( !empty( $_POST['owner_id'] ) ) {
+      $owner_id = (int) $_POST['owner_id'];
+      $groupment->option['user_info']['owner_id'] = $owner_id;
+    }
+
     if ( !empty( $_POST['groupement']['option']['contact']['phone'] ) ) {
       $groupment->option['contact']['phone'][] = sanitize_text_field( $_POST['groupement']['option']['contact']['phone'] );
     }

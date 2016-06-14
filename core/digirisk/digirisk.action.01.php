@@ -41,7 +41,10 @@ class digirisk_action {
 		$term = sanitize_text_field( $_REQUEST['term'] );
 
 		// Sanitize $_GET['filter']
-		$filter = sanitize_text_field( $_REQUEST['filter'] );
+		$filter = '';
+		if ( !empty( $_REQUEST['filter'] ) ) {
+			$filter = sanitize_text_field( $_REQUEST['filter'] );
+		}
 
 		$return = '';
 
@@ -66,6 +69,7 @@ class digirisk_action {
 					/* translators: 1: user_login, 2: user_email */
 					'label' => sprintf( __( '%1$s (%2$s)' ), $user->user_login, $user->user_email ),
 					'value' => $user->$field,
+					'id'		=> $user->ID,
 				);
 			}
 

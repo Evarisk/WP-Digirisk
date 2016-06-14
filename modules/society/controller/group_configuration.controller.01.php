@@ -3,13 +3,15 @@
 class wpdigi_group_configuration_ctr {
   public function display( $element ) {
     global $wpdigi_address_ctr;
+    global $wpdigi_user_ctr;
 
-    // Récupère la dernière adresse lié à ce groupement
-    $address_id = $element->option['contact']['address'][count( $element->option['contact']['address'] ) - 1];
-    $address = $wpdigi_address_ctr->show( $address_id );
+    $address = $wpdigi_address_ctr->show( max( $element->option['contact']['address'] ) );
 
     // Récupère le dernier numéro de téléphone
-    $phone = $element->option['contact']['phone'][count( $element->option['contact']['phone'] ) - 1];
+    $phone = max( $element->option['contact']['phone'] );
+
+    // Récupère le nom de l'utilisateur
+    $user = $wpdigi_user_ctr->show( $element->option['user_info']['owner_id'] );
 
     require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group/configuration', 'form' ) );
   }

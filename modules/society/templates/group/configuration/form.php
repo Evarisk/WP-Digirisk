@@ -19,7 +19,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <ul class="gridwrapper2">
     <li class="form-element"><label><?php _e( 'Society name', 'wpdigi-i18n' ); ?><input type="text" name="groupement[title]" value="<?php echo $element->title; ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'Address', 'wpdigi-i18n' ); ?> <input type="text" name="address[address]" value="<?php echo $address->option['address']; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Owner', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][user_info][owner_id]" /></label></li>
+    <li class="form-element">
+      <label><?php _e( 'Owner', 'wpdigi-i18n' ); ?> <input type="text" data-target="owner_id" placeholder="<?php _e( 'Write name to search...', 'wpdigi-i18n' ); ?>" data-filter="" class="wpdigi-auto-complete-user" data-element-id="<?php echo $element->id; ?>" value="<?php echo !empty( $user ) ? $user->login : ''; ?>" /></label>
+      <input type="hidden" name="owner_id" />
+    </li>
     <li class="form-element"><label><?php _e( 'Additional address', 'wpdigi-i18n' ); ?> <input type="text" name="address[additional_address]" value="<?php echo $address->option['additional_address']; ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'Created date', 'wpdigi-i18n' ); ?> <input type="text" class="wpdigi_date" name="groupement[date]" value="<?php echo !empty( $element->date ) ? $element->date : date( 'd/m/Y' ); ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'Postcode', 'wpdigi-i18n' ); ?> <input type="text" name="address[postcode]" value="<?php echo $address->option['postcode']; ?>" /></label></li>

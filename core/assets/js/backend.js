@@ -64,6 +64,12 @@ var digi_global = {
 				}
 			}
 
+      if( jQuery( element ).data( 'target' ) != undefined ) {
+        list_option.select = function( event, ui ) {
+          jQuery( 'input[name="' + jQuery( element ).data('target') + '"]' ).val( ui.item.id );
+        }
+      }
+
 			jQuery( element ).autocomplete( list_option );
 		} );
 
@@ -73,7 +79,7 @@ var digi_global = {
 		jQuery( element ).autocomplete( {
 			'source': 'admin-ajax.php?action=search&post_type=digi-group&element_id=' + jQuery( element ).data( 'id' ),
 			'select': function( event, ui ) {
-				jQuery( 'input[name="wp-digi-group-id"]' ).val( ui.item.id );
+				jQuery( 'input[name="' + jQuery( element ).data('target') + '"]' ).val( ui.item.id );
 				jQuery( '.wp-digi-group-action-container' ).removeClass( "hidden" );
 			}
 		} );

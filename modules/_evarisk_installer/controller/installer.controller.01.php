@@ -29,9 +29,9 @@ class wp_digirisk_installer {
 		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
 		$old_eva_option = getDbOption( 'base_evarisk' );
 
-		// if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
+		if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
 			add_menu_page( __( 'Digirisk installer', 'wpdigi-i18n' ), __( 'Digirisk', 'wpdigi-i18n' ), 'manage_options', 'digi-setup', array( $this, 'setup_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );
-		// }
+		}
 	}
 
 	/**
