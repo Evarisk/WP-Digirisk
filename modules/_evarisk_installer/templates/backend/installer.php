@@ -15,19 +15,27 @@
 			<?php wp_nonce_field( 'ajax_installer_step_1' ); ?>
 
 			<ul class="gridwrapper2">
-				<li class="form-element"><label><?php _e( 'Society name', 'wpdigi-i18n' ); ?><input type="text" name="groupement[title]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Address', 'wpdigi-i18n' ); ?> <input type="text" name="address[address]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Owner', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][user_info][owner_id]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Additional address', 'wpdigi-i18n' ); ?> <input type="text" name="address[additional_address]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Created date', 'wpdigi-i18n' ); ?> <input type="text" class="wpdigi_date" name="groupement[date]" value="<?php echo date( 'd/m/Y' ); ?>" /></label></li>
-				<li class="form-element"><label><?php _e( 'Postcode', 'wpdigi-i18n' ); ?> <input type="text" name="address[postcode]" /></label></li>
-				<li class="form-element"><label><?php _e( 'SIREN', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][identity][siren]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Town', 'wpdigi-i18n' ); ?> <input type="text" name="address[town]" /></label></li>
-				<li class="form-element"><label><?php _e( 'SIRET', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][identity][siret]" /></label></li>
-				<li class="form-element"><label><?php _e( 'Phone', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][contact][phone]" /></label></li>
+				<li class="form-element">
+					<label><?php _e( 'Society name', 'wpdigi-i18n' ); ?><input type="text" name="groupement[title]" /></label>
+					<button class="wp-digi-bton-fourth btn-more-option"><?php _e( 'More options', 'wpdigi-i18n'); ?></button>
+				</li>
 			</ul>
 
-			<div class="form-element block"><label><?php _e( 'Description', 'wpdigi-i18n' ); ?><textarea name="groupement[content]"></textarea></label></div>
+			<div class="form-more-option hidden">
+				<ul class="gridwrapper2">
+					<li class="form-element"><label><?php _e( 'Address', 'wpdigi-i18n' ); ?> <input type="text" name="address[address]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Owner', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][user_info][owner_id]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Additional address', 'wpdigi-i18n' ); ?> <input type="text" name="address[additional_address]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Created date', 'wpdigi-i18n' ); ?> <input type="text" class="wpdigi_date" name="groupement[date]" value="<?php echo date( 'd/m/Y' ); ?>" /></label></li>
+					<li class="form-element"><label><?php _e( 'Postcode', 'wpdigi-i18n' ); ?> <input type="text" name="address[postcode]" /></label></li>
+					<li class="form-element"><label><?php _e( 'SIREN', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][identity][siren]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Town', 'wpdigi-i18n' ); ?> <input type="text" name="address[town]" /></label></li>
+					<li class="form-element"><label><?php _e( 'SIRET', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][identity][siret]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Phone', 'wpdigi-i18n' ); ?> <input type="text" name="groupement[option][contact][phone]" /></label></li>
+				</ul>
+
+				<div class="form-element block"><label><?php _e( 'Description', 'wpdigi-i18n' ); ?><textarea name="groupement[content]"></textarea></label></div>
+			</div>
 
 			<input type="button" class="float right wp-digi-bton-fourth" value="<?php _e( 'Save', 'wpdigi-i18n' ); ?>" />
 		</form>

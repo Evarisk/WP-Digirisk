@@ -134,7 +134,9 @@ var digi_installer = {
 
 		/** Enregister dernière étape */
 		jQuery( document ).on( 'click', '.wpdigi-installer div:last a:last', function( event ) { digi_installer.save_last_step( event, jQuery( this ) ); } );
-	},
+
+    jQuery( document ).on( 'click', '.btn-more-option', function( event) { digi_installer.toggle_form( event, jQuery( this ) ); } );
+  },
 
 	form_groupement: function( element ) {
 		jQuery( element ).closest( 'div' ).addClass( "wp-digi-bloc-loading" );
@@ -256,7 +258,13 @@ var digi_installer = {
 
 	save_last_step: function( event, element ) {
 		jQuery( '.wpdigi-installer .dashicons-plus:last' ).click();
-	}
+	},
+
+  toggle_form: function( event, element ) {
+    event.preventDefault();
+
+    jQuery( element ).closest( 'form' ).find( '.form-more-option' ).toggle();
+  }
 };
 
 var digi_workunit = {
