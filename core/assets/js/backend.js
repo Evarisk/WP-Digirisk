@@ -814,7 +814,10 @@ var digi_group = {
 
 		/**	Formulaire de génération du DUER / DUER generation form	*/
 		jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-duer-generation-button", function( event ) { digi_group.save_element_sheet( event, jQuery( this ) ); } );
-	},
+
+    // Sauvegarde la configuration
+    jQuery( document ).on( 'click', '.wp-digi-form-save-configuration button', function( event ) { digi_group.save_configuration( event, jQuery( this ) ); } );
+  },
 
 	display_group_tab_content : function( event, element ) {
 		event.preventDefault();
@@ -988,7 +991,24 @@ var digi_group = {
 	        dataType: "json",
 	    };
 		jQuery( "#wpdigi-save-element-form" ).ajaxSubmit( options );
-	}
+	},
+
+  save_configuration: function( event, element ) {
+    event.preventDefault();
+
+    var options = {
+      beforeSubmit: function( formData, jqForm, options ) {
+        jQuery( element ).addClass( "wp-digi-loading" );
+      },
+      success: function() {
+        jQuery( element ).removeClass( "wp-digi-loading" );
+      },
+      dataType: "json"
+    };
+
+    jQuery( element ).closest( 'form' ).ajaxSubmit( options );
+
+  }
 
 };
 

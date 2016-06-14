@@ -215,6 +215,10 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 				'text'	=> __( 'Document list', 'wpdigi-i18n' ),
 				'count' => 0,
 			),
+			'configuration' => array(
+				'text' => __( 'Configuration', 'wpdigi-i18n' ),
+				'count' => 0,
+			)
 		) );
 
 		return $tab_list;
@@ -236,6 +240,13 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 			$document_controller->display_document_list( $element );
 			$output .= ob_get_contents();
 			ob_end_clean();
+		}
+
+		if( 'configuration' == $tab_to_display ) {
+			$wpdigi_group_configuration_ctr = new wpdigi_group_configuration_ctr();
+			ob_start();
+			$wpdigi_group_configuration_ctr->display( $element );
+			$output .= ob_get_clean();
 		}
 
 		return $output;
