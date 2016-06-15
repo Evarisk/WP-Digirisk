@@ -29,7 +29,6 @@ DEFINE( 'WPDIGI_STES_POSTTYPE_SUB', 'digi-workunit' );
 include( WPDIGI_STES_PATH . '/controller/society.controller.01.php' );
 include( WPDIGI_STES_PATH . '/controller/group.controller.01.php' );
 include( WPDIGI_STES_PATH . '/controller/group_configuration.controller.01.php' );
-include( WPDIGI_STES_PATH . '/controller/group_legal_display.controller.01.php' );
 include( WPDIGI_STES_PATH . '/controller/group_configuration.action.01.php' );
 include( WPDIGI_STES_PATH . '/controller/group.action.01.php' );
 include( WPDIGI_STES_PATH . '/controller/workunit.controller.01.php' );

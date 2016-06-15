@@ -218,10 +218,6 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 			'configuration' => array(
 				'text' => __( 'Configuration', 'wpdigi-i18n' ),
 				'count' => 0,
-			),
-			'legal-display' => array(
-				'text' => __( 'Legal display', 'wpdigi-i18n' ),
-				'count' => 0,
 			)
 		) );
 
@@ -250,13 +246,6 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 			$wpdigi_group_configuration_ctr = new wpdigi_group_configuration_ctr();
 			ob_start();
 			$wpdigi_group_configuration_ctr->display( $element );
-			$output .= ob_get_clean();
-		}
-
-		if( 'legal-display' == $tab_to_display ) {
-			$wpdigi_group_legal_display_ctr = new wpdigi_group_legal_display_ctr();
-			ob_start();
-			$wpdigi_group_legal_display_ctr->display( $element );
 			$output .= ob_get_clean();
 		}
 
