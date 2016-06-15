@@ -1,7 +1,19 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class legal_display_ctr {
+class legal_display_ctr extends post_ctr_01 {
+  protected $model_name   = 'legal_display_mdl_01';
+	protected $post_type    = 'digi-legal-display';
+	protected $meta_key    	= '_wpdigi_legal_display';
+
+	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
+	protected $base = 'digirisk/legal_display';
+	protected $version = '0.1';
+
+	public $element_prefix = 'LD';
+
   public function __construct() {
+    parent::__construct();
+    include_once( LEGAL_DISPLAY_PATH . '/model/legal_display.model.01.php' );
     /**	Ajoute les onglets pour les unités de travail / Add tabs for workunit	*/
 		add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
 		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
