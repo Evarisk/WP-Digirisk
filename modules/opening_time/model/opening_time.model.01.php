@@ -22,7 +22,7 @@ class opening_time_mdl_01 extends post_mdl_01 {
 	protected $array_option = array(
     'openingHoursSpecification' => array(
       'description' => 'https://schema.org/openingHoursSpecification',
-      'type' => array(),
+      'type' => 'array',
     ),
 	);
 

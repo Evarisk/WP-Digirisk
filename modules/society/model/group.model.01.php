@@ -32,6 +32,12 @@ class wpdigi_group_mdl_01 extends post_mdl_01 {
 			'default'		=> null,
 			'required'	=> false,
 		),
+		'associated_legal_display_id' => array(
+			'type' 			=> 'array',
+			'function'	=> '',
+			'default'		=> null,
+			'required'	=> false,
+		),
 		'user_info' => array(
 			'owner_id' => array(
 				'type' 			=> 'integer',

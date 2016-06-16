@@ -15,6 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 ?>
 <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-legal-display" method="post">
   <input type="hidden" name="action" value="save_legal_display" />
+  <input type="hidden" name="parent_id" value="<?php echo $element->id; ?>" />
   <?php
   wp_nonce_field( 'save_legal_display' );
 

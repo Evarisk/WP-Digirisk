@@ -33,7 +33,7 @@ class third_action_01 {
     $detective_work_third = $third_class->save_data( $detective_work );
     $occupational_health_service_third = $third_class->save_data( $occupational_health_service );
 
-    wp_send_json_success();
+    do_action( 'save_legal_display', $detective_work_third, $occupational_health_service_third );
   }
 
 

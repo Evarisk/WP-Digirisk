@@ -60,6 +60,12 @@ class legal_display_ctr extends post_ctr_01 {
 
     return $output;
   }
+
+  public function save_data( $data ) {
+    // @todo : securité
+
+    return $this->create( $data );
+  }
 }
 
 global $legal_display_ctr;

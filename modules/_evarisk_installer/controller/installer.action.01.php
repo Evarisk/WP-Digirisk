@@ -70,9 +70,6 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 			'option' => array(
 				'unique_key' => $last_unique_key,
 				'unique_identifier' => $wpdigi_group_ctr->element_prefix . $last_unique_key,
-				'user_info' => array(
-					// TODO 'owner_id' =>
-				),
 				'identity' => array(
 					'siren' => sanitize_text_field( $_POST['groupement']['option']['identity']['siren'] ),
 					'siret' => sanitize_text_field( $_POST['groupement']['option']['identity']['siret'] ),

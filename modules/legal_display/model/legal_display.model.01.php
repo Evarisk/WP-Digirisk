@@ -26,8 +26,8 @@ class legal_display_mdl_01 extends post_mdl_01 {
 		'occupational_health_service_id' => array(
     	'type' => 'integer'
 		),
-		'emmergency_service' => array(
-			'ermergency' => array(
+		'emergency_service' => array(
+			'emergency' => array(
 				'type' => 'string'
 			),
 			'right_defender' => array(
@@ -51,7 +51,7 @@ class legal_display_mdl_01 extends post_mdl_01 {
 		'working_hour_id' => array(
 			'type' => 'integer'
 		),
-		'derogation_schedules' => array(
+		'derogation_schedule' => array(
 			'permanent' => array(
 				'type' => 'string',
 			),
@@ -72,7 +72,7 @@ class legal_display_mdl_01 extends post_mdl_01 {
 			'how_access_to_duer' => array(
 				'type' => 'string'
 			),
-		)
+		),
 	);
 
 	/**
@@ -85,6 +85,23 @@ class legal_display_mdl_01 extends post_mdl_01 {
 	public function __construct( $object, $meta_key, $cropped = false ) {
 		$array_model = $this->get_model();
 		$type = $array_model['type']['field'];
+
+		$this->array_option[ 'unique_key' ] = array(
+			'type' 		=> 'string',
+			'field_type'		=> 'meta',
+			'field'		=> '_wpdigi_unique_key',
+			'function'	=> '',
+			'default'	=> 0,
+			'required'	=> true,
+		);
+		$this->array_option[ 'unique_identifier' ] = array(
+			'type' 		=> 'string',
+			'field_type'		=> 'meta',
+			'field'		=> '_wpdigi_unique_identifier',
+			'function'	=> '',
+			'default'	=> 0,
+			'required'	=> true,
+		);
 
 		if ( !empty( $object->$type ) ) {
 			$taxonomy_objects = get_object_taxonomies( $object->$type, 'objects' );
