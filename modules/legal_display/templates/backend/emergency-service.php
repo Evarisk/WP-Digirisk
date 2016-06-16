@@ -17,19 +17,19 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Emergency', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="emergency_service[emergency]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Rights defender', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="emergency_service[right_defender]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Poison control center', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="emergency_service[poison_control_center]" type="text" />
     </label>
   </li>
 </ul>

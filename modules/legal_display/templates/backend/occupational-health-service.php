@@ -17,34 +17,34 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Full name of compagny doctor', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="occupational_health_service[full_name]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Address', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="occupational_health_service[address]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Postcode', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="occupational_health_service[postcode]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'City', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="occupational_health_service[city]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="occupational_health_service[phone]" type="text" />
     </label>
   </li>
   <li>
-    <?php do_shortcode( '[di_opening_time]' ); ?>
+    <?php do_shortcode( '[di_opening_time name="occupational_health_service"]' ); ?>
   </li>
 </ul>

@@ -17,25 +17,25 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Title of the applicable collective agreement', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="document[title_of_the_applicable_collective_agreement]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Location and access terms of the agreement', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="document[location_and_access_terms_of_the_agreement]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'The rules of procedure display location', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="document[the_rule_of_procedure_display_location]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'How access to DUER', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="document[how_access_to_duer]" type="text" />
     </label>
   </li>
 </ul>

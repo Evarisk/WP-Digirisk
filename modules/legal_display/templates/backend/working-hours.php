@@ -14,5 +14,5 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <h2><?php _e( 'Working hours', 'wpdigi-i18n' ); ?></h2>
 
 <li>
-  <?php do_shortcode( '[di_opening_time]' ); ?>
+  <?php do_shortcode( '[di_opening_time name="working_hours"]' ); ?>
 </li>

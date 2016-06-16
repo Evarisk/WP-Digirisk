@@ -14,11 +14,26 @@ class legal_display_ctr extends post_ctr_01 {
   public function __construct() {
     parent::__construct();
     include_once( LEGAL_DISPLAY_PATH . '/model/legal_display.model.01.php' );
+
+    add_action( 'admin_enqueue_scripts', array( &$this, 'admin_assets' ) );
+
     /**	Ajoute les onglets pour les unités de travail / Add tabs for workunit	*/
 		add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
 		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
 		add_filter( 'wpdigi_group_sheet_content', array( $this, 'filter_display_generate_document_unique_in_element' ), 10, 3 );
   }
+
+  /**
+	 * Déclaration des scripts et styles / Enqueue scripts and styles
+	 *
+	 * @uses wp_register_style
+	 * @uses wp_enqueue_style
+	 * @uses wp_enqueue_script
+	 */
+	public function admin_assets() {
+		wp_enqueue_script( 'legal-display.backend.js', LEGAL_DISPLAY_URL . 'asset/js/legal_display.backend.js', array( 'jquery', 'jquery-form' ), LEGAL_DISPLAY_VERSION, false );
+
+	}
 
   public function display( $element ) {
     require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'display' ) );

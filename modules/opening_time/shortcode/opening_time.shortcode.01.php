@@ -6,7 +6,9 @@ class opening_time_shortcode_01 {
     add_shortcode( 'di_opening_time', array( $this, 'callback_di_opening_time' ) );
   }
 
-  public function callback_di_opening_time( $param ) {
+  public function callback_di_opening_time( $params ) {
+    $name = $params['name'];
+
     $list_day = array(
       "Mo" => __( 'Monday', 'wpdigi-i18n' ),
       "Tu" => __( 'Tuesday', 'wpdigi-i18n' ),

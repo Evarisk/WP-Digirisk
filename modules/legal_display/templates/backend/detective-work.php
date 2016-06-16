@@ -17,34 +17,34 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Last name and first name', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="detective_work[full_name]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Address', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="address[address]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Postcode', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="detective_work[postcode]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'City', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="detective_work[city]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input type="text" />
+      <input name="detective_work[phone]" type="text" />
     </label>
   </li>
   <li>
-    <?php do_shortcode( '[di_opening_time]' ); ?>
+    <?php do_shortcode( '[di_opening_time name="detective_work"]' ); ?>
   </li>
 </ul>
