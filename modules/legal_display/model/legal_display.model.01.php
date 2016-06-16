@@ -20,32 +20,59 @@ class legal_display_mdl_01 extends post_mdl_01 {
 	 * @var array
 	 */
 	protected $array_option = array(
-		'detective_work' => array(
+		'detective_work_id' => array(
       'type' => 'integer'
 		),
-		'occupational_health_service' => array(
-      'full_name' => array(
-        'type' => 'string'
-      ),
-      'contact' => array(
-  			'phone' => array(
-  				'type'			=> 'array',
-  				'function'	=> '',
-  				'default'		=> array(),
-  				'required'	=> false,
-  			),
-  			'address' => array(
-  				'type'			=> 'array',
-  				'function'	=> '',
-  				'default'		=> array(),
-  				'required'	=> false,
-  			),
-  		),
-      'openingHoursSpecification' => array(
-        'description' => 'https://schema.org/openingHoursSpecification',
-        'type' => array(),
-      ),
+		'occupational_health_service_id' => array(
+    	'type' => 'integer'
 		),
+		'emmergency_service' => array(
+			'ermergency' => array(
+				'type' => 'string'
+			),
+			'right_defender' => array(
+				'type' => 'string'
+			),
+			'poison_control_center' => array(
+				'type' => 'string'
+			)
+		),
+		'safety_rule' => array(
+			'responsible_for_preventing' => array(
+				'type' => 'string'
+			),
+			'phone' => array(
+				'type' => 'string'
+			),
+			'location_of_detailed_instruction' => array(
+				'type' => 'string'
+			)
+		),
+		'working_hour_id' => array(
+			'type' => 'integer'
+		),
+		'derogation_schedules' => array(
+			'permanent' => array(
+				'type' => 'string',
+			),
+			'occasional' => array(
+				'type' => 'string',
+			),
+		),
+		'document' => array(
+			'title_of_the_applicable_collective_agreement' => array(
+				'type' => 'string'
+			),
+			'location_and_access_terms_of_the_agreement' => array(
+				'type' => 'string'
+			),
+			'the_rule_of_procedure_display_location' => array(
+				'type' => 'string'
+			),
+			'how_access_to_duer' => array(
+				'type' => 'string'
+			),
+		)
 	);
 
 	/**
