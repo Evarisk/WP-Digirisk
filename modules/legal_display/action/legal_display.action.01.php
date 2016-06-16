@@ -135,8 +135,8 @@ class legal_display_action_01 {
 
 
     $document_creation = $document_controller->create_document( $group_model_to_use, $legal_display_sheet_details, $group->type. '/' . $group->id . '/affichage_legal.odt' , null );
-
-    $response['path'] = $group->type. '/' . $group->id . '/affichage_legal.odt';
+    $upload_dir = wp_upload_dir();
+    $response['path'] = $upload_dir['baseurl'] . '/digirisk/' . $group->type. '/' . $group->id . '/affichage_legal.odt';
 		wp_send_json_success( $response );
 	}
 
