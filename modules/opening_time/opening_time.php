@@ -23,4 +23,5 @@ DEFINE( 'OPENING_TIME_TEMPLATES_MAIN_DIR', OPENING_TIME_PATH . '/view/');
 
 /**	Inclusion des controlleurs principaux du module / Include main module controller	*/
 include( OPENING_TIME_PATH . '/class/opening_time.class.01.php' );
+include( OPENING_TIME_PATH . '/action/opening_time.action.01.php' );
 include( OPENING_TIME_PATH . '/shortcode/opening_time.shortcode.01.php' );
