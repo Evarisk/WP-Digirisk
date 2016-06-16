@@ -36,6 +36,19 @@ class wpdigi_address_ctr_01 extends comment_ctr_01 {
 		include_once( DIGI_ADDRESS_PATH . 'model/address.model.01.php' );
 	}
 
+	public function save_address( $data ) {
+		if ( empty( $data ) || empty( $data['postcode'] ) || empty( $data['address'] ) || empty( $data['town'] ) ) {
+			return false;
+		}
+
+		// Sécurise les données
+		$data['postcode'] = sanitize_text_field( $data['postcode'] );
+		$data['address'] = sanitize_text_field( $data['address'] );
+		$data['town'] = sanitize_text_field( $data['town'] );
+
+		return $this->create( $data );
+	}
+
 }
 
 /**

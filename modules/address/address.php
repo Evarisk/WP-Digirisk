@@ -26,3 +26,4 @@ DEFINE( 'DIGI_ADDRESS_TEMPLATES_MAIN_DIR', DIGI_ADDRESS_PATH . '/templates/' );
 
 /** Plugin initialisation */
 require_once( DIGI_ADDRESS_PATH . '/controller/address.controller.01.php' );
+require_once( DIGI_ADDRESS_PATH . '/action/address.action.01.php' );

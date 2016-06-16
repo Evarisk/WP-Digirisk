@@ -23,19 +23,19 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Address', 'wpdigi-i18n' ); ?>
-      <input name="occupational_health_service[address]" type="text" />
+      <input name="occupational_health_service[address][address]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Postcode', 'wpdigi-i18n' ); ?>
-      <input name="occupational_health_service[postcode]" type="text" />
+      <input name="occupational_health_service[address][postcode]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'City', 'wpdigi-i18n' ); ?>
-      <input name="occupational_health_service[city]" type="text" />
+      <input name="occupational_health_service[address][town]" type="text" />
     </label>
   </li>
   <li>

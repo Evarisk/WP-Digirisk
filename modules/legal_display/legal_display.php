@@ -23,3 +23,4 @@ DEFINE( 'LEGAL_DISPLAY_TEMPLATES_MAIN_DIR', LEGAL_DISPLAY_PATH . '/templates/');
 
 /**	Inclusion des controlleurs principaux du module / Include main module controller	*/
 include( LEGAL_DISPLAY_PATH . '/controller/legal_display.controller.01.php' );
+include( LEGAL_DISPLAY_PATH . '/action/legal_display.action.01.php' );
