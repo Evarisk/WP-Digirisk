@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <h2><?php _e( 'Documents', 'wpdigi-i18n' ); ?></h2>
 
-<ul>
+<ul class="wp-digi-form">
   <li>
     <label>
       <?php _e( 'Title of the applicable collective agreement', 'wpdigi-i18n' ); ?>

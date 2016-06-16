@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <h2><?php _e( 'Safety rules', 'wpdigi-i18n' ); ?></h2>
 
-<ul>
+<ul class="wp-digi-form">
   <li>
     <label>
       <?php _e( 'Responsible for preventing', 'wpdigi-i18n' ); ?>

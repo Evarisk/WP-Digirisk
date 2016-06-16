@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <h2><?php _e( 'Detective work', 'wpdigi-i18n' ); ?></h2>
 
-<ul>
+<ul class="wp-digi-form">
   <li>
     <label>
       <?php _e( 'Last name and first name', 'wpdigi-i18n' ); ?>
