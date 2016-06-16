@@ -14,13 +14,7 @@
  */
 class opening_time_action_01 {
 	function __construct() {
-    add_action( 'wp_ajax_save_opening_time', array( $this, 'callback_save_opening_time' ) );
 	}
-
-  public function callback_save_opening_time() {
-    check_ajax_referer( 'save_opening_time' );
-    wp_send_json_success();
-  }
 }
 
 new opening_time_action_01();

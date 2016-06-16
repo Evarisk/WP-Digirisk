@@ -57,6 +57,7 @@ class post_ctr_01 {
 			$object = new $this->model_name( $data, $this->meta_key );
 			$object->type = $this->post_type;
 		}
+		
 		$object->id = wp_insert_post( $object->do_wp_object() );
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {

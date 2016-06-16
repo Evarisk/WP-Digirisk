@@ -32,6 +32,12 @@ class opening_time_class_01 extends post_ctr_01 {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_assets' ) );
 	}
 
+	public function save_data( $data ) {
+		// @todo : Sécurité
+
+		return $this->create( $data );
+	}
+
 	/**
 	 * Déclaration des scripts et styles / Enqueue scripts and styles
 	 *
@@ -48,4 +54,5 @@ class opening_time_class_01 extends post_ctr_01 {
   }
 }
 
-new opening_time_class_01();
+global $opening_time_class;
+$opening_time_class = new opening_time_class_01();

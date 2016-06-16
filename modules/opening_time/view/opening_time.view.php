@@ -32,9 +32,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
         <li>
           <label>
             <?php echo $element; ?>
-            <input name="<?php echo $name; ?>[<?php echo $key; ?>][open]" type="text" class="time-picker open" value="09:00"/>
+            <input name="<?php echo $name; ?>[opening_time][openingHoursSpecification][<?php echo $key; ?>][open]" type="text" class="time-picker open" value="09:00"/>
             <?php _e( ':', 'wpdigi-i18n' ); ?>
-            <input name="<?php echo $name; ?>[<?php echo $key; ?>][close]" type="text" class="time-picker close" value="18:00" />
+            <input name="<?php echo $name; ?>[opening_time][openingHoursSpecification][<?php echo $key; ?>][close]" type="text" class="time-picker close" value="18:00" />
           </label>
         </li>
         <?php

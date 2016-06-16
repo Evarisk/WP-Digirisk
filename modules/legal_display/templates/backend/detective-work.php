@@ -41,7 +41,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input name="detective_work[phone]" type="text" />
+      <input name="detective_work[contact][phone]" type="text" />
     </label>
   </li>
   <li>

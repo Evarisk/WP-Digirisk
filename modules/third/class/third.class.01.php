@@ -16,8 +16,13 @@ class third_class_01 extends post_ctr_01 {
     include_once( THIRD_PATH . '/model/third.model.01.php' );
   }
 
-  public function display( $element ) {
-    require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'display' ) );
+  public function save_data( $data ) {
+    // @todo : Sécurité
+    if ( empty( $data ) || empty( $data['full_name' ] ) || empty( $data['contact']['phone'] ) || empty( $data['contact']['address_id'] ) ) {
+      return false;
+    }
+
+    return $this->create( $data );
   }
 }
 

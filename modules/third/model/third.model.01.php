@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class third_mdll_01 extends post_mdl_01 {
+class third_mdl_01 extends post_mdl_01 {
 
 	/**
 	 * Définition du modèle d'un risque / Define a risk model
@@ -30,11 +30,8 @@ class third_mdll_01 extends post_mdl_01 {
 				'default'		=> array(),
 				'required'	=> false,
 			),
-			'address' => array(
-				'type'			=> 'array',
-				'function'	=> '',
-				'default'		=> array(),
-				'required'	=> false,
+			'address_id' => array(
+				'type'			=> 'integer'
 			),
 		),
     'opening_time_id' => array(

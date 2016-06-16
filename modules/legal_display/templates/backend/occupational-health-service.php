@@ -41,7 +41,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input name="occupational_health_service[phone]" type="text" />
+      <input name="occupational_health_service[contact][phone]" type="text" />
     </label>
   </li>
   <li>
