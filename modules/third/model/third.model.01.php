@@ -37,10 +37,9 @@ class third_mdll_01 extends post_mdl_01 {
 				'required'	=> false,
 			),
 		),
-    'openingHoursSpecification' => array(
-      'description' => 'https://schema.org/openingHoursSpecification',
-      'type' => array(),
-    ),
+    'opening_time_id' => array(
+			'type' => 'integer'
+		)
 	);
 
 	/**

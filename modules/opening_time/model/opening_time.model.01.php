@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class legal_display_mdl_01 extends post_mdl_01 {
+class opening_time_mdl_01 extends post_mdl_01 {
 
 	/**
 	 * Définition du modèle d'un risque / Define a risk model
@@ -20,32 +20,10 @@ class legal_display_mdl_01 extends post_mdl_01 {
 	 * @var array
 	 */
 	protected $array_option = array(
-		'detective_work' => array(
-      'type' => 'integer'
-		),
-		'occupational_health_service' => array(
-      'full_name' => array(
-        'type' => 'string'
-      ),
-      'contact' => array(
-  			'phone' => array(
-  				'type'			=> 'array',
-  				'function'	=> '',
-  				'default'		=> array(),
-  				'required'	=> false,
-  			),
-  			'address' => array(
-  				'type'			=> 'array',
-  				'function'	=> '',
-  				'default'		=> array(),
-  				'required'	=> false,
-  			),
-  		),
-      'openingHoursSpecification' => array(
-        'description' => 'https://schema.org/openingHoursSpecification',
-        'type' => array(),
-      ),
-		),
+    'openingHoursSpecification' => array(
+      'description' => 'https://schema.org/openingHoursSpecification',
+      'type' => array(),
+    ),
 	);
 
 	/**

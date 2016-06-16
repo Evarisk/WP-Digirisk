@@ -45,9 +45,6 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     </label>
   </li>
   <li>
-    <label>
-      <?php _e( 'Schedule', 'wpdigi-i18n' ); ?>
-      <input type="text" />
-    </label>
+    <?php do_shortcode( '[di_opening_time]' ); ?>
   </li>
 </ul>
