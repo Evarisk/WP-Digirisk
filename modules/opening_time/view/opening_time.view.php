@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="di-opening-time">
   <label>
-    <?php _e( 'Opening time', 'wpdigi-i18n' ); ?>
+    <span><?php _e( 'Opening time', 'wpdigi-i18n' ); ?></span>
     <input type="text" class="time-picker" data-type="open" value="09:00"/>
     <?php _e( ':', 'wpdigi-i18n' ); ?>
     <input type="text" class="time-picker" data-type="close" value="18:00" />

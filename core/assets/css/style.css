@@ -2106,6 +2106,13 @@
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
+.wp-digi-form .di-opening-time label span {
+  display: block;
+}
+.wp-digi-form .di-opening-time label input {
+  width: auto;
+  display: inline-block;
+}
 .wp-digi-form .single-line li {
   margin-bottom: 0;
 }
@@ -2119,7 +2126,9 @@
   line-height: 1.4;
   padding-bottom: 6px;
 }
-.wp-digi-form input,
+.wp-digi-form input[type="text"],
+.wp-digi-form input[type="email"],
+.wp-digi-form input[type="tel"],
 .wp-digi-form textarea {
   background: none;
   border: 0;
@@ -2133,7 +2142,9 @@
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.wp-digi-form input:focus,
+.wp-digi-form input[type="text"]:focus,
+.wp-digi-form input[type="email"]:focus,
+.wp-digi-form input[type="tel"]:focus,
 .wp-digi-form textarea:focus {
   outline: none;
   -webkit-box-shadow: none;
