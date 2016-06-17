@@ -81,6 +81,7 @@ var digi_global = {
 			'select': function( event, ui ) {
 				jQuery( 'input[name="' + jQuery( element ).data('target') + '"]' ).val( ui.item.id );
 				jQuery( '.wp-digi-group-action-container' ).removeClass( "hidden" );
+        jQuery( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
 			}
 		} );
 	} );
@@ -871,6 +872,7 @@ var digi_group = {
 		jQuery( element ).addClass( "active" );
 
 		jQuery( '.wp-digi-societytree-left-container toggle span' ).html( jQuery( element ).val() );
+    jQuery( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Enregistrer' );
 	},
 
 	save_identity: function( event, element ) {

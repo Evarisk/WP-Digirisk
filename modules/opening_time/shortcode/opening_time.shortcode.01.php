@@ -8,6 +8,7 @@ class opening_time_shortcode_01 {
 
   public function callback_di_opening_time( $params ) {
     $name = $params['name'];
+    $checkbox = !empty( $params['checkbox'] ) ? $params['checkbox'] : false;
 
     $list_day = array(
       "Mo" => __( 'Monday', 'wpdigi-i18n' ),

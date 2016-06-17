@@ -19,10 +19,12 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     <input type="text" class="time-picker" data-type="close" value="18:00" />
   </label>
 
+  <?php if ($checkbox): ?>
   <label>
     <?php _e( 'All days', 'wpdigi-i18n' ); ?>
     <input type="checkbox" checked />
   </label>
+  <?php endif; ?> 
 
   <ul class="hidden">
     <?php
