@@ -11,37 +11,38 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<h2><?php _e( 'Occupational health service', 'wpdigi-i18n' ); ?></h2>
 
 <ul class="wp-digi-form">
+  <li><h2><?php _e( 'Occupational health service', 'wpdigi-i18n' ); ?></h2></li>
+
   <li>
     <label>
       <?php _e( 'Full name of compagny doctor', 'wpdigi-i18n' ); ?>
-      <input required name="occupational_health_service[full_name]" type="text" />
+      <input name="occupational_health_service[full_name]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Address', 'wpdigi-i18n' ); ?>
-      <input required name="occupational_health_service[address][address]" type="text" />
+      <input name="occupational_health_service[address][address]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Postcode', 'wpdigi-i18n' ); ?>
-      <input required name="occupational_health_service[address][postcode]" type="text" />
+      <input name="occupational_health_service[address][postcode]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'City', 'wpdigi-i18n' ); ?>
-      <input required name="occupational_health_service[address][town]" type="text" />
+      <input name="occupational_health_service[address][town]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input required pattern="^0[0-9]([-. ]?\d{2}){4}[-. ]?$" name="occupational_health_service[contact][phone]" type="text" />
+      <input name="occupational_health_service[contact][phone]" type="text" />
     </label>
   </li>
   <li>

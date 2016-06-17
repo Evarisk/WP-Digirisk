@@ -11,8 +11,12 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<h2><?php _e( 'Working hours', 'wpdigi-i18n' ); ?></h2>
+<ul class="wp-digi-form">
+  <li>
+    <h2><?php _e( 'Working hours', 'wpdigi-i18n' ); ?></h2>
+  </li>
 
-<li>
-  <?php do_shortcode( '[di_opening_time name="working_hours" checkbox="true"]' ); ?>
-</li>
+  <li>
+    <?php do_shortcode( '[di_opening_time name="working_hours" checkbox="true"]' ); ?>
+  </li>
+</ul>

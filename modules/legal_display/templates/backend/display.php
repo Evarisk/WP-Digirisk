@@ -16,17 +16,26 @@ if ( !defined( 'ABSPATH' ) ) exit;
 <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-legal-display" method="post">
   <input type="hidden" name="action" value="save_legal_display" />
   <input type="hidden" name="parent_id" value="<?php echo $element->id; ?>" />
-  <?php
-  wp_nonce_field( 'save_legal_display' );
+  <?php  wp_nonce_field( 'save_legal_display' ); ?>
 
 
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'detective-work' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'occupational-health-service' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'emergency-service' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'safety-rules' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'working-hours' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'derogations-schedules' ) );
-  require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'documents' ) );
-  ?>
+  <div class="gridwrapper2">
+    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'detective-work' ) ); ?>
+    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'occupational-health-service' ) ); ?>
+  </div>
+
+  <div class="gridwrapper2">
+    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'emergency-service' ) ); ?>
+    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'safety-rules' ) ); ?>
+  </div>
+
+  <div class="clear">
+    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'working-hours' ) ); ?>
+  </div>
+
+  <div class="gridwrapper2">
+  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'derogations-schedules' ) ); ?>
+  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'documents' ) ); ?>
+</div>
   <button class="generate-legal-display wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'wpdigi-i18n' ); ?></button>
 </form>

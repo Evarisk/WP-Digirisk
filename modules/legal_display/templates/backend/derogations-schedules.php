@@ -11,9 +11,10 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<h2><?php _e( 'Derogations schedules', 'wpdigi-i18n' ); ?></h2>
 
 <ul class="wp-digi-form">
+  <li><h2><?php _e( 'Derogations schedules', 'wpdigi-i18n' ); ?></h2></li>
+
   <li>
     <label>
       <?php _e( 'Permanent', 'wpdigi-i18n' ); ?>

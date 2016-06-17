@@ -11,25 +11,26 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<h2><?php _e( 'Safety rules', 'wpdigi-i18n' ); ?></h2>
 
 <ul class="wp-digi-form">
+  <li><h2><?php _e( 'Safety rules', 'wpdigi-i18n' ); ?></h2></li>
+
   <li>
     <label>
       <?php _e( 'Responsible for preventing', 'wpdigi-i18n' ); ?>
-      <input required name="safety_rule[responsible_for_preventing]" type="text" />
+      <input name="safety_rule[responsible_for_preventing]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input required name="safety_rule[phone]" type="text" />
+      <input name="safety_rule[phone]" type="text" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Location of detailed instructions', 'wpdigi-i18n' ); ?>
-      <input required name="safety_rule[location_of_detailed_instruction]" type="text" />
+      <input name="safety_rule[location_of_detailed_instruction]" type="text" />
     </label>
   </li>
 </ul>

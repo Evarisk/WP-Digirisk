@@ -27,6 +27,15 @@ class legal_display_mdl_01 extends post_mdl_01 {
     	'type' => 'integer'
 		),
 		'emergency_service' => array(
+			'samu' => array(
+				'type' => 'string'
+			),
+			'police' => array(
+				'type' => 'string'
+			),
+			'pompier' => array(
+				'type' => 'string'
+			),
 			'emergency' => array(
 				'type' => 'string'
 			),
