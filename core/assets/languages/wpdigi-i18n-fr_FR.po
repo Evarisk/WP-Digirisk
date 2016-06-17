@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Evarisk v5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-08 15:52+0100\n"
-"PO-Revision-Date: 2016-04-08 15:53+0100\n"
+"POT-Creation-Date: 2016-06-17 10:45+0100\n"
+"PO-Revision-Date: 2016-06-17 10:50+0100\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -29,90 +29,117 @@ msgstr ""
 "X-Poedit-SearchPath-11: modules\\society\n"
 "X-Poedit-SearchPath-12: modules\\risk\n"
 "X-Poedit-SearchPath-13: modules\\user\n"
+"X-Poedit-SearchPath-14: modules\\legal_display\n"
+"X-Poedit-SearchPath-15: modules\\opening_time\n"
+"X-Poedit-SearchPath-16: modules\\third\n"
 
-#: core\digirisk/digirisk.action.01.php:51
+#: core\digirisk/digirisk.action.01.php:70
 #, php-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
-
-#: modules\_evarisk_installer/controller/installer.action.01.php:66
-msgid "Workunit"
-msgstr "Unité de travail"
 
 #: modules\_evarisk_installer/controller/installer.controller.01.php:33
 msgid "Digirisk installer"
 msgstr "Installation de Digirisk"
 
 #: modules\_evarisk_installer/controller/installer.controller.01.php:33
-#: modules\_evarisk_installer/templates/backend/installer.php:2
+#: modules\_evarisk_installer/templates/backend/installer.php:3
 #: modules\society/controller/society.controller.01.php:33
 #: modules\user/template/backend/user-profile.php:3
 msgid "Digirisk"
 msgstr "Digirisk"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:5
+#: modules\_evarisk_installer/templates/backend/installer.php:6
 msgid "Your informations"
 msgstr "Votre société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:6
-#: modules\user/template/backend/page-staff.php:2
+#: modules\_evarisk_installer/templates/backend/installer.php:7
+#: modules\user/template/backend/page-staff.php:3
 #: modules\user/template/backend/page-staff.php:88
 msgid "Import staff"
 msgstr "Import du personnel"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:10
+#: modules\_evarisk_installer/templates/backend/installer.php:11
 msgid "Your society"
 msgstr "Votre Société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:17
+#: modules\_evarisk_installer/templates/backend/installer.php:19
+#: modules\society/templates/group/configuration/form.php:20
 msgid "Society name"
 msgstr "Nom de votre société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:18
+#: modules\_evarisk_installer/templates/backend/installer.php:20
+#: modules\user/template/backend/page-staff.php:54
+msgid "More options"
+msgstr "Plus d'options"
+
+#: modules\_evarisk_installer/templates/backend/installer.php:26
+#: modules\legal_display/templates/backend/detective-work.php:24
+#: modules\legal_display/templates/backend/occupational-health-service.php:26
+#: modules\society/templates/group/configuration/form.php:21
 #: modules\user/template/backend/page-staff.php:58
 msgid "Address"
 msgstr "Adresse"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:19
+#: modules\_evarisk_installer/templates/backend/installer.php:28
+#: modules\society/templates/group/configuration/form.php:23
 msgid "Owner"
 msgstr "Responsable"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:20
+#: modules\_evarisk_installer/templates/backend/installer.php:28
+#: modules\society/templates/group/configuration/form.php:23
+msgid "Write name to search..."
+msgstr "Entrez votre recherche..."
+
+#: modules\_evarisk_installer/templates/backend/installer.php:31
+#: modules\society/templates/group/configuration/form.php:26
 msgid "Additional address"
 msgstr "Complément d'adresse"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:21
+#: modules\_evarisk_installer/templates/backend/installer.php:32
+#: modules\society/templates/group/configuration/form.php:27
 msgid "Created date"
 msgstr "Date de création"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:22
+#: modules\_evarisk_installer/templates/backend/installer.php:33
+#: modules\legal_display/templates/backend/detective-work.php:30
+#: modules\legal_display/templates/backend/occupational-health-service.php:32
+#: modules\society/templates/group/configuration/form.php:28
 #: modules\user/template/backend/page-staff.php:66
 msgid "Postcode"
 msgstr "Code postal"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:23
+#: modules\_evarisk_installer/templates/backend/installer.php:34
+#: modules\society/templates/group/configuration/form.php:29
 msgid "SIREN"
 msgstr "SIREN"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:24
+#: modules\_evarisk_installer/templates/backend/installer.php:35
+#: modules\society/templates/group/configuration/form.php:30
 #: modules\user/template/backend/page-staff.php:69
 msgid "Town"
 msgstr "Ville"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:25
+#: modules\_evarisk_installer/templates/backend/installer.php:36
+#: modules\society/templates/group/configuration/form.php:31
 msgid "SIRET"
 msgstr "SIRET"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:26
-#: modules\society/templates/group/sheet-form.php:86
+#: modules\_evarisk_installer/templates/backend/installer.php:37
+#: modules\legal_display/templates/backend/detective-work.php:42
+#: modules\legal_display/templates/backend/occupational-health-service.php:44
+#: modules\legal_display/templates/backend/safety-rules.php:26
+#: modules\society/templates/group/configuration/form.php:32
+#: modules\society/templates/group/sheet-form.php:84
 msgid "Phone"
 msgstr "Téléphone"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:29
+#: modules\_evarisk_installer/templates/backend/installer.php:40
+#: modules\society/templates/group/configuration/form.php:35
 msgid "Description"
 msgstr "Description"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:31
+#: modules\_evarisk_installer/templates/backend/installer.php:43
 #: modules\society/templates/group/sheet-simple.php:6
 #: modules\society/templates/workunit/sheet-simple.php:7
 #: modules\user/template/backend/page-staff.php:92
@@ -216,7 +243,7 @@ msgstr "Ajouter un catégorie de danger"
 msgid "New Danger category Name"
 msgstr "Nouvelle category de danger"
 
-#: modules\danger/templates/backend/category_danger-list.php:17
+#: modules\danger/templates/backend/category_danger-list.php:18
 msgid ""
 "There are no danger category to display here. Please create some danger "
 "category before."
@@ -229,35 +256,35 @@ msgid "Generate sheet"
 msgstr "Générer la fiche"
 
 #: modules\document/controller/document.controller.01.php:191
-#: modules\society/controller/group.action.01.php:198
+#: modules\society/controller/group.action.01.php:221
 msgid "An error occured while getting model to use for generation"
 msgstr ""
 "Une erreur est survenue lors de la récupération du modèle de document a "
 "utiliser pour la génération du document"
 
-#: modules\document/templates/common/printed-list-item.php:7
+#: modules\document/templates/common/printed-list-item.php:8
 msgid "Download"
 msgstr "Télécharger"
 
-#: modules\document/templates/common/printed-list-item.php:9
+#: modules\document/templates/common/printed-list-item.php:10
 msgid "File does not exists. We are working on re-generation function"
 msgstr ""
 "Le fichier n'existe pas. Nous travaillons actuellement sur la fonction "
 "permettant de le re-générer"
 
-#: modules\document/templates/common/printed-list.php:17
+#: modules\document/templates/common/printed-list.php:27
 msgid "There is no document yet"
 msgstr "Il n'y a aucun document actuellement"
 
-#: modules\document/templates/simple/print-button.php:1
+#: modules\document/templates/simple/print-button.php:2
 msgid "Print DUER"
 msgstr "Imprimer le DUER"
 
-#: modules\document/templates/simple/sheet-generation-form.php:8
+#: modules\document/templates/simple/sheet-generation-form.php:9
 msgid "Click the button to save your current sheet"
 msgstr "Sauvegarder une nouvelle fiche"
 
-#: modules\document/templates/simple/sheet-generation-form.php:9
+#: modules\document/templates/simple/sheet-generation-form.php:10
 msgid "Save sheet"
 msgstr "Générer la fiche"
 
@@ -318,7 +345,7 @@ msgstr "Risque à traiter"
 msgid "unacceptable risk"
 msgstr "Risque innaceptable"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:203
+#: modules\evaluation_method/controller/evaluation_method.controller.01.php:206
 msgid "Evarisk simplified"
 msgstr "Evarisk simplifié"
 
@@ -370,7 +397,7 @@ msgstr "Aucun critère d'évaluation n'a été trouvé"
 msgid "Evaluation methods vars"
 msgstr "Critères d'évlauations"
 
-#: modules\evaluator/controller/evaluator.controller.01.php:46
+#: modules\evaluator/controller/evaluator.controller.01.php:50
 msgid "Evaluators"
 msgstr "Evaluateurs"
 
@@ -378,7 +405,7 @@ msgstr "Evaluateurs"
 #: modules\evaluator/template/backend/list-user-to-assign.php:7
 #: modules\user/template/backend/list-affected-user.php:6
 #: modules\user/template/backend/list-user-to-assign.php:7
-#: modules\user/template/backend/page-staff.php:14
+#: modules\user/template/backend/page-staff.php:21
 msgid "ID"
 msgstr "ID"
 
@@ -386,7 +413,7 @@ msgstr "ID"
 #: modules\evaluator/template/backend/list-user-to-assign.php:8
 #: modules\user/template/backend/list-affected-user.php:7
 #: modules\user/template/backend/list-user-to-assign.php:8
-#: modules\user/template/backend/page-staff.php:15
+#: modules\user/template/backend/page-staff.php:22
 msgid "Lastname"
 msgstr "Nom"
 
@@ -434,56 +461,216 @@ msgstr "Page"
 msgid "Write here to search..."
 msgstr "Écrivez votre recherche ici..."
 
-#: modules\file/templates/backend/file-big-gallery.php:19
+#: modules\file/templates/backend/file-big-gallery.php:20
 msgid "Set as default thumbnail"
 msgstr "Utilisez comme image par défaut"
 
-#: modules\file/templates/backend/file-big-gallery.php:20
+#: modules\file/templates/backend/file-big-gallery.php:21
 msgid "Add a new picture"
 msgstr "Ajouter une nouvelle image"
 
-#: modules\file/templates/backend/file-gallery.php:18
-#: modules\file/templates/backend/list-render.php:12
+#: modules\file/templates/backend/file-gallery.php:19
+#: modules\file/templates/backend/list-render.php:13
 msgid "Download the file"
 msgstr "Télécharger le fichier"
 
-#: modules\file/templates/backend/file-gallery.php:19
-#: modules\file/templates/backend/list-render.php:13
+#: modules\file/templates/backend/file-gallery.php:20
+#: modules\file/templates/backend/list-render.php:14
 msgid "Delete file"
 msgstr "Supprimer le fichier"
 
-#: modules\file/templates/backend/file-gallery.php:25
+#: modules\file/templates/backend/file-gallery.php:26
 msgid "No files affected"
 msgstr "Aucun fichier associé"
 
-#: modules\file/templates/backend/file-list.php:9
+#: modules\file/templates/backend/file-list.php:11
 msgid "Associate"
 msgstr "Associer"
 
-#: modules\file/templates/backend/file-list.php:9
+#: modules\file/templates/backend/file-list.php:11
 msgid "Associate file to element"
 msgstr "Associer le fichier aà l'élément actuel"
 
-#: modules\file/templates/backend/file-mini-gallery.php:1
+#: modules\file/templates/backend/file-mini-gallery.php:2
 msgid "Set a thumbnail for"
 msgstr "Définir comme image principale"
 
-#: modules\file/templates/backend/filter-button.php:1
 #: modules\file/templates/backend/filter-button.php:2
+#: modules\file/templates/backend/filter-button.php:3
 msgid "Add a media"
 msgstr "Ajouter un média"
 
-#: modules\file/templates/backend/header.js.php:1
+#: modules\file/templates/backend/header.js.php:2
 msgid "Are you sure you want to dissociate this file?"
 msgstr "Etes vous sûr de vouloir dissocier ce fichier?"
 
-#: modules\file/templates/backend/header.js.php:1
+#: modules\file/templates/backend/header.js.php:2
 msgid "An error occured while dissociating file"
 msgstr "Une erreur est survenue lors de la dissociation"
 
-#: modules\file/templates/backend/header.js.php:1
+#: modules\file/templates/backend/header.js.php:2
 msgid "File have been dissociate succesfully"
 msgstr "Le fichier a été dissocié avec succès"
+
+#: modules\legal_display/action/legal_display.action.01.php:59
+#: modules\society/controller/group.action.01.php:187
+#: modules\society/controller/group.action.01.php:491
+#: modules\society/controller/workunit.action.01.php:259
+msgid "An error occured while getting element to generate sheet for."
+msgstr ""
+"Une erreur est survenue lors de la récupération de l'élément pour la "
+"génération de la fiche."
+
+#: modules\legal_display/action/legal_display.action.01.php:87
+#: modules\society/controller/workunit.action.01.php:292
+msgid "An error occured while getting model content to use for generation"
+msgstr ""
+
+#: modules\legal_display/controller/legal_display.controller.01.php:46
+msgid "Legal display"
+msgstr "Affichage légal"
+
+#: modules\legal_display/templates/backend/derogations-schedules.php:16
+msgid "Derogations schedules"
+msgstr "Dérogations aux horaires de travail"
+
+#: modules\legal_display/templates/backend/derogations-schedules.php:20
+msgid "Permanent"
+msgstr "Permanentes"
+
+#: modules\legal_display/templates/backend/derogations-schedules.php:26
+msgid "Occasional"
+msgstr "Occasionnelles"
+
+#: modules\legal_display/templates/backend/detective-work.php:15
+msgid "Detective work"
+msgstr "Inspection du travail"
+
+#: modules\legal_display/templates/backend/detective-work.php:18
+msgid "Last name and first name"
+msgstr "Nom de l'inspecteur"
+
+#: modules\legal_display/templates/backend/detective-work.php:36
+#: modules\legal_display/templates/backend/occupational-health-service.php:38
+msgid "City"
+msgstr "Ville"
+
+#: modules\legal_display/templates/backend/display.php:40
+msgid "Generate legal display"
+msgstr "Générer l'affichage légal"
+
+#: modules\legal_display/templates/backend/documents.php:16
+msgid "Documents"
+msgstr "Documents"
+
+#: modules\legal_display/templates/backend/documents.php:19
+msgid "Title of the applicable collective agreement"
+msgstr "Intitulé"
+
+#: modules\legal_display/templates/backend/documents.php:25
+msgid "Location and access terms of the agreement"
+msgstr "Lieu et modalités de consultation"
+
+#: modules\legal_display/templates/backend/documents.php:31
+msgid "The rules of procedure display location"
+msgstr "Lieux d'affichage"
+
+#: modules\legal_display/templates/backend/documents.php:37
+msgid "How access to DUER"
+msgstr "Modalités d'accès"
+
+#: modules\legal_display/templates/backend/emergency-service.php:15
+msgid "Emergency service"
+msgstr "Service d'urgence"
+
+#: modules\legal_display/templates/backend/emergency-service.php:18
+msgid "Samu"
+msgstr "SAMU"
+
+#: modules\legal_display/templates/backend/emergency-service.php:24
+msgid "Police/Gendarmerie"
+msgstr "Police/Gendarmerie"
+
+#: modules\legal_display/templates/backend/emergency-service.php:30
+msgid "Pompiers"
+msgstr "Pompiers"
+
+#: modules\legal_display/templates/backend/emergency-service.php:36
+msgid "Emergency"
+msgstr "Toute urgence"
+
+#: modules\legal_display/templates/backend/emergency-service.php:42
+msgid "Rights defender"
+msgstr "Défenseur des droits"
+
+#: modules\legal_display/templates/backend/emergency-service.php:48
+msgid "Poison control center"
+msgstr "Anti-poison"
+
+#: modules\legal_display/templates/backend/occupational-health-service.php:16
+msgid "Occupational health service"
+msgstr "Service de santé au travail"
+
+#: modules\legal_display/templates/backend/occupational-health-service.php:20
+msgid "Full name of compagny doctor"
+msgstr "Nom du médecin du travail"
+
+#: modules\legal_display/templates/backend/safety-rules.php:16
+msgid "Safety rules"
+msgstr "Consignes de sécurité"
+
+#: modules\legal_display/templates/backend/safety-rules.php:20
+msgid "Responsible for preventing"
+msgstr "Responsable à prévenir"
+
+#: modules\legal_display/templates/backend/safety-rules.php:32
+msgid "Location of detailed instructions"
+msgstr "Emplacement de la consigne détaillée"
+
+#: modules\legal_display/templates/backend/working-hours.php:16
+msgid "Working hours"
+msgstr "Horaires de travail"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:14
+msgid "Monday"
+msgstr "Lundi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:15
+msgid "Tuesday"
+msgstr "Mardi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:16
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:17
+msgid "Thrusday"
+msgstr "Jeudi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:18
+msgid "Friday"
+msgstr "Vendredi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:19
+msgid "Saturday"
+msgstr "Samedi"
+
+#: modules\opening_time/shortcode/opening_time.shortcode.01.php:20
+msgid "Sunday"
+msgstr "Dimanche"
+
+#: modules\opening_time/view/opening_time.view.php:16
+msgid "Opening time"
+msgstr "Horaires"
+
+#: modules\opening_time/view/opening_time.view.php:18
+#: modules\opening_time/view/opening_time.view.php:38
+msgid ":"
+msgstr ":"
+
+#: modules\opening_time/view/opening_time.view.php:24
+msgid "All days"
+msgstr "Tous les jours"
 
 #: modules\recommendation/controller/recommendation.controller.01.php:75
 #: modules\recommendation/controller/recommendation.controller.01.php:129
@@ -568,7 +755,7 @@ msgid "New recommendation category Name"
 msgstr "Nom de la catégorie de préconisation"
 
 #: modules\recommendation/templates/list.php:6
-#: modules\risk/templates/simple/list.php:6
+#: modules\risk/templates/simple/list.php:7
 msgid "Ref."
 msgstr "Réf."
 
@@ -577,7 +764,7 @@ msgid "Recommendation name"
 msgstr "Nom de la préconisation"
 
 #: modules\recommendation/templates/list.php:8
-#: modules\risk/templates/simple/list.php:8
+#: modules\risk/templates/simple/list.php:9
 msgid "Comment"
 msgstr "Commentaire"
 
@@ -588,15 +775,8 @@ msgid ""
 msgstr ""
 "Il n'y as pas de préconisation. Veuillez en créer pour pouvoir continuer."
 
-#: modules\risk/controller/risk.action.01.php:488
-#: modules\society/controller/workunit.action.01.php:183
-msgid "An error occured while getting element for association"
-msgstr ""
-"Une erreur est survenue lors de la récupération de l'élément pour "
-"l'assocation"
-
-#: modules\risk/controller/risk.action.01.php:494
-#: modules\society/controller/workunit.action.01.php:189
+#: modules\risk/controller/risk.action.01.php:521
+#: modules\society/controller/workunit.action.01.php:211
 msgid "Nothing has been founded for association"
 msgstr "Aucun élément n'a été trouvé pour l'association"
 
@@ -663,15 +843,15 @@ msgstr "Risques pour Digirisk"
 msgid "Manage risks into digirisk"
 msgstr "Gestion des risques dans Digirisk"
 
-#: modules\risk/templates/simple/item-new.php:29
+#: modules\risk/templates/simple/item-new.php:30
 msgid "Add a comment for the risk"
 msgstr "Ajouter un commentaire pour le risque"
 
-#: modules\risk/templates/simple/list.php:5
+#: modules\risk/templates/simple/list.php:6
 msgid "Cot."
 msgstr "Cot."
 
-#: modules\risk/templates/simple/list.php:7
+#: modules\risk/templates/simple/list.php:8
 msgid "Danger"
 msgstr "Danger"
 
@@ -683,21 +863,14 @@ msgstr "Méthode d'évaluation : Evarisk"
 msgid "Evaluate risk"
 msgstr "Enregistrer la cotation"
 
-#: modules\society/controller/group.action.01.php:53
+#: modules\society/controller/group.action.01.php:52
 msgid "Undefined"
 msgstr "Indéfini"
 
-#: modules\society/controller/group.action.01.php:135
-#: modules\society/controller/workunit.action.01.php:165
+#: modules\society/controller/group.action.01.php:152
+#: modules\society/controller/workunit.action.01.php:182
 msgid "Element to load have not been found"
 msgstr "L'élément demandé n'a pas été trouvé"
-
-#: modules\society/controller/group.action.01.php:165
-#: modules\society/controller/workunit.action.01.php:236
-msgid "An error occured while getting element to generate sheet for."
-msgstr ""
-"Une erreur est survenue lors de la récupération de l'élément pour la "
-"génération de la fiche."
 
 #: modules\society/controller/group.controller.01.php:55
 #: modules\society/controller/group.controller.01.php:57
@@ -744,36 +917,36 @@ msgstr "Société dans Digirisk"
 msgid "Manage societies into digirisk"
 msgstr "Gestion des sociétés dans Digirisk"
 
-#: modules\society/controller/group.controller.01.php:223
+#: modules\society/controller/group.controller.01.php:211
 msgid "DUER Generation"
 msgstr "Génération de votre DUER"
 
-#: modules\society/controller/group.controller.01.php:227
+#: modules\society/controller/group.controller.01.php:215
 msgid "Document list"
 msgstr "Liste des DUER"
+
+#: modules\society/controller/group.controller.01.php:219
+msgid "Configuration"
+msgstr "Configuration"
 
 #: modules\society/controller/society.controller.01.php:33
 msgid "Digirisk : Risk evaluation"
 msgstr "Digirisk: Evaluation des risques"
 
-#: modules\society/controller/workunit.action.01.php:83
+#: modules\society/controller/workunit.action.01.php:95
 msgid "Work unit have been created succesfully"
 msgstr "L'unité de travail a été créée avec succès"
 
-#: modules\society/controller/workunit.action.01.php:92
+#: modules\society/controller/workunit.action.01.php:104
 msgid "An error occured while creating work unit"
 msgstr "Une erreur est survenue lors de la création de l'unité de travail"
 
-#: modules\society/controller/workunit.action.01.php:95
+#: modules\society/controller/workunit.action.01.php:107
 #, php-format
 msgid "Work unit could not been create. request: %s response: %s"
 msgstr "L'unité de travail n'a pu être créée. Demande: %s, résultat: %s"
 
-#: modules\society/controller/workunit.action.01.php:268
-msgid "An error occured while getting model content to use for generation"
-msgstr ""
-
-#: modules\society/controller/workunit.action.01.php:277
+#: modules\society/controller/workunit.action.01.php:301
 msgid "No picture defined"
 msgstr "Pas d'image définie"
 
@@ -817,11 +990,11 @@ msgstr "Rechercher dans les unités de travail"
 msgid "Digirisk work unit"
 msgstr "Unité de travail dans Digirisk"
 
-#: modules\society/templates/group/sheet-form.php:3
-msgid "Hello"
+#: modules\society/templates/group/configuration/form.php:37
+msgid "Save Changes"
 msgstr ""
 
-#: modules\society/templates/group/sheet-form.php:5
+#: modules\society/templates/group/sheet-form.php:3
 msgid ""
 "\n"
 "\n"
@@ -843,7 +1016,7 @@ msgid ""
 "- Traitement et rédaction du document unique"
 msgstr ""
 
-#: modules\society/templates/group/sheet-form.php:54
+#: modules\society/templates/group/sheet-form.php:52
 msgid ""
 "Risk awareness is defined in the \"ed840\" edited by INRS.\n"
 "In the current document you will find:\n"
@@ -856,67 +1029,67 @@ msgstr ""
 "- La définition d'un risque, d'un danger et un schéma explicatif\n"
 "- Les explications concernant les différentes méthodes d'évaluation"
 
-#: modules\society/templates/group/sheet-form.php:80
+#: modules\society/templates/group/sheet-form.php:78
 msgid "Document name"
 msgstr "Nom du document"
 
-#: modules\society/templates/group/sheet-form.php:81
+#: modules\society/templates/group/sheet-form.php:79
 msgid "Start audit date"
 msgstr "Date du début de l'audit"
 
-#: modules\society/templates/group/sheet-form.php:82
+#: modules\society/templates/group/sheet-form.php:80
 msgid "End audit date"
 msgstr "Date de la fin de l'audit"
 
-#: modules\society/templates/group/sheet-form.php:83
+#: modules\society/templates/group/sheet-form.php:81
 msgid "Transmitter"
 msgstr "Emetteur"
 
-#: modules\society/templates/group/sheet-form.php:84
+#: modules\society/templates/group/sheet-form.php:82
 msgid "Company name"
 msgstr "Nom de la société"
 
-#: modules\society/templates/group/sheet-form.php:85
+#: modules\society/templates/group/sheet-form.php:83
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: modules\society/templates/group/sheet-form.php:87
+#: modules\society/templates/group/sheet-form.php:85
 msgid "Cellphone"
 msgstr "Téléphone portable"
 
-#: modules\society/templates/group/sheet-form.php:90
+#: modules\society/templates/group/sheet-form.php:88
 msgid "Methodology"
 msgstr "Méthodologie"
 
-#: modules\society/templates/group/sheet-form.php:91
+#: modules\society/templates/group/sheet-form.php:89
 msgid "Sources"
 msgstr "Sources"
 
-#: modules\society/templates/group/sheet-form.php:92
+#: modules\society/templates/group/sheet-form.php:90
 msgid "Important note"
 msgstr "Note importante"
 
-#: modules\society/templates/group/sheet-form.php:93
+#: modules\society/templates/group/sheet-form.php:91
 msgid "Location"
 msgstr "Localisation"
 
-#: modules\society/templates/group/sheet-form.php:96
+#: modules\society/templates/group/sheet-form.php:94
 msgid "Generate DUER"
 msgstr "Générer le DUER"
 
-#: modules\society/templates/workunit/list.php:18
+#: modules\society/templates/workunit/list.php:19
 msgid "New work unit"
 msgstr "Nouvelle unité de travail"
 
-#: modules\society/templates/workunit/sheet-description.php:8
+#: modules\society/templates/workunit/sheet-description.php:9
 msgid "Risk number"
 msgstr "Nombre de risques"
 
-#: modules\society/templates/workunit/sheet-description.php:9
+#: modules\society/templates/workunit/sheet-description.php:10
 msgid "Affected users"
 msgstr "Utilisateurs affectés"
 
-#: modules\society/templates/workunit/sheet-description.php:10
+#: modules\society/templates/workunit/sheet-description.php:11
 msgid "Affected evaluators"
 msgstr "Evaluateurs affectés"
 
@@ -925,34 +1098,30 @@ msgstr "Evaluateurs affectés"
 msgid "Last update on %s"
 msgstr "Dernière mise à jour le %s"
 
-#: modules\user/controller/user.controller.01.php:53
+#: modules\user/controller/user.controller.01.php:57
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: modules\user/controller/user.controller.01.php:96
+#: modules\user/controller/user.controller.01.php:100
 msgid "Create or import user easyly with a form "
 msgstr "Créer ou importer plusieurs utilisateurs en même temps"
 
-#: modules\user/controller/user.controller.01.php:96
+#: modules\user/controller/user.controller.01.php:100
 msgid "Digirisk : import"
 msgstr "Digirisk : import"
 
 #: modules\user/template/backend/list-user-to-assign.php:9
-#: modules\user/template/backend/page-staff.php:16
+#: modules\user/template/backend/page-staff.php:23
 msgid "Firtname"
 msgstr "Prénom"
 
-#: modules\user/template/backend/page-staff.php:7
+#: modules\user/template/backend/page-staff.php:9
 msgid "Domain mail"
 msgstr "Domaine de l'email"
 
-#: modules\user/template/backend/page-staff.php:17
+#: modules\user/template/backend/page-staff.php:24
 msgid "Email"
 msgstr "Email"
-
-#: modules\user/template/backend/page-staff.php:54
-msgid "More options"
-msgstr "Plus d'options"
 
 #: modules\user/template/backend/page-staff.php:57
 msgid "Social security number"
@@ -1017,6 +1186,14 @@ msgid ""
 msgstr ""
 "Tous les champs ne sont pas obligatoires mais les colonnes doivent êtres "
 "présentes. Exemple de ligne basique: username;;;;mail;;;;;;;;;;;"
+
+#~ msgid "Workunit"
+#~ msgstr "Unité de travail"
+
+#~ msgid "An error occured while getting element for association"
+#~ msgstr ""
+#~ "Une erreur est survenue lors de la récupération de l'élément pour "
+#~ "l'assocation"
 
 #~ msgid ""
 #~ "* Step 1 : Retrieving information\n"
