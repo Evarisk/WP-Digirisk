@@ -18,7 +18,11 @@ var legal_display = {
         legal_display.download_export( responseText.data.path );
       }
     };
-    jQuery( '.form-legal-display' ).ajaxForm(options);
+
+    jQuery( document ).on( "click", '.form-legal-display button', function(){
+	    jQuery( this ).closest( 'form' ).ajaxSubmit(options);
+	    return false;
+	  });
   },
 
   download_export: function(url_to_file) {

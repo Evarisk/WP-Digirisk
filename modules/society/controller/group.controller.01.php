@@ -115,11 +115,13 @@ class wpdigi_group_ctr_01 extends post_ctr_01 {
 				$wpdigi_workunit_ctr->display( $_REQUEST['current_workunit_id'] );
 			}
 			else {
-				$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
+				global $wpdigi_group_ctr;
+				$group_list = $wpdigi_group_ctr->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
+
 				$default_selected_group_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 
 				ob_start();
-				$this->display( $default_selected_group_id );
+				$wpdigi_group_ctr->display( $default_selected_group_id );
 				$default = ob_get_clean();
 			}
 
