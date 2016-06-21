@@ -170,10 +170,11 @@ class wpdigi_evaluation_method_controller_01 extends term_ctr_01 {
 		// Risk evaluation level
 		$risk_evaluation_level = 1;
 		foreach ( $_POST['list_variable'] as $value ) {
-			if (  0 === (int) $value )
-			  wp_send_json_error();
-
 			$risk_evaluation_level *= (int) $value;
+		}
+
+		if ( $risk_evaluation_level == 0 ) {
+			$risk_evaluation_level = 1;
 		}
 
 		global $wpdigi_evaluation_method_controller;

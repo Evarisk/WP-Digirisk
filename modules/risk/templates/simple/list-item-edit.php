@@ -19,7 +19,7 @@ if ( $risk_definition != null ):
 			<?php endif; ?>
 		</span>
 
-		<input type="hidden" class="risk-level" name="risk_evaluation_level" value="<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?>" />
+		<input type="hidden" class="risk-level" name="risk_evaluation_level" value="<?php echo $risk_definition->evaluation->option['risk_level']['equivalence']; ?>" />
 		<span data-target="wp-digi-risk-cotation-chooser" data-risk_level="<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?>" class="<?php echo $risk_definition->taxonomy['digi-method'][0] == $term_evarisk_simple->term_id ? 'digi-toggle' : 'open-method-evaluation-render'; ?> wp-digi-risk-list-column-cotation wp-digi-cotation wp-digi-risk-level-<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?>" >
 			<div class="wp-digi-risk-level-<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?> wp-digi-risk-list-column-danger" ><?php echo $risk_definition->evaluation->option['risk_level']['equivalence']; ?></div>
 			<?php if ( $risk_definition->taxonomy['digi-method'][0] == $term_evarisk_simple->term_id ): ?>
