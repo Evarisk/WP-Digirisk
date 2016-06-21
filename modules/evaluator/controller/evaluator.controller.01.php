@@ -30,6 +30,10 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			add_filter( 'wpdigi_workunit_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
 			/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
 			add_filter( 'wpdigi_workunit_sheet_content', array( $this, 'filter_display_evaluator_in_element' ), 10, 3 );
+			/**	Ajoute les onglets pour les groupements / Add tabs for workunit	*/
+			add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
+			/**	Ajoute le contenu pour les onglets des groupements / Add the content for groupement tabs	*/
+			add_filter( 'wpdigi_group_sheet_content', array( $this, 'filter_display_evaluator_in_element' ), 10, 3 );
 
 			/** Pour la recherche */
 			add_filter( 'wpdigi_search_evaluator_affected', array( $this, 'callback_wpdigi_search_evaluator_affected' ), 10, 3 );
@@ -75,8 +79,8 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			return $output;
 		}
 
-		public function render( $workunit ) {
-			$list_affected_evaluator = $this->get_list_affected_evaluator( $workunit );
+		public function render( $element ) {
+			$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 
 			$current_page = !empty( $_GET['current_page'] ) ? (int)$_GET['current_page'] : 1;
 			$args_where_evaluator = array(
@@ -335,7 +339,7 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			}
 
 			ob_start();
-			require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+			require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
 			$string .= ob_get_clean();
 			return $string;
 		}

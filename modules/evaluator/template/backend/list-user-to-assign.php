@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<form method="POST" class="wp-form-evaluator-to-assign wp-digi-bloc-loader" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+<form method="POST" class="wp-form-evaluator-to-assign wp-digi-bloc-loader" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 	<ul class="wp-digi-list wp-digi-table wp-digi-user-list wp-digi-evaluator-list">
 		<li class="wp-digi-table-header">
 			<span></span>
@@ -32,8 +32,8 @@
 	</ul>
 
 
-	<input type="hidden" name="workunit_id" value="<?php echo $workunit->id; ?>" />
-	<input type="hidden" name="group_id" value="<?php echo $workunit->parent_id; ?>" />
+	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
+	<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
 	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'wpdigi-user-i18n'); ?>" />
 
@@ -43,7 +43,7 @@
 			<?php
 			$big = 999999999;
 			echo paginate_links( array(
-				'base' => admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&current_tab=evaluator&current_group_id=' . $workunit->parent_id . '&current_workunit_id=' . $workunit->id .'&current_page=%_%' ),
+				'base' => admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&current_tab=evaluator&element_id=' . $element->id .'&current_page=%_%' ),
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,

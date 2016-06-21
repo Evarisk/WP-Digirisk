@@ -17,34 +17,29 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 	class wpdigi_evaluator_action_01 {
 		public function __construct() {
 			// Quand on affecte un utilisateur
-			add_action( 'admin_post_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
+			add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 
 			// Quand on désaffecte un utilisateur
-			add_action( 'admin_post_edit_evaluator_detach', array( $this, 'callback_edit_evaluator_detach' ) );
+			add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
 		}
 
 		public function callback_edit_evaluator_assign() {
 			// Est ce que list_user est vide ? Ou est ce que workunit_id est vide et est-ce bien un entier ?
 			if ( empty( $_POST['list_user'] ) || !is_array( $_POST['list_user'] ) )
-				wp_safe_redirect( wp_get_referer() );
+				wp_send_json_error();
 
-			if ( 0 === (int) $_POST['workunit_id'] )
-				wp_safe_redirect( wp_get_referer() );
+			if ( 0 === (int) $_POST['element_id'] )
+				wp_send_json_error();
 			else {
-				$workunit_id = (int) $_POST['workunit_id'];
+				$element_id = (int) $_POST['element_id'];
 			}
 
-			if ( 0 === (int) $_POST['group_id'] )
-				wp_safe_redirect( wp_get_referer() );
-			else {
-				$group_id = (int) $_POST['group_id'];
-			}
+			$global = sanitize_text_field( $_POST['global'] );
+			global ${$global};
+			$element = ${$global}->show( $element_id );
 
-			global $wpdigi_workunit_ctr;
-			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
-
-			if ( empty( $workunit ) )
-				wp_safe_redirect( wp_get_referer() );
+			if ( empty( $element ) )
+				wp_send_json_error();
 
 			foreach ( $_POST['list_user'] as $user_id => $list_value ) {
 				if ( !empty( $list_value['duration'] ) && !empty( $list_value['affect'] ) ) {
@@ -57,7 +52,7 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 					$end_date->add( new DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
 
 
-					$workunit->option['user_info']['affected_id']['evaluator'][$user_id][] = array(
+					$element->option['user_info']['affected_id']['evaluator'][$user_id][] = array(
 						'status' => 'valid',
 						'start' => array(
 							'date' 	=> $list_value['on'],
@@ -75,50 +70,51 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 
 			//On met à jour si au moins un utilisateur à été affecté
 			if( count( $_POST['list_user'] ) > 0 )
-				$wpdigi_workunit_ctr->update( $workunit );
+				${$global}->update( $element );
 
-			wp_safe_redirect( wp_get_referer() . '&current_tab=evaluator&current_group_id=' . $group_id . '&current_workunit_id=' . $workunit_id );
-			exit(0);
+			global $wpdigi_evaluator_ctr;
+			$list_affected_evaluator = $wpdigi_evaluator_ctr->get_list_affected_evaluator( $element );
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+			wp_send_json_success( array( 'template' => ob_get_clean() ) );
 		}
 
-		public function callback_edit_evaluator_detach() {
-			if ( 0 === (int) $_GET['workunit_id'] )
-				wp_safe_redirect( wp_get_referer() );
+		public function callback_detach_evaluator() {
+			if ( 0 === (int) $_POST['id'] )
+				wp_send_json_error();
 			else {
-				$workunit_id = (int) $_GET['workunit_id'];
+				$element_id = (int) $_POST['id'];
 			}
 
-			if ( 0 === (int) $_GET['group_id'] )
-				wp_safe_redirect( wp_get_referer() );
+			if ( !isset( $_POST['affectation_id'] ) )
+				wp_send_json_error();
 			else {
-				$group_id = (int) $_GET['group_id'];
+				$affectation_data_id = (int) $_POST['affectation_id'];
 			}
 
-			if ( !isset( $_GET['affectation_data_id'] ) )
-				wp_safe_redirect( wp_get_referer() );
+			if ( 0 === (int) $_POST['user_id'] )
+				wp_send_json_error();
 			else {
-				$affectation_data_id = (int) $_GET['affectation_data_id'];
+				$user_id = (int) $_POST['user_id'];
 			}
 
-			if ( 0 === (int) $_GET['user_id'] )
-				wp_safe_redirect( wp_get_referer() );
-			else {
-				$user_id = (int) $_GET['user_id'];
-			}
+			$global = sanitize_text_field( $_POST['global'] );
+			global ${$global};
+			$element = ${$global}->show( $element_id );
 
-			global $wpdigi_workunit_ctr;
-			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
-
-			if ( empty( $workunit ) )
-				wp_safe_redirect( wp_get_referer() );
+			if ( empty( $element ) )
+				wp_send_json_error();
 
 			global $wpdigi_user_ctr;
 
-			$workunit->option['user_info']['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
-			$wpdigi_workunit_ctr->update( $workunit );
+			$element->option['user_info']['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
+			${$global}->update( $element );
 
-			wp_safe_redirect( wp_get_referer() . '&current_tab=evaluator&current_group_id=' . $group_id . '&current_workunit_id=' . $workunit_id );
-			exit(0);
+			global $wpdigi_evaluator_ctr;
+			$list_affected_evaluator = $wpdigi_evaluator_ctr->get_list_affected_evaluator( $element );
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+			wp_send_json_success( array( 'template' => ob_get_clean() ) );
 		}
 	}
 

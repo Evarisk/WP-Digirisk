@@ -24,7 +24,13 @@
 							<span><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['firstname']; ?></span>
 							<span><?php echo  mysql2date( 'd/m/Y H:i', $affected_evaluator[ 'affectation_info' ][ 'start' ][ 'date' ], true ); ?></span>
 							<span><?php echo $wpdigi_evaluator_ctr->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
-							<span class="wp-digi-action"><a href="<?php echo admin_url( 'admin-post.php?action=edit_evaluator_detach&group_id=' . $workunit->parent_id . '&workunit_id=' . $workunit->id . '&user_id=' . $affected_evaluator[ 'user_info' ]->id . '&affectation_data_id=' . $affected_evaluator['affectation_info']['id'] ); ?>" class="wp-digi-action-delete dashicons dashicons-no-alt"></a></span>
+							<span class="wp-digi-action">
+								<a 	data-id="<?php echo $element->id; ?>"
+										data-user-id="<?php echo $affected_evaluator[ 'user_info' ]->id; ?>"
+										data-global="<?php echo str_replace( 'mdl_01', 'ctr', get_class( $element ) ); ?>"
+										data-affectation-data-id="<?php echo $affected_evaluator['affectation_info']['id']; ?>"
+										class="wp-digi-action-delete dashicons dashicons-no-alt"></a>
+							</span>
 						</li>
 					<?php
 				endforeach;
