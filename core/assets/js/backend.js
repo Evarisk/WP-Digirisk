@@ -650,9 +650,19 @@ var digi_risk = {
 	create_risk: function( event, element ) {
 		event.preventDefault();
 
-		jQuery( '.wp-digi-risk-item-new' ).addClass( 'wp-digi-bloc-loading' );
 
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
+      'beforeSubmit': function() {
+        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() ) {
+          jQuery( '.wp-digi-risk-item-new' ).addClass( 'wp-digi-bloc-loading' );
+          jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid rgba(0,0,0,.2) 1px' );
+        }
+        else {
+          jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
+
+          return false;
+        }
+      },
 			'success': function( response ) {
 				jQuery( '.wp-digi-risk-item-new' ).removeClass( 'wp-digi-bloc-loading' );
 				jQuery( '.wp-digi-risk.wp-digi-list' ).closest( 'div' ).replaceWith( response.data.template );
