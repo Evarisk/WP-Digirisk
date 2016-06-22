@@ -98,6 +98,13 @@ class sheet_groupment_action_01 {
 		// 	);
 		// }
 
+		/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
+		$option[ 'address' ] = $option[ 'postcode' ] = $option[ 'town' ] = '-';
+		if ( !empty( $group->option[ 'contact' ][ 'address' ] ) && ( true === is_int( (int)$group->option[ 'contact' ][ 'address' ] ) ) ) {
+			global $wpdigi_address_ctr;
+			$work_unit_address_definition = $wpdigi_address_ctr->show( (int)$group->option[ 'contact' ][ 'address' ][ 0 ] );
+			extract( get_object_vars( $work_unit_address_definition ) );
+		}
 
 		/**	Définition finale de l'unité de travail / Final definition for group	*/
 		$group_sheet_details = array(
@@ -203,6 +210,10 @@ class sheet_groupment_action_01 {
 		/**	On créé le document / Create the document	*/
 		$group_sheet_details = apply_filters( 'wpdigi_group_sheet_details', $group_sheet_details );
 		$document_creation = $document_controller->create_document( $group_model_to_use, $group_sheet_details, $group->type. '/' . $group->id . '/' . $group_sheet_media_args[ 'post_title' ] . '.odt' , $group_sheet_id );
+		$filetype = 'unknown';
+		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
+			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
+		}
 
 		/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
 		$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $document_controller->get_post_type() ) + 1 );
