@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Evarisk v5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 10:45+0100\n"
-"PO-Revision-Date: 2016-06-17 10:50+0100\n"
+"POT-Creation-Date: 2016-06-22 11:13+0200\n"
+"PO-Revision-Date: 2016-06-22 11:14+0200\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -11,239 +11,239 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
-"X-Poedit-Basepath: ..\\..\\..\\\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8\n"
-"X-Poedit-SearchPath-0: core\\digirisk\n"
-"X-Poedit-SearchPath-1: modules\\_evarisk_installer\n"
-"X-Poedit-SearchPath-2: modules\\address\n"
-"X-Poedit-SearchPath-3: modules\\coming_soon\n"
-"X-Poedit-SearchPath-4: modules\\danger\n"
-"X-Poedit-SearchPath-5: modules\\document\n"
-"X-Poedit-SearchPath-6: modules\\evaluation_method\n"
-"X-Poedit-SearchPath-7: modules\\evaluator\n"
-"X-Poedit-SearchPath-8: modules\\file\n"
-"X-Poedit-SearchPath-9: modules\\nodistraction_display\n"
-"X-Poedit-SearchPath-10: modules\\recommendation\n"
-"X-Poedit-SearchPath-11: modules\\society\n"
-"X-Poedit-SearchPath-12: modules\\risk\n"
-"X-Poedit-SearchPath-13: modules\\user\n"
-"X-Poedit-SearchPath-14: modules\\legal_display\n"
-"X-Poedit-SearchPath-15: modules\\opening_time\n"
-"X-Poedit-SearchPath-16: modules\\third\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-SearchPath-0: core/digirisk\n"
+"X-Poedit-SearchPath-1: modules/_evarisk_installer\n"
+"X-Poedit-SearchPath-2: modules/address\n"
+"X-Poedit-SearchPath-3: modules/coming_soon\n"
+"X-Poedit-SearchPath-4: modules/danger\n"
+"X-Poedit-SearchPath-5: modules/document\n"
+"X-Poedit-SearchPath-6: modules/evaluation_method\n"
+"X-Poedit-SearchPath-7: modules/evaluator\n"
+"X-Poedit-SearchPath-8: modules/file\n"
+"X-Poedit-SearchPath-9: modules/nodistraction_display\n"
+"X-Poedit-SearchPath-10: modules/recommendation\n"
+"X-Poedit-SearchPath-11: modules/society\n"
+"X-Poedit-SearchPath-12: modules/risk\n"
+"X-Poedit-SearchPath-13: modules/user\n"
+"X-Poedit-SearchPath-14: modules/legal_display\n"
+"X-Poedit-SearchPath-15: modules/opening_time\n"
+"X-Poedit-SearchPath-16: modules/third\n"
 
-#: core\digirisk/digirisk.action.01.php:70
+#: core/digirisk/digirisk.action.01.php:70
 #, php-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: modules\_evarisk_installer/controller/installer.controller.01.php:33
+#: modules/_evarisk_installer/controller/installer.controller.01.php:33
 msgid "Digirisk installer"
 msgstr "Installation de Digirisk"
 
-#: modules\_evarisk_installer/controller/installer.controller.01.php:33
-#: modules\_evarisk_installer/templates/backend/installer.php:3
-#: modules\society/controller/society.controller.01.php:33
-#: modules\user/template/backend/user-profile.php:3
+#: modules/_evarisk_installer/controller/installer.controller.01.php:33
+#: modules/_evarisk_installer/templates/backend/installer.php:3
+#: modules/society/controller/society.controller.01.php:33
+#: modules/user/template/backend/user-profile.php:3
 msgid "Digirisk"
 msgstr "Digirisk"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:6
+#: modules/_evarisk_installer/templates/backend/installer.php:6
 msgid "Your informations"
 msgstr "Votre société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:7
-#: modules\user/template/backend/page-staff.php:3
-#: modules\user/template/backend/page-staff.php:88
+#: modules/_evarisk_installer/templates/backend/installer.php:7
+#: modules/user/template/backend/page-staff.php:3
+#: modules/user/template/backend/page-staff.php:88
 msgid "Import staff"
 msgstr "Import du personnel"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:11
+#: modules/_evarisk_installer/templates/backend/installer.php:11
 msgid "Your society"
 msgstr "Votre Société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:19
-#: modules\society/templates/group/configuration/form.php:20
+#: modules/_evarisk_installer/templates/backend/installer.php:19
+#: modules/society/templates/group/configuration/form.php:20
 msgid "Society name"
 msgstr "Nom de votre société"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:20
-#: modules\user/template/backend/page-staff.php:54
+#: modules/_evarisk_installer/templates/backend/installer.php:20
+#: modules/user/template/backend/page-staff.php:54
 msgid "More options"
 msgstr "Plus d'options"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:26
-#: modules\legal_display/templates/backend/detective-work.php:24
-#: modules\legal_display/templates/backend/occupational-health-service.php:26
-#: modules\society/templates/group/configuration/form.php:21
-#: modules\user/template/backend/page-staff.php:58
+#: modules/_evarisk_installer/templates/backend/installer.php:26
+#: modules/legal_display/templates/backend/detective-work.php:24
+#: modules/legal_display/templates/backend/occupational-health-service.php:26
+#: modules/society/templates/group/configuration/form.php:21
+#: modules/user/template/backend/page-staff.php:58
 msgid "Address"
 msgstr "Adresse"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:28
-#: modules\society/templates/group/configuration/form.php:23
+#: modules/_evarisk_installer/templates/backend/installer.php:28
+#: modules/society/templates/group/configuration/form.php:23
 msgid "Owner"
 msgstr "Responsable"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:28
-#: modules\society/templates/group/configuration/form.php:23
+#: modules/_evarisk_installer/templates/backend/installer.php:28
+#: modules/society/templates/group/configuration/form.php:23
 msgid "Write name to search..."
 msgstr "Entrez votre recherche..."
 
-#: modules\_evarisk_installer/templates/backend/installer.php:31
-#: modules\society/templates/group/configuration/form.php:26
+#: modules/_evarisk_installer/templates/backend/installer.php:31
+#: modules/society/templates/group/configuration/form.php:26
 msgid "Additional address"
 msgstr "Complément d'adresse"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:32
-#: modules\society/templates/group/configuration/form.php:27
+#: modules/_evarisk_installer/templates/backend/installer.php:32
+#: modules/society/templates/group/configuration/form.php:27
 msgid "Created date"
 msgstr "Date de création"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:33
-#: modules\legal_display/templates/backend/detective-work.php:30
-#: modules\legal_display/templates/backend/occupational-health-service.php:32
-#: modules\society/templates/group/configuration/form.php:28
-#: modules\user/template/backend/page-staff.php:66
+#: modules/_evarisk_installer/templates/backend/installer.php:33
+#: modules/legal_display/templates/backend/detective-work.php:30
+#: modules/legal_display/templates/backend/occupational-health-service.php:32
+#: modules/society/templates/group/configuration/form.php:28
+#: modules/user/template/backend/page-staff.php:66
 msgid "Postcode"
 msgstr "Code postal"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:34
-#: modules\society/templates/group/configuration/form.php:29
+#: modules/_evarisk_installer/templates/backend/installer.php:34
+#: modules/society/templates/group/configuration/form.php:29
 msgid "SIREN"
 msgstr "SIREN"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:35
-#: modules\society/templates/group/configuration/form.php:30
-#: modules\user/template/backend/page-staff.php:69
+#: modules/_evarisk_installer/templates/backend/installer.php:35
+#: modules/society/templates/group/configuration/form.php:30
+#: modules/user/template/backend/page-staff.php:69
 msgid "Town"
 msgstr "Ville"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:36
-#: modules\society/templates/group/configuration/form.php:31
+#: modules/_evarisk_installer/templates/backend/installer.php:36
+#: modules/society/templates/group/configuration/form.php:31
 msgid "SIRET"
 msgstr "SIRET"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:37
-#: modules\legal_display/templates/backend/detective-work.php:42
-#: modules\legal_display/templates/backend/occupational-health-service.php:44
-#: modules\legal_display/templates/backend/safety-rules.php:26
-#: modules\society/templates/group/configuration/form.php:32
-#: modules\society/templates/group/sheet-form.php:84
+#: modules/_evarisk_installer/templates/backend/installer.php:37
+#: modules/legal_display/templates/backend/detective-work.php:42
+#: modules/legal_display/templates/backend/occupational-health-service.php:44
+#: modules/legal_display/templates/backend/safety-rules.php:26
+#: modules/society/templates/group/configuration/form.php:32
+#: modules/society/templates/group/sheet-form.php:84
 msgid "Phone"
 msgstr "Téléphone"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:40
-#: modules\society/templates/group/configuration/form.php:35
+#: modules/_evarisk_installer/templates/backend/installer.php:40
+#: modules/society/templates/group/configuration/form.php:35
 msgid "Description"
 msgstr "Description"
 
-#: modules\_evarisk_installer/templates/backend/installer.php:43
-#: modules\society/templates/group/sheet-simple.php:6
-#: modules\society/templates/workunit/sheet-simple.php:7
-#: modules\user/template/backend/page-staff.php:92
+#: modules/_evarisk_installer/templates/backend/installer.php:43
+#: modules/society/templates/group/sheet-simple.php:6
+#: modules/society/templates/workunit/sheet-simple.php:7
+#: modules/user/template/backend/page-staff.php:92
 msgid "Save"
 msgstr "Enregistrer"
 
-#: modules\coming_soon/coming_soon.php:17
+#: modules/coming_soon/coming_soon.php:17
 msgid "Products"
 msgstr "Produits"
 
-#: modules\coming_soon/coming_soon.php:21
+#: modules/coming_soon/coming_soon.php:21
 msgid "PPE"
 msgstr "EPI"
 
-#: modules\coming_soon/coming_soon.php:25
+#: modules/coming_soon/coming_soon.php:25
 msgid "Formation"
 msgstr "Formation"
 
-#: modules\coming_soon/coming_soon.php:29
+#: modules/coming_soon/coming_soon.php:29
 msgid "Accidents"
 msgstr "Accidents"
 
-#: modules\danger/controller/danger.controller.01.php:62
+#: modules/danger/controller/danger.controller.01.php:62
 msgid "Search Dangers"
 msgstr "Rechercher dans les dangers"
 
-#: modules\danger/controller/danger.controller.01.php:63
+#: modules/danger/controller/danger.controller.01.php:63
 msgid "Popular Dangers"
 msgstr "Dangers populaire"
 
-#: modules\danger/controller/danger.controller.01.php:64
+#: modules/danger/controller/danger.controller.01.php:64
 msgid "All Dangers"
 msgstr "Tous les dangers"
 
-#: modules\danger/controller/danger.controller.01.php:67
+#: modules/danger/controller/danger.controller.01.php:67
 msgid "Edit Danger"
 msgstr "Editer les danger"
 
-#: modules\danger/controller/danger.controller.01.php:68
+#: modules/danger/controller/danger.controller.01.php:68
 msgid "Update Danger"
 msgstr "Mettre à jour le danger"
 
-#: modules\danger/controller/danger.controller.01.php:69
+#: modules/danger/controller/danger.controller.01.php:69
 msgid "Add New Danger"
 msgstr "Ajouter un nouveau danger"
 
-#: modules\danger/controller/danger.controller.01.php:70
+#: modules/danger/controller/danger.controller.01.php:70
 msgid "New Danger Name"
 msgstr "Nom du danger"
 
-#: modules\danger/controller/danger.controller.01.php:71
+#: modules/danger/controller/danger.controller.01.php:71
 msgid "Separate dangers with commas"
 msgstr "Séparé par des virgules"
 
-#: modules\danger/controller/danger.controller.01.php:72
+#: modules/danger/controller/danger.controller.01.php:72
 msgid "Add or remove dangers"
 msgstr "Ajouter ou supprimer des dangers"
 
-#: modules\danger/controller/danger.controller.01.php:73
+#: modules/danger/controller/danger.controller.01.php:73
 msgid "Choose from the most used dangers"
 msgstr "Choisissez parmis les dangers les plus utilisés"
 
-#: modules\danger/controller/danger.controller.01.php:74
+#: modules/danger/controller/danger.controller.01.php:74
 msgid "No dangers found."
 msgstr "Aucun danger trouvé"
 
-#: modules\danger/controller/danger.controller.01.php:75
+#: modules/danger/controller/danger.controller.01.php:75
 msgid "Dangers"
 msgstr "Dangers"
 
-#: modules\danger/controller/danger_category.controller.01.php:61
+#: modules/danger/controller/danger_category.controller.01.php:61
 msgid "Danger categories"
 msgstr "Catégories de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:62
-#: modules\danger/controller/danger_category.controller.01.php:71
+#: modules/danger/controller/danger_category.controller.01.php:62
+#: modules/danger/controller/danger_category.controller.01.php:71
 msgid "Danger category"
 msgstr "Catégorie de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:63
+#: modules/danger/controller/danger_category.controller.01.php:63
 msgid "Search Danger categories"
 msgstr "Rechercher dans les catégories de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:64
+#: modules/danger/controller/danger_category.controller.01.php:64
 msgid "All Danger categories"
 msgstr "Toutes les catégories de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:67
+#: modules/danger/controller/danger_category.controller.01.php:67
 msgid "Edit Danger category"
 msgstr "Editer la catégorie de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:68
+#: modules/danger/controller/danger_category.controller.01.php:68
 msgid "Update Danger category"
 msgstr "Mettre à jour le catégorie de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:69
+#: modules/danger/controller/danger_category.controller.01.php:69
 msgid "Add New Danger category"
 msgstr "Ajouter un catégorie de danger"
 
-#: modules\danger/controller/danger_category.controller.01.php:70
+#: modules/danger/controller/danger_category.controller.01.php:70
 msgid "New Danger category Name"
 msgstr "Nouvelle category de danger"
 
-#: modules\danger/templates/backend/category_danger-list.php:18
+#: modules/danger/templates/backend/category_danger-list.php:18
 msgid ""
 "There are no danger category to display here. Please create some danger "
 "category before."
@@ -251,750 +251,752 @@ msgstr ""
 "Aucune catégorie de danger n'a été trouvée. Veuillez en créer une pour "
 "continuer"
 
-#: modules\document/controller/document.controller.01.php:121
+#: modules/document/controller/document.controller.01.php:121
 msgid "Generate sheet"
 msgstr "Générer la fiche"
 
-#: modules\document/controller/document.controller.01.php:191
-#: modules\society/controller/group.action.01.php:221
+#: modules/document/controller/document.controller.01.php:191
+#: modules/society/controller/group.action.01.php:221
 msgid "An error occured while getting model to use for generation"
 msgstr ""
 "Une erreur est survenue lors de la récupération du modèle de document a "
 "utiliser pour la génération du document"
 
-#: modules\document/templates/common/printed-list-item.php:8
+#: modules/document/templates/common/printed-list-item.php:8
 msgid "Download"
 msgstr "Télécharger"
 
-#: modules\document/templates/common/printed-list-item.php:10
+#: modules/document/templates/common/printed-list-item.php:10
 msgid "File does not exists. We are working on re-generation function"
 msgstr ""
 "Le fichier n'existe pas. Nous travaillons actuellement sur la fonction "
 "permettant de le re-générer"
 
-#: modules\document/templates/common/printed-list.php:27
+#: modules/document/templates/common/printed-list.php:27
 msgid "There is no document yet"
 msgstr "Il n'y a aucun document actuellement"
 
-#: modules\document/templates/simple/print-button.php:2
+#: modules/document/templates/simple/print-button.php:2
 msgid "Print DUER"
 msgstr "Imprimer le DUER"
 
-#: modules\document/templates/simple/sheet-generation-form.php:9
+#: modules/document/templates/simple/sheet-generation-form.php:9
 msgid "Click the button to save your current sheet"
 msgstr "Sauvegarder une nouvelle fiche"
 
-#: modules\document/templates/simple/sheet-generation-form.php:10
+#: modules/document/templates/simple/sheet-generation-form.php:10
 msgid "Save sheet"
 msgstr "Générer la fiche"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:77
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:77
 msgid "Evaluation methods"
 msgstr "Méthodes d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:78
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:87
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:78
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:87
 msgid "Evaluation method"
 msgstr "Méthode d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:79
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:79
 msgid "Search evaluation methods"
 msgstr "Rechercher dans les méthodes d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:80
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:80
 msgid "All evaluation methods"
 msgstr "Toutes les méthodes d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:81
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:81
 msgid "Parent evaluation method"
 msgstr "Méthode d'évaluation parent"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:82
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:82
 msgid "Parent evaluation method:"
 msgstr "Méthode d'évaluation parent:"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:83
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:83
 msgid "Edit evaluation method"
 msgstr "Editer la méthode d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:84
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:84
 msgid "Update evaluation method"
 msgstr "Mettre à jour la méthode d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:85
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:85
 msgid "Add New evaluation method"
 msgstr "Ajouter une méthode d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:86
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:86
 msgid "New evaluation method Name"
 msgstr "Nom de la méthode d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:152
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:152
 msgid "low risk"
 msgstr "Risque bas"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:156
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:156
 msgid "risk to plan"
 msgstr "Risque à prévoir"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:160
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:160
 msgid "riskt to treat"
 msgstr "Risque à traiter"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:164
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:164
 msgid "unacceptable risk"
 msgstr "Risque innaceptable"
 
-#: modules\evaluation_method/controller/evaluation_method.controller.01.php:206
+#: modules/evaluation_method/controller/evaluation_method.controller.01.php:207
 msgid "Evarisk simplified"
 msgstr "Evarisk simplifié"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:72
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:72
 msgid "Search evaluation methods vars"
 msgstr "Rechercher dans les critères d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:73
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:73
 msgid "Popular evaluation methods vars"
 msgstr "Critères d'évaluations populaire"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:74
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:74
 msgid "All evaluation methods vars"
 msgstr "Tous les critères d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:77
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:77
 msgid "Edit evaluation methods var"
 msgstr "Editer le critère d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:78
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:78
 msgid "Update evaluation methods var"
 msgstr "Mettre à jour le critère d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:79
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:79
 msgid "Add New evaluation methods var"
 msgstr "Ajouter un critère d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:80
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:80
 msgid "New evaluation methods var Name"
 msgstr "Nouvau critère d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:81
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:81
 msgid "Separate evaluation methods vars with commas"
 msgstr "Séparez les critères d'évaluations par des virgules"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:82
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:82
 msgid "Add or remove evaluation methods vars"
 msgstr "Ajouter ou supprimer des critères d'évaluation"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:83
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:83
 msgid "Choose from the most used evaluation methods vars"
 msgstr "Choisissez aprmis les critères d'évaluation les plus utilisés"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:84
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:84
 msgid "No evaluation methods vars found."
 msgstr "Aucun critère d'évaluation n'a été trouvé"
 
-#: modules\evaluation_method/controller/evaluation_method_variable.controller.01.php:85
+#: modules/evaluation_method/controller/evaluation_method_variable.controller.01.php:85
 msgid "Evaluation methods vars"
 msgstr "Critères d'évlauations"
 
-#: modules\evaluator/controller/evaluator.controller.01.php:50
+#: modules/evaluator/controller/evaluator.controller.01.php:54
 msgid "Evaluators"
 msgstr "Evaluateurs"
 
-#: modules\evaluator/template/backend/list-affected-user.php:6
-#: modules\evaluator/template/backend/list-user-to-assign.php:7
-#: modules\user/template/backend/list-affected-user.php:6
-#: modules\user/template/backend/list-user-to-assign.php:7
-#: modules\user/template/backend/page-staff.php:21
+#: modules/evaluator/template/backend/list-affected-user.php:6
+#: modules/evaluator/template/backend/list-user-to-assign.php:7
+#: modules/user/template/backend/list-affected-user.php:6
+#: modules/user/template/backend/list-user-to-assign.php:7
+#: modules/user/template/backend/page-staff.php:21
 msgid "ID"
 msgstr "ID"
 
-#: modules\evaluator/template/backend/list-affected-user.php:7
-#: modules\evaluator/template/backend/list-user-to-assign.php:8
-#: modules\user/template/backend/list-affected-user.php:7
-#: modules\user/template/backend/list-user-to-assign.php:8
-#: modules\user/template/backend/page-staff.php:22
+#: modules/evaluator/template/backend/list-affected-user.php:7
+#: modules/evaluator/template/backend/list-user-to-assign.php:8
+#: modules/user/template/backend/list-affected-user.php:7
+#: modules/user/template/backend/list-user-to-assign.php:8
+#: modules/user/template/backend/page-staff.php:22
 msgid "Lastname"
 msgstr "Nom"
 
-#: modules\evaluator/template/backend/list-affected-user.php:8
-#: modules\evaluator/template/backend/list-user-to-assign.php:9
-#: modules\user/template/backend/list-affected-user.php:8
+#: modules/evaluator/template/backend/list-affected-user.php:8
+#: modules/evaluator/template/backend/list-user-to-assign.php:9
+#: modules/user/template/backend/list-affected-user.php:8
 msgid "Firstname"
 msgstr "Prénom"
 
-#: modules\evaluator/template/backend/list-affected-user.php:9
-#: modules\user/template/backend/list-affected-user.php:9
+#: modules/evaluator/template/backend/list-affected-user.php:9
+#: modules/user/template/backend/list-affected-user.php:9
 msgid "Assignment date"
 msgstr "Date d'affectation"
 
-#: modules\evaluator/template/backend/list-affected-user.php:10
+#: modules/evaluator/template/backend/list-affected-user.php:10
 msgid "Period"
 msgstr "Durée"
 
-#: modules\evaluator/template/backend/list-user-to-assign.php:10
-#: modules\user/template/backend/list-user-to-assign.php:10
-#: modules\user/template/backend/page-staff.php:59
-#: modules\user/template/backend/user-profile.php:7
+#: modules/evaluator/template/backend/list-user-to-assign.php:10
+#: modules/user/template/backend/list-user-to-assign.php:10
+#: modules/user/template/backend/page-staff.php:59
+#: modules/user/template/backend/user-profile.php:7
 msgid "Hiring date"
 msgstr "Date d'embauche"
 
-#: modules\evaluator/template/backend/list-user-to-assign.php:11
-#: modules\user/template/backend/list-user-to-assign.php:11
+#: modules/evaluator/template/backend/list-user-to-assign.php:11
+#: modules/user/template/backend/list-user-to-assign.php:11
 msgid "Assign"
 msgstr "Affecter"
 
-#: modules\evaluator/template/backend/list-user-to-assign.php:38
-#: modules\user/template/backend/list-user-to-assign.php:35
+#: modules/evaluator/template/backend/list-user-to-assign.php:38
+#: modules/user/template/backend/list-user-to-assign.php:35
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: modules\evaluator/template/backend/list-user-to-assign.php:50
-#: modules\user/template/backend/list-user-to-assign.php:46
+#: modules/evaluator/template/backend/list-user-to-assign.php:50
+#: modules/user/template/backend/list-user-to-assign.php:46
 msgid "Page"
 msgstr "Page"
 
-#: modules\evaluator/template/backend/main.php:9
-#: modules\evaluator/template/backend/main.php:22
-#: modules\user/template/backend/main.php:9
-#: modules\user/template/backend/main.php:21
+#: modules/evaluator/template/backend/main.php:9
+#: modules/evaluator/template/backend/main.php:22
+#: modules/user/template/backend/main.php:9
+#: modules/user/template/backend/main.php:21
 msgid "Write here to search..."
 msgstr "Écrivez votre recherche ici..."
 
-#: modules\file/templates/backend/file-big-gallery.php:20
+#: modules/file/templates/backend/file-big-gallery.php:20
 msgid "Set as default thumbnail"
 msgstr "Utilisez comme image par défaut"
 
-#: modules\file/templates/backend/file-big-gallery.php:21
+#: modules/file/templates/backend/file-big-gallery.php:21
 msgid "Add a new picture"
 msgstr "Ajouter une nouvelle image"
 
-#: modules\file/templates/backend/file-gallery.php:19
-#: modules\file/templates/backend/list-render.php:13
+#: modules/file/templates/backend/file-gallery.php:19
+#: modules/file/templates/backend/list-render.php:13
 msgid "Download the file"
 msgstr "Télécharger le fichier"
 
-#: modules\file/templates/backend/file-gallery.php:20
-#: modules\file/templates/backend/list-render.php:14
+#: modules/file/templates/backend/file-gallery.php:20
+#: modules/file/templates/backend/list-render.php:14
 msgid "Delete file"
 msgstr "Supprimer le fichier"
 
-#: modules\file/templates/backend/file-gallery.php:26
+#: modules/file/templates/backend/file-gallery.php:26
 msgid "No files affected"
 msgstr "Aucun fichier associé"
 
-#: modules\file/templates/backend/file-list.php:11
+#: modules/file/templates/backend/file-list.php:11
 msgid "Associate"
 msgstr "Associer"
 
-#: modules\file/templates/backend/file-list.php:11
+#: modules/file/templates/backend/file-list.php:11
 msgid "Associate file to element"
 msgstr "Associer le fichier aà l'élément actuel"
 
-#: modules\file/templates/backend/file-mini-gallery.php:2
+#: modules/file/templates/backend/file-mini-gallery.php:2
 msgid "Set a thumbnail for"
 msgstr "Définir comme image principale"
 
-#: modules\file/templates/backend/filter-button.php:2
-#: modules\file/templates/backend/filter-button.php:3
+#: modules/file/templates/backend/filter-button.php:2
+#: modules/file/templates/backend/filter-button.php:3
 msgid "Add a media"
 msgstr "Ajouter un média"
 
-#: modules\file/templates/backend/header.js.php:2
+#: modules/file/templates/backend/header.js.php:2
 msgid "Are you sure you want to dissociate this file?"
 msgstr "Etes vous sûr de vouloir dissocier ce fichier?"
 
-#: modules\file/templates/backend/header.js.php:2
+#: modules/file/templates/backend/header.js.php:2
 msgid "An error occured while dissociating file"
 msgstr "Une erreur est survenue lors de la dissociation"
 
-#: modules\file/templates/backend/header.js.php:2
+#: modules/file/templates/backend/header.js.php:2
 msgid "File have been dissociate succesfully"
 msgstr "Le fichier a été dissocié avec succès"
 
-#: modules\legal_display/action/legal_display.action.01.php:59
-#: modules\society/controller/group.action.01.php:187
-#: modules\society/controller/group.action.01.php:491
-#: modules\society/controller/workunit.action.01.php:259
+#: modules/legal_display/action/legal_display.action.01.php:59
+#: modules/society/controller/group.action.01.php:187
+#: modules/society/controller/group.action.01.php:491
+#: modules/society/controller/workunit.action.01.php:259
 msgid "An error occured while getting element to generate sheet for."
 msgstr ""
 "Une erreur est survenue lors de la récupération de l'élément pour la "
 "génération de la fiche."
 
-#: modules\legal_display/action/legal_display.action.01.php:87
-#: modules\society/controller/workunit.action.01.php:292
+#: modules/legal_display/action/legal_display.action.01.php:87
+#: modules/society/controller/workunit.action.01.php:292
 msgid "An error occured while getting model content to use for generation"
 msgstr ""
+"Une erreur est survenue lors de la récupération du modèle à utiliser pour "
+"la génération"
 
-#: modules\legal_display/controller/legal_display.controller.01.php:46
+#: modules/legal_display/controller/legal_display.controller.01.php:46
 msgid "Legal display"
 msgstr "Affichage légal"
 
-#: modules\legal_display/templates/backend/derogations-schedules.php:16
+#: modules/legal_display/templates/backend/derogations-schedules.php:16
 msgid "Derogations schedules"
 msgstr "Dérogations aux horaires de travail"
 
-#: modules\legal_display/templates/backend/derogations-schedules.php:20
+#: modules/legal_display/templates/backend/derogations-schedules.php:20
 msgid "Permanent"
 msgstr "Permanentes"
 
-#: modules\legal_display/templates/backend/derogations-schedules.php:26
+#: modules/legal_display/templates/backend/derogations-schedules.php:26
 msgid "Occasional"
 msgstr "Occasionnelles"
 
-#: modules\legal_display/templates/backend/detective-work.php:15
+#: modules/legal_display/templates/backend/detective-work.php:15
 msgid "Detective work"
 msgstr "Inspection du travail"
 
-#: modules\legal_display/templates/backend/detective-work.php:18
+#: modules/legal_display/templates/backend/detective-work.php:18
 msgid "Last name and first name"
 msgstr "Nom de l'inspecteur"
 
-#: modules\legal_display/templates/backend/detective-work.php:36
-#: modules\legal_display/templates/backend/occupational-health-service.php:38
+#: modules/legal_display/templates/backend/detective-work.php:36
+#: modules/legal_display/templates/backend/occupational-health-service.php:38
 msgid "City"
 msgstr "Ville"
 
-#: modules\legal_display/templates/backend/display.php:40
+#: modules/legal_display/templates/backend/display.php:40
 msgid "Generate legal display"
 msgstr "Générer l'affichage légal"
 
-#: modules\legal_display/templates/backend/documents.php:16
+#: modules/legal_display/templates/backend/documents.php:16
 msgid "Documents"
 msgstr "Documents"
 
-#: modules\legal_display/templates/backend/documents.php:19
+#: modules/legal_display/templates/backend/documents.php:19
 msgid "Title of the applicable collective agreement"
 msgstr "Intitulé"
 
-#: modules\legal_display/templates/backend/documents.php:25
+#: modules/legal_display/templates/backend/documents.php:25
 msgid "Location and access terms of the agreement"
 msgstr "Lieu et modalités de consultation"
 
-#: modules\legal_display/templates/backend/documents.php:31
+#: modules/legal_display/templates/backend/documents.php:31
 msgid "The rules of procedure display location"
 msgstr "Lieux d'affichage"
 
-#: modules\legal_display/templates/backend/documents.php:37
+#: modules/legal_display/templates/backend/documents.php:37
 msgid "How access to DUER"
 msgstr "Modalités d'accès"
 
-#: modules\legal_display/templates/backend/emergency-service.php:15
+#: modules/legal_display/templates/backend/emergency-service.php:15
 msgid "Emergency service"
 msgstr "Service d'urgence"
 
-#: modules\legal_display/templates/backend/emergency-service.php:18
+#: modules/legal_display/templates/backend/emergency-service.php:18
 msgid "Samu"
 msgstr "SAMU"
 
-#: modules\legal_display/templates/backend/emergency-service.php:24
+#: modules/legal_display/templates/backend/emergency-service.php:24
 msgid "Police/Gendarmerie"
 msgstr "Police/Gendarmerie"
 
-#: modules\legal_display/templates/backend/emergency-service.php:30
+#: modules/legal_display/templates/backend/emergency-service.php:30
 msgid "Pompiers"
 msgstr "Pompiers"
 
-#: modules\legal_display/templates/backend/emergency-service.php:36
+#: modules/legal_display/templates/backend/emergency-service.php:36
 msgid "Emergency"
 msgstr "Toute urgence"
 
-#: modules\legal_display/templates/backend/emergency-service.php:42
+#: modules/legal_display/templates/backend/emergency-service.php:42
 msgid "Rights defender"
 msgstr "Défenseur des droits"
 
-#: modules\legal_display/templates/backend/emergency-service.php:48
+#: modules/legal_display/templates/backend/emergency-service.php:48
 msgid "Poison control center"
 msgstr "Anti-poison"
 
-#: modules\legal_display/templates/backend/occupational-health-service.php:16
+#: modules/legal_display/templates/backend/occupational-health-service.php:16
 msgid "Occupational health service"
 msgstr "Service de santé au travail"
 
-#: modules\legal_display/templates/backend/occupational-health-service.php:20
+#: modules/legal_display/templates/backend/occupational-health-service.php:20
 msgid "Full name of compagny doctor"
 msgstr "Nom du médecin du travail"
 
-#: modules\legal_display/templates/backend/safety-rules.php:16
+#: modules/legal_display/templates/backend/safety-rules.php:16
 msgid "Safety rules"
 msgstr "Consignes de sécurité"
 
-#: modules\legal_display/templates/backend/safety-rules.php:20
+#: modules/legal_display/templates/backend/safety-rules.php:20
 msgid "Responsible for preventing"
 msgstr "Responsable à prévenir"
 
-#: modules\legal_display/templates/backend/safety-rules.php:32
+#: modules/legal_display/templates/backend/safety-rules.php:32
 msgid "Location of detailed instructions"
 msgstr "Emplacement de la consigne détaillée"
 
-#: modules\legal_display/templates/backend/working-hours.php:16
+#: modules/legal_display/templates/backend/working-hours.php:16
 msgid "Working hours"
 msgstr "Horaires de travail"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:14
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:14
 msgid "Monday"
 msgstr "Lundi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:15
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:15
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:16
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:16
 msgid "Wednesday"
 msgstr "Mercredi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:17
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:17
 msgid "Thrusday"
 msgstr "Jeudi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:18
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:18
 msgid "Friday"
 msgstr "Vendredi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:19
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:19
 msgid "Saturday"
 msgstr "Samedi"
 
-#: modules\opening_time/shortcode/opening_time.shortcode.01.php:20
+#: modules/opening_time/shortcode/opening_time.shortcode.01.php:20
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: modules\opening_time/view/opening_time.view.php:16
+#: modules/opening_time/view/opening_time.view.php:16
 msgid "Opening time"
 msgstr "Horaires"
 
-#: modules\opening_time/view/opening_time.view.php:18
-#: modules\opening_time/view/opening_time.view.php:38
+#: modules/opening_time/view/opening_time.view.php:18
+#: modules/opening_time/view/opening_time.view.php:38
 msgid ":"
 msgstr ":"
 
-#: modules\opening_time/view/opening_time.view.php:24
+#: modules/opening_time/view/opening_time.view.php:24
 msgid "All days"
 msgstr "Tous les jours"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:75
-#: modules\recommendation/controller/recommendation.controller.01.php:129
+#: modules/recommendation/controller/recommendation.controller.01.php:75
+#: modules/recommendation/controller/recommendation.controller.01.php:129
 msgid "Recommendations"
 msgstr "Préconisations"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:116
+#: modules/recommendation/controller/recommendation.controller.01.php:116
 msgid "Search recommendations"
 msgstr "Rechercher dans les préconisations"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:117
+#: modules/recommendation/controller/recommendation.controller.01.php:117
 msgid "Popular recommendations"
 msgstr "Préconisations populaires"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:118
+#: modules/recommendation/controller/recommendation.controller.01.php:118
 msgid "All recommendations"
 msgstr "Toutes les préconisations"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:121
+#: modules/recommendation/controller/recommendation.controller.01.php:121
 msgid "Edit recommendation"
 msgstr "Editer la préconisation"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:122
+#: modules/recommendation/controller/recommendation.controller.01.php:122
 msgid "Update recommendation"
 msgstr "Mettre à jour la préconisation"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:123
+#: modules/recommendation/controller/recommendation.controller.01.php:123
 msgid "Add New recommendation"
 msgstr "Ajouter une préconisation"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:124
+#: modules/recommendation/controller/recommendation.controller.01.php:124
 msgid "New recommendation Name"
 msgstr "Nom de la préconisation"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:125
+#: modules/recommendation/controller/recommendation.controller.01.php:125
 msgid "Separate recommendations with commas"
 msgstr "Séparez les préconisations par des virgules"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:126
+#: modules/recommendation/controller/recommendation.controller.01.php:126
 msgid "Add or remove recommendations"
 msgstr "Ajouter ou supprimer une préconisation"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:127
+#: modules/recommendation/controller/recommendation.controller.01.php:127
 msgid "Choose from the most used recommendations"
 msgstr "Choisissez parmis les préconisations les plus utilisées"
 
-#: modules\recommendation/controller/recommendation.controller.01.php:128
+#: modules/recommendation/controller/recommendation.controller.01.php:128
 msgid "No recommendations found."
 msgstr "Aucune préconisation trouvée."
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:80
+#: modules/recommendation/controller/recommendation_category.controller.01.php:80
 msgid "Recommendation categories"
 msgstr "Catégories de préconisation"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:81
-#: modules\recommendation/controller/recommendation_category.controller.01.php:90
+#: modules/recommendation/controller/recommendation_category.controller.01.php:81
+#: modules/recommendation/controller/recommendation_category.controller.01.php:90
 msgid "Recommendation category"
 msgstr "Catégories de préconisation"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:82
+#: modules/recommendation/controller/recommendation_category.controller.01.php:82
 msgid "Search recommendation categories"
 msgstr "Rechercher dans les catégories de préconisations"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:83
+#: modules/recommendation/controller/recommendation_category.controller.01.php:83
 msgid "All recommendation categories"
 msgstr "Toutes les catégories de préconisation"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:86
+#: modules/recommendation/controller/recommendation_category.controller.01.php:86
 msgid "Edit recommendation category"
 msgstr "Editer les catégories de préconisations"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:87
+#: modules/recommendation/controller/recommendation_category.controller.01.php:87
 msgid "Update recommendation category"
 msgstr "Mettre à jour la catégorie de préconisation"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:88
+#: modules/recommendation/controller/recommendation_category.controller.01.php:88
 msgid "Add New recommendation category"
 msgstr "Ajouter une catégorie de préconisation"
 
-#: modules\recommendation/controller/recommendation_category.controller.01.php:89
+#: modules/recommendation/controller/recommendation_category.controller.01.php:89
 msgid "New recommendation category Name"
 msgstr "Nom de la catégorie de préconisation"
 
-#: modules\recommendation/templates/list.php:6
-#: modules\risk/templates/simple/list.php:7
+#: modules/recommendation/templates/list.php:6
+#: modules/risk/templates/simple/list.php:7
 msgid "Ref."
 msgstr "Réf."
 
-#: modules\recommendation/templates/list.php:7
+#: modules/recommendation/templates/list.php:7
 msgid "Recommendation name"
 msgstr "Nom de la préconisation"
 
-#: modules\recommendation/templates/list.php:8
-#: modules\risk/templates/simple/list.php:9
+#: modules/recommendation/templates/list.php:8
+#: modules/risk/templates/simple/list.php:9
 msgid "Comment"
 msgstr "Commentaire"
 
-#: modules\recommendation/templates/list.php:56
+#: modules/recommendation/templates/list.php:56
 msgid ""
 "There are no recommendation category to display here. Please create some "
 "recommendation category before."
 msgstr ""
 "Il n'y as pas de préconisation. Veuillez en créer pour pouvoir continuer."
 
-#: modules\risk/controller/risk.action.01.php:521
-#: modules\society/controller/workunit.action.01.php:211
+#: modules/risk/controller/risk.action.01.php:521
+#: modules/society/controller/workunit.action.01.php:211
 msgid "Nothing has been founded for association"
 msgstr "Aucun élément n'a été trouvé pour l'association"
 
-#: modules\risk/controller/risk.controller.01.php:61
-#: modules\risk/controller/risk.controller.01.php:63
-#: modules\risk/controller/risk.controller.01.php:64
-#: modules\risk/controller/risk.controller.01.php:66
-#: modules\risk/controller/risk.controller.01.php:205
+#: modules/risk/controller/risk.controller.01.php:61
+#: modules/risk/controller/risk.controller.01.php:63
+#: modules/risk/controller/risk.controller.01.php:64
+#: modules/risk/controller/risk.controller.01.php:66
+#: modules/risk/controller/risk.controller.01.php:205
 msgid "Risks"
 msgstr "Risques"
 
-#: modules\risk/controller/risk.controller.01.php:62
+#: modules/risk/controller/risk.controller.01.php:62
 msgid "Risk"
 msgstr "Risque"
 
-#: modules\risk/controller/risk.controller.01.php:65
-#: modules\society/controller/group.controller.01.php:59
-#: modules\society/controller/workunit.controller.01.php:56
+#: modules/risk/controller/risk.controller.01.php:65
+#: modules/society/controller/group.controller.01.php:59
+#: modules/society/controller/workunit.controller.01.php:56
 msgid "Parent Item:"
 msgstr "Parent du risque"
 
-#: modules\risk/controller/risk.controller.01.php:67
-#: modules\risk/controller/risk.controller.01.php:68
+#: modules/risk/controller/risk.controller.01.php:67
+#: modules/risk/controller/risk.controller.01.php:68
 msgid "Add risk"
 msgstr "Ajouter un risque"
 
-#: modules\risk/controller/risk.controller.01.php:69
+#: modules/risk/controller/risk.controller.01.php:69
 msgid "New risk"
 msgstr "Nouveau risque"
 
-#: modules\risk/controller/risk.controller.01.php:70
+#: modules/risk/controller/risk.controller.01.php:70
 msgid "Edit risk"
 msgstr "Editer le risque"
 
-#: modules\risk/controller/risk.controller.01.php:71
+#: modules/risk/controller/risk.controller.01.php:71
 msgid "Update risk"
 msgstr "Mettre à jour le risque"
 
-#: modules\risk/controller/risk.controller.01.php:72
+#: modules/risk/controller/risk.controller.01.php:72
 msgid "View risk"
 msgstr "Voir le risque"
 
-#: modules\risk/controller/risk.controller.01.php:73
+#: modules/risk/controller/risk.controller.01.php:73
 msgid "Search risk"
 msgstr "Recherche un risque"
 
-#: modules\risk/controller/risk.controller.01.php:74
-#: modules\society/controller/group.controller.01.php:68
-#: modules\society/controller/workunit.controller.01.php:65
+#: modules/risk/controller/risk.controller.01.php:74
+#: modules/society/controller/group.controller.01.php:68
+#: modules/society/controller/workunit.controller.01.php:65
 msgid "Not found"
 msgstr "Aucun résultat n'a été trouvé"
 
-#: modules\risk/controller/risk.controller.01.php:75
-#: modules\society/controller/group.controller.01.php:69
-#: modules\society/controller/workunit.controller.01.php:66
+#: modules/risk/controller/risk.controller.01.php:75
+#: modules/society/controller/group.controller.01.php:69
+#: modules/society/controller/workunit.controller.01.php:66
 msgid "Not found in Trash"
 msgstr "Aucun résultat n'a été trouvé dans la corbeille"
 
-#: modules\risk/controller/risk.controller.01.php:84
+#: modules/risk/controller/risk.controller.01.php:84
 msgid "Digirisk risk"
 msgstr "Risques pour Digirisk"
 
-#: modules\risk/controller/risk.controller.01.php:85
+#: modules/risk/controller/risk.controller.01.php:85
 msgid "Manage risks into digirisk"
 msgstr "Gestion des risques dans Digirisk"
 
-#: modules\risk/templates/simple/item-new.php:30
+#: modules/risk/templates/simple/item-new.php:30
 msgid "Add a comment for the risk"
 msgstr "Ajouter un commentaire pour le risque"
 
-#: modules\risk/templates/simple/list.php:6
+#: modules/risk/templates/simple/list.php:6
 msgid "Cot."
 msgstr "Cot."
 
-#: modules\risk/templates/simple/list.php:8
+#: modules/risk/templates/simple/list.php:8
 msgid "Danger"
 msgstr "Danger"
 
-#: modules\risk/templates/simple/method-evaluation-evarisk.php:12
+#: modules/risk/templates/simple/method-evaluation-evarisk.php:12
 msgid "Evaluation method Evarisk"
 msgstr "Méthode d'évaluation : Evarisk"
 
-#: modules\risk/templates/simple/method-evaluation-evarisk.php:61
+#: modules/risk/templates/simple/method-evaluation-evarisk.php:61
 msgid "Evaluate risk"
 msgstr "Enregistrer la cotation"
 
-#: modules\society/controller/group.action.01.php:52
+#: modules/society/controller/group.action.01.php:52
 msgid "Undefined"
 msgstr "Indéfini"
 
-#: modules\society/controller/group.action.01.php:152
-#: modules\society/controller/workunit.action.01.php:182
+#: modules/society/controller/group.action.01.php:152
+#: modules/society/controller/workunit.action.01.php:182
 msgid "Element to load have not been found"
 msgstr "L'élément demandé n'a pas été trouvé"
 
-#: modules\society/controller/group.controller.01.php:55
-#: modules\society/controller/group.controller.01.php:57
-#: modules\society/controller/group.controller.01.php:58
-#: modules\society/controller/group.controller.01.php:60
+#: modules/society/controller/group.controller.01.php:55
+#: modules/society/controller/group.controller.01.php:57
+#: modules/society/controller/group.controller.01.php:58
+#: modules/society/controller/group.controller.01.php:60
 msgid "Societies"
 msgstr "Sociétés"
 
-#: modules\society/controller/group.controller.01.php:56
+#: modules/society/controller/group.controller.01.php:56
 msgid "Society"
 msgstr "Société"
 
-#: modules\society/controller/group.controller.01.php:61
-#: modules\society/controller/group.controller.01.php:62
+#: modules/society/controller/group.controller.01.php:61
+#: modules/society/controller/group.controller.01.php:62
 msgid "Add society"
 msgstr "Ajouter une société"
 
-#: modules\society/controller/group.controller.01.php:63
+#: modules/society/controller/group.controller.01.php:63
 msgid "New society"
 msgstr "Nouvelle société"
 
-#: modules\society/controller/group.controller.01.php:64
+#: modules/society/controller/group.controller.01.php:64
 msgid "Edit society"
 msgstr "Editer une société"
 
-#: modules\society/controller/group.controller.01.php:65
+#: modules/society/controller/group.controller.01.php:65
 msgid "Update society"
 msgstr "Mettre à jour la société"
 
-#: modules\society/controller/group.controller.01.php:66
+#: modules/society/controller/group.controller.01.php:66
 msgid "View society"
 msgstr "Voir la société"
 
-#: modules\society/controller/group.controller.01.php:67
+#: modules/society/controller/group.controller.01.php:67
 msgid "Search society"
 msgstr "Rechercher dans les sociétés"
 
-#: modules\society/controller/group.controller.01.php:78
+#: modules/society/controller/group.controller.01.php:78
 msgid "Digirisk society"
 msgstr "Société dans Digirisk"
 
-#: modules\society/controller/group.controller.01.php:79
-#: modules\society/controller/workunit.controller.01.php:76
+#: modules/society/controller/group.controller.01.php:79
+#: modules/society/controller/workunit.controller.01.php:76
 msgid "Manage societies into digirisk"
 msgstr "Gestion des sociétés dans Digirisk"
 
-#: modules\society/controller/group.controller.01.php:211
+#: modules/society/controller/group.controller.01.php:213
 msgid "DUER Generation"
 msgstr "Génération de votre DUER"
 
-#: modules\society/controller/group.controller.01.php:215
+#: modules/society/controller/group.controller.01.php:217
 msgid "Document list"
 msgstr "Liste des DUER"
 
-#: modules\society/controller/group.controller.01.php:219
+#: modules/society/controller/group.controller.01.php:221
 msgid "Configuration"
 msgstr "Configuration"
 
-#: modules\society/controller/society.controller.01.php:33
+#: modules/society/controller/society.controller.01.php:33
 msgid "Digirisk : Risk evaluation"
 msgstr "Digirisk: Evaluation des risques"
 
-#: modules\society/controller/workunit.action.01.php:95
+#: modules/society/controller/workunit.action.01.php:95
 msgid "Work unit have been created succesfully"
 msgstr "L'unité de travail a été créée avec succès"
 
-#: modules\society/controller/workunit.action.01.php:104
+#: modules/society/controller/workunit.action.01.php:104
 msgid "An error occured while creating work unit"
 msgstr "Une erreur est survenue lors de la création de l'unité de travail"
 
-#: modules\society/controller/workunit.action.01.php:107
+#: modules/society/controller/workunit.action.01.php:107
 #, php-format
 msgid "Work unit could not been create. request: %s response: %s"
 msgstr "L'unité de travail n'a pu être créée. Demande: %s, résultat: %s"
 
-#: modules\society/controller/workunit.action.01.php:301
+#: modules/society/controller/workunit.action.01.php:301
 msgid "No picture defined"
 msgstr "Pas d'image définie"
 
-#: modules\society/controller/workunit.controller.01.php:52
-#: modules\society/controller/workunit.controller.01.php:54
-#: modules\society/controller/workunit.controller.01.php:55
-#: modules\society/controller/workunit.controller.01.php:57
+#: modules/society/controller/workunit.controller.01.php:52
+#: modules/society/controller/workunit.controller.01.php:54
+#: modules/society/controller/workunit.controller.01.php:55
+#: modules/society/controller/workunit.controller.01.php:57
 msgid "Work units"
 msgstr "Unités de travail"
 
-#: modules\society/controller/workunit.controller.01.php:53
+#: modules/society/controller/workunit.controller.01.php:53
 msgid "Work unit"
 msgstr "Unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:58
-#: modules\society/controller/workunit.controller.01.php:59
+#: modules/society/controller/workunit.controller.01.php:58
+#: modules/society/controller/workunit.controller.01.php:59
 msgid "Add a work unit"
 msgstr "Ajouter une unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:60
+#: modules/society/controller/workunit.controller.01.php:60
 msgid "New a work unit"
 msgstr "Nouvelle unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:61
+#: modules/society/controller/workunit.controller.01.php:61
 msgid "Edit a work unit"
 msgstr "Editer une unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:62
+#: modules/society/controller/workunit.controller.01.php:62
 msgid "Update a work unit"
 msgstr "Mettre à jour l'unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:63
+#: modules/society/controller/workunit.controller.01.php:63
 msgid "View a work unit"
 msgstr "Voir l'unité de travail"
 
-#: modules\society/controller/workunit.controller.01.php:64
+#: modules/society/controller/workunit.controller.01.php:64
 msgid "Search a work unit"
 msgstr "Rechercher dans les unités de travail"
 
-#: modules\society/controller/workunit.controller.01.php:75
+#: modules/society/controller/workunit.controller.01.php:75
 msgid "Digirisk work unit"
 msgstr "Unité de travail dans Digirisk"
 
-#: modules\society/templates/group/configuration/form.php:37
+#: modules/society/templates/group/configuration/form.php:37
 msgid "Save Changes"
-msgstr ""
+msgstr "Enregistrer les changements"
 
-#: modules\society/templates/group/sheet-form.php:3
+#: modules/society/templates/group/sheet-form.php:3
 msgid ""
 "\n"
 "\n"
@@ -1015,8 +1017,26 @@ msgid ""
 "* Étape 4\n"
 "- Traitement et rédaction du document unique"
 msgstr ""
+"\n"
+"\n"
+"* Étape 1 : Récupération des informations\n"
+"- Visite des locaux\n"
+"- Récupération des données du personnel\n"
+"\n"
+"* Étape 2 : Définition de la méthodologie et de document\n"
+"- Validation des fiches d'unité de travail standard\n"
+"- Validation de l'arborescence des unités\n"
+"\n"
+"* Étape 3  : Réalisation de l'étude de risques\n"
+"- Sensibilisation des personnels aux risques et aux dangers\n"
+"- Création des unités de travail avec le personnel et le ou les "
+"responsables\n"
+"- Évaluations des risques par unités de travail avec le personnel\n"
+"\n"
+"* Étape 4\n"
+"- Traitement et rédaction du document unique"
 
-#: modules\society/templates/group/sheet-form.php:52
+#: modules/society/templates/group/sheet-form.php:52
 msgid ""
 "Risk awareness is defined in the \"ed840\" edited by INRS.\n"
 "In the current document you will find:\n"
@@ -1029,157 +1049,157 @@ msgstr ""
 "- La définition d'un risque, d'un danger et un schéma explicatif\n"
 "- Les explications concernant les différentes méthodes d'évaluation"
 
-#: modules\society/templates/group/sheet-form.php:78
+#: modules/society/templates/group/sheet-form.php:78
 msgid "Document name"
 msgstr "Nom du document"
 
-#: modules\society/templates/group/sheet-form.php:79
+#: modules/society/templates/group/sheet-form.php:79
 msgid "Start audit date"
 msgstr "Date du début de l'audit"
 
-#: modules\society/templates/group/sheet-form.php:80
+#: modules/society/templates/group/sheet-form.php:80
 msgid "End audit date"
 msgstr "Date de la fin de l'audit"
 
-#: modules\society/templates/group/sheet-form.php:81
+#: modules/society/templates/group/sheet-form.php:81
 msgid "Transmitter"
 msgstr "Emetteur"
 
-#: modules\society/templates/group/sheet-form.php:82
+#: modules/society/templates/group/sheet-form.php:82
 msgid "Company name"
 msgstr "Nom de la société"
 
-#: modules\society/templates/group/sheet-form.php:83
+#: modules/society/templates/group/sheet-form.php:83
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: modules\society/templates/group/sheet-form.php:85
+#: modules/society/templates/group/sheet-form.php:85
 msgid "Cellphone"
 msgstr "Téléphone portable"
 
-#: modules\society/templates/group/sheet-form.php:88
+#: modules/society/templates/group/sheet-form.php:88
 msgid "Methodology"
 msgstr "Méthodologie"
 
-#: modules\society/templates/group/sheet-form.php:89
+#: modules/society/templates/group/sheet-form.php:89
 msgid "Sources"
 msgstr "Sources"
 
-#: modules\society/templates/group/sheet-form.php:90
+#: modules/society/templates/group/sheet-form.php:90
 msgid "Important note"
 msgstr "Note importante"
 
-#: modules\society/templates/group/sheet-form.php:91
+#: modules/society/templates/group/sheet-form.php:91
 msgid "Location"
 msgstr "Localisation"
 
-#: modules\society/templates/group/sheet-form.php:94
+#: modules/society/templates/group/sheet-form.php:94
 msgid "Generate DUER"
 msgstr "Générer le DUER"
 
-#: modules\society/templates/workunit/list.php:19
+#: modules/society/templates/workunit/list.php:19
 msgid "New work unit"
 msgstr "Nouvelle unité de travail"
 
-#: modules\society/templates/workunit/sheet-description.php:9
+#: modules/society/templates/workunit/sheet-description.php:9
 msgid "Risk number"
 msgstr "Nombre de risques"
 
-#: modules\society/templates/workunit/sheet-description.php:10
+#: modules/society/templates/workunit/sheet-description.php:10
 msgid "Affected users"
 msgstr "Utilisateurs affectés"
 
-#: modules\society/templates/workunit/sheet-description.php:11
+#: modules/society/templates/workunit/sheet-description.php:11
 msgid "Affected evaluators"
 msgstr "Evaluateurs affectés"
 
-#: modules\society/templates/workunit/sheet-simple.php:5
+#: modules/society/templates/workunit/sheet-simple.php:5
 #, php-format
 msgid "Last update on %s"
 msgstr "Dernière mise à jour le %s"
 
-#: modules\user/controller/user.controller.01.php:57
+#: modules/user/controller/user.controller.01.php:57
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: modules\user/controller/user.controller.01.php:100
+#: modules/user/controller/user.controller.01.php:100
 msgid "Create or import user easyly with a form "
 msgstr "Créer ou importer plusieurs utilisateurs en même temps"
 
-#: modules\user/controller/user.controller.01.php:100
+#: modules/user/controller/user.controller.01.php:100
 msgid "Digirisk : import"
 msgstr "Digirisk : import"
 
-#: modules\user/template/backend/list-user-to-assign.php:9
-#: modules\user/template/backend/page-staff.php:23
+#: modules/user/template/backend/list-user-to-assign.php:9
+#: modules/user/template/backend/page-staff.php:23
 msgid "Firtname"
 msgstr "Prénom"
 
-#: modules\user/template/backend/page-staff.php:9
+#: modules/user/template/backend/page-staff.php:9
 msgid "Domain mail"
 msgstr "Domaine de l'email"
 
-#: modules\user/template/backend/page-staff.php:24
+#: modules/user/template/backend/page-staff.php:24
 msgid "Email"
 msgstr "Email"
 
-#: modules\user/template/backend/page-staff.php:57
+#: modules/user/template/backend/page-staff.php:57
 msgid "Social security number"
 msgstr "Numéro de sécurité sociale"
 
-#: modules\user/template/backend/page-staff.php:60
+#: modules/user/template/backend/page-staff.php:60
 msgid "Job"
 msgstr "Profession"
 
-#: modules\user/template/backend/page-staff.php:61
+#: modules/user/template/backend/page-staff.php:61
 msgid "Birthday"
 msgstr "Date de naissance"
 
-#: modules\user/template/backend/page-staff.php:62
+#: modules/user/template/backend/page-staff.php:62
 msgid "Additional adress"
 msgstr "Complément d'adresse"
 
-#: modules\user/template/backend/page-staff.php:63
+#: modules/user/template/backend/page-staff.php:63
 msgid "Release date of society"
 msgstr "Date de sortie de la société"
 
-#: modules\user/template/backend/page-staff.php:64
+#: modules/user/template/backend/page-staff.php:64
 msgid "Professional qualification"
 msgstr "Qualification professionnelle"
 
-#: modules\user/template/backend/page-staff.php:65
+#: modules/user/template/backend/page-staff.php:65
 msgid "Sex"
 msgstr "Sexe"
 
-#: modules\user/template/backend/page-staff.php:67
+#: modules/user/template/backend/page-staff.php:67
 msgid "Insurance compagny"
 msgstr "Compagnie d'assurance"
 
-#: modules\user/template/backend/page-staff.php:68
+#: modules/user/template/backend/page-staff.php:68
 msgid "Nationality"
 msgstr "Nationalité"
 
-#: modules\user/template/backend/page-staff.php:72
+#: modules/user/template/backend/page-staff.php:72
 msgid "Add"
 msgstr "Ajouter"
 
-#: modules\user/template/backend/page-staff.php:77
+#: modules/user/template/backend/page-staff.php:77
 msgid "Add staff from file"
 msgstr "Importer du personnel depuis un fichier"
 
-#: modules\user/template/backend/page-staff.php:79
+#: modules/user/template/backend/page-staff.php:79
 msgid "You can download the file for build the import here"
 msgstr "Télécharger le fichier d'exemple pour construire votre propre import"
 
-#: modules\user/template/backend/page-staff.php:80
+#: modules/user/template/backend/page-staff.php:80
 msgid "Each lines will have the following format :"
 msgstr "Chaque ligne doit correspondre au format suivant : "
 
-#: modules\user/template/backend/page-staff.php:81
+#: modules/user/template/backend/page-staff.php:81
 msgid "The fields Firstname and Mail are mandatory"
 msgstr "Les champs Prénom et Email sont obligatoires"
 
-#: modules\user/template/backend/page-staff.php:82
+#: modules/user/template/backend/page-staff.php:82
 msgid ""
 "You do not have to fill in all fields but all separator must be present. "
 "Exemple username;;;;mail;;;;;;;;;;;"
