@@ -10,7 +10,10 @@
 				<?php wp_nonce_field( 'ajax_create_risk' ); ?>
 				<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
 				<span class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
-					<i class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
+					<div class="mask">
+						<i class="dashicons dashicons-plus"></i>
+					</div>
+					<i title="<?php _e( '', '' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
 					<input type="hidden" name="thumbnail_id" value="" />
 					<img data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk" width="50" height="50" class="hidden wpeo-upload-media attachment-digirisk-element-miniature size-digirisk-element-miniature wp-post-image" alt="" sizes="(max-width: 50px) 100vw, 50px">
 				</span>
