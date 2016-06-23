@@ -33,7 +33,7 @@ if ( $risk_definition != null ):
 		</span>
 
 		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk_definition->option[ 'unique_identifier' ]; ?> - <?php echo $risk_definition->evaluation->option[ 'unique_identifier' ]?></span>
-		<span class="wp-digi-risk-list-column-danger"><?php echo $risk_definition->danger->name; ?></span>
+		<span class="wp-digi-risk-list-column-danger"><?php echo wp_get_attachment_image( $risk_definition->danger->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $risk_definition->danger->name ) ); ?></span>
 		<span class="wp-digi-risk-comment" >
 			<ul>
 				<?php if ( !empty( $risk_definition->comment ) ) : ?>

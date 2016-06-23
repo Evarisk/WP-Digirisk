@@ -13,13 +13,13 @@
 					<div class="mask">
 						<span class="dashicons dashicons-plus"></span>
 					</div>
-					<i title="<?php _e( '', '' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
+					<i title="<?php _e( 'Upload image', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
 					<input type="hidden" name="thumbnail_id" value="" />
 					<img data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk" width="50" height="50" class="hidden wpeo-upload-media attachment-digirisk-element-miniature size-digirisk-element-miniature wp-post-image" alt="" sizes="(max-width: 50px) 100vw, 50px">
 				</span>
-				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="1" />
+				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
 				<span data-risk_level="1" data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation wp-digi-risk-level-1" >
-					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new" ><?php echo $wpdigi_evaluation_method_controller->get_value_treshold( 1 ); ?></div>
+					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Select Cotation', 'wpdigi-i18n' ); ?></div>
 					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
 						<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >1</li>
 						<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >48</li>

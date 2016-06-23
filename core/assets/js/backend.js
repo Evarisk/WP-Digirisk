@@ -653,36 +653,40 @@ var digi_risk = {
 
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
       'beforeSubmit': function() {
-        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() ) {
-          jQuery( '.wp-digi-risk-item-new' ).addClass( 'wp-digi-bloc-loading' );
-          jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid rgba(0,0,0,.2) 1px' );
-        }
-        else {
-          jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
+        var element_required = false;
 
+        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_evaluation_level"]' ).val() == 0 ) {
+          jQuery( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'solid red 2px' );
+          element_required = true;
+        }
+
+        if ( !jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() ) {
+          jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
+          element_required = true;
+        }
+
+        if ( !jQuery ( element ).closest( 'form' ).find( 'input[name="risk_comment_date"]' ).val() ) {
+          jQuery( element ).closest( 'form' ).find( 'input[name="risk_comment_date"]' ).css( 'border', 'solid red 2px' );
+          element_required = true;
+        }
+
+        if ( element_required ) {
           return false;
         }
+
+        jQuery( '.wp-digi-risk-item-new' ).addClass( 'wp-digi-bloc-loading' );
       },
 			'success': function( response ) {
 				jQuery( '.wp-digi-risk-item-new' ).removeClass( 'wp-digi-bloc-loading' );
 				jQuery( '.wp-digi-risk.wp-digi-list' ).closest( 'div' ).replaceWith( response.data.template );
 
-				// Clean form
-				var risk_level = jQuery( ".wp-digi-risk-item-new .wp-digi-risk-list-column-cotation" ).attr( "data-risk_level" );
-				jQuery( ".wp-digi-risk-item-new .wp-digi-risk-list-column-cotation" ).attr( "data-risk_level", 1 );
-				jQuery( ".wp-digi-risk-item-new .wp-digi-risk-level-new" ).removeClass( "wp-digi-risk-level-" + risk_level ).addClass( "wp-digi-risk-level-1" ).html( "1" );
-				jQuery( ".wp-digi-risk-item-new .wp-digi-risk-list-column-cotation" ).removeClass( "wp-digi-risk-level-" + risk_level ).addClass( "wp-digi-risk-level-1" );
-
 				jQuery( '.wp-digi-risk-item-new toggle' ).html( digi_risk.old_danger );
 
-				jQuery( element ).closest( 'form' ).clearForm();
 
-				jQuery( ".wp-digi-risk-item-new input[name='risk_evaluation_level']" ).val( 1 );
-				jQuery( ".wp-digi-risk-item-new input[name='risk_comment_date']" ).val( digi_risk.old_date );
+				jQuery( ".wp-digi-risk-item-new input[name='risk_evaluation_level']" ).val( 0 );
 				jQuery( ".wp-digi-risk-item-new input[name='risk_danger_id']" ).val( "" );
 
 				digi_global.init();
-
 			}
 		} );
 	},
