@@ -15,7 +15,9 @@
 		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
 	}
 	else if ( is_file( get_attached_file( $document_id ) ) ) {
-		$document_full_path = get_attached_file( $document_id );
+		/**	Voir pourquoi Alex a mis un scotch ici - merci Jimmy */
+		$wp_upload_dir = wp_upload_dir();
+		$document_full_path = str_replace( $wp_upload_dir[ 'path' ], $wp_upload_dir[ 'url'], get_attached_file( $document_id ) );
 	}
 
 	require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
