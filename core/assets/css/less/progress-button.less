@@ -4,16 +4,6 @@
 	box-sizing: border-box;
 }
 
-@font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon/icomoon.eot');
-	src:url('../fonts/icomoon/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon/icomoon.ttf') format('truetype'),
-		url('../fonts/icomoon/icomoon.woff') format('woff'),
-		url('../fonts/icomoon/icomoon.svg#icomoon') format('svg');
-}
 
 /* General styles for all types of buttons */
 .progress-button {
@@ -45,18 +35,18 @@
 	position: absolute;
 	right: 20px;
 	color: #0e7138;
-	font-family: "icomoon";
+	font-family: 'dashicons';
 	opacity: 0;
 	-webkit-transition: opacity 0.3s 0.3s;
 	transition: opacity 0.3s 0.3s;
 }
 
 .progress-button .content::before {
-	content: "\e600"; /* Checkmark for success */
+	content: "\f147"; /* Checkmark for success */
 }
 
 .progress-button .content::after {
-	content: "\e601"; /* Cross for error */
+	content: "\f335"; /* Cross for error */
 }
 
 .progress-button.state-success .content::before,
