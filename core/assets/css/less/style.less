@@ -10,12 +10,13 @@
 @import 'digirisk/core/assets/css/less/form.less';
 @import 'digirisk/core/assets/css/less/evaluation-method.less';
 @import 'digirisk/core/assets/css/less/installer.less';
-@import 'digirisk/core/assets/css/less/responsive.less'; 
-@import 'digirisk/core/assets/css/less/gallery.less'; 
- 
-@c1: #3495f0; 
-@dark_c1: #1360c8; 
-@c2: #272a35;  
+@import 'digirisk/core/assets/css/less/responsive.less';
+@import 'digirisk/core/assets/css/less/gallery.less';
+@import 'digirisk/core/assets/css/less/progress-button.less'; 
+
+@c1: #3495f0;
+@dark_c1: #1360c8;
+@c2: #272a35;
 @dark_c2: #1c1e26;
 
 @red: #e05353; @yellow: #e9ad4f; @green: #47e58e; @pink: #e454a2; @purple: #734fe9;
@@ -25,13 +26,13 @@
 /* -------------------------------------
 		FUNCTIONS
 ------------------------------------- */
-.cls { 
+.cls {
 	&:after {
 		display: table;
 		content: '';
 		clear: both;
 	}
-} 
+}
 .transition(@what: all, @time: 0.4s, @transition: cubic-bezier(0.190, 1.000, 0.220, 1.000)) {
 	-webkit-transition: @what @time @transition;
 	-moz-transition:    @what @time @transition;
@@ -42,13 +43,13 @@
 input, input:focus {
 	outline: none;
 	box-shadow: none;
-} 
-[class *='gridwrapper'] > * { 
+}
+[class *='gridwrapper'] > * {
 	float: left;
 	padding: 0 5px 0 5px;
 	.cls;
 	box-sizing: border-box;
-} 
+}
 /* Padding précis pour que le contenu soit aligné avec le reste */
 [class *='gridwrapper'] > *:first-child {
 	padding: 0 5px 0 0 !important;
