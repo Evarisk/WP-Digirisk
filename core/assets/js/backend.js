@@ -960,6 +960,12 @@ var digi_risk = {
 		}
 	},
 
+  send_risk: function() {
+    jQuery( '.wp-digi-table-item-edit' ).each( function() {
+      jQuery( this ).find( '.dashicons-edit' ).click();
+    } );
+  },
+
 	create_risk: function( instance ) {
     var element = instance.button;
 
@@ -1032,6 +1038,8 @@ var digi_risk = {
 	load_risk: function( event, element ) {
 		event.preventDefault();
 
+    digi_risk.send_risk();
+
 		var risk_id = jQuery( element ).data( 'id' );
 		jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
 
@@ -1043,6 +1051,7 @@ var digi_risk = {
 		};
 
 		jQuery.post( ajaxurl, data, function( response ) {
+      jQuery( '.wp-digi-list-item .dashicons-edit' ).hide();
 			jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
 			jQuery( '.wp-digi-risk .wp-digi-list-item[data-risk-id="' + risk_id + '"]' ).replaceWith( response.data.template );
 			jQuery( '.wp-digi-risk .wp-digi-list-item[data-risk-id="' + risk_id + '"] .wpdigi-method-evaluation-render' ).html( response.data.table_evaluation_method );
@@ -1058,6 +1067,7 @@ var digi_risk = {
 
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
 			'success': function( response ) {
+        jQuery( '.wp-digi-list-item .dashicons-edit' ).show();
 				jQuery( '.wp-digi-risk.wp-digi-list' ).closest( 'div' ).replaceWith( response.data.template );
 			}
 		} );

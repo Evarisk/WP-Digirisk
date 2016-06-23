@@ -9,7 +9,7 @@
 				<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 				<?php wp_nonce_field( 'ajax_create_risk' ); ?>
 				<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
-				<span class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
+				<span title="<?php _e( 'Upload media', 'wpdigi-i18n' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
 					<div class="mask">
 						<span class="dashicons dashicons-plus"></span>
 					</div>
