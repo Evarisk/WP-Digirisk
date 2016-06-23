@@ -208,6 +208,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 
 		$workunit->option['associated_risk'][] = $risk->id;
 		${$global}->update( $workunit );
+		$element = ${$global}->show( $workunit->id );
 
 		$_POST['risk_comment_date'] = str_replace( '/', '-', $_POST['risk_comment_date'] );
 
@@ -226,10 +227,40 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 
 		$risk_id = $risk->id;
 		$risk = $wpdigi_risk_ctr->get_risk( $risk->id );
-		$i = 1;
+		$list_risk_id = $element->option['associated_risk'];
+
+		$list_risk = array();
+		foreach ( $list_risk_id as $risk_id ) {
+			$list_risk[] = $this->get_risk( $risk_id );
+		}
+
+		if ( count( $list_risk ) > 1 ) {
+			usort( $list_risk, function( $a, $b ) {
+				if( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] == $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) {
+					return 0;
+				}
+
+				return ( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] > $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) ? -1 : 1;
+			} );
+		}
 
 		ob_start();
-		$wpdigi_risk_ctr->display_risk_list( $workunit );
+		?>
+		<li class="wp-digi-risk-list-header wp-digi-table-header" >
+			<span class="wp-digi-risk-list-column-thumbnail" >&nbsp;</span>
+			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-risks-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-risks-i18n' ); ?></span>
+			<span><?php _e( 'Danger', 'wpdigi-risks-i18n' ); ?></span>
+			<span><?php _e( 'Comment', 'wpdigi-risks-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
+		</li>
+		<?php
+		if ( !empty( $list_risk ) ) {
+			foreach ( $list_risk as $risk ) {
+				require( wpdigi_utils::get_template_part( WPDIGI_RISKS_DIR, WPDIGI_RISKS_TEMPLATES_MAIN_DIR, 'simple', 'list', 'item' ) );
+			}
+		}
+
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

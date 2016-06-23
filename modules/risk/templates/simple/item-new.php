@@ -31,7 +31,9 @@
 				<span class="wp-digi-risk-select"><?php global $wpdigi_danger_category_ctr; $wpdigi_danger_category_ctr->display_category_danger( array( 'with_danger' => true, ) ); ?></span>
 				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="risk_comment_date" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
 				<span class="wp-digi-risk-comment" ><textarea name="risk_comment" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'wpdigi-risks-i18n' ); ?>" ></textarea></span>
-				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" ><a href="#" class="wp-digi-action dashicons dashicons-plus" ></a></span>
+				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" >
+					<button class="progress-button" data-style="fill" data-horizontal><i class="dashicons dashicons-plus"></i></button>
+				</span>
 			</li>
 		</ul>
 

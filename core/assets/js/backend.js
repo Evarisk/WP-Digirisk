@@ -1,5 +1,304 @@
 "use strict";
 
+/*!
+ * classie - class helper functions
+ * from bonzo https://github.com/ded/bonzo
+ *
+ * classie.has( elem, 'my-class' ) -> true/false
+ * classie.add( elem, 'my-new-class' )
+ * classie.remove( elem, 'my-unwanted-class' )
+ * classie.toggle( elem, 'my-class' )
+ */
+
+/*jshint browser: true, strict: true, undef: true */
+/*global define: false */
+
+( function( window ) {
+
+'use strict';
+
+// class helper functions from bonzo https://github.com/ded/bonzo
+
+function classReg( className ) {
+  return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+}
+
+// classList support for class management
+// altho to be fair, the api sucks because it won't accept multiple classes at once
+var hasClass, addClass, removeClass;
+
+if ( 'classList' in document.documentElement ) {
+  hasClass = function( elem, c ) {
+    return elem.classList.contains( c );
+  };
+  addClass = function( elem, c ) {
+    elem.classList.add( c );
+  };
+  removeClass = function( elem, c ) {
+    elem.classList.remove( c );
+  };
+}
+else {
+  hasClass = function( elem, c ) {
+    return classReg( c ).test( elem.className );
+  };
+  addClass = function( elem, c ) {
+    if ( !hasClass( elem, c ) ) {
+      elem.className = elem.className + ' ' + c;
+    }
+  };
+  removeClass = function( elem, c ) {
+    elem.className = elem.className.replace( classReg( c ), ' ' );
+  };
+}
+
+function toggleClass( elem, c ) {
+  var fn = hasClass( elem, c ) ? removeClass : addClass;
+  fn( elem, c );
+}
+
+var classie = {
+  // full names
+  hasClass: hasClass,
+  addClass: addClass,
+  removeClass: removeClass,
+  toggleClass: toggleClass,
+  // short names
+  has: hasClass,
+  add: addClass,
+  remove: removeClass,
+  toggle: toggleClass
+};
+
+// transport
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( classie );
+} else {
+  // browser global
+  window.classie = classie;
+}
+
+})( window );
+
+
+/**
+ * progressButton.js v1.0.0
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+;( function( window ) {
+
+	'use strict';
+
+	// https://gist.github.com/edankwan/4389601
+	Modernizr.addTest('csstransformspreserve3d', function () {
+		var prop = Modernizr.prefixed('transformStyle');
+		var val = 'preserve-3d';
+		var computedStyle;
+		if(!prop) return false;
+
+		prop = prop.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
+
+		Modernizr.testStyles('#modernizr{' + prop + ':' + val + ';}', function (el, rule) {
+			computedStyle = window.getComputedStyle ? getComputedStyle(el, null).getPropertyValue(prop) : '';
+		});
+
+		return (computedStyle === val);
+	});
+
+	function extend( a, b ) {
+		for( var key in b ) {
+			if( b.hasOwnProperty( key ) ) {
+				a[key] = b[key];
+			}
+		}
+		return a;
+	}
+
+	// support
+	var support = { transitions : Modernizr.csstransitions, transforms3d : Modernizr.csstransforms3d && Modernizr.csstransformspreserve3d },
+		// transition end event name
+		transEndEventNames = {
+			'WebkitTransition': 'webkitTransitionEnd',
+			'MozTransition': 'transitionend',
+			'OTransition': 'oTransitionEnd',
+			'msTransition': 'MSTransitionEnd',
+			'transition': 'transitionend'
+		},
+		transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ];
+
+	function ProgressButton( el, options ) {
+		this.button = el;
+		this.options = extend( {}, this.options );
+  		extend( this.options, options );
+  		this._init();
+	}
+
+	ProgressButton.prototype.options = {
+		// time in ms that the status (success or error will be displayed)
+		// during this time the button will be disabled
+		statusTime : 1500
+	};
+
+	ProgressButton.prototype._init = function() {
+		this._validate();
+		// create structure
+		this._create();
+		// init events
+		this._initEvents();
+	};
+
+	ProgressButton.prototype._validate = function() {
+		// we will consider the fill/horizontal as default
+		if( this.button.getAttribute( 'data-style' ) === null ) {
+			this.button.setAttribute( 'data-style', 'fill' );
+		}
+		if( this.button.getAttribute( 'data-vertical' ) === null && this.button.getAttribute( 'data-horizontal' ) === null ) {
+			this.button.setAttribute( 'data-horizontal', '' );
+		}
+		if( !support.transforms3d && this.button.getAttribute( 'data-perspective' ) !== null ) {
+			this.button.removeAttribute( 'data-perspective' );
+			this.button.setAttribute( 'data-style', 'fill' );
+			this.button.removeAttribute( 'data-vertical' );
+			this.button.setAttribute( 'data-horizontal', '' );
+		}
+	};
+
+	ProgressButton.prototype._create = function() {
+		var textEl = document.createElement( 'span' );
+		textEl.className = 'content';
+		textEl.innerHTML = this.button.innerHTML;
+		var progressEl = document.createElement( 'span' );
+		progressEl.className = 'progress';
+
+		var progressInnerEl = document.createElement( 'span' );
+		progressInnerEl.className = 'progress-inner';
+		progressEl.appendChild( progressInnerEl );
+		// clear content
+		this.button.innerHTML = '';
+
+		if( this.button.getAttribute( 'data-perspective' ) !== null ) {
+			var progressWrapEl = document.createElement( 'span' );
+			progressWrapEl.className = 'progress-wrap';
+			progressWrapEl.appendChild( textEl );
+			progressWrapEl.appendChild( progressEl );
+			this.button.appendChild( progressWrapEl );
+		}
+		else {
+			this.button.appendChild( textEl );
+			this.button.appendChild( progressEl );
+		}
+
+		// the element that serves as the progress bar
+		this.progress = progressInnerEl;
+
+		// property to change on the progress element
+		if( this.button.getAttribute( 'data-horizontal' ) !== null ) {
+			this.progressProp = 'width';
+		}
+		else if( this.button.getAttribute( 'data-vertical' ) !== null ) {
+			this.progressProp = 'height';
+		}
+		this._enable();
+	};
+
+	ProgressButton.prototype._setProgress = function( val ) {
+		this.progress.style[ this.progressProp ] = 100 * val + '%';
+	};
+
+	ProgressButton.prototype._initEvents = function() {
+		var self = this;
+		this.button.addEventListener( 'click', function() {
+			// disable the button
+			self.button.setAttribute( 'disabled', '' );
+			// add class state-loading to the button (applies a specific transform to the button depending which data-style is defined - defined in the stylesheets)
+			classie.remove( self.progress, 'notransition' );
+			classie.add( this, 'state-loading' );
+
+			setTimeout( function() {
+				if( typeof self.options.callback === 'function' ) {
+					self.options.callback( self );
+				}
+				else {
+					self._setProgress( 1 );
+					var onEndTransFn = function( ev ) {
+						if( support.transitions && ev.propertyName !== self.progressProp ) return;
+						this.removeEventListener( transEndEventName, onEndTransFn );
+						self._stop();
+					};
+
+					if( support.transitions ) {
+						self.progress.addEventListener( transEndEventName, onEndTransFn );
+					}
+					else {
+						onEndTransFn.call();
+					}
+
+				}
+			},
+			self.button.getAttribute( 'data-style' ) === 'fill' ||
+			self.button.getAttribute( 'data-style' ) === 'top-line' ||
+			self.button.getAttribute( 'data-style' ) === 'lateral-lines' ? 0 : 200 ); // TODO: change timeout to transitionend event callback
+		} );
+	};
+
+	ProgressButton.prototype._stop = function( status ) {
+		var self = this;
+
+		setTimeout( function() {
+			// fade out progress bar
+			self.progress.style.opacity = 0;
+			var onEndTransFn = function( ev ) {
+				if( support.transitions && ev.propertyName !== 'opacity' ) return;
+				this.removeEventListener( transEndEventName, onEndTransFn );
+				classie.add( self.progress, 'notransition' );
+				self.progress.style[ self.progressProp ] = '0%';
+				self.progress.style.opacity = 1;
+			};
+
+			if( support.transitions ) {
+				self.progress.addEventListener( transEndEventName, onEndTransFn );
+			}
+			else {
+				onEndTransFn.call();
+			}
+
+
+			// add class state-success to the button
+			if( typeof status === 'number' ) {
+				var statusClass = status >= 0 ? 'state-success' : 'state-error';
+				classie.add( self.button, statusClass );
+				// after options.statusTime remove status
+				setTimeout( function() {
+					classie.remove( self.button, statusClass );
+					self._enable();
+				}, self.options.statusTime );
+			}
+			else {
+				self._enable();
+			}
+
+			// remove class state-loading from the button
+			classie.remove( self.button, 'state-loading' );
+		}, 100 );
+	};
+
+	// enable button
+	ProgressButton.prototype._enable = function() {
+		this.button.removeAttribute( 'disabled' );
+	}
+
+	// add to global namespace
+	window.ProgressButton = ProgressButton;
+
+})( window );
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -573,23 +872,37 @@ var digi_risk = {
 
 	old_danger: undefined,
 	old_date: undefined,
+  button: undefined,
+  old_cotation: undefined,
 
 	init: function() {
+
 		digi_risk.event();
 		this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
 		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
+		this.old_cotation = jQuery( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
+
+    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
+      callback: digi_risk.create_risk,
+    } );
 	},
 
 	tab_changed: function() {
+    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
+      callback: digi_risk.create_risk,
+    } );
+
 		this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
 		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
+
+
 	},
 
 	event: function() {
 		// jQuery( document ).on( 'click', '.wp-digi-list-item .wp-digi-risk-list-column-cotation, .wp-digi-risk-item .wp-digi-risk-list-column-cotation', function() { digi_risk.show_simple_cotation( jQuery( this ) ); } );
 
 		// Quand on clique sur le plus pour créer un risque
-		jQuery( document ).on( 'click', '.wp-digi-risk-item-new .dashicons-plus', function( event ) { digi_risk.create_risk( event, jQuery( this ) ); } );
+		jQuery( document ).on( 'click', '.wp-digi-risk-item-new button', function( event ) { return false; } );
 		jQuery( document ).on( 'click', '.wp-digi-risk .wp-digi-action-delete', function( event ) { digi_risk.delete_risk( event, jQuery( this ) ); } );
 
 		// Quand on clique pour charger un risque
@@ -647,11 +960,10 @@ var digi_risk = {
 		}
 	},
 
-	create_risk: function( event, element ) {
-		event.preventDefault();
+	create_risk: function( instance ) {
+    var element = instance.button;
 
-
-		jQuery( element ).closest( 'form' ).ajaxSubmit( {
+    jQuery( element ).closest( 'form' ).ajaxSubmit( {
       'beforeSubmit': function() {
         var element_required = false;
 
@@ -660,7 +972,7 @@ var digi_risk = {
           element_required = true;
         }
 
-        if ( !jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() ) {
+        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() == '' ) {
           jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
@@ -671,22 +983,26 @@ var digi_risk = {
         }
 
         if ( element_required ) {
+          instance._stop(-1);
           return false;
         }
-
-        jQuery( '.wp-digi-risk-item-new' ).addClass( 'wp-digi-bloc-loading' );
+        jQuery( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'none' );
+        jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', '1px solid rgba(0,0,0,.2)' );
+        jQuery( element ).closest( 'form' ).find( 'input[name="risk_comment_date"]' ).css( 'border', 'none' );
       },
-			'success': function( response ) {
-				jQuery( '.wp-digi-risk-item-new' ).removeClass( 'wp-digi-bloc-loading' );
-				jQuery( '.wp-digi-risk.wp-digi-list' ).closest( 'div' ).replaceWith( response.data.template );
-
-				jQuery( '.wp-digi-risk-item-new toggle' ).html( digi_risk.old_danger );
-
-
-				jQuery( ".wp-digi-risk-item-new input[name='risk_evaluation_level']" ).val( 0 );
-				jQuery( ".wp-digi-risk-item-new input[name='risk_danger_id']" ).val( "" );
-
+			success: function( response ) {
+				jQuery( '.wp-digi-risk.wp-digi-list' ).html( response.data.template );
+        jQuery( '.wp-digi-risk-item-new toggle' ).html( digi_risk.old_danger );
+        jQuery( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html( digi_risk.old_cotation );
+        var risk_level = jQuery( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation' ).data( 'risk_level' );
+        jQuery( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation' ).removeClass( 'wp-digi-risk-level-' + risk_level );
+        jQuery( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' ).removeClass( 'wp-digi-risk-level-' + risk_level );
+        jQuery( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' ).addClass( 'wp-digi-risk-level-1' );
+        jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]').val( '' );
+        jQuery( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
+        instance._stop(1);
 				digi_global.init();
+        digi_risk.init();
 			}
 		} );
 	},
