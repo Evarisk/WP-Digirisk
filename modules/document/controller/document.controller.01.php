@@ -295,7 +295,7 @@ class document_controller_01 extends post_ctr_01 {
 
 		/**	Dans le cas où la donnée a écrire est une valeur "simple" (texte) / In case the data to write is a "simple" (text) data	*/
 		if ( !is_array( $data_value ) ) {
-			$current_odf->setVars( $data_key, stripslashes( $data_value ), false, 'UTF-8' );
+			$current_odf->setVars( $data_key, stripslashes( $data_value ), true, 'UTF-8' );
 		}
 		else if ( is_array( $data_value ) && isset( $data_value[ 'type' ] ) && !empty( $data_value[ 'type' ] ) ) {
 			switch ( $data_value[ 'type' ] ) {
