@@ -11,7 +11,7 @@
 				<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
 				<span class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
 					<div class="mask">
-						<i class="dashicons dashicons-plus"></i>
+						<span class="dashicons dashicons-plus"></span>
 					</div>
 					<i title="<?php _e( '', '' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
 					<input type="hidden" name="thumbnail_id" value="" />

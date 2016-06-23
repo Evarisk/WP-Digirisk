@@ -66,6 +66,16 @@
 			display: table-cell;
 			vertical-align: middle;
 		}
+		.wp-digi-element-thumbnail {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		.wp-digi-risk-list-column-cotation {
+			&:hover {
+				cursor: pointer;
+			}
+		}
 		.wp-digi-risk-comment ul li {
 			display: flex;
 			flex-direction: row;
@@ -275,6 +285,30 @@
 }
 
 .wp-digi-risk-item-new {
+	.wp-digi-risk-thumbnail {
+		position: relative;
+		.mask {
+			.transition;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: fade(@c1, 60%);
+			display: flex;
+			span {
+				color: #fff;
+				margin: auto;
+			}
+		}
+		&:hover {
+			.mask {
+				opacity: 1;
+			}
+			cursor: pointer;
+		}
+	}
 	input, textarea {
 		width: 100%;
 		line-height: 1.1;
