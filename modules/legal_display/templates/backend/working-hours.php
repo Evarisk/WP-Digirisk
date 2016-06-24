@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <ul class="wp-digi-table">
 
   <li class="wp-digi-table-header">
-    <span><?php _e( 'Période', 'wpdigi-i18n' ); ?></span>
+    <span></span>
     <span><?php _e( 'Monday', 'wpdigi-i18n' ); ?></span>
     <span><?php _e( 'Tuesday', 'wpdigi-i18n' ); ?></span>
     <span><?php _e( 'Wednesday', 'wpdigi-i18n' ); ?></span>
