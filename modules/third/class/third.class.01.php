@@ -18,9 +18,9 @@ class third_class_01 extends post_ctr_01 {
 
   public function save_data( $data ) {
     // @todo : Sécurité
-    if ( empty( $data ) || empty( $data['full_name' ] ) || empty( $data['contact']['phone'] ) || empty( $data['contact']['address_id'] ) ) {
-      return false;
-    }
+    // if ( empty( $data ) || empty( $data['full_name' ] ) || empty( $data['contact']['phone'] ) || empty( $data['contact']['address_id'] ) ) {
+    //   return false;
+    // }
 
     return $this->create( $data );
   }
