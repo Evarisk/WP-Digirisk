@@ -122,7 +122,10 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 		/** Chargements de tous les risques pour ensuite les trier */
 		$list_risk = array();
 		foreach ( $list_risk_id as $risk_id ) {
-			$list_risk[] = $this->get_risk( $risk_id );
+			$risk_def = $this->get_risk( $risk_id );
+			if ( 'publish' == $risk_def->status ) {
+				$list_risk[] = $risk_def;
+			}
 		}
 
 		if ( count( $list_risk ) > 1 ) {
