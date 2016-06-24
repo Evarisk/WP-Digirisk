@@ -9,7 +9,6 @@ class third_action_01 {
     check_ajax_referer( 'save_legal_display' );
 
     global $wpdigi_address_ctr;
-    global $opening_time_class;
     global $third_class;
 
     // Récupère les tableaux
@@ -27,8 +26,8 @@ class third_action_01 {
     $detective_work['contact']['address_id'] = $detective_work_address->id;
     $occupational_health_service['contact']['address_id'] = $occupational_health_service_address->id;
 
-    $detective_work['opening_time_id'] = $detective_work_opening_time->id;
-    $occupational_health_service['opening_time_id'] = $occupational_health_service_time->id;
+    $detective_work['opening_time'] = $detective_work['opening_time'];
+    $occupational_health_service['opening_time'] = $occupational_health_service['opening_time'];
 
     $detective_work_third = $third_class->save_data( $detective_work );
     $occupational_health_service_third = $third_class->save_data( $occupational_health_service );
