@@ -120,14 +120,23 @@
 				}
 			}
 		}
-		&.wp-digi-action-new {
-			background: @c1;
-			.transition;
-			a {
-				color: #fff;
-			}
-			&:hover {
-				background: @dark_c1;
+		&.wp-digi-action-new {		
+			.progress-button {
+				.transition;
+				background: @c1;
+				a, .content:before, .content:after  {
+					color: #fff;
+				}
+				&:hover {
+					background: @dark_c1;
+					cursor: pointer;
+				}
+				&.state-error {
+					background: @red;
+				}
+				&.state-success {
+					background: @green;
+				}
 			}
 		}
 	}
@@ -254,11 +263,18 @@
 	.wp-digi-action {
 		width: 100px !important;
 		&.wp-digi-action-new {
-			width: 50px !important;
-			a {
-				width: 100% !important;
-				height: 100%;
-				line-height: 50px;
+			text-align: right;
+			.progress-button {
+				padding: 0;
+				width: 50px !important;
+				a {
+					width: 100% !important;
+					height: 100%;
+					line-height: 50px;
+				}
+				i {
+					line-height: 50px;
+				}	
 			}
 		}
 		.wp-digi-action-load, .wp-digi-action-delete {
@@ -267,7 +283,7 @@
 		.wp-digi-action-delete {
 			left: 50%;
 		}
-		.wp-digi-action-new a {
+		.wp-digi-action-new .progress-button {
 			width: 50px;
 			height: 50px;
 			margin-left: auto;
@@ -404,6 +420,26 @@
 		input {
 			width: 100%;
 			font-size: 13px;
+		}
+	}
+}
+
+/* -------------------------------------
+		LEGAL DISPLAY INTERFACE
+------------------------------------- */
+
+.form-legal-display {
+	.wp-digi-list-item {
+		span {
+			padding: 4px;
+		}
+		input {
+			padding: 4px;
+			width: 100%;
+			border-bottom: 2px solid #272a35;
+			&:focus {
+				border-bottom: 2px solid @c1;
+			}
 		}
 	}
 }

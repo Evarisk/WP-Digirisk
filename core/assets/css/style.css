@@ -1635,18 +1635,27 @@
 .wp-digi-table .wp-digi-action > a.wp-digi-action-load:hover {
   color: #3495f0;
 }
-.wp-digi-table .wp-digi-action.wp-digi-action-new {
-  background: #3495f0;
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button {
   -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #3495f0;
 }
-.wp-digi-table .wp-digi-action.wp-digi-action-new a {
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button a,
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button .content:before,
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button .content:after {
   color: #fff;
 }
-.wp-digi-table .wp-digi-action.wp-digi-action-new:hover {
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button:hover {
   background: #1360c8;
+  cursor: pointer;
+}
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button.state-error {
+  background: #e05353;
+}
+.wp-digi-table .wp-digi-action.wp-digi-action-new .progress-button.state-success {
+  background: #47e58e;
 }
 .wp-digi-table input[type="text"],
 .wp-digi-table textarea {
@@ -1773,11 +1782,18 @@
   width: 100px !important;
 }
 .wp-digi-risk-item .wp-digi-action.wp-digi-action-new {
+  text-align: right;
+}
+.wp-digi-risk-item .wp-digi-action.wp-digi-action-new .progress-button {
+  padding: 0;
   width: 50px !important;
 }
-.wp-digi-risk-item .wp-digi-action.wp-digi-action-new a {
+.wp-digi-risk-item .wp-digi-action.wp-digi-action-new .progress-button a {
   width: 100% !important;
   height: 100%;
+  line-height: 50px;
+}
+.wp-digi-risk-item .wp-digi-action.wp-digi-action-new .progress-button i {
   line-height: 50px;
 }
 .wp-digi-risk-item .wp-digi-action .wp-digi-action-load,
@@ -1787,7 +1803,7 @@
 .wp-digi-risk-item .wp-digi-action .wp-digi-action-delete {
   left: 50%;
 }
-.wp-digi-risk-item .wp-digi-action .wp-digi-action-new a {
+.wp-digi-risk-item .wp-digi-action .wp-digi-action-new .progress-button {
   width: 50px;
   height: 50px;
   margin-left: auto;
@@ -1901,6 +1917,20 @@
 .wp-digi-recommendation .wp-digi-comment input {
   width: 100%;
   font-size: 13px;
+}
+/* -------------------------------------
+		LEGAL DISPLAY INTERFACE
+------------------------------------- */
+.form-legal-display .wp-digi-list-item span {
+  padding: 4px;
+}
+.form-legal-display .wp-digi-list-item input {
+  padding: 4px;
+  width: 100%;
+  border-bottom: 2px solid #272a35;
+}
+.form-legal-display .wp-digi-list-item input:focus {
+  border-bottom: 2px solid #3495f0;
 }
 /* -------------------------------------
 		PAGINATION INTERFACE
