@@ -34,8 +34,8 @@ class third_mdl_01 extends post_mdl_01 {
 				'type'			=> 'integer'
 			),
 		),
-    'opening_time_id' => array(
-			'type' => 'integer'
+    'opening_time' => array(
+			'type' => 'string'
 		)
 	);
 

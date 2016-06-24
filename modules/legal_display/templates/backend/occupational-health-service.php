@@ -46,6 +46,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     </label>
   </li>
   <li>
-    <?php do_shortcode( '[di_opening_time name="occupational_health_service"]' ); ?>
+    <label>
+      <?php _e( 'Horaires', 'wpdigi-i18n' ); ?>
+      <input name="occupational_health_service[opening_time]" type="text" />
+    </label>
   </li>
 </ul>

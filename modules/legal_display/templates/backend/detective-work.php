@@ -44,6 +44,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     </label>
   </li>
   <li>
-    <?php do_shortcode( '[di_opening_time name="detective_work"]' ); ?>
+    <label>
+      <?php _e( 'Horaires', 'wpdigi-i18n' ); ?>
+      <input name="detective_work[opening_time]" type="text" />
+    </label>
   </li>
 </ul>

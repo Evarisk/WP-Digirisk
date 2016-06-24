@@ -57,8 +57,49 @@ class legal_display_mdl_01 extends post_mdl_01 {
 				'type' => 'string'
 			)
 		),
-		'working_hour_id' => array(
-			'type' => 'integer'
+		'working_hour' => array(
+			'monday_morning' => array(
+				'type' => 'string',
+			),
+			'tuesday_morning' => array(
+				'type' => 'string',
+			),
+			'wednesday_morning' => array(
+				'type' => 'string',
+			),
+			'thrusday_morning' => array(
+				'type' => 'string',
+			),
+			'friday_morning' => array(
+				'type' => 'string',
+			),
+			'saturday_morning' => array(
+				'type' => 'string',
+			),
+			'saunday_morning' => array(
+				'type' => 'string',
+			),
+			'monday_afternoon' => array(
+				'type' => 'string',
+			),
+			'tuesday_afternoon' => array(
+				'type' => 'string',
+			),
+			'wednesday_afternoon' => array(
+				'type' => 'string',
+			),
+			'thrusday_afternoon' => array(
+				'type' => 'string',
+			),
+			'friday_afternoon' => array(
+				'type' => 'string',
+			),
+			'saturday_afternoon' => array(
+				'type' => 'string',
+			),
+			'saunday_afternoon' => array(
+				'type' => 'string',
+			),
 		),
 		'derogation_schedule' => array(
 			'permanent' => array(
