@@ -35,7 +35,7 @@ class legal_display_ctr extends post_ctr_01 {
 
 	}
 
-  public function display( $element ) {
+  public function display( $element, $data ) {
     require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'display' ) );
   }
 
@@ -54,9 +54,8 @@ class legal_display_ctr extends post_ctr_01 {
   function filter_display_generate_document_unique_in_element( $output, $element, $tab_to_display ) {
     if( 'legal-display' == $tab_to_display ) {
       $data = $this->load_data( $element->id );
-
       ob_start();
-      $this->display( $element );
+      $this->display( $element, $data );
       $output .= ob_get_clean();
     }
 
@@ -68,25 +67,31 @@ class legal_display_ctr extends post_ctr_01 {
   */
   public function load_data( $element_id ) {
     global $third_class;
+		global $wpdigi_address_ctr;
 
     if ( $element_id === 0 ) {
       return array();
     }
 
     $data = array( 'legal_display' => array(), 'detective_work' => array(), 'occupational_health_service' => array() );
+    $list_legal_display = $this->index( array( 'post_parent' => $element_id ) );
 
-    $legal_display = $this->index( array( 'post_parent' => $element_id ) );
+		if ( ( empty( $list_legal_display ) && empty( $legal_display[0] ) ) )
+			return array();
+
+		$legal_display = max($list_legal_display);
+
     $detective_work = $third_class->show( $legal_display->option['detective_work_id'] );
     $occupational_health_service = $third_class->show( $legal_display->option['occupational_health_service_id'] );
 
-    if ( ( empty( $legal_display ) && empty( $legal_display[0] ) ) )
-      return array();
     if ( ( empty( $detective_work ) ) && empty( $occupational_health_service ) )
       return array();
 
-    $data['legal_display'] = $legal_display[0];
+    $data['legal_display'] = $legal_display;
     $data['detective_work'] = $detective_work;
+		$data['detective_work']->address = $wpdigi_address_ctr->show( $detective_work->option['contact']['address_id'] );
     $data['occupational_health_service'] = $occupational_health_service;
+    $data['occupational_health_service']->address = $wpdigi_address_ctr->show( $occupational_health_service->option['contact']['address_id'] );
 
     return $data;
   }
