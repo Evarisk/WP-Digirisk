@@ -189,7 +189,7 @@ class document_controller_01 extends post_ctr_01 {
 		$response = array(
 			'status'		=> false,
 			'message'		=> __( 'An error occured while getting model to use for generation', 'wpdigi-i18n' ),
-			'model_id'	=> null,
+			'model_id'		=> null,
 		);
 
 		$get_model_args = array(
@@ -212,14 +212,19 @@ class document_controller_01 extends post_ctr_01 {
 				}
 			}
 			else {
-				$response = array(
-					'status'		=> true,
-					'message'		=> '',
-					'model_id'	=> $element_sheet_default_model->post->ID,
-				);
+				$workunit_model_to_use = get_attached_file( $element_sheet_default_model->post->ID );
+				if ( is_file( $workunit_model_to_use ) ) {
+					$response = array(
+						'status'		=> true,
+						'message'		=> '',
+						'model_id'		=> $element_sheet_default_model->post->ID,
+						'model_path'	=> $workunit_model_to_use,
+					);
+				}
 			}
 		}
-		else {
+
+		if ( !$response[ 'status' ] ) {
 			foreach ( $current_element_type as $document_type ) {
 				if ( is_file( WPDIGI_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
 					$response = array(
@@ -232,6 +237,7 @@ class document_controller_01 extends post_ctr_01 {
 				}
 			}
 		}
+
 		return $response;
 	}
 
@@ -301,7 +307,7 @@ class document_controller_01 extends post_ctr_01 {
 			switch ( $data_value[ 'type' ] ) {
 
 				case 'picture':
-					$current_odf->setImage( $data_key, $data_value[ 'value' ], ( !empty( $data_value[ 'option' ] ) && !empty( $data_value[ 'option' ][ 'size' ] ) ? $data_value[ 'option' ][ 'size' ] : 0 ) );
+// 					$current_odf->setImage( $data_key, $data_value[ 'value' ], ( !empty( $data_value[ 'option' ] ) && !empty( $data_value[ 'option' ][ 'size' ] ) ? $data_value[ 'option' ][ 'size' ] : 0 ) );
 					break;
 
 				case 'segment':
