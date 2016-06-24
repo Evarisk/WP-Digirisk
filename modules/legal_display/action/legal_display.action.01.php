@@ -49,7 +49,7 @@ class legal_display_action_01 {
     global $wpdigi_address_ctr;
 
     $group = $wpdigi_group_ctr->show( $parent_id );
-		$response = array(
+    $response = array(
 			'status' 	=> false,
 			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
 		);
