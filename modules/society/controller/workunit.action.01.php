@@ -253,7 +253,8 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 	 */
 	public function generate_workunit_sheet() {
 		// wpdigi_utils::check( 'digi_ajax_generate_element_sheet' );
-
+ ini_set("display_errors", true);
+ error_reporting(E_ALL);
 		$response = array(
 			'status' 	=> false,
 			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
@@ -278,19 +279,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 				wp_send_json_error( $response );
 			}
 
-			$workunit_model_id_to_use = is_int( (int)$response[ 'model_id' ] ) ? (int)$response[ 'model_id' ] : $response[ 'model_path' ];
-		}
-
-		if ( is_int( $workunit_model_id_to_use ) ) {
-			$workunit_model_to_use = get_attached_file( $workunit_model_id_to_use );
-		}
-		else {
-			$workunit_model_to_use = $workunit_model_id_to_use;
-		}
-
-		if ( empty( $workunit_model_to_use ) ) {
-			$response[ 'message' ] = __( 'An error occured while getting model content to use for generation', 'wpdigi-i18n' );
-			wp_send_json_error( $response );
+			$workunit_model_to_use = $response[ 'model_path' ];
 		}
 
 		$workunit = $this->show( $element_id );
@@ -301,13 +290,17 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		$picture = __( 'No picture defined', 'wpdigi-i18n' );
 		if ( !empty( $workunit->thumbnail_id ) && ( true === is_int( (int)$workunit->thumbnail_id ) ) ) {
 			$picture_definition = wp_get_attachment_image_src( $workunit->thumbnail_id, 'digirisk-element-thumbnail' );
-			$picture = array(
-				'type'		=> 'picture',
-				'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
-				'option'	=> array(
-					'size'	=> 8,
-				),
-			);
+			$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
+			$picture = '';
+			if ( is_file( $picture_final_path ) ) {
+				$picture = array(
+					'type'		=> 'picture',
+					'value'		=> $picture_final_path,
+					'option'	=> array(
+						'size'	=> 8,
+					),
+				);
+			}
 		}
 
 		/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
@@ -368,31 +361,41 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 								$the_recommendation_category = $digi_recommendation_category_controller->show( $the_recommendation->parent_id );
 
 								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
-								$affected_recommendation[ $the_recommendation->id ] = array(
-									'recommandationCategoryIcon' => array(
+								$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
+								$picture = '';
+								if ( is_file( $picture_final_path ) ) {
+									$picture = array(
 										'type'		=> 'picture',
-										'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
+										'value'		=> $picture_final_path,
 										'option'	=> array(
-											'size'	=> 2,
+												'size'	=> 2,
 										),
-									),
+									);
+								}
+								$affected_recommendation[ $the_recommendation->id ] = array(
+									'recommandationCategoryIcon' => $picture,
 									'recommandationCategoryName' => $the_recommendation_category->name,
 								);
 							}
 
 							$picture_definition = wp_get_attachment_image_src( $the_recommendation->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
+							$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
+							$picture = '';
+							if ( is_file( $picture_final_path ) ) {
+								$picture = array(
+									'type'		=> 'picture',
+									'value'		=> $picture_final_path,
+									'option'	=> array(
+										'size'	=> 8,
+									),
+								);
+							}
 							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'type' ] = 'sub_segment';
 							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'value' ][] = array(
 								'identifiantRecommandation'	=> $recommendation[ 'unique_identifier' ],
-								'recommandationIcon'				=> array(
-									'type'		=> 'picture',
-									'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
-									'option'	=> array(
-										'size'	=> 2,
-									),
-								),
-								'recommandationName'				=> $the_recommendation->name,
-								'recommandationComment'			=> $recommendation[ 'comment' ],
+								'recommandationIcon'		=> $picture,
+								'recommandationName'		=> $the_recommendation->name,
+								'recommandationComment'		=> $recommendation[ 'comment' ],
 							);
 						}
 					}
@@ -439,7 +442,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		global $wpdigi_risk_ctr;
 		$risk_list = array();
 
-		if ( !empty( $workunit->option[ 'associated_risk'] ) ) {
+		if ( !empty( $workunit->option[ 'associated_risk' ] ) ) {
 			$risk_list = $wpdigi_risk_ctr->index( array(
 				'include' => $workunit->option[ 'associated_risk' ],
 			) );
@@ -457,9 +460,9 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 			endif;
 
 			$risk_list_to_order[ $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ] ][] = array(
-				'nomDanger'					=> $complete_risk->danger->name,
+				'nomDanger'			=> $complete_risk->danger->name,
 				'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
-				'quotationRisque'		=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
+				'quotationRisque'	=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
 				'commentaireRisque'	=> $comment_list,
 			);
 		}
