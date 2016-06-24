@@ -61,6 +61,17 @@ class legal_display_ctr extends post_ctr_01 {
     return $output;
   }
 
+  /**
+  * Charges toutes les données du dernier affichage légal
+  */
+  public function load_data( $element_id ) {
+    if ( $element_id === 0 ) {
+      return false;
+    }
+
+    
+  }
+
   public function save_data( $data ) {
     // @todo : securité
 
