@@ -19,7 +19,7 @@
 				</span>
 				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
 				<span data-risk_level="1" data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation wp-digi-risk-level-1" >
-					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Select Cotation', 'wpdigi-i18n' ); ?></div>
+					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Cot', 'wpdigi-i18n' ); ?></div>
 					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
 						<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >1</li>
 						<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >48</li>
