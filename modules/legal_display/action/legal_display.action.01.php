@@ -76,11 +76,10 @@ class legal_display_action_01 {
 
     $third_inspector = $third_class->show( $legal_display->option['detective_work_id'] );
     $third_inspector_address = $wpdigi_address_ctr->show( $third_inspector->option['contact']['address_id'] );
-    $third_inspector_opening_time = $opening_time_class->show( $third_inspector->option['opening_time_id']);
 
     $third_doctor = $third_class->show( $legal_display->option['occupational_health_service_id'] );
     $third_doctor_address = $wpdigi_address_ctr->show( $third_doctor->option['contact']['address_id'] );
-    $third_doctor_opening_time = $opening_time_class->show( $third_doctor->option['opening_time_id']);
+
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
       'inspection_du_travail_nom' => $third_inspector->option['full_name'],
@@ -88,13 +87,11 @@ class legal_display_action_01 {
       'inspection_du_travail_code_postal' => $third_inspector_address->option['postcode'],
       'inspection_du_travail_ville' => $third_inspector_address->option['town'],
       'inspection_du_travail_telephone' => max( $third_inspector->option['contact']['phone'] ),
-      'inspection_du_travail_horaire' => $third_inspector_opening_time->option['openingHoursSpecification']['Mo']['open'] . '/' . $third_inspector_opening_time->option['openingHoursSpecification']['Mo']['close'],
       'service_de_sante_au_travail_nom' => $third_doctor->option['full_name'],
       'service_de_sante_au_travail_adresse' => $third_doctor_address->option['address'],
       'service_de_sante_au_travail_code_postal' => $third_doctor_address->option['postcode'],
       'service_de_sante_au_travail_ville' => $third_doctor_address->option['town'],
       'service_de_sante_au_travail_telephone' => max( $third_doctor->option['contact']['phone'] ),
-      'service_de_sante_au_travail_horaire' => $third_doctor_opening_time->option['openingHoursSpecification']['Mo']['open'] . '/' . $third_doctor_opening_time->option['openingHoursSpecification']['Mo']['close'],
       'samu' => $legal_display->option['emergency_service']['samu'],
       'police' => $legal_display->option['emergency_service']['police'],
       'pompiers' => $legal_display->option['emergency_service']['pompier'],
