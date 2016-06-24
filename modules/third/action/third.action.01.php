@@ -19,10 +19,6 @@ class third_action_01 {
     $detective_work_address = $wpdigi_address_ctr->save_data( $detective_work['address'] );
     $occupational_health_service_address = $wpdigi_address_ctr->save_data( $occupational_health_service['address'] );
 
-    // On enregistre les horaires d'ouvertures
-    $detective_work_opening_time = $opening_time_class->save_data( $detective_work['opening_time'] );
-    $occupational_health_service_time = $opening_time_class->save_data( $occupational_health_service['opening_time'] );
-
     $detective_work['contact']['address_id'] = $detective_work_address->id;
     $occupational_health_service['contact']['address_id'] = $occupational_health_service_address->id;
 
