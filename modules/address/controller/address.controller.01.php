@@ -37,9 +37,9 @@ class wpdigi_address_ctr_01 extends comment_ctr_01 {
 	}
 
 	public function save_data( $data ) {
-		if ( empty( $data ) || empty( $data['postcode'] ) || empty( $data['address'] ) || empty( $data['town'] ) ) {
-			return false;
-		}
+		// if ( empty( $data ) || empty( $data['postcode'] ) || empty( $data['address'] ) || empty( $data['town'] ) ) {
+		// 	return false;
+		// }
 
 		// Sécurise les données
 		$data['postcode'] = sanitize_text_field( $data['postcode'] );
