@@ -11,7 +11,7 @@ class legal_display_action_01 {
 
     // Récupère les tableaux
     $emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
-    $working_hour = !empty( $_POST['working_hours']['opening_time'] ) ? (array) $_POST['working_hours']['opening_time'] : array();
+    $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hours'] : array();
     $safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
     $derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
     $document = !empty( $_POST['document'] ) ? (array) $_POST['document'] : array();
@@ -29,7 +29,7 @@ class legal_display_action_01 {
       'occupational_health_service_id' => $occupational_health_service_third->id,
       'emergency_service' => $emergency_service,
       'safety_rule' => $safety_rule,
-      'working_hour_id' => $working_hour->id,
+      'working_hour' => $working_hour,
       'derogation_schedule' => $derogation_schedule,
       'document' => $document,
       'unique_identifier' => $legal_display_ctr->element_prefix . $last_unique_key,
