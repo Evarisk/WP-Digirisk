@@ -128,7 +128,7 @@ class term_ctr_01 {
 	 * @param integer $id L'identifiant de la taxinomie a supprimer / The taxonomy identifier to delete
 	 */
 	public function delete( $id ) {
-		wp_delete_term( $id );
+		wp_delete_term( $id , $this->taxonomy );
 	}
 
 	/**

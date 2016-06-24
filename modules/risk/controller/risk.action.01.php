@@ -386,7 +386,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 
 		if ( !empty( $_POST['list_comment'] ) ) {
 			if( !is_array( $_POST['list_comment'] ) )
-				wp_send_json_error();
+				wp_send_json_error( array( 'error' => __LINE__, ) );
 
 			foreach ( $_POST['list_comment'] as $comment_id => $comment ) {
 				$risk_evaluation_comment = array(
@@ -425,7 +425,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $wpdigi_evaluation_method_controller->get_taxonomy() );
 
 		if( empty( $term_method_variable ) || empty( $term_method_variable->term_id ) )
-			wp_send_json_error();
+			wp_send_json_error( array( 'error' => __LINE__, ) );
 
 		if ( $risk_evaluation->option['risk_level']['scale'] != $risk_evaluation_level || !empty( $_POST['variable'] ) ) {
 
@@ -458,7 +458,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 				$risk_evaluation_level = 1;
 
 				if( !is_array( $_POST['variable'] ) )
-					wp_send_json_error();
+					wp_send_json_error( array( 'error' => __LINE__, ) );
 
 				foreach ( $_POST['variable'] as $value ) {
 					$risk_evaluation_level *= (int) $value;
@@ -493,7 +493,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 					);
 
 					if ( !is_array( $_POST['variable'] ) )
-						wp_send_json_error();
+						wp_send_json_error( array( 'error' => __LINE__, ) );
 
 					foreach ( $_POST['variable'] as $variable_id => $value ) {
 						$risk_evaluation['option']['quotation_detail'][] = array( 'variable_id' => $variable_id, 'value' => (int) $value );

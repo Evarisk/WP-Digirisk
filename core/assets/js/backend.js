@@ -882,15 +882,19 @@ var digi_risk = {
 		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = jQuery( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
 
-    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
-      callback: digi_risk.create_risk,
-    } );
+		if ( jQuery( '.wp-digi-risk-item-new button' )[0] ) {
+		    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
+		      callback: digi_risk.create_risk,
+		    } );
+		}
 	},
 
 	tab_changed: function() {
-    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
-      callback: digi_risk.create_risk,
-    } );
+		if ( jQuery( '.wp-digi-risk-item-new button' )[0] ) {
+		    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
+		      callback: digi_risk.create_risk,
+		    } );
+		}
 
 		this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
 		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();

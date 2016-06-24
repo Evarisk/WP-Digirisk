@@ -18,7 +18,8 @@ class wpdigi_tools_ctr {
 
   public function callback_reset_method_evaluation() {
     check_ajax_referer( 'reset_method_evaluation' );
-
+ ini_set("display_errors", true);
+ error_reporting(E_ALL);
     global $wpdigi_evaluation_method_controller;
     global $wpdigi_evaluation_method_variable_controller;
 
@@ -138,7 +139,6 @@ class wpdigi_tools_ctr {
 		if ( !empty( $list_post ) ) {
 		  foreach ( $list_post as $element ) {
 				$risk = $wpdigi_risk_ctr->show( $element->ID );
-
 				if ( $risk->taxonomy['digi-method'][0] == $term_method_evarisk_id ) {
 					$list_risk[] = $risk;
 				}
