@@ -76,7 +76,7 @@ class legal_display_mdl_01 extends post_mdl_01 {
 			'saturday_morning' => array(
 				'type' => 'string',
 			),
-			'saunday_morning' => array(
+			'sunday_morning' => array(
 				'type' => 'string',
 			),
 			'monday_afternoon' => array(

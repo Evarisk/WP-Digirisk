@@ -19,34 +19,34 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li class="wp-digi-table-header">
     <span><?php _e( 'Période', 'wpdigi-i18n' ); ?></span>
     <span><?php _e( 'Monday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Thursday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Wedenesday', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Tuesday', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Wednesday', 'wpdigi-i18n' ); ?></span>
     <span><?php _e( 'Thursday', 'wpdigi-i18n' ); ?></span>
     <span><?php _e( 'Friday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Saturday', 'wpdigi-i18n' ); ?></span> 
-    <span><?php _e( 'Friday', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Saturday', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Sunday', 'wpdigi-i18n' ); ?></span>
   </li>
 
   <li class="wp-digi-list-item">
     <span><?php _e( 'Morning', 'wpdigi-i18n' ); ?></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
+    <span><input type="text" name="working_hour[monday_morning]" /></span>
+    <span><input type="text" name="working_hour[tuesday_morning]" /></span>
+    <span><input type="text" name="working_hour[wednesday_morning]" /></span>
+    <span><input type="text" name="working_hour[thursday_morning]" /></span>
+    <span><input type="text" name="working_hour[friday_morning]" /></span>
+    <span><input type="text" name="working_hour[saturday_morning]" /></span>
+    <span><input type="text" name="working_hour[sunday_morning]" /></span>
   </li>
 
   <li class="wp-digi-list-item">
-    <span><?php _e( 'Afternoon', 'wpdigi-i18n' ); ?></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
-    <span><input type="text" /></span>
+    <span><?php _e( 'Morning', 'wpdigi-i18n' ); ?></span>
+    <span><input type="text" name="working_hour[monday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[tuesday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[wednesday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[thursday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[friday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[saturday_afternoon]" /></span>
+    <span><input type="text" name="working_hour[sunday_afternoon]" /></span>
   </li>
 
 </ul>
