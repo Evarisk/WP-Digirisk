@@ -17,20 +17,18 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 	class wpdigi_user_action_01 {
 		public function __construct() {
 			// Quand on affecte un utilisateur
-			add_action( 'admin_post_edit_user_assign', array( $this, 'callback_edit_user_assign' ) );
+			add_action( 'wp_ajax_edit_user_assign', array( $this, 'callback_edit_user_assign' ) );
 
 			// Quand on désaffecte un utilisateur
-			add_action( 'admin_post_edit_user_detach', array( $this, 'callback_edit_user_detach' ) );
+			add_action( 'wp_ajax_detach_user', array( $this, 'callback_detach_user' ) );
+
+			add_action( 'wp_ajax_paginate_user', array( $this, 'callback_paginate_user' ) );
 
 			// Recherche d'un utilisateur affecté
 			add_action( 'wp_ajax_search_user_affected', array( $this, 'ajax_search_user_affected' ) );
 		}
 
 		public function callback_edit_user_assign() {
-			// Est ce que list_user est vide ? Ou est ce que workunit_id est vide et est-ce bien un entier ?
-			if ( empty( $_POST['list_user'] ) || ( empty( $_POST['workunit_id'] ) && ctype_digit( strval( $_POST['workunit_id'] ) ) )  )
-				wp_safe_redirect( wp_get_referer() );
-
 			if ( 0 === (int)$_POST['workunit_id'] )
 				wp_send_json_error( array( 'error' => __LINE__, ) );
 			else
@@ -42,13 +40,14 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 				$group_id = (int)$_POST['group_id'];
 
 			if( !is_array( $_POST['list_user'] ) )
-				wp_safe_redirect( wp_get_referer() );
+				wp_send_json_error();
 
 			global $wpdigi_workunit_ctr;
 			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
 
+
 			if ( empty( $workunit ) )
-				wp_safe_redirect( wp_get_referer() . '&current_workunit_id=' . $workunit_id );
+				wp_send_json_error();
 
 			foreach ( $_POST['list_user'] as $user_id => $list_value ) {
 				if ( !empty( $list_value['affect'] ) ) {
@@ -74,37 +73,43 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 			if( count( $_POST['list_user'] ) > 0 )
 				$wpdigi_workunit_ctr->update( $workunit );
 
-			wp_safe_redirect( wp_get_referer() . '&current_tab=user&current_group_id=' . $group_id . '&current_workunit_id=' . $workunit_id );
-			exit(0);
+			global $wpdigi_user_ctr;
+			$list_affected_user = $wpdigi_user_ctr->list_affected_user( $workunit, $list_affected_id );
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+			$template = ob_get_clean();
+
+			$current_page = !empty( $_REQUEST['current_page'] ) ? (int) $_REQUEST['current_page'] : 1;
+			$args_where_user = array(
+				'offset' => ( $current_page - 1 ) * $this->limit_user,
+				'number' => $wpdigi_user_ctr->limit_user,
+				'exclude' => array( 1 ),
+				'meta_query' => array(
+					'relation' => 'OR',
+				),
+			);
+			$list_user_to_assign = $wpdigi_user_ctr->index( $args_where_user );
+
+			// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+			unset( $args_where_user['offset'] );
+			unset( $args_where_user['number'] );
+			$args_where_user['fields'] = array( 'ID' );
+			$count_user = count( $wpdigi_user_ctr->index( $args_where_user ) );
+			$number_page = ceil( $count_user / $wpdigi_user_ctr->limit_user );
+
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+			wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
 		}
 
-		public function callback_edit_user_detach() {
-			if ( ( empty( $_GET['user_id'] ) && ctype_digit( strval( $_GET['user_id'] ) ) ) && ( empty( $_GET['workunit_id'] ) && ctype_digit( strval( $_GET['workunit_id'] ) ) ) )
-				wp_safe_redirect( wp_get_referer() );
-
-			if ( 0 === (int)$_GET['workunit_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$workunit_id = (int)$_GET['workunit_id'];
-
-			if ( 0 === (int)$_GET['group_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$group_id = (int)$_GET['group_id'];
-
-			if ( 0 === (int)$_GET['user_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$user_id = (int)$_GET['user_id'];
+		public function callback_detach_user() {
+			$workunit_id = !empty( $_POST['workunit_id'] ) ? (int) $_POST['workunit_id'] : 0;
+			$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
 			global $wpdigi_workunit_ctr;
-			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
-
-			if ( empty( $workunit ) )
-				wp_safe_redirect( wp_get_referer() . '&current_workunit_id=' . $workunit_id );
-
 			global $wpdigi_user_ctr;
 
+			$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
 			$index_valid_key = $wpdigi_user_ctr->get_valid_in_workunit_by_user_id( $workunit, $user_id );
 
 			$workunit->option['user_info']['affected_id']['user'][$user_id][$index_valid_key]['status'] = 'delete';
@@ -117,8 +122,33 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 
 			$wpdigi_workunit_ctr->update( $workunit );
 
-			wp_safe_redirect( wp_get_referer() . '&current_tab=user&current_group_id=' . $group_id . '&current_workunit_id=' . $workunit_id );
-			exit(0);
+			global $wpdigi_user_ctr;
+			$list_affected_user = $wpdigi_user_ctr->list_affected_user( $workunit, $list_affected_id );
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+			$template = ob_get_clean();
+
+			$current_page = !empty( $_REQUEST['current_page'] ) ? (int) $_REQUEST['current_page'] : 1;
+			$args_where_user = array(
+				'offset' => ( $current_page - 1 ) * $this->limit_user,
+				'number' => $wpdigi_user_ctr->limit_user,
+				'exclude' => array( 1 ),
+				'meta_query' => array(
+					'relation' => 'OR',
+				),
+			);
+			$list_user_to_assign = $wpdigi_user_ctr->index( $args_where_user );
+
+			// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+			unset( $args_where_user['offset'] );
+			unset( $args_where_user['number'] );
+			$args_where_user['fields'] = array( 'ID' );
+			$count_user = count( $wpdigi_user_ctr->index( $args_where_user ) );
+			$number_page = ceil( $count_user / $wpdigi_user_ctr->limit_user );
+
+			ob_start();
+			require( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+			wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
 		}
 
 		public function ajax_search_user_affected() {
@@ -139,6 +169,21 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 			ob_start();
 			require( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
 			wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		}
+
+		public function callback_paginate_user() {
+			$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+
+			if ( $element_id === 0 ) {
+				wp_send_json_error();
+			}
+
+			global $wpdigi_workunit_ctr;
+			global $wpdigi_user_ctr;
+
+			$element = $wpdigi_workunit_ctr->show( $element_id );
+			$wpdigi_user_ctr->render_list( $element );
+			wp_die();
 		}
 	}
 

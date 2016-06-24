@@ -125,6 +125,31 @@ if ( !class_exists( 'wpdigi_user_ctr_01' ) ) {
 			require_once( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'main' ) );
 		}
 
+		public function render_list( $workunit ) {
+			$list_affected_user = $this->list_affected_user( $workunit, $list_affected_id );
+
+			$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
+			$args_where_user = array(
+				'offset' => ( $current_page - 1 ) * $this->limit_user,
+				'number' => $this->limit_user,
+				'exclude' => array( 1 ),
+				'meta_query' => array(
+					'relation' => 'OR',
+				),
+			);
+
+			$list_user_to_assign = $this->index( $args_where_user );
+
+			// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+			unset( $args_where_user['offset'] );
+			unset( $args_where_user['number'] );
+			$args_where_user['fields'] = array( 'ID' );
+			$count_user = count( $this->index( $args_where_user ) );
+			$number_page = ceil( $count_user / $this->limit_user );
+
+			require_once( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+		}
+
 		/**
 		 * Récupère la liste des utilisateurs affectés avec ses informations d'affectations à cette unité de travail
 		 * Get the list of affected users with assignement information for this workunit

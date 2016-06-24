@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<form class="wp-form-user-to-assign" method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+<form class="wp-form-user-to-assign" method="POST" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 	<ul class="wp-digi-list wp-digi-table">
 		<li class="wp-digi-table-header" >
 			<span></span>
@@ -34,12 +34,13 @@
 	<input type="hidden" name="action" value="edit_user_assign" />
 	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'wpdigi-i18n'); ?>" />
 
+	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
 		<div class="wp-digi-pagination">
 			<?php
 			$big = 999999999;
 			echo paginate_links( array(
-				'base' => admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&current_tab=user&current_group_id=' . $workunit->parent_id . '&current_workunit_id=' . $workunit->id . ' &current_page=%_%' ),
+				'base' => admin_url( 'admin-ajax.php?action=paginate_user&current_page=%_%&element_id=' . $workunit->id ),
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,

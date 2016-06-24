@@ -21,7 +21,10 @@
 					<span><?php echo $affected_user->option['user_info']['lastname']; ?></span>
 					<span><?php echo $affected_user->option['user_info']['firstname']; ?></span>
 					<span><?php echo mysql2date( 'd M. Y', $affected_user->option['date_info']['start']['date'] ); ?></span>
-					<span class="wp-digi-action"><a href="<?php echo admin_url( 'admin-post.php?action=edit_user_detach&group_id=' . $workunit->parent_id . '&workunit_id=' . $workunit->id . '&user_id=' . $affected_user->id ); ?>" class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt"></a></span>
+					<span class="wp-digi-action">
+						<a 	data-workunit-id="<?php echo $workunit->id; ?>"
+								data-user-id="<?php echo $affected_user->id; ?>"
+								class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt"></a></span>
 				</li>
 				<?php
 			endif;

@@ -21,6 +21,9 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 
 			// Quand on désaffecte un utilisateur
 			add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
+
+
+			add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
 		}
 
 		public function callback_edit_evaluator_assign() {
@@ -115,6 +118,22 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 			ob_start();
 			require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
 			wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		}
+
+		public function callback_paginate_evaluator() {
+			$global = !empty( $_POST['global'] ) ? sanitize_text_field( $_POST['global'] ) : '';
+			$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+
+			if ( $global === '' || $element_id === 0 ) {
+				wp_send_json_error();
+			}
+
+			global ${$global};
+			global $wpdigi_evaluator_ctr;
+
+			$element = ${$global}->show( $element_id );
+			$wpdigi_evaluator_ctr->render_list_evaluator_to_assign( $element );
+			wp_die();
 		}
 	}
 
