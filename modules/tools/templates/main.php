@@ -1,11 +1,24 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-
 <div class="wrap">
-  <h1><?php _e( 'Digirisk tools', 'wpdigi-i18n' ); ?></h1>
+	<h1><?php _e( 'Digirisk tools', 'wpdigi-i18n' ); ?></h1>
 
-  <p><?php _e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'wpdigi-i18n' ); ?></p>
-  <p><button class="wp-digi-bton-fourth reset-method-evaluation" data-nonce="<?php echo wp_create_nonce( 'reset_method_evaluation' ); ?>" type="button"><?php _e( 'Réintialiser', 'wpdigi-i18n' ); ?></button>
-  <ul>
-    
-  </ul>
+	<div class="digi-tools-main-container" >
+		<h2 class="nav-tab-wrapper">
+			<a class="nav-tab" href="#" data-id="digi-method-fixer" ><?php _e( 'Correction de la méthode d\'évaluation Evarisk', 'wpdigi-i18n' ); ?></a>
+			<a class="nav-tab nav-tab-active" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'wpdigi-i18n' ); ?></a>
+		</h2>
+
+		<div id="digi-method-fixer" class="hidden" >
+			<p><?php _e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'wpdigi-i18n' ); ?></p>
+			<p><button class="wp-digi-bton-fourth reset-method-evaluation" data-nonce="<?php echo wp_create_nonce( 'reset_method_evaluation' ); ?>" type="button"><?php _e( 'Réintialiser', 'wpdigi-i18n' ); ?></button>
+			<ul></ul>
+		</div>
+
+		<div id="digi-risk-fixer" >
+			<p><?php _e( 'Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez des problèmes d\'affichage', 'wpdigi-i18n' ); ?></p>
+			<p><button class="wp-digi-bton-fourth element-risk-compilation" data-nonce="<?php echo wp_create_nonce( 'risk_list_compil' ); ?>" type="button" ><?php _e( 'Recompiler', 'wpdigi-i18n' ); ?></button>
+			<ul></ul>
+		</div>
+  	</div>
+
 </div>

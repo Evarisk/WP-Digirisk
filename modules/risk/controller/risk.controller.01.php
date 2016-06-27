@@ -234,6 +234,35 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 		return $output;
 	}
 
+	/**
+	 * Get the risk list for an element directly from database / Récupère la liste des risques pour un element dans la base de données
+	 *
+	 * @param Object $element The element we need to get risk list for / L'élément pour lequel il faut récupèrer la liste des risques
+	 *
+	 * @return WP_Query Risk list for given element / La liste des risques pour l'élément donné en paramètre
+	 */
+	function get_risk_list_for_element( $element ) {
+		$risk_for_element = array();
+
+		/**	Define risks list args / Définition des arguments de récupération de la liste des risques	*/
+		$risk_list_args = array(
+			'post_type'			=> $this->post_type,
+			'post_per_pages'	=> -1,
+			'post_parent'		=> $element->id,
+		);
+		$risk_list = new WP_Query( $risk_list_args );
+
+		if ( $risk_list->have_posts() ) {
+			$risk_id_list = array();
+			foreach ( $risk_list->posts as $risk ) {
+				$risk_id_list[] = $risk->ID;
+			}
+			$risk_for_element = $this->index( array( 'include' => $risk_id_list, ) );
+		}
+
+		return $risk_for_element;
+	}
+
 }
 
 /**	Création de l'objet risque / Create the risk object	*/

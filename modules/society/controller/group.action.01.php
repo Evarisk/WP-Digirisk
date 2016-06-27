@@ -206,20 +206,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 				wp_send_json_error( $response );
 			}
 
-			$response_model_id = (int)$response[ 'model_id' ];
-			$element_model_id_to_use = is_int( $response_model_id ) && !empty( $response_model_id ) ? (int)$response[ 'model_id' ] : $response[ 'model_path' ];
-		}
-
-		if ( is_int( $element_model_id_to_use ) ) {
-			$element_model_to_use = get_attached_file( $element_model_id_to_use );
-		}
-		else {
-			$element_model_to_use = $element_model_id_to_use;
-		}
-
-		if ( empty( $element_model_to_use ) ) {
-			$response[ 'message' ] = __( 'An error occured while getting model to use for generation', 'wpdigi-i18n' );
-			wp_send_json_error( $response );
+			$element_model_to_use = $response[ 'model_path' ];
 		}
 
 		$element = $this->show( $element_id );
@@ -429,14 +416,12 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 			$response['file'][] = $sheet_groupment_action->generate_sheet();
 
 			foreach( $work_unit_list as $workunit ) {
-
 				$_POST['element_id'] = $workunit->id;
 				$_POST['element_type'] = 'digi-workunit';
 				$_POST['return'] = true;
 				$response['file'][] = $workunit_action->generate_workunit_sheet();
 				// do_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit' );
 			}
-
 
 			if ( !empty( $list_id ) ) {
 				foreach( $list_id as $element ) {
@@ -449,7 +434,6 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 							// do_action( 'wp_ajax_wpdigi_generate_duer_digi-group', $response['file'][0] );
 						}
 						foreach( $element['workunit'] as $workunit_id ) {
-
 							$_POST['element_id'] = $workunit_id['id'];
 							$_POST['element_type'] = 'digi-workunit';
 							$_POST['return'] = true;

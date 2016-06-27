@@ -3,9 +3,10 @@
 class wpdigi_tools_ctr {
 
 	function __construct() {
-    add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+	    add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
-    add_action( 'wp_ajax_reset_method_evaluation', array( $this, 'callback_reset_method_evaluation' ) );
+		add_action( 'wp_ajax_reset_method_evaluation', array( $this, 'callback_reset_method_evaluation' ) );
+		add_action( 'wp_ajax_compil_risk_list', array( $this, 'callback_risk_compilation' ) );
 	}
 
   public function admin_menu() {
@@ -18,8 +19,7 @@ class wpdigi_tools_ctr {
 
   public function callback_reset_method_evaluation() {
     check_ajax_referer( 'reset_method_evaluation' );
- ini_set("display_errors", true);
- error_reporting(E_ALL);
+
     global $wpdigi_evaluation_method_controller;
     global $wpdigi_evaluation_method_variable_controller;
 
@@ -160,6 +160,43 @@ class wpdigi_tools_ctr {
 		  }
 		}
 	}
+
+	/**
+	 * Callback function for fixing risk list in element when some errors are detected / Fonction de rappel pour la correction de la liste des risques dans les éléments
+	 */
+	public function callback_risk_compilation() {
+		check_ajax_referer( 'risk_list_compil' );
+		global $wpdigi_risk_ctr, $wpdigi_group_ctr, $wpdigi_workunit_ctr;
+
+		/**	First let's list all group / Commençons par lister les groupements	*/
+		$group_list = $wpdigi_group_ctr->index( array() );
+		foreach ( $group_list as $group ) {
+			$risk_list = $wpdigi_risk_ctr->get_risk_list_for_element( $group );
+			if ( !empty( $risk_list ) ) {
+				foreach ( $risk_list as $risk ) {
+					$group->option[ 'associated_risk' ][] = $risk->id;
+				}
+
+				$wpdigi_group_ctr->update( $group );
+			}
+		}
+
+		/**	Let's list all workunit / Listons les unités de travail */
+		$workunit_list = $wpdigi_workunit_ctr->index( array() );
+		foreach ( $workunit_list as $workunit ) {
+			$risk_list = $wpdigi_risk_ctr->get_risk_list_for_element( $workunit );
+			if ( !empty( $risk_list ) ) {
+				foreach ( $risk_list as $risk ) {
+					$workunit->option[ 'associated_risk' ][] = $risk->id;
+				}
+
+				$wpdigi_workunit_ctr->update( $workunit );
+			}
+		}
+
+		wp_send_json_success();
+	}
+
 }
 
 global $wpdigi_tools_ctr;

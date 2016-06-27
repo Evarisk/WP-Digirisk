@@ -46,19 +46,7 @@ class sheet_groupment_action_01 {
 				wp_send_json_error( $response );
 			}
 
-			$group_model_id_to_use = ( is_int( (int)$response[ 'model_id' ] ) && !empty( $response['model_id'] ) ) ? (int)$response[ 'model_id' ] : $response[ 'model_path' ];
-		}
-
-		if ( is_int( $group_model_id_to_use ) ) {
-			$group_model_to_use = get_attached_file( $group_model_id_to_use );
-		}
-		else {
-			$group_model_to_use = $group_model_id_to_use;
-		}
-
-		if ( empty( $group_model_to_use ) ) {
-			$response[ 'message' ] = __( 'An error occured while getting model content to use for generation', 'wpdigi-i18n' );
-			wp_send_json_error( $response );
+			$group_model_to_use = $response[ 'model_path' ];
 		}
 
 		global $wpdigi_group_ctr;
