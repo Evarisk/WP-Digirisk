@@ -1,7 +1,6 @@
 # Digirisk
 Plugin pour Wordpress d'évaluation des risques ce plugin vous permettra de rédiger votre DUER et de réaliser le suivi HSE au sein de votre organisation.
 
-[![Build Status](https://img.shields.io/travis/Evarisk/Digirisk/master.svg?label=Linux)](https://travis-ci.org/Evarisk/Digirisk)
 [![license](https://img.shields.io/:license-gplv2-blue.svg)](https://github.com/Evarisk/Digirisk/blob/master/LICENSE.md)
 [![Build Status](https://img.shields.io/travis/Evarisk/Digirisk/master.svg?label=Linux)](https://travis-ci.org/Evarisk/Digirisk)
 [![Build status](https://ci.appveyor.com/api/projects/status/6r0poqodskk8tdv2?svg=true)](https://ci.appveyor.com/project/jimmyeoxia/task-manager)

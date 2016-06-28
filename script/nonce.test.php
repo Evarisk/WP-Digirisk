@@ -3,22 +3,9 @@
 * @author: Jimmy Latour jimmy.eoxia@gmail.com
 */
 
-require_once( '../task-manager/script/wp-emulator.script.php' );
+require_once( '../digirisk/script/wp-emulator.script.php' );
 
-DEFINE( 'WPEO_TASKMANAGER_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) . '../' );
-
-require_once( WPEO_TASKMANAGER_PATH . 'core/wpeo_util.01.php' );
-require_once( WPEO_TASKMANAGER_PATH . 'core/wpeo_template.01.php' );
-
-require_once( WPEO_TASKMANAGER_PATH . '/core/taskmanager/taskmanager.controller.01.php' );
-require_once( WPEO_TASKMANAGER_PATH . '/core/taskmanager/taskmanager.action.01.php' );
-
-taskmanager\util\wpeo_util::install_module( 'wpeo_model' );
-taskmanager\util\wpeo_util::install_in( 'core' );
-taskmanager\util\wpeo_util::install_in( 'module' );
-
-require_once( WPEO_TASK_WPSHOP_PATH . '/controller/task_wpshop.controller.01.php' );
-require_once( WPEO_TASK_WPSHOP_PATH . '/controller/task_wpshop.action.01.php' );
+DEFINE( 'WPDIGI_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) . '../' );
 
 
 echo "[+] Starting Nonce Tests" . PHP_EOL . PHP_EOL;
@@ -32,7 +19,7 @@ $total_unsecured_line = 0;
 foreach($unitList as $test)
 {
 	// echo "[+] Testing -> " . $test . PHP_EOL;
-  if ( $test != '../task-manager/script/request.test.php' || $test != '../task-manager/script/nonce.test.php' ) {
+  if ( $test != '../digirisk/script/request.test.php' || $test != '../digirisk/script/nonce.test.php' ) {
     $content = file_get_contents( $test );
 
     $pattern = '/class ([a-z0-9_]+) (extends .* {|{)/';
