@@ -14,7 +14,7 @@ DEFINE('DIGI_NODIST_PATH', str_replace( DIGI_NODIST_DIR, "", dirname( __FILE__ )
 DEFINE('DIGI_NODIST_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', str_replace( "\\", "/", DIGI_NODIST_PATH ) ) );
 
 /**	Load plugin translation	*/
-load_plugin_textdomain( 'wp-digi-dtrans-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 /**	Define the templates directories	*/
 DEFINE( 'DIGI_NODIST_TEMPLATES_MAIN_DIR', DIGI_NODIST_PATH . DIGI_NODIST_DIR . '/templates/' );

@@ -80,7 +80,7 @@ class TransferData_components_controller {
 					$current_transfer_state[ 'danger_category' ][] = $eva_danger_category->id;
 					$eva_danger_category_transfered++;
 					/**	Log	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Danger category %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_danger_category->nom, $wp_danger_category->id), ), 0 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Danger category %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_danger_category->nom, $wp_danger_category->id), ), 0 );
 
 					/**	Save old information about transfered element	*/
 					add_term_meta( $wp_danger_category->id, '_wpdigi_element_computed_identifier', TABLE_CATEGORIE_DANGER . '#value_sep#' . $eva_danger_category->id, true );
@@ -118,21 +118,21 @@ class TransferData_components_controller {
 								$current_transfer_state[ 'danger' ][] = $eva_danger->id;
 								$eva_danger_category_transfered++;
 								/**	Log	*/
-								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger', array( 'object_id' => $eva_danger->id, 'message' => sprintf( __( 'Danger %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_danger->nom, $eva_danger->id), ), 0 );
+								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger', array( 'object_id' => $eva_danger->id, 'message' => sprintf( __( 'Danger %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_danger->nom, $eva_danger->id), ), 0 );
 
 								/**	Save old information about transfered element	*/
 								add_term_meta( $wp_danger->id, '_wpdigi_element_computed_identifier', TABLE_DANGER . '#value_sep#' . $eva_danger->id, true );
 								add_term_meta( $wp_danger->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_DANGER, serialize( $eva_danger ) ) ), true );
 							}
 							else {
-								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Error transferring danger %s from evarisk to taxonomy. Error: %s', 'wp-digi-dtrans-i18n' ), $eva_danger->nom, json_encode( $wp_danger ) ), ), 2 );
+								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Error transferring danger %s from evarisk to taxonomy. Error: %s', 'wpdigi-i18n' ), $eva_danger->nom, json_encode( $wp_danger ) ), ), 2 );
 							}
 						}
 					}
 
 				}
 				else {
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Error transferring danger category %s from evarisk to taxonomy. Error: %s', 'wp-digi-dtrans-i18n' ), $eva_danger_category->nom, json_encode( $wp_danger_category ) ), ), 2 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-danger-category', array( 'object_id' => $eva_danger_category->id, 'message' => sprintf( __( 'Error transferring danger category %s from evarisk to taxonomy. Error: %s', 'wpdigi-i18n' ), $eva_danger_category->nom, json_encode( $wp_danger_category ) ), ), 2 );
 				}
 			}
 		}
@@ -210,14 +210,14 @@ class TransferData_components_controller {
 					$current_transfer_state[ 'evaluation_method_var' ][] = $eva_var->id;
 					$eva_vars_transfered++;
 					/**	Log creation	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-vars', array( 'object_id' => $eva_var->id, 'message' => sprintf( __( 'Evaluation method variable %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_var->nom, $wp_var->id ), ), 0 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-vars', array( 'object_id' => $eva_var->id, 'message' => sprintf( __( 'Evaluation method variable %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_var->nom, $wp_var->id ), ), 0 );
 
 					/**	Save old information about transfered element	*/
 					add_term_meta( $wp_var->id, '_wpdigi_element_computed_identifier', TABLE_VARIABLE . '#value_sep#' . $eva_var->id, true );
 					add_term_meta( $wp_var->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_VARIABLE, serialize( $eva_var ) ) ), true );
 				}
 				else {
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-vars', array( 'object_id' => $eva_var->id, 'message' => sprintf( __( 'Error transferring evaluation method variable %s from evarisk to taxonomy. error: %s', 'wp-digi-dtrans-i18n' ), $eva_var->nom, json_encode( $wp_var ) ), ), 2 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-vars', array( 'object_id' => $eva_var->id, 'message' => sprintf( __( 'Error transferring evaluation method variable %s from evarisk to taxonomy. error: %s', 'wpdigi-i18n' ), $eva_var->nom, json_encode( $wp_var ) ), ), 2 );
 				}
 			}
 		}
@@ -327,14 +327,14 @@ class TransferData_components_controller {
 					$current_transfer_state[ 'evaluation_method' ][] = $eva_method->id;
 					$eva_method_transfered++;
 					/**	Log creation	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-method', array( 'object_id' => $eva_method->id, 'message' => sprintf( __( 'Evaluation method %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_method->nom, $wp_evaluation_method->id ), ), 0 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-method', array( 'object_id' => $eva_method->id, 'message' => sprintf( __( 'Evaluation method %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_method->nom, $wp_evaluation_method->id ), ), 0 );
 
 					/**	Save old information about transfered element	*/
 					add_term_meta( $wp_evaluation_method->id, '_wpdigi_element_computed_identifier', TABLE_METHODE . '#value_sep#' . $eva_method->id, true );
 					add_term_meta( $wp_evaluation_method->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_METHODE, serialize( $eva_method ) ) ), true );
 				}
 				else {
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-method', array( 'object_id' => $eva_method->id, 'message' => sprintf( __( 'Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s', 'wp-digi-dtrans-i18n' ), $eva_method->nom, json_encode( $wp_evaluation_method ) ), ), 2 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-evaluation-method', array( 'object_id' => $eva_method->id, 'message' => sprintf( __( 'Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s', 'wpdigi-i18n' ), $eva_method->nom, json_encode( $wp_evaluation_method ) ), ), 2 );
 				}
 			}
 		}
@@ -416,7 +416,7 @@ class TransferData_components_controller {
 					$current_transfer_state[ 'recommendation_category' ][] = $eva_recommendation_category->id;
 					$eva_recommendation_category_transfered++;
 					/**	Log creation	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation_category->id, 'message' => sprintf( __( 'Recommendation category %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_recommendation_category->nom, $wp_category_recommendation->id ), ), 0 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation_category->id, 'message' => sprintf( __( 'Recommendation category %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_recommendation_category->nom, $wp_category_recommendation->id ), ), 0 );
 
 					/**	Save old information about transfered element	*/
 					add_term_meta( $wp_category_recommendation->id, '_wpdigi_element_computed_identifier', TABLE_CATEGORIE_PRECONISATION . '#value_sep#' . $eva_recommendation_category->id, true );
@@ -460,7 +460,7 @@ class TransferData_components_controller {
 								$eva_recommendation_category_transfered++;
 
 								/**	Log creation	*/
-								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation->id, 'message' => sprintf( __( 'Recommendation %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_recommendation->nom, $wp_recommendation->id ), ), 0 );
+								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation->id, 'message' => sprintf( __( 'Recommendation %s transfered from evarisk on taxonomy having id. %d', 'wpdigi-i18n' ), $eva_recommendation->nom, $wp_recommendation->id ), ), 0 );
 
 								/**	Save old information about transfered element	*/
 								add_term_meta( $wp_recommendation->id, '_wpdigi_element_computed_identifier', TABLE_PRECONISATION . '#value_sep#' . $eva_recommendation->id, true );
@@ -468,13 +468,13 @@ class TransferData_components_controller {
 							}
 							else {
 								/**	Log creation	*/
-								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation->id, 'message' => sprintf( __( 'Error while transferring recommendation %s from Evarisk to taxonomy. Error: %s', 'wp-digi-dtrans-i18n' ), $eva_recommendation->nom, $wp_recommendation ), ), 0 );
+								wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation', array( 'object_id' => $eva_recommendation->id, 'message' => sprintf( __( 'Error while transferring recommendation %s from Evarisk to taxonomy. Error: %s', 'wpdigi-i18n' ), $eva_recommendation->nom, $wp_recommendation ), ), 0 );
 							}
 						}
 					}
 				}
 				else {
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation-category', array( 'object_id' => $eva_recommendation_category->id, 'message' => sprintf( __( 'Error transferring recommendation category from evarisk to taxonomy. Error: %s', 'wp-digi-dtrans-i18n' ), $eva_recommendation_category->nom, $wp_category_recommendation ), ), 2 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-recommendation-category', array( 'object_id' => $eva_recommendation_category->id, 'message' => sprintf( __( 'Error transferring recommendation category from evarisk to taxonomy. Error: %s', 'wpdigi-i18n' ), $eva_recommendation_category->nom, $wp_category_recommendation ), ), 2 );
 				}
 			}
 		}
@@ -524,7 +524,7 @@ class TransferData_components_controller {
 				wp_set_object_terms( $model_id, array( 'model', $model->categorie ), 'attachment_category' );
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-model', array( 'object_id' => $model->id, 'message' => sprintf( __( 'Error transferring model named %s from evarisk to wordpress media under id. %d', 'wp-digi-dtrans-i18n' ), $model->nom, $model_id ), ), 2 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-model', array( 'object_id' => $model->id, 'message' => sprintf( __( 'Error transferring model named %s from evarisk to wordpress media under id. %d', 'wpdigi-i18n' ), $model->nom, $model_id ), ), 2 );
 			}
 		}
 

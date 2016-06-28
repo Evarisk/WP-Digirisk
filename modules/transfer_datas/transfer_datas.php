@@ -21,7 +21,7 @@ DEFINE('DIGI_DTRANS_PATH', str_replace( DIGI_DTRANS_DIR, "", dirname( __FILE__ )
 DEFINE('DIGI_DTRANS_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', str_replace( "\\", "/", DIGI_DTRANS_PATH ) ) );
 
 /**	Load plugin translation	*/
-load_plugin_textdomain( 'wp-digi-dtrans-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 /**	Define the templates directories	*/
 DEFINE( 'DIGI_DTRANS_TEMPLATES_MAIN_DIR', DIGI_DTRANS_PATH . DIGI_DTRANS_DIR . '/templates/' );

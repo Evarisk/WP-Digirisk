@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="wrap wpeo-logs-wrap">
-	<h2><?php _e('Logs', 'wpeolog-i18n'); ?> <a class="add-new-h2" href="<?php  echo admin_url( 'admin-post.php?action=add' ); ?>"><?php _e( 'Add New', 'wpeolog-i18n' ); ?></a></h2>
+	<h2><?php _e('Logs', 'wpdigi-i18n'); ?> <a class="add-new-h2" href="<?php  echo admin_url( 'admin-post.php?action=add' ); ?>"><?php _e( 'Add New', 'wpdigi-i18n' ); ?></a></h2>
 
 	<?php if ( !empty( $page_transient ) ): ?>
 	  	<div class="<?php echo $page_transient['type']; ?> notice">

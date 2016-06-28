@@ -104,7 +104,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 			$message = __( 'An error occured while creating work unit', 'wpdigi-i18n' );
 			$output = null;
 
-			wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'wpeotask-i18n'), json_encode( $_POST ), json_encode( $workunit ) ), ), 2 );
+			wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'wpdigi-i18n'), json_encode( $_POST ), json_encode( $workunit ) ), ), 2 );
 		}
 
 		ob_start();

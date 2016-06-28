@@ -7,7 +7,7 @@
 
 /*	Check if file is include. No direct access possible with file url	*/
 if ( !defined( 'EVA_PLUGIN_VERSION' ) ) {
-	die( __('Access is not allowed by this way', 'digi-noticemanager-i18n') );
+	die( __('Access is not allowed by this way', 'wpdigi-i18n') );
 }
 
 /**
@@ -23,7 +23,7 @@ DEFINE( 'DIGINOTIF_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) 
 DEFINE( 'DIGINOTIF_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', DIGINOTIF_PATH ) );
 
 /**	Appel des traductions pour le module / Call translation for module	*/
-load_plugin_textdomain( 'digi-noticemanager-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 /**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
 DEFINE( 'DIGINOTIF_TEMPLATES_MAIN_DIR', DIGINOTIF_PATH . '/templates/');

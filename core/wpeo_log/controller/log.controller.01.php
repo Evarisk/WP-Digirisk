@@ -67,7 +67,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 		 * @return void
 		 */
 		public function admin_menu() {
-			add_submenu_page( 'tools.php', __( 'Logs', 'wpeolog-i18n' ), __( 'Logs', 'wpeolog-i18n' ), 'manage_options', 'wpeo-log-page', array( &$this, 'render_add_submenu_page' ) );
+			add_submenu_page( 'tools.php', __( 'Logs', 'wpdigi-i18n' ), __( 'Logs', 'wpdigi-i18n' ), 'manage_options', 'wpeo-log-page', array( &$this, 'render_add_submenu_page' ) );
 		}
 
 		/**
@@ -79,7 +79,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 			$dir_file = $upload_dir['basedir'] . '/wpeolog/';
 
 			$array_size_format = $this->get_array_size_format();
-			$array_file_rotate_dropdown = array( 'on' => __( 'On', 'wpeolog-i18n' ), 'off' => __( 'Off', 'wpeolog-i18n' ) );
+			$array_file_rotate_dropdown = array( 'on' => __( 'On', 'wpdigi-i18n' ), 'off' => __( 'Off', 'wpdigi-i18n' ) );
 			$array_service = get_option( '_wpeo_log_settings' );
 			$array_service = json_decode( $array_service, true );
 
@@ -442,7 +442,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 			$success = update_option( '_wpeo_log_settings', json_encode( $array_current_settings ) );
 
 			if ( $success ) {
-				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'A new service has been created!', 'wpeolog-i18n' ) ) ) );
+				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'A new service has been created!', 'wpdigi-i18n' ) ) ) );
 			}
 
 			if ( !empty( $name ) ) {
@@ -456,7 +456,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 
 		public function edit_service() {
 			if ( empty( $_POST['service'] ) || !is_array( $_POST['service'] ) ) {
-				set_transient( 'log_message', json_encode( array( 'type' => 'error', 'message' => __( 'Invalid data to update service' ), 'wpeolog-i18n' ) ) );
+				set_transient( 'log_message', json_encode( array( 'type' => 'error', 'message' => __( 'Invalid data to update service' ), 'wpdigi-i18n' ) ) );
 				wp_safe_redirect( wp_get_referer() );
 				die();
 			}
@@ -483,7 +483,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 
 
 			if( $success ) {
-				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'The services has been updated!', 'wpeolog-i18n' ) ) ) );
+				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'The services has been updated!', 'wpdigi-i18n' ) ) ) );
 			}
 
 			wp_safe_redirect( wp_get_referer() );
@@ -518,11 +518,11 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 				$success = update_option( '_wpeo_log_settings', json_encode( $array_current_setting ) );
 
 				if( $success ) {
-					set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( sprintf( 'The service %d has been deleted!', $service_id ), 'wpeolog-i18n' ) ) ) );
+					set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( sprintf( 'The service %d has been deleted!', $service_id ), 'wpdigi-i18n' ) ) ) );
 				}
 			}
 			else {
-				set_transient( 'log_message', json_encode( array( 'type' => 'error', 'message' => __( sprintf( 'The service %d is invalid!', $service_id ), 'wpeolog-i18n' ) ) ) );
+				set_transient( 'log_message', json_encode( array( 'type' => 'error', 'message' => __( sprintf( 'The service %d is invalid!', $service_id ), 'wpdigi-i18n' ) ) ) );
 			}
 
 			wp_safe_redirect( wp_get_referer() );
@@ -543,7 +543,7 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 
 			$success = unlink( $dir_file . $file_name );
 			if ( $success )
-				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'The file has been deleted!', 'wpeolog-i18n' ) ) ) );
+				set_transient( 'log_message', json_encode( array( 'type' => 'updated', 'message' => __( 'The file has been deleted!', 'wpdigi-i18n' ) ) ) );
 			wp_safe_redirect( wp_get_referer() );
 			die();
 		}

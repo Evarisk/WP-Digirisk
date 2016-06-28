@@ -1,9 +1,9 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<br /><h3><?php _e( 'Chart', 'wpeolog-i18n' ); ?></h3>
+<br /><h3><?php _e( 'Chart', 'wpdigi-i18n' ); ?></h3>
 
 <?php if( empty( $count_error ) && empty( $count_info ) && empty( $count_warning ) ): ?>
-	<?php _e( 'No data for chart', 'wpeolog-i18n'); ?>
+	<?php _e( 'No data for chart', 'wpdigi-i18n'); ?>
 <?php else: ?>
 	<canvas class="alignleft" id="myChart" width="200" height="200"></canvas>
 <?php endif; ?>

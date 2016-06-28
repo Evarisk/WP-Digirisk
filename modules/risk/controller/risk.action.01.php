@@ -248,10 +248,10 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		?>
 		<li class="wp-digi-risk-list-header wp-digi-table-header" >
 			<span class="wp-digi-risk-list-column-thumbnail" >&nbsp;</span>
-			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-risks-i18n' ); ?></span>
-			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-risks-i18n' ); ?></span>
-			<span><?php _e( 'Danger', 'wpdigi-risks-i18n' ); ?></span>
-			<span><?php _e( 'Comment', 'wpdigi-risks-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-i18n' ); ?></span>
+			<span><?php _e( 'Danger', 'wpdigi-i18n' ); ?></span>
+			<span><?php _e( 'Comment', 'wpdigi-i18n' ); ?></span>
 			<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 		</li>
 		<?php

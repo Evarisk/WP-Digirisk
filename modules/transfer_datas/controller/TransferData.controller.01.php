@@ -116,7 +116,7 @@ class TransferData_controller_01 {
 	function admin_menu() {
 		global $digi_data_transfer_menu;
 		remove_menu_page( 'digirisk-simple-risk-evaluation' );
-		$digi_data_transfer_menu = add_menu_page( __( 'Digirisk : Manage datas transfert from digirisk V5.X', 'wp-digi-dtrans-i18n' ), __( 'Digirisk', 'wpdigi-i18n' ), 'manage_options', 'digi-transfert', array( &$this, 'transfer_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );
+		$digi_data_transfer_menu = add_menu_page( __( 'Digirisk : Manage datas transfert from digirisk V5.X', 'wpdigi-i18n' ), __( 'Digirisk', 'wpdigi-i18n' ), 'manage_options', 'digi-transfert', array( &$this, 'transfer_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );
 	}
 
 	/* PRODEST:
