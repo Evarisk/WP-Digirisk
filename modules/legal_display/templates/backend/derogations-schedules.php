@@ -18,13 +18,13 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Permanent', 'wpdigi-i18n' ); ?>
-      <input name="derogation_schedule[permanent]" type="text" />
+      <input name="derogation_schedule[permanent]" type="text" value="<?php echo $data['legal_display']->option['derogation_schedule']['permanent']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Occasional', 'wpdigi-i18n' ); ?>
-      <input name="derogation_schedule[occasional]" type="text" />
+      <input name="derogation_schedule[occasional]" type="text" value="<?php echo $data['legal_display']->option['derogation_schedule']['occasional']; ?>" />
     </label>
   </li>
 </ul>
