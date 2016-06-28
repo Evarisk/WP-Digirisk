@@ -16,7 +16,7 @@
 					<input type="hidden" name="action" value="wpdigi_ajax_workunit_create" />
 					<input type="hidden" name="workunit[parent_id]" value="<?php echo $args[ 'group_id' ]; ?>" />
 					<?php wp_nonce_field( 'wpdigi-workunit-creation', 'wpdigi_nonce', false, true ); ?>
-					<input type="text" placeholder="<?php _e( 'New work unit', 'wpdigi-i18n' ); ?>" name="workunit[title]" />
+					<input type="text" placeholder="<?php _e( 'New work unit', 'digirisk' ); ?>" name="workunit[title]" />
 				</form>
 			</span>
 			<span class="wp-digi-new-workunit-action" ><a href="#" class="wp-digi-action dashicons dashicons-plus" ></a></span>

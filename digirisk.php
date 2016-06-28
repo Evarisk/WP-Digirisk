@@ -9,7 +9,7 @@ Author URI:  http://www.evarisk.com
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Domain Path: /core/assets/languages
-Text Domain: wpdigi-i18n
+Text Domain: digirisk
 */
 
 DEFINE( 'EVA_PLUGIN_VERSION', '6.1.4.0');
@@ -22,7 +22,7 @@ DEFINE( 'WPDIGI_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() 
 DEFINE( 'WPDIGI_CORE_OPTION_NAME', '_digirisk_core' );
 
 /**	Chargement des fichiers de traductions / Load plugin translation	*/
-load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/core/assets/languages/' );
+load_plugin_textdomain( 'digirisk', false, dirname( plugin_basename( __FILE__ ) ) . '/core/assets/languages/' );
 
 /**	Chargement de la gestion des modules automatique / Load modules automatic management	*/
 include_once( WPDIGI_PATH . 'core/module_management/module_management.php');

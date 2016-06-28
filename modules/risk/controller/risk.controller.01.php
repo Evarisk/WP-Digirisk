@@ -58,21 +58,21 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 	function custom_post_type() {
 		/**	Créé les sociétés: élément principal / Create risk : main element 	*/
 		$labels = array(
-			'name'                => __( 'Risks', 'wpdigi-i18n' ),
-			'singular_name'       => __( 'Risk', 'wpdigi-i18n' ),
-			'menu_name'           => __( 'Risks', 'wpdigi-i18n' ),
-			'name_admin_bar'      => __( 'Risks', 'wpdigi-i18n' ),
-			'parent_item_colon'   => __( 'Parent Item:', 'wpdigi-i18n' ),
-			'all_items'           => __( 'Risks', 'wpdigi-i18n' ),
-			'add_new_item'        => __( 'Add risk', 'wpdigi-i18n' ),
-			'add_new'             => __( 'Add risk', 'wpdigi-i18n' ),
-			'new_item'            => __( 'New risk', 'wpdigi-i18n' ),
-			'edit_item'           => __( 'Edit risk', 'wpdigi-i18n' ),
-			'update_item'         => __( 'Update risk', 'wpdigi-i18n' ),
-			'view_item'           => __( 'View risk', 'wpdigi-i18n' ),
-			'search_items'        => __( 'Search risk', 'wpdigi-i18n' ),
-			'not_found'           => __( 'Not found', 'wpdigi-i18n' ),
-			'not_found_in_trash'  => __( 'Not found in Trash', 'wpdigi-i18n' ),
+			'name'                => __( 'Risks', 'digirisk' ),
+			'singular_name'       => __( 'Risk', 'digirisk' ),
+			'menu_name'           => __( 'Risks', 'digirisk' ),
+			'name_admin_bar'      => __( 'Risks', 'digirisk' ),
+			'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
+			'all_items'           => __( 'Risks', 'digirisk' ),
+			'add_new_item'        => __( 'Add risk', 'digirisk' ),
+			'add_new'             => __( 'Add risk', 'digirisk' ),
+			'new_item'            => __( 'New risk', 'digirisk' ),
+			'edit_item'           => __( 'Edit risk', 'digirisk' ),
+			'update_item'         => __( 'Update risk', 'digirisk' ),
+			'view_item'           => __( 'View risk', 'digirisk' ),
+			'search_items'        => __( 'Search risk', 'digirisk' ),
+			'not_found'           => __( 'Not found', 'digirisk' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
 		);
 		$rewrite = array(
 			'slug'                => '/',
@@ -81,8 +81,8 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 			'feeds'               => true,
 		);
 		$args = array(
-			'label'               => __( 'Digirisk risk', 'wpdigi-i18n' ),
-			'description'         => __( 'Manage risks into digirisk', 'wpdigi-i18n' ),
+			'label'               => __( 'Digirisk risk', 'digirisk' ),
+			'description'         => __( 'Manage risks into digirisk', 'digirisk' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
 			'hierarchical'        => true,
@@ -205,7 +205,7 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 		/** Définition de l'onglet permettant l'affichage des risques pour le type d'élément actuel / Define the tab allowing to display risks' tab for current element type	*/
 		$tab_list = array_merge( $tab_list, array(
 			$this->get_post_type() => array(
-				'text'	=> __( 'Risks', 'wpdigi-i18n' ),
+				'text'	=> __( 'Risks', 'digirisk' ),
 				'count' => count( $current_element->option[ 'associated_risk' ] ),
 			),
 		)	);

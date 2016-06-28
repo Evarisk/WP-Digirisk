@@ -67,22 +67,22 @@ class wpdigi_evaluation_method_variable_controller_01 extends term_ctr_01 {
 		global $wpdigi_risk_ctr;
 
 		$labels = array(
-			'name'                       => _x( 'Evaluation methods vars', 'wpdigi-i18n' ),
-			'singular_name'              => _x( 'Evaluation methods var', 'wpdigi-i18n' ),
-			'search_items'               => __( 'Search evaluation methods vars', 'wpdigi-i18n' ),
-			'popular_items'              => __( 'Popular evaluation methods vars', 'wpdigi-i18n' ),
-			'all_items'                  => __( 'All evaluation methods vars', 'wpdigi-i18n' ),
+			'name'                       => _x( 'Evaluation methods vars', 'digirisk' ),
+			'singular_name'              => _x( 'Evaluation methods var', 'digirisk' ),
+			'search_items'               => __( 'Search evaluation methods vars', 'digirisk' ),
+			'popular_items'              => __( 'Popular evaluation methods vars', 'digirisk' ),
+			'all_items'                  => __( 'All evaluation methods vars', 'digirisk' ),
 			'parent_item'                => null,
 			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit evaluation methods var', 'wpdigi-i18n' ),
-			'update_item'                => __( 'Update evaluation methods var', 'wpdigi-i18n' ),
-			'add_new_item'               => __( 'Add New evaluation methods var', 'wpdigi-i18n' ),
-			'new_item_name'              => __( 'New evaluation methods var Name', 'wpdigi-i18n' ),
-			'separate_items_with_commas' => __( 'Separate evaluation methods vars with commas', 'wpdigi-i18n' ),
-			'add_or_remove_items'        => __( 'Add or remove evaluation methods vars', 'wpdigi-i18n' ),
-			'choose_from_most_used'      => __( 'Choose from the most used evaluation methods vars', 'wpdigi-i18n' ),
-			'not_found'                  => __( 'No evaluation methods vars found.', 'wpdigi-i18n' ),
-			'menu_name'                  => __( 'Evaluation methods vars', 'wpdigi-i18n' ),
+			'edit_item'                  => __( 'Edit evaluation methods var', 'digirisk' ),
+			'update_item'                => __( 'Update evaluation methods var', 'digirisk' ),
+			'add_new_item'               => __( 'Add New evaluation methods var', 'digirisk' ),
+			'new_item_name'              => __( 'New evaluation methods var Name', 'digirisk' ),
+			'separate_items_with_commas' => __( 'Separate evaluation methods vars with commas', 'digirisk' ),
+			'add_or_remove_items'        => __( 'Add or remove evaluation methods vars', 'digirisk' ),
+			'choose_from_most_used'      => __( 'Choose from the most used evaluation methods vars', 'digirisk' ),
+			'not_found'                  => __( 'No evaluation methods vars found.', 'digirisk' ),
+			'menu_name'                  => __( 'Evaluation methods vars', 'digirisk' ),
 		);
 
 		$args = array(

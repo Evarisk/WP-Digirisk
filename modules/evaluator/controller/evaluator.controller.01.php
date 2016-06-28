@@ -51,7 +51,7 @@ if ( !class_exists( 'wpdigi_evaluator_ctr_01' ) ) {
 			/** Définition de l'onglet permettant l'affichage des utilisateurs pour le type d'élément actuel / Define the tab allowing to display evaluators' tab for current element type	*/
 			$tab_list = array_merge( $tab_list, array(
 				'evaluator' => array(
-					'text'	=> __( 'Evaluators', 'wpdigi-i18n' ),
+					'text'	=> __( 'Evaluators', 'digirisk' ),
 					'count' => !empty( $current_element->option[ 'user_info' ][ 'affected_id' ][ 'evaluator' ] ) ? count( $current_element->option[ 'user_info' ][ 'affected_id' ][ 'evaluator' ] ) : 0,
 				),
 			)	);

@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 
 <ul class="wp-digi-form">
-  <li><h2><?php _e( 'Rules', 'wpdigi-i18n' ); ?></h2></li>
+  <li><h2><?php _e( 'Rules', 'digirisk' ); ?></h2></li>
   <li>
     <label>
-      <?php _e( 'location', 'wpdigi-i18n' ); ?>
+      <?php _e( 'location', 'digirisk' ); ?>
       <input name="rules[location]" type="text" value="<?php echo $data['legal_display']->option['rules']['location']; ?>" />
     </label>
   </li>

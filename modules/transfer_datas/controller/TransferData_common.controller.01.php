@@ -132,7 +132,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
 			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
 				/**	Log creation	*/
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wpdigi-i18n' ), $element_id), ), 0 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'digirisk' ), $element_id), ), 0 );
 
 				/**	Store an option to avoid multiple transfer	*/
 				$digirisk_transfer_options[ $element_type ][] = $element->id;
@@ -204,7 +204,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				}
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wpdigi-i18n' ), json_encode( $element_id ) ), ), 2 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'digirisk' ), json_encode( $element_id ) ), ), 2 );
 			}
 		}
 
@@ -375,7 +375,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		if ( !empty( $survey_results ) ) {
 			foreach ( $survey_results as $original_survey_id => $final_survey ) {
 				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wpdigi-i18n' ), ), 0 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'digirisk' ), ), 0 );
 			}
 		}
 	}
@@ -505,7 +505,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				break;
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wpdigi-i18n' ), $main_type, $attach_id), ), 0 );
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'digirisk' ), $main_type, $attach_id), ), 0 );
 			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 		}
 		else {
@@ -551,10 +551,10 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				$old_evarisk_element .= ( 'picture' == $main_type  ? $document->idElement : $document->id_element );
 			}
 			else {
-				$old_evarisk_element = __( 'Document model', 'wpdigi-i18n' );
+				$old_evarisk_element = __( 'Document model', 'digirisk' );
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wpdigi-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'digirisk' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/

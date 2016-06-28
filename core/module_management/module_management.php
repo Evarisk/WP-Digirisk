@@ -7,7 +7,7 @@
 
 /*	Check if file is include. No direct access possible with file url	*/
 if ( !defined( 'EVA_PLUGIN_VERSION' ) ) {
-	die( __('Access is not allowed by this way', 'wpdigi-i18n') );
+	die( __('Access is not allowed by this way', 'digirisk') );
 }
 
 if ( !defined( 'DIGIMODMAN_VERSION' ) ) {
@@ -24,7 +24,7 @@ if ( !defined( 'DIGIMODMAN_VERSION' ) ) {
 	DEFINE( 'DIGIMODMAN_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', DIGIMODMAN_PATH ) );
 
 	/**	Appel des traductions pour le module / Call translation for module	*/
-	load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'digirisk', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	/**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
 	DEFINE( 'DIGIMODMAN_TEMPLATES_MAIN_DIR', DIGIMODMAN_PATH . '/templates/');

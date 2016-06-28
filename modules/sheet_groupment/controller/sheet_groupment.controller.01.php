@@ -19,7 +19,7 @@ class sheet_groupment_controller_01 {
     /** Définition de l'onglet permettant l'affichage des risques pour le type d'élément actuel / Define the tab allowing to display risks' tab for current element type	*/
     $tab_list = array_merge( $tab_list, array(
       'sheet-groupment' => array(
-        'text'	=> __( 'Generate sheet', 'wpdigi-i18n' ),
+        'text'	=> __( 'Generate sheet', 'digirisk' ),
         'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
       ),
     )	);

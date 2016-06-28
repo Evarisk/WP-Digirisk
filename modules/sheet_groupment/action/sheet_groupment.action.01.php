@@ -24,7 +24,7 @@ class sheet_groupment_action_01 {
 	public function generate_sheet() {
 		$response = array(
 			'status' 	=> false,
-			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
+			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'digirisk' ),
 		);
 
 		if ( 0 === (int) $_POST['element_id'] )
@@ -74,7 +74,7 @@ class sheet_groupment_action_01 {
 
 		$group = $wpdigi_group_ctr->show( $group->id );
 
-		// $picture = __( 'No picture defined', 'wpdigi-i18n' );
+		// $picture = __( 'No picture defined', 'digirisk' );
 		// if ( !empty( $group->thumbnail_id ) && ( true === is_int( (int)$group->thumbnail_id ) ) ) {
 		// 	$picture_definition = wp_get_attachment_image_src( $group->thumbnail_id, 'digirisk-element-thumbnail' );
 		// 	$picture = array(

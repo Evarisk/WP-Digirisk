@@ -26,5 +26,5 @@
 <?php endforeach; ?>
 </ul>
 <?php else: ?>
-	<?php _e( 'There is no document yet', 'wpdigi-i18n' ); ?>
+	<?php _e( 'There is no document yet', 'digirisk' ); ?>
 <?php endif; ?>

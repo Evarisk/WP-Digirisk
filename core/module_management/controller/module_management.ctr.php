@@ -8,7 +8,7 @@
 
 /*	Check if file is include. No direct access possible with file url	*/
 if ( !defined( 'EVA_PLUGIN_VERSION' ) ) {
-	die( __('Access is not allowed by this way', 'wpdigi-i18n') );
+	die( __('Access is not allowed by this way', 'digirisk') );
 }
 
 /**
@@ -25,7 +25,7 @@ class digi_module_management {
 
 	private static $option_name = 'digirisk_module';
 
-	private static $text_domain = 'wpdigi-i18n';
+	private static $text_domain = 'digirisk';
 
 	private static $log_name = 'wps_addon';
 

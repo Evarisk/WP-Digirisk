@@ -98,7 +98,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 			$workunit = $this->show( $workunit->id );
 
 			$status = true;
-			$message = __( 'Work unit have been created succesfully', 'wpdigi-i18n' );
+			$message = __( 'Work unit have been created succesfully', 'digirisk' );
 			/**	Affichage de la liste des unités de travail pour le groupement actuellement sélectionné / Display the work unit list for current selected group	*/
 			ob_start();
 			require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list', 'item' ) );
@@ -107,10 +107,10 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		}
 		else {
 			$status = false;
-			$message = __( 'An error occured while creating work unit', 'wpdigi-i18n' );
+			$message = __( 'An error occured while creating work unit', 'digirisk' );
 			$output = null;
 
-			wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'wpdigi-i18n'), json_encode( $_POST ), json_encode( $workunit ) ), ), 2 );
+			wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'digirisk'), json_encode( $_POST ), json_encode( $workunit ) ), ), 2 );
 		}
 
 		ob_start();
@@ -185,7 +185,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		$response = array(
 			'status'		=> false,
 			'output'		=> null,
-			'message'		=> __( 'Element to load have not been found', 'wpdigi-i18n' ),
+			'message'		=> __( 'Element to load have not been found', 'digirisk' ),
 		);
 
 		ob_start();
@@ -214,7 +214,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 		wpdigi_utils::check( 'ajax_file_association_' . $element_id );
 
 		if ( empty( $_POST ) || empty( $_POST[ 'files_to_associate'] ) || !is_array( $_POST[ 'files_to_associate'] ) )
-			wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'wpdigi-i18n' ), ) );
+			wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'digirisk' ), ) );
 
 
 		$workunit = $this->show( $element_id );
@@ -263,7 +263,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
  error_reporting(E_ALL);
 		$response = array(
 			'status' 	=> false,
-			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
+			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'digirisk' ),
 		);
 
 		if ( 0 === (int) $_POST['element_id'] )
@@ -293,7 +293,7 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 
 		/**	Définition des détails de l'unité de travail a imprimer / Define workunit details for print	*/
 		/**	Définition de la photo de l'unité de travail / Define workunit main picture	*/
-		$picture = __( 'No picture defined', 'wpdigi-i18n' );
+		$picture = __( 'No picture defined', 'digirisk' );
 		if ( !empty( $workunit->thumbnail_id ) && ( true === is_int( (int)$workunit->thumbnail_id ) ) ) {
 			$picture_definition = wp_get_attachment_image_src( $workunit->thumbnail_id, 'digirisk-element-thumbnail' );
 			$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );

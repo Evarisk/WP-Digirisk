@@ -2,9 +2,9 @@
 <div class="wp-digi-workunit-sheet wp-digi-clearer" data-id="<?php echo $this->current_workunit->id; ?>"  >
 
 	<div class="wp-digi-workunit-sheet-header wp-digi-global-sheet-header .wp-digi-clearer" >
-		<?php $workunit = $this->current_workunit; $editable_identity = true; require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'identity' ) ); unset($workunit); ?><span class="wp-digi-workunit-infos wp-digi-global-infos" > | <?php printf( __( 'Last update on %s', 'wpdigi-i18n' ), mysql2date( 'd.m.y', $this->current_workunit->date_modified, true ) ); ?></span>
+		<?php $workunit = $this->current_workunit; $editable_identity = true; require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'identity' ) ); unset($workunit); ?><span class="wp-digi-workunit-infos wp-digi-global-infos" > | <?php printf( __( 'Last update on %s', 'digirisk' ), mysql2date( 'd.m.y', $this->current_workunit->date_modified, true ) ); ?></span>
 		<div class="wp-digi-workunit-action-container wp-digi-global-action-container hidden" >
-			<button class="wp-digi-bton-fourth" id="wp-digi-save-workunit-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_workunit_' . $this->current_workunit->id ); ?>" ><?php _e( 'Save', 'wpdigi-i18n' ); ?></button>
+			<button class="wp-digi-bton-fourth" id="wp-digi-save-workunit-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_workunit_' . $this->current_workunit->id ); ?>" ><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
 	</div>
 

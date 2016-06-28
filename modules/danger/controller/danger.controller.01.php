@@ -57,22 +57,22 @@ class wpdigi_danger_ctr_01 extends term_ctr_01 {
 		global $wpdigi_risk_ctr;
 
 		$labels = array(
-			'name'                       => _x( 'Dangers', 'wpdigi-i18n' ),
-			'singular_name'              => _x( 'Danger', 'wpdigi-i18n' ),
-			'search_items'               => __( 'Search Dangers', 'wpdigi-i18n' ),
-			'popular_items'              => __( 'Popular Dangers', 'wpdigi-i18n' ),
-			'all_items'                  => __( 'All Dangers', 'wpdigi-i18n' ),
+			'name'                       => _x( 'Dangers', 'digirisk' ),
+			'singular_name'              => _x( 'Danger', 'digirisk' ),
+			'search_items'               => __( 'Search Dangers', 'digirisk' ),
+			'popular_items'              => __( 'Popular Dangers', 'digirisk' ),
+			'all_items'                  => __( 'All Dangers', 'digirisk' ),
 			'parent_item'                => null,
 			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit Danger', 'wpdigi-i18n' ),
-			'update_item'                => __( 'Update Danger', 'wpdigi-i18n' ),
-			'add_new_item'               => __( 'Add New Danger', 'wpdigi-i18n' ),
-			'new_item_name'              => __( 'New Danger Name', 'wpdigi-i18n' ),
-			'separate_items_with_commas' => __( 'Separate dangers with commas', 'wpdigi-i18n' ),
-			'add_or_remove_items'        => __( 'Add or remove dangers', 'wpdigi-i18n' ),
-			'choose_from_most_used'      => __( 'Choose from the most used dangers', 'wpdigi-i18n' ),
-			'not_found'                  => __( 'No dangers found.', 'wpdigi-i18n' ),
-			'menu_name'                  => __( 'Dangers', 'wpdigi-i18n' ),
+			'edit_item'                  => __( 'Edit Danger', 'digirisk' ),
+			'update_item'                => __( 'Update Danger', 'digirisk' ),
+			'add_new_item'               => __( 'Add New Danger', 'digirisk' ),
+			'new_item_name'              => __( 'New Danger Name', 'digirisk' ),
+			'separate_items_with_commas' => __( 'Separate dangers with commas', 'digirisk' ),
+			'add_or_remove_items'        => __( 'Add or remove dangers', 'digirisk' ),
+			'choose_from_most_used'      => __( 'Choose from the most used dangers', 'digirisk' ),
+			'not_found'                  => __( 'No dangers found.', 'digirisk' ),
+			'menu_name'                  => __( 'Dangers', 'digirisk' ),
 		);
 
 		$args = array(

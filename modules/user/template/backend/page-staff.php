@@ -1,12 +1,12 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="wpdigi-staff <?php echo empty( $hidden ) ? 'wrap' : 'hidden'; ?>">
-	<h3><?php _e( 'Import staff' , 'wpdigi-i18n' ); ?></h3>
+	<h3><?php _e( 'Import staff' , 'digirisk' ); ?></h3>
 
 	<ul class="wp-digi-form no-form gridwrapper3 single-line">
 		<li></li>
 		<li></li>
 		<li class="form-element">
-			<label><?php _e( 'Domain mail', 'wpdigi-i18n' ); ?>
+			<label><?php _e( 'Domain mail', 'digirisk' ); ?>
 				<input class="input-domain-mail" type="text" value="<?php echo get_option( 'digirisk_domain_mail', 'demo.com' ); ?>" />
 			</label>
 			<a href="#" data-nonce="<?php echo wp_create_nonce( 'save_domain_mail' ); ?>" class="wp-digi-action wp-digi-action-save-domain-mail dashicons dashicons-edit"></a>
@@ -18,10 +18,10 @@
 	<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
 		<li class="wp-digi-table-header" >
 			<span></span>
-			<span><?php _e('ID', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Lastname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Firtname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Email', 'wpdigi-i18n'); ?></span>
+			<span><?php _e('ID', 'digirisk'); ?></span>
+			<span><?php _e('Lastname', 'digirisk'); ?></span>
+			<span><?php _e('Firtname', 'digirisk'); ?></span>
+			<span><?php _e('Email', 'digirisk'); ?></span>
 			<span></span>
 		</li>
 
@@ -51,43 +51,43 @@
 		</form>
 	</div>
 
-		<!-- <a href="#" class="more-option wp-digi-action"><i class="dashicons dashicons-plus"></i><?php _e( 'More options', 'wpdigi-i18n' );?></a>
+		<!-- <a href="#" class="more-option wp-digi-action"><i class="dashicons dashicons-plus"></i><?php _e( 'More options', 'digirisk' );?></a>
 
 		<ul class="row gridwrapper4 hidden">
-			<li class="form-element"><label><?php _e( 'Social security number', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][social_security_number]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Address', 'wpdigi-i18n' ); ?><input type="text" name="address[address]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Hiring date', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][hiring_date]" class="wpdigi_date" /></label></li>
-			<li class="form-element"><label><?php _e( 'Job', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][job]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Birthday', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][birthday]" class="wpdigi_date" /></label></li>
-			<li class="form-element"><label><?php _e( 'Additional adress', 'wpdigi-i18n' ); ?><input type="text" name="address[additional_address]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Release date of society', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][release_date_of_society]" class="wpdigi_date" /></label></li>
-			<li class="form-element"><label><?php _e( 'Professional qualification', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][professional_qualification]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Sex', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][sexe]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Postcode', 'wpdigi-i18n' ); ?><input type="text" name="address[postcode]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Insurance compagny', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][insurance_compagny]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Nationality', 'wpdigi-i18n' ); ?><input type="text" name="user[option][user_info][nationality]" /></label></li>
-			<li class="form-element"><label><?php _e( 'Town', 'wpdigi-i18n' ); ?><input type="text" name="address[town]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Social security number', 'digirisk' ); ?><input type="text" name="user[option][user_info][social_security_number]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Address', 'digirisk' ); ?><input type="text" name="address[address]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Hiring date', 'digirisk' ); ?><input type="text" name="user[option][user_info][hiring_date]" class="wpdigi_date" /></label></li>
+			<li class="form-element"><label><?php _e( 'Job', 'digirisk' ); ?><input type="text" name="user[option][user_info][job]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Birthday', 'digirisk' ); ?><input type="text" name="user[option][user_info][birthday]" class="wpdigi_date" /></label></li>
+			<li class="form-element"><label><?php _e( 'Additional adress', 'digirisk' ); ?><input type="text" name="address[additional_address]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Release date of society', 'digirisk' ); ?><input type="text" name="user[option][user_info][release_date_of_society]" class="wpdigi_date" /></label></li>
+			<li class="form-element"><label><?php _e( 'Professional qualification', 'digirisk' ); ?><input type="text" name="user[option][user_info][professional_qualification]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Sex', 'digirisk' ); ?><input type="text" name="user[option][user_info][sexe]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Postcode', 'digirisk' ); ?><input type="text" name="address[postcode]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Insurance compagny', 'digirisk' ); ?><input type="text" name="user[option][user_info][insurance_compagny]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Nationality', 'digirisk' ); ?><input type="text" name="user[option][user_info][nationality]" /></label></li>
+			<li class="form-element"><label><?php _e( 'Town', 'digirisk' ); ?><input type="text" name="address[town]" /></label></li>
 		</ul> -->
 
-	<!--<a href="#" class="add-staff wp-digi-action wp-digi-bton-first float right"><i class="dashicons dashicons-plus"></i><?php _e( 'Add', 'wpdigi-i18n' ); ?></a>-->
+	<!--<a href="#" class="add-staff wp-digi-action wp-digi-bton-first float right"><i class="dashicons dashicons-plus"></i><?php _e( 'Add', 'digirisk' ); ?></a>-->
 
 	<form enctype="multipart/form-data" action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
 		<div class="hidden wp-digi-add-staff-from-file">
 			<!-- Importer le personel depuis un fichier -->
-			<h3><?php _e( 'Add staff from file', 'wpdigi-i18n' ); ?></h3>
+			<h3><?php _e( 'Add staff from file', 'digirisk' ); ?></h3>
 
-			<a href="<?php echo WPDIGI_URL; ?>/core/assets/document_template/import_des_utilisateurs.ods"><?php _e( 'You can download the file for build the import here', 'wpdigi-i18n' );?></a>
-			<p><?php _e( 'Each lines will have the following format :', 'wpdigi-i18n' ); ?></p>
-			<p><?php _e( 'The fields Firstname and Mail are mandatory', 'wpdigi-i18n' ); ?></p>
-			<p><?php _e( 'You do not have to fill in all fields but all separator must be present. Exemple username;;;;mail;;;;;;;;;;;', 'wpdigi-i18n' ); ?></p>
+			<a href="<?php echo WPDIGI_URL; ?>/core/assets/document_template/import_des_utilisateurs.ods"><?php _e( 'You can download the file for build the import here', 'digirisk' );?></a>
+			<p><?php _e( 'Each lines will have the following format :', 'digirisk' ); ?></p>
+			<p><?php _e( 'The fields Firstname and Mail are mandatory', 'digirisk' ); ?></p>
+			<p><?php _e( 'You do not have to fill in all fields but all separator must be present. Exemple username;;;;mail;;;;;;;;;;;', 'digirisk' ); ?></p>
 			<input type="hidden" name="action" value="wpdigi-installer-import-staff" />
 			<?php wp_nonce_field( 'post_installer_import_staff' ); ?>
 			<textarea name="content_csv"></textarea>
 			<input type="file" name="csv" />
 		</div>
-		<!--<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e( 'Import staff', 'wpdigi-i18n' ); ?>" />-->
+		<!--<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e( 'Import staff', 'digirisk' ); ?>" />-->
 	</form>
 
 
-	<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ); ?>" class="float right <?php echo empty( $hidden ) ? 'hidden' : 'wp-digi-bton-fourth'; ?>"><?php _e( 'Save', 'wpdigi-i18n' ); ?></a>
+	<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ); ?>" class="float right <?php echo empty( $hidden ) ? 'hidden' : 'wp-digi-bton-fourth'; ?>"><?php _e( 'Save', 'digirisk' ); ?></a>
 </div>

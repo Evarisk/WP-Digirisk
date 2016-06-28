@@ -3,10 +3,10 @@
 <ul class="wp-digi-list wp-digi-table wp-digi-list-affected-user wp-digi-bloc-loader" >
 	<li class="wp-digi-table-header" >
 		<span></span>
-		<span><?php _e('ID', 'wpdigi-i18n'); ?></span>
-		<span><?php _e('Lastname', 'wpdigi-i18n'); ?></span>
-		<span><?php _e('Firstname', 'wpdigi-i18n'); ?></span>
-		<span><?php _e('Assignment date', 'wpdigi-i18n'); ?></span>
+		<span><?php _e('ID', 'digirisk'); ?></span>
+		<span><?php _e('Lastname', 'digirisk'); ?></span>
+		<span><?php _e('Firstname', 'digirisk'); ?></span>
+		<span><?php _e('Assignment date', 'digirisk'); ?></span>
 		<span></span>
 	</li>
 	<?php

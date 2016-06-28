@@ -74,17 +74,17 @@ class wpdigi_evaluation_method_controller_01 extends term_ctr_01 {
 		global $wpdigi_risk_ctr;
 
 		$labels = array(
-			'name'              => __( 'Evaluation methods', 'wpdigi-i18n' ),
-			'singular_name'     => __( 'Evaluation method', 'wpdigi-i18n' ),
-			'search_items'      => __( 'Search evaluation methods', 'wpdigi-i18n' ),
-			'all_items'         => __( 'All evaluation methods', 'wpdigi-i18n' ),
-			'parent_item'       => __( 'Parent evaluation method', 'wpdigi-i18n' ),
-			'parent_item_colon' => __( 'Parent evaluation method:', 'wpdigi-i18n' ),
-			'edit_item'         => __( 'Edit evaluation method', 'wpdigi-i18n' ),
-			'update_item'       => __( 'Update evaluation method', 'wpdigi-i18n' ),
-			'add_new_item'      => __( 'Add New evaluation method', 'wpdigi-i18n' ),
-			'new_item_name'     => __( 'New evaluation method Name' , 'wpdigi-i18n'),
-			'menu_name'         => __( 'Evaluation method', 'wpdigi-i18n' ),
+			'name'              => __( 'Evaluation methods', 'digirisk' ),
+			'singular_name'     => __( 'Evaluation method', 'digirisk' ),
+			'search_items'      => __( 'Search evaluation methods', 'digirisk' ),
+			'all_items'         => __( 'All evaluation methods', 'digirisk' ),
+			'parent_item'       => __( 'Parent evaluation method', 'digirisk' ),
+			'parent_item_colon' => __( 'Parent evaluation method:', 'digirisk' ),
+			'edit_item'         => __( 'Edit evaluation method', 'digirisk' ),
+			'update_item'       => __( 'Update evaluation method', 'digirisk' ),
+			'add_new_item'      => __( 'Add New evaluation method', 'digirisk' ),
+			'new_item_name'     => __( 'New evaluation method Name' , 'digirisk'),
+			'menu_name'         => __( 'Evaluation method', 'digirisk' ),
 		);
 
 		$args = array(
@@ -149,19 +149,19 @@ class wpdigi_evaluation_method_controller_01 extends term_ctr_01 {
 		$this->risk_level = array(
 			'1' => array(
 					'color'						=> 'white',
-					'risk_character'	=> __( 'low risk', 'wpdigi-i18n' ),
+					'risk_character'	=> __( 'low risk', 'digirisk' ),
 			),
 			'2' => array(
 					'color'						=> 'orange',
-					'risk_character'	=> __( 'risk to plan', 'wpdigi-i18n' ),
+					'risk_character'	=> __( 'risk to plan', 'digirisk' ),
 			),
 			'3' => array(
 					'color'						=> 'red',
-					'risk_character'	=> __( 'riskt to treat', 'wpdigi-i18n' ),
+					'risk_character'	=> __( 'riskt to treat', 'digirisk' ),
 			),
 			'4' => array(
 					'color'						=> 'black',
-					'risk_character'	=> __( 'unacceptable risk', 'wpdigi-i18n' ),
+					'risk_character'	=> __( 'unacceptable risk', 'digirisk' ),
 			),
 		);
 	}
@@ -204,7 +204,7 @@ class wpdigi_evaluation_method_controller_01 extends term_ctr_01 {
 					'id' => null,
 					'type' => $this->get_taxonomy(),
 					'term_taxonomy_id' => null,
-					'name' => __( 'Evarisk simplified', 'wpdigi-i18n' ),
+					'name' => __( 'Evarisk simplified', 'digirisk' ),
 					'slug' => 'evarisk-simple',
 					'description' => null,
 					'option' => array(

@@ -10,7 +10,7 @@
 	<li data-id="<?php echo $file_id; ?>" >
 		<span>#<?php echo $file_id; ?></span>
 		<span><?php echo $post->post_title; ?></span>
-		<span class="wpeofile-action-button-container" ><a href="<?php echo $file_path; ?>" class="dashicons dashicons-download" title="<?php _e( 'Download the file', 'wpdigi-i18n' ); ?>" download ></a></span>
-		<span class="wpeofile-action-button-container" ><a href="#" class="dashicons dashicons-trash" title="<?php _e( 'Delete file', 'wpdigi-i18n' ); ?>" ></a></span>
+		<span class="wpeofile-action-button-container" ><a href="<?php echo $file_path; ?>" class="dashicons dashicons-download" title="<?php _e( 'Download the file', 'digirisk' ); ?>" download ></a></span>
+		<span class="wpeofile-action-button-container" ><a href="#" class="dashicons dashicons-trash" title="<?php _e( 'Delete file', 'digirisk' ); ?>" ></a></span>
 	</li>
 <?php endif; ?>

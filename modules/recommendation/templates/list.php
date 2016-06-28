@@ -3,9 +3,9 @@
 <ul class="wp-digi-list wp-digi-table wp-digi-recommendation" >
 	<li class="wp-digi-table-header" >
 		<span class="wp-digi-recommendation-list-column-thumbnail" >&nbsp;</span>
-		<span class="wp-digi-recommendation-list-column-reference" ><?php _e( 'Ref.', 'wpdigi-i18n' ); ?></span>
-		<span><?php _e( 'Recommendation name', 'wpdigi-i18n' ); ?></span>
-		<span><?php _e( 'Comment', 'wpdigi-i18n' ); ?></span>
+		<span class="wp-digi-recommendation-list-column-reference" ><?php _e( 'Ref.', 'digirisk' ); ?></span>
+		<span><?php _e( 'Recommendation name', 'digirisk' ); ?></span>
+		<span><?php _e( 'Comment', 'digirisk' ); ?></span>
 		<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 	</li>
 
@@ -53,7 +53,7 @@
 							<?php endforeach; ?>
 						</div>
 					<?php else: ?>
-						<?php _e( 'There are no recommendation category to display here. Please create some recommendation category before.', 'wpdigi-i18n' ); ?>
+						<?php _e( 'There are no recommendation category to display here. Please create some recommendation category before.', 'digirisk' ); ?>
 					<?php endif; ?>
 				</span>
 				<span class="wp-digi-comment"><input type="text" name="recommendation_comment" placeholder="Enter a comment" /></span>

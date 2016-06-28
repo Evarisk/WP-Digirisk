@@ -16,12 +16,12 @@
 				<i class="dashicons <?php echo $this->get_icon_for_attachment( $file_id ); ?>" ></i>
 				<span>#<?php echo $file_id; ?></span>
 				<span><?php echo $file_infos->post_title; ?></span>
-				<span class="wpeofile-action-button-container" ><a href="<?php echo $file_path; ?>" class="dashicons dashicons-download" title="<?php _e( 'Download the file', 'wpdigi-i18n' ); ?>" download ></a></span>
-				<span class="wpeofile-action-button-container" ><a href="#" class="dashicons dashicons-trash" title="<?php _e( 'Delete file', 'wpdigi-i18n' ); ?>" ></a></span>
+				<span class="wpeofile-action-button-container" ><a href="<?php echo $file_path; ?>" class="dashicons dashicons-download" title="<?php _e( 'Download the file', 'digirisk' ); ?>" download ></a></span>
+				<span class="wpeofile-action-button-container" ><a href="#" class="dashicons dashicons-trash" title="<?php _e( 'Delete file', 'digirisk' ); ?>" ></a></span>
 			</li>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</ul>
 <?php else : ?>
-	<div class="wpeomtm-no-result-msg" ><?php _e( 'No files affected', 'wpdigi-i18n' ); ?></div>
+	<div class="wpeomtm-no-result-msg" ><?php _e( 'No files affected', 'digirisk' ); ?></div>
 <?php endif; ?>

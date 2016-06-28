@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 
 <ul class="wp-digi-form">
-  <li><h2><?php _e( 'DUER', 'wpdigi-i18n' ); ?></h2></li>
+  <li><h2><?php _e( 'DUER', 'digirisk' ); ?></h2></li>
   <li>
     <label>
-      <?php _e( 'How access to duer', 'wpdigi-i18n' ); ?>
+      <?php _e( 'How access to duer', 'digirisk' ); ?>
       <input name="DUER[how_access_to_duer]" type="text" value="<?php echo $data['legal_display']->option['DUER']['how_access_to_duer']; ?>" />
     </label>
   </li>

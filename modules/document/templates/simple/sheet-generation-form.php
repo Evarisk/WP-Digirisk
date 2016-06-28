@@ -6,7 +6,7 @@
 	<input type="hidden" name="element_type" value="<?php echo $element->type; ?>" />
 
 	<div class="wp-digi-save-sheet-container">
-		<?php _e( 'Click the button to save your current sheet', 'wpdigi-i18n' ); ?>
-		<button class="wp-digi-bton-fourth" id="wpdigi-save-element-sheet" ><?php _e( 'Save sheet', 'wpdigi-i18n' ); ?></button>
+		<?php _e( 'Click the button to save your current sheet', 'digirisk' ); ?>
+		<button class="wp-digi-bton-fourth" id="wpdigi-save-element-sheet" ><?php _e( 'Save sheet', 'digirisk' ); ?></button>
 	</div>
 </form>

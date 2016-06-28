@@ -43,5 +43,5 @@ if ( !defined( 'ABSPATH' ) ) exit;
 	  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'DUER' ) ); ?>
 	</div>
 
-  <button class="generate-legal-display wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'wpdigi-i18n' ); ?></button>
+  <button class="generate-legal-display wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'digirisk' ); ?></button>
 </form>

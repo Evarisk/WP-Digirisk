@@ -3,10 +3,10 @@
 	<ul class="wp-digi-list wp-digi-risk wp-digi-table" >
 		<li class="wp-digi-risk-list-header wp-digi-table-header" >
 			<span class="wp-digi-risk-list-column-thumbnail" >&nbsp;</span>
-			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-i18n' ); ?></span>
-			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-i18n' ); ?></span>
-			<span><?php _e( 'Risque', 'wpdigi-i18n' ); ?></span>
-			<span><?php _e( 'Comment', 'wpdigi-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'digirisk' ); ?></span>
+			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'digirisk' ); ?></span>
+			<span><?php _e( 'Risque', 'digirisk' ); ?></span>
+			<span><?php _e( 'Comment', 'digirisk' ); ?></span>
 			<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 		</li>
 

@@ -58,17 +58,17 @@ class wpdigi_danger_category_ctr_01 extends term_ctr_01 {
 		global $wpdigi_risk_ctr;
 
 		$labels = array(
-			'name'              => __( 'Danger categories', 'wpdigi-i18n' ),
-			'singular_name'     => __( 'Danger category', 'wpdigi-i18n' ),
-			'search_items'      => __( 'Search Danger categories', 'wpdigi-i18n' ),
-			'all_items'         => __( 'All Danger categories', 'wpdigi-i18n' ),
+			'name'              => __( 'Danger categories', 'digirisk' ),
+			'singular_name'     => __( 'Danger category', 'digirisk' ),
+			'search_items'      => __( 'Search Danger categories', 'digirisk' ),
+			'all_items'         => __( 'All Danger categories', 'digirisk' ),
 			'parent_item'       => null,
 			'parent_item_colon' => null,
-			'edit_item'         => __( 'Edit Danger category', 'wpdigi-i18n' ),
-			'update_item'       => __( 'Update Danger category', 'wpdigi-i18n' ),
-			'add_new_item'      => __( 'Add New Danger category', 'wpdigi-i18n' ),
-			'new_item_name'     => __( 'New Danger category Name' , 'wpdigi-i18n'),
-			'menu_name'         => __( 'Danger category', 'wpdigi-i18n' ),
+			'edit_item'         => __( 'Edit Danger category', 'digirisk' ),
+			'update_item'       => __( 'Update Danger category', 'digirisk' ),
+			'add_new_item'      => __( 'Add New Danger category', 'digirisk' ),
+			'new_item_name'     => __( 'New Danger category Name' , 'digirisk'),
+			'menu_name'         => __( 'Danger category', 'digirisk' ),
 		);
 
 		$args = array(

@@ -15,7 +15,7 @@ if( !isset( $wpeologs ) ) {
 	DEFINE( 'WPEO_LOGS_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', str_replace( "\\", "/", WPEO_LOGS_PATH ) ) );
 
 	/**	Load plugin translation	*/
-	load_plugin_textdomain( 'wpdigi-i18n', false, dirname( plugin_basename( __FILE__ ) ) . '/language/' );
+	load_plugin_textdomain( 'digirisk', false, dirname( plugin_basename( __FILE__ ) ) . '/language/' );
 
 	/**	Define the templates directories */
 	DEFINE( 'WPEO_LOGS_TEMPLATES_MAIN_DIR', WPEO_LOGS_PATH . '/template/');

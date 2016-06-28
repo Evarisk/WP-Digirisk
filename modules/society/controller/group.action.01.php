@@ -55,7 +55,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 				'unique_identifier' => $this->element_prefix . $last_unique_key,
 			),
 			'parent_id' => $group_id,
-			'title' => __( 'Undefined', 'wpdigi-i18n' ),
+			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
 		ob_start();
@@ -155,7 +155,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 		$response = array(
 			'status'		=> false,
 			'output'		=> null,
-			'message'		=> __( 'Element to load have not been found', 'wpdigi-i18n' ),
+			'message'		=> __( 'Element to load have not been found', 'digirisk' ),
 		);
 
 		$subaction = sanitize_text_field( $_POST['subaction'] );
@@ -190,7 +190,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 
 		$response = array(
 			'status' 	=> false,
-			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' ),
+			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'digirisk' ),
 		);
 
 		if ( 0 === (int) $_POST['element_id'] )
@@ -478,7 +478,7 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 
 		if( $zip->open( $path, ZipArchive::CREATE) !== TRUE ) {
 			$response['status'] = false;
-			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'wpdigi-i18n' );
+			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'digirisk' );
 		}
 
 		$zip->addFile( $response['link'], $response['name'] );

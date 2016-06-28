@@ -69,7 +69,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 		$response = array (
 			'status'				=> false,
 			'reload_transfert'		=> false,
-			'message'				=> __( 'A required parameter is missing, please check your request and try again', 'wpdigi-i18n' ),
+			'message'				=> __( 'A required parameter is missing, please check your request and try again', 'digirisk' ),
 		);
 		$element_type = !empty( $_POST[ 'element_type_to_transfert' ] ) && in_array( $_POST[ 'element_type_to_transfert' ] , $this->element_type ) ? sanitize_text_field( $_POST[ 'element_type_to_transfert' ] ): '';
 		$sub_action = !empty( $_POST[ 'sub_action' ] ) && in_array( $_POST[ 'sub_action' ] , array( 'element', 'doc', 'config_components') ) ? sanitize_text_field( $_POST[ 'sub_action' ] ) : 'element';
@@ -89,7 +89,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 		if ( !empty( $element_type ) ) {
 			/**	Define default message and transfer reload state	*/
 			$response[ 'reload_transfert' ] = true;
-			$response[ 'message' ] = __( 'Import will automatically continue while all elements won\'t be transfered into database', 'wpdigi-i18n' );
+			$response[ 'message' ] = __( 'Import will automatically continue while all elements won\'t be transfered into database', 'digirisk' );
 
 			if ( 'config_components' != $sub_action ) {
 				/**	Get transfert statistics */
@@ -117,7 +117,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 					$response[ 'status' ] = true;
 					$response[ 'reload_transfert' ] = false;
 					$response[ 'redirect_to_url' ] = admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' );
-					$response[ 'message' ] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'wpdigi-i18n' );
+					$response[ 'message' ] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'digirisk' );
 
 					/**	Mise à jour de l'identifiant unique de l'association des préconisations /	Update unique identifier of recommendation association */
 					global $digi_recommendation_controller;

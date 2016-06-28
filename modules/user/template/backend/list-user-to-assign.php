@@ -4,11 +4,11 @@
 	<ul class="wp-digi-list wp-digi-table">
 		<li class="wp-digi-table-header" >
 			<span></span>
-			<span><?php _e('ID', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Lastname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Firtname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Hiring date', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Assign', 'wpdigi-i18n'); ?></span>
+			<span><?php _e('ID', 'digirisk'); ?></span>
+			<span><?php _e('Lastname', 'digirisk'); ?></span>
+			<span><?php _e('Firtname', 'digirisk'); ?></span>
+			<span><?php _e('Hiring date', 'digirisk'); ?></span>
+			<span><?php _e('Assign', 'digirisk'); ?></span>
 		</li>
 
 		<?php
@@ -32,7 +32,7 @@
 	<input type="hidden" name="workunit_id" value="<?php echo $workunit->id; ?>" />
 	<input type="hidden" name="group_id" value="<?php echo $workunit->parent_id; ?>" />
 	<input type="hidden" name="action" value="edit_user_assign" />
-	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'wpdigi-i18n'); ?>" />
+	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'digirisk'); ?>" />
 
 	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
@@ -44,7 +44,7 @@
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,
-				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'wpdigi-i18n' ) .' </span>',
+				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'digirisk' ) .' </span>',
 				'type' => 'plain',
 				'next_text' => '<i class="dashicons dashicons-arrow-right"></i>',
 				'prev_text' => '<i class="dashicons dashicons-arrow-left"></i>'

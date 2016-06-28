@@ -118,7 +118,7 @@ class document_controller_01 extends post_ctr_01 {
 	function filter_add_sheet_tab_to_element( $tab_list, $current_element ) {
 		/**	Définition de l'onglet de génération de la fiche pour l'élément sur lequel on se trouve / Define the tab allowing to generate the sheet fur current element we are on */
 		$tab_list[ 'sheet' ] = array(
-			'text'	=> __( 'Generate sheet', 'wpdigi-i18n' ),
+			'text'	=> __( 'Generate sheet', 'digirisk' ),
 			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
 		);
 
@@ -188,7 +188,7 @@ class document_controller_01 extends post_ctr_01 {
 	function get_model_for_element( $current_element_type ) {
 		$response = array(
 			'status'		=> false,
-			'message'		=> __( 'An error occured while getting model to use for generation', 'wpdigi-i18n' ),
+			'message'		=> __( 'An error occured while getting model to use for generation', 'digirisk' ),
 			'model_id'		=> null,
 		);
 

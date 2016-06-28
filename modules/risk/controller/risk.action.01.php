@@ -253,10 +253,10 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		?>
 		<li class="wp-digi-risk-list-header wp-digi-table-header" >
 			<span class="wp-digi-risk-list-column-thumbnail" >&nbsp;</span>
-			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-i18n' ); ?></span>
-			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-i18n' ); ?></span>
-			<span><?php _e( 'Danger', 'wpdigi-i18n' ); ?></span>
-			<span><?php _e( 'Comment', 'wpdigi-i18n' ); ?></span>
+			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'digirisk' ); ?></span>
+			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'digirisk' ); ?></span>
+			<span><?php _e( 'Danger', 'digirisk' ); ?></span>
+			<span><?php _e( 'Comment', 'digirisk' ); ?></span>
 			<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 		</li>
 		<?php
@@ -554,7 +554,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 			$risk_id = (int)$_POST['element_id'];
 
 		if ( empty( $_POST ) || empty( $_POST[ 'files_to_associate'] ) || !is_array( $_POST[ 'files_to_associate'] ) )
-			wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'wpdigi-i18n' ), ) );
+			wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'digirisk' ), ) );
 
 		$risk = $this->show( $risk_id );
 

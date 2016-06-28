@@ -5,9 +5,9 @@
 		<span><?php echo $document->title; ?></span>
 		<span class="wp-digi-print">
 <?php if ( !empty( $document_full_path ) ) : ?>
-			<a href="<?php echo $document_full_path; ?>" class="wp-digi-bton-fifth dashicons-before dashicons-download" ><?php _e( 'Download', 'wpdigi-i18n' ); ?></a>
+			<a href="<?php echo $document_full_path; ?>" class="wp-digi-bton-fifth dashicons-before dashicons-download" ><?php _e( 'Download', 'digirisk' ); ?></a>
 <?php else: ?>
-			<?php _e( 'File does not exists. We are working on re-generation function', 'wpdigi-i18n' ); ?>
+			<?php _e( 'File does not exists. We are working on re-generation function', 'digirisk' ); ?>
 <?php endif; ?>
 		</span>
 		<span class="wp-digi-action"><a class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" data-global="<?php echo substr( str_replace( 'mdl', 'ctr', get_class( $element ) ), 0, -3 ); ?>" data-parent-id="<?php echo $document->parent_id; ?>" data-id="<?php echo $document->id; ?>" href="#"></a></span>

@@ -72,7 +72,7 @@ class wpdigi_recommendation_ctr_01 extends term_ctr_01 {
 		/** Définition de l'onglet permettant l'affichage des utilisateurs pour le type d'élément actuel / Define the tab allowing to display evaluators' tab for current element type	*/
 		$tab_list = array_merge( $tab_list, array(
 			'recommendation' => array(
-				'text'	=> __( 'Recommendations', 'wpdigi-i18n' ),
+				'text'	=> __( 'Recommendations', 'digirisk' ),
 				'count' => 0,
 			),
 		)	);
@@ -111,22 +111,22 @@ class wpdigi_recommendation_ctr_01 extends term_ctr_01 {
 	*/
 	function recommendation_type() {
 		$labels = array(
-			'name'                       => _x( 'Recommendations', 'wpdigi-i18n' ),
-			'singular_name'              => _x( 'Recommendation', 'wpdigi-i18n' ),
-			'search_items'               => __( 'Search recommendations', 'wpdigi-i18n' ),
-			'popular_items'              => __( 'Popular recommendations', 'wpdigi-i18n' ),
-			'all_items'                  => __( 'All recommendations', 'wpdigi-i18n' ),
+			'name'                       => _x( 'Recommendations', 'digirisk' ),
+			'singular_name'              => _x( 'Recommendation', 'digirisk' ),
+			'search_items'               => __( 'Search recommendations', 'digirisk' ),
+			'popular_items'              => __( 'Popular recommendations', 'digirisk' ),
+			'all_items'                  => __( 'All recommendations', 'digirisk' ),
 			'parent_item'                => null,
 			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit recommendation', 'wpdigi-i18n' ),
-			'update_item'                => __( 'Update recommendation', 'wpdigi-i18n' ),
-			'add_new_item'               => __( 'Add New recommendation', 'wpdigi-i18n' ),
-			'new_item_name'              => __( 'New recommendation Name', 'wpdigi-i18n' ),
-			'separate_items_with_commas' => __( 'Separate recommendations with commas', 'wpdigi-i18n' ),
-			'add_or_remove_items'        => __( 'Add or remove recommendations', 'wpdigi-i18n' ),
-			'choose_from_most_used'      => __( 'Choose from the most used recommendations', 'wpdigi-i18n' ),
-			'not_found'                  => __( 'No recommendations found.', 'wpdigi-i18n' ),
-			'menu_name'                  => __( 'Recommendations', 'wpdigi-i18n' ),
+			'edit_item'                  => __( 'Edit recommendation', 'digirisk' ),
+			'update_item'                => __( 'Update recommendation', 'digirisk' ),
+			'add_new_item'               => __( 'Add New recommendation', 'digirisk' ),
+			'new_item_name'              => __( 'New recommendation Name', 'digirisk' ),
+			'separate_items_with_commas' => __( 'Separate recommendations with commas', 'digirisk' ),
+			'add_or_remove_items'        => __( 'Add or remove recommendations', 'digirisk' ),
+			'choose_from_most_used'      => __( 'Choose from the most used recommendations', 'digirisk' ),
+			'not_found'                  => __( 'No recommendations found.', 'digirisk' ),
+			'menu_name'                  => __( 'Recommendations', 'digirisk' ),
 		);
 
 		$args = array(

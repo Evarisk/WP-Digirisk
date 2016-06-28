@@ -9,7 +9,7 @@ endif;
 	<input type="hidden" class="digi-method-evaluation-id" value="<?php echo $term_evarisk->term_id; ?>" />
 	<div class="hidden ">
 		<div class="wp-digi-eval-header">
-			<h2><?php _e( 'Evaluation method Evarisk', 'wpdigi-i18n' ); ?></h2>
+			<h2><?php _e( 'Evaluation method Evarisk', 'digirisk' ); ?></h2>
 			<i class="dashicons dashicons-no-alt"></i>
 		</div>
 
@@ -58,7 +58,7 @@ endif;
 					</ul>
 				<?php endfor; ?>
 			<?php endif;?>
-			<a href="#" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'wpdigi-i18n' ); ?></a>
+			<a href="#" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'digirisk' ); ?></a>
 		</div>
 	</div>
 

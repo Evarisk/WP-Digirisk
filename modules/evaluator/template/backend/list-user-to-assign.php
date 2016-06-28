@@ -4,11 +4,11 @@
 	<ul class="wp-digi-list wp-digi-table wp-digi-user-list wp-digi-evaluator-list">
 		<li class="wp-digi-table-header">
 			<span></span>
-			<span><?php _e('ID', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Lastname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Firstname', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Hiring date', 'wpdigi-i18n'); ?></span>
-			<span><?php _e('Assign', 'wpdigi-i18n'); ?> <input type="text" value="15" /></span>
+			<span><?php _e('ID', 'digirisk'); ?></span>
+			<span><?php _e('Lastname', 'digirisk'); ?></span>
+			<span><?php _e('Firstname', 'digirisk'); ?></span>
+			<span><?php _e('Hiring date', 'digirisk'); ?></span>
+			<span><?php _e('Assign', 'digirisk'); ?> <input type="text" value="15" /></span>
 			<span></span>
 		</li>
 
@@ -35,7 +35,7 @@
 	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 	<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
-	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'wpdigi-i18n'); ?>" />
+	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'digirisk'); ?>" />
 
 	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
@@ -47,7 +47,7 @@
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,
-				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'wpdigi-i18n' ) .' </span>',
+				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'digirisk' ) .' </span>',
 				'type' => 'plain',
 				'next_text' => '<i class="dashicons dashicons-arrow-right"></i>',
 				'prev_text' => '<i class="dashicons dashicons-arrow-left"></i>'

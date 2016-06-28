@@ -1,5 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-<a href="#" title="<?php _e( 'Set a thumbnail for', 'wpdigi-i18n' ); ?>" class="wpdigi-element-thumbnail alignleft" >
+<a href="#" title="<?php _e( 'Set a thumbnail for', 'digirisk' ); ?>" class="wpdigi-element-thumbnail alignleft" >
 	<?php if ( !empty( $element_thumbnail_id ) ) : ?>
 		<?php echo wp_get_attachment_image( $element_thumbnail_id, 'digirisk-element-thumbnail' ); ?>
 	<?php else: ?>

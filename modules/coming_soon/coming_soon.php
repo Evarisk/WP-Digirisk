@@ -14,23 +14,23 @@ function add_workunit_sheet_coming_soon_tab( $tab_list, $current_element ) {
 	/** Définition de l'onglet permettant l'affichage des fiches d'unités de travail générées / Define the tab allowing to display tab for generated workunit sheet	*/
 	$tab_list = array_merge( $tab_list, array(
 		'product' => array(
-				'text' 				=> __( 'Products', 'wpdigi-i18n' ),
+				'text' 				=> __( 'Products', 'digirisk' ),
 				'class'				=> 'wp-digi-list-item disabled',
 		),
 		'ppe' => array(
-				'text' 				=> __( 'PPE', 'wpdigi-i18n' ),
+				'text' 				=> __( 'PPE', 'digirisk' ),
 				'class'				=> 'wp-digi-list-item disabled',
 		),
 		'formation' => array(
-				'text' 				=> __( 'Formation', 'wpdigi-i18n' ),
+				'text' 				=> __( 'Formation', 'digirisk' ),
 				'class'				=> 'wp-digi-list-item disabled',
 		),
 		'accident' => array(
-				'text' 				=> __( 'Accidents', 'wpdigi-i18n' ),
+				'text' 				=> __( 'Accidents', 'digirisk' ),
 				'class'				=> 'wp-digi-list-item disabled',
 		),
 // 		'recommendation' => array(
-// 				'text' 				=> __( 'Recommendations', 'wpdigi-i18n' ),
+// 				'text' 				=> __( 'Recommendations', 'digirisk' ),
 // 				'class'				=> 'wp-digi-list-item disabled',
 // 		),
 	) );

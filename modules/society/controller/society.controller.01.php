@@ -30,7 +30,7 @@ class society_controller_01 {
 		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
 
 		if ( !empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'Digirisk : Risk evaluation', 'wpdigi-i18n' ), __( 'Digirisk', 'wpdigi-i18n' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( &$this, 'display_dashboard' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4);
+			add_menu_page( __( 'Digirisk : Risk evaluation', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( &$this, 'display_dashboard' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4);
 		}
 	}
 

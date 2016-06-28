@@ -9,17 +9,17 @@
 				<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 				<?php wp_nonce_field( 'ajax_create_risk' ); ?>
 				<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
-				<span title="<?php _e( 'Upload media', 'wpdigi-i18n' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
+				<span title="<?php _e( 'Upload media', 'digirisk' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
 					<div class="mask">
 						<span class="dashicons dashicons-plus"></span>
 					</div>
-					<i title="<?php _e( 'Upload image', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
+					<i title="<?php _e( 'Upload image', 'digirisk' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
 					<input type="hidden" name="thumbnail_id" value="" />
 					<img data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk" width="50" height="50" class="hidden wpeo-upload-media attachment-digirisk-element-miniature size-digirisk-element-miniature wp-post-image" alt="" sizes="(max-width: 50px) 100vw, 50px">
 				</span>
 				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
 				<span data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation" >
-					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Cot', 'wpdigi-i18n' ); ?></div>
+					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Cot', 'digirisk' ); ?></div>
 					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
 						<li data-level="1" class="wp-digi-risk-level-1" >&nbsp;</li>
 						<li data-level="2" class="wp-digi-risk-level-2" >&nbsp;</li>
@@ -31,7 +31,7 @@
 				<span class="wp-digi-risk-list-column-reference" ></span>
 				<span class="wp-digi-risk-select"><?php global $wpdigi_danger_category_ctr; $wpdigi_danger_category_ctr->display_category_danger( array( 'with_danger' => true, ) ); ?></span>
 				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="risk_comment_date" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
-				<span class="wp-digi-risk-comment" ><textarea name="risk_comment" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'wpdigi-i18n' ); ?>" ></textarea></span>
+				<span class="wp-digi-risk-comment" ><textarea name="risk_comment" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
 				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" >
 					<button class="progress-button" data-style="fill" data-horizontal><i class="dashicons dashicons-plus"></i></button>
 				</span>

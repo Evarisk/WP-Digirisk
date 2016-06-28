@@ -49,21 +49,21 @@ class wpdigi_workunit_ctr_01 extends post_ctr_01 {
 	function custom_post_type() {
 		/**	Créé les sociétés: élément principal / Create society : main element 	*/
 		$labels = array(
-				'name'                => __( 'Work units', 'wpdigi-i18n' ),
-				'singular_name'       => __( 'Work unit', 'wpdigi-i18n' ),
-				'menu_name'           => __( 'Work units', 'wpdigi-i18n' ),
-				'name_admin_bar'      => __( 'Work units', 'wpdigi-i18n' ),
-				'parent_item_colon'   => __( 'Parent Item:', 'wpdigi-i18n' ),
-				'all_items'           => __( 'Work units', 'wpdigi-i18n' ),
-				'add_new_item'        => __( 'Add a work unit', 'wpdigi-i18n' ),
-				'add_new'             => __( 'Add a work unit', 'wpdigi-i18n' ),
-				'new_item'            => __( 'New a work unit', 'wpdigi-i18n' ),
-				'edit_item'           => __( 'Edit a work unit', 'wpdigi-i18n' ),
-				'update_item'         => __( 'Update a work unit', 'wpdigi-i18n' ),
-				'view_item'           => __( 'View a work unit', 'wpdigi-i18n' ),
-				'search_items'        => __( 'Search a work unit', 'wpdigi-i18n' ),
-				'not_found'           => __( 'Not found', 'wpdigi-i18n' ),
-				'not_found_in_trash'  => __( 'Not found in Trash', 'wpdigi-i18n' ),
+				'name'                => __( 'Work units', 'digirisk' ),
+				'singular_name'       => __( 'Work unit', 'digirisk' ),
+				'menu_name'           => __( 'Work units', 'digirisk' ),
+				'name_admin_bar'      => __( 'Work units', 'digirisk' ),
+				'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
+				'all_items'           => __( 'Work units', 'digirisk' ),
+				'add_new_item'        => __( 'Add a work unit', 'digirisk' ),
+				'add_new'             => __( 'Add a work unit', 'digirisk' ),
+				'new_item'            => __( 'New a work unit', 'digirisk' ),
+				'edit_item'           => __( 'Edit a work unit', 'digirisk' ),
+				'update_item'         => __( 'Update a work unit', 'digirisk' ),
+				'view_item'           => __( 'View a work unit', 'digirisk' ),
+				'search_items'        => __( 'Search a work unit', 'digirisk' ),
+				'not_found'           => __( 'Not found', 'digirisk' ),
+				'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
 		);
 		$rewrite = array(
 				'slug'                => '/',
@@ -72,8 +72,8 @@ class wpdigi_workunit_ctr_01 extends post_ctr_01 {
 				'feeds'               => true,
 		);
 		$args = array(
-				'label'               => __( 'Digirisk work unit', 'wpdigi-i18n' ),
-				'description'         => __( 'Manage societies into digirisk', 'wpdigi-i18n' ),
+				'label'               => __( 'Digirisk work unit', 'digirisk' ),
+				'description'         => __( 'Manage societies into digirisk', 'digirisk' ),
 				'labels'              => $labels,
 				'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
 				'hierarchical'        => true,

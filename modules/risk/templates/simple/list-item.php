@@ -3,7 +3,7 @@
 if ( $risk != null ):
 ?>
 	<li class="wp-digi-list-item wp-digi-risk-item" data-risk-id="<?php echo $risk->id; ?>" >
-		<span title="<?php _e( 'Upload media', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail wpeo-upload-media" data-type="digi-risk" data-id="<?php echo $risk->id; ?>" >
+		<span title="<?php _e( 'Upload media', 'digirisk' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail wpeo-upload-media" data-type="digi-risk" data-id="<?php echo $risk->id; ?>" >
 			<div class="mask">
 				<span class="dashicons dashicons-plus"></span>
 			</div>
@@ -11,7 +11,7 @@ if ( $risk != null ):
 				<?php echo get_the_post_thumbnail( $risk->id, 'digirisk-element-miniature' ); ?>
 				<?php echo do_shortcode( "[wpeo_gallery element_id='" . $risk->id . "' global='wpdigi_risk_ctr' ]" ); ?>
 			<?php else: ?>
-				<i  title="<?php _e( 'Upload image', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail dashicons dashicons-format-image" data-type="digi-risk" data-id="<?php echo $risk->id; ?>" ></i>
+				<i  title="<?php _e( 'Upload image', 'digirisk' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail dashicons dashicons-format-image" data-type="digi-risk" data-id="<?php echo $risk->id; ?>" ></i>
 			<?php endif; ?>
 		</span>
 		<span class="wp-digi-risk-list-column-cotation" ><div class="wp-digi-risk-level-<?php echo $risk->evaluation->option[ 'risk_level' ][ 'scale' ]; ?>" >&nbsp;</div></span>

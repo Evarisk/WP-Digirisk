@@ -77,17 +77,17 @@ class wpdigi_recommendation_category_ctr_01 extends term_ctr_01 {
 	*/
 	function recommendation_category_type() {
 		$labels = array(
-			'name'              => __( 'Recommendation categories', 'wpdigi-i18n' ),
-			'singular_name'     => __( 'Recommendation category', 'wpdigi-i18n' ),
-			'search_items'      => __( 'Search recommendation categories', 'wpdigi-i18n' ),
-			'all_items'         => __( 'All recommendation categories', 'wpdigi-i18n' ),
+			'name'              => __( 'Recommendation categories', 'digirisk' ),
+			'singular_name'     => __( 'Recommendation category', 'digirisk' ),
+			'search_items'      => __( 'Search recommendation categories', 'digirisk' ),
+			'all_items'         => __( 'All recommendation categories', 'digirisk' ),
 			'parent_item'       => null,
 			'parent_item_colon' => null,
-			'edit_item'         => __( 'Edit recommendation category', 'wpdigi-i18n' ),
-			'update_item'       => __( 'Update recommendation category', 'wpdigi-i18n' ),
-			'add_new_item'      => __( 'Add New recommendation category', 'wpdigi-i18n' ),
-			'new_item_name'     => __( 'New recommendation category Name' , 'wpdigi-i18n'),
-			'menu_name'         => __( 'Recommendation category', 'wpdigi-i18n' ),
+			'edit_item'         => __( 'Edit recommendation category', 'digirisk' ),
+			'update_item'       => __( 'Update recommendation category', 'digirisk' ),
+			'add_new_item'      => __( 'Add New recommendation category', 'digirisk' ),
+			'new_item_name'     => __( 'New recommendation category Name' , 'digirisk'),
+			'menu_name'         => __( 'Recommendation category', 'digirisk' ),
 		);
 
 		$args = array(

@@ -54,7 +54,7 @@ if ( !class_exists( 'wpdigi_user_ctr_01' ) ) {
 			/** Définition de l'onglet permettant l'affichage des utilisateurs pour le type d'élément actuel / Define the tab allowing to display users' tab for current element type	*/
 			$tab_list = array_merge( $tab_list, array(
 				'user' => array(
-					'text'	=> __( 'Users', 'wpdigi-i18n' ),
+					'text'	=> __( 'Users', 'digirisk' ),
 					'count' => !empty( $current_element->option[ 'user_info' ][ 'affected_id' ][ 'user' ] ) ? count( $current_element->option[ 'user_info' ][ 'affected_id' ][ 'user' ] ) : 0,
 				),
 			)	);
@@ -97,7 +97,7 @@ if ( !class_exists( 'wpdigi_user_ctr_01' ) ) {
 		}
 
 		public function callback_admin_menu() {
-			add_users_page( __( 'Create or import user easyly with a form ', 'wpdigi-i18n'), __( 'Digirisk : import', 'wpdigi-i18n'), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
+			add_users_page( __( 'Create or import user easyly with a form ', 'digirisk'), __( 'Digirisk : import', 'digirisk'), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
 		}
 
 		public function render( $workunit ) {

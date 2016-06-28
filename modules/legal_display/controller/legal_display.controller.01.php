@@ -43,7 +43,7 @@ class legal_display_ctr extends post_ctr_01 {
     /** Définition de l'onglet permettant l'affichage des utilisateurs pour le type d'élément actuel / Define the tab allowing to display evaluators' tab for current element type	*/
     $tab_list = array_merge( $tab_list, array(
       'legal-display' => array(
-      'text' => __( 'Legal display', 'wpdigi-i18n' ),
+      'text' => __( 'Legal display', 'digirisk' ),
       'count' => 0,
       )
     ) );

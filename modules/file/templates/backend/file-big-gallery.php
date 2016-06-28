@@ -17,8 +17,8 @@
   </ul>
 
   <ul class="action">
-    <li><a href="#" class="wp-digi-bton-fourth set-as-thumbnail"><?php _e( 'Set as default thumbnail', 'wpdigi-i18n' ); ?></a></li>
-    <li><a href="#" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_' . $element_id ); ?>" data-id="<?php echo $element_id; ?>" data-type="<?php echo ${$params['global']}->get_post_type(); ?>" class="wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'wpdigi-i18n' ); ?></a></li>
+    <li><a href="#" class="wp-digi-bton-fourth set-as-thumbnail"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
+    <li><a href="#" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_' . $element_id ); ?>" data-id="<?php echo $element_id; ?>" data-type="<?php echo ${$params['global']}->get_post_type(); ?>" class="wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a></li>
   </ul>
 
 </div>

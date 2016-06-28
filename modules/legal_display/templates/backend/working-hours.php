@@ -11,24 +11,24 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<h2><?php _e( 'Working hours', 'wpdigi-i18n' ); ?></h2>
+<h2><?php _e( 'Working hours', 'digirisk' ); ?></h2>
 
 
 <ul class="wp-digi-table">
 
   <li class="wp-digi-table-header">
     <span></span>
-    <span><?php _e( 'Monday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Tuesday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Wednesday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Thursday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Friday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Saturday', 'wpdigi-i18n' ); ?></span>
-    <span><?php _e( 'Sunday', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Monday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Tuesday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Wednesday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Thursday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Friday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Saturday', 'digirisk' ); ?></span>
+    <span><?php _e( 'Sunday', 'digirisk' ); ?></span>
   </li>
 
   <li class="wp-digi-list-item">
-    <span><?php _e( 'Morning', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Morning', 'digirisk' ); ?></span>
     <span><input type="text" name="working_hour[monday_morning]" value="<?php echo $data['legal_display']->option['working_hour']['monday_morning']; ?>" /></span>
     <span><input type="text" name="working_hour[tuesday_morning]" value="<?php echo $data['legal_display']->option['working_hour']['tuesday_morning']; ?>" /></span>
     <span><input type="text" name="working_hour[wednesday_morning]" value="<?php echo $data['legal_display']->option['working_hour']['wednesday_morning']; ?>" /></span>
@@ -39,7 +39,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   </li>
 
   <li class="wp-digi-list-item">
-    <span><?php _e( 'Afternoon', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Afternoon', 'digirisk' ); ?></span>
     <span><input type="text" name="working_hour[monday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['monday_afternoon']; ?>" /></span>
     <span><input type="text" name="working_hour[tuesday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['tuesday_afternoon']; ?>" /></span>
     <span><input type="text" name="working_hour[wednesday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['wednesday_afternoon']; ?>" /></span>
