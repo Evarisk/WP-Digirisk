@@ -13,7 +13,9 @@ class legal_display_action_01 {
     $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hours'] : array();
     $safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
     $derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
-    $document = !empty( $_POST['document'] ) ? (array) $_POST['document'] : array();
+    $collective_agreement = !empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
+    $DUER = !empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
+    $rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
     $parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
     $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', $legal_display_ctr->get_post_type() );
@@ -27,15 +29,14 @@ class legal_display_action_01 {
       'safety_rule' => $safety_rule,
       'working_hour' => $working_hour,
       'derogation_schedule' => $derogation_schedule,
-      'document' => $document,
+      'collective_agreement' => $collective_agreement,
+      'DUER' => $DUER,
+      'rules' => $rules,
       'unique_identifier' => $legal_display_ctr->element_prefix . $last_unique_key,
       'unique_key' => $last_unique_key,
       'parent_id' => $parent_id,
     );
     $legal_display = $legal_display_ctr->save_data( $legal_display_data );
-
-    // Ouvre le groupement
-    // ajout dans le groupment de legal_display
 
     $this->generate_sheet( $legal_display );
 
