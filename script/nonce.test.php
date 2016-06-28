@@ -3,7 +3,7 @@
 * @author: Jimmy Latour jimmy.eoxia@gmail.com
 */
 
-require_once( '../digirisk/script/wp-emulator.script.php' );
+require_once( '../Digirisk/script/wp-emulator.script.php' );
 
 DEFINE( 'WPDIGI_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) . '../' );
 
@@ -19,7 +19,7 @@ $total_unsecured_line = 0;
 foreach($unitList as $test)
 {
 	// echo "[+] Testing -> " . $test . PHP_EOL;
-  if ( $test != '../digirisk/script/request.test.php' || $test != '../digirisk/script/nonce.test.php' ) {
+  if ( $test != '../Digirisk/script/request.test.php' || $test != '../Digirisk/script/nonce.test.php' ) {
     $content = file_get_contents( $test );
 
     $pattern = '/class ([a-z0-9_]+) (extends .* {|{)/';
