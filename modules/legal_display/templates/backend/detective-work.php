@@ -5,7 +5,7 @@
 * @author Jimmy Latour <jimmy.latour@gmail.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
-* @package society
+* @package legal_display
 * @subpackage templates
 */
 
