@@ -126,7 +126,18 @@ class legal_display_action_01 {
 
     $document_creation = $document_controller->create_document( $group_model_to_use, $legal_display_sheet_details, $element_parent->type. '/' . $element_parent->id . '/affichage_legal_A4.odt' , null );
 
-		$legal_display_attachment_id = wp_insert_attachment( $element_parent, '', $element_parent->id );
+		$attachment_detail = array(
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+			'post_author'		 => get_current_user_id(),
+			'post_date'			 => current_time( 'mysql', 0 ),
+			'post_title'		 => 'affichage_legal_A4',
+			'id' 							=> $element->id,
+			'type'						=> $element->type,
+		);
+
+		$legal_display_attachment_id = wp_insert_attachment( $attachment_detail, '', $element_parent->id );
+
 		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
 		$element_parent = $wpdigi_group_ctr->update( $element_parent );
 		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
