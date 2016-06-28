@@ -15,7 +15,6 @@ var legal_display = {
       },
       success: function( responseText, statusText, xhr, $form ) {
         jQuery( '.form-legal-display .generate-legal-display' ).removeClass( "wp-digi-loading" );
-        legal_display.download_export( responseText.data.path );
       }
     };
 
@@ -23,14 +22,6 @@ var legal_display = {
 	    jQuery( this ).closest( 'form' ).ajaxSubmit(options);
 	    return false;
 	  });
-  },
-
-  download_export: function(url_to_file) {
-
-		var url = jQuery('<a href="' + url_to_file + '" download="affichage_legal.odt"></a>');
-		jQuery('.form-legal-display').append(url);
-		url[0].click();
-		url.remove();
-	}
+  }
 
 };
