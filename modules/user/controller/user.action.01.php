@@ -30,7 +30,7 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 		}
 
 		public function admin_assets() {
-			wp_enqueue_script( 'wpdigi-user-backend-js', WPDIGI_USERS_URL . 'assets/js/backend.js', array( 'jquery' ), WPDIGI_VERSION, false );
+			wp_enqueue_script( 'wpdigi-user-backend-js', WPDIGI_USERS_URL . 'assets/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 		}
 
 		public function callback_edit_user_assign() {
