@@ -18,7 +18,7 @@
 					<img data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk" width="50" height="50" class="hidden wpeo-upload-media attachment-digirisk-element-miniature size-digirisk-element-miniature wp-post-image" alt="" sizes="(max-width: 50px) 100vw, 50px">
 				</span>
 				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
-				<span data-risk_level="1" data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation wp-digi-risk-level-1" >
+				<span data-risk_level="1" data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation" >
 					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Cot', 'wpdigi-i18n' ); ?></div>
 					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
 						<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >&nbsp;</li>
