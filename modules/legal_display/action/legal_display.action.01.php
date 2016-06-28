@@ -10,7 +10,7 @@ class legal_display_action_01 {
 
     // Récupère les tableaux
     $emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
-    $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hours'] : array();
+    $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
     $safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
     $derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
     $collective_agreement = !empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
@@ -36,6 +36,7 @@ class legal_display_action_01 {
       'unique_key' => $last_unique_key,
       'parent_id' => $parent_id,
     );
+
     $legal_display = $legal_display_ctr->save_data( $legal_display_data );
 
     $this->generate_sheet( $legal_display );
