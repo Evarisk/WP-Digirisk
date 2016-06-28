@@ -1606,6 +1606,18 @@
   background: #47e58e;
   color: #fff;
 }
+.wp-digi-table .wp-digi-table-item-edit .wp-digi-cotation > .wp-digi-risk-level-1:hover {
+  background: #c9c9c9;
+}
+.wp-digi-table .wp-digi-table-item-edit .wp-digi-cotation > .wp-digi-risk-level-2:hover {
+  background: #e39822;
+}
+.wp-digi-table .wp-digi-table-item-edit .wp-digi-cotation > .wp-digi-risk-level-3:hover {
+  background: #d82828;
+}
+.wp-digi-table .wp-digi-table-item-edit .wp-digi-cotation > .wp-digi-risk-level-4:hover {
+  background: #121212;
+}
 .wp-digi-table .wp-digi-action {
   width: 50px;
   position: relative;
@@ -1706,10 +1718,13 @@
   text-align: center;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation div.wp-digi-risk-level-new {
+  background: #fff;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
   height: 50px;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation div.wp-digi-risk-level-new:hover {
   cursor: pointer;
+  background: #c9c9c9;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser {
   z-index: 600;
@@ -1722,7 +1737,7 @@
           box-sizing: content-box;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser .wp-digi-risk-level-1 {
-  background: #fff;
+  background: #e2e2e2;
   color: rgba(0, 0, 0, 0.6);
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-cotation-chooser:before {
@@ -1746,16 +1761,32 @@
   width: 200px;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-1 {
-  background: #fff;
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #e2e2e2;
   color: rgba(0, 0, 0, 0.6);
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-2 {
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   background: #e9ad4f;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-3 {
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   background: #e05353;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-4 {
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   background: #2b2b2b;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .open-method-evaluation-render {
@@ -1771,8 +1802,10 @@
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-reference:not(.header) {
   color: #3495f0;
+  width: 80px;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-danger {
+  width: 80px;
   font-weight: bold;
 }
 .wp-digi-risk-item .wp-digi-risk-comment li {
