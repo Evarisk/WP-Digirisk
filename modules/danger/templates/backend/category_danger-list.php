@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <?php if ( !empty( $danger_category_list ) ) : ?>
 	<input type="hidden" name="risk_danger_id" value='' />
-	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">Select a risk <i class="dashicons dashicons-arrow-down"></i></toggle>
+	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list"><?php _e( 'Sélectionner un danger', 'wpdigi-i18n'); ?> <i class="dashicons dashicons-arrow-down"></i></toggle>
 	<div class="wp-digi-select-list digi-popup grid icon hidden">
 	<?php foreach( $danger_category_list as $danger_category ): ?>
 		<ul>
