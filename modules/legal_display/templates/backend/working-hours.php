@@ -39,7 +39,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   </li>
 
   <li class="wp-digi-list-item">
-    <span><?php _e( 'Morning', 'wpdigi-i18n' ); ?></span>
+    <span><?php _e( 'Afternoon', 'wpdigi-i18n' ); ?></span>
     <span><input type="text" name="working_hour[monday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['monday_afternoon']; ?>" /></span>
     <span><input type="text" name="working_hour[tuesday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['tuesday_afternoon']; ?>" /></span>
     <span><input type="text" name="working_hour[wednesday_afternoon]" value="<?php echo $data['legal_display']->option['working_hour']['wednesday_afternoon']; ?>" /></span>
