@@ -109,19 +109,23 @@ class legal_display_mdl_01 extends post_mdl_01 {
 				'type' => 'string',
 			),
 		),
-		'document' => array(
+		'collective_agreement' => array(
 			'title_of_the_applicable_collective_agreement' => array(
 				'type' => 'string'
 			),
 			'location_and_access_terms_of_the_agreement' => array(
 				'type' => 'string'
-			),
-			'the_rule_of_procedure_display_location' => array(
-				'type' => 'string'
-			),
+			)
+		),
+		'DUER' => array(
 			'how_access_to_duer' => array(
 				'type' => 'string'
-			),
+			)
+		),
+		'rules' => array(
+			'location' => array(
+				'type' => 'string'
+			)
 		),
 	);
 
