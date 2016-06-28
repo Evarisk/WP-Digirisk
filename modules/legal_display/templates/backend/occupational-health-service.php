@@ -48,7 +48,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Horaires', 'wpdigi-i18n' ); ?>
-      <input name="occupational_health_service[opening_time]" type="text" value="<?php echo $data['occupational_health_service']->option['opening_hour']; ?>" />
+      <input name="occupational_health_service[opening_time]" type="text" value="<?php echo $data['occupational_health_service']->option['opening_time']; ?>" />
     </label>
   </li>
 </ul>
