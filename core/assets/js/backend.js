@@ -941,7 +941,7 @@ var digi_risk = {
 			new_risk_level_container.removeClass( "wp-digi-risk-level-" + new_risk_current_level );
 			new_risk_level_container.addClass( "wp-digi-risk-level-" + jQuery( this ).data( "risk_level" ) );
 			new_risk_level_container.find( 'div' ).removeClass( "wp-digi-risk-level-" + new_risk_current_level );
-			new_risk_level_container.find( 'div' ).html(  jQuery( this ).data( "risk-text" ) );
+			new_risk_level_container.find( 'div' ).html( "" );
 			new_risk_level_container.find( 'div' ).addClass( "wp-digi-risk-level-" + jQuery( this ).data( "risk_level" ) );
 			new_risk_level_container.attr( "data-risk_level", jQuery( this ).data( "risk_level" ) );
 
@@ -977,7 +977,9 @@ var digi_risk = {
       'beforeSubmit': function() {
         var element_required = false;
 
-        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_evaluation_level"]' ).val() == 0 ) {
+				console.log(jQuery ( element ).closest( 'form' ).find( 'input[name="digi_method"]' ).val());
+
+        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="digi_method"]' ).val() == 0 ) {
           jQuery( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
@@ -1011,8 +1013,8 @@ var digi_risk = {
         jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]').val( '' );
         jQuery( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
         instance._stop(1);
-				digi_global.init();
-        digi_risk.init();
+				// digi_global.init();
+        // digi_risk.init();
 			}
 		} );
 	},
@@ -1131,6 +1133,7 @@ var digi_risk = {
 		jQuery.post( ajaxurl, data, function( response ) {
 			jQuery( element ).closest( '.wp-digi-list-item' ).find( 'input[name="digi_method"]' ).val( jQuery( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
 			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).html( response.data.equivalence );
+
 			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-' + response.data.scale );
 		} );
 	},
