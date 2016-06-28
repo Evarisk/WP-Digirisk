@@ -881,8 +881,7 @@ var digi_risk = {
 		this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
 		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = jQuery( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
-
-		if ( jQuery( '.wp-digi-risk-item-new button' )[0] ) {
+		if ( jQuery( '.wp-digi-risk-item-new button' ).length > 0 ) {
 		    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
 		      callback: digi_risk.create_risk,
 		    } );
@@ -890,7 +889,8 @@ var digi_risk = {
 	},
 
 	tab_changed: function() {
-		if ( jQuery( '.wp-digi-risk-item-new button' )[0] ) {
+		console.log( jQuery( '.wp-digi-risk-item-new button' ).length );
+		if ( jQuery( '.wp-digi-risk-item-new button' ).length > 0 ) {
 		    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
 		      callback: digi_risk.create_risk,
 		    } );
@@ -1205,6 +1205,10 @@ var digi_group = {
 				 * Supression du loader sur le bloc à droite / Remove the loader on the right bloc
 				 */
 				jQuery( ".wp-digi-group-sheet-content" ).removeClass( "wp-digi-bloc-loading" );
+
+				if( action.replace( "digi-", "" ) == "digi-risk" ) {
+					digi_risk.tab_changed();
+				}
 
 				digi_global.init();
 			}, 'json');
@@ -1554,13 +1558,13 @@ var digi_recommendation = {
 };
 
 var digi_tools = {
-		
+
   event: function() {
 	  jQuery( document ).on( 'click', '.reset-method-evaluation', function( event ) { digi_tools.reset( event, jQuery( this ) ); } );
 	  jQuery( document ).on( 'click', '.digi-tools-main-container .nav-tab', function( event ) { digi_tools.tab_switcher( event, jQuery( this ) ); } );
 	  jQuery( document ).on( 'click', '.element-risk-compilation', function( event ) { digi_tools.risk_fixer( event, jQuery( this ) ); } );
   },
- 
+
   tab_switcher: function( event, element ) {
 	  event.preventDefault();
 
@@ -1570,7 +1574,7 @@ var digi_tools = {
 	  });
 	  /**	Add the active class on clicked tab	*/
 	  jQuery( element ).addClass( "nav-tab-active" );
-	  
+
 	  /**	Hide the different container and display the selected container	*/
 	  jQuery( element ).closest( ".digi-tools-main-container" ).children( "div" ).each( function(){
 		  jQuery( this ).hide();
@@ -1600,10 +1604,10 @@ var digi_tools = {
       } );
     }
   },
-  
+
   risk_fixer: function( event, element ) {
 	  event.preventDefault();
-	  
+
       jQuery( element ).addClass( "wp-digi-loading" );
       jQuery( element ).closest( '.wrap' ).find( 'ul' ).html('');
 
@@ -1621,5 +1625,5 @@ var digi_tools = {
         li.innerHTML += ' ' + digi_tools_done;
       } );
   }
-  
+
 }
