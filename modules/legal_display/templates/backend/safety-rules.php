@@ -18,19 +18,19 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Responsible for preventing', 'wpdigi-i18n' ); ?>
-      <input name="safety_rule[responsible_for_preventing]" type="text" />
+      <input name="safety_rule[responsible_for_preventing]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['responsible_for_preventing']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input name="safety_rule[phone]" type="text" />
+      <input name="safety_rule[phone]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['phne']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Location of detailed instructions', 'wpdigi-i18n' ); ?>
-      <input name="safety_rule[location_of_detailed_instruction]" type="text" />
+      <input name="safety_rule[location_of_detailed_instruction]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['location_of_detailed_instruction']; ?>" />
     </label>
   </li>
 </ul>
