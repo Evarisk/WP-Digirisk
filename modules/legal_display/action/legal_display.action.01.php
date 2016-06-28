@@ -50,6 +50,7 @@ class legal_display_action_01 {
   }
 
   public function generate_sheet( $data, $element_parent ) {
+		global $wpdigi_group_ctr;
 		/**	Début de la génération du document / Start document generation	*/
 		$document_controller = new document_controller_01();
 
@@ -69,9 +70,6 @@ class legal_display_action_01 {
 
 		/**	Définition de la révision du document / Define the document version	*/
 		$document_revision = $document_controller->get_document_type_next_revision( array( 'affichage_legal_A4' ), $data['legal_display']->id );
-
-		ini_set("display_errors", true);
-		error_reporting(E_ALL);
 
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
@@ -130,9 +128,9 @@ class legal_display_action_01 {
 
 		$legal_display_attachment_id = wp_insert_attachment( $element_parent, '', $element_parent->id );
 		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
-		$element_parent = $this->update( $element_parent );
+		$element_parent = $wpdigi_group_ctr->update( $element_parent );
 		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
-		
+
 		wp_send_json_success();
 	}
 
