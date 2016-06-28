@@ -127,9 +127,13 @@ class legal_display_action_01 {
 		);
 
     $document_creation = $document_controller->create_document( $group_model_to_use, $legal_display_sheet_details, $element_parent->type. '/' . $element_parent->id . '/affichage_legal_A4.odt' , null );
-    $upload_dir = wp_upload_dir();
-    $response['path'] = $upload_dir['baseurl'] . '/digirisk/' . $element_parent->type. '/' . $element_parent->id . '/affichage_legal_A4.odt';
-		wp_send_json_success( $response );
+
+		$legal_display_attachment_id = wp_insert_attachment( $element_parent, '', $element_parent->id );
+		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
+		$element_parent = $this->update( $element_parent );
+		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
+		
+		wp_send_json_success();
 	}
 
 
