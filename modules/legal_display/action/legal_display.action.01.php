@@ -137,10 +137,32 @@ class legal_display_action_01 {
 		$legal_display_attachment_id = wp_insert_attachment( $attachment_detail, '', $element_parent->id );
 
     $document_creation = $document_controller->create_document( $group_model_to_use, $legal_display_sheet_details, $element_parent->type. '/' . $element_parent->id . '/' . $attachment_detail['post_title'] . '.odt', null );
+		$filetype = 'unknown';
+		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
+			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
+		}
 
 		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
 		$element_parent = $wpdigi_group_ctr->update( $element_parent );
 		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
+
+		/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
+		$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $document_controller->get_post_type() ) + 1 );
+		$sheet_args = array(
+			'id'					=> $legal_display_attachment_id,
+			'status'    	=> 'inherit',
+			'author_id'		=> get_current_user_id(),
+			'date'			 	=> current_time( 'mysql', 0 ),
+			'mime_type'		=> $filetype[ 'type' ],
+			'option'			=> array (
+				'unique_key'						=> $next_document_key,
+				'unique_identifier' 		=> $document_controller->element_prefix . $next_document_key,
+				'model_id' 							=> $group_model_to_use,
+				'document_meta' 				=> json_encode( $legal_display_sheet_details ),
+				'version'								=> '',
+			),
+		);
+		 $document_controller->update( $sheet_args );
 
 		wp_send_json_success();
 	}
