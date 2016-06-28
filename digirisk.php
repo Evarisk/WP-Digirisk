@@ -45,7 +45,7 @@ add_filter( 'wpdigi_workunit_default_tab', function( $default ) {
 	return $current_tab;
 }, 1 );
 add_filter( 'wpdigi_group_default_tab', function( $default ) {
-	$current_tab = !empty( $_REQUEST['current_tab'] ) ? sanitize_text_field( $_REQUEST['current_tab'] ) : 'legal-display';
+	$current_tab = !empty( $_REQUEST['current_tab'] ) ? sanitize_text_field( $_REQUEST['current_tab'] ) : 'generate-sheet';
 	return $current_tab;
 }, 1 );
 
