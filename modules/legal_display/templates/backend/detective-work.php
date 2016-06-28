@@ -46,7 +46,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Horaires', 'wpdigi-i18n' ); ?>
-      <input name="detective_work[opening_time]" type="text" value="<?php echo $data['detective_work']->option['opening_hour']; ?>"/>
+      <input name="detective_work[opening_time]" type="text" value="<?php echo $data['detective_work']->option['opening_time']; ?>"/>
     </label>
   </li>
 </ul>
