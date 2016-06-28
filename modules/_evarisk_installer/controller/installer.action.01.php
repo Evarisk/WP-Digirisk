@@ -18,6 +18,8 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 	 * CORE - Instanciation des actions ajax pour l'installer
 	 */
 	public function __construct() {
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
+
 		add_action( 'wp_ajax_wpdigi-installer-step-1', array( $this, 'ajax_installer_step_1' ) );
 
 		add_action( 'wp_ajax_wpdigi-installer-add-user', array( $this, 'ajax_installer_add_user' ) );
@@ -30,6 +32,10 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
 
 		add_action( 'admin_post_last_step', array( $this, 'admin_post_last_step' ) );
+	}
+
+	public function admin_asset() {
+		wp_enqueue_script( 'wpdigi-installer-backend-js', DIGI_INSTAL_URL . 'asset/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	public function ajax_installer_step_1() {
