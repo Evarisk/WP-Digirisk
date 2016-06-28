@@ -624,19 +624,7 @@ var digi_workunit = {
 		jQuery( "#wpdigi-workunit-creation-form" ).ajaxSubmit({
 			'dataType': 'json',
 			'beforeSubmit' : function( formData, jqForm, options ){
-				var workunit_for_is_complete = true;
-				for (var i=0; i < formData.length; i++) {
-			        if (!formData[i].value) {
-			        	workunit_for_is_complete = false;
-			        }
-				}
-				if ( workunit_for_is_complete ) {
-					jQuery( element ).addClass( "wp-digi-bloc-loading" );
-				}
-				else {
-					alert( "Please fill in all fields" );
-          return false;
-				}
+				jQuery( element ).addClass( "wp-digi-bloc-loading" );
 			},
 			'success' : function( response, status, xhr, $form ){
 				if ( response.status ) {
@@ -646,6 +634,8 @@ var digi_workunit = {
 					jQuery( element ).removeClass( "wp-digi-bloc-loading" );
 
 					jQuery( '.wp-digi-group-header' ).replaceWith( response.template );
+
+
 				}
 				else {
 					alert( response.message );
@@ -753,6 +743,11 @@ var digi_workunit = {
 			 * Supression du loader sur le bloc à droite / Remove the loader on the right bloc
 			 */
 			jQuery( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
+			var workunit_id = jQuery( element ).closest( '.wp-digi-item-workunit' ).data( 'id' );
+			if ( jQuery( ".wp-digi-workunit-sheet[data-id='" + workunit_id  + "'] input[name='wp-digi-workunit-name']" ).val() === '' ) {
+				jQuery( ".wp-digi-workunit-sheet[data-id='" + workunit_id  + "'] input[name='wp-digi-workunit-name']" ).focus();
+				jQuery( '.wp-digi-global-sheet-header' ).find( 'div' ).removeClass('hidden');
+			}
 
 			digi_global.init();
 		});
@@ -940,7 +935,7 @@ var digi_risk = {
 			new_risk_level_container.removeClass( "wp-digi-risk-level-" + new_risk_current_level );
 			new_risk_level_container.addClass( "wp-digi-risk-level-" + jQuery( this ).data( "risk_level" ) );
 			new_risk_level_container.find( 'div' ).removeClass( "wp-digi-risk-level-" + new_risk_current_level );
-			new_risk_level_container.find( 'div' ).html( "" );
+			new_risk_level_container.find( 'div' ).html( "&nbsp;" );
 			new_risk_level_container.find( 'div' ).addClass( "wp-digi-risk-level-" + jQuery( this ).data( "risk_level" ) );
 			new_risk_level_container.attr( "data-risk_level", jQuery( this ).data( "risk_level" ) );
 
@@ -1083,7 +1078,7 @@ var digi_risk = {
 	select_danger: function( event, element ) {
 		jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]' ).val( jQuery( element ).data( 'id' ) );
 		jQuery( '.wp-digi-risk-item-new .wp-digi-select-list' ).toggle();
-		jQuery( '.wp-digi-risk-item-new toggle' ).html( jQuery( element ).find( 'img' ).attr( 'title' ) );
+		jQuery( '.wp-digi-risk-item-new toggle span' ).html( jQuery( element ).find( 'img' ).attr( 'title' ) );
 	},
 
 	select_variable: function( event, element ) {
