@@ -46,11 +46,17 @@ class legal_display_action_01 {
 
     $this->generate_sheet( $all_data, $element_parent );
 
+		// Bug des modèles
+		$element_parent = $wpdigi_group_ctr->show( $parent_id );
+
+    $this->generate_sheet( $all_data, $element_parent, "A3" );
+
     wp_send_json_success();
   }
 
-  public function generate_sheet( $data, $element_parent ) {
+  public function generate_sheet( $data, $element_parent, $format = "A4" ) {
 		global $wpdigi_group_ctr;
+
 		/**	Début de la génération du document / Start document generation	*/
 		$document_controller = new document_controller_01();
 
@@ -60,7 +66,7 @@ class legal_display_action_01 {
 
 		/**	Récupération de la liste des modèles existants pour l'élément actuel / Get model list for current group	*/
 		if ( null === $group_model_id_to_use ) {
-			$response = $document_controller->get_model_for_element( array( 'affichage_legal_A4', ) );
+			$response = $document_controller->get_model_for_element( array( 'affichage_legal_' . $format, ) );
 			if ( false === $response[ 'status' ] ) {
 				wp_send_json_error( $response );
 			}
@@ -129,7 +135,7 @@ class legal_display_action_01 {
 			'post_status'    => 'inherit',
 			'post_author'		 => get_current_user_id(),
 			'post_date'			 => current_time( 'mysql', 0 ),
-			'post_title'		 => mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_affichage_legal_' . $element_parent->option['unique_identifier'] . '_V' . $document_revision,
+			'post_title'		 => mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_affichage_legal_' . $element_parent->option['unique_identifier'] . '_' . $format . '_V' . $document_revision,
 			'id' 							=> $element_parent->id,
 			'type'						=> $element_parent->type,
 		);
@@ -143,7 +149,7 @@ class legal_display_action_01 {
 		}
 
 		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
-		$element_parent = $wpdigi_group_ctr->update( $element_parent );
+		$wpdigi_group_ctr->update( $element_parent );
 		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
 
 		/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
@@ -163,8 +169,6 @@ class legal_display_action_01 {
 			),
 		);
 		 $document_controller->update( $sheet_args );
-
-		wp_send_json_success();
 	}
 
 
