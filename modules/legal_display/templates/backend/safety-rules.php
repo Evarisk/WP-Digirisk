@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Phone', 'wpdigi-i18n' ); ?>
-      <input name="safety_rule[phone]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['phne']; ?>" />
+      <input name="safety_rule[phone]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['phone']; ?>" />
     </label>
   </li>
   <li>
