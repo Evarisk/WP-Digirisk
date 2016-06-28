@@ -11,7 +11,7 @@ if ( $risk != null ):
 				<i class="wp-digi-element-thumbnail wp-digi-risk-thumbnail dashicons dashicons-format-image" data-type="digi-risk" data-id="<?php echo $risk->id; ?>" ></i>
 			<?php endif; ?>
 		</span>
-		<span class="wp-digi-risk-list-column-cotation" ><div class="wp-digi-risk-level-<?php echo $risk->evaluation->option[ 'risk_level' ][ 'scale' ]; ?>" ><?php echo $risk->evaluation->option[ 'risk_level' ][ 'equivalence' ]; ?></div></span>
+		<span class="wp-digi-risk-list-column-cotation" ><div class="wp-digi-risk-level-<?php echo $risk->evaluation->option[ 'risk_level' ][ 'scale' ]; ?>" >&nbsp;</div></span>
 		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->option[ 'unique_identifier' ]; ?> - <?php echo $risk->evaluation->option[ 'unique_identifier' ]?></span>
 		<span class="wp-digi-risk-list-column-danger"><?php echo wp_get_attachment_image( $risk->danger->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $risk->danger->name ) ); ?></span>
 		<span class="wp-digi-risk-comment" >

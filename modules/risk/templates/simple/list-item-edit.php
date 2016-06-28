@@ -24,10 +24,10 @@ if ( $risk_definition != null ):
 			<div class="wp-digi-risk-level-<?php echo $risk_definition->evaluation->option['risk_level']['scale']; ?> wp-digi-risk-list-column-danger" ><?php echo $risk_definition->evaluation->option['risk_level']['equivalence']; ?></div>
 			<?php if ( $risk_definition->taxonomy['digi-method'][0] == $term_evarisk_simple->term_id ): ?>
 				<ul class="digi-popup wp-digi-risk-cotation-chooser simple" style="display: none;" >
-					<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >1</li>
-					<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >48</li>
-					<li data-risk_level="3" data-value="51" data-risk-text="51" class="wp-digi-risk-level-3" >51</li>
-					<li data-risk_level="4" data-value="80" data-risk-text="80" class="wp-digi-risk-level-4" >80</li>
+					<li data-risk_level="1" data-value="1" data-risk-text="1" class="wp-digi-risk-level-1" >&nbsp;</li>
+					<li data-risk_level="2" data-value="48" data-risk-text="48" class="wp-digi-risk-level-2" >&nbsp;</li>
+					<li data-risk_level="3" data-value="51" data-risk-text="51" class="wp-digi-risk-level-3" >&nbsp;</li>
+					<li data-risk_level="4" data-value="80" data-risk-text="80" class="wp-digi-risk-level-4" >&nbsp;</li>
 				</ul>
 			<?php endif; ?>
 		</span>
