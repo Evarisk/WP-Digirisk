@@ -1765,7 +1765,7 @@
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  background: #e2e2e2;
+  background: #e2e2e2 !important;
   color: rgba(0, 0, 0, 0.6);
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-2 {
@@ -1773,21 +1773,21 @@
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  background: #e9ad4f;
+  background: #e9ad4f !important;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-3 {
   -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  background: #e05353;
+  background: #e05353 !important;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .wp-digi-risk-level-4 {
   -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  background: #2b2b2b;
+  background: #2b2b2b !important;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation .open-method-evaluation-render {
   background: #3495f0;
