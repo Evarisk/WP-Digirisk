@@ -1,0 +1,9 @@
+{
+	ignore: [
+		"**/core/wpeo_logs/**",
+		"**/core/module_management/**",
+		"**/core/odtPhpLibrary/**",
+		"**/core/asset/js/modernizr.customjs",
+		"**/core/asset/js/progress-button.js"
+	]
+}
