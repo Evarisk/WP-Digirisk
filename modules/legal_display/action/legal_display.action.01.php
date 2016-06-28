@@ -69,7 +69,7 @@ class legal_display_action_01 {
     }
 
 		/**	Définition de la révision du document / Define the document version	*/
-		$document_revision = $document_controller->get_document_type_next_revision( array( 'affichage_legal_A4' ), $data['legal_display']->id );
+		$document_revision = $document_controller->get_document_type_next_revision( array( 'affichage_legal_A4' ), $element_parent->id );
 
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
