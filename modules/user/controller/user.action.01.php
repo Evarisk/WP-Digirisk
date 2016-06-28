@@ -16,6 +16,7 @@
 if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 	class wpdigi_user_action_01 {
 		public function __construct() {
+			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_assets' ) );
 			// Quand on affecte un utilisateur
 			add_action( 'wp_ajax_edit_user_assign', array( $this, 'callback_edit_user_assign' ) );
 
@@ -26,6 +27,10 @@ if ( !class_exists( 'wpdigi_user_action_01' ) ) {
 
 			// Recherche d'un utilisateur affecté
 			add_action( 'wp_ajax_search_user_affected', array( $this, 'ajax_search_user_affected' ) );
+		}
+
+		public function admin_assets() {
+			wp_enqueue_script( 'wpdigi-user-backend-js', WPDIGI_USERS_URL . 'assets/js/backend.js', array( 'jquery' ), WPDIGI_VERSION, false );
 		}
 
 		public function callback_edit_user_assign() {
