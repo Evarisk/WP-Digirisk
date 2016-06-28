@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Digirisk V2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-28 14:41+0100\n"
-"PO-Revision-Date: 2016-06-28 14:50+0100\n"
+"PO-Revision-Date: 2016-06-28 14:53+0100\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -1245,7 +1245,7 @@ msgstr "Règlement intérieur"
 
 #: modules\legal_display/templates/backend/rule.php:19
 msgid "location"
-msgstr "Lieu de consultation"
+msgstr "Lieux d'affichage"
 
 #: modules\legal_display/templates/backend/safety-rules.php:16
 msgid "Safety rules"
