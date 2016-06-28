@@ -10,12 +10,15 @@ if ( $risk_definition != null ):
 		<input type="hidden" name="risk_id" value="<?php echo $risk_id; ?>" />
 		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 
-		<span class="wp-digi-element-thumbnail wp-digi-risk-thumbnail wpeo-upload-media" data-type="digi-risk" data-id="<?php echo $risk_id; ?>" >
+		<span title="<?php _e( 'Upload media', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail wpeo-upload-media" data-type="digi-risk" data-id="<?php echo $risk_id; ?>" >
+			<div class="mask">
+				<span class="dashicons dashicons-plus"></span>
+			</div>
 			<?php if ( has_post_thumbnail( $risk_id ) ) : ?>
 				<?php echo get_the_post_thumbnail( $risk_id, 'digirisk-element-miniature' ); ?>
 				<?php echo do_shortcode( "[wpeo_gallery element_id='" . $risk_id . "' global='wpdigi_risk_ctr' ]" ); ?>
 			<?php else: ?>
-				<i class="wp-digi-element-thumbnail wp-digi-risk-thumbnail dashicons dashicons-format-image" data-type="digi-risk" data-id="<?php echo $risk_id; ?>" ></i>
+				<i title="<?php _e( 'Upload image', 'wpdigi-i18n' ); ?>" class="wp-digi-element-thumbnail wp-digi-risk-thumbnail dashicons dashicons-format-image" data-type="digi-risk" data-id="<?php echo $risk_id; ?>" ></i>
 			<?php endif; ?>
 		</span>
 
