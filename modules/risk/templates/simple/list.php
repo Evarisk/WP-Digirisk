@@ -5,7 +5,7 @@
 			<span class="wp-digi-risk-list-column-thumbnail" >&nbsp;</span>
 			<span class="wp-digi-risk-list-column-cotation" ><?php _e( 'Cot.', 'wpdigi-i18n' ); ?></span>
 			<span class="wp-digi-risk-list-column-reference header" ><?php _e( 'Ref.', 'wpdigi-i18n' ); ?></span>
-			<span><?php _e( 'Danger', 'wpdigi-i18n' ); ?></span>
+			<span><?php _e( 'Risque', 'wpdigi-i18n' ); ?></span>
 			<span><?php _e( 'Comment', 'wpdigi-i18n' ); ?></span>
 			<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 		</li>
