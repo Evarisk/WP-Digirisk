@@ -15,6 +15,7 @@ var legal_display = {
       },
       success: function( responseText, statusText, xhr, $form ) {
         jQuery( '.form-legal-display .generate-legal-display' ).removeClass( "wp-digi-loading" );
+				jQuery( '.wp-digi-group-sheet-tab li[data-action="digi-sheet"]' ).click();
       }
     };
 
