@@ -1,5 +1,5 @@
 {
-	ignore: [
+	"ignore": [
 		"**/core/wpeo_logs/**",
 		"**/core/module_management/**",
 		"**/core/odtPhpLibrary/**",
