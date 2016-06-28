@@ -18,6 +18,8 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 	 * CORE - Instanciation des actions ajax pour les groupement / Instanciate ajax treatment for group
 	 */
 	function __construct() {
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
+
 		add_action( 'wp_ajax_wpdigi-create-group', array( $this, 'ajax_create_group' ) );
 		add_action( 'wp_ajax_wpdigi-delete-group', array( $this, 'ajax_delete_group' ) );
 
@@ -32,6 +34,10 @@ class wpdigi_group_action_01 extends wpdigi_group_ctr_01 {
 		add_action( 'wp_ajax_wpdigi_loadsheet_group', array( $this, 'ajax_display_ajax_sheet_content' ) );
 
 		add_action( 'wp_ajax_wpdigi_generate_duer_' . $this->get_post_type(), array( $this, 'ajax_generate_duer' ) );
+	}
+
+	public function admin_asset() {
+		wp_enqueue_script( 'wpdigi-group-backend-js', WPDIGI_STES_URL . 'asset/js/group.backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	public function ajax_create_group() {

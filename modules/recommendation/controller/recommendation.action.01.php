@@ -19,10 +19,15 @@ class recommendation_action_01 extends wpdigi_recommendation_ctr_01 {
 	 * CORE - Instanciation des actions ajax pour les recommendation / Instanciate ajax treatment for recommendation
 	 */
 	function __construct() {
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
 		add_action( 'wp_ajax_wpdigi-create-recommendation', array( $this, 'ajax_create_recommendation' ), 12 );
 		add_action( 'wp_ajax_wpdigi-delete-recommendation', array( $this, 'ajax_delete_recommendation' ), 12 );
 		add_action( 'wp_ajax_wpdigi-load-recommendation', array( $this, 'ajax_load_recommendation' ), 12 );
 		add_action( 'wp_ajax_wpdigi-edit-recommendation', array( $this, 'ajax_edit_recommendation' ), 12 );
+	}
+
+	public function admin_asset() {
+		wp_enqueue_script( 'wpdigi-recommendation-backend-js', WPDIGI_EVALUATOR_URL . 'asset/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	function ajax_create_recommendation() {
@@ -161,7 +166,7 @@ class recommendation_action_01 extends wpdigi_recommendation_ctr_01 {
 			wp_send_json_error();
 		else
 			$index = (int) $_POST['index'];
-			
+
 		wpdigi_utils::check( 'ajax_delete_recommendation_' . $term_id . '_' . $index );
 
 		global $digi_recommendation_controller;

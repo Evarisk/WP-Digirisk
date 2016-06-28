@@ -18,6 +18,8 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 	 * CORE - Instanciation des actions ajax pour les unités de travail / Instanciate ajax treatment for work unit
 	 */
 	function __construct() {
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
+
 		/**	Affiche une fiche d'unité de travail / Display a work unit sheet	*/
 		add_action( 'wp_ajax_wpdigi_workunit_sheet_display', array( $this, 'display_workunit_sheet' ) );
 
@@ -38,6 +40,10 @@ class wpdigi_workunit_action_01 extends wpdigi_workunit_ctr_01 {
 
 		/**	Génération de la fiche d'une unité de travail / Generate sheet for a workunit	*/
 		add_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit', array( $this, 'generate_workunit_sheet' ) );
+	}
+
+	public function admin_asset() {
+		wp_enqueue_script( 'wpdigi-workunit-backend-js', WPDIGI_STES_URL . 'asset/js/workunit.backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	/**

@@ -18,12 +18,17 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 	 * CORE - Instanciation des actions ajax pour les risques / Instanciate ajax treatment for danger
 	 */
 	function __construct() {
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
 		add_action( 'wp_ajax_wpdigi-create-risk', array( $this, 'ajax_create_risk' ), 12 );
 		add_action( 'wp_ajax_wpdigi-delete-risk', array( $this, 'ajax_delete_risk' ) );
 		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
 		add_action( 'wp_ajax_wpfile_associate_file_digi-risk', array( $this, 'ajax_associate_file_to_risk' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
+	}
+
+	public function admin_asset() {
+		wp_enqueue_script( 'wpdigi-risk-backend-js', WPDIGI_RISKS_URL . 'asset/js/group.backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	function ajax_create_risk() {

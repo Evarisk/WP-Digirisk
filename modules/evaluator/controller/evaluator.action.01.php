@@ -16,6 +16,7 @@
 if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 	class wpdigi_evaluator_action_01 {
 		public function __construct() {
+			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
 			// Quand on affecte un utilisateur
 			add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 
@@ -24,6 +25,10 @@ if ( !class_exists( 'wpdigi_evaluator_action_01' ) ) {
 
 
 			add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
+		}
+
+		public function admin_asset() {
+			wp_enqueue_script( 'wpdigi-evaluator-backend-js', WPDIGI_EVALUATOR_URL . 'asset/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 		}
 
 		public function callback_edit_evaluator_assign() {

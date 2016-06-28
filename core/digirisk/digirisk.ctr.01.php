@@ -49,6 +49,7 @@ class digirisk_controller_01 {
 
 		/**	Scripts inclusion */
 		wp_enqueue_script( 'modernizr.custom.js', WPDIGI_URL . 'core/assets/js/modernizr.custom.js', array( 'jquery' ), WPDIGI_VERSION, false );
+		wp_enqueue_script( 'progress-button.js', WPDIGI_URL . 'core/assets/js/progress-button.js', array( 'jquery' ), WPDIGI_VERSION, false );
 		wp_enqueue_script( 'wpdigi-backend-js', WPDIGI_URL . 'core/assets/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
