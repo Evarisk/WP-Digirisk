@@ -97,7 +97,7 @@ class legal_display_mdl_01 extends post_mdl_01 {
 			'saturday_afternoon' => array(
 				'type' => 'string',
 			),
-			'saunday_afternoon' => array(
+			'sunday_afternoon' => array(
 				'type' => 'string',
 			),
 		),
