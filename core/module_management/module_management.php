@@ -23,9 +23,6 @@ if ( !defined( 'DIGIMODMAN_VERSION' ) ) {
 	DEFINE( 'DIGIMODMAN_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 	DEFINE( 'DIGIMODMAN_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', DIGIMODMAN_PATH ) );
 
-	/**	Appel des traductions pour le module / Call translation for module	*/
-	load_plugin_textdomain( 'digirisk', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
 	/**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
 	DEFINE( 'DIGIMODMAN_TEMPLATES_MAIN_DIR', DIGIMODMAN_PATH . '/templates/');
 
