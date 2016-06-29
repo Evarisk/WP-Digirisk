@@ -74,24 +74,29 @@ class evaluation_method_shortcode {
 	* @return void
 	*/
 	public function callback_evaluation_method_complex( $param ) {
-		$term_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
+		global $evaluation_method_class;
+		global $wpdigi_evaluation_method_variable_controller;
+		global $wpdigi_risk_evaluation_ctr;
+		global $wpdigi_risk_ctr;
+
+		$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 
 		if ( !empty( $term_evarisk ) ) {
-			$risk = risk_class::get()->show( $risk_id );
-			$risk_evaluation = risk_evaluation_class::get()->show( $risk->option['current_evaluation_id'] );
-			$evarisk_evaluation_method = evaluation_method_class::get()->show( $term_evarisk->term_id );
+			$risk = $wpdigi_risk_ctr->show( $risk_id );
+			$risk_evaluation = $wpdigi_risk_ctr->show( $risk->option['current_evaluation_id'] );
+			$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 			$list_evaluation_method_variable = array();
 			if ( !empty( $evarisk_evaluation_method->option['formula'] ) ) {
 				foreach ( $evarisk_evaluation_method->option['formula'] as $key => $formula ) {
 					if ( $key % 2 == 0 ) {
-						$list_evaluation_method_variable[] = evaluation_method_variable_class::get()->show( $formula );
+						$list_evaluation_method_variable[] = $wpdigi_evaluation_method_variable_controller->show( $formula );
 					}
 				}
 			}
 		}
 
-		require( EVALUATION_METHOD_VIEW_DIR . 'popup/popup.view.php' );
+		require( WPDIGI_EVALMETHOD_VIEW . 'popup/popup.view.php' );
 	}
 }
 
