@@ -103,8 +103,8 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 		global $digi_recommendation_controller;
 		$digi_recommendation_controller->create_default_data();
 		//
-		global $wpdigi_evaluation_method_controller;
-		$wpdigi_evaluation_method_controller->create_default_data();
+		global $evaluation_method_class;
+		$evaluation_method_class->create_default_data();
 
 		/** Définition des modèles de documents / Define document model to use */
 		$document_controller_01 = new document_controller_01();
