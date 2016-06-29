@@ -26,5 +26,6 @@
 		</ul>
 
 		<div class="wpdigi-method-evaluation-render"><?php require( wpdigi_utils::get_template_part( WPDIGI_RISKS_DIR, WPDIGI_RISKS_TEMPLATES_MAIN_DIR, 'simple', 'method', 'evaluation-evarisk' ) ); ?></div>
+		<?php do_shortcode( '[digi_evaluation_method_complex]' ); ?>
 	</form>
 </div>

@@ -22,7 +22,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<li data-level="2" class="wp-digi-risk-level-2" >&nbsp;</li>
 		<li data-level="3" class="wp-digi-risk-level-3" >&nbsp;</li>
 		<li data-level="4" class="wp-digi-risk-level-4" >&nbsp;</li>
-		<?php if ( $risk_id === 0 || $digi_method_id === $term_evarisk_complex->term_id ): ?>
+		<?php if ( $risk_id === 0 ): ?>
 		    <li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic digi-toggle" data-parent=".form-risk" data-target="wpdigi-method-evaluation-render"></span></li>
     <?php endif; ?>
 	</ul>
