@@ -35,6 +35,7 @@ class risk_save_action {
 		global $wpdigi_risk_ctr;
 		global $wpdigi_risk_evaluation_ctr;
 		global $wpdigi_danger_ctr;
+		global $file_management_class;
 
 		$ctr = !empty( $_POST['global'] ) ? sanitize_text_field( $_POST['global'] ) : '';
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
@@ -97,10 +98,10 @@ class risk_save_action {
 		if ( $risk->id === 0 ) {
 			wp_send_json_error();
 		}
-		//
-		// if ( $file_id != 0 ) {
-		// 	file_management_class::get()->associate_file( $file_id, $risk->id, 'risk_class' );
-		// }
+
+		if ( $file_id != 0 ) {
+			$file_management_class->associate_file( $file_id, $risk->id, 'wpdigi_risk_ctr' );
+		}
 
 
 		// Ajoutes le risque à l'établissement
