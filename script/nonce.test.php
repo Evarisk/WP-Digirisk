@@ -24,11 +24,21 @@ $unitList = search_files('../', "/^.*\.php$/");
 $string_post_unsecured = array();
 $total_unsecured_line = 0;
 
+$list_exclude_test = array(
+	'../Digirisk/script/request.test.php',
+	'../Digirisk/script/nonce.test.php',
+	'../Digirisk/modules/transfer_datas/controller/TransferData.controller.01.php',
+	'../Digirisk/modules/transfer_datas/controller/TransferData_ajax.controller.01.php',
+	'../Digirisk/modules/transfer_datas/controller/TransferData_common.controller.01.php',
+	'../Digirisk/modules/transfer_datas/controller/TransferData_components.controller.01.php',
+	'../Digirisk/modules/transfer_datas/controller/TransferData_groupement.controller.01.php',
+);
+
 // Loop on unitList
 foreach($unitList as $test)
 {
 	// echo "[+] Testing -> " . $test . PHP_EOL;
-  if ( $test != '../Digirisk/script/request.test.php' || $test != '../Digirisk/script/nonce.test.php' ) {
+  if ( !in_array( $test, $list_exclude_test ) ) {
 		echo "[+] test : " . $test . PHP_EOL;
     $content = file_get_contents( $test );
 
