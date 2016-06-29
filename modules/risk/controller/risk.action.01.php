@@ -28,7 +28,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 	}
 
 	public function admin_asset() {
-		wp_enqueue_script( 'wpdigi-risk-backend-js', WPDIGI_RISKS_URL . 'asset/js/group.backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
+		wp_enqueue_script( 'wpdigi-risk-backend-js', WPDIGI_RISKS_URL . 'asset/js/backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	function ajax_create_risk() {
