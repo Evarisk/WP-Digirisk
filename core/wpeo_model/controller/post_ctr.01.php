@@ -22,58 +22,60 @@ class post_ctr_01 {
 	}
 
 	public function update( $data ) {
-		$object = $data;
-
-		if( is_array( $data ) ) {
-			$object = new $this->model_name( $data, $this->meta_key );
+		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data ) && empty( $data->id ) ) ) {
+			return $this->create( $data );
 		}
+		else {
+			$object = $data;
 
-		wp_update_post( $object->do_wp_object() );
+			if( is_array( $data ) ) {
+				$object = new $this->model_name( $data, $this->meta_key );
+			}
 
-		/** On insert ou on met à jour les meta */
-		if( !empty( $object->option ) ) {
-			$object->save_meta_data( $object, 'update_post_meta', $this->meta_key );
-		}
+			wp_update_post( $object->do_wp_object() );
 
-		/** On insert les terms */
-		if ( !empty( $object->taxonomy ) ) {
-			foreach( $object->taxonomy as $taxonomy => $array_value ) {
-				if( !empty( $taxonomy ) && !empty( $array_value ) ) {
-					wp_set_object_terms( $object->id, $array_value, $taxonomy );
-				}
-				else if( !empty( $taxonomy ) && empty( $array_value ) ) {
-					wp_set_object_terms( $object->id, '', $taxonomy );
+			/** On insert ou on met à jour les meta */
+			if( !empty( $object->option ) ) {
+				$object->save_meta_data( $object, 'update_post_meta', $this->meta_key );
+			}
+
+			/** On insert les terms */
+			if ( !empty( $object->taxonomy ) ) {
+				foreach( $object->taxonomy as $taxonomy => $array_value ) {
+					if( !empty( $taxonomy ) && !empty( $array_value ) ) {
+						wp_set_object_terms( $object->id, $array_value, $taxonomy );
+					}
+					else if( !empty( $taxonomy ) && empty( $array_value ) ) {
+						wp_set_object_terms( $object->id, '', $taxonomy );
+					}
 				}
 			}
-		}
 
-		return $object;
+			return $object;
+		}
 	}
 
 	public function create( $data ) {
 		$object = $data;
-
 		if( is_array( $data ) ) {
 			$object = new $this->model_name( $data, $this->meta_key );
 			$object->type = $this->post_type;
 		}
-
 		$object->id = wp_insert_post( $object->do_wp_object() );
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {
-			$object->save_meta_data( $object, 'update_post_meta', $this->meta_key );
+			$cloned_object = clone $object;
+			$cloned_object->save_meta_data( $object, 'update_post_meta', $this->meta_key );
 		}
-
 		/** On insert les terms */
-		if ( !empty( $object->taxonomy ) ) {
-			foreach( $object->taxonomy as $taxonomy => $array_value ) {
+		if ( !empty( $cloned_object->taxonomy ) ) {
+			foreach( $cloned_object->taxonomy as $taxonomy => $array_value ) {
 				if( !empty( $taxonomy ) && !empty( $array_value ) ) {
-					wp_set_object_terms( $object->id, $array_value, $taxonomy );
+					wp_set_object_terms( $cloned_object->id, $array_value, $taxonomy );
 				}
 			}
 		}
-
-		return $object;
+		return $cloned_object;
 	}
 
 	public function delete($id) {
