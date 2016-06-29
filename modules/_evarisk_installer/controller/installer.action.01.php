@@ -39,9 +39,11 @@ class wpdigi_installer_action_01 extends wp_digirisk_installer {
 	}
 
 	public function ajax_installer_step_1() {
+		ini_set("display_errors", true);
+		error_reporting(E_ALL);
 		wpdigi_utils::check( 'ajax_installer_step_1' );
 
-		$post_code = '';
+		$postcode = '';
 
 		if ( !empty( $_POST['address']['postcode'] ) ) {
 			$postcode = (int) $_POST['address']['postcode'];
