@@ -13,12 +13,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_evaluation_comment_action {
 	public function __construct() {
-		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 2 );
+		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 3 );
 	}
 
 	/**
   * Enregistres le commentaire d'une evaluation d'un risque
-  * Ce callback est hoocké après wp_ajax_save_risk de risk_evaluation_action
+  * Ce callback est hoocké après wp_ajax_save_risk de risk_save_action
   *
   * @param string $_POST['comment_date'] La date du commentaire
   * @param string $_POST['comment_content'] Le contenu du commentaire

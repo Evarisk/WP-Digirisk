@@ -6,8 +6,8 @@
 		<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 		<?php wp_nonce_field( 'save_risk' ); ?>
-		<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
-		
+		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
+
 		<ul class="wp-digi-table">
 			<li>
 				<span title="<?php _e( 'Upload media', 'digirisk' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
@@ -35,7 +35,7 @@
 
 				<span class="wp-digi-risk-select"><?php global $wpdigi_danger_category_ctr; $wpdigi_danger_category_ctr->display_category_danger( array( 'with_danger' => true, ) ); ?></span>
 
-				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="comment_data[]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
+				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="comment_date[]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
 				<span class="wp-digi-risk-comment" ><textarea name="comment_content[]" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
 
 				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" >

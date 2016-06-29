@@ -111,7 +111,7 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 		if ( empty( $element ) )
 			return false;
 
-		global $wpdigi_evaluation_method_controller;
+		global $evaluation_method_class;
 
 		$current_page = !empty( $_GET['current_page'] ) ? (int)$_GET['current_page'] : 1;
 		$number_page = ceil( count ( $element->option['associated_risk'] ) ) / $this->limit_risk;
@@ -138,14 +138,14 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 			} );
 		}
 
-		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $wpdigi_evaluation_method_controller->get_taxonomy() );
+		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
 
 		/** Le tableau de la méthode d'évaluation evarisk */
 		global $wpdigi_evaluation_method_variable_controller;
-		$term_evarisk = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_controller->get_taxonomy() );
+		$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
 
 		if ( !empty( $term_evarisk ) ) {
-			$evarisk_evaluation_method = $wpdigi_evaluation_method_controller->show( $term_evarisk->term_id );
+			$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 			$list_evaluation_method_variable = array();
 
 			if ( !empty( $evarisk_evaluation_method->option['formula'] ) ) {
@@ -173,8 +173,8 @@ class wpdigi_risk_ctr_01 extends post_ctr_01 {
 			$risk = $this->show( $id );
 
 			/**	Récupération de la méthode associée au risque / Get associated method to risk	*/
-			global $wpdigi_evaluation_method_controller;
-			$risk->method = $wpdigi_evaluation_method_controller->show( $risk->taxonomy[ 'digi-method' ][ 0 ] );
+			global $evaluation_method_class;
+			$risk->method = $evaluation_method_class->show( $risk->taxonomy[ 'digi-method' ][ 0 ] );
 
 			/**	Récupération du danger associé au risque / Get the danger associated to risk	*/
 			global $wpdigi_danger_ctr;
