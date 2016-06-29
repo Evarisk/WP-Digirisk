@@ -18,7 +18,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
       <?php
         echo $list_evaluation_method_variable[$key]->name;
         $value = '';
-        if ( !empty( $risk_evaluation ) ):
+        if ( !empty( $risk_evaluation ) && !empty( $risk_evaluation->option['quotation_detail'] ) ):
           foreach( $risk_evaluation->option['quotation_detail'] as $detail ) {
             if ( $detail['variable_id'] == $list_evaluation_method_variable[$key]->id )
               $value = $detail['value'];

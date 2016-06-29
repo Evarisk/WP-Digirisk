@@ -45,12 +45,6 @@ var digi_risk = {
 		jQuery( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li:not(.open-method-evaluation-render)', function( event ) { digi_risk.select_cotation( event, jQuery( this ) ); } );
 		jQuery( document ).on( 'click', '.wp-digi-risk-item-new .wp-digi-select-list li', function( event ) { digi_risk.select_danger( event, jQuery( this ) ); } );
 
-		// Methode evarisk
-		jQuery( document ).on( 'click', '.open-method-evaluation-render', function( event ) { digi_risk.open_modal( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .row li', function( event ) { digi_risk.select_variable( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .dashicons-no-alt', function( event ) { digi_risk.close_modal( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .wp-digi-bton-fourth', function( event ) { digi_risk.close_modal( event, jQuery( this ) ); } );
-
     jQuery( document ).on( 'click', '.wp-digi-action-comment-delete', function( event ) { digi_risk.delete_comment( event, jQuery( this ) ); } );
 	},
 
@@ -187,48 +181,6 @@ var digi_risk = {
 			jQuery( element ).addClass( 'active' );
 			jQuery( '.wpdigi-method-evaluation-render input[name="variable[' + jQuery( element ).data( 'variable-id' ) + ']"]' ).val( jQuery( element ).data( 'seuil-id' ) );
 		}
-	},
-
-	open_modal: function( event, element ) {
-		jQuery( element ).closest( 'form' ).find( '.wp-digi-eval-evarisk' ).show( function() {
-			jQuery( element ).closest( 'form' ).find( '.wp-digi-eval-evarisk' ).animate({
-				'opacity': 1,
-			}, 400);
-		} );
-		jQuery( element ).closest( 'form' ).find( '.wp-digi-eval-evarisk > div' ).show( function() {
-			jQuery( element ).closest( 'form' ).find( '.wp-digi-eval-evarisk > div' ).animate( {
-				'top': '50%',
-				'opacity': 1,
-			}, 400 );
-		} );
-	},
-
-	close_modal: function( event, element ) {
-		event.preventDefault();
-
-		var list_variable = {};
-		jQuery( '.wpdigi-method-evaluation-render .wp-digi-eval-evarisk:visible').find( 'input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
-			list_variable[jQuery( f ).attr( 'variable-id' )] = jQuery( f ).val();
-		} );
-
-		jQuery( '.wpdigi-method-evaluation-render .wp-digi-eval-evarisk > div ' ).animate( {
-			'top': '30%',
-			'opacity': 0,
-		}, 400, function() { jQuery( '.wpdigi-method-evaluation-render .wp-digi-eval-evarisk > div ' ).hide(); } );
-		jQuery( '.wpdigi-method-evaluation-render .wp-digi-eval-evarisk' ).animate({
-			'opacity': 0,
-		}, 400, function() { jQuery( '.wpdigi-method-evaluation-render .wp-digi-eval-evarisk' ).hide(); } );
-
-		var data = {
-			action: 'get_value_threshold',
-			list_variable: list_variable,
-		};
-
-		jQuery.post( ajaxurl, data, function( response ) {
-			jQuery( element ).closest( '.wp-digi-list-item' ).find( 'input[name="digi_method"]' ).val( jQuery( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
-			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).html( '&nbsp;' );
-			jQuery( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-' + response.data.scale );
-		} );
 	},
 
   delete_comment: function( event, element ) {

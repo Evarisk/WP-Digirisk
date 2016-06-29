@@ -11,7 +11,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="wpdigi-method-evaluation-render digi-popup">
+<div class="wpdigi-method-evaluation-render digi-popup hidden">
   <!-- Utile pour retenir la méthode d'evaluation utilisée -->
   <input type="hidden" class="digi-method-evaluation-id" value="<?php echo $term_evarisk->term_id; ?>" />
 

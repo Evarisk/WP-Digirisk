@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     <?php
     $active = '';
 
-    if ( !empty( $risk_evaluation ) ):
+    if ( !empty( $risk_evaluation ) && !empty( $risk_evaluation->option['quotation_detail'] ) ):
       foreach( $risk_evaluation->option['quotation_detail'] as $detail ) {
         if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->option['survey']['request'][$i]['seuil'] )
           $active = 'active';
