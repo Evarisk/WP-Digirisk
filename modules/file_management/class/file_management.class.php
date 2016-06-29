@@ -23,7 +23,8 @@ class file_management_class {
 
   // @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
-    $element = $object_name::get()->show( $element_id );
+		global ${$object_name};
+    $element = ${$object_name}->show( $element_id );
 
     if ( wp_attachment_is_image( $file_id ) ) {
       $element->option['associated_document_id']['image'][] = $file_id;
@@ -37,7 +38,7 @@ class file_management_class {
       $element->option['associated_document_id']['document'][] = $file_id;
     }
 
-    $object_name::get()->update( $element );
+    ${$object_name}->update( $element );
   }
 }
 
