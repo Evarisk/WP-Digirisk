@@ -85,7 +85,7 @@ var digi_global = {
 			var element = jQuery( this );
       var parent = jQuery( this ).data( 'parent' );
       if( parent != undefined ) {
-  			var div = jQuery( this ).closest( parent ).find( '.' + jQuery( this ).data( 'target' ) );
+  			var div = jQuery( this ).closest( '.' + parent ).find( '.' + jQuery( this ).data( 'target' ) );
       }
       else {
         var div = jQuery( this ).parent().find( '.' + jQuery( this ).data( 'target' ) );
@@ -98,7 +98,6 @@ var digi_global = {
 			} );
 
 			div.toggle();
-
 		} );
 
 		jQuery( document ).on( 'click', function( event ) {

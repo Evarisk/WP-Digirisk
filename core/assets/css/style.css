@@ -154,17 +154,17 @@
 }
 
 @media (max-width: 1100px) {
-  
+
 }
 @media (max-width: 1100px) {
-  
+
 }
 @media (max-width: 960px) {
-  
-  
+
+
 }
 @media (max-width: 800px) {
-  
+
   [class*=wp-digi][class*="boxed"] {
     float: none !important;
     width: 100% !important;
@@ -434,7 +434,7 @@
   }
 }
 @-webkit-keyframes blink {
-  
+
   50% {
     opacity: .85;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
@@ -442,7 +442,7 @@
   }
 }
 @-o-keyframes blink {
-  
+
   50% {
     opacity: .85;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
@@ -450,7 +450,7 @@
   }
 }
 @-moz-keyframes blink {
-  
+
   50% {
     opacity: .85;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
@@ -458,7 +458,7 @@
   }
 }
 @keyframes blink {
-  
+
   50% {
     opacity: .85;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
@@ -2279,7 +2279,6 @@
   height: 100%;
 }
 .wp-digi-eval-evarisk {
-  opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   position: fixed;
   top: 0;
