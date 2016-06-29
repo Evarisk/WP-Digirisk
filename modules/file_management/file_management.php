@@ -8,7 +8,6 @@ DEFINE( 'FILE_MANAGEMENT_VIEW_DIR', FILE_MANAGEMENT_PATH . '/view/');
 DEFINE( 'FILE_MANAGEMENT_MODEL', FILE_MANAGEMENT_PATH . '/model/');
 
 include( FILE_MANAGEMENT_PATH . '/class/file_management.class.php' );
-include( FILE_MANAGEMENT_PATH . '/class/gallery.class.php' );
 
 include( FILE_MANAGEMENT_PATH . '/action/file_management.action.php' );
 include( FILE_MANAGEMENT_PATH . '/action/gallery.action.php' );
