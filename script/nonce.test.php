@@ -17,10 +17,6 @@ digi_module_management::extra_modules();
 require_once( WPDIGI_PATH . '/core/digirisk/digirisk.ctr.01.php' );
 require_once( WPDIGI_PATH . '/core/digirisk/digirisk.action.01.php' );
 
-taskmanager\util\wpeo_util::install_module( 'wpeo_model' );
-taskmanager\util\wpeo_util::install_in( 'core' );
-taskmanager\util\wpeo_util::install_in( 'module' );
-
 echo "[+] Starting Nonce Tests" . PHP_EOL . PHP_EOL;
 
 // Search for test files
