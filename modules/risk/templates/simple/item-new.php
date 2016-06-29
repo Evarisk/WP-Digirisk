@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="wp-digi-risk-item wp-digi-risk-item-new wp-digi-list-item <?php $i++; echo ( $i%2 ? 'odd' : 'even' ); ?> wp-digi-bloc-loader" data-risk-id="new" >
-	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
+	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-risk">
 		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
 		<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />

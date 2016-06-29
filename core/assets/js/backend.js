@@ -83,7 +83,13 @@ var digi_global = {
 		jQuery( document ).on( 'click', 'toggle, .digi-toggle', function( event ) {
 			event.stopPropagation();
 			var element = jQuery( this );
-			var div = jQuery( this ).parent().find( '.' + jQuery( this ).data( 'target' ) );
+      var parent = jQuery( this ).data( 'parent' );
+      if( parent != undefined ) {
+  			var div = jQuery( this ).closest( parent ).find( '.' + jQuery( this ).data( 'target' ) );
+      }
+      else {
+        var div = jQuery( this ).parent().find( '.' + jQuery( this ).data( 'target' ) );
+      }
 
 			jQuery( '.digi-popup' ).each( function() {
 				if ( jQuery( this ).has( event.target ).length === 0 && jQuery( this ).is( ':visible' ) && !jQuery( this ).hasClass( element.data( 'target' ) ) ) {

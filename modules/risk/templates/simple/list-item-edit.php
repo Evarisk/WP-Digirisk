@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 if ( $risk_definition != null ):
 ?>
-	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="wp-digi-table-item-edit wp-digi-list-item wp-digi-risk-item" data-risk-id="<?php echo $risk_id; ?>">
+	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="wp-digi-table-item-edit wp-digi-list-item wp-digi-risk-item form-risk" data-risk-id="<?php echo $risk_id; ?>">
 		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
 		<input type="hidden" name="method_evaluation_id" value="<?php echo $risk_definition->taxonomy['digi-method'][0]; ?>" />
