@@ -29,6 +29,12 @@ class evaluation_method_class extends term_ctr_01 {
 		parent::__construct();
 		/**	Inclusion du modèle / Include model	*/
 		include_once( WPDIGI_EVALMETHOD_PATH . 'model/evaluation_method.model.01.php' );
+
+		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
+	}
+
+	public function callback_admin_enqueue_scripts() {
+		wp_enqueue_script( 'wpdigi-evaluation-method-backend-js', WPDIGI_EVALMETHOD_URL . 'asset/js/evaluation_method.backend.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-autocomplete', 'suggest' ), WPDIGI_VERSION, false );
 	}
 
 	public function create_evaluation_method( $data ) {
