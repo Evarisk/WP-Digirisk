@@ -19,38 +19,49 @@ class comment_ctr_01 {
 	}
 
 	public function update( $data ) {
-		$object = $data;
-
-		if( is_array( $data ) ) {
-			$object = new $this->model_name( $data, $this->meta_key, false );
+		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
+			return $this->create( $data );
 		}
-		wp_update_comment( $object->do_wp_object() );
+		else {
+			$object = $data;
 
-		/** On insert ou on met à jour les meta */
-		if( !empty( $object->option ) ) {
-			$object->save_meta_data( $object, 'update_comment_meta', $this->meta_key );
+			if( is_array( $data ) ) {
+				$object = new $this->model_name( $data, $this->meta_key, false );
+			}
+			wp_update_comment( $object->do_wp_object() );
+
+			/** On insert ou on met à jour les meta */
+			if( !empty( $object->option ) ) {
+				$object->save_meta_data( $object, 'update_comment_meta', $this->meta_key );
+			}
+
+			return $object;
 		}
-
-		return $object;
 	}
 
 	public function create( $data ) {
-
 		$object = $data;
-
 		if( is_array( $data ) ) {
 			$object = new $this->model_name( $data, $this->meta_key );
 			$object->type = $this->comment_type;
+			// @TODO : Mettre au propre
+			if ( empty( $object->date ) ) {
+				$object->date = current_time( 'mysql' );
+			}
+			if ( $object->author_id == 0 ) {
+				$object->author_id = get_current_user_id();
+			}
+			if ( $object->status == 0 ) {
+				$object->status == -34070;
+			}
 		}
-
 		$object->id = wp_insert_comment( $object->do_wp_object() );
-
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {
-			$object->save_meta_data( $object, 'update_comment_meta', $this->meta_key  );
+			$cloned_object = clone $object;
+			$cloned_object->save_meta_data( $object, 'update_comment_meta', $this->meta_key  );
 		}
-
-		return $object;
+		return $cloned_object;
 	}
 
 	public function delete( $id ) {
