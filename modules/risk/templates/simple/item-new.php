@@ -10,14 +10,7 @@
 
 		<ul class="wp-digi-table">
 			<li>
-				<span title="<?php _e( 'Upload media', 'digirisk' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
-					<div class="mask">
-						<span class="dashicons dashicons-plus"></span>
-					</div>
-					<i title="<?php _e( 'Upload image', 'digirisk' ); ?>" class="wp-digi-element-thumbnail dashicons dashicons-format-image" ></i>
-					<input type="hidden" name="thumbnail_id" value="" />
-					<img data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk" width="50" height="50" class="hidden wpeo-upload-media attachment-digirisk-element-miniature size-digirisk-element-miniature wp-post-image" alt="" sizes="(max-width: 50px) 100vw, 50px">
-				</span>
+				<?php echo do_shortcode( '[eo_upload_button]' ); ?>
 
 				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
 				<span data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation" >
