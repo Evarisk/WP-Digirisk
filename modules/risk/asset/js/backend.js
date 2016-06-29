@@ -43,7 +43,7 @@ var digi_risk = {
 		jQuery( document ).on( 'click', '.wp-digi-risk .wp-digi-action-edit', function( event ) { digi_risk.edit_risk( event, jQuery( this ) ); } );
 
 		// Methode digirisk
-		jQuery( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li:not(.open-method-evaluation-render)', digi_risk.select_cotation( event, jQuery( this ) );
+		jQuery( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li:not(.open-method-evaluation-render)', function( event ) { digi_risk.select_cotation( event, jQuery( this ) ); } );
 		jQuery( document ).on( 'click', '.wp-digi-risk-item-new .wp-digi-select-list li', function( event ) { digi_risk.select_danger( event, jQuery( this ) ); } );
 
 		// Methode evarisk
@@ -56,7 +56,6 @@ var digi_risk = {
 	},
 
 	select_cotation: function( event, element ) {
-		alert('ok');
 		event.preventDefault();
 
 		var new_risk_level_container = jQuery( this ).closest( "span" );
