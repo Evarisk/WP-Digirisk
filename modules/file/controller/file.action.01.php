@@ -17,8 +17,8 @@ if ( !class_exists( 'wpdigi_file_action_01' ) ) {
 	class wpdigi_file_action_01 {
 	   public function __construct() {
        /**	AJAX listener	*/
-       add_action( 'wp_ajax_wpeofiles-paginate-files', array( &$this, 'ajax_galery_pagination' ) );
-       add_action( 'wp_ajax_wpeo_file_set_thumbnail', array( $this, 'ajax_file_set_thumbnail' ) );
+      //  add_action( 'wp_ajax_wpeofiles-paginate-files', array( &$this, 'ajax_galery_pagination' ) );
+      //  add_action( 'wp_ajax_wpeo_file_set_thumbnail', array( $this, 'ajax_file_set_thumbnail' ) );
      }
 
      /**

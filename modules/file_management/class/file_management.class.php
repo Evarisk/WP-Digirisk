@@ -12,7 +12,14 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class file_management_class {
-  public function __construct() {}
+  public function __construct() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
+	}
+
+	public function callback_admin_enqueue_scripts() {
+		wp_enqueue_media();
+		wp_enqueue_script( 'wpeofiles-scripts', FILE_MANAGEMENT_URL . '/asset/js/file_management.backend.js', '', FILE_MANAGEMENT_VERSION );
+	}
 
   // @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {

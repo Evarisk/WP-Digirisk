@@ -33,6 +33,7 @@ class file_management_shortcode {
 	public function callback_eo_upload_button( $param ) {
     $id = 0;
     $type = "";
+		global $wpdigi_group_ctr;
 
     if ( !empty( $param['id'] ) ) {
       $id = (int) $param['id'];
@@ -42,7 +43,7 @@ class file_management_shortcode {
       $type = sanitize_text_field( $param['type'] );
     }
 
-    $element = establishment_class::get()->show( $id );
+    $element = $wpdigi_group_ctr->show( $id );
 
 		require( FILE_MANAGEMENT_VIEW_DIR . '/button.view.php' );
 	}
@@ -51,7 +52,7 @@ class file_management_shortcode {
   * Permet d'afficher la gallerie d'image
   *
   * @param array $param
-	* @param int $param['eleemnt_id'] Le fichier sera associé à cette id
+	* @param int $param['element_id'] Le fichier sera associé à cette id
 	* @param string $param['object_name'] Le post_type
   *
   * @author Jimmy Latour <jimmy.latour@gmail.com>

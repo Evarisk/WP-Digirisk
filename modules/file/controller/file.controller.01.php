@@ -42,8 +42,8 @@ class wpdigi_file_ctr_01 {
 	 * WORDPRESS HOOK - ADMIN JAVASCRIPTS - Load the different javascript librairies
 	 */
 	function admin_js() {
-		wp_enqueue_media();
-		wp_enqueue_script( 'wpeofiles-scripts', WPEOMTM_FILES_URL . '/assets/js/backend.js', '', WPEOMTM_FILES_VERSION );
+		// wp_enqueue_media();
+		// wp_enqueue_script( 'wpeofiles-scripts', WPEOMTM_FILES_URL . '/assets/js/backend.js', '', WPEOMTM_FILES_VERSION );
 	}
 
 	/**
