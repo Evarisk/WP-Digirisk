@@ -6,7 +6,7 @@ jQuery( document ).ready( function () {
 
 
 var digi_user = {
-	old_affected_user,
+	old_affected_user: undefined,
 
 	event: function() {
 		jQuery( document ).on( 'keyup', '.wp-list-search input[name="user_name_affected"]', function() { digi_user.search_affected_user( jQuery( this ) ); } );
