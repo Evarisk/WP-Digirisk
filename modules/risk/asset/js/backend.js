@@ -66,7 +66,7 @@ var digi_risk = {
           element_required = true;
         }
 
-        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="risk_danger_id"]' ).val() == '' ) {
+        if ( jQuery ( element ).closest( 'form' ).find( 'input[name="danger_id"]' ).val() == '' ) {
           jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
