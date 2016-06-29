@@ -7,6 +7,18 @@ require_once( '../Digirisk/script/wp-emulator.script.php' );
 
 DEFINE( 'WPDIGI_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) . '../' );
 
+include_once( WPDIGI_PATH . '/core/module_management/module_management.php');
+
+/**	Appel automatique des modules présent dans le plugin / Install automatically modules into module directory	*/
+digi_module_management::extra_modules();
+
+
+require_once( WPDIGI_PATH . '/core/digirisk/digirisk.ctr.01.php' );
+require_once( WPDIGI_PATH . '/core/digirisk/digirisk.action.01.php' );
+
+taskmanager\util\wpeo_util::install_module( 'wpeo_model' );
+taskmanager\util\wpeo_util::install_in( 'core' );
+taskmanager\util\wpeo_util::install_in( 'module' );
 
 echo "[+] Starting Nonce Tests" . PHP_EOL . PHP_EOL;
 
