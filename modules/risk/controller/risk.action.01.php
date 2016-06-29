@@ -54,7 +54,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 
 		global $wpdigi_risk_evaluation_ctr;
 		global $wpdigi_evaluation_method_variable_controller;
-		global $wpdigi_evaluation_method_controller;
+		global $evaluation_method_class;
 		global ${$global};
 		global $wpdigi_danger_ctr;
 		global $wpdigi_risk_ctr;
@@ -72,8 +72,8 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 			wp_send_json_error( wp_parse_args( $more_error, array( 'error' => __LINE__, ) ) );
 		}
 
-		$term_method = get_term_by( 'slug', 'evarisk-simplified', $wpdigi_evaluation_method_controller->get_taxonomy() );
-		$term_evarisk = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_controller->get_taxonomy() );
+		$term_method = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
+		$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
 
 		if( empty( $term_method ) || empty( $term_method->term_id ) )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
@@ -96,7 +96,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 					'risk_level' => array(
 						'method_result' => $risk_evaluation_level,
 						'equivalence'	=> $risk_evaluation_level,
-						'scale'			=> $wpdigi_evaluation_method_controller->get_value_treshold( $risk_evaluation_level ),
+						'scale'			=> $evaluation_method_class->get_value_treshold( $risk_evaluation_level ),
 					),
 					'quotation_detail' => array(
 						array(
@@ -121,10 +121,10 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 			global $wpdigi_evaluation_method_variable_controller;
 
 			if ( !empty( $term_evarisk ) ) {
-				$evarisk_evaluation_method = $wpdigi_evaluation_method_controller->show( $term_evarisk->term_id );
+				$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 
 				$equivalence = (int) $evarisk_evaluation_method->option['matrix'][$risk_evaluation_level];
-				$scale = $wpdigi_evaluation_method_controller->get_value_treshold( $equivalence );
+				$scale = $evaluation_method_class->get_value_treshold( $equivalence );
 
 
 				$risk_evaluation = array(
@@ -306,6 +306,8 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 	}
 
 	public function ajax_load_risk() {
+		ini_set("display_errors", true);
+		error_reporting(E_ALL);
 		if ( 0 === (int)$_POST['risk_id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
@@ -329,15 +331,15 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		}
 		unset( $comment );
 
-		global $wpdigi_evaluation_method_controller;
+		global $evaluation_method_class;
 
 		/** Le tableau de la méthode d'évaluation evarisk */
 		global $wpdigi_evaluation_method_variable_controller;
-		$term_evarisk = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_controller->get_taxonomy() );
-		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $wpdigi_evaluation_method_controller->get_taxonomy() );
+		$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
+		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
 
 		if ( !empty( $term_evarisk ) ) {
-			$evarisk_evaluation_method = $wpdigi_evaluation_method_controller->show( $term_evarisk->term_id );
+			$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 			$list_evaluation_method_variable = array();
 
 			if ( !empty( $evarisk_evaluation_method->option['formula'] ) ) {
@@ -382,7 +384,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 
 		global $wpdigi_risk_evaluation_ctr;
 		global $wpdigi_risk_evaluation_comment_ctr;
-		global $wpdigi_evaluation_method_controller;
+		global $evaluation_method_class;
 		global $wpdigi_evaluation_method_variable_controller;
 		global $wpdigi_risk_ctr;
 		global ${$global};
@@ -426,8 +428,8 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 		$unique_key = $last_unique_key + 1;
 
 		$term_method_variable = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_variable_controller->get_taxonomy() );
-		$term_evarisk = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_controller->get_taxonomy() );
-		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $wpdigi_evaluation_method_controller->get_taxonomy() );
+		$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
+		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
 
 		if( empty( $term_method_variable ) || empty( $term_method_variable->term_id ) )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
@@ -447,7 +449,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 						'risk_level' => array(
 							'method_result' => $risk_evaluation_level,
 							'equivalence'	=> $risk_evaluation_level,
-							'scale'			=> $wpdigi_evaluation_method_controller->get_value_treshold( $risk_evaluation_level ),
+							'scale'			=> $evaluation_method_class->get_value_treshold( $risk_evaluation_level ),
 						),
 						'quotation_detail' => array(
 							array(
@@ -470,13 +472,13 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 				}
 
 				global $wpdigi_evaluation_method_variable_controller;
-				$term_evarisk = get_term_by( 'slug', 'evarisk', $wpdigi_evaluation_method_controller->get_taxonomy() );
+				$term_evarisk = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
 
 				if ( !empty( $term_evarisk ) ) {
-					$evarisk_evaluation_method = $wpdigi_evaluation_method_controller->show( $term_evarisk->term_id );
+					$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 
 					$equivalence = (int) $evarisk_evaluation_method->option['matrix'][$risk_evaluation_level];
-					$scale = $wpdigi_evaluation_method_controller->get_value_treshold( $equivalence );
+					$scale = $evaluation_method_class->get_value_treshold( $equivalence );
 
 
 					$risk_evaluation = array(
