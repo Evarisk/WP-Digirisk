@@ -177,7 +177,7 @@ var digi_risk = {
 	},
 
 	select_danger: function( event, element ) {
-		jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]' ).val( jQuery( element ).data( 'id' ) );
+		jQuery( '.wp-digi-risk-item-new input[name="danger_id"]' ).val( jQuery( element ).data( 'id' ) );
 		jQuery( '.wp-digi-risk-item-new toggle span' ).html( jQuery( element ).find( 'img' ).attr( 'title' ) );
 	},
 
@@ -253,7 +253,7 @@ var digi_risk = {
 		var element_cotation = jQuery( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' )[0];
 		element_cotation.className = element_cotation.className.replace( /wp-digi-risk-level-[1-4]/, 'wp-digi-risk-level-1' );
 
-		jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]').val( '' );
+		jQuery( '.wp-digi-risk-item-new input[name="danger_id"]').val( '' );
 		jQuery( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
 		jQuery( '.wp-digi-risk-item-new input[name="digi_method"]').val( '' );
 	}
