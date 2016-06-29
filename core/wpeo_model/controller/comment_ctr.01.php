@@ -122,4 +122,10 @@ class comment_ctr_01 {
 		return $this->comment_type;
 	}
 
+	public function get_last_entry() {
+		global $wpdb;
+		$query = "SELECT comment_ID FROM {$wpdb->comments} WHERE comment_type='$this->comment_type' ORDER BY comment_ID DESC LIMIT 0, 1";
+		return $wpdb->get_var( $query );
+	}
+
 }
