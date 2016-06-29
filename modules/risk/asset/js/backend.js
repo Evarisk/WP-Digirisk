@@ -150,7 +150,7 @@ var digi_risk = {
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
 			'success': function( response ) {
         jQuery( '.wp-digi-list-item .dashicons-edit' ).show();
-				jQuery( '.wp-digi-risk.wp-digi-list' ).closest( 'div' ).replaceWith( response.data.template );
+				jQuery( '.wp-digi-risk.wp-digi-list' ).html( response.data.template );
 			}
 		} );
 	},

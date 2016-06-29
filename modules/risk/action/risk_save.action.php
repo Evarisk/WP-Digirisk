@@ -42,7 +42,7 @@ class risk_save_action {
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 		global ${$ctr};
 
-		if ( 0 === $element_id || 0 === $method_evaluation_id ) {
+		if ( 0 === $method_evaluation_id ) {
 			wp_send_json_error();
 		}
 
@@ -66,7 +66,7 @@ class risk_save_action {
 		$evaluation = $wpdigi_risk_evaluation_ctr->show( $evaluation_id );
 
 		// L'unique identifier du risque et de l'évaluation
-		$unique_identifier = $wpdigi_risk_ctr->element_prefix . $unique_key . ' - ' . $evaluation->option['unique_identifier'];
+		$unique_identifier = $wpdigi_risk_ctr->element_prefix . $unique_key;
 
 		// Les données du risque
 		if ( $risk_id === 0 ) {
@@ -87,7 +87,7 @@ class risk_save_action {
 			unset( $risk->id );
 		}
 		else {
-			$risk->option['unique_identifier'] = $wpdigi_risk_ctr->element_prefix . $risk->option['unique_key'] . ' - ' . $evaluation->option['unique_identifier'];
+			$risk->option['unique_identifier'] = $wpdigi_risk_ctr->element_prefix . $risk->option['unique_key'];
 		}
 
 		$risk->option['current_evaluation_id'] = $evaluation_id;
@@ -104,10 +104,12 @@ class risk_save_action {
 		}
 
 
-		// Ajoutes le risque à l'établissement
-		$element = ${$ctr}->show( $element_id );
-		$element->option['associated_risk'][] = $risk->id;
-		${$ctr}->update( $element );
+		if ( $risk_id === 0 ) {
+			// Ajoutes le risque à l'établissement
+			$element = ${$ctr}->show( $element_id );
+			$element->option['associated_risk'][] = $risk->id;
+			${$ctr}->update( $element );
+		}
 	}
 }
 

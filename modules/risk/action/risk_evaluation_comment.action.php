@@ -57,7 +57,7 @@ class risk_evaluation_comment_action {
 						'content' => sanitize_text_field( $element ),
 					);
 
-					if ( $list_comment_id[$key] != 0 ) {
+					if ( !empty( $list_comment_id[$key] ) && $list_comment_id[$key] != 0 ) {
 						$data['id'] = (int) $list_comment_id[$key];
 					}
 
