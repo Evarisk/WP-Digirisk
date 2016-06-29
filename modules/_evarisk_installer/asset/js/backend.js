@@ -31,15 +31,25 @@ var digi_installer = {
   },
 
 	form_groupement: function( element ) {
-		jQuery( element ).closest( 'div' ).addClass( "wp-digi-bloc-loading" );
-		jQuery( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-			jQuery( element ).closest( 'div' ).hide();
-			jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
-			jQuery( '.wpdigi-installer ul.step li:first' ).removeClass( 'active' );
-			jQuery( '.wpdigi-installer ul.step li:last' ).addClass( 'active' );
+		jQuery( element ).closest( 'form' ).ajaxSubmit( {
+			'beforeSubmit': function() {
+				if ( jQuery( '.wpdigi-installer input[name="groupement[title]"]' ).val() === '' ) {
+					jQuery( '.wpdigi-installer input[name="groupement[title]"]' ).css( 'border-bottom', 'solid red 2px' );
+					return false;
+				}
 
-      jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
-    } );
+				jQuery( element ).closest( 'div' ).addClass( "wp-digi-bloc-loading" );
+				jQuery( '.wpdigi-installer input[name="groupement[title]"]' ).css( 'border-bottom', '2px solid #272a35' );
+			},
+			'success': function( response ) {
+				jQuery( element ).closest( 'div' ).hide();
+				jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
+				jQuery( '.wpdigi-installer ul.step li:first' ).removeClass( 'active' );
+				jQuery( '.wpdigi-installer ul.step li:last' ).addClass( 'active' );
+
+	      jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+	    }
+		} );
 
   },
 
