@@ -61,7 +61,7 @@ class evaluation_method_action {
 
     $risk->taxonomy['digi-method'][] = $method_evaluation_id;
 
-    wp_send_json_success();
+		$wpdigi_risk_ctr->update( $risk );
   }
 }
 
