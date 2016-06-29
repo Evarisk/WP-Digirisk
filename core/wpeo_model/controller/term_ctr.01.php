@@ -64,23 +64,28 @@ class term_ctr_01 {
 	 * @return Object L'objet sauvegardé / The saved object
 	 */
 	public function update( $data ) {
-		$object = $data;
-
-		/**	Dans le cas d'un tableau on le lit pour construire l'objet / If passed data is an array read and build an object from it	*/
-		if( is_array( $data ) ) {
-			$object = new $this->model_name( $data, $this->meta_key );
+		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
+			return $this->create( $data );
 		}
+		else {
+			$object = $data;
 
-		/**	Sauvegarde des données dans la base de données / Save data into database	*/
-		$wp_category_danger = wp_update_term( $object->id, $this->get_taxonomy(), $object->do_wp_object() );
-		if ( !is_wp_error( $wp_category_danger ) ) {
-			/** Mise à jour des options / Save options */
-			if( !empty( $object->option ) ) {
-				$object->save_meta_data( $object, 'update_term_meta', $this->meta_key );
+			/**	Dans le cas d'un tableau on le lit pour construire l'objet / If passed data is an array read and build an object from it	*/
+			if( is_array( $data ) ) {
+				$object = new $this->model_name( $data, $this->meta_key );
 			}
-		}
 
-		return $object;
+			/**	Sauvegarde des données dans la base de données / Save data into database	*/
+			$wp_category_danger = wp_update_term( $object->id, $this->get_taxonomy(), $object->do_wp_object() );
+			if ( !is_wp_error( $wp_category_danger ) ) {
+				/** Mise à jour des options / Save options */
+				if( !empty( $object->option ) ) {
+					$object->save_meta_data( $object, 'update_term_meta', $this->meta_key );
+				}
+			}
+
+			return $object;
+		}
 	}
 
 	/**
@@ -92,26 +97,21 @@ class term_ctr_01 {
 	 */
 	public function create( $data ) {
 		$object = $data;
-
 		if( is_array( $data ) ) {
 			$object = new $this->model_name( $data, $this->meta_key );
 		}
-
 		$wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
-			'description'	=> $object->description,
-			'slug'	=> $object->slug,
-			'parent'	=> $object->parent_id,
+			'description'	=> !empty( $object->description ) ? $object->description : '',
+			'slug'	=> sanitize_title( $object->name ),
+			'parent'	=> !empty( $object->parent_id ) ? (int) $object->parent_id : 0,
 		) );
-
 		if ( !is_wp_error( $wp_category_danger ) ) {
 			$object->id = $wp_category_danger[ 'term_id' ];
 			$object->term_taxonomy_id = $wp_category_danger[ 'term_taxonomy_id' ];
-
 			/** Mise à jour des options / Save options */
 			if( !empty( $object->option ) ) {
 				$object->save_meta_data( $object, 'update_term_meta', $this->meta_key );
 			}
-
 			return $object;
 		}
 		else {
