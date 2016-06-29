@@ -3,7 +3,7 @@
 		"**/core/wpeo_logs/**",
 		"**/core/module_management/**",
 		"**/core/odtPhpLibrary/**",
-		"**/core/asset/js/modernizr.customjs",
-		"**/core/asset/js/progress-button.js"
+		"**/core/assets/js/modernizr.customjs",
+		"**/core/assets/js/progress-button.js"
 	]
 }
