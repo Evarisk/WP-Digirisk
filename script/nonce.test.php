@@ -6,6 +6,7 @@
 require_once( '../Digirisk/script/wp-emulator.script.php' );
 
 DEFINE( 'WPDIGI_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) . '../' );
+DEFINE( 'EVA_PLUGIN_VERSION', 'test' );
 
 include_once( WPDIGI_PATH . '/core/module_management/module_management.php');
 
