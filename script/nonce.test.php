@@ -29,6 +29,7 @@ foreach($unitList as $test)
 {
 	// echo "[+] Testing -> " . $test . PHP_EOL;
   if ( $test != '../Digirisk/script/request.test.php' || $test != '../Digirisk/script/nonce.test.php' ) {
+		echo "[+] test : " . $test . PHP_EOL;
     $content = file_get_contents( $test );
 
     $pattern = '/class ([a-z0-9_]+) (extends .* {|{)/';
