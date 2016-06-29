@@ -8,7 +8,6 @@ function validateEmail(email) {
 jQuery( document ).ready( function(){
 	digi_global.init();
 	digi_global.event();
-	digi_risk.init();
   digi_tools.event();
 });
 
