@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-DEFINE( 'FILE_MANAGEMENT_VERSION', '0.1');
+DEFINE( 'FILE_MANAGEMENT_VERSION', '0.2' );
 DEFINE( 'FILE_MANAGEMENT_DIR', basename( dirname( __FILE__ ) ) );
 DEFINE( 'FILE_MANAGEMENT_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'FILE_MANAGEMENT_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', FILE_MANAGEMENT_PATH ) );
