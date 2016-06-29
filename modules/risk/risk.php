@@ -27,6 +27,7 @@ include( WPDIGI_RISKS_PATH . '/controller/risk_evaluation.controller.01.php' );
 include( WPDIGI_RISKS_PATH . '/controller/risk_evaluation_comment.controller.01.php' );
 include( WPDIGI_RISKS_PATH . '/action/risk_evaluation.action.php' );
 include( WPDIGI_RISKS_PATH . '/action/risk_save.action.php' );
+include( WPDIGI_RISKS_PATH . '/action/risk.action.php' );
 include( WPDIGI_RISKS_PATH . '/action/risk_evaluation_comment.action.php' );
 
 ?>
