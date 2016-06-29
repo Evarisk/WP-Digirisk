@@ -22,7 +22,7 @@ DEFINE( 'WPDIGI_EVALMETHOD_PATH', str_replace( "\\", "/", plugin_dir_path( __FIL
 DEFINE( 'WPDIGI_EVALMETHOD_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', WPDIGI_EVALMETHOD_PATH ) );
 
 /**	Define the templates directories	*/
-DEFINE( 'DIGI_EVALMETHOD_TEMPLATES_MAIN_DIR', WPDIGI_EVALMETHOD_PATH . '/templates/' );
+DEFINE( 'WPDIGI_EVALMETHOD_VIEW', WPDIGI_EVALMETHOD_PATH . '/view/' );
 
 /** Plugin initialisation */
 require_once( WPDIGI_EVALMETHOD_PATH . '/controller/evaluation_method.controller.01.php' );

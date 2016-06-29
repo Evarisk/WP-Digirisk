@@ -11,7 +11,7 @@ if ( $risk_definition != null ):
 		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 
 		<?php echo do_shortcode( '[eo_upload_button id="' . $risk_id . '" object_name="wpdigi_risk_ctr"]' ); ?>
-		<?php do_shortcode( '[digi_evaluation_method]' ); ?>
+		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk_id . ']' ); ?>
 
 		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk_definition->option[ 'unique_identifier' ]; ?> - <?php echo $risk_definition->evaluation->option[ 'unique_identifier' ]?></span>
 		<span class="wp-digi-risk-list-column-danger"><?php echo wp_get_attachment_image( $risk_definition->danger->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $risk_definition->danger->name ) ); ?></span>

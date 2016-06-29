@@ -1,28 +1,16 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="wp-digi-risk-item wp-digi-risk-item-new wp-digi-list-item <?php $i++; echo ( $i%2 ? 'odd' : 'even' ); ?> wp-digi-bloc-loader" data-risk-id="new" >
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
+		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
-		<input type="hidden" name="method_evaluation_id" />
 		<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr', get_class( $element ) ); ?>" />
-		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 
 		<ul class="wp-digi-table">
 			<li>
 				<?php echo do_shortcode( '[eo_upload_button]' ); ?>
-
-				<input type="hidden" class="risk-level" name="risk_evaluation_level" value="0" />
-				<span data-target="wp-digi-risk-cotation-chooser" class="digi-toggle wp-digi-risk-list-column-cotation" >
-					<div class="wp-digi-risk-level-1 wp-digi-risk-level-new"><?php _e( 'Cot', 'digirisk' ); ?></div>
-					<ul class="wp-digi-risk-cotation-chooser digi-popup" style="display: none;" >
-						<li data-level="1" class="wp-digi-risk-level-1" >&nbsp;</li>
-						<li data-level="2" class="wp-digi-risk-level-2" >&nbsp;</li>
-						<li data-level="3" class="wp-digi-risk-level-3" >&nbsp;</li>
-						<li data-level="4" class="wp-digi-risk-level-4" >&nbsp;</li>
-						<li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic"></span></li>
-					</ul>
-				</span>
+				<?php do_shortcode( '[digi_evaluation_method]' ); ?>
 
 				<span class="wp-digi-risk-list-column-reference"></span>
 
