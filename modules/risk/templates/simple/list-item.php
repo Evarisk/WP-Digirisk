@@ -3,7 +3,7 @@
 if ( $risk != null ):
 ?>
 	<li class="wp-digi-list-item wp-digi-risk-item" data-risk-id="<?php echo $risk->id; ?>" >
-		<?php echo do_shortcode( '[eo_upload_button id="' . $risk->id . '" global="wpdigi_risk_ctr"]' ); ?>
+		<?php echo do_shortcode( '[eo_upload_button id="' . $risk->id . '" object_name="wpdigi_risk_ctr"]' ); ?>
 		<span class="wp-digi-risk-list-column-cotation" ><div class="wp-digi-risk-level-<?php echo $risk->evaluation->option[ 'risk_level' ][ 'scale' ]; ?>" >&nbsp;</div></span>
 		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->option[ 'unique_identifier' ]; ?> - <?php echo $risk->evaluation->option[ 'unique_identifier' ]?></span>
 		<span class="wp-digi-risk-list-column-danger"><?php echo wp_get_attachment_image( $risk->danger->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $risk->danger->name ) ); ?></span>

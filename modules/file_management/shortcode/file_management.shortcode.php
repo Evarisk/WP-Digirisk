@@ -39,8 +39,8 @@ class file_management_shortcode {
       $id = (int) $param['id'];
     }
 
-    if ( !empty( $param['type'] ) ) {
-      $type = sanitize_text_field( $param['type'] );
+    if ( !empty( $param['object_name'] ) ) {
+      $type = sanitize_text_field( $param['object_name'] );
     }
 
     $element = $wpdigi_group_ctr->show( $id );
@@ -63,8 +63,8 @@ class file_management_shortcode {
   */
 	public function callback_shortcode_gallery( $param ) {
 		$element_id = $param['element_id'];
-    $class = str_replace( 'digi-', '', $param['object_name'] ) . '_class';
-		$element = $class::get()->show( $element_id );
+  	global ${$param['object_name']};
+		$element = ${$param['object_name']}->show( $element_id );
 
 		$list_id = !empty( $element->option['associated_document_id']['image'] ) ? $element->option['associated_document_id']['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
