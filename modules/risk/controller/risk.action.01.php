@@ -18,7 +18,7 @@ class wpdigi_risk_action_01 extends wpdigi_risk_ctr_01 {
 	 * CORE - Instanciation des actions ajax pour les risques / Instanciate ajax treatment for danger
 	 */
 	function __construct() {
-		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_asset' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_asset' ) );
 		// add_action( 'wp_ajax_wpdigi-create-risk', array( $this, 'ajax_create_risk' ), 12 );
 		add_action( 'wp_ajax_wpdigi-delete-risk', array( $this, 'ajax_delete_risk' ) );
 		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
