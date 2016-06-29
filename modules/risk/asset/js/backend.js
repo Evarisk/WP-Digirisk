@@ -26,14 +26,14 @@ var digi_risk = {
 	},
 
 	tab_changed: function() {
-		if ( jQuery( '.wp-digi-risk-item-new button' ).length > 0 ) {
-		    this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
-		      callback: digi_risk.create_risk,
-		    } );
-		}
-
-		this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
-		this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
+		// if ( jQuery( '.wp-digi-risk-item-new button' ).length > 0 ) {
+		//     this.button = new ProgressButton( jQuery( '.wp-digi-risk-item-new button' )[0], {
+		//       callback: digi_risk.create_risk,
+		//     } );
+		// }
+		//
+		// this.old_danger = jQuery( '.wp-digi-risk-item-new toggle' ).html();
+		// this.old_date = jQuery( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 	},
 
 	event: function() {
@@ -58,17 +58,16 @@ var digi_risk = {
 	select_cotation: function( event, element ) {
 		event.preventDefault();
 
-		var new_risk_level_container = jQuery( this ).closest( "span" );
-		var new_risk_current_level = new_risk_level_container.attr( "data-risk_level" );
+		var span = jQuery( element ).closest( "span" );
+		var level = jQuery( element ).attr( 'data-level' );
 		var digi_method_id = jQuery( this ).closest( '.wp-digi-list-item' ).find( 'input.digi-method-simple' ).val();
-		var risk_level = jQuery( this ).data( "value" );
+		var div = span.find( 'div' );
+		var div_element = div[0];
+		div_element.className = div_element.className.replace( /wp-digi-risk-level-[1-4]/, 'wp-digi-risk-level-' + level );
+		div.html( '' );
 
-		new_risk_level_container.find( 'div' ).removeClass( "wp-digi-risk-level-" + new_risk_current_level );
-		new_risk_level_container.find( 'div' ).html( "&nbsp;" );
-		new_risk_level_container.find( 'div' ).addClass( "wp-digi-risk-level-" + jQuery( this ).data( "risk_level" ) );
-
-		jQuery( this ).closest( 'form' ).find( '.risk-level' ).val( risk_level );
-		jQuery( this ).closest( '.wp-digi-list-item' ).find( 'input[name="digi_method"]' ).val( digi_method_id );
+		jQuery( element ).closest( 'form' ).find( '.risk-level' ).val( level );
+		jQuery( element ).closest( '.wp-digi-list-item' ).find( 'input[name="digi_method"]' ).val( digi_method_id );
 	},
 
   send_risk: function() {
@@ -185,13 +184,8 @@ var digi_risk = {
 		} );
 	},
 
-	toggle_danger: function( event, element ) {
-		jQuery( '.wp-digi-risk-item-new .wp-digi-select-list' ).toggle();
-	},
-
 	select_danger: function( event, element ) {
 		jQuery( '.wp-digi-risk-item-new input[name="risk_danger_id"]' ).val( jQuery( element ).data( 'id' ) );
-		jQuery( '.wp-digi-risk-item-new .wp-digi-select-list' ).toggle();
 		jQuery( '.wp-digi-risk-item-new toggle span' ).html( jQuery( element ).find( 'img' ).attr( 'title' ) );
 	},
 
