@@ -57,7 +57,7 @@ class post_ctr_01 {
 			$object = new $this->model_name( $data, $this->meta_key );
 			$object->type = $this->post_type;
 		}
-		
+
 		$object->id = wp_insert_post( $object->do_wp_object() );
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {
@@ -232,6 +232,12 @@ class post_ctr_01 {
 		$post_title = get_post_field( 'post_title', $post_id );
 
 		return $post_title;
+	}
+
+	public function get_last_entry() {
+		global $wpdb;
+		$query = "SELECT ID FROM {$wpdb->posts} WHERE post_type='$this->post_type' ORDER BY ID DESC LIMIT 0, 1";
+		return $wpdb->get_var( $query );
 	}
 
 }
