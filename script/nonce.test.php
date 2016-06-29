@@ -11,6 +11,7 @@ DEFINE( 'EVA_PLUGIN_VERSION', 'test' );
 include_once( WPDIGI_PATH . '/core/module_management/module_management.php');
 
 /**	Appel automatique des modules présent dans le plugin / Install automatically modules into module directory	*/
+digi_module_management::core_util();
 digi_module_management::extra_modules();
 
 
