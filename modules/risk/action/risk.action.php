@@ -18,7 +18,7 @@ class risk_action {
 
 	/**
   * Enregistres un risque.
-	* Ce callback est appelé après le callback callback_save_risk de risk_evaluation_action
+	* Ce callback est le dernier de save risque
   *
   * @param int $_POST['establishment']['establishment_id'] L'id de l'établissement
   * @param int $_POST['danger_id'] L'id du danger
