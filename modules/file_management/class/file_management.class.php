@@ -19,6 +19,7 @@ class file_management_class {
 	public function callback_admin_enqueue_scripts() {
 		wp_enqueue_media();
 		wp_enqueue_script( 'wpeofiles-scripts', FILE_MANAGEMENT_URL . '/asset/js/file_management.backend.js', '', FILE_MANAGEMENT_VERSION );
+		wp_enqueue_script( 'gallery', FILE_MANAGEMENT_URL . '/asset/js/gallery.backend.js', '', FILE_MANAGEMENT_VERSION );
 	}
 
   // @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']

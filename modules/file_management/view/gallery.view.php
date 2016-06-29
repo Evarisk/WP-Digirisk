@@ -33,7 +33,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
   <ul class="action">
     <li><a href="#" class="wp-digi-bton-fourth set-as-thumbnail"><?php _e( 'Set as default thumbnail', 'wpdigi-i18n' ); ?></a></li>
-    <li><a href="#" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" data-id="<?php echo $element_id; ?>" data-object-name="<?php echo apply_filters( 'wpdigi_object_name_' . $element->type, '' ); ?>" class="wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'wpdigi-i18n' ); ?></a></li>
+    <li><a href="#" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" data-id="<?php echo $element_id; ?>" data-object-name="<?php echo $param['object_name']; ?>" class="wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'wpdigi-i18n' ); ?></a></li>
   </ul>
 
 </div>

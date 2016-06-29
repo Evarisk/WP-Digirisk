@@ -33,6 +33,8 @@ class file_management_action {
   public function callback_associate_file() {
     check_ajax_referer( 'associate_file' );
 
+		global $file_management_class;
+
     $element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
     $thumbnail = !empty( $_POST['thumbnail'] ) ? (bool) $_POST['thumbnail'] : false;
     $file_id = !empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
@@ -41,9 +43,7 @@ class file_management_action {
 			wp_send_json_error();
     }
 
-    $object_name = str_replace( 'digi-', '', sanitize_title( $_POST['object_name'] ) ) . '_class';
-
-    file_management_class::get()->associate_file( $file_id, $element_id, $object_name, $thumbnail );
+    $file_management_class->associate_file( $file_id, $element_id, $_POST['object_name'], $thumbnail );
 
     ob_start();
     require( FILE_MANAGEMENT_VIEW_DIR . '/button.view.php' );
