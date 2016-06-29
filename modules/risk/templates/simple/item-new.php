@@ -3,11 +3,11 @@
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 		<ul class="wp-digi-table">
 			<li>
-				<input type="hidden" name="action" value="wpdigi-create-risk" />
-				<input type="hidden" name="digi_method" />
+				<input type="hidden" name="action" value="save_risk" />
+				<input type="hidden" name="method_evaluation_id" />
 				<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 				<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
-				<?php wp_nonce_field( 'ajax_create_risk' ); ?>
+				<?php wp_nonce_field( 'save_risk' ); ?>
 				<input type="hidden" name="workunit_id" value="<?php echo $element->id; ?>" />
 				<span title="<?php _e( 'Upload media', 'digirisk' ); ?>" class="wp-digi-risk-thumbnail wpeo-upload-media" data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_risk' ); ?>" data-id="0" data-type="digi-risk"  >
 					<div class="mask">
