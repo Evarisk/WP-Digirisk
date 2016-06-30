@@ -26,3 +26,4 @@ DEFINE( 'TOOLS_POSTTYPE_SUB', 'digi-workunit' );
 
 /**	Inclusion des controlleurs principaux du module / Include main module controller	*/
 include( TOOLS_PATH . '/controller/tools.controller.01.php' );
+include( TOOLS_PATH . '/action/tools.action.01.php' );

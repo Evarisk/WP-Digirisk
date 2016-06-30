@@ -3,7 +3,7 @@
 class wpdigi_tools_ctr {
 
 	function __construct() {
-	    add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+	  add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 		add_action( 'wp_ajax_reset_method_evaluation', array( $this, 'callback_reset_method_evaluation' ) );
 		add_action( 'wp_ajax_compil_risk_list', array( $this, 'callback_risk_compilation' ) );
