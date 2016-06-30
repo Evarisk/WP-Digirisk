@@ -3,6 +3,7 @@
 class evaluation_method_action {
   public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
+		add_action( 'wp_ajax_get_scale', array( $this, 'ajax_get_scale' ) );
     add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 4 );
   }
 
@@ -32,6 +33,37 @@ class evaluation_method_action {
 		);
 		register_taxonomy( $evaluation_method_class->get_taxonomy(), array( $wpdigi_risk_ctr->get_post_type() ), $args );
 	}
+
+	/**
+* Appelle la méthode get_scale pour avoir le niveau de l'évaluation
+*
+* @param int $_POST['variable'] Les valeurs des variables de la méthode d'évaluation complexe
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+*
+* @since 6.0.0.0
+*
+* @return application/json
+* data.scale Le niveau du risque entre 1 et 4
+*/
+public function ajax_get_scale() {
+	ini_set("display_errors", true);
+	error_reporting(E_ALL);
+	global $evaluation_method_class;
+	check_ajax_referer( 'get_scale' );
+	$list_variable = !empty( $_POST['list_variable'] ) ? (array) $_POST['list_variable'] : array();
+	$level = 1;
+	if ( !empty( $list_variable ) ) {
+		foreach ( $list_variable as $element ) {
+			$level *= $element;
+		}
+	}
+	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
+	$evaluation_method = $evaluation_method_class->show( $method_evaluation_digirisk_complex->term_id );
+	$equivalence = $evaluation_method->option['matrix'][$level];
+	$scale = scale_util::get_scale( $equivalence );
+	wp_send_json_success( array( 'equivalence' => $equivalence, 'scale' => $scale ) );
+}
 
   /**
   * Enregistres la méthode utilisée dans le risque.

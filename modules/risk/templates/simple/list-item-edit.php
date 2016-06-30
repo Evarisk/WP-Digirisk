@@ -39,7 +39,7 @@ if ( $risk_definition != null ):
 			<a href="#" data-id="<?php echo $risk_id; ?>" class="wp-digi-action wp-digi-action-edit dashicons dashicons-edit" ></a>
 		</span>
 
-		<div class="wpdigi-method-evaluation-render"></div>
+		<?php do_shortcode( '[digi_evaluation_method_complex risk_id=' . $risk_id . ']' ); ?>
 
 	</form>
 <?php endif ; ?>

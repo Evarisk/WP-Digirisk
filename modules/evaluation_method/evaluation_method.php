@@ -29,3 +29,4 @@ require_once( WPDIGI_EVALMETHOD_PATH . '/controller/evaluation_method.controller
 require_once( WPDIGI_EVALMETHOD_PATH . '/controller/evaluation_method_variable.controller.01.php' );
 require_once( WPDIGI_EVALMETHOD_PATH . '/action/evaluation_method.action.php' );
 require_once( WPDIGI_EVALMETHOD_PATH . '/shortcode/evaluation_method.shortcode.php' );
+require_once( WPDIGI_EVALMETHOD_PATH . '/util/scale.util.php' );

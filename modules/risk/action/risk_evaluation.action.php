@@ -31,6 +31,9 @@ class risk_evaluation_action {
 	public function callback_save_risk() {
 		check_ajax_referer( 'save_risk' );
 
+		ini_set("display_errors", true);
+		error_reporting(E_ALL);
+
 		global $evaluation_method_class;
 		global $wpdigi_risk_evaluation_ctr;
 
@@ -60,7 +63,7 @@ class risk_evaluation_action {
 		$data['option']['unique_key'] = $new_unique_key;
 		$data['option']['unique_identifier'] = 'E' . $new_unique_key;
 
-		$wpdigi_risk_evaluation_ctr->update( $data );		
+		$wpdigi_risk_evaluation_ctr->update( $data );
 	}
 
 	/**
@@ -132,7 +135,7 @@ class risk_evaluation_action {
 
 		$evaluation_method = $evaluation_method_class->show( $term_id );
 		$equivalence = $evaluation_method->option['matrix'][$risk_evaluation_level];
-		$scale = scale_util::get()->get_scale( $equivalence );
+		$scale = scale_util::get_scale( $equivalence );
 
 		$risk_level = array(
 			'method_result' => $risk_evaluation_level,
