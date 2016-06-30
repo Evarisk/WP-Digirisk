@@ -41,9 +41,9 @@ class evaluation_method_shortcode {
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
 		$term_evarisk_complex = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
-		$scale = 1;
+		$scale = 0;
 		$equivalence = 1;
-		$digi_method_id = $term_evarisk_simple->term_id;
+		$digi_method_id = 0;
 		$target = 'wp-digi-risk-cotation-chooser';
 
 		if ( $risk_id != 0 ) {
