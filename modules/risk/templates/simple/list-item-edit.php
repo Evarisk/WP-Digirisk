@@ -4,8 +4,6 @@ if ( $risk_definition != null ):
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="wp-digi-table-item-edit wp-digi-list-item wp-digi-risk-item form-risk" data-risk-id="<?php echo $risk_id; ?>">
 		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
-		<input type="hidden" name="method_evaluation_id" value="<?php echo $risk_definition->taxonomy['digi-method'][0]; ?>" />
-		<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 		<input type="hidden" name="risk_id" value="<?php echo $risk_id; ?>" />
 		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />

@@ -84,7 +84,7 @@ class evaluation_method_shortcode {
 
 		if ( !empty( $term_evarisk ) ) {
 			$risk = $wpdigi_risk_ctr->show( $risk_id );
-			$risk_evaluation = $wpdigi_risk_ctr->show( $risk->option['current_evaluation_id'] );
+			$risk_evaluation = $wpdigi_risk_evaluation_ctr->show( $risk->option['current_evaluation_id'] );
 			$evarisk_evaluation_method = $evaluation_method_class->show( $term_evarisk->term_id );
 			$list_evaluation_method_variable = array();
 			if ( !empty( $evarisk_evaluation_method->option['formula'] ) ) {
