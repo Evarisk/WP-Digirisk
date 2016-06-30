@@ -12,13 +12,18 @@ var digi_evaluation_method = {
   },
 
   select_cotation: function( event, element ) {
-    event.preventDefault();
+		event.preventDefault();
 
-    var current_level = jQuery( element ).closest( 'span' ).find( 'input[name="risk_evaluation_level"]' ).val();
-    var new_level = jQuery( element ).data( 'risk-level' );
-    jQuery( element ).closest( 'span' ).find( '.wp-digi-level'  ).removeClass( 'wp-digi-risk-level-' + current_level ).addClass( 'wp-digi-risk-level-' + new_level );
-    jQuery( element ).closest( 'span' ).find( '.wp-digi-level'  ).html( jQuery( element ).data( 'risk-text' ) );
-    jQuery( element ).closest( 'span' ).find( 'input[name="risk_evaluation_level"]' ).val( new_level );
+		var span = jQuery( element ).closest( "span" );
+		var level = jQuery( element ).attr( 'data-level' );
+		var method_evaluation_id = jQuery( element ).closest( '.wp-digi-list-item' ).find( 'input.digi-method-simple' ).val();
+		var div = span.find( 'div' );
+		var div_element = div[0];
+		div_element.className = div_element.className.replace( /wp-digi-risk-level-[0-4]/, 'wp-digi-risk-level-' + level );
+		div.html( '' );
+
+		jQuery( element ).closest( 'form' ).find( '.risk-level' ).val( level );
+		jQuery( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( method_evaluation_id );
   },
 
   select_variable: function( event, element ) {
