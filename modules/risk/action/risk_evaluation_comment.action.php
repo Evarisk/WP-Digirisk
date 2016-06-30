@@ -42,6 +42,10 @@ class risk_evaluation_comment_action {
 		$risk_evaluation_id = $wpdigi_risk_evaluation_ctr->get_last_entry();
 		$risk_id = $wpdigi_risk_ctr->get_last_entry();
 
+		if ( !empty( $_POST['risk_id'] ) ) {
+			$risk_id = (int) $_POST['risk_id'];
+		}
+
 		if ( !empty( $list_comment_content ) ) {
 		  foreach ( $list_comment_content as $key => $element ) {
 				if ( !empty( $element ) ) {
