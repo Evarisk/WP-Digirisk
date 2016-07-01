@@ -456,7 +456,6 @@ class group_action {
 				'niveauRisque'			=> $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ],
 				'nomDanger'					=> $complete_risk->danger->name,
 				'commentaireRisque'	=> $comment_list,
-				'est' => 'hahaha',
 			);
 		}
 
