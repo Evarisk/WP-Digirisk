@@ -170,39 +170,6 @@ class workunit_class extends post_class {
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $dislay_mode ) );
 	}
 
-	/**
-	 * Construit l'affichage des onglets existant dans une unité de travail / Build the existing tab for workunit
-	 *
-	 * @param Object $workunit L'unité de travail actuellement en cours d'édition / The current work unit
-	 * @param string $default_tab L'onglet a sélectionner automatiquement : The default tab to select
-	 */
-	function display_workunit_tab( $workunit, $default_tab ) {
-		/**	Définition de la liste des onglets pour les unités de travail - modifiable avec un filtre / Define a tab list for work unit - editable list through filter	*/
-		$tab_list = apply_filters( 'wpdigi_workunit_sheet_tab', array(), $workunit );
-
-		/**	Affichage des onglets définis pour les unités de travail / Display defined tabs for work unit	*/
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit/tab', 'list' ) );
-	}
-
-	/**
-	 * Gestion de l'affichage du contenu des onglets pour une unité de travail / Manage content display into workunit
-	 *
-	 * @param Object $workunit La définition complète de l'unité de travail sur laquelle on se trouve / The complete definition for the current workunit we are on
-	 * @param string $tab_to_display Permet de sélectionner les données a afficher ( par défaut affiche un shortcode basé sur cet valeur ) / Allows to display tab content to display ( Display a shortcode composed with this value by default )
-	 */
-	function display_workunit_tab_content( $workunit, $tab_to_display ) {
-		/**	Application d'un filtre d'affichage selon la partie a afficher demandée par l'utilisateur / Apply filter for display user's requested part	*/
-		$output = apply_filters( 'wpdigi_workunit_sheet_content', '', $workunit, $tab_to_display );
-		/**	Par défaut on va afficher un shortcode ayant pour clé la valeur de $tab_to_display / By default display a shortcode composed with $tab_to_display	*/
-		if ( empty( $output ) ) {
-			require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit/tab', 'default' ) );
-		}
-		else {
-			echo $output;
-		}
-	}
-
-
 	function generate_workunit_sheet( $workunit_id ) {
 		$response = array(
 			'status' 	=> true,
