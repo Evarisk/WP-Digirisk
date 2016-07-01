@@ -255,7 +255,7 @@ class workunit_action {
 			wp_send_json_error( array( 'message' => __( 'Requested element for sheet generation is invalid. Please check your request', 'digirisk' ), ) );
 		}
 
-		$generation_response = $this->generate_workunit_sheet( $element_id );
+		$generation_response = workunit_class::get()->generate_workunit_sheet( $element_id );
 
 		wp_die( json_encode( $generation_response ) );
 	}
