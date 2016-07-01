@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluator_filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ) );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 11 );
 	}
 
 	public function callback_tab( $list_tab ) {

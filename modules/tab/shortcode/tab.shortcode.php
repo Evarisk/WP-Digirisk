@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class tab_shortcode {
 	public function __construct() {
-		add_shortcode( 'digi-tab', array( $this, 'callback_digi_tab' ) );
+		add_shortcode( 'digi-tab', array( $this, 'callback_digi_tab' ), 1 );
 	}
 
 	public function callback_digi_tab( $param ) {

@@ -3,7 +3,7 @@
 class sheet_groupment_filter {
 
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 20, 1 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 16, 1 );
 	}
 
 	public function callback_digi_tab( $list_tab ) {
