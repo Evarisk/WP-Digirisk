@@ -17,8 +17,10 @@ class society_action {
 	 */
 	public function callback_load_sheet_display() {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_text_field( $_POST['tab_to_display'] ) : '';
+
 		ob_start();
-		do_shortcode( '[digi_dashboard id="' . $element_id . '"]' );
+		do_shortcode( '[digi_dashboard id="' . $element_id . '" tab_to_display="' . $tab_to_display . '"]' );
 		$template = ob_get_clean();
 
 		$society = society_class::get()->show_by_type( $element_id );

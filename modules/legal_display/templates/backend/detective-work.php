@@ -40,7 +40,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Phone', 'digirisk' ); ?>
-      <input name="detective_work[contact][phone]" type="text" value="<?php echo $data['detective_work']->option['contact']['phone'][0]; ?>" />
+      <input name="detective_work[contact][phone]" type="text" value="<?php echo !empty( $data['detective_work']->option['contact']['phone'][0] ) ? $data['detective_work']->option['contact']['phone'][0] : ''; ?>" />
     </label>
   </li>
   <li>

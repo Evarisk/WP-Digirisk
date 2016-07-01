@@ -19,8 +19,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'wpdigi-i18n' ); ?></button>
 		</div>
 	</div>
-
-	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="digi-risk"]' ); ?>
-	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element ); ?>
+	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element, $tab_to_display ); ?>
 
 </div>

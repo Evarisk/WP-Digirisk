@@ -99,10 +99,9 @@ class evaluator_action {
 	}
 
 	public function callback_paginate_evaluator() {
-		$global = !empty( $_POST['global'] ) ? sanitize_text_field( $_POST['global'] ) : '';
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 
-		if ( $global === '' || $element_id === 0 ) {
+		if ( $element_id === 0 ) {
 			wp_send_json_error();
 		}
 

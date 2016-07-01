@@ -162,20 +162,6 @@ class group_action {
 		wp_die( json_encode( $response ) );
 	}
 
-	public function ajax_group_sheet_display( ) {
-		if ( 0 === ( int )$_POST['group_id'] )
-			wp_send_json_error();
-		else
-			$group_id = (int) $_POST['group_id'];
-
-		$group = group_class::get()->show( $group_id );
-
-		$group_default_tab = apply_filters( 'wpdigi_group_default_tab', '' );
-
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'sheet', 'simple' ) );
-		wp_die();
-	}
-
 	public function ajax_generate_duer() {
 		// wpdigi_utils::check( 'digi_ajax_generate_element_duer' );
 

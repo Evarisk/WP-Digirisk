@@ -21,6 +21,7 @@ class society_shortcode {
   public function callback_digi_dashboard( $param ) {
 		$id = $param['id'];
     $element = society_class::get()->show_by_type( $id );
+		$tab_to_display = !empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-risk';
     require( SOCIETY_VIEW_DIR . '/content.view.php' );
   }
 }

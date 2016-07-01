@@ -92,8 +92,7 @@ class comment_class extends singleton_util {
 	public function show( $id, $cropped = false ) {
 		$comment = get_comment( $id );
 
-		if( !empty( $comment ) )
-			$comment = new $this->model_name( $comment, $this->meta_key, $cropped );
+		$comment = new $this->model_name( $comment, $this->meta_key, $cropped );
 
 		return $comment;
 	}

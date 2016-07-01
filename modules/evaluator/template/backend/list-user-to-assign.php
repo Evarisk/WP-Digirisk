@@ -43,7 +43,7 @@
 			<?php
 			$big = 999999999;
 			echo paginate_links( array(
-				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->id . '&global=' . substr( str_replace( 'mdl', 'ctr', get_class( $element ) ), 0, -3 ) ),
+				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->id ),
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,

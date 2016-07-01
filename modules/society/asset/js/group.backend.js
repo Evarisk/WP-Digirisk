@@ -95,33 +95,21 @@ var digi_group = {
 
 	display_form_duer: function( event, element ) {
 		event.preventDefault();
-
 		/**
 		 * Ajout d'un loader sur le bloc à droite / Display a loader on the right bloc
 		 */
 		jQuery( ".wp-digi-societytree-right-container" ).addClass( "wp-digi-bloc-loading" );
 
-		/**
-		 * Chargement de la fiche dans le conteneur droit / Load the sheet into the right container
-		 */
-		jQuery( ".wp-digi-societytree-right-container" ).load( ajaxurl, {
-			"action": "wpdigi_group_sheet_display",
-			"group_id" : jQuery( element ).data( 'id' ),
-		}, function(){
-			digi_global.init();
-			/**
-			 * Supression du loader sur le bloc à droite / Remove the loader on the right bloc
-			 */
-			jQuery( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
-		});
+		var data = {
+			action: 'load_sheet_display',
+			element_id: jQuery( element ).data( 'id' ),
+			tab_to_display: 'digi-generate-sheet',
+		};
 
-		/**
-		 * Ajoute une classe permettant de savoir sur quel element on est dans l'arbre / Add a class allowing to know on wich element we are in tree
-		 */
-		jQuery( ".wp-digi-item-workunit.active" ).each( function(){
-			jQuery( element ).removeClass( "active" );
-		});
-		jQuery( element ).addClass( "active" );
+		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( ".wp-digi-societytree-right-container" ).html( response.data.template );
+			jQuery( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
+		} );
 	},
 
 	/**

@@ -10,6 +10,7 @@ var digi_evaluator = {
 		jQuery( document ).on( 'click', '.wp-digi-evaluator-list input[type="checkbox"]', function() { digi_evaluator.add_time( jQuery( this ) ); } );
     jQuery( document ).on ('click', '.wp-form-evaluator-to-assign input[type="submit"]', function( evt ) { digi_evaluator.add_evaluator( evt, jQuery( this ) ); } );
     jQuery( document ).on ('click', '.wp-digi-list-evaluator .wp-digi-action-delete', function( evt ) { digi_evaluator.delete_evaluator( evt, jQuery( this ) ); } );
+		jQuery( document ).on( 'click', '.wp-form-evaluator-to-assign .wp-digi-pagination a', function( event ) { digi_evaluator.pagination( event, jQuery( this ) ); } );
 	},
 
 	add_time: function( element ) {
@@ -44,5 +45,21 @@ var digi_evaluator = {
         jQuery( '.wp-digi-list-evaluator' ).replaceWith( response.data.template );
       } );
     }
-  }
+  },
+
+	pagination: function( event, element ) {
+		event.preventDefault();
+
+		var href = jQuery( element ).attr( 'href' ).split( '&' );
+		var next_page = href[1].replace('current_page=', '');
+		var element_id = href[2].replace('element_id=', '');
+
+		var data = {
+			action: 'paginate_evaluator',
+			element_id: element_id,
+			next_page: next_page
+		};
+
+		jQuery( '.wp-form-evaluator-to-assign' ).load( ajaxurl, data, function() {} );
+	}
 };

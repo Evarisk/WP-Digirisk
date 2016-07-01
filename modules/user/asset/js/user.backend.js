@@ -12,6 +12,7 @@ var digi_user = {
 		jQuery( document ).on( 'keyup', '.wp-list-search input[name="user_name_affected"]', function() { digi_user.search_affected_user( jQuery( this ) ); } );
 		jQuery( document ).on ('click', '.wp-form-user-to-assign input[type="submit"]', function( evt ) { digi_user.add_user( evt, jQuery( this ) ); } );
 		jQuery( document ).on ('click', '.wp-digi-list-affected-user .wp-digi-action-delete', function( evt ) { digi_user.delete_user( evt, jQuery( this ) ); } );
+		jQuery( document ).on( 'click', '.wp-form-user-to-assign .wp-digi-pagination a', function( event ) { digi_user.pagination( event, jQuery( this ) ); } );
 	},
 
 	search_affected_user: function( element ) {
@@ -59,5 +60,21 @@ var digi_user = {
         jQuery( '.wp-digi-list-user' ).replaceWith( response.data.template );
       } );
     }
-  }
+  },
+
+	pagination: function( event, element ) {
+		event.preventDefault();
+
+		var href = jQuery( element ).attr( 'href' ).split( '&' );
+		var next_page = href[1].replace('current_page=', '');
+		var element_id = href[2].replace('element_id=', '');
+
+		var data = {
+			action: 'paginate_user',
+			element_id: element_id,
+			next_page: next_page
+		};
+
+		jQuery( '.wp-form-user-to-assign' ).load( ajaxurl, data, function() {} );
+	}
 };
