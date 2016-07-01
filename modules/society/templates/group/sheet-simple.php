@@ -11,5 +11,5 @@
 	</div>
 
 	<?php echo do_shortcode( '[digi-tab type="' . $group->type . '" display="digi-generate-sheet"]' ); ?>
-	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $group ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $group, 'digi-generate-sheet' ); ?>
 </div>

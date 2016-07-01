@@ -3,19 +3,19 @@
 class group_filter {
 
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 3, 1 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ) );
 	}
 
-	 function callback_digi_tab( $tab_list ) {
-		 $tab_list['digi-group']['generate-sheet'] = array(
-			 'text' => __( 'DUER Generation', 'digirisk' ),
-		 );
-		 $tab_list['digi-group']['sheet'] = array(
-			 'text' => __( 'Document list', 'digirisk' ),
-		 );
-		 $tab_list['digi-group']['configuration'] = array(
-			 'text' => __( 'Configuration', 'digirisk' ),
-		 );
+	function callback_digi_tab( $tab_list ) {
+		$tab_list['digi-group']['generate-sheet'] = array(
+			'text' => __( 'DUER Generation', 'digirisk' ),
+		);
+		$tab_list['digi-group']['sheet'] = array(
+			'text' => __( 'Document list', 'digirisk' ),
+		);
+		$tab_list['digi-group']['configuration'] = array(
+			'text' => __( 'Configuration', 'digirisk' ),
+		);
 
 		return $tab_list;
 	}
