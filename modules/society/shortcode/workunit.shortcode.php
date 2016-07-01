@@ -19,9 +19,9 @@ class workunit_shortcode {
   * @TODO : Avoir le groupment par défaut
   */
   public function callback_digi_sheet_workunit( $param ) {
-		$id = $param['id'];
-    $element = society_class::get()->show_by_type( $id );
-		$display_mode = "simple";
+		$element_id = (int)$_POST['element_id'];
+    $element = society_class::get()->show_by_type( $element_id );
+    $display_mode = "simple";
     require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'simple', "sheet", "generation-form" ) );
     document_class::get()->display_document_list( $element );
   }
