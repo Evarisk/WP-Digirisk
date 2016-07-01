@@ -42,7 +42,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Phone', 'digirisk' ); ?>
-      <input name="occupational_health_service[contact][phone]" type="text" value="<?php echo $data['occupational_health_service']->option['contact']['phone'][0]; ?>" />
+      <input name="occupational_health_service[contact][phone]" type="text" value="<?php echo !empty( $data['occupational_health_service']->option['contact']['phone'][0] ) ? $data['occupational_health_service']->option['contact']['phone'][0] : ''; ?>" />
     </label>
   </li>
   <li>
