@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_evaluator_mdl_01 extends user_mdl_01 {
+class wpdigi_evaluator_mdl_01 extends user_model {
 
 	/**
 	* Construit le modèle d'un utilisateur / Fill the user model

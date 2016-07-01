@@ -8,8 +8,6 @@ class evaluation_method_action {
   }
 
 	public function callback_init() {
-		global $wpdigi_risk_ctr;
-		global $evaluation_method_class;
 		$labels = array(
 			'name'              => __( 'Evaluation methods', 'digirisk' ),
 			'singular_name'     => __( 'Evaluation method', 'digirisk' ),
@@ -31,7 +29,7 @@ class evaluation_method_action {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'evaluation-method' ),
 		);
-		register_taxonomy( $evaluation_method_class->get_taxonomy(), array( $wpdigi_risk_ctr->get_post_type() ), $args );
+		register_taxonomy( evaluation_method_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
 	}
 
 	/**
@@ -47,9 +45,6 @@ class evaluation_method_action {
 * data.scale Le niveau du risque entre 1 et 4
 */
 public function ajax_get_scale() {
-	ini_set("display_errors", true);
-	error_reporting(E_ALL);
-	global $evaluation_method_class;
 	check_ajax_referer( 'get_scale' );
 	$list_variable = !empty( $_POST['list_variable'] ) ? (array) $_POST['list_variable'] : array();
 	$level = 1;
@@ -58,8 +53,8 @@ public function ajax_get_scale() {
 			$level *= $element;
 		}
 	}
-	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
-	$evaluation_method = $evaluation_method_class->show( $method_evaluation_digirisk_complex->term_id );
+	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
+	$evaluation_method = evaluation_method_class::get()->show( $method_evaluation_digirisk_complex->term_id );
 	$equivalence = $evaluation_method->option['matrix'][$level];
 	$scale = scale_util::get_scale( $equivalence );
 	wp_send_json_success( array( 'equivalence' => $equivalence, 'scale' => $scale ) );
@@ -80,20 +75,18 @@ public function ajax_get_scale() {
   public function callback_save_risk() {
     check_ajax_referer( 'save_risk' );
 
-		global $wpdigi_risk_ctr;
-
     $method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 
     if ( $method_evaluation_id === 0 ) {
       wp_send_json_error();
     }
 
-    $risk_id = $wpdigi_risk_ctr->get_last_entry();
-    $risk = $wpdigi_risk_ctr->show( $risk_id );
+    $risk_id = risk_class::get()->get_last_entry();
+    $risk = risk_class::get()->show( $risk_id );
 
     $risk->taxonomy['digi-method'][] = $method_evaluation_id;
 
-		$wpdigi_risk_ctr->update( $risk );
+		risk_class::get()->update( $risk );
   }
 }
 

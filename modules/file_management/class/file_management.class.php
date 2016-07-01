@@ -11,21 +11,12 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class file_management_class {
-  public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
-	}
+class file_management_class extends singleton_util {
+	protected function construct() {}
 
-	public function callback_admin_enqueue_scripts() {
-		wp_enqueue_media();
-		wp_enqueue_script( 'wpeofiles-scripts', FILE_MANAGEMENT_URL . '/asset/js/file_management.backend.js', '', FILE_MANAGEMENT_VERSION );
-		wp_enqueue_script( 'gallery', FILE_MANAGEMENT_URL . '/asset/js/gallery.backend.js', '', FILE_MANAGEMENT_VERSION );
-	}
-
-  // @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']
+	// @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
-		global ${$object_name};
-    $element = ${$object_name}->show( $element_id );
+    $element = $object_name::get()->show( $element_id );
 
     if ( wp_attachment_is_image( $file_id ) ) {
       $element->option['associated_document_id']['image'][] = $file_id;
@@ -39,9 +30,6 @@ class file_management_class {
       $element->option['associated_document_id']['document'][] = $file_id;
     }
 
-    ${$object_name}->update( $element );
+    $object_name::get()->update( $element );
   }
 }
-
-global $file_management_class;
-$file_management_class = new file_management_class();

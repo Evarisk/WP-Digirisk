@@ -39,11 +39,16 @@ class file_management_shortcode {
       $id = (int) $param['id'];
     }
 
-    if ( !empty( $param['object_name'] ) ) {
-      $type = sanitize_text_field( $param['object_name'] );
+    if ( !empty( $param['type'] ) ) {
+      $type = sanitize_text_field( $param['type'] );
     }
 
-    $element = $wpdigi_group_ctr->show( $id );
+		if ( $id != 0 ) {
+    	$element = society_class::get()->show_by_type( $id );
+		}
+		else {
+			$element = null;
+		}
 
 		require( FILE_MANAGEMENT_VIEW_DIR . '/button.view.php' );
 	}
@@ -63,8 +68,7 @@ class file_management_shortcode {
   */
 	public function callback_shortcode_gallery( $param ) {
 		$element_id = $param['element_id'];
-  	global ${$param['object_name']};
-		$element = ${$param['object_name']}->show( $element_id );
+		$element = society_class::get()->show_by_type( $element_id );
 
 		$list_id = !empty( $element->option['associated_document_id']['image'] ) ? $element->option['associated_document_id']['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;

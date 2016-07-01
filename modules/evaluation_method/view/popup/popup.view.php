@@ -19,10 +19,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     <div>
       <div class="wp-digi-eval-table">
 			<?php if ( !empty( $list_evaluation_method_variable ) ): ?>
-				<?php require( WPDIGI_EVALMETHOD_VIEW . 'popup/header.view.php' ); ?>
+				<?php require( EVALUATION_METHOD_VIEW . 'popup/header.view.php' ); ?>
 
 				<?php for( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ): ?>
-					<?php require( WPDIGI_EVALMETHOD_VIEW . 'popup/row.view.php' ); ?>
+					<?php require( EVALUATION_METHOD_VIEW . 'popup/row.view.php' ); ?>
 				<?php endfor; ?>
 			<?php endif;?>
 			<a href="#" data-nonce="<?php echo wp_create_nonce( 'get_scale' ); ?>" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'wpdigi-i18n' ); ?></a>

@@ -1,0 +1,26 @@
+<?php
+/**
+* Display .... Fichier incompréhensible.
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package establishment
+* @subpackage view
+*/
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
+<div class="wp-digi-group-sheet wp-digi-sheet" data-id="<?php echo $element->id; ?>"  >
+	<div class="wp-digi-global-sheet-header wp-digi-global-sheet-header">
+    <?php apply_filters( 'wpdigi_establishment_identity', $element, true ); ?>
+
+		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
+			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'wpdigi-i18n' ); ?></button>
+		</div>
+	</div>
+
+	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="digi-risk"]' ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element ); ?>
+
+</div>

@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_group_mdl_01 extends post_mdl_01 {
+class wpdigi_group_mdl_01 extends post_model {
 
 	/**
 	 * Définition du modèle d'un groupement / Define a group model

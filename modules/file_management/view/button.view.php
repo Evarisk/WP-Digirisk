@@ -13,9 +13,6 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <span data-id="<?php echo $id; ?>" data-object-name="<?php echo $type; ?>" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" class="wp-digi-element-thumbnail wpeo-upload-media" >
-	<div class="mask">
-		<span class="dashicons dashicons-plus"></span>
-	</div>
 	<?php
   if ( !empty( $element ) && !empty( $element->thumbnail_id ) ):
 	   echo wp_get_attachment_image( $element->thumbnail_id, 'element-miniature', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail', )  );

@@ -10,6 +10,6 @@
 		<?php endif; ?>
 	</div>
 
-	<ul class="wp-digi-group-sheet-tab wp-digi-global-sheet-tab wp-digi-clearer" data-type="group" ><?php $this->display_group_tab( $group, $group_default_tab ); ?></ul>
-	<div class="wp-digi-group-sheet-content wp-digi-global-sheet-content wp-digi-clearer wp-digi-bloc-loader" ><?php $this->display_group_tab_content( $group, $group_default_tab ); ?></div>
+	<?php echo do_shortcode( '[digi-tab type="' . $group->type . '" display="digi-generate-sheet"]' ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $group ); ?>
 </div>

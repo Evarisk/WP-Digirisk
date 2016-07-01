@@ -21,11 +21,10 @@ class scale_util {
     * @return $int value
     */
   public static function get_scale( $level ) {
-		global $evaluation_method_class;
     if (  true !== is_int( ( int )$level ) )
 		  return false;
 
-    $list_scale = $evaluation_method_class->list_scale;
+    $list_scale = evaluation_method_class::get()->list_scale;
 
     if( empty( $list_scale ) )
 			return false;

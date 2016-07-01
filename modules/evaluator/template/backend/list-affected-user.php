@@ -11,19 +11,18 @@
 		<span></span>
 	</li>
 
-<?php global $wpdigi_evaluator_ctr;
-	if ( !empty( $list_affected_evaluator ) ):
+<?php	if ( !empty( $list_affected_evaluator ) ):
 		foreach ( $list_affected_evaluator as $sub_list_affected_evaluator ):
 			if ( !empty( $sub_list_affected_evaluator ) ):
 				foreach ( $sub_list_affected_evaluator as $affected_evaluator ):
 					?>
 						<li>
 							<span class="wp-avatar" style="background: #<?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['avatar_color']; ?>;"><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['initial']; ?></span>
-							<span><?php echo $wpdigi_evaluator_ctr->element_prefix . $affected_evaluator[ 'user_info' ]->id; ?></span>
+							<span><?php echo evaluator_class::get()->element_prefix . $affected_evaluator[ 'user_info' ]->id; ?></span>
 							<span><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['lastname']; ?></span>
 							<span><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['firstname']; ?></span>
 							<span><?php echo  mysql2date( 'd/m/Y H:i', $affected_evaluator[ 'affectation_info' ][ 'start' ][ 'date' ], true ); ?></span>
-							<span><?php echo $wpdigi_evaluator_ctr->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
+							<span><?php echo evaluator_class::get()->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
 							<span class="wp-digi-action">
 								<a 	data-id="<?php echo $element->id; ?>"
 										data-user-id="<?php echo $affected_evaluator[ 'user_info' ]->id; ?>"

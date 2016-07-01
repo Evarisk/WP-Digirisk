@@ -12,6 +12,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
+<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 <input type="hidden" name="method_evaluation_id" value="<?php echo $digi_method_id; ?>" />
 <input type="hidden" class="risk-level" name="risk_evaluation_level" value="<?php echo $scale; ?>" />
 

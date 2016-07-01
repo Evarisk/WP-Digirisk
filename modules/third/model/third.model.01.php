@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class third_mdl_01 extends post_mdl_01 {
+class third_mdl_01 extends post_model {
 
 	/**
 	 * Définition du modèle d'un risque / Define a risk model

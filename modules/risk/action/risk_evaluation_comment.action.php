@@ -31,16 +31,12 @@ class risk_evaluation_comment_action {
 	public function callback_save_risk() {
 		check_ajax_referer( 'save_risk' );
 
-		global $wpdigi_risk_evaluation_ctr;
-		global $wpdigi_risk_evaluation_comment_ctr;
-		global $wpdigi_risk_ctr;
-
     $list_comment_content = !empty( $_POST['comment_content'] ) ? (array) $_POST['comment_content' ] : array();
     $list_comment_date = !empty( $_POST['comment_date'] ) ? (array) $_POST['comment_date' ] : array();
     $list_comment_id = !empty( $_POST['comment_id'] ) ? (array) $_POST['comment_id' ] : array();
 
-		$risk_evaluation_id = $wpdigi_risk_evaluation_ctr->get_last_entry();
-		$risk_id = $wpdigi_risk_ctr->get_last_entry();
+		$risk_evaluation_id = risk_evaluation_class::get()->get_last_entry();
+		$risk_id = risk_class::get()->get_last_entry();
 
 		if ( !empty( $_POST['risk_id'] ) ) {
 			$risk_id = (int) $_POST['risk_id'];
@@ -65,7 +61,7 @@ class risk_evaluation_comment_action {
 						$data['id'] = (int) $list_comment_id[$key];
 					}
 
-					$wpdigi_risk_evaluation_comment_ctr->update( $data );
+					risk_evaluation_comment_class::get()->update( $data );
 				}
 		  }
 		}

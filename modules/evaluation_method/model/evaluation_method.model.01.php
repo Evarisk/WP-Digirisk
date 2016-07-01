@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_evaluation_method_mdl_01 extends term_mdl_01 {
+class wpdigi_evaluation_method_mdl_01 extends term_model {
 
 	/**
 	 * Définition du modèle d'un danger / Define a danger model

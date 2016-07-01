@@ -2,12 +2,11 @@
 if ( !empty( $group_list ) ): ?>
 	<ul class="<?php echo $class; ?>">
 		<?php foreach ( $group_list as $group ) : ?>
-			<li>
+			<li data-id="<?php echo $group->id; ?>">
 				<div class="<?php echo $default_selected_group_id == $group->id ? 'active' : ''; ?>">
-					<span data-id="<?php echo $group->id; ?>"><?php echo $group->option[ 'unique_identifier' ] . ' - ' . $group->title; ?></span>
+					<span data-id="<?php echo $group->id; ?>" class="wp-digi-global-name"><?php echo $group->option[ 'unique_identifier' ] . ' - ' . $group->title; ?></span>
 					<?php
-					global $wpdigi_workunit_ctr;
-					$list_workunit = $wpdigi_workunit_ctr->index( array( 'post_parent' => $group->id, 'status' => 'publish' ) );
+					$list_workunit = workunit_class::get()->index( array( 'post_parent' => $group->id, 'status' => 'publish' ) );
 					?>
 					<?php if ( count( $list_workunit ) == 0 ): ?>
 						<span class="wp-digi-new-group-action">

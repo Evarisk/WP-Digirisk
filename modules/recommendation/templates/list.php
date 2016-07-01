@@ -11,11 +11,11 @@
 
 	<?php if ( !empty( $list_recommendation_in_workunit ) ): ?>
 		<?php foreach ( $list_recommendation_in_workunit as $term_id => $sub_array ): ?>
-			<?php $term = $this->show( $term_id ); ?>
+			<?php $term = recommendation_class::get()->show( $term_id ); ?>
 			<?php if ( !empty( $sub_array ) ): ?>
 				<?php foreach( $sub_array as $index => $recommendation_in_workunit ):?>
 					<?php if ( !empty( $recommendation_in_workunit['status'] ) && $recommendation_in_workunit['status'] == 'valid' ): ?>
-						<?php require( wpdigi_utils::get_template_part( WPDIGI_RECOM_DIR, DIGI_RECOM_TEMPLATES_MAIN_DIR, '', 'list', 'item' ) ); ?>
+						<?php require ( DIGI_RECOM_TEMPLATES_MAIN_DIR . '/list-item.php' ); ?>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			<?php endif; ?>
@@ -42,7 +42,7 @@
 						<div class="wp-digi-select-list digi-popup hidden grid icon">
 							<?php foreach( $list_recommendation_category as $recommendation_category ): ?>
 								<ul>
-									<?php global $digi_recommendation_controller; $list_recommendation = $digi_recommendation_controller->index( array( 'parent' => $recommendation_category->id, 'hide_empty' => false, ) );?>
+									<?php $list_recommendation = recommendation_class::get()->index( array( 'parent' => $recommendation_category->id, 'hide_empty' => false, ) );?>
 									<?php if ( !empty( $list_recommendation ) ): ?>
 										<?php foreach( $list_recommendation as $recommendation ): ?>
 											<?php $attachement_url = wp_get_attachment_image_src( $recommendation->option['thumbnail_id'] ); ?>

@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_address_mdl_01 extends comment_mdl_01 {
+class wpdigi_address_mdl_01 extends comment_model {
 
 	/**
 	 * Définition du modèle d'une adresse / Define a danger address

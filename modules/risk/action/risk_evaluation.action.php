@@ -31,12 +31,6 @@ class risk_evaluation_action {
 	public function callback_save_risk() {
 		check_ajax_referer( 'save_risk' );
 
-		ini_set("display_errors", true);
-		error_reporting(E_ALL);
-
-		global $evaluation_method_class;
-		global $wpdigi_risk_evaluation_ctr;
-
 		$risk_evaluation_level = !empty( $_POST['risk_evaluation_level'] ) ? (int) $_POST['risk_evaluation_level'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 
@@ -44,8 +38,8 @@ class risk_evaluation_action {
       wp_send_json_error();
     }
 
-		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', $evaluation_method_class->get_taxonomy() );
-		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
+		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );
+		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
 
 		$data = array();
 
@@ -57,13 +51,13 @@ class risk_evaluation_action {
 		}
 
 		// Récupère la dernière clé unique
-		$last_unique_key = wpdigi_utils::get_last_unique_key( 'comment', $wpdigi_risk_evaluation_ctr->get_type() );
+		$last_unique_key = wpdigi_utils::get_last_unique_key( 'comment', risk_evaluation_class::get()->get_type() );
 		$new_unique_key = $last_unique_key + 1;
 
 		$data['option']['unique_key'] = $new_unique_key;
 		$data['option']['unique_identifier'] = 'E' . $new_unique_key;
 
-		$wpdigi_risk_evaluation_ctr->update( $data );
+		risk_evaluation_class::get()->update( $data );
 	}
 
 	/**
@@ -78,14 +72,13 @@ class risk_evaluation_action {
 	* @return array : @todo : A détailler
   */
 	public function update_method_simplified( $risk_evaluation_level ) {
-		global $evaluation_method_class;
 		// Récupère la variable de la méthode simplifiée
-		$term_method_variable = get_term_by( 'slug', 'evarisk', $evaluation_method_class->get_taxonomy() );
+		$term_method_variable = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
 
 		// Le niveau du risque + la force du risque par rapport à son level
 		$risk_level = array(
 			'method_result' => $risk_evaluation_level,
-			'equivalence' => $evaluation_method_class->list_scale[$risk_evaluation_level],
+			'equivalence' => evaluation_method_class::get()->list_scale[$risk_evaluation_level],
 			'scale' => $risk_evaluation_level
 		);
 
@@ -121,7 +114,6 @@ class risk_evaluation_action {
 	* @return array : @todo : A détailler
   */
 	public function update_method_complex( $term_id ) {
-		global $evaluation_method_class;
 
 		$risk_evaluation_level = 1;
 
@@ -133,7 +125,7 @@ class risk_evaluation_action {
 		  }
 		}
 
-		$evaluation_method = $evaluation_method_class->show( $term_id );
+		$evaluation_method = evaluation_method_class::get()->show( $term_id );
 		$equivalence = $evaluation_method->option['matrix'][$risk_evaluation_level];
 		$scale = scale_util::get_scale( $equivalence );
 

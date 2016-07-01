@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_risk_mdl_01 extends post_mdl_01 {
+class wpdigi_risk_mdl_01 extends post_model {
 
 	/**
 	 * Définition du modèle d'un risque / Define a risk model
@@ -98,7 +98,7 @@ class wpdigi_risk_mdl_01 extends post_mdl_01 {
 			foreach ( $taxonomy_objects as $taxonomy => $taxonomy_def ) {
 				$this->model['taxonomy'][$taxonomy] = array(
 					'type' => 'array',
-					'function'	=> 'post_ctr_01::eo_get_object_terms',
+					'function'	=> 'post_class::eo_get_object_terms',
 					'field'	=> '',
 					'default'	=> array(),
 					'required'	=> false,
