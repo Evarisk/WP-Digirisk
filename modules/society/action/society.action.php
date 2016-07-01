@@ -16,6 +16,9 @@ class society_action {
 	 * Affiche la fiche d'une unité de travail / Display a work unit sheet
 	 */
 	public function callback_load_sheet_display() {
+		ini_set("display_errors", true);
+		error_reporting(E_ALL);
+
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_text_field( $_POST['tab_to_display'] ) : '';
 
