@@ -8,13 +8,10 @@ class wpdigi_group_configuration_action {
   public function callback_save_groupment_configuration() {
     check_ajax_referer( 'save_groupment_configuration' );
 
-    global $wpdigi_group_ctr;
-    global $wpdigi_address_ctr;
-
     $groupment_id = !empty( $_POST['groupment_id'] ) ? (int) $_POST['groupment_id'] : 0;
 
     // Modifie les valeurs du groupement
-    $groupment = $wpdigi_group_ctr->show( $groupment_id );
+    $groupment = group_class::get()->show( $groupment_id );
     $groupment->title = !empty( $_POST['groupement']['title'] ) ? sanitize_text_field( $_POST['groupement']['title'] ) : $groupment->title;
     $groupment->date = !empty( $_POST['groupement']['date'] ) ? sanitize_text_field( $_POST['groupement']['date'] ) : $groupment->date;
     $groupment->content = !empty( $_POST['groupement']['content'] ) ? sanitize_text_field( $_POST['groupement']['content'] ) : $groupment->content;
@@ -30,7 +27,7 @@ class wpdigi_group_configuration_action {
       $groupment->option['contact']['phone'][] = sanitize_text_field( $_POST['groupement']['option']['contact']['phone'] );
     }
 
-    $post_code = '';
+    $postcode = '';
 
 		if ( !empty( $_POST['address']['postcode'] ) ) {
 			$postcode = (int) $_POST['address']['postcode'];
@@ -50,10 +47,10 @@ class wpdigi_group_configuration_action {
 			),
 		);
 
-		$address = $wpdigi_address_ctr->create( $address );
+		$address = address_class::get()->create( $address );
 
     $groupment->option['contact']['address'][] = $address->id;
-    $wpdigi_group_ctr->update( $groupment );
+    group_class::get()->update( $groupment );
 
     wp_send_json_success();
   }
