@@ -18,7 +18,7 @@ class legal_display_filter {
 
 	public function callback_tab( $list_tab ) {
 		$list_tab['digi-group']['legal_display'] = array(
-			'text' => __( 'Legal display', 'wpdigi-i18n' )
+			'text' => __( 'Legal display', 'digirisk' )
 		);
 		return $list_tab;
 	}

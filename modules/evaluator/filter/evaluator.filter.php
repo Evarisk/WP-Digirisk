@@ -18,10 +18,10 @@ class evaluator_filter {
 
 	public function callback_tab( $list_tab ) {
 		$list_tab['digi-group']['evaluator'] = array(
-			'text' => __( 'Evaluator', 'wpdigi-i18n' ),
+			'text' => __( 'Evaluator', 'digirisk' ),
 		);
 		$list_tab['digi-workunit']['evaluator'] = array(
-			'text' => __( 'Evaluator', 'wpdigi-i18n' ),
+			'text' => __( 'Evaluator', 'digirisk' ),
 		);
 
 		return $list_tab;

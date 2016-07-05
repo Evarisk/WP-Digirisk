@@ -25,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 					<?php require( EVALUATION_METHOD_VIEW . 'popup/row.view.php' ); ?>
 				<?php endfor; ?>
 			<?php endif;?>
-			<a href="#" data-nonce="<?php echo wp_create_nonce( 'get_scale' ); ?>" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'wpdigi-i18n' ); ?></a>
+			<a href="#" data-nonce="<?php echo wp_create_nonce( 'get_scale' ); ?>" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'digirisk' ); ?></a>
 		</div>
     </div>
   </section>

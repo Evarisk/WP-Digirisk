@@ -18,7 +18,7 @@ class recommendation_filter {
 
 	public function callback_tab( $list_tab ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
-			'text' => __( 'Recommendation', 'wpdigi-i18n' ),
+			'text' => __( 'Recommendation', 'digirisk' ),
 		);
 
 		return $list_tab;

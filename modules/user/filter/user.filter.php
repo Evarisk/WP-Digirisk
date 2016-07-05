@@ -18,7 +18,7 @@ class user_filter {
 
 	public function callback_tab( $list_tab ) {
 		$list_tab['digi-workunit']['user'] = array(
-			'text' => __( 'User', 'wpdigi-i18n' ),
+			'text' => __( 'User', 'digirisk' ),
 		);
 		return $list_tab;
 	}

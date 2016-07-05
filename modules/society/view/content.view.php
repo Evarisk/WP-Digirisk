@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     <?php apply_filters( 'wpdigi_establishment_identity', $element, true ); ?>
 
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
-			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'wpdigi-i18n' ); ?></button>
+			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
 	</div>
 	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>

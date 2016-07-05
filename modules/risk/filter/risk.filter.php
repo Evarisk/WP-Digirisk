@@ -18,10 +18,10 @@ class risk_filter {
 
 	public function callback_tab( $list_tab ) {
 		$list_tab['digi-group']['risk'] = array(
-			'text' => __( 'Risk', 'wpdigi-i18n' ),
+			'text' => __( 'Risk', 'digirisk' ),
 		);
 		$list_tab['digi-workunit']['risk'] = array(
-			'text' => __( 'Risk', 'wpdigi-i18n' ),
+			'text' => __( 'Risk', 'digirisk' ),
 		);
 
 		return $list_tab;
