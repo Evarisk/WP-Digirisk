@@ -18,8 +18,14 @@ class digirisk_action {
 		add_action( 'admin_enqueue_scripts', array( include_util::get(), 'callback_admin_enqueue_scripts' ), 11 );
 		add_action( 'admin_print_scripts', array( include_util::get(), 'callback_admin_print_scripts' ) );
 
+		add_action( 'plugins_loaded', array( $this, 'callback_plugins_loaded' ) );
+
 		add_action( 'wp_ajax_search_user', array( $this, 'ajax_search_user' ) );
 		add_action( 'wp_ajax_search', array( $this, 'ajax_search' ) );
+	}
+
+	public function callback_plugins_loaded() {
+		load_plugin_textdomain( "digirisk", false, WPDIGI_DIR . '/core/assets/languages/' );
 	}
 
 	public function ajax_search_user() {
