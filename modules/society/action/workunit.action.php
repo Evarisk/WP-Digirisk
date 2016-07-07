@@ -64,6 +64,10 @@ class workunit_action {
 		/**	Check if the ajax request come from a known source	*/
 		check_ajax_referer( 'wpdigi-workunit-creation', 'wpdigi_nonce' );
 
+		if ( empty( $_POST['workunit'] ) ) {
+			wp_send_json_error();
+		}
+
 		if ( 0 === ( int )$_POST['workunit']['parent_id'] )
 			wp_send_json_error();
 		else

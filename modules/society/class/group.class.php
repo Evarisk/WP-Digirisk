@@ -170,6 +170,79 @@ class group_class extends post_class {
 	}
 
 	/**
+	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree
+	 *
+	 * @param Object $element L'élément actuel dont il faut récupérer la liste des risques de manière récursive / Current element where we have to get risk list recursively
+	 *
+	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
+	 */
+	public function get_element_tree_risk( $element ) {
+		$risks_in_tree = array();
+
+		$risks_in_tree = $this->build_risk_list_for_export( $element );
+
+		/**	Liste les enfants direct de l'élément / List children of current element	*/
+		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		foreach ( $group_list as $group ) {
+			$risks_in_tree = array_merge( $risks_in_tree, $this->get_element_tree_risk( $group ) );
+		}
+
+		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		foreach ( $work_unit_list as $workunit ) {
+			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit ) );
+		}
+
+		return $risks_in_tree;
+	}
+
+	/**
+	 * Construction de la liste des risques pour un élément donné / Build risks' list for a given element
+	 *
+	 * @param object $element La définition complète de l'élément dont il faut retourner la liste des risques / The entire element we want to get risks list for
+	 *
+	 * @return array La liste des risques construite pour l'export / Risks' list builded for export
+	 */
+	public function build_risk_list_for_export( $element ) {
+		if ( empty( $element->option[ 'associated_risk' ] ) )
+			return array();
+
+		$risk_list = risk_class::get()->index( array(
+			'include' => $element->option[ 'associated_risk' ],
+		) );
+		$element_duer_details = array();
+		foreach ( $risk_list as $risk ) {
+			$complete_risk = risk_class::get()->get_risk( $risk->id );
+			$comment_list = '';
+			if ( !empty( $complete_risk->comment ) ) :
+				foreach ( $complete_risk->comment as $comment ) :
+					$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
+";
+				endforeach;
+			endif;
+
+			$element_duer_details[] = array(
+				'idElement'					=> $element->option[ 'unique_identifier' ],
+				'nomElement'				=> $element->option[ 'unique_identifier'] . ' - ' . $element->title,
+				'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
+				'quotationRisque'		=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
+				'niveauRisque'			=> $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ],
+				'nomDanger'					=> $complete_risk->danger->name,
+				'commentaireRisque'	=> $comment_list,
+			);
+		}
+
+		if ( !empty( $risk_list_to_order ) ) {
+			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
+				$final_level = !empty( $result_treshold[ $risk_level ] ) ? $result_treshold[ $risk_level ] : '';
+				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
+				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
+			}
+		}
+
+		return $element_duer_details;
+	}
+
+	/**
 	 * Construit l'affichage des onglets existant dans une unité de travail / Build the existing tab for workunit
 	 *
 	 * @param Object $workunit L'unité de travail actuellement en cours d'édition / The current work unit

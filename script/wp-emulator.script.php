@@ -1,5 +1,6 @@
 <?php
 	define('ABSPATH', dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR);
+	define('WP_PLUGIN_URL', '');
 	define('WP_PLUGIN_DIR', dirname(dirname(dirname(__FILE__))) );
 	define('WP_LANG_DIR', 'FR');
 	define('WP_CONTENT_DIR', 'wp-content');
@@ -7,7 +8,7 @@
 	function __( $str )
 	{
 		$translate = "Result Testing text";
-		echo "[+] Requesting __ -> " . $str . PHP_EOL;
+		echo "[+] Requesting __ -> " . $str . PHP_EOL . '<br />';
 		return $translate;
 	}
 
@@ -41,7 +42,7 @@
 			$hooked .= "]";
 		}
 		else $hooked .= $object;
-		echo "[+] Adding action -> " . $init . " in " . $hooked . PHP_EOL;
+		echo "[+] Adding action -> " . $init . " in " . $hooked . PHP_EOL . '<br />';
 	}
 
 	function register_activation_hook( $file , $object )
@@ -74,7 +75,7 @@
 			$hooked .= "]";
 		}
 		else $hooked .= $object;
-		echo "[+] Registering actiovation hook -> " . $file . " in " . $hooked . PHP_EOL;
+		echo "[+] Registering actiovation hook -> " . $file . " in " . $hooked . PHP_EOL . '<br />';
 	}
 
 	function register_deactivation_hook( $file , $object )
@@ -107,52 +108,52 @@
 			$hooked .= "]";
 		}
 		else $hooked .= $object;
-		echo "[+] Registering actiovation hook -> " . $file . " in " . $hooked . PHP_EOL;
+		echo "[+] Registering actiovation hook -> " . $file . " in " . $hooked . PHP_EOL . '<br />';
 	}
 
 	function add_filter( $name, $fn, $nbr = "")
 	{
-		echo "[+] Adding filter -> " . $name . " X" . $nbr . PHP_EOL;
+		echo "[+] Adding filter -> " . $name . " X" . $nbr . PHP_EOL . '<br />';
 	}
 
 	function add_shortcode( $name )
 	{
-		echo "[+] Adding shortcode -> " . $name . PHP_EOL;
+		echo "[+] Adding shortcode -> " . $name . PHP_EOL . '<br />';
 	}
 
 	function add_option( $name, $conf)
 	{
-		echo "[+] Adding option -> " . $name . " conf:" . $conf . PHP_EOL;
+		echo "[+] Adding option -> " . $name . " conf:" . $conf . PHP_EOL . '<br />';
 	}
 
 	function update_option( $name, $conf)
 	{
-		echo "[+] Updating option -> " . $name . " conf:" . $conf . PHP_EOL;
+		echo "[+] Updating option -> " . $name . " conf:" . $conf . PHP_EOL . '<br />';
 	}
 
 	function sanitize_text_field($str)
 	{
-		echo "[+] Sanitizing -> " . $str . PHP_EOL;
+		echo "[+] Sanitizing -> " . $str . PHP_EOL . '<br />';
 	}
 
 	function get_posts()
 	{
-		echo "[+] Requesting posts " . PHP_EOL;
+		echo "[+] Requesting posts " . PHP_EOL . '<br />';
 	}
 
 	function get_role()
 	{
-		echo "[+] Requesting role " . PHP_EOL;
+		echo "[+] Requesting role " . PHP_EOL . '<br />';
 	}
 
 	function load_textdomain()
 	{
-		echo "[+] Loading text domain" . PHP_EOL;
+		echo "[+] Loading text domain" . PHP_EOL . '<br />';
 	}
 
 	function plugin_dir_path($path)
 	{
-		echo "[+] Plugin path -> " . $path . PHP_EOL;
+		echo "[+] Plugin path -> " . $path . PHP_EOL . '<br />';
 		return trailingslashit( dirname( $path ) );
 	}
 
@@ -168,73 +169,76 @@
 
 	function site_url()
 	{
-		$url = "http://testunitaire.dom/";
-		echo "[+] Requesting site_url -> " . $url . PHP_EOL;
+		$url = "http://127.0.0.1/wordpress/";
+		echo "[+] Requesting site_url -> " . $url . PHP_EOL . '<br />';
 		return $url;
 	}
 
 	function plugins_url()
 	{
-		$url = "http://testunitaire.dom/wp-content/plugins/wpshop/";
-		echo "[+] Requesting plugins_url -> " . $url . PHP_EOL;
+		$url = "http://127.0.0.1/wordpress/wp-content/plugins/digirisk/";
+		echo "[+] Requesting plugins_url -> " . $url . PHP_EOL . '<br />';
 		return $url;
 	}
 
 	function is_multisite()
 	{
 		$result = true;
-		echo "[+] Requesting is_multisite -> " . $result . PHP_EOL;
+		echo "[+] Requesting is_multisite -> " . $result . PHP_EOL . '<br />';
 		return $result;
 	}
 
 	function is_admin()
 	{
 		$result = true;
-		echo "[+] Requesting is admin -> " . $result . PHP_EOL;
+		echo "[+] Requesting is admin -> " . $result . PHP_EOL . '<br />';
 		return $result;
 	}
 
 	function admin_url()
 	{
 		$url = "http://testunitaire.dom/wp-admin/";
-		echo "[+] Requesting admin_url -> " . $url . PHP_EOL;
+		echo "[+] Requesting admin_url -> " . $url . PHP_EOL . '<br />';
 		return $url;
 	}
 
 	function plugin_basename()
 	{
 		$basename = dirname(__FILE__);
-		echo "[+] Requesting plugin_basename -> " . $basename . PHP_EOL;
+		echo "[+] Requesting plugin_basename -> " . $basename . PHP_EOL . '<br />';
 		return $basename;
 	}
 
 	function wp_upload_dir()
 	{
 		$dir = dirname(__FILE__);
-		echo "[+] Requesting wp_upload_dir -> " . $dir . PHP_EOL;
-		return $dir;
+		echo "[+] Requesting wp_upload_dir -> " . $dir . PHP_EOL . '<br />';
+		return array(
+			'basedir' => $dir,
+			'baseurl' => '',
+		);
 	}
 
 	function add_theme_support( $theme )
 	{
-		echo "[+] Adding theme support -> " . $theme . PHP_EOL;
+		echo "[+] Adding theme support -> " . $theme . PHP_EOL . '<br />';
 	}
 
 	function add_image_size( $image, $x, $y, $bool )
 	{
-		echo "[+] Adding image size -> " . $image . " x:" . $x . " y:" . $y . " bool:" . $bool . PHP_EOL;
+		echo "[+] Adding image size -> " . $image . " x:" . $x . " y:" . $y . " bool:" . $bool . PHP_EOL . '<br />';
 	}
 
 	function get_locale()
 	{
 		$lang = "fr-FR";
-		echo "[+] Requesting get_local -> " . $lang . PHP_EOL;
+		echo "[+] Requesting get_local -> " . $lang . PHP_EOL . '<br />';
 		return $lang;
 	}
 
 	function load_plugin_textdomain( $name, $bool, $dir)
 	{
-		echo "[+] Loading plugin textdomain -> " . $name . " bool:" . $bool . " dir:" . $dir . PHP_EOL;
+		echo "[+] Loading plugin textdomain -> " . $name . " bool:" . $bool . " dir:" . $dir . PHP_EOL . '<br />';
 	}
 
 	function get_option( $name, $int = 0 )
@@ -246,32 +250,42 @@
 
 	function get_site_option( $name, $int = 0 )
 	{
-		echo "[+] Getting site option -> " . $name . " int:" . $int . PHP_EOL;
+		echo "[+] Getting site option -> " . $name . " int:" . $int . PHP_EOL . '<br />';
 		return "";
 	}
 
 	function current_time( $str )
 	{
 		$time = " 2005-08-05 10:41:13";
-		echo "[+] Requesting current_time -> " . $str . PHP_EOL;
+		echo "[+] Requesting current_time -> " . $str . PHP_EOL . '<br />';
 		return $time;
+	}
+
+	function check_ajax_referer( $action, $nonce ) {
+		echo "[+] Check ajax referer -> " . $action . ' : ' . $nonce . PHP_EOL . '<br />';
+		return "";
+	}
+
+	function wp_send_json_error( $data = array( 'success' => 'false' ) ) {
+		echo "[+] wp_send_json_error : " . implode( ', ', $data ) . PHP_EOL . '<br />';
+		return "";
 	}
 
 	class WPDB
 	{
 		function prepare( $request = "" )
 		{
-			echo "[+] Preparing -> " . $request . PHP_EOL;
+			echo "[+] Preparing -> " . $request . PHP_EOL . '<br />';
 		}
 
 		public static function get_var( $request = "" )
 		{
-			echo "[+] Requesting get var -> " . $request . PHP_EOL;
+			echo "[+] Requesting get var -> " . $request . PHP_EOL . '<br />';
 		}
 
 		public static function get_charset_collate( $request = "" )
 		{
-			echo "[+] Requesting get charset collate -> " . $request . PHP_EOL;
+			echo "[+] Requesting get charset collate -> " . $request . PHP_EOL . '<br />';
 		}
 
 		public $usermeta = "usermeta";

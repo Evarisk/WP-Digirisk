@@ -1,4 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+
 <li class="wp-digi-list-item" data-id="<?php echo $user->id; ?>">
 	<span class="wp-avatar" style="background: #<?php echo $user->option['user_info']['avatar_color']; ?>;" ><?php echo $user->option['user_info']['initial']; ?></span>
 	<span><strong>U<?php echo $user->id; ?></strong></span>

@@ -29,6 +29,9 @@ class scale_util {
     if( empty( $list_scale ) )
 			return false;
 
+		$list_ecart = array();
+		$list_key = array();
+
     foreach( $list_scale as $key => $value ) {
 			if( $level - $value >= 0 ) {
 				$list_ecart[$value] = $level - $value;
