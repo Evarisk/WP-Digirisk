@@ -226,7 +226,7 @@ class document_class extends post_class {
 	 * @param Object $element L'élément courant sur lequel on souhaite générer un document / Current element where the user want to generate a file for
 	 *
 	 */
-	function generate_document( $model_path, $document_content, $document_name, $document_id = 0 ) {
+	function generate_document( $model_path, $document_content, $document_name ) {
 		$response = array(
 			'status'	=> false,
 			'message'	=> '',
@@ -266,7 +266,7 @@ class document_class extends post_class {
 		$DigiOdf->saveToDisk( $document_path );
 
 		/**	Dans le cas ou le fichier a bien été généré, on met a jour les informations dans la base de données / In case the file have been saved successfully, save information into database	*/
-		if ( is_file( $document_path ) && ( 0 !== $document_id ) ) {
+		if ( is_file( $document_path ) ) {
 			$response[ 'status' ] = true;
 			$response[ 'link' ] = $document_path;
 		}
@@ -416,51 +416,29 @@ class document_class extends post_class {
 	 */
 	function create_zip( $final_file_path, $file_list, $element ) {
 		$zip = new ZipArchive();
-		if( $zip->open( $final_file_path, ZipArchive::CREATE) !== TRUE ) {
+
+		$response = array();
+
+		if( $zip->open( $final_file_path, ZipArchive::CREATE ) !== TRUE ) {
 			$response['status'] = false;
 			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'digirisk' );
 		}
 
-		$zip->addFile( $response['link'], $response['name'] );
-
 		if( !empty( $file_list ) ) {
 			foreach( $file_list as $file ) {
-				$zip->addFile( $file['link'], $file['name'] );
+				$zip->addFile( $file['link'], $file['filename'] );
 			}
 		}
 		$zip->close();
 
-		$element_duer_media_args = array(
-			'post_content'  => '',
-			'post_status'   => 'inherit',
-			'post_author'	=> get_current_user_id(),
-			'post_date'		=> current_time( 'mysql', 0 ),
-			'post_title'	=> !empty( $_POST ) && !empty( $_POST[ 'wpdigi_duer' ] ) && !empty( $_POST[ 'wpdigi_duer' ][ 'document_name' ] ) ? str_replace( '.odt', '', sanitize_text_field( strip_tags( $_POST[ 'wpdigi_duer' ][ 'document_name' ] ) ) ) . '_V' . $document_revision : ( mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->option[ 'unique_identifier' ] . '_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $document_revision ),
-			'id' 			=> $element->id,
-			'type'			=> $element->type,
-		);
-		$element_zip_id = wp_insert_attachment( $element_duer_media_args, '', $element_duer_media_args['id'] );
+		$document_creation_response = document_class::get()->create_document( $element, array( 'zip' ), $file_list );
+		$document_creation_response = wp_parse_args( $document_creation_response, $response );
+		if ( !empty( $document_creation_response[ 'id' ] ) ) {
+			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
+			group_class::get()->update( $element );
+		}
 
-		$element_file_details['zip'] = true;
-
-		$work_unit_sheet_args = array(
-			'id'					=> $element_zip_id,
-			'status'    			=> 'inherit',
-			'author_id'				=> get_current_user_id(),
-			'date'			 		=> current_time( 'mysql', 0 ),
-			'mime_type'				=> $filetype[ 'type' ],
-			'option'				=> array (
-				'unique_key'			=> $next_document_key,
-				'unique_identifier' 	=> 'ZIP' . $next_document_key,
-				'model_id' 				=> $element_model_to_use,
-				'document_meta' 		=> json_encode( $element_file_details ),
-			),
-		);
-		$document = $this->update( $work_unit_sheet_args );
-
-		wp_set_object_terms( $element_zip_id, array( 'printed', 'document_unique', ), $document_controller->attached_taxonomy_type );
-
-		return $response;
+		return $document_creation_response;
 	}
 
 	/**
@@ -482,76 +460,84 @@ class document_class extends post_class {
 		$model_response = $this->get_model_for_element( $document_type );
 		$model_to_use = $model_response[ 'model_path' ];
 
-	  	/**	Définition de la révision du document / Define the document version	*/
-	  	$document_revision = $this->get_document_type_next_revision( $document_type, $element->id );
+  	/**	Définition de la révision du document / Define the document version	*/
+  	$document_revision = $this->get_document_type_next_revision( $document_type, $element->id );
 
-	  	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
-	  	$main_title_part = $element->title;
-	  	if ( !empty( $document_type ) && is_array( $document_type ) ) {
-	  		$main_title_part = $main_title_part . '_' . $document_type[ 0 ];
-	  	}
+  	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
+  	$main_title_part = $element->title;
+  	if ( !empty( $document_type ) && is_array( $document_type ) ) {
+  		$main_title_part = $main_title_part . '_' . $document_type[ 0 ];
+  	}
 
-	  	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/
-	  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->option[ 'unique_identifier' ] . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
-	  	$document_args = array(
-  			'post_content'	=> '',
-  			'post_status'	=> 'inherit',
-  			'post_author'	=> get_current_user_id(),
-  			'post_date'		=> current_time( 'mysql', 0 ),
-  			'post_title'	=> basename( $response[ 'filename' ], '.odt' ),
-	  	);
-	  	$response[ 'id' ] = wp_insert_attachment( $document_args, '', $element->id );
+  	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/
+  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->option[ 'unique_identifier' ] . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
+  	$document_args = array(
+			'post_content'	=> '',
+			'post_status'	=> 'inherit',
+			'post_author'	=> get_current_user_id(),
+			'post_date'		=> current_time( 'mysql', 0 ),
+			'post_title'	=> basename( $response[ 'filename' ], '.odt' ),
+  	);
 
-	  	wp_set_object_terms( $response[ 'id' ], wp_parse_args( $document_type, array( 'printed', ) ), $this->attached_taxonomy_type );
+  	/**	On créé le document / Create the document	*/
+  	$filetype = 'unknown';
+		$path = '';
 
-	  	/**	On créé le document / Create the document	*/
-	  	$filetype = 'unknown';
-	  	if ( null !== $model_to_use ) {
-	  		$document_creation = $this->generate_document( $model_to_use, $document_data, $element->type. '/' . $element->id . '/' . $response[ 'filename' ] , $response[ 'id' ] );
+  	if ( null !== $model_to_use ) {
+			$path = $element->type. '/' . $element->id . '/' . $response[ 'filename' ];
+  		$document_creation = $this->generate_document( $model_to_use, $document_data, $path );
 
-	  		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
-	  			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
-	  			$response[ 'link' ] = $document_creation[ 'link' ];
-	  			$response[ 'message' ] = __( 'The sheet have been generated successfully. Please find it below', 'digirisk' );
-	  		}
-	  		else {
-	  			$response = wp_parse_args( $document_creation, $response );
-	  		}
-	  	}
-	  	else {
-	  		$response[ 'status' ] = false;
-	  		$response[ 'message' ] = $model_response[ 'message' ];
-	  	}
+  		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
+  			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
+  			$response[ 'link' ] = $document_creation[ 'link' ];
+  			$response[ 'message' ] = __( 'The sheet have been generated successfully. Please find it below', 'digirisk' );
+  		}
+  		else {
+  			$response = wp_parse_args( $document_creation, $response );
+  		}
+  	}
+  	else {
+  		$response[ 'status' ] = false;
+  		$response[ 'message' ] = $model_response[ 'message' ];
+  	}
 
-	  	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
-	  	$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $this->get_post_type() ) + 1 );
-	  	$document_args = array(
-  			'id'			=> $response[ 'id' ],
-  			'status'    	=> 'inherit',
-  			'author_id'		=> get_current_user_id(),
-  			'date'			=> current_time( 'mysql', 0 ),
-  			'mime_type'		=> $filetype[ 'type' ],
-  			'option'			=> array (
-  				'unique_key'		=> $next_document_key,
-  				'unique_identifier' => $this->element_prefix . $next_document_key,
-  				'model_id' 			=> $model_to_use,
-  				'document_meta' 	=> json_encode( $document_data ),
-  				'version'			=> '',
-  			),
-	  	);
-	  	$document = $this->update( $document_args );
-	  	$document = $this->show( $response[ 'id' ] );
+		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_document_path() . '/' . $path, $element->id );
 
-	  	$document_full_path = null;
-	  	if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
-	  		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
-	  	}
-	  	ob_start();
-	  	require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
-	  	$response[ 'output' ] = ob_get_contents();
-	  	ob_end_clean();
+		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_document_path() . '/' . $path );
+		wp_update_attachment_metadata( $response['id'], $attach_data );
 
-	  	return $response;
+		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $document_type, array( 'printed', ) ), $this->attached_taxonomy_type );
+
+  	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
+  	$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $this->get_post_type() ) + 1 );
+  	$document_args = array(
+			'id'			=> $response[ 'id' ],
+			'status'    	=> 'inherit',
+			'author_id'		=> get_current_user_id(),
+			'date'			=> current_time( 'mysql', 0 ),
+			'mime_type'		=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
+			'option'			=> array (
+				'unique_key'		=> $next_document_key,
+				'unique_identifier' => $this->element_prefix . $next_document_key,
+				'model_id' 			=> $model_to_use,
+				'document_meta' 	=> json_encode( $document_data ),
+				'version'			=> '',
+			),
+  	);
+  	$document = $this->update( $document_args );
+  	$document = $this->show( $response[ 'id' ] );
+
+  	$document_full_path = null;
+  	if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
+  		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
+  	}
+
+  	ob_start();
+  	require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
+  	$response[ 'output' ] = ob_get_contents();
+  	ob_end_clean();
+
+  	return $response;
 	}
 
 }

@@ -195,6 +195,69 @@ class group_class extends post_class {
 		return $risks_in_tree;
 	}
 
+	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
+		$element_children = array();
+		$element_tree = '';
+
+		$element_children[ $element->option[ 'unique_identifier' ] ] = array( 'nomElement' => $tabulation . ' ' . $element->option[ 'unique_identifier' ] . ' - ' . $element->title, ) ;
+		if ( !empty( $extra_params ) ) {
+			if ( !empty( $extra_params[ 'default' ] ) ) {
+				$element_children[ $element->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'default' ], $element_children[ $element->option[ 'unique_identifier' ] ] );
+			}
+			if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $element->option[ 'unique_identifier' ], $extra_params[ 'value' ] ) ) {
+				$element_children[ $element->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'value' ][ $element->option[ 'unique_identifier' ] ], $element_children[ $element->option[ 'unique_identifier' ] ] );
+			}
+		}
+		/**	Liste les enfants direct de l'élément / List children of current element	*/
+		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id , 'post_status' => array( 'publish', 'draft', ), ), false );
+		foreach ( $group_list as $group ) {
+			$element_children = array_merge( $element_children, $this->get_element_sub_tree( $group, $tabulation . '-', $extra_params ) );
+		}
+
+		$tabulation = $tabulation . '-';
+		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		foreach ( $work_unit_list as $workunit ) {
+			$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = array( 'nomElement' => $tabulation . ' ' . $workunit->option[ 'unique_identifier' ] . ' - ' . $workunit->title, );
+
+			if ( !empty( $extra_params ) ) {
+				if ( !empty( $extra_params[ 'default' ] ) ) {
+					$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'default' ], $workunit_definition[ $workunit->option[ 'unique_identifier' ] ] );
+				}
+				if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $workunit->option[ 'unique_identifier' ], $extra_params[ 'value' ] ) ) {
+					$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'value' ][ $workunit->option[ 'unique_identifier' ] ], $workunit_definition[ $workunit->option[ 'unique_identifier' ] ] );
+				}
+			}
+			$element_children = array_merge( $element_children, $workunit_definition );
+		}
+
+		return $element_children;
+	}
+
+	public function get_element_sub_tree_id( $element_id, $list_id ) {
+		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ), false );
+		if( !empty( $group_list ) ) {
+			foreach ( $group_list as $group ) {
+				$list_id[] = array( 'id' => $group->id, 'workunit' => array() );
+				// $list_id[count($list_id) - 1] = array();
+				// $list_id[count($list_id) - 1]['workunit'] = array();
+				$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+				foreach ( $work_unit_list as $workunit ) {
+					$list_id[count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
+				}
+				$list_id = $this->get_element_sub_tree_id( $group->id, $list_id );
+			}
+		}
+		else {
+			$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element_id, 'post_status' => array( 'publish', 'draft', ), ), false );
+			foreach ( $work_unit_list as $workunit ) {
+				// $list_id[count($list_id) - 1 == -1 ? 0 : count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
+			}
+		}
+
+
+		return $list_id;
+	}
+
 	/**
 	 * Construction de la liste des risques pour un élément donné / Build risks' list for a given element
 	 *

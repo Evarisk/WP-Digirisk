@@ -39,6 +39,17 @@ class group_duer_class extends singleton_util {
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
 			group_class::get()->update( $element );
+			$element = group_class::get()->show( $id );
+		}
+
+		$all_file = $this->generate_child( $element );
+		$all_file[] = $document_creation_response;
+
+		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
+		$zip_generation_result = document_class::get()->create_zip( document_class::get()->get_document_path() . '/' . $element->type . '/' . $element->id . '/' . $element->title . '_merged.zip', $all_file, $element );
+		if ( !empty( $zip_generation_result[ 'file_id' ] ) ) {
+			$element->option[ 'associated_document_id' ][ 'document' ][] = $zip_generation_result[ 'file_id' ];
+			$element = group_class::get()->update( $element );
 		}
 
 		return true;
@@ -167,10 +178,6 @@ class group_duer_class extends singleton_util {
 		return $data_to_document;
 	}
 
-	public function fill_data_risk_pa() {
-
-	}
-
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
@@ -189,46 +196,39 @@ class group_duer_class extends singleton_util {
 		return $audit_date;
 	}
 
-	public function generate_child() {
+	public function generate_child( $element ) {
 		// Generate children
 		$list_id = array();
 
 		/**	Build a file list to set into the final zip / Contruit la liste des fichiers a ajouter dans le zip lorsque les générations sont terminées	*/
-		$response['file'] = array();
-		$response['file'][] = sheet_groupment_class::get()->generate_sheet( $element->id );
+		$response = array();
+		$response[] = sheet_groupment_class::get()->generate_sheet( $element->id );
 
 		/**	Get workunit list for the current group / Récupération de la liste des unités de travail pour le groupement actuel	*/
 		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach( $work_unit_list as $workunit ) {
-			$response['file'][] = workunit_class::get()->generate_workunit_sheet( $workunit->id );
+			$response[] = workunit_class::get()->generate_workunit_sheet( $workunit->id );
 		}
 
-		$list_id = $this->get_element_sub_tree_id( $element->id, $list_id );
+		$list_id = group_class::get()->get_element_sub_tree_id( $element->id, $list_id );
 		if ( !empty( $list_id ) ) {
 			foreach( $list_id as $element ) {
 				if( !empty( $element['workunit'] ) ) {
 					if( !empty( $element['id'] ) ) {
-						$response['file'][] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
+						$response[] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
 					}
 					foreach( $element['workunit'] as $workunit_id ) {
-						$response['file'][] = workunit_class::get()->generate_workunit_sheet( $workunit_id['id'] );
+						$response[] = workunit_class::get()->generate_workunit_sheet( $workunit_id['id'] );
 					}
 				}
 				else {
 					if( !empty( $element['id'] ) ) {
-						$response['file'][] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
+						$response[] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
 					}
 				}
 			}
 		}
 
-		$response['link'] = $document_creation_response[ 'link' ];
-
-		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
-		$zip_generation_result = document_class::get()->create_zip( document_class::get()->get_document_path() . '/' . $element_duer_media_args['type'] . '/' . $element_duer_media_args['id'] . '/' . $element_duer_media_args[ 'post_title' ] . '_merged.zip', $response['file'], $element );
-		if ( !empty( $zip_generation_result[ 'file_id' ] ) ) {
-			$element->option[ 'associated_document_id' ][ 'document' ][] = $zip_generation_result[ 'file_id' ];
-			$element = group_class::get()->update( $element );
-		}
+		return $response;
 	}
 }

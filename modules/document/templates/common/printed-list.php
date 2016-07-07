@@ -8,8 +8,8 @@
 	$document->option['document_meta'] = json_decode( $document->option['document_meta' ] );
 	$document_full_path = null;
 
-	if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '_merged.zip' )  && !empty( $document->option['document_meta']->zip ) ) {
-		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '_merged.zip';
+	if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $element->title . '_merged.zip' ) ) {
+		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $element->title . '_merged.zip';
 	}
 	else if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
 		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
