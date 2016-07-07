@@ -14,35 +14,6 @@
  */
 class group_duer_class extends singleton_util {
 	protected function construct() {}
-	//
-	// public function prepare_data() {
-	// 	/**	Récupération de la liste des risques pour l'élément actuel et ses sous-éléments	de façon récursive / Get risks list for current element and recursivly sub elements */
-	// 	$risk_details = $this->get_element_tree_risk( $element );
-	//
-	// 	$risk_per_element = array();
-	// 	foreach ( $risk_details as $risk_for_export ) {
-	// 		$final_level = scale_util::get_scale( $risk_for_export[ 'niveauRisque' ] );
-	// 		$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk_for_export;
-	// 		$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $risk_for_export;
-	// 		$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk_for_export;
-	//
-	// 		if ( !isset( $risk_per_element[ $risk_for_export[ 'idElement' ] ] ) ) {
-	// 			$risk_per_element[ $risk_for_export[ 'idElement' ] ][ 'quotationTotale' ] = 0;
-	// 		}
-	// 		$risk_per_element[ $risk_for_export[ 'idElement' ] ][ 'quotationTotale' ] += $risk_for_export[ 'quotationRisque' ];
-	// 	}
-	//
-	// 	/**	Construction de l'arborescence contenue dans l'élément sur lequel on est placé / Build tree under element we are on	*/
-	// 	$element_tree = $this->get_element_sub_tree( $element );
-	// 	$element_file_details[ 'elementParHierarchie' ][ 'value' ] = $element_tree;
-	//
-	// 	/***/
-	// 	$element_tree = $this->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
-	// 	$element_file_details[ 'risqueFiche' ][ 'value' ] = $element_tree;
-	//
-	//
-	// 	return $element_file_details;
-	// }
 
 	public function generate( $data ) {
 		if ( empty( $data ) || empty( $data['element_id'] ) ) {
