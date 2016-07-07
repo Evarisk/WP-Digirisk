@@ -52,26 +52,6 @@ class legal_display_action {
   }
 
   public function generate_sheet( $data, $element_parent, $format = "A4" ) {
-		/**	Début de la génération du document / Start document generation	*/
-		$document_controller = new document_controller_01();
-
-		/**	Définition du modèle de document a utiliser pour l'impression / Define the document model to use for print sheet */
-		$group_model_to_use = null;
-		$group_model_id_to_use = !empty( $_POST ) && !empty( $_POST[ 'document_model_id' ] ) && is_int( (int)$_POST[ 'document_model_id' ] ) ? (int)$_POST[ 'document_model_id' ] : null ;
-
-		/**	Récupération de la liste des modèles existants pour l'élément actuel / Get model list for current group	*/
-		if ( null === $group_model_id_to_use ) {
-			$response = $document_controller->get_model_for_element( array( 'affichage_legal_' . $format, ) );
-			if ( false === $response[ 'status' ] ) {
-				wp_send_json_error( $response );
-			}
-
-      $group_model_to_use = $response['model_path'];
-    }
-
-		/**	Définition de la révision du document / Define the document version	*/
-		$document_revision = $document_controller->get_document_type_next_revision( array( 'legal_display' ), $element_parent->id );
-
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
       'inspection_du_travail_nom' => $data['detective_work']->option['full_name'],
@@ -125,45 +105,15 @@ class legal_display_action {
 			'dimanche_aprem' => $data['legal_display']->option['working_hour']['sunday_afternoon'],
 		);
 
-		$attachment_detail = array(
-			'post_content'   => '',
-			'post_status'    => 'inherit',
-			'post_author'		 => get_current_user_id(),
-			'post_date'			 => current_time( 'mysql', 0 ),
-			'post_title'		 => mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_affichage_legal_' . $element_parent->option['unique_identifier'] . '_' . $format . '_V' . $document_revision,
-			'id' 							=> $element_parent->id,
-			'type'						=> $element_parent->type,
-		);
+		$document_creation = document_class::get()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
 
-		$legal_display_attachment_id = wp_insert_attachment( $attachment_detail, '', $element_parent->id );
-
-    $document_creation = $document_controller->create_document( $group_model_to_use, $legal_display_sheet_details, $element_parent->type. '/' . $element_parent->id . '/' . $attachment_detail['post_title'] . '.odt', null );
 		$filetype = 'unknown';
 		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
 			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
 		}
 
-		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
+		$element_parent->option['associated_document_id']['document'][] = $document_creation['id'];
 		group_class::get()->update( $element_parent );
-		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
-
-		/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
-		$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $document_controller->get_post_type() ) + 1 );
-		$sheet_args = array(
-			'id'					=> $legal_display_attachment_id,
-			'status'    	=> 'inherit',
-			'author_id'		=> get_current_user_id(),
-			'date'			 	=> current_time( 'mysql', 0 ),
-			'mime_type'		=> $filetype[ 'type' ],
-			'option'			=> array (
-				'unique_key'						=> $next_document_key,
-				'unique_identifier' 		=> $document_controller->element_prefix . $next_document_key,
-				'model_id' 							=> $group_model_to_use,
-				'document_meta' 				=> json_encode( $legal_display_sheet_details ),
-				'version'								=> '',
-			),
-		);
-		 $document_controller->update( $sheet_args );
 	}
 
 
