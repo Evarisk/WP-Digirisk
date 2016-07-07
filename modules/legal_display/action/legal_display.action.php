@@ -6,9 +6,6 @@ class legal_display_action {
   }
 
   public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
-    global $legal_display_ctr;
-		global $wpdigi_group_ctr;
-
     // Récupère les tableaux
     $emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
     $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
@@ -19,7 +16,7 @@ class legal_display_action {
     $rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
     $parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
-    $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', $legal_display_ctr->get_post_type() );
+    $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', legal_display_class::get()->get_post_type() );
 		$last_unique_key++;
 
     // @todo sécurisé
@@ -33,21 +30,21 @@ class legal_display_action {
       'collective_agreement' => $collective_agreement,
       'DUER' => $DUER,
       'rules' => $rules,
-      'unique_identifier' => $legal_display_ctr->element_prefix . $last_unique_key,
+      'unique_identifier' => legal_display_class::get()->element_prefix . $last_unique_key,
       'unique_key' => $last_unique_key,
       'parent_id' => $parent_id,
     );
 
-    $legal_display = $legal_display_ctr->save_data( $legal_display_data );
+    $legal_display = legal_display_class::get()->save_data( $legal_display_data );
 
 		// Toutes les données de l'affichage légal
-		$all_data = $legal_display_ctr->load_data( $parent_id );
-		$element_parent = $wpdigi_group_ctr->show( $parent_id );
+		$all_data = legal_display_class::get()->load_data( $parent_id );
+		$element_parent = group_class::get()->show( $parent_id );
 
     $this->generate_sheet( $all_data, $element_parent );
 
 		// Bug des modèles
-		$element_parent = $wpdigi_group_ctr->show( $parent_id );
+		$element_parent = group_class::get()->show( $parent_id );
 
     $this->generate_sheet( $all_data, $element_parent, "A3" );
 
@@ -55,8 +52,6 @@ class legal_display_action {
   }
 
   public function generate_sheet( $data, $element_parent, $format = "A4" ) {
-		global $wpdigi_group_ctr;
-
 		/**	Début de la génération du document / Start document generation	*/
 		$document_controller = new document_controller_01();
 
@@ -149,7 +144,7 @@ class legal_display_action {
 		}
 
 		$element_parent->option['associated_document_id']['document'][] = $legal_display_attachment_id;
-		$wpdigi_group_ctr->update( $element_parent );
+		group_class::get()->update( $element_parent );
 		wp_set_object_terms( $legal_display_attachment_id, array( 'printed', 'legal_display', ), $document_controller->attached_taxonomy_type );
 
 		/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
