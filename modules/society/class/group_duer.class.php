@@ -46,7 +46,8 @@ class group_duer_class extends singleton_util {
 		$all_file[] = $document_creation_response;
 
 		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
-		$zip_generation_result = document_class::get()->create_zip( document_class::get()->get_document_path() . '/' . $element->type . '/' . $element->id . '/' . $element->title . '_merged.zip', $all_file, $element );
+		$version = document_class::get()->get_document_type_next_revision( array( 'zip' ), $element->id );
+		$zip_generation_result = document_class::get()->create_zip( document_class::get()->get_document_path() . '/' . $element->type . '/' . $element->id . '/' . $element->title . '_merged_V' . $version . '.zip', $all_file, $element, $version );
 		if ( !empty( $zip_generation_result[ 'file_id' ] ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $zip_generation_result[ 'file_id' ];
 			$element = group_class::get()->update( $element );

@@ -414,7 +414,7 @@ class document_class extends post_class {
 	 * @param array $file_list The file list to add to the zip file / La liste des fichiers à ajouter au fichier zip
 	 * @param Object $element The current element where to associate the zip file to / L'élément auquel il faut associer le fichier zip
 	 */
-	function create_zip( $final_file_path, $file_list, $element ) {
+	function create_zip( $final_file_path, $file_list, $element, $version ) {
 		$zip = new ZipArchive();
 
 		$response = array();
@@ -431,7 +431,7 @@ class document_class extends post_class {
 		}
 		$zip->close();
 
-		$document_creation_response = document_class::get()->create_document( $element, array( 'zip' ), $file_list );
+		$document_creation_response = document_class::get()->create_document( $element, array( 'zip' ), $file_list, $version );
 		$document_creation_response = wp_parse_args( $document_creation_response, $response );
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
@@ -521,7 +521,7 @@ class document_class extends post_class {
 				'unique_identifier' => $this->element_prefix . $next_document_key,
 				'model_id' 			=> $model_to_use,
 				'document_meta' 	=> json_encode( $document_data ),
-				'version'			=> '',
+				'version'			=> $document_revision,
 			),
   	);
   	$document = $this->update( $document_args );
