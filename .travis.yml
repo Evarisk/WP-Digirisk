@@ -8,4 +8,4 @@ php:
   - hhvm
   - nightly
 
-script: php core/external/wordpress_validator/class/wordpress_validator.class.php
+script: php core/external/wordpress_validator/wordpress_validator.php

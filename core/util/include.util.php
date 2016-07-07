@@ -21,11 +21,14 @@ class include_util extends singleton_util {
   public static function inc( $folder, $list_extension, $recursive = false ) {
 		/**	Check if the defined directory exists for reading and including the different modules	*/
     $list_file = self::get()->get_list_file( $folder, $list_extension );
+		$list_exclude_dir = array( 'core\\\external' );
     $ordered_file = array();
 
   	foreach ( $list_file as $file ) {
       if ( !empty( $file[0] ) && !empty( $file[1] ) && is_file($file[0]) )  {
-        $ordered_file[$file[1]][] = $file[0];
+				if ( !preg_match( '/' . implode( '|', $list_exclude_dir ) . '/', $file[0] ) ) {
+        	$ordered_file[$file[1]][] = $file[0];
+				}
       }
     }
 
