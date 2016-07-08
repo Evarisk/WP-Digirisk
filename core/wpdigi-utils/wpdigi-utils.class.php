@@ -1,48 +1,21 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 class wpdigi_utils {
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "CORE - Instanciation de la classe / Object instanciation",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 0.1
-	}
+	/**
+	* Le constructeur
 	*/
 	function __construct() {}
 
-	/* PRODEST:
-	 {
-		 "name": "get_template_part",
-		 "description": "INTERNAL LIB - Vérifie et récupère si il existe le fichier template pour le bloc a afficher / Check and get the template file path to use for a given display part ",
-		 "type": "function",
-		 "check": true,
-		 "author":
-		 {
-			 "email": "dev@evarisk.com",
-			 "name": "Alexandre T"
-		 },
-		 "param":
-		 {
-			 "$plugin_dir_name": {"type": "string", "description": "The main directory name containing the plugin", "default": "null"},
-			 "$main_template_dir": {"type": "string", "description": "The main directory containing the templates used for display", "default": "null"},
-			 "$side": {"type": "string", "description": "The website part were the template will be displayed. Backend or frontend", "default": "null"},
-			 "$slug": {"type": "string", "description": "The slug name for the generic template.", "default": "null"},
-			 "$name": {"type": "string", "description": "The name of the specialised template.", "default": "null"}
-		 },
-		 "return":
-		 {
-		 	"$path": {"type": "string", "description": "The template file path to use if founded" }
-		 },
-		 "version": 0.1
-	 }
-	 */
+	/**
+	* Récupères le template par rapport au chemin donné
+	*
+	* @param string $plugin_dir_name (test: path/to/plugin) Le chemin vers le dossier du plugin
+	* @param string $main_template_dir (test: path/to/template) Le chemin vers le dossier du template
+	* @param string $side (test: backend) Le sous dossier dans template
+	* @param string $slug (test: main) Le nom du template
+	* @param string $name (test: view) Le sous nom du template
+	* @param bool $debug (test: bool) Active le mode debug
+	*/
 	static function get_template_part( $plugin_dir_name, $main_template_dir, $side, $slug, $name = null, $debug = null ) {
 		$path = '';
 
@@ -91,19 +64,8 @@ class wpdigi_utils {
 		return $path;
 	}
 
-	/* PRODEST:
-	{
-		"name": "activation",
-		"description": "CORE - Lance des actions spécifiques lors de l'activation de l'extension / Make some specific action on plugin activation",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 0.1
-	}
+	/**
+	* test
 	*/
 	public static function activation() {
 		do_action( 'digi-extra-module-activation' );
@@ -115,7 +77,10 @@ class wpdigi_utils {
 	/**
 	 * Récupération du dernier index unique pour un type
 	 *
-	 * @return boolean|integer Retourne la valeur du dernier index unique pour les éléments digirisk / Return the last index for digirisk element
+	 * @param string $wp_type (test: post) Le type de la donnée
+	 * @param string $element_type (test: digi-risk) Le type de la donnée
+	 *
+	 * @return integer Retourne la valeur du dernier index unique pour les éléments digirisk / Return the last index for digirisk element
 	 */
 	public static function get_last_unique_key( $wp_type, $element_type ) {
 		if ( empty( $wp_type ) || empty( $element_type ) )
@@ -165,6 +130,14 @@ class wpdigi_utils {
 		return $last_unique_key;
 	}
 
+	/**
+	* Upload un fichier et créer ensuite les meta données
+	*
+	* @param string $file (test: path/to/file) Le chemin vers le fichier
+	* @param int $element_id (test: 1) L'id de l'élement parent
+	*
+	* @return int L'attachement id
+	*/
 	public static function upload_file( $file, $element_id ) {
 		$wp_upload_dir = wp_upload_dir();
 
@@ -192,44 +165,14 @@ class wpdigi_utils {
 		return $attach_id;
 	}
 
-	public static function check( $action_nonce ) {
-
-		$nonce = sanitize_key( $_REQUEST['_wpnonce'] );
-
-		/** Est-ce que _wpnonce existe ? */
-		if ( !isset( $nonce ) ) {
-			wp_send_json_error();
-		}
-
-		/**
-		 * Vérification du nonce avec la fonction wp_verify_nonce de WordPress. Cette fonction
-		 * sanitize la valeur de $nonce
-		 */
-		if ( !wp_verify_nonce( $nonce, $action_nonce ) ) {
-			wp_send_json_error();
-		}
-
-		/**
-		 * Est ce que je suis bien sur une page admin ?
-		 */
-		// 		$adminurl = strtolower( admin_url() );
-		// 		$referer = strtolower( wp_get_referer() );
-		// 		echo __LINE__ . $adminurl . '<br />';
-		// 		echo __LINE__ . $referer;
-
-		// 		if( strpos( $referer, $adminurl ) !== 0 ) {
-		// 			wp_send_json_error();
-		// 		}
-
-		/**
-		 * Vérification des capabilities de l'utilisateur courant avec la fonction current_user_can
-		 * de WordPress. Est-ce qu'il à droit de crée une tâche ?
-		 */
-		if ( !current_user_can( 'edit_posts' ) ) {
-			wp_send_json_error();
-		}
-	}
-
+	/**
+	* Est ce que le post est un parent des enfants ?
+	*
+	* @param int $parent_id (test: 10) L'id du post parent
+	* @param int $children_id (test: 11) L'id du post enfant
+	*
+	* @return bool true|false
+	*/
 	public static function is_parent( $parent_id, $children_id ) {
 		$list_parent_id = get_post_ancestors( $children_id );
 		if ( !empty( $list_parent_id) && in_array( $parent_id, $list_parent_id ) )
