@@ -18,6 +18,14 @@ class comment_class extends singleton_util {
 		add_filter( 'json_endpoints', array( &$this, 'callback_register_route' ) );
 	}
 
+	/**
+	* Met à jour le commentaire et les meta.
+	* Appelle la méthode create si l'objet ou le tableau n'a pas d'ID.
+	*
+	* @param array $data Les données envoyées
+	*
+	* @return object comment_model object
+	*/
 	public function update( $data ) {
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
 			return $this->create( $data );
@@ -52,6 +60,13 @@ class comment_class extends singleton_util {
 		}
 	}
 
+	/**
+	* Créer le commentaire et les meta.
+	*
+	* @param array $data Les données envoyées
+	*
+	* @return object comment_model object
+	*/
 	public function create( $data ) {
 
 		$object = $data;
@@ -85,10 +100,24 @@ class comment_class extends singleton_util {
 		return $cloned_object;
 	}
 
+	/**
+	* Supprimes un commentaire en utilisant son ID
+	*
+	* @param int $id (test: 10) L'id du commentaire
+	*
+	*/
 	public function delete( $id ) {
 		wp_delete_comment( $id );
 	}
 
+	/**
+	* Récupères le commentaire dans la base de donnée et le transforme en objet selon le modèle
+	*
+	* @param int $id (test: 10) L'id du commentaire
+	* @param bool $croppred (test: false) Récupère les meta si true.
+	*
+	* @return object comment_model object
+	*/
 	public function show( $id, $cropped = false ) {
 		$comment = get_comment( $id );
 
@@ -97,6 +126,15 @@ class comment_class extends singleton_util {
 		return $comment;
 	}
 
+	/**
+	* Récupères tous les commentaires d'un post dans la base de donnée et le transforme en objet selon le modèle
+	*
+	* @param int $post_id (test: 10) Le post parent
+	* @param array $args_where (test: parent => 9, status => -34070) Récupère les meta si true.
+	* @param bool $croppred (test: false) Récupère les meta si true.
+	*
+	* @return object comment_model object
+	*/
 	public function index( $post_id = 0, $args_where = array( 'parent' => 0, 'status' => -34070, ), $cropped = false ) {
 		$array_model = array();
 
@@ -150,10 +188,20 @@ class comment_class extends singleton_util {
 		return $array_route;
 	}
 
+	/**
+	* Renvoie le type du commentaire
+	*
+	* @return string Le type du commentaire
+	*/
 	public function get_type() {
 		return $this->comment_type;
 	}
 
+	/**
+	* Récupères la dernière ID enregistrée dans la base de donnée
+	*
+	* @return int La dernière ID
+	*/
 	public function get_last_entry() {
 		global $wpdb;
 
