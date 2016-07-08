@@ -54,6 +54,13 @@ final class Object_ implements Type
         return $this->fqsen;
     }
 
+		public function getType() {
+			if ($this->fqsen) {
+					return (string)$this->fqsen;
+			}
+
+			return 'object';
+		}
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      *
