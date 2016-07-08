@@ -18,9 +18,11 @@ require_once( PLUGIN_PATH . 'core/external/ReflectionDocBlock/DocBlock/Tags/Form
 
 
 $file_class = new file_class();
+
 // $list_all_php_file = $file_class->get_list_file( PLUGIN_PATH, array( 'php' ) );
 // $request_test = new request_test( $list_all_php_file );
 // // $request_test->execute();
+
 $file_class->inc( PLUGIN_PATH . 'core/wpeo_model', array( 'class', 'model' ) );
 $file_class->inc( PLUGIN_PATH . 'core/wpdigi-utils', array( 'class', 'model' ) );
 $file_class->inc( PLUGIN_PATH . 'core/external/webmozart', array( ) );

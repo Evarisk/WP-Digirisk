@@ -25,8 +25,9 @@ class functional_test {
 		  foreach ( $this->list_file as $file_path ) {
 				$file_path[0] = str_replace( '/', '\\', $file_path[0] );
 				if ( !in_array( $file_path[0], $this->exclude_path ) ) {
-					$class_info = $this->get_class_info( $file_path[0] );
 					echo '[+] testing file : ' . $file_path[0] . PHP_EOL;
+
+					$class_info = $this->get_class_info( $file_path[0] );
 					$this->list_methods_to_test[$file_path[0]] = array();
 
 					$class_name = $class_info['namespace'];
@@ -39,6 +40,7 @@ class functional_test {
 
 					if ( !empty( $methods ) ) {
 					  foreach ( $methods as $element ) {
+							echo "<pre>"; print_r($element); echo "</pre>";
 							if ( empty( $this->list_methods_to_test[$file_path[0]][$element->class] ) ) {
 								$this->list_methods_to_test[$file_path[0]][$element->class] = array();
 							}
@@ -50,7 +52,6 @@ class functional_test {
 							$this->fill_method( $file_path[0], $element, $docBlock );
 					  }
 					}
-					// $this->get_paramaters_methods( $methods );
 				}
 		  }
 		}
@@ -88,7 +89,7 @@ class functional_test {
 		  }
 		}
 
-		echo "<pre>"; print_r($this->list_methods_to_test); echo "</pre>";
+		echo "<pre>"; print_r($this->list_methods_to_test[$file_path][$element->class]); echo "</pre>";
 	}
 
 	private function parseTestValue( $type, $description ) {
@@ -106,6 +107,21 @@ class functional_test {
 
 
 			$matched[1] = explode( ',', trim($matched[1]) );
+
+			$new_array = array();
+
+			if ( !empty( $matched[1] ) ) {
+			  foreach ( $matched[1] as $element ) {
+					preg_match( '/(.*)=>(.*)/', $element, $matchedKey );
+					if ( !empty( $matchedKey[1] ) && !empty( $matchedKey[2] ) ) {
+						$new_array[trim($matchedKey[1])] = trim($matchedKey[2]);
+					}
+			  }
+			}
+
+			if ( !empty( $new_array ) ) {
+				$matched[1] = $new_array;
+			}
 		}
 		else {
 			settype( $matched[1], $type );
