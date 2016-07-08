@@ -21,7 +21,7 @@ class address_class extends comment_class {
 	/**
 	* Créer une addresse
 	*
-	* @param array $data (test: postcode => 34130, address => 10 rue du clavier, town => Montpellier ) Les données a sauvegarder dans l'addresse
+	* @param array $data (test: [postcode => 34130, address => 10 rue du clavier, town => Montpellier]) Les données a sauvegarder dans l'addresse
 	*
 	* @return object The address_model object
 	*/

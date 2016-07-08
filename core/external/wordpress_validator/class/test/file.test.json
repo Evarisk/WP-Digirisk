@@ -1,0 +1,10 @@
+{
+	"inc":
+	[
+		{
+			"folder": "path/to/folder",
+			"list_type": ["class", "test"],
+			"recursive": true
+		}
+	]
+}

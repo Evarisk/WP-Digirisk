@@ -37,10 +37,10 @@ class functional_test {
 					$factory = DocBlockFactory::createInstance();
 		      $methods = $class->getMethods();
 
+					$json_content = $this->load_test_json( $file_path[0] );
 
 					if ( !empty( $methods ) ) {
 					  foreach ( $methods as $element ) {
-							echo "<pre>"; print_r($element); echo "</pre>";
 							if ( empty( $this->list_methods_to_test[$file_path[0]][$element->class] ) ) {
 								$this->list_methods_to_test[$file_path[0]][$element->class] = array();
 							}
@@ -50,6 +50,10 @@ class functional_test {
 							$docBlock = $factory->create($element->getDocComment());
 
 							$this->fill_method( $file_path[0], $element, $docBlock );
+
+							if ( !empty( $json_content ) ) {
+								$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
+							}
 					  }
 					}
 				}
@@ -81,6 +85,19 @@ class functional_test {
 		);
 	}
 
+	private function load_test_json( $file_path ) {
+		$filename = basename( $file_path, '.class.php' );
+		$path_to_json = trim( dirname( $file_path ) . '\\test\\' . $filename . '.test.json' . PHP_EOL );
+		if ( is_file ( $path_to_json ) ) {
+			$json_content = file_get_contents( $path_to_json );
+		}
+		else {
+			return '';
+		}
+
+		return json_decode( $json_content, true );
+	}
+
 	private function fill_method( $file_path, $element, $docBlock ) {
 		if ( !empty( $docBlock->getTags() ) ) {
 		  foreach ( $docBlock->getTags() as $tag ) {
@@ -88,8 +105,19 @@ class functional_test {
 				$this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['test'] = $this->parseTestValue( $this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['type'], $this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['description'] );
 		  }
 		}
+	}
 
-		echo "<pre>"; print_r($this->list_methods_to_test[$file_path][$element->class]); echo "</pre>";
+	private function call_method( $class, $file_path, $list_methods_to_test, $json_content ) {
+		if ( !empty( $list_methods_to_test ) ) {
+		  foreach ( $list_methods_to_test as $method_name =>  $method_to_test ) {
+				if ( !empty( $json_content[$method_name] ) ) {
+				  foreach ( $json_content[$method_name] as $json ) {
+						echo "<pre>"; print_r($json); echo "</pre>";
+						$class->getMethod($method_name)->invokeArgs( new $class->name(), $json );
+				  }
+				}
+		  }
+		}
 	}
 
 	private function parseTestValue( $type, $description ) {
