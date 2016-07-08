@@ -9,6 +9,13 @@ class functional_test {
 	private $list_file;
 	private $exclude_path = array();
 	private $list_methods_to_test = array();
+	private $list_default_value = array(
+		10, "test", true,
+		// array( 10, 22, 42 ),
+		// array( 10, "test", true ),
+		// array( "test", "true" ),
+		// array( true, false ),
+	);
 
 	public function __construct( $list_file ) {
 		$this->list_file = $list_file;
@@ -110,15 +117,113 @@ class functional_test {
 	private function call_method( $class, $file_path, $list_methods_to_test, $json_content ) {
 		if ( !empty( $list_methods_to_test ) ) {
 		  foreach ( $list_methods_to_test as $method_name =>  $method_to_test ) {
-				if ( !empty( $json_content[$method_name] ) ) {
-				  foreach ( $json_content[$method_name] as $json ) {
-						echo "<pre>"; print_r($json); echo "</pre>";
-						$class->getMethod($method_name)->invokeArgs( new $class->name(), $json );
-				  }
-				}
+
+				// if ( !empty( $json_content[$method_name] ) ) {
+				//   foreach ( $json_content[$method_name] as $json ) {
+						// Default value
+
+						$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0) );
+						if (  count( $method_to_test ) - 1 !== - 1) {
+							$index = 0;
+							for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
+								$array = $this->args_to_test( count( $method_to_test ) - 1, $array );
+								echo "test with : " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
+								$class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
+							}
+						}
+				  // }
+				// }
 		  }
 		}
 	}
+
+	private function args_to_test( $number, $array ) {
+		$array['args_to_test'] = array();
+
+		// echo "<pre>"; print_r($array); echo "</pre>";
+
+		for( $i = 0; $i < $number; $i++ ) {
+			if ( $array['default_test'][$i] >= $number ) {
+				$array['default_test'][$i] = 0;
+				$array['index']++;
+				$array['number']++;
+
+				if ( $array['index'] >= $number ) {
+				 	$array['index'] = 0;
+				}
+
+				if( $array['number'] >= $number ) {
+					$array['other_index']++;
+					if ( $array['other_index'] >= $number ) {
+						$array['other_index'] = 0;
+					}
+
+					$array['default_test'][$array['other_index']]++;
+
+				}
+			}
+
+			$array['args_to_test'][] = $this->list_default_value[$array['default_test'][$i]];
+
+		}
+
+		$array['default_test'][$array['index']]++;
+
+		// for ( $i = 0; $i < $number; $i++ ) {
+		// 	if ( $i === $array['number'] ) {
+		// 		$array['default_test'][$i] = $array['index'];
+		// 	}
+		// 	else {
+		// 		$array['default_test'][$i] = $array['other_index'];
+		// 	}
+		// }
+
+
+		return array(
+			'index' => $array['index'],
+			'number' => $array['number'],
+			'other_index' => $array['other_index'],
+			'args_to_test' => $array['args_to_test'],
+			'default_test' => $array['default_test'],
+		);
+	}
+
+	private function search_args( $number, $index = 0 ) {
+
+	}
+
+
+	// 			$monArray = [];
+	//
+	// 			// for 0 < n : $monArray[n] = 0;
+	//
+	// 			$monTableau = uneFonction(3, 0);
+	//
+	//
+	//
+	// 			function uneFonction($n, $index)
+	// 			{
+	//
+	// 				for($a = 0; $a < $n; $a++)
+	//
+	// 				on récupère la valeur en cours pour la variable n
+	//
+	// 				$value[$a] = $defaultValue[$monArray[$n]]
+	//
+	//
+	// 				$monArray[$index] ++
+	// 				if(monArray[$n] > $n) $index++;
+	//
+	//
+	//
+	//
+	// 			}
+	//
+	//
+	//
+	// 	echo '[+] test with ' . implode( ',', $args_to_test ) . PHP_EOL;
+	// 	return $args_to_test;
+	// }
 
 	private function parseTestValue( $type, $description ) {
 		preg_match( '/\(test:(.*)\)/' , $description, $matched );

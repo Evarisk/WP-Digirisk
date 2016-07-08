@@ -5,6 +5,18 @@
 			"folder": "path/to/folder",
 			"list_type": ["class", "test"],
 			"recursive": true
+		},
+		{
+			"folder": 10,
+			"list_type": ["class", "test"],
+			"recursive": true
+		},
+		{
+			"folder": "path/to/folder",
+			"list_type": "class",
+			"recursive": true
+		},
+		{
 		}
 	]
 }

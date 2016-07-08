@@ -5,6 +5,10 @@ class file_class {
 	* test
 	*/
 	public function get_list_file( $folder, $list_extension, $after = true, $end_ext = 'php' ) {
+		if ( !is_dir ( $folder ) ) {
+			return array();
+		}
+
     $dir = new RecursiveDirectoryIterator( $folder );
     $ite = new RecursiveIteratorIterator( $dir );
     $regex = '/^.*\\';
@@ -27,6 +31,10 @@ class file_class {
 	* @return bool True/False
 	*/
 	public function inc( $folder, $list_extension, $recursive = false ) {
+		if ( !is_array( $list_extension ) ) {
+				return array();
+		}
+
 		/**	Check if the defined directory exists for reading and including the different modules	*/
 		$list_file = $this->get_list_file( $folder, $list_extension );
 		$list_exclude_dir = array( 'core\\\external' );
