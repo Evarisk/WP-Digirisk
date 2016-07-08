@@ -14,6 +14,10 @@ class functional_test {
 		$this->list_file = $list_file;
 	}
 
+	public function set_exclude_path( $exclude_path ) {
+		$this->exclude_path = $exclude_path;
+	}
+
 	public function execute() {
 		echo "[+] Starting functional tests" . PHP_EOL . PHP_EOL;
 
