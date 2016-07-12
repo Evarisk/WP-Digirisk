@@ -26,6 +26,10 @@ class address_class extends comment_class {
 	* @return object The address_model object
 	*/
 	public function save_data( $data ) {
+		if ( !is_array( $data ) ) {
+			return false;
+		}
+		
 		$data['postcode'] = sanitize_text_field( $data['postcode'] );
 		$data['address'] = sanitize_text_field( $data['address'] );
 		$data['town'] = sanitize_text_field( $data['town'] );

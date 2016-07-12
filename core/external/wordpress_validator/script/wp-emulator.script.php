@@ -141,6 +141,10 @@
 		echo "[+] Requesting posts " . PHP_EOL;
 	}
 
+	function get_comment() {
+		echo "[+] Requesting comment " . PHP_EOL;
+	}
+
 	function get_role()
 	{
 		echo "[+] Requesting role " . PHP_EOL;
