@@ -11,12 +11,17 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class workunit_shortcode {
+	/**
+	* Le constructeur
+	*/
   public function __construct() {
     add_shortcode( 'digi-sheet-workunit', array( $this, 'callback_digi_sheet_workunit' ) );
   }
 
-  /** Affiches le contenu d'un établissement
-  * @TODO : Avoir le groupment par défaut
+  /**
+	* Affiches le contenu d'un établissement
+	*
+  * @param array $param
   */
   public function callback_digi_sheet_workunit( $param ) {
 		$element_id = (int)$_POST['element_id'];

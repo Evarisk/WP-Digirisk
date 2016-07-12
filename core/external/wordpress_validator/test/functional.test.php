@@ -121,39 +121,60 @@ class functional_test {
 	}
 
 	private function call_method( $class, $file_path, $list_methods_to_test, $json_content ) {
+		$parentClassName = ( !empty( $class->getParentClass() ) && !empty( $class->getParentClass()->name ) ) ? $class->getParentClass()->name : '';
+
+
 		if ( !empty( $list_methods_to_test ) ) {
 		  foreach ( $list_methods_to_test as $method_name =>  $method_to_test ) {
 
-				// if ( !empty( $json_content[$method_name] ) ) {
-				//   foreach ( $json_content[$method_name] as $json ) {
+				if ( !empty( $json_content[$method_name] ) ) {
+				  foreach ( $json_content[$method_name] as $json ) {
 						// Default value
+						echo "Custom test: " . $method_name . "(Number args: ".count($json) . ") -> " . PHP_EOL;
+						ob_start();
+						var_dump( $json );
+						$return = ob_get_clean();
+						echo strip_tags( $return ) . PHP_EOL;
+						if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
+							$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
+								$className = $class->name;
+								$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $json );
+						}
+						else {
+							$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $json );
+						}
+						echo $method_name . " return -> ";
+						ob_start();
+						var_dump( $return );
+						$return = ob_get_clean();
+						echo strip_tags( $return ) . PHP_EOL;
+					}
+				}
 
-						$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
-						if (  count( $method_to_test ) - 1 !== - 1) {
-							$index = 0;
-							for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
-								$array = $this->args_to_test( count( $method_to_test ), count( $this->list_default_value ), $array );
-								$parentClassName = ( !empty( $class->getParentClass() ) && !empty( $class->getParentClass()->name ) ) ? $class->getParentClass()->name : '';
-								$return = '';
-								echo "test: " . $method_name . " (Number args: ".count( $method_to_test ) .") -> " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
-
-								if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
-									$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
-										$className = $class->name;
-										$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
-								}
-								else {
-									$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
-								}
-								echo $method_name . " return -> ";
-								ob_start();
-								var_dump( $return );
-								$return = ob_get_clean();
-								echo strip_tags( $return ) . PHP_EOL;
+				$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
+				if (  count( $method_to_test ) - 1 !== - 1) {
+					$index = 0;
+					for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
+						$array = $this->args_to_test( count( $method_to_test ), count( $this->list_default_value ), $array );
+						$return = '';
+						echo "test: " . $method_name . " (Number args: ".count( $method_to_test ) .") -> " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
+						if ( !empty( $array['args_to_test'] ) ) {
+							if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
+								$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
+									$className = $class->name;
+									$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
+							}
+							else {
+								$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
 							}
 						}
-				  // }
-				// }
+						echo $method_name . " return -> ";
+						ob_start();
+						var_dump( $return );
+						$return = ob_get_clean();
+						echo strip_tags( $return ) . PHP_EOL;
+					}
+				}
 		  }
 		}
 	}
@@ -184,7 +205,9 @@ class functional_test {
 				}
 			}
 
-			$array['args_to_test'][] = $this->list_default_value[$array['default_test'][$i]];
+			if ( !empty ( $this->list_default_value ) ) {
+				$array['args_to_test'][] = $this->list_default_value[$array['default_test'][$i]];
+			}
 
 		}
 

@@ -13,12 +13,20 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class group_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi-generate-sheet', array( $this, 'callback_generate_sheet' ) );
 		add_shortcode( 'digi-sheet', array( $this, 'callback_sheet' ) );
 		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
 	}
 
+	/**
+	* Appelle le template pour génerer le DUER
+	*
+	* @param array $param
+	*/
 	public function callback_generate_sheet( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::get()->show_by_type( $element_id );
@@ -28,6 +36,11 @@ class group_shortcode {
 		require ( WPDIGI_STES_TEMPLATES_MAIN_DIR . '/group/sheet-form.php' );
 	}
 
+	/**
+	* Affiches la liste des documents d'un groupement
+	*
+	* @param array $param
+	*/
 	public function callback_sheet( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::get()->show_by_type( $element_id );
@@ -35,10 +48,15 @@ class group_shortcode {
 		document_class::get()->display_document_list( $element );
 	}
 
+	/**
+	* Affiches le formulaire pour configurer un groupement
+	*
+	* @param array $param
+	*/
 	public function callback_configuration( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::get()->show_by_type( $element_id );
-		
+
 		group_configuration_class::get()->display( $element );
 	}
 }

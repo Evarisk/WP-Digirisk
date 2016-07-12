@@ -11,12 +11,17 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class society_shortcode {
+	/**
+	* Le constructeur
+	*/
   public function __construct() {
     add_shortcode( 'digi_dashboard', array( $this, 'callback_digi_dashboard' ) );
   }
 
-  /** Affiches le contenu d'un établissement
-  * @TODO : Avoir le groupment par défaut
+  /**
+	* Affiches le contenu d'un établissement
+	*
+	* @param array $param
   */
   public function callback_digi_dashboard( $param ) {
 		$id = !empty( $param['id'] ) ? (int)$param['id'] : 0;

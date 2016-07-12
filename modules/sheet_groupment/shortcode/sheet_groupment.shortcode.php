@@ -13,10 +13,18 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class sheet_groupment_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi-sheet-groupment', array( $this, 'callback_sheet_groupment' ) );
 	}
 
+	/**
+	* Appelle la template pour génerer une fiche de groupement
+	*
+	* @param array $param
+	*/
 	public function callback_sheet_groupment( $param ) {
 		$element_id = (int)$_POST['element_id'];
     $element = group_class::get()->show( $element_id );

@@ -13,10 +13,18 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi-risk', array( $this, 'callback_digi_risk' ) );
 	}
 
+	/**
+	* Affiches la liste des risques ainsi que le formulaire pour en ajouter
+	*
+	* @param array $param
+	*/
 	public function callback_digi_risk( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::get()->show_by_type( $element_id );

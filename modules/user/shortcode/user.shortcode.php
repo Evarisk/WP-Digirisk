@@ -13,10 +13,18 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi-user', array( $this, 'callback_digi_user' ) );
 	}
 
+	/**
+	* Appelle la fonction render de \digi\user_class
+	*
+	* @param array $param
+	*/
 	public function callback_digi_user( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::get()->show_by_type( $element_id );

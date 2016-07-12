@@ -30,7 +30,7 @@ $file_class->inc( PLUGIN_PATH . 'core/external/TypeResolver', array( ) );
 $file_class->inc( PLUGIN_PATH . 'core/external/ReflectionDocBlock', array( ) );
 $file_class->inc( PLUGIN_PATH , array( 'config', 'util', 'model', 'class', 'action', 'filter', 'shortcode' ) );
 
-$list_file = $file_class->get_list_file( PLUGIN_PATH, array( 'class' ) );
+$list_file = $file_class->get_list_file( PLUGIN_PATH, array( 'shortcode' ) );
 $functional_test = new functional_test( $list_file );
 $functional_test->set_exclude_path( array(
 	PLUGIN_PATH . 'core\wpeo_model\class\comment.class.php',

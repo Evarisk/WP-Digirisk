@@ -12,10 +12,16 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class tab_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi-tab', array( $this, 'callback_digi_tab' ), 1 );
 	}
 
+	/**
+	* Affiches le template des onglets
+	*/
 	public function callback_digi_tab( $param ) {
 		$type = $param['type'];
 		$display = $param['display'];

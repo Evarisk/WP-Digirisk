@@ -12,6 +12,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class file_management_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'eo_upload_button', array( $this, 'callback_eo_upload_button' ) );
 		add_shortcode( 'wpeo_gallery', array( $this, 'callback_shortcode_gallery' ) );
@@ -24,11 +27,6 @@ class file_management_shortcode {
 	* @param int $param['id'] Le fichier sera associé à cette id
 	* @param string $param['type'] Le post_type
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return void
   */
 	public function callback_eo_upload_button( $param ) {
     $id = 0;
@@ -60,11 +58,6 @@ class file_management_shortcode {
 	* @param int $param['element_id'] Le fichier sera associé à cette id
 	* @param string $param['object_name'] Le post_type
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return void
   */
 	public function callback_shortcode_gallery( $param ) {
 		$element_id = $param['element_id'];

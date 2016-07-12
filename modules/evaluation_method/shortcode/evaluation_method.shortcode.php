@@ -14,6 +14,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluation_method_shortcode {
+	/**
+	* Le constructeur
+	*/
 	public function __construct() {
 		add_shortcode( 'digi_evaluation_method', array( $this, 'callback_digi_evaluation_method' ) );
 		add_shortcode( 'digi_evaluation_method_complex', array( $this, 'callback_evaluation_method_complex' ) );
@@ -26,13 +29,13 @@ class evaluation_method_shortcode {
 	* @param int $param['risk_id'] L'id du risque
 	* @param string $param['display'] La méthode d'affichage pour le template
 	*
-	* @author Jimmy Latour <jimmy.latour@gmail.com>
-	*
-	* @since 6.0.0.0
-	*
-	* @return void
+	* @return bool
 	*/
 	public function callback_digi_evaluation_method( $param ) {
+		if ( !is_array( $param ) ) {
+			return false;
+		}
+
 		$display = !empty( $param['display'] ) ? sanitize_text_field( $param['display'] ) : 'edit';
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );
@@ -63,11 +66,7 @@ class evaluation_method_shortcode {
 	* @param array $param Tableau de donnée
 	* @param int $param['risk_id'] L'id du risque
 	*
-	* @author Jimmy Latour <jimmy.latour@gmail.com>
-	*
-	* @since 6.0.0.0
-	*
-	* @return void
+	* @return bool
 	*/
 	public function callback_evaluation_method_complex( $param ) {
 		$term_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
