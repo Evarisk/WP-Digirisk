@@ -137,6 +137,14 @@
 		echo "[+] Sanitizing -> " . $str . PHP_EOL;
 	}
 
+	function get_post( $post = null, $output = OBJECT, $filter = 'raw' ) {
+		echo "[+] Requesting post " . PHP_EOL;
+	}
+
+	function get_post_field( $field, $post = null, $context = 'display' ) {
+		echo "[+] Requesting post_field " . PHP_EOL;
+	}
+
 	function get_posts()
 	{
 		echo "[+] Requesting posts " . PHP_EOL;
@@ -161,6 +169,10 @@
 
 	function get_term_by( $name, $id, $taxonomy, $output = '' ) {
 		echo "[+] Get term by " . PHP_EOL;
+	}
+
+	function get_user_by( $field, $value ) {
+		echo "[+] Get user by " . PHP_EOL;
 	}
 
 	function load_textdomain()
@@ -217,6 +229,10 @@
 		return $result;
 	}
 
+	function is_wp_error() {
+		echo "[+] IS WP Error" . PHP_EOL;
+	}
+
 	function admin_url()
 	{
 		$url = "http://testunitaire.dom/wp-admin/";
@@ -231,6 +247,10 @@
 		return $basename;
 	}
 
+	function wp_mkdir_p( $path ) {
+		echo '[+] WP Mkdir p -> ' . $path . PHP_EOL;
+	}
+
 	function wp_upload_dir()
 	{
 		$dir = dirname(__FILE__);
@@ -239,6 +259,18 @@
 			'basedir' => $dir,
 			'baseurl' => '',
 		);
+	}
+
+	function wp_update_post( $post, $wp_error = false ) {
+		echo "[+] WP Update post -> " . PHP_EOL;
+	}
+
+	function wp_update_user( $userdata ) {
+		echo "[+] WP Update user -> " . PHP_EOL;
+	}
+
+	function wp_parse_args( $arr, $arr_to_merge ) {
+		echo "[+] WP Parse args" . PHP_EOL;
 	}
 
 	function add_theme_support( $theme )
@@ -348,5 +380,17 @@
 		}
 	}
 
+	class WP_Query
+	{
+		public $post_count;
+
+		function __construct() {
+
+		}
+
+		public function have_posts() {
+
+		}
+	}
 	global $wpdb;
 	$wpdb = new WPDB();
