@@ -116,10 +116,16 @@ class user_class extends \user_class {
 	 * Récupère la liste des utilisateurs affectés avec ses informations d'affectations à cette unité de travail
 	 * Get the list of affected users with assignement information for this workunit
 	 *
-	 * @param int $id The workunit ID
+	 * @param object $workunit L'objet unité de travail
+	 * @param array $list_affected_id La liste des utilisateurs affectés
+	 *
 	 * @return array list users affected
 	 */
-	public function list_affected_user( $workunit, &$list_affected_id ) {
+	public function list_affected_user( $workunit, $list_affected_id ) {
+		if ( !is_object( $workunit) || !is_array( $list_affected_id ) ) {
+			return false;
+		}
+
 		if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) )
 			return false;
 
@@ -159,6 +165,10 @@ class user_class extends \user_class {
 	 * @return array si aucun utilisateur n'a été spécifié | Un tableau contenant les utilisateurs actuellement affectés ou ayant été affectés auparavant / null if no user have been specified | An array with affected users or users who have been affected
 	 */
 	public function build_list_for_document_export( $users ) {
+		if ( !is_array( $users ) ) {
+			return false;
+		}
+		
 		$affected_users = $unaffected_users = null;
 		if ( !empty( $users ) ) {
 			foreach ( $users as $user_id => $user_affectations ) {

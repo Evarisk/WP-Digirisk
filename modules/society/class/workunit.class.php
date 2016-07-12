@@ -91,23 +91,6 @@ class workunit_class extends post_class {
 	}
 
 	/**
-	 * ROUTES - Ajoute les routes spécifiques pour les unités de travail / Add workunit specific routes
-	 *
-	 * @param array $array_route Les routes existantes dans l'API REST de wordpress / Existing routes into Wordpress REST API
-	 *
-	 * @return array La liste des routes personnalisées ajoutées aux routes existantes / The personnalized routes added to existing
-	 */
-	public function callback_register_route( $array_route ) {
-		$array_route = parent::callback_register_route( $array_route );
-
-		$array_route['/' . $this->version . '/get/' . $this->base . '/(?P<id>\d+)/identity' ] = array(
-				array( array( $this, 'get_workunit_identity' ), WP_JSON_Server::READABLE | WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		return $array_route;
-	}
-
-	/**
 	 * ROUTES - Récupération des informations principale d'une unité de travail / Get the main information about a workunit
 	 *
 	 * @param integer $id L'identifiant de l'unité de travail dont on veux récupèrer uniquement l'identité principale / Workunit identifier we want to get main identity for
@@ -144,10 +127,14 @@ class workunit_class extends post_class {
 		$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );
 
 		/**	Affichage de la liste des unités de travail pour le groupement actuellement sélectionné / Display the work unit list for current selected group	*/
-		ob_start();
-		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list' ) );
-		$output = ob_get_contents();
-		ob_end_clean();
+		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list' );
+
+		if ( $path ) {
+			ob_start();
+			require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list' ) );
+			$output = ob_get_contents();
+			ob_end_clean();
+		}
 
 		return  $output;
 	}
@@ -158,7 +145,11 @@ class workunit_class extends post_class {
 	 * @param integer $id L'indentifiant de l'unité de travail à afficher / The workunit identifier to display
 	 * @param string $dislay_mode Optionnal Le mode d'affichage de la fiche (simple, complète, publique, ...) / The display mode (simple, complete, public, ... )
 	 */
-	public function display( $id, $dislay_mode = 'simple' ) {
+	public function display( $id, $display_mode = 'simple' ) {
+		if ( !is_int( $id ) || !is_string( $display_mode ) ) {
+			return false;
+		}
+
 		/**	Get the work unit to display	*/
 		$this->current_workunit = $this->show( $id );
 		$element_post_type = $this->get_post_type();
@@ -167,7 +158,11 @@ class workunit_class extends post_class {
 		$workunit_default_tab = apply_filters( 'wpdigi_workunit_default_tab', '' );
 
 		/**	Display the template	*/
-		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $dislay_mode ) );
+		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $display_mode );
+
+		if ( $path ) {
+			require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $display_mode ) );
+		}
 	}
 
 	/**

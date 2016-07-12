@@ -182,6 +182,10 @@ class group_duer_class extends singleton_util {
 	* @return array Les données qui seront insérées dans le document
 	*/
 	public function fill_data_duer( $data_duer, $data_to_document, $element ) {
+		if ( !is_array( $data_duer ) || !is_array( $data_to_document ) || !is_object( $element ) ) {
+			return false;
+		}
+
 		$data_to_document = array_merge( $data_to_document, $data_duer );
 		$data_to_document['identifiantElement'] = $element->option['unique_identifier'];
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
@@ -251,6 +255,9 @@ class group_duer_class extends singleton_util {
 	* @return array La liste des ODT enfants
 	*/
 	public function generate_child( $element ) {
+		if ( !is_object( $element ) ) {
+			return false;
+		}
 		// Generate children
 		$list_id = array();
 

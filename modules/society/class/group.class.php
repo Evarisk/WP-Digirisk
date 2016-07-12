@@ -188,8 +188,16 @@ class group_class extends post_class {
 	* @param string $class La classe pour l'HTML
 	*/
 	public function render_list_item( $default_selected_group_id, $group_id = 0, $class = '' ) {
+		if ( !is_int( $default_selected_group_id ) || !is_int( $group_id ) || !is_string( $class ) ) {
+			return false;
+		}
+
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => $group_id, 'post_status' => array( 'publish', 'draft', ), ), false );
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list-item' ) );
+
+		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list-item' );
+		if ( $path ) {
+			require $path;
+		}
 	}
 
 	/**
@@ -200,6 +208,10 @@ class group_class extends post_class {
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 */
 	public function get_element_tree_risk( $element ) {
+		if ( !is_object( $element ) ) {
+			return false;
+		}
+
 		$risks_in_tree = array();
 
 		$risks_in_tree = $this->build_risk_list_for_export( $element );
@@ -226,6 +238,10 @@ class group_class extends post_class {
 	* @param array extra_params ?
 	*/
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
+		if ( !is_object( $element ) || !is_string( $tabuliaton ) || !is_array( $extra_params ) ) {
+			return false;
+		}
+
 		$element_children = array();
 		$element_tree = '';
 
@@ -348,6 +364,10 @@ class group_class extends post_class {
 	 * @param string $default_tab L'onglet a sélectionner automatiquement : The default tab to select
 	 */
 	 public function display_group_tab( $group, $default_tab ) {
+		 if ( !is_object( $group ) || !is_string( $default_tab ) ) {
+			 return false;
+		 }
+
 	 	/**	Définition de la liste des onglets pour les unités de travail - modifiable avec un filtre / Define a tab list for work unit - editable list through filter	*/
 	 	$tab_list = apply_filters( 'wpdigi_group_sheet_tab', array(), $group );
 
@@ -362,6 +382,10 @@ class group_class extends post_class {
 	  * @param string $tab_to_display Permet de sélectionner les données a afficher ( par défaut affiche un shortcode basé sur cet valeur ) / Allows to display tab content to display ( Display a shortcode composed with this value by default )
 	  */
 	 public function display_group_tab_content( $group, $tab_to_display ) {
+		 if ( !is_object( $group ) || !is_string( $tab_to_display ) ) {
+			 return false;
+		 }
+
 	 	/**	Application d'un filtre d'affichage selon la partie a afficher demandée par l'utilisateur / Apply filter for display user's requested part	*/
 	 	$output = apply_filters( 'wpdigi_group_sheet_content', '', $group, $tab_to_display );
 	 	/**	Par défaut on va afficher un shortcode ayant pour clé la valeur de $tab_to_display / By default display a shortcode composed with $tab_to_display	*/

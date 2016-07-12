@@ -149,6 +149,10 @@
 			echo "[+] Get post meta " . PHP_EOL;
 	}
 
+	function get_post_type() {
+		echo '[+] Get post type' . PHP_EOL;
+	}
+
 	function get_posts()
 	{
 		echo "[+] Requesting posts " . PHP_EOL;
@@ -260,6 +264,10 @@
 		return $url;
 	}
 
+	function apply_filters() {
+		echo "[+] Apply filters " . PHP_EOL;
+	}
+
 	function plugin_basename()
 	{
 		$basename = dirname(__FILE__);
@@ -338,6 +346,10 @@
 	function check_ajax_referer( $action, $nonce ) {
 		echo "[+] Check ajax referer -> " . $action . ' : ' . $nonce . PHP_EOL;
 		return "";
+	}
+
+	function wp_create_nonce( $action ) {
+		echo '[+] Create nonce -> ' . $action . PHP_EOL;
 	}
 
 	function wp_send_json_error( $data = array( 'success' => 'false' ) ) {
