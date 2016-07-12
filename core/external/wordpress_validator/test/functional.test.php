@@ -63,9 +63,9 @@ class functional_test {
 
 								$this->fill_method( $file_path[0], $element, $docBlock );
 
-								if ( !empty( $json_content ) ) {
+								// if ( !empty( $json_content ) ) {
 									$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
-								}
+								// }
 						  }
 						}
 					}
@@ -128,12 +128,12 @@ class functional_test {
 				//   foreach ( $json_content[$method_name] as $json ) {
 						// Default value
 
-						$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0) );
+						$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
 						if (  count( $method_to_test ) - 1 !== - 1) {
 							$index = 0;
 							for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
-								$array = $this->args_to_test( count( $method_to_test ) - 1, $array );
-								echo "test with : " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
+								$array = $this->args_to_test( count( $method_to_test ) - 1, count( $this->list_default_value ), $array );
+								echo "test :" . $method_name . " with : " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
 								$class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
 							}
 						}
@@ -143,20 +143,20 @@ class functional_test {
 		}
 	}
 
-	private function args_to_test( $number, $array ) {
+	private function args_to_test( $number_default_value, $number, $array ) {
 		$array['args_to_test'] = array();
 
-		for( $i = 0; $i < $number; $i++ ) {
+		for( $i = 0; $i < $number_default_value; $i++ ) {
 			if ( $array['default_test'][$i] >= $number ) {
 				$array['default_test'][$i] = 0;
 				$array['index']++;
 				$array['number']++;
 
-				if ( $array['index'] >= $number ) {
+				if ( $array['index'] >= $number_default_value ) {
 				 	$array['index'] = 0;
 				}
 
-				if( $array['number'] >= $number ) {
+				if( $array['number'] >= $number_default_value ) {
 					$array['other_index']++;
 					if ( $array['other_index'] >= $number ) {
 						$array['other_index'] = 0;

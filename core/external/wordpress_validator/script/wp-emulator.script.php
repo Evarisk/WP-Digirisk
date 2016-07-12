@@ -151,6 +151,11 @@
 		echo "[+] Loading text domain" . PHP_EOL;
 	}
 
+	function locate_template( $template_names, $load = false, $require_once = true ) {
+		echo "[+] Locate template -> " . PHP_EOL;
+		return '';
+	}
+
 	function plugin_dir_path($path)
 	{
 		echo "[+] Plugin path -> " . $path . PHP_EOL;
