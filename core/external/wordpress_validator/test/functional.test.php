@@ -41,31 +41,33 @@ class functional_test {
 					if ( !empty( $class_name ) ) {
 						$class_name .= '\\';
 					}
-					
+
 		      $class_name .= $class_info['class_name'];
-		      $class = new ReflectionClass( $class_name );
+					if ( class_exists( $class_name ) ) {
+			      $class = new ReflectionClass( $class_name );
 
-					$factory = DocBlockFactory::createInstance();
-		      $methods = $class->getMethods();
+						$factory = DocBlockFactory::createInstance();
+			      $methods = $class->getMethods();
 
-					$json_content = $this->load_test_json( $file_path[0] );
+						$json_content = $this->load_test_json( $file_path[0] );
 
-					if ( !empty( $methods ) ) {
-					  foreach ( $methods as $element ) {
-							if ( empty( $this->list_methods_to_test[$file_path[0]][$element->class] ) ) {
-								$this->list_methods_to_test[$file_path[0]][$element->class] = array();
-							}
+						if ( !empty( $methods ) ) {
+						  foreach ( $methods as $element ) {
+								if ( empty( $this->list_methods_to_test[$file_path[0]][$element->class] ) ) {
+									$this->list_methods_to_test[$file_path[0]][$element->class] = array();
+								}
 
-							$this->list_methods_to_test[$file_path[0]][$element->class][$element->name] = array();
+								$this->list_methods_to_test[$file_path[0]][$element->class][$element->name] = array();
 
-							$docBlock = $factory->create($element->getDocComment());
+								$docBlock = $factory->create($element->getDocComment());
 
-							$this->fill_method( $file_path[0], $element, $docBlock );
+								$this->fill_method( $file_path[0], $element, $docBlock );
 
-							if ( !empty( $json_content ) ) {
-								$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
-							}
-					  }
+								if ( !empty( $json_content ) ) {
+									$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
+								}
+						  }
+						}
 					}
 				}
 		  }
