@@ -83,7 +83,7 @@ class wpdigi_utils {
 	 * @return integer Retourne la valeur du dernier index unique pour les éléments digirisk / Return the last index for digirisk element
 	 */
 	public static function get_last_unique_key( $wp_type, $element_type ) {
-		if ( empty( $wp_type ) || empty( $element_type ) )
+		if ( empty( $wp_type ) || empty( $element_type ) || !is_string( $wp_type ) || !is_string( $element_type ) )
 			return false;
 
 		global $wpdb;
@@ -122,7 +122,9 @@ class wpdigi_utils {
 			break;
 		}
 
-		$last_unique_key = $wpdb->get_var( $query );
+		if ( !empty( $query ) ) {
+			$last_unique_key = $wpdb->get_var( $query );
+		}
 
 		if ( empty( $last_unique_key ) )
 			return 0;
@@ -133,12 +135,16 @@ class wpdigi_utils {
 	/**
 	* Upload un fichier et créer ensuite les meta données
 	*
-	* @param string $file (test: path/to/file) Le chemin vers le fichier
-	* @param int $element_id (test: 1) L'id de l'élement parent
+	* @param string $file Le chemin vers le fichier
+	* @param int $element_id L'id de l'élement parent
 	*
 	* @return int L'attachement id
 	*/
 	public static function upload_file( $file, $element_id ) {
+		if ( !is_string( $file ) || !is_int( $element_id ) || !is_file( $file ) ) {
+			return false;
+		}
+
 		$wp_upload_dir = wp_upload_dir();
 
 		// Transfère le thumbnail

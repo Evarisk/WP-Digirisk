@@ -146,6 +146,10 @@
 		echo "[+] Requesting role " . PHP_EOL;
 	}
 
+	function get_post_ancestors( $children_id ) {
+		echo "[+] Get post ancestors for children -> " . $children_id . PHP_EOL;
+	}
+
 	function load_textdomain()
 	{
 		echo "[+] Loading text domain" . PHP_EOL;
@@ -274,6 +278,11 @@
 	function wp_send_json_error( $data = array( 'success' => 'false' ) ) {
 		echo "[+] wp_send_json_error : " . implode( ', ', $data ) . PHP_EOL;
 		return "";
+	}
+
+	function wp_upload_bits( $name, $deprecated, $bits, $time = '' ) {
+		echo "[+] Wp upload bits -> " . $name . PHP_EOL;
+		return '';
 	}
 
 	class WPDB
