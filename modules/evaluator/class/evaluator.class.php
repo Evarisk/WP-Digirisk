@@ -86,6 +86,10 @@ class evaluator_class extends user_class {
 	 * @return object list evaluators affected
 	 */
 	public function get_list_affected_evaluator( $workunit ) {
+		if ( !is_object( $workunit ) ) {
+			return false;
+		}
+
 		if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) )
 			return false;
 
@@ -117,108 +121,6 @@ class evaluator_class extends user_class {
 		sort( $list_evaluator_affected );
 
 		return $list_evaluator_affected;
-	}
-
-	/**
-	* Fait le rendu des evaluateurs affectées à une unité de travail
-	*
-	* @param int $workunit_id L'ID de l'unité de travail
-	* @param array $list_id La liste des evaluateurs ID
-	*/
-	static public function display_evaluator_affected_in_workunit( $workunit_id, $list_id ) {
-		global $wpdigi_evaluator_ctr;
-		global $wpdigi_workunit_ctr;
-
-		$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
-
-		if ( empty( $workunit ) )
-			wp_send_json_error();
-
-		$list_evaluator = array();
-		if ( !empty( $workunit->option['user_info']['affected_id']['evaluator'] ) ) {
-			foreach ( $workunit->option['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
-				if ( !empty( $array_value ) && in_array( $evaluator_id, $list_id ) ) {
-					foreach ( $array_value as $index => $sub_array_value ) {
-						if ( !empty( $sub_array_value['status'] ) && $sub_array_value['status'] == 'valid' ) {
-							$list_evaluator[ $evaluator_id ][ $index ][ 'user_info' ] = $wpdigi_evaluator_ctr->show( $evaluator_id );
-							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ] = $sub_array_value;
-							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ][ 'id' ] = $index;
-						}
-					}
-				}
-			}
-		}
-
-		$list_affected_evaluator = array();
-
-		foreach ( $list_evaluator as $evaluator_id => $array_evaluator ) {
-			if ( !empty( $array_evaluator ) ) {
-				foreach( $array_evaluator as $index => $evaluator ) {
-					$list_affected_evaluator[$evaluator['affectation_info']['start']['date']][$index] = $evaluator;
-				}
-			}
-		}
-
-		arsort( $list_affected_evaluator );
-
-		ob_start();
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
-	 	wp_die( wp_json_encode( array( 'template' => ob_get_clean() ) ) );
-	}
-
-	/**
-	* Fait le rendu des evaluateurs à affecter à une unité de travai
-	*
-	* @param int $workunit_id L'ID de l'unité de travail
-	* @param array $list_id La liste des evaluateurs ID
-	* @param string $search Pour la recherche
-	*/
-	static public function display_evaluator_to_assign( $workunit_id, $list_id, $search ) {
-		global $wpdigi_user_ctr;
-		global $wpdigi_workunit_ctr;
-
-		$workunit = $wpdigi_workunit_ctr->show( $workunit_id );
-
-		if ( empty( $workunit ) )
-			wp_send_json_error();
-
-
-		if ( !empty( $search ) ) {
-
-			$list_evaluator_to_assign = array();
-
-			if ( !empty( $list_id ) ) {
-				foreach ( $list_id as $user_id ) {
-					if ( $user_id != 1 )
-						$list_evaluator_to_assign[] = $wpdigi_user_ctr->show( $user_id );
-				}
-			}
-		}
-		else {
-			$current_page = 1;
-			$args_where_evaluator = array(
-				'offset' => 0,
-				'exclude' => array( 1 ),
-				'number' => $wpdigi_user_ctr->limit_user,
-				'meta_query' => array(
-					'relation' => 'OR',
-				),
-			);
-
-			$list_evaluator_to_assign = $wpdigi_user_ctr->index( $args_where_evaluator );
-
-			// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
-			unset( $args_where_evaluator['offset'] );
-			unset( $args_where_evaluator['number'] );
-			$args_where_evaluator['fields'] = array( 'ID' );
-			$count_evaluator = count( $wpdigi_user_ctr->index( $args_where_evaluator ) );
-
-			$number_page = ceil( $count_evaluator / $wpdigi_user_ctr->limit_user );
-		}
-
-		ob_start();
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
-		wp_die( wp_json_encode( array( 'template' => ob_get_clean() ) ) );
 	}
 
 	/**

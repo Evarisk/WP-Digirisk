@@ -145,6 +145,10 @@
 		echo "[+] Requesting post_field " . PHP_EOL;
 	}
 
+	function get_post_meta( $post_id, $key = '', $single = false ) {
+			echo "[+] Get post meta " . PHP_EOL;
+	}
+
 	function get_posts()
 	{
 		echo "[+] Requesting posts " . PHP_EOL;
@@ -152,6 +156,14 @@
 
 	function get_comment() {
 		echo "[+] Requesting comment " . PHP_EOL;
+	}
+
+	function get_comments() {
+		echo "[+] Get Comments" . PHP_EOL;
+	}
+
+	function get_comment_meta( $comment_id, $key = 0, $single = true ) {
+
 	}
 
 	function get_role()
@@ -167,12 +179,20 @@
 		echo "[+] Get term field " . PHP_EOL;
 	}
 
+	function get_term_meta() {
+		echo "[+] Get term meta " . PHP_EOL;
+	}
+
 	function get_term_by( $name, $id, $taxonomy, $output = '' ) {
 		echo "[+] Get term by " . PHP_EOL;
 	}
 
 	function get_user_by( $field, $value ) {
 		echo "[+] Get user by " . PHP_EOL;
+	}
+
+	function get_users() {
+		echo "[+] Get users " . PHP_EOL;
 	}
 
 	function load_textdomain()

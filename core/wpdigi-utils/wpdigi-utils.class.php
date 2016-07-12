@@ -17,6 +17,10 @@ class wpdigi_utils {
 	* @param bool $debug (test: bool) Active le mode debug
 	*/
 	static function get_template_part( $plugin_dir_name, $main_template_dir, $side, $slug, $name = null, $debug = null ) {
+		if ( !is_string( $plugin_dir_name ) || !is_string( $main_template_dir ) || !is_string( $side ) || is_string( $slug ) ) {
+			return false;
+		}
+		
 		$path = '';
 
 		$templates = array();

@@ -54,6 +54,10 @@ class document_class extends post_class {
 	* @return array Liste des documents
 	*/
 	public function index( $args_where = array( 'parent_id' => 0 ), $cropped = false ) {
+		if ( !is_array( $args_where ) ) {
+			return false;
+		}
+
 		$array_model = array();
 
 		$args = array(
@@ -83,6 +87,10 @@ class document_class extends post_class {
 	* @return string Le chemin vers le document
 	*/
 	public function get_document_path( $path_type = 'basedir' ) {
+		if ( !is_string( $path_type ) ) {
+			return false;
+		}
+
 		$upload_dir = wp_upload_dir();
 		return $upload_dir[ $path_type ] . '/digirisk';
 	}
@@ -123,6 +131,9 @@ class document_class extends post_class {
 	 * @param string $display_mode Le mode d'affichage de l'interface / The main display mode of digirisk interface
 	 */
 	public function filter_display_group_sheet_print_button( $group_id, $display_mode ) {
+		if ( !is_int( $group_id ) || !is_string( $display_mode ) ) {
+			return false;
+		}
 		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, $display_mode, "print", "button" ) );
 	}
 
@@ -136,6 +147,10 @@ class document_class extends post_class {
 	 * @return string Le contenu a afficher pour l'onglet et l'élément actuel / The content to display for current tab and element we are one
 	 */
 	public function filter_display_doc_in_element( $output, $element, $tab_to_display ) {
+		if ( !is_string( $output ) || !is_string( $tab_to_display ) ) {
+			return false;
+		}
+
 		if ( 'sheet' == $tab_to_display ) {
 			ob_start();
 			require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'simple', "sheet", "generation-form" ) );
@@ -175,6 +190,10 @@ class document_class extends post_class {
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
 	public function get_model_for_element( $current_element_type ) {
+		if ( !is_array( $current_element_type ) ) {
+			return false;
+		}
+
 		$response = array(
 			'status'		=> false,
 			'message'		=> __( 'An error occured while getting model to use for generation', 'digirisk' ),
@@ -196,7 +215,7 @@ class document_class extends post_class {
 		);
 		$element_sheet_default_model = new WP_Query( $get_model_args );
 		if ( $element_sheet_default_model->have_posts() ) {
-			if ( 2 <= $element_sheet_default_model->post_count ) {
+			if ( !empty( $element_sheet_default_model->post_count ) && 2 <= $element_sheet_default_model->post_count ) {
 				foreach ( $element_sheet_default_model->posts as $attachment ) {
 					//todo: if there are several model which one to choose
 				}
@@ -214,7 +233,7 @@ class document_class extends post_class {
 			}
 		}
 
-		if ( !$response[ 'status' ] ) {
+		if ( !$response[ 'status' ] && !empty( $current_element_type ) ) {
 			foreach ( $current_element_type as $document_type ) {
 				if ( is_file( WPDIGI_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
 					$response = array(
@@ -240,6 +259,10 @@ class document_class extends post_class {
 	 *
 	 */
 	public function generate_document( $model_path, $document_content, $document_name ) {
+		if ( !is_string( $model_path ) || !is_array( $document_content ) || !is_string( $document_name ) ) {
+			return false;
+		}
+
 		$response = array(
 			'status'	=> false,
 			'message'	=> '',
@@ -297,7 +320,9 @@ class document_class extends post_class {
 	* @return object Le document courant
 	*/
 	public function set_document_data( $data_key, $data_value, $current_odf ) {
-
+		if ( !is_string( $data_key ) || !is_string( $data_value ) || !is_object( $current_odf ) ) {
+			return false;
+		}
 		/**	Dans le cas où la donnée a écrire est une valeur "simple" (texte) / In case the data to write is a "simple" (text) data	*/
 		if ( !is_array( $data_value ) ) {
 			$current_odf->setVars( $data_key, stripslashes( $data_value ), true, 'UTF-8' );
@@ -435,8 +460,13 @@ class document_class extends post_class {
 	 * @param string $final_file_path The zip file path where to save it / Le chemin vers lequel il faut sauvegarder le fichier zip
 	 * @param array $file_list The file list to add to the zip file / La liste des fichiers à ajouter au fichier zip
 	 * @param object $element The current element where to associate the zip file to / L'élément auquel il faut associer le fichier zip
+	 * @param string $version La version du zip
 	 */
 	 public function create_zip( $final_file_path, $file_list, $element, $version ) {
+		if ( !is_string( $final_file_path ) || !is_array( $file_list ) || !is_object( $element ) || !is_string( $version ) ) {
+		 return false;
+		}
+
 		$zip = new ZipArchive();
 
 		$response = array();
@@ -473,6 +503,10 @@ class document_class extends post_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_data ) {
+		if ( !is_object( $element ) || !is_array( $document_type ) || !is_array( $document_data ) ) {
+			return false;
+		}
+
 		$response = array(
 			'status' => true,
 		);

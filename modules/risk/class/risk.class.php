@@ -106,7 +106,7 @@ class risk_class extends post_class {
 	 */
 	function display_risk_list( $element ) {
 
-		if ( empty( $element ) )
+		if ( empty( $element ) || !is_object( $element ) )
 			return false;
 
 		global $evaluation_method_class;
@@ -166,12 +166,16 @@ class risk_class extends post_class {
 	 * @return object Le risque complet / The complete risk
 	 */
 	public function get_risk( $id ) {
+		if ( !is_int( $id ) ) {
+			return false;
+		}
+
 		/**	Récupération du risque / Get the risk définition	*/
 		if ( $id != 0 ) {
 			$risk = $this->show( $id );
 
 			/**	Récupération de la méthode associée au risque / Get associated method to risk	*/
-			$risk->method = evaluation_method_class::get()->show( $risk->taxonomy[ 'digi-method' ][ 0 ] );
+			$risk->method = evaluation_method_class::get()->show( !empty( $risk->taxonomy[ 'digi-method' ][ 0 ] ) ? $risk->taxonomy[ 'digi-method' ][ 0 ] : 0 );
 
 			/**	Récupération du danger associé au risque / Get the danger associated to risk	*/
 			$risk->danger = danger_class::get()->show( !empty( $risk->taxonomy[ 'digi-danger' ][ 0 ] ) ? $risk->taxonomy[ 'digi-danger' ][ 0 ] : 0 );
@@ -196,6 +200,9 @@ class risk_class extends post_class {
 	 * @return array Le tableau des onglets a afficher dans la fiche de l'élément avec les onglets spécifiques ajoutés / The tab array to display into element sheet with specific tabs added
 	 */
 	function filter_add_sheet_tab_to_element( $tab_list, $current_element ) {
+		if ( !is_array( $tab_list ) || !is_object( $current_element ) ) {
+			return false;
+		}
 		/** Définition de l'onglet permettant l'affichage des risques pour le type d'élément actuel / Define the tab allowing to display risks' tab for current element type	*/
 		$tab_list = array_merge( $tab_list, array(
 			$this->get_post_type() => array(
@@ -236,6 +243,10 @@ class risk_class extends post_class {
 	 * @return object Risk list for given element / La liste des risques pour l'élément donné en paramètre
 	 */
 	function get_risk_list_for_element( $element ) {
+		if ( !is_object( $element ) ) {
+			return false;
+		}
+		
 		$risk_for_element = array();
 
 		/**	Define risks list args / Définition des arguments de récupération de la liste des risques	*/

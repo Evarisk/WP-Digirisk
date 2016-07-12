@@ -29,6 +29,10 @@ class post_class extends singleton_util {
 	* @return object L'objet
 	*/
 	public function update( $data ) {
+		if ( !is_array ( $data ) || !is_object( $data ) ) {
+			return false;
+		}
+
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data ) && empty( $data->id ) ) ) {
 			return $this->create( $data );
 		}
@@ -70,6 +74,10 @@ class post_class extends singleton_util {
 	* @return object L'objet cloné
 	*/
 	public function create( $data ) {
+		if ( !is_array( $data ) || !is_object( $data ) ) {
+			return false;
+		}
+
 		$object = $data;
 
 		if( is_array( $data ) ) {
@@ -132,6 +140,10 @@ class post_class extends singleton_util {
 	* @return array La liste des posts
 	*/
 	public function index( $args_where = array( 'post_parent' => 0 ), $cropped = false ) {
+		if ( !is_array( $args_where ) ) {
+			return false;
+		}
+
 		$array_model = array();
 
 		$args = array(
@@ -206,6 +218,10 @@ class post_class extends singleton_util {
 	 * @return array Le tableau des terms id
 	 */
 	public static function eo_get_object_terms( $object ) {
+		if ( !is_array( $object ) || !is_object( $object ) ) {
+			return false;
+		}
+
 		$list_term 		= array();
 		$array_model 	= $object->get_model();
 
@@ -225,37 +241,6 @@ class post_class extends singleton_util {
 	 */
 	public function get_post_type() {
 		return $this->post_type;
-	}
-
-	/**
-	 * Ajoute les routes par défaut pour les éléments de type POST dans wordpress / Add default routes for POST element type into wordpress
-	 *
-	 * @param array $array_route Les routes existantes dans l'API REST de wordpress / Existing routes into Wordpress REST API
-	 *
-	 * @return array La liste des routes personnalisées ajoutées aux routes existantes / The personnalized routes added to existing
-	 */
-	public function callback_register_route( $array_route ) {
-		/** Récupération de la liste complète des éléments / Get all existing elements */
-		$array_route['/' . $this->version . '/get/' . $this->base ] = array(
-				array( array( $this, 'index' ), WP_JSON_Server::READABLE | WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Récupération d'un élément donné / Get a given element */
-		$array_route['/' . $this->version . '/get/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'show' ), WP_JSON_Server::READABLE |  WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Mise à jour d'un élément / Update an element */
-		$array_route['/' . $this->version . '/post/' . $this->base . ''] = array(
-				array( array( $this, 'update' ), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		/** Suppression d'un élément / Delete an element */
-		$array_route['/' . $this->version . '/delete/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'delete' ), WP_JSON_Server::DELETABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		return $array_route;
 	}
 
 	/**
