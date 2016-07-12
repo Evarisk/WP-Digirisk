@@ -22,6 +22,13 @@ class user_class extends singleton_util {
 		add_filter( 'json_endpoints', array( &$this, 'callback_register_route' ) );
 	}
 
+	/**
+	* Met à jour un utilisateur
+	*
+	* @param array $data Les données à mêttre à jour
+	*
+	* @return object L'objet utilisateur
+	*/
 	public function update( $data ) {
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
 			return $this->create( $data );
@@ -46,6 +53,13 @@ class user_class extends singleton_util {
 		return $object;
 	}
 
+	/**
+	* Créer un utilisateur
+	*
+	* @param array $data Les données à créer
+	*
+	* @return object L'objet utilisateur
+	*/
 	public function create( $data ) {
 		$object = $data;
 
@@ -75,10 +89,23 @@ class user_class extends singleton_util {
 		return $cloned_object;
 	}
 
+	/**
+	* Supprimes un utilisateur
+	*
+	* @param int $id L'ID de l'utilisateur
+	*/
 	public function delete( $id ) {
 		wp_delete_user( $id );
 	}
 
+	/**
+	* Récupères l'utilsiateur par son ID
+	*
+	* @param int $id L'ID de l'utilisateur
+	* @param bool $cropped Récupères toutes les données si false
+	*
+	* @return object L'objet utilisateur
+	*/
 	public function show( $id, $cropped = false ) {
  		$user = get_user_by( 'id', $id );
 		$user = new $this->model_name( $user, $this->meta_key, $cropped );
@@ -86,6 +113,14 @@ class user_class extends singleton_util {
 		return $user;
 	}
 
+	/**
+	* Indexes tous les utilisateurs
+	*
+	* @param array $args_where
+	* @param bool $cropped Récupères toutes les données si false
+	*
+	* @return array La liste des utilisateurs
+	*/
 	public function index( $args_where = array( ), $cropped = false ) {
 		$array_model = array();
 
@@ -98,37 +133,6 @@ class user_class extends singleton_util {
 		}
 
 		return $array_model;
-	}
-
-	/**
-	 * Ajoute les routes par défaut pour les éléments de type POST dans wordpress / Add default routes for POST element type into wordpress
-	 *
-	 * @param array $array_route Les routes existantes dans l'API REST de wordpress / Existing routes into Wordpress REST API
-	 *
-	 * @return array La liste des routes personnalisées ajoutées aux routes existantes / The personnalized routes added to existing
-	 */
-	public function callback_register_route( $array_route ) {
-		/** Récupération de la liste complète des éléments / Get all existing elements */
-		$array_route['/' . $this->version . '/get/' . $this->base ] = array(
-				array( array( $this, 'index' ), WP_JSON_Server::READABLE | WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Récupération d'un élément donné / Get a given element */
-		$array_route['/' . $this->version . '/get/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'show' ), WP_JSON_Server::READABLE |  WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Mise à jour d'un élément / Update an element */
-		$array_route['/' . $this->version . '/post/' . $this->base . ''] = array(
-				array( array( $this, 'update' ), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		/** Suppression d'un élément / Delete an element */
-		$array_route['/' . $this->version . '/delete/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'delete' ), WP_JSON_Server::DELETABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		return $array_route;
 	}
 
 }

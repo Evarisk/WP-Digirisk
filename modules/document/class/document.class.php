@@ -43,6 +43,16 @@ class document_class extends post_class {
 		add_filter( 'wpdigi_society_tree_footer', array( $this, 'filter_display_group_sheet_print_button' ), 10, 2 );
 	}
 
+	/**
+	* Indexe tous les documents dans la base de donnée
+	*
+	* array['parent_id'] (optional) Le post parent id.
+	*
+	* @param array $args_where Les données à chercher
+	* @param bool $cropped Récupère toutes les données si false
+	*
+	* @return array Liste des documents
+	*/
 	public function index( $args_where = array( 'parent_id' => 0 ), $cropped = false ) {
 		$array_model = array();
 
@@ -65,6 +75,13 @@ class document_class extends post_class {
 		return $array_model;
 	}
 
+	/**
+	* Récupère le chemin vers le document
+	*
+	* @param string $path_type (Optional) Le type de path
+	*
+	* @return string Le chemin vers le document
+	*/
 	public function get_document_path( $path_type = 'basedir' ) {
 		$upload_dir = wp_upload_dir();
 		return $upload_dir[ $path_type ] . '/digirisk';
@@ -72,10 +89,8 @@ class document_class extends post_class {
 
 	/**
 	 * Création du type d'élément interne a wordpress pour gérer les catégories de documents / Create wordpress element type for managing attachment categories
-	 *
-	 * @uses register_taxonomy()
 	 */
-	function custom_type_creation() {
+	public function custom_type_creation() {
 		$labels = array(
 			'name'              => 'Categories',
 			'singular_name'     => 'Category',
@@ -104,10 +119,10 @@ class document_class extends post_class {
 	/**
 	 * Accrochage au filtre permettant d'ajouter des éléments d'affichages dans la partie gauche de l'écran sous la liste des unités de travail / Hook filter allowing to extend left part of screen below workunit list
 	 *
-	 * @param integer $group_id l'identifiant du groupement pour lequel il faut afficher la page de génération du document unique / The group identifier we have to display the DUER print interface
+	 * @param int $group_id l'identifiant du groupement pour lequel il faut afficher la page de génération du document unique / The group identifier we have to display the DUER print interface
 	 * @param string $display_mode Le mode d'affichage de l'interface / The main display mode of digirisk interface
 	 */
-	function filter_display_group_sheet_print_button( $group_id, $display_mode ) {
+	public function filter_display_group_sheet_print_button( $group_id, $display_mode ) {
 		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, $display_mode, "print", "button" ) );
 	}
 
@@ -115,12 +130,12 @@ class document_class extends post_class {
 	 * Filtrage de l'affichage des documents dans la fiche d'un élément (unité de travail/groupement/etc) / Filter documents' display into a element sheet
 	 *
 	 * @param string $output Le contenu actuel a afficher, contenu que l'on va agrémenter / The current content to update before return and display
-	 * @param JSon_Object $element L'élément sur le quel on se trouve et pour lequel on veut afficher les documents / Current element we are on and we want to display documents' for
+	 * @param object $element L'élément sur le quel on se trouve et pour lequel on veut afficher les documents / Current element we are on and we want to display documents' for
 	 * @param string $tab_to_display L'onglet sur lequel on se trouve actuellement défini par le filtre principal ( wpdigi-workunit-default-tab ) puis par l'ajax / Current tab we are on defined par main filter ( wpdigi-workunit-default-tab ) and then by ajax
 	 *
 	 * @return string Le contenu a afficher pour l'onglet et l'élément actuel / The content to display for current tab and element we are one
 	 */
-	function filter_display_doc_in_element( $output, $element, $tab_to_display ) {
+	public function filter_display_doc_in_element( $output, $element, $tab_to_display ) {
 		if ( 'sheet' == $tab_to_display ) {
 			ob_start();
 			require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'simple', "sheet", "generation-form" ) );
@@ -134,10 +149,10 @@ class document_class extends post_class {
 
 	/**
 	 * AFFICHAGE/DISPLAY - Affiche une liste de document associés à un élément selon la liste passée en paramètre du shortcode ou si elle est vide des documents liés dans la base de données / Display a document list associated to a given element passed through shortcode parameters if defined or by getting list into database if nothing tis given in args
-
+	 *
 	 * @param array $args Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
 	 */
-	function display_document_list( $element ) {
+	public function display_document_list( $element ) {
 		if ( empty( $element ) )
 			return false;
 
@@ -155,13 +170,11 @@ class document_class extends post_class {
 	/**
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément / Get file model list for a given element type
 	 *
-	 * @todo Récupèrer le chemin des documents par défaut si rien n'est trouvé dans la base / Put default way for model into plugin if nothing found into database
-	 *
 	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents / Type list we have to get document model list for
 	 *
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
-	function get_model_for_element( $current_element_type ) {
+	public function get_model_for_element( $current_element_type ) {
 		$response = array(
 			'status'		=> false,
 			'message'		=> __( 'An error occured while getting model to use for generation', 'digirisk' ),
@@ -223,10 +236,10 @@ class document_class extends post_class {
 	 *
 	 * @param string $model_path Le chemin vers le fichier modèle a utiliser pour la génération / The path to model file to use for generate the final document
 	 * @param array $document_content Un tableau contenant le contenu du fichier a écrire selon l'élément en cours d'impression / An array with the content for building file to print
-	 * @param Object $element L'élément courant sur lequel on souhaite générer un document / Current element where the user want to generate a file for
+	 * @param object $element L'élément courant sur lequel on souhaite générer un document / Current element where the user want to generate a file for
 	 *
 	 */
-	function generate_document( $model_path, $document_content, $document_name ) {
+	public function generate_document( $model_path, $document_content, $document_name ) {
 		$response = array(
 			'status'	=> false,
 			'message'	=> '',
@@ -274,7 +287,16 @@ class document_class extends post_class {
 		return $response;
 	}
 
-	function set_document_data( $data_key, $data_value, $current_odf ) {
+	/**
+	* Ecris dans le document ODT
+	*
+	* @param string $data_key La clé dans le ODT.
+	* @param string $data_value La valeur de la clé.
+	* @param object $current_odf Le document courant
+	*
+	* @return object Le document courant
+	*/
+	public function set_document_data( $data_key, $data_value, $current_odf ) {
 
 		/**	Dans le cas où la donnée a écrire est une valeur "simple" (texte) / In case the data to write is a "simple" (text) data	*/
 		if ( !is_array( $data_value ) ) {
@@ -323,9 +345,9 @@ class document_class extends post_class {
 	 *
 	 * @param array $current_element_type Le type de document actuellement en cours de création / Currently being created document type
 	 *
-	 * @return integer La version du document actuellement en cours de création / Currently being created document version
+	 * @return int La version du document actuellement en cours de création / Currently being created document version
 	 */
-	function get_document_type_next_revision( $current_element_type, $element_id ) {
+	public function get_document_type_next_revision( $current_element_type, $element_id ) {
 		global $wpdb;
 
 		/**	Récupération de la date courante / Get current date	*/
@@ -361,10 +383,10 @@ class document_class extends post_class {
 	/**
 	 * Définition du modèle de document a utiliser pour un type de document donné / Define document model to use for a given document type
 	 *
-	 * @param unknown_type $model_path
-	 * @param unknown_type $document_type
+	 * @param string $model_path Le chemin vers le modèle
+	 * @param string $document_type Le type du document
 	 */
-	function set_default_document( $file, $document_type ) {
+	public function set_default_document( $file, $document_type ) {
 		$the_file_content = @file_get_contents( $file );
 
 		/**	Check if file is a valid one	*/
@@ -412,9 +434,9 @@ class document_class extends post_class {
 	 *
 	 * @param string $final_file_path The zip file path where to save it / Le chemin vers lequel il faut sauvegarder le fichier zip
 	 * @param array $file_list The file list to add to the zip file / La liste des fichiers à ajouter au fichier zip
-	 * @param Object $element The current element where to associate the zip file to / L'élément auquel il faut associer le fichier zip
+	 * @param object $element The current element where to associate the zip file to / L'élément auquel il faut associer le fichier zip
 	 */
-	function create_zip( $final_file_path, $file_list, $element, $version ) {
+	 public function create_zip( $final_file_path, $file_list, $element, $version ) {
 		$zip = new ZipArchive();
 
 		$response = array();
@@ -444,13 +466,13 @@ class document_class extends post_class {
 	/**
 	 * Create the document into database and call the generation function / Création du document dans la base de données puis appel de la fonction de génération du fichier
 	 *
-	 * @param Object $element The element to create the document for / L'élément pour lequel il faut créer le document
+	 * @param object $element The element to create the document for / L'élément pour lequel il faut créer le document
 	 * @param array $document_type The document's categories / Les catégories auxquelles associer le document généré
 	 * @param array $document_data Datas to write into the document template / Les données a écrire dans le modèle de document
 	 *
-	 * @return mixed The result of document creation / le résultat de la création du document
+	 * @return object The result of document creation / le résultat de la création du document
 	 */
-	function create_document( $element, $document_type, $document_data ) {
+	public function create_document( $element, $document_type, $document_data ) {
 		$response = array(
 			'status' => true,
 		);
@@ -539,7 +561,6 @@ class document_class extends post_class {
 
   	return $response;
 	}
-
 }
 
 document_class::get();

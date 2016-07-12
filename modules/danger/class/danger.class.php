@@ -21,7 +21,7 @@ class danger_class extends term_class {
 	/**
 	* Récupères le nom du danger par rapport à son ID
 	*
-	* @param int $danger_id (test: 10) L'ID du danger
+	* @param int $danger_id L'ID du danger
 	*
 	* @return string Le nom du danger
 	*/
@@ -37,10 +37,9 @@ class danger_class extends term_class {
 	/**
 	* Récupères le term parent selon l'ID du danger enfant
 	*
-	* @param int $danger_id (test: 10) L'ID du danger enfant
+	* @param int $danger_id L'ID du danger enfant
 	*
-	* @return int Le parent id
-	* @todo Fusionner avec la fonction get_name_by_id
+	* @return int
 	*/
 	public function get_parent_by_id( $danger_id ) {
 		if (  true !== is_int( ( int )$danger_id ) )

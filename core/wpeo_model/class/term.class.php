@@ -43,9 +43,9 @@ class term_class extends singleton_util {
 	/**
 	 * Mise à jour d'une taxinomie / Update the taxonomy
 	 *
-	 * @param array|Object $data Les données de la taxinomie a sauvegarder dans la base de données / Datas o ftaxonomy to save into database
+	 * @param array $data Les données de la taxinomie a sauvegarder dans la base de données / Datas o ftaxonomy to save into database
 	 *
-	 * @return Object L'objet sauvegardé / The saved object
+	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function update( $data ) {
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
@@ -75,9 +75,9 @@ class term_class extends singleton_util {
 	/**
 	 * Création d'une taxinomie / Create the taxonomy
 	 *
-	 * @param array|Object $data Les données de la taxinomie a sauvegarder dans la base de données / Datas o ftaxonomy to save into database
+	 * @param array $data Les données de la taxinomie a sauvegarder dans la base de données / Datas o ftaxonomy to save into database
 	 *
-	 * @return Object L'objet sauvegardé / The saved object
+	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function create( $data ) {
 		$object = $data;
@@ -114,7 +114,7 @@ class term_class extends singleton_util {
 	/**
 	 * Suppresion d'une taxinomie / Delete the taxonomy
 	 *
-	 * @param integer $id L'identifiant de la taxinomie a supprimer / The taxonomy identifier to delete
+	 * @param int $id L'identifiant de la taxinomie a supprimer / The taxonomy identifier to delete
 	 */
 	public function delete( $id ) {
 		wp_delete_term( $id );
@@ -123,8 +123,8 @@ class term_class extends singleton_util {
 	/**
 	 * Retourne une taxinomie construite a partir du modèle / Return a taxonomy builded from the model
 	 *
-	 * @param integer $id l'identifiant de la taxinomie a retourner / The taxonomy identifier
-	 * @param boolean $cropped Optionnal Permet de choisir si il faut retourner la taxinomie complète ou uniquement les chamsp principaux / Allow to define if the taxonomy must be completly returned or just main fileds must be returned
+	 * @param int $id l'identifiant de la taxinomie a retourner / The taxonomy identifier
+	 * @param bool $cropped Permet de choisir si il faut retourner la taxinomie complète ou uniquement les chamsp principaux
 	 *
 	 * @return object la taxinomie construite selon le modèle / The taxonomy builded according to the model
 	 */
@@ -138,6 +138,9 @@ class term_class extends singleton_util {
 		return $term;
 	}
 
+	/**
+	* Show model
+	*/
 	public function show_model() {
 			return _e( 'Try to get the model definition', 'term_ctr_mdl' );
 	}
@@ -146,7 +149,7 @@ class term_class extends singleton_util {
 	 * Retourne une liste de taxinomies selon les paramètres donnés / Return a taxonomy list according to given parameters
 	 *
 	 * @param array $args_where Optionnal Les paramètres du filtre permettant de récupérer les taxinomies / Parameters allowing to retrieve taxonomies
-	 * @param boolean $cropped Optionnal Permet de choisir si il faut retourner la taxinomie complète ou uniquement les chamsp principaux / Allow to define if the taxonomy must be completly returned or just main fileds must be returned
+	 * @param bool $cropped Permet de choisir si il faut retourner la taxinomie complète ou uniquement les champs principaux
 	 *
 	 * @return array La liste des taxinomies correspondantes aux paramètres / Taxonomies corresping to parameters
 	 */

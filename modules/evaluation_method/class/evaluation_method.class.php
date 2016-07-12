@@ -25,10 +25,20 @@ class evaluation_method_class extends term_class {
 		4 => 80
 	);
 
+	/**
+	* Le constructeur
+	*/
 	protected function construct() {
 		include_once( EVALUATION_METHOD_PATH . 'model/evaluation_method.model.01.php' );
 	}
 
+	/**
+	* Créer une méthode d'évaluation
+	*
+	* @param array $data Les données pour créer la méthode d'évaluation
+	*
+	* @return object L'objet créé
+	*/
 	public function create_evaluation_method( $data ) {
 		$evaluation_method = $this->create( $data );
 
@@ -39,6 +49,9 @@ class evaluation_method_class extends term_class {
 		return $evaluation_method;
 	}
 
+	/**
+	* Créer les méthodes d'évaluation par défaut
+	*/
 	public function create_default_data() {
 		$file_content = file_get_contents( EVALUATION_METHOD_PATH . 'asset/json/default.json' );
 		$data = json_decode( $file_content );

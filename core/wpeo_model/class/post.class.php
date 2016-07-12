@@ -21,6 +21,13 @@ class post_class extends singleton_util {
 		add_filter( 'json_endpoints', array( &$this, 'callback_register_route' ) );
 	}
 
+	/**
+	* Met à jour les données d'un post
+	*
+	* @param array $data
+	*
+	* @return object L'objet
+	*/
 	public function update( $data ) {
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data ) && empty( $data->id ) ) ) {
 			return $this->create( $data );
@@ -55,6 +62,13 @@ class post_class extends singleton_util {
 		}
 	}
 
+	/**
+	* Créer un post
+	*
+	* @param array $data
+	*
+	* @return object L'objet cloné
+	*/
 	public function create( $data ) {
 		$object = $data;
 
@@ -81,20 +95,23 @@ class post_class extends singleton_util {
 		return $cloned_object;
 	}
 
+	/**
+	* Supprimes un post
+	*
+	* @param int $id L'ID du post
+	*
+	*/
 	public function delete($id) {
 		wp_trash_post($id);
-
-		$object = $this->show($id);
-
 	}
 
 	/**
 	 * Récupère un élément et le retourne construit selon le modèle / Get an element and build datas with the model
 	 *
-	 * @param integer $id L'identifiant de l'élément que l'on souhaite avoir / Element's identifier we want to get
+	 * @param int $id L'identifiant de l'élément que l'on souhaite avoir / Element's identifier we want to get
 	 * @param boolean $cropped Optionnal La fonction doit elle retourner le modèle entier ou uniquement les données principales / The function must return the entire model or only main datas
 	 *
-	 * @return Object L'objet construit selon le modèle définit / Builded object by model structure
+	 * @return object L'objet construit selon le modèle définit / Builded object by model structure
 	 */
 	public function show( $id, $cropped = false ) {
 
@@ -104,6 +121,16 @@ class post_class extends singleton_util {
 		return $post;
 	}
 
+	/**
+	* Indexe la liste des posts
+	*
+	* array['post_parent'] (Optional) L'ID parent du post
+	*
+	* @param array $args_where
+	* @param bool $cropped
+	*
+	* @return array La liste des posts
+	*/
 	public function index( $args_where = array( 'post_parent' => 0 ), $cropped = false ) {
 		$array_model = array();
 
@@ -125,6 +152,14 @@ class post_class extends singleton_util {
 		return $array_model;
 	}
 
+	/**
+	* Recherche dans les metas des posts
+	*
+	* @param string $search La recherche.
+	* @param array $array
+	*
+	* @return array La liste des posts trouvés
+	*/
 	public function search( $search, $array ) {
 			global $wpdb;
 
@@ -167,8 +202,8 @@ class post_class extends singleton_util {
 	/**
 	 * GETTER - Récupère tous les terms d'un post depuis sa définition dans le modèle / Get all term in post by the model definition
 	 *
-	 * @param mixed $object
-	 * @return array|WP_Error Array of term_id
+	 * @param array $object
+	 * @return array Le tableau des terms id
 	 */
 	public static function eo_get_object_terms( $object ) {
 		$list_term 		= array();
@@ -228,7 +263,7 @@ class post_class extends singleton_util {
 	 *
 	 * @param integer $post_id L'identifiant du post dont on veut récupérer le nom / The post identifier we want to get the name for
 	 *
-	 * @return boolean|string Le titre du post si il est trouvé, false dans le cas contraire / The post title in case it is founded, false in other case
+	 * @return boolean Le titre du post si il est trouvé, false dans le cas contraire / The post title in case it is founded, false in other case
 	 */
 	public function get_title_by_id( $post_id ) {
 		if (  true !== is_int( ( int )$post_id ) )
@@ -239,6 +274,11 @@ class post_class extends singleton_util {
 		return $post_title;
 	}
 
+	/**
+	* Récupère la dernière entrée ajouté dans les posts et en rapport avec le post_type
+	*
+	* @return int L'ID de la dernière entrée
+	*/
 	public function get_last_entry() {
 		global $wpdb;
 

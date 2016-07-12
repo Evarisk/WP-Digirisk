@@ -34,6 +34,9 @@ class evaluation_method_variable_class extends term_class {
 	protected $base = 'digirisk/evaluation-method-variable';
 	protected $version = '0.1';
 
+	/**
+	* Le constructeur
+	*/
 	protected function construct() {
 
 		/**	Inclusion du modèle / Include model	*/

@@ -48,8 +48,6 @@ class danger_category_class extends term_class {
 
 	/**
 	 * Création du type d'élément interne a wordpress pour gérer les catégories de dangers / Create wordpress element type for managing dangers categories
-	 *
-	 * @uses register_post_type()
 	 */
 	function custom_type_creation() {
 		$labels = array(
@@ -78,7 +76,10 @@ class danger_category_class extends term_class {
 		register_taxonomy( $this->taxonomy, array( risk_class::get()->get_post_type() ), $args );
 	}
 
-	function display_category_danger( $args ) {
+	/**
+	* Appelle le template qui affiche le bouton toggle ainsi que la liste de tous les dangers
+	*/
+	function display_category_danger() {
 		$danger_category_list = $this->index( array() );
 
 		require( DANGER_VIEW_DIR . '/backend/category_danger-list.php' );
