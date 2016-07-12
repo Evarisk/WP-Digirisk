@@ -39,9 +39,6 @@ class danger_category_class extends term_class {
 	 * Instanciation de l'objet cétégories de danger / Danger category instanciation
 	 */
 	protected function construct() {
-		/**	Inclusion du modèle / Include model	*/
-		include_once( DANGER_PATH . 'model/danger_category.model.01.php' );
-
 		/**	Définition du type de données personnalisées pour les catégories de dangers / Define custom type for danger categories */
 		add_action( 'init', array( $this, 'custom_type_creation' ), 1 );
 	}

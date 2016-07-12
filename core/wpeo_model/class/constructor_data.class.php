@@ -9,67 +9,71 @@ class constructor_data_class {
 	 * @return void
 	 */
 	public function __construct( $object ) {
-		$action = 'create';
+		if ( is_array( $object ) || is_object( $object ) ) {
+			$action = 'create';
 
-		if( ( is_array( $object ) && isset( $object['id'] ) ) || ( is_object( $object ) && get_class( $object ) != 'WP_User' && isset( $object->id ) ) ) {
-			$action = 'update';
-		}
+			if( ( is_array( $object ) && isset( $object['id'] ) ) || ( is_object( $object ) && get_class( $object ) != 'WP_User' && isset( $object->id ) ) ) {
+				$action = 'update';
+			}
 
-		foreach( $this->model as $field_name => $field_def ) {
-			if( ( 'create' === $action ) || ( 'update' === $action && ( ( is_object( $object ) && isset( $object->$field_name ) ) || ( is_array( $object ) && isset( $object[$field_name] ) ) ) ) ) {
-				if( !isset( $field_def['type'] ) || is_array( $field_def['type'] ) ) {
+			foreach( $this->model as $field_name => $field_def ) {
+				if( ( 'create' === $action ) || ( 'update' === $action && ( ( is_object( $object ) && isset( $object->$field_name ) ) || ( is_array( $object ) && isset( $object[$field_name] ) ) ) ) ) {
+					if( !isset( $field_def['type'] ) || is_array( $field_def['type'] ) ) {
 
-					foreach( $field_def as $sub_file_name => $sub_field_def ) {
-						if( !empty( $sub_field_def['function'] ) ) {
-							$this->$field_name = call_user_func( $sub_field_def['function'], $this );
-						}
-					}
-				}
-				else {
-					// On lui affècte la valeur par défaut
-					$this->$field_name = isset( $field_def['default'] ) ? $field_def[ 'default' ] : null;
-
-					// Il faut tester si c'est une fonction WordPress ou pas
-					// if( function_exists( $field_def['function'] ) && !empty( $this->id ) ) {
-					// 	echo "<pre>"; print_r($field_def['function']); echo "</pre>";
-					// 	$this->$field_name = call_user_func( $field_def['function'], $this->id );
-					// }
-
-					// Si c'est un objet
-					if ( is_object( $object ) ) {
-						// Si la valeur est trouvé dans le modèle et dans l'objet
-						if ( version_compare( phpversion(), '7.0.0' ) >= 0 ) {
-							if( !empty( $object->{$field_def['field']} ) ) {
-								$this->$field_name = $object->{$field_def['field']};
-								settype( $this->$field_name, $field_def['type'] );
-							}
-							else {
-								if( $field_def['required'] ) {
-									$this->$field_name = "Is required !";
-								}
-							}
-						}
-						else {
-							if( !empty( $object->$field_def['field'] ) ) {
-								$this->$field_name = $object->$field_def['field'];
-								settype( $this->$field_name, $field_def['type'] );
-							}
-							else {
-								if( $field_def['required'] ) {
-									$this->$field_name = "Is required !";
+						foreach( $field_def as $sub_file_name => $sub_field_def ) {
+							if( !empty( $sub_field_def['function'] ) ) {
+								if ( method_exists( $this, $sub_field_def['function'] ) ) {
+									$this->$field_name = call_user_func( $sub_field_def['function'], $this );
 								}
 							}
 						}
 					}
 					else {
-						// Si la valeur est trouvé dans le modèle et dans l'objet
-						if( is_array( $object ) && array_key_exists( $field_name, $object ) ) {
-							$this->$field_name = $object[$field_name];
-							settype( $this->$field_name, $field_def['type'] );
+						// On lui affècte la valeur par défaut
+						$this->$field_name = isset( $field_def['default'] ) ? $field_def[ 'default' ] : null;
+
+						// Il faut tester si c'est une fonction WordPress ou pas
+						// if( function_exists( $field_def['function'] ) && !empty( $this->id ) ) {
+						// 	echo "<pre>"; print_r($field_def['function']); echo "</pre>";
+						// 	$this->$field_name = call_user_func( $field_def['function'], $this->id );
+						// }
+
+						// Si c'est un objet
+						if ( is_object( $object ) ) {
+							// Si la valeur est trouvé dans le modèle et dans l'objet
+							if ( version_compare( phpversion(), '7.0.0' ) >= 0 ) {
+								if( !empty( $object->{$field_def['field']} ) ) {
+									$this->$field_name = $object->{$field_def['field']};
+									settype( $this->$field_name, $field_def['type'] );
+								}
+								else {
+									if( $field_def['required'] ) {
+										$this->$field_name = "Is required !";
+									}
+								}
+							}
+							else {
+								if( !empty( $object->$field_def['field'] ) ) {
+									$this->$field_name = $object->$field_def['field'];
+									settype( $this->$field_name, $field_def['type'] );
+								}
+								else {
+									if( $field_def['required'] ) {
+										$this->$field_name = "Is required !";
+									}
+								}
+							}
 						}
 						else {
-							if( $field_def['required'] ) {
-								$this->$field_name = "Is required !";
+							// Si la valeur est trouvé dans le modèle et dans l'objet
+							if( is_array( $object ) && array_key_exists( $field_name, $object ) ) {
+								$this->$field_name = $object[$field_name];
+								settype( $this->$field_name, $field_def['type'] );
+							}
+							else {
+								if( $field_def['required'] ) {
+									$this->$field_name = "Is required !";
+								}
 							}
 						}
 					}

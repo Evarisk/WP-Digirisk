@@ -60,6 +60,10 @@ class file_management_shortcode {
   *
   */
 	public function callback_shortcode_gallery( $param ) {
+		if ( !is_array( $param ) ) {
+			return false;
+		}
+		
 		$element_id = $param['element_id'];
 		$element = society_class::get()->show_by_type( $element_id );
 

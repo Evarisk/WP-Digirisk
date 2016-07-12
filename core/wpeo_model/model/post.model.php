@@ -116,7 +116,7 @@ class post_model extends constructor_data_class {
 		parent::__construct( $object );
 
 		/** If cropped don't get meta */
-		if(!$cropped) {
+		if( !$cropped && !empty( $this->id ) ) {
 
 			/** Meta */
 			$post_meta = get_post_meta( $this->id );

@@ -30,9 +30,6 @@ class risk_class extends post_class {
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {
-		/**	Inclusion du modèle pour les groupements / Include groups' model	*/
-		include_once( RISK_PATH . '/model/risk.model.01.php' );
-
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for risks management	*/
 		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
 
@@ -120,7 +117,7 @@ class risk_class extends post_class {
 		/** Chargements de tous les risques pour ensuite les trier */
 		$list_risk = array();
 		foreach ( $list_risk_id as $risk_id ) {
-			$risk_def = $this->get_risk( $risk_id );
+			$risk_def = $this->get_risk( (int)$risk_id );
 			if ( 'publish' == $risk_def->status ) {
 				$list_risk[] = $risk_def;
 			}
@@ -185,7 +182,6 @@ class risk_class extends post_class {
 
 			/**	Récupération des commentaires associés au risque / Get the comment associated to risk	*/
 			$risk->comment = risk_evaluation_comment_class::get()->index( $id, array( 'status' => -34070, ), false);
-
 			/**	On retourne la définition du risque complet / Return the complete risk definition	*/
 			return $risk;
 		}
@@ -246,7 +242,7 @@ class risk_class extends post_class {
 		if ( !is_object( $element ) ) {
 			return false;
 		}
-		
+
 		$risk_for_element = array();
 
 		/**	Define risks list args / Définition des arguments de récupération de la liste des risques	*/

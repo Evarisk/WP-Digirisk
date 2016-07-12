@@ -34,8 +34,6 @@ class risk_evaluation_comment_class extends comment_class {
 	 * Instanciation de la gestion des évaluations pour un risque / Instanciate controller for risk evaluation
 	 */
 	protected function construct() {
-		/**	Inclusion du modèle pour les groupements / Include groups' model	*/
-		include_once( RISK_PATH . '/model/risk_evaluation_comment.model.01.php' );
 	}
 
 }

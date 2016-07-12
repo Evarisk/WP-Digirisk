@@ -49,7 +49,7 @@ class functional_test {
 						$factory = DocBlockFactory::createInstance();
 			      $methods = $class->getMethods();
 
-						$json_content = $this->load_test_json( $file_path[0] );
+						$json_content = $this->load_test_json( $file_path[0], $file_path[1] );
 
 						if ( !empty( $methods ) ) {
 						  foreach ( $methods as $element ) {
@@ -98,8 +98,8 @@ class functional_test {
 		);
 	}
 
-	private function load_test_json( $file_path ) {
-		$filename = basename( $file_path, '.class.php' );
+	private function load_test_json( $file_path, $format ) {
+		$filename = basename( $file_path, '.' . $format . '.php' );
 		$path_to_json = trim( dirname( $file_path ) . '\\test\\' . $filename . '.test.json' . PHP_EOL );
 		if ( is_file ( $path_to_json ) ) {
 			$json_content = file_get_contents( $path_to_json );
@@ -122,13 +122,11 @@ class functional_test {
 
 	private function call_method( $class, $file_path, $list_methods_to_test, $json_content ) {
 		$parentClassName = ( !empty( $class->getParentClass() ) && !empty( $class->getParentClass()->name ) ) ? $class->getParentClass()->name : '';
-
-
 		if ( !empty( $list_methods_to_test ) ) {
 		  foreach ( $list_methods_to_test as $method_name =>  $method_to_test ) {
-
 				if ( !empty( $json_content[$method_name] ) ) {
 				  foreach ( $json_content[$method_name] as $json ) {
+
 						// Default value
 						echo "Custom test: " . $method_name . "(Number args: ".count($json) . ") -> " . PHP_EOL;
 						ob_start();
@@ -151,28 +149,40 @@ class functional_test {
 					}
 				}
 
-				$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
-				if (  count( $method_to_test ) - 1 !== - 1) {
-					$index = 0;
-					for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
-						$array = $this->args_to_test( count( $method_to_test ), count( $this->list_default_value ), $array );
-						$return = '';
-						echo "test: " . $method_name . " (Number args: ".count( $method_to_test ) .") -> " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
-						if ( !empty( $array['args_to_test'] ) ) {
-							if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
-								$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
-									$className = $class->name;
-									$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
+				if ( !empty( $this->list_default_value ) ) {
+					$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
+					if (  count( $method_to_test ) - 1 !== - 1) {
+						$index = 0;
+						for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
+							$array = $this->args_to_test( count( $method_to_test ), count( $this->list_default_value ), $array );
+							$return = '';
+							echo "pathFile : " . $file_path . " test: " . $method_name . " (Number args: ".count( $method_to_test ) .") -> " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
+							if ( !empty( $array['args_to_test'] ) ) {
+								if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
+									$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
+										$className = $class->name;
+										$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
+								}
+								else {
+									$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
+								}
 							}
-							else {
-								$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
-							}
+							echo $method_name . " return -> ";
+							ob_start();
+							var_dump( $return );
+							$return = ob_get_clean();
+							echo strip_tags( $return ) . PHP_EOL;
 						}
-						echo $method_name . " return -> ";
-						ob_start();
-						var_dump( $return );
-						$return = ob_get_clean();
-						echo strip_tags( $return ) . PHP_EOL;
+					}
+					else {
+						// echo "pathFile : " . $file_path . " test: " . $method_name . " (0 args) " . PHP_EOL;
+						// $className = $class->name;
+						// $return = $class->getMethod( $method_name )->invokeArgs( $className, array() );
+						// echo $method_name . " return -> ";
+						// ob_start();
+						// var_dump( $return );
+						// $return = ob_get_clean();
+						// echo strip_tags( $return ) . PHP_EOL;
 					}
 				}
 		  }

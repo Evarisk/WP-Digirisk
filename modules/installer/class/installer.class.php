@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wp_digirisk_installer {
+class installer_class {
 
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
@@ -72,4 +72,4 @@ class wp_digirisk_installer {
 
 }
 
-new wp_digirisk_installer();
+new installer_class();

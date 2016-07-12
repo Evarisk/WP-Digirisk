@@ -46,9 +46,9 @@ class legal_display_class extends post_class {
 
     $data['legal_display'] = $legal_display;
     $data['detective_work'] = $detective_work;
-		$data['detective_work']->address = address_class::get()->show( $detective_work->option['contact']['address_id'] );
+		$data['detective_work']->address = address_class::get()->show( !empty( $detective_work->option['contact']['address_id'] ) ? $detective_work->option['contact']['address_id'] : 0 );
     $data['occupational_health_service'] = $occupational_health_service;
-    $data['occupational_health_service']->address = address_class::get()->show( $occupational_health_service->option['contact']['address_id'] );
+    $data['occupational_health_service']->address = address_class::get()->show( !empty( $occupational_health_service->option['contact']['address_id'] ) ? $occupational_health_service->option['contact']['address_id'] : 0 );
     return $data;
   }
 

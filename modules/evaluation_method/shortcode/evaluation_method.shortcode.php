@@ -74,7 +74,7 @@ class evaluation_method_shortcode {
 
 		if ( !empty( $term_evarisk ) ) {
 			$risk = risk_class::get()->show( $risk_id );
-			$risk_evaluation = risk_evaluation_class::get()->show( $risk->option['current_evaluation_id'] );
+			$risk_evaluation = risk_evaluation_class::get()->show( !empty( $risk->option['current_evaluation_id'] ) ? $risk->option['current_evaluation_id'] : 0 );
 			$evarisk_evaluation_method = evaluation_method_class::get()->show( $term_evarisk->term_id );
 			$list_evaluation_method_variable = array();
 			if ( !empty( $evarisk_evaluation_method->option['formula'] ) ) {

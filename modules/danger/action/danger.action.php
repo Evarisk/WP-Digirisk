@@ -5,7 +5,7 @@ class danger_action {
 	/**
 	* Ajoutes l'action init
 	*/
-	protected function construct() {
+	public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
 	}
 
@@ -43,7 +43,7 @@ class danger_action {
 			'rewrite'               => array( 'slug' => 'danger' ),
 		);
 
-		register_taxonomy( danger_class::get()->taxonomy, array( risk_class::get()->get_post_type() ), $args );
+		register_taxonomy( danger_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
 
 	}
 }

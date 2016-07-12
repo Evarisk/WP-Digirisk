@@ -92,7 +92,7 @@ class term_model extends constructor_data_class {
 		parent::__construct( $object );
 
 		/** If cropped don't get meta */
-		if( !$cropped ) {
+		if( !$cropped && isset( $this->id ) ) {
 			/** Lecture des "metas" pour la taxinomie / Read taxonomy "meta" */
 			$meta = get_term_meta( $this->id );
 			$internal_meta = !empty( $meta ) && !empty( $meta[ $meta_key ] ) && !empty( $meta[ $meta_key ][ 0 ] ) ? json_decode( $meta[ $meta_key ][ 0 ], true ) : null;

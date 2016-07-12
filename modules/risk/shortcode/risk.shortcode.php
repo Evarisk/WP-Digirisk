@@ -26,8 +26,14 @@ class risk_shortcode {
 	* @param array $param
 	*/
 	public function callback_digi_risk( $param ) {
-		$element_id = $param['post_id'];
+		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
+
     $element = society_class::get()->show_by_type( $element_id );
+		
+		if ( !$element ) {
+			return false;
+		}
+
 		$list_risk = risk_class::get()->index( array( 'post__in' => $element->option['associated_risk'] ) );
 
 		// Si l'établissement n'a pas de risque, on remet le tableau à 0
@@ -44,6 +50,7 @@ class risk_shortcode {
 		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );
 
 		require( RISK_VIEW_DIR . '/list.view.php' );
+		return true;
 	}
 }
 

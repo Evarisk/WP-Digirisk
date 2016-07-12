@@ -59,7 +59,8 @@ class society_class extends singleton_util {
 	* @return object L'objet
 	*/
 	public function show_by_type( $id, $cropped = false ) {
-		if ( !is_int( $id ) ) {
+		$id = (int) $id;
+		if ( !is_int( (int)$id ) ) {
 			return false;
 		}
 
