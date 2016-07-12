@@ -4,6 +4,7 @@
 	define('WP_PLUGIN_DIR', dirname(dirname(dirname(__FILE__))) );
 	define('WP_LANG_DIR', 'FR');
 	define('WP_CONTENT_DIR', 'wp-content');
+	define('OBJECT', '');
 
 	function __( $str )
 	{
@@ -152,6 +153,14 @@
 
 	function get_post_ancestors( $children_id ) {
 		echo "[+] Get post ancestors for children -> " . $children_id . PHP_EOL;
+	}
+
+	function get_term_field( $type, $id, $taxonomy ) {
+		echo "[+] Get term field " . PHP_EOL;
+	}
+
+	function get_term_by( $name, $id, $taxonomy, $output = '' ) {
+		echo "[+] Get term by " . PHP_EOL;
 	}
 
 	function load_textdomain()

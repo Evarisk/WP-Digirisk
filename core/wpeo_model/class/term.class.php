@@ -48,6 +48,10 @@ class term_class extends singleton_util {
 	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function update( $data ) {
+		if ( !is_array( $data ) || !is_object( $data ) ) {
+			return false;
+		}
+
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
 			return $this->create( $data );
 		}
@@ -80,6 +84,10 @@ class term_class extends singleton_util {
 	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function create( $data ) {
+		if ( !is_array( $data ) || !is_object( $data ) ) {
+			return false;
+		}
+
 		$object = $data;
 
 		if( is_array( $data ) ) {
@@ -129,6 +137,9 @@ class term_class extends singleton_util {
 	 * @return object la taxinomie construite selon le modèle / The taxonomy builded according to the model
 	 */
 	public function show( $id, $cropped = false ) {
+		if ( !is_int( $id ) || !is_bool( $cropped ) || !class_exists( $this->model_name ) ) {
+			return false;
+		}
 		/**	Récupération de la taxinomie depuis wordpress / Get the taxonomy from wordpress	*/
  		$wp_term = get_term_by( 'id', $id, $this->taxonomy, OBJECT );
 
@@ -154,6 +165,10 @@ class term_class extends singleton_util {
 	 * @return array La liste des taxinomies correspondantes aux paramètres / Taxonomies corresping to parameters
 	 */
 	public function index( $args = array(), $cropped = false ) {
+		if ( !is_array( $args ) || !is_bool( $cropped ) || !class_exists( $this->model_name ) ) {
+			return false;
+		}
+
 		$array_model = array();
 
 		$term_final_args = array_merge( $args, array( 'hide_empty' => false, ) );
@@ -166,42 +181,6 @@ class term_class extends singleton_util {
 		}
 
 		return $array_model;
-	}
-
-	/**
-	 * Ajoute les routes par défaut pour les éléments de type POST dans wordpress / Add default routes for POST element type into wordpress
-	 *
-	 * @param array $array_route Les routes existantes dans l'API REST de wordpress / Existing routes into Wordpress REST API
-	 *
-	 * @return array La liste des routes personnalisées ajoutées aux routes existantes / The personnalized routes added to existing
-	 */
-	public function callback_register_route( $array_route ) {
-		/**	Récupération de la définition du model pour l'élément / Get model structure for element	*/
-		$array_route['/' . $this->version . '/show_model/' . $this->base ] = array(
-				array( array( $this, 'show_model' ), WP_JSON_Server::READABLE )
-		);
-
-		/** Récupération de la liste complète des éléments / Get all existing elements */
-		$array_route['/' . $this->version . '/get/' . $this->base ] = array(
-				array( array( $this, 'index' ), WP_JSON_Server::READABLE | WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Récupération d'un élément donné / Get a given element */
-		$array_route['/' . $this->version . '/get/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'show' ), WP_JSON_Server::READABLE |  WP_JSON_Server::ACCEPT_JSON )
-		);
-
-		/** Mise à jour d'un élément / Update an element */
-		$array_route['/' . $this->version . '/post/' . $this->base . ''] = array(
-				array( array( $this, 'update' ), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		/** Suppression d'un élément / Delete an element */
-		$array_route['/' . $this->version . '/delete/' . $this->base . '/(?P<id>\d+)'] = array(
-				array( array( $this, 'delete' ), WP_JSON_Server::DELETABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-
-		return $array_route;
 	}
 
 	/**
