@@ -36,19 +36,8 @@ class recommendation_category_class extends term_class {
 
 	public $element_prefix = 'R';
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "Instanciation des outils pour la gestion des catégories de préconisation et les préconisations / Instanciate utilities for managing recommendation categories and recommendations",
-		"type": "function",
-		"check": false,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
+	/**
+	* Le constructeur
 	*/
 	protected function construct() {
 		/**	Inclusion du modèle / Include model	*/
@@ -58,19 +47,8 @@ class recommendation_category_class extends term_class {
 		add_action( 'init', array( $this, 'recommendation_category_type' ), 0 );
 	}
 
-	/* PRODEST:
-	{
-		"name": "recommendation_category_type",
-		"description": "Création du type d'élément interne a wordpress pour gérer les catégories de danger / Create wordpress element type for managing danger categories",
-		"type": "function",
-		"check": false,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
+	/**
+	* Déclares la taxonomy recommendation category
 	*/
 	function recommendation_category_type() {
 		$labels = array(

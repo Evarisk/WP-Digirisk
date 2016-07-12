@@ -1,8 +1,16 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class group_configuration_class extends singleton_util {
+	/**
+	* Le constructeur
+	*/
 	protected function construct() {}
 
+	/**
+	* Affiche le formulaire pour configurer un groupement
+	*
+	* @param object $element L'élement du groupement
+	*/
   public function display( $element ) {
     $address = address_class::get()->show( max( $element->option['contact']['address'] ) );
 

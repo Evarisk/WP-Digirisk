@@ -12,9 +12,19 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class file_management_class extends singleton_util {
+	/**
+	* Le constructeur
+	*/
 	protected function construct() {}
 
-	// @TODO : Ajout du support multifichier, Sécurité nonce et $_POST['file_id']
+	/**
+	* Associes un fichier à un element, todo: Sécurité
+	*
+	* @param int $file_id L'ID du fichier à associer
+	* @param int $element_id L'ID de l'élement parent
+	* @param string $object_name Le type de l'objet
+	* @param bool $thumbnail (Optional) Le défini en vignette
+	*/
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
     $element = $object_name::get()->show( $element_id );
 

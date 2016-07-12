@@ -37,19 +37,8 @@ class recommendation_class extends term_class {
 	public $element_prefix = 'PA';
 	public $last_affectation_index_key = '_wpdigi_last_recommendation_affectation_unique_key';
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "Instanciation des outils pour la gestion des catégories de préconisation et les préconisations / Instanciate utilities for managing recommendation categories and recommendations",
-		"type": "function",
-		"check": false,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
+	/**
+	* Le constructeur
 	*/
 	protected function construct() {
 		/**	Inclusion du modèle / Include model	*/
@@ -59,6 +48,9 @@ class recommendation_class extends term_class {
 		add_action( 'init', array( $this, 'recommendation_type' ), 0 );
 	}
 
+	/**
+	* Déclares la taxonomy recommendation
+	*/
 	function recommendation_type() {
 		$labels = array(
 			'name'                       => _x( 'Recommendations', 'digirisk' ),
@@ -93,6 +85,9 @@ class recommendation_class extends term_class {
 
 	}
 
+	/**
+	* Créer les données par défaut
+	*/
 	public function create_default_data() {
 		$file_content = file_get_contents( RECOMMENDATION_PATH . 'asset/json/default.json' );
 		$data = json_decode( $file_content );

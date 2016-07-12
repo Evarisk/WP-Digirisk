@@ -51,8 +51,8 @@ class risk_class extends post_class {
 	}
 
 	/**
-	 * SETTER - Création des types d'éléments pour la gestion de l'entreprise / Create the different element for risk management
-	 */
+	* Déclares le post type: risque
+	*/
 	function custom_post_type() {
 		/**	Créé les sociétés: élément principal / Create risk : main element 	*/
 		$labels = array(
@@ -102,7 +102,7 @@ class risk_class extends post_class {
 	/**
 	 * DISPLAY - Génération de l'affichage des risques à partir d'un shortcode / Generate display for risks through shortcode
 	 *
-	 * @param array $args La liste des paramètres passées au shortcode / The parameter list passed to shortcode
+	 * @param object $element L'objet
 	 */
 	function display_risk_list( $element ) {
 
@@ -161,7 +161,7 @@ class risk_class extends post_class {
 	/**
 	 * GETTER - Récupération d'un risque avec toutes les données associés déjà construite / Get a complete risk definition
 	 *
-	 * @param integer $id L'identifiant du risque qu'il faut récupèrer / The risk identifier to get
+	 * @param int $id L'identifiant du risque qu'il faut récupèrer / The risk identifier to get
 	 *
 	 * @return object Le risque complet / The complete risk
 	 */
@@ -211,7 +211,7 @@ class risk_class extends post_class {
 	 * Filtrage de l'affichage des risques dans la fiche d'un élément (unité de travail/groupement/etc) / Filter risks' display into a element sheet
 	 *
 	 * @param string $output Le contenu actuel a afficher, contenu que l'on va agrémenter / The current content to update before return and display
-	 * @param JSon_Object $element L'élément sur le quel on se trouve et pour lequel on veut afficher les risques / Current element we are on and we want to display risks' for
+	 * @param object $element L'élément sur le quel on se trouve et pour lequel on veut afficher les risques / Current element we are on and we want to display risks' for
 	 * @param string $tab_to_display L'onglet sur lequel on se trouve actuellement défini par le filtre principal ( wpdigi-workunit-default-tab ) puis par l'ajax / Current tab we are on defined par main filter ( wpdigi-workunit-default-tab ) and then by ajax
 	 *
 	 * @return string Le contenu a afficher pour l'onglet et l'élément actuel / The content to display for current tab and element we are one
@@ -231,9 +231,9 @@ class risk_class extends post_class {
 	/**
 	 * Get the risk list for an element directly from database / Récupère la liste des risques pour un element dans la base de données
 	 *
-	 * @param Object $element The element we need to get risk list for / L'élément pour lequel il faut récupèrer la liste des risques
+	 * @param object $element The element we need to get risk list for / L'élément pour lequel il faut récupèrer la liste des risques
 	 *
-	 * @return WP_Query Risk list for given element / La liste des risques pour l'élément donné en paramètre
+	 * @return object Risk list for given element / La liste des risques pour l'élément donné en paramètre
 	 */
 	function get_risk_list_for_element( $element ) {
 		$risk_for_element = array();

@@ -128,6 +128,11 @@ class group_class extends post_class {
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, ( !empty( $mode ) && in_array( $mode, array( 'simple', 'full',  ) ) ? $mode : 'simple' ), 'society/society', 'tree' ) );
 	}
 
+	/**
+	* Affiche tous les groupements
+	*
+	* @param int $default_selected_group_id L'ID du groupement selectionné par défaut
+	*/
 	public function display_all_group( $default_selected_group_id = null ) {
 		/**	Get existing groups for main selector display	*/
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
@@ -146,6 +151,11 @@ class group_class extends post_class {
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list' ) );
 	}
 
+	/**
+	* Affiche un groupement
+	*
+	* @param int $group_id L'ID du groupement
+	*/
 	public function display( $group_id ) {
 		$group = $this->show( $group_id );
 
@@ -154,16 +164,29 @@ class group_class extends post_class {
 		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'sheet', 'simple' ) );
 	}
 
+	/**
+	* todo: Fonction inutile ?
+	*/
 	public function get_unique_identifier_in_list_by_id( $group_id, $group_list ) {
 		$group = $this->show( $group_id );
 		return $group->option['unique_identifier'];
 	}
 
+	/**
+	* todo: Fonction inutile ?
+	*/
 	public function get_title_in_list_by_id( $group_id, $group_list ) {
 		$group = $this->show( $group_id );
 		return $group->title;
 	}
 
+	/**
+	* Fait le rendu des groupements
+	*
+	* @param int $default_selected_group_id L'ID du groupemnt selectionné par défaut
+	* @param int $group_id L'ID du groupement courant
+	* @param string $class La classe pour l'HTML
+	*/
 	public function render_list_item( $default_selected_group_id, $group_id = 0, $class = '' ) {
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => $group_id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list-item' ) );
@@ -172,7 +195,7 @@ class group_class extends post_class {
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree
 	 *
-	 * @param Object $element L'élément actuel dont il faut récupérer la liste des risques de manière récursive / Current element where we have to get risk list recursively
+	 * @param object $element L'élément actuel dont il faut récupérer la liste des risques de manière récursive / Current element where we have to get risk list recursively
 	 *
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 */
@@ -195,6 +218,13 @@ class group_class extends post_class {
 		return $risks_in_tree;
 	}
 
+	/**
+	* Récupères les elements enfants
+	*
+	* @param object $element L'élement parent
+	* @param string $tabulation ?
+	* @param array extra_params ?
+	*/
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();
 		$element_tree = '';
@@ -233,6 +263,12 @@ class group_class extends post_class {
 		return $element_children;
 	}
 
+	/**
+	* Récupères l'id des elements enfants
+	*
+	* @param int $element_id L'ID de l'élement parent
+	* @param array $list_id La liste des ID
+	*/
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
 		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ), false );
 		if( !empty( $group_list ) ) {
@@ -308,7 +344,7 @@ class group_class extends post_class {
 	/**
 	 * Construit l'affichage des onglets existant dans une unité de travail / Build the existing tab for workunit
 	 *
-	 * @param Object $workunit L'unité de travail actuellement en cours d'édition / The current work unit
+	 * @param object $workunit L'unité de travail actuellement en cours d'édition / The current work unit
 	 * @param string $default_tab L'onglet a sélectionner automatiquement : The default tab to select
 	 */
 	 public function display_group_tab( $group, $default_tab ) {
@@ -322,7 +358,7 @@ class group_class extends post_class {
 	 /**
 	  * Gestion de l'affichage du contenu des onglets pour une unité de travail / Manage content display into workunit
 	  *
-	  * @param Object $workunit La définition complète de l'unité de travail sur laquelle on se trouve / The complete definition for the current workunit we are on
+	  * @param object $workunit La définition complète de l'unité de travail sur laquelle on se trouve / The complete definition for the current workunit we are on
 	  * @param string $tab_to_display Permet de sélectionner les données a afficher ( par défaut affiche un shortcode basé sur cet valeur ) / Allows to display tab content to display ( Display a shortcode composed with this value by default )
 	  */
 	 public function display_group_tab_content( $group, $tab_to_display ) {
@@ -336,53 +372,4 @@ class group_class extends post_class {
 	 		echo $output;
 	 	}
 	 }
-
-	 function filter_add_sheet_tab_to_element( $tab_list, $current_element ) {
-		/** Définition de l'onglet permettant l'affichage des utilisateurs pour le type d'élément actuel / Define the tab allowing to display evaluators' tab for current element type	*/
-		$tab_list = array_merge( $tab_list, array(
-			'generate-sheet' => array(
-				'text'	=> __( 'DUER Generation', 'digirisk' ),
-				'count' => 0,
-			),
-			'sheet' => array(
-				'text'	=> __( 'Document list', 'digirisk' ),
-				'count' => 0,
-			),
-			'configuration' => array(
-				'text' => __( 'Configuration', 'digirisk' ),
-				'count' => 0,
-			)
-		) );
-
-		return $tab_list;
-	}
-
-	function filter_display_generate_document_unique_in_element( $output, $element, $tab_to_display ) {
-		if ( 'generate-sheet' == $tab_to_display ) {
-			$current_user = wp_get_current_user();
-
-			ob_start();
-			require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'sheet', 'form' ) );
-			$output .= ob_get_contents();
-			ob_end_clean();
-		}
-
-		if ( 'sheet' == $tab_to_display ) {
-			$document_controller = new document_controller_01();
-			ob_start();
-			$document_controller->display_document_list( $element );
-			$output .= ob_get_contents();
-			ob_end_clean();
-		}
-
-		if( 'configuration' == $tab_to_display ) {
-			$wpdigi_group_configuration_ctr = new wpdigi_group_configuration_ctr();
-			ob_start();
-			$wpdigi_group_configuration_ctr->display( $element );
-			$output .= ob_get_clean();
-		}
-
-		return $output;
-	}
-
 }

@@ -11,10 +11,18 @@ class legal_display_class extends post_class {
 
 	public $element_prefix = 'LD';
 
+	/**
+	* Le constructeur
+	*/
   protected function construct() {
     include_once( LEGAL_DISPLAY_PATH . '/model/legal_display.model.01.php' );
   }
 
+	/**
+	* Récupères les données de l'affichage légal en base de donnée et affiches le template du formulaire
+	*
+	* @param object $element L'objet groupement
+	*/
   public function display( $element ) {
 		$data = $this->load_data( $element->id );
     require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'display' ) );
@@ -22,6 +30,10 @@ class legal_display_class extends post_class {
 
   /**
   * Charges toutes les données du dernier affichage légal
+	*
+	* @param int $element_id L'ID du groupement
+	*
+	* @return array Les données chargées
   */
   public function load_data( $element_id ) {
     $data = array( 'legal_display' => array(), 'detective_work' => array(), 'occupational_health_service' => array() );
@@ -40,6 +52,13 @@ class legal_display_class extends post_class {
     return $data;
   }
 
+	/**
+	* Sauvegardes les données de l'affichage légal en base de donnée
+	*
+	* @param array $data Les données à sauvegarder
+	*
+	* @return object L'objet sauvé: affichage légal
+	*/
   public function save_data( $data ) {
     // @todo : securité
 
