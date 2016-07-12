@@ -43,7 +43,11 @@ class society_class extends singleton_util {
 		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 
-		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, $display_mode, 'dashboard' ) );
+		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, $display_mode, 'dashboard' );
+
+		if( $path ) {
+			require_once( $path );
+		}
 	}
 
 	/**
@@ -55,7 +59,7 @@ class society_class extends singleton_util {
 	* @return object L'objet
 	*/
 	public function show_by_type( $id, $cropped = false ) {
-		if ( !is_int( $id ) || !is_bool( $cropped ) ) {
+		if ( !is_int( $id ) ) {
 			return false;
 		}
 
@@ -82,7 +86,7 @@ class society_class extends singleton_util {
 		if ( !is_object( $establishment ) ) {
 			return false;
 		}
-		
+
 		$type = empty( $establishment->type ) ? $establishment['type'] : $establishment->type;
 		$model_name = str_replace( 'digi-', '', $type ) . '_class';
 		$establishment = $model_name::get()->update( $establishment );

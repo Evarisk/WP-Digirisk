@@ -137,6 +137,10 @@
 		echo "[+] Sanitizing -> " . $str . PHP_EOL;
 	}
 
+	function get_children() {
+		echo "[+] Get children -> " . PHP_EOL;
+	}
+
 	function get_post( $post = null, $output = OBJECT, $filter = 'raw' ) {
 		echo "[+] Requesting post " . PHP_EOL;
 	}
@@ -279,6 +283,10 @@
 		echo '[+] WP Mkdir p -> ' . $path . PHP_EOL;
 	}
 
+	function wp_nonce_field( $action ) {
+		echo "[+] WP Nonce field -> " . $action . PHP_EOL;
+	}
+
 	function wp_upload_dir()
 	{
 		$dir = dirname(__FILE__);
@@ -360,6 +368,10 @@
 	function wp_upload_bits( $name, $deprecated, $bits, $time = '' ) {
 		echo "[+] Wp upload bits -> " . $name . PHP_EOL;
 		return '';
+	}
+
+	function _e( $text, $domain ) {
+		echo "[+] _e -> " . $text . " : " . $domain . PHP_EOL;
 	}
 
 	class WPDB
