@@ -134,7 +134,15 @@ class functional_test {
 							for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
 								$array = $this->args_to_test( count( $method_to_test ) - 1, count( $this->list_default_value ), $array );
 								echo "test :" . $method_name . " with : " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
-								$class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
+								$parentClassName = ( !empty( $class->getParentClass() ) && !empty( $class->getParentClass()->name ) ) ? $class->getParentClass()->name : '';
+								if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
+									$parentClassName == 'user_class' || $parentClassName == 'singleton_class' ) ) {
+										$className = $class->name;
+										$class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
+								}
+								else {
+									$class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
+								}
 							}
 						}
 				  // }
