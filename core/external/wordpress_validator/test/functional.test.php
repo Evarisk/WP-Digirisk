@@ -38,6 +38,10 @@ class functional_test {
 					$this->list_methods_to_test[$file_path[0]] = array();
 
 					$class_name = $class_info['namespace'];
+					if ( !empty( $class_name ) ) {
+						$class_name .= '\\';
+					}
+					
 		      $class_name .= $class_info['class_name'];
 		      $class = new ReflectionClass( $class_name );
 
@@ -140,8 +144,6 @@ class functional_test {
 	private function args_to_test( $number, $array ) {
 		$array['args_to_test'] = array();
 
-		// echo "<pre>"; print_r($array); echo "</pre>";
-
 		for( $i = 0; $i < $number; $i++ ) {
 			if ( $array['default_test'][$i] >= $number ) {
 				$array['default_test'][$i] = 0;
@@ -169,16 +171,6 @@ class functional_test {
 
 		$array['default_test'][$array['index']]++;
 
-		// for ( $i = 0; $i < $number; $i++ ) {
-		// 	if ( $i === $array['number'] ) {
-		// 		$array['default_test'][$i] = $array['index'];
-		// 	}
-		// 	else {
-		// 		$array['default_test'][$i] = $array['other_index'];
-		// 	}
-		// }
-
-
 		return array(
 			'index' => $array['index'],
 			'number' => $array['number'],
@@ -187,43 +179,6 @@ class functional_test {
 			'default_test' => $array['default_test'],
 		);
 	}
-
-	private function search_args( $number, $index = 0 ) {
-
-	}
-
-
-	// 			$monArray = [];
-	//
-	// 			// for 0 < n : $monArray[n] = 0;
-	//
-	// 			$monTableau = uneFonction(3, 0);
-	//
-	//
-	//
-	// 			function uneFonction($n, $index)
-	// 			{
-	//
-	// 				for($a = 0; $a < $n; $a++)
-	//
-	// 				on récupère la valeur en cours pour la variable n
-	//
-	// 				$value[$a] = $defaultValue[$monArray[$n]]
-	//
-	//
-	// 				$monArray[$index] ++
-	// 				if(monArray[$n] > $n) $index++;
-	//
-	//
-	//
-	//
-	// 			}
-	//
-	//
-	//
-	// 	echo '[+] test with ' . implode( ',', $args_to_test ) . PHP_EOL;
-	// 	return $args_to_test;
-	// }
 
 	private function parseTestValue( $type, $description ) {
 		preg_match( '/\(test:(.*)\)/' , $description, $matched );

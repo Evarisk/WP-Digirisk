@@ -170,6 +170,11 @@ class workunit_class extends post_class {
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $dislay_mode ) );
 	}
 
+	/**
+	* Génère le ODT de l'unité de travail
+	*
+	* @param int $workunit_id L'ID de l'unité de travail
+	*/
 	function generate_workunit_sheet( $workunit_id ) {
 		$response = array(
 			'status' 	=> true,

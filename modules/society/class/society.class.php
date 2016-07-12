@@ -46,6 +46,14 @@ class society_class extends singleton_util {
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, $display_mode, 'dashboard' ) );
 	}
 
+	/**
+	* Récupères l'objet par rapport à son post type
+	*
+	* @param int $id L'ID de l'objet
+	* @param bool $cropped (Optional) Récupères toutes les données si false
+	*
+	* @return object L'objet
+	*/
 	public function show_by_type( $id, $cropped = false ) {
     $post_type = get_post_type( $id );
     $model_name = str_replace( 'digi-', '', $post_type ) . '_class';
@@ -54,14 +62,19 @@ class society_class extends singleton_util {
     return $establishment;
   }
 
+	/**
+	* Met à jour par rapport au post type de l'objet
+	*
+	* @param object $establishment L'objet à mêttre à jour
+	*
+	* @return object L'objet mis à jour
+	*/
 	public function update_by_type( $establishment ) {
 		$type = empty( $establishment->type ) ? $establishment['type'] : $establishment->type;
 		$model_name = str_replace( 'digi-', '', $type ) . '_class';
 		$establishment = $model_name::get()->update( $establishment );
 		return $establishment;
 	}
-
-
 }
 
 society_class::get();

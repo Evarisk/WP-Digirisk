@@ -11,10 +11,20 @@ class third_class extends post_class {
 
 	public $element_prefix = 'T';
 
+	/**
+	* Le constructeur
+	*/
   protected function construct() {
     include_once( THIRD_PATH . '/model/third.model.01.php' );
   }
 
+	/**
+	* Créer un tier
+	*
+	* @param array $data Les données du tier
+	*
+	* @return object L'objet tier
+	*/
   public function save_data( $data ) {
     // @todo : Sécurité
     // if ( empty( $data ) || empty( $data['full_name' ] ) || empty( $data['contact']['phone'] ) || empty( $data['contact']['address_id'] ) ) {

@@ -102,7 +102,7 @@ class user_class extends singleton_util {
 	* Récupères l'utilsiateur par son ID
 	*
 	* @param int $id L'ID de l'utilisateur
-	* @param bool $cropped Récupères toutes les données si false
+	* @param boolean $cropped Récupères toutes les données si false
 	*
 	* @return object L'objet utilisateur
 	*/

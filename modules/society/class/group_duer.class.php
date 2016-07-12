@@ -13,8 +13,16 @@
  * @version 6.0
  */
 class group_duer_class extends singleton_util {
+	/**
+	* Le constructeur
+	*/
 	protected function construct() {}
 
+	/**
+	* Génère le DUER
+	*
+	* @param array $data Les data à mettre dans le ODT
+	*/
 	public function generate( $data ) {
 		if ( empty( $data ) || empty( $data['element_id'] ) ) {
 			return false;
@@ -56,6 +64,13 @@ class group_duer_class extends singleton_util {
 		return true;
 	}
 
+	/**
+	* Securises toutes les données
+	*
+	* @param array $data Les données à sécuriser
+	*
+	* @return array Les données sécurisées
+	*/
 	public function securize_duer_data( $data ) {
 		$data_duer = !empty( $data['wpdigi_duer'] ) ? (array) $data['wpdigi_duer'] : array();
 
@@ -74,6 +89,11 @@ class group_duer_class extends singleton_util {
 		return $data_duer;
 	}
 
+	/**
+	* Prépares un squelette des données
+	*
+	* @return array Le squelette des données
+	*/
 	public function prepare_skeleton() {
 		/**	Définition de la structure des données du document par défaut / Define the default data structure for document	*/
 		$skeleton = array(
@@ -142,7 +162,9 @@ class group_duer_class extends singleton_util {
 	}
 
 	/**
-	* @todo: On utilise pas le logo
+	* Récupères le logo: todo: Pas utiliser
+	*
+	* @return string Le chemin vers le logo
 	*/
 	public function get_logo() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -150,6 +172,15 @@ class group_duer_class extends singleton_util {
 		return $src_logo;
 	}
 
+	/**
+	* Remplis les données du duer
+	*
+	* @param array $data_duer Les données sécurisées
+	* @param array $data_to_document Les données qui seront insérées dans le document
+	* @param object $element L'objet groupement
+	*
+	* @return array Les données qui seront insérées dans le document
+	*/
 	public function fill_data_duer( $data_duer, $data_to_document, $element ) {
 		$data_to_document = array_merge( $data_to_document, $data_duer );
 		$data_to_document['identifiantElement'] = $element->option['unique_identifier'];
@@ -158,6 +189,14 @@ class group_duer_class extends singleton_util {
 		return $data_to_document;
 	}
 
+	/**
+	* Remplis les données du duer des risques
+	*
+	* @param array $data_to_document Les données qui seront insérées dans le document
+	* @param object $element L'objet groupement
+	*
+	* @return array Les données qui seront insérées dans le document
+	*/
 	public function fill_data_risk( $data_to_document, $element ) {
 		$list_risk = group_class::get()->get_element_tree_risk( $element );
 		$risk_per_element = array();
@@ -179,6 +218,13 @@ class group_duer_class extends singleton_util {
 		return $data_to_document;
 	}
 
+	/**
+	* Formattes la date de l'audit
+	*
+	* @param array $data_duer Les données sécurisées
+	*
+	* @return string La date de l'audit formatté
+	*/
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
@@ -197,6 +243,13 @@ class group_duer_class extends singleton_util {
 		return $audit_date;
 	}
 
+	/**
+	* Génère les ODT enfants de ce DUER
+	*
+	* @param object $element L'élement groupement
+	*
+	* @return array La liste des ODT enfants
+	*/
 	public function generate_child( $element ) {
 		// Generate children
 		$list_id = array();
