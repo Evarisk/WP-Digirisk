@@ -63,18 +63,18 @@ class danger_class extends term_class {
 				$unique_key = wpdigi_utils::get_last_unique_key( 'term', danger_category_class::get()->get_taxonomy() );
 				$unique_key++;
 				$unique_identifier = danger_category_class::get()->element_prefix . '' . $unique_key;
-				$danger_category = danger_category_class::get()->create( array(
+				$data = array(
 					'name' => $json_danger_category->name,
 					'option' => array(
 						'unique_key' => $unique_key,
 						'unique_identifier' => $unique_identifier,
 						'status' => $json_danger_category->option->status,
 					),
-				) );
-
+				);
+				$danger_category = danger_category_class::get()->create( $data );
 
 				if ( is_wp_error( $danger_category ) && !empty( $danger_category->errors ) && !empty( $danger_category->errors['term_exists'] ) ) {
-					$danger_category = $this->show( $danger_category->error_data['term_exists'] );
+					$danger_category = danger_category_class::get()->show( $danger_category->error_data['term_exists'] );
 				}
 
 				if ( $json_danger_category->option->status == 'valid' ) {

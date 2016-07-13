@@ -18,7 +18,7 @@ class risk_evaluation_action {
 	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	*/
 	public function __construct() {
-		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 1 );
+		add_action( 'wp_ajax_save_risk', array( $this, 'ajax_save_risk' ) );
 	}
 
 	/**
@@ -29,26 +29,38 @@ class risk_evaluation_action {
   * @param array $_POST Les données envoyées par le formulaire
   *
   */
-	public function callback_save_risk() {
-		check_ajax_referer( 'save_risk' );
+	public function ajax_save_risk() {
+		check_ajax_referer( 'ajax_save_risk' );
 
 		$risk_evaluation_level = !empty( $_POST['risk_evaluation_level'] ) ? (int) $_POST['risk_evaluation_level'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 
     if ( $risk_evaluation_level === 0 || $method_evaluation_id === 0 ) {
-      wp_send_json_error();
+      wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
     }
 
 		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );
 		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
 
+		if ( $method_evaluation_id != $method_evaluation_digirisk_simplified->term_id && $method_evaluation_id != $method_evaluation_digirisk_complex->term_id ) {
+			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+		}
+
 		$data = array();
 
 		if ( $method_evaluation_id == $method_evaluation_digirisk_simplified->term_id ) {
 			$data = $this->update_method_simplified( $risk_evaluation_level );
+
+			if ( !$data ) {
+				wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+			}
 		}
 		else if ( $method_evaluation_id == $method_evaluation_digirisk_complex->term_id ) {
 			$data = $this->update_method_complex( $method_evaluation_digirisk_complex->term_id );
+			
+			if ( !$data ) {
+				wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+			}
 		}
 
 		// Récupère la dernière clé unique
@@ -59,6 +71,8 @@ class risk_evaluation_action {
 		$data['option']['unique_identifier'] = 'E' . $new_unique_key;
 
 		risk_evaluation_class::get()->update( $data );
+
+		do_action( 'save_risk' );
 	}
 
 	/**
@@ -70,6 +84,10 @@ class risk_evaluation_action {
 	public function update_method_simplified( $risk_evaluation_level ) {
 		// Récupère la variable de la méthode simplifiée
 		$term_method_variable = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
+
+		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > 4 ) {
+			return false;
+		}
 
 		// Le niveau du risque + la force du risque par rapport à son level
 		$risk_level = array(
@@ -117,6 +135,10 @@ class risk_evaluation_action {
 		}
 
 		$evaluation_method = evaluation_method_class::get()->show( $term_id );
+		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > max( array_keys( $evaluation_method->option['matrix'] ) ) ) {
+			return false;
+		}
+
 		$equivalence = $evaluation_method->option['matrix'][$risk_evaluation_level];
 		$scale = scale_util::get_scale( $equivalence );
 

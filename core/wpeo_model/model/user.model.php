@@ -162,7 +162,7 @@ class user_model extends constructor_data_class {
 		parent::__construct( $object );
 
 		/** If cropped don't get meta */
-		if ( !$cropped && !empty( $this->id ) ) {
+		if ( !$cropped ) {
 			$user_meta = get_user_meta( $this->id );
 
 			if ( !empty( $user_meta ) )

@@ -1,0 +1,26 @@
+{
+	"ajax_installer_step_1": [
+		{
+			"address": {
+				"address": "",
+				"additional_address": "",
+				"town": "",
+				"postcode": ""
+			},
+			"groupement": {
+				"title": "Test",
+				"content": "",
+				"date": "13/07/2016",
+				"option": {
+					"identity": {
+						"siren": "",
+						"siret": ""
+					},
+					"contact": {
+						"phone": ""
+					}
+				}
+			}
+		}
+	]
+}

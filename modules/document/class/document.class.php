@@ -471,7 +471,7 @@ class document_class extends post_class {
 
 		$response = array();
 
-		if( $zip->open( $final_file_path, ZipArchive::CREATE ) !== TRUE ) {
+		if( $zip->open( $final_file_path, ZipArchive::OVERWRITE ) !== TRUE ) {
 			$response['status'] = false;
 			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'digirisk' );
 		}

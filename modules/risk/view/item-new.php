@@ -3,8 +3,7 @@
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-risk">
 		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
-		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr', get_class( $element ) ); ?>" />
-		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
+		<input type="hidden" name="element_id" value="<?php echo $society->id; ?>" />
 
 		<ul class="wp-digi-table">
 			<li>

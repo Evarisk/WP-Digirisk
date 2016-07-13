@@ -94,6 +94,7 @@ class wpdigi_risk_mdl_01 extends post_model {
 		$type = $array_model['type']['field'];
 
 		if ( !empty( $object->$type ) ) {
+
 			$taxonomy_objects = get_object_taxonomies( $object->$type, 'objects' );
 			foreach ( $taxonomy_objects as $taxonomy => $taxonomy_def ) {
 				$this->model['taxonomy'][$taxonomy] = array(
@@ -105,6 +106,7 @@ class wpdigi_risk_mdl_01 extends post_model {
 				);
 			}
 		}
+		
 		parent::__construct( $object, $meta_key, $cropped );
 	}
 

@@ -60,6 +60,7 @@ class society_class extends singleton_util {
 	*/
 	public function show_by_type( $id, $cropped = false ) {
 		$id = (int) $id;
+
 		if ( !is_int( (int)$id ) ) {
 			return false;
 		}
@@ -84,12 +85,22 @@ class society_class extends singleton_util {
 	* @return object L'objet mis à jour
 	*/
 	public function update_by_type( $establishment ) {
-		if ( !is_object( $establishment ) ) {
+		if ( !is_object( $establishment ) && !is_array( $establishment ) ) {
 			return false;
 		}
 
-		$type = empty( $establishment->type ) ? $establishment['type'] : $establishment->type;
+		$type = ( is_object( $establishment ) && isset( $establishment->type ) ) ? $establishment->type : '';
+		$type = ( is_array( $establishment ) && !empty( $establishment['type'] ) ) ? $establishment['type'] : '';
+		if ( $type ) {
+			return false;
+		}
+
 		$model_name = str_replace( 'digi-', '', $type ) . '_class';
+
+		if ( $model_name === '_class' ) {
+			return false;
+		}
+		
 		$establishment = $model_name::get()->update( $establishment );
 		return $establishment;
 	}

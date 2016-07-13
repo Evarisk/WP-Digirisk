@@ -16,7 +16,7 @@ class risk_evaluation_comment_action {
 	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	*/
 	public function __construct() {
-		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 3 );
+		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ) );
 	}
 
 	/**
@@ -28,9 +28,7 @@ class risk_evaluation_comment_action {
 	*
   * @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_save_risk() {
-		check_ajax_referer( 'save_risk' );
-
+	public function callback_save_risk_evaluation_comment() {
     $list_comment_content = !empty( $_POST['comment_content'] ) ? (array) $_POST['comment_content' ] : array();
     $list_comment_date = !empty( $_POST['comment_date'] ) ? (array) $_POST['comment_date' ] : array();
     $list_comment_id = !empty( $_POST['comment_id'] ) ? (array) $_POST['comment_id' ] : array();
@@ -65,6 +63,8 @@ class risk_evaluation_comment_action {
 				}
 		  }
 		}
+
+		do_action( 'save_risk_evaluation_method' );
 	}
 }
 

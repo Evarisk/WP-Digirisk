@@ -9,7 +9,7 @@ class constructor_data_class {
 	 * @return void
 	 */
 	public function __construct( $object ) {
-		if ( is_array( $object ) || is_object( $object ) ) {
+		// if ( is_array( $object ) || is_object( $object ) ) {
 			$action = 'create';
 
 			if( ( is_array( $object ) && isset( $object['id'] ) ) || ( is_object( $object ) && get_class( $object ) != 'WP_User' && isset( $object->id ) ) ) {
@@ -22,9 +22,9 @@ class constructor_data_class {
 
 						foreach( $field_def as $sub_file_name => $sub_field_def ) {
 							if( !empty( $sub_field_def['function'] ) ) {
-								if ( method_exists( $this, $sub_field_def['function'] ) ) {
+								// if ( method_exists( $this, $sub_field_def['function'] ) ) {
 									$this->$field_name = call_user_func( $sub_field_def['function'], $this );
-								}
+								// }
 							}
 						}
 					}
@@ -79,7 +79,7 @@ class constructor_data_class {
 					}
 				}
 			}
-		}
+		// }
 	}
 
 	/**

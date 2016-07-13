@@ -11,8 +11,8 @@
 		</li>
 
 		<?php $i = 1; ?>
-		<?php if ( !empty( $list_risk ) ) : ?>
-			<?php foreach ( $list_risk as $risk ) : ?>
+		<?php if ( !empty( $risk_list ) ) : ?>
+			<?php foreach ( $risk_list as $risk ) : ?>
 				<?php require( RISK_VIEW_DIR . '/list-item.php' ); ?>
 			<?php endforeach; ?>
 		<?php endif; ?>

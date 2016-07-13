@@ -50,7 +50,7 @@ class installer_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_installer_step_1() {
-		wpdigi_utils::check( 'ajax_installer_step_1' );
+		check_ajax_referer( 'ajax_installer_step_1' );
 
 		$postcode = '';
 
@@ -91,10 +91,13 @@ class installer_action {
 				),
 				'contact' => array(
 					'phone' => array( sanitize_text_field( $_POST['groupement']['option']['contact']['phone'] ) ),
-					'address' => array( $address->id ),
 				),
 			),
 		);
+
+		if ( !empty( $address ) && !empty( $address->id ) ) {
+			$groupment['option']['contact']['address_id'] = array( $address->id );
+		}
 
 		if ( !empty( $_POST['owner_id'] ) ) {
       $owner_id = (int) $_POST['owner_id'];
@@ -104,20 +107,30 @@ class installer_action {
 		$groupement = group_class::get()->create( $groupment );
 
 		/** On crée les dangers */
-		danger_class::get()->create_default_data();
+		$danger_created = danger_class::get()->create_default_data();
 
-		recommendation_class::get()->create_default_data();
-		//
-		evaluation_method_class::get()->create_default_data();
+		$recommendation_created = recommendation_class::get()->create_default_data();
+
+		$evaluation_method_created = evaluation_method_class::get()->create_default_data();
 
 		/** Définition des modèles de documents / Define document model to use */
-		document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
-		document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
+		$document_unique_setted = document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
+		$document_workunit_sheet_setted = document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
 
 		// Met à jours l'option pour dire que l'installation est terminée
 		update_option( WPDIGI_CORE_OPTION_NAME, array( 'installed' => true, 'db_version' => 1 ) );
 
-		wp_send_json_success();
+		wp_send_json_success(
+			array(
+				'groupment' => $groupment,
+				'address' => $address,
+				'danger_created' => $danger_created,
+				'recommendation_created' => $recommendation_created,
+				'evaluation_method_created' => $evaluation_method_created,
+				'document_unique_setted' => $document_unique_setted,
+				'document_workunit_sheet_setted' => $document_workunit_sheet_setted,
+			)
+		);
 	}
 
 	/**

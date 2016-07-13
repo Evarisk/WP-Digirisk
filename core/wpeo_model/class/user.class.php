@@ -30,7 +30,7 @@ class user_class extends singleton_util {
 	* @return object L'objet utilisateur
 	*/
 	public function update( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -65,10 +65,10 @@ class user_class extends singleton_util {
 	* @return object L'objet utilisateur
 	*/
 	public function create( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
-		
+
 		$object = $data;
 
 		if( is_array( $data ) ) {

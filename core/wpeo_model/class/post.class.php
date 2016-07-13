@@ -29,7 +29,7 @@ class post_class extends singleton_util {
 	* @return object L'objet
 	*/
 	public function update( $data ) {
-		if ( !is_array ( $data ) || !is_object( $data ) ) {
+		if ( !is_array ( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -74,7 +74,7 @@ class post_class extends singleton_util {
 	* @return object L'objet cloné
 	*/
 	public function create( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -85,9 +85,10 @@ class post_class extends singleton_util {
 			$object->type = $this->post_type;
 		}
 		$object->id = wp_insert_post( $object->do_wp_object() );
+		$cloned_object = clone $object;
+
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {
-			$cloned_object = clone $object;
 			$cloned_object->save_meta_data( $object, 'update_post_meta', $this->meta_key );
 		}
 
@@ -228,6 +229,7 @@ class post_class extends singleton_util {
 		if( !empty( $array_model ) && !empty( $array_model['taxonomy'] ) ) {
 			foreach( $array_model['taxonomy'] as $key => $value ) {
 				$list_term[$key] = wp_get_object_terms( $object->id, $key, array( 'fields' => 'ids' ) );
+
 			}
 		}
 

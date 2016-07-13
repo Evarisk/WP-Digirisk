@@ -27,7 +27,7 @@ class comment_class extends singleton_util {
 	* @return object comment_model object
 	*/
 	public function update( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -72,7 +72,7 @@ class comment_class extends singleton_util {
 	* @return object comment_model object
 	*/
 	public function create( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -97,10 +97,10 @@ class comment_class extends singleton_util {
 		}
 
 		$object->id = wp_insert_comment( $object->do_wp_object() );
+		$cloned_object = clone $object;
 
 		/** On insert ou on met à jour les meta */
 		if( !empty( $object->option ) ) {
-			$cloned_object = clone $object;
 			$cloned_object->save_meta_data( $object, 'update_comment_meta', $this->meta_key  );
 		}
 

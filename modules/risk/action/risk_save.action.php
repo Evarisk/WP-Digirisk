@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_save_action {
 	/**
-	* Le constructeur appelle la méthode ajax: wp_save_risk
+	* Le constructeur appelle la méthode personnalisé: save_risk
 	*/
 	public function __construct() {
-		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 2 );
+		add_action( 'save_risk', array( $this, 'callback_save_risk' ), 1 );
 
 	}
 
@@ -30,14 +30,11 @@ class risk_save_action {
 	* @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_save_risk() {
-		// todo : global
-		$ctr = !empty( $_POST['global'] ) ? sanitize_text_field( $_POST['global'] ) : '';
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
-		global ${$ctr};
 
 		if ( 0 === $method_evaluation_id ) {
-			wp_send_json_error();
+			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
 		}
 
 		$data = array( 'option' => array() );
@@ -51,6 +48,10 @@ class risk_save_action {
 		// Charge le danger
 		$danger_id = !empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
 		$danger = danger_class::get()->show( $danger_id );
+
+		if ( $danger->id === 0 ) {
+			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+		}
 
     $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', risk_class::get()->get_post_type() );
     $unique_key = $last_unique_key + 1;
@@ -89,21 +90,11 @@ class risk_save_action {
 
 		$risk = risk_class::get()->update( $risk );
 
-		if ( $risk->id === 0 ) {
-			wp_send_json_error();
-		}
-
 		if ( $file_id != 0 ) {
 			file_management_class::get()->associate_file( $file_id, $risk->id, 'wpdigi_risk_ctr' );
 		}
 
-
-		if ( $risk_id === 0 ) {
-			// Ajoutes le risque à l'établissement
-			$element = society_class::get()->show_by_type( $element_id );
-			$element->option['associated_risk'][] = $risk->id;
-			society_class::get()->update_by_type( $element );
-		}
+		do_action( 'save_risk_evaluation_comment' );
 	}
 }
 

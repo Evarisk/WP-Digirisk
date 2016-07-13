@@ -32,6 +32,12 @@ $file_class->inc( PLUGIN_PATH , array( 'config', 'util', 'model', 'class', 'acti
 
 $list_file = $file_class->get_list_file( PLUGIN_PATH, array( 'class', 'action', 'shortcode' ) );
 $functional_test = new functional_test( $list_file );
+register_shutdown_function('onDie', $functional_test);
+
+function onDie($functional_test) {
+	$functional_test->resume();
+}
+
 $functional_test->set_exclude_path( array(
 	PLUGIN_PATH . 'core\wpeo_model\class\comment.class.php',
 	PLUGIN_PATH . 'core\wpeo_model\class\constructor_data.class.php',
@@ -39,6 +45,7 @@ $functional_test->set_exclude_path( array(
 	PLUGIN_PATH . 'core\wpeo_model\class\user.class.php',
 	PLUGIN_PATH . 'core\wpeo_model\class\term.class.php',
 ) );
+
 $functional_test->execute();
 
 ?>

@@ -28,9 +28,6 @@ class group_class extends post_class {
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {
-		/**	Inclusion du modèle pour les groupements / Include groups' model	*/
-		include_once( WPDIGI_STES_PATH . '/model/group.model.01.php' );
-
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for societies management	*/
 		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
 

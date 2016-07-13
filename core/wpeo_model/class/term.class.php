@@ -48,7 +48,7 @@ class term_class extends singleton_util {
 	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function update( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 
@@ -84,7 +84,7 @@ class term_class extends singleton_util {
 	 * @return object L'objet sauvegardé / The saved object
 	 */
 	public function create( $data ) {
-		if ( !is_array( $data ) || !is_object( $data ) ) {
+		if ( !is_array( $data ) && !is_object( $data ) ) {
 			return false;
 		}
 

@@ -116,8 +116,7 @@ class post_model extends constructor_data_class {
 		parent::__construct( $object );
 
 		/** If cropped don't get meta */
-		if( !$cropped && !empty( $this->id ) ) {
-
+		if( !$cropped ) {
 			/** Meta */
 			$post_meta = get_post_meta( $this->id );
 			$internal_meta = !empty( $post_meta ) && !empty( $post_meta[ $meta_key ] ) && !empty( $post_meta[ $meta_key ][ 0 ] ) ? json_decode( $post_meta[ $meta_key ][ 0 ], true ) : null;
