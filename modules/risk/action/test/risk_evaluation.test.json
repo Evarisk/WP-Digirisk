@@ -10,7 +10,11 @@
 			"comment_content": "Mon commentaire"
 		},
 		{
-			"risk_evaluation_level": 1024
+			"risk_evaluation_level": 1024,
+			"method_evaluation_id": 103,
+			"danger_id": 14,
+			"element_id": 4,
+			"variable": [4,4,4,4,4]
 		}
 	]
 }

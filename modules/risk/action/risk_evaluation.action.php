@@ -57,7 +57,7 @@ class risk_evaluation_action {
 		}
 		else if ( $method_evaluation_id == $method_evaluation_digirisk_complex->term_id ) {
 			$data = $this->update_method_complex( $method_evaluation_digirisk_complex->term_id );
-			
+
 			if ( !$data ) {
 				wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
 			}
@@ -128,11 +128,20 @@ class risk_evaluation_action {
 
 		$list_variable = !empty( $_POST['variable'] ) ? (array) $_POST['variable'] : array();
 
+		if ( empty( $list_variable ) ) {
+			return false;
+		}
+
 		if ( !empty( $list_variable ) ) {
 		  foreach ( $list_variable as $element ) {
+				if ( (int) $element < 0 || (int) $element > 5 ) {
+					return false;
+				}
 				$risk_evaluation_level *= (int) $element;
 		  }
 		}
+
+		echo $risk_evaluation_level;
 
 		$evaluation_method = evaluation_method_class::get()->show( $term_id );
 		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > max( array_keys( $evaluation_method->option['matrix'] ) ) ) {

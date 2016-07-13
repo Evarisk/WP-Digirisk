@@ -31,7 +31,6 @@ class functional_test {
 				}
 		  }
 			$this->total = count( $this->list_method_queue );
-			echo "<pre>"; print_r($this->list_method_queue); echo "</pre>";
 			$this->execute_queue();
 		}
 	}
