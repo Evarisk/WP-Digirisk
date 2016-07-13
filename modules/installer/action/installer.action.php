@@ -15,23 +15,40 @@
 class installer_action {
 
 	/**
-	 * CORE - Instanciation des actions ajax pour l'installer
+	 * Le constructeur appelle les méthodes admin_post et ajax suivantes:
+	 * wp_ajax_wpdigi-installer-step-1 (Créer la societé et les données par défaut de Digirisk)
+	 * admin_post_last_step (Renvoie sur la page principale de Digirisk)
 	 */
 	public function __construct() {
+		// todo Renommes avec des underscores
 		add_action( 'wp_ajax_wpdigi-installer-step-1', array( $this, 'ajax_installer_step_1' ) );
-
-		add_action( 'wp_ajax_wpdigi-installer-add-user', array( $this, 'ajax_installer_add_user' ) );
-		add_action( 'wp_ajax_wpdigi-installer-load-user', array( $this, 'ajax_installer_load_user' ) );
-		add_action( 'wp_ajax_wpdigi-installer-edit-user', array( $this, 'ajax_installer_edit_user' ) );
-		add_action( 'wp_ajax_wpdigi-installer-delete-user', array( $this, 'ajax_installer_delete_user' ) );
-
-		add_action( 'admin_post_wpdigi-installer-import-staff', array( $this, 'admin_post_installer_import_staff' ) );
-
-		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
-
 		add_action( 'admin_post_last_step', array( $this, 'admin_post_last_step' ) );
 	}
 
+	/**
+	* Créer la societé et les données par défaut de Digirisk (Danger, recommendation, méthode d'évaluation et méthode d'évaluation variable)
+	* Passes la clé installed de l'option "_digirisk_core" de WordPress à true
+	* Passes la clé db_version de l'option "_digirsk_core" à 1
+	* Met les documents par défault.
+	*
+	* array $_POST['address'] Les données envoyées par le formulaire pour l'adresse
+	* string $_POST['address']['address'] L'adresse
+	* string $_POST['address']['additional_address'] L'adresse complémentaire
+	* string $_POST['address']['postcode'] Le code postal
+	* string $_POST['address']['town'] La ville
+	*
+	* array $_POST['groupement'] Les données envoyées par le formulaire pour la societé
+	* string $_POST['groupement']['title'] Le nom de la societé
+	* string $_POST['groupement']['content'] La description de la societé
+	* string $_POST['groupement']['date'] La date de création de la societé
+	* string $_POST['groupement']['option']['identity']['siren'] Le SIREN de la societé
+	* string $_POST['groupement']['option']['identity']['siret'] Le SIRET de la societé
+	* string $_POST['groupement']['option']['contact']['phone'] Le téléphone de la societé
+	*
+	* int $_POST['owner_id'] Le responsable de la societé
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_installer_step_1() {
 		wpdigi_utils::check( 'ajax_installer_step_1' );
 
@@ -103,125 +120,9 @@ class installer_action {
 		wp_send_json_success();
 	}
 
-	public function ajax_installer_add_user() {
-		wpdigi_utils::check( 'ajax_installer_add_user' );
-
-		global $wpdigi_user_ctr;
-
-		$user = array(
-			'email' => sanitize_email( $_POST['user']['email'] ),
-			'option' => array(
-				'user_info' => array(
-					'lastname' => sanitize_text_field( $_POST['user']['option']['user_info']['lastname'] ),
-					'firstname' => sanitize_text_field( $_POST['user']['option']['user_info']['firstname'] ),
-				)
-			),
-		);
-
-		$user['login'] = trim( strtolower( remove_accents( sanitize_user( $user['option']['user_info']['firstname'] . '.' . $user['option']['user_info']['lastname'] ) ) ) );
-
-		$user = \digi\user_class::get()->create( $user );
-
-		ob_start();
-		require( INSTALLER_VIEW . '/list-item.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
-	}
-
-	public function ajax_installer_load_user() {
-		if ( 0 === (int)$_POST['user_id'] )
-			wp_send_json_error( );
-		else
-			$user_id = (int)$_POST['user_id'];
-
-		wpdigi_utils::check( 'ajax_installer_load_user_' . $user_id );
-
-		global $wpdigi_user_ctr;
-
-		$user = $wpdigi_user_ctr->show( $user_id );
-
-		ob_start();
-		require( INSTALLER_VIEW . '/list-item-edit.php' );
-		$template = ob_get_clean();
-
-		wp_send_json_success( array( 'template' => $template ) );
-	}
-
-	public function ajax_installer_edit_user() {
-		if ( 0 === (int)$_POST['user_id'] )
-			wp_send_json_error( );
-		else
-			$user_id = (int)$_POST['user_id'];
-
-		wpdigi_utils::check( 'ajax_installer_edit_user_' . $user_id );
-
-		global $wpdigi_user_ctr;
-
-		$user = $wpdigi_user_ctr->show( $user_id );
-
-		$user->email = sanitize_email( $_POST['user']['email'] );
-		$user->option['user_info']['lastname'] = sanitize_text_field( $_POST['user']['option']['user_info']['lastname'] );
-		$user->option['user_info']['firstname'] = sanitize_text_field( $_POST['user']['option']['user_info']['firstname'] );
-		$user->login = trim( strtolower( remove_accents( sanitize_user( $user->option['user_info']['firstname'] . '.' . $user->option['user_info']['lastname'] ) ) ) );
-
-		$user = $wpdigi_user_ctr->update( $user );
-
-		ob_start();
-		require( INSTALLER_VIEW . '/list-item.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
-	}
-
-	public function ajax_installer_delete_user() {
-		if ( 0 === (int)$_POST['user_id'] )
-			wp_send_json_error();
-		else
-			$user_id = (int)$_POST['user_id'];
-
-		wpdigi_utils::check( 'ajax_installer_delete_user_' . $user_id );
-
-		global $wpdigi_user_ctr;
-
-		$wpdigi_user_ctr->delete( $user_id );
-
-		wp_send_json_success();
-	}
-
-	public function ajax_save_domain_mail() {
-		check_ajax_referer( 'save_domain_mail' );
-
-		$domain_mail = !empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-
-		if ( $domain_mail === '' ) {
-			wp_send_json_error();
-		}
-
-		update_option( 'digirisk_domain_mail', $domain_mail );
-
-		wp_send_json_success();
-	}
-
-	public function admin_post_installer_import_staff() {
-		if ( ( empty( $_FILES ) || empty( $_FILES['csv' ] ) || $_FILES['csv']['error'] != 0 ) && empty( $_POST['content_csv'] ) )
-			wp_safe_redirect( admin_url( 'users.php?page=digirisk-users' ) );
-
-		global $wpdigi_user_ctr;
-
-		if ( !empty( $_POST['content_csv'] ) ) {
-			$content_csv = preg_split('/\r\n|[\r\n]/', $_POST['content_csv'] );
-
-			if ( !empty( $content_csv ) ) {
-			  foreach ( $content_csv as $csv ) {
-					$data = explode( ';', $csv );
-					$wpdigi_user_ctr->add_user( $data );
-			  }
-			}
-		}
-		else {
-			$wpdigi_user_ctr->open_csv( $_FILES['csv']['tmp_name'] );
-		}
-
-		wp_safe_redirect( admin_url( 'users.php?page=digirisk-users' ) );
-	}
-
+	/**
+	* Rediriges vers la page principale de Digirisk.
+	*/
 	public function admin_post_last_step() {
 		if( empty( $_GET['_wpnonce'] ) ) {
 			wp_safe_redirect( wp_get_referer() );

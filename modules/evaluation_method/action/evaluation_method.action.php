@@ -1,12 +1,22 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluation_method_action {
+	/**
+	* Le constructeur appelle l'action de WordPress: init (Pour déclarer la taxonomy evaluation_method)
+	*
+	* Appelle également les actions actions personnalisées:
+	* wp_ajax_get_scale
+	* wp_ajax_save_risk
+	*/
   public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
 		add_action( 'wp_ajax_get_scale', array( $this, 'ajax_get_scale' ) );
     add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 4 );
   }
 
+	/**
+	* Déclares la taxonomy evaluation_method
+	*/
 	public function callback_init() {
 		$labels = array(
 			'name'              => __( 'Evaluation methods', 'digirisk' ),
@@ -35,14 +45,9 @@ class evaluation_method_action {
 	/**
 * Appelle la méthode get_scale pour avoir le niveau de l'évaluation
 *
-* @param int $_POST['variable'] Les valeurs des variables de la méthode d'évaluation complexe
+* array $_POST['list_variable'] La liste des valeurs de la méthode d'évaluation
+* @param array $_POST Les données envoyées par le formulaire
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
-*
-* @since 6.0.0.0
-*
-* @return application/json
-* data.scale Le niveau du risque entre 1 et 4
 */
 public function ajax_get_scale() {
 	check_ajax_referer( 'get_scale' );
@@ -62,17 +67,14 @@ public function ajax_get_scale() {
 
   /**
   * Enregistres la méthode utilisée dans le risque.
-	* Ce callback est appelé après le callback callback_save_risk de risk_evaluation_comment_action
+	* Ce callback est appelé après le callback "callback_save_risk" de "risk_evaluation_comment_action"
   *
-  * @param int $_POST['method_evaluation_id'] L'id de la méthode utilisée
+	* int $_POST['method_evaluation_id'] L'ID de la méthode utilisé
+  * @param array $_POST Les données envoyées par le formulaire
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return void
   */
   public function callback_save_risk() {
+		// todo A déplacer dans la class ?
     check_ajax_referer( 'save_risk' );
 
     $method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;

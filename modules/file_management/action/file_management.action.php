@@ -12,6 +12,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class file_management_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_eo_associate_file
+	*/
   public function __construct() {
     add_action( 'wp_ajax_eo_associate_file', array( $this, 'callback_associate_file' ) );
   }
@@ -19,16 +22,12 @@ class file_management_action {
   /**
   * Vérifie les données et appelle associate_file de la class file_management_class
   *
-  * @param array $_POST
-  * @param int $_POST['element_id'] Le fichier sera associé à cette id
-  * @param bool $_POST['thumbnail'] True pour mettre l'image en vignette
-  * @param int $_POST['file_id'] L'id du fichier
+	* int $_POST['element_id'] Le fichier sera associé à cette ID
+	* bool $_POST['thumbnail'] True pour mettre l'image en vignette
+	* int $_POST['file_id'] L'ID du fichier
+	*
+  *  @param array $_POST Les données envoyées par le formulaire
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return application/json data.template Le template html pour mettre à jour le bouton
   */
   public function callback_associate_file() {
     check_ajax_referer( 'associate_file' );

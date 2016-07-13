@@ -1,10 +1,27 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_action {
+	/**
+	* Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
+	*/
   public function __construct() {
     add_action( 'save_legal_display', array( $this, 'callback_save_legal_display' ), 10, 2 );
   }
 
+	/**
+	* Sauvegardes les données de l'affichage légal dans la base de donnée
+	*
+	* array $_POST['emergency_service'] Les données du formulaire pour le service d'urgence
+	* array $_POST['working_hour'] Les données du formulaire pour les horaires de travail
+	* array $_POST['safety_rule'] Les données du formulaire pour les consignes de sécurité
+	* array $_POST['derogation_schedule'] Les données du formulaire pour les dérogations aux horaires de travail
+	* array $_POST['collective_agreement'] Les données du formulaire pour les conventions collectives applicables
+	* array $_POST['DUER'] Les données du formulaire pour le document unique d'évaluation des risques
+	* array $_POST['rules'] Les données du formulaire pour le règlement intérieur
+	* int $_POST['parent_id'] L'ID de l'élément parent
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
   public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
     // Récupère les tableaux
     $emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
@@ -51,7 +68,15 @@ class legal_display_action {
     wp_send_json_success();
   }
 
+	/**
+	* Génère l'ODT de l'affichage légal
+	*
+	* @param array $data Toutes les données de l'affichage légal
+	* @param object $element_parent L'objet parent
+	* @param string $format (Optional) Le format voulu A4 ou A3
+	*/
   public function generate_sheet( $data, $element_parent, $format = "A4" ) {
+		// A déplacer dans la class
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
       'inspection_du_travail_nom' => $data['detective_work']->option['full_name'],

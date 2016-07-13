@@ -1,18 +1,31 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluator_action {
+	/**
+	* Le constructeur appelle les actions ajax suivantes:
+	* wp_ajax_edit_eveluator_assign (Permet d'assigner un évaluateur à un élément)
+	* wp_ajax_detach_evaluator (Permet de dissocier un évaluateur d'un élément)
+	* wp_ajax_paginate_evaluator (Permet de gérer la pagination des évaluateurs)
+	*/
 	public function __construct() {
-		// Quand on affecte un utilisateur
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
-
-		// Quand on désaffecte un utilisateur
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
-
-
 		add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
 	}
 
+	/**
+	* Assignes un évaluateur à element_id dans la base de donnée
+	*
+	* array $_POST['list_user'] La liste des evaluateurs à assigner
+	* string $_POST['list_user']['duration'] La durée de l'assignation
+	* string $_POST['list_user']['on'] La date d'assignation
+	* bool $_POST['list_user']['affect'] Si l'évaluateur doit être assigné
+	* int $_POST['element_id'] L'élement ou les evaluateurs doivent être assignés
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_edit_evaluator_assign() {
+		// Todo : A déplacer dans la class
 		// Est ce que list_user est vide ? Ou est ce que workunit_id est vide et est-ce bien un entier ?
 		if ( empty( $_POST['list_user'] ) || !is_array( $_POST['list_user'] ) )
 			wp_send_json_error();
@@ -65,6 +78,15 @@ class evaluator_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
+	*
+	* int $_POST['id'] L'ID de l'élement ou l'évaluateur sera dissocié
+	* int $_POST['affectation_id'] L'index de l'évaluateur
+	* int $_POST['user_id'] L'ID de l'évaluateur
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_detach_evaluator() {
 		if ( 0 === (int) $_POST['id'] )
 			wp_send_json_error();
@@ -98,6 +120,14 @@ class evaluator_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Fait le rendu de l'utilisateur selon l'élement ID et la page
+	*
+	* int $_POST['element_id'] L'ID de l'élement affecté par la pagination
+	* int $_POST['next_page'] La page de la pagination
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_paginate_evaluator() {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 

@@ -42,9 +42,7 @@ class file_class {
 
 		foreach ( $list_file as $file ) {
 			if ( !empty( $file[0] ) && !empty( $file[1] ) && is_file($file[0]) )  {
-				// if ( !preg_match( '/' . implode( '|', $list_exclude_dir ) . '/', $file[0] ) ) {
-					$ordered_file[$file[1]][] = $file[0];
-				// }
+				$ordered_file[$file[1]][] = $file[0];
 			}
 
 			if ( !empty( $file[0] ) && empty( $file[1] ) ) {
@@ -55,7 +53,6 @@ class file_class {
 		foreach ( $list_extension as $extension ) {
 			if ( !empty( $ordered_file[$extension] ) ) {
 				foreach ( $ordered_file[$extension] as $file ) {
-					echo '[+] require_once : ' . $file  . PHP_EOL;
 					require_once ( $file );
 				}
 			}

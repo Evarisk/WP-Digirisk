@@ -3,16 +3,14 @@
 class danger_action {
 
 	/**
-	* Ajoutes l'action init
+	* Le constructeur appelle l'action WordPress suivante: init (Pour déclarer la taxonomy danger)
 	*/
 	public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
 	}
 
 	/**
-	 * Création du type d'élément interne a wordpress pour gérer les dangers / Create wordpress element type for managing dangers
-	 *
-	 * @uses register_taxonomy()
+	 * Déclares la taxonomy danger
 	 */
 	function callback_init() {
 		$labels = array(
@@ -44,7 +42,6 @@ class danger_action {
 		);
 
 		register_taxonomy( danger_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
-
 	}
 }
 

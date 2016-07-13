@@ -12,10 +12,22 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class gallery_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_eo_set_thumbnail
+	*/
   public function __construct() {
     add_action( 'wp_ajax_eo_set_thumbnail', array( $this, 'callback_set_thumbnail' ) );
   }
 
+	/**
+  * Vérifie les données et appelle associate_file de la class file_management_class
+  *
+	* int $_POST['element_id'] Le fichier sera associé à cette ID
+	* int $_POST['thumbnail_id'] L'ID du thumbnail
+	*
+  * @param array $_POST Les données envoyées par le formulaire
+  *
+  */
 	public function callback_set_thumbnail() {
 		if ( 0 === (int) $_POST['element_id'] )
 			wp_send_json_error();

@@ -13,6 +13,13 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class digirisk_action {
 
+	/**
+	* Le constructeur ajoutes les actions WordPress suivantes:
+	* admin_enqueue_scripts (Pour appeller les scripts JS et CSS dans l'admin)
+	* admin_print_scripts (Pour appeler les scripts JS en bas du footer)
+	* plugins_loaded (Pour appeler le domaine de traduction)
+	*
+	*/
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( include_util::get(), 'callback_before_admin_enqueue_scripts' ), 10 );
 		add_action( 'admin_enqueue_scripts', array( include_util::get(), 'callback_admin_enqueue_scripts' ), 11 );
@@ -24,10 +31,16 @@ class digirisk_action {
 		add_action( 'wp_ajax_search', array( $this, 'ajax_search' ) );
 	}
 
+	/**
+	* Appelle le domaine de traduction
+	*/
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( "digirisk", false, WPDIGI_DIR . '/core/assets/languages/' );
 	}
 
+	/**
+	* A déplacer
+	*/
 	public function ajax_search_user() {
 		if ( isset( $_REQUEST['autocomplete_field'] ) && 'user_email' === $_REQUEST['autocomplete_field'] ) {
 			$field = sanitize_text_field( $_REQUEST['autocomplete_field'] );
@@ -84,6 +97,9 @@ class digirisk_action {
 		wp_die();
 	}
 
+	/**
+	* A déplacer
+	*/
 	public function ajax_search() {
 		// Sanitize $_REQUEST['term']
 		$term = sanitize_text_field( $_REQUEST['term'] );

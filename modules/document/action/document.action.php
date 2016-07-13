@@ -15,14 +15,18 @@
 class document_action {
 
 	/**
-	 * CORE - Instanciation des actions pour les documents
+	 * Le constructeur appelle l'action personnalisé wp_ajax_wpdigi_delete_sheet
 	 */
 	function __construct() {
     add_action( 'wp_ajax_wpdigi_delete_sheet', array( $this, 'ajax_delete_sheet' ) );
   }
 
+	/**
+	* Supprimes un document dans une societé
+	*/
   public function ajax_delete_sheet() {
-    if ( true !== is_int( (int) $_POST['parent_id'] ) )
+		// Todo déplacer cette fonction dans la class
+		if ( true !== is_int( (int) $_POST['parent_id'] ) )
       wp_send_json_error();
     else
       $parent_id = (int) $_POST['parent_id'];

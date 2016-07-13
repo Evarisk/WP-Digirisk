@@ -9,13 +9,6 @@ class functional_test {
 	private $list_file;
 	private $exclude_path = array();
 	private $list_methods_to_test = array();
-	private $list_default_value = array(
-		10, "test", true,
-		// array( 10, 22, 42 ),
-		// array( 10, "test", true ),
-		// array( "test", "true" ),
-		// array( true, false ),
-	);
 
 	public function __construct( $list_file ) {
 		$this->list_file = $list_file;
@@ -32,7 +25,7 @@ class functional_test {
 		  foreach ( $this->list_file as $file_path ) {
 				$file_path[0] = str_replace( '/', '\\', $file_path[0] );
 				if ( !in_array( $file_path[0], $this->exclude_path ) ) {
-					echo '[+] testing file : ' . $file_path[0] . PHP_EOL;
+					echo '[+] Testing file : ' . $file_path[0] . PHP_EOL;
 
 					$class_info = $this->get_class_info( $file_path[0] );
 					$this->list_methods_to_test[$file_path[0]] = array();
@@ -58,22 +51,15 @@ class functional_test {
 								}
 
 								$this->list_methods_to_test[$file_path[0]][$element->class][$element->name] = array();
-
 								$docBlock = $factory->create($element->getDocComment());
-
 								$this->fill_method( $file_path[0], $element, $docBlock );
-
-								// if ( !empty( $json_content ) ) {
-									$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
-								// }
+								$this->call_method( $class, $file_path[0], $this->list_methods_to_test[$file_path[0]][$element->class], $json_content );
 						  }
 						}
 					}
 				}
 		  }
 		}
-
-		$this->display();
 
 		echo "[+] End functional tests" . PHP_EOL . PHP_EOL;
 	}
@@ -115,7 +101,6 @@ class functional_test {
 		if ( !empty( $docBlock->getTags() ) ) {
 		  foreach ( $docBlock->getTags() as $tag ) {
 				$this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()] = $tag->getInfo();
-				$this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['test'] = $this->parseTestValue( $this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['type'], $this->list_methods_to_test[$file_path][$element->class][$element->name][$tag->getVariableName()]['description'] );
 		  }
 		}
 	}
@@ -128,11 +113,8 @@ class functional_test {
 				  foreach ( $json_content[$method_name] as $json ) {
 
 						// Default value
-						echo "Custom test: " . $method_name . "(Number args: ".count($json) . ") -> " . PHP_EOL;
-						ob_start();
-						var_dump( $json );
-						$return = ob_get_clean();
-						echo strip_tags( $return ) . PHP_EOL;
+						$this->display_args( $class, $method_name, $json );
+
 						if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
 							$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
 								$className = $class->name;
@@ -141,135 +123,41 @@ class functional_test {
 						else {
 							$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $json );
 						}
-						echo $method_name . " return -> ";
-						ob_start();
-						var_dump( $return );
-						$return = ob_get_clean();
-						echo strip_tags( $return ) . PHP_EOL;
-					}
-				}
 
-				if ( !empty( $this->list_default_value ) ) {
-					$array = array( 'index' => 0, 'number' => 0, 'other_index' => 0, 'default_test' => array(0,0,0,0,0,0,0) );
-					if (  count( $method_to_test ) - 1 !== - 1) {
-						$index = 0;
-						for( $i = 0; $i < pow( count( $method_to_test ) - 1, count( $this->list_default_value ) ); $i++ ) {
-							$array = $this->args_to_test( count( $method_to_test ), count( $this->list_default_value ), $array );
-							$return = '';
-							echo "pathFile : " . $file_path . " test: " . $method_name . " (Number args: ".count( $method_to_test ) .") -> " . implode( ',', $array['args_to_test'] ) . PHP_EOL;
-							if ( !empty( $array['args_to_test'] ) ) {
-								if ( !empty( $parentClassName ) && ( $parentClassName == 'comment_class' || $parentClassName == 'post_class' || $parentClassName == 'term_class' ||
-									$parentClassName == 'user_class' || $parentClassName == 'singleton_util' ) ) {
-										$className = $class->name;
-										$return = $class->getMethod( $method_name )->invokeArgs( $className::get(), $array['args_to_test'] );
-								}
-								else {
-									$return = $class->getMethod( $method_name )->invokeArgs( new $class->name(), $array['args_to_test'] );
-								}
-							}
-							echo $method_name . " return -> ";
-							ob_start();
-							var_dump( $return );
-							$return = ob_get_clean();
-							echo strip_tags( $return ) . PHP_EOL;
-						}
-					}
-					else {
-						// echo "pathFile : " . $file_path . " test: " . $method_name . " (0 args) " . PHP_EOL;
-						// $className = $class->name;
-						// $return = $class->getMethod( $method_name )->invokeArgs( $className, array() );
-						// echo $method_name . " return -> ";
-						// ob_start();
-						// var_dump( $return );
-						// $return = ob_get_clean();
-						// echo strip_tags( $return ) . PHP_EOL;
+						$this->display_return( $class, $method_name, $return );
 					}
 				}
 		  }
 		}
 	}
 
-	// int array object
-
-	private function args_to_test( $number_default_value, $number, $array ) {
-		$array['args_to_test'] = array();
-
-		for( $i = 0; $i < $number_default_value; $i++ ) {
-			if ( $array['default_test'][$i] >= $number ) {
-				$array['default_test'][$i] = 0;
-				$array['index']++;
-				$array['number']++;
-
-				if ( $array['index'] >= $number_default_value ) {
-				 	$array['index'] = 0;
+	private function display_args( $class, $method_name, $args ) {
+		echo '[+] Test ' . $method_name . ' (Args: ' . count( $args ) . ')' . PHP_EOL;
+		if ( !empty( $args ) ) {
+			$i = 0;
+		  foreach ( $args as $key => $element ) {
+				if ( is_array( $element ) ) {
+					$this->display_array( $i, $element );
 				}
-
-				if( $array['number'] >= $number_default_value ) {
-					$array['other_index']++;
-					if ( $array['other_index'] >= $number ) {
-						$array['other_index'] = 0;
-					}
-
-					$array['default_test'][$array['other_index']]++;
-
+				else {
+					echo '[+] Args #' . $key . ' (' . gettype( $element ) . ') -> ' . $element . PHP_EOL;
 				}
+				$i++;
 			}
-
-			if ( !empty ( $this->list_default_value ) ) {
-				$array['args_to_test'][] = $this->list_default_value[$array['default_test'][$i]];
-			}
-
 		}
-
-		$array['default_test'][$array['index']]++;
-
-		return array(
-			'index' => $array['index'],
-			'number' => $array['number'],
-			'other_index' => $array['other_index'],
-			'args_to_test' => $array['args_to_test'],
-			'default_test' => $array['default_test'],
-		);
 	}
 
-	private function parseTestValue( $type, $description ) {
-		preg_match( '/\(test:(.*)\)/' , $description, $matched );
-
-		if ( empty( $matched[1] ) ) {
-			return null;
+	private function display_array( $i, $arr ) {
+		if ( !empty( $arr ) ) {
+			$x = 0;
+		  foreach ( $arr as $key => $element ) {
+				echo '[+] Args #' . $key . ' (array) index #' . $x . ' (' . gettype( $element ) . ') -> ' . $element . PHP_EOL;
+				$x++;
+		  }
 		}
-
-		if ( $type == 'array' ) {
-			settype( $matched[1], 'string' );
-
-			$matched[1] = str_replace( '[', '', $matched[1] );
-			$matched[1] = str_replace( ']', '', $matched[1] );
-
-
-			$matched[1] = explode( ',', trim($matched[1]) );
-
-			$new_array = array();
-
-			if ( !empty( $matched[1] ) ) {
-			  foreach ( $matched[1] as $element ) {
-					preg_match( '/(.*)=>(.*)/', $element, $matchedKey );
-					if ( !empty( $matchedKey[1] ) && !empty( $matchedKey[2] ) ) {
-						$new_array[trim($matchedKey[1])] = trim($matchedKey[2]);
-					}
-			  }
-			}
-
-			if ( !empty( $new_array ) ) {
-				$matched[1] = $new_array;
-			}
-		}
-		else {
-			settype( $matched[1], $type );
-		}
-
-		return $matched[1];
 	}
 
-	private function display() {
+	private function display_return( $class, $method_name, $value ) {
+		echo '[+] Return ' . $method_name . ' (Value: ' . count( $value ) . ') -> ' . gettype($value) . PHP_EOL;
 	}
 }
