@@ -14,6 +14,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_evaluation_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
+	*/
 	public function __construct() {
 		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 1 );
 	}
@@ -21,11 +24,9 @@ class risk_evaluation_action {
 	/**
   * Enregistres l'évaluation d'un risque
   *
-  * @param int $_POST['risk_evaluation_level'] Le level de l'évaluation du risque
+  * int $_POST['risk_evaluation_level'] Le level de l'évaluation du risque
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
+  * @param array $_POST Les données envoyées par le formulaire
   *
   */
 	public function callback_save_risk() {
@@ -65,11 +66,6 @@ class risk_evaluation_action {
   *
   * @param int $risk_evaluation_level Le level de l'évaluation du risque
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-	* @return array : @todo : A détailler
   */
 	public function update_method_simplified( $risk_evaluation_level ) {
 		// Récupère la variable de la méthode simplifiée
@@ -107,11 +103,6 @@ class risk_evaluation_action {
   *
   * @param int $term_id L'ID de la méthode évaluation complexe
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-	* @return array : @todo : A détailler
   */
 	public function update_method_complex( $term_id ) {
 

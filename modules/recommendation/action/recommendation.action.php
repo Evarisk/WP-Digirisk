@@ -16,7 +16,11 @@ class recommendation_action {
 
 	public $unique_identifier = 'PA';
 	/**
-	 * CORE - Instanciation des actions ajax pour les recommendation / Instanciate ajax treatment for recommendation
+	 * Le constructeur appelle les méthodes ajax suivantes:
+	 * wp_ajax_wpdigi-create-recommendation
+	 * wp_ajax_wpdigi-delete-recommendation
+	 * wp_ajax_wpdigi-load-recommendation
+	 * wp_ajax_wpdigi-edit-recommendation
 	 */
 	function __construct() {
 		add_action( 'wp_ajax_wpdigi-create-recommendation', array( $this, 'ajax_create_recommendation' ), 12 );
@@ -25,6 +29,15 @@ class recommendation_action {
 		add_action( 'wp_ajax_wpdigi-edit-recommendation', array( $this, 'ajax_edit_recommendation' ), 12 );
 	}
 
+	/**
+	* Créer une recommendation
+	*
+	* int $_POST['workunit_id'] L'ID de l'unité de travail
+	* int $_POST['recommendation_id'] L'ID de la recommendation
+	* string $_POST['recommendation_comment'] Le commentaire de la recommendation
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	function ajax_create_recommendation() {
 		wpdigi_utils::check( 'ajax_create_recommendation' );
 
@@ -72,6 +85,15 @@ class recommendation_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Charges une recommendation
+	*
+	* int $_POST['workunit_id'] L'ID de l'unité de travail
+	* int $_POST['term_id'] L'ID de la recommendation
+	* int $_POST['index'] L'index du tableau
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_load_recommendation() {
 		if (  0 === (int) $_POST['workunit_id'] )
 			wp_send_json_error();
@@ -101,6 +123,16 @@ class recommendation_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Edites une recommendation
+	*
+	* int $_POST['workunit_id'] L'ID de l'unité de travail
+	* int $_POST['term_id'] L'ID de la recommendation
+	* int $_POST['index'] L'index du tableau
+	* string $_POST['recommendation_comment'] Le commentaire de la recommendation
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_edit_recommendation() {
 		if (  0 === (int) $_POST['workunit_id'] )
 			wp_send_json_error();
@@ -136,6 +168,15 @@ class recommendation_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Supprimes une recommendation (Passes son status en "deleted" dans le tableau)
+	*
+	* int $_POST['workunit_id'] L'ID de l'unité de travail
+	* int $_POST['term_id'] L'ID de la recommendation
+	* int $_POST['index'] L'index du tableau
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_delete_recommendation() {
 		if (  0 === (int) $_POST['workunit_id'] )
 			wp_send_json_error();

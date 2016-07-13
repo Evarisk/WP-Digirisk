@@ -12,25 +12,25 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_save_action {
+	/**
+	* Le constructeur appelle la méthode ajax: wp_save_risk
+	*/
 	public function __construct() {
 		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 2 );
-	
+
 	}
 
 	/**
   * Enregistres un risque.
 	* Ce callback est appelé après le callback callback_save_risk de risk_evaluation_action
   *
-  * @param int $_POST['establishment']['establishment_id'] L'id de l'établissement
-  * @param int $_POST['danger_id'] L'id du danger
-  *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return void
+  * int $_POST['establishment']['establishment_id'] L'id de l'établissement
+  * int $_POST['danger_id'] L'id du danger
+	*
+	* @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_save_risk() {
+		// todo : global
 		$ctr = !empty( $_POST['global'] ) ? sanitize_text_field( $_POST['global'] ) : '';
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;

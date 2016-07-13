@@ -12,27 +12,30 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_action {
+	/**
+	* Le constructeur appelle les actions ajax suivantes:
+	* wp_ajax_save_risk
+	* wp_ajax_wpdigi-delete-risk
+	* wp_ajax_wpdigi-load-risk
+	* wp_ajax_wpdigi-edit-risk
+	* wp_ajax_delete_comment
+	*/
 	public function __construct() {
+		// Remplacé les - en _
 		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 5 );
 		add_action( 'wp_ajax_wpdigi-delete-risk', array( $this, 'ajax_delete_risk' ) );
 		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
-		add_action( 'wp_ajax_wpfile_associate_file_digi-risk', array( $this, 'ajax_associate_file_to_risk' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 	}
 
 	/**
   * Enregistres un risque.
-	* Ce callback est le dernier de save risque
+	* Ce callback est le dernier de l'action "save_risk"
   *
-  * @param int $_POST['establishment']['establishment_id'] L'id de l'établissement
-  * @param int $_POST['danger_id'] L'id du danger
-  *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @return void
+	* int $_POST['element_id'] L'ID de l'élement ou le risque sera affecté
+	*
+	* @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_save_risk() {
 		check_ajax_referer( 'save_risk' );
@@ -74,126 +77,106 @@ class risk_action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Supprimes un risque
+	*
+	* int $_POST['risk_id'] L'ID du risque
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
+	public function ajax_delete_risk() {
+		// todo : global
+		if ( 0 === (int)$_POST['risk_id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$risk_id = (int)$_POST['risk_id'];
 
-		public function ajax_delete_risk() {
-			if ( 0 === (int)$_POST['risk_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$risk_id = (int)$_POST['risk_id'];
+		$global = sanitize_text_field( $_POST['global'] );
 
-			$global = sanitize_text_field( $_POST['global'] );
+		wpdigi_utils::check( 'ajax_delete_risk_' . $risk_id );
 
-			wpdigi_utils::check( 'ajax_delete_risk_' . $risk_id );
+		global $wpdigi_risk_ctr;
+		global ${$global};
 
-			global $wpdigi_risk_ctr;
-			global ${$global};
+		$risk = $wpdigi_risk_ctr->show( $risk_id );
 
-			$risk = $wpdigi_risk_ctr->show( $risk_id );
+		if ( empty( $risk ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
 
-			if ( empty( $risk ) )
-				wp_send_json_error( array( 'error' => __LINE__ ) );
+		$workunit = ${$global}->show( $risk->parent_id );
 
-			$workunit = ${$global}->show( $risk->parent_id );
+		if ( empty( $workunit ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
 
-			if ( empty( $workunit ) )
-				wp_send_json_error( array( 'error' => __LINE__ ) );
+		if ( FALSE === $key = array_search( $risk_id, $workunit->option['associated_risk'] ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
 
-			if ( FALSE === $key = array_search( $risk_id, $workunit->option['associated_risk'] ) )
-				wp_send_json_error( array( 'error' => __LINE__ ) );
+		unset( $workunit->option['associated_risk'][$key] );
 
-			unset( $workunit->option['associated_risk'][$key] );
+		$risk->status = 'trash';
 
-			$risk->status = 'trash';
+		$wpdigi_risk_ctr->update( $risk );
+		${$global}->update( $workunit );
 
-			$wpdigi_risk_ctr->update( $risk );
-			${$global}->update( $workunit );
+		wp_send_json_success();
+	}
 
-			wp_send_json_success();
+	/**
+	* Charges un risque
+	*
+	* int $_POST['risk_id'] L'ID du risque
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
+	public function ajax_load_risk() {
+		// todo : global
+		if ( 0 === (int)$_POST['risk_id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$risk_id = (int)$_POST['risk_id'];
+
+		$global = sanitize_text_field( $_POST['global'] );
+
+		wpdigi_utils::check( 'ajax_load_risk_' .$risk_id );
+
+		$risk_definition = risk_class::get()->get_risk( $risk_id );
+
+		$element = society_class::get()->show_by_type( $risk_definition->parent_id );
+
+		foreach ( $risk_definition->comment as &$comment ) {
+			$comment->date = explode( ' ', $comment->date );
+			$comment->date = $comment->date[0];
+
 		}
+		unset( $comment );
 
-		public function ajax_load_risk() {
-			if ( 0 === (int)$_POST['risk_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$risk_id = (int)$_POST['risk_id'];
+		ob_start();
+		require( RISK_VIEW_DIR . 'list-item-edit.php' );
+		$template = ob_get_clean();
 
-			$global = sanitize_text_field( $_POST['global'] );
+		wp_send_json_success( array( 'template' => $template ) );
+	}
 
-			wpdigi_utils::check( 'ajax_load_risk_' .$risk_id );
+	/**
+	* Supprimes un commentaire sur un risque (met le status du commentaire à "trash")
+	*
+	* int $_POST['id'] L'ID du commentaire
+	* int $_POST['risk_id'] L'ID du risque
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
+	public function callback_delete_comment() {
+		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$risk_id = !empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
 
-			$risk_definition = risk_class::get()->get_risk( $risk_id );
+		check_ajax_referer( 'ajax_delete_risk_comment_' . $risk_id . '_' . $id );
 
-			$element = society_class::get()->show_by_type( $risk_definition->parent_id );
+		$risk_evaluation_comment = risk_evaluation_comment_class::get()->show( $id );
+		$risk_evaluation_comment->status = 'trash';
+		risk_evaluation_comment_class::get()->update( $risk_evaluation_comment );
 
-			foreach ( $risk_definition->comment as &$comment ) {
-				$comment->date = explode( ' ', $comment->date );
-				$comment->date = $comment->date[0];
-
-			}
-			unset( $comment );
-
-			ob_start();
-			require( RISK_VIEW_DIR . 'list-item-edit.php' );
-			$template = ob_get_clean();
-
-			wp_send_json_success( array( 'template' => $template ) );
-		}
-
-		/**
-		 * Affectation de fichiers a une unité de travail / Associate file to a workunit
-		 */
-		public function ajax_associate_file_to_risk() {
-			// wpdigi_utils::check( 'ajax_file_association_' . $_POST['element_id'] );
-
-			if ( 0 === (int)$_POST['element_id'] )
-				wp_send_json_error( array( 'error' => __LINE__, ) );
-			else
-				$risk_id = (int)$_POST['element_id'];
-
-			if ( empty( $_POST ) || empty( $_POST[ 'files_to_associate'] ) || !is_array( $_POST[ 'files_to_associate'] ) )
-				wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'digirisk' ), ) );
-
-			$risk = risk_class::get()->show( $risk_id );
-
-			foreach ( $_POST[ 'files_to_associate' ] as $file_id ) {
-				if ( true === is_int( (int)$file_id ) ) {
-					if ( wp_attachment_is_image( $file_id ) ) {
-						if ( empty( $risk->option[ 'associated_document_id' ][ 'image' ] ) )
-							$risk->option[ 'associated_document_id' ][ 'image' ] = array();
-
-						$risk->option[ 'associated_document_id' ][ 'image' ][] = (int)$file_id;
-
-						//if ( !empty( $_POST['thumbnail'] ) ) {
-						set_post_thumbnail( $risk_id , (int)$file_id );
-						//}
-					}
-					else {
-						$risk->option[ 'associated_document_id' ][ 'document' ][] = (int)$file_id;
-					}
-				}
-			}
-
-			risk_class::get()->update( $risk );
-
-			ob_start();
-			echo get_the_post_thumbnail( $risk_id, 'digirisk-element-miniature' );
-			echo do_shortcode( "[wpeo_gallery element_id='" . $risk_id . "' global='wpdigi_risk_ctr' ]" );
-
-			wp_send_json_success( array( 'id' => $risk->id, 'template' => ob_get_clean() ) );
-		}
-
-		public function callback_delete_comment() {
-			$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-			$risk_id = !empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
-
-			check_ajax_referer( 'ajax_delete_risk_comment_' . $risk_id . '_' . $id );
-
-			$risk_evaluation_comment = risk_evaluation_comment_class::get()->show( $id );
-			$risk_evaluation_comment->status = 'trash';
-			risk_evaluation_comment_class::get()->update( $risk_evaluation_comment );
-
-			wp_send_json_success();
-		}
+		wp_send_json_success();
+	}
 }
 
 new risk_action();

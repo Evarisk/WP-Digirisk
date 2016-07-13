@@ -15,25 +15,31 @@
 class group_action {
 
 	/**
-	 * CORE - Instanciation des actions ajax pour les groupement / Instanciate ajax treatment for group
+	 * Le constructeur appelle les actions ajax suivantes:
+	 * wp_ajax_wpdigi-create-group
+	 * wp_ajax_wpdigi-delete-group
+	 * wp_ajax_wpdigi-load-group
+	 * wp_ajax_wpdigi_ajax_group_update
+	 * wp_ajax_display_ajax_sheet_display
+	 * wp_ajax_wpdigi_generate_duer_digi-group
 	 */
 	public function __construct() {
+		// Remplacer - par _
 		add_action( 'wp_ajax_wpdigi-create-group', array( $this, 'ajax_create_group' ) );
 		add_action( 'wp_ajax_wpdigi-delete-group', array( $this, 'ajax_delete_group' ) );
-
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
-
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
-
-		add_action( 'wp_ajax_display_ajax_sheet_content', array( $this, 'ajax_display_ajax_sheet_content' ) );
-
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
-
-		add_action( 'wp_ajax_wpdigi_loadsheet_group', array( $this, 'ajax_display_ajax_sheet_content' ) );
-
 		add_action( 'wp_ajax_wpdigi_generate_duer_' . group_class::get()->get_post_type(), array( $this, 'ajax_generate_duer' ) );
 	}
 
+	/**
+	* Créer un groupement
+	*
+	* int $_POST['group_id'] L'ID du parent
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_create_group() {
 		if ( 0 === ( int )$_POST['group_id'] )
 			wp_send_json_error();
@@ -65,7 +71,15 @@ class group_action {
 		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
 	}
 
+	/**
+	* Supprimes un groupement
+	*
+	* int $_POST['group_id'] L'ID du groupement
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_delete_group() {
+		// todo: global
 		global $wpdigi_group_ctr;
 		if ( 0 === ( int )$_POST['group_id'] )
 			wp_send_json_error();
@@ -92,6 +106,13 @@ class group_action {
 		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
 	}
 
+	/**
+	* Charges les données d'un groupement
+	*
+	* int $_POST['group_id'] L'ID du groupement
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_load_group() {
 		if ( 0 === ( int )$_POST['group_id'] )
 			wp_send_json_error();
@@ -111,6 +132,15 @@ class group_action {
 		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
 	}
 
+	/**
+	* Sauvegardes les données d'un groupement
+	*
+	* int $_POST['group_id'] L'ID du groupement
+	* string $_POST['title'] Le titre du groupement
+	* int $_POST['send_to_group_id'] L'ID du groupement parent
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_group_update() {
 		if ( 0 === ( int )$_POST['group_id'] )
 			wp_send_json_error();
@@ -137,30 +167,11 @@ class group_action {
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 
-	public function ajax_display_ajax_sheet_content() {
-		if ( 0 === ( int )$_POST['group_id'] )
-			wp_send_json_error();
-		else
-			$group_id = (int) $_POST['group_id'];
-
-		$group = $this->show( $group_id );
-
-		$response = array(
-			'status'		=> false,
-			'output'		=> null,
-			'message'		=> __( 'Element to load have not been found', 'digirisk' ),
-		);
-
-		$subaction = sanitize_text_field( $_POST['subaction'] );
-
-		ob_start();
-		$this->display_group_tab_content( $group, $subaction );
-		$response['output'] = ob_get_contents();
-		ob_end_clean();
-
-		wp_die( json_encode( $response ) );
-	}
-
+	/**
+	* Appelle la méthode generate de l'objet group_duer_class
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_generate_duer() {
 		check_ajax_referer( 'digi_ajax_generate_element_duer' );
 		group_duer_class::get()->generate( $_POST );

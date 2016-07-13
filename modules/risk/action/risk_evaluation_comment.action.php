@@ -12,6 +12,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_evaluation_comment_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
+	*/
 	public function __construct() {
 		add_action( 'wp_ajax_save_risk', array( $this, 'callback_save_risk' ), 3 );
 	}
@@ -20,13 +23,10 @@ class risk_evaluation_comment_action {
   * Enregistres le commentaire d'une evaluation d'un risque
   * Ce callback est hoocké après wp_ajax_save_risk de risk_save_action
   *
-  * @param string $_POST['comment_date'] La date du commentaire
-  * @param string $_POST['comment_content'] Le contenu du commentaire
-  *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
+  * string $_POST['comment_date'] La date du commentaire
+  * string $_POST['comment_content'] Le contenu du commentaire
+	*
+  * @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_save_risk() {
 		check_ajax_referer( 'save_risk' );
