@@ -1,10 +1,21 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class third_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_save_legal_display
+	*/
   public function __construct() {
     add_action( 'wp_ajax_save_legal_display', array( $this, 'callback_save_legal_display' ), 1 );
   }
 
+	/**
+  * Sauvegardes les données de tier pour l'affichage légal
+  *
+	* array $_POST['detective_work'] Les données envoyées par le formulaire pour l'inspecteur du travail
+	* array $_POST['occupational_health_service'] Les données envoyées par le formulaire pour le service de santé au travail
+	*
+  * @param array $_POST Les données envoyées par le formulaire
+  */
   public function callback_save_legal_display() {
     check_ajax_referer( 'save_legal_display' );
 

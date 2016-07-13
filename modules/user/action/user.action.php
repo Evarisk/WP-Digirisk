@@ -5,6 +5,14 @@ namespace digi;
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_action extends \singleton_util {
+	/**
+	* Le constructeur appelle les actions suivantes:
+	* admin_menu (Pour déclarer le sous menu dans le menu utilisateur de WordPress)
+	* wp_ajax_edit_user_assign
+	* wp_ajax_detach_user
+	* wp_ajax_paginate_user
+	* wp_ajax_search_user_affected
+	*/
 	protected function construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ) );
 
@@ -20,17 +28,36 @@ class user_action extends \singleton_util {
 		add_action( 'wp_ajax_search_user_affected', array( $this, 'ajax_search_user_affected' ) );
 	}
 
+	/**
+	* Créer le sous menu dans le menu utilisateur de WordPress
+	*/
 	public function callback_admin_menu() {
 		add_users_page( __( 'Create or import user easyly with a form ', 'digirisk'), __( 'Digirisk : import', 'digirisk'), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
 	}
 
+	/**
+	* Affiche la page staff ??
+	*/
 	public function display_page_staff( $hidden ) {
+		// todo Pourquo ici ?
 		$list_user = user_class::get()->index();
 		array_shift( $list_user );
 
 		require( USERS_VIEW . 'page-staff.php' );
 	}
 
+	/**
+	* Assignes un utilisateur à element_id dans la base de donnée
+	*
+	* array $_POST['list_user'] La liste des utilisateurs à assigner
+	* string $_POST['list_user']['duration'] La durée de l'assignation
+	* string $_POST['list_user']['on'] La date d'assignation
+	* bool $_POST['list_user']['affect'] Si l'utilisateur doit être assigné
+	* int $_POST['workunit_id'] L'élement ou les utilisateurs doivent être assignés
+	* int $_POST['group_id'] L'ID du groupement
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_edit_user_assign() {
 		if ( 0 === (int)$_POST['workunit_id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
@@ -102,6 +129,14 @@ class user_action extends \singleton_util {
 		wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
 	}
 
+	/**
+	* Dissocies un utilisateur à element_id dans la base de donnée
+	*
+	* int $_POST['id'] L'ID de l'élément parent
+	* int $_POST['user_id'] L'ID de l'utilisateur a dissocier
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_detach_user() {
 		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
@@ -147,6 +182,13 @@ class user_action extends \singleton_util {
 		wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
 	}
 
+	/**
+	* Cherches les utilisateurs affectées par rapport à un term
+	*
+	* string $_POSt['user_name_affected'] La recherche fait par l'utilisateur
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function ajax_search_user_affected() {
 		// wpdigi_utils::check( 'ajax_search_user_affected' );
 
@@ -167,6 +209,14 @@ class user_action extends \singleton_util {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	* Fait le rendu de l'utilisateur selon l'élement ID et la page
+	*
+	* int $_POST['element_id'] L'ID de l'élement affecté par la pagination
+	* int $_POST['next_page'] La page de la pagination
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_paginate_user() {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 

@@ -13,18 +13,20 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class tab_action {
+	/**
+	* Le constructeur appelle l'action ajax: wp_ajax_lood_tab_content
+	*/
   public function __construct() {
     add_action( 'wp_ajax_load_tab_content', array( $this, 'callback_load_tab_content' ) );
   }
 
   /**
-  * Appelles le contenu d'un établissement
+  * Charges le contenu d'un onglet
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
-  *
-  * @since 6.0.0.0
-  *
-  * @param string $tab_to_display Le nom de l'onglet pour le contenu à afficher.
+	* int $_POST['element_id'] L'ID de la societé
+	* string $_POST['tab_to_display'] L'onglet a charger
+	*
+  * @param array $_POST Les données envoyées par le formulaire
   */
   public function callback_load_tab_content() {
     // check_ajax_referer( 'load_content' );

@@ -3,12 +3,12 @@
 class society_action {
 
 	/**
-	 * CORE - Instanciation des actions ajax pour les unités de travail / Instanciate ajax treatment for work unit
+	 * Le constructeur appelle les actions ajax suivantes:
+	 * wp_ajax_load_sheet_display
+	 * wp_ajax_save_society
 	 */
 	public function __construct() {
-		/**	Affiche une fiche d'unité de travail / Display a work unit sheet	*/
 		add_action( 'wp_ajax_load_sheet_display', array( $this, 'callback_load_sheet_display' ) );
-
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 	}
 
@@ -16,9 +16,7 @@ class society_action {
 	 * Affiche la fiche d'une unité de travail / Display a work unit sheet
 	 */
 	public function callback_load_sheet_display() {
-		ini_set("display_errors", true);
-		error_reporting(E_ALL);
-
+		// todo: Doublon ?
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_text_field( $_POST['tab_to_display'] ) : '';
 
@@ -38,7 +36,17 @@ class society_action {
 		wp_send_json_success( array( 'template' => $template ) );
 	}
 
+	/**
+	* Sauvegardes les données d'une societé
+	*
+	* int $_POST['element_id'] L'ID de la societé
+	* string $_POST['title'] Le titre de la societé
+	* int $_POST['send_to_group_id'] L'ID du groupement parent
+	*
+	* @param array $_POST Les données envoyées par le formulaire
+	*/
 	public function callback_save_society() {
+		// todo: Doublon ?
 		if ( 0 === ( int )$_POST['element_id'] )
 			wp_send_json_error();
 		else
