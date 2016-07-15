@@ -28,7 +28,6 @@ class risk_shortcode {
 	public function callback_digi_risk( $param ) {
 		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
 		risk_class::get()->display_risk_list( $element_id );
-		return true;
 	}
 }
 
