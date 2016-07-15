@@ -83,10 +83,11 @@ class workunit_action {
 		);
 
 		/**	Création de l'unité / Create the unit	*/
-		$workunit = workunit_class::get()->create( $workunit );
 
-		if ( !empty( $workunit->id ) ) {
-			$args['workunit_id'] = $workunit->id;
+		$element = workunit_class::get()->create( $workunit );
+
+		if ( !empty( $element->id ) ) {
+			$args['workunit_id'] = $element->id;
 			/**	Define a nonce for display sheet using ajax	*/
 			$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );
 
@@ -103,12 +104,12 @@ class workunit_action {
 			$message = __( 'An error occured while creating work unit', 'digirisk' );
 			$output = null;
 
-			wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'digirisk'), json_encode( $_POST ), json_encode( $workunit ) ), ), 2 );
+			// wpeologs_ctr::log_datas_in_files( $this->get_post_type(), array( 'object_id' => null, 'message' => sprintf( __( 'Work unit could not been create. request: %s response: %s', 'digirisk'), json_encode( $_POST ), json_encode( $element ) ), ), 2 );
 		}
 
 		ob_start();
-		group_class::get()->display_all_group( $workunit->parent_id );
-		wp_die( json_encode( array( 'template' => ob_get_clean(), 'status' => $status, 'message' => $message, 'element' => $workunit, 'output' => $output, ) ) );
+		group_class::get()->display_all_group( $element->parent_id );
+		wp_die( json_encode( array( 'template' => ob_get_clean(), 'status' => $status, 'message' => $message, 'element' => $element, 'output' => $output, ) ) );
 	}
 
 	/**
