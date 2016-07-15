@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.5.3
-Stable tag: 6.1.4.0
+Stable tag: 6.1.5.0
 
 Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises.
 
@@ -64,6 +64,31 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 6.1.5.0 =
+
+Améliorations
+
+* 4473 - Général: Le plugin est prêt à la traduction sur wordpress.org
+* 4472 - Général: Le JavaScript est séparé
+* 4468 - Général: Modification des templates ODT pour l'affichage légal: A3 et A4
+* 4467 - Général: Modification de la liste des documents
+* 4442 - Affichage légal: Mis à jour du document
+* 4441 - Affichage légal: Mis à jour du formulaire
+* 4429 - Risque: Upload des images sans passer en mode édition
+* 4427 - Général: Ajout d'infobulle pour expliquer certains boutons
+* 4424 - Général: Mise à jour des traductions
+* 4421 - Risque: La mise en forme des commentaires a été mise à jour
+* 4420 - Risque: Envoie des formulaires automatiquement
+* 4419 - Général: Modification du bouton + pour ajouter un risque
+* 4418 - Risque: L'affichage du danger format image
+* 4417 - Risque: La cotation et la date sont obligatoires pour valider le formulaire
+* 4416 - Risque: Ajout d'un + sur le bouton pour upload les images
+
+Corrections
+
+* 4459 - Outils: Compilation de la liste des identifiants des risques dans les éléments
+* 4422 - Génération des rapports au format ODT compatible avec les caractères spéciaux
 
 = Version 6.1.4.0 =
 
