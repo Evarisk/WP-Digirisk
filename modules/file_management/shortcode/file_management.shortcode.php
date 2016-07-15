@@ -31,7 +31,6 @@ class file_management_shortcode {
 	public function callback_eo_upload_button( $param ) {
     $id = 0;
     $type = "";
-		global $wpdigi_group_ctr;
 
     if ( !empty( $param['id'] ) ) {
       $id = (int) $param['id'];
@@ -63,7 +62,7 @@ class file_management_shortcode {
 		if ( !is_array( $param ) ) {
 			return false;
 		}
-		
+
 		$element_id = $param['element_id'];
 		$element = society_class::get()->show_by_type( $element_id );
 

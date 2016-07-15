@@ -2,7 +2,7 @@
 <ul class="wp-digi-list wp-digi-list-workunit" >
 	<?php if ( !empty( $list ) ) : ?>
 	<!-- List existing work unit -->
-	<?php foreach ( $list as $workunit ) : ?>
+	<?php foreach ( $list as $element ) : ?>
 		<?php require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list', 'item' ) ); ?>
 	<?php endforeach; ?>
 <?php endif; ?>

@@ -13,9 +13,9 @@
 */
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<span data-nonce="<?php echo wp_create_nonce( 'load_right_container' ); ?>" class="wp-digi-global-name">
-	<?php do_shortcode( '[eo_upload_button id=' . $element->id . ' type=' . $element->type . ']' ); ?>
+<?php do_shortcode( '[eo_upload_button id=' . $element->id . ' type=' . $element->type . ']' ); ?>
 
+<span data-nonce="<?php echo wp_create_nonce( 'load_right_container' ); ?>" class="wp-digi-global-name">
 	<strong><?php echo $element->option['unique_identifier']; ?> -</strong>
 
 	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>

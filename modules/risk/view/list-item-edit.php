@@ -6,7 +6,7 @@ if ( $risk_definition != null ):
 		<input type="hidden" name="action" value="save_risk" />
 		<input type="hidden" name="risk_id" value="<?php echo $risk_id; ?>" />
 
-		<?php echo do_shortcode( '[eo_upload_button id="' . $risk_id . '" object_name="wpdigi_risk_ctr"]' ); ?>
+		<?php echo do_shortcode( '[eo_upload_button id="' . $risk_id . '" type="risk"]' ); ?>
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk_id . ']' ); ?>
 
 		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk_definition->option[ 'unique_identifier' ]; ?> - <?php echo $risk_definition->evaluation->option[ 'unique_identifier' ]?></span>
