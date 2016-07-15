@@ -28,7 +28,7 @@ class society_shortcode {
     $element = society_class::get()->show_by_type( $id );
 
 		if ( $element ) {
-			$tab_to_display = !empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-risk';
+			$tab_to_display = !empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-generate-sheet';
 		  require( SOCIETY_VIEW_DIR . '/content.view.php' );
 		}
   }
