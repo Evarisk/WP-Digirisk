@@ -67,7 +67,7 @@ var digi_risk = {
         jQuery( element ).closest( 'form' ).find( 'input[name="risk_comment_date"]' ).css( 'border', 'none' );
       },
 			success: function( response ) {
-				jQuery( '.wp-digi-risk.wp-digi-list' ).html( response.data.template );
+				jQuery( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
 				digi_risk.reset_create_form();
         instance._stop(1);
 			}
@@ -131,7 +131,7 @@ var digi_risk = {
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
 			'success': function( response ) {
         jQuery( '.wp-digi-list-item .dashicons-edit' ).show();
-				jQuery( '.wp-digi-risk.wp-digi-list' ).html( response.data.template );
+				jQuery( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
 			}
 		} );
 	},

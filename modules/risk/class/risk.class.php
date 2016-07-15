@@ -97,6 +97,15 @@ class risk_class extends post_class {
 	}
 
 	/**
+	* Affiche la fenêtre principale
+	*
+	* @param int $society_id L'ID de la societé
+	*/
+	public function display( $society_id ) {
+		require( RISK_VIEW_DIR . 'main.view.php' );
+	}
+
+	/**
 	 * DISPLAY - Génération de l'affichage des risques à partir d'un shortcode / Generate display for risks through shortcode
 	 *
 	 * @param int $society_id L'ID de la societé

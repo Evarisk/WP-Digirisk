@@ -88,7 +88,7 @@ public function ajax_get_scale() {
 
 		risk_class::get()->update( $risk );
 
-		do_action( 'display_risk' );
+		do_action( 'display_risk', $risk->parent_id );
   }
 }
 

@@ -23,7 +23,7 @@ class risk_action {
 	*/
 	public function __construct() {
 		// Remplacé les - en _
-		add_action( 'display_risk', array( $this, 'callback_display_risk' ) );
+		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 1 );
 		add_action( 'wp_ajax_wpdigi-delete-risk', array( $this, 'ajax_delete_risk' ) );
 		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
@@ -38,14 +38,9 @@ class risk_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_display_risk() {
-		// $element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		// if ( $element_id === 0 ) {
-		// 	wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
-		// }
-
+	public function callback_display_risk( $society_id ) {
 		ob_start();
-		// risk_class::get()->display_risk_list( $element_id );
+		risk_class::get()->display_risk_list( $society_id );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
