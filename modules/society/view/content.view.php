@@ -18,7 +18,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
 			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
-		<a class="wp-digi-delete-action" data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
+
+		<?php if ( $display_trash ): ?>
+			<a class="wp-digi-delete-action" data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
+		<?php endif; ?>
 	</div>
 	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
 	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element, $tab_to_display ); ?>
