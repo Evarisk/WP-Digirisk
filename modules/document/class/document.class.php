@@ -320,9 +320,9 @@ class document_class extends post_class {
 	* @return object Le document courant
 	*/
 	public function set_document_data( $data_key, $data_value, $current_odf ) {
-		if ( !is_string( $data_key ) || !is_string( $data_value ) || !is_object( $current_odf ) ) {
-			return false;
-		}
+		// if ( !is_string( $data_key ) || !is_string( $data_value ) || !is_object( $current_odf ) ) {
+		// 	return false;
+		// }
 		/**	Dans le cas où la donnée a écrire est une valeur "simple" (texte) / In case the data to write is a "simple" (text) data	*/
 		if ( !is_array( $data_value ) ) {
 			$current_odf->setVars( $data_key, stripslashes( $data_value ), true, 'UTF-8' );

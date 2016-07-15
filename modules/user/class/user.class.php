@@ -58,7 +58,9 @@ class user_class extends \user_class {
 	* @param object $workunit L'objet parent
 	*/
 	public function render( $workunit ) {
-		$list_affected_user = $this->list_affected_user( $workunit, $list_affected_id );
+		$array = $this->list_affected_user( $workunit );
+		$list_affected_user = $array['list_affected_user'];
+		$list_affected_id = $array['list_affected_id'];
 
 		$current_page = !empty( $_GET['current_page'] ) ? (int) $_GET['current_page'] : 1;
 		$args_where_user = array(
@@ -83,13 +85,11 @@ class user_class extends \user_class {
 	}
 
 	/**
-	* Fait le rendu de la liste des utilisateurs
+	* Fait le rendu de la liste des utilisateurs à assigner
 	*
 	* @param object $workunit L'objet
 	*/
-	public function render_list( $workunit ) {
-		$list_affected_user = $this->list_affected_user( $workunit, $list_affected_id );
-
+	public function render_list_user_to_assign( $workunit ) {
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
 		$args_where_user = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_user,
@@ -121,13 +121,15 @@ class user_class extends \user_class {
 	 *
 	 * @return array list users affected
 	 */
-	public function list_affected_user( $workunit, $list_affected_id ) {
-		if ( !is_object( $workunit) || !is_array( $list_affected_id ) ) {
+	public function list_affected_user( $workunit ) {
+		if ( !is_object( $workunit) ) {
 			return false;
 		}
 
 		if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) )
 			return false;
+
+		$list_affected_id = array();
 
 		$list_user = array();
 		if ( !empty( $workunit->option['user_info']['affected_id']['user'] ) ) {
@@ -145,16 +147,11 @@ class user_class extends \user_class {
 			}
 		}
 
-		return $list_user;
+		return array(
+			'list_affected_user' => $list_user,
+			'list_affected_id' => $list_affected_id,
+		);
 	}
-
-	/**
-	* Récupères les utilisateurs valides dans les unités de travail
-	*
-	* @param object $workunit L'objet
-	* @param int $user_id L'ID de l'utilisateur
-	*
-	*/
 
 
 	/**
@@ -168,7 +165,7 @@ class user_class extends \user_class {
 		if ( !is_array( $users ) ) {
 			return false;
 		}
-		
+
 		$affected_users = $unaffected_users = null;
 		if ( !empty( $users ) ) {
 			foreach ( $users as $user_id => $user_affectations ) {
@@ -249,4 +246,29 @@ class user_class extends \user_class {
 
 		return true;
 	}
+
+	/**
+	* Renvoie l'utilisateur ayant le status "valid" selon $user_id
+	*
+	* @param object $workunit L'objet
+	* @param int $user_id L'ID de l'utilisateur a chercher
+	*
+	* @return int La clé de l'utilisateur 
+	*/
+	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
+			global $wpdigi_user_ctr;
+			// Si $workunit->id est égale à 0 ou si $workunit->option['user_info'] est vide ou si $workunit->option['user_info']['affected_id'] est vide ou si $user_id est vide et n'est pas un entier ou si $workunit->option['user_info']['affected_id'][$user_id] est vide
+			if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) || empty( $workunit->option['user_info']['affected_id']['user'] ) || ( empty( $user_id ) && ctype_digit( strval( $user_id ) ) ) || empty( $workunit->option['user_info']['affected_id']['user'][$user_id] ) )
+				return false;
+			$index_valid_key = -1;
+			foreach ( $workunit->option['user_info']['affected_id']['user'][$user_id] as $key => $affected_user ) {
+				if( $affected_user['status'] == 'valid' ) {
+					$index_valid_key = $key;
+					break;
+				}
+			}
+			if ( $index_valid_key == -1 )
+				return false;
+			return $index_valid_key;
+		}
 }
