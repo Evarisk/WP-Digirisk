@@ -170,7 +170,6 @@ class document_class extends post_class {
 	public function display_document_list( $element ) {
 		// if ( empty( $element ) )
 		// 	return false;
-
 		$list_document_id = !empty( $element->option[ 'associated_document_id' ] ) && !empty( $element->option[ 'associated_document_id' ][ 'document' ] ) ? $element->option[ 'associated_document_id' ][ 'document' ] : null;
 		if ( 0 < $this->limit_document_per_page ) {
 			$current_page = !empty( $_GET[ 'current_page' ] ) ? (int)$_GET[ 'current_page' ] : 1;
@@ -558,7 +557,7 @@ class document_class extends post_class {
   	}
 
 		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_document_path() . '/' . $path, $element->id );
-		
+
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_document_path() . '/' . $path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 

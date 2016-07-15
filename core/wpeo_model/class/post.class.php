@@ -29,9 +29,9 @@ class post_class extends singleton_util {
 	* @return object L'objet
 	*/
 	public function update( $data ) {
-		if ( !is_array ( $data ) && !is_object( $data ) ) {
-			return false;
-		}
+		// if ( !is_array ( $data ) && !is_object( $data ) ) {
+		// 	return false;
+		// }
 
 		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data ) && empty( $data->id ) ) ) {
 			return $this->create( $data );
@@ -74,9 +74,9 @@ class post_class extends singleton_util {
 	* @return object L'objet cloné
 	*/
 	public function create( $data ) {
-		if ( !is_array( $data ) && !is_object( $data ) ) {
-			return false;
-		}
+		// if ( !is_array( $data ) && !is_object( $data ) ) {
+		// 	return false;
+		// }
 
 		$object = $data;
 

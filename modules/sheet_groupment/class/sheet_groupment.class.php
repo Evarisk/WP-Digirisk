@@ -146,7 +146,6 @@ class sheet_groupment_class extends singleton_util {
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$group->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
 			$group = group_class::get()->update( $group );
-			$group = group_class::get()->show( $group->id );
 		}
 
 		return $document_creation_response;

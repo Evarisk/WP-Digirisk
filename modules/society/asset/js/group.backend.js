@@ -127,9 +127,7 @@ var digi_group = {
 	        },
 	        success:       function( responseText, statusText, xhr, $form ) {
 	        	jQuery( element ).removeClass( "wp-digi-loading" );
-	        	if ( responseText.status ) {
-		        	jQuery( ".wp-digi-list-item[data-action='digi-sheet']" ).click( );
-	        	}
+						jQuery( ".wp-digi-global-sheet-tab li[data-action='digi-sheet']" ).click( );
 	        },
 	        dataType: "json",
 	    };
