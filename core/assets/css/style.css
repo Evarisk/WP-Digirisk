@@ -222,7 +222,7 @@
 .wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wpdigi-auto-complete {
   background: rgba(255, 255, 255, 0.4);
 }
-.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-group-action {
+.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-action {
   line-height: 50px;
   float: right;
   padding-right: 10px;
@@ -232,10 +232,10 @@
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-group-action i {
+.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-action i {
   line-height: 50px;
 }
-.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-group-action:hover {
+.wp-digi-societytree-main-container .wp-digi-societytree-right-container .wp-digi-global-sheet-header .wp-digi-delete-action:hover {
   cursor: pointer;
   color: #e05353;
 }
