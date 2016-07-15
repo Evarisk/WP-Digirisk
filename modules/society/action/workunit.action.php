@@ -24,9 +24,6 @@ class workunit_action {
 		/**	Création d'une unité de travail / Create a work unit	*/
 		add_action( 'wp_ajax_wpdigi_ajax_workunit_create', array( $this, 'create_workunit' ) );
 
-		/** Suppresion d'une unité de travail / Delete a work unit */
-		add_action( 'wp_ajax_wpdigi_ajax_workunit_delete', array( $this, 'delete_workunit' ) );
-
 		/** Mise à jour d'une unité de travail / Update a work unit */
 		add_action( 'wp_ajax_wpdigi_ajax_workunit_update', array( $this, 'update_workunit' ) );
 
@@ -112,31 +109,6 @@ class workunit_action {
 		ob_start();
 		group_class::get()->display_all_group( $workunit->parent_id );
 		wp_die( json_encode( array( 'template' => ob_get_clean(), 'status' => $status, 'message' => $message, 'element' => $workunit, 'output' => $output, ) ) );
-	}
-
-	/**
-	 * Suppression d'une unité de travail / Delete a workunit
-	 */
-	public function delete_workunit() {
-		if ( 0 === (int) $_POST['workunit_id'] )
-			wp_send_json_error();
-		else
-			$workunit_id = (int) $_POST['workunit_id'];
-
-		check_ajax_referer( 'ajax_delete_workunit_' . $workunit_id );
-
-		$workunit = array(
-			'id' 		=> $workunit_id,
-			'status'	=> 'trash',
-			'date_modified'	=> current_time( 'mysql', 0 ),
-		);
-
-		workunit_class::get()->update( $workunit );
-		$workunit = workunit_class::get()->show( $workunit_id );
-
-		ob_start();
-		group_class::get()->display_all_group( $workunit->parent_id );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**

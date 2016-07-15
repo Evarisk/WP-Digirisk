@@ -12,6 +12,8 @@ var digi_society = {
 		jQuery( document ).on( 'keyup', 'input[name="establishment_name"]', function( event ) { digi_society.identity_edition_mode( event, jQuery( this ) ); } );
 		/**	Quand on clique sur le bouton de sauvegarde des informations d'une unité	*/
 		jQuery( document ).on( 'click', '.wp-digi-global-sheet-header button.wp-digi-save-identity-button', function( event ) { digi_society.save_identity( event, jQuery( this ) ); } );
+
+		jQuery( document ).on( 'click', '.wp-digi-global-sheet-header .wp-digi-delete-action', function ( event ) { digi_society.delete_society( event, jQuery( this ) ); } );
 	},
 
 	load_society: function( event, element ) {
@@ -74,4 +76,17 @@ var digi_society = {
 			}
 		}, "json");
 	},
+
+	delete_society: function( event, element ) {
+		event.preventDefault();
+
+		if( confirm( digi_confirm_delete ) ) {
+			var data = {
+				action: 'delete_society',
+				element_id: jQuery( element ).data( 'id' ),
+			};
+
+			jQuery.post( ajaxurl, data, function( response ) {} );
+		}
+	}
 };

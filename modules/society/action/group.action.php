@@ -17,16 +17,14 @@ class group_action {
 	/**
 	 * Le constructeur appelle les actions ajax suivantes:
 	 * wp_ajax_wpdigi-create-group
-	 * wp_ajax_wpdigi-delete-group
 	 * wp_ajax_wpdigi-load-group
 	 * wp_ajax_wpdigi_ajax_group_update
 	 * wp_ajax_display_ajax_sheet_display
 	 * wp_ajax_wpdigi_generate_duer_digi-group
 	 */
 	public function __construct() {
-		// Remplacer - par _
+		// todo: Remplacer - par _
 		add_action( 'wp_ajax_wpdigi-create-group', array( $this, 'ajax_create_group' ) );
-		add_action( 'wp_ajax_wpdigi-delete-group', array( $this, 'ajax_delete_group' ) );
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
@@ -66,41 +64,6 @@ class group_action {
 		$_POST['subaction'] = 'generate-sheet';
 		ob_start();
 		group_class::get()->display( $group->id );
-		$template_right = ob_get_clean();
-
-		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
-	}
-
-	/**
-	* Supprimes un groupement
-	*
-	* int $_POST['group_id'] L'ID du groupement
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
-	public function ajax_delete_group() {
-		// todo: global
-		global $wpdigi_group_ctr;
-		if ( 0 === ( int )$_POST['group_id'] )
-			wp_send_json_error();
-		else
-			$group_id = (int) $_POST['group_id'];
-
-		wp_delete_post( $group_id );
-
-		$group_list = $wpdigi_group_ctr->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
-
-		global $default_selected_group_id;
-		$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
-
-		ob_start();
-		$display_mode = 'simple';
-		$this->display_society_tree( $display_mode, $default_selected_group_id );
-		$template_left = ob_get_clean();
-
-		$_POST['subaction'] = 'generate-sheet';
-		ob_start();
-		$this->display( $default_selected_group_id );
 		$template_right = ob_get_clean();
 
 		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );

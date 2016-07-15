@@ -10,6 +10,7 @@ class society_action {
 	public function __construct() {
 		add_action( 'wp_ajax_load_sheet_display', array( $this, 'callback_load_sheet_display' ) );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
+		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
 	}
 
 	/**
@@ -68,6 +69,19 @@ class society_action {
 		$display_mode = 'simple';
 		group_class::get()->display_society_tree( $display_mode, $society->id );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
+	}
+
+	/**
+	* todo: Commenter
+	*/
+	public function callback_delete_society() {
+		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+
+		$society = society_class::get()->show_by_type( $element_id );
+		$society->status = 'trash';
+		society_class::get()->update_by_type( $society );
+
+		wp_send_json_error();
 	}
 }
 
