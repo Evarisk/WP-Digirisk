@@ -87,9 +87,9 @@ class document_class extends post_class {
 	* @return string Le chemin vers le document
 	*/
 	public function get_document_path( $path_type = 'basedir' ) {
-		if ( !is_string( $path_type ) ) {
-			return false;
-		}
+		// if ( !is_string( $path_type ) ) {
+		// 	return false;
+		// }
 
 		$upload_dir = wp_upload_dir();
 		return $upload_dir[ $path_type ] . '/digirisk';
@@ -131,9 +131,9 @@ class document_class extends post_class {
 	 * @param string $display_mode Le mode d'affichage de l'interface / The main display mode of digirisk interface
 	 */
 	public function filter_display_group_sheet_print_button( $group_id, $display_mode ) {
-		if ( !is_int( $group_id ) || !is_string( $display_mode ) ) {
-			return false;
-		}
+		// if ( !is_int( $group_id ) || !is_string( $display_mode ) ) {
+		// 	return false;
+		// }
 		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, $display_mode, "print", "button" ) );
 	}
 
@@ -147,9 +147,9 @@ class document_class extends post_class {
 	 * @return string Le contenu a afficher pour l'onglet et l'élément actuel / The content to display for current tab and element we are one
 	 */
 	public function filter_display_doc_in_element( $output, $element, $tab_to_display ) {
-		if ( !is_string( $output ) || !is_string( $tab_to_display ) ) {
-			return false;
-		}
+		// if ( !is_string( $output ) || !is_string( $tab_to_display ) ) {
+		// 	return false;
+		// }
 
 		if ( 'sheet' == $tab_to_display ) {
 			ob_start();
@@ -168,8 +168,8 @@ class document_class extends post_class {
 	 * @param array $args Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
 	 */
 	public function display_document_list( $element ) {
-		if ( empty( $element ) )
-			return false;
+		// if ( empty( $element ) )
+		// 	return false;
 
 		$list_document_id = !empty( $element->option[ 'associated_document_id' ] ) && !empty( $element->option[ 'associated_document_id' ][ 'document' ] ) ? $element->option[ 'associated_document_id' ][ 'document' ] : null;
 		if ( 0 < $this->limit_document_per_page ) {
@@ -190,9 +190,9 @@ class document_class extends post_class {
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
 	public function get_model_for_element( $current_element_type ) {
-		if ( !is_array( $current_element_type ) ) {
-			return false;
-		}
+		// if ( !is_array( $current_element_type ) ) {
+		// 	return false;
+		// }
 
 		$response = array(
 			'status'		=> false,
@@ -259,9 +259,9 @@ class document_class extends post_class {
 	 *
 	 */
 	public function generate_document( $model_path, $document_content, $document_name ) {
-		if ( !is_string( $model_path ) || !is_array( $document_content ) || !is_string( $document_name ) ) {
-			return false;
-		}
+		// if ( !is_string( $model_path ) || !is_array( $document_content ) || !is_string( $document_name ) ) {
+		// 	return false;
+		// }
 
 		$response = array(
 			'status'	=> false,
@@ -463,15 +463,15 @@ class document_class extends post_class {
 	 * @param string $version La version du zip
 	 */
 	 public function create_zip( $final_file_path, $file_list, $element, $version ) {
-		if ( !is_string( $final_file_path ) || !is_array( $file_list ) || !is_object( $element ) || !is_string( $version ) ) {
-		 return false;
-		}
+		// if ( !is_string( $final_file_path ) || !is_array( $file_list ) || !is_object( $element ) || !is_string( $version ) ) {
+		//  return false;
+		// }
 
 		$zip = new ZipArchive();
 
 		$response = array();
 
-		if( $zip->open( $final_file_path, ZipArchive::OVERWRITE ) !== TRUE ) {
+		if( $zip->open( $final_file_path, ZipArchive::CREATE ) !== TRUE ) {
 			$response['status'] = false;
 			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'digirisk' );
 		}
@@ -503,9 +503,9 @@ class document_class extends post_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_data ) {
-		if ( !is_object( $element ) || !is_array( $document_type ) || !is_array( $document_data ) ) {
-			return false;
-		}
+		// if ( !is_object( $element ) || !is_array( $document_type ) || !is_array( $document_data ) ) {
+		// 	return false;
+		// }
 
 		$response = array(
 			'status' => true,
@@ -558,7 +558,7 @@ class document_class extends post_class {
   	}
 
 		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_document_path() . '/' . $path, $element->id );
-
+		
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_document_path() . '/' . $path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 
