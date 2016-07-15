@@ -22,6 +22,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<i class="wpeo-upload-media dashicons dashicons-format-image" ></i>
 		<img src="#" class="hidden wp-post-image wp-digi-element-thumbnail" />
 		<input type="hidden" name="file_id" />
+		<div class="mask"><span class="dashicons dashicons-plus"></span></div>
 		<?php
   endif;
   ?>

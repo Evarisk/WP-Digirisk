@@ -564,20 +564,12 @@
 		RISK INTERFACE
 ------------------------------------- */
 .wp-digi-risk-item {
-  /* Thumbnail */
+  /* Thumbnail : voir media.less */
   /* Quotation */
   /* Reference */
   /* Danger */
   /* Comment */
   /* Action */
-}
-.wp-digi-risk-item .wp-digi-risk-thumbnail {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-}
-.wp-digi-risk-item .wp-digi-risk-thumbnail img {
-  float: left;
 }
 .wp-digi-risk-item .wp-digi-risk-list-column-cotation {
   position: relative;
@@ -714,39 +706,6 @@
   width: 50px;
   height: 50px;
   margin-left: auto;
-}
-.wp-digi-risk-item-new .wp-digi-risk-thumbnail {
-  position: relative;
-}
-.wp-digi-risk-item-new .wp-digi-risk-thumbnail .mask {
-  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(52, 149, 240, 0.6);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-.wp-digi-risk-item-new .wp-digi-risk-thumbnail .mask span {
-  color: #fff;
-  margin: auto;
-}
-.wp-digi-risk-item-new .wp-digi-risk-thumbnail:hover {
-  cursor: pointer;
-}
-.wp-digi-risk-item-new .wp-digi-risk-thumbnail:hover .mask {
-  opacity: 1;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 .wp-digi-risk-item-new input,
 .wp-digi-risk-item-new textarea {
@@ -2105,6 +2064,51 @@
   right: auto;
   left: 100%;
   margin-left: 25px;
+}
+/* -------------------------------------
+		MEDIA
+------------------------------------- */
+.wpeo-upload-media {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+.wpeo-upload-media img {
+  width: 100%;
+  height: auto;
+  float: left;
+}
+.wpeo-upload-media .mask {
+  -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(52, 149, 240, 0.6);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.wpeo-upload-media .mask span {
+  color: #fff;
+  margin: auto;
+}
+.wpeo-upload-media:hover {
+  cursor: pointer;
+}
+.wpeo-upload-media:hover .mask {
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 /* -------------------------------------
 		FUNCTIONS

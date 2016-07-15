@@ -96,9 +96,9 @@
 		}
 		.wp-digi-cotation {
 			> .wp-digi-risk-level-1:hover {
-				background: darken(#e2e2e2, 10%); 
+				background: darken(#e2e2e2, 10%);
 			}
-			> .wp-digi-risk-level-2:hover { 
+			> .wp-digi-risk-level-2:hover {
 				background: darken(@yellow, 10%);
 			}
 			> .wp-digi-risk-level-3:hover {
@@ -135,7 +135,7 @@
 				}
 			}
 		}
-		&.wp-digi-action-new {		
+		&.wp-digi-action-new {
 			.progress-button {
 				.transition;
 				background: @c1;
@@ -177,15 +177,8 @@
 ------------------------------------- */
 
 .wp-digi-risk-item {
-	/* Thumbnail */
-	.wp-digi-risk-thumbnail {
-		width: 50px;
-		height: 50px;
-		text-align: center;
-		img {
-			float: left;
-		}
-	}
+	/* Thumbnail : voir media.less */
+
 	/* Quotation */
 	.wp-digi-risk-list-column-cotation {
 		position: relative;
@@ -244,7 +237,7 @@
 			color: rgba(0,0,0,0.6);
 		}
 		.wp-digi-risk-level-2 {
-		.transition; 
+		.transition;
 			background: @yellow !important;
 		}
 		.wp-digi-risk-level-3 {
@@ -298,7 +291,7 @@
 				}
 				i {
 					line-height: 50px;
-				}	
+				}
 			}
 		}
 		.wp-digi-action-load, .wp-digi-action-delete {
@@ -325,30 +318,6 @@
 }
 
 .wp-digi-risk-item-new {
-	.wp-digi-risk-thumbnail {
-		position: relative;
-		.mask {
-			.transition;
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: fade(@c1, 60%);
-			display: flex;
-			span {
-				color: #fff;
-				margin: auto;
-			}
-		}
-		&:hover {
-			.mask {
-				opacity: 1;
-			}
-			cursor: pointer;
-		}
-	}
 	input, textarea {
 		width: 100%;
 		line-height: 1.1;
