@@ -25,7 +25,7 @@
 				<ul class="gridwrapper2">
 					<li class="form-element"><label><?php _e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" /></label></li>
 					<li class="form-element">
-						<label><?php _e( 'Owner', 'digirisk' ); ?> <input type="text" data-target="owner_id" placeholder="<?php _e( 'Write name to search...', 'digirisk' ); ?>" data-filter="" class="wpdigi-auto-complete-user" data-element-id="<?php echo $element->id; ?>" value="<?php echo !empty( $user ) ? $user->login : ''; ?>" /></label>
+						<label><?php _e( 'Owner', 'digirisk' ); ?> <input type="text" data-target="owner_id" placeholder="<?php _e( 'Write name to search...', 'digirisk' ); ?>" data-filter="" class="wpdigi-auto-complete-user" value="<?php echo !empty( $user ) ? $user->login : ''; ?>" /></label>
 						<input type="hidden" name="owner_id" />
 					</li>
 					<li class="form-element"><label><?php _e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" /></label></li>

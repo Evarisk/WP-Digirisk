@@ -49,12 +49,12 @@ class user_class extends singleton_util {
 
 			/** On insert ou on met à jour les meta */
 			if( !empty( $object->option ) ) {
-
-				$object->save_meta_data( $object, 'update_user_meta', $this->meta_key );
+				$cloned_object = clone $object;
+				$cloned_object->save_meta_data( $object, 'update_user_meta', $this->meta_key );
 			}
 		}
 
-		return $object;
+		return $cloned_object;
 	}
 
 	/**

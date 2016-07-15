@@ -30,7 +30,8 @@ class risk_evaluation_action {
   *
   */
 	public function ajax_save_risk() {
-		check_ajax_referer( 'ajax_save_risk' );
+		// todo
+		// check_ajax_referer( 'ajax_save_risk' );
 
 		$risk_evaluation_level = !empty( $_POST['risk_evaluation_level'] ) ? (int) $_POST['risk_evaluation_level'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
@@ -140,8 +141,6 @@ class risk_evaluation_action {
 				$risk_evaluation_level *= (int) $element;
 		  }
 		}
-
-		echo $risk_evaluation_level;
 
 		$evaluation_method = evaluation_method_class::get()->show( $term_id );
 		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > max( array_keys( $evaluation_method->option['matrix'] ) ) ) {

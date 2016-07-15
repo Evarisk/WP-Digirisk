@@ -8,7 +8,7 @@
 		<ul class="wp-digi-table">
 			<li>
 				<?php echo do_shortcode( '[eo_upload_button]' ); ?>
-				<?php do_shortcode( '[digi_evaluation_method]' ); ?>
+				<?php echo do_shortcode( '[digi_evaluation_method]' ); ?>
 
 				<span class="wp-digi-risk-list-column-reference"></span>
 

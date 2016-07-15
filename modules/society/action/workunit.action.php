@@ -123,7 +123,7 @@ class workunit_action {
 		else
 			$workunit_id = (int) $_POST['workunit_id'];
 
-		wpdigi_utils::check( 'ajax_delete_workunit_' . $workunit_id );
+		check_ajax_referer( 'ajax_delete_workunit_' . $workunit_id );
 
 		$workunit = array(
 			'id' 		=> $workunit_id,

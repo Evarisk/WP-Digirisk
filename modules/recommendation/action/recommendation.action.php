@@ -39,7 +39,7 @@ class recommendation_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	function ajax_create_recommendation() {
-		wpdigi_utils::check( 'ajax_create_recommendation' );
+		check_ajax_referer( 'ajax_create_recommendation' );
 
 		if (  0 === (int) $_POST['workunit_id'] )
 			wp_send_json_error();
@@ -110,7 +110,7 @@ class recommendation_action {
 		else
 			$index = (int) $_POST['index'];
 
-		wpdigi_utils::check( 'ajax_load_recommendation_' . $term_id. '_' . $index );
+		check_ajax_referer( 'ajax_load_recommendation_' . $term_id. '_' . $index );
 
 		$workunit = society_class::get()->show_by_type( $workunit_id );
 		$recommendation_in_workunit = $workunit->option['associated_recommendation'][$term_id][$index];
@@ -149,7 +149,7 @@ class recommendation_action {
 		else
 			$index = (int) $_POST['index'];
 
-		wpdigi_utils::check( 'ajax_edit_recommendation_' . $term_id . '_' . $index );
+		check_ajax_referer( 'ajax_edit_recommendation_' . $term_id . '_' . $index );
 
 		$workunit = society_class::get()->show_by_type( $workunit_id );
 
@@ -193,7 +193,7 @@ class recommendation_action {
 		else
 			$index = (int) $_POST['index'];
 
-		wpdigi_utils::check( 'ajax_delete_recommendation_' . $term_id . '_' . $index );
+		check_ajax_referer( 'ajax_delete_recommendation_' . $term_id . '_' . $index );
 		$workunit = society_class::get()->show_by_type( $workunit_id );
 
 		$workunit->option['associated_recommendation'][$term_id][$index]['status'] = 'deleted';

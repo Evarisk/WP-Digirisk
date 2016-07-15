@@ -32,10 +32,6 @@ class evaluation_method_shortcode {
 	* @return bool
 	*/
 	public function callback_digi_evaluation_method( $param ) {
-		if ( !is_array( $param ) ) {
-			return false;
-		}
-
 		$display = !empty( $param['display'] ) ? sanitize_text_field( $param['display'] ) : 'edit';
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );

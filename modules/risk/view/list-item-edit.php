@@ -5,8 +5,6 @@ if ( $risk_definition != null ):
 		<?php wp_nonce_field( 'save_risk' ); ?>
 		<input type="hidden" name="action" value="save_risk" />
 		<input type="hidden" name="risk_id" value="<?php echo $risk_id; ?>" />
-		<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
-		<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 
 		<?php echo do_shortcode( '[eo_upload_button id="' . $risk_id . '" object_name="wpdigi_risk_ctr"]' ); ?>
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk_id . ']' ); ?>

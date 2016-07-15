@@ -63,32 +63,16 @@ class risk_action {
 		else
 			$risk_id = (int)$_POST['risk_id'];
 
-		$global = sanitize_text_field( $_POST['global'] );
+		check_ajax_referer( 'ajax_delete_risk_' . $risk_id );
 
-		wpdigi_utils::check( 'ajax_delete_risk_' . $risk_id );
-
-		global $wpdigi_risk_ctr;
-		global ${$global};
-
-		$risk = $wpdigi_risk_ctr->show( $risk_id );
+		$risk = risk_class::get()->show( $risk_id );
 
 		if ( empty( $risk ) )
 			wp_send_json_error( array( 'error' => __LINE__ ) );
 
-		$workunit = ${$global}->show( $risk->parent_id );
-
-		if ( empty( $workunit ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
-
-		if ( FALSE === $key = array_search( $risk_id, $workunit->option['associated_risk'] ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
-
-		unset( $workunit->option['associated_risk'][$key] );
-
 		$risk->status = 'trash';
 
-		$wpdigi_risk_ctr->update( $risk );
-		${$global}->update( $workunit );
+		risk_class::get()->update( $risk );
 
 		wp_send_json_success();
 	}
@@ -101,32 +85,18 @@ class risk_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_risk() {
-		// todo : global
 		if ( 0 === (int)$_POST['risk_id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
 			$risk_id = (int)$_POST['risk_id'];
 
-		$global = sanitize_text_field( $_POST['global'] );
-
-		wpdigi_utils::check( 'ajax_load_risk_' .$risk_id );
+		check_ajax_referer( 'ajax_load_risk_' . $risk_id );
 
 		$risk_definition = risk_class::get()->get_risk( $risk_id );
 
-		$element = society_class::get()->show_by_type( $risk_definition->parent_id );
-
-		foreach ( $risk_definition->comment as &$comment ) {
-			$comment->date = explode( ' ', $comment->date );
-			$comment->date = $comment->date[0];
-
-		}
-		unset( $comment );
-
 		ob_start();
 		require( RISK_VIEW_DIR . 'list-item-edit.php' );
-		$template = ob_get_clean();
-
-		wp_send_json_success( array( 'template' => $template ) );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**

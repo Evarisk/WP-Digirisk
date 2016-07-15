@@ -12,7 +12,7 @@ class group_configuration_class extends singleton_util {
 	* @param object $element L'élement du groupement
 	*/
   public function display( $element ) {
-    $address = address_class::get()->show( max( $element->option['contact']['address'] ) );
+    $address = address_class::get()->show( !empty( $element->option['contact']['address'] ) ? max( $element->option['contact']['address'] ) : 0 );
 
     // Récupère le dernier numéro de téléphone
     $phone = max( $element->option['contact']['phone'] );

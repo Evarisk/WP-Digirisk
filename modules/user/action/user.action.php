@@ -16,6 +16,11 @@ class user_action extends \singleton_util {
 	protected function construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ) );
 
+		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
+		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
+		add_action( 'wp_ajax_delete_user', array( $this, 'ajax_delete_user' ) );
+		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
+
 		// Quand on affecte un utilisateur
 		add_action( 'wp_ajax_edit_user_assign', array( $this, 'callback_edit_user_assign' ) );
 
@@ -35,8 +40,72 @@ class user_action extends \singleton_util {
 		add_users_page( __( 'Create or import user easyly with a form ', 'digirisk'), __( 'Digirisk : import', 'digirisk'), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
 	}
 
+	public function ajax_save_user() {
+		check_ajax_referer( 'ajax_save_user' );
+
+		$user = array(
+			'email' => sanitize_email( $_POST['user']['email'] ),
+			'option' => array(
+				'user_info' => array(
+					'lastname' => sanitize_text_field( $_POST['user']['option']['user_info']['lastname'] ),
+					'firstname' => sanitize_text_field( $_POST['user']['option']['user_info']['firstname'] ),
+				)
+			),
+		);
+
+		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
+
+		if ( $user_id !== 0 ) {
+			$user['id'] = $user_id;
+		}
+
+		$user['login'] = trim( strtolower( remove_accents( sanitize_user( $user['option']['user_info']['firstname'] . '.' . $user['option']['user_info']['lastname'] ) ) ) );
+		$user = \digi\user_class::get()->update( $user );
+
+		ob_start();
+		require( INSTALLER_VIEW . '/list-item.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function ajax_load_user() {
+		if ( 0 === (int)$_POST['user_id'] )
+			wp_send_json_error( );
+		else
+			$user_id = (int)$_POST['user_id'];
+
+		check_ajax_referer( 'ajax_load_user_' . $user_id );
+
+		$user = user_class::get()->show( $user_id );
+
+		ob_start();
+		require( INSTALLER_VIEW . '/list-item-edit.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function ajax_delete_user() {
+		if ( 0 === (int)$_POST['user_id'] )
+			wp_send_json_error();
+		else
+			$user_id = (int)$_POST['user_id'];
+
+		check_ajax_referer( 'ajax_delete_user_' . $user_id );
+
+		user_class::get()->delete( $user_id );
+		wp_send_json_success();
+	}
+
+	public function ajax_save_domain_mail() {
+		check_ajax_referer( 'save_domain_mail' );
+		$domain_mail = !empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		if ( $domain_mail === '' ) {
+			wp_send_json_error();
+		}
+		update_option( 'digirisk_domain_mail', $domain_mail );
+		wp_send_json_success();
+	}
+
 	/**
-	* Affiche la page staff ??
+	* Affiche la page staff ?? Pourquoi ici ?
 	*/
 	public function display_page_staff( $hidden ) {
 		// todo Pourquo ici ?

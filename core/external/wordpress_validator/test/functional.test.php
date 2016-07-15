@@ -33,17 +33,8 @@ class functional_test {
 			$this->total = count( $this->list_method_queue );
 			$this->execute_queue();
 		}
-	}
 
-	public function resume() {
-		if ( count( $this->list_method_queue ) == 0 ) {
-			echo "[+] End functional tests" . PHP_EOL . PHP_EOL;
-		}
-		else {
-			echo '[+] Resume' . PHP_EOL;
-
-			$this->execute_queue();
-		}
+		echo "[+] End functional tests" . PHP_EOL . PHP_EOL;
 	}
 
 	public function get_methods( $file_path, $format ) {
@@ -143,6 +134,7 @@ class functional_test {
 		$_POST = $method['args'];
 
 		$this->display_args( $method['reflection_class'], $method['method_name'], $method['args'] );
+
 		if ( !empty( $method['parent_class_name'] ) && ( $method['parent_class_name'] == 'comment_class' || $method['parent_class_name'] == 'post_class' || $method['parent_class_name'] == 'term_class' ||
 			$method['parent_class_name'] == 'user_class' || $method['parent_class_name'] == 'singleton_util\\' ) ) {
 				$className = $method['class_name'];

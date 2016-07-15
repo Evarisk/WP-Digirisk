@@ -38,8 +38,8 @@
 		<form method="POST" id="wp-digi-form-add-staff" class="wp-digi-form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 			<ul class="wp-digi-table">
 				<li>
-					<input type="hidden" name="action" value="wpdigi-installer-add-user" />
-					<?php wp_nonce_field( 'ajax_installer_add_user' ); ?>
+					<input type="hidden" name="action" value="save_user" />
+					<?php wp_nonce_field( 'ajax_save_user' ); ?>
 					<span class="wp-avatar" style="background: #FFF;" ></span>
 					<span></span>
 					<span class="padded"><input type="text" placeholder="Name" name="user[option][user_info][lastname]" /></span>

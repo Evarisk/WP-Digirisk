@@ -83,7 +83,7 @@ var digi_installer = {
 		jQuery( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
 
 		var data = {
-			action: 'wpdigi-installer-load-user',
+			action: 'load_user',
 			_wpnonce: jQuery( element ).data( 'nonce' ),
 			user_id: user_id,
 		};
@@ -122,7 +122,7 @@ var digi_installer = {
   		jQuery( '.wp-digi-list-staff .wp-digi-list-item[data-id="'+ user_id +'"]' ).fadeOut();
 
   		var data = {
-  			action: 'wpdigi-installer-delete-user',
+  			action: 'delete_user',
   			_wpnonce: jQuery( element ).data( 'nonce' ),
   			user_id: user_id,
   		};

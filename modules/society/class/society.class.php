@@ -90,8 +90,12 @@ class society_class extends singleton_util {
 		}
 
 		$type = ( is_object( $establishment ) && isset( $establishment->type ) ) ? $establishment->type : '';
-		$type = ( is_array( $establishment ) && !empty( $establishment['type'] ) ) ? $establishment['type'] : '';
-		if ( $type ) {
+
+		if ( empty( $type ) ) {
+			$type = ( is_array( $establishment ) && !empty( $establishment['type'] ) ) ? $establishment['type'] : '';
+		}
+		
+		if ( empty( $type ) ) {
 			return false;
 		}
 
@@ -100,7 +104,7 @@ class society_class extends singleton_util {
 		if ( $model_name === '_class' ) {
 			return false;
 		}
-		
+
 		$establishment = $model_name::get()->update( $establishment );
 		return $establishment;
 	}
