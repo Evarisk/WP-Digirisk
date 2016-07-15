@@ -219,9 +219,9 @@ class post_class extends singleton_util {
 	 * @return array Le tableau des terms id
 	 */
 	public static function eo_get_object_terms( $object ) {
-		if ( !is_array( $object ) || !is_object( $object ) ) {
-			return false;
-		}
+		// if ( !is_array( $object ) || !is_object( $object ) ) {
+		// 	return false;
+		// }
 
 		$list_term 		= array();
 		$array_model 	= $object->get_model();

@@ -39,10 +39,10 @@ class risk_action {
 	* @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_display_risk() {
-		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		if ( $element_id === 0 ) {
-			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
-		}
+		// $element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		// if ( $element_id === 0 ) {
+		// 	wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+		// }
 
 		ob_start();
 		// risk_class::get()->display_risk_list( $element_id );

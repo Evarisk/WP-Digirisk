@@ -127,10 +127,6 @@ class risk_class extends post_class {
 	 * @return object Le risque complet / The complete risk
 	 */
 	public function get_risk( $id ) {
-		if ( !is_int( $id ) ) {
-			return false;
-		}
-
 		/**	Récupération du risque / Get the risk définition	*/
 		if ( $id != 0 ) {
 			$risk = $this->show( $id );

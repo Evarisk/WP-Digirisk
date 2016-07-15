@@ -49,9 +49,9 @@ class risk_save_action {
 		$danger_id = !empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
 		$danger = danger_class::get()->show( $danger_id );
 
-		if ( $danger->id === 0 ) {
-			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
-		}
+		// if ( $danger->id === 0 ) {
+		// 	wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+		// }
 
     $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', risk_class::get()->get_post_type() );
     $unique_key = $last_unique_key + 1;
