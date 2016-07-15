@@ -83,7 +83,7 @@
 				}
 			}
 			&:not(.header) li:first-child {
-				background: @c1 !important;
+				background: #3e4851 !important;
 				color: #fff;
 			}
 			li {
@@ -91,6 +91,11 @@
 				border: 1px solid rgba(0,0,0,0.05);
 				display: table-cell;
 				vertical-align: middle;
+				.transition;
+				&:hover {
+					cursor: pointer;
+					background: fade(@c1, 40%) !important;
+				}
 				&:nth-of-type(odd) {
 					background: #fff;
 				}
