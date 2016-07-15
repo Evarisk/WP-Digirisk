@@ -90,6 +90,7 @@
   height: 50px;
   margin: 0;
   padding: 0;
+  color: #fff;
   -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
@@ -98,9 +99,6 @@
 .wp-digi-societytree-main-container .wp-digi-societytree-left-container .wp-digi-list > li:hover,
 .wp-digi-societytree-main-container .wp-digi-societytree-left-container .wp-digi-list > li.active {
   cursor: pointer;
-}
-.wp-digi-societytree-main-container .wp-digi-societytree-left-container .wp-digi-list > li:hover .wp-digi-workunit-name,
-.wp-digi-societytree-main-container .wp-digi-societytree-left-container .wp-digi-list > li.active .wp-digi-workunit-name {
   background: #3495f0;
 }
 .wp-digi-societytree-main-container .wp-digi-societytree-left-container .wp-digi-list > li:hover .wp-digi-workunit-action,
