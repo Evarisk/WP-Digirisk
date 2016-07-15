@@ -91,7 +91,7 @@ class risk_save_action {
 		$risk = risk_class::get()->update( $risk );
 
 		if ( $file_id != 0 ) {
-			file_management_class::get()->associate_file( $file_id, $risk->id, 'wpdigi_risk_ctr' );
+			file_management_class::get()->associate_file( $file_id, $risk->id, 'risk_class' );
 		}
 
 		do_action( 'save_risk_evaluation_comment' );
