@@ -81,7 +81,7 @@ class society_action {
 		$society->status = 'trash';
 		society_class::get()->update_by_type( $society );
 
-		wp_send_json_error();
+		wp_send_json_success();
 	}
 }
 

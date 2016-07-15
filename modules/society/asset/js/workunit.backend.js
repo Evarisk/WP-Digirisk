@@ -72,24 +72,17 @@ var digi_workunit = {
 	delete_workunit: function( event, element ) {
 		event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+		if( confirm( digi_confirm_delete ) ) {
+			var data = {
+				action: 'delete_society',
+				element_id: jQuery( element ).data( 'id' ),
+			};
 
-  		var workunit_id = jQuery( element ).data( 'id' );
-
-  		var data = {
-  			'action': 'wpdigi_ajax_workunit_delete',
-  			'_wpnonce': jQuery( element ).data( 'nonce' ),
-  			'workunit_id': workunit_id,
-  		};
-
-  		jQuery.post( ajaxurl, data, function( response ) {
-  			jQuery( '.wp-digi-workunit-' + workunit_id ).fadeOut();
-
-  			jQuery( '.wp-digi-group-header' ).replaceWith( response.data.template );
-  		} );
-    }
+			jQuery( element ).closest( 'li' ).fadeOut();
+			jQuery.post( ajaxurl, data, function( response ) {} );
+		}
 	},
-	
+
 	/**
 	 * Affichage des onglets dans les unités de travail
 	 *
