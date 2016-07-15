@@ -154,11 +154,9 @@ class group_class extends post_class {
 	* @param int $group_id L'ID du groupement
 	*/
 	public function display( $group_id ) {
-		$group = $this->show( $group_id );
+		$element = $this->show( $group_id );
 
-		$group_default_tab = apply_filters( 'wpdigi_group_default_tab', '' );
-
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'sheet', 'simple' ) );
+		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
 	}
 
 	/**

@@ -63,7 +63,7 @@ class group_action {
 
 		$_POST['subaction'] = 'generate-sheet';
 		ob_start();
-		group_class::get()->display( $group->id );
+		echo do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
 		$template_right = ob_get_clean();
 
 		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
