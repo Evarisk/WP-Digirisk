@@ -2,7 +2,6 @@
 
 var digi_risk = {
 
-	old_danger: undefined,
 	old_date: undefined,
   button: undefined,
   old_cotation: undefined,
@@ -29,7 +28,6 @@ var digi_risk = {
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-delete', function( event ) { digi_risk.delete_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-load', function( event ) { digi_risk.load_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-edit', function( event ) { digi_risk.edit_risk( event, digi_risk.$( this ) ); } );
-		digi_risk.$( document ).on( 'click', '.wp-digi-risk-item-new .wp-digi-select-list li', function( event ) { digi_risk.select_danger( event, digi_risk.$( this ) ); } );
     digi_risk.$( document ).on( 'click', '.wp-digi-action-comment-delete', function( event ) { digi_risk.delete_comment( event, digi_risk.$( this ) ); } );
 	},
 
@@ -141,11 +139,6 @@ var digi_risk = {
 		digi_risk.$( '.wp-digi-table-item-edit' ).each( function() {
 			digi_risk.$( this ).find( '.dashicons-edit' ).click();
 		} );
-	},
-
-	select_danger: function( event, element ) {
-		digi_risk.$( '.wp-digi-risk-item-new input[name="danger_id"]' ).val( digi_risk.$( element ).data( 'id' ) );
-		digi_risk.$( '.wp-digi-risk-item-new toggle span' ).html( digi_risk.$( element ).find( 'img' ).attr( 'title' ) );
 	},
 
   delete_comment: function( event, element ) {
