@@ -1,6 +1,6 @@
 "use strict";
 
-jQuery(document).ready(function( $ ) {
+jQuery( document ).ready(function( $ ) {
 	digi_global.init( $ );
 	legal_display.init( $ );
 	digi_recommendation.init( true, $ );

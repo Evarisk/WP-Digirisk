@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_installer = {
-	$,
+	$: undefined,
 	event: function($) {
 		digi_installer.$ = $;
 
@@ -54,7 +54,7 @@ var digi_installer = {
 
 	add_staff: function( event, element ) {
 		event.preventDefault();
-		if( digi_installer.$( '.wpdigi-staff input[name="option[user_info][lastname]"]' ).val() != '') {
+		if( digi_installer.$( '.wpdigi-staff input[name="option[user_info][lastname]"]' ).val() !== '') {
 			digi_installer.$( '.wp-digi-list-staff' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( '#wp-digi-form-add-staff' ).ajaxSubmit( {
 				beforeSubmit: function() {
