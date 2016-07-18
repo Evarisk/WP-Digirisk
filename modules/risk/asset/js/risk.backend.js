@@ -138,19 +138,6 @@ var digi_risk = {
 		} );
 	},
 
-  delete_comment: function( event, element ) {
-    if( window.confirm( window.digi_confirm_delete ) ) {
-      var data = {
-        action: 'delete_comment',
-        _wpnonce: digi_risk.$( element ).data( 'nonce' ),
-        risk_id: digi_risk.$( element ).data( 'risk-id' ),
-        id: digi_risk.$( element ).data( 'id' ),
-      };
-      digi_risk.$( element ).closest( 'li' ).remove();
-      digi_risk.$.post( window.ajaxurl, data, function() {} );
-    }
-  },
-
 	reset_create_form: function() {
 		digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html( digi_risk.old_cotation );
 		var element_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' )[0];
