@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_tab = {
-	$,
+	$: undefined,
   event: function( $ ) {
 		digi_tab.$ = $;
 
@@ -24,10 +24,10 @@ var digi_tab = {
         "tab_to_display": action,
 				"element_id" : digi_tab.$( element ).closest( '.wp-digi-sheet' ).data( 'id' ),
 			};
-			digi_tab.$.post( ajaxurl, data, function( response ){
+			digi_tab.$.post( window.ajaxurl, data, function( response ){
         digi_tab.$( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
 				digi_tab.$( ".wp-digi-content" ).html( response.data.template );
-				digi_global.init();
+				window.digi_global.init();
 
 				var object_name = action.replace( '-', '_' );
 				if ( window[object_name] && window[object_name].init ) {
