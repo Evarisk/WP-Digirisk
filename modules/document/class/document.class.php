@@ -13,29 +13,20 @@
  * @version 6.0
  */
 class document_class extends post_class {
+	protected $model_name   				= 'document_model';
+	protected $post_type    				= 'attachment';
+	public $attached_taxonomy_type  = 'attachment_category';
+	protected $meta_key    					= '_wpdigi_document';
+	protected $base 								= 'digirisk/printed-document';
+	protected $version 							= '0.1';
+	public $element_prefix 					= 'DOC';
 
-	/**	Définition des différents type pour le module des documents / Define type for document module	*/
-	protected $model_name   = 'wpdigi_document_mdl_01';
-	protected $post_type    = 'attachment';
-	public $attached_taxonomy_type    = 'attachment_category';
-	protected $meta_key    	= '_wpdigi_document';
-
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
-	protected $base = 'digirisk/printed-document';
-	protected $version = '0.1';
-
-	public $element_prefix = 'DOC';
-
-	/**	Définition du nombre de document a afficher par page / Define number of document to display per page	*/
 	protected $limit_document_per_page = -1;
 
 	/**
 	 * Instanciation de la gestion des document imprimés / Instanciate printes document
 	 */
-	protected function construct() {
-		/**	Define taxonomy for attachment categories	*/
-		add_action( 'init', array( $this, 'custom_type_creation' ), 5  );
-	}
+	protected function construct() {}
 
 	/**
 	* Indexe tous les documents dans la base de donnée
@@ -74,7 +65,7 @@ class document_class extends post_class {
 	}
 
 	/**
-	* Récupère le chemin vers le document
+	* Récupères le chemin vers le document
 	*
 	* @param string $path_type (Optional) Le type de path
 	*
@@ -87,35 +78,6 @@ class document_class extends post_class {
 
 		$upload_dir = wp_upload_dir();
 		return $upload_dir[ $path_type ] . '/digirisk';
-	}
-
-	/**
-	 * Création du type d'élément interne a wordpress pour gérer les catégories de documents / Create wordpress element type for managing attachment categories
-	 */
-	public function custom_type_creation() {
-		$labels = array(
-			'name'              => 'Categories',
-			'singular_name'     => 'Category',
-			'search_items'      => 'Search Categories',
-			'all_items'         => 'All Categories',
-			'parent_item'       => 'Parent Category',
-			'parent_item_colon' => 'Parent Category:',
-			'edit_item'         => 'Edit Category',
-			'update_item'       => 'Update Category',
-			'add_new_item'      => 'Add New Category',
-			'new_item_name'     => 'New Category Name',
-			'menu_name'         => 'Category',
-		);
-
-		$args = array(
-			'labels' => $labels,
-			'hierarchical' => true,
-			'query_var' => 'true',
-			'rewrite' => 'true',
-			'show_admin_column' => 'true',
-		);
-
-		register_taxonomy( $this->attached_taxonomy_type, $this->post_type, $args );
 	}
 
 	/**
