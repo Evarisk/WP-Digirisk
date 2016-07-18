@@ -12,23 +12,9 @@ jQuery( document ).ready( function(){
 
 var digi_global = {
 	init: function() {
-		// jQuery( '.wpdigi_date' ).datepicker( {
-		// 	'dateFormat': 'dd/mm/yy',
-		// } );
-
-		/**	Trigger event on use current date button	*/
-		jQuery( document ).on( "click", ".digi_use_current_date", function( event ){
-			event.preventDefault();
-
-			jQuery( this ).prev( "input" ).val( digi_current_date );
+		jQuery( '.wpdigi_date' ).datepicker( {
+			'dateFormat': 'dd/mm/yy',
 		} );
-		/**	Trigger event on use current datetime button	*/
-		jQuery( document ).on( "click", ".digi_use_current_datetime", function( event ){
-			event.preventDefault();
-
-			jQuery( this ).prev( "input" ).val( digi_current_datetime );
-		} );
-
 
 		/** Auto complete */
 		/**
