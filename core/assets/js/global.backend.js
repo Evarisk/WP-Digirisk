@@ -6,8 +6,12 @@ function validateEmail(email) {
 }
 
 var digi_global = {
-	init: function() {
-		jQuery( '.wpdigi_date' ).datepicker( {
+	$,
+
+	init: function( $ ) {
+		digi_global.$ = $;
+
+		digi_global.$( '.wpdigi_date' ).datepicker( {
 			'dateFormat': 'dd/mm/yy',
 		} );
 
@@ -19,69 +23,69 @@ var digi_global = {
 		* string data-callback : Pour appeler une fonction après avoir récupére la liste des ID des utilisateurs.
 		* string append-to : Le bloc ou sera affiche le rendu
 		*/
-		jQuery.each( jQuery( '.wpdigi-auto-complete-user' ), function( key, element ) {
+		digi_global.$.each( digi_global.$( '.wpdigi-auto-complete-user' ), function( key, element ) {
 			var list_option = {
-				'source': 'admin-ajax.php?action=search_user&element_id=' + jQuery( element ).data( "element-id" ) + '&filter=' + jQuery( element ).data( "filter" ),
+				'source': 'admin-ajax.php?action=search_user&element_id=' + digi_global.$( element ).data( "element-id" ) + '&filter=' + digi_global.$( element ).data( "filter" ),
 				'minLength': 0,
 			}
-			if ( jQuery ( element ).data( 'append-to' ) != undefined ) {
+			if ( digi_global.$ ( element ).data( 'append-to' ) != undefined ) {
 				list_option.search = function( event, ui ) {
-					jQuery( jQuery ( element ).data( 'append-to' ) ).addClass( 'wp-digi-bloc-loading' );
+					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).addClass( 'wp-digi-bloc-loading' );
 				}
 				list_option.response = function( event, ui ) {
-					jQuery( jQuery ( element ).data( 'append-to' ) ).replaceWith( ui.content[0].value );
+					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).replaceWith( ui.content[0].value );
 				}
 				list_option.open = function( event, ui ) {
-					jQuery ( element ).autocomplete( 'close' );
+					digi_global.$ ( element ).autocomplete( 'close' );
 				}
 			}
 
-      if( jQuery( element ).data( 'target' ) != undefined ) {
+      if( digi_global.$( element ).data( 'target' ) != undefined ) {
         list_option.select = function( event, ui ) {
-          jQuery( 'input[name="' + jQuery( element ).data('target') + '"]' ).val( ui.item.id );
+          digi_global.$( 'input[name="' + digi_global.$( element ).data('target') + '"]' ).val( ui.item.id );
         }
       }
 
-			jQuery( element ).autocomplete( list_option );
+			digi_global.$( element ).autocomplete( list_option );
 		} );
 
-		jQuery.each( jQuery( '.wpdigi-auto-complete' ), function( key, element ) {
-		jQuery( element ).autocomplete( {
-			'source': 'admin-ajax.php?action=search&post_type=digi-group&element_id=' + jQuery( element ).data( 'id' ),
+		digi_global.$.each( digi_global.$( '.wpdigi-auto-complete' ), function( key, element ) {
+		digi_global.$( element ).autocomplete( {
+			'source': 'admin-ajax.php?action=search&post_type=digi-group&element_id=' + digi_global.$( element ).data( 'id' ),
 			'select': function( event, ui ) {
-				jQuery( 'input[name="' + jQuery( element ).data('target') + '"]' ).val( ui.item.id );
-				jQuery( '.wp-digi-group-action-container' ).removeClass( "hidden" );
-        jQuery( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
+				digi_global.$( 'input[name="' + digi_global.$( element ).data('target') + '"]' ).val( ui.item.id );
+				digi_global.$( '.wp-digi-group-action-container' ).removeClass( "hidden" );
+        digi_global.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
 			}
 		} );
 	} );
 	},
 
 	event: function() {
-		jQuery( document ).on( 'click', 'toggle, .digi-toggle', function( event ) {
+		digi_global.$( document ).on( 'click', 'toggle, .digi-toggle', function( event ) {
 			event.stopPropagation();
-			var element = jQuery( this );
-      var parent = jQuery( this ).data( 'parent' );
+			var element = digi_global.$( this );
+      var parent = digi_global.$( this ).data( 'parent' );
       if( parent != undefined ) {
-  			var div = jQuery( this ).closest( '.' + parent ).find( '.' + jQuery( this ).data( 'target' ) );
+  			var div = digi_global.$( this ).closest( '.' + parent ).find( '.' + digi_global.$( this ).data( 'target' ) );
       }
       else {
-        var div = jQuery( this ).parent().find( '.' + jQuery( this ).data( 'target' ) );
+        var div = digi_global.$( this ).parent().find( '.' + digi_global.$( this ).data( 'target' ) );
       }
 
-			jQuery( '.digi-popup' ).each( function() {
-				if ( jQuery( this ).has( event.target ).length === 0 && jQuery( this ).is( ':visible' ) && !jQuery( this ).hasClass( element.data( 'target' ) ) ) {
-					jQuery( this ).hide();
+			digi_global.$( '.digi-popup' ).each( function() {
+				if ( digi_global.$( this ).has( event.target ).length === 0 && digi_global.$( this ).is( ':visible' ) && !digi_global.$( this ).hasClass( element.data( 'target' ) ) ) {
+					digi_global.$( this ).hide();
 				}
 			} );
 
 			div.toggle();
 		} );
 
-		jQuery( document ).on( 'click', function( event ) {
-			jQuery( '.digi-popup' ).each( function() {
-				if ( jQuery( this ).has( event.target ).length === 0 && jQuery( this ).is( ':visible' ) ) {
-					jQuery( this ).toggle();
+		digi_global.$( document ).on( 'click', function( event ) {
+			digi_global.$( '.digi-popup' ).each( function() {
+				if ( digi_global.$( this ).has( event.target ).length === 0 && digi_global.$( this ).is( ':visible' ) ) {
+					digi_global.$( this ).toggle();
 				}
 			} );
 		} );
@@ -89,7 +93,7 @@ var digi_global = {
 
 	/** Ouvre / ferme le menu responsive */
 	responsive_menu_toggle: function( element ) {
-		jQuery( '.wp-digi-sheet-tab-responsive-content' ).toggle( 'fast' );
-		jQuery( '.wp-digi-sheet-tab-title' ).toggleClass( 'active' );
+		digi_global.$( '.wp-digi-sheet-tab-responsive-content' ).toggle( 'fast' );
+		digi_global.$( '.wp-digi-sheet-tab-title' ).toggleClass( 'active' );
 	}
 };
