@@ -2,7 +2,7 @@
 
 var digi_user = {
 	old_affected_user: undefined,
-	$,
+	$: undefined,
 
 	event: function( $ ) {
 		digi_user.$ = $;
@@ -36,16 +36,13 @@ var digi_user = {
 
 		digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
-		digi_user.$( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-			digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-			digi_user.$( '.wp-digi-content' ).html( response.data.template );
-		} );
+		digi_user.submit_form();
 	},
 
 	delete_user: function( event, element ) {
     event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
       digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
       var data = {
@@ -55,12 +52,16 @@ var digi_user = {
         affectation_id: digi_user.$( element ).data( 'affectation-data-id' ),
       };
 
-      digi_user.$.post( ajaxurl, data, function( response ) {
-				digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-				digi_user.$( '.wp-digi-content' ).html( response.data.template );
-      } );
+			digi_user.submit_form();
     }
   },
+
+	submit_form: function() {
+		digi_user.$.post( ajaxurl, data, function( response ) {
+			digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+			digi_user.$( '.wp-digi-content' ).html( response.data.template );
+		} );
+	},
 
 	pagination: function( event, element ) {
 		event.preventDefault();
