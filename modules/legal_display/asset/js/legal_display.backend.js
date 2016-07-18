@@ -1,7 +1,7 @@
 "use strict";
 
 var legal_display = {
-	$,
+	$: undefined,
   init: function( $ ) {
 		legal_display.$ = $;
 

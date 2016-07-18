@@ -4,7 +4,7 @@ var digi_installer = {
 	$: undefined,
 	event: function($) {
 		digi_installer.$ = $;
-		digi_installer_user.event( $ );
+		window.digi_installer_user.event( $ );
 		digi_installer.$( document ).on( 'click', '.wpdigi-installer form input[type="button"]', function() { digi_installer.form_groupement( digi_installer.$( this ) ); } );
 		digi_installer.$( document ).on( 'click', '.wpdigi-staff .more-option', function( event ) { digi_installer.toggle_form( event, digi_installer.$( this ) ); } );
 
