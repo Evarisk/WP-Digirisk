@@ -1,22 +1,18 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_class extends post_class {
-  protected $model_name   = 'legal_display_mdl_01';
-	protected $post_type    = 'digi-legal-display';
-	protected $meta_key    	= '_wpdigi_legal_display';
-
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
-	protected $base = 'digirisk/legal_display';
-	protected $version = '0.1';
+  protected $model_name = 'legal_display_model';
+	protected $post_type  = 'digi-legal-display';
+	protected $meta_key   = '_wpdigi_legal_display';
+	protected $base 			= 'digirisk/legal_display';
+	protected $version 		= '0.1';
 
 	public $element_prefix = 'LD';
 
 	/**
 	* Le constructeur
 	*/
-  protected function construct() {
-    include_once( LEGAL_DISPLAY_PATH . '/model/legal_display.model.01.php' );
-  }
+  protected function construct() {}
 
 	/**
 	* Récupères les données de l'affichage légal en base de donnée et affiches le template du formulaire
