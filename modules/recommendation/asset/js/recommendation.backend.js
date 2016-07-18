@@ -3,7 +3,7 @@
 var digi_recommendation = {
 	old_recommendation_name: undefined,
 	old_thumbnail: undefined,
-	$,
+	$: undefined,
 
 	init: function( event, $ ) {
 		digi_recommendation.$ = $;
@@ -68,7 +68,7 @@ var digi_recommendation = {
 			index: digi_recommendation.$( element ).data( 'index' ),
 		};
 
-		digi_recommendation.$.post( ajaxurl, data, function( response ) {
+		digi_recommendation.$.post( window.ajaxurl, data, function( response ) {
 			digi_recommendation.$( element ).closest( '.wp-digi-recommendation-item' ).replaceWith( response.data.template );
 		} );
 	},
@@ -86,7 +86,7 @@ var digi_recommendation = {
 	delete_recommendation: function( event, element ) {
 		event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
   		var workunit_id	= digi_recommendation.$( element ).data( 'workunit-id' );
   		var term_id 	= digi_recommendation.$( element ).data( 'id' );
   		var index 		= digi_recommendation.$( element ).data( 'index' );
@@ -101,7 +101,7 @@ var digi_recommendation = {
 
   		digi_recommendation.$( element ).closest( '.wp-digi-recommendation-item' ).fadeOut();
 
-  		digi_recommendation.$.post( ajaxurl, data, function() {
+  		digi_recommendation.$.post( window.ajaxurl, data, function() {
 
   		} );
     }
