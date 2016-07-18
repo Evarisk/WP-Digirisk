@@ -30,7 +30,7 @@ class workunit_shortcode {
 		$output = '';
 
 		/**	Get existing groups for display	*/
-		$list = $this->index( array( 'posts_per_page' => -1, 'parent_id' => 0, 'post_status' => array( 'publish', ), 'post_parent' => $args[ 'group_id' ] ), false );
+		$list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'parent_id' => 0, 'post_status' => array( 'publish', ), 'post_parent' => $args[ 'group_id' ] ), false );
 
 		/**	Define a nonce for display sheet using ajax	*/
 		$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );
