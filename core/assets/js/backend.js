@@ -5,11 +5,6 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-jQuery( document ).ready( function(){
-	digi_global.init();
-	digi_global.event();
-});
-
 var digi_global = {
 	init: function() {
 		jQuery( '.wpdigi_date' ).datepicker( {

@@ -1,10 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-	digi_risk.init();
-});
-
-
 var digi_risk = {
 
 	old_danger: undefined,

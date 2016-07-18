@@ -1,10 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-	digi_evaluator.event();
-} );
-
-
 var digi_evaluator = {
 	event: function() {
 		jQuery( document ).on( 'click', '.wp-digi-evaluator-list input[type="checkbox"]', function() { digi_evaluator.add_time( jQuery( this ) ); } );

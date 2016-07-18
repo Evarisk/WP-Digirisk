@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-  wpeo_gallery.event();
-} );
-
 var wpeo_gallery = {
 	event: function() {
 		jQuery( document ).on( 'keyup', function( event ) { wpeo_gallery.keyup( event, jQuery( this ) ); } );

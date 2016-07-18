@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-	digi_workunit.event();
-} );
-
 var digi_workunit = {
 
 	/**

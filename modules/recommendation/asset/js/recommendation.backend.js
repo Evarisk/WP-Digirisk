@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function () {
-	digi_recommendation.init();
-});
-
 var digi_recommendation = {
 	old_recommendation_name: undefined,
 	old_thumbnail: undefined,
@@ -16,7 +12,7 @@ var digi_recommendation = {
 			digi_recommendation.event();
 		}
 	},
-	
+
 	event: function() {
 		jQuery( document ).on( 'click', '.wp-digi-recommendation-item-new .wp-digi-select-list li', function( event ) { digi_recommendation.select_recommendation( event, jQuery( this ) ); } );
 

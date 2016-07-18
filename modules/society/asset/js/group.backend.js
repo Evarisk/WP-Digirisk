@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-	digi_group.event();
-} );
-
 var digi_group = {
 	event: function() {
 		// Modifier un group

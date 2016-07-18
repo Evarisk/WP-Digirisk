@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-  file_management.event();
-} );
-
 var file_management = {
   file_frame: undefined,
   element_id: undefined,

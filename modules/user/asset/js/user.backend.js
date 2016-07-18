@@ -1,10 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function () {
-	digi_user.event();
-} );
-
-
 var digi_user = {
 	old_affected_user: undefined,
 

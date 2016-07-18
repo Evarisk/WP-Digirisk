@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-  digi_evaluation_method.event();
-} );
-
 var digi_evaluation_method = {
 	event: function() {
     jQuery( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li', function( event ) { digi_evaluation_method.select_cotation( event, jQuery( this ) ); } );

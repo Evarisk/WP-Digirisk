@@ -1,6 +1,4 @@
-jQuery( document ).ready( function() {
-  legal_display.init();
-} );
+"use strict";
 
 var legal_display = {
   init: function() {

@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-  digi_tab.event();
-} );
-
 var digi_tab = {
   event: function() {
     jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-global-sheet-tab li", function( event ) { digi_tab.click_tab( event, jQuery( this ) ); } );

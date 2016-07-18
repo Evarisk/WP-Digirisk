@@ -1,9 +1,5 @@
 "use strict"
 
-jQuery( document ).ready( function() {
-	digi_society.event();
-} );
-
 var digi_society = {
 	event: function() {
 		jQuery( document ).on( 'click', '.wp-digi-societytree-left-container .wp-digi-global-name', function( event ) { digi_society.load_society( event, jQuery( this ) ); } );
