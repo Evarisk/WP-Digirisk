@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_global = {
-	$,
+	$: undefined,
 
 	init: function( $ ) {
 		digi_global.$ = $;
@@ -22,23 +22,27 @@ var digi_global = {
 			var list_option = {
 				'source': 'admin-ajax.php?action=search_user&element_id=' + digi_global.$( element ).data( "element-id" ) + '&filter=' + digi_global.$( element ).data( "filter" ),
 				'minLength': 0,
-			}
-			if ( digi_global.$ ( element ).data( 'append-to' ) != undefined ) {
+			};
+
+			if ( digi_global.$ ( element ).data( 'append-to' ) !== undefined ) {
 				list_option.search = function( event, ui ) {
 					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).addClass( 'wp-digi-bloc-loading' );
-				}
+				};
+
 				list_option.response = function( event, ui ) {
 					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).replaceWith( ui.content[0].value );
-				}
+				};
+
 				list_option.open = function( event, ui ) {
 					digi_global.$ ( element ).autocomplete( 'close' );
-				}
+				};
+
 			}
 
-      if( digi_global.$( element ).data( 'target' ) != undefined ) {
+      if( digi_global.$( element ).data( 'target' ) !== undefined ) {
         list_option.select = function( event, ui ) {
           digi_global.$( 'input[name="' + digi_global.$( element ).data('target') + '"]' ).val( ui.item.id );
-        }
+        };
       }
 
 			digi_global.$( element ).autocomplete( list_option );
@@ -61,11 +65,13 @@ var digi_global = {
 			event.stopPropagation();
 			var element = digi_global.$( this );
       var parent = digi_global.$( this ).data( 'parent' );
-      if( parent != undefined ) {
-  			var div = digi_global.$( this ).closest( '.' + parent ).find( '.' + digi_global.$( this ).data( 'target' ) );
+			var div = undefined;
+			
+      if( parent !== undefined ) {
+  			div = digi_global.$( this ).closest( '.' + parent ).find( '.' + digi_global.$( this ).data( 'target' ) );
       }
       else {
-        var div = digi_global.$( this ).parent().find( '.' + digi_global.$( this ).data( 'target' ) );
+        div = digi_global.$( this ).parent().find( '.' + digi_global.$( this ).data( 'target' ) );
       }
 
 			digi_global.$( '.digi-popup' ).each( function() {
