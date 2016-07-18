@@ -50,7 +50,7 @@ class document_action {
 			'show_admin_column' => 'true',
 		);
 
-		register_taxonomy( $this->attached_taxonomy_type, $this->post_type, $args );
+		register_taxonomy( document_class::get()->attached_taxonomy_type, document_class::get()->post_type, $args );
 	}
 
 	/**
