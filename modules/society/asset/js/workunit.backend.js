@@ -2,9 +2,7 @@
 
 var digi_workunit = {
 
-	/**
-	 * Définition de la liste des actions possibles
-	 */
+	$: undefined,
 	event: function( $ ) {
 		digi_workunit.$ = $;
 		/**	Quand on demande l'ajout d'une unité de travail	*/
@@ -17,8 +15,8 @@ var digi_workunit = {
 		digi_workunit.$( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", function( event ) { digi_workunit.save_element_sheet( event, digi_workunit.$( this ) ); } );
 		digi_workunit.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-delete", function( event ) { digi_workunit.delete_element_sheet( event, digi_workunit.$( this ) ); } );
 
-		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-toggle', function() { digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
-		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-responsive-content > li', function() { digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
+		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-toggle', function() { window.digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
+		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-responsive-content > li', function() { window.digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
 	},
 
 	call_create_workunit: function( event ) {
@@ -59,14 +57,14 @@ var digi_workunit = {
 	delete_workunit: function( event, element ) {
 		event.preventDefault();
 
-		if( confirm( digi_confirm_delete ) ) {
+		if( window.confirm( window.digi_confirm_delete ) ) {
 			var data = {
 				action: 'delete_society',
 				element_id: digi_workunit.$( element ).data( 'id' ),
 			};
 
 			digi_workunit.$( element ).closest( 'li' ).fadeOut();
-			digi_workunit.$.post( ajaxurl, data, function( response ) {} );
+			digi_workunit.$.post( window.ajaxurl, data, function( response ) {} );
 		}
 	},
 
@@ -82,7 +80,7 @@ var digi_workunit = {
 
 		digi_workunit.$( element ).closest( 'li' ).fadeOut();
 
-		digi_workunit.$.post( ajaxurl, data, function() {
+		digi_workunit.$.post( window.ajaxurl, data, function() {
 
 		} );
  	},
@@ -102,8 +100,8 @@ var digi_workunit = {
 	        },
 	        success:       function( responseText, statusText, xhr, $form ) {
 	        	digi_workunit.$( element ).removeClass( "wp-digi-loading" );
-	        	if ( responseText.status && ( undefined != responseText.output ) ) {
-	        		if ( undefined != digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
+	        	if ( responseText.status && ( undefined !== responseText.output ) ) {
+	        		if ( undefined !== digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
 	        			digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
 	        		}
 	        		else {
