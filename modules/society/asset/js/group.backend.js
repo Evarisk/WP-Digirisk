@@ -97,7 +97,7 @@ var digi_group = {
 	 * Lancement de l'enregistrement de la fiche de l'unité de travail
 	 *
 	 * @param event Evenement appelé pour le lancement de l'action
-	 * @param element Element sur lequel on intervient
+	 * @param HTMLElement Element sur lequel on intervient
 	 */
 	save_element_sheet : function ( event, element ) {
 		event.preventDefault();
