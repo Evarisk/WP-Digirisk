@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_society = {
-	$,
+	$: undefined,
 	event: function( $ ) {
 		digi_society.$ = $,
 
@@ -31,7 +31,7 @@ var digi_society = {
 			digi_society.$( '.wp-digi-societytree-right-container' ).removeClass( "wp-digi-bloc-loading" );
 			digi_society.$( '.wp-digi-societytree-right-container' ).html( response.data.template );
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
-			digi_global.init();
+			window.digi_global.init();
 		} );
 	},
 
@@ -64,7 +64,7 @@ var digi_society = {
 			'title': digi_society.$( 'input[name="establishment_name"]' ).val(),
 		};
 
-		digi_society.$.post( ajaxurl, data, function( response ) {
+		digi_society.$.post( window.ajaxurl, data, function( response ) {
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 			digi_society.$( element ).removeClass( "wp-digi-loading" );
 			digi_society.$( ".wp-digi-global-sheet-header .wp-digi-global-action-container" ).addClass( "hidden" );
@@ -74,7 +74,7 @@ var digi_society = {
 	delete_society: function( event, element ) {
 		event.preventDefault();
 
-		if( confirm( digi_confirm_delete ) ) {
+		if( window.confirm( window.digi_confirm_delete ) ) {
 			var data = {
 				action: 'delete_society',
 				element_id: digi_society.$( element ).data( 'id' ),
@@ -82,7 +82,7 @@ var digi_society = {
 
 			digi_society.$( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
 
-			digi_society.$.post( ajaxurl, data, function( response ) {
+			digi_society.$.post( window.ajaxurl, data, function( response ) {
 				digi_society.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
 			} );
 		}
