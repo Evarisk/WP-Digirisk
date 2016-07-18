@@ -86,11 +86,15 @@ class risk_save_action {
 		}
 
 		$risk->option['current_evaluation_id'] = $evaluation_id;
-		$risk->option['associated_evaluation'][] =  $evaluation_id;
 
 		$risk = risk_class::get()->update( $risk );
 
-		if ( $file_id != 0 ) {
+		if ( $risk->id !== 0 ) {
+			$evaluation->post_id = $risk->id;
+			evaluation_class::get()->update( $evaluation );
+		}
+
+		if ( $file_id !== 0 ) {
 			file_management_class::get()->associate_file( $file_id, $risk->id, 'risk_class' );
 		}
 

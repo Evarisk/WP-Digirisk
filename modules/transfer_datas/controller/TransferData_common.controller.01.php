@@ -443,7 +443,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 					$document_controller = new document_controller_01();
 					$default_upload_directory = get_option( 'upload_path', '' );
 					$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_document_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
+					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
 					update_option( 'uploads_use_yearmonth_folders', false );
 					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 					update_option( 'upload_path' , $default_upload_directory );

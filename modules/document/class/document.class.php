@@ -23,6 +23,10 @@ class document_class extends post_class {
 
 	protected $limit_document_per_page = -1;
 
+	public $mime_type_link = array(
+		'application/vnd.oasis.opendocument.text' => '.odt',
+		'application/zip' => '.zip',
+	);
 	/**
 	 * Instanciation de la gestion des document imprimés / Instanciate printes document
 	 */
@@ -49,7 +53,7 @@ class document_class extends post_class {
 			'post_status' 		=> 'inherit',
 			'post_type' 		=> $this->post_type,
 			'posts_per_page' 	=> -1,
-			'post_mime_type' 	=> 'application/vnd.oasis.opendocument.text',
+			'post_mime_type' 	=> array( 'application/vnd.oasis.opendocument.text', 'application/zip' ),
 		);
 
 		$args = array_merge( $args, $args_where );
@@ -65,13 +69,14 @@ class document_class extends post_class {
 	}
 
 	/**
-	* Récupères le chemin vers le document
+	* Récupères le chemin vers le dossier digirisk dans wp-content/uploads
 	*
 	* @param string $path_type (Optional) Le type de path
 	*
 	* @return string Le chemin vers le document
 	*/
-	public function get_document_path( $path_type = 'basedir' ) {
+	public function get_digirisk_dir_path( $path_type = 'basedir' ) {
+		// @todo : Methode mal nommé
 		// if ( !is_string( $path_type ) ) {
 		// 	return false;
 		// }
@@ -93,6 +98,12 @@ class document_class extends post_class {
 			$number_page = ceil( count ( $list_document_id ) ) / $this->limit_document_per_page;
 
 			$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
+		}
+
+		$list_document = array();
+
+		if ( !empty( $list_document_id ) ) {
+			$list_document = document_class::get()->index( array( 'post__in' => $list_document_id ) );
 		}
 
 		require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', "printed", "list" ) );
@@ -187,7 +198,7 @@ class document_class extends post_class {
 
 		require_once( WPDIGI_PATH . '/core/odtPhpLibrary/odf.php');
 
-		$digirisk_directory = $this->get_document_path();
+		$digirisk_directory = $this->get_digirisk_dir_path();
 		$document_path = $digirisk_directory . '/' . $document_name;
 
 		$config = array(
@@ -281,6 +292,16 @@ class document_class extends post_class {
 		return $current_odf;
 	}
 
+	public function get_document_path( $element ) {
+		$society = society_class::get()->show_by_type( $element->parent_id );
+
+		$path = $this->get_digirisk_dir_path( 'baseurl' );
+		$path .= "/" . $society->type . "/" . $society->id . "/";
+		$path .= $element->title;
+		$path .= $this->mime_type_link[$element->mime_type];
+		return $path;
+	}
+
 	/**
 	 * Récupération de la prochaine version pour un type de document / Get next version number for a document type
 	 *
@@ -338,7 +359,7 @@ class document_class extends post_class {
 			/**	Start by coping document into wordpress uploads directory	*/
 			$default_upload_directory = get_option( 'upload_path', '' );
 			$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-			update_option( 'upload_path', str_replace( ABSPATH, '', $this->get_document_path() . '/document_models' ) );
+			update_option( 'upload_path', str_replace( ABSPATH, '', $this->get_digirisk_dir_path() . '/document_models' ) );
 			update_option( 'uploads_use_yearmonth_folders', false );
 			$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 			update_option( 'upload_path' , $default_upload_directory );
@@ -453,6 +474,12 @@ class document_class extends post_class {
 
   	/**	On créé le document / Create the document	*/
   	$filetype = 'unknown';
+
+		// @todo: A faire
+		if ( in_array( 'zip', $document_type ) ) {
+				$filetype = "application/zip";
+		}
+
 		$path = '';
 
   	if ( null !== $model_to_use ) {
@@ -473,9 +500,9 @@ class document_class extends post_class {
   		$response[ 'message' ] = $model_response[ 'message' ];
   	}
 
-		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_document_path() . '/' . $path, $element->id );
+		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $path, $element->id );
 
-		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_document_path() . '/' . $path );
+		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 
 		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $document_type, array( 'printed', ) ), $this->attached_taxonomy_type );
@@ -500,8 +527,8 @@ class document_class extends post_class {
   	$document = $this->show( $response[ 'id' ] );
 
   	$document_full_path = null;
-  	if ( is_file( $this->get_document_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
-  		$document_full_path = $this->get_document_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
+  	if ( is_file( $this->get_digirisk_dir_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
+  		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
   	}
 
   	ob_start();
