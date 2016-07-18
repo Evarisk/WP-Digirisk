@@ -125,6 +125,16 @@ class risk_class extends post_class {
 		  }
 		}
 
+		// Tries les risques par ordre de cotation
+		if ( count( $risk_list ) > 1 ) {
+			usort( $risk_list, function( $a, $b ) {
+				if( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] == $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) {
+					return 0;
+				}
+				return ( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] > $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) ? -1 : 1;
+			} );
+		}
+
 		require( RISK_VIEW_DIR . 'list.view.php' );
 	}
 
