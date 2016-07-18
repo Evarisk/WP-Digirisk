@@ -1,41 +1,19 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 
-/**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 class workunit_class extends post_class {
-
 	public $element_prefix = 'UT';
-
 	protected $model_name   = 'workunit_model';
 	protected $post_type    = WPDIGI_STES_POSTTYPE_SUB;
 	protected $meta_key    	= '_wp_workunit';
-
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to society from WP Rest API	*/
 	protected $base = 'digirisk/workunit';
 	protected $version = '0.1';
 
-	private $current_workunit;
-
-	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
-	 */
 	protected function construct() {
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for societies management	*/
 		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
 
 		/**	Create shortcodes for elements displaying	*/
 		/**	Shortcode for displaying a dropdown with all groups	*/
-		add_shortcode( 'wpdigi-workunit-list', array( &$this, 'shortcode_workunit_list' ) );
 	}
 
 	/**
@@ -107,34 +85,7 @@ class workunit_class extends post_class {
 		return $work_unit;
 	}
 
-	/**
-	 * Affiche la liste des groupements existant sous forme de liste déroulante si il en existe plusieurs / Display a dropdown with all groups if there are several existing
-	 *
-	 * @param array $args Les paramètres passés au travers du shortcode / Parameters list passed thrgough shortcode
-	 *
-	 * @return string Le code html permettant d'afficher la liste déroulante contenant les groupements existant / The HTML code allowing to display existing groups
-	 */
-	public function shortcode_workunit_list( $args ) {
-		$output = '';
-
-		/**	Get existing groups for display	*/
-		$list = $this->index( array( 'posts_per_page' => -1, 'parent_id' => 0, 'post_status' => array( 'publish', ), 'post_parent' => $args[ 'group_id' ] ), false );
-
-		/**	Define a nonce for display sheet using ajax	*/
-		$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );
-
-		/**	Affichage de la liste des unités de travail pour le groupement actuellement sélectionné / Display the work unit list for current selected group	*/
-		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list' );
-
-		if ( $path ) {
-			ob_start();
-			require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list' ) );
-			$output = ob_get_contents();
-			ob_end_clean();
-		}
-
-		return  $output;
-	}
+	
 
 	/**
 	 * Affiche une fiche d'unité de travail à partir d'un identifiant donné / Display a work unit from given identifier
