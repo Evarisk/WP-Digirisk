@@ -1,12 +1,12 @@
 "use strict";
 
 var wpeo_gallery = {
-	$,
+	$: undefined,
 	event: function( $ ) {
 		wpeo_gallery.$ = $;
 
 		wpeo_gallery.$( document ).on( 'keyup', function( event ) { wpeo_gallery.keyup( event, wpeo_gallery.$( this ) ); } );
-		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery', function( event ) { event.preventDefault; return false; } );
+		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery', function( event ) { event.preventDefault(); return false; } );
 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .prev', function( event ) { wpeo_gallery.prev( event, wpeo_gallery.$( this ) ); } );
 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .next', function( event ) { wpeo_gallery.next( event, wpeo_gallery.$( this ) ); } );
 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .set-as-thumbnail', function( event ) { wpeo_gallery.set_thumbnail( event, wpeo_gallery.$( this ) ); } );
@@ -60,12 +60,12 @@ var wpeo_gallery = {
 			thumbnail_id: wpeo_gallery.$( element ).closest( 'div' ).find( 'li.current' ).data( 'id' ),
 		};
 
-		wpeo_gallery.$.post( ajaxurl, data, function( response ) {
-        wpeo_gallery.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).find( '.wp-post-image' ).replaceWith( response.data.template );
+		wpeo_gallery.$.post( window.ajaxurl, data, function( response ) {
+        wpeo_gallery.$( 'span.wpeo-upload-media[data-id="'+ window.file_management.element_id + '"]' ).find( '.wp-post-image' ).replaceWith( response.data.template );
 		} );
 	},
 
 	close: function( event ) {
 		wpeo_gallery.$( '.wpeo-gallery' ).hide();
 	}
-}
+};
