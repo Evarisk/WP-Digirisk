@@ -19,7 +19,7 @@ var digi_risk = {
 		this.old_date = digi_risk.$( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
 		if ( digi_risk.$( '.wp-digi-risk-item-new button' ).length > 0 ) {
-				this.button = new ProgressButton( digi_risk.$( '.wp-digi-risk-item-new button' )[0], {
+				this.button = new window.ProgressButton( digi_risk.$( '.wp-digi-risk-item-new button' )[0], {
 					callback: digi_risk.create_risk,
 				} );
 		}
@@ -79,7 +79,7 @@ var digi_risk = {
 	delete_risk: function( event, element ) {
 		event.preventDefault();
 
-    if( window.confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
   		var risk_id = digi_risk.$( element ).data( 'id' );
 
   		digi_risk.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
@@ -91,7 +91,7 @@ var digi_risk = {
   			risk_id: risk_id,
   		};
 
-  		digi_risk.$.post( ajaxurl, data, function() {
+  		digi_risk.$.post( window.ajaxurl, data, function() {
   			digi_risk.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
   			digi_risk.$( '.wp-digi-list .wp-digi-list-item[data-risk-id="' + risk_id + '"]' ).fadeOut();
   		} );
@@ -113,7 +113,7 @@ var digi_risk = {
 			risk_id: risk_id,
 		};
 
-		digi_risk.$.post( ajaxurl, data, function( response ) {
+		digi_risk.$.post( window.ajaxurl, data, function( response ) {
       digi_risk.$( '.wp-digi-list-item .dashicons-edit' ).hide();
 			digi_risk.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 			digi_risk.$( '.wp-digi-risk .wp-digi-list-item[data-risk-id="' + risk_id + '"]' ).replaceWith( response.data.template );
@@ -149,7 +149,7 @@ var digi_risk = {
 	},
 
   delete_comment: function( event, element ) {
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
       var data = {
         action: 'delete_comment',
         _wpnonce: digi_risk.$( element ).data( 'nonce' ),
@@ -159,7 +159,7 @@ var digi_risk = {
 
       digi_risk.$( element ).closest( 'li' ).remove();
 
-      digi_risk.$.post( ajaxurl, data, function() {} );
+      digi_risk.$.post( window.ajaxurl, data, function() {} );
     }
   },
 
