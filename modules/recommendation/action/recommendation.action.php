@@ -54,7 +54,7 @@ class recommendation_action {
 			$recommendation_id = (int) $_POST['recommendation_id'];
 
 		// Récupèration des l'identifiant unique
-		$unique_identifier = get_option( recommendation_class::get()->last_affectation_index_key );
+		$unique_identifier = get_option( recommendation_class::get()->last_affectation_index_key, 0 );
 		$unique_identifier++;
 		update_option( recommendation_class::get()->last_affectation_index_key, $unique_identifier );
 
