@@ -1,28 +1,31 @@
-"use strict"
+"use strict";
 
 var digi_user = {
 	old_affected_user: undefined,
+	$,
 
-	event: function() {
-		jQuery( document ).on( 'keyup', '.wp-list-search input[name="user_name_affected"]', function() { digi_user.search_affected_user( jQuery( this ) ); } );
-		jQuery( document ).on ('click', '.wp-form-user-to-assign input[type="submit"]', function( evt ) { digi_user.add_user( evt, jQuery( this ) ); } );
-		jQuery( document ).on ('click', '.wp-digi-list-affected-user .wp-digi-action-delete', function( evt ) { digi_user.delete_user( evt, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wp-form-user-to-assign .wp-digi-pagination a', function( event ) { digi_user.pagination( event, jQuery( this ) ); } );
+	event: function( $ ) {
+		digi_user.$ = $;
+
+		digi_user.$( document ).on( 'keyup', '.wp-list-search input[name="user_name_affected"]', function() { digi_user.search_affected_user( digi_user.$( this ) ); } );
+		digi_user.$( document ).on ('click', '.wp-form-user-to-assign input[type="submit"]', function( evt ) { digi_user.add_user( evt, digi_user.$( this ) ); } );
+		digi_user.$( document ).on ('click', '.wp-digi-list-affected-user .wp-digi-action-delete', function( evt ) { digi_user.delete_user( evt, digi_user.$( this ) ); } );
+		digi_user.$( document ).on( 'click', '.wp-form-user-to-assign .wp-digi-pagination a', function( event ) { digi_user.pagination( event, digi_user.$( this ) ); } );
 	},
 
 	search_affected_user: function( element ) {
-		if ( digi_user.old_affected_user != jQuery( element ).val() ) {
-			digi_user.old_affected_user = jQuery( element ).val();
-			if ( jQuery( element ).val().length > 2 ) {
-				var new_search = jQuery( element ).val();
+		if ( digi_user.old_affected_user != digi_user.$( element ).val() ) {
+			digi_user.old_affected_user = digi_user.$( element ).val();
+			if ( digi_user.$( element ).val().length > 2 ) {
+				var new_search = digi_user.$( element ).val();
 
-				jQuery( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-					jQuery( element ).closest( 'div' ).find( '.wp-digi-list' ).replaceWith( response.data.template );
+				digi_user.$( element ).closest( 'form' ).ajaxSubmit( function( response ) {
+					digi_user.$( element ).closest( 'div' ).find( '.wp-digi-list' ).replaceWith( response.data.template );
 				} );
 			}
-			else if ( jQuery( element ).val().length <= 0 ) {
-				jQuery( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-					jQuery( element ).closest( 'div' ).find( '.wp-digi-list' ).replaceWith( response.data.template );
+			else if ( digi_user.$( element ).val().length <= 0 ) {
+				digi_user.$( element ).closest( 'form' ).ajaxSubmit( function( response ) {
+					digi_user.$( element ).closest( 'div' ).find( '.wp-digi-list' ).replaceWith( response.data.template );
 				} );
 			}
 		}
@@ -31,11 +34,11 @@ var digi_user = {
 	add_user: function( event, element ) {
 		event.preventDefault();
 
-		jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
+		digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
-		jQuery( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-			jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-			jQuery( '.wp-digi-content' ).html( response.data.template );
+		digi_user.$( element ).closest( 'form' ).ajaxSubmit( function( response ) {
+			digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+			digi_user.$( '.wp-digi-content' ).html( response.data.template );
 		} );
 	},
 
@@ -43,18 +46,18 @@ var digi_user = {
     event.preventDefault();
 
     if( confirm( digi_confirm_delete ) ) {
-      jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
+      digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
       var data = {
         action: 'detach_user',
-        id: jQuery( element ).data( 'id' ),
-        user_id: jQuery( element ).data( 'user-id' ),
-        affectation_id: jQuery( element ).data( 'affectation-data-id' ),
+        id: digi_user.$( element ).data( 'id' ),
+        user_id: digi_user.$( element ).data( 'user-id' ),
+        affectation_id: digi_user.$( element ).data( 'affectation-data-id' ),
       };
 
-      jQuery.post( ajaxurl, data, function( response ) {
-				jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-				jQuery( '.wp-digi-content' ).html( response.data.template );
+      digi_user.$.post( ajaxurl, data, function( response ) {
+				digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+				digi_user.$( '.wp-digi-content' ).html( response.data.template );
       } );
     }
   },
@@ -62,7 +65,7 @@ var digi_user = {
 	pagination: function( event, element ) {
 		event.preventDefault();
 
-		var href = jQuery( element ).attr( 'href' ).split( '&' );
+		var href = digi_user.$( element ).attr( 'href' ).split( '&' );
 		var next_page = href[1].replace('current_page=', '');
 		var element_id = href[2].replace('element_id=', '');
 
@@ -72,6 +75,6 @@ var digi_user = {
 			next_page: next_page
 		};
 
-		jQuery( '.wp-form-user-to-assign' ).load( ajaxurl, data, function() {} );
+		digi_user.$( '.wp-form-user-to-assign' ).load( ajaxurl, data, function() {} );
 	}
 };

@@ -1,29 +1,32 @@
-"use strict"
+"use strict";
 
 var digi_tab = {
-  event: function() {
-    jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-global-sheet-tab li", function( event ) { digi_tab.click_tab( event, jQuery( this ) ); } );
+	$,
+  event: function( $ ) {
+		digi_tab.$ = $;
+
+    digi_tab.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-global-sheet-tab li", function( event ) { digi_tab.click_tab( event, digi_tab.$( this ) ); } );
   },
 
   click_tab: function( event, element ) {
     event.preventDefault();
 
-		if ( !jQuery( element ).hasClass( "disabled" ) ) {
-			var action = jQuery( element ).data( "action" );
-			jQuery( ".wp-digi-global-sheet-tab li.active" ).removeClass( "active" );
-			jQuery( element ).addClass( "active" );
+		if ( !digi_tab.$( element ).hasClass( "disabled" ) ) {
+			var action = digi_tab.$( element ).data( "action" );
+			digi_tab.$( ".wp-digi-global-sheet-tab li.active" ).removeClass( "active" );
+			digi_tab.$( element ).addClass( "active" );
 
-			jQuery( ".wp-digi-content" ).addClass( "wp-digi-bloc-loading" );
+			digi_tab.$( ".wp-digi-content" ).addClass( "wp-digi-bloc-loading" );
 
 			var data = {
 				"action": "load_tab_content",
-        "_wpnonce": jQuery( element ).data( 'nonce' ),
+        "_wpnonce": digi_tab.$( element ).data( 'nonce' ),
         "tab_to_display": action,
-				"element_id" : jQuery( element ).closest( '.wp-digi-sheet' ).data( 'id' ),
+				"element_id" : digi_tab.$( element ).closest( '.wp-digi-sheet' ).data( 'id' ),
 			};
-			jQuery.post( ajaxurl, data, function( response ){
-        jQuery( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
-				jQuery( ".wp-digi-content" ).html( response.data.template );
+			digi_tab.$.post( ajaxurl, data, function( response ){
+        digi_tab.$( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
+				digi_tab.$( ".wp-digi-content" ).html( response.data.template );
 				digi_global.init();
 
 				var object_name = action.replace( '-', '_' );

@@ -3,9 +3,10 @@
 jQuery(document).ready(function( $ ) {
 	digi_global.init( $ );
 	legal_display.init( $ );
-	digi_recommendation.init( $ );
-	digi_risk.init( $ );
+	digi_recommendation.init( true, $ );
+	digi_risk.init( true, $ );
 
+	digi_tools.event( $ );
 	digi_installer.event( $ );
 	digi_global.event( $ );
 	digi_evaluation_method.event( $ );

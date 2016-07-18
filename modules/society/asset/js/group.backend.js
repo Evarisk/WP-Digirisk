@@ -1,72 +1,75 @@
-"use strict"
+"use strict";
 
 var digi_group = {
-	event: function() {
+	$,
+	event: function( $ ) {
+		digi_group.$ = $;
+
 		// Modifier un group
-		jQuery( document ).on( 'keyup', 'input[name="wp-digi-group-name"]', function( event ) { digi_group.identity_edition_mode( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '#wp-digi-save-group-identity-button', function( event ) { digi_group.save_identity( event, jQuery( this ) ); } );
+		digi_group.$( document ).on( 'keyup', 'input[name="wp-digi-group-name"]', function( event ) { digi_group.identity_edition_mode( event, digi_group.$( this ) ); } );
+		digi_group.$( document ).on( 'click', '#wp-digi-save-group-identity-button', function( event ) { digi_group.save_identity( event, digi_group.$( this ) ); } );
 
 		// Créer un groupement
-		jQuery( document ).on( 'click', '.wp-digi-group-selector .wp-digi-new-group-action a', function( event ) { digi_group.create_group( event, jQuery( this ) ); } );
+		digi_group.$( document ).on( 'click', '.wp-digi-group-selector .wp-digi-new-group-action a', function( event ) { digi_group.create_group( event, digi_group.$( this ) ); } );
 
 		// Print DUER
-		jQuery( document ).on( 'click', '.wp-digi-duer-form-display', function( event ) { digi_group.display_form_duer( event, jQuery( this ) ); } );
+		digi_group.$( document ).on( 'click', '.wp-digi-duer-form-display', function( event ) { digi_group.display_form_duer( event, digi_group.$( this ) ); } );
 
 		/**	Formulaire de génération du DUER / DUER generation form	*/
-		jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-duer-generation-button", function( event ) { digi_group.save_element_sheet( event, jQuery( this ) ); } );
+		digi_group.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-duer-generation-button", function( event ) { digi_group.save_element_sheet( event, digi_group.$( this ) ); } );
 
     // Sauvegarde la configuration
-    jQuery( document ).on( 'click', '.wp-digi-form-save-configuration button', function( event ) { digi_group.save_configuration( event, jQuery( this ) ); } );
+    digi_group.$( document ).on( 'click', '.wp-digi-form-save-configuration button', function( event ) { digi_group.save_configuration( event, digi_group.$( this ) ); } );
   },
 
 	identity_edition_mode: function( event, element ) {
-		jQuery( ".wp-digi-group-action-container" ).removeClass( "hidden" );
-		jQuery( element ).addClass( "active" );
+		digi_group.$( ".wp-digi-group-action-container" ).removeClass( "hidden" );
+		digi_group.$( element ).addClass( "active" );
 
-		jQuery( '.wp-digi-societytree-left-container toggle span' ).html( jQuery( element ).val() );
-    jQuery( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Enregistrer' );
+		digi_group.$( '.wp-digi-societytree-left-container toggle span' ).html( digi_group.$( element ).val() );
+    digi_group.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Enregistrer' );
 	},
 
 	save_identity: function( event, element ) {
-		jQuery( element ).addClass( "wp-digi-loading" );
+		digi_group.$( element ).addClass( "wp-digi-loading" );
 
-		var group_id = jQuery( element ).closest( '.wp-digi-group-sheet' ).data( 'id' );
+		var group_id = digi_group.$( element ).closest( '.wp-digi-group-sheet' ).data( 'id' );
 
 		var data = {
 			'action': 'wpdigi_ajax_group_update',
-			'_wpnonce': jQuery( element ).data( 'nonce' ),
+			'_wpnonce': digi_group.$( element ).data( 'nonce' ),
 			'group_id': group_id,
-			'send_to_group_id': jQuery( 'input[name="wp-digi-group-id"]' ).val(),
-			'title': jQuery( 'input[name="wp-digi-group-name"]' ).val(),
+			'send_to_group_id': digi_group.$( 'input[name="wp-digi-group-id"]' ).val(),
+			'title': digi_group.$( 'input[name="wp-digi-group-name"]' ).val(),
 		};
 
-		jQuery.post( ajaxurl, data, function( response ) {
-			jQuery( element ).removeClass( "wp-digi-loading" );
-			jQuery( element ).removeClass( "active" );
-			jQuery( element ).closest( '.wp-digi-group-sheet-header' ).find( '.wpdigi-auto-complete' ).val( '' );
-			jQuery( element ).closest( '.wp-digi-group-sheet-header' ).find( 'input[name="wp-digi-group-id"]' ).val( '0' );
+		digi_group.$.post( ajaxurl, data, function( response ) {
+			digi_group.$( element ).removeClass( "wp-digi-loading" );
+			digi_group.$( element ).removeClass( "active" );
+			digi_group.$( element ).closest( '.wp-digi-group-sheet-header' ).find( '.wpdigi-auto-complete' ).val( '' );
+			digi_group.$( element ).closest( '.wp-digi-group-sheet-header' ).find( 'input[name="wp-digi-group-id"]' ).val( '0' );
 			if( response.data.template_left != undefined )
-				jQuery( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
+				digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 
-			jQuery( '.wp-digi-group-action-container' ).addClass( "hidden" );
+			digi_group.$( '.wp-digi-group-action-container' ).addClass( "hidden" );
 		} );
 	},
 
 	create_group: function( event, element ) {
 		event.preventDefault();
-		var group_id = jQuery( element ).data( 'id' );
-		jQuery( '.wp-digi-group-selector .wp-digi-develop-list' ).toggle();
-		jQuery( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
+		var group_id = digi_group.$( element ).data( 'id' );
+		digi_group.$( '.wp-digi-group-selector .wp-digi-develop-list' ).toggle();
+		digi_group.$( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'wpdigi-create-group',
 			group_id: group_id,
 		};
 
-		jQuery.post( ajaxurl, data, function( response ) {
-			jQuery( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
-			jQuery( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
-			jQuery( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
+		digi_group.$.post( ajaxurl, data, function( response ) {
+			digi_group.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
+			digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
+			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
 			digi_global.init();
 		} );
 	},
@@ -76,17 +79,17 @@ var digi_group = {
 		/**
 		 * Ajout d'un loader sur le bloc à droite / Display a loader on the right bloc
 		 */
-		jQuery( ".wp-digi-societytree-right-container" ).addClass( "wp-digi-bloc-loading" );
+		digi_group.$( ".wp-digi-societytree-right-container" ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'load_sheet_display',
-			element_id: jQuery( element ).data( 'id' ),
+			element_id: digi_group.$( element ).data( 'id' ),
 			tab_to_display: 'digi-generate-sheet',
 		};
 
-		jQuery.post( ajaxurl, data, function( response ) {
-			jQuery( ".wp-digi-societytree-right-container" ).html( response.data.template );
-			jQuery( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
+		digi_group.$.post( ajaxurl, data, function( response ) {
+			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template );
+			digi_group.$( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
 		} );
 	},
 
@@ -101,20 +104,20 @@ var digi_group = {
 
 		var options = {
 	        beforeSubmit:  function( formData, jqForm, options ) {
-	        	jQuery( element ).addClass( "wp-digi-loading" );
+	        	digi_group.$( element ).addClass( "wp-digi-loading" );
 	        },
 	        success:       function( responseText, statusText, xhr, $form ) {
-	        	jQuery( element ).removeClass( "wp-digi-loading" );
-						jQuery( ".wp-digi-global-sheet-tab li[data-action='digi-sheet']" ).click( );
+	        	digi_group.$( element ).removeClass( "wp-digi-loading" );
+						digi_group.$( ".wp-digi-global-sheet-tab li[data-action='digi-sheet']" ).click( );
 	        },
 	        dataType: "json",
 	    };
-		jQuery( "#wpdigi-save-element-form" ).ajaxSubmit( options );
+		digi_group.$( "#wpdigi-save-element-form" ).ajaxSubmit( options );
 	},
 
   save_configuration: function( event, element ) {
     event.preventDefault();
-    jQuery( element ).closest( 'form' ).ajaxSubmit();
+    digi_group.$( element ).closest( 'form' ).ajaxSubmit();
   }
 
 };

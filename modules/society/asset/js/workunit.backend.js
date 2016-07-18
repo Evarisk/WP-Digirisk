@@ -1,29 +1,30 @@
-"use strict"
+"use strict";
 
 var digi_workunit = {
 
 	/**
 	 * Définition de la liste des actions possibles
 	 */
-	event: function() {
+	event: function( $ ) {
+		digi_workunit.$ = $;
 		/**	Quand on demande l'ajout d'une unité de travail	*/
-		jQuery( ".wp-digi-societytree-left-container" ).on( "keypress", "input[name='workunit[title]']", function( event) { digi_workunit.call_create_workunit( event ); } );
-		jQuery( ".wp-digi-societytree-left-container" ).on( "click", ".wp-digi-new-workunit-action", function( event ){ digi_workunit.create_workunit( event, jQuery( this ) ); } );
+		digi_workunit.$( ".wp-digi-societytree-left-container" ).on( "keypress", "input[name='workunit[title]']", function( event) { digi_workunit.call_create_workunit( event ); } );
+		digi_workunit.$( ".wp-digi-societytree-left-container" ).on( "click", ".wp-digi-new-workunit-action", function( event ){ digi_workunit.create_workunit( event, digi_workunit.$( this ) ); } );
 
 		/**	Quand on demande la suppression d'une unité de travail	*/
-		jQuery( document ).on( 'click', '.wp-digi-list-workunit .wp-digi-action-delete', function( event ) { digi_workunit.delete_workunit( event, jQuery( this ) ); } );
+		digi_workunit.$( document ).on( 'click', '.wp-digi-list-workunit .wp-digi-action-delete', function( event ) { digi_workunit.delete_workunit( event, digi_workunit.$( this ) ); } );
 
-		jQuery( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", function( event ) { digi_workunit.save_element_sheet( event, jQuery( this ) ); } );
-		jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-delete", function( event ) { digi_workunit.delete_element_sheet( event, jQuery( this ) ); } );
+		digi_workunit.$( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", function( event ) { digi_workunit.save_element_sheet( event, digi_workunit.$( this ) ); } );
+		digi_workunit.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-delete", function( event ) { digi_workunit.delete_element_sheet( event, digi_workunit.$( this ) ); } );
 
-		jQuery( document ).on( 'click', '.wp-digi-sheet-tab-toggle', function() { digi_global.responsive_menu_toggle( jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wp-digi-sheet-tab-responsive-content > li', function() { digi_global.responsive_menu_toggle( jQuery( this ) ); } );
+		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-toggle', function() { digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
+		digi_workunit.$( document ).on( 'click', '.wp-digi-sheet-tab-responsive-content > li', function() { digi_global.responsive_menu_toggle( digi_workunit.$( this ) ); } );
 	},
 
 	call_create_workunit: function( event ) {
 		if( event.keyCode == 13 ) {
 			event.preventDefault();
-			jQuery( ".wp-digi-societytree-left-container .wp-digi-new-workunit-action" ).click();
+			digi_workunit.$( ".wp-digi-societytree-left-container .wp-digi-new-workunit-action" ).click();
 		}
 	},
 
@@ -36,15 +37,15 @@ var digi_workunit = {
 	create_workunit: function( event, element ) {
 		event.preventDefault();
 
-		jQuery( "#wpdigi-workunit-creation-form" ).ajaxSubmit({
+		digi_workunit.$( "#wpdigi-workunit-creation-form" ).ajaxSubmit({
 			'dataType': 'json',
 			'beforeSubmit' : function( formData, jqForm, options ) {
-				jQuery( '.wp-digi-societytree-left-container' ).addClass( "wp-digi-bloc-loading" );
+				digi_workunit.$( '.wp-digi-societytree-left-container' ).addClass( "wp-digi-bloc-loading" );
 			},
 			'success' : function( response, status, xhr, $form ) {
-				jQuery( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
-				jQuery( ".wp-digi-list-workunit" ).prepend( response.output );
-				jQuery( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
+				digi_workunit.$( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
+				digi_workunit.$( ".wp-digi-list-workunit" ).prepend( response.output );
+				digi_workunit.$( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
 			},
 		});
 	},
@@ -61,11 +62,11 @@ var digi_workunit = {
 		if( confirm( digi_confirm_delete ) ) {
 			var data = {
 				action: 'delete_society',
-				element_id: jQuery( element ).data( 'id' ),
+				element_id: digi_workunit.$( element ).data( 'id' ),
 			};
 
-			jQuery( element ).closest( 'li' ).fadeOut();
-			jQuery.post( ajaxurl, data, function( response ) {} );
+			digi_workunit.$( element ).closest( 'li' ).fadeOut();
+			digi_workunit.$.post( ajaxurl, data, function( response ) {} );
 		}
 	},
 
@@ -74,14 +75,14 @@ var digi_workunit = {
 
 		var data = {
 			action: 'wpdigi_delete_sheet',
-			parent_id: jQuery( element ).data( 'parent-id' ),
-			element_id: jQuery( element ).data( 'id' ),
-			global: jQuery( element ).data( 'global' ),
+			parent_id: digi_workunit.$( element ).data( 'parent-id' ),
+			element_id: digi_workunit.$( element ).data( 'id' ),
+			global: digi_workunit.$( element ).data( 'global' ),
 		};
 
-		jQuery( element ).closest( 'li' ).fadeOut();
+		digi_workunit.$( element ).closest( 'li' ).fadeOut();
 
-		jQuery.post( ajaxurl, data, function() {
+		digi_workunit.$.post( ajaxurl, data, function() {
 
 		} );
  	},
@@ -97,16 +98,16 @@ var digi_workunit = {
 
 		var options = {
 	        beforeSubmit:  function( formData, jqForm, options ) {
-	        	jQuery( element ).addClass( "wp-digi-loading" );
+	        	digi_workunit.$( element ).addClass( "wp-digi-loading" );
 	        },
 	        success:       function( responseText, statusText, xhr, $form ) {
-	        	jQuery( element ).removeClass( "wp-digi-loading" );
+	        	digi_workunit.$( element ).removeClass( "wp-digi-loading" );
 	        	if ( responseText.status && ( undefined != responseText.output ) ) {
-	        		if ( undefined != jQuery( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
-	        			jQuery( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
+	        		if ( undefined != digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
+	        			digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
 	        		}
 	        		else {
-	        			jQuery( ".wp-digi-global-sheet-tab li.wp-digi-sheet-generation-button" ).click();
+	        			digi_workunit.$( ".wp-digi-global-sheet-tab li.wp-digi-sheet-generation-button" ).click();
 	        		}
 	        	}
 	        	else {
@@ -116,7 +117,7 @@ var digi_workunit = {
 	        dataType: "json",
 	        resetForm: true,
 	    };
-		jQuery( "#wpdigi-save-element-form" ).ajaxSubmit( options );
+		digi_workunit.$( "#wpdigi-save-element-form" ).ajaxSubmit( options );
 	}
 
 };
