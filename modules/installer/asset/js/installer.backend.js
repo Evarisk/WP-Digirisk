@@ -88,7 +88,6 @@ var digi_installer = {
 		};
 
 		digi_installer.$.post( ajaxurl, data, function( response ) {
-			digi_installer.$( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).replaceWith( response.data.template );
 		} );
   },
@@ -105,7 +104,6 @@ var digi_installer = {
 					}
 				},
 				success: function( response ) {
-          digi_installer.$( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
     			digi_installer.$( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).replaceWith( response.data.template );
 				}
 			} );
