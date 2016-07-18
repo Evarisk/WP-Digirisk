@@ -13,12 +13,12 @@ var digi_risk_comment = {
     if( window.confirm( window.digi_confirm_delete ) ) {
       var data = {
         action: 'delete_comment',
-        _wpnonce: digi_risk.$( element ).data( 'nonce' ),
-        risk_id: digi_risk.$( element ).data( 'risk-id' ),
-        id: digi_risk.$( element ).data( 'id' ),
+        _wpnonce: digi_risk_comment.$( element ).data( 'nonce' ),
+        risk_id: digi_risk_comment.$( element ).data( 'risk-id' ),
+        id: digi_risk_comment.$( element ).data( 'id' ),
       };
-      digi_risk.$( element ).closest( 'li' ).remove();
-      digi_risk.$.post( window.ajaxurl, data, function() {} );
+      digi_risk_comment.$( element ).closest( 'li' ).remove();
+      digi_risk_comment.$.post( window.ajaxurl, data, function() {} );
     }
   }
 };
