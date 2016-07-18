@@ -16,7 +16,7 @@ class workunit_class extends post_class {
 
 	public $element_prefix = 'UT';
 
-	protected $model_name   = 'wpdigi_workunit_mdl_01';
+	protected $model_name   = 'workunit_model';
 	protected $post_type    = WPDIGI_STES_POSTTYPE_SUB;
 	protected $meta_key    	= '_wp_workunit';
 
