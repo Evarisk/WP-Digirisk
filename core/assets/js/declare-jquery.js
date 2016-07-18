@@ -1,7 +1,7 @@
 "use strict";
 
 jQuery( document ).ready(function( $ ) {
-	digi_global.init( $ );
+	if ( digi_global ) digi_global.init( $ );
 	legal_display.init( $ );
 	digi_recommendation.init( true, $ );
 	digi_risk.init( true, $ );
