@@ -121,12 +121,11 @@ class document_class extends post_class {
 	/**
 	 * AFFICHAGE/DISPLAY - Affiche une liste de document associés à un élément selon la liste passée en paramètre du shortcode ou si elle est vide des documents liés dans la base de données / Display a document list associated to a given element passed through shortcode parameters if defined or by getting list into database if nothing tis given in args
 	 *
-	 * @param array $args Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
+	 * @param array $element Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
 	 */
 	public function display_document_list( $element ) {
-		// if ( empty( $element ) )
-		// 	return false;
 		$list_document_id = !empty( $element->option[ 'associated_document_id' ] ) && !empty( $element->option[ 'associated_document_id' ][ 'document' ] ) ? $element->option[ 'associated_document_id' ][ 'document' ] : null;
+
 		if ( 0 < $this->limit_document_per_page ) {
 			$current_page = !empty( $_GET[ 'current_page' ] ) ? (int)$_GET[ 'current_page' ] : 1;
 			$number_page = ceil( count ( $list_document_id ) ) / $this->limit_document_per_page;
