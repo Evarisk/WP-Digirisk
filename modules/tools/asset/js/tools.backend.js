@@ -44,32 +44,32 @@ var digi_tools = {
         _wpnonce: digi_tools.$( element ).data( 'nonce' )
       };
 
-      digi_tools.$.post( ajaxurl, data, function() {
-        digi_tools.$( element ).removeClass( "wp-digi-loading" );
-        li.innerHTML += ' ' + digi_tools_done;
-      } );
+			digi_tools.exec_request( data, element );
     }
   },
 
   risk_fixer: function( event, element ) {
 	  event.preventDefault();
 
-      digi_tools.$( element ).addClass( "wp-digi-loading" );
-      digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
+    digi_tools.$( element ).addClass( "wp-digi-loading" );
+    digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
 
-      var li = document.createElement( 'li' );
-      li.innerHTML = window.digi_tools_in_progress;
-      digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
+    var li = document.createElement( 'li' );
+    li.innerHTML = window.digi_tools_in_progress;
+    digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
 
-      var data = {
-        action: 'compil_risk_list',
-        _wpnonce: digi_tools.$( element ).data( 'nonce' )
-      };
+    var data = {
+      action: 'compil_risk_list',
+      _wpnonce: digi_tools.$( element ).data( 'nonce' )
+    };
 
-      digi_tools.$.post( ajaxurl, data, function() {
-        digi_tools.$( element ).removeClass( "wp-digi-loading" );
-        li.innerHTML += ' ' + digi_tools_done;
-      } );
+    digi_tools.exec_request( data, element );
   }
 
+	exec_request: function( data, element ) {
+		digi_tools.$.post( window.ajaxurl, data, function() {
+			digi_tools.$( element ).removeClass( "wp-digi-loading" );
+			li.innerHTML += ' ' + window.digi_tools_done;
+		} );
+	}
 }
