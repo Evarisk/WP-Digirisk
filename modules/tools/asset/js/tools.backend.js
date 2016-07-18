@@ -44,7 +44,7 @@ var digi_tools = {
         _wpnonce: digi_tools.$( element ).data( 'nonce' )
       };
 
-			digi_tools.exec_request( data, element );
+			digi_tools.exec_request( li, data, element );
     }
   },
 
@@ -63,13 +63,13 @@ var digi_tools = {
       _wpnonce: digi_tools.$( element ).data( 'nonce' )
     };
 
-    digi_tools.exec_request( data, element );
+    digi_tools.exec_request( li, data, element );
   },
 
-	exec_request: function( data, element ) {
+	exec_request: function( li, data, element ) {
 		digi_tools.$.post( window.ajaxurl, data, function() {
 			digi_tools.$( element ).removeClass( "wp-digi-loading" );
 			li.innerHTML += ' ' + window.digi_tools_done;
 		} );
 	}
-}
+};
