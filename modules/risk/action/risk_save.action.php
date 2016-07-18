@@ -91,7 +91,7 @@ class risk_save_action {
 
 		if ( $risk->id !== 0 ) {
 			$evaluation->post_id = $risk->id;
-			evaluation_class::get()->update( $evaluation );
+			risk_evaluation_class::get()->update( $evaluation );
 		}
 
 		if ( $file_id !== 0 ) {

@@ -17,9 +17,10 @@ var digi_society = {
 	},
 
 	load_society: function( event, element ) {
+		jQuery( '.wp-digi-group-selector .digi-popup').hide();
 		jQuery( element ).closest( 'ul' ).find( 'li.active' ).removeClass( 'active' );
 		jQuery( element ).closest( 'li' ).addClass( 'active' );
-		jQuery( '.wp-digi-societytree-right-container' ).addClass( "wp-digi-bloc-loader" );
+		jQuery( '.wp-digi-societytree-right-container' ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'load_sheet_display',
@@ -28,6 +29,7 @@ var digi_society = {
 		};
 
 		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( '.wp-digi-societytree-right-container' ).removeClass( "wp-digi-bloc-loading" );
 			jQuery( '.wp-digi-societytree-right-container' ).html( response.data.template );
 			jQuery( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 		} );
@@ -62,7 +64,7 @@ var digi_society = {
 		};
 
 		jQuery.post( ajaxurl, data, function( response ) {
-			
+
 			jQuery( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 			jQuery( element ).removeClass( "wp-digi-loading" );
 			jQuery( ".wp-digi-global-sheet-header .wp-digi-global-action-container" ).addClass( "hidden" );

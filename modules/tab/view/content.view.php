@@ -10,6 +10,6 @@
 */
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="wp-digi-content">
+<div class="wp-digi-content wp-digi-bloc-loader">
   <?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element->id . '" ]' ); ?>
 </div>

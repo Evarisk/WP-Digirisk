@@ -26,8 +26,8 @@ if ( $risk != null ):
 			<?php endif;?>
 		</span>
 		<span class="wp-digi-action wp-digi-risk-action" >
-			<a href="#" data-id="<?php echo $risk->id; ?>" data-global="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_load_risk_' . $risk->id ); ?>" class="wp-digi-action wp-digi-action-load dashicons dashicons-edit" ></a>
-			<a href="#" data-id="<?php echo $risk->id; ?>" data-global="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_delete_risk_' . $risk->id ); ?>" class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>
+			<a href="#" data-id="<?php echo $risk->id; ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_load_risk_' . $risk->id ); ?>" class="wp-digi-action wp-digi-action-load dashicons dashicons-edit" ></a>
+			<a href="#" data-id="<?php echo $risk->id; ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_delete_risk_' . $risk->id ); ?>" class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>
 		</span>
 	</li>
 <?php endif ; ?>

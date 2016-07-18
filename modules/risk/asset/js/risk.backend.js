@@ -65,8 +65,10 @@ var digi_risk = {
         jQuery( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'none' );
         jQuery( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', '1px solid rgba(0,0,0,.2)' );
         jQuery( element ).closest( 'form' ).find( 'input[name="risk_comment_date"]' ).css( 'border', 'none' );
+				jQuery( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
       },
 			success: function( response ) {
+				jQuery( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 				jQuery( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
 				digi_risk.reset_create_form();
         instance._stop(1);
@@ -82,7 +84,7 @@ var digi_risk = {
     if( confirm( digi_confirm_delete ) ) {
   		var risk_id = jQuery( element ).data( 'id' );
 
-  		jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
+  		jQuery( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
 
   		var data = {
   			action: 'wpdigi-delete-risk',
@@ -92,7 +94,7 @@ var digi_risk = {
   		};
 
   		jQuery.post( ajaxurl, data, function() {
-  			jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
+  			jQuery( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
   			jQuery( '.wp-digi-list .wp-digi-list-item[data-risk-id="' + risk_id + '"]' ).fadeOut();
   		} );
     }
@@ -104,7 +106,7 @@ var digi_risk = {
     digi_risk.send_risk();
 
 		var risk_id = jQuery( element ).data( 'id' );
-		jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
+		jQuery( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'wpdigi-load-risk',
@@ -115,7 +117,7 @@ var digi_risk = {
 
 		jQuery.post( ajaxurl, data, function( response ) {
       jQuery( '.wp-digi-list-item .dashicons-edit' ).hide();
-			jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).removeClass( 'wp-digi-bloc-loading' );
+			jQuery( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 			jQuery( '.wp-digi-risk .wp-digi-list-item[data-risk-id="' + risk_id + '"]' ).replaceWith( response.data.template );
 			jQuery( '.wp-digi-risk .wp-digi-list-item[data-risk-id="' + risk_id + '"] .wpdigi-method-evaluation-render' ).html( response.data.table_evaluation_method );
 			jQuery( '.wpdigi_date' ).datepicker( { 'dateFormat': 'dd/mm/yy', } );
@@ -126,10 +128,11 @@ var digi_risk = {
 		event.preventDefault();
 
 		var risk_id = jQuery( element ).data( 'id' );
-		jQuery( '.wp-digi-risk-item[data-risk-id="'+ risk_id +'"]' ).addClass( 'wp-digi-bloc-loading' );
+		jQuery( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
 
 		jQuery( element ).closest( 'form' ).ajaxSubmit( {
 			'success': function( response ) {
+				jQuery( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
         jQuery( '.wp-digi-list-item .dashicons-edit' ).show();
 				jQuery( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
 			}

@@ -42,10 +42,11 @@ var digi_workunit = {
 
 		jQuery( "#wpdigi-workunit-creation-form" ).ajaxSubmit({
 			'dataType': 'json',
-			'beforeSubmit' : function( formData, jqForm, options ){
-				jQuery( element ).addClass( "wp-digi-bloc-loading" );
+			'beforeSubmit' : function( formData, jqForm, options ) {
+				jQuery( '.wp-digi-societytree-left-container' ).addClass( "wp-digi-bloc-loading" );
 			},
-			'success' : function( response, status, xhr, $form ){
+			'success' : function( response, status, xhr, $form ) {
+				jQuery( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
 				jQuery( ".wp-digi-list-workunit" ).prepend( response.output );
 				jQuery( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
 			},

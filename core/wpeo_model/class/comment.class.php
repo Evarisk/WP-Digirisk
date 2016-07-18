@@ -126,9 +126,9 @@ class comment_class extends singleton_util {
 	* @return object comment_model object
 	*/
 	public function show( $id, $cropped = false ) {
-		if ( !is_int( $id ) || !is_bool( $cropped ) ) {
-			return false;
-		}
+		// if ( !is_int( $id ) || !is_bool( $cropped ) ) {
+		// 	return false;
+		// }
 
 		$comment = get_comment( $id );
 
