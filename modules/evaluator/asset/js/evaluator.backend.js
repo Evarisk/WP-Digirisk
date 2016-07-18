@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_evaluator = {
-	$,
+	$: undefined,
 	event: function( $ ) {
 		digi_evaluator.$ = $;
 
@@ -28,7 +28,7 @@ var digi_evaluator = {
   delete_evaluator: function( event, element ) {
     event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
       digi_evaluator.$( '.wp-digi-list-evaluator' ).addClass( 'wp-digi-bloc-loading' );
 
       var data = {
@@ -39,7 +39,7 @@ var digi_evaluator = {
         affectation_id: digi_evaluator.$( element ).data( 'affectation-data-id' ),
       };
 
-      digi_evaluator.$.post( ajaxurl, data, function( response ) {
+      digi_evaluator.$.post( window.ajaxurl, data, function( response ) {
         digi_evaluator.$( '.wp-digi-list-evaluator' ).replaceWith( response.data.template );
       } );
     }
@@ -58,6 +58,6 @@ var digi_evaluator = {
 			next_page: next_page
 		};
 
-		digi_evaluator.$( '.wp-form-evaluator-to-assign' ).load( ajaxurl, data, function() {} );
+		digi_evaluator.$( '.wp-form-evaluator-to-assign' ).load( window.ajaxurl, data, function() {} );
 	}
 };
