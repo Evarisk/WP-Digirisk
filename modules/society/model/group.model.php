@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_group_mdl_01 extends post_model {
+class group_model extends post_model {
 
 	/**
 	 * Définition du modèle d'un groupement / Define a group model
@@ -20,24 +20,6 @@ class wpdigi_group_mdl_01 extends post_model {
 	 * @var array
 	 */
 	protected $array_option = array(
-		'associated_picture_id' => array(
-			'type' 			=> 'array',
-			'function'	=> '',
-			'default'		=> null,
-			'required'	=> false,
-		),
-		'associated_document_id' => array(
-			'type' 			=> 'array',
-			'function'	=> '',
-			'default'		=> null,
-			'required'	=> false,
-		),
-		'associated_legal_display_id' => array(
-			'type' 			=> 'array',
-			'function'	=> '',
-			'default'		=> null,
-			'required'	=> false,
-		),
 		'user_info' => array(
 			'owner_id' => array(
 				'type' 			=> 'integer',
@@ -91,12 +73,6 @@ class wpdigi_group_mdl_01 extends post_model {
 				'default'		=> 0,
 				'required'	=> false,
 			),
-		),
-		'associated_risk' => array(
-				'type'			=> 'array',
-				'function'	=> '',
-				'default'		=> array(),
-				'required'	=> false,
 		),
 		'associated_product' => array(
 				'type'			=> 'array',
