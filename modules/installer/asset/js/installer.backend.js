@@ -58,7 +58,7 @@ var digi_installer = {
 			digi_installer.$( '.wp-digi-list-staff' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( '#wp-digi-form-add-staff' ).ajaxSubmit( {
 				beforeSubmit: function() {
-					if( !validateEmail( digi_installer.$( '.wpdigi-staff input[name="user[email]"]' ).val() ) ) {
+					if( !regex.validateEmail( digi_installer.$( '.wpdigi-staff input[name="user[email]"]' ).val() ) ) {
 						digi_installer.$( '.wp-digi-list-staff' ).removeClass( 'wp-digi-bloc-loading' );
 						return false;
 					}
@@ -94,11 +94,11 @@ var digi_installer = {
 
   edit_staff: function( event, element ) {
     var user_id = digi_installer.$( element ).closest( 'form' ).data( 'id' );
-		if( digi_installer.$( element ).closest( 'form' ).find( 'input[name="option[user_info][lastname]"]' ).val() != '') {
+		if( digi_installer.$( element ).closest( 'form' ).find( 'input[name="option[user_info][lastname]"]' ).val() !== '') {
 			digi_installer.$( element ).closest( 'form' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( element ).closest( 'form' ).ajaxSubmit( {
 				beforeSubmit: function() {
-					if( !validateEmail( digi_installer.$( element ).closest( 'form' ).find( 'input[name="user[email]"]' ).val() ) ) {
+					if( !regex.validateEmail( digi_installer.$( element ).closest( 'form' ).find( 'input[name="user[email]"]' ).val() ) ) {
 						digi_installer.$( element ).closest( 'form' ).removeClass( 'wp-digi-bloc-loading' );
 						return false;
 					}
@@ -113,7 +113,7 @@ var digi_installer = {
   delete_staff: function( event, element ) {
     event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( window.digi_confirm_delete ) ) {
   		var user_id = digi_installer.$( element ).data( 'id' );
 
   		digi_installer.$( '.wp-digi-list-staff .wp-digi-list-item[data-id="'+ user_id +'"]' ).fadeOut();
@@ -124,16 +124,9 @@ var digi_installer = {
   			user_id: user_id,
   		};
 
-  		digi_installer.$.post( ajaxurl, data, function() {} );
+  		digi_installer.$.post( window.ajaxurl, data, function() {} );
     }
   },
-
-	toggle_form: function( event, element ) {
-		event.preventDefault();
-		digi_installer.$( element ).find( '.dashicons' ).toggleClass( 'dashicons-plus dashicons-minus' );
-		digi_installer.$( element ).closest( 'div' ).find( 'ul:last' ).toggle();
-		digi_installer.$( '.wp-digi-add-staff-from-file' ).toggle();
-	},
 
 	keyp_update_email: function( event, element ) {
 		digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val( digi_installer.$( '.wpdigi-staff input[name="user[option][user_info][firstname]"]' ).val() + '.' + digi_installer.$( '.wpdigi-staff input[name="user[option][user_info][lastname]"]' ).val() + '@' + digi_installer.$( '.wpdigi-staff .input-domain-mail' ).val() );
@@ -152,7 +145,7 @@ var digi_installer = {
       domain_mail: digi_installer.$( element ).closest( '.form-element' ).find( 'input' ).val(),
     };
 
-    digi_installer.$.post( ajaxurl, data, function() { } );
+    digi_installer.$.post( window.ajaxurl, data, function() { } );
   },
 
 	save_last_step: function( event, element ) {
@@ -162,6 +155,7 @@ var digi_installer = {
   toggle_form: function( event, element ) {
     event.preventDefault();
 
+		digi_installer.$( element ).find( '.dashicons' ).toggleClass( 'dashicons-plus dashicons-minus' );
     digi_installer.$( element ).closest( 'form' ).find( '.form-more-option' ).toggle();
   }
 };
