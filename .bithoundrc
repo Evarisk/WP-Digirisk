@@ -1,6 +1,6 @@
 {
 	"ignore": [
-		"**/core/wpeo_logs/**",
+		"**/core/wpeo_log/**",
 		"**/core/module_management/**",
 		"**/core/odtPhpLibrary/**",
 		"**/core/assets/js/modernizr.custom.js",
