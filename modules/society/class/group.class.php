@@ -14,7 +14,7 @@
  */
 class group_class extends post_class {
 
-	protected $model_name   = 'wpdigi_group_mdl_01';
+	protected $model_name   = 'group_model';
 	protected $post_type    = WPDIGI_STES_POSTTYPE_MAIN;
 	protected $meta_key    	= '_wpdigi_society';
 
