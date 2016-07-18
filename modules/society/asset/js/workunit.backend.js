@@ -46,19 +46,8 @@ var digi_workunit = {
 				jQuery( element ).addClass( "wp-digi-bloc-loading" );
 			},
 			'success' : function( response, status, xhr, $form ){
-				if ( response.status ) {
-					jQuery( ".wp-digi-list-workunit" ).prepend( response.output );
-					jQuery( ".wp-digi-workunit-" + response.element.id + ' span.wp-digi-workunit-name' ).click();
-					$form[ 0 ].reset();
-					jQuery( element ).removeClass( "wp-digi-bloc-loading" );
-
-					jQuery( '.wp-digi-group-header' ).replaceWith( response.template );
-
-
-				}
-				else {
-					alert( response.message );
-				}
+				jQuery( ".wp-digi-list-workunit" ).prepend( response.output );
+				jQuery( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
 			},
 		});
 	},
@@ -80,55 +69,6 @@ var digi_workunit = {
 
 			jQuery( element ).closest( 'li' ).fadeOut();
 			jQuery.post( ajaxurl, data, function( response ) {} );
-		}
-	},
-
-	/**
-	 * Affichage des onglets dans les unités de travail
-	 *
-	 * @param event Evenement appelé pour le lancement de l'action
-	 * @param element Element sur lequel on intervient
-	 */
-	display_workunit_tab_content : function( event, element ) {
-		event.preventDefault();
-
-		if ( !jQuery( element ).hasClass( "disabled" ) ) {
-			jQuery( ".wp-digi-workunit-sheet-tab li.active" ).removeClass( "active" );
-			jQuery( element ).addClass( "active" );
-
-			/**
-			 * Ajout d'un loader sur le bloc à droite / Display a loader on the right bloc
-			 */
-			jQuery( ".wp-digi-workunit-sheet-content" ).addClass( "wp-digi-bloc-loading" );
-
-			/**
-			 * Chargement de la fiche dans le conteneur droit / Load the sheet into the right container
-			 */
-			var action = jQuery( element ).data( 'action' );
-			var data = {
-				"action": "wpdigi_loadsheet_" + jQuery( element ).closest( "ul" ).data( "type" ),
-				"subaction" : action.replace( "digi-", "" ),
-				"wpdigi_nonce": jQuery( element ).data( 'nonce' ),
-				"workunit_id" : jQuery( element ).closest( '.wp-digi-workunit-sheet' ).data( 'id' ),
-			};
-			jQuery.post( ajaxurl, data, function( response ){
-				jQuery( ".wp-digi-workunit-sheet-content" ).html( response.output );
-				/**
-				 * Supression du loader sur le bloc à droite / Remove the loader on the right bloc
-				 */
-				jQuery( ".wp-digi-workunit-sheet-content" ).removeClass( "wp-digi-bloc-loading" );
-
-				digi_global.init();
-
-				if( action.replace( "digi-", "" ) == "digi-risk" ) {
-					digi_risk.tab_changed();
-				}
-				else if ( action.replace( "digi-", "" ) == "recommendation" ) {
-					digi_recommendation.tab_changed();
-				}
-
-				jQuery( '.wp-digi-sheet-tab-title' ).html( jQuery( element ).html() );
-			}, 'json');
 		}
 	},
 
