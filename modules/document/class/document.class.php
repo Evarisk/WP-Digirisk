@@ -33,14 +33,8 @@ class document_class extends post_class {
 	 * Instanciation de la gestion des document imprimés / Instanciate printes document
 	 */
 	protected function construct() {
-		/**	Inclusion du modèle pour les groupements / Include groups' model	*/
-		include_once( WPDIGI_DOC_PATH . '/model/document.model.01.php' );
-
 		/**	Define taxonomy for attachment categories	*/
 		add_action( 'init', array( $this, 'custom_type_creation' ), 5  );
-
-		/**	Ajoute le bouton d'impression du document unique dans la partie gauche de l'écran / Add the button for main document print into left part of screen	*/
-		add_filter( 'wpdigi_society_tree_footer', array( $this, 'filter_display_group_sheet_print_button' ), 10, 2 );
 	}
 
 	/**
@@ -122,44 +116,6 @@ class document_class extends post_class {
 		);
 
 		register_taxonomy( $this->attached_taxonomy_type, $this->post_type, $args );
-	}
-
-	/**
-	 * Accrochage au filtre permettant d'ajouter des éléments d'affichages dans la partie gauche de l'écran sous la liste des unités de travail / Hook filter allowing to extend left part of screen below workunit list
-	 *
-	 * @param int $group_id l'identifiant du groupement pour lequel il faut afficher la page de génération du document unique / The group identifier we have to display the DUER print interface
-	 * @param string $display_mode Le mode d'affichage de l'interface / The main display mode of digirisk interface
-	 */
-	public function filter_display_group_sheet_print_button( $group_id, $display_mode ) {
-		// if ( !is_int( $group_id ) || !is_string( $display_mode ) ) {
-		// 	return false;
-		// }
-		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, $display_mode, "print", "button" ) );
-	}
-
-	/**
-	 * Filtrage de l'affichage des documents dans la fiche d'un élément (unité de travail/groupement/etc) / Filter documents' display into a element sheet
-	 *
-	 * @param string $output Le contenu actuel a afficher, contenu que l'on va agrémenter / The current content to update before return and display
-	 * @param object $element L'élément sur le quel on se trouve et pour lequel on veut afficher les documents / Current element we are on and we want to display documents' for
-	 * @param string $tab_to_display L'onglet sur lequel on se trouve actuellement défini par le filtre principal ( wpdigi-workunit-default-tab ) puis par l'ajax / Current tab we are on defined par main filter ( wpdigi-workunit-default-tab ) and then by ajax
-	 *
-	 * @return string Le contenu a afficher pour l'onglet et l'élément actuel / The content to display for current tab and element we are one
-	 */
-	public function filter_display_doc_in_element( $output, $element, $tab_to_display ) {
-		// if ( !is_string( $output ) || !is_string( $tab_to_display ) ) {
-		// 	return false;
-		// }
-
-		if ( 'sheet' == $tab_to_display ) {
-			ob_start();
-			require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'simple', "sheet", "generation-form" ) );
-			$this->display_document_list( $element );
-			$output .= ob_get_contents();
-			ob_end_clean();
-		}
-
-		return $output;
 	}
 
 	/**
