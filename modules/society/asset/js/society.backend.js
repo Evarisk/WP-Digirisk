@@ -3,7 +3,7 @@
 var digi_society = {
 	$: undefined,
 	event: function( $ ) {
-		digi_society.$ = $,
+		digi_society.$ = $;
 		digi_society.$( document ).on( 'keyup', 'input[name="establishment_name"]', function( event ) { digi_society.identity_edition_mode( event, digi_society.$( this ) ); } );
 		digi_society.$( document ).on( 'click', '.wp-digi-societytree-left-container .wp-digi-global-name', function( event ) { digi_society.load_society( event, digi_society.$( this ) ); } );
 		digi_society.$( document ).on( 'click', '.wp-digi-global-sheet-header button.wp-digi-save-identity-button', function( event ) { digi_society.save_society( event, digi_society.$( this ) ); } );
