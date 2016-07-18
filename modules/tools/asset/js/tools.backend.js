@@ -64,7 +64,7 @@ var digi_tools = {
     };
 
     digi_tools.exec_request( data, element );
-  }
+  },
 
 	exec_request: function( data, element ) {
 		digi_tools.$.post( window.ajaxurl, data, function() {
