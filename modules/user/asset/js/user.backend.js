@@ -36,10 +36,11 @@ var digi_user = {
 	add_user: function( event, element ) {
 		event.preventDefault();
 
-		jQuery( '.wp-digi-list-user' ).addClass( 'wp-digi-bloc-loading' );
+		jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
 		jQuery( element ).closest( 'form' ).ajaxSubmit( function( response ) {
-			jQuery( '.wp-digi-list-user' ).replaceWith( response.data.template );
+			jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+			jQuery( '.wp-digi-content' ).html( response.data.template );
 		} );
 	},
 
@@ -47,7 +48,7 @@ var digi_user = {
     event.preventDefault();
 
     if( confirm( digi_confirm_delete ) ) {
-      jQuery( '.wp-digi-list-user' ).addClass( 'wp-digi-bloc-loading' );
+      jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
       var data = {
         action: 'detach_user',
@@ -57,7 +58,8 @@ var digi_user = {
       };
 
       jQuery.post( ajaxurl, data, function( response ) {
-        jQuery( '.wp-digi-list-user' ).replaceWith( response.data.template );
+				jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+				jQuery( '.wp-digi-content' ).html( response.data.template );
       } );
     }
   },

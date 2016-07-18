@@ -168,34 +168,11 @@ class user_action extends \singleton_util {
 
 		// On met à jour si au moins un utilisateur à été affecté
 		if( count( $_POST['list_user'] ) > 0 )
-			\workunit_class::get()->update( $workunit );
-
-		$list_user = user_class::get()->list_affected_user( $workunit );
-		ob_start();
-		require( USERS_VIEW . 'list-affected-user.php' );
-		$template = ob_get_clean();
-
-		$current_page = !empty( $_REQUEST['current_page'] ) ? (int) $_REQUEST['current_page'] : 1;
-		$args_where_user = array(
-			'offset' => ( $current_page - 1 ) * user_class::get()->limit_user,
-			'number' => user_class::get()->limit_user,
-			'exclude' => array( 1 ),
-			'meta_query' => array(
-				'relation' => 'OR',
-			),
-		);
-		$list_user_to_assign = user_class::get()->index( $args_where_user );
-
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
-		unset( $args_where_user['offset'] );
-		unset( $args_where_user['number'] );
-		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( user_class::get()->index( $args_where_user ) );
-		$number_page = ceil( $count_user / user_class::get()->limit_user );
+			$workunit = \workunit_class::get()->update( $workunit );
 
 		ob_start();
-		require( USERS_VIEW . 'list-user-to-assign.php' );
-		wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
+		user_class::get()->render( $workunit );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -222,7 +199,9 @@ class user_action extends \singleton_util {
 
 		\workunit_class::get()->update( $workunit );
 
-		wp_send_json_success( array( 'template' => $template, 'template_form' => ob_get_clean() ) );
+		ob_start();
+		user_class::get()->render( $workunit );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**
