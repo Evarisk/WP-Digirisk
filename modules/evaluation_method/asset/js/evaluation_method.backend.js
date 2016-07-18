@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_evaluation_method = {
-	$,
+	$: undefined,
 	event: function( $ ) {
 		digi_evaluation_method.$ = $;
     digi_evaluation_method.$( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li', function( event ) { digi_evaluation_method.select_cotation( event, digi_evaluation_method.$( this ) ); } );
@@ -44,13 +44,12 @@ var digi_evaluation_method = {
 			list_variable: list_variable,
 		};
 
-		digi_evaluation_method.$.post( ajaxurl, data, function( response ) {
+		digi_evaluation_method.$.post( window.ajaxurl, data, function( response ) {
       digi_evaluation_method.$( '.wpdigi-method-evaluation-render' ).hide();
 
       digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( digi_evaluation_method.$( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
 			digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-new wp-digi-risk-level-' + response.data.scale );
       digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
     } );
-
   }
-}
+};
