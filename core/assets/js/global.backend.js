@@ -65,8 +65,8 @@ var digi_global = {
 			event.stopPropagation();
 			var element = digi_global.$( this );
       var parent = digi_global.$( this ).data( 'parent' );
-			var div = undefined;
-			
+			var div;
+
       if( parent !== undefined ) {
   			div = digi_global.$( this ).closest( '.' + parent ).find( '.' + digi_global.$( this ).data( 'target' ) );
       }
