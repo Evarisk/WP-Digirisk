@@ -58,7 +58,7 @@ var digi_installer = {
 			digi_installer.$( '.wp-digi-list-staff' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( '#wp-digi-form-add-staff' ).ajaxSubmit( {
 				beforeSubmit: function() {
-					if( !regex.validateEmail( digi_installer.$( '.wpdigi-staff input[name="user[email]"]' ).val() ) ) {
+					if( !window.regex.validateEmail( digi_installer.$( '.wpdigi-staff input[name="user[email]"]' ).val() ) ) {
 						digi_installer.$( '.wp-digi-list-staff' ).removeClass( 'wp-digi-bloc-loading' );
 						return false;
 					}
@@ -87,7 +87,7 @@ var digi_installer = {
 			user_id: user_id,
 		};
 
-		digi_installer.$.post( ajaxurl, data, function( response ) {
+		digi_installer.$.post( window.ajaxurl, data, function( response ) {
 			digi_installer.$( '.wp-digi-list-item[data-id="'+ user_id +'"]' ).replaceWith( response.data.template );
 		} );
   },
@@ -98,7 +98,7 @@ var digi_installer = {
 			digi_installer.$( element ).closest( 'form' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer.$( element ).closest( 'form' ).ajaxSubmit( {
 				beforeSubmit: function() {
-					if( !regex.validateEmail( digi_installer.$( element ).closest( 'form' ).find( 'input[name="user[email]"]' ).val() ) ) {
+					if( !window.regex.validateEmail( digi_installer.$( element ).closest( 'form' ).find( 'input[name="user[email]"]' ).val() ) ) {
 						digi_installer.$( element ).closest( 'form' ).removeClass( 'wp-digi-bloc-loading' );
 						return false;
 					}
