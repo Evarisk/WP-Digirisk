@@ -1,7 +1,6 @@
 {
 	"ignore": [
-		"**/core/assets/declare-jquery.js",
-		"**/core/assets/backend.js",
+		"**/core/assets/js/declare-jquery.js",
 		"**/core/wpeo_log/**",
 		"**/core/module_management/**",
 		"**/core/odtPhpLibrary/**",
