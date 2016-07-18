@@ -8,17 +8,16 @@ var digi_risk = {
 
 	init: function( event, $ ) {
 		digi_risk.$ = $;
-
+		window.digi_risk_comment.event( $ );
 		if ( event || event === undefined ) {
 			digi_risk.event();
 		}
-
 		this.old_date = digi_risk.$( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
 		if ( digi_risk.$( '.wp-digi-risk-item-new button' ).length > 0 ) {
-				this.button = new window.ProgressButton( digi_risk.$( '.wp-digi-risk-item-new button' )[0], {
-					callback: digi_risk.create_risk,
-				} );
+			this.button = new window.ProgressButton( digi_risk.$( '.wp-digi-risk-item-new button' )[0], {
+				callback: digi_risk.create_risk,
+			} );
 		}
 	},
 
