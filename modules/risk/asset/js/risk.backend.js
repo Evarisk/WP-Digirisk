@@ -1,7 +1,6 @@
 "use strict";
 
 var digi_risk = {
-
 	old_date: undefined,
   button: undefined,
   old_cotation: undefined,
@@ -14,7 +13,6 @@ var digi_risk = {
 			digi_risk.event();
 		}
 
-		this.old_danger = digi_risk.$( '.wp-digi-risk-item-new toggle' ).html();
 		this.old_date = digi_risk.$( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
 		if ( digi_risk.$( '.wp-digi-risk-item-new button' ).length > 0 ) {
@@ -149,22 +147,17 @@ var digi_risk = {
         risk_id: digi_risk.$( element ).data( 'risk-id' ),
         id: digi_risk.$( element ).data( 'id' ),
       };
-
       digi_risk.$( element ).closest( 'li' ).remove();
-
       digi_risk.$.post( window.ajaxurl, data, function() {} );
     }
   },
 
 	reset_create_form: function() {
-		digi_risk.$( '.wp-digi-risk-item-new toggle' ).html( digi_risk.old_danger );
 		digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html( digi_risk.old_cotation );
-
 		var element_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' )[0];
 		element_cotation.className = element_cotation.className.replace( /wp-digi-risk-level-[0-4]/, 'wp-digi-risk-level-0' );
-
-		digi_risk.$( '.wp-digi-risk-item-new input[name="danger_id"]').val( '' );
 		digi_risk.$( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
 		digi_risk.$( '.wp-digi-risk-item-new input[name="digi_method"]').val( '' );
+		window.digi_danger.reset_create_form();
 	}
 };
