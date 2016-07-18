@@ -36,7 +36,7 @@ var digi_user = {
 
 		digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
-		digi_user.submit_form();
+		digi_user.submit_form( data );
 	},
 
 	delete_user: function( event, element ) {
@@ -52,12 +52,12 @@ var digi_user = {
         affectation_id: digi_user.$( element ).data( 'affectation-data-id' ),
       };
 
-			digi_user.submit_form();
+			digi_user.submit_form( data );
     }
   },
 
-	submit_form: function() {
-		digi_user.$.post( ajaxurl, data, function( response ) {
+	submit_form: function( data ) {
+		digi_user.$.post( window.ajaxurl, data, function( response ) {
 			digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
 			digi_user.$( '.wp-digi-content' ).html( response.data.template );
 		} );
@@ -76,6 +76,6 @@ var digi_user = {
 			next_page: next_page
 		};
 
-		digi_user.$( '.wp-form-user-to-assign' ).load( ajaxurl, data, function() {} );
+		digi_user.$( '.wp-form-user-to-assign' ).load( window.ajaxurl, data, function() {} );
 	}
 };
