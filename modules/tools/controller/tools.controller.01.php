@@ -171,7 +171,7 @@ class wpdigi_tools_ctr {
 		/**	First let's list all group / Commençons par lister les groupements	*/
 		$group_list = $wpdigi_group_ctr->index( array() );
 		foreach ( $group_list as $group ) {
-			$risk_list = $wpdigi_risk_ctr->get_risk_list_for_element( $group );
+			$risk_list = risk_class::get()->index( array( 'post_parent' => $group->id ) );
 			if ( !empty( $risk_list ) ) {
 				foreach ( $risk_list as $risk ) {
 					$group->option[ 'associated_risk' ][] = $risk->id;
@@ -184,7 +184,7 @@ class wpdigi_tools_ctr {
 		/**	Let's list all workunit / Listons les unités de travail */
 		$workunit_list = $wpdigi_workunit_ctr->index( array() );
 		foreach ( $workunit_list as $workunit ) {
-			$risk_list = $wpdigi_risk_ctr->get_risk_list_for_element( $workunit );
+			$risk_list = risk_class::get()->index( array( 'post_parent' => $workunit->id ) );
 			if ( !empty( $risk_list ) ) {
 				foreach ( $risk_list as $risk ) {
 					$workunit->option[ 'associated_risk' ][] = $risk->id;
