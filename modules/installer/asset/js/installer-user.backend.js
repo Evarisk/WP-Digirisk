@@ -1,6 +1,6 @@
 "use strict";
 
-var digi_installer_user_user = {
+var digi_installer_user = {
 	$: undefined,
 	event: function($) {
 		digi_installer_user.$ = $;
