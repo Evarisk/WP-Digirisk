@@ -29,7 +29,6 @@ class evaluation_method_class extends term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
-		include_once( EVALUATION_METHOD_PATH . 'model/evaluation_method.model.01.php' );
 	}
 
 	/**

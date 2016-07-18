@@ -40,9 +40,6 @@ class recommendation_category_class extends term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
-		/**	Inclusion du modèle / Include model	*/
-		include_once( RECOMMENDATION_PATH . 'model/recommendation_category.model.01.php' );
-
 		/**	Define taxonomy for recommendation categories	*/
 		add_action( 'init', array( $this, 'recommendation_category_type' ), 0 );
 	}

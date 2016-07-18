@@ -38,10 +38,6 @@ class evaluation_method_variable_class extends term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
-
-		/**	Inclusion du modèle / Include model	*/
-		include_once( EVALUATION_METHOD_PATH . 'model/evaluation_method_variable.model.01.php' );
-
 		/**	Define taxonomy for evaluation method's vars	*/
 		add_action( 'init', array( $this, 'evaluation_method_vars_type' ), 1 );
 	}

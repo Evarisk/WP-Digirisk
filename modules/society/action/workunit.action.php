@@ -30,9 +30,6 @@ class workunit_action {
 		/**	Affichage de la liste des utilisateurs affectés à une unité de travail / Display user associated to a work unit	*/
 		add_action( 'wp_ajax_wpdigi_loadsheet_workunit', array( $this, 'display_workunit_sheet_content' ), 9 );
 
-		/**	Association de fichiers à une unité de travail / Associate file to a workunit	*/
-		add_action( 'wp_ajax_wpfile_associate_file_digi-workunit', array( $this, 'associate_file_to_workunit' ) );
-
 		/**	Génération de la fiche d'une unité de travail / Generate sheet for a workunit	*/
 		add_action( 'wp_ajax_wpdigi_save_sheet_digi-workunit', array( $this, 'generate_workunit_sheet' ) );
 	}
@@ -160,64 +157,6 @@ class workunit_action {
 		ob_end_clean();
 
 		wp_die( json_encode( $response ) );
-	}
-
-	/**
-	 * Affectation de fichiers a une unité de travail / Associate file to a workunit
-	 */
-	public function associate_file_to_workunit() {
-		if ( 0 === (int) $_POST['element_id'] )
-			wp_send_json_error();
-		else
-			$element_id = (int) $_POST['element_id'];
-
-		if( !isset( $_POST['thumbnail'] ) )
-			wp_send_json_error();
-		else {
-			$thumbnail = (bool) $_POST['thumbnail'];
-		}
-
-		wpdigi_utils::check( 'ajax_file_association_' . $element_id );
-
-		if ( empty( $_POST ) || empty( $_POST[ 'files_to_associate'] ) || !is_array( $_POST[ 'files_to_associate'] ) )
-			wp_send_json_error( array( 'message' => __( 'Nothing has been founded for association', 'digirisk' ), ) );
-
-
-		$workunit = $this->show( $element_id );
-
-
-		$response = null;
-		foreach ( $_POST[ 'files_to_associate'] as $file_id ) {
-			if ( true === is_int( (int)$file_id ) ) {
-				if ( wp_attachment_is_image( $file_id ) ) {
-					$workunit->option[ 'associated_document_id' ][ 'image' ][] = (int)$file_id;
-
-					if ( !empty( $thumbnail ) ) {
-						set_post_thumbnail( $element_id , (int)$file_id );
-					}
-				}
-				else {
-					$workunit->option[ 'associated_document_id' ][ 'document' ][] = (int)$file_id;
-				}
-			}
-		}
-		$updated_workunit = $this->update( $workunit );
-		$workunit = $this->show( $element_id );
-		$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );
-
-		$this->current_workunit = $workunit;
-
-		$workunit_default_tab = apply_filters( 'wpdigi_workunit_default_tab', '' );
-
-		ob_start();
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'list', 'item' ) );
-		$list_item_workunit = ob_get_clean();
-
-		ob_start();
-		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', 'simple' ) );
-		$sheet_simple = ob_get_clean();
-
-		wp_send_json_success( array( 'workunit_id' => $element_id, 'list_item_workunit' => $list_item_workunit, 'sheet_simple' => $sheet_simple ) );
 	}
 
 	/**

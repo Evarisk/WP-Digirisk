@@ -26,10 +26,6 @@ class file_management_class extends singleton_util {
 	* @param bool $thumbnail (Optional) Le défini en vignette
 	*/
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
-		// if ( !is_int( $file_id ) || !is_int( $element_id ) || !is_string( $object_name ) || !is_bool( $thumbnail ) ) {
-		// 	return false;
-		// }
-
     $element = $object_name::get()->show( $element_id );
 
     if ( wp_attachment_is_image( $file_id ) ) {

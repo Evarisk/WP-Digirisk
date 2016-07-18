@@ -44,7 +44,7 @@ class workunit_model extends post_model {
 			'address' => array(
 				'type'		=> 'array',
 				'function'	=> '',
-				'default'	=>array(),
+				'default'	=> array(),
 				'required'	=> false,
 			),
 		),
@@ -68,6 +68,18 @@ class workunit_model extends post_model {
 			'default'	=> null,
 			'required'	=> false,
 		),
+		'associated_picture_id' => array(
+			'type' 			=> 'array',
+			'function'	=> '',
+			'default'		=> array(),
+			'required'	=> false,
+		),
+		'associated_document_id' => array(
+			'type' 			=> 'array',
+			'function'	=> '',
+			'default'		=> null,
+			'required'	=> false,
+		)
 	);
 
 	/**

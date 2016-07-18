@@ -62,12 +62,6 @@ class wpdigi_risk_mdl_01 extends post_model {
 			'default'	=> 0,
 			'required'	=> false,
 		),
-		'associated_evaluation' => array(
-			'type' 		=> 'array',
-			'function'	=> '',
-			'default'	=> null,
-			'required'	=> false,
-		),
 		'associated_recommendation' => array(
 			'type' 		=> 'array',
 			'function'	=> '',
@@ -106,7 +100,7 @@ class wpdigi_risk_mdl_01 extends post_model {
 				);
 			}
 		}
-		
+
 		parent::__construct( $object, $meta_key, $cropped );
 	}
 

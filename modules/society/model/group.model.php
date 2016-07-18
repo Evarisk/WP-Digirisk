@@ -86,6 +86,18 @@ class group_model extends post_model {
 			'default'		=> array(),
 			'required'	=> false,
 		),
+		'associated_picture_id' => array(
+			'type' 			=> 'array',
+			'function'	=> '',
+			'default'		=> array(),
+			'required'	=> false,
+		),
+		'associated_document_id' => array(
+			'type' 			=> 'array',
+			'function'	=> '',
+			'default'		=> null,
+			'required'	=> false,
+		)
 	);
 
 	/**

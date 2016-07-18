@@ -14,9 +14,7 @@ class address_class extends comment_class {
 	/**
 	 * Instanciation de l'objet addresse / Address instanciation
 	 */
-	protected function construct() {
-		include_once( ADDRESS_PATH . 'model/address.model.01.php' );
-	}
+	protected function construct() {}
 
 	/**
 	* Créer une addresse
@@ -29,7 +27,7 @@ class address_class extends comment_class {
 		if ( !is_array( $data ) ) {
 			return false;
 		}
-		
+
 		$data['postcode'] = sanitize_text_field( $data['postcode'] );
 		$data['address'] = sanitize_text_field( $data['address'] );
 		$data['town'] = sanitize_text_field( $data['town'] );
