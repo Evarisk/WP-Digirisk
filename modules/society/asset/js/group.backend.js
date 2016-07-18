@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_group = {
-	$,
+	$: undefined,
 	event: function( $ ) {
 		digi_group.$ = $;
 
@@ -43,12 +43,12 @@ var digi_group = {
 			'title': digi_group.$( 'input[name="wp-digi-group-name"]' ).val(),
 		};
 
-		digi_group.$.post( ajaxurl, data, function( response ) {
+		digi_group.$.post( window.ajaxurl, data, function( response ) {
 			digi_group.$( element ).removeClass( "wp-digi-loading" );
 			digi_group.$( element ).removeClass( "active" );
 			digi_group.$( element ).closest( '.wp-digi-group-sheet-header' ).find( '.wpdigi-auto-complete' ).val( '' );
 			digi_group.$( element ).closest( '.wp-digi-group-sheet-header' ).find( 'input[name="wp-digi-group-id"]' ).val( '0' );
-			if( response.data.template_left != undefined )
+			if( response.data.template_left !== undefined )
 				digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 
 			digi_group.$( '.wp-digi-group-action-container' ).addClass( "hidden" );
@@ -66,11 +66,11 @@ var digi_group = {
 			group_id: group_id,
 		};
 
-		digi_group.$.post( ajaxurl, data, function( response ) {
+		digi_group.$.post( window.ajaxurl, data, function( response ) {
 			digi_group.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
 			digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
-			digi_global.init();
+			window.digi_global.init();
 		} );
 	},
 
@@ -87,7 +87,7 @@ var digi_group = {
 			tab_to_display: 'digi-generate-sheet',
 		};
 
-		digi_group.$.post( ajaxurl, data, function( response ) {
+		digi_group.$.post( window.ajaxurl, data, function( response ) {
 			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template );
 			digi_group.$( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
 		} );
@@ -103,15 +103,16 @@ var digi_group = {
 		event.preventDefault();
 
 		var options = {
-	        beforeSubmit:  function( formData, jqForm, options ) {
-	        	digi_group.$( element ).addClass( "wp-digi-loading" );
-	        },
-	        success:       function( responseText, statusText, xhr, $form ) {
-	        	digi_group.$( element ).removeClass( "wp-digi-loading" );
-						digi_group.$( ".wp-digi-global-sheet-tab li[data-action='digi-sheet']" ).click( );
-	        },
-	        dataType: "json",
-	    };
+      beforeSubmit: function( formData, jqForm, options ) {
+      	digi_group.$( element ).addClass( "wp-digi-loading" );
+      },
+      success: function( responseText, statusText, xhr, $form ) {
+      	digi_group.$( element ).removeClass( "wp-digi-loading" );
+				digi_group.$( ".wp-digi-global-sheet-tab li[data-action='digi-sheet']" ).click( );
+      },
+      dataType: "json",
+  	};
+
 		digi_group.$( "#wpdigi-save-element-form" ).ajaxSubmit( options );
 	},
 
