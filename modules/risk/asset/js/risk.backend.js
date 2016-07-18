@@ -6,12 +6,12 @@ var digi_risk = {
 	old_date: undefined,
   button: undefined,
   old_cotation: undefined,
-	$,
+	$: undefined,
 
 	init: function( event, $ ) {
 		digi_risk.$ = $;
 
-		if ( event || event == undefined ) {
+		if ( event || event === undefined ) {
 			digi_risk.event();
 		}
 
@@ -40,12 +40,12 @@ var digi_risk = {
       'beforeSubmit': function() {
         var element_required = false;
 
-        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="method_evaluation_id"]' ).val() == 0 ) {
+        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="method_evaluation_id"]' ).val() === 0 ) {
           digi_risk.$( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
 
-        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="danger_id"]' ).val() == '' ) {
+        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="danger_id"]' ).val() === '' ) {
           digi_risk.$( element ).closest( 'form' ).find( '.wp-digi-summon-list' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
@@ -79,7 +79,7 @@ var digi_risk = {
 	delete_risk: function( event, element ) {
 		event.preventDefault();
 
-    if( confirm( digi_confirm_delete ) ) {
+    if( window.confirm( digi_confirm_delete ) ) {
   		var risk_id = digi_risk.$( element ).data( 'id' );
 
   		digi_risk.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
