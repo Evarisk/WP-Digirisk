@@ -36,7 +36,9 @@ var digi_user = {
 
 		digi_user.$( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
 
-		digi_user.submit_form( data );
+		digi_user.$( element ).closest( 'form' ).ajaxSubmit( function( response ) {
+			digi_user.render( response );
+		} );
 	},
 
 	delete_user: function( event, element ) {
@@ -52,15 +54,15 @@ var digi_user = {
         affectation_id: digi_user.$( element ).data( 'affectation-data-id' ),
       };
 
-			digi_user.submit_form( data );
+			digi_user.$.post( window.ajaxurl, data, function( response ) {
+				digi_user.render( response );
+			} );
     }
   },
 
-	submit_form: function( data ) {
-		digi_user.$.post( window.ajaxurl, data, function( response ) {
-			digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-			digi_user.$( '.wp-digi-content' ).html( response.data.template );
-		} );
+	render: function( response ) {
+		digi_user.$( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
+		digi_user.$( '.wp-digi-content' ).html( response.data.template );
 	},
 
 	pagination: function( event, element ) {
