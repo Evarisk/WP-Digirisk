@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_workunit_mdl_01 extends post_model {
+class workunit_model extends post_model {
 
 	/**
 	 * Définition du modèle d'une unité de travail / Define a work unit model
@@ -20,12 +20,6 @@ class wpdigi_workunit_mdl_01 extends post_model {
 	 * @var array
 	 */
 	protected $array_option = array(
-		'associated_document_id' => array(
-			'type' 		=> 'array',
-			'function'	=> '',
-			'default'	=> null,
-			'required'	=> false,
-		),
 		'user_info' => array(
 			'owner_id' => array(
 				'type' 		=> 'integer',
@@ -61,12 +55,6 @@ class wpdigi_workunit_mdl_01 extends post_model {
 				'default'	=> array(),
 				'required'	=> false,
 			),
-		),
-		'associated_risk' => array(
-				'type'		=> 'array',
-				'function'	=> '',
-				'default'	=> null,
-				'required'	=> false,
 		),
 		'associated_product' => array(
 				'type'		=> 'array',
