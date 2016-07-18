@@ -6,7 +6,7 @@ jQuery( document ).ready( function() {
 
 var digi_society = {
 	event: function() {
-		jQuery( document ).on( 'click', '.wp-digi-global-name', function( event ) { digi_society.load_society( event, jQuery( this ) ); } );
+		jQuery( document ).on( 'click', '.wp-digi-societytree-left-container .wp-digi-global-name', function( event ) { digi_society.load_society( event, jQuery( this ) ); } );
 
 		/**	Quand on commence a modifier le nom ou la description, on affiche le bouton de sauvgarde	*/
 		jQuery( document ).on( 'keyup', 'input[name="establishment_name"]', function( event ) { digi_society.identity_edition_mode( event, jQuery( this ) ); } );
@@ -80,7 +80,11 @@ var digi_society = {
 				element_id: jQuery( element ).data( 'id' ),
 			};
 
-			jQuery.post( ajaxurl, data, function( response ) {} );
+			jQuery( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
+
+			jQuery.post( ajaxurl, data, function( response ) {
+				jQuery( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
+			} );
 		}
 	}
 };

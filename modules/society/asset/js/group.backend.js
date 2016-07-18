@@ -12,7 +12,6 @@ var digi_group = {
 
 		// Créer un groupement
 		jQuery( document ).on( 'click', '.wp-digi-group-selector .wp-digi-new-group-action a', function( event ) { digi_group.create_group( event, jQuery( this ) ); } );
-		jQuery( document ).on( 'click', '.wp-digi-delete-group-action', function( event ) { digi_group.delete_group( event, jQuery( this ) ); } );
 
 		// Print DUER
 		jQuery( document ).on( 'click', '.wp-digi-duer-form-display', function( event ) { digi_group.display_form_duer( event, jQuery( this ) ); } );
@@ -61,6 +60,7 @@ var digi_group = {
 		event.preventDefault();
 		var group_id = jQuery( element ).data( 'id' );
 		jQuery( '.wp-digi-group-selector .wp-digi-develop-list' ).toggle();
+		jQuery( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'wpdigi-create-group',
@@ -68,30 +68,12 @@ var digi_group = {
 		};
 
 		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
 			jQuery( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 			jQuery( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
 			digi_global.init();
 		} );
 	},
-
-  delete_group: function( event, element ) {
-    event.preventDefault();
-
-    if( confirm( digi_confirm_delete ) ) {
-  		var group_id = jQuery( element ).data( 'id' );
-
-  		var data = {
-  			action: 'wpdigi-delete-group',
-  			group_id: group_id,
-  		};
-
-  		jQuery.post( ajaxurl, data, function( response ) {
-        jQuery( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
-        jQuery( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
-  			digi_global.init();
-  		} );
-    }
-  },
 
 	display_form_duer: function( event, element ) {
 		event.preventDefault();
@@ -136,19 +118,7 @@ var digi_group = {
 
   save_configuration: function( event, element ) {
     event.preventDefault();
-
-    var options = {
-      beforeSubmit: function( formData, jqForm, options ) {
-        jQuery( element ).addClass( "wp-digi-loading" );
-      },
-      success: function() {
-        jQuery( element ).removeClass( "wp-digi-loading" );
-      },
-      dataType: "json"
-    };
-
-    jQuery( element ).closest( 'form' ).ajaxSubmit( options );
-
+    jQuery( element ).closest( 'form' ).ajaxSubmit();
   }
 
 };
