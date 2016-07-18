@@ -24,7 +24,4 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<span><?php echo $element->title; ?></span>
 	<?php endif; ?>
 
-	<input type="hidden" name="group_id" value="0" />
-	<input type="text" placeholder="" data-target="group_id" data-id="<?php echo $element->id; ?>" class="wpdigi-auto-complete" />
-
 </span>

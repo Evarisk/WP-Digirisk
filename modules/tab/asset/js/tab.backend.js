@@ -28,6 +28,7 @@ var digi_tab = {
 			jQuery.post( ajaxurl, data, function( response ){
         jQuery( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
 				jQuery( ".wp-digi-content" ).html( response.data.template );
+				digi_global.init();
 
 				var object_name = action.replace( '-', '_' );
 				if ( window[object_name] && window[object_name].init ) {

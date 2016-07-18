@@ -59,9 +59,9 @@ class society_action {
 		$society = society_class::get()->show_by_type( $element_id );
 		$society->title = $title;
 
-		if ( !empty( $_POST['send_to_group_id'] ) ) {
-			$send_to_group_id = (int) $_POST['send_to_group_id'];
-			$society->parent_id = $_POST['send_to_group_id'];
+		if ( !empty( $_POST['parent_id'] ) ) {
+			$parent_id = (int) $_POST['parent_id'];
+			$society->parent_id = $_POST['parent_id'];
 		}
 
 		society_class::get()->update_by_type( $society );

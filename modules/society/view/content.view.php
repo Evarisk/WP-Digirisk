@@ -15,6 +15,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<div class="wp-digi-global-sheet-header wp-digi-global-sheet-header">
     <?php apply_filters( 'wpdigi_establishment_identity', $element, true ); ?>
 
+		<input type="hidden" name="group_id" value="0" />
+		<input type="text" placeholder="" data-target="group_id" data-id="<?php echo $element->id; ?>" class="wpdigi-auto-complete" />
+		
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
 			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
