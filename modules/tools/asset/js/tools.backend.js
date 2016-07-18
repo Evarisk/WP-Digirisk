@@ -1,7 +1,7 @@
 "use strict";
 
 var digi_tools = {
-	$,
+	$: undefined,
 
   event: function( $ ) {
 		digi_tools.$ = $;
@@ -31,12 +31,12 @@ var digi_tools = {
   reset: function( event, element ) {
     event.preventDefault();
 
-    if ( confirm ( digi_tools_confirm ) ) {
+    if ( window.confirm( window.digi_tools_confirm ) ) {
       digi_tools.$( element ).addClass( "wp-digi-loading" );
       digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
 
       var li = document.createElement( 'li' );
-      li.innerHTML = digi_tools_in_progress;
+      li.innerHTML = window.digi_tools_in_progress;
       digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
 
       var data = {
@@ -58,7 +58,7 @@ var digi_tools = {
       digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
 
       var li = document.createElement( 'li' );
-      li.innerHTML = digi_tools_in_progress;
+      li.innerHTML = window.digi_tools_in_progress;
       digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
 
       var data = {
