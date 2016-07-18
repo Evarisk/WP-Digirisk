@@ -55,6 +55,7 @@ class society_action {
 
 		$title = sanitize_text_field( $_POST['title'] );
 
+		$group_id = $element_id;
 		$society = society_class::get()->show_by_type( $element_id );
 		$society->title = $title;
 
@@ -65,9 +66,13 @@ class society_action {
 
 		society_class::get()->update_by_type( $society );
 
+		if ( $society->type !== 'digi-group' ) {
+			$group_id = $society->parent_id;
+		}
+
 		ob_start();
 		$display_mode = 'simple';
-		group_class::get()->display_society_tree( $display_mode, $society->id );
+		group_class::get()->display_society_tree( $display_mode, $group_id );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 

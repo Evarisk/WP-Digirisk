@@ -62,18 +62,10 @@ var digi_society = {
 		};
 
 		jQuery.post( ajaxurl, data, function( response ) {
-			if ( response.success ) {
-				jQuery( element ).removeClass( "wp-digi-loading" );
-				jQuery( 'input[name="wp-digi-workunit-name"]' ).removeClass( 'active' );
-				jQuery( 'textarea[name="wp-digi-workunit-content"]' ).removeClass( 'active' );
-
-				jQuery( ".wp-digi-workunit-action-container" ).addClass( "hidden" );
-
-				jQuery( ".wp-digi-workunit-" + response.data.id + " span.wp-digi-workunit-name > span" ).html( response.data.title );
-			}
-			else {
-
-			}
+			
+			jQuery( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
+			jQuery( element ).removeClass( "wp-digi-loading" );
+			jQuery( ".wp-digi-global-sheet-header .wp-digi-global-action-container" ).addClass( "hidden" );
 		}, "json");
 	},
 
