@@ -7,6 +7,6 @@
 		"**/core/odtPhpLibrary/**",
 		"**/core/assets/js/modernizr.custom.js",
 		"**/core/assets/js/progress-button.js",
-		"**/modules/transfer_datas/transfert-data.backend.js"
+		"**/modules/transfer_datas/assets/js/transfert-data.backend.js"
 	]
 }
