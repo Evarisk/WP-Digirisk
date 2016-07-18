@@ -15,7 +15,7 @@ class group_configuration_class extends singleton_util {
     $address = address_class::get()->show( !empty( $element->option['contact']['address'] ) ? max( $element->option['contact']['address'] ) : 0 );
 
     // Récupère le dernier numéro de téléphone
-    $phone = max( $element->option['contact']['phone'] );
+    $phone = !empty( $element->option['contact']['phone'] ) ? max( $element->option['contact']['phone'] ) : '';
 
     // Récupère le nom de l'utilisateur
     $user = \digi\user_class::get()->show( $element->option['user_info']['owner_id'] );
