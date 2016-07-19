@@ -40,7 +40,7 @@ class request_test {
 		$pattern = '\$_POST|\$_GET|\$_REQUEST';
 		if ( !empty( $lines ) ) {
 		  foreach ( $lines as $k => $line ) {
-				if ( !preg_match_all( '#' . $pattern . '#', $line ) ) {
+				if ( !preg_match_all( '#' . $pattern . '#', $line, $matches ) ) {
 					unset($lines[$k]);
 				}
 		  }
