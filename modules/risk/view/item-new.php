@@ -14,8 +14,8 @@
 
 				<span class="wp-digi-risk-select"><?php danger_category_class::get()->display_category_danger(); ?></span>
 
-				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="comment_date[]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
-				<span class="wp-digi-risk-comment" ><textarea name="comment_content[]" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
+				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="list_comment[0][comment_date]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
+				<span class="wp-digi-risk-comment" ><textarea name="list_comment[0][comment_content]" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
 
 				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" >
 					<button class="progress-button" data-style="fill" data-horizontal><i class="dashicons dashicons-plus"></i></button>

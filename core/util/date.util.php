@@ -13,11 +13,8 @@ class date_util extends singleton_util {
 			$date .= " 00:00:00";
 		}
 
-		echo $date;
-
 		$date = str_replace( '/', '-', $date );
 		$date = date("Y-m-d h:i:s", strtotime( $date ) );
-		echo $date;
 		return $date;
 	}
 }

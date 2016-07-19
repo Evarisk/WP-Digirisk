@@ -29,9 +29,7 @@ class risk_evaluation_comment_action {
   * @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_save_risk_evaluation_comment() {
-    $list_comment_content = !empty( $_POST['comment_content'] ) ? (array) $_POST['comment_content' ] : array();
-    $list_comment_date = !empty( $_POST['comment_date'] ) ? (array) $_POST['comment_date' ] : array();
-    $list_comment_id = !empty( $_POST['comment_id'] ) ? (array) $_POST['comment_id' ] : array();
+    $list_comment = !empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment' ] : array();
 
 		$risk_evaluation_id = risk_evaluation_class::get()->get_last_entry();
 		$risk_id = risk_class::get()->get_last_entry();
@@ -40,20 +38,20 @@ class risk_evaluation_comment_action {
 			$risk_id = (int) $_POST['risk_id'];
 		}
 
-		if ( !empty( $list_comment_content ) ) {
-		  foreach ( $list_comment_content as $key => $element ) {
-				if ( !empty( $element ) ) {
+		if ( !empty( $list_comment ) ) {
+		  foreach ( $list_comment as $key => $element ) {
+				if ( !empty( $element['comment_content'] ) ) {
 					$data = array(
 						'author_id' => get_current_user_id(),
 						'parent_id' => $risk_evaluation_id,
 						'post_id' => $risk_id,
 						'status' => '-34070',
-						'date' => sanitize_text_field( date_util::get()->formatte_date( $list_comment_date[$key] ) ),
-						'content' => sanitize_text_field( $element ),
+						'date' => sanitize_text_field( date_util::get()->formatte_date( $element['comment_date'] ) ),
+						'content' => sanitize_text_field( $element['comment_content'] ),
 					);
 
-					if ( !empty( $list_comment_id[$key] ) && $list_comment_id[$key] != 0 ) {
-						$data['id'] = (int) $list_comment_id[$key];
+					if ( !empty( $element['comment_id'] ) ) {
+						$data['id'] = (int)  $element['comment_id'];
 					}
 
 					risk_evaluation_comment_class::get()->update( $data );

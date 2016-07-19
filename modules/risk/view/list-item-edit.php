@@ -21,6 +21,7 @@ if ( $risk_definition != null ):
 								$userdata = get_userdata( $comment->author_id );
 								echo $userdata->display_name;
 								?>
+								<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][comment_id]" value="<?php echo $comment->id; ?>" />
 								<input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][comment_date]" value="<?php echo date( 'd/m/Y', strtotime( $comment->date ) ); ?>" /> : <input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][comment_content]" value="<?php echo $comment->content; ?>" />
 								<a href="#" data-id="<?php echo $comment->id; ?>" data-risk-id="<?php echo $risk_id; ?>" data-nonce="<?php echo wp_create_nonce( 'ajax_delete_risk_comment_' . $risk_id . '_' . $comment->id ); ?>" class="wp-digi-action wp-digi-action-comment-delete dashicons dashicons-no-alt" ></a>
 							</li>

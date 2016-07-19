@@ -46,8 +46,8 @@ var digi_risk = {
           element_required = true;
         }
 
-        if ( !digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="comment_date[]"]' ).val() ) {
-          digi_risk.$( element ).closest( 'form' ).find( 'input[name="comment_date[]"]' ).css( 'border', 'solid red 2px' );
+        if ( !digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="list_comment[0][comment_date]"]' ).val() ) {
+          digi_risk.$( element ).closest( 'form' ).find( 'input[name="list_comment[0][comment_date]"]' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
 
