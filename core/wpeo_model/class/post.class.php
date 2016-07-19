@@ -153,7 +153,7 @@ class post_class extends singleton_util {
 			'posts_per_page' 	=> -1,
 		);
 
-		$args = array_merge( $args, $args_where );
+		$args = wp_parse_args( $args, $args_where );
 		$array_post = get_posts( $args );
 
 		if( !empty( $array_post ) ) {

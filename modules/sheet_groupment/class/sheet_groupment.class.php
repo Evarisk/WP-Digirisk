@@ -102,7 +102,7 @@ class sheet_groupment_class extends singleton_util {
   	/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
   	$group_sheet_details[ 'risq80' ] = $group_sheet_details[ 'risq51' ] = $group_sheet_details[ 'risq48' ] = $group_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
   	/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to group	*/
-		$risk_list = risk_class::get()->index( array( 'parent_id' => $group->id ) );
+		$risk_list = risk_class::get()->index( array( 'post_parent' => $group->id ) );
 
 		$risk_list_to_order = array();
 		foreach ( $risk_list as $risk ) {

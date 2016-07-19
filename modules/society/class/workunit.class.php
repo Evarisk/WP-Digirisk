@@ -85,7 +85,7 @@ class workunit_class extends post_class {
 		return $work_unit;
 	}
 
-	
+
 
 	/**
 	 * Affiche une fiche d'unité de travail à partir d'un identifiant donné / Display a work unit from given identifier
@@ -197,7 +197,7 @@ class workunit_class extends post_class {
 								$the_recommendation_category = recommendation_category_class::get()->show( $the_recommendation->parent_id );
 
 								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
-								$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
+								$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ) );
 								$picture = '';
 								if ( is_file( $picture_final_path ) ) {
 									$picture = array(
@@ -208,6 +208,7 @@ class workunit_class extends post_class {
 										),
 									);
 								}
+
 								$affected_recommendation[ $the_recommendation->id ] = array(
 									'recommandationCategoryIcon' => $picture,
 									'recommandationCategoryName' => $the_recommendation_category->name,
@@ -274,13 +275,7 @@ class workunit_class extends post_class {
 		/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
 		$workunit_sheet_details[ 'risq80' ] = $workunit_sheet_details[ 'risq51' ] = $workunit_sheet_details[ 'risq48' ] = $workunit_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
 		/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to workunit	*/
-		$risk_list = array();
-
-		if ( !empty( $workunit->option[ 'associated_risk' ] ) ) {
-			$risk_list = risk_class::get()->index( array(
-				'include' => $workunit->option[ 'associated_risk' ],
-			) );
-		}
+		$risk_list = risk_class::get()->index( array( 'post_parent' => $workunit->id ) );
 
 		$risk_list_to_order = array();
 		foreach ( $risk_list as $risk ) {
@@ -304,8 +299,7 @@ class workunit_class extends post_class {
 
 		if ( !empty( $risk_list_to_order ) ) {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = scale_util::get_scale( $risk_for_export[ 'niveauRisque' ] );
-
+				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk_level] ) ? evaluation_method_class::get()->list_scale[$risk_level] : '';
 				$workunit_sheet_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
 			}
 		}

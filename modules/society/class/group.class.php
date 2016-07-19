@@ -316,7 +316,7 @@ class group_class extends post_class {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
 		// 	return array();
 
-		$risk_list = risk_class::get()->index( array( 'parent_id' => $element->id ) );
+		$risk_list = risk_class::get()->index( array( 'post_parent' => $element->id ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
 			$complete_risk = risk_class::get()->get_risk( $risk->id );
