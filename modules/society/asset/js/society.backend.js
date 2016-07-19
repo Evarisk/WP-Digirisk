@@ -38,6 +38,7 @@ var digi_society = {
 			digi_society.$( '.wp-digi-societytree-right-container' ).html( response.data.template );
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 			window.digi_global.init( digi_society.$ );
+			window.digi_risk.init( false, digi_society.$ );
 		} );
 	},
 

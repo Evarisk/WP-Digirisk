@@ -27,7 +27,6 @@ var digi_risk = {
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-delete', function( event ) { digi_risk.delete_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-load', function( event ) { digi_risk.load_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-edit', function( event ) { digi_risk.edit_risk( event, digi_risk.$( this ) ); } );
-    digi_risk.$( document ).on( 'click', '.wp-digi-action-comment-delete', function( event ) { digi_risk.delete_comment( event, digi_risk.$( this ) ); } );
 	},
 
 	create_risk: function( instance ) {
