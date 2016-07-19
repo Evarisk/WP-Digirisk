@@ -9,4 +9,4 @@
 */
 
 DEFINE( 'WORDPRESS_VALIDATOR_VERSION', '0.1.0.0' );
-DEFINE( 'PLUGIN_PATH', realpath( __DIR__ ) . '' );
+DEFINE( 'PLUGIN_PATH', '\\home\\travis\\build\\Evarisk\\Digirisk\\' );
