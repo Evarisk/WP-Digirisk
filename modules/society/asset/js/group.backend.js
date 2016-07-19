@@ -70,7 +70,7 @@ var digi_group = {
 			digi_group.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
 			digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
-			window.digi_global.init();
+			window.digi_global.init( digi_group.$ );
 		} );
 	},
 
