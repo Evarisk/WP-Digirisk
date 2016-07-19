@@ -3,7 +3,7 @@
 	<?php
 	if ( !empty( $workunit->thumbnail_id ) ) :
 		echo wp_get_attachment_image( $workunit->thumbnail_id, 'digirisk-element-miniature', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail', )  );
-		echo do_shortcode( "[wpeo_gallery element_id='" . $workunit->id . "' global='wpdigi_workunit_ctr' ]" );
+		echo do_shortcode( "[wpeo_gallery element_id='" . $workunit->id . "' global='workunit_class' ]" );
 	else :
 	?>
 		<i data-nonce="<?php echo wp_create_nonce( 'ajax_file_association_' . $workunit->id ); ?>" data-id="<?php echo $workunit->id; ?>" data-type="<?php echo $workunit->type; ?>" class="wp-digi-element-thumbnail wp-digi-workunit-thumbnail wpeo-upload-media dashicons dashicons-format-image" ></i>
