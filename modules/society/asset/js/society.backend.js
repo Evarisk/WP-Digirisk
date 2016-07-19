@@ -37,7 +37,7 @@ var digi_society = {
 			digi_society.$( '.wp-digi-societytree-right-container' ).removeClass( "wp-digi-bloc-loading" );
 			digi_society.$( '.wp-digi-societytree-right-container' ).html( response.data.template );
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
-			window.digi_global.init();
+			window.digi_global.init( digi_society.$ );
 		} );
 	},
 
