@@ -31,7 +31,7 @@ var digi_tab = {
 
 				var object_name = action.replace( '-', '_' );
 				if ( window[object_name] && window[object_name].init ) {
-					window[object_name].init(false);
+					window[object_name].init( false, digi_tab.$ );
 				}
 			}, 'json');
 		}
