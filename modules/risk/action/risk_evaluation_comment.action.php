@@ -43,15 +43,12 @@ class risk_evaluation_comment_action {
 		if ( !empty( $list_comment_content ) ) {
 		  foreach ( $list_comment_content as $key => $element ) {
 				if ( !empty( $element ) ) {
-					// On change les slasles dans la date en virgule
-					$comment_date = str_replace( '/', ',', $list_comment_date[$key] );
-
 					$data = array(
 						'author_id' => get_current_user_id(),
 						'parent_id' => $risk_evaluation_id,
 						'post_id' => $risk_id,
 						'status' => '-34070',
-						'date' => sanitize_text_field( $comment_date ),
+						'date' => sanitize_text_field( date_util::get()->formatte_date( $list_comment_date[$key] ) ),
 						'content' => sanitize_text_field( $element ),
 					);
 
