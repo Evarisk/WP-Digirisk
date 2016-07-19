@@ -36,7 +36,7 @@ var digi_risk = {
       'beforeSubmit': function() {
         var element_required = false;
 
-        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="method_evaluation_id"]' ).val() === 0 ) {
+        if ( digi_risk.$ ( element ).closest( 'form' ).find( 'input[name="method_evaluation_id"]' ).val() === '0' ) {
           digi_risk.$( element ).closest( 'form' ).find( '.wp-digi-risk-list-column-cotation' ).css( 'border', 'solid red 2px' );
           element_required = true;
         }
@@ -144,7 +144,7 @@ var digi_risk = {
 		var element_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' )[0];
 		element_cotation.className = element_cotation.className.replace( /wp-digi-risk-level-[0-4]/, 'wp-digi-risk-level-0' );
 		digi_risk.$( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
-		digi_risk.$( '.wp-digi-risk-item-new input[name="digi_method"]').val( '' );
+		digi_risk.$( '.wp-digi-risk-item-new input[name="method_evaluation_id"]').val( '0' );
 		window.digi_danger.reset_create_form();
 	}
 };
