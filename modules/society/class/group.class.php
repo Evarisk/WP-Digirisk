@@ -95,32 +95,13 @@ class group_class extends post_class {
 	 *
 	 * @param string $mode Optionnal. Default: simple. Le mode d'affichage pour l'arborescence de la société / The mode of display for society tree
 	 */
-	public function display_society_tree( $mode = 'simple', $default_selected_group_id = null ) {
+	public function display_society_tree( $mode = 'simple', $group_id = 0 ) {
 		/**	Get existing groups for main selector display	*/
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
-		$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
 
-		if (!empty( $_REQUEST['current_workunit_id'] ) ) {
-			$workunit_id = (int) $_REQUEST['current_workunit_id'];
+		if ( $group_id === 0 ) {
+			$group_id = ( !empty( $group_list ) && !empty( $group_list[0] ) ) ? $group_list[0]->id : 0;
 		}
-
-		add_filter( 'wpdigi_default_dashboard_content', function( $default ) {
-			if (!empty( $_REQUEST['current_workunit_id'] ) ) {
-				workunit_class::get()->display( $_REQUEST['current_workunit_id'] );
-			}
-			else {
-				$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
-
-				$default_selected_group_id = !empty( $group_list ) ? $group_list[0]->id : 0;
-
-				ob_start();
-				group_class::get()->display( $default_selected_group_id );
-				$default = ob_get_clean();
-			}
-
-			return $default;
-		}, 12);
-
 		/**	Affichage du bloc société (groupement principal + unité de travail) / Display a society bloc (main group + work unit) 	*/
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, ( !empty( $mode ) && in_array( $mode, array( 'simple', 'full',  ) ) ? $mode : 'simple' ), 'society/society', 'tree' ) );
 	}
@@ -183,9 +164,9 @@ class group_class extends post_class {
 	* @param string $class La classe pour l'HTML
 	*/
 	public function render_list_item( $default_selected_group_id, $group_id = 0, $class = '' ) {
-		if ( !is_int( $default_selected_group_id ) || !is_int( $group_id ) || !is_string( $class ) ) {
-			return false;
-		}
+		// if ( !is_int( $default_selected_group_id ) ) {
+		// 	return false;
+		// }
 
 		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => $group_id, 'post_status' => array( 'publish', 'draft', ), ), false );
 
@@ -349,44 +330,4 @@ class group_class extends post_class {
 
 		return $element_duer_details;
 	}
-
-	/**
-	 * Construit l'affichage des onglets existant dans une unité de travail / Build the existing tab for workunit
-	 *
-	 * @param object $workunit L'unité de travail actuellement en cours d'édition / The current work unit
-	 * @param string $default_tab L'onglet a sélectionner automatiquement : The default tab to select
-	 */
-	 public function display_group_tab( $group, $default_tab ) {
-		 if ( !is_object( $group ) || !is_string( $default_tab ) ) {
-			 return false;
-		 }
-
-	 	/**	Définition de la liste des onglets pour les unités de travail - modifiable avec un filtre / Define a tab list for work unit - editable list through filter	*/
-	 	$tab_list = apply_filters( 'wpdigi_group_sheet_tab', array(), $group );
-
-	 	/**	Affichage des onglets définis pour les unités de travail / Display defined tabs for work unit	*/
-	 	require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group/tab', 'list' ) );
-	 }
-
-	 /**
-	  * Gestion de l'affichage du contenu des onglets pour une unité de travail / Manage content display into workunit
-	  *
-	  * @param object $workunit La définition complète de l'unité de travail sur laquelle on se trouve / The complete definition for the current workunit we are on
-	  * @param string $tab_to_display Permet de sélectionner les données a afficher ( par défaut affiche un shortcode basé sur cet valeur ) / Allows to display tab content to display ( Display a shortcode composed with this value by default )
-	  */
-	 public function display_group_tab_content( $group, $tab_to_display ) {
-		 if ( !is_object( $group ) || !is_string( $tab_to_display ) ) {
-			 return false;
-		 }
-
-	 	/**	Application d'un filtre d'affichage selon la partie a afficher demandée par l'utilisateur / Apply filter for display user's requested part	*/
-	 	$output = apply_filters( 'wpdigi_group_sheet_content', '', $group, $tab_to_display );
-	 	/**	Par défaut on va afficher un shortcode ayant pour clé la valeur de $tab_to_display / By default display a shortcode composed with $tab_to_display	*/
-	 	if ( empty( $output ) ) {
-	 		require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group/tab', 'default' ) );
-	 	}
-	 	else {
-	 		echo $output;
-	 	}
-	 }
 }

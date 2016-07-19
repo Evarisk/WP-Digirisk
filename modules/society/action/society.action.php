@@ -71,8 +71,7 @@ class society_action {
 		}
 
 		ob_start();
-		$display_mode = 'simple';
-		group_class::get()->display_society_tree( $display_mode, $group_id );
+		group_class::get()->display_society_tree( "simple", $group_id );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 
