@@ -205,19 +205,18 @@ class group_duer_class extends singleton_util {
 		$risk_per_element = array();
 
 		if ( !empty( $list_risk ) ) {
-		  foreach ( $list_risk as $element ) {
-				$final_level = !empty( evaluation_method_class::get()->list_scale[$element[ 'niveauRisque' ]] ) ? evaluation_method_class::get()->list_scale[$element[ 'niveauRisque' ]] : '';
-				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $element;
-				$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $element;
-				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $element;
+		  foreach ( $list_risk as $risk ) {
+				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::get()->list_scale[$risk[ 'niveauRisque' ]] : '';
+				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk;
+				$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $risk;
+				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk;
 
-				if ( !isset( $risk_per_element[ $element[ 'idElement' ] ] ) ) {
-					$risk_per_element[ $element[ 'idElement' ] ][ 'quotationTotale' ] = 0;
+				if ( !isset( $risk_per_element[ $risk[ 'idElement' ] ] ) ) {
+					$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] = 0;
 				}
-				$risk_per_element[ $element[ 'idElement' ] ][ 'quotationTotale' ] += $element[ 'quotationRisque' ];
+				$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] += $risk[ 'quotationRisque' ];
 		  }
 		}
-
 		$data_to_document[ 'risqueFiche' ][ 'value' ] = group_class::get()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
 
 		return $data_to_document;

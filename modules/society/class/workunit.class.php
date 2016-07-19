@@ -139,7 +139,7 @@ class workunit_class extends post_class {
 					'type'		=> 'picture',
 					'value'		=> $picture_final_path,
 					'option'	=> array(
-						'size'	=> 8,
+						'size'	=> 2,
 					),
 				);
 			}
@@ -223,7 +223,7 @@ class workunit_class extends post_class {
 									'type'		=> 'picture',
 									'value'		=> $picture_final_path,
 									'option'	=> array(
-										'size'	=> 8,
+										'size'	=> 2,
 									),
 								);
 							}
