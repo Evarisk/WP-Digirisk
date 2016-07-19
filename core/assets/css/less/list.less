@@ -23,12 +23,18 @@
 	&.navigation {
 		background: @c2;
 		text-align: left !important;
-		padding: 12px;
+		padding: 0;
 		text-transform: uppercase;
 		border: 0;
+		line-height: 50px;
 		color: rgba(255,255,255,0.6);
+		.wpeo-upload-media {
+			float: left;
+		}
 		i {
 			color: rgba(255,255,255,0.4);
+			line-height: 50px;
+			margin-right: 10px;
 		}
 	}
 }
@@ -67,7 +73,7 @@
 				&:first-child {
 					display: inline-block;
 				}
-				&.wp-digi-new-group-action { 
+				&.wp-digi-new-group-action {
 					width: 50px;
 					float: right;
 					a {
@@ -95,7 +101,7 @@
 				a {
 					font-size: 14px;
 					line-height: 1.6;
-				}		
+				}
 			}
 		}
 		.active {
