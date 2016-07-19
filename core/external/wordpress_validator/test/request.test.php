@@ -18,7 +18,7 @@ class request_test {
 
 		if ( !empty( $this->list_file ) ) {
 		  foreach ( $this->list_file as $file_path ) {
-				$file_path = str_replace( '/', '\\', $file_path );
+				// $file_path = str_replace( '/', '\\', $file_path );
 				if ( !in_array( $file_path, $this->exclude_path ) ) {
 					$lines = file( $file_path );
 					$string_post_unsecured[$file_path] = array();
