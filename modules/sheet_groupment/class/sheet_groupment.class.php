@@ -102,12 +102,7 @@ class sheet_groupment_class extends singleton_util {
   	/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
   	$group_sheet_details[ 'risq80' ] = $group_sheet_details[ 'risq51' ] = $group_sheet_details[ 'risq48' ] = $group_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
   	/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to group	*/
-		$risk_list = array();
-		if ( !empty( $group->option[ 'associated_risk'] ) ) {
-			$risk_list = risk_class::get()->index( array(
-				'include' => $group->option[ 'associated_risk' ],
-			) );
-		}
+		$risk_list = risk_class::get()->index( array( 'parent_id' => $group->id ) );
 
 		$risk_list_to_order = array();
 		foreach ( $risk_list as $risk ) {
@@ -132,14 +127,13 @@ class sheet_groupment_class extends singleton_util {
 		if ( !empty( $risk_list_to_order ) ) {
 			$result_treshold = scale_util::get_scale( 'score' );
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( $result_treshold[ $risk_level ] ) ? $result_treshold[ $risk_level ] : '';
+				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk_level] ) ? evaluation_method_class::get()->list_scale[$risk_level] : '';
 				$group_sheet_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
 			}
 		}
 
 		/**	Permet d'étendre les donnée que l'on souhaite intégrer au document / Allows to extend data we want to send to the final document	*/
 		$group_sheet_details = apply_filters( 'wpdigi_group_sheet_details', $group_sheet_details );
-
 
 		/**	Call document creation function / Appel de la fonction de création du document	*/
 		$document_creation_response = $document_controller->create_document( $group, array( 'fiche_de_groupement' ), $group_sheet_details );

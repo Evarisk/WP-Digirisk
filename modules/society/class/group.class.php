@@ -203,9 +203,9 @@ class group_class extends post_class {
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 */
 	public function get_element_tree_risk( $element ) {
-		if ( !is_object( $element ) ) {
-			return false;
-		}
+		// if ( !is_object( $element ) ) {
+		// 	return false;
+		// }
 
 		$risks_in_tree = array();
 
@@ -233,8 +233,8 @@ class group_class extends post_class {
 	* @param array extra_params ?
 	*/
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
-		if ( !is_object( $element ) || !is_string( $tabuliaton ) || !is_array( $extra_params ) ) {
-			return false;
+		if ( !is_object( $element ) ) {
+			return array();
 		}
 
 		$element_children = array();
@@ -313,12 +313,10 @@ class group_class extends post_class {
 	 * @return array La liste des risques construite pour l'export / Risks' list builded for export
 	 */
 	public function build_risk_list_for_export( $element ) {
-		if ( empty( $element->option[ 'associated_risk' ] ) )
-			return array();
+		// if ( empty( $element->option[ 'associated_risk' ] ) )
+		// 	return array();
 
-		$risk_list = risk_class::get()->index( array(
-			'include' => $element->option[ 'associated_risk' ],
-		) );
+		$risk_list = risk_class::get()->index( array( 'parent_id' => $element->id ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
 			$complete_risk = risk_class::get()->get_risk( $risk->id );
@@ -343,7 +341,7 @@ class group_class extends post_class {
 
 		if ( !empty( $risk_list_to_order ) ) {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( $result_treshold[ $risk_level ] ) ? $result_treshold[ $risk_level ] : '';
+				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk_level] ) ? evaluation_method_class::get()->list_scale[$risk_level] : '';
 				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
 				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
 			}

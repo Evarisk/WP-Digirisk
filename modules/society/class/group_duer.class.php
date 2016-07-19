@@ -139,7 +139,7 @@ class group_duer_class extends singleton_util {
 			),
 		);
 
-		$level_list = array( 48, 51, 80, );
+		$level_list = array( 0, 48, 51, 80, );
 		foreach ( $level_list as $level ) {
 			$skeleton[ 'risq' . $level ] = array(
 				'type'	=> 'segment',
@@ -179,14 +179,16 @@ class group_duer_class extends singleton_util {
 	* @return array Les données qui seront insérées dans le document
 	*/
 	public function fill_data_duer( $data_duer, $data_to_document, $element ) {
-		if ( !is_array( $data_duer ) || !is_array( $data_to_document ) || !is_object( $element ) ) {
-			return false;
-		}
+		// if ( !is_array( $data_duer ) || !is_array( $data_to_document ) || !is_object( $element ) ) {
+		// 	return false;
+		// }
 
 		$data_to_document = array_merge( $data_to_document, $data_duer );
+		$data_to_document['nomEntreprise'] = $data_duer['company_name'];
 		$data_to_document['identifiantElement'] = $element->option['unique_identifier'];
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
 		$data_to_document['dateGeneration'] = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
+		$data_to_document['elementParHierarchie']['value'] = group_class::get()->get_element_sub_tree( $element );
 		return $data_to_document;
 	}
 
@@ -204,7 +206,7 @@ class group_duer_class extends singleton_util {
 
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $element ) {
-				$final_level = evaluation_method_class::get()->list_scale[$element[ 'niveauRisque' ]];
+				$final_level = !empty( evaluation_method_class::get()->list_scale[$element[ 'niveauRisque' ]] ) ? evaluation_method_class::get()->list_scale[$element[ 'niveauRisque' ]] : '';
 				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $element;
 				$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $element;
 				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $element;
@@ -215,6 +217,8 @@ class group_duer_class extends singleton_util {
 				$risk_per_element[ $element[ 'idElement' ] ][ 'quotationTotale' ] += $element[ 'quotationRisque' ];
 		  }
 		}
+
+		$data_to_document[ 'risqueFiche' ][ 'value' ] = group_class::get()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
 
 		return $data_to_document;
 	}

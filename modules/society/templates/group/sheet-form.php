@@ -79,7 +79,7 @@ In the current document you will find:
 		<div class="form-element"><label><?php _e( 'Start audit date', 'digirisk' ); ?><input type="text" class="wpdigi_date" value="<?php echo mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ); ?>" name="wpdigi_duer[audit_start_date]" /></label></div>
 		<div class="form-element"><label><?php _e( 'End audit date', 'digirisk' ); ?><input type="text" class="wpdigi_date" value="<?php echo mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ); ?>" name="wpdigi_duer[audit_end_date]" /></label></div>
 		<div class="form-element"><label><?php _e( 'Transmitter', 'digirisk' ); ?><input type="text" value="<?php echo $transmitter_infos; ?>" name="wpdigi_duer[document_transmitter]" /></label></div>
-		<div class="form-element"><label><?php _e( 'Company name', 'digirisk' ); ?><input type="text" value="<?php echo $element->title; ?>" name="wpdigi_duer[company name]" /></label></div>
+		<div class="form-element"><label><?php _e( 'Company name', 'digirisk' ); ?><input type="text" value="<?php echo $element->title; ?>" name="wpdigi_duer[company_name]" /></label></div>
 		<div class="form-element"><label><?php _e( 'Recipient', 'digirisk' ); ?><input type="text" value="" name="wpdigi_duer[document_recipient]" /></label></div>
 		<div class="form-element"><label><?php _e( 'Phone', 'digirisk' ); ?><input type="text" value="" name="wpdigi_duer[document_recipient_phone]" /></label></div>
 		<div class="form-element"><label><?php _e( 'Cellphone', 'digirisk' ); ?><input type="text" value="" name="wpdigi_duer[document_recipient_cellphone]" /></label></div>
