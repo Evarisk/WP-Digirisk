@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Digirisk V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-19 15:17+0100\n"
-"PO-Revision-Date: 2016-07-19 15:19+0100\n"
+"POT-Creation-Date: 2016-07-19 15:23+0100\n"
+"PO-Revision-Date: 2016-07-19 15:24+0100\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -40,6 +40,26 @@ msgstr ""
 #, php-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
+
+#: core\assets\js/define-string.js.php:4
+msgid "Confirm delete ?"
+msgstr "Confirmer la suppression ?"
+
+#: core\assets\js/define-string.js.php:6
+msgid "En cours..."
+msgstr "En cours..."
+
+#: core\assets\js/define-string.js.php:7
+msgid "Terminé"
+msgstr "Terminé"
+
+#: core\assets\js/define-string.js.php:8
+msgid ""
+"Attention, avant cette opération, il est recommendé de faire une sauvegarde "
+"de votre base de donnée."
+msgstr ""
+"Attention, avant cette opération, il est recommendé de faire une sauvegarde "
+"de votre base de donnée"
 
 #: modules\_evarisk_5199/include/config.php:45
 msgid "Risque Faible"
@@ -2002,22 +2022,6 @@ msgstr ""
 
 #~ msgid "D&eacute;s&eacute;lectionner"
 #~ msgstr "D&eacute;s&eacute;lectionner"
-
-#~ msgid "Confirm delete ?"
-#~ msgstr "Confirmer la suppression ?"
-
-#~ msgid "En cours..."
-#~ msgstr "En cours..."
-
-#~ msgid "Terminé"
-#~ msgstr "Terminé"
-
-#~ msgid ""
-#~ "Attention, avant cette opération, il est recommendé de faire une "
-#~ "sauvegarde de votre base de donnée."
-#~ msgstr ""
-#~ "Attention, avant cette opération, il est recommendé de faire une "
-#~ "sauvegarde de votre base de donnée"
 
 #~ msgid "File does not exists. We are working on re-generation function"
 #~ msgstr ""
