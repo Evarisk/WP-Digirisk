@@ -1,14 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Module bootstrap file
- * @author Evarisk development team <dev@evarisk.com>
- * @version 1.0
- */
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
 DEFINE( 'TOOLS_VERSION', '1.0');
 
 /**	Définition des constantes pour le module / Define constant for module	*/
@@ -23,7 +14,3 @@ DEFINE( 'TOOLS_TEMPLATES_MAIN_DIR', TOOLS_PATH . '/templates/');
 /**	Définition des types d'éléments ( post type ) à générer / Define elements types ( post type ) to generate */
 DEFINE( 'TOOLS_POSTTYPE_MAIN', 'digi-group' );
 DEFINE( 'TOOLS_POSTTYPE_SUB', 'digi-workunit' );
-
-/**	Inclusion des controlleurs principaux du module / Include main module controller	*/
-include( TOOLS_PATH . '/controller/tools.controller.01.php' );
-include( TOOLS_PATH . '/action/tools.action.01.php' );

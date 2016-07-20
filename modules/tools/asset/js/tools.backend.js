@@ -33,11 +33,11 @@ var digi_tools = {
 
     if ( window.confirm( window.digi_tools_confirm ) ) {
       digi_tools.$( element ).addClass( "wp-digi-loading" );
-      digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
+      digi_tools.$( element ).closest( 'div' ).find( 'ul' ).html('');
 
       var li = document.createElement( 'li' );
       li.innerHTML = window.digi_tools_in_progress;
-      digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
+      digi_tools.$( element ).closest( 'div' ).find( 'ul' ).append( li );
 
       var data = {
         action: 'reset_method_evaluation',
@@ -52,11 +52,11 @@ var digi_tools = {
 	  event.preventDefault();
 
     digi_tools.$( element ).addClass( "wp-digi-loading" );
-    digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).html('');
+    digi_tools.$( element ).closest( 'div' ).find( 'ul' ).html('');
 
     var li = document.createElement( 'li' );
     li.innerHTML = window.digi_tools_in_progress;
-    digi_tools.$( element ).closest( '.wrap' ).find( 'ul' ).append( li );
+    digi_tools.$( element ).closest( 'div' ).find( 'ul' ).append( li );
 
     var data = {
       action: 'compil_risk_list',
