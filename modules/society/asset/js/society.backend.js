@@ -19,6 +19,7 @@ var digi_society = {
 	identity_edition_mode: function( event, element ) {
 		digi_society.$( element ).closest( '.wp-digi-global-sheet-header' ).find( ".wp-digi-global-action-container" ).removeClass( "hidden" );
 		digi_society.$( element ).addClass( "active" );
+		digi_global.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Enregistrer' );
 	},
 
 	load_society: function( event, element ) {
@@ -65,6 +66,7 @@ var digi_society = {
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 			digi_society.$( element ).removeClass( "wp-digi-loading" );
 			digi_society.$( ".wp-digi-global-sheet-header .wp-digi-global-action-container" ).addClass( "hidden" );
+			digi_society.$( ".wp-digi-global-sheet-header .wp-list-search input" ).val( '' );
 		}, "json");
 	},
 
