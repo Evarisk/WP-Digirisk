@@ -11,7 +11,7 @@
 	<!-- Le bloc des utilisateurs à affecter -->
 	<div>
 
-		<?php do_shortcode( '[digi-search id="' . $workunit->id . '" next-action="display_user_assigned" type=".digi.user" target="wp-form-user-to-assign"]' ); ?>
+		<?php do_shortcode( '[digi-search id="' . $workunit->id . '" next-action="display_user_assigned" type="user" target="wp-form-user-to-assign"]' ); ?>
 		<!-- La liste des utilisateurs à affecter -->
 		<?php require( USERS_VIEW . '/list-user-to-assign.php' ); ?>
 	</div>

@@ -7,15 +7,23 @@ class search_class extends singleton_util {
   protected function construct() {}
 
 	public function search( $data ) {
-		$list_user = array();
+		$list = array();
 
-		$list_user = get_users( array(
-			'fields' => 'ID',
-			'search' => '*' . $data['term'] . '*',
-			'search_columns' => array( 'user_login', 'display_name', 'user_email' ),
-		) );
+		if ( $data['type'] === 'user' ) {
+			$list = get_users( array(
+				'fields' => 'ID',
+				'search' => '*' . $data['term'] . '*',
+				'search_columns' => array( 'user_login', 'display_name', 'user_email' ),
+			) );
+		}
+		else if ( $data['type'] === 'post' ) {
+			$list = $data['class']::get()->search( $data['term'], array(
+				'option' => array( '_wpdigi_unique_identifier' ),
+				'post_title'
+			) );
+		}
 
-		return $list_user;
+		return $list;
 	}
 }
 

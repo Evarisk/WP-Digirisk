@@ -71,6 +71,7 @@ var digi_group = {
 			digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
 			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
 			window.digi_global.init( digi_group.$ );
+			window.digi_search.event( digi_group.$ );
 		} );
 	},
 

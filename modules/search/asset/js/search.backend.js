@@ -14,32 +14,38 @@ var digi_search = {
 		* string append-to : Le bloc ou sera affiche le rendu
 		*/
 		digi_search.$.each( digi_search.$( '.wp-list-search input' ), function( key, element ) {
+			// Automatiser la source
 			var list_option = {
-				'source': 'admin-ajax.php?action=digi_search&next_action=' + digi_search.$( element ).data( "next-action" ) + '&id=' + digi_search.$( element ).data( "id" ) + '&type=' + digi_search.$( element ).data( "type" ),
+				'source': 'admin-ajax.php?action=digi_search'
+									+ '&next_action='	+ digi_search.$( element ).data( "next-action" )
+									// + '&field=' 			+ digi_search.$( element ).data( 'field' )
+									+ '&class=' 			+ digi_search.$( element ).data( 'class' )
+									+ '&id=' 					+ digi_search.$( element ).data( "id" )
+									+ '&type=' 				+ digi_search.$( element ).data( "type" ),
 				'minLength': 0,
 			};
 
-			if ( digi_search.$ ( element ).data( 'target' ) !== undefined ) {
+			if ( digi_search.$ ( element ).data( 'target' ) ) {
 				list_option.search = function( event, ui ) {
 					digi_search.$( '.' + digi_search.$( element ).data( 'target' ) ).addClass( 'wp-digi-bloc-loading' );
 				};
 
 				list_option.response = function( event, response ) {
-					console.log(response);
 					digi_search.$( '.' + digi_search.$( element ).data( 'target' ) ).replaceWith( response.content[1].template );
 				};
 
 				list_option.open = function( event, ui ) {
 					digi_search.$( element ).autocomplete( 'close' );
 				};
-
 			}
 
-			// if( digi_search.$( element ).data( 'target' ) !== undefined ) {
-			// 	list_option.select = function( event, ui ) {
-			// 		digi_search.$( 'input[name="' + digi_search.$( element ).data('target') + '"]' ).val( ui.item.id );
-			// 	};
-			// }
+			if( digi_search.$( element ).data( 'field' ) ) {
+				list_option.select = function( event, ui ) {
+					digi_search.$( 'input[name="' + digi_search.$( element ).data('field') + '"]' ).val( ui.item.id );
+					digi_global.$( '.wp-digi-group-action-container' ).removeClass( "hidden" );
+        	digi_global.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
+				};
+			}
 
 			digi_search.$( element ).autocomplete( list_option );
 		} );
