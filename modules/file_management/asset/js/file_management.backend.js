@@ -24,12 +24,7 @@ var file_management = {
     window.wp.media.model.settings.post.id = file_management.$( element ).data( 'id' );
 
     if( file_management.$( element ).find( '.wpeo-gallery' ).length === 0 ) {
-      if( !file_management.file_frame ) {
-        file_management.load_media_upload( element );
-      }
-      else {
-        file_management.open_media_upload();
-      }
+      file_management.load_media_upload( element );
     }
     else {
       window.wpeo_gallery.open( element );
