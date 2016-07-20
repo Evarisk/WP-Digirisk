@@ -14,9 +14,7 @@ class third_class extends post_class {
 	/**
 	* Le constructeur
 	*/
-  protected function construct() {
-    include_once( THIRD_PATH . '/model/third.model.01.php' );
-  }
+  protected function construct() {}
 
 	/**
 	* Créer un tier
