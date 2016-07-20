@@ -37,11 +37,12 @@
 	h2, h3 {
 		line-height: 1;
 	}
-	i {
+	.close {
 		position: absolute;
-		top: 16px;
-		right: 20px;
+		top: 10px;
+		right: 10px;
 		font-size: 30px;
+		text-decoration: none;
 		color: rgba(0,0,0,0.2);
 		.transition;
 		&:hover {
@@ -51,7 +52,7 @@
 	}
 	> div {
 		z-index: 9998;
-		padding: 20px;
+		padding: 30px;
 		position: absolute;
 		display: block;
 		max-width: 1000px;
@@ -73,6 +74,12 @@
 		display: table;
 		border-collapse: collapse;
 		vertical-align: middle;
+		.row .cell {
+			&:hover {
+				cursor: pointer;
+				background: fade(@c1, 40%) !important;
+			}
+		}
 		> ul {
 			display: table-row;
 			text-align: center;
@@ -92,10 +99,6 @@
 				display: table-cell;
 				vertical-align: middle;
 				.transition;
-				&:hover {
-					cursor: pointer;
-					background: fade(@c1, 40%) !important;
-				}
 				&:nth-of-type(odd) {
 					background: #fff;
 				}

@@ -10,8 +10,6 @@
 		box-sizing: border-box;
 	}
 
-	> div {
-	}
 	> div:first-child {
 		float: left;
 		width: 26%;
@@ -36,6 +34,9 @@
 				width: 100%;
 				margin: auto;
 				text-align: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 			.wp-digi-sheet-generation-button {
 				margin: 0;
@@ -161,10 +162,17 @@
 		.wp-digi-global-sheet-header {
 			background: @c2;
 			height: 50px;
+			display: flex;
 			.cls;
 			> * {
 				float: left;
 				color: #fff;
+			}
+			.wp-list-search {
+				max-width: 300px;
+			}
+			.wp-digi-global-action-container, .wp-digi-delete-action {
+				margin-left: auto;
 			}
 			.wp-digi-element-thumbnail {
 				width: 50px;
