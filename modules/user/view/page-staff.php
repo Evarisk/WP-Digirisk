@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="wpdigi-staff <?php echo empty( $hidden ) ? 'wrap' : 'hidden'; ?>">
-	<h3><?php _e( 'Import staff' , 'digirisk' ); ?></h3>
+	<h3><?php _e( 'Add a Digirisk user' , 'digirisk' ); ?></h3>
 
 	<ul class="wp-digi-form no-form gridwrapper3 single-line">
 		<li></li>
