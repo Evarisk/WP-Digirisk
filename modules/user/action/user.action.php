@@ -37,7 +37,7 @@ class user_action extends \singleton_util {
 	* Créer le sous menu dans le menu utilisateur de WordPress
 	*/
 	public function callback_admin_menu() {
-		add_users_page( __( 'Create or import user easyly with a form ', 'digirisk'), __( 'Digirisk : import', 'digirisk'), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
+		add_users_page( __( 'Add a Digirisk user', 'digirisk' ), __( 'Digirisk : add', 'digirisk' ), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
 	}
 
 	public function ajax_save_user() {
