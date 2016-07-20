@@ -9,55 +9,6 @@ var digi_global = {
 		digi_global.$( '.wpdigi_date' ).datepicker( {
 			'dateFormat': 'dd/mm/yy',
 		} );
-
-		/** Auto complete */
-		/**
-		* Paramètre à ajouter sur la balise html
-		* Ne pas oublier la classe : wp-digi-bloc-loader
-		* int data-element-id : ID d'un élément ex: workunit_id
-		* string data-callback : Pour appeler une fonction après avoir récupére la liste des ID des utilisateurs.
-		* string append-to : Le bloc ou sera affiche le rendu
-		*/
-		digi_global.$.each( digi_global.$( '.wpdigi-auto-complete-user' ), function( key, element ) {
-			var list_option = {
-				'source': 'admin-ajax.php?action=search_user&element_id=' + digi_global.$( element ).data( "element-id" ) + '&filter=' + digi_global.$( element ).data( "filter" ),
-				'minLength': 0,
-			};
-
-			if ( digi_global.$ ( element ).data( 'append-to' ) !== undefined ) {
-				list_option.search = function( event, ui ) {
-					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).addClass( 'wp-digi-bloc-loading' );
-				};
-
-				list_option.response = function( event, ui ) {
-					digi_global.$( digi_global.$ ( element ).data( 'append-to' ) ).replaceWith( ui.content[0].value );
-				};
-
-				list_option.open = function( event, ui ) {
-					digi_global.$ ( element ).autocomplete( 'close' );
-				};
-
-			}
-
-      if( digi_global.$( element ).data( 'target' ) !== undefined ) {
-        list_option.select = function( event, ui ) {
-          digi_global.$( 'input[name="' + digi_global.$( element ).data('target') + '"]' ).val( ui.item.id );
-        };
-      }
-
-			digi_global.$( element ).autocomplete( list_option );
-		} );
-
-		digi_global.$.each( digi_global.$( '.wpdigi-auto-complete' ), function( key, element ) {
-		digi_global.$( element ).autocomplete( {
-			'source': 'admin-ajax.php?action=search&post_type=digi-group&element_id=' + digi_global.$( element ).data( 'id' ),
-			'select': function( event, ui ) {
-				digi_global.$( 'input[name="' + digi_global.$( element ).data('target') + '"]' ).val( ui.item.id );
-				digi_global.$( '.wp-digi-group-action-container' ).removeClass( "hidden" );
-        digi_global.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
-			}
-		} );
-	} );
 	},
 
 	event: function() {

@@ -253,7 +253,7 @@ class user_class extends \user_class {
 	* @param object $workunit L'objet
 	* @param int $user_id L'ID de l'utilisateur a chercher
 	*
-	* @return int La clé de l'utilisateur 
+	* @return int La clé de l'utilisateur
 	*/
 	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
 			global $wpdigi_user_ctr;

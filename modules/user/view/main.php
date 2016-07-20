@@ -4,7 +4,7 @@
 	<!-- Le bloc des utilisateurs affectés -->
 	<div>
 
-
+		<?php do_shortcode( '[digi-search id="' . $workunit->id . '" next-action="display_user_affected" type="user" target="wp-digi-list-affected-user"]' ); ?>
 		<!-- La liste des utilisateurs affectés -->
 		<?php require( USERS_VIEW . '/list-affected-user.php' ); ?>
 	</div>

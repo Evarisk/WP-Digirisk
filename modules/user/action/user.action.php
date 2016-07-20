@@ -30,7 +30,7 @@ class user_action extends \singleton_util {
 		add_action( 'wp_ajax_paginate_user', array( $this, 'callback_paginate_user' ) );
 
 		// Recherche d'un utilisateur affecté
-		add_action( 'wp_ajax_search_user_affected', array( $this, 'ajax_search_user_affected' ) );
+		add_action( 'display_user_affected', array( $this, 'callback_display_user_affected' ), 10, 2 );
 	}
 
 	/**
@@ -211,23 +211,21 @@ class user_action extends \singleton_util {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
-	public function ajax_search_user_affected() {
-		// wpdigi_utils::check( 'ajax_search_user_affected' );
+	public function callback_display_user_affected( $id, $list_user ) {
+		$workunit = \society_class::get()->show_by_type( $id );
+		$data = user_class::get()->list_affected_user( $workunit );
+		$list_affected_user = $data['list_affected_user'];
 
-		global $wpdb;
-		$user_name_affected = sanitize_text_field( $_POST['user_name_affected'] );
-
-		$keyword = '%' . $user_name_affected . '%';
-
-		$query = "SELECT u.ID FROM {$wpdb->users} as u
-							WHERE u.user_email LIKE %s";
-
-		$list_user_result = $wpdb->get_results( $wpdb->prepare( $query, array( $keyword ) ), 'ARRAY_N' );
-		$list_user_result = array_map( 'current', $list_user_result );
-
+		if ( !empty( $list_affected_user ) ) {
+		  foreach ( $list_affected_user as $key => $element ) {
+				if ( !in_array( $element->id, $list_user ) ) {
+					unset( $list_affected_user[$key] );
+				}
+		  }
+		}
 
 		ob_start();
-		require( USERS_VIEW . 'list-affecetd-user.php' );
+		require( USERS_VIEW . '/list-affected-user.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
