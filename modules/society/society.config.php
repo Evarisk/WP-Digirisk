@@ -1,14 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Module bootstrap file
- * @author Evarisk development team <dev@evarisk.com>
- * @version 1.0
- */
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
 DEFINE( 'WPDIGI_STES_VERSION', '1.0');
 
 /**	Définition des constantes pour le module / Define constant for module	*/
