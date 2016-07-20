@@ -72,6 +72,8 @@ var file_management = {
   },
 
   associate_file( selected_file_id ) {
+
+		file_management.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
     var data = {
       action: "eo_associate_file",
       file_id: selected_file_id,
