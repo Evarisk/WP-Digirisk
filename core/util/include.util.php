@@ -73,9 +73,11 @@ class include_util extends singleton_util {
     foreach ( $list_file as $file ) {
       $filename = explode( '\\', $file[0] );
       $filename = $filename[count($filename) - 1];
-      $http_file = explode( 'wp-content', str_replace( '\\', '/', $file[0] ) );
-      wp_register_style( 'eo-' . $filename, '/wp-content' . $http_file[1], array(), WPDIGI_VERSION );
-      wp_enqueue_style( 'eo-' . $filename );
+			if ( $filename !== 'font-awesome.min.css' ) {
+	      $http_file = explode( 'wp-content', str_replace( '\\', '/', $file[0] ) );
+	      wp_register_style( 'eo-' . $filename, '/wp-content' . $http_file[1], array(), WPDIGI_VERSION );
+	      wp_enqueue_style( 'eo-' . $filename );
+			}
     }
   }
 
