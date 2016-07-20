@@ -24,7 +24,7 @@ var digi_danger = {
 	},
 
 	reset_create_form: function() {
-		digi_danger.$( '.wp-digi-risk-item-new toggle' ).html( window.digi_risk.old_danger );
+		digi_danger.$( '.wp-digi-risk-item-new toggle' ).html( digi_danger.old_danger );
 		digi_danger.$( '.wp-digi-risk-item-new input[name="danger_id"]').val( '' );
 	}
 };

@@ -10,6 +10,7 @@ var digi_risk = {
 		digi_risk.$ = $;
 
 		window.digi_risk_comment.event( digi_risk.$ );
+		window.digi_danger.init( event, digi_risk.$ );
 
 		if ( event || event === undefined ) {
 			digi_risk.event();
@@ -141,10 +142,14 @@ var digi_risk = {
 
 	reset_create_form: function() {
 		digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html( digi_risk.old_cotation );
+
 		var element_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-list-column-cotation div' )[0];
 		element_cotation.className = element_cotation.className.replace( /wp-digi-risk-level-[0-4]/, 'wp-digi-risk-level-0' );
+
 		digi_risk.$( '.wp-digi-risk-item-new input[name="risk_evaluation_level"]').val( '' );
 		digi_risk.$( '.wp-digi-risk-item-new input[name="method_evaluation_id"]').val( '0' );
+
+		window.digi_risk_comment.reset_create_form();
 		window.digi_danger.reset_create_form();
 	}
 };

@@ -20,5 +20,9 @@ var digi_risk_comment = {
       digi_risk_comment.$( element ).closest( 'li' ).remove();
       digi_risk_comment.$.post( window.ajaxurl, data, function() {} );
     }
-  }
+  },
+
+	reset_create_form: function() {
+		digi_risk_comment.$( '.wp-digi-risk-item-new .wp-digi-risk-comment textarea' ).val('');
+	}
 };
