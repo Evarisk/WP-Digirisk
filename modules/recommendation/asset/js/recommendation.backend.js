@@ -23,7 +23,7 @@ var digi_recommendation = {
 		// Charger une recommendation
 		digi_recommendation.$( document ).on( 'click', '.wp-digi-recommendation-item .wp-digi-action-load', function( event ) { digi_recommendation.load_recommendation( event, digi_recommendation.$( this ) ); } );
 		// Editer une recommendation
-		digi_recommendation.$( document ).on( 'click', '.wp-digi-recommendation-item .dashicons-edit', function( event ) { digi_recommendation.edit_recommendation( event, digi_recommendation.$( this ) ); } );
+		digi_recommendation.$( document ).on( 'click', '.wp-digi-recommendation-item .wp-digi-action-edit', function( event ) { digi_recommendation.edit_recommendation( event, digi_recommendation.$( this ) ); } );
 		// Supprimer une recommendation
 		digi_recommendation.$( document ).on( 'click', '.wp-digi-recommendation-item .wp-digi-action-delete', function( event ) { digi_recommendation.delete_recommendation( event, digi_recommendation.$( this ) ); } );
 	},

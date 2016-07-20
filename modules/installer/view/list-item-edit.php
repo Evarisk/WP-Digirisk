@@ -10,6 +10,6 @@
 	<span><input type="text" placeholder="Firstname" name="user[option][user_info][firstname]" value="<?php echo stripslashes($user->option['user_info']['firstname']); ?>" /></span>
 	<span><input type="text" placeholder="email" name="user[email]" value="<?php echo stripslashes($user->email); ?>" /></span>
 	<span class="wp-digi-action wp-digi-user wp-digi-user-action">
-		<a href="#" data-id="<?php echo $user->id; ?>" class="wp-digi-action wp-digi-action-edit dashicons dashicons-edit"></a>
+		<a href="#" data-id="<?php echo $user->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true"></a>
 	</span>
 </form>

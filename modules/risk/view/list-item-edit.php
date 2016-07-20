@@ -36,7 +36,7 @@ if ( $risk_definition != null ):
 			</ul>
 		</span>
 		<span class="wp-digi-action">
-			<a href="#" data-id="<?php echo $risk_id; ?>" class="wp-digi-action wp-digi-action-edit dashicons dashicons-edit" ></a>
+			<a href="#" data-id="<?php echo $risk_id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
 		</span>
 
 		<?php do_shortcode( '[digi_evaluation_method_complex risk_id=' . $risk_id . ']' ); ?>

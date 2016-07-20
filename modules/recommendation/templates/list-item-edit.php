@@ -10,6 +10,6 @@
 	<span><?php echo $term->name; ?></span>
 	<span class="wp-digi-comment"><input name="recommendation_comment" type="text" value="<?php echo !empty( $recommendation_in_workunit['comment'] ) ? $recommendation_in_workunit['comment'] : ''; ?>" /></span>
 	<span class="wp-digi-action">
-		<a href="#" data-workunit-id="<?php echo $workunit_id; ?>" data-id="<?php echo $term_id; ?>" data-index="<?php echo $index; ?>" class="wp-digi-action-edit dashicons dashicons-edit" ></a>
+		<a href="#" data-workunit-id="<?php echo $workunit_id; ?>" data-id="<?php echo $term_id; ?>" data-index="<?php echo $index; ?>" class="wp-digi-action-edit fa fa-floppy-o" aria-hidden="true"></a>
 	</span>
 </form>
