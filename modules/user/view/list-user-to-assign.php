@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<form class="wp-form-user-to-assign" method="POST" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
+<form class="wp-form-user-to-assign wp-digi-bloc-loader" method="POST" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 	<ul class="wp-digi-list wp-digi-table">
 		<li class="wp-digi-table-header" >
 			<span></span>

@@ -11,6 +11,9 @@ class evaluator_action {
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
 		add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
+
+		add_action( 'display_evaluator_affected', array( $this, 'callback_display_evaluator_affected' ), 10, 2 );
+		add_action( 'display_evaluator_to_assign', array( $this, 'callback_display_evaluator_to_assign' ), 10, 2 );
 	}
 
 	/**
@@ -138,6 +141,63 @@ class evaluator_action {
 		$element = society_class::get()->show_by_type( $element_id );
 		evaluator_class::get()->render_list_evaluator_to_assign( $element );
 		wp_die();
+	}
+
+	public function callback_display_evaluator_affected( $id, $list_user_id ) {
+		$element = \society_class::get()->show_by_type( $id );
+		$list_affected_evaluator = evaluator_class::get()->get_list_affected_evaluator( $element );
+
+		if ( !empty( $list_affected_evaluator ) ) {
+		  foreach ( $list_affected_evaluator as $key => $sub_list ) {
+				foreach( $sub_list as $evaluator_key => $evaluator ) {
+					if ( is_object( $evaluator['user_info'] ) ) {
+						if ( !in_array( $evaluator['user_info']->id, $list_user_id ) ) {
+							unset( $list_affected_evaluator[$key][$evaluator_key] );
+						}
+					}
+				}
+		  }
+		}
+
+		ob_start();
+		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
+		$element = \society_class::get()->show_by_type( $id );
+
+		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
+		$args_where_evaluator = array(
+			'offset' => ( $current_page - 1 ) * evaluator_class::get()->limit_evaluator,
+			'exclude' => array( 1 ),
+			'number' => evaluator_class::get()->limit_evaluator,
+			'meta_query' => array(
+				'relation' => 'OR',
+			),
+		);
+
+		$list_evaluator_to_assign = evaluator_class::get()->index( $args_where_evaluator );
+		//
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		unset( $args_where_evaluator['offset'] );
+		unset( $args_where_evaluator['number'] );
+		$args_where_evaluator['fields'] = array( 'ID' );
+		$count_evaluator = count( evaluator_class::get()->index( $args_where_evaluator ) );
+
+		$number_page = ceil( $count_evaluator / evaluator_class::get()->limit_evaluator );
+
+		if ( !empty( $list_evaluator_to_assign ) ) {
+			foreach ( $list_evaluator_to_assign as $key => $evaluator ) {
+				if ( !in_array( $evaluator->id, $list_user_id ) ) {
+					unset( $list_evaluator_to_assign[$key] );
+				}
+			}
+		}
+
+		ob_start();
+		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
 

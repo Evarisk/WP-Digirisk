@@ -13,9 +13,6 @@ class evaluator_class extends user_class {
 	* Le constructeur
 	*/
 	protected function construct() {
-		/** Pour la recherche */
-		add_filter( 'wpdigi_search_evaluator_affected', array( $this, 'callback_wpdigi_search_evaluator_affected' ), 10, 3 );
-		add_filter( 'wpdigi_search_evaluator_to_assign', array( $this, 'callback_wpdigi_search_evaluator_to_assign' ), 10, 4 );
 	}
 
 	/**
@@ -85,17 +82,17 @@ class evaluator_class extends user_class {
 	 * @param int $id The workunit ID
 	 * @return object list evaluators affected
 	 */
-	public function get_list_affected_evaluator( $workunit ) {
-		if ( !is_object( $workunit ) ) {
+	public function get_list_affected_evaluator( $society ) {
+		if ( !is_object( $society ) ) {
 			return false;
 		}
 
-		if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) )
+		if ( $society->id === 0 || empty( $society->option['user_info'] ) || empty( $society->option['user_info']['affected_id'] ) )
 			return false;
 
 		$list_evaluator = array();
-		if ( !empty( $workunit->option['user_info']['affected_id']['evaluator'] ) ) {
-			foreach ( $workunit->option['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+		if ( !empty( $society->option['user_info']['affected_id']['evaluator'] ) ) {
+			foreach ( $society->option['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
 				if ( !empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( !empty( $sub_array_value['status'] ) && $sub_array_value['status'] == 'valid' ) {

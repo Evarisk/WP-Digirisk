@@ -33,7 +33,6 @@
 
 
 	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
-	<input type="hidden" name="global" value="<?php echo str_replace( 'mdl_01', 'ctr',get_class( $element ) ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
 	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'digirisk'); ?>" />
 

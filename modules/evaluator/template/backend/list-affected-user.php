@@ -26,7 +26,6 @@
 							<span class="wp-digi-action">
 								<a 	data-id="<?php echo $element->id; ?>"
 										data-user-id="<?php echo $affected_evaluator[ 'user_info' ]->id; ?>"
-										data-global="<?php echo str_replace( 'mdl_01', 'ctr', get_class( $element ) ); ?>"
 										data-affectation-data-id="<?php echo $affected_evaluator['affectation_info']['id']; ?>"
 										class="wp-digi-action-delete dashicons dashicons-no-alt"></a>
 							</span>

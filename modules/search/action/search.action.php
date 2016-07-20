@@ -12,9 +12,7 @@ class search_action {
 	public function callback_digi_search() {
 		$list = search_class::get()->search( $_GET );
 
-		$type = str_replace( '.', '\\', $_GET['type'] );
-
-		do_action( $_GET['next_action'], $_GET['id'], $list, $type );
+		do_action( $_GET['next_action'], $_GET['id'], $list );
 
 		wp_send_json_success( $list_user );
 	}

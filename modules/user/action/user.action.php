@@ -31,7 +31,7 @@ class user_action extends \singleton_util {
 
 		// Recherche d'un utilisateur affecté
 		add_action( 'display_user_affected', array( $this, 'callback_display_user_affected' ), 10, 2 );
-		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 3 );
+		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 2 );
 	}
 
 	/**
@@ -230,7 +230,7 @@ class user_action extends \singleton_util {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
-	public function callback_display_user_assigned( $id, $list_user_id, $type ) {
+	public function callback_display_user_assigned( $id, $list_user_id ) {
 		$workunit = \society_class::get()->show_by_type( $id );
 		$data = user_class::get()->list_affected_user( $workunit );
 		$list_affected_id = $data['list_affected_id'];
