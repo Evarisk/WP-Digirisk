@@ -31,6 +31,7 @@ class user_action extends \singleton_util {
 
 		// Recherche d'un utilisateur affecté
 		add_action( 'display_user_affected', array( $this, 'callback_display_user_affected' ), 10, 2 );
+		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 3 );
 	}
 
 	/**
@@ -211,14 +212,14 @@ class user_action extends \singleton_util {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
-	public function callback_display_user_affected( $id, $list_user ) {
+	public function callback_display_user_affected( $id, $list_user_id ) {
 		$workunit = \society_class::get()->show_by_type( $id );
 		$data = user_class::get()->list_affected_user( $workunit );
 		$list_affected_user = $data['list_affected_user'];
 
 		if ( !empty( $list_affected_user ) ) {
 		  foreach ( $list_affected_user as $key => $element ) {
-				if ( !in_array( $element->id, $list_user ) ) {
+				if ( !in_array( $element->id, $list_user_id ) ) {
 					unset( $list_affected_user[$key] );
 				}
 		  }
@@ -226,6 +227,43 @@ class user_action extends \singleton_util {
 
 		ob_start();
 		require( USERS_VIEW . '/list-affected-user.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+	}
+
+	public function callback_display_user_assigned( $id, $list_user_id, $type ) {
+		$workunit = \society_class::get()->show_by_type( $id );
+		$data = user_class::get()->list_affected_user( $workunit );
+		$list_affected_id = $data['list_affected_id'];
+
+		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
+		$args_where_user = array(
+			'offset' => ( $current_page - 1 ) * user_class::get()->limit_user,
+			'number' => user_class::get()->limit_user,
+			'exclude' => array( 1 ),
+			'meta_query' => array(
+				'relation' => 'OR',
+			),
+		);
+
+		$list_user_to_assign = user_class::get()->index( $args_where_user );
+
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		unset( $args_where_user['offset'] );
+		unset( $args_where_user['number'] );
+		$args_where_user['fields'] = array( 'ID' );
+		$count_user = count( user_class::get()->index( $args_where_user ) );
+		$number_page = ceil( $count_user / user_class::get()->limit_user );
+
+		if ( !empty( $list_user_to_assign ) ) {
+			foreach ( $list_user_to_assign as $key => $element ) {
+				if ( !in_array( $element->id, $list_user_id ) ) {
+					unset( $list_user_to_assign[$key] );
+				}
+			}
+		}
+
+		ob_start();
+		require( USERS_VIEW . '/list-user-to-assign.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

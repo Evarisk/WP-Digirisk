@@ -9,8 +9,6 @@ class search_class extends singleton_util {
 	public function search( $data ) {
 		$list_user = array();
 
-		$data['type'] .= '_class';
-
 		$list_user = get_users( array(
 			'fields' => 'ID',
 			'search' => '*' . $data['term'] . '*',

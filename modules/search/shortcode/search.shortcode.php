@@ -28,7 +28,7 @@ class search_shortcode {
 		$element_id = !empty( $param['id'] ) ? (int) $param['id'] : 0;
 		$text = !empty( $param['text'] ) ? sanitize_text_field( $param['text'] ) : __( 'Write your search here...', 'digirisk' );
 		$target = !empty( $param['target'] ) ? sanitize_text_field( $param['target'] ) : '';
-		$type = !empty( $param['type'] ) ? sanitize_text_field( $param['type'] ) : '';
+		$type = !empty( $param['type'] ) ?  $param['type'] : '';
 		$next_action = !empty( $param['next-action'] ) ? sanitize_text_field( $param['next-action'] ) : '';
 
 		require SEARCH_VIEW_DIR . 'search.view.php';
