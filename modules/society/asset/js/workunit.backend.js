@@ -44,6 +44,7 @@ var digi_workunit = {
 				digi_workunit.$( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
 				digi_workunit.$( ".wp-digi-list-workunit" ).prepend( response.output );
 				digi_workunit.$( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
+				digi_workunit.$( "#wpdigi-workunit-creation-form input[type='text']" ).val( '' );
 			},
 		});
 	},
