@@ -46,13 +46,17 @@ var digi_installer = {
   save_domain_mail: function( event, element ) {
     event.preventDefault();
 
+		digi_installer.$( element ).closest( 'li' ).addClass( 'wp-digi-bloc-loading' );
+
     var data = {
       action: 'save_domain_mail',
       _wpnonce: digi_installer.$( element ).data( 'nonce' ),
       domain_mail: digi_installer.$( element ).closest( '.form-element' ).find( 'input' ).val(),
     };
 
-    digi_installer.$.post( window.ajaxurl, data, function() { } );
+    digi_installer.$.post( window.ajaxurl, data, function() {
+			digi_installer.$( element ).closest( 'li' ).removeClass( 'wp-digi-bloc-loading' );
+		} );
   },
 
 	save_last_step: function( event, element ) {
