@@ -28,6 +28,7 @@ var digi_tab = {
         digi_tab.$( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
 				digi_tab.$( ".wp-digi-content" ).html( response.data.template );
 				window.digi_global.init( digi_tab.$ );
+				window.digi_search.event( digi_tab.$ );
 
 				var object_name = action.replace( '-', '_' );
 				if ( window[object_name] && window[object_name].init ) {
