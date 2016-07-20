@@ -29,7 +29,10 @@ if ( $risk_definition != null ):
 					<?php endforeach; ?>
 				<?php endif;?>
 				<!-- Ajouter un commentaire -->
-				<li><input type="text" class="wpdigi_date" name="comment_date" value="<?php echo date( 'd/m/Y' ); ?>" /> : <input type="text" class="wpdigi_comment" name="comment_content" value="" /></li>
+				<li>
+					<input type="text" class="wpdigi_date" name="list_comment[0][comment_date]" value="<?php echo date( 'd/m/Y' ); ?>" /> :
+					<input type="text" class="wpdigi_comment" name="list_comment[0][comment_content]" value="" />
+				</li>
 			</ul>
 		</span>
 		<span class="wp-digi-action">
