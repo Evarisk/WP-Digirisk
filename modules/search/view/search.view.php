@@ -12,7 +12,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <label class="wp-list-search">
-	<i class="dashicons dashicons-search"></i>
+	<?php if ( !empty( $icon ) ): ?><i class="<?php echo $icon; ?>"></i><?php endif; ?>
 	<input type="text"
 		placeholder="<?php echo $text; ?>"
 		data-target="<?php echo $target; ?>"

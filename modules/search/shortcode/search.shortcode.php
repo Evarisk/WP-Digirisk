@@ -31,6 +31,7 @@ class search_shortcode {
 		$field = !empty( $param['field'] ) ? sanitize_text_field( $param['field'] ) : '';
 		$type = !empty( $param['type'] ) ?  $param['type'] : '';
 		$class = !empty( $param['class'] ) ?  $param['class'] : '';
+		$icon = !empty( $param['icon'] ) ?  $param['icon'] : '';
 		$next_action = !empty( $param['next-action'] ) ? sanitize_text_field( $param['next-action'] ) : '';
 
 		require SEARCH_VIEW_DIR . 'search.view.php';

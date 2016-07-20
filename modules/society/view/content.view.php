@@ -18,7 +18,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<?php if ( $display_trash ): ?>
 			<?php do_shortcode( '[digi-search id="' . $element->id . '" class="group_class" text="' . __( 'Write groupment number or name for move this object to it', 'digirisk' ) . '" type="post" field="group_id"]' ); ?>
 		<?php endif; ?>
-		
+
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
 			<button class="wp-digi-bton-fourth wp-digi-save-identity-button" data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
