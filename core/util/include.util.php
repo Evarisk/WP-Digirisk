@@ -64,8 +64,10 @@ class include_util extends singleton_util {
     foreach ( $list_file as $file ) {
       $filename = explode( '\\', $file[0] );
       $filename = $filename[count($filename) - 1];
-      $http_file = explode( 'wp-content', str_replace( '\\', '/', $file[0] ) );
-      wp_enqueue_script( 'eo-' . $filename, '/wp-content' . $http_file[1], array(), WPDIGI_VERSION, false );
+			if ( $filename !== 'no-back-page.backend.js' ) {
+	      $http_file = explode( 'wp-content', str_replace( '\\', '/', $file[0] ) );
+	      wp_enqueue_script( 'eo-' . $filename, '/wp-content' . $http_file[1], array(), WPDIGI_VERSION, false );
+			}
     }
   }
 

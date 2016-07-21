@@ -11,6 +11,14 @@ class society_action {
 		add_action( 'wp_ajax_load_sheet_display', array( $this, 'callback_load_sheet_display' ) );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
+	}
+
+	public function callback_admin_enqueue_scripts() {
+		$screen = get_current_screen();
+		if ( 'toplevel_page_digirisk-simple-risk-evaluation' == $screen->id ) {
+			wp_enqueue_script( 'eo-no-back-page', WPDIGI_STES_URL . 'asset/js/no-back-page.backend.js', array(), WPDIGI_VERSION, false );
+		}
 	}
 
 	/**
