@@ -32,7 +32,7 @@ class sheet_groupment_class extends singleton_util {
 	  			'type'		=> 'picture',
 	  			'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
 	  			'option'	=> array(
-	  				'size'	=> 8,
+	  				'size'	=> 2,
 	  			),
 	  		);
   		}

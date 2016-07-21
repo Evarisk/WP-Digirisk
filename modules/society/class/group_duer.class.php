@@ -78,7 +78,7 @@ class group_duer_class extends singleton_util {
 		$data_duer['telephone'] 					= !empty( $data_duer['document_recipient_telephone'] ) ? sanitize_text_field( $data_duer['document_recipient_telephone'] ) : '';
 		$data_duer['portable'] 						= !empty( $data_duer['document_recipient_cellphone'] ) ? sanitize_text_field( $data_duer['document_recipient_cellphone'] ) : '';
 
-		$data_duer['methodologie'] 				= !empty( $data_duer['audit_methodology'] ) ? sanitize_text_field( $data_duer['audit_methodology'] ) : '';
+		$data_duer['methodologie'] 				= !empty( $data_duer['audit_methodology'] ) ? $data_duer['audit_methodology'] : '';
 		$data_duer['sources'] 						= !empty( $data_duer['audit_sources'] ) ? sanitize_text_field( $data_duer['audit_sources'] ) : '';
 		$data_duer['remarqueImportante'] 	= !empty( $data_duer['audit_important_note'] ) ? sanitize_text_field( $data_duer['audit_important_note'] ) : '';
 		$data_duer['dispoDesPlans'] 			= !empty( $data_duer['audit_location'] ) ? sanitize_text_field( $data_duer['audit_location'] ) : '';
