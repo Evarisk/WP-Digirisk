@@ -43,7 +43,7 @@
 					<span></span>
 					<span class="padded"><input type="text" placeholder="Name" name="user[option][user_info][lastname]" /></span>
 					<span class="padded"><input type="text" placeholder="Firstname" name="user[option][user_info][firstname]" /></span>
-					<span class="padded"><input type="text" placeholder="demo@demo.com" name="user[email]" /></span>
+					<span class="padded"><input type="text" placeholder="demo@<?php echo get_option( 'digirisk_domain_mail', 'demo.com' ); ?>" name="user[email]" /></span>
 					<span class="add-staff wp-digi-action wp-digi-action-new" ><a href="#" class="wp-digi-action dashicons dashicons-plus" ></a></span>
 				</li>
 			</ul>
