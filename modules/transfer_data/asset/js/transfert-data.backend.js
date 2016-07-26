@@ -38,9 +38,15 @@ jQuery( document ).ready( function(){
 			else if ( responseText[ 'status' ] ) {
 				jQuery( "#wp-digi-transfert-message" ).html( responseText[ "message" ] ).show();
 				jQuery( "#wpdigi-datastransfer-form .wp-digi-bton-first" ).hide();
-				setTimeout( function(){
-				 window.location.href = responseText[ "redirect_to_url" ];
-				}, '1500');
+				var data = {
+					"action": "reset_method_evaluation",
+					"_wpnonce": jQuery( 'input[name="_wpnonce"]' ).val()
+				};
+				jQuery.post( ajaxurl, data, function() {
+					setTimeout( function(){
+					 window.location.href = responseText[ "redirect_to_url" ];
+					}, '1500');
+				});
 			}
 		}
 	});

@@ -1,4 +1,7 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+namespace digi\transfert;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class TransferData_common_class extends TransferData_class {
 
@@ -66,7 +69,7 @@ class TransferData_common_class extends TransferData_class {
 			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
 			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
 				/**	Log creation	*/
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), ), 0 );
+				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), ), 0 );
 
 				/**	Store an option to avoid multiple transfer	*/
 				$digirisk_transfer_options[ $element_type ][] = $element->id;
@@ -82,8 +85,7 @@ class TransferData_common_class extends TransferData_class {
 				switch( $element_type ) {
 					case TABLE_TACHE:
 					case TABLE_ACTIVITE:
-						$task_transfer = new TransferData_task_controller();
-						$task_transfer->transfer( $element, $element_type, $element_id );
+						TransferData_task_class::get()->transfer( $element, $element_type, $element_id );
 					break;
 
 					case TABLE_GROUPEMENT:
@@ -94,8 +96,7 @@ class TransferData_common_class extends TransferData_class {
 						 * Produits
 						 */
 
-						$groupement_transfer = new wpdigi_transferdata_society_ctr_01();
-						$groupement_transfer->transfer_groupement( $element, $element_type, $element_id );
+						wpdigi_transferdata_society_class::get()->transfer_groupement( $element, $element_type, $element_id );
 					break;
 
 					case TABLE_UNITE_TRAVAIL:
@@ -106,8 +107,7 @@ class TransferData_common_class extends TransferData_class {
 						 * Produits
 						 */
 
-						$groupement_transfer = new wpdigi_transferdata_society_ctr_01();
-						$groupement_transfer->transfer_unite( $element, $element_type, $element_id );
+						wpdigi_transferdata_society_class::get()->transfer_unite( $element, $element_type, $element_id );
 					break;
 				}
 
@@ -138,7 +138,7 @@ class TransferData_common_class extends TransferData_class {
 				}
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), ), 2 );
+				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), ), 2 );
 			}
 		}
 
@@ -250,7 +250,7 @@ class TransferData_common_class extends TransferData_class {
 		if ( !empty( $survey_results ) ) {
 			foreach ( $survey_results as $original_survey_id => $final_survey ) {
 				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), ), 0 );
+				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), ), 0 );
 			}
 		}
 	}
@@ -295,10 +295,9 @@ class TransferData_common_class extends TransferData_class {
 			switch ( $main_type ) {
 				case 'document':
 					/**	Start by coping picture into wordpress uploads directory	*/
-					$document_controller = new document_controller_01();
 					$default_upload_directory = get_option( 'upload_path', '' );
 					$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_document_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
+					update_option( 'upload_path', str_replace( ABSPATH, '', \document_class::get()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
 					update_option( 'uploads_use_yearmonth_folders', false );
 					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 					update_option( 'upload_path' , $default_upload_directory );
@@ -360,7 +359,7 @@ class TransferData_common_class extends TransferData_class {
 				break;
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), ), 0 );
+			\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), ), 0 );
 			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 		}
 		else {
@@ -409,7 +408,7 @@ class TransferData_common_class extends TransferData_class {
 				$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
+			\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/

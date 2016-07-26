@@ -1,4 +1,8 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+
+namespace digi\transfert;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * This file is the main file called by wordpress for our plugin use. It define the basic vars and include the different file needed to use the plugin
  * @author Evarisk <dev@evarisk.com>

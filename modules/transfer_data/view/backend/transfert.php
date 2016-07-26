@@ -1,8 +1,12 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php
+
+namespace digi\transfert;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="about-wrap wp-digi-wrap wp-digi-clearer">
 	<h1><?php _e( 'Transfer datas for digirisk', 'wp-digi-dtrans-i18n' ); ?></h1>
 	<div class="about-text"><?php _e( 'Next digirisk version will use more wordpress fonctionnalities. For this purpose we need to transfer some datas from our specific storage to wordpress storage.', 'wp-digi-dtrans-i18n' ); ?></div>
-
+	<?php wp_nonce_field('reset_method_evaluation'); ?>
 	<h2 class="wp-digi-alert wp-digi-alert-error wp-digi-center" ><span class="wp-digi-bold" ><?php _e( 'Important note : ', 'wp-digi-dtrans-i18n' ); ?></span><?php _e( 'Be sure to make a backup of your datas before launching datas transfer', 'wp-digi-dtrans-i18n' ); ?></h2>
 
 	<ul class="wp-digi-elements-to-transfer" >
@@ -13,7 +17,7 @@
 		$main_config_components_are_transfered = null;
 		if ( in_array( TABLE_GROUPEMENT, TransferData_class::get()->element_type) ) :
 			global $wpdb;
-			require( wpdigi_utils::get_template_part( DIGI_DTRANS_DIR, DIGI_DTRANS_TEMPLATES_MAIN_DIR, "backend", "transfert", "components" ) );
+			require( \wpdigi_utils::get_template_part( DIGI_DTRANS_DIR, DIGI_DTRANS_TEMPLATES_MAIN_DIR, "backend", "transfert", "components" ) );
 		endif;
 
 		/**	Read the different types	*/

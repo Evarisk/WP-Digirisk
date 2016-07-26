@@ -27,7 +27,7 @@ class installer_class {
 	 */
 	public function admin_menu() {
 		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
-		$old_eva_option = getDbOption( 'base_evarisk' );
+		$old_eva_option = \digi\transfert\getDbOption( 'base_evarisk' );
 
 		if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
 			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digi-setup', array( $this, 'setup_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );

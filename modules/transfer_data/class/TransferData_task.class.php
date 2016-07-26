@@ -1,6 +1,9 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+namespace digi\transfert;
 
-class TransferData_task_class extends singleton_util {
+if ( !defined( 'ABSPATH' ) ) exit;
+
+class TransferData_task_class extends \singleton_util {
 
 	protected function construct() { }
 

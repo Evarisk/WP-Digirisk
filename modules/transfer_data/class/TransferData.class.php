@@ -1,6 +1,10 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 
-class TransferData_class extends singleton_util {
+namespace digi\transfert;
+
+if ( !defined( 'ABSPATH' ) ) exit;
+
+class TransferData_class extends \singleton_util {
 
 	/**
 	 * Déclaration de la correspondance entre les anciens types Evarisk et les nouveaux types dans wordpress / Declare an array for making correspondance between evarisk old types and wordpress new type
