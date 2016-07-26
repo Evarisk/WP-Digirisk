@@ -294,14 +294,10 @@ class TransferData_common_class extends TransferData_class {
 			/**	Get associated picture list	*/
 			switch ( $main_type ) {
 				case 'document':
-					/**	Start by coping picture into wordpress uploads directory	*/
-					$default_upload_directory = get_option( 'upload_path', '' );
-					$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-					update_option( 'upload_path', str_replace( ABSPATH, '', \document_class::get()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
-					update_option( 'uploads_use_yearmonth_folders', false );
-					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
-					update_option( 'upload_path' , $default_upload_directory );
-					update_option( 'uploads_use_yearmonth_folders', true );
+					$path_document_complete = \document_class::get()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
+					$guid = \document_class::get()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
+					wp_mkdir_p( $path_document_complete );
+					copy( $file, $path_document_complete . '/' . basename($file) );
 
 					$idCreateur = !isset( $document->idCreateur ) && ( 0 == $document->idCreateur ) ? 1 : $document->idCreateur;
 					if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idCreateur ] ) ) {
@@ -313,26 +309,29 @@ class TransferData_common_class extends TransferData_class {
 
 				default:
 					/**	Start by coping picture into wordpress uploads directory	*/
-					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
+					$path_document_complete = $wp_upload_dir['path'];
+					$path_document = $wp_upload_dir['path'] . '/' . basename($file);
+					copy( $file, $path_document );
+					$guid = $wp_upload_dir['url'] . '/' . basename( $file );
 				break;
 			}
 
 			/**	Get informations about the picture	*/
-			$filetype = wp_check_filetype( basename( $upload_result[ 'file' ] ), null );
+			$filetype = wp_check_filetype( basename( $file ), null );
 			/**	Set the default values for the current attachement	*/
 			$attachment_default_args = array(
-				'guid'           => $wp_upload_dir['url'] . '/' . basename( $upload_result[ 'file' ] ),
+				'guid'           => $guid,
 				'post_mime_type' => $filetype['type'],
-				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $upload_result[ 'file' ] ) ),
+				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file ) ),
 				'post_content'   => '',
 				'post_status'    => 'inherit'
 			);
 
 			/**	Save new picture into database	*/
-			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $upload_result[ 'file' ], $new_element_id );
+			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid, $new_element_id );
 
 			/**	Create the different size for the given picture and get metadatas for this picture	*/
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $upload_result[ 'file' ] );
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename($file) );
 			/**	Finaly save pictures metadata	*/
 			wp_update_attachment_metadata( $attach_id, $attach_data );
 

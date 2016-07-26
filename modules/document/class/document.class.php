@@ -76,11 +76,6 @@ class document_class extends post_class {
 	* @return string Le chemin vers le document
 	*/
 	public function get_digirisk_dir_path( $path_type = 'basedir' ) {
-		// @todo : Methode mal nommé
-		// if ( !is_string( $path_type ) ) {
-		// 	return false;
-		// }
-
 		$upload_dir = wp_upload_dir();
 		return $upload_dir[ $path_type ] . '/digirisk';
 	}
@@ -519,7 +514,7 @@ class document_class extends post_class {
 				'unique_key'		=> $next_document_key,
 				'unique_identifier' => $this->element_prefix . $next_document_key,
 				'model_id' 			=> $model_to_use,
-				// 'document_meta' 	=> json_encode( $document_data ),
+				'document_meta' 	=> json_encode( $document_data ),
 				'version'			=> $document_revision,
 			),
   	);
@@ -531,10 +526,10 @@ class document_class extends post_class {
   		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
   	}
 
-  	ob_start();
-  	require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
-  	$response[ 'output' ] = ob_get_contents();
-  	ob_end_clean();
+  	// ob_start();
+  	// require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
+  	// $response[ 'output' ] = ob_get_contents();
+  	// ob_end_clean();
 
   	return $response;
 	}
