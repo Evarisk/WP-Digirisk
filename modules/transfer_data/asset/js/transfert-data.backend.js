@@ -42,7 +42,7 @@ jQuery( document ).ready( function(){
 				 window.location.href = responseText[ "redirect_to_url" ];
 				}, '1500');
 			}
-		},
+		}
 	});
 
 	jQuery( "input[name=wpdigi-dtrans-userid-behaviour]" ).click( function(){

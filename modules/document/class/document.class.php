@@ -519,7 +519,7 @@ class document_class extends post_class {
 				'unique_key'		=> $next_document_key,
 				'unique_identifier' => $this->element_prefix . $next_document_key,
 				'model_id' 			=> $model_to_use,
-				'document_meta' 	=> json_encode( $document_data ),
+				// 'document_meta' 	=> json_encode( $document_data ),
 				'version'			=> $document_revision,
 			),
   	);

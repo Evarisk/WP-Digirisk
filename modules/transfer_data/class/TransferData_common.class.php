@@ -1,75 +1,9 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/* PRODEST-MASTER:
-{
-	"name": "TransferData_common.controller.01.php",
-	"description": "Fichier contenant les utilitaires pour les tranferts communs à tous les éléments / File with all utilities for all elements common transfer",
-	"type": "file",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
 
-/* PRODEST:
-{
-	"name": "TransferData_common_controller",
-	"description": "Classe contenant les utilitaires pour les tranferts communs à tous les éléments / Class with all utilities for all elements common transfer",
-	"type": "class",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
-class TransferData_common_controller extends TransferData_controller_01 {
+class TransferData_common_class extends TransferData_class {
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "Instanciation des outils pour les transferts communs / Instanciate the common transfer utilities",
-		"type": "function",
-		"check": false,
-		"author":
-		{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
-	*/
-	function __construct() { }
+	protected function construct() { }
 
-	/* PRODEST:
-	{
-		"name": "transfer",
-		"description": "Traitement du transfert pour un élément donné / Treat the transfer for a given element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$element_type": {"type": "string", "description": "Le type de l'élément a transférer / The element type to transfer", "default": "null"},
-			"$element": {"type": "object", "description": "L'élément a transférer / The element to transfer", "default": "null"}
-			"$element_parent": {"type": "integer", "description": "L'identifiant du `nouveau` parent de l'élément a transférer / The `new` parent identifier for element being transfered", "default": "null"}
-		},
-		"return":
-		{
-			"$count" : {"type": "integer", "description": "L'identifiant du nouvel élément créé si pas d'erreur. Un object WP_Error dans le cas inverse / Le new element identifier if creation is OK. Otherwiwe return a WP_Error object" }
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer( $element_type, $element, $element_parent = null ) {
 		global $wpdb;
 		$element_id = 0;
@@ -132,7 +66,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
 			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
 				/**	Log creation	*/
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'digirisk' ), $element_id), ), 0 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), ), 0 );
 
 				/**	Store an option to avoid multiple transfer	*/
 				$digirisk_transfer_options[ $element_type ][] = $element->id;
@@ -204,31 +138,13 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				}
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'digirisk' ), json_encode( $element_id ) ), ), 2 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), ), 2 );
 			}
 		}
 
 		return $element_id;
 	}
 
-	/* PRODEST:
-	{
-		"name": "transfer_orphelan",
-		"description": "Traitement du transfert pour les éléments non transférés à cause de leur `orphelinat` / Treat the transfer for an `orphelan` element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$element_type": {"type": "string", "description": "Le type de l'élément a transférer / The element type to transfer", "default": "null"},
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_orphelan( $element_type ) {
 		global $wpdb;
 		$treated_element = 0;
@@ -260,27 +176,6 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		return $treated_element;
 	}
 
-	/* PRODEST:
-	{
-		"name": "transfer_users",
-		"description": "Traitement du transfert pour les utilisateurs associés à un élément / Treat the transfer for users associated to an element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément a transférer / Element to transfer identifier", "default": "null"},
-			"$old_element_type": {"type": "string", "description": "Le type de l'élément a transférer / Element type to transfer", "default": "null"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré / Transfered element identifier", "default": "null"},
-			"$user_role": {"type": "string", "description": "Rôle spécifique pour les utilisateurs à transférer sur le nouvel élément / Specific role for users to transfert on new element", "default": "null"},
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_users( $old_element_id, $old_element_type, $user_role = '', $element_new_type = '', $element_new_id = 0 ) {
 		$currently_affected_user = array();
 		global $wpdb;
@@ -329,26 +224,6 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		return $currently_affected_user;
 	}
 
-	/* PRODEST:
-	 {
-		"name": "transfer_surveys",
-		"description": "Traitement du transfert pour les formulaires associés à un élément / Treat the transfer for surveys associated to an element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément a transférer / Element to transfer identifier", "default": "null"},
-			"$old_element_type": {"type": "string", "description": "Le type de l'élément a transférer / Element type to transfer", "default": "null"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré / Transfered element identifier", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_surveys( $old_element_id, $old_element_type, $new_element_id ) {
 		global $wpdb;
 		$survey_results = array();
@@ -375,31 +250,11 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		if ( !empty( $survey_results ) ) {
 			foreach ( $survey_results as $original_survey_id => $final_survey ) {
 				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'digirisk' ), ), 0 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), ), 0 );
 			}
 		}
 	}
 
-	/* PRODEST:
-	 {
-		"name": "transfer_document",
-		"description": "Traitement du transfert des medias associés à un élément / Treat the transfer for medias associated to an element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$document": {"type": "integer", "description": "Définition complète du media a transférer / Complete definition for the media to transfer", "default": "null"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel est associé le média / Transfered element identifier to which media is associated", "default": "null"},
-			"$document_origin": {"type": "string", "description": "Le type du media a transférer / Media type to transfer", "default": "picture"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_document( $document, $new_element_id, $document_origin = 'picture', $main_file_directory = EVA_GENERATED_DOC_DIR ) {
 		if ( !function_exists( 'wp_generate_attachment_metadata' ) )
 			require_once( ABSPATH . 'wp-admin/includes/image.php' );
@@ -443,7 +298,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 					$document_controller = new document_controller_01();
 					$default_upload_directory = get_option( 'upload_path', '' );
 					$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
+					update_option( 'upload_path', str_replace( ABSPATH, '', $document_controller->get_document_path() . '/' . ( empty( $new_element_id ) ? 'document_models' : get_post_type( $new_element_id ) . '/' . $new_element_id) ) );
 					update_option( 'uploads_use_yearmonth_folders', false );
 					$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 					update_option( 'upload_path' , $default_upload_directory );
@@ -505,7 +360,7 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				break;
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'digirisk' ), $main_type, $attach_id), ), 0 );
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), ), 0 );
 			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 		}
 		else {
@@ -551,10 +406,10 @@ class TransferData_common_controller extends TransferData_controller_01 {
 				$old_evarisk_element .= ( 'picture' == $main_type  ? $document->idElement : $document->id_element );
 			}
 			else {
-				$old_evarisk_element = __( 'Document model', 'digirisk' );
+				$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
 			}
 
-			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'digirisk' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
+			wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/
@@ -563,26 +418,6 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		return $attach_id;
 	}
 
-	/* PRODEST:
-	 {
-		"name": "transfert_picture_linked_to_element",
-		"description": "Traitement du transfert des médias associés à une taxonomy / Treat tthe media transfer associated to taxonomy",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$element_type": {"type": "string", "description": "Type de l'élément pour lequel on doit transférer les médias et le transformer en taxonomie / Type of element we have to transfer into taxonomy and to transfer media for", "default": "null"},
-			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément dont on veut transférer les médias / ELement identifier we want to transfer medias for", "default": "null"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel sont associés les médias / Transfered element identifier to which medias are associated", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfert_picture_linked_to_element( $element_type, $old_element_id, $new_element_id = null ) {
 		global $wpdb;
 		$associated_document_list = array(
@@ -614,26 +449,6 @@ class TransferData_common_controller extends TransferData_controller_01 {
 		return $associated_document_list;
 	}
 
-	/* PRODEST:
-	 {
-		"name": "transfer_notification",
-		"description": "Traitement du transfert des notifications associées à un élément / Treat the transfer for notifications associated to an element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$old_element_id": {"type": "integer", "description": "Identifiant de l'élément pour lequel il faut récupérer les notifications et les transférer / Element identifier for which we have to get notifications for and transfer them into new storage way", "default": "null"},
-			"$old_element_type": {"type": "string", "description": "Le type de l'élément pour lequel il faut récupèrer les notifications / Element type we had to get notifications for", "default": "picture"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de l'élément transféré auquel sont associés les notifications / Transfered element identifier to which notifications are associated", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_notification( $old_element_id, $old_element_type, $new_element_id ) {
 		global $wpdb;
 
@@ -673,5 +488,6 @@ WHERE LUN.status = 'valid'
 			update_post_meta( $new_element_id, '_wpeo_element_notification', $notifications );
 		}
 	}
-
 }
+
+TransferData_common_class::get();

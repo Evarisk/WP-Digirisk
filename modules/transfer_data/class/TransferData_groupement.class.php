@@ -12,12 +12,12 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller {
+class wpdigi_transferdata_society_class extends TransferData_common_class {
 
 	/**
 	 * Instanciation des outils pour les transferts spécifiques aux groupements et unités de travail / Instanciate groupements' and work unit specific transfer utilities
 	 */
-	function __construct() { }
+	protected function construct() { }
 
 	/**
 	 * Traitement du transfert des groupements / Treat the transfer for work groups
@@ -174,7 +174,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					'author_id' 			=> $main_risk_infos->idEvaluateur,
 					'date'						=> $main_risk_infos->unformatted_evaluation_date,
 					'date_modified'		=> current_time( 'mysql', 0 ),
-					'title'						=> sprintf( __( '%1$s for %3$s - %2$s', 'digirisk' ), $danger->nom, $old_element->nom, $element_prefix ),
+					'title'						=> sprintf( __( '%1$s for %3$s - %2$s', 'wp-digi-dtrans-i18n' ), $danger->nom, $old_element->nom, $element_prefix ),
 					'slug'						=> null,
 					'content'					=> null,
 					'status'					=> $status,
@@ -201,7 +201,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					$risk_to_associate[] = $wp_risk->id;
 
 					/**	Log creation	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Risk have been successfully transfered to wordpress system id. %d', 'digirisk' ), $wp_risk->id ), ), 0 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Risk have been successfully transfered to wordpress system id. %d', 'wp-digi-dtrans-i18n' ), $wp_risk->id ), ), 0 );
 
 					/**	Store the other data into meta	*/
 					update_post_meta( $wp_risk->id, '_wpdigi_element_computed_identifier', TABLE_RISQUE . '#value_sep#' . $old_risk_id );
@@ -218,7 +218,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					if ( !empty( $new_danger_category ) && !empty( $new_danger_category->term_id )  ) {
 						$association = wp_set_object_terms( $wp_risk->id, (int)$new_danger_category->term_id, $wpdigi_danger_category_ctr->get_taxonomy() );
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category %s - %d have been associated to risk', 'digirisk' ), $wpdigi_danger_category_ctr->get_taxonomy(), (int)$new_danger_category->term_id ), ), 0 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category %s - %d have been associated to risk', 'wp-digi-dtrans-i18n' ), $wpdigi_danger_category_ctr->get_taxonomy(), (int)$new_danger_category->term_id ), ), 0 );
 
 						if ( !is_wp_error( $association ) ) {
 							$danger_category_thumbnail = get_term_meta( $new_danger_category->term_id, '_thumbnail_id', true );
@@ -229,7 +229,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					}
 					else {
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category to associate have not been found. %d', 'digirisk' ), json_encode( $new_danger_category )), ), 2 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), json_encode( $new_danger_category )), ), 2 );
 					}
 
 					$risk_associated_file = $common_data_transfer->transfert_picture_linked_to_element( TABLE_RISQUE, $wp_risk->id );
@@ -250,11 +250,11 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					if ( !empty( $new_danger_id ) ) {
 						wp_set_object_terms( $wp_risk->id, (int)$new_danger_id, $wpdigi_danger_ctr->get_taxonomy() );
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger %s - %d have been associated to risk', 'digirisk' ), $wpdigi_danger_ctr->get_taxonomy(), (int)$new_danger_id ), ), 0 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger %s - %d have been associated to risk', 'wp-digi-dtrans-i18n' ), $wpdigi_danger_ctr->get_taxonomy(), (int)$new_danger_id ), ), 0 );
 					}
 					else {
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => __( 'Danger to associate have not been found.', 'digirisk'), ), 2 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => __( 'Danger to associate have not been found.', 'wp-digi-dtrans-i18n'), ), 2 );
 					}
 
 					/**	Définition de la catégorie de danger pour le risque selon les nouveaux rangements / Define the danger category for risk into new storage	*/
@@ -268,11 +268,11 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 					if ( !empty( $new_method_id ) ) {
 						wp_set_object_terms( $wp_risk->id, (int)$new_method_id, $wpdigi_evaluation_method_controller->get_taxonomy() );
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Method %d have been associated to risk', 'digirisk' ), (int)$new_method_id ), ), 0 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Method %d have been associated to risk', 'wp-digi-dtrans-i18n' ), (int)$new_method_id ), ), 0 );
 					}
 					else {
 						/**	Log creation	*/
-						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => __( 'Method to associate have not been found.', 'digirisk'), ), 2 );
+						wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => __( 'Method to associate have not been found.', 'wp-digi-dtrans-i18n'), ), 2 );
 					}
 
 					/**	Création de chaque évaluation du risque / Create each risk evaluation	*/
@@ -339,7 +339,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 							$wp_risk->option[ 'associated_evaluation' ][] = $wp_risk_evaluation->id;
 
 							/**	Log creation	*/
-							wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Evaluation %d have been associated to risk under %s', 'digirisk' ), (int)$risk_evaluation_definition[ 'option' ][ 'unique_key' ], $wp_risk_evaluation->id ), ), 0 );
+							wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Evaluation %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$risk_evaluation_definition[ 'option' ][ 'unique_key' ], $wp_risk_evaluation->id ), ), 0 );
 
 							$query = $wpdb->prepare(
 								"SELECT *
@@ -384,7 +384,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 									$wp_risk_evaluation_comment = $wpdigi_risk_evaluation_comment_ctr->create( $risk_evaluation_comment_definition );
 									if ( !empty( $wp_risk_evaluation_comment->id ) ) {
 										/**	Log creation	*/
-										wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Evaluation comment %d have been associated to risk under %s', 'digirisk' ), (int)$comment->id, $wp_risk_evaluation_comment->id ), ), 0 );
+										wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Evaluation comment %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$comment->id, $wp_risk_evaluation_comment->id ), ), 0 );
 									}
 								}
 							}
@@ -394,7 +394,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 						}
 						else {
 							/**	Log creation	*/
-							wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'digirisk' ), json_encode( $wp_risk_evaluation ) ), ), 2 );
+							wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'wp-digi-dtrans-i18n' ), json_encode( $wp_risk_evaluation ) ), ), 2 );
 						}
 					}
 
@@ -403,7 +403,7 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 				}
 				else {
 					/**	Log creation	*/
-					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Unable to transfer risk to wordpress system. %d', 'digirisk' ), json_encode( $wp_risk ) ), ), 2 );
+					wpeologs_ctr::log_datas_in_files( 'digirisk-datas-tranfert-risk', array( 'object_id' => $old_risk_id, 'message' => sprintf( __( 'Unable to transfer risk to wordpress system. %d', 'wp-digi-dtrans-i18n' ), json_encode( $wp_risk ) ), ), 2 );
 				}
 			}
 		}
@@ -649,3 +649,5 @@ class wpdigi_transferdata_society_ctr_01 extends TransferData_common_controller 
 	}
 
 }
+
+wpdigi_transferdata_society_class::get();

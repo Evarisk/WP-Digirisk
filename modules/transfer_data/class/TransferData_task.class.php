@@ -1,71 +1,9 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/* PRODEST-MASTER:
-{
-	"name": "TransferData_task.controller.01.php",
-	"description": "Fichier contenant les utilitaires pour les tranferts spécifiques pour les tâches / File with all utilities for tasks' specific transfer",
-	"type": "file",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
 
-/* PRODEST:
-{
-	"name": "TransferData_task_controller",
-	"description": "Classe contenant les utilitaires pour les tranferts spécifiques pour les tâches / Class with all utilities for tasks' specific transfer",
-	"type": "class",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
-class TransferData_task_controller {
+class TransferData_task_class extends singleton_util {
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "Instanciation des outils pour les transferts spécifiques aux tâches / Instanciate tasks' specific transfer utilities",
-		"type": "function",
-		"check": false,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-		}
-	*/
-	function __construct() { }
+	protected function construct() { }
 
-	/* PRODEST:
-	{
-		"name": "transfer",
-		"description": "Traitement du transfert des commentaires et notes associés à une tâches / Treat the transfer for comments and notes associated to a task",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$element": {"type": "integer", "description": "Identifiant de la tâche pour lequel il faut récupérer les commentaires et notes et les transférer / Element identifier for which we have to get comment and notes for and transfer them into new storage way", "default": "null"},
-			"$element_type": {"type": "string", "description": "Le type de l'élément (tâche) pour lequel il faut récupèrer les commentaires et notes / Element type we had to get comment and notes for", "default": "picture"},
-			"$element_id": {"type": "integer", "description": "Identifiant de la tâche transféré auquel sont associés les commentaires et notes / Transfered element identifier to which comment and notes are associated", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer( $element, $element_type, $element_id ) {
 		/**	Transfert follow up of tasks	*/
 		$this->transfer_follow_up( $element->id, $element_type, $element_id );
@@ -117,26 +55,6 @@ class TransferData_task_controller {
 		}
 	}
 
-	/* PRODEST:
-	 {
-		"name": "transfer_follow_up",
-		"description": "Traitement du transfert des commentaires et notes associés à une tâches / Treat the transfer for comments and notes associated to a task",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$old_element_id": {"type": "integer", "description": "Identifiant de la tâche pour lequel il faut récupérer les commentaires et notes et les transférer / Element identifier for which we have to get comment and notes for and transfer them into new storage way", "default": "null"},
-			"$old_element_type": {"type": "string", "description": "Le type de l'élément (tâche) pour lequel il faut récupèrer les commentaires et notes / Element type we had to get comment and notes for", "default": "picture"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de la tâche transféré auquel sont associés les commentaires et notes / Transfered element identifier to which comment and notes are associated", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_follow_up( $old_element_id, $old_element_type, $new_element_id ) {
 		/**	Get existing folow up for given element	*/
 		$follow_up_types = array( 'note', 'follow_up' );
@@ -190,26 +108,6 @@ class TransferData_task_controller {
 		}
 	}
 
-	/* PRODEST:
-	{
-		"name": "transfer_link_between_tasks_and_element",
-		"description": "Traitement du transfert des notifications associées à un élément / Treat the transfer for notifications associated to an element",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"param":
-		{
-			"$old_element_id": {"type": "integer", "description": "Identifiant de la tâche pour lequel il faut récupérer les liens avec d'autres éléments et les transférer / Element identifier for which we have to get link with other elements for and transfer them into new storage way", "default": "null"},
-			"$old_element_type": {"type": "string", "description": "Le type de l'élément (tâche) pour lequel il faut récupèrer les liens avec d'autres éléments / Element type we had to get link with other elements for", "default": "picture"},
-			"$new_element_id": {"type": "integer", "description": "Identifiant de la tâche transféré auquel sont associés les liens avec d'autres éléments / Transfered element identifier to which link with others elements are associated", "default": "null"}
-		},
-		"version": 1.0
-	}
-	*/
 	function transfer_link_between_tasks_and_element( $old_element_id, $old_element_type, $new_element_id ) {
 		global $wpdb;
 
@@ -232,10 +130,12 @@ class TransferData_task_controller {
 				update_post_meta( $new_element_id, '_wpeo_element_links', $links );
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $old_element_type . '-association-error', array( 'object_id' => $old_element_id, 'message' => sprintf( __( 'Element linked to this %s have not been transfered to %d', 'digirisk' ), $old_element_type, $new_element_id ), ), 2 );
+				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $old_element_type . '-association-error', array( 'object_id' => $old_element_id, 'message' => sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), ), 2 );
 			}
 		}
 
 	}
 
 }
+
+TransferData_task_class::get();

@@ -76,10 +76,10 @@
 
 ?>
 		<li class="wp-digi-transfert-components" >
-			<div class="wp-digi-datastransfer-element-type-name<?php if ( $main_config_components_are_transfered ) : echo ' dashicons-before dashicons-yes'; endif; ?> "><?php _e( 'General components', 'digirisk' ); ?></div>
+			<div class="wp-digi-datastransfer-element-type-name<?php if ( $main_config_components_are_transfered ) : echo ' dashicons-before dashicons-yes'; endif; ?> "><?php _e( 'General components', 'wp-digi-dtrans-i18n' ); ?></div>
 			<ul class="wp-digi-datastransfer-element-type-detail" >
-				<li><?php _e( 'Danger', 'digirisk' ); ?> : <span><?php echo $eva_danger_transfered; ?> / <?php echo $eva_danger_to_transfer; ?></span></li>
-				<li><?php _e( 'Method', 'digirisk' ); ?> : <span><?php echo $method_transfered; ?> / <?php echo $method_to_transfer; ?></span></li>
-				<li><?php _e( 'Recommendation', 'digirisk' ); ?> : <span><?php echo $recommendation_transfered; ?> / <?php echo $recommendation_to_transfer; ?></span></li>
+				<li><?php _e( 'Danger', 'wp-digi-dtrans-i18n' ); ?> : <span><?php echo $eva_danger_transfered; ?> / <?php echo $eva_danger_to_transfer; ?></span></li>
+				<li><?php _e( 'Method', 'wp-digi-dtrans-i18n' ); ?> : <span><?php echo $method_transfered; ?> / <?php echo $method_to_transfer; ?></span></li>
+				<li><?php _e( 'Recommendation', 'wp-digi-dtrans-i18n' ); ?> : <span><?php echo $recommendation_transfered; ?> / <?php echo $recommendation_to_transfer; ?></span></li>
 			</ul>
 		</li>

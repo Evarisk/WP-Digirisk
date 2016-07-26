@@ -5,16 +5,9 @@
  * @version 5.0
  * @package Digirisk
  */
-DEFINE( 'WPDIGI_OLDFUNC_VERSION', '5.1.9.9' );
-
-/**	Définition des constantes pour le module / Define constant for module	*/
-DEFINE( 'WPDIGI_OLDFUNC_DIR', basename(dirname(__FILE__)));
-DEFINE( 'WPDIGI_OLDFUNC_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
-DEFINE( 'WPDIGI_OLDFUNC_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
-DEFINE( 'WPDIGI_OLDFUNC_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', WPDIGI_OLDFUNC_PATH ) );
 
 /**	Include the different config for the plugin	*/
-require_once( WPDIGI_OLDFUNC_PATH . '/include/config.php' );
+require_once( DIGI_DTRANS_PATH . DIGI_DTRANS_DIR . '/include/config.php' );
 
 /*	CLEAN UP A VAR BEFORE SENDING IT TO OUTPUT OR DATABASE	*/
 function IsValid_Variable($MyVar2Test,$DefaultValue='')
@@ -31,12 +24,13 @@ function IsValid_Variable($MyVar2Test,$DefaultValue='')
  *
  *	@return mixed $optionSubValue The value of the option
  */
-function getDbOption($subOptionName)
+function getDbOption( $subOptionName )
 {
 	$optionSubValue = -1;
 
 	/*	Get the db option 	*/
-	$optionValue = get_option('digirisk_db_option');
+	$optionValue = get_option( 'digirisk_db_option' );
+
 	if($optionValue != ''){
 		if(is_array($optionValue)){
 			$optionSubValue = $optionValue[$subOptionName];

@@ -1,75 +1,20 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/* PRODEST-MASTER:
-{
-	"name": "TransferData_ajax.controller.01.php",
-	"description": "Fichier contenant les requetes ajax pour le module de transfert de données / File for all ajax request needed for datas transfer",
-	"type": "file",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
 
-/* PRODEST:
-{
-	"name": "TransferData_ajax_controller",
-	"description": "Classe contenant les requetes ajax pour le module de transfert de données / Class for all ajax request needed for datas transfer",
-	"type": "class",
-	"check": true,
-	"author":
-	{
-		"email": "dev@evarisk.com",
-		"name": "Alexandre T"
-	},
-	"version": 1.0
-}
-*/
-class TransferData_ajax_controller_01 extends TransferData_controller_01 {
+class TransferData_ajax_class extends TransferData_class {
 
-	/* PRODEST:
-	{
-		"name": "__construct",
-		"description": "Initialisation de la gestion des requetes ajax pour l'utilitaire de transfert des données de Digirisk vers le stockage de wordpress / Initialisation of ajax request for utilities allowing to transfer Digirisk datas to wordpress storage",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
-	*/
-	function __construct() {
+
+	protected function construct() {
 		/**	Launch transfer for elements	*/
 		add_action( 'wp_ajax_wpdigi-datas-transfert', array( $this, 'launch_transfer' ), 150 );
 	}
 
-	/* PRODEST:
-	{
-		"name": "launch_transfer",
-		"description": "Lancement du transfert des données / Launch element datas transfer",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
-	*/
 	function launch_transfer() {
 		global $wpdb;
 
 		$response = array (
 			'status'				=> false,
 			'reload_transfert'		=> false,
-			'message'				=> __( 'A required parameter is missing, please check your request and try again', 'digirisk' ),
+			'message'				=> __( 'A required parameter is missing, please check your request and try again', 'wp-digi-dtrans-i18n' ),
 		);
 		$element_type = !empty( $_POST[ 'element_type_to_transfert' ] ) && in_array( $_POST[ 'element_type_to_transfert' ] , $this->element_type ) ? sanitize_text_field( $_POST[ 'element_type_to_transfert' ] ): '';
 		$sub_action = !empty( $_POST[ 'sub_action' ] ) && in_array( $_POST[ 'sub_action' ] , array( 'element', 'doc', 'config_components') ) ? sanitize_text_field( $_POST[ 'sub_action' ] ) : 'element';
@@ -89,7 +34,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 		if ( !empty( $element_type ) ) {
 			/**	Define default message and transfer reload state	*/
 			$response[ 'reload_transfert' ] = true;
-			$response[ 'message' ] = __( 'Import will automatically continue while all elements won\'t be transfered into database', 'digirisk' );
+			$response[ 'message' ] = __( 'Import will automatically continue while all elements won\'t be transfered into database', 'wp-digi-dtrans-i18n' );
 
 			if ( 'config_components' != $sub_action ) {
 				/**	Get transfert statistics */
@@ -117,7 +62,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 					$response[ 'status' ] = true;
 					$response[ 'reload_transfert' ] = false;
 					$response[ 'redirect_to_url' ] = admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' );
-					$response[ 'message' ] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'digirisk' );
+					$response[ 'message' ] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'wp-digi-dtrans-i18n' );
 
 					/**	Mise à jour de l'identifiant unique de l'association des préconisations /	Update unique identifier of recommendation association */
 					global $digi_recommendation_controller;
@@ -245,7 +190,7 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 					$transfer_response[ 'old_sub_action' ] = $sub_action;
 
 					global $wpdigi_evaluation_method_controller;
-					// $wpdigi_evaluation_method_controller->create_default_data();
+					$wpdigi_evaluation_method_controller->create_default_data();
 
 					/**	Build an output for component box	*/
 					ob_start();
@@ -267,20 +212,6 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 		wp_die( json_encode( $response ) );
 	}
 
-	/* PRODEST:
-	{
-		"name": "launch_element_transfer",
-		"description": "Lancement du transfert des données des éléments (hors medias) / Launch element datas transfer (except medias)",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
-	*/
 	function element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, $transfered_element ) {
 		global $wpdb;
 		$main_element_transfered = $sub_element_transfered = 0;
@@ -372,20 +303,6 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 		return $response;
 	}
 
-	/* PRODEST:
-	{
-		"name": "document_transfer",
-		"description": "Lancement du transfert des médias associés aux éléments déjà transférés / Launch medias transfer for already transfered elements",
-		"type": "function",
-		"check": true,
-		"author":
-		{
-			"email": "dev@evarisk.com",
-			"name": "Alexandre T"
-		},
-		"version": 1.0
-	}
-	*/
 	function document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, $transfered_element ) {
 		global $wpdb;
 		$all_heavy_element_done = false;
@@ -816,4 +733,4 @@ class TransferData_ajax_controller_01 extends TransferData_controller_01 {
 
 }
 
-new TransferData_ajax_controller_01();
+TransferData_ajax_class::get();
