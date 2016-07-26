@@ -30,6 +30,7 @@ class menu_action {
 	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
 	 */
 	public function callback_admin_menu() {
+		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
 		if ( empty( $digirisk_core['installed'] ) && getDbOption( 'base_evarisk' ) > 0 ) {
 			add_menu_page( __( 'Digirisk : Manage datas transfert from digirisk V5.X', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digi-transfert', array( &$this, 'transfer_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );
 		}
