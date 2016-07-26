@@ -33,8 +33,13 @@ class sheet_groupment_action {
 		}
 
 		$generation_response = sheet_groupment_class::get()->generate_sheet( $element_id );
+  	$document = document_class::get()->show( $generation_response[ 'id' ] );
+		ob_start();
+		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
+		$response[ 'output' ] = ob_get_contents();
+		ob_end_clean();
 
-		wp_die( json_encode( $generation_response ) );
+		wp_send_json_success($response);
 	}
 
 }

@@ -102,9 +102,9 @@ var digi_workunit = {
 	        },
 	        success:       function( responseText, statusText, xhr, $form ) {
 	        	digi_workunit.$( element ).removeClass( "wp-digi-loading" );
-	        	if ( responseText.status && ( undefined !== responseText.output ) ) {
+	        	if ( responseText.success ) {
 	        		if ( undefined !== digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).html() ) {
-	        			digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.output );
+	        			digi_workunit.$( ".wp-digi-global-sheet-content ul.wp-digi-list-document" ).prepend( responseText.data.output );
 	        		}
 	        		else {
 	        			digi_workunit.$( ".wp-digi-global-sheet-tab li.wp-digi-sheet-generation-button" ).click();

@@ -526,11 +526,6 @@ class document_class extends post_class {
   		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
   	}
 
-  	// ob_start();
-  	// require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
-  	// $response[ 'output' ] = ob_get_contents();
-  	// ob_end_clean();
-
   	return $response;
 	}
 }
