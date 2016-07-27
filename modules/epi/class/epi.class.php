@@ -1,0 +1,115 @@
+<?php if ( !defined( 'ABSPATH' ) ) exit;
+
+class epi_class extends post_class {
+
+	protected $model_name   = 'epi_model';
+	protected $post_type    = 'digi-epi';
+	protected $meta_key    	= '_wpdigi_epi';
+
+	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to epi from WP Rest API	*/
+	protected $base = 'digiepi/epi';
+	protected $version = '0.1';
+
+	public $element_prefix = 'R';
+
+	protected $limit_epi = -1;
+
+	/**
+	 * Instanciation principale de l'extension / Plugin instanciation
+	 */
+	protected function construct() {
+		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for epis management	*/
+		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
+	}
+
+	/**
+	* Déclares le post type: risque
+	*/
+	function custom_post_type() {
+		/**	Créé les sociétés: élément principal / Create epi : main element 	*/
+		$labels = array(
+			'name'                => __( 'Risks', 'digiepi' ),
+			'singular_name'       => __( 'Risk', 'digiepi' ),
+			'menu_name'           => __( 'Risks', 'digiepi' ),
+			'name_admin_bar'      => __( 'Risks', 'digiepi' ),
+			'parent_item_colon'   => __( 'Parent Item:', 'digiepi' ),
+			'all_items'           => __( 'Risks', 'digiepi' ),
+			'add_new_item'        => __( 'Add epi', 'digiepi' ),
+			'add_new'             => __( 'Add epi', 'digiepi' ),
+			'new_item'            => __( 'New epi', 'digiepi' ),
+			'edit_item'           => __( 'Edit epi', 'digiepi' ),
+			'update_item'         => __( 'Update epi', 'digiepi' ),
+			'view_item'           => __( 'View epi', 'digiepi' ),
+			'search_items'        => __( 'Search epi', 'digiepi' ),
+			'not_found'           => __( 'Not found', 'digiepi' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'digiepi' ),
+		);
+		$rewrite = array(
+			'slug'                => '/',
+			'with_front'          => true,
+			'pages'               => true,
+			'feeds'               => true,
+		);
+		$args = array(
+			'label'               => __( 'Digiepi epi', 'digiepi' ),
+			'description'         => __( 'Manage epis into digiepi', 'digiepi' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
+			'hierarchical'        => true,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => false,
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => true,
+			'rewrite'             => $rewrite,
+			'capability_type'     => 'page',
+		);
+		register_post_type( $this->post_type, $args );
+	}
+
+	/**
+	* Affiche la fenêtre principale
+	*
+	* @param int $society_id L'ID de la societé
+	*/
+	public function display( $society_id ) {
+		require( EPI_VIEW_DIR . 'main.view.php' );
+	}
+
+	/**
+	 * DISPLAY - Génération de l'affichage des risques à partir d'un shortcode / Generate display for epis through shortcode
+	 *
+	 * @param int $society_id L'ID de la societé
+	 */
+	public function display_epi_list( $society_id ) {
+		$society = society_class::get()->show_by_type( $society_id );
+
+		if ( $society->id === 0 ) {
+			return false;
+		}
+
+		$epi_list = epi_class::get()->index( array( 'post_parent' => $society->id ) );
+
+		if ( !empty( $epi_list ) ) {
+		  foreach ( $epi_list as $key => $element ) {
+				$epi_list[$key] = $this->get_epi( $element->id );
+		  }
+		}
+
+		// Tries les risques par ordre de cotation
+		if ( count( $epi_list ) > 1 ) {
+			usort( $epi_list, function( $a, $b ) {
+				if( $a->evaluation->option[ 'epi_level' ][ 'equivalence' ] == $b->evaluation->option[ 'epi_level' ][ 'equivalence' ] ) {
+					return 0;
+				}
+				return ( $a->evaluation->option[ 'epi_level' ][ 'equivalence' ] > $b->evaluation->option[ 'epi_level' ][ 'equivalence' ] ) ? -1 : 1;
+			} );
+		}
+
+		require( EPI_VIEW_DIR . 'list.view.php' );
+	}
+}
