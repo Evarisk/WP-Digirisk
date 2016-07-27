@@ -77,7 +77,7 @@ class accident_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
-		require( EPI_VIEW_DIR . 'main.view.php' );
+		require( ACCIDENT_VIEW_DIR . 'main.view.php' );
 	}
 
 	/**
@@ -110,6 +110,6 @@ class accident_class extends post_class {
 			} );
 		}
 
-		require( EPI_VIEW_DIR . 'list.view.php' );
+		require( ACCIDENT_VIEW_DIR . 'list.view.php' );
 	}
 }
