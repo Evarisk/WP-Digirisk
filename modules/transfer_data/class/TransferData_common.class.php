@@ -3,7 +3,7 @@ namespace digi\transfert;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_common_class extends TransferData_class {
+class TransferData_common_class extends \singleton_util {
 
 	protected function construct() { }
 
@@ -33,7 +33,7 @@ class TransferData_common_class extends TransferData_class {
 
 		/**	Define the default field for new element into wordpress	*/
 		$element_wp_definition = array(
-			'post_type' => $this->post_type[ $element_type ],
+			'post_type' => TransferData_class::get()->post_type[ $element_type ],
 		);
 		if ( !empty( $element_parent ) ) {
 			$element_wp_definition[ 'post_parent' ] = $element_parent;
@@ -166,7 +166,7 @@ class TransferData_common_class extends TransferData_class {
 		$not_transfered_element = $wpdb->get_results( $query );
 		if ( !empty( $not_transfered_element ) ) {
 			foreach ( $not_transfered_element as $element ) {
-				$new_element_id = $this->transfer( $element_type, $element );
+				$new_element_id = TransferData_class::get()->transfer( $element_type, $element );
 				if ( !is_wp_error( $new_element_id ) ) {
 					$treated_element += 1;
 				}
