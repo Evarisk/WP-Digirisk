@@ -70,7 +70,8 @@ class include_util extends singleton_util {
 	}
 
   public function callback_admin_enqueue_scripts() {
-    $this->enqueue_script( $this->get_list_file( WPDIGI_PATH, array(), false, 'js' ) );
+		$end_extension_js = WPDIGI_DEBUG ? "backend.js" : "min.js";
+    $this->enqueue_script( $this->get_list_file( WPDIGI_PATH, array(), false, $end_extension_js ) );
     $this->enqueue_style( $this->get_list_file( WPDIGI_PATH, array(), false, 'css' ) );
   }
 
