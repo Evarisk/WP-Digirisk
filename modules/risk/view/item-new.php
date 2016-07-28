@@ -17,9 +17,7 @@
 				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="list_comment[0][comment_date]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
 				<span class="wp-digi-risk-comment" ><textarea name="list_comment[0][comment_content]" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
 
-				<span class="wp-digi-risk-action wp-digi-action wp-digi-action-new" >
-					<button class="progress-button" data-style="fill" data-horizontal><i class="dashicons dashicons-plus"></i></button>
-				</span>
+				<span class="wp-digi-risk-action wp-digi-action-new wp-digi-action" ><a href="#" class="wp-digi-action dashicons dashicons-plus" ></a></span>
 			</li>
 		</ul>
 

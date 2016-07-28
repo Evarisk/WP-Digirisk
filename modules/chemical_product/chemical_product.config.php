@@ -22,4 +22,5 @@ DEFINE( 'CHEMICAL_PRODUCT_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE
 DEFINE( 'CHEMICAL_PRODUCT_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', CHEMICAL_PRODUCT_PATH ) );
 DEFINE( 'CHEMICAL_PRODUCT_VIEW_DIR', CHEMICAL_PRODUCT_PATH . '/view/');
 DEFINE( 'CHEMICAL_PRODUCT_MODEL', CHEMICAL_PRODUCT_PATH . '/model/');
+DEFINE( 'CHEMICAL_PRODUCT_STATE', false );
 ?>

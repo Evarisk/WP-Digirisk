@@ -15,24 +15,19 @@ var digi_risk = {
 		if ( event || event === undefined ) {
 			digi_risk.event();
 		}
+
 		this.old_date = digi_risk.$( '.wp-digi-risk-item-new input[name="risk_comment_date"]' ).val();
 		this.old_cotation = digi_risk.$( '.wp-digi-risk-item-new .wp-digi-risk-level-new' ).html();
-		if ( digi_risk.$( '.wp-digi-risk-item-new button' ).length > 0 ) {
-			this.button = new window.ProgressButton( digi_risk.$( '.wp-digi-risk-item-new button' )[0], {
-				callback: digi_risk.create_risk,
-			} );
-		}
 	},
 
 	event: function() {
+		digi_risk.$( document ).on( 'click', '.wp-digi-risk-item-new .wp-digi-action-new', function( event ) { digi_risk.create_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-delete', function( event ) { digi_risk.delete_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-load', function( event ) { digi_risk.load_risk( event, digi_risk.$( this ) ); } );
 		digi_risk.$( document ).on( 'click', '.wp-digi-risk .wp-digi-action-edit', function( event ) { digi_risk.edit_risk( event, digi_risk.$( this ) ); } );
 	},
 
-	create_risk: function( instance ) {
-    var element = instance.button;
-
+	create_risk: function( event, element ) {
     digi_risk.$( element ).closest( 'form' ).ajaxSubmit( {
       'beforeSubmit': function() {
         var element_required = false;
@@ -53,7 +48,6 @@ var digi_risk = {
         }
 
         if ( element_required ) {
-          instance._stop(-1);
           return false;
         }
 
@@ -66,7 +60,6 @@ var digi_risk = {
 				digi_risk.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 				digi_risk.$( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
 				digi_risk.reset_create_form();
-        instance._stop(1);
 			}
 		} );
 

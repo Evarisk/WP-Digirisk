@@ -24,18 +24,36 @@ class include_util extends singleton_util {
 		$list_exclude_dir = array( 'core\\\external' );
     $ordered_file = array();
 
+		$plugin_dir_path = plugin_dir_path( __FILE__ );
+		$plugin_dir_path = str_replace( '\\', '/', substr( $plugin_dir_path, 0, count( $plugin_dir_path ) - 11) );
+
   	foreach ( $list_file as $file ) {
       if ( !empty( $file[0] ) && !empty( $file[1] ) && is_file($file[0]) )  {
+				$file[0] = str_replace( '\\', '/', $file[0] );
+				$file_path = str_replace($plugin_dir_path, '', $file[0]);
+				$file_path = explode('/', $file_path);
+				$module_name = "";
+				if (!empty( $file_path ) && !empty( $file_path[1] ) ) {
+					$module_name = $file_path[1];
+				}
 				if ( !preg_match( '/' . implode( '|', $list_exclude_dir ) . '/', $file[0] ) ) {
-        	$ordered_file[$file[1]][] = $file[0];
+        	$ordered_file[$module_name][$file[1]][] = $file[0];
 				}
       }
     }
 
     foreach ( $list_extension as $extension ) {
-      if ( !empty( $ordered_file[$extension] ) ) {
-        foreach ( $ordered_file[$extension] as $file ) {
-          require_once ( $file );
+			foreach ( $ordered_file as $module_name => $array_extension )
+      if ( !empty( $array_extension[$extension] ) ) {
+        foreach ( $array_extension[$extension] as $file ) {
+					if (!empty( $module_name ) && defined( strtoupper( $module_name ) . '_STATE' ) ) {
+						if ( constant( strtoupper( $module_name ) . '_STATE' ) ) {
+							require_once ( $file );
+						}
+					}
+					else {
+	          require_once ( $file );
+					}
         }
       }
     }
