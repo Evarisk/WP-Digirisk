@@ -454,7 +454,7 @@ class document_class extends post_class {
   	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
   	$main_title_part = $element->title;
   	if ( !empty( $document_type ) && is_array( $document_type ) ) {
-  		$main_title_part = $main_title_part . '_' . $document_type[ 0 ];
+  		$main_title_part = $document_type[ 0 ] . '_' . $main_title_part;
   	}
 
   	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/

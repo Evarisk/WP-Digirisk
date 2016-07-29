@@ -169,12 +169,7 @@ class evaluator_action {
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
 		$args_where_evaluator = array(
-			'offset' => ( $current_page - 1 ) * evaluator_class::get()->limit_evaluator,
-			'exclude' => array( 1 ),
-			'number' => evaluator_class::get()->limit_evaluator,
-			'meta_query' => array(
-				'relation' => 'OR',
-			),
+			'exclude' => array( 1 )
 		);
 
 		$list_evaluator_to_assign = evaluator_class::get()->index( $args_where_evaluator );
@@ -187,13 +182,13 @@ class evaluator_action {
 
 		$number_page = ceil( $count_evaluator / evaluator_class::get()->limit_evaluator );
 
-		if ( !empty( $list_evaluator_to_assign ) ) {
-			foreach ( $list_evaluator_to_assign as $key => $evaluator ) {
-				if ( !in_array( $evaluator->id, $list_user_id ) ) {
-					unset( $list_evaluator_to_assign[$key] );
+			if ( !empty( $list_evaluator_to_assign ) ) {
+				foreach ( $list_evaluator_to_assign as $key => $evaluator ) {
+					if ( !in_array( $evaluator->id, $list_user_id ) ) {
+						unset( $list_evaluator_to_assign[$key] );
+					}
 				}
 			}
-		}
 
 		ob_start();
 		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );

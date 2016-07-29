@@ -237,12 +237,7 @@ class user_action extends \singleton_util {
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
 		$args_where_user = array(
-			'offset' => ( $current_page - 1 ) * user_class::get()->limit_user,
-			'number' => user_class::get()->limit_user,
-			'exclude' => array( 1 ),
-			'meta_query' => array(
-				'relation' => 'OR',
-			),
+			'exclude' => array( 1 )
 		);
 
 		$list_user_to_assign = user_class::get()->index( $args_where_user );
