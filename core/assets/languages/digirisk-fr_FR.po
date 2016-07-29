@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Digirisk V2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-29 14:24+0100\n"
-"PO-Revision-Date: 2016-07-29 14:24+0100\n"
+"PO-Revision-Date: 2016-07-29 15:00+0100\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -1811,7 +1811,7 @@ msgstr "Ajouter un utilisateur Digirisk"
 
 #: modules\user/action/user.action.php:41
 msgid "Digirisk : add"
-msgstr "Digirisk: ajouter"
+msgstr "Digirisk: utilisateurs"
 
 #: modules\user/filter/user.filter.php:21
 msgid "User"
