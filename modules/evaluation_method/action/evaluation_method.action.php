@@ -11,7 +11,7 @@ class evaluation_method_action {
   public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
 		add_action( 'wp_ajax_get_scale', array( $this, 'ajax_get_scale' ) );
-    add_action( 'save_risk_evaluation_method', array( $this, 'callback_save_risk_evaluation_method' ) );
+    add_action( 'save_risk_evaluation_method', array( $this, 'callback_save_risk_evaluation_method' ), 10, 2 );
   }
 
 	/**
@@ -73,7 +73,7 @@ public function ajax_get_scale() {
   * @param array $_POST Les données envoyées par le formulaire
   *
   */
-  public function callback_save_risk_evaluation_method() {
+  public function callback_save_risk_evaluation_method( $risk_id, $risk_evaluation_id ) {
 		// todo A déplacer dans la class ?
     $method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 
@@ -81,7 +81,6 @@ public function ajax_get_scale() {
       wp_send_json_error();
     }
 
-    $risk_id = risk_class::get()->get_last_entry();
     $risk = risk_class::get()->show( $risk_id );
 
     $risk->taxonomy['digi-method'][] = $method_evaluation_id;

@@ -16,7 +16,7 @@ class risk_save_action {
 	* Le constructeur appelle la méthode personnalisé: save_risk
 	*/
 	public function __construct() {
-		add_action( 'save_risk', array( $this, 'callback_save_risk' ), 1 );
+		add_action( 'save_risk', array( $this, 'callback_save_risk' ), 10, 1 );
 
 	}
 
@@ -29,7 +29,7 @@ class risk_save_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_save_risk() {
+	public function callback_save_risk( $risk_evaluation_id ) {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
 
@@ -57,8 +57,7 @@ class risk_save_action {
     $unique_key = $last_unique_key + 1;
 
 		// Charge l'évaluation créer dans le callback callback_save_risk de risk_evaluation_action
-		$evaluation_id = risk_evaluation_class::get()->get_last_entry();
-		$evaluation = risk_evaluation_class::get()->show( $evaluation_id );
+		$evaluation = risk_evaluation_class::get()->show( $risk_evaluation_id );
 
 		// L'unique identifier du risque et de l'évaluation
 		$unique_identifier = risk_class::get()->element_prefix . $unique_key;
@@ -85,7 +84,7 @@ class risk_save_action {
 			$risk->option['unique_identifier'] = risk_class::get()->element_prefix . $risk->option['unique_key'];
 		}
 
-		$risk->option['current_evaluation_id'] = $evaluation_id;
+		$risk->option['current_evaluation_id'] = $risk_evaluation_id;
 
 		$risk = risk_class::get()->update( $risk );
 
@@ -98,7 +97,7 @@ class risk_save_action {
 			file_management_class::get()->associate_file( $file_id, $risk->id, 'risk_class' );
 		}
 
-		do_action( 'save_risk_evaluation_comment' );
+		do_action( 'save_risk_evaluation_comment', $risk->id, $risk_evaluation_id );
 	}
 }
 

@@ -16,7 +16,7 @@ class risk_evaluation_comment_action {
 	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	*/
 	public function __construct() {
-		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ) );
+		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 2 );
 	}
 
 	/**
@@ -28,11 +28,8 @@ class risk_evaluation_comment_action {
 	*
   * @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_save_risk_evaluation_comment() {
+ 	public function callback_save_risk_evaluation_comment( $risk_id, $risk_evaluation_id ) {
     $list_comment = !empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment' ] : array();
-
-		$risk_evaluation_id = risk_evaluation_class::get()->get_last_entry();
-		$risk_id = risk_class::get()->get_last_entry();
 
 		if ( !empty( $_POST['risk_id'] ) ) {
 			$risk_id = (int) $_POST['risk_id'];
@@ -59,7 +56,7 @@ class risk_evaluation_comment_action {
 		  }
 		}
 
-		do_action( 'save_risk_evaluation_method' );
+		do_action( 'save_risk_evaluation_method', $risk_id, $risk_evaluation_id );
 	}
 }
 

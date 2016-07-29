@@ -71,9 +71,9 @@ class risk_evaluation_action {
 		$data['option']['unique_key'] = $new_unique_key;
 		$data['option']['unique_identifier'] = 'E' . $new_unique_key;
 
-		risk_evaluation_class::get()->update( $data );
+		$risk_evaluation_class = risk_evaluation_class::get()->update( $data );
 
-		do_action( 'save_risk' );
+		do_action( 'save_risk', $risk_evaluation_class->id );
 	}
 
 	/**
