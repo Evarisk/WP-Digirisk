@@ -94,7 +94,7 @@ class society_class extends singleton_util {
 		if ( empty( $type ) ) {
 			$type = ( is_array( $establishment ) && !empty( $establishment['type'] ) ) ? $establishment['type'] : '';
 		}
-		
+
 		if ( empty( $type ) ) {
 			return false;
 		}

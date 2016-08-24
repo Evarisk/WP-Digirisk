@@ -29,8 +29,8 @@ class workunit_shortcode {
 	public function shortcode_workunit_list( $args ) {
 		$output = '';
 
-		/**	Get existing groups for display	*/
-		$list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'parent_id' => 0, 'post_status' => array( 'publish', ), 'post_parent' => $args[ 'group_id' ] ), false );
+		/**	Get existing workunit for display	*/
+		$list = workunit_class::get()->get_workunit_of_group( $args[ 'group_id' ] );
 
 		/**	Define a nonce for display sheet using ajax	*/
 		$workunit_display_nonce = wp_create_nonce( 'wpdigi_workunit_sheet_display' );

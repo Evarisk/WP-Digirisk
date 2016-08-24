@@ -42,4 +42,5 @@ class file_management_class extends singleton_util {
 
     $object_name::get()->update( $element );
   }
+	
 }

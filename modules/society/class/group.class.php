@@ -97,7 +97,7 @@ class group_class extends post_class {
 	 */
 	public function display_society_tree( $mode = 'simple', $group_id = 0 ) {
 		/**	Get existing groups for main selector display	*/
-		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = $this->get_group_of_group( 0 );
 
 		if ( $group_id === 0 ) {
 			$group_id = ( !empty( $group_list ) && !empty( $group_list[0] ) ) ? $group_list[0]->id : 0;
@@ -113,7 +113,7 @@ class group_class extends post_class {
 	*/
 	public function display_all_group( $default_selected_group_id = null ) {
 		/**	Get existing groups for main selector display	*/
-		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = $this->get_group_of_group( 0 );
 
 		//global $default_selected_group_id;
 		$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
@@ -127,6 +127,42 @@ class group_class extends post_class {
 		}
 
 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list' ) );
+	}
+
+
+	/**
+	 * Récupère la liste des groupements enfants appartenant à un groupement / Get children group list belonging to a group
+	 *
+	 * @since 6.1.5.6
+	 * @param  integer $group_id Identifiant du groupement dont il faut récupèrer la liste des groupements enfants / Group identifier where to get get the children group list
+	 * @return array La liste des groupements enfants du groupement / Children group list belonging to the defined group
+	 */
+	function get_group_of_group( $group_id ) {
+		$group_list = array();
+
+		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_status' => array( 'publish', ), 'post_parent' => $group_id ), false );
+
+		return $group_list;
+	}
+
+	/**
+	 * Récupère la liste des enfants ( groupements et unités de travail ) d'un groupement / Get children list ( groups and workunits ) of a group
+	 *
+	 * @since 6.1.5.6
+	 * @param  integer $group_id L'identifiant du groupement dont aon souhaite avoir la liste des enfants / The group identifier we want to get children list for
+	 * @return array           La liste complète des enfants ( groupements et unités de travail ) du groupement / The complète children list ( groups and workunits ) of the group
+	 */
+	function get_group_children( $group_id ) {
+		/** Récupération de la liste des groupements appartenant au groupement actuelle / Get existing group belonging to current group */
+		$group_list = group_class::get()->get_group_of_group( $group_id );
+
+		/**	Récupération de la liste des unités de travail appartenant au groupement / Get existing workunit belonging to group	*/
+		$workunit_list = workunit_class::get()->get_workunit_of_group( $group_id );
+
+		/** Construit la liste des enfants du groupement a partir de la liste de chaque type possible pour les enfants / Build the children list from each list of possible type */
+		$children_list = array_merge( $group_list, $workunit_list );
+
+		return $children_list;
 	}
 
 	/**
@@ -168,7 +204,7 @@ class group_class extends post_class {
 		// 	return false;
 		// }
 
-		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_parent' => $group_id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = $this->get_group_of_group( $group_id );
 
 		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list-item' );
 		if ( $path ) {

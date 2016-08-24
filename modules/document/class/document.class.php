@@ -405,7 +405,7 @@ class document_class extends post_class {
 
 		if( $zip->open( $final_file_path, ZipArchive::CREATE ) !== TRUE ) {
 			$response['status'] = false;
-			$response['message'] = __( 'An error occured while getting element to generate sheet for.', 'digirisk' );
+			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
 		}
 
 		if( !empty( $file_list ) ) {
@@ -417,7 +417,7 @@ class document_class extends post_class {
 
 		$document_creation_response = document_class::get()->create_document( $element, array( 'zip' ), $file_list, $version );
 		$document_creation_response = wp_parse_args( $document_creation_response, $response );
-		if ( !empty( $document_creation_response[ 'id' ] ) ) {
+		if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
 			group_class::get()->update( $element );
 		}

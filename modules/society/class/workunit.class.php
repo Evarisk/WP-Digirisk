@@ -315,4 +315,19 @@ class workunit_class extends post_class {
 		return $document_creation_response;
 	}
 
+	/**
+	 * Récupère la liste des unités de travail appartenant à un groupement / Get workunit list belonging to a group
+	 *
+	 * @param  integer $group_id Identifiant du groupement dont il faut récupèrer la liste des unités de travail / Group identifier where to get get the workunit list
+	 *
+	 * @return array La liste des unités de travail du groupement / Workunit list belonging to the defined group
+	 */
+	function get_workunit_of_group( $group_id ) {
+		$workunit_list = array();
+
+		$workunit_list = $this->index( array( 'posts_per_page' => -1, 'post_status' => array( 'publish', ), 'post_parent' => $group_id ), false );
+
+		return $workunit_list;
+	}
+
 }
