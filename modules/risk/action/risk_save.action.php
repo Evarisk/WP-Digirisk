@@ -62,10 +62,10 @@ class risk_save_action {
 			$risk[0]->taxonomy['digi-danger-category'][] = $danger[0]->parent_id;
 			$risk[0]->parent_id = $element_id;
 			$risk[0]->author_id = get_current_user_id();
-			$risk[0]->option['risk_date'] = array(
-				'start' => current_time( 'mysql' ),
-				'end' => current_time( 'mysql' )
-			);
+			// $risk[0]->option['risk_date'] = array(
+			// 	'start' => current_time( 'mysql' ),
+			// 	'end' => current_time( 'mysql' )
+			// );
 			$risk[0]->taxonomy['digi-method'][] = $method_evaluation_id;
 			unset( $risk[0]->id );
 		}

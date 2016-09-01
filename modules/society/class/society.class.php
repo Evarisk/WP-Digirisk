@@ -63,7 +63,7 @@ class society_class extends singleton_util {
 	*
 	* @return object L'objet
 	*/
-	public function show_by_type( $id, $cropped = false ) {
+	public function show_by_type( $id, $child_wanted = array() ) {
 		$id = (int) $id;
 
 		if ( !is_int( (int)$id ) ) {
@@ -77,7 +77,7 @@ class society_class extends singleton_util {
 		}
 
     $model_name = str_replace( 'digi-', '', $post_type ) . '_class';
-    $establishment = $model_name::g()->get( array( 'id' => $id ) );
+    $establishment = $model_name::g()->get( array( 'id' => $id ), $child_wanted );
 
     return $establishment[0];
   }

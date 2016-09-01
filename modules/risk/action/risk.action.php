@@ -40,7 +40,7 @@ class risk_action {
   */
 	public function callback_display_risk( $society_id ) {
 		ob_start();
-		risk_class::g()->display_risk_list( $society_id );
+		risk_class::g()->display( $society_id );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

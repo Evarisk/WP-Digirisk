@@ -25,7 +25,7 @@ class society_shortcode {
   */
   public function callback_digi_dashboard( $param ) {
 		$id = !empty( $param['id'] ) ? (int)$param['id'] : 0;
-    $element = society_class::g()->show_by_type( $id );
+    $element = society_class::g()->show_by_type( $id, array( 'list_group' ) );
 		$display_trash = true;
 		//
 		// if ( $element ) {

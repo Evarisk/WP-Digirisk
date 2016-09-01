@@ -3,7 +3,7 @@
 class group_class extends post_class {
 
 	protected $model_name   				= 'group_model';
-	protected $post_type    				= WPDIGI_STES_POSTTYPE_MAIN;
+	protected $post_type    				= 'digi-group';
 	protected $meta_key    					= '_wpdigi_society';
 	public $element_prefix 					= 'GP';
 	protected $before_post_function = array( 'construct_identifier', 'convert_date' );
@@ -69,7 +69,7 @@ class group_class extends post_class {
 	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
 	 */
 	public function display_toggle( $groupment ) {
-		require ( SOCIETY_VIEW_DIR . '/toggle.view.php' );
+		require ( GROUP_VIEW_DIR . '/toggle.view.php' );
 	}
 	/**
 	* Affiche un groupement
@@ -82,6 +82,9 @@ class group_class extends post_class {
 		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
 	}
 
+	public function display_list_item( $group ) {
+		require ( GROUP_VIEW_DIR . '/list.view.php' );
+	}
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree
 	 *

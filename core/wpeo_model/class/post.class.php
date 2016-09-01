@@ -12,13 +12,13 @@ class post_class extends singleton_util {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 
-		if ( !empty( $args['id'] ) ) {
+		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
 		}
 		else {
 			$array_posts = get_posts( $args );
 		}
-		
+
 		foreach ( $array_posts as $key => $post ) {
 			$post = (array) $post;
 
@@ -131,7 +131,7 @@ class post_class extends singleton_util {
 		if ( !empty( $data->taxonomy ) ) {
 		  foreach ( $data->taxonomy as $taxonomy_name => $taxonomy_data ) {
 				if ( !empty( $taxonomy_name ) ) {
-					wp_set_object_terms( $data->id, $taxonomy_data, $taxonomy_name );
+					wp_set_object_terms( $data->id, $taxonomy_data, $taxonomy_name, true );
 				}
 			}
 		}

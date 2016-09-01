@@ -46,6 +46,20 @@ class risk_model extends post_model {
 				'type'			=> 'integer',
 				'meta_type' => 'multiple',
 				'bydefault'	=> 0,
+			),
+			'taxonomy' => array(
+				'type' => 'array',
+				'child' => array(
+					'digi-danger' => array(
+						'type' => 'array'
+					),
+					'digi-danger-category' => array(
+						'type' => 'array'
+					),
+					'digi-method' => array(
+						'type' => 'array'
+					)
+				)
 			)
 		) );
 		parent::__construct( $object, $field_wanted );

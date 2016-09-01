@@ -19,4 +19,4 @@ DEFINE( 'INSTALLER_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url
 
 /**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
 DEFINE( 'INSTALLER_VIEW', INSTALLER_PATH . '/view/');
-DEFINE( 'INSTALLER_STATE', false );
+DEFINE( 'INSTALLER_STATE', true );

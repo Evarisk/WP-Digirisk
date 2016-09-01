@@ -54,7 +54,7 @@ class constructor_data_class extends helper_class {
 	private function fill_child( $field_wanted ) {
 		if ( !empty( $this->model['child'] ) ) {
 			foreach ( $this->model['child'] as $child_name => $child_def ) {
-				if ( isset( $child_def['field'] ) && in_array( $child_name, !empty( $field_wanted ) ? $field_wanted : array() ) ) {
+				if ( isset( $child_def['field'] ) && (in_array( $child_name, !empty( $field_wanted ) ? $field_wanted : array() ) || empty( $field_wanted ) ) ) {
 
 					if ( isset( $this->id ) ) {
 						$value = $this->id;
