@@ -2,6 +2,7 @@
 
 class workunit_class extends post_class {
 	public $element_prefix = 'UT';
+	protected $before_post_function = array( 'construct_identifier' );
 	protected $model_name   = 'workunit_model';
 	protected $post_type    = WPDIGI_STES_POSTTYPE_SUB;
 	protected $meta_key    	= '_wp_workunit';
@@ -85,8 +86,6 @@ class workunit_class extends post_class {
 		return $work_unit;
 	}
 
-
-
 	/**
 	 * Affiche une fiche d'unité de travail à partir d'un identifiant donné / Display a work unit from given identifier
 	 *
@@ -113,221 +112,9 @@ class workunit_class extends post_class {
 		}
 	}
 
-	/**
-	* Génère le ODT de l'unité de travail
-	*
-	* @param int $workunit_id L'ID de l'unité de travail
-	*/
-	function generate_workunit_sheet( $workunit_id ) {
-		$response = array(
-			'status' 	=> true,
-			'message'	=> __( 'An error occured while getting element to generate sheet for.', 'digirisk' ),
-			'link'		=> null,
-		);
+	public function display_list( $groupment_id ) {
+		$list_workunit = workunit_class::g()->get( array( 'parent_id' => $groupment_id, 'posts_per_page' => -1 ) );
 
-		$workunit = $this->show( $workunit_id );
-
-		/**	Définition des détails de l'unité de travail a imprimer / Define workunit details for print	*/
-		/**	Définition de la photo de l'unité de travail / Define workunit main picture	*/
-		$picture = __( 'No picture defined', 'digirisk' );
-		if ( !empty( $workunit->thumbnail_id ) && ( true === is_int( (int)$workunit->thumbnail_id ) ) ) {
-			$picture_definition = wp_get_attachment_image_src( $workunit->thumbnail_id, 'digirisk-element-thumbnail' );
-			$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
-			$picture = '';
-			if ( is_file( $picture_final_path ) ) {
-				$picture = array(
-					'type'		=> 'picture',
-					'value'		=> $picture_final_path,
-					'option'	=> array(
-						'size'	=> 2,
-					),
-				);
-			}
-		}
-
-		/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
-		$option[ 'address' ] = $option[ 'postcode' ] = $option[ 'town' ] = '-';
-		if ( !empty( $workunit->option[ 'contact' ][ 'address' ] ) && ( true === is_int( (int)$workunit->option[ 'contact' ][ 'address' ] ) ) ) {
-			$work_unit_address_definition = address_class::get()->show( (int)$workunit->option[ 'contact' ][ 'address' ][ 0 ] );
-			extract( get_object_vars( $work_unit_address_definition ) );
-		}
-
-		/**	Définition finale de l'unité de travail / Final definition for workunit	*/
-		$workunit_sheet_details = array(
-			'referenceUnite'	=> $workunit->option[ 'unique_identifier' ],
-			'nomUnite'			=> $workunit->title,
-			'photoDefault'		=> $picture,
-			'description'		=> $workunit->content,
-			'adresse'			=> $option[ 'address' ],
-			'codePostal'		=> $option[ 'postcode' ],
-			'ville'				=> $option[ 'town' ],
-			'telephone'			=> implode( ', ', $workunit->option[ 'contact' ][ 'phone' ] ),
-		);
-
-		/**	Ajout des utilisateurs dans le document final / Add affected users' into final document	*/
-		$workunit_sheet_details[ 'utilisateursAffectes' ] = $workunit_sheet_details[ 'utilisateursDesaffectes' ] = array( 'type' => 'segment', 'value' => array(), );
-		$affected_users = $unaffected_users = null;
-		if ( !empty( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'user' ] ) ) {
-			$user_affectation_for_export = \digi\user_class::get()->build_list_for_document_export( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'user' ] );
-			if ( null !== $user_affectation_for_export ) {
-				$workunit_sheet_details[ 'utilisateursAffectes' ] = array(
-					'type'	=> 'segment',
-					'value'	=> $user_affectation_for_export[ 'affected' ],
-				);
-				if ( !empty( $user_affectation_for_export[ 'unaffected' ] ) ) {
-					$workunit_sheet_details[ 'utilisateursDesaffectes' ] = array(
-						'type'	=> 'segment',
-						'value'	=> $user_affectation_for_export[ 'unaffected' ],
-					);
-				}
-			}
-		}
-
-		/**	Ajout des préconisations affectées a l'unité de travail / Add recommendation affected to workunit	*/
-		$affected_recommendation = array( );
-		$workunit_sheet_details[ 'affectedRecommandation' ] = array( 'type' => 'segment', 'value' => array(), );
-		if ( !empty( $workunit->option[ 'associated_recommendation' ] ) ) {
-			foreach ( $workunit->option[ 'associated_recommendation' ] as $recommendation_id => $recommendation_detail ) {
-				foreach ( $recommendation_detail as $recommendation ) {
-					if ( 'valid' == $recommendation[ 'status' ] ) {
-						$the_recommendation = recommendation_class::get()->show( $recommendation_id );
-
-						if ( !empty( $the_recommendation ) && !empty( $the_recommendation->parent_id ) ) {
-							if ( empty( $affected_recommendation ) || empty( $affected_recommendation[ $the_recommendation->id ] ) ) {
-								$the_recommendation_category = recommendation_category_class::get()->show( $the_recommendation->parent_id );
-
-								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
-								$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ) );
-								$picture = '';
-								if ( is_file( $picture_final_path ) ) {
-									$picture = array(
-										'type'		=> 'picture',
-										'value'		=> $picture_final_path,
-										'option'	=> array(
-											'size'	=> 2,
-										),
-									);
-								}
-
-								$affected_recommendation[ $the_recommendation->id ] = array(
-									'recommandationCategoryIcon' => $picture,
-									'recommandationCategoryName' => $the_recommendation_category->name,
-								);
-							}
-
-							$picture_definition = wp_get_attachment_image_src( $the_recommendation->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
-							$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
-							$picture = '';
-							if ( is_file( $picture_final_path ) ) {
-								$picture = array(
-									'type'		=> 'picture',
-									'value'		=> $picture_final_path,
-									'option'	=> array(
-										'size'	=> 2,
-									),
-								);
-							}
-							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'type' ] = 'sub_segment';
-							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'value' ][] = array(
-								'identifiantRecommandation'	=> $recommendation[ 'unique_identifier' ],
-								'recommandationIcon'		=> $picture,
-								'recommandationName'		=> $the_recommendation->name,
-								'recommandationComment'		=> $recommendation[ 'comment' ],
-							);
-						}
-					}
-				}
-			}
-		}
-		$workunit_sheet_details[ 'affectedRecommandation' ] = array(
-			'type'	=> 'segment',
-			'value'	=> $affected_recommendation,
-		);
-
-		/**	Ajout des personnes présentes lors de l'évaluation dans le document final / Add users' who were present when evaluation have been done into final document	*/
-		$workunit_sheet_details[ 'utilisateursPresents' ] = array( 'type' => 'segment', 'value' => array(), );
-		$affected_users = $unaffected_users = null;
-		if ( !empty( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'evaluator' ] ) ) {
-			/**	Récupération de la liste des personnes présentes lors de l'évaluation / Get list of user who were present for evaluation	*/
-			$list_affected_evaluator = evaluator_class::get()->get_list_affected_evaluator( $workunit );
-			if ( !empty( $list_affected_evaluator ) ) {
-				foreach ( $list_affected_evaluator as $evaluator_id => $evaluator_affectation_info ) {
-					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
-						if ( 'valid' == $evaluator_affectation_info[ 'affectation_info' ][ 'status' ] ) {
-							$affected_users[] = array(
-								'idUtilisateur'			=> evaluator_class::get()->element_prefix . $evaluator_affectation_info[ 'user_info' ]->id,
-								'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'lastname' ],
-								'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'firstname' ],
-								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info[ 'affectation_info' ][ 'start' ][ 'date' ], true ),
-								'dureeEntretien'		=> evaluator_class::get()->get_duration( $evaluator_affectation_info[ 'affectation_info' ] ),
-							);
-						}
-					}
-				}
-
-				$workunit_sheet_details[ 'utilisateursPresents' ] = array(
-					'type'	=> 'segment',
-					'value'	=> $affected_users,
-				);
-			}
-		}
-
-		/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
-		$workunit_sheet_details[ 'risq80' ] = $workunit_sheet_details[ 'risq51' ] = $workunit_sheet_details[ 'risq48' ] = $workunit_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
-		/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to workunit	*/
-		$risk_list = risk_class::get()->index( array( 'post_parent' => $workunit->id ) );
-
-		$risk_list_to_order = array();
-		foreach ( $risk_list as $risk ) {
-			$complete_risk = risk_class::get()->get_risk( $risk->id );
-			$comment_list = '';
-			if ( !empty( $complete_risk->comment ) ) :
-				foreach ( $complete_risk->comment as $comment ) :
-					$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
-";
-				endforeach;
-			endif;
-
-			$risk_list_to_order[ $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ] ][] = array(
-				'nomDanger'			=> $complete_risk->danger->name,
-				'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
-				'quotationRisque'	=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
-				'commentaireRisque'	=> $comment_list,
-			);
-		}
-		krsort( $risk_list_to_order );
-
-		if ( !empty( $risk_list_to_order ) ) {
-			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk_level] ) ? evaluation_method_class::get()->list_scale[$risk_level] : '';
-				$workunit_sheet_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
-			}
-		}
-
-		/**	Call document creation function / Appel de la fonction de création du document	*/
-		$document_creation_response = document_class::get()->create_document( $workunit, array( 'fiche_de_poste' ), $workunit_sheet_details );
-		if ( !empty( $document_creation_response[ 'id' ] ) ) {
-			$workunit->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
-			$workunit = $this->update( $workunit );
-			$workunit = $this->show( $workunit->id );
-		}
-
-		return $document_creation_response;
+		require ( SOCIETY_VIEW_DIR . '/workunit/list.view.php' );
 	}
-
-	/**
-	 * Récupère la liste des unités de travail appartenant à un groupement / Get workunit list belonging to a group
-	 *
-	 * @param  integer $group_id Identifiant du groupement dont il faut récupèrer la liste des unités de travail / Group identifier where to get get the workunit list
-	 *
-	 * @return array La liste des unités de travail du groupement / Workunit list belonging to the defined group
-	 */
-	function get_workunit_of_group( $group_id ) {
-		$workunit_list = array();
-
-		$workunit_list = $this->index( array( 'posts_per_page' => -1, 'post_status' => array( 'publish', ), 'post_parent' => $group_id ), false );
-
-		return $workunit_list;
-	}
-
 }

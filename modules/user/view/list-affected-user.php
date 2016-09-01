@@ -14,11 +14,11 @@
 		foreach ( $list_affected_user as $affected_user ):
 			?>
 			<li class="wp-digi-list-item">
-				<span class="wp-avatar" style="background: #<?php echo $affected_user->option['user_info']['avatar_color']; ?>;"><?php echo $affected_user->option['user_info']['initial']; ?></span>
+				<span class="wp-avatar" style="background: #<?php echo $affected_user->avatar_color; ?>;"><?php echo $affected_user->initial; ?></span>
 				<span><strong>U<?php echo $affected_user->id; ?></strong></span>
-				<span><?php echo $affected_user->option['user_info']['lastname']; ?></span>
-				<span><?php echo $affected_user->option['user_info']['firstname']; ?></span>
-				<span><?php echo mysql2date( 'd M. Y', $affected_user->option['date_info']['start']['date'] ); ?></span>
+				<span><?php echo $affected_user->lastname; ?></span>
+				<span><?php echo $affected_user->firstname; ?></span>
+				<span><?php echo mysql2date( 'd M. Y', $affected_user->date_info['start']['date'] ); ?></span>
 				<span class="wp-digi-action">
 					<a 	data-id="<?php echo $workunit->id; ?>"
 							data-user-id="<?php echo $affected_user->id; ?>"

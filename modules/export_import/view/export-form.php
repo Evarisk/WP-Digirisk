@@ -18,13 +18,13 @@
 
 	<ul class="hidden" >
 		<li>
-			<label><input type="checkbox" name="type_to_export[]" value="<?php echo group_class::get()->get_post_type(); ?>" checked="true" /><?php _e( 'Groupements', 'digirisk' ); ?></label>
+			<label><input type="checkbox" name="type_to_export[]" value="<?php echo group_class::g()->get_post_type(); ?>" checked="true" /><?php _e( 'Groupements', 'digirisk' ); ?></label>
 		</li>
 		<li>
-			<label><input type="checkbox" name="type_to_export[]" value="<?php echo workunit_class::get()->get_post_type(); ?>" checked="true" /><?php _e( 'Work units', 'digirisk' ); ?></label>
+			<label><input type="checkbox" name="type_to_export[]" value="<?php echo workunit_class::g()->get_post_type(); ?>" checked="true" /><?php _e( 'Work units', 'digirisk' ); ?></label>
 		</li>
 		<li>
-			<label><input type="checkbox" name="type_to_export[]" value="<?php echo risk_class::get()->get_post_type(); ?>" checked="true" /><?php _e( 'Risks', 'digirisk' ); ?></label>
+			<label><input type="checkbox" name="type_to_export[]" value="<?php echo risk_class::g()->get_post_type(); ?>" checked="true" /><?php _e( 'Risks', 'digirisk' ); ?></label>
 		</li>
 	</ul>
 

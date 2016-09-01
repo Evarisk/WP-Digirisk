@@ -48,7 +48,7 @@ class establishment_filter {
   * @TODO : Avoir le groupment par défaut
   */
   public function callback_digi_dashboard( $content, $establishment_selected_id ) {
-    $establishment = establishment_class::get()->show_by_type( $establishment_selected_id );
+    $establishment = establishment_class::g()->show_by_type( $establishment_selected_id );
     $object_name_establishment = apply_filters( 'wpdigi_object_name_' . $establishment->type, '' );
     require( SOCIETY_VIEW_DIR . '/content.view.php' );
   }

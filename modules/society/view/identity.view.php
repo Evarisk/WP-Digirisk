@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <?php do_shortcode( '[eo_upload_button id=' . $element->id . ' type=' . $element->type . ']' ); ?>
 
 <span data-nonce="<?php echo wp_create_nonce( 'load_right_container' ); ?>" class="wp-digi-global-name">
-	<strong><?php echo $element->option['unique_identifier']; ?> -</strong>
+	<strong><?php echo $element->unique_identifier; ?> -</strong>
 
 	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>
 		<input type="text" value="<?php echo $element->title; ?>" name="establishment_name" class="wp-digi-input-editable" />

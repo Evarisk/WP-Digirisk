@@ -17,11 +17,11 @@
 			foreach ( $list_evaluator_to_assign as $evaluator_to_assign ):
 				?>
 				<li>
-					<span class="wp-avatar" style="background: #<?php echo $evaluator_to_assign->option['user_info']['avatar_color']; ?>;" ><?php echo $evaluator_to_assign->option['user_info']['initial']; ?></span>
+					<span class="wp-avatar" style="background: #<?php echo $evaluator_to_assign->avatar_color; ?>;" ><?php echo $evaluator_to_assign->initial; ?></span>
 					<span>U<?php echo $evaluator_to_assign->id; ?></span>
-					<span><?php echo $evaluator_to_assign->option['user_info']['lastname']; ?></span>
-					<span><?php echo $evaluator_to_assign->option['user_info']['firstname']; ?></span>
-					<span><input type="text" class="wpdigi_date" name="list_user[<?php echo $evaluator_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $evaluator_to_assign->option['user_info']['hiring_date'] ) ); ?>" /></span>
+					<span><?php echo $evaluator_to_assign->lastname; ?></span>
+					<span><?php echo $evaluator_to_assign->firstname; ?></span>
+					<span><input type="text" class="wpdigi_date" name="list_user[<?php echo $evaluator_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ); ?>" /></span>
 					<span class="period-assign"><input type="text" name="list_user[<?php echo $evaluator_to_assign->id; ?>][duration]" value="" /></span>
 					<span><input type="checkbox" name="list_user[<?php echo $evaluator_to_assign->id; ?>][affect]" /></span>
 				</li>

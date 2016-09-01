@@ -27,7 +27,7 @@ class accident_shortcode {
 	*/
 	public function callback_digi_accident( $param ) {
 		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		accident_class::get()->display( $element_id );
+		accident_class::g()->display( $element_id );
 	}
 }
 

@@ -4,104 +4,67 @@ class post_model extends constructor_data_class {
 
 	protected $model = array(
 		'id' => array(
-			'type'		=> 'integer',
-			'field'		=> 'ID',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'type'	=> 'integer',
+			'field'	=> 'ID',
 		),
 		'parent_id' => array(
-			'type'		=> 'integer',
-			'field'		=> 'post_parent',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'type'	=> 'integer',
+			'field'	=> 'post_parent',
 		),
 		'author_id' => array(
-			'type'		=> 'integer',
-			'field'		=> 'post_author',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'type'	=> 'integer',
+			'field'	=> 'post_author',
 		),
 		'date' => array(
-			'type'		=> 'string',
-			'field'		=> 'post_date',
-			'function'	=> '',
-			'default'	=> '0000-00-00 00:00:00',
-			'required'	=> false,
+			'type'	=> 'string',
+			'field'	=> 'post_date',
 		),
 		'date_modified' => array(
-			'type'		=> 'string',
-			'field'		=> 'post_modified',
-			'function'	=> '',
-			'default'	=> '0000-00-00 00:00:00',
-			'required'	=> false,
+			'type'	=> 'string',
+			'field'	=> 'post_modified',
 		),
 		'title' 	=> array(
-			'type'		=> 'string',
-			'field'		=> 'post_title',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
+			'type'	=> 'string',
+			'field'	=> 'post_title',
+			'export'	=> true,
 		),
 		'slug' 	=> array(
 			'type'		=> 'string',
 			'field'		=> 'post_name',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
+			'export'	=> true,
 		),
 		'content' => array(
-			'type'		=> 'string',
-			'field'		=> 'post_content',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
+			'export' => true,
+			'type'	=> 'string',
+			'field'	=> 'post_content',
 		),
 		'status' => array(
-			'type'		=> 'string',
-			'field'		=> 'post_status',
-			'function'	=> '',
-			'default' 	=> 'publish',
-			'required' 	=> false,
+			'type'	=> 'string',
+			'field'	=> 'post_status',
+			'bydefault' => 'publish'
 		),
 		'link' => array(
-			'type'		=> 'string',
-			'field'		=> 'guid',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
+			'type'	=> 'string',
+			'field'	=> 'guid',
 		),
 		'type' 	=> array(
-			'type'		=> 'string',
-			'field'		=> 'post_type',
-			'function'	=> '',
-			'default' 	=> 'post',
-			'required' 	=> false,
+			'type'	=> 'string',
+			'field'	=> 'post_type',
 		),
 		'comment_status' 	=> array(
-			'type'			=> 'string',
-			'field'			=> 'comment_status',
-			'function'		=> '',
-			'default' 		=> 'open',
-			'required' 		=> false,
+			'type'	=> 'string',
+			'field'	=> 'comment_status',
 		),
 		'comment_count' => array(
-			'type'		=> 'int',
-			'field'		=> 'comment_count',
-			'function'	=> '',
-			'default' 	=> 0,
-			'required' 	=> false,
+			'type'	=> 'int',
+			'field'	=> 'comment_count',
 		),
 		'thumbnail_id' => array(
-			'type'		=> 'int',
-			'field_type'=> 'meta',
-			'field'		=> '_thumbnail_id',
-			'function'	=> '',
-			'default' 	=> 0,
-			'required' 	=> false,
-		),
+			'export'			=> true,
+			'type'				=> 'int',
+			'meta_type'		=> 'single',
+			'field'				=> '_thumbnail_id',
+		)
 	);
 
 	/**
@@ -111,22 +74,9 @@ class post_model extends constructor_data_class {
 	 * @param string $meta_key Le nom de la "meta" contenant la définition complète de l'object sous forme json / The "meta" name containing the complete definition of object under json format
 	 * @param boolean $cropped Permet de choisir si on construit le modèle complet ou uniquement les champs principaux / Allows to choose if the entire model have to be build or only main model
 	 */
-	public function __construct( $object, $meta_key, $cropped ) {
+	public function __construct( $data, $wanted_field = array() ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object );
-
-		/** If cropped don't get meta */
-		if( !$cropped ) {
-			/** Meta */
-			$post_meta = get_post_meta( $this->id );
-			$internal_meta = !empty( $post_meta ) && !empty( $post_meta[ $meta_key ] ) && !empty( $post_meta[ $meta_key ][ 0 ] ) ? json_decode( $post_meta[ $meta_key ][ 0 ], true ) : null;
-			if( !empty( $this->array_option ) ) {
-				foreach( $this->array_option as $key => $array ) {
-					$this->option[ $key ] = $this->fill_value( $object, $post_meta, $key, $array, $internal_meta );
-				}
-			}
-
-		}
+		parent::__construct( $data, $wanted_field );
 	}
 
 }

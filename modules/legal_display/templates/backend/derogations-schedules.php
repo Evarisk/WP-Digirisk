@@ -18,13 +18,13 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Permanent', 'digirisk' ); ?>
-      <input name="derogation_schedule[permanent]" type="text" value="<?php echo $data['legal_display']->option['derogation_schedule']['permanent']; ?>" />
+      <input name="derogation_schedule[permanent]" type="text" value="<?php echo $legal_display->derogation_schedule['permanent']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Occasional', 'digirisk' ); ?>
-      <input name="derogation_schedule[occasional]" type="text" value="<?php echo $data['legal_display']->option['derogation_schedule']['occasional']; ?>" />
+      <input name="derogation_schedule[occasional]" type="text" value="<?php echo $legal_display->derogation_schedule['occasional']; ?>" />
     </label>
   </li>
 </ul>

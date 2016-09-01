@@ -33,4 +33,4 @@ class third_class extends post_class {
   }
 }
 
-third_class::get();
+third_class::g();

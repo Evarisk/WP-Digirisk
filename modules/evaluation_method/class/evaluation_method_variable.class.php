@@ -18,7 +18,7 @@ class evaluation_method_variable_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'wpdigi_evaluation_method_variable_mdl_01';
+	protected $model_name   = 'evaluation_method_variable_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -75,8 +75,8 @@ class evaluation_method_variable_class extends term_class {
 			'rewrite'               => array( 'slug' => 'evaluation-method-variable' ),
 		);
 
-		register_taxonomy( evaluation_method_variable_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
+		register_taxonomy( evaluation_method_variable_class::g()->get_taxonomy(), array( risk_class::g()->get_post_type() ), $args );
 	}
 }
 
-evaluation_method_variable_class::get();
+evaluation_method_variable_class::g();

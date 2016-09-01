@@ -24,7 +24,7 @@ class scale_util {
     if (  true !== is_int( ( int )$level ) )
 		  return false;
 
-    $list_scale = evaluation_method_class::get()->list_scale;
+    $list_scale = evaluation_method_class::g()->list_scale;
 
     if( empty( $list_scale ) )
 			return false;

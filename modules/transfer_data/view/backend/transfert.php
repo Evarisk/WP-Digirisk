@@ -15,14 +15,14 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 		/**	Define if config components have to be transferd or not */
 		$main_config_components_are_transfered = null;
-		if ( in_array( TABLE_GROUPEMENT, TransferData_class::get()->element_type) ) :
+		if ( in_array( TABLE_GROUPEMENT, TransferData_class::g()->element_type) ) :
 			global $wpdb;
 			require( \wpdigi_utils::get_template_part( DIGI_DTRANS_DIR, DIGI_DTRANS_TEMPLATES_MAIN_DIR, "backend", "transfert", "components" ) );
 		endif;
 
 		/**	Read the different types	*/
 		$element_to_treat = null;
-		foreach ( TransferData_class::get()->element_type as $element_type ) :
+		foreach ( TransferData_class::g()->element_type as $element_type ) :
 			/**	Define element to treat by default with first array entry	*/
 			$element_to_treat = empty( $element_to_treat ) ? $element_type : $element_to_treat;
 
@@ -43,7 +43,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			endswitch;
 
 			/**	Count the different eleent that have to be transfered	*/
-			$element_to_transfert_count = TransferData_class::get()->get_transfer_progression( $element_type, $sub_element_type );
+			$element_to_transfert_count = TransferData_class::g()->get_transfer_progression( $element_type, $sub_element_type );
 			$main_element_to_transfer = $element_to_transfert_count[ 'to_transfer' ]->main_element_nb;
 				$main_element_transfered = !empty( $element_to_transfert_count[ 'transfered' ] ) && !empty( $element_to_transfert_count[ 'transfered' ][ $element_type ]) ? count( $element_to_transfert_count[ 'transfered' ][ $element_type ] ) : 0;
 			$sub_element_to_transfer = $element_to_transfert_count[ 'to_transfer' ]->sub_element_nb;
@@ -96,7 +96,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<input type="hidden" name="action" value="wpdigi-datas-transfert" />
 		<input type="hidden" name="sub_action" value="<?php echo ( false === $main_config_components_are_transfered ) ? 'config_components' : ( empty( $element_to_treat ) ? 'doc' : 'element' ); ?>" />
 		<input type="hidden" name="wpdigi-nonce" value="<?php echo wp_create_nonce( 'wpdigi-launchtransfer-form' ); ?>" />
-		<input type="hidden" name="element_type_to_transfert" value="<?php echo ( empty( $element_to_treat ) ? TransferData_class::get()->element_type[ 0 ] :  $element_to_treat ); ?>" />
+		<input type="hidden" name="element_type_to_transfert" value="<?php echo ( empty( $element_to_treat ) ? TransferData_class::g()->element_type[ 0 ] :  $element_to_treat ); ?>" />
 		<input type="hidden" name="number_per_page" value="<?php echo DIGI_DTRANS_NB_ELMT_PER_PAGE; ?>" />
 
 		<button class="wp-digi-bton wp-digi-bton-first alignright" ><?php _e( 'Launch transfer', 'digirisk' ); ?></button>

@@ -39,7 +39,7 @@ class evaluation_method_action {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'evaluation-method' ),
 		);
-		register_taxonomy( evaluation_method_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
+		register_taxonomy( evaluation_method_class::g()->get_taxonomy(), array( risk_class::g()->get_post_type() ), $args );
 	}
 
 	/**
@@ -58,9 +58,9 @@ public function ajax_get_scale() {
 			$level *= $element;
 		}
 	}
-	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
-	$evaluation_method = evaluation_method_class::get()->show( $method_evaluation_digirisk_complex->term_id );
-	$equivalence = $evaluation_method->option['matrix'][$level];
+	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+	$evaluation_method = evaluation_method_class::g()->get( array( 'id' => $method_evaluation_digirisk_complex->term_id ) );
+	$equivalence = $evaluation_method[0]->matrix[$level];
 	$scale = scale_util::get_scale( $equivalence );
 	wp_send_json_success( array( 'equivalence' => $equivalence, 'scale' => $scale ) );
 }
@@ -81,13 +81,13 @@ public function ajax_get_scale() {
       wp_send_json_error();
     }
 
-    $risk = risk_class::get()->show( $risk_id );
+    $risk = risk_class::g()->get( array( 'id' => $risk_id ) );
 
-    $risk->taxonomy['digi-method'][] = $method_evaluation_id;
+    $risk[0]->taxonomy['digi-method'][] = $method_evaluation_id;
 
-		risk_class::get()->update( $risk );
+		risk_class::g()->update( $risk[0] );
 
-		do_action( 'display_risk', $risk->parent_id );
+		do_action( 'display_risk', $risk[0]->parent_id );
   }
 }
 

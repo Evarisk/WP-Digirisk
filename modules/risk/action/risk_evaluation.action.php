@@ -40,8 +40,8 @@ class risk_evaluation_action {
       wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
     }
 
-		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::get()->get_taxonomy() );
-		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
+		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::g()->get_taxonomy() );
+		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
 
 		if ( $method_evaluation_id != $method_evaluation_digirisk_simplified->term_id && $method_evaluation_id != $method_evaluation_digirisk_complex->term_id ) {
 			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
@@ -64,16 +64,9 @@ class risk_evaluation_action {
 			}
 		}
 
-		// Récupère la dernière clé unique
-		$last_unique_key = wpdigi_utils::get_last_unique_key( 'comment', risk_evaluation_class::get()->get_type() );
-		$new_unique_key = $last_unique_key + 1;
+		$risk_evaluation = risk_evaluation_class::g()->update( $data );
 
-		$data['option']['unique_key'] = $new_unique_key;
-		$data['option']['unique_identifier'] = 'E' . $new_unique_key;
-
-		$risk_evaluation_class = risk_evaluation_class::get()->update( $data );
-
-		do_action( 'save_risk', $risk_evaluation_class->id );
+		do_action( 'save_risk', $risk_evaluation->id );
 	}
 
 	/**
@@ -84,7 +77,7 @@ class risk_evaluation_action {
   */
 	public function update_method_simplified( $risk_evaluation_level ) {
 		// Récupère la variable de la méthode simplifiée
-		$term_method_variable = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
+		$term_method_variable = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
 
 		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > 4 ) {
 			return false;
@@ -93,8 +86,7 @@ class risk_evaluation_action {
 		// Le niveau du risque + la force du risque par rapport à son level
 		$risk_level = array(
 			'method_result' => $risk_evaluation_level,
-			'equivalence' => evaluation_method_class::get()->list_scale[$risk_evaluation_level],
-			'scale' => $risk_evaluation_level
+			'equivalence' => evaluation_method_class::g()->list_scale[$risk_evaluation_level],
 		);
 
 		// Les détails de la cotation
@@ -103,15 +95,11 @@ class risk_evaluation_action {
 			'value' => $risk_evaluation_level
 		);
 
-		// Les options de l'évaluation
-		$option = array(
-			'risk_level' => $risk_level,
-			'quotation_detail' => $quotation_detail
-		);
-
 		// Les données de l'évaluation
 		$data = array(
-			'option' => $option
+			'scale' => $risk_evaluation_level,
+			'risk_level' => $risk_level,
+			'quotation_detail' => $quotation_detail,
 		);
 
 		return $data;
@@ -142,18 +130,17 @@ class risk_evaluation_action {
 		  }
 		}
 
-		$evaluation_method = evaluation_method_class::get()->show( $term_id );
-		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > max( array_keys( $evaluation_method->option['matrix'] ) ) ) {
+		$evaluation_method = evaluation_method_class::g()->get( array( 'id' => $term_id ) );
+		if ( $risk_evaluation_level < 0 || $risk_evaluation_level > max( array_keys( $evaluation_method[0]->matrix ) ) ) {
 			return false;
 		}
 
-		$equivalence = $evaluation_method->option['matrix'][$risk_evaluation_level];
+		$equivalence = $evaluation_method[0]->matrix[$risk_evaluation_level];
 		$scale = scale_util::get_scale( $equivalence );
 
 		$risk_level = array(
 			'method_result' => $risk_evaluation_level,
 			'equivalence' => $equivalence,
-			'scale' => $scale
 		);
 
 		$quotation_detail = array();
@@ -170,7 +157,9 @@ class risk_evaluation_action {
 		);
 
 		$data = array(
-			'option' => $option
+			'scale' => $scale,
+			'risk_level' => $risk_level,
+			'quotation_detail' => $quotation_detail,
 		);
 
 		return $data;

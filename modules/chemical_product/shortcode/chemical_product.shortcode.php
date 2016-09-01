@@ -27,7 +27,7 @@ class chemical_product_shortcode {
 	*/
 	public function callback_digi_chemical_product( $param ) {
 		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		chemical_product_class::get()->display( $element_id );
+		chemical_product_class::g()->display( $element_id );
 	}
 }
 

@@ -43,7 +43,7 @@ class risk_evaluation_comment_action {
 						'parent_id' => $risk_evaluation_id,
 						'post_id' => $risk_id,
 						'status' => '-34070',
-						'date' => sanitize_text_field( date_util::get()->formatte_date( $element['comment_date'] ) ),
+						'date' => sanitize_text_field( date_util::g()->formatte_date( $element['comment_date'] ) ),
 						'content' => sanitize_text_field( $element['comment_content'] ),
 					);
 
@@ -51,7 +51,7 @@ class risk_evaluation_comment_action {
 						$data['id'] = (int)  $element['comment_id'];
 					}
 
-					risk_evaluation_comment_class::get()->update( $data );
+					risk_evaluation_comment_class::g()->update( $data );
 				}
 		  }
 		}

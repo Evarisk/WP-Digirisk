@@ -25,4 +25,4 @@ DEFINE( 'WPDIGI_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() 
 DEFINE( 'WPDIGI_CORE_OPTION_NAME', '_digirisk_core' );
 DEFINE( 'WPDIGI_VIEW_DIR', WPDIGI_PATH . 'core/view/' );
 DEFINE( 'WPDIGI_MODEL', WPDIGI_PATH . 'core/model/' );
-DEFINE( 'WPDIGI_DEBUG', false );
+DEFINE( 'WPDIGI_DEBUG', true );

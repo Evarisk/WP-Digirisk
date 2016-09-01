@@ -22,4 +22,5 @@ DEFINE( 'FILE_MANAGEMENT_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE_
 DEFINE( 'FILE_MANAGEMENT_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', FILE_MANAGEMENT_PATH ) );
 DEFINE( 'FILE_MANAGEMENT_VIEW_DIR', FILE_MANAGEMENT_PATH . '/view/');
 DEFINE( 'FILE_MANAGEMENT_MODEL', FILE_MANAGEMENT_PATH . '/model/');
+DEFINE( 'FILE_MANAGEMENT_STATE', true );
 ?>

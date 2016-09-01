@@ -20,6 +20,7 @@ class document_class extends post_class {
 	protected $base 								= 'digirisk/printed-document';
 	protected $version 							= '0.1';
 	public $element_prefix 					= 'DOC';
+	protected $before_post_function = array( 'construct_identifier' );
 
 	protected $limit_document_per_page = -1;
 
@@ -61,7 +62,7 @@ class document_class extends post_class {
 
 		if( !empty( $array_post ) ) {
 			foreach( $array_post as $key => $post ) {
-				$array_model[$key] = new $this->model_name( $post, $this->meta_key, $cropped );
+				$array_model[$key] = new $this->model_name( (array)$post, $this->meta_key, $cropped );
 			}
 		}
 
@@ -86,7 +87,7 @@ class document_class extends post_class {
 	 * @param array $element Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
 	 */
 	public function display_document_list( $element ) {
-		$list_document_id = !empty( $element->option[ 'associated_document_id' ] ) && !empty( $element->option[ 'associated_document_id' ][ 'document' ] ) ? $element->option[ 'associated_document_id' ][ 'document' ] : null;
+		$list_document_id = !empty( $element->associated_document_id ) && !empty( $element->associated_document_id[ 'document' ] ) ? $element->associated_document_id[ 'document' ] : null;
 
 		if ( 0 < $this->limit_document_per_page ) {
 			$current_page = !empty( $_GET[ 'current_page' ] ) ? (int)$_GET[ 'current_page' ] : 1;
@@ -98,7 +99,7 @@ class document_class extends post_class {
 		$list_document = array();
 
 		if ( !empty( $list_document_id ) ) {
-			$list_document = document_class::get()->index( array( 'post__in' => $list_document_id ) );
+			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ) );
 		}
 
 		require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', "printed", "list" ) );
@@ -288,8 +289,7 @@ class document_class extends post_class {
 	}
 
 	public function get_document_path( $element ) {
-		$society = society_class::get()->show_by_type( $element->parent_id );
-
+		$society = society_class::g()->show_by_type( $element->parent_id );
 		$path = $this->get_digirisk_dir_path( 'baseurl' );
 		$path .= "/" . $society->type . "/" . $society->id . "/";
 		$path .= $element->title;
@@ -415,11 +415,11 @@ class document_class extends post_class {
 		}
 		$zip->close();
 
-		$document_creation_response = document_class::get()->create_document( $element, array( 'zip' ), $file_list, $version );
+		$document_creation_response = document_class::g()->create_document( $element, array( 'zip' ), $file_list, $version );
 		$document_creation_response = wp_parse_args( $document_creation_response, $response );
 		if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
-			group_class::get()->update( $element );
+			group_class::g()->update( $element );
 		}
 
 		return $document_creation_response;
@@ -458,7 +458,7 @@ class document_class extends post_class {
   	}
 
   	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/
-  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->option[ 'unique_identifier' ] . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
+  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
   	$document_args = array(
 			'post_content'	=> '',
 			'post_status'	=> 'inherit',
@@ -503,31 +503,29 @@ class document_class extends post_class {
 		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $document_type, array( 'printed', ) ), $this->attached_taxonomy_type );
 
   	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
-  	$next_document_key = ( wpdigi_utils::get_last_unique_key( 'post', $this->get_post_type() ) + 1 );
   	$document_args = array(
-			'id'			=> $response[ 'id' ],
-			'status'    	=> 'inherit',
-			'author_id'		=> get_current_user_id(),
-			'date'			=> current_time( 'mysql', 0 ),
-			'mime_type'		=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
-			'option'			=> array (
-				'unique_key'		=> $next_document_key,
-				'unique_identifier' => $this->element_prefix . $next_document_key,
-				'model_id' 			=> $model_to_use,
-				'document_meta' 	=> json_encode( $document_data ),
-				'version'			=> $document_revision,
-			),
+			'id'						=> $response[ 'id' ],
+			'title'					=> basename( $response[ 'filename' ], '.odt' ),
+			'status'    		=> 'inherit',
+			'parent_id'			=> $element->id,
+			'author_id'			=> get_current_user_id(),
+			'date'					=> current_time( 'mysql', 0 ),
+			'mime_type'			=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
+			'model_id' 			=> $model_to_use,
+			'document_meta' => json_encode( $document_data ),
+			'version'				=> $document_revision,
   	);
+
   	$document = $this->update( $document_args );
-  	$document = $this->show( $response[ 'id' ] );
+  	$document = $this->get( array( 'id' => $response[ 'id' ] ) );
 
   	$document_full_path = null;
-  	if ( is_file( $this->get_digirisk_dir_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt' ) ) {
-  		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document->title . '.odt';
+  	if ( is_file( $this->get_digirisk_dir_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document[0]->title . '.odt' ) ) {
+  		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document[0]->title . '.odt';
   	}
 
   	return $response;
 	}
 }
 
-document_class::get();
+document_class::g();

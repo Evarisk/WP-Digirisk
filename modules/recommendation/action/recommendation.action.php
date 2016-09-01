@@ -46,7 +46,7 @@ class recommendation_action {
 		else
 			$workunit_id = (int) $_POST['workunit_id'];
 
-		$workunit = society_class::get()->show_by_type( $workunit_id );
+		$workunit = society_class::g()->show_by_type( $workunit_id );
 
 		if (  0 === (int) $_POST['recommendation_id'] )
 			wp_send_json_error();
@@ -54,28 +54,29 @@ class recommendation_action {
 			$recommendation_id = (int) $_POST['recommendation_id'];
 
 		// Récupèration des l'identifiant unique
-		$unique_identifier = get_option( recommendation_class::get()->last_affectation_index_key, 0 );
+		$unique_identifier = get_option( recommendation_class::g()->last_affectation_index_key, 0 );
 		$unique_identifier++;
-		update_option( recommendation_class::get()->last_affectation_index_key, $unique_identifier );
+		update_option( recommendation_class::g()->last_affectation_index_key, $unique_identifier );
 
 		$recommendation_in_workunit = array(
-				'status' 			=> 'valid',
-				'unique_key' 		=> $unique_identifier,
-				'unique_identifier' => $this->unique_identifier . $unique_identifier,
-				'efficiency' 		=> 0,
-				'comment'			=> sanitize_text_field( $_POST['recommendation_comment'] ),
-				'type'				=> '',
-				'affectation_date'	=> current_time( 'mysql' ),
-				'last_update_date'	=> current_time( 'mysql' ),
+			'status' 			=> 'valid',
+			'unique_key' 		=> $unique_identifier,
+			'unique_identifier' => $this->unique_identifier . $unique_identifier,
+			'efficiency' 		=> 0,
+			'comment'			=> sanitize_text_field( $_POST['recommendation_comment'] ),
+			'type'				=> '',
+			'affectation_date'	=> current_time( 'mysql' ),
+			'last_update_date'	=> current_time( 'mysql' ),
 		);
 
-		$workunit->option['associated_recommendation'][$recommendation_id][] = $recommendation_in_workunit;
+		$workunit->associated_recommendation[$recommendation_id][] = $recommendation_in_workunit;
 
-		society_class::get()->update_by_type( $workunit );
+		society_class::g()->update_by_type( $workunit );
 
-		$term = recommendation_class::get()->show( $recommendation_id );
+		$term = recommendation_class::g()->get( array( 'id' => $recommendation_id ) );
+		$term = $term[0];
 		$term_id = $term->id;
-		$index = count( $workunit->option['associated_recommendation'][$recommendation_id] ) - 1;
+		$index = count( $workunit->associated_recommendation[$recommendation_id] ) - 1;
 		$element = new stdClass();
 		$element->id = $workunit_id;
 
@@ -112,11 +113,12 @@ class recommendation_action {
 
 		check_ajax_referer( 'ajax_load_recommendation_' . $term_id. '_' . $index );
 
-		$workunit = society_class::get()->show_by_type( $workunit_id );
-		$recommendation_in_workunit = $workunit->option['associated_recommendation'][$term_id][$index];
-		$list_recommendation_category = recommendation_category_class::get()->index();
+		$workunit = society_class::g()->show_by_type( $workunit_id );
+		$recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
+		$list_recommendation_category = recommendation_category_class::g()->get();
 
-		$term = recommendation_class::get()->show( $term_id );
+		$term = recommendation_class::g()->get( array( 'id' => $term_id ) );
+		$term = $term[0];
 
 		ob_start();
 		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list-item-edit.php' );
@@ -151,15 +153,16 @@ class recommendation_action {
 
 		check_ajax_referer( 'ajax_edit_recommendation_' . $term_id . '_' . $index );
 
-		$workunit = society_class::get()->show_by_type( $workunit_id );
+		$workunit = society_class::g()->show_by_type( $workunit_id );
 
-		$workunit->option['associated_recommendation'][$term_id][$index]['comment'] = $_POST['recommendation_comment'];
-		$workunit->option['associated_recommendation'][$term_id][$index]['last_update_date'] = current_time( 'mysql' );
+		$workunit->associated_recommendation[$term_id][$index]['comment'] = $_POST['recommendation_comment'];
+		$workunit->associated_recommendation[$term_id][$index]['last_update_date'] = current_time( 'mysql' );
 
-		society_class::get()->update_by_type( $workunit );
+		society_class::g()->update_by_type( $workunit );
 
-		$term = recommendation_class::get()->show( $term_id );
-		$recommendation_in_workunit = $workunit->option['associated_recommendation'][$term_id][$index];
+		$term = recommendation_class::g()->get( array( 'id' => $term_id ) );
+		$term = $term[0];
+		$recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
 		$element = new StdClass();
 		$element->id = $workunit_id;
 
@@ -194,10 +197,10 @@ class recommendation_action {
 			$index = (int) $_POST['index'];
 
 		check_ajax_referer( 'ajax_delete_recommendation_' . $term_id . '_' . $index );
-		$workunit = society_class::get()->show_by_type( $workunit_id );
+		$workunit = society_class::g()->show_by_type( $workunit_id );
 
-		$workunit->option['associated_recommendation'][$term_id][$index]['status'] = 'deleted';
-		society_class::get()->update_by_type( $workunit );
+		$workunit->associated_recommendation[$term_id][$index]['status'] = 'deleted';
+		society_class::g()->update_by_type( $workunit );
 
 		wp_send_json_success();
 	}

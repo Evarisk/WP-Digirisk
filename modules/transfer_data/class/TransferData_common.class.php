@@ -33,7 +33,7 @@ class TransferData_common_class extends \singleton_util {
 
 		/**	Define the default field for new element into wordpress	*/
 		$element_wp_definition = array(
-			'post_type' => TransferData_class::get()->post_type[ $element_type ],
+			'post_type' => TransferData_class::g()->post_type[ $element_type ],
 		);
 		if ( !empty( $element_parent ) ) {
 			$element_wp_definition[ 'post_parent' ] = $element_parent;
@@ -85,7 +85,7 @@ class TransferData_common_class extends \singleton_util {
 				switch( $element_type ) {
 					case TABLE_TACHE:
 					case TABLE_ACTIVITE:
-						TransferData_task_class::get()->transfer( $element, $element_type, $element_id );
+						TransferData_task_class::g()->transfer( $element, $element_type, $element_id );
 					break;
 
 					case TABLE_GROUPEMENT:
@@ -96,7 +96,7 @@ class TransferData_common_class extends \singleton_util {
 						 * Produits
 						 */
 
-						wpdigi_transferdata_society_class::get()->transfer_groupement( $element, $element_type, $element_id );
+						wpdigi_transferdata_society_class::g()->transfer_groupement( $element, $element_type, $element_id );
 					break;
 
 					case TABLE_UNITE_TRAVAIL:
@@ -107,7 +107,7 @@ class TransferData_common_class extends \singleton_util {
 						 * Produits
 						 */
 
-						wpdigi_transferdata_society_class::get()->transfer_unite( $element, $element_type, $element_id );
+						wpdigi_transferdata_society_class::g()->transfer_unite( $element, $element_type, $element_id );
 					break;
 				}
 
@@ -166,7 +166,7 @@ class TransferData_common_class extends \singleton_util {
 		$not_transfered_element = $wpdb->get_results( $query );
 		if ( !empty( $not_transfered_element ) ) {
 			foreach ( $not_transfered_element as $element ) {
-				$new_element_id = TransferData_class::get()->transfer( $element_type, $element );
+				$new_element_id = TransferData_class::g()->transfer( $element_type, $element );
 				if ( !is_wp_error( $new_element_id ) ) {
 					$treated_element += 1;
 				}
@@ -294,8 +294,8 @@ class TransferData_common_class extends \singleton_util {
 			/**	Get associated picture list	*/
 			switch ( $main_type ) {
 				case 'document':
-					$path_document_complete = \document_class::get()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
-					$guid = \document_class::get()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
+					$path_document_complete = \document_class::g()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
+					$guid = \document_class::g()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
 					wp_mkdir_p( $path_document_complete );
 					copy( $file, $path_document_complete . '/' . basename($file) );
 
@@ -488,4 +488,4 @@ WHERE LUN.status = 'valid'
 	}
 }
 
-TransferData_common_class::get();
+TransferData_common_class::g();

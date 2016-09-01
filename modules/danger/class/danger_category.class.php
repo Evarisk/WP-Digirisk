@@ -17,7 +17,7 @@ class danger_category_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'wpdigi_category_danger_mdl_01';
+	protected $model_name   = 'category_danger_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -33,6 +33,8 @@ class danger_category_class extends term_class {
 	protected $base = 'digirisk/danger-category';
 	protected $version = '0.1';
 
+	protected $before_post_function = array( 'construct_identifier' );
+	protected $after_get_function = array();
 	public $element_prefix = 'CD';
 
 	/**
@@ -70,18 +72,8 @@ class danger_category_class extends term_class {
 			'rewrite'           => array( 'slug' => 'danger-category' ),
 		);
 
-		register_taxonomy( $this->taxonomy, array( risk_class::get()->get_post_type() ), $args );
+		register_taxonomy( $this->taxonomy, array( risk_class::g()->get_post_type() ), $args );
 	}
-
-	/**
-	* Appelle le template qui affiche le bouton toggle ainsi que la liste de tous les dangers
-	*/
-	function display_category_danger() {
-		$danger_category_list = $this->index( array() );
-
-		require( DANGER_VIEW_DIR . '/backend/category_danger-list.php' );
-	}
-
 }
 
-danger_category_class::get();
+danger_category_class::g();

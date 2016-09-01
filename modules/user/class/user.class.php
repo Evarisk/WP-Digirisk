@@ -7,6 +7,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class user_class extends \user_class {
 	protected $model_name 	= '\wpdigi_user_mdl_01';
 	protected $meta_key		= '_wpeo_user_info';
+	protected $before_post_function = array( '\digi\construct_login' );
+	protected $after_get_function = array( '\digi\get_hiring_date' );
 
 	protected $base 	= 'digirisk/user';
 	protected $version 	= '0.1';
@@ -72,13 +74,13 @@ class user_class extends \user_class {
 			),
 		);
 
-		$list_user_to_assign = $this->index( $args_where_user );
+		$list_user_to_assign = $this->get( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( $this->index( $args_where_user ) );
+		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
 		require( USERS_VIEW . '/main.php' );
@@ -100,13 +102,13 @@ class user_class extends \user_class {
 			),
 		);
 
-		$list_user_to_assign = $this->index( $args_where_user );
+		$list_user_to_assign = $this->get( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( $this->index( $args_where_user ) );
+		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
 		require( USERS_VIEW . '/list-user-to-assign.php' );
@@ -126,20 +128,21 @@ class user_class extends \user_class {
 			return false;
 		}
 
-		if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) )
+		if ( $workunit->id === 0 || empty( $workunit->user_info ) || empty( $workunit->user_info['affected_id'] ) )
 			return false;
 
 		$list_affected_id = array();
 
 		$list_user = array();
-		if ( !empty( $workunit->option['user_info']['affected_id']['user'] ) ) {
-			foreach ( $workunit->option['user_info']['affected_id']['user'] as $user_id => $sub_value ) {
+		if ( !empty( $workunit->user_info['affected_id']['user'] ) ) {
+			foreach ( $workunit->user_info['affected_id']['user'] as $user_id => $sub_value ) {
 				if ( !empty( $sub_value ) ) {
 					foreach( $sub_value as $array_value ) {
 						if ( !empty( $array_value['status'] ) && $array_value['status'] == 'valid' ) {
-							$list_user[$user_id] = $this->show( $user_id );
-							$list_user[$user_id]->option['date_info'] = $array_value;
-							$list_user[$user_id]->option['date_info']['last_entry'] = count( $array_value ) - 1;
+							$user = $this->get( array( 'id' => $user_id ) );
+							$list_user[$user_id] = $user[0];
+							$list_user[$user_id]->date_info = $array_value;
+							$list_user[$user_id]->date_info['last_entry'] = count( $array_value ) - 1;
 							$list_affected_id[] = $user_id;
 						}
 					}

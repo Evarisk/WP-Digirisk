@@ -27,6 +27,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<a class="wp-digi-delete-action" data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
 		<?php endif; ?>
 	</div>
+
 	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
 	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element, $tab_to_display ); ?>
 

@@ -2,7 +2,7 @@
 
 class danger_class extends term_class {
 
-	protected $model_name   = 'wpdigi_danger_mdl_01';
+	protected $model_name   = 'danger_model';
 
 	protected $taxonomy    	= 'digi-danger';
 
@@ -11,6 +11,7 @@ class danger_class extends term_class {
 	protected $base = 'digirisk/danger';
 	protected $version = '0.1';
 
+	protected $before_post_function = array( 'construct_identifier' );
 	public $element_prefix = 'D';
 
 	/**
@@ -50,71 +51,6 @@ class danger_class extends term_class {
 		return $term;
 	}
 
-	/**
-	* Créé les données par défaut des dangers selon le fichier assets/json/default.json
-	*/
-	public function create_default_data() {
-		$file_content = file_get_contents( DANGER_PATH . 'assets/json/default.json' );
-		$data = json_decode( $file_content );
-
-
-		if ( !empty( $data ) ) {
-			foreach ( $data as $json_danger_category ) {
-				$unique_key = wpdigi_utils::get_last_unique_key( 'term', danger_category_class::get()->get_taxonomy() );
-				$unique_key++;
-				$unique_identifier = danger_category_class::get()->element_prefix . '' . $unique_key;
-				$data = array(
-					'name' => $json_danger_category->name,
-					'option' => array(
-						'unique_key' => $unique_key,
-						'unique_identifier' => $unique_identifier,
-						'status' => $json_danger_category->option->status,
-					),
-				);
-				$danger_category = danger_category_class::get()->create( $data );
-
-				if ( is_wp_error( $danger_category ) && !empty( $danger_category->errors ) && !empty( $danger_category->errors['term_exists'] ) ) {
-					$danger_category = danger_category_class::get()->show( $danger_category->error_data['term_exists'] );
-				}
-
-				if ( $json_danger_category->option->status == 'valid' ) {
-					$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
-
-					$danger_category->option['thumbnail_id'] = $file_id;
-					$danger_category = danger_category_class::get()->update( $danger_category );
-				}
-
-				foreach( $json_danger_category->option->danger as $json_danger ) {
-					$unique_key = wpdigi_utils::get_last_unique_key( 'term', $this->get_taxonomy() );
-					$unique_key++;
-					$unique_identifier = $this->element_prefix . '' . $unique_key;
-					$danger = $this->create( array(
-						'name' => $json_danger->name,
-						'parent_id' => $danger_category->id,
-						'option' => array(
-							'unique_key' => $unique_key,
-							'unique_identifier' => $unique_identifier,
-							'status' => $json_danger->option->status,
-						),
-					) );
-
-					if ( !is_wp_error( $danger ) ) {
-						if ( $json_danger->option->status == 'valid' && !empty( $json_danger_category->name_thumbnail ) ) {
-							if ( !empty( $json_danger->name_thumbnail ) ) {
-								$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/categorieDangers/' . $json_danger->name_thumbnail, 0 );
-
-							}
-							else {
-								$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
-							}
-								$danger->option['thumbnail_id'] = $file_id;
-								$danger = $this->update( $danger );
-						}
-					}
-				}
-			}
-		}
-	}
 }
 
-danger_class::get();
+danger_class::g();

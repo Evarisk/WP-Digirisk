@@ -11,7 +11,8 @@
 
 	<?php if ( !empty( $list_recommendation_in_workunit ) ): ?>
 		<?php foreach ( $list_recommendation_in_workunit as $term_id => $sub_array ): ?>
-			<?php $term = recommendation_class::get()->show( $term_id ); ?>
+			<?php $term = recommendation_class::g()->get( array( 'id' => $term_id ) );
+			$term = $term[0]; ?>
 			<?php if ( !empty( $sub_array ) ): ?>
 				<?php foreach( $sub_array as $index => $recommendation_in_workunit ):?>
 					<?php if ( !empty( $recommendation_in_workunit['status'] ) && $recommendation_in_workunit['status'] == 'valid' ): ?>
@@ -42,11 +43,11 @@
 						<div class="wp-digi-select-list digi-popup hidden grid icon">
 							<?php foreach( $list_recommendation_category as $recommendation_category ): ?>
 								<ul>
-									<?php $list_recommendation = recommendation_class::get()->index( array( 'parent' => $recommendation_category->id, 'hide_empty' => false, ) );?>
+									<?php $list_recommendation = recommendation_class::g()->get( array( 'parent' => $recommendation_category->id, 'hide_empty' => false, ) );?>
 									<?php if ( !empty( $list_recommendation ) ): ?>
 										<?php foreach( $list_recommendation as $recommendation ): ?>
-											<?php $attachement_url = wp_get_attachment_image_src( $recommendation->option['thumbnail_id'] ); ?>
-											<li data-name="<?php echo $recommendation->name; ?>" data-url="<?php echo $attachement_url[0]; ?>" data-id="<?php echo $recommendation->id; ?>"><?php echo wp_get_attachment_image( $recommendation->option['thumbnail_id'], 'thumbnail', false, array('title' => $recommendation->name) ); ?></li>
+											<?php $attachement_url = wp_get_attachment_image_src( $recommendation->thumbnail_id ); ?>
+											<li data-name="<?php echo $recommendation->name; ?>" data-url="<?php echo $attachement_url[0]; ?>" data-id="<?php echo $recommendation->id; ?>"><?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false, array('title' => $recommendation->name) ); ?></li>
 										<?php endforeach; ?>
 									<?php endif ?>
 								</ul>

@@ -1,68 +1,44 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Fichier du controlleur pour la gestion des risques / Main controller file for risk management
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 
-/**
- * Classe du controlleur pour la gestion des risques / Main class file for risk management
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 class third_mdl_01 extends post_model {
 
-	/**
-	 * Définition du modèle d'un risque / Define a risk model
-	 *
-	 * @var array
-	 */
-	protected $array_option = array(
-    'full_name' => array(
-      'type' => 'string'
-    ),
-    'contact' => array(
-			'phone' => array(
+	public function __construct( $object, $field_wanted = array() ) {
+		$this->model = array_merge( $this->model, array(
+			'child' => array(
+				'address' => array(
+					'type'				=> 'object',
+					'controller' 	=> 'address_class',
+					'field' 			=> '',
+				)
+			),
+			'full_name' => array(
+				'type' 			=> 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => ''
+			),
+			'contact' => array(
+				'meta_type' => 'multiple',
 				'type'			=> 'array',
-				'function'	=> '',
-				'default'		=> array(),
-				'required'	=> false,
+				'child' => array(
+					'phone' => array(
+						'type'	=> 'string',
+						'bydefault' => '01 02 03 04 05',
+						'meta_type' => 'multiple',
+					),
+					'address_id' => array(
+						'type'	=> 'integer',
+						'bydefault'	=> 0,
+						'meta_type' => 'multiple',
+					)
+				)
 			),
-			'address_id' => array(
-				'type'			=> 'integer'
-			),
-		),
-    'opening_time' => array(
-			'type' => 'string'
-		)
-	);
-
-	/**
-	 * Construit le modèle / Fill the model
-	 *
-	 * @param array|WP_Object $object La définition de l'objet dans l'instance actuelle / Object currently present into model instance
-	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
-	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
-	 */
-	public function __construct( $object, $meta_key, $cropped = false ) {
-		$array_model = $this->get_model();
-		$type = $array_model['type']['field'];
-
-		if ( !empty( $object->$type ) ) {
-			$taxonomy_objects = get_object_taxonomies( $object->$type, 'objects' );
-			foreach ( $taxonomy_objects as $taxonomy => $taxonomy_def ) {
-				$this->model['taxonomy'][$taxonomy] = array(
-					'type' => 'array',
-					'function'	=> 'post_ctr_01::eo_get_object_terms',
-					'field'	=> '',
-					'default'	=> array(),
-					'required'	=> false,
-				);
-			}
-		}
-		parent::__construct( $object, $meta_key, $cropped );
+			'opening_time' => array(
+				'type' => 'string',
+				'bydefault' => '',
+				'meta_type' => 'multiple',
+			)
+		) );
+		parent::__construct( $object, $field_wanted );
 	}
 
 }

@@ -18,19 +18,19 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Responsible for preventing', 'digirisk' ); ?>
-      <input name="safety_rule[responsible_for_preventing]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['responsible_for_preventing']; ?>" />
+      <input name="safety_rule[responsible_for_preventing]" type="text" value="<?php echo $legal_display->safety_rule['responsible_for_preventing']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'digirisk' ); ?>
-      <input name="safety_rule[phone]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['phone']; ?>" />
+      <input name="safety_rule[phone]" type="text" value="<?php echo $legal_display->safety_rule['phone']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Location of detailed instructions', 'digirisk' ); ?>
-      <input name="safety_rule[location_of_detailed_instruction]" type="text" value="<?php echo $data['legal_display']->option['safety_rule']['location_of_detailed_instruction']; ?>" />
+      <input name="safety_rule[location_of_detailed_instruction]" type="text" value="<?php echo $legal_display->safety_rule['location_of_detailed_instruction']; ?>" />
     </label>
   </li>
 </ul>

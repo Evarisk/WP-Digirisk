@@ -52,85 +52,24 @@ class installer_action {
 	public function ajax_installer_step_1() {
 		check_ajax_referer( 'ajax_installer_step_1' );
 
-		$postcode = '';
+		$address = address_class::g()->create( $_POST['address'] );
+		$groupment = group_class::g()->create( $_POST['groupment'] );
+		$groupment->contact['address_id'][] = $address->id;
+		group_class::g()->update( $groupment );
+		$address->post_id = $groupment->id;
+		address_class::g()->update( $address );
 
-		if ( !empty( $_POST['address']['postcode'] ) ) {
-			$postcode = (int) $_POST['address']['postcode'];
-			if ( strlen( $postcode ) > 5 )
-				$postcode = substr( $postcode, 0, 5 );
-		}
+		$danger_created = danger_default_data_class::g()->create();
+		$recommendation_created = recommendation_default_data_class::g()->create();
+		$evaluation_method_created = evaluation_method_default_data_class::g()->create();
 
-		$date = date( 'Y-m-d', strtotime( str_replace( '/', '-', sanitize_text_field( $_POST['groupement']['date'] ) ) ) );
-
-		$address = array(
-			'date' => $date,
-			'option' => array(
-				'address' => sanitize_text_field( $_POST['address']['address'] ),
-				'additional_address' => sanitize_text_field( $_POST['address']['additional_address'] ),
-				'postcode' => $postcode,
-				'town' => sanitize_text_field( $_POST['address']['town'] ),
-			),
-		);
-		$address = address_class::get()->create( $address );
-
-		// On récupère le last unique key
-		$last_unique_key = wpdigi_utils::get_last_unique_key( 'post', group_class::get()->get_post_type() );
-		$last_unique_key++;
-		if ( empty( $last_unique_key ) ) $last_unique_key = 1;
-
-		$groupment = array(
-			'title' => sanitize_text_field( $_POST['groupement']['title'] ),
-			'content' => sanitize_text_field( $_POST['groupement']['content'] ),
-			'date' => $date,
-			'option' => array(
-				'unique_key' => $last_unique_key,
-				'unique_identifier' => group_class::get()->element_prefix . $last_unique_key,
-				'identity' => array(
-					'siren' => sanitize_text_field( $_POST['groupement']['option']['identity']['siren'] ),
-					'siret' => sanitize_text_field( $_POST['groupement']['option']['identity']['siret'] ),
-				),
-				'contact' => array(
-					'phone' => array( sanitize_text_field( $_POST['groupement']['option']['contact']['phone'] ) ),
-				),
-			),
-		);
-
-		if ( !empty( $address ) && !empty( $address->id ) ) {
-			$groupment['option']['contact']['address_id'] = array( $address->id );
-		}
-
-		if ( !empty( $_POST['owner_id'] ) ) {
-      $owner_id = (int) $_POST['owner_id'];
-      $groupment->option['user_info']['owner_id'] = $owner_id;
-    }
-
-		$groupement = group_class::get()->create( $groupment );
-
-		/** On crée les dangers */
-		$danger_created = danger_class::get()->create_default_data();
-
-		$recommendation_created = recommendation_class::get()->create_default_data();
-
-		$evaluation_method_created = evaluation_method_class::get()->create_default_data();
-
-		/** Définition des modèles de documents / Define document model to use */
-		$document_unique_setted = document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
-		$document_workunit_sheet_setted = document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
+		$document_unique_setted = document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
+		$document_workunit_sheet_setted = document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
 
 		// Met à jours l'option pour dire que l'installation est terminée
 		update_option( WPDIGI_CORE_OPTION_NAME, array( 'installed' => true, 'db_version' => 1 ) );
 
-		wp_send_json_success(
-			array(
-				'groupment' => $groupment,
-				'address' => $address,
-				'danger_created' => $danger_created,
-				'recommendation_created' => $recommendation_created,
-				'evaluation_method_created' => $evaluation_method_created,
-				'document_unique_setted' => $document_unique_setted,
-				'document_workunit_sheet_setted' => $document_workunit_sheet_setted,
-			)
-		);
+		wp_send_json_success();
 	}
 
 	/**

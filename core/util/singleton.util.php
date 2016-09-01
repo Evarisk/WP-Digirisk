@@ -12,7 +12,7 @@ abstract class singleton_util {
 	/**
 	* Récupères l'instance courante
 	*/
-  final public static function get() {
+  final public static function g() {
     if ( !isset( self::$instance ) || get_called_class() != get_class( self::$instance ) ) {
       $class_name = get_called_class();
       $new_instance = new $class_name();

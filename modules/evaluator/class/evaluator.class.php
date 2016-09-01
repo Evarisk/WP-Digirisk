@@ -3,6 +3,7 @@
 class evaluator_class extends user_class {
 	protected $model_name 	= 'wpdigi_user_mdl_01';
 	protected $meta_key		= '_wpeo_user_info';
+	protected $after_get_function = array( '\digi\get_hiring_date' );
 
 	protected $base 	= 'digirisk/evaluator';
 	protected $version 	= '0.1';
@@ -12,8 +13,7 @@ class evaluator_class extends user_class {
 	/**
 	* Le constructeur
 	*/
-	protected function construct() {
-	}
+	protected function construct() {}
 
 	/**
 	* Fait le rendu des evaluateurs
@@ -22,7 +22,6 @@ class evaluator_class extends user_class {
 	*/
 	public function render( $element ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-
 		$current_page = !empty( $_GET['current_page'] ) ? (int)$_GET['current_page'] : 1;
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
@@ -33,13 +32,14 @@ class evaluator_class extends user_class {
 			),
 		);
 
-		$list_evaluator_to_assign = $this->index( $args_where_evaluator );
+
+		$list_evaluator_to_assign = $this->get( $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( $this->index( $args_where_evaluator ) );
+		$count_evaluator = count( $this->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
@@ -87,16 +87,18 @@ class evaluator_class extends user_class {
 			return false;
 		}
 
-		if ( $society->id === 0 || empty( $society->option['user_info'] ) || empty( $society->option['user_info']['affected_id'] ) )
+		if ( $society->id === 0 || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) )
 			return false;
 
+
 		$list_evaluator = array();
-		if ( !empty( $society->option['user_info']['affected_id']['evaluator'] ) ) {
-			foreach ( $society->option['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+		if ( !empty( $society->user_info['affected_id']['evaluator'] ) ) {
+			foreach ( $society->user_info['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
 				if ( !empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( !empty( $sub_array_value['status'] ) && $sub_array_value['status'] == 'valid' ) {
-							$list_evaluator[ $evaluator_id ][ $index ][ 'user_info' ] = $this->show( $evaluator_id );
+							$evaluator = $this->get( array( 'id' => $evaluator_id ) );
+							$list_evaluator[ $evaluator_id ][ $index ][ 'user_info' ] = $evaluator[0];
 							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ] = $sub_array_value;
 							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ][ 'id' ] = $index;
 						}

@@ -10,6 +10,7 @@ class epi_class extends post_class {
 	protected $base = 'digiepi/epi';
 	protected $version = '0.1';
 
+	protected $before_post_function = array( 'construct_identifier' );
 	public $element_prefix = 'R';
 
 	protected $limit_epi = -1;
@@ -86,13 +87,13 @@ class epi_class extends post_class {
 	 * @param int $society_id L'ID de la societé
 	 */
 	public function display_epi_list( $society_id ) {
-		$society = society_class::get()->show_by_type( $society_id );
+		$society = society_class::g()->show_by_type( $society_id );
 
 		if ( $society->id === 0 ) {
 			return false;
 		}
 
-		$epi_list = epi_class::get()->index( array( 'post_parent' => $society->id ) );
+		$epi_list = epi_class::g()->index( array( 'post_parent' => $society->id ) );
 
 		if ( !empty( $epi_list ) ) {
 		  foreach ( $epi_list as $key => $element ) {

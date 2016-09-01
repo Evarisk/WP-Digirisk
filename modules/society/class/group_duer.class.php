@@ -29,7 +29,8 @@ class group_duer_class extends singleton_util {
 		}
 
 		$id = (int) $data['element_id'];
-		$element = group_class::get()->show( $id );
+		$element = group_class::g()->get( array( 'id' => $id ) );
+		$element = $element[0];
 
 		/**	Définition des composants du fichier / Define the file component	*/
 		$src_logo = $this->get_logo();
@@ -42,21 +43,22 @@ class group_duer_class extends singleton_util {
 		$data_to_document = apply_filters( 'wpdigi_element_duer_details', $data_to_document );
 
 		/**	Call document creation function / Appel de la fonction de création du document	*/
-		$document_creation_response = document_class::get()->create_document( $element, array( 'document_unique' ), $data_to_document );
+		$document_creation_response = document_class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
-			group_class::get()->update( $element );
+			group_class::g()->update( $element );
 		}
 
 		$all_file = $this->generate_child( $element );
 		$all_file[] = $document_creation_response;
 
-		$element = group_class::get()->show( $element->id );
+		$element = group_class::g()->get( array( 'id' => $element->id ) );
+		$element = $element[0];
 
 		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
-		$version = document_class::get()->get_document_type_next_revision( array( 'zip' ), $element->id );
-		$zip_generation_result = document_class::get()->create_zip( document_class::get()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->option[ 'unique_identifier' ] . '_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_zip_V' . $version . '.zip', $all_file, $element, $version );
+		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
+		$zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_zip_V' . $version . '.zip', $all_file, $element, $version );
 
 		return true;
 	}
@@ -185,10 +187,10 @@ class group_duer_class extends singleton_util {
 
 		$data_to_document = array_merge( $data_to_document, $data_duer );
 		$data_to_document['nomEntreprise'] = $data_duer['company_name'];
-		$data_to_document['identifiantElement'] = $element->option['unique_identifier'];
+		$data_to_document['identifiantElement'] = $element->unique_identifier;
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
 		$data_to_document['dateGeneration'] = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
-		$data_to_document['elementParHierarchie']['value'] = group_class::get()->get_element_sub_tree( $element );
+		$data_to_document['elementParHierarchie']['value'] = group_class::g()->get_element_sub_tree( $element );
 		return $data_to_document;
 	}
 
@@ -201,12 +203,12 @@ class group_duer_class extends singleton_util {
 	* @return array Les données qui seront insérées dans le document
 	*/
 	public function fill_data_risk( $data_to_document, $element ) {
-		$list_risk = group_class::get()->get_element_tree_risk( $element );
+		$list_risk = group_class::g()->get_element_tree_risk( $element );
 		$risk_per_element = array();
 
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $risk ) {
-				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::get()->list_scale[$risk[ 'niveauRisque' ]] : '';
+				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] : '';
 				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk;
 				$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $risk;
 				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk;
@@ -217,7 +219,7 @@ class group_duer_class extends singleton_util {
 				$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] += $risk[ 'quotationRisque' ];
 		  }
 		}
-		$data_to_document[ 'risqueFiche' ][ 'value' ] = group_class::get()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
+		$data_to_document[ 'risqueFiche' ][ 'value' ] = group_class::g()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
 
 		return $data_to_document;
 	}
@@ -263,28 +265,28 @@ class group_duer_class extends singleton_util {
 
 		/**	Build a file list to set into the final zip / Contruit la liste des fichiers a ajouter dans le zip lorsque les générations sont terminées	*/
 		$response = array();
-		$response[] = sheet_groupment_class::get()->generate_sheet( $element->id );
+		$response[] = sheet_groupment_class::g()->generate_sheet( $element->id );
 
 		/**	Get workunit list for the current group / Récupération de la liste des unités de travail pour le groupement actuel	*/
-		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach( $work_unit_list as $workunit ) {
-			$response[] = workunit_class::get()->generate_workunit_sheet( $workunit->id );
+			$response[] = workunit_class::g()->generate_workunit_sheet( $workunit->id );
 		}
 
-		$list_id = group_class::get()->get_element_sub_tree_id( $element->id, $list_id );
+		$list_id = group_class::g()->get_element_sub_tree_id( $element->id, $list_id );
 		if ( !empty( $list_id ) ) {
 			foreach( $list_id as $element ) {
 				if( !empty( $element['workunit'] ) ) {
 					if( !empty( $element['id'] ) ) {
-						$response[] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
+						$response[] = sheet_groupment_class::g()->generate_sheet( $element['id'] );
 					}
 					foreach( $element['workunit'] as $workunit_id ) {
-						$response[] = workunit_class::get()->generate_workunit_sheet( $workunit_id['id'] );
+						$response[] = workunit_class::g()->generate_workunit_sheet( $workunit_id['id'] );
 					}
 				}
 				else {
 					if( !empty( $element['id'] ) ) {
-						$response[] = sheet_groupment_class::get()->generate_sheet( $element['id'] );
+						$response[] = sheet_groupment_class::g()->generate_sheet( $element['id'] );
 					}
 				}
 			}

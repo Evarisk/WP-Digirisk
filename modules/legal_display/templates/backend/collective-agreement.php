@@ -17,13 +17,13 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Title of the applicable collective agreement', 'digirisk' ); ?>
-      <input name="collective_agreement[title_of_the_applicable_collective_agreement]" type="text" value="<?php echo $data['legal_display']->option['collective_agreement']['title_of_the_applicable_collective_agreement']; ?>" />
+      <input name="collective_agreement[title_of_the_applicable_collective_agreement]" type="text" value="<?php echo $legal_display->collective_agreement['title_of_the_applicable_collective_agreement']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Location and access terms of the agreement', 'digirisk' ); ?>
-      <input name="collective_agreement[location_and_access_terms_of_the_agreement]" type="text" value="<?php echo $data['legal_display']->option['collective_agreement']['location_and_access_terms_of_the_agreement']; ?>" />
+      <input name="collective_agreement[location_and_access_terms_of_the_agreement]" type="text" value="<?php echo $legal_display->collective_agreement['location_and_access_terms_of_the_agreement']; ?>" />
     </label>
   </li>
 </ul>

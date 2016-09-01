@@ -141,4 +141,4 @@ class TransferData_task_class extends \singleton_util {
 
 }
 
-TransferData_task_class::get();
+TransferData_task_class::g();

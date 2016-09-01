@@ -52,7 +52,7 @@ class TransferData_components_class extends \singleton_util {
 				/**	Définition de la structure d'une catégorie de danger / Define the danger category structure		*/
 				$wp_danger_category_definition = array(
 					'id' => null,
-					'type' => \danger_category_class::get()->get_taxonomy(),
+					'type' => \danger_category_class::g()->get_taxonomy(),
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_danger_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => $eva_danger_category->description,
@@ -68,14 +68,14 @@ class TransferData_components_class extends \singleton_util {
 					),
 				);
 
-				$wp_danger_category = \danger_category_class::get()->create( $wp_danger_category_definition );
+				$wp_danger_category = \danger_category_class::g()->create( $wp_danger_category_definition );
 
 				/**	Enregistrement des données complémentaires pour les catégories de danger et création des danger pour la catégorie / Save complementary datas for danger categories and create danger of category	*/
 				if ( !empty( $wp_danger_category->id ) ) {
-					$term_associated_files = TransferData_common_class::get()->transfert_picture_linked_to_element( TABLE_CATEGORIE_DANGER, $eva_danger_category->id );
+					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_DANGER, $eva_danger_category->id );
 					$wp_danger_category->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
 					$wp_danger_category->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
-					$wp_danger_category = \danger_category_class::get()->update( $wp_danger_category );
+					$wp_danger_category = \danger_category_class::g()->update( $wp_danger_category );
 
 					$current_transfer_state[ 'danger_category' ][] = $eva_danger_category->id;
 					$eva_danger_category_transfered++;
@@ -95,7 +95,7 @@ class TransferData_components_class extends \singleton_util {
 							/**	Définition de la structure d'un danger / Define the danger structure		*/
 							$wp_danger_definition = array(
 								'id' 								=> null,
-								'type' 							=> \danger_category_class::get()->get_taxonomy(),
+								'type' 							=> \danger_category_class::g()->get_taxonomy(),
 								'term_taxonomy_id' 	=> null,
 								'name' 							=> html_entity_decode( $eva_danger->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' 			=> $eva_danger->description,
@@ -111,7 +111,7 @@ class TransferData_components_class extends \singleton_util {
 									'thumbnail_id' 				=> $term_associated_files[ '_thumbnail' ],
 								),
 							);
-							$wp_danger = \danger_class::get()->create( $wp_danger_definition );
+							$wp_danger = \danger_class::g()->create( $wp_danger_definition );
 
 							/**	Enregistrement des données complémentaires pour les catégories de danger et création des danger pour la catégorie / Save complementary datas for danger categories and create danger of category	*/
 							if ( !empty( $wp_danger->id ) ) {
@@ -170,7 +170,7 @@ class TransferData_components_class extends \singleton_util {
 				/**	Définition de la structure d'une catégorie de danger / Define the danger category structure		*/
 				$wp_evaluation_method_var_definition = array(
 					'id' => null,
-					'type' => \evaluation_method_variable_class::get()->get_taxonomy(),
+					'type' => \evaluation_method_variable_class::g()->get_taxonomy(),
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_var->nom ),
 					'description' => html_entity_decode( $eva_var->annotation ),
@@ -204,7 +204,7 @@ class TransferData_components_class extends \singleton_util {
 					}
 				}
 
-				$wp_var = \evaluation_method_variable_class::get()->create( $wp_evaluation_method_var_definition );
+				$wp_var = \evaluation_method_variable_class::g()->create( $wp_evaluation_method_var_definition );
 
 				if ( !empty( $wp_var->id ) ) {
 					$current_transfer_state[ 'evaluation_method_var' ][] = $eva_var->id;
@@ -299,7 +299,7 @@ class TransferData_components_class extends \singleton_util {
 				/**	Définition de la structure d'une catégorie de danger / Define the danger category structure		*/
 				$wp_evaluation_method_definition = array(
 						'id' => null,
-						'type' => \evaluation_method_class::get()->get_taxonomy(),
+						'type' => \evaluation_method_class::g()->get_taxonomy(),
 						'term_taxonomy_id' => null,
 						'name' => html_entity_decode( $eva_method->nom, ENT_QUOTES, 'UTF-8' ),
 						'description' => null,
@@ -313,13 +313,13 @@ class TransferData_components_class extends \singleton_util {
 							'associated_document_id' => null,
 						),
 				);
-				$wp_evaluation_method = \evaluation_method_class::get()->create( $wp_evaluation_method_definition );
+				$wp_evaluation_method = \evaluation_method_class::g()->create( $wp_evaluation_method_definition );
 
 				if ( !is_wp_error( $wp_evaluation_method ) ) {
-					$term_associated_files = TransferData_common_class::get()->transfert_picture_linked_to_element( TABLE_METHODE, $eva_method->id );
+					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_METHODE, $eva_method->id );
 					$wp_evaluation_method->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
 					$wp_evaluation_method->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
-					\evaluation_method_class::get()->update( $wp_evaluation_method );
+					\evaluation_method_class::g()->update( $wp_evaluation_method );
 
 					$current_transfer_state[ 'evaluation_method' ][] = $eva_method->id;
 					$eva_method_transfered++;
@@ -380,7 +380,7 @@ class TransferData_components_class extends \singleton_util {
 				/**	Définition de la structure d'une catégorie de préconisation / Define the recommendation category structure		*/
 				$wp_recommendation_category_definition = array(
 					'id' => null,
-					'type' => \recommendation_category_class::get()->get_taxonomy(),
+					'type' => \recommendation_category_class::g()->get_taxonomy(),
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_recommendation_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => null,
@@ -399,13 +399,13 @@ class TransferData_components_class extends \singleton_util {
 						),
 					),
 				);
-				$wp_category_recommendation = \recommendation_category_class::get()->create( $wp_recommendation_category_definition );
+				$wp_category_recommendation = \recommendation_category_class::g()->create( $wp_recommendation_category_definition );
 
 				if ( !empty( $wp_category_recommendation->id ) ) {
-					$term_associated_files = TransferData_common_class::get()->transfert_picture_linked_to_element( TABLE_CATEGORIE_PRECONISATION, $eva_recommendation_category->id, $wp_category_recommendation->id );
+					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_PRECONISATION, $eva_recommendation_category->id, $wp_category_recommendation->id );
 					$wp_category_recommendation->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
 					$wp_category_recommendation->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
-					\recommendation_category_class::get()->update( $wp_category_recommendation );
+					\recommendation_category_class::g()->update( $wp_category_recommendation );
 
 					$current_transfer_state[ 'recommendation_category' ][] = $eva_recommendation_category->id;
 					$eva_recommendation_category_transfered++;
@@ -431,7 +431,7 @@ class TransferData_components_class extends \singleton_util {
 							/**	Définition de la structure d'une préconisation / Define the recommendation's structure		*/
 							$wp_recommendation_definition = array(
 								'id' => null,
-								'type' => \recommendation_class::get()->get_taxonomy(),
+								'type' => \recommendation_class::g()->get_taxonomy(),
 								'term_taxonomy_id' => null,
 								'name' => html_entity_decode( $eva_recommendation->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' => $eva_recommendation->description,
@@ -442,13 +442,13 @@ class TransferData_components_class extends \singleton_util {
 									'type' => $eva_recommendation->preconisation_type,
 								),
 							);
-							$wp_recommendation = \recommendation_class::get()->create( $wp_recommendation_definition );
+							$wp_recommendation = \recommendation_class::g()->create( $wp_recommendation_definition );
 
 							if ( !empty( $wp_recommendation->id ) ) {
-								$term_associated_files = TransferData_common_class::get()->transfert_picture_linked_to_element( TABLE_PRECONISATION, $eva_recommendation->id, $wp_recommendation->id );
+								$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_PRECONISATION, $eva_recommendation->id, $wp_recommendation->id );
 								$wp_recommendation->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
 								$wp_recommendation->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
-								\recommendation_class::get()->update( $wp_recommendation );
+								\recommendation_class::g()->update( $wp_recommendation );
 
 								$current_transfer_state[ 'recommendation' ][] = $eva_recommendation->id;
 								$eva_recommendation_category_transfered++;
@@ -509,7 +509,7 @@ class TransferData_components_class extends \singleton_util {
 			$model->meta[ 0 ]->meta_key = 'is_default';
 			$model->meta[ 0 ]->meta_value = $model->parDefaut;
 
-			$model_id = TransferData_common_class::get()->transfer_document( $model, 0, 'document' );
+			$model_id = TransferData_common_class::g()->transfer_document( $model, 0, 'document' );
 			if ( is_int( $model_id ) ) {
 				$model_list_transfered++;
 				wp_set_object_terms( $model_id, array( 'model', $model->categorie ), 'attachment_category' );
@@ -529,4 +529,4 @@ class TransferData_components_class extends \singleton_util {
 
 }
 
-TransferData_components_class::get();
+TransferData_components_class::g();

@@ -29,7 +29,7 @@ class group_shortcode {
 	*/
 	public function callback_generate_sheet( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
 		$current_user = wp_get_current_user();
 
@@ -43,9 +43,9 @@ class group_shortcode {
 	*/
 	public function callback_sheet( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
-		document_class::get()->display_document_list( $element );
+		document_class::g()->display_document_list( $element );
 	}
 
 	/**
@@ -55,9 +55,9 @@ class group_shortcode {
 	*/
 	public function callback_configuration( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
-		group_configuration_class::get()->display( $element );
+		group_configuration_class::g()->display( $element );
 	}
 }
 

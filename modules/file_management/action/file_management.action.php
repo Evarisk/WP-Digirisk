@@ -42,8 +42,9 @@ class file_management_action {
 			wp_send_json_error();
     }
 
-    file_management_class::get()->associate_file( $file_id, $id, $type_class, $thumbnail );
-		$element = $type_class::get()->show( $id );
+    file_management_class::g()->associate_file( $file_id, $id, $type_class, $thumbnail );
+		$element = $type_class::g()->get( array( 'id' => $id ) );
+		$element = $element[0];
 
     ob_start();
     require( FILE_MANAGEMENT_VIEW_DIR . '/button.view.php' );

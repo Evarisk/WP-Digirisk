@@ -39,7 +39,7 @@ class evaluator_action {
 			$element_id = (int) $_POST['element_id'];
 		}
 
-		$element = society_class::get()->show_by_type( $element_id );
+		$element = society_class::g()->show_by_type( $element_id );
 
 		if ( empty( $element ) )
 			wp_send_json_error();
@@ -55,7 +55,7 @@ class evaluator_action {
 				$end_date->add( new DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
 
 
-				$element->option['user_info']['affected_id']['evaluator'][$user_id][] = array(
+				$element->user_info['affected_id']['evaluator'][$user_id][] = array(
 					'status' => 'valid',
 					'start' => array(
 						'date' 	=> $list_value['on'],
@@ -73,9 +73,9 @@ class evaluator_action {
 
 		//On met à jour si au moins un utilisateur à été affecté
 		if( count( $_POST['list_user'] ) > 0 )
-			society_class::get()->update_by_type( $element );
+			society_class::g()->update_by_type( $element );
 
-		$list_affected_evaluator = evaluator_class::get()->get_list_affected_evaluator( $element );
+		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
@@ -109,15 +109,15 @@ class evaluator_action {
 			$user_id = (int) $_POST['user_id'];
 		}
 
-		$element = society_class::get()->show_by_type( $element_id );
+		$element = society_class::g()->show_by_type( $element_id );
 
 		if ( empty( $element ) )
 			wp_send_json_error();
 
-		$element->option['user_info']['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
-		society_class::get()->update_by_type( $element );
+		$element->user_info['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
+		society_class::g()->update_by_type( $element );
 
-		$list_affected_evaluator = evaluator_class::get()->get_list_affected_evaluator( $element );
+		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
@@ -138,14 +138,14 @@ class evaluator_action {
 			wp_send_json_error();
 		}
 
-		$element = society_class::get()->show_by_type( $element_id );
-		evaluator_class::get()->render_list_evaluator_to_assign( $element );
+		$element = society_class::g()->show_by_type( $element_id );
+		evaluator_class::g()->render_list_evaluator_to_assign( $element );
 		wp_die();
 	}
 
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element = \society_class::get()->show_by_type( $id );
-		$list_affected_evaluator = evaluator_class::get()->get_list_affected_evaluator( $element );
+		$element = \society_class::g()->show_by_type( $id );
+		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 
 		if ( !empty( $list_affected_evaluator ) ) {
 		  foreach ( $list_affected_evaluator as $key => $sub_list ) {
@@ -165,22 +165,22 @@ class evaluator_action {
 	}
 
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
-		$element = \society_class::get()->show_by_type( $id );
+		$element = \society_class::g()->show_by_type( $id );
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
 		$args_where_evaluator = array(
 			'exclude' => array( 1 )
 		);
 
-		$list_evaluator_to_assign = evaluator_class::get()->index( $args_where_evaluator );
+		$list_evaluator_to_assign = evaluator_class::g()->index( $args_where_evaluator );
 		//
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( evaluator_class::get()->index( $args_where_evaluator ) );
+		$count_evaluator = count( evaluator_class::g()->index( $args_where_evaluator ) );
 
-		$number_page = ceil( $count_evaluator / evaluator_class::get()->limit_evaluator );
+		$number_page = ceil( $count_evaluator / evaluator_class::g()->limit_evaluator );
 
 			if ( !empty( $list_evaluator_to_assign ) ) {
 				foreach ( $list_evaluator_to_assign as $key => $evaluator ) {

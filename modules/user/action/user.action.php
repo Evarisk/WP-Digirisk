@@ -44,24 +44,7 @@ class user_action extends \singleton_util {
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		$user = array(
-			'email' => sanitize_email( $_POST['user']['email'] ),
-			'option' => array(
-				'user_info' => array(
-					'lastname' => sanitize_text_field( $_POST['user']['option']['user_info']['lastname'] ),
-					'firstname' => sanitize_text_field( $_POST['user']['option']['user_info']['firstname'] ),
-				)
-			),
-		);
-
-		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
-
-		if ( $user_id !== 0 ) {
-			$user['id'] = $user_id;
-		}
-
-		$user['login'] = trim( strtolower( remove_accents( sanitize_user( $user['option']['user_info']['firstname'] . '.' . $user['option']['user_info']['lastname'] ) ) ) );
-		$user = \digi\user_class::get()->update( $user );
+		$user = \digi\user_class::g()->update( $_POST['user'] );
 
 		ob_start();
 		require( INSTALLER_VIEW . '/list-item.php' );
@@ -76,7 +59,7 @@ class user_action extends \singleton_util {
 
 		check_ajax_referer( 'ajax_load_user_' . $user_id );
 
-		$user = user_class::get()->show( $user_id );
+		$user = user_class::g()->get( array( 'id' => $user_id ) );
 
 		ob_start();
 		require( INSTALLER_VIEW . '/list-item-edit.php' );
@@ -91,7 +74,7 @@ class user_action extends \singleton_util {
 
 		check_ajax_referer( 'ajax_delete_user_' . $user_id );
 
-		user_class::get()->delete( $user_id );
+		user_class::g()->delete( $user_id );
 		wp_send_json_success();
 	}
 
@@ -110,7 +93,7 @@ class user_action extends \singleton_util {
 	*/
 	public function display_page_staff( $hidden ) {
 		// todo Pourquo ici ?
-		$list_user = user_class::get()->index();
+		$list_user = user_class::g()->get();
 		array_shift( $list_user );
 
 		require( USERS_VIEW . 'page-staff.php' );
@@ -142,7 +125,8 @@ class user_action extends \singleton_util {
 		if( !is_array( $_POST['list_user'] ) )
 			wp_send_json_error();
 
-		$workunit = \workunit_class::get()->show( $workunit_id );
+		$workunit = \workunit_class::g()->get( array( 'id' => $workunit_id ) );
+		$workunit = $workunit[0];
 
 		if ( empty( $workunit ) )
 			wp_send_json_error();
@@ -150,7 +134,7 @@ class user_action extends \singleton_util {
 		foreach ( $_POST['list_user'] as $user_id => $list_value ) {
 			if ( !empty( $list_value['affect'] ) ) {
 				$list_value['on'] = str_replace( '/', '-', $list_value['on'] );
-				$workunit->option['user_info']['affected_id']['user'][$user_id][] = array(
+				$workunit->user_info['affected_id']['user'][$user_id][] = array(
 					'status' => 'valid',
 					'start' => array(
 						'date' 	=> sanitize_text_field( date( 'Y-m-d', strtotime( $list_value['on'] ) ) ),
@@ -169,10 +153,10 @@ class user_action extends \singleton_util {
 
 		// On met à jour si au moins un utilisateur à été affecté
 		if( count( $_POST['list_user'] ) > 0 )
-			$workunit = \workunit_class::get()->update( $workunit );
+			$workunit = \workunit_class::g()->update( $workunit );
 
 		ob_start();
-		user_class::get()->render( $workunit );
+		user_class::g()->render( $workunit );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -188,20 +172,21 @@ class user_action extends \singleton_util {
 		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-		$workunit = \workunit_class::get()->show( $id );
-		$index_valid_key = user_class::get()->get_valid_in_workunit_by_user_id( $workunit, $user_id );
+		$workunit = \workunit_class::g()->get( array( 'id' => $id ) );
+		$workunit = $workunit[0];
+		$index_valid_key = user_class::g()->get_valid_in_workunit_by_user_id( $workunit, $user_id );
 
-		$workunit->option['user_info']['affected_id']['user'][$user_id][$index_valid_key]['status'] = 'delete';
-		$workunit->option['user_info']['affected_id']['user'][$user_id][$index_valid_key]['end'] = array(
+		$workunit->user_info['affected_id']['user'][$user_id][$index_valid_key]['status'] = 'delete';
+		$workunit->user_info['affected_id']['user'][$user_id][$index_valid_key]['end'] = array(
 			'date'  => current_time( 'Y-m-d' ),
 			'by'	=> get_current_user_id(),
 			'on'	=> current_time( 'Y-m-d' ),
 		);
 
-		\workunit_class::get()->update( $workunit );
+		\workunit_class::g()->update( $workunit );
 
 		ob_start();
-		user_class::get()->render( $workunit );
+		user_class::g()->render( $workunit );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -213,8 +198,8 @@ class user_action extends \singleton_util {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function callback_display_user_affected( $id, $list_user_id ) {
-		$workunit = \society_class::get()->show_by_type( $id );
-		$data = user_class::get()->list_affected_user( $workunit );
+		$workunit = \society_class::g()->show_by_type( $id );
+		$data = user_class::g()->list_affected_user( $workunit );
 		$list_affected_user = $data['list_affected_user'];
 
 		if ( !empty( $list_affected_user ) ) {
@@ -231,8 +216,8 @@ class user_action extends \singleton_util {
 	}
 
 	public function callback_display_user_assigned( $id, $list_user_id ) {
-		$workunit = \society_class::get()->show_by_type( $id );
-		$data = user_class::get()->list_affected_user( $workunit );
+		$workunit = \society_class::g()->show_by_type( $id );
+		$data = user_class::g()->list_affected_user( $workunit );
 		$list_affected_id = $data['list_affected_id'];
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
@@ -240,14 +225,14 @@ class user_action extends \singleton_util {
 			'exclude' => array( 1 )
 		);
 
-		$list_user_to_assign = user_class::get()->index( $args_where_user );
+		$list_user_to_assign = user_class::g()->index( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( user_class::get()->index( $args_where_user ) );
-		$number_page = ceil( $count_user / user_class::get()->limit_user );
+		$count_user = count( user_class::g()->index( $args_where_user ) );
+		$number_page = ceil( $count_user / user_class::g()->limit_user );
 
 		if ( !empty( $list_user_to_assign ) ) {
 			foreach ( $list_user_to_assign as $key => $element ) {
@@ -277,10 +262,10 @@ class user_action extends \singleton_util {
 			wp_send_json_error();
 		}
 
-		$element = \workunit_class::get()->show( $element_id );
-		user_class::get()->render_list( $element );
+		$element = \workunit_class::g()->show( $element_id );
+		user_class::g()->render_list( $element );
 		wp_die();
 	}
 }
 
-user_action::get();
+user_action::g();

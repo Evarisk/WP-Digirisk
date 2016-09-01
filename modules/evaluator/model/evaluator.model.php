@@ -21,7 +21,7 @@ class wpdigi_evaluator_mdl_01 extends user_model {
 	* @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
 	* @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	*/
-	public function __construct( $object, $meta_key, $cropped = false ) {
+	public function __construct( $object, $field_wanted = array() ) {
 		// Ajout de la date d'embauche dans le modèle
 		$this->array_option['user_info']['hiring_date'] = array(
 			'type'			=> 'string',
@@ -32,7 +32,7 @@ class wpdigi_evaluator_mdl_01 extends user_model {
 			'required'		=> false,
 		);
 
-		parent::__construct( $object, $meta_key, $cropped );
+		parent::__construct( $object, $field_wanted );
 		/**     Création d'un code couleur pour l'utilisateur si inexistant ou utilisation du code couleur existant    */
 		if ( empty( $this->option[ 'evaluator_info' ][ 'avatar_color' ] ) ) {
 			global $wpdigi_evaluator_ctr;

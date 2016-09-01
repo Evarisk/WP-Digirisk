@@ -18,7 +18,7 @@ var digi_export = {
 		event.preventDefault();
 		digi_export.$( element ).closest( 'form' ).ajaxSubmit( {
 			'beforeSubmit': function() {
-				digi_export.$( element ).closest( '.wp-digi-bloc-loader' ).addClass( "wp-digi-bloc-loading" );
+				// digi_export.$( element ).closest( '.wp-digi-bloc-loader' ).addClass( "wp-digi-bloc-loading" );
 			},
 			success: function( response ) {
 				digi_export.$( element ).closest( '.wp-digi-bloc-loader' ).removeClass( "wp-digi-bloc-loading" );

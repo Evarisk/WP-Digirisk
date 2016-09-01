@@ -40,7 +40,7 @@ class risk_action {
   */
 	public function callback_display_risk( $society_id ) {
 		ob_start();
-		risk_class::get()->display_risk_list( $society_id );
+		risk_class::g()->display_risk_list( $society_id );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -60,14 +60,15 @@ class risk_action {
 
 		check_ajax_referer( 'ajax_delete_risk_' . $risk_id );
 
-		$risk = risk_class::get()->show( $risk_id );
+		$risk = risk_class::g()->get( array( 'id' => $risk_id ) );
+		$risk = $risk[0];
 
 		if ( empty( $risk ) )
 			wp_send_json_error( array( 'error' => __LINE__ ) );
 
 		$risk->status = 'trash';
 
-		risk_class::get()->update( $risk );
+		risk_class::g()->update( $risk );
 
 		wp_send_json_success();
 	}
@@ -87,7 +88,8 @@ class risk_action {
 
 		check_ajax_referer( 'ajax_load_risk_' . $risk_id );
 
-		$risk_definition = risk_class::get()->get_risk( $risk_id );
+		$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'danger_category', 'danger', 'evaluation', 'comment' ) );
+		$risk = $risk[0];
 
 		ob_start();
 		require( RISK_VIEW_DIR . 'list-item-edit.php' );
@@ -108,9 +110,10 @@ class risk_action {
 
 		check_ajax_referer( 'ajax_delete_risk_comment_' . $risk_id . '_' . $id );
 
-		$risk_evaluation_comment = risk_evaluation_comment_class::get()->show( $id );
+		$risk_evaluation_comment = risk_evaluation_comment_class::g()->get( array( 'id' => $id ) );
+		$risk_evaluation_comment = $risk_evaluation_comment[0];
 		$risk_evaluation_comment->status = 'trash';
-		risk_evaluation_comment_class::get()->update( $risk_evaluation_comment );
+		risk_evaluation_comment_class::g()->update( $risk_evaluation_comment );
 
 		wp_send_json_success();
 	}

@@ -28,7 +28,7 @@ class group_action {
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
-		add_action( 'wp_ajax_wpdigi_generate_duer_' . group_class::get()->get_post_type(), array( $this, 'ajax_generate_duer' ) );
+		add_action( 'wp_ajax_wpdigi_generate_duer_' . group_class::g()->get_post_type(), array( $this, 'ajax_generate_duer' ) );
 	}
 
 	/**
@@ -44,13 +44,13 @@ class group_action {
 		else
 			$group_id = (int) $_POST['group_id'];
 
-		$last_unique_key = wpdigi_utils::get_last_unique_key( 'post', group_class::get()->get_post_type() );
+		$last_unique_key = wpdigi_utils::get_last_unique_key( 'post', group_class::g()->get_post_type() );
 		$last_unique_key++;
 
-		$group = group_class::get()->create( array(
+		$group = group_class::g()->create( array(
 			'option' => array(
 				'unique_key' => $last_unique_key,
-				'unique_identifier' => group_class::get()->element_prefix . $last_unique_key,
+				'unique_identifier' => group_class::g()->element_prefix . $last_unique_key,
 			),
 			'parent_id' => $group_id,
 			'title' => __( 'Undefined', 'digirisk' ),
@@ -58,7 +58,7 @@ class group_action {
 
 		ob_start();
 		$display_mode = 'simple';
-		group_class::get()->display_society_tree( $display_mode, $group->id );
+		group_class::g()->display_society_tree( $display_mode, $group->id );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';
@@ -137,7 +137,7 @@ class group_action {
 	*/
 	public function ajax_generate_duer() {
 		check_ajax_referer( 'digi_ajax_generate_element_duer' );
-		group_duer_class::get()->generate( $_POST );
+		group_duer_class::g()->generate( $_POST );
 		wp_send_json_success();
 	}
 

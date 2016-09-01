@@ -26,9 +26,9 @@ class legal_display_shortcode {
 	*/
 	public function callback_digi_legal_display( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
-		legal_display_class::get()->display( $element );
+		legal_display_class::g()->display( $element );
 	}
 }
 

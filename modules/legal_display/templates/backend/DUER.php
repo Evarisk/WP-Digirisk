@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'How access to duer', 'digirisk' ); ?>
-      <input name="DUER[how_access_to_duer]" type="text" value="<?php echo $data['legal_display']->option['DUER']['how_access_to_duer']; ?>" />
+      <input name="DUER[how_access_to_duer]" type="text" value="<?php echo $legal_display->DUER['how_access_to_duer']; ?>" />
     </label>
   </li>
 </ul>

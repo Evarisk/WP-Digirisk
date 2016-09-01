@@ -33,14 +33,14 @@ class society_action {
 		do_shortcode( '[digi_dashboard id="' . $element_id . '" tab_to_display="' . $tab_to_display . '"]' );
 		$template = ob_get_clean();
 
-		$society = society_class::get()->show_by_type( $element_id );
-		if ( $society->type == 'digi-group' ) {
-			ob_start();
-			$display_mode = 'simple';
-			group_class::get()->display_society_tree( $display_mode, $society->id );
-			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
-
-		}
+		// $society = society_class::g()->show_by_type( $element_id );
+		// if ( $society->type == 'digi-group' ) {
+		// 	ob_start();
+		// 	$display_mode = 'simple';
+		// 	group_class::g()->display_society_tree( $display_mode, $society->id );
+		// 	wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
+		//
+		// }
 
 		wp_send_json_success( array( 'template' => $template ) );
 	}
@@ -56,30 +56,27 @@ class society_action {
 	*/
 	public function callback_save_society() {
 		// todo: Doublon ?
-		if ( 0 === ( int )$_POST['element_id'] )
+		if ( 0 === ( int )$_POST['id'] )
 			wp_send_json_error();
 		else
-			$element_id = (int) $_POST['element_id'];
+			$id = (int) $_POST['id'];
 
-		$title = sanitize_text_field( $_POST['title'] );
-
-		$group_id = $element_id;
-		$society = society_class::get()->show_by_type( $element_id );
-		$society->title = $title;
+		$group_id = $id;
+		$society = society_class::g()->show_by_type( $_POST['id'] );
+		$society->title = $_POST['title'];
 
 		if ( !empty( $_POST['parent_id'] ) ) {
 			$parent_id = (int) $_POST['parent_id'];
 			$society->parent_id = $_POST['parent_id'];
 		}
-
-		society_class::get()->update_by_type( $society );
+		society_class::g()->update_by_type( $society );
 
 		if ( $society->type !== 'digi-group' ) {
 			$group_id = $society->parent_id;
 		}
 
 		ob_start();
-		group_class::get()->display_society_tree( "simple", $group_id );
+		group_class::g()->display_society_tree( "simple", $group_id );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 
@@ -89,9 +86,9 @@ class society_action {
 	public function callback_delete_society() {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 
-		$society = society_class::get()->show_by_type( $element_id );
+		$society = society_class::g()->show_by_type( $element_id );
 		$society->status = 'trash';
-		society_class::get()->update_by_type( $society );
+		society_class::g()->update_by_type( $society );
 
 		wp_send_json_success();
 	}

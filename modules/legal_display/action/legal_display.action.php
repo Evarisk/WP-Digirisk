@@ -33,9 +33,6 @@ class legal_display_action {
     $rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
     $parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
-    $last_unique_key = wpdigi_utils::get_last_unique_key( 'post', legal_display_class::get()->get_post_type() );
-		$last_unique_key++;
-
     // @todo sécurisé
     $legal_display_data = array(
       'detective_work_id' => $detective_work_third->id,
@@ -47,23 +44,21 @@ class legal_display_action {
       'collective_agreement' => $collective_agreement,
       'DUER' => $DUER,
       'rules' => $rules,
-      'unique_identifier' => legal_display_class::get()->element_prefix . $last_unique_key,
-      'unique_key' => $last_unique_key,
       'parent_id' => $parent_id,
     );
 
-    $legal_display = legal_display_class::get()->save_data( $legal_display_data );
+    $legal_display = legal_display_class::g()->save_data( $legal_display_data );
 
 		// Toutes les données de l'affichage légal
-		$all_data = legal_display_class::get()->load_data( $parent_id );
-		$element_parent = group_class::get()->show( $parent_id );
+		// $all_data = legal_display_class::g()->load_data( $parent_id );
+		$element_parent = group_class::g()->get( array( 'id' => $parent_id ) );
 
-    $this->generate_sheet( $all_data, $element_parent );
+    $this->generate_sheet( $legal_display, $element_parent[0] );
 
 		// Bug des modèles
-		$element_parent = group_class::get()->show( $parent_id );
-
-    $this->generate_sheet( $all_data, $element_parent, "A3" );
+		// $element_parent = group_class::g()->show( array( 'id' => $parent_id ) );
+		//
+    // $this->generate_sheet( $all_data, $element_parent[0], "A3" );
 
     wp_send_json_success();
   }
@@ -75,70 +70,70 @@ class legal_display_action {
 	* @param object $element_parent L'objet parent
 	* @param string $format (Optional) Le format voulu A4 ou A3
 	*/
-  public function generate_sheet( $data, $element_parent, $format = "A4" ) {
+  public function generate_sheet( $legal_display, $element_parent, $format = "A4" ) {
 		// A déplacer dans la class
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
-      'inspection_du_travail_nom' => $data['detective_work']->option['full_name'],
-      'inspection_du_travail_adresse' => $data['detective_work']->address->option['address'],
-      'inspection_du_travail_code_postal' => $data['detective_work']->address->option['postcode'],
-      'inspection_du_travail_ville' => $data['detective_work']->address->option['town'],
-      'inspection_du_travail_telephone' => max( $data['detective_work']->option['contact']['phone'] ),
-      'inspection_du_travail_horaire' => $data['detective_work']->option['opening_time'],
+      'inspection_du_travail_nom' => $legal_display->detective_work[0]->full_name,
+      'inspection_du_travail_adresse' => $legal_display->detective_work[0]->address[0]->address,
+      'inspection_du_travail_code_postal' => $legal_display->detective_work[0]->address[0]->postcode,
+      'inspection_du_travail_ville' => $legal_display->detective_work[0]->address[0]->town,
+      'inspection_du_travail_telephone' => $legal_display->detective_work[0]->contact['phone'],
+      'inspection_du_travail_horaire' => $legal_display->detective_work[0]->opening_time,
 
-      'service_de_sante_nom' => $data['occupational_health_service']->option['full_name'],
-      'service_de_sante_adresse' => $data['occupational_health_service']->address->option['address'],
-      'service_de_sante_code_postal' => $data['occupational_health_service']->address->option['postcode'],
-      'service_de_sante_ville' => $data['occupational_health_service']->address->option['town'],
-      'service_de_sante_telephone' => max( $data['occupational_health_service']->option['contact']['phone'] ),
-			'service_de_sante_horaire' => $data['occupational_health_service']->option['opening_time'],
+      'service_de_sante_nom' => $legal_display->occupational_health_service[0]->full_name,
+      'service_de_sante_adresse' => $legal_display->occupational_health_service[0]->address[0]->address,
+      'service_de_sante_code_postal' => $legal_display->occupational_health_service[0]->address[0]->postcode,
+      'service_de_sante_ville' => $legal_display->occupational_health_service[0]->address[0]->town,
+      'service_de_sante_telephone' => $legal_display->occupational_health_service[0]->contact['phone'],
+			'service_de_sante_horaire' => $legal_display->occupational_health_service[0]->opening_time,
 
-      'samu' => $data['legal_display']->option['emergency_service']['samu'],
-      'police' => $data['legal_display']->option['emergency_service']['police'],
-      'pompier' => $data['legal_display']->option['emergency_service']['pompier'],
-      'toute_urgence' => $data['legal_display']->option['emergency_service']['emergency'],
-      'defenseur_des_droits' => $data['legal_display']->option['emergency_service']['right_defender'],
-      'anti_poison' => $data['legal_display']->option['emergency_service']['poison_control_center'],
+      'samu' => $legal_display->emergency_service['samu'],
+      'police' => $legal_display->emergency_service['police'],
+      'pompier' => $legal_display->emergency_service['pompier'],
+      'toute_urgence' => $legal_display->emergency_service['emergency'],
+      'defenseur_des_droits' => $legal_display->emergency_service['right_defender'],
+      'anti_poison' => $legal_display->emergency_service['poison_control_center'],
 
-      'responsable_a_prevenir' => $data['legal_display']->option['safety_rule']['responsible_for_preventing'],
-      'telephone' => $data['legal_display']->option['safety_rule']['phone'],
-      'emplacement_des_consignes_detaillees' => $data['legal_display']->option['safety_rule']['location_of_detailed_instruction'],
+      'responsable_a_prevenir' => $legal_display->safety_rule['responsible_for_preventing'],
+      'telephone' => $legal_display->safety_rule['phone'],
+      'emplacement_des_consignes_detaillees' => $legal_display->safety_rule['location_of_detailed_instruction'],
 
-      'permanente' => $data['legal_display']->option['derogation_schedule']['permanent'],
-      'occasionnelle' => $data['legal_display']->option['derogation_schedule']['occasional'],
+      'permanente' => $legal_display->derogation_schedule['permanent'],
+      'occasionnelle' => $legal_display->derogation_schedule['occasional'],
 
-      'intitule' => $data['legal_display']->option['collective_agreement']['title_of_the_applicable_collective_agreement'],
-      'lieu_modalite' => $data['legal_display']->option['collective_agreement']['location_and_access_terms_of_the_agreement'],
+      'intitule' => $legal_display->collective_agreement['title_of_the_applicable_collective_agreement'],
+      'lieu_modalite' => $legal_display->collective_agreement['location_and_access_terms_of_the_agreement'],
 
-      'lieu_affichage' =>$data['legal_display']->option['rules']['location'],
-      'modalite_access' =>$data['legal_display']->option['DUER']['how_access_to_duer'],
+      'lieu_affichage' => $legal_display->rules['location'],
+      'modalite_access' => $legal_display->DUER['how_access_to_duer'],
 
-			'lundi_matin' => $data['legal_display']->option['working_hour']['monday_morning'],
-			'mardi_matin' => $data['legal_display']->option['working_hour']['tuesday_morning'],
-			'mercredi_matin' => $data['legal_display']->option['working_hour']['wednesday_morning'],
-			'jeudi_matin' => $data['legal_display']->option['working_hour']['thursday_morning'],
-			'vendredi_matin' => $data['legal_display']->option['working_hour']['friday_morning'],
-			'samedi_matin' => $data['legal_display']->option['working_hour']['saturday_morning'],
-			'dimanche_matin' => $data['legal_display']->option['working_hour']['sunday_morning'],
+			'lundi_matin' => $legal_display->working_hour['monday_morning'],
+			'mardi_matin' => $legal_display->working_hour['tuesday_morning'],
+			'mercredi_matin' => $legal_display->working_hour['wednesday_morning'],
+			'jeudi_matin' => $legal_display->working_hour['thursday_morning'],
+			'vendredi_matin' => $legal_display->working_hour['friday_morning'],
+			'samedi_matin' => $legal_display->working_hour['saturday_morning'],
+			'dimanche_matin' => $legal_display->working_hour['sunday_morning'],
 
-			'lundi_aprem' => $data['legal_display']->option['working_hour']['monday_afternoon'],
-			'mardi_aprem' => $data['legal_display']->option['working_hour']['tuesday_afternoon'],
-			'mercredi_aprem' => $data['legal_display']->option['working_hour']['wednesday_afternoon'],
-			'jeudi_aprem' => $data['legal_display']->option['working_hour']['thursday_afternoon'],
-			'vendredi_aprem' => $data['legal_display']->option['working_hour']['friday_afternoon'],
-			'samedi_aprem' => $data['legal_display']->option['working_hour']['saturday_afternoon'],
-			'dimanche_aprem' => $data['legal_display']->option['working_hour']['sunday_afternoon'],
+			'lundi_aprem' => $legal_display->working_hour['monday_afternoon'],
+			'mardi_aprem' => $legal_display->working_hour['tuesday_afternoon'],
+			'mercredi_aprem' => $legal_display->working_hour['wednesday_afternoon'],
+			'jeudi_aprem' => $legal_display->working_hour['thursday_afternoon'],
+			'vendredi_aprem' => $legal_display->working_hour['friday_afternoon'],
+			'samedi_aprem' => $legal_display->working_hour['saturday_afternoon'],
+			'dimanche_aprem' => $legal_display->working_hour['sunday_afternoon'],
 		);
 
-		$document_creation = document_class::get()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
+		$document_creation = document_class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
 
 		$filetype = 'unknown';
 		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
 			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
 		}
 
-		$element_parent->option['associated_document_id']['document'][] = $document_creation['id'];
-		group_class::get()->update( $element_parent );
+		$element_parent->associated_document_id['document'][] = $document_creation['id'];
+		group_class::g()->update( $element_parent );
 	}
 
 

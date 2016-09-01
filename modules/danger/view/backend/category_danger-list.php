@@ -7,10 +7,10 @@
 		<div class="wp-digi-select-list digi-popup grid icon hidden">
 		<?php foreach( $danger_category_list as $danger_category ): ?>
 			<ul>
-				<?php $danger_of_category = danger_class::get()->index( array( 'parent' => $danger_category->id, ) ); ?>
+				<?php $danger_of_category = danger_class::g()->get( array( 'parent' => $danger_category->id, ) ); ?>
 				<?php if( !empty( $danger_of_category ) ): ?>
 					<?php foreach( $danger_of_category as $danger ): ?>
-						<li class="child" data-id="<?php echo $danger->id; ?>"><?php echo wp_get_attachment_image( $danger->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $danger->name ) ); ?></li>
+						<li class="child" data-id="<?php echo $danger->id; ?>"><?php echo wp_get_attachment_image( $danger->thumbnail_id, 'thumbnail', false, array( 'title' => $danger->name ) ); ?></li>
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</ul>

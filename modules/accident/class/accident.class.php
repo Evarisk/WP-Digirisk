@@ -10,6 +10,7 @@ class accident_class extends post_class {
 	protected $base = 'digirisk/accident';
 	protected $version = '0.1';
 
+	protected $before_post_function = array( 'construct_identifier' );
 	public $element_prefix = 'R';
 
 	protected $limit_accident = -1;
@@ -86,13 +87,13 @@ class accident_class extends post_class {
 	 * @param int $society_id L'ID de la societé
 	 */
 	public function display_accident_list( $society_id ) {
-		$society = society_class::get()->show_by_type( $society_id );
+		$society = society_class::g()->show_by_type( $society_id );
 
 		if ( $society->id === 0 ) {
 			return false;
 		}
 
-		$accident_list = accident_class::get()->index( array( 'post_parent' => $society->id ) );
+		$accident_list = accident_class::g()->index( array( 'post_parent' => $society->id ) );
 
 		if ( !empty( $accident_list ) ) {
 		  foreach ( $accident_list as $key => $element ) {

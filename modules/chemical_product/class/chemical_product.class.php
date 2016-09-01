@@ -10,6 +10,7 @@ class chemical_product_class extends post_class {
 	protected $base = 'digirisk/chemical_product';
 	protected $version = '0.1';
 
+	protected $before_post_function = array( 'construct_identifier' );
 	public $element_prefix = 'R';
 
 	protected $limit_chemical_product = -1;
@@ -86,13 +87,13 @@ class chemical_product_class extends post_class {
 	 * @param int $society_id L'ID de la societé
 	 */
 	public function display_chemical_product_list( $society_id ) {
-		$society = society_class::get()->show_by_type( $society_id );
+		$society = society_class::g()->show_by_type( $society_id );
 
 		if ( $society->id === 0 ) {
 			return false;
 		}
 
-		$chemical_product_list = chemical_product_class::get()->index( array( 'post_parent' => $society->id ) );
+		$chemical_product_list = chemical_product_class::g()->index( array( 'post_parent' => $society->id ) );
 
 		if ( !empty( $chemical_product_list ) ) {
 		  foreach ( $chemical_product_list as $key => $element ) {

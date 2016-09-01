@@ -38,13 +38,18 @@ class society_class extends singleton_util {
 	 * AFFICHAGE/DISPLAY - Affichage de l'écran principal pour la gestion de la structure de la société et l'évaluation des risques / Display main screen for society management and risk evaluation
 	 */
 	public function display_dashboard() {
-		$display_mode = 'simple';
+		$group_list = group_class::g()->get(
+			array(
+				'posts_per_page' => 1,
+				'post_parent' => 0,
+				'post_status' => array( 'publish', 'draft', ),
+			), array(
+				'list_group'
+			) );
 
-		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), false );
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 
-		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, $display_mode, 'dashboard' );
-
+		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'simple', 'dashboard' );
 		if( $path ) {
 			require_once( $path );
 		}
@@ -72,9 +77,9 @@ class society_class extends singleton_util {
 		}
 
     $model_name = str_replace( 'digi-', '', $post_type ) . '_class';
-    $establishment = $model_name::get()->show( $id );
+    $establishment = $model_name::g()->get( array( 'id' => $id ) );
 
-    return $establishment;
+    return $establishment[0];
   }
 
 	/**
@@ -105,9 +110,9 @@ class society_class extends singleton_util {
 			return false;
 		}
 
-		$establishment = $model_name::get()->update( $establishment );
+		$establishment = $model_name::g()->update( $establishment );
 		return $establishment;
 	}
 }
 
-society_class::get();
+society_class::g();

@@ -17,15 +17,15 @@
 				foreach ( $sub_list_affected_evaluator as $affected_evaluator ):
 					?>
 						<li>
-							<span class="wp-avatar" style="background: #<?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['avatar_color']; ?>;"><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['initial']; ?></span>
-							<span><?php echo evaluator_class::get()->element_prefix . $affected_evaluator[ 'user_info' ]->id; ?></span>
-							<span><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['lastname']; ?></span>
-							<span><?php echo $affected_evaluator[ 'user_info' ]->option['user_info']['firstname']; ?></span>
+							<span class="wp-avatar" style="background: #<?php echo $affected_evaluator[ 'user_info' ]->avatar_color; ?>;"><?php echo $affected_evaluator[ 'user_info' ]->initial; ?></span>
+							<span><?php echo evaluator_class::g()->element_prefix . $affected_evaluator[ 'user_info' ]->id; ?></span>
+							<span><?php echo $affected_evaluator[ 'user_info' ]->lastname; ?></span>
+							<span><?php echo $affected_evaluator[ 'user_info' ]->firstname; ?></span>
 							<span><?php echo  mysql2date( 'd/m/Y H:i', $affected_evaluator[ 'affectation_info' ][ 'start' ][ 'date' ], true ); ?></span>
-							<span><?php echo evaluator_class::get()->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
+							<span><?php echo evaluator_class::g()->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
 							<span class="wp-digi-action">
 								<a 	data-id="<?php echo $element->id; ?>"
-										data-user-id="<?php echo $affected_evaluator[ 'user_info' ]->id; ?>"
+										data-user-id="<?php echo $affected_evaluator['user_info']->id; ?>"
 										data-affectation-data-id="<?php echo $affected_evaluator['affectation_info']['id']; ?>"
 										class="wp-digi-action-delete dashicons dashicons-no-alt"></a>
 							</span>

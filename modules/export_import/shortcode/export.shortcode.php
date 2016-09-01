@@ -38,7 +38,7 @@ class export_shortcode {
 		/** On vérifie si il y a un élément défini pour l'affichage du shortcode / Check if there is an element specified for shortcode usage */
 		if ( !empty( $param ) && !empty( $param[ 'post_id' ] ) && is_int( (int)$param[ 'post_id' ] ) ) {
 			$element_id = $param[ 'post_id' ];
-	    $element = society_class::get()->show_by_type( $element_id );
+	    $element = society_class::g()->show_by_type( $element_id );
 		}
 
 		/** Affichage du formulaire d'export / Display export form */
@@ -55,7 +55,7 @@ class export_shortcode {
 		/** On vérifie si il y a un élément défini pour l'affichage du shortcode / Check if there is an element specified for shortcode usage */
 		if ( !empty( $param ) && !empty( $param[ 'post_id' ] ) && is_int( (int)$param[ 'post_id' ] ) ) {
 			$element_id = $param[ 'post_id' ];
-			$element = society_class::get()->show_by_type( $element_id );
+			$element = society_class::g()->show_by_type( $element_id );
 		}
 
 		/** Affichage du formulaire d'import / Display import form */

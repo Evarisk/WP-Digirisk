@@ -12,16 +12,12 @@ class group_configuration_class extends singleton_util {
 	* @param object $element L'élement du groupement
 	*/
   public function display( $element ) {
-    $address = address_class::get()->show( !empty( $element->option['contact']['address'] ) ? max( $element->option['contact']['address'] ) : 0 );
-
-    // Récupère le dernier numéro de téléphone
-    $phone = !empty( $element->option['contact']['phone'] ) ? max( $element->option['contact']['phone'] ) : '';
-
-    // Récupère le nom de l'utilisateur
-    $user = \digi\user_class::get()->show( $element->option['user_info']['owner_id'] );
-
     require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group/configuration', 'form' ) );
   }
+
+	public function save( $data ) {
+		group_class::g()->update( $data );
+	}
 }
 
-group_configuration_class::get();
+group_configuration_class::g();

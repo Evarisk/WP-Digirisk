@@ -4,9 +4,9 @@ if ( !empty( $group_list ) ): ?>
 		<?php foreach ( $group_list as $group ) : ?>
 			<li data-id="<?php echo $group->id; ?>">
 				<div class="<?php echo $default_selected_group_id == $group->id ? 'active' : ''; ?>">
-					<span data-id="<?php echo $group->id; ?>" class="wp-digi-global-name"><?php echo $group->option[ 'unique_identifier' ] . ' - ' . $group->title; ?></span>
+					<span data-id="<?php echo $group->id; ?>" class="wp-digi-global-name"><?php echo $group->unique_identifier . ' - ' . $group->title; ?></span>
 					<?php
-					$list_workunit = workunit_class::get()->index( array( 'post_parent' => $group->id, 'status' => 'publish' ) );
+					$list_workunit = workunit_class::g()->get( array( 'post_parent' => $group->id, 'status' => 'publish' ) );
 					?>
 					<?php if ( count( $list_workunit ) == 0 ): ?>
 						<span class="wp-digi-new-group-action">

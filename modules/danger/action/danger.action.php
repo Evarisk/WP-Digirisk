@@ -41,7 +41,7 @@ class danger_action {
 			'rewrite'               => array( 'slug' => 'danger' ),
 		);
 
-		register_taxonomy( danger_class::get()->get_taxonomy(), array( risk_class::get()->get_post_type() ), $args );
+		register_taxonomy( danger_class::g()->get_taxonomy(), array( risk_class::g()->get_post_type() ), $args );
 	}
 }
 

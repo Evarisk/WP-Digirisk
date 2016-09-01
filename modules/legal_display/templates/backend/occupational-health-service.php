@@ -18,37 +18,37 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Full name of compagny doctor', 'digirisk' ); ?>
-      <input name="occupational_health_service[full_name]" type="text" value="<?php echo $data['occupational_health_service']->option['full_name']; ?>" />
+      <input name="occupational_health_service[full_name]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->full_name; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Address', 'digirisk' ); ?>
-      <input name="occupational_health_service[address][address]" type="text" value="<?php echo $data['occupational_health_service']->address->option['address']; ?>" />
+      <input name="occupational_health_service[address][address]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->address[0]->address; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Postcode', 'digirisk' ); ?>
-      <input name="occupational_health_service[address][postcode]" type="text" value="<?php echo $data['occupational_health_service']->address->option['postcode']; ?>" />
+      <input name="occupational_health_service[address][postcode]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->address[0]->postcode; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'City', 'digirisk' ); ?>
-      <input name="occupational_health_service[address][town]" type="text" value="<?php echo $data['occupational_health_service']->address->option['town']; ?>" />
+      <input name="occupational_health_service[address][town]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->address[0]->town; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Phone', 'digirisk' ); ?>
-      <input name="occupational_health_service[contact][phone]" type="text" value="<?php echo !empty( $data['occupational_health_service']->option['contact']['phone'][0] ) ? $data['occupational_health_service']->option['contact']['phone'][0] : ''; ?>" />
+      <input name="occupational_health_service[contact][phone]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->contact['phone']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Horaires', 'digirisk' ); ?>
-      <input name="occupational_health_service[opening_time]" type="text" value="<?php echo $data['occupational_health_service']->option['opening_time']; ?>" />
+      <input name="occupational_health_service[opening_time]" type="text" value="<?php echo $legal_display->occupational_health_service[0]->opening_time; ?>" />
     </label>
   </li>
 </ul>

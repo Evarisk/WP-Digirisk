@@ -8,101 +8,53 @@ class term_model extends constructor_data_class {
 	 */
 	protected $model = array(
 		'id' => array(
+			'export'	=> true,
 			'type'		=> 'integer',
 			'field'		=> 'term_id',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
 		),
 		'type' => array(
 			'type'		=> 'string',
 			'field'		=> 'taxonomy',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
 		),
 		'term_taxonomy_id' => array(
 			'type'		=> 'integer',
 			'field'		=> 'term_taxonomy_id',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
 		),
 		'name' => array(
 			'type'		=> 'string',
 			'field'		=> 'name',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
+			'export'	=> true,
 		),
 		'description' => array(
 			'type'		=> 'string',
 			'field'		=> 'description',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
 		),
 		'slug' => array(
 			'type'		=> 'string',
 			'field'		=> 'slug',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
+			'export'	=> true,
 		),
 		'parent_id' => array(
 			'type'		=> 'integer',
 			'field'		=> 'parent',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
+			'bydefault'	=> 0,
 		),
+		'post_id' => array(
+			'type' 	=> 'integer',
+			'field'	=>	'post_id',
+			'bydefault' => 0,
+		)
 	);
 
-	/**
-	 * Définition du modèle pour les champs secondaires des taxinomies / Secondary fields definition for taxonomy model
-	 * @var array Les champs secondaires d'une taxinomie / Secondary field for a taxonomy
-	 */
-	protected $array_option = array(
-		'group' => array(
-			'type'		=> 'integer',
-			'field'		=> 'term_group',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
-		),
-		'thumbnail_id' => array(
-			'type'		=> 'integer',
-			'field_type'	=> 'meta',
-			'field'		=> '_thumbnail_id',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
-		),
-	);
-
-	/**
-	 * Construction de l'objet taxinomie par remplissage du modèle / Build taxonomy through fill in the model
-	 *
-	 * @param object $object L'object avec lequel il faut construire le modèle / The object which one to build
-	 * @param string $meta_key Le nom de la "meta" contenant la définition complète de l'object sous forme json / The "meta" name containing the complete definition of object under json format
-	 * @param boolean $cropped Permet de choisir si on construit le modèle complet ou uniquement les champs principaux / Allows to choose if the entire model have to be build or only main model
-	 */
-	public function __construct( $object, $meta_key, $cropped ) {
+	public function __construct( $object, $children_wanted = array() ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object );
-
-		/** If cropped don't get meta */
-		if( !$cropped ) {
-			/** Lecture des "metas" pour la taxinomie / Read taxonomy "meta" */
-			$meta = get_term_meta( $this->id );
-			$internal_meta = !empty( $meta ) && !empty( $meta[ $meta_key ] ) && !empty( $meta[ $meta_key ][ 0 ] ) ? json_decode( $meta[ $meta_key ][ 0 ], true ) : null;
-
-			if( !empty( $this->array_option ) ) {
-				foreach( $this->array_option as $key => $array ) {
-					$this->option[ $key ] = $this->fill_value( $object, $meta, $key, $array, $internal_meta );
-				}
-			}
-		}
+		parent::__construct( $object, $children_wanted );
 	}
 
 }

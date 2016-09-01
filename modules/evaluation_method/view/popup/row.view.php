@@ -17,16 +17,16 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
     <?php
     $active = '';
 
-    if ( !empty( $risk_evaluation ) && !empty( $risk_evaluation->option['quotation_detail'] ) ):
-      foreach( $risk_evaluation->option['quotation_detail'] as $detail ) {
-        if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->option['survey']['request'][$i]['seuil'] )
+    if ( !empty( $risk->evaluation[0] ) && !empty( $risk->evaluation[0]->quotation_detail ) ):
+      foreach( $risk->evaluation[0]->quotation_detail as $detail ) {
+        if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] )
           $active = 'active';
       }
     endif;
     ?>
 
-    <li data-variable-id="<?php echo $list_evaluation_method_variable[$x]->id; ?>" data-seuil-id="<?php echo $list_evaluation_method_variable[$x]->option['survey']['request'][$i]['seuil'] == null ? 'undefined' : $list_evaluation_method_variable[$x]->option['survey']['request'][$i]['seuil']; ?>" class="cell <?php echo $active; ?>">
-      <?php echo !empty( $list_evaluation_method_variable[$x]->option['survey']['request'][$i] ) ? $list_evaluation_method_variable[$x]->option['survey']['request'][$i]['question'] : ''; ?>
+    <li data-variable-id="<?php echo $list_evaluation_method_variable[$x]->id; ?>" data-seuil-id="<?php echo $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] == null ? 'undefined' : $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil']; ?>" class="cell <?php echo $active; ?>">
+      <?php echo !empty( $list_evaluation_method_variable[$x]->survey['request'][$i] ) ? $list_evaluation_method_variable[$x]->survey['request'][$i]['question'] : ''; ?>
     </li>
   <?php endfor; ?>
 </ul>

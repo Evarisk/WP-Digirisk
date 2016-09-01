@@ -27,7 +27,7 @@ class epi_shortcode {
 	*/
 	public function callback_digi_epi( $param ) {
 		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		epi_class::get()->display( $element_id );
+		epi_class::g()->display( $element_id );
 	}
 }
 

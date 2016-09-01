@@ -26,9 +26,9 @@ class evaluator_shortcode {
 	*/
 	public function callback_digi_evaluator( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
-		evaluator_class::get()->render( $element );
+		evaluator_class::g()->render( $element );
 	}
 }
 

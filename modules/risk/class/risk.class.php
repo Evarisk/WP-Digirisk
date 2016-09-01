@@ -14,9 +14,10 @@
  */
 class risk_class extends post_class {
 
-	protected $model_name   = 'wpdigi_risk_mdl_01';
+	protected $model_name   = 'risk_model';
 	protected $post_type    = 'digi-risk';
 	protected $meta_key    	= '_wpdigi_risk';
+	protected $before_post_function = array( 'construct_identifier' );
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
 	protected $base = 'digirisk/risk';
@@ -102,68 +103,7 @@ class risk_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
 		require( RISK_VIEW_DIR . 'main.view.php' );
-	}
-
-	/**
-	 * DISPLAY - Génération de l'affichage des risques à partir d'un shortcode / Generate display for risks through shortcode
-	 *
-	 * @param int $society_id L'ID de la societé
-	 */
-	public function display_risk_list( $society_id ) {
-		$society = society_class::get()->show_by_type( $society_id );
-
-		if ( $society->id === 0 ) {
-			return false;
-		}
-
-		$risk_list = risk_class::get()->index( array( 'post_parent' => $society->id ) );
-
-		if ( !empty( $risk_list ) ) {
-		  foreach ( $risk_list as $key => $element ) {
-				$risk_list[$key] = $this->get_risk( $element->id );
-		  }
-		}
-
-		// Tries les risques par ordre de cotation
-		if ( count( $risk_list ) > 1 ) {
-			usort( $risk_list, function( $a, $b ) {
-				if( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] == $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) {
-					return 0;
-				}
-				return ( $a->evaluation->option[ 'risk_level' ][ 'equivalence' ] > $b->evaluation->option[ 'risk_level' ][ 'equivalence' ] ) ? -1 : 1;
-			} );
-		}
-
-		require( RISK_VIEW_DIR . 'list.view.php' );
-	}
-
-	/**
-	 * GETTER - Récupération d'un risque avec toutes les données associés déjà construite / Get a complete risk definition
-	 *
-	 * @param int $id L'identifiant du risque qu'il faut récupèrer / The risk identifier to get
-	 *
-	 * @return object Le risque complet / The complete risk
-	 */
-	public function get_risk( $id ) {
-		/**	Récupération du risque / Get the risk définition	*/
-		if ( $id != 0 ) {
-			$risk = $this->show( $id );
-
-			/**	Récupération de la méthode associée au risque / Get associated method to risk	*/
-			$risk->method = evaluation_method_class::get()->show( !empty( $risk->taxonomy[ 'digi-method' ][ 0 ] ) ? $risk->taxonomy[ 'digi-method' ][ 0 ] : 0 );
-
-			/**	Récupération du danger associé au risque / Get the danger associated to risk	*/
-			$risk->danger = danger_class::get()->show( !empty( $risk->taxonomy[ 'digi-danger' ][ 0 ] ) ? $risk->taxonomy[ 'digi-danger' ][ 0 ] : 0 );
-
-			/**	Récupération de l'évaluation courante / Get the current evalation	*/
-			$risk->evaluation = risk_evaluation_class::get()->show( !empty( $risk->option[ 'current_evaluation_id' ] ) ? $risk->option[ 'current_evaluation_id' ] : 0 );
-
-			/**	Récupération des commentaires associés au risque / Get the comment associated to risk	*/
-			$risk->comment = risk_evaluation_comment_class::get()->index( $id, array( 'status' => -34070, ), false);
-			/**	On retourne la définition du risque complet / Return the complete risk definition	*/
-			return $risk;
-		}
-		return null;
 	}
 }

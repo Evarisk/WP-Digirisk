@@ -6,6 +6,7 @@ class legal_display_class extends post_class {
 	protected $meta_key   = '_wpdigi_legal_display';
 	protected $base 			= 'digirisk/legal_display';
 	protected $version 		= '0.1';
+	protected $before_post_function = array( 'construct_identifier' );
 
 	public $element_prefix = 'LD';
 
@@ -20,7 +21,14 @@ class legal_display_class extends post_class {
 	* @param object $element L'objet groupement
 	*/
   public function display( $element ) {
-		$data = $this->load_data( $element->id );
+		$legal_display = $this->get( array( 'post_parent' => $element->id ) );
+
+		if ( empty( $legal_display ) ) {
+			$legal_display = $this->get( array( 'id' => 0 ) );
+		}
+
+		$legal_display = $legal_display[0];
+
     require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'display' ) );
   }
 
@@ -32,20 +40,34 @@ class legal_display_class extends post_class {
 	* @return array Les données chargées
   */
   public function load_data( $element_id ) {
-    $data = array( 'legal_display' => array(), 'detective_work' => array(), 'occupational_health_service' => array() );
-    $list_legal_display = $this->index( array( 'post_parent' => $element_id ) );
-
-		$legal_display = !empty( $list_legal_display ) ? max($list_legal_display) : $this->show( 0 );
-
-    $detective_work = third_class::get()->show( !empty( $legal_display->option['detective_work_id'] ) ? $legal_display->option['detective_work_id'] : 0 );
-    $occupational_health_service = third_class::get()->show( !empty( $legal_display->option['occupational_health_service_id'] ) ? $legal_display->option['occupational_health_service_id'] : 0 );
-
-    $data['legal_display'] = $legal_display;
-    $data['detective_work'] = $detective_work;
-		$data['detective_work']->address = address_class::get()->show( !empty( $detective_work->option['contact']['address_id'] ) ? $detective_work->option['contact']['address_id'] : 0 );
-    $data['occupational_health_service'] = $occupational_health_service;
-    $data['occupational_health_service']->address = address_class::get()->show( !empty( $occupational_health_service->option['contact']['address_id'] ) ? $occupational_health_service->option['contact']['address_id'] : 0 );
-    return $data;
+		// $l = $this->get( array( 'post_parent' => $element_id ) );
+		// echo "<pre>"; print_r($l); echo "</pre>";
+		// echo $l[0];
+		// exit(0);
+		//
+		//
+    // $data = array( 'legal_display' => array(), 'detective_work' => array(), 'occupational_health_service' => array() );
+		//
+    // $list_legal_display = $this->get( array( 'post_parent' => $element_id ) );
+		//
+		// $legal_display = !empty( $list_legal_display ) ? max($list_legal_display) : $this->get( array( 'id' => 0 ) );
+		//
+		// $detective_work_id = !empty( $legal_display->option['detective_work_id'] ) ? $legal_display->option['detective_work_id'] : 0;
+    // $detective_work = third_class::g()->get( array( 'id' => $detective_work_id ) );
+		//
+		// $occupational_health_service_id = !empty( $legal_display->option['occupational_health_service_id'] ) ? $legal_display->option['occupational_health_service_id'] : 0;
+    // $occupational_health_service = third_class::g()->get( array( 'id' => $occupational_health_service_id ) );
+		//
+    // $data['legal_display'] = $legal_display[0];
+		//
+    // $data['detective_work'] = $detective_work[0];
+		// $detective_work_address_id = !empty( $detective_work->option['contact']['address_id'] ) ? $detective_work->option['contact']['address_id'] : 0;
+		// $data['detective_work']->address = address_class::g()->get( array( 'id' => $detective_work_address_id ) );
+		//
+    // $data['occupational_health_service'] = $occupational_health_service[0];
+		// $occupational_health_service_address_id = !empty( $occupational_health_service->option['contact']['address_id'] ) ? $occupational_health_service->option['contact']['address_id'] : 0;
+    // $data['occupational_health_service']->address = address_class::g()->get( array( 'id' => $occupational_health_service_address_id ) );
+    // return $data;
   }
 
 	/**
@@ -62,4 +84,4 @@ class legal_display_class extends post_class {
   }
 }
 
-legal_display_class::get();
+legal_display_class::g();

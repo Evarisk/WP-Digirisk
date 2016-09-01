@@ -1,24 +1,12 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Fichier contenant les utilitaires pour la gestion des préconisations / File with all utilities for managing recommendations
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 
-/**
- * Classe contenant les utilitaires pour la gestion des préconisations / Class with all utilities for managing recommendations
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 class recommendation_class extends term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'wpdigi_recommendation_mdl_01';
+	protected $model_name   = 'recommendation_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -35,6 +23,7 @@ class recommendation_class extends term_class {
 	protected $version = '0.1';
 
 	public $element_prefix = 'PA';
+	protected $before_post_function = array( 'construct_identifier' );
 	public $last_affectation_index_key = '_wpdigi_last_recommendation_affectation_unique_key';
 
 	/**
@@ -82,63 +71,9 @@ class recommendation_class extends term_class {
 
 	}
 
-	/**
-	* Créer les données par défaut
-	*/
-	public function create_default_data() {
-		$file_content = file_get_contents( RECOMMENDATION_PATH . 'asset/json/default.json' );
-		$data = json_decode( $file_content );
 
-		if ( !empty( $data ) ) {
-			foreach ( $data as $json_recommendation_category ) {
-				$unique_key = wpdigi_utils::get_last_unique_key( 'term', recommendation_category_class::get()->get_taxonomy() );
-				$unique_key++;
-				$unique_identifier = recommendation_category_class::get()->element_prefix . '' . $unique_key;
-				$recommendation_category = recommendation_category_class::get()->create( array(
-						'name' => $json_recommendation_category->name,
-						'option' => array(
-							'unique_key' => $unique_key,
-							'unique_identifier' => $unique_identifier,
-							'recommendation_category_print_option' => $json_recommendation_category->option->recommendation_category_print_option,
-							'recommendation_category_option' => $json_recommendation_category->option->recommendation_print_option,
-						),
-				) );
-
-				if ( is_wp_error( $recommendation_category ) && !empty( $recommendation_category->errors ) && !empty( $recommendation_category->errors['term_exists'] ) ) {
-					$recommendation_category = $this->show( $recommendation_category->error_data['term_exists'] );
-				}
-
-				$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommendation_category->name_thumbnail, 0 );
-
-				$recommendation_category->option['thumbnail_id'] = $file_id;
-				$recommendation_category->option['associated_document_id'][] = $file_id;
-				$recommendation_category = recommendation_category_class::get()->update( $recommendation_category );
-
-				foreach( $json_recommendation_category->option->recommendation as $json_recommandation ) {
-					$unique_key = wpdigi_utils::get_last_unique_key( 'term', $this->get_taxonomy() );
-					$unique_key++;
-					$unique_identifier = $this->element_prefix . '' . $unique_key;
-					$recommandation = $this->create( array(
-							'name' => $json_recommandation->name,
-							'parent_id' => $recommendation_category->id,
-							'option' => array(
-								'unique_key' => $unique_key,
-								'unique_identifier' => $unique_identifier,
-								'type'	=> $json_recommandation->option->type,
-							),
-					) );
-
-					if ( !is_wp_error( $recommandation ) ) {
-						$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
-						$recommandation->option['thumbnail_id'] = $file_id;
-						$recommandation = $this->update( $recommandation );
-					}
-				}
-			}
-		}
-	}
 
 }
 
-recommendation_class::get();
+recommendation_class::g();
 ?>

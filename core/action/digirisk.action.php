@@ -21,9 +21,9 @@ class digirisk_action {
 	*
 	*/
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( include_util::get(), 'callback_before_admin_enqueue_scripts' ), 10 );
-		add_action( 'admin_enqueue_scripts', array( include_util::get(), 'callback_admin_enqueue_scripts' ), 11 );
-		add_action( 'admin_print_scripts', array( include_util::get(), 'callback_admin_print_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( include_util::g(), 'callback_before_admin_enqueue_scripts' ), 10 );
+		add_action( 'admin_enqueue_scripts', array( include_util::g(), 'callback_admin_enqueue_scripts' ), 11 );
+		add_action( 'admin_print_scripts', array( include_util::g(), 'callback_admin_print_scripts' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'callback_plugins_loaded' ) );
 	}

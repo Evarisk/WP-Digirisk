@@ -24,8 +24,8 @@ class third_action {
     $occupational_health_service = !empty( $_POST['occupational_health_service'] ) ? (array) $_POST['occupational_health_service'] : array();
 
     // On enregistre les addresses
-    $detective_work_address = address_class::get()->save_data( $detective_work['address'] );
-    $occupational_health_service_address = address_class::get()->save_data( $occupational_health_service['address'] );
+    $detective_work_address = address_class::g()->save( $detective_work['address'] );
+    $occupational_health_service_address = address_class::g()->save( $occupational_health_service['address'] );
 
     $detective_work['contact']['address_id'] = $detective_work_address->id;
     $occupational_health_service['contact']['address_id'] = $occupational_health_service_address->id;
@@ -33,8 +33,8 @@ class third_action {
     $detective_work['opening_time'] = $detective_work['opening_time'];
     $occupational_health_service['opening_time'] = $occupational_health_service['opening_time'];
 
-    $detective_work_third = third_class::get()->save_data( $detective_work );
-    $occupational_health_service_third = third_class::get()->save_data( $occupational_health_service );
+    $detective_work_third = third_class::g()->save_data( $detective_work );
+    $occupational_health_service_third = third_class::g()->save_data( $occupational_health_service );
 
     do_action( 'save_legal_display', $detective_work_third, $occupational_health_service_third );
   }

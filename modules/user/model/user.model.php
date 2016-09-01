@@ -21,76 +21,53 @@ class wpdigi_user_mdl_01 extends user_model {
 	* @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
 	* @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	*/
-	public function __construct( $object, $meta_key, $cropped = false ) {
-		// Ajout de la date d'embauche dans le modèle
-		$this->array_option['user_info']['hiring_date'] = array(
-			'type'			=> 'string',
-			'field_type' 	=> 'computed',
-			'field'			=> 'digirisk_user_information_meta',
-			'function'		=> 'wpdigi_user_mdl_01::get_hiring_date',
-			'default'		=> 0,
-			'required'		=> false,
-		);
-		$this->array_option['user_info']['social_security_number'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['job'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['release_date_of_society'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['professional_qualification'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['sexe'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['nationality'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
-		$this->array_option['user_info']['insurance_compagny'] = array(
-			'type'		=> 'string',
-			'function'	=> '',
-			'default'	=> '',
-			'required'	=> false,
-		);
+	public function __construct( $object, $field_wanted = array() ) {
+		$this->model = array_merge( $this->model, array(
+			'hiring_date' => array(
+				'type'				=> 'string',
+				'bydefault'	=> ''
+			),
+			'social_security_number' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'job' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'release_date_of_society' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'professional_qualification' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'sexe' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'nationality' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+			'insurance_compagny' => array(
+				'type'		=> 'string',
+				'bydefault'	=> '',
+			),
+		) );
 
-		parent::__construct( $object, $meta_key, $cropped );
-		/**     Création d'un code couleur pour l'utilisateur si inexistant ou utilisation du code couleur existant    */
-		if ( !empty( $this->id ) && empty( $this->option[ 'user_info']['avatar_color'] ) ) {
-			$this->option[ 'user_info' ][ 'initial' ] = $this->build_user_initial( $this );
-			$this->option[ 'user_info' ][ 'avatar_color' ] = $this->avatar_color[ array_rand( $this->avatar_color, 1 ) ];
-			\digi\user_class::get()->update( $this );
-		}
+		parent::__construct( $object, $field_wanted );
+		// /**     Création d'un code couleur pour l'utilisateur si inexistant ou utilisation du code couleur existant    */
+		// if ( !empty( $this->id ) && empty( $this->option[ 'user_info']['avatar_color'] ) ) {
+		// 	$this->option[ 'user_info' ][ 'initial' ] = $this->build_user_initial( $this );
+		// 	$this->option[ 'user_info' ][ 'avatar_color' ] = $this->avatar_color[ array_rand( $this->avatar_color, 1 ) ];
+		// 	\digi\user_class::g()->update( $this );
+		// }
 	}
 
 	public static function get_hiring_date( $user ) {
-		$hiring_date = null;
 
-		if ( !empty( $user ) && !empty( $user->ID ) ) {
-			$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
-			$hiring_date = !empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : current_time( 'Y-m-d' );
-		}
-		return $hiring_date;
 	}
 
 }

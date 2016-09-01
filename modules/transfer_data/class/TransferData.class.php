@@ -81,4 +81,4 @@ class TransferData_class extends \singleton_util {
 
 }
 
-TransferData_class::get();
+TransferData_class::g();

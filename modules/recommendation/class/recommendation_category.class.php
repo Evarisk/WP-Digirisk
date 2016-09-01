@@ -18,7 +18,7 @@ class recommendation_category_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'wpdigi_recommendation_category_mdl_01';
+	protected $model_name   = 'recommendation_category_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -33,7 +33,7 @@ class recommendation_category_class extends term_class {
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
 	protected $base = 'digirisk/recommendation-category';
 	protected $version = '0.1';
-
+	protected $before_post_function = array( 'construct_identifier' );
 	public $element_prefix = 'R';
 
 	/**
@@ -76,4 +76,4 @@ class recommendation_category_class extends term_class {
 
 }
 
-recommendation_category_class::get();
+recommendation_category_class::g();

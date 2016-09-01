@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'location', 'digirisk' ); ?>
-      <input name="rules[location]" type="text" value="<?php echo $data['legal_display']->option['rules']['location']; ?>" />
+      <input name="rules[location]" type="text" value="<?php echo $legal_display->rules['location']; ?>" />
     </label>
   </li>
 </ul>

@@ -57,7 +57,7 @@ var digi_society = {
 
 		var data = {
 			'action': 'save_society',
-			'element_id': element_id,
+			'id': element_id,
 			'parent_id': digi_society.$( 'input[name="group_id"]' ).val(),
 			'title': digi_society.$( 'input[name="establishment_name"]' ).val(),
 		};

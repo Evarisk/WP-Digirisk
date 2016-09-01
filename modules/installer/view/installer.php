@@ -16,7 +16,7 @@
 
 			<ul class="gridwrapper2">
 				<li class="form-element">
-					<label><?php _e( 'Society name', 'digirisk' ); ?><input type="text" name="groupement[title]" /></label>
+					<label><?php _e( 'Society name', 'digirisk' ); ?><input type="text" name="groupment[title]" /></label>
 					<button class="wp-digi-bton-fourth btn-more-option"><?php _e( 'More options', 'digirisk'); ?></button>
 				</li>
 			</ul>
@@ -26,24 +26,24 @@
 					<li class="form-element"><label><?php _e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" /></label></li>
 					<li class="form-element">
 						<label><?php _e( 'Owner', 'digirisk' ); ?> <input type="text" data-target="owner_id" placeholder="<?php _e( 'Write name to search...', 'digirisk' ); ?>" data-filter="" class="wpdigi-auto-complete-user" value="<?php echo !empty( $user ) ? $user->login : ''; ?>" /></label>
-						<input type="hidden" name="owner_id" />
+						<input type="hidden" name="groupment[user_info][owner_id]" />
 					</li>
 					<li class="form-element"><label><?php _e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" /></label></li>
-					<li class="form-element"><label><?php _e( 'Created date', 'digirisk' ); ?> <input type="text" class="wpdigi_date" name="groupement[date]" value="<?php echo date( 'd/m/Y' ); ?>" /></label></li>
+					<li class="form-element"><label><?php _e( 'Created date', 'digirisk' ); ?> <input type="text" class="wpdigi_date" name="groupment[date]" value="" /></label></li>
 					<li class="form-element"><label><?php _e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" /></label></li>
-					<li class="form-element"><label><?php _e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupement[option][identity][siren]" /></label></li>
+					<li class="form-element"><label><?php _e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" /></label></li>
 					<li class="form-element"><label><?php _e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" /></label></li>
-					<li class="form-element"><label><?php _e( 'SIRET', 'digirisk' ); ?> <input type="text" name="groupement[option][identity][siret]" /></label></li>
-					<li class="form-element"><label><?php _e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupement[option][contact][phone]" /></label></li>
+					<li class="form-element"><label><?php _e( 'SIRET', 'digirisk' ); ?> <input type="text" name="groupment[identity][siret]" /></label></li>
+					<li class="form-element"><label><?php _e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" /></label></li>
 				</ul>
 
-				<div class="form-element block"><label><?php _e( 'Description', 'digirisk' ); ?><textarea name="groupement[content]"></textarea></label></div>
+				<div class="form-element block"><label><?php _e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"></textarea></label></div>
 			</div>
 
 			<input type="button" class="float right wp-digi-bton-fourth" value="<?php _e( 'Save', 'digirisk' ); ?>" />
 		</form>
 	</div>
 
-	<?php \digi\user_action::get()->display_page_staff( true ); ?>
+	<?php \digi\user_action::g()->display_page_staff( true ); ?>
 
 </div>

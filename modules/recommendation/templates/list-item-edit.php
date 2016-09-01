@@ -5,7 +5,7 @@
 	<input type="hidden" name="term_id" value="<?php echo $term_id; ?>" />
 	<input type="hidden" name="index" value="<?php echo $index; ?>" />
 	<?php wp_nonce_field( 'ajax_edit_recommendation_' . $term_id . '_' . $index ); ?>
-	<span class="wp-digi-recommendation-list-column-thumbnail"><?php echo wp_get_attachment_image( $term->option['thumbnail_id'], 'thumbnail', false, array( 'title' => $term->name ) ); ?></span>
+	<span class="wp-digi-recommendation-list-column-thumbnail"><?php echo wp_get_attachment_image( $term->thumbnail_id, 'thumbnail', false, array( 'title' => $term->name ) ); ?></span>
 	<span class="wp-digi-recommendation-list-column-reference"><?php echo $recommendation_in_workunit['unique_identifier']; ?></span>
 	<span><?php echo $term->name; ?></span>
 	<span class="wp-digi-comment"><input name="recommendation_comment" type="text" value="<?php echo !empty( $recommendation_in_workunit['comment'] ) ? $recommendation_in_workunit['comment'] : ''; ?>" /></span>

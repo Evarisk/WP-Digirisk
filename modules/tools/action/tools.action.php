@@ -21,17 +21,18 @@ class tools_action {
     check_ajax_referer( 'reset_method_evaluation' );
 
     // Récupères la méthode d'évaluation
-    $term_method_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::get()->get_taxonomy() );
-    $method_evaluation = evaluation_method_class::get()->show( $term_method_evarisk->term_id );
+    $term_method_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+    $method_evaluation = evaluation_method_class::g()->get( array( 'id' => $term_method_evarisk->term_id ) );
+		$method_evaluation = $method_evaluation[0];
 
 		$list_old_variable_id = array();
 		$list_new_variable_id = array();
 
     // Suppresion de toutes les variables actuelles.
-    if ( !empty( $method_evaluation->option['formula'] ) ) {
-      foreach ( $method_evaluation->option['formula'] as $element ) {
+    if ( !empty( $method_evaluation->formula ) ) {
+      foreach ( $method_evaluation->formula as $element ) {
         if ( $element != '*' ) {
-          wp_delete_term( (int) $element, evaluation_method_class::get()->get_taxonomy() );
+          wp_delete_term( (int) $element, evaluation_method_class::g()->get_taxonomy() );
 
 					if ( !in_array( (int) $element, $list_old_variable_id ) ) {
 						$list_old_variable_id[] = (int)$element;
@@ -43,10 +44,10 @@ class tools_action {
     // Suppresion également des variables par leurs noms ( Au cas ou certains sont passé à coté de la première suppression )
     $array_slug = array( 'Gravite', 'Exposition', 'Occurence', 'Formation', 'Protection' );
     foreach ( $array_slug as $element ) {
-      $term = get_term_by( 'name', $element, evaluation_method_variable_class::get()->get_taxonomy() );
+      $term = get_term_by( 'name', $element, evaluation_method_variable_class::g()->get_taxonomy() );
       if ( !empty( $term ) && ( $term->term_id ) ) {
-        // evaluation_method_variable_class::get()->delete( $term->term_id ); Ne supprimes pas le term ? bug
-        wp_delete_term( $term->term_id, evaluation_method_variable_class::get()->get_taxonomy() );
+        // evaluation_method_variable_class::g()->delete( $term->term_id ); Ne supprimes pas le term ? bug
+        wp_delete_term( $term->term_id, evaluation_method_variable_class::g()->get_taxonomy() );
 
 				if ( !in_array( $term->term_id, $list_old_variable_id ) ) {
 					$list_old_variable_id[] = $term->term_id;
@@ -55,8 +56,8 @@ class tools_action {
     }
 
     // On met à jours la méthode d'évaluation pour enlever les formules
-    unset( $method_evaluation->option['formula'] );
-    $method_evaluation = evaluation_method_class::get()->update( $method_evaluation );
+    unset( $method_evaluation->formula );
+    $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
     $file_content = file_get_contents( EVALUATION_METHOD_PATH . 'asset/json/default.json' );
@@ -79,14 +80,14 @@ class tools_action {
     }
 
     foreach ( $data_variable_evarisk as $element ) {
-      $term_id = tools_class::get()->add_variable( $method_evaluation, $element );
+      $term_id = tools_class::g()->add_variable( $method_evaluation, $element );
 
 			if ( !in_array( $term_id, $list_new_variable_id ) ) {
 				$list_new_variable_id[] = $term_id;
 			}
     }
 
-		tools_class::get()->fix_all_risk( $term_method_evarisk->term_id, $list_old_variable_id, $list_new_variable_id);
+		tools_class::g()->fix_all_risk( $term_method_evarisk->term_id, $list_old_variable_id, $list_new_variable_id);
 
     wp_send_json_success();
   }
@@ -98,28 +99,28 @@ class tools_action {
 		check_ajax_referer( 'risk_list_compil' );
 
 		/**	First let's list all group / Commençons par lister les groupements	*/
-		$group_list = group_class::get()->index( array() );
+		$group_list = group_class::g()->get( array() );
 		foreach ( $group_list as $group ) {
-			$risk_list = risk_class::get()->index( array( 'post_parent' => $group->id ) );
+			$risk_list = risk_class::g()->get( array( 'post_parent' => $group->id ) );
 			if ( !empty( $risk_list ) ) {
 				foreach ( $risk_list as $risk ) {
-					$group->option[ 'associated_risk' ][] = $risk->id;
+					$group->associated_risk[] = $risk->id;
 				}
 
-				group_class::get()->update( $group );
+				group_class::g()->update( $group );
 			}
 		}
 
 		/**	Let's list all workunit / Listons les unités de travail */
-		$workunit_list = workunit_class::get()->index( array() );
+		$workunit_list = workunit_class::g()->get( array() );
 		foreach ( $workunit_list as $workunit ) {
-			$risk_list = risk_class::get()->index( array( 'post_parent' => $workunit->id ) );
+			$risk_list = risk_class::g()->get( array( 'post_parent' => $workunit->id ) );
 			if ( !empty( $risk_list ) ) {
 				foreach ( $risk_list as $risk ) {
-					$workunit->option[ 'associated_risk' ][] = $risk->id;
+					$workunit->associated_risk[] = $risk->id;
 				}
 
-				workunit_class::get()->update( $workunit );
+				workunit_class::g()->update( $workunit );
 			}
 		}
 

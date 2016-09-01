@@ -16,11 +16,11 @@
 			foreach ( $list_user_to_assign as $user_to_assign ):
 				?>
 				<li class="wp-digi-list-item">
-					<span class="wp-avatar" style="background: #<?php echo $user_to_assign->option['user_info']['avatar_color']; ?>;" ><?php echo $user_to_assign->option['user_info']['initial']; ?></span>
+					<span class="wp-avatar" style="background: #<?php echo $user_to_assign->avatar_color; ?>;" ><?php echo $user_to_assign->initial; ?></span>
 					<span><strong>U<?php echo $user_to_assign->id; ?></strong></span>
-					<span><?php echo $user_to_assign->option['user_info']['lastname']; ?></span>
-					<span><?php echo $user_to_assign->option['user_info']['firstname']; ?></span>
-					<span><input type="text" class="wpdigi_date" name="list_user[<?php echo $user_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $user_to_assign->option['user_info']['hiring_date'] ) ); ?>" /></span>
+					<span><?php echo $user_to_assign->lastname; ?></span>
+					<span><?php echo $user_to_assign->firstname; ?></span>
+					<span><input type="text" class="wpdigi_date" name="list_user[<?php echo $user_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $user_to_assign->hiring_date ) ); ?>" /></span>
 					<span><input type="checkbox" <?php echo in_array( $user_to_assign->id, !empty( $list_affected_id ) ? $list_affected_id : array() ) ? 'disabled="disabled";' : '';?> name="list_user[<?php echo $user_to_assign->id; ?>][affect]" /></span>
 				</li>
 				<?php

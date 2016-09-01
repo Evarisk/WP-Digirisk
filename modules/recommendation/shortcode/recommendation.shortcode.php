@@ -26,10 +26,10 @@ class recommendation_shortcode {
 	*/
 	public function callback_digi_recommendation( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::get()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id );
 
-		$list_recommendation_category = recommendation_category_class::get()->index();
-		$list_recommendation_in_workunit = $element->option['associated_recommendation'];
+		$list_recommendation_category = recommendation_category_class::g()->get();
+		$list_recommendation_in_workunit = $element->associated_recommendation;
 		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list.php' );
 	}
 }

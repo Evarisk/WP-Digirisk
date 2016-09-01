@@ -1,44 +1,18 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 
-/**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 class group_class extends post_class {
 
-	protected $model_name   = 'group_model';
-	protected $post_type    = WPDIGI_STES_POSTTYPE_MAIN;
-	protected $meta_key    	= '_wpdigi_society';
-
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to society from WP Rest API	*/
-	protected $base = 'digirisk/groupement';
-	protected $version = '0.1';
-
-	public $element_prefix = 'GP';
+	protected $model_name   				= 'group_model';
+	protected $post_type    				= WPDIGI_STES_POSTTYPE_MAIN;
+	protected $meta_key    					= '_wpdigi_society';
+	public $element_prefix 					= 'GP';
+	protected $before_post_function = array( 'construct_identifier', 'convert_date' );
 
 	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
+	 * Constructeur
 	 */
 	protected function construct() {
-		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for societies management	*/
-		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
-
-		/**	Create shortcodes for elements displaying	*/
-		/**	Shortcode for displaying a dropdown with all groups	*/
-		add_shortcode( 'wpdigi-group-dropdown', array( &$this, 'shortcode_group_dropdown' ) );
-
-		/**	Ajoute les onglets pour les unités de travail / Add tabs for workunit	*/
-		add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 6, 2 );
-		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
-		add_filter( 'wpdigi_group_sheet_content', array( $this, 'filter_display_generate_document_unique_in_element' ), 10, 3 );
+		add_action( 'init', array( $this, 'custom_post_type' ), 5 );
 	}
 
 	/**
@@ -87,84 +61,16 @@ class group_class extends post_class {
 			'rewrite'             => $rewrite,
 			'capability_type'     => 'page',
 		);
+
 		register_post_type( $this->post_type, $args );
 	}
 
 	/**
-	 * AFFICHAGE/DISPLAY - Affichage de l'arboresence d'une société / Display the main tree of a given society
-	 *
-	 * @param string $mode Optionnal. Default: simple. Le mode d'affichage pour l'arborescence de la société / The mode of display for society tree
+	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
 	 */
-	public function display_society_tree( $mode = 'simple', $group_id = 0 ) {
-		/**	Get existing groups for main selector display	*/
-		$group_list = $this->get_group_of_group( 0 );
-
-		if ( $group_id === 0 ) {
-			$group_id = ( !empty( $group_list ) && !empty( $group_list[0] ) ) ? $group_list[0]->id : 0;
-		}
-		/**	Affichage du bloc société (groupement principal + unité de travail) / Display a society bloc (main group + work unit) 	*/
-		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, ( !empty( $mode ) && in_array( $mode, array( 'simple', 'full',  ) ) ? $mode : 'simple' ), 'society/society', 'tree' ) );
+	public function display_toggle( $groupment ) {
+		require ( SOCIETY_VIEW_DIR . '/toggle.view.php' );
 	}
-
-	/**
-	* Affiche tous les groupements
-	*
-	* @param int $default_selected_group_id L'ID du groupement selectionné par défaut
-	*/
-	public function display_all_group( $default_selected_group_id = null ) {
-		/**	Get existing groups for main selector display	*/
-		$group_list = $this->get_group_of_group( 0 );
-
-		//global $default_selected_group_id;
-		$default_selected_group_id = ( $default_selected_group_id == null ) && ( !empty( $group_list ) ) ? $group_list[0]->id : $default_selected_group_id;
-
-		$workunit_id = 0;
-		global $wpdb;
-		$workunit_id = $wpdb->get_var( $wpdb->prepare( "SELECT P.ID FROM {$wpdb->posts} as P JOIN {$wpdb->postmeta} as PM ON P.ID=PM.post_id WHERE P.post_type=%s AND PM.meta_key=%s AND PM.meta_value=%s", array( workunit_class::get()->get_post_type(), '_wpdigi_unique_identifier', 'UT1' ) ) );
-
-		if ( !empty( $_REQUEST['current_workunit_id'] ) ) {
-			$workunit_id = $_REQUEST['current_workunit_id'];
-		}
-
-		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list' ) );
-	}
-
-
-	/**
-	 * Récupère la liste des groupements enfants appartenant à un groupement / Get children group list belonging to a group
-	 *
-	 * @since 6.1.5.6
-	 * @param  integer $group_id Identifiant du groupement dont il faut récupèrer la liste des groupements enfants / Group identifier where to get get the children group list
-	 * @return array La liste des groupements enfants du groupement / Children group list belonging to the defined group
-	 */
-	function get_group_of_group( $group_id ) {
-		$group_list = array();
-
-		$group_list = $this->index( array( 'posts_per_page' => -1, 'post_status' => array( 'publish', ), 'post_parent' => $group_id ), false );
-
-		return $group_list;
-	}
-
-	/**
-	 * Récupère la liste des enfants ( groupements et unités de travail ) d'un groupement / Get children list ( groups and workunits ) of a group
-	 *
-	 * @since 6.1.5.6
-	 * @param  integer $group_id L'identifiant du groupement dont aon souhaite avoir la liste des enfants / The group identifier we want to get children list for
-	 * @return array           La liste complète des enfants ( groupements et unités de travail ) du groupement / The complète children list ( groups and workunits ) of the group
-	 */
-	function get_group_children( $group_id ) {
-		/** Récupération de la liste des groupements appartenant au groupement actuelle / Get existing group belonging to current group */
-		$group_list = group_class::get()->get_group_of_group( $group_id );
-
-		/**	Récupération de la liste des unités de travail appartenant au groupement / Get existing workunit belonging to group	*/
-		$workunit_list = workunit_class::get()->get_workunit_of_group( $group_id );
-
-		/** Construit la liste des enfants du groupement a partir de la liste de chaque type possible pour les enfants / Build the children list from each list of possible type */
-		$children_list = array_merge( $group_list, $workunit_list );
-
-		return $children_list;
-	}
-
 	/**
 	* Affiche un groupement
 	*
@@ -174,42 +80,6 @@ class group_class extends post_class {
 		$element = $this->show( $group_id );
 
 		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
-	}
-
-	/**
-	* todo: Fonction inutile ?
-	*/
-	public function get_unique_identifier_in_list_by_id( $group_id, $group_list ) {
-		$group = $this->show( $group_id );
-		return $group->option['unique_identifier'];
-	}
-
-	/**
-	* todo: Fonction inutile ?
-	*/
-	public function get_title_in_list_by_id( $group_id, $group_list ) {
-		$group = $this->show( $group_id );
-		return $group->title;
-	}
-
-	/**
-	* Fait le rendu des groupements
-	*
-	* @param int $default_selected_group_id L'ID du groupemnt selectionné par défaut
-	* @param int $group_id L'ID du groupement courant
-	* @param string $class La classe pour l'HTML
-	*/
-	public function render_list_item( $default_selected_group_id, $group_id = 0, $class = '' ) {
-		// if ( !is_int( $default_selected_group_id ) ) {
-		// 	return false;
-		// }
-
-		$group_list = $this->get_group_of_group( $group_id );
-
-		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group', 'list-item' );
-		if ( $path ) {
-			require $path;
-		}
 	}
 
 	/**
@@ -229,12 +99,12 @@ class group_class extends post_class {
 		$risks_in_tree = $this->build_risk_list_for_export( $element );
 
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
-		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach ( $group_list as $group ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->get_element_tree_risk( $group ) );
 		}
 
-		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach ( $work_unit_list as $workunit ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit ) );
 		}
@@ -257,32 +127,32 @@ class group_class extends post_class {
 		$element_children = array();
 		$element_tree = '';
 
-		$element_children[ $element->option[ 'unique_identifier' ] ] = array( 'nomElement' => $tabulation . ' ' . $element->option[ 'unique_identifier' ] . ' - ' . $element->title, ) ;
+		$element_children[ $element->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $element->unique_identifier . ' - ' . $element->title, ) ;
 		if ( !empty( $extra_params ) ) {
 			if ( !empty( $extra_params[ 'default' ] ) ) {
-				$element_children[ $element->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'default' ], $element_children[ $element->option[ 'unique_identifier' ] ] );
+				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params[ 'default' ], $element_children[ $element->unique_identifier ] );
 			}
-			if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $element->option[ 'unique_identifier' ], $extra_params[ 'value' ] ) ) {
-				$element_children[ $element->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'value' ][ $element->option[ 'unique_identifier' ] ], $element_children[ $element->option[ 'unique_identifier' ] ] );
+			if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $element->unique_identifier, $extra_params[ 'value' ] ) ) {
+				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params[ 'value' ][ $element->unique_identifier ], $element_children[ $element->unique_identifier ] );
 			}
 		}
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
-		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id , 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id , 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach ( $group_list as $group ) {
 			$element_children = array_merge( $element_children, $this->get_element_sub_tree( $group, $tabulation . '-', $extra_params ) );
 		}
 
 		$tabulation = $tabulation . '-';
-		$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach ( $work_unit_list as $workunit ) {
-			$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = array( 'nomElement' => $tabulation . ' ' . $workunit->option[ 'unique_identifier' ] . ' - ' . $workunit->title, );
+			$workunit_definition[ $workunit->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $workunit->unique_identifier . ' - ' . $workunit->title, );
 
 			if ( !empty( $extra_params ) ) {
 				if ( !empty( $extra_params[ 'default' ] ) ) {
-					$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'default' ], $workunit_definition[ $workunit->option[ 'unique_identifier' ] ] );
+					$workunit_definition[ $workunit->unique_identifier ] = wp_parse_args( $extra_params[ 'default' ], $workunit_definition[ $workunit->unique_identifier ] );
 				}
-				if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $workunit->option[ 'unique_identifier' ], $extra_params[ 'value' ] ) ) {
-					$workunit_definition[ $workunit->option[ 'unique_identifier' ] ] = wp_parse_args( $extra_params[ 'value' ][ $workunit->option[ 'unique_identifier' ] ], $workunit_definition[ $workunit->option[ 'unique_identifier' ] ] );
+				if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $workunit->unique_identifier, $extra_params[ 'value' ] ) ) {
+					$workunit_definition[ $workunit->unique_identifier ] = wp_parse_args( $extra_params[ 'value' ][ $workunit->unique_identifier ], $workunit_definition[ $workunit->unique_identifier ] );
 				}
 			}
 			$element_children = array_merge( $element_children, $workunit_definition );
@@ -298,13 +168,13 @@ class group_class extends post_class {
 	* @param array $list_id La liste des ID
 	*/
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
-		$group_list = group_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ), false );
 		if( !empty( $group_list ) ) {
 			foreach ( $group_list as $group ) {
 				$list_id[] = array( 'id' => $group->id, 'workunit' => array() );
 				// $list_id[count($list_id) - 1] = array();
 				// $list_id[count($list_id) - 1]['workunit'] = array();
-				$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+				$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 				foreach ( $work_unit_list as $workunit ) {
 					$list_id[count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
 				}
@@ -312,7 +182,7 @@ class group_class extends post_class {
 			}
 		}
 		else {
-			$work_unit_list = workunit_class::get()->index( array( 'posts_per_page' => -1, 'post_parent' => $element_id, 'post_status' => array( 'publish', 'draft', ), ), false );
+			$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id, 'post_status' => array( 'publish', 'draft', ), ), false );
 			foreach ( $work_unit_list as $workunit ) {
 				// $list_id[count($list_id) - 1 == -1 ? 0 : count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
 			}
@@ -333,10 +203,10 @@ class group_class extends post_class {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
 		// 	return array();
 
-		$risk_list = risk_class::get()->index( array( 'post_parent' => $element->id ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
-			$complete_risk = risk_class::get()->get_risk( $risk->id );
+			$complete_risk = risk_class::g()->get_risk( $risk->id );
 			$comment_list = '';
 			if ( !empty( $complete_risk->comment ) ) :
 				foreach ( $complete_risk->comment as $comment ) :
@@ -346,11 +216,11 @@ class group_class extends post_class {
 			endif;
 
 			$element_duer_details[] = array(
-				'idElement'					=> $element->option[ 'unique_identifier' ],
-				'nomElement'				=> $element->option[ 'unique_identifier'] . ' - ' . $element->title,
-				'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
-				'quotationRisque'		=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
-				'niveauRisque'			=> $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ],
+				'idElement'					=> $element->unique_identifier,
+				'nomElement'				=> $element->unique_identifier. ' - ' . $element->title,
+				'identifiantRisque'	=> $risk->unique_identifier . '-' . $complete_risk->evaluation->unique_identifier,
+				'quotationRisque'		=> $complete_risk->evaluation->risk_level[ 'equivalence' ],
+				'niveauRisque'			=> $complete_risk->evaluation->risk_level[ 'scale' ],
 				'nomDanger'					=> $complete_risk->danger->name,
 				'commentaireRisque'	=> $comment_list,
 			);
@@ -358,7 +228,7 @@ class group_class extends post_class {
 
 		if ( !empty( $risk_list_to_order ) ) {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( evaluation_method_class::get()->list_scale[$risk_level] ) ? evaluation_method_class::get()->list_scale[$risk_level] : '';
+				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk_level] ) ? evaluation_method_class::g()->list_scale[$risk_level] : '';
 				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
 				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
 			}

@@ -31,153 +31,80 @@ class user_model extends constructor_data_class {
 		'id' => array(
 			'type'		=> 'integer',
 			'field'		=> 'ID',
-			'function'	=> '',
-			'default'	=> 0,
-			'required'	=> false,
 		),
 		'email' => array(
-				'type'		=> 'string',
-				'field'		=> 'user_email',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
+			'type'		=> 'string',
+			'field'		=> 'user_email',
 		),
 		'login' => array(
-				'type'		=> 'string',
-				'field'		=> 'user_login',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
+			'type'		=> 'string',
+			'field'		=> 'user_login',
 		),
-// 		'password' => array(
-// 				'type'		=> 'string',
-// 				'field'		=> 'user_pass',
-// 				'function'	=> '',
-// 				'default'	=> 0,
-// 				'required'	=> false,
-// 		),
+		'password' => array(
+			'type'		=> 'string',
+			'field'		=> 'user_pass',
+		),
 		'displayname' => array(
-				'type'		=> 'string',
-				'field'		=> 'display_name',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
+			'type'		=> 'string',
+			'field'		=> 'display_name',
 		),
 		'date' => array(
-				'type'		=> 'string',
-				'field'		=> 'user_registered',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
+			'type'		=> 'string',
+			'field'		=> 'user_registered',
 		),
+		'avatar' => array(
+			'type'			=> 'string',
+			'meta_type' => 'single',
+			'field'			=> 'avatar',
+			'bydefault'	=> '',
+		),
+		'avatar_color' => array(
+			'type'			=> 'string',
+			'meta_type'	=> 'single',
+			'field'			=> 'avatar_color',
+			'bydefault'	=> '',
+		),
+		'initial'		=> array(
+			'type'			=> 'string',
+			'meta_type'	=> 'single',
+			'field'			=> 'initial',
+			'bydefault'	=> '',
+		),
+		'firstname'		=> array(
+			'type'			=> 'string',
+			'meta_type'	=> 'single',
+			'field'			=> 'first_name',
+			'bydefault'	=> '',
+		),
+		'lastname'		=> array(
+			'type'			=> 'string',
+			'meta_type'	=> 'single',
+			'field'			=> 'last_name',
+			'bydefault'	=> '',
+		)
 	);
 
-	/**
-	 * Définition du modèle pour les champs secondaires des utilisateurs / Secondary fields definition for user model
-	 * @var array Les champs secondaires d'un utilisateur / Secondary field for a user
-	 */
-	protected $array_option = array(
-		'user_info' => array(
-			'avatar' => array(
-				'type'		=> 'string',
-				'field_type'	=> 'computed',
-				'field'		=> '',
-				'function' => 'user_model::build_user_avatar_url',
-				'default'	=> '',
-				'required'	=> false,
-			),
-			'avatar_color' => array(
-				'type'		=> 'string',
-				'field_type' => 'meta',
-				'field'		=> 'avatar_color',
-				'default'	=> '',
-				'required'	=> false,
-			),
-			'initial' => array(
-				'type'		=> 'string',
-				'field_type' => 'meta',
-				'field'		=> 'initial',
-				'default'	=> '',
-				'required'	=> false,
-			),
-			'firstname' => array(
-				'type'		=> 'string',
-				'field_type'	=> 'meta',
-				'field'		=> 'first_name',
-				'default'	=> '',
-				'required'	=> false,
-			),
-			'lastname' => array(
-				'type'		=> 'string',
-				'field_type'	=> 'meta',
-				'field'		=> 'last_name',
-				'default'	=> 0,
-				'required'	=> false,
-			),
-			'address_id' => array(
-				'type'		=> 'array',
-				'field'		=> '',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
-			),
-			'phone' => array(
-				'type'		=> 'array',
-				'field_type'	=> 'meta',
-				'field'		=> '_phone',
-				'function'	=> '',
-				'default'	=> null,
-				'required'	=> false,
-			),
-		),
-		'user_right' => array(
-			'type' => array(
-				'type'		=> 'array',
-				'field_type'		=> 'meta',
-				'field'		=> 'roles',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
-			),
-			'code' => array(
-				'type'		=> 'array',
-				'field_type'		=> 'meta',
-				'field'		=> 'allcaps',
-				'function'	=> '',
-				'default'	=> 0,
-				'required'	=> false,
-			),
-		),
-	);
-
-	/**
-	 * Construction de l'objet utilisateur par remplissage du modèle / Build user through fill in the model
-	 *
-	 * @param object $object L'object avec lequel il faut construire le modèle / The object which one to build
-	 * @param string $meta_key Le nom de la "meta" contenant la définition complète de l'object sous forme json / The "meta" name containing the complete definition of object under json format
-	 * @param boolean $cropped Permet de choisir si on construit le modèle complet ou uniquement les champs principaux / Allows to choose if the entire model have to be build or only main model
-	 */
-	public function __construct( $object, $meta_key, $cropped = false ) {
+	public function __construct( $object, $children_wanted = array() ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object );
-
-		/** If cropped don't get meta */
-		if ( !$cropped ) {
-			$user_meta = get_user_meta( $this->id );
-
-			if ( !empty( $user_meta ) )
-				$user_meta = array_merge( $user_meta, get_user_meta( $this->id, $meta_key ) );
-			else
-				$user_meta = get_user_meta( $this->id, $meta_key );
-
-			$internal_meta = !empty( $user_meta ) && !empty( $user_meta[ $meta_key ] ) && !empty( $user_meta[ $meta_key ][ 0 ] ) ? json_decode( $user_meta[ $meta_key ][ 0 ], true ) : null;
-
-			if ( !empty( $this->array_option ) ) {
-				foreach( $this->array_option as $key => $array ) {
-					$this->option[ $key ] = $this->fill_value( $object, $user_meta, $key, $array, $internal_meta );
-				}
-			}
-		}
+		parent::__construct( $object, $children_wanted );
+		//
+		// /** If cropped don't get meta */
+		// if ( !$cropped ) {
+		// 	$user_meta = get_user_meta( $this->id );
+		//
+		// 	if ( !empty( $user_meta ) )
+		// 		$user_meta = array_merge( $user_meta, get_user_meta( $this->id, $meta_key ) );
+		// 	else
+		// 		$user_meta = get_user_meta( $this->id, $meta_key );
+		//
+		// 	$internal_meta = !empty( $user_meta ) && !empty( $user_meta[ $meta_key ] ) && !empty( $user_meta[ $meta_key ][ 0 ] ) ? json_decode( $user_meta[ $meta_key ][ 0 ], true ) : null;
+		//
+		// 	if ( !empty( $this->array_option ) ) {
+		// 		foreach( $this->array_option as $key => $array ) {
+		// 			$this->option[ $key ] = $this->fill_value( $object, $user_meta, $key, $array, $internal_meta );
+		// 		}
+		// 	}
+		// }
 	}
 
 	/**

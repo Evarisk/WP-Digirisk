@@ -18,7 +18,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
   <input type="hidden" name="parent_id" value="<?php echo $element->id; ?>" />
   <?php  wp_nonce_field( 'save_legal_display' ); ?>
 
-
   <div class="gridwrapper2">
     <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'detective-work' ) ); ?>
     <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'occupational-health-service' ) ); ?>

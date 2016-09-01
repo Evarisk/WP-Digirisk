@@ -38,7 +38,7 @@ class search_class extends singleton_util {
 			}
 		}
 		else if ( $data['type'] === 'post' ) {
-			$list = $data['class']::get()->search( $data['term'], array(
+			$list = $data['class']::g()->search( $data['term'], array(
 				'option' => array( '_wpdigi_unique_identifier' ),
 				'post_title'
 			) );
@@ -49,4 +49,4 @@ class search_class extends singleton_util {
 	}
 }
 
-search_class::get();
+search_class::g();

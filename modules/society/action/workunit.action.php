@@ -67,21 +67,13 @@ class workunit_action {
 		else
 			$parent_id = (int) $_POST['workunit']['parent_id'];
 
-		/**	Génération des identifiants unique pour l'unité / Create the unique identifier for workunit	*/
-		$next_identifier = wpdigi_utils::get_last_unique_key( 'post', workunit_class::get()->get_post_type() );
-
 		$workunit = array(
 			'title' => sanitize_text_field( $_POST['workunit']['title'] ),
 			'parent_id' => $parent_id,
-			'option' => array(
-				'unique_key' => (int)( $next_identifier + 1 ),
-				'unique_identifier' => 'UT' . ( $next_identifier + 1 ),
-			)
 		);
 
 		/**	Création de l'unité / Create the unit	*/
-
-		$element = workunit_class::get()->create( $workunit );
+		$element = workunit_class::g()->create( $workunit );
 
 		if ( !empty( $element->id ) ) {
 			$args['workunit_id'] = $element->id;
@@ -105,7 +97,7 @@ class workunit_action {
 		}
 
 		ob_start();
-		group_class::get()->display_all_group( $element->parent_id );
+		group_class::g()->display_all_group( $element->parent_id );
 		wp_die( json_encode( array( 'template' => ob_get_clean(), 'status' => $status, 'message' => $message, 'element' => $element, 'output' => $output, ) ) );
 	}
 
@@ -171,8 +163,8 @@ class workunit_action {
 			wp_send_json_error( array( 'message' => __( 'Requested element for sheet generation is invalid. Please check your request', 'digirisk' ), ) );
 		}
 
-		$generation_response = workunit_class::get()->generate_workunit_sheet( $element_id );
-		$document = document_class::get()->show( $generation_response[ 'id' ] );
+		$generation_response = workunit_class::g()->generate_workunit_sheet( $element_id );
+		$document = document_class::g()->get( array( 'id' => $generation_response[ 'id' ] ) );
 		ob_start();
 		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
 		$response[ 'output' ] = ob_get_contents();

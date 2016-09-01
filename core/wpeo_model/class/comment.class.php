@@ -8,188 +8,96 @@
 class comment_class extends singleton_util {
 	protected $model_name = 'comment_model';
 	protected $meta_key = '_comment';
-	protected $comment_type	= '';
-
+	protected $comment_type	= 'comment';
 	protected $base = 'comment';
 	protected $version = '0.1';
 
-	protected function construct() {
-		/**	Ajout des routes personnalisées pour les éléments de type "commentaires" / Add specific routes for "comments" elements' type	*/
-		add_filter( 'json_endpoints', array( &$this, 'callback_register_route' ) );
-	}
+	protected function construct() {}
 
-	/**
-	* Met à jour le commentaire et les meta.
-	* Appelle la méthode create si l'objet ou le tableau n'a pas d'ID.
-	*
-	* @param array $data Les données envoyées
-	*
-	* @return object comment_model object
-	*/
-	public function update( $data ) {
-		if ( !is_array( $data ) && !is_object( $data ) ) {
-			return false;
+	public function get( $args = array( 'post_id' => 0, 'parent' => 0 ), $field_wanted = array() ) {
+		$array_model = array();
+		$array_comment = array();
+
+		if ( !empty( $this->comment_type ) ) {
+			$args['type'] = $this->comment_type;
+			$args['status'] = '-34070';
 		}
 
-		if ( ( is_array( $data ) && empty( $data['id'] ) ) || ( is_object( $data) && empty( $data->id ) ) ) {
-			return $this->create( $data );
+		if ( !empty( $args['id'] ) ) {
+			$array_comment[] = get_comment( $args['id'], ARRAY_A );
 		}
 		else {
-			$object = $data;
-
-			if( is_array( $data ) ) {
-				$object = new $this->model_name( $data, $this->meta_key, false );
-
-				// @TODO : Mettre au propre
-				if ( empty( $object->date ) ) {
-					$object->date = current_time( 'mysql' );
-				}
-
-				if ( $object->author_id == 0 ) {
-					$object->author_id = get_current_user_id();
-				}
-
-				if ( $object->status == 0 ) {
-					$object->status == -34070;
-				}
-			}
-			wp_update_comment( $object->do_wp_object() );
-
-			/** On insert ou on met à jour les meta */
-			if( !empty( $object->option ) ) {
-				$object->save_meta_data( $object, 'update_comment_meta', $this->meta_key );
-			}
-
-			return $object;
-		}
-	}
-
-	/**
-	* Créer le commentaire et les meta.
-	*
-	* @param array $data Les données envoyées
-	*
-	* @return object comment_model object
-	*/
-	public function create( $data ) {
-		if ( !is_array( $data ) && !is_object( $data ) ) {
-			return false;
+			$array_comment = get_comments( $args );
 		}
 
-		$object = $data;
-
-		if( is_array( $data ) ) {
-			$object = new $this->model_name( $data, $this->meta_key );
-			$object->type = $this->comment_type;
-
-			// @TODO : Mettre au propre
-			if ( empty( $object->date ) ) {
-				$object->date = current_time( 'mysql' );
-			}
-
-			if ( $object->author_id == 0 ) {
-				$object->author_id = get_current_user_id();
-			}
-
-			if ( $object->status == 0 ) {
-				$object->status == -34070;
-			}
-		}
-
-		$object->id = wp_insert_comment( $object->do_wp_object() );
-		$cloned_object = clone $object;
-
-		/** On insert ou on met à jour les meta */
-		if( !empty( $object->option ) ) {
-			$cloned_object->save_meta_data( $object, 'update_comment_meta', $this->meta_key  );
-		}
-
-		return $cloned_object;
-	}
-
-	/**
-	* Supprimes un commentaire en utilisant son ID
-	*
-	* @param int $id (test: 10) L'id du commentaire
-	*
-	*/
-	public function delete( $id ) {
-		wp_delete_comment( $id );
-	}
-
-	/**
-	* Récupères le commentaire dans la base de donnée et le transforme en objet selon le modèle
-	*
-	* @param int $id (test: 10) L'id du commentaire
-	* @param bool $croppred (test: false) Récupère les meta si true.
-	*
-	* @return object comment_model object
-	*/
-	public function show( $id, $cropped = false ) {
-		// if ( !is_int( $id ) || !is_bool( $cropped ) ) {
-		// 	return false;
-		// }
-
-		$comment = get_comment( $id );
-
-		$comment = new $this->model_name( $comment, $this->meta_key, $cropped );
-
-		return $comment;
-	}
-
-	/**
-	* Récupères tous les commentaires d'un post dans la base de donnée et le transforme en objet selon le modèle
-	*
-	* @param int $post_id (test: 10) Le post parent
-	* @param array $args_where (test: parent => 9, status => -34070) Récupère les meta si true.
-	* @param bool $croppred (test: false) Récupère les meta si true.
-	*
-	* @return object comment_model object
-	*/
-	public function index( $post_id = 0, $args_where = array( 'parent' => 0, 'status' => -34070, ), $cropped = false ) {
-		if ( !is_int( $post_id ) || !is_array( $args_where ) ) {
-			return false;
-		}
-
-		$array_model = array();
-
-		$args = array(
-			'post_id' 	=> $post_id,
-		);
-
-		if ( !empty( $this->comment_type ) )
-			$args['type'] = $this->comment_type;
-
-		$args = array_merge($args, $args_where);
-		$array_comment = get_comments( $args );
+		$list_comment = array();
 
 		if( !empty( $array_comment ) ) {
 			foreach( $array_comment as $comment ) {
-				$array_model[] = new $this->model_name( $comment, $this->meta_key, $cropped );
+				$comment = (array) $comment;
+
+				if ( !empty( $comment['comment_ID'] ) ) {
+					$list_meta = get_comment_meta( $comment['comment_ID'] );
+					foreach ( $list_meta as &$meta ) {
+						$meta = array_shift( $meta );
+					}
+
+					$comment = array_merge( $comment, $list_meta );
+
+					if ( !empty( $comment[$this->meta_key] ) ) {
+						$comment = array_merge( $comment, json_decode( $comment[$this->meta_key], true ) );
+						unset( $comment[$this->meta_key] );
+					}
+				}
+
+				$list_comment[] = new $this->model_name( $comment, $field_wanted );
 			}
 		}
+		else {
+			$list_comment[] = new $this->model_name( array(), $field_wanted );
+		}
 
-		return $array_model;
+		return $list_comment;
 	}
 
-	/**
-	* Renvoie le type du commentaire
-	*
-	* @return string Le type du commentaire
-	*/
-	public function get_type() {
+	public function create( $data ) {
+		return $this->update( $data );
+	}
+
+	public function update( $data ) {
+		$data = new $this->model_name( (array) $data );
+
+		// Ajout du post type si il est vide
+		if ( empty( $data->type ) ) {
+			$data->type = $this->comment_type;
+			$data->status = '-34070';
+		}
+
+		if ( empty( $data->id ) ) {
+			if ( !empty( $this->before_post_function ) ) {
+				foreach ( $this->before_post_function as $post_function ) {
+					$data = call_user_func( $post_function, $data );
+				}
+			}
+
+			$data->id = wp_insert_comment( $data->do_wp_object() );
+		}
+		else {
+			if ( !empty( $this->before_put_function ) ) {
+				foreach ( $this->before_put_function as $put_function ) {
+					$data = call_user_func( $put_function, $data );
+				}
+			}
+
+			wp_update_comment( $data->do_wp_object() );
+		}
+
+		save_meta_class::g()->save_meta_data( $data, 'update_comment_meta', $this->meta_key );
+
+		return $data;
+	}
+
+	public function get_post_type() {
 		return $this->comment_type;
-	}
-
-	/**
-	* Récupères la dernière ID enregistrée dans la base de donnée
-	*
-	* @return int La dernière ID
-	*/
-	public function get_last_entry() {
-		global $wpdb;
-
-		$query = "SELECT comment_ID FROM {$wpdb->comments} WHERE comment_type='$this->comment_type' ORDER BY comment_ID DESC LIMIT 0, 1";
-		return $wpdb->get_var( $query );
 	}
 }

@@ -22,7 +22,7 @@ class transfert_action {
 			'reload_transfert'		=> false,
 			'message'				=> __( 'A required parameter is missing, please check your request and try again', 'wp-digi-dtrans-i18n' ),
 		);
-		$element_type = !empty( $_POST[ 'element_type_to_transfert' ] ) && in_array( $_POST[ 'element_type_to_transfert' ] , TransferData_class::get()->element_type ) ? sanitize_text_field( $_POST[ 'element_type_to_transfert' ] ): '';
+		$element_type = !empty( $_POST[ 'element_type_to_transfert' ] ) && in_array( $_POST[ 'element_type_to_transfert' ] , TransferData_class::g()->element_type ) ? sanitize_text_field( $_POST[ 'element_type_to_transfert' ] ): '';
 		$sub_action = !empty( $_POST[ 'sub_action' ] ) && in_array( $_POST[ 'sub_action' ] , array( 'element', 'doc', 'config_components') ) ? sanitize_text_field( $_POST[ 'sub_action' ] ) : 'element';
 
 		/**	Launch transfer for current element direct children of subtype	*/
@@ -44,7 +44,7 @@ class transfert_action {
 
 			if ( 'config_components' != $sub_action ) {
 				/**	Get transfert statistics */
-				$transfer_progression = TransferData_class::get()->get_transfer_progression( $element_type, $sub_element_type );
+				$transfer_progression = TransferData_class::g()->get_transfer_progression( $element_type, $sub_element_type );
 
 				$nb_element_to_transfert = $transfer_progression[ 'to_transfer' ];
 				$nb_main_element_transfered = !empty( $transfer_progression[ 'transfered' ][ $element_type ] ) ? count( $transfer_progression[ 'transfered' ][ $element_type ] ) : 0;
@@ -74,11 +74,11 @@ class transfert_action {
 					$query =
 						"SELECT MAX( id )
 						FROM " . TABLE_LIAISON_PRECONISATION_ELEMENT;
-					update_option( \recommendation_class::get()->last_affectation_index_key, $wpdb->get_var( $query ) );
+					update_option( \recommendation_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
 
 					/** Définition des modèles de documents / Define document model to use */
-					\document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
-					\document_class::get()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
+					\document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
+					\document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
 
 					/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */
 					$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
@@ -110,7 +110,7 @@ class transfert_action {
 
 					/**	Start danger transfer	*/
 					if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'danger' ] ) || ( !empty( $digirisk_transfert_options[ 'danger' ] ) && !empty( $digirisk_transfert_options[ 'danger' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'danger' ][ 'state' ] ) ) ) {
-						$eva_danger_tranfer_result = TransferData_components_class::get()->transfer_danger( $digirisk_transfert_options );
+						$eva_danger_tranfer_result = TransferData_components_class::g()->transfer_danger( $digirisk_transfert_options );
 						$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_danger_tranfer_result );
 
 						if ( !empty( $digirisk_transfert_options[ 'danger_category' ] ) ) {
@@ -130,7 +130,7 @@ class transfert_action {
 
 					/**	Get Evalation method	*/
 					if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'evaluation_method' ] ) || ( !empty( $digirisk_transfert_options[ 'evaluation_method' ] ) && !empty( $digirisk_transfert_options[ 'evaluation_method' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'evaluation_method' ][ 'state' ] ) ) ) {
-						$eva_evaluation_method_tranfer_result = TransferData_components_class::get()->transfer_evaluation_method( $digirisk_transfert_options );
+						$eva_evaluation_method_tranfer_result = TransferData_components_class::g()->transfer_evaluation_method( $digirisk_transfert_options );
 						$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_evaluation_method_tranfer_result );
 
 						if ( !empty( $digirisk_transfert_options[ 'evaluation_method_var' ] ) ) {
@@ -149,7 +149,7 @@ class transfert_action {
 
 					/**	Get Recommendation	*/
 					if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'recommendation' ] ) || ( !empty( $digirisk_transfert_options[ 'recommendation' ] ) && !empty( $digirisk_transfert_options[ 'recommendation' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'recommendation' ][ 'state' ] ) ) ) {
-						$eva_recommendation_tranfer_result = TransferData_components_class::get()->transfer_recommendation( $digirisk_transfert_options );
+						$eva_recommendation_tranfer_result = TransferData_components_class::g()->transfer_recommendation( $digirisk_transfert_options );
 						$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_recommendation_tranfer_result );
 
 						if ( !empty( $digirisk_transfert_options[ 'recommendation_category' ] ) ) {
@@ -169,7 +169,7 @@ class transfert_action {
 
 					/**	Get Document model	*/
 					if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'document_model' ] ) || ( !empty( $digirisk_transfert_options[ 'document_model' ] ) && !empty( $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) ) ) {
-						$eva_models_tranfer_result = TransferData_components_class::get()->transfer_document_model( $digirisk_transfert_options );
+						$eva_models_tranfer_result = TransferData_components_class::g()->transfer_document_model( $digirisk_transfert_options );
 						$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_models_tranfer_result );
 
 						if ( !empty( $digirisk_transfert_options[ 'document_model' ] ) ) {
@@ -192,7 +192,7 @@ class transfert_action {
 
 					$transfer_response[ 'old_sub_action' ] = $sub_action;
 
-					\evaluation_method_class::get()->create_default_data();
+					\evaluation_method_class::g()->create_default_data();
 
 					/**	Build an output for component box	*/
 					ob_start();
@@ -248,7 +248,7 @@ class transfert_action {
 
 				foreach ( $first_level_elements as $element ) {
 					if ( !empty( $element ) ) {
-						$new_element_id = TransferData_common_class::get()->transfer( $element_type, $element );
+						$new_element_id = TransferData_common_class::g()->transfer( $element_type, $element );
 						if ( !is_wp_error( $new_element_id ) ) {
 							$response[ 'element_nb_treated' ] += 1;
 						}
@@ -291,7 +291,7 @@ class transfert_action {
 						$element_parent_id = $wpdb->get_var( $query );
 
 						/**	Launch transfert for element subtype	*/
-						$new_children_id = TransferData_common_class::get()->transfer( $sub_element_type, $child, $element_parent_id );
+						$new_children_id = TransferData_common_class::g()->transfer( $sub_element_type, $child, $element_parent_id );
 						if ( !is_wp_error( $new_children_id ) ) {
 							$response[ 'element_nb_treated' ]++;
 						}
@@ -350,7 +350,7 @@ class transfert_action {
 					);
 					$new_element_id = $wpdb->get_var( $query );
 
-					$document_id = TransferData_common_class::get()->transfer_document( $picture, $new_element_id, 'picture' );
+					$document_id = TransferData_common_class::g()->transfer_document( $picture, $new_element_id, 'picture' );
 					if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 
 						$response[ 'transfered']++;
@@ -358,14 +358,14 @@ class transfert_action {
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 						switch ( $picture->tableElement ) {
 							case TABLE_UNITE_TRAVAIL:
-									$elt = \workunit_class::get()->show( $new_element_id );
+									$elt = \workunit_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'image' ][] = $document_id;
-									\workunit_class::get()->update( $elt );
+									\workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-									$elt = \group_class::get()->show( $new_element_id );
+									$elt = \group_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'image' ][] = $document_id;
-									\group_class::get()->update( $elt );
+									\group_class::g()->update( $elt );
 								break;
 							case TABLE_TACHE:
 
@@ -398,7 +398,7 @@ class transfert_action {
 						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = \document_class::get()->show( $document_id );
+						$doc_model = \document_class::g()->show( $document_id );
 
 						/**	Build the model for new data storage */
 						$meta = array(
@@ -408,7 +408,7 @@ class transfert_action {
 							// 'revision'							=> null,
 						);
 						$doc_model->option = array_replace_recursive( $doc_model->option, $meta);
-						\document_class::get()->update( $doc_model );
+						\document_class::g()->update( $doc_model );
 					}
 					else {
 						$response[ 'not_transfered']++;
@@ -470,7 +470,7 @@ class transfert_action {
 					$document->meta[ $default_meta_index ]->meta_key = 'is_default';
 					$document->meta[ $default_meta_index ]->meta_value = $document->parDefaut;
 
-					$document_id = TransferData_common_class::get()->transfer_document( $document, $new_element_id, 'document' );
+					$document_id = TransferData_common_class::g()->transfer_document( $document, $new_element_id, 'document' );
 					if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 						$response[ 'transfered' ]++;
 
@@ -487,15 +487,15 @@ class transfert_action {
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 						switch ( $document->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = \workunit_class::get()->show( $new_element_id );
+								$elt = \workunit_class::g()->show( $new_element_id );
 								$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-								\workunit_class::get()->update( $elt );
+								\workunit_class::g()->update( $elt );
 							break;
 
 							case TABLE_GROUPEMENT:
-								$elt = \group_class::get()->show( $new_element_id );
+								$elt = \group_class::g()->show( $new_element_id );
 								$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-								\group_class::get()->update( $elt );
+								\group_class::g()->update( $elt );
 							break;
 
 							case TABLE_TACHE:
@@ -506,7 +506,7 @@ class transfert_action {
 						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = \document_class::get()->show( $document_id );
+						$doc_model = \document_class::g()->show( $document_id );
 
 						/**	Build the model for new data storage */
 						$meta = array(
@@ -516,7 +516,7 @@ class transfert_action {
 							// 'revision'							=> null,
 						);
 						$doc_model->option = array_replace_recursive( $doc_model->option, $meta);
-						\document_class::get()->update( $doc_model );
+						\document_class::g()->update( $doc_model );
 
 					}
 					else {
@@ -564,7 +564,7 @@ class transfert_action {
 					);
 					$new_element_id = $wpdb->get_var( $query );
 
-					$document_id = TransferData_common_class::get()->transfer_document( $duer, $new_element_id, 'printed_duer' );
+					$document_id = TransferData_common_class::g()->transfer_document( $duer, $new_element_id, 'printed_duer' );
 					if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 							$response[ 'transfered' ]++;
 							wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
@@ -572,14 +572,14 @@ class transfert_action {
 							/**	Association des images aux différents éléments / Associate picture to elements	*/
 							switch ( $duer->table_element ) {
 								case TABLE_UNITE_TRAVAIL:
-									$elt = \workunit_class::get()->show( $new_element_id );
+									$elt = \workunit_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-									\workunit_class::get()->update( $elt );
+									\workunit_class::g()->update( $elt );
 									break;
 								case TABLE_GROUPEMENT:
-									$elt = \group_class::get()->show( $new_element_id );
+									$elt = \group_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-									\group_class::get()->update( $elt );
+									\group_class::g()->update( $elt );
 									break;
 								case TABLE_TACHE:
 
@@ -590,7 +590,7 @@ class transfert_action {
 							}
 
 							/**	Get the element created for new data transfer	*/
-							$doc_model = \document_class::get()->show( $document_id );
+							$doc_model = \document_class::g()->show( $document_id );
 
 							/**	Build the model for new data storage */
 							$meta = array(
@@ -600,7 +600,7 @@ class transfert_action {
 								// 'revision'							=> $duer->revisionDUER,
 							);
 							$doc_model->option = array_replace_recursive( $doc_model->option, $meta);
-							\document_class::get()->update( $doc_model );
+							\document_class::g()->update( $doc_model );
 					}
 					else {
 							$response[ 'not_transfered' ]++;
@@ -665,7 +665,7 @@ class transfert_action {
 					}
 					$sheet->chemin = str_replace( 'directory_to_change_later', $directory_to_use, $sheet->chemin );
 
-					$document_id = TransferData_common_class::get()->transfer_document( $sheet, $new_element_id, 'printed_sheet' );
+					$document_id = TransferData_common_class::g()->transfer_document( $sheet, $new_element_id, 'printed_sheet' );
 					if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 							$response[ 'transfered' ]++;
 
@@ -674,14 +674,14 @@ class transfert_action {
 							/**	Association des images aux différents éléments / Associate picture to elements	*/
 							switch ( $sheet->table_element ) {
 								case TABLE_UNITE_TRAVAIL:
-									$elt = \workunit_class::get()->show( $new_element_id );
+									$elt = \workunit_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-									\workunit_class::get()->update( $elt );
+									\workunit_class::g()->update( $elt );
 									break;
 								case TABLE_GROUPEMENT:
-									$elt = \group_class::get()->show( $new_element_id );
+									$elt = \group_class::g()->show( $new_element_id );
 									$elt->option[ 'associated_document_id' ][ 'document' ][] = $document_id;
-									\group_class::get()->update( $elt );
+									\group_class::g()->update( $elt );
 									break;
 								case TABLE_TACHE:
 
@@ -692,7 +692,7 @@ class transfert_action {
 							}
 
 							/**	Get the element created for new data transfer	*/
-							$doc_model = \document_class::get()->show( $document_id );
+							$doc_model = \document_class::g()->show( $document_id );
 
 							/**	Build the model for new data storage */
 							$meta = array(
@@ -702,7 +702,7 @@ class transfert_action {
 									// 'revision'							=> $sheet->revision,
 							);
 							$doc_model->option = array_replace_recursive( $doc_model->option, $meta);
-							\document_class::get()->update( $doc_model );
+							\document_class::g()->update( $doc_model );
 					}
 					else {
 							$response[ 'not_transfered' ]++;
