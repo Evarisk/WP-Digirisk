@@ -12,6 +12,10 @@ class post_class extends singleton_util {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 
+		if ( !isset( $args['posts_per_page'] ) ) {
+			$args['posts_per_page'] = -1;
+		}
+
 		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
 		}

@@ -16,5 +16,6 @@
 
 	<span class="digi-import-explanation" ><?php _e( 'Don\'t start from scratch. Use a predefined template by importing it with the button below', 'digirisk' ); ?></span>
 
+	<input type="file" />
 	<button class="wp-digi-bton-fifth" id="digi-export-button" ><?php _e( 'Import Digirisk model', 'digirisk' ); ?></button>
 </form>
