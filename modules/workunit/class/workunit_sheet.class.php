@@ -15,7 +15,7 @@ class workunit_sheet_class extends singleton_util {
 			'link'		=> null,
 		);
 
-		$workunit = $this->get( array( 'id' => $workunit_id ) );
+		$workunit = workunit_class::g()->get( array( 'id' => $workunit_id ), array( 'danger_category', 'danger' ) );
 		$workunit = $workunit[0];
 
 		/**	Définition des détails de l'unité de travail a imprimer / Define workunit details for print	*/
@@ -38,8 +38,8 @@ class workunit_sheet_class extends singleton_util {
 
 		/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
 		$option[ 'address' ] = $option[ 'postcode' ] = $option[ 'town' ] = '-';
-		if ( !empty( $workunit->option[ 'contact' ][ 'address' ] ) && ( true === is_int( (int)$workunit->option[ 'contact' ][ 'address' ] ) ) ) {
-			$work_unit_address_definition = address_class::g()->show( (int)$workunit->option[ 'contact' ][ 'address' ][ 0 ] );
+		if ( !empty( $workunit->contact[ 'address' ] ) && ( true === is_int( (int)$workunit->contact[ 'address' ] ) ) ) {
+			$work_unit_address_definition = address_class::g()->show( (int)$workunit->contact[ 'address' ][ 0 ] );
 			extract( get_object_vars( $work_unit_address_definition ) );
 		}
 
@@ -59,7 +59,7 @@ class workunit_sheet_class extends singleton_util {
 		$workunit_sheet_details[ 'utilisateursAffectes' ] = $workunit_sheet_details[ 'utilisateursDesaffectes' ] = array( 'type' => 'segment', 'value' => array(), );
 		$affected_users = $unaffected_users = null;
 		if ( !empty( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'user' ] ) ) {
-			$user_affectation_for_export = \digi\user_class::g()->build_list_for_document_export( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'user' ] );
+			$user_affectation_for_export = \digi\user_class::g()->build_list_for_document_export( $workunit->user_info[ 'affected_id' ][ 'user' ] );
 			if ( null !== $user_affectation_for_export ) {
 				$workunit_sheet_details[ 'utilisateursAffectes' ] = array(
 					'type'	=> 'segment',
@@ -106,7 +106,7 @@ class workunit_sheet_class extends singleton_util {
 								);
 							}
 
-							$picture_definition = wp_get_attachment_image_src( $the_recommendation->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
+							$picture_definition = wp_get_attachment_image_src( $the_recommendation->thumbnail_id, 'digirisk-element-thumbnail' );
 							$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
 							$picture = '';
 							if ( is_file( $picture_final_path ) ) {
@@ -147,8 +147,8 @@ class workunit_sheet_class extends singleton_util {
 						if ( 'valid' == $evaluator_affectation_info[ 'affectation_info' ][ 'status' ] ) {
 							$affected_users[] = array(
 								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info[ 'user_info' ]->id,
-								'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'lastname' ],
-								'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'firstname' ],
+								'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->user_info[ 'lastname' ],
+								'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->user_info[ 'firstname' ],
 								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info[ 'affectation_info' ][ 'start' ][ 'date' ], true ),
 								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info[ 'affectation_info' ] ),
 							);
@@ -180,7 +180,7 @@ class workunit_sheet_class extends singleton_util {
 			endif;
 
 			$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
-				'nomDanger'			=> $risk->danger[0]->name,
+				'nomDanger'			=> $risk->danger_category[0]->danger[0]->name,
 				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
 				'quotationRisque'	=> $risk->evaluation[0]->risk_level[ 'equivalence' ],
 				'commentaireRisque'	=> $comment_list,
@@ -199,7 +199,7 @@ class workunit_sheet_class extends singleton_util {
 		$document_creation_response = document_class::g()->create_document( $workunit, array( 'fiche_de_poste' ), $workunit_sheet_details );
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$workunit->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
-			$workunit = $this->update( $workunit );
+			$workunit = workunit_class::g()->update( $workunit );
 		}
 
 		return $document_creation_response;

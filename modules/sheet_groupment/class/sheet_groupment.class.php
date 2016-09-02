@@ -103,23 +103,22 @@ class sheet_groupment_class extends singleton_util {
   	/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
   	$group_sheet_details[ 'risq80' ] = $group_sheet_details[ 'risq51' ] = $group_sheet_details[ 'risq48' ] = $group_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
   	/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to group	*/
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $group->id ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $group->id ), array ( 'evaluation', 'evaluation_method', 'comment', 'danger_category', 'danger' ) );
 
 		$risk_list_to_order = array();
 		foreach ( $risk_list as $risk ) {
-			$complete_risk = risk_class::g()->get_risk( $risk->id );
 			$comment_list = '';
-			if ( !empty( $complete_risk->comment ) ) :
-  			foreach ( $complete_risk->comment as $comment ) :
+			if ( !empty( $risk->comment ) ) :
+  			foreach ( $risk->comment as $comment ) :
 	 			$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
 ";
   			endforeach;
   		endif;
 
-  		$risk_list_to_order[ $complete_risk->evaluation->option[ 'risk_level' ][ 'scale' ] ][] = array(
-  			'nomDanger'					=> $complete_risk->danger->name,
-  			'identifiantRisque'	=> $risk->option[ 'unique_identifier' ] . '-' . $complete_risk->evaluation->option[ 'unique_identifier' ],
-  			'quotationRisque'		=> $complete_risk->evaluation->option[ 'risk_level' ][ 'equivalence' ],
+  		$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
+  			'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
+  			'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
+  			'quotationRisque'		=> $risk->evaluation[0]->risk_level[ 'equivalence' ],
   			'commentaireRisque'	=> $comment_list,
   		);
   	}
@@ -139,7 +138,7 @@ class sheet_groupment_class extends singleton_util {
 		/**	Call document creation function / Appel de la fonction de création du document	*/
 		$document_creation_response = $document_controller->create_document( $group, array( 'fiche_de_groupement' ), $group_sheet_details );
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
-			$group->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
+			$group->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
 			$group = group_class::g()->update( $group );
 		}
 

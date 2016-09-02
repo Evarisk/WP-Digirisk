@@ -21,4 +21,47 @@ function convert_date( $data ) {
 	return $data;
 }
 
+/**
+ * Construit les initiales d'un utilisateurs donné / Build initial for a given user
+ *
+ * @param object $user Les données de l'utilisateur courant / Current user data
+ *
+ * @return string Les initiales de l'utilisateur courant / Current user initial
+ */
+function build_user_initial( $user ){
+	$initial = '';
+
+	if ( !empty( $user->firstname ) ) {
+		$initial .= substr( $user->firstname, 0, 1 );
+	}
+	if ( !empty( $user->lastname ) ) {
+		$initial .= substr( $user->lastname, 0, 1 );
+	}
+
+	if ( empty( $initial ) ) {
+		if ( !empty( $user->login ) ) {
+			$initial .= substr( $user->login, 0, 1 );
+		}
+	}
+
+	$user->initial = $initial;
+
+	return $user;
+}
+
+function build_avatar_color( $user ) {
+	$avatar_color = array(
+		'e9ad4f',
+		'50a1ed',
+		'e05353',
+		'e454a2',
+		'47e58e',
+		'734fe9',
+	);
+
+	$user->avatar_color = $avatar_color[array_rand( $avatar_color, 1 )];
+
+	return $user;
+}
+
 ?>

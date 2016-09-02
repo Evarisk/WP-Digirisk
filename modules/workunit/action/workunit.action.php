@@ -163,7 +163,7 @@ class workunit_action {
 			wp_send_json_error( array( 'message' => __( 'Requested element for sheet generation is invalid. Please check your request', 'digirisk' ), ) );
 		}
 
-		$generation_response = workunit_class::g()->generate_workunit_sheet( $element_id );
+		$generation_response = workunit_sheet_class::g()->generate_workunit_sheet( $element_id );
 		$document = document_class::g()->get( array( 'id' => $generation_response[ 'id' ] ) );
 		ob_start();
 		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );

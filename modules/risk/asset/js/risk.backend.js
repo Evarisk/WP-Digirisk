@@ -122,7 +122,7 @@ var digi_risk = {
 			'success': function( response ) {
 				digi_risk.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
         digi_risk.$( '.wp-digi-list-item .dashicons-edit' ).show();
-				digi_risk.$( '.wp-digi-risk.wp-digi-list' ).replaceWith( response.data.template );
+				digi_risk.$( '.wp-digi-content > :first-child' ).replaceWith( response.data.template );
 			}
 		} );
 	},

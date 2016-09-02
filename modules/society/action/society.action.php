@@ -33,10 +33,19 @@ class society_action {
 		do_shortcode( '[digi_dashboard id="' . $element_id . '" tab_to_display="' . $tab_to_display . '"]' );
 		$template = ob_get_clean();
 
+		$group_parent = group_class::g()->get(
+			array(
+				'posts_per_page' => 1,
+				'post_parent' => 0,
+				'post_status' => array( 'publish', 'draft', ),
+			), array(
+				'list_group'
+			) );
+
 		$society = society_class::g()->show_by_type( $element_id );
 		if ( $society->type == 'digi-group' ) {
 			ob_start();
-			group_class::g()->display_toggle( $society );
+			group_class::g()->display_toggle( $group_parent[0], $society );
 			workunit_class::g()->display_list( $society->id );
 			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
 
@@ -69,14 +78,24 @@ class society_action {
 			$parent_id = (int) $_POST['parent_id'];
 			$society->parent_id = $_POST['parent_id'];
 		}
+
 		society_class::g()->update_by_type( $society );
 
 		if ( $society->type !== 'digi-group' ) {
 			$group_id = $society->parent_id;
 		}
 
+		$group_parent = group_class::g()->get(
+			array(
+				'posts_per_page' => 1,
+				'post_parent' => 0,
+				'post_status' => array( 'publish', 'draft', ),
+			), array(
+				'list_group'
+			) );
+
 		ob_start();
-		group_class::g()->display_society_tree( "simple", $group_id );
+		group_class::g()->display_toggle( $group_parent[0], $society );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 

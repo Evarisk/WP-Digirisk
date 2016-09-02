@@ -54,21 +54,12 @@ class wpdigi_user_mdl_01 extends user_model {
 			'insurance_compagny' => array(
 				'type'		=> 'string',
 				'bydefault'	=> '',
-			),
+			)
 		) );
 
 		parent::__construct( $object, $field_wanted );
-		// /**     Création d'un code couleur pour l'utilisateur si inexistant ou utilisation du code couleur existant    */
-		// if ( !empty( $this->id ) && empty( $this->option[ 'user_info']['avatar_color'] ) ) {
-		// 	$this->option[ 'user_info' ][ 'initial' ] = $this->build_user_initial( $this );
-		// 	$this->option[ 'user_info' ][ 'avatar_color' ] = $this->avatar_color[ array_rand( $this->avatar_color, 1 ) ];
-		// 	\digi\user_class::g()->update( $this );
-		// }
 	}
 
-	public static function get_hiring_date( $user ) {
-
-	}
 
 }
 

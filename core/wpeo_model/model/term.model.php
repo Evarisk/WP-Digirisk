@@ -8,7 +8,6 @@ class term_model extends constructor_data_class {
 	 */
 	protected $model = array(
 		'id' => array(
-			'export'	=> true,
 			'type'		=> 'integer',
 			'field'		=> 'term_id',
 			'bydefault'	=> 0,

@@ -10,7 +10,6 @@ class comment_model extends constructor_data_class {
 		'id' => array(
 			'type'		=> 'integer',
 			'field'		=> 'comment_ID',
-			'export'	=> true,
 		),
 		'parent_id' => array(
 			'type'		=> 'integer',

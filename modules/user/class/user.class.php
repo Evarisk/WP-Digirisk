@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class user_class extends \user_class {
 	protected $model_name 	= '\wpdigi_user_mdl_01';
 	protected $meta_key		= '_wpeo_user_info';
-	protected $before_post_function = array( '\digi\construct_login' );
+	protected $before_post_function = array( '\digi\construct_login', '\build_user_initial', '\build_avatar_color' );
 	protected $after_get_function = array( '\digi\get_hiring_date' );
 
 	protected $base 	= 'digirisk/user';

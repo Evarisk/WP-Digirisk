@@ -68,7 +68,11 @@ class group_class extends post_class {
 	/**
 	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
 	 */
-	public function display_toggle( $groupment ) {
+	public function display_toggle( $groupment, $selected_group = null ) {
+		if ( $selected_group === null ) {
+			$selected_group = $groupment;
+		}
+
 		require ( GROUP_VIEW_DIR . '/toggle.view.php' );
 	}
 	/**
@@ -210,13 +214,12 @@ class group_class extends post_class {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
 		// 	return array();
 
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ), array ( 'evaluation', 'evaluation_method', 'comment', 'danger_category', 'danger' ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
-			$complete_risk = risk_class::g()->get_risk( $risk->id );
 			$comment_list = '';
-			if ( !empty( $complete_risk->comment ) ) :
-				foreach ( $complete_risk->comment as $comment ) :
+			if ( !empty( $risk->comment ) ) :
+				foreach ( $risk->comment as $comment ) :
 					$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
 ";
 				endforeach;
@@ -225,10 +228,10 @@ class group_class extends post_class {
 			$element_duer_details[] = array(
 				'idElement'					=> $element->unique_identifier,
 				'nomElement'				=> $element->unique_identifier. ' - ' . $element->title,
-				'identifiantRisque'	=> $risk->unique_identifier . '-' . $complete_risk->evaluation->unique_identifier,
-				'quotationRisque'		=> $complete_risk->evaluation->risk_level[ 'equivalence' ],
-				'niveauRisque'			=> $complete_risk->evaluation->risk_level[ 'scale' ],
-				'nomDanger'					=> $complete_risk->danger->name,
+				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
+				'quotationRisque'		=> $risk->evaluation[0]->risk_level[ 'equivalence' ],
+				'niveauRisque'			=> $risk->evaluation[0]->scale,
+				'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
 				'commentaireRisque'	=> $comment_list,
 			);
 		}

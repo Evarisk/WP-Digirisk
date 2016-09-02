@@ -418,7 +418,7 @@ class document_class extends post_class {
 		$document_creation_response = document_class::g()->create_document( $element, array( 'zip' ), $file_list, $version );
 		$document_creation_response = wp_parse_args( $document_creation_response, $response );
 		if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
-			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
+			$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
 			group_class::g()->update( $element );
 		}
 

@@ -108,32 +108,6 @@ class user_model extends constructor_data_class {
 	}
 
 	/**
-	 * Construit les initiales d'un utilisateurs donné / Build initial for a given user
-	 *
-	 * @param object $user Les données de l'utilisateur courant / Current user data
-	 *
-	 * @return string Les initiales de l'utilisateur courant / Current user initial
-	 */
-	public static function build_user_initial( $user ){
-		$initial = '';
-
-		if ( !empty( $user->option['user_info']['firstname'] ) ) {
-			$initial .= substr( $user->option['user_info']['firstname'], 0, 1 );
-		}
-		if ( !empty( $user->option['user_info']['lastname'] ) ) {
-			$initial .= substr( $user->option['user_info']['lastname'], 0, 1 );
-		}
-
-		if ( empty( $initial ) ) {
-			if ( !empty( $user->login ) ) {
-				$initial .= substr( $user->login, 0, 1 );
-			}
-		}
-
-		return $initial;
-	}
-
-	/**
 	 * Retourne l'adresse url de l'image gravatar d'un utilisateur / Return the gravatar picture for a given user.
 	 * Utilisation: il faut utiliser cette valeur dans l'attribut src de la balise image, c'est à ce moment qu'il faut définir les différents paramètres que l'on souhaite (Taille:?s=; Image par défaut:?d=[404|blank|...])
 	 * Use: Use the value into src attribute of img html tag, parameters have to be set at this moment (Size:?s=; Default picture:?d=[404|blank|...])

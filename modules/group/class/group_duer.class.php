@@ -46,7 +46,7 @@ class group_duer_class extends singleton_util {
 		$document_creation_response = document_class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
-			$element->option[ 'associated_document_id' ][ 'document' ][] = $document_creation_response[ 'id' ];
+			$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
 			group_class::g()->update( $element );
 		}
 

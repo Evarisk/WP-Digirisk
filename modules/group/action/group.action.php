@@ -56,9 +56,18 @@ class group_action {
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
+		$group_parent = group_class::g()->get(
+			array(
+				'posts_per_page' => 1,
+				'post_parent' => 0,
+				'post_status' => array( 'publish', 'draft', ),
+			), array(
+				'list_group'
+			) );
+
 		ob_start();
 		$display_mode = 'simple';
-		group_class::g()->display_society_tree( $display_mode, $group->id );
+		group_class::g()->display_toggle( $group_parent[0], $group );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';
@@ -124,9 +133,18 @@ class group_action {
 
 		$this->update( $group );
 
+		$group_parent = group_class::g()->get(
+			array(
+				'posts_per_page' => 1,
+				'post_parent' => 0,
+				'post_status' => array( 'publish', 'draft', ),
+			), array(
+				'list_group'
+			) );
+
 		ob_start();
 		$display_mode = 'simple';
-		$this->display_society_tree( $display_mode, $group->id );
+		$this->display_toggle( $group_parent[0], $group );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 

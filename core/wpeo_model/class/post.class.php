@@ -58,14 +58,15 @@ class post_class extends singleton_util {
 	}
 
 	public function update( $data ) {
-		$data = new $this->model_name( (array) $data );
+		$data = (array) $data;
+		if ( empty( $data['id'] ) ) {
+			$data = new $this->model_name( $data, array( false ) );
 
-		// Ajout du post type si il est vide
-		if ( empty( $data->type ) ) {
-			$data->type = $this->post_type;
-		}
+			// Ajout du post type si il est vide
+			if ( empty( $data->type ) ) {
+				$data->type = $this->post_type;
+			}
 
-		if ( empty( $data->id ) ) {
 			if ( !empty( $this->before_post_function ) ) {
 				foreach ( $this->before_post_function as $post_function ) {
 					$data = call_user_func( $post_function, $data );
@@ -75,6 +76,11 @@ class post_class extends singleton_util {
 			$data->id = wp_insert_post( $data->do_wp_object() );
 		}
 		else {
+			$current_data = $this->get( array( 'id' => $data['id'] ), array( false ) );
+			$current_data = $current_data[0];
+			$obj_merged = (object) array_merge((array) $current_data, (array) $data);
+			$data = new $this->model_name( (array) $obj_merged, array( false ) );
+
 			wp_update_post( $data->do_wp_object() );
 		}
 
