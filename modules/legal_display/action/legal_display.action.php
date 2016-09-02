@@ -48,17 +48,15 @@ class legal_display_action {
     );
 
     $legal_display = legal_display_class::g()->save_data( $legal_display_data );
+		$legal_display = legal_display_class::g()->get( array( 'id' => $legal_display->id ), array( 'detective_work', 'address', 'occupational_health_service' ) );
+		$legal_display = $legal_display[0];
 
 		// Toutes les données de l'affichage légal
 		// $all_data = legal_display_class::g()->load_data( $parent_id );
 		$element_parent = group_class::g()->get( array( 'id' => $parent_id ) );
 
     $this->generate_sheet( $legal_display, $element_parent[0] );
-
-		// Bug des modèles
-		// $element_parent = group_class::g()->show( array( 'id' => $parent_id ) );
-		//
-    // $this->generate_sheet( $all_data, $element_parent[0], "A3" );
+    $this->generate_sheet( $legal_display, $element_parent[0], "A3" );
 
     wp_send_json_success();
   }
