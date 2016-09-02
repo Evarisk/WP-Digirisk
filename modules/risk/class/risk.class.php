@@ -103,7 +103,7 @@ class risk_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
 		require( RISK_VIEW_DIR . 'main.view.php' );
 	}
 }

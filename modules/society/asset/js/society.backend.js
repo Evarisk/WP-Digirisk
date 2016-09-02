@@ -27,6 +27,7 @@ var digi_society = {
 		digi_society.$( element ).closest( 'ul' ).find( 'li.active' ).removeClass( 'active' );
 		digi_society.$( element ).closest( 'li' ).addClass( 'active' );
 		digi_society.$( '.wp-digi-societytree-right-container' ).addClass( "wp-digi-bloc-loading" );
+		digi_society.$( '.wp-digi-societytree-left-container' ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
 			action: 'load_sheet_display',
@@ -37,6 +38,7 @@ var digi_society = {
 		digi_society.$.post( window.ajaxurl, data, function( response ) {
 			digi_society.$( '.wp-digi-societytree-right-container' ).removeClass( "wp-digi-bloc-loading" );
 			digi_society.$( '.wp-digi-societytree-right-container' ).html( response.data.template );
+			digi_society.$( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
 			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
 			window.digi_global.init( digi_society.$ );
 			window.digi_risk.init( false, digi_society.$ );

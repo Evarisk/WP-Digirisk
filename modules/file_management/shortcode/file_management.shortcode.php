@@ -41,7 +41,7 @@ class file_management_shortcode {
     }
 
 		if ( $id != 0 ) {
-    	$element = society_class::g()->show_by_type( $id );
+    	$element = society_class::g()->show_by_type( $id, array( 'false' ) );
 		}
 		else {
 			$element = null;
@@ -64,7 +64,7 @@ class file_management_shortcode {
 		}
 
 		$element_id = $param['element_id'];
-		$element = society_class::g()->show_by_type( $element_id );
+		$element = society_class::g()->show_by_type( $element_id, array( false ) );
 
 		$list_id = !empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;

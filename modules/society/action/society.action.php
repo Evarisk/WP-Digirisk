@@ -33,14 +33,14 @@ class society_action {
 		do_shortcode( '[digi_dashboard id="' . $element_id . '" tab_to_display="' . $tab_to_display . '"]' );
 		$template = ob_get_clean();
 
-		// $society = society_class::g()->show_by_type( $element_id );
-		// if ( $society->type == 'digi-group' ) {
-		// 	ob_start();
-		// 	$display_mode = 'simple';
-		// 	group_class::g()->display_society_tree( $display_mode, $society->id );
-		// 	wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
-		//
-		// }
+		$society = society_class::g()->show_by_type( $element_id );
+		if ( $society->type == 'digi-group' ) {
+			ob_start();
+			group_class::g()->display_toggle( $society );
+			workunit_class::g()->display_list( $society->id );
+			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
+
+		}
 
 		wp_send_json_success( array( 'template' => $template ) );
 	}

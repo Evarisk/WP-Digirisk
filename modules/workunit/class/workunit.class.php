@@ -113,7 +113,7 @@ class workunit_class extends post_class {
 	}
 
 	public function display_list( $groupment_id ) {
-		$list_workunit = workunit_class::g()->get( array( 'parent_id' => $groupment_id, 'posts_per_page' => -1 ) );
+		$list_workunit = workunit_class::g()->get( array( 'post_parent' => $groupment_id, 'posts_per_page' => -1 ), array( false ) );
 
 		require ( WORKUNIT_VIEW_DIR . '/list.view.php' );
 	}

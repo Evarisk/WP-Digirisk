@@ -82,7 +82,11 @@ class group_class extends post_class {
 		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
 	}
 
-	public function display_list_item( $group ) {
+	public function display_list_item( $groupment, $selected_group = null ) {
+		if ( $selected_group === null ) {
+			$selected_group = $groupment;
+		}
+
 		require ( GROUP_VIEW_DIR . '/list.view.php' );
 	}
 	/**

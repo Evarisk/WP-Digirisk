@@ -8,7 +8,7 @@ class post_class extends singleton_util {
 
 	protected function construct() {}
 
-	public function get( $args = array(), $children_wanted = array()) {
+	public function get( $args = array( 'posts_per_page' => -1 ), $children_wanted = array()) {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 

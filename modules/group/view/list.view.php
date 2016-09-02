@@ -3,7 +3,7 @@
 if ( !empty( $group ) ):
 	?>
 	<ul class="<?php echo isset( $key ) ? 'sub-menu': 'parent'; ?>">
-		<li data-id="<?php echo $group->id; ?>">
+		<li data-id="<?php echo $group->id; ?>" class="<?php echo $group->id === $selected_group->id ? 'active' : ''; ?>">
 			<div>
 				<span data-id="<?php echo $group->id; ?>" class="wp-digi-global-name"><?php echo $group->unique_identifier . ' - ' . $group->title; ?></span>
 				<span class="wp-digi-new-group-action">
