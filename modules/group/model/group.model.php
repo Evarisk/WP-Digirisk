@@ -37,6 +37,19 @@ class group_model extends post_model {
 					'type'				=> 'object',
 					'controller'	=> '\digi\user_class',
 					'field'				=> 'id',
+				),
+				'thumbnail' => array(
+					'type'				=> 'array',
+					'controller'	=> 'attachment_class',
+					'field'				=> 'include',
+					'value'				=> 'thumbnail_id'
+				),
+				'attachment' => array(
+					'type'				=> 'array',
+					'controller'	=> 'attachment_class',
+					'field'				=> 'include',
+					'value'				=> 'associated_document_id[image]',
+					'custom'			=> 'array'
 				)
 			),
 			'user_info' => array(
