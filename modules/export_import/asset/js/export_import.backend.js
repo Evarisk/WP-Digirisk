@@ -40,7 +40,14 @@ var digi_export = {
 			data: data,
 			processData: false,
 			contentType: false,
-			type: 'POST'
+			type: 'POST',
+			beforeSend: function() {
+				digi_installer.$( '#digi-data-export' ).addClass( "wp-digi-bloc-loading" );
+			},
+			success: function() {
+				digi_installer.$( '#digi-data-export' ).removeClass( "wp-digi-bloc-loading" );
+				digi_installer.$( '#toplevel_page_digi-setup a' ).attr( 'href', digi_installer.$( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+			}
 		} );
 	}
 
