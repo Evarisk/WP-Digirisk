@@ -9,11 +9,8 @@
 			<li>
 				<?php echo do_shortcode( '[eo_upload_button]' ); ?>
 				<?php echo do_shortcode( '[digi_evaluation_method]' ); ?>
-
 				<span class="wp-digi-risk-list-column-reference"></span>
-
 				<?php echo do_shortcode( '[dropdown_danger]' ); ?>
-
 				<span class="wp-digi-risk-date"><input type="text" class="wpdigi_date" name="list_comment[0][comment_date]" value="<?php echo current_time( 'd/m/Y', 0 ); ?>" /></span>
 				<span class="wp-digi-risk-comment" ><textarea name="list_comment[0][comment_content]" rows="1" placeholder="<?php _e( 'Add a comment for the risk', 'digirisk' ); ?>" ></textarea></span>
 
