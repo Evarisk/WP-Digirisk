@@ -39,12 +39,14 @@ class group_model extends post_model {
 					'field'				=> 'id',
 				),
 				'thumbnail' => array(
+					'export' 			=> true,
 					'type'				=> 'array',
 					'controller'	=> 'attachment_class',
 					'field'				=> 'include',
 					'value'				=> 'thumbnail_id'
 				),
 				'attachment' => array(
+					'export'			=> true,
 					'type'				=> 'array',
 					'controller'	=> 'attachment_class',
 					'field'				=> 'include',
