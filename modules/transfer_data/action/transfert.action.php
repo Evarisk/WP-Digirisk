@@ -192,7 +192,7 @@ class transfert_action {
 
 					$transfer_response[ 'old_sub_action' ] = $sub_action;
 
-					\evaluation_method_class::g()->create_default_data();
+					\evaluation_method_default_data_class::g()->create();
 
 					/**	Build an output for component box	*/
 					ob_start();
