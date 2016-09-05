@@ -43,9 +43,7 @@ class society_class extends singleton_util {
 				'posts_per_page' => 1,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
-			), array(
-				'list_group'
-			) );
+			), array( false ) );
 
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 
