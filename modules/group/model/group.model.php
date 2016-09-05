@@ -119,11 +119,13 @@ class group_model extends post_model {
 				'child' => array(
 					'image' => array(
 						'type'				=> 'array',
-						'meta_type'	=> 'multiple'
+						'meta_type'		=> 'multiple',
+						'bydefault'		=> array()
 					),
 					'document' => array(
 						'type'				=> 'array',
-						'meta_type' => 'multiple',
+						'meta_type' 	=> 'multiple',
+						'bydefault'		=> array()
 					)
 				)
 			),
