@@ -8,9 +8,9 @@ var digi_installer = {
 		digi_installer.$( document ).on( 'click', '.wpdigi-installer form input[type="button"]', function() { digi_installer.form_groupement( digi_installer.$( this ) ); } );
 		digi_installer.$( document ).on( 'click', '.wpdigi-installer .btn-more-option', function( event ) { digi_installer.toggle_form( event, digi_installer.$( this ) ); } );
 
-		digi_installer.$( document ).on( 'keyup', '.wpdigi-staff .input-domain-mail', function( event ) { digi_installer.keyp_update_email( event, digi_installer.$( this ) ); } );
-		digi_installer.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[lastname]"]', function( event ) { digi_installer.keyp_update_email( event, digi_installer.$( this ) ); } );
-		digi_installer.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[firstname]"]', function( event ) { digi_installer.keyp_update_email( event, digi_installer.$( this ) ); } );
+		digi_installer.$( document ).on( 'keyup', '.wpdigi-staff .input-domain-mail', function( event ) { digi_installer.keyup_update_email( event, digi_installer.$( this ) ); } );
+		digi_installer.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[lastname]"]', function( event ) { digi_installer.keyup_update_email( event, digi_installer.$( this ) ); } );
+		digi_installer.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[firstname]"]', function( event ) { digi_installer.keyup_update_email( event, digi_installer.$( this ) ); } );
     digi_installer.$( document ).on( 'click', '.wp-digi-action-save-domain-mail', function( event ) { digi_installer.save_domain_mail( event, digi_installer.$( this ) ); } );
   },
 
@@ -36,8 +36,13 @@ var digi_installer = {
 
   },
 
-	keyp_update_email: function( event, element ) {
-		digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val( digi_installer.$( '.wpdigi-staff input[name="user[firstname]"]' ).val() + '.' + digi_installer.$( '.wpdigi-staff input[name="user[lastname]"]' ).val() + '@' + digi_installer.$( '.wpdigi-staff .input-domain-mail' ).val() );
+	keyup_update_email: function( event, element ) {
+		var email = digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val();
+		var firstname = digi_installer.$( '.wpdigi-staff input[name="user[firstname]"]' ).val();
+		var lastname = digi_installer.$( '.wpdigi-staff input[name="user[lastname]"]' ).val();
+		var domain_mail = digi_installer.$( '.wpdigi-staff .input-domain-mail' ).val();
+		digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val( firstname + '.' + lastname + '@' + domain_mail );
+
 		if( event.keyCode == 13 ) {
 			digi_installer.$( ".wpdigi-staff .add-staff" ).click();
 		}
