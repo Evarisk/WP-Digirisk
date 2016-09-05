@@ -17,6 +17,7 @@ class evaluation_method_class extends term_class {
 	protected $meta_key    	= '_wpdigi_method';
 	protected $base = 'digirisk/evaluation-method';
 	protected $version = '0.1';
+	public $element_prefix = 'ME';
 
 	public $list_scale = array(
 		1 => 0,
