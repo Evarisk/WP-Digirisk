@@ -59,14 +59,14 @@ class constructor_data_class extends helper_class {
 					if ( isset( $this->id ) ) {
 						$value = $this->id;
 
-						if ( !empty( $child_def['value'] ) && !empty( $this->$child_def['value'] )) {
-							$value = $this->$child_def['value'];
+						if ( !empty( $child_def['value'] ) ) {
+							$key = $this->parse_key( $child_def );
+							$value = $this->parse_value( $key );
 							if ( !empty( $child_def['custom_field'] ) ) {
 								$child_def['field'] = $child_def['custom_field'];
 							}
 						}
 
-						// parent_id => post_id
 						$list_child = $child_def['controller']::g()->get( array( $child_def['field'] => $value ), $field_wanted );
 					}
 					else {
@@ -90,5 +90,43 @@ class constructor_data_class extends helper_class {
 		}
 
 		return $object;
+	}
+
+	public function parse_key( $def ) {
+		$key = $def['value'];
+		$custom = !empty( $def['custom'] ) ? $def['custom'] : '';
+
+		switch( $custom ) {
+			case "array":
+				$key = $this->parse_key_array( $key );
+				break;
+			default:
+				break;
+		}
+
+		return $key;
+	}
+
+	private function parse_key_array( $key ) {
+		$key = str_replace( ']', '', $key );
+		$key = explode( '[', $key );
+		return $key;
+	}
+
+	private function parse_value( $key ) {
+		if ( !is_array( $key ) ) {
+			return $this->$key;
+		}
+
+		$value = $this->$key[0];
+		array_shift( $key );
+
+		if ( !empty( $key ) ) {
+		  foreach ( $key as $k ) {
+				$value = $value[$k];
+		  }
+		}
+
+		return $value;
 	}
 }
