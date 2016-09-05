@@ -46,6 +46,7 @@ class post_model extends constructor_data_class {
 		'link' => array(
 			'type'	=> 'string',
 			'field'	=> 'guid',
+			'export' => true,
 		),
 		'type' 	=> array(
 			'type'	=> 'string',
