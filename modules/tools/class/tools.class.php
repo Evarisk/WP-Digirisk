@@ -7,7 +7,7 @@ class tools_class extends singleton_util {
   public function add_variable( $method_evaluation, $variable ) {
     $unique_key = wpdigi_utils::get_last_unique_key( 'term', evaluation_method_variable_class::g()->get_taxonomy() );
     $unique_key++;
-    $unique_identifier = ELEMENT_IDENTIFIER_ME . '' . $unique_key;
+    $unique_identifier = evaluation_method_class::g()->element_prefix . '' . $unique_key;
 
     // On tente de crée les variables de la méthode d'évaluation
     $evaluation_method_variable = evaluation_method_variable_class::g()->create( array(
