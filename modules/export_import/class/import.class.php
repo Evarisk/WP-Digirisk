@@ -75,6 +75,12 @@ class import_class extends singleton_util {
 				$this->create_danger_category( $risk, $danger_category_json );
 			}
 		}
+
+		if ( !empty( $risk_json['evaluation_method'] ) ) {
+		  foreach ( $risk_json['evaluation_method'] as $evaluation_method_json ) {
+				$this->create_evaluation_method( $risk, $evaluation_method_json );
+		  }
+		}
 	}
 
 	public function create_risk_evaluation( $risk, $risk_comment_json, $evaluation_json ) {
@@ -112,5 +118,22 @@ class import_class extends singleton_util {
 		$danger = danger_class::g()->update( $danger_json );
 		$risk->taxonomy['digi-danger'][] = $danger->id;
 		$risk = risk_class::g()->update( $risk );
+	}
+
+	public function create_evaluation_method( $risk, $evaluation_method_json ) {
+		$evaluation_method = evaluation_method_class::g()->update( $evaluation_method_json );
+		$risk->taxonomy['digi-method'][] = $evaluation_method->id;
+		$risk = risk_class::g()->update( $risk );
+
+		if ( !empty( $evaluation_method_json['variable'] ) ) {
+		  foreach ( $evaluation_method_json['variable'] as $evaluation_method_variable_json ) {
+				$this->create_evaluation_method_variable( $evaluation_method, $evaluation_method_variable_json );
+		  }
+		}
+	}
+
+	public function create_evaluation_method_variable( $evaluation_method, $evaluation_method_variable_json ) {
+		$evaluation_method_variable_json['parent_id'] = $evaluation_method->id;
+		$evaluation_method_variable = evaluation_method_variable_class::g()->update( $evaluation_method_variable_json );
 	}
 }
