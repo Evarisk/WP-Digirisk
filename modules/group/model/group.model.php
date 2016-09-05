@@ -12,6 +12,7 @@ class group_model extends post_model {
 		$this->model = array_merge( $this->model, array(
 			'child' => array(
 				'list_group' => array(
+					'export' 			=> true,
 					'type'				=> 'array',
 					'controller'	=> 'group_class',
 					'field'				=> 'post_parent',
