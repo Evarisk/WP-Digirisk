@@ -7,6 +7,6 @@
 	</toggle>
 
 	<div class="wp-digi-develop-list digi-popup hidden">
-		<?php group_class::g()->display_list_item( $groupment, $selected_group ); ?>
+		<?php group_class::g()->display_list_item( $list_groupment, $selected_group ); ?>
 	</div>
 </div>
