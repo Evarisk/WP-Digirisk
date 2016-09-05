@@ -51,15 +51,9 @@ class import_action {
 			wp_send_json_error();
 		}
 
-		$danger_created = danger_default_data_class::g()->create();
-		$recommendation_created = recommendation_default_data_class::g()->create();
-		$evaluation_method_created = evaluation_method_default_data_class::g()->create();
-
 		$file_content = file_get_contents( $this->destination_directory . $zip_info['list_file'][0] );
 		$data = json_decode( $file_content, true );
 		import_class::g()->create( $data );
-
-		update_option( WPDIGI_CORE_OPTION_NAME, array( 'installed' => true, 'db_version' => 1 ) );
 
 		wp_send_json_success( $response );
 	}
