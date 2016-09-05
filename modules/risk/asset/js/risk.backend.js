@@ -9,10 +9,9 @@ var digi_risk = {
 	init: function( event, $ ) {
 		digi_risk.$ = $;
 
-		window.digi_risk_comment.event( digi_risk.$ );
-		window.digi_danger.init( event, digi_risk.$ );
-
 		if ( event || event === undefined ) {
+			window.digi_risk_comment.event( digi_risk.$ );
+			window.digi_danger.init( event, digi_risk.$ );
 			digi_risk.event();
 		}
 
