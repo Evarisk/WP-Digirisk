@@ -82,7 +82,10 @@ class society_action {
 		society_class::g()->update_by_type( $society );
 
 		if ( $society->type !== 'digi-group' ) {
+			$workunit_id_selected = $society->id;
 			$group_id = $society->parent_id;
+
+			$society = society_class::g()->show_by_type( $society->parent_id );
 		}
 
 		$group_parent = group_class::g()->get(
@@ -96,6 +99,7 @@ class society_action {
 
 		ob_start();
 		group_class::g()->display_toggle( $group_parent[0], $society );
+		workunit_class::g()->display_list( $society->id, $workunit_id_selected );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 
