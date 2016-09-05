@@ -119,7 +119,14 @@ var digi_group = {
 
   save_configuration: function( event, element ) {
     event.preventDefault();
-    digi_group.$( element ).closest( 'form' ).ajaxSubmit();
+    digi_group.$( element ).closest( 'form' ).ajaxSubmit({
+			'beforeSubmit': function() {
+				digi_group.$( ".wp-digi-societytree-main-container" ).addClass( "wp-digi-bloc-loading" );
+			},
+			'success': function() {
+				digi_group.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
+			}
+		});
   }
 
 };
