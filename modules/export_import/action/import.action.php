@@ -34,6 +34,7 @@ class import_action {
 	 */
 	public function callback_import_data() {
 		check_ajax_referer( 'digi_import_data' );
+		ini_set( 'memory_limit', '-1' );
 
 		$response = array(
 			'message' => __( 'Digirisk datas imported successfully', 'digirisk' ),
