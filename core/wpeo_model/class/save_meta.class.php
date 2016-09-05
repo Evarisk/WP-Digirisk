@@ -29,6 +29,20 @@ class save_meta_class extends singleton_util {
 	}
 
 	private function save_multiple_meta_data( $id, $array_value, $function, $meta_key ) {
-		call_user_func( $function, $id, $meta_key, json_encode( $array_value ) );
+		$data = json_encode( $array_value );
+		$data = preg_replace_callback(
+		    '/\\\\u([0-9a-f]{4})/i',
+		    function ($matches) {
+		        $sym = mb_convert_encoding(
+		                pack('H*', $matches[1]),
+		                'UTF-8',
+		                'UTF-16'
+		                );
+			    return $sym;
+		    },
+		    $data
+		);
+
+		call_user_func( $function, $id, $meta_key, $data );
 	}
 }
