@@ -45,7 +45,8 @@ class import_action {
 
 		$zip_file = $_FILES['file'];
 
-		if ( !zip_util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory ) ) {
+		$zip_info = zip_util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
+		if ( !$zip_info['state'] || empty( $zip_info[0]['filename'] ) ) {
 			wp_send_json_error();
 		}
 
@@ -53,7 +54,7 @@ class import_action {
 		$recommendation_created = recommendation_default_data_class::g()->create();
 		$evaluation_method_created = evaluation_method_default_data_class::g()->create();
 
-		$file_content = file_get_contents( $this->destination_directory . str_replace( 'zip', 'json', $zip_file['name'] ) );
+		$file_content = file_get_contents( $this->destination_directory . $zip_info[0]['filename'] );
 		$data = json_decode( $file_content, true );
 		import_class::g()->create( $data );
 
