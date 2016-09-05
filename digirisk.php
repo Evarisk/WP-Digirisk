@@ -15,6 +15,7 @@
 require_once( 'digirisk.config.php' );
 require_once( 'core/util/singleton.util.php' );
 require_once( 'core/util/include.util.php' );
+require_once( 'core/wpeo_log/wpeo_log.php' );
 
 include_util::inc( WPDIGI_PATH . 'core/wpeo_model', array( 'config', 'helper', 'class', 'model' ) );
 include_util::inc( WPDIGI_PATH . 'core/wpeo_export', array( 'config', 'class' ) );
