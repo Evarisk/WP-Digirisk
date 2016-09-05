@@ -68,9 +68,9 @@ class group_class extends post_class {
 	/**
 	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
 	 */
-	public function display_toggle( $groupment, $selected_group = null ) {
+	public function display_toggle( $list_groupment, $selected_group = null ) {
 		if ( $selected_group === null ) {
-			$selected_group = $groupment;
+			$selected_group = $list_groupment[0];
 		}
 
 		require ( GROUP_VIEW_DIR . '/toggle.view.php' );
@@ -86,9 +86,9 @@ class group_class extends post_class {
 		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
 	}
 
-	public function display_list_item( $groupment, $selected_group = null ) {
+	public function display_list_item( $list_groupment, $selected_group = null ) {
 		if ( $selected_group === null ) {
-			$selected_group = $groupment;
+			$selected_group = $list_groupment[0];
 		}
 
 		require ( GROUP_VIEW_DIR . '/list.view.php' );
