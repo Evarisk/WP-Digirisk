@@ -24,7 +24,7 @@ class export_filter {
 	 * Constructeur pour l'instanciation des filtres pour les exports / Constructor for export's filters instanciation
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 15 );
+		// add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 15 );
 	}
 
 	/**
@@ -38,7 +38,7 @@ class export_filter {
 		$list_tab['digi-group']['export'] = array(
  			'text' => __( 'Export', 'digirisk' ),
  		);
-		
+
 		$list_tab['digi-workunit']['export'] = array(
  			'text' => __( 'Export', 'digirisk' ),
  		);
