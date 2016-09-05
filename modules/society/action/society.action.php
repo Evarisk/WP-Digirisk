@@ -33,19 +33,18 @@ class society_action {
 		do_shortcode( '[digi_dashboard id="' . $element_id . '" tab_to_display="' . $tab_to_display . '"]' );
 		$template = ob_get_clean();
 
-		$group_parent = group_class::g()->get(
+		$group_list = group_class::g()->get(
 			array(
-				'posts_per_page' => 1,
+				'posts_per_page' => 5,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
-			), array(
-				'list_group'
-			) );
+				'order' => 'ASC'
+			), array( 'list_group' ) );
 
 		$society = society_class::g()->show_by_type( $element_id );
 		if ( $society->type == 'digi-group' ) {
 			ob_start();
-			group_class::g()->display_toggle( $group_parent[0], $society );
+			group_class::g()->display_toggle( $group_list, $society );
 			workunit_class::g()->display_list( $society->id );
 			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
 
