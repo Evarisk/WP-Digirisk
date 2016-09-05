@@ -40,9 +40,10 @@ class society_class extends singleton_util {
 	public function display_dashboard() {
 		$group_list = group_class::g()->get(
 			array(
-				'posts_per_page' => 1,
+				'posts_per_page' => 5,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
+				'order' => 'ASC'
 			), array( false ) );
 
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
