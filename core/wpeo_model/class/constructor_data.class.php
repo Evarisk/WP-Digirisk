@@ -61,8 +61,8 @@ class constructor_data_class extends helper_class {
 
 						if ( !empty( $child_def['value'] ) ) {
 							$key = $this->parse_key( $child_def );
-							$value = $this->parse_value( $key );
-							if ( !empty( $child_def['custom_field'] ) ) {
+							if ( !empty( $child_def['custom_field'] ) && $this->$child_def['value'] ) {
+								$value = $this->parse_value( $key );
 								$child_def['field'] = $child_def['custom_field'];
 							}
 						}
