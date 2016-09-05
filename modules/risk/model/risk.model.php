@@ -47,6 +47,20 @@ class risk_model extends post_model {
 				'meta_type' => 'multiple',
 				'bydefault'	=> 0,
 			),
+			'associated_document_id' => array(
+				'type'				=> 'array',
+				'meta_type'	=> 'multiple',
+				'child' => array(
+					'image' => array(
+						'type'				=> 'array',
+						'meta_type'	=> 'multiple'
+					),
+					'document' => array(
+						'type'				=> 'array',
+						'meta_type' => 'multiple',
+					)
+				)
+			),
 			'taxonomy' => array(
 				'type' => 'array',
 				'meta_type' => 'multiple',
