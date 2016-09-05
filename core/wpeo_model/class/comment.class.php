@@ -97,6 +97,10 @@ class comment_class extends singleton_util {
 		return $data;
 	}
 
+	public function get_type() {
+		return $this->comment_type;
+	}
+	
 	public function get_post_type() {
 		return $this->comment_type;
 	}
