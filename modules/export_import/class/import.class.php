@@ -35,6 +35,12 @@ class import_class extends singleton_util {
 	  foreach ( $data as $groupment_json ) {
 			$groupment = group_class::g()->update( $groupment_json );
 
+			if ( !empty( $groupment_json['list_risk'] ) ) {
+			  foreach ( $groupment_json['list_risk'] as $risk_json ) {
+					$this->create_risk( $groupment, $risk_json );
+			  }
+			}
+
 			if ( !empty( $groupment_json['list_workunit'] ) ) {
 			  foreach ( $groupment_json['list_workunit'] as $workunit_json ) {
 					$this->create_workunit( $groupment, $workunit_json );
