@@ -34,33 +34,33 @@ class wpdigi_transferdata_society_class extends \singleton_util {
 	 */
 	function transfer_groupement( $evarisk_element, $element_type, $wp_element_id ) {
 		/**	Get the element created for new data transfer	*/
-		$group_mdl = \group_class::g()->show( $wp_element_id );
+		$group_mdl = \group_class::g()->get( array( 'id' => $wp_element_id ) );
+		$group_mdl = $group_mdl[0];
 
 		/**	Build the	group model for new data storage */
-		$meta = array(
-			'unique_key' => $evarisk_element->id,
-			'unique_identifier' => ELEMENT_IDENTIFIER_GP . $evarisk_element->id,
-			'user_info' => array(
-				'owner_id' => $evarisk_element->id_responsable,
-				'affected_id' => $this->transfer_users( $evarisk_element->id, $element_type, null, \group_class::g()->get_post_type(), $wp_element_id ),
-			),
-			'contact' => array(
-				'phone' => array( $evarisk_element->telephoneGroupement, ),
-				'address' => $this->transfer_addresse( $evarisk_element->id_adresse, $wp_element_id ),
-			),
-			'identity' => array(
-				'workforce' => $evarisk_element->effectif,
-				'siren' => $evarisk_element->siren,
-				'siret' => $evarisk_element->siret,
-				'social_activity_number' => $evarisk_element->social_activity_number,
-				'establishment_date' => $evarisk_element->creation_date_of_society,
-			),
-			'associated_risk' => $this->transfer_risk( $evarisk_element->id, $element_type, $wp_element_id ),
-			'associated_product' => $this->transfer_product( $evarisk_element->id, $element_type, $wp_element_id ),
-			'associated_recommendation' => $this->transfer_recommendation( $evarisk_element->id, $element_type, $wp_element_id ),
+		$group_mdl->unique_key = $evarisk_element->id;
+		$group_mdl->unique_identifier = ELEMENT_IDENTIFIER_GP . $evarisk_element->id;
+		$group_mdl->user_info = array(
+			'owner_id' => $evarisk_element->id_responsable,
+			'affected_id' => $this->transfer_users( $evarisk_element->id, $element_type, null, \group_class::g()->get_post_type(), $wp_element_id ),
 		);
 
-		$group_mdl->option = array_replace_recursive( $group_mdl->option, $meta);
+		$group_mdl->contact = array(
+			'phone' => array( $evarisk_element->telephoneGroupement, ),
+			'address' => $this->transfer_addresse( $evarisk_element->id_adresse, $wp_element_id ),
+		);
+
+		$group_mdl->identity = array(
+			'workforce' => $evarisk_element->effectif,
+			'siren' => $evarisk_element->siren,
+			'siret' => $evarisk_element->siret,
+			'social_activity_number' => $evarisk_element->social_activity_number,
+			'establishment_date' => $evarisk_element->creation_date_of_society,
+		);
+
+		$group_mdl->associated_risk = $this->transfer_risk( $evarisk_element->id, $element_type, $wp_element_id );
+		$group_mdl->associated_product = $this->transfer_product( $evarisk_element->id, $element_type, $wp_element_id );
+		$group_mdl->associated_recommendation = $this->transfer_recommendation( $evarisk_element->id, $element_type, $wp_element_id );
 
 		\group_class::g()->update( $group_mdl );
 	}
@@ -535,18 +535,17 @@ class wpdigi_transferdata_society_class extends \singleton_util {
 			'user_id'								=> null,
 			'author_id'							=> null,
 			'status'								=> -34070,
-			'option'								=> array(
-					'address' => $address->ligne1,
-					'additional_address' => $address->ligne2,
-					'postcode' => $address->codePostal,
-					'town' => $address->ville,
-					'coordinate' => array(
-						'long'	=> $address->longitude,
-						'lat'		=> $address->latitude,
-					),
+			'address' => $address->ligne1,
+			'additional_address' => $address->ligne2,
+			'postcode' => $address->codePostal,
+			'town' => $address->ville,
+			'coordinate' => array(
+				'long'	=> $address->longitude,
+				'lat'		=> $address->latitude,
 			),
 		);
-		$wp_address = \address_class::g()->create( $address_definition );
+
+		$wp_address = \address_class::g()->update( $address_definition );
 		if ( !empty( $wp_address->id ) ) {
 			$addresses[] = $wp_address->id;
 		}
