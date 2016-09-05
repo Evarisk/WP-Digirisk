@@ -56,18 +56,17 @@ class group_action {
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
-		$group_parent = group_class::g()->get(
+		$group_list = group_class::g()->get(
 			array(
-				'posts_per_page' => 1,
+				'posts_per_page' => 5,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
-			), array(
-				'list_group'
-			) );
+				'order' => 'ASC'
+			), array( 'list_group' ) );
+
 
 		ob_start();
-		$display_mode = 'simple';
-		group_class::g()->display_toggle( $group_parent[0], $group );
+		group_class::g()->display_toggle( $group_list, $group );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';
