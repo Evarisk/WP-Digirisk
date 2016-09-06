@@ -34,7 +34,7 @@ class tab_action {
     $element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
     $tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_key( $_POST['tab_to_display'] ) : '';
 
-    $element = society_class::g()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id, array( '' ) );
 
     ob_start();
     require( TAB_VIEW_DIR . 'content.view.php' );

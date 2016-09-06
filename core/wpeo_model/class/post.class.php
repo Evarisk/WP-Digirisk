@@ -45,7 +45,7 @@ class post_class extends singleton_util {
 
 			if ( !empty( $this->after_get_function ) ) {
 				foreach ( $this->after_get_function as $get_function ) {
-					$data = call_user_func( $get_function, $data );
+					$array_posts[$key] = call_user_func( $get_function, $array_posts[$key] );
 				}
 			}
 		}

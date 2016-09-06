@@ -232,7 +232,7 @@ class import_class extends singleton_util {
 		$this->index++;
 		import_action::$response['index_element']++;
 
-		if ( $this->index >= 30 ) {
+		if ( $this->index >= 100 ) {
 			import_action::g()->fast_response();
 		}
 	}
