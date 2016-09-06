@@ -33,7 +33,6 @@ class wpeo_export_class {
 				foreach ( $field_to_export as $name => $key ) {
 					if ( $name !== 'child' ) {
 						$list_data_to_export[$key] = $current_data->$key;
-						$list_data_to_export['imported'] = false;
 					}
 					else {
 						if ( !empty( $key ) ) {
