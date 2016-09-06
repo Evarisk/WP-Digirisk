@@ -1,11 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-<div class="wp-digi-societytree-main-container wp-digi-bloc-loader" >
-	<div class="wp-digi-societytree-left-container wp-digi-bloc-loader" >
-		<?php group_class::g()->display_toggle( $group_list ); ?>
-		<?php workunit_class::g()->display_list( $element_id ); ?>
-	</div>
 
-	<div class="wp-digi-societytree-right-container wp-digi-bloc-loader">
-		<?php do_shortcode( '[digi_dashboard id="' . $element_id . '"]' ); ?>
-	</div>
+<div class="wp-digi-societytree-main-container wp-digi-bloc-loader" >
+	<?php require( SOCIETY_VIEW_DIR . '/screen-left.view.php' ); ?>
+	<?php require( SOCIETY_VIEW_DIR . '/screen-right.view.php' ); ?>
 </div>
