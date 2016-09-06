@@ -39,9 +39,13 @@ var digi_society = {
 			digi_society.$( '.wp-digi-societytree-right-container' ).removeClass( "wp-digi-bloc-loading" );
 			digi_society.$( '.wp-digi-societytree-right-container' ).html( response.data.template );
 			digi_society.$( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
-			digi_society.$( '.wp-digi-societytree-left-container' ).html( response.data.template_left );
+				if ( response.data.template_left ) {
+				digi_society.$( '.wp-digi-societytree-left-container' ).replaceWith( response.data.template_left );
+			}
+
 			window.digi_global.init( digi_society.$ );
 			window.digi_risk.init( false, digi_society.$ );
+			window.digi_workunit.event( digi_society.$ );
 			window.digi_search.event( digi_society.$ );
 		} );
 	},
