@@ -66,7 +66,9 @@ class group_action {
 
 
 		ob_start();
-		group_class::g()->display_toggle( $group_list, $group );
+		$element_id = $group->id;
+		$society = $group;
+		require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';
