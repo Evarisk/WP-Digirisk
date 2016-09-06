@@ -15,7 +15,9 @@
 	<input type="hidden" name="element_id" value="<?php echo $element_id; ?>" />
 
 	<span class="digi-import-explanation" ><?php _e( 'Don\'t start from scratch. Use a predefined template by importing it with the button below', 'digirisk' ); ?></span>
+	<progress value="0" max="100">0%</progress>
+	<input type="file" name="file" id="file" />
+	<label for="file"><?php _e( 'Import Digirisk model', 'digirisk' ); ?></label><br />
+	<span class="digi-import-detail"></span>
 
-	<input type="file" />
-	<button class="wp-digi-bton-fifth" id="digi-export-button" ><?php _e( 'Import Digirisk model', 'digirisk' ); ?></button>
 </form>

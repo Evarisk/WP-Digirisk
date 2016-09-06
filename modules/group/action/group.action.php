@@ -58,7 +58,7 @@ class group_action {
 
 		$group_list = group_class::g()->get(
 			array(
-				'posts_per_page' => 5,
+				'posts_per_page' => -1,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
 				'order' => 'ASC'

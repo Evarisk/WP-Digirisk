@@ -12,7 +12,7 @@ var digi_export = {
 
 	event: function() {
 		digi_export.$( document ).on( 'submit', '#digi-export-form', function( event ) { digi_export.create_export( event, digi_export.$( this ) ); } );
-		digi_export.$( document ).on( 'submit', '#digi-import-form', function( event ) { digi_export.make_import( event, digi_export.$( this ) ); } );
+		digi_export.$( document ).on( 'change', '#digi-import-form input[type="file"]', function( event ) { digi_export.make_import( event, digi_export.$( this ) ); } );
 	},
 
 	create_export: function( event, element ) {
@@ -31,10 +31,15 @@ var digi_export = {
 		event.preventDefault();
 
 		var data = new FormData();
-		data.append( 'file', digi_export.$( element ).find( 'input[type="file"]' )[0].files[0] );
+		data.append( 'file', digi_export.$( element )[0].files[0] );
 		data.append( 'action', 'digi_import_data' );
-		data.append( '_wpnonce', digi_export.$( element ).find( 'input[name="_wpnonce"]' ).val() );
+		data.append( '_wpnonce', digi_export.$( element ).closest('form').find( 'input[name="_wpnonce"]' ).val() );
+		data.append( 'index_element', 0 );
 
+		digi_export.request_import( data );
+	},
+
+	request_import: function( data ) {
 		digi_export.$.ajax( {
 			url: ajaxurl,
 			data: data,
@@ -42,15 +47,33 @@ var digi_export = {
 			contentType: false,
 			type: 'POST',
 			beforeSend: function() {
-				digi_installer.$( '#digi-data-export' ).addClass( "wp-digi-bloc-loading" );
 			},
-			success: function() {
-				digi_installer.$( '#digi-data-export' ).removeClass( "wp-digi-bloc-loading" );
-				digi_installer.$( '#toplevel_page_digi-setup a' ).attr( 'href', digi_installer.$( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+			success: function(response) {
+				if ( response.success ) {
+					if ( !response.data.end ) {
+						var data = new FormData();
+						data.append( 'action', 'digi_import_data' );
+						data.append( '_wpnonce', digi_export.$( '#digi-import-form' ).find( 'input[name="_wpnonce"]' ).val() );
+						data.append( 'path_to_json', response.data.path_to_json );
+						data.append( 'index_element', response.data.index_element );
+						digi_export.$('.digi-import-detail').html( window.digi_tools_in_progress );
+						digi_export.request_import(data);
+					}
+					else {
+						digi_export.$('.digi-import-detail').html( window.digi_tools_done );
+					}
+
+					digi_export.$('progress').attr( 'max', response.data.count_element );
+					digi_export.$('progress').val( ( response.data.index_element / response.data.count_element ) * response.data.count_element );
+
+				}
+				else {
+					alert( 'Problème lors de l\'importation du modèle' );
+					digi_installer.$( '#digi-data-export' ).removeClass( "wp-digi-bloc-loading" );
+				}
 			}
 		} );
 	}
-
 };
 
 jQuery( document ).ready(function( $ ) {
