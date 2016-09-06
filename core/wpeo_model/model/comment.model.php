@@ -20,6 +20,7 @@ class comment_model extends constructor_data_class {
 			'field'		=> 'comment_post_ID',
 		),
 		'date' => array(
+			'export'	=> true,
 			'type'		=> 'string',
 			'field'		=> 'comment_date',
 		),
