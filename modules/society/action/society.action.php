@@ -42,10 +42,10 @@ class society_action {
 			), array( 'list_group' ) );
 
 		$society = society_class::g()->show_by_type( $element_id );
+
 		if ( $society->type == 'digi-group' ) {
 			ob_start();
-			group_class::g()->display_toggle( $group_list, $society );
-			workunit_class::g()->display_list( $society->id );
+			require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
 			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
 
 		}
