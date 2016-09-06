@@ -47,6 +47,7 @@ var digi_export = {
 			contentType: false,
 			type: 'POST',
 			beforeSend: function() {
+				digi_export.$('.digi-import-detail').html( window.digi_tools_in_progress );
 			},
 			success: function(response) {
 				if ( response.success ) {
