@@ -9,9 +9,13 @@
 			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
 		</h2>
 
-		<div id="digi-data-export" class="wp-digi-bloc-loader" >
-			<?php echo do_shortcode( '[digi-export]' ); ?>
-			<?php echo do_shortcode( '[digi-import]' ); ?>
+		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2" >
+			<div class="block">
+				<?php echo do_shortcode( '[digi-export]' ); ?>
+			</div>
+			<div class="block">
+				<?php echo do_shortcode( '[digi-import]' ); ?>
+			</div>
 		</div>
 
 		<div id="digi-method-fixer" class="hidden" >
