@@ -68,9 +68,10 @@ var digi_group = {
 
 		digi_group.$.post( window.ajaxurl, data, function( response ) {
 			digi_group.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
-			digi_group.$( ".wp-digi-societytree-left-container" ).html( response.data.template_left );
+			digi_group.$( ".wp-digi-societytree-left-container" ).replaceWith( response.data.template_left );
 			digi_group.$( ".wp-digi-societytree-right-container" ).html( response.data.template_right );
 			window.digi_global.init( digi_group.$ );
+			window.digi_workunit.event( digi_society.$ );
 			window.digi_search.event( digi_group.$ );
 		} );
 	},
