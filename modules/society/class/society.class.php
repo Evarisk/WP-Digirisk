@@ -46,6 +46,7 @@ class society_class extends singleton_util {
 				'order' => 'ASC'
 			), array( 'list_group' ) );
 
+		$society = $group_list[0];
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 
 		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'simple', 'dashboard' );
