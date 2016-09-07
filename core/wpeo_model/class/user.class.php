@@ -27,6 +27,13 @@ class user_class extends singleton_util {
 			$data->id = wp_insert_user( $data->do_wp_object() );
 		}
 		else {
+
+			if ( !empty( $this->before_put_function ) ) {
+				foreach( $this->before_put_function as $put_function ) {
+					$data = call_user_func( $put_function, $data );
+				}
+			}
+
 			wp_update_user( $data->do_wp_object() );
 		}
 

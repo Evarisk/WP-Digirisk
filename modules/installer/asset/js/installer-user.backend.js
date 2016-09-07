@@ -12,7 +12,7 @@ var digi_installer_user = {
 
 	add_staff: function( event, element ) {
 		event.preventDefault();
-		if( digi_installer_user.$( '.wpdigi-staff input[name="option[user_info][lastname]"]' ).val() !== '') {
+		if( digi_installer_user.$( '.wpdigi-staff input[name="user[lastname]"]' ).val() !== '') {
 			digi_installer_user.$( '.wp-digi-list-staff' ).addClass( 'wp-digi-bloc-loading' );
 			digi_installer_user.$( '#wp-digi-form-add-staff' ).ajaxSubmit( {
 				beforeSubmit: function() {
@@ -24,10 +24,10 @@ var digi_installer_user = {
 				success: function( response ) {
 					digi_installer_user.$( '.wp-digi-list-staff' ).removeClass( 'wp-digi-bloc-loading' );
 					digi_installer_user.$( '.wp-digi-list-staff' ).append( response.data.template );
-					digi_installer_user.$( '.wpdigi-staff input[name="user[option][user_info][firstname]"]' ).val( "" );
-					digi_installer_user.$( '.wpdigi-staff input[name="user[option][user_info][lastname]"]' ).val( "" );
-					digi_installer_user.$( ".wpdigi-staff input[name='user[email]']" ).val( digi_installer_user.$( '.wpdigi-staff input[name="user[option][user_info][firstname]"]' ).val() + '.' + digi_installer_user.$( '.wpdigi-staff input[name="user[option][user_info][lastname]"]' ).val() + '@' + digi_installer_user.$( '.wpdigi-staff .input-domain-mail' ).val() );
-					digi_installer_user.$( '.wpdigi-staff input[name="user[option][user_info][lastname]"]' ).focus();
+					digi_installer_user.$( '.wpdigi-staff input[name="user[firstname]"]' ).val( "" );
+					digi_installer_user.$( '.wpdigi-staff input[name="user[lastname]"]' ).val( "" );
+					digi_installer_user.$( ".wpdigi-staff input[name='user[email]']" ).val( digi_installer_user.$( '.wpdigi-staff input[name="user[firstname]"]' ).val() + '.' + digi_installer_user.$( '.wpdigi-staff input[name="user[lastname]"]' ).val() + '@' + digi_installer_user.$( '.wpdigi-staff .input-domain-mail' ).val() );
+					digi_installer_user.$( '.wpdigi-staff input[name="user[lastname]"]' ).focus();
 				}
 			} );
 		}
