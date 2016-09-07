@@ -61,10 +61,22 @@ class constructor_data_class extends helper_class {
 
 						if ( !empty( $child_def['value'] ) ) {
 							$key = $this->parse_key( $child_def );
-							if ( !empty( $child_def['custom_field'] ) && $this->$child_def['value'] ) {
+
+							if ( !is_array( $key ) ) {
+								$value = $this->$child_def['value'];
+							}
+							else {
+								$value = $this->parse_value( $key );
+							}
+
+							if ( is_array( $key ) && !empty( $child_def['custom_field'] ) && $this->$child_def['value'] ) {
 								$value = $this->parse_value( $key );
 								$child_def['field'] = $child_def['custom_field'];
 							}
+						}
+
+						if ( $child_def['field'] == 'include' || $child_def['field'] == 'comment__in' && !is_array( $value ) ) {
+							$value = (array) $value;
 						}
 
 						$list_child = $child_def['controller']::g()->get( array( $child_def['field'] => $value ), $field_wanted );

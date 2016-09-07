@@ -6,9 +6,11 @@ class third_mdl_01 extends post_model {
 		$this->model = array_merge( $this->model, array(
 			'child' => array(
 				'address' => array(
-					'type'				=> 'object',
-					'controller' 	=> 'address_class',
-					'field' 			=> '',
+					'type'					=> 'object',
+					'controller' 		=> 'address_class',
+					'field'					=> 'comment__in',
+					'value'					=> 'contact[address_id]',
+					'custom'			=> 'array'
 				)
 			),
 			'full_name' => array(

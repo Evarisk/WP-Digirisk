@@ -23,6 +23,7 @@ class comment_class extends singleton_util {
 			$args['status'] = '-34070';
 		}
 
+
 		if ( !empty( $args['id'] ) ) {
 			$array_comment[] = get_comment( $args['id'], ARRAY_A );
 		}
@@ -100,7 +101,7 @@ class comment_class extends singleton_util {
 	public function get_type() {
 		return $this->comment_type;
 	}
-	
+
 	public function get_post_type() {
 		return $this->comment_type;
 	}

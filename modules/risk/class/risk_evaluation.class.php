@@ -8,7 +8,6 @@ class risk_evaluation_class extends comment_class {
 	protected $version 			= '0.1';
 	public $element_prefix 	= 'E';
 	protected $before_post_function = array( 'construct_identifier' );
-	protected $before_put_function = array( 'construct_identifier' );
 
 	protected function construct() {}
 

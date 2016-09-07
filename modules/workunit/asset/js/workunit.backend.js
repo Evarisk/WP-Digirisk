@@ -6,8 +6,8 @@ var digi_workunit = {
 	event: function( $ ) {
 		digi_workunit.$ = $;
 		/**	Quand on demande l'ajout d'une unité de travail	*/
-		digi_workunit.$( ".wp-digi-societytree-left-container" ).on( "keypress", "input[name='workunit[title]']", function( event) { digi_workunit.call_create_workunit( event ); } );
-		digi_workunit.$( ".wp-digi-societytree-left-container" ).on( "click", ".wp-digi-new-workunit-action", function( event ){ digi_workunit.create_workunit( event, digi_workunit.$( this ) ); } );
+		digi_workunit.$( ".wp-digi-societytree-main-container" ).on( "keypress", "input[name='workunit[title]']", function( event) { digi_workunit.call_create_workunit( event ); } );
+		digi_workunit.$( ".wp-digi-societytree-main-container" ).on( "click", ".wp-digi-new-workunit-action", function( event ){ digi_workunit.create_workunit( event, digi_workunit.$( this ) ); } );
 
 		/**	Quand on demande la suppression d'une unité de travail	*/
 		digi_workunit.$( document ).on( 'click', '.wp-digi-list-workunit .wp-digi-action-delete', function( event ) { digi_workunit.delete_workunit( event, digi_workunit.$( this ) ); } );
@@ -22,7 +22,7 @@ var digi_workunit = {
 	call_create_workunit: function( event ) {
 		if( event.keyCode == 13 ) {
 			event.preventDefault();
-			digi_workunit.$( ".wp-digi-societytree-left-container .wp-digi-new-workunit-action" ).click();
+			digi_workunit.$( ".wp-digi-societytree-main-container .wp-digi-new-workunit-action" ).click();
 		}
 	},
 
