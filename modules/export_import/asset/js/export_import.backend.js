@@ -23,6 +23,7 @@ var digi_export = {
 			},
 			success: function( response ) {
 				digi_export.$( element ).closest( '.wp-digi-bloc-loader' ).removeClass( "wp-digi-bloc-loading" );
+				window.digi_global.download_file( response.data.url_to_file, response.data.filename );
 			}
 		} );
 	},

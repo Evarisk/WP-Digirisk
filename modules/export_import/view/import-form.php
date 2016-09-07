@@ -23,6 +23,6 @@
 		<span class="digi-import-detail"></span>
 	</div>
 
-	<label for="file" class="wp-digi-bton-first" ><?php _e( 'Import Digirisk model', 'digirisk' ); ?></label><br />
+	<label for="file" class="wp-digi-bton-first" ><?php _e( 'Import Digirisk model (.ZIP)', 'digirisk' ); ?></label><br />
 
 </form>

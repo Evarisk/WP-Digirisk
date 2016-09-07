@@ -82,7 +82,9 @@ class export_action {
 
 		/** Suppression du fichier json après l'enregistrement dans le fichier zip / Delete the json file after zip saving */
 		@unlink( $json_filename );
-
+		$upload_dir = wp_upload_dir();
+		$response['url_to_file'] = $upload_dir['baseurl'] . '/digirisk/export/' . current_time( 'YmdHis' ) . '_' . $filename . '_export.zip';
+		$response['filename'] = current_time( 'YmdHis' ) . '_' . $filename . '_export.zip';
 		wp_send_json_success( $response );
 	}
 

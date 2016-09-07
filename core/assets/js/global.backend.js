@@ -47,5 +47,12 @@ var digi_global = {
 	responsive_menu_toggle: function( element ) {
 		digi_global.$( '.wp-digi-sheet-tab-responsive-content' ).toggle( 'fast' );
 		digi_global.$( '.wp-digi-sheet-tab-title' ).toggleClass( 'active' );
+	},
+
+	download_file: function( url_to_file, filename ) {
+		var url = digi_global.$('<a href="' + url_to_file + '" download="' + filename + '"></a>');
+		digi_global.$('.wrap').append(url);
+		url[0].click();
+		url.remove();
 	}
 };
