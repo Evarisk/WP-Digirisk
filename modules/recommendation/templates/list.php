@@ -39,7 +39,7 @@
 				<span class="wp-digi-recommendation-select">
 					<?php if ( !empty( $list_recommendation_category ) ) : ?>
 						<input type="hidden" name="recommendation_id" />
-						<toggle data-target="wp-digi-select-list" class="wp-digi-summon-list">Select a recommendation <i class="dashicons dashicons-arrow-down"></i></toggle>
+						<toggle data-target="wp-digi-select-list" class="wp-digi-summon-list"><?php _e( 'Select a recommendation', 'digirisk' ); ?> <i class="dashicons dashicons-arrow-down"></i></toggle>
 						<div class="wp-digi-select-list digi-popup hidden grid icon">
 							<?php foreach( $list_recommendation_category as $recommendation_category ): ?>
 								<ul>
@@ -57,7 +57,7 @@
 						<?php _e( 'There are no recommendation category to display here. Please create some recommendation category before.', 'digirisk' ); ?>
 					<?php endif; ?>
 				</span>
-				<span class="wp-digi-comment"><input type="text" name="recommendation_comment" placeholder="Enter a comment" /></span>
+				<span class="wp-digi-comment"><input type="text" name="recommendation_comment" placeholder="<?php _e( 'Enter a comment', 'digirisk' ); ?>" /></span>
 				<span class="wp-digi-recommendation-action wp-digi-action-new wp-digi-action" ><a href="#" class="wp-digi-action dashicons dashicons-plus" ></a></span>
 			</li>
 		</ul>
