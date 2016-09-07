@@ -75,7 +75,6 @@ class workunit_model extends post_model {
 				'meta_type'	=> 'multiple',
 			),
 			'associated_document_id' => array(
-				'export'			=> true,
 				'type'				=> 'array',
 				'meta_type'	=> 'multiple',
 				'child' => array(

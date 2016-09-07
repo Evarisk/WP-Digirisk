@@ -47,7 +47,6 @@ class group_model extends post_model {
 					'value'				=> 'thumbnail_id'
 				),
 				'attachment' => array(
-					'export'			=> true,
 					'type'				=> 'array',
 					'controller'	=> 'attachment_class',
 					'field'				=> 'include',
@@ -114,7 +113,6 @@ class group_model extends post_model {
 				'type' 			=> 'array',
 			),
 			'associated_document_id' => array(
-				'export'			=> true,
 				'type'				=> 'array',
 				'meta_type'	=> 'multiple',
 				'child' => array(

@@ -39,7 +39,7 @@ class society_action {
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
 				'order' => 'ASC'
-			), array( 'list_group' ) );
+			), array( 'list_group', 'list_workunit' ) );
 
 		$society = society_class::g()->show_by_type( $element_id );
 
@@ -70,6 +70,8 @@ class society_action {
 			$id = (int) $_POST['id'];
 
 		$group_id = $id;
+		$workunit_id_selected = 0;
+
 		$society = society_class::g()->show_by_type( $_POST['id'] );
 		$society->title = $_POST['title'];
 
@@ -87,18 +89,17 @@ class society_action {
 			$society = society_class::g()->show_by_type( $society->parent_id );
 		}
 
-		$group_parent = group_class::g()->get(
+		$group_list = group_class::g()->get(
 			array(
-				'posts_per_page' => 1,
+				'posts_per_page' => -1,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
-			), array(
-				'list_group'
-			) );
+				'order' => 'ASC'
+			), array( 'list_group', 'list_workunit' ) );
 
 		ob_start();
-		group_class::g()->display_toggle( $group_parent[0], $society );
-		workunit_class::g()->display_list( $society->id, $workunit_id_selected );
+		$element_id = $society->id;
+		require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
 

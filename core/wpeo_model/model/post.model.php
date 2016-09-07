@@ -61,7 +61,6 @@ class post_model extends constructor_data_class {
 			'field'	=> 'comment_count',
 		),
 		'thumbnail_id' => array(
-			'export'			=> true,
 			'type'				=> 'int',
 			'meta_type'		=> 'single',
 			'field'				=> '_thumbnail_id',

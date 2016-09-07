@@ -44,7 +44,7 @@ class society_class extends singleton_util {
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
 				'order' => 'ASC'
-			), array( 'list_group' ) );
+			), array( 'list_group', 'list_workunit' ) );
 
 		$society = $group_list[0];
 		$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;

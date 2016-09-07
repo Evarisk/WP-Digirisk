@@ -61,7 +61,7 @@ class export_action {
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft', ),
 				'order' => 'ASC'
-			), array( 'list_group', 'list_workunit', 'risk', 'danger', 'danger_category', 'comment', 'evaluation', 'evaluation_method' ) );
+			), array( 'list_group', 'list_workunit', 'list_risk', 'danger', 'danger_category', 'comment', 'evaluation', 'evaluation_method' ) );
 		$list_data_exported = array();
 
 		if ( !empty( $list_group ) ) {
