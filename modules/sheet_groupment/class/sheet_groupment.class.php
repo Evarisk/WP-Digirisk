@@ -85,8 +85,8 @@ class sheet_groupment_class extends singleton_util {
   					if ( 'valid' == $evaluator_affectation_info[ 'affectation_info' ][ 'status' ] ) {
   						$affected_users[] = array(
   							'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info[ 'user_info' ]->id,
-  							'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'lastname' ],
-  							'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->option[ 'user_info' ][ 'firstname' ],
+  							'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->lastname,
+  							'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->firstname,
   							'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info[ 'affectation_info' ][ 'start' ][ 'date' ], true ),
   							'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info[ 'affectation_info' ] ),
   						);

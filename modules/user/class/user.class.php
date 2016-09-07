@@ -172,21 +172,22 @@ class user_class extends \user_class {
 		$affected_users = $unaffected_users = null;
 		if ( !empty( $users ) ) {
 			foreach ( $users as $user_id => $user_affectations ) {
-				$the_user = $this->show( $user_id );
+				$the_user = $this->get( array( 'id' => $user_id ) );
+				$the_user = $the_user[0];
 				foreach ( $user_affectations as $user ) {
 					if ( !empty( $user[ 'status' ] ) && ( 'valid' == $user[ 'status' ] ) )  {
 						$affected_users[] = array(
 								'idUtilisateur'								=> $this->element_prefix . $user_id,
-								'nomUtilisateur'							=> $the_user->option[ 'user_info' ][ 'lastname' ],
-								'prenomUtilisateur'						=> $the_user->option[ 'user_info' ][ 'firstname' ],
+								'nomUtilisateur'							=> $the_user->lastname,
+								'prenomUtilisateur'						=> $the_user->firstname,
 								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y H:i', $user[ 'start' ][ 'date' ], true ),
 						);
 					}
 					else {
 						$unaffected_users[] = array(
 								'idUtilisateur'									=> $this->element_prefix . $user_id,
-								'nomUtilisateur'								=> $the_user->option[ 'user_info' ][ 'lastname' ],
-								'prenomUtilisateur'							=> $the_user->option[ 'user_info' ][ 'firstname' ],
+								'nomUtilisateur'								=> $the_user->lastname,
+								'prenomUtilisateur'							=> $the_user->firstname,
 								'dateAffectationUtilisateur'		=> mysql2date( 'd/m/Y H:i', $user[ 'start' ][ 'date' ], true ),
 								'dateDesaffectationUtilisateur' => mysql2date( 'd/m/Y H:i', $user[ 'end' ][ 'date' ], true ),
 						);

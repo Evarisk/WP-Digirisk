@@ -270,7 +270,7 @@ class group_duer_class extends singleton_util {
 		/**	Get workunit list for the current group / Récupération de la liste des unités de travail pour le groupement actuel	*/
 		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach( $work_unit_list as $workunit ) {
-			$response[] = workunit_class::g()->generate_workunit_sheet( $workunit->id );
+			$response[] = workunit_sheet_class::g()->generate_workunit_sheet( $workunit->id );
 		}
 
 		$list_id = group_class::g()->get_element_sub_tree_id( $element->id, $list_id );
@@ -281,7 +281,7 @@ class group_duer_class extends singleton_util {
 						$response[] = sheet_groupment_class::g()->generate_sheet( $element['id'] );
 					}
 					foreach( $element['workunit'] as $workunit_id ) {
-						$response[] = workunit_class::g()->generate_workunit_sheet( $workunit_id['id'] );
+						$response[] = workunit_sheet_class::g()->generate_workunit_sheet( $workunit_id['id'] );
 					}
 				}
 				else {

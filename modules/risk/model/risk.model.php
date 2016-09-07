@@ -11,7 +11,7 @@ class risk_model extends post_model {
 					'controller'	=> 'risk_evaluation_class',
 					'field'					=> 'id',
 					'value'					=> 'current_evaluation_id',
-					'custom_field'	=> 'id',
+
 				),
 				'danger_category' => array(
 					'export'			=> true,

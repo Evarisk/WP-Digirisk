@@ -58,7 +58,7 @@ class workunit_sheet_class extends singleton_util {
 		/**	Ajout des utilisateurs dans le document final / Add affected users' into final document	*/
 		$workunit_sheet_details[ 'utilisateursAffectes' ] = $workunit_sheet_details[ 'utilisateursDesaffectes' ] = array( 'type' => 'segment', 'value' => array(), );
 		$affected_users = $unaffected_users = null;
-		if ( !empty( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'user' ] ) ) {
+		if ( !empty( $workunit->user_info[ 'affected_id' ][ 'user' ] ) ) {
 			$user_affectation_for_export = \digi\user_class::g()->build_list_for_document_export( $workunit->user_info[ 'affected_id' ][ 'user' ] );
 			if ( null !== $user_affectation_for_export ) {
 				$workunit_sheet_details[ 'utilisateursAffectes' ] = array(
@@ -77,17 +77,19 @@ class workunit_sheet_class extends singleton_util {
 		/**	Ajout des préconisations affectées a l'unité de travail / Add recommendation affected to workunit	*/
 		$affected_recommendation = array( );
 		$workunit_sheet_details[ 'affectedRecommandation' ] = array( 'type' => 'segment', 'value' => array(), );
-		if ( !empty( $workunit->option[ 'associated_recommendation' ] ) ) {
-			foreach ( $workunit->option[ 'associated_recommendation' ] as $recommendation_id => $recommendation_detail ) {
+		if ( !empty( $workunit->associated_recommendation ) ) {
+			foreach ( $workunit->associated_recommendation as $recommendation_id => $recommendation_detail ) {
 				foreach ( $recommendation_detail as $recommendation ) {
 					if ( 'valid' == $recommendation[ 'status' ] ) {
-						$the_recommendation = recommendation_class::g()->show( $recommendation_id );
+						$the_recommendation = recommendation_class::g()->get( array( 'id' => $recommendation_id ) );
+						$the_recommendation = $the_recommendation[0];
 
 						if ( !empty( $the_recommendation ) && !empty( $the_recommendation->parent_id ) ) {
 							if ( empty( $affected_recommendation ) || empty( $affected_recommendation[ $the_recommendation->id ] ) ) {
 								$the_recommendation_category = recommendation_category_class::g()->get( array( 'id' => $the_recommendation->parent_id ) );
+								$the_recommendation_category = $the_recommendation_category[0];
 
-								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->option[ 'thumbnail_id' ], 'digirisk-element-thumbnail' );
+								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->thumbnail_id, 'digirisk-element-thumbnail' );
 								$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ) );
 								$picture = '';
 								if ( is_file( $picture_final_path ) ) {
@@ -138,7 +140,7 @@ class workunit_sheet_class extends singleton_util {
 		/**	Ajout des personnes présentes lors de l'évaluation dans le document final / Add users' who were present when evaluation have been done into final document	*/
 		$workunit_sheet_details[ 'utilisateursPresents' ] = array( 'type' => 'segment', 'value' => array(), );
 		$affected_users = $unaffected_users = null;
-		if ( !empty( $workunit->option[ 'user_info' ][ 'affected_id' ][ 'evaluator' ] ) ) {
+		if ( !empty( $workunit->user_info[ 'affected_id' ][ 'evaluator' ] ) ) {
 			/**	Récupération de la liste des personnes présentes lors de l'évaluation / Get list of user who were present for evaluation	*/
 			$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $workunit );
 			if ( !empty( $list_affected_evaluator ) ) {
@@ -146,9 +148,9 @@ class workunit_sheet_class extends singleton_util {
 					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
 						if ( 'valid' == $evaluator_affectation_info[ 'affectation_info' ][ 'status' ] ) {
 							$affected_users[] = array(
-								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info[ 'user_info' ]->id,
-								'nomUtilisateur'		=> $evaluator_affectation_info[ 'user_info' ]->user_info[ 'lastname' ],
-								'prenomUtilisateur'	=> $evaluator_affectation_info[ 'user_info' ]->user_info[ 'firstname' ],
+								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['affectation_info']['id'],
+								'nomUtilisateur'		=> $evaluator_affectation_info['user_info']->lastname,
+								'prenomUtilisateur'	=> $evaluator_affectation_info['user_info']->firstname,
 								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info[ 'affectation_info' ][ 'start' ][ 'date' ], true ),
 								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info[ 'affectation_info' ] ),
 							);

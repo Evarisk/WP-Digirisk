@@ -69,6 +69,15 @@ class constructor_data_class extends helper_class {
 								$value = $this->parse_value( $key );
 							}
 
+							if ( !is_array( $key ) && empty( $this->$child_def['value'] ) ) {
+								$value = $this->id;
+							}
+
+							if ( !is_array( $key ) && !empty( $child_def['custom_field'] ) && !empty( $this->$child_def['value'] ) ) {
+								$value = $this->$child_def['custom_field'];
+								$child_def['field'] = $child_def['custom_field'];
+							}
+
 							if ( is_array( $key ) && !empty( $child_def['custom_field'] ) && $this->$child_def['value'] ) {
 								$value = $this->parse_value( $key );
 								$child_def['field'] = $child_def['custom_field'];

@@ -225,13 +225,13 @@ class user_action extends \singleton_util {
 			'exclude' => array( 1 )
 		);
 
-		$list_user_to_assign = user_class::g()->index( $args_where_user );
+		$list_user_to_assign = user_class::g()->get( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( user_class::g()->index( $args_where_user ) );
+		$count_user = count( user_class::g()->get( $args_where_user ) );
 		$number_page = ceil( $count_user / user_class::g()->limit_user );
 
 		if ( !empty( $list_user_to_assign ) ) {

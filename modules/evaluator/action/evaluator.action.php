@@ -172,13 +172,13 @@ class evaluator_action {
 			'exclude' => array( 1 )
 		);
 
-		$list_evaluator_to_assign = evaluator_class::g()->index( $args_where_evaluator );
+		$list_evaluator_to_assign = evaluator_class::g()->get( $args_where_evaluator );
 		//
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( evaluator_class::g()->index( $args_where_evaluator ) );
+		$count_evaluator = count( evaluator_class::g()->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / evaluator_class::g()->limit_evaluator );
 
