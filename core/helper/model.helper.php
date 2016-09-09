@@ -15,7 +15,21 @@ function construct_identifier( $data ) {
 	if ( empty( $data->unique_identifier ) ) {
 		$data->unique_identifier = $controller_name::g()->element_prefix . ( $next_identifier + 1 );
 	}
-	
+
+	return $data;
+}
+
+function get_identifier( $data ) {
+	$list_accronym = get_option( SETTING_OPTION_NAME_ACCRONYM );
+	$list_accronym = json_decode( $list_accronym, true );
+	$model_name = get_class( $data );
+	$controller_name = str_replace( 'model', 'class', $model_name );
+	$element_prefix = $controller_name::g()->element_prefix;
+
+	if ( !empty( $data->unique_identifier ) && !empty( $list_accronym[$element_prefix] ) ) {
+		$data->unique_identifier = str_replace( $element_prefix, $list_accronym[$element_prefix]['to'], $data->unique_identifier );
+	}
+
 	return $data;
 }
 

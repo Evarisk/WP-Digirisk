@@ -7,6 +7,7 @@ class legal_display_class extends post_class {
 	protected $base 			= 'digirisk/legal_display';
 	protected $version 		= '0.1';
 	protected $before_post_function = array( 'construct_identifier' );
+	protected $after_get_function = array( 'get_identifier' );
 
 	public $element_prefix = 'LD';
 

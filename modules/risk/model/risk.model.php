@@ -16,7 +16,7 @@ class risk_model extends post_model {
 				'danger_category' => array(
 					'export'			=> true,
 					'type'				=> 'taxonomy',
-					'controller'	=> 'danger_category_class',
+					'controller'	=> 'category_danger_class',
 					'field'				=> 'post_id',
 				),
 				'comment' => array(

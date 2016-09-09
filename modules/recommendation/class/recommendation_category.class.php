@@ -34,7 +34,8 @@ class recommendation_category_class extends term_class {
 	protected $base = 'digirisk/recommendation-category';
 	protected $version = '0.1';
 	protected $before_post_function = array( 'construct_identifier' );
-	public $element_prefix = 'R';
+	protected $after_get_function = array( 'get_identifier' );
+	public $element_prefix = 'RC';
 
 	/**
 	* Le constructeur

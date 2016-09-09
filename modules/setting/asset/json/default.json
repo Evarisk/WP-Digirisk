@@ -1,0 +1,70 @@
+{
+	"A": {
+		"description": "Identifiant des accidents",
+		"to": "A"
+	},
+	"AL": {
+		"description": "Identifiant de l'affichage légal",
+		"to": "AL"
+	},
+	"CD": {
+		"description": "Identifiant des catégories de danger",
+		"to": "CD"
+	},
+	"CP": {
+		"description": "Identifiant des catégories de préconisation",
+		"to": "CP"
+	},
+	"D": {
+		"description": "Identifiant des danger",
+		"to": "D"
+	},
+	"DOC": {
+		"description": "Identifiant des documents",
+		"to": "DOC"
+	},
+	"E": {
+		"description": "Identifiant des évaluation d'un risque",
+		"to": "E"
+	},
+	"EPI": {
+		"description": "Identifiant des équipement de protection individuelle",
+		"to": "EPI"
+	},
+	"EV": {
+		"description": "Identifiant des évaluateurs",
+		"to": "EV"
+	},
+	"GP": {
+		"description"	: "Identifiant des groupements",
+		"to": "GP"
+	},
+	"ME": {
+		"description": "Identifiant des méthodes d'évaluation",
+		"to": "ME"
+	},
+	"P": {
+		"description": "Identifiant des préconisations",
+		"to": "RE"
+	},
+	"PC": {
+		"description": "Identifiant des produits chimique",
+		"to": "PC"
+	},
+	"R": {
+		"description": "Identifiant des risques",
+		"to": "R"
+	},
+	"T": {
+		"description": "Identifiant des tiers",
+		"to": "T"
+	},
+	"U": {
+		"description": "Identifiant des utilisateurs",
+		"to": "U"
+	},
+	"UT": {
+		"description": "Identifiant des unitées de travail",
+		"to": "UT"
+	}
+}

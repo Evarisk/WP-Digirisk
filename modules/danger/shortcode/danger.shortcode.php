@@ -32,7 +32,7 @@ class danger_shortcode {
 	* @return bool
 	*/
 	public function callback_dropdown_danger( $param ) {
-		$danger_category_list = danger_category_class::g()->get( array( ), array( 'danger' ) );
+		$danger_category_list = category_danger_class::g()->get( array( ), array( 'danger' ) );
 		require( DANGER_VIEW_DIR . '/dropdown.view.php' );
 
 	}

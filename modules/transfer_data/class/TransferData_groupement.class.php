@@ -212,9 +212,9 @@ class wpdigi_transferdata_society_class extends \singleton_util {
 					);
 					$new_danger_category = $wpdb->get_row( $query );
 					if ( !empty( $new_danger_category ) && !empty( $new_danger_category->term_id )  ) {
-						$association = wp_set_object_terms( $wp_risk->id, (int)$new_danger_category->term_id, \danger_category_class::g()->get_taxonomy() );
+						$association = wp_set_object_terms( $wp_risk->id, (int)$new_danger_category->term_id, \category_danger_class::g()->get_taxonomy() );
 						/**	Log creation	*/
-						\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category %s - %d have been associated to risk', 'wp-digi-dtrans-i18n' ), \danger_category_class::g()->get_taxonomy(), (int)$new_danger_category->term_id ), ), 0 );
+						\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-risk-association', array( 'object_id' => $wp_risk->id, 'message' => sprintf( __( 'Danger category %s - %d have been associated to risk', 'wp-digi-dtrans-i18n' ), \category_danger_class::g()->get_taxonomy(), (int)$new_danger_category->term_id ), ), 0 );
 
 						if ( !is_wp_error( $association ) ) {
 							$danger_category_thumbnail = get_term_meta( $new_danger_category->term_id, '_thumbnail_id', true );

@@ -52,7 +52,7 @@ class TransferData_components_class extends \singleton_util {
 				/**	Définition de la structure d'une catégorie de danger / Define the danger category structure		*/
 				$wp_danger_category_definition = array(
 					'id' => null,
-					'type' => \danger_category_class::g()->get_taxonomy(),
+					'type' => \category_danger_class::g()->get_taxonomy(),
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_danger_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => $eva_danger_category->description,
@@ -68,14 +68,14 @@ class TransferData_components_class extends \singleton_util {
 					),
 				);
 
-				$wp_danger_category = \danger_category_class::g()->create( $wp_danger_category_definition );
+				$wp_danger_category = \category_danger_class::g()->create( $wp_danger_category_definition );
 
 				/**	Enregistrement des données complémentaires pour les catégories de danger et création des danger pour la catégorie / Save complementary datas for danger categories and create danger of category	*/
 				if ( !empty( $wp_danger_category->id ) ) {
 					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_DANGER, $eva_danger_category->id );
 					$wp_danger_category->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
 					$wp_danger_category->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
-					$wp_danger_category = \danger_category_class::g()->update( $wp_danger_category );
+					$wp_danger_category = \category_danger_class::g()->update( $wp_danger_category );
 
 					$current_transfer_state[ 'danger_category' ][] = $eva_danger_category->id;
 					$eva_danger_category_transfered++;
@@ -95,7 +95,7 @@ class TransferData_components_class extends \singleton_util {
 							/**	Définition de la structure d'un danger / Define the danger structure		*/
 							$wp_danger_definition = array(
 								'id' 								=> null,
-								'type' 							=> \danger_category_class::g()->get_taxonomy(),
+								'type' 							=> \category_danger_class::g()->get_taxonomy(),
 								'term_taxonomy_id' 	=> null,
 								'name' 							=> html_entity_decode( $eva_danger->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' 			=> $eva_danger->description,

@@ -7,7 +7,7 @@ class group_class extends post_class {
 	protected $meta_key    					= '_wpdigi_society';
 	public $element_prefix 					= 'GP';
 	protected $before_post_function = array( 'construct_identifier', 'convert_date' );
-	protected $after_get_function = array( 'order_risk' );
+	protected $after_get_function = array( 'order_risk', 'get_identifier' );
 
 	/**
 	 * Constructeur

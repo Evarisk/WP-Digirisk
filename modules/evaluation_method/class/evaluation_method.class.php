@@ -18,6 +18,7 @@ class evaluation_method_class extends term_class {
 	protected $base = 'digirisk/evaluation-method';
 	protected $version = '0.1';
 	public $element_prefix = 'ME';
+	protected $after_get_function = array( 'get_identifier' );
 
 	public $list_scale = array(
 		1 => 0,

@@ -10,6 +10,7 @@ class third_class extends post_class {
 	protected $version = '0.1';
 
 	public $element_prefix = 'T';
+	protected $after_get_function = array( 'get_identifier' );
 
 	/**
 	* Le constructeur

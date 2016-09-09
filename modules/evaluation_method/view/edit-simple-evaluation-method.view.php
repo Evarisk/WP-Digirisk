@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <input type="hidden" class="risk-level" name="risk_evaluation_level" value="<?php echo $scale; ?>" />
 
 <span data-target="<?php echo $target; ?>" data-parent="form-risk" class="digi-toggle wp-digi-risk-list-column-cotation" >
-	<div class="wp-digi-risk-level-<?php echo $scale; ?> wp-digi-risk-level-new">&nbsp;</div>
+	<div class="wp-digi-risk-level-<?php echo $scale; ?> wp-digi-risk-level-new"></div>
 	<ul class="wp-digi-risk-cotation-chooser digi-popup <?php echo ( $risk_id !== 0 ) ? 'simple': ''; ?>" style="display: none;" >
 		<li data-level="1" class="wp-digi-risk-level-1" >&nbsp;</li>
 		<li data-level="2" class="wp-digi-risk-level-2" >&nbsp;</li>

@@ -162,7 +162,7 @@ class import_class extends singleton_util {
 
 	public function create_danger_category( $risk, &$danger_category_json ) {
 		if ( empty( $danger_category_json['id'] ) ) {
-			$danger_category = danger_category_class::g()->update( $danger_category_json );
+			$danger_category = category_danger_class::g()->update( $danger_category_json );
 			$risk->taxonomy['digi-danger-category'][] = $danger_category->id;
 			$risk = risk_class::g()->update( $risk );
 			$danger_category_json['id'] = $danger_category->id;
@@ -170,7 +170,7 @@ class import_class extends singleton_util {
 			$this->check_index();
 		}
 		else {
-			$danger_category = danger_category_class::g()->get( array( 'include' => $danger_category_json['id'] ) );
+			$danger_category = category_danger_class::g()->get( array( 'include' => $danger_category_json['id'] ) );
 			$danger_category = $danger_category[0];
 		}
 

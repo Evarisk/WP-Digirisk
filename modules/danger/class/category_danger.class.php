@@ -12,7 +12,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class danger_category_class extends term_class {
+class category_danger_class extends term_class {
 	/**
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
@@ -34,7 +34,7 @@ class danger_category_class extends term_class {
 	protected $version = '0.1';
 
 	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array();
+	protected $after_get_function = array( 'get_identifier' );
 	public $element_prefix = 'CD';
 
 	/**
@@ -76,4 +76,4 @@ class danger_category_class extends term_class {
 	}
 }
 
-danger_category_class::g();
+category_danger_class::g();

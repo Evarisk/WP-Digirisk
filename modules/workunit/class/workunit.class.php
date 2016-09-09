@@ -3,6 +3,7 @@
 class workunit_class extends post_class {
 	public $element_prefix = 'UT';
 	protected $before_post_function = array( 'construct_identifier' );
+	protected $after_get_function = array( 'get_identifier' );
 	protected $model_name   = 'workunit_model';
 	protected $post_type    = WPDIGI_STES_POSTTYPE_SUB;
 	protected $meta_key    	= '_wp_workunit';

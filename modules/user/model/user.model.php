@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier contenant le modèle pour les utilisateurs / File containing the main user model
  *
@@ -12,7 +14,7 @@
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_user_mdl_01 extends user_model {
+class user_model extends \user_model {
 
 	/**
 	* Construit le modèle d'un utilisateur / Fill the user model

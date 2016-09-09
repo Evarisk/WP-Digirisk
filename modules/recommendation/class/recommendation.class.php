@@ -22,8 +22,9 @@ class recommendation_class extends term_class {
 	protected $base = 'digirisk/recommendation';
 	protected $version = '0.1';
 
-	public $element_prefix = 'PA';
+	public $element_prefix = 'RE';
 	protected $before_post_function = array( 'construct_identifier' );
+	protected $after_get_function = array( 'get_identifier' );
 	public $last_affectation_index_key = '_wpdigi_last_recommendation_affectation_unique_key';
 
 	/**

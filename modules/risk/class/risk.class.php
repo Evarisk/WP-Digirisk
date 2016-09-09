@@ -18,6 +18,7 @@ class risk_class extends post_class {
 	protected $post_type    = 'digi-risk';
 	protected $meta_key    	= '_wpdigi_risk';
 	protected $before_post_function = array( 'construct_identifier' );
+	protected $after_get_function = array( 'get_identifier' );
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
 	protected $base = 'digirisk/risk';
