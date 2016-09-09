@@ -71,8 +71,9 @@ class export_action {
 		  }
 		}
 
+		$current_time = current_time( 'YmdHis' );
 		$filename = 'global';
-		$export_base = $this->export_directory . current_time( 'YmdHis' ) . '_' . $filename . '_export';
+		$export_base = $this->export_directory . $current_time . '_' . $filename . '_export';
 		$json_filename = $export_base . '.json';
 		file_put_contents( $json_filename, json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
 
@@ -83,7 +84,7 @@ class export_action {
 		/** Suppression du fichier json après l'enregistrement dans le fichier zip / Delete the json file after zip saving */
 		@unlink( $json_filename );
 		$upload_dir = wp_upload_dir();
-		$response['url_to_file'] = $upload_dir['baseurl'] . '/digirisk/export/' . current_time( 'YmdHis' ) . '_' . $filename . '_export.zip';
+		$response['url_to_file'] = $upload_dir['baseurl'] . '/digirisk/export/' . $current_time . '_' . $filename . '_export.zip';
 		$response['filename'] = current_time( 'YmdHis' ) . '_' . $filename . '_export.zip';
 		wp_send_json_success( $response );
 	}
