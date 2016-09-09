@@ -42,9 +42,8 @@ var digi_workunit = {
 			},
 			'success' : function( response, status, xhr, $form ) {
 				digi_workunit.$( '.wp-digi-societytree-left-container' ).removeClass( "wp-digi-bloc-loading" );
-				digi_workunit.$( ".wp-digi-list-workunit" ).prepend( response.output );
-				digi_workunit.$( ".wp-digi-workunit-" + response.element.id + " .wp-digi-global-name" ).click();
-				digi_workunit.$( "#wpdigi-workunit-creation-form input[type='text']" ).val( '' );
+				digi_workunit.$( ".wp-digi-list-workunit" ).replaceWith( response.data.template );
+				digi_workunit.$( ".wp-digi-workunit-" + response.data.id + " .wp-digi-global-name" ).click();
 				window.digi_search.event( digi_workunit.$ );
 			},
 		});
