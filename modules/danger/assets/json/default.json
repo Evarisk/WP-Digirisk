@@ -163,12 +163,12 @@
 	}
 },
 {
-	"name": "Electricité",
+	"name": "Électricité",
 	"name_thumbnail": "electricite_PictoCategorie.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
-			"name": "Divers electricité",
+			"name": "Divers électricité",
 			"option": {
 				"status": "valid"
 			}
@@ -194,7 +194,7 @@
 	"option": {
 		"status": "valid",
 		"danger": [ {
-			"name": "Divers incendie, explostion",
+			"name": "Divers incendie, explosion",
 			"option": {
 				"status": "valid"
 			}
