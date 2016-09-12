@@ -25,6 +25,8 @@ before_script:
   - sudo apt-get install npm
   - sudo npm config set registry https://registry.npmjs.org/
   - sudo npm update
+  - sudo npm -v
+  - sudo node -v
   - sudo npm install nightmare
 
 script:
