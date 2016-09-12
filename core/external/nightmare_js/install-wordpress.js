@@ -3,7 +3,7 @@ module.exports = function() {
 		nightmare
 			.goto('http://localhost/wp-login.php')
 			.evaluate(function() {
-				console.log(document.querySelector('body').innerHTML));
+				console.log(document.querySelector('body').innerHTML);
 			})
 			.wait('#setup')
 			.click('#language-continue')
