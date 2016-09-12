@@ -8,6 +8,7 @@ module.exports = function() {
 			.end()
 			.then(function(result) {
 				// nightmare
+				console.log(result);
 			})
 			.catch(function() {
 
