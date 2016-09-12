@@ -11,17 +11,12 @@ install:
   - sudo apt-get install -y apache2
 
 before_script:
-  - export WP_DEVELOP_DIR=/tmp/wordpress/
-  - mkdir -p $WP_DEVELOP_DIR
-
-  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
-
+  - git clone https://github.com/WordPress/WordPress.git
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
+  - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
   - sudo service apache2 reload
 
-  - ls
-  - cd $WP_DEVELOP_DIR
   - ls
   - cd ./wp-content/plugins/
   - git clone https://github.com/Evarisk/Digirisk.git
