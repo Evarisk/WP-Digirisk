@@ -1,4 +1,3 @@
-env:
-  - TRAVIS_NODE_VERSION="6.5.0"
-
-script: node -v
+script: 
+  - nvm use 6.5.0
+  - node -v
