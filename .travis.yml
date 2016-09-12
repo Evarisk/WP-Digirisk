@@ -22,8 +22,8 @@ before_script:
 
 script:
   - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
-  - npm install nightmare
-  - DEBUG=nightmare* node index.js
+  - sudo npm install nightmare
+  - sudo DEBUG=nightmare* node index.js
 
 matrix:
   fast_finish: true
