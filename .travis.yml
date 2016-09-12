@@ -22,6 +22,6 @@ before_script:
   - git clone https://github.com/Evarisk/Digirisk.git
 
 script:
-  - ls
+  - cd Digirisk/core/external/nightmare_js/
   - npm install nightmare
-  - node ./Digirisk/core/external/nightmare_js/index.js
+  - node index.js

@@ -5,6 +5,8 @@ var install_wordpress = require('./install-wordpress');
 var install_digirisk = require('./install-digirisk');
 var user = require('./user');
 
+console.log('Nightmare Test');
+
 var nigthmare = Nightmare({
 	show:false,
 	typeInterval: 50,
