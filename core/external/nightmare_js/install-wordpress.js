@@ -1,7 +1,7 @@
 module.exports = function() {
 	return function (nightmare) {
 		nightmare
-			.goto('http://127.0.0.1/wordpress/wp-login.php')
+			.goto('http://localhost/wordpress/wp-login.php')
 			.wait('#setup')
 			.click('#language-continue')
 			.wait(3000)
