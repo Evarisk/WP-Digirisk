@@ -1,7 +1,5 @@
 module.exports = function() {
 	return function (nightmare) {
-		console.log('here');
-		console.log(nightmare);
 		nightmare
 			.goto('http://localhost/wp-login.php')
 			.evaluate(function() {
@@ -13,8 +11,8 @@ module.exports = function() {
 				console.log('HERE');
 				console.log(result);
 			})
-			.catch(function() {
-
+			.catch(function(err) {
+				console.log(err);
 			})
 
 	};
