@@ -6,12 +6,14 @@ var install_digirisk = require('./install-digirisk');
 var user = require('./user');
 
 var nigthmare = Nightmare({
-	show:false,
+	show:true,
 	typeInterval: 50,
 	webPreferences: {
     preload: path.resolve("custom-script.js")
   }
 });
+
+console.log('Test NIGHTMARE');
 
 nigthmare
 	.use(install_wordpress())
