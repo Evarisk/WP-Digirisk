@@ -1,5 +1,7 @@
 module.exports = function() {
 	return function (nightmare) {
+		console.log('here');
+		console.log(nightmare);
 		nightmare
 			.goto('http://localhost/wp-login.php')
 			.evaluate(function() {
