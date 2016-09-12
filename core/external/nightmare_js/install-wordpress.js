@@ -6,6 +6,7 @@ module.exports = function() {
 			.click('#language-continue')
 			.wait(3000)
 			.evaluate(function() {
+				console.log(document.querySelector('input[name="pass1-text"]').value);
 				document.querySelector('input[name="pass1-text"]').value = '';
 			})
 			.wait(1000)
