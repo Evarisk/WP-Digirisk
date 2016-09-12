@@ -19,7 +19,7 @@ install:
 
 before_script:
   - ls
-  - cd /etc/apache2/sites-available
+  - cd /etc/apache2/sites-available/default/
   - ls
   - cd /var/www
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
