@@ -11,7 +11,8 @@ install:
   - sudo apt-get install -y apache2
 
 before_script:
-  - git clone https://github.com/WordPress/WordPress.git
+  - cd /var/www
+  - ls
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
   - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
