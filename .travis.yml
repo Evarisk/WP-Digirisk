@@ -1,5 +1,23 @@
+language: php
+
+php:
+  - "5.5"
+
+env:
+  -WP_VERSION=master WP_MULTISITE=0
+
 install:
   - nvm install 6.5.0
+  - sudo apt-get install -y apache2
 
+before_script:
+  - export WP_DEVELOP_DIR=/tmp/wordpress/
+  - mkdir -p $WP_DEVELOP_DIR
+
+  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
+
+  - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
+
+  - sudo service apache2 reload
 script:
-  -node -v
+  - node -v
