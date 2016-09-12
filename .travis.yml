@@ -25,6 +25,10 @@ before_script:
   - sudo apt-get install npm
   - sudo npm config set registry https://registry.npmjs.org/
   - sudo npm update
+  - sudo ln -s /usr/local/bin/node /usr/bin/node
+  - sudo ln -s /usr/local/lib/node /usr/lib/node
+  - sudo ln -s /usr/local/bin/npm /usr/bin/npm
+  - sudo ln -s /usr/local/bin/node-waf /usr/bin/node-waf
   - sudo npm -v
   - sudo node -v
   - sudo npm install nightmare
