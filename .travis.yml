@@ -6,6 +6,8 @@ php:
 env:
   -WP_VERSION=master WP_MULTISITE=0
 
+sudo: true
+
 install:
   - nvm install 6.5.0
   - sudo apt-get install -y apache2
@@ -20,12 +22,10 @@ before_script:
   - sudo mkdir /var/www/wp-content/plugins/digirisk/
   - sudo git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
   - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
-  - sudo -s
   - npm install nightmare
 
 script:
-
-  - sudo DEBUG=nightmare* node index.js
+  - DEBUG=nightmare* node index.js
 
 matrix:
   fast_finish: true
