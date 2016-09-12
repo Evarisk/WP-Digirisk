@@ -1,7 +1,10 @@
 module.exports = function() {
 	return function (nightmare) {
 		nightmare
-			.goto('http://localhost/wordpress/wp-login.php')
+			.goto('http://localhost/wp-login.php')
+			.evaluate(function() {
+				console.log(document.querySelector('body').innerHTML));
+			})
 			.wait('#setup')
 			.click('#language-continue')
 			.wait(3000)
