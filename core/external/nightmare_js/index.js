@@ -6,6 +6,7 @@ var install_digirisk = require('./install-digirisk');
 var user = require('./user');
 
 console.log('Nightmare Test');
+console.error('no');
 
 var nigthmare = Nightmare({
 	show:false,
