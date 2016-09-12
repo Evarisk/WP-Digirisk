@@ -1,1 +1,2 @@
-script: node -v
+script:
+  - apt-get install -y nodejs
