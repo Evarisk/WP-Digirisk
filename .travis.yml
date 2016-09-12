@@ -1,2 +1,4 @@
-script:
-  - apt-get install -y nodejs
+env:
+  - TRAVIS_NODE_VERSION="6.5.0"
+
+script: node -v
