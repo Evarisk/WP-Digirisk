@@ -1,23 +1,17 @@
 module.exports = function() {
 	return function (nightmare) {
 		nightmare
-			.goto('http://localhost/wp-login.php')
+			.goto('http://localhost/wordpress/wp-login.php')
 			.evaluate(function() {
-				console.log(document.querySelector('body').innerHTML);
+				return document.querySelector('body').innerHTML;
 			})
-			.wait('#setup')
-			.click('#language-continue')
-			.wait(3000)
-			.evaluate(function() {
-				console.log(document.querySelector('input[name="pass1-text"]').value);
-				document.querySelector('input[name="pass1-text"]').value = '';
+			.end()
+			.then(function(result) {
+				// nightmare
 			})
-			.wait(1000)
-			.type('input[name="weblog_title"]', 'A')
-			.type('input[name="user_name"]', 'a')
-			.type('input[name="pass1-text"]', 'a')
-			.click('.pw-checkbox')
-			.type('input[name="admin_email"]', 'a@a.com')
-			.click('input[type="submit"]')
+			.catch(function() {
+
+			})
+
 	};
 };

@@ -15,7 +15,7 @@ var nigthmare = Nightmare({
 
 nigthmare
 	.use(install_wordpress())
-	.wait(5000)
+	.wait(50000)
 	.use(login())
 	.wait(3000)
 	.use(install_digirisk())
