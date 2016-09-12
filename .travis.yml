@@ -1,5 +1,10 @@
 language: node_js
 
+addons:
+  apt:
+    packages:
+      - xvfb
+
 node_js:
   - "6"
 
@@ -7,6 +12,9 @@ env:
   -WP_VERSION=master WP_MULTISITE=0
 
 install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
   - sudo apt-get install -y apache2
 
 before_script:
