@@ -20,7 +20,9 @@ before_script:
 
   - sudo service apache2 reload
 
+  - ls
   - cd $WP_DEVELOP_DIR
+  - ls
   - cd ./wp-content/plugins/
   - git clone https://github.com/Evarisk/Digirisk.git
 
