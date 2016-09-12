@@ -10,6 +10,9 @@ install:
   - sudo apt-get install -y apache2
 
 before_script:
+  - ls
+  - cd /etc/apache2/
+  - ls
   - cd /var/www
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
   - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
