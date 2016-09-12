@@ -1,7 +1,8 @@
 module.exports = function() {
 	return function (nightmare) {
 		nightmare
-			.goto('http://localhost/wordpress/wp-login.php')
+			.goto('http://localhost/wp-login.php')
+			.wait()
 			.evaluate(function() {
 				return document.querySelector('body').innerHTML;
 			})
