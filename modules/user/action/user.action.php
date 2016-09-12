@@ -48,7 +48,7 @@ class user_action extends \singleton_util {
 
 		ob_start();
 		require( INSTALLER_VIEW . '/list-item.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'template' => ob_get_clean(), 'id' => $user->id ) );
 	}
 
 	public function ajax_load_user() {

@@ -19,5 +19,11 @@ before_script:
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
   - sudo service apache2 reload
+
+  - cd $WP_DEVELOP_DIR
+  - cd ./wp-content/plugins/
+  - git clone https://github.com/Evarisk/Digirisk.git
+
 script:
-  - node -v
+  - ls
+  - node ./Digirisk/core/external/nightmare_js/index.js
