@@ -16,10 +16,13 @@ before_script:
   - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
   - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
+  - sudo rm index.html
+  - git clone https://github.com/WordPress/WordPress.git ./
+  - ls
   - sudo service apache2 reload
 
   - ls
-  - cd ./WordPress/wp-content/plugins/
+  - cd ./wp-content/plugins/
   - git clone https://github.com/Evarisk/Digirisk.git
 
 script:
