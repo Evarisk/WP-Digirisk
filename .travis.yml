@@ -6,8 +6,6 @@ node_js:
 env:
   -WP_VERSION=master WP_MULTISITE=0
 
-sudo: true
-
 install:
   - sudo apt-get install -y apache2
 
@@ -17,6 +15,7 @@ before_script:
   - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
   - sudo rm index.html
   - sudo git clone https://github.com/WordPress/WordPress.git /var/www
+  - sudo chmod u+rwx /var/www/
   - sudo service apache2 reload
   - sudo mkdir /var/www/wp-content/plugins/digirisk/
   - sudo git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
