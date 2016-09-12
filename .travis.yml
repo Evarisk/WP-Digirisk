@@ -17,8 +17,8 @@ before_script:
   - sudo rm index.html
   - sudo git clone https://github.com/WordPress/WordPress.git /var/www
   - sudo service apache2 reload
-  - mkdir /var/www/wp-content/plugins/digirisk/
-  - git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
+  - sudo mkdir /var/www/wp-content/plugins/digirisk/
+  - sudo git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
 
 script:
   - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
