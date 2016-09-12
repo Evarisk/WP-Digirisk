@@ -21,6 +21,7 @@ before_script:
   - sudo git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
   - sudo chmod -R 777 /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
   - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
+  - npm i -g electron-prebuilt
   - npm install nightmare
 
 script:
