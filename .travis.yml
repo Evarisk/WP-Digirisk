@@ -24,7 +24,7 @@ before_script:
 script:
   - cd Digirisk/core/external/nightmare_js/
   - npm install nightmare
-  - DEBUG=nightmare node index.js
+  - DEBUG=* node index.js
 
 matrix:
   fast_finish: true
