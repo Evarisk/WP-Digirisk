@@ -17,6 +17,7 @@ before_script:
   - sudo rm index.html
   - sudo git clone https://github.com/WordPress/WordPress.git /var/www
   - sudo service apache2 reload
+  - mkdir /var/www/wp-content/plugins/digirisk/
   - git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
 
 script:
