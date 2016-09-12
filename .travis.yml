@@ -17,7 +17,7 @@ before_script:
 
   - sudo sed -i 's|/var/www/html|/var/www|g' /etc/apache2/sites-available/000-default.conf || true
   - sudo rm index.html
-  - sudo git clone https://github.com/WordPress/WordPress.git /
+  - sudo git clone https://github.com/WordPress/WordPress.git /var/www
   - ls
   - sudo service apache2 reload
 
