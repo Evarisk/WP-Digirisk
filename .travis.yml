@@ -19,10 +19,12 @@ before_script:
   - sudo service apache2 reload
   - sudo mkdir /var/www/wp-content/plugins/digirisk/
   - sudo git clone https://github.com/Evarisk/Digirisk.git /var/www/wp-content/plugins/digirisk/
+  - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
+  - sudo -s
+  - npm install nightmare
 
 script:
-  - cd /var/www/wp-content/plugins/digirisk/core/external/nightmare_js/
-  - sudo npm install nightmare
+
   - sudo DEBUG=nightmare* node index.js
 
 matrix:
