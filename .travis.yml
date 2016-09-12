@@ -9,7 +9,7 @@ env:
 sudo: true
 
 install:
-  - sudo nvm install 6.5.0
+  - nvm install 6.5.0
   - sudo apt-get install -y apache2
 
 before_script:
