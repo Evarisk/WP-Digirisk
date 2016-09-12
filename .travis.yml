@@ -18,7 +18,7 @@ before_script:
   - sudo service apache2 reload
 
   - ls
-  - cd ./wp-content/plugins/
+  - cd ./WordPress/wp-content/plugins/
   - git clone https://github.com/Evarisk/Digirisk.git
 
 script:
