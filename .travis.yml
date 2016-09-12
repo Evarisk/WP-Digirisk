@@ -23,4 +23,5 @@ before_script:
 
 script:
   - ls
+  - npm install nightmare
   - node ./Digirisk/core/external/nightmare_js/index.js
