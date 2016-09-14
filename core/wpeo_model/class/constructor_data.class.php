@@ -144,7 +144,9 @@ class constructor_data_class extends helper_class {
 
 		if ( !empty( $key ) ) {
 		  foreach ( $key as $k ) {
-				$value = $value[$k];
+				if ( !empty( $value ) && !empty( $value[$k] ) ) {
+					$value = $value[$k];
+				}
 		  }
 		}
 

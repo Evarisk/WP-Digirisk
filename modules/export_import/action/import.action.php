@@ -72,6 +72,9 @@ class import_action extends singleton_util {
 
 	public function fast_response( $end = false ) {
 		import_action::$response['end'] = $end;
+		if ( import_action::$response['end'] ) {
+			tools_class::g()->reset_method_evaluation();
+		}
 		wp_send_json_success( import_action::$response );
 	}
 }

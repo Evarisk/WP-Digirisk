@@ -54,7 +54,7 @@ class export_action {
 		$response = array(
 			'message' => __( 'Digirisk datas exported successfully', 'digirisk' ),
 		);
-		//
+
 		$list_group = group_class::g()->get(
 			array(
 				'posts_per_page' => 5,
@@ -64,12 +64,16 @@ class export_action {
 			), array( 'list_group', 'list_workunit', 'list_risk', 'danger', 'danger_category', 'comment', 'evaluation', 'evaluation_method' ) );
 		$list_data_exported = array();
 
+
+
 		if ( !empty( $list_group ) ) {
 		  foreach ( $list_group as $element ) {
 				$element_to_export = new wpeo_export_class( $element );
 				$list_data_exported[] = $element_to_export->export();
 		  }
 		}
+
+
 
 		$current_time = current_time( 'YmdHis' );
 		$filename = 'global';

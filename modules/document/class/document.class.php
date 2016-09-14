@@ -67,6 +67,7 @@ class document_class extends post_class {
 			}
 		}
 
+
 		return $array_model;
 	}
 
@@ -100,7 +101,7 @@ class document_class extends post_class {
 		$list_document = array();
 
 		if ( !empty( $list_document_id ) ) {
-			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ) );
+			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( false ) );
 		}
 
 		require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', "printed", "list" ) );
@@ -290,7 +291,7 @@ class document_class extends post_class {
 	}
 
 	public function get_document_path( $element ) {
-		$society = society_class::g()->show_by_type( $element->parent_id );
+		$society = society_class::g()->show_by_type( $element->parent_id, array( false ) );
 		$path = $this->get_digirisk_dir_path( 'baseurl' );
 		$path .= "/" . $society->type . "/" . $society->id . "/";
 		$path .= $element->title;

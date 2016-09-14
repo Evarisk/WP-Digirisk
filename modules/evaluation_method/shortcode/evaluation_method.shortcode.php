@@ -70,6 +70,7 @@ class evaluation_method_shortcode {
 
 		if ( !empty( $term_evarisk ) ) {
 			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
+
 			$risk = !empty( $risk[0] ) ? $risk[0] : array();
 			$evarisk_evaluation_method = evaluation_method_class::g()->get( array( 'id' => $term_evarisk->term_id ) );
 			$evarisk_evaluation_method = $evarisk_evaluation_method[0];

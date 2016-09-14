@@ -26,7 +26,7 @@ var digi_evaluation_method = {
 		var div = span.find( 'div' );
 		var div_element = div[0];
 		div_element.className = div_element.className.replace( /wp-digi-risk-level-[0-4]/, 'wp-digi-risk-level-' + level );
-		div.html( '' );
+		div.html( digi_evaluation_method.$( element ).text() );
 
 		digi_evaluation_method.$( element ).closest( 'form' ).find( '.risk-level' ).val( level );
 		digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( method_evaluation_id );
@@ -62,6 +62,7 @@ var digi_evaluation_method = {
 	      digi_evaluation_method.$( '.wpdigi-method-evaluation-render' ).hide();
 
 	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( digi_evaluation_method.$( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
+	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-level-new' ).html( response.data.equivalence );
 				digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-new wp-digi-risk-level-' + response.data.scale );
 	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
 				digi_evaluation_method.$( element ).removeClass( 'wp-digi-loading' );

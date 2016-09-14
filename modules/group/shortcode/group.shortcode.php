@@ -43,8 +43,7 @@ class group_shortcode {
 	*/
 	public function callback_sheet( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id );
-
+    $element = society_class::g()->show_by_type( $element_id, array() );
 		document_class::g()->display_document_list( $element );
 	}
 

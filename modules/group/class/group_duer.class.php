@@ -206,6 +206,15 @@ class group_duer_class extends singleton_util {
 		$list_risk = group_class::g()->get_element_tree_risk( $element );
 		$risk_per_element = array();
 
+		if ( count( $list_risk ) > 1 ) {
+			usort( $list_risk, function( $a, $b ) {
+				if( $a['quotationRisque'] == $b['quotationRisque'] ) {
+					return 0;
+				}
+				return ( $a['quotationRisque'] > $b['quotationRisque'] ) ? -1 : 1;
+			} );
+		}
+
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $risk ) {
 				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] : '';
