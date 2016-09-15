@@ -30,6 +30,10 @@ if ( $risk != null ):
 				<?php endif;?>
 				<!-- Ajouter un commentaire -->
 				<li>
+					<?php
+					$userdata = get_userdata( get_current_user_id() );
+					echo !empty( $userdata->display_name ) ? $userdata->display_name : '';
+					?>
 					<input type="text" class="wpdigi_date" name="list_comment[0][comment_date]" value="<?php echo date( 'd/m/Y' ); ?>" /> :
 					<input type="text" class="wpdigi_comment" name="list_comment[0][comment_content]" value="" />
 				</li>

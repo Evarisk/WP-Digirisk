@@ -113,7 +113,9 @@ class society_action {
 		$society->status = 'trash';
 		society_class::g()->update_by_type( $society );
 
-		wp_send_json_success();
+		ob_start();
+		society_class::g()->display_dashboard();
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
 

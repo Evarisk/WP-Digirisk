@@ -39,7 +39,6 @@ class risk_evaluation_comment_action {
 		  foreach ( $list_comment as $key => $element ) {
 				if ( !empty( $element['comment_content'] ) ) {
 					$data = array(
-						'author_id' => get_current_user_id(),
 						'parent_id' => $risk_evaluation_id,
 						'post_id' => $risk_id,
 						'status' => '-34070',
@@ -49,6 +48,10 @@ class risk_evaluation_comment_action {
 
 					if ( !empty( $element['comment_id'] ) ) {
 						$data['id'] = (int)  $element['comment_id'];
+					}
+					else {
+						$data['author_id'] = get_current_user_id();
+
 					}
 
 					risk_evaluation_comment_class::g()->update( $data );

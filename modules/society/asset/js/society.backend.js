@@ -88,6 +88,7 @@ var digi_society = {
 
 			digi_society.$.post( window.ajaxurl, data, function( response ) {
 				digi_society.$( ".wp-digi-societytree-main-container" ).removeClass( "wp-digi-bloc-loading" );
+				digi_society.$( ".wp-digi-societytree-main-container" ).replaceWith( response.data.template );
 			} );
 		}
 	}
