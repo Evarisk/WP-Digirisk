@@ -76,7 +76,7 @@ class group_action {
 		echo do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
 		$template_right = ob_get_clean();
 
-		wp_send_json_success( array( 'template_left' => $template_left, 'template_right' => $template_right ) );
+		wp_send_json_success( array( 'society' => $society, 'template_left' => $template_left, 'template_right' => $template_right ) );
 	}
 
 	/**

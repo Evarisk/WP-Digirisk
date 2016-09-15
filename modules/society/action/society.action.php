@@ -100,7 +100,7 @@ class society_action {
 		ob_start();
 		$element_id = $society->id;
 		require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
-		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
+		wp_send_json_success( array( 'society' => $society, 'template_left' => ob_get_clean() ) );
 	}
 
 	/**

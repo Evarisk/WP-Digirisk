@@ -63,7 +63,7 @@ class recommendation_action {
 			'unique_key' 		=> $unique_identifier,
 			'unique_identifier' => $this->unique_identifier . $unique_identifier,
 			'efficiency' 		=> 0,
-			'comment'			=> sanitize_text_field( $_POST['recommendation_comment'] ),
+			'comment'			=> sanitize_text_field( stripslashes($_POST['recommendation_comment'] ) ),
 			'type'				=> '',
 			'affectation_date'	=> current_time( 'mysql' ),
 			'last_update_date'	=> current_time( 'mysql' ),
