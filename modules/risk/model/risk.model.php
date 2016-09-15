@@ -9,7 +9,7 @@ class risk_model extends post_model {
 					'export'			=> true,
 					'type' 				=> 'object',
 					'controller'	=> 'risk_evaluation_class',
-					'field'					=> 'id',
+					'field'					=> 'comment__in',
 					'value'					=> 'current_evaluation_id',
 
 				),

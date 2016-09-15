@@ -71,7 +71,7 @@ var file_management = {
     file_management.$( element ).find( 'input[name="file_id"]' ).val( selected_JSON.id );
   },
 
-  associate_file( selected_file_id ) {
+  associate_file: function( selected_file_id ) {
 
 		file_management.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
     var data = {
