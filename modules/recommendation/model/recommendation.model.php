@@ -20,7 +20,8 @@ class recommendation_model extends term_model {
 			),
 			'thumbnail_id'	=> array(
 				'type'			=> 'integer',
-				'meta_type'	=> 'multiple',
+				'meta_type'	=> 'single',
+				'field'			=> '_thumbnail_id',
 			)
 		) );
 
