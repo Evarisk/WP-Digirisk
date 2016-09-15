@@ -48,10 +48,10 @@ class risk_evaluation_comment_action {
 
 					if ( !empty( $element['comment_id'] ) ) {
 						$data['id'] = (int)  $element['comment_id'];
+						$data['author_id'] = (int)  $element['author_id'];
 					}
 					else {
 						$data['author_id'] = get_current_user_id();
-
 					}
 
 					risk_evaluation_comment_class::g()->update( $data );
