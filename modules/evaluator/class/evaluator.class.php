@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluator_class extends user_class {
-	protected $model_name 	= 'wpdigi_user_mdl_01';
+	protected $model_name 	= '\digi\user_model';
 	protected $meta_key		= '_wpeo_user_info';
 	protected $after_get_function = array( '\digi\get_hiring_date', 'get_identifier' );
 

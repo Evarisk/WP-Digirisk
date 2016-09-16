@@ -234,6 +234,7 @@ class group_class extends post_class {
 				'niveauRisque'			=> $risk->evaluation[0]->scale,
 				'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
 				'commentaireRisque'	=> $comment_list,
+				'actionPrevention'	=> ''
 			);
 		}
 

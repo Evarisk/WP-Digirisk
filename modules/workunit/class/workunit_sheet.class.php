@@ -39,8 +39,8 @@ class workunit_sheet_class extends singleton_util {
 		/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
 		$option[ 'address' ] = $option[ 'postcode' ] = $option[ 'town' ] = '-';
 		if ( !empty( $workunit->contact[ 'address' ] ) && ( true === is_int( (int)$workunit->contact[ 'address' ] ) ) ) {
-			$work_unit_address_definition = address_class::g()->show( (int)$workunit->contact[ 'address' ][ 0 ] );
-			extract( get_object_vars( $work_unit_address_definition ) );
+			$work_unit_address_definition = address_class::g()->get( array( 'comment__in' => (int)$workunit->contact[ 'address' ][ 0 ] ) );
+			// extract( get_object_vars( $work_unit_address_definition ) );
 		}
 
 		/**	Définition finale de l'unité de travail / Final definition for workunit	*/

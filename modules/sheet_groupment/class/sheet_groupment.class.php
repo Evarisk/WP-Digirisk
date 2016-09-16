@@ -41,9 +41,9 @@ class sheet_groupment_class extends singleton_util {
 
   	/**	Définition des informations de l'adresse de l'unité de travail / Define informations about workunit address	*/
   	$option[ 'address' ] = $option[ 'postcode' ] = $option[ 'town' ] = '-';
-  	if ( !empty( $group->contact[ 'address' ] ) && ( true === is_int( (int)$group->option[ 'contact' ][ 'address' ] ) ) ) {
-  		$work_unit_address_definition = address_class::g()->get( array( 'id' => (int)$group->option[ 'contact' ][ 'address' ][ 0 ] ) );
-  		extract( get_object_vars( $work_unit_address_definition ) );
+  	if ( !empty( $group->contact[ 'address' ] ) && ( true === is_int( (int)$group->contact[ 'address' ] ) ) ) {
+  		$work_unit_address_definition = address_class::g()->get( array( 'id' => (int)$group->contact[ 'address' ][ 0 ] ) );
+  		// extract( get_object_vars( $work_unit_address_definition ) );
   	}
 
   	/**	Définition finale de l'unité de travail / Final definition for group	*/
