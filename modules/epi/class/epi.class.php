@@ -94,23 +94,7 @@ class epi_class extends post_class {
 			return false;
 		}
 
-		$epi_list = epi_class::g()->index( array( 'post_parent' => $society->id ) );
-
-		if ( !empty( $epi_list ) ) {
-		  foreach ( $epi_list as $key => $element ) {
-				$epi_list[$key] = $this->get_epi( $element->id );
-		  }
-		}
-
-		// Tries les risques par ordre de cotation
-		if ( count( $epi_list ) > 1 ) {
-			usort( $epi_list, function( $a, $b ) {
-				if( $a->evaluation->option[ 'epi_level' ][ 'equivalence' ] == $b->evaluation->option[ 'epi_level' ][ 'equivalence' ] ) {
-					return 0;
-				}
-				return ( $a->evaluation->option[ 'epi_level' ][ 'equivalence' ] > $b->evaluation->option[ 'epi_level' ][ 'equivalence' ] ) ? -1 : 1;
-			} );
-		}
+		$epi_list = epi_class::g()->get( array( 'post_parent' => $society->id ), array( false ) );
 
 		require( EPI_VIEW_DIR . 'list.view.php' );
 	}
