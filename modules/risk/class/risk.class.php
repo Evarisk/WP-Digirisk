@@ -115,6 +115,8 @@ class risk_class extends post_class {
 			} );
 		}
 
+		echo $risk_list[1];
+
 		require( RISK_VIEW_DIR . 'main.view.php' );
 	}
 }

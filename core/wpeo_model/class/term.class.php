@@ -16,7 +16,7 @@ class term_class extends singleton_util {
 		if ( empty( $object->id ) ) {
 			$wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
 				'description'	=> !empty( $object->description ) ? $object->description : '',
-				'slug'	=> sanitize_title( $object->name ),
+				// 'slug'	=> !empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
 				'parent'	=> !empty( $object->parent_id ) ? (int) $object->parent_id : 0,
 			) );
 		}
@@ -40,39 +40,6 @@ class term_class extends singleton_util {
 
 	public function create( $data ) {
 		return $this->update( $data );
-		// if ( !is_array( $data ) && !is_object( $data ) ) {
-		// 	return false;
-		// }
-		//
-		// $object = $data;
-		//
-		// if( is_array( $data ) ) {
-		// 	$object = new $this->model_name( $data, $this->meta_key );
-		// }
-		//
-		// $wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
-		// 	'description'	=> !empty( $object->description ) ? $object->description : '',
-		// 	'slug'	=> sanitize_title( $object->name ),
-		// 	'parent'	=> !empty( $object->parent_id ) ? (int) $object->parent_id : 0,
-		// ) );
-		//
-		// if ( !is_wp_error( $wp_category_danger ) ) {
-		// 	$object->id = $wp_category_danger[ 'term_id' ];
-		// 	$object->term_taxonomy_id = $wp_category_danger[ 'term_taxonomy_id' ];
-		//
-		// 	/** Mise à jour des options / Save options */
-		// 	if( !empty( $object->option ) ) {
-		// 		$object->save_meta_data( $object, 'update_term_meta', $this->meta_key );
-		// 	}
-		//
-		// 	return $object;
-		// }
-		// else {
-		// 	/**
-		// 	 * @todo return error when creation does not work
-		// 	 */
-		// 	return $wp_category_danger;
-		// }
 	}
 
 	public function delete( $id ) {
