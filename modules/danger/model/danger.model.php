@@ -25,7 +25,6 @@ class danger_model extends term_model {
 				'bydefault'	=> '',
 			),
 			'thumbnail_id' => array(
-				'export'			=> true,
 				'type' 		=> 'integer',
 				'meta_type'		=> 'single',
 				'field'		=> '_thumbnail_id',
