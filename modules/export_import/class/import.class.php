@@ -183,13 +183,9 @@ class import_class extends singleton_util {
 
 	public function create_danger( $risk, $danger_category, &$danger_json ) {
 		if ( empty( $danger_json['id'] ) ) {
+			$danger_json['parent_id'] = $danger_category->id;
 			$danger = danger_class::g()->update( $danger_json );
-			if ( $danger_json['slug'] == 'divers-incendie-explosion' ) {
-				echo "<pre>"; print_r($danger); echo "</pre>";
-				$risk->taxonomy['digi-danger'][] = $danger->id;
-				echo $risk;
-				
-			}
+			$risk->taxonomy['digi-danger'][] = $danger->id;
 			$risk = risk_class::g()->update( $risk );
 			$danger_json['id'] = $danger->id;
 			$this->update_json_file();

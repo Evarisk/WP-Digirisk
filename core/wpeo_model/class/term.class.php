@@ -16,7 +16,7 @@ class term_class extends singleton_util {
 		if ( empty( $object->id ) ) {
 			$wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
 				'description'	=> !empty( $object->description ) ? $object->description : '',
-				// 'slug'	=> !empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
+				'slug'	=> !empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
 				'parent'	=> !empty( $object->parent_id ) ? (int) $object->parent_id : 0,
 			) );
 		}
