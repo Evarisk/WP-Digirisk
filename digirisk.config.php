@@ -16,7 +16,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-DEFINE( 'EVA_PLUGIN_VERSION', '6.1.5.6' );
+DEFINE( 'EVA_PLUGIN_VERSION', '6.1.5.8' );
 
 DEFINE( 'WPDIGI_VERSION', EVA_PLUGIN_VERSION );
 DEFINE( 'WPDIGI_DIR', basename( dirname( __FILE__ ) ) );
@@ -25,4 +25,4 @@ DEFINE( 'WPDIGI_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() 
 DEFINE( 'WPDIGI_CORE_OPTION_NAME', '_digirisk_core' );
 DEFINE( 'WPDIGI_VIEW_DIR', WPDIGI_PATH . 'core/view/' );
 DEFINE( 'WPDIGI_MODEL', WPDIGI_PATH . 'core/model/' );
-DEFINE( 'WPDIGI_DEBUG', false );
+DEFINE( 'WPDIGI_DEBUG', true );

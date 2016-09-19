@@ -128,8 +128,9 @@ class post_class extends singleton_util {
 	}
 
 	private function get_taxonomies_id( $data ) {
-		if ( !empty( $data->get_model()['taxonomy']['child'] ) ) {
-		  foreach ( $data->get_model()['taxonomy']['child'] as $key => $value ) {
+		$model = $data->get_model();
+		if ( !empty( $model['taxonomy']['child'] ) ) {
+		  foreach ( $model['taxonomy']['child'] as $key => $value ) {
 				$data->taxonomy[$key] = wp_get_object_terms( $data->id, $key, array( 'fields' => 'ids' ) );
 			}
 		}

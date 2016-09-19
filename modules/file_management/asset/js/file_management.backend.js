@@ -23,14 +23,14 @@ var file_management = {
     file_management.have_thumbnail = file_management.$( element ).hasClass( 'wp-digi-element-thumbnail' ) ? true : false;
     window.wp.media.model.settings.post.id = file_management.$( element ).data( 'id' );
     if( file_management.$( element ).find( '.wpeo-gallery' ).length === 0 ) {
-      file_management.load_media_upload( element );
+      file_management.load_media_upload( element, file_management.$( element ).data( 'id' )  );
     }
     else {
       window.wpeo_gallery.open( element );
     }
   },
 
-  load_media_upload: function( element ) {
+  load_media_upload: function( element, post_id ) {
     file_management.file_frame = window.wp.media.frames.file_frame = window.wp.media( {
       title: file_management.$( element ).data( 'uploader_title' ),
       button: {
@@ -38,8 +38,7 @@ var file_management = {
       },
       multiple: false
     } );
-		console.log(file_management.file_frame);
-		file_management.file_frame.el.className += ' test';
+		file_management.file_frame.el.className += ' digi-upload-' + post_id;
     file_management.file_frame.on( "select", function() { file_management.selected_file( element ); } );
     file_management.open_media_upload();
   },
