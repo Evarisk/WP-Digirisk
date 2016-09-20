@@ -21,4 +21,4 @@ require_once( 'core/wpeo_model/class/helper.class.php' );
 include_util::inc( WPDIGI_PATH . 'core/wpeo_model', array( 'config', 'helper', 'class', 'model' ) );
 include_util::inc( WPDIGI_PATH . 'core/wpeo_export', array( 'config', 'class' ) );
 include_util::inc( WPDIGI_PATH . 'core/wpdigi-utils', array( 'class', 'model' ) );
-include_util::inc( WPDIGI_PATH , array( 'config', 'util', 'helper', 'model', 'class', 'action', 'filter', 'shortcode' ) );
+include_util::inc( WPDIGI_PATH , array( 'config', 'util', 'shortcode', 'helper', 'model', 'class', 'action', 'filter' ) );
