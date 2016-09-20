@@ -19,7 +19,7 @@ class evaluation_method_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'digi_evaluation_method', array( $this, 'callback_digi_evaluation_method' ) );
-		add_shortcode( 'digi_evaluation_method_complex', array( $this, 'callback_evaluation_method_complex' ) );
+		add_shortcode( 'digi_evaluation_method_evarisk', array( $this, 'callback_evaluation_method_evarisk' ) );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class evaluation_method_shortcode {
 	*
 	* @return bool
 	*/
-	public function callback_evaluation_method_complex( $param ) {
+	public function callback_evaluation_method_evarisk( $param ) {
 		$term_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 
