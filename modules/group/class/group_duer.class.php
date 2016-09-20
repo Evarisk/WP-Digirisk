@@ -228,7 +228,17 @@ class group_duer_class extends singleton_util {
 				$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] += $risk[ 'quotationRisque' ];
 		  }
 		}
-		$data_to_document[ 'risqueFiche' ][ 'value' ] = group_class::g()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
+
+		$element_sub_tree = group_class::g()->get_element_sub_tree( $element , '', array( 'default' => array( 'quotationTotale' => 0, ), 'value' => $risk_per_element, ) );
+		if ( count( $element_sub_tree ) > 1 ) {
+			usort( $element_sub_tree, function( $a, $b ) {
+				if( $a['quotationTotale'] == $b['quotationTotale'] ) {
+					return 0;
+				}
+				return ( $a['quotationTotale'] > $b['quotationTotale'] ) ? -1 : 1;
+			} );
+		}
+		$data_to_document[ 'risqueFiche' ][ 'value' ] = $element_sub_tree;
 
 		return $data_to_document;
 	}
