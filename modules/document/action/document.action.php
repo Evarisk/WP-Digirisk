@@ -70,8 +70,7 @@ class document_action {
 
     $global = sanitize_text_field( $_POST['global'] );
 
-    global ${$global};
-    $parent_element = ${$global}->show( $parent_id );
+    $parent_element = society_class::g()->show_by_type( $parent_id );
 
     if ( $parent_element->id == 0 || empty( $parent_element->option['associated_document_id']['document'] ) )
       wp_send_json_error();
@@ -83,7 +82,7 @@ class document_action {
 
     unset( $parent_element->option['associated_document_id']['document'][$key] );
 
-    ${$global}->update( $parent_element );
+    society_class::g()->update_by_type( $parent_element );
 
     wp_send_json_success();
   }
