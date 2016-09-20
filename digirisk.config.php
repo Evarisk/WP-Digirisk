@@ -16,7 +16,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-DEFINE( 'EVA_PLUGIN_VERSION', '6.1.5.9' );
+DEFINE( 'EVA_PLUGIN_VERSION', '6.1.5.10' );
 
 DEFINE( 'WPDIGI_VERSION', EVA_PLUGIN_VERSION );
 DEFINE( 'WPDIGI_DIR', basename( dirname( __FILE__ ) ) );
