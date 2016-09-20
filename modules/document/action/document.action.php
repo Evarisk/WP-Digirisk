@@ -94,9 +94,9 @@ class document_action {
 	function ajax_regenerate_document() {
 		check_ajax_referer( 'wpdigi_regenerate_document' );
 
-		$document_id = !empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( (int)$_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
+		$document_id = !empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( $_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
 		if ( !empty( $document_id ) ) {
-			$parent_id = !empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( (int)$_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
+			$parent_id = !empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( $_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
 			$parent_element = society_class::g()->show_by_type( $parent_id );
 
 			$current_document = document_class::g()->get( array( 'post__in' => array( $document_id ), ) );
