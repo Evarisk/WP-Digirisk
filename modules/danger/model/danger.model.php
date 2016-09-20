@@ -12,14 +12,12 @@ class danger_model extends term_model {
 				'bydefault'			=> '',
 			),
 			'unique_key' => array(
-				'export'			=> true,
 				'type' 		=> 'string',
 				'meta_type'		=> 'single',
 				'field'		=> '_wpdigi_unique_key',
 				'bydefault'	=> '',
 			),
 			'unique_identifier' => array(
-				'export'			=> true,
 				'type' 		=> 'string',
 				'meta_type' => 'multiple',
 				'bydefault'	=> '',

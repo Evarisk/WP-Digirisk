@@ -40,6 +40,7 @@ class term_model extends constructor_data_class {
 			'bydefault'	=> 0
 		),
 		'parent_id' => array(
+			'export' 	=> true,
 			'type'		=> 'integer',
 			'field'		=> 'parent',
 			'bydefault'	=> 0,
