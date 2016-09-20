@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
 class third_class extends post_class {
-  protected $model_name   = 'third_mdl_01';
+  protected $model_name   = 'third_model';
 	protected $post_type    = 'third-display';
 	protected $meta_key    	= 'third_display';
 

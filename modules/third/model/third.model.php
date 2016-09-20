@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class third_mdl_01 extends post_model {
+class third_model extends post_model {
 
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(
