@@ -153,6 +153,7 @@ class import_class extends singleton_util {
 		if ( empty( $comment_json['id'] ) ) {
 			$comment_json['post_id'] = $risk->id;
 			$comment_json['parent_id'] = $risk_evaluation->id;
+			$comment_json['author_id'] = get_current_user_id();
 			$risk_evaluation_comment = risk_evaluation_comment_class::g()->update( $comment_json );
 			$comment_json['id'] = $risk_evaluation_comment->id;
 			$this->update_json_file();
