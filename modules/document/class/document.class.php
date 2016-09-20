@@ -20,7 +20,7 @@ class document_class extends post_class {
 	protected $base 								= 'digirisk/printed-document';
 	protected $version 							= '0.1';
 	public $element_prefix 					= 'DOC';
-	protected $before_post_function = array( 'construct_identifier' );
+	protected $before_put_function = array( 'construct_identifier' );
 	protected $after_get_function = array( 'get_identifier' );
 
 	protected $limit_document_per_page = -1;

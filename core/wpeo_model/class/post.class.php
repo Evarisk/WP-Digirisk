@@ -89,6 +89,12 @@ class post_class extends singleton_util {
 			$obj_merged = (object) array_merge((array) $current_data, (array) $data);
 			$data = new $this->model_name( (array) $obj_merged, array( false ) );
 
+			if ( !empty( $this->before_put_function ) ) {
+				foreach ( $this->before_put_function as $put_function ) {
+					$data = call_user_func( $put_function, $data );
+				}
+			}
+
 			wp_update_post( $data->do_wp_object() );
 		}
 
