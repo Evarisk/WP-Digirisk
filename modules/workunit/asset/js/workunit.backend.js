@@ -77,6 +77,8 @@ var digi_workunit = {
 		var data = {
 			action: 'wpdigi_regenerate_document',
 			element_id: digi_workunit.$( element ).data( 'id' ),
+			parent_id: digi_workunit.$( element ).data( 'parent-id' ),
+			_wpnonce: digi_workunit.$( element ).data( 'nonce' ),
 		};
 		digi_workunit.$.post( window.ajaxurl, data, function() {
 

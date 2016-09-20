@@ -22,6 +22,7 @@ class document_action {
 		add_action( 'init', array( $this, 'custom_type_creation' ), 5  );
 
     add_action( 'wp_ajax_wpdigi_delete_sheet', array( $this, 'ajax_delete_sheet' ) );
+    add_action( 'wp_ajax_wpdigi_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
   }
 
 	/**
@@ -86,6 +87,30 @@ class document_action {
 
     wp_send_json_success();
   }
+
+	/**
+	 * Re-génére un document a partir des données présentes en base de données
+	 */
+	function ajax_regenerate_document() {
+		check_ajax_referer( 'wpdigi_regenerate_document' );
+
+		$document_id = !empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( (int)$_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
+		if ( !empty( $document_id ) ) {
+			$parent_id = !empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( (int)$_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
+			$parent_element = society_class::g()->show_by_type( $parent_id );
+
+			$current_document = document_class::g()->get( array( 'post__in' => array( $document_id ), ) );
+			$model_infos = document_class::g()->get_model_for_element( array( 'document_unique' ) );
+		 	$response =	document_class::g()->generate_document( $model_infos[ 'model_path' ], $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
+			wp_send_json_success( $response );
+		}
+		else {
+      wp_send_json_error( array( 'message' => __( 'No document has been selected', 'digirisk' ), ) );
+		}
+
+		wp_send_json_error( array( 'message' => __( 'An error occured while trying to generate the document', 'digirisk' ), ) );
+	}
+
 }
 
 new document_action();
