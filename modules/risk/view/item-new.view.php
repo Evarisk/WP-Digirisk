@@ -18,6 +18,6 @@
 			</li>
 		</ul>
 
-		<?php do_shortcode( '[digi_evaluation_method_complex]' ); ?>
+		<?php do_shortcode( '[digi_evaluation_method_evarisk]' ); ?>
 	</form>
 </div>
