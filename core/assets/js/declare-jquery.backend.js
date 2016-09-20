@@ -5,7 +5,6 @@ jQuery( document ).ready(function( $ ) {
 	digi_recommendation.init( true, $ );
 	digi_risk.init( true, $ );
 	digi_danger.init( true, $ );
-
 	digi_search.event( $ );
 	digi_tools.event( $ );
 	digi_installer.event( $ );
@@ -19,4 +18,5 @@ jQuery( document ).ready(function( $ ) {
 	digi_workunit.event( $ );
 	digi_tab.event( $ );
 	digi_user.event( $ );
+	digi_document.event( $ );
 } );
