@@ -34,6 +34,7 @@ class term_model extends constructor_data_class {
 			'bydefault'	=> 0,
 		),
 		'slug' => array(
+			'export'	=> true,
 			'type'		=> 'string',
 			'field'		=> 'slug',
 			'bydefault'	=> 0
