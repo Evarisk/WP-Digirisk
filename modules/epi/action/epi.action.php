@@ -24,6 +24,7 @@ class epi_action {
 	public function __construct() {
 		// Remplacé les - en _
 		add_action( 'display_epi', array( $this, 'callback_display_epi' ), 10, 1 );
+		add_action( 'wp_ajax_save_epi', array( $this, 'ajax_save_epi' ) );
 		add_action( 'wp_ajax_wpdigi-delete-epi', array( $this, 'ajax_delete_epi' ) );
 		add_action( 'wp_ajax_wpdigi-load-epi', array( $this, 'ajax_load_epi' ) );
 		add_action( 'wp_ajax_wpdigi-edit-epi', array( $this, 'ajax_edit_epi' ) );
@@ -38,6 +39,14 @@ class epi_action {
 	* @param array $_POST Les données envoyées par le formulaire
   */
 	public function callback_display_epi( $society_id ) {
+	}
+
+	public function ajax_save_epi() {
+		check_ajax_referer( 'save_epi' );
+
+		$epi = epi_class::g()->update( $_POST );
+
+		wp_send_json_success( array( 'object_saved' => $epi ) );
 	}
 
 	/**
