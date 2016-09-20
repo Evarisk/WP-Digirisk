@@ -48,35 +48,6 @@ class evaluator_class extends user_class {
 	}
 
 	/**
-	* Fait le rendu de la liste des évaluateurs à assigner
-	*
-	* @param object $element L'objet parent
-	*/
-	public function render_list_evaluator_to_assign( $element ) {
-		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
-		$args_where_evaluator = array(
-			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
-			'exclude' => array( 1 ),
-			'number' => $this->limit_evaluator,
-			'meta_query' => array(
-				'relation' => 'OR',
-			),
-		);
-
-		$list_evaluator_to_assign = $this->index( $args_where_evaluator );
-		//
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
-		unset( $args_where_evaluator['offset'] );
-		unset( $args_where_evaluator['number'] );
-		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( $this->index( $args_where_evaluator ) );
-
-		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
-
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
-	}
-
-	/**
 	 * Récupère la liste des utilisateurs affectés avec ses informations d'affectations à cette unité de travail
 	 * Get the list of affected evaluators with assignement information for this workunit
 	 *
