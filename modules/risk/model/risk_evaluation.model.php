@@ -46,13 +46,11 @@ class risk_evaluation_model extends comment_model {
 				'bydefault'			=> 0,
 			),
 			'unique_key' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_key',
 			),
 			'unique_identifier' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',

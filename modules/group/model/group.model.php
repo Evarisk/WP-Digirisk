@@ -129,7 +129,6 @@ class group_model extends post_model {
 				)
 			),
 			'unique_key' => array(
-				'export' => true,
 				'type' 		=> 'string',
 				'meta_type'		=> 'single',
 				'field'		=> '_wpdigi_unique_key',
@@ -138,7 +137,6 @@ class group_model extends post_model {
 				'type' 			=> 'string',
 				'meta_type'	=> 'single',
 				'field'			=> '_wpdigi_unique_identifier',
-				'export' => true,
 			)
 		) );
 

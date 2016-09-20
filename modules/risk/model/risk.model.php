@@ -33,13 +33,11 @@ class risk_model extends post_model {
 				)
 			),
 			'unique_key' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_key',
 			),
 			'unique_identifier' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
