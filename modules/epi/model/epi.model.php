@@ -26,7 +26,8 @@ class epi_model extends post_model {
 			),
 			'serial_number' => array(
 				'type'				=> 'string',
-				'meta_type'		=> 'single'
+				'meta_type'		=> 'single',
+				'field'				=> '_serial_number'
 			),
 			'production_date' => array(
 				'type'				=> 'string',
@@ -36,7 +37,7 @@ class epi_model extends post_model {
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple'
 			),
-			'rewiew' => array(
+			'review' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple'
 			)
