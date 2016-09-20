@@ -35,43 +35,6 @@ class document_class extends post_class {
 	protected function construct() {}
 
 	/**
-	* Indexe tous les documents dans la base de donnée
-	*
-	* array['parent_id'] (optional) Le post parent id.
-	*
-	* @param array $args_where Les données à chercher
-	* @param bool $cropped Récupère toutes les données si false
-	*
-	* @return array Liste des documents
-	*/
-	public function index( $args_where = array( 'parent_id' => 0 ), $cropped = false ) {
-		if ( !is_array( $args_where ) ) {
-			return false;
-		}
-
-		$array_model = array();
-
-		$args = array(
-			'post_status' 		=> 'inherit',
-			'post_type' 		=> $this->post_type,
-			'posts_per_page' 	=> -1,
-			'post_mime_type' 	=> array( 'application/vnd.oasis.opendocument.text', 'application/zip' ),
-		);
-
-		$args = array_merge( $args, $args_where );
-		$array_post = get_posts( $args );
-
-		if( !empty( $array_post ) ) {
-			foreach( $array_post as $key => $post ) {
-				$array_model[$key] = new $this->model_name( (array)$post, $this->meta_key, $cropped );
-			}
-		}
-
-
-		return $array_model;
-	}
-
-	/**
 	* Récupères le chemin vers le dossier digirisk dans wp-content/uploads
 	*
 	* @param string $path_type (Optional) Le type de path
