@@ -31,14 +31,22 @@ class post_class extends singleton_util {
 				$list_meta = get_post_meta( $post['ID'] );
 				foreach ( $list_meta as &$meta ) {
 					$meta = array_shift( $meta );
+					$meta = json_util::g()->decode( $meta );
 				}
 
 				$post = array_merge( $post, $list_meta );
 
 				if ( !empty( $post[$this->meta_key] ) ) {
-					$post = array_merge( $post, json_decode( $post[$this->meta_key], true ) );
+					$data_json = json_util::g()->decode( $post[$this->meta_key] );
+					if ( is_array( $data_json ) ) {
+						$post = array_merge( $post, $data_json );
+					}
+					else {
+						$post[$this->meta_key] = $data_json;
+					}
 					unset( $post[$this->meta_key] );
 				}
+
 			}
 
 			$array_posts[$key] = new $this->model_name( $post, $children_wanted );
