@@ -5,13 +5,11 @@ class epi_model extends post_model {
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_key',
 			),
 			'unique_identifier' => array(
-				'export'			=> true,
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
@@ -27,8 +25,20 @@ class epi_model extends post_model {
 				)
 			),
 			'serial_number' => array(
-				'type'				=> 'array',
+				'type'				=> 'string',
 				'meta_type'		=> 'single'
+			),
+			'production_date' => array(
+				'type'				=> 'string',
+				'meta_type'		=> 'multiple',
+			),
+			'lifetime' => array(
+				'type'				=> 'string',
+				'meta_type'		=> 'multiple'
+			),
+			'rewiew' => array(
+				'type'				=> 'string',
+				'meta_type'		=> 'multiple'
 			)
 		) );
 
