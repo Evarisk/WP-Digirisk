@@ -116,6 +116,15 @@ class workunit_class extends post_class {
 	public function display_list( $groupment_id, $workunit_selected_id = 0 ) {
 		$list_workunit = workunit_class::g()->get( array( 'post_parent' => $groupment_id, 'posts_per_page' => -1 ), array( false ) );
 
+		if ( count( $list_workunit ) > 1 ) {
+			usort( $list_workunit, function( $a, $b ) {
+				if( $a->unique_key == $b->unique_key ) {
+					return 0;
+				}
+				return ( $a->unique_key < $b->unique_key ) ? -1 : 1;
+			} );
+		}
+
 		require ( WORKUNIT_VIEW_DIR . '/list.view.php' );
 	}
 }
