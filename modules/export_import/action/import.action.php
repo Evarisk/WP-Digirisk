@@ -46,6 +46,16 @@ class import_action extends singleton_util {
 				wp_send_json_error();
 			}
 
+			$danger_created = danger_default_data_class::g()->create();
+			$recommendation_created = recommendation_default_data_class::g()->create();
+			$evaluation_method_created = evaluation_method_default_data_class::g()->create();
+
+			$document_unique_setted = document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
+			$document_workunit_sheet_setted = document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
+
+			// Met à jours l'option pour dire que l'installation est terminée
+			update_option( WPDIGI_CORE_OPTION_NAME, array( 'installed' => true, 'db_version' => 1 ) );
+
 			$zip_file = $_FILES['file'];
 
 			$zip_info = zip_util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
