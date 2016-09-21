@@ -41,7 +41,8 @@ var digi_installer = {
 		var firstname = digi_installer.$( '.wpdigi-staff input[name="user[firstname]"]' ).val();
 		var lastname = digi_installer.$( '.wpdigi-staff input[name="user[lastname]"]' ).val();
 		var domain_mail = digi_installer.$( '.wpdigi-staff .input-domain-mail' ).val();
-		digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val( firstname + '.' + lastname + '@' + domain_mail );
+		var together = window.digi_global.remove_diacritics(firstname + '.' + lastname + '@' + domain_mail).toLowerCase();
+		digi_installer.$( ".wpdigi-staff input[name='user[email]']" ).val( together );
 
 		if( event.keyCode == 13 ) {
 			digi_installer.$( ".wpdigi-staff .add-staff" ).click();
