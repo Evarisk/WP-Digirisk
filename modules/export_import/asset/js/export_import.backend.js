@@ -63,6 +63,7 @@ var digi_export = {
 					}
 					else {
 						digi_export.$('.digi-import-detail').html( window.digi_tools_done );
+						digi_export.$( '#toplevel_page_digi-setup a' ).attr( 'href', digi_export.$( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 					}
 
 					digi_export.$('progress').attr( 'max', response.data.count_element );
