@@ -11,8 +11,8 @@ var digi_export = {
 	},
 
 	event: function() {
-		digi_export.$( document ).on( 'submit', '#digi-export-form', function( event ) { digi_export.create_export( event, digi_export.$( this ) ); } );
-		digi_export.$( document ).on( 'change', '#digi-import-form input[type="file"]', function( event ) { digi_export.make_import( event, digi_export.$( this ) ); } );
+		digi_export.$( document ).on( 'submit', '#digi-data-export #digi-export-form', function( event ) { digi_export.create_export( event, digi_export.$( this ) ); } );
+		digi_export.$( document ).on( 'change', '#digi-data-export #digi-import-form input[type="file"]', function( event ) { digi_export.make_import( event, digi_export.$( this ) ); } );
 	},
 
 	create_export: function( event, element ) {
