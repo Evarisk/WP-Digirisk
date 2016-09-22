@@ -24,9 +24,9 @@ class post_model extends constructor_data_class {
 			'field'	=> 'post_modified',
 		),
 		'title' 	=> array(
-			'type'	=> 'string',
-			'field'	=> 'post_title',
-			'export'	=> true,
+			'type'			=> 'string',
+			'field'			=> 'post_title',
+			'export'		=> true,
 		),
 		'slug' 	=> array(
 			'type'		=> 'string',

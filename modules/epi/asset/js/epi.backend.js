@@ -11,13 +11,13 @@ var digi_epi = {
 	},
 
 	event: function() {
-		digi_epi.$( document ).on( 'click', '.wp-digi-epi-item-new .wp-digi-action-new', function( event ) { digi_epi.create_epi( event, digi_epi.$( this ) ); } );
+		digi_epi.$( document ).on( 'click', '.form-epi .wp-digi-action-new', function( event ) { digi_epi.edit_epi( event, digi_epi.$( this ) ); } );
 		digi_epi.$( document ).on( 'click', '.wp-digi-epi .wp-digi-action-delete', function( event ) { digi_epi.delete_epi( event, digi_epi.$( this ) ); } );
 		digi_epi.$( document ).on( 'click', '.wp-digi-epi .wp-digi-action-load', function( event ) { digi_epi.load_epi( event, digi_epi.$( this ) ); } );
-		digi_epi.$( document ).on( 'click', '.wp-digi-epi .wp-digi-action-edit', function( event ) { digi_epi.edit_epi( event, digi_epi.$( this ) ); } );
+		// digi_epi.$( document ).on( 'click', '.wp-digi-epi .wp-digi-action-edit', function( event ) { digi_epi.edit_epi( event, digi_epi.$( this ) ); } );
 	},
 
-	create_epi: function( event, element ) {
+	edit_epi: function( event, element ) {
 
     digi_epi.$( element ).closest( 'form' ).ajaxSubmit( {
       'beforeSubmit': function() {
@@ -70,21 +70,6 @@ var digi_epi = {
       digi_epi.$( '.wp-digi-list-item .dashicons-edit' ).hide();
 			digi_epi.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 			digi_epi.$( '.wp-digi-epi .wp-digi-list-item[data-epi-id="' + epi_id + '"]' ).replaceWith( response.data.template );
-		} );
-	},
-
-	edit_epi: function( event, element ) {
-		event.preventDefault();
-
-		var epi_id = digi_epi.$( element ).data( 'id' );
-		digi_epi.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
-
-		digi_epi.$( element ).closest( 'form' ).ajaxSubmit( {
-			'success': function( response ) {
-				digi_epi.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-        digi_epi.$( '.wp-digi-list-item .dashicons-edit' ).show();
-				digi_epi.$( '.wp-digi-epi.wp-digi-list' ).replaceWith( response.data.template );
-			}
 		} );
 	},
 

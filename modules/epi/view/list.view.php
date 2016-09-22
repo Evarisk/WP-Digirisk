@@ -8,7 +8,6 @@
 	<span class="wp-digi-epi-list-column-serial-number"><?php _e('n° serie', 'digirisk' ); ?></span>
 	<span class="wp-digi-epi-list-column-fabrication-date"><?php _e('date prod.', 'digirisk'); ?></span>
 	<span class="wp-digi-epi-list-column-shelf-life"><?php _e('durée de vie', 'digirisk'); ?></span>
-	<span class="wp-digi-epi-list-column-periodicity-of-controls"><?php _e('per. de contrôles', 'digirisk'); ?></span>
 
 	<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 </li>
