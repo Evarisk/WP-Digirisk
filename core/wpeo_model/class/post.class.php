@@ -84,6 +84,10 @@ class post_class extends singleton_util {
 				}
 			}
 
+			if ( !empty( $data->error ) && $data->error ) {
+				return false;
+			}
+
 			$data->id = wp_insert_post( $data->do_wp_object() );
 		}
 		else {
@@ -96,6 +100,10 @@ class post_class extends singleton_util {
 				foreach ( $this->before_put_function as $put_function ) {
 					$data = call_user_func( $put_function, $data );
 				}
+			}
+
+			if ( !empty( $data->error ) && $data->error ) {
+				return false;
 			}
 
 			wp_update_post( $data->do_wp_object() );
