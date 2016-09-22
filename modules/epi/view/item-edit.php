@@ -1,12 +1,11 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-<li class="wp-digi-list-form wp-digi-list-item wp-digi-bloc-loader">
-	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-epi">
+<li class="wp-digi-list-item">
 		<?php wp_nonce_field( 'save_epi' ); ?>
 		<input type="hidden" name="action" value="save_epi" />
 		<input type="hidden" name="parent_id" value="<?php echo $society_id; ?>" />
 
 		<?php echo do_shortcode( '[eo_upload_button]' ); ?>
-		<span><?php echo $epi->unique_identifier; ?></span>
+		<span class="padded"><?php echo $epi->unique_identifier; ?></span>
 		<span class="padded"><input type="text" name="title" value="<?php echo $epi->title; ?>" placeholder="Nom" /></span>
 		<span class="padded"><input type="text" name="content" value="<?php echo $epi->content; ?>" placeholder="Description" /></span>
 		<span class="padded"><input type="text" name="serial_number" value="<?php echo $epi->serial_number; ?>" placeholder="Numéro de série" /></span>
@@ -26,5 +25,4 @@
 			endif;
 			?>
 		</span>
-	</form>
 </li>

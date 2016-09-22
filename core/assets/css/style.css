@@ -2662,6 +2662,9 @@
 .wp-digi-table li {
   margin: 0;
 }
+.wp-digi-table .wp-digi-list span {
+  display: table-cell;
+}
 .wp-digi-table .wp-digi-table-header {
   background: #272a35 !important;
   color: #fff !important;
