@@ -38,7 +38,7 @@ class user_action extends \singleton_util {
 	* Créer le sous menu dans le menu utilisateur de WordPress
 	*/
 	public function callback_admin_menu() {
-		add_users_page( __( 'Add a Digirisk user', 'digirisk' ), __( 'Digirisk : add', 'digirisk' ), 'read', 'digirisk-users', array( $this, 'display_page_staff' ) );
+		add_users_page( __( 'Add a Digirisk user', 'digirisk' ), __( 'Digirisk : add', 'digirisk' ), 'read', 'digirisk-users', array( $this, 'callback_users_page' ) );
 	}
 
 	public function ajax_save_user() {
@@ -88,6 +88,11 @@ class user_action extends \singleton_util {
 		wp_send_json_success();
 	}
 
+	public function callback_users_page() {
+		$list_user = user_class::g()->get();
+		array_shift( $list_user );
+		require( USERS_VIEW . 'page-user/main.view.php' );
+	}
 	/**
 	* Affiche la page staff ?? Pourquoi ici ?
 	*/
@@ -96,7 +101,7 @@ class user_action extends \singleton_util {
 		$list_user = user_class::g()->get();
 		array_shift( $list_user );
 
-		require( USERS_VIEW . 'page-staff.php' );
+		require( USERS_VIEW . 'page-user/page-staff.php' );
 	}
 
 	/**
