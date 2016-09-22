@@ -68,7 +68,7 @@ var file_management = {
   display_attachment: function( selected_JSON, element ) {
     file_management.$( element ).find( 'img' ).attr( 'src', selected_JSON.url ).show();
     file_management.$( element ).find( 'i' ).hide();
-    file_management.$( element ).find( 'input[name="file_id"]' ).val( selected_JSON.id );
+    file_management.$( element ).find( 'input.input-file-image' ).val( selected_JSON.id );
   },
 
   associate_file: function( selected_file_id ) {
