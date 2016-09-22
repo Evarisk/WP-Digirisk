@@ -22,5 +22,5 @@ DEFINE( 'EPI_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'EPI_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', EPI_PATH ) );
 DEFINE( 'EPI_VIEW_DIR', EPI_PATH . '/view/');
 DEFINE( 'EPI_MODEL', EPI_PATH . '/model/');
-DEFINE( 'EPI_STATE', false );
+DEFINE( 'EPI_STATE', true );
 ?>

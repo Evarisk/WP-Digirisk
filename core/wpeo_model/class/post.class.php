@@ -19,6 +19,9 @@ class post_class extends singleton_util {
 		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
 		}
+		else if( isset( $args['schema'] ) ) {
+			$array_posts[] = array();
+		}
 		else {
 			$array_posts = get_posts( $args );
 		}

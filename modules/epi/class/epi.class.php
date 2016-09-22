@@ -79,6 +79,8 @@ class epi_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
+		$epi = $this->get( array( 'schema' => true ) );
+		$epi = $epi[0];
 		require( EPI_VIEW_DIR . 'main.view.php' );
 	}
 

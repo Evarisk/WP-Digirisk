@@ -61,9 +61,8 @@ var digi_epi = {
 		digi_epi.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
 
 		var data = {
-			action: 'wpdigi-load-epi',
+			action: 'load_epi',
 			_wpnonce: digi_epi.$( element ).data( 'nonce' ),
-			global: digi_epi.$( element ).data( 'global' ),
 			epi_id: epi_id,
 		};
 
@@ -71,8 +70,6 @@ var digi_epi = {
       digi_epi.$( '.wp-digi-list-item .dashicons-edit' ).hide();
 			digi_epi.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
 			digi_epi.$( '.wp-digi-epi .wp-digi-list-item[data-epi-id="' + epi_id + '"]' ).replaceWith( response.data.template );
-			digi_epi.$( '.wp-digi-epi .wp-digi-list-item[data-epi-id="' + epi_id + '"] .wpdigi-method-evaluation-render' ).html( response.data.table_evaluation_method );
-			digi_epi.$( '.wpdigi_date' ).datepicker( { 'dateFormat': 'dd/mm/yy', } );
 		} );
 	},
 
