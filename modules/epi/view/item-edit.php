@@ -1,7 +1,7 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <li class="wp-digi-list-item">
 		<input name="epi[<?php echo $epi->id; ?>][id]" type="hidden" value="<?php echo $epi->id; ?>" />
-		<?php echo do_shortcode( '[eo_upload_button]' ); ?>
+		<?php echo do_shortcode( '[eo_upload_button id="' . $epi->id . '" type="epi"]' ); ?>
 		<span class="padded"><?php echo $epi->unique_identifier; ?></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][title]" value="<?php echo $epi->title; ?>" placeholder="Nom" /></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][content]" value="<?php echo $epi->content; ?>" placeholder="Description" /></span>
