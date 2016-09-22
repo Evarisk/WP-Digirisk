@@ -37,6 +37,10 @@ class constructor_data_class extends helper_class {
 				$current_object->$field_name = $data[$field_name];
 			}
 
+			if ( isset( $field_def['required'] ) && $field_def['required'] && empty( $current_object->$field_name ) ) {
+				$this->error = true;
+			}
+
 			if ( !empty( $field_def['type'] ) ) {
 				settype( $current_object->$field_name, $field_def['type'] );
 			}
