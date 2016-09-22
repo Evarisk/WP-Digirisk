@@ -32,7 +32,7 @@ class document_model extends post_model {
 				'field'				=> '_wpdigi_model_id',
 			),
 			'document_meta' => array(
-				'type' 				=> 'array',
+				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_document_data',
 			),
