@@ -56,6 +56,33 @@ class user_model extends \user_model {
 			'insurance_compagny' => array(
 				'type'		=> 'string',
 				'bydefault'	=> '',
+			),
+			'dashboard_compiled_data' => array(
+				'type'			=> 'array',
+				'meta_type'	=> 'single',
+				'field'			=> '_dashboard_compiled_data',
+				'bydefault'	=> array( 'list_workunit_id' => array() ),
+				'child'			=> array(
+					'list_workunit_id' => array(
+						'type' => 'array',
+						'bydefault'	=> array( 1, 10 ),
+					),
+					'list_evaluation_id' => array(
+						'type'	=> 'array'
+					),
+					'list_accident_id' => array(
+						'type'	=> 'array',
+					),
+					'list_stop_day_id' => array(
+						'type'	=> 'array',
+					),
+					'list_chemical_product_id' => array(
+						'type'	=> 'array'
+					),
+					'list_epi_edi' => array(
+						'type'	=> 'array'
+					)
+				)
 			)
 		) );
 
