@@ -14,8 +14,6 @@ class user_action extends \singleton_util {
 	* wp_ajax_search_user_affected
 	*/
 	protected function construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ) );
-
 		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
 		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
 		add_action( 'wp_ajax_delete_user', array( $this, 'ajax_delete_user' ) );
@@ -32,13 +30,6 @@ class user_action extends \singleton_util {
 		// Recherche d'un utilisateur affecté
 		add_action( 'display_user_affected', array( $this, 'callback_display_user_affected' ), 10, 2 );
 		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 2 );
-	}
-
-	/**
-	* Créer le sous menu dans le menu utilisateur de WordPress
-	*/
-	public function callback_admin_menu() {
-		add_users_page( __( 'Add a Digirisk user', 'digirisk' ), __( 'Digirisk : add', 'digirisk' ), 'read', 'digirisk-users', array( $this, 'callback_users_page' ) );
 	}
 
 	public function ajax_save_user() {
@@ -88,11 +79,6 @@ class user_action extends \singleton_util {
 		wp_send_json_success();
 	}
 
-	public function callback_users_page() {
-		$list_user = user_class::g()->get();
-		array_shift( $list_user );
-		require( USERS_VIEW . 'page-user/main.view.php' );
-	}
 	/**
 	* Affiche la page staff ?? Pourquoi ici ?
 	*/
