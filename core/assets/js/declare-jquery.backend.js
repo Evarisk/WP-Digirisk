@@ -20,4 +20,5 @@ jQuery( document ).ready(function( $ ) {
 	digi_tab.event( $ );
 	digi_user.event( $ );
 	digi_document.event( $ );
+	digi_user_dashboard.event( $ );
 } );
