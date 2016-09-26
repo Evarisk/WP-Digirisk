@@ -23,7 +23,7 @@ class evaluator_class extends user_class {
 	*/
 	public function render( $element ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page = !empty( $_GET['current_page'] ) ? (int)$_GET['current_page'] : 1;
+		$current_page = !empty( $_POST['next_page'] ) ? (int)$_POST['next_page'] : 1;
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
 			'exclude' => array( 1 ),
@@ -32,7 +32,6 @@ class evaluator_class extends user_class {
 				'relation' => 'OR',
 			),
 		);
-
 
 		$list_evaluator_to_assign = $this->get( $args_where_evaluator );
 
@@ -44,7 +43,7 @@ class evaluator_class extends user_class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'main' ) );
+		require_once( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/main.php' );
 	}
 
 	/**

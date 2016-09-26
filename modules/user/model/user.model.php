@@ -59,28 +59,31 @@ class user_model extends \user_model {
 			),
 			'dashboard_compiled_data' => array(
 				'type'			=> 'array',
-				'meta_type'	=> 'single',
-				'field'			=> '_dashboard_compiled_data',
-				'bydefault'	=> array( 'list_workunit_id' => array() ),
+				'meta_type'	=> 'multiple',
 				'child'			=> array(
 					'list_workunit_id' => array(
 						'type' => 'array',
-						'bydefault'	=> array( 1, 10 ),
+						'meta_type'	=> 'multiple',
 					),
 					'list_evaluation_id' => array(
-						'type'	=> 'array'
+						'type'	=> 'array',
+						'meta_type'	=> 'multiple',
 					),
 					'list_accident_id' => array(
 						'type'	=> 'array',
+						'meta_type'	=> 'multiple',
 					),
 					'list_stop_day_id' => array(
 						'type'	=> 'array',
+						'meta_type'	=> 'multiple',
 					),
 					'list_chemical_product_id' => array(
-						'type'	=> 'array'
+						'type'	=> 'array',
+						'meta_type'	=> 'multiple',
 					),
 					'list_epi_edi' => array(
-						'type'	=> 'array'
+						'type'	=> 'array',
+						'meta_type'	=> 'multiple',
 					)
 				)
 			)

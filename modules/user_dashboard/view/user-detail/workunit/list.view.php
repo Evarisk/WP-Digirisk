@@ -13,7 +13,7 @@
 	<?php
 	if ( !empty( $list_workunit ) ):
 		foreach ( $list_workunit as $element ):
-			require( USERS_VIEW . '/user-detail/workunit/item.view.php' );
+			require( USER_DASHBOARD_VIEW . '/user-detail/workunit/item.view.php' );
 		endforeach;
 	endif;
 	?>

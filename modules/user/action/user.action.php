@@ -14,12 +14,7 @@ class user_action extends \singleton_util {
 	* wp_ajax_search_user_affected
 	*/
 	protected function construct() {
-		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
-		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
-		add_action( 'wp_ajax_delete_user', array( $this, 'ajax_delete_user' ) );
-		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
-
-		// Quand on affecte un utilisateur
+			// Quand on affecte un utilisateur
 		add_action( 'wp_ajax_edit_user_assign', array( $this, 'callback_edit_user_assign' ) );
 
 		// Quand on désaffecte un utilisateur
@@ -32,63 +27,6 @@ class user_action extends \singleton_util {
 		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 2 );
 	}
 
-	public function ajax_save_user() {
-		check_ajax_referer( 'ajax_save_user' );
-
-		$user = \digi\user_class::g()->update( $_POST['user'] );
-
-		ob_start();
-		require( INSTALLER_VIEW . '/list-item.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean(), 'id' => $user->id ) );
-	}
-
-	public function ajax_load_user() {
-		if ( 0 === (int)$_POST['user_id'] )
-			wp_send_json_error( );
-		else
-			$user_id = (int)$_POST['user_id'];
-
-		check_ajax_referer( 'ajax_load_user_' . $user_id );
-
-		$user = user_class::g()->get( array( 'id' => $user_id ) );
-
-		ob_start();
-		require( INSTALLER_VIEW . '/list-item-edit.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
-	}
-
-	public function ajax_delete_user() {
-		if ( 0 === (int)$_POST['user_id'] )
-			wp_send_json_error();
-		else
-			$user_id = (int)$_POST['user_id'];
-
-		check_ajax_referer( 'ajax_delete_user_' . $user_id );
-
-		user_class::g()->delete( $user_id );
-		wp_send_json_success();
-	}
-
-	public function ajax_save_domain_mail() {
-		check_ajax_referer( 'save_domain_mail' );
-		$domain_mail = !empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-		if ( $domain_mail === '' ) {
-			wp_send_json_error();
-		}
-		update_option( 'digirisk_domain_mail', $domain_mail );
-		wp_send_json_success();
-	}
-
-	/**
-	* Affiche la page staff ?? Pourquoi ici ?
-	*/
-	public function display_page_staff( $hidden ) {
-		// todo Pourquo ici ?
-		$list_user = user_class::g()->get();
-		array_shift( $list_user );
-
-		require( USERS_VIEW . 'page-user/page-staff.php' );
-	}
 
 	/**
 	* Assignes un utilisateur à element_id dans la base de donnée
@@ -137,14 +75,17 @@ class user_action extends \singleton_util {
 						'by'	=> get_current_user_id(),
 						'on'	=> '0000-00-00 00:00:00',
 					),
-
 				);
+
+				// Hook pour enregister l'unité de travail dans les données compilées de l'utilisateur
+				do_action( 'add_compiled_workunit_id', $user_id, $workunit_id );
 			}
 		}
 
 		// On met à jour si au moins un utilisateur à été affecté
-		if( count( $_POST['list_user'] ) > 0 )
+		if( count( $_POST['list_user'] ) > 0 ) {
 			$workunit = \workunit_class::g()->update( $workunit );
+		}
 
 		ob_start();
 		user_class::g()->render( $workunit );
@@ -173,6 +114,9 @@ class user_action extends \singleton_util {
 			'by'	=> get_current_user_id(),
 			'on'	=> current_time( 'Y-m-d' ),
 		);
+
+		// Hook pour enregister l'unité de travail dans les données compilées de l'utilisateur
+		do_action( 'delete_compiled_workunit_id', $user_id, $id );
 
 		\workunit_class::g()->update( $workunit );
 
@@ -253,8 +197,8 @@ class user_action extends \singleton_util {
 			wp_send_json_error();
 		}
 
-		$element = \workunit_class::g()->show( $element_id );
-		user_class::g()->render_list( $element );
+		$element = \workunit_class::g()->get( array( 'include' => array( $element_id ) ), array( false ) );
+		user_class::g()->render_list_user_to_assign( $element[0] );
 		wp_die();
 	}
 }

@@ -53,11 +53,12 @@ class society_class extends singleton_util {
 			$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 		}
 
-		$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'simple', 'dashboard' );
-		if( $path ) {
-			require_once( $path );
-		}
+		// $path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'simple', 'dashboard' );
+		// if( $path ) {
+		// 	require_once( $path );
+		// }
 
+		require_once( WPDIGI_STES_TEMPLATES_MAIN_DIR . 'simple/dashboard.php' );
 	}
 
 	/**

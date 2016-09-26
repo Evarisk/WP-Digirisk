@@ -58,6 +58,6 @@ var digi_evaluator = {
 			next_page: next_page
 		};
 
-		digi_evaluator.$( '.wp-form-evaluator-to-assign' ).load( window.ajaxurl, data, function() {} );
+		digi_evaluator.$( '.wp-digi-content' ).load( window.ajaxurl, data, function() {} );
 	}
 };

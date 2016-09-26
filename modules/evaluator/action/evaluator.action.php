@@ -68,16 +68,19 @@ class evaluator_action {
 						'on'	=> current_time( 'Y-m-d H:i:s' ),
 					),
 				);
+
+				do_action( 'add_compiled_evaluation_id', $element_id, $user_id, count( $element->user_info['affected_id']['evaluator'][$user_id] ) - 1 );
 			}
 		}
 
 		//On met à jour si au moins un utilisateur à été affecté
-		if( count( $_POST['list_user'] ) > 0 )
+		if( count( $_POST['list_user'] ) > 0 ) {
 			society_class::g()->update_by_type( $element );
+		}
 
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -115,11 +118,12 @@ class evaluator_action {
 			wp_send_json_error();
 
 		$element->user_info['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
+		do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );
 		society_class::g()->update_by_type( $element );
 
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		require( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -139,7 +143,7 @@ class evaluator_action {
 		}
 
 		$element = society_class::g()->show_by_type( $element_id );
-		evaluator_class::g()->render_list_evaluator_to_assign( $element );
+		evaluator_class::g()->render( $element );
 		wp_die();
 	}
 
@@ -160,7 +164,7 @@ class evaluator_action {
 		}
 
 		ob_start();
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-affected-user' ) );
+		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -191,7 +195,7 @@ class evaluator_action {
 			}
 
 		ob_start();
-		require_once( wpdigi_utils::get_template_part( WPDIGI_EVALUATOR_DIR, WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR, 'backend', 'list-user-to-assign' ) );
+		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-user-to-assign.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }

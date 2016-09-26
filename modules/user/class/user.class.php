@@ -5,7 +5,7 @@ namespace digi;
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_class extends \user_class {
-	protected $model_name 	= 'user_model';
+	protected $model_name 	= '\digi\user_model';
 	protected $meta_key		= '_wpeo_user_info';
 	protected $before_post_function = array( '\digi\construct_login', '\build_user_initial', '\build_avatar_color' );
 	protected $before_put_function = array( '\build_user_initial', '\build_avatar_color' );
@@ -263,10 +263,10 @@ class user_class extends \user_class {
 	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
 			global $wpdigi_user_ctr;
 			// Si $workunit->id est égale à 0 ou si $workunit->option['user_info'] est vide ou si $workunit->option['user_info']['affected_id'] est vide ou si $user_id est vide et n'est pas un entier ou si $workunit->option['user_info']['affected_id'][$user_id] est vide
-			if ( $workunit->id === 0 || empty( $workunit->option['user_info'] ) || empty( $workunit->option['user_info']['affected_id'] ) || empty( $workunit->option['user_info']['affected_id']['user'] ) || ( empty( $user_id ) && ctype_digit( strval( $user_id ) ) ) || empty( $workunit->option['user_info']['affected_id']['user'][$user_id] ) )
+			if ( $workunit->id === 0 || empty( $workunit->user_info ) || empty( $workunit->user_info['affected_id'] ) || empty( $workunit->user_info['affected_id']['user'] ) || ( empty( $user_id ) && ctype_digit( strval( $user_id ) ) ) || empty( $workunit->user_info['affected_id']['user'][$user_id] ) )
 				return false;
 			$index_valid_key = -1;
-			foreach ( $workunit->option['user_info']['affected_id']['user'][$user_id] as $key => $affected_user ) {
+			foreach ( $workunit->user_info['affected_id']['user'][$user_id] as $key => $affected_user ) {
 				if( $affected_user['status'] == 'valid' ) {
 					$index_valid_key = $key;
 					break;

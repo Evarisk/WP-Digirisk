@@ -13,10 +13,10 @@
 	<?php
 	if ( !empty( $list_user ) ):
 		foreach ( $list_user as $user ):
-			require( USERS_VIEW . 'page-user/item.view.php' );
+			require( USER_DASHBOARD_VIEW . 'item.view.php' );
 		endforeach;
 	endif;
 
-	require( USERS_VIEW . 'page-user/item-edit.view.php' );
+	require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );
 	?>
 </ul>
