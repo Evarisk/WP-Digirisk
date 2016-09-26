@@ -114,6 +114,11 @@ class constructor_data_class extends helper_class {
 				$object[ $field_def[ 'field' ] ] = $this->$field_name;
 		}
 
+		eo_log( 'digi-post-toto', array(
+				'message' => 'Do wp object : ' . json_encode( $object )
+			)
+		);
+
 		return $object;
 	}
 

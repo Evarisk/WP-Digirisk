@@ -1,9 +1,9 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class chemical_product_class extends post_class {
+class chemi_product_class extends post_class {
 
-	protected $model_name   = 'chemical_product_model';
-	protected $post_type    = 'digi-chemical-product';
+	protected $model_name   = 'chemi_product_model';
+	protected $post_type    = 'digi-chemi_product';
 	protected $meta_key    	= '_wpdigi_chemical_product';
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to chemical_product from WP Rest API	*/
@@ -96,7 +96,7 @@ class chemical_product_class extends post_class {
 			return false;
 		}
 
-		$chemical_product_list = chemical_product_class::g()->get( array( 'post_parent' => $society->id ), array( false ) );
+		$chemical_product_list = chemi_product_class::g()->get( array( 'post_parent' => $society->id ), array( false ) );
 
 		require( CHEMICAL_PRODUCT_VIEW_DIR . 'list.view.php' );
 	}

@@ -25,7 +25,7 @@ var digi_chemical_product = {
       },
 			success: function( response ) {
 				digi_chemical_product.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-				digi_chemical_product.$( '.wp-digi-chemical_product.wp-digi-list' ).replaceWith( response.data.template );
+				digi_chemical_product.$( '.wp-digi-chemical-product.wp-digi-list' ).replaceWith( response.data.template );
 			}
 		} );
 	},
@@ -69,7 +69,7 @@ var digi_chemical_product = {
 		digi_chemical_product.$.post( window.ajaxurl, data, function( response ) {
       digi_chemical_product.$( '.wp-digi-list-item .dashicons-edit' ).hide();
 			digi_chemical_product.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-			digi_chemical_product.$( '.wp-digi-chemical_product .wp-digi-list-item[data-chemical_product-id="' + chemical_product_id + '"]' ).replaceWith( response.data.template );
+			digi_chemical_product.$( '.wp-digi-chemical-product .wp-digi-list-item[data-chemical-product-id="' + chemical_product_id + '"]' ).replaceWith( response.data.template );
 		} );
 	},
 

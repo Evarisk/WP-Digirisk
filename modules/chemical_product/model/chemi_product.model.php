@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class chemical_product_model extends post_model {
+class chemi_product_model extends post_model {
 
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(
@@ -27,15 +27,17 @@ class chemical_product_model extends post_model {
 			'CAS_number' => array(
 				'type'				=> 'integer',
 				'meta_type'		=> 'multiple',
+				'required'		=> true,
 			),
 			'reference' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
+				'required'		=> true,
 			),
 		) );
 
-		// $this->model['title']['required'] = true;
-		// $this->model['content']['required'] = true;
+		$this->model['title']['required'] = true;
+		$this->model['content']['required'] = true;
 
 		parent::__construct( $object, $field_wanted );
 	}

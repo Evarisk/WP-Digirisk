@@ -6,7 +6,7 @@
 	<input type="hidden" name="parent_id" value="<?php echo $society_id; ?>" />
 
 	<ul class="wp-digi-list wp-digi-chemical-product wp-digi-table">
-		<?php chemical_product_class::g()->display_chemical_product_list( $society_id ); ?>
+		<?php chemi_product_class::g()->display_chemical_product_list( $society_id ); ?>
 		<?php require( CHEMICAL_PRODUCT_VIEW_DIR . '/item-edit.php' ); ?>
 	</ul>
 </form>

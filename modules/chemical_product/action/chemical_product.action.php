@@ -30,15 +30,15 @@ class chemical_product_action {
 	public function ajax_edit_chemical_product() {
 		check_ajax_referer( 'edit_chemical_product' );
 
-		if ( !empty( $_POST['chemical_product'] ) ) {
-		  foreach ( $_POST['chemical_product'] as $element ) {
+		if ( !empty( $_POST['chemi_product'] ) ) {
+		  foreach ( $_POST['chemi_product'] as $element ) {
 				$element['parent_id'] = $_POST['parent_id'];
-				chemical_product_class::g()->update( $element );
+				chemi_product_class::g()->update( $element );
 		  }
 		}
 
 		ob_start();
-		chemical_product_class::g()->display( $_POST['parent_id'] );
+		chemi_product_class::g()->display( $_POST['parent_id'] );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -65,7 +65,7 @@ class chemical_product_action {
 
 		$chemical_product->status = 'trash';
 
-		chemical_product_class::g()->update( $chemical_product );
+		chemi_product_class::g()->update( $chemical_product );
 
 		wp_send_json_success();
 	}
@@ -81,7 +81,7 @@ class chemical_product_action {
 		$chemical_product_id = !empty( $_POST['chemical_product_id'] ) ? (int)$_POST['chemical_product_id'] : 0;
 
 		check_ajax_referer( 'ajax_load_chemical_product_' . $chemical_product_id );
-		$chemical_product = chemical_product_class::g()->get( array( 'include' => $chemical_product_id ) );
+		$chemical_product = chemi_product_class::g()->get( array( 'include' => $chemical_product_id ) );
 		$chemical_product = $chemical_product[0];
 		$society_id = $chemical_product->parent_id;
 
