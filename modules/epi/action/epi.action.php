@@ -14,32 +14,18 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class epi_action {
 	/**
 	* Le constructeur appelle une action personnalisée:
-	* callback_display_epi
 	* Il appelle également les actions ajax suivantes:
 	* wp_ajax_wpdigi-delete-epi
 	* wp_ajax_wpdigi-load-epi
 	* wp_ajax_wpdigi-edit-epi
-	* wp_ajax_delete_comment
 	*/
 	public function __construct() {
-		// Remplacé les - en _
-		add_action( 'display_epi', array( $this, 'callback_display_epi' ), 10, 1 );
 		add_action( 'wp_ajax_edit_epi', array( $this, 'ajax_edit_epi' ) );
 		add_action( 'wp_ajax_wpdigi-delete-epi', array( $this, 'ajax_delete_epi' ) );
 		add_action( 'wp_ajax_load_epi', array( $this, 'ajax_load_epi' ) );
 		add_action( 'wp_ajax_wpdigi-edit-epi', array( $this, 'ajax_edit_epi' ) );
 	}
 
-	/**
-  * Enregistres un epi.
-	* Ce callback est le dernier de l'action "save_epi"
-  *
-	* int $_POST['element_id'] L'ID de l'élement ou le epi sera affecté
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-  */
-	public function callback_display_epi( $society_id ) {
-	}
 
 	public function ajax_edit_epi() {
 		check_ajax_referer( 'edit_epi' );
@@ -64,7 +50,24 @@ class epi_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_epi() {
-		
+		if ( 0 === (int)$_POST['epi_id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$epi_id = (int)$_POST['epi_id'];
+
+		check_ajax_referer( 'ajax_delete_epi_' . $epi_id );
+
+		$epi = epi_class::g()->get( array( 'id' => $epi_id ) );
+		$epi = $epi[0];
+
+		if ( empty( $epi ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
+
+		$epi->status = 'trash';
+
+		epi_class::g()->update( $epi );
+
+		wp_send_json_success();
 	}
 
 	/**

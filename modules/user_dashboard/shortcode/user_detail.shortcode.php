@@ -22,9 +22,8 @@ class user_detail_shortcode {
 	public function callback_digi_user_detail( $param ) {
 		$user = \digi\user_class::g()->get( array( 'include' => array( $param['id'] ) ) );
 		$user = $user[0];
-		echo $user;
 
-		$list_workunit = workunit_class::g()->get( array(), array( false ), array( 'after_get' => array( array( 'func' => 'filter_by_affected_user_id', 'args' => array( 'user_id' => $user->id ) ) ) ) );
+		$list_workunit = user_detail_class::g()->get_list_workunit( $user->id, $user->dashboard_compiled_data['list_workunit_id'] );
 
 		require( USER_DASHBOARD_VIEW . '/user-detail/main.view.php' );
 	}

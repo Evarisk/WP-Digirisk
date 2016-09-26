@@ -8,7 +8,7 @@ class post_class extends singleton_util {
 
 	protected function construct() {}
 
-	public function get( $args = array( 'posts_per_page' => -1 ), $children_wanted = array(), $custom_function = array() ) {
+	public function get( $args = array( 'posts_per_page' => -1 ), $children_wanted = array() ) {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 
@@ -60,15 +60,6 @@ class post_class extends singleton_util {
 				}
 			}
 
-			if ( !empty( $custom_function['after_get'] ) ) {
-				foreach ( $custom_function['after_get'] as $get_function ) {
-					$array_posts[$key] = call_user_func( $get_function['func'], $array_posts[$key], $get_function['args'] );
-
-					if ( !$array_posts[$key] ) {
-						unset( $array_posts[$key] );
-					}
-				}
-			}
 		}
 
 		return $array_posts;

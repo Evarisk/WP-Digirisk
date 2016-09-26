@@ -81,7 +81,7 @@ class user_model extends \user_model {
 						'type'	=> 'array',
 						'meta_type'	=> 'multiple',
 					),
-					'list_epi_edi' => array(
+					'list_epi_id' => array(
 						'type'	=> 'array',
 						'meta_type'	=> 'multiple',
 					)
