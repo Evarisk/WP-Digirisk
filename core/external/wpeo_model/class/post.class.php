@@ -90,6 +90,12 @@ class post_class extends singleton_util {
 			}
 
 			$data->id = wp_insert_post( $data->do_wp_object() );
+			eo_log( 'digi-post-' . $this->post_type, array(
+					'object_id' => $data->id,
+					'message' => 'Saved post : ' . json_encode( $data )
+				),
+				$data->id === 0 ? 1 : 0
+			);
 		}
 		else {
 			$current_data = $this->get( array( 'id' => $data['id'] ), array( false ) );
@@ -108,6 +114,12 @@ class post_class extends singleton_util {
 			}
 
 			wp_update_post( $data->do_wp_object() );
+			eo_log( 'digi-post-' . $this->post_type, array(
+					'object_id' => $data->id,
+					'message' => 'Saved post : ' . json_encode( $data )
+				),
+				$data->id === 0 ? 1 : 0
+			);
 		}
 
 		save_meta_class::g()->save_meta_data( $data, 'update_post_meta', $this->meta_key );

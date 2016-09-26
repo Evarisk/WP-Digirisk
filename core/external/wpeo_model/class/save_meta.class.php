@@ -26,6 +26,10 @@ class save_meta_class extends singleton_util {
 
 	private function save_single_meta_data( $id, $value, $function, $meta_key ) {
 		call_user_func( $function, $id, $meta_key, $value );
+		eo_log( 'digi-post-' . $this->post_type, array(
+			'object_id' => $data->id,
+			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . $value
+		) );
 	}
 
 	private function save_multiple_meta_data( $id, $array_value, $function, $meta_key ) {
@@ -44,5 +48,9 @@ class save_meta_class extends singleton_util {
 		);
 
 		call_user_func( $function, $id, $meta_key, $data );
+		eo_log( 'digi-post-' . $this->post_type, array(
+			'object_id' => $data->id,
+			'message' => 'Saved post meta (multiple) : ' . $meta_key . ' => ' . $data
+		) );
 	}
 }

@@ -17,7 +17,7 @@ class chemical_product_shortcode {
 	* Le constructeur
 	*/
 	public function __construct() {
-		add_shortcode( 'digi-chemical_product', array( $this, 'callback_digi_chemical_product' ) );
+		add_shortcode( 'digi-chemical-product', array( $this, 'callback_digi_chemical_product' ) );
 	}
 
 	/**

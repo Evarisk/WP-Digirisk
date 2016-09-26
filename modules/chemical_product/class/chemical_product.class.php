@@ -3,7 +3,7 @@
 class chemical_product_class extends post_class {
 
 	protected $model_name   = 'chemical_product_model';
-	protected $post_type    = 'digi-chemical_product';
+	protected $post_type    = 'digi-chemical-product';
 	protected $meta_key    	= '_wpdigi_chemical_product';
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to chemical_product from WP Rest API	*/
@@ -12,7 +12,7 @@ class chemical_product_class extends post_class {
 
 	protected $before_post_function = array( 'construct_identifier' );
 	protected $after_get_function = array( 'get_identifier' );
-	public $element_prefix = 'PC';
+	public $element_prefix = 'CP';
 
 	protected $limit_chemical_product = -1;
 
@@ -53,7 +53,7 @@ class chemical_product_class extends post_class {
 			'feeds'               => true,
 		);
 		$args = array(
-			'label'               => __( 'Digichemical_product chemical_product', 'digirisk' ),
+			'label'               => __( 'Digirisk chemical_product', 'digirisk' ),
 			'description'         => __( 'Manage chemical_products into digirisk', 'digirisk' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
@@ -79,7 +79,9 @@ class chemical_product_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
-		require( EPI_VIEW_DIR . 'main.view.php' );
+		$chemical_product = $this->get( array( 'schema' => true ) );
+		$chemical_product = $chemical_product[0];
+		require( CHEMICAL_PRODUCT_VIEW_DIR . 'main.view.php' );
 	}
 
 	/**
@@ -94,24 +96,8 @@ class chemical_product_class extends post_class {
 			return false;
 		}
 
-		$chemical_product_list = chemical_product_class::g()->index( array( 'post_parent' => $society->id ) );
+		$chemical_product_list = chemical_product_class::g()->get( array( 'post_parent' => $society->id ), array( false ) );
 
-		if ( !empty( $chemical_product_list ) ) {
-		  foreach ( $chemical_product_list as $key => $element ) {
-				$chemical_product_list[$key] = $this->get_chemical_product( $element->id );
-		  }
-		}
-
-		// Tries les risques par ordre de cotation
-		if ( count( $chemical_product_list ) > 1 ) {
-			usort( $chemical_product_list, function( $a, $b ) {
-				if( $a->evaluation->option[ 'chemical_product_level' ][ 'equivalence' ] == $b->evaluation->option[ 'chemical_product_level' ][ 'equivalence' ] ) {
-					return 0;
-				}
-				return ( $a->evaluation->option[ 'chemical_product_level' ][ 'equivalence' ] > $b->evaluation->option[ 'chemical_product_level' ][ 'equivalence' ] ) ? -1 : 1;
-			} );
-		}
-
-		require( EPI_VIEW_DIR . 'list.view.php' );
+		require( CHEMICAL_PRODUCT_VIEW_DIR . 'list.view.php' );
 	}
 }

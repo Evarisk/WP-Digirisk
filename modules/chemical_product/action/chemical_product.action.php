@@ -14,30 +14,32 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class chemical_product_action {
 	/**
 	* Le constructeur appelle une action personnalisée:
-	* callback_display_chemical_product
 	* Il appelle également les actions ajax suivantes:
 	* wp_ajax_wpdigi-delete-chemical_product
 	* wp_ajax_wpdigi-load-chemical_product
 	* wp_ajax_wpdigi-edit-chemical_product
-	* wp_ajax_delete_comment
 	*/
 	public function __construct() {
-		// Remplacé les - en _
-		add_action( 'display_chemical_product', array( $this, 'callback_display_chemical_product' ), 10, 1 );
+		add_action( 'wp_ajax_edit_chemical_product', array( $this, 'ajax_edit_chemical_product' ) );
 		add_action( 'wp_ajax_wpdigi-delete-chemical_product', array( $this, 'ajax_delete_chemical_product' ) );
-		add_action( 'wp_ajax_wpdigi-load-chemical_product', array( $this, 'ajax_load_chemical_product' ) );
-		add_action( 'wp_ajax_wpdigi-edit-chemical_product', array( $this, 'ajax_edit_chemical_product' ) );
+		add_action( 'wp_ajax_load_chemical_product', array( $this, 'ajax_load_chemical_product' ) );
+		add_action( 'wp_ajax_edit_chemical_product', array( $this, 'ajax_edit_chemical_product' ) );
 	}
 
-	/**
-  * Enregistres un chemical_product.
-	* Ce callback est le dernier de l'action "save_chemical_product"
-  *
-	* int $_POST['element_id'] L'ID de l'élement ou le chemical_product sera affecté
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-  */
-	public function callback_display_chemical_product( $society_id ) {
+
+	public function ajax_edit_chemical_product() {
+		check_ajax_referer( 'edit_chemical_product' );
+
+		if ( !empty( $_POST['chemical_product'] ) ) {
+		  foreach ( $_POST['chemical_product'] as $element ) {
+				$element['parent_id'] = $_POST['parent_id'];
+				chemical_product_class::g()->update( $element );
+		  }
+		}
+
+		ob_start();
+		chemical_product_class::g()->display( $_POST['parent_id'] );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -48,6 +50,24 @@ class chemical_product_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_chemical_product() {
+		if ( 0 === (int)$_POST['chemical_product_id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$chemical_product_id = (int)$_POST['chemical_product_id'];
+
+		check_ajax_referer( 'ajax_delete_chemical_product_' . $chemical_product_id );
+
+		$chemical_product = chemical_product_class::g()->get( array( 'id' => $chemical_product_id ) );
+		$chemical_product = $chemical_product[0];
+
+		if ( empty( $chemical_product ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
+
+		$chemical_product->status = 'trash';
+
+		chemical_product_class::g()->update( $chemical_product );
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -58,6 +78,16 @@ class chemical_product_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_chemical_product() {
+		$chemical_product_id = !empty( $_POST['chemical_product_id'] ) ? (int)$_POST['chemical_product_id'] : 0;
+
+		check_ajax_referer( 'ajax_load_chemical_product_' . $chemical_product_id );
+		$chemical_product = chemical_product_class::g()->get( array( 'include' => $chemical_product_id ) );
+		$chemical_product = $chemical_product[0];
+		$society_id = $chemical_product->parent_id;
+
+		ob_start();
+		require( CHEMICAL_PRODUCT_VIEW_DIR . 'item-edit.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
 

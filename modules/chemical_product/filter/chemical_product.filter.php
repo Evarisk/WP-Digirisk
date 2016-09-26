@@ -17,11 +17,11 @@ class chemical_product_filter {
 	}
 
 	public function callback_tab( $list_tab ) {
-		$list_tab['digi-workunit']['chemical_product'] = array(
-			'text' => __( 'Chemical product', 'digirisk' ),
+		$list_tab['digi-workunit']['chemical-product'] = array(
+			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
-		$list_tab['digi-group']['chemical_product'] = array(
-			'text' => __( 'Chemical product', 'digirisk' ),
+		$list_tab['digi-group']['chemical-product'] = array(
+			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
 
 		return $list_tab;
