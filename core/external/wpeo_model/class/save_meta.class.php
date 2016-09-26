@@ -26,7 +26,7 @@ class save_meta_class extends singleton_util {
 
 	private function save_single_meta_data( $id, $value, $function, $meta_key ) {
 		call_user_func( $function, $id, $meta_key, $value );
-		eo_log( 'digi-post-' . $this->post_type, array(
+		eo_log( 'digi-post-meta', array(
 			'object_id' => $data->id,
 			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . $value
 		) );
@@ -48,7 +48,7 @@ class save_meta_class extends singleton_util {
 		);
 
 		call_user_func( $function, $id, $meta_key, $data );
-		eo_log( 'digi-post-' . $this->post_type, array(
+		eo_log( 'digi-post-meta', array(
 			'object_id' => $data->id,
 			'message' => 'Saved post meta (multiple) : ' . $meta_key . ' => ' . $data
 		) );
