@@ -27,7 +27,7 @@ class recommendation_default_data_class extends singleton_util {
 			$recommendation_category = $this->get( array( 'id' => $recommendation_category->error_data['term_exists'] ) );
 		}
 
-		$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommendation_category->name_thumbnail, 0 );
+		$file_id = file_util::g()->move_file_and_attach( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommendation_category->name_thumbnail, 0 );
 
 		$recommendation_category->thumbnail_id = $file_id;
 		$recommendation_category->associated_document_id[] = $file_id;
@@ -46,7 +46,7 @@ class recommendation_default_data_class extends singleton_util {
 		) );
 
 		if ( !is_wp_error( $recommandation ) ) {
-			$file_id = wpdigi_utils::upload_file( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
+			$file_id = file_util::g()->move_file_and_attach( WPDIGI_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
 			$recommandation->thumbnail_id = $file_id;
 			$recommandation = recommendation_class::g()->update( $recommandation );
 		}

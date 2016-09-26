@@ -44,6 +44,8 @@
 		</form>
 	</div>
 
-	<?php \digi\user_action::g()->display_page_staff( true ); ?>
+	<div class="hidden wpdigi-staff">
+		<?php do_shortcode( '[digi_user_dashboard]' ); ?>
+	</div>
 
 </div>

@@ -21,11 +21,14 @@ class user_detail_shortcode {
 
 	public function callback_digi_user_detail( $param ) {
 		$user = \digi\user_class::g()->get( array( 'include' => array( $param['id'] ) ) );
-		$user = $user[0];
 
-		$list_workunit = user_detail_class::g()->get_list_workunit( $user->id, $user->dashboard_compiled_data['list_workunit_id'] );
+		if ( !empty( $user[0] ) ) {
+			$user = $user[0];
 
-		require( USER_DASHBOARD_VIEW . '/user-detail/main.view.php' );
+			$list_workunit = user_detail_class::g()->get_list_workunit( $user->id, $user->dashboard_compiled_data['list_workunit_id'] );
+
+			require( USER_DASHBOARD_VIEW . '/user-detail/main.view.php' );
+		}
 	}
 }
 
