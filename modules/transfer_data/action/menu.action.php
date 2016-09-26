@@ -37,7 +37,7 @@ class menu_action {
 	}
 
 	public function transfer_page() {
-		require( \wpdigi_utils::get_template_part( DIGI_DTRANS_DIR, DIGI_DTRANS_TEMPLATES_MAIN_DIR, "backend", "transfert" ) );
+		require( DIGI_DTRANS_TEMPLATES_MAIN_DIR . "backend/transfert.php" );
 	}
 }
 

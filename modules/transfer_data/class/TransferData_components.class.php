@@ -58,14 +58,12 @@ class TransferData_components_class extends \singleton_util {
 					'description' => $eva_danger_category->description,
 					'url' => null,
 					'parent_id' => null,
-					'option' => array(
-						'status' => ( 'Valid' == $eva_danger_category->Status ) ? 'valid' : 'deleted',
-						'unique_key' => $eva_danger_category->id,
-						'unique_identifier' => ELEMENT_IDENTIFIER_CD . $eva_danger_category->id,
-						'position' => $eva_danger_category->position,
-						'thumbnail_id' => null,
-						'associated_document_id' => null,
-					),
+					'status' => ( 'Valid' == $eva_danger_category->Status ) ? 'valid' : 'deleted',
+					'unique_key' => $eva_danger_category->id,
+					'unique_identifier' => ELEMENT_IDENTIFIER_CD . $eva_danger_category->id,
+					'position' => $eva_danger_category->position,
+					'thumbnail_id' => null,
+					'associated_document_id' => null,
 				);
 
 				$wp_danger_category = \category_danger_class::g()->create( $wp_danger_category_definition );
@@ -73,8 +71,8 @@ class TransferData_components_class extends \singleton_util {
 				/**	Enregistrement des données complémentaires pour les catégories de danger et création des danger pour la catégorie / Save complementary datas for danger categories and create danger of category	*/
 				if ( !empty( $wp_danger_category->id ) ) {
 					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_DANGER, $eva_danger_category->id );
-					$wp_danger_category->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
-					$wp_danger_category->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
+					$wp_danger_category->associated_document_id = $term_associated_files[ 'associated_list' ];
+					$wp_danger_category->thumbnail_id = $term_associated_files[ '_thumbnail' ];
 					$wp_danger_category = \category_danger_class::g()->update( $wp_danger_category );
 
 					$current_transfer_state[ 'danger_category' ][] = $eva_danger_category->id;
@@ -101,15 +99,13 @@ class TransferData_components_class extends \singleton_util {
 								'description' 			=> $eva_danger->description,
 								'url' 							=> null,
 								'parent_id'	 				=> $wp_danger_category->id,
-								'option' 						=> array(
-									'status' 							=> ( 'Valid' == $eva_danger->Status ) ? 'valid' : 'deleted',
-									'unique_key' 					=> $eva_danger->id,
-									'unique_identifier' 	=> ELEMENT_IDENTIFIER_D . $eva_danger->id,
-									'default_method' 			=> $eva_danger->methode_eva_defaut,
-									'default_of_category' => ( !empty( $options ) && is_array( $options ) && in_array( 'default', $options ) ? true : false ),
-									'is_annoying' 				=> ( !empty( $options ) && is_array( $options ) && in_array( 'penibilite', $options ) ? true : false ),
-									'thumbnail_id' 				=> $term_associated_files[ '_thumbnail' ],
-								),
+								'status' 							=> ( 'Valid' == $eva_danger->Status ) ? 'valid' : 'deleted',
+								'unique_key' 					=> $eva_danger->id,
+								'unique_identifier' 	=> ELEMENT_IDENTIFIER_D . $eva_danger->id,
+								'default_method' 			=> $eva_danger->methode_eva_defaut,
+								'default_of_category' => ( !empty( $options ) && is_array( $options ) && in_array( 'default', $options ) ? true : false ),
+								'is_annoying' 				=> ( !empty( $options ) && is_array( $options ) && in_array( 'penibilite', $options ) ? true : false ),
+								'thumbnail_id' 				=> $term_associated_files[ '_thumbnail' ],
 							);
 							$wp_danger = \danger_class::g()->create( $wp_danger_definition );
 
@@ -174,13 +170,11 @@ class TransferData_components_class extends \singleton_util {
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_var->nom ),
 					'description' => html_entity_decode( $eva_var->annotation ),
-					'option' => array(
-						'unique_key' => $eva_var->id,
-						'unique_identifier' => ELEMENT_IDENTIFIER_ME . $eva_var->id,
-						'display_type' => $eva_var->affichageVar,
-						'range' => array( $eva_var->min, $eva_var->max ),
-						'survey' => array( 'titre' => $eva_var->questionTitre, 'request' => unserialize( $eva_var->questionVar ) ),
-					),
+					'unique_key' => $eva_var->id,
+					'unique_identifier' => ELEMENT_IDENTIFIER_ME . $eva_var->id,
+					'display_type' => $eva_var->affichageVar,
+					'range' => array( $eva_var->min, $eva_var->max ),
+					'survey' => array( 'titre' => $eva_var->questionTitre, 'request' => unserialize( $eva_var->questionVar ) ),
 				);
 
 				if ( 'slide' == $eva_var->affichageVar && !empty( $eva_var->annotation ) ) {
@@ -303,22 +297,20 @@ class TransferData_components_class extends \singleton_util {
 						'term_taxonomy_id' => null,
 						'name' => html_entity_decode( $eva_method->nom, ENT_QUOTES, 'UTF-8' ),
 						'description' => null,
-						'option' => array(
-							'unique_key' => $eva_method->id,
-							'unique_identifier' => ELEMENT_IDENTIFIER_ME . $eva_method->id,
-							'is_default' => ( 'yes' == $eva_method->default_methode ? true : false ),
-							'formula' => $final_new_formula,
-							'matrix' => $method_result,
-							'thumbnail_id' => null,
-							'associated_document_id' => null,
-						),
+						'unique_key' => $eva_method->id,
+						'unique_identifier' => ELEMENT_IDENTIFIER_ME . $eva_method->id,
+						'is_default' => ( 'yes' == $eva_method->default_methode ? true : false ),
+						'formula' => $final_new_formula,
+						'matrix' => $method_result,
+						'thumbnail_id' => null,
+						'associated_document_id' => null,
 				);
 				$wp_evaluation_method = \evaluation_method_class::g()->create( $wp_evaluation_method_definition );
 
 				if ( !is_wp_error( $wp_evaluation_method ) ) {
 					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_METHODE, $eva_method->id );
-					$wp_evaluation_method->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
-					$wp_evaluation_method->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
+					$wp_evaluation_method->associated_document_id = $term_associated_files[ 'associated_list' ];
+					$wp_evaluation_method->thumbnail_id = $term_associated_files[ '_thumbnail' ];
 					\evaluation_method_class::g()->update( $wp_evaluation_method );
 
 					$current_transfer_state[ 'evaluation_method' ][] = $eva_method->id;
@@ -384,27 +376,25 @@ class TransferData_components_class extends \singleton_util {
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_recommendation_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => null,
-					'option' => array(
-						'unique_key' => $eva_recommendation_category->id,
-						'unique_identifier' => ELEMENT_IDENTIFIER_CP . $eva_recommendation_category->id,
-						'thumbnail_id' => null,
-						'associated_document_id' => null,
-						'recommendation_category_print_option' => array(
-							'type'	=> $eva_recommendation_category->impressionRecommandationCategorie,
-							'size'	=> $eva_recommendation_category->tailleimpressionRecommandationCategorie,
-						),
-						'recommendation_print_option' => array(
-							'type'	=> $eva_recommendation_category->impressionRecommandation,
-							'size'	=> $eva_recommendation_category->tailleimpressionRecommandation,
-						),
+					'unique_key' => $eva_recommendation_category->id,
+					'unique_identifier' => ELEMENT_IDENTIFIER_CP . $eva_recommendation_category->id,
+					'thumbnail_id' => null,
+					'associated_document_id' => null,
+					'recommendation_category_print_option' => array(
+						'type'	=> $eva_recommendation_category->impressionRecommandationCategorie,
+						'size'	=> $eva_recommendation_category->tailleimpressionRecommandationCategorie,
+					),
+					'recommendation_print_option' => array(
+						'type'	=> $eva_recommendation_category->impressionRecommandation,
+						'size'	=> $eva_recommendation_category->tailleimpressionRecommandation,
 					),
 				);
 				$wp_category_recommendation = \recommendation_category_class::g()->create( $wp_recommendation_category_definition );
 
 				if ( !empty( $wp_category_recommendation->id ) ) {
 					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_PRECONISATION, $eva_recommendation_category->id, $wp_category_recommendation->id );
-					$wp_category_recommendation->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
-					$wp_category_recommendation->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
+					$wp_category_recommendation->associated_document_id = $term_associated_files[ 'associated_list' ];
+					$wp_category_recommendation->thumbnail_id = $term_associated_files[ '_thumbnail' ];
 					\recommendation_category_class::g()->update( $wp_category_recommendation );
 
 					$current_transfer_state[ 'recommendation_category' ][] = $eva_recommendation_category->id;
@@ -436,18 +426,16 @@ class TransferData_components_class extends \singleton_util {
 								'name' => html_entity_decode( $eva_recommendation->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' => $eva_recommendation->description,
 								'parent_id' => $wp_category_recommendation->id,
-								'option' => array(
-									'unique_key' => $eva_recommendation->id,
-									'unique_identifier' => ELEMENT_IDENTIFIER_P . $eva_recommendation->id,
-									'type' => $eva_recommendation->preconisation_type,
-								),
+								'unique_key' => $eva_recommendation->id,
+								'unique_identifier' => ELEMENT_IDENTIFIER_P . $eva_recommendation->id,
+								'type' => $eva_recommendation->preconisation_type,
 							);
 							$wp_recommendation = \recommendation_class::g()->create( $wp_recommendation_definition );
 
 							if ( !empty( $wp_recommendation->id ) ) {
 								$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_PRECONISATION, $eva_recommendation->id, $wp_recommendation->id );
-								$wp_recommendation->option[ 'associated_document_id' ] = $term_associated_files[ 'associated_list' ];
-								$wp_recommendation->option[ 'thumbnail_id' ] = $term_associated_files[ '_thumbnail' ];
+								$wp_recommendation->associated_document_id = $term_associated_files[ 'associated_list' ];
+								$wp_recommendation->thumbnail_id = $term_associated_files[ '_thumbnail' ];
 								\recommendation_class::g()->update( $wp_recommendation );
 
 								$current_transfer_state[ 'recommendation' ][] = $eva_recommendation->id;

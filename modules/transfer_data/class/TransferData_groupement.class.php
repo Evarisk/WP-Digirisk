@@ -78,30 +78,29 @@ class wpdigi_transferdata_society_class extends \singleton_util {
 	function transfer_unite( $element, $element_type, $wp_element_id ) {
 
 		/**	Get the element created for new data transfer	*/
-		$workunit_mdl = \workunit_class::g()->show( $wp_element_id );
+		$workunit_mdl = \workunit_class::g()->get( array( 'include' => array( $wp_element_id ) ) );
+		$workunit_mdl = $workunit_mdl[0];
 
 		/**	Build the	group model for new data storage */
-		$meta = array(
-			'unique_key' => $element->id,
-			'unique_identifier' => ELEMENT_IDENTIFIER_UT . $element->id,
-			'associated_document_id' => null,
-			'user_info' => array(
-				'owner_id' => $element->id_responsable,
-				'affected_id' => $this->transfer_users( $element->id, $element_type, null, \workunit_class::g()->get_post_type(), $wp_element_id ),
-			),
-			'contact' => array(
-				'phone' => array( $element->telephoneUnite, ),
-				'address' => $this->transfer_addresse( $element->id_adresse, $wp_element_id ),
-			),
-			'identity' => array(
-				'workforce' => $element->effectif,
-			),
-			'associated_risk' => $this->transfer_risk( $element->id, $element_type, $wp_element_id ),
-			'associated_product' => $this->transfer_product( $element->id, $element_type, $wp_element_id ),
-			'associated_recommendation' => $this->transfer_recommendation( $element->id, $element_type, $wp_element_id ),
+		$workunit_mdl->unique_key = $element->id;
+		$workunit_mdl->unique_identifier = ELEMENT_IDENTIFIER_UT . $element->id;
+		$workunit_mdl->associated_document_id = null;
+		$workunit_mdl->user_info = array(
+			'owner_id' => $element->id_responsable,
+			'affected_id' => $this->transfer_users( $element->id, $element_type, null, \workunit_class::g()->get_post_type(), $wp_element_id )
+		);
+		$workunit_mdl->contact = array(
+			'phone' => array( $element->telephoneUnite, ),
+			'address' => $this->transfer_addresse( $element->id_adresse, $wp_element_id )
 		);
 
-		$workunit_mdl->option = array_replace_recursive( $workunit_mdl->option, $meta);
+		$workunit_mdl->identity = array(
+			'workforce' => $element->effectif,
+		);
+
+		$workunit_mdl->associated_risk = $this->transfer_risk( $element->id, $element_type, $wp_element_id );
+		$workunit_mdl->associated_product = $this->transfer_product( $element->id, $element_type, $wp_element_id );
+		$workunit_mdl->associated_recommendation = $this->transfer_recommendation( $element->id, $element_type, $wp_element_id );
 
 		\workunit_class::g()->update( $workunit_mdl );
 	}

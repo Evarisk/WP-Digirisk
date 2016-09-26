@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		$main_config_components_are_transfered = null;
 		if ( in_array( TABLE_GROUPEMENT, TransferData_class::g()->element_type) ) :
 			global $wpdb;
-			require( \wpdigi_utils::get_template_part( DIGI_DTRANS_DIR, DIGI_DTRANS_TEMPLATES_MAIN_DIR, "backend", "transfert", "components" ) );
+			require( DIGI_DTRANS_TEMPLATES_MAIN_DIR . "backend/transfert-components.php" );
 		endif;
 
 		/**	Read the different types	*/
