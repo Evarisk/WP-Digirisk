@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 <li class="wp-digi-list-item">
-		<input name="chemical_product[<?php echo $chemical_product->id; ?>][id]" type="hidden" value="<?php echo $chemical_product->id; ?>" />
+		<input name="chemi_product[<?php echo $chemical_product->id; ?>][id]" type="hidden" value="<?php echo $chemical_product->id; ?>" />
 		<?php echo do_shortcode( '[eo_upload_button id="' . $chemical_product->id . '" type="chemi_product"]' ); ?>
 		<span class="padded"><?php echo $chemical_product->unique_identifier; ?></span>
 		<span class="padded"><input type="text" name="chemi_product[<?php echo $chemical_product->id; ?>][title]" value="<?php echo $chemical_product->title; ?>" placeholder="Nom" /></span>
