@@ -18,6 +18,7 @@ class user_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'digi-user', array( $this, 'callback_digi_user' ) );
+		add_shortcode( 'digi_dropdown_user', array( $this, 'callback_dropdown_user' ) );
 	}
 
 	/**
@@ -30,6 +31,16 @@ class user_shortcode {
     $element = society_class::g()->show_by_type( $element_id );
 
 		\digi\user_class::g()->render( $element );
+	}
+
+	public function callback_dropdown_user( $param ) {
+		$element_id = !empty( $param['element_id'] ) ? (int) $param['element_id'] : 0;
+		$user_id = !empty( $param['user_id'] ) ? (int) $param['user_id'] : 0;
+
+		$list_user = \digi\user_class::g()->get();
+		array_shift($list_user);
+
+		require( USERS_VIEW . 'dropdown/list.view.php' );
 	}
 }
 

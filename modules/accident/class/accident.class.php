@@ -12,7 +12,7 @@ class accident_class extends post_class {
 
 	protected $before_post_function = array( 'construct_identifier' );
 	protected $after_get_function = array( 'get_identifier' );
-	public $element_prefix = 'A';
+	public $element_prefix = 'AC';
 
 	protected $limit_accident = -1;
 
@@ -30,21 +30,21 @@ class accident_class extends post_class {
 	function custom_post_type() {
 		/**	Créé les sociétés: élément principal / Create accident : main element 	*/
 		$labels = array(
-			'name'                => __( 'Accidents', 'digirisk' ),
-			'singular_name'       => __( 'Accident', 'digirisk' ),
-			'menu_name'           => __( 'Accidents', 'digirisk' ),
-			'name_admin_bar'      => __( 'Accident', 'digirisk' ),
-			'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
-			'all_items'           => __( 'Accident', 'digirisk' ),
-			'add_new_item'        => __( 'Add accident', 'digirisk' ),
-			'add_new'             => __( 'Add accident', 'digirisk' ),
-			'new_item'            => __( 'New accident', 'digirisk' ),
-			'edit_item'           => __( 'Edit accident', 'digirisk' ),
-			'update_item'         => __( 'Update accident', 'digirisk' ),
-			'view_item'           => __( 'View accident', 'digirisk' ),
-			'search_items'        => __( 'Search accident', 'digirisk' ),
-			'not_found'           => __( 'Not found', 'digirisk' ),
-			'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
+			'name'                => __( 'Risks', 'digiaccident' ),
+			'singular_name'       => __( 'Risk', 'digiaccident' ),
+			'menu_name'           => __( 'Risks', 'digiaccident' ),
+			'name_admin_bar'      => __( 'Risks', 'digiaccident' ),
+			'parent_item_colon'   => __( 'Parent Item:', 'digiaccident' ),
+			'all_items'           => __( 'Risks', 'digiaccident' ),
+			'add_new_item'        => __( 'Add accident', 'digiaccident' ),
+			'add_new'             => __( 'Add accident', 'digiaccident' ),
+			'new_item'            => __( 'New accident', 'digiaccident' ),
+			'edit_item'           => __( 'Edit accident', 'digiaccident' ),
+			'update_item'         => __( 'Update accident', 'digiaccident' ),
+			'view_item'           => __( 'View accident', 'digiaccident' ),
+			'search_items'        => __( 'Search accident', 'digiaccident' ),
+			'not_found'           => __( 'Not found', 'digiaccident' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'digiaccident' ),
 		);
 		$rewrite = array(
 			'slug'                => '/',
@@ -53,8 +53,8 @@ class accident_class extends post_class {
 			'feeds'               => true,
 		);
 		$args = array(
-			'label'               => __( 'Digiaccident accident', 'digirisk' ),
-			'description'         => __( 'Manage accidents into digirisk', 'digirisk' ),
+			'label'               => __( 'Digiaccident accident', 'digiaccident' ),
+			'description'         => __( 'Manage accidents into digiaccident', 'digiaccident' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
 			'hierarchical'        => true,
@@ -79,6 +79,8 @@ class accident_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
+		$accident = $this->get( array( 'schema' => true ) );
+		$accident = $accident[0];
 		require( ACCIDENT_VIEW_DIR . 'main.view.php' );
 	}
 
@@ -94,23 +96,7 @@ class accident_class extends post_class {
 			return false;
 		}
 
-		$accident_list = accident_class::g()->index( array( 'post_parent' => $society->id ) );
-
-		if ( !empty( $accident_list ) ) {
-		  foreach ( $accident_list as $key => $element ) {
-				$accident_list[$key] = $this->get_accident( $element->id );
-		  }
-		}
-
-		// Tries les risques par ordre de cotation
-		if ( count( $accident_list ) > 1 ) {
-			usort( $accident_list, function( $a, $b ) {
-				if( $a->evaluation->option[ 'accident_level' ][ 'equivalence' ] == $b->evaluation->option[ 'accident_level' ][ 'equivalence' ] ) {
-					return 0;
-				}
-				return ( $a->evaluation->option[ 'accident_level' ][ 'equivalence' ] > $b->evaluation->option[ 'accident_level' ][ 'equivalence' ] ) ? -1 : 1;
-			} );
-		}
+		$accident_list = accident_class::g()->get( array( 'post_parent' => $society->id ), array( 'list_risk', 'evaluation', 'list_user' ) );
 
 		require( ACCIDENT_VIEW_DIR . 'list.view.php' );
 	}

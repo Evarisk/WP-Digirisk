@@ -14,30 +14,31 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class accident_action {
 	/**
 	* Le constructeur appelle une action personnalisée:
-	* callback_display_accident
 	* Il appelle également les actions ajax suivantes:
 	* wp_ajax_wpdigi-delete-accident
 	* wp_ajax_wpdigi-load-accident
 	* wp_ajax_wpdigi-edit-accident
-	* wp_ajax_delete_comment
 	*/
 	public function __construct() {
-		// Remplacé les - en _
-		add_action( 'display_accident', array( $this, 'callback_display_accident' ), 10, 1 );
+		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
 		add_action( 'wp_ajax_wpdigi-delete-accident', array( $this, 'ajax_delete_accident' ) );
-		add_action( 'wp_ajax_wpdigi-load-accident', array( $this, 'ajax_load_accident' ) );
+		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );
 		add_action( 'wp_ajax_wpdigi-edit-accident', array( $this, 'ajax_edit_accident' ) );
 	}
 
-	/**
-  * Enregistres un accident.
-	* Ce callback est le dernier de l'action "save_accident"
-  *
-	* int $_POST['element_id'] L'ID de l'élement ou le accident sera affecté
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-  */
-	public function callback_display_accident( $society_id ) {
+	public function ajax_edit_accident() {
+		check_ajax_referer( 'edit_accident' );
+
+		if ( !empty( $_POST['accident'] ) ) {
+		  foreach ( $_POST['accident'] as $element ) {
+				$element['parent_id'] = $_POST['parent_id'];
+				accident_class::g()->update( $element );
+		  }
+		}
+
+		ob_start();
+		accident_class::g()->display( $_POST['parent_id'] );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -48,6 +49,24 @@ class accident_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_accident() {
+		if ( 0 === (int)$_POST['accident_id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$accident_id = (int)$_POST['accident_id'];
+
+		check_ajax_referer( 'ajax_delete_accident_' . $accident_id );
+
+		$accident = accident_class::g()->get( array( 'id' => $accident_id ) );
+		$accident = $accident[0];
+
+		if ( empty( $accident ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
+
+		$accident->status = 'trash';
+
+		accident_class::g()->update( $accident );
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -58,6 +77,16 @@ class accident_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_accident() {
+		$accident_id = !empty( $_POST['accident_id'] ) ? (int)$_POST['accident_id'] : 0;
+
+		check_ajax_referer( 'ajax_load_accident_' . $accident_id );
+		$accident = accident_class::g()->get( array( 'include' => $accident_id ) );
+		$accident = $accident[0];
+		$society_id = $accident->parent_id;
+
+		ob_start();
+		require( ACCIDENT_VIEW_DIR . 'item-edit.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
 

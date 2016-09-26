@@ -6,6 +6,7 @@ jQuery( document ).ready(function( $ ) {
 	digi_risk.init( true, $ );
 	digi_danger.init( true, $ );
 	digi_epi.init( true, $ );
+	digi_accident.init( true, $ );
 	digi_search.event( $ );
 	digi_tools.event( $ );
 	digi_installer.event( $ );

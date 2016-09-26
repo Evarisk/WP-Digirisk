@@ -19,7 +19,6 @@ class danger_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'dropdown_danger', array( $this, 'callback_dropdown_danger' ) );
-		add_shortcode( 'digi_evaluation_method_complex', array( $this, 'callback_evaluation_method_complex' ) );
 	}
 
 	/**
