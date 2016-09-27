@@ -5,7 +5,7 @@
 		<span class="padded"><?php echo $epi->unique_identifier; ?></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][title]" value="<?php echo $epi->title; ?>" placeholder="Nom" /></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][serial_number]" value="<?php echo $epi->serial_number; ?>" placeholder="Numéro de série" /></span>
-		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][frequency_control]" value="<?php echo $epi->frequency_control; ?>" placeholder="10" /></span>
+		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][frequency_control]" value="<?php echo $epi->frequency_control; ?>" placeholder="10" /> jours</span>
 		<span class="padded"><input type="text" class="wpdigi_date" name="epi[<?php echo $epi->id; ?>][control_date]" value="<?php echo $epi->control_date; ?>" placeholder="Date de contrôle" /></span>
 		<span class="padded"><?php echo $epi->compiled_remaining_time; ?></span>
 		<span class="wp-digi-epi-action wp-digi-action-new wp-digi-action" >

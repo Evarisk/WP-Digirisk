@@ -19,18 +19,21 @@ function update_remaining_time( $data ) {
 		$date_now = DateTime::createFromFormat( 'd/m/Y', current_time( 'd/m/Y' ) );
 		$interval = $date_now->diff( $control_date );
 
-		// $result = '';
-		//
-		// if ( $interval->format( '%R' ) === '+' ) {
-		// 	$result = 'A controller dans ';
-		// }
-		// else {
-		// 	$result = 'Non controlé depuis ';
-		// }
+		$result = '';
 
-		// $result .= $interval->format( '%R%a jours' );
+		if ( $interval->format( '%R' ) === '+' ) {
+			$result = '<span class="time-ok"><i class="fa fa-calendar-o" aria-hidden="true"></i> ';
+			$result .= $interval->format( '%a jours' );
+			$result .= '</span>';
+		}
+		else {
+			$result = '<span class="time-past"><i class="fa fa-calendar-times-o" aria-hidden="true"></i> ';
+			$result .= $interval->format( '%a jours' );
+			$result .= '</span>';
+		}
 
-		$data->compiled_remaining_time = $interval->format( '%R%a jours' );
+
+		$data->compiled_remaining_time = $result;
 	}
 
 	return $data;

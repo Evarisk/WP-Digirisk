@@ -6,7 +6,7 @@
 	<span class="wp-digi-epi-list-column-name"><?php _e( 'Nom', 'digirisk' ); ?></span>
 	<span class="wp-digi-epi-list-column-serial-number"><?php _e('N° serie', 'digirisk' ); ?></span>
 	<span class="wp-digi-epi-list-column-fabrication-date"><?php _e('Périod. de contrôle', 'digirisk'); ?></span>
-	<span class="wp-digi-epi-list-column-shelf-life"><?php _e('Date de contrôle', 'digirisk'); ?></span>
+	<span class="wp-digi-epi-list-column-shelf-life"><?php _e('Date de dernier contrôle', 'digirisk'); ?></span>
 	<span class="wp-digi-epi-list-column-shelf-life"><?php _e('Reste', 'digirisk'); ?></span>
 	<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
 </li>
