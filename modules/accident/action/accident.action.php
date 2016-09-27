@@ -32,7 +32,10 @@ class accident_action {
 		if ( !empty( $_POST['accident'] ) ) {
 		  foreach ( $_POST['accident'] as $element ) {
 				$element['parent_id'] = $_POST['parent_id'];
-				accident_class::g()->update( $element );
+				$accident = accident_class::g()->update( $element );
+
+				do_action( 'add_compiled_accident_id', $accident );
+				do_action( 'add_compiled_stop_day_id', $accident );
 		  }
 		}
 
@@ -63,6 +66,8 @@ class accident_action {
 			wp_send_json_error( array( 'error' => __LINE__ ) );
 
 		$accident->status = 'trash';
+		do_action( 'delete_compiled_accident_id', $accident );
+		do_action( 'delete_compiled_stop_day_id', $accident );
 
 		accident_class::g()->update( $accident );
 
