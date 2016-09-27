@@ -57,7 +57,7 @@ class chemical_product_action {
 
 		check_ajax_referer( 'ajax_delete_chemical_product_' . $chemical_product_id );
 
-		$chemical_product = chemical_product_class::g()->get( array( 'id' => $chemical_product_id ) );
+		$chemical_product = chemi_product_class::g()->get( array( 'id' => $chemical_product_id ) );
 		$chemical_product = $chemical_product[0];
 
 		if ( empty( $chemical_product ) )
