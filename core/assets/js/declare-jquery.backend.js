@@ -23,4 +23,5 @@ jQuery( document ).ready(function( $ ) {
 	digi_user.event( $ );
 	digi_document.event( $ );
 	digi_user_dashboard.event( $ );
+	digi_user_detail.event( $ );
 } );
