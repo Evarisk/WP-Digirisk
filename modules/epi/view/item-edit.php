@@ -4,10 +4,10 @@
 		<?php echo do_shortcode( '[eo_upload_button id="' . $epi->id . '" type="epi"]' ); ?>
 		<span class="padded"><?php echo $epi->unique_identifier; ?></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][title]" value="<?php echo $epi->title; ?>" placeholder="Nom" /></span>
-		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][content]" value="<?php echo $epi->content; ?>" placeholder="Description" /></span>
 		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][serial_number]" value="<?php echo $epi->serial_number; ?>" placeholder="Numéro de série" /></span>
-		<span class="padded"><input type="text" class="wpdigi_date" name="epi[<?php echo $epi->id; ?>][production_date]" value="<?php echo $epi->production_date; ?>" placeholder="Date de production" /></span>
-		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][lifetime]" value="<?php echo $epi->lifetime; ?>" placeholder="Durée de vie" /></span>
+		<span class="padded"><input type="text" name="epi[<?php echo $epi->id; ?>][frequency_control]" value="<?php echo $epi->frequency_control; ?>" placeholder="10" /></span>
+		<span class="padded"><input type="text" class="wpdigi_date" name="epi[<?php echo $epi->id; ?>][control_date]" value="<?php echo $epi->control_date; ?>" placeholder="Date de contrôle" /></span>
+		<span class="padded"><?php echo $epi->compiled_remaining_time; ?></span>
 		<span class="wp-digi-epi-action wp-digi-action-new wp-digi-action" >
 			<?php
 			if ( empty( $epi->id ) ):

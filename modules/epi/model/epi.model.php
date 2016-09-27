@@ -28,26 +28,31 @@ class epi_model extends post_model {
 				'type'				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_serial_number',
-				'required'		=> true,
+				'required'		=> true
 			),
 			'production_date' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
-				'required'		=> true,
 			),
-			'lifetime' => array(
+			'frequency_control' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
-				'required'		=> true,
+				'required'		=> true
 			),
-			'review' => array(
+			'control_date' => array(
 				'type'				=> 'string',
-				'meta_type'		=> 'multiple'
+				'meta_type'		=> 'multiple',
+				'required'		=> true
+			),
+			'compiled_remaining_time' => array(
+				'type'				=> 'string',
+				'meta_type'		=> 'field',
+				'field'				=> '_compiled_remaining_time',
+				'bydefault'		=> ''
 			)
 		) );
 
 		$this->model['title']['required'] = true;
-		$this->model['content']['required'] = true;
 
 		parent::__construct( $object, $field_wanted );
 	}
