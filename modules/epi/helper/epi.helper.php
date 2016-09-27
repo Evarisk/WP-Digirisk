@@ -22,12 +22,12 @@ function update_remaining_time( $data ) {
 		$result = '';
 
 		if ( $interval->format( '%R' ) === '+' ) {
-			$result = '<span class="time-ok"><i class="fa fa-calendar-o" aria-hidden="true"></i> ';
+			$result = '<span class=\'time-ok\'><i class=\'fa fa-calendar-o\' aria-hidden=\'true\'></i> ';
 			$result .= $interval->format( '%a jours' );
 			$result .= '</span>';
 		}
 		else {
-			$result = '<span class="time-past"><i class="fa fa-calendar-times-o" aria-hidden="true"></i> ';
+			$result = '<span class=\'time-past\'><i class=\'fa fa-calendar-times-o\' aria-hidden=\'true\'></i> ';
 			$result .= $interval->format( '%a jours' );
 			$result .= '</span>';
 		}
