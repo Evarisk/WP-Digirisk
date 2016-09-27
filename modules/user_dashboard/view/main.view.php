@@ -16,6 +16,8 @@
 
 	<!-- Liste les utilisateurs -->
 	<form method="POST" id="wp-digi-form-add-staff" class="wp-digi-form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
+		<input type="hidden" name="action" value="save_user" />
+		<?php wp_nonce_field( 'ajax_save_user' ); ?>
 		<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
 			<?php
 				user_dashboard_class::g()->display_list_user();

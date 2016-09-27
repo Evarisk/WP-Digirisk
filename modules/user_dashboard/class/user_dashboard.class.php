@@ -8,8 +8,7 @@ class user_dashboard_class extends singleton_util {
 	protected function construct() {}
 
 	public function display_list_user() {
-		$list_user = \digi\user_class::g()->get();
-		array_shift( $list_user );
+		$list_user = \digi\user_class::g()->get( array( 'exclude' => array( 1 ) ) );
 		require( USER_DASHBOARD_VIEW . 'list.view.php' );
 	}
 }

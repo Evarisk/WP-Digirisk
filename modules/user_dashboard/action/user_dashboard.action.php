@@ -32,11 +32,19 @@ class user_shortcode_action extends \singleton_util {
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		$user = \digi\user_class::g()->update( $_POST['user'] );
+		if ( !empty( $_POST['user'] ) ) {
+		  foreach ( $_POST['user'] as $element ) {
+				\digi\user_class::g()->update( $element );
+		  }
+		}
 
 		ob_start();
-		require( USER_DASHBOARD_VIEW . '/item.view.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean(), 'id' => $user->id ) );
+		user_dashboard_class::g()->display_list_user();
+		
+		$user = \digi\user_class::g()->get( array( 'schema' => true ) );
+		$user = $user[0];
+		require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	public function ajax_load_user() {
