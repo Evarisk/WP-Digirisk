@@ -67,7 +67,7 @@ class document_class extends post_class {
 			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( false ) );
 		}
 
-		require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', "printed", "list" ) );
+		require( WPDIGI_DOC_TEMPLATES_MAIN_DIR . 'common/printed-list.php' );
 	}
 
 	/**
@@ -157,7 +157,7 @@ class document_class extends post_class {
 			'link'		=> '',
 		);
 
-		require_once( WPDIGI_PATH . '/core/odtPhpLibrary/odf.php');
+		require_once( WPDIGI_PATH . '/core/external/odtPhpLibrary/odf.php');
 
 		$digirisk_directory = $this->get_digirisk_dir_path();
 		$document_path = $digirisk_directory . '/' . $document_name;

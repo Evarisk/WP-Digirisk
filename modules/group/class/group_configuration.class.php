@@ -12,7 +12,7 @@ class group_configuration_class extends singleton_util {
 	* @param object $element L'élement du groupement
 	*/
   public function display( $element ) {
-    require( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'group/configuration', 'form' ) );
+		require( WPDIGI_STES_TEMPLATES_MAIN_DIR . 'group/configuration/form.php' );
   }
 
 	public function save( $data ) {
