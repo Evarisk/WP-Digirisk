@@ -19,27 +19,27 @@ if ( !defined( 'ABSPATH' ) ) exit;
   <?php  wp_nonce_field( 'save_legal_display' ); ?>
 
   <div class="gridwrapper2">
-    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'detective-work' ) ); ?>
-    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'occupational-health-service' ) ); ?>
+    <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/detective-work.php' ); ?>
+    <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/occupational-health-service.php' ); ?>
   </div>
 
   <div class="gridwrapper2">
-    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'emergency-service' ) ); ?>
-    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'safety-rules' ) ); ?>
+    <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/emergency-service.php' ); ?>
+    <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/safety-rules.php' ); ?>
   </div>
 
   <div class="clear">
-    <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'working-hours' ) ); ?>
+    <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/working-hours.php' ); ?>
   </div>
 
   <div class="gridwrapper2">
-	  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'derogations-schedules' ) ); ?>
-	  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'collective-agreement' ) ); ?>
+	  <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/derogations-schedules.php' ); ?>
+	  <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/collective-agreement.php' ); ?>
 	</div>
 
   <div class="gridwrapper2">
-	  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'rule' ) ); ?>
-	  <?php require( wpdigi_utils::get_template_part( LEGAL_DISPLAY_DIR, LEGAL_DISPLAY_TEMPLATES_MAIN_DIR, 'backend', 'DUER' ) ); ?>
+	  <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/rule.php' ); ?>
+	  <?php require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/DUER.php' ); ?>
 	</div>
 
   <button class="generate-legal-display wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'digirisk' ); ?></button>
