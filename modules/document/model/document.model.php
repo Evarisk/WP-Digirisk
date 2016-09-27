@@ -10,7 +10,7 @@ class document_model extends post_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
-		$this->model = array_merge( $this->model, array(
+		$this->model = wp_parse_args( $this->model, array(
 			'mime_type' => array(
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
@@ -32,7 +32,7 @@ class document_model extends post_model {
 				'field'				=> '_wpdigi_model_id',
 			),
 			'document_meta' => array(
-				'type' 				=> 'string',
+				'type' 				=> 'array',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_document_data',
 			),

@@ -400,9 +400,7 @@ class document_class extends post_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_data ) {
-		// if ( !is_object( $element ) || !is_array( $document_type ) || !is_array( $document_data ) ) {
-		// 	return false;
-		// }
+		$this->set_model( $document_type[0] . '_model' );
 
 		$response = array(
 			'status' => true,
@@ -477,18 +475,13 @@ class document_class extends post_class {
 			'date'					=> current_time( 'mysql', 0 ),
 			'mime_type'			=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
 			'model_id' 			=> $model_to_use,
-			'document_meta' => json_encode( $document_data ),
+			'document_meta' => $document_data,
 			'version'				=> $document_revision,
   	);
 
+		echo "<pre>"; print_r($document_args['document_meta']); echo "</pre>";
+
   	$document = $this->update( $document_args );
-  	$document = $this->get( array( 'id' => $response[ 'id' ] ) );
-
-  	$document_full_path = null;
-  	if ( is_file( $this->get_digirisk_dir_path( 'basedir' ) . '/' . $element->type . '/' . $element->id . '/' . $document[0]->title . '.odt' ) ) {
-  		$document_full_path = $this->get_digirisk_dir_path( 'baseurl' ) . '/' . $element->type . '/' . $element->id . '/' . $document[0]->title . '.odt';
-  	}
-
   	return $response;
 	}
 }

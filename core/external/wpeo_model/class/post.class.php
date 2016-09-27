@@ -185,4 +185,9 @@ class post_class extends singleton_util {
 			}
 		}
 	}
+
+	public function set_model( $model_name ) {
+		$this->model_name = $model_name;
+	}
+
 }

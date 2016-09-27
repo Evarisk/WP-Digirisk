@@ -25,10 +25,10 @@ class save_meta_class extends singleton_util {
 	}
 
 	private function save_single_meta_data( $id, $value, $function, $meta_key ) {
-		call_user_func( $function, $id, $meta_key, $value );
+		call_user_func( $function, $id, $meta_key, is_array( $value ) ? json_encode( $value ) : $value );
 		eo_log( 'digi-post-meta', array(
 			'object_id' => $id,
-			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . $value
+			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . is_array( $value ) ? json_encode( $value ) : $value
 		) );
 	}
 

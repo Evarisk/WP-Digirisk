@@ -50,15 +50,15 @@ class group_duer_class extends singleton_util {
 			group_class::g()->update( $element );
 		}
 
-		$all_file = $this->generate_child( $element );
-		$all_file[] = $document_creation_response;
-
-		$element = group_class::g()->get( array( 'id' => $element->id ) );
-		$element = $element[0];
+		// $all_file = $this->generate_child( $element );
+		// $all_file[] = $document_creation_response;
+		//
+		// $element = group_class::g()->get( array( 'id' => $element->id ) );
+		// $element = $element[0];
 
 		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
 		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-		$zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
+		// $zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
 
 		return true;
 	}
@@ -71,19 +71,19 @@ class group_duer_class extends singleton_util {
 	* @return array Les données sécurisées
 	*/
 	public function securize_duer_data( $data ) {
-		$data_duer = !empty( $data['wpdigi_duer'] ) ? (array) $data['wpdigi_duer'] : array();
+		$data_duer = array();
 
-		$data_duer['company_name'] 				= !empty( $data_duer['company_name'] ) ? sanitize_text_field( $data_duer['company_name'] ) : '';
-		$data_duer['date_audit'] 					= $this->formatte_audit_date( $data_duer );
-		$data_duer['emetteurDUER'] 				= !empty( $data_duer['document_transmitter'] ) ? sanitize_text_field( $data_duer['document_transmitter'] ) : '';
-		$data_duer['destinataireDUER'] 		= !empty( $data_duer['document_recipient'] ) ? sanitize_text_field( $data_duer['document_recipient'] ) : '';
-		$data_duer['telephone'] 					= !empty( $data_duer['document_recipient_telephone'] ) ? sanitize_text_field( $data_duer['document_recipient_telephone'] ) : '';
-		$data_duer['portable'] 						= !empty( $data_duer['document_recipient_cellphone'] ) ? sanitize_text_field( $data_duer['document_recipient_cellphone'] ) : '';
+		$data_duer['nomEntreprise'] 			= !empty( $data['nomEntreprise'] ) ? sanitize_text_field( $data['nomEntreprise'] ) : '';
+		$data_duer['dateAudit'] 					= $this->formatte_audit_date( $data_duer );
+		$data_duer['emetteurDUER'] 				= !empty( $data['emetteurDUER'] ) ? sanitize_text_field( $data['emetteurDUER'] ) : '';
+		$data_duer['destinataireDUER'] 		= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
+		$data_duer['telephone'] 					= !empty( $data['telephone'] ) ? sanitize_text_field( $data['telephone'] ) : '';
+		$data_duer['portable'] 						= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
 
-		$data_duer['methodologie'] 				= !empty( $data_duer['audit_methodology'] ) ? $data_duer['audit_methodology'] : '';
-		$data_duer['sources'] 						= !empty( $data_duer['audit_sources'] ) ? sanitize_text_field( $data_duer['audit_sources'] ) : '';
-		$data_duer['remarqueImportante'] 	= !empty( $data_duer['audit_important_note'] ) ? sanitize_text_field( $data_duer['audit_important_note'] ) : '';
-		$data_duer['dispoDesPlans'] 			= !empty( $data_duer['audit_location'] ) ? sanitize_text_field( $data_duer['audit_location'] ) : '';
+		$data_duer['methodologie'] 				= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
+		$data_duer['sources'] 						= !empty( $data['sources'] ) ? $data['sources'] : '';
+		$data_duer['remarqueImportante'] 	= !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
+		$data_duer['dispoDesPlans'] 			= !empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
 
 		return $data_duer;
 	}
@@ -125,11 +125,6 @@ class group_duer_class extends singleton_util {
 				'value'	=> array(),
 			),
 
-			'risqPA' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
-			),
-
 			'planDactionRisq' => array(
 				'type'	=> 'segment',
 				'value'	=> array(),
@@ -141,13 +136,9 @@ class group_duer_class extends singleton_util {
 			),
 		);
 
-		$level_list = array( 0, 48, 51, 80, );
+		$level_list = array( 48, 51, 80, );
 		foreach ( $level_list as $level ) {
 			$skeleton[ 'risq' . $level ] = array(
-				'type'	=> 'segment',
-				'value'	=> array(),
-			);
-			$skeleton[ 'risqPA' . $level ] = array(
 				'type'	=> 'segment',
 				'value'	=> array(),
 			);
@@ -186,7 +177,6 @@ class group_duer_class extends singleton_util {
 		// }
 
 		$data_to_document = array_merge( $data_to_document, $data_duer );
-		$data_to_document['nomEntreprise'] = $data_duer['company_name'];
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
 		$data_to_document['dateGeneration'] = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
@@ -219,7 +209,6 @@ class group_duer_class extends singleton_util {
 		  foreach ( $list_risk as $risk ) {
 				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] : '';
 				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk;
-				$data_to_document[ 'risqPA' . $final_level ][ 'value' ][] = $risk;
 				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk;
 
 				if ( !isset( $risk_per_element[ $risk[ 'idElement' ] ] ) ) {
@@ -264,6 +253,9 @@ class group_duer_class extends singleton_util {
 
 			$audit_date .= sanitize_text_field( $data_duer['audit_end_date'] );
 		}
+
+		unset( $data_duer['audit_start_date'] );
+		unset( $data_duer['audit_end_date'] );
 
 		return $audit_date;
 	}
