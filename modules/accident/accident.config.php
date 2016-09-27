@@ -22,5 +22,5 @@ DEFINE( 'ACCIDENT_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) )
 DEFINE( 'ACCIDENT_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', ACCIDENT_PATH ) );
 DEFINE( 'ACCIDENT_VIEW_DIR', ACCIDENT_PATH . '/view/');
 DEFINE( 'ACCIDENT_MODEL', ACCIDENT_PATH . '/model/');
-DEFINE( 'ACCIDENT_STATE', true );
+DEFINE( 'ACCIDENT_STATE', false );
 ?>

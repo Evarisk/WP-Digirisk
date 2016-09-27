@@ -98,7 +98,6 @@ class user_class extends singleton_util {
 				$list_model_user[] = $data;
 		  }
 		}
-
 		return $list_model_user;
 	}
 }

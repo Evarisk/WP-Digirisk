@@ -33,9 +33,9 @@ class constructor_data_class extends helper_class {
 			}
 
 			// Est-ce que le field_name existe en donnée (premier niveau) ?
-			if ( isset( $data[$field_name] ) ) {
-				$current_object->$field_name = $data[$field_name];
-			}
+			// if ( isset( $data[$field_name] ) ) {
+			// 	$current_object->$field_name = $data[$field_name];
+			// }
 
 			if ( isset( $field_def['required'] ) && $field_def['required'] && empty( $current_object->$field_name ) ) {
 				$this->error = true;

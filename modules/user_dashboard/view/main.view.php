@@ -25,6 +25,4 @@
 			?>
 		</ul>
 	</form>
-
-	<?php do_shortcode( '[digi-user-detail id=2]' ); ?>
 </div>

@@ -27,7 +27,7 @@ class user_model extends \user_model {
 		$this->model = array_merge( $this->model, array(
 			'hiring_date' => array(
 				'type'				=> 'string',
-				'bydefault'	=> ''
+				'bydefault'	=> 'Pas configuré'
 			),
 			'social_security_number' => array(
 				'type'		=> 'string',
@@ -36,6 +36,10 @@ class user_model extends \user_model {
 			'job' => array(
 				'type'		=> 'string',
 				'bydefault'	=> '',
+			),
+			"phone_number" => array(
+				'type'			=> 'string',
+				'bydefault' => '01 02 03 04 05'
 			),
 			'release_date_of_society' => array(
 				'type'		=> 'string',
@@ -61,6 +65,11 @@ class user_model extends \user_model {
 				'type'			=> 'array',
 				'meta_type'	=> 'multiple',
 				'child'			=> array(
+					'last_evaluation_date' => array(
+						'type'	=> 'string',
+						'meta_type' => 'multiple',
+						'bydefault' => 'Pas d\'évaluation',
+					),
 					'list_workunit_id' => array(
 						'type' => 'array',
 						'meta_type'	=> 'multiple',
