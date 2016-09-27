@@ -1,6 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
 	<li class="wp-digi-table-header">
 		<span></span>
 		<span><?php _e('ID', 'digirisk'); ?></span>
@@ -12,11 +11,8 @@
 
 	<?php
 	if ( !empty( $list_user ) ):
-		foreach ( $list_user as $user ):
+	  foreach ( $list_user as $user ):
 			require( USER_DASHBOARD_VIEW . 'item.view.php' );
-		endforeach;
+	  endforeach;
 	endif;
-
-	require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );
 	?>
-</ul>

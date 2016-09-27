@@ -24,8 +24,8 @@ class user_shortcode_action extends \singleton_util {
 	}
 
 	public function callback_users_page() {
-		$list_user = \digi\user_class::g()->get();
-		array_shift( $list_user );
+		$user = \digi\user_class::g()->get( array( 'schema' => true ) );
+		$user = $user[0];
 		require( USER_DASHBOARD_VIEW . 'main.view.php' );
 	}
 
@@ -35,7 +35,7 @@ class user_shortcode_action extends \singleton_util {
 		$user = \digi\user_class::g()->update( $_POST['user'] );
 
 		ob_start();
-		require( INSTALLER_VIEW . '/list-item.php' );
+		require( USER_DASHBOARD_VIEW . '/item.view.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean(), 'id' => $user->id ) );
 	}
 
@@ -48,9 +48,10 @@ class user_shortcode_action extends \singleton_util {
 		check_ajax_referer( 'ajax_load_user_' . $user_id );
 
 		$user = user_class::g()->get( array( 'id' => $user_id ) );
+		$user = $user[0];
 
 		ob_start();
-		require( INSTALLER_VIEW . '/list-item-edit.php' );
+		require( USER_DASHBOARD_VIEW . '/item-edit.view.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

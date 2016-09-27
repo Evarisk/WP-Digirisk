@@ -20,9 +20,7 @@ class user_dashboard_shortcode {
 	}
 
 	public function callback_digi_user_dashboard( $param ) {
-		$list_user = \digi\user_class::g()->get();
-		array_shift( $list_user );
-		require( USER_DASHBOARD_VIEW . 'main.view.php' );
+		user_shortcode_action::g()->callback_users_page();
 	}
 }
 

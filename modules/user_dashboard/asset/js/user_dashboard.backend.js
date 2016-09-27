@@ -9,22 +9,22 @@ var digi_user_dashboard = {
     digi_user_dashboard.$( document ).on( 'click', '#wp-digi-form-add-staff .wp-digi-action-edit', function( event ) { digi_user_dashboard.edit_staff( event, digi_user_dashboard.$( this ) ); } );
     digi_user_dashboard.$( document ).on( 'click', '#wp-digi-form-add-staff .wp-digi-action-delete', function( event ) { digi_user_dashboard.delete_staff( event, digi_user_dashboard.$( this ) ); } );
 
-		digi_user_dashboard.$( document ).on( 'keyup', '#wp-digi-form-add-staff .input-domain-mail', function( event ) { digi_user_dashboard.keyup_update_email( event, digi_user_dashboard.$( this ) ); } );
+		digi_user_dashboard.$( document ).on( 'keyup', '.user-dashboard .input-domain-mail', function( event ) { digi_user_dashboard.keyup_update_email( event, digi_user_dashboard.$( this ) ); } );
 		digi_user_dashboard.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[lastname]"]', function( event ) { digi_user_dashboard.keyup_update_email( event, digi_user_dashboard.$( this ) ); } );
 		digi_user_dashboard.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[firstname]"]', function( event ) { digi_user_dashboard.keyup_update_email( event, digi_user_dashboard.$( this ) ); } );
-		digi_user_dashboard.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[email]"]', function( event ) { digi_user_dashboard.key_enter_send_form( event ); } );
-    digi_user_dashboard.$( document ).on( 'click', '.wp-digi-action-save-domain-mail', function( event ) { digi_user_dashboard.save_domain_mail( event, digi_user_dashboard.$( this ) ); } );
+		digi_user_dashboard.$( document ).on( 'keyup', '#wp-digi-form-add-staff input[name="user[email]"]', function( event ) { digi_user_dashboard.key_enter_send_form( event, digi_user_dashboard.$( this ) ); } );
+    digi_user_dashboard.$( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', function( event ) { digi_user_dashboard.save_domain_mail( event, digi_user_dashboard.$( this ) ); } );
   },
 
 	keyup_update_email: function( event, element ) {
-		var email = digi_user_dashboard.$( element ).closest( 'li' ).find( "input[name='user[email]']" ).val();
-		var firstname = digi_user_dashboard.$( element ).closest( 'li').find( 'input[name="user[firstname]"]' ).val();
-		var lastname = digi_user_dashboard.$( element ).closest( 'li' ).find( 'input[name="user[lastname]"]' ).val();
-		var domain_mail = digi_user_dashboard.$( element ).closest( 'li' ).find( '.input-domain-mail' ).val();
+		var email = digi_user_dashboard.$( ".wp-digi-table-item-new input[name='user[email]']" ).val();
+		var firstname = digi_user_dashboard.$( ".wp-digi-table-item-new input[name='user[firstname]']" ).val();
+		var lastname = digi_user_dashboard.$( ".wp-digi-table-item-new input[name='user[lastname]']" ).val();
+		var domain_mail = digi_user_dashboard.$( '.input-domain-mail' ).val();
 
 		var together = window.digi_global.remove_diacritics(firstname + '.' + lastname + '@' + domain_mail).toLowerCase();
 
-		digi_user_dashboard.$( element ).closest( 'li' ).find( "input[name='user[email]']" ).val( together );
+		digi_user_dashboard.$( ".wp-digi-table-item-new input[name='user[email]']" ).val( together );
 		digi_user_dashboard.key_enter_send_form( event, element );
 	},
 

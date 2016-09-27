@@ -57,6 +57,9 @@ class user_class extends singleton_util {
 		if ( !empty( $args['id'] ) ) {
 	 		$list_user[] = get_user_by( 'id', $args['id'] );
 		}
+		else if( isset( $args['schema'] ) ) {
+			$list_user[] = array();
+		}
 		else {
 			$list_user = get_users( $args );
 		}
