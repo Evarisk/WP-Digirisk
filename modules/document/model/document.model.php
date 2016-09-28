@@ -10,34 +10,29 @@ class document_model extends post_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
-		$this->model = wp_parse_args( $this->model, array(
-			'mime_type' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> 'post_mime_type',
-			),
-			'unique_key' 	=> array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_unique_key',
-			),
-			'unique_identifier' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_unique_identifier',
-			),
-			'model_id' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_model_id',
-			),
-			'document_meta' => array(
-				'type' 				=> 'array',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_document_data',
-			),
-		) );
+		$this->model['mime_type'] = array(
+			'type' 				=> 'string',
+			'meta_type'		=> 'single',
+			'field'				=> 'post_mime_type'
+		);
 
+		$this->model['unique_key'] = array(
+			'type' 				=> 'string',
+			'meta_type'		=> 'single',
+			'field'				=> '_wpdigi_unique_key',
+		);
+
+		$this->model['unique_identifier'] = array(
+			'type' 				=> 'string',
+			'meta_type'		=> 'single',
+			'field'				=> '_wpdigi_unique_identifier',
+		);
+
+		$this->model['model_id'] = array(
+			'type' 				=> 'string',
+			'meta_type'		=> 'single',
+			'field'				=> '_wpdigi_model_id',
+		);
 
 		parent::__construct( $object, $field_wanted );
 	}

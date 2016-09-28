@@ -16,7 +16,9 @@ class common_util extends singleton_util {
 	 *
 	 * @return integer Retourne la valeur du dernier index unique pour les éléments digirisk / Return the last index for digirisk element
 	 */
-	public static function get_last_unique_key( $wp_type, $element_type ) {
+	public static function get_last_unique_key( $controller ) {
+		$element_type = $controller::g()->get_post_type();
+		$wp_type = $controller::g()->get_identifier_helper();
 		if ( empty( $wp_type ) || empty( $element_type ) || !is_string( $wp_type ) || !is_string( $element_type ) )
 			return false;
 

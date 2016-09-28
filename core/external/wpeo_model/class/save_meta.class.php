@@ -25,15 +25,38 @@ class save_meta_class extends singleton_util {
 	}
 
 	private function save_single_meta_data( $id, $value, $function, $meta_key ) {
-		call_user_func( $function, $id, $meta_key, is_array( $value ) ? json_encode( $value ) : $value );
+		$data = $value;
+
+		if ( is_array( $data ) ) {
+			$data = json_encode( $data );
+			$data = addslashes($data);
+			$data = preg_replace_callback(
+			    '/\\\\u([0-9a-f]{4})/i',
+			    function ($matches) {
+			        $sym = mb_convert_encoding(
+			                pack('H*', $matches[1]),
+			                'UTF-8',
+			                'UTF-16'
+			                );
+				    return $sym;
+			    },
+			    $data
+			);
+		}
+		else {
+			// $data = addslashes($data);
+		}
+
+		call_user_func( $function, $id, $meta_key, $data );
 		eo_log( 'digi-post-meta', array(
 			'object_id' => $id,
-			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . is_array( $value ) ? json_encode( $value ) : $value
+			'message' => 'Saved post meta (single) : ' . $meta_key . ' => ' . $data
 		) );
 	}
 
 	private function save_multiple_meta_data( $id, $array_value, $function, $meta_key ) {
 		$data = json_encode( $array_value );
+		$data = addslashes($data);
 		$data = preg_replace_callback(
 		    '/\\\\u([0-9a-f]{4})/i',
 		    function ($matches) {

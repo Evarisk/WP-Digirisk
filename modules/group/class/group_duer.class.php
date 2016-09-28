@@ -50,15 +50,15 @@ class group_duer_class extends singleton_util {
 			group_class::g()->update( $element );
 		}
 
-		// $all_file = $this->generate_child( $element );
-		// $all_file[] = $document_creation_response;
-		//
-		// $element = group_class::g()->get( array( 'id' => $element->id ) );
-		// $element = $element[0];
+		$all_file = $this->generate_child( $element );
+		$all_file[] = $document_creation_response;
+
+		$element = group_class::g()->get( array( 'id' => $element->id ) );
+		$element = $element[0];
 
 		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
 		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-		// $zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
+		$zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
 
 		return true;
 	}
@@ -172,10 +172,6 @@ class group_duer_class extends singleton_util {
 	* @return array Les données qui seront insérées dans le document
 	*/
 	public function fill_data_duer( $data_duer, $data_to_document, $element ) {
-		// if ( !is_array( $data_duer ) || !is_array( $data_to_document ) || !is_object( $element ) ) {
-		// 	return false;
-		// }
-
 		$data_to_document = array_merge( $data_to_document, $data_duer );
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
@@ -242,20 +238,17 @@ class group_duer_class extends singleton_util {
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
-		if ( !empty( $data_duer['audit_start_date' ] ) ) {
-			$audit_date .= sanitize_text_field( $data_duer['audit_start_date'] );
+		if ( !empty( $data_duer['dateDebutAudit' ] ) ) {
+			$audit_date .= sanitize_text_field( $data_duer['dateDebutAudit'] );
 		}
 
-		if ( !empty( $data_duer['audit_end_date'] ) && $audit_date != $data_duer['audit_end_date'] ) {
+		if ( !empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
 			if ( !empty( $audit_date ) ) {
 				$audit_date .= ' - ';
 			}
 
-			$audit_date .= sanitize_text_field( $data_duer['audit_end_date'] );
+			$audit_date .= sanitize_text_field( $data_duer['dateFinAudit'] );
 		}
-
-		unset( $data_duer['audit_start_date'] );
-		unset( $data_duer['audit_end_date'] );
 
 		return $audit_date;
 	}

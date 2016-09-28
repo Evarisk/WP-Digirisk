@@ -13,7 +13,6 @@ class danger_default_data_class extends singleton_util {
 		$file_content = file_get_contents( DANGER_PATH . 'assets/json/default.json' );
 		$data = json_decode( $file_content );
 
-
 		if ( !empty( $data ) ) {
 			foreach ( $data as $json_danger_category ) {
 				$this->create_danger_category( $json_danger_category );

@@ -5,7 +5,7 @@ class user_class extends singleton_util {
 	protected $meta_key = '_wpeo_user';
 	protected $base = 'user';
 	protected $version = '0.1';
-
+	protected $identifier_helper = 'user';
 	public $element_prefix = 'U';
 
 	protected function construct() {}
@@ -99,5 +99,9 @@ class user_class extends singleton_util {
 		  }
 		}
 		return $list_model_user;
+	}
+
+	public function get_identifier_helper() {
+		return $this->identifier_helper;
 	}
 }

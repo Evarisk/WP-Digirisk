@@ -11,6 +11,7 @@ class comment_class extends singleton_util {
 	protected $comment_type	= 'comment';
 	protected $base = 'comment';
 	protected $version = '0.1';
+	protected $identifier_helper = 'comment';
 
 	protected function construct() {}
 
@@ -104,5 +105,9 @@ class comment_class extends singleton_util {
 
 	public function get_post_type() {
 		return $this->comment_type;
+	}
+
+	public function get_identifier_helper() {
+		return $this->identifier_helper;
 	}
 }

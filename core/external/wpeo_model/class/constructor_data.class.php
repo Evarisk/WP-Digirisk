@@ -15,11 +15,22 @@ class constructor_data_class extends helper_class {
 			$current_object = $this;
 		}
 
+		// if (( !empty( $data['ID'] ) && $data['ID'] == 123) || (!empty( $this->id ) && $this->id == '123') ) {
+		// 	echo "<pre>"; print_r($model); echo "</pre>";
+		// }
+
 		foreach ( $model as $field_name => $field_def ) {
 			$current_object->$field_name = $this->set_default_data( $field_name, $field_def );
 
+			// if (( !empty( $data['ID'] ) && $data['ID'] == 123) || (!empty( $this->id ) && $this->id == '123') ) {
+			// 	echo "<pre>"; print_r($field_def); echo "</pre>";
+			// }
+
 			// Est-ce qu'il existe des enfants ?
-			if ( isset( $field_def['child'] ) ) {
+			if ( isset( $field_def['field'] ) && isset( $data[$field_def['field']] ) && !isset( $field_def['child'] ) ) {
+				$current_object->$field_name = $data[$field_def['field']];
+			}
+			else if ( isset( $field_def['child'] ) ) {
 				$current_data = !empty( $all_data[$field_name] ) ? $all_data[$field_name] : array();
 
 				if ( empty( $current_object->$field_name ) ) {
@@ -28,12 +39,9 @@ class constructor_data_class extends helper_class {
 
 				$current_object->$field_name = $this->dispatch_wordpress_data( $all_data, $current_data, $current_object->$field_name, $field_def['child'] );
 			}
-			elseif ( isset( $field_def['field'] ) && isset( $data[$field_def['field']] ) ) {
-				$current_object->$field_name = $data[$field_def['field']];
-			}
 
 			// Est-ce que le field_name existe en donnée (premier niveau) ?
-			if ( isset( $data[$field_name] ) ) {
+			if ( isset( $data[$field_name] ) && isset( $field_def ) && !isset( $field_def['child'] ) ) {
 				$current_object->$field_name = $data[$field_name];
 			}
 
@@ -41,8 +49,12 @@ class constructor_data_class extends helper_class {
 				$this->error = true;
 			}
 
+
 			if ( !empty( $field_def['type'] ) ) {
 				settype( $current_object->$field_name, $field_def['type'] );
+				if ( $field_def['type'] === 'string' ) {
+					$current_object->$field_name = stripslashes( $current_object->$field_name );
+				}
 			}
 		}
 

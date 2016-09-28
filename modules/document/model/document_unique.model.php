@@ -10,7 +10,7 @@ class document_unique_model extends document_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
-		$this->model['document_meta'] = array(
+		$this->model['_wpdigi_document_data'] = array(
 			'type'				=> 'array',
 			'meta_type' 	=> 'single',
 			'field'				=> '_wpdigi_document_data',
@@ -33,6 +33,12 @@ class document_unique_model extends document_model {
 				'dateGeneration' => array(
 					'type'	=> 'string'
 				),
+				'dateDebutAudit' => array(
+					'type'	=> 'string'
+				),
+				'dateFinAudit' => array(
+					'type' => 'string'
+				),
 				'telephone' => array(
 					'type'	=> 'string'
 				),
@@ -40,7 +46,29 @@ class document_unique_model extends document_model {
 					'type'	=> 'string'
 				),
 				'methodologie' => array(
-					'type'	=> 'string'
+					'type'	=> 'string',
+					'bydefault' => '* Étape 1 : Récupération des informations
+- Visite des locaux
+- Récupération des données du personnel
+
+* Étape 2 : Définition de la méthodologie et de document
+- Validation des fiches d\'unité de travail standard
+- Validation de l\'arborescence des unités
+
+* Étape 3  : Réalisation de l\'étude de risques
+- Sensibilisation des personnels aux risques et aux dangers
+- Création des unités de travail avec le personnel et le ou les responsables
+- Évaluations des risques par unités de travail avec le personnel
+
+* Étape 4
+- Traitement et rédaction du document unique'
+				),
+				'sources' => array(
+					'type' => 'string',
+					'bydefault' => 'La sensibilisation des risques est définie dans l\'ed840 édité par l\'INRS.
+Dans ce document vous trouverez:
+- La définition d\'un risque, d\'un danger et un schéma explicatif
+- Les explications concernant les différentes méthodes d\'évaluation'
 				),
 				'remarqueImportante' => array(
 					'type'	=> 'string'

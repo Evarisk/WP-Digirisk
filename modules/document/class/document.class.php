@@ -400,7 +400,9 @@ class document_class extends post_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_data ) {
-		$this->set_model( $document_type[0] . '_model' );
+		if ( !empty( $document_type ) && !empty( $document_type[0] ) && class_exists( $document_type[0] . '_model' ) ) {
+			$this->set_model( $document_type[0] . '_model' );
+		}
 
 		$response = array(
 			'status' => true,
@@ -467,19 +469,17 @@ class document_class extends post_class {
 
   	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
   	$document_args = array(
-			'id'						=> $response[ 'id' ],
-			'title'					=> basename( $response[ 'filename' ], '.odt' ),
-			'status'    		=> 'inherit',
-			'parent_id'			=> $element->id,
-			'author_id'			=> get_current_user_id(),
-			'date'					=> current_time( 'mysql', 0 ),
-			'mime_type'			=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
-			'model_id' 			=> $model_to_use,
-			'document_meta' => $document_data,
-			'version'				=> $document_revision,
+			'id'										=> $response[ 'id' ],
+			'title'									=> basename( $response[ 'filename' ], '.odt' ),
+			'status'    						=> 'inherit',
+			'parent_id'							=> $element->id,
+			'author_id'							=> get_current_user_id(),
+			'date'									=> current_time( 'mysql', 0 ),
+			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
+			'model_id' 							=> $model_to_use,
+			'_wpdigi_document_data' => $document_data,
+			'version'								=> $document_revision,
   	);
-
-		echo "<pre>"; print_r($document_args['document_meta']); echo "</pre>";
 
   	$document = $this->update( $document_args );
   	return $response;

@@ -30,10 +30,23 @@ class group_shortcode {
 	public function callback_generate_sheet( $param ) {
 		$element_id = $param['post_id'];
     $element = society_class::g()->show_by_type( $element_id );
-
+		$list_document_unique = document_unique_class::g()->get( array( 'parent_id' => $element_id, 'order' => 'DESC', 'post_mime_type' => 'application/vnd.oasis.opendocument.text', 'posts_per_page' => 1 ) );
+		$document_unique = $list_document_unique[0];
 		$current_user = wp_get_current_user();
 
-		require ( WPDIGI_STES_TEMPLATES_MAIN_DIR . '/group/sheet-form.php' );
+		/**	Définition des informations de l'émetteur du document unique / Define informations about DUER	*/
+		$transmitter_infos = '';
+		if ( !empty( $current_user ) && !empty( $current_user->firstname ) ) {
+			$transmitter_infos .= $current_user->firstname;
+		}
+		if ( !empty( $current_user ) && !empty( $current_user->lastname ) ) {
+			$transmitter_infos .= $current_user->lastname;
+		}
+		if ( empty( $transmitter_infos ) ) {
+			$transmitter_infos = $current_user->display_name;
+		}
+
+		require ( GROUP_VIEW_DIR . 'sheet-form.php' );
 	}
 
 	/**

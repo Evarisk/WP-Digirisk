@@ -4,10 +4,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 function construct_identifier( $data ) {
 	$model_name = get_class( $data );
-	$parent_class_name = get_parent_class( $data );
 	$controller_name = str_replace( 'model', 'class', $model_name );
-	$parent_controller_name = str_replace( 'model', 'class', $parent_class_name );
-	$next_identifier = common_util::get_last_unique_key( $parent_controller_name::g()->get_post_type(), $controller_name::g()->get_post_type() );
+	$next_identifier = common_util::get_last_unique_key( $controller_name );
 	if ( empty( $data->unique_key ) ) {
 		$data->unique_key = (int)( $next_identifier + 1 );
 	}

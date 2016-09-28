@@ -6,6 +6,7 @@ class term_class extends singleton_util {
 	protected $taxonomy = 'category';
 	protected $base = 'term';
 	protected $version = '0.1';
+	protected $identifier_helper = 'term';
 
 	protected function construct() {}
 
@@ -107,4 +108,7 @@ class term_class extends singleton_util {
 		return $this->taxonomy;
 	}
 
+	public function get_identifier_helper() {
+		return $this->identifier_helper;
+	}
 }

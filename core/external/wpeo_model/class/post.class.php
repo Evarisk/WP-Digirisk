@@ -5,6 +5,7 @@ class post_class extends singleton_util {
 	protected $post_type = 'post';
 	protected $meta_key = '_wpeo_post';
 	protected $version = '0.1.0.0';
+	protected $identifier_helper = 'post';
 
 	protected function construct() {}
 
@@ -163,6 +164,10 @@ class post_class extends singleton_util {
 
 	public function get_post_type() {
 		return $this->post_type;
+	}
+
+	public function get_identifier_helper() {
+		return $this->identifier_helper;
 	}
 
 	private function get_taxonomies_id( $data ) {
