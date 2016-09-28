@@ -1,17 +1,25 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+/**
+* SOCIETY_VERSION : The module version
+* SOCIETY_DIR : The directory path to the module
+* SOCIETY_PATH : The path to the module
+* SOCIETY_URL : The url to the module
+* SOCIETY_VIEW_DIR : The path to the folder view of the module
+* SOCIETY_MODEL : The path to the folder model of the module
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package society
+* @subpackage society
+*/
+if ( !defined( 'ABSPATH' ) ) exit;
 
-DEFINE( 'WPDIGI_STES_VERSION', '1.0');
-
-/**	Définition des constantes pour le module / Define constant for module	*/
-DEFINE( 'WPDIGI_STES_DIR', basename(dirname(__FILE__)));
-DEFINE( 'WPDIGI_STES_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
-DEFINE( 'WPDIGI_STES_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
-DEFINE( 'WPDIGI_STES_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', WPDIGI_STES_PATH ) );
-
-/**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
-DEFINE( 'WPDIGI_STES_TEMPLATES_MAIN_DIR', WPDIGI_STES_PATH . '/templates/');
-DEFINE( 'SOCIETY_VIEW_DIR', WPDIGI_STES_PATH . '/view/');
-
-/**	Définition des types d'éléments ( post type ) à générer / Define elements types ( post type ) to generate */
-DEFINE( 'WPDIGI_STES_POSTTYPE_MAIN', 'digi-group' );
-DEFINE( 'WPDIGI_STES_POSTTYPE_SUB', 'digi-workunit' );
+DEFINE( 'SOCIETY_VERSION', '0.1');
+DEFINE( 'SOCIETY_DIR', basename( dirname( __FILE__ ) ) );
+DEFINE( 'SOCIETY_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
+DEFINE( 'SOCIETY_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', SOCIETY_PATH ) );
+DEFINE( 'SOCIETY_VIEW_DIR', SOCIETY_PATH . '/view/');
+DEFINE( 'SOCIETY_MODEL', SOCIETY_PATH . '/model/');
+DEFINE( 'SOCIETY_STATE', false);
+?>

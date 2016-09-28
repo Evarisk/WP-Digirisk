@@ -1,23 +1,25 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Module bootstrap file
- * @author Evarisk development team <dev@evarisk.com>
- * @version 1.0
- */
+* USER_DASHBOARD_VERSION : The module version
+* USER_DASHBOARD_DIR : The directory path to the module
+* USER_DASHBOARD_PATH : The path to the module
+* USER_DASHBOARD_URL : The url to the module
+* USER_DASHBOARD_VIEW_DIR : The path to the folder view of the module
+* USER_DASHBOARD_MODEL : The path to the folder model of the module
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package user_dashboard
+* @subpackage user_dashboard
+*/
+if ( !defined( 'ABSPATH' ) ) exit;
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
-DEFINE( 'USER_DASHBOARD_VERSION', '1.0');
-
-/**     Définition des constantes pour le module / Define constant for module  */
-DEFINE( 'USER_DASHBOARD_DIR', basename(dirname(__FILE__)));
-DEFINE( 'USER_DASHBOARD_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
+DEFINE( 'USER_DASHBOARD_VERSION', '0.1');
+DEFINE( 'USER_DASHBOARD_DIR', basename( dirname( __FILE__ ) ) );
 DEFINE( 'USER_DASHBOARD_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'USER_DASHBOARD_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', USER_DASHBOARD_PATH ) );
-
-/**     Définition du chemin absolu vers les templates / Define the templates absolute directories     */
-DEFINE( 'USER_DASHBOARD_VIEW', USER_DASHBOARD_PATH . 'view/');
-
+DEFINE( 'USER_DASHBOARD_VIEW_DIR', USER_DASHBOARD_PATH . '/view/');
+DEFINE( 'USER_DASHBOARD_MODEL', USER_DASHBOARD_PATH . '/model/');
+DEFINE( 'USER_DASHBOARD_STATE', false);
 ?>

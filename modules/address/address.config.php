@@ -1,25 +1,26 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Bootstrap file
- *
- * @author Development team <dev@eoxia.com>
- * @version 1.0
- */
+* ADDRESS_VERSION : The module version
+* ADDRESS_DIR : The directory path to the module
+* ADDRESS_PATH : The path to the module
+* ADDRESS_URL : The url to the module
+* ADDRESS_VIEW_DIR : The path to the folder view of the module
+* ADDRESS_MODEL : The path to the folder model of the module
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package address
+* @subpackage address
+*/
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
-DEFINE('ADDRESS_VERSION', '1.0');
+if ( !defined( 'ABSPATH' ) ) exit;
 
-/**
- * Get the plugin main dirname. Allows to avoid writing path directly into code
- * @var string Dirname of the plugin
- */
-DEFINE( 'ADDRESS_DIR', basename(dirname(__FILE__)));
-DEFINE( 'ADDRESS_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
+DEFINE( 'ADDRESS_VERSION', '0.1');
+DEFINE( 'ADDRESS_DIR', basename( dirname( __FILE__ ) ) );
 DEFINE( 'ADDRESS_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'ADDRESS_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', ADDRESS_PATH ) );
-
-/**	Define the templates directories	*/
-DEFINE( 'ADDRESS_TEMPLATES_MAIN_DIR', ADDRESS_PATH . '/templates/' );
+DEFINE( 'ADDRESS_VIEW_DIR', ADDRESS_PATH . '/view/');
+DEFINE( 'ADDRESS_MODEL', ADDRESS_PATH . '/model/');
+DEFINE( 'ADDRESS_STATE', false );
+?>

@@ -13,7 +13,6 @@
 * @package tab
 * @subpackage tab
 */
-
 if ( !defined( 'ABSPATH' ) ) exit;
 
 DEFINE( 'TAB_VERSION', '0.1');
@@ -21,3 +20,6 @@ DEFINE( 'TAB_DIR', basename( dirname( __FILE__ ) ) );
 DEFINE( 'TAB_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'TAB_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', TAB_PATH ) );
 DEFINE( 'TAB_VIEW_DIR', TAB_PATH . '/view/');
+DEFINE( 'TAB_MODEL', TAB_PATH . '/model/');
+DEFINE( 'TAB_STATE', false);
+?>

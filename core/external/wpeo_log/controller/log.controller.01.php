@@ -203,66 +203,68 @@ if ( !class_exists( "wpeologs_ctr" ) ) {
 		 * @param int $criticality The message crit rate (0-2)
 		 */
 		public static function log_datas_in_files( $name, $array_message, $criticality ) {
-			$upload_dir = wp_upload_dir();
+			if (WPDIGI_LOG) {
+				$upload_dir = wp_upload_dir();
 
-			$backtrace = debug_backtrace();
+				$backtrace = debug_backtrace();
 
-			// On récupère le service
-			$service = self::get_service_by_name( $name );
+				// On récupère le service
+				$service = self::get_service_by_name( $name );
 
-			if( $service == null ) {
-			/** Créer le service s'il n'existe pas */
-				$service = self::add( $name );
-			}
-
-			wp_mkdir_p( $upload_dir[ 'basedir' ] . '/wpeolog/' );
-
-			if( $service == null )
-				return null;
-
-			$message = "
-";
-			$message .= current_time('mysql', 0) . self::$file_separator;
-			$message .= get_current_user_id() . self::$file_separator;
-			$message .= '"' . $name . '"' . self::$file_separator;
-			$message .= ( !empty( $array_message['object_id'] ) ? $array_message['object_id'] : 'Not found' ) . self::$file_separator;
-
-			// For post type
-			if(!empty($array_message['previous_element'])) {
-				$message .= '"' . base64_encode(serialize($array_message['previous_element'])) . '"' . self::$file_separator;
-				$message .= '"' . base64_encode(serialize($array_message['previous_element_metas'])) . '"' . self::$file_separator;
-			}
-
-			if(!empty($array_message['message'])) {
-				$message .= '"' . $array_message['message'] . '"' . self::$file_separator;
-			}
-			$message .= $criticality . self::$file_separator . $name . self::$file_separator;
-
-			if ( !empty( $backtrace ) ) {
-				foreach ( $backtrace as $t ) {
-					$message .= ( !empty( $t['file'] ) ? $t['file'] : '' ) . ' line ' . ( !empty( $t['line'] ) ? $t['line'] : '' ) . ' function ' . $t['function'] . '()<br />';
+				if( $service == null ) {
+				/** Créer le service s'il n'existe pas */
+					$service = self::add( $name );
 				}
-			}
 
-			self::check_need_rotate( $service, $name . '-info', $message);
+				wp_mkdir_p( $upload_dir[ 'basedir' ] . '/wpeolog/' );
 
-			$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-info.csv', 'a');
-			fwrite($fp, $message);
-			fclose($fp);
+				if( $service == null )
+					return null;
 
-			if( 2 <= $criticality ) {
-				self::check_need_rotate( $service, $name . '-error', $message);
+				$message = "
+	";
+				$message .= current_time('mysql', 0) . self::$file_separator;
+				$message .= get_current_user_id() . self::$file_separator;
+				$message .= '"' . $name . '"' . self::$file_separator;
+				$message .= ( !empty( $array_message['object_id'] ) ? $array_message['object_id'] : 'Not found' ) . self::$file_separator;
 
-				$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-error.csv', 'a');
+				// For post type
+				if(!empty($array_message['previous_element'])) {
+					$message .= '"' . base64_encode(serialize($array_message['previous_element'])) . '"' . self::$file_separator;
+					$message .= '"' . base64_encode(serialize($array_message['previous_element_metas'])) . '"' . self::$file_separator;
+				}
+
+				if(!empty($array_message['message'])) {
+					$message .= '"' . $array_message['message'] . '"' . self::$file_separator;
+				}
+				$message .= $criticality . self::$file_separator . $name . self::$file_separator;
+
+				if ( !empty( $backtrace ) ) {
+					foreach ( $backtrace as $t ) {
+						$message .= ( !empty( $t['file'] ) ? $t['file'] : '' ) . ' line ' . ( !empty( $t['line'] ) ? $t['line'] : '' ) . ' function ' . $t['function'] . '()<br />';
+					}
+				}
+
+				self::check_need_rotate( $service, $name . '-info', $message);
+
+				$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-info.csv', 'a');
 				fwrite($fp, $message);
 				fclose($fp);
-			}
-			else if( 1 == $criticality ) {
-				self::check_need_rotate( $service, $name . '-warning', $message);
 
-				$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-warning.csv', 'a');
-				fwrite( $fp, $message );
-				fclose( $fp );
+				if( 2 <= $criticality ) {
+					self::check_need_rotate( $service, $name . '-error', $message);
+
+					$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-error.csv', 'a');
+					fwrite($fp, $message);
+					fclose($fp);
+				}
+				else if( 1 == $criticality ) {
+					self::check_need_rotate( $service, $name . '-warning', $message);
+
+					$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name . '-warning.csv', 'a');
+					fwrite( $fp, $message );
+					fclose( $fp );
+				}
 			}
 		}
 

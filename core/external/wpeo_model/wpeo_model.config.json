@@ -1,0 +1,10 @@
+{
+	"name": "WPEO Model",
+	"version": 0.2,
+	"description": "Le moteur de donnée et de définition de schéma pour WordPress",
+	"state": true,
+	"dependencies": [
+		"class",
+		"model"
+	]
+}

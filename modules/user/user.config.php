@@ -1,23 +1,25 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Module bootstrap file
- * @author Evarisk development team <dev@evarisk.com>
- * @version 1.0
- */
+* USER_VERSION : The module version
+* USER_DIR : The directory path to the module
+* USER_PATH : The path to the module
+* USER_URL : The url to the module
+* USER_VIEW_DIR : The path to the folder view of the module
+* USER_MODEL : The path to the folder model of the module
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package user
+* @subpackage user
+*/
+if ( !defined( 'ABSPATH' ) ) exit;
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
-DEFINE( 'USERS_VERSION', '1.0');
-
-/**     Définition des constantes pour le module / Define constant for module  */
-DEFINE( 'USERS_DIR', basename(dirname(__FILE__)));
-DEFINE( 'USERS_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
-DEFINE( 'USERS_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
-DEFINE( 'USERS_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', USERS_PATH ) );
-
-/**     Définition du chemin absolu vers les templates / Define the templates absolute directories     */
-DEFINE( 'USERS_VIEW', USERS_PATH . '/view/');
-
+DEFINE( 'USER_VERSION', '0.1');
+DEFINE( 'USER_DIR', basename( dirname( __FILE__ ) ) );
+DEFINE( 'USER_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
+DEFINE( 'USER_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', USER_PATH ) );
+DEFINE( 'USER_VIEW_DIR', USER_PATH . '/view/');
+DEFINE( 'USER_MODEL', USER_PATH . '/model/');
+DEFINE( 'USER_STATE', false);
 ?>

@@ -22,4 +22,5 @@ DEFINE( 'EVALUATION_METHOD_PATH', str_replace( "\\", "/", plugin_dir_path( __FIL
 DEFINE( 'EVALUATION_METHOD_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', EVALUATION_METHOD_PATH ) );
 DEFINE( 'EVALUATION_METHOD_VIEW', EVALUATION_METHOD_PATH . '/view/');
 DEFINE( 'EVALUATION_METHOD_MODEL', EVALUATION_METHOD_PATH . '/model/');
+DEFINE( 'EVALUATION_METHOD_STATE', false );
 ?>

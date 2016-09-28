@@ -13,7 +13,6 @@
 * @package risk
 * @subpackage risk
 */
-
 if ( !defined( 'ABSPATH' ) ) exit;
 
 DEFINE( 'RISK_VERSION', '0.1');
@@ -22,4 +21,5 @@ DEFINE( 'RISK_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
 DEFINE( 'RISK_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', RISK_PATH ) );
 DEFINE( 'RISK_VIEW_DIR', RISK_PATH . '/view/');
 DEFINE( 'RISK_MODEL', RISK_PATH . '/model/');
+DEFINE( 'RISK_STATE', false);
 ?>

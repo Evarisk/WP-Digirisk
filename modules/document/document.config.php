@@ -1,25 +1,25 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Module bootstrap file
- * @author Evarisk development team <dev@evarisk.com>
- * @version 1.0
- */
+* DOCUMENT_VERSION : The module version
+* DOCUMENT_DIR : The directory path to the module
+* DOCUMENT_PATH : The path to the module
+* DOCUMENT_URL : The url to the module
+* DOCUMENT_VIEW_DIR : The path to the folder view of the module
+* DOCUMENT_MODEL : The path to the folder model of the module
+*
+* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @version 0.1
+* @copyright 2015-2016 Eoxia
+* @package document
+* @subpackage document
+*/
+if ( !defined( 'ABSPATH' ) ) exit;
 
-/**
- * Define the current version for the plugin. Interresting for clear cache for plugin style and script
- * @var string Plugin current version number
- */
-DEFINE( 'WPDIGI_DOC_VERSION', '1.0');
-
-/**	Définition des constantes pour le module / Define constant for module	*/
-DEFINE( 'WPDIGI_DOC_DIR', basename(dirname(__FILE__)));
-DEFINE( 'WPDIGI_DOC_PATH_TO_MODULE', str_replace( str_replace( "\\", "/", WP_PLUGIN_DIR ), "", str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) ) );
-DEFINE( 'WPDIGI_DOC_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
-DEFINE( 'WPDIGI_DOC_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', WPDIGI_DOC_PATH ) );
-
-/**	Définition du chemin absolu vers les templates / Define the templates absolute directories	*/
-DEFINE( 'WPDIGI_DOC_TEMPLATES_MAIN_DIR', WPDIGI_DOC_PATH . '/templates/');
-
-/**	Définition des types d'éléments ( post type ) à générer / Define elements types ( post type ) to generate */
-DEFINE( 'WPDIGI_DOC_POSTTYPE_MAIN', 'digi-group' );
-DEFINE( 'WPDIGI_DOC_POSTTYPE_SUB', 'digi-workunit' );
+DEFINE( 'DOCUMENT_VERSION', '0.1');
+DEFINE( 'DOCUMENT_DIR', basename( dirname( __FILE__ ) ) );
+DEFINE( 'DOCUMENT_PATH', str_replace( "\\", "/", plugin_dir_path( __FILE__ ) ) );
+DEFINE( 'DOCUMENT_URL', str_replace( str_replace( "\\", "/", ABSPATH), site_url() . '/', DOCUMENT_PATH ) );
+DEFINE( 'DOCUMENT_VIEW_DIR', DOCUMENT_PATH . '/view/');
+DEFINE( 'DOCUMENT_MODEL', DOCUMENT_PATH . '/model/');
+DEFINE( 'DOCUMENT_STATE', false);
+?>

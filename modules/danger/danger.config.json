@@ -1,0 +1,13 @@
+{
+	"name": "Danger",
+	"version": 0.1,
+	"description": "Gères les dangers dans l'application Digirisk",
+	"state": true,
+	"dependencies": [
+		"action",
+		"class",
+		"helper",
+		"model",
+		"shortcode"
+	]
+}

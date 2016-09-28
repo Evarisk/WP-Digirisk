@@ -17,7 +17,10 @@ require_once( 'core/util/singleton.util.php' );
 require_once( 'core/util/include.util.php' );
 require_once( 'core/external/wpeo_log/wpeo_log.php' );
 require_once( 'core/external/wpeo_model/class/helper.class.php' );
+require_once( 'core/action/digirisk.action.php' );
 
-include_util::inc( WPDIGI_PATH . 'core/external/wpeo_model', array( 'config', 'helper', 'class', 'model' ) );
-include_util::inc( WPDIGI_PATH . 'core/external/wpeo_export', array( 'config', 'class' ) );
-include_util::inc( WPDIGI_PATH , array( 'config', 'util', 'shortcode', 'helper', 'model', 'class', 'action', 'filter' ) );
+include_util::inc();
+
+// include_util::inc( WPDIGI_PATH . 'core/external/wpeo_model', array( 'util' ) );
+// include_util::inc( WPDIGI_PATH . 'core/external/wpeo_export', array( 'config', 'class' ) );
+// include_util::inc( WPDIGI_PATH . 'core/' , array( 'action' ) );
