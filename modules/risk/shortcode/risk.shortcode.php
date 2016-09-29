@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'un établissement.
 * Et un formulaire qui permet d'ajouter un risque

@@ -1,0 +1,27 @@
+{
+	"name": "Digirisk Core",
+	"slug": "core",
+	"version": "0.2.0.0",
+	"description": "Le module boot de Digirisk",
+	"path": "core/",
+	"dependencies": {
+		"util": {
+			"priority": [
+
+			]
+		},
+		"action": {
+			"priority": [
+
+			]
+		},
+		"class": {
+			"priority": [
+			]
+		},
+		"helper": {
+			"priority": [
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "Societé",
+	"slug": "society",
+	"version": "0.2.0.0",
+	"description": "Le module gérant la page d'affichage de Digirisk",
+	"path": "modules/society/",
+	"dependencies": {
+		"shortcode": {
+		},
+		"action": {
+		},
+		"filter": {
+		},
+		"action": {
+		},
+		"class": {
+		}
+	}
+}

@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_evaluation_class extends comment_class {
 	protected $model_name   = 'risk_evaluation_model';

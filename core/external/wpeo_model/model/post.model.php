@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class post_model extends constructor_data_class {
 

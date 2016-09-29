@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class workunit_sheet_class extends singleton_util {
 	protected function construct() {}

@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>

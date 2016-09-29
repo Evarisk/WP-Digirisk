@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class address_class extends comment_class {
 

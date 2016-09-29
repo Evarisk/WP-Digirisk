@@ -8,17 +8,31 @@ class society_action {
 	 * wp_ajax_save_society
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+
 		add_action( 'wp_ajax_load_sheet_display', array( $this, 'callback_load_sheet_display' ) );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
 	}
 
+	/**
+	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
+	 */
+	public function callback_admin_menu() {
+		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
+		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
+
+		if ( !empty( $digirisk_core['installed'] ) ) {
+			add_menu_page( __( 'Digirisk : Risk evaluation', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( society_class::g(), 'display_dashboard' ), PLUGIN_URL . 'core/assets/images/favicon.png', 4);
+		}
+	}
+
 	public function callback_admin_enqueue_scripts() {
 		$screen = get_current_screen();
-		if ( 'toplevel_page_digirisk-simple-risk-evaluation' == $screen->id ) {
-			wp_enqueue_script( 'eo-no-back-page', WPDIGI_STES_URL . 'asset/js/no-back-page.backend.js', array(), WPDIGI_VERSION, false );
-		}
+		// if ( 'toplevel_page_digirisk-simple-risk-evaluation' == $screen->id ) {
+		// 	wp_enqueue_script( 'eo-no-back-page', WPDIGI_STES_URL . 'asset/js/no-back-page.backend.js', array(), WPDIGI_VERSION, false );
+		// }
 	}
 
 	/**

@@ -25,7 +25,7 @@ class tab_filter {
   * @param string $tab_to_display Le nom de l'onglet pour le contenu à afficher.
   */
   public function callback_tab_content( $content, $element, $tab_to_display ) {
-    require( TAB_VIEW_DIR . 'content.view.php' );
+		view_util::g()->exec( 'tab', 'content', array( 'content' => $content, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
   }
 }
 

@@ -40,7 +40,7 @@ class society_shortcode {
 				}
 			}
 
-		  require( SOCIETY_VIEW_DIR . '/content.view.php' );
+			view_util::g()->exec( 'society', 'content', array( 'element' => $element, 'tab_to_display' => $tab_to_display ) );
 		}
   }
 }

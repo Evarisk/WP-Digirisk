@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
  *
@@ -19,25 +21,16 @@ class society_class extends singleton_util {
 	 */
 	protected function construct() {
 		/*	Création du menu dans l'administration pour le module digirisk / Create the administration menu for digirisk plugin */
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 	}
 
-	/**
-	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
-	 */
-	public function callback_admin_menu() {
-		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
-		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
 
-		if ( !empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'Digirisk : Risk evaluation', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( &$this, 'display_dashboard' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4);
-		}
-	}
 
 	/**
 	 * AFFICHAGE/DISPLAY - Affichage de l'écran principal pour la gestion de la structure de la société et l'évaluation des risques / Display main screen for society management and risk evaluation
 	 */
 	public function display_dashboard() {
+		\digi\log_class::g()->start_ms( 'display_dashboard' );
+
 		$group_list = group_class::g()->get(
 			array(
 				'posts_per_page' => -1,
@@ -53,12 +46,8 @@ class society_class extends singleton_util {
 			$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 		}
 
-		// $path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'simple', 'dashboard' );
-		// if( $path ) {
-		// 	require_once( $path );
-		// }
-
-		require_once( WPDIGI_STES_TEMPLATES_MAIN_DIR . 'simple/dashboard.php' );
+		view_util::g()->exec( 'society', 'dashboard', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
+		\digi\log_class::g()->exec( 'digi_callback_admin_menu', 'display_dashboard', 'Réponse callback_admin_menu' );
 	}
 
 	/**

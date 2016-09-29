@@ -27,7 +27,8 @@ class tab_shortcode {
 		$display = $param['display'];
 
     $list_tab = apply_filters( 'digi_tab', array() );
-    require_once( TAB_VIEW_DIR . 'list.view.php' );
+
+		view_util::g()->exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
 	}
 }
 

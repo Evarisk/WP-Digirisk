@@ -3,6 +3,9 @@ $service_id = (int) $_GET['service_id'];
 $sanitize_type = sanitize_text_field( $_GET['type'] );
 $sanitize_key = (int) !empty( $_GET['key'] ) ? $_GET['key'] : 0;
 
+$background_color = array( '', 'rgba(230, 126, 34,0.8)', 'rgba(231, 76, 60,0.8)' );
+$total_ms = 0;
+
 ?>
 
 <div class="tablenav bottom">
@@ -54,11 +57,12 @@ $sanitize_key = (int) !empty( $_GET['key'] ) ? $_GET['key'] : 0;
 <table id='wpeo-table-data-csv' class="tablesorter wp-list-table widefat fixed posts">
 	<thead>
     	<tr>
-      		<th id="author" class="header-order manage-column column-author" style="" scope="col"><?php _e('Author', 'digirisk'); ?></th>
-	        <th id="severity" class="header-order manage-column column-severity" style="" scope="col"><?php _e('Severity', 'digirisk'); ?></th>
-	        <th id="object-id" class="header-order manage-column column-object-id" style="" scope="col"><?php _e('Object ID', 'digirisk'); ?></th>
-	        <th style='width: 50%;' id="message" class="header-order manage-column column-message" style="" scope="col"><?php _e('Message', 'digirisk'); ?></th>
-	        <th id="date" class="header-order manage-column column-date sortable <?php echo (!empty($order)) ? $order : ""; ?>" style="" scope="col">
+      		<th id="date" class="header-order manage-column column-date" style="" scope="col"><?php _e('Critique', 'digirisk'); ?></th>
+      		<th id="date" class="header-order manage-column column-date" style="" scope="col"><?php _e('Date', 'digirisk'); ?></th>
+      		<th id="date" class="header-order manage-column column-date" style="" scope="col"><?php _e('MS', 'digirisk'); ?></th>
+	        <th id="severity" class="header-order manage-column column-severity" style="" scope="col"><?php _e('Auteur', 'digirisk'); ?></th>
+	        <th id="object-id" class="header-order manage-column column-object-id" style="" scope="col"><?php _e('Message', 'digirisk'); ?></th>
+	        <th style='width: 50%;' id="message" class="header-order manage-column column-message" style="" scope="col"><?php _e('Données', 'digirisk'); ?></th>
             	<span>Date</span>
         	</th>
     	</tr>
@@ -67,18 +71,19 @@ $sanitize_key = (int) !empty( $_GET['key'] ) ? $_GET['key'] : 0;
  	<tbody>
  		<?php if ( !empty( $file ) ): ?>
   			<?php foreach ( $file as $key => $value ):
-  				$user_email = !empty( $value[1] ) ? get_userdata( $value[1] ) : __( 'Empty', 'digirisk' );
+					$user_email = !empty( $value[1] ) ? get_userdata( $value[1] ) : __( 'No user', 'digirisk' );
   				if ( gettype( $user_email ) == 'object' ) {
-					$user_email = $user_email->user_email;
-				}
-
+						$user_email = $user_email->user_email;
+					}
+					$total_ms += $value[5];
   				?>
-    			<tr>
-				    <td><?php echo esc_html( $user_email ); ?></td>
-				    <td><?php echo !empty( $value[5] ) ? esc_html( $value[5] ) : 0; ?></td>
+    			<tr style="background-color: <?php echo $background_color[trim($value[6])]; ?>">
+				    <td><?php echo trim($value[6]); ?></td>
+						<td><?php echo $value[0]; ?></td>
+						<td><?php echo $value[5]; ?></td>
+				    <td><?php echo !empty( $user_email ) ? esc_html( $user_email ) : 'Aucun utilisateur'; ?></td>
 				    <td><?php echo !empty( $value[3] ) ? esc_html( $value[3] ) : __( 'Empty', 'digirisk' ); ?></td>
-				    <td><?php echo !(empty($value[4])) ? trim(esc_html( $value[4] ), "\"" ) : __('Empty', 'digirisk'); ?></td>
-			    	<td><?php echo !(empty($value[0])) ? mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), esc_html( $value[0] ), true ) : __('Empty', 'digirisk'); ?></td>
+				    <td><?php echo !(empty($value[4])) ? '<pre>' . print_r( json_decode( $value[4], true ), true ) . '</pre>' : 'No data'; ?></td>
 				</tr>
 			<?php endforeach; ?>
 		<?php else: ?>
@@ -86,6 +91,8 @@ $sanitize_key = (int) !empty( $_GET['key'] ) ? $_GET['key'] : 0;
     			<td><?php _e('Nothing to display, select your log of file', 'digirisk'); ?></td>
   			</tr>
 		<?php endif; ?>
+
+		<p>Total MS : <?php echo $total_ms; ?></p>
 
  	</tbody>
 </table>

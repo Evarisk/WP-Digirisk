@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
  *
@@ -23,12 +25,64 @@ class group_action {
 	 * wp_ajax_wpdigi_generate_duer_digi-group
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'custom_post_type' ), 5 );
+
 		// todo: Remplacer - par _
 		add_action( 'wp_ajax_wpdigi-create-group', array( $this, 'ajax_create_group' ) );
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
 		add_action( 'wp_ajax_wpdigi_generate_duer_' . group_class::g()->get_post_type(), array( $this, 'ajax_generate_duer' ) );
+	}
+
+	/**
+	 * SETTER - Création des types d'éléments pour la gestion de l'entreprise / Create the different element for society management
+	 */
+	function custom_post_type() {
+		/**	Créé les sociétés: élément principal / Create society : main element 	*/
+		$labels = array(
+			'name'                => __( 'Societies', 'digirisk' ),
+			'singular_name'       => __( 'Society', 'digirisk' ),
+			'menu_name'           => __( 'Societies', 'digirisk' ),
+			'name_admin_bar'      => __( 'Societies', 'digirisk' ),
+			'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
+			'all_items'           => __( 'Societies', 'digirisk' ),
+			'add_new_item'        => __( 'Add society', 'digirisk' ),
+			'add_new'             => __( 'Add society', 'digirisk' ),
+			'new_item'            => __( 'New society', 'digirisk' ),
+			'edit_item'           => __( 'Edit society', 'digirisk' ),
+			'update_item'         => __( 'Update society', 'digirisk' ),
+			'view_item'           => __( 'View society', 'digirisk' ),
+			'search_items'        => __( 'Search society', 'digirisk' ),
+			'not_found'           => __( 'Not found', 'digirisk' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
+		);
+		$rewrite = array(
+			'slug'                => '/',
+			'with_front'          => true,
+			'pages'               => true,
+			'feeds'               => true,
+		);
+		$args = array(
+			'label'               => __( 'Digirisk society', 'digirisk' ),
+			'description'         => __( 'Manage societies into digirisk', 'digirisk' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
+			'hierarchical'        => true,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => false,
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => true,
+			'rewrite'             => $rewrite,
+			'capability_type'     => 'page',
+		);
+
+		register_post_type( group_class::g()->get_post_type(), $args );
 	}
 
 	/**

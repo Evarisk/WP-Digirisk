@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class group_class extends post_class {
 
@@ -7,64 +9,13 @@ class group_class extends post_class {
 	protected $meta_key    					= '_wpdigi_society';
 	public $element_prefix 					= 'GP';
 	protected $before_post_function = array( 'construct_identifier', 'convert_date' );
-	protected $after_get_function = array( 'order_risk', 'get_identifier' );
+	protected $after_get_function = array( 'get_identifier' );
 
 	/**
 	 * Constructeur
 	 */
-	protected function construct() {
-		add_action( 'init', array( $this, 'custom_post_type' ), 5 );
-	}
+	protected function construct() {}
 
-	/**
-	 * SETTER - Création des types d'éléments pour la gestion de l'entreprise / Create the different element for society management
-	 */
-	function custom_post_type() {
-		/**	Créé les sociétés: élément principal / Create society : main element 	*/
-		$labels = array(
-			'name'                => __( 'Societies', 'digirisk' ),
-			'singular_name'       => __( 'Society', 'digirisk' ),
-			'menu_name'           => __( 'Societies', 'digirisk' ),
-			'name_admin_bar'      => __( 'Societies', 'digirisk' ),
-			'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
-			'all_items'           => __( 'Societies', 'digirisk' ),
-			'add_new_item'        => __( 'Add society', 'digirisk' ),
-			'add_new'             => __( 'Add society', 'digirisk' ),
-			'new_item'            => __( 'New society', 'digirisk' ),
-			'edit_item'           => __( 'Edit society', 'digirisk' ),
-			'update_item'         => __( 'Update society', 'digirisk' ),
-			'view_item'           => __( 'View society', 'digirisk' ),
-			'search_items'        => __( 'Search society', 'digirisk' ),
-			'not_found'           => __( 'Not found', 'digirisk' ),
-			'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
-		);
-		$rewrite = array(
-			'slug'                => '/',
-			'with_front'          => true,
-			'pages'               => true,
-			'feeds'               => true,
-		);
-		$args = array(
-			'label'               => __( 'Digirisk society', 'digirisk' ),
-			'description'         => __( 'Manage societies into digirisk', 'digirisk' ),
-			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
-			'hierarchical'        => true,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => false,
-			'show_in_admin_bar'   => false,
-			'show_in_nav_menus'   => true,
-			'can_export'          => true,
-			'has_archive'         => true,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
-			'rewrite'             => $rewrite,
-			'capability_type'     => 'page',
-		);
-
-		register_post_type( $this->post_type, $args );
-	}
 
 	/**
 	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
@@ -74,7 +25,7 @@ class group_class extends post_class {
 			$selected_group = $list_groupment[0];
 		}
 
-		require ( GROUP_VIEW_DIR . '/toggle.view.php' );
+		view_util::g()->exec( 'group', 'toggle', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 	}
 	/**
 	* Affiche un groupement
@@ -84,7 +35,7 @@ class group_class extends post_class {
 	public function display( $group_id ) {
 		$element = $this->show( $group_id );
 
-		require ( SOCIETY_VIEW_DIR . '/content.view.php' );
+		view_util::g()->exec( 'society', 'content' );
 	}
 
 	public function display_list_item( $list_groupment, $selected_group = null ) {
@@ -92,7 +43,7 @@ class group_class extends post_class {
 			$selected_group = $list_groupment[0];
 		}
 
-		require ( GROUP_VIEW_DIR . '/list.view.php' );
+		view_util::g()->exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 	}
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree

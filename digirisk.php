@@ -1,4 +1,6 @@
 <?php
+
+namespace digi;
 /**
  * Plugin Name: Digirisk
  * Plugin URI:  http://www.evarisk.com/document-unique-logiciel
@@ -12,15 +14,13 @@
  * Text Domain: digirisk
  */
 
-require_once( 'digirisk.config.php' );
+DEFINE( 'PLUGIN_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '\\' );
+DEFINE( 'PLUGIN_URL', plugins_url( basename( __DIR__ ) ) . '/' );
+
 require_once( 'core/util/singleton.util.php' );
-require_once( 'core/util/include.util.php' );
-require_once( 'core/external/wpeo_log/wpeo_log.php' );
-require_once( 'core/external/wpeo_model/class/helper.class.php' );
-require_once( 'core/action/digirisk.action.php' );
+require_once( 'core/util/init.util.php' );
+require_once( 'core/external/wpeo_log/class/log.class.php' );
 
-include_util::inc();
-
-// include_util::inc( WPDIGI_PATH . 'core/external/wpeo_model', array( 'util' ) );
-// include_util::inc( WPDIGI_PATH . 'core/external/wpeo_export', array( 'config', 'class' ) );
-// include_util::inc( WPDIGI_PATH . 'core/' , array( 'action' ) );
+log_class::g()->start_ms( 'digi_boot' );
+init_util::g()->exec();
+log_class::g()->exec('digi_boot', 'digi_boot', 'Boot l\'application Digirisk' );

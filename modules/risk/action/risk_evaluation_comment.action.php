@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * @TODO : A détailler
 *

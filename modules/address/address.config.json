@@ -1,0 +1,15 @@
+{
+	"name": "Address",
+	"slug": "address",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les adresses",
+	"path": "modules/address/",
+	"dependencies": {
+		"model": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "WPEO Log",
+	"slug": "wpeo_log",
+	"version": "0.2.0.0",
+	"description": "Gestionnaire des logs",
+	"path": "core/external/wpeo_log/",
+	"dependencies": {
+		"util": {
+		},
+		"action": {
+		},
+		"class": {
+		}
+	},
+	"log": false,
+	"number_decimal_ms": 2
+}

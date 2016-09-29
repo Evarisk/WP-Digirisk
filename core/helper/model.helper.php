@@ -18,7 +18,7 @@ function construct_identifier( $data ) {
 }
 
 function get_identifier( $data ) {
-	$list_accronym = get_option( SETTING_OPTION_NAME_ACCRONYM );
+	$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
 	$list_accronym = json_decode( $list_accronym, true );
 	$model_name = get_class( $data );
 	$controller_name = str_replace( 'model', 'class', $model_name );

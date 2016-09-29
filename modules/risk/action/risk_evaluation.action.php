@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Enregistres l'évaluation d'un risque.
 * Gères la méthode d'évaluation simple

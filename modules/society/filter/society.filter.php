@@ -10,7 +10,7 @@
 */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class establishment_filter {
+class society_filter {
   public function __construct() {
 		add_filter( 'digi_menu', array( $this, 'callback_digi_menu' ), 10, 2 );
 
@@ -36,7 +36,7 @@ class establishment_filter {
 
   /** Affiches l'identité d'un établissement */
   public function callback_establishment_identity( $element, $editable_identity = false ) {
-    require( SOCIETY_VIEW_DIR . '/identity.view.php' );
+		view_util::g()->exec( 'society', 'identity', array( 'element' => $element, 'editable_identity' => $editable_identity ) );
   }
 
   /** Affiches les actions d'un établissement */
@@ -54,4 +54,4 @@ class establishment_filter {
   }
 }
 
-new establishment_filter();
+new society_filter();

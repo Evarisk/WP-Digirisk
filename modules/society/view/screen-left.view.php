@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="wp-digi-societytree-left-container wp-digi-bloc-loader" >
+<div class="wp-digi-societytree-left-container wp-digi-bloc-loader">
 	<?php
 	if ( !empty( $group_list ) ):
 		group_class::g()->display_toggle( $group_list, $society );

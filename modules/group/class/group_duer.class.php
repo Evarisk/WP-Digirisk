@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
  *
