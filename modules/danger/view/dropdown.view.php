@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <?php if ( !empty( $danger_category_list ) ) : ?>
 	<input type="hidden" name="danger_id" value='' />

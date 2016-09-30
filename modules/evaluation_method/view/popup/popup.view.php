@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * La popup qui contient les données de l'évaluation complexe de digirisk
 *

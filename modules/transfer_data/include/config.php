@@ -1,4 +1,7 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+
+namespace digi;
+if ( !defined( 'ABSPATH' ) ) exit;
 require_once('databaseTable.php');
 
 {/*	Define the different path for the plugin	*/

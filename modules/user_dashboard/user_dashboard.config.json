@@ -1,0 +1,15 @@
+{
+	"name": "User dashboard",
+	"slug": "user_dashboard",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les utilisateurs de Digirisk",
+	"path": "modules/user_dashboard/",
+	"dependencies": {
+		"shortcode": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

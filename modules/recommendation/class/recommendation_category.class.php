@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier contenant les utilitaires pour la gestion des catégories de préconisation et les préconisations / File with all utilities for managing recommendation categories and recommendations
  *
@@ -18,7 +20,7 @@ class recommendation_category_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'recommendation_category_model';
+	protected $model_name   = '\digi\recommendation_category_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -33,8 +35,8 @@ class recommendation_category_class extends term_class {
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
 	protected $base = 'digirisk/recommendation-category';
 	protected $version = '0.1';
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 	public $element_prefix = 'RC';
 
 	/**

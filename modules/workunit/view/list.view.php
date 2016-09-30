@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <ul class="wp-digi-list wp-digi-list-workunit" >
 	<?php if ( !empty( $list_workunit ) ) : ?>

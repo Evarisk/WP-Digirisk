@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes deux shortcodes
 * digi_evaluation_method permet d'afficher la méthode d'évaluation simple

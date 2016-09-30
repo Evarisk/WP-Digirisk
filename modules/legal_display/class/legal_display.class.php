@@ -1,13 +1,15 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_class extends post_class {
-  protected $model_name = 'legal_display_model';
+  protected $model_name = '\digi\legal_display_model';
 	protected $post_type  = 'digi-legal-display';
 	protected $meta_key   = '_wpdigi_legal_display';
 	protected $base 			= 'digirisk/legal_display';
 	protected $version 		= '0.1';
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 
 	public $element_prefix = 'LD';
 

@@ -4,12 +4,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class group_class extends post_class {
 
-	protected $model_name   				= 'group_model';
+	protected $model_name   				= '\digi\group_model';
 	protected $post_type    				= 'digi-group';
 	protected $meta_key    					= '_wpdigi_society';
 	public $element_prefix 					= 'GP';
-	protected $before_post_function = array( 'construct_identifier', 'convert_date' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier', '\digi\convert_date' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * Constructeur

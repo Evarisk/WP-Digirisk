@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_class extends singleton_util {
-	protected $model_name = 'user_model';
+	protected $model_name = '\digi\user_model';
 	protected $meta_key = '_wpeo_user';
 	protected $base = 'user';
 	protected $version = '0.1';

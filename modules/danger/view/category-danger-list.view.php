@@ -1,4 +1,4 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi; if ( !defined( 'ABSPATH' ) ) exit; ?>
 <?php if ( !empty( $danger_category_list ) ) : ?>
 	<input type="hidden" name="danger_id" value='' />
 	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">

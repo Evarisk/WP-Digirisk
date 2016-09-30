@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 /**
@@ -11,7 +11,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 
 /**	Include the different config for the plugin	*/
-require_once( DIGI_DTRANS_PATH . DIGI_DTRANS_DIR . '/include/config.php' );
+require_once( PLUGIN_PATH . config_util::$init['transfer_data']->path . '/include/config.php' );
 
 /*	CLEAN UP A VAR BEFORE SENDING IT TO OUTPUT OR DATABASE	*/
 function IsValid_Variable($MyVar2Test,$DefaultValue='')

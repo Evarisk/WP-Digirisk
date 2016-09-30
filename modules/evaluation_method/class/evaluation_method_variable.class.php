@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier contenant les utilitaires pour la gestion des méthodes d'évaluation / File with all utilities for managing evaluation method
  *
@@ -18,7 +20,7 @@ class evaluation_method_variable_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'evaluation_method_variable_model';
+	protected $model_name   = '\digi\evaluation_method_variable_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string

@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class category_danger_model extends term_model {
 
@@ -8,7 +10,7 @@ class category_danger_model extends term_model {
 				'danger'	=> array(
 					'export'			=> true,
 					'type'				=> 'taxonomy',
-					'controller'	=> 'danger_class',
+					'controller'	=> '\digi\danger_class',
 					'field'					=> 'parent',
 					'value'					=> 'post_id',
 					'custom_field'	=> 'post_id',

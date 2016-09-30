@@ -1,4 +1,7 @@
 <?php
+
+namespace digi;
+
 /**
 * @TODO : A détailler
 *
@@ -35,6 +38,8 @@ class digirisk_action {
 	public function callback_admin_enqueue_scripts() {
 		wp_register_style( 'digi-style', PLUGIN_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
 	  wp_enqueue_style( 'digi-style' );
+
+		 wp_enqueue_script( 'digi-script', PLUGIN_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
 	}
 	/**
 	* Appelle le domaine de traduction

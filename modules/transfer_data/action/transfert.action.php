@@ -1,6 +1,6 @@
 <?php
 
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 

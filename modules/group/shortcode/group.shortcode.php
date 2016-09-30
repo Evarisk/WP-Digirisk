@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'un établissement.
 * Et un formulaire qui permet d'ajouter un risque
@@ -29,7 +29,7 @@ class group_shortcode {
 	*/
 	public function callback_generate_sheet( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id, array( false ) );
 		$list_document_unique = document_unique_class::g()->get( array( 'parent_id' => $element_id, 'order' => 'DESC', 'post_mime_type' => 'application/vnd.oasis.opendocument.text', 'posts_per_page' => 1 ) );
 		$document_unique = $list_document_unique[0];
 		$current_user = wp_get_current_user();
@@ -46,7 +46,7 @@ class group_shortcode {
 			$transmitter_infos = $current_user->display_name;
 		}
 
-		require ( GROUP_VIEW_DIR . 'sheet-form.php' );
+		view_util::g()->exec( 'group', 'sheet-form', array( 'element_id' => $element_id, 'element' => $element, 'document_unique' => $document_unique, 'transmitter_infos' => $transmitter_infos ) );
 	}
 
 	/**

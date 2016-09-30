@@ -1,4 +1,8 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+
+namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 	/**	Set the config components transfert state	*/
 	$main_config_components_are_transfered = true;
 

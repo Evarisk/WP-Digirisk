@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -40,7 +40,7 @@ class user_shortcode_action extends \singleton_util {
 
 		ob_start();
 		user_dashboard_class::g()->display_list_user();
-		
+
 		$user = \digi\user_class::g()->get( array( 'schema' => true ) );
 		$user = $user[0];
 		require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );

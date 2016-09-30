@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * La gallerie d'image avec bouton de navigation
 * Avec deux bouton :

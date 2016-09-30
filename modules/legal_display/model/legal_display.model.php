@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_model extends post_model {
 
@@ -7,13 +9,13 @@ class legal_display_model extends post_model {
 			'child' => array(
 				'detective_work' => array(
 					'type' 				=> 'object',
-					'controller'	=> 'third_class',
+					'controller'	=> '\digi\third_class',
 					'field'				=> 'id',
 					'value'				=> 'detective_work_id'
 				),
 				'occupational_health_service' => array(
 					'type' 				=> 'object',
-					'controller'	=> 'third_class',
+					'controller'	=> '\digi\third_class',
 					'field'				=> 'id',
 					'value'				=> 'occupational_health_service_id'
 				)

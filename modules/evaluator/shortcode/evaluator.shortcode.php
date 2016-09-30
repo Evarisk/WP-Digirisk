@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes un shortcode qui permet d'afficher le page des evaluateurs
 *

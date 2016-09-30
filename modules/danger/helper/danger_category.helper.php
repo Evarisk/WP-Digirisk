@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 
 function get_danger( $data ) {
 	echo $data;

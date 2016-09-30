@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 <li class="wp-digi-list-item">
 		<input name="epi[<?php echo $epi->id; ?>][id]" type="hidden" value="<?php echo $epi->id; ?>" />
 		<?php echo do_shortcode( '[eo_upload_button id="' . $epi->id . '" type="epi"]' ); ?>

@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_import_action extends \singleton_util {
+class user_import_action extends singleton_util {
 	public static $response;
 	/**
 	* Le constructeur appelle les actions suivantes:

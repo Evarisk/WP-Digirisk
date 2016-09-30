@@ -1,10 +1,10 @@
 <?php
 
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_class extends \singleton_util {
+class TransferData_class extends singleton_util {
 
 	/**
 	 * Déclaration de la correspondance entre les anciens types Evarisk et les nouveaux types dans wordpress / Declare an array for making correspondance between evarisk old types and wordpress new type
@@ -14,8 +14,8 @@ class TransferData_class extends \singleton_util {
 // 		TABLE_TACHE => 'wpeo-tasks',
 // 		TABLE_ACTIVITE => 'comments',
 
-		TABLE_GROUPEMENT => WPDIGI_STES_POSTTYPE_MAIN,
-		TABLE_UNITE_TRAVAIL => WPDIGI_STES_POSTTYPE_SUB,
+		TABLE_GROUPEMENT => 'digi-group',
+		TABLE_UNITE_TRAVAIL => 'digi-workunit',
 	);
 
 	/**

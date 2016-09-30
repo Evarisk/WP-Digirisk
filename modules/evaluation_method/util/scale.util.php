@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
  * Tout ce qui est en relation avec les JSON
  *

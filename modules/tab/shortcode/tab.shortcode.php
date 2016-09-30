@@ -1,4 +1,6 @@
 <?php
+
+namespace digi;
 /**
 * Ajout le shortcode qui permet d'afficher les onglets
 *

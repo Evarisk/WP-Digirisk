@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class term_class extends singleton_util {
-	protected $model_name = 'term_model';
+	protected $model_name = '\digi\term_model';
 	protected $meta_key = '_wpeo_term';
 	protected $taxonomy = 'category';
 	protected $base = 'term';
@@ -13,7 +13,7 @@ class term_class extends singleton_util {
 	protected function construct() {}
 
 	public function update( $data ) {
-		$object = new $this->model_name( (array)$data );
+		$object = new $this->model_name( (array)$data, array( false ) );
 
 		/**	Sauvegarde des données dans la base de données / Save data into database	*/
 		if ( empty( $object->id ) ) {

@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier du controlleur principal pour les catégories de dangers dans Digirisk / Controller file for danger categories for Digirisk
  *
@@ -17,7 +19,7 @@ class category_danger_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = 'category_danger_model';
+	protected $model_name   = '\digi\category_danger_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -33,8 +35,8 @@ class category_danger_class extends term_class {
 	protected $base = 'digirisk/danger-category';
 	protected $version = '0.1';
 
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 	public $element_prefix = 'CD';
 
 	/**

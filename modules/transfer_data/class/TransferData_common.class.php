@@ -1,9 +1,9 @@
 <?php
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_common_class extends \singleton_util {
+class TransferData_common_class extends singleton_util {
 
 	protected function construct() { }
 

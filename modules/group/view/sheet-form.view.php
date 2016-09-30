@@ -1,5 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
 
+if ( !defined( 'ABSPATH' ) ) exit;
 
 ?>
 <form method="post" class="wp-digi-form" id="wpdigi-save-element-form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" >

@@ -5,7 +5,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class constructor_data_class extends helper_class {
 	protected function __construct( $data, $field_wanted ) {
 		$this->dispatch_wordpress_data( $data, $data );
-		$this->fill_child( $field_wanted );
+
+		if ( !empty( $field_wanted ) ) {
+			$this->fill_child( $field_wanted );
+		}
 	}
 
 	private function dispatch_wordpress_data( $all_data, $data, $current_object = null, $model = array() ) {
@@ -36,7 +39,7 @@ class constructor_data_class extends helper_class {
 				$current_data = !empty( $all_data[$field_name] ) ? $all_data[$field_name] : array();
 
 				if ( empty( $current_object->$field_name ) ) {
-					$current_object->$field_name = new stdClass();
+					$current_object->$field_name = new \stdClass();
 				}
 
 				$current_object->$field_name = $this->dispatch_wordpress_data( $all_data, $current_data, $current_object->$field_name, $field_def['child'] );
@@ -127,11 +130,6 @@ class constructor_data_class extends helper_class {
 			if( !empty( $field_def['field'] ) && isset( $this->$field_name ) )
 				$object[ $field_def[ 'field' ] ] = $this->$field_name;
 		}
-
-		eo_log( 'digi-post-toto', array(
-				'message' => 'Do wp object : ' . json_encode( $object )
-			)
-		);
 
 		return $object;
 	}

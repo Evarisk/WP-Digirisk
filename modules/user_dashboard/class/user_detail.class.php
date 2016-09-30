@@ -1,5 +1,6 @@
+<?php namespace digi;
 
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_detail_class extends singleton_util {
 

@@ -1,9 +1,11 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluator_class extends user_class {
 	protected $model_name 	= '\digi\user_model';
 	protected $meta_key		= '_wpeo_user_info';
-	protected $after_get_function = array( '\digi\get_hiring_date', 'get_identifier' );
+	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
 
 	protected $base 	= 'digirisk/evaluator';
 	protected $version 	= '0.1';

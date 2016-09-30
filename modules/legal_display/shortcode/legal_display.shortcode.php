@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes le formulaire pour générer l'affichage légal
 *

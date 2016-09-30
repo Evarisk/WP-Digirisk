@@ -1,0 +1,19 @@
+{
+	"name": "Evaluator",
+	"slug": "evaluator",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les évaluateurs",
+	"path": "modules/evaluator/",
+	"dependencies": {
+		"shortcode": {
+		},
+		"model": {
+		},
+		"filter": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

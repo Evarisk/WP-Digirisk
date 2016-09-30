@@ -1,0 +1,17 @@
+{
+	"name": "Export Import",
+	"slug": "export_import",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les exportation et importation de groupment",
+	"path": "modules/export_import/",
+	"dependencies": {
+		"filter": {
+		},
+		"shortcode": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

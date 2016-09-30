@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Affiches le toggle pour sélectionner une cotation avec la méthode simple de digirisk
 * Ajoutes également un bouton qui permet d'évaluer avec la méthode complexe de digirisk

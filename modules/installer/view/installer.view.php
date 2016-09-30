@@ -1,4 +1,8 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
+
 <div class="wpdigi-installer">
 	<h2><?php _e( 'Digirisk', 'digirisk' ); ?></h2>
 

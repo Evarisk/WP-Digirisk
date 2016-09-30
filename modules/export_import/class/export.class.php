@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
 * Fichier de gestion des actions pour le tableau de bord de Digirisk / File for managing Digirisk dashboard
 *

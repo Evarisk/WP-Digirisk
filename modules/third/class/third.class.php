@@ -1,7 +1,9 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class third_class extends post_class {
-  protected $model_name   = 'third_model';
+  protected $model_name   = '\digi\third_model';
 	protected $post_type    = 'third-display';
 	protected $meta_key    	= 'third_display';
 
@@ -10,7 +12,7 @@ class third_class extends post_class {
 	protected $version = '0.1';
 
 	public $element_prefix = 'T';
-	protected $after_get_function = array( 'get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	* Le constructeur

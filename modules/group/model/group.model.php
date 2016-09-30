@@ -1,4 +1,6 @@
-<?php namespace digi;
+<?php
+
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -16,24 +18,24 @@ class group_model extends post_model {
 				'list_group' => array(
 					'export' 			=> true,
 					'type'				=> 'array',
-					'controller'	=> 'group_class',
+					'controller'	=> '\digi\group_class',
 					'field'				=> 'post_parent',
 				),
 				'list_risk' => array(
 					'export'			=> true,
 					'type'				=> 'array',
-					'controller' 	=> 'risk_class',
+					'controller' 	=> '\digi\risk_class',
 					'field'				=> 'post_parent',
 				),
 				'list_workunit' => array(
 					'export'			=> true,
 					'type'				=> 'array',
-					'controller' 	=> 'workunit_class',
+					'controller' 	=> '\digi\workunit_class',
 					'field'				=> 'post_parent',
 				),
 				'address' => array(
 					'type'				=> 'object',
-					'controller'	=> 'address_class',
+					'controller'	=> '\digi\address_class',
 					'field'				=> 'post_id'
 				),
 				'owner_data' => array(
@@ -44,13 +46,13 @@ class group_model extends post_model {
 				'thumbnail' => array(
 					'export' 			=> true,
 					'type'				=> 'array',
-					'controller'	=> 'attachment_class',
+					'controller'	=> '\digi\attachment_class',
 					'field'				=> 'include',
 					'value'				=> 'thumbnail_id'
 				),
 				'attachment' => array(
 					'type'				=> 'array',
-					'controller'	=> 'attachment_class',
+					'controller'	=> '\digi\attachment_class',
 					'field'				=> 'include',
 					'value'				=> 'associated_document_id[image]',
 					'custom'			=> 'array'

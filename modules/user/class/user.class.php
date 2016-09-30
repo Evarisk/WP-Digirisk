@@ -4,8 +4,8 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_class extends \user_class {
-	protected $model_name 	= '\digi\user_model';
+class user_digi_class extends user_class {
+	protected $model_name 	= '\digi\user_digi_model';
 	protected $meta_key		= '_wpeo_user_info';
 	protected $before_post_function = array( '\digi\construct_login', '\build_user_initial', '\build_avatar_color' );
 	protected $before_put_function = array( '\build_user_initial', '\build_avatar_color' );

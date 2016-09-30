@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !empty( $list_groupment ) ):
 	foreach( $list_groupment as $key => $groupment ):

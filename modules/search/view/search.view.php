@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Affiches le champ de recherche
 *

@@ -71,7 +71,7 @@ class society_class extends singleton_util {
 			return false;
 		}
 
-    $model_name = str_replace( 'digi-', '', $post_type ) . '_class';
+    $model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
     $establishment = $model_name::g()->get( array( 'id' => $id ), $child_wanted );
 
     return $establishment[0];

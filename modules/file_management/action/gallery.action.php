@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Les actions pour la gestion des fichiers
 *

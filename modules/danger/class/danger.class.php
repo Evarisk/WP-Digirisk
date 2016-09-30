@@ -1,8 +1,10 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class danger_class extends term_class {
 
-	protected $model_name   = 'danger_model';
+	protected $model_name   = '\digi\danger_model';
 
 	protected $taxonomy    	= 'digi-danger';
 
@@ -11,8 +13,8 @@ class danger_class extends term_class {
 	protected $base = 'digirisk/danger';
 	protected $version = '0.1';
 
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 	public $element_prefix = 'D';
 
 	/**

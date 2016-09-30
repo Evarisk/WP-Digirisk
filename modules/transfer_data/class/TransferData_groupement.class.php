@@ -1,5 +1,5 @@
 <?php
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 /**
@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_transferdata_society_class extends \singleton_util {
+class wpdigi_transferdata_society_class extends singleton_util {
 
 	/**
 	 * Instanciation des outils pour les transferts spécifiques aux groupements et unités de travail / Instanciate groupements' and work unit specific transfer utilities

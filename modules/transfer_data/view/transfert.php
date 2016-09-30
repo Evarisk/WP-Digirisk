@@ -1,6 +1,5 @@
 <?php
-
-namespace digi\transfert;
+namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="about-wrap wp-digi-wrap wp-digi-clearer">

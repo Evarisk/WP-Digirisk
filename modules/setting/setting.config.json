@@ -1,0 +1,13 @@
+{
+	"name": "Setting",
+	"slug": "setting",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les configuration de Digirisk",
+	"path": "modules/setting/",
+	"dependencies": {
+		"action": {
+		},
+		"class": {
+		}
+	}
+}

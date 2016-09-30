@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_import_class extends \singleton_util {
+class user_import_class extends singleton_util {
 	private $index;
 	private $data;
 

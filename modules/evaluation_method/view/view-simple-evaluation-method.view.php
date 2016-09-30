@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Affiches le level d'évaluation d'un risque
 *

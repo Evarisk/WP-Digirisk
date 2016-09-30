@@ -1,8 +1,10 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class epi_class extends post_class {
 
-	protected $model_name   = 'epi_model';
+	protected $model_name   = '\digi\epi_model';
 	protected $post_type    = 'digi-epi';
 	protected $meta_key    	= '_wpdigi_epi';
 
@@ -10,8 +12,8 @@ class epi_class extends post_class {
 	protected $base = 'digiepi/epi';
 	protected $version = '0.1';
 
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier', 'update_remaining_time' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\update_remaining_time' );
 	public $element_prefix = 'EPI';
 
 	protected $limit_epi = -1;

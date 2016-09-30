@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier de la classe du controlleur de l'installateur de l'extension Digirisk / Main controller class file for digirisk installer
  *
@@ -26,7 +28,7 @@ class installer_class {
 	 * Ajout d'un menu non visile dans la zone du tableau de bord de wordpress pour la page d'installation de l'extension / Add a menu to wordpress dashboard part for installation page menu
 	 */
 	public function admin_menu() {
-		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
+		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
 
 		$old_eva_option = '';
 
@@ -35,7 +37,7 @@ class installer_class {
 		}
 
 		if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
-			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digi-setup', array( $this, 'setup_page' ), WPDIGI_URL . 'core/assets/images/favicon.png', 4 );
+			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digi-setup', array( $this, 'setup_page' ), PLUGIN_URL . 'core/assets/images/favicon.png', 4 );
 		}
 	}
 
@@ -70,9 +72,7 @@ class installer_class {
 	 * Définition de la page d'installation de l'extension Digirisk / Define Digirisk installation page
 	 */
 	public function setup_page() {
-		global $wpdigi_user_ctr;
-
-		require( INSTALLER_VIEW . '/installer.php' );
+		view_util::g()->exec( 'installer', 'installer' );
 	}
 
 }

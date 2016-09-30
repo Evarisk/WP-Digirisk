@@ -1,5 +1,7 @@
 <?php
 
+namespace digi;
+
 if ( !defined( 'ABSPATH' ) ) exit;
 
 function construct_identifier( $data ) {

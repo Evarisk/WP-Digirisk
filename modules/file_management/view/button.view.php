@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Contient un bouton qui permet d'ouvrir le media upload de WordPress.
 * Si une image existe déjà, le bouton permet d'ouvrir la gallerie.

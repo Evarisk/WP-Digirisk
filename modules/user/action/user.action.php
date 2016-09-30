@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_action extends \singleton_util {
+class user_action extends singleton_util {
 	/**
 	* Le constructeur appelle les actions suivantes:
 	* admin_menu (Pour déclarer le sous menu dans le menu utilisateur de WordPress)

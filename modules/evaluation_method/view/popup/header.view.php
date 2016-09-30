@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Les titres des variables de l'évaluation complexe de digirisk
 *

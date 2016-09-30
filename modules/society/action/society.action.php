@@ -1,4 +1,8 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+
+namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class society_action {
 

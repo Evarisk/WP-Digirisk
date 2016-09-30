@@ -8,7 +8,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @version 0.1
  */
 class comment_class extends singleton_util {
-	protected $model_name = 'comment_model';
+	protected $model_name = '\digi\comment_model';
 	protected $meta_key = '_comment';
 	protected $comment_type	= 'comment';
 	protected $base = 'comment';

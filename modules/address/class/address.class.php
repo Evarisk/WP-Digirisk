@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class address_class extends comment_class {
 
-	protected $model_name   = 'address_model';
+	protected $model_name   = '\digi\address_model';
 
 	protected $comment_type  = 'digi-address';
 

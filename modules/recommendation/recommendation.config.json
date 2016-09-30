@@ -1,0 +1,19 @@
+{
+	"name": "Recommendation",
+	"slug": "recommendation",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les recommandation de Digirisk",
+	"path": "modules/recommendation/",
+	"dependencies": {
+		"shortcode": {
+		},
+		"model": {
+		},
+		"filter": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

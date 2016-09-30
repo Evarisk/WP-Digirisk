@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 class third_model extends post_model {
 
@@ -7,7 +9,7 @@ class third_model extends post_model {
 			'child' => array(
 				'address' => array(
 					'type'					=> 'object',
-					'controller' 		=> 'address_class',
+					'controller' 		=> '\digi\address_class',
 					'field'					=> 'comment__in',
 					'value'					=> 'contact[address_id]',
 					'custom'			=> 'array'
