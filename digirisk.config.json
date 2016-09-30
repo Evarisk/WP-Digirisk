@@ -29,7 +29,8 @@
 		"modules/third/third.config.json",
 		"modules/export_import/export_import.config.json",
 		"modules/tools/tools.config.json",
-		"modules/transfer_data/transfer_data.config.json"
+		"modules/transfer_data/transfer_data.config.json",
+		"modules/user_dashboard/user_dashboard.config.json"
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",

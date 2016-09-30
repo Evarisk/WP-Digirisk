@@ -25,6 +25,6 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	</div>
 
 	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
-	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element, $tab_to_display ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element->id, $tab_to_display ); ?>
 
 </div>

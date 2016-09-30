@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Loop the list_tab for display it.
 * Each tab have an attribute data-action for javascript request.

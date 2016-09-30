@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; echo $user; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; echo $user; ?>
 
 <header>
 	<span class="wp-avatar" style="background: #<?php echo $user->avatar_color; ?>;" ><?php echo $user->initial; ?></span>

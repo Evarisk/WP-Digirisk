@@ -21,7 +21,7 @@ class search_action {
 		$return = array();
 
 		foreach ( $list as $element ) {
-			if( $element[0]->id != $_GET['id'] && !wpdigi_utils::is_parent( $_GET['id'], $element[0]->id ) && count( get_children( array( 'post_parent' => $element[0]->id, 'post_type' => 'digi-workunit' ) ) ) == 0 ) {
+			if( $element[0]->id != $_GET['id'] && !post_util::is_parent( $_GET['id'], $element[0]->id ) && count( get_children( array( 'post_parent' => $element[0]->id, 'post_type' => 'digi-workunit' ) ) ) == 0 ) {
 				$return[] = array(
 					'label' => $element[0]->unique_identifier . ' ' . $element[0]->title,
 					'value' => $element[0]->unique_identifier . ' ' . $element[0]->title,

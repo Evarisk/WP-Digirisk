@@ -39,7 +39,7 @@ class society_filter {
 
   /** Affiches l'identité d'un établissement */
   public function callback_establishment_identity( $element, $editable_identity = false ) {
-		view_util::g()->exec( 'society', 'identity', array( 'element' => $element, 'editable_identity' => $editable_identity ) );
+		view_util::exec( 'society', 'identity', array( 'element' => $element, 'editable_identity' => $editable_identity ) );
   }
 
   /** Affiches les actions d'un établissement */

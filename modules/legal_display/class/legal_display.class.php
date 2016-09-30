@@ -24,15 +24,15 @@ class legal_display_class extends post_class {
 	* @param object $element L'objet groupement
 	*/
   public function display( $element ) {
-		$legal_display = $this->get( array( 'post_parent' => $element->id ) );
+		$legal_display = $this->get( array( 'post_parent' => $element->id ), array( '\digi\detective_work', '\digi\occupational_health_service', '\digi\address', ) );
 
 		if ( empty( $legal_display ) ) {
-			$legal_display = $this->get( array( 'id' => 0 ) );
+			$legal_display = $this->get( array( 'schema' => true ), array( '\digi\detective_work', '\digi\occupational_health_service', '\digi\address', ) );
 		}
 
 		$legal_display = $legal_display[0];
 
-		require( LEGAL_DISPLAY_TEMPLATES_MAIN_DIR . 'backend/display.php' );
+		view_util::exec( 'legal_display', 'display', array( 'element_id' => $element->id, 'legal_display' => $legal_display ) );
   }
 
 	/**

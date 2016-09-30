@@ -1,4 +1,8 @@
+<?php namespace digi; ?>
+
 <div>
-	<?php require( RISK_VIEW_DIR . 'list.view.php' ); ?>
-	<?php require( RISK_VIEW_DIR . 'item-new.view.php' ); ?>
+	<?php
+		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
+		view_util::exec( 'risk', 'item-new', array( 'society_id' => $society_id ) );
+	?>
 </div>

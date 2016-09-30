@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Service de santé au travail
 *

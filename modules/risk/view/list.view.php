@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <ul class="wp-digi-list wp-digi-risk wp-digi-table" >
 	<li class="wp-digi-risk-list-header wp-digi-table-header" >

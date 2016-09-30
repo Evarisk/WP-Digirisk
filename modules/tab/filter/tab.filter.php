@@ -27,8 +27,8 @@ class tab_filter {
   *
   * @param string $tab_to_display Le nom de l'onglet pour le contenu à afficher.
   */
-  public function callback_tab_content( $content, $element, $tab_to_display ) {
-		view_util::g()->exec( 'tab', 'content', array( 'content' => $content, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
+  public function callback_tab_content( $content, $element_id, $tab_to_display ) {
+		view_util::exec( 'tab', 'content', array( 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ) );
   }
 }
 

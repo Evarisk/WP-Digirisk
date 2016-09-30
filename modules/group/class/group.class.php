@@ -25,7 +25,7 @@ class group_class extends post_class {
 			$selected_group = $list_groupment[0];
 		}
 
-		view_util::g()->exec( 'group', 'toggle', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
+		view_util::exec( 'group', 'toggle', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 	}
 	/**
 	* Affiche un groupement
@@ -35,7 +35,7 @@ class group_class extends post_class {
 	public function display( $group_id ) {
 		$element = $this->show( $group_id );
 
-		view_util::g()->exec( 'society', 'content' );
+		view_util::exec( 'society', 'content' );
 	}
 
 	public function display_list_item( $list_groupment, $selected_group = null ) {
@@ -43,7 +43,7 @@ class group_class extends post_class {
 			$selected_group = $list_groupment[0];
 		}
 
-		view_util::g()->exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
+		view_util::exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 	}
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree

@@ -4,8 +4,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class workunit_class extends post_class {
 	public $element_prefix = 'UT';
-	protected $before_post_function = array( 'construct_identifier' );
-	protected $after_get_function = array( 'get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 	protected $model_name   = 'workunit_model';
 	protected $post_type    = 'digi-workunit';
 	protected $meta_key    	= '_wp_workunit';
@@ -77,6 +77,6 @@ class workunit_class extends post_class {
 			} );
 		}
 
-		view_util::g()->exec( 'workunit', 'list', array( 'groupment_id' => $groupment_id, 'list_workunit' => $list_workunit ) );
+		view_util::exec( 'workunit', 'list', array( 'groupment_id' => $groupment_id, 'list_workunit' => $list_workunit ) );
 	}
 }

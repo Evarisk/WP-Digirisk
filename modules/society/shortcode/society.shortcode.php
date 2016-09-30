@@ -43,7 +43,7 @@ class society_shortcode {
 				}
 			}
 
-			view_util::g()->exec( 'society', 'content', array( 'element' => $element, 'tab_to_display' => $tab_to_display ) );
+			view_util::exec( 'society', 'content', array( 'element' => $element, 'tab_to_display' => $tab_to_display ) );
 		}
   }
 }

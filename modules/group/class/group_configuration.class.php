@@ -14,7 +14,7 @@ class group_configuration_class extends singleton_util {
 	* @param object $element L'élement du groupement
 	*/
   public function display( $element ) {
-		require( WPDIGI_STES_TEMPLATES_MAIN_DIR . 'group/configuration/form.php' );
+		view_util::exec( 'group', 'configuration-form', array( 'element' => $element ) );
   }
 
 	public function save( $data ) {

@@ -46,7 +46,7 @@ class group_shortcode {
 			$transmitter_infos = $current_user->display_name;
 		}
 
-		view_util::g()->exec( 'group', 'sheet-form', array( 'element_id' => $element_id, 'element' => $element, 'document_unique' => $document_unique, 'transmitter_infos' => $transmitter_infos ) );
+		view_util::exec( 'group', 'sheet-form', array( 'element_id' => $element_id, 'element' => $element, 'document_unique' => $document_unique, 'transmitter_infos' => $transmitter_infos ) );
 	}
 
 	/**
@@ -67,7 +67,7 @@ class group_shortcode {
 	*/
 	public function callback_configuration( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id );
+    $element = society_class::g()->show_by_type( $element_id, array( 'address' ) );
 
 		group_configuration_class::g()->display( $element );
 	}

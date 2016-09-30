@@ -117,6 +117,6 @@ class risk_class extends post_class {
 			} );
 		}
 
-		require( RISK_VIEW_DIR . 'main.view.php' );
+		view_util::exec( 'risk', 'main', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
 	}
 }

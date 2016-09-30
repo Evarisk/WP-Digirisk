@@ -34,7 +34,7 @@ class search_shortcode {
 		$icon = !empty( $param['icon'] ) ?  $param['icon'] : '';
 		$next_action = !empty( $param['next-action'] ) ? sanitize_text_field( $param['next-action'] ) : '';
 
-		view_util::g()->exec( 'search', 'search', array( 'element_id' => $element_id, 'text' => $text, 'target' => $target, 'field' => $field, 'type' => $type, 'class' => $class, 'icon' => $icon, 'next_action' => $next_action ) );
+		view_util::exec( 'search', 'search', array( 'element_id' => $element_id, 'text' => $text, 'target' => $target, 'field' => $field, 'type' => $type, 'class' => $class, 'icon' => $icon, 'next_action' => $next_action ) );
 	}
 }
 

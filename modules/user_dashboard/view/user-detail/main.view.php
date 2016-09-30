@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <section class="user-detail">
 	<?php require( USER_DASHBOARD_VIEW . '/user-detail/header.view.php' ); ?>

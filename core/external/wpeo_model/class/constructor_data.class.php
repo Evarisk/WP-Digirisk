@@ -75,8 +75,7 @@ class constructor_data_class extends helper_class {
 	private function fill_child( $field_wanted ) {
 		if ( !empty( $this->model['child'] ) ) {
 			foreach ( $this->model['child'] as $child_name => $child_def ) {
-				if ( isset( $child_def['field'] ) && (in_array( $child_name, !empty( $field_wanted ) ? $field_wanted : array() ) || empty( $field_wanted ) ) ) {
-
+				if ( isset( $child_def['field'] ) && (in_array( $child_name, !empty( $field_wanted ) ?  str_replace( '\digi\\', '', $field_wanted ) : array() ) || empty( $field_wanted ) ) ) {
 					if ( isset( $this->id ) ) {
 						$value = $this->id;
 
@@ -84,22 +83,22 @@ class constructor_data_class extends helper_class {
 							$key = $this->parse_key( $child_def );
 
 							if ( !is_array( $key ) ) {
-								$value = $this->$child_def['value'];
+								$value = $this->{$child_def['value']};
 							}
 							else {
 								$value = $this->parse_value( $key );
 							}
 
-							if ( !is_array( $key ) && empty( $this->$child_def['value'] ) ) {
+							if ( !is_array( $key ) && empty( $this->{$child_def['value']} ) ) {
 								$value = $this->id;
 							}
 
-							if ( !is_array( $key ) && !empty( $child_def['custom_field'] ) && !empty( $this->$child_def['value'] ) ) {
-								$value = $this->$child_def['custom_field'];
+							if ( !is_array( $key ) && !empty( $child_def['custom_field'] ) && !empty( $this->{$child_def['value']} ) ) {
+								$value = $this->{$child_def['custom_field']};
 								$child_def['field'] = $child_def['custom_field'];
 							}
 
-							if ( is_array( $key ) && !empty( $child_def['custom_field'] ) && $this->$child_def['value'] ) {
+							if ( is_array( $key ) && !empty( $child_def['custom_field'] ) && $this->{$child_def['value']} ) {
 								$value = $this->parse_value( $key );
 								$child_def['field'] = $child_def['custom_field'];
 							}
@@ -160,7 +159,7 @@ class constructor_data_class extends helper_class {
 			return $this->$key;
 		}
 
-		$value = $this->$key[0];
+		$value = $this->{$key[0]};
 		array_shift( $key );
 
 		if ( !empty( $key ) ) {

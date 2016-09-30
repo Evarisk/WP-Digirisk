@@ -26,7 +26,8 @@ class file_management_class extends singleton_util {
 	* @param bool $thumbnail (Optional) Le défini en vignette
 	*/
   public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
-    $element = $object_name::g()->get( array( 'id' => $element_id ) );
+		$model_name = '\digi\\' . $object_name;
+    $element = $model_name::g()->get( array( 'id' => $element_id ) );
 
     if ( wp_attachment_is_image( $file_id ) ) {
       $element[0]->associated_document_id['image'][] = $file_id;
@@ -40,7 +41,7 @@ class file_management_class extends singleton_util {
       $element[0]->associated_document_id['document'][] = $file_id;
     }
 
-    $object_name::g()->update( $element[0] );
+    $model_name::g()->update( $element[0] );
   }
 
 }

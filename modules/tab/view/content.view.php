@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Call the shortcode by her identity
 *
@@ -11,5 +11,5 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="wp-digi-content wp-digi-bloc-loader">
-  <?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element->id . '" ]' ); ?>
+  <?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element_id . '" ]' ); ?>
 </div>

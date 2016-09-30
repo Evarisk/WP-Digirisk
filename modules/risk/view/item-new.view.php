@@ -1,4 +1,7 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
 <div class="wp-digi-risk-item wp-digi-risk-item-new wp-digi-list-item wp-digi-bloc-loader" data-risk-id="new" >
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="form-risk">
 		<?php wp_nonce_field( 'save_risk' ); ?>

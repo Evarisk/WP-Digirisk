@@ -72,7 +72,7 @@ class installer_class {
 	 * Définition de la page d'installation de l'extension Digirisk / Define Digirisk installation page
 	 */
 	public function setup_page() {
-		view_util::g()->exec( 'installer', 'installer' );
+		view_util::exec( 'installer', 'installer' );
 	}
 
 }

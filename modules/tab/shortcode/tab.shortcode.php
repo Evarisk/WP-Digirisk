@@ -30,7 +30,7 @@ class tab_shortcode {
 
     $list_tab = apply_filters( 'digi_tab', array() );
 
-		view_util::g()->exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		view_util::exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
 	}
 }
 

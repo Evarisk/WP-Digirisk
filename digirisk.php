@@ -19,6 +19,7 @@ DEFINE( 'PLUGIN_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 
 require_once( 'core/util/singleton.util.php' );
 require_once( 'core/util/init.util.php' );
+require_once( 'core/helper/model.helper.php' );
 require_once( 'core/external/wpeo_log/class/log.class.php' );
 
 log_class::g()->start_ms( 'digi_boot' );

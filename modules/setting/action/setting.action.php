@@ -16,7 +16,7 @@ class setting_action {
   public function add_option_page() {
 		$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
 		$list_accronym = !empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
-		view_util::g()->exec( 'setting', 'main', array( 'list_accronym' => $list_accronym ) );
+		view_util::exec( 'setting', 'main', array( 'list_accronym' => $list_accronym ) );
   }
 
 	public function callback_update_accronym() {

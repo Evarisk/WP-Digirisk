@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Add filter for add tab
 * Add filter for display the tab content
@@ -34,10 +34,8 @@ class tab_action {
     $element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
     $tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_key( $_POST['tab_to_display'] ) : '';
 
-    $element = society_class::g()->show_by_type( $element_id, array( '' ) );
-
     ob_start();
-    require( TAB_VIEW_DIR . 'content.view.php' );
+		view_util::exec( 'tab', 'content', array( 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ) );
     wp_send_json_success( array( 'template' => ob_get_clean() ) );
   }
 }

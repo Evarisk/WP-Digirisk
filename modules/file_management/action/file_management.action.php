@@ -43,11 +43,12 @@ class file_management_action {
     }
 
     file_management_class::g()->associate_file( $file_id, $id, $type_class, $thumbnail );
+		$type_class = '\digi\\' . $type_class;
 		$element = $type_class::g()->get( array( 'id' => $id ) );
 		$element = $element[0];
 
     ob_start();
-    require( FILE_MANAGEMENT_VIEW_DIR . '/button.view.php' );
+		view_util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type, 'element' => $element ) );
     wp_send_json_success( array( 'template' => ob_get_clean() ));
   }
 }

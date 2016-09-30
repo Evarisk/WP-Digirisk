@@ -46,7 +46,7 @@ class society_class extends singleton_util {
 			$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
 		}
 
-		view_util::g()->exec( 'society', 'dashboard', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
+		view_util::exec( 'society', 'dashboard', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
 		\digi\log_class::g()->exec( 'digi_callback_admin_menu', 'display_dashboard', 'Réponse callback_admin_menu' );
 	}
 
@@ -99,9 +99,9 @@ class society_class extends singleton_util {
 			return false;
 		}
 
-		$model_name = str_replace( 'digi-', '', $type ) . '_class';
+		$model_name = '\digi\\' . str_replace( 'digi-', '', $type ) . '_class';
 
-		if ( $model_name === '_class' ) {
+		if ( $model_name === '\digi\_class' ) {
 			return false;
 		}
 

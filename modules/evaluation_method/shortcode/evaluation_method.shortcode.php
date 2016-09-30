@@ -40,6 +40,7 @@ class evaluation_method_shortcode {
 		$equivalence = 1;
 		$digi_method_id = 0;
 		$target = 'wp-digi-risk-cotation-chooser';
+		$risk = array();
 
 		if ( $risk_id != 0 ) {
 			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
@@ -53,7 +54,7 @@ class evaluation_method_shortcode {
 			}
 		}
 
-    require( EVALUATION_METHOD_VIEW . $display . '-simple-evaluation-method.view.php' );
+		view_util::exec( 'evaluation_method', $display . '-simple-evaluation-method', array( 'target' => $target, 'digi_method_id' => $digi_method_id, 'risk' => $risk, 'risk_id' => $risk_id, 'term_evarisk_simple' => $term_evarisk_simple, 'scale' => $scale, 'equivalence' => $equivalence ) );
 	}
 
 	/**
@@ -67,9 +68,10 @@ class evaluation_method_shortcode {
 	public function callback_evaluation_method_evarisk( $param ) {
 		$term_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
 		$risk_id = !empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
+		$risk = array();
 
 		if ( !empty( $term_evarisk ) ) {
-			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
+			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( '\digi\evaluation_method', '\digi\evaluation' ) );
 
 			$risk = !empty( $risk[0] ) ? $risk[0] : array();
 			$evarisk_evaluation_method = evaluation_method_class::g()->get( array( 'id' => $term_evarisk->term_id ) );
@@ -85,7 +87,7 @@ class evaluation_method_shortcode {
 			}
 		}
 
-		require( EVALUATION_METHOD_VIEW . 'popup/popup.view.php' );
+		view_util::exec( 'evaluation_method', 'popup/popup', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) );
 	}
 }
 

@@ -98,14 +98,7 @@ class group_action {
 		else
 			$group_id = (int) $_POST['group_id'];
 
-		$last_unique_key = wpdigi_utils::get_last_unique_key( 'post', group_class::g()->get_post_type() );
-		$last_unique_key++;
-
 		$group = group_class::g()->create( array(
-			'option' => array(
-				'unique_key' => $last_unique_key,
-				'unique_identifier' => group_class::g()->element_prefix . $last_unique_key,
-			),
 			'parent_id' => $group_id,
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
@@ -122,12 +115,12 @@ class group_action {
 		ob_start();
 		$element_id = $group->id;
 		$society = $group;
-		require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
+		view_util::exec( 'society', 'screen-left', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';
 		ob_start();
-		echo do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
+		do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
 		$template_right = ob_get_clean();
 
 		wp_send_json_success( array( 'society' => $society, 'template_left' => $template_left, 'template_right' => $template_right ) );

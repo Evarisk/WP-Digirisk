@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_shortcode_action extends \singleton_util {
+class user_shortcode_action extends singleton_util {
 	/**
 	* Le constructeur appelle les actions suivantes:
 	* admin_menu (Pour déclarer le sous menu dans le menu utilisateur de WordPress)
@@ -24,9 +24,9 @@ class user_shortcode_action extends \singleton_util {
 	}
 
 	public function callback_users_page() {
-		$user = \digi\user_class::g()->get( array( 'schema' => true ) );
+		$user = user_digi_class::g()->get( array( 'schema' => true ) );
 		$user = $user[0];
-		require( USER_DASHBOARD_VIEW . 'main.view.php' );
+		view_util::exec( 'user_dashboard', 'main', array( 'user' => $user ) );
 	}
 
 	public function ajax_save_user() {
@@ -34,16 +34,16 @@ class user_shortcode_action extends \singleton_util {
 
 		if ( !empty( $_POST['user'] ) ) {
 		  foreach ( $_POST['user'] as $element ) {
-				\digi\user_class::g()->update( $element );
+				user_digi_class::g()->update( $element );
 		  }
 		}
 
 		ob_start();
 		user_dashboard_class::g()->display_list_user();
-
-		$user = \digi\user_class::g()->get( array( 'schema' => true ) );
+		$user = user_digi_class::g()->get( array( 'schema' => true ) );
 		$user = $user[0];
-		require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );
+
+		view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -55,11 +55,11 @@ class user_shortcode_action extends \singleton_util {
 
 		check_ajax_referer( 'ajax_load_user_' . $user_id );
 
-		$user = user_class::g()->get( array( 'id' => $user_id ) );
+		$user = user_digi_class::g()->get( array( 'id' => $user_id ) );
 		$user = $user[0];
 
 		ob_start();
-		require( USER_DASHBOARD_VIEW . '/item-edit.view.php' );
+		view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -71,7 +71,7 @@ class user_shortcode_action extends \singleton_util {
 
 		check_ajax_referer( 'ajax_delete_user_' . $user_id );
 
-		user_class::g()->delete( $user_id );
+		user_digi_class::g()->delete( $user_id );
 		wp_send_json_success();
 	}
 

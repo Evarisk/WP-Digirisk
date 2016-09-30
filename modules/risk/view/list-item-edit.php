@@ -1,4 +1,7 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
+
 if ( $risk != null ):
 ?>
 	<form method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="wp-digi-table-item-edit wp-digi-list-item wp-digi-risk-item form-risk" data-risk-id="<?php echo $risk_id; ?>">

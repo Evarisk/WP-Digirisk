@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="wrap user-dashboard">
 	<h3><?php _e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h3>
@@ -21,7 +23,7 @@
 		<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
 			<?php
 				user_dashboard_class::g()->display_list_user();
-				require( USER_DASHBOARD_VIEW . 'item-edit.view.php' );
+				view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 			?>
 		</ul>
 	</form>

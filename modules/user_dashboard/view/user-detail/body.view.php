@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div>
 	<ul data-user-id="<?php echo $user->id; ?>" data-nonce="<?php echo wp_create_nonce( 'load_data_' . $user->id ); ?>">

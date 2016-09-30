@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class view_util extends singleton_util {
 	protected function construct() {}
 
-	public function exec( $module_name, $view_path_without_ext, $args = array() ) {
+	public static function exec( $module_name, $view_path_without_ext, $args = array() ) {
 		$path_to_view = PLUGIN_PATH . 'modules/' . $module_name . '/view/' . $view_path_without_ext . '.view.php';
 
 		\digi\log_class::g()->start_ms( 'view_util_exec' );

@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Documents
 *
@@ -13,11 +13,11 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 
 <ul class="wp-digi-form">
-  <li><h2><?php _e( 'DUER', 'digirisk' ); ?></h2></li>
+  <li><h2><?php _e( 'Rules', 'digirisk' ); ?></h2></li>
   <li>
     <label>
-      <?php _e( 'How access to duer', 'digirisk' ); ?>
-      <input name="DUER[how_access_to_duer]" type="text" value="<?php echo $legal_display->DUER['how_access_to_duer']; ?>" />
+      <?php _e( 'location', 'digirisk' ); ?>
+      <input name="rules[location]" type="text" value="<?php echo $legal_display->rules['location']; ?>" />
     </label>
   </li>
 </ul>

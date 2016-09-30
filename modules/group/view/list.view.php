@@ -19,7 +19,7 @@ if ( !empty( $list_groupment ) ):
 				<?php
 				if ( !empty( $groupment->list_group ) ) {
 					$list_groupment = $groupment->list_group;
-					require ( GROUP_VIEW_DIR . '/list.view.php' );
+					view_util::exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 				}
 				?>
 

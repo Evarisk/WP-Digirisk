@@ -40,7 +40,8 @@ class search_class extends singleton_util {
 			}
 		}
 		else if ( $data['type'] === 'post' ) {
-			$list = $data['class']::g()->search( $data['term'], array(
+			$model_name = '\digi\\' . $data['class'];
+			$list = $model_name::g()->search( $data['term'], array(
 				'option' => array( '_wpdigi_unique_identifier' ),
 				'post_title'
 			) );

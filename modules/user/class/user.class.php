@@ -7,9 +7,9 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class user_digi_class extends user_class {
 	protected $model_name 	= '\digi\user_digi_model';
 	protected $meta_key		= '_wpeo_user_info';
-	protected $before_post_function = array( '\digi\construct_login', '\build_user_initial', '\build_avatar_color' );
-	protected $before_put_function = array( '\build_user_initial', '\build_avatar_color' );
-	protected $after_get_function = array( '\digi\get_hiring_date', '\get_identifier' );
+	protected $before_post_function = array( '\digi\construct_login', '\digi\build_user_initial', '\digi\build_avatar_color' );
+	protected $before_put_function = array( '\digi\build_user_initial', '\digi\build_avatar_color' );
+	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
 
 	protected $base 	= 'digirisk/user';
 	protected $version 	= '0.1';

@@ -69,7 +69,7 @@ class document_class extends post_class {
 			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( false ) );
 		}
 
-		require( WPDIGI_DOC_TEMPLATES_MAIN_DIR . 'common/printed-list.php' );
+		view_util::exec( 'document', 'printed-list', array( 'list_document' => $list_document, 'list_document_id' => $list_document_id ) );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class document_class extends post_class {
 				),
 			),
 		);
-		$element_sheet_default_model = new WP_Query( $get_model_args );
+		$element_sheet_default_model = new \WP_Query( $get_model_args );
 		if ( $element_sheet_default_model->have_posts() ) {
 			if ( !empty( $element_sheet_default_model->post_count ) && 2 <= $element_sheet_default_model->post_count ) {
 				foreach ( $element_sheet_default_model->posts as $attachment ) {
@@ -125,12 +125,12 @@ class document_class extends post_class {
 
 		if ( !$response[ 'status' ] && !empty( $current_element_type ) ) {
 			foreach ( $current_element_type as $document_type ) {
-				if ( is_file( WPDIGI_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
+				if ( is_file( PLUGIN_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
 					$response = array(
 						'status'			=> true,
 						'message'			=> '',
 						'model_id'		=> null,
-						'model_path'	=> WPDIGI_PATH . 'core/assets/document_template/' . $document_type . '.odt',
+						'model_path'	=> PLUGIN_PATH . 'core/assets/document_template/' . $document_type . '.odt',
 					);
 					break;
 				}
@@ -159,7 +159,7 @@ class document_class extends post_class {
 			'link'		=> '',
 		);
 
-		require_once( WPDIGI_PATH . '/core/external/odtPhpLibrary/odf.php');
+		require_once( PLUGIN_PATH . '/core/external/odtPhpLibrary/odf.php');
 
 		$digirisk_directory = $this->get_digirisk_dir_path();
 		$document_path = $digirisk_directory . '/' . $document_name;
@@ -173,7 +173,7 @@ class document_class extends post_class {
 
 		/**	On créé l'instance pour la génération du document odt / Create instance for document generation */
 		@ini_set( 'memory_limit', '256M' );
-		$DigiOdf = new DigiOdf( $model_path, $config );
+		$DigiOdf = new \DigiOdf( $model_path, $config );
 
 		/**	Vérification de l'existence d'un contenu a écrire dans le document / Check if there is content to put into file	*/
 		if ( !empty( $document_content ) ) {
@@ -299,7 +299,7 @@ class document_class extends post_class {
 				),
 			),
 		);
-		$element_sheet_default_model = new WP_Query( $get_model_args );
+		$element_sheet_default_model = new \WP_Query( $get_model_args );
 
 		return ( $element_sheet_default_model->post_count + 1 );
 	}

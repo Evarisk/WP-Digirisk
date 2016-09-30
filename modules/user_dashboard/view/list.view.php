@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 	<li class="wp-digi-table-header">
 		<span></span>
@@ -12,7 +14,7 @@
 	<?php
 	if ( !empty( $list_user ) ):
 	  foreach ( $list_user as $user ):
-			require( USER_DASHBOARD_VIEW . 'item.view.php' );
+			view_util::exec( 'user_dashboard', 'item', array( 'user' => $user ) );
 	  endforeach;
 	endif;
 	?>

@@ -63,7 +63,7 @@ class society_action {
 
 		if ( $society->type == 'digi-group' ) {
 			ob_start();
-			require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
+			view_util::exec( 'society', 'screen-left', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
 			wp_send_json_success( array( 'template' => $template, 'template_left' => ob_get_clean() ) );
 
 		}
@@ -117,7 +117,7 @@ class society_action {
 
 		ob_start();
 		$element_id = $society->id;
-		require( SOCIETY_VIEW_DIR . '/screen-left.view.php' );
+		view_util::exec( 'society', 'screen-left', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
 		wp_send_json_success( array( 'society' => $society, 'template_left' => ob_get_clean() ) );
 	}
 

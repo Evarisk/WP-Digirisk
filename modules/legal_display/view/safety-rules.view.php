@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Consignes de sécurité
 *

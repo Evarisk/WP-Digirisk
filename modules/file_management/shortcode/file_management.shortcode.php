@@ -47,7 +47,7 @@ class file_management_shortcode {
 			$element = null;
 		}
 
-		view_util::g()->exec( 'file_management', 'button', array( 'id' => $id, 'type' => $type, 'element' => $element ) );
+		view_util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'type' => $type, 'element' => $element ) );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class file_management_shortcode {
 		$list_id = !empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
 
-		view_util::g()->exec( 'file_management', 'gallery', array( 'element_id' => $element_id, 'element' => $element, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
+		view_util::exec( 'file_management', 'gallery', array( 'param' => $param, 'element_id' => $element_id, 'element' => $element, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
   }
 }
 
