@@ -5,7 +5,15 @@ namespace digi;
 if ( !defined( 'ABSPATH' ) ) exit;
 
 function construct_login( $data ) {
-	$data->login = trim( strtolower( remove_accents( sanitize_user( $data->firstname . '.' . $data->lastname ) ) ) );
+	$data['login'] = trim( strtolower( remove_accents( sanitize_user( $data['firstname'] . $data['lastname'] ) ) ) );
+	return $data;
+}
+
+function generate_password( $data ) {
+	if ( empty( $data['password'] ) ) {
+		$data['password'] = wp_generate_password();
+	}
+
 	return $data;
 }
 

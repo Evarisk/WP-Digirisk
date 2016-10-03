@@ -25,6 +25,8 @@ class digirisk_action {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts' ), 10 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ), 11 );
+
+		add_action( 'plugins_loaded', array( $this, 'callback_plugins_loaded' ) );
 	}
 
 	public function callback_before_admin_enqueue_scripts() {
@@ -45,7 +47,7 @@ class digirisk_action {
 	* Appelle le domaine de traduction
 	*/
 	public function callback_plugins_loaded() {
-		// load_plugin_textdomain( "digirisk", false, WPDIGI_DIR . '/core/assets/languages/' );
+		load_plugin_textdomain( "digirisk", false, PLUGIN_PATH . 'core\assets\languages\\' );
 	}
 }
 

@@ -20,16 +20,8 @@ class constructor_data_class extends helper_class {
 			$current_object = $this;
 		}
 
-		// if (( !empty( $data['ID'] ) && $data['ID'] == 123) || (!empty( $this->id ) && $this->id == '123') ) {
-		// 	echo "<pre>"; print_r($model); echo "</pre>";
-		// }
-
 		foreach ( $model as $field_name => $field_def ) {
 			$current_object->$field_name = $this->set_default_data( $field_name, $field_def );
-
-			// if (( !empty( $data['ID'] ) && $data['ID'] == 123) || (!empty( $this->id ) && $this->id == '123') ) {
-			// 	echo "<pre>"; print_r($field_def); echo "</pre>";
-			// }
 
 			// Est-ce qu'il existe des enfants ?
 			if ( isset( $field_def['field'] ) && isset( $data[$field_def['field']] ) && !isset( $field_def['child'] ) ) {
@@ -53,7 +45,6 @@ class constructor_data_class extends helper_class {
 			if ( isset( $field_def['required'] ) && $field_def['required'] && empty( $current_object->$field_name ) ) {
 				$this->error = true;
 			}
-
 
 			if ( !empty( $field_def['type'] ) ) {
 				settype( $current_object->$field_name, $field_def['type'] );

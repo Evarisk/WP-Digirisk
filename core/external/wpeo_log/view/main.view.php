@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="wrap wpeo-logs-wrap">
 	<h2>
@@ -16,12 +18,12 @@
 	<?php
 	$action = sanitize_text_field( !empty( $_GET['action'] ) ? $_GET['action'] : '' );
 	if ( !empty( $action ) && 'edit' == $action ):
-		require ( PLUGIN_PATH . \config_util::$init['wpeo_log']->path . '/view/list-service-edit.view.php' );
+		require ( PLUGIN_PATH . config_util::$init['wpeo_log']->path . '/view/list-service-edit.view.php' );
 	elseif ( !empty( $action ) && 'view' == $action ):
-		require ( PLUGIN_PATH . \config_util::$init['wpeo_log']->path . '/view/view-service.view.php' );
-		require ( PLUGIN_PATH . \config_util::$init['wpeo_log']->path . '/view/chart.view.php' );
+		require ( PLUGIN_PATH . config_util::$init['wpeo_log']->path . '/view/view-service.view.php' );
+		require ( PLUGIN_PATH . config_util::$init['wpeo_log']->path . '/view/chart.view.php' );
 	else:
-		require ( PLUGIN_PATH . \config_util::$init['wpeo_log']->path . '/view/list-service.view.php' );
+		require ( PLUGIN_PATH . config_util::$init['wpeo_log']->path . '/view/list-service.view.php' );
 	endif;
 	?>
 </div>

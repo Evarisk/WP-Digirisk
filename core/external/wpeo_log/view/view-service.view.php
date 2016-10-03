@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 $service_id = (int) $_GET['service_id'];
 $sanitize_type = sanitize_text_field( $_GET['type'] );
 $sanitize_key = (int) !empty( $_GET['key'] ) ? $_GET['key'] : 0;

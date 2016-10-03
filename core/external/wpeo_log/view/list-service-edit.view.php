@@ -1,6 +1,8 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
 
-<div class="tablenav top">	
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
+<div class="tablenav top">
  	<div class="tablenav-pages">
 		<span class="displaying-num"><?php echo !empty( $array_service ) ? count( $array_service ) : 0; _e( ' item(s)', 'digirisk' ); ?></span>
 	</div>
@@ -12,11 +14,11 @@
 
 	<table class="wp-list-table widefat fixed striped posts">
 		<thead>
-		<tr>			
+		<tr>
 			<th scope="col" id="id" class="manage-column"><?php _e( 'ID', 'digirisk' ); ?></th>
 			<th scope="col" id="active" class="manage-column"><?php _e( 'Active', 'digirisk' ); ?></th>
 			<th scope="col" id="title" class="manage-column column-title column-primary sortable desc">
-				<?php _e( 'Name', 'digirisk' ); ?></th>			
+				<?php _e( 'Name', 'digirisk' ); ?></th>
 			<th scope="col" id="size" class="manage-column"><?php _e( 'Size', 'digirisk' ); ?></th>
 			<th scope="col" id="size-format" class="manage-column"><?php _e( 'File size', 'digirisk' ); ?></th>
 			<th scope="col" id="rotate" class="manage-column"><?php _e( 'File rotate', 'digirisk' ); ?></th>
@@ -69,10 +71,10 @@
 		</tbody>
 
 		<tfoot>
-			<tr>			
+			<tr>
 				<th scope="col" id="id" class="manage-column"><?php _e( 'ID', 'digirisk' ); ?></th>
 				<th scope="col" id="active" class="manage-column"><?php _e( 'Active', 'digirisk' ); ?></th>
-				<th scope="col" id="title" class="manage-column column-title column-primary sortable desc"><?php _e( 'Name', 'digirisk' ); ?></th>			
+				<th scope="col" id="title" class="manage-column column-title column-primary sortable desc"><?php _e( 'Name', 'digirisk' ); ?></th>
 				<th scope="col" id="size" class="manage-column"><?php _e( 'Size', 'digirisk' ); ?></th>
 				<th scope="col" id="size-format" class="manage-column"><?php _e( 'File size', 'digirisk' ); ?></th>
 				<th scope="col" id="rotate" class="manage-column"><?php _e( 'File rotate', 'digirisk' ); ?></th>
@@ -80,7 +82,7 @@
 			</tr>
 		</tfoot>
 	</table>
-	
+
 	<div class="tablenav bottom">
 		<div class="alignleft actions bulkactions">
 			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Save Changes', 'digirisk'); ?>" />

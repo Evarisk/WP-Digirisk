@@ -37,14 +37,17 @@ class user_model extends constructor_data_class {
 		'email' => array(
 			'type'		=> 'string',
 			'field'		=> 'user_email',
+			'required'	=> true,
 		),
 		'login' => array(
 			'type'		=> 'string',
 			'field'		=> 'user_login',
+			'required'	=> true,
 		),
 		'password' => array(
 			'type'		=> 'string',
 			'field'		=> 'user_pass',
+			'required'	=> true,
 		),
 		'displayname' => array(
 			'type'		=> 'string',
@@ -77,12 +80,14 @@ class user_model extends constructor_data_class {
 			'meta_type'	=> 'single',
 			'field'			=> 'first_name',
 			'bydefault'	=> '',
+			'required'		=> true,
 		),
 		'lastname'		=> array(
 			'type'			=> 'string',
 			'meta_type'	=> 'single',
 			'field'			=> 'last_name',
 			'bydefault'	=> '',
+			'required'		=> true,
 		)
 	);
 

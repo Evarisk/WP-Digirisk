@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="tablenav top">
  	<div class="tablenav-pages">
@@ -33,7 +35,7 @@
 					<td><a href="<?php echo admin_url( 'tools.php?page=wpeo-log-page&service_id=' . $key . '&action=view&type=warning' ); ?>"><?php echo $service['warning']['count']; ?></a></td>
 					<td>
 						<?php
-						echo !empty( $service['size'] ) ? \digi\size_util::g()->convert_to( $service['size'], $service['format'] , false ) : ''; 
+						echo !empty( $service['size'] ) ? \digi\size_util::g()->convert_to( $service['size'], $service['format'] , false ) : '';
 						echo !empty( $service['format'] ) ? $service['format'] : 'oc'
 						?>
 					</td>
