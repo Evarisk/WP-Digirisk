@@ -30,7 +30,7 @@ class recommendation_shortcode {
 
 		$list_recommendation_category = recommendation_category_class::g()->get();
 		$list_recommendation_in_workunit = $element->associated_recommendation;
-		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list.php' );
+		view_util::exec( 'recommendation', 'list', array( 'element' => $element, 'element_id' => $element_id, 'list_recommendation_category' => $list_recommendation_category, 'list_recommendation_in_workunit' => $list_recommendation_in_workunit ) );
 	}
 }
 

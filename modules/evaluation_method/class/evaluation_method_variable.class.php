@@ -79,6 +79,22 @@ class evaluation_method_variable_class extends term_class {
 
 		register_taxonomy( evaluation_method_variable_class::g()->get_taxonomy(), array( risk_class::g()->get_post_type() ), $args );
 	}
+
+	public function get_evaluation_method_variable( $formula ) {
+		$list_evaluation_method_variable = array();
+
+		if ( !empty( $formula ) ) {
+			foreach ( $formula as $key => $id ) {
+				if ( $key % 2 == 0 ) {
+					$evaluation_method_variable = evaluation_method_variable_class::g()->get( array( 'id' => $id ) );
+					$list_evaluation_method_variable[] = $evaluation_method_variable[0];
+				}
+			}
+		}
+
+		return $list_evaluation_method_variable;
+	}
+
 }
 
 evaluation_method_variable_class::g();

@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 /**
 * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'un établissement.
 * Et un formulaire qui permet d'ajouter un risque
@@ -30,7 +30,7 @@ class user_shortcode {
 		$element_id = $param['post_id'];
     $element = society_class::g()->show_by_type( $element_id );
 
-		\digi\user_class::g()->render( $element );
+		user_digi_class::g()->render( $element );
 	}
 
 	public function callback_dropdown_user( $param ) {

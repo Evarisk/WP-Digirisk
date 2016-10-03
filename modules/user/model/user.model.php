@@ -27,38 +27,47 @@ class user_digi_model extends user_model {
 		$this->model = array_merge( $this->model, array(
 			'hiring_date' => array(
 				'type'				=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> 'Pas configuré'
 			),
 			'social_security_number' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'job' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			"phone_number" => array(
 				'type'			=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault' => '01 02 03 04 05'
 			),
 			'release_date_of_society' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'professional_qualification' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'sexe' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'nationality' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'insurance_compagny' => array(
 				'type'		=> 'string',
+				'meta_type'	=> 'multiple',
 				'bydefault'	=> '',
 			),
 			'dashboard_compiled_data' => array(

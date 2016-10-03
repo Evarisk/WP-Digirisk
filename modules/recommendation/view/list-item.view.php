@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 <li class="wp-digi-list-item wp-digi-recommendation-item">
 	<span class="wp-digi-recommendation-list-column-thumbnail"><?php echo wp_get_attachment_image( $term->thumbnail_id, 'thumbnail', false, array( 'title' => $term->name ) ); ?></span>
 	<span class="wp-digi-recommendation-list-column-reference"><?php echo $recommendation_in_workunit['unique_identifier']; ?></span>

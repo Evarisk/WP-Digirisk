@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 		<ul class="wp-digi-table">
 			<li>
-				<?php echo do_shortcode( '[eo_upload_button]' ); ?>
+				<?php echo do_shortcode( '[eo_upload_button type="risk"]' ); ?>
 				<?php echo do_shortcode( '[digi_evaluation_method]' ); ?>
 				<span class="wp-digi-risk-list-column-reference"></span>
 				<?php echo do_shortcode( '[dropdown_danger]' ); ?>

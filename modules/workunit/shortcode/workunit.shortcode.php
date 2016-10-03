@@ -56,8 +56,7 @@ class workunit_shortcode {
   public function callback_digi_sheet_workunit( $param ) {
 		$element_id = (int)$_POST['element_id'];
     $element = society_class::g()->show_by_type( $element_id );
-    $display_mode = "simple";
-    require_once( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'simple', "sheet", "generation-form" ) );
+		view_util::exec( 'workunit', 'sheet-generation-form', array( 'element' => $element ) );
     document_class::g()->display_document_list( $element );
   }
 }

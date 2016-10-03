@@ -42,7 +42,7 @@ class risk_save_action {
 		$risk_id = !empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
 		$risk = risk_class::g()->get( array( 'id' => $risk_id ) );
 
-		$file_id = !empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
+		$file_id = !empty( $_POST['risk'][0]['associated_document_id']['image'][0] ) ? (int) $_POST['risk'][0]['associated_document_id']['image'][0] : 0;
 
 		// Charge le danger
 		$danger_id = !empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
@@ -62,10 +62,6 @@ class risk_save_action {
 			$risk[0]->taxonomy['digi-danger-category'][] = $danger[0]->parent_id;
 			$risk[0]->parent_id = $element_id;
 			$risk[0]->author_id = get_current_user_id();
-			// $risk[0]->option['risk_date'] = array(
-			// 	'start' => current_time( 'mysql' ),
-			// 	'end' => current_time( 'mysql' )
-			// );
 			$risk[0]->taxonomy['digi-method'][] = $method_evaluation_id;
 			unset( $risk[0]->id );
 		}

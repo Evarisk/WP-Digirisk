@@ -27,7 +27,6 @@ class user_action extends singleton_util {
 		add_action( 'display_user_assigned', array( $this, 'callback_display_user_assigned' ), 10, 2 );
 	}
 
-
 	/**
 	* Assignes un utilisateur à element_id dans la base de donnée
 	*
@@ -54,7 +53,7 @@ class user_action extends singleton_util {
 		if( !is_array( $_POST['list_user'] ) )
 			wp_send_json_error();
 
-		$workunit = \workunit_class::g()->get( array( 'id' => $workunit_id ) );
+		$workunit = workunit_class::g()->get( array( 'id' => $workunit_id ) );
 		$workunit = $workunit[0];
 
 		if ( empty( $workunit ) )
@@ -78,17 +77,17 @@ class user_action extends singleton_util {
 				);
 
 				// Hook pour enregister l'unité de travail dans les données compilées de l'utilisateur
-				do_action( 'add_compiled_workunit_id', $user_id, $workunit_id );
+				// do_action( 'add_compiled_workunit_id', $user_id, $workunit_id );
 			}
 		}
 
 		// On met à jour si au moins un utilisateur à été affecté
 		if( count( $_POST['list_user'] ) > 0 ) {
-			$workunit = \workunit_class::g()->update( $workunit );
+			$workunit = workunit_class::g()->update( $workunit );
 		}
 
 		ob_start();
-		user_class::g()->render( $workunit );
+		user_digi_class::g()->render( $workunit );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -104,9 +103,9 @@ class user_action extends singleton_util {
 		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-		$workunit = \workunit_class::g()->get( array( 'id' => $id ) );
+		$workunit = workunit_class::g()->get( array( 'id' => $id ) );
 		$workunit = $workunit[0];
-		$index_valid_key = user_class::g()->get_valid_in_workunit_by_user_id( $workunit, $user_id );
+		$index_valid_key = user_digi_class::g()->get_valid_in_workunit_by_user_id( $workunit, $user_id );
 
 		$workunit->user_info['affected_id']['user'][$user_id][$index_valid_key]['status'] = 'delete';
 		$workunit->user_info['affected_id']['user'][$user_id][$index_valid_key]['end'] = array(
@@ -116,12 +115,12 @@ class user_action extends singleton_util {
 		);
 
 		// Hook pour enregister l'unité de travail dans les données compilées de l'utilisateur
-		do_action( 'delete_compiled_workunit_id', $user_id, $id );
+		// do_action( 'delete_compiled_workunit_id', $user_id, $id );
 
-		\workunit_class::g()->update( $workunit );
+		workunit_class::g()->update( $workunit );
 
 		ob_start();
-		user_class::g()->render( $workunit );
+		user_digi_class::g()->render( $workunit );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -133,8 +132,8 @@ class user_action extends singleton_util {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function callback_display_user_affected( $id, $list_user_id ) {
-		$workunit = \society_class::g()->show_by_type( $id );
-		$data = user_class::g()->list_affected_user( $workunit );
+		$workunit = society_class::g()->show_by_type( $id );
+		$data = user_digi_class::g()->list_affected_user( $workunit );
 		$list_affected_user = $data['list_affected_user'];
 
 		if ( !empty( $list_affected_user ) ) {
@@ -146,13 +145,14 @@ class user_action extends singleton_util {
 		}
 
 		ob_start();
-		require( USERS_VIEW . '/list-affected-user.php' );
+
+		view_util::exec( 'user', 'list-affected-user', array( 'workunit' => $workunit, 'list_affected_user' => $list_affected_user, ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	public function callback_display_user_assigned( $id, $list_user_id ) {
-		$workunit = \society_class::g()->show_by_type( $id );
-		$data = user_class::g()->list_affected_user( $workunit );
+		$workunit = society_class::g()->show_by_type( $id );
+		$data = user_digi_class::g()->list_affected_user( $workunit );
 		$list_affected_id = $data['list_affected_id'];
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
@@ -160,14 +160,14 @@ class user_action extends singleton_util {
 			'exclude' => array( 1 )
 		);
 
-		$list_user_to_assign = user_class::g()->get( $args_where_user );
+		$list_user_to_assign = user_digi_class::g()->get( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
-		$count_user = count( user_class::g()->get( $args_where_user ) );
-		$number_page = ceil( $count_user / user_class::g()->limit_user );
+		$count_user = count( user_digi_class::g()->get( $args_where_user ) );
+		$number_page = ceil( $count_user / user_digi_class::g()->limit_user );
 
 		if ( !empty( $list_user_to_assign ) ) {
 			foreach ( $list_user_to_assign as $key => $element ) {
@@ -178,7 +178,7 @@ class user_action extends singleton_util {
 		}
 
 		ob_start();
-		require( USERS_VIEW . '/list-user-to-assign.php' );
+		view_util::exec( 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'list_user_to_assign' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -197,8 +197,8 @@ class user_action extends singleton_util {
 			wp_send_json_error();
 		}
 
-		$element = \workunit_class::g()->get( array( 'include' => array( $element_id ) ), array( false ) );
-		user_class::g()->render_list_user_to_assign( $element[0] );
+		$element = workunit_class::g()->get( array( 'include' => array( $element_id ) ), array( false ) );
+		user_digi_class::g()->render_list_user_to_assign( $element[0] );
 		wp_die();
 	}
 }

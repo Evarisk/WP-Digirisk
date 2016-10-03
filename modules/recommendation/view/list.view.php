@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <ul class="wp-digi-list wp-digi-table wp-digi-recommendation" >
 	<li class="wp-digi-table-header" >
@@ -16,7 +18,7 @@
 			<?php if ( !empty( $sub_array ) ): ?>
 				<?php foreach( $sub_array as $index => $recommendation_in_workunit ):?>
 					<?php if ( !empty( $recommendation_in_workunit['status'] ) && $recommendation_in_workunit['status'] == 'valid' ): ?>
-						<?php require ( DIGI_RECOM_TEMPLATES_MAIN_DIR . '/list-item.php' ); ?>
+						<?php view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) ); ?>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			<?php endif; ?>

@@ -30,8 +30,6 @@ class evaluator_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function callback_edit_evaluator_assign() {
-		// Todo : A déplacer dans la class
-		// Est ce que list_user est vide ? Ou est ce que workunit_id est vide et est-ce bien un entier ?
 		if ( empty( $_POST['list_user'] ) || !is_array( $_POST['list_user'] ) )
 			wp_send_json_error();
 
@@ -53,8 +51,8 @@ class evaluator_action {
 				$list_value['on'] .= ' ' . current_time( 'H:i:s' );
 				$list_value['on'] = sanitize_text_field( $list_value['on'] );
 
-				$end_date = new DateTime( $list_value['on'] );
-				$end_date->add( new DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
+				$end_date = new \DateTime( $list_value['on'] );
+				$end_date->add( new \DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
 
 
 				$element->user_info['affected_id']['evaluator'][$user_id][] = array(
@@ -71,7 +69,7 @@ class evaluator_action {
 					),
 				);
 
-				do_action( 'add_compiled_evaluation_id', $element_id, $user_id, count( $element->user_info['affected_id']['evaluator'][$user_id] ) - 1 );
+				// do_action( 'add_compiled_evaluation_id', $element_id, $user_id, count( $element->user_info['affected_id']['evaluator'][$user_id] ) - 1 );
 			}
 		}
 
@@ -82,7 +80,7 @@ class evaluator_action {
 
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
+		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -120,12 +118,12 @@ class evaluator_action {
 			wp_send_json_error();
 
 		$element->user_info['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
-		do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );
+		// do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );
 		society_class::g()->update_by_type( $element );
 
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
+		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -150,7 +148,7 @@ class evaluator_action {
 	}
 
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element = \society_class::g()->show_by_type( $id );
+		$element = society_class::g()->show_by_type( $id );
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 
 		if ( !empty( $list_affected_evaluator ) ) {
@@ -166,12 +164,12 @@ class evaluator_action {
 		}
 
 		ob_start();
-		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-affected-user.php' );
+		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
-		$element = \society_class::g()->show_by_type( $id );
+		$element = society_class::g()->show_by_type( $id );
 
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
 		$args_where_evaluator = array(
@@ -197,7 +195,7 @@ class evaluator_action {
 			}
 
 		ob_start();
-		require( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/list-user-to-assign.php' );
+		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'list_evaluator_to_assign' => $list_evaluator_to_assign ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }

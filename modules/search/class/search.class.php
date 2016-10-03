@@ -13,24 +13,27 @@ class search_class extends singleton_util {
 
 		if ( $data['type'] === 'user' ) {
 			if ( !empty( $data['term'] ) ) {
-			$list = get_users( array(
-				'fields' => 'ID',
-				'search' => '*' . $data['term'] . '*',
-				// 'search_columns' => array( 'id', 'user_login', 'display_name', 'user_email' ),
-				'meta_query' => array(
-					'relation' => 'OR',
-					array(
-						'key' => 'first_name',
-						'value' => $data['term'],
-						'compare' => 'LIKE'
-					),
-					array(
-						'key' => 'last_name',
-						'value' => $data['term'],
-						'compare' => 'LIKE'
-					)
-				)
+				$list = get_users( array(
+					'fields' => 'ID',
+					'search' => '*' . $data['term'] . '*',
 				) );
+
+				$list = wp_parse_args( get_users( array(
+					'fields' => 'ID',
+					'meta_query' => array(
+						'relation' => 'OR',
+						array(
+							'key' => 'first_name',
+							'value' => $data['term'],
+							'compare' => 'LIKE'
+						),
+						array(
+							'key' => 'last_name',
+							'value' => $data['term'],
+							'compare' => 'LIKE'
+						),
+					)
+				) ) );
 			}
 			else {
 				$list = get_users( array(
@@ -46,7 +49,6 @@ class search_class extends singleton_util {
 				'post_title'
 			) );
 		}
-
 
 		return $list;
 	}

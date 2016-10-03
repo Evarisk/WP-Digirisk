@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluator_class extends user_class {
-	protected $model_name 	= '\digi\user_model';
+	protected $model_name 	= '\digi\user_digi_model';
 	protected $meta_key		= '_wpeo_user_info';
 	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
 
@@ -45,7 +45,7 @@ class evaluator_class extends user_class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		require_once( WPDIGI_EVALUATOR_TEMPLATES_MAIN_DIR . 'backend/main.php' );
+		view_util::exec( 'evaluator', 'main', array( 'element' => $element, 'list_evaluator_to_assign' => $list_evaluator_to_assign, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
 	}
 
 	/**
@@ -106,8 +106,8 @@ class evaluator_class extends user_class {
 		if ( empty( $user_affectation_info[ 'start' ][ 'date' ] ) || empty( $user_affectation_info[ 'end' ][ 'date' ] ) )
 			return 0;
 
-		$start_date = new DateTime( $user_affectation_info[ 'start' ][ 'date' ] );
-		$end_date = new DateTime( $user_affectation_info[ 'end' ][ 'date' ] );
+		$start_date = new \DateTime( $user_affectation_info[ 'start' ][ 'date' ] );
+		$end_date = new \DateTime( $user_affectation_info[ 'end' ][ 'date' ] );
 		$interval = $start_date->diff( $end_date );
 
 		$minutes = $interval->format( '%h' ) * 60;

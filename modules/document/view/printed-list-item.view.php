@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <li data-id="<?php echo $element->id; ?>" class="wp-digi-list-item wp-digi-list-document wp-digi-item-document-<?php echo $element->id; ?>" >
 	<span class="wp-digi-reference"><?php echo $element->unique_identifier; ?></span>

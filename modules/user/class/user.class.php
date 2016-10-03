@@ -84,7 +84,7 @@ class user_digi_class extends user_class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		require( USERS_VIEW . '/main.php' );
+		view_util::exec( 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
 	}
 
 	/**
@@ -103,6 +103,9 @@ class user_digi_class extends user_class {
 			),
 		);
 
+		$array = $this->list_affected_user( $workunit );
+		$list_affected_id = $array['list_affected_id'];
+
 		$list_user_to_assign = $this->get( $args_where_user );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
@@ -112,7 +115,7 @@ class user_digi_class extends user_class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		require( USERS_VIEW . '/list-user-to-assign.php' );
+		view_util::exec( 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'list_user_to_assign' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 	}
 
 	/**

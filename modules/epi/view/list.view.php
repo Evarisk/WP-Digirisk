@@ -16,6 +16,6 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <?php $i = 1; ?>
 <?php if ( !empty( $epi_list ) ) : ?>
 	<?php foreach ( $epi_list as $epi ) : ?>
-		<?php require( EPI_VIEW_DIR . '/list-item.php' ); ?>
+		<?php view_util::exec( 'epi', 'list-item', array( 'society_id' => $society_id, 'epi' => $epi ) ); ?>
 	<?php endforeach; ?>
 <?php endif; ?>

@@ -72,19 +72,12 @@ class evaluation_method_shortcode {
 
 		if ( !empty( $term_evarisk ) ) {
 			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( '\digi\evaluation_method', '\digi\evaluation' ) );
-
 			$risk = !empty( $risk[0] ) ? $risk[0] : array();
+
 			$evarisk_evaluation_method = evaluation_method_class::g()->get( array( 'id' => $term_evarisk->term_id ) );
 			$evarisk_evaluation_method = $evarisk_evaluation_method[0];
-			$list_evaluation_method_variable = array();
-			if ( !empty( $evarisk_evaluation_method->formula ) ) {
-				foreach ( $evarisk_evaluation_method->formula as $key => $formula ) {
-					if ( $key % 2 == 0 ) {
-						$evaluation_method_variable = evaluation_method_variable_class::g()->get( array( 'id' => $formula ) );
-						$list_evaluation_method_variable[] = $evaluation_method_variable[0];
-					}
-				}
-			}
+
+			$list_evaluation_method_variable = evaluation_method_variable_class::g()->get_evaluation_method_variable( $evarisk_evaluation_method->formula );
 		}
 
 		view_util::exec( 'evaluation_method', 'popup/popup', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) );

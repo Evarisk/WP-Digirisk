@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 function update_remaining_time( $data ) {
 	if ( !empty( $data->frequency_control ) && !empty( $data->control_date ) ) {
-		$control_date = DateTime::createFromFormat( 'd/m/Y', $data->control_date );
+		$control_date = \DateTime::createFromFormat( 'd/m/Y', $data->control_date );
 		$control_date->modify( '+' . $data->frequency_control . ' day' );
 
-		$date_now = DateTime::createFromFormat( 'd/m/Y', current_time( 'd/m/Y' ) );
+		$date_now = \DateTime::createFromFormat( 'd/m/Y', current_time( 'd/m/Y' ) );
 		$interval = $date_now->diff( $control_date );
 
 		$result = '';

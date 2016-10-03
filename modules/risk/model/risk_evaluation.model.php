@@ -27,18 +27,18 @@ class risk_evaluation_model extends comment_model {
 				'export' => true,
 				'type' => 'array',
 				'meta_type'	=> 'multiple',
-				'child' => array(
-					'variable_id' => array(
-						'type' 			=> 'integer',
-						'meta_type'	=> 'multiple',
-						'field'			=> 'variable_id',
-					),
-					'value' => array(
-						'type' 			=> 'integer',
-						'meta_type'	=> 'multiple',
-						'field'			=> 'value'
-					)
-				)
+				// 'child' => array(
+				// 	'variable_id' => array(
+				// 		'type' 			=> 'integer',
+				// 		'meta_type'	=> 'multiple',
+				// 		'field'			=> 'variable_id',
+				// 	),
+				// 	'value' => array(
+				// 		'type' 			=> 'integer',
+				// 		'meta_type'	=> 'multiple',
+				// 		'field'			=> 'value'
+				// 	)
+				// )
 			),
 			'scale' => array(
 				'export' => true,

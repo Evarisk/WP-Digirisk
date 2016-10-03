@@ -30,7 +30,7 @@ class sheet_groupment_shortcode {
     $element = group_class::g()->get( array( 'id' => $element_id ) );
 		$element = $element[0];
     $display_mode = "simple";
-		require( WPDIGI_DOC_TEMPLATES_MAIN_DIR . 'simple/sheet-generation-form.php' );
+		view_util::exec( 'sheet_groupment', 'sheet-generation-form', array( 'element' => $element ) );
     document_class::g()->display_document_list( $element );
 	}
 }

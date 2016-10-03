@@ -362,15 +362,11 @@ class document_class extends post_class {
 	 * @param string $version La version du zip
 	 */
 	 public function create_zip( $final_file_path, $file_list, $element, $version ) {
-		// if ( !is_string( $final_file_path ) || !is_array( $file_list ) || !is_object( $element ) || !is_string( $version ) ) {
-		//  return false;
-		// }
-
-		$zip = new ZipArchive();
+		$zip = new \ZipArchive();
 
 		$response = array();
 
-		if( $zip->open( $final_file_path, ZipArchive::CREATE ) !== TRUE ) {
+		if( $zip->open( $final_file_path, \ZipArchive::CREATE ) !== TRUE ) {
 			$response['status'] = false;
 			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
 		}

@@ -79,12 +79,11 @@ class recommendation_action {
 		$term = $term[0];
 		$term_id = $term->id;
 		$index = count( $workunit->associated_recommendation[$recommendation_id] ) - 1;
-		$element = new stdClass();
+		$element = new \stdClass();
 		$element->id = $workunit_id;
 
 		ob_start();
-		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list-item.php' );
-
+		view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -123,7 +122,7 @@ class recommendation_action {
 		$term = $term[0];
 
 		ob_start();
-		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list-item-edit.php' );
+		view_util::exec( 'recommendation', 'list-item-edit', array( 'workunit_id' => $workunit_id, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, 'term' => $term ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -165,11 +164,11 @@ class recommendation_action {
 		$term = recommendation_class::g()->get( array( 'id' => $term_id ) );
 		$term = $term[0];
 		$recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
-		$element = new StdClass();
+		$element = new \StdClass();
 		$element->id = $workunit_id;
 
 		ob_start();
-		require( DIGI_RECOM_TEMPLATES_MAIN_DIR . 'list-item.php' );
+		view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

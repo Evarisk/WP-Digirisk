@@ -6,7 +6,7 @@ class workunit_class extends post_class {
 	public $element_prefix = 'UT';
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
-	protected $model_name   = 'workunit_model';
+	protected $model_name   = '\digi\workunit_model';
 	protected $post_type    = 'digi-workunit';
 	protected $meta_key    	= '_wp_workunit';
 	protected $base = 'digirisk/workunit';
@@ -39,32 +39,6 @@ class workunit_class extends post_class {
 		return $work_unit;
 	}
 
-	// /**
-	//  * Affiche une fiche d'unité de travail à partir d'un identifiant donné / Display a work unit from given identifier
-	//  *
-	//  * @param integer $id L'indentifiant de l'unité de travail à afficher / The workunit identifier to display
-	//  * @param string $dislay_mode Optionnal Le mode d'affichage de la fiche (simple, complète, publique, ...) / The display mode (simple, complete, public, ... )
-	//  */
-	// public function display( $id, $display_mode = 'simple' ) {
-	// 	if ( !is_int( $id ) || !is_string( $display_mode ) ) {
-	// 		return false;
-	// 	}
-	//
-	// 	/**	Get the work unit to display	*/
-	// 	$this->current_workunit = $this->show( $id );
-	// 	$element_post_type = $this->get_post_type();
-	//
-	// 	/**	Set default tab in work unit - Allow modification throught filter	*/
-	// 	$workunit_default_tab = apply_filters( 'wpdigi_workunit_default_tab', '' );
-	//
-	// 	/**	Display the template	*/
-	// 	$path = wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $display_mode );
-	//
-	// 	if ( $path ) {
-	// 		require_once( wpdigi_utils::get_template_part( WPDIGI_STES_DIR, WPDIGI_STES_TEMPLATES_MAIN_DIR, 'workunit', 'sheet', $display_mode ) );
-	// 	}
-	// }
-
 	public function display_list( $groupment_id, $workunit_selected_id = 0 ) {
 		$list_workunit = workunit_class::g()->get( array( 'post_parent' => $groupment_id, 'posts_per_page' => -1 ), array( false ) );
 
@@ -77,6 +51,6 @@ class workunit_class extends post_class {
 			} );
 		}
 
-		view_util::exec( 'workunit', 'list', array( 'groupment_id' => $groupment_id, 'list_workunit' => $list_workunit ) );
+		view_util::exec( 'workunit', 'list', array( 'editable_identity' => false, 'workunit_selected_id' => $workunit_selected_id, 'groupment_id' => $groupment_id, 'list_workunit' => $list_workunit ) );
 	}
 }

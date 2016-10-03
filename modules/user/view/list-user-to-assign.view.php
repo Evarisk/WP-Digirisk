@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <form class="wp-form-user-to-assign wp-digi-bloc-loader" method="POST" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 	<ul class="wp-digi-list wp-digi-table">

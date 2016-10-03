@@ -23,7 +23,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 					<?php view_util::exec( 'evaluation_method', 'popup/header', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) ); ?>
 
 					<?php for( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ): ?>
-						<?php view_util::exec( 'evaluation_method', 'popup/header', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) ); ?>
+						<?php view_util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) ); ?>
 					<?php endfor; ?>
 				<?php endif;?>
 				<button type="button" data-nonce="<?php echo wp_create_nonce( 'get_scale' ); ?>" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'digirisk' ); ?></button>

@@ -10,26 +10,26 @@ class risk_model extends post_model {
 				'evaluation' => array(
 					'export'			=> true,
 					'type' 				=> 'object',
-					'controller'	=> 'risk_evaluation_class',
+					'controller'	=> '\digi\risk_evaluation_class',
 					'field'					=> 'comment__in',
 					'value'					=> 'current_evaluation_id',
 				),
 				'danger_category' => array(
 					'export'			=> true,
 					'type'				=> 'taxonomy',
-					'controller'	=> 'category_danger_class',
+					'controller'	=> '\digi\category_danger_class',
 					'field'				=> 'post_id',
 				),
 				'comment' => array(
 					'export'			=> true,
 					'type'				=> 'object',
-					'controller'	=> 'risk_evaluation_comment_class',
+					'controller'	=> '\digi\risk_evaluation_comment_class',
 					'field'				=> 'post_id'
 				),
 				'evaluation_method' => array(
 					'export'			=> true,
 					'type'				=> 'object',
-					'controller' 	=> 'evaluation_method_class',
+					'controller' 	=> '\digi\evaluation_method_class',
 					'field'				=> 'post_id'
 				)
 			),

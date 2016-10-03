@@ -1,4 +1,7 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
 <form method="post" class="wp-digi-list-item wp-digi-table-item-edit wp-digi-recommendation-item" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 	<input type="hidden" name="action" value="wpdigi-edit-recommendation" />
 	<input type="hidden" name="workunit_id" value="<?php echo $workunit_id; ?>" />

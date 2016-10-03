@@ -22,7 +22,7 @@ class workunit_model extends post_model {
 				'list_risk' => array(
 					'export'			=> true,
 					'type'				=> 'array',
-					'controller' 	=> 'risk_class',
+					'controller' 	=> '\digi\risk_class',
 					'field'				=> 'post_parent',
 				),
 			),

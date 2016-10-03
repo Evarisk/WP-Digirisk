@@ -22,6 +22,8 @@ class risk_action {
 	* wp_ajax_delete_comment
 	*/
 	public function __construct() {
+		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for risks management	*/
+		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
 		// Remplacé les - en _
 		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 1 );
 		add_action( 'wp_ajax_wpdigi-delete-risk', array( $this, 'ajax_delete_risk' ) );
@@ -29,6 +31,56 @@ class risk_action {
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 	}
+
+	/**
+	* Déclares le post type: risque
+	*/
+	function custom_post_type() {
+		/**	Créé les sociétés: élément principal / Create risk : main element 	*/
+		$labels = array(
+			'name'                => __( 'Risks', 'digirisk' ),
+			'singular_name'       => __( 'Risk', 'digirisk' ),
+			'menu_name'           => __( 'Risks', 'digirisk' ),
+			'name_admin_bar'      => __( 'Risks', 'digirisk' ),
+			'parent_item_colon'   => __( 'Parent Item:', 'digirisk' ),
+			'all_items'           => __( 'Risks', 'digirisk' ),
+			'add_new_item'        => __( 'Add risk', 'digirisk' ),
+			'add_new'             => __( 'Add risk', 'digirisk' ),
+			'new_item'            => __( 'New risk', 'digirisk' ),
+			'edit_item'           => __( 'Edit risk', 'digirisk' ),
+			'update_item'         => __( 'Update risk', 'digirisk' ),
+			'view_item'           => __( 'View risk', 'digirisk' ),
+			'search_items'        => __( 'Search risk', 'digirisk' ),
+			'not_found'           => __( 'Not found', 'digirisk' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'digirisk' ),
+		);
+		$rewrite = array(
+			'slug'                => '/',
+			'with_front'          => true,
+			'pages'               => true,
+			'feeds'               => true,
+		);
+		$args = array(
+			'label'               => __( 'Digirisk risk', 'digirisk' ),
+			'description'         => __( 'Manage risks into digirisk', 'digirisk' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
+			'hierarchical'        => true,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => false,
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => true,
+			'rewrite'             => $rewrite,
+			'capability_type'     => 'page',
+		);
+		register_post_type( risk_class::g()->get_post_type(), $args );
+	}
+
 
 	/**
   * Enregistres un risque.
@@ -92,7 +144,7 @@ class risk_action {
 		$risk = $risk[0];
 
 		ob_start();
-		require( RISK_VIEW_DIR . 'list-item-edit.php' );
+		view_util::exec( 'risk', 'list-item-edit', array( 'risk_id' => $risk_id, 'risk' => $risk ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

@@ -199,7 +199,7 @@ class workunit_action {
 		$generation_response = workunit_sheet_class::g()->generate_workunit_sheet( $element_id );
 		$document = document_class::g()->get( array( 'id' => $generation_response[ 'id' ] ) );
 		ob_start();
-		require( wpdigi_utils::get_template_part( WPDIGI_DOC_DIR, WPDIGI_DOC_TEMPLATES_MAIN_DIR, 'common', 'printed-list', 'item' ) );
+		view_util::exec( 'document', 'printed-list-item', array( 'document' => $document, 'element_id' => $element_id ) );
 		$response[ 'output' ] = ob_get_contents();
 		ob_end_clean();
 

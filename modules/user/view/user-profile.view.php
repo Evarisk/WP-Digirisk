@@ -1,4 +1,6 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <h3><?php _e( 'Digirisk', 'digirisk' ); ?></h3>
 

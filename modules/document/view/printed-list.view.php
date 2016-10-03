@@ -1,11 +1,13 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !empty( $list_document ) ):
 	?>
 	<ul class="wp-digi-list wp-digi-table wp-digi-list-document">
 	<?php
   foreach ( $list_document as $element ):
-		require( WPDIGI_DOC_TEMPLATES_MAIN_DIR . 'common/printed-list-item.php' );
+		view_util::exec( 'document', 'printed-list-item', array( 'element' => $element ) );
   endforeach;
 	?>
 	</ul>
