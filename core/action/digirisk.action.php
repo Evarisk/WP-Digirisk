@@ -26,7 +26,7 @@ class digirisk_action {
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts' ), 10 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ), 11 );
 
-		add_action( 'plugins_loaded', array( $this, 'callback_plugins_loaded' ) );
+		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 	}
 
 	public function callback_before_admin_enqueue_scripts() {
@@ -38,16 +38,16 @@ class digirisk_action {
 	}
 
 	public function callback_admin_enqueue_scripts() {
-		wp_register_style( 'digi-style', PLUGIN_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
+		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
 	  wp_enqueue_style( 'digi-style' );
 
-		 wp_enqueue_script( 'digi-script', PLUGIN_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
+		 wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
 	}
 	/**
 	* Appelle le domaine de traduction
 	*/
 	public function callback_plugins_loaded() {
-		load_plugin_textdomain( "digirisk", false, PLUGIN_DIGIRISK_PATH . 'core\assets\languages\\' );
+		load_plugin_textdomain( "digirisk", false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
 	}
 }
 
