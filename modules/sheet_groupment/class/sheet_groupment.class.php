@@ -3,6 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class sheet_groupment_class extends singleton_util {
+
 	/**
 	* Le constructeur
 	*/

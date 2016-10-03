@@ -435,7 +435,7 @@ class document_class extends post_class {
 
 		// @todo: A faire
 		if ( in_array( 'zip', $document_type ) ) {
-				$filetype = "application/zip";
+			$filetype = "application/zip";
 		}
 
 		$path = '';
