@@ -17,6 +17,33 @@ class fiche_de_groupement_model extends document_model {
 			'meta_type' 	=> 'single',
 			'field'				=> '_wpdigi_document_data',
 			'child' => array(
+				'reference' => array(
+					'type' => 'string',
+				),
+				'nom' => array(
+					'type'	=> 'string',
+				),
+				'photoDefault'	=> array(
+					'type'	=> 'string',
+				),
+				'description'	=> array(
+					'type'	=> 'string',
+				),
+				'adresse'	=> array(
+					'type'	=> 'string',
+				),
+				'telephone' => array(
+					'type'	=> 'string'
+				),
+				'utilisateursDesaffectes' => array(
+					'type'	=> 'array'
+				),
+				'utilisateursAffectes' => array(
+					'type'	=> 'array'
+				),
+				'utilisateursPresents' => array(
+					'type'	=> 'array'
+				),
 				'risq' => array(
 					'type'	=> 'array',
 					'child' => array(
