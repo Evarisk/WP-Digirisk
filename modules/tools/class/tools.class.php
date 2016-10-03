@@ -47,7 +47,7 @@ class tools_class extends singleton_util {
     $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
-    $file_content = file_get_contents( EVALUATION_METHOD_PATH . 'asset/json/default.json' );
+    $file_content = file_get_contents( PLUGIN_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
     $data_variable_evarisk = array();
@@ -78,16 +78,10 @@ class tools_class extends singleton_util {
 	}
 
   public function add_variable( $method_evaluation, $variable ) {
-    $unique_key = wpdigi_utils::get_last_unique_key( 'term', evaluation_method_variable_class::g()->get_taxonomy() );
-    $unique_key++;
-    $unique_identifier = evaluation_method_class::g()->element_prefix . '' . $unique_key;
-
     // On tente de crée les variables de la méthode d'évaluation
     $evaluation_method_variable = evaluation_method_variable_class::g()->create( array(
         'name' => $variable->name,
         'description' => $variable->description,
-        'unique_key' => $unique_key,
-        'unique_identifier' => $unique_identifier,
         'display_type' => $variable->option->display_type,
         'range' => $variable->option->range,
         'survey' => $variable->option->survey,
@@ -130,7 +124,9 @@ class tools_class extends singleton_util {
 				// On modifie les anciennes variables avec les nouvelles
 				if ( !empty( $risk_evaluation->quotation_detail ) ) {
 				  foreach ( $risk_evaluation->quotation_detail as $e_key => $element ) {
-						$risk_evaluation->quotation_detail[$e_key]['variable_id'] = $list_new_variable_id[$e_key];
+						if ( !empty( $risk_evaluation->quotation_detail[$e_key]['variable_id'] ) ) {
+							$risk_evaluation->quotation_detail[$e_key]['variable_id'] = $list_new_variable_id[$e_key];
+						}
 				  }
 				}
 

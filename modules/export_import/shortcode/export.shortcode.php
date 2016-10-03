@@ -44,7 +44,7 @@ class export_shortcode {
 		}
 
 		/** Affichage du formulaire d'export / Display export form */
-		require ( WPDIGI_IMPEXP_VIEW_DIR . '/export-form.php' );
+		view_util::exec( 'export_import', 'export-form', array( 'element_id' => $element_id, 'element' => $element ) );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class export_shortcode {
 		}
 
 		/** Affichage du formulaire d'import / Display import form */
-		require ( WPDIGI_IMPEXP_VIEW_DIR . '/import-form.php' );
+		view_util::exec( 'export_import', 'import-form', array( 'element_id' => $element_id, 'element' => $element ) );
 	}
 
 }

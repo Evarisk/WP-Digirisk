@@ -6,6 +6,7 @@
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",
 		"core/external/wpeo_model/wpeo_model.config.json",
+		"core/external/wpeo_export/wpeo_export.config.json",
 		"core/core.config.json",
 		"modules/society/society.config.json",
 		"modules/group/group.config.json",

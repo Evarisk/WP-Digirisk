@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
 		</h2>
 
-		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2 hidden" >
+		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2" >
 			<div class="block">
 				<?php echo do_shortcode( '[digi-export]' ); ?>
 			</div>
@@ -22,7 +22,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			</div>
 		</div>
 
-		<div id="digi-data-import-user" class="wp-digi-bloc-loader gridwrapper2" >
+		<div id="digi-data-import-user" class="wp-digi-bloc-loader gridwrapper2 hidden" >
 			<?php echo do_shortcode( '[digi-import-user]' ); ?>
 		</div>
 

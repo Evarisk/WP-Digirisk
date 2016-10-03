@@ -1,0 +1,9 @@
+{
+	"name": "WPEO Export",
+	"slug": "wpeo_export",
+	"version": 0.2,
+	"description": "Le moteur d'export liée à wpeo_model",
+	"dependencies": {
+		"class": {}
+	}
+}

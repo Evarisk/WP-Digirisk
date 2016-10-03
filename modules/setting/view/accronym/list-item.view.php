@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php
 	if ( !empty( $list_accronym ) ):
 	  foreach ( $list_accronym as $key => $element ):
-			require( SETTING_VIEW_DIR . '/accronym/item.view.php' );
+			view_util::exec( 'setting', 'accronym/item', array( 'key' => $key, 'element' => $element ) );
 	  endforeach;
 	endif;
 	?>

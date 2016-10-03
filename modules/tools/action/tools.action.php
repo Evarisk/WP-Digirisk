@@ -16,7 +16,7 @@ class tools_action {
   }
 
   public function add_management_page() {
-    require( TOOLS_TEMPLATES_MAIN_DIR . '/main.php' );
+		view_util::exec( 'tools', 'main' );
   }
 
   public function callback_reset_method_evaluation() {

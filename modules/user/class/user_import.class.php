@@ -11,7 +11,7 @@ class user_import_class extends singleton_util {
 	protected function construct() {}
 
 	public function render() {
-		require( USERS_VIEW . 'import.view.php' );
+		view_util::exec( 'user', 'import' );
 	}
 
 	public function create( $data ) {

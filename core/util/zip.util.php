@@ -20,7 +20,7 @@ class zip_util extends singleton_util {
 	 * @return $data = array('state' => true|false, 'list_file' => array( 0 => filename ) );
 	 */
   public function unzip( $zip_path, $destination_path ) {
-		$zip = new ZipArchive;
+		$zip = new \ZipArchive;
 		$data = array( 'state' => true, 'list_file' => array() );
 
 		if ( $zip->open( $zip_path ) === TRUE ) {
