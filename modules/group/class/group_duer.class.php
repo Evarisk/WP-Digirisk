@@ -36,9 +36,9 @@ class group_duer_class extends singleton_util {
 
 		/**	Définition des composants du fichier / Define the file component	*/
 		$src_logo = $this->get_logo();
-		$data['wpdigi_duer'] = $this->securize_duer_data( $data );
+		$data = $this->securize_duer_data( $data );
 		$data_to_document = $this->prepare_skeleton();
-		$data_to_document = $this->fill_data_duer( $data['wpdigi_duer'], $data_to_document, $element );
+		$data_to_document = $this->fill_data_duer( $data, $data_to_document, $element );
 		$data_to_document = $this->fill_data_risk( $data_to_document, $element );
 
 		/**	Possibilité de filtrer les données envoyées au document pour ajout, suppression, traitement supplémentaire / Add capability to filter datas sended to the document for addition, deletion or other treatment	*/
@@ -73,21 +73,19 @@ class group_duer_class extends singleton_util {
 	* @return array Les données sécurisées
 	*/
 	public function securize_duer_data( $data ) {
-		$data_duer = array();
+		$data['nomEntreprise'] 			= !empty( $data['nomEntreprise'] ) ? sanitize_text_field( $data['nomEntreprise'] ) : '';
+		$data['dateAudit'] 					= $this->formatte_audit_date( $data );
+		$data['emetteurDUER'] 				= !empty( $data['emetteurDUER'] ) ? sanitize_text_field( $data['emetteurDUER'] ) : '';
+		$data['destinataireDUER'] 		= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
+		$data['telephone'] 					= !empty( $data['telephone'] ) ? sanitize_text_field( $data['telephone'] ) : '';
+		$data['portable'] 						= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
 
-		$data_duer['nomEntreprise'] 			= !empty( $data['nomEntreprise'] ) ? sanitize_text_field( $data['nomEntreprise'] ) : '';
-		$data_duer['dateAudit'] 					= $this->formatte_audit_date( $data_duer );
-		$data_duer['emetteurDUER'] 				= !empty( $data['emetteurDUER'] ) ? sanitize_text_field( $data['emetteurDUER'] ) : '';
-		$data_duer['destinataireDUER'] 		= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
-		$data_duer['telephone'] 					= !empty( $data['telephone'] ) ? sanitize_text_field( $data['telephone'] ) : '';
-		$data_duer['portable'] 						= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
+		$data['methodologie'] 				= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
+		$data['sources'] 						= !empty( $data['sources'] ) ? $data['sources'] : '';
+		$data['remarqueImportante'] 	= !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
+		$data['dispoDesPlans'] 			= !empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
 
-		$data_duer['methodologie'] 				= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
-		$data_duer['sources'] 						= !empty( $data['sources'] ) ? $data['sources'] : '';
-		$data_duer['remarqueImportante'] 	= !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
-		$data_duer['dispoDesPlans'] 			= !empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
-
-		return $data_duer;
+		return $data;
 	}
 
 	/**
@@ -173,12 +171,13 @@ class group_duer_class extends singleton_util {
 	*
 	* @return array Les données qui seront insérées dans le document
 	*/
-	public function fill_data_duer( $data_duer, $data_to_document, $element ) {
-		$data_to_document = array_merge( $data_to_document, $data_duer );
+	public function fill_data_duer( $data, $data_to_document, $element ) {
+		$data_to_document = array_merge( $data_to_document, $data );
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
-		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data_duer );
+		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data );
 		$data_to_document['dateGeneration'] = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
 		$data_to_document['elementParHierarchie']['value'] = group_class::g()->get_element_sub_tree( $element );
+
 		return $data_to_document;
 	}
 

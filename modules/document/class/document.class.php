@@ -398,8 +398,8 @@ class document_class extends post_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_data ) {
-		if ( !empty( $document_type ) && !empty( $document_type[0] ) && class_exists( $document_type[0] . '_model' ) ) {
-			$this->set_model( $document_type[0] . '_model' );
+		if ( !empty( $document_type ) && !empty( $document_type[0] ) && class_exists( '\digi\\' . $document_type[0] . '_model' ) ) {
+			$this->set_model( '\digi\\' . $document_type[0] . '_model' );
 		}
 
 		$response = array(
