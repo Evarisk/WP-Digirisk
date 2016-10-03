@@ -13,7 +13,7 @@ class config_util extends singleton_util {
 	protected function construct() {}
 
 	public function init_config( $path_to_config_file ) {
-		$path_to_config_file = PLUGIN_PATH . $path_to_config_file;
+		$path_to_config_file = PLUGIN_DIGIRISK_PATH . $path_to_config_file;
 		if ( empty( $path_to_config_file ) ) {
 			trigger_error( 'Impossible de charger le fichier : ' . $path_to_config_file, E_USER_ERROR );
 		}

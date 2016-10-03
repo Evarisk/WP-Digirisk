@@ -18,7 +18,7 @@ class evaluation_method_default_data_class extends singleton_util {
 	* Créer les méthodes d'évaluation par défaut
 	*/
 	public function create() {
-		$file_content = file_get_contents( PLUGIN_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
+		$file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
 		if ( !empty( $data ) ) {

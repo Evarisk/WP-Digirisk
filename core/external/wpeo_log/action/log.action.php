@@ -66,7 +66,7 @@ class log_action {
 		$file = $array_data['data']['data'];
 		$list_archive_file = $array_data['list_archive_file'];
 
-		require ( PLUGIN_PATH . config_util::$init['wpeo_log']->path . '/view/main.view.php' );
+		require ( PLUGIN_DIGIRISK_PATH . config_util::$init['wpeo_log']->path . '/view/main.view.php' );
 	}
 
 }

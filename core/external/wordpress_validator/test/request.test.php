@@ -10,7 +10,7 @@ class request_test {
 
 	public function __construct( $list_file ) {
 		$this->list_file = $list_file;
-		$this->exclude_path[] = PLUGIN_PATH . 'core\external\wordpress_validator\test\request.test.php';
+		$this->exclude_path[] = PLUGIN_DIGIRISK_PATH . 'core\external\wordpress_validator\test\request.test.php';
 	}
 
 	public function execute() {

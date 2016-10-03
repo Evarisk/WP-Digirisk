@@ -12,7 +12,7 @@ class danger_default_data_class extends singleton_util {
 	* Créé les données par défaut des dangers selon le fichier assets/json/default.json
 	*/
 	public function create() {
-		$file_content = file_get_contents( PLUGIN_PATH . config_util::$init['danger']->path . 'assets/json/default.json' );
+		$file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['danger']->path . 'assets/json/default.json' );
 		$data = json_decode( $file_content );
 
 		if ( !empty( $data ) ) {
@@ -38,7 +38,7 @@ class danger_default_data_class extends singleton_util {
 		}
 
 		if ( $json_danger_category->option->status == 'valid' ) {
-			$file_id = file_util::g()->move_file_and_attach( PLUGIN_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
+			$file_id = file_util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
 			$danger_category->thumbnail_id = $file_id;
 			$danger_category = category_danger_class::g()->update( $danger_category );
 		}
@@ -58,10 +58,10 @@ class danger_default_data_class extends singleton_util {
 		if ( !is_wp_error( $danger ) ) {
 			if ( $json_danger->option->status == 'valid' && !empty( $json_danger_category->name_thumbnail ) ) {
 				if ( !empty( $json_danger->name_thumbnail ) ) {
-					$file_id = file_util::g()->move_file_and_attach( PLUGIN_PATH . '/core/assets/images/categorieDangers/' . $json_danger->name_thumbnail, 0 );
+					$file_id = file_util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/categorieDangers/' . $json_danger->name_thumbnail, 0 );
 				}
 				else {
-					$file_id = file_util::g()->move_file_and_attach( PLUGIN_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
+					$file_id = file_util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/categorieDangers/' . $json_danger_category->name_thumbnail, 0 );
 				}
 					$danger->thumbnail_id = $file_id;
 					danger_class::g()->update( $danger );

@@ -22,7 +22,7 @@ class init_util extends singleton_util {
 	 * @return [type] [description]
 	 */
 	private function read_core_util_file_and_inculde() {
-		$path_to_core_folder_util = PLUGIN_PATH . 'core/util/';
+		$path_to_core_folder_util = PLUGIN_DIGIRISK_PATH . 'core/util/';
 		if ( !file_exists( $path_to_core_folder_util ) ) {
 			trigger_error( 'Impossible de charger les fichiers ".utils"', E_USER_ERROR );
 		}

@@ -47,7 +47,7 @@ class tools_class extends singleton_util {
     $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
-    $file_content = file_get_contents( PLUGIN_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
+    $file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
     $data_variable_evarisk = array();

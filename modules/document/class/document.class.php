@@ -125,12 +125,12 @@ class document_class extends post_class {
 
 		if ( !$response[ 'status' ] && !empty( $current_element_type ) ) {
 			foreach ( $current_element_type as $document_type ) {
-				if ( is_file( PLUGIN_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
+				if ( is_file( PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
 					$response = array(
 						'status'			=> true,
 						'message'			=> '',
 						'model_id'		=> null,
-						'model_path'	=> PLUGIN_PATH . 'core/assets/document_template/' . $document_type . '.odt',
+						'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $document_type . '.odt',
 					);
 					break;
 				}
@@ -159,7 +159,7 @@ class document_class extends post_class {
 			'link'		=> '',
 		);
 
-		require_once( PLUGIN_PATH . '/core/external/odtPhpLibrary/odf.php');
+		require_once( PLUGIN_DIGIRISK_PATH . '/core/external/odtPhpLibrary/odf.php');
 
 		$digirisk_directory = $this->get_digirisk_dir_path();
 		$document_path = $digirisk_directory . '/' . $document_name;

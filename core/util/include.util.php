@@ -11,7 +11,7 @@ class include_util extends singleton_util {
 	protected function construct() {}
 
 	public function in_folder( $folder_path ) {
-		$folder_path = PLUGIN_PATH . $folder_path;
+		$folder_path = PLUGIN_DIGIRISK_PATH . $folder_path;
 		if ( !file_exists( $folder_path ) ) {
 
 		}

@@ -14,7 +14,7 @@ namespace digi;
  * Text Domain: digirisk
  */
 
-DEFINE( 'PLUGIN_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '\\' );
+DEFINE( 'PLUGIN_DIGIRISK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '\\' );
 DEFINE( 'PLUGIN_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 
 require_once( 'core/util/singleton.util.php' );

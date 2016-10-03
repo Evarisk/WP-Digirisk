@@ -47,7 +47,7 @@ class digirisk_action {
 	* Appelle le domaine de traduction
 	*/
 	public function callback_plugins_loaded() {
-		load_plugin_textdomain( "digirisk", false, PLUGIN_PATH . 'core\assets\languages\\' );
+		load_plugin_textdomain( "digirisk", false, PLUGIN_DIGIRISK_PATH . 'core\assets\languages\\' );
 	}
 }
 

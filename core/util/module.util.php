@@ -53,7 +53,7 @@ class module_util extends singleton_util {
 	public function inc_priority_file( $path_to_module_and_dependence_folder, $dependence_folder, $list_priority_file ) {
 		if ( !empty( $list_priority_file ) ) {
 		  foreach ( $list_priority_file as $file_name ) {
-				$path_file = realpath( PLUGIN_PATH . $path_to_module_and_dependence_folder . $file_name . '.' . $dependence_folder . '.php' );
+				$path_file = realpath( PLUGIN_DIGIRISK_PATH . $path_to_module_and_dependence_folder . $file_name . '.' . $dependence_folder . '.php' );
 
 				if ( !file_exists( $path_file ) ) {
 				}
