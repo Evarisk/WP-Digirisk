@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <?php if ( !empty( $danger_category_list ) ) : ?>
-	<input type="hidden" name="danger_id" value='' />
+	<input class="input-hidden-danger" type="hidden" name="risk[<?php echo $id; ?>][danger_id]" value='' />
 	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">
 		<span><?php _e( 'Sélectionner un danger', 'digirisk'); ?></span>
 		<i class="dashicons dashicons-arrow-down"></i>

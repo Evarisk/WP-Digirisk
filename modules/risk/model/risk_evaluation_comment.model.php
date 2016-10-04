@@ -16,9 +16,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class risk_evaluation_comment_model extends comment_model {
 	public function __construct( $object, $field_wanted = array() ) {
-
-
-
 		parent::__construct( $object, $field_wanted );
 	}
 

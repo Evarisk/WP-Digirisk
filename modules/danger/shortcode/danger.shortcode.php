@@ -31,8 +31,10 @@ class danger_shortcode {
 	* @return bool
 	*/
 	public function callback_dropdown_danger( $param ) {
+		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
+
 		$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
-		view_util::exec( 'danger', 'dropdown', array( 'danger_category_list' => $danger_category_list ) );
+		view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
 
 	}
 }

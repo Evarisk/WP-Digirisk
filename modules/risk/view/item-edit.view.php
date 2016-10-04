@@ -1,0 +1,18 @@
+<?php namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit; ?>
+
+<li class="wp-digi-list-item">
+	<input name="risk[<?php echo $risk->id; ?>][id]" type="hidden" value="<?php echo $risk->id; ?>" />
+	<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
+	<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
+	<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation[0]->unique_identifier; ?></span>
+	<?php do_shortcode( '[dropdown_danger id="' . $risk->id . ' type="risk"]' ); ?>
+	<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk"]'); ?>
+
+	<span class="wp-digi-action">
+		<a href="#" data-id="<?php echo $risk->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
+	</span>
+
+	<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
+</li>

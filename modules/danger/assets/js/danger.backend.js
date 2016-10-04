@@ -15,16 +15,16 @@ var digi_danger = {
 	},
 
 	event: function( $ ) {
-		digi_danger.$( document ).on( 'click', '.wp-digi-risk-item-new .wp-digi-select-list li', function( event ) { digi_danger.select_danger( event, digi_danger.$( this ) ); } );
+		digi_danger.$( document ).on( 'click', '.form-risk .wp-digi-select-list li', function( event ) { digi_danger.select_danger( event, digi_danger.$( this ) ); } );
 	},
 
 	select_danger: function( event, element ) {
-		digi_danger.$( '.wp-digi-risk-item-new input[name="danger_id"]' ).val( digi_danger.$( element ).data( 'id' ) );
-		digi_danger.$( '.wp-digi-risk-item-new toggle span' ).html( digi_danger.$( element ).find( 'img' ).attr( 'title' ) );
+		digi_danger.$( '.form-risk input.input-hidden-danger' ).val( digi_danger.$( element ).data( 'id' ) );
+		digi_danger.$( '.form-risk toggle span' ).html( digi_danger.$( element ).find( 'img' ).attr( 'title' ) );
 	},
 
 	reset_create_form: function() {
-		digi_danger.$( '.wp-digi-risk-item-new toggle' ).html( digi_danger.old_danger );
-		digi_danger.$( '.wp-digi-risk-item-new input[name="danger_id"]').val( '' );
+		digi_danger.$( '.form-risk toggle' ).html( digi_danger.old_danger );
+		digi_danger.$( '.form-risk input.input-hidden-danger' ).val( '' );
 	}
 };

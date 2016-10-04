@@ -54,6 +54,12 @@ class risk_class extends post_class {
 	* @param int $society_id L'ID de la societé
 	*/
 	public function display( $society_id ) {
+		$risk = $this->get( array( 'schema' => true ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk = $risk[0];
+		view_util::exec( 'risk', 'main', array( 'society_id' => $society_id, 'risk' => $risk ) );
+	}
+
+	public function display_risk_list( $society_id ) {
 		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
 
 		if ( count( $risk_list ) > 1 ) {
@@ -65,6 +71,6 @@ class risk_class extends post_class {
 			} );
 		}
 
-		view_util::exec( 'risk', 'main', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
+		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
 	}
 }

@@ -69,28 +69,49 @@ class comment_class extends singleton_util {
 	}
 
 	public function update( $data ) {
-		$data = new $this->model_name( (array) $data );
+		$data = (array) $data;
 
-		// Ajout du post type si il est vide
-		if ( empty( $data->type ) ) {
-			$data->type = $this->comment_type;
-			$data->status = '-34070';
-		}
+		if ( empty( $data['id'] ) ) {
+			if ( !empty( $this->before_model_post_function ) ) {
+				foreach( $this->before_model_post_function as $model_function ) {
+					$data = call_user_func( $model_function, $data );
+				}
+			}
+			
+			$data = new $this->model_name( $data, array( false ) );
 
-		if ( empty( $data->id ) ) {
+			// Ajout du post type si il est vide
+			if ( empty( $data->type ) ) {
+				$data->type = $this->comment_type;
+				$data->status = '-34070';
+			}
+
 			if ( !empty( $this->before_post_function ) ) {
 				foreach ( $this->before_post_function as $post_function ) {
 					$data = call_user_func( $post_function, $data );
 				}
 			}
 
+			if ( !empty( $data->error ) && $data->error ) {
+				return false;
+			}
+
 			$data->id = wp_insert_comment( $data->do_wp_object() );
 		}
 		else {
+			$current_data = $this->get( array( 'id' => $data['id'] ), array( false ) );
+			$current_data = $current_data[0];
+			$obj_merged = (object) array_merge((array) $current_data, (array) $data);
+			$data = new $this->model_name( (array) $obj_merged, array( false ) );
+
 			if ( !empty( $this->before_put_function ) ) {
 				foreach ( $this->before_put_function as $put_function ) {
 					$data = call_user_func( $put_function, $data );
 				}
+			}
+
+			if ( !empty( $data->error ) && $data->error ) {
+				return false;
 			}
 
 			wp_update_comment( $data->do_wp_object() );

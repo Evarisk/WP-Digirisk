@@ -15,11 +15,13 @@ class risk_evaluation_model extends comment_model {
 						'type' 			=> 'integer',
 						'meta_type'	=> 'multiple',
 						'bydefault'	=> 0,
+						'required'	=> true,
 					),
 					'equivalence' => array(
 						'type' 			=> 'integer',
 						'meta_type'	=> 'multiple',
 						'bydefault'	=> 0,
+						'required'	=> true,
 					)
 				),
 			),
@@ -46,6 +48,7 @@ class risk_evaluation_model extends comment_model {
 				'field'		=> '_wpdigi_risk_evaluation_scale',
 				'meta_type'	=> 'single',
 				'bydefault'			=> 0,
+				'required'	=> true,
 			),
 			'unique_key' => array(
 				'type' 				=> 'string',

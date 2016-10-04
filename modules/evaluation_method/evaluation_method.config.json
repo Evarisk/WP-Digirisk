@@ -7,11 +7,11 @@
 	"dependencies": {
 		"shortcode": {
 		},
+		"helper": {
+		},
 		"util": {
-
 		},
 		"model": {
-
 		},
 		"action": {
 		},

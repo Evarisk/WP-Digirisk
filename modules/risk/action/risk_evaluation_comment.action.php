@@ -16,7 +16,7 @@ class risk_evaluation_comment_action {
 	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	*/
 	public function __construct() {
-		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 2 );
+		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 1 );
 	}
 
 	/**
@@ -28,38 +28,21 @@ class risk_evaluation_comment_action {
 	*
   * @param array $_POST Les données envoyées par le formulaire
   */
- 	public function callback_save_risk_evaluation_comment( $risk_id, $risk_evaluation_id ) {
-    $list_comment = !empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment' ] : array();
-
-		if ( !empty( $_POST['risk_id'] ) ) {
-			$risk_id = (int) $_POST['risk_id'];
-		}
-
-		if ( !empty( $list_comment ) ) {
-		  foreach ( $list_comment as $key => $element ) {
-				if ( !empty( $element['comment_content'] ) ) {
-					$data = array(
-						'parent_id' => $risk_evaluation_id,
-						'post_id' => $risk_id,
-						'status' => '-34070',
-						'date' => sanitize_text_field( date_util::g()->formatte_date( $element['comment_date'] ) ),
-						'content' => sanitize_text_field( $element['comment_content'] ),
-					);
-
-					if ( !empty( $element['comment_id'] ) ) {
-						$data['id'] = (int)  $element['comment_id'];
-						$data['author_id'] = (int)  $element['author_id'];
+ 	public function callback_save_risk_evaluation_comment( $list_posted_risk ) {
+		if ( !empty( $list_posted_risk ) ) {
+		  foreach ( $list_posted_risk as $risk ) {
+				if ( isset( $risk['id'] ) ) {
+					if ( !empty( $risk['list_comment'] ) ) {
+					  foreach ( $risk['list_comment'] as $comment ) {
+							$comment['post_id'] = $_POST['parent_id'];
+							risk_evaluation_comment_class::g()->update( $comment );
+					  }
 					}
-					else {
-						$data['author_id'] = get_current_user_id();
-					}
-
-					risk_evaluation_comment_class::g()->update( $data );
 				}
-		  }
+			}
 		}
 
-		do_action( 'save_risk_evaluation_method', $risk_id, $risk_evaluation_id );
+		do_action( 'display_risk', $_POST['parent_id'] );
 	}
 }
 

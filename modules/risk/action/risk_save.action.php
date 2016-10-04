@@ -28,58 +28,44 @@ class risk_save_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_save_risk( $risk_evaluation_id ) {
-		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		$method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
+	public function callback_save_risk( $list_posted_risk ) {
+		$parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
-		if ( 0 === $method_evaluation_id ) {
-			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+		if ( !empty( $list_posted_risk ) ) {
+		  foreach ( $list_posted_risk as &$posted_risk ) {
+				if ( isset( $posted_risk['id'] ) ) {
+					$danger = danger_class::g()->get( array( 'include' => $posted_risk['danger_id'] ) );
+					$danger = $danger[0];
+
+					$image_id = $posted_risk['associated_document_id']['image'][0];
+
+					$posted_risk['title'] = $danger->name;
+					$posted_risk['parent_id'] = $parent_id;
+					$posted_risk['taxonomy']['digi-danger'][] = $danger->id;
+					$posted_risk['taxonomy']['digi-danger-category'][] = $danger->parent_id;
+
+					$risk = risk_class::g()->update( $posted_risk );
+
+					if ( !$risk ) {
+						wp_send_json_error();
+					}
+
+					$posted_risk['id'] = $risk->id;
+
+					$risk_evaluation = risk_evaluation_class::g()->update( array( 'id' => $risk->current_evaluation_id, 'post_id' => $risk->id ) );
+
+					if ( !$risk_evaluation ) {
+						wp_send_json_error();
+					}
+
+					if ( !empty( $image_id ) ) {
+						file_management_class::g()->associate_file( $image_id, $risk->id, 'risk_class' );
+					}
+			  }
+			}
 		}
 
-		$data = array( 'option' => array() );
-
-		// Si risk id existe
-		$risk_id = !empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
-		$risk = risk_class::g()->get( array( 'id' => $risk_id ) );
-
-		$file_id = !empty( $_POST['risk'][0]['associated_document_id']['image'][0] ) ? (int) $_POST['risk'][0]['associated_document_id']['image'][0] : 0;
-
-		// Charge le danger
-		$danger_id = !empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
-		$danger = danger_class::g()->get( array( 'id' => $danger_id ) );
-
-		// if ( $danger->id === 0 ) {
-		// 	wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
-		// }
-
-		// Charge l'évaluation créer dans le callback callback_save_risk de risk_evaluation_action
-		$evaluation = risk_evaluation_class::g()->get( array( 'id' => $risk_evaluation_id ) );
-
-		// Les données du risque
-		if ( $risk_id === 0 ) {
-			$risk[0]->title = $danger[0]->name;
-			$risk[0]->taxonomy['digi-danger'][] = $danger[0]->id;
-			$risk[0]->taxonomy['digi-danger-category'][] = $danger[0]->parent_id;
-			$risk[0]->parent_id = $element_id;
-			$risk[0]->author_id = get_current_user_id();
-			$risk[0]->taxonomy['digi-method'][] = $method_evaluation_id;
-			unset( $risk[0]->id );
-		}
-
-		$risk[0]->current_evaluation_id = $risk_evaluation_id;
-
-		$risk = risk_class::g()->update( $risk[0] );
-
-		if ( $risk->id !== 0 ) {
-			$evaluation[0]->post_id = $risk->id;
-			risk_evaluation_class::g()->update( $evaluation[0] );
-		}
-
-		if ( $file_id !== 0 ) {
-			file_management_class::g()->associate_file( $file_id, $risk->id, 'risk_class' );
-		}
-
-		do_action( 'save_risk_evaluation_comment', $risk->id, $risk_evaluation_id );
+		do_action( 'save_risk_evaluation_comment', $list_posted_risk );
 	}
 }
 

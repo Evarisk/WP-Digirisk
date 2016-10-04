@@ -47,6 +47,7 @@ class risk_model extends post_model {
 				'type'			=> 'integer',
 				'meta_type' => 'multiple',
 				'bydefault'	=> 0,
+				'required'	=> true,
 			),
 			'associated_document_id' => array(
 				'type'				=> 'array',

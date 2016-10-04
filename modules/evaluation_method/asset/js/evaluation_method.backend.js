@@ -29,7 +29,7 @@ var digi_evaluation_method = {
 		div.html( digi_evaluation_method.$( element ).text() );
 
 		digi_evaluation_method.$( element ).closest( 'form' ).find( '.risk-level' ).val( level );
-		digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( method_evaluation_id );
+		digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input.input-hidden-method-id' ).val( method_evaluation_id );
   },
 
   select_variable: function( event, element ) {
@@ -61,7 +61,7 @@ var digi_evaluation_method = {
 			digi_evaluation_method.$.post( window.ajaxurl, data, function( response ) {
 	      digi_evaluation_method.$( '.wpdigi-method-evaluation-render' ).hide();
 
-	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="method_evaluation_id"]' ).val( digi_evaluation_method.$( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
+	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input.input-hidden-method-id' ).val( digi_evaluation_method.$( element ).closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );
 	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-level-new' ).html( response.data.equivalence );
 				digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-new wp-digi-risk-level-' + response.data.scale );
 	      digi_evaluation_method.$( element ).closest( '.wp-digi-list-item' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );

@@ -13,7 +13,6 @@ class evaluation_method_action {
   public function __construct() {
 		add_action( 'init', array( $this, 'callback_init' ), 1 );
 		add_action( 'wp_ajax_get_scale', array( $this, 'ajax_get_scale' ) );
-    add_action( 'save_risk_evaluation_method', array( $this, 'callback_save_risk_evaluation_method' ), 10, 2 );
   }
 
 	/**
@@ -66,31 +65,6 @@ public function ajax_get_scale() {
 	$scale = scale_util::get_scale( $equivalence );
 	wp_send_json_success( array( 'equivalence' => $equivalence, 'scale' => $scale ) );
 }
-
-  /**
-  * Enregistres la méthode utilisée dans le risque.
-	* Ce callback est appelé après le callback "callback_save_risk" de "risk_evaluation_comment_action"
-  *
-	* int $_POST['method_evaluation_id'] L'ID de la méthode utilisé
-  * @param array $_POST Les données envoyées par le formulaire
-  *
-  */
-  public function callback_save_risk_evaluation_method( $risk_id, $risk_evaluation_id ) {
-		// todo A déplacer dans la class ?
-    $method_evaluation_id = !empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
-
-    if ( $method_evaluation_id === 0 ) {
-      wp_send_json_error();
-    }
-
-    $risk = risk_class::g()->get( array( 'id' => $risk_id ) );
-
-    $risk[0]->taxonomy['digi-method'][] = $method_evaluation_id;
-
-		risk_class::g()->update( $risk[0] );
-
-		do_action( 'display_risk', $risk[0]->parent_id );
-  }
 }
 
 new evaluation_method_action();
