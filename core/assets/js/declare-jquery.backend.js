@@ -24,4 +24,5 @@ jQuery( document ).ready(function( $ ) {
 	digi_document.event( $ );
 	digi_user_dashboard.event( $ );
 	digi_user_detail.event( $ );
+	digi_corrective_task.event( $ );
 } );
