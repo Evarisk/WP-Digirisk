@@ -32,10 +32,18 @@ class danger_shortcode {
 	*/
 	public function callback_dropdown_danger( $param ) {
 		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
+		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 
 		$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
-		view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
 
+		if ( $display === 'edit' ) {
+			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
+		}
+		else {
+			$risk = risk_class::g()->get( array( 'include' => $id ), array( 'danger', 'danger_category' ) );
+			$risk = $risk[0];
+			view_util::exec( 'danger', 'item', array( 'id' => $id, 'risk' => $risk ) );
+		}
 	}
 }
 

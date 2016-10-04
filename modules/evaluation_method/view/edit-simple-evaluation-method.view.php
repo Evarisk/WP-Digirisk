@@ -13,10 +13,10 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
-<input type="hidden" class="input-hidden-method-id" name="risk[<?php echo $risk->id; ?>][taxonomy][digi_method][]" value="<?php echo $risk->evaluation_method[0]->id; ?>" />
+<input type="hidden" class="input-hidden-method-id" name="risk[<?php echo $risk->id; ?>][taxonomy][digi_method][]" value="<?php echo $digi_method_id; ?>" />
 <input type="hidden" class="risk-level" name="risk[<?php echo $risk->id; ?>][evaluation][scale]" value="<?php echo $risk->evaluation[0]->scale; ?>" />
 
-<span data-target="<?php echo $target; ?>" data-parent="form-risk" class="digi-toggle wp-digi-risk-list-column-cotation" >
+<span data-target="<?php echo $target; ?>" data-parent="wp-digi-risk-item" class="digi-toggle wp-digi-risk-list-column-cotation" >
 	<div class="wp-digi-risk-level-<?php echo $risk->evaluation[0]->scale; ?> wp-digi-risk-level-new"><?php echo $risk->id !== 0 ? $risk->evaluation[0]->risk_level['equivalence'] : '0'; ?></div>
 	<ul class="wp-digi-risk-cotation-chooser digi-popup <?php echo ( $risk->id !== 0 ) ? 'simple': ''; ?>" style="display: none;" >
 		<li data-level="1" class="wp-digi-risk-level-1" >0</li>

@@ -144,7 +144,7 @@ class risk_action {
 		$risk = $risk[0];
 
 		ob_start();
-		view_util::exec( 'risk', 'list-item-edit', array( 'risk_id' => $risk_id, 'risk' => $risk ) );
+		view_util::exec( 'risk', 'item-edit', array( 'risk_id' => $risk_id, 'risk' => $risk ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
