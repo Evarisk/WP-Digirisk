@@ -40,6 +40,7 @@ class risk_evaluation_action {
 		  foreach ( $list_risk as &$risk ) {
 				if ( isset( $risk['id'] ) ) {
 					$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi_method'] );
+					$risk['evaluation']['variable'] = $risk['variable'];
 					$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
 
 					if ( !$risk['evaluation'] ) {

@@ -50,7 +50,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 	<div class="hidden wpdigi-staff">
 		<?php do_shortcode( '[digi_user_dashboard]' ); ?>
-		<a href="<?php echo admin_url( '?page=digirisk-simple-risk-evaluation' ); ?>" type="button" class="float right wp-digi-bton-fourth"><?php _e( 'Aller sur l\'application', 'digirisk' ); ?></a>
+		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ); ?>" type="button" class="float right wp-digi-bton-fourth"><?php _e( 'Aller sur l\'application', 'digirisk' ); ?></a>
 	</div>
 
 </div>

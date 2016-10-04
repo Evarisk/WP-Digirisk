@@ -20,6 +20,7 @@ class digi_comment_class extends singleton_util {
 	protected function construct() {}
 
 	public function display( $param ) {
+		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 		$type = !empty( $param ) && !empty( $param['type'] ) ? $param['type'] : '';
 		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
 
@@ -30,18 +31,17 @@ class digi_comment_class extends singleton_util {
 		$model_name = '\digi\\' . $type . '_class';
 
 		if ( $id !== 0 ) {
-			$element = $model_name::g()->get( array( 'include' => $id ) );
+			$element = $model_name::g()->get( array( 'include' => $id ), array( 'comment' ) );
 			$element = $element[0];
+
 		}
 		else {
 			$element = $model_name::g()->get( array( 'schema' => true ) );
 			$element = $element[0];
+			$element->comment = comment_class::g()->get( array( 'schema' => true ) );
 		}
 
-		$comment_schema = comment_class::g()->get( array( 'schema' => true ) );
-		$comment_schema = $comment_schema[0];
-
-		view_util::exec( 'comment', 'main', array( 'comment_schema' => $comment_schema, 'element' => $element, 'type' => $type ) );
+		view_util::exec( 'comment', 'main', array( 'element' => $element, 'type' => $type, 'display' => $display ) );
 	}
 }
 

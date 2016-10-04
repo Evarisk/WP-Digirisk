@@ -34,7 +34,7 @@ class risk_evaluation_comment_action {
 				if ( isset( $risk['id'] ) ) {
 					if ( !empty( $risk['list_comment'] ) ) {
 					  foreach ( $risk['list_comment'] as $comment ) {
-							$comment['post_id'] = $_POST['parent_id'];
+							$comment['post_id'] = $risk['id'];
 							risk_evaluation_comment_class::g()->update( $comment );
 					  }
 					}

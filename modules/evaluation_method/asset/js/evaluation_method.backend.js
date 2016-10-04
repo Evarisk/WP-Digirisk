@@ -36,7 +36,7 @@ var digi_evaluation_method = {
 		if ( digi_evaluation_method.$( element ).data( 'seuil-id' ) != 'undefined' ) {
 			digi_evaluation_method.$( '.wpdigi-method-evaluation-render .row li[data-variable-id="' + digi_evaluation_method.$( element ).data( 'variable-id' ) + '"]' ).removeClass( 'active' );
 			digi_evaluation_method.$( element ).addClass( 'active' );
-			digi_evaluation_method.$( '.wpdigi-method-evaluation-render input[name="variable[' + digi_evaluation_method.$( element ).data( 'variable-id' ) + ']"]' ).val( digi_evaluation_method.$( element ).data( 'seuil-id' ) );
+			digi_evaluation_method.$( '.wpdigi-method-evaluation-render input.variable-' + digi_evaluation_method.$( element ).data( 'variable-id' ) ).val( digi_evaluation_method.$( element ).data( 'seuil-id' ) );
 		}
   },
 
