@@ -1,4 +1,4 @@
-<?php
+<?php namespace digi;
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class corrective_task_action {
@@ -35,7 +35,7 @@ class corrective_task_action {
 			return '<input type="hidden" name="parent_id" value="' . $_GET['id'] . '" />';
 		} );
 
-		require( CORRECTIVE_TASK_PATH . '/view/form.view.php' );
+		view_util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
 		wp_die();
 	}
 
@@ -70,8 +70,7 @@ class corrective_task_action {
 
 		$custom_class = 'wpeo-task-point-sortable';
 		ob_start();
-		require_once( wpeo_template_01::get_template_part( WPEO_POINT_DIR, WPEO_POINT_TEMPLATES_MAIN_DIR, 'backend', 'point' ) );
-
+		require( WPEO_POINT_TEMPLATES_MAIN_DIR . '/backend/point.php' );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }

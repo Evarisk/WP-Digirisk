@@ -30,6 +30,9 @@ class comment_class extends singleton_util {
 		if ( !empty( $args['id'] ) ) {
 			$array_comment[] = get_comment( $args['id'], ARRAY_A );
 		}
+		else if( isset( $args['schema'] ) ) {
+			$array_comment[] = array();
+		}
 		else {
 			$array_comment = get_comments( $args );
 		}
@@ -77,7 +80,7 @@ class comment_class extends singleton_util {
 					$data = call_user_func( $model_function, $data );
 				}
 			}
-			
+
 			$data = new $this->model_name( $data, array( false ) );
 
 			// Ajout du post type si il est vide
