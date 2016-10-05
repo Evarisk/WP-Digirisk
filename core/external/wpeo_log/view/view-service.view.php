@@ -85,7 +85,7 @@ $total_ms = 0;
 						<td><?php echo $value[5]; ?></td>
 				    <td><?php echo !empty( $user_email ) ? esc_html( $user_email ) : 'Aucun utilisateur'; ?></td>
 				    <td><?php echo !empty( $value[3] ) ? esc_html( $value[3] ) : __( 'Empty', 'digirisk' ); ?></td>
-				    <td><?php echo !(empty($value[4])) ? '<pre>' . print_r( json_decode( $value[4], true ), true ) . '</pre>' : 'No data'; ?></td>
+				    <td><?php echo !(empty($value[4])) ? '<pre>' . substr( print_r( json_decode( $value[4], true ), true ), 0, 100 ) . '...</pre>' : 'No data'; ?></td>
 				</tr>
 			<?php endforeach; ?>
 		<?php else: ?>

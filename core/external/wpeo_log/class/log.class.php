@@ -25,7 +25,7 @@ class log_class extends singleton_util {
 
 			if ( !empty( self::$timestart[$custom_name] ) ) {
 				self::$timeend[$custom_name] = microtime(true);
-				$ms = number_format( (self::$timeend[$custom_name] - self::$timestart[$custom_name]), \config_util::$init['wpeo_log']->number_decimal_ms );
+				$ms = number_format( (self::$timeend[$custom_name] - self::$timestart[$custom_name]), config_util::$init['wpeo_log']->number_decimal_ms );
 				unset(self::$timestart[$custom_name]);
 			}
 
@@ -55,7 +55,7 @@ class log_class extends singleton_util {
 			// Le niveau du log
 			$output_to_log .= $criticality;
 
-			if ( !empty( $message ) ) {
+			if ( !empty( $output_to_log ) ) {
 				self::write_to_file( $service, $service_name, $output_to_log, $criticality );
 			}
 		}
