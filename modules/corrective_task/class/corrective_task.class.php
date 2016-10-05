@@ -1,4 +1,4 @@
-<?php namespace digi;
+<?php 
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
