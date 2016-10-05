@@ -10,11 +10,6 @@
 	li {
 		margin: 0;
 	}
-	.wp-digi-list {
-		span {
-			display: table-cell;
-		}
-	}
 	.wp-digi-table-header {
 		background: @c2 !important;
 		color: #fff !important;
@@ -125,12 +120,18 @@
 			position: absolute;
 			top: 0;
 			width: 100%;
+			max-width: 50px;
 			height: 100%;
 			color: rgba(0,0,0,0.2);
 			.transition;
 			display: flex;
 			&:before {
 				margin: auto;
+			}
+			&.thickbox {
+				&:hover {
+					color: rgba(0,0,0,0.6);
+				}
 			}
 			&.wp-digi-action-delete {
 				&:hover {
@@ -289,7 +290,7 @@
 	}
 	/* Action */
 	.wp-digi-action {
-		width: 100px !important;
+		width: 150px !important;
 		&.wp-digi-action-new {
 			text-align: right;
 			.progress-button {
@@ -308,8 +309,14 @@
 		.wp-digi-action-load, .wp-digi-action-delete {
 			width: 50% !important;
 		}
+		a:first-child {
+			left: 0;
+		}
+		&:nth-child(2) {
+			left: 50px;
+		}
 		.wp-digi-action-delete {
-			left: 50%;
+			right: 0;
 		}
 		.wp-digi-action-new .progress-button {
 			width: 50px;

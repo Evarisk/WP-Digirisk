@@ -35,6 +35,7 @@ class digirisk_action {
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
 		wp_enqueue_media();
+		add_thickbox();
 	}
 
 	public function callback_admin_enqueue_scripts() {
