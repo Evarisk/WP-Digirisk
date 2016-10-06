@@ -21,7 +21,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>
 		<input type="text" value="<?php echo $element->title; ?>" name="establishment_name" class="wp-digi-input-editable" />
 	<?php else: ?>
-		<span><?php echo $element->title; ?></span>
+		<span title="<?php echo $element->title; ?>"><?php echo $element->title; ?></span>
 	<?php endif; ?>
 
 </span>
