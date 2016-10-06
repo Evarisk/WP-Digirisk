@@ -70,6 +70,10 @@ class export_action {
 
 		if ( !empty( $list_group ) ) {
 		  foreach ( $list_group as $element ) {
+				uasort( $element->list_workunit, function( $a, $b ) {
+					return ( $a->id < $b->id ) ? -1 : 1;
+				});
+
 				$element_to_export = new wpeo_export_class( $element );
 				$list_data_exported[] = $element_to_export->export();
 		  }
