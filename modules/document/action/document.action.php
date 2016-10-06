@@ -96,12 +96,18 @@ class document_action {
 	function ajax_regenerate_document() {
 		check_ajax_referer( 'wpdigi_regenerate_document' );
 
+		$model_name = !empty( $_POST['model_name'] ) ? sanitize_text_field( $_POST['model_name'] ) : '';
+		if ( empty( $model_name ) ) {
+			wp_send_json_error();
+		}
+		$model_name = '\digi\\' . $model_name . '_class';
+
 		$document_id = !empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( $_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
 		if ( !empty( $document_id ) ) {
 			$parent_id = !empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( $_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
 			$parent_element = society_class::g()->show_by_type( $parent_id );
 
-			$current_document = document_class::g()->get( array( 'post__in' => array( $document_id ), ) );
+			$current_document = $model_name::g()->get( array( 'post__in' => array( $document_id ), ) );
 			$model_infos = document_class::g()->get_model_for_element( array( 'document_unique' ) );
 		 	$response =	document_class::g()->generate_document( $model_infos[ 'model_path' ], $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
 			wp_send_json_success( $response );

@@ -98,7 +98,6 @@ class constructor_data_class extends helper_class {
 						if ( $child_def['field'] == 'include' || $child_def['field'] == 'comment__in' && !is_array( $value ) ) {
 							$value = (array) $value;
 						}
-
 						$list_child = $child_def['controller']::g()->get( array( $child_def['field'] => $value ), $field_wanted );
 					}
 					else {

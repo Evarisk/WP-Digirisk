@@ -20,6 +20,7 @@ var digi_document = {
 			action: 'wpdigi_regenerate_document',
 			element_id: digi_document.$( element ).data( 'id' ),
 			parent_id: digi_document.$( element ).data( 'parent-id' ),
+			model_name: digi_document.$( element ).data( 'model'),
 			_wpnonce: digi_document.$( element ).data( 'nonce' ),
 		};
 		digi_document.$.post( window.ajaxurl, data, function() {

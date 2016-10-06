@@ -66,7 +66,7 @@ class document_class extends post_class {
 		$list_document = array();
 
 		if ( !empty( $list_document_id ) ) {
-			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( false ) );
+			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( 'category' ) );
 		}
 
 		view_util::exec( 'document', 'printed-list', array( 'list_document' => $list_document, 'list_document_id' => $list_document_id ) );
@@ -80,62 +80,14 @@ class document_class extends post_class {
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
 	public function get_model_for_element( $current_element_type ) {
-		// if ( !is_array( $current_element_type ) ) {
-		// 	return false;
-		// }
+		if ( in_array( 'zip', $current_element_type ) ) return null;
 
 		$response = array(
 			'status'		=> false,
 			'message'		=> __( 'An error occured while getting model to use for generation', 'digirisk' ),
 			'model_id'		=> null,
-			'model_path'	=> null,
+			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
 		);
-
-		$get_model_args = array(
-			'post_type' 	=> $this->get_post_type(),
-			'post_status'	=> 'inherit',
-			'tax_query' => array(
-				array(
-					'taxonomy' => $this->attached_taxonomy_type,
-					'field'    => 'slug',
-					'terms'    => wp_parse_args( $current_element_type, array( 'default_model' ) ),
-					'operator' => 'AND',
-				),
-			),
-		);
-		$element_sheet_default_model = new \WP_Query( $get_model_args );
-		if ( $element_sheet_default_model->have_posts() ) {
-			if ( !empty( $element_sheet_default_model->post_count ) && 2 <= $element_sheet_default_model->post_count ) {
-				foreach ( $element_sheet_default_model->posts as $attachment ) {
-					//todo: if there are several model which one to choose
-				}
-			}
-			else {
-				$workunit_model_to_use = get_attached_file( $element_sheet_default_model->post->ID );
-				if ( is_file( $workunit_model_to_use ) ) {
-					$response = array(
-						'status'		=> true,
-						'message'		=> '',
-						'model_id'		=> $element_sheet_default_model->post->ID,
-						'model_path'	=> $workunit_model_to_use,
-					);
-				}
-			}
-		}
-
-		if ( !$response[ 'status' ] && !empty( $current_element_type ) ) {
-			foreach ( $current_element_type as $document_type ) {
-				if ( is_file( PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $document_type . '.odt' ) ) {
-					$response = array(
-						'status'			=> true,
-						'message'			=> '',
-						'model_id'		=> null,
-						'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $document_type . '.odt',
-					);
-					break;
-				}
-			}
-		}
 
 		return $response;
 	}
@@ -179,7 +131,7 @@ class document_class extends post_class {
 		if ( !empty( $document_content ) ) {
 			/**	Lecture du contenu à écrire dans le document / Read the content to write into document	*/
 			foreach ( $document_content as $data_key => $data_value ) {
-				$DigiOdf = $this->set_document_data( $data_key, $data_value, $DigiOdf );
+				$DigiOdf = $this->set_document_meta( $data_key, $data_value, $DigiOdf );
 			}
 		}
 
@@ -209,7 +161,7 @@ class document_class extends post_class {
 	*
 	* @return object Le document courant
 	*/
-	public function set_document_data( $data_key, $data_value, $current_odf ) {
+	public function set_document_meta( $data_key, $data_value, $current_odf ) {
 		// if ( !is_string( $data_key ) || !is_string( $data_value ) || !is_object( $current_odf ) ) {
 		// 	return false;
 		// }
@@ -233,12 +185,12 @@ class document_class extends post_class {
 								if ( is_array( $segment_detail_value ) && array_key_exists( 'type', $segment_detail_value ) && ( 'sub_segment' == $segment_detail_value[ 'type' ] ) ) {
 									foreach ( $segment_detail_value[ 'value' ] as $sub_segment_data ) {
 										foreach ( $sub_segment_data as $sub_segment_data_key => $sub_segment_data_value ) {
-											$segment->$segment_detail_key = $this->set_document_data( $sub_segment_data_key, $sub_segment_data_value, $segment );
+											$segment->$segment_detail_key = $this->set_document_meta( $sub_segment_data_key, $sub_segment_data_value, $segment );
 										}
 									}
 								}
 								else {
-									$segment = $this->set_document_data( $segment_detail_key, $segment_detail_value, $segment );
+									$segment = $this->set_document_meta( $segment_detail_key, $segment_detail_value, $segment );
 								}
 							}
 
@@ -393,11 +345,11 @@ class document_class extends post_class {
 	 *
 	 * @param object $element The element to create the document for / L'élément pour lequel il faut créer le document
 	 * @param array $document_type The document's categories / Les catégories auxquelles associer le document généré
-	 * @param array $document_data Datas to write into the document template / Les données a écrire dans le modèle de document
+	 * @param array $document_meta Datas to write into the document template / Les données a écrire dans le modèle de document
 	 *
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
-	public function create_document( $element, $document_type, $document_data ) {
+	public function create_document( $element, $document_type, $document_meta ) {
 		if ( !empty( $document_type ) && !empty( $document_type[0] ) && class_exists( '\digi\\' . $document_type[0] . '_model' ) ) {
 			$this->set_model( '\digi\\' . $document_type[0] . '_model' );
 		}
@@ -442,7 +394,7 @@ class document_class extends post_class {
 
   	if ( null !== $model_to_use ) {
 			$path = $element->type. '/' . $element->id . '/' . $response[ 'filename' ];
-  		$document_creation = $this->generate_document( $model_to_use, $document_data, $path );
+  		$document_creation = $this->generate_document( $model_to_use, $document_meta, $path );
 
   		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
   			$filetype = wp_check_filetype( $document_creation[ 'link' ], null );
@@ -475,7 +427,7 @@ class document_class extends post_class {
 			'date'									=> current_time( 'mysql', 0 ),
 			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
 			'model_id' 							=> $model_to_use,
-			'_wpdigi_document_data' => $document_data,
+			'document_meta' => $document_meta,
 			'version'								=> $document_revision,
   	);
 

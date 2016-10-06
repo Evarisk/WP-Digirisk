@@ -20,10 +20,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		<div class="form-element"><label><?php _e( 'Téléphone portable', 'digirisk' ); ?><input type="text" value="" name="portable" /></label></div>
 	</div>
 	<div class="gridwrapper2">
-		<div class="form-element"><label><?php _e( 'Methodology', 'digirisk' ); ?><textarea name="methodologie" ><?php echo $document_unique->_wpdigi_document_data['methodologie']; ?></textarea></label></div>
-		<div class="form-element"><label><?php _e( 'Sources', 'digirisk' ); ?><textarea name="sources" ><?php echo $document_unique->_wpdigi_document_data['sources']; ?></textarea></label></div>
-		<div class="form-element"><label><?php _e( 'Important note', 'digirisk' ); ?><textarea name="remarqueImportante" ><?php echo $document_unique->_wpdigi_document_data['remarqueImportante']; ?></textarea></label></div>
-		<div class="form-element"><label><?php _e( 'Location', 'digirisk' ); ?><textarea name="dispoDesPlans" ><?php echo $document_unique->_wpdigi_document_data['dispoDesPlans']; ?></textarea></label></div>
+		<div class="form-element"><label><?php _e( 'Methodology', 'digirisk' ); ?><textarea name="methodologie" ><?php echo $document_unique->document_meta['methodologie']; ?></textarea></label></div>
+		<div class="form-element"><label><?php _e( 'Sources', 'digirisk' ); ?><textarea name="sources" ><?php echo $document_unique->document_meta['sources']; ?></textarea></label></div>
+		<div class="form-element"><label><?php _e( 'Important note', 'digirisk' ); ?><textarea name="remarqueImportante" ><?php echo $document_unique->document_meta['remarqueImportante']; ?></textarea></label></div>
+		<div class="form-element"><label><?php _e( 'Location', 'digirisk' ); ?><textarea name="dispoDesPlans" ><?php echo $document_unique->document_meta['dispoDesPlans']; ?></textarea></label></div>
 	</div>
 
 	<button class="wp-digi-sheet-generation-button wp-digi-bton-fifth dashicons-before dashicons-share-alt2 wp-digi-duer-generation-button " ><?php _e( 'Generate DUER', 'digirisk' ); ?></button>

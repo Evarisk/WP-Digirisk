@@ -60,6 +60,7 @@ class term_class extends singleton_util {
 		}
 		else if ( !empty( $args['post_id'] ) ) {
 			$array_term = wp_get_post_terms( $args['post_id'], $this->taxonomy, $term_final_args );
+
 			if ( empty( $array_term ) ) $array_term[] = array();
 		}
 		else {

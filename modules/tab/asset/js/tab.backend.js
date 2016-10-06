@@ -26,7 +26,7 @@ var digi_tab = {
 			};
 			digi_tab.$.post( window.ajaxurl, data, function( response ){
         digi_tab.$( ".wp-digi-content" ).removeClass( "wp-digi-bloc-loading" );
-				digi_tab.$( ".wp-digi-content" ).html( response.data.template );
+				digi_tab.$( ".wp-digi-content" ).replaceWith( response.data.template );
 				window.digi_global.init( digi_tab.$ );
 				window.digi_search.event( digi_tab.$ );
 

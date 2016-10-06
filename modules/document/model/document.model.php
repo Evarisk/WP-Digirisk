@@ -12,6 +12,14 @@ class document_model extends post_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
+		$this->model['child'] = array(
+			'category' => array(
+				'type'				=> 'taxonomy',
+				'controller'	=> '\digi\term_attachment_class',
+				'field'				=> 'post_id',
+			)
+		);
+
 		$this->model['mime_type'] = array(
 			'type' 				=> 'string',
 			'meta_type'		=> 'single',

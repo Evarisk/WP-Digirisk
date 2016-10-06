@@ -12,10 +12,10 @@ class document_unique_model extends document_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
-		$this->model['_wpdigi_document_data'] = array(
+		$this->model['document_meta'] = array(
 			'type'				=> 'array',
 			'meta_type' 	=> 'single',
-			'field'				=> '_wpdigi_document_data',
+			'field'				=> 'document_meta',
 			'child' => array(
 				'identifiantElement' => array(
 					'type' => 'string'
@@ -80,124 +80,47 @@ Dans ce document vous trouverez:
 				),
 				'elementParHierarchie' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'risq' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'risq48' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'risq51' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'risq80' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'risqueFiche' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'planDactionRisq' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'planDactionRisq48' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'planDactionRisq51' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'planDactionRisq80' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				),
 				'planDaction' => array(
 					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
+					'meta_type' 	=> 'multiple',
 				)
 			)
 		);
