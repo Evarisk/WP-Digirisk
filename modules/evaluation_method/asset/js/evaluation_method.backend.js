@@ -9,6 +9,7 @@ var digi_evaluation_method = {
   	digi_evaluation_method.$( document ).on( 'click', '.wpdigi-method-evaluation-render .row li', function( event ) { digi_evaluation_method.select_variable( event, digi_evaluation_method.$( this ) ); } );
     digi_evaluation_method.$( document ).on( 'click', '.wpdigi-method-evaluation-render .wp-digi-bton-fourth', function( event ) { digi_evaluation_method.close_modal( digi_evaluation_method.$( this ) ); } );
 		digi_evaluation_method.$( document ).on( 'click', '.wpdigi-method-evaluation-render .dashicons-no-alt', function( event ) { digi_evaluation_method.close_modal( digi_evaluation_method.$( '.wpdigi-method-evaluation-render .wp-digi-bton-fourth' ).click() ); } );
+		digi_evaluation_method.$( document ).on( 'click', '.wp-digi-eval-evarisk', function( event ) { digi_evaluation_method.close_model_mask( event ); } );
 	},
 
 	keyup: function( event, element ) {
@@ -72,5 +73,11 @@ var digi_evaluation_method = {
 			digi_evaluation_method.$( '.wpdigi-method-evaluation-render' ).hide();
 		}
 		return false;
-  }
+	},
+
+	close_model_mask: function( event ) {
+		if ( event.target.className === 'wp-digi-eval-evarisk' ) {
+			digi_evaluation_method.$( '.wpdigi-method-evaluation-render' ).hide();
+		}
+	}
 };
