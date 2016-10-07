@@ -25,6 +25,7 @@ class document_action {
 
     add_action( 'wp_ajax_wpdigi_delete_sheet', array( $this, 'ajax_delete_sheet' ) );
     add_action( 'wp_ajax_wpdigi_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
+		add_action( 'wp_ajax_paginate_document', array( $this, 'ajax_paginate_document' ) );
   }
 
 	/**
@@ -119,6 +120,12 @@ class document_action {
 		wp_send_json_error( array( 'message' => __( 'An error occured while trying to generate the document', 'digirisk' ), ) );
 	}
 
+	public function ajax_paginate_document() {
+		$element = society_class::g()->show_by_type( $_REQUEST['element_id'] );
+		document_class::g()->display_document_list( $element );
+
+		wp_die();
+	}
 }
 
 new document_action();

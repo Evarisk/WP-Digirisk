@@ -9,7 +9,7 @@ var digi_document = {
 
 		digi_document.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-delete", function( event ) { digi_document.delete_element_sheet( event, digi_document.$( this ) ); } );
 		digi_document.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-regenerate", function( event ) { digi_document.regenerate_document( event, digi_document.$( this ) ); } );
-
+		digi_document.$( document ).on( 'click', '.wp-digi-doc-pagination a', function( event ) { digi_document.pagination( event, digi_document.$( this ) ); } );
 	},
 
 
@@ -76,5 +76,23 @@ var digi_document = {
 	        resetForm: true,
 	    };
 		digi_document.$( "#wpdigi-save-element-form" ).ajaxSubmit( options );
+	},
+
+	pagination: function( event, element ) {
+		event.preventDefault();
+
+		var href = digi_evaluator.$( element ).attr( 'href' ).split( '&' );
+		var next_page = href[1].replace('current_page=', '');
+		var element_id = href[2].replace('element_id=', '');
+
+		var data = {
+			action: 'paginate_document',
+			element_id: element_id,
+			next_page: next_page
+		};
+
+		digi_evaluator.$.post( window.ajaxurl, data, function( template ) {
+			digi_evaluator.$( '.doc-content' ).replaceWith( template );
+		} );
 	}
 };
