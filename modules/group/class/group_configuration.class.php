@@ -18,7 +18,8 @@ class group_configuration_class extends singleton_util {
   }
 
 	public function save( $data ) {
-		group_class::g()->update( $data );
+		$group = group_class::g()->update( $data );
+		return $group;
 	}
 }
 

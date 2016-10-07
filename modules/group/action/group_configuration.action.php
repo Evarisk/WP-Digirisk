@@ -36,10 +36,10 @@ class wpdigi_group_configuration_action {
   public function callback_save_groupment_configuration() {
     check_ajax_referer( 'save_groupment_configuration' );
 
-		group_configuration_class::g()->save( $_POST['groupment'] );
-		address_class::g()->save( $_POST['address'] );
+		$group = group_configuration_class::g()->save( $_POST['groupment'] );
+		$address = address_class::g()->save( $_POST['address'] );
 
-    wp_send_json_success();
+    wp_send_json_success( array( 'group' => $group, 'address' => $address ) );
   }
 }
 
