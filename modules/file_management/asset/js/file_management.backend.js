@@ -31,7 +31,7 @@ var file_management = {
   },
 
   load_media_upload: function( element, post_id ) {
-    file_management.file_frame = window.wp.media.frames.file_frame = window.wp.media( {
+    file_management.file_frame = new window.wp.media.view.MediaFrame.Post( {
       title: file_management.$( element ).data( 'uploader_title' ),
       button: {
         text: file_management.$( element ).data( 'uploader_button_text' ),
@@ -39,7 +39,7 @@ var file_management = {
       multiple: false
     } );
 		file_management.file_frame.el.className += ' digi-upload-' + post_id;
-    file_management.file_frame.on( "select", function() { file_management.selected_file( element ); } );
+    file_management.file_frame.on( "insert", function() { file_management.selected_file( element ); } );
     file_management.open_media_upload();
   },
 
