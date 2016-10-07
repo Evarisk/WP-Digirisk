@@ -5,10 +5,8 @@
 	"description": "Le module gérant les tâches correctives",
 	"path": "modules/corrective_task/",
 	"dependencies": {
-		"class": {
-		},
-		"action": {
-		},
+		"class": {},
+		"action": {},
 		"filter": {}
 	}
 }

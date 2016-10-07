@@ -1,5 +1,7 @@
-<?php namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php
+namespace digi;
+if ( !defined( 'ABSPATH' ) ) exit;
+?>
 
 <?php if ( !empty( $element->comment ) ) : ?>
 	<?php foreach ( $element->comment as $key => $comment ) : ?>

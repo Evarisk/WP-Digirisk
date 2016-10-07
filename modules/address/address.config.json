@@ -5,11 +5,8 @@
 	"description": "Le module gérant les adresses",
 	"path": "modules/address/",
 	"dependencies": {
-		"model": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"model": {},
+		"class": {},
+		"action": {}
 	}
 }

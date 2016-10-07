@@ -8,7 +8,6 @@ class corrective_task_action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_open_task', array( $this, 'callback_open_task' ) );
-
 		add_action( 'wp_ajax_create_task_and_point', array( $this, 'callback_create_task_and_point' ) );
 	}
 

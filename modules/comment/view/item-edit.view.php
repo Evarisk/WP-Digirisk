@@ -1,7 +1,8 @@
-<?php namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php
+namespace digi;
+if ( !defined( 'ABSPATH' ) ) exit;
+?>
 
-<!-- Ajouter un commentaire -->
 <li>
 	<?php
 	$userdata = get_userdata( get_current_user_id() );

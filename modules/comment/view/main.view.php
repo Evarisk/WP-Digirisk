@@ -1,5 +1,7 @@
-<?php namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php
+namespace digi;
+if ( !defined( 'ABSPATH' ) ) exit;
+?>
 
 <span class="wp-digi-<?php echo $type; ?>-comment" >
 	<ul>

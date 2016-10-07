@@ -3,8 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class address_action {
-  public function __construct() {
-  }
+  public function __construct() {}
 }
 
 new address_action();
