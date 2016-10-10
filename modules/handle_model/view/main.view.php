@@ -3,9 +3,18 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 ?>
+	<ul>
+	<?php
 
-<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="Document unique" type="document_unique"]' ); ?>
-<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="Fiche de groupement" type="fiche_de_groupement"]' ); ?>
-<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="Fiche de poste" type="fiche_de_poste"]' ); ?>
-<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="Affichage légal A3" type="affichage_legal_A3"]' ); ?>
-<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="Affichage légal A4" type="affichage_legal_A4"]' ); ?>
+	if ( !empty( $list_type_document ) ):
+	  foreach ( $list_type_document as $key => $element ):
+			?>
+			<li>
+				<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="' . $element . '" type="' . $key . '"]' ); ?>
+				<a href="<?php echo $list_document_default[$key]['model_path']; ?>">Télécharger le modèle</a>
+			</li>
+			<?php
+		endforeach;
+	endif;
+	?>
+	</ul>
