@@ -34,6 +34,7 @@ class file_management_action {
 
     $id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
     $thumbnail = !empty( $_POST['thumbnail'] ) ? (bool) $_POST['thumbnail'] : false;
+    $action = !empty( $_POST['action'] ) ? (bool) $_POST['action'] : 'eo_associate_file';
     $file_id = !empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
 		$type = str_replace( 'digi-', '', $_POST['object_name'] );
 		$type_class = $type . '_class';
@@ -48,7 +49,7 @@ class file_management_action {
 		$element = $element[0];
 
     ob_start();
-		view_util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type, 'element' => $element ) );
+		view_util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type, 'element' => $element ) );
     wp_send_json_success( array( 'template' => ob_get_clean() ));
   }
 }

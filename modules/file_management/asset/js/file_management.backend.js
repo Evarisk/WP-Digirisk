@@ -20,6 +20,7 @@ var file_management = {
     file_management.element_id = file_management.$( element ).data( 'id' );
     file_management._wpnonce = file_management.$( element ).data( 'nonce' );
     file_management.object_name = file_management.$( element ).data( 'object-name' );
+    file_management.action = file_management.$( element ).data( 'action' );
     file_management.have_thumbnail = file_management.$( element ).hasClass( 'wp-digi-element-thumbnail' ) ? true : false;
     window.wp.media.model.settings.post.id = file_management.$( element ).data( 'id' );
     if( file_management.$( element ).find( '.wpeo-gallery' ).length === 0 ) {
@@ -77,7 +78,7 @@ var file_management = {
 
 		file_management.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
     var data = {
-      action: "eo_associate_file",
+      action: file_management.action,
       file_id: selected_file_id,
       _wpnonce: file_management._wpnonce,
       element_id: file_management.element_id,

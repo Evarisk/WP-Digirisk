@@ -31,6 +31,7 @@ class file_management_shortcode {
 	public function callback_eo_upload_button( $param ) {
     $id = 0;
     $type = "";
+		$action = !empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
 
     if ( !empty( $param['id'] ) ) {
       $id = (int) $param['id'];
@@ -47,7 +48,7 @@ class file_management_shortcode {
 			$element = null;
 		}
 
-		view_util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'type' => $type, 'element' => $element ) );
+		view_util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'type' => $type, 'action' => $action, 'element' => $element ) );
 	}
 
 	/**
@@ -66,10 +67,12 @@ class file_management_shortcode {
 		$element_id = $param['element_id'];
 		$element = society_class::g()->show_by_type( $element_id, array( false ) );
 
+		$action = !empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
+
 		$list_id = !empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
 
-		view_util::exec( 'file_management', 'gallery', array( 'param' => $param, 'element_id' => $element_id, 'element' => $element, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
+		view_util::exec( 'file_management', 'gallery', array( 'param' => $param, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
   }
 }
 
