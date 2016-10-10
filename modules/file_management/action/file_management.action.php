@@ -70,8 +70,8 @@ class file_management_action {
 		}
 
 		ob_start();
-		view_util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		do_shortcode( '[digi-handle-model]' );
+		wp_send_json_success( array( 'type' => 'set_model', 'template' => ob_get_clean() ) );
 	}
 }
 

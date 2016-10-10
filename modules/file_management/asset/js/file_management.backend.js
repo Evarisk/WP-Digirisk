@@ -91,7 +91,12 @@ var file_management = {
     };
 
     file_management.$.post( window.ajaxurl, data, function( response ) {
-      file_management.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).replaceWith( response.data.template );
+			if ( response.data.type == 'set_model' ) {
+				file_management.$( '#digi-handle-model' ).replaceWith( response.data.template );
+			}
+			else {
+	      file_management.$( 'span.wpeo-upload-media[data-id="'+ file_management.element_id + '"]' ).replaceWith( response.data.template );
+			}
     });
   }
 };
