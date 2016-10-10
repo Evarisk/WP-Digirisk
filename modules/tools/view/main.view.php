@@ -8,13 +8,13 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<div class="digi-tools-main-container" >
 		<h2 class="nav-tab-wrapper">
 			<a class="nav-tab nav-tab-active" href="#" data-id="digi-data-export" ><?php _e( 'Export digirisk datas', 'digirisk' ); ?></a>
-			<a class="nav-tab nav-tab-active" href="#" data-id="digi-handle-model" ><?php _e( 'Gestion des modèles ODT', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-handle-model" ><?php _e( 'Gestion des modèles ODT', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-data-import-user" ><?php _e( 'Import user', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-method-fixer" ><?php _e( 'Correction de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
 		</h2>
 
-		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2 hidden" >
+		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2" >
 			<div class="block">
 				<?php echo do_shortcode( '[digi-export]' ); ?>
 			</div>
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		</div>
 
 
-		<div id="digi-handle-model" class="wp-digi-bloc-loader gridwrapper2" >
+		<div id="digi-handle-model" class="wp-digi-bloc-loader gridwrapper2 hidden" >
 			<?php echo do_shortcode( '[digi-handle-model]' ); ?>
 		</div>
 
