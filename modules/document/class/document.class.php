@@ -85,11 +85,17 @@ class document_class extends post_class {
 		if ( in_array( 'zip', $current_element_type ) ) return null;
 
 		$response = array(
-			'status'		=> false,
-			'message'		=> __( 'An error occured while getting model to use for generation', 'digirisk' ),
+			'status'		=> true,
+			'message'		=> __( 'Le modèle utilisé est : ' . PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt', 'digirisk' ),
 			'model_id'		=> null,
 			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
 		);
+
+		$upload_dir = wp_upload_dir();
+		if ( file_exists( $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt' ) ) {
+			$response['model_path']	= $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt';
+			$response['message'] = __( 'Le modèle utilisé est : ' . $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt', 'digirisk' );
+		}
 
 		return $response;
 	}
