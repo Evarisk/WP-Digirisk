@@ -93,7 +93,8 @@ class document_class extends post_class {
 			'status'		=> true,
 			'message'		=> __( 'Le modèle utilisé est : ' . PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt', 'digirisk' ),
 			'model_id'		=> null,
-			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
+			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt',
+			'model_url' => PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
 		);
 
 		$tax_query = array(
@@ -114,10 +115,13 @@ class document_class extends post_class {
 		$model = $list_model->posts;
 
 		if ( $model ) {
+			$upload_dir = wp_upload_dir();
+
 			$model = $model[0];
 			$attachment_file = get_attached_file( $model );
 			$response['model_path']	= $attachment_file;
-				$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file, 'digirisk' );
+			$response['model_url']	= str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file);
+			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file, 'digirisk' );
 		}
 
 

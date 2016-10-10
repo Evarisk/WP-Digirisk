@@ -11,7 +11,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 			?>
 			<li>
 				<?php do_shortcode( '[eo_upload_button action="eo_set_model" title="' . $element . '" type="' . $key . '"]' ); ?>
-				<a href="<?php echo $list_document_default[$key]['model_path']; ?>">Télécharger le modèle</a>
+				<a href="<?php echo $list_document_default[$key]['model_url']; ?>">Télécharger le modèle</a>
 			</li>
 			<?php
 		endforeach;

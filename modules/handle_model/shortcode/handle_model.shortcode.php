@@ -24,7 +24,7 @@ class handle_model_shortcode {
 	private $list_type_document = array(
 		'document_unique' => 'Document unique',
 		'fiche_de_groupement' => 'fiche_de_groupement',
-		'fiche_de_travail' => 'Fiche de travail',
+		'fiche_de_poste' => 'Fiche de poste',
 		'affichage_legal_A3' => 'Affichage légal A3',
 		'affichage_legal_A4' => 'Affichage légal A4'
 	);
