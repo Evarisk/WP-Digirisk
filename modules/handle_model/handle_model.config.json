@@ -1,0 +1,17 @@
+{
+	"name": "Handle model",
+	"slug": "handle_model",
+	"version": "1.0.0.0",
+	"description": "Le module gérant les modèles des documents ODT",
+	"path": "modules/handle_model/",
+	"dependencies": {
+		"filter": {
+		},
+		"shortcode": {
+		},
+		"class": {
+		},
+		"action": {
+		}
+	}
+}

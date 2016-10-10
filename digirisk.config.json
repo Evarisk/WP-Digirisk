@@ -8,32 +8,47 @@
 		"core/external/wpeo_model/wpeo_model.config.json",
 		"core/external/wpeo_export/wpeo_export.config.json",
 		"core/core.config.json",
-		"modules/society/society.config.json",
-		"modules/group/group.config.json",
-		"modules/document/document.config.json",
-		"modules/workunit/workunit.config.json",
-		"modules/tab/tab.config.json",
-		"modules/risk/risk.config.json",
-		"modules/danger/danger.config.json",
-		"modules/recommendation/recommendation.config.json",
-		"modules/evaluation_method/evaluation_method.config.json",
-		"modules/epi/epi.config.json",
+
 		"modules/address/address.config.json",
-		"modules/legal_display/legal_display.config.json",
-		"modules/user/user.config.json",
+
+		"modules/comment/comment.config.json",
+		"modules/corrective_task/corrective_task.config.json",
+
+		"modules/danger/danger.config.json",
+		"modules/document/document.config.json",
+
+		"modules/epi/epi.config.json",
+		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
+		"modules/export_import/export_import.config.json",
+
 		"modules/file_management/file_management.config.json",
+
+		"modules/handle_model/handle_model.config.json",
+
+		"modules/group/group.config.json",
+
 		"modules/installer/installer.config.json",
+
+		"modules/legal_display/legal_display.config.json",
+
+		"modules/recommendation/recommendation.config.json",
+		"modules/risk/risk.config.json",
+
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",
 		"modules/sheet_groupment/sheet_groupment.config.json",
+		"modules/society/society.config.json",
+
+		"modules/tab/tab.config.json",
 		"modules/third/third.config.json",
-		"modules/export_import/export_import.config.json",
-		"modules/tools/tools.config.json",
 		"modules/transfer_data/transfer_data.config.json",
+		"modules/tools/tools.config.json",
+
+		"modules/user/user.config.json",
 		"modules/user_dashboard/user_dashboard.config.json",
-		"modules/comment/comment.config.json",
-		"modules/corrective_task/corrective_task.config.json"
+
+		"modules/workunit/workunit.config.json"
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
