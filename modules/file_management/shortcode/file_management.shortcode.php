@@ -32,6 +32,7 @@ class file_management_shortcode {
     $id = 0;
     $type = "";
 		$action = !empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
+		$title = !empty( $param['title'] ) ? sanitize_text_field( $param['title'] ) : '';
 
     if ( !empty( $param['id'] ) ) {
       $id = (int) $param['id'];
@@ -48,7 +49,7 @@ class file_management_shortcode {
 			$element = null;
 		}
 
-		view_util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'type' => $type, 'action' => $action, 'element' => $element ) );
+		view_util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'title' => $title, 'type' => $type, 'action' => $action, 'element' => $element ) );
 	}
 
 	/**

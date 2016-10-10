@@ -19,6 +19,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
      echo do_shortcode( "[wpeo_gallery element_id='" . $element->id . "' action='" . $action . "' object_name='". $type . "' ]" );
   else:
     ?>
+		<?php echo $title; ?>
 		<i class="wpeo-upload-media dashicons dashicons-format-image" ></i>
 		<img src="#" class="hidden wp-post-image wp-digi-element-thumbnail" />
 		<input class="input-file-image" type="hidden" name="<?php echo $type . '[' . $id . '][associated_document_id][image][]'; ?>" />
