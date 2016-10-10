@@ -52,9 +52,6 @@ class import_action extends singleton_util {
 			$recommendation_created = recommendation_default_data_class::g()->create();
 			$evaluation_method_created = evaluation_method_default_data_class::g()->create();
 
-			$document_unique_setted = document_class::g()->set_default_document( PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
-			$document_workunit_sheet_setted = document_class::g()->set_default_document( PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
-
 			// Met à jours l'option pour dire que l'installation est terminée
 			update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 

@@ -12,7 +12,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<span data-id="<?php echo $id; ?>" data-object-name="<?php echo $type; ?>" data-action="<?php echo $action; ?>" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" class="wp-digi-element-thumbnail wp-digi-bloc-loader wpeo-upload-media" >
+<span data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-title="<?php echo $title; ?>" data-object-name="<?php echo $type; ?>" data-action="<?php echo $action; ?>" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" class="wp-digi-element-thumbnail wp-digi-bloc-loader wpeo-upload-media" >
 	<?php
   if ( !empty( $element ) && !empty( $element->thumbnail_id ) ):
 	   echo wp_get_attachment_image( $element->thumbnail_id, 'element-miniature', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail', )  );

@@ -44,4 +44,39 @@ class file_management_class extends singleton_util {
     $model_name::g()->update( $element[0] );
   }
 
+	public function upload_model( $type ) {
+		// Upload le fichier vers le dossier ./wp-content/uploads/digirisk/document_template/
+		$upload_dir = wp_upload_dir();
+		$document_template_path = $upload_dir['basedir'] . '/digirisk/document_template/';
+		wp_mkdir_p( $document_template_path );
+
+		$attachment = get_post( $_POST['file_id'] );
+		$attachment_current_path = str_replace( $upload_dir['url'], $upload_dir['path'] , $attachment->guid );
+		$attachment_copy_path = str_replace( $upload_dir['url'], $document_template_path , $attachment->guid );
+
+		$copy_status = copy( $attachment_current_path, $attachment_copy_path );
+
+		if (!$copy_status) {
+			return false;
+		}
+
+		// Génère les données du média
+		$document_args = array(
+			'post_content'	=> '',
+			'post_status'	=> 'inherit',
+			'post_author'	=> get_current_user_id(),
+			'post_date'		=> current_time( 'mysql', 0 ),
+			'post_title'	=> $attachment->title,
+		);
+
+		$response[ 'id' ] = wp_insert_attachment( $document_args, $attachment_copy_path, 0 );
+
+		$attach_data = wp_generate_attachment_metadata( $response['id'], $attachment_copy_path );
+		wp_update_attachment_metadata( $response['id'], $attach_data );
+		wp_set_object_terms( $response[ 'id' ], array( $type, 'default_model', 'model' ), document_class::g()->attached_taxonomy_type );
+		$response['model_id'] = $attachment_copy_path;
+		attachment_class::g()->update( $response );
+
+		return true;
+	}
 }

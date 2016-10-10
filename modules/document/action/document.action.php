@@ -55,6 +55,7 @@ class document_action {
 		);
 
 		register_taxonomy( document_class::g()->attached_taxonomy_type, document_class::g()->get_post_type(), $args );
+		register_taxonomy( document_class::g()->attached_taxonomy_type, attachment_class::g()->get_post_type(), $args );
 	}
 
 	/**

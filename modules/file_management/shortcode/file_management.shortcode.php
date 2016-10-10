@@ -34,6 +34,10 @@ class file_management_shortcode {
 		$action = !empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
 		$title = !empty( $param['title'] ) ? sanitize_text_field( $param['title'] ) : '';
 
+		if ( $action == 'eo_set_model' ) {
+			// $list_element =
+		}
+
     if ( !empty( $param['id'] ) ) {
       $id = (int) $param['id'];
     }
@@ -43,7 +47,7 @@ class file_management_shortcode {
     }
 
 		if ( $id != 0 ) {
-    	$element = society_class::g()->show_by_type( $id, array( 'false' ) );
+    	$element = society_class::g()->show_by_type( $id );
 		}
 		else {
 			$element = null;
@@ -68,12 +72,13 @@ class file_management_shortcode {
 		$element_id = $param['element_id'];
 		$element = society_class::g()->show_by_type( $element_id, array( false ) );
 
+		$title = !empty( $param['title'] ) ? sanitize_text_field( $param['title'] ) : '';
 		$action = !empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
 
 		$list_id = !empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
 
-		view_util::exec( 'file_management', 'gallery', array( 'param' => $param, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
+		view_util::exec( 'file_management', 'gallery', array( 'param' => $param, 'title' => $title, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
   }
 }
 

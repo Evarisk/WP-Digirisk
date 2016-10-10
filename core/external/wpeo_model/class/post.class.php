@@ -19,6 +19,7 @@ class post_class extends singleton_util {
 			$args['posts_per_page'] = -1;
 		}
 
+
 		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
 		}

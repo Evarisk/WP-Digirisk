@@ -76,10 +76,6 @@ class transfert_action {
 						FROM " . TABLE_LIAISON_PRECONISATION_ELEMENT;
 					update_option( \recommendation_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
 
-					/** Définition des modèles de documents / Define document model to use */
-					\document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/document_unique.odt', 'document_unique' );
-					\document_class::g()->set_default_document( WPDIGI_PATH . 'core/assets/document_template/fiche_de_poste.odt', 'fiche_de_poste' );
-
 					/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */
 					$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
 					$digirisk_transfert_options[ 'state' ] = 'complete';

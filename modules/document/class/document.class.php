@@ -56,13 +56,18 @@ class document_class extends post_class {
 	public function display_document_list( $element ) {
 		$element_id = $element->id;
 		$list_document_id = !empty( $element->associated_document_id ) && !empty( $element->associated_document_id[ 'document' ] ) ? $element->associated_document_id[ 'document' ] : null;
-		$list_document_id = array_reverse( $list_document_id );
+
+		if ( !empty( $list_document_id ) ) {
+			$list_document_id = array_reverse( $list_document_id );
+		}
 
 		if ( 0 < $this->limit_document_per_page ) {
 			$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
 			$number_page = ceil( count ( $list_document_id ) ) / $this->limit_document_per_page;
 
-			$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
+			if ( !empty( $list_document_id ) ) {
+				$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
+			}
 		}
 
 		$list_document = array();
@@ -91,11 +96,35 @@ class document_class extends post_class {
 			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
 		);
 
-		$upload_dir = wp_upload_dir();
-		if ( file_exists( $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt' ) ) {
-			$response['model_path']	= $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt';
-			$response['message'] = __( 'Le modèle utilisé est : ' . $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt', 'digirisk' );
+		$tax_query = array(
+			'relation' => 'AND'
+		);
+
+		if ( !empty( $current_element_type ) ) {
+		  foreach ( $current_element_type as $element ) {
+				$tax_query[] = array(
+					'taxonomy' => document_class::g()->attached_taxonomy_type,
+					'field'			=> 'slug',
+					'terms'			=> $element
+				);
+		  }
 		}
+
+		$list_model = new \WP_Query( array( 'fields' => 'ids', 'post_status' => 'inherit', 'posts_per_page' => 1, 'tax_query' => $tax_query ) );
+		$model = $list_model->posts;
+
+		if ( $model ) {
+			$model = $model[0];
+			$attachment_file = get_attached_file( $model );
+			$response['model_path']	= $attachment_file;
+				$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file, 'digirisk' );
+		}
+
+
+		// $upload_dir = wp_upload_dir();
+		// if ( file_exists( $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt' ) ) {
+		//
+		// }
 
 		return $response;
 	}
@@ -262,55 +291,6 @@ class document_class extends post_class {
 		$element_sheet_default_model = new \WP_Query( $get_model_args );
 
 		return ( $element_sheet_default_model->post_count + 1 );
-	}
-
-	/**
-	 * Définition du modèle de document a utiliser pour un type de document donné / Define document model to use for a given document type
-	 *
-	 * @param string $model_path Le chemin vers le modèle
-	 * @param string $document_type Le type du document
-	 */
-	public function set_default_document( $file, $document_type ) {
-		$the_file_content = @file_get_contents( $file );
-
-		/**	Check if file is a valid one	*/
-		if ( $the_file_content !== FALSE ) {
-			$attachment_args = array();
-			$wp_upload_dir = wp_upload_dir();
-
-			/**	Start by coping document into wordpress uploads directory	*/
-			$default_upload_directory = get_option( 'upload_path', '' );
-			$default_upload_sub_directory_behavior = get_option( 'uploads_use_yearmonth_folders', '' );
-			update_option( 'upload_path', str_replace( ABSPATH, '', $this->get_digirisk_dir_path() . '/document_models' ) );
-			update_option( 'uploads_use_yearmonth_folders', false );
-			$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
-			update_option( 'upload_path' , $default_upload_directory );
-			update_option( 'uploads_use_yearmonth_folders', true );
-
-			$attachment_args[ 'post_author' ] = get_current_user_id();
-			$attachment_args[ 'post_date' ] = current_time( 'mysql', 0 );
-			/**	Get informations about the picture	*/
-			$filetype = wp_check_filetype( basename( $upload_result[ 'file' ] ), null );
-			/**	Set the default values for the current attachement	*/
-			$attachment_default_args = array(
-				'guid'           => $wp_upload_dir['url'] . '/' . basename( $upload_result[ 'file' ] ),
-				'post_mime_type' => $filetype['type'],
-				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $upload_result[ 'file' ] ) ),
-				'post_content'   => '',
-				'post_status'    => 'inherit'
-			);
-
-			/**	Save new picture into database	*/
-			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $upload_result[ 'file' ] );
-
-			/**	Create the different size for the given picture and get metadatas for this picture	*/
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $upload_result[ 'file' ] );
-			/**	Finaly save pictures metadata	*/
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-
-			wp_set_object_terms( $attach_id, array( 'model', $document_type, 'default_model' ), 'attachment_category' );
-		}
-
 	}
 
 	/**

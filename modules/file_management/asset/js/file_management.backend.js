@@ -19,7 +19,9 @@ var file_management = {
 
     file_management.element_id = file_management.$( element ).data( 'id' );
     file_management._wpnonce = file_management.$( element ).data( 'nonce' );
+    file_management.title = file_management.$( element ).data( 'title' );
     file_management.object_name = file_management.$( element ).data( 'object-name' );
+    file_management.type = file_management.$( element ).data( 'type' );
     file_management.action = file_management.$( element ).data( 'action' );
     file_management.have_thumbnail = file_management.$( element ).hasClass( 'wp-digi-element-thumbnail' ) ? true : false;
     window.wp.media.model.settings.post.id = file_management.$( element ).data( 'id' );
@@ -60,7 +62,7 @@ var file_management = {
       selected_file_id = attachment.id;
     } );
 
-    if ( file_management.element_id === 0 ) {
+    if ( file_management.element_id === 0 && file_management.action != 'eo_set_model' ) {
       file_management.display_attachment( selected_JSON, element );
     }
     else {
@@ -81,6 +83,8 @@ var file_management = {
       action: file_management.action,
       file_id: selected_file_id,
       _wpnonce: file_management._wpnonce,
+			title: file_management.title,
+			type: file_management.type,
       element_id: file_management.element_id,
       object_name: file_management.object_name,
       thumbnail: file_management.have_thumbnail,
