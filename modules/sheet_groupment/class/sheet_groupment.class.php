@@ -22,8 +22,6 @@ class sheet_groupment_class extends singleton_util {
   	);
 
   	/**	Début de la génération du document / Start document generation	*/
-  	$document_controller = document_class::g();
-
   	$group = group_class::g()->get( array( 'id' => $element_id ) );
 		$group = $group[0];
 
@@ -36,7 +34,7 @@ class sheet_groupment_class extends singleton_util {
 	  			'type'		=> 'picture',
 	  			'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ),
 	  			'option'	=> array(
-	  				'size'	=> 1000,
+	  				'size'	=> 6,
 	  			),
 	  		);
   		}
@@ -139,7 +137,7 @@ class sheet_groupment_class extends singleton_util {
 		$group_sheet_details = apply_filters( 'wpdigi_group_sheet_details', $group_sheet_details );
 
 		/**	Call document creation function / Appel de la fonction de création du document	*/
-		$document_creation_response = $document_controller->create_document( $group, array( 'fiche_de_groupement' ), $group_sheet_details );
+		$document_creation_response = document_class::g()->create_document( $group, array( 'fiche_de_groupement' ), $group_sheet_details );
 		if ( !empty( $document_creation_response[ 'id' ] ) ) {
 			$group->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
 			$group = group_class::g()->update( $group );

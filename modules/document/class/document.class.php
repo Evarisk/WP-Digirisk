@@ -111,17 +111,16 @@ class document_class extends post_class {
 		  }
 		}
 
-		$list_model = new \WP_Query( array( 'fields' => 'ids', 'post_status' => 'inherit', 'posts_per_page' => 1, 'tax_query' => $tax_query ) );
-		$model = $list_model->posts;
+		$query = new \WP_Query( array( 'fields' => 'ids', 'post_status' => 'inherit', 'posts_per_page' => 1, 'tax_query' => $tax_query ) );
 
-		if ( $model ) {
+		if ( $query->have_posts() ) {
 			$upload_dir = wp_upload_dir();
 
-			$model = $model[0];
-			$attachment_file = get_attached_file( $model );
-			$response['model_path']	= $attachment_file;
-			$response['model_url']	= str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file);
-			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file, 'digirisk' );
+			$model_id = $query->posts[0];
+			$attachment_file_path = get_attached_file( $model_id );
+			$response['model_path']	= $attachment_file_path;
+			$response['model_url']	= str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path);
+			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file_path, 'digirisk' );
 		}
 
 
@@ -352,7 +351,7 @@ class document_class extends post_class {
 
 		/**	Définition du modèle de document a utiliser pour l'impression / Define the document model to use for print sheet */
 		$model_to_use = null;
-		$model_response = $this->get_model_for_element( $document_type );
+		$model_response = $this->get_model_for_element( wp_parse_args( $document_type, array( 'model', 'default_model' )) );
 		$model_to_use = $model_response[ 'model_path' ];
 
   	/**	Définition de la révision du document / Define the document version	*/
@@ -419,7 +418,7 @@ class document_class extends post_class {
 			'date'									=> current_time( 'mysql', 0 ),
 			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
 			'model_id' 							=> $model_to_use,
-			'document_meta' => $document_meta,
+			'document_meta' 				=> $document_meta,
 			'version'								=> $document_revision,
   	);
 
