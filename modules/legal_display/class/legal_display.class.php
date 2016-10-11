@@ -45,6 +45,7 @@ class legal_display_class extends post_class {
   public function save_data( $data ) {
     // @todo : securité
 
+		echo "<pre>"; print_r($data); echo "</pre>";
     return $this->create( $data );
   }
 }

@@ -37,22 +37,22 @@ class legal_display_model extends post_model {
 					'samu' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => '15',
 					),
 					'police' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => '17',
 					),
 					'pompier' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => '18',
 					),
 					'emergency' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => '112',
 					),
 					'right_defender' => array(
 						'type' => 'string',

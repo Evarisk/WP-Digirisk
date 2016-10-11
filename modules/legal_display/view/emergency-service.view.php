@@ -40,13 +40,13 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <li>
     <label>
       <?php _e( 'Rights defender', 'digirisk' ); ?>
-      <input name="emergency_service[right_defender]" type="text" value="<?php $legal_display->emergency_service['right_defender']; ?>" />
+      <input name="emergency_service[right_defender]" type="text" value="<?php echo $legal_display->emergency_service['right_defender']; ?>" />
     </label>
   </li>
   <li>
     <label>
       <?php _e( 'Poison control center', 'digirisk' ); ?>
-      <input name="emergency_service[poison_control_center]" type="text" value="<?php $legal_display->emergency_service['poison_control_center']; ?>"  />
+      <input name="emergency_service[poison_control_center]" type="text" value="<?php echo $legal_display->emergency_service['poison_control_center']; ?>"  />
     </label>
   </li>
 </ul>
