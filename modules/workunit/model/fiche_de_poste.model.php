@@ -24,7 +24,7 @@ class fiche_de_poste_model extends document_model {
 					'type'	=> 'string',
 				),
 				'photoDefault'	=> array(
-					'type'	=> 'string',
+					'type'	=> 'array',
 				),
 				'description'	=> array(
 					'type'	=> 'string',

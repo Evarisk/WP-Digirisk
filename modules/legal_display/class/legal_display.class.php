@@ -43,9 +43,6 @@ class legal_display_class extends post_class {
 	* @return object L'objet sauvé: affichage légal
 	*/
   public function save_data( $data ) {
-    // @todo : securité
-
-		echo "<pre>"; print_r($data); echo "</pre>";
     return $this->create( $data );
   }
 }

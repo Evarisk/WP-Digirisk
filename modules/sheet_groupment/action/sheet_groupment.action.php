@@ -35,9 +35,10 @@ class sheet_groupment_action {
 		}
 
 		$generation_response = sheet_groupment_class::g()->generate_sheet( $element_id );
-  	$document = document_class::g()->get( array( 'id' => $generation_response[ 'id' ] ) );
+  	$element = document_class::g()->get( array( 'post__in' => array( $generation_response[ 'id' ] ) ), array( 'category' ) );
+		$element = $element[0];
 		ob_start();
-		view_util::exec( 'document', 'printed-list-item', array( 'document' => $document ) );
+		view_util::exec( 'document', 'printed-list-item', array( 'element' => $element ) );
 		$response[ 'output' ] = ob_get_contents();
 		ob_end_clean();
 
