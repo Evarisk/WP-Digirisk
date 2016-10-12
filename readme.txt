@@ -11,7 +11,8 @@ Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, l
 == Description ==
 
 Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
-
+-DUER
+-Affichage légal
 
 == Installation ==
 
@@ -28,8 +29,6 @@ L'installation du plugin peut se faire de 2 façons :
 1. Rechercher l'extension Digirisk à partir du menu "Extension" de Wordpress
 2. Lancer l'installation du plugin
 
-
-
 == Frequently Asked Questions ==
 
 Question 1 : Le logiciel d'évaluation des risques Digirisk est t'il totalement gratuit ?
@@ -43,7 +42,6 @@ Non, cette version est stable mais nous ne la ferons plus evoluer. Nous étions 
 Question 3 : Peut t'on importer les informations a partir du logiciel en version 5
 
 Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la version 5 il vous sera proposé de transférer les données existantes vers la nouvelle interface.
-
 
 == Screenshots ==
 

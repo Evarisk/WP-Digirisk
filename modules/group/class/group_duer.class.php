@@ -62,7 +62,9 @@ class group_duer_class extends singleton_util {
 		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
 		$zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
 
-		return true;
+		$duer = document_unique_class::g()->get( array( 'include' => array( $document_creation_response[ 'id' ] ) ) );
+		$duer = $duer[0];
+		return $duer;
 	}
 
 	/**
