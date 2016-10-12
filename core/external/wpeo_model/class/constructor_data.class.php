@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class constructor_data_class extends helper_class {
 	protected function __construct( $data, $field_wanted ) {
 		$this->dispatch_wordpress_data( $data, $data );
-
+		log_class::g()->exec( 'digirisk_construct_data', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => '', 'object' => $this, ), 0 );
 		if ( !empty( $field_wanted ) ) {
 			$this->fill_child( $field_wanted );
 		}
@@ -42,7 +42,7 @@ class constructor_data_class extends helper_class {
 				$current_object->$field_name = $data[$field_name];
 			}
 
-			if ( isset( $field_def['required'] ) && $field_def['required'] && empty( $current_object->$field_name ) ) {
+			if ( isset( $field_def['required'] ) && $field_def['required'] && !isset( $current_object->$field_name ) ) {
 				$this->error = true;
 			}
 

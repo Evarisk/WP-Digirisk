@@ -31,9 +31,8 @@ class installer_class {
 		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
 
 		$old_eva_option = '';
-
-		if ( function_exists( '\digi\transfert\getDbOption' ) ) {
-			$old_eva_option = \digi\transfert\getDbOption( 'base_evarisk' );
+		if ( function_exists( '\digi\getDbOption' ) ) {
+			$old_eva_option = \digi\getDbOption( 'base_evarisk' );
 		}
 
 		if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
@@ -49,7 +48,7 @@ class installer_class {
 			return;
 		}
 
-		$digirisk_core = get_option( WPDIGI_CORE_OPTION_NAME );
+		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
 
 		if ( !empty( $digirisk_core['installed'] ) ) {
 			$url_for_first_launch =  admin_url( 'index.php?page=digirisk-simple-risk-evaluation' );

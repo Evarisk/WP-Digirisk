@@ -133,7 +133,7 @@ class TransferData_task_class extends singleton_util {
 				update_post_meta( $new_element_id, '_wpeo_element_links', $links );
 			}
 			else {
-				wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $old_element_type . '-association-error', array( 'object_id' => $old_element_id, 'message' => sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), ), 2 );
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $old_element_type , '', sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), array( 'object_id' => $old_element_id, ), 2 );
 			}
 		}
 

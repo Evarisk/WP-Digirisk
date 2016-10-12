@@ -19,7 +19,7 @@ class log_class extends singleton_util {
 		}
 	}
 
-	public function exec( $service_name, $custom_name, $message = '', $data = array(), $criticality = 0 ) {
+	public static function exec( $service_name, $custom_name, $message = '', $data = array(), $criticality = 0 ) {
 		if ( config_util::$init['wpeo_log']->log ) {
 			$ms = 0;
 
@@ -61,7 +61,7 @@ class log_class extends singleton_util {
 		}
 	}
 
-	public function write_to_file( $service, $name_service, $output_to_log, $criticality ) {
+	public static function write_to_file( $service, $name_service, $output_to_log, $criticality ) {
 		log_archive_class::g()->check_need_rotate( $service, $name_service . '-info.csv', $output_to_log );
 		$upload_dir = wp_upload_dir();
 		$fp = fopen( $upload_dir[ 'basedir' ] . '/wpeolog/' . $name_service . '-info.csv', 'a');

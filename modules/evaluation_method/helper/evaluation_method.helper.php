@@ -1,24 +1,25 @@
 <?php namespace digi;
 
 function construct_evaluation( $data ) {
-	$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::g()->get_taxonomy() );
-	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+	if ( !empty( $data ) && !empty( $data[ 'method_id' ] ) ) {
+		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::g()->get_taxonomy() );
+		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
 
-	if ( $data['method_id'] == $method_evaluation_digirisk_simplified->term_id ) {
-		$data = update_method_simplified( $data['scale'] );
+		if ( $data['method_id'] == $method_evaluation_digirisk_simplified->term_id ) {
+			$data = update_method_simplified( $data['scale'] );
 
-		if ( !$data ) {
-			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+			if ( !$data ) {
+				wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+			}
+		}
+		else if ( $data['method_id'] == $method_evaluation_digirisk_complex->term_id ) {
+			$data = update_method_complex( $data['variable'], $method_evaluation_digirisk_complex->term_id );
+
+			if ( !$data ) {
+				wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
+			}
 		}
 	}
-	else if ( $data['method_id'] == $method_evaluation_digirisk_complex->term_id ) {
-		$data = update_method_complex( $data['variable'], $method_evaluation_digirisk_complex->term_id );
-
-		if ( !$data ) {
-			wp_send_json_error( array( 'file' => __FILE__, 'line' => __LINE__ ) );
-		}
-	}
-
 	return $data;
 }
 

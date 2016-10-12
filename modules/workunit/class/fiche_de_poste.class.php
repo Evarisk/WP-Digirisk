@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class fiche_de_poste_class extends document_class {
 
-	protected $model_name   				= '\digi\fiche_de_poste';
+	protected $model_name   				= '\digi\fiche_de_poste_model';
 	protected $post_type    				= 'attachment';
 	public $attached_taxonomy_type  = 'attachment_category';
 	protected $meta_key    					= '_wpdigi_document';

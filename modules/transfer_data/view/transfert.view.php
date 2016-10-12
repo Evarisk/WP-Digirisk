@@ -1,5 +1,4 @@
-<?php
-namespace digi;
+<?php namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="about-wrap wp-digi-wrap wp-digi-clearer">
@@ -13,10 +12,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		$documents_to_transfer = $documents_transfered = $documents_not_transfered = 0;
 
 		/**	Define if config components have to be transferd or not */
-		$main_config_components_are_transfered = null;
 		if ( in_array( TABLE_GROUPEMENT, TransferData_class::g()->element_type) ) :
-			global $wpdb;
-			require( DIGI_DTRANS_TEMPLATES_MAIN_DIR . "backend/transfert-components.php" );
+			$main_config_components_are_transfered = TransferData_components_class::g()->display_component_transfer_bloc();
 		endif;
 
 		/**	Read the different types	*/

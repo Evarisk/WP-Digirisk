@@ -69,7 +69,7 @@ class TransferData_common_class extends singleton_util {
 			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
 			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
 				/**	Log creation	*/
-				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element->id, 'message' => sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), ), 0 );
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), array( 'object_id' => $element->id, ), 0 );
 
 				/**	Store an option to avoid multiple transfer	*/
 				$digirisk_transfer_options[ $element_type ][] = $element->id;
@@ -138,7 +138,7 @@ class TransferData_common_class extends singleton_util {
 				}
 			}
 			else {
-				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $element_type, array( 'object_id' => $element_type . '-' . $element->id, 'message' => sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), ), 2 );
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), array( 'object_id' => $element_type . '-' . $element->id, ), 2 );
 			}
 		}
 
@@ -250,7 +250,7 @@ class TransferData_common_class extends singleton_util {
 		if ( !empty( $survey_results ) ) {
 			foreach ( $survey_results as $original_survey_id => $final_survey ) {
 				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
-				\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-survey', array( 'object_id' => $original_survey_id, 'message' => __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), ), 0 );
+				log_class::g()->exec( 'digirisk-datas-transfert-survey' , '', __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $original_survey_id, ), 0 );
 			}
 		}
 	}
@@ -294,8 +294,8 @@ class TransferData_common_class extends singleton_util {
 			/**	Get associated picture list	*/
 			switch ( $main_type ) {
 				case 'document':
-					$path_document_complete = \document_class::g()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
-					$guid = \document_class::g()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
+					$path_document_complete = document_class::g()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
+					$guid = document_class::g()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
 					wp_mkdir_p( $path_document_complete );
 					copy( $file, $path_document_complete . '/' . basename($file) );
 
@@ -358,7 +358,7 @@ class TransferData_common_class extends singleton_util {
 				break;
 			}
 
-			\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), ), 0 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), array( 'object_id' => $document->id, ), 0 );
 			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 		}
 		else {
@@ -407,7 +407,7 @@ class TransferData_common_class extends singleton_util {
 				$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
 			}
 
-			\wpeologs_ctr::log_datas_in_files( 'digirisk-datas-transfert-' . $main_type, array( 'object_id' => $document->id, 'message' => sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), ), 2 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/
@@ -434,7 +434,7 @@ class TransferData_common_class extends singleton_util {
 		$pictures = $wpdb->get_results( $query );
 		if ( !empty( $pictures ) ) {
 			foreach ( $pictures as $picture ) {
-				$document_id = $this->transfer_document( $picture, $new_element_id, 'picture', WPDIGI_PATH . '/' );
+				$document_id = $this->transfer_document( $picture, $new_element_id, 'picture', PLUGIN_DIGIRISK_PATH . '/' );
 				if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 					if ( 'yes' == $picture->isMainPicture ) {
 						$associated_document_list[ '_thumbnail' ] = $document_id;

@@ -74,7 +74,7 @@ class transfert_action {
 					$query =
 						"SELECT MAX( id )
 						FROM " . TABLE_LIAISON_PRECONISATION_ELEMENT;
-					update_option( \recommendation_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
+					update_option( recommendation_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
 
 					/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */
 					$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
@@ -82,7 +82,7 @@ class transfert_action {
 					update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
 					// Met à jour l'option pour dire que l'installation est terminée
-					update_option( WPDIGI_CORE_OPTION_NAME, array( 'installed' => true, 'db_version' => 1 ) );
+					update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 				}
 				else if ( $element_done ) {
 					$sub_action = 'doc';
@@ -188,11 +188,11 @@ class transfert_action {
 
 					$transfer_response[ 'old_sub_action' ] = $sub_action;
 
-					\evaluation_method_default_data_class::g()->create();
+					evaluation_method_default_data_class::g()->create();
 
 					/**	Build an output for component box	*/
 					ob_start();
-					require( DIGI_DTRANS_TEMPLATES_MAIN_DIR . "backend/transfert-components.php" );
+					TransferData_components_class::g()->display_component_transfer_bloc();
 					$transfer_response[ 'display_components_transfer' ] = ob_get_contents();
 					ob_end_clean();
 
@@ -354,16 +354,16 @@ class transfert_action {
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
 					switch ( $picture->tableElement ) {
 						case TABLE_UNITE_TRAVAIL:
-								$elt = \workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
-								$el = $elt[0];
+								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = $elt[0];
 								$elt->associated_document_id[ 'image' ][] = $document_id;
-								\workunit_class::g()->update( $elt );
+								workunit_class::g()->update( $elt );
 							break;
 						case TABLE_GROUPEMENT:
-								$elt = \group_class::g()->get( array( 'include' => array( $new_element_id  ) ) );
-								$el = $elt[0];
+								$elt = group_class::g()->get( array( 'include' => array( $new_element_id  ) ) );
+								$elt = $elt[0];
 								$elt->associated_document_id[ 'image' ][] = $document_id;
-								\group_class::g()->update( $elt );
+								group_class::g()->update( $elt );
 							break;
 						case TABLE_TACHE:
 
@@ -396,14 +396,14 @@ class transfert_action {
 					}
 
 					/**	Get the element created for new data transfer	*/
-					$doc_model = \document_class::g()->get( array( 'include' => array( $document_id ) ) );
+					$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
 					$doc_model = $doc_model[0];
 
 					/**	Build the model for new data storage */
 					$doc_model->unique_key = $picture->id;
 					$doc_model->unique_identifier = ELEMENT_IDENTIFIER_PIC . $picture->id;
 					$doc_model->model_id = null;
-					\document_class::g()->update( $doc_model );
+					document_class::g()->update( $doc_model );
 				}
 				else {
 					$response[ 'not_transfered']++;
@@ -482,17 +482,17 @@ class transfert_action {
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
 					switch ( $document->table_element ) {
 						case TABLE_UNITE_TRAVAIL:
-							$elt = \workunit_class::g()->get( array( 'include' => array( $new_element_id  ) ) );
+							$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id  ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id[ 'document' ][] = $document_id;
-							\workunit_class::g()->update( $elt );
+							workunit_class::g()->update( $elt );
 						break;
 
 						case TABLE_GROUPEMENT:
-							$elt = \group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+							$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id[ 'document' ][] = $document_id;
-							\group_class::g()->update( $elt );
+							group_class::g()->update( $elt );
 						break;
 
 						case TABLE_TACHE:
@@ -503,13 +503,13 @@ class transfert_action {
 					}
 
 					/**	Get the element created for new data transfer	*/
-					$doc_model = \document_class::g()->get( array( 'include' => array( $document_id ) ) );
+					$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
 					$doc_model = $doc_model[0];
 
-					$doc->unique_key = $document->id;
-					$doc->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
-					$doc->model_id = null;
-					\document_class::g()->update( $doc_model );
+					$document->unique_key = $document->id;
+					$document->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
+					$document->model_id = null;
+					document_class::g()->update( $doc_model );
 
 				}
 				else {
@@ -565,16 +565,16 @@ class transfert_action {
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 						switch ( $duer->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = \workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
-								\workunit_class::g()->update( $elt );
+								workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-								$elt = \group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
-								\group_class::g()->update( $elt );
+								group_class::g()->update( $elt );
 								break;
 							case TABLE_TACHE:
 
@@ -585,14 +585,14 @@ class transfert_action {
 						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = \document_class::g()->get( array( 'include' => array( $document_id ) ) );
+						$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
 						$doc_model->unique_key = $duer->id;
 						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $duer->id;
 						$doc_model->model_id = $duer->id_model;
-						\document_class::g()->update( $doc_model );
+						document_class::g()->update( $doc_model );
 				}
 				else {
 						$response[ 'not_transfered' ]++;
@@ -666,16 +666,16 @@ class transfert_action {
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 						switch ( $sheet->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = \workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
-								\workunit_class::g()->update( $elt );
+								workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-								$elt = \group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
-								\group_class::g()->update( $elt );
+								group_class::g()->update( $elt );
 								break;
 							case TABLE_TACHE:
 
@@ -686,14 +686,14 @@ class transfert_action {
 						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = \document_class::g()->get( array( 'include' => array( $document_id ) ) );
+						$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
 						$doc_model->unique_key = $sheet->id;
 						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $sheet->id;
 						$doc_model->model_id = $sheet->id_model;
-						\document_class::g()->update( $doc_model );
+						document_class::g()->update( $doc_model );
 				}
 				else {
 						$response[ 'not_transfered' ]++;
