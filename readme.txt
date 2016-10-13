@@ -6,28 +6,36 @@ Requires at least: 4.4
 Tested up to: 4.5.3
 Stable tag: 6.1.5.10
 
-Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises.
+Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
 == Description ==
 
-Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
--DUER
+Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le Document Unique de votre entreprise. Associé à la puissance de WordPres MU, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...
+Digirisk permet aussi la gestion des données liées à la sécurité de votre personnel tel que :
+-La gestion des EPIs
+-L'historique des causeries sécurité
+Digirisk génére automatique : 
 -Affichage légal
+-Impression du DUER
 
 == Installation ==
 
-L'installation du plugin peut se faire de 2 façons :
+L'installation du plugin peut se faire de 3 façons :
 
-* Méthode 1
+* Méthode 1 : Vous WordPress (sans acces internet)
 
 1. Téléchargez `digirisk_VX.X.X.zip`
 2. Uploader le dossier `digirisk` dans le répertoire `/wp-content/plugins/`
 3. Activer le plugin dans le menu `Extensions` de Wordpress
 
-* Méthode 2
+* Méthode 2 : Vous WordPress (avec un acces internet)
 
 1. Rechercher l'extension Digirisk à partir du menu "Extension" de Wordpress
 2. Lancer l'installation du plugin
+
+* Méthode 3 : Vous n'avez pas WordPress
+
+1. Vous pouvez télécharger sur notre site une version executable
 
 == Frequently Asked Questions ==
 
@@ -35,11 +43,15 @@ Question 1 : Le logiciel d'évaluation des risques Digirisk est t'il totalement 
 
 Oui le logiciel est totalement gratuit, il est publié sous une licence Publique Générale Affero (GNU). Ce programme est libre et gratuit en (Open Source), vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale Affero GNU publiée par la Free Software Foundation.
 
+Question 1.1 : Je suis consultant est ce que je peux utiliser Digirisk
+
+Oui le logiciel est totalement gratuit. Vous pouvez l'utiliser pour vos clients et leur fournir les documents générer par Digirisk ainsi que le logiciel s'il le demande.
+
 Question 2 : La version 5 du logiciel va t'elle continué d'évoluer ?
 
-Non, cette version est stable mais nous ne la ferons plus evoluer. Nous étions trop souvent bloqué sur des principes theoriques c'est la raison pour laquelle nous avons lancé la version 6
+Non, cette version est stable mais nous ne la ferons plus evoluer. Nous étions trop souvent bloqué sur des principes théoriques c'est la raison pour laquelle nous avons lancé la version 6
 
-Question 3 : Peut t'on importer les informations a partir du logiciel en version 5
+Question 3 : Peut t'on importer les informations à partir du logiciel en version 5
 
 Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la version 5 il vous sera proposé de transférer les données existantes vers la nouvelle interface.
 
