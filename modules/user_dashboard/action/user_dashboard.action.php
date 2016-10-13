@@ -48,19 +48,19 @@ class user_shortcode_action extends singleton_util {
 	}
 
 	public function ajax_load_user() {
-		if ( 0 === (int)$_POST['user_id'] )
+		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error( );
 		else
-			$user_id = (int)$_POST['user_id'];
+			$id = (int)$_POST['id'];
 
-		check_ajax_referer( 'ajax_load_user_' . $user_id );
+		check_ajax_referer( 'ajax_load_user_' . $id );
 
-		$user = user_digi_class::g()->get( array( 'id' => $user_id ) );
+		$user = user_digi_class::g()->get( array( 'id' => $id ) );
 		$user = $user[0];
 
 		ob_start();
 		view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'user_dashboard', 'callback_success' => 'load_success', 'template' => ob_get_clean() ) );
 	}
 
 	public function ajax_delete_user() {

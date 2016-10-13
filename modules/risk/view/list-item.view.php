@@ -17,7 +17,8 @@ if ( $risk != null ):
 			<a href="#"
 				data-id="<?php echo $risk->id; ?>"
 				data-nonce="<?php echo wp_create_nonce( 'ajax_load_risk_' . $risk->id ); ?>"
-				class="wp-digi-action wp-digi-action-load dashicons dashicons-edit" ></a>
+				data-action="load_risk"
+				class="wp-digi-action wp-digi-action-load action dashicons dashicons-edit" ></a>
 
 			<a href="#"
 				data-id="<?php echo $risk->id; ?>"

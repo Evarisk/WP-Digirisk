@@ -51,6 +51,10 @@ window.digirisk.user_dashboard.delete_success = function( element, response ) {
   element.closest( 'li' ).fadeOut();
 }
 
+window.digirisk.user_dashboard.load_success = function( element, response ) {
+  element.closest( 'li' ).replaceWith( response.data.template );
+}
+
 window.digirisk.user_dashboard.save_user_success = function( element, response ) {
   jQuery( '.wp-digi-list-staff' ).html( response.data.template );
 }

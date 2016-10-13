@@ -5,7 +5,7 @@ window.digirisk.action.init = function() {
 };
 
 window.digirisk.action.event = function() {
-  jQuery( '.wp-digi-societytree-main-container' ).on( 'click', '.action', window.digirisk.action.exec );
+  jQuery( document ).on( 'click', '.action', window.digirisk.action.exec );
   jQuery( document ).on( 'click', '.wp-digi-action-delete', window.digirisk.action.delete );
 };
 
