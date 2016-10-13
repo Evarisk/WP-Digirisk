@@ -27,7 +27,7 @@ class risk_action {
 		// Remplacé les - en _
 		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 1 );
 		add_action( 'wp_ajax_delete_risk', array( $this, 'ajax_delete_risk' ) );
-		add_action( 'wp_ajax_wpdigi-load-risk', array( $this, 'ajax_load_risk' ) );
+		add_action( 'wp_ajax_load_risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 	}
@@ -133,19 +133,19 @@ class risk_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_risk() {
-		if ( 0 === (int)$_POST['risk_id'] )
+		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
-			$risk_id = (int)$_POST['risk_id'];
+			$id = (int)$_POST['id'];
 
-		check_ajax_referer( 'ajax_load_risk_' . $risk_id );
+		check_ajax_referer( 'ajax_load_risk_' . $id );
 
-		$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'danger_category', 'danger', 'evaluation', 'comment' ) );
+		$risk = risk_class::g()->get( array( 'id' => $id ), array( 'danger_category', 'danger', 'evaluation', 'comment' ) );
 		$risk = $risk[0];
 
 		ob_start();
-		view_util::exec( 'risk', 'item-edit', array( 'risk_id' => $risk_id, 'risk' => $risk ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		view_util::exec( 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
+		wp_send_json_success( array( 'module' => 'risk', 'callback_success' => 'load_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
