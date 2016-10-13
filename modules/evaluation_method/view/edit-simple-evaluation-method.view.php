@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<li data-level="3" class="level-chooser wp-digi-risk-level-3" >51</li>
 		<li data-level="4" class="level-chooser wp-digi-risk-level-4" >80</li>
 		<?php if ( $risk->id === 0 ): ?>
-		    <li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic digi-toggle" data-parent="form-risk" data-target="wpdigi-method-evaluation-render"></span></li>
+		    <li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic open-popup" data-parent="form-risk" data-target="wpdigi-method-evaluation-render"></span></li>
     <?php endif; ?>
 	</ul>
 </toggle>
