@@ -26,7 +26,7 @@ class workunit_action {
 		add_action( 'wp_ajax_wpdigi_workunit_sheet_display', array( $this, 'display_workunit_sheet' ) );
 
 		/**	Création d'une unité de travail / Create a work unit	*/
-		add_action( 'wp_ajax_wpdigi_ajax_workunit_create', array( $this, 'create_workunit' ) );
+		add_action( 'wp_ajax_save_workunit', array( $this, 'ajax_save_workunit' ) );
 
 		/** Mise à jour d'une unité de travail / Update a work unit */
 		add_action( 'wp_ajax_wpdigi_ajax_workunit_update', array( $this, 'update_workunit' ) );
@@ -108,7 +108,7 @@ class workunit_action {
 	/**
 	 * Création d'une unité de travail / Create a new workunit
 	 */
-	public function create_workunit() {
+	public function ajax_save_workunit() {
 		/**	Check if the ajax request come from a known source	*/
 		check_ajax_referer( 'wpdigi-workunit-creation', 'wpdigi_nonce' );
 
@@ -131,7 +131,7 @@ class workunit_action {
 
 		ob_start();
 		workunit_class::g()->display_list( $element->parent_id );
-		wp_send_json_success( array( 'template' => ob_get_clean(), 'id' => $element->id ) );
+		wp_send_json_success( array( 'module' => 'workunit', 'callback_success' => 'save_workunit', 'template' => ob_get_clean(), 'id' => $element->id ) );
 	}
 
 	/**

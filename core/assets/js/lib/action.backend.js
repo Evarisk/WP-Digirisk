@@ -11,12 +11,25 @@ window.digirisk.action.event = function() {
 
 window.digirisk.action.exec = function(event) {
   var element = jQuery( this );
+	var parent_element = element;
+
+	if ( element.data( 'parent' ) ) {
+			parent_element = element.closest( '.' + element.data( 'parent' ) );
+	}
 
 	if ( !element[0].getAttribute(' disabled' ) ) {
 		element[0].setAttribute( 'disabled', true );
-	  element.get_data( function ( data ) {
-    	window.digirisk.request.send( element, data );
-  	} );
+
+		var list_input = window.eva_lib.array_form.get_input( parent_element );
+
+		var data = {};
+		for (var i = 0; i < list_input.length; i++) {
+			if ( list_input[i].name ) {
+				data[list_input[i].name] = list_input[i].value;
+			}
+		}
+
+    window.digirisk.request.send( element, data );
 	}
 };
 
