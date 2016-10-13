@@ -116,6 +116,12 @@ class comment_class extends singleton_util {
 			$data->id = wp_insert_comment( $data->do_wp_object() );
 		}
 		else {
+			if ( !empty( $this->before_model_put_function ) ) {
+				foreach( $this->before_model_put_function as $model_function ) {
+					$data = call_user_func( $model_function, $data );
+				}
+			}
+
 			$current_data = $this->get( array( 'id' => $data['id'] ), array( false ) );
 			$current_data = $current_data[0];
 			$obj_merged = (object) array_merge((array) $current_data, (array) $data);

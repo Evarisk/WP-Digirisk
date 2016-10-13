@@ -15,9 +15,9 @@ class evaluation_method_class extends term_class {
 	protected $model_name   = '\digi\evaluation_method_model';
 	protected $taxonomy    	= 'digi-method';
 	protected $meta_key    	= '_wpdigi_method';
-	protected $base = 'digirisk/evaluation-method';
-	protected $version = '0.1';
-	public $element_prefix = 'ME';
+	protected $base 				= 'digirisk/evaluation-method';
+	protected $version 			= '0.1';
+	public $element_prefix 	= 'ME';
 	protected $after_get_function = array( '\digi\get_identifier' );
 
 	public $list_scale = array(

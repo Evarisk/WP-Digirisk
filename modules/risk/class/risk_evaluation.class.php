@@ -10,6 +10,7 @@ class risk_evaluation_class extends comment_class {
 	protected $version 			= '0.1';
 	public $element_prefix 	= 'E';
 	protected $before_model_post_function = array( '\digi\construct_evaluation' );
+	protected $before_model_put_function = array( '\digi\construct_evaluation' );
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
