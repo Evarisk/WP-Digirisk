@@ -44,7 +44,7 @@ class user_shortcode_action extends singleton_util {
 		$user = $user[0];
 
 		view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'user_dashboard', 'callback_success' => 'save_user_success', 'template' => ob_get_clean() ) );
 	}
 
 	public function ajax_load_user() {
