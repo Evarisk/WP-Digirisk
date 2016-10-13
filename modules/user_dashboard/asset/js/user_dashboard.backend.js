@@ -47,6 +47,10 @@ window.digirisk.user_dashboard.key_enter_send_form = function( event ) {
 	}
 };
 
+window.digirisk.user_dashboard.delete_success = function( element, response ) {
+  element.closest( 'li' ).fadeOut();
+}
+
 window.digirisk.user_dashboard.save_user_success = function( element, response ) {
   jQuery( '.wp-digi-list-staff' ).html( response.data.template );
 }

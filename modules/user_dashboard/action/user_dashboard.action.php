@@ -64,15 +64,15 @@ class user_shortcode_action extends singleton_util {
 	}
 
 	public function ajax_delete_user() {
-		if ( 0 === (int)$_POST['user_id'] )
+		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error();
 		else
-			$user_id = (int)$_POST['user_id'];
+			$id = (int)$_POST['id'];
 
-		check_ajax_referer( 'ajax_delete_user_' . $user_id );
+		check_ajax_referer( 'ajax_delete_user_' . $id );
 
-		user_digi_class::g()->delete( $user_id );
-		wp_send_json_success();
+		user_digi_class::g()->delete( $id );
+		wp_send_json_success( array( 'module' => 'user_dashboard', 'callback_success' => 'delete_success' ) );
 	}
 
 	public function ajax_save_domain_mail() {
