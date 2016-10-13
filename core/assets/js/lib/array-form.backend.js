@@ -13,7 +13,8 @@ window.eva_lib.array_form.get_input = function( parent ) {
 };
 
 window.eva_lib.array_form.send_form = function( event ) {
-	var parent = jQuery( this ).closest( '.wp-digi-list-item' );
+	var element = jQuery( this );
+	var parent = element.closest( '.wp-digi-list-item' );
 	var list_input = window.eva_lib.array_form.get_input( parent );
 
 	var data = {};
@@ -23,12 +24,5 @@ window.eva_lib.array_form.send_form = function( event ) {
 		}
 	}
 
-	jQuery.post( window.ajaxurl, data, window.eva_lib.array_form.success, "json" )
-};
-
-window.eva_lib.array_form.success = function( response ) {
-	console.log(response);
-};
-
-window.eva_lib.array_form.error = function() {
+	window.digirisk.request.send( element, data );
 };

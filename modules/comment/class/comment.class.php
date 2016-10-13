@@ -33,7 +33,6 @@ class digi_comment_class extends singleton_util {
 		if ( $id !== 0 ) {
 			$element = $model_name::g()->get( array( 'include' => $id ), array( 'comment' ) );
 			$element = $element[0];
-
 		}
 		else {
 			$element = $model_name::g()->get( array( 'schema' => true ) );

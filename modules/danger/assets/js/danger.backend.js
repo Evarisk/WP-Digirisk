@@ -1,30 +1,15 @@
-"use strict";
+window.digirisk.danger = {};
 
-var digi_danger = {
-	old_danger: undefined,
-	$: undefined,
+window.digirisk.danger.init = function() {
+	window.digirisk.danger.event();
+};
 
-	init: function( event, $ ) {
-		digi_danger.$ = $;
+window.digirisk.danger.event = function() {
+	jQuery( document ).on( 'click', '.wp-digi-risk .wp-digi-select-list li', window.digirisk.danger.select_danger );
+};
 
-		if ( event || event === undefined ) {
-			digi_danger.event();
-		}
-
-		this.old_danger = digi_danger.$( '.wp-digi-risk-item-new toggle' ).html();
-	},
-
-	event: function( $ ) {
-		digi_danger.$( document ).on( 'click', '.form-risk .wp-digi-select-list li', function( event ) { digi_danger.select_danger( event, digi_danger.$( this ) ); } );
-	},
-
-	select_danger: function( event, element ) {
-		digi_danger.$( '.form-risk input.input-hidden-danger' ).val( digi_danger.$( element ).data( 'id' ) );
-		digi_danger.$( '.form-risk toggle span' ).html( digi_danger.$( element ).find( 'img' ).attr( 'title' ) );
-	},
-
-	reset_create_form: function() {
-		digi_danger.$( '.form-risk toggle' ).html( digi_danger.old_danger );
-		digi_danger.$( '.form-risk input.input-hidden-danger' ).val( '' );
-	}
+window.digirisk.danger.select_danger = function( event ) {
+	var element = jQuery( this );
+	jQuery( '.wp-digi-risk input.input-hidden-danger' ).val( element.data( 'id' ) );
+	jQuery( '.wp-digi-risk toggle span img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
 };
