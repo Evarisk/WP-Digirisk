@@ -1,9 +1,8 @@
-window.eva_lib.array_form = function() {
-	window.eva_lib.array_form.init();
-	window.eva_lib.array_form.event();
-}
+window.eva_lib.array_form = {};
 
-window.eva_lib.array_form.init = function() {};
+window.eva_lib.array_form.init = function() {
+	window.eva_lib.array_form.event();
+};
 
 window.eva_lib.array_form.event = function() {
 	jQuery( document ).on( 'click', '.wp-digi-table .wp-digi-list-item .wp-digi-action-edit', window.eva_lib.array_form.send_form );
