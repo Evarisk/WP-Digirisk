@@ -23,7 +23,7 @@ class installer_action {
 	 */
 	public function __construct() {
 		// todo Renommes avec des underscores
-		add_action( 'wp_ajax_wpdigi-installer-step-1', array( $this, 'ajax_installer_step_1' ) );
+		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
 		add_action( 'admin_post_last_step', array( $this, 'admin_post_last_step' ) );
 	}
 
@@ -51,8 +51,8 @@ class installer_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
-	public function ajax_installer_step_1() {
-		check_ajax_referer( 'ajax_installer_step_1' );
+	public function ajax_installer_save_society() {
+		check_ajax_referer( 'ajax_installer_save_society' );
 
 		$address = address_class::g()->create( $_POST['address'] );
 		$groupment = group_class::g()->create( $_POST['groupment'] );
@@ -68,7 +68,7 @@ class installer_action {
 		// Met à jours l'option pour dire que l'installation est terminée
 		update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 
-		wp_send_json_success();
+		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'save_society' ) );
 	}
 
 	/**

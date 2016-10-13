@@ -9,11 +9,19 @@ window.digirisk.installer.init = function() {
 window.digirisk.installer.event = function() {
 
 };
+
+window.digirisk.installer.save_society = function( element, response ) {
+	element.closest( 'div' ).hide();
+	jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
+	jQuery( '.wpdigi-installer ul.step li:first' ).removeClass( 'active' );
+	jQuery( '.wpdigi-installer ul.step li:last' ).addClass( 'active' );
+  jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+}
 //
 // var digi_installer = {
 // 	$: undefined,
 // 	event: function($) {
-// 		digi_installer.$ = $;
+// 		jQuery = $;
 // 		digi_installer.$( document ).on( 'click', '.wpdigi-installer form input[type="button"]', function() { digi_installer.form_groupement( digi_installer.$( this ) ); } );
 // 		digi_installer.$( document ).on( 'click', '.wpdigi-installer .btn-more-option', function( event ) { digi_installer.toggle_form( event, digi_installer.$( this ) ); } );
 //   },

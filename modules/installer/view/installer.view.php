@@ -15,8 +15,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<h3><?php _e( 'Your society', 'digirisk' );?></h3>
 
 		<form method="POST" class="wp-digi-form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
-			<input type="hidden" name="action" value="wpdigi-installer-step-1" />
-			<?php wp_nonce_field( 'ajax_installer_step_1' ); ?>
+			<input type="hidden" name="action" value="installer_save_society" />
+			<?php wp_nonce_field( 'ajax_installer_save_society' ); ?>
 
 			<ul class="gridwrapper2">
 				<li class="form-element">
@@ -44,7 +44,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 				<div class="form-element block"><label><?php _e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"></textarea></label></div>
 			</div>
 
-			<input type="button" class="float right wp-digi-bton-fourth" value="<?php _e( 'Save', 'digirisk' ); ?>" />
+			<input 	type="button"
+							class="float right wp-digi-bton-fourth submit-form"
+							value="<?php _e( 'Enregistrer', 'digirisk' ); ?>" />
 		</form>
 	</div>
 
