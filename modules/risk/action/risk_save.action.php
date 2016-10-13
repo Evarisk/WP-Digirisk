@@ -38,7 +38,7 @@ class risk_save_action {
 					$danger = $danger[0];
 
 					$image_id = 0;
-					
+
 					if ( !empty( $posted_risk['associated_document_id'] ) ) {
 						$image_id = $posted_risk['associated_document_id']['image'][0];
 					}
@@ -47,7 +47,6 @@ class risk_save_action {
 					$posted_risk['parent_id'] = $parent_id;
 					$posted_risk['taxonomy']['digi-danger'][] = $danger->id;
 					$posted_risk['taxonomy']['digi-danger-category'][] = $danger->parent_id;
-
 					$risk = risk_class::g()->update( $posted_risk );
 
 					if ( !$risk ) {

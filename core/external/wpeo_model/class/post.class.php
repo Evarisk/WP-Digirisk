@@ -56,7 +56,7 @@ class post_class extends singleton_util {
 			}
 
 			$array_posts[$key] = new $this->model_name( $post, $children_wanted );
-			$array_posts[$key] = $this->get_taxonomies_id( $array_posts[$key] );
+			// $array_posts[$key] = $this->get_taxonomies_id( $array_posts[$key] );
 
 			if ( !empty( $this->after_get_function ) ) {
 				foreach ( $this->after_get_function as $get_function ) {

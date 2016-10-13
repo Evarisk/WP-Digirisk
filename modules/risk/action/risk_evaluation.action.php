@@ -39,13 +39,12 @@ class risk_evaluation_action {
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $key => &$risk ) {
 				if ( isset( $risk['id'] ) ) {
-					$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi_method'] );
+					$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
 					$risk['evaluation']['variable'] = $risk['variable'];
 					$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
 
 					if ( $risk['evaluation'] ) {
 						$risk['current_evaluation_id'] = $risk['evaluation']->id;
-						$risk['taxonomy']['digi-method'][] = max( $risk['taxonomy']['digi_method'] );
 					}
 					else {
 						unset( $list_risk[$key] );
