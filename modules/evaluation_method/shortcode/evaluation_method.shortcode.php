@@ -42,7 +42,6 @@ class evaluation_method_shortcode {
 		$equivalence = 1;
 		$digi_method_id = 0;
 		$target = 'wp-digi-risk-cotation-chooser';
-
 		if ( $risk_id != 0 ) {
 			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
 			$risk = $risk[0];

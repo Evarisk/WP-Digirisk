@@ -37,7 +37,11 @@ class risk_save_action {
 					$danger = danger_class::g()->get( array( 'include' => $posted_risk['danger_id'] ) );
 					$danger = $danger[0];
 
-					$image_id = $posted_risk['associated_document_id']['image'][0];
+					$image_id = 0;
+					
+					if ( !empty( $posted_risk['associated_document_id'] ) ) {
+						$image_id = $posted_risk['associated_document_id']['image'][0];
+					}
 
 					$posted_risk['title'] = $danger->name;
 					$posted_risk['parent_id'] = $parent_id;
