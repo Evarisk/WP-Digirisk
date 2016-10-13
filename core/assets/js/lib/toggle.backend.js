@@ -1,9 +1,9 @@
-window.digirisk.toggle = function() {
-	window.digirisk.toggle.init();
-	window.digirisk.toggle.event();
-}
+window.digirisk.toggle = {};
 
-window.digirisk.toggle.init = function() {};
+window.digirisk.toggle.init = function() {
+	window.digirisk.toggle.event();
+};
+
 window.digirisk.toggle.event = function() {
   jQuery( document ).on( 'click', 'toggle', window.digirisk.toggle.open );
   jQuery( document ).on( 'click', 'body', window.digirisk.toggle.close );
