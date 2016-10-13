@@ -1,9 +1,9 @@
-window.digirisk.evaluation_method_digirisk = function() {
-	window.digirisk.evaluation_method_digirisk.init();
-	window.digirisk.evaluation_method_digirisk.event();
-}
+window.digirisk.evaluation_method_digirisk = {};
 
-window.digirisk.evaluation_method_digirisk.init = function() {};
+window.digirisk.evaluation_method_digirisk.init = function() {
+	window.digirisk.evaluation_method_digirisk.event();
+};
+
 window.digirisk.evaluation_method_digirisk.event = function() {
 	jQuery( document ).on( 'click', 'ul.wp-digi-risk-cotation-chooser li.level-chooser', window.digirisk.evaluation_method_digirisk.select_cotation );
 };
