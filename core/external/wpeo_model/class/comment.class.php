@@ -14,6 +14,7 @@ class comment_class extends singleton_util {
 	protected $base = 'comment';
 	protected $version = '0.1';
 	protected $identifier_helper = 'comment';
+	protected $after_model_get_function = array( '\digi\construct_current_date' );
 
 	protected function construct() {}
 
@@ -61,7 +62,7 @@ class comment_class extends singleton_util {
 
 				if ( !empty( $this->after_model_get_function ) ) {
 					foreach( $this->after_model_get_function as $model_function ) {
-						$list_comment[$key] = call_user_func( $model_function, $data );
+						$list_comment[$key] = call_user_func( $model_function, $list_comment[$key] );
 					}
 				}
 			}
@@ -71,7 +72,7 @@ class comment_class extends singleton_util {
 
 			if ( !empty( $this->after_model_get_function ) ) {
 				foreach( $this->after_model_get_function as $model_function ) {
-					$list_comment[0] = call_user_func( $model_function, $data );
+					$list_comment[0] = call_user_func( $model_function, $list_comment[0] );
 				}
 			}
 		}
