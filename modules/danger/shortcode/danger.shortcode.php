@@ -35,9 +35,10 @@ class danger_shortcode {
 		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 
 		$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
+		$first_danger = max( $danger_category_list[0]->danger );
 
 		if ( $display === 'edit' ) {
-			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
+			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'first_danger' => $first_danger, 'danger_category_list' => $danger_category_list ) );
 		}
 		else {
 			$risk = risk_class::g()->get( array( 'include' => $id ), array( 'danger', 'danger_category' ) );

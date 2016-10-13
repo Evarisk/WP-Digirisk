@@ -20,4 +20,4 @@ window.eva_lib.init_array_form = function() {
 	new window.eva_lib.array_form();
 }
 
-window.onload = window.eva_lib.init;
+jQuery(document).ready(window.eva_lib.init);

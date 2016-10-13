@@ -3,9 +3,9 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <?php if ( !empty( $danger_category_list ) ) : ?>
-	<input class="input-hidden-danger" type="hidden" name="risk[<?php echo $id; ?>][danger_id]" value='' />
+	<input class="input-hidden-danger" type="hidden" name="risk[<?php echo $id; ?>][danger_id]" value='<?php echo $first_danger->id; ?>' />
 	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">
-		<span><?php _e( 'Sélectionner un danger', 'digirisk'); ?></span>
+		<span><?php echo wp_get_attachment_image( $first_danger->thumbnail_id, 'thumbnail', false, array( 'title' => $first_danger->name ) ); ?></span>
 		<i class="dashicons dashicons-arrow-down"></i>
 		<div class="wp-digi-select-list digi-popup grid icon hidden">
 		<?php foreach( $danger_category_list as $danger_category ): ?>

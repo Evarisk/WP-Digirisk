@@ -3,6 +3,8 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <li class="wp-digi-list-item wp-digi-risk-item <?php echo empty ( $risk->id ) ? 'wp-digi-risk-item-new': ''; ?>" data-risk-id="<?php echo $risk->id; ?>">
+	<input type="hidden" name="action" value="edit_risk" />
+	<input type="hidden" name="parent_id" value="<?php echo $society_id; ?>" />
 	<input name="risk[<?php echo $risk->id; ?>][id]" type="hidden" value="<?php echo $risk->id; ?>" />
 	<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
