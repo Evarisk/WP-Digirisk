@@ -125,9 +125,9 @@ class society_action {
 	* todo: Commenter
 	*/
 	public function callback_delete_society() {
-		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 
-		$society = society_class::g()->show_by_type( $element_id );
+		$society = society_class::g()->show_by_type( $id );
 		$society->status = 'trash';
 		society_class::g()->update_by_type( $society );
 
