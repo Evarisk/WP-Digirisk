@@ -1,9 +1,9 @@
-window.digirisk.tab = function() {
-	window.digirisk.tab.init();
-	window.digirisk.tab.event();
-}
+window.digirisk.tab = {};
 
-window.digirisk.tab.init = function() {};
+window.digirisk.tab.init = function() {
+	window.digirisk.tab.event();
+};
+
 window.digirisk.tab.event = function() {
   jQuery( document ).on( 'click', '.wp-digi-global-sheet-tab li', window.digirisk.tab.load );
 };
