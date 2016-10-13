@@ -40,7 +40,7 @@ class comment_class extends singleton_util {
 		$list_comment = array();
 
 		if( !empty( $array_comment ) ) {
-			foreach( $array_comment as $comment ) {
+			foreach( $array_comment as $key => $comment ) {
 				$comment = (array) $comment;
 
 				if ( !empty( $comment['comment_ID'] ) ) {
@@ -57,11 +57,23 @@ class comment_class extends singleton_util {
 					}
 				}
 
-				$list_comment[] = new $this->model_name( $comment, $field_wanted );
+				$list_comment[$key] = new $this->model_name( $comment, $field_wanted );
+
+				if ( !empty( $this->after_model_get_function ) ) {
+					foreach( $this->after_model_get_function as $model_function ) {
+						$list_comment[$key] = call_user_func( $model_function, $data );
+					}
+				}
 			}
 		}
 		else {
-			$list_comment[] = new $this->model_name( array(), $field_wanted );
+			$list_comment[0] = new $this->model_name( array(), $field_wanted );
+
+			if ( !empty( $this->after_model_get_function ) ) {
+				foreach( $this->after_model_get_function as $model_function ) {
+					$list_comment[0] = call_user_func( $model_function, $data );
+				}
+			}
 		}
 
 		return $list_comment;

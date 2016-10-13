@@ -55,13 +55,13 @@ class evaluation_method_shortcode {
 		else {
 			$risk = risk_class::g()->get( array( 'schema' => true ), array( 'evaluation_method', 'evaluation' ) );
 			$risk = $risk[0];
+			$risk->taxonomy['digi-method'][] = $term_evarisk_simple->term_id;
 		}
 
 		$view_data = array(
 			'target'							=> $target,
 			'term_evarisk_simple'	=> $term_evarisk_simple,
 			'risk'								=> $risk,
-			'digi_method_id' 		=> $digi_method_id,
 		);
 
 		view_util::exec( 'evaluation_method', $display . '-simple-evaluation-method', $view_data );
