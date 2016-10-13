@@ -179,7 +179,6 @@ class wpdigi_transferdata_society_class extends singleton_util {
 					'current_evaluation_id' 				=> 0,
 					'unique_key' 				=> $old_risk_id,
 					'unique_identifier' => ELEMENT_IDENTIFIER_R . $old_risk_id,
-					//'status' 						=> $main_risk_infos->risk_status,
 					'risk_date' 				=> array(
 						'start' => $main_risk_infos->dateDebutRisque,
 						'end' 	=> $main_risk_infos->dateFinRisque,
@@ -352,7 +351,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 									}
 									$risk_comment_definition = array(
 										'post_id'								=> $wp_risk->id,
-										'date'									=> $comment->date,
+										'date'									=> $comment->date_ajout,
 										'author_nicename'				=> $comment_author->display_name,
 										'author_email'					=> $comment_author->user_email,
 										'content'								=> $comment->commentaire,
