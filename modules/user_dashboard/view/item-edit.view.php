@@ -3,6 +3,8 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <li class="wp-digi-list-item <?php echo $user->id === 0 ? 'wp-digi-table-item-new':  ''; ?>">
+	<input type="hidden" name="action" value="save_user" />
+	<?php wp_nonce_field( 'ajax_save_user' ); ?>
 	<input type="hidden" name="user[<?php echo $user->id; ?>][id]" value="<?php echo $user->id; ?>" />
 	<span class="wp-avatar" style="background: #<?php echo $user->avatar_color; ?>;" ><?php echo $user->initial; ?></span>
 	<span><strong>U<?php echo $user->id; ?></strong></span>
@@ -13,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<?php
 		if ( empty( $user->id ) ):
 			?>
-			<a href="#" class="wp-digi-action dashicons dashicons-plus" ></a>
+			<a href="#" class="wp-digi-action dashicons dashicons-plus wp-digi-action-edit"></a>
 			<?php
 		else:
 			?>
