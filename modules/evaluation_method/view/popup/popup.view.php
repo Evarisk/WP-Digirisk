@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
   <input type="hidden" class="digi-method-evaluation-id" value="<?php echo !empty( $term_evarisk->term_id ) ? $term_evarisk->term_id : 0; ?>" />
 
   <section class="wp-digi-eval-evarisk">
-    <div>
+    <div class="digi-popup-propagation">
 			<a href="#" class="close"><i class="dashicons dashicons-no-alt"></i></a>
 			<div class="wp-digi-eval-table">
 				<?php if ( !empty( $list_evaluation_method_variable ) ): ?>
