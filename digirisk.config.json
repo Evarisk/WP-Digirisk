@@ -10,6 +10,8 @@
 		"core/core.config.json",
 
 		"modules/address/address.config.json",
+		"modules/society/society.config.json",
+		
 
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",
@@ -38,7 +40,6 @@
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",
 		"modules/sheet_groupment/sheet_groupment.config.json",
-		"modules/society/society.config.json",
 
 		"modules/tab/tab.config.json",
 		"modules/third/third.config.json",
