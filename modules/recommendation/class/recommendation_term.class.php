@@ -8,7 +8,7 @@ class recommendation_term_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = '\digi\recommendation_model';
+	protected $model_name   = '\digi\recommendation_term_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -74,19 +74,8 @@ class recommendation_term_class extends term_class {
 
 	}
 
-	public function display( $society_id ) {
-		$recommendation = $this->get( array( 'schema' => true ) );
-		$recommendation = $recommendation[0];
-		$index = 0;
-		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
-	}
 
-	public function display_recommendation_list( $society_id ) {
-		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ) );
-
-		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
-	}
 }
 
-recommendation_class::g();
+recommendation_term_class::g();
 ?>

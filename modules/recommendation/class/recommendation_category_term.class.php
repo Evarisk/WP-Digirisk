@@ -20,7 +20,7 @@ class recommendation_category_term_class extends term_class {
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = '\digi\recommendation_category_model';
+	protected $model_name   = '\digi\recommendation_category_term_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
@@ -79,4 +79,4 @@ class recommendation_category_term_class extends term_class {
 
 }
 
-recommendation_category_class::g();
+recommendation_category_term_class::g();

@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_category_model extends term_model {
+class recommendation_category_term_model extends term_model {
 
 	public function __construct( $object, $field_wanted = array()) {
 		$this->model = array_merge( $this->model, array(
@@ -36,7 +36,7 @@ class recommendation_category_model extends term_model {
 				'recommendation'	=> array(
 					'export'			=> true,
 					'type'				=> 'taxonomy',
-					'controller'	=> '\digi\recommendation_class',
+					'controller'	=> '\digi\recommendation_term_class',
 					'field'					=> 'parent',
 					'value'					=> 'post_id',
 					'custom_field'	=> 'post_id',
