@@ -41,7 +41,6 @@ class recommendation_class extends post_class {
 	public function display( $society_id ) {
 		$recommendation = $this->get( array( 'schema' => true ) );
 		$recommendation = $recommendation[0];
-		echo "<pre>"; print_r($recommendation); echo "</pre>";
 		$index = 0;
 		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
 	}

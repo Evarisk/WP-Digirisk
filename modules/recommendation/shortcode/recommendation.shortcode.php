@@ -42,7 +42,7 @@ class recommendation_shortcode {
 	public function callback_dropdown_recommendation( $param ) {
 		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
 
-		$recommendation_category_list = recommendation_category_term_class::g()->get( array(), 'recommendation_term' );
+		$recommendation_category_list = recommendation_category_term_class::g()->get( array(), array( '\digi\recommendation_term' ) );
 		$first_recommendation = max( $recommendation_category_list[0]->recommendation_term );
 
 		view_util::exec( 'recommendation', 'dropdown', array( 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
