@@ -170,7 +170,7 @@ class workunit_sheet_class extends singleton_util {
 		/**	Construction de l'affichage des risques dans la fiche imprimée / Build risks display into printed sheet	*/
 		$workunit_sheet_details[ 'risq80' ] = $workunit_sheet_details[ 'risq51' ] = $workunit_sheet_details[ 'risq48' ] = $workunit_sheet_details[ 'risq' ] = array( 'type' => 'segment', 'value' => array(), );
 		/**	On récupère la définition des risques associés à l'unité de travail / Get definition of risks associated to workunit	*/
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $workunit->id ), array( 'evaluation', 'danger_category', 'comment', 'evaluation_method' ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $workunit->id ), array( 'evaluation', 'danger', 'danger_category', 'comment', 'evaluation_method' ) );
 
 		$risk_list_to_order = array();
 		foreach ( $risk_list as $risk ) {

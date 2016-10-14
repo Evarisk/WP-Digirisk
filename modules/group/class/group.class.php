@@ -166,7 +166,7 @@ class group_class extends post_class {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
 		// 	return array();
 
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ), array ( 'evaluation', 'danger_category', 'danger' ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ), array ( 'evaluation', 'danger_category', 'danger', 'comment' ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
 			$comment_list = '';
