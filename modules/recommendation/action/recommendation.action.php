@@ -25,10 +25,9 @@ class recommendation_action {
 	 * wp_ajax_wpdigi-edit-recommendation
 	 */
 	function __construct() {
-		add_action( 'wp_ajax_wpdigi-create-recommendation', array( $this, 'ajax_create_recommendation' ), 12 );
 		add_action( 'wp_ajax_wpdigi-delete-recommendation', array( $this, 'ajax_delete_recommendation' ), 12 );
 		add_action( 'wp_ajax_wpdigi-load-recommendation', array( $this, 'ajax_load_recommendation' ), 12 );
-		add_action( 'wp_ajax_wpdigi-edit-recommendation', array( $this, 'ajax_edit_recommendation' ), 12 );
+		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ), 12 );
 	}
 
 	/**
@@ -136,36 +135,38 @@ class recommendation_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
-	public function ajax_edit_recommendation() {
-		if (  0 === (int) $_POST['workunit_id'] )
-			wp_send_json_error();
-		else
-			$workunit_id = (int) $_POST['workunit_id'];
-
-		if (  0 === (int) $_POST['term_id'] )
-			wp_send_json_error();
-		else
-			$term_id = (int) $_POST['term_id'];
-
-		if ( !isset( $_POST['index'] ) )
-			wp_send_json_error();
-		else
-			$index = (int) $_POST['index'];
-
-		check_ajax_referer( 'ajax_edit_recommendation_' . $term_id . '_' . $index );
-
-		$workunit = society_class::g()->show_by_type( $workunit_id );
-
-		$workunit->associated_recommendation[$term_id][$index]['comment'] = $_POST['recommendation_comment'];
-		$workunit->associated_recommendation[$term_id][$index]['last_update_date'] = current_time( 'mysql' );
-
-		society_class::g()->update_by_type( $workunit );
-
-		$term = recommendation_class::g()->get( array( 'id' => $term_id ) );
-		$term = $term[0];
-		$recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
-		$element = new \StdClass();
-		$element->id = $workunit_id;
+	public function ajax_save_recommendation() {
+		// if (  0 === (int) $_POST['workunit_id'] )
+		// 	wp_send_json_error();
+		// else
+		// 	$workunit_id = (int) $_POST['workunit_id'];
+		//
+		// if (  0 === (int) $_POST['term_id'] )
+		// 	wp_send_json_error();
+		// else
+		// 	$term_id = (int) $_POST['term_id'];
+		//
+		// if ( !isset( $_POST['index'] ) )
+		// 	wp_send_json_error();
+		// else
+		// 	$index = (int) $_POST['index'];
+		//
+		// check_ajax_referer( 'ajax_edit_recommendation_' . $term_id . '_' . $index );
+		//
+		// $workunit = society_class::g()->show_by_type( $workunit_id );
+		//
+		// $workunit->associated_recommendation[$term_id][$index]['comment'] = $_POST['recommendation_comment'];
+		// $workunit->associated_recommendation[$term_id][$index]['last_update_date'] = current_time( 'mysql' );
+		//
+		// society_class::g()->update_by_type( $workunit );
+		//
+		// $term = recommendation_class::g()->get( array( 'id' => $term_id ) );
+		// $term = $term[0];
+		// $recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
+		// $element = new \StdClass();
+		// $element->id = $workunit_id;
+		//
+		recommendation_class::g()->update( $_POST );
 
 		ob_start();
 		view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) );

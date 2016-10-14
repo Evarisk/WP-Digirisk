@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <form method="post" class="wp-digi-list-item wp-digi-table-item-edit wp-digi-recommendation-item" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
-	<input type="hidden" name="action" value="wpdigi-edit-recommendation" />
+	<input type="hidden" name="action" value="save_recommendation" />
 	<input type="hidden" name="workunit_id" value="<?php echo $society_id; ?>" />
 	<input type="hidden" name="term_id" value="<?php echo $recommendation->id; ?>" />
 	<input type="hidden" name="index" value="<?php echo $index; ?>" />

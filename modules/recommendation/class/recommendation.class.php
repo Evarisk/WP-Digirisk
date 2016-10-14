@@ -78,7 +78,6 @@ class recommendation_class extends term_class {
 		$recommendation = $this->get( array( 'schema' => true ) );
 		$recommendation = $recommendation[0];
 		$index = 0;
-		echo $recommendation;
 		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
 	}
 
