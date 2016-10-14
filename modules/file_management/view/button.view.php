@@ -22,8 +22,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<?php echo $title; ?>
 		<i class="wpeo-upload-media dashicons dashicons-format-image" ></i>
 		<img src="#" class="hidden wp-post-image wp-digi-element-thumbnail" />
-		<input class="input-file-image" type="hidden" name="<?php echo $type . '[' . $id . '][associated_document_id][image][]'; ?>" />
-		<input class="input-file-image" type="hidden" name="<?php echo $type . '[' . $id . '][thumbnail_id]'; ?>" />
+		<input class="input-file-image" type="hidden" name="associated_document_id[image][]'; ?>" />
+		<input class="input-file-image" type="hidden" name="thumbnail_id'; ?>" />
 		<?php
   endif;
   ?>

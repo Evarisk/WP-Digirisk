@@ -166,10 +166,10 @@ class recommendation_action {
 		// $element = new \StdClass();
 		// $element->id = $workunit_id;
 		//
-		recommendation_class::g()->update( $_POST );
+		$recommendation = recommendation_class::g()->update( $_POST );
 
 		ob_start();
-		view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) );
+		view_util::exec( 'recommendation', 'list-item', array( 'recommendation' => $recommendation ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

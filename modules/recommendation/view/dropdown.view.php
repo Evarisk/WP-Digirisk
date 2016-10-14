@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <?php if ( !empty( $recommendation_category_list ) ) : ?>
-	<input class="input-hidden-danger" type="hidden" name="recommendation[<?php echo $id; ?>][recommendation_id]" value='<?php echo $first_recommendation->id; ?>' />
+	<input class="input-hidden-danger" type="hidden" name="recommendation_id" value='<?php echo $first_recommendation->id; ?>' />
 	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">
 		<span><?php echo wp_get_attachment_image( $first_recommendation->thumbnail_id, 'thumbnail', false, array( 'title' => $first_recommendation->name ) ); ?></span>
 		<i class="dashicons dashicons-arrow-down"></i>

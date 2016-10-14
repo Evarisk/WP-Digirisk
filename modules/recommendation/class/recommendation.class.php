@@ -47,7 +47,7 @@ class recommendation_class extends post_class {
 
 	public function display_recommendation_list( $society_id ) {
 		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ) );
-
+		
 		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
 	}
 }
