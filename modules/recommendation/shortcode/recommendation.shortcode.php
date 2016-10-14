@@ -41,19 +41,11 @@ class recommendation_shortcode {
 	*/
 	public function callback_dropdown_recommendation( $param ) {
 		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
-		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 
-		$recommendation_category_list = category_recommendation_class::g()->get( array( ) );
+		$recommendation_category_list = recommendation_category_class::g()->get( array(), array( 'recommendation' ) );
 		$first_recommendation = max( $recommendation_category_list[0]->recommendation );
 
-		if ( $display === 'edit' ) {
-			view_util::exec( 'recommendation', 'dropdown', array( 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
-		}
-		else {
-			$recommendation = recommendation_class::g()->get( array( 'include' => $id ) );
-			$recommendation = $recommendation[0];
-			view_util::exec( 'recommendation', 'item', array( 'id' => $id, 'recommendation' => $recommendation ) );
-		}
+		view_util::exec( 'recommendation', 'dropdown', array( 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
 	}
 }
 

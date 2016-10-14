@@ -32,6 +32,16 @@ class recommendation_category_model extends term_model {
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
 			),
+			'child' => array(
+				'recommendation'	=> array(
+					'export'			=> true,
+					'type'				=> 'taxonomy',
+					'controller'	=> '\digi\recommendation_class',
+					'field'					=> 'parent',
+					'value'					=> 'post_id',
+					'custom_field'	=> 'post_id',
+				),
+			),
 		) );
 
 		parent::__construct( $object, $field_wanted );

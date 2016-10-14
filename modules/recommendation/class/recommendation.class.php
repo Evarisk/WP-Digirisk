@@ -23,8 +23,8 @@ class recommendation_class extends term_class {
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
 	protected $base = 'digirisk/recommendation';
 	protected $version = '0.1';
-
 	public $element_prefix = 'RE';
+
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 	public $last_affectation_index_key = '_wpdigi_last_recommendation_affectation_unique_key';
@@ -77,7 +77,9 @@ class recommendation_class extends term_class {
 	public function display( $society_id ) {
 		$recommendation = $this->get( array( 'schema' => true ) );
 		$recommendation = $recommendation[0];
-		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation ) );
+		$index = 0;
+		echo $recommendation;
+		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
 	}
 
 	public function display_recommendation_list( $society_id ) {
