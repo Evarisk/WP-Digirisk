@@ -14,18 +14,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class workunit_model extends post_model {
+class workunit_model extends society_model {
 
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'list_risk' => array(
-					'export'			=> true,
-					'type'				=> 'array',
-					'controller' 	=> '\digi\risk_class',
-					'field'				=> 'post_parent',
-				),
-			),
 			'user_info' => array(
 				'type' => 'array',
 				'meta_type'	=> 'multiple',
@@ -64,41 +56,9 @@ class workunit_model extends post_model {
 					),
 				),
 			),
-			'associated_product' => array(
-					'type'		=> 'array',
-					'meta_type'	=> 'multiple',
-			),
 			'associated_recommendation' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
-			),
-			'associated_picture_id' => array(
-				'type' 			=> 'array',
-				'meta_type'	=> 'multiple',
-			),
-			'associated_document_id' => array(
-				'type'				=> 'array',
-				'meta_type'	=> 'multiple',
-				'child' => array(
-					'image' => array(
-						'type'				=> 'array',
-						'meta_type'	=> 'multiple'
-					),
-					'document' => array(
-						'type'				=> 'array',
-						'meta_type' => 'multiple',
-					)
-				)
-			),
-			'unique_key' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_unique_key',
-			),
-			'unique_identifier' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_unique_identifier',
 			)
 		) );
 
