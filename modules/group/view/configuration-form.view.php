@@ -35,5 +35,5 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
   <div class="form-element block"><label><?php _e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"><?php echo $element->content; ?></textarea></label></div>
 
-  <button class="float right wp-digi-bton-fourth"><?php _e( 'Save Changes', 'digirisk' ); ?></button>
+  <button class="float right wp-digi-bton-fourth submit-form"><?php _e( 'Save Changes', 'digirisk' ); ?></button>
 </form>

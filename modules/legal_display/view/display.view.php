@@ -52,5 +52,5 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		?>
 	</div>
 
-  <button class="generate-legal-display wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'digirisk' ); ?></button>
+  <button class="generate-legal-display wp-digi-bton-fifth submit-form dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'digirisk' ); ?></button>
 </form>
