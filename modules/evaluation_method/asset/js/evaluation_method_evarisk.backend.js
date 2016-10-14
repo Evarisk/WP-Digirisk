@@ -7,6 +7,7 @@ window.digirisk.evaluation_method_evarisk.init = function() {
 window.digirisk.evaluation_method_evarisk.event = function() {
 	jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .row li', window.digirisk.evaluation_method_evarisk.select_variable );
 	jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .wp-digi-bton-fourth', window.digirisk.evaluation_method_evarisk.close_modal );
+	jQuery( document ).on( 'click', '.wpdigi-method-evaluation-render .close', window.digirisk.evaluation_method_evarisk.close_model_mask );
 };
 
 window.digirisk.evaluation_method_evarisk.select_variable = function( event ) {
@@ -56,8 +57,6 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 
 window.digirisk.evaluation_method_evarisk.close_model_mask = function( event ) {
 	var element = jQuery( this );
+	jQuery( '.wpdigi-method-evaluation-render' ).hide();
 
-	if ( event.target.className === 'wp-digi-eval-evarisk' ) {
-		jQuery( '.wpdigi-method-evaluation-render' ).hide();
-	}
 };

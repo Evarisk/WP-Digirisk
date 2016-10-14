@@ -17,6 +17,7 @@ class recommendation_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'digi-recommendation', array( $this, 'callback_digi_recommendation' ) );
+		add_shortcode( 'dropdown_recommendation', array( $this, 'callback_dropdown_recommendation' ) );
 	}
 
 	/**
@@ -25,12 +26,34 @@ class recommendation_shortcode {
 	* @param array $param
 	*/
 	public function callback_digi_recommendation( $param ) {
-		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id );
+		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
+		recommendation_class::g()->display( $element_id );
+	}
 
-		$list_recommendation_category = recommendation_category_class::g()->get();
-		$list_recommendation_in_workunit = $element->associated_recommendation;
-		view_util::exec( 'recommendation', 'list', array( 'element' => $element, 'element_id' => $element_id, 'list_recommendation_category' => $list_recommendation_category, 'list_recommendation_in_workunit' => $list_recommendation_in_workunit ) );
+	/**
+	* Récupère le niveau et l'équivalence de la méthode d'évaluation du risque courant.
+	*
+	* @param array $param Tableau de donnée
+	* @param int $param['risk_id'] L'id du risque
+	* @param string $param['display'] La méthode d'affichage pour le template
+	*
+	* @return bool
+	*/
+	public function callback_dropdown_recommendation( $param ) {
+		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
+		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
+
+		$recommendation_category_list = category_recommendation_class::g()->get( array( ) );
+		$first_recommendation = max( $recommendation_category_list[0]->recommendation );
+
+		if ( $display === 'edit' ) {
+			view_util::exec( 'recommendation', 'dropdown', array( 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
+		}
+		else {
+			$recommendation = recommendation_class::g()->get( array( 'include' => $id ) );
+			$recommendation = $recommendation[0];
+			view_util::exec( 'recommendation', 'item', array( 'id' => $id, 'recommendation' => $recommendation ) );
+		}
 	}
 }
 
