@@ -61,7 +61,7 @@ class workunit_sheet_class extends singleton_util {
 		$workunit_sheet_details[ 'utilisateursAffectes' ] = $workunit_sheet_details[ 'utilisateursDesaffectes' ] = array( 'type' => 'segment', 'value' => array(), );
 		$affected_users = $unaffected_users = null;
 		if ( !empty( $workunit->user_info[ 'affected_id' ][ 'user' ] ) ) {
-			$user_affectation_for_export = \digi\user_class::g()->build_list_for_document_export( $workunit->user_info[ 'affected_id' ][ 'user' ] );
+			$user_affectation_for_export = user_digi_class::g()->build_list_for_document_export( $workunit->user_info[ 'affected_id' ][ 'user' ] );
 			if ( null !== $user_affectation_for_export ) {
 				$workunit_sheet_details[ 'utilisateursAffectes' ] = array(
 					'type'	=> 'segment',
