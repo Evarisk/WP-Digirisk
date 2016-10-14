@@ -6,9 +6,9 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<li class="wp-digi-table-header">
 		<span class="wp-digi-recommendation-list-column-thumbnail" >&nbsp;</span>
 		<span class="wp-digi-recommendation-list-column-reference" ><?php _e( 'Ref.', 'digirisk' ); ?></span>
-		<span><?php _e( 'Recommendation name', 'digirisk' ); ?></span>
-		<span><?php _e( 'Comment', 'digirisk' ); ?></span>
-		<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
+		<span><?php _e( 'Préconisation', 'digirisk' ); ?></span>
+		<span><?php _e( 'Commentaire', 'digirisk' ); ?></span>
+		<span>&nbsp;</span>
 	</li>
 
 	<?php $i = 1; ?>
