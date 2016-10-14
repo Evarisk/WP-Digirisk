@@ -1,92 +1,82 @@
 <?php namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
+/**
+ * Fichier contenant les utilitaires pour la gestion des catégories de préconisation et les préconisations / File with all utilities for managing recommendation categories and recommendations
+ *
+ * @author Evarisk development team <dev@evarisk.com>
+ * @version 6.0
+ */
 
-class recommendation_class extends term_class {
+/**
+ * Classe contenant les utilitaires pour la gestion des catégories de préconisations / Class with all utilities for managing recommendation categories
+ *
+ * @author Evarisk development team <dev@evarisk.com>
+ * @version 6.0
+ */
+class recommendation_category_class extends term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string
 	 */
-	protected $model_name   = '\digi\recommendation_model';
+	protected $model_name   = '\digi\recommendation_category_model';
 	/**
 	 * Type de l'élément dans wordpress / Wordpress element type
 	 * @var string
 	 */
-	protected $taxonomy    	= 'digi-recommendation';
+	protected $taxonomy    	= 'digi-recommendation-category';
 	/**
 	 * Nom du champs (meta) de stockage des données liées / Name of field (meta) for linked datas storage
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_recommendation';
+	protected $meta_key    	= '_wpdigi_recommendationcategory';
 
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
-	protected $base = 'digirisk/recommendation';
+	protected $base = 'digirisk/recommendation-category';
 	protected $version = '0.1';
-	public $element_prefix = 'RE';
-
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
-	public $last_affectation_index_key = '_wpdigi_last_recommendation_affectation_unique_key';
+	public $element_prefix = 'RC';
 
 	/**
 	* Le constructeur
 	*/
 	protected function construct() {
-		/**	Define taxonomy for recommendation	*/
-		add_action( 'init', array( $this, 'recommendation_type' ), 0 );
+		/**	Define taxonomy for recommendation categories	*/
+		add_action( 'init', array( $this, 'recommendation_category_type' ), 0 );
 	}
 
 	/**
-	* Déclares la taxonomy recommendation
+	* Déclares la taxonomy recommendation category
 	*/
-	function recommendation_type() {
+	function recommendation_category_type() {
 		$labels = array(
-			'name'                       => _x( 'Recommendations', 'digirisk' ),
-			'singular_name'              => _x( 'Recommendation', 'digirisk' ),
-			'search_items'               => __( 'Search recommendations', 'digirisk' ),
-			'popular_items'              => __( 'Popular recommendations', 'digirisk' ),
-			'all_items'                  => __( 'All recommendations', 'digirisk' ),
-			'parent_item'                => null,
-			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit recommendation', 'digirisk' ),
-			'update_item'                => __( 'Update recommendation', 'digirisk' ),
-			'add_new_item'               => __( 'Add New recommendation', 'digirisk' ),
-			'new_item_name'              => __( 'New recommendation Name', 'digirisk' ),
-			'separate_items_with_commas' => __( 'Separate recommendations with commas', 'digirisk' ),
-			'add_or_remove_items'        => __( 'Add or remove recommendations', 'digirisk' ),
-			'choose_from_most_used'      => __( 'Choose from the most used recommendations', 'digirisk' ),
-			'not_found'                  => __( 'No recommendations found.', 'digirisk' ),
-			'menu_name'                  => __( 'Recommendations', 'digirisk' ),
+			'name'              => __( 'Recommendation categories', 'digirisk' ),
+			'singular_name'     => __( 'Recommendation category', 'digirisk' ),
+			'search_items'      => __( 'Search recommendation categories', 'digirisk' ),
+			'all_items'         => __( 'All recommendation categories', 'digirisk' ),
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => __( 'Edit recommendation category', 'digirisk' ),
+			'update_item'       => __( 'Update recommendation category', 'digirisk' ),
+			'add_new_item'      => __( 'Add New recommendation category', 'digirisk' ),
+			'new_item_name'     => __( 'New recommendation category Name' , 'digirisk'),
+			'menu_name'         => __( 'Recommendation category', 'digirisk' ),
 		);
 
 		$args = array(
-			'hierarchical'          => true,
-			'labels'                => $labels,
-			'show_ui'               => true,
-			'show_admin_column'     => true,
-			'query_var'             => true,
-			'rewrite'               => array( 'slug' => 'recommendation' ),
-			'update_count_callback' => '_update_generic_term_count',
+			'hierarchical'      => false,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'recommendation-category' ),
 		);
 
 		register_taxonomy( $this->taxonomy, array( 'risk', 'societies' ), $args );
-
 	}
 
-	public function display( $society_id ) {
-		$recommendation = $this->get( array( 'schema' => true ) );
-		$recommendation = $recommendation[0];
-		$index = 0;
-		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
-	}
-
-	public function display_recommendation_list( $society_id ) {
-		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ) );
-
-		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
-	}
 }
 
-recommendation_class::g();
-?>
+recommendation_category_class::g();

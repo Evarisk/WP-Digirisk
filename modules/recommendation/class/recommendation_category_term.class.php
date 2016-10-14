@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class recommendation_category_class extends term_class {
+class recommendation_category_term_class extends term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use
