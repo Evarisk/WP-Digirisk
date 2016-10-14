@@ -41,12 +41,13 @@ class recommendation_class extends post_class {
 	public function display( $society_id ) {
 		$recommendation = $this->get( array( 'schema' => true ) );
 		$recommendation = $recommendation[0];
+		echo "<pre>"; print_r($recommendation); echo "</pre>";
 		$index = 0;
 		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
 	}
 
 	public function display_recommendation_list( $society_id ) {
-		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'recommendation_category_term', 'recommendation_term' ) );
+		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
 		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
 	}
 }

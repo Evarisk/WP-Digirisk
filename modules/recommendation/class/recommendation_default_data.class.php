@@ -19,7 +19,7 @@ class recommendation_default_data_class extends singleton_util {
 	}
 
 	private function create_recommendation_category( $json_recommendation_category ) {
-		$recommendation_category = recommendation_category_class::g()->create( array(
+		$recommendation_category = recommendation_category_term_class::g()->create( array(
 				'name' => $json_recommendation_category->name,
 				'recommendation_category_print_option' => $json_recommendation_category->option->recommendation_category_print_option,
 				'recommendation_category_option' => $json_recommendation_category->option->recommendation_print_option,
@@ -33,7 +33,7 @@ class recommendation_default_data_class extends singleton_util {
 
 		$recommendation_category->thumbnail_id = $file_id;
 		$recommendation_category->associated_document_id[] = $file_id;
-		$recommendation_category = recommendation_category_class::g()->update( $recommendation_category );
+		$recommendation_category = recommendation_category_term_class::g()->update( $recommendation_category );
 
 		foreach( $json_recommendation_category->option->recommendation as $json_recommandation ) {
 			$this->create_recommendation( $recommendation_category, $json_recommandation );
@@ -41,7 +41,7 @@ class recommendation_default_data_class extends singleton_util {
 	}
 
 	private function create_recommendation( $recommendation_category, $json_recommandation ) {
-		$recommandation = recommendation_class::g()->create( array(
+		$recommandation = recommendation_term_class::g()->create( array(
 			'name' => $json_recommandation->name,
 			'parent_id' => $recommendation_category->id,
 			'type'	=> $json_recommandation->option->type,
@@ -50,7 +50,7 @@ class recommendation_default_data_class extends singleton_util {
 		if ( !is_wp_error( $recommandation ) ) {
 			$file_id = file_util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
 			$recommandation->thumbnail_id = $file_id;
-			$recommandation = recommendation_class::g()->update( $recommandation );
+			$recommandation = recommendation_term_class::g()->update( $recommandation );
 		}
 	}
 }

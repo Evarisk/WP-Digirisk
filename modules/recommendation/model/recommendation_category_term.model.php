@@ -33,7 +33,7 @@ class recommendation_category_term_model extends term_model {
 				'meta_type'	=> 'multiple',
 			),
 			'child' => array(
-				'recommendation'	=> array(
+				'recommendation_term'	=> array(
 					'export'			=> true,
 					'type'				=> 'taxonomy',
 					'controller'	=> '\digi\recommendation_term_class',

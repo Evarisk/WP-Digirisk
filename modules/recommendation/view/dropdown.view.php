@@ -10,8 +10,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<div class="wp-digi-select-list digi-popup grid icon hidden">
 		<?php foreach( $recommendation_category_list as $recommendation_category ): ?>
 			<ul>
-				<?php if( !empty( $recommendation_category->recommendation ) ): ?>
-					<?php foreach( $recommendation_category->recommendation as $recommendation ): ?>
+				<?php if( !empty( $recommendation_category->recommendation_term ) ): ?>
+					<?php foreach( $recommendation_category->recommendation_term as $recommendation ): ?>
 						<li class="child" data-id="<?php echo $recommendation->id; ?>"><?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false, array( 'title' => $recommendation->name ) ); ?></li>
 					<?php endforeach; ?>
 				<?php endif; ?>
