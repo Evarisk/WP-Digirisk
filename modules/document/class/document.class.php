@@ -123,12 +123,6 @@ class document_class extends post_class {
 			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file_path, 'digirisk' );
 		}
 
-
-		// $upload_dir = wp_upload_dir();
-		// if ( file_exists( $upload_dir['basedir'] . '/digirisk/document_template/' . $current_element_type[0] . '.odt' ) ) {
-		//
-		// }
-
 		return $response;
 	}
 
@@ -351,7 +345,7 @@ class document_class extends post_class {
 
 		/**	Définition du modèle de document a utiliser pour l'impression / Define the document model to use for print sheet */
 		$model_to_use = null;
-		$model_response = $this->get_model_for_element( wp_parse_args( $document_type, array( 'model', 'default_model' )) );
+		$model_response = $this->get_model_for_element( wp_parse_args( array( 'model', 'default_model' ), $document_type) );
 		$model_to_use = $model_response[ 'model_path' ];
 
   	/**	Définition de la révision du document / Define the document version	*/
