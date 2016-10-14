@@ -36,7 +36,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
-	<input type="submit" class="wp-digi-bton-fourth float right" value="<?php _e('Update', 'digirisk'); ?>" />
+	<input type="submit" class="wp-digi-bton-fourth float right submit-form" value="<?php _e('Update', 'digirisk'); ?>" />
 
 	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>

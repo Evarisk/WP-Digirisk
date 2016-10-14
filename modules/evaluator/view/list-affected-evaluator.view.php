@@ -27,9 +27,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 							<span><?php echo evaluator_class::g()->get_duration( $affected_evaluator[ 'affectation_info' ] ); ?></span>
 							<span class="wp-digi-action">
 								<a 	data-id="<?php echo $element->id; ?>"
+										data-action="detach_evaluator"
 										data-user-id="<?php echo $affected_evaluator['user_info']->id; ?>"
-										data-affectation-data-id="<?php echo $affected_evaluator['affectation_info']['id']; ?>"
-										class="wp-digi-action-delete dashicons dashicons-no-alt"></a>
+										data-affectation-id="<?php echo $affected_evaluator['affectation_info']['id']; ?>"
+										class="wp-digi-action-delete dashicons dashicons-no-alt wp-digi-action-delete"></a>
 							</span>
 						</li>
 					<?php
