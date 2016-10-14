@@ -8,6 +8,7 @@ window.digirisk.form.event = function() {
 };
 
 window.digirisk.form.sumbit_form = function( event ) {
+	event.preventDefault();
   var element = jQuery( this );
   jQuery( this ).closest( 'form' ).ajaxSubmit( {
     success: function( response ) {

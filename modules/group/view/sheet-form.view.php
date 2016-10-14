@@ -26,5 +26,5 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		<div class="form-element"><label><?php _e( 'Location', 'digirisk' ); ?><textarea name="dispoDesPlans" ><?php echo $document_unique->document_meta['dispoDesPlans']; ?></textarea></label></div>
 	</div>
 
-	<button class="wp-digi-sheet-generation-button wp-digi-bton-fifth dashicons-before dashicons-share-alt2 wp-digi-duer-generation-button " ><?php _e( 'Generate DUER', 'digirisk' ); ?></button>
+	<button class="submit-form wp-digi-sheet-generation-button wp-digi-bton-fifth dashicons-before dashicons-share-alt2 wp-digi-duer-generation-button " ><?php _e( 'Generate DUER', 'digirisk' ); ?></button>
 </form>

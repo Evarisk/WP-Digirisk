@@ -28,7 +28,7 @@ class group_action {
 		add_action( 'init', array( $this, 'custom_post_type' ), 5 );
 
 		// todo: Remplacer - par _
-		add_action( 'wp_ajax_wpdigi-create-group', array( $this, 'ajax_create_group' ) );
+		add_action( 'wp_ajax_create_group', array( $this, 'ajax_create_group' ) );
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
@@ -93,13 +93,13 @@ class group_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_create_group() {
-		if ( 0 === ( int )$_POST['group_id'] )
+		if ( 0 === ( int )$_POST['parent_id'] )
 			wp_send_json_error();
 		else
-			$group_id = (int) $_POST['group_id'];
+			$parent_id = (int) $_POST['parent_id'];
 
 		$group = group_class::g()->create( array(
-			'parent_id' => $group_id,
+			'parent_id' => $parent_id,
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
@@ -123,7 +123,7 @@ class group_action {
 		do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
 		$template_right = ob_get_clean();
 
-		wp_send_json_success( array( 'society' => $society, 'template_left' => $template_left, 'template_right' => $template_right ) );
+		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_create_group', 'society' => $society, 'template_left' => $template_left, 'template_right' => $template_right ) );
 	}
 
 	/**

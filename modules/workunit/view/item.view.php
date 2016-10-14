@@ -1,7 +1,10 @@
 <?php namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
-	<li class="<?php echo $element->id === $workunit_selected_id ? "active": ""; ?> wp-digi-list-item wp-digi-workunit-<?php echo $element->id; ?> wp-digi-item-workunit" data-id="<?php echo $element->id; ?>" data-type="<?php echo $element->type; ?>">
+	<li class="<?php echo $element->id === $workunit_selected_id ? "active": ""; ?> wp-digi-list-item wp-digi-workunit-<?php echo $element->id; ?> wp-digi-item-workunit"
+		data-id="<?php echo $element->id; ?>"
+		data-type="<?php echo $element->type; ?>">
+		
 		<?php view_util::exec( 'society', 'identity', array( 'element' => $element ) ); ?>
 
 		<span class="wp-digi-workunit-action" >

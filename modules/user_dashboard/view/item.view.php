@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			data-id="<?php echo $user->id; ?>"
 			data-action="load_user"
 			data-nonce="<?php echo wp_create_nonce( 'ajax_load_user_' . $user->id ); ?>"
-			class="wp-digi-action wp-digi-action-load dashicons action dashicons-edit"></a>
+			class="wp-digi-action wp-digi-action-load dashicons action-attribute dashicons-edit"></a>
 
 		<a href="#"
 			data-id="<?php echo $user->id; ?>"

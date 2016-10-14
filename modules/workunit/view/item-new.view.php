@@ -10,5 +10,5 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<?php wp_nonce_field( 'wpdigi-workunit-creation', 'wpdigi_nonce', false, true ); ?>
 		<input type="text" placeholder="<?php _e( 'New work unit', 'digirisk' ); ?>" name="workunit[title]" />
 	</span>
-	<span class="wp-digi-new-workunit-action" ><a data-parent="wp-digi-workunit" href="#" class="wp-digi-action dashicons dashicons-plus action" ></a></span>
+	<span class="wp-digi-new-workunit-action" ><a data-parent="wp-digi-workunit" href="#" class="wp-digi-action dashicons dashicons-plus action-input" ></a></span>
 </li>

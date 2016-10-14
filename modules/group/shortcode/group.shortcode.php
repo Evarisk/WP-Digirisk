@@ -31,7 +31,14 @@ class group_shortcode {
 		$element_id = $param['post_id'];
     $element = society_class::g()->show_by_type( $element_id, array( false ) );
 		$list_document_unique = document_unique_class::g()->get( array( 'parent_id' => $element_id, 'order' => 'DESC', 'post_mime_type' => 'application/vnd.oasis.opendocument.text', 'posts_per_page' => 1 ) );
-		$document_unique = $list_document_unique[0];
+		if ( !empty( $list_doucment_unique[0] ) ) {
+			$document_unique = $list_document_unique[0];
+		}
+		else {
+			$list_document_unique = document_unique_class::g()->get( array( 'schema' => true ) );
+			$document_unique = $list_document_unique[0];
+		}
+
 		$current_user = wp_get_current_user();
 
 		/**	Définition des informations de l'émetteur du document unique / Define informations about DUER	*/

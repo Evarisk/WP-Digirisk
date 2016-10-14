@@ -10,7 +10,7 @@ jQuery.fn.get_data = function( cb ) {
         localName = localName.substr(5);
 
         if ( localName == 'nonce' ) localName = '_wpnonce';
-        
+        localName = localName.replace( '-', '_' );
         data[localName] =  jQuery( this )[0].attributes[i].value;
       }
     }

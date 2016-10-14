@@ -14,7 +14,7 @@ window.eva_lib.array_form.get_input = function( parent ) {
 
 window.eva_lib.array_form.send_form = function( event ) {
 	event.preventDefault();
-	
+
 	var element = jQuery( this );
 	var parent = element.closest( '.wp-digi-list-item' );
 	var list_input = window.eva_lib.array_form.get_input( parent );

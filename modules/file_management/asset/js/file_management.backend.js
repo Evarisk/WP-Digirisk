@@ -31,7 +31,7 @@ window.digirisk.media.open_popup = function( event ) {
     window.digirisk.media.load_media_upload( element, element.data( 'id' )  );
   }
   else {
-    window.wpeo_gallery.open( element );
+    window.digirisk.gallery.open( element );
   }
 };
 

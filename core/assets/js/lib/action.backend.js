@@ -5,11 +5,12 @@ window.digirisk.action.init = function() {
 };
 
 window.digirisk.action.event = function() {
-  jQuery( document ).on( 'click', '.action', window.digirisk.action.exec );
+  jQuery( document ).on( 'click', '.action-input', window.digirisk.action.exec_input );
+  jQuery( document ).on( 'click', '.action-attribute', window.digirisk.action.exec_attribute );
   jQuery( document ).on( 'click', '.wp-digi-action-delete', window.digirisk.action.delete );
 };
 
-window.digirisk.action.exec = function(event) {
+window.digirisk.action.exec_input = function(event) {
   var element = jQuery( this );
 	var parent_element = element;
 
@@ -21,7 +22,6 @@ window.digirisk.action.exec = function(event) {
 		element[0].setAttribute( 'disabled', true );
 
 		var list_input = window.eva_lib.array_form.get_input( parent_element );
-
 		var data = {};
 		for (var i = 0; i < list_input.length; i++) {
 			if ( list_input[i].name ) {
@@ -30,6 +30,18 @@ window.digirisk.action.exec = function(event) {
 		}
 
     window.digirisk.request.send( element, data );
+	}
+};
+
+window.digirisk.action.exec_attribute = function(event) {
+  var element = jQuery( this );
+
+	if ( !element[0].getAttribute(' disabled' ) ) {
+		element[0].setAttribute( 'disabled', true );
+
+		element.get_data( function ( data ) {
+			window.digirisk.request.send( element, data );
+		} );
 	}
 };
 
