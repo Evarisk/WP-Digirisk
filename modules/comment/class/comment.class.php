@@ -31,7 +31,7 @@ class digi_comment_class extends singleton_util {
 		$model_name = '\digi\\' . $type . '_class';
 
 		if ( $id !== 0 ) {
-			$element = $model_name::g()->get( array( 'include' => $id ), array( 'comment' ) );
+			$element = $model_name::g()->get( array( 'include' => array( $id ), array( '\digi\comment' ) ) );
 			$element = $element[0];
 		}
 		else {

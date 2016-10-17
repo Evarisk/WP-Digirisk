@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<span class="wp-digi-recommendation-list-column-reference"><?php echo !empty( $recommendation->unique_identifier ) ? $recommendation->unique_identifier : 'RE0'; ?></span>
 	<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	<span><?php echo $recommendation->title; ?></span>
-	<span class="wp-digi-comment">Comment</span>
+	<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" type="recommendation"]'); ?>
 	<span class="wp-digi-action">
 		<a href="#" class="wp-digi-action-edit fa fa-floppy-o" aria-hidden="true"></a>
 	</span>

@@ -13,3 +13,7 @@ window.digirisk.recommendation.select_recommendation = function( event ) {
 	jQuery( '.wp-digi-recommendation input.input-hidden-recommendation' ).val( element.data( 'id' ) );
 	jQuery( '.wp-digi-recommendation toggle span img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
 };
+
+window.digirisk.recommendation.save_recommendation_success = function( element, response ) {
+  jQuery( '.wp-digi-recommendation' ).replaceWith( response.data.template );
+}

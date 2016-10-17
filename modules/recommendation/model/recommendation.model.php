@@ -15,7 +15,7 @@ class recommendation_model extends post_model {
 		$this->model['child']['comment'] = array(
 			'export'			=> true,
 			'type'				=> 'object',
-			'controller'	=> '\digi\comment_class',
+			'controller'	=> '\digi\recommendation_comment_class',
 			'field'				=> 'post_id'
 		);
 

@@ -31,62 +31,6 @@ class recommendation_action {
 	}
 
 	/**
-	* Créer une recommendation
-	*
-	* int $_POST['workunit_id'] L'ID de l'unité de travail
-	* int $_POST['recommendation_id'] L'ID de la recommendation
-	* string $_POST['recommendation_comment'] Le commentaire de la recommendation
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
-	function ajax_create_recommendation() {
-		check_ajax_referer( 'ajax_create_recommendation' );
-
-		if (  0 === (int) $_POST['workunit_id'] )
-			wp_send_json_error();
-		else
-			$workunit_id = (int) $_POST['workunit_id'];
-
-		$workunit = society_class::g()->show_by_type( $workunit_id );
-
-		if (  0 === (int) $_POST['recommendation_id'] )
-			wp_send_json_error();
-		else
-			$recommendation_id = (int) $_POST['recommendation_id'];
-
-		// Récupèration des l'identifiant unique
-		$unique_identifier = get_option( recommendation_class::g()->last_affectation_index_key, 0 );
-		$unique_identifier++;
-		update_option( recommendation_class::g()->last_affectation_index_key, $unique_identifier );
-
-		$recommendation_in_workunit = array(
-			'status' 			=> 'valid',
-			'unique_key' 		=> $unique_identifier,
-			'unique_identifier' => $this->unique_identifier . $unique_identifier,
-			'efficiency' 		=> 0,
-			'comment'			=> sanitize_text_field( stripslashes($_POST['recommendation_comment'] ) ),
-			'type'				=> '',
-			'affectation_date'	=> current_time( 'mysql' ),
-			'last_update_date'	=> current_time( 'mysql' ),
-		);
-
-		$workunit->associated_recommendation[$recommendation_id][] = $recommendation_in_workunit;
-
-		society_class::g()->update_by_type( $workunit );
-
-		$term = recommendation_class::g()->get( array( 'id' => $recommendation_id ) );
-		$term = $term[0];
-		$term_id = $term->id;
-		$index = count( $workunit->associated_recommendation[$recommendation_id] ) - 1;
-		$element = new \stdClass();
-		$element->id = $workunit_id;
-
-		ob_start();
-		view_util::exec( 'recommendation', 'list-item', array( 'term' => $term, 'element' => $element, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
-	}
-
-	/**
 	* Charges une recommendation
 	*
 	* int $_POST['workunit_id'] L'ID de l'unité de travail
@@ -96,33 +40,7 @@ class recommendation_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_recommendation() {
-		if (  0 === (int) $_POST['workunit_id'] )
-			wp_send_json_error();
-		else
-			$workunit_id = (int) $_POST['workunit_id'];
-
-		if (  0 === (int) $_POST['term_id'] )
-			wp_send_json_error();
-		else
-			$term_id = (int) $_POST['term_id'];
-
-		if ( !isset( $_POST['index'] ) )
-			wp_send_json_error();
-		else
-			$index = (int) $_POST['index'];
-
-		check_ajax_referer( 'ajax_load_recommendation_' . $term_id. '_' . $index );
-
-		$workunit = society_class::g()->show_by_type( $workunit_id );
-		$recommendation_in_workunit = $workunit->associated_recommendation[$term_id][$index];
-		$list_recommendation_category = recommendation_category_class::g()->get();
-
-		$term = recommendation_class::g()->get( array( 'id' => $term_id ) );
-		$term = $term[0];
-
-		ob_start();
-		view_util::exec( 'recommendation', 'list-item-edit', array( 'workunit_id' => $workunit_id, 'term_id' => $term_id, 'index' => $index, 'recommendation_in_workunit' => $recommendation_in_workunit, 'term' => $term ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		// wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => '' 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -141,9 +59,16 @@ class recommendation_action {
 		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
 		$recommendation = recommendation_class::g()->update( $_POST );
 
+		if ( !empty( $_POST['list_comment'] ) ) {
+		  foreach ( $_POST['list_comment'] as $element ) {
+				$element['post_id'] = $recommendation->id;
+				recommendation_comment_class::g()->update( $element );
+		  }
+		}
+
 		ob_start();
-		view_util::exec( 'recommendation', 'list-item', array( 'recommendation' => $recommendation ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		recommendation_class::g()->display( $recommendation->parent_id );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'save_recommendation_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -156,27 +81,6 @@ class recommendation_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_recommendation() {
-		if (  0 === (int) $_POST['workunit_id'] )
-			wp_send_json_error();
-		else
-			$workunit_id = (int) $_POST['workunit_id'];
-
-		if (  0 === (int) $_POST['term_id'] )
-			wp_send_json_error();
-		else
-			$term_id = (int) $_POST['term_id'];
-
-		if ( !isset( $_POST['index'] ) )
-			wp_send_json_error();
-		else
-			$index = (int) $_POST['index'];
-
-		check_ajax_referer( 'ajax_delete_recommendation_' . $term_id . '_' . $index );
-		$workunit = society_class::g()->show_by_type( $workunit_id );
-
-		$workunit->associated_recommendation[$term_id][$index]['status'] = 'deleted';
-		society_class::g()->update_by_type( $workunit );
-
 		wp_send_json_success();
 	}
 }

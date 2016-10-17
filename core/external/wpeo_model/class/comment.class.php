@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 class comment_class extends singleton_util {
 	protected $model_name = '\digi\comment_model';
 	protected $meta_key = '_comment';
-	protected $comment_type	= 'comment';
+	protected $comment_type	= '';
 	protected $base = 'comment';
 	protected $version = '0.1';
 	protected $identifier_helper = 'comment';
@@ -41,7 +41,9 @@ class comment_class extends singleton_util {
 			$array_comment[] = array();
 		}
 		else {
+			echo "<pre>"; print_r($args); echo "</pre>";
 			$array_comment = get_comments( $args );
+			echo "<pre>"; print_r($array_comment); echo "</pre>";
 		}
 
 		$list_comment = array();
