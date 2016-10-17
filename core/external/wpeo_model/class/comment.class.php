@@ -41,9 +41,7 @@ class comment_class extends singleton_util {
 			$array_comment[] = array();
 		}
 		else {
-			echo "<pre>"; print_r($args); echo "</pre>";
 			$array_comment = get_comments( $args );
-			echo "<pre>"; print_r($array_comment); echo "</pre>";
 		}
 
 		$list_comment = array();
