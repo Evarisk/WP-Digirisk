@@ -138,7 +138,7 @@ class recommendation_action {
 	public function ajax_save_recommendation() {
 		$recommendation_term = recommendation_term_class::g()->get( array( 'include' => $_POST['taxonomy']['digi-recommendation'] ) );
 		$recommendation_term = $recommendation_term[0];
-		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->id;
+		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
 		$recommendation = recommendation_class::g()->update( $_POST );
 
 		ob_start();

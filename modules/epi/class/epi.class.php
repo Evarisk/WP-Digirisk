@@ -9,7 +9,7 @@ class epi_class extends post_class {
 	protected $meta_key    	= '_wpdigi_epi';
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to epi from WP Rest API	*/
-	protected $base = 'digiepi/epi';
+	protected $base = 'digirisk/epi';
 	protected $version = '0.1';
 
 	protected $before_post_function = array( '\digi\construct_identifier' );
@@ -21,7 +21,9 @@ class epi_class extends post_class {
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Affiche la fenêtre principale

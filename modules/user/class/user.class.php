@@ -29,6 +29,7 @@ class user_digi_class extends user_class {
 		add_action( 'edit_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'personal_options_update', array( $this, 'callback_options_update' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'callback_options_update' ) );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 
 	}
 

@@ -34,7 +34,9 @@ class document_class extends post_class {
 	/**
 	 * Instanciation de la gestion des document imprimés / Instanciate printes document
 	 */
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Récupères le chemin vers le dossier digirisk dans wp-content/uploads

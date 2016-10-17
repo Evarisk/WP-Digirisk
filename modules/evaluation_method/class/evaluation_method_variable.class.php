@@ -42,6 +42,7 @@ class evaluation_method_variable_class extends term_class {
 	protected function construct() {
 		/**	Define taxonomy for evaluation method's vars	*/
 		add_action( 'init', array( $this, 'evaluation_method_vars_type' ), 1 );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

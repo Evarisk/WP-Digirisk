@@ -6,8 +6,10 @@ class legal_display_class extends post_class {
   protected $model_name = '\digi\legal_display_model';
 	protected $post_type  = 'digi-legal-display';
 	protected $meta_key   = '_wpdigi_legal_display';
-	protected $base 			= 'digirisk/legal_display';
+
+	protected $base 			= 'digirisk/legal-display';
 	protected $version 		= '0.1';
+
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
@@ -16,7 +18,9 @@ class legal_display_class extends post_class {
 	/**
 	* Le constructeur
 	*/
-  protected function construct() {}
+  protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Récupères les données de l'affichage légal en base de donnée et affiches le template du formulaire

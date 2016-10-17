@@ -17,7 +17,9 @@ class third_class extends post_class {
 	/**
 	* Le constructeur
 	*/
-  protected function construct() {}
+  protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Créer un tier

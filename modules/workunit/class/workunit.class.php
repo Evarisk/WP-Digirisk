@@ -17,6 +17,7 @@ class workunit_class extends post_class {
 
 		/**	Create shortcodes for elements displaying	*/
 		/**	Shortcode for displaying a dropdown with all groups	*/
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

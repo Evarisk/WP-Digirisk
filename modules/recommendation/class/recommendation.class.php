@@ -36,6 +36,7 @@ class recommendation_class extends post_class {
 	protected function construct() {
 		/**	Définition d'un shortcode permettant d'afficher les risques associés à un élément / Define a shortcode allowing to display risk associated to a given element 	*/
 		add_shortcode( 'risk', array( $this, 'risk_shortcode' ) );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	public function display( $society_id ) {

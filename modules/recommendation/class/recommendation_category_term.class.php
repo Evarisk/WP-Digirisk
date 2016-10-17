@@ -45,6 +45,7 @@ class recommendation_category_term_class extends term_class {
 	protected function construct() {
 		/**	Define taxonomy for recommendation categories	*/
 		add_action( 'init', array( $this, 'recommendation_category_type' ), 0 );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

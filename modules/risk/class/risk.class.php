@@ -46,6 +46,7 @@ class risk_class extends post_class {
 		add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 5, 2 );
 		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for group tabs	*/
 		add_filter( 'wpdigi_group_sheet_content', array( $this, 'filter_display_risk_in_element' ), 10, 3 );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

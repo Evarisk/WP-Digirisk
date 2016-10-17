@@ -11,10 +11,15 @@ class group_class extends post_class {
 	protected $before_post_function = array( '\digi\construct_identifier', '\digi\convert_date' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
+	protected $base = 'digirisk/group';
+	protected $version = '0.1';
+
 	/**
 	 * Constructeur
 	 */
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 
 	/**

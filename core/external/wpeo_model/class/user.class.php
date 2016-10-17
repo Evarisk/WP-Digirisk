@@ -12,6 +12,11 @@ class user_class extends singleton_util {
 
 	protected function construct() {}
 
+	public function get_schema() {
+		$model = new $this->model_name( array(), array() );
+		return $model->get_model();
+	}
+
 	public function update( $data ) {
 		$data = (array) $data;
 		if ( empty( $data['id'] ) ) {
@@ -120,5 +125,29 @@ class user_class extends singleton_util {
 
 	public function get_identifier_helper() {
 		return $this->identifier_helper;
+	}
+
+	public function callback_register_route( $array_route ) {
+		/** Récupération de la liste complète des éléments / Get all existing elements */
+		$array_route['/' . $this->version . '/get/' . $this->base ] = array(
+				array( array( $this, 'get' ), \WP_JSON_Server::READABLE | \WP_JSON_Server::ACCEPT_JSON )
+		);
+		/** Récupération d'un élément donné / Get a given element */
+		$array_route['/' . $this->version . '/get/' . $this->base . '/(?P<id>\d+)'] = array(
+				array( array( $this, 'get' ), \WP_JSON_Server::READABLE |  \WP_JSON_Server::ACCEPT_JSON )
+		);
+		$array_route['/' . $this->version . '/get/' . $this->base . '/schema'] = array(
+				array( array( $this, 'get_schema' ), \WP_JSON_Server::READABLE |  \WP_JSON_Server::ACCEPT_JSON )
+		);
+		/** Mise à jour d'un élément / Update an element */
+		// $array_route['/' . $this->version . '/post/' . $this->base . ''] = array(
+		// 		array( array( $this, 'update' ), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
+		// );
+		// /** Suppression d'un élément / Delete an element */
+		// $array_route['/' . $this->version . '/delete/' . $this->base . '/(?P<id>\d+)'] = array(
+		// 		array( array( $this, 'delete' ), WP_JSON_Server::DELETABLE | WP_JSON_Server::ACCEPT_JSON ),
+		// );
+
+		return $array_route;
 	}
 }

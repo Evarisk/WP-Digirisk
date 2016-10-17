@@ -16,7 +16,9 @@ class evaluator_class extends user_class {
 	/**
 	* Le constructeur
 	*/
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Fait le rendu des evaluateurs

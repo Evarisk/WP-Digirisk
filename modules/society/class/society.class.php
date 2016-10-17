@@ -20,7 +20,6 @@ class society_class extends singleton_util {
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {
-		/*	Création du menu dans l'administration pour le module digirisk / Create the administration menu for digirisk plugin */
 	}
 
 

@@ -7,12 +7,16 @@ class address_class extends comment_class {
 	protected $model_name   = '\digi\address_model';
 	protected $comment_type = 'digi-address';
 	protected $meta_key    	= '_wpdigi_address';
+	
 	protected $base					= 'address';
+	protected $version = '0.1';
 
 	/**
 	 * Instanciation de l'objet addresse / Address instanciation
 	 */
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Créer une addresse

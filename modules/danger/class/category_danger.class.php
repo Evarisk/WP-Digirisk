@@ -45,6 +45,7 @@ class category_danger_class extends term_class {
 	protected function construct() {
 		/**	Définition du type de données personnalisées pour les catégories de dangers / Define custom type for danger categories */
 		add_action( 'init', array( $this, 'custom_type_creation' ), 1 );
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

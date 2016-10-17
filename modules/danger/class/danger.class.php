@@ -20,7 +20,9 @@ class danger_class extends term_class {
 	/**
 	 * Le constructeur
 	 */
-	protected function construct() {}
+	protected function construct() {
+		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+	}
 
 	/**
 	* Récupères le nom du danger par rapport à son ID
