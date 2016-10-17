@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <li class="wp-digi-list-item wp-digi-recommendation-item">
-	<span class="wp-digi-recommendation-list-column-thumbnail"><?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false, array( 'title' => $recommendation->title ) ); ?></span>
+	<?php echo do_shortcode( '[eo_upload_button id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	<span class="wp-digi-recommendation-list-column-reference"><?php echo $recommendation->unique_identifier; ?></span>
 	<span><?php echo wp_get_attachment_image( $recommendation->recommendation_category_term[0]->recommendation_term[0]->thumbnail_id, 'thumbnail', false, array( 'title' => $recommendation->recommendation_category_term[0]->recommendation_term[0]->name ) ); ?></span>
 	<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" type="recommendation" display="view"]'); ?>
