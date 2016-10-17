@@ -6,7 +6,7 @@ class recommendation_comment_class extends comment_class {
 
 	protected $model_name   = '\digi\recommendation_comment_model';
 	protected $meta_key     = '_wpdigi_recommendation_comment';
-	protected $comment_type	= 'digi-recommendation-comment';
+	protected $comment_type	= 'digi-re-comment';
 
 	protected $base					= 'digirisk/recommendation-comment';
 	protected $version			= '0.1';

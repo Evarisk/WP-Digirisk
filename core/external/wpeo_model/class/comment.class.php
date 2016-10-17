@@ -104,6 +104,7 @@ class comment_class extends singleton_util {
 
 			$data = new $this->model_name( $data, array( false ) );
 
+
 			// Ajout du post type si il est vide
 			if ( empty( $data->type ) ) {
 				$data->type = $this->comment_type;
