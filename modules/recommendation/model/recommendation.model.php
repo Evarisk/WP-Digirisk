@@ -18,7 +18,7 @@ class recommendation_model extends post_model {
 			'controller'	=> '\digi\comment_class',
 			'field'				=> 'post_id'
 		);
-		
+
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 				=> 'string',
@@ -50,11 +50,13 @@ class recommendation_model extends post_model {
 				'child' => array(
 					'digi-recommendation' => array(
 						'meta_type' => 'multiple',
-						'type' => 'array'
+						'type' => 'array',
+						'array_type' => 'int',
 					),
 					'digi-recommendation-category' => array(
 						'meta_type' => 'multiple',
-						'type' => 'array'
+						'type' => 'array',
+						'array_type' => 'int',
 					)
 				)
 			)

@@ -51,6 +51,14 @@ class constructor_data_class extends helper_class {
 				if ( $field_def['type'] === 'string' ) {
 					$current_object->$field_name = stripslashes( $current_object->$field_name );
 				}
+
+				if ( !empty( $field_def['array_type'] ) ) {
+					if ( !empty( $current_object->$field_name ) ) {
+					  foreach ( $current_object->$field_name as &$element ) {
+							settype( $element, $field_def['array_type'] );
+					  }
+					}
+				}
 			}
 		}
 
