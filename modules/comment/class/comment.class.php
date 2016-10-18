@@ -40,7 +40,10 @@ class digi_comment_class extends singleton_util {
 			$element->comment = comment_class::g()->get( array( 'schema' => true ) );
 		}
 
-		view_util::exec( 'comment', 'main', array( 'element' => $element, 'type' => $type, 'display' => $display ) );
+		$comment_new = comment_class::g()->get( array( 'schema' => true ) );
+		$comment_new = $comment_new[0];
+
+		view_util::exec( 'comment', 'main', array( 'element' => $element, 'comment_new' => $comment_new, 'type' => $type, 'display' => $display ) );
 	}
 }
 
