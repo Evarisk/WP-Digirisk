@@ -25,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
           }
         endif;
       ?>
-      <input type="hidden" class="variable-<?php echo $list_evaluation_method_variable[$key]->id; ?>" variable-id="<?php echo $list_evaluation_method_variable[$key]->id; ?>" name="risk[<?php echo $risk->id; ?>][variable][<?php echo $list_evaluation_method_variable[$key]->id; ?>]" value="<?php echo !empty( $value ) ? $value : ''; ?>" />
+      <input type="hidden" class="variable-<?php echo $list_evaluation_method_variable[$key]->id; ?>" variable-id="<?php echo $list_evaluation_method_variable[$key]->id; ?>" name="risk[variable][<?php echo $list_evaluation_method_variable[$key]->id; ?>]" value="<?php echo !empty( $value ) ? $value : ''; ?>" />
     </li>
    <?php endforeach; ?>
 </ul>

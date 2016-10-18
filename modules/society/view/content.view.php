@@ -17,8 +17,6 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<input type="hidden" name="id" value="<?php echo $element->id; ?>" />
     <?php apply_filters( 'wpdigi_establishment_identity', $element, true ); ?>
 
-		<?php do_shortcode( '[digi-search id="' . $element->id . '" class="group_class" text="' . __( 'Write groupment number or name for move this object to it', 'digirisk' ) . '" type="post" field="group_id"]' ); ?>
-
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
 			<button
 				class="wp-digi-bton-fourth wp-digi-save-identity-button action-input"
