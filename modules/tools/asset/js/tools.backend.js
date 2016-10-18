@@ -1,75 +1,73 @@
-"use strict";
+window.digirisk.tools = {};
 
-var digi_tools = {
-	$: undefined,
+window.digirisk.tools.init = function() {
+	window.digirisk.tools.event();
+};
 
-  event: function( $ ) {
-		digi_tools.$ = $;
+window.digirisk.tools.event = function() {
+	jQuery( document ).on( 'click', '.digi-tools-main-container .nav-tab', window.digirisk.tools.tab_switcher );
+	jQuery( document ).on( 'click', '.reset-method-evaluation', window.digirisk.tools.reset_evaluation_method );
+	jQuery( document ).on( 'click', '.element-risk-compilation', window.digirisk.tools.risk_fixer );
+};
 
-	  digi_tools.$( document ).on( 'click', '.reset-method-evaluation', function( event ) { digi_tools.reset( event, digi_tools.$( this ) ); } );
-	  digi_tools.$( document ).on( 'click', '.digi-tools-main-container .nav-tab', function( event ) { digi_tools.tab_switcher( event, digi_tools.$( this ) ); } );
-	  digi_tools.$( document ).on( 'click', '.element-risk-compilation', function( event ) { digi_tools.risk_fixer( event, digi_tools.$( this ) ); } );
-  },
+window.digirisk.tools.tab_switcher = function( event ) {
+  event.preventDefault();
 
-  tab_switcher: function( event, element ) {
-	  event.preventDefault();
+  /**	Remove all calss active on all tabs	*/
+  jQuery( this ).closest( "h2" ).children( ".nav-tab" ).each( function(){
+	  jQuery( this ).removeClass( "nav-tab-active" );
+  });
+  /**	Add the active class on clicked tab	*/
+  jQuery( this ).addClass( "nav-tab-active" );
 
-	  /**	Remove all calss active on all tabs	*/
-	  digi_tools.$( element ).closest( "h2" ).children( ".nav-tab" ).each( function(){
-		  digi_tools.$( this ).removeClass( "nav-tab-active" );
-	  });
-	  /**	Add the active class on clicked tab	*/
-	  digi_tools.$( element ).addClass( "nav-tab-active" );
+  /**	Hide the different container and display the selected container	*/
+  jQuery( this ).closest( ".digi-tools-main-container" ).children( "div" ).each( function(){
+	  jQuery( this ).hide();
+  });
+  jQuery( "#" + jQuery( this ).attr( "data-id" ) ).show();
+},
 
-	  /**	Hide the different container and display the selected container	*/
-	  digi_tools.$( element ).closest( ".digi-tools-main-container" ).children( "div" ).each( function(){
-		  digi_tools.$( this ).hide();
-	  });
-	  digi_tools.$( "#" + digi_tools.$( element ).attr( "data-id" ) ).show();
-  },
+window.digirisk.tools.reset_evaluation_method = function( event ) {
+  event.preventDefault();
 
-  reset: function( event, element ) {
-    event.preventDefault();
-
-    if ( window.confirm( window.digi_tools_confirm ) ) {
-      digi_tools.$( element ).addClass( "wp-digi-loading" );
-      digi_tools.$( element ).closest( 'div' ).find( 'ul' ).html('');
-
-      var li = document.createElement( 'li' );
-      li.innerHTML = window.digi_tools_in_progress;
-      digi_tools.$( element ).closest( 'div' ).find( 'ul' ).append( li );
-
-      var data = {
-        action: 'reset_method_evaluation',
-        _wpnonce: digi_tools.$( element ).data( 'nonce' )
-      };
-
-			digi_tools.exec_request( li, data, element );
-    }
-  },
-
-  risk_fixer: function( event, element ) {
-	  event.preventDefault();
-
-    digi_tools.$( element ).addClass( "wp-digi-loading" );
-    digi_tools.$( element ).closest( 'div' ).find( 'ul' ).html('');
+  if ( window.confirm( window.digi_tools_confirm ) ) {
+    jQuery( this ).addClass( "wp-digi-loading" );
+    jQuery( this ).closest( 'div' ).find( 'ul' ).html('');
 
     var li = document.createElement( 'li' );
     li.innerHTML = window.digi_tools_in_progress;
-    digi_tools.$( element ).closest( 'div' ).find( 'ul' ).append( li );
+    jQuery( this ).closest( 'div' ).find( 'ul' ).append( li );
 
     var data = {
-      action: 'compil_risk_list',
-      _wpnonce: digi_tools.$( element ).data( 'nonce' )
+      action: 'reset_method_evaluation',
+      _wpnonce: jQuery( this ).data( 'nonce' )
     };
 
-    digi_tools.exec_request( li, data, element );
-  },
+		window.digirisk.tools.exec_request( li, data, this );
+  }
+},
 
-	exec_request: function( li, data, element ) {
-		digi_tools.$.post( window.ajaxurl, data, function() {
-			digi_tools.$( element ).removeClass( "wp-digi-loading" );
-			li.innerHTML += ' ' + window.digi_tools_done;
-		} );
-	}
-};
+window.digirisk.tools.risk_fixer = function( event ) {
+  event.preventDefault();
+
+  jQuery( this ).addClass( "wp-digi-loading" );
+  jQuery( this ).closest( 'div' ).find( 'ul' ).html('');
+
+  var li = document.createElement( 'li' );
+  li.innerHTML = window.digi_tools_in_progress;
+  jQuery( this ).closest( 'div' ).find( 'ul' ).append( li );
+
+  var data = {
+    action: 'compil_risk_list',
+    _wpnonce: jQuery( this ).data( 'nonce' )
+  };
+
+  window.digirisk.tools.exec_request( li, data, this );
+},
+
+window.digirisk.tools.exec_request = function( li, data, element ) {
+	jQuery.post( window.ajaxurl, data, function() {
+		jQuery( element ).removeClass( "wp-digi-loading" );
+		li.innerHTML += ' ' + window.digi_tools_done;
+	} );
+}

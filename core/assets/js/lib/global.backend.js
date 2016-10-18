@@ -1,77 +1,29 @@
-"use strict";
+window.digirisk.global = {};
 
-var digi_global = {
-	$: undefined,
+window.digirisk.global.init = function() {}
 
-	init: function( $ ) {
-		digi_global.$ = $;
 
-		digi_global.$( '.wpdigi_date' ).datepicker( {
-			'dateFormat': 'dd/mm/yy',
-		} );
-	},
+window.digirisk.global.download_file = function( url_to_file, filename ) {
+	var url = jQuery('<a href="' + url_to_file + '" download="' + filename + '"></a>');
+	jQuery('.wrap').append(url);
+	url[0].click();
+	url.remove();
+};
 
-	event: function() {
-		digi_global.$( document ).on( 'click', 'toggle, .digi-toggle', function( event ) {
-			event.stopPropagation();
-			var element = digi_global.$( this );
-      var parent = digi_global.$( this ).data( 'parent' );
-			var div;
+window.digirisk.global.remove_diacritics = function( input ) {
+  var output = "";
 
-      if( parent !== undefined ) {
-  			div = digi_global.$( this ).closest( '.' + parent ).find( '.' + digi_global.$( this ).data( 'target' ) );
-      }
-      else {
-        div = digi_global.$( this ).parent().find( '.' + digi_global.$( this ).data( 'target' ) );
-      }
+  var normalized = input.normalize("NFD");
+  var i=0;
+  var j=0;
 
-			digi_global.$( '.digi-popup' ).each( function() {
-				if ( digi_global.$( this ).has( event.target ).length === 0 && digi_global.$( this ).is( ':visible' ) && !digi_global.$( this ).hasClass( element.data( 'target' ) ) ) {
-					digi_global.$( this ).hide();
-				}
-			} );
+  while (i<input.length)
+  {
+      output += normalized[j];
 
-			div.toggle();
-		} );
+      j += (input[i] == normalized[j]) ? 1 : 2;
+      i++;
+  }
 
-		digi_global.$( document ).on( 'click', function( event ) {
-			digi_global.$( '.digi-popup' ).each( function() {
-				if ( digi_global.$( this ).has( event.target ).length === 0 && digi_global.$( this ).is( ':visible' ) ) {
-					digi_global.$( this ).toggle();
-				}
-			} );
-		} );
-	},
-
-	/** Ouvre / ferme le menu responsive */
-	responsive_menu_toggle: function( element ) {
-		digi_global.$( '.wp-digi-sheet-tab-responsive-content' ).toggle( 'fast' );
-		digi_global.$( '.wp-digi-sheet-tab-title' ).toggleClass( 'active' );
-	},
-
-	download_file: function( url_to_file, filename ) {
-		var url = digi_global.$('<a href="' + url_to_file + '" download="' + filename + '"></a>');
-		digi_global.$('.wrap').append(url);
-		url[0].click();
-		url.remove();
-	},
-
-	remove_diacritics: function( input ) {
-    var output = "";
-
-    var normalized = input.normalize("NFD");
-    var i=0;
-    var j=0;
-
-    while (i<input.length)
-    {
-        output += normalized[j];
-
-        j += (input[i] == normalized[j]) ? 1 : 2;
-        i++;
-    }
-
-    return output;
-	}
-
+  return output;
 };
