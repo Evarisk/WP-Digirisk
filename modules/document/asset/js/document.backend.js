@@ -6,6 +6,8 @@ window.digirisk.document.init = function() {
 
 window.digirisk.document.event = function() {
 	jQuery( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", window.digirisk.document.save_element_sheet );
+	jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-regenerate", window.digirisk.document.regenerate_document );
+
 };
 
 window.digirisk.document.save_element_sheet = function ( event ) {
@@ -35,6 +37,19 @@ window.digirisk.document.save_element_sheet = function ( event ) {
 	jQuery( "#wpdigi-save-element-form" ).ajaxSubmit( options );
 };
 
+window.digirisk.document.regenerate_document = function ( event ) {
+	event.preventDefault();
+
+	var data = {
+		action: 'wpdigi_regenerate_document',
+		element_id: jQuery( this ).data( 'id' ),
+		parent_id: jQuery( this ).data( 'parent-id' ),
+		model_name: jQuery( this ).data( 'model'),
+		_wpnonce: jQuery( this ).data( 'nonce' ),
+	};
+	jQuery.post( window.ajaxurl, data, function() {} );
+};
+
 
 
 // "use strict";
@@ -48,7 +63,6 @@ window.digirisk.document.save_element_sheet = function ( event ) {
 // 		digi_document.$( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", function( event ) { digi_document.save_element_sheet( event, digi_document.$( this ) ); } );
 //
 // 		digi_document.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-delete", function( event ) { digi_document.delete_element_sheet( event, digi_document.$( this ) ); } );
-// 		digi_document.$( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-regenerate", function( event ) { digi_document.regenerate_document( event, digi_document.$( this ) ); } );
 // 		digi_document.$( document ).on( 'click', '.wp-digi-doc-pagination a', function( event ) { digi_document.pagination( event, digi_document.$( this ) ); } );
 // 	},
 //
@@ -58,7 +72,7 @@ window.digirisk.document.save_element_sheet = function ( event ) {
 //
 // 		var data = {
 // 			action: 'wpdigi_regenerate_document',
-// 			element_id: digi_document.$( element ).data( 'id' ),
+// 			element_id: jQuery( this ).data( 'id' ),
 // 			parent_id: digi_document.$( element ).data( 'parent-id' ),
 // 			model_name: digi_document.$( element ).data( 'model'),
 // 			_wpnonce: digi_document.$( element ).data( 'nonce' ),
