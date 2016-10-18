@@ -17,7 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<a href="#"
 			data-id="<?php echo $recommendation->id; ?>"
 			data-nonce="<?php echo wp_create_nonce( 'ajax_delete_recommendation_' . $recommendation->id ); ?>"
-			data-action="delete_risk"
+			data-action="delete_recommendation"
 			class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>
 	</span>
 </li>

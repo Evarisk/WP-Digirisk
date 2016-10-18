@@ -25,9 +25,9 @@ class recommendation_action {
 	 * wp_ajax_wpdigi-edit-recommendation
 	 */
 	function __construct() {
-		add_action( 'wp_ajax_wpdigi-delete-recommendation', array( $this, 'ajax_delete_recommendation' ), 12 );
-		add_action( 'wp_ajax_wpdigi-load-recommendation', array( $this, 'ajax_load_recommendation' ), 12 );
-		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ), 12 );
+		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ) );
+		add_action( 'wp_ajax_load_recommendation', array( $this, 'ajax_load_recommendation' ) );
+		add_action( 'wp_ajax_delete_recommendation', array( $this, 'ajax_delete_recommendation' ) );
 	}
 
 	/**
@@ -40,7 +40,19 @@ class recommendation_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_recommendation() {
-		// wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => '' 'template' => ob_get_clean() ) );
+		if ( 0 === (int)$_POST['id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$id = (int)$_POST['id'];
+
+		check_ajax_referer( 'ajax_load_recommendation_' . $id );
+
+		$recommendation = recommendation_class::g()->get( array( 'id' => $id ), array() );
+		$recommendation = $recommendation[0];
+
+		ob_start();
+		view_util::exec( 'recommendation', 'item-edit', array( 'society_id' => $recommendation->parent_id, 'recommendation' => $recommendation ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'load_recommendation_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -81,7 +93,24 @@ class recommendation_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_recommendation() {
-		wp_send_json_success();
+		if ( 0 === (int)$_POST['id'] )
+			wp_send_json_error( array( 'error' => __LINE__, ) );
+		else
+			$id = (int)$_POST['id'];
+
+		check_ajax_referer( 'ajax_delete_recommendation_' . $id );
+
+		$recommendation = recommendation_class::g()->get( array( 'id' => $id ) );
+		$recommendation = $recommendation[0];
+
+		if ( empty( $recommendation ) )
+			wp_send_json_error( array( 'error' => __LINE__ ) );
+
+		$recommendation->status = 'trash';
+
+		recommendation_class::g()->update( $recommendation );
+
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'delete_recommendation_success', 'template' => ob_get_clean() ) );
 	}
 }
 

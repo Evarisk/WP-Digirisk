@@ -104,7 +104,6 @@ class risk_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_risk() {
-		// todo : global
 		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
