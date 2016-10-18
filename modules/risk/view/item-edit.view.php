@@ -13,7 +13,17 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk" display="edit"]'); ?>
 
 	<span class="wp-digi-action">
-		<a href="#" data-id="<?php echo $risk->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
+		<?php
+		if ( empty( $risk->id ) ):
+			?>
+			<a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a>
+			<?php
+		else:
+			?>
+			<a href="#" data-id="<?php echo $risk->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
+			<?php
+		endif;
+		?>
 	</span>
 
 	<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
