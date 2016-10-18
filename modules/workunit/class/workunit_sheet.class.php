@@ -32,7 +32,7 @@ class workunit_sheet_class extends singleton_util {
 					'type'		=> 'picture',
 					'value'		=> $picture_final_path,
 					'option'	=> array(
-						'size'	=> 2,
+						'size'	=> 8,
 					),
 				);
 			}

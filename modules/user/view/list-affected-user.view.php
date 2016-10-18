@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 				<span class="wp-digi-action">
 					<a 	data-id="<?php echo $workunit->id; ?>"
 							data-user-id="<?php echo $affected_user->id; ?>"
-							class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt"></a></span>
+							class="wp-digi-action wp-digi-action-user-delete dashicons dashicons-no-alt"></a></span>
 			</li>
 			<?php
 		endforeach;

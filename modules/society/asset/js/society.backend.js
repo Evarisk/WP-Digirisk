@@ -9,6 +9,7 @@ window.digirisk.society.event = function() {
 };
 
 window.digirisk.society.callback_load_society = function( element, response ) {
+	console.log(response);
 	jQuery( '.wp-digi-societytree-right-container' ).html( response.data.template );
 
 	if ( response.data.template_left ) {
