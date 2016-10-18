@@ -102,6 +102,7 @@ class document_action {
 		if ( empty( $model_name ) ) {
 			wp_send_json_error();
 		}
+		$tmp_name = $model_name;
 		$model_name = '\digi\\' . $model_name . '_class';
 
 		$document_id = !empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( $_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
@@ -110,7 +111,7 @@ class document_action {
 			$parent_element = society_class::g()->show_by_type( $parent_id );
 
 			$current_document = $model_name::g()->get( array( 'post__in' => array( $document_id ), ) );
-			$model_infos = document_class::g()->get_model_for_element( array( 'document_unique' ) );
+			$model_infos = document_class::g()->get_model_for_element( array( $tmp_name ) );
 		 	$response =	document_class::g()->generate_document( $model_infos[ 'model_path' ], $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
 			wp_send_json_success( $response );
 		}
