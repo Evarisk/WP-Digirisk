@@ -23,10 +23,9 @@ class epi_action {
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for epis management	*/
 		add_action( 'init', array( $this, 'custom_post_type' ), 5 );
 
-		add_action( 'wp_ajax_edit_epi', array( $this, 'ajax_edit_epi' ) );
-		add_action( 'wp_ajax_wpdigi-delete-epi', array( $this, 'ajax_delete_epi' ) );
+		add_action( 'wp_ajax_save_epi', array( $this, 'ajax_save_epi' ) );
+		add_action( 'wp_ajax_delete_epi', array( $this, 'ajax_delete_epi' ) );
 		add_action( 'wp_ajax_load_epi', array( $this, 'ajax_load_epi' ) );
-		add_action( 'wp_ajax_wpdigi-edit-epi', array( $this, 'ajax_edit_epi' ) );
 	}
 
 	/**
@@ -78,19 +77,15 @@ class epi_action {
 		register_post_type( epi_class::g()->get_post_type(), $args );
 	}
 
-	public function ajax_edit_epi() {
-		check_ajax_referer( 'edit_epi' );
+	public function ajax_save_epi() {
+		// check_ajax_referer( 'edit_epi' );
 
-		if ( !empty( $_POST['epi'] ) ) {
-		  foreach ( $_POST['epi'] as $element ) {
-				$element['parent_id'] = $_POST['parent_id'];
-				epi_class::g()->update( $element );
-		  }
-		}
+		$_POST['parent_id'] = $_POST['parent_id'];
+		epi_class::g()->update( $_POST );
 
 		ob_start();
 		epi_class::g()->display( $_POST['parent_id'] );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'epi', 'callback_success' => 'save_epi_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -101,14 +96,14 @@ class epi_action {
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_delete_epi() {
-		if ( 0 === (int)$_POST['epi_id'] )
+		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
-			$epi_id = (int)$_POST['epi_id'];
+			$id = (int)$_POST['id'];
 
-		check_ajax_referer( 'ajax_delete_epi_' . $epi_id );
+		check_ajax_referer( 'ajax_delete_epi_' . $id );
 
-		$epi = epi_class::g()->get( array( 'id' => $epi_id ) );
+		$epi = epi_class::g()->get( array( 'id' => $id ) );
 		$epi = $epi[0];
 
 		if ( empty( $epi ) )
@@ -118,27 +113,27 @@ class epi_action {
 
 		epi_class::g()->update( $epi );
 
-		wp_send_json_success();
+		wp_send_json_success( array( 'module' => 'epi', 'callback_success' => 'delete_epi_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
 	* Charges un epi
 	*
-	* int $_POST['epi_id'] L'ID du epi
+	* int $_POST['id'] L'ID du epi
 	*
 	* @param array $_POST Les données envoyées par le formulaire
 	*/
 	public function ajax_load_epi() {
-		$epi_id = !empty( $_POST['epi_id'] ) ? (int)$_POST['epi_id'] : 0;
+		$id = !empty( $_POST['id'] ) ? (int)$_POST['id'] : 0;
 
-		check_ajax_referer( 'ajax_load_epi_' . $epi_id );
-		$epi = epi_class::g()->get( array( 'include' => $epi_id ) );
+		check_ajax_referer( 'ajax_load_epi_' . $id );
+		$epi = epi_class::g()->get( array( 'include' => $id ) );
 		$epi = $epi[0];
 		$society_id = $epi->parent_id;
 
 		ob_start();
-		view_util::exec( 'epi', 'item-edit', array( 'society_id' => $society_id, 'epi' => $epi, 'epi_id' => $epi_id ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		view_util::exec( 'epi', 'item-edit', array( 'society_id' => $society_id, 'epi' => $epi, 'epi_id' => $id ) );
+		wp_send_json_success( array( 'module' => 'epi', 'callback_success' => 'load_epi_success', 'template' => ob_get_clean() ) );
 	}
 }
 
