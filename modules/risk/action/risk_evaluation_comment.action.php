@@ -29,10 +29,10 @@ class risk_evaluation_comment_action {
   * @param array $_POST Les données envoyées par le formulaire
   */
  	public function callback_save_risk_evaluation_comment( $risk_obj, $risk ) {
-		if ( isset( $risk['id'] ) ) {
-			if ( !empty( $risk['list_comment'] ) ) {
-			  foreach ( $risk['list_comment'] as $comment ) {
-					$comment['post_id'] = $risk['id'];
+		if ( isset( $risk_obj->id ) ) {
+			if ( !empty( $_POST['list_comment'] ) ) {
+			  foreach ( $_POST['list_comment'] as $comment ) {
+					$comment['post_id'] = $risk_obj->id;
 					risk_evaluation_comment_class::g()->update( $comment );
 			  }
 			}
