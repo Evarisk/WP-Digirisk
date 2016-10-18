@@ -30,30 +30,26 @@ class risk_evaluation_action {
   *
   */
 	public function ajax_edit_risk() {
-		$list_risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
+		$risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
 
-		if ( empty( $list_risk ) ) {
-			wp_send_json_success();
+		if ( empty( $risk ) ) {
+			wp_send_json_error();
 		}
 
-		if ( !empty( $list_risk ) ) {
-		  foreach ( $list_risk as $key => &$risk ) {
-				if ( isset( $risk['id'] ) ) {
-					$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
-					$risk['evaluation']['variable'] = $risk['variable'];
-					$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
+		if ( isset( $risk['id'] ) ) {
+			$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
+			$risk['evaluation']['variable'] = $risk['variable'];
+			$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
 
-					if ( $risk['evaluation'] ) {
-						$risk['current_evaluation_id'] = $risk['evaluation']->id;
-					}
-					else {
-						unset( $list_risk[$key] );
-					}
-				}
-		  }
+			if ( $risk['evaluation'] ) {
+				$risk['current_evaluation_id'] = $risk['evaluation']->id;
+			}
+			else {
+				unset( $list_risk[$key] );
+			}
 		}
 
-		do_action( 'save_risk', $list_risk );
+		do_action( 'save_risk', $risk );
 	}
 }
 

@@ -28,47 +28,41 @@ class risk_save_action {
 	*
 	* @param array $_POST Les données envoyées par le formulaire
   */
-	public function callback_save_risk( $list_posted_risk ) {
+	public function callback_save_risk( $risk ) {
 		$parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
-		if ( !empty( $list_posted_risk ) ) {
-		  foreach ( $list_posted_risk as &$posted_risk ) {
-				if ( isset( $posted_risk['id'] ) ) {
-					$danger = danger_class::g()->get( array( 'include' => $posted_risk['danger_id'] ) );
-					$danger = $danger[0];
+		if ( isset( $risk['id'] ) ) {
+			$danger = danger_class::g()->get( array( 'include' => $risk['danger_id'] ) );
+			$danger = $danger[0];
 
-					$image_id = 0;
+			$image_id = 0;
 
-					if ( !empty( $posted_risk['associated_document_id'] ) ) {
-						$image_id = $posted_risk['associated_document_id']['image'][0];
-					}
+			if ( !empty( $risk['associated_document_id'] ) ) {
+				$image_id = $risk['associated_document_id']['image'][0];
+			}
 
-					$posted_risk['title'] = $danger->name;
-					$posted_risk['parent_id'] = $parent_id;
-					$posted_risk['taxonomy']['digi-danger'][] = $danger->id;
-					$posted_risk['taxonomy']['digi-danger-category'][] = $danger->parent_id;
-					$risk = risk_class::g()->update( $posted_risk );
+			$risk['title'] = $danger->name;
+			$risk['parent_id'] = $parent_id;
+			$risk['taxonomy']['digi-danger'][] = $danger->id;
+			$risk['taxonomy']['digi-danger-category'][] = $danger->parent_id;
+			$risk_obj = risk_class::g()->update( $risk );
 
-					if ( !$risk ) {
-						wp_send_json_error();
-					}
+			if ( !$risk_obj ) {
+				wp_send_json_error();
+			}
 
-					$posted_risk['id'] = $risk->id;
+			$risk_evaluation = risk_evaluation_class::g()->update( array( 'id' => $risk_obj->current_evaluation_id, 'post_id' => $risk_obj->id ) );
 
-					$risk_evaluation = risk_evaluation_class::g()->update( array( 'id' => $risk->current_evaluation_id, 'post_id' => $risk->id ) );
+			if ( !$risk_evaluation ) {
+				wp_send_json_error();
+			}
 
-					if ( !$risk_evaluation ) {
-						wp_send_json_error();
-					}
-
-					if ( !empty( $image_id ) ) {
-						file_management_class::g()->associate_file( $image_id, $risk->id, 'risk_class' );
-					}
-			  }
+			if ( !empty( $image_id ) ) {
+				file_management_class::g()->associate_file( $image_id, $risk_obj->id, 'risk_class' );
 			}
 		}
 
-		do_action( 'save_risk_evaluation_comment', $list_posted_risk );
+		do_action( 'save_risk_evaluation_comment', $risk_obj, $risk );
 	}
 }
 

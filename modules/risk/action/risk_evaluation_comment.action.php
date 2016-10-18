@@ -16,7 +16,7 @@ class risk_evaluation_comment_action {
 	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	*/
 	public function __construct() {
-		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 1 );
+		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 2 );
 	}
 
 	/**
@@ -28,17 +28,13 @@ class risk_evaluation_comment_action {
 	*
   * @param array $_POST Les données envoyées par le formulaire
   */
- 	public function callback_save_risk_evaluation_comment( $list_posted_risk ) {
-		if ( !empty( $list_posted_risk ) ) {
-		  foreach ( $list_posted_risk as $risk ) {
-				if ( isset( $risk['id'] ) ) {
-					if ( !empty( $risk['list_comment'] ) ) {
-					  foreach ( $risk['list_comment'] as $comment ) {
-							$comment['post_id'] = $risk['id'];
-							risk_evaluation_comment_class::g()->update( $comment );
-					  }
-					}
-				}
+ 	public function callback_save_risk_evaluation_comment( $risk_obj, $risk ) {
+		if ( isset( $risk['id'] ) ) {
+			if ( !empty( $risk['list_comment'] ) ) {
+			  foreach ( $risk['list_comment'] as $comment ) {
+					$comment['post_id'] = $risk['id'];
+					risk_evaluation_comment_class::g()->update( $comment );
+			  }
 			}
 		}
 
