@@ -6,6 +6,7 @@
 	"path": "modules/comment/",
 	"dependencies": {
 		"shortcode": {},
-		"class": {}
+		"class": {},
+		"action": {}
 	}
 }

@@ -12,4 +12,9 @@ if ( !defined( 'ABSPATH' ) ) exit;
 	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][id]" value="<?php echo $comment->id; ?>" />
 	<input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][date]" value="<?php echo $comment->date; ?>" /> :
 	<input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][content]" value="<?php echo $comment->content; ?>" />
+	<a href="#"
+		data-id="<?php echo $comment->id; ?>"
+		data-nonce="<?php echo wp_create_nonce( 'ajax_delete_comment_' . $comment->id ); ?>"
+		data-action="delete_comment"
+		class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>
 </li>
