@@ -31,6 +31,12 @@ class risk_model extends post_model {
 					'type'				=> 'object',
 					'controller' 	=> '\digi\evaluation_method_class',
 					'field'				=> 'post_id'
+				),
+				'recommendation' => array(
+					'export'			=> true,
+					'type'				=> 'object',
+					'controller' 	=> '\digi\recommendation_class',
+					'field'				=> 'post_id'
 				)
 			),
 			'unique_key' => array(
