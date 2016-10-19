@@ -53,6 +53,51 @@ class recommendation_class extends post_class {
 	}
 
 	public function transfert() {
+		// Récupères toutes les unités de travail avec leurs recommendations
+		$list_workunit = workunit_class::g()->get( array() );
+
+		if ( !empty( $list_workunit ) ) {
+		  foreach ( $list_workunit as $workunit ) {
+				if ( !empty( $workunit->associated_recommendation ) ) {
+				  foreach ( $workunit->associated_recommendation as $recommendation_term_id => $list_recommendation ) {
+						if ( !empty( $list_recommendation ) ) {
+							$recommendation_term = recommendation_term_class::g()->get( array( 'include' => array( $recommendation_term_id ) ) );
+							$recommendation_term = $recommendation_term[0];
+
+						  foreach ( $list_recommendation as $element ) {
+								$recommendation = array(
+									'status' 							=> $element['status'],
+									'unique_key' 					=> $element['unique_key'],
+									'unique_identifier' 	=> $element['unique_identifier'],
+									'efficiency'					=> $element['efficiency'],
+									'recommendation_type'	=> $element['type'],
+									'date'								=> $element['affectation_date'],
+									'date_modified'				=> $element['last_update_date'],
+									'parent_id'						=> $workunit->id,
+									'taxonomy' => array(
+										'digi-recommendation' => array( $recommendation_term->id ),
+										'digi-recommendation-category' => array( $recommendation_term->parent_id )
+									)
+								);
+
+								$recommendation = recommendation_class::g()->update( $recommendation );
+
+								$recommendation_comment_args = array(
+									'post_id'		=> $recommendation->id,
+									'date'			=> $recommendation->date,
+									'author_id'	=> 0,
+									'content'		=> $element['comment'],
+									'status'		=> ( ( 'valid' == $element['status'] ) ? '-34070' : '-34071' ),
+									'type'	=> recommendation_comment_class::g()->get_type(),
+								);
+
+								recommendation_comment_class::g()->update( $recommendation_comment_args );
+						  }
+						}
+					}
+				}
+		  }
+		}
 		return true;
 	}
 }
