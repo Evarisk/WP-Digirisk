@@ -54,6 +54,17 @@ class group_model extends society_model {
 			'custom'			=> 'array'
 		);
 
+		$this->model['child']['associated_recommendation'] = array(
+			'type' 		=> 'array',
+			'meta_type'	=> 'multiple',
+		);
+		$this->model['child']['recommendation'] = array(
+			'export'			=> true,
+			'type'				=> 'object',
+			'controller' 	=> '\digi\recommendation_class',
+			'field'				=> 'post_id'
+		);
+
 		$this->model['user_info'] = array(
 			'type'				=> 'array',
 			'meta_type'	=> 'multiple',
