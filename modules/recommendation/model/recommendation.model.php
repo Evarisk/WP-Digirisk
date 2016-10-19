@@ -30,6 +30,14 @@ class recommendation_model extends post_model {
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
 			),
+			'recommendation_type' => array(
+				'type' 				=> 'string',
+				'meta_type'		=> 'multiple',
+			),
+			'efficiency' => array(
+				'type' 				=> 'string',
+				'meta_type'		=> 'multiple',
+			),
 			'associated_document_id' => array(
 				'type'				=> 'array',
 				'meta_type'	=> 'multiple',
