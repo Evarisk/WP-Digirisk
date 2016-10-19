@@ -35,7 +35,8 @@ class danger_shortcode {
 		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 
 		$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
-		$first_danger = max( $danger_category_list[0]->danger );
+		$danger_list = danger_class::g()->get( array() );
+		$first_danger = $danger_list[0];
 
 		if ( $display === 'edit' ) {
 			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'first_danger' => $first_danger, 'danger_category_list' => $danger_category_list ) );
