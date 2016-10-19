@@ -39,6 +39,10 @@ class risk_model extends post_model {
 					'field'				=> 'post_id'
 				)
 			),
+			'associated_recommendation' => array(
+				'type' 		=> 'array',
+				'meta_type'	=> 'multiple',
+			),
 			'unique_key' => array(
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
