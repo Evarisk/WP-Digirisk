@@ -64,6 +64,10 @@ class workunit_model extends society_model {
 					'field'				=> 'post_id'
 				),
 			),
+			'associated_recommendation' => array(
+				'type' 		=> 'array',
+				'meta_type'	=> 'multiple',
+			),
 		) );
 
 		parent::__construct( $object, $field_wanted );
