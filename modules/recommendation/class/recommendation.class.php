@@ -26,7 +26,7 @@ class recommendation_class extends post_class {
 	protected $base = 'digirisk/recommendation';
 	protected $version = '0.1';
 
-	public $element_prefix = 'RE';
+	public $element_prefix = 'PA';
 
 	protected $limit_recommendation = -1;
 
@@ -65,8 +65,8 @@ class recommendation_class extends post_class {
 							$recommendation_term = $recommendation_term[0];
 
 						  foreach ( $list_recommendation as $element ) {
-								$recommendation = array(
-									'status' 							=> $element['status'],
+								$recommendation_args = array(
+									'status'							=> ( ( 'valid' == $element['status'] ) ? 'publish' : 'trash' ),
 									'unique_key' 					=> $element['unique_key'],
 									'unique_identifier' 	=> $element['unique_identifier'],
 									'efficiency'					=> $element['efficiency'],
@@ -80,7 +80,7 @@ class recommendation_class extends post_class {
 									)
 								);
 
-								$recommendation = recommendation_class::g()->update( $recommendation );
+								$recommendation = recommendation_class::g()->update( $recommendation_args );
 
 								$recommendation_comment_args = array(
 									'post_id'		=> $recommendation->id,
