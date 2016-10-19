@@ -15,26 +15,31 @@ class corrective_task_action {
 		$parent_id = $_GET['id'];
 
 		global $task_controller;
-		$task = $task_controller->index( array( 'post_parent' => $parent_id ) );
+			if ($task_controller) {
+			$task = $task_controller->index( array( 'post_parent' => $parent_id ) );
 
-		if ( empty( $task ) ) {
-			$task = new \StdClass();
-			$task->id = 0;
+			if ( empty( $task ) ) {
+				$task = new \StdClass();
+				$task->id = 0;
+			}
+			else {
+				$task = $task[0];
+			}
+
+			add_filter( 'action_create_point', function( $action ) {
+				$action = 'create_task_and_point';
+				return $action;
+			} );
+
+			add_filter( 'create_point_additional_option', function() {
+				return '<input type="hidden" name="parent_id" value="' . $_GET['id'] . '" />';
+			} );
+
+			view_util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
 		}
 		else {
-			$task = $task[0];
+			echo 'Il faut installer l\'extension Task Manager.';
 		}
-
-		add_filter( 'action_create_point', function( $action ) {
-			$action = 'create_task_and_point';
-			return $action;
-		} );
-
-		add_filter( 'create_point_additional_option', function() {
-			return '<input type="hidden" name="parent_id" value="' . $_GET['id'] . '" />';
-		} );
-
-		view_util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
 		wp_die();
 	}
 
