@@ -56,10 +56,14 @@ class workunit_model extends society_model {
 					),
 				),
 			),
-			'associated_recommendation' => array(
-				'type' 		=> 'array',
-				'meta_type'	=> 'multiple',
-			)
+			'child' => array(
+				'recommendation' => array(
+					'export'			=> true,
+					'type'				=> 'object',
+					'controller' 	=> '\digi\recommendation_class',
+					'field'				=> 'post_id'
+				),
+			),
 		) );
 
 		parent::__construct( $object, $field_wanted );
