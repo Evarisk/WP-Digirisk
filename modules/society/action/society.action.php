@@ -135,7 +135,7 @@ class society_action {
 
 		ob_start();
 		society_class::g()->display_dashboard();
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'template' => ob_get_clean(), 'module' => 'society', 'callback_success' => 'delete_success' ) );
 	}
 }
 
