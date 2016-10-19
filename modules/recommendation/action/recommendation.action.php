@@ -28,6 +28,8 @@ class recommendation_action {
 		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ) );
 		add_action( 'wp_ajax_load_recommendation', array( $this, 'ajax_load_recommendation' ) );
 		add_action( 'wp_ajax_delete_recommendation', array( $this, 'ajax_delete_recommendation' ) );
+
+		add_action( 'wp_ajax_transfert_recommendation', array( $this, 'ajax_transfert_recommendation' ) );
 	}
 
 	/**
@@ -111,6 +113,11 @@ class recommendation_action {
 		recommendation_class::g()->update( $recommendation );
 
 		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'delete_recommendation_success', 'template' => ob_get_clean() ) );
+	}
+
+	public function ajax_transfert_recommendation() {
+		recommendation_class::g()->transfert();
+		wp_send_json_success();
 	}
 }
 

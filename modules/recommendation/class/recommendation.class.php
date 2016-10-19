@@ -51,6 +51,10 @@ class recommendation_class extends post_class {
 		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
 		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
 	}
+
+	public function transfert() {
+		return true;
+	}
 }
 
 recommendation_class::g();
