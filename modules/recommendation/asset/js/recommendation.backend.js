@@ -16,10 +16,12 @@ window.digirisk.recommendation.select_recommendation = function( event ) {
 
 window.digirisk.recommendation.save_recommendation_success = function( element, response ) {
   jQuery( '.wp-digi-recommendation' ).replaceWith( response.data.template );
+	window.digirisk.date.init
 }
 
 window.digirisk.recommendation.load_recommendation_success = function( element, response ) {
   jQuery( element ).closest( 'li' ).replaceWith( response.data.template );
+	window.digirisk.date.init 
 }
 
 window.digirisk.recommendation.delete_recommendation_success = function( element, response ) {
