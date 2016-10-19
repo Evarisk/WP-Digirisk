@@ -32,11 +32,7 @@ class user_shortcode_action extends singleton_util {
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		if ( !empty( $_POST['user'] ) ) {
-		  foreach ( $_POST['user'] as $element ) {
-				user_digi_class::g()->update( $element );
-		  }
-		}
+		user_digi_class::g()->update( $_POST );
 
 		ob_start();
 		user_dashboard_class::g()->display_list_user();
