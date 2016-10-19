@@ -118,7 +118,9 @@ class society_action {
 		ob_start();
 		$element_id = $society->id;
 		view_util::exec( 'society', 'screen-left', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
-		wp_send_json_success( array( 'society' => $society, 'template_left' => ob_get_clean() ) );
+		$template_left = ob_get_clean();
+
+		wp_send_json_success( array( 'society' => $society, 'template_left' => $template_left ) );
 	}
 
 	/**
