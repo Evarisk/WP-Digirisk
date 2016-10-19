@@ -32,8 +32,10 @@ class risk_evaluation_comment_action {
 		if ( isset( $risk_obj->id ) ) {
 			if ( !empty( $_POST['list_comment'] ) ) {
 			  foreach ( $_POST['list_comment'] as $comment ) {
-					$comment['post_id'] = $risk_obj->id;
-					risk_evaluation_comment_class::g()->update( $comment );
+					if ( !empty( $comment['content'] ) ) {
+						$comment['post_id'] = $risk_obj->id;
+						risk_evaluation_comment_class::g()->update( $comment );
+					}
 			  }
 			}
 		}

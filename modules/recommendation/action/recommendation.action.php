@@ -75,8 +75,10 @@ class recommendation_action {
 
 		if ( !empty( $_POST['list_comment'] ) ) {
 		  foreach ( $_POST['list_comment'] as $element ) {
-				$element['post_id'] = $recommendation->id;
-				recommendation_comment_class::g()->update( $element );
+				if ( !empty( $element['content'] ) ) {
+					$element['post_id'] = $recommendation->id;
+					recommendation_comment_class::g()->update( $element );
+				}
 		  }
 		}
 
