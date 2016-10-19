@@ -10,8 +10,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 	?>
 	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][author_id]" value="<?php echo $comment->author_id; ?>" />
 	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][id]" value="<?php echo $comment->id; ?>" />
-	<input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][date]" value="<?php echo $comment->date; ?>" /> :
-	<input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][content]" value="<?php echo $comment->content; ?>" />
+	<span class="wp-digi-risk-date padded">
+		<input type="text" class="wpdigi_date" name="list_comment[<?php echo $comment->id; ?>][date]" value="<?php echo $comment->date; ?>" />
+	</span>
+	<span class="wp-digi-risk-comment padded">
+		<input type="text" class="wpdigi_comment" name="list_comment[<?php echo $comment->id; ?>][content]" value="<?php echo $comment->content; ?>" />
+	</span>
 
 	<?php if ($comment->id > 0): ?>
 		<a href="#"

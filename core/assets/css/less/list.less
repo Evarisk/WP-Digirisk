@@ -7,6 +7,7 @@
 	box-shadow: 0;
 	text-align: left;
 	padding: 6px 12px;
+	position: relative;
 	.cls;
 	.transition;
 	&:hover {
@@ -17,8 +18,10 @@
 		outline: none;
 	}
 	i {
-		float: right;
 		color: rgba(0,0,0,0.4);
+		position: absolute;
+		right: 4px;
+		top: 4px;
 	}
 	&.navigation {
 		background: @c2;
@@ -68,7 +71,7 @@
 			.wp-digi-global-name {
 				white-space: nowrap;
 				overflow: hidden;
-				text-overflow: ellipsis; 
+				text-overflow: ellipsis;
 			}
 			span {
 				display: block;

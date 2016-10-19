@@ -8,6 +8,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<span><?php _e( 'Préconisation', 'digirisk' ); ?></span>
 	<span><?php _e( 'Commentaire', 'digirisk' ); ?></span>
 	<span>&nbsp;</span>
+	<span>&nbsp;</span>
 </li>
 
 <?php $i = 1; ?>

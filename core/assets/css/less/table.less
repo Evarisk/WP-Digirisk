@@ -63,11 +63,20 @@
 			font-weight: 300;
 		}
 	}
-	.wp-digi-table-item-edit {
+	.wp-digi-table-item-edit, [class$="item-new"] {
 		display: table-row !important;
-		span {
+		span, toggle {
 			display: table-cell;
 			vertical-align: middle;
+		}
+		.wp-digi-summon-list {
+			width: 60px;
+		}
+		.padded {
+			padding: 0 4px;
+		}
+		.wp-digi-action-delete {
+			color: @red;
 		}
 		.wp-digi-element-thumbnail {
 			&:hover {
@@ -83,7 +92,7 @@
 			display: flex;
 			flex-direction: row;
 			.wpdigi_date {
-				width: 120px;
+				// width: 120px;
 			}
 			.wpdigi_comment {
 				width: 100%;
@@ -162,6 +171,7 @@
 					background: @green;
 				}
 			}
+			background: @c1 !important;
 		}
 	}
 	input[type="text"], textarea {
@@ -335,7 +345,7 @@
 	}
 }
 
-.wp-digi-risk-item-new {
+[class$="item-new"] {
 	input, textarea {
 		width: 100%;
 		line-height: 1.1;
@@ -347,6 +357,12 @@
 	.wp-digi-risk-date {
 		padding-right: 6px;
 		width: 100px;
+	}
+	.wp-digi-action a:first-child {
+		left: auto;
+	}
+	.wp-digi-action-edit {
+		background: @c1 !important;
 	}
 }
 
