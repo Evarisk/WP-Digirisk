@@ -26,5 +26,16 @@ window.digirisk.tab.load = function( event ) {
 
   jQuery.post( window.ajaxurl, data, function( response ) {
     jQuery( ".wp-digi-content" ).replaceWith( response.data.template );
+
+		window.digirisk.tab.call_tab_changed();
   } );
 };
+
+window.digirisk.tab.call_tab_changed = function() {
+	for ( var key in window.digirisk ) {
+		if (window.digirisk[key].tab_changed) {
+			console.log('Tab changed de l\'objet: ' + key);
+			window.digirisk[key].tab_changed();
+		}
+	}
+}

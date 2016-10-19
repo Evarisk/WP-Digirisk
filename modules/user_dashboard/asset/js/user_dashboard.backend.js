@@ -35,9 +35,9 @@ window.digirisk.user_dashboard.keyup_update_email = function( event ) {
 	var lastname = jQuery( ".wp-digi-table-item-new .lastname" ).val();
 	var domain_mail = jQuery( '.input-domain-mail' ).val();
 
-	var together = window.digi_global.remove_diacritics(firstname + '.' + lastname + '@' + domain_mail).toLowerCase();
+	var together = window.digirisk.global.remove_diacritics(firstname + '.' + lastname + '@' + domain_mail).toLowerCase();
 
-	jQuery( ".wp-digi-table-item-new input.email" ).val( together );
+	jQuery( ".wp-digi-table-item-new input[name='email']" ).val( together );
 	window.digirisk.user_dashboard.key_enter_send_form( event, jQuery( this ) );
 };
 
