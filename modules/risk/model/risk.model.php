@@ -43,6 +43,10 @@ class risk_model extends post_model {
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
 			),
+			'risk_date' => array(
+				'type' 		=> 'array',
+				'meta_type'	=> 'multiple',
+			),
 			'unique_key' => array(
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
