@@ -46,7 +46,7 @@ class evaluation_method_shortcode {
 		if ( $risk_id != 0 ) {
 			$risk = risk_class::g()->get( array( 'include' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
 			$risk = $risk[0];
-			$digi_method_id = max( $risk->taxonomy['digi-method'] );
+			$digi_method_id = $risk->evaluation_method[0]->id;
 			$scale = !empty( $risk->evaluation[0]->scale ) ? $risk->evaluation[0]->scale : 0;
 			$equivalence = !empty( $risk->evaluation[0]->risk_level['equivalence'] ) ? $risk->evaluation[0]->risk_level['equivalence'] : 0;
 			if ( $digi_method_id == $term_evarisk_complex->term_id ) {
