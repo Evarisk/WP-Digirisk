@@ -7,8 +7,8 @@ class address_class extends comment_class {
 	protected $model_name   = '\digi\address_model';
 	protected $comment_type = 'digi-address';
 	protected $meta_key    	= '_wpdigi_address';
-	
-	protected $base					= 'address';
+
+	protected $base					= 'digirisk/address';
 	protected $version = '0.1';
 
 	/**
@@ -29,3 +29,6 @@ class address_class extends comment_class {
 		return $this->update( $data );
 	}
 }
+
+
+address_class::g();
