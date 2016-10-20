@@ -39,6 +39,14 @@ class address_model extends comment_model {
 				'type' 			=> 'array',
 				'meta_type'	=> 'multiple',
 				'bydefault'	=> array(),
+				'child'			=> array(
+					'longitude' => array(
+						'type' 			=> 'string',
+					),
+					'latitude' => array(
+						'type' 			=> 'string',
+					),
+				)
 			),
 		)	);
 
