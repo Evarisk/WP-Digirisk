@@ -16,6 +16,15 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class risk_evaluation_comment_model extends comment_model {
 	public function __construct( $object, $field_wanted = array() ) {
+		$this->model = array_merge( $this->model, array(
+			'export'	=> array(
+				'type'			=> 'boolean',
+				'bydefault'	=> true,
+				'meta_type'	=> 'multiple',
+				'description'	=> 'Permet de définir si on souhaite exporter le commentaire dans le DUER ou juste l\'afficher dans l\'interface',
+			),
+		) );
+
 		parent::__construct( $object, $field_wanted );
 	}
 
