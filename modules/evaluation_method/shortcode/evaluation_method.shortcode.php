@@ -43,6 +43,8 @@ class evaluation_method_shortcode {
 		$display = 'simple';
 		$target = 'wp-digi-risk-cotation-chooser';
 
+		$class = '';
+
 		if ( $risk_id != 0 ) {
 			$risk = risk_class::g()->get( array( 'include' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
 			$risk = $risk[0];
@@ -52,6 +54,10 @@ class evaluation_method_shortcode {
 			if ( $digi_method_id == $term_evarisk_complex->term_id ) {
 				$target = "wpdigi-method-evaluation-render";
 				$display = "evarisk";
+				$class = 'open-popup';
+			}
+			else {
+				$class = '';
 			}
 		}
 		else {
@@ -65,7 +71,8 @@ class evaluation_method_shortcode {
 			'target'							=> $target,
 			'term_evarisk_simple'	=> $term_evarisk_simple,
 			'risk'								=> $risk,
-			'digi_method_id' 		=> $digi_method_id
+			'digi_method_id' 			=> $digi_method_id,
+			'class'								=> $class
 		);
 
 		view_util::exec( 'evaluation_method', 'edit-' . $display . '-evaluation-method', $view_data );

@@ -14,7 +14,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		<?php elseif ( $element->id == 0 ): ?>
 			<?php view_util::exec( 'comment', 'item-edit', array('key' => $key, 'type' => $type, 'comment' => $comment, 'element' => $element ) ); ?>
 		<?php elseif ( $element->id > 0 && $display == 'edit' ): ?>
-			<?php view_util::exec( 'comment', 'item-edit', array('key' => $key, 'type' => $type, 'comment' => $comment, 'element' => $element ) ); ?>
 		<?php else: ?>
 			<?php _e( '<span>Aucun commentaire</span>', 'digirisk' ); ?>
 		<?php endif; ?>

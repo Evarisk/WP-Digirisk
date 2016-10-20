@@ -83,14 +83,17 @@ class risk_model extends post_model {
 				'child' => array(
 					'digi-danger' => array(
 						'meta_type' => 'multiple',
+						'array_type'	=> 'integer',
 						'type' => 'array'
 					),
 					'digi-danger-category' => array(
 						'meta_type' => 'multiple',
+						'array_type'	=> 'integer',
 						'type' => 'array'
 					),
 					'digi-method' => array(
 						'meta_type' => 'multiple',
+						'array_type'	=> 'integer',
 						'type' => 'array'
 					)
 				)
