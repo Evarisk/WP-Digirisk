@@ -28,6 +28,14 @@ class evaluation_method_variable_model extends term_model {
 			'survey' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
+				'child'			=> array(
+					'title'	=> array(
+						'type'	=> 'string',
+					),
+					'request'	=> array(
+						'type'	=> 'array',
+					),
+				),
 			),
 		) );
 
