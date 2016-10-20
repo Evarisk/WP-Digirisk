@@ -45,7 +45,17 @@ class recommendation_shortcode {
 		$recommendation_category_list = recommendation_category_term_class::g()->get( array(), array( '\digi\recommendation_term' ) );
 		$first_recommendation = max( $recommendation_category_list[0]->recommendation_term );
 
-		view_util::exec( 'recommendation', 'dropdown', array( 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
+		$recommendation = array();
+
+		$display = 'dropdown';
+
+		if ( $id != 0 ) {
+			$recommendation = recommendation_class::g()->get( array( 'include' => array( $id ) ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
+			$recommendation = $recommendation[0];
+			$display = 'item-dropdown';
+		}
+
+		view_util::exec( 'recommendation', $display, array( 'recommendation' => $recommendation, 'id' => $id, 'first_recommendation' => $first_recommendation, 'recommendation_category_list' => $recommendation_category_list ) );
 	}
 }
 
