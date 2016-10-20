@@ -6,7 +6,7 @@ class risk_evaluation_class extends comment_class {
 	protected $model_name   = '\digi\risk_evaluation_model';
 	protected $meta_key     = '_wpdigi_risk_evaluation';
 	protected $comment_type	= 'digi-risk-eval';
-	
+
 	protected $base 				= 'digirisk/risk-evaluation';
 	protected $version 			= '0.1';
 
@@ -21,3 +21,5 @@ class risk_evaluation_class extends comment_class {
 	}
 
 }
+
+risk_evaluation_class::g();
