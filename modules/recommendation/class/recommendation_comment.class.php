@@ -16,3 +16,5 @@ class recommendation_comment_class extends comment_class {
 	}
 
 }
+
+recommendation_comment_class::g();
