@@ -37,16 +37,18 @@ class module_util extends singleton_util {
 		$module_name = basename( $module_json_path, '.config.json' );
 		$module_path = dirname( $module_json_path );
 
-		if ( !empty( config_util::$init[$module_name]->dependencies ) ) {
-		  foreach ( config_util::$init[$module_name]->dependencies as $dependence_folder => $list_option ) {
-				$path_to_module_and_dependence_folder =  $module_path . '/' . $dependence_folder . '/';
+		if ( !isset( config_util::$init[$module_name]->state ) || ( isset( config_util::$init[$module_name]->state ) && config_util::$init[$module_name]->state ) ) {
+			if ( !empty( config_util::$init[$module_name]->dependencies ) ) {
+			  foreach ( config_util::$init[$module_name]->dependencies as $dependence_folder => $list_option ) {
+					$path_to_module_and_dependence_folder =  $module_path . '/' . $dependence_folder . '/';
 
-				if ( !empty( $list_option->priority ) ) {
-					$this->inc_priority_file( $path_to_module_and_dependence_folder, $dependence_folder, $list_option->priority );
-				}
+					if ( !empty( $list_option->priority ) ) {
+						$this->inc_priority_file( $path_to_module_and_dependence_folder, $dependence_folder, $list_option->priority );
+					}
 
-				include_util::g()->in_folder( $path_to_module_and_dependence_folder );
-		  }
+					include_util::g()->in_folder( $path_to_module_and_dependence_folder );
+			  }
+			}
 		}
 	}
 
