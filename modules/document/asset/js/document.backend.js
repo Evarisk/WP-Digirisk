@@ -13,9 +13,11 @@ window.digirisk.document.event = function() {
 window.digirisk.document.save_element_sheet = function ( event ) {
 	event.preventDefault();
 
+	jQuery( this ).addClass( "wp-digi-loading" );
+	
+
 	var options = {
         beforeSubmit:  function( formData, jqForm, options ) {
-        	jQuery( this ).addClass( "wp-digi-loading" );
         },
         success:       function( responseText, statusText, xhr, $form ) {
         	jQuery( this ).removeClass( "wp-digi-loading" );

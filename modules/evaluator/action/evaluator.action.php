@@ -81,7 +81,7 @@ class evaluator_action {
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class evaluator_action {
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**

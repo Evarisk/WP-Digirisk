@@ -204,7 +204,7 @@ class group_action {
 	public function ajax_generate_duer() {
 		check_ajax_referer( 'digi_ajax_generate_element_duer' );
 		$duer = group_duer_class::g()->generate( $_POST );
-		wp_send_json_success( array( 'duer' => $duer ) );
+		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_generate_duer_success', 'duer' => $duer ) );
 	}
 
 
