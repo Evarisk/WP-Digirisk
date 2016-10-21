@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.1.6.1",
+	"version": "6.1.6.3",
 	"description": "L'application Digirisk",
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",
