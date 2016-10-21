@@ -14,7 +14,7 @@ namespace digi;
  * Text Domain: digirisk
  */
 
-DEFINE( 'PLUGIN_DIGIRISK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '\\' );
+DEFINE( 'PLUGIN_DIGIRISK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_DIR', basename( __DIR__ ) );
 
