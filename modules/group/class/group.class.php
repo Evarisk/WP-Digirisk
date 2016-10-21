@@ -182,7 +182,7 @@ class group_class extends post_class {
 				endforeach;
 			endif;
 
-			$element_duer_details[] = array(
+			$element_duer_details[] = apply_filters( 'risk_duer_additional_data', array(
 				'idElement'					=> $element->unique_identifier,
 				'nomElement'				=> $element->unique_identifier. ' - ' . $element->title,
 				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
@@ -191,7 +191,7 @@ class group_class extends post_class {
 				'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
 				'commentaireRisque'	=> $comment_list,
 				'actionPrevention'	=> ''
-			);
+			), $risk );
 		}
 
 		if ( !empty( $risk_list_to_order ) ) {
