@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<li class="wp-digi-list-item wp-digi-epi-item" data-epi-id="<?php echo $epi->id; ?>" >
+<li class="wp-digi-list-item wp-digi-risk-item wp-digi-epi-item" data-epi-id="<?php echo $epi->id; ?>" >
 	<?php echo do_shortcode( '[eo_upload_button id="' . $epi->id . '" type="epi"]' ); ?>
 	<span class="padded"><?php echo $epi->unique_identifier; ?></span>
 	<span class="padded"><?php echo $epi->title; ?></span>
@@ -11,7 +11,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<span class="padded"><?php echo $epi->control_date; ?></span>
 	<span class="padded"><?php echo $epi->compiled_remaining_time; ?></span>
 
-	<span class="wp-digi-action" >
+	<span class="wp-digi-action">
 		<a href="#"
 			data-id="<?php echo $epi->id; ?>"
 			data-nonce="<?php echo wp_create_nonce( 'ajax_load_epi_' . $epi->id ); ?>"

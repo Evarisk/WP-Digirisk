@@ -28,6 +28,7 @@ class evaluation_method_variable_model extends term_model {
 			'survey' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
+<<<<<<< HEAD
 				// 'child'			=> array(
 				// 	'title'	=> array(
 				// 		'type'	=> 'string',
@@ -38,6 +39,8 @@ class evaluation_method_variable_model extends term_model {
 				// 		'bydefault'	=> null,
 				// 	),
 				// ),
+=======
+>>>>>>> 2b7a075c30ef8318881e5634f23bccd932a2a512
 			),
 		) );
 
