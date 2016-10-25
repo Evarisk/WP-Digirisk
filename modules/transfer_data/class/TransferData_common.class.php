@@ -62,7 +62,6 @@ class TransferData_common_class extends singleton_util {
 					unset( $element->$custom_field );
 				}
 			}
-
 			/**	Create element into wordpress database */
 			$element_id = wp_insert_post( $element_wp_definition, true );
 
@@ -176,54 +175,6 @@ class TransferData_common_class extends singleton_util {
 		return $treated_element;
 	}
 
-	function transfer_users( $old_element_id, $old_element_type, $user_role = '', $element_new_type = '', $element_new_id = 0 ) {
-		$currently_affected_user = array();
-		global $wpdb;
-
-		$query = $wpdb->prepare(
-				"SELECT *, DATEDIFF( date_desaffectation_reelle, date_affectation_reelle ) AS duration_in_days, TIMEDIFF( date_desaffectation_reelle, date_affectation_reelle ) AS duration_in_hour, TIMESTAMPDIFF( MINUTE, date_affectation_reelle, date_desaffectation_reelle ) AS duration_in_minute
-			FROM " . TABLE_LIAISON_USER_ELEMENT . "
-			WHERE id_element = '%s'
-				AND table_element = '%s'
-				AND status IN ( 'valid', 'moderated', 'deleted') "
-				, $old_element_id, $old_element_type
-		);
-		$currently_affected_users_old = $wpdb->get_results( $query );
-		if ( !empty( $currently_affected_users_old ) ) {
-			foreach ( $currently_affected_users_old as $currently_affected_users ) {
-
-				$idUser = ( 0 == $currently_affected_users->id_user ) ? 1 : $currently_affected_users->id_user;
-				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idUser ] ) ) {
-					$idUser = (int)$_POST[ 'wp_new_user' ][ $idUser ];
-				}
-				$idAttributeur = ( 0 == $currently_affected_users->id_attributeur ) ? 1 : $currently_affected_users->id_attributeur;
-				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idAttributeur ] ) ) {
-					$idAttributeur = (int)$_POST[ 'wp_new_user' ][ $i ][ $idAttributeur ];
-				}
-				$idDesAttributeur = ( 0 == $currently_affected_users->id_desAttributeur ) ? 1 : $currently_affected_users->id_desAttributeur;
-				if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idDesAttributeur ] ) ) {
-					$idDesAttributeur = (int)$_POST[ 'wp_new_user' ][ $i ][ $idDesAttributeur ];
-				}
-
-				$currently_affected_user[ $idUser ][ 'status' ] = ( 'valid' == $currently_affected_users->status ) ? 'valid' : 'deleted';
-
-				$currently_affected_user[ $idUser ][ 'start' ][ 'date' ] = $currently_affected_users->date_affectation_reelle;
-				$currently_affected_user[ $idUser ][ 'start' ][ 'by' ] = $idAttributeur;
-				$currently_affected_user[ $idUser ][ 'start' ][ 'on' ] = $currently_affected_users->date_affectation;
-
-				$currently_affected_user[ $idUser ][ 'end' ][ 'date' ] = $currently_affected_users->date_desaffectation_reelle;
-				$currently_affected_user[ $idUser ][ 'end' ][ 'by' ] = $idDesAttributeur;
-				$currently_affected_user[ $idUser ][ 'end' ][ 'on' ] = $currently_affected_users->date_desAffectation;
-
-				if ( !empty( $user_role ) ) {
-					$currently_affected_user[ $idUser ][ 'role' ] = $user_role;
-				}
-			}
-		}
-
-		return $currently_affected_user;
-	}
-
 	function transfer_surveys( $old_element_id, $old_element_type, $new_element_id ) {
 		global $wpdb;
 		$survey_results = array();
@@ -269,13 +220,13 @@ class TransferData_common_class extends singleton_util {
 		switch ( $document_origin ) {
 			case 'picture':
 				$field_name = 'photo';
-				break;
+			break;
 			case 'document':
 			case 'document_model':
 			case 'printed_duer':
 			case 'printed_sheet':
 				$main_type = 'document';
-				break;
+			break;
 		}
 
 		$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
@@ -331,7 +282,7 @@ class TransferData_common_class extends singleton_util {
 			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid, $new_element_id );
 
 			/**	Create the different size for the given picture and get metadatas for this picture	*/
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename($file) );
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename( $file ) );
 			/**	Finaly save pictures metadata	*/
 			wp_update_attachment_metadata( $attach_id, $attach_data );
 

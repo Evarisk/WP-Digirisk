@@ -61,7 +61,7 @@ class risk_class extends post_class {
 	}
 
 	public function display_risk_list( $society_id ) {
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger', 'recommendation' ) );
 
 		if ( count( $risk_list ) > 1 ) {
 			usort( $risk_list, function( $a, $b ) {

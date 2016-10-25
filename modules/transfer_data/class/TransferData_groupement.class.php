@@ -58,9 +58,10 @@ class wpdigi_transferdata_society_class extends singleton_util {
 			'establishment_date' => $evarisk_element->creation_date_of_society,
 		);
 
-		$group_mdl->associated_risk = $this->transfer_risk( $evarisk_element->id, $element_type, $wp_element_id );
+		$this->transfer_risk( $evarisk_element->id, $element_type, $wp_element_id );
+		$this->transfer_recommendation( $evarisk_element->id, $element_type, $wp_element_id );
+
 		$group_mdl->associated_product = $this->transfer_product( $evarisk_element->id, $element_type, $wp_element_id );
-		$group_mdl->associated_recommendation = $this->transfer_recommendation( $evarisk_element->id, $element_type, $wp_element_id );
 
 		group_class::g()->update( $group_mdl );
 	}
@@ -78,7 +79,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 	function transfer_unite( $element, $element_type, $wp_element_id ) {
 
 		/**	Get the element created for new data transfer	*/
-		$workunit_mdl = workunit_class::g()->get( array( 'include' => array( $wp_element_id ) ) );
+		$workunit_mdl = workunit_class::g()->get( array( 'include' => array( $wp_element_id ), 'post_status' => 'all', ) );
 		$workunit_mdl = $workunit_mdl[0];
 
 		/**	Build the	group model for new data storage */
@@ -98,9 +99,9 @@ class wpdigi_transferdata_society_class extends singleton_util {
 			'workforce' => $element->effectif,
 		);
 
-		$workunit_mdl->associated_risk = $this->transfer_risk( $element->id, $element_type, $wp_element_id );
+		$this->transfer_risk( $element->id, $element_type, $wp_element_id );
 		$workunit_mdl->associated_product = $this->transfer_product( $element->id, $element_type, $wp_element_id );
-		$workunit_mdl->associated_recommendation = $this->transfer_recommendation( $element->id, $element_type, $wp_element_id );
+		$this->transfer_recommendation( $element->id, $element_type, $wp_element_id );
 
 		workunit_class::g()->update( $workunit_mdl );
 	}
@@ -164,26 +165,25 @@ class wpdigi_transferdata_society_class extends singleton_util {
 				}
 				/**	Définition principale du risque / Define the main risk model	*/
 				$risk_definition = array(
-					'parent_id' 			=> $new_element_id,
-					'author_id' 			=> $main_risk_infos->idEvaluateur,
-					'date'						=> $main_risk_infos->unformatted_evaluation_date,
-					'date_modified'		=> current_time( 'mysql', 0 ),
-					'title'						=> sprintf( __( '%1$s for %3$s - %2$s', 'wp-digi-dtrans-i18n' ), $danger->nom, $old_element->nom, $element_prefix ),
-					'slug'						=> null,
-					'content'					=> null,
-					'status'					=> $status,
-					'link'						=> null,
-					'type'						=> risk_class::g()->get_post_type(),
-					'comment_status'	=> 'closed',
-					'comment_count'		=> null,
-					'current_evaluation_id' 				=> 0,
-					'unique_key' 				=> $old_risk_id,
-					'unique_identifier' => ELEMENT_IDENTIFIER_R . $old_risk_id,
-					'risk_date' 				=> array(
+					'parent_id' 						=> $new_element_id,
+					'author_id' 						=> $main_risk_infos->idEvaluateur,
+					'date'									=> $main_risk_infos->unformatted_evaluation_date,
+					'date_modified'					=> current_time( 'mysql', 0 ),
+					'title'									=> sprintf( __( '%1$s for %3$s - %2$s', 'wp-digi-dtrans-i18n' ), $danger->nom, $old_element->nom, $element_prefix ),
+					'slug'									=> null,
+					'content'								=> null,
+					'status'								=> $status,
+					'link'									=> null,
+					'type'									=> risk_class::g()->get_post_type(),
+					'comment_status'				=> 'closed',
+					'comment_count'					=> null,
+					'current_evaluation_id'	=> 0,
+					'unique_key' 						=> $old_risk_id,
+					'unique_identifier' 		=> ELEMENT_IDENTIFIER_R . $old_risk_id,
+					'risk_date' 						=> array(
 						'start' => $main_risk_infos->dateDebutRisque,
 						'end' 	=> $main_risk_infos->dateFinRisque,
 					),
-					'associated_recommendation' => $this->transfer_recommendation( $old_element_id, $old_element_type, $new_element_id ),
 				);
 
 				/**	Création du risque / Create the risk	*/
@@ -191,6 +191,9 @@ class wpdigi_transferdata_society_class extends singleton_util {
 				if ( !empty( $wp_risk->id ) ) {
 					/**	Ajoute le risque à la liste pour affectation à l'éléments / Add the risk for element affectation	*/
 					$risk_to_associate[] = $wp_risk->id;
+
+					/** Transfert des recommendations */
+					$this->transfer_recommendation( $old_risk_id, TABLE_RISQUE, $wp_risk->id );
 
 					/**	Log creation	*/
 					log_class::g()->exec( 'digirisk-datas-transfert-risk', '', sprintf( __( 'Risk have been successfully transfered to wordpress system id. %d', 'wp-digi-dtrans-i18n' ), $wp_risk->id ), array( 'object_id' => $old_risk_id, ), 0 );
@@ -268,117 +271,119 @@ class wpdigi_transferdata_society_class extends singleton_util {
 					/**	Création de chaque évaluation du risque / Create each risk evaluation	*/
 					$wp_risk->current_evaluation_id = null;
 					foreach ( $old_risk_evaluation_list as $old_risk_evaluation_id => $old_risk_evaluation ) {
-						/**	Enregistrement de la cotation du risque / Save the risk quotation	*/
-						unset( $status );
-						switch ( $old_risk_evaluation[ 0 ]->evaluation_status ) {
-							case 'Moderated':
-								$status = -34071;
-								break;
-							case 'Deleted':
-								$status = -34072;
-								break;
-							default:
-								$status = -34070;
-								break;
-						}
-						$evaluator = get_userdata( $old_risk_evaluation[ 0 ]->idEvaluateur );
+						if ( !empty( $old_risk_evaluation_id ) && !empty( $old_risk_evaluation ) && !empty( $old_risk_evaluation[ 0 ] ) ) {
+							/**	Enregistrement de la cotation du risque / Save the risk quotation	*/
+							unset( $status );
+							switch ( $old_risk_evaluation[ 0 ]->evaluation_status ) {
+								case 'Moderated':
+									$status = -34071;
+									break;
+								case 'Deleted':
+									$status = -34072;
+									break;
+								default:
+									$status = -34070;
+									break;
+							}
+							$evaluator = get_userdata( $old_risk_evaluation[ 0 ]->idEvaluateur );
 
-						$risk_evaluation_definition = array(
-							'post_id'								=> $wp_risk->id,
-							'date'									=> $old_risk_evaluation[ 0 ]->date,
-							'author_nicename'				=> $evaluator->display_name,
-							'author_email'					=> $evaluator->user_email,
-							'content'								=> null,
-							'type'									=> risk_evaluation_class::g()->get_type(),
-							'parent_id'							=> null,
-							'user_id'								=> $old_risk_evaluation[ 0 ]->idEvaluateur,
-							'author_id'							=> $old_risk_evaluation[ 0 ]->unformatted_evaluation_date,
-							'status'								=> $status,
-							'unique_key'						=> $old_risk_evaluation_id,
-							'unique_identifier'			=> ELEMENT_IDENTIFIER_E . $old_risk_evaluation_id,
-						);
-
-						/**	Enregistrement des valeurs résultantes de la cotation / Save the different value resulting of risk quotation	*/
-						$risk_score = getScoreRisque( $old_risk_evaluation_list[ $old_risk_evaluation_id ] );
-						$risk_quotation = getEquivalenceEtalon( $old_risk_evaluation[ 0 ]->id_methode, $risk_score, $main_risk_infos->date );
-						$risk_evaluation_definition[ 'risk_level' ] = array(
-							'method_result' => $risk_score,
-							'equivalence' 	=> $risk_quotation,
-						);
-						$risk_evaluation_definition[ 'scale' ] = getSeuil( $risk_quotation );
-
-						/**	Enregistrement de la quotation du risque, du commentaire et du score / Save the risk level, the risk comment and the risk final score	*/
-						foreach ( $old_risk_evaluation as $old_risk_definition ) {
-							$query = $wpdb->prepare( "
-									SELECT term_id
-									FROM {$wpdb->termmeta}
-									WHERE meta_key = %s
-									AND meta_value = %s", '_wpdigi_element_computed_identifier', TABLE_VARIABLE . '#value_sep#' . $old_risk_definition->id_variable
+							$risk_evaluation_definition = array(
+								'post_id'								=> $wp_risk->id,
+								'date'									=> $old_risk_evaluation[ 0 ]->date,
+								'author_nicename'				=> !empty( $evaluator ) && !empty( $evaluator->display_name ) ? $evaluator->display_name : '',
+								'author_email'					=> !empty( $evaluator ) && !empty( $evaluator->user_email ) ? $evaluator->user_email : '',
+								'content'								=> null,
+								'type'									=> risk_evaluation_class::g()->get_type(),
+								'parent_id'							=> null,
+								'user_id'								=> $old_risk_evaluation[ 0 ]->idEvaluateur,
+								'author_id'							=> $old_risk_evaluation[ 0 ]->unformatted_evaluation_date,
+								'status'								=> $status,
+								'unique_key'						=> $old_risk_evaluation_id,
+								'unique_identifier'			=> ELEMENT_IDENTIFIER_E . $old_risk_evaluation_id,
 							);
-							$risk_evaluation_definition[ 'quotation_detail' ][] = array(
-								'variable_id' => $wpdb->get_var( $query ),
-								'value'				=> $old_risk_definition->valeur,
+
+							/**	Enregistrement des valeurs résultantes de la cotation / Save the different value resulting of risk quotation	*/
+							$risk_score = getScoreRisque( $old_risk_evaluation_list[ $old_risk_evaluation_id ] );
+							$risk_quotation = getEquivalenceEtalon( $old_risk_evaluation[ 0 ]->id_methode, $risk_score, $main_risk_infos->date );
+							$risk_evaluation_definition[ 'risk_level' ] = array(
+								'method_result' => $risk_score,
+								'equivalence' 	=> $risk_quotation,
 							);
-						}
+							$risk_evaluation_definition[ 'scale' ] = getSeuil( $risk_quotation );
 
-						$wp_risk_evaluation = risk_evaluation_class::g()->create( $risk_evaluation_definition );
-						if ( !empty( $wp_risk_evaluation->id ) ) {
-							$wp_risk->associated_evaluation[] = $wp_risk_evaluation->id;
-
-							/**	Log creation	*/
-							log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$risk_evaluation_definition[ 'unique_key' ], $wp_risk_evaluation->id ), array( 'object_id' => $wp_risk->id, ), 0 );
-
-							$query = $wpdb->prepare(
-								"SELECT *
-								FROM " . TABLE_ACTIVITE_SUIVI . "
-								WHERE table_element = %s
-									AND id_element = %d", TABLE_AVOIR_VALEUR, $old_risk_evaluation_id
-							);
-							$comment_list = $wpdb->get_results( $query );
-							if ( !empty( $comment_list ) ) {
-								foreach ( $comment_list as $comment ) {
-									$comment_author = get_userdata( $comment->id_user );
-									switch ( $comment->status ) {
-										case 'moderated':
-											$status = -34071;
-											break;
-										case 'deleted':
-											$status = -34072;
-											break;
-										default:
-											$status = -34070;
-											break;
-									}
-									$risk_comment_definition = array(
-										'post_id'								=> $wp_risk->id,
-										'date'									=> $comment->date_ajout,
-										'author_nicename'				=> $comment_author->display_name,
-										'author_email'					=> $comment_author->user_email,
-										'content'								=> $comment->commentaire,
-										'type'									=> risk_evaluation_comment_class::g()->get_type(),
-										'parent_id'							=> $wp_risk_evaluation->id,
-										'user_id'								=> $comment->id_user,
-										'author_id'							=> $comment->id_user,
-										'status'								=> $status,
-											'unique_key'				=> $comment->id,
-											'unique_identifier'	=> $comment->id,
-											'export'	=> ( !empty( $comment->export ) && ( "yes" == $comment->export ) ? true : false ),
-									);
-
-									$wp_risk_evaluation_comment_class = risk_evaluation_comment_class::g()->create( $risk_comment_definition );
-									if ( !empty( $wp_risk_evaluation_comment_class->id ) ) {
-										/**	Log creation	*/
-										log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation comment %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$comment->id, $wp_risk_evaluation_comment_class->id ), array( 'object_id' => $wp_risk->id, ), 0 );
-									}
-								}
+							/**	Enregistrement de la quotation du risque, du commentaire et du score / Save the risk level, the risk comment and the risk final score	*/
+							foreach ( $old_risk_evaluation as $old_risk_definition ) {
+								$query = $wpdb->prepare( "
+										SELECT term_id
+										FROM {$wpdb->termmeta}
+										WHERE meta_key = %s
+										AND meta_value = %s", '_wpdigi_element_computed_identifier', TABLE_VARIABLE . '#value_sep#' . $old_risk_definition->id_variable
+								);
+								$risk_evaluation_definition[ 'quotation_detail' ][] = array(
+									'variable_id' => $wpdb->get_var( $query ),
+									'value'				=> $old_risk_definition->valeur,
+								);
 							}
 
-							if ( 'Valid' == $old_risk_evaluation[ 0 ]->evaluation_status )
-								$wp_risk->current_evaluation_id = $wp_risk_evaluation->id;
-						}
-						else {
-							/**	Log creation	*/
-							log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'wp-digi-dtrans-i18n' ), json_encode( $wp_risk_evaluation ) ), array( 'object_id' => $old_risk_id, ), 2 );
+							$wp_risk_evaluation = risk_evaluation_class::g()->create( $risk_evaluation_definition );
+							if ( !empty( $wp_risk_evaluation->id ) ) {
+								$wp_risk->associated_evaluation[] = $wp_risk_evaluation->id;
+
+								/**	Log creation	*/
+								log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$risk_evaluation_definition[ 'unique_key' ], $wp_risk_evaluation->id ), array( 'object_id' => $wp_risk->id, ), 0 );
+
+								$query = $wpdb->prepare(
+									"SELECT *
+									FROM " . TABLE_ACTIVITE_SUIVI . "
+									WHERE table_element = %s
+										AND id_element = %d", TABLE_AVOIR_VALEUR, $old_risk_evaluation_id
+								);
+								$comment_list = $wpdb->get_results( $query );
+								if ( !empty( $comment_list ) ) {
+									foreach ( $comment_list as $comment ) {
+										$comment_author = get_userdata( $comment->id_user );
+										switch ( $comment->status ) {
+											case 'moderated':
+												$status = -34071;
+												break;
+											case 'deleted':
+												$status = -34072;
+												break;
+											default:
+												$status = -34070;
+												break;
+										}
+										$risk_comment_definition = array(
+											'post_id'								=> $wp_risk->id,
+											'date'									=> $comment->date_ajout,
+											'author_nicename'				=> $comment_author->display_name,
+											'author_email'					=> $comment_author->user_email,
+											'content'								=> $comment->commentaire,
+											'type'									=> risk_evaluation_comment_class::g()->get_type(),
+											'parent_id'							=> $wp_risk_evaluation->id,
+											'user_id'								=> $comment->id_user,
+											'author_id'							=> $comment->id_user,
+											'status'								=> $status,
+											'unique_key'						=> $comment->id,
+											'unique_identifier'			=> $comment->id,
+											'export'								=> ( !empty( $comment->export ) && ( "yes" == $comment->export ) ? true : false ),
+										);
+
+										$wp_risk_evaluation_comment_class = risk_evaluation_comment_class::g()->create( $risk_comment_definition );
+										if ( !empty( $wp_risk_evaluation_comment_class->id ) ) {
+											/**	Log creation	*/
+											log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation comment %d have been associated to risk under %s', 'wp-digi-dtrans-i18n' ), (int)$comment->id, $wp_risk_evaluation_comment_class->id ), array( 'object_id' => $wp_risk->id, ), 0 );
+										}
+									}
+								}
+
+								if ( 'Valid' == $old_risk_evaluation[ 0 ]->evaluation_status )
+									$wp_risk->current_evaluation_id = $wp_risk_evaluation->id;
+							}
+							else {
+								/**	Log creation	*/
+								log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'wp-digi-dtrans-i18n' ), json_encode( $wp_risk_evaluation ) ), array( 'object_id' => $old_risk_id, ), 2 );
+							}
 						}
 					}
 
@@ -463,32 +468,46 @@ class wpdigi_transferdata_society_class extends singleton_util {
 		);
 		$associated_recommendations = $wpdb->get_results( $query );
 
-		foreach ( $associated_recommendations as $recommendation ) {
+		foreach ( $associated_recommendations as $recommendation_old ) {
 			/**	Définition de la catégorie de danger pour le risque selon les nouveaux rangements / Define the danger category for risk into new storage	*/
 			$query = $wpdb->prepare( "
 				SELECT term_id
 				FROM {$wpdb->termmeta}
 				WHERE meta_key = %s
-					AND meta_value = %s", '_wpdigi_element_computed_identifier', TABLE_PRECONISATION . '#value_sep#' . $recommendation->id_preconisation
+					AND meta_value = %s", '_wpdigi_element_computed_identifier', TABLE_PRECONISATION . '#value_sep#' . $recommendation_old->id_preconisation
 			);
-			$new_recommendation_id = $wpdb->get_var( $query );
-			if ( !empty( $new_recommendation_id ) ) {
-				wp_set_object_terms( $new_element_id, (int)$new_recommendation_id, recommendation_class::g()->get_taxonomy(), true );
+			$recommendation_term_id = $wpdb->get_var( $query );
+			$recommendation_term = recommendation_term_class::g()->get( array( 'include' => array( $recommendation_term_id ) ) );
+			$recommendation_term = $recommendation_term[0];
 
-				$associated_recommendation[ (int)$new_recommendation_id ][] = array(
-					'status'						=> ( ( 'valid' == $recommendation->status ) ? 'valid' : 'deleted' ),
-					'unique_key'				=> $recommendation->id,
-					'unique_identifier'	=> recommendation_class::g()->element_prefix . $recommendation->id,
-					'efficiency'				=> (int)$recommendation->efficacite,
-					'comment'						=> $recommendation->commentaire,
-					'type'							=> $recommendation->preconisation_type,
-					'affectation_date'	=> $recommendation->date_affectation,
-					'last_update_date'	=> $recommendation->date_update_affectation,
-				);
-			}
+			$recommendation_args = array(
+				'parent_id'						=> $new_element_id,
+				'author_id'						=> 0,
+				'date'								=> ( '0000-00-00 00:00:00' != $recommendation_old->date_affectation					? $recommendation_old->date_affectation : current_time( 'mysql', 0 ) ),
+				'date_modified'				=> ( '0000-00-00 00:00:00' != $recommendation_old->date_update_affectation	? $recommendation_old->date_update_affectation : current_time( 'mysql', 0 ) ),
+				'status'							=> ( ( 'valid' == $recommendation_old->status ) ? 'publish' : 'trash' ),
+				'unique_key'					=> $recommendation_old->id,
+				'unique_identifier'		=> recommendation_class::g()->element_prefix . $recommendation_old->id,
+				'efficiency'					=> (int)$recommendation_old->efficacite,
+				'recommendation_type'	=> $recommendation_old->preconisation_type,
+				'taxonomy'						=> array(
+					recommendation_category_term_class::g()->get_taxonomy()	=> $recommendation_term->parent_id,
+					recommendation_term_class::g()->get_taxonomy()					=> (int)$recommendation_term_id,
+				),
+			);
+			$recommendation = recommendation_class::g()->update( $recommendation_args );
+			$associated_recommendation[] = $recommendation->id;
+
+			$recommendation_comment_args = array(
+				'post_id'		=> $recommendation->id,
+				'date'			=> ( '0000-00-00 00:00:00' != $recommendation_old->date_affectation					? $recommendation_old->date_affectation : current_time( 'mysql', 0 ) ),
+				'author_id'	=> 0,
+				'content'		=> $recommendation_old->commentaire,
+				'status'		=> ( ( 'valid' == $recommendation_old->status ) ? '-34070' : '-34071' ),
+				'type'			=> recommendation_comment_class::g()->get_type(),
+			);
+			$recommendation_comment = recommendation_comment_class::g()->update( $recommendation_comment_args );
 		}
-
-		return $associated_recommendation;
 	}
 
 	/**
@@ -528,8 +547,8 @@ class wpdigi_transferdata_society_class extends singleton_util {
 			'postcode' => $address->codePostal,
 			'town' => $address->ville,
 			'coordinate' => array(
-				'long'	=> $address->longitude,
-				'lat'		=> $address->latitude,
+				'longitude'	=> $address->longitude,
+				'latitude'		=> $address->latitude,
 			),
 		);
 

@@ -4,7 +4,7 @@
 	"version": "0.2.0.0",
 	"description": "Le module gérant le transfert de l'application 5.x.x.x à 6.x.x.x",
 	"path": "modules/transfer_data/",
-	"state": false,
+	"state": true,
 	"dependencies": {
 		"include": {
 		},

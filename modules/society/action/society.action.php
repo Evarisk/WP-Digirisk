@@ -27,9 +27,9 @@ class society_action {
 		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
 		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
 
-		if ( !empty( $digirisk_core['installed'] ) ) {
+		// if ( !empty( $digirisk_core['installed'] ) ) {
 			add_menu_page( __( 'Digirisk : Risk evaluation', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( society_class::g(), 'display_dashboard' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4);
-		}
+		// }
 	}
 
 	public function callback_admin_enqueue_scripts() {

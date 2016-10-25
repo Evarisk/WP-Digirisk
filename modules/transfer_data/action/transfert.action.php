@@ -74,7 +74,7 @@ class transfert_action {
 					$query =
 						"SELECT MAX( id )
 						FROM " . TABLE_LIAISON_PRECONISATION_ELEMENT;
-					update_option( recommendation_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
+					update_option( recommendation_term_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
 
 					/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */
 					$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
@@ -164,7 +164,7 @@ class transfert_action {
 					}
 
 					/**	Get Document model	*/
-					if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'document_model' ] ) || ( !empty( $digirisk_transfert_options[ 'document_model' ] ) && !empty( $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) ) ) {
+					if ( false && empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options[ 'document_model' ] ) || ( !empty( $digirisk_transfert_options[ 'document_model' ] ) && !empty( $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) && ( 'complete' != $digirisk_transfert_options[ 'document_model' ][ 'state' ] ) ) ) {
 						$eva_models_tranfer_result = TransferData_components_class::g()->transfer_document_model( $digirisk_transfert_options );
 						$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_models_tranfer_result );
 
@@ -201,6 +201,7 @@ class transfert_action {
 					$transfer_response = $this->element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression[ 'transfered' ], array( $element_type => array(), $sub_element_type => array(), ) ) );
 					break;
 				case 'doc':
+				exit;
 					$transfer_response = $this->document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression[ 'transfered' ], array( 'document' => array( 'ok' => array(), 'nok' => array(), ), 'picture' => array( 'ok' => array(), 'nok' => array(), ), ) ) );
 					break;
 			}
@@ -223,7 +224,7 @@ class transfert_action {
 
 		if ( count( $transfered_element[ $element_type ] ) < $nb_element_to_transfert->main_element_nb ) {
 			/**	Check if current element type has a root element in order to exclude it from datas transfert	*/
-			$root_element = $wpdb->get_row( "SELECT * FROM {$element_type} table1 WHERE NOT EXISTS( SELECT * FROM {$element_type} table2 WHERE table2.limiteGauche < table1.limiteGauche )");
+			$root_element = $wpdb->get_row( "SELECT * FROM {$element_type} table1 WHERE NOT EXISTS( SELECT * FROM {$element_type} table2 WHERE table2.limiteGauche < table1.limiteGauche )" );
 			/**	Retrieve elements to store into database	*/
 			$query = "SELECT *
 				FROM {$element_type} AS table1
@@ -241,7 +242,6 @@ class transfert_action {
 					)
 				ORDER BY limiteGauche ASC";
 			$first_level_elements = $wpdb->get_results($query);
-
 			foreach ( $first_level_elements as $element ) {
 				if ( !empty( $element ) ) {
 					$new_element_id = TransferData_common_class::g()->transfer( $element_type, $element );

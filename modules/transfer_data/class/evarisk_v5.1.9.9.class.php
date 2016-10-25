@@ -249,19 +249,19 @@ function getOperateursMethode($id_methode, $date = null){
 	$id_methode = (int) $id_methode;
 	$t = TABLE_AVOIR_OPERATEUR;
 	$query = $wpdb->prepare("SELECT *
-				FROM " . $t . " t1
-				WHERE t1.id_methode = %d
-				AND t1.date < %s
-                                AND t1.Status = 'Valid'
-				AND NOT EXISTS
-				(
-					SELECT *
-					FROM " . $t . " t2
-					WHERE t2.id_methode = %d
+		FROM " . $t . " t1
+		WHERE t1.id_methode = %d
+			AND t1.date < %s
+      AND t1.Status = 'Valid'
+			AND NOT EXISTS
+			(
+				SELECT *
+				FROM " . $t . " t2
+				WHERE t2.id_methode = %d
 					AND t2.date < %s
 					AND t1.date < t2.date
-				)
-				ORDER BY ordre ASC", $id_methode, $date, $id_methode, $date);
+			)
+		ORDER BY ordre ASC", $id_methode, $date, $id_methode, $date);
 	return $wpdb->get_results($query);
 }
 
@@ -310,19 +310,21 @@ function getScoreRisque( $risque, $method_option = '' ) {
 		// invariant de boucle : la valeur $listeValeurs[$numeroValeur] est trait�
 		foreach($listeOperateurs as $operateur){
 			$numeroValeur = $numeroValeur + 1;
-			switch($operateur){
-				case '*' :
-					$scoreRisque = $scoreRisque * $listeValeurs[$numeroValeur];
-					break;
-				case '/' :
-					$scoreRisque = $scoreRisque / $listeValeurs[$numeroValeur];
-					break;
-					//default <=> op�rateur de faible priorit� (i.e. + et -)
-				default :
-					$listeValeursSimples[] = $scoreRisque;
-					$listeOperateursSimples[] = $operateur;
-					$scoreRisque = $listeValeurs[$numeroValeur];
-					break;
+			if ( isset( $listeValeurs[ $numeroValeur ] ) ) {
+				switch($operateur){
+					case '*' :
+						$scoreRisque = $scoreRisque * $listeValeurs[$numeroValeur];
+						break;
+					case '/' :
+						$scoreRisque = $scoreRisque / $listeValeurs[$numeroValeur];
+						break;
+						//default <=> op�rateur de faible priorit� (i.e. + et -)
+					default :
+						$listeValeursSimples[] = $scoreRisque;
+						$listeOperateursSimples[] = $operateur;
+						$scoreRisque = $listeValeurs[$numeroValeur];
+						break;
+				}
 			}
 		}
 	}

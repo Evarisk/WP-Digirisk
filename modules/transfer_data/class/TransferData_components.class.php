@@ -56,7 +56,7 @@ class TransferData_components_class extends singleton_util {
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_danger_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => $eva_danger_category->description,
-					'url' => null,
+					'slug' => null,
 					'parent_id' => null,
 					'status' => ( 'Valid' == $eva_danger_category->Status ) ? 'valid' : 'deleted',
 					'unique_key' => $eva_danger_category->id,
@@ -97,8 +97,9 @@ class TransferData_components_class extends singleton_util {
 								'term_taxonomy_id' 	=> null,
 								'name' 							=> html_entity_decode( $eva_danger->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' 			=> $eva_danger->description,
-								'url' 							=> null,
+								'slug' 							=> null,
 								'parent_id'	 				=> $wp_danger_category->id,
+								'post_id'	 					=> null,
 								'status' 							=> ( 'Valid' == $eva_danger->Status ) ? 'valid' : 'deleted',
 								'unique_key' 					=> $eva_danger->id,
 								'unique_identifier' 	=> ELEMENT_IDENTIFIER_D . $eva_danger->id,
@@ -174,7 +175,7 @@ class TransferData_components_class extends singleton_util {
 					'unique_identifier' => ELEMENT_IDENTIFIER_ME . $eva_var->id,
 					'display_type' => $eva_var->affichageVar,
 					'range' => array( $eva_var->min, $eva_var->max ),
-					'survey' => array( 'titre' => $eva_var->questionTitre, 'request' => unserialize( $eva_var->questionVar ) ),
+					'survey' => array( 'title' => $eva_var->questionTitre, 'request' => unserialize( $eva_var->questionVar ) ),
 				);
 
 				if ( 'slide' == $eva_var->affichageVar && !empty( $eva_var->annotation ) ) {
@@ -183,8 +184,8 @@ class TransferData_components_class extends singleton_util {
 
 						if ( 4 == count( $details ) ) {
 							$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
-									'question' => null,
-									'seuil' => null,
+								'question' => null,
+								'treshold' => null,
 							);
 						}
 
@@ -192,7 +193,7 @@ class TransferData_components_class extends singleton_util {
 							$sub_detail = explode( ' : ', $detail );
 							$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
 								'question' => html_entity_decode( $sub_detail[ 1 ] ),
-								'seuil' => $sub_detail[ 0 ],
+								'treshold' => $sub_detail[ 0 ],
 							);
 						}
 					}
@@ -372,7 +373,7 @@ class TransferData_components_class extends singleton_util {
 				/**	Définition de la structure d'une catégorie de préconisation / Define the recommendation category structure		*/
 				$wp_recommendation_category_definition = array(
 					'id' => null,
-					'type' => recommendation_category_class::g()->get_taxonomy(),
+					'type' => recommendation_category_term_class::g()->get_taxonomy(),
 					'term_taxonomy_id' => null,
 					'name' => html_entity_decode( $eva_recommendation_category->nom, ENT_QUOTES, 'UTF-8' ),
 					'description' => null,
@@ -389,13 +390,13 @@ class TransferData_components_class extends singleton_util {
 						'size'	=> $eva_recommendation_category->tailleimpressionRecommandation,
 					),
 				);
-				$wp_category_recommendation = recommendation_category_class::g()->create( $wp_recommendation_category_definition );
+				$wp_category_recommendation = recommendation_category_term_class::g()->create( $wp_recommendation_category_definition );
 
 				if ( !empty( $wp_category_recommendation->id ) ) {
 					$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_CATEGORIE_PRECONISATION, $eva_recommendation_category->id, $wp_category_recommendation->id );
 					$wp_category_recommendation->associated_document_id = $term_associated_files[ 'associated_list' ];
 					$wp_category_recommendation->thumbnail_id = $term_associated_files[ '_thumbnail' ];
-					recommendation_category_class::g()->update( $wp_category_recommendation );
+					recommendation_category_term_class::g()->update( $wp_category_recommendation );
 
 					$current_transfer_state[ 'recommendation_category' ][] = $eva_recommendation_category->id;
 					$eva_recommendation_category_transfered++;
@@ -421,7 +422,7 @@ class TransferData_components_class extends singleton_util {
 							/**	Définition de la structure d'une préconisation / Define the recommendation's structure		*/
 							$wp_recommendation_definition = array(
 								'id' => null,
-								'type' => recommendation_class::g()->get_taxonomy(),
+								'type' => recommendation_term_class::g()->get_taxonomy(),
 								'term_taxonomy_id' => null,
 								'name' => html_entity_decode( $eva_recommendation->nom, ENT_QUOTES, 'UTF-8' ),
 								'description' => $eva_recommendation->description,
@@ -430,13 +431,13 @@ class TransferData_components_class extends singleton_util {
 								'unique_identifier' => ELEMENT_IDENTIFIER_P . $eva_recommendation->id,
 								'type' => $eva_recommendation->preconisation_type,
 							);
-							$wp_recommendation = recommendation_class::g()->create( $wp_recommendation_definition );
+							$wp_recommendation = recommendation_term_class::g()->create( $wp_recommendation_definition );
 
 							if ( !empty( $wp_recommendation->id ) ) {
 								$term_associated_files = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_PRECONISATION, $eva_recommendation->id, $wp_recommendation->id );
 								$wp_recommendation->associated_document_id = $term_associated_files[ 'associated_list' ];
 								$wp_recommendation->thumbnail_id = $term_associated_files[ '_thumbnail' ];
-								recommendation_class::g()->update( $wp_recommendation );
+								recommendation_term_class::g()->update( $wp_recommendation );
 
 								$current_transfer_state[ 'recommendation' ][] = $eva_recommendation->id;
 								$eva_recommendation_category_transfered++;
@@ -515,6 +516,11 @@ class TransferData_components_class extends singleton_util {
 		return $current_transfer_state;
 	}
 
+	/**
+	 * [display_component_transfer_bloc description]
+	 *
+	 * @return boolean If the core components have been transfered into the new storage way
+	 */
 	function display_component_transfer_bloc() {
 		global $wpdb;
 

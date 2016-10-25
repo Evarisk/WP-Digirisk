@@ -71,7 +71,7 @@ class group_action {
 			'hierarchical'        => true,
 			'public'              => true,
 			'show_ui'             => true,
-			'show_in_menu'        => false,
+			'show_in_menu'        => true,
 			'show_in_admin_bar'   => false,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,

@@ -10,12 +10,12 @@ class evaluation_method_variable_model extends term_model {
 				'type' 			=> 'string',
 				'meta_type'	=> 'single',
 				'field'			=> '_wpdigi_unique_key',
-				'default'	=> 0,
+				'bydefault'	=> 0,
 			),
 			'unique_identifier' => array(
 				'type' 			=> 'string',
 				'meta_type'	=> 'multiple',
-				'default'	=> 0,
+				'bydefault'	=> 0,
 			),
 			'display_type' => array(
 				'type' 		=> 'string',
@@ -28,14 +28,16 @@ class evaluation_method_variable_model extends term_model {
 			'survey' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
-				'child'			=> array(
-					'title'	=> array(
-						'type'	=> 'string',
-					),
-					'request'	=> array(
-						'type'	=> 'array',
-					),
-				),
+				// 'child'			=> array(
+				// 	'title'	=> array(
+				// 		'type'	=> 'string',
+				// 		'bydefault'	=> null,
+				// 	),
+				// 	'request'	=> array(
+				// 		'type'	=> 'array',
+				// 		'bydefault'	=> null,
+				// 	),
+				// ),
 			),
 		) );
 

@@ -36,7 +36,7 @@ class risk_model extends post_model {
 					'export'			=> true,
 					'type'				=> 'object',
 					'controller' 	=> '\digi\recommendation_class',
-					'field'				=> 'post_id'
+					'field'				=> 'post_parent'
 				)
 			),
 			'associated_recommendation' => array(

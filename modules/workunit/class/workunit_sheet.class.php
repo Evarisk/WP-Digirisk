@@ -88,7 +88,7 @@ class workunit_sheet_class extends singleton_util {
 
 						if ( !empty( $the_recommendation ) && !empty( $the_recommendation->parent_id ) ) {
 							if ( empty( $affected_recommendation ) || empty( $affected_recommendation[ $the_recommendation->id ] ) ) {
-								$the_recommendation_category = recommendation_category_class::g()->get( array( 'id' => $the_recommendation->parent_id ) );
+								$the_recommendation_category = recommendation_category_term_class::g()->get( array( 'id' => $the_recommendation->parent_id ) );
 								$the_recommendation_category = $the_recommendation_category[0];
 
 								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->thumbnail_id, 'digirisk-element-thumbnail' );
