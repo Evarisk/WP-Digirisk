@@ -117,6 +117,7 @@ class document_class extends post_class {
 
 		if ( $query->have_posts() ) {
 			$upload_dir = wp_upload_dir();
+			echo "<pre>"; print_r($query->posts); echo "</pre>";exit;
 
 			$model_id = $query->posts[0];
 			$attachment_file_path = get_attached_file( $model_id );

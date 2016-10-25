@@ -1,0 +1,20 @@
+{
+	"name": "Accident",
+	"slug": "accident",
+	"version": "0.2.0.0",
+	"description": "Le module gérant les accidents",
+	"path": "modules/accident/",
+	"dependencies": {
+		"shortcode": {
+		},
+		"model": {
+		},
+		"class": {
+		},
+		"filter": {
+		},
+		"action": {
+		}
+	},
+	"state": false
+}

@@ -10,6 +10,7 @@
 		"core/core.config.json",
 
 		"modules/address/address.config.json",
+		"modules/accident/accident.config.json",
 		"modules/society/society.config.json",
 
 

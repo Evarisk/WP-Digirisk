@@ -111,7 +111,7 @@ class document_action {
 			$parent_element = society_class::g()->show_by_type( $parent_id );
 
 			$current_document = $model_name::g()->get( array( 'post__in' => array( $document_id ), ) );
-			$model_infos = document_class::g()->get_model_for_element( array( $tmp_name ) );
+			$model_infos = document_class::g()->get_model_for_element( array( $tmp_name, 'model', 'model_default' ) );
 		 	$response =	document_class::g()->generate_document( $model_infos[ 'model_path' ], $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
 			wp_send_json_success( $response );
 		}
