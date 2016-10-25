@@ -40,7 +40,7 @@ class risk_evaluation_comment_action {
 			}
 		}
 
-		do_action( 'display_risk', $_POST['parent_id'] );
+		do_action( 'display_risk', $_POST['parent_id'], $risk_obj );
 	}
 }
 

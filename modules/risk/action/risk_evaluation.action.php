@@ -38,7 +38,11 @@ class risk_evaluation_action {
 
 		if ( isset( $risk['id'] ) ) {
 			$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
-			$risk['evaluation']['variable'] = $risk['variable'];
+
+			if ( !empty( $risk['variable'] ) ) {
+				$risk['evaluation']['variable'] = $risk['variable'];
+			}
+			
 			$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
 
 			if ( $risk['evaluation'] ) {
