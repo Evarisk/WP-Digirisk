@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class document_unique_class extends post_class {
+class document_unique_class extends attachment_class {
 	protected $model_name   				= '\digi\document_unique_model';
 	protected $post_type    				= 'attachment';
 	public $attached_taxonomy_type  = 'attachment_category';
@@ -30,4 +30,7 @@ class document_unique_class extends post_class {
 	protected function construct() {
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
+	
 }
+
+document_unique_class::g();
