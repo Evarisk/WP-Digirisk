@@ -91,7 +91,7 @@ class TransferData_common_class extends singleton_util {
 						/**
 						 * Risques
 						 * Preconisations
-* Accidents de travail
+						 * //Accidents de travail
 						 * Produits
 						 */
 
@@ -102,7 +102,7 @@ class TransferData_common_class extends singleton_util {
 						/**
 						 * Risques
 						 * Preconisations
-* Accidents de travail
+						 * //Accidents de travail
 						 * Produits
 						 */
 
@@ -298,6 +298,7 @@ class TransferData_common_class extends singleton_util {
 			/**	store old document complete definition	*/
 			switch ( $main_type ) {
 				case 'document':
+					/** Do a backup of old document */
 					update_post_meta( $attach_id, '_wpeo_digidoc_old', $document );
 					$document_meta = array();
 					if ( isset( $document->meta ) ) {
