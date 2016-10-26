@@ -65,8 +65,7 @@ class document_class extends attachment_class {
 
 		if ( 0 < $this->limit_document_per_page ) {
 			$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
-			$number_page = ceil( count ( $list_document_id ) ) / $this->limit_document_per_page;
-
+			$number_page = ceil( count ( $list_document_id ) / $this->limit_document_per_page );
 			if ( !empty( $list_document_id ) ) {
 				$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
 			}
