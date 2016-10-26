@@ -34,11 +34,11 @@ class danger_shortcode {
 		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
 		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
 
-		$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
-		$danger_list = danger_class::g()->get( array() );
-		$first_danger = $danger_list[0];
-
 		if ( $display === 'edit' ) {
+			$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
+			$danger_list = danger_class::g()->get( array() );
+			$first_danger = $danger_list[0];
+
 			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'first_danger' => $first_danger, 'danger_category_list' => $danger_category_list ) );
 		}
 		else {

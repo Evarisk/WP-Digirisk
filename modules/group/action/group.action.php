@@ -115,7 +115,7 @@ class group_action {
 		ob_start();
 		$element_id = $group->id;
 		$society = $group;
-		view_util::exec( 'society', 'screen-left', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
+		view_util::exec( 'society', 'screen-left', array( 'society_parent' => $society, 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
 		$template_left = ob_get_clean();
 
 		$_POST['subaction'] = 'generate-sheet';

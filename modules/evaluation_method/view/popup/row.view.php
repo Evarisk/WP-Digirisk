@@ -19,8 +19,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
     if ( !empty( $risk->evaluation[0] ) && !empty( $risk->evaluation[0]->quotation_detail ) ):
       foreach( $risk->evaluation[0]->quotation_detail as $detail ) {
-        if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] )
-          $active = 'active';
+				if ( !empty( $detail['variable_id'] ) ) {
+	        if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] )
+	          $active = 'active';
+				}
       }
     endif;
     ?>

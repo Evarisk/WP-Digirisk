@@ -25,7 +25,7 @@ class risk_action {
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for risks management	*/
 		add_action( 'init', array( &$this, 'custom_post_type' ), 5 );
 		// Remplacé les - en _
-		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 1 );
+		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 2 );
 		add_action( 'wp_ajax_delete_risk', array( $this, 'ajax_delete_risk' ) );
 		add_action( 'wp_ajax_load_risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
@@ -83,17 +83,33 @@ class risk_action {
 
 
 	/**
-  * Enregistres un risque.
+	* Enregistres un risque.
 	* Ce callback est le dernier de l'action "save_risk"
-  *
+	*
 	* int $_POST['element_id'] L'ID de l'élement ou le risque sera affecté
 	*
 	* @param array $_POST Les données envoyées par le formulaire
-  */
-	public function callback_display_risk( $society_id ) {
-		ob_start();
-		risk_class::g()->display( $society_id );
-		wp_send_json_success( array( 'module' => 'risk', 'callback_success' => 'save_risk_success', 'template' => ob_get_clean() ) );
+	*/
+	public function callback_display_risk( $society_id, $risk ) {
+		$module = "risk";
+		$callback_success = "save_risk_success";
+		$template = '';
+
+		if ( $_POST['page'] == 'all_risk' ) {
+			$module = "risk_page";
+			ob_start();
+			$risk = risk_class::g()->get( array( 'include' => $risk->id ),  array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+			$risk = $risk[0];
+			view_util::exec( 'risk', '/page/item-edit', array( 'risk' => $risk ) );
+			$template = ob_get_clean();
+		}
+		else {
+			ob_start();
+			risk_class::g()->display( $society_id );
+			$template = ob_get_clean();
+		}
+
+		wp_send_json_success( array( 'module' => $module, 'callback_success' => $callback_success, 'template' => $template ) );
 	}
 
 	/**
@@ -105,9 +121,9 @@ class risk_action {
 	*/
 	public function ajax_delete_risk() {
 		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
+		wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
-			$id = (int)$_POST['id'];
+		$id = (int)$_POST['id'];
 
 		check_ajax_referer( 'ajax_delete_risk_' . $id );
 
@@ -115,7 +131,7 @@ class risk_action {
 		$risk = $risk[0];
 
 		if ( empty( $risk ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+		wp_send_json_error( array( 'error' => __LINE__ ) );
 
 		$risk->status = 'trash';
 
@@ -133,9 +149,9 @@ class risk_action {
 	*/
 	public function ajax_load_risk() {
 		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
+		wp_send_json_error( array( 'error' => __LINE__, ) );
 		else
-			$id = (int)$_POST['id'];
+		$id = (int)$_POST['id'];
 
 		check_ajax_referer( 'ajax_load_risk_' . $id );
 
