@@ -41,7 +41,13 @@ class society_class extends singleton_util {
 		if ( !empty( $group_list ) ) {
 			if ( !empty( $_GET['society_id'] ) ) {
 				$society = society_class::g()->show_by_type( $_GET['society_id'], array( 'list_group', 'list_workunit' ) );
-				$society_parent = society_class::g()->show_by_type( $society->parent_id, array( 'list_group', 'list_workunit' ) );
+
+				if ( $society->type != 'digi-group' ) {
+					$society_parent = society_class::g()->show_by_type( $society->parent_id, array( 'list_group', 'list_workunit' ) );
+				}
+				else {
+					$society_parent = $society;
+				}
 			}
 			else {
 				$society = $group_list[0];
