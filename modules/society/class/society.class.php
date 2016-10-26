@@ -39,13 +39,19 @@ class society_class extends singleton_util {
 			), array( 'list_group' ) );
 
 		if ( !empty( $group_list ) ) {
-			$society = $group_list[0];
-			$tmp_group = group_class::g()->get( array( 'include' => $group_list[0]->id ), array( 'list_group', 'list_workunit' ) );
-			$group_list[0] = $tmp_group[0];
-			$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
+			if ( !empty( $_GET['society_id'] ) ) {
+				$society = society_class::g()->show_by_type( $_GET['society_id'], array( 'list_group', 'list_workunit' ) );
+				$society_parent = society_class::g()->show_by_type( $society->parent_id, array( 'list_group', 'list_workunit' ) );
+			}
+			else {
+				$society = $group_list[0];
+				$society_parent = $group_list[0];
+				$tmp_group = group_class::g()->get( array( 'include' => $group_list[0]->id ), array( 'list_group', 'list_workunit' ) );
+				$group_list[0] = $tmp_group[0];
+			}
 		}
 
-		view_util::exec( 'society', 'dashboard', array( 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
+		view_util::exec( 'society', 'dashboard', array( 'society_parent' => $society_parent, 'society' => $society, 'group_list' => $group_list ) );
 		\digi\log_class::g()->exec( 'digi_callback_admin_menu', 'display_dashboard', 'Réponse callback_admin_menu' );
 	}
 
