@@ -2,10 +2,10 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="about-wrap wp-digi-wrap wp-digi-clearer">
-	<h1><?php _e( 'Transfer datas for digirisk', 'digirisk' ); ?></h1>
-	<div class="about-text"><?php _e( 'Next digirisk version will use more wordpress fonctionnalities. For this purpose we need to transfer some datas from our specific storage to wordpress storage.', 'digirisk' ); ?></div>
+	<h1><?php _e( 'Transfert des données d\'Evarisk 5 vers Digirisk 6', 'digirisk' ); ?></h1>
+	<div class="about-text"><?php _e( 'La version 6 et ultérieur de Digirisk vont utiliser les fonctionnalités de WordPress de manière plus avancée. Pour cela nous allons effectuer le transfert des données de votre version 5.X.X.X.', 'digirisk' ); ?></div>
 	<?php wp_nonce_field('reset_method_evaluation'); ?>
-	<h2 class="wp-digi-alert wp-digi-alert-error wp-digi-center" ><span class="wp-digi-bold" ><?php _e( 'Important note : ', 'digirisk' ); ?></span><?php _e( 'Be sure to make a backup of your datas before launching datas transfer', 'digirisk' ); ?></h2>
+	<h2 class="wp-digi-alert wp-digi-alert-error wp-digi-center" ><span class="wp-digi-bold" ><?php _e( 'Note importante : ', 'digirisk' ); ?></span><?php _e( 'Veillez a bien sauvegarder vos données avant de lancer le transfert des données', 'digirisk' ); ?></h2>
 
 	<ul class="wp-digi-elements-to-transfer" >
 	<?php
@@ -26,15 +26,15 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			$sub_element_type = '';
 			switch ( $element_type ) :
 				case TABLE_TACHE:
-					$main_element_name = __( 'Tasks', 'digirisk' );
+					$main_element_name = __( 'Tâches', 'digirisk' );
 					$sub_element_type = TABLE_ACTIVITE;
-					$sub_element_name = __( 'Sub tasks', 'digirisk' );
+					$sub_element_name = __( 'Sous-tâches', 'digirisk' );
 				break;
 
 				case TABLE_GROUPEMENT:
-					$main_element_name = __( 'Groups', 'digirisk' );
+					$main_element_name = __( 'Groupement', 'digirisk' );
 					$sub_element_type = TABLE_UNITE_TRAVAIL;
-					$sub_element_name = __( 'Work unit', 'digirisk' );
+					$sub_element_name = __( 'Unité de travail', 'digirisk' );
 				break;
 			endswitch;
 
@@ -63,7 +63,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<div class="wp-digi-datastransfer-element-type-name wp-digi-datastransfer-element-type-name-<?php echo $element_type; ?><?php if ( $main_element_to_transfer == $main_element_transfered ) : echo ' dashicons-before dashicons-yes'; endif; ?>" ><?php echo $main_element_name; ?></div>
 			<ul class="wp-digi-datastransfer-element-type-detail" >
 				<li><?php _e( 'Total', 'digirisk' ); ?> : <span class="wpdigi-to-transfer-element-nb-<?php echo $element_type; ?>" ><?php echo $main_element_to_transfer; ?></span></li>
-				<li><?php _e( 'Transfered', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-<?php echo $element_type; ?>" ><?php echo $main_element_transfered; ?></span></li>
+				<li><?php _e( 'Transférés', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-<?php echo $element_type; ?>" ><?php echo $main_element_transfered; ?></span></li>
 				<li>&nbsp;</li>
 			</ul>
 		</li>
@@ -71,7 +71,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<div class="wp-digi-datastransfer-element-type-name wp-digi-datastransfer-element-type-name-<?php echo $sub_element_type; ?><?php if ( $sub_element_to_transfer == $sub_element_transfered ) : echo ' dashicons-before dashicons-yes'; endif; ?>" ><?php echo $sub_element_name; ?></div>
 			<ul class="wp-digi-datastransfer-element-type-detail" >
 				<li><?php _e( 'Total', 'digirisk' ); ?> : <span class="wpdigi-to-transfer-element-nb-<?php echo $sub_element_type; ?>" ><?php echo $sub_element_to_transfer; ?></span></li>
-				<li><?php _e( 'Transfered', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-<?php echo $sub_element_type; ?>" ><?php echo $sub_element_transfered; ?></span></li>
+				<li><?php _e( 'Transférés', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-<?php echo $sub_element_type; ?>" ><?php echo $sub_element_transfered; ?></span></li>
 				<li>&nbsp;</li>
 			</ul>
 		</li>
@@ -82,8 +82,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<div class="wp-digi-datastransfer-element-type-name wp-digi-datastransfer-element-type-name-documents<?php if ( $documents_to_transfer == ( $documents_transfered + $documents_not_transfered ) ) : echo ' dashicons-before dashicons-yes'; endif; ?>" ><?php _e( 'Documents', 'digirisk' ); ?></div>
 			<ul class="wp-digi-datastransfer-element-type-detail" >
 				<li><?php _e( 'Total', 'digirisk' ); ?> : <span class="wpdigi-to-transfer-element-nb-documents" ><?php echo $documents_to_transfer; ?></span></li>
-				<li><?php _e( 'Transfered', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-documents" ><?php echo $documents_transfered; ?></span></li>
-				<li><?php _e( 'Not Transfered', 'digirisk' ); ?> : <span class="wpdigi-not-transfered-element-nb-documents" ><?php echo $documents_not_transfered; ?></span></li>
+				<li><?php _e( 'Transférés', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-documents" ><?php echo $documents_transfered; ?></span></li>
+				<li><?php _e( 'Non transférés', 'digirisk' ); ?> : <span class="wpdigi-not-transfered-element-nb-documents" ><?php echo $documents_not_transfered; ?></span></li>
 			</ul>
 		</li>
 	</ul>
@@ -95,7 +95,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<input type="hidden" name="element_type_to_transfert" value="<?php echo ( empty( $element_to_treat ) ? TransferData_class::g()->element_type[ 0 ] :  $element_to_treat ); ?>" />
 		<input type="hidden" name="number_per_page" value="<?php echo DIGI_DTRANS_NB_ELMT_PER_PAGE; ?>" />
 
-		<button class="wp-digi-bton wp-digi-bton-first alignright" ><?php _e( 'Launch transfer', 'digirisk' ); ?></button>
+		<button class="wp-digi-bton wp-digi-bton-first alignright" ><?php _e( 'Démarrer le transfert', 'digirisk' ); ?></button>
 	</form>
 
 </div>
