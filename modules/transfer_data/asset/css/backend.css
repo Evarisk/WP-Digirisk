@@ -125,6 +125,12 @@ ul.wp-digi-datastransfer-element-type-detail {
 ul.wp-digi-datastransfer-element-type-detail li span {
 	float: right;
 }
+.wp-digi-elements-to-transfer > li.wp-digi-transfert-components {
+	width: 25%;
+}
+div.about-wrap.wp-digi-wrap h1 {
+	margin-right: 150px;
+}
 
 #wp-digi-transfert-message {
 	display: none;

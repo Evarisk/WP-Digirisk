@@ -10,8 +10,17 @@ class transfert_action {
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	public function __construct() {
+		/**	Call wordpress hook for backend styles and scripts definition	*/
+		add_action( 'admin_enqueue_scripts', array( $this, 'backend_assets' ) );
 		/**	Launch transfer for elements	*/
 		add_action( 'wp_ajax_wpdigi-datas-transfert', array( $this, 'launch_transfer' ), 150 );
+	}
+
+	/**
+	 * Call wordpress hook for adding scripts and styles for backend
+	 */
+	public function backend_assets() {
+		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array( ), config_util::$init['digirisk']->version );
 	}
 
 	function launch_transfer() {
@@ -201,7 +210,6 @@ class transfert_action {
 					$transfer_response = $this->element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression[ 'transfered' ], array( $element_type => array(), $sub_element_type => array(), ) ) );
 					break;
 				case 'doc':
-				exit;
 					$transfer_response = $this->document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression[ 'transfered' ], array( 'document' => array( 'ok' => array(), 'nok' => array(), ), 'picture' => array( 'ok' => array(), 'nok' => array(), ), ) ) );
 					break;
 			}
@@ -666,13 +674,13 @@ class transfert_action {
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 						switch ( $sheet->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ), 'post_status' => 'all', ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
 								workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-								$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+								$elt = group_class::g()->get( array( 'include' => array( $new_element_id ), 'post_status' => 'all', ) );
 								$elt = $elt[0];
 								$elt->associated_document_id[ 'document' ][] = $document_id;
 								group_class::g()->update( $elt );
