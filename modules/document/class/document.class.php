@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class document_class extends post_class {
+class document_class extends attachment_class {
 	protected $model_name   				= '\digi\document_model';
 	protected $post_type    				= 'attachment';
 	public $attached_taxonomy_type  = 'attachment_category';
