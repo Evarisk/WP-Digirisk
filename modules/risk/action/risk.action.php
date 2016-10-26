@@ -94,8 +94,9 @@ class risk_action {
 		$module = "risk";
 		$callback_success = "save_risk_success";
 		$template = '';
+		$page = !empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
 
-		if ( $_POST['page'] == 'all_risk' ) {
+		if ( $page == 'all_risk' ) {
 			$module = "risk_page";
 			ob_start();
 			$risk = risk_class::g()->get( array( 'include' => $risk->id ),  array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
