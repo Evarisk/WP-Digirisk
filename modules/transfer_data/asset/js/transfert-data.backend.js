@@ -21,15 +21,16 @@ jQuery( document ).ready( function(){
 						jQuery( ".wp-digi-datastransfer-element-type-name-" + responseText[ 'sub_element_type' ] ).addClass( 'dashicons-before dashicons-yes' );
 					}
 				}
-				else if( 'config_components' == responseText[ 'old_sub_action' ] ) {
-					jQuery( ".wp-digi-transfert-components" ).html( responseText[ 'display_components_transfer' ] );
-				}
 				else {
 					jQuery( ".wpdigi-transfered-element-nb-documents" ).html( responseText[ 'transfered' ] );
 					jQuery( ".wpdigi-not-transfered-element-nb-documents" ).html( responseText[ 'not_transfered' ] );
 					if ( ( responseText[ 'transfered' ] + responseText[ 'not_transfered' ] ) == jQuery( ".wpdigi-to-transfer-element-nb-wpdigi-to-transfer-element-nb-documents" ).html() ) {
 						jQuery( "wp-digi-datastransfer-element-type-name-documents" ).addClass( 'dashicons-before dashicons-yes' );
 					}
+				}
+				if( 'config_components' == responseText[ 'old_sub_action' ] ) {
+					jQuery( ".wp-digi-transfert-components" ).html( responseText[ 'display_components_transfer' ] );
+					$form.children( "input[name=action]" ).val( $form.children( "input[name=action]" ).val().replace( '-config_components', '' ) );
 				}
 				$form.children( "input[name=element_type_to_transfert]" ).val( responseText[ 'element_type' ] );
 				$form.children( "input[name=sub_action]" ).val( responseText[ 'sub_action' ] );
