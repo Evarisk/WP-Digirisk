@@ -21,8 +21,8 @@ class Address_model extends Comment_model {
 	/**
 	 * La définition d'une addresse
 	 *
-	 * @param Address_model $object       Le
-	 * @param array         $field_wanted [description]
+	 * @param Address_model $object       L'objet avec ses données.
+	 * @param array         $field_wanted Les enfants voulu dans l'objet.
 	 */
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(

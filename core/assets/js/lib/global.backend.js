@@ -11,19 +11,19 @@ window.digirisk.global.download_file = function( url_to_file, filename ) {
 };
 
 window.digirisk.global.remove_diacritics = function( input ) {
-  var output = "";
+	var output = "";
 
-  var normalized = input.normalize("NFD");
-  var i=0;
-  var j=0;
+	var normalized = input.normalize("NFD");
+	var i=0;
+	var j=0;
 
-  while (i<input.length)
-  {
-      output += normalized[j];
+	while (i<input.length)
+	{
+		output += normalized[j];
 
-      j += (input[i] == normalized[j]) ? 1 : 2;
-      i++;
-  }
+		j += (input[i] == normalized[j]) ? 1 : 2;
+		i++;
+	}
 
-  return output;
+	return output;
 };
