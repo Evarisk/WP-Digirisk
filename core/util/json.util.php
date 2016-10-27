@@ -42,7 +42,7 @@ class Json_util extends Singleton_util {
 			}
 		}
 
-		$config_content = wpcom_vip_file_get_contents( $path_to_json );
+		$config_content = file_get_contents( $path_to_json );
 
 		$data = json_decode( $config_content );
 
