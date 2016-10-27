@@ -1,8 +1,29 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition d'une addresse
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class address_model extends comment_model {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Définition d'une addresse
+ *
+ * @author Jimmy Latour <jimmy.eoxia@gmail.com>
+ * @version 1.1.0.0
+ */
+class Address_model extends Comment_model {
+	/**
+	 * La définition d'une addresse
+	 *
+	 * @param Address_model $object       Le
+	 * @param array         $field_wanted [description]
+	 */
 	public function __construct( $object, $field_wanted = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'address' => array(
@@ -46,7 +67,7 @@ class address_model extends comment_model {
 					'latitude' => array(
 						'type' 			=> 'string',
 					),
-				)
+				),
 			),
 		)	);
 

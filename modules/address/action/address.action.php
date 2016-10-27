@@ -1,9 +1,27 @@
-<?php namespace digi;
+<?php
+/**
+ * Gestion des adresses
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class address_action {
-  public function __construct() {}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-new address_action();
+/**
+ * Gestion des adresses
+ *
+ * @author Jimmy Latour <jimmy.eoxia@gmail.com>
+ * @version 1.1.0.0
+ */
+class Address_action {
+	/**
+	 * Constructeur
+	 */
+	public function __construct() {}
+}
+
+new Address_action();
