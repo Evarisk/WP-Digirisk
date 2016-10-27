@@ -15,8 +15,7 @@ class transfert_action {
 		add_action( 'admin_enqueue_scripts', array( $this, 'backend_assets' ) );
 		/**	Launch transfer for elements	*/
 		add_action( 'wp_ajax_wpdigi-datas-transfert-config_components', array( TransferData_components_class::g(), 'launch_transfer' ), 150 );
-		add_action( 'wp_ajax_wpdigi-datas-transfert-doc', array( $this, 'launch_transfer' ), 150 );
-		add_action( 'wp_ajax_wpdigi-datas-transfert-element', array( $this, 'launch_transfer' ), 150 );
+		add_action( 'wp_ajax_wpdigi-datas-transfert', array( $this, 'launch_transfer' ), 150 );
 	}
 
 	/**

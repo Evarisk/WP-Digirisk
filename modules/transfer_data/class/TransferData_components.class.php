@@ -113,7 +113,7 @@ class TransferData_components_class extends singleton_util {
 							/**	Enregistrement des données complémentaires pour les catégories de danger et création des danger pour la catégorie / Save complementary datas for danger categories and create danger of category	*/
 							if ( !empty( $wp_danger->id ) ) {
 								$current_transfer_state[ 'danger' ][] = $eva_danger->id;
-								$eva_danger_category_transfered++;
+								$eva_danger_transfered++;
 								/**	Log	*/
 								log_class::g()->exec( 'digirisk-datas-tranfert-danger', '', sprintf( __( 'Danger %s transfered from evarisk on taxonomy having id. %d', 'wp-digi-dtrans-i18n' ), $eva_danger->nom, $eva_danger->id), array( 'object_id' => $eva_danger->id, ), 0 );
 
@@ -623,7 +623,7 @@ class TransferData_components_class extends singleton_util {
 
 		$response = array(
 			'status'						=> false,
-			'reload_transfert'	=> false,
+			'reload_transfert'	=> true,
 			'message'						=> __( 'A required parameter is missing, please check your request and try again', 'wp-digi-dtrans-i18n' ),
 		);
 		$element_type = ! empty( $_POST['element_type_to_transfert'] ) && in_array( $_POST['element_type_to_transfert'] , TransferData_class::g()->element_type ) ? sanitize_text_field( $_POST['element_type_to_transfert'] ): '';
@@ -633,7 +633,7 @@ class TransferData_components_class extends singleton_util {
 		$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
 		$response['element_nb_treated'] = 0;
 		$response['element_type'] = $element_type;
-		$response['sub_element_type'] = $sub_element_type;
+		$response['sub_element_type'] = '';
 		$response['sub_action'] = $sub_action;
 
 		/**	Set the config components transfert state	*/
@@ -715,10 +715,10 @@ class TransferData_components_class extends singleton_util {
 		update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
 		/**	Return a specific response if components transfer are all done	*/
-		var_dump( $main_config_components_are_transfered );
 		if ( $main_config_components_are_transfered ) {
 			$transfer_response = array(
-				'sub_action' => 'element',
+				'sub_action'	=> 'element',
+				'message'			=> __( 'Tous les composants de configuration ont été transférés', 'digirisk' ),
 			);
 		}
 
