@@ -1,30 +1,42 @@
 <?php
+/**
+ * Gestion des méthodes communes
+ *
+ * @package Evarisk\Plugin
+ */
 
 namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
+ * Gestion des méthodes communes
+ *
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.0
+ * @version 1.1.0.0
  */
-
-class common_util extends singleton_util {
+class Common_util extends singleton_util {
+	/**
+	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
+	 *
+	 * @return void nothing
+	 */
 	protected function construct() {}
 
 	/**
-	 * Récupération du dernier index unique pour un type
+	 * Renvoie la dernière clé unique selon le type de l'élement
 	 *
-	 * @param string $wp_type (test: post) Le type de la donnée
-	 * @param string $element_type (test: digi-risk) Le type de la donnée
-	 *
-	 * @return integer Retourne la valeur du dernier index unique pour les éléments digirisk / Return the last index for digirisk element
+	 * @param  string $controller Le controller.
+	 * @return int             		L'identifiant unique
 	 */
 	public static function get_last_unique_key( $controller ) {
 		$element_type = $controller::g()->get_post_type();
 		$wp_type = $controller::g()->get_identifier_helper();
-		if ( empty( $wp_type ) || empty( $element_type ) || !is_string( $wp_type ) || !is_string( $element_type ) )
+		if ( empty( $wp_type ) || empty( $element_type ) || ! is_string( $wp_type ) || ! is_string( $element_type ) ) {
 			return false;
+		}
 
 		global $wpdb;
 		switch ( $wp_type ) {
@@ -62,12 +74,13 @@ class common_util extends singleton_util {
 			break;
 		}
 
-		if ( !empty( $query ) ) {
+		if ( ! empty( $query ) ) {
 			$last_unique_key = $wpdb->get_var( $query );
 		}
 
-		if ( empty( $last_unique_key ) )
+		if ( empty( $last_unique_key ) ) {
 			return 0;
+		}
 
 		return $last_unique_key;
 	}

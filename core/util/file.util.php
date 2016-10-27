@@ -1,24 +1,37 @@
-<?php namespace digi;
+<?php
+/**
+ * Gestion des fichiers
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( ! defined( 'ABSPATH' ) ) { exit;
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
+ * Gestion des fichiers
+ *
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.0
+ * @version 1.1.0.0
  */
-
-class file_util extends singleton_util {
+class File_util extends Singleton_util {
+	/**
+	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
+	 *
+	 * @return void nothing
+	 */
 	protected function construct() {}
 
-		/**
-		 * Upload un fichier et créer ensuite les meta données
-		 *
-		 * @param string $file Le chemin vers le fichier
-		 * @param int    $element_id L'id de l'élement parent
-		 *
-		 * @return int L'attachement id
-		 */
+	/**
+	 * Upload le fichier $file et créer les méta données de ce fichier.
+	 *
+	 * @param  mixed $file        Les données du fichier.
+	 * @param  int   $element_id  L'ID de l'élément pour l'attachement du fichier.
+	 * @return int            		L'id de l'attachement
+	 */
 	public static function move_file_and_attach( $file, $element_id ) {
 		if ( ! is_string( $file ) || ! is_int( $element_id ) || ! is_file( $file ) ) {
 			return false;
@@ -26,8 +39,8 @@ class file_util extends singleton_util {
 
 		$wp_upload_dir = wp_upload_dir();
 
-		// Transfère le thumbnail
-		$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
+		// Transfère le thumbnail.
+		$upload_result = wp_upload_bits( basename( $file ), null, wpcom_vip_file_get_contents( $file ) );
 
 		$filetype = wp_check_filetype( basename( $upload_result['file'] ), null );
 		/**	Set the default values for the current attachement	*/

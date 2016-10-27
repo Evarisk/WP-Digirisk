@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Le singleton
+ *
+ * @author Jimmy Latour <jimmy.eoxia@gmail.com>
+ * @version 1.1.0.0
  */
 abstract class Singleton_util {
 	/**

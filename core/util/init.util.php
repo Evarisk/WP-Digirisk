@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Cette classe initialise tous les fichiers config.json
  *
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.0
+ * @version 1.1.0.0
  */
 class Init_util extends Singleton_util {
 	/**
