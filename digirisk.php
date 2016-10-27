@@ -1,4 +1,9 @@
 <?php
+/**
+ * Fichier boot du plugin
+ *
+ * @package Evarisk\Plugin
+ */
 
 namespace digi;
 /**
@@ -18,11 +23,11 @@ DEFINE( 'PLUGIN_DIGIRISK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_DIR', basename( __DIR__ ) );
 
-require_once( 'core/util/singleton.util.php' );
-require_once( 'core/util/init.util.php' );
-require_once( 'core/helper/model.helper.php' );
-require_once( 'core/external/wpeo_log/class/log.class.php' );
+require_once 'core/util/singleton.util.php';
+require_once 'core/util/init.util.php';
+require_once 'core/helper/model.helper.php';
+require_once 'core/external/wpeo_log/class/log.class.php';
 
 log_class::g()->start_ms( 'digi_boot' );
-init_util::g()->exec();
-log_class::g()->exec('digi_boot', 'digi_boot', 'Boot l\'application Digirisk' );
+Init_util::g()->exec();
+log_class::g()->exec( 'digi_boot', 'digi_boot', 'Boot l\'application Digirisk' );

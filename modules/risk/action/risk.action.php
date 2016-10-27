@@ -101,6 +101,15 @@ class risk_action {
 			ob_start();
 			$risk = risk_class::g()->get( array( 'include' => $risk->id ),  array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
 			$risk = $risk[0];
+			$risk->parent = society_class::g()->show_by_type( $risk->parent_id );
+			if ( $risk->parent->type == 'digi-group' ) {
+				$risk->parent_group = $risk->parent;
+			}
+			else {
+				$risk->parent_workunit = $risk->parent;
+				$risk->parent_group = society_class::g()->show_by_type( $risk->parent_workunit->parent_id );
+			}
+
 			view_util::exec( 'risk', '/page/item-edit', array( 'risk' => $risk ) );
 			$template = ob_get_clean();
 		}
