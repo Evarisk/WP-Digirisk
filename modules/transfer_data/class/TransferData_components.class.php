@@ -612,6 +612,130 @@ class TransferData_components_class extends singleton_util {
 		return $main_config_components_are_transfered;
 	}
 
+	/**
+	 * Launch transfer for config components
+	 *
+	 * @return array The response of componentns transfer
+	 */
+	public function launch_transfer() {
+		check_ajax_referer( 'wpdigi-datas-transfert' );
+		global $wpdb;
+
+		$response = array(
+			'status'						=> false,
+			'reload_transfert'	=> false,
+			'message'						=> __( 'A required parameter is missing, please check your request and try again', 'wp-digi-dtrans-i18n' ),
+		);
+		$element_type = ! empty( $_POST['element_type_to_transfert'] ) && in_array( $_POST['element_type_to_transfert'] , TransferData_class::g()->element_type ) ? sanitize_text_field( $_POST['element_type_to_transfert'] ): '';
+		$sub_action = ! empty( $_POST['sub_action'] ) && in_array( $_POST['sub_action'] , array( 'element', 'doc', 'config_components' ) ) ? sanitize_text_field( wp_unslash( $_POST['sub_action'] ) ) : 'element'; // input var okay.
+
+		/**	Get option with already transfered element	*/
+		$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
+		$response['element_nb_treated'] = 0;
+		$response['element_type'] = $element_type;
+		$response['sub_element_type'] = $sub_element_type;
+		$response['sub_action'] = $sub_action;
+
+		/**	Set the config components transfert state	*/
+		$main_config_components_are_transfered = true;
+
+		/**	Start danger transfer	*/
+		if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options['danger'] ) || ( ! empty( $digirisk_transfert_options['danger'] ) && ! empty( $digirisk_transfert_options['danger']['state'] ) && ( 'complete' != $digirisk_transfert_options['danger']['state'] ) ) ) {
+			$eva_danger_tranfer_result = TransferData_components_class::g()->transfer_danger( $digirisk_transfert_options );
+			$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_danger_tranfer_result );
+
+			if ( ! empty( $digirisk_transfert_options['danger_category'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['danger_category'] ) - 1 );
+				if ( ! empty( $digirisk_transfert_options['danger_category']['state'] ) && ( 'complete' != $digirisk_transfert_options['danger_category']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+			if ( ! empty( $digirisk_transfert_options['danger'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['danger'] ) - 1 );
+
+				if ( ! empty( $digirisk_transfert_options['danger']['state'] ) && ( 'complete' != $digirisk_transfert_options['danger']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+		}
+
+		/**	Get Evalation method	*/
+		if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options['evaluation_method'] ) || ( ! empty( $digirisk_transfert_options['evaluation_method'] ) && ! empty( $digirisk_transfert_options['evaluation_method']['state'] ) && ( 'complete' != $digirisk_transfert_options['evaluation_method']['state'] ) ) ) {
+			$eva_evaluation_method_tranfer_result = TransferData_components_class::g()->transfer_evaluation_method( $digirisk_transfert_options );
+			$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_evaluation_method_tranfer_result );
+
+			if ( ! empty( $digirisk_transfert_options['evaluation_method_var'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['evaluation_method_var'] ) - 1 );
+				if ( ! empty( $digirisk_transfert_options['evaluation_method_var']['state'] ) && ( 'complete' != $digirisk_transfert_options['evaluation_method_var']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+			if ( ! empty( $digirisk_transfert_options['evaluation_method'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['evaluation_method'] ) - 1 );
+				if ( ! empty( $digirisk_transfert_options['evaluation_method']['state'] ) && ( 'complete' != $digirisk_transfert_options['evaluation_method']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+		}
+
+		/**	Get Recommendation	*/
+		if ( empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options['recommendation'] ) || ( ! empty( $digirisk_transfert_options['recommendation'] ) && ! empty( $digirisk_transfert_options['recommendation']['state'] ) && ( 'complete' != $digirisk_transfert_options['recommendation']['state'] ) ) ) {
+			$eva_recommendation_tranfer_result = TransferData_components_class::g()->transfer_recommendation( $digirisk_transfert_options );
+			$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_recommendation_tranfer_result );
+
+			if ( ! empty( $digirisk_transfert_options['recommendation_category'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['recommendation_category'] ) - 1 );
+				if ( ! empty( $digirisk_transfert_options['recommendation_category']['state'] ) && ( 'complete' != $digirisk_transfert_options['recommendation_category']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+			if ( ! empty( $digirisk_transfert_options['recommendation'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['recommendation'] ) - 1 );
+
+				if ( ! empty( $digirisk_transfert_options['recommendation']['state'] ) && ( 'complete' != $digirisk_transfert_options['recommendation']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+		}
+
+		/**	Get Document model	*/
+		if ( false && empty( $digirisk_transfert_options ) || empty( $digirisk_transfert_options['document_model'] ) || ( ! empty( $digirisk_transfert_options['document_model'] ) && ! empty( $digirisk_transfert_options['document_model']['state'] ) && ( 'complete' != $digirisk_transfert_options['document_model']['state'] ) ) ) {
+			$eva_models_tranfer_result = TransferData_components_class::g()->transfer_document_model( $digirisk_transfert_options );
+			$digirisk_transfert_options = array_merge( $digirisk_transfert_options, $eva_models_tranfer_result );
+
+			if ( ! empty( $digirisk_transfert_options['document_model'] ) ) {
+				$response['element_nb_treated'] += ( count( $digirisk_transfert_options['document_model'] ) - 1 );
+				if ( ! empty( $digirisk_transfert_options['document_model']['state'] ) && ( 'complete' != $digirisk_transfert_options['document_model']['state'] ) ) {
+					$main_config_components_are_transfered = false;
+				}
+			}
+		}
+
+		/**	Save the transfert state	*/
+		update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
+
+		/**	Return a specific response if components transfer are all done	*/
+		var_dump( $main_config_components_are_transfered );
+		if ( $main_config_components_are_transfered ) {
+			$transfer_response = array(
+				'sub_action' => 'element',
+			);
+		}
+
+		$transfer_response['old_sub_action'] = $sub_action;
+
+		evaluation_method_default_data_class::g()->create();
+
+		/**	Build an output for component box	*/
+		ob_start();
+		TransferData_components_class::g()->display_component_transfer_bloc();
+		$transfer_response['display_components_transfer'] = ob_get_contents();
+		ob_end_clean();
+
+		$response = wp_parse_args( $transfer_response, $response );
+		wp_die( json_encode( $response ) );
+	}
+
 }
 
 TransferData_components_class::g();
