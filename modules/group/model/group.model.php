@@ -102,18 +102,24 @@ class group_model extends society_model {
 			'child' => array(
 				'workforce' => array(
 					'type'			=> 'integer',
+					'meta_type'	=> 'multiple',
 				),
 				'siren' => array(
 					'type'			=> 'string',
-					'meta_type'	=> 'multiple'
+					'meta_type'	=> 'multiple',
 				),
 				'siret' => array(
 					'type'			=> 'string',
-					'meta_type'	=> 'multiple'
+					'meta_type'	=> 'multiple',
 				),
 				'social_activity_number' => array(
 					'type'			=> 'integer',
-				)
+					'meta_type'	=> 'multiple',
+				),
+				'establishment_date' => array(
+					'type'			=> 'string',
+					'meta_type'	=> 'multiple',
+				),
 			)
 		);
 
