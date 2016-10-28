@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span>Groupement</span>
 	<span>Unité de travail</span>
 	<span class="wp-digi-risk-list-column-thumbnail">&nbsp;</span>
-	<span class="wp-digi-risk-list-column-cotation"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
-	<span class="wp-digi-risk-list-column-reference header"><a href="<?php echo esc_url( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><?php _e( 'Ref.', 'digirisk' ); ?></a></span>
+	<span class="wp-digi-risk-list-column-cotation"><a href="<?php echo esc_url( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></span>
+	<span class="wp-digi-risk-list-column-reference header"><?php _e( 'Ref.', 'digirisk' ); ?></span>
 	<span><?php _e( 'Risque', 'digirisk' ); ?></span>
 	<span><?php _e( 'Comment', 'digirisk' ); ?></span>
 	<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
