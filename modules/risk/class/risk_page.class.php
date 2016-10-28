@@ -51,7 +51,7 @@ class Risk_page_class extends singleton_util {
 		if ( ! empty( $risk_list ) ) {
 			foreach ( $risk_list as $key => $element ) {
 				$risk_list[ $key ]->parent = society_class::g()->show_by_type( $element->parent_id );
-				if ( 'digi -group' === $risk_list[ $key ]->parent->type ) {
+				if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
 					$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
 				} else {
 					$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
