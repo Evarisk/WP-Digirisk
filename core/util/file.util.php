@@ -40,7 +40,7 @@ class File_util extends Singleton_util {
 		$wp_upload_dir = wp_upload_dir();
 
 		// Transfère le thumbnail.
-		$upload_result = wp_upload_bits( basename( $file ), null, wpcom_vip_file_get_contents( $file ) );
+		$upload_result = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 
 		$filetype = wp_check_filetype( basename( $upload_result['file'] ), null );
 		/**	Set the default values for the current attachement	*/
