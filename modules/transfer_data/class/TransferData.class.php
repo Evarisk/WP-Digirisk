@@ -36,31 +36,31 @@ class TransferData_class extends singleton_util {
 		/**	Get the number of element that will be transfered for the given element type	*/
 		$query = $wpdb->prepare( "SELECT
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM {$main_element_type}
 				WHERE id != 1
 			) AS main_element_nb,
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM {$sub_element_type}
 			) AS sub_element_nb,
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM " . TABLE_PHOTO_LIAISON . "
 				WHERE tableElement IN ( %s, %s )
 			) AS nb_picture,
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM " . TABLE_GED_DOCUMENTS . "
 				WHERE table_element IN ( %s, %s )
 			) AS nb_document,
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM " . TABLE_FP . "
 				WHERE table_element  IN ( %s, %s )
 			) AS nb_fiches,
 			(
-				SELECT COUNT( DISTINCT( id ) )
+				SELECT CAST( COUNT( DISTINCT( id ) ) AS SIGNED INTEGER )
 				FROM " . TABLE_DUER . "
 				WHERE element IN ( %s, %s )
 			) AS nb_duer", array( $main_element_type, $sub_element_type, $main_element_type, $sub_element_type, $main_element_type, $sub_element_type, $main_element_type, $sub_element_type, ) );

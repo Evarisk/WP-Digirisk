@@ -23,47 +23,60 @@ class wpdigi_transferdata_society_class extends singleton_util {
 	protected function construct() { }
 
 	/**
-	 * Traitement du transfert des groupements / Treat the transfer for work groups
+	 * Transfert the group form evarisk database to wordpress database
 	 *
-	 * @param integer $evarisk_element Identifiant de l'élément pour lequel il faut effectuer le transfert / Element identifier for which we have to transfer datas into new storage way
-	 * @param string $element_type Le type de l'élément pour lequel il faut récupèrer les commentaires et notes / Element type we had to get comment and notes for
-	 * @param integer $wp_element_id Identifiant de l'élément transféré auquel sont associés les éléments / Transfered element identifier to which we have to associate transfered element
+	 * @param  WP_Object $groupement The complete definition of group from evarisk old database
 	 *
-	 * @author Evarisk development team <dev@evarisk.com>
-	 * @version 6.0
+	 * @return Object                The new group into Digirisk wordpress database
 	 */
-	function transfer_groupement( $evarisk_element, $element_type, $wp_element_id ) {
-		/**	Get the element created for new data transfer	*/
-		$group_mdl = group_class::g()->get( array( 'id' => $wp_element_id ) );
-		$group_mdl = $group_mdl[0];
+	public function transfert_groupement( $groupement ) {
+		$group_mdl = array(
+			'date'							=> $groupement->creation_date,
+			'date_modified'			=> $groupement->lastupdate_date,
+			'title'							=> $groupement->nom,
+			'content'						=> $groupement->description,
+			'status'						=> ( 'Valid' == $groupement->Status ? 'publish' : ( 'Deleted' == $groupement->Status ? 'trash' : 'draft' ) ),
+			'user_info'					=> array(
+				'owner_id'								=> $groupement->id_responsable,
+				'affected_id' 						=> $this->transfer_users( $groupement->id, TABLE_GROUPEMENT, null, group_class::g()->get_post_type() ),
+			),
+			'identity'					=> array(
+				'workforce'								=> $groupement->effectif,
+				'siren'										=> $groupement->siren,
+				'siret'										=> $groupement->siret,
+				'social_activity_number'	=> $groupement->social_activity_number,
+				'establishment_date'			=> $groupement->creation_date_of_society,
+			),
 
-		/**	Build the	group model for new data storage */
-		$group_mdl->unique_key = $evarisk_element->id;
-		$group_mdl->unique_identifier = ELEMENT_IDENTIFIER_GP . $evarisk_element->id;
-		$group_mdl->user_info = array(
-			'owner_id' => $evarisk_element->id_responsable,
-			'affected_id' => $this->transfer_users( $evarisk_element->id, $element_type, null, group_class::g()->get_post_type(), $wp_element_id ),
+			'unique_key'				=> $groupement->id,
+			'unique_identifier'	=> ELEMENT_IDENTIFIER_GP . $groupement->id,
+
+			'associated_product'	=> $this->transfer_product( $groupement->id, TABLE_GROUPEMENT ),
 		);
 
-		$group_mdl->contact = array(
-			'phone' => array( $evarisk_element->telephoneGroupement, ),
-			'address' => $this->transfer_addresse( $evarisk_element->id_adresse, $wp_element_id ),
-		);
+		$new_group = group_class::g()->update( $group_mdl );
+		if ( ! empty( $new_group ) && ! empty( $new_group->id ) ) {
+			/**	Log creation	*/
+			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $new_group->id), array( 'object_id' => $groupement->id, ), 0 );
 
-		$group_mdl->identity = array(
-			'workforce' => $evarisk_element->effectif,
-			'siren' => $evarisk_element->siren,
-			'siret' => $evarisk_element->siret,
-			'social_activity_number' => $evarisk_element->social_activity_number,
-			'establishment_date' => $evarisk_element->creation_date_of_society,
-		);
+			/**
+			 * Transfert element associated risk
+			 */
+			$this->transfer_risk( $groupement->id, TABLE_GROUPEMENT, $new_group->id );
+			/**
+			 * Transfert element associated recommendation
+			 */
+			$this->transfer_recommendation( $groupement->id, TABLE_GROUPEMENT, $new_group->id );
 
-		$this->transfer_risk( $evarisk_element->id, $element_type, $wp_element_id );
-		$this->transfer_recommendation( $evarisk_element->id, $element_type, $wp_element_id );
+			/**	Store the other data into meta	*/
+			update_post_meta( $new_group->id, '_wpdigi_element_computed_identifier', TABLE_GROUPEMENT . '#value_sep#' . $groupement->id );
+			update_post_meta( $new_group->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_GROUPEMENT, serialize( $groupement ) ) ) );
+		} else {
+			/**	Log creation	*/
+			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', __( 'An error occured while transfering the element to wordpress', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $groupement->id, ), 2 );
+		}
 
-		$group_mdl->associated_product = $this->transfer_product( $evarisk_element->id, $element_type, $wp_element_id );
-
-		group_class::g()->update( $group_mdl );
+		return $new_group;
 	}
 
 	/**
@@ -88,7 +101,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 		$workunit_mdl->associated_document_id = null;
 		$workunit_mdl->user_info = array(
 			'owner_id' => $element->id_responsable,
-			'affected_id' => $this->transfer_users( $element->id, $element_type, null, workunit_class::g()->get_post_type(), $wp_element_id )
+			'affected_id' => $this->transfer_users( $element->id, $element_type, null, workunit_class::g()->get_post_type() )
 		);
 		$workunit_mdl->contact = array(
 			'phone' => array( $element->telephoneUnite, ),
@@ -405,12 +418,11 @@ class wpdigi_transferdata_society_class extends singleton_util {
 	 *
 	 * @param integer $element Identifiant de l'élément pour lequel il faut effectuer le transfert / Element identifier for which we have to transfer datas into new storage way
 	 * @param string $element_type Le type de l'élément pour lequel il faut récupèrer les commentaires et notes / Element type we had to get comment and notes for
-	 * @param integer $wp_element_id Identifiant de l'élément transféré auquel sont associés les éléments / Transfered element identifier to which we have to associate transfered element
 	 *
 	 * @author Evarisk development team <dev@evarisk.com>
 	 * @version 6.0
 	 */
-	function transfer_product( $old_element_id, $old_element_type, $new_element_id ) {
+	function transfer_product( $old_element_id, $old_element_type ) {
 		global $wpdb;
 		$associated_product = array();
 
@@ -572,7 +584,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 	 *
 	 * @return array Les utilisateurs affectés par type d'affectation / User affectation by affectation type
 	 */
-	function transfer_users( $old_element_id, $old_element_type, $user_role = '', $element_new_type = '', $element_new_id = 0, $status = "'valid', 'moderated', 'deleted'" ) {
+	function transfer_users( $old_element_id, $old_element_type, $user_role = '', $element_new_type = '', $status = "'valid', 'moderated', 'deleted'" ) {
 		global $wpdb;
 
 		$currently_affected_user_list = array(
