@@ -75,6 +75,17 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.1.8.0 =
+
+Améliorations
+
+* 5374 - Charge tous les scripts JS et CSS que si nous sommes sur une page "Digirisk"
+* 5375 - Ajout de la checkbox dans la page "Tous les risques"
+
+Corrections
+
+* 5378 - DUER: Fix la génération
+
 = Version 6.1.7.0 =
 
 Améliorations
