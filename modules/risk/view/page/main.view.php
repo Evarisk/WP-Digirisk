@@ -8,6 +8,6 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<?php risk_page_class::g()->display_risk_list(); ?>
 	</ul>
 
-	<a href="#" class="button button-primary right">Enregistrer</a>
+	<a href="#" class="button button-secondary right">Enregistrer</a>
 
 </div>

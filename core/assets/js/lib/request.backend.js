@@ -12,7 +12,6 @@ window.digirisk.request.send = function( element, data ) {
       }
     }
     else {
-      alert('error');
       if ( response.data.module && response.data.callback_error ) {
         window.digirisk[response.data.module][response.data.callback_error]( element, response );
       }
