@@ -5,14 +5,25 @@ window.digirisk.risk_page.init = function() {
 };
 
 window.digirisk.risk_page.event = function() {
-	jQuery( document ).on( 'click', '.risk-page .button-primary', window.digirisk.risk_page.send_all_risk );
+	jQuery( document ).on( 'click', '.risk-page .button', window.digirisk.risk_page.send_all_risk );
+
+	jQuery( document ).on( 'click', '.wp-digi-list-item input, .wp-digi-list-item toggle', window.digirisk.risk_page.check_the_checkbox );
 };
 
 window.digirisk.risk_page.send_all_risk = function(event) {
-	event.preventDefault();
-	jQuery( '.risk-page .wp-digi-action-edit' ).click();
+	if (event) {
+		event.preventDefault();
+	}
+
+	jQuery( '.risk-page .wp-digi-list-item  .wp-digi-action-edit.checked:first' ).click();
+}
+
+window.digirisk.risk_page.check_the_checkbox = function(event) {
+	jQuery( this ).closest( 'li.wp-digi-list-item' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
+	jQuery( this ).closest( 'li.wp-digi-list-item' ).find( '.wp-digi-action-edit' ).addClass( 'checked' );
 }
 
 window.digirisk.risk_page.save_risk_success = function( element, response ) {
 	jQuery( element ).closest( 'li' ).replaceWith( response.data.template );
+	window.digirisk.risk_page.send_all_risk(undefined);
 }
