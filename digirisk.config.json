@@ -4,7 +4,10 @@
 	"version": "6.1.7.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages": [
-		
+		"digirisk-simple-risk-evaluation",
+		"digirisk-handle-risk",
+		"digirisk-users",
+		"digirisk-tools"
 	],
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",

@@ -30,6 +30,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk" display="edit"]'); ?>
 
 	<span class="wp-digi-action">
+		<input type="checkbox" name="can_update" />
 		<a href="#" data-id="<?php echo $risk->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
 	</span>
 

@@ -32,6 +32,9 @@ class risk_evaluation_action {
 	public function ajax_edit_risk() {
 		$risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
 
+		// Cette action vérifie que la variable $_POST['can_update'] est à true. (Utile pour la page "Tous les risques").
+		do_action( 'can_update' );
+
 		if ( empty( $risk ) ) {
 			wp_send_json_error();
 		}
@@ -42,7 +45,7 @@ class risk_evaluation_action {
 			if ( !empty( $risk['variable'] ) ) {
 				$risk['evaluation']['variable'] = $risk['variable'];
 			}
-			
+
 			$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
 
 			if ( $risk['evaluation'] ) {

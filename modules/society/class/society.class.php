@@ -19,10 +19,7 @@ class society_class extends singleton_util {
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
-	protected function construct() {
-	}
-
-
+	protected function construct() {}
 
 	/**
 	 * AFFICHAGE/DISPLAY - Affichage de l'écran principal pour la gestion de la structure de la société et l'évaluation des risques / Display main screen for society management and risk evaluation
