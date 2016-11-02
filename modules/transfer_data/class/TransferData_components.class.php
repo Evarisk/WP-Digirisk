@@ -190,11 +190,20 @@ class TransferData_components_class extends singleton_util {
 						}
 
 						foreach ( $details as $detail ) {
-							$sub_detail = explode( ' : ', $detail );
-							$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
-								'question' => html_entity_decode( $sub_detail[ 1 ] ),
-								'treshold' => $sub_detail[ 0 ],
-							);
+							if ( ! empty( $detail ) ) {
+								$sub_detail = explode( ' : ', $detail );
+								if ( 2 == count( $sub_detail ) ) {
+									$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
+										'question' => html_entity_decode( $sub_detail[ 1 ] ),
+										'treshold' => $sub_detail[ 0 ],
+									);
+								} else {
+									$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
+										'question' => $detail,
+										'treshold' => 1,
+									);
+								}
+							}
 						}
 					}
 				}

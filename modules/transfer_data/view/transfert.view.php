@@ -41,6 +41,14 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			/**	Count the different eleent that have to be transfered	*/
 			$element_to_transfert_count = TransferData_class::g()->get_transfer_progression( $element_type, $sub_element_type );
 			$main_element_to_transfer = $element_to_transfert_count[ 'to_transfer' ]->main_element_nb;
+			if ( ! empty( $element_to_transfert_count[ 'transfered' ][ $element_type ] ) && ! empty( $element_to_transfert_count['transfered'][ $element_type ]['state'] ) ) {
+				unset( $element_to_transfert_count['transfered'][ $element_type ]['state'] );
+			}
+			$treated_tree_element = ' - ';
+			if ( ! empty( $element_to_transfert_count[ 'transfered' ][ $element_type ] ) && ! empty( $element_to_transfert_count['transfered'][ $element_type ]['tree'] ) ) {
+				$treated_tree_element = count( $element_to_transfert_count['transfered'][ $element_type ]['tree'] );
+				unset( $element_to_transfert_count['transfered'][ $element_type ]['tree'] );
+			}
 				$main_element_transfered = !empty( $element_to_transfert_count[ 'transfered' ] ) && !empty( $element_to_transfert_count[ 'transfered' ][ $element_type ]) ? count( $element_to_transfert_count[ 'transfered' ][ $element_type ] ) : 0;
 			$sub_element_to_transfer = $element_to_transfert_count[ 'to_transfer' ]->sub_element_nb;
 				$sub_element_transfered = !empty( $element_to_transfert_count[ 'transfered' ] ) && !empty( $element_to_transfert_count[ 'transfered' ][ $sub_element_type ] ) ? count( $element_to_transfert_count[ 'transfered' ][ $sub_element_type ] ) : 0;
@@ -64,7 +72,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<ul class="wp-digi-datastransfer-element-type-detail" >
 				<li><?php _e( 'Total', 'digirisk' ); ?> : <span class="wpdigi-to-transfer-element-nb-<?php echo $element_type; ?>" ><?php echo $main_element_to_transfer; ?></span></li>
 				<li><?php _e( 'Transférés', 'digirisk' ); ?> : <span class="wpdigi-transfered-element-nb-<?php echo $element_type; ?>" ><?php echo $main_element_transfered; ?></span></li>
-				<li>&nbsp;</li>
+				<li><?php _e( 'Arborescence', 'digirisk' ); ?> : <span class="wpdigi-tree-check-<?php echo $element_type; ?>" ><?php esc_html_e( $treated_tree_element ); ?></span></li>
 			</ul>
 		</li>
 		<li>
@@ -89,8 +97,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	</ul>
 	<div class="wp-digi-alert wp-digi-alert-error wp-digi-center" id="wp-digi-transfert-message" ></div>
 	<form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" id="wpdigi-datastransfer-form" method="post" >
+		<input type="hidden" name="action" value="wpdigi-datas-transfert<?php echo ( false === $main_config_components_are_transfered ) ? '-config_components' : ''; ?>" />
 		<?php $current_type = ( false === $main_config_components_are_transfered ) ? 'config_components' : ( empty( $element_to_treat ) ? 'doc' : 'element' ); ?>
-		<input type="hidden" name="action" value="wpdigi-datas-transfert-<?php echo $current_type; ?>" />
 		<input type="hidden" name="sub_action" value="<?php echo $current_type; ?>" />
 		<?php wp_nonce_field( 'wpdigi-datas-transfert' ); ?>
 		<input type="hidden" name="element_type_to_transfert" value="<?php echo ( empty( $element_to_treat ) ? TransferData_class::g()->element_type[ 0 ] :  $element_to_treat ); ?>" />

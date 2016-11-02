@@ -95,7 +95,7 @@ class TransferData_common_class extends singleton_util {
 						 * Produits
 						 */
 
-						wpdigi_transferdata_society_class::g()->transfer_groupement( $element, $element_type, $element_id );
+					//	wpdigi_transferdata_society_class::g()->transfer_groupement( $element, $element_type, $element_id );
 					break;
 
 					case TABLE_UNITE_TRAVAIL:
@@ -142,37 +142,6 @@ class TransferData_common_class extends singleton_util {
 		}
 
 		return $element_id;
-	}
-
-	function transfer_orphelan( $element_type ) {
-		global $wpdb;
-		$treated_element = 0;
-
-		/**	Do a final check for element possibly not transfer	*/
-		$query = $wpdb->prepare( "
-			SELECT T.*
-			FROM {$element_type} AS T
-			WHERE T.id NOT IN (
-				SELECT PM.meta_value
-				FROM {$wpdb->postmeta} AS PM
-					INNER JOIN {$wpdb->postmeta} AS PM2 ON (PM2.post_id = PM.post_id)
-				WHERE PM.meta_key = %s
-					AND PM2.meta_key = %s
-					AND PM2.meta_value = '{$element_type}'
-			)
-			AND T.id != %d", '_wpdigi_element_unique_key', '_wpdigi_element_old_type', 1 );
-
-		$not_transfered_element = $wpdb->get_results( $query );
-		if ( !empty( $not_transfered_element ) ) {
-			foreach ( $not_transfered_element as $element ) {
-				$new_element_id = TransferData_class::g()->transfer( $element_type, $element );
-				if ( !is_wp_error( $new_element_id ) ) {
-					$treated_element += 1;
-				}
-			}
-		}
-
-		return $treated_element;
 	}
 
 	function transfer_surveys( $old_element_id, $old_element_type, $new_element_id ) {

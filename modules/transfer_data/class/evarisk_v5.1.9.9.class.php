@@ -267,6 +267,7 @@ function getOperateursMethode($id_methode, $date = null){
 
 function getScoreRisque( $risque, $method_option = '' ) {
 	$date_to_take = $risque[0]->date;
+	$scoreRisque = 0;
 	/*	Add option allowing to modify method behavior */
 	if(is_array($method_option)){
 		if(isset($method_option['date_to_take']) && ($method_option['date_to_take'] != '')){
@@ -274,80 +275,85 @@ function getScoreRisque( $risque, $method_option = '' ) {
 		}
 	}
 
-	$methode = getMethod($risque[0]->id_methode);
-	$listeVariables = getVariablesMethode($methode->id, $date_to_take);
-	unset($listeIdVariables);
-	$listeIdVariables = array();
-	foreach($listeVariables as $ordre => $variable){
-		$listeIdVariables['"' . $variable->id . '"'][]=$ordre;
-	}
-	unset($listeValeurs);
-	foreach($risque as $ligneRisque){
-		if(!empty($listeIdVariables) && !empty($listeIdVariables['"' . $ligneRisque->id_variable . '"']) && is_array($listeIdVariables['"' . $ligneRisque->id_variable . '"'])){
-			foreach($listeIdVariables['"' . $ligneRisque->id_variable . '"'] as $ordre){
-				if(isset($method_option['value_to_take']) && ($method_option['value_to_take'] != '')){
-					$listeValeurs[$ordre] = getValeurAlternative($ligneRisque->id_variable, $method_option['value_to_take'][$ligneRisque->id_variable], $date_to_take);
-				}
-				else{
-					$listeValeurs[$ordre] = getValeurAlternative($ligneRisque->id_variable, $ligneRisque->valeur, $date_to_take);
+	$methode = getMethod( $risque[0]->id_methode );
+	if ( !empty( $methode ) ) {
+		$listeVariables = getVariablesMethode($methode->id, $date_to_take);
+		unset($listeIdVariables);
+		$listeIdVariables = array();
+		foreach($listeVariables as $ordre => $variable){
+			$listeIdVariables['"' . $variable->id . '"'][]=$ordre;
+		}
+		unset($listeValeurs);
+		foreach($risque as $ligneRisque){
+			if(!empty($listeIdVariables) && !empty($listeIdVariables['"' . $ligneRisque->id_variable . '"']) && is_array($listeIdVariables['"' . $ligneRisque->id_variable . '"'])){
+				foreach($listeIdVariables['"' . $ligneRisque->id_variable . '"'] as $ordre){
+					if(isset($method_option['value_to_take']) && ($method_option['value_to_take'] != '')){
+						$listeValeurs[$ordre] = getValeurAlternative($ligneRisque->id_variable, $method_option['value_to_take'][$ligneRisque->id_variable], $date_to_take);
+					}
+					else{
+						$listeValeurs[$ordre] = getValeurAlternative($ligneRisque->id_variable, $ligneRisque->valeur, $date_to_take);
+					}
 				}
 			}
 		}
-	}
 
-	$listeOperateursComplexe = getOperateursMethode($methode->id, $date_to_take);
-	unset($listeOperateurs);$listeOperateurs = array();
-	foreach ( $listeOperateursComplexe as $operateurComplexe ) {
-		$listeOperateurs[] = $operateurComplexe->operateur;
-	}
-	$listeValeursSimples;
-	$listeOperateursSimple;
+		$listeOperateursComplexe = getOperateursMethode($methode->id, $date_to_take);
+		unset($listeOperateurs);$listeOperateurs = array();
+		foreach ( $listeOperateursComplexe as $operateurComplexe ) {
+			$listeOperateurs[] = $operateurComplexe->operateur;
+		}
+		$listeValeursSimples;
+		$listeOperateursSimple;
 
-	//r�solution des op�ration de forte priorit� (i.e. * et /)
-	$scoreRisque = !empty($listeValeurs[0]) ? $listeValeurs[0] : 0;
-	$numeroValeur = 0;
-	if($listeOperateurs != null){
-		// invariant de boucle : la valeur $listeValeurs[$numeroValeur] est trait�
-		foreach($listeOperateurs as $operateur){
-			$numeroValeur = $numeroValeur + 1;
-			if ( isset( $listeValeurs[ $numeroValeur ] ) ) {
+		//r�solution des op�ration de forte priorit� (i.e. * et /)
+		$scoreRisque = !empty($listeValeurs[0]) ? $listeValeurs[0] : 0;
+		$numeroValeur = 0;
+		if($listeOperateurs != null){
+			// invariant de boucle : la valeur $listeValeurs[$numeroValeur] est trait�
+			foreach($listeOperateurs as $operateur){
+				$numeroValeur = $numeroValeur + 1;
+				if ( isset( $listeValeurs[ $numeroValeur ] ) ) {
+					switch($operateur){
+						case '*' :
+							$scoreRisque = $scoreRisque * $listeValeurs[$numeroValeur];
+							break;
+						case '/' :
+							$scoreRisque = $scoreRisque / $listeValeurs[$numeroValeur];
+							break;
+							//default <=> op�rateur de faible priorit� (i.e. + et -)
+						default :
+							$listeValeursSimples[] = $scoreRisque;
+							$listeOperateursSimples[] = $operateur;
+							$scoreRisque = $listeValeurs[$numeroValeur];
+							break;
+					}
+				}
+			}
+		}
+		//Comme il y a une valeur de plus que d'operateur, on la range � la fin
+		$listeValeursSimples[] = $scoreRisque;
+
+		//r�solution du score
+		$scoreRisque = $listeValeursSimples[0];
+		$numeroValeur = 0;
+		if(isset($listeOperateursSimples) && ($listeOperateursSimples != null)){
+			// invariant de boucle : la valeur $listeValeursSimples[$numeroValeur] est trait�
+			foreach($listeOperateursSimples as $operateur){
+				$numeroValeur = $numeroValeur + 1;
 				switch($operateur){
-					case '*' :
-						$scoreRisque = $scoreRisque * $listeValeurs[$numeroValeur];
+					case '+' :
+						$scoreRisque = $scoreRisque + $listeValeursSimples[$numeroValeur];
 						break;
-					case '/' :
-						$scoreRisque = $scoreRisque / $listeValeurs[$numeroValeur];
+					case '-' :
+						$scoreRisque = $scoreRisque - $listeValeursSimples[$numeroValeur];
 						break;
-						//default <=> op�rateur de faible priorit� (i.e. + et -)
-					default :
-						$listeValeursSimples[] = $scoreRisque;
-						$listeOperateursSimples[] = $operateur;
-						$scoreRisque = $listeValeurs[$numeroValeur];
-						break;
+					default : break;
 				}
 			}
 		}
 	}
-	//Comme il y a une valeur de plus que d'operateur, on la range � la fin
-	$listeValeursSimples[] = $scoreRisque;
-
-	//r�solution du score
-	$scoreRisque = $listeValeursSimples[0];
-	$numeroValeur = 0;
-	if(isset($listeOperateursSimples) && ($listeOperateursSimples != null)){
-		// invariant de boucle : la valeur $listeValeursSimples[$numeroValeur] est trait�
-		foreach($listeOperateursSimples as $operateur){
-			$numeroValeur = $numeroValeur + 1;
-			switch($operateur){
-				case '+' :
-					$scoreRisque = $scoreRisque + $listeValeursSimples[$numeroValeur];
-					break;
-				case '-' :
-					$scoreRisque = $scoreRisque - $listeValeursSimples[$numeroValeur];
-					break;
-				default : break;
-			}
-		}
+	else {
+		log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_RISQUE, '', __( 'Aucune méthode d\'évaluation n\'a été associée au risque', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $risque[ 0 ]->id, 'data' => $risque, ), 2 );
 	}
 
 	return $scoreRisque;
@@ -406,4 +412,25 @@ function getSeuil($quotation) {
 	);
 	$niveauSeuil = !empty($resultat->niveauSeuil) ? (int)$resultat->niveauSeuil : 0;
 	return $niveauSeuil;
+}
+
+function getPere($table, $element, $where="Status='Valid'") {
+	global $wpdb;
+	$query = $wpdb->prepare( "
+	SELECT *
+	FROM " . $table . " table1
+	WHERE " . $where . "
+	AND table1.limiteGauche < " . $element->limiteGauche . "
+	AND table1.limiteDroite > " . $element->limiteDroite . "
+	AND NOT
+	EXISTS (
+		SELECT *
+		FROM " . $table . " table2
+		WHERE " . $where . "
+		AND table2.limiteGauche < " . $element->limiteGauche . "
+		AND table2.limiteDroite > " . $element->limiteDroite . "
+		AND table1.limiteGauche < table2.limiteGauche
+	)", "");
+	$resultat = $wpdb->get_row($query);
+	return $resultat;
 }

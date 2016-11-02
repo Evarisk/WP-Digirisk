@@ -1,11 +1,21 @@
 <?php
+/**
+ * Manage actions for Evarisk datas transfert to Digirisk storage
+ *
+ * @package digirisk
+ * @subpackage transfert
+ */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-class transfert_action {
+/**
+ * Define the main actions for digirisk transfert Datas
+ */
+class Transfert_Action {
 
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
@@ -25,6 +35,11 @@ class transfert_action {
 		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array(), config_util::$init['digirisk']->version );
 	}
 
+	/**
+	 * Callback function for datas transfert
+	 *
+	 * @return void Send datas transfer ajax response
+	 */
 	function launch_transfer() {
 		check_ajax_referer( 'wpdigi-datas-transfert' );
 		global $wpdb;
@@ -34,8 +49,8 @@ class transfert_action {
 			'reload_transfert'	=> false,
 			'message'						=> __( 'A required parameter is missing, please check your request and try again', 'wp-digi-dtrans-i18n' ),
 		);
-		$element_type = ! empty( $_POST['element_type_to_transfert'] ) && in_array( $_POST['element_type_to_transfert'] , TransferData_class::g()->element_type ) ? sanitize_text_field( $_POST['element_type_to_transfert'] ): '';
-		$sub_action = ! empty( $_POST['sub_action'] ) && in_array( $_POST['sub_action'] , array( 'element', 'doc', 'config_components' ) ) ? sanitize_text_field( wp_unslash( $_POST['sub_action'] ) ) : 'element'; // input var okay.
+		$element_type = ! empty( $_POST['element_type_to_transfert'] ) && in_array( $_POST['element_type_to_transfert'] , TransferData_class::g()->element_type, true ) ? sanitize_text_field( $_POST['element_type_to_transfert'] ): '';
+		$sub_action = ! empty( $_POST['sub_action'] ) && in_array( $_POST['sub_action'] , array( 'element', 'doc', 'config_components' ), true ) ? sanitize_text_field( wp_unslash( $_POST['sub_action'] ) ) : 'element'; // input var okay.
 
 		/**	Launch transfer for current element direct children of subtype	*/
 		switch ( $element_type ) {
@@ -58,7 +73,17 @@ class transfert_action {
 			$transfer_progression = TransferData_class::g()->get_transfer_progression( $element_type, $sub_element_type );
 
 			$nb_element_to_transfert = $transfer_progression['to_transfer'];
-			$nb_main_element_transfered = ! empty( $transfer_progression['transfered'][ $element_type ] ) ? count( $transfer_progression['transfered'][ $element_type ] ) : 0;
+			$nb_main_element_transfered = 0;
+			if ( ! empty( $transfer_progression['transfered'][ $element_type ] ) ) {
+				$nb_main_element_transfered = count( $transfer_progression['transfered'][ $element_type ] );
+				if ( ! empty( $transfer_progression['transfered'][ $element_type ]['tree'] ) ) {
+					$nb_main_element_transfered -= 1;
+				}
+				if ( ! empty( $transfer_progression['transfered'][ $element_type ]['state'] ) ) {
+					$nb_main_element_transfered -= 1;
+				}
+			}
+
 			$nb_sub_element_transfered = ! empty( $transfer_progression['transfered'][ $sub_element_type ] ) ? count( $transfer_progression['transfered'][ $sub_element_type ] ) : 0;
 			$nb_doc_element_transfered = 0;
 			$nb_doc_element_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['picture'] ) && ! empty( $transfer_progression['transfered']['picture']['ok'] ) ? count( $transfer_progression['transfered']['picture']['ok'] ) : 0;
@@ -68,10 +93,10 @@ class transfert_action {
 			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['document'] ) && ! empty( $transfer_progression['transfered']['document']['nok'] ) ? count( $transfer_progression['transfered']['document']['nok'] ) : 0;
 
 			$element_done = $document_done = false;
-			if ( ( $nb_main_element_transfered + $nb_sub_element_transfered ) == ( $nb_element_to_transfert->main_element_nb + $nb_element_to_transfert->sub_element_nb ) ) {
+			if ( ( $nb_main_element_transfered + $nb_sub_element_transfered ) === ( $nb_element_to_transfert->main_element_nb + $nb_element_to_transfert->sub_element_nb ) ) {
 				$element_done = true;
 			}
-			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) == ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture ) ) {
+			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) === ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture ) ) {
 				$document_done = true;
 			}
 
@@ -81,18 +106,14 @@ class transfert_action {
 				$response['redirect_to_url'] = admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' );
 				$response['message'] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'wp-digi-dtrans-i18n' );
 
-				/**	Mise à jour de l'identifiant unique de l'association des préconisations /	Update unique identifier of recommendation association */
-				$query =
-					'SELECT MAX( id )
-                      FROM ' . TABLE_LIAISON_PRECONISATION_ELEMENT;
-				update_option( recommendation_term_class::g()->last_affectation_index_key, $wpdb->get_var( $query ) );
-
 				/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */
 				$digirisk_transfert_options = get_option( '_wpdigirisk-dtransfert', array() );
 				$digirisk_transfert_options['state'] = 'complete';
 				update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
-				// Met à jour l'option pour dire que l'installation est terminée
+				/**
+				 * Met à jour l'option pour dire que l'installation est terminée
+				 */
 				update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 			} elseif ( $element_done ) {
 				$sub_action = 'doc';
@@ -109,68 +130,152 @@ class transfert_action {
 					$transfer_response = $this->element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression['transfered'], array( $element_type => array(), $sub_element_type => array() ) ) );
 					break;
 				case 'doc':
+				exit;
 					$transfer_response = $this->document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression['transfered'], array( 'document' => array( 'ok' => array(), 'nok' => array() ), 'picture' => array( 'ok' => array(), 'nok' => array() ) ) ) );
 					break;
 			}
 		}
 
 		$response = wp_parse_args( $transfer_response, $response );
-		wp_die( json_encode( $response ) );
+		wp_die( wp_json_encode( $response ) );
 	}
 
+	/**
+	 * [element_transfer description]
+	 *
+	 * @param  string $element_type            Main element type currently being transfered.
+	 * @param  string $sub_element_type        Sub element type currently being transfered.
+	 * @param  object $nb_element_to_transfert Each element type.
+	 * @param  array  $transfered_element      The list of element already transfered.
+	 *
+	 * @return array                         The transfer result for current request.
+	 */
 	function element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, $transfered_element ) {
 		global $wpdb;
 		$main_element_transfered = $sub_element_transfered = 0;
 		$response['element_nb_treated'] = 0;
 
 		/**	Build a response for displaying transfer state and progression	*/
+		$main_element_state = 'unstarted';
+		if ( isset( $transfered_element[ $element_type ]['state'] ) ) {
+			$main_element_state = $transfered_element[ $element_type ]['state'];
+			unset( $transfered_element[ $element_type ]['state'] );
+		}
+		$treated_tree_element = array();
+		if ( isset( $transfered_element[ $element_type ]['tree'] ) ) {
+			$treated_tree_element = $transfered_element[ $element_type ]['tree'];
+			unset( $transfered_element[ $element_type ]['tree'] );
+		}
 		$response['main_element_nb'] = count( $transfered_element[ $element_type ] );
 		$response['sub_element_nb'] = count( $transfered_element[ $sub_element_type ] );
+	 	$per_page_element_number = ( ! empty( $_POST ) && ! empty( $_POST['number_per_page'] ) ? (int) $_POST['number_per_page'] : 10 );	// Input var okay
 
 		/**	Instanciate common datas transfer utilities	*/
+		if ( 'complete' !== $main_element_state ) {
+			/**
+			 * The query to get element list to transfert
+			 *
+			 * @var string
+			 */
+			$initial_transfert = false;
+			if ( $response['main_element_nb'] !== (int) $nb_element_to_transfert->main_element_nb ) {
+		 		$initial_transfert = true;
+				$main_element_state = 'in_progress';
+			}
+			$exclude_list = array( 1 );
+			if ( ( true === $initial_transfert ) && ! empty( $transfered_element ) && isset( $transfered_element[ $element_type ] ) ) {
+				$exclude_list = wp_parse_args( $transfered_element[ $element_type ], $exclude_list );
+			} elseif ( false === $initial_transfert ) {
+				$exclude_list = wp_parse_args( $treated_tree_element, $exclude_list );
+				$per_page_element_number = $per_page_element_number * 2;
+			}
+			$query = $wpdb->prepare( "SELECT * FROM {$element_type} WHERE id NOT IN ( " . implode( ',', $exclude_list ) . " ) LIMIT " . $per_page_element_number, '' );
+			$main_element_list = $wpdb->get_results( $query );
+			if ( ! empty( $main_element_list ) ) {
+				foreach ( $main_element_list as $element ) {
+					switch ( $element_type ) {
+						case TABLE_TACHE:
+							// @Todo Transfert data for tasks
+						break;
 
-		if ( count( $transfered_element[ $element_type ] ) < $nb_element_to_transfert->main_element_nb ) {
-			/**	Check if current element type has a root element in order to exclude it from datas transfert	*/
-			$root_element = $wpdb->get_row( "SELECT * FROM {$element_type} table1 WHERE NOT EXISTS( SELECT * FROM {$element_type} table2 WHERE table2.limiteGauche < table1.limiteGauche )" );
-			/**	Retrieve elements to store into database	*/
-			$query = "SELECT *
-				FROM {$element_type} AS table1
-				WHERE 1
-					AND table1.limiteGauche > " . $root_element->limiteGauche . '
-          AND table1.limiteDroite < ' . $root_element->limiteDroite . "
-					AND NOT EXISTS (
-						SELECT *
-						FROM {$element_type} AS table2
-						WHERE 1
-							AND table2.limiteGauche > " . $root_element->limiteGauche . '
-              AND table2.limiteDroite < ' . $root_element->limiteDroite . '
-              AND table1.limiteGauche > table2.limiteGauche
-              AND table1.limiteDroite < table2.limiteDroite
-          )
-        ORDER BY limiteGauche ASC';
-			$first_level_elements = $wpdb->get_results( $query );
-			foreach ( $first_level_elements as $element ) {
-				if ( ! empty( $element ) ) {
-					$new_element_id = TransferData_common_class::g()->transfer( $element_type, $element );
-					if ( ! is_wp_error( $new_element_id ) ) {
-						$response['element_nb_treated'] += 1;
+						case TABLE_GROUPEMENT:
+							/** Initial transfer is the first steop to transfer all datas without taking care about tree */
+							if ( true === $initial_transfert ) {
+								$digirisk_group = wpdigi_transferdata_society_class::g()->transfert_groupement( $element );
+								if ( ! is_wp_error( $digirisk_group ) && is_int( $digirisk_group->id ) ) {
+									/** Increment successfully treated element number */
+									$response['element_nb_treated'] += 1;
+
+									/**	Store an option to avoid multiple transfer	*/
+									$transfered_element[ $element_type ][] = $element->id;
+								}
+							} else {
+								$element_parent = getPere( TABLE_GROUPEMENT, $element, "1" );
+								if ( null !== $element_parent ) {
+									$query = $wpdb->prepare( "
+										UPDATE {$wpdb->posts}
+										SET post_parent = (
+											SELECT post_id
+											FROM {$wpdb->postmeta}
+											WHERE meta_key = %s
+												AND meta_value = %s
+										)
+										WHERE ID = (
+											SELECT post_id
+											FROM {$wpdb->postmeta}
+											WHERE meta_key = %s
+												AND meta_value = %s
+										)",
+											'_wpdigi_element_computed_identifier', TABLE_GROUPEMENT . '#value_sep#' . $element_parent->id,
+											'_wpdigi_element_computed_identifier', TABLE_GROUPEMENT . '#value_sep#' . $element->id
+									);
+									$set_parent = $wpdb->query( $query );
+									if ( false !== $set_parent ) {
+										$treated_tree_element[] = $element->id;
+										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément parent %d a bien été associé à %d', 'wp-digi-dtrans-i18n' ), $element_parent->id, $element->id ), array( 'object_id' => $element->id, ), 0 );
+									} else {
+										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'Aucun parent n\'a pu être associé à %d', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id, ), 2 );
+									}
+								}
+								else {
+									$treated_tree_element[] = $element->id;
+									log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément %d ne possédait pas d\'élément parent', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id, ), 1 );
+								}
+							}
+						break;
 					}
 				}
 			}
 
-			/**	Create the element that are orphelan due to errors during moving in old tree - Main element	*/
-			$response['main_element_nb'] += $response['element_nb_treated'];
-		} elseif ( count( $transfered_element[ $sub_element_type ] ) < $nb_element_to_transfert->sub_element_nb ) {
+			/** Check if the current element transfered element number correspond to  */
+			if ( true === $initial_transfert ) {
+				$response['main_element_nb'] += $response['element_nb_treated'];
+				if ( ( $response['main_element_nb'] === (int) $nb_element_to_transfert->main_element_nb ) ) {
+					$main_element_state = 'tree_to_check';
+				}
+			} else {
+				if ( ( count( $treated_tree_element ) === (int) $nb_element_to_transfert->main_element_nb ) ) {
+					$main_element_state = 'complete';
+				}
+			}
+
+			/**	GSave current transfert state	*/
+			$digirisk_transfer_options = get_option( '_wpdigirisk-dtransfert', array() );
+			$digirisk_transfer_options[ $element_type ] = $transfered_element[ $element_type ];
+			$digirisk_transfer_options[ $element_type ]['state'] = $main_element_state;
+			$digirisk_transfer_options[ $element_type ]['tree'] = $treated_tree_element;
+			$response['treated_tree'] = count( $treated_tree_element );
+			update_option( '_wpdigirisk-dtransfert', $digirisk_transfer_options );
+
+		} elseif ( ( 'complete' === $main_element_state ) && ( count( $transfered_element[ $sub_element_type ] ) < $nb_element_to_transfert->sub_element_nb ) ) {
 			/**	Start the query buiding	*/
 			$query = 'SELECT * FROM ' . $sub_element_type . ' WHERE 1';
-
 			/**	Check if there are already element of current types that have been transferd in order to exclude them of query	*/
 			$transfered_element = get_option( '_wpdigirisk-dtransfert', array() );
 			if ( ! empty( $transfered_element ) && ! empty( $transfered_element[ $sub_element_type ] ) && is_array( $transfered_element[ $sub_element_type ] ) ) {
 				$query .= " AND id NOT IN ('" . implode( "', '", $transfered_element[ $sub_element_type ] ) . "')";
 			}
-
-			$query .= ' LIMIT 0, ' . $_POST['number_per_page'];
+			$query .= ' LIMIT 0, ' . $per_page_element_number;
 
 			/**	Get current element sub type	*/
 			$children = $wpdb->get_results( $query );
@@ -206,6 +311,16 @@ class transfert_action {
 		return $response;
 	}
 
+	/**
+	 * Transfert the document
+	 *
+	 * @param  [type] $element_type            [description].
+	 * @param  [type] $sub_element_type        [description].
+	 * @param  [type] $nb_element_to_transfert [description].
+	 * @param  [type] $transfered_element      [description].
+	 *
+	 * @return [type]                          [description]
+	 */
 	function document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, $transfered_element ) {
 		global $wpdb;
 		$all_heavy_element_done = false;
@@ -376,7 +491,7 @@ class transfert_action {
 
 					$term_to_associate = array();
 					$term_to_associate[] = $document->categorie;
-					if ( 'uploads/modeles/' == substr( $document->chemin, 0, 16 ) ) {
+					if ( 'uploads/modeles/' === substr( $document->chemin, 0, 16 ) ) {
 						$term_to_associate[] = 'model';
 					} else {
 						$term_to_associate[] = 'printed';
@@ -613,4 +728,4 @@ class transfert_action {
 
 }
 
-new transfert_action();
+new Transfert_Action();

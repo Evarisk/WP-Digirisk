@@ -20,6 +20,9 @@ jQuery( document ).ready( function(){
 					if ( responseText[ 'sub_element_nb' ] == jQuery( ".wpdigi-to-transfer-element-nb-" + responseText[ 'sub_element_type' ] ).html() ) {
 						jQuery( ".wp-digi-datastransfer-element-type-name-" + responseText[ 'sub_element_type' ] ).addClass( 'dashicons-before dashicons-yes' );
 					}
+					if ( undefined != ( responseText['treated_tree'] ) ) {
+						jQuery( ".wpdigi-tree-check-" + responseText[ 'element_type' ] ).html( responseText['treated_tree'] );
+					}
 				}
 				else {
 					jQuery( ".wpdigi-transfered-element-nb-documents" ).html( responseText[ 'transfered' ] );
