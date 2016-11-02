@@ -13,6 +13,16 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<span><?php echo $risk->parent_group->title; ?></span>
 		</a>
 	</span>
+	<span>
+		<?php if (!empty( $risk->parent_workunit ) ): ?>
+		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $risk->parent_workunit->id ); ?>">
+			<strong><?php echo $risk->parent_workunit->unique_identifier; ?> -</strong>
+			<span><?php echo $risk->parent_workunit->title; ?></span>
+		</a>
+		<?php else: ?>
+			Aucune unité de travail
+		<?php endif; ?>
+	</span>
 	<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
 	<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation[0]->unique_identifier; ?></span>
