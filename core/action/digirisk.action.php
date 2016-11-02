@@ -24,9 +24,14 @@ class Digirisk_action {
 	 * plugins_loaded (Pour appeler le domaine de traduction)
 	 */
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts' ), 10 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ), 11 );
-		add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts' ) );
+		// Initialises ses actions que si nous sommes sur une des pages réglés dans le fichier digirisk.config.json dans la clé "insert_scripts_pages".
+		$page = ( ! empty( $_REQUEST['page'] ) ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+
+		if ( in_array( $page, config_util::$init['digirisk']->insert_scripts_pages, true ) ) {
+			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts' ), 10 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ), 11 );
+			add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts' ) );
+		}
 
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 	}
