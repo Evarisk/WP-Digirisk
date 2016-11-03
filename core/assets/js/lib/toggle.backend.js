@@ -19,8 +19,6 @@ window.digirisk.toggle.open = function( event ) {
 		target = jQuery( "." + jQuery( this ).data( 'target' ) );
 	}
 
-	console.log(target);
-
 	if ( target ) {
 	  target.toggle();
 	  event.stopPropagation();
