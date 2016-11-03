@@ -23,7 +23,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 					<span>U<?php echo $evaluator_to_assign->id; ?></span>
 					<span><?php echo $evaluator_to_assign->lastname; ?></span>
 					<span><?php echo $evaluator_to_assign->firstname; ?></span>
-					<span><input type="text" class="wpdigi_date" name="list_user[<?php echo $evaluator_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ); ?>" /></span>
+					<span><input type="text" class="eva-date" name="list_user[<?php echo $evaluator_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ); ?>" /></span>
 					<span class="period-assign"><input type="text" name="list_user[<?php echo $evaluator_to_assign->id; ?>][duration]" value="" /></span>
 					<span><input type="checkbox" name="list_user[<?php echo $evaluator_to_assign->id; ?>][affect]" /></span>
 				</li>

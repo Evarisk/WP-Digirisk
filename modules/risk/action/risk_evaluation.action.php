@@ -4,7 +4,7 @@
 * Gères la méthode d'évaluation simple
 * Géres la méthode d'évalution complexe
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package risk

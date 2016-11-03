@@ -2,7 +2,7 @@
 /**
 * Le formulaire pour configurer un groupement
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package society
@@ -25,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
       <input type="hidden" name="groupment[user_info][owner_id]" />
     </li>
     <li class="form-element"><label><?php _e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" value="<?php echo $element->address[0]->additional_address; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Created date', 'digirisk' ); ?> <input type="text" class="wpdigi_date" name="groupment[date]" value="<?php echo !empty( $element->date ) ? $element->date : date( 'd/m/Y' ); ?>" /></label></li>
+    <li class="form-element"><label><?php _e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo !empty( $element->date ) ? $element->date : date( 'd/m/Y' ); ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" value="<?php echo $element->address[0]->postcode; ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" value="<?php echo $element->identity['siren']; ?>" /></label></li>
     <li class="form-element"><label><?php _e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" value="<?php echo $element->address[0]->town; ?>" /></label></li>

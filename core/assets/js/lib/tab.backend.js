@@ -5,7 +5,7 @@ window.digirisk.tab.init = function() {
 };
 
 window.digirisk.tab.event = function() {
-  jQuery( document ).on( 'click', '.wp-digi-global-sheet-tab li', window.digirisk.tab.load );
+  jQuery( document ).on( 'click', '.wp-digi-global-sheet-tab li, .tab', window.digirisk.tab.load );
 };
 
 window.digirisk.tab.load = function( event ) {
@@ -34,7 +34,6 @@ window.digirisk.tab.load = function( event ) {
 window.digirisk.tab.call_tab_changed = function() {
 	for ( var key in window.digirisk ) {
 		if (window.digirisk[key].tab_changed) {
-			console.log('Tab changed de l\'objet: ' + key);
 			window.digirisk[key].tab_changed();
 		}
 	}

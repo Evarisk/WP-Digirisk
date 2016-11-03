@@ -14,7 +14,7 @@ class scale_util {
     *
     * @param int $level Le level de l'évaluation
     *
-    * @author Jimmy Latour <jimmy.latour@gmail.com>
+    * @author Jimmy Latour <jimmy@evarisk.com>
     *
     * @since 6.0.0.0
     *

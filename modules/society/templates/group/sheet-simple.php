@@ -10,6 +10,6 @@
 		<?php endif; ?>
 	</div>
 
-	<?php echo do_shortcode( '[digi-tab type="' . $group->type . '" display="digi-generate-sheet"]' ); ?>
-	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $group->id, 'digi-generate-sheet' ); ?>
+	<?php echo do_shortcode( '[digi-tab type="' . $group->type . '" display="digi-risk"]' ); ?>
+	<?php apply_filters( 'wpdigi_establishment_tab_content', '', $group->id, 'digi-risk' ); ?>
 </div>

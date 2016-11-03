@@ -5,7 +5,7 @@
 * If the establishment is editable : Display the input with the value establishment name
 * Or display the establisment name without an input.
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package establishment

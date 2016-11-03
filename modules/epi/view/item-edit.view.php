@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<span class="padded"><input type="text" name="title" value="<?php echo $epi->title; ?>" placeholder="Nom" /></span>
 	<span class="padded"><input type="text" name="serial_number" value="<?php echo $epi->serial_number; ?>" placeholder="Numéro de série" /></span>
 	<span class="padded"><input type="text" name="frequency_control" value="<?php echo $epi->frequency_control; ?>" placeholder="10" /> jours</span>
-	<span class="padded"><input type="text" class="wpdigi_date" name="control_date" value="<?php echo $epi->control_date; ?>" placeholder="Date de contrôle" /></span>
+	<span class="padded"><input type="text" class="eva-date" name="control_date" value="<?php echo $epi->control_date; ?>" placeholder="Date de contrôle" /></span>
 	<span class="padded"><?php echo $epi->compiled_remaining_time; ?></span>
 	<span class="wp-digi-epi-action wp-digi-action-new wp-digi-action" >
 		<?php

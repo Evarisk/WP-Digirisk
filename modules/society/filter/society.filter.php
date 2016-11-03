@@ -5,7 +5,7 @@ namespace digi;
 /**
 * @TODO : A Détailler
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package establishment
@@ -29,7 +29,7 @@ class society_filter {
   *
   * @param string $content Le contenu du filtre
   *
-  * @author Jimmy Latour <jimmy.latour@gmail.com>
+  * @author Jimmy Latour <jimmy@evarisk.com>
   *
   * @since 6.0.0.0
   */

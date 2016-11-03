@@ -5,7 +5,7 @@
 * Set as default thumbnail : Pour mettre l'image par défaut
 * Add a new picture : Permet d'ajouter une nouvelle image à la gallerie
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package file_management

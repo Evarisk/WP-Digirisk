@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class group_duer_class extends singleton_util {
+class group_generate_duer_class extends singleton_util {
 	/**
 	* Le constructeur
 	*/

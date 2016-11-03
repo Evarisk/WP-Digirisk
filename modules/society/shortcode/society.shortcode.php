@@ -5,7 +5,7 @@ namespace digi;
 /**
 * @TODO : A Détailler
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package establishment

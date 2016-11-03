@@ -7,12 +7,6 @@ class group_filter {
 	}
 
 	function callback_digi_tab( $tab_list ) {
-		$tab_list['digi-group']['generate-sheet'] = array(
-			'text' => __( 'DUER Generation', 'digirisk' ),
-		);
-		$tab_list['digi-group']['sheet'] = array(
-			'text' => __( 'Document list', 'digirisk' ),
-		);
 		$tab_list['digi-group']['configuration'] = array(
 			'text' => __( 'Configuration', 'digirisk' ),
 		);

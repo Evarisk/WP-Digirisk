@@ -3,7 +3,7 @@
 * Contient un bouton qui permet d'ouvrir le media upload de WordPress.
 * Si une image existe déjà, le bouton permet d'ouvrir la gallerie.
 *
-* @author Jimmy Latour <jimmy.latour@gmail.com>
+* @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package file_management
