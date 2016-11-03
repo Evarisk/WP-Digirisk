@@ -10,7 +10,7 @@ class fiche_de_poste_class extends document_class {
 	protected $meta_key    					= '_wpdigi_document';
 	protected $base 								= 'digirisk/fiche-de-poste';
 	protected $version 							= '0.1';
-	public $element_prefix 					= 'DOC';
+	public $element_prefix 					= 'FP';
 	protected $before_put_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
