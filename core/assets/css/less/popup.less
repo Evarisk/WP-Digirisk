@@ -1,0 +1,56 @@
+.wp-digi-societytree-main-container {
+
+	.popup {
+		position: fixed;
+		display: flex;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 9000;
+		&:before {
+			display: block;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(39,42,53,.9);
+			z-index: 8999;
+		}
+		.container {
+			background: #fff;
+			max-width: 560px;
+			width: 100%;
+			height: 250px;
+			margin: auto;
+			z-index: 9000;
+			position: relative;
+			.header {
+				padding: 16px;
+				border-bottom: 1px solid rgba(0,0,0,0.05);
+				.title {
+					margin: 0;
+				}
+				.close {
+					position: absolute;
+					right: 0;
+					top: 0;
+					padding: 18px;
+					color: rgba(0,0,0,0.2);
+					.transition;
+					&:hover {
+						cursor: pointer;
+						color: rgba(0,0,0,0.6);
+					}
+				}
+			}
+			.content {
+				padding: 16px;
+			}
+		}
+
+	}
+
+}
