@@ -23,14 +23,14 @@ class document_unique_class extends attachment_class {
 	protected $base 								= 'digirisk/document-unique';
 	protected $version 							= '0.1';
 
-	public $element_prefix 					= 'DOC';
+	public $element_prefix 					= 'DU';
 	protected $before_put_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
 	protected function construct() {
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
-	
+
 }
 
 document_unique_class::g();

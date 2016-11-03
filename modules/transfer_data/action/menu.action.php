@@ -31,9 +31,9 @@ class menu_action {
 	 */
 	public function callback_admin_menu() {
 		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
-		if ( empty( $digirisk_core['installed'] ) && getDbOption( 'base_evarisk' ) > 0 ) {
+		// if ( empty( $digirisk_core['installed'] ) && getDbOption( 'base_evarisk' ) > 0 ) {
 			add_menu_page( __( 'Digirisk : Manage datas transfert from digirisk V5.X', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-transfert', array( &$this, 'transfer_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );
-		}
+		// }
 	}
 
 	public function transfer_page() {

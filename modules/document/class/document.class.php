@@ -72,7 +72,6 @@ class document_class extends attachment_class {
 		}
 
 		$list_document = array();
-
 		if ( !empty( $list_document_id ) ) {
 			$list_document = document_class::g()->get( array( 'post__in' => $list_document_id ), array( 'category' ) );
 		}

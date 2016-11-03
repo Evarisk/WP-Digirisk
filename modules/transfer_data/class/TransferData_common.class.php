@@ -205,130 +205,133 @@ class TransferData_common_class extends singleton_util {
 		if ( !is_file( $file ) && ( $main_file_directory != EVA_GENERATED_DOC_DIR ) ) {
 			$file = EVA_GENERATED_DOC_DIR . $filename;
 		}
-		$the_file_content = @file_get_contents( $file );
 
-		/**	Check if file is a valid one	*/
-		if ( $the_file_content !== FALSE ) {
-			$attachment_args = array();
+		if ( is_file( $file ) ) {
+			$the_file_content = @file_get_contents( $file );
 
-			/**	Get associated picture list	*/
-			switch ( $main_type ) {
-				case 'document':
-					$path_document_complete = document_class::g()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
-					$guid = document_class::g()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
-					wp_mkdir_p( $path_document_complete );
-					copy( $file, $path_document_complete . '/' . basename($file) );
+			/**	Check if file is a valid one	*/
+			if ( $the_file_content !== FALSE ) {
+				$attachment_args = array();
 
-					$idCreateur = !isset( $document->idCreateur ) && ( 0 == $document->idCreateur ) ? 1 : $document->idCreateur;
-					if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idCreateur ] ) ) {
-						$idCreateur = $_POST[ 'wp_new_user' ][ $idCreateur ];
-					}
-					$attachment_args[ 'post_author' ] = $idCreateur;
-					$attachment_args[ 'post_date' ] = $document->dateCreation;
-				break;
+				/**	Get associated picture list	*/
+				switch ( $main_type ) {
+					case 'document':
+						$path_document_complete = document_class::g()->get_digirisk_dir_path() . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' );
+						$guid = document_class::g()->get_digirisk_dir_path('baseurl') . '/' . ( empty( $new_element_id ) ? 'document_models/' : get_post_type( $new_element_id ) . '/' . $new_element_id . '/' ) . basename($file);
+						wp_mkdir_p( $path_document_complete );
+						copy( $file, $path_document_complete . '/' . basename($file) );
 
-				default:
-					/**	Start by coping picture into wordpress uploads directory	*/
-					$path_document_complete = $wp_upload_dir['path'];
-					$path_document = $wp_upload_dir['path'] . '/' . basename($file);
-					copy( $file, $path_document );
-					$guid = $wp_upload_dir['url'] . '/' . basename( $file );
-				break;
-			}
-
-			/**	Get informations about the picture	*/
-			$filetype = wp_check_filetype( basename( $file ), null );
-			/**	Set the default values for the current attachement	*/
-			$attachment_default_args = array(
-				'guid'           => $guid,
-				'post_mime_type' => $filetype['type'],
-				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file ) ),
-				'post_content'   => '',
-				'post_status'    => 'inherit'
-			);
-
-			/**	Save new picture into database	*/
-			$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid, $new_element_id );
-
-			/**	Create the different size for the given picture and get metadatas for this picture	*/
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename( $file ) );
-			/**	Finaly save pictures metadata	*/
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-
-			/**	Set the post thumbnail in case it is the case	*/
-			if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
-				set_post_thumbnail( $new_element_id, $attach_id );
-			}
-
-			if ( 'valid' == $document->status ) {
-				$associate_document_list[] = $attach_id;
-			}
-
-			/**	store old document complete definition	*/
-			switch ( $main_type ) {
-				case 'document':
-					/** Do a backup of old document */
-					update_post_meta( $attach_id, '_wpeo_digidoc_old', $document );
-					$document_meta = array();
-					if ( isset( $document->meta ) ) {
-						foreach ( $document->meta as $doc_meta ) {
-							$document_meta[ $doc_meta->meta_key ] = maybe_unserialize( $doc_meta->meta_value );
+						$idCreateur = !isset( $document->idCreateur ) && ( 0 == $document->idCreateur ) ? 1 : $document->idCreateur;
+						if ( empty( $_POST[ 'wpdigi-dtrans-userid-behaviour' ] ) && !empty( $_POST[ 'wp_new_user' ] ) && !empty( $_POST[ 'wp_new_user' ][ $idCreateur ] ) ) {
+							$idCreateur = $_POST[ 'wp_new_user' ][ $idCreateur ];
 						}
-					}
-					update_post_meta( $attach_id, '_wpeo_document', json_encode( $document_meta ) );
-				break;
-			}
+						$attachment_args[ 'post_author' ] = $idCreateur;
+						$attachment_args[ 'post_date' ] = $document->dateCreation;
+					break;
 
-			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), array( 'object_id' => $document->id, ), 0 );
-			$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
-		}
-		else {
+					default:
+						/**	Start by coping picture into wordpress uploads directory	*/
+						$path_document_complete = $wp_upload_dir['path'];
+						$path_document = $wp_upload_dir['path'] . '/' . basename($file);
+						copy( $file, $path_document );
+						$guid = $wp_upload_dir['url'] . '/' . basename( $file );
+					break;
+				}
+
+				/**	Get informations about the picture	*/
+				$filetype = wp_check_filetype( basename( $file ), null );
+				/**	Set the default values for the current attachement	*/
+				$attachment_default_args = array(
+					'guid'           => $guid,
+					'post_mime_type' => $filetype['type'],
+					'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file ) ),
+					'post_content'   => '',
+					'post_status'    => 'inherit'
+				);
+
+				/**	Save new picture into database	*/
+				$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid, $new_element_id );
+
+				/**	Create the different size for the given picture and get metadatas for this picture	*/
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename( $file ) );
+				/**	Finaly save pictures metadata	*/
+				wp_update_attachment_metadata( $attach_id, $attach_data );
+
+				/**	Set the post thumbnail in case it is the case	*/
+				if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
+					set_post_thumbnail( $new_element_id, $attach_id );
+				}
+
+				if ( 'valid' == $document->status ) {
+					$associate_document_list[] = $attach_id;
+				}
+
+				/**	store old document complete definition	*/
+				switch ( $main_type ) {
+					case 'document':
+						/** Do a backup of old document */
+						update_post_meta( $attach_id, '_digi_old_doc', $document );
+						$document_meta = array();
+						if ( isset( $document->meta ) ) {
+							foreach ( $document->meta as $doc_meta ) {
+								$document_meta[ $doc_meta->meta_key ] = maybe_unserialize( $doc_meta->meta_value );
+							}
+						}
+						update_post_meta( $attach_id, '_digi_old_doc_meta', json_encode( $document_meta ) );
+					break;
+				}
+
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), array( 'object_id' => $document->id, ), 0 );
+				$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
+			} else {
+				$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
+				if ( 'picture' == $main_type ) {
+					$tocheck = $document->tableElement;
+				} else {
+					$tocheck = $document->table_element;
+				}
+
+				switch ( $tocheck ) {
+					case TABLE_TACHE:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_T;
+						break;
+					case TABLE_ACTIVITE:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_ST;
+						break;
+					case TABLE_GROUPEMENT:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_GP;
+						break;
+					case TABLE_UNITE_TRAVAIL:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_UT;
+						break;
+					case TABLE_DANGER:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_D;
+						break;
+					case TABLE_CATEGORIE_DANGER:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_CD;
+						break;
+					case TABLE_PRECONISATION:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_P;
+						break;
+					case TABLE_CATEGORIE_PRECONISATION:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_CP;
+						break;
+					case TABLE_METHODE:
+						$old_evarisk_element = ELEMENT_IDENTIFIER_ME;
+						break;
+				}
+
+				if ( ( 'all' != $tocheck ) && !empty( $old_evarisk_element ) ) {
+					$old_evarisk_element .= ( 'picture' == $main_type  ? $document->idElement : $document->id_element );
+				} else {
+					$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
+				}
+
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
+			}
+		} else {
 			$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
-			if ( 'picture' == $main_type ) {
-				$tocheck = $document->tableElement;
-			}
-			else {
-				$tocheck = $document->table_element;
-			}
-
-			switch ( $tocheck ) {
-				case TABLE_TACHE:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_T;
-					break;
-				case TABLE_ACTIVITE:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_ST;
-					break;
-				case TABLE_GROUPEMENT:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_GP;
-					break;
-				case TABLE_UNITE_TRAVAIL:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_UT;
-					break;
-				case TABLE_DANGER:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_D;
-					break;
-				case TABLE_CATEGORIE_DANGER:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_CD;
-					break;
-				case TABLE_PRECONISATION:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_P;
-					break;
-				case TABLE_CATEGORIE_PRECONISATION:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_CP;
-					break;
-				case TABLE_METHODE:
-					$old_evarisk_element = ELEMENT_IDENTIFIER_ME;
-					break;
-			}
-
-			if ( ( 'all' != $tocheck ) && !empty( $old_evarisk_element ) ) {
-				$old_evarisk_element .= ( 'picture' == $main_type  ? $document->idElement : $document->id_element );
-			}
-			else {
-				$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
-			}
-
-			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element because it is not a file. Path: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/

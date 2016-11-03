@@ -44,6 +44,9 @@ class Transfert_Action {
 		check_ajax_referer( 'wpdigi-datas-transfert' );
 		global $wpdb;
 
+		$log_conf = config_util::$init['wpeo_log'];
+		$log_conf->log = true;
+
 		$response = array(
 			'status'						=> false,
 			'reload_transfert'	=> false,
@@ -88,18 +91,21 @@ class Transfert_Action {
 			$nb_doc_element_transfered = 0;
 			$nb_doc_element_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['picture'] ) && ! empty( $transfer_progression['transfered']['picture']['ok'] ) ? count( $transfer_progression['transfered']['picture']['ok'] ) : 0;
 			$nb_doc_element_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['document'] ) && ! empty( $transfer_progression['transfered']['document']['ok'] ) ? count( $transfer_progression['transfered']['document']['ok'] ) : 0;
+			$nb_doc_element_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['printed_duer'] ) && ! empty( $transfer_progression['transfered']['printed_duer']['ok'] ) ? count( $transfer_progression['transfered']['printed_duer']['ok'] ) : 0;
+			$nb_doc_element_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['printed_sheet'] ) && ! empty( $transfer_progression['transfered']['printed_sheet']['ok'] ) ? count( $transfer_progression['transfered']['printed_sheet']['ok'] ) : 0;
 			$nb_doc_element_not_transfered = 0;
 			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['picture'] ) && ! empty( $transfer_progression['transfered']['picture']['nok'] ) ? count( $transfer_progression['transfered']['picture']['nok'] ) : 0;
 			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['document'] ) && ! empty( $transfer_progression['transfered']['document']['nok'] ) ? count( $transfer_progression['transfered']['document']['nok'] ) : 0;
+			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['printed_duer'] ) && ! empty( $transfer_progression['transfered']['printed_duer']['nok'] ) ? count( $transfer_progression['transfered']['printed_duer']['nok'] ) : 0;
+			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['printed_sheet'] ) && ! empty( $transfer_progression['transfered']['printed_sheet']['nok'] ) ? count( $transfer_progression['transfered']['printed_sheet']['nok'] ) : 0;
 
 			$element_done = $document_done = false;
 			if ( ( $nb_main_element_transfered + $nb_sub_element_transfered ) === ( $nb_element_to_transfert->main_element_nb + $nb_element_to_transfert->sub_element_nb ) ) {
 				$element_done = true;
 			}
-			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) === ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture ) ) {
+			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) === ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture + $nb_element_to_transfert->nb_fiches + $nb_element_to_transfert->nb_duer ) ) {
 				$document_done = true;
 			}
-
 			if ( $element_done && $document_done ) {
 				$response['status'] = true;
 				$response['reload_transfert'] = false;
@@ -111,9 +117,7 @@ class Transfert_Action {
 				$digirisk_transfert_options['state'] = 'complete';
 				update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
-				/**
-				 * Met à jour l'option pour dire que l'installation est terminée
-				 */
+				/** Met à jour l'option pour dire que l'installation est terminée */
 				update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 			} elseif ( $element_done ) {
 				$sub_action = 'doc';
@@ -130,7 +134,6 @@ class Transfert_Action {
 					$transfer_response = $this->element_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression['transfered'], array( $element_type => array(), $sub_element_type => array() ) ) );
 					break;
 				case 'doc':
-				exit;
 					$transfer_response = $this->document_transfer( $element_type, $sub_element_type, $nb_element_to_transfert, wp_parse_args( $transfer_progression['transfered'], array( 'document' => array( 'ok' => array(), 'nok' => array() ), 'picture' => array( 'ok' => array(), 'nok' => array() ) ) ) );
 					break;
 			}
@@ -348,8 +351,8 @@ class Transfert_Action {
 		$pics_are_done = true;
 		$query =
 			'SELECT PICTURE.*, PICTURE_LINK.isMainPicture, PICTURE_LINK.idElement, PICTURE_LINK.tableElement
-            FROM ' . TABLE_PHOTO . ' AS PICTURE
-                INNER JOIN ' . TABLE_PHOTO_LIAISON . " AS PICTURE_LINK ON (PICTURE_LINK.idPhoto = PICTURE.id)
+      FROM ' . TABLE_PHOTO . ' AS PICTURE
+        INNER JOIN ' . TABLE_PHOTO_LIAISON . " AS PICTURE_LINK ON (PICTURE_LINK.idPhoto = PICTURE.id)
 			WHERE PICTURE_LINK.tableElement IN ( '{$element_type}', '{$sub_element_type}' )
 				{$where}
 			ORDER BY PICTURE.id ASC
@@ -369,7 +372,6 @@ class Transfert_Action {
 
 				$document_id = TransferData_common_class::g()->transfer_document( $picture, $new_element_id, 'picture' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-
 					$response['transfered']++;
 
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
@@ -387,20 +389,18 @@ class Transfert_Action {
 								group_class::g()->update( $elt );
 							break;
 						case TABLE_TACHE:
-
 							break;
 						case TABLE_ACTIVITE:
-
 							break;
 					}
 
 					/**	Certaines images nécessite un traitement spécifique / Do specific treatment for pictures	*/
 					/**	Affectation de l'image a un risque / Associate picture to a risk	*/
 					$query = $wpdb->prepare(
-						'SELECT idElement
-                        FROM ' . TABLE_PHOTO_LIAISON . '
-                        WHERE idPhoto = %d
-                            AND tableElement = %s', $picture->id, TABLE_RISQUE
+						"SELECT idElement
+            FROM " . TABLE_PHOTO_LIAISON . "
+            WHERE idPhoto = %d
+              AND tableElement = %s", $picture->id, TABLE_RISQUE
 					);
 					$picture_to_risk_association = $wpdb->get_var( $query );
 					if ( ! empty( $picture_to_risk_association ) ) {
@@ -455,7 +455,7 @@ class Transfert_Action {
 		$docs_are_done = true;
 		$query =
 			'SELECT *
-            FROM ' . TABLE_GED_DOCUMENTS . " AS DOCUMENT
+      FROM ' . TABLE_GED_DOCUMENTS . " AS DOCUMENT
 			WHERE table_element IN ( '{$element_type}', '{$sub_element_type}' )
 				{$where}
 			ORDER BY id ASC
@@ -475,8 +475,8 @@ class Transfert_Action {
 
 				$query = $wpdb->prepare(
 					'SELECT meta_key, meta_value
-                    FROM ' . TABLE_GED_DOCUMENTS_META . '
-                    WHERE document_id = %d', $document->id
+          FROM ' . TABLE_GED_DOCUMENTS_META . '
+          WHERE document_id = %d', $document->id
 				);
 				$document->meta = $wpdb->get_results( $query );
 				$current_meta_index = count( $document->meta );
@@ -529,7 +529,6 @@ class Transfert_Action {
 					$document->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
 					$document->model_id = null;
 					document_class::g()->update( $doc_model );
-
 				} else {
 					$response['not_transfered']++;
 				}
@@ -616,6 +615,7 @@ class Transfert_Action {
 				}
 				$response['element_nb_treated']++;
 			}
+			$docs_are_done = false;
 		}
 
 		/**	Printed document treatment */
@@ -676,9 +676,9 @@ class Transfert_Action {
 
 				$document_id = TransferData_common_class::g()->transfer_document( $sheet, $new_element_id, 'printed_sheet' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-						$response['transfered']++;
+					$response['transfered']++;
 
-						wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
+					wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
 
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
 					switch ( $sheet->table_element ) {
@@ -712,17 +712,17 @@ class Transfert_Action {
 						$doc_model->model_id = $sheet->id_model;
 						document_class::g()->update( $doc_model );
 				} else {
-						$response['not_transfered']++;
+					$response['not_transfered']++;
 				}
 				$response['element_nb_treated']++;
 			}
+			$docs_are_done = false;
 		}
 
 		/**	In case all pictures and documents have been treated	*/
 		if ( $pics_are_done && $docs_are_done ) {
 			$response['reload_transfert'] = false;
 		}
-
 		return $response;
 	}
 

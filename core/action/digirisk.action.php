@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Initialise les scripts JS et CSS du Plugin
  * Ainsi que le fichier MO
  */
-class Digirisk_action {
+class Digirisk_Action {
 
 	/**
 	 * Le constructeur ajoutes les actions WordPress suivantes:
@@ -79,4 +79,4 @@ class Digirisk_action {
 	}
 }
 
-new digirisk_action();
+new Digirisk_Action();
