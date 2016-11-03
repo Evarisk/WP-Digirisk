@@ -1,14 +1,15 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.1.8.0",
+	"version": "6.1.8.1",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
 		"digirisk-users",
 		"digirisk-tools",
-		"digirisk-transfert"
+		"digirisk-transfert",
+		"digi-setup"
 	],
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",
