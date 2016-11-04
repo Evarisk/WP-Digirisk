@@ -238,11 +238,10 @@ class wpdigi_transferdata_society_class extends singleton_util {
 						log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), json_encode( $new_danger_category )), array( 'object_id' => $wp_risk->id, ), 2 );
 					}
 
-					$risk_associated_file = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_RISQUE, $wp_risk->id );
+					$risk_associated_file = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_RISQUE, $old_risk_id, $wp_risk->id );
 					$wp_risk->associated_document_id[ 'image' ] = $risk_associated_file[ 'associated_list' ];
-					if ( !empty( $risk_associated_file ) && !empty( $risk_associated_file[ 'associated_document_id' ] ) ) {
-						$wp_risk->thumbnail_id = implode( '', $risk_associated_file[ 'associated_document_id' ] );
-						wp_update_post( array( 'ID' => $wp_risk->thumbnail_id, 'post_parent' => $new_element_id, ) );
+					if ( !empty( $risk_associated_file ) && !empty( $risk_associated_file[ '_thumbnail' ] ) ) {
+						$wp_risk->thumbnail_id = $risk_associated_file[ '_thumbnail' ];
 					}
 
 					/**	Définition du danger pour le risque selon les nouveaux rangements / Define the danger for risk into new storage	*/

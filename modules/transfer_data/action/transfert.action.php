@@ -375,23 +375,25 @@ class Transfert_Action {
 					$response['transfered']++;
 
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
-					switch ( $picture->tableElement ) {
-						case TABLE_UNITE_TRAVAIL:
-								$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
-								$elt = $elt[0];
-								$elt->associated_document_id['image'][] = $document_id;
-								workunit_class::g()->update( $elt );
-							break;
-						case TABLE_GROUPEMENT:
-								$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
-								$elt = $elt[0];
-								$elt->associated_document_id['image'][] = $document_id;
-								group_class::g()->update( $elt );
-							break;
-						case TABLE_TACHE:
-							break;
-						case TABLE_ACTIVITE:
-							break;
+					if ( ! empty( (int)$new_element_id ) ) {
+						switch ( $picture->tableElement ) {
+							case TABLE_UNITE_TRAVAIL:
+									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['image'][] = $document_id;
+									workunit_class::g()->update( $elt );
+								break;
+							case TABLE_GROUPEMENT:
+									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['image'][] = $document_id;
+									group_class::g()->update( $elt );
+								break;
+							case TABLE_TACHE:
+								break;
+							case TABLE_ACTIVITE:
+								break;
+						}
 					}
 
 					/**	Certaines images nécessite un traitement spécifique / Do specific treatment for pictures	*/
@@ -499,16 +501,17 @@ class Transfert_Action {
 					wp_set_object_terms( $document_id, $term_to_associate, 'attachment_category' );
 
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
+					if ( ! empty( (int)$new_element_id ) ) {
 					switch ( $document->table_element ) {
 						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							workunit_class::g()->update( $elt );
 						break;
 
 						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							group_class::g()->update( $elt );
@@ -519,6 +522,7 @@ class Transfert_Action {
 
 						case TABLE_ACTIVITE:
 						break;
+					}
 					}
 
 					/**	Get the element created for new data transfer	*/
@@ -580,15 +584,16 @@ class Transfert_Action {
 						wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
 
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
+						if ( ! empty( (int)$new_element_id ) ) {
 					switch ( $duer->table_element ) {
 						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							workunit_class::g()->update( $elt );
 							break;
 						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'include' => array( $new_element_id ) ) );
+							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							group_class::g()->update( $elt );
@@ -599,6 +604,7 @@ class Transfert_Action {
 						case TABLE_ACTIVITE:
 
 							break;
+					}
 					}
 
 						/**	Get the element created for new data transfer	*/
@@ -680,26 +686,28 @@ class Transfert_Action {
 
 					wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
 
-						/**	Association des images aux différents éléments / Associate picture to elements	*/
-					switch ( $sheet->table_element ) {
-						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							workunit_class::g()->update( $elt );
-							break;
-						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							group_class::g()->update( $elt );
-							break;
-						case TABLE_TACHE:
+					/**	Association des images aux différents éléments / Associate picture to elements	*/
+					if ( ! empty( (int)$new_element_id ) ) {
+						switch ( $sheet->table_element ) {
+							case TABLE_UNITE_TRAVAIL:
+								$elt = workunit_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
+								$elt = $elt[0];
+								$elt->associated_document_id['document'][] = $document_id;
+								workunit_class::g()->update( $elt );
+								break;
+							case TABLE_GROUPEMENT:
+								$elt = group_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
+								$elt = $elt[0];
+								$elt->associated_document_id['document'][] = $document_id;
+								group_class::g()->update( $elt );
+								break;
+							case TABLE_TACHE:
 
-							break;
-						case TABLE_ACTIVITE:
+								break;
+							case TABLE_ACTIVITE:
 
-							break;
+								break;
+						}
 					}
 
 						/**	Get the element created for new data transfer	*/

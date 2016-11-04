@@ -260,6 +260,7 @@ class TransferData_common_class extends singleton_util {
 				/**	Set the post thumbnail in case it is the case	*/
 				if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
 					set_post_thumbnail( $new_element_id, $attach_id );
+					log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $attach_id ), array( 'object_id' => $document->id, 'document_old_def' => $document ), 0 );
 				}
 
 				if ( 'valid' == $document->status ) {
@@ -281,7 +282,7 @@ class TransferData_common_class extends singleton_util {
 					break;
 				}
 
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s transfered from evarisk on post having to element #%d', 'wp-digi-dtrans-i18n' ), $main_type, $attach_id), array( 'object_id' => $document->id, ), 0 );
+				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l\'élément %4$s ', 'wp-digi-dtrans-i18n' ), $main_type, $document->id, $attach_id, $new_element_id), array( 'object_id' => $document->id, ), 0 );
 				$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 			} else {
 				$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
@@ -362,6 +363,11 @@ class TransferData_common_class extends singleton_util {
 				if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 					if ( 'yes' == $picture->isMainPicture ) {
 						$associated_document_list[ '_thumbnail' ] = $document_id;
+					} elseif ( in_array( $element_type, array( TABLE_RISQUE ) ) ) {
+						/**	Set the post thumbnail in case it is the case	*/
+						set_post_thumbnail( $new_element_id, $document_id );
+						$associated_document_list[ '_thumbnail' ] = $document_id;
+						log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
 					}
 					$associated_document_list[ 'associated_list' ][] = $document_id;
 				}
@@ -376,12 +382,12 @@ class TransferData_common_class extends singleton_util {
 
 		/**	Get the current user notification list for current element being transfered	*/
 		$query = $wpdb->prepare("
-SELECT LUN.*, NOTI.action, NOTI.message_to_send, NOTI.message_subject
-FROM " . DIGI_DBT_LIAISON_USER_NOTIFICATION_ELEMENT . " AS LUN
-	INNER JOIN " . DIGI_DBT_ELEMENT_NOTIFICATION . " AS NOTI ON (NOTI.id = LUN.id_notification)
-WHERE LUN.status = 'valid'
-	AND LUN.table_element = %s
-	AND LUN.id_element = %d", array( $old_element_type, $old_element_id ) );
+			SELECT LUN.*, NOTI.action, NOTI.message_to_send, NOTI.message_subject
+			FROM " . DIGI_DBT_LIAISON_USER_NOTIFICATION_ELEMENT . " AS LUN
+				INNER JOIN " . DIGI_DBT_ELEMENT_NOTIFICATION . " AS NOTI ON (NOTI.id = LUN.id_notification)
+			WHERE LUN.status = 'valid'
+				AND LUN.table_element = %s
+				AND LUN.id_element = %d", array( $old_element_type, $old_element_id ) );
 		$current_user_notification_list = $wpdb->get_results( $query );
 
 		/**	If there are notification setted transfer them to new element	*/

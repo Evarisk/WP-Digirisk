@@ -2,8 +2,8 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 <div class="about-wrap wp-digi-wrap wp-digi-clearer">
-	<h1><?php _e( 'Transfert des données d\'Evarisk 5 vers Digirisk 6', 'digirisk' ); ?></h1>
-	<div class="about-text"><?php _e( 'La version 6 et ultérieur de Digirisk vont utiliser les fonctionnalités de WordPress de manière plus avancée. Pour cela nous allons effectuer le transfert des données de votre version 5.X.X.X.', 'digirisk' ); ?></div>
+	<h1><?php _e( 'Transfert des données d\'Evarisk 5 vers DigiRisk 6', 'digirisk' ); ?></h1>
+	<div class="about-text"><?php _e( 'La version 6 et ultérieur de DigiRisk vont utiliser les fonctionnalités de WordPress de manière plus avancée. Pour cela nous allons effectuer le transfert des données de votre version 5.X.X.X.', 'digirisk' ); ?></div>
 	<?php wp_nonce_field('reset_method_evaluation'); ?>
 	<h2 class="wp-digi-alert wp-digi-alert-error wp-digi-center" ><span class="wp-digi-bold" ><?php _e( 'Note importante : ', 'digirisk' ); ?></span><?php _e( 'Veillez a bien sauvegarder vos données avant de lancer le transfert des données', 'digirisk' ); ?></h2>
 
