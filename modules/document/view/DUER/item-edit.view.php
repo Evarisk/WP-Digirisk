@@ -22,9 +22,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span class="padded"><input type="text" class="eva-date" value="" /></span>
 	<span class="padded"><input type="text" class="eva-date" value="" /></span>
 	<span class="padded"><input type="text" /></span>
-	<span class="padded">test... <span data-parent="wp-digi-risk-item" data-target="digi-popup" class="open-popup dashicons dashicons-media-default"></span></span>
-	<span class="padded">Sources <span class="dashicons dashicons-media-default"></span></span>
-	<span class="padded">Notes importantes <span class="dashicons dashicons-media-default"></span></span>
+
+	<span class="padded">
+		<span class="content-methodology">test</span>
+		<span data-parent="wp-digi-risk-item"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition de la méthodologie"
+					data-src="methodology"
+					class="open-popup dashicons dashicons-media-default"></span>
+	</span>
+
+	<span class="padded">
+		<span class="content-sources">sources</span>
+		<span data-parent="wp-digi-risk-item"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition de la source"
+					data-src="sources"
+					class="open-popup dashicons dashicons-media-default"></span>
+		</span>
+
+	<span class="padded">
+		<span class="content-notes-importantes">Notes importantes</span>
+		<span data-parent="wp-digi-risk-item"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition de la note importante"
+					data-src="notes-importantes"
+					class="open-popup dashicons dashicons-media-default"></span>
+	</span>
+
 	<span class="padded"><input type="text" /></span>
 	<span class="padded">Créer</span>
 	<?php

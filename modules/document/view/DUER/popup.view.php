@@ -11,11 +11,21 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="digi-popup hidden">
-  <section>
-    <div class="digi-popup-propagation">
-			<a href="#" class="close"><i class="dashicons dashicons-no-alt"></i></a>
-			test
-    </div>
-  </section>
+
+<div class="popup" style="display: none;">
+	<div class="container wp-digi-bloc-loader">
+		<div class="header">
+			<h2 class="title">Titre de la popup</h2>
+			<i class="close fa fa-times"></i>
+		</div>
+			<div class="content" style="height: 60%">
+				<textarea style="width: 100%; height: 100%; resize: none;"></textarea>
+		</div>
+
+		<button class="button button-primary"
+						data-cb-object="DUER"
+						data-cb-func="set_textarea_content">Ok</button>
+		<button class="button button-secondary">Annuler</button>
+	</div>
+
 </div>
