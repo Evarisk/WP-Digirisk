@@ -62,7 +62,7 @@ class chemi_product_class extends post_class {
 			'show_ui'             => true,
 			'show_in_menu'        => false,
 			'show_in_admin_bar'   => false,
-			'show_in_nav_menus'   => true,
+			'show_in_nav_menus'   => false,
 			'can_export'          => true,
 			'has_archive'         => true,
 			'exclude_from_search' => true,
