@@ -24,7 +24,7 @@ class DUER_Class extends attachment_class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   				= '\digi\document_unique_model';
+	protected $model_name   				= '\digi\DUER_Model';
 
 	/**
 	 * Le type du document

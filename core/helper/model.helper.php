@@ -43,6 +43,7 @@ function get_identifier( $data ) {
 	$list_accronym = json_decode( $list_accronym, true );
 	$model_name = get_class( $data );
 	$controller_name = str_replace( 'model', 'class', $model_name );
+	$controller_name = str_replace( 'Model', 'Class', $controller_name );
 	$element_prefix = $controller_name::g()->element_prefix;
 
 	if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {

@@ -32,7 +32,6 @@ class group_action {
 		add_action( 'wp_ajax_wpdigi-load-group', array( $this, 'ajax_load_group' ) );
 		add_action( 'wp_ajax_wpdigi_ajax_group_update', array( $this, 'ajax_group_update' ) );
 		add_action( 'wp_ajax_wpdigi_group_sheet_display', array( $this, 'ajax_group_sheet_display' ) );
-		add_action( 'wp_ajax_wpdigi_generate_duer_' . group_class::g()->get_post_type(), array( $this, 'ajax_generate_duer' ) );
 	}
 
 	/**
@@ -195,18 +194,6 @@ class group_action {
 		$this->display_toggle( $group_parent[0], $group );
 		wp_send_json_success( array( 'template_left' => ob_get_clean() ) );
 	}
-
-	/**
-	* Appelle la méthode generate de l'objet group_duer_class
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
-	public function ajax_generate_duer() {
-		check_ajax_referer( 'digi_ajax_generate_element_duer' );
-		$duer = group_genereate_duer_class::g()->generate( $_POST );
-		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_generate_duer_success', 'duer' => $duer ) );
-	}
-
 
 }
 
