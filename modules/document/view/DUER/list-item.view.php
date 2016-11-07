@@ -59,7 +59,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span class="padded"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></span>
 	<span class="padded flex-tmp">
 		<a href="<?php echo document_class::g()->get_document_path( $element ); ?>" class="wp-digi-bton-fifth" ><?php _e( 'Download', 'digirisk' ); ?></a>
-		<a href="<?php echo document_class::g()->get_document_path( $element ); ?>" class="wp-digi-bton-sixth" ><?php _e( 'Zip', 'digirisk' ); ?></a>
-		<a class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" data-parent-id="<?php echo $element->parent_id; ?>" data-id="<?php echo $element->id; ?>" href="#"></a>
 	</span>
 </li>

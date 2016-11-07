@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 
 	<span class="padded">
-		<textarea class="hidden textarea-content-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
+		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
 		<span class="span-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
 		<span data-parent="wp-digi-risk-item"
 					data-target="popup"
