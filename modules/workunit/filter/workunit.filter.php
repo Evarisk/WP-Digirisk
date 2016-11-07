@@ -11,6 +11,9 @@ class workunit_filter {
  			'text' => __( 'Sheet workunit', 'digirisk' ),
  			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
  		);
+		$tab_list['digi-workunit']['sheet'] = array(
+			'text' => __( 'Document list', 'digirisk' ),
+		);
 
 		return $list_tab;
 	}
