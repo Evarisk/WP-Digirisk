@@ -18,6 +18,7 @@ class group_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
+		add_shortcode( 'digi-sheet', array( $this, 'callback_sheet' ) );
 	}
 
 	/**
@@ -30,6 +31,17 @@ class group_shortcode {
     $element = society_class::g()->show_by_type( $element_id, array( 'address' ) );
 
 		group_configuration_class::g()->display( $element );
+	}
+
+	/**
+	* Affiches la liste des documents d'un groupement
+	*
+	* @param array $param
+	*/
+	public function callback_sheet( $param ) {
+		$element_id = $param['post_id'];
+    $element = society_class::g()->show_by_type( $element_id, array() );
+		document_class::g()->display_document_list( $element );
 	}
 }
 

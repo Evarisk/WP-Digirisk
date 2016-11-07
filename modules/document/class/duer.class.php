@@ -84,6 +84,12 @@ class DUER_Class extends attachment_class {
 	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
+	 * La limite des documents affichés par page
+	 * @var integer
+	 */
+	protected $limit_document_per_page = 50;
+
+	/**
 	 * Ajout du filtre pour la Rest API
 	 *
 	 * @return void
@@ -99,7 +105,9 @@ class DUER_Class extends attachment_class {
 	 * @return void
 	 */
 	public function display( $element_id ) {
-		view_util::exec( 'document', 'DUER/main', array( 'element_id' => $element_id ) );
+		$element = $this->get( array( 'schema' => true ), array() );
+		$element = $element[0];
+		view_util::exec( 'document', 'DUER/main', array( 'element' => $element, 'element_id' => $element_id ) );
 	}
 
 	/**
@@ -109,7 +117,27 @@ class DUER_Class extends attachment_class {
 	 * @return void
 	 */
 	public function display_document_list( $element_id ) {
-		view_util::exec( 'document', 'DUER/list' );
+		$element = society_class::g()->show_by_type( $element_id );
+		$list_document_id = !empty( $element->associated_document_id ) && !empty( $element->associated_document_id[ 'document' ] ) ? $element->associated_document_id[ 'document' ] : null;
+
+		if ( !empty( $list_document_id ) ) {
+			$list_document_id = array_reverse( $list_document_id );
+		}
+
+		if ( 0 < $this->limit_document_per_page ) {
+			$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
+			$number_page = ceil( count ( $list_document_id ) / $this->limit_document_per_page );
+			if ( !empty( $list_document_id ) ) {
+				$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
+			}
+		}
+
+		$list_document = array();
+		if ( !empty( $list_document_id ) ) {
+			$list_document = $this->get( array( 'post__in' => $list_document_id ), array( 'category' ) );
+		}
+
+		view_util::exec( 'document', 'DUER/list', array( 'list_document' => $list_document ) );
 	}
 }
 

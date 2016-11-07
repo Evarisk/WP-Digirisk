@@ -26,3 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span><?php \esc_html_e( 'Localisation', 'digirisk' ); ?></span>
 	<span></span>
 </li>
+
+<?php if ( !empty( $list_document ) ) : ?>
+	<?php foreach ( $list_document as $element ) : ?>
+		<?php view_util::exec( 'document', 'DUER/list-item', array( 'element' => $element ) ); ?>
+	<?php endforeach; ?>
+<?php endif; ?>

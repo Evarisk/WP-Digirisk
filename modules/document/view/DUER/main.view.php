@@ -16,5 +16,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="wp-digi-list wp-digi-risk wp-digi-table">
 	<?php DUER_Class::g()->display_document_list( $element_id ); ?>
-	<?php view_util::exec( 'document', 'DUER/item-edit', array( 'element_id' => $element_id ) ); ?>
+	<?php view_util::exec( 'document', 'DUER/item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
 </ul>

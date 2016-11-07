@@ -10,6 +10,9 @@ class group_filter {
 		$tab_list['digi-group']['configuration'] = array(
 			'text' => __( 'Configuration', 'digirisk' ),
 		);
+		$tab_list['digi-group']['sheet'] = array(
+			'text' => __( 'Document list', 'digirisk' ),
+		);
 
 		return $tab_list;
 	}

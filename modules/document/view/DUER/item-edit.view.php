@@ -9,8 +9,6 @@
  * @subpackage view
  */
 
-namespace digi;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -20,16 +18,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 <li class='wp-digi-list-item wp-digi-risk-item'>
 	<input type="hidden" name="action" value="generate_duer" />
 	<?php wp_nonce_field( 'callback_ajax_generate_duer' ); ?>
-	<input type="hidden" name="element_id" value="<?php echo \esc_attr( $element_id ); ?>" />
+	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<span></span>
-	<span class="padded"><input type="text" class="eva-date" value="<?php echo \esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateDebutAudit" /></span>
-	<span class="padded"><input type="text" class="eva-date" value="<?php echo \esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateFinAudit" /></span>
+	<span class="padded"><input type="text" class="eva-date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateDebutAudit" /></span>
+	<span class="padded"><input type="text" class="eva-date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateFinAudit" /></span>
 	<span class="padded"><input type="text" name="destinataireDUER" /></span>
 
 	<span class="padded">
-		<textarea class="hidden textarea-content-methodology" name="methodologie">test</textarea>
-		<span class="span-content-methodology">test</span>
+		<textarea class="hidden textarea-content-methodology" name="methodologie"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></textarea>
+		<span class="span-content-methodology"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></span>
 		<span data-parent="wp-digi-risk-item"
 					data-target="popup"
 					data-cb-object="DUER"
@@ -40,8 +38,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</span>
 
 	<span class="padded">
-		<textarea class="hidden textarea-content-sources" name="sources">sources</textarea>
-		<span class="span-content-sources">sources</span>
+		<textarea class="hidden textarea-content-sources" name="sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></textarea>
+		<span class="span-content-sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></span>
 		<span data-parent="wp-digi-risk-item"
 					data-target="popup"
 					data-cb-object="DUER"
@@ -52,8 +50,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 
 	<span class="padded">
-		<textarea class="hidden textarea-content-importantes" name="remarqueImportante">Notes importantes</textarea>
-		<span class="span-content-notes-importantes">Notes importantes</span>
+		<textarea class="hidden textarea-content-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
+		<span class="span-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
 		<span data-parent="wp-digi-risk-item"
 					data-target="popup"
 					data-cb-object="DUER"
@@ -66,6 +64,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span class="padded"><input type="text" name="dispoDesPlans"/></span>
 	<span class="padded"><a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a></span>
 	<?php
-	view_util::exec( 'document', 'DUER/popup' );
+	\digi\view_util::exec( 'document', 'DUER/popup' );
 	?>
 </li>
