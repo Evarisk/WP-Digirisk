@@ -6,15 +6,15 @@ class workunit_filter {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 15 );
 	}
 
-	 function callback_digi_tab( $list_tab ) {
-		 $list_tab['digi-workunit']['sheet-workunit'] = array(
- 			'text' => __( 'Sheet workunit', 'digirisk' ),
- 			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
- 		);
-		$tab_list['digi-workunit']['sheet'] = array(
+	function callback_digi_tab( $list_tab ) {
+		$list_tab['digi-workunit']['sheet'] = array(
 			'text' => __( 'Document list', 'digirisk' ),
 		);
 
+		$list_tab['digi-workunit']['sheet-workunit'] = array(
+			'text' => __( 'Sheet workunit', 'digirisk' ),
+			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
+		);
 		return $list_tab;
 	}
 }
