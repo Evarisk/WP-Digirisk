@@ -580,31 +580,31 @@ class Transfert_Action {
 
 				$document_id = TransferData_common_class::g()->transfer_document( $duer, $new_element_id, 'printed_duer' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-						$response['transfered']++;
-						wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
+					$response['transfered']++;
+					wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
 
-						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( (int)$new_element_id ) ) {
-					switch ( $duer->table_element ) {
-						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							workunit_class::g()->update( $elt );
-							break;
-						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							group_class::g()->update( $elt );
-							break;
-						case TABLE_TACHE:
+					/**	Association des images aux différents éléments / Associate picture to elements	*/
+					if ( ! empty( (int)$new_element_id ) ) {
+						switch ( $duer->table_element ) {
+							case TABLE_UNITE_TRAVAIL:
+								$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+								$elt = $elt[0];
+								$elt->associated_document_id['document'][] = $document_id;
+								workunit_class::g()->update( $elt );
+								break;
+							case TABLE_GROUPEMENT:
+								$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+								$elt = $elt[0];
+								$elt->associated_document_id['document'][] = $document_id;
+								group_class::g()->update( $elt );
+								break;
+							case TABLE_TACHE:
 
-							break;
-						case TABLE_ACTIVITE:
+								break;
+							case TABLE_ACTIVITE:
 
-							break;
-					}
+								break;
+						}
 					}
 
 						/**	Get the element created for new data transfer	*/
