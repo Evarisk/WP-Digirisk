@@ -9,6 +9,7 @@ class tools_action {
 
 		add_action( 'wp_ajax_reset_method_evaluation', array( $this, 'callback_reset_method_evaluation' ) );
 		add_action( 'wp_ajax_compil_risk_list', array( $this, 'callback_risk_compilation' ) );
+		add_action( 'wp_ajax_transfert_doc', array( $this, 'callback_transfert_doc' ) );
 	}
 
 	public function admin_menu() {
@@ -57,6 +58,37 @@ class tools_action {
 
 				workunit_class::g()->update( $workunit );
 			}
+		}
+
+		wp_send_json_success();
+	}
+
+	public function callback_transfert_doc() {
+		check_ajax_referer( 'callback_transfert_doc' );
+
+		$args = array(
+			'post_status' => 'inherit',
+			'tax_query' => array(
+				array(
+					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
+					'field'			=> 'slug',
+					'terms'			=> 'document_unique'
+				)
+			)
+		);
+
+		$list_document = document_class::g()->get( $args, array( 'category' ));
+
+		if ( !empty( $list_document ) ) {
+		  foreach ( $list_document as $element ) {
+				$element->status = 'trash';
+				document_class::g()->update( $element );
+
+				$element->status = 'publish';
+				$element->type = Duer_Class::g()->get_post_type();
+				$element->unique_identifier = str_replace( document_class::g()->element_prefix, DUER_Class::g()->element_prefix, $element->unique_identifier );
+				DUER_Class::g()->update( $element );
+		  }
 		}
 
 		wp_send_json_success();

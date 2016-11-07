@@ -9,6 +9,7 @@ window.digirisk.tools.event = function() {
 	jQuery( document ).on( 'click', '.reset-method-evaluation', window.digirisk.tools.reset_evaluation_method );
 	jQuery( document ).on( 'click', '.element-risk-compilation', window.digirisk.tools.risk_fixer );
 	jQuery( document ).on( 'click', '.fix-recommendation', window.digirisk.tools.recommendation_fixer );
+	jQuery( document ).on( 'click', '.fix-doc', window.digirisk.tools.doc_fixer );
 };
 
 window.digirisk.tools.tab_switcher = function( event ) {
@@ -78,6 +79,24 @@ window.digirisk.tools.recommendation_fixer = function( event ) {
 
   var data = {
     action: 'transfert_recommendation',
+    _wpnonce: jQuery( this ).data( 'nonce' )
+  };
+
+  window.digirisk.tools.exec_request( li, data, this );
+},
+
+window.digirisk.tools.doc_fixer = function( event ) {
+  event.preventDefault();
+
+  jQuery( this ).addClass( "wp-digi-loading" );
+  jQuery( this ).closest( 'div' ).find( 'ul' ).html('');
+
+  var li = document.createElement( 'li' );
+  li.innerHTML = window.digi_tools_in_progress;
+  jQuery( this ).closest( 'div' ).find( 'ul' ).append( li );
+
+  var data = {
+    action: 'transfert_doc',
     _wpnonce: jQuery( this ).data( 'nonce' )
   };
 

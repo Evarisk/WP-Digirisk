@@ -12,6 +12,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<a class="nav-tab" href="#" data-id="digi-data-import-user" ><?php _e( 'Import user', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-method-fixer" ><?php _e( 'Correction de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-recommendation-fixer" ><?php _e( 'Correction des recommendations', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-doc-fixer" ><?php _e( 'Migrer les docs', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
 		</h2>
 
@@ -42,6 +43,12 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		<div id="digi-recommendation-fixer" class="hidden" >
 			<p><?php _e( 'Cliquer sur ce bouton pour résoudre les problèmes de recommendation', 'digirisk' ); ?></p>
 			<p><button class="wp-digi-bton-fourth fix-recommendation" data-nonce="<?php echo wp_create_nonce( 'fix_recommendation' ); ?>" type="button"><?php _e( 'Résoudre', 'digirisk' ); ?></button>
+			<ul></ul>
+		</div>
+
+		<div id="digi-doc-fixer" class="" >
+			<p><?php _e( 'Cliquer sur ce bouton pour migrer les documents', 'digirisk' ); ?></p>
+			<p><button class="wp-digi-bton-fourth fix-doc" data-nonce="<?php echo wp_create_nonce( 'callback_transfert_doc' ); ?>" type="button"><?php _e( 'Résoudre', 'digirisk' ); ?></button>
 			<ul></ul>
 		</div>
 
