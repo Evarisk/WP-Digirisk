@@ -87,7 +87,7 @@ class DUER_Action {
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
 		$duer = DUER_Generate_Class::g()->generate( $_POST );
-		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_generate_duer_success', 'duer' => $duer ) );
+		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'callback_generate_duer_success', 'duer' => $duer ) );
 	}
 }
 

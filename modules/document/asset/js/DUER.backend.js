@@ -24,3 +24,7 @@ window.digirisk.DUER.set_textarea_content = function( triggered_element, event, 
 		jQuery( '.span-content-' + args['target'] ).text( textarea_content );
 	}
 };
+
+window.digirisk.DUER.callback_generate_duer_success = function() {
+	jQuery( 'button[data-action="digi_list_duer"]' ).click();
+}

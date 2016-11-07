@@ -31,7 +31,3 @@ window.digirisk.group.display_form_duer = function( event ) {
 		jQuery( ".wp-digi-societytree-right-container" ).removeClass( "wp-digi-bloc-loading" );
 	} );
 };
-
-window.digirisk.group.callback_generate_duer_success = function() {
-	jQuery( '.wp-digi-global-sheet-tab .wp-digi-list-item[data-action="digi-sheet"]' ).click();
-}
