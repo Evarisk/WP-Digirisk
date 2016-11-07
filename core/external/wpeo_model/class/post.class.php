@@ -86,6 +86,7 @@ class post_class extends singleton_util {
 
 	public function update( $data ) {
 		$data = (array) $data;
+
 		if ( empty( $data['id'] ) ) {
 			$data = new $this->model_name( $data, array( false ) );
 
@@ -103,7 +104,6 @@ class post_class extends singleton_util {
 			if ( !empty( $data->error ) && $data->error ) {
 				return false;
 			}
-
 
 			$data->id = wp_insert_post( $data->do_wp_object() );
 		}
