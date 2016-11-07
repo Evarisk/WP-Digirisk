@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class DUER_Class extends attachment_class {
+class DUER_Class extends post_class {
 	/**
 	 * Le nom du modèle
 	 *
@@ -31,7 +31,7 @@ class DUER_Class extends attachment_class {
 	 *
 	 * @var string
 	 */
-	protected $post_type    				= 'attachment';
+	protected $post_type    				= 'duer';
 
 	/**
 	 * A faire
@@ -117,26 +117,7 @@ class DUER_Class extends attachment_class {
 	 * @return void
 	 */
 	public function display_document_list( $element_id ) {
-		$element = society_class::g()->show_by_type( $element_id );
-		$list_document_id = !empty( $element->associated_document_id ) && !empty( $element->associated_document_id[ 'document' ] ) ? $element->associated_document_id[ 'document' ] : null;
-
-		if ( !empty( $list_document_id ) ) {
-			$list_document_id = array_reverse( $list_document_id );
-		}
-
-		if ( 0 < $this->limit_document_per_page ) {
-			$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
-			$number_page = ceil( count ( $list_document_id ) / $this->limit_document_per_page );
-			if ( !empty( $list_document_id ) ) {
-				$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
-			}
-		}
-
-		$list_document = array();
-		if ( !empty( $list_document_id ) ) {
-			$list_document = $this->get( array( 'post__in' => $list_document_id ), array( 'category' ) );
-		}
-
+		$list_document = $this->get( array( 'post_parent' => $element_id ), array( 'category' ) );
 		view_util::exec( 'document', 'DUER/list', array( 'list_document' => $list_document ) );
 	}
 }

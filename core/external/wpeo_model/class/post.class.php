@@ -98,6 +98,7 @@ class post_class extends singleton_util {
 				return false;
 			}
 
+
 			$data->id = wp_insert_post( $data->do_wp_object() );
 		}
 		else {

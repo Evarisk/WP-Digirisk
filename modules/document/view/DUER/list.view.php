@@ -19,11 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span><?php \esc_html_e( 'Ref', 'digirisk' ); ?></span>
 	<span><?php \esc_html_e( 'Début', 'digirisk' ); ?></span>
 	<span><?php \esc_html_e( 'Fin', 'digirisk' ); ?></span>
-	<span><?php \esc_html_e( 'Destinataire', 'digirisk' ); ?></span>
-	<span><?php \esc_html_e( 'Méthodologie', 'digirisk' ); ?></span>
-	<span><?php \esc_html_e( 'Sources', 'digirisk' ); ?></span>
-	<span><?php \esc_html_e( 'Notes importantes', 'digirisk' ); ?></span>
-	<span><?php \esc_html_e( 'Localisation', 'digirisk' ); ?></span>
+	<span style="width: 5%"><?php \esc_html_e( 'Destinataire', 'digirisk' ); ?></span>
+	<span style="width: 5%"><?php \esc_html_e( 'Méthodologie', 'digirisk' ); ?></span>
+	<span style="width: 5%"><?php \esc_html_e( 'Sources', 'digirisk' ); ?></span>
+	<span style="width: 5%"><?php \esc_html_e( 'Notes importantes', 'digirisk' ); ?></span>
+	<span style="width: 5%"><?php \esc_html_e( 'Localisation', 'digirisk' ); ?></span>
 	<span></span>
 </li>
 

@@ -406,7 +406,6 @@ class document_class extends attachment_class {
   	$document_args = array(
 			'id'										=> $response[ 'id' ],
 			'title'									=> basename( $response[ 'filename' ], '.odt' ),
-			'status'    						=> 'inherit',
 			'parent_id'							=> $element->id,
 			'author_id'							=> get_current_user_id(),
 			'date'									=> current_time( 'mysql', 0 ),
@@ -416,7 +415,17 @@ class document_class extends attachment_class {
 			'version'								=> $document_revision,
   	);
 
-  	$document = $this->update( $document_args );
+		// @todo: Temporaire, il faut repenser cette fonction.
+		switch( $document_type[0] ) {
+			case "document_unique":
+				$document_args['type'] = DUER_Class::g()->get_post_type();
+				$document = DUER_Class::g()->update( $document_args );
+				break;
+			default:
+		  	$document = $this->update( $document_args );
+				break;
+		}
+
   	return $response;
 	}
 }
