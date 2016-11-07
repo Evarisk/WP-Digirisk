@@ -49,8 +49,9 @@ class society_class extends singleton_util {
 			else {
 				$society = $group_list[0];
 				$society_parent = $group_list[0];
-				$tmp_group = group_class::g()->get( array( 'include' => $group_list[0]->id ), array( 'list_group', 'list_workunit' ) );
+				$tmp_group = group_class::g()->get( array( 'id' => $group_list[0]->id ), array( 'list_group', 'list_workunit' ) );
 				$group_list[0] = $tmp_group[0];
+
 			}
 		}
 

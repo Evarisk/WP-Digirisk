@@ -48,6 +48,7 @@ class group_class extends post_class {
 			$selected_group = $list_groupment[0];
 		}
 
+
 		view_util::exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
 	}
 	/**

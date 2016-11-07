@@ -20,6 +20,11 @@ class post_class extends singleton_util {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 
+		// @todo: Temporaire
+		if ( !empty( $args['include'] ) ) {
+			$args['post__in'] = $post['include'];
+		}
+
 		if ( !isset( $args['posts_per_page'] ) ) {
 			$args['posts_per_page'] = -1;
 		}
