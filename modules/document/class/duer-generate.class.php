@@ -36,7 +36,7 @@ class DUER_Generate_Class extends singleton_util {
 
 		/**	Définition des composants du fichier / Define the file component	*/
 		$src_logo = $this->get_logo();
-		$data = $this->securize_duer_data( $data );
+		$data = $this->securize_duer_data( $data, $element );
 		$data_to_document = $this->prepare_skeleton();
 		$data_to_document = $this->fill_data_duer( $data, $data_to_document, $element );
 		$data_to_document = $this->fill_data_risk( $data_to_document, $element );
@@ -74,17 +74,20 @@ class DUER_Generate_Class extends singleton_util {
 	*
 	* @return array Les données sécurisées
 	*/
-	public function securize_duer_data( $data ) {
-		$data['nomEntreprise'] 			= !empty( $data['nomEntreprise'] ) ? sanitize_text_field( $data['nomEntreprise'] ) : '';
-		$data['dateAudit'] 					= $this->formatte_audit_date( $data );
-		$data['emetteurDUER'] 				= !empty( $data['emetteurDUER'] ) ? sanitize_text_field( $data['emetteurDUER'] ) : '';
-		$data['destinataireDUER'] 		= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
-		$data['telephone'] 					= !empty( $data['telephone'] ) ? sanitize_text_field( $data['telephone'] ) : '';
-		$data['portable'] 						= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
+	public function securize_duer_data( $data, $element ) {
+		$user = get_currentuserinfo();
+		$data['nomEntreprise'] 			= $element->title;
+		$data['emetteurDUER'] 			= $user->display_name;
+		$data['telephone'] 					= !empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '';
 
-		$data['methodologie'] 				= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
+
+		$data['dateAudit'] 					= $this->formatte_audit_date( $data );
+		$data['destinataireDUER'] 	= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
+		$data['portable'] 					= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
+
+		$data['methodologie'] 			= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
 		$data['sources'] 						= !empty( $data['sources'] ) ? $data['sources'] : '';
-		$data['remarqueImportante'] 	= !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
+		$data['remarqueImportante'] = !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
 		$data['dispoDesPlans'] 			= !empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
 
 		return $data;
