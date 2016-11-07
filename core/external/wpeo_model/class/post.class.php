@@ -22,7 +22,8 @@ class post_class extends singleton_util {
 
 		// @todo: Temporaire
 		if ( !empty( $args['include'] ) ) {
-			$args['post__in'] = $post['include'];
+			$args['post__in'] = $args['include'];
+			unset( $args['include'] );
 		}
 
 		if ( !isset( $args['posts_per_page'] ) ) {
