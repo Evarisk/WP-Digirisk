@@ -12,8 +12,18 @@ window.digirisk.DUER.fill_textarea_in_popup = function( triggered_element, popup
 		popup_element.find( 'h2' ).text( args.title );
 		// On récupères le textarea caché avec le contenu actuel.
 		var textarea_content = triggered_element.closest( '.wp-digi-list-item' ).find( '.textarea-content-' + args['src'] ).text();
+		popup_element.find( 'textarea' ).show();
+		popup_element.find( 'p' ).hide();
 		popup_element.find( 'textarea' ).val( textarea_content );
 		popup_element.find( '.button-primary' ).attr( 'data-target', args['src'] );
+	}
+};
+
+window.digirisk.DUER.view_in_popup = function( triggered_element, popup_element, event, args ) {
+	if (args) {
+		popup_element.find( 'h2' ).text( args.title );
+		popup_element.find( 'textarea' ).hide();
+		popup_element.find( 'p' ).text( triggered_element.closest( '.wp-digi-list-item' ).find( '.span-content-' + args['src'] ).text() ).show();
 	}
 };
 

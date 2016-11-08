@@ -75,7 +75,7 @@ class DUER_Generate_Class extends singleton_util {
 	* @return array Les données sécurisées
 	*/
 	public function securize_duer_data( $data, $element ) {
-		$user = get_currentuserinfo();
+		$user = wp_get_current_user();
 		$data['nomEntreprise'] 			= $element->title;
 		$data['emetteurDUER'] 			= $user->display_name;
 		$data['telephone'] 					= !empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '';

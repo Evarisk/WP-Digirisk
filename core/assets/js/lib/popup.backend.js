@@ -9,6 +9,7 @@ window.digirisk.popup.event = function() {
   jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.open_ajax );
   jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
   jQuery( document ).on( 'click', '.popup .container .button-primary', window.digirisk.popup.confirm );
+  jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
   jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
 };
 

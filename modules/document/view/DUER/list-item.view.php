@@ -25,33 +25,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<span class="padded">
 		<span class="span-content-methodology"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></span>
-		<span data-parent="wp-digi-risk-item"
+		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
-					data-cb-func="fill_textarea_in_popup"
-					data-title="Édition de la méthodologie"
+					data-cb-func="view_in_popup"
+					data-title="Méthodologie"
 					data-src="methodology"
 					class="open-popup dashicons dashicons-media-default"></span>
 	</span>
 
 	<span class="padded">
 		<span class="span-content-sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></span>
-		<span data-parent="wp-digi-risk-item"
+		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
-					data-cb-func="fill_textarea_in_popup"
-					data-title="Édition de la source"
+					data-cb-func="view_in_popup"
+					data-title="Source"
 					data-src="sources"
 					class="open-popup dashicons dashicons-media-default"></span>
 		</span>
 
 	<span class="padded">
 		<span class="span-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
-		<span data-parent="wp-digi-risk-item"
+		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
-					data-cb-func="fill_textarea_in_popup"
-					data-title="Édition de la note importante"
+					data-cb-func="view_in_popup"
+					data-title="Note importante"
 					data-src="notes-importantes"
 					class="open-popup dashicons dashicons-media-default"></span>
 	</span>

@@ -19,7 +19,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<i class="close fa fa-times"></i>
 		</div>
 			<div class="content" style="height: 60%">
-				<textarea style="width: 100%; height: 100%; resize: none;"></textarea>
+				<textarea class="hidden" style="width: 100%; height: 100%; resize: none;"></textarea>
+				<p class="hidden"></p>
 		</div>
 
 		<button class="button button-primary"
