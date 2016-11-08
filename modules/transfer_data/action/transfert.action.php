@@ -378,13 +378,13 @@ class Transfert_Action {
 					if ( ! empty( (int)$new_element_id ) ) {
 						switch ( $picture->tableElement ) {
 							case TABLE_UNITE_TRAVAIL:
-									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 									$elt = $elt[0];
 									$elt->associated_document_id['image'][] = $document_id;
 									workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 									$elt = $elt[0];
 									$elt->associated_document_id['image'][] = $document_id;
 									group_class::g()->update( $elt );
@@ -504,14 +504,14 @@ class Transfert_Action {
 					if ( ! empty( (int)$new_element_id ) ) {
 					switch ( $document->table_element ) {
 						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							workunit_class::g()->update( $elt );
 						break;
 
 						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 							$elt = $elt[0];
 							$elt->associated_document_id['document'][] = $document_id;
 							group_class::g()->update( $elt );
@@ -587,13 +587,13 @@ class Transfert_Action {
 					if ( ! empty( (int)$new_element_id ) ) {
 						switch ( $duer->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+								$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-								$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'include' => array( $new_element_id ) ) );
+								$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								group_class::g()->update( $elt );
@@ -608,7 +608,7 @@ class Transfert_Action {
 					}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
+						$doc_model = document_class::g()->get( array( 'post__in' => array( $document_id ) ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
@@ -690,13 +690,13 @@ class Transfert_Action {
 					if ( ! empty( (int)$new_element_id ) ) {
 						switch ( $sheet->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
-								$elt = workunit_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
+								$elt = workunit_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post__in' => 'all' ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-								$elt = group_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post_status' => 'all' ) );
+								$elt = group_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post__in' => 'all' ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								group_class::g()->update( $elt );
