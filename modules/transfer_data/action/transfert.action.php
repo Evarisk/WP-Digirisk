@@ -331,6 +331,8 @@ class Transfert_Action {
 		$response['transfered'] = 0;
 		$response['not_transfered'] = 0;
 
+		$current_loop_nb = 0;
+
 		/** Picture treatment */
 		$where = '';
 		$pictures_to_check = array();
@@ -356,7 +358,7 @@ class Transfert_Action {
 			WHERE PICTURE_LINK.tableElement IN ( '{$element_type}', '{$sub_element_type}' )
 				{$where}
 			ORDER BY PICTURE.id ASC
-			LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE / 2 );
+			LIMIT " . DIGI_DTRANS_NB_ELMT_PER_PAGE;
 		$pictures = $wpdb->get_results( $query );
 		if ( ! empty( $pictures ) ) {
 			foreach ( $pictures as $picture ) {
@@ -373,6 +375,7 @@ class Transfert_Action {
 				$document_id = TransferData_common_class::g()->transfer_document( $picture, $new_element_id, 'picture' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
 					$response['transfered']++;
+					$current_loop_nb++;
 
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
 					if ( ! empty( (int)$new_element_id ) ) {
@@ -419,7 +422,7 @@ class Transfert_Action {
 					}
 
 					/**	Get the element created for new data transfer	*/
-					$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
+					$doc_model = document_class::g()->get( array( 'post_in' => array( $document_id ), 'post_status' => 'all', ) );
 					$doc_model = $doc_model[0];
 
 					/**	Build the model for new data storage */
@@ -438,280 +441,283 @@ class Transfert_Action {
 		/**
 		 *	Documents treatment
 		 */
-		$where = '';
-		$documents_to_check = array();
-		if ( ! empty( $transfered_element['document']['ok'] ) && is_array( $transfered_element['document']['ok'] ) ) {
-			$documents_to_check = array_merge( $documents_to_check, $transfered_element['document']['ok'] );
-			$response['transfered'] += count( $transfered_element['document']['ok'] );
-		}
-		if ( ! empty( $transfered_element['document']['nok'] ) && is_array( $transfered_element['document']['nok'] ) ) {
-			/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
-			foreach ( $transfered_element['document']['nok'] as $document_id => $document_path ) {
-				$documents_to_check[] = $document_id;
+		if ( DIGI_DTRANS_NB_ELMT_PER_PAGE !== $current_loop_nb) {
+			$where = '';
+			$documents_to_check = array();
+			if ( ! empty( $transfered_element['document']['ok'] ) && is_array( $transfered_element['document']['ok'] ) ) {
+				$documents_to_check = array_merge( $documents_to_check, $transfered_element['document']['ok'] );
+				$response['transfered'] += count( $transfered_element['document']['ok'] );
 			}
-			$response['not_transfered'] += count( $transfered_element['document']['nok'] );
-		}
-		if ( ! empty( $documents_to_check ) ) {
-			$where .= "AND DOCUMENT.id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
-		}
-		$docs_are_done = true;
-		$query =
-			'SELECT *
-      FROM ' . TABLE_GED_DOCUMENTS . " AS DOCUMENT
-			WHERE table_element IN ( '{$element_type}', '{$sub_element_type}' )
-				{$where}
-			ORDER BY id ASC
-			LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE / 2 );
-		$documents = $wpdb->get_results( $query );
-		if ( ! empty( $documents ) ) {
-			foreach ( $documents as $document ) {
-				$query = $wpdb->prepare(
-					"SELECT P.ID
-					FROM {$wpdb->posts} AS P
-						INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
-					WHERE PMID.meta_key = %s
-						AND PMID.meta_value = %s",
-					array( '_wpdigi_element_computed_identifier', $document->table_element . '#value_sep#' . $document->id_element )
-				);
-				$new_element_id = $wpdb->get_var( $query );
-
-				$query = $wpdb->prepare(
-					'SELECT meta_key, meta_value
-          FROM ' . TABLE_GED_DOCUMENTS_META . '
-          WHERE document_id = %d', $document->id
-				);
-				$document->meta = $wpdb->get_results( $query );
-				$current_meta_index = count( $document->meta );
-				$default_meta_index = $current_meta_index + 1;
-				$document->meta[ $default_meta_index ] = new \stdClass();
-				$document->meta[ $default_meta_index ]->meta_key = 'is_default';
-				$document->meta[ $default_meta_index ]->meta_value = $document->parDefaut;
-
-				$document_id = TransferData_common_class::g()->transfer_document( $document, $new_element_id, 'document' );
-				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-					$response['transfered']++;
-
-					$term_to_associate = array();
-					$term_to_associate[] = $document->categorie;
-					if ( 'uploads/modeles/' === substr( $document->chemin, 0, 16 ) ) {
-						$term_to_associate[] = 'model';
-					} else {
-						$term_to_associate[] = 'printed';
-					}
-					wp_set_object_terms( $document_id, $term_to_associate, 'attachment_category' );
-
-					/**	Association des images aux différents éléments / Associate picture to elements	*/
-					if ( ! empty( (int)$new_element_id ) ) {
-					switch ( $document->table_element ) {
-						case TABLE_UNITE_TRAVAIL:
-							$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							workunit_class::g()->update( $elt );
-						break;
-
-						case TABLE_GROUPEMENT:
-							$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
-							$elt = $elt[0];
-							$elt->associated_document_id['document'][] = $document_id;
-							group_class::g()->update( $elt );
-						break;
-
-						case TABLE_TACHE:
-						break;
-
-						case TABLE_ACTIVITE:
-						break;
-					}
-					}
-
-					/**	Get the element created for new data transfer	*/
-					$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
-					$doc_model = $doc_model[0];
-
-					$document->unique_key = $document->id;
-					$document->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
-					$document->model_id = null;
-					document_class::g()->update( $doc_model );
-				} else {
-					$response['not_transfered']++;
+			if ( ! empty( $transfered_element['document']['nok'] ) && is_array( $transfered_element['document']['nok'] ) ) {
+				/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
+				foreach ( $transfered_element['document']['nok'] as $document_id => $document_path ) {
+					$documents_to_check[] = $document_id;
 				}
-				$response['element_nb_treated']++;
+				$response['not_transfered'] += count( $transfered_element['document']['nok'] );
 			}
-			$docs_are_done = false;
-		}
-
-		/**	Printed document treatment */
-		$where = '';
-		$documents_to_check = array();
-		if ( ! empty( $transfered_element['printed_duer']['ok'] ) && is_array( $transfered_element['printed_duer']['ok'] ) ) {
-			$documents_to_check = array_merge( $documents_to_check, $transfered_element['printed_duer']['ok'] );
-			$response['transfered'] += count( $transfered_element['printed_duer']['ok'] );
-		}
-		if ( ! empty( $transfered_element['printed_duer']['nok'] ) && is_array( $transfered_element['printed_duer']['nok'] ) ) {
-			/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
-			foreach ( $transfered_element['printed_duer']['nok'] as $document_id => $document_path ) {
-				$documents_to_check[] = $document_id;
+			if ( ! empty( $documents_to_check ) ) {
+				$where .= "AND DOCUMENT.id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
 			}
-			$response['not_transfered'] += count( $transfered_element['printed_duer']['nok'] );
-		}
-		if ( ! empty( $documents_to_check ) ) {
-			$where .= "AND id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
-		}
-		$query =
-			"SELECT *, element AS table_element, elementID as id_element, 'printed_fiche_action' as categorie, CONCAT( 'documentUnique/', element, '/', elementId, '/', nomDUER, '_V', revisionDUER, '.odt' ) as chemin, null as nom, null as idCreateur, dateGenerationDUER as dateCreation
-			FROM " . TABLE_DUER . "
-			WHERE element IN ( '{$element_type}', '{$sub_element_type}' )
-				{$where}
-			ORDER BY id ASC
-			LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE / 2 );
-		$duers = $wpdb->get_results( $query );
-		if ( ! empty( $duers ) ) {
-			foreach ( $duers as $duer ) {
-				$query = $wpdb->prepare(
-					"SELECT P.ID
+			$docs_are_done = true;
+			$query =
+				'SELECT *
+	      FROM ' . TABLE_GED_DOCUMENTS . " AS DOCUMENT
+				WHERE table_element IN ( '{$element_type}', '{$sub_element_type}' )
+					{$where}
+				ORDER BY id ASC
+				LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE - $current_loop_nb );
+			$documents = $wpdb->get_results( $query );
+			if ( ! empty( $documents ) ) {
+				foreach ( $documents as $document ) {
+					$query = $wpdb->prepare(
+						"SELECT P.ID
 						FROM {$wpdb->posts} AS P
-						INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
+							INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
 						WHERE PMID.meta_key = %s
-						AND PMID.meta_value = %s",
-					array( '_wpdigi_element_computed_identifier', $duer->element . '#value_sep#' . $duer->elementId )
-				);
-				$new_element_id = $wpdb->get_var( $query );
+							AND PMID.meta_value = %s",
+						array( '_wpdigi_element_computed_identifier', $document->table_element . '#value_sep#' . $document->id_element )
+					);
+					$new_element_id = $wpdb->get_var( $query );
 
-				$document_id = TransferData_common_class::g()->transfer_document( $duer, $new_element_id, 'printed_duer' );
-				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-					$response['transfered']++;
-					wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
+					$query = $wpdb->prepare(
+						'SELECT meta_key, meta_value
+	          FROM ' . TABLE_GED_DOCUMENTS_META . '
+	          WHERE document_id = %d', $document->id
+					);
+					$document->meta = $wpdb->get_results( $query );
+					$current_meta_index = count( $document->meta );
+					$default_meta_index = $current_meta_index + 1;
+					$document->meta[ $default_meta_index ] = new \stdClass();
+					$document->meta[ $default_meta_index ]->meta_key = 'is_default';
+					$document->meta[ $default_meta_index ]->meta_value = $document->parDefaut;
 
-					/**	Association des images aux différents éléments / Associate picture to elements	*/
-					if ( ! empty( (int)$new_element_id ) ) {
-						switch ( $duer->table_element ) {
+					$document_id = TransferData_common_class::g()->transfer_document( $document, $new_element_id, 'document' );
+					if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
+						$response['transfered']++;
+						$current_loop_nb++;
+
+						$term_to_associate = array();
+						$term_to_associate[] = $document->categorie;
+						if ( 'uploads/modeles/' === substr( $document->chemin, 0, 16 ) ) {
+							$term_to_associate[] = 'model';
+						} else {
+							$term_to_associate[] = 'printed';
+						}
+						wp_set_object_terms( $document_id, $term_to_associate, 'attachment_category' );
+
+						/**	Association des images aux différents éléments / Associate picture to elements	*/
+						if ( ! empty( (int)$new_element_id ) ) {
+						switch ( $document->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
 								$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								workunit_class::g()->update( $elt );
-								break;
+							break;
+
 							case TABLE_GROUPEMENT:
 								$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
 								$elt = $elt[0];
 								$elt->associated_document_id['document'][] = $document_id;
 								group_class::g()->update( $elt );
-								break;
+							break;
+
 							case TABLE_TACHE:
+							break;
 
-								break;
 							case TABLE_ACTIVITE:
-
-								break;
+							break;
 						}
-					}
+						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = document_class::g()->get( array( 'post__in' => array( $document_id ) ) );
+						$doc_model = document_class::g()->get( array( 'post_in' => array( $document_id ), 'post_status' => 'all', ) );
 						$doc_model = $doc_model[0];
 
-						/**	Build the model for new data storage */
-						$doc_model->unique_key = $duer->id;
-						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $duer->id;
-						$doc_model->model_id = $duer->id_model;
+						$document->unique_key = $document->id;
+						$document->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
+						$document->model_id = null;
 						document_class::g()->update( $doc_model );
-				} else {
+					} else {
 						$response['not_transfered']++;
+					}
+					$response['element_nb_treated']++;
 				}
-				$response['element_nb_treated']++;
+				$docs_are_done = false;
 			}
-			$docs_are_done = false;
 		}
 
 		/**	Printed document treatment */
-		$where = '';
-		$documents_to_check = array();
-		if ( ! empty( $transfered_element['printed_sheet']['ok'] ) && is_array( $transfered_element['printed_sheet']['ok'] ) ) {
-			$documents_to_check = array_merge( $documents_to_check, $transfered_element['printed_sheet']['ok'] );
-			$response['transfered'] += count( $transfered_element['printed_sheet']['ok'] );
-		}
-		if ( ! empty( $transfered_element['printed_sheet']['nok'] ) && is_array( $transfered_element['printed_sheet']['nok'] ) ) {
-			/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
-			foreach ( $transfered_element['printed_sheet']['nok'] as $document_id => $document_path ) {
-				$documents_to_check[] = $document_id;
+		if ( DIGI_DTRANS_NB_ELMT_PER_PAGE !== $current_loop_nb) {
+			$where = '';
+			$documents_to_check = array();
+			if ( ! empty( $transfered_element['printed_duer']['ok'] ) && is_array( $transfered_element['printed_duer']['ok'] ) ) {
+				$documents_to_check = array_merge( $documents_to_check, $transfered_element['printed_duer']['ok'] );
+				$response['transfered'] += count( $transfered_element['printed_duer']['ok'] );
 			}
-			$response['not_transfered'] += count( $transfered_element['printed_sheet']['nok'] );
-		}
-		if ( ! empty( $documents_to_check ) ) {
-			$where .= "AND id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
-		}
-		$query =
-			"SELECT *, 'printed_fiche_action' as categorie, CONCAT( 'directory_to_change_later/', table_element, '/', id_element, '/', name, '_V', revision, '.odt' ) as chemin, '' as nom, null as status, null as idCreateur, creation_date as dateCreation
-			FROM " . TABLE_FP . "
-			WHERE table_element IN ( '{$element_type}', '{$sub_element_type}' )
-				{$where}
-			ORDER BY id ASC
-			LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE / 2 );
-		$sheets = $wpdb->get_results( $query );
-		if ( ! empty( $sheets ) ) {
-			foreach ( $sheets as $sheet ) {
-				$query = $wpdb->prepare(
-					"SELECT P.ID
-						FROM {$wpdb->posts} AS P
-						INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
-						WHERE PMID.meta_key = %s
-						AND PMID.meta_value = %s",
-					array( '_wpdigi_element_computed_identifier', $sheet->table_element . '#value_sep#' . $sheet->id_element )
-				);
-				$new_element_id = $wpdb->get_var( $query );
-
-				switch ( $sheet->document_type ) {
-					case 'fiche_de_groupement':
-						$directory_to_use = 'ficheDeGroupement';
-						break;
-					case 'fiche_de_poste':
-						$directory_to_use = 'ficheDePoste';
-						break;
-					case 'listing_des_risques':
-						$directory_to_use = 'listingRisque';
-						break;
-					case 'fiche_exposition_penibilite':
-						$directory_to_use = 'ficheDeRisques';
-						break;
-					case 'user_global_export':
-						$directory_to_use = ELEMENT_IDENTIFIER_GUE;
-						break;
+			if ( ! empty( $transfered_element['printed_duer']['nok'] ) && is_array( $transfered_element['printed_duer']['nok'] ) ) {
+				/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
+				foreach ( $transfered_element['printed_duer']['nok'] as $document_id => $document_path ) {
+					$documents_to_check[] = $document_id;
 				}
-				$sheet->chemin = str_replace( 'directory_to_change_later', $directory_to_use, $sheet->chemin );
+				$response['not_transfered'] += count( $transfered_element['printed_duer']['nok'] );
+			}
+			if ( ! empty( $documents_to_check ) ) {
+				$where .= "AND id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
+			}
+			$query =
+				"SELECT *, element AS table_element, elementID as id_element, 'printed_fiche_action' as categorie, CONCAT( 'documentUnique/', element, '/', elementId, '/', nomDUER, '_V', revisionDUER, '.odt' ) as chemin, null as nom, null as idCreateur, dateGenerationDUER as dateCreation
+				FROM " . TABLE_DUER . "
+				WHERE element IN ( '{$element_type}', '{$sub_element_type}' )
+					{$where}
+				ORDER BY id ASC
+				LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE - $current_loop_nb );
+			$duers = $wpdb->get_results( $query );
+			if ( ! empty( $duers ) ) {
+				foreach ( $duers as $duer ) {
+					$query = $wpdb->prepare(
+						"SELECT P.ID
+							FROM {$wpdb->posts} AS P
+							INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
+							WHERE PMID.meta_key = %s
+							AND PMID.meta_value = %s",
+						array( '_wpdigi_element_computed_identifier', $duer->element . '#value_sep#' . $duer->elementId )
+					);
+					$new_element_id = $wpdb->get_var( $query );
 
-				$document_id = TransferData_common_class::g()->transfer_document( $sheet, $new_element_id, 'printed_sheet' );
-				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
-					$response['transfered']++;
+					$document_id = TransferData_common_class::g()->transfer_document( $duer, $new_element_id, 'printed_duer' );
+					if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
+						$response['transfered']++;
+						$current_loop_nb++;
+						wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
 
-					wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
-
-					/**	Association des images aux différents éléments / Associate picture to elements	*/
-					if ( ! empty( (int)$new_element_id ) ) {
-						switch ( $sheet->table_element ) {
-							case TABLE_UNITE_TRAVAIL:
-								$elt = workunit_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post__in' => 'all' ) );
-								$elt = $elt[0];
-								$elt->associated_document_id['document'][] = $document_id;
-								workunit_class::g()->update( $elt );
-								break;
-							case TABLE_GROUPEMENT:
-								$elt = group_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), 'post__in' => 'all' ) );
-								$elt = $elt[0];
-								$elt->associated_document_id['document'][] = $document_id;
-								group_class::g()->update( $elt );
-								break;
-							case TABLE_TACHE:
-
-								break;
-							case TABLE_ACTIVITE:
-
-								break;
+						/**	Association des images aux différents éléments / Associate picture to elements	*/
+						if ( ! empty( (int)$new_element_id ) ) {
+							switch ( $duer->table_element ) {
+								case TABLE_UNITE_TRAVAIL:
+									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['document'][] = $document_id;
+									workunit_class::g()->update( $elt );
+									break;
+								case TABLE_GROUPEMENT:
+									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'post__in' => array( $new_element_id ) ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['document'][] = $document_id;
+									group_class::g()->update( $elt );
+									break;
+								case TABLE_TACHE:
+									break;
+								case TABLE_ACTIVITE:
+									break;
+							}
 						}
+
+							/**	Get the element created for new data transfer	*/
+							$doc_model = document_class::g()->get( array( 'post__in' => array( $document_id ), 'post_status' => 'all', ) );
+							$doc_model = $doc_model[0];
+							/**	Build the model for new data storage */
+							$doc_model->unique_key = $duer->id;
+							$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DU . $duer->id;
+							$doc_model->model_id = $duer->id_model;
+							DUER_Class::g()->update( $doc_model );
+					} else {
+							$response['not_transfered']++;
 					}
+					$response['element_nb_treated']++;
+				}
+				$docs_are_done = false;
+			}
+		}
+
+		/**	Printed document treatment */
+		if ( DIGI_DTRANS_NB_ELMT_PER_PAGE !== $current_loop_nb) {
+			$where = '';
+			$documents_to_check = array();
+			if ( ! empty( $transfered_element['printed_sheet']['ok'] ) && is_array( $transfered_element['printed_sheet']['ok'] ) ) {
+				$documents_to_check = array_merge( $documents_to_check, $transfered_element['printed_sheet']['ok'] );
+				$response['transfered'] += count( $transfered_element['printed_sheet']['ok'] );
+			}
+			if ( ! empty( $transfered_element['printed_sheet']['nok'] ) && is_array( $transfered_element['printed_sheet']['nok'] ) ) {
+				/**	For not ok document, the foreach is mandatory because implode return an error due to not ok array structure	*/
+				foreach ( $transfered_element['printed_sheet']['nok'] as $document_id => $document_path ) {
+					$documents_to_check[] = $document_id;
+				}
+				$response['not_transfered'] += count( $transfered_element['printed_sheet']['nok'] );
+			}
+			if ( ! empty( $documents_to_check ) ) {
+				$where .= "AND id NOT IN ( '" . implode( "', '", $documents_to_check ) . "' )";
+			}
+			$query =
+				"SELECT *, 'printed_fiche_action' as categorie, CONCAT( 'directory_to_change_later/', table_element, '/', id_element, '/', name, '_V', revision, '.odt' ) as chemin, '' as nom, null as status, null as idCreateur, creation_date as dateCreation
+				FROM " . TABLE_FP . "
+				WHERE table_element IN ( '{$element_type}', '{$sub_element_type}' )
+					{$where}
+				ORDER BY id ASC
+				LIMIT " . ( DIGI_DTRANS_NB_ELMT_PER_PAGE - $current_loop_nb );
+			$sheets = $wpdb->get_results( $query );
+			if ( ! empty( $sheets ) ) {
+				foreach ( $sheets as $sheet ) {
+					$query = $wpdb->prepare(
+						"SELECT P.ID
+							FROM {$wpdb->posts} AS P
+							INNER JOIN {$wpdb->postmeta} AS PMID ON ( PMID.post_id = P.ID )
+							WHERE PMID.meta_key = %s
+							AND PMID.meta_value = %s",
+						array( '_wpdigi_element_computed_identifier', $sheet->table_element . '#value_sep#' . $sheet->id_element )
+					);
+					$new_element_id = $wpdb->get_var( $query );
+
+					switch ( $sheet->document_type ) {
+						case 'fiche_de_groupement':
+							$directory_to_use = 'ficheDeGroupement';
+							break;
+						case 'fiche_de_poste':
+							$directory_to_use = 'ficheDePoste';
+							break;
+						case 'listing_des_risques':
+							$directory_to_use = 'listingRisque';
+							break;
+						case 'fiche_exposition_penibilite':
+							$directory_to_use = 'ficheDeRisques';
+							break;
+						case 'user_global_export':
+							$directory_to_use = ELEMENT_IDENTIFIER_GUE;
+							break;
+					}
+					$sheet->chemin = str_replace( 'directory_to_change_later', $directory_to_use, $sheet->chemin );
+
+					$document_id = TransferData_common_class::g()->transfer_document( $sheet, $new_element_id, 'printed_sheet' );
+					if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
+						$response['transfered']++;
+						$current_loop_nb++;
+
+						wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
+
+						/**	Association des images aux différents éléments / Associate picture to elements	*/
+						if ( ! empty( (int)$new_element_id ) ) {
+							switch ( $sheet->table_element ) {
+								case TABLE_UNITE_TRAVAIL:
+									$elt = workunit_class::g()->get( array( 'post_status' => 'any', 'post_in' => array( $new_element_id ), ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['document'][] = $document_id;
+									workunit_class::g()->update( $elt );
+									break;
+								case TABLE_GROUPEMENT:
+									$elt = group_class::g()->get( array( 'post_status' => 'any', 'include' => array( $new_element_id ), ) );
+									$elt = $elt[0];
+									$elt->associated_document_id['document'][] = $document_id;
+									group_class::g()->update( $elt );
+									break;
+								case TABLE_TACHE:
+									break;
+								case TABLE_ACTIVITE:
+									break;
+							}
+						}
 
 						/**	Get the element created for new data transfer	*/
-						$doc_model = document_class::g()->get( array( 'include' => array( $document_id ) ) );
+						$doc_model = document_class::g()->get( array( 'post_in' => array( $document_id ), 'post_status' => 'all', ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
@@ -719,12 +725,13 @@ class Transfert_Action {
 						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $sheet->id;
 						$doc_model->model_id = $sheet->id_model;
 						document_class::g()->update( $doc_model );
-				} else {
-					$response['not_transfered']++;
+					} else {
+						$response['not_transfered']++;
+					}
+					$response['element_nb_treated']++;
 				}
-				$response['element_nb_treated']++;
+				$docs_are_done = false;
 			}
-			$docs_are_done = false;
 		}
 
 		/**	In case all pictures and documents have been treated	*/

@@ -257,7 +257,7 @@ class TransferData_common_class extends singleton_util {
 				/**	Finaly save pictures metadata	*/
 				wp_update_attachment_metadata( $attach_id, $attach_data );
 
-				/**	Set the post thumbnail in case it is the case	*/
+				/**	Set the post thumbnail if necessary	*/
 				if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
 					set_post_thumbnail( $new_element_id, $attach_id );
 					log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $attach_id ), array( 'object_id' => $document->id, 'document_old_def' => $document ), 0 );
