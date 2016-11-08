@@ -86,9 +86,7 @@ class tools_action {
 				// document_class::g()->update( $element );
 				$element->status = 'publish';
 				$element->type = Duer_Class::g()->get_post_type();
-				echo "<pre>"; print_r($element); echo "</pre>";
 				$element->unique_identifier = str_replace( document_class::g()->element_prefix, DUER_Class::g()->element_prefix, $element->unique_identifier );
-				echo "<pre>"; print_r($element); echo "</pre>";exit;
 				DUER_Class::g()->update( $element );
 		  }
 		}
