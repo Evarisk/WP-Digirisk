@@ -25,6 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit;
 				data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
 
+		<a class="wp-digi-delete-action wp-digi-action-delete"
+			data-action="delete_society"
+			data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
+
 		<?php
 		if ( 'digi-group' === $element->type ) :
 		?>
@@ -32,9 +36,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit;
 		<?php
 		endif;
 		?>
-		<a class="wp-digi-delete-action wp-digi-action-delete"
-			data-action="delete_society"
-			data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
 	</div>
 
 	<?php echo do_shortcode( '[digi-tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>

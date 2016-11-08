@@ -62,5 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</span>
 
 	<span class="padded"><input type="text" name="dispoDesPlans"/></span>
-	<span class="padded"><a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a></span>
+	<span class="wp-digi-action">
+		<a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a>
+	</span>
 </li>
