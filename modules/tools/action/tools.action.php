@@ -63,6 +63,10 @@ class tools_action {
 		wp_send_json_success();
 	}
 
+	/**
+	 * Passes les documents de type "DUER" en post type "duer" et met à jour l'unique identifiant.
+	 * @return void
+	 */
 	public function callback_transfert_doc() {
 		check_ajax_referer( 'callback_transfert_doc' );
 
@@ -81,7 +85,6 @@ class tools_action {
 
 		if ( !empty( $list_document ) ) {
 		  foreach ( $list_document as $element ) {
-				$element->status = 'publish';
 				$element->unique_identifier = str_replace( document_class::g()->element_prefix, DUER_Class::g()->element_prefix, $element->unique_identifier );
 				DUER_Class::g()->update( $element );
 		  }
