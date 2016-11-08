@@ -27,38 +27,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<span class="padded">
 		<textarea class="hidden textarea-content-methodology" name="methodologie"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></textarea>
-		<span class="span-content-methodology"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></span>
 		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la méthodologie"
 					data-src="methodology"
-					class="open-popup dashicons dashicons-media-default"></span>
+					class="open-popup span-content-methodology"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></span>
 	</span>
 
 	<span class="padded">
 		<textarea class="hidden textarea-content-sources" name="sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></textarea>
-		<span class="span-content-sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></span>
 		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la source"
 					data-src="sources"
-					class="open-popup dashicons dashicons-media-default"></span>
+					class="open-popup span-content-sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></span>
 		</span>
 
 	<span class="padded">
 		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
-		<span class="span-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
 		<span data-parent="wp-digi-societytree-right-container"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la note importante"
 					data-src="notes-importantes"
-					class="open-popup dashicons dashicons-media-default"></span>
+					class="open-popup span-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
 	</span>
 
 	<span class="padded"><input type="text" name="dispoDesPlans"/></span>

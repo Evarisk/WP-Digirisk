@@ -73,7 +73,8 @@ Dans ce document vous trouverez:
 - Les explications concernant les différentes méthodes d\'évaluation'
 				),
 				'remarqueImportante' => array(
-					'type'	=> 'string'
+					'type'	=> 'string',
+					'bydefault' => 'Notes importantes'
 				),
 				'dispoDesPlans' => array(
 					'type'	=> 'string'
