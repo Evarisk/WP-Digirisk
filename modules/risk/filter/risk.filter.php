@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ) );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ),1 );
 	}
 
 	public function callback_tab( $list_tab ) {

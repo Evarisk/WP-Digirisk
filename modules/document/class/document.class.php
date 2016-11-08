@@ -56,27 +56,18 @@ class document_class extends attachment_class {
 	 * @param array $element Les différents paramètres passés au shortcode lors de son utilisation / Different parameters passed through shortcode when used by user
 	 */
 	public function display_document_list( $element ) {
-		// $element_id = $element->id;
-		// $list_document_id = !empty( $element->associated_document_id ) && !empty( $element->associated_document_id[ 'document' ] ) ? $element->associated_document_id[ 'document' ] : null;
-		//
-		// if ( !empty( $list_document_id ) ) {
-		// 	$list_document_id = array_reverse( $list_document_id );
-		// }
-		//
-		// if ( 0 < $this->limit_document_per_page ) {
-		// 	$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
-		// 	$number_page = ceil( count ( $list_document_id ) / $this->limit_document_per_page );
-		// 	if ( !empty( $list_document_id ) ) {
-		// 		$list_document_id = array_slice( $list_document_id, ($current_page - 1) * $this->limit_document_per_page, $this->limit_document_per_page );
-		// 	}
-		// }
-		//
-		// $list_document = array();
-		// if ( !empty( $list_document_id ) ) {
-			$list_document = document_class::g()->get( array( 'post_parent' => $element->id ), array( 'category' ) );
-		// }
+		$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
+	
+		$list_document = document_class::g()->get( array(
+			// 'post__in'				=> $list_document_id,
+			'post_parent'			=> $element->id,
+			'post_status'			=> array( 'publish', 'inherit', ),
+			// 'posts_per_page'	=> $this->limit_document_per_page,
+			// 'offset'					=> ( $current_page - 1 ) * $this->limit_document_per_page,
+		), array( 'category' ) );
+		$number_page = 0;//ceil( count ( $list_document ) / $this->limit_document_per_page );
 
-		view_util::exec( 'document', 'printed-list', array( 'list_document' => $list_document ) );
+		view_util::exec( 'document', 'printed-list', array( 'element_id' => $element->id, 'list_document' => $list_document, 'number_page' => $number_page, 'current_page' => $current_page, ) );
 	}
 
 	/**

@@ -37,8 +37,9 @@ class post_class extends singleton_util {
 			$array_posts[] = array();
 		}
 		else {
-			$array_posts = new \WP_Query( $args );
-			$array_posts = $array_posts->posts;
+			$query_posts = new \WP_Query( $args );
+			$array_posts = $query_posts->posts;
+			unset( $query_posts->posts );
 		}
 
 		foreach ( $array_posts as $key => $post ) {

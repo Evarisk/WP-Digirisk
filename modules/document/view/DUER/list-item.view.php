@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <li class='wp-digi-list-item wp-digi-risk-item'>
 	<span><?php echo $element->unique_identifier; ?></span>
-	<span class="padded"><?php echo esc_html( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?></span>
-	<span class="padded"><?php echo esc_html( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?></span>
+	<span class="padded"><?php echo esc_html( mysql2date( 'd/m/Y', $element->date, true ) ); ?></span>
+	<span class="padded"><?php echo esc_html( mysql2date( 'd/m/Y', $element->date, true ) ); ?></span>
 	<span class="padded"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></span>
 
 	<span class="padded">
