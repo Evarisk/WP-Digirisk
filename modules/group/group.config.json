@@ -5,15 +5,10 @@
 	"description": "Le module gérant les groupements",
 	"path": "modules/group/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"model": {
-		},
-		"filter": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"shortcode": {},
+		"model": {},
+		"filter": {},
+		"class": {},
+		"action": {}
 	}
 }

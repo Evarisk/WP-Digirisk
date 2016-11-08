@@ -5,16 +5,11 @@
 	"description": "Le module gérant les EPI de Digirisk",
 	"path": "modules/epi/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"model": {
-		},
-		"filter": {
-		},
+		"shortcode": {},
+		"model": {},
+		"filter": {},
 		"helper": {},
-		"class": {
-		},
-		"action": {
-		}
+		"class": {},
+		"action": {}
 	}
 }
