@@ -113,6 +113,7 @@ class post_class extends singleton_util {
 			$current_data = $current_data[0];
 			$obj_merged = (object) array_merge((array) $current_data, (array) $data);
 			$data = new $this->model_name( (array) $obj_merged, array( false ) );
+			$data->type = $this->post_type;
 
 			if ( !empty( $this->before_put_function ) ) {
 				foreach ( $this->before_put_function as $put_function ) {
