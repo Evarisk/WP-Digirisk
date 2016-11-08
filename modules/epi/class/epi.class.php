@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class epi_class extends post_class {
+class EPI_Class extends post_class {
 
 	protected $model_name   = '\digi\epi_model';
 	protected $post_type    = 'digi-epi';
@@ -53,3 +53,4 @@ class epi_class extends post_class {
 		view_util::exec( 'epi', 'list', array( 'society_id' => $society_id, 'epi_list' => $epi_list ) );
 	}
 }
+EPI_Class::g();

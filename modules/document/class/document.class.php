@@ -403,7 +403,7 @@ class document_class extends attachment_class {
 			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
 			'model_id' 							=> $model_to_use,
 			'document_meta' 				=> $document_meta,
-			'status'								=> 'publish',
+			'status'								=> 'inherit',
 			'version'								=> $document_revision,
   	);
 

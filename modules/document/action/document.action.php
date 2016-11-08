@@ -20,43 +20,10 @@ class document_action {
 	 * Le constructeur appelle l'action personnalisé wp_ajax_wpdigi_delete_sheet
 	 */
 	function __construct() {
-		/**	Define taxonomy for attachment categories	*/
-		add_action( 'init', array( $this, 'custom_type_creation' ), 5  );
-
     add_action( 'wp_ajax_wpdigi_delete_sheet', array( $this, 'ajax_delete_sheet' ) );
     add_action( 'wp_ajax_wpdigi_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
 		add_action( 'wp_ajax_paginate_document', array( $this, 'ajax_paginate_document' ) );
   }
-
-	/**
-	 * Création du type d'élément interne a wordpress pour gérer les catégories de documents / Create wordpress element type for managing attachment categories
-	 */
-	public function custom_type_creation() {
-		$labels = array(
-			'name'              => 'Categories',
-			'singular_name'     => 'Category',
-			'search_items'      => 'Search Categories',
-			'all_items'         => 'All Categories',
-			'parent_item'       => 'Parent Category',
-			'parent_item_colon' => 'Parent Category:',
-			'edit_item'         => 'Edit Category',
-			'update_item'       => 'Update Category',
-			'add_new_item'      => 'Add New Category',
-			'new_item_name'     => 'New Category Name',
-			'menu_name'         => 'Category',
-		);
-
-		$args = array(
-			'labels' => $labels,
-			'hierarchical' => true,
-			'query_var' => 'true',
-			'rewrite' => 'true',
-			'show_admin_column' => 'true',
-		);
-
-		register_taxonomy( document_class::g()->attached_taxonomy_type, document_class::g()->get_post_type(), $args );
-		register_taxonomy( document_class::g()->attached_taxonomy_type, attachment_class::g()->get_post_type(), $args );
-	}
 
 	/**
 	* Supprimes un document dans une societé
