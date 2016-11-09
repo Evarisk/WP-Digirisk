@@ -1,15 +1,85 @@
-<?php namespace digi;
+<?php
+/**
+ * Gestion des posts de WordPress par WPEO_Model
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class post_class extends singleton_util {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Gestion des posts de WordPress par WPEO_Model
+ */
+class Post_Class extends singleton_util {
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name = '\digi\post_model';
-	protected $post_type = 'post';
-	protected $meta_key = '_wpeo_post';
-	protected $version = '0.1.0.0';
-	protected $identifier_helper = 'post';
 
-	protected function construct() {}
+	/**
+	 * Le type du post
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'post';
+
+	/**
+	 * La clé principale pour post_meta
+	 *
+	 * @var string
+	 */
+	protected $meta_key = '_wpeo_post';
+
+	/**
+	 * La version du modèle
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1.0.0';
+
+	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'posts';
+
+	/**
+	 * Le slug pour le register post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_slug = 'post';
+
+	/**
+	 * Appelle l'action "init" de WordPress
+	 *
+	 * @return void
+	 */
+	protected function construct() {
+		add_action( 'init', array( $this, 'init_post_type' ) );
+	}
+
+	/**
+	 * Initialise le post type selon $name et $name_singular.
+	 *
+	 * @see register_post_type
+	 * @return void
+	 */
+	public function init_post_type() {
+		$args = array(
+			'public' => true,
+			'label'  => $this->post_type_name,
+		);
+
+		register_post_type( $this->post_type_slug, $args );
+	}
 
 	public function get_schema() {
 		$model = new $this->model_name( array(), array() );
