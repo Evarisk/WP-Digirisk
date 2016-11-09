@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	</span>
 
 	<?php if ( 'application/vnd.oasis.opendocument.text' == $element->mime_type ) : ?>
-		<span class="wp-digi-action"><a class="wp-digi-action wp-digi-action-regenerate dashicons dashicons-image-rotate" data-model="<?php echo $element->category[0]->slug; ?>" data-nonce="<?php echo wp_create_nonce( 'wpdigi_regenerate_document' ); ?>" title="<?php _e( 'Regenerate the document', 'digirisk' ); ?>" data-parent-id="<?php echo $element->parent_id; ?>" data-id="<?php echo $element->id; ?>" href="#"></a></span>
+		<!-- <span class="wp-digi-action"><a class="wp-digi-action wp-digi-action-regenerate dashicons dashicons-image-rotate" data-model="<?php echo $element->category[0]->slug; ?>" data-nonce="<?php echo wp_create_nonce( 'wpdigi_regenerate_document' ); ?>" title="<?php _e( 'Regenerate the document', 'digirisk' ); ?>" data-parent-id="<?php echo $element->parent_id; ?>" data-id="<?php echo $element->id; ?>" href="#"></a></span> -->
 	<?php else: ?>
 		<span class="wp-digi-action"><a class="wp-digi-action dashicons" href="#"></a></span>
 	<?php endif; ?>

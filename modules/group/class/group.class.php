@@ -15,6 +15,13 @@ class group_class extends post_class {
 	protected $version = '0.1';
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Groupements';
+
+	/**
 	 * Constructeur
 	 */
 	protected function construct() {
