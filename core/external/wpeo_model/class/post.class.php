@@ -51,11 +51,12 @@ class Post_Class extends singleton_util {
 	protected $post_type_name = 'posts';
 
 	/**
-	 * Le slug pour le register post type
+	 * Utiles pour récupérer la clé unique
 	 *
+	 * @todo Rien à faire ici
 	 * @var string
 	 */
-	protected $post_type_slug = 'post';
+	protected $identifier_helper = 'post';
 
 	/**
 	 * Appelle l'action "init" de WordPress
@@ -78,7 +79,7 @@ class Post_Class extends singleton_util {
 			'label'  => $this->post_type_name,
 		);
 
-		register_post_type( $this->post_type_slug, $args );
+		register_post_type( $this->post_type, $args );
 	}
 
 	public function get_schema() {
