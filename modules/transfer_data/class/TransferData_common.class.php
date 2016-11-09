@@ -363,6 +363,7 @@ class TransferData_common_class extends singleton_util {
 				if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 					if ( 'yes' == $picture->isMainPicture ) {
 						$associated_document_list[ '_thumbnail' ] = $document_id;
+						log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Association de l\'image %2$d à l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
 					} elseif ( in_array( $element_type, array( TABLE_RISQUE ) ) ) {
 						/**	Set the post thumbnail in case it is the case	*/
 						set_post_thumbnail( $new_element_id, $document_id );
