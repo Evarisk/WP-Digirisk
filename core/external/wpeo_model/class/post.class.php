@@ -75,7 +75,7 @@ class Post_Class extends singleton_util {
 	 */
 	public function init_post_type() {
 		$args = array(
-			'public' => true,
+			'public' => config_util::$init['digirisk']->debug ? true : false,
 			'label'  => $this->post_type_name,
 		);
 
