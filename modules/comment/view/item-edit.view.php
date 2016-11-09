@@ -5,10 +5,11 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 <li>
 	<?php
-	$userdata = get_userdata( get_current_user_id() );
+	$author_id = !empty( $comment->author_id ) ? $comment->author_id : get_current_user_id();
+	$userdata = get_userdata( $author_id );
 	echo !empty( $userdata->display_name ) ? $userdata->display_name : '';
 	?>
-	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][author_id]" value="<?php echo $comment->author_id; ?>" />
+	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][author_id]" value="<?php echo $author_id; ?>" />
 	<input type="hidden" name="list_comment[<?php echo $comment->id; ?>][id]" value="<?php echo $comment->id; ?>" />
 	<span class="wp-digi-risk-date padded">
 		<input type="text" class="eva-date" name="list_comment[<?php echo $comment->id; ?>][date]" value="<?php echo $comment->date; ?>" />
