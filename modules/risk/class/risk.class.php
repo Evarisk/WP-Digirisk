@@ -31,9 +31,17 @@ class risk_class extends post_class {
 	protected $limit_risk = -1;
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Risques';
+
+	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {
+		parent::construct();
 		/**	Définition d'un shortcode permettant d'afficher les risques associés à un élément / Define a shortcode allowing to display risk associated to a given element 	*/
 		add_shortcode( 'risk', array( $this, 'risk_shortcode' ) );
 
@@ -75,3 +83,5 @@ class risk_class extends post_class {
 		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
 	}
 }
+
+risk_class::g();

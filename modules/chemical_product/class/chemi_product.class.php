@@ -17,9 +17,18 @@ class chemi_product_class extends post_class {
 	protected $limit_chemical_product = -1;
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Produits chimique';
+
+	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
-	protected function construct() {}
+	protected function construct() {
+		parent::construct();
+	}
 
 	/**
 	* Affiche la fenêtre principale
