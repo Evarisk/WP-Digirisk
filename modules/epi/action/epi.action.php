@@ -20,11 +20,27 @@ class EPI_Action {
 	 * Le constructeur
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+
 		add_action( 'wp_ajax_save_epi', array( $this, 'ajax_save_epi' ) );
 		add_action( 'wp_ajax_delete_epi', array( $this, 'ajax_delete_epi' ) );
 		add_action( 'wp_ajax_load_epi', array( $this, 'ajax_load_epi' ) );
 	}
 
+	/**
+	 * Ajoutes le sous menu dans Digirisk
+	 *
+	 * @return void
+	 */
+	public function callback_admin_menu() {
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'EPIS', 'digirisk' ), __( 'EPIS', 'digirisk' ), 'manage_options', 'digirisk-handle-epi', array( epi_class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 10 );
+	}
+
+	/**
+	 * Sauvegardes un EPI
+	 *
+	 * @return void
+	 */
 	public function ajax_save_epi() {
 		// check_ajax_referer( 'edit_epi' );
 
@@ -37,12 +53,10 @@ class EPI_Action {
 	}
 
 	/**
-	* Supprimes un epi
-	*
-	* int $_POST['epi_id'] L'ID du epi
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Supprimes un EPI
+	 *
+	 * @return void
+	 */
 	public function ajax_delete_epi() {
 		if ( 0 === (int)$_POST['id'] )
 			wp_send_json_error( array( 'error' => __LINE__, ) );
@@ -65,12 +79,10 @@ class EPI_Action {
 	}
 
 	/**
-	* Charges un epi
-	*
-	* int $_POST['id'] L'ID du epi
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Charges les données d'un EPI
+	 *
+	 * @return void
+	 */
 	public function ajax_load_epi() {
 		$id = !empty( $_POST['id'] ) ? (int)$_POST['id'] : 0;
 

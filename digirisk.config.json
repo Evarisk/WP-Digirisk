@@ -6,6 +6,7 @@
 	"insert_scripts_pages": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
+		"digirisk-handle-epi",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
