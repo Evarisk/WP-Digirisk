@@ -33,7 +33,7 @@ class EPI_Action {
 	 * @return void
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'EPIS', 'digirisk' ), __( 'EPIS', 'digirisk' ), 'manage_options', 'digirisk-handle-epi', array( epi_class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 10 );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'EPI', 'digirisk' ), __( 'EPI', 'digirisk' ), 'manage_options', 'digirisk-handle-epi', array( epi_class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 10 );
 	}
 
 	/**

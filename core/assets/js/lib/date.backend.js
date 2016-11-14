@@ -1,9 +1,8 @@
 window.digirisk.date = {};
 
 window.digirisk.date.init = function() {
-	jQuery( '.eva-date' ).datepicker( { dateFormat: 'dd/mm/yy' } );
-};
-
-window.digirisk.date.tab_changed = function() {
-  window.digirisk.date.init();
+	jQuery( document ).on( 'click', '.eva-date', function(e) {
+		jQuery( this ).datepicker( { dateFormat: 'dd/mm/yy' } );
+		jQuery( this ).datepicker( "show" );
+	} );
 };
