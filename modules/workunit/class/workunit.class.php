@@ -12,7 +12,15 @@ class workunit_class extends post_class {
 	protected $base = 'digirisk/workunit';
 	protected $version = '0.1';
 
+	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Unitée de travail';
+
 	protected function construct() {
+		parent::construct();
 		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for societies management	*/
 
 		/**	Create shortcodes for elements displaying	*/
@@ -59,3 +67,5 @@ class workunit_class extends post_class {
 		view_util::exec( 'workunit', 'list', array( 'editable_identity' => false, 'workunit_selected_id' => $workunit_selected_id, 'groupment_id' => $groupment_id, 'list_workunit' => $list_workunit ) );
 	}
 }
+
+workunit_class::g();

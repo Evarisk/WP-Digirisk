@@ -14,8 +14,18 @@ class fiche_de_poste_class extends document_class {
 	protected $before_put_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
+	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Fiche de poste';
+
 	protected function construct() {
+		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 }
+
+fiche_de_poste_class::g();

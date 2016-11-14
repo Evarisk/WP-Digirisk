@@ -16,9 +16,17 @@ class legal_display_class extends post_class {
 	public $element_prefix = 'LD';
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Affichages légal';
+
+	/**
 	* Le constructeur
 	*/
   protected function construct() {
+		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 

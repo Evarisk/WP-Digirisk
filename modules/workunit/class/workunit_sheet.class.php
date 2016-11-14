@@ -17,7 +17,7 @@ class workunit_sheet_class extends singleton_util {
 			'link'		=> null,
 		);
 
-		$workunit = workunit_class::g()->get( array( 'id' => $workunit_id ), array( 'danger_category', 'danger' ) );
+		$workunit = workunit_class::g()->get( array( 'id' => $workunit_id ), array( 'recommendation', 'danger_category', 'danger' ) );
 		$workunit = $workunit[0];
 
 		/**	Définition des détails de l'unité de travail a imprimer / Define workunit details for print	*/
@@ -79,58 +79,62 @@ class workunit_sheet_class extends singleton_util {
 		/**	Ajout des préconisations affectées a l'unité de travail / Add recommendation affected to workunit	*/
 		$affected_recommendation = array( );
 		$workunit_sheet_details[ 'affectedRecommandation' ] = array( 'type' => 'segment', 'value' => array(), );
-		if ( !empty( $workunit->associated_recommendation ) ) {
-			foreach ( $workunit->associated_recommendation as $recommendation_id => $recommendation_detail ) {
-				foreach ( $recommendation_detail as $recommendation ) {
-					if ( 'valid' == $recommendation[ 'status' ] ) {
-						$the_recommendation = recommendation_class::g()->get( array( 'id' => $recommendation_id ) );
-						$the_recommendation = $the_recommendation[0];
-
-						if ( !empty( $the_recommendation ) && !empty( $the_recommendation->parent_id ) ) {
-							if ( empty( $affected_recommendation ) || empty( $affected_recommendation[ $the_recommendation->id ] ) ) {
-								$the_recommendation_category = recommendation_category_term_class::g()->get( array( 'id' => $the_recommendation->parent_id ) );
-								$the_recommendation_category = $the_recommendation_category[0];
-
-								$picture_definition = wp_get_attachment_image_src( $the_recommendation_category->thumbnail_id, 'digirisk-element-thumbnail' );
-								$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ) );
-								$picture = '';
-								if ( is_file( $picture_final_path ) ) {
-									$picture = array(
-										'type'		=> 'picture',
-										'value'		=> $picture_final_path,
-										'option'	=> array(
-											'size'	=> 2,
-										),
-									);
-								}
-
-								$affected_recommendation[ $the_recommendation->id ] = array(
-									'recommandationCategoryIcon' => $picture,
-									'recommandationCategoryName' => $the_recommendation_category->name,
-								);
-							}
-
-							$picture_definition = wp_get_attachment_image_src( $the_recommendation->thumbnail_id, 'digirisk-element-thumbnail' );
-							$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
-							$picture = '';
-							if ( is_file( $picture_final_path ) ) {
-								$picture = array(
-									'type'		=> 'picture',
-									'value'		=> $picture_final_path,
-									'option'	=> array(
-										'size'	=> 2,
-									),
-								);
-							}
-							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'type' ] = 'sub_segment';
-							$affected_recommendation[ $the_recommendation->id ][ 'recommandations' ][ 'value' ][] = array(
-								'identifiantRecommandation'	=> $recommendation[ 'unique_identifier' ],
-								'recommandationIcon'		=> $picture,
-								'recommandationName'		=> $the_recommendation->name,
-								'recommandationComment'		=> $recommendation[ 'comment' ],
-							);
-						}
+		if ( !empty( $workunit->recommendation ) ) {
+			foreach ( $workunit->recommendation as $recommendation ) {
+				if ( 'publish' == $recommendation->status ) {
+					$recommendation_category_term = recommendation_category_term_class::g()->get( array( 'id' => $recommendation->taxonomy['digi-recommendation-category'][0] ) );
+					$recommendation_category_term = $recommendation_category_term[0];
+					$picture_definition = wp_get_attachment_image_src( $recommendation->taxonomy['digi-recommendation-category'][0], 'digirisk-element-thumbnail' );
+					$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] ) );
+					$picture = '';
+					if ( is_file( $picture_final_path ) ) {
+						$picture = array(
+							'type'		=> 'picture',
+							'value'		=> $picture_final_path,
+							'option'	=> array(
+								'size'	=> 2,
+							),
+						);
 					}
+
+					$affected_recommendation[ $recommendation->id ] = array(
+						'recommandationCategoryIcon' => $picture,
+						'recommandationCategoryName' => $recommendation_category_term->name,
+					);
+
+					$recommendation_term = recommendation_term_class::g()->get( array( 'id' => $recommendation->taxonomy['digi-recommendation'][0] ) );
+					$recommendation_term = $recommendation_term[0];
+					$picture_definition = wp_get_attachment_image_src( $recommendation->taxonomy['digi-recommendation'][0], 'digirisk-element-thumbnail' );
+					$picture_final_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[ 0 ] );
+					$picture = '';
+					if ( is_file( $picture_final_path ) ) {
+						$picture = array(
+							'type'		=> 'picture',
+							'value'		=> $picture_final_path,
+							'option'	=> array(
+								'size'	=> 2,
+							),
+						);
+					}
+
+					$comments = recommendation_comment_class::g()->get( array( 'post_id' => $recommendation->id ) );
+					$comment_content = '';
+					if ( !empty( $comments ) ) {
+					  foreach ( $comments as $element ) {
+							$userdata = get_userdata( $element->author_id );
+
+							$comment_content .= $userdata->display_name . ' ' . $element->date . ' : ' . $element->content . '
+';
+					  }
+					}
+
+					$affected_recommendation[ $recommendation->id ][ 'recommandations' ][ 'type' ] = 'sub_segment';
+					$affected_recommendation[ $recommendation->id ][ 'recommandations' ][ 'value' ][] = array(
+						'identifiantRecommandation'	=> $recommendation->unique_identifier,
+						'recommandationIcon'		=> $picture,
+						'recommandationName'		=> $recommendation_term->name,
+						'recommandationComment'		=> $comment_content,
+					);
 				}
 			}
 		}

@@ -1,11 +1,12 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.1.8.1",
+	"version": "6.1.9.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
+		"digirisk-handle-epi",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -62,5 +63,5 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"debug": true
+	"debug": false
 }

@@ -20,7 +20,7 @@ class risk_page_action {
 	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Tous les risques', 'digirisk' ), __( 'Tous les risques', 'digirisk' ), 'manage_options', 'digirisk-handle-risk', array( risk_page_class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4);
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_options', 'digirisk-handle-risk', array( risk_page_class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4);
 	}
 
 	/**

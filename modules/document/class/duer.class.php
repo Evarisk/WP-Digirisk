@@ -90,11 +90,19 @@ class DUER_Class extends post_class {
 	protected $limit_document_per_page = 50;
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'DUERS';
+
+	/**
 	 * Ajout du filtre pour la Rest API
 	 *
 	 * @return void
 	 */
 	protected function construct() {
+		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 

@@ -15,9 +15,17 @@ class group_class extends post_class {
 	protected $version = '0.1';
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Groupements';
+
+	/**
 	 * Constructeur
 	 */
 	protected function construct() {
+		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
@@ -206,3 +214,5 @@ class group_class extends post_class {
 		return $element_duer_details;
 	}
 }
+
+group_class::g();

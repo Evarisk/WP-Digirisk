@@ -19,9 +19,17 @@ class EPI_Class extends post_class {
 	protected $limit_epi = -1;
 
 	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Équipements de protection individuelle';
+
+	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {
+		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
