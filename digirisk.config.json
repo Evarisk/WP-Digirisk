@@ -63,5 +63,5 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"debug": true
+	"debug": false
 }
