@@ -370,7 +370,7 @@ class Transfert_Action {
 						AND PMID.meta_value = %s",
 					array( '_wpdigi_element_computed_identifier', $picture->tableElement . '#value_sep#' . $picture->idElement )
 				);
-				$new_element_id = $wpdb->get_var( $query );
+				(int)$new_element_id = $wpdb->get_var( $query );
 
 				$document_id = TransferData_common_class::g()->transfer_document( $picture, $new_element_id, 'picture' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
@@ -378,7 +378,7 @@ class Transfert_Action {
 					$current_loop_nb++;
 
 					/**	Association des images aux différents éléments / Associate picture to elements	*/
-					if ( ! empty( (int)$new_element_id ) ) {
+					if ( ! empty( $new_element_id ) ) {
 						switch ( $picture->tableElement ) {
 							case TABLE_UNITE_TRAVAIL:
 									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
@@ -506,7 +506,7 @@ class Transfert_Action {
 						wp_set_object_terms( $document_id, $term_to_associate, 'attachment_category' );
 
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( (int)$new_element_id ) ) {
+						if ( ! empty( $new_element_id ) ) {
 						switch ( $document->table_element ) {
 							case TABLE_UNITE_TRAVAIL:
 								// $elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
@@ -592,7 +592,7 @@ class Transfert_Action {
 						wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
 
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( (int)$new_element_id ) ) {
+						if ( ! empty( $new_element_id ) ) {
 							switch ( $duer->table_element ) {
 								case TABLE_UNITE_TRAVAIL:
 									// $elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
@@ -695,7 +695,7 @@ class Transfert_Action {
 						wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
 
 						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( (int)$new_element_id ) ) {
+						if ( ! empty( $new_element_id ) ) {
 							switch ( $sheet->table_element ) {
 								case TABLE_UNITE_TRAVAIL:
 									// $elt = workunit_class::g()->get( array( 'post_status' => 'any', 'p' => $new_element_id, ) );
