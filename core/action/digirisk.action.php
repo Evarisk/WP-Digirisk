@@ -45,6 +45,8 @@ class Digirisk_Action {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'jquery-form' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
 		wp_enqueue_media();
 		add_thickbox();
@@ -58,6 +60,9 @@ class Digirisk_Action {
 	public function callback_admin_enqueue_scripts() {
 		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
+
+		wp_register_style( 'digi-jquery-ui', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery-ui-1.12.1.custom/jquery-ui.min.css', array(), config_util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-jquery-ui' );
 
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
 	}

@@ -10,7 +10,8 @@
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
-		"digi-setup"
+		"digi-setup",
+		"digirisk-handle-sorter"
 	],
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",
@@ -22,7 +23,6 @@
 		"modules/accident/accident.config.json",
 		"modules/society/society.config.json",
 
-
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",
 
@@ -33,6 +33,7 @@
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
 		"modules/export_import/export_import.config.json",
+		"modules/page_sorter/page_sorter.config.json",
 
 		"modules/file_management/file_management.config.json",
 
