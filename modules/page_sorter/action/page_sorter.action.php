@@ -21,7 +21,7 @@ class Page_Sorter_Action {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 15 );
-		add_action( 'wp_ajax_sorter_parent', array( $this, 'callback_sorter_parent' ) );
+		add_action( 'admin_post_sorter_parent', array( $this, 'callback_sorter_parent' ) );
 	}
 
 	/**
@@ -37,16 +37,20 @@ class Page_Sorter_Action {
 	 * @return void
 	 */
 	public function callback_sorter_parent() {
-		check_ajax_referer( 'callback_sorter_parent' );
+		check_admin_referer( 'callback_sorter_parent' );
 
-		$parent_id 	= ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-		$id 				= ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		if ( ! empty( $_POST['menu_item_db_id'] ) ) {
+			foreach ( $_POST['menu_item_db_id'] as $element_id ) {
+				$element_id = (int) $element_id;
+				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
-		$society = society_class::g()->show_by_type( $id );
-		$society->parent_id = $parent_id;
-		society_class::g()->update_by_type( $society );
+				$society = society_class::g()->show_by_type( $element_id );
+				$society->parent_id = $parent_id;
+				society_class::g()->update_by_type( $society );
+			}
+		}
 
-		wp_send_json_success();
+		wp_safe_redirect( wp_get_referer() );
 	}
 }
 

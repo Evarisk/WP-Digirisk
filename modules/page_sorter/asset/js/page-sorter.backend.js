@@ -62,6 +62,21 @@ jQuery.fn.extend({
 			jQuery(this).removeClass('menu-item-depth-'+ depth )
 				.addClass('menu-item-depth-'+ (depth + change) );
 		});
+	},
+	updateParentMenuItemDBId : function() {
+		return this.each(function(){
+			var item = jQuery(this),
+				input = item.find( '.menu-item-data-parent-id' ),
+				depth = parseInt( item.menuItemDepth(), 10 ),
+				parentDepth = depth - 1,
+				parent = item.prevAll( '.menu-item-depth-' + parentDepth ).first();
+
+			if ( 0 === depth ) { // Item is on the top level, has no parent
+				input.val(0);
+			} else { // Find the parent item, and retrieve its object id.
+				input.val( parent.find( '.menu-item-data-db-id' ).val() );
+			}
+		});
 	}
 });
 
@@ -124,10 +139,8 @@ window.digirisk.page_sorter.init = function() {
 			var parent, children, height, width, tempHolder;
 
 			window.digirisk.page_sorter.transport = ui.item.children('.menu-item-transport');
-			//
 			window.digirisk.page_sorter.originalDepth = ui.item.menuItemDepth();
 			window.digirisk.page_sorter.api.updateCurrentDepth(ui, window.digirisk.page_sorter.originalDepth);
-			//
 			parent = ( ui.item.next()[0] == ui.placeholder[0] ) ? ui.item.next() : ui.item;
 			children = parent.childMenuItems();
 			window.digirisk.page_sorter.transport.append( children );
@@ -209,7 +222,7 @@ window.digirisk.page_sorter.init = function() {
 			// Register a change
 			// api.registerChange();
 			// Update the item data.
-			// ui.item.updateParentMenuItemDBId();
+			ui.item.updateParentMenuItemDBId();
 
 			// address sortable's incorrectly-calculated top in opera
 			ui.item[0].style.top = 0;
@@ -217,7 +230,6 @@ window.digirisk.page_sorter.init = function() {
 
 	}	);
 };
-
 
 
 

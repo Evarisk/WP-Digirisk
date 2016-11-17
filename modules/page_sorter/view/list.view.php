@@ -22,6 +22,9 @@ if ( ! empty( $groupments ) ) :
 				</div>
 			</div>
 
+			<input type="hidden" class="menu-item-data-parent-id" name="menu_item_parent_id[<?php echo esc_attr( $groupment->id ); ?>]" value="<?php echo esc_attr( $groupment->parent_id ); ?>" />
+			<input type="hidden" class="menu-item-data-db-id" name="menu_item_db_id[<?php echo esc_attr( $groupment->id ); ?>]" value="<?php echo esc_attr( $groupment->id ); ?>" />
+
 			<ul class="menu-item-transport"></ul>
 		</li>
 
