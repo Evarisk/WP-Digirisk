@@ -83,12 +83,12 @@ jQuery.fn.extend({
 function updateSharedVars(ui) {
 	var depth;
 
-	window.digirisk.page_sorter.prev = ui.placeholder.prev( '.menu-item' );
-	window.digirisk.page_sorter.next = ui.placeholder.next( '.menu-item' );
+	window.digirisk.page_sorter.prev = ui.placeholder.prev( '.menu-item:not(.no-drop)' );
+	window.digirisk.page_sorter.next = ui.placeholder.next( '.menu-item:not(.no-drop)' );
 
 	// Make sure we don't select the moving item.
-	if( window.digirisk.page_sorter.prev[0] == ui.item[0] ) window.digirisk.page_sorter.prev = window.digirisk.page_sorter.prev.prev( '.menu-item' );
-	if( window.digirisk.page_sorter.next[0] == ui.item[0] ) window.digirisk.page_sorter.next = window.digirisk.page_sorter.next.next( '.menu-item' );
+	if( window.digirisk.page_sorter.prev[0] == ui.item[0] ) window.digirisk.page_sorter.prev = window.digirisk.page_sorter.prev.prev( '.menu-item:not(.no-drop)' );
+	if( window.digirisk.page_sorter.next[0] == ui.item[0] ) window.digirisk.page_sorter.next = window.digirisk.page_sorter.next.next( '.menu-item:not(.no-drop)' );
 
 	window.digirisk.page_sorter.prevBottom = (window.digirisk.page_sorter.prev.length) ? window.digirisk.page_sorter.prev.offset().top + window.digirisk.page_sorter.prev.height() : 0;
 	window.digirisk.page_sorter.nextThreshold = (window.digirisk.page_sorter.next.length) ? window.digirisk.page_sorter.next.offset().top + window.digirisk.page_sorter.next.height() / 3 : 0;
@@ -191,7 +191,7 @@ window.digirisk.page_sorter.init = function() {
 			// Check and correct if depth is not within range.
 			// Also, if the dragged element is dragged upwards over
 			// an item, shift the placeholder to a child position.
-			if ( depth > window.digirisk.page_sorter.maxDepth || offset.top < ( window.digirisk.page_sorter.prevBottom ) ) {
+			if ( depth > window.digirisk.page_sorter.maxDepth || offset.top < ( window.digirisk.page_sorter.prevBottom - 50 ) ) {
 				depth = window.digirisk.page_sorter.maxDepth;
 			} else if ( depth < window.digirisk.page_sorter.minDepth ) {
 				depth = window.digirisk.page_sorter.minDepth.minDepth;
@@ -230,41 +230,3 @@ window.digirisk.page_sorter.init = function() {
 
 	}	);
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// window.digirisk.page_sorter.send_request = function( event, ui ) {
-// 	if ( this === ui.item.parent()[0] ) {
-// 		var parent_id = jQuery( ui )[0].item.closest( 'ul.child' ).data( 'id' );
-// 		var item_id = jQuery( ui )[0].item.data( 'id' );
-//
-// 		var data = {
-// 			action: "sorter_parent",
-// 			_wpnonce: jQuery( '.sorter-page #_wpnonce' ).val(),
-// 			parent_id: parent_id,
-// 			id: item_id
-// 		};
-//
-// 		// Envoie de la requête
-// 		jQuery.post( ajaxurl, data, function() {
-// 			jQuery( '.sorter-page .updated' ).show();
-// 			setTimeout( function() {
-// 				jQuery( '.sorter-page .updated' ).fadeOut();
-// 			}, 2000 );
-// 		} );
-// 	}
-// };

@@ -33,10 +33,12 @@ class Page_Sorter_Class extends Singleton_Util {
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft' ),
 				'order' => 'ASC',
-			), array( 'list_group' )
+			), array( 'list_group', 'list_workunit' )
 		);
 
-		view_util::exec( 'page_sorter', 'main', array( 'groupments' => $groupments ) );
+		$display_notice = get_transient( 'display_notice' );
+
+		view_util::exec( 'page_sorter', 'main', array( 'display_notice' => $display_notice, 'groupments' => $groupments ) );
 	}
 }
 

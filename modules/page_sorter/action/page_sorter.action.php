@@ -50,6 +50,7 @@ class Page_Sorter_Action {
 			}
 		}
 
+		set_transient( 'display_notice', true, 5 );
 		wp_safe_redirect( wp_get_referer() );
 	}
 }
