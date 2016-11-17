@@ -82,22 +82,21 @@ jQuery.fn.extend({
 
 function updateSharedVars(ui) {
 	var depth;
+	var t = window.digirisk.page_sorter;
 
-	window.digirisk.page_sorter.prev = ui.placeholder.prev( '.menu-item:not(.no-drop)' );
-	window.digirisk.page_sorter.next = ui.placeholder.next( '.menu-item:not(.no-drop)' );
+	t.prev = ui.placeholder.prev( '.menu-item:not(.no-drop)' );
+	t.next = ui.placeholder.next( '.menu-item' );
 
 	// Make sure we don't select the moving item.
-	if( window.digirisk.page_sorter.prev[0] == ui.item[0] ) window.digirisk.page_sorter.prev = window.digirisk.page_sorter.prev.prev( '.menu-item:not(.no-drop)' );
-	if( window.digirisk.page_sorter.next[0] == ui.item[0] ) window.digirisk.page_sorter.next = window.digirisk.page_sorter.next.next( '.menu-item:not(.no-drop)' );
+	if( t.prev[0] == ui.item[0] ) t.prev = t.prev.prev( '.menu-item:not(.no-drop)' );
+	if( t.next[0] == ui.item[0] ) t.next = t.next.next( '.menu-item' );
 
-	window.digirisk.page_sorter.prevBottom = (window.digirisk.page_sorter.prev.length) ? window.digirisk.page_sorter.prev.offset().top + window.digirisk.page_sorter.prev.height() : 0;
-	window.digirisk.page_sorter.nextThreshold = (window.digirisk.page_sorter.next.length) ? window.digirisk.page_sorter.next.offset().top + window.digirisk.page_sorter.next.height() / 3 : 0;
-	window.digirisk.page_sorter.minDepth = (window.digirisk.page_sorter.next.length) ? window.digirisk.page_sorter.next.menuItemDepth() : 0;
+	t.prevBottom = (t.prev.length) ? t.prev.offset().top + t.prev.height() : 0;
+	t.nextThreshold = (t.next.length) ? t.next.offset().top + t.next.height() / 3 : 0;
+	t.minDepth = (t.next.length) ? t.next.menuItemDepth() : 0;
 
-	if( window.digirisk.page_sorter.prev.length )
-		window.digirisk.page_sorter.maxDepth = ( (depth = window.digirisk.page_sorter.prev.menuItemDepth() + 1) > window.digirisk.page_sorter.globalMaxDepth ) ? window.digirisk.page_sorter.globalMaxDepth : depth;
-	else
-		window.digirisk.page_sorter.maxDepth = 0
+	depth = t.prev.menuItemDepth() + 1;
+	t.maxDepth = ( depth > t.globalMaxDepth ) ? t.globalMaxDepth : depth;
 }
 
 function initialMenuMaxDepth() {
