@@ -22,7 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</p>
 	</div>
 
-	<?php
-	view_util::exec( 'page_sorter', 'list', array( 'groupments' => $groupments ) );
-	?>
+	<ul class="menu" id="menu-to-edit">
+		<?php
+		view_util::exec( 'page_sorter', 'list', array( 'i' => 0, 'groupments' => $groupments ) );
+		?>
+	</ul>
 </div>

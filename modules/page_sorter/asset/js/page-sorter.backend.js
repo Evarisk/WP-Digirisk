@@ -66,6 +66,8 @@ jQuery.fn.extend({
 });
 
 function updateSharedVars(ui) {
+	var depth;
+
 	window.digirisk.page_sorter.prev = ui.placeholder.prev( '.menu-item' );
 	window.digirisk.page_sorter.next = ui.placeholder.next( '.menu-item' );
 
@@ -78,7 +80,7 @@ function updateSharedVars(ui) {
 	window.digirisk.page_sorter.minDepth = (window.digirisk.page_sorter.next.length) ? window.digirisk.page_sorter.next.menuItemDepth() : 0;
 
 	if( window.digirisk.page_sorter.prev.length )
-		window.digirisk.page_sorter.maxDepth = ( (window.digirisk.page_sorter.depth = window.digirisk.page_sorter.prev.menuItemDepth() + 1) > window.digirisk.page_sorter.globalMaxDepth ) ? window.digirisk.page_sorter.globalMaxDepth : window.digirisk.page_sorter.depth;
+		window.digirisk.page_sorter.maxDepth = ( (depth = window.digirisk.page_sorter.prev.menuItemDepth() + 1) > window.digirisk.page_sorter.globalMaxDepth ) ? window.digirisk.page_sorter.globalMaxDepth : depth;
 	else
 		window.digirisk.page_sorter.maxDepth = 0
 }
@@ -119,7 +121,7 @@ window.digirisk.page_sorter.init = function() {
 		placeholder: 'sortable-placeholder',
 		items: '> *',
 		start: function( e, ui ) {
-			var parent, children;
+			var parent, children, height, width, tempHolder;
 
 			window.digirisk.page_sorter.transport = ui.item.children('.menu-item-transport');
 			//
@@ -129,6 +131,34 @@ window.digirisk.page_sorter.init = function() {
 			parent = ( ui.item.next()[0] == ui.placeholder[0] ) ? ui.item.next() : ui.item;
 			children = parent.childMenuItems();
 			window.digirisk.page_sorter.transport.append( children );
+
+			// Update the height of the placeholder to match the moving item.
+			height = window.digirisk.page_sorter.transport.outerHeight();
+			// If there are children, account for distance between top of children and parent
+			height += ( height > 0 ) ? (ui.placeholder.css('margin-top').slice(0, -2) * 1) : 0;
+			height += ui.helper.outerHeight();
+			window.digirisk.page_sorter.helperHeight = height;
+			height -= 2; // Subtract 2 for borders
+			ui.placeholder.height(height);
+
+			// Update the width of the placeholder to match the moving item.
+			window.digirisk.page_sorter.maxChildDepth = window.digirisk.page_sorter.originalDepth;
+			children.each(function(){
+				var depth = jQuery(this).menuItemDepth();
+				window.digirisk.page_sorter.maxChildDepth = (depth > window.digirisk.page_sorter.maxChildDepth) ? depth : window.digirisk.page_sorter.maxChildDepth;
+			});
+			width = ui.helper.find('.menu-item-handle').outerWidth(); // Get original width
+			width += window.digirisk.page_sorter.api.depthToPx(window.digirisk.page_sorter.maxChildDepth - window.digirisk.page_sorter.originalDepth); // Account for children
+			width -= 2; // Subtract 2 for borders
+			ui.placeholder.width(width);
+
+			// Update the list of menu items.
+			tempHolder = ui.placeholder.next( '.menu-item' );
+			tempHolder.css( 'margin-top', window.digirisk.page_sorter.helperHeight + 'px' ); // Set the margin to absorb the placeholder
+			ui.placeholder.detach(); // detach or jQuery UI will think the placeholder is a menu item
+			jQuery(this).sortable( 'refresh' ); // The children aren't sortable. We should let jQ UI know.
+			ui.item.after( ui.placeholder ); // reattach the placeholder.
+			tempHolder.css('margin-top', 0); // reset the margin
 
 			updateSharedVars( ui );
 		},
@@ -154,7 +184,7 @@ window.digirisk.page_sorter.init = function() {
 				depth = window.digirisk.page_sorter.minDepth.minDepth;
 			}
 
-			if( depth != window.digirisk.page_sorter.currentDepth )
+			if( depth != window.digirisk.page_sorter.currentDepth && depth != undefined )
 				window.digirisk.page_sorter.api.updateCurrentDepth(ui, depth);
 
 			// If we overlap the next element, manually shift downwards

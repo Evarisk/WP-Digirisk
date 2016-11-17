@@ -10,46 +10,24 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+$i++;
 
 if ( ! empty( $groupments ) ) :
-	?>
-	<ul class="menu" id="menu-to-edit">
-		<li id="menu-item-104" class="menu-item menu-item-depth-0 menu-item-custom menu-item-edit-inactive pending">
+	foreach ( $groupments as $groupment ) :
+		?>
+		<li id="menu-item-<?php echo esc_attr( $groupment->id ); ?>" class="menu-item menu-item-depth-<?php echo esc_attr( $i - 1 ); ?> menu-item-custom">
 			<div class="menu-item-bar">
 				<div class="menu-item-handle ui-sortable-handle">
-					<span class="item-title">Test</span>
+					<span class="item-title"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></span>
 				</div>
 			</div>
 
 			<ul class="menu-item-transport"></ul>
 		</li>
-		<li id="menu-item-104" class="menu-item menu-item-depth-0 menu-item-custom menu-item-edit-inactive pending">
-			<div class="menu-item-bar">
-				<div class="menu-item-handle ui-sortable-handle">
-					<span class="item-title">Test 2</span>
-				</div>
-			</div>
 
-			<ul class="menu-item-transport"></ul>
-		</li>
-		<li id="menu-item-104" class="menu-item menu-item-depth-0 menu-item-custom menu-item-edit-inactive pending">
-			<div class="menu-item-bar">
-				<div class="menu-item-handle ui-sortable-handle">
-					<span class="item-title">Test 3</span>
-				</div>
-			</div>
-
-			<ul class="menu-item-transport"></ul>
-		</li>
-		<li id="menu-item-104" class="menu-item menu-item-depth-0 menu-item-custom menu-item-edit-inactive pending">
-			<div class="menu-item-bar">
-				<div class="menu-item-handle ui-sortable-handle">
-					<span class="item-title">Test 4</span>
-				</div>
-			</div>
-
-			<ul class="menu-item-transport"></ul>
-		</li>
-	</ul>
-	<?php
+		<?php
+		if ( ! empty( $groupment->list_group ) ) :
+			view_util::exec( 'page_sorter', 'list', array( 'i' => $i, 'groupments' => $groupment->list_group ) );
+		endif;
+	endforeach;
 endif;
