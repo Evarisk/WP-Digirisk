@@ -11,7 +11,7 @@ window.digirisk.page_sorter.init = function() {
 		placeholder: 'sortable-placeholder',
 		items: '> *',
 		start: function( e, ui ) {
-			window.evaMenu.startDepth = parseInt(ui.item.closest('li').attr( 'class' ).replace( 'menu-item-depth-', '' ));
+			window.evaMenu.startDepth = ui.item.data( 'depth' );
 			window.evaMenu.childs = window.evaMenu.getChildItems(ui.item);
 			ui.item.children( '.menu-item-transport' ).append( window.evaMenu.childs );
 		},
@@ -30,13 +30,13 @@ window.digirisk.page_sorter.init = function() {
 			var prevDepth = 0;
 
 			if (prev && prev.attr('class')) {
-				prevDepth = parseInt(prev.attr( 'class' ).replace( 'menu-item-depth-', '' ));
+				prevDepth = prev.data( 'depth' );
 			}
 
 			var nextDepth = 0;
 
 			if (next && next.attr('class')) {
-				nextDepth = parseInt(next.attr( 'class' ).replace( 'menu-item-depth-', '' ));
+				nextDepth = next.data( 'depth' );
 			}
 
 			if (window.evaMenu.depth < prevDepth) {
@@ -50,16 +50,25 @@ window.digirisk.page_sorter.init = function() {
 				window.evaMenu.depth = prevDepth + 1;
 			}
 
+			if (!prev.data('drop')) {
+				window.evaMenu.depth = prevDepth;
+			}
+
 			ui.placeholder[0].className = 'menu-item-depth-' + window.evaMenu.depth + ' sortable-placeholder';
 		},
 		stop: function(e, ui) {
 			ui.item[0].className = 'menu-item-depth-' + window.evaMenu.depth;
+
+			if (!ui.item.data('drop')) {
+				ui.item[0].className += " no-drop";
+			}
+
 			window.evaMenu.childs.insertAfter( ui.item );
 
 			var diffDepth = window.evaMenu.depth - window.evaMenu.startDepth;
 
 			for ( var key in window.evaMenu.childs ) {
-				var currentDepth = parseInt(window.evaMenu.childs[key].className.replace( 'menu-item-depth-', '' ));
+				var currentDepth = window.evaMenu.childs[key].data( 'depth' );
 				var newDepth = currentDepth + diffDepth;
 				window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
 			}
@@ -71,17 +80,17 @@ window.evaMenu.getChildItems = function(ui) {
 	var result = jQuery();
 	ui.each( function() {
 		var t = jQuery(this);
-		var depth = parseInt(t.attr( 'class' ).replace( 'menu-item-depth-', '' ))
+		var depth = t.data( 'depth' );
 		var next = t.next( 'li' ).next('li');
 
 		if (next.attr( 'class' )) {
-			var nextDepth = parseInt(next.attr( 'class' ).replace( 'menu-item-depth-', '' ));
+			var nextDepth = next.data( 'depth' );
 
 			while( next.length && nextDepth > depth ) {
 				result = result.add( next );
 				next = next.next( 'li' );
 				if (next && next.attr( 'class' )) {
-					nextDepth = parseInt(next.attr( 'class' ).replace( 'menu-item-depth-', '' ));
+					nextDepth = next.data( 'depth' );
 				}
 			}
 		}
