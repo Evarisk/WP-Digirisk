@@ -68,9 +68,14 @@ window.digirisk.page_sorter.init = function() {
 			var diffDepth = window.evaMenu.depth - window.evaMenu.startDepth;
 
 			for ( var key in window.evaMenu.childs ) {
-				var currentDepth = window.evaMenu.childs[key].data( 'depth' );
-				var newDepth = currentDepth + diffDepth;
-				window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
+				if (window.evaMenu.childs[key]) {
+					var currentDepth = jQuery( window.evaMenu.childs[key] ).data( 'depth' );
+					var newDepth = currentDepth + diffDepth;
+					window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
+					if (! jQuery( window.evaMenu.childs[key] ).data('drop')) {
+						window.evaMenu.childs[key].className += " no-drop";
+					}
+				}
 			}
 		}
 	}	);
