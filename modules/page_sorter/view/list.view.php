@@ -15,7 +15,7 @@ $i++;
 if ( ! empty( $groupments ) ) :
 	foreach ( $groupments as $groupment ) :
 		?>
-		<li id="menu-item-<?php echo esc_attr( $groupment->id ); ?>" class="<?php echo ( ! empty( $groupment->list_workunit ) ) ? 'no-drop' : ''; ?> menu-item menu-item-depth-<?php echo esc_attr( $i - 1 ); ?> menu-item-custom">
+		<li id="menu-item-<?php echo esc_attr( $groupment->id ); ?>" data-depth="<?php echo esc_attr( $i - 1 ); ?>" class="menu-item-depth-<?php echo esc_attr( $i - 1 ); ?>">
 			<div class="menu-item-bar">
 				<div class="menu-item-handle ui-sortable-handle">
 					<span class="item-title"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></span>
