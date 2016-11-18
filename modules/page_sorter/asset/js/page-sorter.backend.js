@@ -11,7 +11,7 @@ window.digirisk.page_sorter.init = function() {
 		placeholder: 'sortable-placeholder',
 		items: '> *',
 		start: function( e, ui ) {
-			window.evaMenu.startDepth = ui.item.attr( 'depth' );
+			window.evaMenu.startDepth = parseInt( ui.item.attr( 'data-depth' ) );
 			window.evaMenu.childs = window.evaMenu.getChildItems(ui.item);
 			ui.item.children( '.menu-item-transport' ).append( window.evaMenu.childs );
 		},
@@ -30,13 +30,13 @@ window.digirisk.page_sorter.init = function() {
 			var prevDepth = 0;
 
 			if (prev && prev.attr('class')) {
-				prevDepth = prev.attr( 'depth' );
+				prevDepth = parseInt( prev.attr( 'data-depth' ) );
 			}
 
 			var nextDepth = 0;
 
 			if (next && next.attr('class')) {
-				nextDepth = next.attr( 'depth' );
+				nextDepth = parseInt( next.attr( 'data-depth' ) );
 			}
 
 			if (window.evaMenu.depth < prevDepth) {
@@ -58,7 +58,7 @@ window.digirisk.page_sorter.init = function() {
 		},
 		stop: function(e, ui) {
 			ui.item[0].className = 'menu-item-depth-' + window.evaMenu.depth;
-			ui.item[0].attr( 'depth', window.evaMenu.depth );
+			ui.item.attr( 'data-depth', window.evaMenu.depth );
 
 			if (!ui.item.data('drop')) {
 				ui.item[0].className += " no-drop";
@@ -70,10 +70,10 @@ window.digirisk.page_sorter.init = function() {
 
 			for ( var key in window.evaMenu.childs ) {
 				if (window.evaMenu.childs[key]) {
-					var currentDepth = jQuery( window.evaMenu.childs[key] ).attr( 'depth' );
+					var currentDepth = parseInt( jQuery( window.evaMenu.childs[key] ).attr( 'data-depth' ) );
 					var newDepth = currentDepth + diffDepth;
 					window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
-					window.evaMenu.childs[key].attr( 'depth', newDepth );
+					jQuery( window.evaMenu.childs[key] ).attr( 'data-depth', newDepth );
 					if (! jQuery( window.evaMenu.childs[key] ).data('drop')) {
 						window.evaMenu.childs[key].className += " no-drop";
 					}
@@ -87,17 +87,17 @@ window.evaMenu.getChildItems = function(ui) {
 	var result = jQuery();
 	ui.each( function() {
 		var t = jQuery(this);
-		var depth = t.attr( 'depth' );
+		var depth = parseInt( t.attr( 'data-depth' ) );
 		var next = t.next( 'li' ).next('li');
 
 		if (next.attr( 'class' )) {
-			var nextDepth = next.attr( 'depth' );
+			var nextDepth = parseInt( next.attr( 'data-depth' ) );
 
 			while( next.length && nextDepth > depth ) {
 				result = result.add( next );
 				next = next.next( 'li' );
 				if (next && next.attr( 'class' )) {
-					nextDepth = next.attr( 'depth' );
+					nextDepth = parseInt( next.attr( 'data-depth' ) );
 				}
 			}
 		}
