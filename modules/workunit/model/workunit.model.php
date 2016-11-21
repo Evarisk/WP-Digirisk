@@ -70,7 +70,7 @@ class workunit_model extends society_model {
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted, $array );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }
