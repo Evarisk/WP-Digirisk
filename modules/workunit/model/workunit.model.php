@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class workunit_model extends society_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'user_info' => array(
 				'type' => 'array',
@@ -70,7 +70,7 @@ class workunit_model extends society_model {
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $array );
 	}
 
 }

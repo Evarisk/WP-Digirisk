@@ -16,14 +16,14 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class society_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model['child']['list_risk'] = array(
 			'export'			=> true,
 			'type'				=> 'array',
 			'controller' 	=> '\digi\risk_class',
 			'field'				=> 'post_parent',
 		);
-		
+
 		$this->model['associated_document_id'] = array(
 			'type'				=> 'array',
 			'meta_type'	=> 'multiple',
@@ -51,7 +51,7 @@ class society_model extends post_model {
 			'field'				=> '_wpdigi_unique_identifier',
 		);
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

@@ -11,7 +11,7 @@ class document_model extends post_model {
 	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model['child'] = array(
 			'category' => array(
 				'type'				=> 'taxonomy',
@@ -44,7 +44,7 @@ class document_model extends post_model {
 			'field'				=> '_wpdigi_model_id',
 		);
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

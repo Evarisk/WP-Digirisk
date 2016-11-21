@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'child' => array(
 				'detective_work' => array(
@@ -219,7 +219,7 @@ class legal_display_model extends post_model {
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class recommendation_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model['child']['recommendation_category_term'] = array(
 			'export'			=> true,
 			'type'				=> 'taxonomy',
@@ -69,7 +69,7 @@ class recommendation_model extends post_model {
 				)
 			)
 		) );
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

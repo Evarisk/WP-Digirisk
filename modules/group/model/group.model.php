@@ -11,7 +11,7 @@ class group_model extends society_model {
 	 * @param array|WP_Object $object La définition de l'objet dans l'instance actuelle / Object currently present into model instance
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model['child']['list_group'] = array(
 			'export' 			=> true,
 			'type'				=> 'array',
@@ -123,7 +123,7 @@ class group_model extends society_model {
 			)
 		);
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

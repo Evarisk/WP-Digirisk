@@ -80,9 +80,9 @@ class post_model extends constructor_data_class {
 	 * @param string $meta_key Le nom de la "meta" contenant la définition complète de l'object sous forme json / The "meta" name containing the complete definition of object under json format
 	 * @param boolean $cropped Permet de choisir si on construit le modèle complet ou uniquement les champs principaux / Allows to choose if the entire model have to be build or only main model
 	 */
-	public function __construct( $data, $wanted_field = array() ) {
+	public function __construct( $data, $wanted_field = array(), $args = array() ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $data, $wanted_field );
+		parent::__construct( $data, $wanted_field, $args );
 	}
 
 }

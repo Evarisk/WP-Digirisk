@@ -1,7 +1,7 @@
 {
 	"name": "WPEO Model",
 	"slug": "wpeo_model",
-	"version": 0.2,
+	"version": "1.0.0.0",
 	"description": "Le moteur de donnée et de définition de schéma pour WordPress",
 	"state": true,
 	"dependencies": {

@@ -106,6 +106,7 @@ class Post_Class extends singleton_util {
 
 		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
+			unset( $args['id'] );
 		}
 		else if( isset( $args['schema'] ) ) {
 			$array_posts[] = array();
@@ -142,7 +143,7 @@ class Post_Class extends singleton_util {
 
 			}
 
-			$array_posts[$key] = new $this->model_name( $post, $children_wanted );
+			$array_posts[$key] = new $this->model_name( $post, $children_wanted, $args );
 			$array_posts[$key] = $this->get_taxonomies_id( $array_posts[$key] );
 
 			if ( !empty( $this->after_get_function ) ) {

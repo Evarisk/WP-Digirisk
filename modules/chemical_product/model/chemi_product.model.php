@@ -2,7 +2,7 @@
 
 class chemi_product_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 				=> 'string',
@@ -39,7 +39,7 @@ class chemi_product_model extends post_model {
 		$this->model['title']['required'] = true;
 		$this->model['content']['required'] = true;
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

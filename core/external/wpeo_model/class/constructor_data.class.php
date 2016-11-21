@@ -3,11 +3,11 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class constructor_data_class extends helper_class {
-	protected function __construct( $data, $field_wanted ) {
+	protected function __construct( $data, $field_wanted, $args = array() ) {
 		$this->dispatch_wordpress_data( $data, $data );
 		log_class::g()->exec( 'digirisk_construct_data', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => '', 'object' => $this, ), 0 );
 		if ( !empty( $field_wanted ) ) {
-			$this->fill_child( $field_wanted );
+			$this->fill_child( $field_wanted, $args );
 		}
 	}
 
@@ -71,7 +71,7 @@ class constructor_data_class extends helper_class {
 		}
 	}
 
-	private function fill_child( $field_wanted ) {
+	private function fill_child( $field_wanted, $args ) {
 		if ( !empty( $this->model['child'] ) ) {
 			foreach ( $this->model['child'] as $child_name => $child_def ) {
 				if ( isset( $child_def['field'] ) && (in_array( $child_name, !empty( $field_wanted ) ?  str_replace( '\digi\\', '', $field_wanted ) : array() ) || empty( $field_wanted ) ) ) {
@@ -106,13 +106,17 @@ class constructor_data_class extends helper_class {
 						if ( $child_def['field'] == 'include' || $child_def['field'] == 'comment__in' && !is_array( $value ) ) {
 							$value = (array) $value;
 						}
-						$list_child = $child_def['controller']::g()->get( array( $child_def['field'] => $value ), $field_wanted );
+
+						// Ajout de l'agument.
+						$args[ $child_def['field'] ] = $value;
+
+						$list_child = $child_def['controller']::g()->get( $args, $field_wanted );
 					}
 					else {
 						$list_child = $child_def['controller']::g()->get( array( 'id' => 0 ), $field_wanted );
 					}
 
-					if ( !empty( $list_child ) ) {
+					if ( ! empty( $list_child ) ) {
 						$this->$child_name = $list_child;
 					}
 				}

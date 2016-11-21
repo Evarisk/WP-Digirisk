@@ -31,8 +31,8 @@ class society_class extends singleton_util {
 			array(
 				'posts_per_page' => -1,
 				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft', ),
-				'order' => 'ASC'
+				'post_status' => array( 'publish', 'draft' ),
+				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 			), array( 'list_group', 'list_workunit' ) );
 
 		if ( !empty( $group_list ) ) {
