@@ -43,7 +43,7 @@ class post_model extends constructor_data_class {
 		'status' => array(
 			'type'	=> 'string',
 			'field'	=> 'post_status',
-			'bydefault' => 'publish'
+			'bydefault' => 'publish',
 		),
 		'link' => array(
 			'type'	=> 'string',
@@ -53,6 +53,10 @@ class post_model extends constructor_data_class {
 		'type' 	=> array(
 			'type'	=> 'string',
 			'field'	=> 'post_type',
+		),
+		'order' => array(
+			'type' => 'int',
+			'field' => 'menu_order',
 		),
 		'comment_status' 	=> array(
 			'type'	=> 'string',
