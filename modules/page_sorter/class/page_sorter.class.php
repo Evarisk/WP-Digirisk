@@ -32,7 +32,7 @@ class Page_Sorter_Class extends Singleton_Util {
 				'posts_per_page' => -1,
 				'post_parent' => 0,
 				'post_status' => array( 'publish', 'draft' ),
-				'order' => 'ASC',
+				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 			), array( 'list_group', 'list_workunit' )
 		);
 
