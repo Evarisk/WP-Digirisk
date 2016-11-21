@@ -1,6 +1,7 @@
 window.digirisk.page_sorter = {};
 window.evaMenu = {};
 window.evaMenu.depth = 0;
+window.evaMenu.prev = undefined;
 window.evaMenu.startDepth = 0;
 window.evaMenu.childs = [];
 window.digirisk.page_sorter.init = function() {
@@ -21,16 +22,16 @@ window.digirisk.page_sorter.init = function() {
 			var edge = offset.left - menuEdge;
 			window.evaMenu.depth = Math.floor(edge / 30);
 
-			var prev = ui.placeholder.prev( 'li' );
+			window.evaMenu.prev = ui.placeholder.prev( 'li' );
 			var next = ui.placeholder.next( 'li' );
 
-			if( prev[0] == ui.item[0] ) prev = prev.prev( 'li' );
+			if( window.evaMenu.prev[0] == ui.item[0] ) window.evaMenu.prev = window.evaMenu.prev.prev( 'li' );
 			if( next[0] == ui.item[0] ) next = next.next( 'li' );
 
 			var prevDepth = 0;
 
-			if (prev && prev.attr('class')) {
-				prevDepth = parseInt( prev.attr( 'data-depth' ) );
+			if (window.evaMenu.prev && window.evaMenu.prev.attr('class')) {
+				prevDepth = parseInt( window.evaMenu.prev.attr( 'data-depth' ) );
 			}
 
 			var nextDepth = 0;
@@ -50,7 +51,7 @@ window.digirisk.page_sorter.init = function() {
 				window.evaMenu.depth = prevDepth + 1;
 			}
 
-			if (!prev.data('drop')) {
+			if (!window.evaMenu.prev.data('drop')) {
 				window.evaMenu.depth = prevDepth;
 			}
 
@@ -68,17 +69,22 @@ window.digirisk.page_sorter.init = function() {
 
 			var diffDepth = window.evaMenu.depth - window.evaMenu.startDepth;
 
-			for ( var key in window.evaMenu.childs ) {
-				if (window.evaMenu.childs[key]) {
-					var currentDepth = parseInt( jQuery( window.evaMenu.childs[key] ).attr( 'data-depth' ) );
-					var newDepth = currentDepth + diffDepth;
-					window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
-					jQuery( window.evaMenu.childs[key] ).attr( 'data-depth', newDepth );
-					if (! jQuery( window.evaMenu.childs[key] ).data('drop')) {
-						window.evaMenu.childs[key].className += " no-drop";
+			if (window.evaMenu.childs.length > 0) {
+				for ( var key in window.evaMenu.childs ) {
+					if (window.evaMenu.childs[key]) {
+						var currentDepth = parseInt( jQuery( window.evaMenu.childs[key] ).attr( 'data-depth' ) );
+						var newDepth = currentDepth + diffDepth;
+
+						window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
+						jQuery( window.evaMenu.childs[key] ).attr( 'data-depth', newDepth );
+						if (! jQuery( window.evaMenu.childs[key] ).data('drop')) {
+							window.evaMenu.childs[key].className += " no-drop";
+						}
 					}
 				}
 			}
+
+			window.evaMenu.updateParentId(ui.item);
 		}
 	}	);
 };
@@ -104,4 +110,18 @@ window.evaMenu.getChildItems = function(ui) {
 
 	} );
 	return result;
+}
+
+window.evaMenu.updateParentId = function( item ) {
+	var parentId = 0;
+	var itemDepth = parseInt( jQuery( item ).attr( 'data-depth' ) );
+	var prevDepth = itemDepth - 1;
+	var parent = undefined;
+
+	if ( prevDepth >= 0 ) {
+		parent = item.prevAll( '.menu-item-depth-' + prevDepth ).first();
+		parentId = parent.find( '.menu-item-data-db-id' ).val();
+	}
+
+	item.find( '.menu-item-data-parent-id' ).val( parentId );
 }
