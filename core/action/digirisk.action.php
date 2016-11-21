@@ -61,9 +61,6 @@ class Digirisk_Action {
 		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
-		wp_register_style( 'digi-jquery-ui', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery-ui-1.12.1.custom/jquery-ui.min.css', array(), config_util::$init['digirisk']->version );
-		wp_enqueue_style( 'digi-jquery-ui' );
-
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
 	}
 
