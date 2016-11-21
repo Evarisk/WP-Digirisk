@@ -92,7 +92,7 @@ class Post_Class extends singleton_util {
 		$args['post_type'] = $this->post_type;
 
 		// @todo: Temporaire
-		if ( !empty( $args['include'] ) ) {
+		if ( ! empty( $args['include'] ) ) {
 			$args['post__in'] = $args['include'];
 			if ( !is_array( $args['post__in'] ) ) {
 				$args['post__in'] = (array) $args['post__in'];
@@ -119,8 +119,8 @@ class Post_Class extends singleton_util {
 		foreach ( $array_posts as $key => $post ) {
 			$post = (array) $post;
 
-			// Si post['ID'] existe, on récupère les meta
-			if ( !empty( $post['ID'] ) ) {
+			// Si post['ID'] existe, on récupère les meta.
+			if ( ! empty( $post['ID'] ) ) {
 				$list_meta = get_post_meta( $post['ID'] );
 				foreach ( $list_meta as &$meta ) {
 					$meta = array_shift( $meta );
@@ -129,7 +129,7 @@ class Post_Class extends singleton_util {
 
 				$post = array_merge( $post, $list_meta );
 
-				if ( !empty( $post[$this->meta_key] ) ) {
+				if ( ! empty( $post[$this->meta_key] ) ) {
 					$data_json = json_util::g()->decode( $post[$this->meta_key] );
 					if ( is_array( $data_json ) ) {
 						$post = array_merge( $post, $data_json );
