@@ -27,7 +27,7 @@ class recommendation_term_model extends term_model {
 			)
 		) );
 
-		parent::__construct( $object, $field_wanted, $array );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }
