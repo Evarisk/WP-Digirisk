@@ -39,6 +39,8 @@ class Page_Sorter_Action {
 	public function callback_sorter_parent() {
 		check_admin_referer( 'callback_sorter_parent' );
 
+		$array_order = array();
+
 		if ( ! empty( $_POST['menu_item_db_id'] ) ) {
 			foreach ( $_POST['menu_item_db_id'] as $element_id ) {
 				$element_id = (int) $element_id;
@@ -46,6 +48,15 @@ class Page_Sorter_Action {
 
 				$society = society_class::g()->show_by_type( $element_id );
 				$society->parent_id = $parent_id;
+
+				// Met le menu order.
+				if ( empty( $array_order[ $parent_id ] ) ) {
+					$array_order[ $parent_id ] = 0;
+				}
+
+				$society->order = $array_order[ $parent_id ];
+				$array_order[ $parent_id ]++;
+
 				society_class::g()->update_by_type( $society );
 			}
 		}
