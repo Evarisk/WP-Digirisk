@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class category_danger_model extends term_model {
 
-	public function __construct( $object, $children_wanted = array() ) {
+	public function __construct( $object, $children_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'status' => array(
 				'export'			=> true,
@@ -48,7 +48,7 @@ class category_danger_model extends term_model {
 			),
 		) );
 
-		parent::__construct( $object, $children_wanted );
+		parent::__construct( $object, $children_wanted, $args );
 	}
 
 }

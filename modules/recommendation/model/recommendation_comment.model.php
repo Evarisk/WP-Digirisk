@@ -15,8 +15,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @version 6.0
  */
 class recommendation_comment_model extends comment_model {
-	public function __construct( $object, $field_wanted = array() ) {
-		parent::__construct( $object, $field_wanted );
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

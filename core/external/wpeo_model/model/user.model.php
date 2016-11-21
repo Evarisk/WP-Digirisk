@@ -91,9 +91,9 @@ class user_model extends constructor_data_class {
 		)
 	);
 
-	public function __construct( $object, $children_wanted = array() ) {
+	public function __construct( $object, $children_wanted = array(), $args = array() ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object, $children_wanted );
+		parent::__construct( $object, $children_wanted, $args );
 		//
 		// /** If cropped don't get meta */
 		// if ( !$cropped ) {

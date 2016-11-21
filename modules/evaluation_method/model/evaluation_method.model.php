@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluation_method_model extends term_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'child' => array(
 				'variable'	=> array(
@@ -48,7 +48,7 @@ class evaluation_method_model extends term_model {
 				'meta_type'	=> 'multiple',
 			),
 		) );
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $args );
 	}
 
 }

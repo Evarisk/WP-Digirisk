@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class recommendation_term_model extends term_model {
 
-	public function __construct( $object, $field_wanted = array() ) {
+	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 				=> 'string',
@@ -27,7 +27,7 @@ class recommendation_term_model extends term_model {
 			)
 		) );
 
-		parent::__construct( $object, $field_wanted );
+		parent::__construct( $object, $field_wanted, $array );
 	}
 
 }

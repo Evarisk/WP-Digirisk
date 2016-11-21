@@ -65,8 +65,8 @@ class comment_model extends constructor_data_class {
 	 * @param string $meta_key Le nom de la "meta" contenant la définition complète de l'object sous forme json / The "meta" name containing the complete definition of object under json format
 	 * @param boolean $cropped Permet de choisir si on construit le modèle complet ou uniquement les champs principaux / Allows to choose if the entire model have to be build or only main model
 	 */
-	public function __construct( $data, $field_wanted ) {
-		parent::__construct( $data, $field_wanted );
+	public function __construct( $data, $field_wanted = array(), $args = array() ) {
+		parent::__construct( $data, $field_wanted, $args );
 	}
 
 }
