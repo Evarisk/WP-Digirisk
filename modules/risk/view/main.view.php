@@ -1,8 +1,18 @@
-<?php namespace digi;
+<?php
+/**
+ * Affiches le titre du l'unique identifiant et le titre de la societé
+ * Appelle le template pour afficher la liste des risques
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<ul class="wp-digi-list wp-digi-risk wp-digi-table">
-	<?php risk_class::g()->display_risk_list( $society_id ); ?>
-	<?php view_util::exec( 'risk', 'item-edit', array( 'society_id' => $society_id, 'risk' => $risk ) ); ?>
-</ul>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
+
+<h2><?php echo esc_html( 'Les risques de ' . $society->unique_identifier . ' - ' . $society->title ); ?></h2>
+
+<?php view_util::exec( 'risk', 'list', array( 'society' => $society, 'risks' => $society->list_risk, 'risk_schema' => $risk_schema ) ); ?>

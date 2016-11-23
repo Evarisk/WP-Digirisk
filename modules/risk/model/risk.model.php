@@ -1,9 +1,26 @@
-<?php namespace digi;
+<?php
+/**
+ * Le modèle d'un risque
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Le modèle d'un risque
+ */
 class risk_model extends post_model {
 
+	/**
+	 * Constructeur
+	 * @param [type] $object       [description]
+	 * @param array  $field_wanted [description]
+	 */
 	public function __construct( $object, $field_wanted = array(), $args = array() ) {
 		$this->model = array_merge( $this->model, array(
 			'child' => array(
@@ -24,20 +41,20 @@ class risk_model extends post_model {
 					'export'			=> true,
 					'type'				=> 'object',
 					'controller'	=> '\digi\risk_evaluation_comment_class',
-					'field'				=> 'post_id'
+					'field'				=> 'post_id',
 				),
 				'evaluation_method' => array(
 					'export'			=> true,
 					'type'				=> 'object',
 					'controller' 	=> '\digi\evaluation_method_class',
-					'field'				=> 'post_id'
+					'field'				=> 'post_id',
 				),
 				'recommendation' => array(
 					'export'			=> true,
 					'type'				=> 'object',
 					'controller' 	=> '\digi\recommendation_class',
-					'field'				=> 'post_parent'
-				)
+					'field'				=> 'post_parent',
+				),
 			),
 			'associated_recommendation' => array(
 				'type' 		=> 'array',

@@ -1,33 +1,82 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Les risques
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @package Evarisk\Plugin
  */
 
-/**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
-class risk_class extends post_class {
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Les risques
+ */
+class Risk_Class extends Post_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name   = '\digi\risk_model';
+
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
 	protected $post_type    = 'digi-risk';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key    	= '_wpdigi_risk';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $before_post_function = array( '\digi\construct_identifier' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $after_get_function = array( '\digi\get_identifier' );
 
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'digirisk/risk';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'R';
 
+	/**
+	 * La limite des risques a affiché par page
+	 *
+	 * @var integer
+	 */
 	protected $limit_risk = -1;
 
 	/**
@@ -38,7 +87,9 @@ class risk_class extends post_class {
 	protected $post_type_name = 'Risques';
 
 	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
+	 * Constructeur
+	 *
+	 * @return void
 	 */
 	protected function construct() {
 		parent::construct();
@@ -58,29 +109,20 @@ class risk_class extends post_class {
 	}
 
 	/**
-	* Affiche la fenêtre principale
-	*
-	* @param int $society_id L'ID de la societé
-	*/
+	 * Charges la liste des risques même ceux des enfants. Et appelle le template pour les afficher.
+	 * Récupères le schéma d'un risque pour l'entrée d'ajout de risque dans le tableau.
+	 *
+	 * @param  int $society_id L'ID de la société.
+	 * @return void
+	 */
 	public function display( $society_id ) {
-		$risk = $this->get( array( 'schema' => true ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
-		$risk = $risk[0];
-		view_util::exec( 'risk', 'main', array( 'society_id' => $society_id, 'risk' => $risk ) );
-	}
+		$society = society_class::g()->show_by_type( $society_id, array( 'list_risk', 'list_workunit', 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risks = ! empty( $society->list_risk ) ? $society->list_risk : array();
 
-	public function display_risk_list( $society_id ) {
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_schema = $this->get( array( 'schema' => true ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_schema = $risk_schema[0];
 
-		if ( count( $risk_list ) > 1 ) {
-			usort( $risk_list, function( $a, $b ) {
-				if( $a->evaluation[0]->risk_level['equivalence'] == $b->evaluation[0]->risk_level['equivalence'] ) {
-					return 0;
-				}
-				return ( $a->evaluation[0]->risk_level['equivalence'] > $b->evaluation[0]->risk_level['equivalence'] ) ? -1 : 1;
-			} );
-		}
-
-		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risk_list' => $risk_list ) );
+		view_util::exec( 'risk', 'list', array( 'society' => $society, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
 	}
 }
 

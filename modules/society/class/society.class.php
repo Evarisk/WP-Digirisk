@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class society_class extends singleton_util {
+class Society_Class extends Singleton_Util {
 
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation
@@ -81,7 +81,7 @@ class society_class extends singleton_util {
 		}
 
     $model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
-    $establishment = $model_name::g()->get( array( 'id' => $id ), $child_wanted );
+    $establishment = $model_name::g()->get( array( 'include' => array( $id ) ), $child_wanted );
 
     return $establishment[0];
   }

@@ -115,6 +115,10 @@ class Post_Class extends singleton_util {
 			$query_posts = new \WP_Query( $args );
 			$array_posts = $query_posts->posts;
 			unset( $query_posts->posts );
+
+			if ( ! empty( $args['post__in'] ) ) {
+				unset( $args['post__in'] );
+			}
 		}
 
 		foreach ( $array_posts as $key => $post ) {
