@@ -167,46 +167,55 @@ class Post_Class extends singleton_util {
 		if ( empty( $data['id'] ) ) {
 			$data = new $this->model_name( $data, array( false ) );
 
-			// Ajout du post type si il est vide
+			// Ajout du post type si il est vide !
 			if ( empty( $data->type ) ) {
 				$data->type = $this->post_type;
 			}
 
-			if ( !empty( $this->before_post_function ) ) {
+			if ( ! empty( $this->before_post_function ) ) {
 				foreach ( $this->before_post_function as $post_function ) {
 					$data = call_user_func( $post_function, $data );
 				}
 			}
 
-			if ( !empty( $data->error ) && $data->error ) {
+			if ( ! empty( $data->error ) && $data->error ) {
 				return false;
 			}
 
-			$data->id = wp_insert_post( $data->do_wp_object() );
-		}
-		else {
+			$post_save = wp_insert_post( $data->do_wp_object(), true );
+			if ( ! is_wp_error( $post_save ) ) {
+				$data->id = $post_save;
+			} else {
+				$data = $post_save;
+			}
+		} else {
 			$current_data = $this->get( array( 'id' => $data['id'] ), array( false ) );
 			$current_data = $current_data[0];
-			$obj_merged = (object) array_merge((array) $current_data, (array) $data);
+			$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
 			$data = new $this->model_name( (array) $obj_merged, array( false ) );
 			$data->type = $this->post_type;
 
-			if ( !empty( $this->before_put_function ) ) {
+			if ( ! empty( $this->before_put_function ) ) {
 				foreach ( $this->before_put_function as $put_function ) {
 					$data = call_user_func( $put_function, $data );
 				}
 			}
 
-			if ( !empty( $data->error ) && $data->error ) {
+			if ( ! empty( $data->error ) && $data->error ) {
 				return false;
 			}
 
-			wp_update_post( $data->do_wp_object() );
+			$post_save = wp_update_post( $data->do_wp_object(), true );
+			if ( is_wp_error( $post_save ) ) {
+				$data = $post_save;
+			}
 		}
 
-		save_meta_class::g()->save_meta_data( $data, 'update_post_meta', $this->meta_key );
-		// Save taxonomy
-		$this->save_taxonomies( $data );
+		if ( ! is_wp_error( $data ) ) {
+			save_meta_class::g()->save_meta_data( $data, 'update_post_meta', $this->meta_key );
+			// Save taxonomy!
+			$this->save_taxonomies( $data );
+		}
 
 		return $data;
 	}
