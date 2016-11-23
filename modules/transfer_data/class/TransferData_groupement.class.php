@@ -31,11 +31,11 @@ class wpdigi_transferdata_society_class extends singleton_util {
 	 */
 	public function transfert_groupement( $groupement ) {
 		$group_mdl = array(
-			'date'							=> $groupement->creation_date,
-			'date_modified'			=> $groupement->lastupdate_date,
+			'date'							=> ( '0000-00-00 00:00:00' !== $groupement->creation_date_of_society ? $groupement->creation_date_of_society : current_time( 'mysql' ) ),
+			'date_modified'			=> ( '0000-00-00 00:00:00' !== $groupement->lastupdate_date ? $groupement->lastupdate_date : current_time( 'mysql' ) ),
 			'title'							=> $groupement->nom,
 			'content'						=> $groupement->description,
-			'status'						=> ( 'Valid' == $groupement->Status ? 'publish' : ( 'Deleted' == $groupement->Status ? 'trash' : 'draft' ) ),
+			'status'						=> ( 'Valid' === $groupement->Status ? 'publish' : ( 'Deleted' === $groupement->Status ? 'trash' : 'draft' ) ),
 			'user_info'					=> array(
 				'owner_id'								=> $groupement->id_responsable,
 				'affected_id' 						=> $this->transfer_users( $groupement->id, TABLE_GROUPEMENT, null, group_class::g()->get_post_type() ),
@@ -57,7 +57,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 		$new_group = group_class::g()->update( $group_mdl );
 		if ( ! empty( $new_group ) && ! empty( $new_group->id ) ) {
 			/**	Log creation	*/
-			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $new_group->id), array( 'object_id' => $groupement->id, ), 0 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $new_group->id ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 0 );
 
 			/**
 			 * Transfert element associated risk
@@ -70,10 +70,10 @@ class wpdigi_transferdata_society_class extends singleton_util {
 
 			/**	Store the other data into meta	*/
 			update_post_meta( $new_group->id, '_wpdigi_element_computed_identifier', TABLE_GROUPEMENT . '#value_sep#' . $groupement->id );
-			update_post_meta( $new_group->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_GROUPEMENT, serialize( $groupement ) ) ) );
+			update_post_meta( $new_group->id, '_wpdigi_element_old_definition', wp_json_encode( array( TABLE_GROUPEMENT, serialize( $groupement ) ) ) );
 		} else {
 			/**	Log creation	*/
-			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', __( 'An error occured while transfering the element to wordpress', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $groupement->id, ), 2 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', __( 'An error occured while transfering the element to wordpress', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 2 );
 		}
 
 		return $new_group;
@@ -180,7 +180,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 				$risk_definition = array(
 					'parent_id' 						=> $new_element_id,
 					'author_id' 						=> $main_risk_infos->idEvaluateur,
-					'date'									=> $main_risk_infos->unformatted_evaluation_date,
+					'date'									=> ( '0000-00-00 00:00:00' !== $main_risk_infos->unformatted_evaluation_date ? $main_risk_infos->unformatted_evaluation_date : current_time( 'mysql' ) ),
 					'date_modified'					=> current_time( 'mysql', 0 ),
 					'title'									=> sprintf( __( '%1$s for %3$s - %2$s', 'wp-digi-dtrans-i18n' ), $danger->nom, $old_element->nom, $element_prefix ),
 					'slug'									=> null,
@@ -235,7 +235,7 @@ class wpdigi_transferdata_society_class extends singleton_util {
 					}
 					else {
 						/**	Log creation	*/
-						log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), json_encode( $new_danger_category )), array( 'object_id' => $wp_risk->id, ), 2 );
+						log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), json_encode( $new_danger_category )), array( 'object_id' => $wp_risk->id, 'error' => $wp_risk ), 2 );
 					}
 
 					$risk_associated_file = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_RISQUE, $old_risk_id, $wp_risk->id );
