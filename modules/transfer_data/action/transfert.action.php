@@ -235,14 +235,13 @@ class Transfert_Action {
 									$set_parent = $wpdb->query( $query );
 									if ( false !== $set_parent ) {
 										$treated_tree_element[] = $element->id;
-										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément parent %d a bien été associé à %d', 'wp-digi-dtrans-i18n' ), $element_parent->id, $element->id ), array( 'object_id' => $element->id, ), 0 );
+										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément parent %1$d a bien été associé à %2$d', 'wp-digi-dtrans-i18n' ), $element_parent->id, $element->id ), array( 'object_id' => $element->id ), 0 );
 									} else {
-										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'Aucun parent n\'a pu être associé à %d', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id, ), 2 );
+										log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'Aucun parent n\'a pu être associé à %d', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 2 );
 									}
-								}
-								else {
+								} else {
 									$treated_tree_element[] = $element->id;
-									log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément %d ne possédait pas d\'élément parent', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id, ), 1 );
+									log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément %d ne possédait pas d\'élément parent', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 1 );
 								}
 							}
 						break;
