@@ -18,3 +18,19 @@ window.digirisk.request.send = function( element, data ) {
     }
   }, "json" );
 };
+
+window.digirisk.request.get = function( url, data ) {
+  jQuery.get( url, data, function( response ) {
+
+    if ( response && response.success ) {
+      if ( response.data.module && response.data.callback_success ) {
+        window.digirisk[response.data.module][response.data.callback_success]( response );
+      }
+    }
+    else {
+      if ( response.data.module && response.data.callback_error ) {
+        window.digirisk[response.data.module][response.data.callback_error]( response );
+      }
+    }
+  }, "json" );
+};
