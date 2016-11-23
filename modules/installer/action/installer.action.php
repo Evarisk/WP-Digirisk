@@ -1,56 +1,36 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controller pour installer digirisk
+ * Les actions qui se déroulent lors de l'installation.
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @package Evarisk\Plugin
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Fichier du controller pour installer digirisk
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * Les actions qui se déroulent lors de l'installation.
  */
-class installer_action {
+class Installer_Action {
 
 	/**
 	 * Le constructeur appelle les méthodes admin_post et ajax suivantes:
-	 * wp_ajax_wpdigi-installer-step-1 (Créer la societé et les données par défaut de Digirisk)
-	 * admin_post_last_step (Renvoie sur la page principale de Digirisk)
 	 */
 	public function __construct() {
-		// todo Renommes avec des underscores
 		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
+		add_action( 'wp_ajax_installer_components', array( $this, 'ajax_installer_components' ) );
 		add_action( 'admin_post_last_step', array( $this, 'admin_post_last_step' ) );
 	}
 
+
 	/**
-	* Créer la societé et les données par défaut de Digirisk (Danger, recommendation, méthode d'évaluation et méthode d'évaluation variable)
-	* Passes la clé installed de l'option "_digirisk_core" de WordPress à true
-	* Passes la clé db_version de l'option "_digirsk_core" à 1
-	* Met les documents par défault.
-	*
-	* array $_POST['address'] Les données envoyées par le formulaire pour l'adresse
-	* string $_POST['address']['address'] L'adresse
-	* string $_POST['address']['additional_address'] L'adresse complémentaire
-	* string $_POST['address']['postcode'] Le code postal
-	* string $_POST['address']['town'] La ville
-	*
-	* array $_POST['groupement'] Les données envoyées par le formulaire pour la societé
-	* string $_POST['groupement']['title'] Le nom de la societé
-	* string $_POST['groupement']['content'] La description de la societé
-	* string $_POST['groupement']['date'] La date de création de la societé
-	* string $_POST['groupement']['option']['identity']['siren'] Le SIREN de la societé
-	* string $_POST['groupement']['option']['identity']['siret'] Le SIRET de la societé
-	* string $_POST['groupement']['option']['contact']['phone'] Le téléphone de la societé
-	*
-	* int $_POST['owner_id'] Le responsable de la societé
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Test
+	 *
+	 * @return void
+	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
@@ -61,27 +41,64 @@ class installer_action {
 		$address->post_id = $groupment->id;
 		address_class::g()->update( $address );
 
-		$danger_created = danger_default_data_class::g()->create();
-		$recommendation_created = recommendation_default_data_class::g()->create();
-		$evaluation_method_created = evaluation_method_default_data_class::g()->create();
-
-		// Met à jours l'option pour dire que l'installation est terminée
-		update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
-
 		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'save_society' ) );
 	}
 
 	/**
-	* Rediriges vers la page principale de Digirisk.
-	*/
+	 * Installes les composants requis pour l'utilisation de Digirisk
+	 * Les dangers
+	 * Les méthodes d'évaluations
+	 * Les recommendations
+	 *
+	 * @return void
+	 */
+	public function ajax_installer_components() {
+		check_ajax_referer( 'ajax_installer_components' );
+
+		$default_core_option = array(
+			'installed' 									=> false,
+			'db_version'									=> '1',
+			'danger_installed' 						=> false,
+			'recommendation_installed' 		=> false,
+			'evaluation_method_installed' => false,
+		);
+
+		$core_option = get_option( config_util::$init['digirisk']->core_option, $default_core_option );
+
+		if ( ! $core_option['danger_installed'] ) {
+			danger_default_data_class::g()->create();
+			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
+			$core_option['danger_installed'] = true;
+		} elseif ( ! $core_option['recommendation_installed'] ) {
+			recommendation_default_data_class::g()->create();
+			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
+			$core_option['recommendation_installed'] = true;
+		} elseif ( ! $core_option['evaluation_method_installed'] ) {
+			evaluation_method_default_data_class::g()->create();
+			log_class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
+			$core_option['evaluation_method_installed'] = true;
+			$core_option['installed'] = true;
+			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
+		}
+
+		update_option( config_util::$init['digirisk']->core_option, $core_option );
+
+		wp_send_json_success( array( 'core_option' => $core_option, 'module' => 'installer', 'callback_success' => 'install_component_success' ) );
+	}
+
+	/**
+	 * Tmp
+	 *
+	 * @return void
+	 */
 	public function admin_post_last_step() {
-		if( empty( $_GET['_wpnonce'] ) ) {
+		if ( empty( $_GET['_wpnonce'] ) ) {
 			wp_safe_redirect( wp_get_referer() );
 			die();
 		}
 		$wpnonce = sanitize_text_field( $_GET['_wpnonce'] );
 
-		if ( !wp_verify_nonce( $wpnonce, 'last_step' ) ) {
+		if ( ! wp_verify_nonce( $wpnonce, 'last_step' ) ) {
 			wp_safe_redirect( admin_url( 'users.php?page=digirisk-users' ) );
 		}
 
