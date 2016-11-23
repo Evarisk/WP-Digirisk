@@ -46,7 +46,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<ul></ul>
 		</div>
 
-		<div id="digi-doc-fixer" class="" >
+		<div id="digi-doc-fixer" class="hidden" >
 			<p><?php _e( 'Cliquer sur ce bouton pour migrer les documents', 'digirisk' ); ?></p>
 			<p><button class="wp-digi-bton-fourth fix-doc" data-nonce="<?php echo wp_create_nonce( 'callback_transfert_doc' ); ?>" type="button"><?php _e( 'Résoudre', 'digirisk' ); ?></button>
 			<ul></ul>
