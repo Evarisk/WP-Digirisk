@@ -5,8 +5,13 @@ window.digirisk.installer.init = function() {
 };
 
 window.digirisk.installer.event = function() {
-
+	jQuery( '.wpdigi-installer .btn-more-option' ).click( window.digirisk.installer.more_options );
 };
+
+window.digirisk.installer.more_options = function( event ) {
+	event.preventDefault();
+	jQuery( '.wpdigi-installer .form-more-option' ).toggle();
+}
 
 window.digirisk.installer.save_society = function( element, response ) {
 	element.closest( 'div' ).hide();
