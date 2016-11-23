@@ -12,7 +12,7 @@ class corrective_task_filter {
 	}
 
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
-		if ( class_exists( "task_controller" ) ) {
+		if ( class_exists( "task_controller_01" ) ) {
 			global $task_controller;
 			global $point_controller;
 
