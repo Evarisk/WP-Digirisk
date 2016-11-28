@@ -1,12 +1,19 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class constructor_data_class extends helper_class {
+
+	/**
+	 * Constructeur
+	 * @param [type] $data         [description]
+	 * @param [type] $field_wanted [description]
+	 * @param array  $args         [description]
+	 */
 	protected function __construct( $data, $field_wanted, $args = array() ) {
 		$this->dispatch_wordpress_data( $data, $data );
 		log_class::g()->exec( 'digirisk_construct_data', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => '', 'object' => $this, ), 0 );
-		if ( !empty( $field_wanted ) ) {
+		if ( ! empty( $field_wanted ) ) {
 			$this->fill_child( $field_wanted, $args );
 		}
 	}
@@ -110,6 +117,8 @@ class constructor_data_class extends helper_class {
 						// Ajout de l'agument.
 						$args[ $child_def['field'] ] = $value;
 
+						unset( $args['post__in']);
+						unset( $args['comment__in'] );
 						$list_child = $child_def['controller']::g()->get( $args, $field_wanted );
 					}
 					else {
