@@ -1,48 +1,43 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Gères l'action pour appeler la méthode generate de Fiche_De_Groupement_Class
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @package Evarisk\Plugin
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * Gères l'action pour appeler la méthode generate de Fiche_De_Groupement_Class
  */
-class sheet_groupment_action {
+class Sheet_Groupment_Action {
 
 	/**
-	 * CORE - Instanciation des actions ajax pour les unités de travail / Instanciate ajax treatment for work unit
+	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_groupment
 	 */
-	function __construct() {
-  	add_action( 'wp_ajax_wpdigi_save_sheet_digi-group', array( $this, 'generate_sheet' ) );
+	public function __construct() {
+		add_action( 'wp_ajax_generate_fiche_de_groupement', array( $this, 'ajax_generate_fiche_de_groupement' ) );
 	}
 
 	/**
 	 *	Callback function for group sheet generation / Fonction de rappel pour la génération des fiches de groupements
 	 */
-	function generate_sheet() {
-		check_ajax_referer( 'digi_ajax_generate_element_sheet' );
+	function ajax_generate_fiche_de_groupement() {
+		check_ajax_referer( 'ajax_generate_fiche_de_groupement' );
 
-		$element_id = !empty( $_POST ) && !empty( $_POST[ 'element_id' ] ) && is_int( (int)$_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : ( null !== $element_id  && is_int( (int)$element_id ) ? (int)$element_id : null );
-		if ( 0 === $element_id ) {
-			wp_send_json_error( array( 'message' => __( 'Requested element for sheet generation is invalid. Please check your request', 'digirisk' ), ) );
+		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+
+		if ( ! $society_id ) {
+			wp_send_json_error();
 		}
 
-		$generation_response = sheet_groupment_class::g()->generate_sheet( $element_id );
-  	$element = document_class::g()->get( array( 'post__in' => array( $generation_response[ 'id' ] ) ), array( 'category' ) );
-		$element = $element[0];
-		ob_start();
-		view_util::exec( 'document', 'printed-list-item', array( 'element' => $element ) );
-		$response[ 'output' ] = ob_get_contents();
-		ob_end_clean();
+		Fiche_De_Groupement_Class::g()->generate( $society_id );
 
-		wp_send_json_success($response);
+		wp_send_json_success();
 	}
 
 }

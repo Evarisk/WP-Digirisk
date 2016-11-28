@@ -1,38 +1,39 @@
-<?php namespace digi;
+<?php
 /**
-* Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'un établissement.
-* Et un formulaire qui permet d'ajouter un risque
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package risk
-* @subpackage shortcode
-*/
+ * Ajoutes le shortcode pour afficher la liste des fiches de groupement
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class sheet_groupment_shortcode {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Ajoutes le shortcode pour afficher la liste des fiches de groupement
+ */
+class Sheet_Groupement_Shortcode {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur ajoutes le shortcode
+	 *
+	 * @todo passer le shortcode avec des "_" au lieu de "-"
+	 * @see add_shortcode
+	 */
 	public function __construct() {
-		add_shortcode( 'digi-sheet-groupment', array( $this, 'callback_sheet_groupment' ) );
+		add_shortcode( 'digi-fiche-de-groupement', array( $this, 'callback_digi_fiche_de_groupement' ) );
 	}
 
 	/**
-	* Appelle la template pour génerer une fiche de groupement
-	*
-	* @param array $param
-	*/
-	public function callback_sheet_groupment( $param ) {
-		$element_id = (int)$_POST['element_id'];
-    $element = group_class::g()->get( array( 'id' => $element_id ) );
-		$element = $element[0];
-    $display_mode = "simple";
-		view_util::exec( 'sheet_groupment', 'sheet-generation-form', array( 'element' => $element ) );
-    document_class::g()->display_document_list( $element );
+	 * Appelle la méthode display de la classe Fiche_De_Groupement_Class
+	 *
+	 * @param array $atts Les paramètres du shortcode.
+	 * @return void
+	 */
+	public function callback_digi_fiche_de_groupement( $atts ) {
+		$element_id = ! empty( $atts['post_id'] ) ? (int) $atts['post_id'] : 0;
+		Fiche_De_Groupement_Class::g()->display( $element_id );
 	}
 }
 
-new sheet_groupment_shortcode();
+new Sheet_Groupement_Shortcode();

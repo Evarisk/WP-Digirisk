@@ -94,7 +94,7 @@ class DUER_Class extends post_class {
 	 *
 	 * @var string
 	 */
-	protected $post_type_name = 'DUERS';
+	protected $post_type_name = 'DUER';
 
 	/**
 	 * Ajout du filtre pour la Rest API
@@ -125,7 +125,7 @@ class DUER_Class extends post_class {
 	 * @return void
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit', ) ), array( 'category' ) );
+		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
 		view_util::exec( 'document', 'DUER/list', array( 'list_document' => $list_document ) );
 	}
 }

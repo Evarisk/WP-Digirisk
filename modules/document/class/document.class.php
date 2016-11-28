@@ -57,7 +57,7 @@ class document_class extends attachment_class {
 	 */
 	public function display_document_list( $element ) {
 		$current_page = !empty( $_REQUEST[ 'next_page' ] ) ? (int)$_REQUEST[ 'next_page' ] : 1;
-	
+
 		$list_document = document_class::g()->get( array(
 			// 'post__in'				=> $list_document_id,
 			'post_parent'			=> $element->id,
@@ -251,6 +251,7 @@ class document_class extends attachment_class {
 	public function get_document_type_next_revision( $current_element_type, $element_id ) {
 		global $wpdb;
 
+
 		/**	Récupération de la date courante / Get current date	*/
 		$today = getdate();
 
@@ -258,7 +259,7 @@ class document_class extends attachment_class {
 		$get_model_args = array(
 			'nopaging'		=> true,
 			'post_parent'	=> $element_id,
-			'post_type' 	=> $this->get_post_type(),
+			'post_type' 	=> $current_element_type[0],
 			'post_status'	=> 'inherit',
 			'tax_query' => array(
 				array(
@@ -326,7 +327,7 @@ class document_class extends attachment_class {
 	 * @return object The result of document creation / le résultat de la création du document
 	 */
 	public function create_document( $element, $document_type, $document_meta ) {
-		if ( !empty( $document_type ) && !empty( $document_type[0] ) && class_exists( '\digi\\' . $document_type[0] . '_model' ) ) {
+		if ( ! empty( $document_type ) && ! empty( $document_type[0] ) && class_exists( '\digi\\' . $document_type[0] . '_model' ) ) {
 			$this->set_model( '\digi\\' . $document_type[0] . '_model' );
 		}
 
@@ -412,6 +413,10 @@ class document_class extends attachment_class {
 			case "document_unique":
 				$document_args['type'] = DUER_Class::g()->get_post_type();
 				$document = DUER_Class::g()->update( $document_args );
+				break;
+			case "fiche_de_groupement":
+				$document_args['type'] = Fiche_De_Groupement_Class::g()->get_post_type();
+				$document = Fiche_De_Groupement_Class::g()->update( $document_args );
 				break;
 			default:
 		  	$document = $this->update( $document_args );
