@@ -17,12 +17,12 @@ class epi_filter {
 	}
 
 	public function callback_tab( $list_tab ) {
-		$list_tab['digi-workunit']['epi'] = array(
-			'text' => __( 'EPI', 'digirisk' ),
-		);
-		$list_tab['digi-group']['epi'] = array(
-			'text' => __( 'EPI', 'digirisk' ),
-		);
+		// $list_tab['digi-workunit']['epi'] = array(
+		// 	'text' => __( 'EPI', 'digirisk' ),
+		// );
+		// $list_tab['digi-group']['epi'] = array(
+		// 	'text' => __( 'EPI', 'digirisk' ),
+		// );
 
 		return $list_tab;
 	}
