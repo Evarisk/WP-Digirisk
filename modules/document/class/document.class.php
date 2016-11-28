@@ -422,6 +422,14 @@ class document_class extends attachment_class {
 				$document_args['type'] = Fiche_De_Poste_Class::g()->get_post_type();
 				$document = Fiche_De_Poste_Class::g()->update( $document_args );
 				break;
+			case "affichage_legal_A3":
+				$document_args['type'] = Affichage_Legal_A3_Class::g()->get_post_type();
+				$document = Affichage_Legal_A3_Class::g()->update( $document_args );
+				break;
+			case "affichage_legal_A4":
+				$document_args['type'] = Affichage_Legal_A4_Class::g()->get_post_type();
+				$document = Affichage_Legal_A4_Class::g()->update( $document_args );
+				break;
 			default:
 		  	$document = $this->update( $document_args );
 				break;

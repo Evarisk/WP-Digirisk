@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Gères la génération de la fiche de poste
  */
 class Fiche_De_Poste_Class extends Post_Class {
-
 	/**
 	 * Le nom du modèle
 	 *

@@ -20,35 +20,35 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
   <div class="gridwrapper2">
 		<?php
-			view_util::exec( 'legal_display', 'detective-work', array( 'legal_display' => $legal_display ) );
-			view_util::exec( 'legal_display', 'occupational-health-service', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/detective-work', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/occupational-health-service', array( 'legal_display' => $legal_display ) );
 		?>
   </div>
 
   <div class="gridwrapper2">
 		<?php
-			view_util::exec( 'legal_display', 'emergency-service', array( 'legal_display' => $legal_display ) );
-			view_util::exec( 'legal_display', 'safety-rules', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/emergency-service', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/safety-rules', array( 'legal_display' => $legal_display ) );
 		?>
   </div>
 
   <div class="clear">
 		<?php
-			view_util::exec( 'legal_display', 'working-hours', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/working-hours', array( 'legal_display' => $legal_display ) );
 		?>
   </div>
 
   <div class="gridwrapper2">
 		<?php
-			view_util::exec( 'legal_display', 'derogations-schedules', array( 'legal_display' => $legal_display ) );
-			view_util::exec( 'legal_display', 'collective-agreement', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/derogations-schedules', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/collective-agreement', array( 'legal_display' => $legal_display ) );
 		?>
 	</div>
 
   <div class="gridwrapper2">
 		<?php
-			view_util::exec( 'legal_display', 'rule', array( 'legal_display' => $legal_display ) );
-			view_util::exec( 'legal_display', 'DUER', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/rule', array( 'legal_display' => $legal_display ) );
+			view_util::exec( 'legal_display', 'form/DUER', array( 'legal_display' => $legal_display ) );
 		?>
 	</div>
 
