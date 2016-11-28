@@ -27,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span></span>
 </li>
 
-<?php if ( !empty( $list_document ) ) : ?>
+<?php if ( ! empty( $list_document ) ) : ?>
 	<?php foreach ( $list_document as $element ) : ?>
-		<?php view_util::exec( 'document', 'DUER/list-item', array( 'element' => $element ) ); ?>
+		<?php view_util::exec( 'duer', 'list-item', array( 'element' => $element ) ); ?>
 	<?php endforeach; ?>
 <?php endif; ?>

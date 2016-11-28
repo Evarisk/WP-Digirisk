@@ -60,7 +60,7 @@ class Affichage_Legal_A4_Class extends Post_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'ALA4';
+	public $element_prefix 					= 'AL-A4-';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée

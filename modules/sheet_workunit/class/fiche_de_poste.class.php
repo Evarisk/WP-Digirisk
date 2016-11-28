@@ -167,7 +167,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 			$society = workunit_class::g()->update( $society );
 		}
 
-		return true;
+		return $document_creation_response;
 	}
 
 	/**

@@ -29,6 +29,8 @@
 		"modules/danger/danger.config.json",
 		"modules/document/document.config.json",
 
+		"modules/duer/duer.config.json",
+
 		"modules/epi/epi.config.json",
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
@@ -52,6 +54,7 @@
 		"modules/setting/setting.config.json",
 		"modules/sheet_groupment/sheet_groupment.config.json",
 		"modules/sheet_workunit/sheet_workunit.config.json",
+		"modules/zip/zip.config.json",
 
 		"modules/tab/tab.config.json",
 		"modules/third/third.config.json",

@@ -1,17 +1,12 @@
 {
 	"name": "Document",
 	"slug": "document",
-	"version": "0.2.0.0",
+	"version": "6.2.1.0",
 	"description": "Le module gérant les documents de Digirisk",
 	"path": "modules/document/",
 	"dependencies": {
-		"model": {
-		},
-		"shortcode": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"model": {},
+		"class": {},
+		"action": {}
 	}
 }

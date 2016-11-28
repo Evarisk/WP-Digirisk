@@ -60,10 +60,16 @@ class DUER_Generate_Class extends singleton_util {
 
 		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
 		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-		$zip_generation_result = document_class::g()->create_zip( document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip', $all_file, $element, $version );
 
-		// $duer = DUER_Class::g()->get( array( 'include' => array( $document_creation_response[ 'id' ] ) ) );
-		// $duer = $duer[0];
+		$zip_path = document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
+		$zip_generation_result = document_class::g()->create_zip( $zip_path, $all_file, $element, $version );
+
+		// On rajoute le chemin vers le fichier zip.
+		$duer = DUER_Class::g()->get( array( 'post__in' => array( $document_creation_response['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
+		$duer = $duer[0];
+		$duer->zip_path = $zip_path;
+
+		DUER_Class::g()->update( $duer );
 		return array();
 	}
 
@@ -267,36 +273,32 @@ class DUER_Generate_Class extends singleton_util {
 	* @return array La liste des ODT enfants
 	*/
 	public function generate_child( $element ) {
-		// if ( !is_object( $element ) ) {
-		// 	return false;
-		// }
-		// Generate children
 		$list_id = array();
 
 		/**	Build a file list to set into the final zip / Contruit la liste des fichiers a ajouter dans le zip lorsque les générations sont terminées	*/
 		$response = array();
-		$response[] = sheet_groupment_class::g()->generate_sheet( $element->id );
+		$response[] = Fiche_De_Groupement_Class::g()->generate( $element->id );
 
 		/**	Get workunit list for the current group / Récupération de la liste des unités de travail pour le groupement actuel	*/
-		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
-		foreach( $work_unit_list as $workunit ) {
-			$response[] = workunit_sheet_class::g()->generate_workunit_sheet( $workunit->id );
+		$work_unit_list = Workunit_Class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
+		foreach ( $work_unit_list as $workunit ) {
+			$response[] = Fiche_De_Poste_Class::g()->generate( $workunit->id );
 		}
 
-		$list_id = group_class::g()->get_element_sub_tree_id( $element->id, $list_id );
-		if ( !empty( $list_id ) ) {
-			foreach( $list_id as $element ) {
-				if( !empty( $element['workunit'] ) ) {
-					if( !empty( $element['id'] ) ) {
-						$response[] = sheet_groupment_class::g()->generate_sheet( $element['id'] );
+		$list_id = Group_Class::g()->get_element_sub_tree_id( $element->id, $list_id );
+		if ( ! empty( $list_id ) ) {
+			foreach ( $list_id as $element ) {
+				if ( ! empty( $element['workunit'] ) ) {
+					if ( ! empty( $element['id'] ) ) {
+						$response[] = Fiche_De_Groupement_Class::g()->generate( $element['id'] );
 					}
-					foreach( $element['workunit'] as $workunit_id ) {
-						$response[] = workunit_sheet_class::g()->generate_workunit_sheet( $workunit_id['id'] );
+					foreach ( $element['workunit'] as $workunit_id ) {
+						$response[] = Fiche_De_Poste_Class::g()->generate( $workunit_id['id'] );
 					}
 				}
 				else {
-					if( !empty( $element['id'] ) ) {
-						$response[] = sheet_groupment_class::g()->generate_sheet( $element['id'] );
+					if ( ! empty( $element['id'] ) ) {
+						$response[] = Fiche_De_Groupement_Class::g()->generate( $element['id'] );
 					}
 				}
 			}

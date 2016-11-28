@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class document_class extends attachment_class {
+class Document_Class extends attachment_class {
 	protected $model_name   				= '\digi\document_model';
 	protected $post_type    				= 'attachment';
 	public $attached_taxonomy_type  = 'attachment_category';
@@ -429,6 +429,10 @@ class document_class extends attachment_class {
 			case "affichage_legal_A4":
 				$document_args['type'] = Affichage_Legal_A4_Class::g()->get_post_type();
 				$document = Affichage_Legal_A4_Class::g()->update( $document_args );
+				break;
+			case "zip":
+			$document_args['type'] = ZIP_Class::g()->get_post_type();
+			$document = ZIP_Class::g()->update( $document_args );
 				break;
 			default:
 		  	$document = $this->update( $document_args );

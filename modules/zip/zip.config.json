@@ -1,0 +1,13 @@
+{
+	"name": "ZIP",
+	"slug": "zip",
+	"version": "6.2.1.0",
+	"description": "Le module gérant les ZIP de DigiRisk",
+	"path": "modules/zip/",
+	"dependencies": {
+		"model": {},
+		"class": {},
+		"action": {},
+		"filter": {}
+	}
+}

@@ -163,7 +163,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			$society = group_class::g()->update( $society );
 		}
 
-		return true;
+		return $document_creation_response;
 	}
 
 	/**
@@ -279,21 +279,23 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		);
 
 		$risk_list_to_order = array();
-		foreach ( $society->list_risk as $risk ) {
-			$comment_list = '';
-			if ( ! empty( $risk->comment ) ) :
-				foreach ( $risk->comment as $comment ) :
-					$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
-		";
-				endforeach;
-			endif;
+		if ( ! empty( $society->list_risk ) ) {
+			foreach ( $society->list_risk as $risk ) {
+				$comment_list = '';
+				if ( ! empty( $risk->comment ) ) :
+					foreach ( $risk->comment as $comment ) :
+						$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
+			";
+					endforeach;
+				endif;
 
-			$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
-				'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
-				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
-				'quotationRisque'		=> $risk->evaluation[0]->risk_level['equivalence'],
-				'commentaireRisque'	=> $comment_list,
-			);
+				$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
+					'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
+					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
+					'quotationRisque'		=> $risk->evaluation[0]->risk_level['equivalence'],
+					'commentaireRisque'	=> $comment_list,
+				);
+			}
 		}
 		krsort( $risk_list_to_order );
 

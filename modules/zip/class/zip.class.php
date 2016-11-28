@@ -18,20 +18,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class DUER_Class extends post_class {
+class ZIP_Class extends Post_Class {
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name   				= '\digi\DUER_Model';
+	protected $model_name   				= '\digi\ZIP_Model';
 
 	/**
 	 * Le type du document
 	 *
 	 * @var string
 	 */
-	protected $post_type    				= 'duer';
+	protected $post_type    				= 'zip';
 
 	/**
 	 * A faire
@@ -53,7 +53,7 @@ class DUER_Class extends post_class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/document-unique';
+	protected $base 								= 'digirisk/zip';
 
 	/**
 	 * La version pour la Rest API
@@ -67,7 +67,7 @@ class DUER_Class extends post_class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'DU';
+	public $element_prefix 					= 'ZIP';
 
 	/**
 	 * Fonctions appelées avant le PUT
@@ -94,7 +94,7 @@ class DUER_Class extends post_class {
 	 *
 	 * @var string
 	 */
-	protected $post_type_name = 'DUER';
+	protected $post_type_name = 'ZIP';
 
 	/**
 	 * Ajout du filtre pour la Rest API
@@ -105,29 +105,6 @@ class DUER_Class extends post_class {
 		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
-
-	/**
-	 * Appelle le template main.view.php dans le dossier /view/document-unique
-	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 */
-	public function display( $element_id ) {
-		$element = $this->get( array( 'schema' => true ), array() );
-		$element = $element[0];
-		view_util::exec( 'document', 'DUER/main', array( 'element' => $element, 'element_id' => $element_id ) );
-	}
-
-	/**
-	 * Appelle le template list.view.php dans le dossier /view/document-unique
-	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		view_util::exec( 'document', 'DUER/list', array( 'list_document' => $list_document ) );
-	}
 }
 
-DUER_Class::g();
+ZIP_Class::g();

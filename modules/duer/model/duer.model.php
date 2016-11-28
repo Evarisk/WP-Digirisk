@@ -12,6 +12,12 @@ class DUER_Model extends document_model {
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
 	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+		$this->model['zip_path'] = array(
+			'type'				=> 'string',
+			'meta_type'		=> 'single',
+			'field'				=> 'zip_path',
+		);
+
 		$this->model['document_meta'] = array(
 			'type'				=> 'array',
 			'meta_type' 	=> 'single',
