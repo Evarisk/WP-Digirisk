@@ -69,6 +69,7 @@ class Post_Class extends singleton_util {
 
 	/**
 	 * Initialise le post type selon $name et $name_singular.
+	 * Initialise la taxonomy si elle existe.
 	 *
 	 * @see register_post_type
 	 * @return void
@@ -80,6 +81,12 @@ class Post_Class extends singleton_util {
 		);
 
 		register_post_type( $this->post_type, $args );
+		\digi\log_class::g()->exec( 'digi_post_type', '', 'Enregistres le post personnalisé : ' . $this->post_type, $args );
+
+		if ( ! empty( $this->attached_taxonomy_type ) ) {
+			register_taxonomy( $this->attached_taxonomy_type, $this->post_type );
+			\digi\log_class::g()->exec( 'digi_taxonomy', '', 'Enregistres la taxonomie : ' . $this->attached_taxonomy_type );
+		}
 	}
 
 	public function get_schema() {
