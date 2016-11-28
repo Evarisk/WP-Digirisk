@@ -418,6 +418,10 @@ class document_class extends attachment_class {
 				$document_args['type'] = Fiche_De_Groupement_Class::g()->get_post_type();
 				$document = Fiche_De_Groupement_Class::g()->update( $document_args );
 				break;
+			case "fiche_de_poste":
+				$document_args['type'] = Fiche_De_Poste_Class::g()->get_post_type();
+				$document = Fiche_De_Poste_Class::g()->update( $document_args );
+				break;
 			default:
 		  	$document = $this->update( $document_args );
 				break;

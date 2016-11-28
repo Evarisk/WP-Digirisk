@@ -21,7 +21,7 @@ class society_model extends post_model {
 			'export'			=> true,
 			'type'				=> 'array',
 			'controller' 	=> '\digi\risk_class',
-			'field'				=> 'post_parent',
+			'field'				=> 'post_parent'
 		);
 
 		$this->model['associated_document_id'] = array(
