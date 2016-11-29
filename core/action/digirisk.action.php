@@ -34,6 +34,7 @@ class Digirisk_Action {
 		}
 
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 	}
 
 	/**
@@ -81,6 +82,19 @@ class Digirisk_Action {
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
 	}
+
+	/**
+	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
+	 */
+	public function callback_admin_menu() {
+		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
+		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
+
+		if ( ! empty( $digirisk_core['installed'] ) ) {
+			add_menu_page( __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );
+		}
+	}
+
 }
 
 new Digirisk_Action();

@@ -1,17 +1,73 @@
-<?php namespace digi;
+<?php
+/**
+ * Les groupements
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class group_class extends post_class {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Les groupements
+ */
+class Group_Class extends Post_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name   				= '\digi\group_model';
+
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
 	protected $post_type    				= 'digi-group';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key    					= '_wpdigi_society';
+
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix 					= 'GP';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $before_post_function = array( '\digi\construct_identifier', '\digi\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $after_get_function = array( '\digi\get_identifier' );
 
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'digirisk/group';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
 	/**
@@ -29,36 +85,28 @@ class group_class extends post_class {
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
-
 	/**
-	 * AFFICHAGE/DISPLAY - Affichage du bouton toggle
+	 * Renvoie l'ID du premier groupement "publish" ou "draft" sans groupement parent trouvé dans la base de donnée dans l'ordre de la date croissant, ou dans l'ordre de menu_order croissant.
+	 *
+	 * @return int
 	 */
-	public function display_toggle( $list_groupment, $selected_group = null ) {
-		if ( $selected_group === null ) {
-			$selected_group = $list_groupment[0];
-		}
+	public function get_first_groupment_id() {
+		$first_groupment_id = 0;
 
-		view_util::exec( 'group', 'toggle', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
+		$first_groupment = group_class::g()->get(
+			array(
+				'posts_per_page' 	=> 1,
+				'post_parent'			=> 0,
+				'post_status' 		=> array( 'publish', 'draft' ),
+				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+			)
+		);
+
+		$first_groupment_id = $first_groupment[0]->id;
+
+		return $first_groupment_id;
 	}
-	/**
-	* Affiche un groupement
-	*
-	* @param int $group_id L'ID du groupement
-	*/
-	public function display( $group_id ) {
-		$element = $this->show( $group_id );
 
-		view_util::exec( 'society', 'content' );
-	}
-
-	public function display_list_item( $list_groupment, $selected_group = null ) {
-		if ( $selected_group === null ) {
-			$selected_group = $list_groupment[0];
-		}
-
-
-		view_util::exec( 'group', 'list', array( 'list_groupment' => $list_groupment, 'selected_group' => $selected_group ) );
-	}
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree
 	 *
@@ -67,21 +115,17 @@ class group_class extends post_class {
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 */
 	public function get_element_tree_risk( $element ) {
-		// if ( !is_object( $element ) ) {
-		// 	return false;
-		// }
-
 		$risks_in_tree = array();
 
 		$risks_in_tree = $this->build_risk_list_for_export( $element );
 
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
-		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
 		foreach ( $group_list as $group ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->get_element_tree_risk( $group ) );
 		}
 
-		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
 		foreach ( $work_unit_list as $workunit ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit ) );
 		}
@@ -90,12 +134,12 @@ class group_class extends post_class {
 	}
 
 	/**
-	* Récupères les elements enfants
-	*
-	* @param object $element L'élement parent
-	* @param string $tabulation ?
-	* @param array extra_params ?
-	*/
+	 * Récupères les elements enfants
+	 *
+	 * @param object $element L'élement parent.
+	 * @param string $tabulation ?.
+	 * @param array  $extra_params ?.
+	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		if ( !is_object( $element ) ) {
 			return array();

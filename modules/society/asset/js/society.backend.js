@@ -9,11 +9,7 @@ window.digirisk.society.event = function() {
 };
 
 window.digirisk.society.callback_load_society = function( element, response ) {
-	jQuery( '.wp-digi-societytree-right-container' ).html( response.data.template );
-
-	if ( response.data.template_left ) {
-		jQuery( '.wp-digi-societytree-left-container' ).replaceWith( response.data.template_left );
-	}
+	jQuery( '.wp-digi-societytree-main-container' ).replaceWith( response.data.template );
 }
 
 window.digirisk.society.display_save_button = function( event ) {

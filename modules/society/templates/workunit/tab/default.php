@@ -1,2 +1,0 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-<?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $workunit->id . '"' . ( !empty( $workunit->option[ 'associated_' . $tab_to_display] ) ? ' list="' . implode( ',', $workunit->option[ 'associated_' . $tab_to_display ] ) . '"' : '' ) . ' ]' ); ?>

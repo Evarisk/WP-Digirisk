@@ -15,9 +15,11 @@
 
 			]
 		},
+		"class": {},
 		"helper": {
 			"priority": [
 			]
-		}
+		},
+		"shortcode": {}
 	}
 }

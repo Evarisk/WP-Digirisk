@@ -25,38 +25,7 @@ class Society_Class extends Singleton_Util {
 	 * AFFICHAGE/DISPLAY - Affichage de l'écran principal pour la gestion de la structure de la société et l'évaluation des risques / Display main screen for society management and risk evaluation
 	 */
 	public function display_dashboard() {
-		\digi\log_class::g()->start_ms( 'display_dashboard' );
-
-		$group_list = group_class::g()->get(
-			array(
-				'posts_per_page' => -1,
-				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft' ),
-				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
-			), array( 'list_group', 'list_workunit' ) );
-
-		if ( !empty( $group_list ) ) {
-			if ( !empty( $_GET['society_id'] ) ) {
-				$society = society_class::g()->show_by_type( $_GET['society_id'], array( 'list_group', 'list_workunit' ) );
-
-				if ( $society->type != 'digi-group' ) {
-					$society_parent = society_class::g()->show_by_type( $society->parent_id, array( 'list_group', 'list_workunit' ) );
-				}
-				else {
-					$society_parent = $society;
-				}
-			}
-			else {
-				$society = $group_list[0];
-				$society_parent = $group_list[0];
-				$tmp_group = group_class::g()->get( array( 'id' => $group_list[0]->id ), array( 'list_group', 'list_workunit' ) );
-				$group_list[0] = $tmp_group[0];
-
-			}
-		}
-
-		view_util::exec( 'society', 'dashboard', array( 'society_parent' => $society_parent, 'society' => $society, 'group_list' => $group_list ) );
-		\digi\log_class::g()->exec( 'digi_callback_admin_menu', 'display_dashboard', 'Réponse callback_admin_menu' );
+		view_util::exec( '' );
 	}
 
 	/**

@@ -12,54 +12,20 @@ class society_action {
 	 * wp_ajax_save_society
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
-
 		add_action( 'wp_ajax_load_society', array( $this, 'callback_load_society' ) );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
 	}
 
 	/**
-	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
-	 */
-	public function callback_admin_menu() {
-		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
-		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
-
-		if ( !empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'Digirisk : Risk evaluation', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( society_class::g(), 'display_dashboard' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4);
-		}
-	}
-
-	/**
 	 * Affiche la fiche d'une unité de travail / Display a work unit sheet
 	 */
 	public function callback_load_society() {
-		// todo: Doublon ?
-		$id = !empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		$tab_to_display = !empty( $_POST['tab_to_display'] ) ? sanitize_text_field( $_POST['tab_to_display'] ) : '';
+		$template = '';
 
 		ob_start();
-		do_shortcode( '[digi_dashboard id="' . $id . '" tab_to_display="' . $tab_to_display . '"]' );
-		$template = ob_get_clean();
-
-		$group_list = group_class::g()->get(
-			array(
-				'posts_per_page' => -1,
-				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft', ),
-				'order' => 'ASC'
-			), array( 'list_group', 'list_workunit' ) );
-
-		$society = society_class::g()->show_by_type( $id );
-
-		if ( $society->type == 'digi-group' ) {
-			ob_start();
-			view_util::exec( 'society', 'screen-left', array( 'society_parent' => $society, 'society' => $society, 'group_list' => $group_list, 'element_id' => $id ) );
-			wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'callback_load_society', 'template' => $template, 'template_left' => ob_get_clean() ) );
-
-		}
-
+		Digirisk_Class::g()->display();
+		$template .= ob_get_clean();
 		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'callback_load_society', 'template' => $template ) );
 	}
 

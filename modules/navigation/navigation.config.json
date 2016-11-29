@@ -1,0 +1,12 @@
+{
+	"name": "Navigation",
+	"slug": "navigation",
+	"state": true,
+	"version": "6.2.1.0",
+	"description": "La navigation de DigiRisk",
+	"path": "modules/navigation/",
+	"dependencies": {
+		"class": {},
+		"shortcode": {}
+	}
+}

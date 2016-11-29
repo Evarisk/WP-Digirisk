@@ -64,7 +64,8 @@
 		"modules/user/user.config.json",
 		"modules/user_dashboard/user_dashboard.config.json",
 
-		"modules/workunit/workunit.config.json"
+		"modules/workunit/workunit.config.json",
+		"modules/navigation/navigation.config.json"
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
