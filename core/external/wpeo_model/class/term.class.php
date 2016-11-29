@@ -54,11 +54,11 @@ class term_class extends singleton_util {
 		wp_delete_term( $id );
 	}
 
-	public function get( $args = array(), $children_wanted = array() ) {
+	public function get( $args = array() ) {
 		$list_term = array();
 		$array_term = array();
 
-		$term_final_args = array_merge( $args, array( 'hide_empty' => false, ) );
+		$term_final_args = array_merge( $args, array( 'hide_empty' => false ) );
 
 		if ( !empty( $args['id'] ) ) {
 			$array_term[] = get_term_by( 'id', $args['id'], $this->taxonomy, ARRAY_A );
@@ -94,7 +94,7 @@ class term_class extends singleton_util {
 					}
 				}
 
-				$list_term[$key] = new $this->model_name( $term, $children_wanted );
+				$list_term[$key] = new $this->model_name( $term );
 
 				if ( !empty( $this->after_get_function ) ) {
 				  foreach ( $this->after_get_function as $get_function ) {

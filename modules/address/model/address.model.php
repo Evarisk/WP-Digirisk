@@ -24,7 +24,7 @@ class Address_model extends Comment_model {
 	 * @param Address_model $object       L'objet avec ses données.
 	 * @param array         $field_wanted Les enfants voulu dans l'objet.
 	 */
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'address' => array(
 				'type' 			=> 'string',
@@ -71,7 +71,7 @@ class Address_model extends Comment_model {
 			),
 		)	);
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

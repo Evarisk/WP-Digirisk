@@ -4,17 +4,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluation_method_model extends term_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'variable'	=> array(
-					'export'			=> true,
-					'type'				=> 'taxonomy',
-					'controller'	=> 'evaluation_method_variable_class',
-					'field'				=> 'include',
-					'value'				=> 'formula'
-				),
-			),
 			'unique_key' => array(
 				'type' 			=> 'string',
 				'meta_type'	=> 'single',
@@ -48,7 +39,7 @@ class evaluation_method_model extends term_model {
 				'meta_type'	=> 'multiple',
 			),
 		) );
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

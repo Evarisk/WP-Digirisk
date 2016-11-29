@@ -10,12 +10,9 @@ class constructor_data_class extends helper_class {
 	 * @param [type] $field_wanted [description]
 	 * @param array  $args         [description]
 	 */
-	protected function __construct( $data, $field_wanted, $args = array() ) {
+	protected function __construct( $data ) {
 		$this->dispatch_wordpress_data( $data, $data );
 		log_class::g()->exec( 'digirisk_construct_data', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => '', 'object' => $this, ), 0 );
-		if ( ! empty( $field_wanted ) ) {
-			$this->fill_child( $field_wanted, $args );
-		}
 	}
 
 	private function dispatch_wordpress_data( $all_data, $data, $current_object = null, $model = array() ) {
@@ -75,61 +72,6 @@ class constructor_data_class extends helper_class {
 	private function set_default_data( $field_name, $field_def ) {
 		if ( isset( $field_def['bydefault'] ) ) {
 			return $field_def['bydefault'];
-		}
-	}
-
-	private function fill_child( $field_wanted, $args ) {
-		if ( !empty( $this->model['child'] ) ) {
-			foreach ( $this->model['child'] as $child_name => $child_def ) {
-				if ( isset( $child_def['field'] ) && (in_array( $child_name, !empty( $field_wanted ) ?  str_replace( '\digi\\', '', $field_wanted ) : array() ) || empty( $field_wanted ) ) ) {
-					if ( isset( $this->id ) ) {
-						$value = $this->id;
-
-						if ( !empty( $child_def['value'] ) ) {
-							$key = $this->parse_key( $child_def );
-
-							if ( !is_array( $key ) ) {
-								$value = $this->{$child_def['value']};
-							}
-							else {
-								$value = $this->parse_value( $key );
-							}
-
-							if ( !is_array( $key ) && empty( $this->{$child_def['value']} ) ) {
-								$value = $this->id;
-							}
-
-							if ( !is_array( $key ) && !empty( $child_def['custom_field'] ) && !empty( $this->{$child_def['value']} ) ) {
-								$value = $this->{$child_def['custom_field']};
-								$child_def['field'] = $child_def['custom_field'];
-							}
-
-							if ( is_array( $key ) && !empty( $child_def['custom_field'] ) && $this->{$child_def['value']} ) {
-								$value = $this->parse_value( $key );
-								$child_def['field'] = $child_def['custom_field'];
-							}
-						}
-
-						if ( $child_def['field'] == 'include' || $child_def['field'] == 'comment__in' && !is_array( $value ) ) {
-							$value = (array) $value;
-						}
-
-						// Ajout de l'agument.
-						$args[ $child_def['field'] ] = $value;
-
-						unset( $args['post__in']);
-						unset( $args['comment__in'] );
-						$list_child = $child_def['controller']::g()->get( $args, $field_wanted );
-					}
-					else {
-						$list_child = $child_def['controller']::g()->get( array( 'id' => 0 ), $field_wanted );
-					}
-
-					if ( ! empty( $list_child ) ) {
-						$this->$child_name = $list_child;
-					}
-				}
-			}
 		}
 	}
 

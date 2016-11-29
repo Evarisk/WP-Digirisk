@@ -105,6 +105,20 @@ class ZIP_Class extends Post_Class {
 		parent::construct();
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
+
+	/**
+	 * Convertis le chemin absolu vers le fichier en URL
+	 *
+	 * @param  string $zip_path Le chemin absolu vers le fichier.
+	 *
+	 * @return string           L'URL vers le fichier
+	 */
+	public function get_zip_url( $zip_path ) {
+		$url = document_class::g()->get_digirisk_dir_path( 'baseurl' );
+		$zip_path_exploded = explode( 'digirisk/', $zip_path );
+		$url .= '/' . $zip_path_exploded[1];
+		return $url;
+	}
 }
 
 ZIP_Class::g();

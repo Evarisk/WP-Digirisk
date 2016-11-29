@@ -54,9 +54,9 @@ class term_model extends constructor_data_class {
 		)
 	);
 
-	public function __construct( $object, $children_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object, $children_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

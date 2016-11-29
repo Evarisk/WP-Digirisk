@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class evaluation_method_variable_model extends term_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 			=> 'string',
@@ -28,20 +28,10 @@ class evaluation_method_variable_model extends term_model {
 			'survey' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
-				// 'child'			=> array(
-				// 	'title'	=> array(
-				// 		'type'	=> 'string',
-				// 		'bydefault'	=> null,
-				// 	),
-				// 	'request'	=> array(
-				// 		'type'	=> 'array',
-				// 		'bydefault'	=> null,
-				// 	),
-				// ),
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

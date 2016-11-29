@@ -4,21 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class recommendation_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
-		$this->model['child']['recommendation_category_term'] = array(
-			'export'			=> true,
-			'type'				=> 'taxonomy',
-			'controller'	=> '\digi\recommendation_category_term_class',
-			'field'				=> 'post_id',
-		);
-
-		$this->model['child']['comment'] = array(
-			'export'			=> true,
-			'type'				=> 'object',
-			'controller'	=> '\digi\recommendation_comment_class',
-			'field'				=> 'post_id'
-		);
-
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 				=> 'string',
@@ -69,7 +55,7 @@ class recommendation_model extends post_model {
 				)
 			)
 		) );
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

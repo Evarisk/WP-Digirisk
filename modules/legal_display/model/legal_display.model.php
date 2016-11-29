@@ -4,22 +4,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class legal_display_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'detective_work' => array(
-					'type' 				=> 'object',
-					'controller'	=> '\digi\third_class',
-					'field'				=> 'id',
-					'value'				=> 'detective_work_id'
-				),
-				'occupational_health_service' => array(
-					'type' 				=> 'object',
-					'controller'	=> '\digi\third_class',
-					'field'				=> 'id',
-					'value'				=> 'occupational_health_service_id'
-				)
-			),
 			'occupational_health_service_id' => array(
 				'type'			=> 'integer',
 				'meta_type'	=> 'multiple',
@@ -219,7 +205,7 @@ class legal_display_model extends post_model {
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

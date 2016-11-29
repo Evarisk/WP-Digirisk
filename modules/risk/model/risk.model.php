@@ -21,41 +21,8 @@ class risk_model extends post_model {
 	 * @param [type] $object       [description]
 	 * @param array  $field_wanted [description]
 	 */
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'evaluation' => array(
-					'export'			=> true,
-					'type' 				=> 'object',
-					'controller'	=> '\digi\risk_evaluation_class',
-					'field'					=> 'comment__in',
-					'value'					=> 'current_evaluation_id',
-				),
-				'danger_category' => array(
-					'export'			=> true,
-					'type'				=> 'taxonomy',
-					'controller'	=> '\digi\category_danger_class',
-					'field'				=> 'post_id',
-				),
-				'comment' => array(
-					'export'			=> true,
-					'type'				=> 'object',
-					'controller'	=> '\digi\risk_evaluation_comment_class',
-					'field'				=> 'post_id',
-				),
-				'evaluation_method' => array(
-					'export'			=> true,
-					'type'				=> 'object',
-					'controller' 	=> '\digi\evaluation_method_class',
-					'field'				=> 'post_id',
-				),
-				'recommendation' => array(
-					'export'			=> true,
-					'type'				=> 'object',
-					'controller' 	=> '\digi\recommendation_class',
-					'field'				=> 'post_parent',
-				),
-			),
 			'associated_recommendation' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
@@ -116,7 +83,7 @@ class risk_model extends post_model {
 				)
 			)
 		) );
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

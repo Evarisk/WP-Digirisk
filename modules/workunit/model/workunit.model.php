@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class workunit_model extends society_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'user_info' => array(
 				'type' => 'array',
@@ -56,21 +56,13 @@ class workunit_model extends society_model {
 					),
 				),
 			),
-			'child' => array(
-				'recommendation' => array(
-					'export'			=> true,
-					'type'				=> 'object',
-					'controller' 	=> '\digi\recommendation_class',
-					'field'				=> 'post_parent'
-				),
-			),
 			'associated_recommendation' => array(
 				'type' 		=> 'array',
 				'meta_type'	=> 'multiple',
 			),
 		) );
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

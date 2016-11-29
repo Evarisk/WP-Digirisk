@@ -4,17 +4,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class third_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'address' => array(
-					'type'					=> 'object',
-					'controller' 		=> '\digi\address_class',
-					'field'					=> 'comment__in',
-					'value'					=> 'contact[address_id]',
-					'custom'			=> 'array'
-				)
-			),
 			'full_name' => array(
 				'type' 			=> 'string',
 				'meta_type' => 'multiple',
@@ -42,7 +33,7 @@ class third_model extends post_model {
 				'meta_type' => 'multiple',
 			)
 		) );
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

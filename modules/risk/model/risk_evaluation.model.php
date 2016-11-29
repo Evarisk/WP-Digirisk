@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_evaluation_model extends comment_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'risk_level' => array(
 				'export' => true,
@@ -62,7 +62,7 @@ class risk_evaluation_model extends comment_model {
 			)
 		) );
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

@@ -72,7 +72,7 @@ class user_class extends singleton_util {
 		wp_delete_user( $id );
 	}
 
-	public function get( $args = array(), $field_wanted = array() ) {
+	public function get( $args = array() ) {
 		$list_user = array();
 		$list_model_user = array();
 
@@ -109,7 +109,7 @@ class user_class extends singleton_util {
 					}
 				}
 
-				$data = new $this->model_name( $element, $field_wanted );
+				$data = new $this->model_name( $element );
 
 				if ( !empty( $this->after_get_function ) ) {
 				  foreach ( $this->after_get_function as $get_function ) {

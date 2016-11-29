@@ -25,7 +25,7 @@ class comment_class extends singleton_util {
 		return $model->get_model();
 	}
 
-	public function get( $args = array( 'post_id' => 0, 'parent' => 0 ), $field_wanted = array() ) {
+	public function get( $args = array( 'post_id' => 0, 'parent' => 0 ) ) {
 		$array_model = array();
 		$array_comment = array();
 
@@ -65,7 +65,7 @@ class comment_class extends singleton_util {
 					}
 				}
 
-				$list_comment[$key] = new $this->model_name( $comment, $field_wanted );
+				$list_comment[$key] = new $this->model_name( $comment );
 
 				if ( !empty( $this->after_model_get_function ) ) {
 					foreach( $this->after_model_get_function as $model_function ) {
@@ -75,7 +75,7 @@ class comment_class extends singleton_util {
 			}
 		}
 		else {
-			$list_comment[0] = new $this->model_name( array(), $field_wanted );
+			$list_comment[0] = new $this->model_name( array() );
 
 			if ( !empty( $this->after_model_get_function ) ) {
 				foreach( $this->after_model_get_function as $model_function ) {

@@ -94,7 +94,7 @@ class Post_Class extends singleton_util {
 		return $model->get_model();
 	}
 
-	public function get( $args = array( 'posts_per_page' => -1 ), $children_wanted = array() ) {
+	public function get( $args = array( 'posts_per_page' => -1 ) ) {
 		$array_posts = array();
 		$args['post_type'] = $this->post_type;
 
@@ -122,10 +122,6 @@ class Post_Class extends singleton_util {
 			$query_posts = new \WP_Query( $args );
 			$array_posts = $query_posts->posts;
 			unset( $query_posts->posts );
-
-			if ( ! empty( $args['post__in'] ) ) {
-				unset( $args['post__in'] );
-			}
 		}
 
 		foreach ( $array_posts as $key => $post ) {
@@ -154,7 +150,7 @@ class Post_Class extends singleton_util {
 
 			}
 
-			$array_posts[$key] = new $this->model_name( $post, $children_wanted, $args );
+			$array_posts[$key] = new $this->model_name( $post );
 			$array_posts[$key] = $this->get_taxonomies_id( $array_posts[$key] );
 
 			if ( !empty( $this->after_get_function ) ) {

@@ -21,13 +21,13 @@ class ZIP_Model extends Post_Model {
 	 * @param array  $field_wanted [description].
 	 * @param array  $args          [description].
 	 */
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model['list_generation_results'] = array(
 			'type' 		=> 'array',
 			'meta_type'	=> 'multiple',
 		);
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

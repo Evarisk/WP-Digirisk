@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class epi_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array(), $args =  array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'unique_key' => array(
 				'type' 				=> 'string',
@@ -56,7 +56,7 @@ class epi_model extends post_model {
 
 		$this->model['title']['required'] = true;
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

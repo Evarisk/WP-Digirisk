@@ -91,27 +91,9 @@ class user_model extends constructor_data_class {
 		)
 	);
 
-	public function __construct( $object, $children_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		/**	Instanciation du constructeur de modèle principal / Instanciate the main model constructor	*/
-		parent::__construct( $object, $children_wanted, $args );
-		//
-		// /** If cropped don't get meta */
-		// if ( !$cropped ) {
-		// 	$user_meta = get_user_meta( $this->id );
-		//
-		// 	if ( !empty( $user_meta ) )
-		// 		$user_meta = array_merge( $user_meta, get_user_meta( $this->id, $meta_key ) );
-		// 	else
-		// 		$user_meta = get_user_meta( $this->id, $meta_key );
-		//
-		// 	$internal_meta = !empty( $user_meta ) && !empty( $user_meta[ $meta_key ] ) && !empty( $user_meta[ $meta_key ][ 0 ] ) ? json_decode( $user_meta[ $meta_key ][ 0 ], true ) : null;
-		//
-		// 	if ( !empty( $this->array_option ) ) {
-		// 		foreach( $this->array_option as $key => $array ) {
-		// 			$this->option[ $key ] = $this->fill_value( $object, $user_meta, $key, $array, $internal_meta );
-		// 		}
-		// 	}
-		// }
+		parent::__construct( $object );
 	}
 
 	/**

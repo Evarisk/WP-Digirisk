@@ -11,7 +11,7 @@ class fiche_de_poste_model extends Document_Model {
 	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
 	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
 	 */
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model['document_meta'] = array(
 			'type'				=> 'array',
 			'meta_type' 	=> 'single',
@@ -91,7 +91,7 @@ class fiche_de_poste_model extends Document_Model {
 			)
 		);
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

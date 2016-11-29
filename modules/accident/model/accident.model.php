@@ -2,22 +2,8 @@
 
 class accident_model extends post_model {
 
-	public function __construct( $object, $field_wanted = array(), $args = array() ) {
+	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
-			'child' => array(
-				'list_risk' => array(
-					'type'				=> 'array',
-					'controller' 	=> 'risk_class',
-					'field'				=> 'id',
-					'value'				=> 'risk_id'
-				),
-				'list_user' => array(
-					'type'				=> 'array',
-					'controller' 	=> '\digi\user_class',
-					'field'				=> 'id',
-					'value'				=> 'user_id'
-				),
-			),
 			'unique_key' => array(
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
@@ -47,12 +33,12 @@ class accident_model extends post_model {
 				'type'				=> 'integer',
 				'meta_type'		=> 'multiple',
 				'required'		=> true,
-			)
+			),
 		) );
 
 		$this->model['content']['required'] = true;
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

@@ -36,9 +36,12 @@ class ZIP_Filter {
 	 * @return string $content Le contenu du bouton "Télécharger le ZIP"
 	 */
 	public function callback_list_duer_single_item_action_end( $content, $element ) {
-		ob_start();
-		view_util::exec( 'zip', 'download-button', array( 'element' => $element ) );
-		$content .= ob_get_clean();
+		if ( ! empty( $element->zip_path ) ) {
+			ob_start();
+			$zip_url = ZIP_Class::g()->get_zip_url( $element->zip_path );
+			view_util::exec( 'zip', 'download-button', array( 'zip_url' => $zip_url ) );
+			$content .= ob_get_clean();
+		}
 		return $content;
 	}
 }
