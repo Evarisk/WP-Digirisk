@@ -94,6 +94,46 @@ class tools_action {
 			}
 		}
 
+		$args = array(
+			'post_status' => 'inherit',
+			'tax_query' => array(
+				array(
+					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
+					'field'			=> 'slug',
+					'terms'			=> 'fiche_de_groupement',
+				),
+			),
+		);
+
+		$list_document = document_class::g()->get( $args );
+
+		if ( ! empty( $list_document ) ) {
+			foreach ( $list_document as $element ) {
+				$element->unique_identifier = str_replace( document_class::g()->element_prefix, Fiche_De_Groupement_Class::g()->element_prefix, $element->unique_identifier );
+				Fiche_De_Groupement_Class::g()->update( $element );
+			}
+		}
+
+		$args = array(
+			'post_status' => 'inherit',
+			'tax_query' => array(
+				array(
+					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
+					'field'			=> 'slug',
+					'terms'			=> 'fiche_de_poste',
+				),
+			),
+		);
+
+		$list_document = document_class::g()->get( $args );
+
+		if ( ! empty( $list_document ) ) {
+			foreach ( $list_document as $element ) {
+				$element->unique_identifier = str_replace( document_class::g()->element_prefix, Fiche_De_Poste_Class::g()->element_prefix, $element->unique_identifier );
+				Fiche_De_Poste_Class::g()->update( $element );
+			}
+		}
+
 		wp_send_json_success();
 	}
 }
