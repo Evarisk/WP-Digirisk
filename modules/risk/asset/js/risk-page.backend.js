@@ -7,7 +7,7 @@ window.digirisk.risk_page.init = function() {
 window.digirisk.risk_page.event = function() {
 	jQuery( document ).on( 'click', '.risk-page .button', window.digirisk.risk_page.send_all_risk );
 
-	jQuery( document ).on( 'click', '.wp-digi-list-item input, .wp-digi-list-item toggle', window.digirisk.risk_page.check_the_checkbox );
+	jQuery( document ).on( 'click', '.wp-digi-list-item input, .wp-digi-list-item toggle, .wp-digi-list-item textarea', window.digirisk.risk_page.check_the_checkbox );
 };
 
 window.digirisk.risk_page.send_all_risk = function(event) {
