@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function get_full_recommendation( $data ) {
 	$args_recommendation_category_term = array( 'schema' => true );
 	$args_recommendation_term = array( 'schema' => true );
+	$args_recommendation_comment = array( 'schema' => true );
 
 	if ( ! empty( $data->taxonomy['digi-recommendation-category'] ) ) {
 		$args_recommendation_category_term = array( 'include' => array( max( $data->taxonomy['digi-recommendation-category'] ) ) );
@@ -33,8 +34,15 @@ function get_full_recommendation( $data ) {
 		$args_recommendation_term = array( 'include' => array( max( $data->taxonomy['digi-recommendation'] ) ) );
 	}
 
+	if ( ! empty( $data->id ) ) {
+		$args_recommendation_comment = array( 'post_id' => $data->id );
+	}
+
 	$data->recommendation_category_term = Recommendation_Category_Term_Class::g()->get( $args_recommendation_category_term );
 	$data->recommendation_category_term[0]->recommendation_term = Recommendation_Term_Class::g()->get( $args_recommendation_term );
+
+	// Récupères les commentaires.
+	$data->comment = Recommendation_Comment_Class::g()->get( $args_recommendation_comment );
 
 	return $data;
 }

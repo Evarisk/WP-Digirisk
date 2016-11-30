@@ -128,15 +128,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @return bool
 	 */
 	public function generate( $society_id ) {
-		$society = group_class::g()->get( array( 'post__in' => array( $society_id ) ), array(
-			'list_risk',
-			'list_workunit',
-			'comment',
-			'evaluation_method',
-			'evaluation',
-			'danger_category',
-			'danger',
-		) );
+		$society = group_class::g()->get( array( 'post__in' => array( $society_id ) ) );
 
 		if ( empty( $society[0] ) ) {
 			return false;
@@ -271,6 +263,8 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @return array Les risques dans la société
 	 */
 	public function set_risks( $society ) {
+		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
+
 		$risk_details = array(
 			'risq80' => array( 'type' => 'segment', 'value' => array() ),
 			'risq51' => array( 'type' => 'segment', 'value' => array() ),
@@ -279,8 +273,8 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		);
 
 		$risk_list_to_order = array();
-		if ( ! empty( $society->list_risk ) ) {
-			foreach ( $society->list_risk as $risk ) {
+		if ( ! empty( $risks ) ) {
+			foreach ( $risks as $risk ) {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
@@ -289,10 +283,10 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					endforeach;
 				endif;
 
-				$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
-					'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
-					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
-					'quotationRisque'		=> $risk->evaluation[0]->risk_level['equivalence'],
+				$risk_list_to_order[ $risk->evaluation->scale ][] = array(
+					'nomDanger'					=> $risk->danger->name,
+					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
+					'quotationRisque'		=> $risk->evaluation->risk_level['equivalence'],
 					'commentaireRisque'	=> $comment_list,
 				);
 			}

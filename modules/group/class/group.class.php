@@ -224,7 +224,7 @@ class Group_Class extends Post_Class {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
 		// 	return array();
 
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ), array ( 'evaluation', 'danger_category', 'danger', 'comment' ) );
+		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
 			$comment_list = '';
@@ -238,12 +238,12 @@ class Group_Class extends Post_Class {
 			$element_duer_details[] = apply_filters( 'risk_duer_additional_data', array(
 				'idElement'					=> $element->unique_identifier,
 				'nomElement'				=> $element->unique_identifier. ' - ' . $element->title,
-				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
-				'quotationRisque'		=> $risk->evaluation[0]->risk_level[ 'equivalence' ],
-				'niveauRisque'			=> $risk->evaluation[0]->scale,
-				'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
+				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
+				'quotationRisque'		=> $risk->evaluation->risk_level[ 'equivalence' ],
+				'niveauRisque'			=> $risk->evaluation->scale,
+				'nomDanger'					=> $risk->danger->name,
 				'commentaireRisque'	=> $comment_list,
-				'actionPrevention'	=> ''
+				'actionPrevention'	=> '',
 			), $risk );
 		}
 

@@ -127,17 +127,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @return bool
 	 */
 	public function generate( $society_id ) {
-		$society = workunit_class::g()->get( array( 'post__in' => array( $society_id ) ), array(
-			'list_risk',
-			'comment',
-			'evaluation_method',
-			'evaluation',
-			'danger_category',
-			'danger',
-			'recommendation',
-			'recommendation_category_term',
-			'comment',
-		) );
+		$society = workunit_class::g()->get( array( 'post__in' => array( $society_id ) ) );
 
 		if ( empty( $society[0] ) ) {
 			return false;
@@ -275,6 +265,8 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @return array Les risques dans la société
 	 */
 	public function set_risks( $society ) {
+		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
+
 		$risk_details = array(
 			'risq80' => array( 'type' => 'segment', 'value' => array() ),
 			'risq51' => array( 'type' => 'segment', 'value' => array() ),
@@ -284,8 +276,8 @@ class Fiche_De_Poste_Class extends Post_Class {
 
 		$risk_list_to_order = array();
 
-		if ( ! empty( $society->list_risk ) ) {
-			foreach ( $society->list_risk as $risk ) {
+		if ( ! empty( $risks ) ) {
+			foreach ( $risks as $risk ) {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
@@ -294,10 +286,10 @@ class Fiche_De_Poste_Class extends Post_Class {
 					endforeach;
 				endif;
 
-				$risk_list_to_order[ $risk->evaluation[0]->scale ][] = array(
-					'nomDanger'					=> $risk->danger_category[0]->danger[0]->name,
-					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation[0]->unique_identifier,
-					'quotationRisque'		=> $risk->evaluation[0]->risk_level['equivalence'],
+				$risk_list_to_order[ $risk->evaluation->scale ][] = array(
+					'nomDanger'					=> $risk->danger->name,
+					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
+					'quotationRisque'		=> $risk->evaluation->risk_level['equivalence'],
 					'commentaireRisque'	=> $comment_list,
 				);
 			}
@@ -323,28 +315,30 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @return array Les recommandations dans la société
 	 */
 	public function set_recommendations( $society ) {
-		$recommendations_details = array( 'affectedRecommandation' => array( 'type' => 'segment', 'value' => array() ) );
-		$recommendations = array();
+		$recommendations = Recommendation_Class::g()->get( array( 'post_parent' => $society->id ) );
 
-		if ( ! empty( $society->recommendation ) ) {
-			foreach ( $society->recommendation as $element ) {
+		$recommendations_details = array( 'affectedRecommandation' => array( 'type' => 'segment', 'value' => array() ) );
+		$recommendations_filled = array();
+
+		if ( ! empty( $recommendations ) ) {
+			foreach ( $recommendations as $element ) {
 				/** Récupères la catégorie parent */
-				$recommendations[ $element->id ] = array(
-					'recommandationCategoryIcon' => $this->get_picture_term( $element->recommendation_category_term[0]->id ),
+				$recommendations_filled[ $element->id ] = array(
+					'recommandationCategoryIcon' => $this->get_picture_term( $element->recommendation_category_term[0]->thumbnail_id ),
 					'recommandationCategoryName' => $element->recommendation_category_term[0]->name,
 				);
 
-				$recommendations[ $element->id ]['recommendations']['type'] = 'sub_segment';
-				$recommendations[ $element->id ]['recommendations']['value'][] = array(
+				$recommendations_filled[ $element->id ]['recommendations']['type'] = 'sub_segment';
+				$recommendations_filled[ $element->id ]['recommendations']['value'][] = array(
 					'identifiantRecommandation' => $element->unique_identifier,
-					'recommandationIcon'				=> $this->get_picture_term( $element->taxonomy['digi-recommendation'][0] ),
+					'recommandationIcon'				=> $this->get_picture_term( $element->recommendation_category_term[0]->recommendation_term[0]->thumbnail_id ),
 					'recommandationName'				=> $element->recommendation_category_term[0]->name,
 					'recommandationComment'			=> $element->comment[0]->content,
 				);
 			}
 		}
 
-		$recommendations_details['affectedRecommandation']['value'] = $recommendations;
+		$recommendations_details['affectedRecommandation']['value'] = $recommendations_filled;
 
 		return $recommendations_details;
 	}
