@@ -14,8 +14,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 
 <input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
 <input type="hidden" class="input-hidden-method-id" name="risk[taxonomy][digi-method][]" value="<?php echo $digi_method_id; ?>" />
-<input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo $risk->evaluation[0]->scale; ?>" />
+<input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo $risk->evaluation->scale; ?>" />
 
 <span data-target="wpdigi-method-evaluation-render" data-parent="wp-digi-risk-item" class="open-popup wp-digi-risk-list-column-cotation" >
-	<div class="wp-digi-risk-level wp-digi-risk-level-<?php echo $risk->evaluation[0]->scale; ?> wp-digi-risk-level-new"><?php echo $risk->id !== 0 ? $risk->evaluation[0]->risk_level['equivalence'] : '0'; ?></div>
+	<div class="wp-digi-risk-level wp-digi-risk-level-<?php echo $risk->evaluation->scale; ?> wp-digi-risk-level-new"><?php echo $risk->id !== 0 ? $risk->evaluation->risk_level['equivalence'] : '0'; ?></div>
 </span>

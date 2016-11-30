@@ -13,5 +13,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="wp-digi-societytree-right-container wp-digi-bloc-loader">
-	Deuxieme
+	<?php do_shortcode( '[digi_dashboard id="' . $society_id . '"]' ); ?>
 </div>

@@ -2,7 +2,11 @@
 /**
  * Affiches la liste des risques
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package recommendation
+ * @subpackage shortcode
  */
 
 namespace digi;
@@ -29,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	if ( ! empty( $risk_schema ) ) :
-		view_util::exec( 'risk', 'item-edit', array( 'society_id' => $society->id, 'risk' => $risk_schema ) );
+		view_util::exec( 'risk', 'item-edit', array( 'society_id' => $society_id, 'risk' => $risk_schema ) );
 	endif;
 	?>
 </ul>

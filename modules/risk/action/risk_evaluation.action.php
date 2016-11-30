@@ -46,7 +46,7 @@ class risk_evaluation_action {
 				$risk['evaluation']['variable'] = $risk['variable'];
 			}
 
-			$risk['evaluation'] = risk_evaluation_class::g()->update( $risk['evaluation'] );
+			$risk['evaluation'] = Risk_Evaluation_Class::g()->update( $risk['evaluation'] );
 
 			if ( $risk['evaluation'] ) {
 				$risk['current_evaluation_id'] = $risk['evaluation']->id;

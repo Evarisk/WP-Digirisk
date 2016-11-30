@@ -24,10 +24,10 @@ class recommendation_term_model extends term_model {
 				'type'			=> 'integer',
 				'meta_type'	=> 'single',
 				'field'			=> '_thumbnail_id',
-			)
+			),
 		) );
 
-		parent::__construct( $object, $field_wanted, $args );
+		parent::__construct( $object );
 	}
 
 }

@@ -1,28 +1,40 @@
-<?php namespace digi;
+<?php
 /**
-* Ajoutes deux shortcodes
-* digi_evaluation_method permet d'afficher la méthode d'évaluation simple
-* digi_evaluation_method_complex permet d'afficher la méthode d'évaluation complexe
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage shortcode
-*/
+ * Récupères le commentaire pour ensuiter l'afficher.
+ * Fait également l'affichage du formulaire pour ajouter un commentaire.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package comment
+ * @subpackage class
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class digi_comment_class extends singleton_util {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Récupères le commentaire pour ensuiter l'afficher.
+ * Fait également l'affichage du formulaire pour ajouter un commentaire.
+ */
+class Digi_Comment_Class extends Singleton_Util {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	protected function construct() {}
 
+	/**
+	 * [display description]
+	 *
+	 * @param  [type] $param [description].
+	 * @return [type]        [description]
+	 */
 	public function display( $param ) {
-		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
-		$type = !empty( $param ) && !empty( $param['type'] ) ? $param['type'] : '';
-		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
+		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
+		$type = ! empty( $param ) && ! empty( $param['type'] ) ? $param['type'] : '';
+		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
 
 		if ( empty( $type ) ) {
 			return false;
@@ -30,21 +42,18 @@ class digi_comment_class extends singleton_util {
 
 		$model_name = '\digi\\' . $type . '_class';
 
-		if ( $id !== 0 ) {
-			$element = $model_name::g()->get( array( 'include' => array( $id ) ), array( '\digi\comment' ) );
-			$element = $element[0];
+		if ( 0 !== $id ) {
+			$comments = $model_name::g()->get( array( 'post_id' => $id ) );
 		}
 		else {
-			$element = $model_name::g()->get( array( 'schema' => true ) );
-			$element = $element[0];
-			$element->comment = comment_class::g()->get( array( 'schema' => true ) );
+			$comments = comment_class::g()->get( array( 'schema' => true ) );
 		}
 
 		$comment_new = comment_class::g()->get( array( 'schema' => true ) );
 		$comment_new = $comment_new[0];
 
-		view_util::exec( 'comment', 'main', array( 'element' => $element, 'comment_new' => $comment_new, 'type' => $type, 'display' => $display ) );
+		view_util::exec( 'comment', 'main', array( 'id' => $id, 'comments' => $comments, 'comment_new' => $comment_new, 'type' => $type, 'display' => $display ) );
 	}
 }
 
-new digi_comment_class();
+new Digi_Comment_Class();

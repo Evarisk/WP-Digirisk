@@ -4,7 +4,6 @@ function construct_evaluation( $data ) {
 	if ( !empty( $data ) && !empty( $data[ 'method_id' ] ) ) {
 		$method_evaluation_digirisk_simplified = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::g()->get_taxonomy() );
 		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
-
 		if ( $data['method_id'] == $method_evaluation_digirisk_simplified->term_id ) {
 			$data = update_method_simplified( $data['scale'] );
 
@@ -20,6 +19,7 @@ function construct_evaluation( $data ) {
 			}
 		}
 	}
+
 	return $data;
 }
 

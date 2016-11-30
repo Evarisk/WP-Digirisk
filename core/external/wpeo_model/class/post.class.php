@@ -137,25 +137,25 @@ class Post_Class extends singleton_util {
 
 				$post = array_merge( $post, $list_meta );
 
-				if ( ! empty( $post[$this->meta_key] ) ) {
-					$data_json = json_util::g()->decode( $post[$this->meta_key] );
+				if ( ! empty( $post[ $this->meta_key ] ) ) {
+					$data_json = json_util::g()->decode( $post[ $this->meta_key ] );
 					if ( is_array( $data_json ) ) {
 						$post = array_merge( $post, $data_json );
 					}
 					else {
-						$post[$this->meta_key] = $data_json;
+						$post[ $this->meta_key ] = $data_json;
 					}
-					unset( $post[$this->meta_key] );
+					unset( $post[ $this->meta_key ] );
 				}
 
 			}
 
-			$array_posts[$key] = new $this->model_name( $post );
-			$array_posts[$key] = $this->get_taxonomies_id( $array_posts[$key] );
+			$array_posts[ $key ] = new $this->model_name( $post );
+			$array_posts[ $key ] = $this->get_taxonomies_id( $array_posts[ $key ] );
 
-			if ( !empty( $this->after_get_function ) ) {
+			if ( ! empty( $this->after_get_function ) ) {
 				foreach ( $this->after_get_function as $get_function ) {
-					$array_posts[$key] = call_user_func( $get_function, $array_posts[$key] );
+					$array_posts[ $key ] = call_user_func( $get_function, $array_posts[ $key ] );
 				}
 			}
 

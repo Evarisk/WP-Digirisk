@@ -1,46 +1,47 @@
-<?php namespace digi;
+<?php
+/**
+ * Gestion de la requête AJAX pour enregistrer la configuration d'un groupement
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package group
+ * @subpackage action
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class wpdigi_group_configuration_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Gestion de la requête AJAX pour enregistrer la configuration d'un groupement
+ */
+class Group_Configuration_Action {
+
 	/**
-	* Le constructeur appelle l'action ajax: wp_ajax_save_groupment_configuration
-	*/
-  public function __construct() {
-    add_action( 'wp_ajax_save_groupment_configuration', array( $this, 'callback_save_groupment_configuration' ) );
-  }
+	 * Le constructeur
+	 */
+	public function __construct() {
+		add_action( 'wp_ajax_save_groupment_configuration', array( $this, 'callback_save_groupment_configuration' ) );
+	}
 
 	/**
-	* Sauvegardes toutes les données d'un groupement
-	*
-	* int $_POST['groupment_id'] L'ID du groupement
-	*
-	* array $_POST['address'] Les données envoyées par le formulaire pour l'adresse
-	* string $_POST['address']['address'] L'adresse
-	* string $_POST['address']['additional_address'] L'adresse complémentaire
-	* string $_POST['address']['postcode'] Le code postal
-	* string $_POST['address']['town'] La ville
-	*
-	* array $_POST['groupment'] Les données du groupement envoyées par le formulaire
-	* string $_POST['groupement']['title'] Le nom de la societé
-	* string $_POST['groupement']['content'] La description de la societé
-	* string $_POST['groupement']['date'] La date de création de la societé
-	* string $_POST['groupement']['option']['identity']['siren'] Le SIREN de la societé
-	* string $_POST['groupement']['option']['identity']['siret'] Le SIRET de la societé
-	* string $_POST['groupement']['option']['contact']['phone'] Le téléphone de la societé
-	*
-	* int $_POST['owner_id'] Le responsable de la societé
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
-  public function callback_save_groupment_configuration() {
-    check_ajax_referer( 'save_groupment_configuration' );
+	 * Appelle les méthodes save de Group_Configuration_Class et Address_Class pour enregister les données.
+	 *
+	 * @return void
+	 */
+	public function callback_save_groupment_configuration() {
+		check_ajax_referer( 'save_groupment_configuration' );
 
-		$group = group_configuration_class::g()->save( $_POST['groupment'] );
-		$address = address_class::g()->save( $_POST['address'] );
+		$groupment_data = (array) $_POST['groupment'];
 
-    wp_send_json_success( array( 'group' => $group, 'address' => $address ) );
-  }
+		$address = Address_Class::g()->save( $_POST['address'] );
+		$groupment_data['contact']['address_id'][] = $address->id;
+
+		$group = Group_Configuration_Class::g()->save( $groupment_data );
+
+		wp_send_json_success( array( 'group' => $group, 'address' => $address ) );
+	}
 }
 
-new wpdigi_group_configuration_action();
+new Group_Configuration_Action();

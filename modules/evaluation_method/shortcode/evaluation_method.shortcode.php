@@ -45,12 +45,12 @@ class evaluation_method_shortcode {
 
 		$class = '';
 
-		if ( $risk_id != 0 ) {
-			$risk = risk_class::g()->get( array( 'include' => $risk_id ), array( 'evaluation_method', 'evaluation' ) );
+		if ( 0 !== $risk_id ) {
+			$risk = Risk_Class::g()->get( array( 'post__in' => array( $risk_id ) ) );
 			$risk = $risk[0];
-			$digi_method_id = $risk->evaluation_method[0]->id;
-			$scale = !empty( $risk->evaluation[0]->scale ) ? $risk->evaluation[0]->scale : 0;
-			$equivalence = !empty( $risk->evaluation[0]->risk_level['equivalence'] ) ? $risk->evaluation[0]->risk_level['equivalence'] : 0;
+			$digi_method_id = max( $risk->taxonomy['digi-method'] );
+			$scale = ! empty( $risk->evaluation->scale ) ? $risk->evaluation->scale : 0;
+			$equivalence = ! empty( $risk->evaluation->risk_level['equivalence'] ) ? $risk->evaluation->risk_level['equivalence'] : 0;
 			if ( $digi_method_id == $term_evarisk_complex->term_id ) {
 				$target = "wpdigi-method-evaluation-render";
 				$display = "evarisk";
@@ -61,7 +61,7 @@ class evaluation_method_shortcode {
 			}
 		}
 		else {
-			$risk = risk_class::g()->get( array( 'schema' => true ), array( 'evaluation_method', 'evaluation' ) );
+			$risk = risk_class::g()->get( array( 'schema' => true ) );
 			$risk = $risk[0];
 			$risk->taxonomy['digi-method'][] = $term_evarisk_simple->term_id;
 			$digi_method_id = $term_evarisk_simple->term_id;

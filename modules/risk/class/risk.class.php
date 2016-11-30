@@ -49,7 +49,7 @@ class Risk_Class extends Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_risk' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -93,6 +93,7 @@ class Risk_Class extends Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
+
 		/**	Définition d'un shortcode permettant d'afficher les risques associés à un élément / Define a shortcode allowing to display risk associated to a given element 	*/
 		add_shortcode( 'risk', array( $this, 'risk_shortcode' ) );
 
@@ -112,17 +113,16 @@ class Risk_Class extends Post_Class {
 	 * Charges la liste des risques même ceux des enfants. Et appelle le template pour les afficher.
 	 * Récupères le schéma d'un risque pour l'entrée d'ajout de risque dans le tableau.
 	 *
-	 * @param  int $society_id L'ID de la société.
+	 * @param  integer $society_id L'ID de la société.
 	 * @return void
 	 */
 	public function display( $society_id ) {
-		$society = society_class::g()->show_by_type( $society_id, array( 'list_risk', 'list_workunit', 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
-		$risks = ! empty( $society->list_risk ) ? $society->list_risk : array();
-
-		$risk_schema = $this->get( array( 'schema' => true ), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_schema = $this->get( array( 'schema' => true ) );
 		$risk_schema = $risk_schema[0];
 
-		view_util::exec( 'risk', 'list', array( 'society' => $society, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
+		$risks = $this->get( array( 'post_parent' => $society_id ) );
+
+		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
 	}
 }
 

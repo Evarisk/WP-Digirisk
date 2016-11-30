@@ -19,5 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endforeach; ?>
 	<?php endif; ?>
 
-	<?php view_util::exec( 'workunit', 'item-new', array( 'groupment_id' => 0 ) ); ?>
+	<?php view_util::exec( 'navigation', 'item-new', array( 'parent_id' => $parent_id ) ); ?>
 </ul>

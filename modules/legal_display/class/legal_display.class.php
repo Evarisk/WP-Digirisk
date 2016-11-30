@@ -65,7 +65,7 @@ class Legal_Display_Class extends Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_legal_display' );
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk

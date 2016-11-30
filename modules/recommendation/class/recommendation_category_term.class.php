@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class recommendation_category_term_class extends term_class {
+class Recommendation_Category_Term_Class extends term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use
@@ -36,7 +36,7 @@ class recommendation_category_term_class extends term_class {
 	protected $base = 'digirisk/recommendation-category';
 	protected $version = '0.1';
 	protected $before_post_function = array( '\digi\construct_identifier' );
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_recommendation_category' );
 	public $element_prefix = 'RC';
 
 	/**

@@ -87,7 +87,7 @@ class Navigation_Class extends Singleton_Util {
 			} );
 		}
 
-		view_util::exec( 'navigation', 'list', array( 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits ) );
+		view_util::exec( 'navigation', 'list', array( 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
 	}
 }
 

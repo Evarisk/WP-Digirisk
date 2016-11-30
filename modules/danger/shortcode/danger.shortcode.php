@@ -22,22 +22,31 @@ class danger_shortcode {
 	}
 
 	/**
-	* Récupère le niveau et l'équivalence de la méthode d'évaluation du risque courant.
+	* Récupères le niveau et l'équivalence de la méthode d'évaluation du risque courant.
 	*
 	* @param array $param Tableau de donnée
 	* @param int $param['risk_id'] L'id du risque
 	* @param string $param['display'] La méthode d'affichage pour le template
 	*
-	* @return bool
+	* @return void
 	*/
 	public function callback_dropdown_danger( $param ) {
-		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
-		$display = !empty( $param ) && !empty( $param['display'] ) ? $param['display'] : 'edit';
+		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
+		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 
 		if ( $display === 'edit' ) {
-			$danger_category_list = category_danger_class::g()->get( array( ), array( '\digi\danger' ) );
-			$danger_list = danger_class::g()->get( array() );
-			$first_danger = $danger_list[0];
+			$danger_category_list = category_danger_class::g()->get();
+			$first_danger = null;
+
+			if ( !empty( $danger_category_list ) ) {
+				foreach ( $danger_category_list as $element ) {
+					$element->danger = Danger_Class::g()->get( array( 'parent' => $element->id ) );
+
+					if ( empty( $first_danger ) && ! empty( $element->danger[0] ) ) {
+						$first_danger = $element->danger[0];
+					}
+				}
+			}
 
 			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'first_danger' => $first_danger, 'danger_category_list' => $danger_category_list ) );
 		}

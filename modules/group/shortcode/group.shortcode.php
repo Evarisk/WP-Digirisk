@@ -1,33 +1,40 @@
-<?php namespace digi;
+<?php
 /**
-* Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'un établissement.
-* Et un formulaire qui permet d'ajouter un risque
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package risk
-* @subpackage shortcode
-*/
+ * Shortcodes
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package group
+ * @subpackage shortcode
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class group_shortcode {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Shortcodes
+ */
+class Group_Shortcode {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	public function __construct() {
 		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
 	}
 
 	/**
-	* Affiches le formulaire pour configurer un groupement
-	*
-	* @param array $param
-	*/
+	 * Affiches le formulaire pour configurer un groupement
+	 *
+	 * @param array $param Les paramètres du shortcode.
+	 *
+	 * @return void
+	 */
 	public function callback_configuration( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id, array( 'address' ) );
+		$element = society_class::g()->show_by_type( $element_id );
 
 		group_configuration_class::g()->display( $element );
 	}

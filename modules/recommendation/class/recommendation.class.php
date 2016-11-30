@@ -1,33 +1,84 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Les préconisations
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package recommendation
+ * @subpackage shortcode
  */
 
-/**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
-class recommendation_class extends post_class {
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les préconisations
+ */
+class Recommendation_Class extends Post_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name   = '\digi\recommendation_model';
-	protected $post_type    = 'digi-recommendation';
-	protected $meta_key    	= '_wpdigi_recommendation';
-	protected $before_post_function = array( '\digi\construct_identifier' );
-	protected $after_get_function = array( '\digi\get_identifier' );
 
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
+	protected $post_type    = 'digi-recommendation';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key    	= '_wpdigi_recommendation';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_post_function = array( '\digi\construct_identifier' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_recommendation' );
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'digirisk/recommendation';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'PA';
 
+	/**
+	 * La limite des risques a affiché par page
+	 *
+	 * @var integer
+	 */
 	protected $limit_recommendation = -1;
 
 	/**
@@ -37,44 +88,53 @@ class recommendation_class extends post_class {
 	 */
 	protected $post_type_name = 'Recommandations';
 
+
 	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
+	 * Le constructeur
+	 *
+	 * @return void
 	 */
 	protected function construct() {
 		parent::construct();
-		/**	Définition d'un shortcode permettant d'afficher les risques associés à un élément / Define a shortcode allowing to display risk associated to a given element 	*/
-		add_shortcode( 'risk', array( $this, 'risk_shortcode' ) );
-
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
+	/**
+	 * Charges la liste des préconisations. Et appelle le template pour les afficher.
+	 * Récupères le schéma d'une préconisations pour l'entrée d'ajout d'une préconisation dans le tableau.
+	 *
+	 * @param  integer $society_id L'ID de la société.
+	 * @return void
+	 */
 	public function display( $society_id ) {
-		$recommendation = $this->get( array( 'schema' => true ) );
-		$recommendation = $recommendation[0];
-		$index = 0;
-		view_util::exec( 'recommendation', 'main', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
+		$recommendation_schema = $this->get( array( 'schema' => true ) );
+		$recommendation_schema = $recommendation_schema[0];
+
+		$recommendations = $this->get( array( 'post_parent' => $society_id ) );
+
+		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendations' => $recommendations, 'recommendation_schema' => $recommendation_schema ) );
 	}
 
-	public function display_recommendation_list( $society_id ) {
-		$recommendation_list = recommendation_class::g()->get( array( 'post_parent' => $society_id, 'posts_per_page' => -1 ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
-		view_util::exec( 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendation_list' => $recommendation_list ) );
-	}
-
+	/**
+	 * Transfères les préconisations
+	 *
+	 * @return bool
+	 */
 	public function transfert() {
-		// Récupères toutes les unités de travail avec leurs recommendations
+		// Récupères toutes les unités de travail avec leurs recommendations.
 		$list_workunit = workunit_class::g()->get( array() );
 
-		if ( !empty( $list_workunit ) ) {
-		  foreach ( $list_workunit as $workunit ) {
-				if ( !empty( $workunit->associated_recommendation ) ) {
-				  foreach ( $workunit->associated_recommendation as $recommendation_term_id => $list_recommendation ) {
-						if ( !empty( $list_recommendation ) ) {
+		if ( ! empty( $list_workunit ) ) {
+			foreach ( $list_workunit as $workunit ) {
+				if ( ! empty( $workunit->associated_recommendation ) ) {
+					foreach ( $workunit->associated_recommendation as $recommendation_term_id => $list_recommendation ) {
+						if ( ! empty( $list_recommendation ) ) {
 							$recommendation_term = recommendation_term_class::g()->get( array( 'include' => array( $recommendation_term_id ) ) );
 							$recommendation_term = $recommendation_term[0];
 
-						  foreach ( $list_recommendation as $element ) {
+							foreach ( $list_recommendation as $element ) {
 								$recommendation_args = array(
-									'status'							=> ( ( 'valid' == $element['status'] ) ? 'publish' : 'trash' ),
+									'status'							=> ( ( 'valid' === $element['status'] ) ? 'publish' : 'trash' ),
 									'unique_key' 					=> $element['unique_key'],
 									'unique_identifier' 	=> $element['unique_identifier'],
 									'efficiency'					=> $element['efficiency'],
@@ -84,8 +144,8 @@ class recommendation_class extends post_class {
 									'parent_id'						=> $workunit->id,
 									'taxonomy' => array(
 										'digi-recommendation' => array( $recommendation_term->id ),
-										'digi-recommendation-category' => array( $recommendation_term->parent_id )
-									)
+										'digi-recommendation-category' => array( $recommendation_term->parent_id ),
+									),
 								);
 
 								$recommendation = recommendation_class::g()->update( $recommendation_args );
@@ -95,19 +155,19 @@ class recommendation_class extends post_class {
 									'date'			=> $recommendation->date,
 									'author_id'	=> 0,
 									'content'		=> $element['comment'],
-									'status'		=> ( ( 'valid' == $element['status'] ) ? '-34070' : '-34071' ),
+									'status'		=> ( ( 'valid' === $element['status'] ) ? '-34070' : '-34071' ),
 									'type'	=> recommendation_comment_class::g()->get_type(),
 								);
 
 								recommendation_comment_class::g()->update( $recommendation_comment_args );
-						  }
+							}
 						}
 					}
 				}
-		  }
+			}
 		}
 		return true;
 	}
 }
 
-recommendation_class::g();
+Recommendation_Class::g();

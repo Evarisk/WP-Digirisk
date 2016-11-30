@@ -18,7 +18,7 @@ class term_class extends singleton_util {
 	}
 
 	public function update( $data ) {
-		$object = new $this->model_name( (array)$data, array( false ) );
+		$object = new $this->model_name( (array) $data );
 
 		/**	Sauvegarde des données dans la base de données / Save data into database	*/
 		if ( empty( $object->id ) ) {
@@ -67,6 +67,9 @@ class term_class extends singleton_util {
 			$array_term = wp_get_post_terms( $args['post_id'], $this->taxonomy, $term_final_args );
 
 			if ( empty( $array_term ) ) $array_term[] = array();
+		}
+		else if( isset( $args['schema'] ) ) {
+			$array_term[] = array();
 		}
 		else {
 			$array_term = get_terms( $this->taxonomy, $term_final_args );

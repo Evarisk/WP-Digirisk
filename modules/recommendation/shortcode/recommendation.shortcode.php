@@ -1,56 +1,61 @@
-<?php namespace digi;
+<?php
 /**
-* todo
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package recommendation
-* @subpackage shortcode
-*/
+ * Ajoutes les shortcodes pour les préconisations
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package recommendation
+ * @subpackage shortcode
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class recommendation_shortcode {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Ajoutes les shortcodes pour les préconisations
+ */
+class Recommendation_Shortcode {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	public function __construct() {
 		add_shortcode( 'digi-recommendation', array( $this, 'callback_digi_recommendation' ) );
 		add_shortcode( 'dropdown_recommendation', array( $this, 'callback_dropdown_recommendation' ) );
 	}
 
 	/**
-	* Affiches le template pour lister les recommendations ainsi que le formulaire
-	*
-	* @param array $param
-	*/
+	 * Appelle la méthode display de Recommendation_Class
+	 *
+	 * @param  array $param Les paramètres du shortcode.
+	 * @return void
+	 */
 	public function callback_digi_recommendation( $param ) {
-		$element_id = !empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
+		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
 		recommendation_class::g()->display( $element_id );
 	}
 
 	/**
-	* Récupère le niveau et l'équivalence de la méthode d'évaluation du risque courant.
-	*
-	* @param array $param Tableau de donnée
-	* @param int $param['risk_id'] L'id du risque
-	* @param string $param['display'] La méthode d'affichage pour le template
-	*
-	* @return bool
-	*/
+	 * Récupère le niveau et l'équivalence de la méthode d'évaluation du risque courant.
+	 *
+	 * @param array $param Tableau de donnée.
+	 *
+	 * @return void
+	 */
 	public function callback_dropdown_recommendation( $param ) {
-		$id = !empty( $param ) && !empty( $param['id'] ) ? $param['id'] : 0;
+		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
 
-		$recommendation_category_list = recommendation_category_term_class::g()->get( array(), array( '\digi\recommendation_term' ) );
+		$recommendation_category_list = recommendation_category_term_class::g()->get( array() );
 		$first_recommendation = max( $recommendation_category_list[0]->recommendation_term );
 
 		$recommendation = array();
 
 		$display = 'dropdown';
 
-		if ( $id != 0 ) {
-			$recommendation = recommendation_class::g()->get( array( 'include' => array( $id ) ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
+		if ( 0 !== $id ) {
+			$recommendation = recommendation_class::g()->get( array( 'post__in' => array( $id ) ) );
 			$recommendation = $recommendation[0];
 			$display = 'item-dropdown';
 		}

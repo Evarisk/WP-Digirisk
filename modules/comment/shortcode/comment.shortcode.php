@@ -1,29 +1,39 @@
-<?php namespace digi;
+<?php
 /**
-* Ajoutes deux shortcodes
-* digi_evaluation_method permet d'afficher la méthode d'évaluation simple
-* digi_evaluation_method_complex permet d'afficher la méthode d'évaluation complexe
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage shortcode
-*/
+ * Aoutes un shortcode permettant d'afficher un commentaire d'un post n'importe ou.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @version 6.2.1.0
+ * @copyright 2015-2016 Eoxia
+ * @package comment
+ * @subpackage shortcode
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class digi_comment_shortcode {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Aoutes un shortcode permettant d'afficher un commentaire d'un post n'importe ou.
+ */
+class Digi_Comment_Shortcode {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	public function __construct() {
 		add_shortcode( 'digi_comment', array( $this, 'callback_digi_comment' ) );
 	}
 
+	/**
+	 * Appelle la méthode display de Digi_Comment_Class
+	 *
+	 * @param  array $param  Les paramètres du shortcode.
+	 * @return void
+	 */
 	public function callback_digi_comment( $param ) {
-		digi_comment_class::g()->display( $param );
+		Digi_Comment_Class::g()->display( $param );
 	}
 }
 
-new digi_comment_shortcode();
+new Digi_Comment_Shortcode();
