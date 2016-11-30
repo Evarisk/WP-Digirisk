@@ -19,5 +19,5 @@ window.digirisk.society.display_save_button = function( event ) {
 }
 
 window.digirisk.society.delete_success = function( event, response ) {
-	jQuery( '.wp-digi-develop-list ul.parent:not(.sub-menu) span:first-child' ).click();
+	jQuery( '.wp-digi-societytree-main-container' ).replaceWith( response.data.template );
 }

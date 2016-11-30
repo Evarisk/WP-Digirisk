@@ -77,14 +77,20 @@ class Navigation_Class extends Singleton_Util {
 		$workunit_selected_id = 0;
 
 		if ( count( $workunits ) > 1 ) {
-			$workunit_selected_id = $workunits[0]->id;
-
 			usort( $workunits, function( $a, $b ) {
 				if ( $a->unique_key === $b->unique_key ) {
 					return 0;
 				}
 				return ( $a->unique_key < $b->unique_key ) ? -1 : 1;
 			} );
+		}
+
+		if ( ! empty( $_GET['workunit_id'] ) ) {
+			$workunit_selected_id = (int) $_GET['workunit_id'];
+		}
+
+		if ( ! empty( $_POST['workunit_id'] ) ) {
+			$workunit_selected_id = (int) $_POST['workunit_id'];
 		}
 
 		view_util::exec( 'navigation', 'list', array( 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );

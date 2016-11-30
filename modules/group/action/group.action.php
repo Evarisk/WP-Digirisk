@@ -49,27 +49,9 @@ class group_action {
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
-		$group_list = group_class::g()->get(
-			array(
-				'posts_per_page' => -1,
-				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft', ),
-				'order' => 'ASC'
-			), array( 'list_group' ) );
-
-
 		ob_start();
-		$element_id = $group->id;
-		$society = $group;
-		view_util::exec( 'society', 'screen-left', array( 'society_parent' => $society, 'society' => $society, 'group_list' => $group_list, 'element_id' => $element_id ) );
-		$template_left = ob_get_clean();
-
-		$_POST['subaction'] = 'generate-sheet';
-		ob_start();
-		do_shortcode( '[digi_dashboard id="' . $group->id . '"]' );
-		$template_right = ob_get_clean();
-
-		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_create_group', 'society' => $society, 'template_left' => $template_left, 'template_right' => $template_right ) );
+		Digirisk_Class::g()->display();
+		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_create_group', 'groupment_id' => $group->id, 'template' => ob_get_clean() ) );
 	}
 
 	/**

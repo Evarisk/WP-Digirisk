@@ -84,7 +84,7 @@ class workunit_action {
 		$element = workunit_class::g()->create( $workunit );
 
 		ob_start();
-		workunit_class::g()->display_list( $element->parent_id );
+		Digirisk_Class::g()->display();
 		wp_send_json_success( array( 'module' => 'workunit', 'callback_success' => 'save_workunit', 'template' => ob_get_clean(), 'id' => $element->id ) );
 	}
 
