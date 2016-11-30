@@ -63,7 +63,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'FG';
+	public $element_prefix 					= 'FGP';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée

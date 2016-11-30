@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 	<span
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 		data-action="load_society"
+		data-groupment-id="<?php echo $workunit->parent_id; ?>"
 		data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
 		class="action-attribute">
 		<strong><?php echo esc_html( $workunit->unique_identifier ); ?> -</strong>
