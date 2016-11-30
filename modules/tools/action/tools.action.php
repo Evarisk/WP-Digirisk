@@ -65,6 +65,10 @@ class tools_action {
 
 	/**
 	 * Passes les documents de type "DUER" en post type "duer" et met à jour l'unique identifiant.
+	 * Passes les documents de type "Fiche_De_Groupement" en post type "fiche_de_groupement" et met à jour l'unique identifiant.
+	 * Passes les documents de type "Fiche_De_poste" en post type "fiche_de_psote" et met à jour l'unique identifiant.
+	 * Passes les documents de type "Affichage_Legal" en post type "affichage_legal" et met à jour l'unique identifiant.
+	 *
 	 * @return void
 	 */
 	public function callback_transfert_doc() {
@@ -76,18 +80,18 @@ class tools_action {
 				array(
 					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
 					'field'			=> 'slug',
-					'terms'			=> 'document_unique'
-				)
-			)
+					'terms'			=> 'document_unique',
+				),
+			),
 		);
 
-		$list_document = document_class::g()->get( $args, array( 'category' ));
+		$list_document = document_class::g()->get( $args );
 
-		if ( !empty( $list_document ) ) {
-		  foreach ( $list_document as $element ) {
+		if ( ! empty( $list_document ) ) {
+			foreach ( $list_document as $element ) {
 				$element->unique_identifier = str_replace( document_class::g()->element_prefix, DUER_Class::g()->element_prefix, $element->unique_identifier );
 				DUER_Class::g()->update( $element );
-		  }
+			}
 		}
 
 		wp_send_json_success();

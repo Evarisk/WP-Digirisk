@@ -41,7 +41,7 @@ class Risk_page_class extends singleton_util {
 	 * @return void nothing
 	 */
 	public function display_risk_list() {
-		$risk_list = risk_class::g()->get( array(), array( 'comment', 'evaluation_method', 'evaluation', 'danger_category', 'danger' ) );
+		$risk_list = risk_class::g()->get( array() );
 
 		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
 		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'asc';
@@ -66,17 +66,17 @@ class Risk_page_class extends singleton_util {
 			if ( 'equivalence' === $order_key ) {
 				if ( 'asc' === $order_type ) {
 					usort( $risk_list, function( $a, $b ) {
-						if ( $a->evaluation[0]->risk_level['equivalence'] === $b->evaluation[0]->risk_level['equivalence'] ) {
+						if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
 							return 0;
 						}
-						return ( $a->evaluation[0]->risk_level['equivalence'] > $b->evaluation[0]->risk_level['equivalence'] ) ? -1 : 1;
+						return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
 					} );
 				} else {
 					usort( $risk_list, function( $a, $b ) {
-						if ( $a->evaluation[0]->risk_level['equivalence'] === $b->evaluation[0]->risk_level['equivalence'] ) {
+						if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
 							return 0;
 						}
-						return ( $a->evaluation[0]->risk_level['equivalence'] < $b->evaluation[0]->risk_level['equivalence'] ) ? -1 : 1;
+						return ( $a->evaluation->risk_level['equivalence'] < $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
 					} );
 				}
 			}

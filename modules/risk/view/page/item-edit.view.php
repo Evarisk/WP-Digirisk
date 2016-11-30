@@ -8,14 +8,14 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<input type="hidden" name="parent_id" value="<?php echo $risk->parent_id; ?>" />
 	<input name="risk[id]" type="hidden" value="<?php echo $risk->id; ?>" />
 	<span>
-		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $risk->parent_group->id ); ?>">
+		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id ); ?>">
 			<strong><?php echo $risk->parent_group->unique_identifier; ?> -</strong>
 			<span><?php echo $risk->parent_group->title; ?></span>
 		</a>
 	</span>
 	<span>
 		<?php if (!empty( $risk->parent_workunit ) ): ?>
-		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $risk->parent_workunit->id ); ?>">
+		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&workunit_id=' . $risk->parent_workunit->id ); ?>">
 			<strong><?php echo $risk->parent_workunit->unique_identifier; ?> -</strong>
 			<span><?php echo $risk->parent_workunit->title; ?></span>
 		</a>
@@ -25,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	</span>
 	<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
-	<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation[0]->unique_identifier; ?></span>
+	<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation->unique_identifier; ?></span>
 	<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . (($risk->id != 0) ? "view" : "edit") . '"]' ); ?>
 	<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk" display="edit"]'); ?>
 

@@ -29,8 +29,6 @@ if ( ! empty( $groupments ) ) :
 		</li>
 
 		<?php
-		if ( ! empty( $groupment->list_group ) ) :
-			view_util::exec( 'page_sorter', 'list', array( 'i' => $i, 'groupments' => $groupment->list_group ) );
-		endif;
+		Page_Sorter_Class::g()->display_list( $i, $groupment->id );
 	endforeach;
 endif;
