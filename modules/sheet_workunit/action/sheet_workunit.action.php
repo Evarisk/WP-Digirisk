@@ -39,7 +39,7 @@ class Sheet_Workunit_Action {
 
 		Fiche_De_Poste_Class::g()->generate( $society_id );
 
-		wp_send_json_success();
+		wp_send_json_success( array( 'module' => 'sheet_workunit', 'callback_success' => 'callback_success' ) );
 	}
 
 }

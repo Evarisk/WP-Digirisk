@@ -37,7 +37,7 @@ class Sheet_Groupment_Action {
 
 		Fiche_De_Groupement_Class::g()->generate( $society_id );
 
-		wp_send_json_success();
+		wp_send_json_success( array( 'module' => 'sheet_groupment', 'callback_success' => 'callback_success' ) );
 	}
 
 }
