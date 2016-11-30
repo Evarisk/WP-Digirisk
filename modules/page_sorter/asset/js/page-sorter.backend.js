@@ -70,15 +70,15 @@ window.digirisk.page_sorter.init = function() {
 			var diffDepth = window.evaMenu.depth - window.evaMenu.startDepth;
 
 			if (window.evaMenu.childs.length > 0) {
-				for ( var key in window.evaMenu.childs ) {
-					if (window.evaMenu.childs[key]) {
-						var currentDepth = parseInt( jQuery( window.evaMenu.childs[key] ).attr( 'data-depth' ) );
+				for ( var i = 0; i < window.evaMenu.childs.length; i++ ) {
+					if (window.evaMenu.childs[i]) {
+						var currentDepth = parseInt( jQuery( window.evaMenu.childs[i] ).attr( 'data-depth' ) );
 						var newDepth = currentDepth + diffDepth;
 
-						window.evaMenu.childs[key].className = 'menu-item-depth-' + newDepth;
-						jQuery( window.evaMenu.childs[key] ).attr( 'data-depth', newDepth );
-						if (! jQuery( window.evaMenu.childs[key] ).data('drop')) {
-							window.evaMenu.childs[key].className += " no-drop";
+						window.evaMenu.childs[i].className = 'menu-item-depth-' + newDepth;
+						jQuery( window.evaMenu.childs[i] ).attr( 'data-depth', newDepth );
+						if (! jQuery( window.evaMenu.childs[i] ).data('drop')) {
+							window.evaMenu.childs[i].className += " no-drop";
 						}
 					}
 				}
@@ -117,6 +117,8 @@ window.evaMenu.updateParentId = function( item ) {
 	var itemDepth = parseInt( jQuery( item ).attr( 'data-depth' ) );
 	var prevDepth = itemDepth - 1;
 	var parent = undefined;
+
+	console.log(itemDepth);
 
 	if ( prevDepth >= 0 ) {
 		parent = item.prevAll( '.menu-item-depth-' + prevDepth ).first();
