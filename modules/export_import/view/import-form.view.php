@@ -15,16 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 	<h3><?php _e( 'Import', 'digirisk' ); ?></h3>
 
 	<div class="content">
-		<input type="hidden" name="action" value="digi_import_data" />
-		<?php /** Crtéation d'un nonce de sécurité pour le formulaire / Create a security nonce for the form */ wp_nonce_field( 'digi_import_data' ); ?>
-		<input type="hidden" name="element_id" value="<?php echo $element_id; ?>" />
-
-		<span class="digi-import-explanation" ><?php _e( 'Don\'t start from scratch. Use a predefined template by importing it with the button below', 'digirisk' ); ?></span>
-		<progress value="0" max="100">0%</progress>
-		<input type="file" name="file" id="file" />
-		<span class="digi-import-detail"></span>
+		<?php esc_html_e( 'Indisponible', 'digirisk' ); ?>
 	</div>
-
-	<label for="file" class="wp-digi-bton-first" ><?php _e( 'Import Digirisk model (.ZIP)', 'digirisk' ); ?></label><br />
 
 </form>

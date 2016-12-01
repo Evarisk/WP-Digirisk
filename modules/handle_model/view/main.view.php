@@ -2,4 +2,5 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-esc_html_e( 'Indisponible', 'digirisk' );
+?><h3><?php esc_html_e( 'Gestion des modèles ODT', 'digirisk' ); ?></h3>
+<?php esc_html_e( 'Indisponible', 'digirisk' ); ?>
