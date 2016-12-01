@@ -74,63 +74,35 @@ class tools_action {
 	public function callback_transfert_doc() {
 		check_ajax_referer( 'callback_transfert_doc' );
 
-		$args = array(
-			'post_status' => 'inherit',
-			'tax_query' => array(
-				array(
-					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
-					'field'			=> 'slug',
-					'terms'			=> 'document_unique',
-				),
-			),
+		$types_to_transfert = array(
+			'document_unique' => 'DUER_Class',
+			'fiche_de_groupement' => 'Fiche_De_Groupement_Class',
+			'fiche_de_poste'			=> 'Fiche_De_Poste_Class',
+			'affichage_legal_a4'	=> 'Affichage_Legal_A4_Class',
+			'affichage_legal_a3'	=> 'Affichage_Legal_A3_Class',
 		);
 
-		$list_document = document_class::g()->get( $args );
+		if ( ! empty( $types_to_transfert ) ) {
+			foreach ( $types_to_transfert as $type => $type_class ) {
+				$args = array(
+					'post_status' => 'inherit',
+					'tax_query' => array(
+						array(
+							'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
+							'field'			=> 'slug',
+							'terms'			=> $type,
+						),
+					),
+				);
 
-		if ( ! empty( $list_document ) ) {
-			foreach ( $list_document as $element ) {
-				$element->unique_identifier = str_replace( document_class::g()->element_prefix, DUER_Class::g()->element_prefix, $element->unique_identifier );
-				DUER_Class::g()->update( $element );
-			}
-		}
+				$list_document = document_class::g()->get( $args );
 
-		$args = array(
-			'post_status' => 'inherit',
-			'tax_query' => array(
-				array(
-					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
-					'field'			=> 'slug',
-					'terms'			=> 'fiche_de_groupement',
-				),
-			),
-		);
-
-		$list_document = document_class::g()->get( $args );
-
-		if ( ! empty( $list_document ) ) {
-			foreach ( $list_document as $element ) {
-				$element->unique_identifier = str_replace( document_class::g()->element_prefix, Fiche_De_Groupement_Class::g()->element_prefix, $element->unique_identifier );
-				Fiche_De_Groupement_Class::g()->update( $element );
-			}
-		}
-
-		$args = array(
-			'post_status' => 'inherit',
-			'tax_query' => array(
-				array(
-					'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
-					'field'			=> 'slug',
-					'terms'			=> 'fiche_de_poste',
-				),
-			),
-		);
-
-		$list_document = document_class::g()->get( $args );
-
-		if ( ! empty( $list_document ) ) {
-			foreach ( $list_document as $element ) {
-				$element->unique_identifier = str_replace( document_class::g()->element_prefix, Fiche_De_Poste_Class::g()->element_prefix, $element->unique_identifier );
-				Fiche_De_Poste_Class::g()->update( $element );
+				if ( ! empty( $list_document ) ) {
+					foreach ( $list_document as $element ) {
+						$element->unique_identifier = str_replace( document_class::g()->element_prefix, $type_class::g()->element_prefix, $element->unique_identifier );
+						$type_class::g()->update( $element );
+					}
+				}
 			}
 		}
 
