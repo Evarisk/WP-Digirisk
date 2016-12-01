@@ -70,10 +70,10 @@ class workunit_action {
 			wp_send_json_error();
 		}
 
-		if ( 0 === ( int )$_POST['workunit']['parent_id'] )
+		if ( 0 === ( int )$_POST['groupment_id'] )
 			wp_send_json_error();
 		else
-			$parent_id = (int) $_POST['workunit']['parent_id'];
+			$parent_id = (int) $_POST['groupment_id'];
 
 		$workunit = array(
 			'title' => sanitize_text_field( $_POST['workunit']['title'] ),

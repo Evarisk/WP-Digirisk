@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 <li class="wp-digi-workunit wp-digi-new-workunit" >
 	<span class="wp-digi-new-workunit-name" >
 		<input type="hidden" name="action" value="save_workunit" />
-		<input type="hidden" name="workunit[parent_id]" value="<?php echo $parent_id; ?>" />
+		<input type="hidden" name="groupment_id" value="<?php echo $parent_id; ?>" />
 		<?php wp_nonce_field( 'wpdigi-workunit-creation', 'wpdigi_nonce', false, true ); ?>
 		<input type="text" placeholder="<?php _e( 'New work unit', 'digirisk' ); ?>" name="workunit[title]" />
 	</span>

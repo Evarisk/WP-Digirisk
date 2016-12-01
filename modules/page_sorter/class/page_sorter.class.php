@@ -36,6 +36,12 @@ class Page_Sorter_Class extends Singleton_Util {
 			)
 		);
 
+		if ( ! empty( $groupments ) ) {
+			foreach ( $groupments as $groupment ) {
+				$groupment->count_workunit = count( workunit_class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
+			}
+		}
+
 		$display_notice = get_transient( 'display_notice' );
 
 		view_util::exec( 'page_sorter', 'main', array( 'display_notice' => $display_notice, 'groupments' => $groupments ) );
@@ -57,6 +63,12 @@ class Page_Sorter_Class extends Singleton_Util {
 				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 			)
 		);
+
+		if ( ! empty( $groupments ) ) {
+			foreach ( $groupments as $groupment ) {
+				$groupment->count_workunit = count( workunit_class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
+			}
+		}
 
 		view_util::exec( 'page_sorter', 'list', array( 'i' => $i, 'groupments' => $groupments ) );
 	}
