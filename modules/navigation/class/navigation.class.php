@@ -62,17 +62,26 @@ class Navigation_Class extends Singleton_Util {
 			)
 		);
 
+		if ( !empty( $groupments ) ) {
+			foreach ( $groupments as $groupment ) {
+				$groupment->count_workunit = count( workunit_class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
+			}
+		}
+
 		view_util::exec( 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
 	}
 
 	/**
-	 * Charges les unités de travail selon le groupement parent et les envoies à la vue navigation/list.view.php
+	 * Vérifie si on affiche le formulaire pour créer une unité de travail ou pas.
+	 * Charges les unités de travail selon le groupement parent et les envoies à la vue navigation/list.view.php.
 	 *
 	 * @param  integer $parent_id L'ID du groupement parent.
 	 * @return void
 	 */
 	public function display_workunit_list( $parent_id ) {
-		$workunits = workunit_class::g()->get( array( 'post_parent' => $parent_id, 'posts_per_page' => -1 ), array( false ) );
+		$display_create_workunit_form = ( count( group_class::g()->get( array( 'post_parent' => $parent_id, 'posts_per_page' => -1 ) ) ) === 0 ) ? true : false;
+
+		$workunits = workunit_class::g()->get( array( 'post_parent' => $parent_id, 'posts_per_page' => -1 ) );
 
 		$workunit_selected_id = 0;
 
@@ -93,7 +102,7 @@ class Navigation_Class extends Singleton_Util {
 			$workunit_selected_id = (int) $_POST['workunit_id'];
 		}
 
-		view_util::exec( 'navigation', 'list', array( 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
+		view_util::exec( 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
 	}
 }
 

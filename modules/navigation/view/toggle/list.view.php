@@ -23,7 +23,7 @@ if ( ! empty( $groupments ) ) :
 						class="action-attribute"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></span>
 
 					<span class="wp-digi-new-group-action">
-						<?php if ( empty( $groupment->list_workunit ) ) : ?>
+						<?php if ( empty( $groupment->count_workunit ) ) : ?>
 							<a
 								data-parent-id="<?php echo esc_attr( $groupment->id ); ?>"
 								data-action="create_group"

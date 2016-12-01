@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 	<span class="wp-digi-workunit-action" >
 	<a href="#"
-		data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
+		data-id="<?php echo esc_attr( $workunit->id ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_workunit_' . $workunit->id ) ); ?>"
 		data-action="delete_society"
 		class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>

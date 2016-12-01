@@ -19,5 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endforeach; ?>
 	<?php endif; ?>
 
-	<?php view_util::exec( 'navigation', 'item-new', array( 'parent_id' => $parent_id ) ); ?>
+	<?php
+	if ( $display_create_workunit_form ) :
+		view_util::exec( 'navigation', 'item-new', array( 'parent_id' => $parent_id ) );
+	endif;
+	?>
 </ul>
