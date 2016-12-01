@@ -171,7 +171,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 		$picture = __( 'No picture defined', 'digirisk' );
 
 		if ( ! empty( $society->thumbnail_id ) ) {
-			$picture_definition = wp_get_attachment_image_src( $group->thumbnail_id, 'full' );
+			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'full' );
 			$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 			if ( is_file( $picture_path ) ) {
