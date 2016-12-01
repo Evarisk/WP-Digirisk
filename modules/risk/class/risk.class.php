@@ -122,6 +122,15 @@ class Risk_Class extends Post_Class {
 
 		$risks = $this->get( array( 'post_parent' => $society_id ) );
 
+		if ( count( $risks ) > 1 ) {
+			usort( $risks, function( $a, $b ) {
+				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
+					return 0;
+				}
+				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
+			} );
+		}
+
 		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
 	}
 }
