@@ -43,6 +43,7 @@ window.digirisk.user.delete = function( event ) {
 window.digirisk.user.render = function( response ) {
 	jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
 	jQuery( '.wp-digi-content' ).html( response.data.template );
+	window.digirisk.render.call_render_changed();
 };
 
 window.digirisk.user.pagination = function( event ) {
