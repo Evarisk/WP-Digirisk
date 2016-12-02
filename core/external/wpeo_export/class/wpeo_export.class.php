@@ -23,13 +23,11 @@ class wpeo_export_class {
 	*/
 	public function export( $field_to_export = array(), $current_data = null ) {
 		if ( $this->_instance ) {
-
 			if ( empty( $field_to_export ) ) {
 				$list_data_to_export = array();
 				$field_to_export = $this->get_field_to_export( $this->_instance->get_model() );
 				$current_data = $this->_instance;
 			}
-
 
 			if ( $field_to_export ) {
 				foreach ( $field_to_export as $name => $key ) {

@@ -9,6 +9,7 @@
 		"model": {},
 		"filter": {},
 		"class": {},
-		"action": {}
+		"action": {},
+		"helper": {}
 	}
 }

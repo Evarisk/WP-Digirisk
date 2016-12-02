@@ -57,35 +57,34 @@ class export_action {
 			'message' => __( 'Digirisk datas exported successfully', 'digirisk' ),
 		);
 
-		$list_group = group_class::g()->get(
+		$list_group = Group_Class::g()->get(
 			array(
-				'posts_per_page' => 5,
+				'posts_per_page' => -1,
 				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft', ),
-				'order' => 'ASC'
-			), array( 'list_group', 'list_workunit', 'list_risk', 'danger', 'danger_category', 'comment', 'evaluation', 'evaluation_method' ) );
+				'post_status' => array( 'publish', 'draft' ),
+				'order' => 'ASC',
+		) );
+
 		$list_data_exported = array();
 
+		if ( ! empty( $list_group ) ) {
+			foreach ( $list_group as $element ) {
+				$element = get_full_group( $element );
 
-
-		if ( !empty( $list_group ) ) {
-		  foreach ( $list_group as $element ) {
 				uasort( $element->list_workunit, function( $a, $b ) {
 					return ( $a->id < $b->id ) ? -1 : 1;
 				});
 
 				$element_to_export = new wpeo_export_class( $element );
 				$list_data_exported[] = $element_to_export->export();
-		  }
+			}
 		}
-
-
 
 		$current_time = current_time( 'YmdHis' );
 		$filename = 'global';
 		$export_base = $this->export_directory . $current_time . '_' . $filename . '_export';
 		$json_filename = $export_base . '.json';
-		file_put_contents( $json_filename, json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
+		file_put_contents( $json_filename, wp_json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
 
 		/** Ajout du fichier json au fichier zip / Add the json file to zip file */
 		$sub_response = document_class::g()->create_zip( $export_base . '.zip', array( array( 'link' => $json_filename, 'filename' => basename( $json_filename ) ) ), $element, null );

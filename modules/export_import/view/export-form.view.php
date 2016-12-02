@@ -10,7 +10,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @package export_import
  * @subpackage view
  */
-
 ?>
 <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="POST" id="digi-export-form" >
 	<h3><?php _e( 'Export', 'digirisk' ); ?></h3>
@@ -18,4 +17,5 @@ if ( !defined( 'ABSPATH' ) ) exit;
 	<div class="content">
 		<?php esc_html_e( 'Indisponible', 'digirisk' ); ?>
 	</div>
+
 </form>
