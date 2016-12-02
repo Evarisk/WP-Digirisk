@@ -95,7 +95,7 @@ window.digirisk.media.associate_file = function( selected_file_id ) {
 
   jQuery.post( window.ajaxurl, data, function( response ) {
     if ( response.data.type == 'set_model' ) {
-      jQuery( '#digi-handle-model' ).replaceWith( response.data.template );
+      jQuery( '#digi-handle-model' ).html( response.data.template );
     }
     else {
       jQuery( 'span.wpeo-upload-media[data-id="'+ window.digirisk.media.element_id + '"]' ).replaceWith( response.data.template );

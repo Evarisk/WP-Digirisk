@@ -49,7 +49,6 @@ class handle_model_shortcode {
 		  }
 		}
 
-
 		view_util::exec( 'handle_model', 'main', array( 'list_type_document' => $this->list_type_document, 'list_document_default' => $list_document_default ) );
 	}
 
