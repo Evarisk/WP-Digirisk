@@ -12,13 +12,13 @@ class search_class extends singleton_util {
 		$list = array();
 
 		if ( $data['type'] === 'user' ) {
-			if ( !empty( $data['term'] ) ) {
+			if ( ! empty( $data['term'] ) ) {
 				$list = get_users( array(
 					'fields' => 'ID',
 					'search' => '*' . $data['term'] . '*',
 				) );
 
-				$list = wp_parse_args( get_users( array(
+				$list = wp_parse_args( $list, get_users( array(
 					'fields' => 'ID',
 					'meta_query' => array(
 						'relation' => 'OR',

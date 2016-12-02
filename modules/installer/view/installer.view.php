@@ -39,8 +39,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<ul class="gridwrapper2">
 					<li class="form-element"><label><?php esc_html_e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" /></label></li>
 					<li class="form-element">
-						<label><?php esc_html_e( 'Owner', 'digirisk' ); ?> <input type="text" data-target="owner_id" placeholder="<?php esc_html_e( 'Write name to search...', 'digirisk' ); ?>" data-filter="" class="wpdigi-auto-complete-user" value="<?php esc_attr( ( ! empty( $user ) ) ? $user->login : '' ); ?>" /></label>
-						<input type="hidden" name="groupment[user_info][owner_id]" />
+						<label><?php esc_html_e( 'Owner', 'digirisk' ); ?>
+							<input type="text"
+										data-field="groupment[user_info][owner_id]"
+										data-type="user"
+										placeholder="<?php esc_html_e( 'Write name to search...', 'digirisk' ); ?>"
+										class="digi-search"
+										value="<?php echo esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ); ?>" /></label>
+							<input type="hidden" name="groupment[user_info][owner_id]" />
 					</li>
 					<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" /></label></li>
 					<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( current_time( 'd/m/Y', 0 ) ); ?>" /></label></li>
