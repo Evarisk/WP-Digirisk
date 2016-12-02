@@ -21,12 +21,12 @@ window.digirisk.search.event = function() {
 	* string append-to : Le bloc ou sera affiche le rendu
 	*/
 
-	jQuery.each( jQuery( '.wp-list-search input' ), function( key, element ) {
+	jQuery.each( jQuery( '.wp-list-search input, .digi-search' ), function( key, element ) {
 		// Automatiser la source
 		var list_option = {
 			'source': 'admin-ajax.php?action=digi_search'
 								+ '&next_action='	+ jQuery( element ).data( "next-action" )
-								// + '&field=' 			+ jQuery( element ).data( 'field' )
+								+ '&field=' 			+ jQuery( element ).data( 'field' )
 								+ '&class=' 			+ jQuery( element ).data( 'class' )
 								+ '&id=' 					+ jQuery( element ).data( "id" )
 								+ '&type=' 				+ jQuery( element ).data( "type" ),
@@ -49,9 +49,7 @@ window.digirisk.search.event = function() {
 
 		if( jQuery( element ).data( 'field' ) ) {
 			list_option.select = function( event, ui ) {
-				// jQuery( 'input[name="' + jQuery( element ).data('field') + '"]' ).val( ui.item.id );
-				// digi_global.$( '.wp-digi-group-action-container' ).removeClass( "hidden" );
-	    	// digi_global.$( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Déplacer' );
+				jQuery( 'input[name="' + jQuery( element ).data('field') + '"]' ).val( ui.item.id );
 			};
 		}
 

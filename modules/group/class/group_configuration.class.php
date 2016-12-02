@@ -36,7 +36,9 @@ class Group_Configuration_Class extends Singleton_Util {
 		$address = $this->get_address( $element );
 		$address = $address[0];
 
-		view_util::exec( 'group', 'configuration-form', array( 'element' => $element, 'address' => $address ) );
+		$owner_user = $this->get_owner_user( $element );
+
+		view_util::exec( 'group', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
 	}
 
 	/**
@@ -56,6 +58,26 @@ class Group_Configuration_Class extends Singleton_Util {
 
 		return $address;
 	}
+
+	/**
+	 * Récupères le responsable du groupement
+	 *
+	 * @param  Group_Model $groupment L'objet groupement.
+	 * @return User_Digi_Model				Le responsable du groupement
+	 */
+	public function get_owner_user( $groupment ) {
+		$args_owner_user = array( 'schema' => true );
+
+		if ( ! empty( $groupment->user_info['owner_id'] ) ) {
+			$args_owner_user = array( 'include' => array( $groupment->user_info['owner_id'] ) );
+		}
+
+		$owner_user = User_Digi_Class::g()->get( $args_owner_user );
+
+		return $owner_user[0];
+	}
+
+
 
 	/**
 	 * Sauvegardes les données du groupements

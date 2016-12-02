@@ -1,24 +1,94 @@
 <?php
+/**
+ * Les utilisateurs de DigiRisk
+ *
+ * @package Evarisk\Plugin
+ */
 
 namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class user_digi_class extends user_class {
-	protected $model_name 	= '\digi\user_digi_model';
-	protected $meta_key		= '_wpeo_user_info';
-	protected $before_model_post_function = array( '\digi\construct_login', '\digi\generate_password' );
-	protected $before_post_function = array( '\digi\build_user_initial', '\digi\build_avatar_color' );
-	protected $before_put_function = array( '\digi\build_user_initial' );
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
-
-	protected $base 	= 'digirisk/user';
-	protected $version 	= '0.1';
-	public $limit_user = 5;
+/**
+ * Les utilisateurs de DigiRisk
+ */
+class User_Digi_Class extends user_class {
 
 	/**
-	* Le constructeur
-	*/
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
+	protected $model_name 	= '\digi\user_digi_model';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key		= '_wpeo_user_info';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans le script PHP
+	 *
+	 * @var array
+	 */
+	protected $before_model_post_function = array( '\digi\construct_login', '\digi\generate_password' );
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_post_function = array( '\digi\build_user_initial', '\digi\build_avatar_color' );
+
+	/**
+	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_put_function = array( '\digi\build_user_initial' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base 	= 'digirisk/user';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
+	protected $version 	= '0.1';
+
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
+	public $element_prefix = 'U';
+
+	/**
+	 * La limite des utilisateurs a affiché par page
+	 *
+	 * @var integer
+	 */
+	public $limit_user = -1;
+
+	/**
+	 * Le constructeur
+	 *
+	 * @return void
+	 */
 	protected function construct() {
 		/** Pour la recherche */
 		add_filter( 'wpdigi_search_user_affected', array( $this, 'callback_wpdigi_search_user_affected' ), 10, 3 );

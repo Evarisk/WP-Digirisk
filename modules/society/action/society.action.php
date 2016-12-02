@@ -40,7 +40,7 @@ class society_action {
 	*/
 	public function callback_save_society() {
 		// todo: Doublon ?
-		if ( 0 === ( int )$_POST['id'] )
+		if ( 0 === (int) $_POST['id'] )
 			wp_send_json_error();
 		else
 			$id = (int) $_POST['id'];
@@ -60,7 +60,7 @@ class society_action {
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'society' => $society, 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'update_society_success', 'society' => $society, 'template' => ob_get_clean() ) );
 	}
 
 	/**

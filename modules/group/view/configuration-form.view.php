@@ -5,8 +5,8 @@
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @version 6.2.1.0
  * @copyright 2015-2016 Eoxia
- * @package society
- * @subpackage templates
+ * @package group
+ * @subpackage view
  */
 
 namespace digi;
@@ -14,29 +14,35 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<form method="POST" class="wp-digi-form wp-digi-form-save-configuration" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
-  <input type="hidden" name="action" value="save_groupment_configuration" />
-  <input type="hidden" name="groupment[id]" value="<?php echo $element->id; ?>" />
-  <input type="hidden" name="address[post_id]" value="<?php echo $element->id; ?>" />
-  <?php wp_nonce_field( 'save_groupment_configuration' ); ?>
+<form method="POST" class="wp-digi-form wp-digi-form-save-configuration" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
+	<input type="hidden" name="action" value="save_groupment_configuration" />
+	<input type="hidden" name="groupment[id]" value="<?php echo esc_attr( $element->id ); ?>" />
+	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->id ); ?>" />
+	<?php wp_nonce_field( 'save_groupment_configuration' ); ?>
 
-  <ul class="gridwrapper2">
-    <li class="form-element"><label><?php _e( 'Society name', 'digirisk' ); ?><input type="text" name="groupment[title]" value="<?php echo $element->title; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" value="<?php echo $address->address; ?>" /></label></li>
-    <li class="form-element">
-      <label><?php _e( 'Owner', 'digirisk' ); ?> <input type="text" data-target="owner_id" placeholder="<?php _e( 'Write name to search...', 'digirisk' ); ?>" data-filter="" class="wpdigi-auto-complete-user" data-element-id="<?php echo $element->id; ?>" value="<?php echo !empty( $user ) ? $user->login : ''; ?>" /></label>
-      <input type="hidden" name="groupment[user_info][owner_id]" />
-    </li>
-    <li class="form-element"><label><?php _e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" value="<?php echo $address->additional_address; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo !empty( $element->date ) ? $element->date : date( 'd/m/Y' ); ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" value="<?php echo $address->postcode; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" value="<?php echo $element->identity['siren']; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" value="<?php echo $address->town; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'SIRET', 'digirisk' ); ?> <input type="text" name="groupment[identity][siret]" value="<?php echo $element->identity['siret']; ?>" /></label></li>
-    <li class="form-element"><label><?php _e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" value="<?php echo max( $element->contact['phone'] ); ?>" /></label></li>
-  </ul>
+	<ul class="gridwrapper2">
+		<li class="form-element"><label><?php esc_html_e( 'Society name', 'digirisk' ); ?><input type="text" name="groupment[title]" value="<?php echo esc_attr( $element->title ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" value="<?php echo esc_attr( $address->address ); ?>" /></label></li>
+		<li class="form-element">
+			<label><?php esc_html_e( 'Owner', 'digirisk' ); ?>
+				<input type="text"
+							data-field="groupment[user_info][owner_id]"
+							data-type="user"
+							placeholder="<?php esc_html_e( 'Write name to search...', 'digirisk' ); ?>"
+							class="digi-search"
+							value="<?php echo esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ); ?>" /></label>
+				<input type="hidden" name="groupment[user_info][owner_id]" />
+		</li>
+		<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" value="<?php echo esc_attr( $address->additional_address ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( ! empty( $element->date ) ? $element->date : date( 'd/m/Y' ) ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" value="<?php echo esc_attr( $address->postcode ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" value="<?php echo esc_attr( $element->identity['siren'] ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" value="<?php echo esc_attr( $address->town ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'SIRET', 'digirisk' ); ?> <input type="text" name="groupment[identity][siret]" value="<?php echo esc_attr( $element->identity['siret'] ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( max( $element->contact['phone'] ) ); ?>" /></label></li>
+	</ul>
 
-  <div class="form-element block"><label><?php _e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"><?php echo $element->content; ?></textarea></label></div>
+	<div class="form-element block"><label><?php esc_html_e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"><?php echo esc_html( $element->content ); ?></textarea></label></div>
 
-  <button class="float right wp-digi-bton-fourth submit-form"><?php _e( 'Save Changes', 'digirisk' ); ?></button>
+	<button class="float right wp-digi-bton-fourth submit-form"><?php esc_html_e( 'Save Changes', 'digirisk' ); ?></button>
 </form>

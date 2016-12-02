@@ -1,37 +1,53 @@
-<?php namespace digi;
+<?php
+/**
+ * Gestion des actions des champs de recherche.
+ *
+ * @package Evarisk\Plugin
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class search_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Gestion des actions des champs de recherche.
+ */
+class Search_Action {
 
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	function __construct() {
 		add_action( 'wp_ajax_digi_search', array( $this, 'callback_digi_search' ) );
 	}
 
+	/**
+	 * Appelle la méthode search de Search_Class pour récupérer la liste selon le critère $_GET['type']
+	 * Si next_action est défini, appelle l'action pour gérer une action différente.
+	 *
+	 * @return void
+	 */
 	public function callback_digi_search() {
 		$list = search_class::g()->search( $_GET );
 
-		if ( !empty( $_GET['next_action'] ) ) {
+		if ( ! empty( $_GET['next_action'] ) ) {
 			do_action( $_GET['next_action'], $_GET['id'], $list );
 		}
 
 		$return = array();
 
 		foreach ( $list as $element ) {
-			if( $element[0]->id != $_GET['id'] && !post_util::is_parent( $_GET['id'], $element[0]->id ) && count( get_children( array( 'post_parent' => $element[0]->id, 'post_type' => 'digi-workunit' ) ) ) == 0 ) {
-				$return[] = array(
-					'label' => $element[0]->unique_identifier . ' ' . $element[0]->title,
-					'value' => $element[0]->unique_identifier . ' ' . $element[0]->title,
-					'id'		=> $element[0]->id,
-				);
-			}
+			$user = User_Class::g()->get( array( 'include' => array( $element ) ) );
+			$user = $user[0];
+			$return[] = array(
+				'label' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->displayname,
+				'value' => $user->id . ' - ' . $user->displayname,
+				'id'		=> $user->id,
+			);
 		}
 
 		wp_die( wp_json_encode( $return ) );
 	}
 }
 
-new search_action();
+new Search_Action();
