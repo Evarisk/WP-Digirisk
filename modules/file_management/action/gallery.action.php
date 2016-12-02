@@ -44,10 +44,10 @@ class gallery_action {
 		set_post_thumbnail( $element_id, $thumbnail_id );
 
 		ob_start();
-		echo get_the_post_thumbnail( $element_id, 'digirisk-element-miniature' );
+		echo get_the_post_thumbnail( $element_id, 'thumbnail' );
 		$template = ob_get_clean();
 
-		wp_send_json_success( array( 'template' => $template ) );
+		wp_send_json_success( array( 'element_id' => $element_id, 'template' => $template ) );
 	}
 }
 

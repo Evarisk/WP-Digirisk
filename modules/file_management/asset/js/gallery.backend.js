@@ -60,37 +60,11 @@ window.digirisk.gallery.set_thumbnail = function( event ) {
 	};
 
 	jQuery.post( window.ajaxurl, data, function( response ) {
-      jQuery( 'span.wpeo-upload-media[data-id="'+ window.file_management.element_id + '"]' ).find( '.wp-post-image' ).replaceWith( response.data.template );
+      jQuery( 'span.wpeo-upload-media[data-id="'+ response.data.element_id + '"]' ).find( '.wp-post-image' ).replaceWith( response.data.template );
+			jQuery( '.wpeo-gallery' ).hide();
 	} );
 };
 
 window.digirisk.gallery.close = function( event ) {
 	jQuery( '.wpeo-gallery' ).hide();
 };
-
-// var wpeo_gallery = {
-// 	$: undefined,
-// 	event: function( $ ) {
-// 		wpeo_gallery.$ = $;
-//
-// 		wpeo_gallery.$( document ).on( 'keyup', function( event ) { wpeo_gallery.keyup( event, wpeo_gallery.$( this ) ); } );
-// 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery', function( event ) { event.preventDefault(); return false; } );
-// 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .prev', function( event ) { wpeo_gallery.prev( event, wpeo_gallery.$( this ) ); } );
-// 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .next', function( event ) { wpeo_gallery.next( event, wpeo_gallery.$( this ) ); } );
-// 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .set-as-thumbnail', function( event ) { wpeo_gallery.set_thumbnail( event, wpeo_gallery.$( this ) ); } );
-// 		wpeo_gallery.$( document ).on( 'click', '.wpeo-gallery .close', function( event ) { wpeo_gallery.close( event ); } );
-//
-// 	},
-//
-// 	keyup: function( event, element ) {
-// 		if ( event.keyCode == 37 ) {
-// 			wpeo_gallery.$( '.wpeo-gallery .prev' ).click();
-// 		}
-// 		else if ( event.keyCode == 39 ) {
-// 			wpeo_gallery.$( '.wpeo-gallery .next' ).click();
-// 		}
-// 		else if ( event.keyCode == 27 ) {
-// 			wpeo_gallery.$( '.wpeo-gallery .close' ).click();
-// 		}
-// 	},
-//
