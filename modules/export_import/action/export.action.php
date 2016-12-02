@@ -75,26 +75,11 @@ class export_action {
 					return ( $a->id < $b->id ) ? -1 : 1;
 				});
 
-				$element_to_export = new wpeo_export_class( $element );
-				$list_data_exported[] = $element_to_export->export();
+				$list_data_exported[] = Export_Class::g()->get_full_data_for_export( $element );
 			}
 		}
 
-		$current_time = current_time( 'YmdHis' );
-		$filename = 'global';
-		$export_base = $this->export_directory . $current_time . '_' . $filename . '_export';
-		$json_filename = $export_base . '.json';
-		file_put_contents( $json_filename, wp_json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
-
-		/** Ajout du fichier json au fichier zip / Add the json file to zip file */
-		$sub_response = document_class::g()->create_zip( $export_base . '.zip', array( array( 'link' => $json_filename, 'filename' => basename( $json_filename ) ) ), $element, null );
-		$response = array_merge( $response, $sub_response );
-
-		/** Suppression du fichier json après l'enregistrement dans le fichier zip / Delete the json file after zip saving */
-		@unlink( $json_filename );
-		$upload_dir = wp_upload_dir();
-		$response['url_to_file'] = $upload_dir['baseurl'] . '/digirisk/export/' . $current_time . '_' . $filename . '_export.zip';
-		$response['filename'] = current_time( 'YmdHis' ) . '_' . $filename . '_export.zip';
+		Export_Class::g()->generate_zip();
 		wp_send_json_success( $response );
 	}
 
