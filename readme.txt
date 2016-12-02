@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 6.2.1.0
+Stable tag: 6.2.1.1
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -74,6 +74,14 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 6.2.1.1 =
+
+Corrections
+
+* 5794 - Page utilisateur: La touche entrée sur la modification du domaine de l'email ne crée plus un utilisateur
+* 5811 - Organiseur: On ne peut plus déplacer un groupement dans un groupement contenant des unités de travail
+* 5815 - On ne peut plus créer d'unité de travail dans un groupement contenant des groupements enfant
 
 = Version 6.2.1.0 =
 
