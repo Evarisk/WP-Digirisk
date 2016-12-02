@@ -37,8 +37,10 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 		list_variable: list_variable,
 	};
 
+	jQuery( '.wp-digi-risk-cotation-chooser' ).hide();
+
 	if ( length === 5 ) {
-		element.addClass( 'wp-digi-loading' );
+		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 		jQuery.post( window.ajaxurl, data, function( response ) {
       jQuery( '.wpdigi-method-evaluation-render' ).hide();
 
@@ -46,7 +48,6 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
       element.closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-level-new' ).html( response.data.equivalence );
 			element.closest( '.wp-digi-list-item' ).find( '.wp-digi-risk-list-column-cotation > div' ).attr( 'class', 'wp-digi-risk-level-new wp-digi-risk-level-' + response.data.scale );
       element.closest( '.wp-digi-list-item' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
-			element.removeClass( 'wp-digi-loading' );
     } );
 	}
 	else {

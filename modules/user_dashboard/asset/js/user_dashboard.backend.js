@@ -61,4 +61,5 @@ window.digirisk.user_dashboard.load_success = function( element, response ) {
 
 window.digirisk.user_dashboard.save_user_success = function( element, response ) {
   jQuery( '.wp-digi-list-staff' ).html( response.data.template );
+	jQuery( '.wp-digi-table-item-new input.lastname' ).focus();
 }

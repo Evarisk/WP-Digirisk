@@ -82,7 +82,7 @@ class User_Digi_Class extends user_class {
 	 *
 	 * @var integer
 	 */
-	public $limit_user = -1;
+	public $limit_user = 5;
 
 	/**
 	 * Le constructeur
