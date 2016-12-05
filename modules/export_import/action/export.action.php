@@ -22,7 +22,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class export_action {
 
-	private $export_directory;
 
 	public function __construct() {
 		/** Enqueue les javascripts pour l'administration / Enqueue scripts into backend */
@@ -31,10 +30,6 @@ class export_action {
 		/** Ecoute l'événement ajax d'export des données / Listen ajax event for datas export */
 		add_action( 'wp_ajax_digi_export_data', array( $this, 'callback_export_data' ) );
 
-		/** Définition des chemins vers les exports / Define path where export will be saved */
-		$wp_upload_dir = wp_upload_dir();
-		$this->export_directory = $wp_upload_dir[ 'basedir' ] . '/digirisk/export/';
-		wp_mkdir_p( $this->export_directory );
 	}
 
 	/**
@@ -53,33 +48,8 @@ class export_action {
 	public function callback_export_data() {
 		check_ajax_referer( 'digi_export_data' );
 
-		$response = array(
-			'message' => __( 'Digirisk datas exported successfully', 'digirisk' ),
-		);
+		$response = Export_Class::g()->exec();
 
-		$list_group = Group_Class::g()->get(
-			array(
-				'posts_per_page' => -1,
-				'post_parent' => 0,
-				'post_status' => array( 'publish', 'draft' ),
-				'order' => 'ASC',
-		) );
-
-		$list_data_exported = array();
-
-		if ( ! empty( $list_group ) ) {
-			foreach ( $list_group as $element ) {
-				$element = get_full_group( $element );
-
-				uasort( $element->list_workunit, function( $a, $b ) {
-					return ( $a->id < $b->id ) ? -1 : 1;
-				});
-
-				$list_data_exported[] = Export_Class::g()->get_full_data_for_export( $element );
-			}
-		}
-
-		Export_Class::g()->generate_zip();
 		wp_send_json_success( $response );
 	}
 

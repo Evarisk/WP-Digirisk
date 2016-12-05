@@ -27,8 +27,10 @@ function get_full_risk( $data ) {
 
 	if ( ! empty( $data->id ) ) {
 		$args_dangers = array( 'include' => $data->taxonomy['digi-danger'] );
+		$args_dangers_categories = array( 'include' => $data->taxonomy['digi-danger-category'] );
 		$args_evaluation = array( 'comment__in' => array( $data->current_evaluation_id ) );
 		$args_risk_evaluation_comment = array( 'post_id' => $data->id );
+		$args_evaluation_method = array( 'post_id' => $data->id );
 	}
 
 	// Récupères le danger.

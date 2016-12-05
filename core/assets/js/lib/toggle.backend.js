@@ -13,7 +13,7 @@ window.digirisk.toggle.open = function( event ) {
 	var target = undefined;
   // Récupères la box de destination mis dans l'attribut du toggle
   if ( jQuery( this ).data( 'parent' ) ) {
-	  target = jQuery( this ).closest( "." + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
+	  target = jQuery( this ).closest( '.' + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
 	}
 	else {
 		target = jQuery( "." + jQuery( this ).data( 'target' ) );
@@ -24,7 +24,3 @@ window.digirisk.toggle.open = function( event ) {
 	  event.stopPropagation();
 	}
 };
-
-window.digirisk.toggle.close = function( event ) {
-  jQuery( '.digi-popup' ).hide();
-}

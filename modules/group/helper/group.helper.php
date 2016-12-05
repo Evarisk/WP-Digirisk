@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return Group_Model L'objet avec tous les éléments ajoutés par cette méthode.
  */
 function get_full_group( $data ) {
+	// Récupères les risques du groupement.
+	$data->list_risk = Risk_Class::g()->get( array( 'post_parent' => $data->id ) );
+
 	$data->list_workunit = Workunit_Class::g()->get( array( 'post_parent' => $data->id, 'posts_per_page' => -1 ) );
 
 	if ( ! empty( $data->list_workunit ) ) {
