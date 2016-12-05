@@ -10,7 +10,7 @@ window.digirisk.action.event = function() {
   jQuery( document ).on( 'click', '.wp-digi-action-delete', window.digirisk.action.delete );
 };
 
-window.digirisk.action.exec_input = function(event) {
+window.digirisk.action.exec_input = function( event ) {
   var element = jQuery( this );
 	var parent_element = element;
 

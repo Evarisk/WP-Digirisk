@@ -20,26 +20,14 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @package export_import
  * @subpackage shortcode
  */
-class export_action {
-
+class Export_Action {
 
 	public function __construct() {
 		/** Enqueue les javascripts pour l'administration / Enqueue scripts into backend */
-		// add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts' ) );
 
 		/** Ecoute l'événement ajax d'export des données / Listen ajax event for datas export */
 		add_action( 'wp_ajax_digi_export_data', array( $this, 'callback_export_data' ) );
 
-	}
-
-	/**
-	 * Fonction de rappel des javascripts pour l'administration / Callback fonction for backend javascripts
-	 */
-	public function callback_admin_enqueue_scripts() {
-		$screen = get_current_screen();
-		if ( ( 'toplevel_page_digirisk-simple-risk-evaluation' == $screen->id ) || ( 'tools_page_digirisk-tools' == $screen->id ) ) {
-			wp_enqueue_script( 'digi-export-js', WPDIGI_IMPEXP_URL . 'asset/js/export_import.backend.js', array(), WPDIGI_IMPEXP_VERSION, false );
-		}
 	}
 
 	/**
