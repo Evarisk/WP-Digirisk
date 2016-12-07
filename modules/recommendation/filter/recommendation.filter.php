@@ -11,9 +11,9 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_filter {
+class Recommendation_Filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 1 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 1 );
 	}
 
 	public function callback_tab( $list_tab ) {
@@ -25,4 +25,4 @@ class recommendation_filter {
 	}
 }
 
-new recommendation_filter();
+new Recommendation_Filter();
