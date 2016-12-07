@@ -5,7 +5,7 @@
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @version 6.2.1.0
  * @copyright 2015-2016 Eoxia
- * @package group
+ * @package society
  * @subpackage action
  */
 
@@ -27,6 +27,9 @@ class Society_Configuration_Action {
 
 	/**
 	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
+	 *
+	 * @since 6.2.2.0
+	 * @version 6.2.2.0
 	 *
 	 * @return void
 	 */

@@ -87,8 +87,17 @@ class Society_Configuration_Class extends Singleton_Util {
 	 * @return Group_Model Le groupement mis à jour.
 	 */
 	public function save( $data ) {
-		$group = group_class::g()->update( $data );
-		return $group;
+		$society = society_class::g()->show_by_type( $data['id'] );
+
+		$society->title = $data['title'];
+		$society->user_info['owner_id'] = $data['user_info']['owner_id'];
+		$society->date = $data['date'];
+		$society->contact['phone'][] = $data['contact']['phone'][0];
+		$society->contact['address_id'][] = $data['contact']['address_id'][0];
+		$society->content = $data['content'];
+
+		$society = society_class::g()->update_by_type( $society );
+		return $society;
 	}
 }
 

@@ -36,9 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" value="<?php echo esc_attr( $address->additional_address ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( ! empty( $element->date ) ? $element->date : date( 'd/m/Y' ) ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" value="<?php echo esc_attr( $address->postcode ); ?>" /></label></li>
-		<li class="form-element"><label><?php esc_html_e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" value="<?php echo esc_attr( $element->identity['siren'] ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" value="<?php echo esc_attr( $address->town ); ?>" /></label></li>
-		<li class="form-element"><label><?php esc_html_e( 'SIRET', 'digirisk' ); ?> <input type="text" name="groupment[identity][siret]" value="<?php echo esc_attr( $element->identity['siret'] ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( max( $element->contact['phone'] ) ); ?>" /></label></li>
 	</ul>
 
