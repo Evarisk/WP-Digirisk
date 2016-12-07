@@ -1,5 +1,6 @@
 [ {
 	"name": "Evarisk",
+	"slug": "evarisk",
 	"option": {
 		"is_default": true,
 		"matrix": {
@@ -228,6 +229,7 @@
 },
 {
 	"name": "Evarisk simplified",
+	"slug": "evarisk-simplified",
 	"option": {
 		"is_default": true,
 		"matrix": {
@@ -273,6 +275,7 @@
 },
 {
 	"name": "Amiante",
+	"slug": "amiante",
 	"option": {
 		"is_default": false,
 		"matrix": [
@@ -315,6 +318,7 @@
 },
 {
 	"name": "Résultats Seirich",
+	"slug": "resultats-seirich",
 	"option": {
 		"is_default": false,
 		"matrix": [
