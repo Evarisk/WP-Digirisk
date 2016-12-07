@@ -237,10 +237,10 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
 						if ( 'valid' === $evaluator_affectation_info['affectation_info']['status'] ) {
 							$affected_evaluators[] = array(
-								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
-								'nomUtilisateur'		=> $evaluator_affectation_info['user_info']->lastname,
-								'prenomUtilisateur'	=> $evaluator_affectation_info['user_info']->firstname,
-								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'idUtilisateur'								=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
+								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
+								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
+								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
 								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
