@@ -174,7 +174,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	public function get_infos( $society ) {
 		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
 
-		$address = Group_Configuration_Class::g()->get_address( $society );
+		$address = Society_Class::g()->get_address( $society );
 		$address = $address[0];
 
 		$infos['adresse'] = $address->address . ' ' . $address->additional_address;

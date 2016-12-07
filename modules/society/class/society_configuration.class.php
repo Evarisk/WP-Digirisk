@@ -34,32 +34,12 @@ class Society_Configuration_Class extends Singleton_Util {
 	 * @return void
 	 */
 	public function display( $element ) {
-		$address = $this->get_address( $element );
+		$address = Society_Class::g()->get_address( $element );
 		$address = $address[0];
 
 		$owner_user = $this->get_owner_user( $element );
 
 		view_util::exec( 'society', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
-	}
-
-	/**
-	 * Récupères l'adresse du groupement
-	 *
-	 * @param  Group_Model $groupment L'objet groupement.
-	 * @return Address_Model        L'adresse du groupement ou le schéma d'une adresse.
-	 *
-	 * @todo Déplacer cette méthode vers Group_Class
-	 */
-	public function get_address( $groupment ) {
-		$args_address = array( 'schema' => true );
-
-		if ( ! empty( $groupment->contact['address_id'] ) ) {
-			$args_address = array( 'comment__in' => array( max( $groupment->contact['address_id'] ) ) );
-		}
-
-		$address = Address_Class::g()->get( $args_address );
-
-		return $address;
 	}
 
 	/**
