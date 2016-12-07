@@ -40,8 +40,8 @@ class Search_Action {
 			$user = User_Class::g()->get( array( 'include' => array( $element ) ) );
 			$user = $user[0];
 			$return[] = array(
-				'label' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->displayname,
-				'value' => $user->id . ' - ' . $user->displayname,
+				'label' => $user->login . ' (' . $user->email . ')',
+				'value' => $user->login,
 				'id'		=> $user->id,
 			);
 		}

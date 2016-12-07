@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										data-type="user"
 										placeholder="<?php esc_html_e( 'Write name to search...', 'digirisk' ); ?>"
 										class="digi-search"
-										value="<?php echo esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ); ?>" /></label>
+										value="<?php echo ! empty( $owner_user->id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ) : ''; ?>" /></label>
 							<input type="hidden" name="groupment[user_info][owner_id]" />
 					</li>
 					<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" /></label></li>

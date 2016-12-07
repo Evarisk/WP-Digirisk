@@ -34,6 +34,8 @@ class search_class extends singleton_util {
 						),
 					)
 				) ) );
+
+				$list = array_unique( $list );
 			}
 			else {
 				$list = get_users( array(

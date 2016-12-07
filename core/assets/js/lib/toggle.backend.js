@@ -6,7 +6,7 @@ window.digirisk.toggle.init = function() {
 
 window.digirisk.toggle.event = function() {
   jQuery( document ).on( 'click', 'toggle', window.digirisk.toggle.open );
-  jQuery( document ).on( 'click', 'body', window.digirisk.toggle.close );
+  // jQuery( document ).on( 'click', 'body', window.digirisk.toggle.close );
 };
 
 window.digirisk.toggle.open = function( event ) {

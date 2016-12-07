@@ -43,7 +43,7 @@ class user_digi_model extends user_model {
 			"phone_number" => array(
 				'type'			=> 'string',
 				'meta_type'	=> 'multiple',
-				'bydefault' => '01 02 03 04 05'
+				'bydefault' => ''
 			),
 			'release_date_of_society' => array(
 				'type'		=> 'string',

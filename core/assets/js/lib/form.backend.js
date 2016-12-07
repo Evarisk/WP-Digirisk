@@ -14,7 +14,7 @@ window.digirisk.form.sumbit_form = function( event ) {
   element.closest( 'form' ).ajaxSubmit( {
     success: function( response ) {
 			element.closest( '.wp-digi-bloc-loader' ).removeClass( 'wp-digi-bloc-loading' );
-			
+
       if ( response && response.success ) {
         if ( response.data.module && response.data.callback_success ) {
           window.digirisk[response.data.module][response.data.callback_success]( element, response );
