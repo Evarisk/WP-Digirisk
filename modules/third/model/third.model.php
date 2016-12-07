@@ -17,7 +17,7 @@ class third_model extends post_model {
 				'child' => array(
 					'phone' => array(
 						'type'	=> 'string',
-						'bydefault' => '01 02 03 04 05',
+						'bydefault' => '',
 						'meta_type' => 'multiple',
 					),
 					'address_id' => array(

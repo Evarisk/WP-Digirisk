@@ -33,17 +33,15 @@ class society_shortcode {
 
 		if ( $element ) {
 			$tab_to_display = !empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-risk';
-
 			if ( $element->type == 'digi-group' ) {
-				$group_list = group_class::g()->get( array( 'order' => 'ASC', 'posts_per_page' => 1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ), array( false ) );
-				$element_id = !empty( $group_list ) ? $group_list[0]->id : 0;
-
+				$group_list = group_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft', ), ) );
+				$element_id = ! empty( $group_list ) ? $group_list[0]->id : 0;
 				if ( $element_id === $id ) {
 					$display_trash = false;
 				}
 			}
 
-			view_util::exec( 'society', 'content', array( 'element' => $element, 'tab_to_display' => $tab_to_display ) );
+			view_util::exec( 'society', 'content', array( 'display_trash' => $display_trash, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
 		}
   }
 }

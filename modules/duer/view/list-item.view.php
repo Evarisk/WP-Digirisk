@@ -55,7 +55,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<span class="padded"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></span>
 	<span class="padded flex-tmp">
-		<a href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>" class="wp-digi-bton-fifth" ><?php esc_html_e( 'Télécharger le DUER', 'digirisk' ); ?></a>
+		<a href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
+			<i class="fa fa-download" aria-hidden="true"></i>
+			<?php esc_html_e( 'DUER', 'digirisk' ); ?>
+		</a>
+
 		<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>
 	</span>
 </li>

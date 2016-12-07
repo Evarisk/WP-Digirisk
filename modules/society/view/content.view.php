@@ -25,14 +25,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit;
 				data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
 		</div>
 
+		<?php if ( $display_trash ) : ?>
 		<a class="wp-digi-delete-action wp-digi-action-delete"
 			data-action="delete_society"
 			data-id="<?php echo $element->id; ?>"><i class="dashicons dashicons-trash"></i></a>
-
+		<?php endif; ?>
 		<?php
 		if ( 'digi-group' === $element->type ) :
 		?>
-			<button data-id="<?php echo $element->id; ?>" data-action="digi_list_duer" class="tab wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Document unique', 'digirisk' ); ?></button>
+			<button data-id="<?php echo $element->id; ?>" data-action="digi_list_duer" style="margin-left: auto;" class="tab wp-digi-bton-fifth dashicons-before dashicons-share-alt2"><?php _e( 'Document unique', 'digirisk' ); ?></button>
 		<?php
 		endif;
 		?>

@@ -15,4 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<a href="<?php echo esc_attr( $zip_url ); ?>" class="wp-digi-bton-two" ><?php esc_html_e( 'Télécharger le ZIP', 'digirisk' ); ?></a>
+<a href="<?php echo esc_attr( $zip_url ); ?>">
+	<i class="fa fa-file-archive-o" aria-hidden="true"></i>
+	<?php esc_html_e( 'ZIP', 'digirisk' ); ?>
+</a>
