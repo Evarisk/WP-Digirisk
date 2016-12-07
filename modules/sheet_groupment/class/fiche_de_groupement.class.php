@@ -143,7 +143,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			'nom'						=> $society->title,
 			'description'		=> $society->content,
 			'adresse'				=> $society_infos['adresse'],
-			'telephone'			=> implode( ', ', $society->contact['phone'] ),
+			'telephone'			=> max( $society->contact['phone'] ),
 			'codePostal'		=> $society_infos['codePostal'],
 			'ville'					=> $society_infos['ville'],
 		);
