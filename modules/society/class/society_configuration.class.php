@@ -1,11 +1,12 @@
 <?php
 /**
- * Appelle la vue pour afficher le formulaire de configuration d'un groupement
+ * Appelle la vue pour afficher le formulaire de configuration d'une société
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
+ * @since 6.2.1.0
+ * @version 6.2.2.0
  * @copyright 2015-2016 Eoxia
- * @package group
+ * @package society
  * @subpackage class
  */
 
@@ -14,9 +15,9 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Appelle la vue pour afficher le formulaire de configuration d'un groupement
+ * Appelle la vue pour afficher le formulaire de configuration d'une société
  */
-class Group_Configuration_Class extends Singleton_Util {
+class Society_Configuration_Class extends Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -38,7 +39,7 @@ class Group_Configuration_Class extends Singleton_Util {
 
 		$owner_user = $this->get_owner_user( $element );
 
-		view_util::exec( 'group', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
+		view_util::exec( 'society', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
 	}
 
 	/**
@@ -79,8 +80,6 @@ class Group_Configuration_Class extends Singleton_Util {
 		return $owner_user[0];
 	}
 
-
-
 	/**
 	 * Sauvegardes les données du groupements
 	 *
@@ -93,4 +92,4 @@ class Group_Configuration_Class extends Singleton_Util {
 	}
 }
 
-group_configuration_class::g();
+Society_Configuration_Class::g();

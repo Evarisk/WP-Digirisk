@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( 'ajax_generate_fiche_de_poste' ); ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 	<span></span>
-	<span><?php esc_html_e( 'Générer une nouvelle fiche d\'unité de travail', 'digirisk' ); ?></span>
+	<span><?php esc_html_e( 'Générer une nouvelle fiche de poste', 'digirisk' ); ?></span>
 
 	<span class="wp-digi-action">
 		<a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a>

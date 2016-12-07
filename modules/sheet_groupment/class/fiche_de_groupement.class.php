@@ -165,6 +165,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	/**
 	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
 	 *
+	 * @since 6.2.1.2
+	 * @version 6.2.1.2
+	 *
 	 * @param Group_Model $society L'objet groupement.
 	 * @return array
 	 */
@@ -174,7 +177,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		$address = Group_Configuration_Class::g()->get_address( $society );
 		$address = $address[0];
 
-		$infos['adresse'] = $address->address;
+		$infos['adresse'] = $address->address . ' ' . $address->additional_address;
 		$infos['codePostal'] = $address->postcode;
 		$infos['ville'] = $address->town;
 

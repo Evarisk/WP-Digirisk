@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php wp_nonce_field( 'save_groupment_configuration' ); ?>
 
 	<ul class="gridwrapper2">
-		<li class="form-element"><label><?php esc_html_e( 'Society name', 'digirisk' ); ?><input type="text" name="groupment[title]" value="<?php echo esc_attr( $element->title ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Nom', 'digirisk' ); ?><input type="text" name="groupment[title]" value="<?php echo esc_attr( $element->title ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Address', 'digirisk' ); ?> <input type="text" name="address[address]" value="<?php echo esc_attr( $address->address ); ?>" /></label></li>
 		<li class="form-element">
 			<label><?php esc_html_e( 'Owner', 'digirisk' ); ?>
