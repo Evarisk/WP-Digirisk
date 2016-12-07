@@ -167,7 +167,6 @@ class Export_Class extends Singleton_Util {
 				'slug'			=> $element->danger->slug,
 				'status'		=> $element->danger->status,
 				'parent_id'	=> $element->danger->parent_id,
-				'id'				=> $element->danger->id,
 			),
 		);
 
