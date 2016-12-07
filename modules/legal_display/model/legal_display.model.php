@@ -43,12 +43,12 @@ class legal_display_model extends post_model {
 					'right_defender' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => 'www.defenseurdesdroits.fr',
 					),
 					'poison_control_center' => array(
 						'type' => 'string',
 						'meta_type'	=> 'multiple',
-						'bydefault' => '',
+						'bydefault' => 'www.centres-antipoison.net',
 					),
 				),
 			),
