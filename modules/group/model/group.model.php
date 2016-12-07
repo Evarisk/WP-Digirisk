@@ -34,7 +34,7 @@ class group_model extends society_model {
 				'phone' => array(
 					'type'			=> 'array',
 					'meta_type'	=> 'multiple',
-					'bydefault'	=> array( '01 02 03 04 05' )
+					'bydefault'	=> array( '' )
 				),
 				'address_id' => array(
 					'type'			=> 'array',
