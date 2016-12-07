@@ -82,7 +82,6 @@ class Export_Class extends Singleton_Util {
 					'content'				=> $element->content,
 					'link'					=> $element->link,
 					'parent_id'			=> $element->parent_id,
-					'id'						=> $element->id,
 					'list_workunit' => $this->export_workunits( $element->list_workunit ),
 					'list_risk'			=> $this->export_risks( $element->list_risk ),
 					'list_group'		=> $this->export_groupments( $element->id ),
@@ -112,7 +111,6 @@ class Export_Class extends Singleton_Util {
 					'content'				=> $element->content,
 					'link'					=> $element->link,
 					'parent_id'			=> $element->parent_id,
-					'id'						=> $element->id,
 					'list_risk'			=> $this->export_risks( $element->list_risk ),
 				);
 
@@ -140,7 +138,6 @@ class Export_Class extends Singleton_Util {
 					'content'						=> $element->content,
 					'link'							=> $element->link,
 					'parent_id'					=> $element->parent_id,
-					'id'								=> $element->id,
 					'danger_category'		=> $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.
 					'evaluation'				=> $this->export_evaluation( $element->evaluation ),
 					'evaluation_method'	=> $this->export_evaluation_method( $element->evaluation_method ),
@@ -165,7 +162,6 @@ class Export_Class extends Singleton_Util {
 			'name'			=> $element->danger_category->name,
 			'slug'			=> $element->danger_category->slug,
 			'parent_id'	=> $element->danger_category->parent_id,
-			'id'				=> $element->danger_category->id,
 			'danger'		=> array(
 				'name'			=> $element->danger->name,
 				'slug'			=> $element->danger->slug,
@@ -193,7 +189,6 @@ class Export_Class extends Singleton_Util {
 			'quotation_detail'		=> $evaluation->quotation_detail,
 			'scale'								=> $evaluation->scale,
 			'post_id'							=> $evaluation->post_id,
-			'id'									=> $evaluation->id,
 		);
 
 		return $data;
@@ -210,7 +205,6 @@ class Export_Class extends Singleton_Util {
 			'name'			=> $evaluation_method->name,
 			'slug'			=> $evaluation_method->slug,
 			'parent_id'	=> $evaluation_method->parent_id,
-			'id'				=> $evaluation_method->id,
 		);
 
 		return $data;
@@ -235,7 +229,6 @@ class Export_Class extends Singleton_Util {
 						'post_id'		=> $element->post_id,
 						'parent_id'	=> $element->parent_id,
 						'author_id'	=> $element->author_id,
-						'id'				=> $element->id,
 					);
 
 					$comments_to_export[] = $tmp_comment_to_export;
