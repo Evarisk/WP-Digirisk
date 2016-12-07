@@ -21,6 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span><?php echo esc_html( $element->unique_identifier ); ?></span>
 	<span><?php echo esc_html( $element->title ); ?></span>
 	<span class="padded flex-tmp">
-		<a href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>" class="wp-digi-bton-fifth" ><?php esc_html_e( 'Télécharger', 'digirisk' ); ?></a>
+		<span class="padded flex-tmp">
+			<a href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+				<i class="fa fa-download" aria-hidden="true"></i>
+				<?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?>
+			</a>
+		</span>
 	</span>
 </li>

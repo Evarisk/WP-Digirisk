@@ -10,7 +10,7 @@ class evaluator_class extends user_class {
 	protected $base 	= 'digirisk/evaluator';
 	protected $version 	= '0.1';
 
-	public $element_prefix = 'EV';
+	public $element_prefix = 'U';
 	public $limit_evaluator = 5;
 
 	/**

@@ -272,8 +272,8 @@ class User_Digi_Class extends user_class {
 			}
 
 			return array(
-				'affected'		=> $affected_users,
-				'unaffected'	=> $unaffected_users,
+				'affected'		=> ! empty( $affected_users ) ? $affected_users : array(),
+				'unaffected'	=> ! empty( $unaffected_users ) ? $unaffected_users : array(),
 			);
 		}
 
