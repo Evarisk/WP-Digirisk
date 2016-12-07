@@ -135,14 +135,16 @@ class Fiche_De_Poste_Class extends Post_Class {
 
 		$society = $society[0];
 
+		$society_infos = $this->get_infos( $society );
+
 		$sheet_details = array(
 			'referenceUnite'			=> $society->unique_identifier,
 			'nomUnite'						=> $society->title,
 			'description'		=> $society->content,
-			'adresse'				=> '',
-			'codePostal' 		=> '',
-			'ville'					=> '',
-			'telephone'			=> implode( ', ', $society->contact['phone'] ),
+			'adresse'				=> $society_infos['adresse'],
+			'codePostal'		=> $society_infos['codePostal'],
+			'ville'					=> $society_infos['ville'],
+			'telephone'			=> max( $society->contact['phone'] ),
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -158,6 +160,28 @@ class Fiche_De_Poste_Class extends Post_Class {
 		}
 
 		return $document_creation_response;
+	}
+
+	/**
+	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
+	 *
+	 * @since 6.2.1.2
+	 * @version 6.2.1.2
+	 *
+	 * @param Workunit_Model $society L'objet unité de travail.
+	 * @return array
+	 */
+	public function get_infos( $society ) {
+		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
+
+		$address = Society_Class::g()->get_address( $society );
+		$address = $address[0];
+
+		$infos['adresse'] = $address->address . ' ' . $address->additional_address;
+		$infos['codePostal'] = $address->postcode;
+		$infos['ville'] = $address->town;
+
+		return $infos;
 	}
 
 	/**

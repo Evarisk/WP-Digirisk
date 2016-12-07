@@ -13,12 +13,13 @@ namespace digi;
 */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class society_shortcode {
+class Society_Shortcode {
 	/**
 	* Le constructeur
 	*/
   public function __construct() {
     add_shortcode( 'digi_dashboard', array( $this, 'callback_digi_dashboard' ) );
+		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
   }
 
   /**
@@ -44,6 +45,20 @@ class society_shortcode {
 			view_util::exec( 'society', 'content', array( 'display_trash' => $display_trash, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
 		}
   }
+
+	/**
+	 * Affiches le formulaire pour configurer un groupement
+	 *
+	 * @param array $param Les paramètres du shortcode.
+	 *
+	 * @return void
+	 */
+	public function callback_configuration( $param ) {
+		$element_id = $param['post_id'];
+		$element = Society_Class::g()->show_by_type( $element_id );
+
+		Society_Configuration_Class::g()->display( $element );
+	}
 }
 
-new society_shortcode();
+new Society_Shortcode();

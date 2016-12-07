@@ -5,7 +5,7 @@
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @version 6.2.1.0
  * @copyright 2015-2016 Eoxia
- * @package group
+ * @package society
  * @subpackage action
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Gestion de la requête AJAX pour enregistrer la configuration d'un groupement
  */
-class Group_Configuration_Action {
+class Society_Configuration_Action {
 
 	/**
 	 * Le constructeur
@@ -26,7 +26,10 @@ class Group_Configuration_Action {
 	}
 
 	/**
-	 * Appelle les méthodes save de Group_Configuration_Class et Address_Class pour enregister les données.
+	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
+	 *
+	 * @since 6.2.2.0
+	 * @version 6.2.2.0
 	 *
 	 * @return void
 	 */
@@ -38,10 +41,10 @@ class Group_Configuration_Action {
 		$address = Address_Class::g()->save( $_POST['address'] );
 		$groupment_data['contact']['address_id'][] = $address->id;
 
-		$group = Group_Configuration_Class::g()->save( $groupment_data );
+		$group = Society_Configuration_Class::g()->save( $groupment_data );
 
 		wp_send_json_success( array( 'group' => $group, 'address' => $address ) );
 	}
 }
 
-new Group_Configuration_Action();
+new Society_Configuration_Action();

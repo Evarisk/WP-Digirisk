@@ -1,11 +1,12 @@
 <?php
 /**
- * Appelle la vue pour afficher le formulaire de configuration d'un groupement
+ * Appelle la vue pour afficher le formulaire de configuration d'une société
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
+ * @since 6.2.1.0
+ * @version 6.2.2.0
  * @copyright 2015-2016 Eoxia
- * @package group
+ * @package society
  * @subpackage class
  */
 
@@ -14,9 +15,9 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Appelle la vue pour afficher le formulaire de configuration d'un groupement
+ * Appelle la vue pour afficher le formulaire de configuration d'une société
  */
-class Group_Configuration_Class extends Singleton_Util {
+class Society_Configuration_Class extends Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -33,30 +34,12 @@ class Group_Configuration_Class extends Singleton_Util {
 	 * @return void
 	 */
 	public function display( $element ) {
-		$address = $this->get_address( $element );
+		$address = Society_Class::g()->get_address( $element );
 		$address = $address[0];
 
 		$owner_user = $this->get_owner_user( $element );
 
-		view_util::exec( 'group', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
-	}
-
-	/**
-	 * Récupères l'adresse du groupement
-	 *
-	 * @param  Group_Model $groupment L'objet groupement.
-	 * @return Address_Model        L'adresse du groupement ou le schéma d'une adresse.
-	 */
-	public function get_address( $groupment ) {
-		$args_address = array( 'schema' => true );
-
-		if ( ! empty( $groupment->contact['address_id'] ) ) {
-			$args_address = array( 'comment__in' => array( max( $groupment->contact['address_id'] ) ) );
-		}
-
-		$address = Address_Class::g()->get( $args_address );
-
-		return $address;
+		view_util::exec( 'society', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
 	}
 
 	/**
@@ -77,8 +60,6 @@ class Group_Configuration_Class extends Singleton_Util {
 		return $owner_user[0];
 	}
 
-
-
 	/**
 	 * Sauvegardes les données du groupements
 	 *
@@ -86,9 +67,18 @@ class Group_Configuration_Class extends Singleton_Util {
 	 * @return Group_Model Le groupement mis à jour.
 	 */
 	public function save( $data ) {
-		$group = group_class::g()->update( $data );
-		return $group;
+		$society = society_class::g()->show_by_type( $data['id'] );
+
+		$society->title = $data['title'];
+		$society->user_info['owner_id'] = $data['user_info']['owner_id'];
+		$society->date = $data['date'];
+		$society->contact['phone'][] = $data['contact']['phone'][0];
+		$society->contact['address_id'][] = $data['contact']['address_id'][0];
+		$society->content = $data['content'];
+
+		$society = society_class::g()->update_by_type( $society );
+		return $society;
 	}
 }
 
-group_configuration_class::g();
+Society_Configuration_Class::g();

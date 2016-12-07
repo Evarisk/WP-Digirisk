@@ -5,6 +5,7 @@
 	"description": "Le module gérant les unitées de travail",
 	"path": "modules/workunit/",
 	"dependencies": {
+		"filter": {},
 		"shortcode": {},
 		"model": {},
 		"helper": {},

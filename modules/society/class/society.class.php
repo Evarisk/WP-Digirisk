@@ -86,6 +86,26 @@ class Society_Class extends Singleton_Util {
 		$establishment = $model_name::g()->update( $establishment );
 		return $establishment;
 	}
+
+	/**
+	 * Récupères l'adresse du groupement
+	 *
+	 * @param  mixed $society Les données de la société.
+	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
+	 *
+	 * @todo Déplacer cette méthode vers Group_Class
+	 */
+	public function get_address( $society ) {
+		$args_address = array( 'schema' => true );
+
+		if ( ! empty( $society->contact['address_id'] ) ) {
+			$args_address = array( 'comment__in' => array( max( $society->contact['address_id'] ) ) );
+		}
+
+		$address = Address_Class::g()->get( $args_address );
+
+		return $address;
+	}
 }
 
 society_class::g();

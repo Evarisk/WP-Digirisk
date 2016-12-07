@@ -136,12 +136,16 @@ class Fiche_De_Groupement_Class extends Post_Class {
 
 		$society = $society[0];
 
+		$society_infos = $this->get_infos( $society );
+
 		$sheet_details = array(
 			'reference'			=> $society->unique_identifier,
 			'nom'						=> $society->title,
 			'description'		=> $society->content,
-			'adresse'				=> '',
-			'telephone'			=> implode( ', ', $society->contact['phone'] ),
+			'adresse'				=> $society_infos['adresse'],
+			'telephone'			=> max( $society->contact['phone'] ),
+			'codePostal'		=> $society_infos['codePostal'],
+			'ville'					=> $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -156,6 +160,28 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		}
 
 		return $document_creation_response;
+	}
+
+	/**
+	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
+	 *
+	 * @since 6.2.1.2
+	 * @version 6.2.1.2
+	 *
+	 * @param Group_Model $society L'objet groupement.
+	 * @return array
+	 */
+	public function get_infos( $society ) {
+		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
+
+		$address = Society_Class::g()->get_address( $society );
+		$address = $address[0];
+
+		$infos['adresse'] = $address->address . ' ' . $address->additional_address;
+		$infos['codePostal'] = $address->postcode;
+		$infos['ville'] = $address->town;
+
+		return $infos;
 	}
 
 	/**
@@ -235,10 +261,10 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
 						if ( 'valid' === $evaluator_affectation_info['affectation_info']['status'] ) {
 							$affected_evaluators[] = array(
-								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
-								'nomUtilisateur'		=> $evaluator_affectation_info['user_info']->lastname,
-								'prenomUtilisateur'	=> $evaluator_affectation_info['user_info']->firstname,
-								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'idUtilisateur'								=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
+								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
+								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
+								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
 								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
