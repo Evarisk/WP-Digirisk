@@ -136,14 +136,16 @@ class Fiche_De_Groupement_Class extends Post_Class {
 
 		$society = $society[0];
 
+		$society_infos = $this->get_infos( $society );
+
 		$sheet_details = array(
 			'reference'			=> $society->unique_identifier,
 			'nom'						=> $society->title,
 			'description'		=> $society->content,
-			'adresse'				=> '',
+			'adresse'				=> $society_infos['adresse'],
 			'telephone'			=> implode( ', ', $society->contact['phone'] ),
-			'codePostal'		=> '',
-			'ville'					=> '',
+			'codePostal'		=> $society_infos['codePostal'],
+			'ville'					=> $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -158,6 +160,25 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		}
 
 		return $document_creation_response;
+	}
+
+	/**
+	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
+	 *
+	 * @param Group_Model $society L'objet groupement.
+	 * @return array
+	 */
+	public function get_infos( $society ) {
+		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
+
+		$address = Group_Configuration_Class::g()->get_address( $society );
+		$address = $address[0];
+
+		$infos['adresse'] = $address->address;
+		$infos['codePostal'] = $address->postcode;
+		$infos['ville'] = $address->town;
+
+		return $infos;
 	}
 
 	/**

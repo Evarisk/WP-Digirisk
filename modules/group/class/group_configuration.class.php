@@ -46,6 +46,8 @@ class Group_Configuration_Class extends Singleton_Util {
 	 *
 	 * @param  Group_Model $groupment L'objet groupement.
 	 * @return Address_Model        L'adresse du groupement ou le schéma d'une adresse.
+	 *
+	 * @todo Déplacer cette méthode vers Group_Class
 	 */
 	public function get_address( $groupment ) {
 		$args_address = array( 'schema' => true );
