@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							data-type="user"
 							placeholder="<?php esc_html_e( 'Write name to search...', 'digirisk' ); ?>"
 							class="digi-search"
-							value="<?php echo esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ); ?>" /></label>
-				<input type="hidden" name="groupment[user_info][owner_id]" />
+							value="<?php echo esc_attr( $owner_user->login ); ?>" /></label>
+				<input type="hidden" name="groupment[user_info][owner_id]" value="<?php echo esc_attr( $owner_user->id ); ?>" />
 		</li>
 		<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" value="<?php echo esc_attr( $address->additional_address ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( ! empty( $element->date ) ? $element->date : date( 'd/m/Y' ) ); ?>" /></label></li>
