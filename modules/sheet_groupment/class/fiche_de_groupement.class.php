@@ -142,6 +142,8 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			'description'		=> $society->content,
 			'adresse'				=> '',
 			'telephone'			=> implode( ', ', $society->contact['phone'] ),
+			'codePostal'		=> '',
+			'ville'					=> '',
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
