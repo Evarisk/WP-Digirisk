@@ -141,20 +141,16 @@ class Group_Class extends Post_Class {
 	 * @param array  $extra_params ?.
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
-		if ( !is_object( $element ) ) {
-			return array();
-		}
-
 		$element_children = array();
 		$element_tree = '';
 
 		$element_children[ $element->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $element->unique_identifier . ' - ' . $element->title, ) ;
-		if ( !empty( $extra_params ) ) {
-			if ( !empty( $extra_params[ 'default' ] ) ) {
-				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params[ 'default' ], $element_children[ $element->unique_identifier ] );
+		if ( ! empty( $extra_params ) ) {
+			if ( ! empty( $extra_params['default'] ) ) {
+				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params['default'], $element_children[ $element->unique_identifier ] );
 			}
-			if ( !empty( $extra_params[ 'value' ] ) &&  array_key_exists( $element->unique_identifier, $extra_params[ 'value' ] ) ) {
-				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params[ 'value' ][ $element->unique_identifier ], $element_children[ $element->unique_identifier ] );
+			if ( ! empty( $extra_params['value'] ) &&  array_key_exists( $element->unique_identifier, $extra_params['value'] ) ) {
+				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params['value'][ $element->unique_identifier ], $element_children[ $element->unique_identifier ] );
 			}
 		}
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
@@ -164,7 +160,7 @@ class Group_Class extends Post_Class {
 		}
 
 		$tabulation = $tabulation . '-';
-		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+		$work_unit_list = workunit_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 		foreach ( $work_unit_list as $workunit ) {
 			$workunit_definition[ $workunit->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $workunit->unique_identifier . ' - ' . $workunit->title, );
 
@@ -183,21 +179,21 @@ class Group_Class extends Post_Class {
 	}
 
 	/**
-	* Récupères l'id des elements enfants
-	*
-	* @param int $element_id L'ID de l'élement parent
-	* @param array $list_id La liste des ID
-	*/
+	 * Récupères l'id des elements enfants
+	 *
+	 * @param int $element_id L'ID de l'élement parent.
+	 * @param array $list_id La liste des ID.
+	 */
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
-		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ), false );
-		if( !empty( $group_list ) ) {
+		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ) );
+		if ( ! empty( $group_list ) ) {
 			foreach ( $group_list as $group ) {
 				$list_id[] = array( 'id' => $group->id, 'workunit' => array() );
 				// $list_id[count($list_id) - 1] = array();
 				// $list_id[count($list_id) - 1]['workunit'] = array();
-				$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+				$work_unit_list = workunit_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
 				foreach ( $work_unit_list as $workunit ) {
-					$list_id[count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
+					$list_id[ (count( $list_id ) - 1) ]['workunit'][]['id'] = $workunit->id;
 				}
 				$list_id = $this->get_element_sub_tree_id( $group->id, $list_id );
 			}
