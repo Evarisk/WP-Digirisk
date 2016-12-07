@@ -12,6 +12,8 @@ class corrective_task_filter {
 	}
 
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
+		$data_risk['actionPreventionCompleted'] = '';
+		$data_risk['actionPreventionUncompleted'] = '';
 		if ( class_exists( "task_controller_01" ) ) {
 			global $task_controller;
 			global $point_controller;
@@ -30,27 +32,27 @@ class corrective_task_filter {
 					$list_point_uncompleted = array_filter( $list_point, function( $point ) { return $point->option['point_info']['completed'] === false; } );
 				}
 
-				$string = 'Complété' . "
-	";
+				$string = '';
 
 				if ( !empty( $list_point_completed ) ) {
 				  foreach ( $list_point_completed as $element ) {
 						$string .= "Le " . mysql2date( 'd F Y', $element->date, true ) . ':' . $element->content . "
-	";
+";
 				  }
 				}
 
-				$string .= 'Incomplet' . "
-	";
+				$data_risk['actionPreventionCompleted'] = $string;
+				$string = '';
 
 				if ( !empty( $list_point_uncompleted ) ) {
 				  foreach ( $list_point_uncompleted as $element ) {
 						$string .= "Le " . mysql2date( 'd F Y', $element->date, true ) . ":" . $element->content . "
-	";
+";
 				  }
 				}
 
-				$data_risk['actionPrevention'] = $string;
+				$data_risk['actionPreventionUncompleted'] = $string;
+
 			}
 		}
 

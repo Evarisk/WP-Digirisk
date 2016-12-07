@@ -262,7 +262,6 @@ class Export_Class extends Singleton_Util {
 		$json_filename = $export_base . '.json';
 		file_put_contents( $json_filename, wp_json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
 
-
 		/** Ajout du fichier json au fichier zip / Add the json file to zip file */
 		$sub_response = document_class::g()->create_zip( $export_base . '.zip', array( array( 'link' => $json_filename, 'filename' => basename( $json_filename ) ) ), $element, null );
 		$response = array();
