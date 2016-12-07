@@ -23,6 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! empty( $list_document ) ) : ?>
 	<?php foreach ( $list_document as $element ) : ?>
-		<?php view_util::exec( 'sheet_workunit', 'list-item', array( 'element' => $element ) ); ?>
+		<?php view_util::exec( 'legal_display', 'list-item', array( 'element' => $element ) ); ?>
 	<?php endforeach; ?>
 <?php endif; ?>

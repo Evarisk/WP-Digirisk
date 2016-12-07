@@ -31,7 +31,7 @@ class Sheet_Workunit_Filter {
 	 */
 	public function callback_digi_tab( $list_tab ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
-			'text' => __( 'Fiche d\'unité de travail', 'digirisk' ),
+			'text' => __( 'Fiche de poste', 'digirisk' ),
 			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
 		);
 
