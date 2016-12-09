@@ -42,6 +42,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 	if ( length === 5 ) {
 		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 		jQuery.post( window.ajaxurl, data, function( response ) {
+			element.closest( '.wp-digi-bloc-loader' ).removeClass( 'wp-digi-bloc-loading' );
       jQuery( '.wpdigi-method-evaluation-render' ).hide();
 
       element.closest( '.wp-digi-list-item' ).find( 'input.input-hidden-method-id' ).val( element.closest( '.wpdigi-method-evaluation-render' ).find( 'input.digi-method-evaluation-id' ).val() );

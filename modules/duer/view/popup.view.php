@@ -18,8 +18,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<h2 class="title">Titre de la popup</h2>
 			<i class="close fa fa-times"></i>
 		</div>
-			<div class="content" style="height: 60%">
-				<textarea class="hidden" style="width: 100%; height: 100%; resize: none;"></textarea>
+			<div class="content">
+				<textarea class="hidden" rows="8" style="width: 100%;"></textarea>
 				<p class="hidden"></p>
 		</div>
 
