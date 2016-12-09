@@ -101,24 +101,22 @@ class Post_Class extends singleton_util {
 		// @todo: Temporaire
 		if ( ! empty( $args['include'] ) ) {
 			$args['post__in'] = $args['include'];
-			if ( !is_array( $args['post__in'] ) ) {
+			if ( ! is_array( $args['post__in'] ) ) {
 				$args['post__in'] = (array) $args['post__in'];
 			}
 			unset( $args['include'] );
 		}
 
-		if ( !isset( $args['posts_per_page'] ) ) {
+		if ( ! isset( $args['posts_per_page'] ) ) {
 			$args['posts_per_page'] = -1;
 		}
 
 		if ( isset( $args['id'] ) ) {
 			$array_posts[] = get_post( $args['id'], ARRAY_A );
 			unset( $args['id'] );
-		}
-		else if( isset( $args['schema'] ) ) {
+		} elseif ( isset( $args['schema'] ) ) {
 			$array_posts[] = array();
-		}
-		else {
+		} else {
 			$query_posts = new \WP_Query( $args );
 			$array_posts = $query_posts->posts;
 			unset( $query_posts->posts );
@@ -141,13 +139,11 @@ class Post_Class extends singleton_util {
 					$data_json = json_util::g()->decode( $post[ $this->meta_key ] );
 					if ( is_array( $data_json ) ) {
 						$post = array_merge( $post, $data_json );
-					}
-					else {
+					} else {
 						$post[ $this->meta_key ] = $data_json;
 					}
 					unset( $post[ $this->meta_key ] );
 				}
-
 			}
 
 			$array_posts[ $key ] = new $this->model_name( $post );
@@ -158,7 +154,6 @@ class Post_Class extends singleton_util {
 					$array_posts[ $key ] = call_user_func( $get_function, $array_posts[ $key ] );
 				}
 			}
-
 		}
 
 		return $array_posts;
