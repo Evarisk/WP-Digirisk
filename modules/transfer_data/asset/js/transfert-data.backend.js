@@ -39,7 +39,7 @@ jQuery( document ).ready( function(){
 				$form.submit();
 			}
 			else if ( responseText[ 'status' ] ) {
-				jQuery( "#wp-digi-transfert-message" ).html( responseText[ "message" ] ).show();
+				jQuery( '#wp-digi-transfert-message' ).html( responseText[ "message" ] ).show();
 				jQuery( "#wpdigi-datastransfer-form .wp-digi-bton-first" ).hide();
 				setTimeout( function(){
 				 window.location.href = responseText['redirect_to_url'];

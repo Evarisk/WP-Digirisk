@@ -61,6 +61,10 @@ class risk_save_action
                 wp_send_json_error();
             }
 
+						if ( empty( $image_id ) ) {
+							$image_id = (int) $_POST['associated_document_id']['image'][0];
+						}
+
             if (!empty($image_id) ) {
                 file_management_class::g()->associate_file($image_id, $risk_obj->id, 'risk_class');
             }

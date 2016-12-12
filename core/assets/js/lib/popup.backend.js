@@ -75,4 +75,5 @@ window.digirisk.popup.stop = function( event ) {
 
 window.digirisk.popup.close = function( event ) {
   jQuery( '.popup' ).hide();
+  jQuery( '.digi-popup' ).hide();
 }
