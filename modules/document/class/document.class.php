@@ -73,12 +73,14 @@ class Document_Class extends attachment_class {
 	/**
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément / Get file model list for a given element type
 	 *
-	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents / Type list we have to get document model list for
+	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents / Type list we have to get document model list for.
 	 *
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
 	public function get_model_for_element( $current_element_type ) {
-		if ( in_array( 'zip', $current_element_type ) ) return null;
+		if ( in_array( 'zip', $current_element_type, true ) ) {
+			return null;
+		}
 
 		$response = array(
 			'status'		=> true,
@@ -109,8 +111,9 @@ class Document_Class extends attachment_class {
 
 			$model_id = $query->posts[0];
 			$attachment_file_path = get_attached_file( $model_id );
-			$response['model_path']	= $attachment_file_path;
-			$response['model_url']	= str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path);
+			$response['model_id'] = $model_id;
+			$response['model_path'] = $attachment_file_path;
+			$response['model_url'] = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
 			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file_path, 'digirisk' );
 		}
 

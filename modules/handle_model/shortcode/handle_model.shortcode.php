@@ -1,57 +1,40 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier de gestion des shortcodes pour l'export des données de Digirisk / File managing shortcodes for digirisk datas export
+ * Gestion des shortcodes pour gérer l'affichage des modèles personnalisés
  *
- * @author Alexandre Techer <dev@evarisk.com>
- * @version 6.1.5.5
- * @copyright 2015-2016 Evarisk
- * @package export_import
- * @subpackage shortcode
+ * @since 6.1.5.5
+ * @version 6.2.3.0
+ *
+ * @package Evarisk\Plugin
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 /**
- * Classe de gestion des shortcodes pour l'export des données de Digirisk / Class for managing shortcodes for digirisk datas export
- *
- * @author Alexandre Techer <dev@evarisk.com>
- * @version 6.1.5.5
- * @copyright 2015-2016 Evarisk
- * @package export_import
- * @subpackage shortcode
+ * Gestion des shortcodes pour gérer l'affichage des modèles personnalisés
  */
-class handle_model_shortcode {
-	private $list_type_document = array(
-		'document_unique' => 'Document unique',
-		'fiche_de_groupement' => 'fiche_de_groupement',
-		'fiche_de_poste' => 'Fiche de poste',
-		'affichage_legal_A3' => 'Affichage légal A3',
-		'affichage_legal_A4' => 'Affichage légal A4'
-	);
+class Handle_Model_Shortcode {
+
 	/**
-	 * Le constructeur de la classe / Class constructor
+	 * Le constructeur ajoutes le shortcode digi-handle-model
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-handle-model', array( $this, 'callback_handle_model_interface' ) );
 	}
 
 	/**
-	 * Interface d'export / Export Interface filter callback
+	 * Appelle la méthode display de Handle_Model_Class
 	 *
-	 * @param array $param Les paramètres du shortcode / Shortcode parameters
+	 * @param array $param Les paramètres du shortcode / Shortcode parameters.
+	 *
+	 * @return void
 	 */
 	public function callback_handle_model_interface( $param ) {
-		$list_document_default = array();
-
-		if ( !empty( $this->list_type_document ) ) {
-		  foreach ( $this->list_type_document as $key => $element ) {
-				$list_document_default[$key] = document_class::g()->get_model_for_element( array( $key, 'model', 'default_model' ) );
-		  }
-		}
-
-		view_util::exec( 'handle_model', 'main', array( 'list_type_document' => $this->list_type_document, 'list_document_default' => $list_document_default ) );
+		Handle_Model_Class::g()->display();
 	}
 
 }
 
-new handle_model_shortcode();
+new Handle_Model_Shortcode();

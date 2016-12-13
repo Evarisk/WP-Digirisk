@@ -41,14 +41,17 @@ window.digirisk.popup.open = function( event ) {
  * @return {[type]}       [description]
  */
 window.digirisk.popup.open_ajax = function( event ) {
+	var element = jQuery( this );
+
   // Récupères la box de destination mis dans l'attribut du popup
   var target = jQuery( this ).closest(  "." + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
 	target.toggle();
 
+
 	jQuery( this ).get_data( function( data ) {
 		delete data.parent;
 		delete data.target;
-		window.digirisk.request.send( jQuery( this ), data );
+		window.digirisk.request.send( element, data );
 	});
 
   event.stopPropagation();
