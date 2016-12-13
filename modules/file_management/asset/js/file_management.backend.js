@@ -11,7 +11,7 @@ window.digirisk.media.init = function() {
 };
 
 window.digirisk.media.event = function() {
-  jQuery( document ).on( 'click', 'span.wpeo-upload-media, a.wpeo-upload-media', window.digirisk.media.open_popup );
+  jQuery( document ).on( 'click', 'span.wpeo-upload-media, a.wpeo-upload-media, .upload', window.digirisk.media.open_popup );
 };
 
 window.digirisk.media.open_popup = function( event ) {
@@ -80,8 +80,12 @@ window.digirisk.media.display_attachment = function( selected_JSON, element ) {
 };
 
 window.digirisk.media.associate_file = function( selected_file_id ) {
+	if ( 'eo_set_model' === window.digirisk.media.action ) {
+		jQuery( '.upload[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'wp-digi-bloc-loading' );
+	} else {
+		jQuery( 'span.wpeo-upload-media[data-id="' + window.digirisk.media.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
+	}
 
-  jQuery( 'span.wpeo-upload-media[data-id="'+ window.digirisk.media.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
   var data = {
     action: window.digirisk.media.action,
     file_id: selected_file_id,

@@ -15,7 +15,13 @@ if ( ! empty( $list_type_document ) ) :
 		<div class="block">
 			<div>
 				<h3><?php echo esc_html( $title ); ?></h3>
-				<div class="wp-digi-bton-first upload">
+				<div class="wp-digi-bton-first upload"
+							data-id="0"
+							data-type="<?php echo $key; ?>"
+							data-title="<?php echo $title; ?>"
+							data-object-name="<?php echo $key; ?>"
+							data-action="eo_set_model"
+							data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>">
 					<?php do_shortcode( '[eo_upload_button action="eo_set_model" type="' . $key . '"]' ); ?>
 					<span>Envoyer votre modèle personnalisé</span>
 				</div>
