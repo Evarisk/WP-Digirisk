@@ -42,19 +42,31 @@ class Handle_Model_Action {
 			wp_send_json_error();
 		}
 
-		// On récupère l'ID du modèle par défault.
-		$model = Document_Class::g()->get_model_for_element( array( 'model', 'default_model', $type ) );
-		$model_id = $model['model_id'];
+		// On récupères tous les posts qui correspond aux catégories "model" et $type.
+		$tax_query = array( 'relation' => 'AND' );
+		$types = array( 'model', $type );
 
-		$success = wp_remove_object_terms( $model_id, 'default_model', Document_Class::g()->attached_taxonomy_type );
-
-		if ( is_wp_error( $success ) ) {
-			wp_send_json_error( $success );
-		} elseif ( ! $success ) {
-			wp_send_json_error();
+		if ( ! empty( $types ) ) {
+			foreach ( $types as $element ) {
+				$tax_query[] = array(
+					'taxonomy' => document_class::g()->attached_taxonomy_type,
+					'field'			=> 'slug',
+					'terms'			=> $element,
+				);
+			}
 		}
 
-		wp_send_json_success();
+		$models = Document_Class::g()->get( array( 'post_status' => 'inherit', 'tax_query' => $tax_query ) );
+
+		if ( ! empty( $models ) ) {
+			foreach ( $models as $element ) {
+				wp_remove_object_terms( $element->id, 'default_model', Document_Class::g()->attached_taxonomy_type );
+			}
+		}
+
+		// On récupère le modèle officiel de DigiRisk.
+		$model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
+		wp_send_json_success( array( 'module' => 'handle_model', 'callback_success' => 'reset_default_model_success', 'url' => $model['model_url'], 'type' => $type ) );
 	}
 
 	/**
@@ -78,7 +90,7 @@ class Handle_Model_Action {
 		}
 
 		// Récupères le modèle par défaut actuel.
-		$default_model = Document_Class::g()->get_model_for_element( array( 'model', 'default_model', $type ) );
+		$default_model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
 		$default_model_id = $default_model['model_id'];
 
 		// On récupères tous les posts qui correspond aux catégories "model" et $type.
