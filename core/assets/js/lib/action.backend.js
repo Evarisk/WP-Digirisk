@@ -40,10 +40,20 @@ window.digirisk.action.exec_attribute = function(event) {
 	if ( !element[0].getAttribute(' disabled' ) ) {
 		element[0].setAttribute( 'disabled', true );
 
-		element.get_data( function ( data ) {
-			element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
-			window.digirisk.request.send( element, data );
-		} );
+		if ( jQuery( this ).data( 'confirm' ) ) {
+			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
+				element.get_data( function ( data ) {
+					element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+					window.digirisk.request.send( element, data );
+				} );
+			}
+		}
+		else {
+			element.get_data( function ( data ) {
+				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+				window.digirisk.request.send( element, data );
+			} );
+		}
 	}
 };
 

@@ -29,7 +29,7 @@ if ( ! empty( $list_type_document ) ) :
 
 				<a href="<?php echo esc_attr( $list_document_default[ $key ]['model_url'] ); ?>" class="wp-digi-bton-second"><i class="dashicons-download dashicons"></i>Télécharger le modèle courant</a>
 
-				<a href="#" class="open-popup-ajax wp-digi-bton-third"
+				<a href="#" class="open-popup-ajax"
 					data-action="view_historic_model"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'view_historic_model' ) ); ?>"
 					data-parent="block"
@@ -37,10 +37,11 @@ if ( ! empty( $list_type_document ) ) :
 					data-title="<?php echo esc_attr( 'Historique des modèles: ' . $title ); ?>"
 					data-type="<?php echo esc_attr( $key ); ?>"><span class="dashicons dashicons-visibility"></span>Historique des modèles personnalisés</a>
 
-				<a href="#" class="action-attribute wp-digi-bton-third"
+				<a href="#" class="action-attribute"
 					data-action="reset_default_model"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'reset_default_model' ) ); ?>"
-					data-type="<?php echo esc_attr( $key ); ?>"><span class="dashicons dashicons-edit"></span>Réinitialiser le modèle par défaut</a>
+					data-type="<?php echo esc_attr( $key ); ?>"
+					data-confirm="<?php echo esc_attr( 'Êtes vous sur de vouloir réinitialiser le modèle par défaut' ); ?>"><span class="dashicons dashicons-edit"></span>Réinitialiser le modèle par défaut</a>
 			</div>
 
 			<?php view_util::exec( 'handle_model', 'popup' ); ?>

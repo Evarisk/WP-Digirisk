@@ -91,7 +91,9 @@ class Handle_Model_Action {
 
 		// Récupères le modèle par défaut actuel.
 		$default_model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
-		$default_model_id = $default_model['model_id'];
+		$default_model_data = Document_Class::g()->get( array( 'post_status' => 'inherit', 'post__in' => array( $default_model['model_id'] ) ) );
+		$default_model_data = $default_model_data[0];
+		$default_model_data->url = $default_model['model_url'];
 
 		// On récupères tous les posts qui correspond aux catégories "model" et $type.
 		$tax_query = array( 'relation' => 'AND' );
@@ -116,8 +118,10 @@ class Handle_Model_Action {
 			}
 		}
 
+		array_unshift( $models, $default_model_data );
+
 		ob_start();
-		view_util::exec( 'handle_model', 'popup-list', array( 'models' => $models, 'default_model_id' => $default_model_id ) );
+		view_util::exec( 'handle_model', 'popup-list', array( 'models' => $models ) );
 		wp_send_json_success( array( 'module' => 'handle_model', 'callback_success' => 'popup_historic_loaded', 'title' => $title, 'view' => ob_get_clean() ) );
 	}
 }

@@ -18,17 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <ul>
 <?php
 if ( ! empty( $models ) ) :
-	foreach ( $models as $element ) :
+	foreach ( $models as $key => $element ) :
 		?>
 		<li>
+			<?php if ( 0 === $key ) : ?>
+				<h4>Le modèle par défaut</h4>
+			<?php elseif( 1 === $key ) : ?>
+				<h4>Historique des modèles</h4>
+			<?php endif; ?>
 			<span>
-				<a href="<?php echo esc_attr( $element->url ); ?>" class="wp-digi-bton-second">
-					<i class="dashicons-download dashicons"></i>Télécharger ce modèle (<?php echo esc_html( $element->date ); ?>)
-					<?php
-					if ( $default_model_id === $element->id ) :
-						?><strong><br />Ce modèle est le modèle par défaut</strong><?php
-					endif;
-					?>
+				<a href="<?php echo esc_attr( $element->url ); ?>">
+					<i class="dashicons-download dashicons"></i>Télécharger ce modèle (<?php echo esc_html( ! empty( $element->date ) ? $element->date : 'Modèle de Digirisk par défaut' ); ?>)
 				</a>
 			</span>
 		</li>
