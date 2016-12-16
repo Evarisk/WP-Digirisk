@@ -128,6 +128,41 @@ class DUER_Class extends post_class {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
 		view_util::exec( 'duer', 'list', array( 'list_document' => $list_document ) );
 	}
+
+	/**
+	 * Permet d'appeler l'affichage pour afficher un arbre de société pour voir la génération des ODT pour chaque société
+	 *
+	 * @param integer $parent_id L'ID de la société parent.
+	 * @return void
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.3.0
+	 */
+	public function display_group_tree( $parent_id = 0 ) {
+		$groupments = Group_Class::g()->get(
+			array(
+				'posts_per_page' 	=> -1,
+				'post_parent'			=> $parent_id,
+				'post_status' 		=> array( 'publish', 'draft' ),
+				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+			)
+		);
+
+		view_util::exec( 'duer', 'tree/tree', array( 'societies' => $groupments ) );
+	}
+
+	public function display_workunit_tree( $parent_id = 0 ) {
+		$workunits = Workunit_Class::g()->get(
+			array(
+				'posts_per_page' 	=> -1,
+				'post_parent'			=> $parent_id,
+				'post_status' 		=> array( 'publish', 'draft' ),
+				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+			)
+		);
+
+		view_util::exec( 'duer', 'tree/tree', array( 'societies' => $workunits ) );
+	}
 }
 
 DUER_Class::g();

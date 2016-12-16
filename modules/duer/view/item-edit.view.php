@@ -60,6 +60,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<span class="padded"><input type="text" name="dispoDesPlans"/></span>
 	<span class="wp-digi-action">
-		<a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a>
+		<a href="#" class="open-popup dashicons dashicons-plus"
+		 		data-parent="wp-digi-societytree-right-container"
+				data-target="popup"
+				data-cb-object="DUER"
+				data-cb-func="popup_for_generate_DUER"
+				data-title="Génération du DUER"></a>
 	</span>
 </li>

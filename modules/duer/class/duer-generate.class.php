@@ -47,30 +47,32 @@ class DUER_Generate_Class extends singleton_util {
 		/**	Call document creation function / Appel de la fonction de création du document	*/
 		$document_creation_response = document_class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
-		if ( !empty( $document_creation_response[ 'id' ] ) ) {
-			$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
-			group_class::g()->update( $element );
-		}
+		return array( 'element' => $element, 'status' => true );
 
-		$all_file = $this->generate_child( $element );
-		$all_file[] = $document_creation_response;
+		// if ( !empty( $document_creation_response[ 'id' ] ) ) {
+		// 	$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
+		// 	group_class::g()->update( $element );
+		// }
 
-		$element = group_class::g()->get( array( 'id' => $element->id ) );
-		$element = $element[0];
+		// $all_file = $this->generate_child( $element );
+		// $all_file[] = $document_creation_response;
+		//
+		// $element = group_class::g()->get( array( 'id' => $element->id ) );
+		// $element = $element[0];
+		//
+		// /**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
+		// $version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
+		//
+		// $zip_path = document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
+		// $zip_generation_result = document_class::g()->create_zip( $zip_path, $all_file, $element, $version );
+		//
+		// // On rajoute le chemin vers le fichier zip.
+		// $duer = DUER_Class::g()->get( array( 'post__in' => array( $document_creation_response['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
+		// $duer = $duer[0];
+		// $duer->zip_path = $zip_path;
 
-		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
-		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-
-		$zip_path = document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
-		$zip_generation_result = document_class::g()->create_zip( $zip_path, $all_file, $element, $version );
-
-		// On rajoute le chemin vers le fichier zip.
-		$duer = DUER_Class::g()->get( array( 'post__in' => array( $document_creation_response['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
-		$duer = $duer[0];
-		$duer->zip_path = $zip_path;
-
-		DUER_Class::g()->update( $duer );
-		return array();
+		// DUER_Class::g()->update( $duer );
+		// return array();
 	}
 
 	/**

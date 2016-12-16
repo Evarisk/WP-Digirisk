@@ -34,6 +34,43 @@ window.digirisk.DUER.set_textarea_content = function( triggered_element, event, 
 	}
 };
 
-window.digirisk.DUER.callback_generate_duer_success = function() {
-	jQuery( 'button[data-action="digi_list_duer"]' ).click();
-}
+window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popupElement, event, args ) {
+	var data = { action: 'display_societies_duer'	};
+
+	popupElement.find( 'h2' ).text( args.title );
+
+	window.digirisk.request.send( popupElement, data );
+};
+
+window.digirisk.DUER.display_societies_duer_success = function( popup, response ) {
+	popup.find( '.content' ).html( response.data.view );
+};
+
+window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
+	var data = {};
+	var i = 0;
+	var listInput = window.eva_lib.array_form.get_input( triggeredElement.closest( '.wp-digi-list-item' ) );
+
+	for ( i = 0; i < listInput.length; i++ ) {
+		if ( listInput[i].name ) {
+			data[listInput[i].name] = window.eva_lib.array_form.get_input_value( listInput[i] );
+		}
+	}
+
+	for ( i in preData ) {
+		data[i] = preData[i];
+	}
+
+	window.digirisk.request.send( triggeredElement, data );
+};
+
+window.digirisk.DUER.callback_generate_duer_success = function( element, response ) {
+	if ( ! response.data.end ) {
+		window.digirisk.DUER.generate_DUER( element, response.data );
+	} else {
+		console.log('end');
+	}
+};
+
+window.digirisk.DUER.callback_generate_duer_error = function() {
+};
