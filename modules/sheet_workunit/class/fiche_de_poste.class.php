@@ -144,7 +144,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 			'adresse'				=> $society_infos['adresse'],
 			'codePostal'		=> $society_infos['codePostal'],
 			'ville'					=> $society_infos['ville'],
-			'telephone'			=> max( $society->contact['phone'] ),
+			'telephone'			=> ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -159,7 +159,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 			$society = workunit_class::g()->update( $society );
 		}
 
-		return $document_creation_response;
+		return array( 'creation_response' => $document_creation_response, 'element' => $society, 'success' => true );
 	}
 
 	/**

@@ -44,6 +44,8 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 
 window.digirisk.DUER.display_societies_duer_success = function( popup, response ) {
 	popup.find( '.content' ).html( response.data.view );
+
+	window.digirisk.DUER.generate_DUER( jQuery( '.open-popup.dashicons-plus' ), { index: 0 } );
 };
 
 window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
@@ -61,10 +63,19 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 		data[i] = preData[i];
 	}
 
+	data['society_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'id' );
+	data['duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'duer' );
+	data['zip'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'zip' );
+
+	if ( data['zip'] ) {
+		data['element_id'] = jQuery( '.popup li:nth-child(2)' ).data( 'id' );
+	}
+
 	window.digirisk.request.send( triggeredElement, data );
 };
 
 window.digirisk.DUER.callback_generate_duer_success = function( element, response ) {
+	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
 	if ( ! response.data.end ) {
 		window.digirisk.DUER.generate_DUER( element, response.data );
 	} else {

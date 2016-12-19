@@ -14,5 +14,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <ul>
+	<li data-duer="true"><?php esc_html_e( 'Génération du DUER', 'digirisk' ); ?></li>
 	<?php DUER_Class::g()->display_group_tree(); ?>
+	<li data-zip="true"><?php esc_html_e( 'Génération du ZIP', 'digirisk' ); ?></li>
 </ul>

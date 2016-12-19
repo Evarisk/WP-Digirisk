@@ -38,6 +38,8 @@ class DUER_Action {
 	 * @version 6.2.3.0
 	 */
 	public function callback_display_societies_duer() {
+		delete_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer );
+
 		ob_start();
 		View_Util::exec( 'duer', 'tree/main' );
 		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'display_societies_duer_success', 'view' => ob_get_clean() ) );
@@ -48,29 +50,61 @@ class DUER_Action {
 	 * Cette méthode appelle la méthode generate de DUER_Generate_Class.
 	 *
 	 * @return void
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.3.0
 	 */
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
-		$generate_response = DUER_Generate_Class::g()->generate( $_POST );
+
+		$meta_generate_duer = get_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, true );
+		$end = false;
+
+		if ( empty( $meta_generate_duer ) ) {
+			$meta_generate_duer = array();
+		}
+
+		if ( ! empty( $_POST['duer'] ) ) {
+			$generate_response = DUER_Generate_Class::g()->generate( $_POST );
+		} elseif ( ! empty( $_POST['zip'] ) ) {
+			$element = Group_Class::g()->get( array( 'post__in' => array( $_POST['element_id'] ) ) );
+			$element = $element[0];
+			$generate_response = ZIP_Class::g()->generate( $element, $meta_generate_duer );
+			$end = true;
+
+			// C'est sur que c'est le 0 le DUER.
+			$duer = DUER_Class::g()->get( array( 'post__in' => array( $meta_generate_duer[0]['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
+			$duer = $duer[0];
+			$duer->zip_path = $generate_response['zip_path'];
+			DUER_Class::g()->update( $duer );
+
+			delete_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer );
+		} else {
+			$post_type = get_post_type( $_POST['society_id'] );
+
+			if ( 'digi-group' === $post_type ) {
+				$generate_response = Fiche_De_Groupement_Class::g()->generate( $_POST['society_id'] );
+			} elseif ( 'digi-workunit' === $post_type ) {
+				$generate_response = Fiche_De_Poste_Class::g()->generate( $_POST['society_id'] );
+			}
+		}
 
 		$response = array(
 			'module' => 'DUER',
-			'number_document' => ! empty( $_POST['number_document'] ) ? $_POST['number_document'] : 0,
-			'index' => ! empty( $_POST['index'] ) ? $_POST['index'] : 0,
-			'end' => false,
+			'index' => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
 		);
 
-		if ( empty( $_POST['number_document'] ) ) {
-			$response['number_document'] = Society_Class::g()->get_number_society_in( $_POST['element_id'] );
+		if ( $end ) {
+			$response['end'] = true;
+		}
+		else {
+			$meta_generate_duer[] = $generate_response['creation_response'];
+			update_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, $meta_generate_duer );
 		}
 
 		if ( $generate_response['success'] ) {
 			$response['callback_success'] = 'callback_generate_duer_success';
 			$response['index']++;
-
-			if ( (int) $response['index'] === (int) $response['number_document'] ) {
-				$response['end'] = true;
-			}
 		} else {
 			$response['callback_error'] = 'callback_generate_duer_error';
 		}

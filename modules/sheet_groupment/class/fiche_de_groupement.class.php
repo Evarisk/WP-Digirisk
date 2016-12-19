@@ -159,7 +159,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			$society = group_class::g()->update( $society );
 		}
 
-		return $document_creation_response;
+		return array( 'creation_response' => $document_creation_response, 'element' => $society, 'success' => true );
 	}
 
 	/**

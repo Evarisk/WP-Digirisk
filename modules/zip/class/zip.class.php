@@ -119,6 +119,22 @@ class ZIP_Class extends Post_Class {
 		$url .= '/' . $zip_path_exploded[1];
 		return $url;
 	}
+
+	/**
+	 * Génères un zip et le met dans l'élément.
+	 *
+	 * @param Group_Model $element Les données du groupement.
+	 * @param array       $files_info Un tableau contenant le nom des fichiers ainsi que le chemin sur le disque dur.
+	 * @return array
+	 */
+	public function generate( $element, $files_info ) {
+		$version = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
+
+		$zip_path = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
+		$zip_generation_result = Document_Class::g()->create_zip( $zip_path, $files_info, $element, $version );
+
+		return array( 'zip_path' => $zip_path, 'creation_response' => $zip_generation_result, 'element' => $element, 'success' => true );
+	}
 }
 
 ZIP_Class::g();

@@ -47,7 +47,7 @@ class Document_Class extends attachment_class {
 	*/
 	public function get_digirisk_dir_path( $path_type = 'basedir' ) {
 		$upload_dir = wp_upload_dir();
-		return $upload_dir[ $path_type ] . '/digirisk';
+		return str_replace( '\\', '/', $upload_dir[ $path_type ] ) . '/digirisk';
 	}
 
 	/**
@@ -297,25 +297,26 @@ class Document_Class extends attachment_class {
 		$zip = new \ZipArchive();
 
 		$response = array();
-
-		if( $zip->open( $final_file_path, \ZipArchive::CREATE ) !== TRUE ) {
+		if ( $zip->open( $final_file_path, \ZipArchive::CREATE ) !== true ) {
 			$response['status'] = false;
 			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
 		}
 
-		if( !empty( $file_list ) ) {
-			foreach( $file_list as $file ) {
-				$zip->addFile( $file['link'], $file['filename'] );
+		if ( ! empty( $file_list ) ) {
+			foreach ( $file_list as $file ) {
+				if ( ! empty( $file['link'] ) ) {
+					$zip->addFile( $file['link'], $file['filename'] );
+				}
 			}
 		}
 		$zip->close();
 
 		$document_creation_response = document_class::g()->create_document( $element, array( 'zip' ), $file_list, $version );
 		$document_creation_response = wp_parse_args( $document_creation_response, $response );
-		if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
-			$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
-			group_class::g()->update( $element );
-		}
+		// if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
+		// 	$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
+		// 	group_class::g()->update( $element );
+		// }
 
 		return $document_creation_response;
 	}
@@ -434,8 +435,8 @@ class Document_Class extends attachment_class {
 				$document = Affichage_Legal_A4_Class::g()->update( $document_args );
 				break;
 			case "zip":
-			$document_args['type'] = ZIP_Class::g()->get_post_type();
-			$document = ZIP_Class::g()->update( $document_args );
+				$document_args['type'] = ZIP_Class::g()->get_post_type();
+				$document = ZIP_Class::g()->update( $document_args );
 				break;
 			default:
 		  	$document = $this->update( $document_args );

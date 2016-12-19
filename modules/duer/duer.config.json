@@ -13,5 +13,6 @@
 		},
 		"action": {
 		}
-	}
+	},
+	"meta_key_generate_duer": "generate_duer_tmp"
 }

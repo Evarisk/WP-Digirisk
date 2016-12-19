@@ -16,12 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( ! empty( $societies ) ) :
 	foreach ( $societies as $key => $society ) :
 		?>
-		<li><?php echo esc_html( $society->unique_identifier . ' - ' . $society->title ); ?>
-			<ul>
-			<?php DUER_Class::g()->display_group_tree( $society->id ); ?>
-			<?php DUER_Class::g()->display_workunit_tree( $society->id ); ?>
-			</ul>
-		</li>
+		<li data-id="<?php echo esc_attr( $society->id ); ?>"><?php echo esc_html( $society->unique_identifier . ' - ' . $society->title ); ?></li>
+		<?php DUER_Class::g()->display_group_tree( $society->id ); ?>
+		<?php DUER_Class::g()->display_workunit_tree( $society->id ); ?>
 		<?php
 	endforeach;
 endif;
