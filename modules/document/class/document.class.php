@@ -86,8 +86,8 @@ class Document_Class extends attachment_class {
 			'status'		=> true,
 			'message'		=> __( 'Le modèle utilisé est : ' . PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt', 'digirisk' ),
 			'model_id'		=> null,
-			'model_path'	=> PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt',
-			'model_url' => PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $current_element_type[0] . '.odt'
+			'model_path'	=> str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
+			'model_url' => str_replace( '\\', '/', PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
 		);
 
 		$tax_query = array(
@@ -112,7 +112,7 @@ class Document_Class extends attachment_class {
 			$model_id = $query->posts[0];
 			$attachment_file_path = get_attached_file( $model_id );
 			$response['model_id'] = $model_id;
-			$response['model_path'] = $attachment_file_path;
+			$response['model_path'] =  str_replace( '\\', '/', $attachment_file_path );
 			$response['model_url'] = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
 			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file_path, 'digirisk' );
 		}
