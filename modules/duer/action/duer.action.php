@@ -76,6 +76,15 @@ class DUER_Action {
 
 		if ( ! empty( $_POST['duer'] ) ) {
 			$generate_response = DUER_Generate_Class::g()->generate( $_POST );
+		} elseif ( ! empty( $_POST['generate_duer'] ) ) {
+			$document_id = ! empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( $_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
+			if ( ! empty( $document_id ) ) {
+				$parent_id = ! empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( $_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
+				$parent_element = society_class::g()->show_by_type( $parent_id );
+
+				$current_document = DUER_Class::g()->get( array( 'post__in' => array( $document_id ), 'post_status' => 'any' ) );
+			 	$generate_response = document_class::g()->generate_document( $current_document[0]->model_id, $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
+			}
 		} elseif ( ! empty( $_POST['zip'] ) ) {
 			$element = Group_Class::g()->get( array( 'post__in' => array( $_POST['element_id'] ) ) );
 			$element = $element[0];
@@ -102,13 +111,16 @@ class DUER_Action {
 		$response = array(
 			'module' => 'DUER',
 			'index' => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'creation_response' => ! empty( $generate_response ) && ! empty( $generate_response['creation_response'] ) ? $generate_response['creation_response'] : '',
 		);
 
 		if ( $end ) {
 			$response['end'] = true;
 		} else {
-			$meta_generate_duer[] = $generate_response['creation_response'];
-			update_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, $meta_generate_duer );
+			if ( ! empty( $generate_response['creation_response'] ) ) {
+				$meta_generate_duer[] = $generate_response['creation_response'];
+				update_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, $meta_generate_duer );
+			}
 		}
 
 		if ( $generate_response['success'] ) {

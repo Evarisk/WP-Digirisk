@@ -174,6 +174,7 @@ class Document_Class extends attachment_class {
 		/**	Dans le cas ou le fichier a bien été généré, on met a jour les informations dans la base de données / In case the file have been saved successfully, save information into database	*/
 		if ( is_file( $document_path ) ) {
 			$response[ 'status' ] = true;
+			$response[ 'success' ] = true;
 			$response[ 'link' ] = $document_path;
 		}
 

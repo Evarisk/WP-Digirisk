@@ -15,6 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <ul>
 	<li data-duer="true">
+		<?php esc_html_e( 'Construction du DUER', 'digirisk' ); ?>
+		<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
+	</li>
+	<li data-generate-duer="true"
+			data-model-name="DUER"
+			data-element-id="0"
+			data-parent-id="<?php echo esc_attr( $society->id ); ?>">
 		<?php esc_html_e( 'Génération du DUER', 'digirisk' ); ?>
 		<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
 	</li>

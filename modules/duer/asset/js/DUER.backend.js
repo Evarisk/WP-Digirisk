@@ -72,10 +72,16 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 
 	data['society_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'id' );
 	data['duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'duer' );
+	data['generate_duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'generate-duer' );
 	data['zip'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'zip' );
 
 	if ( data['zip'] ) {
-		data['element_id'] = jQuery( '.popup li:nth-child(2)' ).data( 'id' );
+		data['element_id'] = jQuery( '.popup li:nth-child(3)' ).data( 'id' );
+	}
+
+	if ( data['generate_duer'] ) {
+		data['element_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'element-id' );
+		data['parent_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'parent-id' );
 	}
 
 	window.digirisk.request.send( triggeredElement, data );
@@ -84,6 +90,10 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 window.digirisk.DUER.callback_generate_duer_success = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
+	if ( response.data.creation_response.id  ) {
+		jQuery( '.popup li:nth-child(' + ( response.data.index + 1 ) + ')' ).attr( 'data-element-id', response.data.creation_response.id );
+	}
+
 	if ( ! response.data.end ) {
 		window.digirisk.DUER.generate_DUER( element, response.data );
 	} else {
