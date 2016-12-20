@@ -146,19 +146,19 @@ class DUER_Generate_Class extends singleton_util {
 	*/
 	public function get_logo() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
-		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'digirisk-element-thumbnail' );
 		return $src_logo;
 	}
 
 	/**
-	* Remplis les données du duer
-	*
-	* @param array $data_duer Les données sécurisées
-	* @param array $data_to_document Les données qui seront insérées dans le document
-	* @param object $element L'objet groupement
-	*
-	* @return array Les données qui seront insérées dans le document
-	*/
+	 * Remplis les données du duer
+	 *
+	 * @param array  $data Les données sécurisées.
+	 * @param array  $data_to_document Les données qui seront insérées dans le document.
+	 * @param object $element L'objet groupement.
+	 *
+	 * @return array Les données qui seront insérées dans le document
+	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
 		$data_to_document = array_merge( $data_to_document, $data );
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
@@ -170,13 +170,13 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Remplis les données du duer des risques
-	*
-	* @param array $data_to_document Les données qui seront insérées dans le document
-	* @param object $element L'objet groupement
-	*
-	* @return array Les données qui seront insérées dans le document
-	*/
+	 * Remplis les données du duer des risques
+	 *
+	 * @param array  $data_to_document Les données qui seront insérées dans le document.
+	 * @param object $element L'objet groupement.
+	 *
+	 * @return array Les données qui seront insérées dans le document
+	 */
 	public function fill_data_risk( $data_to_document, $element ) {
 		$list_risk = group_class::g()->get_element_tree_risk( $element );
 		$risk_per_element = array();
@@ -218,21 +218,21 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Formattes la date de l'audit
-	*
-	* @param array $data_duer Les données sécurisées
-	*
-	* @return string La date de l'audit formatté
-	*/
+	 * Formattes la date de l'audit
+	 *
+	 * @param array $data_duer Les données sécurisées.
+	 *
+	 * @return string La date de l'audit formatté
+	 */
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
-		if ( !empty( $data_duer['dateDebutAudit' ] ) ) {
+		if ( ! empty( $data_duer['dateDebutAudit' ] ) ) {
 			$audit_date .= sanitize_text_field( $data_duer['dateDebutAudit'] );
 		}
 
-		if ( !empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
-			if ( !empty( $audit_date ) ) {
+		if ( ! empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
+			if ( ! empty( $audit_date ) ) {
 				$audit_date .= ' - ';
 			}
 

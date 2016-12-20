@@ -195,7 +195,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 		$picture = __( 'No picture defined', 'digirisk' );
 
 		if ( ! empty( $society->thumbnail_id ) ) {
-			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'thumbnail' );
+			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'digirisk-element-thumbnail' );
 			$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 			if ( is_file( $picture_path ) ) {
@@ -374,7 +374,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @return false|string    Le lien vers l'image
 	 */
 	public function get_picture_term( $term_id ) {
-		$picture_definition = wp_get_attachment_image_src( $term_id, 'thumbnail' );
+		$picture_definition = wp_get_attachment_image_src( $term_id, 'digirisk-element-thumbnail' );
 
 		if ( ! $picture_definition ) {
 			return false;
