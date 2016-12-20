@@ -63,15 +63,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php esc_html_e( 'DUER', 'digirisk' ); ?>
 		</a>
 
-		<a href="#" class="action-attribute" data-nonce="<?php echo esc_attr( wp_create_nonce( 'wpdigi_regenerate_document' ) ); ?>"
-								data-action="wpdigi_regenerate_document"
-								data-model-name="DUER"
-								data-element-id="<?php echo $element->id; ?>"
-								data-parent-id="<?php echo $element->parent_id; ?>">
-			<i class="fa fa-download" aria-hidden="true"></i>
-			<?php esc_html_e( 'Regenérer', 'digirisk' ); ?>
-		</a>
-
 		<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>
 	</span>
 </li>
