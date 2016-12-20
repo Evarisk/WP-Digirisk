@@ -61,6 +61,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span class="padded"><input type="text" name="dispoDesPlans"/></span>
 	<span class="wp-digi-action">
 		<a href="#" class="open-popup dashicons dashicons-plus"
+				data-id="<?php echo esc_attr( $element_id ); ?>"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'display_societies_duer' ) ); ?>"
 		 		data-parent="wp-digi-societytree-right-container"
 				data-target="popup"
 				data-cb-object="DUER"

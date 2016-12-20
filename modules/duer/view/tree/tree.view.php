@@ -16,7 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( ! empty( $societies ) ) :
 	foreach ( $societies as $key => $society ) :
 		?>
-		<li data-id="<?php echo esc_attr( $society->id ); ?>"><?php echo esc_html( $society->unique_identifier . ' - ' . $society->title ); ?></li>
+		<li data-id="<?php echo esc_attr( $society->id ); ?>">
+			<?php echo esc_html( $society->unique_identifier . ' - ' . $society->title ); ?>
+			<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
+		</li>
 		<?php DUER_Class::g()->display_group_tree( $society->id ); ?>
 		<?php DUER_Class::g()->display_workunit_tree( $society->id ); ?>
 		<?php

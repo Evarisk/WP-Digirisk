@@ -35,9 +35,16 @@ window.digirisk.DUER.set_textarea_content = function( triggered_element, event, 
 };
 
 window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popupElement, event, args ) {
-	var data = { action: 'display_societies_duer'	};
+	var data = {
+		action: 'display_societies_duer',
+		id: args.id,
+		_wpnonce: args._wpnonce
+	};
 
 	popupElement.find( 'h2' ).text( args.title );
+	popupElement.addClass( 'no-close' );
+	popupElement.find( 'button.button-primary' ).attr( 'disabled', true );
+	popupElement.find( 'button.button-primary' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
 	window.digirisk.request.send( popupElement, data );
 };
@@ -75,13 +82,18 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 };
 
 window.digirisk.DUER.callback_generate_duer_success = function( element, response ) {
+	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
 	if ( ! response.data.end ) {
 		window.digirisk.DUER.generate_DUER( element, response.data );
 	} else {
-		console.log('end');
+		jQuery( '.popup' ).find( 'button.button-primary' ).attr( 'disabled', false );
 	}
 };
 
 window.digirisk.DUER.callback_generate_duer_error = function() {
+};
+
+window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
+	jQuery( '.wp-digi-group-sheet button[data-action="digi_list_duer"]' ).click();
 };

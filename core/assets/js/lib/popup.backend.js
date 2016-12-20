@@ -77,6 +77,6 @@ window.digirisk.popup.stop = function( event ) {
 };
 
 window.digirisk.popup.close = function( event ) {
-  jQuery( '.popup' ).hide();
-  jQuery( '.digi-popup' ).hide();
+  jQuery( '.popup:not(.no-close)' ).hide();
+  jQuery( '.digi-popup:not(.no-close)' ).hide();
 }

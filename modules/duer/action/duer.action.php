@@ -38,10 +38,20 @@ class DUER_Action {
 	 * @version 6.2.3.0
 	 */
 	public function callback_display_societies_duer() {
+		check_ajax_referer( 'display_societies_duer' );
+
 		delete_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer );
 
+		$society_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		if ( empty( $society_id ) ) {
+			wp_send_json_error();
+		}
+
+		$society = Group_Class::g()->get( array( 'post__in' => array( $society_id ) ) );
+		$society = $society[0];
+
 		ob_start();
-		View_Util::exec( 'duer', 'tree/main' );
+		View_Util::exec( 'duer', 'tree/main', array( 'society' => $society ) );
 		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'display_societies_duer_success', 'view' => ob_get_clean() ) );
 	}
 
@@ -96,8 +106,7 @@ class DUER_Action {
 
 		if ( $end ) {
 			$response['end'] = true;
-		}
-		else {
+		} else {
 			$meta_generate_duer[] = $generate_response['creation_response'];
 			update_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, $meta_generate_duer );
 		}
