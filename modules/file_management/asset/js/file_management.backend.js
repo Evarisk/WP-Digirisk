@@ -79,7 +79,7 @@ window.digirisk.media.display_attachment = function( selected_JSON, element ) {
   jQuery( element ).find( 'input.input-file-image' ).val( selected_JSON.id );
 };
 
-window.digirisk.media.associate_file = function( selected_file_id ) {
+window.digirisk.media.associate_file = function( selectedFileId ) {
 	if ( 'eo_set_model' === window.digirisk.media.action ) {
 		jQuery( '.upload[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'wp-digi-bloc-loading' );
 	} else {
@@ -88,7 +88,7 @@ window.digirisk.media.associate_file = function( selected_file_id ) {
 
   var data = {
     action: window.digirisk.media.action,
-    file_id: selected_file_id,
+    file_id: selectedFileId,
     _wpnonce: window.digirisk.media._wpnonce,
     title: window.digirisk.media.title,
     type: window.digirisk.media.type,
