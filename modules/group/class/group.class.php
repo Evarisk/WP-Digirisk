@@ -50,11 +50,18 @@ class Group_Class extends Post_Class {
 	protected $before_post_function = array( '\digi\construct_identifier', '\digi\convert_date' );
 
 	/**
+	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_put_function = array( '\digi\convert_date' );
+
+	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

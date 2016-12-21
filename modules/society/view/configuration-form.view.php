@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( ! empty( $element->date ) ? $element->date : date( 'd/m/Y' ) ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" value="<?php echo esc_attr( $address->postcode ); ?>" /></label></li>
 		<li class="form-element"><label><?php esc_html_e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" value="<?php echo esc_attr( $address->town ); ?>" /></label></li>
-		<li class="form-element"><label><?php esc_html_e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( max( $element->contact['phone'] ) ); ?>" /></label></li>
+		<li class="form-element"><label><?php esc_html_e( 'Phone', 'digirisk' ); ?> <input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max ( $element->contact['phone'] ) : '' ); ?>" /></label></li>
 	</ul>
 
 	<div class="form-element block"><label><?php esc_html_e( 'Description', 'digirisk' ); ?><textarea name="groupment[content]"><?php echo esc_html( $element->content ); ?></textarea></label></div>
