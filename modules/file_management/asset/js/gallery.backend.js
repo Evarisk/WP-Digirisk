@@ -74,5 +74,5 @@ window.digirisk.gallery.close = function( event ) {
 window.digirisk.gallery.dessociate_file_success = function( element, response ) {
 	jQuery( '.wpeo-gallery .image-list .current' ).remove();
 	jQuery( '.wpeo-gallery .prev' ).click();
-	jQuery( 'span.wpeo-upload-media[data-id="'+ reponse.data.element_id + '"]' ).replaceWith( response.data.view );
+	jQuery( 'span.wpeo-upload-media[data-id="'+ response.data.element_id + '"]' ).replaceWith( response.data.view );
 };

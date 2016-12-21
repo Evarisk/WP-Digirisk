@@ -80,7 +80,7 @@ class Gallery_Action {
 		$element = $model_name::g()->get( array( 'id' => $element_id ) );
 
 		ob_start();
-		view_util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => $title, 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
+		view_util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
 		wp_send_json_success( array( 'view' => ob_get_clean(), 'element_id' => $element_id, 'module' => 'gallery', 'callback_success' => 'dessociate_file_success' ) );
 	}
 }
