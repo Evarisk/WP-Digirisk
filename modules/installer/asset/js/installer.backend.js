@@ -54,14 +54,17 @@ window.digirisk.installer.request_install_component = function() {
 window.digirisk.installer.install_component_success = function( response ) {
 	jQuery( '.wpdigi-installer .wpdigi-components li.active img' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components li.active .dashicons' ).show();
-	jQuery( '.wpdigi-installer .wpdigi-components li.active ').removeClass( 'active' );
+	jQuery( '.wpdigi-installer .wpdigi-components li.active' ).removeClass( 'active' );
 
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
-	if ( !response.data.core_option.installed ) {
+	if ( ! response.data.core_option.installed ) {
 		jQuery( '.wpdigi-installer .wpdigi-components li.hidden:first' ).removeClass( 'hidden' ).addClass( 'active' );
 		window.digirisk.installer.request_install_component();
-	}
-	else {
+	} else {
+		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
+			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+		}
+
 		// Si l'installation est terminée, nous passons à la prochaine étape.
 		jQuery( '.wpdigi-installer .wpdigi-components' ).hide();
 		jQuery( '.wpdigi-installer .step-create-components' ).removeClass( 'active' );
