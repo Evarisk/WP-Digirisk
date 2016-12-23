@@ -21,13 +21,14 @@ window.eva_lib.array_form.get_input_value = function( input ) {
 			return input.value;
 			break;
 	}
-}
+};
 
 window.eva_lib.array_form.send_form = function( event ) {
+	var element = jQuery( this );
+
 	event.preventDefault();
 
-	var element = jQuery( this );
-	if ( jQuery( this ).data( 'loader' ) ) {
+	if ( ( jQuery( this ).data( 'loader' ) && false !== jQuery( this ).data( 'loader' ) ) || ! jQuery( this ).data( 'loader' ) ) {
 		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 	}
 
