@@ -19,7 +19,12 @@ class Digirisk_Class extends Singleton_Util {
 	/**
 	 * Le constructeur
 	 */
-	protected function construct() {}
+	protected function construct() {
+		/**	Création d'une taille d'image dédiée pour les images principales des groupements et unités de travail / Create a deddicated picture size for groups and word unit pictures	*/
+		add_image_size( 'digirisk-element-thumbnail', 200, 150, true );
+		/**	Création d'une taille d'image dédiée pour les images principales des groupements et unités de travail / Create a deddicated picture size for groups and word unit pictures	*/
+		add_image_size( 'digirisk-element-miniature', 50, 50, true );
+	}
 
 	/**
 	 * La méthode qui permet d'afficher la page

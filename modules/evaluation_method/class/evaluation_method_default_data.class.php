@@ -17,31 +17,33 @@ class evaluation_method_default_data_class extends singleton_util {
 	/**
 	* Créer les méthodes d'évaluation par défaut
 	*/
-	public function create() {
+	public function create( $exclude = array() ) {
 		$file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
 		if ( !empty( $data ) ) {
 			foreach ( $data as $json_evaluation_method ) {
-				$this->create_evaluation_method( $json_evaluation_method );
+				if ( ! in_array( $json_evaluation_method->slug, $exclude, true ) ) {
+					$this->create_evaluation_method( $json_evaluation_method );
+				}
 			}
 		}
 	}
 
 	private function create_evaluation_method( $json_evaluation_method ) {
 		$evaluation_method = evaluation_method_class::g()->create( array(
-		'name' 				=> $json_evaluation_method->name,
-		'is_default'	=> $json_evaluation_method->option->is_default,
-		'matrix'			=> $json_evaluation_method->option->matrix,
+			'name' 				=> $json_evaluation_method->name,
+			'slug' 				=> $json_evaluation_method->slug,
+			'is_default'	=> $json_evaluation_method->option->is_default,
+			'matrix'			=> $json_evaluation_method->option->matrix,
 		) );
 
-		if ( is_wp_error( $evaluation_method ) && !empty( $evaluation_method->errors ) && !empty( $evaluation_method->errors['term_exists'] ) ) {
-			$evaluation_method = evaluation_method_class::g()->get( array( 'id' => $evaluation_method->error_data['term_exists'] ) );
+		if ( ! is_wp_error( $evaluation_method ) ) {
+			foreach ( $json_evaluation_method->option->variable as $json_evaluation_method_variable ) {
+				$this->create_evaluation_method_variable( $evaluation_method, $json_evaluation_method, $json_evaluation_method_variable );
+			}
 		}
 
-		foreach( $json_evaluation_method->option->variable as $json_evaluation_method_variable ) {
-			$this->create_evaluation_method_variable( $evaluation_method, $json_evaluation_method, $json_evaluation_method_variable );
-		}
 	}
 
 	private function create_evaluation_method_variable( $evaluation_method, $json_evaluation_method, $json_evaluation_method_variable ) {
@@ -56,7 +58,7 @@ class evaluation_method_default_data_class extends singleton_util {
 
 		// Si elle existe déjà
 		if ( !is_wp_error( $evaluation_method_variable ) ) {
-			if ( $json_evaluation_method->name == 'Evarisk' ) {
+			if ( $json_evaluation_method->slug == 'evarisk' ) {
 				$evaluation_method->formula[] = $evaluation_method_variable->id;
 				$evaluation_method->formula[] = "*";
 			}

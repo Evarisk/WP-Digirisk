@@ -100,10 +100,10 @@ class Transfert_Action {
 			$nb_doc_element_not_transfered += ! empty( $transfer_progression['transfered'] ) && ! empty( $transfer_progression['transfered']['printed_sheet'] ) && ! empty( $transfer_progression['transfered']['printed_sheet']['nok'] ) ? count( $transfer_progression['transfered']['printed_sheet']['nok'] ) : 0;
 
 			$element_done = $document_done = false;
-			if ( ( $nb_main_element_transfered + $nb_sub_element_transfered ) === ( $nb_element_to_transfert->main_element_nb + $nb_element_to_transfert->sub_element_nb ) ) {
+			if ( ( $nb_main_element_transfered + $nb_sub_element_transfered ) >= ( $nb_element_to_transfert->main_element_nb + $nb_element_to_transfert->sub_element_nb ) ) {
 				$element_done = true;
 			}
-			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) === ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture + $nb_element_to_transfert->nb_fiches + $nb_element_to_transfert->nb_duer ) ) {
+			if ( ( $nb_doc_element_transfered + $nb_doc_element_not_transfered ) >= ( $nb_element_to_transfert->nb_document + $nb_element_to_transfert->nb_picture + $nb_element_to_transfert->nb_fiches + $nb_element_to_transfert->nb_duer ) ) {
 				$document_done = true;
 			}
 			if ( $element_done && $document_done ) {
@@ -171,7 +171,7 @@ class Transfert_Action {
 		}
 		$response['main_element_nb'] = count( $transfered_element[ $element_type ] );
 		$response['sub_element_nb'] = count( $transfered_element[ $sub_element_type ] );
-	 	$per_page_element_number = ( ! empty( $_POST ) && ! empty( $_POST['number_per_page'] ) ? (int) $_POST['number_per_page'] : 10 );	// Input var okay
+	 	$per_page_element_number = ( ! empty( $_POST ) && ! empty( $_POST['number_per_page'] ) ? (int) $_POST['number_per_page'] : 10 ); // WPCS: CSRF ok.
 
 		/**	Instanciate common datas transfer utilities	*/
 		if ( 'complete' !== $main_element_state ) {
@@ -351,7 +351,7 @@ class Transfert_Action {
 		}
 		$pics_are_done = true;
 		$query =
-			'SELECT PICTURE.*, PICTURE_LINK.isMainPicture, PICTURE_LINK.idElement, PICTURE_LINK.tableElement
+			'SELECT PICTURE.*, PICTURE_LINK.status as LINK_STATUS, PICTURE_LINK.isMainPicture, PICTURE_LINK.idElement, PICTURE_LINK.tableElement
       FROM ' . TABLE_PHOTO . ' AS PICTURE
         INNER JOIN ' . TABLE_PHOTO_LIAISON . " AS PICTURE_LINK ON (PICTURE_LINK.idPhoto = PICTURE.id)
 			WHERE PICTURE_LINK.tableElement IN ( '{$element_type}', '{$sub_element_type}' )
@@ -369,7 +369,7 @@ class Transfert_Action {
 						AND PMID.meta_value = %s",
 					array( '_wpdigi_element_computed_identifier', $picture->tableElement . '#value_sep#' . $picture->idElement )
 				);
-				(int)$new_element_id = $wpdb->get_var( $query );
+				(int) $new_element_id = $wpdb->get_var( $query );
 
 				$document_id = TransferData_common_class::g()->transfer_document( $picture, $new_element_id, 'picture' );
 				if ( ( null !== $document_id ) && ! is_wp_error( $document_id ) ) {
@@ -380,13 +380,13 @@ class Transfert_Action {
 					if ( ! empty( $new_element_id ) ) {
 						switch ( $picture->tableElement ) {
 							case TABLE_UNITE_TRAVAIL:
-									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
+									$elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash' ), 'p' => $new_element_id ) );
 									$elt = $elt[0];
 									$elt->associated_document_id['image'][] = $document_id;
 									workunit_class::g()->update( $elt );
 								break;
 							case TABLE_GROUPEMENT:
-									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
+									$elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash' ), 'p' => $new_element_id ) );
 									$elt = $elt[0];
 									$elt->associated_document_id['image'][] = $document_id;
 									group_class::g()->update( $elt );
@@ -419,16 +419,6 @@ class Transfert_Action {
 						$new_risk_id = $wpdb->get_var( $query );
 						set_post_thumbnail( $new_risk_id, $document_id );
 					}
-
-					/**	Get the element created for new data transfer	*/
-					$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => 'all', ) );
-					$doc_model = $doc_model[0];
-
-					/**	Build the model for new data storage */
-					$doc_model->unique_key = $picture->id;
-					$doc_model->unique_identifier = ELEMENT_IDENTIFIER_PIC . $picture->id;
-					$doc_model->model_id = null;
-					document_class::g()->update( $doc_model );
 				} else {
 					$response['not_transfered']++;
 				}
@@ -504,38 +494,14 @@ class Transfert_Action {
 						}
 						wp_set_object_terms( $document_id, $term_to_associate, 'attachment_category' );
 
-						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( $new_element_id ) ) {
-						switch ( $document->table_element ) {
-							case TABLE_UNITE_TRAVAIL:
-								// $elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
-								// $elt = $elt[0];
-								// $elt->associated_document_id['document'][] = $document_id;
-								// workunit_class::g()->update( $elt );
-							break;
-
-							case TABLE_GROUPEMENT:
-								// $elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
-								// $elt = $elt[0];
-								// $elt->associated_document_id['document'][] = $document_id;
-								// group_class::g()->update( $elt );
-							break;
-
-							case TABLE_TACHE:
-							break;
-
-							case TABLE_ACTIVITE:
-							break;
-						}
-						}
-
 						/**	Get the element created for new data transfer	*/
-						$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => 'all', ) );
+						$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ) ) );
 						$doc_model = $doc_model[0];
 
-						$document->unique_key = $document->id;
-						$document->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
-						$document->model_id = null;
+						$doc_model->parent_id = $new_element_id;
+						$doc_model->unique_key = $document->id;
+						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $document->id;
+						$doc_model->model_id = null;
 						document_class::g()->update( $doc_model );
 					} else {
 						$response['not_transfered']++;
@@ -590,36 +556,17 @@ class Transfert_Action {
 						$current_loop_nb++;
 						wp_set_object_terms( $document_id, array( 'document_unique', 'printed' ), 'attachment_category' );
 
-						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( $new_element_id ) ) {
-							switch ( $duer->table_element ) {
-								case TABLE_UNITE_TRAVAIL:
-									// $elt = workunit_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
-									// $elt = $elt[0];
-									// $elt->associated_document_id['document'][] = $document_id;
-									// workunit_class::g()->update( $elt );
-									break;
-								case TABLE_GROUPEMENT:
-									// $elt = group_class::g()->get( array( 'post_status' => array( 'publish', 'draft', 'trash', ), 'p' => $new_element_id, ) );
-									// $elt = $elt[0];
-									// $elt->associated_document_id['document'][] = $document_id;
-									// group_class::g()->update( $elt );
-									break;
-								case TABLE_TACHE:
-									break;
-								case TABLE_ACTIVITE:
-									break;
-							}
-						}
+						/**	Get the element created for new data transfer	*/
+						$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ) ) );
+						$doc_model = $doc_model[0];
 
-							/**	Get the element created for new data transfer	*/
-							$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => 'all', ) );
-							$doc_model = $doc_model[0];
-							/**	Build the model for new data storage */
-							$doc_model->unique_key = $duer->id;
-							$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DU . $duer->id;
-							$doc_model->model_id = $duer->id_model;
-							DUER_Class::g()->update( $doc_model );
+						/**	Build the model for new data storage */
+						$doc_model->type = DUER_Class::g()->get_post_type();
+						$doc_model->parent_id = $new_element_id;
+						$doc_model->unique_key = $duer->id;
+						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DU . $duer->id;
+						$doc_model->model_id = $duer->id_model;
+						DUER_Class::g()->update( $doc_model );
 					} else {
 							$response['not_transfered']++;
 					}
@@ -630,7 +577,7 @@ class Transfert_Action {
 		}
 
 		/**	Printed document treatment */
-		if ( DIGI_DTRANS_NB_ELMT_PER_PAGE !== $current_loop_nb) {
+		if ( DIGI_DTRANS_NB_ELMT_PER_PAGE !== $current_loop_nb ) {
 			$where = '';
 			$documents_to_check = array();
 			if ( ! empty( $transfered_element['printed_sheet']['ok'] ) && is_array( $transfered_element['printed_sheet']['ok'] ) ) {
@@ -667,12 +614,15 @@ class Transfert_Action {
 					);
 					$new_element_id = $wpdb->get_var( $query );
 
+					$specific_element_type = '';
 					switch ( $sheet->document_type ) {
 						case 'fiche_de_groupement':
 							$directory_to_use = 'ficheDeGroupement';
+							$specific_element_type = 'Fiche_De_Groupement_Class';
 							break;
 						case 'fiche_de_poste':
 							$directory_to_use = 'ficheDePoste';
+							$specific_element_type = 'Fiche_De_Poste_Class';
 							break;
 						case 'listing_des_risques':
 							$directory_to_use = 'listingRisque';
@@ -693,37 +643,40 @@ class Transfert_Action {
 
 						wp_set_object_terms( $document_id, array( $sheet->document_type, 'printed' ), 'attachment_category' );
 
-						/**	Association des images aux différents éléments / Associate picture to elements	*/
-						if ( ! empty( $new_element_id ) ) {
-							switch ( $sheet->table_element ) {
-								case TABLE_UNITE_TRAVAIL:
-									// $elt = workunit_class::g()->get( array( 'post_status' => 'any', 'p' => $new_element_id, ) );
-									// $elt = $elt[0];
-									// $elt->associated_document_id['document'][] = $document_id;
-									// workunit_class::g()->update( $elt );
-									break;
-								case TABLE_GROUPEMENT:
-									// $elt = group_class::g()->get( array( 'post_status' => 'any', 'p' => $new_element_id, ) );
-									// $elt = $elt[0];
-									// $elt->associated_document_id['document'][] = $document_id;
-									// group_class::g()->update( $elt );
-									break;
-								case TABLE_TACHE:
-									break;
-								case TABLE_ACTIVITE:
-									break;
-							}
-						}
-
 						/**	Get the element created for new data transfer	*/
-						$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => 'all', ) );
+						$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ) ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
+						$doc_model->parent_id = $new_element_id;
 						$doc_model->unique_key = $sheet->id;
 						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $sheet->id;
 						$doc_model->model_id = $sheet->id_model;
-						document_class::g()->update( $doc_model );
+
+						if ( ! empty( $specific_element_type ) ) {
+							switch ( $sheet->document_type ) {
+								case 'fiche_de_groupement':
+									$doc_model->type = Fiche_De_Groupement_Class::g()->get_post_type();
+									Fiche_De_Groupement_Class::g()->update( $doc_model );
+									break;
+								case 'fiche_de_poste':
+									$doc_model->type = Fiche_De_Poste_Class::g()->get_post_type();
+									Fiche_De_Poste_Class::g()->update( $doc_model );
+									break;
+							}
+						} else {
+							/**	Get the element created for new data transfer	*/
+							$doc_model = document_class::g()->get( array( 'p' => $document_id, 'post_status' => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ) ) );
+							$doc_model = $doc_model[0];
+
+							/**	Build the model for new data storage */
+							$doc_model->parent_id = $new_element_id;
+							$doc_model->unique_key = $sheet->id;
+							$doc_model->unique_identifier = ELEMENT_IDENTIFIER_DOC . $sheet->id;
+							$doc_model->model_id = $sheet->id_model;
+
+							document_class::g()->update( $doc_model );
+						}
 					} else {
 						$response['not_transfered']++;
 					}

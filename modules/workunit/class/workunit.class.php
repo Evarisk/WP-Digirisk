@@ -1,11 +1,24 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-class workunit_class extends post_class {
+class Workunit_Class extends post_class {
 	public $element_prefix = 'UT';
 	protected $before_post_function = array( '\digi\construct_identifier' );
-	protected $after_get_function = array( '\digi\get_identifier' );
+
+	/**
+	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_put_function = array( '\digi\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
 	protected $model_name   = '\digi\workunit_model';
 	protected $post_type    = 'digi-workunit';
 	protected $meta_key    	= '_wp_workunit';

@@ -1,6 +1,6 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
  *
@@ -20,13 +20,6 @@ class Society_Class extends Singleton_Util {
 	 * Instanciation principale de l'extension / Plugin instanciation
 	 */
 	protected function construct() {}
-
-	/**
-	 * AFFICHAGE/DISPLAY - Affichage de l'écran principal pour la gestion de la structure de la société et l'évaluation des risques / Display main screen for society management and risk evaluation
-	 */
-	public function display_dashboard() {
-		view_util::exec( '' );
-	}
 
 	/**
 	* Récupères l'objet par rapport à son post type

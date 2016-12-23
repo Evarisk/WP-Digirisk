@@ -70,6 +70,18 @@ function convert_date( $data ) {
 }
 
 /**
+ * Convertie la date au format SQL vers le format français
+ *
+ * @param  object $data Les donnnées du modèle.
+ * @return object       Les donnnées du modèle avec la date au format SQL
+ */
+function convert_date_display( $data ) {
+	$data->date = ! empty( $data->date ) ? date( 'd/m/Y', strtotime( $data->date ) ) : current_time( 'd/m/Y' );
+
+	return $data;
+}
+
+/**
  * Construit les initiales des utilisateurs
  *
  * @param  \digi\User_class $user Les données de l'utilisateur.

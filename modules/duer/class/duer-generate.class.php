@@ -47,30 +47,7 @@ class DUER_Generate_Class extends singleton_util {
 		/**	Call document creation function / Appel de la fonction de création du document	*/
 		$document_creation_response = document_class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
-		if ( !empty( $document_creation_response[ 'id' ] ) ) {
-			$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
-			group_class::g()->update( $element );
-		}
-
-		$all_file = $this->generate_child( $element );
-		$all_file[] = $document_creation_response;
-
-		$element = group_class::g()->get( array( 'id' => $element->id ) );
-		$element = $element[0];
-
-		/**	Generate a zip file with all sheet for current group, sub groups, and sub work units / Génération du fichier zip contenant les fiches du groupement actuel, des sous groupements et des unités de travail	*/
-		$version = document_class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-
-		$zip_path = document_class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
-		$zip_generation_result = document_class::g()->create_zip( $zip_path, $all_file, $element, $version );
-
-		// On rajoute le chemin vers le fichier zip.
-		$duer = DUER_Class::g()->get( array( 'post__in' => array( $document_creation_response['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
-		$duer = $duer[0];
-		$duer->zip_path = $zip_path;
-
-		DUER_Class::g()->update( $duer );
-		return array();
+		return array( 'creation_response' => $document_creation_response, 'element' => $element, 'success' => true );
 	}
 
 	/**
@@ -169,19 +146,19 @@ class DUER_Generate_Class extends singleton_util {
 	*/
 	public function get_logo() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
-		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'digirisk-element-thumbnail' );
 		return $src_logo;
 	}
 
 	/**
-	* Remplis les données du duer
-	*
-	* @param array $data_duer Les données sécurisées
-	* @param array $data_to_document Les données qui seront insérées dans le document
-	* @param object $element L'objet groupement
-	*
-	* @return array Les données qui seront insérées dans le document
-	*/
+	 * Remplis les données du duer
+	 *
+	 * @param array  $data Les données sécurisées.
+	 * @param array  $data_to_document Les données qui seront insérées dans le document.
+	 * @param object $element L'objet groupement.
+	 *
+	 * @return array Les données qui seront insérées dans le document
+	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
 		$data_to_document = array_merge( $data_to_document, $data );
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
@@ -193,13 +170,13 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Remplis les données du duer des risques
-	*
-	* @param array $data_to_document Les données qui seront insérées dans le document
-	* @param object $element L'objet groupement
-	*
-	* @return array Les données qui seront insérées dans le document
-	*/
+	 * Remplis les données du duer des risques
+	 *
+	 * @param array  $data_to_document Les données qui seront insérées dans le document.
+	 * @param object $element L'objet groupement.
+	 *
+	 * @return array Les données qui seront insérées dans le document
+	 */
 	public function fill_data_risk( $data_to_document, $element ) {
 		$list_risk = group_class::g()->get_element_tree_risk( $element );
 		$risk_per_element = array();
@@ -215,7 +192,7 @@ class DUER_Generate_Class extends singleton_util {
 
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $risk ) {
-				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] ) ? evaluation_method_class::g()->list_scale[$risk[ 'niveauRisque' ]] : '';
+				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk['niveauRisque']] ) ? evaluation_method_class::g()->list_scale[$risk['niveauRisque']] : '';
 				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk;
 				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk;
 
@@ -241,21 +218,21 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Formattes la date de l'audit
-	*
-	* @param array $data_duer Les données sécurisées
-	*
-	* @return string La date de l'audit formatté
-	*/
+	 * Formattes la date de l'audit
+	 *
+	 * @param array $data_duer Les données sécurisées.
+	 *
+	 * @return string La date de l'audit formatté
+	 */
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
-		if ( !empty( $data_duer['dateDebutAudit' ] ) ) {
+		if ( ! empty( $data_duer['dateDebutAudit' ] ) ) {
 			$audit_date .= sanitize_text_field( $data_duer['dateDebutAudit'] );
 		}
 
-		if ( !empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
-			if ( !empty( $audit_date ) ) {
+		if ( ! empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
+			if ( ! empty( $audit_date ) ) {
 				$audit_date .= ' - ';
 			}
 

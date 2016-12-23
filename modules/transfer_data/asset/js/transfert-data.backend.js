@@ -23,15 +23,14 @@ jQuery( document ).ready( function(){
 					if ( undefined != ( responseText['treated_tree'] ) ) {
 						jQuery( ".wpdigi-tree-check-" + responseText[ 'element_type' ] ).html( responseText['treated_tree'] );
 					}
-				}
-				else {
+				} else {
 					jQuery( ".wpdigi-transfered-element-nb-documents" ).html( responseText[ 'transfered' ] );
 					jQuery( ".wpdigi-not-transfered-element-nb-documents" ).html( responseText[ 'not_transfered' ] );
 					if ( ( responseText[ 'transfered' ] + responseText[ 'not_transfered' ] ) == jQuery( ".wpdigi-to-transfer-element-nb-wpdigi-to-transfer-element-nb-documents" ).html() ) {
 						jQuery( "wp-digi-datastransfer-element-type-name-documents" ).addClass( 'dashicons-before dashicons-yes' );
 					}
 				}
-				if( 'config_components' == responseText[ 'old_sub_action' ] ) {
+				if ( 'config_components' == responseText[ 'old_sub_action' ] ) {
 					jQuery( ".wp-digi-transfert-components" ).html( responseText[ 'display_components_transfer' ] );
 					$form.children( "input[name=action]" ).val( $form.children( "input[name=action]" ).val().replace( '-config_components', '' ) );
 				}
@@ -40,17 +39,11 @@ jQuery( document ).ready( function(){
 				$form.submit();
 			}
 			else if ( responseText[ 'status' ] ) {
-				jQuery( "#wp-digi-transfert-message" ).html( responseText[ "message" ] ).show();
+				jQuery( '#wp-digi-transfert-message' ).html( responseText[ "message" ] ).show();
 				jQuery( "#wpdigi-datastransfer-form .wp-digi-bton-first" ).hide();
-				var data = {
-					"action": "reset_method_evaluation",
-					"_wpnonce": jQuery( 'input[name="_wpnonce"]' ).val()
-				};
-				jQuery.post( ajaxurl, data, function() {
-					setTimeout( function(){
-					 window.location.href = responseText[ "redirect_to_url" ];
-					}, '1500');
-				});
+				setTimeout( function(){
+				 window.location.href = responseText['redirect_to_url'];
+				}, '1500' );
 			}
 		}
 	});

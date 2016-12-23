@@ -41,14 +41,17 @@ window.digirisk.popup.open = function( event ) {
  * @return {[type]}       [description]
  */
 window.digirisk.popup.open_ajax = function( event ) {
+	var element = jQuery( this );
+
   // Récupères la box de destination mis dans l'attribut du popup
   var target = jQuery( this ).closest(  "." + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
 	target.toggle();
 
+
 	jQuery( this ).get_data( function( data ) {
 		delete data.parent;
 		delete data.target;
-		window.digirisk.request.send( jQuery( this ), data );
+		window.digirisk.request.send( element, data );
 	});
 
   event.stopPropagation();
@@ -67,13 +70,15 @@ window.digirisk.popup.confirm = function( event ) {
 			window.digirisk[callback_object][callback_func]( triggered_element, event, data );
 		} );
 	}
-}
+};
 
 window.digirisk.popup.stop = function( event ) {
 	event.stopPropagation();
 };
 
 window.digirisk.popup.close = function( event ) {
-  jQuery( '.popup' ).hide();
-  jQuery( '.digi-popup' ).hide();
-}
+  jQuery( '.popup:not(.no-close)' ).hide();
+  jQuery( '.digi-popup:not(.no-close)' ).hide();
+
+	jQuery( '.popup:not(.no-close) .content' ).html( window.digi_loader );
+};

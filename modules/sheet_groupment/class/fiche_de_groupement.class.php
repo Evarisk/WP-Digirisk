@@ -159,7 +159,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			$society = group_class::g()->update( $society );
 		}
 
-		return $document_creation_response;
+		return array( 'creation_response' => $document_creation_response, 'element' => $society, 'success' => true );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		$picture = __( 'No picture defined', 'digirisk' );
 
 		if ( ! empty( $society->thumbnail_id ) ) {
-			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'full' );
+			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'digirisk-element-thumbnail' );
 			$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 			if ( is_file( $picture_path ) ) {

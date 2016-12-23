@@ -19,9 +19,8 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 			<i class="close fa fa-times"></i>
 		</div>
 			<div class="content">
-				<textarea class="hidden" rows="8" style="width: 100%;"></textarea>
-				<p class="hidden"></p>
-		</div>
+				<img src='<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>' alt='<?php echo esc_attr( 'Chargement...' ); ?>' />
+			</div>
 
 		<button class="button button-primary"
 						data-cb-object="DUER"

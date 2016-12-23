@@ -23,7 +23,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span></span>
 	<span class="padded"><input type="text" class="eva-date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateDebutAudit" /></span>
 	<span class="padded"><input type="text" class="eva-date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateFinAudit" /></span>
-	<span class="padded"><input type="text" name="destinataireDUER" /></span>
+
+	<span class="padded">
+		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></textarea>
+		<span data-parent="wp-digi-societytree-right-container"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition du destinataire"
+					data-src="destinataire-duer"
+					class="open-popup span-content-destinataire-duer"><span class="dashicons dashicons-admin-users"></span></span>
+	</span>
 
 	<span class="padded">
 		<textarea class="hidden textarea-content-methodology" name="methodologie"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></textarea>
@@ -58,8 +68,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="open-popup span-content-notes-importantes"><span class="dashicons dashicons-clipboard"></span></span>
 	</span>
 
-	<span class="padded"><input type="text" name="dispoDesPlans"/></span>
+	<span class="padded">
+		<textarea class="hidden textarea-content-dispo-des-plans" name="dispoDesPlans"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></textarea>
+		<span data-parent="wp-digi-societytree-right-container"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition de la disposition des plans"
+					data-src="dispo-des-plans"
+					class="open-popup span-content-dispo-des-plans"><span class="dashicons dashicons-location"></span></span>
+	</span>
+
 	<span class="wp-digi-action">
-		<a href="#" class="wp-digi-action wp-digi-action-edit dashicons dashicons-plus" ></a>
+		<a href="#" class="open-popup dashicons dashicons-plus"
+				data-id="<?php echo esc_attr( $element_id ); ?>"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'display_societies_duer' ) ); ?>"
+		 		data-parent="wp-digi-societytree-right-container"
+				data-target="popup"
+				data-cb-object="DUER"
+				data-cb-func="popup_for_generate_DUER"
+				data-title="Génération du DUER"></a>
 	</span>
 </li>

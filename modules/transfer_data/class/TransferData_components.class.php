@@ -183,9 +183,9 @@ class TransferData_components_class extends singleton_util {
 					if ( !empty( $details ) ) {
 
 						if ( 4 == count( $details ) ) {
-							$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
+							$wp_evaluation_method_var_definition['survey']['request'][] = array(
 								'question' => null,
-								'treshold' => null,
+								'seuil' => null,
 							);
 						}
 
@@ -193,21 +193,20 @@ class TransferData_components_class extends singleton_util {
 							if ( ! empty( $detail ) ) {
 								$sub_detail = explode( ' : ', $detail );
 								if ( 2 == count( $sub_detail ) ) {
-									$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
-										'question' => html_entity_decode( $sub_detail[ 1 ] ),
-										'treshold' => $sub_detail[ 0 ],
+									$wp_evaluation_method_var_definition['survey']['request'][] = array(
+										'question' => html_entity_decode( $sub_detail[1] ),
+										'seuil' => $sub_detail[0],
 									);
 								} else {
-									$wp_evaluation_method_var_definition[ 'option' ][ 'survey' ][ 'request' ][] = array(
+									$wp_evaluation_method_var_definition['survey']['request'][] = array(
 										'question' => $detail,
-										'treshold' => 1,
+										'seuil' => 1,
 									);
 								}
 							}
 						}
 					}
 				}
-
 				$wp_var = evaluation_method_variable_class::g()->create( $wp_evaluation_method_var_definition );
 
 				if ( !empty( $wp_var->id ) ) {
@@ -219,8 +218,7 @@ class TransferData_components_class extends singleton_util {
 					/**	Save old information about transfered element	*/
 					add_term_meta( $wp_var->id, '_wpdigi_element_computed_identifier', TABLE_VARIABLE . '#value_sep#' . $eva_var->id, true );
 					add_term_meta( $wp_var->id, '_wpdigi_element_old_definition', json_encode( array( TABLE_VARIABLE, serialize( $eva_var ) ) ), true );
-				}
-				else {
+				} else {
 					log_class::g()->exec( 'digirisk-datas-transfert-evaluation-vars', '', sprintf( __( 'Error transferring evaluation method variable %s from evarisk to taxonomy. error: %s', 'wp-digi-dtrans-i18n' ), $eva_var->nom, json_encode( $wp_var ) ), array( 'object_id' => $eva_var->id, ), 2 );
 				}
 			}
@@ -733,7 +731,7 @@ class TransferData_components_class extends singleton_util {
 
 		$transfer_response['old_sub_action'] = $sub_action;
 
-		evaluation_method_default_data_class::g()->create();
+		evaluation_method_default_data_class::g()->create( array( 'evarisk' ) );
 
 		/**	Build an output for component box	*/
 		ob_start();

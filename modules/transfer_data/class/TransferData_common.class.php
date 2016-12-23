@@ -210,7 +210,7 @@ class TransferData_common_class extends singleton_util {
 			$the_file_content = @file_get_contents( $file );
 
 			/**	Check if file is a valid one	*/
-			if ( $the_file_content !== FALSE ) {
+			if ( $the_file_content !== false ) {
 				$attachment_args = array();
 
 				/**	Get associated picture list	*/
@@ -240,17 +240,18 @@ class TransferData_common_class extends singleton_util {
 
 				/**	Get informations about the picture	*/
 				$filetype = wp_check_filetype( basename( $file ), null );
+				$document_status = ( 'valid' === $document->status ? 'inherit' : 'trash' );
 				/**	Set the default values for the current attachement	*/
 				$attachment_default_args = array(
 					'guid'           => $guid,
 					'post_mime_type' => $filetype['type'],
 					'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file ) ),
 					'post_content'   => '',
-					'post_status'    => 'inherit'
+					'post_status'    => $document_status,
 				);
 
 				/**	Save new picture into database	*/
-				$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid, $new_element_id );
+				$attach_id = wp_insert_attachment( wp_parse_args( $attachment_args, $attachment_default_args ), $guid );
 
 				/**	Create the different size for the given picture and get metadatas for this picture	*/
 				$attach_data = wp_generate_attachment_metadata( $attach_id, $path_document_complete . '/' . basename( $file ) );
@@ -263,12 +264,23 @@ class TransferData_common_class extends singleton_util {
 					log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $attach_id ), array( 'object_id' => $document->id, 'document_old_def' => $document ), 0 );
 				}
 
-				if ( 'valid' == $document->status ) {
+				if ( ! isset( $document->LINK_STATUS ) || ( 'valid' === $document->LINK_STATUS ) ) {
 					$associate_document_list[] = $attach_id;
 				}
 
 				/**	store old document complete definition	*/
 				switch ( $main_type ) {
+					case 'picture':
+						/**	Get the element created for new data transfer	*/
+						$doc_model = attachment_class::g()->get( array( 'p' => $attach_id, 'post_status' => $document_status ) );
+						$doc_model = $doc_model[0];
+
+						/**	Build the model for new data storage */
+						$doc_model->parent_id = $new_element_id;
+						$doc_model->unique_key = $document->id;
+						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_PIC . $document->id;
+						attachment_class::g()->update( $doc_model );
+					break;
 					case 'document':
 						/** Do a backup of old document */
 						update_post_meta( $attach_id, '_digi_old_doc', $document );
@@ -332,7 +344,7 @@ class TransferData_common_class extends singleton_util {
 			}
 		} else {
 			$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
-			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element because it is not a file. Path: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
+			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s could not being transfered to wordpress element because it is not a file. Path: %2$s.', 'wp-digi-dtrans-i18n' ), $main_type, $file ), array( 'object_id' => $document->id, ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/

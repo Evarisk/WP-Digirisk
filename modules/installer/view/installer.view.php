@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<ul class="gridwrapper2">
 				<li class="form-element">
 					<label><?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?><input type="text" name="groupment[title]" /></label>
-					<button class="wp-digi-bton-fourth btn-more-option"><?php esc_html_e( 'Plus d\'options', 'digirisk' ); ?></button>
+					<a class="wp-digi-bton-fourth btn-more-option"><?php esc_html_e( 'Plus d\'options', 'digirisk' ); ?></a>
 				</li>
 			</ul>
 
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<input type="hidden" name="groupment[user_info][owner_id]" />
 					</li>
 					<li class="form-element"><label><?php esc_html_e( 'Additional address', 'digirisk' ); ?> <input type="text" name="address[additional_address]" /></label></li>
-					<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( current_time( 'd/m/Y', 0 ) ); ?>" /></label></li>
+					<li class="form-element"><label><?php esc_html_e( 'Created date', 'digirisk' ); ?> <input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( date( 'd/m/Y' ) ); ?>" /></label></li>
 					<li class="form-element"><label><?php esc_html_e( 'Postcode', 'digirisk' ); ?> <input type="text" name="address[postcode]" /></label></li>
 					<li class="form-element"><label><?php esc_html_e( 'SIREN', 'digirisk' ); ?> <input type="text" name="groupment[identity][siren]" /></label></li>
 					<li class="form-element"><label><?php esc_html_e( 'Town', 'digirisk' ); ?> <input type="text" name="address[town]" /></label></li>

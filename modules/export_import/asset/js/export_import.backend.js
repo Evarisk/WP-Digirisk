@@ -48,17 +48,18 @@ window.digirisk.export.event = function() {
 /**
  * Lances la requête XHR pour créer le fichier .zip de l'export du modèle de donnée.
  *
- * @param  {[type]} event [description]
+ * @param  {Object} event [description]
  * @return {void}
  */
 window.digirisk.export.create_export = function( event ) {
+	var form = jQuery( this );
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
 		'beforeSubmit': function() {
-			jQuery( this ).closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+			form.find( 'button' ).addClass( 'wp-digi-loading' );
 		},
 		success: function( response ) {
-			jQuery( this ).closest( '.wp-digi-bloc-loader' ).removeClass( 'wp-digi-bloc-loading' );
+			form.find( 'button' ).removeClass( 'wp-digi-loading' );
 			window.digirisk.global.download_file( response.data.url_to_file, response.data.filename );
 		}
 	} );
