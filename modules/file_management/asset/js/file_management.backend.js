@@ -11,12 +11,13 @@ window.digirisk.media.init = function() {
 };
 
 window.digirisk.media.event = function() {
-  jQuery( document ).on( 'click', 'span.wpeo-upload-media, a.wpeo-upload-media, .upload', window.digirisk.media.open_popup );
+  jQuery( document ).on( 'click', '.media', window.digirisk.media.open_popup );
 };
 
 window.digirisk.media.open_popup = function( event ) {
+	var element = jQuery( this );
+
   event.preventDefault();
-  var element = jQuery( this );
 
   window.digirisk.media.element_id = element.data( 'id' );
   window.digirisk.media._wpnonce = element.data( 'nonce' );
