@@ -1,12 +1,22 @@
 /**
  * Table design
+ * .table -> classe principale
+ * .media
+ * .cotation-container
+ * .categorie-container
+ * .comment-container
+ * .w50 -> cellule de 50px
+ * .w100 -> cellule de 100px
+ * .w150 -> cellule de 150px
+ * .full -> cellule de 100%
+ * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
  */
 .digirisk-wrap {
 
 	.table {
 		width: 100%;
 		border: 1px solid rgba(0,0,0,0.1);
-		td, th {
+		td, th, tr {
 			height: 50px;
 			text-align: left;
 			vertical-align: middle;
@@ -39,19 +49,18 @@
 					flex-direction: row;
 					background: #2b2b2b;
 					border: 4px solid #2b2b2b;
-					top: 50px;
 					&:before {
 						border-color: transparent transparent #2b2b2b transparent;
 						top: -10px;
 					}
 				}
 			}
-			.risk-container {
+			.categorie-container {
 				.action {
 					padding: 0 8px;
 					transition: all 0.2s ease-out;
 					span, .icon {
-						line-height: 50px;
+						line-height: 49px;
 						transition: all 0.2s ease-out;
 						color: rgba(0,0,0,0.7);
 					}
@@ -76,20 +85,79 @@
 					}
 				}
 			}
-			.list-comment {
+			.user {
+				background: none;
+				color: rgba(0,0,0,0.7);
+				font-weight: 700;
+			}
+			.comment-container {
+				.comment {
+					line-height: 1.8;
+					.date {
+						font-weight: 700;
+						width: 76px;
+					}
+					* {
+						color: rgba(0,0,0,0.7);
+					}
+					.delete, .add {
+						width: 20px;
+						min-width: 20px;
+						height: 20px;
+						line-height: 20px;
+						padding: 0;
+						text-align: center;
+						border-radius: 50%;
+						font-size: 10px;
+						i {
+							transition: all 0.2s ease-out;
+						}
+					}
+					.delete {
+						float: right;
+						background: rgba(0,0,0,0.1);
+						i {
+							color: rgba(0,0,0,0.2);
+						}
+						&:hover i {
+							color: @red;
+						}
+					}
+				}
+				.new.comment {
+					display: flex;
+					flex: 0 1 auto;
+					line-height: 2;
+					border-top: 1px solid rgba(0,0,0,0.1);
+					margin-top: 4px;
+					padding-top: 8px;
+					> * {
+						margin: auto;
+					}
+					.date {
+						margin: auto 4px;
+						font-weight: 400;
+					}
+					.content {
+						width: 100%;
+					}
+					.add {
+						margin-left: 4px;
+						background: @a;
+						i {
+							color: #fff;
+						}
+						&:hover {
+							background: @dark_a;
+						}
+					}
+				}
 			}
 		}
 		tfoot {
 
 		}
 
-		// input {
-		// 	border: 0;
-		// 	border-bottom: 1px solid rgba(0,0,0,0.8);
-		// 	margin: 0;
-		// 	padding: 0 0 6px 0;
-		// 	box-shadow: none;
-		// }
 		td.w50, th.w50 {
 			width: 50px;
 		}
@@ -101,6 +169,9 @@
 		}
 		td.full, th.full {
 			width: 100%;
+			input[type="text"], textarea {
+				width: 100%;
+			}
 		}
 		td.padding, th.padding {
 			padding-left: 8px;
