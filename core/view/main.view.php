@@ -108,39 +108,145 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<table class="table">
 				<thead>
 					<tr>
-						<th></th>
-						<th>Quot.</th>
 						<th class="padding">Ref.</th>
 						<th>Risque</th>
+						<th>Quot.</th>
+						<th>Photo</th>
 						<th>Commentaire</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
+						<td class="padding">
+							<span><strong>0412</strong></span>
+						</td>
+						<td>
+							<div class="categorie-container toggle grid padding">
+								<div class="action"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /><i class="icon animated fa fa-angle-down"></i></div>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="cotation-container toggle grid">
+								<div class="action cotation level1"><span>0</span></div>
+							</div>
+						</td>
 						<td class="w50">
 							<div class="media no-file">
 								<i class="add animated fa fa-plus-circle"></i>
 								<i class="default-image fa fa-picture-o"></i>
 							</div>
 						</td>
-						<td class="w50">
-							<div class="cotation-container toggle grid">
-								<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
-								<ul class="content">
-									<li class="item cotation level1"><span>0</span></li>
-									<li class="item cotation level2"><span>48</span></li>
-									<li class="item cotation level3"><span>51</span></li>
-									<li class="item cotation level4"><span>80</span></li>
-									<li class="item cotation method"><i class="icon fa fa-cog"></i></li>
-								</ul>
+						<td class="full padding">
+							<ul class="comment-container">
+								<li class="comment">
+									<span class="user">Jean Louis, </span>
+									<span class="date">14/01/2017 : </span>
+									<span class="content">Salut, c'est trop génial</span>
+								</li>
+							</ul>
+						</td>
+						<td>
+							<div class="action grid w3">
+								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
+								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
+								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
 							</div>
 						</td>
+					</tr>
+					<tr>
 						<td class="padding">
 							<span><strong>0412</strong></span>
 						</td>
 						<td>
-							<div class="risk-container toggle grid padding">
+							<div class="categorie-container toggle grid padding">
+								<div class="action"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /><i class="icon animated fa fa-angle-down"></i></div>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="cotation-container toggle grid">
+								<div class="action cotation level2"><span>48</span></div>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="media no-file">
+								<i class="add animated fa fa-plus-circle"></i>
+								<i class="default-image fa fa-picture-o"></i>
+							</div>
+						</td>
+						<td class="full padding">
+							<ul class="comment-container">
+								<li class="comment">
+									<span class="user">Jean Louis, </span>
+									<input type="text" class="date" value="03/01/2017" placeholder="03/01/2017" />
+									<input type="text" class="content" value="Salut c'est trop génial" placeholder="Entrer un commentaire" />
+									<span class="button delete"><i class="icon fa fa-times"></i></span>
+								</li>
+								<li class="comment">
+									<span class="user">Jean Louis, </span>
+									<input type="text" class="date" value="03/01/2017" placeholder="03/01/2017" />
+									<input type="text" class="content" value="Salut c'est trop génial" placeholder="Entrer un commentaire" />
+									<span class="button delete"><i class="icon fa fa-times"></i></span>
+								</li>
+								<li class="new comment">
+									<span class="user">Jean Louis, </span>
+									<input type="text" class="date" placeholder="03/01/2017" />
+									<input type="text" class="content" placeholder="Entrer un commentaire" />
+									<span class="button add"><i class="icon fa fa-plus"></i></span>
+								</li>
+							</ul>
+						</td>
+						<td>
+							<div class="action grid w3">
+								<div class="button w50 green save"><i class="icon fa fa-floppy-o"></i></div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="padding">
+							<span><strong>0412</strong></span>
+						</td>
+						<td>
+							<div class="categorie-container toggle grid padding">
+								<div class="action"><img src="https://www.eoxia.com/wp-content/uploads/2013/08/formations-web-2.jpg" /><i class="icon animated fa fa-angle-down"></i></div>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="cotation-container toggle grid">
+								<div class="action cotation level4"><span>80</span></div>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="media no-file">
+								<i class="add animated fa fa-plus-circle"></i>
+								<i class="default-image fa fa-picture-o"></i>
+							</div>
+						</td>
+						<td class="full padding">
+							<ul class="comment-container">
+								<li class="comment">
+									<span class="user">Jean Louis, </span>
+									<span class="date">14/01/2017 : </span>
+									<span class="content">Salut, c'est trop génial</span>
+								</li>
+							</ul>
+						</td>
+						<td>
+							<div class="action grid w3">
+								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
+								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
+								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+
+				<tfoot>
+					<tr>
+						<td class="padding"></td>
+						<td>
+							<div class="categorie-container toggle grid padding">
 								<div class="action"><span>Choisir un risque</span><i class="icon animated fa fa-angle-down"></i></div>
 								<ul class="content">
 									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
@@ -158,19 +264,43 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
 									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
 									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-								</div>
+								</ul>
 							</div>
 						</td>
-						<td class="full">
-							<ul class="list-comment">
-								<li class="comment"><span class="user">Jean Louis</span><span class="date">Le 13 janvier</span><span class="content">Salut, c'est tropgénial</span></li>
+						<td class="w50">
+							<div class="cotation-container toggle grid">
+								<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
+								<ul class="content">
+									<li class="item cotation level1"><span>0</span></li>
+									<li class="item cotation level2"><span>48</span></li>
+									<li class="item cotation level3"><span>51</span></li>
+									<li class="item cotation level4"><span>80</span></li>
+									<li class="item cotation method"><i class="icon fa fa-cog"></i></li>
+								</ul>
+							</div>
+						</td>
+						<td class="w50">
+							<div class="media no-file">
+								<i class="add animated fa fa-plus-circle"></i>
+								<i class="default-image fa fa-picture-o"></i>
+							</div>
+						</td>
+						<td class="full padding">
+							<ul class="comment-container">
+								<li class="new comment">
+									<span class="user">Jean Louis, </span>
+									<input type="text" class="date" placeholder="03/01/2017" />
+									<input type="text" class="content" placeholder="Entrer un commentaire" />
+								</li>
 							</ul>
 						</td>
 						<td>
-							<div class="button blue w50"><i class="icon fa fa-plus"></i></div>
+							<div class="action grid w1">
+								<div class="button w50 blue add"><i class="icon fa fa-plus"></i></div>
+							</div>
 						</td>
 					</tr>
-				</tbody>
+				</tfoot>
 			</table>
 		</div>
 	</div>

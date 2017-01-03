@@ -1,0 +1,36 @@
+/**
+ * Grid
+ */
+
+.digirisk-wrap {
+
+	.grid {
+		display: flex;
+		flex: 0 1 auto;
+		flex-direction: row;
+		&.w1 > * {
+			width: 100%;
+		}
+		&.w2 > * {
+			width: 50%;
+		}
+		&.w3 > * {
+			width: 33.333333% !important;
+		}
+		&.w4 > * {
+			width: 25%;
+		}
+		&.w5 > * {
+			width: 20%;
+		}
+		&.w6 {
+			width: 16.666666%;
+		}
+		&:after {
+			display: table;
+			content: '';
+			clear: both;
+		}
+	}
+
+}

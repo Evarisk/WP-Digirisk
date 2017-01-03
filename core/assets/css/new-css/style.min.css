@@ -2683,6 +2683,51 @@
           animation-name: downAndUp;
 }
 /**
+ * Grid
+ */
+.digirisk-wrap .grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+     -moz-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.digirisk-wrap .grid.w1 > * {
+  width: 100%;
+}
+.digirisk-wrap .grid.w2 > * {
+  width: 50%;
+}
+.digirisk-wrap .grid.w3 > * {
+  width: 33.333333% !important;
+}
+.digirisk-wrap .grid.w4 > * {
+  width: 25%;
+}
+.digirisk-wrap .grid.w5 > * {
+  width: 20%;
+}
+.digirisk-wrap .grid.w6 {
+  width: 16.666666%;
+}
+.digirisk-wrap .grid:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+/**
  * Les boutons se forment grâce à leurs classes CSS
  * .button -> classe de base pour un bouton
  * .strong -> texte en gras
@@ -2722,6 +2767,9 @@
       -ms-transform: none;
        -o-transform: none;
           transform: none;
+}
+.digirisk-wrap .button .icon.dashicons {
+  line-height: 1.3;
 }
 .digirisk-wrap .button .icon,
 .digirisk-wrap .button span {
@@ -2944,9 +2992,6 @@
 }
 .digirisk-wrap .unit-header .title strong {
   text-transform: uppercase;
-}
-.digirisk-wrap .unit-header .button {
-  font-size: 22px;
 }
 .digirisk-wrap .workunit-navigation {
   background: #3d4152;
@@ -3415,6 +3460,10 @@
  * .cotation-container
  * .categorie-container
  * .comment-container
+ * .action -> Boite contenant les actions sur une ligne
+ * 		.task
+ * 		.edit
+ * 		.delete
  * .w50 -> cellule de 50px
  * .w100 -> cellule de 100px
  * .w150 -> cellule de 150px
@@ -3440,20 +3489,26 @@
 .digirisk-wrap .table thead th {
   font-weight: 600;
 }
-.digirisk-wrap .table tbody .media {
+.digirisk-wrap .table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+.digirisk-wrap .table tbody tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.1);
 }
-.digirisk-wrap .table tbody .media .add {
+.digirisk-wrap .table .media {
+  background: rgba(0, 0, 0, 0.1);
+}
+.digirisk-wrap .table .media .add {
   color: rgba(0, 0, 0, 0.6);
 }
-.digirisk-wrap .table tbody .media .default-image {
+.digirisk-wrap .table .media .default-image {
   color: rgba(0, 0, 0, 0.3);
 }
-.digirisk-wrap .table tbody strong {
+.digirisk-wrap .table strong {
   font-weight: 700;
   color: #3495f0;
 }
-.digirisk-wrap .table tbody .cotation-container .content {
+.digirisk-wrap .table .cotation-container .content {
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap;
@@ -3467,19 +3522,24 @@
   background: #2b2b2b;
   border: 4px solid #2b2b2b;
 }
-.digirisk-wrap .table tbody .cotation-container .content:before {
+.digirisk-wrap .table .cotation-container .content:before {
   border-color: transparent transparent #2b2b2b transparent;
   top: -10px;
 }
-.digirisk-wrap .table tbody .categorie-container .action {
+.digirisk-wrap .table .categorie-container .action {
   padding: 0 8px;
   -webkit-transition: all 0.2s ease-out;
      -moz-transition: all 0.2s ease-out;
        -o-transition: all 0.2s ease-out;
           transition: all 0.2s ease-out;
 }
-.digirisk-wrap .table tbody .categorie-container .action span,
-.digirisk-wrap .table tbody .categorie-container .action .icon {
+.digirisk-wrap .table .categorie-container .action img {
+  float: left;
+  max-width: 50px;
+  width: 100%;
+}
+.digirisk-wrap .table .categorie-container .action span,
+.digirisk-wrap .table .categorie-container .action .icon {
   line-height: 49px;
   -webkit-transition: all 0.2s ease-out;
      -moz-transition: all 0.2s ease-out;
@@ -3487,23 +3547,23 @@
           transition: all 0.2s ease-out;
   color: rgba(0, 0, 0, 0.7);
 }
-.digirisk-wrap .table tbody .categorie-container .action .icon {
+.digirisk-wrap .table .categorie-container .action .icon {
   margin-left: 10px;
 }
-.digirisk-wrap .table tbody .categorie-container .content {
+.digirisk-wrap .table .categorie-container .content {
   width: 392px;
 }
-.digirisk-wrap .table tbody .categorie-container:hover {
+.digirisk-wrap .table .categorie-container:hover {
   cursor: pointer;
 }
-.digirisk-wrap .table tbody .categorie-container:hover .action {
+.digirisk-wrap .table .categorie-container:hover .action {
   background: rgba(0, 0, 0, 0.1);
 }
-.digirisk-wrap .table tbody .categorie-container:hover .action span,
-.digirisk-wrap .table tbody .categorie-container:hover .action .icon {
+.digirisk-wrap .table .categorie-container:hover .action span,
+.digirisk-wrap .table .categorie-container:hover .action .icon {
   color: #000;
 }
-.digirisk-wrap .table tbody .categorie-container:hover .action .icon {
+.digirisk-wrap .table .categorie-container:hover .action .icon {
   -webkit-animation-duration: 0.6s;
      -moz-animation-duration: 0.6s;
        -o-animation-duration: 0.6s;
@@ -3513,51 +3573,16 @@
        -o-animation-name: downAndUp;
           animation-name: downAndUp;
 }
-.digirisk-wrap .table tbody .user {
+.digirisk-wrap .table .user {
   background: none;
   color: rgba(0, 0, 0, 0.7);
   font-weight: 700;
 }
-.digirisk-wrap .table tbody .comment-container .comment {
-  line-height: 1.8;
+.digirisk-wrap .table .comment-container {
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
-.digirisk-wrap .table tbody .comment-container .comment .date {
-  font-weight: 700;
-  width: 76px;
-}
-.digirisk-wrap .table tbody .comment-container .comment * {
-  color: rgba(0, 0, 0, 0.7);
-}
-.digirisk-wrap .table tbody .comment-container .comment .delete,
-.digirisk-wrap .table tbody .comment-container .comment .add {
-  width: 20px;
-  min-width: 20px;
-  height: 20px;
-  line-height: 20px;
-  padding: 0;
-  text-align: center;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  font-size: 10px;
-}
-.digirisk-wrap .table tbody .comment-container .comment .delete i,
-.digirisk-wrap .table tbody .comment-container .comment .add i {
-  -webkit-transition: all 0.2s ease-out;
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
-}
-.digirisk-wrap .table tbody .comment-container .comment .delete {
-  float: right;
-  background: rgba(0, 0, 0, 0.1);
-}
-.digirisk-wrap .table tbody .comment-container .comment .delete i {
-  color: rgba(0, 0, 0, 0.2);
-}
-.digirisk-wrap .table tbody .comment-container .comment .delete:hover i {
-  color: #e05353;
-}
-.digirisk-wrap .table tbody .comment-container .new.comment {
+.digirisk-wrap .table .comment-container .comment {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -3568,30 +3593,98 @@
      -moz-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
-  line-height: 2;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  line-height: 1.8;
   margin-top: 4px;
-  padding-top: 8px;
 }
-.digirisk-wrap .table tbody .comment-container .new.comment > * {
-  margin: auto;
+.digirisk-wrap .table .comment-container .comment > * {
+  margin: auto 0;
 }
-.digirisk-wrap .table tbody .comment-container .new.comment .date {
+.digirisk-wrap .table .comment-container .comment .date {
+  font-weight: 700;
+  width: 78px;
   margin: auto 4px;
+}
+.digirisk-wrap .table .comment-container .comment * {
+  color: rgba(0, 0, 0, 0.7);
+}
+.digirisk-wrap .table .comment-container .comment .delete,
+.digirisk-wrap .table .comment-container .comment .add {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  text-align: center;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  font-size: 10px;
+}
+.digirisk-wrap .table .comment-container .comment .delete i,
+.digirisk-wrap .table .comment-container .comment .add i {
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
+.digirisk-wrap .table .comment-container .comment .delete {
+  margin-left: 4px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.digirisk-wrap .table .comment-container .comment .delete i {
+  color: rgba(0, 0, 0, 0.2);
+}
+.digirisk-wrap .table .comment-container .comment .delete:hover i {
+  color: #e05353;
+}
+.digirisk-wrap .table .comment-container .comment ~ .new.comment {
+  padding-top: 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.digirisk-wrap .table .comment-container .new.comment {
+  line-height: 2;
+}
+.digirisk-wrap .table .comment-container .new.comment .date {
   font-weight: 400;
 }
-.digirisk-wrap .table tbody .comment-container .new.comment .content {
-  width: 100%;
-}
-.digirisk-wrap .table tbody .comment-container .new.comment .add {
+.digirisk-wrap .table .comment-container .new.comment .add {
   margin-left: 4px;
   background: #3495f0;
 }
-.digirisk-wrap .table tbody .comment-container .new.comment .add i {
+.digirisk-wrap .table .comment-container .new.comment .add i {
   color: #fff;
 }
-.digirisk-wrap .table tbody .comment-container .new.comment .add:hover {
+.digirisk-wrap .table .comment-container .new.comment .add:hover {
   background: #1360c8;
+}
+.digirisk-wrap .table .action .button .icon {
+  color: rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
+.digirisk-wrap .table .action .task:hover .icon {
+  color: rgba(0, 0, 0, 0.6);
+}
+.digirisk-wrap .table .action .edit:hover .icon {
+  color: #3495f0;
+}
+.digirisk-wrap .table .action .delete {
+  background: rgba(0, 0, 0, 0.05);
+}
+.digirisk-wrap .table .action .delete:hover .icon {
+  color: #e05353;
+}
+.digirisk-wrap .table .action .add,
+.digirisk-wrap .table .action .save {
+  margin-left: auto;
+}
+.digirisk-wrap .table .action .add .icon,
+.digirisk-wrap .table .action .save .icon {
+  color: #fff !important;
+}
+.digirisk-wrap .table tfoot {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 .digirisk-wrap .table td.w50,
 .digirisk-wrap .table th.w50 {
