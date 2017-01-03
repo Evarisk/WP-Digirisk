@@ -1,18 +1,22 @@
-<?php namespace digi;
+<?php
 /**
-* Add filter for add tab
-* Add filter for display the tab content
-* Add action ajax for load content
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package tab
-* @subpackage action
-*/
-if ( !defined( 'ABSPATH' ) ) exit;
+ * Add filter for add tab
+ * Add filter for display the tab content
+ * Add action ajax for load content
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package tab
+ * @subpackage action
+ */
 
-class tab_action {
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+class Tab_Action {
 	/**
 	* Le constructeur appelle l'action ajax: wp_ajax_lood_tab_content
 	*/
@@ -40,4 +44,4 @@ class tab_action {
   }
 }
 
-new tab_action();
+new Tab_Action();

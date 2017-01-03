@@ -5,17 +5,15 @@ window.digirisk.tab.init = function() {
 };
 
 window.digirisk.tab.event = function() {
-  jQuery( document ).on( 'click', '.wp-digi-global-sheet-tab li, .tab', window.digirisk.tab.load );
+  jQuery( document ).on( 'click', '.tab .tab-element', window.digirisk.tab.load );
 };
 
 window.digirisk.tab.load = function( event ) {
   event.preventDefault();
   var a = jQuery( this );
 
-  jQuery( ".wp-digi-global-sheet-tab li.active" ).removeClass( "active" );
+  jQuery( ".tab .tab-element.active" ).removeClass( "active" );
   a.addClass( "active" );
-
-  jQuery( ".wp-digi-content" ).addClass( "wp-digi-bloc-loading" );
 
   var data = {
     action:           "load_tab_content",

@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		</div>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
-		<button
-				class="action-input"
+		<div
+				class="button green action-input"
 				data-parent="unit-header"
-				data-nonce="<?php echo wp_create_nonce( 'ajax_update_group_' . $element->id ); ?>"><?php _e( 'Save', 'digirisk' ); ?></button>
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_update_group_' . $element->id ) ); ?>"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></div>
 	</div>
 	<div class="dut button red uppercase"><i class="icon fa fa-download"></i><span>Télécharger le document unique</span></div>
 </div>
 
-<?php echo do_shortcode( '[digi_tab type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
+<?php echo do_shortcode( '[digi_tab id="' . $element->id . '" type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
 <?php apply_filters( 'wpdigi_establishment_tab_content', '', $element->id, $tab_to_display ); ?>

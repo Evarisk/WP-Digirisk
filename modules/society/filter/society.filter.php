@@ -3,7 +3,7 @@
  * Les filtres pour les sociétés
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
+ * @since 6.2.2.0
  * @version 6.2.3.0
  * @copyright 2015-2017 Evarisk
  * @package society
@@ -25,7 +25,6 @@ class Society_Filter {
 		add_filter( 'digi_dashboard', array( $this, 'callback_digi_dashboard' ), 10, 2 );
 	}
 
-
 	public function callback_digi_menu( $content, $groupment_selected_id ) {
 		require_once( SOCIETY_VIEW_DIR . 'menu.view.php' );
 	}
@@ -37,7 +36,6 @@ class Society_Filter {
 	public function callback_establishment_action( $element ) {
 		require( SOCIETY_VIEW_DIR . '/action.view.php' );
 	}
-
 
 	public function callback_digi_dashboard( $content, $establishment_selected_id ) {
 		$establishment = establishment_class::g()->show_by_type( $establishment_selected_id );

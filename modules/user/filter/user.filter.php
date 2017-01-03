@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class user_filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ) );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 10, 2 );
 	}
 
-	public function callback_tab( $list_tab ) {
+	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['user'] = array(
 			'text' => __( 'User', 'digirisk' ),
 		);

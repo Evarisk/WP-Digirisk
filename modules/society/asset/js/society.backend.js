@@ -9,8 +9,8 @@ window.digirisk.society.event = function() {
 };
 
 window.digirisk.society.callback_load_society = function( element, response ) {
-	jQuery( '.wp-digi-societytree-main-container' ).replaceWith( response.data.template );
-}
+	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
+};
 
 window.digirisk.society.display_save_button = function( event ) {
 	jQuery( this ).closest( '.wp-digi-global-sheet-header' ).find( ".wp-digi-global-action-container" ).removeClass( "hidden" );
