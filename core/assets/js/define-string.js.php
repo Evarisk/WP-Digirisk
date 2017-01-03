@@ -6,4 +6,6 @@
 	var digi_tools_in_progress = "<?php _e( 'En cours...', 'digirisk'); ?>";
 	var digi_tools_done = "<?php _e( 'Terminé', 'digirisk'); ?>";
 	var digi_tools_confirm = "<?php _e( 'Attention, avant cette opération, il vous est recommandé de faire une sauvegarde de votre base de donnée.', 'digirisk' ); ?>"
+
+	var digi_loader = "<img src='<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>' alt='<?php echo esc_attr( 'Chargement...' ); ?>' />";
 </script>

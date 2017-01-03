@@ -11,7 +11,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class file_management_class extends singleton_util {
+class File_Management_Class extends singleton_util {
 	/**
 	* Le constructeur
 	*/
@@ -30,7 +30,7 @@ class file_management_class extends singleton_util {
     $element = $model_name::g()->get( array( 'id' => $element_id ) );
 
     if ( wp_attachment_is_image( $file_id ) ) {
-      $element[0]->associated_document_id['image'][] = $file_id;
+      $element[0]->associated_document_id['image'][] = (int) $file_id;
 
       if ( !empty( $thumbnail ) ) {
         set_post_thumbnail( $element_id, $file_id );
@@ -43,6 +43,43 @@ class file_management_class extends singleton_util {
 
     $model_name::g()->update( $element[0] );
   }
+
+	/**
+	 * Déssocies le fichier du tableau associated_document_id['image']
+	 *
+	 * @param  integer $file_id     L'ID du fichier.
+	 * @param  integer $element_id  L'ID du l'élement contenant le fichier.
+	 * @param  string  $object_name Le nom du modèle de l'objet.
+	 * @return boolean
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.3.0
+	 */
+	public function dessociate_file( $file_id, $element_id, $object_name ) {
+		$model_name = '\digi\\' . $object_name;
+		$element = $model_name::g()->get( array( 'id' => $element_id ) );
+
+		$founded_key = array_search( $file_id, $element[0]->associated_document_id['image'], true );
+		if ( false === $founded_key ) {
+			return false;
+		}
+
+		array_splice( $element[0]->associated_document_id['image'], $founded_key, 1 );
+
+		if ( $element[0]->thumbnail_id === $file_id ) {
+			delete_post_thumbnail( $element_id );
+		}
+
+		if ( 0 < count( $element[0]->associated_document_id['image'] ) ) {
+			$element[0]->thumbnail_id = $element[0]->associated_document_id['image'][0];
+		} else {
+			$element[0]->thumbnail_id = 0;
+		}
+
+		$model_name::g()->update( $element[0] );
+
+		return true;
+	}
 
 	public function upload_model( $type ) {
 		// Upload le fichier vers le dossier ./wp-content/uploads/digirisk/document_template/

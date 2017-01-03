@@ -31,32 +31,34 @@ window.digirisk.gallery.open = function( element ) {
 
 window.digirisk.gallery.prev = function( event ) {
 	event.preventDefault();
-	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current').prev().length <= 0 ) {
+	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).prev().length <= 0 ) {
 		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
 		jQuery( this ).closest( 'div' ).find( '.image-list li:last' ).toggleClass( 'hidden current' );
-	}
-	else {
+	}	else {
 		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).prev().toggleClass( 'hidden current' );
 	}
+
+	jQuery( '.wpeo-gallery .wp-digi-bton-third' ).attr( 'data-thumbnail-id', jQuery( '.wpeo-gallery .current' ).attr( 'data-id' ) );
 };
 
 window.digirisk.gallery.next = function( event ) {
 	event.preventDefault();
 
-	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current').next().length <= 0 ) {
+	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).next().length <= 0 ) {
 		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
 		jQuery( this ).closest( 'div' ).find( '.image-list li:first' ).toggleClass( 'hidden current' );
-	}
-	else {
+	} else {
 		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).next().toggleClass( 'hidden current' );
 	}
+
+	jQuery( '.wpeo-gallery .wp-digi-bton-third' ).attr( 'data-thumbnail-id', jQuery( '.wpeo-gallery .current' ).attr( 'data-id' ) );
 };
 
 window.digirisk.gallery.set_thumbnail = function( event ) {
 	var data = {
 		action: 'eo_set_thumbnail',
 		element_id: jQuery( this ).closest( 'div' ).data( 'id' ),
-		thumbnail_id: jQuery( this ).closest( 'div' ).find( 'li.current' ).data( 'id' ),
+		thumbnail_id: jQuery( this ).closest( 'div' ).find( 'li.current' ).data( 'id' )
 	};
 
 	jQuery.post( window.ajaxurl, data, function( response ) {
@@ -67,4 +69,10 @@ window.digirisk.gallery.set_thumbnail = function( event ) {
 
 window.digirisk.gallery.close = function( event ) {
 	jQuery( '.wpeo-gallery' ).hide();
+};
+
+window.digirisk.gallery.dessociate_file_success = function( element, response ) {
+	jQuery( '.wpeo-gallery .image-list .current' ).remove();
+	jQuery( '.wpeo-gallery .prev' ).click();
+	jQuery( 'span.wpeo-upload-media[data-id="'+ response.data.element_id + '"]' ).replaceWith( response.data.view );
 };

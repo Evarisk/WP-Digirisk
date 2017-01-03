@@ -70,7 +70,7 @@ window.digirisk.popup.confirm = function( event ) {
 			window.digirisk[callback_object][callback_func]( triggered_element, event, data );
 		} );
 	}
-}
+};
 
 window.digirisk.popup.stop = function( event ) {
 	event.stopPropagation();
@@ -79,4 +79,6 @@ window.digirisk.popup.stop = function( event ) {
 window.digirisk.popup.close = function( event ) {
   jQuery( '.popup:not(.no-close)' ).hide();
   jQuery( '.digi-popup:not(.no-close)' ).hide();
-}
+
+	jQuery( '.popup:not(.no-close) .content' ).html( window.digi_loader );
+};

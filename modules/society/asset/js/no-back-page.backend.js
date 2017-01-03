@@ -13,7 +13,8 @@ jQuery( document ).ready(function() {
                  d.type.toUpperCase() === 'NUMBER' ||
                  d.type.toUpperCase() === 'DATE' )
              ) ||
-             d.tagName.toUpperCase() === 'TEXTAREA') {
+             ( d.tagName.toUpperCase() === 'TEXTAREA' ) ||
+						 d.getAttribute( 'contenteditable' ) ) {
             doPrevent = d.readOnly || d.disabled;
         }
         else {
