@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class Recommendation_Filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 1 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
 	}
 
-	public function callback_tab( $list_tab ) {
+	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
 			'text' => __( 'Recommendation', 'digirisk' ),
 		);

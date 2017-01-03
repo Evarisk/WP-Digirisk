@@ -1,22 +1,39 @@
-<?php namespace digi;
+<?php
 /**
-* @TODO : A Détailler
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package risk
-* @subpackage filter
-*/
+ * Gestion des filtres relatifs aux évaluateurs
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage filter
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluator_filter {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Gestion des filtres relatifs aux évaluateurs
+ */
+class Evaluator_Filter {
+
+	/**
+	 * Utilises le filtre digi_tab
+	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 11 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 11, 2 );
 	}
 
-	public function callback_tab( $list_tab ) {
+	/**
+	 * Ajoutes l'onglet évaluateur dans les groupements et les unités de travail
+	 *
+	 * @param  array   $list_tab Les onglets déjà présents.
+	 * @param  integer $id       L'ID de la société.
+	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
+	 */
+	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['evaluator'] = array(
 			'text' => __( 'Evaluator', 'digirisk' ),
 		);
@@ -28,4 +45,4 @@ class evaluator_filter {
 	}
 }
 
-new evaluator_filter();
+new Evaluator_Filter();

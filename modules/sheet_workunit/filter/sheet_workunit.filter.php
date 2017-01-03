@@ -20,7 +20,7 @@ class Sheet_Workunit_Filter {
 	 * @see add_filter
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 16, 1 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 16, 2 );
 	}
 
 	/**
@@ -29,7 +29,7 @@ class Sheet_Workunit_Filter {
 	 * @param  array $list_tab  La liste des filtres.
 	 * @return array            La liste des filtres + le filtre ajouté par cette méthode.
 	 */
-	public function callback_digi_tab( $list_tab ) {
+	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
 			'text' => __( 'Fiche de poste', 'digirisk' ),
 			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',

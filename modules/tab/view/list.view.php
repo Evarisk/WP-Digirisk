@@ -26,4 +26,25 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			?><li class="tab-element" data-action="digi-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $element['text'] ); ?></li><?php
 		endforeach;
 	endif; ?>
+
+
+	<?php
+	if ( ! empty( $list_tab_more ) ) :
+		?>
+		<li class="tab-element toggle option" data-target="digi-toggle-more">
+			<i class="action fa fa-ellipsis-v toggle"></i>
+			<ul class="content digi-toggle digi-toggle-more">
+				<?php
+				foreach ( $list_tab_more as $key => $element ) :
+					?><li
+						class="item <?php echo esc_attr( $element['class'] ); ?>"
+						data-nonce="<?php echo esc_attr( $element['nonce'] ); ?>"
+						<?php echo esc_attr( $element['attributes'] ); ?> ><?php echo esc_html( $element['text'] ); ?></li><?php
+				endforeach;
+				?>
+			</ul>
+		</li>
+	<?php
+	endif;
+	?>
 </ul>

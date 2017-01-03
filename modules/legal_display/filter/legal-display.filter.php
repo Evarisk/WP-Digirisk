@@ -1,21 +1,23 @@
 <?php
 /**
- * Gestion des filtres relatifs aux accidents
+ * Gestion des filtres relatifs aux affichages légaux
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
+ * @since 0.1
  * @version 6.2.3.0
  * @copyright 2015-2017 Evarisk
- * @package accident
+ * @package legal_display
  * @subpackage filter
  */
+
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Gestion des filtres relatifs aux accidents
+ * Gestion des filtres relatifs aux affichages légaux
  */
-class Accident_Filter {
+class Legal_Display_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
@@ -25,22 +27,18 @@ class Accident_Filter {
 	}
 
 	/**
-	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
+	 * Ajoutes l'onglet affichage légal dans les groupements.
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 */
 	public function callback_tab( $list_tab, $id ) {
-		$list_tab['digi-workunit']['accident'] = array(
-			'text' => __( 'Accident', 'digirisk' ),
+		$list_tab['digi-group']['legal_display'] = array(
+			'text' => __( 'Affichage légal', 'digirisk' ),
 		);
-		$list_tab['digi-group']['accident'] = array(
-			'text' => __( 'Accident', 'digirisk' ),
-		);
-
 		return $list_tab;
 	}
 }
 
-new Accident_Filter();
+new Legal_Display_Filter();

@@ -20,12 +20,12 @@ window.digirisk.toggle.open = function( event ) {
 	}
 
 	if ( target ) {
-		target.toggle();
+		target.toggleClass( 'active' );
 		event.stopPropagation();
 	}
 };
 
 window.digirisk.toggle.close = function( event ) {
-	jQuery( '.digi-toggle' ).hide();
+	jQuery( '.digi-toggle' ).removeClass( 'active' );
 	event.stopPropagation();
 };

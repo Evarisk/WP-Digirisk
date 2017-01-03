@@ -33,11 +33,19 @@ class Tab_Shortcode {
 	 * @return void
 	 */
 	public function callback_digi_tab( $param ) {
+		$id = $param['id'];
 		$type = $param['type'];
 		$display = $param['display'];
 
-		$list_tab = apply_filters( 'digi_tab', array() );
-		view_util::exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		$list_tab = apply_filters( 'digi_tab', array(), $id );
+
+		$list_tab_more = array();
+		if ( ! empty( $list_tab[ $type ]['more'] ) ) {
+			$list_tab_more = $list_tab[ $type ]['more'];
+			unset( $list_tab[ $type ]['more'] );
+		}
+
+		view_util::exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab, 'list_tab_more' => $list_tab_more ) );
 	}
 }
 

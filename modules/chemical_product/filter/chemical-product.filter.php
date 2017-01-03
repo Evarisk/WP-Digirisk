@@ -1,21 +1,21 @@
 <?php
 /**
- * Gestion des filtres relatifs aux accidents
+ * Gestion des filtres relatifs aux produits chimiques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
+ * @since 0.1
  * @version 6.2.3.0
  * @copyright 2015-2017 Evarisk
- * @package accident
+ * @package chemical_product
  * @subpackage filter
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Gestion des filtres relatifs aux accidents
+ * Gestion des filtres relatifs aux produits chimiques
  */
-class Accident_Filter {
+class Chemical_Product_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
@@ -25,22 +25,22 @@ class Accident_Filter {
 	}
 
 	/**
-	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
+	 * Ajoutes l'onglet produit chimique dans les groupements et les unités de travail
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 */
 	public function callback_tab( $list_tab, $id ) {
-		$list_tab['digi-workunit']['accident'] = array(
-			'text' => __( 'Accident', 'digirisk' ),
+		$list_tab['digi-workunit']['chemical-product'] = array(
+			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
-		$list_tab['digi-group']['accident'] = array(
-			'text' => __( 'Accident', 'digirisk' ),
+		$list_tab['digi-group']['chemical-product'] = array(
+			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
 
 		return $list_tab;
 	}
 }
 
-new Accident_Filter();
+new Chemical_Product_Filter();

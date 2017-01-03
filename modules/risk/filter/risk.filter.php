@@ -13,10 +13,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class risk_filter {
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ),1 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 1, 2 );
 	}
 
-	public function callback_tab( $list_tab ) {
+	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['risk'] = array(
 			'text' => __( 'Risk', 'digirisk' ),
 		);
