@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 	</span>
 
 
-	<span class="delete button w50"
+	<span class="action-delete delete button w50"
 		data-id="<?php echo esc_attr( $workunit->id ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_workunit_' . $workunit->id ) ); ?>"
 		data-action="delete_society">

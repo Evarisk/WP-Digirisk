@@ -7,7 +7,7 @@ window.digirisk.action.init = function() {
 window.digirisk.action.event = function() {
   jQuery( document ).on( 'click', '.action-input', window.digirisk.action.exec_input );
   jQuery( document ).on( 'click', '.action-attribute', window.digirisk.action.exec_attribute );
-  jQuery( document ).on( 'click', '.wp-digi-action-delete', window.digirisk.action.delete );
+  jQuery( document ).on( 'click', '.action-delete', window.digirisk.action.delete );
 };
 
 window.digirisk.action.exec_input = function( event ) {
