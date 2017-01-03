@@ -59,7 +59,8 @@ class Digirisk_Action {
 	 * @return void nothing
 	 */
 	public function callback_admin_enqueue_scripts() {
-		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
+		// wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
+		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/new-css/style.min.css', array(), config_util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
 		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/datepicker.min.css', array(), config_util::$init['digirisk']->version );

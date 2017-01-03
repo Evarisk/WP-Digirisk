@@ -1,0 +1,54 @@
+/**
+ * Main tab
+ */
+.digirisk-wrap {
+
+	.tab {
+		display: flex;
+		background: #e8e8e8;
+		height: 50px;
+		.tab-element {
+			padding: 0 14px;
+			line-height: 50px;
+			margin: auto 0;
+			transition: all 0.2s ease-out;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			&.active:not(.toggle) {
+				background: @a;
+				color: #fff;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+			&:hover:not(.active) {
+				background: rgba(0,0,0,0.1);
+			}
+			&.toggle {
+				overflow: visible;
+				.action {
+					color: rgba(0,0,0,0.4);
+					transition: all 0.2s ease-out;
+				}
+				&:hover {
+					background: none;
+					.action {
+						color: #000;
+					}
+				}
+			}
+		}
+		.gp {
+			margin-left: auto;
+			display: flex;
+			flex: 0 1 auto;
+			height: 50px;
+			span, .icon {
+				margin-top: auto;
+				margin-bottom: auto;
+			}
+		}
+	}
+
+}

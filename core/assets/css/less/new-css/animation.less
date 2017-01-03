@@ -1,0 +1,78 @@
+/*---
+  Animations from animate.css
+  .animated
+      To animate an element
+  .bounce-in
+      appears with bounce animation
+  .rotate
+
+---*/
+
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes bounceIn {
+  0, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  20% {
+    transform: scale3d(1.4, 1.4, 1.4);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounce-in {
+  animation-name: bounceIn;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(90deg);
+  }
+}
+
+.rotate {
+	animation-name: rotate;
+}
+
+@keyframes downAndUp {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(4px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+.down-and-up {
+	animation-name: downAndUp;
+}

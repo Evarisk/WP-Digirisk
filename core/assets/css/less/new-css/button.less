@@ -1,0 +1,119 @@
+/**
+ * Les boutons se forment grâce à leurs classes CSS
+ * .button -> classe de base pour un bouton
+ * .strong -> texte en gras
+ * .uppercase -> texte en majuscule
+ * .red -> fond du bouton rouge
+ * .green -> fond du bouton vert
+ * .grey -> fond dubuoton gris
+ * .w54 -> bouton carré 40px
+ * .w50 -> bouton carré 50px
+ * .w60 -> bouton carré 60px
+ * .w80 -> bouton carré 80px
+ */
+.digirisk-wrap {
+
+	.button {
+		display: inline-block;
+		border: 0;
+		box-shadow: none;
+		background: none;
+		color: #fff;
+		padding: 6px 14px;
+		vertical-align: middle;
+		height: auto;
+		border-radius: 0;
+		transition: all 0.2s ease-out;
+		&:hover {
+			background: none;
+			color: #fff;
+		}
+		&:active {
+			transform: none;
+		}
+		.icon, span {
+			transition: all 0.2s ease-out;
+		}
+		.icon ~ span {
+			margin-left: 10px;
+		}
+		&.strong {
+			span {
+				font-weight: 700;
+			}
+		}
+		&.uppercase {
+			span {
+				text-transform: uppercase;
+			}
+		}
+		&.blue {
+			background: @a;
+			&:hover {
+				background: @dark_a;
+			}
+		}
+		&.red {
+			background: @red;
+			&:hover {
+				background: darken(@red, 14%);
+			}
+		}
+		&.green {
+			background: @green;
+			&:hover {
+				background: darken(@green, 14%);
+			}
+		}
+		&.grey {
+			background: #d0d0d0;
+			&:hover {
+				background: darken(#d0d0d0, 14%);
+			}
+		}
+		&.w40 {
+			display: flex;
+			flex: 0 1 auto;
+			width: 40px;
+			min-width: 40px;
+			height: 40px;
+			> * {
+				margin: auto;
+			}
+		}
+		&.w50 {
+			display: flex;
+			flex: 0 1 auto;
+			width: 50px;
+			min-width: 50px;
+			height: 50px;
+			> * {
+				margin: auto;
+			}
+			.icon {
+				font-size: 16px;
+			}
+		}
+		&.w60 {
+			display: flex;
+			flex: 0 1 auto;
+			width: 60px;
+			min-width: 60px;
+			height: 60px;
+			> * {
+				margin: auto;
+			}
+		}
+		&.w80 {
+			display: flex;
+			flex: 0 1 auto;
+			width: 80px;
+			min-width: 80px;
+			height: 80px;
+			> * {
+				margin: auto;
+			}
+		}
+	}
+
+}

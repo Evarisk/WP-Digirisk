@@ -1,0 +1,57 @@
+
+.digirisk-wrap {
+
+	padding: 20px 20px 20px 0;
+
+	&:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+	.navigation-container, .main-container {
+		display: block;
+		float: left;
+	}
+	.navigation-container {
+		width:24%;
+		padding-right: 10px;
+	}
+	.main-container {
+		width: 76%;
+		padding-let: 10px;
+	}
+
+	.main-header {
+		background: @b;
+		display: flex;
+		flex: 0 1 auto;
+		height: 50px;
+		.title {
+			width: 100%;
+		}
+		.title, .dut {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.media {
+			background: darken(@b, 4%);
+		}
+		.dut {
+			margin-left: auto;
+			display: flex;
+			flex: 0 1 auto;
+			height: 50px;
+			span, .icon {
+				margin-top: auto;
+				margin-bottom: auto;
+			}
+		}
+	}
+
+	.main-content {
+		padding: 16px;
+		background: #fff;
+	}
+
+}
