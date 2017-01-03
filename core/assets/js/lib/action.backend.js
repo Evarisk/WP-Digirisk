@@ -18,20 +18,15 @@ window.digirisk.action.exec_input = function( event ) {
 			parent_element = element.closest( '.' + element.data( 'parent' ) );
 	}
 
-	if ( !element[0].getAttribute(' disabled' ) ) {
-		element[0].setAttribute( 'disabled', true );
-		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
-
-		var list_input = window.eva_lib.array_form.get_input( parent_element );
-		var data = {};
-		for (var i = 0; i < list_input.length; i++) {
-			if ( list_input[i].name ) {
-				data[list_input[i].name] = list_input[i].value;
-			}
+	var list_input = window.eva_lib.array_form.get_input( parent_element );
+	var data = {};
+	for (var i = 0; i < list_input.length; i++) {
+		if ( list_input[i].name ) {
+			data[list_input[i].name] = list_input[i].value;
 		}
-
-    window.digirisk.request.send( element, data );
 	}
+
+  window.digirisk.request.send( element, data );
 };
 
 window.digirisk.action.exec_attribute = function(event) {
@@ -43,14 +38,12 @@ window.digirisk.action.exec_attribute = function(event) {
 		if ( jQuery( this ).data( 'confirm' ) ) {
 			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
 				element.get_data( function ( data ) {
-					element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 					window.digirisk.request.send( element, data );
 				} );
 			}
 		}
 		else {
 			element.get_data( function ( data ) {
-				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 				window.digirisk.request.send( element, data );
 			} );
 		}
@@ -64,7 +57,6 @@ window.digirisk.action.delete = function(event) {
   	if ( window.confirm( window.digi_confirm_delete ) ) {
 			element[0].setAttribute( 'disabled', true );
 	    element.get_data( function ( data ) {
-				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 	      window.digirisk.request.send( element, data );
 	    } );
 	  }

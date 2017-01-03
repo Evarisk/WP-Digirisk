@@ -1,31 +1,39 @@
-<?php namespace digi;
+<?php
 /**
-* Contient un bouton qui permet d'ouvrir le media upload de WordPress.
-* Si une image existe déjà, le bouton permet d'ouvrir la gallerie.
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package file_management
-* @subpackage view
-*/
+ * Contient un bouton qui permet d'ouvrir le media upload de WordPress.
+ * Si une image existe déjà, le bouton permet d'ouvrir la gallerie.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package file_management
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<span data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" data-title="<?php echo $title; ?>" data-object-name="<?php echo $type; ?>" data-action="<?php echo $action; ?>" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" class="wp-digi-element-thumbnail wp-digi-bloc-loader wpeo-upload-media" >
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<span data-id="<?php echo esc_attr( $id ); ?>"
+			data-type="<?php echo esc_attr( $type ); ?>"
+			data-title="<?php echo esc_attr( $title ); ?>"
+			data-object-name="<?php echo esc_attr( $type ); ?>"
+			data-action="<?php echo esc_attr( $action ); ?>"
+			data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>"
+			class="media <?php echo empty( $element->thumbnail_id ) ? esc_attr( 'no-file' ) : ''; ?>">
+
+	<i class="add animated fa fa-plus-circle"></i>
 	<?php
-  if ( !empty( $element ) && !empty( $element->thumbnail_id ) ):
-	   echo wp_get_attachment_image( $element->thumbnail_id, 'thumbnail', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail', )  );
-     echo do_shortcode( "[wpeo_gallery element_id='" . $element->id . "' action='" . $action . "' object_name='". $type . "' ]" );
-  else:
-    ?>
-		<?php echo $title; ?>
-		<i class="wpeo-upload-media dashicons dashicons-format-image" ></i>
-		<img src="#" class="hidden wp-post-image wp-digi-element-thumbnail" />
+	if ( ! empty( $element ) && ! empty( $element->thumbnail_id ) ) :
+		echo wp_get_attachment_image( $element->thumbnail_id, 'thumbnail', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail' ) );
+		echo do_shortcode( "[wpeo_gallery element_id='" . $element->id . "' action='" . $action . "' object_name='" . $type . "' ]" );
+	else :
+		?>
+		<i class="default-image fa fa-picture-o"></i>
 		<input class="input-file-image" type="hidden" name="associated_document_id[image][]" />
 		<input class="input-file-image" type="hidden" name="thumbnail_id" />
 		<?php
-  endif;
-  ?>
-	<div class="mask"><span class="dashicons dashicons-plus"></span></div>
+	endif;
+	?>
 </span>

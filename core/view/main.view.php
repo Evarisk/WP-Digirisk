@@ -177,7 +177,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </div>
 
-<div class="wp-digi-societytree-main-container wp-digi-bloc-loader" style="display: none;">
+<div class="digirisk-wrap" style="clear: both;">
 	<?php do_shortcode( '[digi_navigation]' ); ?>
 	<?php do_shortcode( '[digi_content]' ); ?>
 </div>
