@@ -2683,6 +2683,33 @@
           animation-name: downAndUp;
 }
 /**
+ * Search bar
+ */
+.search {
+  display: block;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 16px !important;
+}
+.search i {
+  color: rgba(0, 0, 0, 0.6);
+}
+.search input {
+  width: 90%;
+  border: 0;
+  margin: 0;
+  background: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.search input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.search input:hover {
+  cursor: text;
+}
+/**
  * Grid
  */
 .digirisk-wrap .grid-layout {
@@ -2703,6 +2730,15 @@
      -moz-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+.digirisk-wrap .grid-layout > * {
+  padding: 0 6px;
+}
+.digirisk-wrap .grid-layout > *:first-child {
+  padding-left: 0;
+}
+.digirisk-wrap .grid-layout > *:last-child {
+  padding-right: 0;
 }
 .digirisk-wrap .grid-layout.w1 > * {
   width: 100%;
@@ -3702,8 +3738,23 @@
 .digirisk-wrap .table .action .save .icon {
   color: #fff !important;
 }
+.digirisk-wrap .table .avatar {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  text-align: center;
+}
+.digirisk-wrap .table .avatar span {
+  line-height: 50px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+}
+.digirisk-wrap .table input.affect {
+  width: 50px;
+}
 .digirisk-wrap .table tfoot {
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgbsa(0, 0, 0, 0.05);
 }
 .digirisk-wrap .table td.w50,
 .digirisk-wrap .table th.w50 {
@@ -3735,6 +3786,12 @@
 .digirisk-wrap .table th.padding {
   padding-left: 8px;
   padding-right: 8px;
+}
+@media screen and (max-width: 1280px) {
+  .digirisk-wrap .table input[type="text"],
+  .digirisk-wrap .table textarea {
+    width: 100%;
+  }
 }
 /**
  * Propriétés générales

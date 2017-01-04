@@ -302,6 +302,88 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</tr>
 				</tfoot>
 			</table>
+
+			<h1>Evaluateurs</h1>
+			<div class="grid-layout w2">
+				<div>
+					<label class="search">
+						<i class="dashicons dashicons-search"></i>
+						<input type="text" placeholder="Ecrivez votre recherche ici..." />
+					</label>
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="padding">ID</th>
+								<th class="padding">Nom</th>
+								<th class="padding">Prénom</th>
+								<th>Date d'embauche</th>
+								<th><input type="text" class="affect" value="15" /></th>
+								<th>Affecter</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div class="avatar" style="background-color: #e05353;"><span>DD</span></div></td>
+								<td class="padding"><span><strong>U16</strong></span></td>
+								<td class="padding"><span>Dupont</span></td>
+								<td class="padding"><span>Jean</span></td>
+								<td><input type="text" value="04/01/2017" /></td>
+								<td><input type="text" class="affect" value="" /></td>
+								<td><input type="checkbox" /></td>
+							</tr>
+							<tr>
+								<td><div class="avatar" style="background-color: #e9ad4f;"><span>GG</span></div></td>
+								<td class="padding"><span><strong>U16</strong></span></td>
+								<td class="padding"><span>Dupont</span></td>
+								<td class="padding"><span>Jean</span></td>
+								<td><input type="text" value="04/01/2017" /></td>
+								<td><input type="text" class="affect" value="" /></td>
+								<td><input type="checkbox" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<label class="search">
+						<i class="dashicons dashicons-search"></i>
+						<input type="text" placeholder="Ecrivez votre recherche ici..." />
+					</label>
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="padding">ID</th>
+								<th class="padding">Nom</th>
+								<th class="padding">Prénom</th>
+								<th>Date d'embauche</th>
+								<th><input type="text" class="affect" value="15" /></th>
+								<th>Affecter</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div class="avatar" style="background-color: #e05353;"><span>DD</span></div></td>
+								<td class="padding"><span><strong>U16</strong></span></td>
+								<td class="padding"><span>Dupont</span></td>
+								<td class="padding"><span>Jean</span></td>
+								<td><input type="text" value="04/01/2017" /></td>
+								<td><input type="text" class="affect" value="" /></td>
+								<td><input type="checkbox" /></td>
+							</tr>
+							<tr>
+								<td><div class="avatar" style="background-color: #e9ad4f;"><span>GG</span></div></td>
+								<td class="padding"><span><strong>U16</strong></span></td>
+								<td class="padding"><span>Dupont</span></td>
+								<td class="padding"><span>Jean</span></td>
+								<td><input type="text" value="04/01/2017" /></td>
+								<td><input type="text" class="affect" value="" /></td>
+								<td><input type="checkbox" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 

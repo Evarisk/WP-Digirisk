@@ -204,8 +204,23 @@
 				}
 			}
 		}
+		.avatar {
+			width: 50px;
+			height: 50px;
+			min-width: 50px;
+			text-align: center;
+			span {
+				line-height: 50px;
+				color: #fff;
+				font-size: 16px;
+				font-weight: 300;
+			}
+		}
+		input.affect {
+			width: 50px;
+		}
 		tfoot {
-			border-top: 1px solid rgba(0,0,0,0.05);
+			border-top: 1px solid rgbsa(0,0,0,0.05);
 		}
 
 		td.w50, th.w50 {
@@ -229,6 +244,14 @@
 		td.padding, th.padding {
 			padding-left: 8px;
 			padding-right: 8px;
+		}
+	}
+
+	@media screen and (max-width: 1280px) {
+		.table {
+			input[type="text"], textarea {
+				width: 100%;
+			}
 		}
 	}
 
