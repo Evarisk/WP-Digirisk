@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="categorie-container toggle grid padding">
+<div class="categorie-container toggle grid padding" data-parent="categorie-container" data-target="content">
 
 	<div class="action">
 		<span>Choisir un risque</span>

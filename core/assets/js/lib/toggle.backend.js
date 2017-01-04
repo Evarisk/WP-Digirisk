@@ -26,6 +26,6 @@ window.digirisk.toggle.open = function( event ) {
 };
 
 window.digirisk.toggle.close = function( event ) {
-	jQuery( '.digi-toggle' ).removeClass( 'active' );
+	jQuery( '.toggle .content' ).removeClass( 'active' );
 	event.stopPropagation();
 };

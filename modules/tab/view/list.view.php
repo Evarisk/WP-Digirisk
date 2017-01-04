@@ -31,9 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $list_tab_more ) ) :
 		?>
-		<li class="tab-element toggle option" data-target="digi-toggle-more">
+		<li class="tab-element toggle option" data-parent="toggle" data-target="content">
 			<i class="action fa fa-ellipsis-v toggle"></i>
-			<ul class="content digi-toggle digi-toggle-more">
+			<ul class="content">
 				<?php
 				foreach ( $list_tab_more as $key => $element ) :
 					?><li
