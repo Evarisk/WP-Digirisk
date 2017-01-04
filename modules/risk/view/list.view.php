@@ -12,13 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-?>
-
-<table class="table">
+<table class="table risk">
 	<thead>
 		<tr>
 			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>

@@ -14,10 +14,13 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="categorie-container toggle grid padding" data-parent="categorie-container" data-target="content">
+<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='<?php echo $first_danger->id; ?>' />
+
+<div class="danger categorie-container toggle grid padding" data-parent="categorie-container" data-target="content">
 
 	<div class="action">
-		<span>Choisir un risque</span>
+		<span><?php esc_html_e( 'Choisir un danger', 'digirisk' ); ?></span>
+		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir un danger', 'digirisk' ); ?>" />
 		<i class="icon animated fa fa-angle-down"></i>
 	</div>
 

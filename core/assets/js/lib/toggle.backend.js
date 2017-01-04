@@ -12,6 +12,8 @@ window.digirisk.toggle.event = function() {
 window.digirisk.toggle.open = function( event ) {
 	var target = undefined;
 
+	jQuery( '.toggle .content.active' ).removeClass( 'active' );
+
 	// Récupères la box de destination mis dans l'attribut du toggle
 	if ( jQuery( this ).data( 'parent' ) ) {
 		target = jQuery( this ).closest( '.' + jQuery( this ).data( 'parent' ) ).find( '.' + jQuery( this ).data( 'target' ) );

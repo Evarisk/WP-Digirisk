@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 	data-action="load_society"
 	data-id="<?php echo esc_attr( $element->id ); ?>"
-	class="<?php echo ! isset( $editable_identity ) ? 'action-attribute' : ''; ?>">
+	class="<?php echo ! isset( $editable_identity ) ? 'action-attribute' : ''; ?> title">
 	<strong><?php echo esc_html( $element->unique_identifier ); ?> -</strong>
 
 	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>

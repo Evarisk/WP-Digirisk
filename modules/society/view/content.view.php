@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
 		<div
-				class="button green action-input"
+				class="button green action-input save"
 				data-parent="unit-header"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_update_group_' . $element->id ) ); ?>"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></div>
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_update_group_' . $element->id ) ); ?>"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 	</div>
 	<div class="dut button red uppercase"><i class="icon fa fa-download"></i><span>Télécharger le document unique</span></div>
 </div>

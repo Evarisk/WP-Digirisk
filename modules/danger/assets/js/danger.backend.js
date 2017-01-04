@@ -5,13 +5,17 @@ window.digirisk.danger.init = function() {
 };
 
 window.digirisk.danger.event = function() {
-	jQuery( document ).on( 'click', '.wp-digi-risk .wp-digi-select-list li', window.digirisk.danger.select_danger );
+	jQuery( document ).on( 'click', '.table.risk .categorie-container.danger .item', window.digirisk.danger.select_danger );
 };
 
 window.digirisk.danger.select_danger = function( event ) {
 	var element = jQuery( this );
-	jQuery( '.wp-digi-risk input.input-hidden-danger' ).val( element.data( 'id' ) );
-	jQuery( '.wp-digi-risk toggle span img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
-	jQuery( '.wp-digi-risk toggle span img' ).attr( 'srcset', "" );
-	jQuery( '.wp-digi-risk toggle span img' ).attr( 'sizes', "" );
+	element.closest( '.content' ).removeClass( 'active' );
+	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
+	element.closest( 'tr' ).find( '.action span' ).hide();
+	element.closest( 'tr' ).find( '.action img' ).show();
+	element.closest( 'tr' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( 'tr' ).find( '.action img' ).attr( 'srcset', '' );
+	element.closest( 'tr' ).find( '.action img' ).attr( 'sizes', '' );
+	event.stopPropagation();
 };

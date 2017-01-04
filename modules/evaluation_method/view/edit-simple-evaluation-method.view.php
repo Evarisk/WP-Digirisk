@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <input type="hidden" class="input-hidden-method-id" name="risk[taxonomy][digi-method][]" value="<?php echo esc_attr( $digi_method_id ); ?>" />
 <input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo esc_attr( $risk->evaluation->scale ); ?>" />
 
-<div class="cotation-container toggle grid">
+<div class="cotation-container toggle grid" data-parent="toggle" data-target="content">
 	<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
 	<ul class="content">
 		<li class="item cotation level1"><span>0</span></li>
