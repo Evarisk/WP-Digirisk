@@ -12,6 +12,7 @@ window.digirisk.action.event = function() {
 
 window.digirisk.action.exec_input = function( event ) {
   var element = jQuery( this );
+	var key = undefined;
 	var parent_element = element;
 
 	if ( element.data( 'parent' ) ) {
@@ -26,7 +27,13 @@ window.digirisk.action.exec_input = function( event ) {
 		}
 	}
 
-  window.digirisk.request.send( element, data );
+	element.get_data( function( attrData ) {
+		for ( key in attrData ) {
+			data[key] = attrData[key];
+		}
+
+		window.digirisk.request.send( element, data );
+	} );
 };
 
 window.digirisk.action.exec_attribute = function(event) {

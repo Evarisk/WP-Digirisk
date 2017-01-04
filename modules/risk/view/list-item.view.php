@@ -40,7 +40,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk_' . $risk->id ) ); ?>"
 						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
 
-			<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
+			<div 	class="button w50 delete action-delete"
+						data-id="<?php echo esc_attr( $risk->id ); ?>"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk_' . $risk->id ) ); ?>"
+						data-action="delete_risk"><i class="icon fa fa-times"></i></div>
 		</div>
 	</td>
 </tr>

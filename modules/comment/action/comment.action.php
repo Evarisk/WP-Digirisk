@@ -1,51 +1,89 @@
-<?php namespace digi;
+<?php
 /**
-* @TODO : A détailler
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package risk
-* @subpackage action
-*/
+ * Gestion des actions dans les commentaires
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage action
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class comment_action {
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Gestion des actions dans les commentaires
+ */
+class Comment_Action {
+
 	/**
-	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
-	*/
+	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.3.0
+	 */
 	public function __construct() {
+		add_action( 'wp_ajax_save_comment', array( $this, 'callback_save_comment' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 	}
 
 	/**
-  * Enregistres le commentaire d'une evaluation d'un risque
-  * Ce callback est hoocké après wp_ajax_save_risk de risk_save_action
-  *
-  * string $_POST['comment_date'] La date du commentaire
-  * string $_POST['comment_content'] Le contenu du commentaire
-	*
-  * @param array $_POST Les données envoyées par le formulaire
-  */
- 	public function callback_delete_comment() {
-		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
-		else
-			$id = (int)$_POST['id'];
+	 * Sauvegardes un commentaire
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.3.0
+	 */
+	public function callback_save_comment() {
+		check_ajax_referer( 'save_comment' );
 
-		$comment = comment_class::g()->get( array( 'id' => $id ) );
+		$comment = array(
+			'post_id' => (int) $_POST['list_comment'][0]['post_id'],
+			'author_id' => (int) $_POST['list_comment'][0]['author_id'],
+			'date' => sanitize_text_field( $_POST['list_comment'][0]['date'] ),
+			'content' => sanitize_text_field( $_POST['list_comment'][0]['content'] ),
+		);
+
+		Risk_Evaluation_Comment_Class::g()->update( $comment );
+
+		wp_send_json_success( array( 'module' => 'comment', 'callback_success' => 'saved_comment_success' ) );
+	}
+
+	/**
+	 * Supprimes un commentaire en le passant au status -34071 au lieu de -34072
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.3.0
+	 */
+	public function callback_delete_comment() {
+		check_ajax_referer( 'ajax_delete_comment_' . $_POST['id'] );
+
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error();
+		} else {
+			$id = (int) $_POST['id'];
+		}
+
+		$comment = Comment_Class::g()->get( array( 'id' => $id ) );
 		$comment = $comment[0];
 
-		if ( empty( $comment ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+		if ( empty( $comment ) ) {
+			wp_send_json_error();
+		}
 
 		$comment->status = '-34071';
 
-		comment_class::g()->update( $comment );
+		Comment_Class::g()->update( $comment );
 
 		wp_send_json_success( array( 'module' => 'comment', 'callback_success' => 'delete_success' ) );
 	}
 }
 
-new comment_action();
+new Comment_Action();

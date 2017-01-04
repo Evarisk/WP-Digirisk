@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class risk_evaluation_comment_class extends comment_class {
+class Risk_Evaluation_Comment_Class extends comment_class {
 
 	protected $model_name   = '\digi\risk_evaluation_comment_model';
 	protected $meta_key     = '_wpdigi_risk_evaluation_comment';
@@ -17,4 +17,4 @@ class risk_evaluation_comment_class extends comment_class {
 
 }
 
-risk_evaluation_comment_class::g();
+Risk_Evaluation_Comment_Class::g();

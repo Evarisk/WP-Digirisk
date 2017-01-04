@@ -22,4 +22,4 @@ class Risk_Evaluation_Class extends Comment_Class {
 
 }
 
-risk_evaluation_class::g();
+Risk_Evaluation_Class::g();
