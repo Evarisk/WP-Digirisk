@@ -1,30 +1,32 @@
-<?php namespace digi;
+<?php
 /**
-* Affiches le toggle pour sélectionner une cotation avec la méthode simple de digirisk
-* Ajoutes également un bouton qui permet d'évaluer avec la méthode complexe de digirisk
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package method_evaluation
-* @subpackage view
-*/
+ * Affiches le toggle pour sélectionner une cotation avec la méthode simple de digirisk
+ * Ajoutes également un bouton qui permet d'évaluer avec la méthode complexe de digirisk
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package method_evaluation
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<input type="hidden" class="digi-method-simple" value="<?php echo $term_evarisk_simple->term_id; ?>" />
-<input type="hidden" class="input-hidden-method-id" name="risk[taxonomy][digi-method][]" value="<?php echo $digi_method_id; ?>" />
-<input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo $risk->evaluation->scale; ?>" />
 
-<toggle data-target="<?php echo $target; ?>" data-parent="wp-digi-risk-item" class="<?php echo $class; ?> digi-toggle wp-digi-risk-list-column-cotation" >
-	<div class="wp-digi-risk-level wp-digi-risk-level-<?php echo $risk->evaluation->scale; ?> wp-digi-risk-level-new"><?php echo $risk->id !== 0 ? $risk->evaluation->risk_level['equivalence'] : '0'; ?></div>
-	<ul class="wp-digi-risk-cotation-chooser digi-popup <?php echo ( $risk->id !== 0 ) ? 'simple': ''; ?>" style="display: none;" >
-		<li data-level="1" class="level-chooser wp-digi-risk-level-1" >0</li>
-		<li data-level="2" class="level-chooser wp-digi-risk-level-2" >48</li>
-		<li data-level="3" class="level-chooser wp-digi-risk-level-3" >51</li>
-		<li data-level="4" class="level-chooser wp-digi-risk-level-4" >80</li>
-		<?php if ( $risk->id === 0 ): ?>
-		    <li class="open-method-evaluation-render"><span class="dashicons dashicons-admin-generic open-popup" data-parent="wp-digi-risk-item" data-target="wpdigi-method-evaluation-render"></span></li>
-    <?php endif; ?>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<input type="hidden" class="digi-method-simple" value="<?php echo esc_attr( $term_evarisk_simple->term_id ); ?>" />
+<input type="hidden" class="input-hidden-method-id" name="risk[taxonomy][digi-method][]" value="<?php echo esc_attr( $digi_method_id ); ?>" />
+<input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo esc_attr( $risk->evaluation->scale ); ?>" />
+
+<div class="cotation-container toggle grid">
+	<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
+	<ul class="content">
+		<li class="item cotation level1"><span>0</span></li>
+		<li class="item cotation level2"><span>48</span></li>
+		<li class="item cotation level3"><span>51</span></li>
+		<li class="item cotation level4"><span>80</span></li>
+		<li class="item cotation method"><i class="icon fa fa-cog"></i></li>
 	</ul>
-</toggle>
+</div>

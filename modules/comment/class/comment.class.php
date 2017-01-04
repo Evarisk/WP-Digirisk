@@ -28,7 +28,7 @@ class Digi_Comment_Class extends Singleton_Util {
 	/**
 	 * [display description]
 	 *
-	 * @param  [type] $param [description].
+	 * @param  array $param  Les arguments du shortcode.
 	 * @return [type]        [description]
 	 */
 	public function display( $param ) {

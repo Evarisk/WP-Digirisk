@@ -1,9 +1,13 @@
 <?php
 /**
- * Affiches le titre du l'unique identifiant et le titre de la societé
- * Appelle le template pour afficher la liste des risques
+ * Affiches le titre de l'onglet risque et appelle la vue list.view du module risk
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage view
  */
 
 namespace digi;
@@ -13,6 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<h2><?php echo esc_html( 'Les risques de ' . $society->unique_identifier . ' - ' . $society->title ); ?></h2>
+<h1><?php echo esc_html( 'Les risques de ' . $society->unique_identifier . ' - ' . $society->title ); ?></h1>
 
-<?php view_util::exec( 'risk', 'list', array( 'society' => $society, 'risks' => $society->list_risk, 'risk_schema' => $risk_schema ) ); ?>
+<?php view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) ); ?>

@@ -39,8 +39,8 @@ class Group_Filter {
 		$tab_list['digi-group']['more']['delete'] = array(
 			'text' => __( 'Supprimer', 'digirisk' ),
 			'class' => 'action-delete',
-			'attributes' => 'data-action="delete_group" data-id="' . $id . '"',
-			'nonce' => wp_create_nonce( 'delete_group' ),
+			'attributes' => 'data-action=delete_society data-id=' . $id . '',
+			'nonce' => wp_create_nonce( 'delete_society' ),
 		);
 
 		return $tab_list;

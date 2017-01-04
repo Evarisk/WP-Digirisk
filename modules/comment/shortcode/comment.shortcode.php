@@ -3,8 +3,9 @@
  * Aoutes un shortcode permettant d'afficher un commentaire d'un post n'importe ou.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
+ * @since 6.2.1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage shortcode
  */
