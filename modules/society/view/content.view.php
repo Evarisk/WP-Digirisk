@@ -28,4 +28,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 </div>
 
 <?php echo do_shortcode( '[digi_tab id="' . $element->id . '" type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
-<?php apply_filters( 'wpdigi_establishment_tab_content', '', $element->id, $tab_to_display ); ?>
+<?php apply_filters( 'tab_content', '', $element->id, $tab_to_display ); ?>

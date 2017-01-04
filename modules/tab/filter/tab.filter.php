@@ -23,7 +23,7 @@ class Tab_Filter {
 	 * Le constructeur
 	 */
 	public function __construct() {
-		add_filter( 'wpdigi_establishment_tab_content', array( $this, 'callback_tab_content' ), 10, 3 );
+		add_filter( 'tab_content', array( $this, 'callback_tab_content' ), 10, 3 );
 	}
 
 	/**
