@@ -2924,6 +2924,14 @@
 .digirisk-wrap .main-header .title {
   width: 100%;
 }
+.digirisk-wrap .main-header .title input {
+  background: none;
+  border: 0;
+  color: #fff;
+}
+.digirisk-wrap .main-header .title input:focus {
+  background: rgba(0, 0, 0, 0.2);
+}
 .digirisk-wrap .main-header .title,
 .digirisk-wrap .main-header .dut {
   white-space: nowrap;
@@ -2934,7 +2942,8 @@
 .digirisk-wrap .main-header .media {
   background: #1e2129;
 }
-.digirisk-wrap .main-header .dut {
+.digirisk-wrap .main-header .dut,
+.digirisk-wrap .main-header .save {
   margin-left: auto;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2949,7 +2958,9 @@
   height: 50px;
 }
 .digirisk-wrap .main-header .dut span,
-.digirisk-wrap .main-header .dut .icon {
+.digirisk-wrap .main-header .save span,
+.digirisk-wrap .main-header .dut .icon,
+.digirisk-wrap .main-header .save .icon {
   margin-top: auto;
   margin-bottom: auto;
 }

@@ -28,6 +28,14 @@
 		height: 50px;
 		.title {
 			width: 100%;
+			input {
+				background: none;
+				border: 0;
+				color: #fff;
+				&:focus {
+					background: rgba(0,0,0,0.2);
+				}
+			}
 		}
 		.title, .dut {
 			white-space: nowrap;
@@ -37,7 +45,7 @@
 		.media {
 			background: darken(@b, 4%);
 		}
-		.dut {
+		.dut, .save {
 			margin-left: auto;
 			display: flex;
 			flex: 0 1 auto;
