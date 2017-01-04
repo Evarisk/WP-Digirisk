@@ -21,12 +21,17 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo esc_attr( $risk->evaluation->scale ); ?>" />
 
 <div class="cotation-container toggle grid" data-parent="toggle" data-target="content">
-	<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
+
+	<div class="action cotation default-cotation level<?php echo esc_attr( $risk->evaluation->scale ); ?>">
+		<i class="icon fa fa-line-chart" style="<?php echo ( 0 !== $risk->evaluation->scale ) ? 'display: none;': ''; ?>"></i>
+		<span><?php echo esc_html( $risk->evaluation->risk_level['equivalence'] ); ?></span>
+	</div>
+
 	<ul class="content">
-		<li class="item cotation level1"><span>0</span></li>
-		<li class="item cotation level2"><span>48</span></li>
-		<li class="item cotation level3"><span>51</span></li>
-		<li class="item cotation level4"><span>80</span></li>
-		<li class="item cotation method"><i class="icon fa fa-cog"></i></li>
+		<li data-level="1" class="item cotation level1"><span>0</span></li>
+		<li data-level="2" class="item cotation level2"><span>48</span></li>
+		<li data-level="3" class="item cotation level3"><span>51</span></li>
+		<li data-level="4" class="item cotation level4"><span>80</span></li>
+		<li class="item cotation method open-popup"><i class="icon fa fa-cog"></i></li>
 	</ul>
 </div>

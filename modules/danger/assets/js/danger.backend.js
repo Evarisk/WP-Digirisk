@@ -12,10 +12,10 @@ window.digirisk.danger.select_danger = function( event ) {
 	var element = jQuery( this );
 	element.closest( '.content' ).removeClass( 'active' );
 	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
-	element.closest( 'tr' ).find( '.action span' ).hide();
-	element.closest( 'tr' ).find( '.action img' ).show();
-	element.closest( 'tr' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
-	element.closest( 'tr' ).find( '.action img' ).attr( 'srcset', '' );
-	element.closest( 'tr' ).find( '.action img' ).attr( 'sizes', '' );
+	element.closest( '.toggle' ).find( '.action span' ).hide();
+	element.closest( '.toggle' ).find( '.action img' ).show();
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
 	event.stopPropagation();
 };

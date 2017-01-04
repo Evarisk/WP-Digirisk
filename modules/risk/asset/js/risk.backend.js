@@ -7,7 +7,7 @@ window.digirisk.risk.delete_success = function( element, response ) {
 }
 
 window.digirisk.risk.load_success = function( element, response ) {
-  element.closest( 'li' ).replaceWith( response.data.template );
+  element.closest( 'tr' ).replaceWith( response.data.template );
 	window.digirisk.date.init();
 }
 

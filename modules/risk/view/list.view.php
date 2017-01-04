@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<thead>
 		<tr>
 			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
+			<th class="wm130"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Quot', 'digirisk' ); ?>.</th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
@@ -27,6 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	</thead>
 
 	<tbody>
+		<?php if ( ! empty( $risks ) ) :
+			foreach ( $risks as $element ) :
+				View_Util::exec( 'risk', 'list-item', array( 'society_id' => $society_id, 'risk' => $element ) );
+			endforeach;
+		endif; ?>
 	</tbody>
 
 	<tfoot>

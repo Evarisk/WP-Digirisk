@@ -5,7 +5,7 @@ window.digirisk.toggle.init = function() {
 };
 
 window.digirisk.toggle.event = function() {
-	jQuery( document ).on( 'click', '.toggle', window.digirisk.toggle.open );
+	jQuery( document ).on( 'click', '.toggle:not(.disabled)', window.digirisk.toggle.open );
 	jQuery( document ).on( 'click', 'body', window.digirisk.toggle.close );
 };
 

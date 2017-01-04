@@ -31,6 +31,9 @@ class Digi_Comment_Shortcode {
 	 *
 	 * @param  array $param  Les paramètres du shortcode.
 	 * @return void
+	 *
+	 * @since 6.2.1.0
+	 * @version 6.2.3.0
 	 */
 	public function callback_digi_comment( $param ) {
 		Digi_Comment_Class::g()->display( $param );

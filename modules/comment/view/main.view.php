@@ -15,5 +15,11 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <ul class="comment-container">
-	<?php View_Util::exec( 'comment', 'item-edit', array( 'comment' => $comment_new ) ); ?>
+	<?php View_Util::exec( 'comment', 'list', array( 'id' => $id, 'comment_new' => $comment_new, 'comments' => $comments, 'display' => $display, 'type' => $type ) ); ?>
+
+	<?php
+	if ( 'edit' === $display ) :
+		View_Util::exec( 'comment', 'item-edit', array( 'id' => $id, 'comment' => $comment_new ) );
+	endif;
+	?>
 </ul>
