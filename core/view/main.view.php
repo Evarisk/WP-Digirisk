@@ -382,6 +382,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</tr>
 						</tbody>
 					</table>
+					<div class="button green uppercase strong float right margin"><span>Mettre à jour</span></div>
 				</div>
 			</div>
 		</div>
