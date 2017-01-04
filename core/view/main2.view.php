@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="digirisk-wrap" style="clear: both;">
 
-	<div class="popup">
+	<div class="popup active">
 		<div class="container">
 			<div class="header">
 				<h2 class="title">Titre de la popup</h2>
