@@ -147,7 +147,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</ul>
 						</td>
 						<td>
-							<div class="action grid w3">
+							<div class="action grid-layout w3">
 								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
 								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
 								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
@@ -197,7 +197,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</ul>
 						</td>
 						<td>
-							<div class="action grid w3">
+							<div class="action grid-layout w3">
 								<div class="button w50 green save"><i class="icon fa fa-floppy-o"></i></div>
 							</div>
 						</td>
@@ -232,7 +232,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</ul>
 						</td>
 						<td>
-							<div class="action grid w3">
+							<div class="action grid-layout w3">
 								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
 								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
 								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
@@ -245,7 +245,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tfoot>
 					<tr>
 						<td class="padding"></td>
-						<td>
+						<td class="wm130">
 							<div class="categorie-container toggle grid padding">
 								<div class="action"><span>Choisir un risque</span><i class="icon animated fa fa-angle-down"></i></div>
 								<ul class="content">
