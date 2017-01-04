@@ -23,7 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			if ( 'digi-' . $key === $display ) {
 				$class = 'active';
 			}
-			?><li class="tab-element" data-action="digi-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $element['text'] ); ?></li><?php
+			?>
+			<li class="tab-element" data-action="digi-<?php echo esc_attr( $key ); ?>">
+				<span><?php echo esc_html( $element['text'] ); ?></span>
+			</li>
+			<?php
 		endforeach;
 	endif; ?>
 

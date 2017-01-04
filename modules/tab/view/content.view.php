@@ -15,5 +15,6 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="main-content">
+	<h1><?php echo esc_html( $title ); ?></h1>
 	<?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element_id . '" ]' ); ?>
 </div>

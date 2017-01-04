@@ -51,7 +51,9 @@ class Comment_Action {
 
 		Risk_Evaluation_Comment_Class::g()->update( $comment );
 
-		wp_send_json_success( array( 'module' => 'comment', 'callback_success' => 'saved_comment_success' ) );
+		ob_start();
+		do_shortcode( '[digi_comment id="' . (int) $_POST['list_comment'][0]['post_id'] . '" type="risk_evaluation_comment" display="edit"]' );
+		wp_send_json_success( array( 'view' => ob_get_clean(), 'module' => 'comment', 'callback_success' => 'saved_comment_success' ) );
 	}
 
 	/**

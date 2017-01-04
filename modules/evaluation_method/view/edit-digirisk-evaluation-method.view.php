@@ -23,8 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <div class="cotation-container toggle grid" data-parent="toggle" data-target="content">
 
 	<div class="action cotation default-cotation level<?php echo esc_attr( $risk->evaluation->scale ); ?>">
-		<i class="icon fa fa-line-chart" style="<?php echo ( 0 !== $risk->evaluation->scale ) ? 'display: none;': ''; ?>"></i>
-		<span><?php echo esc_html( $risk->evaluation->risk_level['equivalence'] ); ?></span>
+		<i class="icon fa fa-line-chart" style="<?php echo ( 0 !== $risk->evaluation->id ) ? 'display: none;': ''; ?>"></i>
+		<span>
+			<?php if ( 0 !== $risk->evaluation->id ) :
+				echo esc_html( $risk->evaluation->risk_level['equivalence'] );
+			endif ?>
+		</span>
 	</div>
 
 	<ul class="content">
