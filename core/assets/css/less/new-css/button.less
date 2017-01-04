@@ -10,6 +10,9 @@
  * .w50 -> bouton carré 50px
  * .w60 -> bouton carré 60px
  * .w80 -> bouton carré 80px
+ * .float.right -> float right
+ * .float.left -> float left
+ * .margin -> margin haut et bas sur le bouton
  */
 .digirisk-wrap {
 
@@ -19,7 +22,7 @@
 		box-shadow: none;
 		background: none;
 		color: #fff;
-		padding: 6px 14px;
+		padding: 6px 14px !important;
 		vertical-align: middle;
 		height: auto;
 		border-radius: 0;
@@ -116,6 +119,16 @@
 			> * {
 				margin: auto;
 			}
+		}
+		&.float.left {
+			float: left;
+		}
+		&.float.right {
+			float: right;
+		}
+		&.margin {
+			margin-top: 8px;
+			margin-bottom: 8px;
 		}
 	}
 
