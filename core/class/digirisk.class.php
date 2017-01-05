@@ -32,7 +32,7 @@ class Digirisk_Class extends Singleton_Util {
 	 * @return void
 	 */
 	public function display() {
-		require( PLUGIN_DIGIRISK_PATH . '/core/view/main2.view.php' );
+		require( PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php' );
 	}
 }
 

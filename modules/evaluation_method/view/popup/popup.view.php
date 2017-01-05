@@ -1,33 +1,43 @@
-<?php namespace digi;
+<?php
 /**
-* La popup qui contient les données de l'évaluation complexe de digirisk
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage view
-*/
+ * La popup qui contient les données de l'évaluation complexe de digirisk
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluation_method
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<div class="wpdigi-method-evaluation-render digi-popup hidden">
-  <!-- Utile pour retenir la méthode d'evaluation utilisée -->
-  <input type="hidden" class="digi-method-evaluation-id" value="<?php echo !empty( $term_evarisk->term_id ) ? $term_evarisk->term_id : 0; ?>" />
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-  <section class="wp-digi-eval-evarisk">
-    <div class="digi-popup-propagation wp-digi-bloc-loader">
-			<a href="#" class="close"><i class="dashicons dashicons-no-alt"></i></a>
-			<div class="wp-digi-eval-table">
-				<?php if ( !empty( $list_evaluation_method_variable ) ): ?>
-					<?php view_util::exec( 'evaluation_method', 'popup/header', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) ); ?>
+<div class="popup active popup-evaluation">
+	<div class="container">
+		<div class="header">
+			<h2 class="title"><?php echo esc_html_e( 'Édition de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></h2>
+			<i class="close fa fa-times"></i>
+		</div>
+		<div class="content">
 
-					<?php for( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ): ?>
-						<?php view_util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) ); ?>
-					<?php endfor; ?>
-				<?php endif;?>
-				<button type="button" data-nonce="<?php echo wp_create_nonce( 'get_scale' ); ?>" class="float right wp-digi-bton-fourth"><?php _e( 'Evaluate risk', 'digirisk' ); ?></button>
-			</div>
-    </div>
-  </section>
+			<input type="hidden" class="digi-method-evaluation-id" value="<?php echo esc_attr( ! empty( $term_evarisk->term_id ) ? $term_evarisk->term_id : 0 ); ?>" />
+
+			<table class="table evaluation">
+				<thead>
+					<tr>
+						<td></td>
+						<?php View_Util::exec( 'evaluation_method', 'popup/header', array( 'list_evaluation_method_variable' => $list_evaluation_method_variable ) ); ?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php for ( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ) :
+						View_Util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) );
+					endfor; ?>
+				</tbody>
+			</table>
+			<div data-nonce="<?php echo esc_attr( wp_create_nonce( 'get_scale' ) ); ?>" class="button green margin uppercase strong float right"><span>Enregistrer la cotation</span></div>
+		</div>
+	</div>
 </div>

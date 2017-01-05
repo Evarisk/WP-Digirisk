@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $risk->id ); ?>" />
 
 	<td class="padding">
+		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
+
 		<span><strong><?php echo esc_html( $risk->unique_identifier ); ?></span></strong>
 	</td>
 	<td>

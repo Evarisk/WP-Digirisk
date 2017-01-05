@@ -17,7 +17,7 @@ window.digirisk.popup.open = function( event ) {
 	var triggered_element = jQuery( this );
   // Récupères la box de destination mis dans l'attribut du popup
   var target = triggered_element.closest(  "." + triggered_element.data( 'parent' ) ).find( "." + triggered_element.data( 'target' ) );
-	target.toggle();
+	target.addClass( 'active' );
 
 	if ( target.is( ":visible" ) && triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
 		var callback_object = triggered_element.data( 'cb-object' );
@@ -77,8 +77,6 @@ window.digirisk.popup.stop = function( event ) {
 };
 
 window.digirisk.popup.close = function( event ) {
-  jQuery( '.popup:not(.no-close)' ).hide();
-  jQuery( '.digi-popup:not(.no-close)' ).hide();
-
-	jQuery( '.popup:not(.no-close) .content' ).html( window.digi_loader );
+  jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
+  jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
 };

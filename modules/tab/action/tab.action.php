@@ -37,7 +37,7 @@ class Tab_Action {
 		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
 		ob_start();
-		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ) );
+		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }

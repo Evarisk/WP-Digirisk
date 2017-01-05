@@ -1,34 +1,27 @@
-<?php namespace digi;
+<?php
 /**
-* La ligne des valeurs des variables de l'évaluation complexe de digirisk
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage view
-*/
+ * La ligne des valeurs des variables de l'évaluation complexe de digirisk
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluation_method
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<ul class="row">
-  <li><?php echo $i; ?></li>
-  <?php for ( $x = 0; $x < count( $list_evaluation_method_variable ); $x++ ): ?>
-    <?php
-    $active = '';
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-    if ( !empty( $risk->evaluation ) && !empty( $risk->evaluation->quotation_detail ) ):
-      foreach( $risk->evaluation->quotation_detail as $detail ) {
-				if ( !empty( $detail['variable_id'] ) ) {
-	        if( $detail['variable_id'] == $list_evaluation_method_variable[$x]->id && $detail['value'] == $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] )
-	          $active = 'active';
-				}
-      }
-    endif;
-    ?>
+<tr>
+	<td class="padding"><?php echo esc_html( $i ); ?></td>
+	<?php $variables_number = count( $list_evaluation_method_variable ); ?>
+	<?php for ( $x = 0; $x < $variables_number; $x++ ) : ?>
+		<td data-variable-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->id ); ?>"
+				data-seuil-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->survey['request'][ $i ]['seuil'] ); ?>">
+				<?php echo esc_html( ! empty( $list_evaluation_method_variable[ $x ]->survey['request'][ $i ] ) ? $list_evaluation_method_variable[ $x ]->survey['request'][ $i ]['question'] : '' ); ?>
+			</td>
+	<?php endfor; ?>
 
-    <li data-variable-id="<?php echo $list_evaluation_method_variable[$x]->id; ?>" data-seuil-id="<?php echo $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil'] == null ? 'undefined' : $list_evaluation_method_variable[$x]->survey['request'][$i]['seuil']; ?>" class="cell <?php echo $active; ?>">
-      <?php echo !empty( $list_evaluation_method_variable[$x]->survey['request'][$i] ) ? $list_evaluation_method_variable[$x]->survey['request'][$i]['question'] : ''; ?>
-    </li>
-  <?php endfor; ?>
-</ul>
+</tr>

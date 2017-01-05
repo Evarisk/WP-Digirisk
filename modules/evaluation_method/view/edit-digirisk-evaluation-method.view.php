@@ -13,7 +13,6 @@
 
 namespace digi;
 
-
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <input type="hidden" class="digi-method-simple" value="<?php echo esc_attr( $term_evarisk_simple->term_id ); ?>" />
@@ -36,6 +35,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li data-level="2" class="item cotation level2"><span>48</span></li>
 		<li data-level="3" class="item cotation level3"><span>51</span></li>
 		<li data-level="4" class="item cotation level4"><span>80</span></li>
-		<li class="item cotation method open-popup"><i class="icon fa fa-cog"></i></li>
+		<li class="item cotation method open-popup" data-parent="main-content" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
 	</ul>
 </div>
