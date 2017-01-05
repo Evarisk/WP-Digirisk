@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<i class="close fa fa-times"></i>
 			</div>
 			<div class="content">
-				<table class="table method">
+				<table class="table evaluation">
 					<thead>
 						<tr>
 							<th></th><th>Gravité</th><th>Exposition</th><th>Occurence</th><th>Formation</th><th>Protection</th>
@@ -32,8 +32,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</thead>
 					<tbody>
 						<tr>
-							<td>0</td>
-							<td>Pas de blessures possibles</td>
+							<td class="padding">0</td>
+							<td class="active">Pas de blessures possibles</td>
 							<td>Jamais en contact</td>
 							<td></td>
 							<td></td>

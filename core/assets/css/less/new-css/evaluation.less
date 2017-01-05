@@ -4,7 +4,48 @@
 .digirisk-wrap {
 
 	.evaluation {
-		
+		th, td {
+			border: 1px solid rgba(0,0,0,0.1);
+			text-align: center;
+		}
+		tbody {
+			tr {
+				&:nth-of-type(even) {
+					background: #fff;
+				}
+				td:nth-of-type(odd) {
+					background: rgba(0,0,0,0.1);
+				}
+				td:nth-of-type(even) {
+					background: #fff;
+				}
+				td:first-child {
+					background: #3e4851;
+					color: #fff;
+					font-weight: 600;
+				}
+			}
+			td {
+				transition: all 0.2s ease-out;
+				&:hover {
+					cursor: pointer;
+					&:nth-of-type(odd) {
+						background: rgba(0,0,0,0.2);
+					}
+					&:nth-of-type(even) {
+						background: rgba(0,0,0,0.1);
+					}
+					&:first-child {
+						background: #3e4851;
+						cursor: auto;
+					}
+				}
+				&.active {
+					background: @a !important;
+					color: #fff;
+				}
+			}
+		}
 	}
 
 }
