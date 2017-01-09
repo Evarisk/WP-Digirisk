@@ -1,33 +1,91 @@
-<?php namespace digi;
+<?php
+/**
+ * Classe gérant les évaluateurs
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluator
+ * @subpackage class
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluator_class extends user_class {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Classe gérant les évaluateurs
+ */
+class Evaluator_Class extends User_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name 	= '\digi\user_digi_model';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key		= '_wpeo_user_info';
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
 
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base 	= 'digirisk/evaluator';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version 	= '0.1';
 
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'U';
+
+	/**
+	 * La limite des risques a afficher par page
+	 *
+	 * @var integer
+	 */
 	public $limit_evaluator = 5;
 
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 */
 	protected function construct() {
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**
-	* Fait le rendu des evaluateurs
-	*
-	* @param object element L'objet parent
-	*/
+	 * Fait le rendu des evaluateurs
+	 *
+	 * @param Group_Model $element L'objet parent.
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function render( $element ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page = !empty( $_POST['next_page'] ) ? (int)$_POST['next_page'] : 1;
+		$current_page = ! empty( $_POST['next_page'] ) ? ( int ) $_POST['next_page'] : 1;
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
 			'exclude' => array( 1 ),
@@ -37,7 +95,7 @@ class evaluator_class extends user_class {
 			),
 		);
 
-		$list_evaluator_to_assign = $this->get( $args_where_evaluator );
+		$evaluators = $this->get( $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
 		unset( $args_where_evaluator['offset'] );
@@ -47,7 +105,7 @@ class evaluator_class extends user_class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		view_util::exec( 'evaluator', 'main', array( 'element' => $element, 'list_evaluator_to_assign' => $list_evaluator_to_assign, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
+		view_util::exec( 'evaluator', 'main', array( 'element' => $element, 'evaluators' => $evaluators, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
 	}
 
 	/**

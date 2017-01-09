@@ -5,13 +5,13 @@ window.digirisk.evaluator.init = function() {
 };
 
 window.digirisk.evaluator.event = function() {
-	jQuery( document ).on( 'click', '.wp-digi-evaluator-list input[type="checkbox"]', window.digirisk.evaluator.set_time );
+	jQuery( document ).on( 'click', '.digirisk-wrap table.evaluators input[type="checkbox"]', window.digirisk.evaluator.set_time );
 	jQuery( document ).on( 'click', '.wp-form-evaluator-to-assign .wp-digi-pagination a', window.digirisk.evaluator.pagination );
 };
 
-window.digirisk.evaluator.set_time = function(event) {
+window.digirisk.evaluator.set_time = function( event ) {
 	var element = jQuery( this );
-	element.closest( 'li' ).find( '.period-assign input' ).val( jQuery( '.wp-digi-evaluator-list .wp-digi-table-header input[type="text"]' ).val() );
+	element.closest( 'tr' ).find( 'input.affect' ).val( jQuery( '.table.evaluators input[type="text"]' ).val() );
 };
 
 window.digirisk.evaluator.callback_edit_evaluator_assign_success = function( element, response ) {

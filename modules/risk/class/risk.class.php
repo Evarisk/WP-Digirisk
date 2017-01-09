@@ -76,7 +76,7 @@ class Risk_Class extends Post_Class {
 	public $element_prefix = 'R';
 
 	/**
-	 * La limite des risques a affiché par page
+	 * La limite des risques a afficher par page
 	 *
 	 * @var integer
 	 */

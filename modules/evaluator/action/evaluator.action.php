@@ -1,14 +1,30 @@
-<?php namespace digi;
+<?php
+/**
+ * Les actions relatifs aux évaluateurs
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluator
+ * @subpackage class
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluator_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatifs aux évaluateurs
+ */
+class Evaluator_Action {
+
 	/**
-	* Le constructeur appelle les actions ajax suivantes:
-	* wp_ajax_edit_eveluator_assign (Permet d'assigner un évaluateur à un élément)
-	* wp_ajax_detach_evaluator (Permet de dissocier un évaluateur d'un élément)
-	* wp_ajax_paginate_evaluator (Permet de gérer la pagination des évaluateurs)
-	*/
+	 * Le constructeur appelle les actions ajax suivantes:
+	 * wp_ajax_edit_eveluator_assign (Permet d'assigner un évaluateur à un élément)
+	 * wp_ajax_detach_evaluator (Permet de dissocier un évaluateur d'un élément)
+	 * wp_ajax_paginate_evaluator (Permet de gérer la pagination des évaluateurs)
+	 */
 	public function __construct() {
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
@@ -19,18 +35,13 @@ class evaluator_action {
 	}
 
 	/**
-	* Assignes un évaluateur à element_id dans la base de donnée
-	*
-	* array $_POST['list_user'] La liste des evaluateurs à assigner
-	* string $_POST['list_user']['duration'] La durée de l'assignation
-	* string $_POST['list_user']['on'] La date d'assignation
-	* bool $_POST['list_user']['affect'] Si l'évaluateur doit être assigné
-	* int $_POST['element_id'] L'élement ou les evaluateurs doivent être assignés
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Assignes un évaluateur à element_id dans la base de donnée
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_edit_evaluator_assign() {
-		if ( empty( $_POST['list_user'] ) || !is_array( $_POST['list_user'] ) )
+		if ( empty( $_POST['list_user'] ) || ! is_array( $_POST['list_user'] ) )
 			wp_send_json_error();
 
 		if ( 0 === (int) $_POST['element_id'] )
@@ -45,7 +56,7 @@ class evaluator_action {
 			wp_send_json_error();
 
 		foreach ( $_POST['list_user'] as $user_id => $list_value ) {
-			if ( !empty( $list_value['duration'] ) && !empty( $list_value['affect'] ) ) {
+			if ( ! empty( $list_value['duration'] ) && !empty( $list_value['affect'] ) ) {
 				$list_value['on'] = str_replace( '/', '-', $list_value['on'] );
 				$list_value['on'] = date( 'y-m-d', strtotime( $list_value['on'] ) );
 				$list_value['on'] .= ' ' . current_time( 'H:i:s' );
@@ -80,7 +91,7 @@ class evaluator_action {
 
 		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		view_util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
 	}
 
@@ -200,4 +211,4 @@ class evaluator_action {
 	}
 }
 
-	new evaluator_action();
+	new Evaluator_Action();

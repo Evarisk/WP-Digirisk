@@ -1,61 +1,55 @@
-<?php namespace digi;
+<?php
+/**
+ * Le tableau des évaluateurs qui peuvent être affecté.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluator
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<form method="POST" class="wp-form-evaluator-to-assign wp-digi-bloc-loader" action="<?php echo admin_url( 'admin-ajax.php' ); ?>">
-	<ul class="wp-digi-list wp-digi-table wp-digi-user-list wp-digi-evaluator-list">
-		<li class="wp-digi-table-header">
-			<span></span>
-			<span><?php _e('ID', 'digirisk'); ?></span>
-			<span><?php _e('Lastname', 'digirisk'); ?></span>
-			<span><?php _e('Firstname', 'digirisk'); ?></span>
-			<span><?php _e('Hiring date', 'digirisk'); ?></span>
-			<span><?php _e('Assign', 'digirisk'); ?> <input type="text" value="15" /></span>
-			<span></span>
-		</li>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-		<?php
-		if ( !empty( $list_evaluator_to_assign ) ):
-			foreach ( $list_evaluator_to_assign as $evaluator_to_assign ):
-				?>
-				<li>
-					<span class="wp-avatar" style="background: #<?php echo $evaluator_to_assign->avatar_color; ?>;" ><?php echo $evaluator_to_assign->initial; ?></span>
-					<span>U<?php echo $evaluator_to_assign->id; ?></span>
-					<span><?php echo $evaluator_to_assign->lastname; ?></span>
-					<span><?php echo $evaluator_to_assign->firstname; ?></span>
-					<span><input type="text" class="eva-date" name="list_user[<?php echo $evaluator_to_assign->id; ?>][on]" value="<?php echo date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ); ?>" /></span>
-					<span class="period-assign"><input type="text" name="list_user[<?php echo $evaluator_to_assign->id; ?>][duration]" value="" /></span>
-					<span><input type="checkbox" name="list_user[<?php echo $evaluator_to_assign->id; ?>][affect]" /></span>
-				</li>
-				<?php
-			endforeach;
-		endif;
-		?>
-	</ul>
+<form method="POST" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 
+	<table class="table evaluators">
+
+		<thead>
+			<tr>
+				<th></th>
+				<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
+				<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
+				<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
+				<th><?php esc_html_e( 'Date d\'embauche', 'digirisk' ); ?></th>
+				<th><input type="text" class="affect" value="15"></th>
+				<th><?php esc_html_e( 'Affecter', 'digirisk' ); ?></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<?php if ( ! empty( $evaluators ) ) : ?>
+				<?php foreach ( $evaluators as $evaluator ) : ?>
+					<tr>
+						<td><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator->initial ); ?></span></div></td>
+						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->id ); ?><strong></span></td>
+						<td class="padding"><span><?php echo esc_html( $evaluator->lastname ); ?></span></td>
+						<td class="padding"><span><?php echo esc_html( $evaluator->firstname ); ?></span></td>
+						<td><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ) ); ?>"></td>
+						<td><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][duration]" value=""></td>
+						<td><input type="checkbox"></td>
+					</tr>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</tbody>
+
+	</table>
 
 	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
-	<input type="submit" class="wp-digi-bton-fourth float right submit-form" value="<?php _e('Update', 'digirisk'); ?>" />
-
-	<!-- Pagination -->
-	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
-		<div class="wp-digi-pagination">
-			<?php
-			$big = 999999999;
-			echo paginate_links( array(
-				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->id ),
-				'format' => '%#%',
-				'current' => $current_page,
-				'total' => $number_page,
-				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'digirisk' ) .' </span>',
-				'type' => 'plain',
-				'next_text' => '<i class="dashicons dashicons-arrow-right"></i>',
-				'prev_text' => '<i class="dashicons dashicons-arrow-left"></i>'
-			) );
-			?>
-		</div>
-	<?php endif; ?>
-
+	<div class="button green uppercase strong float right margin submit-form"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
 </form>

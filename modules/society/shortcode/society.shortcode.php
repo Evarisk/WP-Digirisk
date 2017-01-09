@@ -38,8 +38,8 @@ class Society_Shortcode {
 		$display_trash = true;
 
 		if ( $element ) {
-			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-risk';
-			$title = 'Les risques de ' . $element->unique_identifier . ' - ' . $element->title;
+			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : Config_Util::$init['digirisk']->default_tab;
+			$title = Config_Util::$init['digirisk']->default_tab_title . ' ' . $element->unique_identifier . ' - ' . $element->title;
 			if ( 'digi-group' === $element->type ) {
 				$group_list = group_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft' ) ) );
 				$element_id = ! empty( $group_list ) ? $group_list[0]->id : 0;
