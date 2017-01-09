@@ -4,8 +4,8 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.3.0
- * @copyright 2015-2016 Eoxia
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package tab
  * @subpackage shortcode
  */
@@ -31,6 +31,9 @@ class Tab_Shortcode {
 	 *
 	 * @param  array $param Les paramètres du shortcode.
 	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_digi_tab( $param ) {
 		$id = $param['id'];
@@ -39,7 +42,7 @@ class Tab_Shortcode {
 
 		$list_tab = apply_filters( 'digi_tab', array(), $id );
 
-		view_util::exec( 'tab', 'list', array( 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		view_util::exec( 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
 	}
 }
 

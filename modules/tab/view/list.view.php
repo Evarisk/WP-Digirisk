@@ -5,7 +5,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package tab
  * @subpackage view
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $list_tab[ $type ] ) ) :
 		foreach ( $list_tab[ $type ] as $key => $element ) :
-			View_Util::exec( 'tab', 'item-' . $element['type'], array( 'element' => $element ) );
+			View_Util::exec( 'tab', 'item-' . $element['type'], array( 'id' => $id, 'key' => $key, 'element' => $element ) );
 		endforeach;
 	endif; ?>
 </ul>

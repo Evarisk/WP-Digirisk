@@ -37,7 +37,9 @@ class Evaluator_Filter {
 		$list_tab['digi-group']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Evaluator', 'digirisk' ),
+			'title' => __( 'Les évaluateurs de', 'digirisk' ),
 		);
+
 		$list_tab['digi-workunit']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Evaluator', 'digirisk' ),

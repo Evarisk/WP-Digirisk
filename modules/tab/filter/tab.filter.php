@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package tab
  * @subpackage filter
@@ -35,7 +35,7 @@ class Tab_Filter {
 	 * @param string  $title Le titre.
 	 *
 	 * @since 6.0.0.0
-	 * @version 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_tab_content( $content, $element_id, $tab_to_display, $title ) {
 		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );

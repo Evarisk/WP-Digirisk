@@ -36,6 +36,10 @@ class Tab_Action {
 		$tab_to_display = ! empty( $_POST['tab_to_display'] ) ? sanitize_key( $_POST['tab_to_display'] ) : '';
 		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
+		// Modification du titre.
+		$element = society_class::g()->show_by_type( $element_id );
+		$title .= ' ' . $element->unique_identifier . ' - ' . $element->title;
+
 		ob_start();
 		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );

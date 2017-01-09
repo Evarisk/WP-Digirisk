@@ -3,7 +3,7 @@
  * Ajoutes l'onglet Configuration aux unités de travail
  *
  * @since 6.2.2.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  *
  * @package Evarisk\Plugin
  */
@@ -26,7 +26,7 @@ class Workunit_Filter {
 	}
 
 	/**
-	 * Ajotues l'onglet Configuration aux unités de travail
+	 * Ajoutes l'onglet Configuration aux unités de travail
 	 *
 	 * @since 6.2.2.0
 	 * @version 6.2.4.0
