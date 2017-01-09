@@ -31,7 +31,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 		list_variable: listVariable
 	};
 
-	jQuery( '.popup.popup-evaluation:visible' ).find( 'input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
+	element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
 		listVariable[jQuery( f ).attr( 'variable-id' )] = jQuery( f ).val();
 		if ( '' !== jQuery( f ).val() ) {
 			length++;

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package evaluation_method
  * @subpackage view
@@ -16,6 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <?php foreach ( $list_evaluation_method_variable as $key => $value ) :
 	$value_input = '';
+	if ( ! empty( $risk->evaluation ) && ! empty( $risk->evaluation->quotation_detail ) ) :
+		foreach ( $risk->evaluation->quotation_detail as $detail ) :
+			if ( ! empty( $detail['variable_id'] ) ) :
+				if ( $detail['variable_id'] === $list_evaluation_method_variable[ $key ]->id ) :
+					$value_input = $detail['value'];
+				endif;
+			endif;
+		endforeach;
+	endif;
 	?>
 	<th>
 		<?php echo esc_html( $value->name ); ?>

@@ -74,12 +74,13 @@ class Evaluation_Method_Shortcode {
 		}
 
 		$view_data = array(
-			'target'							=> $target,
-			'term_evarisk_simple'	=> $term_evarisk_simple,
-			'risk'								=> $risk,
-			'digi_method_id' 			=> $digi_method_id,
-			'class'								=> $class,
-			'display'							=> $display,
+			'target' => $target,
+			'term_evarisk_simple' => $term_evarisk_simple,
+			'term_evarisk_complex' => $term_evarisk_complex,
+			'risk' => $risk,
+			'digi_method_id' => $digi_method_id,
+			'class'	=> $class,
+			'display' => $display,
 		);
 
 		if ( 'view' === $display ) {

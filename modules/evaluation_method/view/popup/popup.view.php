@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package evaluation_method
  * @subpackage view
@@ -28,12 +28,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<thead>
 					<tr>
 						<td></td>
-						<?php View_Util::exec( 'evaluation_method', 'popup/header', array( 'list_evaluation_method_variable' => $list_evaluation_method_variable ) ); ?>
+						<?php View_Util::exec( 'evaluation_method', 'popup/header', array( 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) ); ?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php for ( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ) :
-						View_Util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) );
+						View_Util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) );
 					endfor; ?>
 				</tbody>
 			</table>

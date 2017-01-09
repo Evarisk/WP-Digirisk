@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li data-level="4" class="item cotation level4"><span>80</span></li>
 
 		<?php if ( 0 === $risk->id ) : ?>
-			<li class="item cotation method open-popup" data-parent="main-content" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
+			<li class="item cotation method open-popup" data-parent="risk-row" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
 		<?php endif; ?>
 	</ul>
 </div>
