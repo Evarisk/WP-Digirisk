@@ -39,12 +39,11 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 	} );
 
 	jQuery( '.wp-digi-risk-cotation-chooser' ).removeClass( 'active' );
-
 	if ( 5 === length ) {
 		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			element.closest( '.wp-digi-bloc-loader' ).removeClass( 'wp-digi-bloc-loading' );
-      jQuery( '.popup.popup-evaluation' ).removeClass( 'active' );
+			jQuery( '.popup.popup-evaluation' ).removeClass( 'active' );
 
 			element.closest( '.risk-row' ).find( 'input.input-hidden-method-id' ).val( element.closest( '.popup.popup-evaluation' ).find( 'input.digi-method-evaluation-id' ).val() );
 

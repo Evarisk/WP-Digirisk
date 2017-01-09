@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="popup active popup-evaluation">
+<div class="popup popup-evaluation">
 	<div class="container">
 		<div class="header">
 			<h2 class="title"><?php echo esc_html_e( 'Édition de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></h2>

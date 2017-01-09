@@ -85,7 +85,11 @@ class Evaluation_Method_Shortcode {
 		if ( 'view' === $display ) {
 			View_Util::exec( 'evaluation_method', 'view-evaluation-method', $view_data );
 		} else {
-			View_Util::exec( 'evaluation_method', 'edit-digirisk-evaluation-method', $view_data );
+			if ( $term_evarisk_simple->term_id === $digi_method_id ) {
+				View_Util::exec( 'evaluation_method', 'edit-digirisk-evaluation-method', $view_data );
+			} else {
+				View_Util::exec( 'evaluation_method', 'edit-evarisk-evaluation-method', $view_data );
+			}
 		}
 	}
 

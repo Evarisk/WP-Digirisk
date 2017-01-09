@@ -5,7 +5,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package method_evaluation
  * @subpackage view
@@ -35,6 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li data-level="2" class="item cotation level2"><span>48</span></li>
 		<li data-level="3" class="item cotation level3"><span>51</span></li>
 		<li data-level="4" class="item cotation level4"><span>80</span></li>
-		<li class="item cotation method open-popup" data-parent="main-content" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
+
+		<?php if ( 0 === $risk->id ) : ?>
+			<li class="item cotation method open-popup" data-parent="main-content" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
+		<?php endif; ?>
 	</ul>
 </div>
