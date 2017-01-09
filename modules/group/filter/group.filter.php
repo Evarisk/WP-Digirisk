@@ -21,7 +21,7 @@ class Group_Filter {
 	 * Utilises le filtre digi_tab
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 10, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 4, 2 );
 	}
 
 	/**
@@ -35,16 +35,18 @@ class Group_Filter {
 		$tab_list['digi-group']['more'] = array(
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
-			'configuration' => array(
-				'type' => 'text',
-				'text' => __( 'Configuration', 'digirisk' ),
-			),
-			'delete' => array(
-				'type' => 'text',
-				'text' => __( 'Supprimer', 'digirisk' ),
-				'class' => 'action-delete',
-				'attributes' => 'data-action=delete_society data-id=' . $id . '',
-				'nonce' => wp_create_nonce( 'delete_society' ),
+			'items' => array(
+				'configuration' => array(
+					'type' => 'text',
+					'text' => __( 'Configuration', 'digirisk' ),
+				),
+				'delete' => array(
+					'type' => 'text',
+					'text' => __( 'Supprimer', 'digirisk' ),
+					'class' => 'action-delete',
+					'attributes' => 'data-action=delete_society data-id=' . $id . '',
+					'nonce' => wp_create_nonce( 'delete_society' ),
+				),
 			),
 		);
 

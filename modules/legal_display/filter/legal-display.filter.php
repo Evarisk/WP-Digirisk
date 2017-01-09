@@ -23,7 +23,7 @@ class Legal_Display_Filter {
 	 * Utilises le filtre digi_tab
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 10, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
 	}
 
 	/**

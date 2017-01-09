@@ -19,41 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $list_tab[ $type ] ) ) :
 		foreach ( $list_tab[ $type ] as $key => $element ) :
-			$class = '';
-			if ( 'digi-' . $key === $display ) {
-				$class = 'active';
-			}
-			?>
-			<li class="tab-element"
-					data-action="digi-<?php echo esc_attr( $key ); ?>"
-					data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
-					data-title="<?php echo esc_attr( 'risques' ); ?>">
-				<span><?php echo $element['text']; ?></span> <!-- no esc_html is okay. -->
-			</li>
-			<?php
+			View_Util::exec( 'tab', 'item-' . $element['type'], array( 'element' => $element ) );
 		endforeach;
 	endif; ?>
-</ul>
-
-
-
-	<?php
-	if ( ! empty( $list_tab_more ) ) :
-		?>
-		<li class="tab-element toggle option" data-parent="toggle" data-target="content">
-			<i class="action fa fa-ellipsis-v toggle"></i>
-			<ul class="content">
-				<?php
-				foreach ( $list_tab_more as $key => $element ) :
-					?><li
-						class="item <?php echo esc_attr( $element['class'] ); ?>"
-						data-nonce="<?php echo esc_attr( $element['nonce'] ); ?>"
-						<?php echo esc_attr( $element['attributes'] ); ?> ><?php echo esc_html( $element['text'] ); ?></li><?php
-				endforeach;
-				?>
-			</ul>
-		</li>
-	<?php
-	endif;
-	?>
 </ul>
