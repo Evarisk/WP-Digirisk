@@ -35,9 +35,11 @@ class Evaluator_Filter {
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['evaluator'] = array(
+			'type' => 'text',
 			'text' => __( 'Evaluator', 'digirisk' ),
 		);
 		$list_tab['digi-workunit']['evaluator'] = array(
+			'type' => 'text',
 			'text' => __( 'Evaluator', 'digirisk' ),
 		);
 

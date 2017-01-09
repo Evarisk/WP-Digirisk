@@ -33,9 +33,11 @@ class Accident_Filter {
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['accident'] = array(
+			'type' => 'text',
 			'text' => __( 'Accident', 'digirisk' ),
 		);
 		$list_tab['digi-group']['accident'] = array(
+			'type' => 'text',
 			'text' => __( 'Accident', 'digirisk' ),
 		);
 

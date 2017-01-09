@@ -1,6 +1,6 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Fichier de gestion des filtres pour l'export des données de Digirisk / File managing filters for digirisk datas export
  *
@@ -38,10 +38,12 @@ class export_filter {
 	 */
 	function callback_digi_tab( $list_tab ) {
 		$list_tab['digi-group']['export'] = array(
+			'type' => 'text',
  			'text' => __( 'Export', 'digirisk' ),
  		);
 
 		$list_tab['digi-workunit']['export'] = array(
+			'type' => 'text',
  			'text' => __( 'Export', 'digirisk' ),
  		);
 

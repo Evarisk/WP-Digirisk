@@ -28,11 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-action="digi-<?php echo esc_attr( $key ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
 					data-title="<?php echo esc_attr( 'risques' ); ?>">
-				<span><?php echo esc_html( $element['text'] ); ?></span>
+				<span><?php echo $element['text']; ?></span> <!-- no esc_html is okay. -->
 			</li>
 			<?php
 		endforeach;
 	endif; ?>
+</ul>
+
 
 
 	<?php

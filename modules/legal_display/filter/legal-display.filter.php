@@ -35,6 +35,7 @@ class Legal_Display_Filter {
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['legal_display'] = array(
+			'type' => 'text',
 			'text' => __( 'Affichage légal', 'digirisk' ),
 		);
 		return $list_tab;

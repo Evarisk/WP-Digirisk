@@ -18,6 +18,7 @@ class user_filter {
 
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['user'] = array(
+			'type' => 'text',
 			'text' => __( 'User', 'digirisk' ),
 		);
 		return $list_tab;

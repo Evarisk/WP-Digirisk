@@ -33,9 +33,11 @@ class Chemical_Product_Filter {
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['chemical-product'] = array(
+			'type' => 'text',
 			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
 		$list_tab['digi-group']['chemical-product'] = array(
+			'type' => 'text',
 			'text' => __( 'Produit chimique', 'digirisk' ),
 		);
 

@@ -32,15 +32,20 @@ class Group_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
-		$tab_list['digi-group']['more']['configuration'] = array(
-			'text' => __( 'Configuration', 'digirisk' ),
-		);
-
-		$tab_list['digi-group']['more']['delete'] = array(
-			'text' => __( 'Supprimer', 'digirisk' ),
-			'class' => 'action-delete',
-			'attributes' => 'data-action=delete_society data-id=' . $id . '',
-			'nonce' => wp_create_nonce( 'delete_society' ),
+		$tab_list['digi-group']['more'] = array(
+			'type' => 'toggle',
+			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
+			'configuration' => array(
+				'type' => 'text',
+				'text' => __( 'Configuration', 'digirisk' ),
+			),
+			'delete' => array(
+				'type' => 'text',
+				'text' => __( 'Supprimer', 'digirisk' ),
+				'class' => 'action-delete',
+				'attributes' => 'data-action=delete_society data-id=' . $id . '',
+				'nonce' => wp_create_nonce( 'delete_society' ),
+			),
 		);
 
 		return $tab_list;
