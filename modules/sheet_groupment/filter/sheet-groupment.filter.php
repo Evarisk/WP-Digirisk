@@ -26,14 +26,15 @@ class Sheet_Groupment_Filter {
 	/**
 	 * Ajoutes une entrée dans le tableau $list_tab
 	 *
-	 * @param  array $list_tab  La liste des filtres.
-	 * @return array            La liste des filtres + le filtre ajouté par cette méthode.
+	 * @param  array   $list_tab  La liste des filtres.
+	 * @param  integer $id        L'ID de la société.
+	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
 			'type' => 'text',
 			'text' => __( 'Sheet groupment', 'digirisk' ),
-			'class' => 'wp-digi-sheet-generation-button dashicons-before dashicons-share-alt2',
+			'class' => 'dut button red uppercase',
 		);
 
 		return $list_tab;
