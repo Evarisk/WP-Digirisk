@@ -40,4 +40,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<li class="item cotation method open-popup" data-parent="risk-row" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
 		<?php endif; ?>
 	</ul>
+
+	<div class="tooltip">
+		<p><?php esc_html_e( 'Vous devez coter votre risque.', 'digirisk' ); ?></p>
+	</div>
 </div>

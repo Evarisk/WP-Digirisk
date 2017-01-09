@@ -50,7 +50,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 			element.closest( '.risk-row' ).find( '.cotation-container .action span' ).html( response.data.equivalence );
 			element.closest( '.risk-row' ).find( '.cotation-container .action i' ).hide();
 
-			element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className = element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className.replace( /level[0-4]/, 'level' + response.data.scale );
+			element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className = element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className.replace( /level[-1]?[0-4]/, 'level' + response.data.scale );
 			element.closest( '.risk-row' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
 		} );
 	} else {

@@ -47,7 +47,7 @@ class risk_evaluation_model extends comment_model {
 				'type' 		=> 'integer',
 				'field'		=> '_wpdigi_risk_evaluation_scale',
 				'meta_type'	=> 'single',
-				'bydefault'			=> 1,
+				'bydefault'			=> -1,
 				'required'	=> true,
 			),
 			'unique_key' => array(

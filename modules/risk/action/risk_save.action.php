@@ -19,7 +19,7 @@ class risk_save_action
     */
     public function __construct()
     {
-        add_action('save_risk', array( $this, 'callback_save_risk' ), 10, 1);
+        add_action('save_risk', array( $this, 'callback_save_risk' ), 10, 1 );
     }
 
     /**

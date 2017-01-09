@@ -1,12 +1,10 @@
 <?php
 /**
- * Ajoutes deux shortcodes
- * digi_evaluation_method permet d'afficher la méthode d'évaluation simple
- * digi_evaluation_method_complex permet d'afficher la méthode d'évaluation complexe
+ * Ajoutes le shortcode pour afficher le toggle des dangers
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package danger
  * @subpackage shortcode
@@ -30,7 +28,8 @@ class Danger_Shortcode {
 	}
 
 	/**
-	 * Récupères le niveau et l'équivalence de la méthode d'évaluation du risque courant.
+	 * Récupères tous les dangers, et appel la vue danger-dropdown.view.php
+	 * Si le danger du risque est déjà défini, appel la vue danger-item.view.php
 	 *
 	 * @param array $param Tableau de donnée.
 	 *
@@ -41,24 +40,19 @@ class Danger_Shortcode {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 
 		if ( 'edit' === $display ) {
-			$danger_category_list = category_danger_class::g()->get();
-			$first_danger = null;
+			$danger_category_list = Category_Danger_Class::g()->get();
 
 			if ( ! empty( $danger_category_list ) ) {
 				foreach ( $danger_category_list as $element ) {
 					$element->danger = Danger_Class::g()->get( array( 'parent' => $element->id ) );
-
-					if ( empty( $first_danger ) && ! empty( $element->danger[0] ) ) {
-						$first_danger = $element->danger[0];
-					}
 				}
 			}
 
-			view_util::exec( 'danger', 'dropdown', array( 'id' => $id, 'first_danger' => $first_danger, 'danger_category_list' => $danger_category_list ) );
+			View_Util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
 		} else {
-			$risk = risk_class::g()->get( array( 'include' => $id ) );
+			$risk = Risk_Class::g()->get( array( 'include' => $id ) );
 			$risk = $risk[0];
-			view_util::exec( 'danger', 'item', array( 'id' => $id, 'risk' => $risk ) );
+			View_Util::exec( 'danger', 'item', array( 'id' => $id, 'risk' => $risk ) );
 		}
 	}
 }

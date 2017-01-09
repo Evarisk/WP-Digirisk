@@ -11,29 +11,40 @@ window.digirisk.action.event = function() {
 };
 
 window.digirisk.action.exec_input = function( event ) {
-  var element = jQuery( this );
+	var element = jQuery( this );
 	var key = undefined;
-	var parent_element = element;
+	var parentElement = element;
+	var listInput = undefined;
+	var data = {};
+	var i = 0;
+	var doAction = true;
 
 	if ( element.data( 'parent' ) ) {
-			parent_element = element.closest( '.' + element.data( 'parent' ) );
+		parentElement = element.closest( '.' + element.data( 'parent' ) );
 	}
 
-	var list_input = window.eva_lib.array_form.get_input( parent_element );
-	var data = {};
-	for (var i = 0; i < list_input.length; i++) {
-		if ( list_input[i].name ) {
-			data[list_input[i].name] = list_input[i].value;
-		}
+	/** Méthode appelée avant l'action */
+	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
+		doAction = false;
+		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
 	}
 
-	element.get_data( function( attrData ) {
-		for ( key in attrData ) {
-			data[key] = attrData[key];
+	if ( doAction ) {
+		listInput = window.eva_lib.array_form.get_input( parentElement );
+		for ( i = 0; i < listInput.length; i++ ) {
+			if ( listInput[i].name ) {
+				data[listInput[i].name] = listInput[i].value;
+			}
 		}
 
-		window.digirisk.request.send( element, data );
-	} );
+		element.get_data( function( attrData ) {
+			for ( key in attrData ) {
+				data[key] = attrData[key];
+			}
+
+			window.digirisk.request.send( element, data );
+		} );
+	}
 };
 
 window.digirisk.action.exec_attribute = function(event) {

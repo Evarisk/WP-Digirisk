@@ -17,7 +17,8 @@ window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	div.find( '.action span' ).html( element.text() );
 	div.find( '.action i' ).hide();
 	element.closest( '.content' ).removeClass( 'active' );
-	div.find( '.action' )[0].className = div.find( '.action' )[0].className.replace( /level[0-4]/, 'level' + level );
+
+	div.find( '.action' )[0].className = div.find( '.action' )[0].className.replace( /level[-1]?[0-4]/, 'level' + level );
 	event.stopPropagation();
 
 	// Met le niveau de la cotation dans le input risk-level
@@ -25,4 +26,7 @@ window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 
 	// Met le méthode d'évaluation dans le input input-hidden-method-id
 	element.closest( 'tr' ).find( 'input.input-hidden-method-id' ).val( methodEvaluationId );
+
+	element.closest( '.risk-row' ).find( '.cotation-container .action i' ).css( 'color', 'rgb(68,68,68)' );
+	element.closest( '.risk-row' ).find( '.cotation-container .tooltip' ).removeClass( 'active' );
 };
