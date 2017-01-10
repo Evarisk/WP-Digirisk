@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <li class="tab-element"
 		data-action="digi-<?php echo esc_attr( $key ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
-		<?php echo esc_attr( ! empty( $element['title'] ) ? 'data-title="' . $element['title'] . '"' : '' ); ?>
+		<?php echo ! empty( $element['title'] ) ? 'data-title="' . $element['title'] . '"' : ''; // WPCS: XSS ok. ?>
 		data-id="<?php echo esc_attr( $id ); ?>">
 	<span <?php echo ! empty( $element['class'] ) ? 'class="' . esc_attr( $element['class'] ) . '"' : ''; ?>
-		><?php echo $element['text']; ?></span> <!-- no esc_html is okay. -->
+		><?php echo $element['text']; // WPCS: XSS ok. ?></span>
 </li>
