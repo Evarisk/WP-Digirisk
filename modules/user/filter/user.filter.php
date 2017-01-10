@@ -26,11 +26,11 @@ class User_Filter {
 	 * @version 6.2.4.0
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 10, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
 	}
 
 	/**
-	 * Ajoutes l'onglet Utilisateurs dans les unités de travail.
+	 * Ajoutes l'onglet "Utilisateurs" dans les unités de travail.
 	 *
 	 * @param  array   $list_tab  La liste des onglets.
 	 * @param  integer $id        L'ID de la société.
