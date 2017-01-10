@@ -161,24 +161,34 @@ class Evaluator_Action {
 		wp_die();
 	}
 
+	/**
+	 * Méthode appelé par le champs de recherche des évaluateurs affectés
+	 *
+	 * @param  integer $id          L'ID de la société.
+	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
+	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element = society_class::g()->show_by_type( $id );
-		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
+		$element = Society_Class::g()->show_by_type( $id );
+		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 
-		if ( !empty( $list_affected_evaluator ) ) {
-		  foreach ( $list_affected_evaluator as $key => $sub_list ) {
-				foreach( $sub_list as $evaluator_key => $evaluator ) {
+		if ( ! empty( $list_affected_evaluator ) ) {
+			foreach ( $list_affected_evaluator as $key => $sub_list ) {
+				foreach ( $sub_list as $evaluator_key => $evaluator ) {
 					if ( is_object( $evaluator['user_info'] ) ) {
-						if ( !in_array( $evaluator['user_info']->id, $list_user_id ) ) {
-							unset( $list_affected_evaluator[$key][$evaluator_key] );
+						if ( ! in_array( $evaluator['user_info']->id, $list_user_id, true ) ) {
+							unset( $list_affected_evaluator[ $key ][ $evaluator_key ] );
 						}
 					}
 				}
-		  }
+			}
 		}
 
 		ob_start();
-		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
