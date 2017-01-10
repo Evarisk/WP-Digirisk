@@ -1,6 +1,6 @@
 <?php
 /**
- * Les filtres relatifs aux utilisateurs
+ * Les filtres relatives aux utilisateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
@@ -15,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Les filtres relatifs aux utilisateurs
+ * Les filtres relatives aux utilisateurs
  */
 class User_Filter {
 
@@ -43,7 +43,9 @@ class User_Filter {
 		$list_tab['digi-workunit']['user'] = array(
 			'type' => 'text',
 			'text' => __( 'Utilisateurs', 'digirisk' ),
+			'title' => __( 'Les utilisateurs de', 'digirisk' ),
 		);
+
 		return $list_tab;
 	}
 }
