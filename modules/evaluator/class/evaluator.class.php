@@ -85,7 +85,8 @@ class Evaluator_Class extends User_Class {
 	 */
 	public function render( $element ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page = ! empty( $_POST['next_page'] ) ? ( int ) $_POST['next_page'] : 1;
+
+		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // $
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
 			'exclude' => array( 1 ),
@@ -97,7 +98,7 @@ class Evaluator_Class extends User_Class {
 
 		$evaluators = $this->get( $args_where_evaluator );
 
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
@@ -109,31 +110,29 @@ class Evaluator_Class extends User_Class {
 	}
 
 	/**
-	 * Récupère la liste des utilisateurs affectés avec ses informations d'affectations à cette unité de travail
-	 * Get the list of affected evaluators with assignement information for this workunit
+	 * Récupère la liste des évaluateurs affectés avec ses informations d'affectations à ce groupement
 	 *
-	 * @param int $id The workunit ID
-	 * @return object list evaluators affected
+	 * @param Group_Model $society La société.
+	 * @return array
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function get_list_affected_evaluator( $society ) {
-		if ( !is_object( $society ) ) {
+		if ( 0 === $society->id || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) ) {
 			return false;
 		}
 
-		if ( $society->id === 0 || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) )
-			return false;
-
-
 		$list_evaluator = array();
-		if ( !empty( $society->user_info['affected_id']['evaluator'] ) ) {
+		if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
 			foreach ( $society->user_info['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
-				if ( !empty( $array_value ) ) {
+				if ( ! empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
-						if ( !empty( $sub_array_value['status'] ) && $sub_array_value['status'] == 'valid' ) {
+						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {
 							$evaluator = $this->get( array( 'id' => $evaluator_id ) );
-							$list_evaluator[ $evaluator_id ][ $index ][ 'user_info' ] = $evaluator[0];
-							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ] = $sub_array_value;
-							$list_evaluator[ $evaluator_id ][ $index ][ 'affectation_info' ][ 'id' ] = $index;
+							$list_evaluator[ $evaluator_id ][ $index ]['user_info'] = $evaluator[0];
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info'] = $sub_array_value;
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']['id'] = $index;
 						}
 					}
 				}
@@ -143,9 +142,9 @@ class Evaluator_Class extends User_Class {
 		$list_evaluator_affected = array();
 
 		foreach ( $list_evaluator as $evaluator_id => $array_evaluator ) {
-			if ( !empty( $array_evaluator ) ) {
-				foreach( $array_evaluator as $index => $evaluator ) {
-					$list_evaluator_affected[$evaluator['affectation_info']['start']['date']][] = $evaluator;
+			if ( ! empty( $array_evaluator ) ) {
+				foreach ( $array_evaluator as $index => $evaluator ) {
+					$list_evaluator_affected[ $evaluator['affectation_info']['start']['date'] ][] = $evaluator;
 				}
 			}
 		}

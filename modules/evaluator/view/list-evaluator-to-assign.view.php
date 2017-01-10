@@ -17,7 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <form method="POST" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 
 	<table class="table evaluators">
-
 		<thead>
 			<tr>
 				<th></th>
@@ -40,15 +39,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						<td class="padding"><span><?php echo esc_html( $evaluator->firstname ); ?></span></td>
 						<td><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator_to_assign->hiring_date ) ) ); ?>"></td>
 						<td><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][duration]" value=""></td>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][affect]"></td>
 					</tr>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</tbody>
-
 	</table>
 
-	<input type="hidden" name="element_id" value="<?php echo $element->id; ?>" />
+	<?php wp_nonce_field( 'edit_evaluator_assign' ); ?>
+	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->id ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
 	<div class="button green uppercase strong float right margin submit-form"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
