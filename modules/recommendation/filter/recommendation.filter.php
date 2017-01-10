@@ -26,7 +26,7 @@ class Recommendation_Filter {
 	 * @version 6.2.4.0
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 4, 2 );
 	}
 
 	/**
