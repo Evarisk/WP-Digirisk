@@ -1,17 +1,42 @@
-<?php namespace digi;
+<?php
+/**
+ * Classe gérant la recherche
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package search
+ * @subpackage action
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class search_class extends singleton_util {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Classe gérant la recherche
+ */
+class Search_Class extends singleton_util {
+
 	/**
-	* Le constructeur
-	*/
-  protected function construct() {}
+	 * Le constructeur
+	 */
+	protected function construct() {}
 
+	/**
+	 * Récupères les éléments selon le term et le type de la recherche.
+	 *
+	 * @param  array $data Les données pour la recherche.
+	 * @return array       Les élements trouvés par la recherche.
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function search( $data ) {
 		$list = array();
 
-		if ( $data['type'] === 'user' ) {
+		if ( 'user' === $data['type'] ) {
 			if ( ! empty( $data['term'] ) ) {
 				$list = get_users( array(
 					'fields' => 'ID',
@@ -25,26 +50,28 @@ class search_class extends singleton_util {
 						array(
 							'key' => 'first_name',
 							'value' => $data['term'],
-							'compare' => 'LIKE'
+							'compare' => 'LIKE',
 						),
 						array(
 							'key' => 'last_name',
 							'value' => $data['term'],
-							'compare' => 'LIKE'
+							'compare' => 'LIKE',
 						),
-					)
+					),
 				) ) );
 
 				$list = array_unique( $list );
-			}
-			else {
+			} else {
 				$list = get_users( array(
 					'fields' => 'ID',
 					'exclude' => array( 1 ),
 				) );
 			}
-		}
-		else if ( $data['type'] === 'post' ) {
+
+			// Force le tableau de integer.
+			$list = Array_Util::g()->to_int( $list );
+
+		} elseif ( 'post' === $data['type'] ) {
 			$model_name = '\digi\\' . $data['class'];
 			$list = $model_name::g()->search( $data['term'], array(
 				'option' => array( '_wpdigi_unique_identifier' ),
@@ -56,4 +83,4 @@ class search_class extends singleton_util {
 	}
 }
 
-search_class::g();
+Search_Class::g();
