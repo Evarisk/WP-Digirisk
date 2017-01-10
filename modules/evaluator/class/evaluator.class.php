@@ -79,14 +79,14 @@ class Evaluator_Class extends User_Class {
 	 * Fait le rendu des evaluateurs
 	 *
 	 * @param Group_Model $element L'objet parent.
+	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 *
 	 * @since 1.0
 	 * @version 6.2.4.0
 	 */
-	public function render( $element ) {
+	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 
-		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // $
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
 			'exclude' => array( 1 ),
@@ -157,16 +157,20 @@ class Evaluator_Class extends User_Class {
 	/**
 	 * Calcul de la durée d'affectation d'un utilisateur selon les dates d'affectation et de désaffectation / User assignment duration calculation depending on assignment and decommissioning dates
 	 *
-	 * @param array $user_affectation_info Les informations d'affectation de l'utilisateur / User assignment informations
+	 * @param array $user_affectation_info Les informations d'affectation de l'utilisateur / User assignment informations.
 	 *
 	 * @return string La durée d'affectation en minutes / Assigment duration in minutes
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function get_duration( $user_affectation_info ) {
-		if ( empty( $user_affectation_info[ 'start' ][ 'date' ] ) || empty( $user_affectation_info[ 'end' ][ 'date' ] ) )
+		if ( empty( $user_affectation_info['start']['date'] ) || empty( $user_affectation_info['end']['date'] ) ) {
 			return 0;
+		}
 
-		$start_date = new \DateTime( $user_affectation_info[ 'start' ][ 'date' ] );
-		$end_date = new \DateTime( $user_affectation_info[ 'end' ][ 'date' ] );
+		$start_date = new \DateTime( $user_affectation_info['start']['date'] );
+		$end_date = new \DateTime( $user_affectation_info['end']['date'] );
 		$interval = $start_date->diff( $end_date );
 
 		$minutes = $interval->format( '%h' ) * 60;
