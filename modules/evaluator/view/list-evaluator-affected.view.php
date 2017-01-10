@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<table class="table">
+<table class="table affected-evaluator">
 	<thead>
 		<tr>
 			<th></th>
