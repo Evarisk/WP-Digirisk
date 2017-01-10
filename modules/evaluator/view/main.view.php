@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<!-- Le bloc des utilisateurs à affecter -->
 	<div>
+		<?php do_shortcode( '[digi-search id="' . $element->id . '" icon="dashicons dashicons-search" next-action="display_evaluator_to_assign" type="user" target="form-edit-evaluator-assign"]' ); ?>
 		<!-- La liste des utilisateurs à affecter -->
 		<?php view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) ); ?>
 	</div>
