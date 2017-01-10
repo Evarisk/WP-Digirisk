@@ -59,7 +59,7 @@ class Workunit_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'module' => 'workunit', 'callback_success' => 'save_workunit', 'template' => ob_get_clean(), 'id' => $element->id ) );
+		wp_send_json_success( array( 'module' => 'workunit', 'callback_success' => 'saved_workunit_success', 'template' => ob_get_clean(), 'id' => $element->id ) );
 	}
 
 }
