@@ -3,9 +3,10 @@
  * Display .... Fichier incompréhensible.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 0.1
- * @copyright 2015-2016 Eoxia
- * @package establishment
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package society
  * @subpackage view
  */
 
@@ -24,7 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-parent="unit-header"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_update_group_' . $element->id ) ); ?>"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 	</div>
-	<div class="dut button red uppercase"><i class="icon fa fa-download"></i><span>Télécharger le document unique</span></div>
+
+	<div 	class="tab-element dut button red uppercase"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
+				data-action="digi_list_duer"
+				data-id="<?php echo esc_attr( $element->id ); ?>"><i class="icon fa fa-download"></i><span>Télécharger le document unique</span></div>
 </div>
 
 <?php echo do_shortcode( '[digi_tab id="' . $element->id . '" type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
