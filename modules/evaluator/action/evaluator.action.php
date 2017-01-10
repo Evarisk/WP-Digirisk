@@ -1,13 +1,13 @@
 <?php
 /**
- * Les actions relatifs aux évaluateurs
+ * Les actions relatives aux évaluateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package evaluator
- * @subpackage class
+ * @subpackage action
  */
 
 namespace digi;
@@ -15,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Les actions relatifs aux évaluateurs
+ * Les actions relatives aux évaluateurs
  */
 class Evaluator_Action {
 
