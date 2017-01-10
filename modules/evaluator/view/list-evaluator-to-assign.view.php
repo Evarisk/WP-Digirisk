@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<form method="POST" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
+<form method="POST" class="form-edit-evaluator-assign" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 
 	<table class="table evaluators">
 		<thead>
