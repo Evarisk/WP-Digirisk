@@ -1,11 +1,23 @@
-<?php namespace digi;
+<?php
+/**
+ * Affiches le champs de texte et le bouton "Plus" pour créer une unité de travail.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package navigation
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="workunit-add">
 	<input type="hidden" name="action" value="save_workunit" />
-	<input type="hidden" name="groupment_id" value="<?php echo $parent_id; ?>" />
-	<?php wp_nonce_field( 'wpdigi-workunit-creation', 'wpdigi_nonce', false, true ); ?>
-	<input class="title" type="text" placeholder="<?php _e( 'New work unit', 'digirisk' ); ?>" name="workunit[title]" />
+	<input type="hidden" name="groupment_id" value="<?php echo esc_attr( $parent_id ); ?>" />
+	<?php wp_nonce_field( 'save_workunit' ); ?>
+	<input class="title" type="text" placeholder="<?php _e( 'Nouvelle unité de travail', 'digirisk' ); ?>" name="workunit[title]" />
 	<div class="add button blue w50 action-input" data-parent="workunit-add"><i class="icon fa fa-plus"></i></div>
 </div>
