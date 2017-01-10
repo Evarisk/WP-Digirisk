@@ -1,8 +1,13 @@
 <?php
 /**
- * Gestion des actions des champs de recherche.
+ * Gestion des actions relatif à la recherche
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package search
+ * @subpackage action
  */
 
 namespace digi;
@@ -26,9 +31,12 @@ class Search_Action {
 	 * Si next_action est défini, appelle l'action pour gérer une action différente.
 	 *
 	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_digi_search() {
-		$list = search_class::g()->search( $_GET );
+		$list = Search_Class::g()->search( $_GET );
 
 		if ( ! empty( $_GET['next_action'] ) ) {
 			do_action( $_GET['next_action'], $_GET['id'], $list );
