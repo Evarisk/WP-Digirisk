@@ -12,7 +12,7 @@ window.digirisk.evaluator.event = function() {
 /**
  * Lorsque que l'utilisateur coche la checkbox "affecter", la valeur dans le champ de texte du header du tableau est remplis dans le champs à gauche de la checkbox.
  *
- * @param {MouseEvent} event Le clique de la souris
+ * @param {MouseEvent} event Le clique de la souris.
  *
  * @since 1.0
  * @version 6.2.4.0
@@ -26,8 +26,8 @@ window.digirisk.evaluator.set_time = function( event ) {
  * Le callback en cas de réussite à la requête Ajax "edit_evaluator_assign".
  * Remplaces le contenu du tableau "affected-evaluator" par le template renvoyé par la requête Ajax.
  *
- * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax
- * @param  {Object}         response          Les données renvoyées par la requête Ajax
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
  * @since 1.0
@@ -41,8 +41,8 @@ window.digirisk.evaluator.callback_edit_evaluator_assign_success = function( tri
  * Le callback en cas de réussite à la requête Ajax "detach_evaluator".
  * Remplaces le contenu du tableau "affected-evaluator" par le template renvoyé par la requête Ajax.
  *
- * @param  {HTMLAnchorElement} triggeredElement  L'élement HTML déclenchant la requête Ajax
- * @param  {Object}            response          Les données renvoyées par la requête Ajax
+ * @param  {HTMLAnchorElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}            response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
  * @since 1.0
