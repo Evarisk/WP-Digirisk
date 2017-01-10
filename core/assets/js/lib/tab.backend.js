@@ -5,7 +5,7 @@ window.digirisk.tab.init = function() {
 };
 
 window.digirisk.tab.event = function() {
-  jQuery( document ).on( 'click', '.tab .tab-element', window.digirisk.tab.load );
+  jQuery( document ).on( 'click', '.tab-element', window.digirisk.tab.load );
 };
 
 window.digirisk.tab.load = function( event ) {
