@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <section class="grid-layout w2">
 	<!-- Le bloc des utilisateurs affectés -->
 	<div>
+		<?php do_shortcode( '[digi-search id="' . $element->id . '" icon="dashicons dashicons-search" next-action="display_evaluator_affected" type="user" target="affected-evaluator"]' ); ?>
 		<!-- La liste des utilisateurs affectés -->
 		<?php view_util::exec( 'evaluator', 'list-evaluator-affected', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'list_affected_evaluator' => $list_affected_evaluator ) ); ?>
 	</div>
