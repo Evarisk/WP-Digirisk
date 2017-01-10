@@ -1,8 +1,13 @@
 <?php
 /**
- * Les utilisateurs de DigiRisk
+ * Classe gérant les utilisateurs
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluator
+ * @subpackage class
  */
 
 namespace digi;
@@ -10,9 +15,9 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Les utilisateurs de DigiRisk
+ * Classe gérant les utilisateurs
  */
-class User_Digi_Class extends user_class {
+class User_Digi_Class extends User_Class {
 
 	/**
 	 * Le nom du modèle
@@ -88,56 +93,68 @@ class User_Digi_Class extends user_class {
 	 * Le constructeur
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	protected function construct() {
 		/** Pour la recherche */
 		add_filter( 'wpdigi_search_user_affected', array( $this, 'callback_wpdigi_search_user_affected' ), 10, 3 );
 		add_filter( 'wpdigi_search_user_to_assign', array( $this, 'callback_wpdigi_search_user_to_assign' ), 10, 4 );
 
-		// Ajout de 4 actions pour ajouter des champs dans la partie utilisateur de WordPres
+		// Ajout de 4 actions pour ajouter des champs dans la partie utilisateur de WordPress.
 		add_action( 'show_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'edit_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'personal_options_update', array( $this, 'callback_options_update' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'callback_options_update' ) );
 		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
-
 	}
 
 	/**
-	* Ajout de la date de fin pour l'utilisateur
-	*
-	* @param object $user L'utilisateur courant
-	*/
+	 * Ajout de la date de fin pour l'utilisateur
+	 *
+	 * @param object $user L'utilisateur courant.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function callback_user_profile( $user ) {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
-		$hiring_date = !empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
+		$hiring_date = ! empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
 
 		require_once( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'user-profile' ) );
 	}
 
 	/**
-	* Met à jour la date de fin pour l'utilisateur
-	*
-	* @param int $user_id L'ID de l'utilisateur
-	*/
+	 * Met à jour la date de fin pour l'utilisateur
+	 *
+	 * @param int $user_id L'ID de l'utilisateur.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function callback_options_update( $user_id ) {
-		if ( !current_user_can( 'edit_user', $user_id ) )
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
+		}
 
 		update_usermeta( $user_id, 'digirisk_user_information_meta', $_POST['digirisk_user_information_meta'] );
 	}
 
 	/**
-	* Affiches le rendu principal des utilisateurs
-	*
-	* @param object $workunit L'objet parent
-	*/
-	public function render( $workunit ) {
+	 * Affiches le rendu principal des utilisateurs
+	 *
+	 * @param object  $workunit L'objet parent.
+	 * @param integer $current_page La page courant.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
+	public function render( $workunit, $current_page = 1 ) {
 		$array = $this->list_affected_user( $workunit );
 		$list_affected_user = $array['list_affected_user'];
 		$list_affected_id = $array['list_affected_id'];
 
-		$current_page = !empty( $_GET['current_page'] ) ? (int) $_GET['current_page'] : 1;
 		$args_where_user = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_user,
 			'number' => $this->limit_user,
@@ -149,7 +166,7 @@ class User_Digi_Class extends user_class {
 
 		$list_user_to_assign = $this->get( $args_where_user );
 
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_user['offset'] );
 		unset( $args_where_user['number'] );
 		$args_where_user['fields'] = array( 'ID' );
@@ -160,10 +177,13 @@ class User_Digi_Class extends user_class {
 	}
 
 	/**
-	* Fait le rendu de la liste des utilisateurs à assigner
-	*
-	* @param object $workunit L'objet
-	*/
+	 * Fait le rendu de la liste des utilisateurs à assigner
+	 *
+	 * @param object $workunit L'objet.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function render_list_user_to_assign( $workunit ) {
 		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
 		$args_where_user = array(
@@ -194,10 +214,12 @@ class User_Digi_Class extends user_class {
 	 * Récupère la liste des utilisateurs affectés avec ses informations d'affectations à cette unité de travail
 	 * Get the list of affected users with assignement information for this workunit
 	 *
-	 * @param object $workunit L'objet unité de travail
-	 * @param array $list_affected_id La liste des utilisateurs affectés
+	 * @param object $workunit L'objet unité de travail.
 	 *
 	 * @return array list users affected
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function list_affected_user( $workunit ) {
 		if ( !is_object( $workunit) ) {
@@ -236,9 +258,12 @@ class User_Digi_Class extends user_class {
 	/**
 	 * Construction de la liste des utilisateurs avec leurs informations d'affectation pour l'export d'un document / Build a user list with their informations about affectation for document export
 	 *
-	 * @param array $users La liste des utilisateurs que l'on doit lire et ordonner pour l'impression dans les documents / Users' list to read and format for export into document
+	 * @param array $users La liste des utilisateurs que l'on doit lire et ordonner pour l'impression dans les documents / Users' list to read and format for export into document.
 	 *
 	 * @return array si aucun utilisateur n'a été spécifié | Un tableau contenant les utilisateurs actuellement affectés ou ayant été affectés auparavant / null if no user have been specified | An array with affected users or users who have been affected
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function build_list_for_document_export( $users ) {
 		if ( !is_array( $users ) ) {
@@ -281,12 +306,15 @@ class User_Digi_Class extends user_class {
 	}
 
 	/**
-	* Ajoutes un utilisateur
-	*
-	* @param array $data Les données à enregistrer
-	*
-	* @return bool
-	*/
+	 * Ajoutes un utilisateur
+	 *
+	 * @param array $data Les données à enregistrer.
+	 *
+	 * @return bool
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function add_user( $data ) {
 		if ( empty( $data[0] ) && empty( $data[3] ) )
 			return false;
@@ -328,13 +356,16 @@ class User_Digi_Class extends user_class {
 	}
 
 	/**
-	* Renvoie l'utilisateur ayant le status "valid" selon $user_id
-	*
-	* @param object $workunit L'objet
-	* @param int $user_id L'ID de l'utilisateur a chercher
-	*
-	* @return int La clé de l'utilisateur
-	*/
+	 * Renvoie l'utilisateur ayant le status "valid" selon $user_id
+	 *
+	 * @param object $workunit L'objet.
+	 * @param int    $user_id L'ID de l'utilisateur a chercher.
+	 *
+	 * @return int La clé de l'utilisateur
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
 			global $wpdigi_user_ctr;
 			// Si $workunit->id est égale à 0 ou si $workunit->option['user_info'] est vide ou si $workunit->option['user_info']['affected_id'] est vide ou si $user_id est vide et n'est pas un entier ou si $workunit->option['user_info']['affected_id'][$user_id] est vide
