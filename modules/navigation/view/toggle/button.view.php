@@ -13,7 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 <div class="workunit-navigation">
 	<div class="unit-header">
 		<?php do_shortcode( '[eo_upload_button id=' . $groupment->id . ' type=digi-group]' ); ?>
-		<div class="title"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
+		<div 	class="title action-attribute"
+					data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
+					data-action="load_society"
+					data-groupment-id="<?php echo esc_attr( $groupment->id ); ?>"
+					><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
 		<span class="toggle button w50" data-target="wp-digi-develop-list"><i class="icon fa fa-angle-down"></i></span>
 	</div>
 
