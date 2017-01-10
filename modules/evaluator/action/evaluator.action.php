@@ -164,7 +164,7 @@ class Evaluator_Action {
 	/**
 	 * Méthode appelé par le champs de recherche des évaluateurs affectés
 	 *
-	 * @param  integer $id          L'ID de la société.
+	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
 	 * @return void
 	 *
@@ -192,34 +192,45 @@ class Evaluator_Action {
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	 * Méthode appelé par le champs de recherche des évaluateurs à assigner.
+	 *
+	 * @param  integer $id           L'ID de la société.
+	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
+	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
-		$element = society_class::g()->show_by_type( $id );
+		$element = Society_Class::g()->show_by_type( $id );
 
-		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
 		$args_where_evaluator = array(
-			'exclude' => array( 1 )
+			'exclude' => array( 1 ),
 		);
 
-		$list_evaluator_to_assign = evaluator_class::g()->get( $args_where_evaluator );
-		//
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		$current_page = 1;
+
+		$evaluators = Evaluator_Class::g()->get( $args_where_evaluator );
+
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( evaluator_class::g()->get( $args_where_evaluator ) );
+		$count_evaluator = count( Evaluator_Class::g()->get( $args_where_evaluator ) );
 
-		$number_page = ceil( $count_evaluator / evaluator_class::g()->limit_evaluator );
+		$number_page = ceil( $count_evaluator / Evaluator_Class::g()->limit_evaluator );
 
-			if ( !empty( $list_evaluator_to_assign ) ) {
-				foreach ( $list_evaluator_to_assign as $key => $evaluator ) {
-					if ( !in_array( $evaluator->id, $list_user_id ) ) {
-						unset( $list_evaluator_to_assign[$key] );
-					}
+		if ( ! empty( $evaluators ) ) {
+			foreach ( $evaluators as $key => $evaluator ) {
+				if ( ! in_array( $evaluator->id, $list_user_id, true ) ) {
+					unset( $evaluators[ $key ] );
 				}
 			}
+		}
 
 		ob_start();
-		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'list_evaluator_to_assign' => $list_evaluator_to_assign ) );
+		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
