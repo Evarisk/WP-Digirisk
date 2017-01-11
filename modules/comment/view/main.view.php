@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage view
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<?php
 	if ( 'edit' === $display ) :
-		View_Util::exec( 'comment', 'item-edit', array( 'id' => $id, 'comment' => $comment_new ) );
+		View_Util::exec( 'comment', 'item-edit', array( 'id' => $id, 'comment' => $comment_new, 'type' => $type ) );
 	endif;
 	?>
 </ul>
