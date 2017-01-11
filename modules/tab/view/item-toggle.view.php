@@ -20,9 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php foreach ( $element['items'] as $key => $sub_element ) : ?>
 			<li class="tab-element <?php echo esc_attr( ! empty( $sub_element['parent_class'] ) ? $sub_element['parent_class'] : '' ); ?>"
 					data-action="<?php echo esc_attr( ! empty( $sub_element['action'] ) ? $sub_element['action'] : 'digi-' . esc_attr( $key ) ); ?>"
-					data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
+					<?php echo esc_attr( ! empty( $sub_element['nonce'] ) ? 'data-nonce=' . wp_create_nonce( $sub_element['nonce'] ) : '' ); ?>
 					<?php echo ! empty( $sub_element['title'] ) ? 'data-title="' . $sub_element['title'] . '"' : ''; // WPCS: XSS ok. ?>
-					<?php echo ! empty( $sub_element['nonce'] ) ? 'data-nonce="' . esc_attr( $sub_element['nonce'] ) . '"' : ''; ?>
 					<?php echo ! empty( $sub_element['attributes'] ) ? esc_attr( $sub_element['attributes'] ) : ''; ?>
 					data-id="<?php echo esc_attr( $id ); ?>">
 				<span <?php echo ! empty( $sub_element['class'] ) ? 'class="' . esc_attr( $sub_element['class'] ) . '"' : ''; ?>
