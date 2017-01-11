@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -42,6 +42,9 @@ class Comment_Action {
 	public function callback_save_comment() {
 		check_ajax_referer( 'save_comment' );
 
+		$type = ! empty( $_POST['type'] ) ? $_POST['type'] : '';
+		$model_name = '\digi\\' . $type . '_class';
+
 		$comment = array(
 			'post_id' => (int) $_POST['list_comment'][0]['post_id'],
 			'author_id' => (int) $_POST['list_comment'][0]['author_id'],
@@ -49,10 +52,10 @@ class Comment_Action {
 			'content' => sanitize_text_field( $_POST['list_comment'][0]['content'] ),
 		);
 
-		Risk_Evaluation_Comment_Class::g()->update( $comment );
+		$model_name::g()->update( $comment );
 
 		ob_start();
-		do_shortcode( '[digi_comment id="' . (int) $_POST['list_comment'][0]['post_id'] . '" type="risk_evaluation_comment" display="edit"]' );
+		do_shortcode( '[digi_comment id="' . (int) $_POST['list_comment'][0]['post_id'] . '" type="' . $type . '" display="edit"]' );
 		wp_send_json_success( array( 'view' => ob_get_clean(), 'module' => 'comment', 'callback_success' => 'saved_comment_success' ) );
 	}
 
