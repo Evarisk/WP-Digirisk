@@ -3,10 +3,10 @@
  * Classe gérant les utilisateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
+ * @since 0.1
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
- * @package evaluator
+ * @package user
  * @subpackage class
  */
 
@@ -98,10 +98,6 @@ class User_Digi_Class extends User_Class {
 	 * @version 6.2.4.0
 	 */
 	protected function construct() {
-		/** Pour la recherche */
-		add_filter( 'wpdigi_search_user_affected', array( $this, 'callback_wpdigi_search_user_affected' ), 10, 3 );
-		add_filter( 'wpdigi_search_user_to_assign', array( $this, 'callback_wpdigi_search_user_to_assign' ), 10, 4 );
-
 		// Ajout de 4 actions pour ajouter des champs dans la partie utilisateur de WordPress.
 		add_action( 'show_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'edit_user_profile', array( $this, 'callback_user_profile' ) );
@@ -361,25 +357,30 @@ class User_Digi_Class extends User_Class {
 	 * @param object $workunit L'objet.
 	 * @param int    $user_id L'ID de l'utilisateur a chercher.
 	 *
-	 * @return int La clé de l'utilisateur
+	 * @return bool|int La clé de l'utilisateur
 	 *
 	 * @since 0.1
 	 * @version 6.2.4.0
 	 */
 	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
-			global $wpdigi_user_ctr;
-			// Si $workunit->id est égale à 0 ou si $workunit->option['user_info'] est vide ou si $workunit->option['user_info']['affected_id'] est vide ou si $user_id est vide et n'est pas un entier ou si $workunit->option['user_info']['affected_id'][$user_id] est vide
-			if ( $workunit->id === 0 || empty( $workunit->user_info ) || empty( $workunit->user_info['affected_id'] ) || empty( $workunit->user_info['affected_id']['user'] ) || ( empty( $user_id ) && ctype_digit( strval( $user_id ) ) ) || empty( $workunit->user_info['affected_id']['user'][$user_id] ) )
-				return false;
-			$index_valid_key = -1;
-			foreach ( $workunit->user_info['affected_id']['user'][$user_id] as $key => $affected_user ) {
-				if( $affected_user['status'] == 'valid' ) {
-					$index_valid_key = $key;
-					break;
-				}
-			}
-			if ( $index_valid_key == -1 )
-				return false;
-			return $index_valid_key;
+
+		if ( 0 === $workunit->id || empty( $workunit->user_info ) || empty( $workunit->user_info['affected_id'] ) ||
+				empty( $workunit->user_info['affected_id']['user'] ) || ( empty( $user_id ) &&
+				ctype_digit( strval( $user_id ) ) ) || empty( $workunit->user_info['affected_id']['user'][ $user_id ] ) ) {
+			return false;
 		}
+
+		$index_valid_key = -1;
+		foreach ( $workunit->user_info['affected_id']['user'] [ $user_id ] as $key => $affected_user ) {
+			if ( 'valid' === $affected_user['status'] ) {
+				$index_valid_key = $key;
+				break;
+			}
+		}
+		if ( -1 === $index_valid_key ) {
+			return false;
+		}
+
+		return $index_valid_key;
+	}
 }
