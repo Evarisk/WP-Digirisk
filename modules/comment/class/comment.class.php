@@ -4,8 +4,9 @@
  * Fait également l'affichage du formulaire pour ajouter un commentaire.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage class
  */
@@ -26,10 +27,13 @@ class Digi_Comment_Class extends Singleton_Util {
 	protected function construct() {}
 
 	/**
-	 * [display description]
+	 * Récupères les commentaires et le schéma d'un commentaire puis appelle la vue "main.view.php" du module "comment".
 	 *
 	 * @param  array $param  Les arguments du shortcode.
 	 * @return void
+	 *
+	 * @since 6.2.1.0
+	 * @version 6.2.4.0
 	 */
 	public function display( $param ) {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
