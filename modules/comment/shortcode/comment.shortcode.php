@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage shortcode
@@ -33,7 +33,7 @@ class Digi_Comment_Shortcode {
 	 * @return void
 	 *
 	 * @since 6.2.1.0
-	 * @version 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_digi_comment( $param ) {
 		Digi_Comment_Class::g()->display( $param );
