@@ -47,10 +47,11 @@ class Workunit_Filter {
 				),
 				'delete' => array(
 					'type' => 'text',
+					'action' => 'delete_society',
 					'text' => __( 'Supprimer', 'digirisk' ),
-					'class' => 'action-delete',
-					'attributes' => 'data-action=delete_society data-id=' . $id . '',
-					'nonce' => wp_create_nonce( 'delete_society' ),
+					'parent_class' => 'action-delete no-tab',
+					'attributes' => 'data-id=' . $id . '',
+					'nonce' => 'delete_society',
 				),
 			),
 		);
