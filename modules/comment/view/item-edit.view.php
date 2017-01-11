@@ -39,6 +39,7 @@ $userdata = get_userdata( $author_id );
 			<span data-parent="comment"
 						data-action="save_comment"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_comment' ) ); ?>"
+						data-type="<?php echo esc_attr( $type ); ?>"
 						class="button add action-input"><i class="icon fa fa-plus"></i></span>
 		<?php endif; ?>
 	<?php endif; ?>
