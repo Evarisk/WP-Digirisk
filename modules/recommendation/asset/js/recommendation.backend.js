@@ -5,25 +5,90 @@ window.digirisk.recommendation.init = function() {
 };
 
 window.digirisk.recommendation.event = function() {
-	jQuery( document ).on( 'click', '.wp-digi-recommendation .wp-digi-select-list li', window.digirisk.recommendation.select_recommendation );
+	jQuery( document ).on( 'click', '.table.recommendation .categorie-container.recommendation .item', window.digirisk.recommendation.selectRecommendation );
 };
 
-window.digirisk.recommendation.select_recommendation = function( event ) {
+/**
+ * Lors du clic sur une recommendation, remplace le contenu du toggle par l'image de la recommendation sélectionnée.
+ *
+ * @param  {ClickEvent} event [description]
+ * @return {void}
+ *
+ * @since 0.1
+ * @version 6.2.4.0
+ */
+window.digirisk.recommendation.selectRecommendation = function( event ) {
 	var element = jQuery( this );
-	jQuery( '.wp-digi-recommendation input.input-hidden-recommendation' ).val( element.data( 'id' ) );
-	jQuery( '.wp-digi-recommendation toggle span img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( '.content' ).removeClass( 'active' );
+	element.closest( 'tr' ).find( 'input.input-hidden-recommendation' ).val( element.data( 'id' ) );
+	element.closest( '.toggle' ).find( '.action span' ).hide();
+	element.closest( '.toggle' ).find( '.action img' ).show();
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
+
+	element.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'rgba(0,0,0,.7)' );
+	element.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).removeClass( 'active' );
+	event.stopPropagation();
 };
 
-window.digirisk.recommendation.save_recommendation_success = function( element, response ) {
-  jQuery( '.wp-digi-recommendation' ).replaceWith( response.data.template );
-	window.digirisk.date.init
-}
+/**
+ * Vérifie que le champs "taxonomy[digi-recommendation][] soit différent de -1".
+ *
+ * @param  {HTMLDivElement} triggeredElement L'élément déclenchant l'action.
+ * @return {bool}                            Si true, le formulaire est envoyé. Si false, on annule l'envoie du formulaire.
+ *
+ * @since 0.1
+ * @version 6.2.4.0
+ */
+window.digirisk.recommendation.beforeSaveRecommendation = function( triggeredElement ) {
 
-window.digirisk.recommendation.load_recommendation_success = function( element, response ) {
-  jQuery( element ).closest( 'li' ).replaceWith( response.data.template );
-	window.digirisk.date.init 
-}
+	// Remet à 0 les styles.
+	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'rgba(0,0,0,.7)' );
+	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).removeClass( 'active' );
+
+	// Vérification du danger.
+	if ( '-1' === triggeredElement.closest( '.recommendation-row' ).find( 'input[name="taxonomy[digi-recommendation][]"]' ).val() ) {
+		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'red' );
+		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	return true;
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "save_recommendation".
+ * Remplaces le contenu du tableau "recommendation" par le template renvoyé par la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.recommendation.savedRecommendationSuccess = function( element, response ) {
+	jQuery( 'table.recommendation' ).replaceWith( response.data.template );
+	window.digirisk.date.init();
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "load_recommendation".
+ * Remplaces le contenu de la ligne du tableau "recommendation" par le template renvoyé par la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.recommendation.loadedRecommendationSuccess = function( element, response ) {
+	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
+	window.digirisk.date.init();
+};
 
 window.digirisk.recommendation.delete_recommendation_success = function( element, response ) {
-  jQuery( element ).closest( 'li' ).fadeOut();
-}
+	jQuery( element ).closest( 'li' ).fadeOut();
+};

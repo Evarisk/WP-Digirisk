@@ -35,7 +35,7 @@ class Digirisk_Shortcode extends Singleton_Util {
 			$society_id = (int) $_GET['groupment_id'];
 		}
 
-		if ( ! empty( $_POST['groupment_id'] ) ) {
+		if ( ! empty( $_POST['groupment_id'] ) ) { // WPCS: CSRF ok.
 			$society_id = (int) $_POST['groupment_id'];
 		}
 
@@ -43,7 +43,7 @@ class Digirisk_Shortcode extends Singleton_Util {
 			$society_id = (int) $_GET['workunit_id'];
 		}
 
-		if ( ! empty( $_POST['workunit_id'] ) ) {
+		if ( ! empty( $_POST['workunit_id'] ) ) { // WPCS: CSRF ok.
 			$society_id = (int) $_POST['workunit_id'];
 		}
 

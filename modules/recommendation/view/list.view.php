@@ -3,8 +3,9 @@
  * Affiches la liste des préconisations
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage view
  */
@@ -13,25 +14,26 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<ul class="wp-digi-list wp-digi-recommendation wp-digi-table">
-	<li class="wp-digi-table-header">
-		<span class="wp-digi-recommendation-list-column-thumbnail" >&nbsp;</span>
-		<span class="wp-digi-recommendation-list-column-reference" ><?php _e( 'Ref.', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Préconisation', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></span>
-		<span>&nbsp;</span>
-		<span>&nbsp;</span>
-	</li>
+<table class="table recommendation">
+	<thead>
+		<tr>
+			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+			<th class="wm130"><?php esc_html_e( 'Préconisation', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
+			<th></th>
+		</tr>
+	</thead>
 
-	<?php if ( ! empty( $recommendations ) ) : ?>
-		<?php foreach ( $recommendations as $recommendation ) : ?>
-			<?php view_util::exec( 'recommendation', 'list-item', array( 'recommendation' => $recommendation ) ); ?>
-		<?php endforeach; ?>
-	<?php endif; ?>
+	<tbody>
+		<?php if ( ! empty( $recommendations ) ) :
+			foreach ( $recommendations as $recommendation ) :
+				View_Util::exec( 'recommendation', 'list-item', array( 'society_id' => $society_id, 'recommendation' => $recommendation ) );
+			endforeach;
+		endif; ?>
+	</tbody>
 
-	<?php
-	if ( ! empty( $recommendation_schema ) ) :
-		view_util::exec( 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation_schema ) );
-	endif;
-	?>
-</ul>
+	<tfoot>
+		<?php View_Util::exec( 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation_schema ) ); ?>
+	</tfoot>
+</table>

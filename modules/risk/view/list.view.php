@@ -28,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	<tbody>
 		<?php if ( ! empty( $risks ) ) :
-			foreach ( $risks as $element ) :
-				View_Util::exec( 'risk', 'list-item', array( 'society_id' => $society_id, 'risk' => $element ) );
+			foreach ( $risks as $risk ) :
+				View_Util::exec( 'risk', 'list-item', array( 'society_id' => $society_id, 'risk' => $risk ) );
 			endforeach;
 		endif; ?>
 	</tbody>

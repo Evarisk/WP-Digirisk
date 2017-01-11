@@ -47,36 +47,28 @@ window.digirisk.action.exec_input = function( event ) {
 	}
 };
 
-window.digirisk.action.exec_attribute = function(event) {
+window.digirisk.action.exec_attribute = function( event ) {
   var element = jQuery( this );
 
-	if ( !element[0].getAttribute(' disabled' ) ) {
-		element[0].setAttribute( 'disabled', true );
-
-		if ( jQuery( this ).data( 'confirm' ) ) {
-			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
-				element.get_data( function ( data ) {
-					window.digirisk.request.send( element, data );
-				} );
-			}
-		}
-		else {
-			element.get_data( function ( data ) {
+	if ( jQuery( this ).data( 'confirm' ) ) {
+		if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
+			element.get_data( function( data ) {
 				window.digirisk.request.send( element, data );
 			} );
 		}
+	} else {
+		element.get_data( function( data ) {
+			window.digirisk.request.send( element, data );
+		} );
 	}
 };
 
-window.digirisk.action.delete = function(event) {
+window.digirisk.action.delete = function( event ) {
   var element = jQuery( this );
 
-	if ( !element[0].getAttribute( 'disabled' ) ) {
-  	if ( window.confirm( window.digi_confirm_delete ) ) {
-			element[0].setAttribute( 'disabled', true );
-	    element.get_data( function ( data ) {
-	      window.digirisk.request.send( element, data );
-	    } );
-	  }
+	if ( window.confirm( window.digi_confirm_delete ) ) {
+		element.get_data( function( data ) {
+			window.digirisk.request.send( element, data );
+		} );
 	}
 };

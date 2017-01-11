@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="categorie-container toggle grid padding">
 	<div class="action">
-		<?php echo wp_get_attachment_image( $risk->danger->thumbnail_id, 'thumbnail', false, array( 'title' => $risk->danger->name ) ); ?>
+		<?php echo wp_get_attachment_image( $risk->danger->thumbnail_id, 'thumbnail', false, array( 'aria-label' => $risk->danger->name, 'class' => 'help' ) ); ?>
 		<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='<?php echo esc_attr( $risk->danger->id ); ?>' />
 	</div>
 </div>
