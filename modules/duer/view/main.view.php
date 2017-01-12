@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</thead>
 
 	<tbody>
+		<?php DUER_Class::g()->display_document_list( $element_id ); ?>
 	</tbody>
 
 	<tfoot>

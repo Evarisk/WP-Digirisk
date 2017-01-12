@@ -83,7 +83,7 @@ window.digirisk.DUER.display_societies_duer_success = function( popup, response 
 window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 	var data = {};
 	var i = 0;
-	var listInput = window.eva_lib.array_form.get_input( triggeredElement.closest( '.wp-digi-list-item' ) );
+	var listInput = window.eva_lib.array_form.get_input( triggeredElement.closest( 'tr' ) );
 
 	for ( i = 0; i < listInput.length; i++ ) {
 		if ( listInput[i].name ) {
@@ -112,7 +112,7 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 	window.digirisk.request.send( triggeredElement, data );
 };
 
-window.digirisk.DUER.callback_generate_duer_success = function( element, response ) {
+window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
 	if ( response.data.creation_response.id  ) {
