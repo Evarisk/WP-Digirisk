@@ -5,27 +5,28 @@ window.digirisk.popup.init = function() {
 };
 
 window.digirisk.popup.event = function() {
-  jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
-  jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.open_ajax );
-  jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
-  jQuery( document ).on( 'click', '.popup .container .button-primary', window.digirisk.popup.confirm );
-  jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
-  jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
+	jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
+	jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.open_ajax );
+	jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
+	jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
+	jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
+	jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
 };
 
 window.digirisk.popup.open = function( event ) {
-	var triggered_element = jQuery( this );
-  // Récupères la box de destination mis dans l'attribut du popup
-  var target = triggered_element.closest(  "." + triggered_element.data( 'parent' ) ).find( "." + triggered_element.data( 'target' ) );
+	var triggeredElement = jQuery( this );
+
+	// Récupères la box de destination mis dans l'attribut du popup.
+	var target = triggeredElement.closest(  "." + triggeredElement.data( 'parent' ) ).find( "." + triggeredElement.data( 'target' ) );
 	target.addClass( 'active' );
 
-	if ( target.is( ":visible" ) && triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
-		var callback_object = triggered_element.data( 'cb-object' );
-		var callback_func = triggered_element.data( 'cb-func' );
+	if ( target.is( ":visible" ) && triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
+		var callback_object = triggeredElement.data( 'cb-object' );
+		var callback_func = triggeredElement.data( 'cb-func' );
 
 		// On récupères les "data" sur l'élement en tant qu'args.
-		triggered_element.get_data( function( data ) {
-			window.digirisk[callback_object][callback_func]( triggered_element, target, event, data );
+		triggeredElement.get_data( function( data ) {
+			window.digirisk[callback_object][callback_func]( triggeredElement, target, event, data );
 		} );
 	}
 
@@ -59,7 +60,7 @@ window.digirisk.popup.open_ajax = function( event ) {
 
 window.digirisk.popup.confirm = function( event ) {
 	var triggered_element = jQuery( this );
-	jQuery( '.popup' ).hide();
+	jQuery( '.popup' ).removeClass( 'active' );
 
 	if ( triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
 		var callback_object = triggered_element.data( 'cb-object' );
@@ -77,6 +78,6 @@ window.digirisk.popup.stop = function( event ) {
 };
 
 window.digirisk.popup.close = function( event ) {
-  jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
-  jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
+	jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
+	jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
 };

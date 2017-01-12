@@ -1,31 +1,35 @@
-<?php namespace digi;
+<?php
 /**
-* La popup qui contient les données de l'évaluation complexe de digirisk
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage view
-*/
+ * La popup qui contient les données de l'évaluation complexe de digirisk
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package duer
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="popup" style="display: none;">
-	<div class="container wp-digi-bloc-loader">
+<div class="popup">
+	<div class="container">
+
 		<div class="header">
 			<h2 class="title">Titre de la popup</h2>
 			<i class="close fa fa-times"></i>
 		</div>
-			<div class="content">
+
+		<div class="content">
+			<div class="change-content">
 				<img src='<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>' alt='<?php echo esc_attr( 'Chargement...' ); ?>' />
 			</div>
 
-		<button class="button button-primary"
-						data-cb-object="DUER"
-						data-cb-func="set_textarea_content">Ok</button>
-		<button class="button button-secondary">Annuler</button>
+			<div 	data-cb-object="DUER"
+						data-cb-func="set_textarea_content"
+						class="button green margin uppercase strong float right"><span>OK</span></div>
+		</div>
 	</div>
-
 </div>

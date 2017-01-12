@@ -27,6 +27,5 @@ window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	// Met le méthode d'évaluation dans le input input-hidden-method-id
 	element.closest( 'tr' ).find( 'input.input-hidden-method-id' ).val( methodEvaluationId );
 
-	element.closest( '.risk-row' ).find( '.cotation-container .action i' ).css( 'color', 'rgb(68,68,68)' );
-	element.closest( '.risk-row' ).find( '.cotation-container .tooltip' ).removeClass( 'active' );
+	element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
 };

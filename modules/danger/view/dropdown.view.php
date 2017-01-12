@@ -16,7 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='-1' />
 
-<div class="danger categorie-container toggle grid padding" data-parent="categorie-container" data-target="content">
+<div 	class="danger categorie-container toggle grid padding tooltip red"
+			data-parent="categorie-container"
+			data-target="content"
+			aria-label="<?php esc_html_e( 'Vous devez choisir un danger.', 'digirisk' ); ?>">
 
 	<div class="action">
 		<span><?php esc_html_e( 'Choisir un danger', 'digirisk' ); ?></span>
@@ -35,8 +38,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</ul>
-
-	<div class="tooltip">
-		<p><?php esc_html_e( 'Vous devez choisir un danger.', 'digirisk' ); ?></p>
-	</div>
 </div>

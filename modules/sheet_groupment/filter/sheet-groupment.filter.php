@@ -34,7 +34,7 @@ class Sheet_Groupment_Filter {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
 			'type' => 'text',
 			'text' => __( 'Sheet groupment', 'digirisk' ),
-			'class' => 'dut button red uppercase',
+			'parent_class' => 'gp button red uppercase',
 		);
 
 		return $list_tab;

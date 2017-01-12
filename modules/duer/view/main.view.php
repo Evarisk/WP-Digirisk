@@ -1,24 +1,39 @@
 <?php
 /**
- * Déclares la liste des contient les documents uniques
+ * Déclares le tableau qui contient les documents unique
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.1.9.0
- * @copyright 2015-2016 Evarisk
+ * @since 6.1.9.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package document
  * @subpackage view
  */
 
 namespace digi;
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<ul class="wp-digi-list wp-digi-risk wp-digi-table">
-	<?php DUER_Class::g()->display_document_list( $element_id ); ?>
-	<?php view_util::exec( 'duer', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
-</ul>
+<table class="table duer">
+	<thead>
+		<tr>
+			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+			<th><?php esc_html_e( 'Début', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Fin', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Destinataire', 'digirisk' ); ?>.</th>
+			<th><?php esc_html_e( 'Méthodologie', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Sources', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Notes importantes', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Localisation', 'digirisk' ); ?></th>
+			<th></th>
+		</tr>
+	</thead>
 
-<?php
-\digi\view_util::exec( 'duer', 'popup' );
-?>
+	<tbody>
+	</tbody>
+
+	<tfoot>
+		<?php View_Util::exec( 'duer', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+	</tfoot>
+</table>
+
+<?php View_Util::exec( 'duer', 'popup' ); ?>

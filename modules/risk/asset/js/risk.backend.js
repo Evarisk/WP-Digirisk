@@ -14,23 +14,18 @@ window.digirisk.risk.load_success = function( element, response ) {
 window.digirisk.risk.before_save_risk = function( triggeredElement ) {
 
 	// Remet à 0 les styles.
-	triggeredElement.closest( '.risk-row' ).find( '.categorie-container .action span' ).css( 'color', 'rgba(0,0,0,.7)' );
-	triggeredElement.closest( '.risk-row' ).find( '.categorie-container .tooltip' ).removeClass( 'active' );
-
-	triggeredElement.closest( '.risk-row' ).find( '.cotation-container .action i' ).css( 'color', 'rgb(68,68,68)' );
-	triggeredElement.closest( '.risk-row' ).find( '.cotation-container .tooltip' ).removeClass( 'active' );
+	triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
 
 	// Vérification du danger.
 	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[danger_id]"]' ).val() ) {
-		triggeredElement.closest( '.risk-row' ).find( '.categorie-container .action span' ).css( 'color', 'red' );
-		triggeredElement.closest( '.risk-row' ).find( '.categorie-container .tooltip' ).addClass( 'active' );
+		triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).addClass( 'active' );
 		return false;
 	}
 
 	// Vérification de la cotation.
 	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
-		triggeredElement.closest( '.risk-row' ).find( '.cotation-container .action i' ).css( 'color', 'red' );
-		triggeredElement.closest( '.risk-row' ).find( '.cotation-container .tooltip' ).addClass( 'active' );
+		triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).addClass( 'active' );
 		return false;
 	}
 

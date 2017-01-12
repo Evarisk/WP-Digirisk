@@ -7,17 +7,38 @@ window.digirisk.DUER.init = function() {
 window.digirisk.DUER.event = function() {
 };
 
-window.digirisk.DUER.fill_textarea_in_popup = function( triggered_element, popup_element, event, args ) {
-	if (args) {
-		popup_element.find( 'h2' ).text( args.title );
-		popup_element.find( '.content' ).html( '<textarea class="hidden" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
+/**
+ * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
+ *
+ * Remplis la popup avec:
+ * -la balise <h2> qui est égale au titre data-title de triggeredElement.
+ * -la balise <textarea> qui est égale au contenu du textarea de args.src dans le tableau de l'édition d'un DUER.
+ * -Modifie le contenu de ".change-content" par un <textarea>. On modifie le contenu car la Popup est utilisé dans d'autres cas.
+ * -Rend invisible la balise <p>. Cette balise <p> est utilisé quand on veut voir le contenu de la popup et non le modifier.
+ * -Met args.src dans l'attribut data-target du "bouton vert" qui permet de valider l'édition.
+ *
+ * @param  {HTMLSpanElement} triggeredElement L'icone qui déclenche l'action.
+ * @param  {HTMLDivElement}  popupElement     La popup.
+ * @param  {MouseEvent}      event            Le clic sur l'icone.
+ * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
+ * @return {void}
+ *
+ * @since 0.1
+ * @version 6.2.4.0
+ */
+window.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
+	var textareaContent = '';
+
+	if ( args ) {
+		popupElement.find( 'h2' ).text( args.title );
+		popupElement.find( '.change-content' ).html( '<textarea class="hidden" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
 
 		// On récupères le textarea caché avec le contenu actuel.
-		var textarea_content = triggered_element.closest( '.wp-digi-list-item' ).find( '.textarea-content-' + args['src'] ).val();
-		popup_element.find( 'textarea' ).show();
-		popup_element.find( 'p' ).hide();
-		popup_element.find( 'textarea' ).val( textarea_content );
-		popup_element.find( '.button-primary' ).attr( 'data-target', args['src'] );
+		textareaContent = triggeredElement.closest( 'tr' ).find( '.textarea-content-' + args.src ).val();
+		popupElement.find( 'textarea' ).show();
+		popupElement.find( 'p' ).hide();
+		popupElement.find( 'textarea' ).val( textareaContent );
+		popupElement.find( '.button' ).attr( 'data-target', args.src );
 	}
 };
 
@@ -25,14 +46,15 @@ window.digirisk.DUER.view_in_popup = function( triggered_element, popup_element,
 	if (args) {
 		popup_element.find( 'h2' ).text( args.title );
 		popup_element.find( 'textarea' ).hide();
-		popup_element.find( '.content' ).html( '<p></p>' );
+		popup_element.find( '.change-content' ).html( '<p></p>' );
 		popup_element.find( 'p' ).text( triggered_element.closest( '.wp-digi-list-item' ).find( '.text-content-' + args['src'] ).text() ).show();
 	}
 };
 
-window.digirisk.DUER.set_textarea_content = function( triggered_element, event, args ) {
+window.digirisk.DUER.set_textarea_content = function( triggeredElement, event, args ) {
 	if ( args && args['target'] ) {
 		var textarea_content = jQuery( '.popup textarea' ).val();
+
 		jQuery( '.textarea-content-' + args['target'] ).val( textarea_content );
 	}
 };
@@ -53,7 +75,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 };
 
 window.digirisk.DUER.display_societies_duer_success = function( popup, response ) {
-	popup.find( '.content' ).html( response.data.view );
+	popup.find( '.change-content' ).html( response.data.view );
 
 	window.digirisk.DUER.generate_DUER( jQuery( '.open-popup.dashicons-plus' ), { index: 0 } );
 };
@@ -100,12 +122,11 @@ window.digirisk.DUER.callback_generate_duer_success = function( element, respons
 	if ( ! response.data.end ) {
 		window.digirisk.DUER.generate_DUER( element, response.data );
 	} else {
-		jQuery( '.popup' ).find( 'button.button-primary' ).attr( 'disabled', false );
+		jQuery( '.popup' ).find( 'button' ).attr( 'disabled', false );
 	}
 };
 
-window.digirisk.DUER.callback_generate_duer_error = function() {
-};
+window.digirisk.DUER.callback_generate_duer_error = function() {};
 
 window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
 	jQuery( '.wp-digi-group-sheet button[data-action="digi_list_duer"]' ).click();
