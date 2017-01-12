@@ -1,0 +1,68 @@
+/**
+ * Formulaires
+ */
+
+.digirisk-wrap {
+
+	.form {
+		.form-element {
+			position: relative;
+			width: 100%;
+			margin-bottom: 26px;
+			&:after {
+				content: '';
+				display: block;
+			}
+		}
+		.form-element {
+			&.active input, &.active textarea, input:focus, textarea:focus {
+				outline: none;
+				& ~ label {
+					font-size: 12px;
+					color: @a;
+					pointer-events: auto;
+				}
+			}
+			&.active input, input:focus {
+				& ~ label {
+					top: -10px;
+				}
+			}
+			&.active textarea, textarea:focus {
+				& ~ label {
+					top: -16px;
+				}
+			}
+		}
+		input, textarea {
+			border: 0;
+			border-bottom: 1px solid @b;
+			box-shadow: none;
+			padding: 10px 0;
+			margin: 0;
+			width: 100%;
+			font-size: 14px;
+			&:focus ~ .bar {
+				width: 100%;
+			}
+		}
+		label {
+			position: absolute;
+			top: 10px;
+			transition: all 0.2s ease-out;
+			font-size: 14px;
+			color: rgba(0,0,0,0.4);
+			pointer-events: none;
+			font-weight: 600;
+		}
+		.bar {
+			position: absolute;
+			bottom: 0;
+			width: 0;
+			height: 3px;
+			background: @a;
+			transition: all 0.2s ease-out;
+		}
+	}
+
+}

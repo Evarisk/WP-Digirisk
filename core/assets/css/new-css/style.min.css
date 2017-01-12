@@ -4021,6 +4021,78 @@
           transform: translate(-50%, 0);
 }
 /**
+ * Formulaires
+ */
+.digirisk-wrap .form .form-element {
+  position: relative;
+  width: 100%;
+  margin-bottom: 26px;
+}
+.digirisk-wrap .form .form-element:after {
+  content: '';
+  display: block;
+}
+.digirisk-wrap .form .form-element.active input,
+.digirisk-wrap .form .form-element.active textarea,
+.digirisk-wrap .form .form-element input:focus,
+.digirisk-wrap .form .form-element textarea:focus {
+  outline: none;
+}
+.digirisk-wrap .form .form-element.active input ~ label,
+.digirisk-wrap .form .form-element.active textarea ~ label,
+.digirisk-wrap .form .form-element input:focus ~ label,
+.digirisk-wrap .form .form-element textarea:focus ~ label {
+  font-size: 12px;
+  color: #3495f0;
+  pointer-events: auto;
+}
+.digirisk-wrap .form .form-element.active input ~ label,
+.digirisk-wrap .form .form-element input:focus ~ label {
+  top: -10px;
+}
+.digirisk-wrap .form .form-element.active textarea ~ label,
+.digirisk-wrap .form .form-element textarea:focus ~ label {
+  top: -16px;
+}
+.digirisk-wrap .form input,
+.digirisk-wrap .form textarea {
+  border: 0;
+  border-bottom: 1px solid #272a35;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 10px 0;
+  margin: 0;
+  width: 100%;
+  font-size: 14px;
+}
+.digirisk-wrap .form input:focus ~ .bar,
+.digirisk-wrap .form textarea:focus ~ .bar {
+  width: 100%;
+}
+.digirisk-wrap .form label {
+  position: absolute;
+  top: 10px;
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  font-weight: 600;
+}
+.digirisk-wrap .form .bar {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #3495f0;
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
+/**
  * Propriétés générales
  */
 .digirisk-wrap * {
@@ -4032,4 +4104,9 @@
   font-size: 18px;
   text-transform: uppercase;
   margin: 6px 0;
+}
+.digirisk-wrap h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 6px 0 14px 0;
 }
