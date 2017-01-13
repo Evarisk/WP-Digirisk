@@ -1,12 +1,12 @@
 <?php
 /**
- * Gestion de l'affichage d'un DUER
+ * Affichage d'un DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9.0
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
- * @package document
+ * @package duer
  * @subpackage view
  */
 
@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<td class="padded"><?php echo esc_html( mysql2date( 'd/m/Y', $element->document_meta['dateFinAudit'], true ) ); ?></td>
 
 	<td class="text-center">
-		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></span>
-		<span data-parent="wp-digi-societytree-right-container"
+		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( $element->document_meta['destinataireDUER'] ) ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
@@ -33,8 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	</td>
 
 	<td class="text-center">
-		<span class="hidden text-content-methodology"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></span>
-		<span data-parent="wp-digi-societytree-right-container"
+		<span class="hidden text-content-methodology"><?php echo nl2br( $element->document_meta['methodologie'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
@@ -44,8 +44,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	</td>
 
 	<td class="text-center">
-		<span class="hidden text-content-sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></span>
-		<span data-parent="wp-digi-societytree-right-container"
+		<span class="hidden text-content-sources"><?php echo nl2br( $element->document_meta['sources'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
@@ -55,8 +55,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		</td>
 
 	<td class="text-center">
-		<span class="hidden text-content-notes-importantes"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></span>
-		<span data-parent="wp-digi-societytree-right-container"
+		<span class="hidden text-content-notes-importantes"><?php echo nl2br( $element->document_meta['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
@@ -66,8 +66,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	</td>
 
 	<td class="text-center">
-		<span class="hidden text-content-dispo-des-plans"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></span>
-		<span data-parent="wp-digi-societytree-right-container"
+		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( $element->document_meta['dispoDesPlans'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"

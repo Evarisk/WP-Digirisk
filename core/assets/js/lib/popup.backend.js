@@ -60,16 +60,19 @@ window.digirisk.popup.open_ajax = function( event ) {
 
 window.digirisk.popup.confirm = function( event ) {
 	var triggered_element = jQuery( this );
-	jQuery( '.popup' ).removeClass( 'active' );
 
-	if ( triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
-		var callback_object = triggered_element.data( 'cb-object' );
-		var callback_func = triggered_element.data( 'cb-func' );
+	if ( ! jQuery( '.popup' ).hasClass( 'no-close' ) ) {
+		jQuery( '.popup' ).removeClass( 'active' );
 
-		// On récupères les "data" sur l'élement en tant qu'args.
-		triggered_element.get_data( function( data ) {
-			window.digirisk[callback_object][callback_func]( triggered_element, event, data );
-		} );
+		if ( triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
+			var callback_object = triggered_element.data( 'cb-object' );
+			var callback_func = triggered_element.data( 'cb-func' );
+
+			// On récupères les "data" sur l'élement en tant qu'args.
+			triggered_element.get_data( function( data ) {
+				window.digirisk[callback_object][callback_func]( triggered_element, event, data );
+			} );
+		}
 	}
 };
 
