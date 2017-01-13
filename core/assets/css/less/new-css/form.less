@@ -42,6 +42,7 @@
 			margin: 0;
 			width: 100%;
 			font-size: 14px;
+			background: transparent;
 			&:focus ~ .bar {
 				width: 100%;
 			}
@@ -57,11 +58,16 @@
 		}
 		.bar {
 			position: absolute;
-			bottom: 0;
 			width: 0;
 			height: 3px;
 			background: @a;
 			transition: all 0.2s ease-out;
+		}
+		input ~ .bar {
+			bottom: 0;
+		}
+		textarea ~ .bar {
+			bottom: 3px;	
 		}
 	}
 
