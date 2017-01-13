@@ -42,12 +42,30 @@ window.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupE
 	}
 };
 
-window.digirisk.DUER.view_in_popup = function( triggered_element, popup_element, event, args ) {
-	if (args) {
-		popup_element.find( 'h2' ).text( args.title );
-		popup_element.find( 'textarea' ).hide();
-		popup_element.find( '.change-content' ).html( '<p></p>' );
-		popup_element.find( 'p' ).text( triggered_element.closest( '.wp-digi-list-item' ).find( '.text-content-' + args['src'] ).text() ).show();
+
+/**
+ * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
+ *
+ * Remplis la popup avec:
+ * -la balise <h2> qui est égale au titre data-title de triggeredElement.
+ * -Cache la balise <textarea>.
+ * -Modifie le contenu de ".change-content" par un paragraphe vide pour ensuite ajouter le contenu.
+ *
+ * @param  {HTMLSpanElement} triggeredElement L'icone qui déclenche l'action.
+ * @param  {HTMLDivElement}  popupElement     La popup.
+ * @param  {MouseEvent}      event            Le clic sur l'icone.
+ * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
+ * @return {void}
+ *
+ * @since 0.1
+ * @version 6.2.4.0
+ */
+window.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
+	if ( args ) {
+		popupElement.find( 'h2' ).text( args.title );
+		popupElement.find( 'textarea' ).hide();
+		popupElement.find( '.change-content' ).html( '<p></p>' );
+		popupElement.find( 'p' ).html( triggeredElement.closest( 'tr' ).find( '.text-content-' + args.src ).html() ).show();
 	}
 };
 
@@ -68,8 +86,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 
 	popupElement.find( 'h2' ).text( args.title );
 	popupElement.addClass( 'no-close' );
-	popupElement.find( 'button.button-primary' ).attr( 'disabled', true );
-	popupElement.find( 'button.button-primary' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
+	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
 	window.digirisk.request.send( popupElement, data );
 };
@@ -112,6 +129,18 @@ window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
 	window.digirisk.request.send( triggeredElement, data );
 };
 
+/**
+ * Le callback en cas de réussite à la requête Ajax "generate_DUER".
+ * Coches le LI correspondant à index et regénères un DUER.
+ * Si la réponse contient "end", stop la génération du DUER, et rend le bouton cliquable.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
 window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
@@ -122,12 +151,12 @@ window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	if ( ! response.data.end ) {
 		window.digirisk.DUER.generate_DUER( element, response.data );
 	} else {
-		jQuery( '.popup' ).find( 'button' ).attr( 'disabled', false );
+		jQuery( '.popup' ).removeClass( 'no-close' );
 	}
 };
 
 window.digirisk.DUER.callback_generate_duer_error = function() {};
 
 window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
-	jQuery( '.wp-digi-group-sheet button[data-action="digi_list_duer"]' ).click();
+	jQuery( '.digirisk-wrap .button[data-action="digi_list_duer"]' ).click();
 };
