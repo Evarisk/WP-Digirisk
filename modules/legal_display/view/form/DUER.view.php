@@ -1,23 +1,24 @@
-<?php namespace digi;
+<?php
 /**
-* Documents
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package legal_display
-* @subpackage templates
-*/
+ * Modalités d'accés au DUER
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package legal_display
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<ul class="wp-digi-form">
-  <li><h2><?php _e( 'DUER', 'digirisk' ); ?></h2></li>
-  <li>
-    <label>
-      <?php _e( 'How access to duer', 'digirisk' ); ?>
-      <input name="DUER[how_access_to_duer]" type="text" value="<?php echo $legal_display->DUER['how_access_to_duer']; ?>" />
-    </label>
-  </li>
+<ul class="form">
+	<li><h2><?php esc_html_e( 'DUER', 'digirisk' ); ?></h2></li>
+	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->DUER['how_access_to_duer'] ) ? 'active' : '' ); ?>">
+		<input name="DUER[how_access_to_duer]" type="text" value="<?php echo esc_attr( $legal_display->DUER['how_access_to_duer'] ); ?>" />
+		<label><?php esc_html_e( 'Modalités d\'accès', 'digirisk' ); ?></label>
+		<span class="bar"></span>
+	</li>
 </ul>

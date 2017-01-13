@@ -69,7 +69,7 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"default_tab": "digi_list_duer",
-	"default_tab_title": "Les documents unique de",
+	"default_tab": "digi-legal_display",
+	"default_tab_title": "Les affichages légaux de",
 	"debug": false
 }
