@@ -27,8 +27,21 @@ window.digirisk.installer.key_up_domain_mail = function( event ) {
 	}
 };
 
-window.digirisk.installer.save_society = function( element, response ) {
-	element.closest( 'div' ).hide();
+/**
+ * Le callback en cas de réussite à la requête Ajax "save_society".
+ * Ferme la div "society". Changes l'étape de "Votre société" en "Composants".
+ * Ouvre la div "wpdigi-components".
+ * Appel la méthode "request_install_component".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.installer.savedSociety = function( element, response ) {
+	element.closest( 'div.society' ).hide();
 	jQuery( '.wpdigi-installer .step-create-society' ).removeClass( 'active' );
 	jQuery( '.wpdigi-installer .step-create-components' ).addClass( 'active' );
 	jQuery( '.wpdigi-installer .wpdigi-components' ).fadeIn();
@@ -45,13 +58,18 @@ window.digirisk.installer.request_install_component = function() {
 };
 
 /**
- * Le callback quand la requête pour installer les composants est terminée avec succés
+ * Le callback en cas de réussite à la requête Ajax "installer_components".
  * Met le li active en statut "finit" et passes au suivant, tout en relancant la requête pour installer le composant suivant.
  * Si tous les li sont en statut "finit" passes à l'étape suivante qui est "Création des utilisateurs"
- * @param  {Object} response [description]
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
  */
-window.digirisk.installer.install_component_success = function( response ) {
+window.digirisk.installer.installedComponentSuccess = function( response ) {
 	jQuery( '.wpdigi-installer .wpdigi-components li.active img' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components li.active .dashicons' ).show();
 	jQuery( '.wpdigi-installer .wpdigi-components li.active' ).removeClass( 'active' );

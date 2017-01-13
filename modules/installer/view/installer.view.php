@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<li class="step step-create-users"><span class="title"><?php esc_html_e( 'Votre personnel', 'digirisk' ); ?></span><i class="circle">3</i></li>
 	</ul>
 
-	<div class="main-content">
+	<div class="main-content society">
 		<h2><?php esc_html_e( 'Votre société', 'digirisk' );?></h2>
 
 		<form method="POST" class="form" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">

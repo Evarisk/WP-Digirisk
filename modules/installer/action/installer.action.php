@@ -3,13 +3,14 @@
  * Les actions qui se déroulent lors de l'installation.
  *
  * @package Evarisk\Plugin
+ *
+ * @since 0.1
+ * @version 6.2.4.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Les actions qui se déroulent lors de l'installation.
@@ -18,6 +19,12 @@ class Installer_Action {
 
 	/**
 	 * Le constructeur appelle les méthodes admin_post et ajax suivantes:
+	 * save_society (Ajax)
+	 * installer_components (Ajax)
+	 * last_step (admin_post)
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
@@ -30,18 +37,21 @@ class Installer_Action {
 	 * Test
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
-		$address = address_class::g()->create( $_POST['address'] );
-		$groupment = group_class::g()->create( $_POST['groupment'] );
+		$address = Address_Class::g()->create( $_POST['address'] );
+		$groupment = Group_Class::g()->create( $_POST['groupment'] );
 		$groupment->contact['address_id'][] = $address->id;
-		group_class::g()->update( $groupment );
+		Group_Class::g()->update( $groupment );
 		$address->post_id = $groupment->id;
-		address_class::g()->update( $address );
+		Address_Class::g()->update( $address );
 
-		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'save_society' ) );
+		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'savedSociety' ) );
 	}
 
 	/**
@@ -51,6 +61,9 @@ class Installer_Action {
 	 * Les recommendations
 	 *
 	 * @return void
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function ajax_installer_components() {
 		check_ajax_referer( 'ajax_installer_components' );
@@ -63,27 +76,27 @@ class Installer_Action {
 			'evaluation_method_installed' => false,
 		);
 
-		$core_option = get_option( config_util::$init['digirisk']->core_option, $default_core_option );
+		$core_option = get_option( Config_Util::$init['digirisk']->core_option, $default_core_option );
 
 		if ( ! $core_option['danger_installed'] ) {
-			danger_default_data_class::g()->create();
-			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
+			Danger_Default_Data_Class::g()->create();
+			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
 			$core_option['danger_installed'] = true;
 		} elseif ( ! $core_option['recommendation_installed'] ) {
-			recommendation_default_data_class::g()->create();
-			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
+			Recommendation_Default_Data_Class::g()->create();
+			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
 			$core_option['recommendation_installed'] = true;
 		} elseif ( ! $core_option['evaluation_method_installed'] ) {
-			evaluation_method_default_data_class::g()->create();
-			log_class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
+			Evaluation_Method_Default_Data_Class::g()->create();
+			Log_Class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
 			$core_option['evaluation_method_installed'] = true;
 			$core_option['installed'] = true;
-			log_class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
+			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
-		update_option( config_util::$init['digirisk']->core_option, $core_option );
+		update_option( Config_Util::$init['digirisk']->core_option, $core_option );
 
-		wp_send_json_success( array( 'core_option' => $core_option, 'module' => 'installer', 'callback_success' => 'install_component_success' ) );
+		wp_send_json_success( array( 'core_option' => $core_option, 'module' => 'installer', 'callback_success' => 'installedComponentSuccess' ) );
 	}
 
 	/**
