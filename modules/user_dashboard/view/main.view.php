@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="wrap user-dashboard">
+<div class="digirisk-wrap user-dashboard">
 	<h3><?php _e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h3>
 
 	<ul class="wp-digi-form no-form gridwrapper3 single-line">
@@ -17,10 +17,10 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	</ul>
 
 	<!-- Liste les utilisateurs -->
-	<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
+	<table class="table">
 		<?php
-			user_dashboard_class::g()->display_list_user();
-			view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
+			User_Dashboard_Class::g()->display_list_user();
+			View_Util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 		?>
-	</ul>
+	</table>
 </div>
