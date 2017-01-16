@@ -1,27 +1,39 @@
-<?php namespace digi;
+<?php
+/**
+ * Affichage d'un utilisateur en mode édition.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.1.9.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package user_dashboard
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<li class="wp-digi-list-item <?php echo $user->id === 0 ? 'wp-digi-table-item-new':  ''; ?>">
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<tr class="user-row">
 	<input type="hidden" name="action" value="save_user" />
 	<?php wp_nonce_field( 'ajax_save_user' ); ?>
-	<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
-	<span class="wp-avatar" style="background: #<?php echo $user->avatar_color; ?>;" ><?php echo $user->initial; ?></span>
-	<span><strong>U<?php echo $user->id; ?></strong></span>
-	<span class="padded"><input type="text" class="lastname" placeholder="Name" name="lastname" value="<?php echo $user->lastname; ?>" /></span>
-	<span class="padded"><input type="text" class="firstname" placeholder="Firstname" name="firstname" value="<?php echo $user->firstname; ?>" /></span>
-	<span class="padded"><input type="text" class="email" placeholder="demo@<?php echo get_option( 'digirisk_domain_mail', 'demo.com' ); ?>" name="email" value="<?php echo $user->email; ?>" /></span>
-	<span class="add-staff wp-digi-action wp-digi-action-new" >
+	<input type="hidden" name="id" value="<?php echo esc_attr( $user->id ); ?>" />
+	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
+	<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
+	<td class="padding"><input type="text" class="lastname" placeholder="Name" name="lastname" value="<?php echo esc_attr( $user->lastname ); ?>" /></td>
+	<td class="padding"><input type="text" class="firstname" placeholder="Firstname" name="firstname" value="<?php echo esc_attr( $user->firstname ); ?>" /></td>
+	<td class="padding"><input type="text" class="email" placeholder="demo@<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" name="email" value="<?php echo esc_attr( $user->email ); ?>" /></td>
+	<td>
 		<?php
-		if ( empty( $user->id ) ):
+		if ( empty( $user->id ) ) :
 			?>
-			<a href="#" class="wp-digi-action dashicons dashicons-plus wp-digi-action-edit"></a>
+			<a href="#" data-parent="user-row" class="action-input">S</a>
 			<?php
-		else:
+		else :
 			?>
-			<a href="#" data-id="<?php echo $user->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
+			<a href="#" class="action-input" data-parent="user-row" aria-hidden="true" >S</a>
 			<?php
 		endif;
 		?>
-	</span>
-</li>
+	</td>
+</tr>
