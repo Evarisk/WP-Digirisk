@@ -1,0 +1,30 @@
+/**
+ * Loader
+ * .loading -> Ajouter cette classe sur un bloc pendant un chargement
+ */
+
+ .digirisk-wrap {
+
+	 .loading {
+		 transition: all 0.2s ease-out;
+		 pointer-events: none;
+		 opacity: 0.5;
+		 position: relative;
+		 &:before {
+			 display: block;
+			 content: '';
+			 border: 3px solid #a7a7a7;
+			 border-top: 3px solid @a;
+			 border-radius: 50%;
+			 width: 20px;
+			 height: 20px;
+			 animation: spin 1s cubic-bezier(.17,.67,.67,.46) infinite;
+			 position: absolute;
+			 left: 50%;
+			 top: 50%;
+			 transform: translate(-50%, -50%);
+			 z-index: 99;
+		 }
+	 }
+
+ }
