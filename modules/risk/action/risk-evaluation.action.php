@@ -6,29 +6,33 @@
 *
 * @author Jimmy Latour <jimmy@evarisk.com>
 * @version 0.1
-* @copyright 2015-2016 Eoxia
+* @copyright 2015-2017 Evarisk
 * @package risk
 * @subpackage action
 */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class risk_evaluation_action {
+/**
+ * Les actions relatives aux évaluations des risques.
+ */
+class Risk_Evaluation_Action {
 	/**
-	* Le constructeur appelle l'action ajax: wp_ajax_save_risk
-	*/
+	 * Le constructeur appelle l'action ajax: wp_ajax_save_risk
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function __construct() {
 		add_action( 'wp_ajax_edit_risk', array( $this, 'ajax_edit_risk' ) );
 	}
 
 	/**
-  * Enregistres l'évaluation d'un risque
-  *
-  * int $_POST['risk_evaluation_level'] Le level de l'évaluation du risque
-  *
-  * @param array $_POST Les données envoyées par le formulaire
-  *
-  */
+	 * Enregistres l'évaluation d'un risque
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	*/
 	public function ajax_edit_risk() {
 		$risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
 
@@ -60,4 +64,4 @@ class risk_evaluation_action {
 	}
 }
 
-new risk_evaluation_action();
+new Risk_Evaluation_Action();

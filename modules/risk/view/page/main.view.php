@@ -1,13 +1,25 @@
-<?php namespace digi;
+<?php
+/**
+ * La vue principale de la page "Risques"
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<div class="wrap risk-page">
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-	<ul class="wp-digi-list wp-digi-risk wp-digi-table wp-digi-bloc-loader">
-		<?php risk_page_class::g()->display_risk_list(); ?>
-	</ul>
+<div class="digirisk-wrap risk-page">
 
-	<a href="#" class="button button-secondary right">Enregistrer</a>
+	<table class="table risk">
+		<?php Risk_Page_Class::g()->display_risk_list(); ?>
+	</table>
+
+	<a href="#" class="button green right">Enregistrer</a>
 
 </div>

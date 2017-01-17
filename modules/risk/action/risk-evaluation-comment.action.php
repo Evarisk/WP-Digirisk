@@ -1,12 +1,11 @@
 <?php
-
 /**
  * Enregistres les commentaires des risques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
- * @copyright 2015-2016 Eoxia
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
  */
@@ -23,6 +22,9 @@ class Risk_Evaluation_Comment_Action {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 2 );
@@ -37,7 +39,7 @@ class Risk_Evaluation_Comment_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_save_risk_evaluation_comment( $risk_obj, $risk ) {
 		if ( isset( $risk_obj->id ) ) {

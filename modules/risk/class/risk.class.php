@@ -7,7 +7,7 @@
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package risk
- * @subpackage shortcode
+ * @subpackage class
  */
 
 namespace digi;

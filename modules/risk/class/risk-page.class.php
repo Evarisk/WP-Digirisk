@@ -1,27 +1,32 @@
 <?php
 /**
- * La classe qui contrôle la page "Tous les riques"
+ * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage class
  */
+
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
- * La classe qui contrôle la page "Tous les riques"
- *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.1.0.0
+ * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
-class Risk_page_class extends singleton_util {
+class Risk_page_class extends Singleton_Util {
+
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
 	 *
 	 * @return void nothing
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	protected function construct() {}
 
@@ -29,6 +34,9 @@ class Risk_page_class extends singleton_util {
 	 * Affiches le contenu de la page "Tous les risques"
 	 *
 	 * @return void nothing
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function display() {
 		view_util::exec( 'risk', 'page/main' );
@@ -39,6 +47,9 @@ class Risk_page_class extends singleton_util {
 	 * Si $_GET['order_key'] et $_GET['order_type'] existent, le trie se fait selon ses critères.
 	 *
 	 * @return void nothing
+	 *
+	 * @since 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function display_risk_list() {
 		$risk_list = risk_class::g()->get( array() );
