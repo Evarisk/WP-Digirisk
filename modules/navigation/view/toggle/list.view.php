@@ -32,7 +32,7 @@ if ( ! empty( $groupments ) ) :
 								data-action="create_group"
 								data-nonce="<?php echo esc_attr( wp_create_nonce( 'create_group' ) ); ?>"
 								href="#"
-								class="wp-digi-action dashicons dashicons-plus action-attribute"></a>
+								class="wp-digi-action fa fa-plus action-attribute"></a>
 						<?php endif; ?>
 					</span>
 				</div>
