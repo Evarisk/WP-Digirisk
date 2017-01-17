@@ -27,8 +27,7 @@ window.digirisk.recommendation.selectRecommendation = function( event ) {
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
 
-	element.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'rgba(0,0,0,.7)' );
-	element.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).removeClass( 'active' );
+	element.closest( '.recommendation-row' ).find( '.categorie-container' ).removeClass( 'active' );
 	event.stopPropagation();
 };
 
@@ -44,13 +43,11 @@ window.digirisk.recommendation.selectRecommendation = function( event ) {
 window.digirisk.recommendation.beforeSaveRecommendation = function( triggeredElement ) {
 
 	// Remet à 0 les styles.
-	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'rgba(0,0,0,.7)' );
-	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).removeClass( 'active' );
+	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container' ).removeClass( 'active' );
 
 	// Vérification du danger.
 	if ( '-1' === triggeredElement.closest( '.recommendation-row' ).find( 'input[name="taxonomy[digi-recommendation][]"]' ).val() ) {
-		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .action span' ).css( 'color', 'red' );
-		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container .tooltip' ).addClass( 'active' );
+		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container' ).addClass( 'active' );
 		return false;
 	}
 

@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php foreach ( $danger_category_list as $danger_category ) : ?>
 			<?php if ( ! empty( $danger_category->danger ) ) : ?>
 				<?php foreach ( $danger_category->danger as $danger ) : ?>
-					<li class="item help" aria-label="<?php echo esc_attr( $danger->name ); ?>" data-id="<?php echo esc_attr( $danger->id ); ?>">
+					<li class="item tooltip" aria-label="<?php echo esc_attr( $danger->name ); ?>" data-id="<?php echo esc_attr( $danger->id ); ?>">
 						<?php echo wp_get_attachment_image( $danger->thumbnail_id, 'thumbnail', false ); ?>
 					</li>
 				<?php endforeach; ?>

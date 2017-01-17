@@ -52,7 +52,7 @@ class Risk_Action {
 	 */
 	public function callback_display_risk( $society_id, $risk ) {
 		$module = 'risk';
-		$callback_success = 'save_risk_success';
+		$callback_success = 'savedRiskSuccess';
 		$template = '';
 		$page = ! empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
 

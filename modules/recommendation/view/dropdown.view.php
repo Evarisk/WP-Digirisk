@@ -16,7 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
 
-<div class="recommendation categorie-container toggle grid padding" data-parent="categorie-container" data-target="content">
+<div 	class="recommendation categorie-container toggle grid padding tooltip red"
+			aria-label="<?php esc_html_e( 'Vous devez choisir une préconisation.', 'digirisk' ); ?>"
+			data-parent="categorie-container"
+			data-target="content">
 
 	<div class="action">
 		<span><?php esc_html_e( 'Choisir une préconisation', 'digirisk' ); ?></span>
@@ -28,15 +31,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php foreach ( $recommendation_category_list as $recommendation_category ) : ?>
 				<?php if ( ! empty( $recommendation_category->recommendation_term ) ) : ?>
 					<?php foreach ( $recommendation_category->recommendation_term as $recommendation ) : ?>
-						<li class="item help" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
+						<li class="item tooltip" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
 							<?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false ); ?>
 						</li>
 					<?php endforeach; ?>
 				<?php endif; ?>
 		<?php endforeach; ?>
 	</ul>
-
-	<div class="tooltip">
-		<p><?php esc_html_e( 'Vous devez choisir une préconisation.', 'digirisk' ); ?></p>
-	</div>
 </div>
