@@ -1,20 +1,23 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Les actions relatives aux groupements
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package group
+ * @subpackage action
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 /**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * Les actions relatives aux groupements
  */
-class group_action {
+class Group_Action {
 
 	/**
 	 * Le constructeur appelle les actions ajax suivantes:
@@ -23,6 +26,9 @@ class group_action {
 	 * wp_ajax_wpdigi_ajax_group_update
 	 * wp_ajax_display_ajax_sheet_display
 	 * wp_ajax_wpdigi_generate_duer_digi-group
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_create_group', array( $this, 'ajax_create_group' ) );
@@ -32,26 +38,28 @@ class group_action {
 	}
 
 	/**
-	* Créer un groupement
-	*
-	* int $_POST['group_id'] L'ID du parent
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Créer un groupement
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function ajax_create_group() {
-		if ( 0 === ( int )$_POST['parent_id'] )
-			wp_send_json_error();
-		else
-			$parent_id = (int) $_POST['parent_id'];
+		check_ajax_referer( 'create_group' );
 
-		$group = group_class::g()->create( array(
+		if ( 0 === (int) $_POST['parent_id'] ) {
+			wp_send_json_error();
+		} else {
+			$parent_id = (int) $_POST['parent_id'];
+		}
+
+		$group = Group_Class::g()->create( array(
 			'parent_id' => $parent_id,
 			'title' => __( 'Undefined', 'digirisk' ),
 		) );
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'callback_create_group', 'groupment_id' => $group->id, 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'createdGroupSuccess', 'groupment_id' => $group->id, 'template' => ob_get_clean() ) );
 	}
 
 	/**

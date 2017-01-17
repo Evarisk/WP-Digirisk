@@ -1,14 +1,18 @@
 <?php
 /**
- * Une unité de travail
+ * Affiches une unité de travail dans la navigation
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package navigation
+ * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
-?>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <li class="unit-header"
 	data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
@@ -19,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 	<span
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 		data-action="load_society"
-		data-groupment-id="<?php echo $workunit->parent_id; ?>"
+		data-groupment-id="<?php echo esc_attr( $workunit->parent_id ); ?>"
 		data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
 		class="action-attribute title">
 		<strong><?php echo esc_html( $workunit->unique_identifier ); ?> -</strong>
@@ -29,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 	<span class="action-delete delete button w50"
 		data-id="<?php echo esc_attr( $workunit->id ); ?>"
-		data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_workunit_' . $workunit->id ) ); ?>"
+		data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_society' ) ); ?>"
 		data-action="delete_society">
 		<i class="icon dashicons dashicons-no-alt"></i>
 	</span>

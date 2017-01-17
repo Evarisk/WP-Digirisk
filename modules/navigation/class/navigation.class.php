@@ -1,15 +1,17 @@
 <?php
 /**
- * Appelle la vue permettant d'afficher la navigation
+ * Classe gérant la navigation
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package navigation
+ * @subpackage class
  */
-
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
  * Appelle la vue permettant d'afficher la navigation
@@ -18,6 +20,9 @@ class Navigation_Class extends Singleton_Util {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	protected function construct() {}
 
@@ -26,6 +31,9 @@ class Navigation_Class extends Singleton_Util {
 	 *
 	 * @param int $groupment_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display( $groupment_id ) {
 		view_util::exec( 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
@@ -37,6 +45,9 @@ class Navigation_Class extends Singleton_Util {
 	 * @param  int $groupment_id (optional) L'ID du groupement sélectionné.
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display_toggle( $groupment_id = 0 ) {
 		$groupment = group_class::g()->get( array( 'post__in' => array( $groupment_id ) ) );
@@ -51,6 +62,9 @@ class Navigation_Class extends Singleton_Util {
 	 * @param  integer $selected_groupment_id L'ID du groupement sélectionné.
 	 * @param  integer $parent_id (optional) 	L'ID du groupement parent.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display_toggle_list( $selected_groupment_id, $parent_id = 0 ) {
 		$groupments = group_class::g()->get(
@@ -64,7 +78,7 @@ class Navigation_Class extends Singleton_Util {
 
 		if ( !empty( $groupments ) ) {
 			foreach ( $groupments as $groupment ) {
-				$groupment->count_workunit = count( workunit_class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
+				$groupment->count_workunit = count( Workunit_Class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
 			}
 		}
 
@@ -77,6 +91,9 @@ class Navigation_Class extends Singleton_Util {
 	 *
 	 * @param  integer $parent_id L'ID du groupement parent.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display_workunit_list( $parent_id ) {
 		$display_create_workunit_form = ( count( group_class::g()->get( array( 'post_parent' => $parent_id, 'posts_per_page' => -1 ) ) ) === 0 ) ? true : false;

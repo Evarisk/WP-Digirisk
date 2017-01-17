@@ -1,15 +1,18 @@
 <?php
 /**
- * La liste des groupements
+ * La liste des groupements dans la navigation
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package navigation
+ * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 if ( ! empty( $groupments ) ) :
 	foreach ( $groupments as $key => $groupment ) :
@@ -27,6 +30,7 @@ if ( ! empty( $groupments ) ) :
 							<a
 								data-parent-id="<?php echo esc_attr( $groupment->id ); ?>"
 								data-action="create_group"
+								data-nonce="<?php echo esc_attr( wp_create_nonce( 'create_group' ) ); ?>"
 								href="#"
 								class="wp-digi-action dashicons dashicons-plus action-attribute"></a>
 						<?php endif; ?>
