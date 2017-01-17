@@ -28,13 +28,12 @@ class Workunit_Filter {
 	/**
 	 * Ajoutes les onglets "Configuration" et "Supprimer" aux unités de travail
 	 *
-	 * @since 6.2.2.0
-	 * @version 6.2.4.0
-	 *
 	 * @param  array   $tab_list La liste des filtres.
 	 * @param  integer $id L'ID de la société.
 	 *
 	 * @return array
+	 * @since 6.2.2.0
+	 * @version 6.2.4.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
 		$tab_list['digi-workunit']['more'] = array(
@@ -44,14 +43,15 @@ class Workunit_Filter {
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),
+					'nonce' => 'load_content',
+					'attributes' => 'data-id=' . $id . '',
 				),
 				'delete' => array(
 					'type' => 'text',
-					'action' => 'delete_society',
 					'text' => __( 'Supprimer', 'digirisk' ),
-					'parent_class' => 'action-delete no-tab',
-					'attributes' => 'data-id=' . $id . '',
-					'nonce' => 'delete_society',
+					'class' => 'action-delete',
+					'attributes' => 'data-action=delete_society data-id=' . $id . '',
+					'nonce' => wp_create_nonce( 'delete_society' ),
 				),
 			),
 		);

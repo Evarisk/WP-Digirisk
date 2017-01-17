@@ -1,18 +1,21 @@
 <?php
 /**
- * Gères la génération de la fiche de poste
+ * Classe gérant les fiches de poste
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package sheet-workunit
+ * @subpackage class
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
- * Gères la génération de la fiche de poste
+ * Classe gérant les fiches de poste
  */
 class Fiche_De_Poste_Class extends Post_Class {
 	/**
@@ -116,7 +119,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		view_util::exec( 'sheet_workunit', 'list', array( 'list_document' => $list_document ) );
+		view_util::exec( 'sheet_workunit', 'list', array( 'list_document' => $list_document, 'element_id' => $element_id ) );
 	}
 
 	/**

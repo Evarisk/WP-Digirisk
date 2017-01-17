@@ -1,21 +1,19 @@
 <?php
 /**
- * Déclares la liste des contenant les fiches de groupements
+ * Déclares la liste des contenant les fiches de poste
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Evarisk
- * @package sheet_groupment
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package sheet_workunit
  * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-<ul class="wp-digi-list wp-digi-risk wp-digi-table">
+<table class="table">
 	<?php Fiche_De_Poste_Class::g()->display_document_list( $element_id ); ?>
-	<?php view_util::exec( 'sheet_workunit', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
 </ul>

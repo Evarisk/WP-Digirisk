@@ -21,6 +21,9 @@ class Tab_Action {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_load_tab_content', array( $this, 'callback_load_tab_content' ) );
@@ -28,6 +31,9 @@ class Tab_Action {
 
 	/**
 	 * Charges le contenu d'un onglet
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function callback_load_tab_content() {
 		check_ajax_referer( 'load_content' );
@@ -37,7 +43,7 @@ class Tab_Action {
 		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
 		// Modification du titre.
-		$element = society_class::g()->show_by_type( $element_id );
+		$element = Society_Class::g()->show_by_type( $element_id );
 		$title .= ' ' . $element->unique_identifier . ' - ' . $element->title;
 
 		ob_start();

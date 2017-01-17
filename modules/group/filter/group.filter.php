@@ -39,6 +39,8 @@ class Group_Filter {
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),
+					'nonce' => 'load_content',
+					'attributes' => 'data-id=' . $id . '',
 				),
 				'delete' => array(
 					'type' => 'text',

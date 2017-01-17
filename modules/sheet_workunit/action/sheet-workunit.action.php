@@ -1,23 +1,29 @@
 <?php
 /**
- * Gères l'action pour appeler la méthode generate de Fiche_De_Poste_Class
+ * Les actions relatives aux fiches de poste
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package sheet-workunit
+ * @subpackage action
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
- * Gères l'action pour appeler la méthode generate de Fiche_De_Poste_Class
+ * Les actions relatives aux fiches de poste
  */
 class Sheet_Workunit_Action {
 
 	/**
 	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_workunit
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_fiche_de_poste', array( $this, 'ajax_generate_fiche_de_poste' ) );
@@ -27,6 +33,9 @@ class Sheet_Workunit_Action {
 	 * Appelle la méthode generate de Fiche_De_Poste_Class
 	 *
 	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function ajax_generate_fiche_de_poste() {
 		check_ajax_referer( 'ajax_generate_fiche_de_poste' );
@@ -39,7 +48,7 @@ class Sheet_Workunit_Action {
 
 		Fiche_De_Poste_Class::g()->generate( $society_id );
 
-		wp_send_json_success( array( 'module' => 'sheet_workunit', 'callback_success' => 'callback_success' ) );
+		wp_send_json_success( array( 'module' => 'sheet_workunit', 'callback_success' => 'generatedFicheDePosteSuccess' ) );
 	}
 
 }

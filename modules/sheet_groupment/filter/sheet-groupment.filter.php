@@ -1,8 +1,13 @@
 <?php
 /**
- * Ajoutes le filtre pour ajouter le bouton dans le contenu des onglets
+ * Les filtres relatives aux fiches de groupement
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package sheet_groupment
+ * @subpackage filter
  */
 
 namespace digi;
@@ -18,6 +23,9 @@ class Sheet_Groupment_Filter {
 	 * Ajoutes le filtres
 	 *
 	 * @see add_filter
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
@@ -29,6 +37,9 @@ class Sheet_Groupment_Filter {
 	 * @param  array   $list_tab  La liste des filtres.
 	 * @param  integer $id        L'ID de la société.
 	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
