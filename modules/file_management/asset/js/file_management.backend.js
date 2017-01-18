@@ -82,9 +82,9 @@ window.digirisk.media.display_attachment = function( selected_JSON, element ) {
 
 window.digirisk.media.associate_file = function( selectedFileId ) {
 	if ( 'eo_set_model' === window.digirisk.media.action ) {
-		jQuery( '.upload[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'wp-digi-bloc-loading' );
+		jQuery( '.upload[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'loading' );
 	} else {
-		jQuery( 'span.wpeo-upload-media[data-id="' + window.digirisk.media.element_id + '"]' ).addClass( 'wp-digi-bloc-loading' );
+		jQuery( 'span.media[data-id="' + window.digirisk.media.element_id + '"]' ).addClass( 'loading' );
 	}
 
   var data = {
@@ -103,7 +103,7 @@ window.digirisk.media.associate_file = function( selectedFileId ) {
       jQuery( '#digi-handle-model' ).html( response.data.template );
     }
     else {
-      jQuery( 'span.wpeo-upload-media[data-id="'+ window.digirisk.media.element_id + '"]' ).replaceWith( response.data.template );
+      jQuery( 'span.media[data-id="'+ window.digirisk.media.element_id + '"]' ).replaceWith( response.data.template );
     }
   });
 };

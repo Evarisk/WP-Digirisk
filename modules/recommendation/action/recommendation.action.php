@@ -86,33 +86,34 @@ class Recommendation_Action {
 	}
 
 	/**
-	* Supprimes une recommendation (Passes son status en "deleted" dans le tableau)
-	*
-	* int $_POST['workunit_id'] L'ID de l'unité de travail
-	* int $_POST['term_id'] L'ID de la recommendation
-	* int $_POST['index'] L'index du tableau
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Supprimes une recommendation (Passes son status en "deleted" dans le tableau)
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function ajax_delete_recommendation() {
-		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
-		else
-			$id = (int)$_POST['id'];
+		check_ajax_referer( 'ajax_delete_recommendation' );
 
-		check_ajax_referer( 'ajax_delete_recommendation_' . $id );
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error();
+		} else {
+			$id = (int) $_POST['id'];
+		}
 
-		$recommendation = recommendation_class::g()->get( array( 'id' => $id ) );
+		$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ) );
 		$recommendation = $recommendation[0];
 
-		if ( empty( $recommendation ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+		if ( empty( $recommendation ) ) {
+			wp_send_json_error();
+		}
 
 		$recommendation->status = 'trash';
 
-		recommendation_class::g()->update( $recommendation );
+		Recommendation_Class::g()->update( $recommendation );
 
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'delete_recommendation_success', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'deletedRecommendationSuccess', 'template' => ob_get_clean() ) );
 	}
 
 	public function ajax_transfert_recommendation() {

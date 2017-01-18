@@ -1,21 +1,85 @@
-<?php namespace digi;
+<?php
+/**
+ * Classe gérant les EPI
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package epi
+ * @subpackage class
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class EPI_Class extends post_class {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Classe gérant les EPI
+ */
+class EPI_Class extends Post_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name   = '\digi\epi_model';
+
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
 	protected $post_type    = 'digi-epi';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key    	= '_wpdigi_epi';
 
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to epi from WP Rest API	*/
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'digirisk/epi';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $before_post_function = array( '\digi\construct_identifier' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $after_get_function = array( '\digi\get_identifier', '\digi\update_remaining_time' );
+
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'EPI';
 
+	/**
+	 * La limite des risques a afficher par page
+	 *
+	 * @var integer
+	 */
 	protected $limit_epi = -1;
 
 	/**
@@ -34,31 +98,37 @@ class EPI_Class extends post_class {
 	}
 
 	/**
-	* Affiche la fenêtre principale
-	*
-	* @param int $society_id L'ID de la societé
-	*/
+	 * Charges le schéma des EPI puis appel la vue epi/view/main.view.php
+	 *
+	 * @param  integer $society_id L'ID de la société.
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function display( $society_id ) {
 		$epi = $this->get( array( 'schema' => true ) );
 		$epi = $epi[0];
-		view_util::exec( 'epi', 'main', array( 'society_id' => $society_id, 'epi' => $epi ) );
+		View_Util::exec( 'epi', 'main', array( 'society_id' => $society_id, 'epi' => $epi ) );
 	}
 
 	/**
-	 * DISPLAY - Génération de l'affichage des risques à partir d'un shortcode / Generate display for epis through shortcode
+	 * Charges tous les EPI de la société et appel la vue epi/view/list.view.php
 	 *
-	 * @param int $society_id L'ID de la societé
+	 * @param  integer $society_id L'ID de la société.
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display_epi_list( $society_id ) {
-		$society = society_class::g()->show_by_type( $society_id );
+		$society = Society_Class::g()->show_by_type( $society_id );
 
-		if ( $society->id === 0 ) {
-			return false;
-		}
+		$epi_list = EPI_Class::g()->get( array( 'post_parent' => $society_id ) );
 
-		$epi_list = epi_class::g()->get( array( 'post_parent' => $society->id ), array( false ) );
-
-		view_util::exec( 'epi', 'list', array( 'society_id' => $society_id, 'epi_list' => $epi_list ) );
+		View_Util::exec( 'epi', 'list', array( 'society_id' => $society_id, 'epi_list' => $epi_list ) );
 	}
 }
 EPI_Class::g();

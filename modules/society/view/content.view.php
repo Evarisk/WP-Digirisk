@@ -14,10 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="main-header">
 	<div class="unit-header">
-		<div class="media no-file">
-			<i class="add animated fa fa-plus-circle"></i>
-			<i class="default-image fa fa-picture-o"></i>
-		</div>
+		<?php do_shortcode( '[eo_upload_button id="' . $element->id . '" type="' . $element->type . '"]' ); ?>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
 		<div

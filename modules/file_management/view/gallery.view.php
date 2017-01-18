@@ -1,16 +1,20 @@
-<?php namespace digi;
+<?php
 /**
-* La gallerie d'image avec bouton de navigation
-* Avec deux bouton :
-* Set as default thumbnail : Pour mettre l'image par défaut
-* Add a new picture : Permet d'ajouter une nouvelle image à la gallerie
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package file_management
-* @subpackage view
-*/
+ * La gallerie d'image avec bouton de navigation
+ * Avec deux bouton :
+ * Set as default thumbnail : Pour mettre l'image par défaut
+ * Add a new picture : Permet d'ajouter une nouvelle image à la gallerie
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2016 Eoxia
+ * @package file_management
+ * @subpackage view
+ */
+
+namespace digi;
+
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
@@ -37,7 +41,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<ul class="action">
 		<li><a href="#" class="wp-digi-bton-fourth set-as-thumbnail"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
-		<li><a href="#" data-nonce="<?php echo wp_create_nonce( 'associate_file' ); ?>" data-action="<?php echo $action; ?>" data-id="<?php echo $element_id; ?>" data-object-name="<?php echo $param['object_name']; ?>" class="custom wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a></li>
+		<li>
+			<a 	href="#"
+					data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>"
+					data-action="<?php echo esc_attr( $action ); ?>"
+					data-id="<?php echo esc_attr( $element_id ); ?>"
+					data-object-name="<?php echo $param['object_name']; ?>"
+					class="custom wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a>
+		</li>
 		<li><a href="#"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'dessociate_file' ) ); ?>"
 						data-action="dessociate_file"

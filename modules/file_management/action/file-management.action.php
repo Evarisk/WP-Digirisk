@@ -1,18 +1,24 @@
-<?php namespace digi;
+<?php
 /**
-* Les actions pour la gestion des fichiers
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package file_management
-* @subpackage action
-*/
+ * Les actions relatives à la gestion des fichiers
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package file_management
+ * @subpackage action
+ */
 
-if ( ! defined( 'ABSPATH' ) ) { exit;
-}
+namespace digi;
 
-class file_management_action {
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives à la gestion des fichiers
+ */
+class File_Management_Action {
 	/**
 	 * Le constructeur appelle l'action ajax: wp_ajax_eo_associate_file
 	 */
@@ -24,11 +30,8 @@ class file_management_action {
 	/**
 	 * Vérifie les données et appelle associate_file de la class file_management_class
 	 *
-	 * int $_POST['element_id'] Le fichier sera associé à cette ID
-	 * bool $_POST['thumbnail'] True pour mettre l'image en vignette
-	 * int $_POST['file_id'] L'ID du fichier
-	 *
-	 *  @param array $_POST Les données envoyées par le formulaire
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function callback_associate_file() {
 		check_ajax_referer( 'associate_file' );
@@ -45,16 +48,22 @@ class file_management_action {
 			wp_send_json_error();
 		}
 
-		file_management_class::g()->associate_file( $file_id, $id, $type_class, $thumbnail );
+		File_Management_Class::g()->associate_file( $file_id, $id, $type_class, $thumbnail );
 		$type_class = '\digi\\' . $type_class;
 		$element = $type_class::g()->get( array( 'id' => $id ) );
 		$element = $element[0];
 
 		ob_start();
-		view_util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type, 'element' => $element ) );
+		View_Util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'type_class' => $type, 'element' => $element ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	 * Appelle la méthode "upload_model" de "File_Management_Class"
+	 *
+	 * @since 6.2.1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_set_model() {
 		check_ajax_referer( 'associate_file' );
 
@@ -65,7 +74,7 @@ class file_management_action {
 		$file_id = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
 		$type = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
 
-		if ( ! file_management_class::g()->upload_model( $type ) ) {
+		if ( ! File_Management_Class::g()->upload_model( $type ) ) {
 			wp_send_json_error();
 		}
 
@@ -75,4 +84,4 @@ class file_management_action {
 	}
 }
 
-new file_management_action();
+new File_Management_Action();

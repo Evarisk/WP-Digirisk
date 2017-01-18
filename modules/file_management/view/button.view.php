@@ -5,7 +5,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package file_management
  * @subpackage view
@@ -31,6 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	else :
 		?>
 		<i class="default-image fa fa-picture-o"></i>
+		<img src="" class="hidden"/>
 		<input class="input-file-image" type="hidden" name="associated_document_id[image][]" />
 		<input class="input-file-image" type="hidden" name="thumbnail_id" />
 		<?php
