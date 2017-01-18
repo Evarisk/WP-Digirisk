@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<thead>
 		<tr>
-			<td></td>
-			<td><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
-			<td><?php esc_html_e( 'Lastname', 'digirisk' ); ?></td>
-			<td><?php esc_html_e( 'Firtname', 'digirisk' ); ?></td>
-			<td><?php esc_html_e( 'Email', 'digirisk' ); ?></td>
-			<td></td>
+			<td class="w50"></td>
+			<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
+			<td class="padding"><?php esc_html_e( 'Lastname', 'digirisk' ); ?></td>
+			<td class="padding"><?php esc_html_e( 'Firtname', 'digirisk' ); ?></td>
+			<td class="padding"><?php esc_html_e( 'Email', 'digirisk' ); ?></td>
+			<td class="w100"></td>
 		</tr>
 	</thead>
 

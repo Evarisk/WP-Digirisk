@@ -43,5 +43,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		?>
 	</div>
 
-	<button class="submit-form"><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></button>
+	<button class="button red submit-form"><span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span></button>
 </form>

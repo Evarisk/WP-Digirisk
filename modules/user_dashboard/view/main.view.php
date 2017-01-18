@@ -15,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="digirisk-wrap user-dashboard">
-	<h3><?php esc_html_e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h3>
+	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h1>
 
 	<ul class="form">
 		<li class="form-element active">
@@ -23,9 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<label><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
 			<span class="bar"></span>
 		</li>
+		<li>
+			<span data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_domain_mail' ) ); ?>" data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+		</li>
 	</ul>
-
-	<a href="#" data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_domain_mail' ) ); ?>" class="button green" aria-hidden="true"><?php esc_html_e( 'Sauvegarder', 'digirisk' ); ?></a>
 
 	<!-- Liste les utilisateurs -->
 	<table class="table users">

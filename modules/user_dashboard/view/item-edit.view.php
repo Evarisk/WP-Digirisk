@@ -24,16 +24,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="padding"><input type="text" class="firstname" placeholder="Firstname" name="firstname" value="<?php echo esc_attr( $user->firstname ); ?>" /></td>
 	<td class="padding"><input type="text" class="email" placeholder="demo@<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" name="email" value="<?php echo esc_attr( $user->email ); ?>" /></td>
 	<td>
-		<?php
-		if ( empty( $user->id ) ) :
-			?>
-			<a href="#" data-parent="user-row" data-loader="table" class="action-input">S</a>
-			<?php
-		else :
-			?>
-			<a href="#" class="action-input" data-loader="table" data-parent="user-row" aria-hidden="true" >S</a>
-			<?php
-		endif;
-		?>
+		<div class="action">
+			<?php if ( empty( $user->id ) ) : ?>
+				<div class="button w50 blue add action-input" data-parent="user-row" data-loader="table">
+					<i class="icon fa fa-plus"></i>
+				</div>
+			<?php	else : ?>
+				<div class="button w50 green add action-input" data-parent="user-row" data-loader="table">
+					<i class="icon fa fa-floppy-o"></i>
+				</div>
+			<?php	endif; ?>
+		</div>
 	</td>
 </tr>
