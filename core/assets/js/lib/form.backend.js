@@ -8,22 +8,25 @@ window.digirisk.form.event = function() {
 };
 
 window.digirisk.form.sumbit_form = function( event ) {
-	event.preventDefault();
-  var element = jQuery( this );
-  element.closest( 'form' ).ajaxSubmit( {
-    success: function( response ) {
+	var element = jQuery( this );
 
+	element.closest( 'form' ).addClass( 'loading' );
+
+  element.closest( 'form' ).ajaxSubmit( {
+
+    success: function( response ) {
+			element.closest( 'form' ).removeClass( 'loading' );
       if ( response && response.success ) {
         if ( response.data.module && response.data.callback_success ) {
           window.digirisk[response.data.module][response.data.callback_success]( element, response );
         }
-      }
-      else {
-        alert('error');
+      } else {
         if ( response.data.module && response.data.callback_error ) {
           window.digirisk[response.data.module][response.data.callback_error]( element, response );
         }
       }
     }
   } );
-}
+
+	event.preventDefault();
+};

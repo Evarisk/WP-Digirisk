@@ -39,6 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 									data-nonce="<?php echo esc_attr( wp_create_nonce( 'detach_user' ) ); ?>"
 									data-action="detach_user"
 									data-user-id="<?php echo esc_attr( $affected_user->id ); ?>"
+									data-loader="affected-users"
 									class="action-delete dashicons dashicons-no-alt"></a>
 						</td>
 				</tr>

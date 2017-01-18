@@ -33,11 +33,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<div 	class="button w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
+						data-loader="recommendation-row"
 						data-action="load_recommendation"><i class="icon fa fa-pencil"></i></div>
 
 			<div 	class="button w50 delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation_' . $recommendation->id ) ); ?>"
+						data-loader="recommendation-row"
 						data-action="delete_recommendation"><i class="icon fa fa-times"></i></div>
 		</div>
 	</td>

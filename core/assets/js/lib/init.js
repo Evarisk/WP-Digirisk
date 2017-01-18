@@ -19,7 +19,7 @@ window.eva_lib.init_array_form = function() {
 	 window.eva_lib.array_form.init();
 };
 
-window.eva_lib.init_array_form = function() {
+window.eva_lib.init_tooltip = function() {
 	 window.eva_lib.tooltip.init();
 };
 

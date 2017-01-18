@@ -19,5 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="groupment_id" value="<?php echo esc_attr( $parent_id ); ?>" />
 	<?php wp_nonce_field( 'save_workunit' ); ?>
 	<input class="title" type="text" placeholder="<?php _e( 'Nouvelle unité de travail', 'digirisk' ); ?>" name="workunit[title]" />
-	<div class="add button blue w50 action-input" data-parent="workunit-add"><i class="icon fa fa-plus"></i></div>
+	<div class="add button blue w50 action-input" data-loader="workunit-add" data-parent="workunit-add"><i class="icon fa fa-plus"></i></div>
 </div>

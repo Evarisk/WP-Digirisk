@@ -14,10 +14,15 @@ window.digirisk.action.exec_input = function( event ) {
 	var element = jQuery( this );
 	var key = undefined;
 	var parentElement = element;
+	var loaderElement = element;
 	var listInput = undefined;
 	var data = {};
 	var i = 0;
 	var doAction = true;
+
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
+	}
 
 	if ( element.data( 'parent' ) ) {
 		parentElement = element.closest( '.' + element.data( 'parent' ) );
@@ -30,6 +35,8 @@ window.digirisk.action.exec_input = function( event ) {
 	}
 
 	if ( doAction ) {
+		loaderElement.addClass( 'loading' );
+
 		listInput = window.eva_lib.array_form.get_input( parentElement );
 		for ( i = 0; i < listInput.length; i++ ) {
 			if ( listInput[i].name ) {
@@ -49,15 +56,22 @@ window.digirisk.action.exec_input = function( event ) {
 
 window.digirisk.action.exec_attribute = function( event ) {
   var element = jQuery( this );
+	var loaderElement = element;
+
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
+	}
 
 	if ( jQuery( this ).data( 'confirm' ) ) {
 		if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
 			element.get_data( function( data ) {
+				loaderElement.addClass( 'loading' );
 				window.digirisk.request.send( element, data );
 			} );
 		}
 	} else {
 		element.get_data( function( data ) {
+			loaderElement.addClass( 'loading' );
 			window.digirisk.request.send( element, data );
 		} );
 	}
@@ -66,7 +80,14 @@ window.digirisk.action.exec_attribute = function( event ) {
 window.digirisk.action.delete = function( event ) {
   var element = jQuery( this );
 
+	var loaderElement = element;
+
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
+	}
+
 	if ( window.confirm( window.digi_confirm_delete ) ) {
+		loaderElement.addClass( 'loading' );
 		element.get_data( function( data ) {
 			window.digirisk.request.send( element, data );
 		} );

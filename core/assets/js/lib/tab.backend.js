@@ -34,6 +34,8 @@ window.digirisk.tab.load = function( event ) {
 			element_id: a.data( 'id' )
 	  };
 
+		jQuery( '.main-content' ).addClass( 'loading' );
+
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			jQuery( '.main-content' ).replaceWith( response.data.template );
 

@@ -44,6 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 											data-action="detach_evaluator"
 											data-user-id="<?php echo esc_attr( $evaluator['user_info']->id ); ?>"
 											data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"
+											data-loader="affected-evaluator"
 											class="action-delete dashicons dashicons-no-alt"></a>
 								</td>
 						</tr>

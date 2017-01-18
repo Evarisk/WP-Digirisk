@@ -19,5 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	<td></td>
 	<td><?php esc_html_e( 'Générer une nouvelle fiche de groupement', 'digirisk' ); ?></td>
-	<td><a href="#" class="action-input" data-parent="sheet-groupment-row">G</a></td>
+	<td><a href="#" class="action-input" data-loader="sheet-groupment-row" data-parent="sheet-groupment-row">G</a></td>
 </tr>

@@ -27,11 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php
 		if ( empty( $user->id ) ) :
 			?>
-			<a href="#" data-parent="user-row" class="action-input">S</a>
+			<a href="#" data-parent="user-row" data-loader="table" class="action-input">S</a>
 			<?php
 		else :
 			?>
-			<a href="#" class="action-input" data-parent="user-row" aria-hidden="true" >S</a>
+			<a href="#" class="action-input" data-loader="table" data-parent="user-row" aria-hidden="true" >S</a>
 			<?php
 		endif;
 		?>

@@ -5,13 +5,12 @@
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
  * @version 6.2.4.0
- * @copyright 2015-2016 Evarisk
+ * @copyright 2015-2017 Evarisk
  * @package legal_display
  * @subpackage view
  */
 
 namespace digi;
-
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
@@ -44,5 +43,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		?>
 	</div>
 
-	<button class="generate-legal-display wp-digi-bton-fifth submit-form dashicons-before dashicons-share-alt2"><?php _e( 'Generate legal display', 'digirisk' ); ?></button>
+	<button class="submit-form"><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></button>
 </form>

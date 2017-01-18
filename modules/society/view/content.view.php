@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<div
 				class="button green action-input save"
 				data-parent="unit-header"
+				data-loader="digirisk-wrap"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 	</div>
 

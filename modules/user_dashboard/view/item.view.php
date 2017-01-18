@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<tr>
+<tr class="user-row">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
 	<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			data-id="<?php echo esc_attr( $user->id ); ?>"
 			data-action="load_user"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
+			data-loader="user-row"
 			class="action-attribute">E</a>
 
 		<a href="#"

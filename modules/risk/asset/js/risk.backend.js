@@ -2,11 +2,11 @@ window.digirisk.risk = {};
 
 window.digirisk.risk.init = function() {};
 
-window.digirisk.risk.delete_success = function( element, response ) {
+window.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();
 };
 
-window.digirisk.risk.load_success = function( element, response ) {
+window.digirisk.risk.loadedRiskSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
 	window.digirisk.date.init();
 };
@@ -32,7 +32,18 @@ window.digirisk.risk.before_save_risk = function( triggeredElement ) {
 	return true;
 };
 
-window.digirisk.risk.save_risk_success = function( element, response ) {
+/**
+ * Le callback en cas de réussite à la requête Ajax "edit_risk".
+ * Remplaces le contenu du tableau "risk" par le template renvoyé par la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.risk.sevedRiskSuccess = function( element, response ) {
 	element.closest( 'table.risk' ).replaceWith( response.data.template );
 	window.digirisk.date.init();
 };

@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		data-action="load_society"
 		data-groupment-id="<?php echo esc_attr( $workunit->parent_id ); ?>"
 		data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
+		data-loader="digirisk-wrap"
 		class="action-attribute title">
 		<strong><?php echo esc_html( $workunit->unique_identifier ); ?> -</strong>
 		<span title="<?php echo esc_attr( $workunit->title ); ?>"><?php echo esc_html( $workunit->title ); ?></span>

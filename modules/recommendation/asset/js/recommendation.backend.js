@@ -86,6 +86,17 @@ window.digirisk.recommendation.loadedRecommendationSuccess = function( element, 
 	window.digirisk.date.init();
 };
 
-window.digirisk.recommendation.delete_recommendation_success = function( element, response ) {
-	jQuery( element ).closest( 'li' ).fadeOut();
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_recommendation".
+ * Supprimes la ligne du tableau affectée par l'action.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.recommendation.deletedRecommendationSuccess = function( element, response ) {
+	jQuery( element ).closest( 'tr' ).fadeOut();
 };

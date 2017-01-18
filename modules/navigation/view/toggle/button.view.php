@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <div class="workunit-navigation toggle" data-parent="workunit-navigation" data-target="content">
 	<div class="unit-header">
 		<?php do_shortcode( '[eo_upload_button id=' . $groupment->id . ' type=digi-group]' ); ?>
-		<div 	class="title action-attribute"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
+		<div 	class="title"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
 		<span class="button w50"><i class="icon fa fa-angle-down"></i></span>
 	</div>
 

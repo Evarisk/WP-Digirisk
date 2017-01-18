@@ -158,5 +158,6 @@ window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 window.digirisk.DUER.callback_generate_duer_error = function() {};
 
 window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
+	alert('ok');
 	jQuery( '.digirisk-wrap .button[data-action="digi_list_duer"]' ).click();
 };
