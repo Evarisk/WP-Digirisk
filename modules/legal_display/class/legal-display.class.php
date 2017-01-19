@@ -1,10 +1,13 @@
 <?php
 /**
- * Charges tous les affichages légaux générés et appelle la vue pour les afficher.
+ * Classe gérant les affichages légaux
  *
- * Charges les données de l'objet "l'affichage légal" pour ensuite appeler la vue contenant le formulaire pour le générer.
- *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package legal_display
+ * @subpackage class
  */
 
 namespace digi;
@@ -12,9 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Charges tous les affichages légaux générés et appelle la vue pour les afficher.
- *
- * Charges les données de l'objet "l'affichage légal" pour ensuite appeler la vue contenant le formulaire pour le générer.
+ * Classe gérant les affichages légaux
  */
 class Legal_Display_Class extends Post_Class {
 
@@ -85,6 +86,9 @@ class Legal_Display_Class extends Post_Class {
 	 * Constructeur
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	protected function construct() {
 		parent::construct();
@@ -94,8 +98,11 @@ class Legal_Display_Class extends Post_Class {
 	/**
 	 * Appelle la méthode display_form
 	 *
-	 * @param  [type] $element [description].
+	 * @param  mixed $element Les données de la société.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display( $element ) {
 		view_util::exec( 'legal_display', 'main', array( 'element' => $element, 'element_id' => $element->id ) );
@@ -105,12 +112,15 @@ class Legal_Display_Class extends Post_Class {
 	/**
 	 * Appelle le template list.view.php dans le dossier /view/
 	 *
-	 * @param  int $element_id L'ID de l'élement.
+	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = Affichage_Legal_A3_Class::g()->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		$list_document = array_merge( $list_document, Affichage_Legal_A4_Class::g()->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) ) );
+		$list_document = Affichage_Legal_A3_Class::g()->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ) );
+		$list_document = array_merge( $list_document, Affichage_Legal_A4_Class::g()->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ) ) );
 
 		// Trie le tableau par ordre des clés.
 		usort( $list_document, function( $a, $b ) {
@@ -121,7 +131,7 @@ class Legal_Display_Class extends Post_Class {
 			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
 		} );
 
-		view_util::exec( 'legal_display', 'list', array( 'list_document' => $list_document ) );
+		View_Util::exec( 'legal_display', 'list', array( 'list_document' => $list_document ) );
 	}
 
 	/**

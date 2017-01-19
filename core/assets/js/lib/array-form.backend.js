@@ -9,7 +9,7 @@ window.eva_lib.array_form.event = function() {
 };
 
 window.eva_lib.array_form.get_input = function( parent ) {
-	return parent.find('input, textarea');
+	return parent.find( 'input, textarea' );
 };
 
 window.eva_lib.array_form.get_input_value = function( input ) {

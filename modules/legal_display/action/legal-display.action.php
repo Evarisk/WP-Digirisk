@@ -1,64 +1,78 @@
-<?php namespace digi;
+<?php
+/**
+ * Les actions relatives aux affichages légaux
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package legal_display
+ * @subpackage class
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class legal_display_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives aux affichages légaux
+ */
+class Legal_Display_Action {
+
 	/**
-	* Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
-	*/
-  public function __construct() {
-    add_action( 'save_legal_display', array( $this, 'callback_save_legal_display' ), 10, 2 );
-  }
+	 * Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
+	public function __construct() {
+		add_action( 'save_legal_display', array( $this, 'callback_save_legal_display' ), 10, 2 );
+	}
 
 	/**
-	* Sauvegardes les données de l'affichage légal dans la base de donnée
-	*
-	* array $_POST['emergency_service'] Les données du formulaire pour le service d'urgence
-	* array $_POST['working_hour'] Les données du formulaire pour les horaires de travail
-	* array $_POST['safety_rule'] Les données du formulaire pour les consignes de sécurité
-	* array $_POST['derogation_schedule'] Les données du formulaire pour les dérogations aux horaires de travail
-	* array $_POST['collective_agreement'] Les données du formulaire pour les conventions collectives applicables
-	* array $_POST['DUER'] Les données du formulaire pour le document unique d'évaluation des risques
-	* array $_POST['rules'] Les données du formulaire pour le règlement intérieur
-	* int $_POST['parent_id'] L'ID de l'élément parent
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
-  public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
-    // Récupère les tableaux
-    $emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
-    $working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
-    $safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
-    $derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
-    $collective_agreement = !empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
-    $DUER = !empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
-    $rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
-    $parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+	 * Sauvegardes les données de l'affichage légal dans la base de donnée
+	 *
+	 * @param Third_Model $detective_work_third Les données de l'inspecteur du travail.
+	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
+	 public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
+		 // Récupère les tableaux
+		$emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
+		$working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
+		$safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
+		$derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
+		$collective_agreement = !empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
+		$DUER = !empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
+		$rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
+		$parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
-    // @todo sécurisé
-    $legal_display_data = array(
-      'detective_work_id' => $detective_work_third->id,
-      'occupational_health_service_id' => $occupational_health_service_third->id,
-      'emergency_service' => $emergency_service,
-      'safety_rule' => $safety_rule,
-      'working_hour' => $working_hour,
-      'derogation_schedule' => $derogation_schedule,
-      'collective_agreement' => $collective_agreement,
-      'DUER' => $DUER,
-      'rules' => $rules,
-      'parent_id' => $parent_id,
-    );
+		// @todo sécurisé
+		$legal_display_data = array(
+			'detective_work_id' => $detective_work_third->id,
+			'occupational_health_service_id' => $occupational_health_service_third->id,
+			'emergency_service' => $emergency_service,
+			'safety_rule' => $safety_rule,
+			'working_hour' => $working_hour,
+			'derogation_schedule' => $derogation_schedule,
+			'collective_agreement' => $collective_agreement,
+			'DUER' => $DUER,
+			'rules' => $rules,
+			'parent_id' => $parent_id,
+		);
 
-    $legal_display = legal_display_class::g()->save_data( $legal_display_data );
-		$legal_display = legal_display_class::g()->get( array( 'id' => $legal_display->id ), array( '\digi\detective_work', '\digi\address', '\digi\occupational_health_service' ) );
+		$legal_display = Legal_Display_Class::g()->save_data( $legal_display_data );
+		$legal_display = Legal_Display_Class::g()->get( array( 'id' => $legal_display->id ), array( '\digi\detective_work', '\digi\address', '\digi\occupational_health_service' ) );
 		$legal_display = $legal_display[0];
 
-		$element_parent = group_class::g()->get( array( 'id' => $parent_id ) );
+		$element_parent = Group_Class::g()->get( array( 'id' => $parent_id ) );
 
-    $this->generate_sheet( $legal_display, $element_parent[0] );
-    $this->generate_sheet( $legal_display, $element_parent[0], "A3" );
+		$this->generate_sheet( $legal_display, $element_parent[0] );
+		$this->generate_sheet( $legal_display, $element_parent[0], 'A3' );
 
-    wp_send_json_success( array( 'module' => 'legal_display', 'callback_success' => 'callback_success', 'legal_display' => $legal_display ) );
+		wp_send_json_success( array( 'module' => 'legal_display', 'callback_success' => 'generatedSuccess', 'legal_display' => $legal_display ) );
   }
 
 	/**
@@ -137,4 +151,4 @@ class legal_display_action {
 
 }
 
-new legal_display_action();
+new Legal_Display_Action();

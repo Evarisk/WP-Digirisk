@@ -45,9 +45,10 @@ class Group_Filter {
 				'delete' => array(
 					'type' => 'text',
 					'text' => __( 'Supprimer', 'digirisk' ),
-					'class' => 'action-delete',
-					'attributes' => 'data-action=delete_society data-id=' . $id . '',
-					'nonce' => wp_create_nonce( 'delete_society' ),
+					'parent_class' => 'action-delete no-tab',
+					'action' => 'delete_society',
+					'attributes' => 'data-loader=digirisk-wrap data-id=' . $id . '',
+					'nonce' => 'delete_society',
 				),
 			),
 		);

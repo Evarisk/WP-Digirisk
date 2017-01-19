@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <thead>
 	<tr>
 		<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-		<th class="full"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
-		<th></th>
+		<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
+		<th class="w50"></th>
 	</tr>
 </thead>
 

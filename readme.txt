@@ -75,6 +75,12 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.2.4.0 =
+
+Améliorations
+
+* 6662 Déplacer un groupement ou une unité de travail
+
 = Version 6.2.3.0 =
 
 Améliorations

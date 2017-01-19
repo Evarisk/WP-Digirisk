@@ -12,9 +12,7 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <thead>
 	<tr>
@@ -29,5 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php foreach ( $list_document as $element ) : ?>
 			<?php View_Util::exec( 'legal_display', 'list-item', array( 'element' => $element ) ); ?>
 		<?php endforeach; ?>
+	<?php else : ?>
+		<tr><td colspan="2"><?php esc_html_e( 'Aucun affichage légal généré', 'digirisk' ); ?></td></tr>
 	<?php endif; ?>
 </tbody>

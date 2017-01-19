@@ -5,7 +5,7 @@
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9.0
  * @version 6.2.4.0
- * @copyright 2015-2016 Evarisk
+ * @copyright 2015-2017 Evarisk
  * @package sheet_groupment
  * @subpackage view
  */

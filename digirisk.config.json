@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.3.0",
+	"version": "6.2.4.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages": [
 		"digirisk-simple-risk-evaluation",
@@ -69,7 +69,7 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"default_tab": "digi-evaluator",
+	"default_tab": "digi_list_duer",
 	"default_tab_title": "Les risques de",
 	"debug": false
 }

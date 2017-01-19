@@ -22,6 +22,11 @@ window.digirisk.tab.load = function( event ) {
 
 	event.preventDefault();
 
+	jQuery( this ).closest( '.content' ).removeClass( 'active' );
+
+	// Pour éviter que ça réouvre le toggle.
+	event.stopPropagation();
+
 	if ( ! a.hasClass( 'no-tab' ) && a.data( 'action' ) ) {
 		jQuery( '.tab .tab-element.active' ).removeClass( 'active' );
 		a.addClass( 'active' );

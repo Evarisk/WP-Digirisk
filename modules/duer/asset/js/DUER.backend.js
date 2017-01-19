@@ -4,8 +4,7 @@ window.digirisk.DUER.init = function() {
 	window.digirisk.DUER.event();
 };
 
-window.digirisk.DUER.event = function() {
-};
+window.digirisk.DUER.event = function() {};
 
 /**
  * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
@@ -15,6 +14,7 @@ window.digirisk.DUER.event = function() {
  * -la balise <textarea> qui est égale au contenu du textarea de args.src dans le tableau de l'édition d'un DUER.
  * -Modifie le contenu de ".change-content" par un <textarea>. On modifie le contenu car la Popup est utilisé dans d'autres cas.
  * -Rend invisible la balise <p>. Cette balise <p> est utilisé quand on veut voir le contenu de la popup et non le modifier.
+ *
  * -Met args.src dans l'attribut data-target du "bouton vert" qui permet de valider l'édition.
  *
  * @param  {HTMLSpanElement} triggeredElement L'icone qui déclenche l'action.
@@ -41,7 +41,6 @@ window.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupE
 		popupElement.find( '.button' ).attr( 'data-target', args.src );
 	}
 };
-
 
 /**
  * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
@@ -86,6 +85,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 
 	popupElement.find( 'h2' ).text( args.title );
 	popupElement.addClass( 'no-close' );
+	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
 	window.digirisk.request.send( popupElement, data );
@@ -94,7 +94,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 window.digirisk.DUER.display_societies_duer_success = function( popup, response ) {
 	popup.find( '.change-content' ).html( response.data.view );
 
-	window.digirisk.DUER.generate_DUER( jQuery( '.open-popup.dashicons-plus' ), { index: 0 } );
+	window.digirisk.DUER.generate_DUER( jQuery( '.open-popup.add' ), { index: 0 } );
 };
 
 window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
@@ -158,6 +158,5 @@ window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 window.digirisk.DUER.callback_generate_duer_error = function() {};
 
 window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
-	alert('ok');
 	jQuery( '.digirisk-wrap .button[data-action="digi_list_duer"]' ).click();
 };
