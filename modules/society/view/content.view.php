@@ -18,6 +18,19 @@ if ( ! defined( 'ABSPATH' ) ) { exit;
 		<input type="hidden" name="id" value="<?php echo $element->id; ?>" />
 	<?php apply_filters( 'wpdigi_establishment_identity', $element, true ); ?>
 
+	<select name="parent_id" style="color: black;">
+		<?php if ( ! empty( $groupments ) ) : ?>
+			<?php foreach ( $groupments as $groupment ) : ?>
+				<?php $selected = "";
+				if ( $groupment->id === $element->parent_id || $groupment->id === $element->id ) :
+					$selected = "selected='true'";
+				endif;
+				?>
+				<option <?php echo $selected; ?> value="<?php echo $groupment->id; ?>"><?php echo $groupment->unique_identifier . ' - ' . $groupment->title; ?></option>
+			<?php endforeach; ?>
+		<?php endif; ?>
+	</select>
+
 		<div class="wp-digi-group-action-container wp-digi-global-action-container hidden">
 			<button
 				class="wp-digi-bton-fourth wp-digi-save-identity-button action-input"

@@ -19,7 +19,6 @@ window.digirisk.action.exec_input = function( event ) {
 	}
 
 	if ( !element[0].getAttribute(' disabled' ) ) {
-		element[0].setAttribute( 'disabled', true );
 		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 
 		var list_input = window.eva_lib.array_form.get_input( parent_element );
@@ -62,7 +61,6 @@ window.digirisk.action.delete = function(event) {
 
 	if ( !element[0].getAttribute( 'disabled' ) ) {
   	if ( window.confirm( window.digi_confirm_delete ) ) {
-			element[0].setAttribute( 'disabled', true );
 	    element.get_data( function ( data ) {
 				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 	      window.digirisk.request.send( element, data );

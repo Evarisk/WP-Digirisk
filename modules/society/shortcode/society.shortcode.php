@@ -32,6 +32,8 @@ class Society_Shortcode {
     $element = society_class::g()->show_by_type( $id, array( 'list_group' ) );
 		$display_trash = true;
 
+		$groupments = Group_Class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_status' => array( 'publish', 'draft' ) ) );
+
 		if ( $element ) {
 			$tab_to_display = !empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : 'digi-risk';
 			if ( $element->type == 'digi-group' ) {
@@ -42,7 +44,7 @@ class Society_Shortcode {
 				}
 			}
 
-			view_util::exec( 'society', 'content', array( 'display_trash' => $display_trash, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
+			view_util::exec( 'society', 'content', array( 'display_trash' => $display_trash, 'groupments' => $groupments, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
 		}
   }
 

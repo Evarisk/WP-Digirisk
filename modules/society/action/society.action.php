@@ -56,6 +56,13 @@ class society_action {
 			$society->parent_id = $_POST['parent_id'];
 		}
 
+		if ( $society->type === 'digi-group' ) {
+			$_GET['groupment_id'] = $id;
+		} else {
+			$_GET['groupment_id'] = $_POST['parent_id'];
+			$_GET['workunit_id'] = $id;
+		}
+
 		society_class::g()->update_by_type( $society );
 
 		ob_start();

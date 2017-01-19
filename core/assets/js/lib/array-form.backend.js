@@ -9,13 +9,16 @@ window.eva_lib.array_form.event = function() {
 };
 
 window.eva_lib.array_form.get_input = function( parent ) {
-	return parent.find('input, textarea');
+	return parent.find('input, select, textarea');
 };
 
 window.eva_lib.array_form.get_input_value = function( input ) {
 	switch( input.getAttribute( 'type' ) ) {
 		case "checkbox":
 			return input.checked;
+			break;
+		case "select":
+			return input.value;
 			break;
 		default:
 			return input.value;
