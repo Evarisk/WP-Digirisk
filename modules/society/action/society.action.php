@@ -78,7 +78,7 @@ class Society_Action {
 		Society_Class::g()->update_by_type( $society );
 
 		ob_start();
-		Digirisk_Class::g()->display();
+		Digirisk_Class::g()->display( $id );
 		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'savedSocietySuccess', 'society' => $society, 'template' => ob_get_clean() ) );
 	}
 

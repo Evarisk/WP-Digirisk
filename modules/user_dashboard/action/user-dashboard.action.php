@@ -123,13 +123,23 @@ class User_Shortcode_Action extends Singleton_Util {
 		wp_send_json_success( array( 'module' => 'user_dashboard', 'callback_success' => 'deletedUserSuccess' ) );
 	}
 
+	/**
+	 * Sauvegardes le domaine de l'email dans la page "Digirisk" dans le menu "Utilisateurs" de WordPress.
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function ajax_save_domain_mail() {
 		check_ajax_referer( 'save_domain_mail' );
-		$domain_mail = !empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-		if ( $domain_mail === '' ) {
+		$domain_mail = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		if ( '' === $domain_mail ) {
 			wp_send_json_error();
 		}
+
 		update_option( 'digirisk_domain_mail', $domain_mail );
+
 		wp_send_json_success();
 	}
 }

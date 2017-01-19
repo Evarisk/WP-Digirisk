@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 				<ul>
 					<li class="form-element">
 						<input type="text" name="address[address]" />
-						<label><?php esc_html_e( 'Address', 'digirisk' ); ?></label>
+						<label><?php esc_html_e( 'Adresse', 'digirisk' ); ?></label>
 						<span class="bar"></span>
 					</li>
 					<li class="form-element">
@@ -52,17 +52,17 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 					</li>
 					<li class="form-element">
 						<input type="text" name="address[postcode]" />
-						<label><?php esc_html_e( 'Postcode', 'digirisk' ); ?> </label>
+						<label><?php esc_html_e( 'Code postal', 'digirisk' ); ?> </label>
 						<span class="bar"></span>
 					</li>
 					<li class="form-element">
 						<input type="text" name="address[town]" />
-						<label><?php esc_html_e( 'Town', 'digirisk' ); ?></label>
+						<label><?php esc_html_e( 'Ville', 'digirisk' ); ?></label>
 						<span class="bar"></span>
 					</li>
 					<li class="form-element">
 						<input type="text" name="groupment[contact][phone][]" />
-						<label><?php esc_html_e( 'Phone', 'digirisk' ); ?></label>
+						<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
 						<span class="bar"></span>
 					</li>
 				</ul>
@@ -74,13 +74,13 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 									placeholder=""
 									class="digi-search"
 									value="<?php echo ! empty( $owner_user->id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ) : ''; ?>" />
-						<label><?php esc_html_e( 'Owner', 'digirisk' ); ?></label>
+						<label><?php esc_html_e( 'Responsable', 'digirisk' ); ?></label>
 						<span class="bar"></span>
 						<input type="hidden" name="groupment[user_info][owner_id]" />
 					</li>
 					<li class="form-element active">
-						<input type="text" class="eva-date" name="groupment[date]" value="<?php echo esc_attr( date( 'd/m/Y' ) ); ?>" />
-						<label><?php esc_html_e( 'Created date', 'digirisk' ); ?> </label>
+						<input type="text" class="date" name="groupment[date]" value="<?php echo esc_attr( date( 'd/m/Y' ) ); ?>" />
+						<label><?php esc_html_e( 'Date de création', 'digirisk' ); ?> </label>
 						<span class="bar"></span>
 					</li>
 					<li class="form-element">

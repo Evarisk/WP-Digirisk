@@ -19,12 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<ul class="form">
 		<li class="form-element active">
-			<input class="input-domain-mail" type="text" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
+			<input type="hidden" name="action" value="save_domain_mail" />
+			<?php wp_nonce_field( 'save_domain_mail' ); ?>
+			<input class="input-domain-mail" name="domain_mail" type="text" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 			<label><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
 			<span class="bar"></span>
 		</li>
 		<li>
-			<span data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_domain_mail' ) ); ?>" data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+			<span data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
 		</li>
 	</ul>
 
