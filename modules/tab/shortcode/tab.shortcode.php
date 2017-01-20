@@ -42,7 +42,7 @@ class Tab_Shortcode {
 
 		$list_tab = apply_filters( 'digi_tab', array(), $id );
 
-		view_util::exec( 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		View_Util::exec( 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
 	}
 }
 

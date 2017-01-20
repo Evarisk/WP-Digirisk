@@ -30,13 +30,13 @@ class Risk_Filter {
 	/**
 	 * Ajoutes l'onglet risque aux groupements et aux unités de travail
 	 *
-	 * @since 6.2.2.0
-	 * @version 6.2.4.0
-	 *
 	 * @param  array   $list_tab La liste des filtres.
 	 * @param  integer $id L'ID de la société.
 	 *
 	 * @return array
+	 *
+	 * @since 6.2.2.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['risk'] = array(
@@ -48,6 +48,7 @@ class Risk_Filter {
 		$list_tab['digi-workunit']['risk'] = array(
 			'type' => 'text',
 			'text' => __( 'Risques', 'digirisk' ),
+			'title' => __( 'Les risques de', 'digirisk' ),
 		);
 
 		return $list_tab;

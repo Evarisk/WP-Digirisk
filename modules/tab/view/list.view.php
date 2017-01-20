@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $list_tab[ $type ] ) ) :
 		foreach ( $list_tab[ $type ] as $key => $element ) :
-			View_Util::exec( 'tab', 'item-' . $element['type'], array( 'id' => $id, 'key' => $key, 'element' => $element ) );
+			View_Util::exec( 'tab', 'item-' . $element['type'], array( 'display' => $display, 'id' => $id, 'key' => $key, 'element' => $element ) );
 		endforeach;
 	endif; ?>
 </ul>

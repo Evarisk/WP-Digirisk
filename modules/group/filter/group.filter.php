@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
  * @package group
  * @subpackage filter
@@ -19,6 +19,9 @@ class Group_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 4, 2 );
@@ -30,6 +33,9 @@ class Group_Filter {
 	 * @param  array   $tab_list Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
 		$tab_list['digi-group']['more'] = array(
@@ -39,6 +45,7 @@ class Group_Filter {
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),
+					'title' => __( 'Configuration de', 'digirisk' ),
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),

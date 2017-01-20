@@ -44,7 +44,8 @@ class Sheet_Groupment_Filter {
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
 			'type' => 'text',
-			'text' => __( 'Sheet groupment', 'digirisk' ),
+			'text' => __( 'Fiche de groupement', 'digirisk' ),
+			'title' => __( 'Les fiches de groupement de', 'digirisk' ),
 			'parent_class' => 'gp button red uppercase',
 		);
 

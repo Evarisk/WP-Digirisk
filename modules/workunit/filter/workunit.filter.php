@@ -32,6 +32,7 @@ class Workunit_Filter {
 	 * @param  integer $id L'ID de la société.
 	 *
 	 * @return array
+	 *
 	 * @since 6.2.2.0
 	 * @version 6.2.4.0
 	 */
@@ -43,6 +44,7 @@ class Workunit_Filter {
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),
+					'title' => __( 'Configuration de' ,'digirisk' ),
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),

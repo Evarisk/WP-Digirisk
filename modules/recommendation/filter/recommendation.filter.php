@@ -43,6 +43,7 @@ class Recommendation_Filter {
 		$list_tab['digi-workunit']['recommendation'] = array(
 			'type' => 'text',
 			'text' => __( 'Recommendations', 'digirisk' ),
+			'title' => __( 'Les recommendations de', 'digirisk' ),
 		);
 
 		return $list_tab;

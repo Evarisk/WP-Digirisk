@@ -69,7 +69,7 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"default_tab": "digi_list_duer",
+	"default_tab": "digi-risk",
 	"default_tab_title": "Les risques de",
 	"debug": false
 }
