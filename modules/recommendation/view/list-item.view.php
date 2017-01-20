@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
-	<td class="full padding">
+	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" type="recommendation_comment" display="view"]' ); ?>
 	</td>
 	<td>
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			<div 	class="button w50 delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation_' . $recommendation->id ) ); ?>"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
 						data-loader="recommendation-row"
 						data-action="delete_recommendation"><i class="icon fa fa-times"></i></div>
 		</div>

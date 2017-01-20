@@ -43,7 +43,7 @@ class Society_Configuration_Action {
 
 		$group = Society_Configuration_Class::g()->save( $groupment_data );
 
-		wp_send_json_success( array( 'group' => $group, 'address' => $address ) );
+		wp_send_json_success( array( 'society' => $group, 'address' => $address, 'module' => 'society', 'callback_success' => 'savedSocietyConfiguration' ) );
 	}
 }
 

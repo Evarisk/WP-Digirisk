@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 <tr>
 	<td><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
 	<td><?php echo esc_html( $element->title ); ?></td>
-	<td>
+	<td class="w50">
 		<a href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 			<i class="fa fa-download" aria-hidden="true"></i>
 			<?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?>

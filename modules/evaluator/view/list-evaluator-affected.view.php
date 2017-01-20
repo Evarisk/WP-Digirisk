@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Date d\'affectation', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Durée', 'digirisk' ); ?></th>
-			<th></th>
+			<th class="padding"><?php esc_html_e( 'Durée', 'digirisk' ); ?></th>
+			<th class="w50"></th>
 		</tr>
 	</thead>
 
@@ -38,14 +38,19 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->lastname ); ?></span></td>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->firstname ); ?></span></td>
 							<td><?php echo esc_html( mysql2date( 'd/m/Y H:i', $evaluator['affectation_info']['start']['date'], true ) ); ?></td>
-							<td><?php echo esc_html( Evaluator_Class::g()->get_duration( $evaluator['affectation_info'] ) ); ?></td>
-							<td><a 	data-id="<?php echo esc_attr( $element->id ); ?>"
-											data-nonce="<?php echo wp_create_nonce( 'detach_evaluator' ); ?>"
-											data-action="detach_evaluator"
-											data-user-id="<?php echo esc_attr( $evaluator['user_info']->id ); ?>"
-											data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"
-											data-loader="affected-evaluator"
-											class="action-delete dashicons dashicons-no-alt"></a>
+							<td class="padding"><?php echo esc_html( Evaluator_Class::g()->get_duration( $evaluator['affectation_info'] ) ); ?></td>
+							<td>
+									<div class="action">
+										<div data-id="<?php echo esc_attr( $element->id ); ?>"
+												data-nonce="<?php echo wp_create_nonce( 'detach_evaluator' ); ?>"
+												data-action="detach_evaluator"
+												data-user-id="<?php echo esc_attr( $evaluator['user_info']->id ); ?>"
+												data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"
+												data-loader="affected-evaluator"
+												class="action-delete button w50 delete">
+												<i class="icon fa fa-times"></i>
+											</div>
+										</div>
 								</td>
 						</tr>
 					<?php endforeach; ?>

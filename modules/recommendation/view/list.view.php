@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<th class="wm130"><?php esc_html_e( 'Préconisation', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
-			<th></th>
+			<th class="w100"></th>
 		</tr>
 	</thead>
 

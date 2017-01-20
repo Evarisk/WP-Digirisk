@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</td>
 	<td>
 		<?php if ( ! empty( $risk->parent_workunit ) ) : ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&workunit_id=' . $risk->parent_workunit->id ) ); ?>">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id . '&workunit_id=' . $risk->parent_workunit->id ) ); ?>">
 			<strong><?php echo esc_attr( $risk->parent_workunit->unique_identifier ); ?> -</strong>
 			<span><?php echo esc_attr( $risk->parent_workunit->title ); ?></span>
 		</a>

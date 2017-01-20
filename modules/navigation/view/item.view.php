@@ -28,14 +28,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		data-loader="digirisk-wrap"
 		class="action-attribute title">
 		<strong><?php echo esc_html( $workunit->unique_identifier ); ?> -</strong>
-		<span title="<?php echo esc_attr( $workunit->title ); ?>"><?php echo esc_html( $workunit->title ); ?></span>
+		<span class="title" title="<?php echo esc_attr( $workunit->title ); ?>"><?php echo esc_html( $workunit->title ); ?></span>
 	</span>
 
 
 	<span class="action-delete delete button w50"
 		data-id="<?php echo esc_attr( $workunit->id ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_society' ) ); ?>"
-		data-action="delete_society">
+		data-action="delete_society"
+		data-loader="unit-header">
 		<i class="icon dashicons dashicons-no-alt"></i>
 	</span>
 </li>

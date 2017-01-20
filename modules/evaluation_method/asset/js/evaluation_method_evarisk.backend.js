@@ -38,17 +38,19 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 		}
 	} );
 
-	jQuery( '.wp-digi-risk-cotation-chooser' ).removeClass( 'active' );
+	jQuery( '.cotation-container .content.active' ).removeClass( 'active' );
+	element.closest( '.risk-row' ).find( '.cotation-container' ).addClass( 'loading' );
+
 	if ( 5 === length ) {
-		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 		jQuery.post( window.ajaxurl, data, function( response ) {
-			element.closest( '.wp-digi-bloc-loader' ).removeClass( 'wp-digi-bloc-loading' );
-			jQuery( '.popup.popup-evaluation' ).removeClass( 'active' );
+			element.closest( '.popup.popup-evaluation' ).removeClass( 'active' );
 
 			element.closest( '.risk-row' ).find( 'input.input-hidden-method-id' ).val( element.closest( '.popup.popup-evaluation' ).find( 'input.digi-method-evaluation-id' ).val() );
+			element.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val( response.data.scale );
 
 			element.closest( '.risk-row' ).find( '.cotation-container .action span' ).html( response.data.equivalence );
 			element.closest( '.risk-row' ).find( '.cotation-container .action i' ).hide();
+			element.closest( '.risk-row' ).find( '.cotation-container' ).removeClass( 'loading' );
 
 			element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className = element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className.replace( /level[-1]?[0-4]/, 'level' + response.data.scale );
 			element.closest( '.risk-row' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );

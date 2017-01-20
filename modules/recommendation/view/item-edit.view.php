@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
-	<td class="full padding">
+	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" type="recommendation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<div data-parent="recommendation-row" data-loader="recommendation-row" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
-			<div class="action grid w1">
+			<div class="action grid-layout w2">
 				<div	data-module="recommendation"
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"

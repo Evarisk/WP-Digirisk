@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<td class="padding">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
-
 		<span><strong><?php echo esc_html( $risk->unique_identifier ); ?></span></strong>
 	</td>
 	<td>
@@ -35,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	</td>
-	<td class="full padding">
+	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
@@ -44,8 +43,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<div data-parent="risk-row" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
-			<div class="action grid w1">
-				<div data-module="risk" data-before-method="before_save_risk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input"><i class="icon fa fa-plus"></i></div>
+			<div class="action grid-layout w3">
+				<div data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

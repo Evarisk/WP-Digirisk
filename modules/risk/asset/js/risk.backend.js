@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "risk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
 window.digirisk.risk = {};
 
 window.digirisk.risk.init = function() {};
@@ -11,7 +17,7 @@ window.digirisk.risk.loadedRiskSuccess = function( element, response ) {
 	window.digirisk.date.init();
 };
 
-window.digirisk.risk.before_save_risk = function( triggeredElement ) {
+window.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
 
 	// Remet à 0 les styles.
 	triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
@@ -43,7 +49,7 @@ window.digirisk.risk.before_save_risk = function( triggeredElement ) {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.risk.sevedRiskSuccess = function( element, response ) {
-	element.closest( 'table.risk' ).replaceWith( response.data.template );
+window.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
 	window.digirisk.date.init();
 };

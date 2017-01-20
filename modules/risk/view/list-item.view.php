@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	</td>
-	<td class="full padding">
+	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
 	<td>
