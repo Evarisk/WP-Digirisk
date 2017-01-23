@@ -93,6 +93,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * Appelle le constructeur parent pour initialiser le post type
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	protected function construct() {
 		parent::construct();
@@ -104,6 +107,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array( 'schema' => true ), array() );
@@ -114,8 +120,11 @@ class Fiche_De_Poste_Class extends Post_Class {
 	/**
 	 * Appelle le template list.view.php dans le dossier /view/
 	 *
-	 * @param  int $element_id L'ID de l'élement.
+	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
@@ -128,6 +137,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param  int $society_id L'ID de la société.
 	 *
 	 * @return bool
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function generate( $society_id ) {
 		$society = workunit_class::g()->get( array( 'post__in' => array( $society_id ) ) );
@@ -193,6 +205,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param Group_Model $society L'objet unité de travail.
 	 *
 	 * @return string|false|array
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_picture( $society ) {
 		$picture = __( 'No picture defined', 'digirisk' );
@@ -221,6 +236,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param Group_Model $society L'objet unité de travail.
 	 *
 	 * @return array La liste des utilisateurs affectés et désaffectés à la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_users( $society ) {
 		$users = array(
@@ -251,6 +269,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param Group_Model $society L'objet unité de travail.
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
 		$evaluators = array( 'utilisateursPresents' => array( 'type' => 'segment', 'value' => array() ) );
@@ -290,6 +311,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param Group_Model $society L'objet unité de travail.
 	 *
 	 * @return array Les risques dans la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_risks( $society ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
@@ -340,6 +364,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @param Group_Model $society L'objet unité de travail.
 	 *
 	 * @return array Les recommandations dans la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_recommendations( $society ) {
 		$recommendations = Recommendation_Class::g()->get( array( 'post_parent' => $society->id ) );
@@ -375,6 +402,9 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 *
 	 * @param  int $term_id    L'ID de la recommendation.
 	 * @return false|string    Le lien vers l'image
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_picture_term( $term_id ) {
 		$picture_definition = wp_get_attachment_image_src( $term_id, 'digirisk-element-thumbnail' );
