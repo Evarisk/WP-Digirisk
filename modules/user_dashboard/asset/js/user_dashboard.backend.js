@@ -1,24 +1,39 @@
-window.digirisk.user_dashboard = {};
+/**
+ * Initialise l'objet "userDashboard" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
 
-window.digirisk.user_dashboard.init = function() {
-	window.digirisk.user_dashboard.event();
+window.digirisk.userDashboard = {};
+
+window.digirisk.userDashboard.init = function() {
+	window.digirisk.userDashboard.event();
 };
 
-window.digirisk.user_dashboard.event = function() {
-	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.digirisk.user_dashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.digirisk.user_dashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.digirisk.user_dashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.digirisk.user_dashboard.keyEnterSendForm );
-	jQuery( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', window.digirisk.user_dashboard.save_domain_mail );
+window.digirisk.userDashboard.event = function() {
+	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.digirisk.userDashboard.keyupUpdateEmail );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.digirisk.userDashboard.keyupUpdateEmail );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.digirisk.userDashboard.keyupUpdateEmail );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.digirisk.userDashboard.keyEnterSendForm );
+	jQuery( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', window.digirisk.userDashboard.save_domain_mail );
 };
 
-window.digirisk.user_dashboard.save_domain_mail = function( event ) {
+/**
+ * Envoies une requête pour enregister le domaine de l'email.
+ *
+ * @param  {ClickEvent} event L'état de la souris lors du clic sur le bouton.
+ *
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+window.digirisk.userDashboard.save_domain_mail = function( event ) {
 	var element = jQuery( this );
 	var data = {};
 
-  event.preventDefault();
-
-	element.closest( 'li' ).addClass( 'wp-digi-bloc-loading' );
+	event.preventDefault();
 
 	data = {
 		action: 'save_domain_mail',
@@ -26,10 +41,8 @@ window.digirisk.user_dashboard.save_domain_mail = function( event ) {
 		domain_mail: element.closest( '.form-element' ).find( 'input' ).val()
 	};
 
-  jQuery.post( window.ajaxurl, data, function() {
-		element.closest( 'li' ).removeClass( 'wp-digi-bloc-loading' );
-	} );
-},
+	jQuery.post( window.ajaxurl, data );
+};
 
 /**
  * Lors qu'une touche est en status "keyup" on met à jour le champ de texte "email" avec les données du champs de texte "nom", "prénom" et "Domaine de l'email".
@@ -38,20 +51,20 @@ window.digirisk.user_dashboard.save_domain_mail = function( event ) {
  * @return {void}
  *
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
-window.digirisk.user_dashboard.keyupUpdateEmail = function( event ) {
+window.digirisk.userDashboard.keyupUpdateEmail = function( event ) {
 	var email = jQuery( '.user-dashboard table.users tr:last .email' ).val();
 	var firstname = jQuery( '.user-dashboard table.users tr:last .firstname' ).val();
 	var lastname = jQuery( '.user-dashboard table.users tr:last .lastname' ).val();
 	var domainMail = jQuery( '.input-domain-mail' ).val();
-	var together = window.digirisk.global.remove_diacritics( firstname + '.' + lastname + '@' + domainMail ).toLowerCase();
+	var together = window.digirisk.global.removeDiacritics( firstname + '.' + lastname + '@' + domainMail ).toLowerCase();
 
 	jQuery( '.user-dashboard table.users tr:last input[name="email"]' ).val( together );
 
 	// Vérifie que l'évènement n'est pas déclenché dans le champ de texte du domaine de l'email.
 	if ( 'input-domain-mail' !== event.target.className ) {
-		window.digirisk.user_dashboard.keyEnterSendForm( event, jQuery( this ) );
+		window.digirisk.userDashboard.keyEnterSendForm( event, jQuery( this ) );
 	}
 };
 
@@ -60,8 +73,11 @@ window.digirisk.user_dashboard.keyupUpdateEmail = function( event ) {
  *
  * @param  {KeyEvent} event L'état du clavier lors de l'évènement "keyup"
  * @return {void}
+ *
+ * @since 0.1
+ * @version 6.2.4.0
  */
-window.digirisk.user_dashboard.keyEnterSendForm = function( event ) {
+window.digirisk.userDashboard.keyEnterSendForm = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.user-dashboard table.users tr:last .action-input' ).click();
 	}
@@ -76,13 +92,24 @@ window.digirisk.user_dashboard.keyEnterSendForm = function( event ) {
  * @return {void}
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
-window.digirisk.user_dashboard.deletedUserSuccess = function( element, response ) {
+window.digirisk.userDashboard.deletedUserSuccess = function( element, response ) {
   element.closest( 'tr' ).fadeOut();
 };
 
-window.digirisk.user_dashboard.loadedUserSuccess = function( element, response ) {
+/**
+ * Le callback en cas de réussite à la requête Ajax "load_user".
+ * Remplaces la vue de la ligne.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+window.digirisk.userDashboard.loadedUserSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
 };
 
@@ -95,9 +122,9 @@ window.digirisk.user_dashboard.loadedUserSuccess = function( element, response )
  * @return {void}
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
-window.digirisk.user_dashboard.savedUserSuccess = function( element, response ) {
+window.digirisk.userDashboard.savedUserSuccess = function( element, response ) {
   jQuery( '.user-dashboard table.users' ).html( response.data.template );
 	jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();
 };
