@@ -91,20 +91,20 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 	window.digirisk.request.send( popupElement, data );
 };
 
-window.digirisk.DUER.display_societies_duer_success = function( popup, response ) {
+window.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
 	popup.find( '.change-content' ).html( response.data.view );
 
-	window.digirisk.DUER.generate_DUER( jQuery( '.open-popup.add' ), { index: 0 } );
+	window.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { index: 0 } );
 };
 
-window.digirisk.DUER.generate_DUER = function( triggeredElement, preData ) {
+window.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
 	var data = {};
 	var i = 0;
-	var listInput = window.eva_lib.array_form.get_input( triggeredElement.closest( 'tr' ) );
+	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( 'tr' ) );
 
 	for ( i = 0; i < listInput.length; i++ ) {
 		if ( listInput[i].name ) {
-			data[listInput[i].name] = window.eva_lib.array_form.get_input_value( listInput[i] );
+			data[listInput[i].name] = window.eoxiaJS.arrayForm.getInputValue( listInput[i] );
 		}
 	}
 
@@ -149,7 +149,7 @@ window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	}
 
 	if ( ! response.data.end ) {
-		window.digirisk.DUER.generate_DUER( element, response.data );
+		window.digirisk.DUER.generateDUER( element, response.data );
 	} else {
 		jQuery( '.popup' ).removeClass( 'no-close' );
 	}

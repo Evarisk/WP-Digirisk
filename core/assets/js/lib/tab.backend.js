@@ -17,8 +17,9 @@ window.digirisk.tab.load = function( event ) {
 
 	tabTriggered.closest( '.content' ).removeClass( 'active' );
 
-	if ( ! tabTriggered.hasClass( 'no-tab' ) && tabTriggered( 'action' ) ) {
+	if ( ! tabTriggered.hasClass( 'no-tab' ) && tabTriggered.data( 'action' ) ) {
 		jQuery( '.tab .tab-element.active' ).removeClass( 'active' );
+		tabTriggered.addClass( 'active' );
 
 		data = {
 			action: 'load_tab_content',
@@ -26,6 +27,8 @@ window.digirisk.tab.load = function( event ) {
 			tab_to_display: tabTriggered.data( 'action' ),
 			element_id: tabTriggered.data( 'id' )
 	  };
+
+		jQuery( '.' + tabTriggered.data( 'target' ) ).addClass( 'loading' );
 
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			jQuery( '.' + tabTriggered.data( 'target' ) ).replaceWith( response.data.template );

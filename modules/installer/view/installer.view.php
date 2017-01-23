@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
 
 namespace digi;
@@ -31,7 +31,14 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			<div class="grid-layout w2">
 				<div class="form-element">
 					<input type="text" name="groupment[title]" />
-					<label><?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?></label>
+					<label>
+						<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
+					</label>
+
+					<span class="tooltip" aria-label="<?php echo esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+						<i class="dashicons dashicons-editor-help">*</i>
+					</span>
+
 					<span class="bar"></span>
 				</div>
 				<div>

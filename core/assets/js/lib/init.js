@@ -17,7 +17,7 @@ window.eoxiaJS.loadScripts = function() {
 };
 
 window.eoxiaJS.initArrayForm = function() {
-	 window.eoxiaJS.array_form.init();
+	 window.eoxiaJS.arrayForm.init();
 };
 
 window.eoxiaJS.initToolTip = function() {

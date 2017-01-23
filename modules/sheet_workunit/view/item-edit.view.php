@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package sheet_workunit
  * @subpackage view
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	<td>
 		<div class="action w50">
-			<div class="action-input button blue add" data-loader="sheet-workunit-row" data-parent="sheet-groupment-row">
+			<div class="action-input button blue add" data-loader="sheet-workunit-row" data-parent="sheet-workunit-row">
 				<i class="icon fa fa-plus"></i>
 			</div>
 		</div>

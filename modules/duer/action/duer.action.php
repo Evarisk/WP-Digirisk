@@ -35,7 +35,7 @@ class DUER_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
@@ -52,7 +52,7 @@ class DUER_Action {
 
 		ob_start();
 		View_Util::exec( 'duer', 'tree/main', array( 'society' => $society ) );
-		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'display_societies_duer_success', 'view' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'displayedSocietyDUERSuccess', 'view' => ob_get_clean() ) );
 	}
 
 	/**

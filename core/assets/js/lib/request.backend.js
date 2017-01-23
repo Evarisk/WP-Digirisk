@@ -20,8 +20,6 @@ window.digirisk.request.send = function( element, data ) {
 
 window.digirisk.request.get = function( url, data ) {
 	jQuery.get( url, data, function( response ) {
-		element.closest( '.loading' ).removeClass( 'loading' );
-
 		if ( response && response.success ) {
 			if ( response.data.module && response.data.callback_success ) {
 				window.digirisk[response.data.module][response.data.callback_success]( response );

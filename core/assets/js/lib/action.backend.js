@@ -18,6 +18,7 @@ window.digirisk.action.execInput = function( event ) {
 	var data = {};
 	var i = 0;
 	var doAction = true;
+	var key = undefined;
 
 	if ( element.data( 'loader' ) ) {
 		loaderElement = element.closest( '.' + element.data( 'loader' ) );
@@ -36,7 +37,7 @@ window.digirisk.action.execInput = function( event ) {
 	if ( doAction ) {
 		loaderElement.addClass( 'loading' );
 
-		listInput = window.eoxiaJS.arrayForm.get_input( parentElement );
+		listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
 		for ( i = 0; i < listInput.length; i++ ) {
 			if ( listInput[i].name ) {
 				data[listInput[i].name] = listInput[i].value;
@@ -103,6 +104,7 @@ window.digirisk.action.execDelete = function( event ) {
 	if ( doAction ) {
 		if ( window.confirm( 'Confirm delete ?' ) ) {
 			element.get_data( function( data ) {
+				loaderElement.addClass( 'loading' );
 				window.digirisk.request.send( element, data );
 			} );
 		}

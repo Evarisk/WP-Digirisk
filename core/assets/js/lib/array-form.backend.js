@@ -34,7 +34,7 @@ window.eoxiaJS.arrayForm.sendForm = function( event ) {
 
 	for ( i = 0; i < listInput.length; i++ ) {
 		if ( listInput[i].name ) {
-			data[listInput[i].name] = window.eoxiaJS.arrayForm.get_input_value( listInput[i] );
+			data[listInput[i].name] = window.eoxiaJS.arrayForm.getInputValue( listInput[i] );
 		}
 	}
 

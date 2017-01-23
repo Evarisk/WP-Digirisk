@@ -4,11 +4,11 @@ window.digirisk.search.init = function() {
 	window.digirisk.search.event();
 };
 
-window.digirisk.search.tab_changed = function() {
+window.digirisk.search.tabChanged = function() {
 	window.digirisk.search.event();
 };
 
-window.digirisk.search.render_changed = function() {
+window.digirisk.search.renderChanged = function() {
 	window.digirisk.search.event();
 };
 
@@ -43,7 +43,7 @@ window.digirisk.search.event = function() {
 
 		if ( jQuery( element ).data( 'target' ) ) {
 			listOption.search = function( event, ui ) {
-				jQuery( '.' + jQuery( element ).data( 'target' ) ).addClass( 'wp-digi-bloc-loading' );
+				jQuery( '.' + jQuery( element ).data( 'target' ) ).addClass( 'loading' );
 			};
 
 			listOption.response = function( event, response ) {

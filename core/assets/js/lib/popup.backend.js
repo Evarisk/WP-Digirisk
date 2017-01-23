@@ -8,8 +8,8 @@ window.digirisk.popup.event = function() {
   jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
   jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.openAjax );
   jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
-  jQuery( document ).on( 'click', '.popup .container .button-primary', window.digirisk.popup.confirm );
-  jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
+  jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
+  jQuery( document ).on( 'click', '.popup .close', window.digirisk.popup.close );
   jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
 };
 
@@ -43,7 +43,7 @@ window.digirisk.popup.open = function( event ) {
 window.digirisk.popup.openAjax = function( event ) {
 	var element = jQuery( this );
 	var target = jQuery( this ).closest(  '.' + jQuery( this ).data( 'parent' ) ).find( '.' + jQuery( this ).data( 'target' ) );
-	target.addClass( 'active ');
+	target.addClass( 'active' );
 
 	jQuery( this ).get_data( function( data ) {
 		delete data.parent;

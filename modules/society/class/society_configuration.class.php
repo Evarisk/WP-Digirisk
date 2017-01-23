@@ -4,8 +4,8 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.2.0
- * @copyright 2015-2016 Eoxia
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage class
  */
@@ -32,6 +32,9 @@ class Society_Configuration_Class extends Singleton_Util {
 	 *
 	 * @param  Group_Model $element L'objet groupement.
 	 * @return void
+	 *
+	 * @since 6.2.1.0
+	 * @version 6.2.5.0
 	 */
 	public function display( $element ) {
 		$address = Society_Class::g()->get_address( $element );
@@ -39,7 +42,7 @@ class Society_Configuration_Class extends Singleton_Util {
 
 		$owner_user = $this->get_owner_user( $element );
 
-		view_util::exec( 'society', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
+		View_Util::exec( 'society', 'configuration-form', array( 'element' => $element, 'owner_user' => $owner_user, 'address' => $address ) );
 	}
 
 	/**

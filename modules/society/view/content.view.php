@@ -24,10 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 	</div>
 
-	<div 	class="tab-element dut button red uppercase"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
-				data-action="digi_list_duer"
-				data-id="<?php echo esc_attr( $element->id ); ?>"><i class="icon fa fa-download"></i><span>Télécharger le document unique</span></div>
+	<?php apply_filters( 'society_header_end', $element ); ?>
 </div>
 
 <?php echo do_shortcode( '[digi_tab id="' . $element->id . '" type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>

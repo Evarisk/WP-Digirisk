@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package user
  * @subpackage view
@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
-				<th><?php esc_html_e( 'Date d\'embauche', 'digirisk' ); ?></th>
-				<th><?php esc_html_e( 'Affecter', 'digirisk' ); ?></th>
+				<th class="w100 padding"><?php esc_html_e( 'Date d\'embauche', 'digirisk' ); ?></th>
+				<th class="w50 padding"><?php esc_html_e( 'Affecter', 'digirisk' ); ?></th>
 			</tr>
 		</thead>
 
@@ -36,8 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 						<td class="padding"><span><?php echo esc_html( $user->lastname ); ?></span></td>
 						<td class="padding"><span><?php echo esc_html( $user->firstname ); ?></span></td>
-						<td><input type="text" class="date" name="list_user[<?php echo esc_attr( $user->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $user->hiring_date ) ) ); ?>"></td>
-						<td><input <?php echo esc_attr( in_array( $user->id, ! empty( $list_affected_id ) ? $list_affected_id : array(), true ) ? 'disabled="disabled";' : '' ); ?> type="checkbox" name="list_user[<?php echo esc_attr( $user->id ); ?>][affect]"></td>
+						<td class="w100 padding"><input type="text" class="date" name="list_user[<?php echo esc_attr( $user->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $user->hiring_date ) ) ); ?>"></td>
+						<td class="w50 padding"><input <?php echo esc_attr( in_array( $user->id, ! empty( $list_affected_id ) ? $list_affected_id : array(), true ) ? 'disabled="disabled";' : '' ); ?> type="checkbox" name="list_user[<?php echo esc_attr( $user->id ); ?>][affect]"></td>
 					</tr>
 				<?php endforeach; ?>
 			<?php endif; ?>

@@ -5,14 +5,8 @@ window.digirisk.installer.init = function() {
 };
 
 window.digirisk.installer.event = function() {
-	jQuery( '.wpdigi-installer .btn-more-option' ).click( window.digirisk.installer.more_options );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.key_up_groupment_title );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.digirisk.installer.key_up_domain_mail );
-};
-
-window.digirisk.installer.more_options = function( event ) {
-	event.preventDefault();
-	jQuery( '.wpdigi-installer .form-more-option' ).toggle();
 };
 
 window.digirisk.installer.key_up_groupment_title = function( event ) {
