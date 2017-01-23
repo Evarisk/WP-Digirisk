@@ -46,7 +46,7 @@ window.digirisk.popup.open_ajax = function( event ) {
 
   // Récupères la box de destination mis dans l'attribut du popup
   var target = jQuery( this ).closest(  "." + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
-	target.toggle();
+	target.addClass( 'active' );
 
 
 	jQuery( this ).get_data( function( data ) {

@@ -1,7 +1,7 @@
 {
 	"name": "Sheet workunit",
 	"slug": "sheet_workunit",
-	"version": "6.2.1.0",
+	"version": "6.2.4.0",
 	"description": "Le module gérant les fiches des unités de travail",
 	"path": "modules/sheet_workunit/",
 	"dependencies": {

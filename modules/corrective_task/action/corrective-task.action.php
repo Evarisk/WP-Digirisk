@@ -1,28 +1,56 @@
-<?php namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
+/**
+ * Les actions relatives aux tâches correctives.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package corrective-task
+ * @subpackage action
+ */
 
-class corrective_task_action {
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives aux tâches correctives.
+ */
+class Corrective_Task_Action {
 
 	/**
-	 * Constructeur de la classe permettant d'appeler les différentes actions / Class constructor for calling diffrent actions
+	 * Le constructeur
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_open_task', array( $this, 'callback_open_task' ) );
 		add_action( 'wp_ajax_create_task_and_point', array( $this, 'callback_create_task_and_point' ) );
 	}
 
+	/**
+	 * Récupères la tâche liée au risque.
+	 * Appelle la vue contenant le formulaire pour ajouter une tâche corrective.
+	 *
+	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
+	 */
 	public function callback_open_task() {
 		$parent_id = $_GET['id'];
 
 		global $task_controller;
-			if ($task_controller) {
+
+		if ( $task_controller ) {
 			$task = $task_controller->index( array( 'post_parent' => $parent_id ) );
 
 			if ( empty( $task ) ) {
 				$task = new \StdClass();
 				$task->id = 0;
-			}
-			else {
+			} else {
 				$task = $task[0];
 			}
 
@@ -35,12 +63,14 @@ class corrective_task_action {
 				return '<input type="hidden" name="parent_id" value="' . $_GET['id'] . '" />';
 			} );
 
-			view_util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
-		}
-		else {
+			ob_start();
+			View_Util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
+			$view = ob_get_clean();
+		} else {
 			echo 'Il faut installer l\'extension Task Manager.';
 		}
-		wp_die();
+
+		wp_send_json_success( array( 'module' => 'correctiveTask', 'callback_success' => 'openedTaskPopup', 'view' => $view ) );
 	}
 
 	public function callback_create_task_and_point() {
@@ -81,4 +111,4 @@ class corrective_task_action {
 	}
 }
 
-new corrective_task_action();
+new Corrective_Task_Action();
