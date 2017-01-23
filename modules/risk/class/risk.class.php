@@ -24,21 +24,21 @@ class Risk_Class extends Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   = '\digi\risk_model';
+	protected $model_name = '\digi\risk_model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    = 'digi-risk';
+	protected $post_type = 'digi-risk';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_risk';
+	protected $meta_key = '_wpdigi_risk';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée

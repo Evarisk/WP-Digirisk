@@ -1,8 +1,13 @@
 <?php
 /**
- * Les groupements
+ * Classe gérant les groupements
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package group
+ * @subpackage class
  */
 
 namespace digi;
@@ -10,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Les groupements
+ * Classe gérant les groupements
  */
 class Group_Class extends Post_Class {
 
@@ -86,6 +91,9 @@ class Group_Class extends Post_Class {
 
 	/**
 	 * Constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	protected function construct() {
 		parent::construct();
@@ -95,7 +103,10 @@ class Group_Class extends Post_Class {
 	/**
 	 * Renvoie l'ID du premier groupement "publish" ou "draft" sans groupement parent trouvé dans la base de donnée dans l'ordre de la date croissant, ou dans l'ordre de menu_order croissant.
 	 *
-	 * @return int
+	 * @return integer
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_first_groupment_id() {
 		$first_groupment_id = 0;
@@ -117,9 +128,12 @@ class Group_Class extends Post_Class {
 	/**
 	 * Construction du tableau contenant les risques pour l'arborescence complète du premier élément demandé / Build an array with all risks for element and element's subtree
 	 *
-	 * @param object $element L'élément actuel dont il faut récupérer la liste des risques de manière récursive / Current element where we have to get risk list recursively
+	 * @param object $element L'élément actuel dont il faut récupérer la liste des risques de manière récursive / Current element where we have to get risk list recursively.
 	 *
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_element_tree_risk( $element ) {
 		$risks_in_tree = array();
@@ -146,6 +160,9 @@ class Group_Class extends Post_Class {
 	 * @param object $element L'élement parent.
 	 * @param string $tabulation ?.
 	 * @param array  $extra_params ?.
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();
@@ -188,8 +205,11 @@ class Group_Class extends Post_Class {
 	/**
 	 * Récupères l'id des elements enfants
 	 *
-	 * @param int $element_id L'ID de l'élement parent.
-	 * @param array $list_id La liste des ID.
+	 * @param integer $element_id L'ID de l'élement parent.
+	 * @param array   $list_id La liste des ID.
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
 		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ) );
@@ -219,9 +239,12 @@ class Group_Class extends Post_Class {
 	/**
 	 * Construction de la liste des risques pour un élément donné / Build risks' list for a given element
 	 *
-	 * @param object $element La définition complète de l'élément dont il faut retourner la liste des risques / The entire element we want to get risks list for
+	 * @param object $element La définition complète de l'élément dont il faut retourner la liste des risques / The entire element we want to get risks list for.
 	 *
 	 * @return array La liste des risques construite pour l'export / Risks' list builded for export
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function build_risk_list_for_export( $element ) {
 		// if ( empty( $element->option[ 'associated_risk' ] ) )
@@ -250,9 +273,9 @@ class Group_Class extends Post_Class {
 			), $risk );
 		}
 
-		if ( !empty( $risk_list_to_order ) ) {
+		if ( ! empty( $risk_list_to_order ) ) {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk_level] ) ? evaluation_method_class::g()->list_scale[$risk_level] : '';
+				$final_level = !empty( Evaluation_Method_Class::g()->list_scale[$risk_level] ) ? Evaluation_Method_Class::g()->list_scale[$risk_level] : '';
 				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
 				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
 			}
@@ -262,4 +285,4 @@ class Group_Class extends Post_Class {
 	}
 }
 
-group_class::g();
+Group_Class::g();

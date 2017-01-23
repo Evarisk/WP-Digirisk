@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php foreach ( $recommendation_category_list as $recommendation_category ) : ?>
 				<?php if ( ! empty( $recommendation_category->recommendation_term ) ) : ?>
 					<?php foreach ( $recommendation_category->recommendation_term as $recommendation ) : ?>
-						<li class="item tooltip" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
+						<li class="item tooltip hover" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
 							<?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false ); ?>
 						</li>
 					<?php endforeach; ?>

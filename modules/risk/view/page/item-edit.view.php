@@ -47,7 +47,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<td>
 		<input type="checkbox" name="can_update" />
-		<a href="#" data-id="<?php echo esc_attr( $risk->id ); ?>" data-parent="risk-row" class="edit-risk action-input fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
+		<a href="#" data-id="<?php echo esc_attr( $risk->id ); ?>"
+								data-parent="risk-row"
+								data-loader="risk-row"
+								class="edit-risk action-input fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
 	</td>
 
 </tr>

@@ -26,6 +26,7 @@ window.digirisk.danger.selectDanger = function( event ) {
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
+	element.closest( '.toggle' ).find( '.action img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
 	element.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 	event.stopPropagation();

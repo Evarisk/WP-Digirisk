@@ -39,9 +39,10 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 	} );
 
 	jQuery( '.cotation-container .content.active' ).removeClass( 'active' );
-	element.closest( '.risk-row' ).find( '.cotation-container' ).addClass( 'loading' );
-
 	if ( 5 === length ) {
+		element.closest( '.risk-row' ).find( '.cotation-container' ).addClass( 'loading' );
+		element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
+
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			element.closest( '.popup.popup-evaluation' ).removeClass( 'active' );
 

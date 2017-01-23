@@ -1,30 +1,40 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Génères le DUER
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.1.9.0
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package duer
+ * @subpackage class
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 /**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * Génères le DUER
  */
-class DUER_Generate_Class extends singleton_util {
+class DUER_Generate_Class extends Singleton_Util {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	protected function construct() {}
 
 	/**
-	* Génère le DUER
-	*
-	* @param array $data Les data à mettre dans le ODT
-	*/
+	 * Génères le DUER
+	 *
+	 * @param array $data Les data à mettre dans le ODT.
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function generate( $data ) {
 		if ( empty( $data ) || empty( $data['element_id'] ) ) {
 			return false;
@@ -51,12 +61,16 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Securises toutes les données
-	*
-	* @param array $data Les données à sécuriser
-	*
-	* @return array Les données sécurisées
-	*/
+	 * Securises toutes les données
+	 *
+	 * @param array       $data Les données à sécuriser.
+	 * @param Group_Model $element Les données du groupement.
+	 *
+	 * @return array Les données sécurisées
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function securize_duer_data( $data, $element ) {
 		$user = wp_get_current_user();
 		$data['nomEntreprise'] 			= $element->title;
@@ -77,10 +91,13 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Prépares un squelette des données
-	*
-	* @return array Le squelette des données
-	*/
+	 * Prépares un squelette des données
+	 *
+	 * @return array Le squelette des données
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function prepare_skeleton() {
 		/**	Définition de la structure des données du document par défaut / Define the default data structure for document	*/
 		$skeleton = array(
@@ -140,10 +157,13 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Récupères le logo: todo: Pas utiliser
-	*
-	* @return string Le chemin vers le logo
-	*/
+	 * Récupères le logo: todo: Pas utiliser
+	 *
+	 * @return string Le chemin vers le logo
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function get_logo() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$src_logo = wp_get_attachment_image_src( $custom_logo_id, 'digirisk-element-thumbnail' );
@@ -158,6 +178,9 @@ class DUER_Generate_Class extends singleton_util {
 	 * @param object $element L'objet groupement.
 	 *
 	 * @return array Les données qui seront insérées dans le document
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
 		$data_to_document = array_merge( $data_to_document, $data );
@@ -176,6 +199,9 @@ class DUER_Generate_Class extends singleton_util {
 	 * @param object $element L'objet groupement.
 	 *
 	 * @return array Les données qui seront insérées dans le document
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function fill_data_risk( $data_to_document, $element ) {
 		$list_risk = group_class::g()->get_element_tree_risk( $element );
@@ -223,6 +249,9 @@ class DUER_Generate_Class extends singleton_util {
 	 * @param array $data_duer Les données sécurisées.
 	 *
 	 * @return string La date de l'audit formatté
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
@@ -243,12 +272,15 @@ class DUER_Generate_Class extends singleton_util {
 	}
 
 	/**
-	* Génère les ODT enfants de ce DUER
-	*
-	* @param object $element L'élement groupement
-	*
-	* @return array La liste des ODT enfants
-	*/
+	 * Génère les ODT enfants de ce DUER
+	 *
+	 * @param object $element L'élement groupement.
+	 *
+	 * @return array La liste des ODT enfants
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function generate_child( $element ) {
 		$list_id = array();
 

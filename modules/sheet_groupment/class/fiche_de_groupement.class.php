@@ -7,9 +7,7 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
  * Gères la génération de la fiche de groupement
@@ -203,7 +201,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					'type'		=> 'picture',
 					'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 					'option'	=> array(
-						'size'	=> 8,
+						'size' => 2,
 					),
 				);
 			}
