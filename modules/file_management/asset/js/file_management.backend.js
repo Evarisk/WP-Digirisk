@@ -28,7 +28,7 @@ window.digirisk.media.open_popup = function( event ) {
   window.digirisk.media.have_thumbnail = element.hasClass( 'wp-digi-element-thumbnail' ) ? true : false;
   window.wp.media.model.settings.post.id = element.data( 'id' );
 
-  if( element.find( '.wpeo-gallery' ).length === 0 ) {
+  if( element.find( '.gallery' ).length === 0 ) {
     window.digirisk.media.load_media_upload( element, element.data( 'id' )  );
   }
   else {

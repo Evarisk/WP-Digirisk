@@ -18,7 +18,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div data-id="<?php echo esc_attr( $element_id ); ?>" class="wpeo-gallery" style="display: none!important;">
+<div data-id="<?php echo esc_attr( $element_id ); ?>" class="gallery" style="display: none!important;">
 
 	<a href="#" class="close"><i class="dashicons dashicons-no-alt"></i></a>
 

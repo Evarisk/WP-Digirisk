@@ -17,43 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="digirisk-wrap" style="clear: both;">
 
-	<div class="popup active">
-		<div class="container">
-			<div class="header">
-				<h2 class="title">Titre de la popup</h2>
-				<i class="close fa fa-times"></i>
-			</div>
-			<div class="content">
-				<table class="table evaluation">
-					<thead>
-						<tr>
-							<th></th><th>Gravité</th><th>Exposition</th><th>Occurence</th><th>Formation</th><th>Protection</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="padding">0</td>
-							<td class="active">Pas de blessures possibles</td>
-							<td>Jamais en contact</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Blessure légère</td>
-							<td>Rare, 1 fois par an</td>
-							<td>Jamais arrivé</td>
-							<td>Prévention régulière</td>
-							<td>Intrinsèque</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="button green margin uppercase strong float right"><span>Enregistrer la cotation</span></div>
-			</div>
-		</div>
-	</div>
-
 	<div class="navigation-container">
 	<div class="workunit-navigation">
 		<div class="unit-header">
@@ -141,287 +104,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 
 		<div class="main-content">
-			<h1>Risques du groupement</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th class="padding">Ref.</th>
-						<th>Risque</th>
-						<th>Quot.</th>
-						<th>Photo</th>
-						<th>Commentaire</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="padding">
-							<span><strong>0412</strong></span>
-						</td>
-						<td>
-							<div class="categorie-container toggle grid padding">
-								<div class="action"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /><i class="icon animated fa fa-angle-down"></i></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="cotation-container toggle grid">
-								<div class="action cotation level1"><span>0</span></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="media no-file">
-								<i class="add animated fa fa-plus-circle"></i>
-								<i class="default-image fa fa-picture-o"></i>
-							</div>
-						</td>
-						<td class="full padding">
-							<ul class="comment-container">
-								<li class="comment">
-									<span class="user">Jean Louis, </span>
-									<span class="date">14/01/2017 : </span>
-									<span class="content">Salut, c'est trop génial</span>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<div class="action grid-layout w3">
-								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
-								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
-								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="padding">
-							<span><strong>0412</strong></span>
-						</td>
-						<td>
-							<div class="categorie-container toggle grid padding">
-								<div class="action"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /><i class="icon animated fa fa-angle-down"></i></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="cotation-container toggle grid">
-								<div class="action cotation level2"><span>48</span></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="media no-file">
-								<i class="add animated fa fa-plus-circle"></i>
-								<i class="default-image fa fa-picture-o"></i>
-							</div>
-						</td>
-						<td class="full padding">
-							<ul class="comment-container">
-								<li class="comment">
-									<span class="user">Jean Louis, </span>
-									<input type="text" class="date" value="03/01/2017" placeholder="03/01/2017" />
-									<input type="text" class="content" value="Salut c'est trop génial" placeholder="Entrer un commentaire" />
-									<span class="button delete"><i class="icon fa fa-times"></i></span>
-								</li>
-								<li class="comment">
-									<span class="user">Jean Louis, </span>
-									<input type="text" class="date" value="03/01/2017" placeholder="03/01/2017" />
-									<input type="text" class="content" value="Salut c'est trop génial" placeholder="Entrer un commentaire" />
-									<span class="button delete"><i class="icon fa fa-times"></i></span>
-								</li>
-								<li class="new comment">
-									<span class="user">Jean Louis, </span>
-									<input type="text" class="date" placeholder="03/01/2017" />
-									<input type="text" class="content" placeholder="Entrer un commentaire" />
-									<span class="button add"><i class="icon fa fa-plus"></i></span>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<div class="action grid-layout w3">
-								<div class="button w50 green save"><i class="icon fa fa-floppy-o"></i></div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="padding">
-							<span><strong>0412</strong></span>
-						</td>
-						<td>
-							<div class="categorie-container toggle grid padding">
-								<div class="action"><img src="https://www.eoxia.com/wp-content/uploads/2013/08/formations-web-2.jpg" /><i class="icon animated fa fa-angle-down"></i></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="cotation-container toggle grid">
-								<div class="action cotation level4"><span>80</span></div>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="media no-file">
-								<i class="add animated fa fa-plus-circle"></i>
-								<i class="default-image fa fa-picture-o"></i>
-							</div>
-						</td>
-						<td class="full padding">
-							<ul class="comment-container">
-								<li class="comment">
-									<span class="user">Jean Louis, </span>
-									<span class="date">14/01/2017 : </span>
-									<span class="content">Salut, c'est trop génial</span>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<div class="action grid-layout w3">
-								<div class="button w50 task"><i class="icon dashicons dashicons-schedule"></i></div>
-								<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
-								<div class="button w50 delete"><i class="icon fa fa-times"></i></div>
-							</div>
-						</td>
-					</tr>
+			<h1>Affichage légal</h1>
 
-				</tbody>
-
-				<tfoot>
-					<tr>
-						<td class="padding"></td>
-						<td class="wm130">
-							<div class="categorie-container toggle grid padding">
-								<div class="action"><span>Choisir un risque</span><i class="icon animated fa fa-angle-down"></i></div>
-								<ul class="content">
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-									<li class="item"><img src="http://demo.digirisk.com/wp-content/uploads/2016/05/activitePhysique.png" /></li>
-								</ul>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="cotation-container toggle grid">
-								<div class="action cotation default-cotation"><i class="icon fa fa-line-chart"></i></div>
-								<ul class="content">
-									<li class="item cotation level1"><span>0</span></li>
-									<li class="item cotation level2"><span>48</span></li>
-									<li class="item cotation level3"><span>51</span></li>
-									<li class="item cotation level4"><span>80</span></li>
-									<li class="item cotation method"><i class="icon fa fa-cog"></i></li>
-								</ul>
-							</div>
-						</td>
-						<td class="w50">
-							<div class="media no-file">
-								<i class="add animated fa fa-plus-circle"></i>
-								<i class="default-image fa fa-picture-o"></i>
-							</div>
-						</td>
-						<td class="full padding">
-							<ul class="comment-container">
-								<li class="new comment">
-									<span class="user">Jean Louis, </span>
-									<input type="text" class="date" placeholder="03/01/2017" />
-									<input type="text" class="content" placeholder="Entrer un commentaire" />
-								</li>
-							</ul>
-						</td>
-						<td>
-							<div class="action grid w1">
-								<div class="button w50 blue add"><i class="icon fa fa-plus"></i></div>
-							</div>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-
-			<h1>Evaluateurs</h1>
-			<div class="grid-layout w2">
+			<form class="form grid-layout w2">
 				<div>
-					<label class="search">
-						<i class="dashicons dashicons-search"></i>
-						<input type="text" placeholder="Ecrivez votre recherche ici..." />
-					</label>
-					<table class="table">
-						<thead>
-							<tr>
-								<th></th>
-								<th class="padding">ID</th>
-								<th class="padding">Nom</th>
-								<th class="padding">Prénom</th>
-								<th>Date d'embauche</th>
-								<th><input type="text" class="affect" value="15" /></th>
-								<th>Affecter</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><div class="avatar" style="background-color: #e05353;"><span>DD</span></div></td>
-								<td class="padding"><span><strong>U16</strong></span></td>
-								<td class="padding"><span>Dupont</span></td>
-								<td class="padding"><span>Jean</span></td>
-								<td><input type="text" value="04/01/2017" /></td>
-								<td><input type="text" class="affect" value="" /></td>
-								<td><input type="checkbox" /></td>
-							</tr>
-							<tr>
-								<td><div class="avatar" style="background-color: #e9ad4f;"><span>GG</span></div></td>
-								<td class="padding"><span><strong>U16</strong></span></td>
-								<td class="padding"><span>Dupont</span></td>
-								<td class="padding"><span>Jean</span></td>
-								<td><input type="text" value="04/01/2017" /></td>
-								<td><input type="text" class="affect" value="" /></td>
-								<td><input type="checkbox" /></td>
-							</tr>
-						</tbody>
-					</table>
+					<h2>Inspection du travail</h2>
+					<div class="form-element">
+						<input type="text" />
+						<label>Nom de l'inspecteur</label>
+						<span class="bar"></span>
+					</div>
+					<div class="form-element">
+						<input type="text" />
+						<label>Adresse</label>
+						<span class="bar"></span>
+					</div>
 				</div>
 				<div>
-					<label class="search">
-						<i class="dashicons dashicons-search"></i>
-						<input type="text" placeholder="Ecrivez votre recherche ici..." />
-					</label>
-					<table class="table">
-						<thead>
-							<tr>
-								<th></th>
-								<th class="padding">ID</th>
-								<th class="padding">Nom</th>
-								<th class="padding">Prénom</th>
-								<th>Date d'embauche</th>
-								<th><input type="text" class="affect" value="15" /></th>
-								<th>Affecter</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><div class="avatar" style="background-color: #e05353;"><span>DD</span></div></td>
-								<td class="padding"><span><strong>U16</strong></span></td>
-								<td class="padding"><span>Dupont</span></td>
-								<td class="padding"><span>Jean</span></td>
-								<td><input type="text" value="04/01/2017" /></td>
-								<td><input type="text" class="affect" value="" /></td>
-								<td><input type="checkbox" /></td>
-							</tr>
-							<tr>
-								<td><div class="avatar" style="background-color: #e9ad4f;"><span>GG</span></div></td>
-								<td class="padding"><span><strong>U16</strong></span></td>
-								<td class="padding"><span>Dupont</span></td>
-								<td class="padding"><span>Jean</span></td>
-								<td><input type="text" value="04/01/2017" /></td>
-								<td><input type="text" class="affect" value="" /></td>
-								<td><input type="checkbox" /></td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="button green uppercase strong float right margin"><span>Mettre à jour</span></div>
+					<h2>Service de santé du travail</h2>
+					<div class="form-element">
+						<input type="text" />
+						<label>Nom du médecin de travail</label>
+						<span class="bar"></span>
+					</div>
 				</div>
-			</div>
+			</form>
+
 		</div>
 	</div>
 

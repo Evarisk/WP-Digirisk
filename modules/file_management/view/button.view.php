@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $element ) && ! empty( $element->thumbnail_id ) ) :
 		echo wp_get_attachment_image( $element->thumbnail_id, 'thumbnail', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail' ) );
-		echo do_shortcode( "[wpeo_gallery element_id='" . $element->id . "' action='" . $action . "' object_name='" . $type . "' ]" );
+		echo do_shortcode( "[gallery element_id='" . $element->id . "' action='" . $action . "' object_name='" . $type . "' ]" );
 	else :
 		?>
 		<i class="default-image fa fa-picture-o"></i>

@@ -17,7 +17,7 @@ class file_management_shortcode {
 	*/
 	public function __construct() {
 		add_shortcode( 'eo_upload_button', array( $this, 'callback_eo_upload_button' ) );
-		add_shortcode( 'wpeo_gallery', array( $this, 'callback_shortcode_gallery' ) );
+		add_shortcode( 'gallery', array( $this, 'callback_shortcode_gallery' ) );
 	}
 
 	/**
