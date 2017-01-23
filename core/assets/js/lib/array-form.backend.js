@@ -1,20 +1,20 @@
-window.eva_lib.array_form = {};
+window.eoxiaJS.arrayForm = {};
 
-window.eva_lib.array_form.init = function() {
-	window.eva_lib.array_form.event();
+window.eoxiaJS.arrayForm.init = function() {
+	window.eoxiaJS.arrayForm.event();
 };
 
-window.eva_lib.array_form.event = function() {
-	jQuery( document ).on( 'click', '.submit-fake-form', window.eva_lib.array_form.send_form );
+window.eoxiaJS.arrayForm.event = function() {
+	jQuery( document ).on( 'click', '.submit-fake-form', window.eoxiaJS.arrayForm.sendForm );
 };
 
-window.eva_lib.array_form.get_input = function( parent ) {
+window.eoxiaJS.arrayForm.getInput = function( parent ) {
 	return parent.find( 'input, textarea' );
 };
 
-window.eva_lib.array_form.get_input_value = function( input ) {
-	switch( input.getAttribute( 'type' ) ) {
-		case "checkbox":
+window.eoxiaJS.arrayForm.getInputValue = function( input ) {
+	switch ( input.getAttribute( 'type' ) ) {
+		case 'checkbox':
 			return input.checked;
 			break;
 		default:
@@ -23,18 +23,18 @@ window.eva_lib.array_form.get_input_value = function( input ) {
 	}
 };
 
-window.eva_lib.array_form.send_form = function( event ) {
+window.eoxiaJS.arrayForm.sendForm = function( event ) {
 	var element = jQuery( this );
+	var parent = element.closest( '.form' );
+	var listInput = window.eoxiaJS.arrayForm.getInput( parent );
+	var data = {};
+	var i = 0;
 
 	event.preventDefault();
 
-	var parent = element.closest( jQuery( this ).data( 'parent' ) );
-	var list_input = window.eva_lib.array_form.get_input( parent );
-
-	var data = {};
-	for (var i = 0; i < list_input.length; i++) {
-		if ( list_input[i].name ) {
-			data[list_input[i].name] = window.eva_lib.array_form.get_input_value( list_input[i] );
+	for ( i = 0; i < listInput.length; i++ ) {
+		if ( listInput[i].name ) {
+			data[listInput[i].name] = window.eoxiaJS.arrayForm.get_input_value( listInput[i] );
 		}
 	}
 

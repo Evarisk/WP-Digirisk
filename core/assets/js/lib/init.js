@@ -1,26 +1,27 @@
 'use strict';
 
-window.eva_lib = {};
+window.eoxiaJS = {};
 window.digirisk = {};
 
-window.eva_lib.init = function() {
-	window.eva_lib.load_list_script();
-	window.eva_lib.init_array_form();
-	window.eva_lib.init_tooltip();
+window.eoxiaJS.init = function() {
+	window.eoxiaJS.loadScripts();
+	window.eoxiaJS.initArrayForm();
+	window.eoxiaJS.initToolTip();
 };
 
-window.eva_lib.load_list_script = function() {
-	for ( var key in window.digirisk ) {
+window.eoxiaJS.loadScripts = function() {
+	var key;
+	for ( key in window.digirisk ) {
 		window.digirisk[key].init();
 	}
 };
 
-window.eva_lib.init_array_form = function() {
-	 window.eva_lib.array_form.init();
+window.eoxiaJS.initArrayForm = function() {
+	 window.eoxiaJS.array_form.init();
 };
 
-window.eva_lib.init_tooltip = function() {
-	 window.eva_lib.tooltip.init();
+window.eoxiaJS.initToolTip = function() {
+	window.eoxiaJS.tooltip.init();
 };
 
-jQuery(document).ready(window.eva_lib.init);
+jQuery( document ).ready( window.eoxiaJS.init );

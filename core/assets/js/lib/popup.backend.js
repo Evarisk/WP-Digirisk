@@ -5,28 +5,27 @@ window.digirisk.popup.init = function() {
 };
 
 window.digirisk.popup.event = function() {
-	jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
-	jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.open_ajax );
-	jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
-	jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
-	jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
-	jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
+  jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
+  jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.openAjax );
+  jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
+  jQuery( document ).on( 'click', '.popup .container .button-primary', window.digirisk.popup.confirm );
+  jQuery( document ).on( 'click', '.popup .container .button-secondary, .popup .close', window.digirisk.popup.close );
+  jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
 };
 
 window.digirisk.popup.open = function( event ) {
 	var triggeredElement = jQuery( this );
-
-	// Récupères la box de destination mis dans l'attribut du popup.
-	var target = triggeredElement.closest(  "." + triggeredElement.data( 'parent' ) ).find( "." + triggeredElement.data( 'target' ) );
+	var target = triggeredElement.closest(  '.' + triggeredElement.data( 'parent' ) ).find( '.' + triggeredElement.data( 'target' ) );
+	var cbObject, cbFunc = undefined;
 	target.addClass( 'active' );
 
-	if ( target.is( ":visible" ) && triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
-		var callback_object = triggeredElement.data( 'cb-object' );
-		var callback_func = triggeredElement.data( 'cb-func' );
+	if ( target.is( ':visible' ) && triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
+		cbObject = triggeredElement.data( 'cb-object' );
+		cbFunc = triggeredElement.data( 'cb-func' );
 
 		// On récupères les "data" sur l'élement en tant qu'args.
 		triggeredElement.get_data( function( data ) {
-			window.digirisk[callback_object][callback_func]( triggeredElement, target, event, data );
+			window.digirisk[cbObject][cbFunc]( triggeredElement, target, event, data );
 		} );
 	}
 
@@ -41,13 +40,10 @@ window.digirisk.popup.open = function( event ) {
  * @param  {[type]} event [description]
  * @return {[type]}       [description]
  */
-window.digirisk.popup.open_ajax = function( event ) {
+window.digirisk.popup.openAjax = function( event ) {
 	var element = jQuery( this );
-
-  // Récupères la box de destination mis dans l'attribut du popup
-  var target = jQuery( this ).closest(  "." + jQuery( this ).data( 'parent' ) ).find( "." + jQuery( this ).data( 'target' ) );
-	target.addClass( 'active' );
-
+	var target = jQuery( this ).closest(  '.' + jQuery( this ).data( 'parent' ) ).find( '.' + jQuery( this ).data( 'target' ) );
+	target.addClass( 'active ');
 
 	jQuery( this ).get_data( function( data ) {
 		delete data.parent;
@@ -55,22 +51,23 @@ window.digirisk.popup.open_ajax = function( event ) {
 		window.digirisk.request.send( element, data );
 	});
 
-  event.stopPropagation();
+	event.stopPropagation();
 };
 
 window.digirisk.popup.confirm = function( event ) {
-	var triggered_element = jQuery( this );
+	var triggeredElement = jQuery( this );
+	var cbObject, cbFunc = undefined;
 
 	if ( ! jQuery( '.popup' ).hasClass( 'no-close' ) ) {
 		jQuery( '.popup' ).removeClass( 'active' );
 
-		if ( triggered_element.data( 'cb-object' ) && triggered_element.data( 'cb-func' ) ) {
-			var callback_object = triggered_element.data( 'cb-object' );
-			var callback_func = triggered_element.data( 'cb-func' );
+		if ( triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
+			cbObject = triggeredElement.data( 'cb-object' );
+			cbFunc = triggeredElement.data( 'cb-func' );
 
 			// On récupères les "data" sur l'élement en tant qu'args.
-			triggered_element.get_data( function( data ) {
-				window.digirisk[callback_object][callback_func]( triggered_element, event, data );
+			triggeredElement.get_data( function( data ) {
+				window.digirisk[cbObject][cbFunc]( triggeredElement, event, data );
 			} );
 		}
 	}

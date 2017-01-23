@@ -3,34 +3,33 @@ window.digirisk.request = {};
 window.digirisk.request.init = function() {};
 
 window.digirisk.request.send = function( element, data ) {
-  jQuery.post( window.ajaxurl, data, function( response ) {
+	jQuery.post( window.ajaxurl, data, function( response ) {
 		element.closest( '.loading' ).removeClass( 'loading' );
 
-    if ( response && response.success ) {
-      if ( response.data.module && response.data.callback_success ) {
-        window.digirisk[response.data.module][response.data.callback_success]( element, response );
-      }
-    }
-    else {
-      if ( response.data.module && response.data.callback_error ) {
-        window.digirisk[response.data.module][response.data.callback_error]( element, response );
-      }
-    }
-  }, "json" );
+		if ( response && response.success ) {
+			if ( response.data.module && response.data.callback_success ) {
+				window.digirisk[response.data.module][response.data.callback_success]( element, response );
+			}
+		} else {
+			if ( response.data.module && response.data.callback_error ) {
+				window.digirisk[response.data.module][response.data.callback_error]( element, response );
+			}
+		}
+	}, 'json' );
 };
 
 window.digirisk.request.get = function( url, data ) {
-  jQuery.get( url, data, function( response ) {
+	jQuery.get( url, data, function( response ) {
+		element.closest( '.loading' ).removeClass( 'loading' );
 
-    if ( response && response.success ) {
-      if ( response.data.module && response.data.callback_success ) {
-        window.digirisk[response.data.module][response.data.callback_success]( response );
-      }
-    }
-    else {
-      if ( response.data.module && response.data.callback_error ) {
-        window.digirisk[response.data.module][response.data.callback_error]( response );
-      }
-    }
-  }, "json" );
+		if ( response && response.success ) {
+			if ( response.data.module && response.data.callback_success ) {
+				window.digirisk[response.data.module][response.data.callback_success]( response );
+			}
+		} else {
+			if ( response.data.module && response.data.callback_error ) {
+				window.digirisk[response.data.module][response.data.callback_error]( response );
+			}
+		}
+	}, 'json' );
 };
