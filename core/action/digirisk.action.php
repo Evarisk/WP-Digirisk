@@ -3,13 +3,14 @@
  * Initialise les fichiers .config.json
  *
  * @package Evarisk\Plugin
+ *
+ * @since 0.1
+ * @version 6.2.5.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
  * Initialise les scripts JS et CSS du Plugin
@@ -41,6 +42,9 @@ class Digirisk_Action {
 	 * Initialise les fichiers JS inclus dans WordPress (jQuery, wp.media et thickbox)
 	 *
 	 * @return void nothing
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_before_admin_enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
@@ -57,21 +61,27 @@ class Digirisk_Action {
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
 	 *
 	 * @return void nothing
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_admin_enqueue_scripts() {
-		// wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );
-		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/new-css/style.min.css', array(), config_util::$init['digirisk']->version );
+		// wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), config_util::$init['digirisk']->version );.
+		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/new-css/style.min.css', array(), Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
-		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/datepicker.min.css', array(), config_util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/datepicker.min.css', array(), Config_Util::$init['digirisk']->version );
 
-		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), config_util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), Config_Util::$init['digirisk']->version, false );
 	}
 
 	/**
 	 * Initialise en php le fichier permettant la traduction des variables string JavaScript.
 	 *
 	 * @return void nothing
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_admin_print_scripts() {
 		require( PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php' );
@@ -79,6 +89,9 @@ class Digirisk_Action {
 
 	/**
 	 * Initialise le fichier MO
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
@@ -86,10 +99,13 @@ class Digirisk_Action {
 
 	/**
 	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
+	 *
+	 * @since 1.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_admin_menu() {
 		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
-		$digirisk_core = get_option( config_util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
 			add_menu_page( __( 'Digirisk', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );

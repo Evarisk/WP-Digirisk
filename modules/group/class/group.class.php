@@ -256,7 +256,7 @@ class Group_Class extends Post_Class {
 			$comment_list = '';
 			if ( !empty( $risk->comment ) ) :
 				foreach ( $risk->comment as $comment ) :
-					$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
+					$comment_list .= $comment->date . ' : ' . $comment->content . "
 ";
 				endforeach;
 			endif;

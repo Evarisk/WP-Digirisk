@@ -1,19 +1,31 @@
-<?php namespace digi;
+<?php
+/**
+ * Affichages le contenu de la page outils de Digirisk dans WordPress.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package tools
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="wrap">
-	<h1><?php _e( 'Digirisk tools', 'digirisk' ); ?></h1>
+	<h1><?php esc_html_e( 'Digirisk tools', 'digirisk' ); ?></h1>
 
 	<div class="digi-tools-main-container" >
 		<h2 class="nav-tab-wrapper">
-			<a class="nav-tab nav-tab-active" href="#" data-id="digi-data-export" ><?php _e( 'Export digirisk datas', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-handle-model" ><?php _e( 'Gestion des modèles ODT', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-data-import-user" ><?php _e( 'Import user', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-method-fixer" ><?php _e( 'Correction de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-recommendation-fixer" ><?php _e( 'Correction des recommendations', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-doc-fixer" ><?php _e( 'Migrer les docs', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php _e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
+			<a class="nav-tab nav-tab-active" href="#" data-id="digi-data-export" ><?php esc_html_e( 'Export digirisk datas', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-handle-model" ><?php esc_html_e( 'Modèles ODT', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-data-import-user" ><?php esc_html_e( 'Importer des utilisateurs', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-method-fixer" ><?php esc_html_e( 'Correction de la méthode d\'évaluation Evarisk', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-recommendation-fixer" ><?php esc_html_e( 'Correction des recommendations', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-doc-fixer" ><?php esc_html_e( 'Migrer les docs', 'digirisk' ); ?></a>
+			<a class="nav-tab" href="#" data-id="digi-risk-fixer" ><?php esc_html_e( 'Recompilation des identifiants de risques', 'digirisk' ); ?></a>
 		</h2>
 
 		<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2" >
@@ -35,26 +47,26 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		</div>
 
 		<div id="digi-method-fixer" class="hidden" >
-			<p><?php _e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'digirisk' ); ?></p>
-			<p><button class="wp-digi-bton-fourth reset-method-evaluation" data-nonce="<?php echo wp_create_nonce( 'reset_method_evaluation' ); ?>" type="button"><?php _e( 'Réintialiser', 'digirisk' ); ?></button>
+			<p><?php esc_html_e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'digirisk' ); ?></p>
+			<p><button class="wp-digi-bton-fourth reset-method-evaluation" data-nonce="<?php echo wp_create_nonce( 'reset_methodesc_html_evaluation' ); ?>" type="button"><?php esc_html_e( 'Réintialiser', 'digirisk' ); ?></button>
 			<ul></ul>
 		</div>
 
 		<div id="digi-recommendation-fixer" class="hidden" >
-			<p><?php _e( 'Cliquer sur ce bouton pour résoudre les problèmes de recommendation', 'digirisk' ); ?></p>
-			<p><button class="wp-digi-bton-fourth fix-recommendation" data-nonce="<?php echo wp_create_nonce( 'fix_recommendation' ); ?>" type="button"><?php _e( 'Résoudre', 'digirisk' ); ?></button>
+			<p><?php esc_html_e( 'Cliquer sur ce bouton pour résoudre les problèmes de recommendation', 'digirisk' ); ?></p>
+			<p><button class="wp-digi-bton-fourth fix-recommendation" data-nonce="<?php echo wp_create_nonce( 'fix_recommendation' ); ?>" type="button"><?php esc_html_e( 'Résoudre', 'digirisk' ); ?></button>
 			<ul></ul>
 		</div>
 
 		<div id="digi-doc-fixer" class="hidden" >
-			<p><?php _e( 'Cliquer sur ce bouton pour migrer les documents', 'digirisk' ); ?></p>
-			<p><button class="wp-digi-bton-fourth fix-doc" data-nonce="<?php echo wp_create_nonce( 'callback_transfert_doc' ); ?>" type="button"><?php _e( 'Résoudre', 'digirisk' ); ?></button>
+			<p><?php esc_html_e( 'Cliquer sur ce bouton pour migrer les documents', 'digirisk' ); ?></p>
+			<p><button class="wp-digi-bton-fourth fix-doc" data-nonce="<?php echo wp_create_nonce( 'callback_transfert_doc' ); ?>" type="button"><?php esc_html_e( 'Résoudre', 'digirisk' ); ?></button>
 			<ul></ul>
 		</div>
 
 		<div id="digi-risk-fixer" class="hidden" >
-			<p><?php _e( 'Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez des problèmes d\'affichage', 'digirisk' ); ?></p>
-			<p><button class="wp-digi-bton-fourth element-risk-compilation" data-nonce="<?php echo wp_create_nonce( 'risk_list_compil' ); ?>" type="button" ><?php _e( 'Recompiler', 'digirisk' ); ?></button>
+			<p><?php esc_html_e( 'Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez des problèmes d\'affichage', 'digirisk' ); ?></p>
+			<p><button class="wp-digi-bton-fourth element-risk-compilation" data-nonce="<?php echo wp_create_nonce( 'risk_list_compil' ); ?>" type="button" ><?php esc_html_e( 'Recompiler', 'digirisk' ); ?></button>
 			<ul></ul>
 		</div>
   </div>
