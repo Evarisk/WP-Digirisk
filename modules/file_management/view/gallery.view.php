@@ -7,8 +7,8 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
- * @copyright 2015-2016 Eoxia
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
  * @package file_management
  * @subpackage view
  */
@@ -40,14 +40,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</ul>
 
 	<ul class="action">
-		<li><a href="#" class="wp-digi-bton-fourth set-as-thumbnail"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
+		<li><a href="#" class="action-attribute"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
 		<li>
 			<a 	href="#"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>"
 					data-action="<?php echo esc_attr( $action ); ?>"
 					data-id="<?php echo esc_attr( $element_id ); ?>"
 					data-object-name="<?php echo $param['object_name']; ?>"
-					class="custom wp-digi-bton-first wpeo-upload-media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a>
+					class="media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a>
 		</li>
 		<li><a href="#"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'dessociate_file' ) ); ?>"
@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						data-thumbnail-id="<?php echo esc_attr( $thumbnail_id ); ?>"
 						data-element-id="<?php echo esc_attr( $element_id ); ?>"
 						data-object-name="<?php echo esc_attr( $param['object_name'] ); ?>"
-						class="action-attribute wp-digi-bton-third" ><i></i><?php esc_html_e( 'Supprimer', 'digirisk' ); ?></a></li>
+						class="action-attribute"" ><i></i><?php esc_html_e( 'Supprimer', 'digirisk' ); ?></a></li>
 	</ul>
 
 </div>

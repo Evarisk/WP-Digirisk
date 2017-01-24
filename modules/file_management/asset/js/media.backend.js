@@ -1,11 +1,25 @@
+/**
+ * Initialise l'objet "media" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
 window.digirisk.media = {
-  file_frame: undefined,
-  element_id: undefined,
-  have_thumbnail: undefined,
-  object_name: undefined,
-  _wpnonce: undefined
+	file_frame: undefined,
+	element_id: undefined,
+	have_thumbnail: undefined,
+	object_name: undefined,
+	_wpnonce: undefined
 };
 
+/**
+ * Appel la méthode "event"
+ *
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
 window.digirisk.media.init = function() {
   window.digirisk.media.event();
 };

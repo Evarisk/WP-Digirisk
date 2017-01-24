@@ -25,6 +25,7 @@ window.digirisk.tab.load = function( event ) {
 			action: 'load_tab_content',
 			_wpnonce: tabTriggered.data( 'nonce' ),
 			tab_to_display: tabTriggered.data( 'action' ),
+			title: tabTriggered.data( 'title' ),
 			element_id: tabTriggered.data( 'id' )
 	  };
 
