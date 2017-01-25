@@ -117,6 +117,8 @@ window.digirisk.userDashboard.loadedUserSuccess = function( element, response ) 
  * Le callback en cas de réussite à la requête Ajax "save_user".
  * Remplaces le contenu du tableau "users" par le template renvoyé par la requête Ajax.
  *
+ * Si response.data.error est égale à true, affiches le tooltip disant "Cette adresse email est déjà utilisée."
+ *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
@@ -125,6 +127,12 @@ window.digirisk.userDashboard.loadedUserSuccess = function( element, response ) 
  * @version 6.2.5.0
  */
 window.digirisk.userDashboard.savedUserSuccess = function( element, response ) {
-  jQuery( '.user-dashboard table.users' ).html( response.data.template );
-	jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();
+	jQuery( '.user-dashboard table.users .tooltip.red.active' ).removeClass( 'active' );
+
+	if ( response.data.error ) {
+		jQuery( '.user-dashboard table.users .tooltip.red' ).addClass( 'active' );
+	} else {
+		jQuery( '.user-dashboard table.users' ).html( response.data.template );
+		jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();
+	}
 };

@@ -1,4 +1,11 @@
-window .digirisk.installer = {};
+/**
+ * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+
+window.digirisk.installer = {};
 
 window.digirisk.installer.init = function() {
 	window.digirisk.installer.event();
@@ -25,7 +32,7 @@ window.digirisk.installer.key_up_domain_mail = function( event ) {
  * Le callback en cas de réussite à la requête Ajax "save_society".
  * Ferme la div "society". Changes l'étape de "Votre société" en "Composants".
  * Ouvre la div "wpdigi-components".
- * Appel la méthode "request_install_component".
+ * Appel la méthode "requestInstallComponent".
  *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
@@ -39,14 +46,14 @@ window.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .step-create-society' ).removeClass( 'active' );
 	jQuery( '.wpdigi-installer .step-create-components' ).addClass( 'active' );
 	jQuery( '.wpdigi-installer .wpdigi-components' ).fadeIn();
-	window.digirisk.installer.request_install_component();
+	window.digirisk.installer.requestInstallComponent();
 };
 
 /**
  * Envoie une requête pour installer les composants nécessaires à l'utilisation de DigiRisk.
  * @return {void}
  */
-window.digirisk.installer.request_install_component = function() {
+window.digirisk.installer.requestInstallComponent = function() {
 	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
 	window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
@@ -71,7 +78,7 @@ window.digirisk.installer.installedComponentSuccess = function( response ) {
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {
 		jQuery( '.wpdigi-installer .wpdigi-components li.hidden:first' ).removeClass( 'hidden' ).addClass( 'active' );
-		window.digirisk.installer.request_install_component();
+		window.digirisk.installer.requestInstallComponent();
 	} else {
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );

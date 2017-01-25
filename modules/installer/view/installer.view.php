@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 						<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
 					</label>
 
-					<span class="tooltip" aria-label="<?php echo esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+					<span class="tooltip hover" aria-label="<?php echo esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 						<i class="dashicons dashicons-editor-help">*</i>
 					</span>
 

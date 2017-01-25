@@ -1,3 +1,10 @@
+/**
+ * Initialise l'objet "DUER" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+
 window.digirisk.DUER = {};
 
 window.digirisk.DUER.init = function() {
@@ -84,7 +91,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 	};
 
 	popupElement.find( 'h2' ).text( args.title );
-	popupElement.addClass( 'no-close' );
+	popupElement.addClass( 'no-close loading' );
 	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 

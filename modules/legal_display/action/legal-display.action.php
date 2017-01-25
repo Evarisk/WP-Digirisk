@@ -72,7 +72,7 @@ class Legal_Display_Action {
 		$this->generate_sheet( $legal_display, $element_parent[0] );
 		$this->generate_sheet( $legal_display, $element_parent[0], 'A3' );
 
-		wp_send_json_success( array( 'module' => 'legal_display', 'callback_success' => 'generatedSuccess', 'legal_display' => $legal_display ) );
+		wp_send_json_success( array( 'module' => 'legalDisplay', 'callback_success' => 'generatedSuccess', 'legal_display' => $legal_display ) );
   }
 
 	/**

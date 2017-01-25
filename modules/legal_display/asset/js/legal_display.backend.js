@@ -1,6 +1,13 @@
-window.digirisk.legal_display = {};
+/**
+ * Initialise l'objet "legalDisplay" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
 
-window.digirisk.legal_display.init = function() {};
+window.digirisk.legalDisplay = {};
+
+window.digirisk.legalDisplay.init = function() {};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "save_legal_display".
@@ -13,6 +20,7 @@ window.digirisk.legal_display.init = function() {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.legal_display.generatedSuccess = function() {
+window.digirisk.legalDisplay.generatedSuccess = function() {
 	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
+	window.scrollTo( 0, 0 );
 };

@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<li class="unit-header"
+<li class="unit-header <?php echo esc_attr( $workunit->id === $workunit_selected_id ) ? 'active' : ''; ?>"
 	data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
 	data-type="<?php echo esc_attr( $workunit->type ); ?>">
 

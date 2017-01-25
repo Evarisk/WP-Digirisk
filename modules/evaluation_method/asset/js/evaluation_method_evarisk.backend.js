@@ -1,16 +1,22 @@
-window.digirisk.evaluation_method_evarisk = {};
+/**
+ * Initialise l'objet "evaluationMethodEvarisk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.evaluationMethodEvarisk = {};
 
-window.digirisk.evaluation_method_evarisk.init = function() {
-	window.digirisk.evaluation_method_evarisk.event();
+window.digirisk.evaluationMethodEvarisk.init = function() {
+	window.digirisk.evaluationMethodEvarisk.event();
 };
 
-window.digirisk.evaluation_method_evarisk.event = function() {
-	jQuery( document ).on( 'click', '.popup.popup-evaluation tr td', window.digirisk.evaluation_method_evarisk.select_variable );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation .button.green', window.digirisk.evaluation_method_evarisk.close_modal );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation .close', window.digirisk.evaluation_method_evarisk.close_model_mask );
+window.digirisk.evaluationMethodEvarisk.event = function() {
+	jQuery( document ).on( 'click', '.popup.popup-evaluation tr td', window.digirisk.evaluationMethodEvarisk.select_variable );
+	jQuery( document ).on( 'click', '.popup.popup-evaluation .button.green', window.digirisk.evaluationMethodEvarisk.close_modal );
+	jQuery( document ).on( 'click', '.popup.popup-evaluation .close', window.digirisk.evaluationMethodEvarisk.close_model_mask );
 };
 
-window.digirisk.evaluation_method_evarisk.select_variable = function( event ) {
+window.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
 	var element = jQuery( this );
 	if ( '' !== element.data( 'seuil-id' ) ) {
 		jQuery( '.popup.popup-evaluation tr td[data-variable-id="' + element.data( 'variable-id' ) + '"]' ).removeClass( 'active' );
@@ -19,7 +25,7 @@ window.digirisk.evaluation_method_evarisk.select_variable = function( event ) {
 	}
 };
 
-window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
+window.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
 	var element = jQuery( this );
 
   var listVariable = {};
@@ -40,7 +46,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 
 	jQuery( '.cotation-container .content.active' ).removeClass( 'active' );
 	if ( 5 === length ) {
-		element.closest( '.risk-row' ).find( '.cotation-container' ).addClass( 'loading' );
+		element.closest( '.risk-row' ).find( '.cotation' ).addClass( 'loading' );
 		element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
 
 		jQuery.post( window.ajaxurl, data, function( response ) {
@@ -51,7 +57,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 
 			element.closest( '.risk-row' ).find( '.cotation-container .action span' ).html( response.data.equivalence );
 			element.closest( '.risk-row' ).find( '.cotation-container .action i' ).hide();
-			element.closest( '.risk-row' ).find( '.cotation-container' ).removeClass( 'loading' );
+			element.closest( '.risk-row' ).find( '.cotation' ).removeClass( 'loading' );
 
 			element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className = element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className.replace( /level[-1]?[0-4]/, 'level' + response.data.scale );
 			element.closest( '.risk-row' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
@@ -62,7 +68,7 @@ window.digirisk.evaluation_method_evarisk.close_modal = function( event ) {
 	return false;
 };
 
-window.digirisk.evaluation_method_evarisk.close_model_mask = function( event ) {
+window.digirisk.evaluationMethodEvarisk.close_model_mask = function( event ) {
 	var element = jQuery( this );
 	jQuery( '.popup.popup-evaluation' ).hide();
 

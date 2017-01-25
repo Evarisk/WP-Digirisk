@@ -93,7 +93,7 @@ class Navigation_Class extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function display_workunit_list( $parent_id ) {
 		$display_create_workunit_form = ( count( group_class::g()->get( array( 'post_parent' => $parent_id, 'posts_per_page' => -1 ) ) ) === 0 ) ? true : false;
@@ -119,7 +119,7 @@ class Navigation_Class extends Singleton_Util {
 			$workunit_selected_id = (int) $_POST['workunit_id'];
 		}
 
-		view_util::exec( 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
+		View_Util::exec( 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
 	}
 }
 

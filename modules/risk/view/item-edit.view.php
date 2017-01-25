@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<td class="padding">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
-		<span><strong><?php echo esc_html( $risk->unique_identifier ); ?></span></strong>
+		<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
 	<td>
 		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . ( ( $risk->id !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td>
 		<?php if ( 0 !== $risk->id ) : ?>
 			<div class="action grid-layout w3">
-				<div data-parent="risk-row" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">

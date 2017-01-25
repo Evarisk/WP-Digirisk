@@ -5,7 +5,7 @@ window.digirisk.society.init = function() {
 };
 
 window.digirisk.society.event = function() {
-	jQuery( document ).on( 'keyup', 'input[name="title"]', window.digirisk.society.display_save_button );
+	jQuery( document ).on( 'keyup', 'input[name="title"]', window.digirisk.society.keyUpSaveIdentity );
 };
 
 /**
@@ -23,10 +23,22 @@ window.digirisk.society.loadedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 };
 
-window.digirisk.society.display_save_button = function( event ) {
-	jQuery( this ).closest( '.wp-digi-global-sheet-header' ).find( ".wp-digi-global-action-container" ).removeClass( "hidden" );
+/**
+ * Lorsque qu'on lache une touche dans le champ de texte "title", on fait apparaitre le bouton "Enregistrer".
+ * Si la touche laché est "entrée" on appuie sur le bouton "Enregistrer".
+ *
+ * @param  {KeyboardEvent} event L'état du clavier lors du "keyup"
+ * @return {void}
+ *
+ * @since 0.1
+ * @version 6.2.5.0
+ */
+window.digirisk.society.keyUpSaveIdentity = function( event ) {
 	jQuery( this ).addClass( 'active' );
-	jQuery( '.wp-digi-group-action-container .wp-digi-bton-fourth' ).text( 'Enregistrer' );
+
+	if ( 13 === event.keyCode ) {
+		jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).click();
+	}
 };
 
 /**

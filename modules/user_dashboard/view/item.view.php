@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-id="<?php echo esc_attr( $user->id ); ?>"
 				data-action="load_user"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
-				data-loader="user-row"
+				data-loader="users"
 				class="button w50 edit action-attribute">
 				<i class="icon fa fa-pencil"></i>
 			</div>

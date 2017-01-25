@@ -68,13 +68,14 @@ class User_Shortcode_Action extends Singleton_Util {
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		User_Digi_Class::g()->update( $_POST );
+		$error = false;
+		$update_state = User_Digi_Class::g()->update( $_POST );
+
+		$error = is_wp_error( $update_state->id );
 
 		ob_start();
 		User_Dashboard_Class::g()->display_list_user();
-		$user = User_Digi_Class::g()->get( array( 'schema' => true ) );
-		$user = $user[0];
-		wp_send_json_success( array( 'module' => 'userDashboard', 'callback_success' => 'savedUserSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'userDashboard', 'callback_success' => 'savedUserSuccess', 'template' => ob_get_clean(), 'error' => $error ) );
 	}
 
 	/**

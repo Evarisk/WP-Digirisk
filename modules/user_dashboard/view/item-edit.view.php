@@ -22,7 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td class="padding"><input type="text" class="lastname" placeholder="Name" name="lastname" value="<?php echo esc_attr( $user->lastname ); ?>" /></td>
 	<td class="padding"><input type="text" class="firstname" placeholder="Firstname" name="firstname" value="<?php echo esc_attr( $user->firstname ); ?>" /></td>
-	<td class="padding"><input type="text" class="email" placeholder="demo@<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" name="email" value="<?php echo esc_attr( $user->email ); ?>" /></td>
+	<td class="padding tooltip red" aria-label="<?php echo esc_attr_e( 'Cette adresse email est déjà utilisée.', 'digirisk' ); ?>">
+		<input type="text" class="email" placeholder="demo@<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" name="email" value="<?php echo esc_attr( $user->email ); ?>" />
+	</td>
 	<td>
 		<div class="action">
 			<?php if ( empty( $user->id ) ) : ?>

@@ -61,9 +61,9 @@ window.digirisk.popup.confirm = function( event ) {
 	if ( ! jQuery( '.popup' ).hasClass( 'no-close' ) ) {
 		jQuery( '.popup' ).removeClass( 'active' );
 
-		if ( triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
-			cbObject = triggeredElement.data( 'cb-object' );
-			cbFunc = triggeredElement.data( 'cb-func' );
+		if ( triggeredElement.attr( 'data-cb-object' ) && triggeredElement.attr( 'data-cb-func' ) ) {
+			cbObject = triggeredElement.attr( 'data-cb-object' );
+			cbFunc = triggeredElement.attr( 'data-cb-func' );
 
 			// On récupères les "data" sur l'élement en tant qu'args.
 			triggeredElement.get_data( function( data ) {

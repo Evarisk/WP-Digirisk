@@ -102,7 +102,7 @@ window.digirisk.action.execDelete = function( event ) {
 	}
 
 	if ( doAction ) {
-		if ( window.confirm( 'Confirm delete ?' ) ) {
+		if ( window.confirm( window.digi_confirm_delete ) ) {
 			element.get_data( function( data ) {
 				loaderElement.addClass( 'loading' );
 				window.digirisk.request.send( element, data );
