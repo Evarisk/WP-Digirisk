@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
 		<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
-	<td>
+	<td class="wm130 w150">
 		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . ( ( $risk->id !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
 	</td>
 	<td class="w50">

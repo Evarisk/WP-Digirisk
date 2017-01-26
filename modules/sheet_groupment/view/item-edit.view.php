@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td></td>
 	<td><?php esc_html_e( 'Générer une nouvelle fiche de groupement', 'digirisk' ); ?></td>
 	<td>
-		<div class="w50">
-			<div class="action-input button blue" data-loader="sheet-groupment-row" data-parent="sheet-groupment-row">
+		<div class="action">
+			<div class="w50 action-input add button blue" data-loader="sheet-groupment-row" data-parent="sheet-groupment-row">
 				<i class="icon fa fa-plus"></i>
 			</div>
 		</div>

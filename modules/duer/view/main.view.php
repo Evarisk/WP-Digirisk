@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<thead>
 		<tr>
 			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th><?php esc_html_e( 'Début', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Fin', 'digirisk' ); ?></th>
+			<th class="w100"><?php esc_html_e( 'Début', 'digirisk' ); ?></th>
+			<th class="w100"><?php esc_html_e( 'Fin', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Destinataire', 'digirisk' ); ?>.</th>
 			<th><?php esc_html_e( 'Méthodologie', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Sources', 'digirisk' ); ?></th>

@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td><?php esc_html_e( 'Générer une nouvelle fiche de poste', 'digirisk' ); ?></td>
 
 	<td>
-		<div class="action w50">
-			<div class="action-input button blue add" data-loader="table" data-parent="sheet-workunit-row">
+		<div class="action">
+			<div class="action-input button blue add w50" data-loader="table" data-parent="sheet-workunit-row">
 				<i class="icon fa fa-plus"></i>
 			</div>
 		</div>

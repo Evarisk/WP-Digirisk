@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='-1' />
 
-<div 	class="danger categorie-container toggle grid padding tooltip red"
+<div class="danger categorie-container toggle grid padding tooltip red"
 			data-parent="categorie-container"
 			data-target="content"
 			aria-label="<?php esc_html_e( 'Vous devez choisir un danger.', 'digirisk' ); ?>">

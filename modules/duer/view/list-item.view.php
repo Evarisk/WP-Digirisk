@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package duer
  * @subpackage view
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 ?>
 
 <tr>
-	<td><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
+	<td class="padding"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit'] ); ?></td>
 	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit'] ); ?></td>
 
@@ -73,17 +73,15 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Disponibilité des plans"
 					data-src="dispo-des-plans"
-					class="open-popup"><span class="dashicons dashicons-location"></span></span>
+					class="open-popup button grey"><span class="dashicons dashicons-location"></span></span>
 	</td>
 
 	<td>
 		<div class="action grid-layout w2">
-			<div class="button delete w100">
-				<a href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
+				<a class="button red" href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
 					<i class="fa fa-download" aria-hidden="true"></i>
-					<?php esc_html_e( 'DUER', 'digirisk' ); ?>
+					<span><?php esc_html_e( 'DUER', 'digirisk' ); ?></span>
 				</a>
-			</div>
 
 			<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>
 		</div>

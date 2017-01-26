@@ -33,12 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 					<input type="text" name="groupment[title]" />
 					<label>
 						<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
+						<span class="required">*</span>
 					</label>
-
-					<span class="tooltip hover" aria-label="<?php echo esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
-						<i class="dashicons dashicons-editor-help">*</i>
-					</span>
-
 					<span class="bar"></span>
 				</div>
 				<div>
