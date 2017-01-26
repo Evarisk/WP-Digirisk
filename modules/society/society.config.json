@@ -1,8 +1,8 @@
 {
 	"name": "Societé",
 	"slug": "society",
-	"version": "6.2.4.0",
-	"description": "Le module gérant la page d'affichage de Digirisk",
+	"version": "6.2.5.0",
+	"description": "Le module gérant les sociétés de DigiRisk (Groupement et unité de travail)",
 	"path": "modules/society/",
 	"dependencies": {
 		"shortcode": {},

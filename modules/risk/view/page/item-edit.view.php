@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input name="risk[id]" type="hidden" value="<?php echo esc_attr( $risk->id ); ?>" />
 	<?php wp_nonce_field( 'edit_risk' ); ?>
 
-	<td>
+	<td class="padding">
 		<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
 
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id ) ); ?>">
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<span><?php echo esc_attr( $risk->parent_workunit->title ); ?></span>
 		</a>
 		<?php else : ?>
-			Aucune unité de travail
+			<p><?php esc_html_e( 'Aucune unité de travail', 'digirisk' ); ?></p>
 		<?php endif; ?>
 	</td>
 	<td><?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?></td>
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<input type="checkbox" name="can_update" />
 		<a href="#" data-id="<?php echo esc_attr( $risk->id ); ?>"
 								data-parent="risk-row"
-								data-loader="risk-row"
+								data-loader="table"
 								class="edit-risk action-input fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
 	</td>
 

@@ -52,7 +52,7 @@ class Risk_page_class extends Singleton_Util {
 	 * @version 6.2.4.0
 	 */
 	public function display_risk_list() {
-		$risk_list = risk_class::g()->get( array() );
+		$risk_list = Risk_Class::g()->get( array( 'post_status' => 'publish' ) );
 
 		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
 		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'asc';
@@ -61,12 +61,17 @@ class Risk_page_class extends Singleton_Util {
 
 		if ( ! empty( $risk_list ) ) {
 			foreach ( $risk_list as $key => $element ) {
-				$risk_list[ $key ]->parent = society_class::g()->show_by_type( $element->parent_id );
-				if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
-					$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
+				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->parent_id );
+
+				if ( !$risk_list[ $key ]->parent ) {
+					unset( $risk_list[ $key ] );
 				} else {
-					$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
-					$risk_list[ $key ]->parent_group = society_class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
+					if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
+						$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
+					} else {
+						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
+						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
+					}
 				}
 			}
 		}

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package user
  * @subpackage view
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
 			<th class="w100 padding"><?php esc_html_e( 'Date d\'affectation', 'digirisk' ); ?></th>
-			<th class="w50 padding"></th>
+			<th class="w50"></th>
 		</tr>
 	</thead>
 
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					<td class="padding"><span><?php echo esc_html( $affected_user->lastname ); ?></span></td>
 					<td class="padding"><span><?php echo esc_html( $affected_user->firstname ); ?></span></td>
 					<td class="w100 padding"><?php echo esc_html( mysql2date( 'd/m/Y', $affected_user->date_info['start']['date'] ) ); ?></td>
-					<td class="w50 padding">
+					<td class="w50">
 						<div class="action">
 							<a 	data-id="<?php echo esc_attr( $workunit->id ); ?>"
 									data-nonce="<?php echo esc_attr( wp_create_nonce( 'detach_user' ) ); ?>"
