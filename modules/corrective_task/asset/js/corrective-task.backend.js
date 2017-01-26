@@ -22,4 +22,5 @@ window.digirisk.correctiveTask.init = function() {};
  */
 window.digirisk.correctiveTask.openedTaskPopup = function( triggeredElement, response ) {
 	jQuery( '.popup.corrective-task .content' ).html( response.data.view );
+	jQuery( '.popup.corrective-task.loading' ).removeClass( 'loading' );
 };

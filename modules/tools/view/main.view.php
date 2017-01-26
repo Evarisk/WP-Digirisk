@@ -43,8 +43,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<?php echo do_shortcode( '[digi-import-user]' ); ?>
 		</div>
 
-
-
 		<div id="digi-more" class="hidden">
 			<div class="block">
 				<p><?php esc_html_e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'digirisk' ); ?></p>

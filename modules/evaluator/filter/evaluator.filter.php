@@ -4,9 +4,9 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
- * @package risk
+ * @package evaluator
  * @subpackage filter
  */
 
@@ -21,6 +21,9 @@ class Evaluator_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
@@ -34,7 +37,7 @@ class Evaluator_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['evaluator'] = array(
@@ -46,7 +49,7 @@ class Evaluator_Filter {
 		$list_tab['digi-workunit']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Évaluateurs', 'digirisk' ),
-			'title' => __( 'Les évaluateeurs de', 'digirisk' ),
+			'title' => __( 'Les évaluateurs de', 'digirisk' ),
 		);
 
 		return $list_tab;

@@ -14,16 +14,15 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="popup corrective-task">
+<div class="popup corrective-task loading">
 	<div class="container">
 
 		<div class="header">
-			<h2 class="title">Titre de la popup</h2>
+			<h2 class="title"><?php esc_html_e( 'Édition des tâches correctives', 'digirisk' ); ?></h2>
 			<i class="close fa fa-times"></i>
 		</div>
 
 		<div class="content">
-
 		</div>
 	</div>
 </div>

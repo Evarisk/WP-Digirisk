@@ -11,17 +11,16 @@ window.digirisk.evaluationMethodEvarisk.init = function() {
 };
 
 window.digirisk.evaluationMethodEvarisk.event = function() {
-	jQuery( document ).on( 'click', '.popup.popup-evaluation tr td', window.digirisk.evaluationMethodEvarisk.select_variable );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation .button.green', window.digirisk.evaluationMethodEvarisk.close_modal );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation .close', window.digirisk.evaluationMethodEvarisk.close_model_mask );
+	jQuery( document ).on( 'click', '.popup.popup-evaluation.active tr td', window.digirisk.evaluationMethodEvarisk.select_variable );
+	jQuery( document ).on( 'click', '.popup.popup-evaluation.active .button.green', window.digirisk.evaluationMethodEvarisk.close_modal );
 };
 
 window.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
 	var element = jQuery( this );
 	if ( '' !== element.data( 'seuil-id' ) ) {
-		jQuery( '.popup.popup-evaluation tr td[data-variable-id="' + element.data( 'variable-id' ) + '"]' ).removeClass( 'active' );
+		jQuery( '.popup.popup-evaluation.active tr td[data-variable-id="' + element.data( 'variable-id' ) + '"]' ).removeClass( 'active' );
 		element.addClass( 'active' );
-		jQuery( '.popup.popup-evaluation input.variable-' + element.data( 'variable-id' ) ).val( element.data( 'seuil-id' ) );
+		jQuery( '.popup.popup-evaluation.active input.variable-' + element.data( 'variable-id' ) ).val( element.data( 'seuil-id' ) );
 	}
 };
 
@@ -66,10 +65,4 @@ window.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
 		jQuery( '.popup.popup-evaluation' ).removeClass( 'active' );
 	}
 	return false;
-};
-
-window.digirisk.evaluationMethodEvarisk.close_model_mask = function( event ) {
-	var element = jQuery( this );
-	jQuery( '.popup.popup-evaluation' ).hide();
-
 };

@@ -67,7 +67,9 @@ class Corrective_Task_Action {
 			View_Util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
 			$view = ob_get_clean();
 		} else {
-			echo 'Il faut installer l\'extension Task Manager.';
+			ob_start();
+			echo 'Il faut installer l\'extension Task Manager pour créer des tâches correctives.';
+			$view = ob_get_clean();
 		}
 
 		wp_send_json_success( array( 'module' => 'correctiveTask', 'callback_success' => 'openedTaskPopup', 'view' => $view ) );

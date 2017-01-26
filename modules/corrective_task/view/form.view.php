@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 global $point_controller; ?>
 
 <div class="wpeo-project-wrap">
-	<div class="wpeo-project-task">
+	<div class="wpeo-project-task" data-id="<?php echo esc_attr( $task->id ); ?>">
 		<?php	echo $point_controller->callback_task_content( '', $task );	?>
 	</div>
 </div>
