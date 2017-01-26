@@ -27,14 +27,17 @@
 			vertical-align: middle;
 			white-space: nowrap;
 		}
-		thead {
+		> thead {
 			background: @b;
 			color: #fff;
 			th {
 				font-weight: 600;
 			}
+			tr {
+				background: @b !important;
+			}
 		}
-		tbody {
+		> tbody {
 			tr {
 				&:nth-child(odd) {
 					background: #fff;
@@ -126,8 +129,9 @@
 				}
 				.date {
 					font-weight: 700;
-					width: 78px;
+					width: 84px;
 					margin: auto 4px;
+					font-size: 13px;
 				}
 				.content {
 					white-space: normal;

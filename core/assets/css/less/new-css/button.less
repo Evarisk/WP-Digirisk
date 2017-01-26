@@ -34,6 +34,15 @@
 		&:active {
 			transform: none;
 		}
+		&.active, &.active:hover {
+			box-shadow: none;
+			transform: translateY(0);
+			border: 0;
+		}
+		&:focus {
+			box-shadow: none;
+			color: #fff;
+		}
 		.icon.dashicons {
 			line-height: 1.3;
 		}
@@ -77,48 +86,38 @@
 				background: darken(#d0d0d0, 14%);
 			}
 		}
-		&.w40 {
+		&.w40, &.w50, &.w60, &.w80, &.h50 {
 			display: flex;
 			flex: 0 1 auto;
-			width: 40px;
-			min-width: 40px;
-			height: 40px;
 			> * {
 				margin: auto;
 			}
 		}
+		&.w40 {
+			width: 40px;
+			min-width: 40px;
+			height: 40px;
+		}
 		&.w50 {
-			display: flex;
-			flex: 0 1 auto;
 			width: 50px;
 			min-width: 50px;
 			height: 50px;
-			> * {
-				margin: auto;
-			}
 			.icon {
 				font-size: 16px;
 			}
 		}
 		&.w60 {
-			display: flex;
-			flex: 0 1 auto;
 			width: 60px;
 			min-width: 60px;
 			height: 60px;
-			> * {
-				margin: auto;
-			}
 		}
 		&.w80 {
-			display: flex;
-			flex: 0 1 auto;
 			width: 80px;
 			min-width: 80px;
 			height: 80px;
-			> * {
-				margin: auto;
-			}
+		}
+		&.h50 {
+			height: 50px;
 		}
 		&.float.left {
 			float: left;
