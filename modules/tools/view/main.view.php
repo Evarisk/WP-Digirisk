@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<div class="digirisk-wrap">
 
-			<div id="digi-data-export" class="wp-digi-bloc-loader gridwrapper2" >
+			<div id="digi-data-export" class="tab-content wp-digi-bloc-loader gridwrapper2" >
 				<div class="block">
 					<?php echo do_shortcode( '[digi-export]' ); ?>
 				</div>
@@ -37,15 +37,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			</div>
 
 
-			<div id="digi-handle-model" class="wp-digi-bloc-loader gridwrapper2 hidden" >
+			<div id="digi-handle-model" class="tab-content wp-digi-bloc-loader gridwrapper2 hidden" >
 				<?php echo do_shortcode( '[digi-handle-model]' ); ?>
 			</div>
 
-			<div id="digi-data-import-user" class="wp-digi-bloc-loader gridwrapper2 hidden" >
+			<div id="digi-data-import-user" class="tab-content wp-digi-bloc-loader gridwrapper2 hidden" >
 				<?php echo do_shortcode( '[digi-import-user]' ); ?>
 			</div>
 
-			<div id="digi-more" class="hidden">
+			<div id="digi-more" class="tab-content hidden">
 				<div class="block">
 					<p><?php esc_html_e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'digirisk' ); ?></p>
 					<p><button class="wp-digi-bton-fourth reset-method-evaluation" data-nonce="<?php echo esc_attr( wp_create_nonce( 'reset_methodesc_html_evaluation' ) ); ?>" type="button"><?php esc_html_e( 'Réintialiser', 'digirisk' ); ?></button>

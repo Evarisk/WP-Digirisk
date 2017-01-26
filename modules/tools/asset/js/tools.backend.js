@@ -23,9 +23,10 @@ window.digirisk.tools.tab_switcher = function( event ) {
   jQuery( this ).addClass( "nav-tab-active" );
 
   /**	Hide the different container and display the selected container	*/
-  jQuery( this ).closest( ".digi-tools-main-container" ).children( "div" ).each( function(){
+  jQuery( this ).closest( ".digi-tools-main-container" ).find( ".tab-content" ).each( function(){
 	  jQuery( this ).hide();
   });
+
   jQuery( "#" + jQuery( this ).attr( "data-id" ) ).show();
 },
 
