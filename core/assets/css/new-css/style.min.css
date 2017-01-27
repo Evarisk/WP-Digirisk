@@ -2879,6 +2879,284 @@
             transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+@-webkit-keyframes progressSuccess {
+  0,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+  20% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+  }
+  40% {
+    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+  }
+  80% {
+    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+}
+@-moz-keyframes progressSuccess {
+  0,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -moz-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    -moz-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+         transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+  20% {
+    -moz-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+         transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+  }
+  40% {
+    -moz-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+         transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    -moz-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+         transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+  }
+  80% {
+    -moz-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+         transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    -moz-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+         transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+}
+@-o-keyframes progressSuccess {
+  0,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -o-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+       animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+  20% {
+    transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+  }
+  40% {
+    transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+  }
+  80% {
+    transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+}
+@keyframes progressSuccess {
+  0,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+       -moz-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+         -o-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+       -moz-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+  20% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+       -moz-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+  }
+  40% {
+    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+       -moz-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+       -moz-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+  }
+  80% {
+    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+       -moz-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+       -moz-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  }
+}
+.digirisk-wrap .progress-success {
+  -webkit-animation-name: progressSuccess;
+     -moz-animation-name: progressSuccess;
+       -o-animation-name: progressSuccess;
+          animation-name: progressSuccess;
+}
+@-webkit-keyframes progressError {
+  from {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  15% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+  30% {
+    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+  45% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+  60% {
+    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+  75% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+@-moz-keyframes progressError {
+  from {
+    -moz-transform: translate(-50%, -50%);
+         transform: translate(-50%, -50%);
+  }
+  15% {
+    -moz-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+         transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+  30% {
+    -moz-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+         transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+  45% {
+    -moz-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+         transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+  60% {
+    -moz-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+         transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+  75% {
+    -moz-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+         transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+  to {
+    -moz-transform: translate(-50%, -50%);
+         transform: translate(-50%, -50%);
+  }
+}
+@-o-keyframes progressError {
+  from {
+    -o-transform: translate(-50%, -50%);
+       transform: translate(-50%, -50%);
+  }
+  15% {
+    transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+  30% {
+    transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+  45% {
+    transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+  to {
+    -o-transform: translate(-50%, -50%);
+       transform: translate(-50%, -50%);
+  }
+}
+@keyframes progressError {
+  from {
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  15% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+       -moz-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+  30% {
+    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+       -moz-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+  45% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+       -moz-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+  60% {
+    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+       -moz-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+  75% {
+    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+       -moz-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+.digirisk-wrap .progress-error {
+  -webkit-animation-name: progressError;
+     -moz-animation-name: progressError;
+       -o-animation-name: progressError;
+          animation-name: progressError;
+}
 /**
  * Loader
  * .loading -> Ajouter cette classe sur un bloc pendant un chargement
@@ -3044,6 +3322,10 @@
  * .float.left -> float left
  * .margin -> margin haut et bas sur le bouton
  * .radius -> ajoute un border radius de 4px
+ * .progress -> Active le progress button
+ * 		.load -> le bouton affiche une icone de chargement
+ * 		.success -> le bouton affiche une icone succès
+ * 		.error -> Le bouton affiche une icone erreur
  */
 .digirisk-wrap .button {
   display: inline-block;
@@ -3226,6 +3508,116 @@
 .digirisk-wrap .button.radius {
   -webkit-border-radius: 4px;
           border-radius: 4px;
+}
+.digirisk-wrap .button.progress .icon {
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+  -webkit-transform: translate(-50%, -50%);
+     -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.digirisk-wrap .button.progress .icon,
+.digirisk-wrap .button.progress:before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+.digirisk-wrap .button.progress:before {
+  content: '';
+  display: block;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transform: translate(-50%, -90%);
+     -moz-transform: translate(-50%, -90%);
+      -ms-transform: translate(-50%, -90%);
+       -o-transform: translate(-50%, -90%);
+          transform: translate(-50%, -90%);
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+  font-family: 'FontAwesome';
+  font-size: 16px;
+  -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+       -o-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+     -moz-animation-fill-mode: both;
+       -o-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.digirisk-wrap .button.progress.success,
+.digirisk-wrap .button.progress.load,
+.digirisk-wrap .button.progress.error {
+  pointer-events: none;
+}
+.digirisk-wrap .button.progress.success:before,
+.digirisk-wrap .button.progress.load:before,
+.digirisk-wrap .button.progress.error:before {
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  -webkit-transform: translate(-50%, -50%);
+     -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.digirisk-wrap .button.progress.success .icon,
+.digirisk-wrap .button.progress.load .icon,
+.digirisk-wrap .button.progress.error .icon {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transform: translate(-50%, 10%);
+     -moz-transform: translate(-50%, 10%);
+      -ms-transform: translate(-50%, 10%);
+       -o-transform: translate(-50%, 10%);
+          transform: translate(-50%, 10%);
+}
+.digirisk-wrap .button.progress.success {
+  background: #47e58e;
+}
+.digirisk-wrap .button.progress.success:before {
+  content: "\f00c";
+  -webkit-animation-name: progressSuccess;
+     -moz-animation-name: progressSuccess;
+       -o-animation-name: progressSuccess;
+          animation-name: progressSuccess;
+}
+.digirisk-wrap .button.progress.error {
+  background: #e05353;
+}
+.digirisk-wrap .button.progress.error:before {
+  content: "\f00d";
+  -webkit-animation-name: progressError;
+     -moz-animation-name: progressError;
+       -o-animation-name: progressError;
+          animation-name: progressError;
+}
+.digirisk-wrap .button.progress.load {
+  background: #d6d6d6;
+}
+.digirisk-wrap .button.progress.load:before {
+  display: inline-block;
+  content: '';
+  border: 3px solid #fff;
+  border-top: 3px solid #3495f0;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 99;
+  left: 50%;
+  top: 50%;
+  -webkit-animation: spin 1s ease-out infinite;
+     -moz-animation: spin 1s ease-out infinite;
+       -o-animation: spin 1s ease-out infinite;
+          animation: spin 1s ease-out infinite;
 }
 /**
  * Structure de la page

@@ -16,6 +16,10 @@
  * .float.left -> float left
  * .margin -> margin haut et bas sur le bouton
  * .radius -> ajoute un border radius de 4px
+ * .progress -> Active le progress button
+ * 		.load -> le bouton affiche une icone de chargement
+ * 		.success -> le bouton affiche une icone succès
+ * 		.error -> Le bouton affiche une icone erreur
  */
 .digirisk-wrap {
 
@@ -160,6 +164,71 @@
 		}
 		&.radius {
 			border-radius: 4px;
+		}
+		&.progress {
+			.icon {
+				transition: all 0.2s ease-out;
+				transform: translate(-50%, -50%);
+			}
+			.icon, &:before {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+			&:before {
+				content: '';
+				display: block;
+				opacity: 0;
+				transform: translate(-50%, -90%);
+				transition: all 0.2s ease-out;
+				font-family: 'FontAwesome';
+				font-size: 16px;
+				animation-duration: 1s;
+				animation-fill-mode: both;
+			}
+			&.success, &.load, &.error {
+				pointer-events: none;
+				&:before {
+					opacity: 1;
+					transform: translate(-50%, -50%);
+				}
+				.icon {
+					opacity: 0;
+					transform: translate(-50%, 10%);
+				}
+			}
+			&.success {
+				background: @green;
+				&:before {
+					content: "\f00c";
+					animation-name: progressSuccess;
+				}
+			}
+
+			&.error {
+				background: @red;
+				&:before {
+					content: "\f00d";
+					animation-name: progressError;
+				}
+			}
+			&.load {
+				background: @grey;
+				&:before {
+					display: inline-block;
+					content: '';
+					border: 3px solid #fff;
+					border-top: 3px solid @a;
+					border-radius: 50%;
+					width: 20px;
+					height: 20px;
+					position: absolute;
+					z-index: 99;
+					left: 50%;
+					top: 50%;
+					animation: spin 1s ease-out infinite;
+				}
+			}
 		}
 	}
 
