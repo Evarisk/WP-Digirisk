@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Destinataire"
 					data-src="destinataire-duer"
-					class="open-popup"><span class="dashicons dashicons-admin-users"></span></span>
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-users"></span></span>
 	</td>
 
 	<td class="padding text-center">
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Méthodologie"
 					data-src="methodology"
-					class="open-popup"><span class="dashicons dashicons-search"></span></span>
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-search"></span></span>
 	</td>
 
 	<td class="padding text-center">
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Source"
 					data-src="sources"
-					class="open-popup"><span class="dashicons dashicons-admin-links"></span></span>
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-links"></span></span>
 		</td>
 
 	<td class="padding text-center">
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Note importante"
 					data-src="notes-importantes"
-					class="open-popup"><span class="dashicons dashicons-clipboard"></span></span>
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-clipboard"></span></span>
 	</td>
 
 	<td class="padding text-center">
@@ -73,12 +73,12 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-cb-func="view_in_popup"
 					data-title="Disponibilité des plans"
 					data-src="dispo-des-plans"
-					class="open-popup button grey"><span class="dashicons dashicons-location"></span></span>
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-location"></span></span>
 	</td>
 
 	<td>
 		<div class="action grid-layout w2">
-				<a class="button red" href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
+				<a class="button red h50" href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
 					<i class="fa fa-download" aria-hidden="true"></i>
 					<span><?php esc_html_e( 'DUER', 'digirisk' ); ?></span>
 				</a>

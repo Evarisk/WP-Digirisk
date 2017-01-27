@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td class="padding"><?php echo esc_html( $element->title ); ?></td>
 	<td>
 		<div class="action">
-			<a class="button red" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download" aria-hidden="true"></i>
 				<span><?php esc_html_e( 'Fiche de groupement', 'digirisk' ); ?></span>
 			</a>

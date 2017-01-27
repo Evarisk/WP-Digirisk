@@ -1,11 +1,13 @@
 /**
  * Les boutons se forment grâce à leurs classes CSS
  * .button -> classe de base pour un bouton
+ * .float-icon -> Rajoute une icone en haut à droite du bouton
  * .strong -> texte en gras
  * .uppercase -> texte en majuscule
  * .red -> fond du bouton rouge
  * .green -> fond du bouton vert
- * .grey -> fond dubuoton gris
+ * .grey -> fond du bouton gris
+ * .dark -> couleur foncé comme l'interface
  * .w40 -> bouton carré 40px
  * .w50 -> bouton carré 50px
  * .w60 -> bouton carré 60px
@@ -13,6 +15,7 @@
  * .float.right -> float right
  * .float.left -> float left
  * .margin -> margin haut et bas sur le bouton
+ * .radius -> ajoute un border radius de 4px
  */
 .digirisk-wrap {
 
@@ -27,9 +30,13 @@
 		height: auto;
 		border-radius: 0;
 		transition: all 0.2s ease-out;
+		position: relative;
 		&:hover {
 			background: none;
 			color: #fff;
+			.float-icon {
+				animation-name: bounceInLight;
+			}
 		}
 		&:active {
 			transform: none;
@@ -42,6 +49,15 @@
 		&:focus {
 			box-shadow: none;
 			color: #fff;
+		}
+		.float-icon {
+			position: absolute;
+			top: -6px;
+			right: -6px;
+			background: @grey;
+			padding: 4px;
+			border-radius: 50%;
+			font-size: 12px;
 		}
 		.icon.dashicons {
 			line-height: 1.3;
@@ -80,18 +96,31 @@
 				background: darken(@green, 14%);
 			}
 		}
-		&.grey {
-			background: #d0d0d0;
+		&.dark {
+			background: @b;
 			&:hover {
-				background: darken(#d0d0d0, 14%);
+				background: darken(@b, 20%);
 			}
 		}
-		&.w40, &.w50, &.w60, &.w80, &.h50 {
+		&.grey {
+			background: @grey;
+			color: rgba(0,0,0,0.8);
+			&:hover {
+				background: darken(@grey, 14%);
+			}
+		}
+		&.w30, &.w40, &.w50, &.w60, &.w80, &.h50 {
 			display: flex;
 			flex: 0 1 auto;
 			> * {
 				margin: auto;
 			}
+		}
+		&.w30 {
+			width: 30px;
+			min-width: 30px;
+			height: 30px;
+			padding: 0 !important;
 		}
 		&.w40 {
 			width: 40px;
@@ -128,6 +157,9 @@
 		&.margin {
 			margin-top: 8px;
 			margin-bottom: 8px;
+		}
+		&.radius {
+			border-radius: 4px;
 		}
 	}
 

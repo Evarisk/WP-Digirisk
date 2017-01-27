@@ -29,6 +29,7 @@
 		display: flex;
 		flex: 0 1 auto;
 		height: 50px;
+		overflow: hidden;
 		.title {
 			width: 100%;
 			input {
@@ -56,6 +57,17 @@
 			span, .icon {
 				margin-top: auto;
 				margin-bottom: auto;
+			}
+		}
+		.save {
+			opacity: 0;
+			transform: translateX(10px);
+			pointer-events: none;
+			transition: all 0.2s ease-out;
+			&.active {
+				opacity: 1;
+				transform: translateX(0);
+				pointer-events: auto;
 			}
 		}
 	}

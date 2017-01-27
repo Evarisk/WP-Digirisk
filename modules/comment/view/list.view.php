@@ -26,6 +26,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php endforeach; ?>
 <?php else : ?>
 	<?php if ( 'view' === $display ) : ?>
-		<li><?php echo esc_html( 'Aucun commentaire', 'digirisk' ); ?></li>
+		<li><i><?php echo esc_html( 'Aucun commentaire', 'digirisk' ); ?></i></li>
 	<?php endif; ?>
 <?php endif; ?>

@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 <tr>
 	<td class="padding"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( $element->title ); ?></td>
-	<td class="padding w50">
+	<td class="w50">
 		<div class="action">
-			<a href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download" aria-hidden="true"></i>
-				<?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?>
+				<span><?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?></span>
 			</a>
 		</div>
 	</td>

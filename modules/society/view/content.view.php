@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				class="button green action-input save"
 				data-parent="unit-header"
 				data-loader="digirisk-wrap"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fa fa-floppy-o"></i></span></div>
 	</div>
 
 	<?php apply_filters( 'society_header_end', $element ); ?>

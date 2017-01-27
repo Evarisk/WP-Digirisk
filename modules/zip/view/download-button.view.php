@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<a class="button grey" href="<?php echo esc_attr( $zip_url ); ?>">
+<a class="button dark h50" href="<?php echo esc_attr( $zip_url ); ?>">
 	<i class="fa fa-file-archive-o" aria-hidden="true"></i>
 	<span><?php esc_html_e( 'ZIP', 'digirisk' ); ?></span>
 </a>

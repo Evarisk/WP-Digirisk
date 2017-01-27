@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition du destinataire"
 					data-src="destinataire-duer"
-					class="open-popup span-content-destinataire-duer"><span class="dashicons dashicons-admin-users"></span></span>
+					class="open-popup button grey radius w30 span-content-destinataire-duer"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-admin-users"></span></span>
 	</td>
 
 	<td class="padding">
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la méthodologie"
 					data-src="methodology"
-					class="open-popup span-content-methodology"><span class="dashicons dashicons-search"></span></span>
+					class="open-popup button grey w30 radius span-content-methodology"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-search"></span></span>
 	</td>
 
 	<td class="padding">
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la source"
 					data-src="sources"
-					class="open-popup span-content-sources"><span class="dashicons dashicons-admin-links"></span></span>
+					class="open-popup button grey radius w30 span-content-sources"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-admin-links"></span></span>
 	</td>
 
 	<td class="padding">
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la note importante"
 					data-src="notes-importantes"
-					class="open-popup span-content-notes-importantes"><span class="dashicons dashicons-clipboard"></span></span>
+					class="open-popup button grey radius w30 span-content-notes-importantes"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-clipboard"></span></span>
 	</td>
 
 	<td class="padding">
@@ -73,7 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la disposition des plans"
 					data-src="dispo-des-plans"
-					class="open-popup span-content-dispo-des-plans"><span class="dashicons dashicons-location"></span></span>
+					class="open-popup button grey radius w30 span-content-dispo-des-plans"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-location"></span></span>
 	</td>
 
 	<td>
