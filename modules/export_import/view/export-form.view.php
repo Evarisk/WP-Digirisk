@@ -34,5 +34,5 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		</ul>
 	</div>
 
-	<button class="wp-digi-bton-first" id="digi-export-button" ><?php _e( 'Export my Digirisk datas', 'digirisk' ); ?></button>
+	<button class="button blue" id="digi-export-button" ><?php _e( 'Export my Digirisk datas', 'digirisk' ); ?></button>
 </form>

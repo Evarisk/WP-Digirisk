@@ -25,6 +25,6 @@ if ( !defined( 'ABSPATH' ) ) exit;
 		<span class="digi-import-detail"></span>
 	</div>
 
-	<label for="file" class="wp-digi-bton-first" ><?php _e( 'Import Digirisk model (.ZIP)', 'digirisk' ); ?></label><br />
+	<label for="file" class="button blue" ><?php _e( 'Import Digirisk model (.ZIP)', 'digirisk' ); ?></label><br />
 
 </form>

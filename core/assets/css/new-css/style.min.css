@@ -2397,6 +2397,9 @@
   content: '';
   clear: both;
 }
+.digirisk-wrap .margin {
+  margin: 10px 0;
+}
 /*---
   Animations from animate.css
   .animated
@@ -4549,6 +4552,9 @@
 .digirisk-wrap .block .upload.wp-digi-bton-first {
   padding: 0 16px;
   line-height: 1.4;
+}
+.digirisk-wrap a {
+  text-decoration: none;
 }
 /* display none input type file */
 /**
