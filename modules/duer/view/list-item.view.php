@@ -55,17 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-notes-importantes"><?php echo nl2br( $element->document_meta['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-object="DUER"
-					data-cb-func="view_in_popup"
-					data-title="Note importante"
-					data-src="notes-importantes"
-					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-clipboard"></span></span>
-	</td>
-
-	<td class="padding text-center">
 		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( $element->document_meta['dispoDesPlans'] ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
@@ -75,6 +64,17 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 					data-src="dispo-des-plans"
 					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-location"></span></span>
 	</td>
+
+		<td class="padding text-center">
+			<span class="hidden text-content-notes-importantes"><?php echo nl2br( $element->document_meta['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
+			<span data-parent="main-content"
+						data-target="popup"
+						data-cb-object="DUER"
+						data-cb-func="view_in_popup"
+						data-title="Note importante"
+						data-src="notes-importantes"
+						class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-clipboard"></span></span>
+		</td>
 
 	<td>
 		<div class="action grid-layout w2">

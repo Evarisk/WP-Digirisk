@@ -55,17 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-object="DUER"
-					data-cb-func="fill_textarea_in_popup"
-					data-title="Édition de la note importante"
-					data-src="notes-importantes"
-					class="open-popup button grey radius w30 span-content-notes-importantes"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-clipboard"></span></span>
-	</td>
-
-	<td class="padding">
 		<textarea class="hidden textarea-content-dispo-des-plans" name="dispoDesPlans"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
@@ -74,6 +63,17 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-title="Édition de la disposition des plans"
 					data-src="dispo-des-plans"
 					class="open-popup button grey radius w30 span-content-dispo-des-plans"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-location"></span></span>
+	</td>
+
+	<td class="padding">
+		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
+		<span data-parent="main-content"
+					data-target="popup"
+					data-cb-object="DUER"
+					data-cb-func="fill_textarea_in_popup"
+					data-title="Édition de la note importante"
+					data-src="notes-importantes"
+					class="open-popup button grey radius w30 span-content-notes-importantes"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-clipboard"></span></span>
 	</td>
 
 	<td>
