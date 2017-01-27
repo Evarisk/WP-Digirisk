@@ -88,6 +88,3 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<button class="float right button blue submit-form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
 </form>
-
-
-</form>

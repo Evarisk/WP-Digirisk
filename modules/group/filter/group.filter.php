@@ -35,13 +35,20 @@ class Group_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
 		$tab_list['digi-group']['more'] = array(
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
 			'items' => array(
+				'advanced-options' => array(
+					'type' => 'text',
+					'text' => __( 'Options avancées', 'digirisk' ),
+					'title' => __( 'Les options avancées de', 'digirisk' ),
+					'nonce' => 'load_content',
+					'attributes' => 'data-id=' . $id . '',
+				),
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),

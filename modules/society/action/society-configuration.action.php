@@ -3,8 +3,9 @@
  * Gestion de la requête AJAX pour enregistrer la configuration d'un groupement
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
+ * @since 6.2.1.0
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage action
  */

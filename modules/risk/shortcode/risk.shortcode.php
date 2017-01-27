@@ -28,7 +28,6 @@ class Risk_Shortcode {
 		add_shortcode( 'digi_dropdown_risk', array( $this, 'callback_dropdown_risk' ) );
 	}
 
-
 	/**
 	 * Appelle la méthode display de l'objet Risk_Class pour gérer le rendu de la liste des risques.
 	 *
