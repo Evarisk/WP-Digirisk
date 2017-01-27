@@ -20,8 +20,15 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	<ul class="grid-layout w2">
 		<li class="form-element <?php echo esc_attr( ! empty( $element->title ) ? 'active' : '' ); ?>">
-			<input type="text" value="<?php echo esc_attr( $element->title ); ?>" />
+			<input
+				type="text"
+				class="digi-search"
+				value="<?php echo esc_attr( $element->title ); ?>" />
+
+			<input type="hidden" name="parent_id" />
+
 			<label><?php esc_html_e( 'Entrer l\'identifiant ou le nom du GP', 'digirisk' ); ?></label>
+
 			<span class="bar"></span>
 		</li>
 		<li>
