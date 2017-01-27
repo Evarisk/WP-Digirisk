@@ -3892,6 +3892,10 @@
   line-height: 1.8;
   margin-top: 4px;
 }
+.digirisk-wrap .table .comment-container .comment input,
+.digirisk-wrap .table .comment-container .comment textarea {
+  height: 28px;
+}
 .digirisk-wrap .table .comment-container .comment > * {
   margin: auto 0;
 }
@@ -3956,6 +3960,11 @@
 }
 .digirisk-wrap .table .comment-container .new.comment .add:hover {
   background: #1360c8;
+}
+.digirisk-wrap .table .action {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
 }
 .digirisk-wrap .table .action .button .icon {
   color: rgba(0, 0, 0, 0.3);
@@ -4219,6 +4228,7 @@
 .digirisk-wrap .form label {
   position: absolute;
   top: 10px;
+  left: 0;
   -webkit-transition: all 0.2s ease-out;
      -moz-transition: all 0.2s ease-out;
        -o-transition: all 0.2s ease-out;
@@ -4386,7 +4396,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 99999;
 }
 .digirisk-wrap .gallery a {
   text-decoration: none;
@@ -4493,7 +4503,7 @@
 .digirisk-wrap .gallery .action li:hover {
   background: rgba(255, 255, 255, 0.05);
 }
-.digirisk-wrap .gallery .action .wpeo-upload-media {
+.digirisk-wrap .gallery .action .media {
   width: auto;
   height: auto;
   line-height: 1;
