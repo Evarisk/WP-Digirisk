@@ -37,7 +37,8 @@ class Society_Advanced_Options_Shortcode {
 	 */
 	public function callback_digi_advanced_options( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		Society_Advanced_Options_Class::g()->display( $element_id );
+		$element = Society_Class::g()->show_by_type( $element_id );
+		Society_Advanced_Options_Class::g()->display( $element );
 	}
 }
 

@@ -30,16 +30,19 @@ class Society_Advanced_Options_Class extends Singleton_Util {
 	protected function construct() {}
 
 	/**
-	 * Charges la vue affichant le champ pour déplacer une société vers une autre.
+	 * Charges tous les groupements de l'application, et enlèves le groupement courant.
+	 * Charges la vue affichant le select permettant de déplacer une société vers une autre.
 	 *
-	 * @param  Society_Model $element L'objet société.
+	 * @param  Society_Model $selected_society L'objet société.
 	 * @return void
 	 *
 	 * @since 6.2.5.0
 	 * @version 6.2.5.0
 	 */
-	public function display( $element ) {
-		View_Util::exec( 'society', 'advanced-options/main', array( 'element' => $element ) );
+	public function display( $selected_society ) {
+		$groupments = Group_Class::g()->get( array( 'status' => 'publish' ) );
+
+		View_Util::exec( 'society', 'advanced-options/main', array( 'selected_society' => $selected_society, 'groupments' => $groupments ) );
 	}
 }
 
