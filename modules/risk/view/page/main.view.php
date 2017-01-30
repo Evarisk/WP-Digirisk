@@ -20,6 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php Risk_Page_Class::g()->display_risk_list(); ?>
 	</table>
 
-	<a href="#" class="button green right">Enregistrer</a>
+	<a href="#" class="button green save-all right">Enregistrer</a>
 
 </div>

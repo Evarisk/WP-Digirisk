@@ -3,7 +3,7 @@
  * Gestion des actions pour gérer les modèles personnalisés
  *
  * @since 6.2.3.0
- * @version 6.2.3.0
+ * @version 6.2.5.0
  *
  * @package Evarisk\Plugin
  */
@@ -74,7 +74,7 @@ class Handle_Model_Action {
 	 * $type correspond au type du modèle.
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.5.0
 	 *
 	 * @return void
 	 */
@@ -121,8 +121,8 @@ class Handle_Model_Action {
 		array_unshift( $models, $default_model_data );
 
 		ob_start();
-		view_util::exec( 'handle_model', 'popup-list', array( 'models' => $models ) );
-		wp_send_json_success( array( 'module' => 'handle_model', 'callback_success' => 'popup_historic_loaded', 'title' => $title, 'view' => ob_get_clean() ) );
+		View_Util::exec( 'handle_model', 'popup-list', array( 'models' => $models ) );
+		wp_send_json_success( array( 'module' => 'handleModel', 'callback_success' => 'loadedPopupHistoric', 'title' => $title, 'view' => ob_get_clean() ) );
 	}
 }
 

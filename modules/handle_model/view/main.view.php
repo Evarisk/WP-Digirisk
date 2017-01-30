@@ -3,6 +3,9 @@
  * Affichages des boutons permettant d'envoyer les modèles ODT personnalisés
  *
  * @package Evarisk\Plugin
+ *
+ * @since 1.0
+ * @version 6.2.5.0
  */
 
 namespace digi;
@@ -50,7 +53,7 @@ if ( ! empty( $list_type_document ) ) :
 				</ul>
 			</div>
 
-			<?php view_util::exec( 'handle_model', 'popup' ); ?>
+			<?php View_Util::exec( 'handle_model', 'popup' ); ?>
 		</div>
 		<?php
 	endforeach;

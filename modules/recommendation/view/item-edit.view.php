@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $recommendation->id ); ?>" />
 	<?php wp_nonce_field( 'save_recommendation' ); ?>
 
-	<td class="padding">
+	<td class="padding w50">
 		<span><strong><?php echo esc_html( $recommendation->unique_identifier ); ?></span></strong>
 	</td>
-	<td>
+	<td class="wm130 w150">
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">

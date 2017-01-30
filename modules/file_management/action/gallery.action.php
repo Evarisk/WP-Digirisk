@@ -1,34 +1,41 @@
-<?php namespace digi;
+<?php
 /**
-* Les actions pour la gestion des fichiers
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package file_management
-* @subpackage action
-*/
+ * Les actions relatives à la gallerie.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package gallery
+ * @subpackage action
+ */
+namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
 
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives à la gallerie.
+ */
 class Gallery_Action {
-	/**
-	* Le constructeur appelle l'action ajax: wp_ajax_eo_set_thumbnail
-	*/
-  public function __construct() {
-    add_action( 'wp_ajax_eo_set_thumbnail', array( $this, 'callback_set_thumbnail' ) );
-		add_action( 'wp_ajax_dessociate_file', array( $this, 'callback_dessociate_file' ) );
-  }
 
 	/**
-  * Vérifie les données et appelle associate_file de la class file_management_class
-  *
-	* int $_POST['element_id'] Le fichier sera associé à cette ID
-	* int $_POST['thumbnail_id'] L'ID du thumbnail
-	*
-  * @param array $_POST Les données envoyées par le formulaire
-  *
-  */
+	 * Le constructeur appelle l'action ajax: wp_ajax_eo_set_thumbnail ainsi que dessociate_file
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
+	public function __construct() {
+		add_action( 'wp_ajax_eo_set_thumbnail', array( $this, 'callback_set_thumbnail' ) );
+		add_action( 'wp_ajax_dessociate_file', array( $this, 'callback_dessociate_file' ) );
+	}
+
+	/**
+	 * Vérifie les données et appelle associate_file de la class file_management_class
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function callback_set_thumbnail() {
 		if ( 0 === (int) $_POST['element_id'] )
 			wp_send_json_error();

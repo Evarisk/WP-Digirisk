@@ -41,19 +41,27 @@ class Workunit_Filter {
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
 			'items' => array(
+				'advanced-options' => array(
+					'type' => 'text',
+					'text' => __( 'Options avancées', 'digirisk' ),
+					'title' => __( 'Les options avancées de', 'digirisk' ),
+					'nonce' => 'load_content',
+					'attributes' => 'data-id=' . $id . '',
+				),
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),
-					'title' => __( 'Configuration de' ,'digirisk' ),
+					'title' => __( 'Configuration de', 'digirisk' ),
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),
 				'delete' => array(
 					'type' => 'text',
 					'text' => __( 'Supprimer', 'digirisk' ),
-					'class' => 'action-delete',
-					'attributes' => 'data-action=delete_society data-id=' . $id . '',
-					'nonce' => wp_create_nonce( 'delete_society' ),
+					'parent_class' => 'action-delete no-tab',
+					'action' => 'delete_society',
+					'attributes' => 'data-loader=digirisk-wrap data-id=' . $id . '',
+					'nonce' => 'delete_society',
 				),
 			),
 		);

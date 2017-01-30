@@ -156,7 +156,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			'nom'						=> $society->title,
 			'description'		=> $society->content,
 			'adresse'				=> $society_infos['adresse'],
-			'telephone'			=> max( $society->contact['phone'] ),
+			'telephone'			=> ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
 			'codePostal'		=> $society_infos['codePostal'],
 			'ville'					=> $society_infos['ville'],
 		);
@@ -219,7 +219,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					'type'		=> 'picture',
 					'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 					'option'	=> array(
-						'size' => 2,
+						'size' => 4,
 					),
 				);
 			}

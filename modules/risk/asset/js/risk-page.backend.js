@@ -12,8 +12,8 @@ window.digirisk.risk_page.init = function() {
 };
 
 window.digirisk.risk_page.event = function() {
-	jQuery( document ).on( 'click', '.risk-page .button.green', window.digirisk.risk_page.send_all_risk );
-	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), tr .toggle, tr textarea, tr .popup', window.digirisk.risk_page.checkTheCheckbox );
+	jQuery( document ).on( 'click', '.risk-page .save-all', window.digirisk.risk_page.send_all_risk );
+	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), tr .toggle, tr textarea, tr .popup, tr .action', window.digirisk.risk_page.checkTheCheckbox );
 };
 
 window.digirisk.risk_page.send_all_risk = function( event ) {

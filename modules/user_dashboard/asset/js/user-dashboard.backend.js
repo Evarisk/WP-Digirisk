@@ -95,7 +95,7 @@ window.digirisk.userDashboard.keyEnterSendForm = function( event ) {
  * @version 6.2.5.0
  */
 window.digirisk.userDashboard.deletedUserSuccess = function( element, response ) {
-  element.closest( 'tr' ).fadeOut();
+	element.closest( 'tr' ).fadeOut();
 };
 
 /**

@@ -40,7 +40,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</ul>
 
 	<ul class="action">
-		<li><a href="#" class="action-attribute"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
+		<li><a href="#"
+						data-action="eo_set_thumbnail"
+						data-element-id="<?php echo esc_attr( $element_id ); ?>"
+						data-thumbnail-id="<?php echo esc_attr( $thumbnail_id ); ?>"
+			 			class="edit-thumbnail-id action-attribute"><?php _e( 'Set as default thumbnail', 'digirisk' ); ?></a></li>
 		<li>
 			<a 	href="#"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>"
@@ -55,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						data-thumbnail-id="<?php echo esc_attr( $thumbnail_id ); ?>"
 						data-element-id="<?php echo esc_attr( $element_id ); ?>"
 						data-object-name="<?php echo esc_attr( $param['object_name'] ); ?>"
-						class="action-attribute"" ><i></i><?php esc_html_e( 'Supprimer', 'digirisk' ); ?></a></li>
+						class="edit-thumbnail-id action-attribute" ><i></i><?php esc_html_e( 'Supprimer', 'digirisk' ); ?></a></li>
 	</ul>
 
 </div>

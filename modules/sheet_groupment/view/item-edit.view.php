@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td><?php esc_html_e( 'Générer une nouvelle fiche de groupement', 'digirisk' ); ?></td>
 	<td>
 		<div class="action">
-			<div class="w50 action-input add button blue" data-loader="sheet-groupment-row" data-parent="sheet-groupment-row">
+			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">
 				<i class="icon fa fa-plus"></i>
 			</div>
 		</div>

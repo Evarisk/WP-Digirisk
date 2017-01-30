@@ -39,7 +39,6 @@ class workunit_model extends society_model {
 					'phone' => array(
 						'type'		=> 'array',
 						'meta_type'	=> 'multiple',
-						'bydefault' => array()
 					),
 					'address_id' => array(
 						'type'		=> 'array',

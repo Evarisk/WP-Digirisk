@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package evaluator
  * @subpackage view
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <table class="table affected-evaluator">
 	<thead>
 		<tr>
-			<th></th>
+			<th class="w50"></th>
 			<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							<td>
 									<div class="action">
 										<div data-id="<?php echo esc_attr( $element->id ); ?>"
-												data-nonce="<?php echo wp_create_nonce( 'detach_evaluator' ); ?>"
+												data-nonce="<?php echo esc_attr( wp_create_nonce( 'detach_evaluator' ) ); ?>"
 												data-action="detach_evaluator"
 												data-user-id="<?php echo esc_attr( $evaluator['user_info']->id ); ?>"
 												data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"

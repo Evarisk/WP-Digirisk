@@ -34,7 +34,7 @@ window.digirisk.society.loadedSocietySuccess = function( element, response ) {
  * @version 6.2.5.0
  */
 window.digirisk.society.keyUpSaveIdentity = function( event ) {
-	jQuery( this ).addClass( 'active' );
+	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).addClass( 'active' );
 
 	if ( 13 === event.keyCode ) {
 		jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).click();

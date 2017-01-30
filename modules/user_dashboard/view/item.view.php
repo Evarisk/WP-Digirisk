@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<div
 				data-id="<?php echo esc_attr( $user->id ); ?>"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_user' ) ); ?>"
+				data-loader="users"
 				data-action="delete_user"
 				class="button w50 delete action-delete" >
 				<i class="icon fa fa-times"></i>

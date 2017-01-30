@@ -14,7 +14,7 @@ window.digirisk.toggle.open = function( event ) {
 	var elementToggle = jQuery( this );
 
 	if ( elementToggle.is( 'i' ) ) {
-		elementToggle = elementToggle.parent( '.toggle' );
+		elementToggle = elementToggle.parents( '.toggle' );
 	}
 
 	jQuery( '.toggle .content.active' ).removeClass( 'active' );
