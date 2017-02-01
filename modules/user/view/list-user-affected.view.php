@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <table class="table affected-users">
 	<thead>
 		<tr>
-			<th></th>
+			<th class="w50"></th>
 			<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 			<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php if ( ! empty( $list_affected_user ) ) :
 			foreach ( $list_affected_user as $affected_user ) : ?>
 				<tr>
-					<td><div class="avatar" style="background-color: #<?php echo esc_attr( $affected_user->avatar_color ); ?>;"><span><?php echo esc_html( $affected_user->initial ); ?></span></div></td>
+					<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $affected_user->avatar_color ); ?>;"><span><?php echo esc_html( $affected_user->initial ); ?></span></div></td>
 					<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $affected_user->id ); ?></strong></span></td>
 					<td class="padding"><span><?php echo esc_html( $affected_user->lastname ); ?></span></td>
 					<td class="padding"><span><?php echo esc_html( $affected_user->firstname ); ?></span></td>

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<table class="table users">
 		<thead>
 			<tr>
-				<th></th>
+				<th class="w50"></th>
 				<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<?php if ( ! empty( $users ) ) : ?>
 				<?php foreach ( $users as $user ) : ?>
 					<tr>
-						<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
+						<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
 						<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 						<td class="padding"><span><?php echo esc_html( $user->lastname ); ?></span></td>
 						<td class="padding"><span><?php echo esc_html( $user->firstname ); ?></span></td>

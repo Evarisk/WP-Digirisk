@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<?php if ( ! empty( $sub_list_affected_evaluator ) ) : ?>
 					<?php foreach ( $sub_list_affected_evaluator as $evaluator ) : ?>
 						<tr>
-							<td><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator['user_info']->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator['user_info']->initial ); ?></span></div></td>
+							<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator['user_info']->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator['user_info']->initial ); ?></span></div></td>
 							<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator['user_info']->id ); ?></strong></span></td>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->lastname ); ?></span></td>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->firstname ); ?></span></td>

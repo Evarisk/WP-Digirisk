@@ -40,7 +40,9 @@ class DUER_Filter {
 	 * @version 6.2.5.0
 	 */
 	public function callback_society_header_end( $element ) {
-		View_Util::exec( 'duer', 'button-generate-duer', array( 'element' => $element ) );
+		if ( 'digi-group' === $element->type ) {
+			View_Util::exec( 'duer', 'button-generate-duer', array( 'element' => $element ) );
+		}
 	}
 }
 

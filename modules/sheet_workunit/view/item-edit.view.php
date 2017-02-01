@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td></td>
-	<td><?php esc_html_e( 'Générer une nouvelle fiche de poste', 'digirisk' ); ?></td>
+	<td><?php esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer une fiche d\'unité de travail.', 'digirisk' ); ?></td>
 
 	<td>
 		<div class="action">

@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<?php if ( ! empty( $evaluators ) ) : ?>
 				<?php foreach ( $evaluators as $evaluator ) : ?>
 					<tr>
-						<td><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator->initial ); ?></span></div></td>
+						<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator->initial ); ?></span></div></td>
 						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->id ); ?><strong></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->lastname ); ?></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->firstname ); ?></span></td>
