@@ -95,7 +95,7 @@ window.digirisk.media.display_attachment = function( selected_JSON, element ) {
 
 window.digirisk.media.associate_file = function( selectedFileId ) {
 	if ( 'eo_set_model' === window.digirisk.media.action ) {
-		jQuery( '.upload[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'loading' );
+		jQuery( '.upload-model[data-type="' + window.digirisk.media.type + '"]' ).addClass( 'loading' );
 	} else {
 		jQuery( 'span.media[data-id="' + window.digirisk.media.element_id + '"]' ).addClass( 'loading' );
 	}

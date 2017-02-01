@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<span class="bar"></span>
 		</li>
 
-		<li class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][1] ) ? 'active' : '' ); ?>">
+		<li class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][0] ) ? 'active' : '' ); ?>">
 			<input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '' ); ?>" />
 			<label><?php esc_html_e( 'Phone', 'digirisk' ); ?></label>
 			<span class="bar"></span>

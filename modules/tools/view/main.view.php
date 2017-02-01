@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						<div class="container">
 							<h3><?php esc_html_e( 'Méthode d\'évaluation d\'Evarisk', 'digirisk' ); ?></h3>
 							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour que Digirisk réintialise les anciennes variables de la méthode d\'évaluation d\'Evarisk.', 'digirisk' ); ?></p>
-							<p><button class="button blue margin reset-method-evaluation" data-nonce="<?php echo esc_attr( wp_create_nonce( 'reset_methodesc_html_evaluation' ) ); ?>" type="button"><?php esc_html_e( 'Réintialiser', 'digirisk' ); ?></button>
+							<p><button class="button blue margin reset-method-evaluation" data-nonce="<?php echo esc_attr( wp_create_nonce( 'reset_method_evaluation' ) ); ?>" type="button"><?php esc_html_e( 'Réintialiser', 'digirisk' ); ?></button>
 							<ul></ul>
 						</div>
 					</div>
