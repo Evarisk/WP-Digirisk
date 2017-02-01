@@ -51,4 +51,22 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
 	<div class="button green uppercase strong float right margin submit-form"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
+	<!-- Pagination -->
+	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
+		<div class="wp-digi-pagination">
+			<?php
+			$big = 999999999;
+			echo paginate_links( array(
+				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->id ),
+				'format' => '%#%',
+				'current' => $current_page,
+				'total' => $number_page,
+				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'digirisk' ) .' </span>',
+				'type' => 'plain',
+				'next_text' => '<i class="dashicons dashicons-arrow-right"></i>',
+				'prev_text' => '<i class="dashicons dashicons-arrow-left"></i>'
+			) );
+			?>
+		</div>
+	<?php endif; ?>
 </form>

@@ -82,10 +82,11 @@ class Evaluator_Class extends User_Class {
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
+		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
 		$args_where_evaluator = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
@@ -106,7 +107,7 @@ class Evaluator_Class extends User_Class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		view_util::exec( 'evaluator', 'main', array( 'element' => $element, 'evaluators' => $evaluators, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
+		View_Util::exec( 'evaluator', 'main', array( 'element' => $element, 'evaluators' => $evaluators, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
 	}
 
 	/**

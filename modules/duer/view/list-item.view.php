@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 ?>
 
 <tr>
-	<td class="padding"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
+	<td class="padding w50"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit'] ); ?></td>
 	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit'] ); ?></td>
 

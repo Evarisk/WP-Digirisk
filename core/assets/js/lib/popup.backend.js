@@ -5,12 +5,19 @@ window.digirisk.popup.init = function() {
 };
 
 window.digirisk.popup.event = function() {
+	jQuery( document ).on( 'keyup', window.digirisk.popup.keyup );
   jQuery( document ).on( 'click', '.open-popup, .open-popup i', window.digirisk.popup.open );
   jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.openAjax );
   jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
   jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
   jQuery( document ).on( 'click', '.popup .close', window.digirisk.popup.close );
   jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
+};
+
+window.digirisk.popup.keyup = function( event ) {
+	if ( 27 === event.keyCode ) {
+		jQuery( '.popup .close' ).click();
+	}
 };
 
 window.digirisk.popup.open = function( event ) {

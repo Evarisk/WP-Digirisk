@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package user
  * @subpackage class
@@ -144,13 +144,14 @@ class User_Digi_Class extends User_Class {
 	 * @param integer $current_page La page courant.
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function render( $workunit, $current_page = 1 ) {
 		$array = $this->list_affected_user( $workunit );
 		$list_affected_user = $array['list_affected_user'];
 		$list_affected_id = $array['list_affected_id'];
 
+		$current_page = ! empty( $_GET['next_page'] ) ? (int) $_GET['next_page'] : 1;
 		$args_where_user = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_user,
 			'number' => $this->limit_user,
@@ -181,7 +182,7 @@ class User_Digi_Class extends User_Class {
 	 * @version 6.2.4.0
 	 */
 	public function render_list_user_to_assign( $workunit ) {
-		$current_page = !empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
+		$current_page = ! empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
 		$args_where_user = array(
 			'offset' => ( $current_page - 1 ) * $this->limit_user,
 			'number' => $this->limit_user,
@@ -203,7 +204,7 @@ class User_Digi_Class extends User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		view_util::exec( 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'list_user_to_assign' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
+		view_util::exec( 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 	}
 
 	/**

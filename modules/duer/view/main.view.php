@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <table class="table duer">
 	<thead>
 		<tr>
-			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+			<th class="padding w50"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
 			<th class="w100 padding"><i class="fa fa-calendar-o icon"></i><?php esc_html_e( 'Début', 'digirisk' ); ?></th>
 			<th class="w100 padding"><i class="fa fa-calendar-o icon"></i><?php esc_html_e( 'Fin', 'digirisk' ); ?></th>
 			<th class="w100 padding"><?php esc_html_e( 'Destinataire', 'digirisk' ); ?></th>

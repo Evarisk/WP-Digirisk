@@ -13,7 +13,7 @@ window.digirisk.evaluator.init = function() {
 
 window.digirisk.evaluator.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap table.evaluators input[type="checkbox"]', window.digirisk.evaluator.setTime );
-	jQuery( document ).on( 'click', '.wp-form-evaluator-to-assign .wp-digi-pagination a', window.digirisk.evaluator.pagination );
+	jQuery( document ).on( 'click', '.form-edit-evaluator-assign .wp-digi-pagination a', window.digirisk.evaluator.pagination );
 };
 
 /**
@@ -81,5 +81,7 @@ window.digirisk.evaluator.pagination = function( event ) {
 
 	event.preventDefault();
 
-	jQuery( '.wp-digi-content' ).load( window.ajaxurl, data );
+	jQuery.post( window.ajaxurl, data, function( view ) {
+		jQuery( '.main-content .grid-layout' ).replaceWith( view );
+	} );
 };
