@@ -42,11 +42,10 @@ window.digirisk.media.open_popup = function( event ) {
   window.digirisk.media.have_thumbnail = element.hasClass( 'wp-digi-element-thumbnail' ) ? true : false;
   window.wp.media.model.settings.post.id = element.data( 'id' );
 
-  if( element.find( '.gallery' ).length === 0 ) {
+  if ( 0 === element.find( '.wp-digi-element-thumbnail' ).length ) {
     window.digirisk.media.load_media_upload( element, element.data( 'id' )  );
-  }
-  else {
-    window.digirisk.gallery.open( element );
+  } else {
+    window.digirisk.gallery.open( element, element.data( 'id' ), element.data( 'type' ) );
   }
 };
 

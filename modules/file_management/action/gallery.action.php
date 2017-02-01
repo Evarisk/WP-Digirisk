@@ -26,8 +26,37 @@ class Gallery_Action {
 	 * @version 6.2.5.0
 	 */
 	public function __construct() {
+		add_action( 'wp_ajax_load_gallery', array( $this, 'callback_load_gallery' ) );
 		add_action( 'wp_ajax_eo_set_thumbnail', array( $this, 'callback_set_thumbnail' ) );
 		add_action( 'wp_ajax_dessociate_file', array( $this, 'callback_dessociate_file' ) );
+	}
+
+	/**
+	 * Charges les images de la galerie selon l'id de la société.
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.5.0
+	 * @version 6.2.5.0
+	 */
+	public function callback_load_gallery() {
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$type = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+
+		if ( 0 === $id ) {
+			wp_send_json_error();
+		}
+
+		$data = array(
+			'element_id' => $id,
+			'title' => 'title',
+			'object_name' => $type,
+		);
+
+		ob_start();
+		Gallery_Class::g()->display( $data );
+
+		wp_send_json_success( array( 'view' => ob_get_clean() ) );
 	}
 
 	/**

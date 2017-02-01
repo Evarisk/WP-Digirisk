@@ -28,8 +28,19 @@ window.digirisk.gallery.keyup = function( event ) {
 	}
 };
 
-window.digirisk.gallery.open = function( element ) {
-	element.find( '.gallery' ).show();
+window.digirisk.gallery.open = function( element, elementId, type ) {
+	var data = {
+		action: 'load_gallery',
+		id: elementId,
+		type: type
+	};
+
+	element.addClass( 'loading' );
+
+	jQuery.post( ajaxurl, data, function( response ) {
+		element.removeClass( 'loading' );
+		jQuery( '.digirisk-wrap' ).append( response.data.view );
+	});
 };
 
 window.digirisk.gallery.prevPicture = function( event ) {
@@ -55,7 +66,7 @@ window.digirisk.gallery.nextPicture = function( event ) {
 };
 
 window.digirisk.gallery.close = function( event ) {
-	jQuery( '.gallery' ).hide();
+	jQuery( '.gallery' ).remove();
 };
 
 window.digirisk.gallery.dessociate_file_success = function( element, response ) {
