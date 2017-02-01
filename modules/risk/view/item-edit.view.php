@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<tr class="risk-row">
+<tr class="risk-row edit">
 
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="edit_risk" />

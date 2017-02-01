@@ -38,12 +38,12 @@ class Sheet_Workunit_Filter {
 	 * @return array
 	 *
 	 * @since 6.2.2.0
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
 			'type' => 'text',
-			'text' => __( 'Fiche de poste', 'digirisk' ),
+			'text' => __( 'Fiche ', 'digirisk' ) . Workunit_Class::g()->element_prefix,
 			'title' => __( 'Les fiches de poste de', 'digirisk' ),
 			'parent_class' => 'gp button red uppercase',
 		);

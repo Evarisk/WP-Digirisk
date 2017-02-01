@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td></td>
-	<td><?php esc_html_e( 'Générer une nouvelle fiche de groupement', 'digirisk' ); ?></td>
+	<td><?php esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer une fiche de groupement', 'digirisk' ); ?></td>
 	<td>
 		<div class="action">
 			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">

@@ -5,7 +5,7 @@ window.digirisk.popup.init = function() {
 };
 
 window.digirisk.popup.event = function() {
-  jQuery( document ).on( 'click', '.open-popup', window.digirisk.popup.open );
+  jQuery( document ).on( 'click', '.open-popup, .open-popup i', window.digirisk.popup.open );
   jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.openAjax );
   jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
   jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
@@ -15,6 +15,11 @@ window.digirisk.popup.event = function() {
 
 window.digirisk.popup.open = function( event ) {
 	var triggeredElement = jQuery( this );
+
+	if ( triggeredElement.is( 'i' ) ) {
+		triggeredElement = triggeredElement.parents( '.open-popup' );
+	}
+
 	var target = triggeredElement.closest(  '.' + triggeredElement.data( 'parent' ) ).find( '.' + triggeredElement.data( 'target' ) );
 	var cbObject, cbFunc = undefined;
 	target.addClass( 'active' );

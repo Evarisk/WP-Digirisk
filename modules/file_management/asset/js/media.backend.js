@@ -25,7 +25,7 @@ window.digirisk.media.init = function() {
 };
 
 window.digirisk.media.event = function() {
-  jQuery( document ).on( 'click', '.media, .upload-model', window.digirisk.media.open_popup );
+  jQuery( document ).on( 'click', '.media:not(.loading), .upload-model', window.digirisk.media.open_popup );
 };
 
 window.digirisk.media.open_popup = function( event ) {

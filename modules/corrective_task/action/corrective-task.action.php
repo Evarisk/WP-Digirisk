@@ -40,7 +40,7 @@ class Corrective_Task_Action {
 	 * @version 6.2.5.0
 	 */
 	public function callback_open_task() {
-		$parent_id = $_GET['id'];
+		$parent_id = $_POST['id'];
 
 		global $task_controller;
 
@@ -60,7 +60,7 @@ class Corrective_Task_Action {
 			} );
 
 			add_filter( 'create_point_additional_option', function() {
-				return '<input type="hidden" name="parent_id" value="' . $_GET['id'] . '" />';
+				return '<input type="hidden" name="parent_id" value="' . $_POST['id'] . '" />';
 			} );
 
 			ob_start();
@@ -68,7 +68,7 @@ class Corrective_Task_Action {
 			$view = ob_get_clean();
 		} else {
 			ob_start();
-			echo 'Il faut installer l\'extension Task Manager pour créer des tâches correctives.';
+			View_Util::exec( 'corrective_task', 'need-task-manager' );
 			$view = ob_get_clean();
 		}
 
