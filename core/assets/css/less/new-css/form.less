@@ -15,7 +15,7 @@
 			}
 		}
 		.form-element {
-			&.active input, &.active textarea, input:focus, textarea:focus {
+			&.active input, &.active textarea, input:focus, textarea:focus, select:focus {
 				outline: none;
 				& ~ label {
 					font-size: 12px;
@@ -69,6 +69,16 @@
 		}
 		textarea ~ .bar {
 			bottom: 3px;
+		}
+		select {
+			width: 100%;
+	    padding: 6px;
+	    height: 40px;
+	    border: 1px solid rgba(0,0,0,0.8);
+			transition: all 0.2s ease-out;
+			&:focus {
+				border: 1px solid @a;
+			}
 		}
 	}
 

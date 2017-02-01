@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 												data-user-id="<?php echo esc_attr( $evaluator['user_info']->id ); ?>"
 												data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"
 												data-loader="affected-evaluator"
-												class="action-delete button w50 delete">
+												class="action-delete button w50 light delete">
 												<i class="icon fa fa-times"></i>
 											</div>
 										</div>
