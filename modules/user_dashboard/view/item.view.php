@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-action="load_user"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
-				class="button w50 edit action-attribute">
+				class="button w50 light edit action-attribute">
 				<i class="icon fa fa-pencil"></i>
 			</div>
 
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_user' ) ); ?>"
 				data-loader="users"
 				data-action="delete_user"
-				class="button w50 delete action-delete" >
+				class="button w50 light delete action-delete" >
 				<i class="icon fa fa-times"></i>
 			</div>
 		</div>

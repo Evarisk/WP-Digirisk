@@ -35,20 +35,20 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</td>
 	<td>
 		<div class="action grid-layout w3">
-			<div 	class="open-popup-ajax button w50 task"
+			<div 	class="open-popup-ajax button light w50 task"
 						data-parent="risk-row"
 						data-target="corrective-task"
 						data-action="open_task"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
 
 			<!-- Editer un risque -->
-			<div 	class="button w50 edit action-attribute"
+			<div 	class="button light w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
 						data-loader="risk"
 						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
 
-			<div 	class="button w50 delete action-delete"
+			<div 	class="button light w50 delete action-delete"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
 						data-action="delete_risk"><i class="icon fa fa-times"></i></div>

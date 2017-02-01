@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td>
 		<div class="action grid-layout w2">
 			<!-- Editer une recommendation -->
-			<div 	class="button w50 edit action-attribute"
+			<div 	class="button w50 light edit action-attribute"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
 						data-loader="table"
 						data-action="load_recommendation"><i class="icon fa fa-pencil"></i></div>
 
-			<div 	class="button w50 delete action-delete"
+			<div 	class="button w50 light delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
 						data-action="delete_recommendation"><i class="icon fa fa-times"></i></div>

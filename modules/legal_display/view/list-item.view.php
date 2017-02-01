@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td>
 		<div class="action">
 			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
-				<i class="fa fa-download" aria-hidden="true"></i>
+				<i class="icon fa fa-download" aria-hidden="true"></i>
 				<span>
 					<?php esc_html_e( 'Affichage légal ', 'digirisk' ); ?>
 					<?php echo esc_html( strtoupper( substr( $element->type, 16, 2 ) ) ); ?>

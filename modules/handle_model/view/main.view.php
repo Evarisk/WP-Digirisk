@@ -16,7 +16,7 @@ if ( ! empty( $list_type_document ) ) :
 	foreach ( $list_type_document as $key => $title ) :
 		?>
 		<div class="block">
-			<div>
+			<div class="container">
 				<h3><?php echo esc_html( $title ); ?></h3>
 
 				<div class="button blue upload-model margin"

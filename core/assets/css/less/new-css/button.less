@@ -8,6 +8,7 @@
  * .green -> fond du bouton vert
  * .grey -> fond du bouton gris
  * .dark -> couleur foncé comme l'interface
+ * .light -> pas de fond, couleur de l'icon claire
  * .w40 -> bouton carré 40px
  * .w50 -> bouton carré 50px
  * .w60 -> bouton carré 60px
@@ -53,6 +54,9 @@
 		&:focus {
 			box-shadow: none;
 			color: #fff;
+		}
+		.icon {
+			transition: all 0.2s ease-out;
 		}
 		.float-icon {
 			position: absolute;
@@ -105,6 +109,10 @@
 			&:hover {
 				background: darken(@b, 20%);
 			}
+		}
+		&.light {
+			background: none;
+			color: rgba(0, 0, 0, 0.3);
 		}
 		&.grey {
 			background: @grey;
@@ -228,6 +236,15 @@
 					top: 50%;
 					animation: spin 1s ease-out infinite;
 				}
+			}
+		}
+		&.disable {
+			background: @grey;
+			color: rgba(0,0,0,0.3);
+			&:hover {
+				background: @grey;
+				color: rgba(0,0,0,0.3);
+				cursor: not-allowed;
 			}
 		}
 	}

@@ -3314,6 +3314,7 @@
  * .green -> fond du bouton vert
  * .grey -> fond du bouton gris
  * .dark -> couleur foncé comme l'interface
+ * .light -> pas de fond, couleur de l'icon claire
  * .w40 -> bouton carré 40px
  * .w50 -> bouton carré 50px
  * .w60 -> bouton carré 60px
@@ -3378,6 +3379,12 @@
           box-shadow: none;
   color: #fff;
 }
+.digirisk-wrap .button .icon {
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
 .digirisk-wrap .button .float-icon {
   position: absolute;
   top: -6px;
@@ -3430,6 +3437,10 @@
 }
 .digirisk-wrap .button.dark:hover {
   background: #000000;
+}
+.digirisk-wrap .button.light {
+  background: none;
+  color: rgba(0, 0, 0, 0.3);
 }
 .digirisk-wrap .button.grey {
   background: #d6d6d6;
@@ -3619,11 +3630,21 @@
        -o-animation: spin 1s ease-out infinite;
           animation: spin 1s ease-out infinite;
 }
+.digirisk-wrap .button.disable {
+  background: #d6d6d6;
+  color: rgba(0, 0, 0, 0.3);
+}
+.digirisk-wrap .button.disable:hover {
+  background: #d6d6d6;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
 /**
  * Structure de la page
  */
 .digirisk-wrap {
   padding: 20px 20px 20px 0;
+  /* CSS spécifique pour le champs domaine de l'email dans les utilisateurs */
 }
 .digirisk-wrap:after {
   display: block;
@@ -3736,6 +3757,15 @@
 }
 .digirisk-wrap.wpdigi-installer .main-content {
   margin-top: 20px;
+}
+.digirisk-wrap .email-domain {
+  float: right;
+  width: 100%;
+  max-width: 460px;
+}
+.digirisk-wrap .email-domain .form-element {
+  width: 80% !important;
+  float: left;
 }
 @media screen and (max-width: 1200px) {
   .digirisk-wrap .navigation-container,
@@ -4048,7 +4078,7 @@
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
 }
-.digirisk-wrap .tab .tab-element.active:not(.toggle, .button) {
+.digirisk-wrap .tab .tab-element.active:not(.toggle):not(.button) {
   background: #3495f0;
   color: #fff;
 }
@@ -4386,6 +4416,9 @@
 .digirisk-wrap .table > thead tr {
   background: #272a35 !important;
 }
+.digirisk-wrap .table > thead .icon {
+  padding-right: 4px;
+}
 .digirisk-wrap .table > tbody tr:nth-child(odd) {
   background: #fff;
 }
@@ -4570,13 +4603,6 @@
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap;
-}
-.digirisk-wrap .table .action .button .icon {
-  color: rgba(0, 0, 0, 0.3);
-  -webkit-transition: all 0.2s ease-out;
-     -moz-transition: all 0.2s ease-out;
-       -o-transition: all 0.2s ease-out;
-          transition: all 0.2s ease-out;
 }
 .digirisk-wrap .table .action .task:hover .icon {
   color: rgba(0, 0, 0, 0.6);
@@ -4802,13 +4828,15 @@
 .digirisk-wrap .form .form-element.active input,
 .digirisk-wrap .form .form-element.active textarea,
 .digirisk-wrap .form .form-element input:focus,
-.digirisk-wrap .form .form-element textarea:focus {
+.digirisk-wrap .form .form-element textarea:focus,
+.digirisk-wrap .form .form-element select:focus {
   outline: none;
 }
 .digirisk-wrap .form .form-element.active input ~ label,
 .digirisk-wrap .form .form-element.active textarea ~ label,
 .digirisk-wrap .form .form-element input:focus ~ label,
-.digirisk-wrap .form .form-element textarea:focus ~ label {
+.digirisk-wrap .form .form-element textarea:focus ~ label,
+.digirisk-wrap .form .form-element select:focus ~ label {
   font-size: 12px;
   color: #3495f0;
   pointer-events: auto;
@@ -4865,6 +4893,19 @@
 }
 .digirisk-wrap .form textarea ~ .bar {
   bottom: 3px;
+}
+.digirisk-wrap .form select {
+  width: 100%;
+  padding: 6px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  -webkit-transition: all 0.2s ease-out;
+     -moz-transition: all 0.2s ease-out;
+       -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+}
+.digirisk-wrap .form select:focus {
+  border: 1px solid #3495f0;
 }
 /**
  * Step for installer
@@ -5149,7 +5190,7 @@
   padding: 10px;
   text-align: center;
 }
-.digirisk-wrap .block > * {
+.digirisk-wrap .block .container {
   background: #fff;
   padding: 20px;
   min-height: 220px;

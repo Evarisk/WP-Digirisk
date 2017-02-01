@@ -17,18 +17,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <div class="digirisk-wrap user-dashboard">
 	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h1>
 
-	<ul class="form">
-		<li class="form-element active">
+	<div class="form email-domain">
+		<div class="form-element active">
 			<input type="hidden" name="action" value="save_domain_mail" />
 			<?php wp_nonce_field( 'save_domain_mail' ); ?>
 			<input class="input-domain-mail" name="domain_mail" type="text" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 			<label><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
 			<span class="bar"></span>
-		</li>
-		<li>
-			<span data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
-		</li>
-	</ul>
+		</div>
+		<span data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+	</div>
 
 	<!-- Liste les utilisateurs -->
 	<table class="table users">
