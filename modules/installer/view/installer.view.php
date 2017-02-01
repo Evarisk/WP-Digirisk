@@ -109,8 +109,8 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		</form>
 	</div>
 
-	<div class="hidden wpdigi-components">
-		<h3><?php esc_html_e( 'Composants', 'digirisk' ); ?></h3>
+	<div class="hidden main-content wpdigi-components">
+		<h2><?php esc_html_e( 'Composants', 'digirisk' ); ?></h2>
 
 		<!-- Le nonce pour la sécurité de la requête -->
 		<?php

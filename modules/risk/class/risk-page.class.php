@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage class
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
-class Risk_page_class extends Singleton_Util {
+class Risk_Page_Class extends Singleton_Util {
 
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util

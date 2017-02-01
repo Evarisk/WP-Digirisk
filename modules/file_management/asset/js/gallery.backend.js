@@ -19,7 +19,6 @@ window.digirisk.gallery.event = function() {
 };
 
 window.digirisk.gallery.keyup = function( event ) {
-	console.log('keyup');
 	if ( 37 === event.keyCode ) {
 		jQuery( '.gallery .navigation .prev' ).click();
 	} else if ( 39 === event.keyCode ) {

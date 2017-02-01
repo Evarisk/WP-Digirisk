@@ -39,12 +39,12 @@ class Sheet_Groupment_Filter {
 	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
 			'type' => 'text',
-			'text' => __( 'Fiche de groupement', 'digirisk' ),
+			'text' => __( 'Fiche de ', 'digirisk' ) . Group_Class::g()->element_prefix,
 			'title' => __( 'Les fiches de groupement de', 'digirisk' ),
 			'parent_class' => 'gp button red uppercase',
 		);

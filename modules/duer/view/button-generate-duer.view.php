@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	data-id="<?php echo esc_attr( $element->id ); ?>"
 	data-title="<?php echo esc_attr( 'Les documents uniques de', 'digirisk' ); ?>"><i class="icon fa fa-download"></i>
 
-	<span><?php esc_html_e( 'Télécharger le document unique', 'digirisk' ); ?></span>
+	<span><?php esc_html_e( 'DUER', 'digirisk' ); ?></span>
 </div>
