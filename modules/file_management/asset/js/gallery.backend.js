@@ -20,9 +20,9 @@ window.digirisk.gallery.event = function() {
 
 window.digirisk.gallery.keyup = function( event ) {
 	if ( 37 === event.keyCode ) {
-		jQuery( '.gallery .navigation .prev' ).click();
+		window.digirisk.gallery.prevPicture();
 	} else if ( 39 === event.keyCode ) {
-		jQuery( '.gallery .navigation .next' ).click();
+		window.digirisk.gallery.nextPicture();
 	} else if ( 27 === event.keyCode ) {
 		jQuery( '.gallery .close' ).click();
 	}
@@ -33,28 +33,22 @@ window.digirisk.gallery.open = function( element ) {
 };
 
 window.digirisk.gallery.prevPicture = function( event ) {
-	// event.preventDefault();
-	//
-	// if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).prev().length <= 0 ) {
-	// 	jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
-	// 	jQuery( this ).closest( 'div' ).find( '.image-list li:last' ).toggleClass( 'hidden current' );
-	// }	else {
-	// 	jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).prev().toggleClass( 'hidden current' );
-	// }
+	if ( jQuery( '.gallery .image-list li.current' ).prev().length <= 0 ) {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
+		jQuery( '.gallery .image-list li:last' ).toggleClass( 'hidden current' );
+	}	else {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' ).prev().toggleClass( 'hidden current' );
+	}
 
-	console.log('prev');
-
-	// jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
+	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
 };
 
 window.digirisk.gallery.nextPicture = function( event ) {
-	event.preventDefault();
-
-	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).next().length <= 0 ) {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
-		jQuery( this ).closest( 'div' ).find( '.image-list li:first' ).toggleClass( 'hidden current' );
+	if ( jQuery( '.gallery .image-list li.current' ).next().length <= 0 ) {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
+		jQuery( '.gallery .image-list li:first' ).toggleClass( 'hidden current' );
 	} else {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).next().toggleClass( 'hidden current' );
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' ).next().toggleClass( 'hidden current' );
 	}
 
 	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
