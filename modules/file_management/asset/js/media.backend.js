@@ -117,6 +117,7 @@ window.digirisk.media.associate_file = function( selectedFileId ) {
     }
     else {
       jQuery( 'span.media[data-id="'+ window.digirisk.media.element_id + '"]' ).replaceWith( response.data.template );
+			jQuery( '.gallery' ).remove();
     }
   });
 };

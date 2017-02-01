@@ -81,10 +81,10 @@ class Gallery_Action {
 		set_post_thumbnail( $element_id, $thumbnail_id );
 
 		ob_start();
-		echo get_the_post_thumbnail( $element_id, 'thumbnail' );
+		echo get_the_post_thumbnail( $element_id, 'thumbnail wp-digi-element-thumbnail' );
 		$template = ob_get_clean();
 
-		wp_send_json_success( array( 'element_id' => $element_id, 'template' => $template ) );
+		wp_send_json_success( array( 'template' => $template, 'elementId' => $element_id, 'module' => 'gallery', 'callback_success' => 'successfulSetThumbnail' ) );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Gallery_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_dessociate_file() {
 		check_ajax_referer( 'dessociate_file' );
@@ -115,9 +115,11 @@ class Gallery_Action {
 		$model_name = '\digi\\' . $type_class;
 		$element = $model_name::g()->get( array( 'id' => $element_id ) );
 
+		$close_popup = ( 0 === $element[0]->thumbnail_id ) ? true : false;
+
 		ob_start();
-		view_util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
-		wp_send_json_success( array( 'view' => ob_get_clean(), 'element_id' => $element_id, 'module' => 'gallery', 'callback_success' => 'dessociate_file_success' ) );
+		View_Util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
+		wp_send_json_success( array( 'view' => ob_get_clean(), 'closePopup' => $close_popup, 'elementId' => $element_id, 'module' => 'gallery', 'callback_success' => 'dessociatedFileSuccess' ) );
 	}
 }
 
