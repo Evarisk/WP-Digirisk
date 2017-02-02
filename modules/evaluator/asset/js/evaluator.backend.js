@@ -73,6 +73,8 @@ window.digirisk.evaluator.pagination = function( event ) {
 	var nextPage = href[1].replace( 'current_page=', '' );
 	var elementId = href[2].replace( 'element_id=', '' );
 
+	jQuery( '.main-content .form-edit-evaluator-assign' ).addClass( 'loading' );
+
 	var data = {
 		action: 'paginate_evaluator',
 		element_id: elementId,

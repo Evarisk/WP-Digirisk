@@ -73,6 +73,8 @@ window.digirisk.user.pagination = function( event ) {
 		next_page: next_page
 	};
 
+	jQuery( '.form-edit-user-assign' ).addClass( 'loading' );
+
 	jQuery.post( window.ajaxurl, data, function( view ) {
 		jQuery( '.form-edit-user-assign' ).replaceWith( view );
 	} );
