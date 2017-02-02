@@ -44,12 +44,12 @@ class Installer_Action {
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
-		$address = Address_Class::g()->create( $_POST['address'] );
+		// $address = Address_Class::g()->create( $_POST['address'] );
 		$groupment = Group_Class::g()->create( $_POST['groupment'] );
-		$groupment->contact['address_id'][] = $address->id;
+		// $groupment->contact['address_id'][] = $address->id;
 		Group_Class::g()->update( $groupment );
-		$address->post_id = $groupment->id;
-		Address_Class::g()->update( $address );
+		// $address->post_id = $groupment->id;
+		// Address_Class::g()->update( $address );
 
 		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'savedSociety' ) );
 	}
