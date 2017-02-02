@@ -20,6 +20,25 @@ window.digirisk.userDashboard.event = function() {
 };
 
 /**
+ * Vérifie si le domaine de l'email a un format valide.
+ *
+ * @param  {HTMLDivElement} triggeredElement
+ * @return {void}
+ *
+ * @since 6.2.5.0
+ * @version 6.2.5.0
+ */
+window.digirisk.userDashboard.checkDomainEmailValid = function( triggeredElement ) {
+	if ( ! window.regex.validateEndEmail( triggeredElement.closest( '.email-domain' ).find( 'input[type="text"]' ).val() ) ) {
+		triggeredElement.closest( '.email-domain' ).find( 'label' ).addClass( 'active' );
+		return false;
+	} else {
+		triggeredElement.closest( '.email-domain' ).find( 'label' ).removeClass( 'active' );
+		return true;
+	}
+};
+
+/**
  * Envoies une requête pour enregister le domaine de l'email.
  *
  * @param  {ClickEvent} event L'état de la souris lors du clic sur le bouton.

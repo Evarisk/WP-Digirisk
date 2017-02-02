@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<input type="hidden" name="action" value="save_domain_mail" />
 			<?php wp_nonce_field( 'save_domain_mail' ); ?>
 			<input class="input-domain-mail" name="domain_mail" type="text" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
-			<label><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
+			<label class="tooltip red" aria-label="<?php echo esc_attr( 'Domaine de l\'email invalide.', 'digirisk' ); ?>"><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
 			<span class="bar"></span>
 		</div>
-		<span data-parent="form" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+		<span data-parent="form" data-module="userDashboard" data-before-method="checkDomainEmailValid" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
 	</div>
 
 	<!-- Liste les utilisateurs -->

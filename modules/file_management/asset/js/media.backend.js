@@ -9,7 +9,8 @@ window.digirisk.media = {
 	element_id: undefined,
 	have_thumbnail: undefined,
 	object_name: undefined,
-	_wpnonce: undefined
+	_wpnonce: undefined,
+	element: undefined
 };
 
 /**
@@ -33,6 +34,7 @@ window.digirisk.media.open_popup = function( event ) {
 
   event.preventDefault();
 
+  window.digirisk.media.element = jQuery( this );
   window.digirisk.media.element_id = element.data( 'id' );
   window.digirisk.media._wpnonce = element.data( 'nonce' );
   window.digirisk.media.title = element.data( 'title' );
@@ -81,16 +83,15 @@ window.digirisk.media.selected_file = function( element ) {
 
   if ( window.digirisk.media.element_id === 0 && window.digirisk.media.action != 'eo_set_model' ) {
     window.digirisk.media.display_attachment( selected_JSON, element );
-  }
-  else {
+  } else {
     window.digirisk.media.associate_file( selected_file_id );
   }
 };
 
 window.digirisk.media.display_attachment = function( selected_JSON, element ) {
-  jQuery( element ).find( 'img' ).attr( 'src', selected_JSON.url ).show();
-  jQuery( element ).find( 'i' ).hide();
-  jQuery( element ).find( 'input.input-file-image' ).val( selected_JSON.id );
+  window.digirisk.media.element.find( 'img' ).attr( 'src', selected_JSON.url ).show();
+  window.digirisk.media.element.find( 'i' ).hide();
+  window.digirisk.media.element.find( 'input.input-file-image' ).val( selected_JSON.id );
 };
 
 window.digirisk.media.associate_file = function( selectedFileId ) {

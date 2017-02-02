@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<th class="padding w50"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
 				<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
-				<th class="w100 padding"><?php esc_html_e( 'Date d\'embauche', 'digirisk' ); ?></th>
+				<th class="w100 padding hidden"><?php esc_html_e( 'Date d\'embauche', 'digirisk' ); ?></th>
 				<th class="w50 padding"><input type="text" class="affect" value="15"></th>
 				<th class="w50 padding"><?php esc_html_e( 'Affecter', 'digirisk' ); ?></th>
 			</tr>
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->id ); ?><strong></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->lastname ); ?></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->firstname ); ?></span></td>
-						<td class="padding"><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator->hiring_date ) ) ); ?>"></td>
+						<td class="padding hidden"><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator->hiring_date ) ) ); ?>"></td>
 						<td class="padding"><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][duration]" value=""></td>
 						<td class="padding"><input type="checkbox" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][affect]"></td>
 					</tr>
