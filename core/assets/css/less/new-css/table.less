@@ -100,19 +100,6 @@
 			.content {
 				width: 392px;
 			}
-			&:hover {
-				cursor: pointer;
-				.action {
-					background: rgba(0,0,0,0.1);
-					span, .icon {
-						color: #000;
-					}
-					.icon {
-						animation-duration: 0.6s;
-						animation-name: downAndUp;
-					}
-				}
-			}
 		}
 		.user {
 			background: none;
@@ -222,6 +209,7 @@
 				color: #fff;
 				font-size: 16px;
 				font-weight: 300;
+				text-transform: uppercase;
 			}
 		}
 		input.affect {
@@ -258,6 +246,27 @@
 		td.padding, th.padding {
 			padding-left: 8px;
 			padding-right: 8px;
+		}
+
+		.risk-row.edit {
+			.categorie-container:hover {
+				cursor: pointer;
+				.action {
+					background: rgba(0,0,0,0.1);
+					span, .icon {
+						color: #000;
+					}
+					.icon {
+						animation-duration: 0.6s;
+						animation-name: downAndUp;
+					}
+				}
+			}
+		}
+		.risk-row:not(.edit) {
+			.cotation {
+				pointer-events: none;
+			}
 		}
 	}
 
