@@ -53,7 +53,7 @@ window.digirisk.user.detachUserSuccess = function( triggeredElement, response ) 
  * @return {void}
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
 window.digirisk.user.render = function( response ) {
 	jQuery( 'section.users' ).replaceWith( response.data.template );

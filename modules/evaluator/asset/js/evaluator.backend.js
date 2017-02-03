@@ -62,11 +62,11 @@ window.digirisk.evaluator.callback_detach_evaluator_success = function( triggere
 /**
  * Gestion de la pagination des évalateurs.
  *
- * @param  {[type]} event [description]
+ * @param  {ClickEvent} event [description]
  * @return {void}
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.5.0
  */
 window.digirisk.evaluator.pagination = function( event ) {
 	var href = jQuery( this ).attr( 'href' ).split( '&' );
