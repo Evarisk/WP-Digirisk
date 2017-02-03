@@ -46,10 +46,15 @@ class Corrective_Task_Action {
 
 		if ( $task_controller ) {
 			$task = $task_controller->index( array( 'post_parent' => $parent_id ) );
+			$risk = risk_class::g()->get( array( 'include' => $parent_id ) );
+			$risk = $risk[0];
 
 			if ( empty( $task ) ) {
-				$task = new \StdClass();
-				$task->id = 0;
+				$task = $task_controller->create( array(
+					'title' => __( 'Risque ' . $risk->unique_identifier, 'task-manager' ),
+					'parent_id' => $parent_id,
+					'author_id' => get_current_user_id(),
+					'option' => array( 'user_info' => array( 'owner_id' => get_current_user_id() ) ) ) );
 			} else {
 				$task = $task[0];
 			}
@@ -81,16 +86,7 @@ class Corrective_Task_Action {
 		$risk = risk_class::g()->get( array( 'include' => $_POST['parent_id'] ) );
 		$risk = $risk[0];
 
-		if ( empty( $task ) ) {
-			$task = $task_controller->create( array(
-				'title' => __( 'Risque ' . $risk->unique_identifier, 'task-manager' ),
-				'parent_id' => !empty( $_POST['parent_id'] ) ? $_POST['parent_id'] : 0,
-				'author_id' => get_current_user_id(),
-				'option' => array( 'user_info' => array( 'owner_id' => get_current_user_id() ) ) ) );
-		}
-		else {
-			$task = $task[0];
-		}
+		$task = $task[0];
 
 		global $point_controller;
 		$_POST['point']['author_id'] = get_current_user_id();

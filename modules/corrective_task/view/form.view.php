@@ -6,7 +6,7 @@
  * @since 0.1
  * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
- * @package duer
+ * @package corrective-task
  * @subpackage view
  */
 
