@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
  * @package user
  * @subpackage filter
@@ -37,14 +37,14 @@ class User_Filter {
 	 * @return array              La liste des onglets et ceux ajoutés par cette méthode.
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
-		$list_tab['digi-workunit']['user'] = array(
-			'type' => 'text',
-			'text' => __( 'Utilisateurs', 'digirisk' ),
-			'title' => __( 'Les utilisateurs de', 'digirisk' ),
-		);
+		// $list_tab['digi-workunit']['user'] = array(
+		// 	'type' => 'text',
+		// 	'text' => __( 'Utilisateurs', 'digirisk' ),
+		// 	'title' => __( 'Les utilisateurs de', 'digirisk' ),
+		// );
 
 		return $list_tab;
 	}
