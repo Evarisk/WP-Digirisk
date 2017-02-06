@@ -5,66 +5,108 @@ window.digirisk.action.init = function() {
 };
 
 window.digirisk.action.event = function() {
-  jQuery( document ).on( 'click', '.action-input', window.digirisk.action.exec_input );
-  jQuery( document ).on( 'click', '.action-attribute', window.digirisk.action.exec_attribute );
-  jQuery( document ).on( 'click', '.wp-digi-action-delete', window.digirisk.action.delete );
+	jQuery( document ).on( 'click', '.action-input:not(.no-action)', window.digirisk.action.execInput );
+	jQuery( document ).on( 'click', '.action-attribute:not(.no-action)', window.digirisk.action.execAttribute );
+	jQuery( document ).on( 'click', '.action-delete:not(.no-action)', window.digirisk.action.execDelete );
 };
 
-window.digirisk.action.exec_input = function( event ) {
-  var element = jQuery( this );
-	var parent_element = element;
+window.digirisk.action.execInput = function( event ) {
+	var element = jQuery( this );
+	var parentElement = element;
+	var loaderElement = element;
+	var listInput = undefined;
+	var data = {};
+	var i = 0;
+	var doAction = true;
+	var key = undefined;
 
-	if ( element.data( 'parent' ) ) {
-			parent_element = element.closest( '.' + element.data( 'parent' ) );
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
 	}
 
-	if ( !element[0].getAttribute(' disabled' ) ) {
-		element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+	if ( element.data( 'parent' ) ) {
+		parentElement = element.closest( '.' + element.data( 'parent' ) );
+	}
 
-		var list_input = window.eva_lib.array_form.get_input( parent_element );
-		var data = {};
-		for (var i = 0; i < list_input.length; i++) {
-			if ( list_input[i].name ) {
-				data[list_input[i].name] = list_input[i].value;
+	/** Méthode appelée avant l'action */
+	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
+		doAction = false;
+		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
+	}
+
+	if ( doAction ) {
+		loaderElement.addClass( 'loading' );
+
+		listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
+		for ( i = 0; i < listInput.length; i++ ) {
+			if ( listInput[i].name ) {
+				data[listInput[i].name] = listInput[i].value;
 			}
 		}
 
-    window.digirisk.request.send( element, data );
+		element.get_data( function( attrData ) {
+			for ( key in attrData ) {
+				data[key] = attrData[key];
+			}
+
+			window.digirisk.request.send( element, data );
+		} );
 	}
 };
 
-window.digirisk.action.exec_attribute = function(event) {
+window.digirisk.action.execAttribute = function( event ) {
   var element = jQuery( this );
+	var doAction = true;
+	var loaderElement = element;
 
-	if ( !element[0].getAttribute(' disabled' ) ) {
-		element[0].setAttribute( 'disabled', true );
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
+	}
 
+	/** Méthode appelée avant l'action */
+	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
+		doAction = false;
+		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
+	}
+
+	if ( doAction ) {
 		if ( jQuery( this ).data( 'confirm' ) ) {
 			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
-				element.get_data( function ( data ) {
-					element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+				element.get_data( function( data ) {
+					loaderElement.addClass( 'loading' );
 					window.digirisk.request.send( element, data );
 				} );
 			}
-		}
-		else {
-			element.get_data( function ( data ) {
-				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
+		} else {
+			element.get_data( function( data ) {
+				loaderElement.addClass( 'loading' );
 				window.digirisk.request.send( element, data );
 			} );
 		}
 	}
 };
 
-window.digirisk.action.delete = function(event) {
+window.digirisk.action.execDelete = function( event ) {
   var element = jQuery( this );
+	var doAction = true;
+	var loaderElement = element;
 
-	if ( !element[0].getAttribute( 'disabled' ) ) {
-  	if ( window.confirm( window.digi_confirm_delete ) ) {
-	    element.get_data( function ( data ) {
-				element.closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
-	      window.digirisk.request.send( element, data );
-	    } );
-	  }
+	if ( element.data( 'loader' ) ) {
+		loaderElement = element.closest( '.' + element.data( 'loader' ) );
+	}
+
+	/** Méthode appelée avant l'action */
+	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
+		doAction = false;
+		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
+	}
+
+	if ( doAction ) {
+		if ( window.confirm( window.digi_confirm_delete ) ) {
+			element.get_data( function( data ) {
+				loaderElement.addClass( 'loading' );
+				window.digirisk.request.send( element, data );
+			} );
+		}
 	}
 };

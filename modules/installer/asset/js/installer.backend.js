@@ -1,18 +1,19 @@
-window .digirisk.installer = {};
+/**
+ * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+
+window.digirisk.installer = {};
 
 window.digirisk.installer.init = function() {
 	window.digirisk.installer.event();
 };
 
 window.digirisk.installer.event = function() {
-	jQuery( '.wpdigi-installer .btn-more-option' ).click( window.digirisk.installer.more_options );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.key_up_groupment_title );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.digirisk.installer.key_up_domain_mail );
-};
-
-window.digirisk.installer.more_options = function( event ) {
-	event.preventDefault();
-	jQuery( '.wpdigi-installer .form-more-option' ).toggle();
 };
 
 window.digirisk.installer.key_up_groupment_title = function( event ) {
@@ -27,31 +28,69 @@ window.digirisk.installer.key_up_domain_mail = function( event ) {
 	}
 };
 
-window.digirisk.installer.save_society = function( element, response ) {
-	element.closest( 'div' ).hide();
+/**
+ * Vérifie que le nom de la société ne soit pas vide.
+ *
+ * @param  {HTMLDivElement} element Le bouton déclenchant la création de la société
+ * @return {void}
+ *
+ * @since 6.2.5.0
+ * @version 6.2.5.0
+ */
+window.digirisk.installer.beforeCreateSociety = function( element ) {
+	if ( '' === element.closest( 'form' ).find( 'input[name="groupment[title]"]' ).val() ) {
+		element.closest( 'form' ).find( 'span.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	element.closest( 'form' ).find( 'span.tooltip.active' ).removeClass( 'active' );
+
+	return true;
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "save_society".
+ * Ferme la div "society". Changes l'étape de "Votre société" en "Composants".
+ * Ouvre la div "wpdigi-components".
+ * Appel la méthode "requestInstallComponent".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.installer.savedSociety = function( element, response ) {
+	element.closest( 'div.society' ).hide();
 	jQuery( '.wpdigi-installer .step-create-society' ).removeClass( 'active' );
 	jQuery( '.wpdigi-installer .step-create-components' ).addClass( 'active' );
 	jQuery( '.wpdigi-installer .wpdigi-components' ).fadeIn();
-	window.digirisk.installer.request_install_component();
+	window.digirisk.installer.requestInstallComponent();
 };
 
 /**
  * Envoie une requête pour installer les composants nécessaires à l'utilisation de DigiRisk.
  * @return {void}
  */
-window.digirisk.installer.request_install_component = function() {
+window.digirisk.installer.requestInstallComponent = function() {
 	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
 	window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
 
 /**
- * Le callback quand la requête pour installer les composants est terminée avec succés
+ * Le callback en cas de réussite à la requête Ajax "installer_components".
  * Met le li active en statut "finit" et passes au suivant, tout en relancant la requête pour installer le composant suivant.
  * Si tous les li sont en statut "finit" passes à l'étape suivante qui est "Création des utilisateurs"
- * @param  {Object} response [description]
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
  */
-window.digirisk.installer.install_component_success = function( response ) {
+window.digirisk.installer.installedComponentSuccess = function( response ) {
 	jQuery( '.wpdigi-installer .wpdigi-components li.active img' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components li.active .dashicons' ).show();
 	jQuery( '.wpdigi-installer .wpdigi-components li.active' ).removeClass( 'active' );
@@ -59,7 +98,7 @@ window.digirisk.installer.install_component_success = function( response ) {
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {
 		jQuery( '.wpdigi-installer .wpdigi-components li.hidden:first' ).removeClass( 'hidden' ).addClass( 'active' );
-		window.digirisk.installer.request_install_component();
+		window.digirisk.installer.requestInstallComponent();
 	} else {
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );

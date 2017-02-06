@@ -41,7 +41,7 @@ function get_full_group( $data ) {
 
 	if ( ! empty( $data->list_group ) ) {
 		foreach ( $data->list_group as $group ) {
-			$group = get_full_group( $data );
+			$group = get_full_group( $group );
 		}
 	}
 

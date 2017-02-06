@@ -1,38 +1,56 @@
-<?php namespace digi;
+<?php
+/**
+ * Affiches un risque
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<li class="wp-digi-list-item wp-digi-risk-item wp-digi-table-item-edit <?php echo empty ( $risk->id ) ? 'wp-digi-risk-item-new': ''; ?>" data-risk-id="<?php echo $risk->id; ?>">
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<tr class="risk-row">
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="page" value="all_risk" />
-	<input type="hidden" name="parent_id" value="<?php echo $risk->parent_id; ?>" />
-	<input name="risk[id]" type="hidden" value="<?php echo $risk->id; ?>" />
-	<span>
-		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id ); ?>">
-			<strong><?php echo $risk->parent_group->unique_identifier; ?> -</strong>
-			<span><?php echo $risk->parent_group->title; ?></span>
+	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $risk->parent_id ); ?>" />
+	<input name="risk[id]" type="hidden" value="<?php echo esc_attr( $risk->id ); ?>" />
+	<?php wp_nonce_field( 'edit_risk' ); ?>
+
+	<td class="padding">
+		<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
+
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id ) ); ?>">
+			<strong><?php echo esc_attr( $risk->parent_group->unique_identifier ); ?> -</strong>
+			<span><?php echo esc_attr( $risk->parent_group->title ); ?></span>
 		</a>
-	</span>
-	<span>
-		<?php if (!empty( $risk->parent_workunit ) ): ?>
-		<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&workunit_id=' . $risk->parent_workunit->id ); ?>">
-			<strong><?php echo $risk->parent_workunit->unique_identifier; ?> -</strong>
-			<span><?php echo $risk->parent_workunit->title; ?></span>
+	</td>
+	<td>
+		<?php if ( ! empty( $risk->parent_workunit ) ) : ?>
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id . '&workunit_id=' . $risk->parent_workunit->id ) ); ?>">
+			<strong><?php echo esc_attr( $risk->parent_workunit->unique_identifier ); ?> -</strong>
+			<span><?php echo esc_attr( $risk->parent_workunit->title ); ?></span>
 		</a>
-		<?php else: ?>
-			Aucune unité de travail
+		<?php else : ?>
+			<p><?php esc_html_e( 'Aucune unité de travail', 'digirisk' ); ?></p>
 		<?php endif; ?>
-	</span>
-	<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
-	<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
-	<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation->unique_identifier; ?></span>
-	<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . (($risk->id != 0) ? "view" : "edit") . '"]' ); ?>
-	<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="edit"]'); ?>
+	</td>
+	<td><?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?></td>
+	<td><?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?></td>
+	<td><?php echo esc_attr( $risk->unique_identifier ); ?> - <?php echo esc_attr( $risk->evaluation->unique_identifier ); ?></td>
+	<td><?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?></td>
+	<td><?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="edit"]' ); ?></td>
 
-	<span class="wp-digi-action">
+	<td>
 		<input type="checkbox" name="can_update" />
-		<a href="#" data-id="<?php echo $risk->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
-	</span>
+		<a href="#" data-id="<?php echo esc_attr( $risk->id ); ?>"
+								data-parent="risk-row"
+								data-loader="table"
+								class="edit-risk action-input fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
+	</td>
 
-	<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
-</li>
+</tr>

@@ -1,30 +1,31 @@
-<?php namespace digi;
+<?php
 /**
-* Dérrogatiosn aux horaires
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package society
-* @subpackage templates
-*/
+ * Dérogations aux horaires
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package legal_display
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 
-<ul class="wp-digi-form">
-  <li><h2><?php _e( 'Derogations schedules', 'digirisk' ); ?></h2></li>
+<ul class="form">
+	<li><h2><?php esc_html_e( 'Dérogations aux horaires de travail', 'digirisk' ); ?></h2></li>
 
-  <li>
-    <label>
-      <?php _e( 'Permanent', 'digirisk' ); ?>
-      <input name="derogation_schedule[permanent]" type="text" value="<?php echo $legal_display->derogation_schedule['permanent']; ?>" />
-    </label>
-  </li>
-  <li>
-    <label>
-      <?php _e( 'Occasional', 'digirisk' ); ?>
-      <input name="derogation_schedule[occasional]" type="text" value="<?php echo $legal_display->derogation_schedule['occasional']; ?>" />
-    </label>
-  </li>
+	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->derogation_schedule['permanent'] ) ? 'active' : '' ); ?>">
+		<input name="derogation_schedule[permanent]" type="text" value="<?php echo esc_attr( $legal_display->derogation_schedule['permanent'] ); ?>" />
+		<label><?php esc_html_e( 'Permanentes', 'digirisk' ); ?></label>
+		<span class="bar"></span>
+	</li>
+	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->derogation_schedule['occasional'] ) ? 'active' : '' ); ?>">
+		<input name="derogation_schedule[occasional]" type="text" value="<?php echo esc_attr( $legal_display->derogation_schedule['occasional'] ); ?>" />
+		<label><?php esc_html_e( 'Occasionnelles', 'digirisk' ); ?></label>
+		<span class="bar"></span>
+	</li>
 </ul>

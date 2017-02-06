@@ -1,28 +1,28 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier de controlle des requêtes  ajax pour les recommendations / Recommendation' ajax request main class
+ * Les actions relatives aux recommendations
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package recommendation
+ * @subpackage action
  */
 
-/**
- * Classe de controlle des requêtes ajax pour les recommendations / Recommendation' ajax request main class
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
-class recommendation_action {
+namespace digi;
 
-	public $unique_identifier = 'PA';
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives aux recommendations
+ */
+class Recommendation_Action {
 	/**
-	 * Le constructeur appelle les méthodes ajax suivantes:
-	 * wp_ajax_wpdigi-create-recommendation
-	 * wp_ajax_wpdigi-delete-recommendation
-	 * wp_ajax_wpdigi-load-recommendation
-	 * wp_ajax_wpdigi-edit-recommendation
+	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	function __construct() {
 		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ) );
@@ -33,88 +33,87 @@ class recommendation_action {
 	}
 
 	/**
-	* Charges une recommendation
-	*
-	* int $_POST['workunit_id'] L'ID de l'unité de travail
-	* int $_POST['term_id'] L'ID de la recommendation
-	* int $_POST['index'] L'index du tableau
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Charges une recommendation
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function ajax_load_recommendation() {
-		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
-		else
-			$id = (int)$_POST['id'];
+		check_ajax_referer( 'ajax_load_recommendation' );
 
-		check_ajax_referer( 'ajax_load_recommendation_' . $id );
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error( array( 'error' => __LINE__ ) );
+		} else {
+			$id = (int) $_POST['id'];
+		}
 
-		$recommendation = recommendation_class::g()->get( array( 'id' => $id ), array() );
+		$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ) );
 		$recommendation = $recommendation[0];
 
 		ob_start();
-		view_util::exec( 'recommendation', 'item-edit', array( 'society_id' => $recommendation->parent_id, 'recommendation' => $recommendation ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'load_recommendation_success', 'template' => ob_get_clean() ) );
+		View_Util::exec( 'recommendation', 'item-edit', array( 'society_id' => $recommendation->parent_id, 'recommendation' => $recommendation ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'loadedRecommendationSuccess', 'template' => ob_get_clean() ) );
 	}
 
 	/**
-	* Edites une recommendation
-	*
-	* int $_POST['workunit_id'] L'ID de l'unité de travail
-	* int $_POST['term_id'] L'ID de la recommendation
-	* int $_POST['index'] L'index du tableau
-	* string $_POST['recommendation_comment'] Le commentaire de la recommendation
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Sauvegardes une recommendation ainsi que la liste des commentaires.
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function ajax_save_recommendation() {
-		$recommendation_term = recommendation_term_class::g()->get( array( 'include' => $_POST['taxonomy']['digi-recommendation'] ) );
+		check_ajax_referer( 'save_recommendation' );
+
+		$recommendation_term = Recommendation_Term_Class::g()->get( array( 'include' => $_POST['taxonomy']['digi-recommendation'] ) );
 		$recommendation_term = $recommendation_term[0];
 		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
-		$recommendation = recommendation_class::g()->update( $_POST );
+		$recommendation = Recommendation_Class::g()->update( $_POST );
 
-		if ( !empty( $_POST['list_comment'] ) ) {
-		  foreach ( $_POST['list_comment'] as $element ) {
-				if ( !empty( $element['content'] ) ) {
+		if ( ! empty( $_POST['list_comment'] ) ) {
+			foreach ( $_POST['list_comment'] as $element ) {
+				if ( ! empty( $element['content'] ) ) {
 					$element['post_id'] = $recommendation->id;
-					recommendation_comment_class::g()->update( $element );
+					Recommendation_Comment_Class::g()->update( $element );
 				}
-		  }
+			}
 		}
 
 		ob_start();
-		recommendation_class::g()->display( $recommendation->parent_id );
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'save_recommendation_success', 'template' => ob_get_clean() ) );
+		Recommendation_Class::g()->display( $recommendation->parent_id );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'savedRecommendationSuccess', 'template' => ob_get_clean() ) );
 	}
 
 	/**
-	* Supprimes une recommendation (Passes son status en "deleted" dans le tableau)
-	*
-	* int $_POST['workunit_id'] L'ID de l'unité de travail
-	* int $_POST['term_id'] L'ID de la recommendation
-	* int $_POST['index'] L'index du tableau
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Supprimes une recommendation (Passes son status en "deleted" dans le tableau)
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function ajax_delete_recommendation() {
-		if ( 0 === (int)$_POST['id'] )
-			wp_send_json_error( array( 'error' => __LINE__, ) );
-		else
-			$id = (int)$_POST['id'];
+		check_ajax_referer( 'ajax_delete_recommendation' );
 
-		check_ajax_referer( 'ajax_delete_recommendation_' . $id );
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error();
+		} else {
+			$id = (int) $_POST['id'];
+		}
 
-		$recommendation = recommendation_class::g()->get( array( 'id' => $id ) );
+		$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ) );
 		$recommendation = $recommendation[0];
 
-		if ( empty( $recommendation ) )
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+		if ( empty( $recommendation ) ) {
+			wp_send_json_error();
+		}
 
 		$recommendation->status = 'trash';
 
-		recommendation_class::g()->update( $recommendation );
+		Recommendation_Class::g()->update( $recommendation );
 
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'delete_recommendation_success', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'deletedRecommendationSuccess', 'template' => ob_get_clean() ) );
 	}
 
 	public function ajax_transfert_recommendation() {
@@ -123,4 +122,4 @@ class recommendation_action {
 	}
 }
 
-new recommendation_action();
+new Recommendation_Action();

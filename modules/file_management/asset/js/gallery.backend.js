@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "gallery" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
 window.digirisk.gallery = {};
 
 window.digirisk.gallery.init = function() {
@@ -6,73 +12,100 @@ window.digirisk.gallery.init = function() {
 
 window.digirisk.gallery.event = function() {
 	jQuery( document ).on( 'keyup', window.digirisk.gallery.keyup );
-	jQuery( document ).on( 'click', '.wpeo-gallery', function( event ) { event.preventDefault(); return false; } );
-	jQuery( document ).on( 'click', '.wpeo-gallery .prev', window.digirisk.gallery.prev );
-	jQuery( document ).on( 'click', '.wpeo-gallery .next', window.digirisk.gallery.next );
-	jQuery( document ).on( 'click', '.wpeo-gallery .set-as-thumbnail', window.digirisk.gallery.set_thumbnail );
-	jQuery( document ).on( 'click', '.wpeo-gallery .close', window.digirisk.gallery.close );
+	jQuery( document ).on( 'click', '.gallery', function( event ) { event.preventDefault(); return false; } );
+	jQuery( document ).on( 'click', '.gallery .navigation .prev', window.digirisk.gallery.prevPicture );
+	jQuery( document ).on( 'click', '.gallery .navigation .next', window.digirisk.gallery.nextPicture );
+	jQuery( document ).on( 'click', '.gallery .close', window.digirisk.gallery.close );
 };
 
 window.digirisk.gallery.keyup = function( event ) {
-	if ( event.keyCode == 37 ) {
-		jQuery( '.wpeo-gallery .prev' ).click();
-	}
-	else if ( event.keyCode == 39 ) {
-		jQuery( '.wpeo-gallery .next' ).click();
-	}
-	else if ( event.keyCode == 27 ) {
-		jQuery( '.wpeo-gallery .close' ).click();
+	if ( 37 === event.keyCode ) {
+		window.digirisk.gallery.prevPicture();
+	} else if ( 39 === event.keyCode ) {
+		window.digirisk.gallery.nextPicture();
+	} else if ( 27 === event.keyCode ) {
+		jQuery( '.gallery .close' ).click();
 	}
 };
 
-window.digirisk.gallery.open = function( element ) {
-	element.find( '.wpeo-gallery' ).show();
-};
-
-window.digirisk.gallery.prev = function( event ) {
-	event.preventDefault();
-	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).prev().length <= 0 ) {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
-		jQuery( this ).closest( 'div' ).find( '.image-list li:last' ).toggleClass( 'hidden current' );
-	}	else {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).prev().toggleClass( 'hidden current' );
-	}
-
-	jQuery( '.wpeo-gallery .wp-digi-bton-third' ).attr( 'data-thumbnail-id', jQuery( '.wpeo-gallery .current' ).attr( 'data-id' ) );
-};
-
-window.digirisk.gallery.next = function( event ) {
-	event.preventDefault();
-
-	if ( jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).next().length <= 0 ) {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' );
-		jQuery( this ).closest( 'div' ).find( '.image-list li:first' ).toggleClass( 'hidden current' );
-	} else {
-		jQuery( this ).closest( 'div' ).find( '.image-list li.current' ).toggleClass( 'current hidden' ).next().toggleClass( 'hidden current' );
-	}
-
-	jQuery( '.wpeo-gallery .wp-digi-bton-third' ).attr( 'data-thumbnail-id', jQuery( '.wpeo-gallery .current' ).attr( 'data-id' ) );
-};
-
-window.digirisk.gallery.set_thumbnail = function( event ) {
+window.digirisk.gallery.open = function( element, elementId, type, namespace ) {
 	var data = {
-		action: 'eo_set_thumbnail',
-		element_id: jQuery( this ).closest( 'div' ).data( 'id' ),
-		thumbnail_id: jQuery( this ).closest( 'div' ).find( 'li.current' ).data( 'id' )
+		action: 'load_gallery',
+		id: elementId,
+		type: type,
+		namespace: namespace
 	};
 
-	jQuery.post( window.ajaxurl, data, function( response ) {
-      jQuery( 'span.wpeo-upload-media[data-id="'+ response.data.element_id + '"]' ).find( '.wp-post-image' ).replaceWith( response.data.template );
-			jQuery( '.wpeo-gallery' ).hide();
-	} );
+	element.addClass( 'loading' );
+
+	jQuery.post( ajaxurl, data, function( response ) {
+		element.removeClass( 'loading' );
+		jQuery( '.digirisk-wrap' ).append( response.data.view );
+	});
+};
+
+window.digirisk.gallery.prevPicture = function( event ) {
+	if ( jQuery( '.gallery .image-list li.current' ).prev().length <= 0 ) {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
+		jQuery( '.gallery .image-list li:last' ).toggleClass( 'hidden current' );
+	}	else {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' ).prev().toggleClass( 'hidden current' );
+	}
+
+	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
+};
+
+window.digirisk.gallery.nextPicture = function( event ) {
+	if ( jQuery( '.gallery .image-list li.current' ).next().length <= 0 ) {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
+		jQuery( '.gallery .image-list li:first' ).toggleClass( 'hidden current' );
+	} else {
+		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' ).next().toggleClass( 'hidden current' );
+	}
+
+	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
 };
 
 window.digirisk.gallery.close = function( event ) {
-	jQuery( '.wpeo-gallery' ).hide();
+	jQuery( '.gallery' ).remove();
 };
 
-window.digirisk.gallery.dessociate_file_success = function( element, response ) {
-	jQuery( '.wpeo-gallery .image-list .current' ).remove();
-	jQuery( '.wpeo-gallery .prev' ).click();
-	jQuery( 'span.wpeo-upload-media[data-id="'+ response.data.element_id + '"]' ).replaceWith( response.data.view );
+/**
+ * Le callback en cas de réussite à la requête Ajax "dessociate_file".
+ * Remplaces les boutons pour ouvrir la popup "galerie"
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+window.digirisk.gallery.dessociatedFileSuccess = function( element, response ) {
+	if ( response.data.closePopup ) {
+		jQuery( '.gallery' ).remove();
+	}
+
+	jQuery( '.gallery .image-list .current' ).remove();
+	jQuery( '.gallery .prev' ).click();
+	jQuery( '.main-container .main-header .unit-header .media img' ).replaceWith( response.data.view );
+	jQuery( '.navigation-container span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.view );
+	jQuery( '.navigation-container .workunit-list span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.view );
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "eo_set_thumbnail".
+ * Remplaces les boutons pour ouvrir la popup "galerie"
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
+window.digirisk.gallery.successfulSetThumbnail = function( element, response ) {
+	jQuery( '.main-container .main-header .unit-header .media img' ).replaceWith( response.data.template );
+	jQuery( '.navigation-container span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
+	jQuery( '.navigation-container .workunit-list span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 };

@@ -35,7 +35,7 @@ class DUER_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.5.0
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
@@ -52,7 +52,7 @@ class DUER_Action {
 
 		ob_start();
 		View_Util::exec( 'duer', 'tree/main', array( 'society' => $society ) );
-		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'display_societies_duer_success', 'view' => ob_get_clean() ) );
+		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'displayedSocietyDUERSuccess', 'view' => ob_get_clean() ) );
 	}
 
 	/**
@@ -62,7 +62,7 @@ class DUER_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
@@ -77,13 +77,13 @@ class DUER_Action {
 		if ( ! empty( $_POST['duer'] ) ) {
 			$generate_response = DUER_Generate_Class::g()->generate( $_POST );
 		} elseif ( ! empty( $_POST['generate_duer'] ) ) {
-			$document_id = ! empty( $_POST ) && is_int( (int)$_POST[ 'element_id' ] ) && !empty( $_POST[ 'element_id' ] ) ? (int)$_POST[ 'element_id' ] : 0;
+			$document_id = ! empty( $_POST ) && is_int( (int) $_POST['element_id'] ) && ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 			if ( ! empty( $document_id ) ) {
-				$parent_id = ! empty( $_POST ) && is_int( (int)$_POST[ 'parent_id' ] ) && !empty( $_POST[ 'parent_id' ] ) ? (int)$_POST[ 'parent_id' ] : 0;
+				$parent_id = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 				$parent_element = society_class::g()->show_by_type( $parent_id );
 
 				$current_document = DUER_Class::g()->get( array( 'post__in' => array( $document_id ), 'post_status' => 'any' ) );
-			 	$generate_response = document_class::g()->generate_document( $current_document[0]->model_id, $current_document[ 0 ]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
+			 	$generate_response = document_class::g()->generate_document( $current_document[0]->model_id, $current_document[0]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[0]->title . '.odt' );
 			}
 		} elseif ( ! empty( $_POST['zip'] ) ) {
 			$element = Group_Class::g()->get( array( 'post__in' => array( $_POST['element_id'] ) ) );
@@ -124,7 +124,7 @@ class DUER_Action {
 		}
 
 		if ( $generate_response['success'] ) {
-			$response['callback_success'] = 'callback_generate_duer_success';
+			$response['callback_success'] = 'generatedDUERSuccess';
 			$response['index']++;
 		} else {
 			$response['callback_error'] = 'callback_generate_duer_error';

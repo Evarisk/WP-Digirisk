@@ -1,20 +1,15 @@
 {
 	"name": "User",
 	"slug": "user",
-	"version": "0.2.0.0",
+	"version": "6.2.4.0",
 	"description": "Le module gérant les utilisateurs de Digirisk",
 	"path": "modules/user/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"model": {
-		},
+		"shortcode": {},
+		"model": {},
 		"helper": {},
-		"filter": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"filter": {},
+		"class": {},
+		"action": {}
 	}
 }

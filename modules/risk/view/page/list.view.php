@@ -1,23 +1,37 @@
-<?php namespace digi;
+<?php
+/**
+ * Affiches la liste des risques
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage view
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+namespace digi;
 
-<li class="wp-digi-risk-list-header wp-digi-table-header" >
-	<span>Groupement</span>
-	<span>Unité de travail</span>
-	<span class="wp-digi-risk-list-column-thumbnail">&nbsp;</span>
-	<span class="wp-digi-risk-list-column-cotation"><a href="<?php echo esc_url( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></span>
-	<span class="wp-digi-risk-list-column-reference header"><?php _e( 'Ref.', 'digirisk' ); ?></span>
-	<span><?php _e( 'Risque', 'digirisk' ); ?></span>
-	<span><?php _e( 'Comment', 'digirisk' ); ?></span>
-	<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
-</li>
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-<?php $i = 1; ?>
-<?php if ( ! empty( $risk_list ) ) : ?>
-	<?php foreach ( $risk_list as $risk ) : ?>
-		<?php view_util::exec( 'risk', 'page/item-edit', array( 'risk' => $risk ) ); ?>
-	<?php endforeach; ?>
-<?php endif; ?>
+<thead>
+	<tr>
+		<td class="padding">Groupement</td>
+		<td>Unité de travail</td>
+		<td>&nbsp;</td>
+		<td><a class="tooltip hover" aria-label="<?php echo esc_attr( 'Cliquer pour trier par cotation', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></td>
+		<td><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
+		<td><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
+		<td><?php esc_html_e( 'Comment', 'digirisk' ); ?></td>
+		<td>&nbsp;</td>
+	</tr>
+</thead>
+
+<tbody>
+	<?php $i = 1; ?>
+	<?php if ( ! empty( $risk_list ) ) : ?>
+		<?php foreach ( $risk_list as $risk ) : ?>
+			<?php View_Util::exec( 'risk', 'page/item-edit', array( 'risk' => $risk ) ); ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</tbody>

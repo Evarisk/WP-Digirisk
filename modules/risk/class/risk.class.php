@@ -1,18 +1,21 @@
 <?php
 /**
- * Les risques
+ * Classe gérant les risques
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage class
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
- * Les risques
+ * Classe gérant les risques
  */
 class Risk_Class extends Post_Class {
 
@@ -21,21 +24,21 @@ class Risk_Class extends Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   = '\digi\risk_model';
+	protected $model_name = '\digi\risk_model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    = 'digi-risk';
+	protected $post_type = 'digi-risk';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_risk';
+	protected $meta_key = '_wpdigi_risk';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -73,7 +76,7 @@ class Risk_Class extends Post_Class {
 	public $element_prefix = 'R';
 
 	/**
-	 * La limite des risques a affiché par page
+	 * La limite des risques a afficher par page
 	 *
 	 * @var integer
 	 */
@@ -90,23 +93,12 @@ class Risk_Class extends Post_Class {
 	 * Constructeur
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.3.0
 	 */
 	protected function construct() {
 		parent::construct();
-
-		/**	Définition d'un shortcode permettant d'afficher les risques associés à un élément / Define a shortcode allowing to display risk associated to a given element 	*/
-		add_shortcode( 'risk', array( $this, 'risk_shortcode' ) );
-
-		/**	Ajoute les onglets pour les unités de travail / Add tabs for workunit	*/
-		add_filter( 'wpdigi_workunit_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 5, 2 );
-		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for workunit tabs	*/
-		add_filter( 'wpdigi_workunit_sheet_content', array( $this, 'filter_display_risk_in_element' ), 10, 3 );
-
-		/**	Ajoute les onglets pour les unités de travail / Add tabs for workunit	*/
-		add_filter( 'wpdigi_group_sheet_tab', array( $this, 'filter_add_sheet_tab_to_element' ), 5, 2 );
-		/**	Ajoute le contenu pour les onglets des unités de travail / Add the content for group tabs	*/
-		add_filter( 'wpdigi_group_sheet_content', array( $this, 'filter_display_risk_in_element' ), 10, 3 );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**
@@ -115,8 +107,14 @@ class Risk_Class extends Post_Class {
 	 *
 	 * @param  integer $society_id L'ID de la société.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.3.0
+	 * @todo Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
+		$society = Society_Class::g()->show_by_type( $society_id );
+
 		$risk_schema = $this->get( array( 'schema' => true ) );
 		$risk_schema = $risk_schema[0];
 
@@ -131,8 +129,8 @@ class Risk_Class extends Post_Class {
 			} );
 		}
 
-		view_util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
+		View_Util::exec( 'risk', 'main', array( 'society' => $society, 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
 	}
 }
 
-risk_class::g();
+Risk_Class::g();

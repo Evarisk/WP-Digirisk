@@ -3,8 +3,9 @@
  * Le bouton "Télécharger le ZIP"
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Evarisk
+ * @since 1.0
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
  * @package zip
  * @subpackage view
  */
@@ -15,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<a href="<?php echo esc_attr( $zip_url ); ?>">
+<a class="button dark h50" href="<?php echo esc_attr( $zip_url ); ?>">
 	<i class="fa fa-file-archive-o" aria-hidden="true"></i>
-	<?php esc_html_e( 'ZIP', 'digirisk' ); ?>
+	<span><?php esc_html_e( 'ZIP', 'digirisk' ); ?></span>
 </a>

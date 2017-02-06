@@ -1,15 +1,31 @@
 <?php
+/**
+ * Les actions relatives aux sociétés
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package society
+ * @subpackage action
+ */
 
 namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class society_action {
+/**
+ * Les actions relatives aux sociétés
+ */
+class Society_Action {
 
 	/**
 	 * Le constructeur appelle les actions ajax suivantes:
 	 * wp_ajax_load_sheet_display
 	 * wp_ajax_save_society
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_load_society', array( $this, 'callback_load_society' ) );
@@ -18,7 +34,10 @@ class society_action {
 	}
 
 	/**
-	 * Affiche la fiche d'une unité de travail / Display a work unit sheet
+	 * Charges le template d'une société
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function callback_load_society() {
 		$template = '';
@@ -26,64 +45,70 @@ class society_action {
 		ob_start();
 		Digirisk_Class::g()->display();
 		$template .= ob_get_clean();
-		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'callback_load_society', 'template' => $template ) );
+		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'loadedSocietySuccess', 'template' => $template ) );
 	}
 
 	/**
-	* Sauvegardes les données d'une societé
-	*
-	* int $_POST['element_id'] L'ID de la societé
-	* string $_POST['title'] Le titre de la societé
-	* int $_POST['send_to_group_id'] L'ID du groupement parent
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Sauvegardes les données d'une societé
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function callback_save_society() {
+		check_ajax_referer( 'save_society' );
+
 		// todo: Doublon ?
-		if ( 0 === (int) $_POST['id'] )
+		if ( 0 === (int) $_POST['id'] ) {
 			wp_send_json_error();
-		else
+		} else {
 			$id = (int) $_POST['id'];
+		}
 
 		$group_id = $id;
 		$workunit_id_selected = 0;
 
-		$society = society_class::g()->show_by_type( $_POST['id'] );
+		$society = Society_Class::g()->show_by_type( $_POST['id'] );
 		$society->title = $_POST['title'];
 
-		if ( !empty( $_POST['parent_id'] ) ) {
+		if ( ! empty( $_POST['parent_id'] ) ) {
 			$parent_id = (int) $_POST['parent_id'];
 			$society->parent_id = $_POST['parent_id'];
 		}
 
-		if ( $society->type === 'digi-group' ) {
-			$_GET['groupment_id'] = $id;
-		} else {
-			$_GET['groupment_id'] = $_POST['parent_id'];
-			$_GET['workunit_id'] = $id;
+		Society_Class::g()->update_by_type( $society );
+
+		if ( 'digi-workunit' === $society->type ) {
+			$id = $society->parent_id;
+
+			$_POST['workunit_id'] = $society->id;
 		}
 
-		society_class::g()->update_by_type( $society );
-
 		ob_start();
-		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'update_society_success', 'society' => $society, 'template' => ob_get_clean() ) );
+		Digirisk_Class::g()->display( $id );
+		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'savedSocietySuccess', 'society' => $society, 'template' => ob_get_clean() ) );
 	}
 
 	/**
-	* todo: Commenter
-	*/
+	 * Supprimes une société
+	 *
+	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function callback_delete_society() {
+		check_ajax_referer( 'delete_society' );
+
 		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 
-		$society = society_class::g()->show_by_type( $id );
+		$society = Society_Class::g()->show_by_type( $id );
 		$society->status = 'trash';
-		society_class::g()->update_by_type( $society );
+		Society_Class::g()->update_by_type( $society );
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'template' => ob_get_clean(), 'module' => 'society', 'callback_success' => 'delete_success' ) );
+		wp_send_json_success( array( 'template' => ob_get_clean(), 'module' => 'society', 'callback_success' => 'deletedSocietySuccess' ) );
 	}
 }
 
-new society_action();
+new Society_Action();

@@ -1,14 +1,30 @@
-<?php namespace digi;
+<?php
+/**
+ * Les actions relatives aux évaluateurs
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package evaluator
+ * @subpackage action
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluator_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les actions relatives aux évaluateurs
+ */
+class Evaluator_Action {
+
 	/**
-	* Le constructeur appelle les actions ajax suivantes:
-	* wp_ajax_edit_eveluator_assign (Permet d'assigner un évaluateur à un élément)
-	* wp_ajax_detach_evaluator (Permet de dissocier un évaluateur d'un élément)
-	* wp_ajax_paginate_evaluator (Permet de gérer la pagination des évaluateurs)
-	*/
+	 * Le constructeur appelle les actions ajax suivantes:
+	 * wp_ajax_edit_eveluator_assign (Permet d'assigner un évaluateur à un élément)
+	 * wp_ajax_detach_evaluator (Permet de dissocier un évaluateur d'un élément)
+	 * wp_ajax_paginate_evaluator (Permet de gérer la pagination des évaluateurs)
+	 */
 	public function __construct() {
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
@@ -19,33 +35,32 @@ class evaluator_action {
 	}
 
 	/**
-	* Assignes un évaluateur à element_id dans la base de donnée
-	*
-	* array $_POST['list_user'] La liste des evaluateurs à assigner
-	* string $_POST['list_user']['duration'] La durée de l'assignation
-	* string $_POST['list_user']['on'] La date d'assignation
-	* bool $_POST['list_user']['affect'] Si l'évaluateur doit être assigné
-	* int $_POST['element_id'] L'élement ou les evaluateurs doivent être assignés
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Assignes un évaluateur à element_id dans la base de donnée
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_edit_evaluator_assign() {
-		if ( empty( $_POST['list_user'] ) || !is_array( $_POST['list_user'] ) )
-			wp_send_json_error();
+		check_ajax_referer( 'edit_evaluator_assign' );
 
-		if ( 0 === (int) $_POST['element_id'] )
+		if ( empty( $_POST['list_user'] ) || ! is_array( $_POST['list_user'] ) ) {
 			wp_send_json_error();
-		else {
+		}
+
+		if ( 0 === (int) $_POST['element_id'] ) {
+			wp_send_json_error();
+		} else {
 			$element_id = (int) $_POST['element_id'];
 		}
 
 		$element = society_class::g()->show_by_type( $element_id );
 
-		if ( empty( $element ) )
+		if ( empty( $element ) ) {
 			wp_send_json_error();
+		}
 
 		foreach ( $_POST['list_user'] as $user_id => $list_value ) {
-			if ( !empty( $list_value['duration'] ) && !empty( $list_value['affect'] ) ) {
+			if ( ! empty( $list_value['duration'] ) && ! empty( $list_value['affect'] ) ) {
 				$list_value['on'] = str_replace( '/', '-', $list_value['on'] );
 				$list_value['on'] = date( 'y-m-d', strtotime( $list_value['on'] ) );
 				$list_value['on'] .= ' ' . current_time( 'H:i:s' );
@@ -54,8 +69,7 @@ class evaluator_action {
 				$end_date = new \DateTime( $list_value['on'] );
 				$end_date->add( new \DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
 
-
-				$element->user_info['affected_id']['evaluator'][$user_id][] = array(
+				$element->user_info['affected_id']['evaluator'][ $user_id ][] = array(
 					'status' => 'valid',
 					'start' => array(
 						'date' 	=> $list_value['on'],
@@ -69,62 +83,62 @@ class evaluator_action {
 					),
 				);
 
-				// do_action( 'add_compiled_evaluation_id', $element_id, $user_id, count( $element->user_info['affected_id']['evaluator'][$user_id] ) - 1 );
+				// do_action( 'add_compiled_evaluation_id', $element_id, $user_id, count( $element->user_info['affected_id']['evaluator'][$user_id] ) - 1 );.
 			}
 		}
 
-		//On met à jour si au moins un utilisateur à été affecté
-		if( count( $_POST['list_user'] ) > 0 ) {
-			society_class::g()->update_by_type( $element );
+		// On met à jour si au moins un utilisateur à été affecté.
+		if ( count( $_POST['list_user'] ) > 0 ) {
+			Society_Class::g()->update_by_type( $element );
 		}
 
-		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
+		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
-	* Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
-	*
-	* int $_POST['id'] L'ID de l'élement ou l'évaluateur sera dissocié
-	* int $_POST['affectation_id'] L'index de l'évaluateur
-	* int $_POST['user_id'] L'ID de l'évaluateur
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_detach_evaluator() {
-		if ( 0 === (int) $_POST['id'] )
+		check_ajax_referer( 'detach_evaluator' );
+
+		if ( 0 === (int) $_POST['id'] ) {
 			wp_send_json_error();
-		else {
+		} else {
 			$element_id = (int) $_POST['id'];
 		}
 
-		if ( !isset( $_POST['affectation_id'] ) )
+		if ( ! isset( $_POST['affectation_id'] ) ) {
 			wp_send_json_error();
-		else {
+		} else {
 			$affectation_data_id = (int) $_POST['affectation_id'];
 		}
 
-		if ( 0 === (int) $_POST['user_id'] )
+		if ( 0 === (int) $_POST['user_id'] ) {
 			wp_send_json_error();
-		else {
+		} else {
 			$user_id = (int) $_POST['user_id'];
 		}
 
-		$element = society_class::g()->show_by_type( $element_id );
+		$element = Society_Class::g()->show_by_type( $element_id );
 
-		if ( empty( $element ) )
+		if ( empty( $element ) ) {
 			wp_send_json_error();
+		}
 
-		$element->user_info['affected_id']['evaluator'][$user_id][$affectation_data_id]['status'] = 'deleted';
-		// do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );
-		society_class::g()->update_by_type( $element );
+		$element->user_info['affected_id']['evaluator'][ $user_id ][ $affectation_data_id ]['status'] = 'deleted';
+		// do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );.
+		Society_Class::g()->update_by_type( $element );
 
-		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
+		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
+		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_detach_evaluator_success', 'template' => ob_get_clean() ) );
 	}
 
 	/**
@@ -147,57 +161,78 @@ class evaluator_action {
 		wp_die();
 	}
 
+	/**
+	 * Méthode appelé par le champs de recherche des évaluateurs affectés
+	 *
+	 * @param  integer $id           L'ID de la société.
+	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
+	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element = society_class::g()->show_by_type( $id );
-		$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $element );
+		$element = Society_Class::g()->show_by_type( $id );
+		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 
-		if ( !empty( $list_affected_evaluator ) ) {
-		  foreach ( $list_affected_evaluator as $key => $sub_list ) {
-				foreach( $sub_list as $evaluator_key => $evaluator ) {
+		if ( ! empty( $list_affected_evaluator ) ) {
+			foreach ( $list_affected_evaluator as $key => $sub_list ) {
+				foreach ( $sub_list as $evaluator_key => $evaluator ) {
 					if ( is_object( $evaluator['user_info'] ) ) {
-						if ( !in_array( $evaluator['user_info']->id, $list_user_id ) ) {
-							unset( $list_affected_evaluator[$key][$evaluator_key] );
+						if ( ! in_array( $evaluator['user_info']->id, $list_user_id, true ) ) {
+							unset( $list_affected_evaluator[ $key ][ $evaluator_key ] );
 						}
 					}
 				}
-		  }
+			}
 		}
 
 		ob_start();
-		view_util::exec( 'evaluator', 'list-affected-evaluator',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
+	/**
+	 * Méthode appelé par le champs de recherche des évaluateurs à assigner.
+	 *
+	 * @param  integer $id           L'ID de la société.
+	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
+	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
+	 */
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
-		$element = society_class::g()->show_by_type( $id );
+		$element = Society_Class::g()->show_by_type( $id );
 
-		$current_page = !empty( $_REQUEST['next_page'] ) ? (int)$_REQUEST['next_page'] : 1;
 		$args_where_evaluator = array(
-			'exclude' => array( 1 )
+			'exclude' => array( 1 ),
 		);
 
-		$list_evaluator_to_assign = evaluator_class::g()->get( $args_where_evaluator );
-		//
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset
+		$current_page = 1;
+
+		$evaluators = Evaluator_Class::g()->get( $args_where_evaluator );
+
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( evaluator_class::g()->get( $args_where_evaluator ) );
+		$count_evaluator = count( Evaluator_Class::g()->get( $args_where_evaluator ) );
 
-		$number_page = ceil( $count_evaluator / evaluator_class::g()->limit_evaluator );
+		$number_page = ceil( $count_evaluator / Evaluator_Class::g()->limit_evaluator );
 
-			if ( !empty( $list_evaluator_to_assign ) ) {
-				foreach ( $list_evaluator_to_assign as $key => $evaluator ) {
-					if ( !in_array( $evaluator->id, $list_user_id ) ) {
-						unset( $list_evaluator_to_assign[$key] );
-					}
+		if ( ! empty( $evaluators ) ) {
+			foreach ( $evaluators as $key => $evaluator ) {
+				if ( ! in_array( $evaluator->id, $list_user_id, true ) ) {
+					unset( $evaluators[ $key ] );
 				}
 			}
+		}
 
 		ob_start();
-		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'list_evaluator_to_assign' => $list_evaluator_to_assign ) );
+		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }
 
-	new evaluator_action();
+	new Evaluator_Action();

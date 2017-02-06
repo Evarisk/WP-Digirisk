@@ -1,26 +1,35 @@
-<?php namespace digi;
+<?php
+/**
+ * La vue contenant le tableau d'édition des utilisateurs ainsi que le domaine de l'email.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package user_dashboard
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<div class="wrap user-dashboard">
-	<h3><?php _e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h3>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-	<ul class="wp-digi-form no-form gridwrapper3 single-line">
-		<li></li>
-		<li></li>
-		<li class="form-element wp-digi-bloc-loader">
-			<label><?php _e( 'Domain mail', 'digirisk' ); ?>
-				<input class="input-domain-mail" type="text" value="<?php echo get_option( 'digirisk_domain_mail', 'demo.com' ); ?>" />
-			</label>
-			<a href="#" data-nonce="<?php echo wp_create_nonce( 'save_domain_mail' ); ?>" class="wp-digi-action wp-digi-action-save-domain-mail fa fa-floppy-o" aria-hidden="true"></a>
-		</li>
-	</ul>
+<div class="digirisk-wrap user-dashboard">
+	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h1>
+
+	<div class="form email-domain">
+		<div class="form-element active">
+			<input type="hidden" name="action" value="save_domain_mail" />
+			<?php wp_nonce_field( 'save_domain_mail' ); ?>
+			<input class="input-domain-mail" name="domain_mail" type="text" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
+			<label class="tooltip red" aria-label="<?php echo esc_attr( 'Domaine de l\'email invalide.', 'digirisk' ); ?>"><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
+			<span class="bar"></span>
+		</div>
+		<span data-parent="form" data-module="userDashboard" data-before-method="checkDomainEmailValid" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+	</div>
 
 	<!-- Liste les utilisateurs -->
-	<ul class="wp-digi-list wp-digi-table wp-digi-list-staff wp-digi-bloc-loader">
-		<?php
-			user_dashboard_class::g()->display_list_user();
-			view_util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
-		?>
-	</ul>
+	<table class="table users">
+		<?php	User_Dashboard_Class::g()->display_list_user(); ?>
+	</table>
 </div>

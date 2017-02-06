@@ -1,25 +1,31 @@
 <?php
-namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit;
-?>
+/**
+ * Affichage des commentaires
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package comment
+ * @subpackage view
+ */
 
-<?php if ( !empty( $comments ) ) : ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<?php if ( ! empty( $comments ) && 0 !== $comments[0]->id ) : ?>
 	<?php foreach ( $comments as $key => $comment ) : ?>
-		<?php if ( $comment->status == '-34070' ): ?>
-			<?php if ( $display == 'edit' ): ?>
+		<?php if ( '-34070' === $comment->status ) : ?>
+			<?php if ( 'edit' === $display ) : ?>
 				<?php view_util::exec( 'comment', 'item-edit', array( 'key' => $key, 'type' => $type, 'comment' => $comment, 'id' => $id ) ); ?>
-			<?php else: ?>
+			<?php else : ?>
 				<?php view_util::exec( 'comment', 'item', array( 'key' => $key, 'type' => $type, 'comment' => $comment, 'id' => $id ) ); ?>
 			<?php endif; ?>
-		<?php elseif ( $id == 0 ): ?>
-			<?php view_util::exec( 'comment', 'item-edit', array( 'key' => $key, 'type' => $type, 'comment' => $comment, 'id' => $id ) ); ?>
-		<?php elseif ( $id > 0 && $display == 'edit' ): ?>
-		<?php else: ?>
-			<?php _e( '<span>Aucun commentaire</span>', 'digirisk' ); ?>
 		<?php endif; ?>
 	<?php endforeach; ?>
-<?php endif;?>
-
-<?php if ( $id > 0 && $display == 'edit'): ?>
-	<?php view_util::exec( 'comment', 'item-edit', array('key' => 0, 'type' => $type, 'comment' => $comment_new, 'id' => $id ) ); ?>
+<?php else : ?>
+	<?php if ( 'view' === $display ) : ?>
+		<li><i><?php echo esc_html( 'Aucun commentaire', 'digirisk' ); ?></i></li>
+	<?php endif; ?>
 <?php endif; ?>

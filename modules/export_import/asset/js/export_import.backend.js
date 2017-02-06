@@ -48,6 +48,9 @@ window.digirisk.export.event = function() {
 /**
  * Lances la requête XHR pour créer le fichier .zip de l'export du modèle de donnée.
  *
+ * @since 6.1.5.5
+ * @version 6.2.5.0
+ *
  * @param  {Object} event [description]
  * @return {void}
  */
@@ -56,17 +59,20 @@ window.digirisk.export.create_export = function( event ) {
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
 		'beforeSubmit': function() {
-			form.find( 'button' ).addClass( 'wp-digi-loading' );
+			form.find( 'button' ).addClass( 'loading' );
 		},
 		success: function( response ) {
-			form.find( 'button' ).removeClass( 'wp-digi-loading' );
-			window.digirisk.global.download_file( response.data.url_to_file, response.data.filename );
+			form.find( 'button' ).removeClass( 'loading' );
+			window.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
 		}
 	} );
 },
 
 /**
  * Prépare la première requête pour importer un modèle de donnée.
+ *
+ * @since 6.1.5.5
+ * @version 6.2.5.0
  *
  * @param  {[type]} event [description]
  * @return {void}
@@ -88,7 +94,10 @@ window.digirisk.export.make_import = function( event ) {
  * Lances la requête pour importer un modèle de donnée.
  * Modifie la barre de progression.
  *
- * @param  {[type]} data [description]
+ * @since 6.1.5.5
+ * @version 6.2.5.0
+ *
+ * @param  {object} data Les données pour la requête
  * @return {void}
  */
 window.digirisk.export.request_import = function( data ) {

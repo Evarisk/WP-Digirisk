@@ -1,24 +1,41 @@
-<?php namespace digi;
+<?php
+/**
+ * La liste des danger
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package danger
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<?php if ( !empty( $danger_category_list ) ) : ?>
-	<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='<?php echo $first_danger->id; ?>' />
-	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">
-		<span><?php echo wp_get_attachment_image( $first_danger->thumbnail_id, 'thumbnail', false, array( 'title' => $first_danger->name ) ); ?></span>
-		<i class="dashicons dashicons-arrow-down"></i>
-		<div class="wp-digi-select-list digi-popup grid icon hidden">
-		<?php foreach( $danger_category_list as $danger_category ): ?>
-			<ul>
-				<?php if( !empty( $danger_category->danger ) ): ?>
-					<?php foreach( $danger_category->danger as $danger ): ?>
-						<li class="child" data-id="<?php echo $danger->id; ?>"><?php echo wp_get_attachment_image( $danger->thumbnail_id, 'thumbnail', false, array( 'title' => $danger->name ) ); ?></li>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			</ul>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='-1' />
+
+<div class="danger categorie-container toggle grid padding tooltip red"
+			data-parent="categorie-container"
+			data-target="content"
+			aria-label="<?php esc_html_e( 'Vous devez choisir un danger.', 'digirisk' ); ?>">
+
+	<div class="action">
+		<span><?php esc_html_e( 'Choisir un danger', 'digirisk' ); ?></span>
+		<img class="hidden tooltip hover" src="" aria-label="" />
+		<i class="icon animated fa fa-angle-down"></i>
+	</div>
+
+	<ul class="content">
+		<?php foreach ( $danger_category_list as $danger_category ) : ?>
+			<?php if ( ! empty( $danger_category->danger ) ) : ?>
+				<?php foreach ( $danger_category->danger as $danger ) : ?>
+					<li class="item tooltip hover" aria-label="<?php echo esc_attr( $danger->name ); ?>" data-id="<?php echo esc_attr( $danger->id ); ?>">
+						<?php echo wp_get_attachment_image( $danger->thumbnail_id, 'thumbnail', false ); ?>
+					</li>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		<?php endforeach; ?>
-		</div>
-	</toggle>
-<?php else: ?>
-	<?php _e( 'There are no danger category to display here. Please create some danger category before.', 'digirisk' ); ?>
-<?php endif; ?>
+	</ul>
+</div>

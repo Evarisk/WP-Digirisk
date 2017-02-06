@@ -1,24 +1,27 @@
 <?php
 /**
- * Le bouton qui permet d'afficher la liste des groupements lors du clic sur celui-ci.
+ * Le bouton (toggle) qui permet d'afficher le titre du groupement actuellement sélectionné.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package navigation
+ * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
-?>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="wp-digi-group-header wp-digi-group-selector">
-	<toggle class="wp-digi-summon-list navigation wp-digi-button-popup" data-target="wp-digi-develop-list">
+<div class="workunit-navigation toggle">
+	<div class="unit-header">
 		<?php do_shortcode( '[eo_upload_button id=' . $groupment->id . ' type=digi-group]' ); ?>
-		<?php echo esc_html( $groupment->unique_identifier ); ?>
-		<span class="title"> - <?php echo esc_html( $groupment->title ); ?></span>
-		<i class="dashicons dashicons-arrow-down"></i>
-	</toggle>
-
-	<div class="wp-digi-develop-list digi-popup hidden">
-		<?php Navigation_Class::g()->display_toggle_list( $groupment->id ); ?>
+		<div class="title toggle" data-parent="workunit-navigation" data-target="content"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
+		<span class="button w50 toggle" data-parent="workunit-navigation" data-target="content"><i class="icon fa fa-angle-down"></i></span>
 	</div>
+
+	<ul class="content">
+		<?php Navigation_Class::g()->display_toggle_list( $groupment->id ); ?>
+	</ul>
 </div>

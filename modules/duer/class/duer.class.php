@@ -3,22 +3,21 @@
  * Fait l'affichage du template de la liste des documents uniques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.1.9.0
- * @copyright 2015-2016 Evarisk
- * @package document
+ * @since 6.1.9.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package duer
  * @subpackage class
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class DUER_Class extends post_class {
+class DUER_Class extends Post_Class {
 	/**
 	 * Le nom du modèle
 	 *
@@ -34,7 +33,7 @@ class DUER_Class extends post_class {
 	protected $post_type    				= 'duer';
 
 	/**
-	 * A faire
+	 * La taxonomy du post
 	 *
 	 * @todo
 	 * @var string
@@ -85,6 +84,7 @@ class DUER_Class extends post_class {
 
 	/**
 	 * La limite des documents affichés par page
+	 *
 	 * @var integer
 	 */
 	protected $limit_document_per_page = 50;
@@ -111,11 +111,14 @@ class DUER_Class extends post_class {
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array( 'schema' => true ), array() );
 		$element = $element[0];
-		view_util::exec( 'duer', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
+		View_Util::exec( 'duer', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
 	}
 
 	/**
@@ -123,9 +126,13 @@ class DUER_Class extends post_class {
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 1.0
+	 * @version 6.2.4.0
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
+		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ) );
+
 		view_util::exec( 'duer', 'list', array( 'list_document' => $list_document ) );
 	}
 

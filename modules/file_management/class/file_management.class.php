@@ -25,8 +25,8 @@ class File_Management_Class extends singleton_util {
 	* @param string $object_name Le type de l'objet
 	* @param bool $thumbnail (Optional) Le défini en vignette
 	*/
-  public function associate_file( $file_id, $element_id, $object_name, $thumbnail = true ) {
-		$model_name = '\digi\\' . $object_name;
+  public function associate_file( $file_id, $element_id, $object_name, $namespace, $thumbnail = true ) {
+		$model_name = '\\' . $namespace . '\\' . $object_name;
     $element = $model_name::g()->get( array( 'id' => $element_id ) );
 
     if ( wp_attachment_is_image( $file_id ) ) {
@@ -50,13 +50,15 @@ class File_Management_Class extends singleton_util {
 	 * @param  integer $file_id     L'ID du fichier.
 	 * @param  integer $element_id  L'ID du l'élement contenant le fichier.
 	 * @param  string  $object_name Le nom du modèle de l'objet.
+	 * @param  string  $namespace Le namespace de l'objet.
+	 *
 	 * @return boolean
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.5.0
 	 */
-	public function dessociate_file( $file_id, $element_id, $object_name ) {
-		$model_name = '\digi\\' . $object_name;
+	public function dessociate_file( $file_id, $element_id, $object_name, $namespace ) {
+		$model_name = '\\' . $namespace . '\\' . $object_name;
 		$element = $model_name::g()->get( array( 'id' => $element_id ) );
 
 		$founded_key = array_search( $file_id, $element[0]->associated_document_id['image'], true );

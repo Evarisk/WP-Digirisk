@@ -1,12 +1,21 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.4.0",
+	"version": "6.2.5.0",
 	"description": "L'application Digirisk",
-	"insert_scripts_pages": [
+	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
-		"digirisk-handle-epi",
+		"digirisk-users",
+		"digirisk-tools",
+		"digirisk-transfert",
+		"digi-setup",
+		"digirisk-handle-sorter"
+	],
+	"insert_scripts_pages_css": [
+		"digirisk-simple-risk-evaluation",
+		"digirisk-handle-risk",
+		"digirisk-epi",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -69,5 +78,7 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
+	"default_tab": "digi-risk",
+	"default_tab_title": "Les risques de",
 	"debug": false
 }

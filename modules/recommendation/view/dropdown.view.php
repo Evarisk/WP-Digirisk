@@ -1,24 +1,41 @@
-<?php namespace digi;
+<?php
+/**
+ * La liste des préconisations
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package recommendation
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
 
-<?php if ( !empty( $recommendation_category_list ) ) : ?>
-	<input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='<?php echo $first_recommendation->id; ?>' />
-	<toggle class="wp-digi-summon-list" data-target="wp-digi-select-list">
-		<span><?php echo wp_get_attachment_image( $first_recommendation->thumbnail_id, 'thumbnail', false, array( 'title' => $first_recommendation->name ) ); ?></span>
-		<i class="dashicons dashicons-arrow-down"></i>
-		<div class="wp-digi-select-list digi-popup grid icon hidden">
-		<?php foreach( $recommendation_category_list as $recommendation_category ): ?>
-			<ul>
-				<?php if( !empty( $recommendation_category->recommendation_term ) ): ?>
-					<?php foreach( $recommendation_category->recommendation_term as $recommendation ): ?>
-						<li class="child" data-id="<?php echo $recommendation->id; ?>"><?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false, array( 'title' => $recommendation->name ) ); ?></li>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
+
+<div 	class="recommendation categorie-container toggle grid padding tooltip red"
+			aria-label="<?php esc_html_e( 'Vous devez choisir une préconisation.', 'digirisk' ); ?>"
+			data-parent="categorie-container"
+			data-target="content">
+
+	<div class="action">
+		<span><?php esc_html_e( 'Choisir une préconisation', 'digirisk' ); ?></span>
+		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une préconisation', 'digirisk' ); ?>" />
+		<i class="icon animated fa fa-angle-down"></i>
+	</div>
+
+	<ul class="content">
+		<?php foreach ( $recommendation_category_list as $recommendation_category ) : ?>
+				<?php if ( ! empty( $recommendation_category->recommendation_term ) ) : ?>
+					<?php foreach ( $recommendation_category->recommendation_term as $recommendation ) : ?>
+						<li class="item tooltip hover" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
+							<?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false ); ?>
+						</li>
 					<?php endforeach; ?>
 				<?php endif; ?>
-			</ul>
 		<?php endforeach; ?>
-		</div>
-	</toggle>
-<?php else: ?>
-	<?php _e( 'There are no recommendation category to display here. Please create some danger category before.', 'digirisk' ); ?>
-<?php endif; ?>
+	</ul>
+</div>

@@ -1,17 +1,13 @@
 {
 	"name": "Danger",
 	"slug": "danger",
-	"version": "0.2.0.0",
+	"version": "6.2.4.0",
 	"description": "Le module gérant les danger de Digirisk",
 	"path": "modules/danger/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"model": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"shortcode": {},
+		"model": {},
+		"class": {},
+		"action": {}
 	}
 }

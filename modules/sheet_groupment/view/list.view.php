@@ -1,28 +1,31 @@
 <?php
 /**
- * La liste des DUER
+ * La liste des fiches de groupement
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.1.9.0
- * @copyright 2015-2016 Evarisk
- * @package document
+ * @since 6.1.9.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package sheet_groupment
  * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<li class="wp-digi-risk-list-header wp-digi-table-header">
-	<span><?php \esc_html_e( 'Ref', 'digirisk' ); ?></span>
-	<span style="width: 5%"><?php \esc_html_e( 'Nom', 'digirisk' ); ?></span>
-	<span></span>
-</li>
+<thead>
+	<tr>
+		<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+		<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
+		<th class="w50"></th>
+	</tr>
+</thead>
 
-<?php if ( ! empty( $list_document ) ) : ?>
-	<?php foreach ( $list_document as $element ) : ?>
-		<?php view_util::exec( 'sheet_groupment', 'list-item', array( 'element' => $element ) ); ?>
-	<?php endforeach; ?>
-<?php endif; ?>
+<tbody>
+	<?php if ( ! empty( $list_document ) ) : ?>
+		<?php foreach ( $list_document as $element ) : ?>
+			<?php View_Util::exec( 'sheet_groupment', 'list-item', array( 'element' => $element ) ); ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</tbody>

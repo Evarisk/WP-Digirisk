@@ -1,15 +1,12 @@
 {
 	"name": "File management",
 	"slug": "file_management",
-	"version": "0.2.0.0",
+	"version": "6.2.5.0",
 	"description": "Le module gérant les images et la galerie de Digirisk",
 	"path": "modules/file_management/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"class": {
-		},
-		"action": {
-		}
+		"shortcode": {},
+		"class": {},
+		"action": {}
 	}
 }

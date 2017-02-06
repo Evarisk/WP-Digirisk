@@ -1,0 +1,247 @@
+/**
+ * Style spécifique à la navigation des workunits
+ * .unit-header -> Affichage des media et de l'UT ou GP
+ * .workunit-navigation -> la navigation toggle des workunit -> le toggle devrait disparaitre dans les prochaines versions
+ * .workunit-list -> Liste des UT
+ * .workunit-add -> Ajout d'une UT
+ */
+.digirisk-wrap {
+
+	.unit-header {
+		display: flex;
+		flex: 0 1 auto;
+		height: 50px;
+		transition: all 0.2s ease-out;
+		.title {
+			line-height: 50px;
+			padding: 0 10px;
+			color: rgba(255,255,255,0.7);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			strong {
+				text-transform: uppercase;
+			}
+		}
+		.button {
+			// font-size: 22px;
+		}
+	}
+	.workunit-navigation {
+		background: lighten(@b, 10%);
+		transition: all 0.2s ease-out;
+		position: relative;
+		&:hover {
+			background: lighten(@b, 16%);
+			cursor: pointer;
+			.toggle .icon {
+				color: #fff;
+			}
+		}
+		.unit-header {
+			.title {
+				width: 100%;
+			}
+		}
+		.button {
+			background: none;
+			&:hover {
+				background: none;
+			}
+			.icon {
+				color: rgba(255,255,255,0.4);
+			}
+		}
+		// Code du menu déroulant, à effacer dans une prochaine version
+		.content {
+			background: @b !important;
+			top: 42px;
+			left: 0;
+			width: 360px !important;
+			margin: 0;
+			ul, li {
+				margin: 0;
+			}
+			ul.sub-menu {
+				margin-left: 26px;
+				border-left: 1px dashed rgba(255,255,255,0.3);
+			}
+			li {
+				clear: both;
+				div {
+					display: flex;
+					flex-direction: row;
+					transition: all 0.2s ease-out;
+					.wp-digi-global-name {
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+					span {
+						display: block;
+						padding: 12px 16px;
+						color: #fff;
+						transition: all 0.2s ease-out;
+						&:first-child {
+							display: inline-block;
+						}
+						&.wp-digi-new-group-action {
+							width: 50px;
+							float: right;
+							a {
+								color: #fff;
+							}
+						}
+					}
+					&:hover {
+						background: @a;
+						cursor: pointer;
+						a {
+							color: @a;
+						}
+						.wp-digi-new-group-action {
+							background: @dark_a;
+							color: @a;
+						}
+					}
+					span:first-child {
+						width: 100%;
+					}
+					span:last-child {
+						width: 50px;
+						margin-left: auto;
+						a {
+							font-size: 14px;
+							line-height: 1.6;
+						}
+					}
+				}
+				.active {
+					span:first-child, span:last-child:not(.wp-digi-new-group-action)  {
+						background: @a;
+					}
+					span.wp-digi-new-group-action {
+						background: @dark_a;
+						a {
+							color: @a;
+						}
+					}
+				}
+			}
+		}
+		// Fin du code du menu déroulant
+		/*.content {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			top: 50px;
+			left: 0;
+			width: 100%;
+			z-index: 99;
+			background: darken(@b, 4%);
+			width: 280px;
+			&.active {
+				opacity: 1;
+				pointer-events: auto;
+			}
+			.item {
+				height: 40px;
+				.title {
+					float: left;
+					width: 240px;
+					padding: 0 14px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					color: rgba(255,255,255,0.4);
+					transition: all 0.2s ease-out;
+				}
+				.add {
+					&:hover {
+						background: lighten(@b, 4%);
+						.icon {
+							color: #fff;
+						}
+					}
+					.icon {
+						color: rgba(255,255,255,0.7);
+					}
+				}
+				&.active {
+					.title {
+						color: @a;
+					}
+				}
+				&:hover {
+					&.active .title {
+						color: lighten(@a, 20%);
+					}
+					.title {
+						color: #fff;
+					}
+				}
+				.sub-menu {
+					width: 100%;
+					padding-left: 20px;
+				}
+			}
+		}*/
+	}
+
+	.workunit-list {
+		.unit-header {
+			background: @b;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+			&:last-child {
+				border: 0;
+				.delete {
+					height: 50px !important;
+				}
+			}
+			&:hover, &.active {
+				background: @a;
+				cursor: pointer;
+				.media {
+					background: @dark_a;
+				}
+				.delete {
+					background: @dark_a;
+				}
+			}
+			.media {
+				background: darken(@b, 4%);
+			}
+			.title {
+				width: 100%;
+			}
+			.delete {
+				background: darken(@b, 4%);
+				height: 49px;
+				&:hover {
+					.icon {
+						color: rgba(255,255,255,0.7);
+					}
+				}
+				.icon {
+					color: rgba(255,255,255,0.2);
+				}
+			}
+		}
+	}
+
+	.workunit-add {
+		display: flex;
+		flex: 0 1 auto;
+		height: 50px;
+		.title {
+			border: 0;
+			background: #fff;
+			padding: 10px;
+			width: 100%;
+		}
+		.add .icon {
+			font-size: 16px;
+		}
+	}
+
+}

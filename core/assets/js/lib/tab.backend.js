@@ -5,36 +5,47 @@ window.digirisk.tab.init = function() {
 };
 
 window.digirisk.tab.event = function() {
-  jQuery( document ).on( 'click', '.wp-digi-global-sheet-tab li, .tab', window.digirisk.tab.load );
+  jQuery( document ).on( 'click', '.tab-element', window.digirisk.tab.load );
 };
 
 window.digirisk.tab.load = function( event ) {
+	var tabTriggered = jQuery( this );
+	var data = {};
+
   event.preventDefault();
-  var a = jQuery( this );
+	event.stopPropagation();
 
-  jQuery( ".wp-digi-global-sheet-tab li.active" ).removeClass( "active" );
-  a.addClass( "active" );
+	tabTriggered.closest( '.content' ).removeClass( 'active' );
 
-  jQuery( ".wp-digi-content" ).addClass( "wp-digi-bloc-loading" );
+	if ( ! tabTriggered.hasClass( 'no-tab' ) && tabTriggered.data( 'action' ) ) {
+		jQuery( '.tab .tab-element.active' ).removeClass( 'active' );
+		tabTriggered.addClass( 'active' );
 
-  var data = {
-    action:           "load_tab_content",
-    _wpnonce:         a.data( 'nonce' ),
-    tab_to_display:   a.data( "action" ),
-    element_id :      a.closest( '.wp-digi-sheet' ).data( 'id' ),
-  };
+		data = {
+			action: 'load_tab_content',
+			_wpnonce: tabTriggered.data( 'nonce' ),
+			tab_to_display: tabTriggered.data( 'action' ),
+			title: tabTriggered.data( 'title' ),
+			element_id: tabTriggered.data( 'id' )
+	  };
 
-  jQuery.post( window.ajaxurl, data, function( response ) {
-    jQuery( ".wp-digi-content" ).replaceWith( response.data.template );
+		jQuery( '.' + tabTriggered.data( 'target' ) ).addClass( 'loading' );
 
-		window.digirisk.tab.call_tab_changed();
-  } );
+		jQuery.post( window.ajaxurl, data, function( response ) {
+			jQuery( '.' + tabTriggered.data( 'target' ) ).replaceWith( response.data.template );
+
+			window.digirisk.tab.callTabChanged();
+		} );
+
+	}
+
 };
 
-window.digirisk.tab.call_tab_changed = function() {
-	for ( var key in window.digirisk ) {
-		if (window.digirisk[key].tab_changed) {
-			window.digirisk[key].tab_changed();
+window.digirisk.tab.callTabChanged = function() {
+	var key = undefined;
+	for ( key in window.digirisk ) {
+		if ( window.digirisk[key].tabChanged ) {
+			window.digirisk[key].tabChanged();
 		}
 	}
-}
+};

@@ -1,30 +1,57 @@
-<?php namespace digi;
+<?php
+/**
+ * Affichage d'un risque
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package risk
+ * @subpackage view
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-if ( $risk != null ):
-?>
-	<li class="wp-digi-list-item wp-digi-risk-item" data-risk-id="<?php echo $risk->id; ?>" >
-		<?php echo do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
-		<span class="wp-digi-risk-list-column-cotation" ><div class="wp-digi-risk-level-<?php echo $risk->evaluation->scale; ?>" ><?php echo $risk->evaluation->risk_level['equivalence']; ?></div></span>
-		<span class="wp-digi-risk-list-column-reference" ><?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation->unique_identifier; ?></span>
-		<span class="wp-digi-risk-list-column-danger"><?php echo wp_get_attachment_image( $risk->danger->thumbnail_id, 'thumbnail', false, array( 'title' => $risk->danger->name ) ); ?></span>
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<tr class="risk-row">
+	<td class="padding">
+		<!-- La popup pour les actions correctives -->
+		<?php View_Util::exec( 'corrective_task', 'popup', array() ); ?>
+
+		<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
+	</td>
+	<td>
+		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?>
+	</td>
+	<td class="w50">
+		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
+	</td>
+	<td class="w50">
+		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
+	</td>
+	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="view"]' ); ?>
+	</td>
+	<td>
+		<div class="action grid-layout w3">
+			<div 	class="open-popup-ajax button light w50 task"
+						data-parent="risk-row"
+						data-target="corrective-task"
+						data-action="open_task"
+						data-id="<?php echo esc_attr( $risk->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
 
-		<span class="wp-digi-action wp-digi-risk-action" >
-			<a href="<?php echo admin_url( 'admin-ajax.php?action=open_task&id=' . $risk->id ); ?>" class="thickbox dashicons dashicons-schedule" title="Gestion des tâches correctives pour le risque : <?php echo $risk->unique_identifier; ?> - <?php echo $risk->evaluation->unique_identifier; ?>" ></a>
+			<!-- Editer un risque -->
+			<div 	class="button light w50 edit action-attribute"
+						data-id="<?php echo esc_attr( $risk->id ); ?>"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
+						data-loader="risk"
+						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
 
-			<a href="#"
-				data-id="<?php echo $risk->id; ?>"
-				data-nonce="<?php echo wp_create_nonce( 'ajax_load_risk_' . $risk->id ); ?>"
-				data-action="load_risk"
-				class="wp-digi-action wp-digi-action-load action-attribute dashicons dashicons-edit" ></a>
-
-			<a href="#"
-				data-id="<?php echo $risk->id; ?>"
-				data-nonce="<?php echo wp_create_nonce( 'ajax_delete_risk_' . $risk->id ); ?>"
-				data-action="delete_risk"
-				class="wp-digi-action wp-digi-action-delete dashicons dashicons-no-alt" ></a>
-		</span>
-	</li>
-<?php endif ; ?>
+			<div 	class="button light w50 delete action-delete"
+						data-id="<?php echo esc_attr( $risk->id ); ?>"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
+						data-action="delete_risk"><i class="icon fa fa-times"></i></div>
+		</div>
+	</td>
+</tr>

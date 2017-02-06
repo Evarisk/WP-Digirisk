@@ -16,7 +16,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 
-<div class="popup" style="display: none;">
+<div class="popup">
 	<div class="container wp-digi-bloc-loader">
 		<div class="header">
 			<h2 class="title">Historique des modèles</h2>

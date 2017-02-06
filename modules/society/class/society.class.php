@@ -1,69 +1,84 @@
-<?php namespace digi;
-
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+<?php
 /**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
+ * Classe gérant les sociétés (groupement et unité de travail)
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package society
+ * @subpackage class
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 /**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * Classe gérant les sociétés (groupement et unité de travail)
  */
 class Society_Class extends Singleton_Util {
 
 	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
+	 * Constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	protected function construct() {}
 
 	/**
-	* Récupères l'objet par rapport à son post type
-	*
-	* @param int $id L'ID de l'objet
-	* @param bool $cropped (Optional) Récupères toutes les données si false
-	*
-	* @return object L'objet
-	*/
-	public function show_by_type( $id, $child_wanted = array() ) {
+	 * Récupères l'objet par rapport à son post type
+	 *
+	 * @param integer $id L'ID de l'objet.
+	 *
+	 * @return boolean|object L'objet
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
+	public function show_by_type( $id ) {
 		$id = (int) $id;
 
-		if ( !is_int( (int)$id ) ) {
+		if ( ! is_int( (int) $id ) ) {
 			return false;
 		}
 
-    $post_type = get_post_type( $id );
+		$post_type = get_post_type( $id );
 
-		if ( !$post_type ) {
+		if ( ! $post_type ) {
 			return false;
 		}
 
-    $model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
-    $establishment = $model_name::g()->get( array( 'include' => array( $id ) ), $child_wanted );
+		$model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+		$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
 
-    return $establishment[0];
-  }
+		if ( empty( $establishment[0] ) ) {
+			return false;
+		}
+
+		return $establishment[0];
+	}
 
 	/**
-	* Met à jour par rapport au post type de l'objet
-	*
-	* @param object $establishment L'objet à mêttre à jour
-	*
-	* @return object L'objet mis à jour
-	*/
+	 * Met à jour par rapport au post type de l'objet
+	 *
+	 * @param object $establishment L'objet à mêttre à jour.
+	 *
+	 * @return object L'objet mis à jour
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
 	public function update_by_type( $establishment ) {
-		if ( !is_object( $establishment ) && !is_array( $establishment ) ) {
+		if ( ! is_object( $establishment ) && ! is_array( $establishment ) ) {
 			return false;
 		}
 
 		$type = ( is_object( $establishment ) && isset( $establishment->type ) ) ? $establishment->type : '';
 
 		if ( empty( $type ) ) {
-			$type = ( is_array( $establishment ) && !empty( $establishment['type'] ) ) ? $establishment['type'] : '';
+			$type = ( is_array( $establishment ) && ! empty( $establishment['type'] ) ) ? $establishment['type'] : '';
 		}
 
 		if ( empty( $type ) ) {
@@ -72,7 +87,7 @@ class Society_Class extends Singleton_Util {
 
 		$model_name = '\digi\\' . str_replace( 'digi-', '', $type ) . '_class';
 
-		if ( $model_name === '\digi\_class' ) {
+		if ( '\digi\_class' === $model_name ) {
 			return false;
 		}
 
@@ -86,7 +101,8 @@ class Society_Class extends Singleton_Util {
 	 * @param  mixed $society Les données de la société.
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
-	 * @todo Déplacer cette méthode vers Group_Class
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function get_address( $society ) {
 		$args_address = array( 'schema' => true );
@@ -101,4 +117,4 @@ class Society_Class extends Singleton_Util {
 	}
 }
 
-society_class::g();
+Society_Class::g();

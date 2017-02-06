@@ -3,13 +3,14 @@
  * Gères la génération de la fiche de groupement
  *
  * @package Evarisk\Plugin
+ *
+ * @since 0.1
+ * @version 6.2.5.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
  * Gères la génération de la fiche de groupement
@@ -91,6 +92,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * Appelle le constructeur parent pour initialiser le post type
 	 *
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	protected function construct() {
 		parent::construct();
@@ -102,6 +106,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array( 'schema' => true ), array() );
@@ -114,6 +121,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
@@ -126,6 +136,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @param  int $society_id L'ID de la société.
 	 *
 	 * @return bool
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function generate( $society_id ) {
 		$society = group_class::g()->get( array( 'post__in' => array( $society_id ) ) );
@@ -143,7 +156,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 			'nom'						=> $society->title,
 			'description'		=> $society->content,
 			'adresse'				=> $society_infos['adresse'],
-			'telephone'			=> max( $society->contact['phone'] ),
+			'telephone'			=> ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
 			'codePostal'		=> $society_infos['codePostal'],
 			'ville'					=> $society_infos['ville'],
 		);
@@ -165,11 +178,11 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	/**
 	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
 	 *
-	 * @since 6.2.1.2
-	 * @version 6.2.1.2
-	 *
 	 * @param Group_Model $society L'objet groupement.
 	 * @return array
+	 *
+	 * @since 6.2.1.2
+	 * @version 6.2.1.2
 	 */
 	public function get_infos( $society ) {
 		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
@@ -190,6 +203,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return string|false|array
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_picture( $society ) {
 		$picture = __( 'No picture defined', 'digirisk' );
@@ -203,7 +219,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 					'type'		=> 'picture',
 					'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 					'option'	=> array(
-						'size'	=> 8,
+						'size' => 2,
 					),
 				);
 			}
@@ -218,6 +234,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array La liste des utilisateurs affectés et désaffectés à la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_users( $society ) {
 		$users = array(
@@ -248,6 +267,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
 		$evaluators = array( 'utilisateursPresents' => array( 'type' => 'segment', 'value' => array() ) );
@@ -287,6 +309,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array Les risques dans la société
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
 	 */
 	public function set_risks( $society ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
@@ -320,9 +345,9 @@ class Fiche_De_Groupement_Class extends Post_Class {
 		krsort( $risk_list_to_order );
 
 		if ( ! empty( $risk_list_to_order ) ) {
-			$result_treshold = scale_util::get_scale( 'score' );
+			$result_treshold = Scale_Util::get_scale( 'score' );
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = ! empty( evaluation_method_class::g()->list_scale[ $risk_level ] ) ? evaluation_method_class::g()->list_scale[ $risk_level ] : '';
+				$final_level = ! empty( Evaluation_Method_Class::g()->list_scale[ $risk_level ] ) ? Evaluation_Method_Class::g()->list_scale[ $risk_level ] : '';
 				$risk_details[ 'risq' . $final_level ]['value'] = $risk_for_export;
 			}
 		}

@@ -1,15 +1,20 @@
-<?php namespace digi;
+<?php
 /**
-* Call the shortcode by her identity
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package establishment
-* @subpackage view
-*/
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+ * Affiches le contenu principale
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package tab
+ * @subpackage view
+ */
 
-<div class="wp-digi-content wp-digi-bloc-loader">
-  <?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element_id . '" ]' ); ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+<div class="main-content">
+	<h1><?php echo esc_html( $title ); ?></h1>
+	<?php echo do_shortcode( '[' . $tab_to_display . ' post_id="' . $element_id . '" ]' ); ?>
 </div>

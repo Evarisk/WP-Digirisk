@@ -3,10 +3,11 @@
  * Les préconisations
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
+ * @since 6.2.1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
  * @package recommendation
- * @subpackage shortcode
+ * @subpackage class
  */
 
 namespace digi;
@@ -105,6 +106,9 @@ class Recommendation_Class extends Post_Class {
 	 *
 	 * @param  integer $society_id L'ID de la société.
 	 * @return void
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
 	 */
 	public function display( $society_id ) {
 		$recommendation_schema = $this->get( array( 'schema' => true ) );
@@ -119,6 +123,9 @@ class Recommendation_Class extends Post_Class {
 	 * Transfères les préconisations
 	 *
 	 * @return bool
+	 *
+	 * @since 6.2.1.0
+	 * @version 6.2.1.0
 	 */
 	public function transfert() {
 		// Récupères toutes les unités de travail avec leurs recommendations.

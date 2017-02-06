@@ -1,15 +1,12 @@
 {
 	"name": "Tab",
 	"slug": "tab",
-	"version": "0.2.0.0",
+	"version": "6.2.4.0",
 	"description": "Le module gérant les onglets",
 	"path": "modules/tab/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"filter": {
-		},
-		"action": {
-		}
+		"shortcode": {},
+		"filter": {},
+		"action": {}
 	}
 }

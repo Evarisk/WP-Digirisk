@@ -4,52 +4,64 @@ window.digirisk.user.init = function() {
 	window.digirisk.user.event();
 };
 
+/**
+ * Initialise l'évènement relatif à la pagination.
+ *
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
 window.digirisk.user.event = function() {
-	jQuery( document ).on ('click', '.wp-form-user-to-assign input[type="submit"]', window.digirisk.user.add );
-	jQuery( document ).on ('click', '.wp-digi-list-affected-user .wp-digi-action-user-delete', window.digirisk.user.delete );
-	jQuery( document ).on( 'click', '.wp-form-user-to-assign .wp-digi-pagination a', window.digirisk.user.pagination );
+	jQuery( document ).on( 'click', '.form-edit-user-assign .wp-digi-pagination a', window.digirisk.user.pagination );
 };
 
-
-window.digirisk.user.add = function( event ) {
-	event.preventDefault();
-
-	jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
-
-	jQuery( this ).closest( 'form' ).ajaxSubmit( function( response ) {
-		window.digirisk.user.render( response );
-	} );
+/**
+ * Le callback en cas de réussite à la requête Ajax "edit_user_assign".
+ * Appel la méthode render de l'objet user avec la réponse de la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.user.editUserAssignSuccess = function( triggeredElement, response ) {
+	window.digirisk.user.render( response );
 };
 
-window.digirisk.user.delete = function( event ) {
-    event.preventDefault();
+/**
+ * Le callback en cas de réussite à la requête Ajax "detach_user".
+ * Appel la méthode render de l'objet user avec la réponse de la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.digirisk.user.detachUserSuccess = function( triggeredElement, response ) {
+	window.digirisk.user.render( response );
+};
 
-    if( window.confirm( window.digi_confirm_delete ) ) {
-      jQuery( '.wp-digi-content' ).addClass( 'wp-digi-bloc-loading' );
-
-      var data = {
-        action: 'detach_user',
-        id: jQuery( this ).data( 'id' ),
-        user_id: jQuery( this ).data( 'user-id' ),
-        affectation_id: jQuery( this ).data( 'affectation-data-id' ),
-      };
-
-			jQuery.post( window.ajaxurl, data, function( response ) {
-				window.digirisk.user.render( response );
-			} );
-    }
-  };
-
+/**
+ * Remplaces le contenu de la section ".users" avec la réponse de la requête Ajax de editUserAssignSuccess et detachUserSuccess.
+ *
+ * @param  {Object} response Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.5.0
+ */
 window.digirisk.user.render = function( response ) {
-	jQuery( '.wp-digi-content' ).removeClass( 'wp-digi-bloc-loading' );
-	jQuery( '.wp-digi-content' ).html( response.data.template );
+	jQuery( 'section.users' ).replaceWith( response.data.template );
 	window.digirisk.render.call_render_changed();
 };
 
 window.digirisk.user.pagination = function( event ) {
 	event.preventDefault();
-
-	jQuery( this ).closest( '.wp-digi-bloc-loader' ).addClass( 'wp-digi-bloc-loading' );
 
 	var href = jQuery( this ).attr( 'href' ).split( '&' );
 	var next_page = href[1].replace('current_page=', '');
@@ -61,7 +73,9 @@ window.digirisk.user.pagination = function( event ) {
 		next_page: next_page
 	};
 
-	jQuery( '.wp-form-user-to-assign' ).load( window.ajaxurl, data, function() {
-		jQuery( '.wp-form-user-to-assign' ).removeClass( 'wp-digi-bloc-loading' );
+	jQuery( '.form-edit-user-assign' ).addClass( 'loading' );
+
+	jQuery.post( window.ajaxurl, data, function( view ) {
+		jQuery( '.form-edit-user-assign' ).replaceWith( view );
 	} );
 };

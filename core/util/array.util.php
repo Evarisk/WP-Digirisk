@@ -2,7 +2,12 @@
 /**
  * Gestion des tableaux
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 1.0
+ * @version 6.2.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package Digirisk
+ * @subpackage util
  */
 
 namespace digi;
@@ -17,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
  * @version 1.1.0.0
  */
-class Array_util extends Singleton_util {
+class Array_Util extends Singleton_util {
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
 	 *
@@ -53,5 +58,24 @@ class Array_util extends Singleton_util {
 		}
 
 		return $count;
+	}
+
+	/**
+	 * Forces à convertir les valeurs d'un tableau en integer.
+	 *
+	 * @param  array $array Le tableau à convertir.
+	 * @return array        Le tableau converti.
+	 *
+	 * @since 6.2.4.0
+	 * @version 6.2.4.0
+	 */
+	public function to_int( $array ) {
+		if ( ! empty( $array ) ) {
+			foreach ( $array as &$element ) {
+				$element = (int) $element;
+			}
+		}
+
+		return $array;
 	}
 }

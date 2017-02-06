@@ -1,12 +1,23 @@
 <?php
-namespace digi;
-if ( !defined( 'ABSPATH' ) ) exit;
-?>
+/**
+ * Affichage d'un commentaire
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.1.0
+ * @version 6.2.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package comment
+ * @subpackage view
+ */
 
-<li>
-	<?php
-	$userdata = get_userdata( $comment->author_id );
-	echo !empty( $userdata->display_name ) ? $userdata->display_name : 'Indéfini'; ?>
-	<strong><?php echo $comment->date; ?></strong> :
-	<?php echo $comment->content; ?>
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+$userdata = get_userdata( $comment->author_id ); ?>
+
+<li class="comment">
+	<span class="user"><?php echo ! empty( $userdata->display_name ) ? $userdata->display_name : 'Indéfini'; ?>, </span>
+	<span class="date"><?php echo $comment->date; ?> : </span>
+	<span class="content"><?php echo $comment->content; ?></span>
 </li>

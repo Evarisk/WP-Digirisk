@@ -1,27 +1,53 @@
-<?php namespace digi;
+<?php
 /**
-* @TODO : A Détailler
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package risk
-* @subpackage filter
-*/
+ * Les filtres relatives aux utilisateurs
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1
+ * @version 6.2.5.0
+ * @copyright 2015-2017 Evarisk
+ * @package user
+ * @subpackage filter
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class user_filter {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Les filtres relatives aux utilisateurs
+ */
+class User_Filter {
+
+	/**
+	 * Le constructeur ajoute le filtre digi_tab
+	 *
+	 * @since 0.1
+	 * @version 6.2.4.0
+	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ) );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
 	}
 
-	public function callback_tab( $list_tab ) {
-		$list_tab['digi-workunit']['user'] = array(
-			'text' => __( 'User', 'digirisk' ),
-		);
+	/**
+	 * Ajoutes l'onglet "Utilisateurs" dans les unités de travail.
+	 *
+	 * @param  array   $list_tab  La liste des onglets.
+	 * @param  integer $id        L'ID de la société.
+	 * @return array              La liste des onglets et ceux ajoutés par cette méthode.
+	 *
+	 * @since 0.1
+	 * @version 6.2.5.0
+	 */
+	public function callback_tab( $list_tab, $id ) {
+		// $list_tab['digi-workunit']['user'] = array(
+		// 	'type' => 'text',
+		// 	'text' => __( 'Utilisateurs', 'digirisk' ),
+		// 	'title' => __( 'Les utilisateurs de', 'digirisk' ),
+		// );
+
 		return $list_tab;
 	}
 }
 
-new user_filter();
+new User_Filter();
