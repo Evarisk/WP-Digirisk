@@ -41,7 +41,16 @@ class Gallery_Class extends Singleton_Util {
 		}
 
 		$element_id = $param['element_id'];
-		$element = society_class::g()->show_by_type( $element_id, array( false ) );
+		$namespace = ! empty( $param['namespace'] ) ? sanitize_text_field( $param['namespace'] ) : 'digi';
+
+		$post_type = get_post_type( $element_id );
+
+		if ( ! $post_type ) {
+			return false;
+		}
+		$model_name = '\\' . $namespace . '\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+		$establishment = $model_name::g()->get( array( 'include' => array( $element_id ) ) );
+		$element = $establishment[0];
 
 		$title = ! empty( $param['title'] ) ? sanitize_text_field( $param['title'] ) : '';
 		$action = ! empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
@@ -49,7 +58,7 @@ class Gallery_Class extends Singleton_Util {
 		$list_id = ! empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
 
-		View_Util::exec( 'file_management', 'gallery', array( 'param' => $param, 'title' => $title, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
+		View_Util::exec( 'file_management', 'gallery', array( 'param' => $param, 'title' => $title, 'namespace' => $namespace, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
 	}
 }
 

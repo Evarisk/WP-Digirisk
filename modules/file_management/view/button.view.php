@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			data-type="<?php echo esc_attr( $type ); ?>"
 			data-title="<?php echo esc_attr( $title ); ?>"
 			data-object-name="<?php echo esc_attr( $type ); ?>"
+			data-namespace="<?php echo esc_attr( $namespace ); ?>"
 			data-action="<?php echo esc_attr( $action ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>"
 			class="media <?php echo empty( $element->thumbnail_id ) ? esc_attr( 'no-file' ) : ''; ?>">

@@ -28,11 +28,12 @@ window.digirisk.gallery.keyup = function( event ) {
 	}
 };
 
-window.digirisk.gallery.open = function( element, elementId, type ) {
+window.digirisk.gallery.open = function( element, elementId, type, namespace ) {
 	var data = {
 		action: 'load_gallery',
 		id: elementId,
-		type: type
+		type: type,
+		namespace: namespace
 	};
 
 	element.addClass( 'loading' );

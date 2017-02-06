@@ -43,6 +43,7 @@ class File_Management_Shortcode {
 		$type = '';
 		$action = ! empty( $param['action'] ) ? sanitize_text_field( $param['action'] ) : 'eo_associate_file';
 		$title = ! empty( $param['title'] ) ? sanitize_text_field( $param['title'] ) : '';
+		$namespace = ! empty( $param['namespace'] ) ? sanitize_text_field( $param['namespace'] ) : 'digi';
 
 		if ( ! empty( $param['id'] ) ) {
 			$id = (int) $param['id'];
@@ -53,12 +54,19 @@ class File_Management_Shortcode {
 		}
 
 		if ( 0 !== $id ) {
-			$element = society_class::g()->show_by_type( $id );
+			$post_type = get_post_type( $id );
+
+			if ( ! $post_type ) {
+				return false;
+			}
+			$model_name = '\\' . $namespace . '\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+			$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
+			$element = $establishment[0];
 		} else {
 			$element = null;
 		}
 
-		View_Util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'title' => $title, 'type' => $type, 'action' => $action, 'element' => $element ) );
+		View_Util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'title' => $title, 'type' => $type, 'namespace' => $namespace, 'action' => $action, 'element' => $element ) );
 	}
 
 	/**

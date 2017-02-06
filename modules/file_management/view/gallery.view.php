@@ -51,6 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-action="<?php echo esc_attr( $action ); ?>"
 					data-id="<?php echo esc_attr( $element_id ); ?>"
 					data-object-name="<?php echo $param['object_name']; ?>"
+					data-namespace="<?php echo $param['namespace']; ?>"
 					class="media" ><i></i><?php _e( 'Add a new picture', 'digirisk' ); ?></a>
 		</li>
 		<li><a href="#"
@@ -59,6 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						data-thumbnail-id="<?php echo esc_attr( $thumbnail_id ); ?>"
 						data-element-id="<?php echo esc_attr( $element_id ); ?>"
 						data-object-name="<?php echo esc_attr( $param['object_name'] ); ?>"
+						data-namespace="<?php echo $param['namespace']; ?>"
 						class="edit-thumbnail-id action-attribute" ><i></i><?php esc_html_e( 'Supprimer', 'digirisk' ); ?></a></li>
 	</ul>
 

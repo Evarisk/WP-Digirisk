@@ -42,6 +42,7 @@ class Gallery_Action {
 	public function callback_load_gallery() {
 		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$type = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+		$namespace = ! empty( $_POST['namespace'] ) ? sanitize_text_field( $_POST['namespace'] ) : '';
 
 		if ( 0 === $id ) {
 			wp_send_json_error();
@@ -51,6 +52,7 @@ class Gallery_Action {
 			'element_id' => $id,
 			'title' => 'title',
 			'object_name' => $type,
+			'namespace' => $namespace
 		);
 
 		ob_start();
@@ -101,6 +103,7 @@ class Gallery_Action {
 		$thumbnail_id = ! empty( $_POST['thumbnail_id'] ) ? (int) $_POST['thumbnail_id'] : 0;
 		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$object_name = ! empty( $_POST['object_name'] ) ? sanitize_text_field( $_POST['object_name'] ) : '';
+		$namespace = ! empty( $_POST['namespace'] ) ? sanitize_text_field( $_POST['namespace'] ) : '';
 		$type = str_replace( 'digi-', '', $object_name );
 		$type_class = $type . '_class';
 
@@ -108,11 +111,11 @@ class Gallery_Action {
 			wp_send_json_error();
 		}
 
-		if ( ! File_Management_Class::g()->dessociate_file( $thumbnail_id, $element_id, $type_class ) ) {
+		if ( ! File_Management_Class::g()->dessociate_file( $thumbnail_id, $element_id, $type_class, $namespace ) ) {
 			wp_send_json_error();
 		}
 
-		$model_name = '\digi\\' . $type_class;
+		$model_name = '\\' . $namespace . '\\' . $type_class;
 		$element = $model_name::g()->get( array( 'id' => $element_id ) );
 
 		$close_popup = ( 0 === $element[0]->thumbnail_id ) ? true : false;
