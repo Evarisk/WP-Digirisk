@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 					<input type="text" name="groupment[title]" />
 					<label>
 						<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
-						<span class="required">*</span>
+						<span class="required tooltip red" aria-label="Le nom de votre société est obligatoire.">*</span>
 					</label>
 					<span class="bar"></span>
 				</div>
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 				</div>
 			</div>
 
-			<div class="float right submit-form button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
+			<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 		</form>
 	</div>
 

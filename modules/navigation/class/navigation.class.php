@@ -33,10 +33,10 @@ class Navigation_Class extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function display( $groupment_id ) {
-		view_util::exec( 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
+		View_Util::exec( 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
 	}
 
 	/**
@@ -47,13 +47,13 @@ class Navigation_Class extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.5.0
 	 */
 	public function display_toggle( $groupment_id = 0 ) {
-		$groupment = group_class::g()->get( array( 'post__in' => array( $groupment_id ) ) );
+		$groupment = Group_Class::g()->get( array( 'post__in' => array( $groupment_id ) ) );
 		$groupment = $groupment[0];
 
-		view_util::exec( 'navigation', 'toggle/button', array( 'groupment' => $groupment ) );
+		View_Util::exec( 'navigation', 'toggle/button', array( 'groupment' => $groupment ) );
 	}
 
 	/**

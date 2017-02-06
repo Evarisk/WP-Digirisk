@@ -221,7 +221,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 					'type'		=> 'picture',
 					'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 					'option'	=> array(
-						'size' => 4,
+						'size' => 2,
 					),
 				);
 			}

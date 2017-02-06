@@ -29,6 +29,26 @@ window.digirisk.installer.key_up_domain_mail = function( event ) {
 };
 
 /**
+ * Vérifie que le nom de la société ne soit pas vide.
+ *
+ * @param  {HTMLDivElement} element Le bouton déclenchant la création de la société
+ * @return {void}
+ *
+ * @since 6.2.5.0
+ * @version 6.2.5.0
+ */
+window.digirisk.installer.beforeCreateSociety = function( element ) {
+	if ( '' === element.closest( 'form' ).find( 'input[name="groupment[title]"]' ).val() ) {
+		element.closest( 'form' ).find( 'span.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	element.closest( 'form' ).find( 'span.tooltip.active' ).removeClass( 'active' );
+
+	return true;
+};
+
+/**
  * Le callback en cas de réussite à la requête Ajax "save_society".
  * Ferme la div "society". Changes l'étape de "Votre société" en "Composants".
  * Ouvre la div "wpdigi-components".
