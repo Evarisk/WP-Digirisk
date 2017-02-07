@@ -101,28 +101,39 @@ class Evaluation_Method_Shortcode {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @version 6.2.6.0
 	 */
 	public function callback_evaluation_method_evarisk( $param ) {
-		$term_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+		$term_evarisk = get_term_by( 'slug', 'evarisk', Evaluation_Method_Class::g()->get_taxonomy() );
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$risk = array();
 		$list_evaluation_method_variable = array();
 
 		if ( ! empty( $term_evarisk ) ) {
-			$evarisk_evaluation_method = evaluation_method_class::g()->get( array( 'id' => $term_evarisk->term_id ) );
+			$evarisk_evaluation_method = Evaluation_Method_Class::g()->get( array(
+				'id' => $term_evarisk->term_id,
+			) );
+
 			$evarisk_evaluation_method = $evarisk_evaluation_method[0];
 
-			$list_evaluation_method_variable = evaluation_method_variable_class::g()->get_evaluation_method_variable( $evarisk_evaluation_method->formula );
+			$list_evaluation_method_variable = Evaluation_Method_Variable_Class::g()->get_evaluation_method_variable( $evarisk_evaluation_method->formula );
 		}
 
 		if ( ! empty( $risk_id ) ) {
-			$risk = risk_class::g()->get( array( 'id' => $risk_id ), array( '\digi\evaluation_method', '\digi\evaluation' ) );
+			$risk = Risk_Class::g()->get( array(
+				'id' => $risk_id,
+			) );
+
 			$risk = ! empty( $risk[0] ) ? $risk[0] : array();
 		}
 
-
-		view_util::exec( 'evaluation_method', 'popup/popup', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) );
+		View_Util::exec( 'evaluation_method', 'popup/popup', array(
+			'term_evarisk' => $term_evarisk,
+			'risk_id' => $risk_id,
+			'risk' => $risk,
+			'list_evaluation_method_variable' => $list_evaluation_method_variable,
+			'evarisk_evaluation_method' => $evarisk_evaluation_method,
+		) );
 	}
 }
 
