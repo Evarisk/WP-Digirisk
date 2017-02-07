@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td>
 		<div class="action">
 			<?php if ( empty( $user->id ) ) : ?>
-				<div class="button w50 blue add action-input" data-parent="user-row" data-loader="table">
+				<div class="button w50 grey add action-input" data-parent="user-row" data-loader="table">
 					<i class="icon fa fa-plus"></i>
 				</div>
 			<?php	else : ?>

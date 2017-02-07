@@ -51,6 +51,9 @@ window.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			element.closest( '.popup.popup-evaluation' ).removeClass( 'active' );
 
+			// Rend le bouton "active".
+			element.closest( 'tr' ).find( '.action .button.grey' ).removeClass( 'grey' ).addClass( 'blue' );
+
 			element.closest( '.risk-row' ).find( 'input.input-hidden-method-id' ).val( element.closest( '.popup.popup-evaluation' ).find( 'input.digi-method-evaluation-id' ).val() );
 			element.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val( response.data.scale );
 

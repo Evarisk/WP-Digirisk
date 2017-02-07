@@ -34,6 +34,10 @@ window.digirisk.action.execInput = function( event ) {
 		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
 	}
 
+	if ( element.hasClass( '.grey' ) ) {
+		doAction = false;
+	}
+
 	if ( doAction ) {
 		loaderElement.addClass( 'loading' );
 
@@ -69,6 +73,10 @@ window.digirisk.action.execAttribute = function( event ) {
 		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
 	}
 
+	if ( element.hasClass( '.grey' ) ) {
+		doAction = false;
+	}
+
 	if ( doAction ) {
 		if ( jQuery( this ).data( 'confirm' ) ) {
 			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
@@ -99,6 +107,10 @@ window.digirisk.action.execDelete = function( event ) {
 	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
 		doAction = false;
 		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
+	}
+
+	if ( element.hasClass( '.grey' ) ) {
+		doAction = false;
 	}
 
 	if ( doAction ) {

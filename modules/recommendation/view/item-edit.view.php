@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"
 							data-loader="table"
-							class="button w50 blue add action-input"><i class="icon fa fa-plus"></i></div>
+							class="button w50 grey add action-input"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>
