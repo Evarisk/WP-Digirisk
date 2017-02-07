@@ -32,7 +32,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					</tr>
 				</thead>
 				<tbody>
-					<?php for ( $i = 0; $i < count( $list_evaluation_method_variable ); $i++ ) :
+					<?php
+					$number_variables = count( $list_evaluation_method_variable );
+					for ( $i = 0; $i < $number_variables; $i++ ) :
 						View_Util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) );
 					endfor; ?>
 				</tbody>
