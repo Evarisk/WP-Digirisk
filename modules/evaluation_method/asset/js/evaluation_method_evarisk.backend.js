@@ -22,6 +22,28 @@ window.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
 		element.addClass( 'active' );
 		jQuery( '.popup.popup-evaluation.active input.variable-' + element.data( 'variable-id' ) ).val( element.data( 'seuil-id' ) );
 	}
+
+	var listVariable = {};
+	var length = 0;
+
+	var data = {
+		action: 'get_scale',
+		_wpnonce: element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .button.green' ).data( 'nonce' ),
+		list_variable: listVariable
+	};
+
+	element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
+		listVariable[jQuery( f ).attr( 'variable-id' )] = jQuery( f ).val();
+		if ( '' !== jQuery( f ).val() ) {
+			length++;
+		}
+	} );
+
+	if ( 5 === length ) {
+		jQuery.post( window.ajaxurl, data, function( response ) {
+			element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .preview span' ).text( response.data.equivalence );
+		} );
+	}
 };
 
 window.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {

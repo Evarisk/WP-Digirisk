@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package evaluation_method
  * @subpackage view
@@ -37,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					endfor; ?>
 				</tbody>
 			</table>
+			<div class="preview">Prévisualisation: <span>0</span></div>
 			<div data-nonce="<?php echo esc_attr( wp_create_nonce( 'get_scale' ) ); ?>" class="button green margin uppercase strong float right"><span>Enregistrer la cotation</span></div>
 		</div>
 	</div>
