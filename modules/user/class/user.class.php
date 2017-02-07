@@ -59,7 +59,7 @@ class User_Digi_Class extends User_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier', '\digi\force_avatar_color' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

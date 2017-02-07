@@ -10,12 +10,7 @@ class user_model extends constructor_data_class {
 	 * @var array Une liste de couleurs prédéfinies pour les avatars / A pre-defined color for user avatar
 	 */
 	public $avatar_color = array(
-		'e9ad4f',
-		'50a1ed',
-		'e05353',
-		'e454a2',
-		'47e58e',
-		'734fe9',
+		'50a1ed'
 	);
 
 	/**

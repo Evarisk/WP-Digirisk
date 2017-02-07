@@ -128,3 +128,14 @@ function build_avatar_color( $user ) {
 
 	return $user;
 }
+
+/**
+ * Force la couleur d'un tuilisateur
+ *
+ * @param  User_Class $user Les données de l'utilisateur.
+ * @return User_Class       Les données de l'utilisateur avec la couleur forcé.
+ */
+function force_avatar_color( $user ) {
+	$user->avatar_color = '50a1ed';
+	return $user;
+}
