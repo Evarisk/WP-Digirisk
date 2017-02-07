@@ -6,7 +6,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package evaluation_method
  * @subpackage shortcode
@@ -38,7 +38,7 @@ class Evaluation_Method_Shortcode {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @version 6.2.6.0
 	 */
 	public function callback_digi_evaluation_method( $param ) {
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
