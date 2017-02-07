@@ -14,6 +14,8 @@ window.digirisk.risk_page.init = function() {
 window.digirisk.risk_page.event = function() {
 	jQuery( document ).on( 'click', '.risk-page .save-all:not(.grey)', window.digirisk.risk_page.saveRisks );
 	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), tr .toggle, tr textarea, tr .popup, tr .action', window.digirisk.risk_page.checkTheCheckbox );
+
+	jQuery( document ).on( 'click', '.risk-page .wp-digi-pagination a', window.digirisk.risk_page.pagination );
 };
 
 window.digirisk.risk_page.saveRisks = function( event ) {
@@ -43,4 +45,32 @@ window.digirisk.risk_page.checkTheCheckbox = function( event ) {
 window.digirisk.risk_page.savedRiskSuccess = function( element, response ) {
 	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
 	window.digirisk.risk_page.saveRisks( undefined );
+};
+
+
+/**
+ * Gestion de la pagination des risques dans la page "Risques".
+ *
+ * @param  {ClickEvent} event [description]
+ * @return {void}
+ *
+ * @since 6.2.6.0
+ * @version 6.2.6.0
+ */
+window.digirisk.risk_page.pagination = function( event ) {
+	var href = jQuery( this ).attr( 'href' ).split( '&' );
+	var nextPage = href[1].replace( 'current_page=', '' );
+
+	jQuery( '.risk-page' ).addClass( 'loading' );
+
+	var data = {
+		action: 'paginate_risk',
+		next_page: nextPage
+	};
+
+	event.preventDefault();
+
+	jQuery.post( window.ajaxurl, data, function( view ) {
+		jQuery( '.risk-page' ).replaceWith( view );
+	} );
 };

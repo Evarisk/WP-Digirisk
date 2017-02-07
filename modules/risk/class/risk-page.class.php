@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.5.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage class
@@ -19,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
 class Risk_Page_Class extends Singleton_Util {
+	/**
+	 * La limite des risques a afficher par page
+	 *
+	 * @var integer
+	 */
+	protected $limit_risk = 10;
 
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
@@ -36,10 +42,28 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.4.0
+	 * @version 6.2.6.0
 	 */
 	public function display() {
-		view_util::exec( 'risk', 'page/main' );
+		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+
+		$args_where = array(
+			'post_status' => 'publish',
+			'offset' => ( $current_page - 1 ) * $this->limit_risk,
+			'posts_per_page' => $this->limit_risk,
+		);
+
+		$risk_list = Risk_Class::g()->get( $args_where );
+
+		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
+		unset( $args_where['offset'] );
+		unset( $args_where['posts_per_page'] );
+		$args_where['fields'] = array( 'ID' );
+		$count_risk = count( Risk_Class::g()->get( $args_where ) );
+
+		$number_page = ceil( $count_risk / $this->limit_risk );
+
+		view_util::exec( 'risk', 'page/main', array( 'current_page' => $current_page, 'number_page' => $number_page ) );
 	}
 
 	/**
@@ -49,10 +73,18 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.4.0
+	 * @version 6.2.6.0
 	 */
 	public function display_risk_list() {
-		$risk_list = Risk_Class::g()->get( array( 'post_status' => 'publish' ) );
+		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+
+		$args_where = array(
+			'post_status' => 'publish',
+			'offset' => ( $current_page - 1 ) * $this->limit_risk,
+			'posts_per_page' => $this->limit_risk,
+		);
+
+		$risk_list = Risk_Class::g()->get( $args_where );
 
 		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
 		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'asc';

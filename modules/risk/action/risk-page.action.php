@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -28,6 +28,8 @@ class Risk_Page_Action {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'can_update', array( $this, 'callback_can_update' ), 10, 0 );
+
+		add_action( 'wp_ajax_paginate_risk', array( $this, 'callback_paginate_risk' ) );
 	}
 
 	/**
@@ -57,6 +59,12 @@ class Risk_Page_Action {
 		if ( ! $can_update ) {
 			wp_send_json_error();
 		}
+	}
+
+	public function callback_paginate_risk() {
+		ob_start();
+		Risk_Page_Class::g()->display();
+		wp_die( ob_get_clean() );
 	}
 }
 
