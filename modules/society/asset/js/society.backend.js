@@ -5,12 +5,7 @@ window.digirisk.society.init = function() {
 };
 
 window.digirisk.society.event = function() {
-<<<<<<< HEAD
 	jQuery( document ).on( 'keyup', 'input[name="title"]', window.digirisk.society.keyUpSaveIdentity );
-=======
-	jQuery( document ).on( 'keyup', 'input[name="title"]', window.digirisk.society.display_save_button );
-	jQuery( document ).on( 'change', 'select[name="parent_id"]', window.digirisk.society.display_save_button );
->>>>>>> master
 };
 
 /**
@@ -41,7 +36,6 @@ window.digirisk.society.loadedSocietySuccess = function( element, response ) {
 window.digirisk.society.keyUpSaveIdentity = function( event ) {
 	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).addClass( 'active' );
 
-<<<<<<< HEAD
 	if ( 13 === event.keyCode ) {
 		jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).click();
 	}
@@ -95,20 +89,6 @@ window.digirisk.society.savedSocietyConfiguration = function( triggeredElement, 
 		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).text( response.data.society.title );
 		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).attr( 'title', response.data.society.title );
 	}
-=======
-window.digirisk.society.update_society_success = function( element, response ) {
-	jQuery( '.wp-digi-societytree-main-container' ).replaceWith( response.data.template );
-	// jQuery( element ).closest( '.wp-digi-global-sheet-header' ).find( '.wp-digi-global-action-container' ).addClass( 'hidden' );
-	//
-	// if ( 'digi-group' === response.data.society.type ) {
-	// 	jQuery( '.wp-digi-societytree-left-container span.title' ).text( ' - ' + response.data.society.title );
-	// 	jQuery( '.wp-digi-societytree-left-container li[data-groupment-id="' + response.data.society.id + '"] span[data-groupment-id="' + response.data.society.id + '"]' ).text( response.data.society.unique_identifier + ' - ' + response.data.society.title );
-	// }
-	// else {
-	// 	jQuery( '.wp-digi-societytree-left-container span[data-workunit-id="' + response.data.society.id + '"]' ).text( response.data.society.unique_identifier + ' - ' + response.data.society.title );
-	// }
-}
->>>>>>> master
 
 	jQuery( '.digirisk-wrap .main-content h1' ).text( 'Configuration de ' + response.data.society.unique_identifier + ' - ' + response.data.society.title );
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
