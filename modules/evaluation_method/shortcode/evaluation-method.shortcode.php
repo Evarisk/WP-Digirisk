@@ -44,8 +44,8 @@ class Evaluation_Method_Shortcode {
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$display = ! empty( $param['display'] ) ? sanitize_text_field( $param['display'] ) : 'edit';
 
-		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', evaluation_method_class::g()->get_taxonomy() );
-		$term_evarisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+		$term_evarisk_simple = get_term_by( 'slug', 'evarisk-simplified', Evaluation_Method_Class::g()->get_taxonomy() );
+		$term_evarisk_complex = get_term_by( 'slug', 'evarisk', Evaluation_Method_Class::g()->get_taxonomy() );
 
 		$scale = 0;
 		$equivalence = 1;
@@ -55,7 +55,10 @@ class Evaluation_Method_Shortcode {
 		$class = '';
 
 		if ( 0 !== $risk_id ) {
-			$risk = Risk_Class::g()->get( array( 'post__in' => array( $risk_id ) ) );
+			$risk = Risk_Class::g()->get( array(
+				'post__in' => array( $risk_id ),
+			) );
+
 			$risk = $risk[0];
 			$digi_method_id = max( $risk->taxonomy['digi-method'] );
 			$scale = ! empty( $risk->evaluation->scale ) ? $risk->evaluation->scale : 0;
@@ -67,7 +70,10 @@ class Evaluation_Method_Shortcode {
 				$class = '';
 			}
 		} else {
-			$risk = Risk_Class::g()->get( array( 'schema' => true ) );
+			$risk = Risk_Class::g()->get( array(
+				'schema' => true,
+			) );
+
 			$risk = $risk[0];
 			$risk->taxonomy['digi-method'][] = $term_evarisk_simple->term_id;
 			$digi_method_id = $term_evarisk_simple->term_id;
