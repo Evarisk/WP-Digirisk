@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					endfor; ?>
 				</tbody>
 			</table>
-			<div class="preview">Prévisualisation: <span>0</span></div>
+			<div class="preview">Prévisualisation: <span><?php echo ! empty( $risk->evaluation ) ? $risk->evaluation->risk_level['equivalence'] : 0; ?></span></div>
 			<div data-nonce="<?php echo esc_attr( wp_create_nonce( 'get_scale' ) ); ?>" class="button green margin uppercase strong float right"><span>Enregistrer la cotation</span></div>
 		</div>
 	</div>

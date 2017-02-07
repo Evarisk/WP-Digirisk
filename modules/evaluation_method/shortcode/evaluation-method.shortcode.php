@@ -121,6 +121,7 @@ class Evaluation_Method_Shortcode {
 			$risk = ! empty( $risk[0] ) ? $risk[0] : array();
 		}
 
+
 		view_util::exec( 'evaluation_method', 'popup/popup', array( 'term_evarisk' => $term_evarisk, 'risk_id' => $risk_id, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'evarisk_evaluation_method' => $evarisk_evaluation_method ) );
 	}
 }
