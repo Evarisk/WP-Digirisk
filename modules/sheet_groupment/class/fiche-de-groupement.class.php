@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.6.0
  */
 
 namespace digi;
@@ -104,16 +104,23 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
-	 * @param  int $element_id L'ID de l'élement.
+	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.6.0
 	 */
 	public function display( $element_id ) {
-		$element = $this->get( array( 'schema' => true ), array() );
+		$element = $this->get( array(
+			'schema' => true,
+		) );
+
 		$element = $element[0];
-		view_util::exec( 'sheet_groupment', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
+
+		View_Util::exec( 'sheet_groupment', 'main', array(
+			'element' => $element,
+			'element_id' => $element_id,
+		) );
 	}
 
 	/**
@@ -287,7 +294,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
 								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
 								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
-								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
+								'dureeEntretien'							=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
 					}
