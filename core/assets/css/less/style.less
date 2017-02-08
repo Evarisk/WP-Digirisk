@@ -1,129 +1,56 @@
-@import url('font-awesome/font-awesome.less');
-@import url('interface.less');
-@import url('table.less');
-@import url('pagination.less');
-@import url('list.less');
-@import url('form.less');
-@import url('evaluation-method.less');
-@import url('installer.less');
-@import url('responsive.less');
-@import url('gallery.less');
-@import url('progress-button.less');
-@import url('media.less');
-@import url('tools.less');
-@import url('admin.less');
-@import url('popup.less');
+/**
+ * Import des fichiers less
+ */
+@import "font-awesome/font-awesome.less";
+@import "reset.less";
+@import "variable.less";
+@import "tools.less";
+@import "animation.less";
+@import "loader.less";
+@import "popup.less";
+@import "search.less";
+@import "button.less";
+@import "structure.less";
+@import "list.less";
+@import "workunit.less";
+@import "tab.less";
+@import "toggle.less";
+@import "pagination.less";
+@import "media.less";
+@import "cotation.less";
+@import "table.less";
+@import "evaluation.less";
+@import "tooltip.less";
+@import "form.less";
+@import "step.less";
+@import "grid.less";
+@import "gallery.less";
+@import "taskmanager.less";
 
-@c1: #3495f0;
-@dark_c1: #1360c8;
-@c2: #272a35;
-@dark_c2: #1c1e26;
-
-@red: #e05353; @yellow: #e9ad4f; @green: #47e58e; @pink: #e454a2; @purple: #734fe9;
+/**
+ * Import des templates de page
+ */
+@import "template-tools.less";
 
 
+/**
+ * Propriétés générales
+ */
+.digirisk-wrap {
 
-/* -------------------------------------
-		FUNCTIONS
-------------------------------------- */
-.cls {
-	&:after {
-		display: table;
-		content: '';
-		clear: both;
+	* {
+		box-sizing: border-box;
 	}
-}
-.transition(@what: all, @time: 0.4s, @transition: cubic-bezier(0.190, 1.000, 0.220, 1.000)) {
-	-webkit-transition: @what @time @transition;
-	-moz-transition:    @what @time @transition;
-	-ms-transition:     @what @time @transition;
-	-o-transition:      @what @time @transition;
-	transition:         @what @time @transition;
-}
-input, input:focus {
-	outline: none;
-	box-shadow: none;
-}
-[class *='gridwrapper'] > * {
-	float: left;
-	padding: 0 5px 0 5px;
-	.cls;
-	box-sizing: border-box;
-}
-/* Padding précis pour que le contenu soit aligné avec le reste */
-[class *='gridwrapper'] > *:first-child {
-	padding: 0 5px 0 0 !important;
-}
-[class *='gridwrapper'] > *:last-child {
-	padding: 0 0 0 5px !important;
-}
-.gridwrapper2 > * {
-	width: 50%;
-}
-.gridwrapper3 > * {
-	width: 33.333%;
-}
-.gridwrapper4 > * {
-	width: 25%;
-}
-.float {
-	float: left;
-	.cls;
-	&.right {
-		float: right;
-	}
-}
-.wp-list-search {
-	display: block;
-	width: 100%;
-	background: rgba(0,0,0,0.2) !important;
-	padding: 10px 16px;
-	i {
-		color: rgba(0,0,0,0.6);
-	}
-	input {
-		width: 90%;
-		border: 0 !important;
-		margin: 0 !important;
-		background: none !important;
-		box-shadow: none;
-		&:focus {
-			box-shadow: none;
-		}
-	}
-	&:hover {
-		cursor: text;
-	}
-}
 
-/* FIX */
-.wp-digi-bloc-loader:before {
-	pointer-events: none;
-}
-
-.span-content-methodology, .span-content-sources, .span-content-notes-importantes {
-	display: block;
-	height: 30px;
-	overflow: hidden;
-	margin: auto;
-	text-align: center;
-	:hover {
-		cursor: pointer;
+	h1 {
+		font-size: 18px;
+		text-transform: uppercase;
+		margin: 6px 0;
 	}
-}
-
-.no-drop {
- opacity: 0.5;
-}
-
-.wp-digi-global-sheet-header {
-	span {
-		input {
-			line-height: 40px;
-		}
+	h2 {
+		font-size: 16px;
+		font-weight: 600;
+		margin: 6px 0 14px 0;
 	}
-}
 
-.text-center {
-	text-align: center;
 }

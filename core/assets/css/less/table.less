@@ -1,478 +1,279 @@
+/**
+ * Table design
+ * .table -> classe principale
+ * .media
+ * .cotation-container
+ * .categorie-container
+ * .comment-container
+ * .action -> Boite contenant les actions sur une ligne
+ * 		.task
+ * 		.edit
+ * 		.delete
+ * .w50 -> cellule de 50px
+ * .w100 -> cellule de 100px
+ * .wm130 -> cellule de 130px minimum
+ * .w150 -> cellule de 150px
+ * .full -> cellule de 100%
+ * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
+ */
+.digirisk-wrap {
 
-/* -------------------------------------
-		TABLE INTERFACE
-------------------------------------- */
-
-.wp-digi-table {
-	width: 100%;
-	margin: 0;
-	display: table;
-	.flex-tmp {
-		display: flex;
-		a {
-			margin: 5px;
-		}
-	}
-	li {
-		margin: 0;
-	}
-	.wp-digi-table-header {
-		background: @c2 !important;
-		color: #fff !important;
-		height: 40px;
-		font-weight: bold;
-		span:first-child {
-			padding-left: 10px;
-		}
-		span:last-child {
-			padding-right: 10px;
-		}
-		.wp-digi-risk-list-column-cotation {
-			text-align: center;
-		}
-	}
-	> * {
-		&:nth-of-type(even) {
-			background: #fff;
-			.wp-digi-action-delete {
-				background: rgba(0,0,0,0.05);
-			}
-		}
-		&:nth-of-type(odd) {
-			background: rgba(0,0,0,0.05);
-			.wp-digi-action-delete {
-				background: rgba(0,0,0,0.05);
-			}
-		}
-	}
-	> * {
-		display: table-row;
-		height: 50px;
-		> span {
-			display: table-cell;
+	.table {
+		width: 100%;
+		border: 1px solid rgba(0,0,0,0.1);
+		td, th, tr {
+			height: 50px;
+			text-align: left;
 			vertical-align: middle;
-			//padding: 0 4px;
+			white-space: nowrap;
 		}
-		> span:last-child {
-			padding: 0;
-		}
-		> span.padded {
-			padding: 0 10px;
-		}
-		.wp-avatar {
-			width: 50px;
-			margin: auto;
-			text-align: center;
-			text-transform: uppercase;
+		> thead {
+			background: @b;
 			color: #fff;
-			font-size: 18px;
-			font-weight: 300;
-		}
-	}
-	.wp-digi-table-item-edit, [class$="item-new"] {
-		display: table-row !important;
-		span, toggle {
-			display: table-cell;
-			vertical-align: middle;
-		}
-		.wp-digi-summon-list {
-			width: 60px;
-		}
-		.padded {
-			padding: 0 4px;
-		}
-		.wp-digi-action-delete {
-			color: @red;
-		}
-		.wp-digi-element-thumbnail {
-			&:hover {
-				cursor: pointer;
+			th {
+				font-weight: 600;
+			}
+			tr {
+				background: @b !important;
+			}
+			.icon {
+				padding-right: 4px;
 			}
 		}
-		.wp-digi-risk-list-column-cotation {
-			&:hover {
-				cursor: pointer;
-			}
-		}
-		.wp-digi-risk-comment ul li {
-			display: flex;
-			flex-direction: row;
-			.eva-date {
-				// width: 120px;
-			}
-			.wpdigi_comment {
-				width: 100%;
-			}
-		}
-		.wp-digi-action {
-			width: 50px !important;
-			a {
-				right: 0;
-				background: @green;
-				color: #fff;
-			}
-		}
-		.wp-digi-risk-list-column-cotation:hover {
-			> .wp-digi-risk-level-1 {
-				background: darken(#e2e2e2, 10%) !important;
-			}
-			> .wp-digi-risk-level-2 {
-				background: darken(@yellow, 10%) !important;
-			}
-			> .wp-digi-risk-level-3 {
-				background: darken(@red, 10%) !important;
-			}
-			> .wp-digi-risk-level-4 {
-				background: darken(#2b2b2b, 10%) !important;
-			}
-		}
-
-	}
-	.wp-digi-action {
-		width: 50px;
-		position: relative;
-		> a {
-			position: absolute;
-			top: 0;
-			width: 100%;
-			max-width: 50px;
-			height: 100%;
-			color: rgba(0,0,0,0.2);
-			.transition;
-			display: flex;
-			&:before {
-				margin: auto;
-			}
-			&.thickbox {
-				&:hover {
-					color: rgba(0,0,0,0.6);
+		> tbody {
+			tr {
+				&:nth-child(odd) {
+					background: #fff;
+				}
+				&:nth-child(even) {
+					background: rgba(0,0,0,0.1);
 				}
 			}
-			&.wp-digi-action-delete {
-				&:hover {
+		}
+		.media {
+			background: rgba(0,0,0,0.1);
+			&.no-file .add {
+				color: rgba(0,0,0,0.6);
+			}
+			.default-image {
+				color: rgba(0,0,0,0.3);
+			}
+		}
+		strong {
+			font-weight: 700;
+			color: @a;
+		}
+		.cotation-container {
+			.content {
+				flex-wrap: nowrap !important;
+				flex-direction: row;
+				background: #2b2b2b;
+				border: 4px solid #2b2b2b;
+				&:before {
+					border-color: transparent transparent #2b2b2b transparent;
+					top: -10px;
+				}
+			}
+		}
+		.categorie-container {
+			.action {
+				padding: 0 8px;
+				transition: all 0.2s ease-out;
+				img {
+					float: left;
+					max-width: 50px;
+				}
+				span, .icon {
+					line-height: 49px;
+					transition: all 0.2s ease-out;
+					color: rgba(0,0,0,0.7);
+				}
+				.icon {
+					margin-left: 10px;
+				}
+				&:after {
+					display: table;
+					content: '';
+					clear: both;
+				}
+			}
+			.content {
+				width: 392px;
+			}
+		}
+		.user {
+			background: none;
+			color: rgba(0,0,0,0.7);
+			font-weight: 700;
+		}
+		.comment-container {
+			padding-top: 6px;
+			padding-bottom: 6px;
+			.comment {
+				display: flex;
+				flex: 0 1 auto;
+				line-height: 1.8;
+				margin-top: 4px;
+				input, textarea {
+					height: 28px;
+				}
+				> * {
+					margin: auto 0;
+				}
+				.date {
+					font-weight: 700;
+					width: 84px;
+					margin: auto 4px;
+					font-size: 13px;
+				}
+				.content {
+					white-space: normal;
+					line-height: 1.3;
+				}
+				* {
+					color: rgba(0,0,0,0.7);
+				}
+				.delete, .add {
+					width: 20px;
+					min-width: 20px;
+					height: 20px;
+					line-height: 20px;
+					padding: 0 !important;
+					text-align: center;
+					border-radius: 50%;
+					font-size: 10px;
+					i {
+						transition: all 0.2s ease-out;
+					}
+				}
+				.delete {
+					margin-left: 4px;
+					background: rgba(0,0,0,0.1);
+					i {
+						color: rgba(0,0,0,0.2);
+					}
+					&:hover i {
+						color: @red;
+					}
+				}
+			}
+			.comment ~ .new.comment {
+				padding-top: 4px;
+				border-top: 1px solid rgba(0,0,0,0.1);
+			}
+			.new.comment {
+				line-height: 2;
+				.date {
+					font-weight: 400;
+				}
+				.add {
+					margin-left: 4px;
+					background: @a;
+					i {
+						color: #fff;
+					}
+					&:hover {
+						background: @dark_a;
+					}
+				}
+			}
+		}
+		.action {
+			flex-wrap: nowrap;
+			.task:hover .icon {
+				color: rgba(0,0,0,0.6);
+			}
+			.edit:hover .icon {
+				color: @a;
+			}
+			.delete {
+				background: rgba(0,0,0,0.05);
+				&:hover .icon {
 					color: @red;
 				}
 			}
-			&.wp-digi-action-load {
-				&:hover {
-					color: @c1;
+			.add, .save {
+				margin-left: auto;
+				.icon {
+					color: #fff !important;
 				}
 			}
 		}
-		&.wp-digi-action-new {
-			.progress-button {
-				.transition;
-				background: @c1;
-				a, .content:before, .content:after  {
-					color: #fff;
-				}
-				&:hover {
-					background: @dark_c1;
-					cursor: pointer;
-				}
-				&.state-error {
-					background: @red;
-				}
-				&.state-success {
-					background: @green;
-				}
-			}
-			background: @c1 !important;
-		}
-	}
-	input[type="text"], textarea {
-		background: none;
-		border: 0;
-		border-bottom: 1px solid rgba(0,0,0,0.4);
-		box-shadow: none;
-		outline: none;
-		margin: 0;
-		padding: 0 4px;
-		//width: 100%;
-		//float: left;
-		&:focus {
-			box-shadow: none;
-			outline: none;
-		}
-	}
-}
-
-/* -------------------------------------
-		RISK INTERFACE
-------------------------------------- */
-
-.wp-digi-risk-item {
-	/* Thumbnail : voir media.less */
-
-	/* Quotation */
-	.wp-digi-risk-list-column-cotation {
-		position: relative;
-		width: 50px;
-		div, .wp-digi-risk-cotation-chooser li {
+		.avatar {
 			width: 50px;
-			height: 100%;
-			color: #fff;
-			line-height: 50px;
-			text-align: center;
-		}
-		div.wp-digi-risk-level-new {
-			background: #fff;
-			border: 1px dashed rgba(0,0,0,0.2);
 			height: 50px;
-			i {
-				color: #dadada;
-			}
-			&:hover {
-				cursor: pointer;
-				background: darken(#e2e2e2, 10%);
-			}
-		}
-		.wp-digi-risk-cotation-chooser {
-			z-index: 600;
-			width: 250px;
-			position: absolute;
-			top: 50px;
-			border: 4px solid @c2;
-			box-sizing: content-box;
-			.wp-digi-risk-level-1 {
-				background: #e2e2e2;
-				color: rgba(0,0,0,0.6);
-			}
-			&:before {
-				display: block;
-				content: '';
-				width: 0;
-				height: 0;
-				position: absolute;
-				top: -10px;
-				border-style: solid;
-				border-width: 0 10px 10px 10px;
-				border-color: transparent transparent @c2 transparent;
-			}
-			li {
-				float: left;
-				&:hover {
-					cursor: pointer;
-				}
-			}
-			&.simple {
-				width: 200px;
-			}
-		}
-		.wp-digi-risk-level-1 {
-			.transition;
-			background: #e2e2e2 !important;
-			color: rgba(0,0,0,0.6);
-		}
-		.wp-digi-risk-level-2 {
-		.transition;
-			background: @yellow !important;
-		}
-		.wp-digi-risk-level-3 {
-			.transition;
-			background: @red !important;
-		}
-		.wp-digi-risk-level-4 {
-			.transition;
-			background: #2b2b2b !important;
-		}
-		.open-method-evaluation-render {
-			background: @c1;
+			min-width: 50px;
 			text-align: center;
 			span {
-				color: #fff;
 				line-height: 50px;
-				height: 100%;
-				width: 100%;
-				display: block;
+				color: #fff;
+				font-size: 16px;
+				font-weight: 300;
+				text-transform: uppercase;
 			}
 		}
-	}
-	/* Reference */
-	.wp-digi-risk-list-column-reference:not(.header) {
-		color: @c1;
-		width: 80px;
-	}
-	/* Danger */
-	.wp-digi-risk-list-column-danger {
-		width: 80px;
-		font-weight: bold;
-	}
-	/* Comment */
-	.wp-digi-risk-comment {
-		li {
-			padding: 4px 0;
-		}
-	}
-	/* Action */
-	.wp-digi-action {
-		width: 150px !important;
-		&.wp-digi-action-new {
-			text-align: right;
-			.progress-button {
-				padding: 0;
-				width: 50px !important;
-				a {
-					width: 100% !important;
-					height: 100%;
-					line-height: 50px;
-				}
-				i {
-					line-height: 50px;
-				}
-			}
-		}
-		.wp-digi-action-load, .wp-digi-action-delete {
-			width: 50% !important;
-		}
-		a:first-child {
-			left: 0;
-		}
-		&:nth-child(2) {
-			left: 50px;
-		}
-		.wp-digi-action-delete {
-			right: 0;
-		}
-		.wp-digi-action-new .progress-button {
+		input.affect {
 			width: 50px;
-			height: 50px;
-			margin-left: auto;
 		}
-	}
-	.wp-digi-risk-date {
-		//width: 10%;
-	}
-	.wp-digi-risk-select {
-		//width: 20%;
-	}
-	.wp-digi-risk-comment {
-		//width: 40%;
-	}
-}
-
-[class$="item-new"] {
-	input, textarea {
-		width: 100%;
-		line-height: 1.1;
-		display: inline-block;
-	}
-	textarea {
-		padding: 2px;
-	}
-	.wp-digi-risk-date {
-		padding-right: 6px;
-		width: 100px;
-	}
-	.wp-digi-action a:first-child {
-		left: auto;
-	}
-	.wp-digi-action-edit {
-		background: @c1 !important;
-	}
-}
-
-
-/* -------------------------------------
-		USER INTERFACE
-------------------------------------- */
-
-.wp-digi-user-list {
-	.wp-digi-risk-list-header {
-		input {
-			background: #fff !important;
-			float: right !important;
-			width: 40px !important;
+		tfoot {
+			border-top: 1px solid rgba(0,0,0,0.05);
 		}
-	}
-	input[type="text"], textarea {
-		width: 100%;
-	}
-}
-
-.wp-digi-evaluator-list, .wp-digi-list {
-	.eva-date {
-		width: 100%;
-	}
-}
-
-/* -------------------------------------
-		EVALUATOR INTERFACE
-------------------------------------- */
-
-.wp-digi-evaluator-list {
-	.wp-digi-table-header {
-		input[type="text"] {
-		color: @c1;
+		input[type="text"], textarea {
+			width: 100%;
 		}
-	}
-	.period-assign {
-		width: 40px;
-		padding-left: 6px;
-	}
-}
 
-/* -------------------------------------
-		LIST INTERFACE
-------------------------------------- */
+		td.w50, th.w50 {
+			width: 50px;
+		}
+		td.w100, th.w100 {
+			width: 100px;
+		}
+		td.wm130, th.wm130 {
+			min-width: 130px;
+		}
+		td.wm40, th.wm40 {
+			min-width: 40px;
+		}
+		td.w150, th.w150 {
+			width: 150px;
+		}
+		td.full, th.full {
+			width: 100%;
+			input[type="text"], textarea {
+				width: 100%;
+			}
+		}
+		td.padding, th.padding {
+			padding-left: 8px;
+			padding-right: 8px;
+		}
 
-.wp-digi-list-document {
-	margin-top: 10px;
-	a {
-		margin: 0;
-	}
-	.wp-digi-reference {
-		color: @c1;
-		padding-left: 8px;
-	}
-	.wp-digi-print {
-		text-align: right;
-	}
-}
-
-
-/* -------------------------------------
-		RECOMMENDATION INTERFACE
-------------------------------------- */
-
-.wp-digi-recommendation {
-	.wp-digi-action {
-		width: 100px !important;
-		a {
-			width: 50% !important;
-			&:last-child {
-				right: 0;
+		.risk-row.edit {
+			.categorie-container:hover {
+				cursor: pointer;
+				.action {
+					background: rgba(0,0,0,0.1);
+					span, .icon {
+						color: #000;
+					}
+					.icon {
+						animation-duration: 0.6s;
+						animation-name: downAndUp;
+					}
+				}
+			}
+		}
+		.risk-row:not(.edit) {
+			.cotation {
+				pointer-events: none;
 			}
 		}
 	}
-}
-.wp-digi-recommendation-item, .wp-digi-recommendation {
-	.wp-digi-comment {
-		padding: 0 10px;
-		width: 400px;
-		input {
-			width: 100%;
-			font-size: 13px;
+
+	@media screen and (max-width: 1280px) {
+		th, tr, td {
+			padding: 0 !important;
 		}
 	}
-}
 
-/* -------------------------------------
-		LEGAL DISPLAY INTERFACE
-------------------------------------- */
-
-.form-legal-display {
-	.wp-digi-list-item {
-		span {
-			padding: 4px;
-		}
-		input {
-			padding: 4px;
-			width: 100%;
-			border-bottom: 2px solid #272a35;
-			&:focus {
-				border-bottom: 2px solid @c1;
-			}
-		}
-	}
 }
