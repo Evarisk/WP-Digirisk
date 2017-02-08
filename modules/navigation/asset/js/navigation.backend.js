@@ -72,3 +72,23 @@ window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
 window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
 	jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.grey' ).removeClass( 'grey' ).addClass( 'blue' );
 };
+
+/**
+ * Méthodes appelé avant la création d'un nouvelle unité de travail.
+ * Vérifies si le champ de texte est vide. Si c'est le cas, affiches l'infobulle pour dire qu'il est obligatoire.
+ *
+ * @param  {ClickEvent} element L'élément déclenchant l'action.
+ * @return {void}
+ *
+ * @since 6.2.6.0
+ * @version 6.2.6.0
+ */
+window.digirisk.navigation.beforeSaveWorkunit = function( element ) {
+	if ( '' === element.closest( '.workunit-add' ).find( 'input.title' ).val() ) {
+		element.closest( '.workunit-add' ).addClass( 'active' );
+		return false;
+	}
+
+	element.closest( '.workunit-add.active' ).removeClass( 'active' );
+	return true;
+};
