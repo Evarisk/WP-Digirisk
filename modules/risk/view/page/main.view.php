@@ -20,6 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php Risk_Page_Class::g()->display_risk_list(); ?>
 	</table>
 
+	<a href="#" class="margin button disable save-all right">Enregistrer</a>
+
 	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
 		<div class="wp-digi-pagination">
@@ -38,7 +40,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			?>
 		</div>
 	<?php endif; ?>
-
-	<a href="#" class="button disable save-all right">Enregistrer</a>
 
 </div>

@@ -43,9 +43,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				</tbody>
 			</table>
 
-			<div class="cotation level<?php echo esc_attr( ! empty( $risk->evaluation ) ? $risk->evaluation->scale : '-1' ); ?>">
-				<span><?php echo esc_html( ! empty( $risk->evaluation ) ? $risk->evaluation->risk_level['equivalence'] : 0 ); ?></span>
+			<div class="result-method">
+				<p><?php echo esc_html_e( 'Cliquez sur les cases du tableau pour avoir un aperçu du résultat de la méthode', 'digirisk' ); ?></p>
+				<div class="cotation level<?php echo esc_attr( ! empty( $risk->evaluation ) ? $risk->evaluation->scale : '-1' ); ?>">
+					<span><?php echo esc_html( ! empty( $risk->evaluation ) ? $risk->evaluation->risk_level['equivalence'] : 0 ); ?></span>
+				</div>
 			</div>
+
+
 			<div data-nonce="<?php echo esc_attr( wp_create_nonce( 'get_scale' ) ); ?>" class="button green margin uppercase strong float right"><span>Enregistrer la cotation</span></div>
 		</div>
 	</div>
