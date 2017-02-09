@@ -38,7 +38,7 @@ class Evaluator_Class extends User_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\force_avatar_color', '\digi\get_identifier' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -82,7 +82,7 @@ class Evaluator_Class extends User_Class {
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 *
 	 * @since 1.0
-	 * @version 6.2.5.0
+	 * @version 6.2.6.0
 	 */
 	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
@@ -107,7 +107,13 @@ class Evaluator_Class extends User_Class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		View_Util::exec( 'evaluator', 'main', array( 'element' => $element, 'evaluators' => $evaluators, 'list_affected_evaluator' => $list_affected_evaluator, 'number_page' => $number_page, 'current_page' => $current_page ) );
+		View_Util::exec( 'evaluator', 'main', array(
+			'element' => $element,
+			'evaluators' => $evaluators,
+			'list_affected_evaluator' => $list_affected_evaluator,
+			'number_page' => $number_page,
+			'current_page' => $current_page,
+		) );
 	}
 
 	/**
