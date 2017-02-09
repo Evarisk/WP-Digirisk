@@ -30,7 +30,7 @@ window.digirisk.recommendation.selectRecommendation = function( event ) {
 	element.closest( '.recommendation-row' ).find( '.categorie-container' ).removeClass( 'active' );
 	event.stopPropagation();
 
-	element.closest( 'tr' ).find( '.action .button.grey' ).removeClass( 'grey' ).addClass( 'blue' );
+	element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };
 
 /**

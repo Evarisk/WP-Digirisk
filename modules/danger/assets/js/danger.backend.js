@@ -32,5 +32,5 @@ window.digirisk.danger.selectDanger = function( event ) {
 	event.stopPropagation();
 
 	// Rend le bouton "active".
-	element.closest( 'tr' ).find( '.action .button.grey' ).removeClass( 'grey' ).addClass( 'blue' );
+	element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };

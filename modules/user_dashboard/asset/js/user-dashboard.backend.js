@@ -117,7 +117,7 @@ window.digirisk.userDashboard.keyEnterSendForm = function( event ) {
  * @version 6.2.6.0
  */
 window.digirisk.userDashboard.changeColorInputSubmit = function( event ) {
-	jQuery( this ).closest( 'tr' ).find( '.action .button.grey' ).removeClass( 'grey' ).addClass( 'blue' );
+	jQuery( this ).closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };
 
 /**

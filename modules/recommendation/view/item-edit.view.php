@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<tr class="recommendation-row">
+<tr class="recommendation-row edit">
 
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="save_recommendation" />
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"
 							data-loader="table"
-							class="button w50 grey add action-input"><i class="icon fa fa-plus"></i></div>
+							class="button w50 disable add action-input"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

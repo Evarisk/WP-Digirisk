@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<div data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 grey add action-input progress"><i class="icon fa fa-plus"></i></div>
+				<div data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

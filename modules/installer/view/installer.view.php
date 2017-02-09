@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 				<span class="dashicons dashicons-yes hidden"></span>
 			</li>
 			<li class="hidden">
-				<?php esc_html_e( 'Création des recommandations', 'digirisk' ); ?>
+				<?php esc_html_e( 'Création des préconisations', 'digirisk' ); ?>
 				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
 				<span class="dashicons dashicons-yes hidden"></span>
 			</li>

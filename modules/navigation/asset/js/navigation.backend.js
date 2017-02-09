@@ -2,7 +2,7 @@
  * Initialise l'objet "navigation" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 
 window.digirisk.navigation = {};
@@ -70,7 +70,7 @@ window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
  * @version 6.2.6.0
  */
 window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
-	jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.grey' ).removeClass( 'grey' ).addClass( 'blue' );
+	jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };
 
 /**
