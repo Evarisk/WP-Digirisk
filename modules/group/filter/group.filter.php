@@ -35,7 +35,7 @@ class Group_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.6.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
 		$tab_list['digi-group']['more'] = array(
@@ -46,6 +46,13 @@ class Group_Filter {
 					'type' => 'text',
 					'text' => __( 'Options avancées', 'digirisk' ),
 					'title' => __( 'Les options avancées de', 'digirisk' ),
+					'nonce' => 'load_content',
+					'attributes' => 'data-id=' . $id . '',
+				),
+				'historic' => array(
+					'type' => 'text',
+					'text' => __( 'Historique', 'digirisk' ),
+					'title' => __( 'Historique de', 'digirisk' ),
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),
