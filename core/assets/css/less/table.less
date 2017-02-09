@@ -99,6 +99,9 @@
 			}
 			.content {
 				width: 392px;
+				.tooltip:hover {
+					cursor: pointer;
+				}
 			}
 		}
 		.user {
@@ -248,11 +251,13 @@
 			padding-right: 8px;
 		}
 
-		.risk-row.edit {
+		tr.edit {
 			.categorie-container:hover {
-				cursor: pointer;
 				.action {
 					background: rgba(0,0,0,0.1);
+					&:hover {
+						cursor: pointer;
+					}
 					span, .icon {
 						color: #000;
 					}
@@ -263,7 +268,7 @@
 				}
 			}
 		}
-		.risk-row:not(.edit) {
+		tr:not(.edit) {
 			.cotation {
 				pointer-events: none;
 			}
