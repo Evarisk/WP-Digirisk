@@ -21,26 +21,56 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<div class="grid-layout w2">
 		<?php
-		View_Util::exec( 'legal_display', 'form/detective-work', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/occupational-health-service', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/emergency-service', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/safety-rules', array( 'legal_display' => $legal_display ) );
+		View_Util::exec( 'legal_display', 'form/detective-work', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/occupational-health-service', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/emergency-service', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/safety-rules', array(
+			'legal_display' => $legal_display,
+		) );
+
 		?>
 	</div>
 
 	<div class="clear">
 		<?php
-			View_Util::exec( 'legal_display', 'form/working-hours', array( 'legal_display' => $legal_display ) );
+			View_Util::exec( 'legal_display', 'form/working-hours', array(
+				'legal_display' => $legal_display,
+			) );
+
 		?>
 	</div>
 
 	<div class="grid-layout w2">
 		<?php
-		View_Util::exec( 'legal_display', 'form/derogations-schedules', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/collective-agreement', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/rule', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/DUER', array( 'legal_display' => $legal_display ) );
-		View_Util::exec( 'legal_display', 'form/participation-agreement', array( 'legal_display' => $legal_display ) );
+		View_Util::exec( 'legal_display', 'form/derogations-schedules', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/collective-agreement', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/rule', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/DUER', array(
+			'legal_display' => $legal_display,
+		) );
+
+		View_Util::exec( 'legal_display', 'form/participation-agreement', array(
+			'legal_display' => $legal_display,
+		) );
+
 		?>
 	</div>
 
