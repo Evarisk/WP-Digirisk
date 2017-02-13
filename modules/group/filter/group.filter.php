@@ -49,13 +49,13 @@ class Group_Filter {
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),
-				'historic' => array(
-					'type' => 'text',
-					'text' => __( 'Historique', 'digirisk' ),
-					'title' => __( 'Historique de', 'digirisk' ),
-					'nonce' => 'load_content',
-					'attributes' => 'data-id=' . $id . '',
-				),
+				// 'historic' => array(
+				// 	'type' => 'text',
+				// 	'text' => __( 'Historique', 'digirisk' ),
+				// 	'title' => __( 'Historique de', 'digirisk' ),
+				// 	'nonce' => 'load_content',
+				// 	'attributes' => 'data-id=' . $id . '',
+				// ), // Commented out code.
 				'configuration' => array(
 					'type' => 'text',
 					'text' => __( 'Configuration', 'digirisk' ),

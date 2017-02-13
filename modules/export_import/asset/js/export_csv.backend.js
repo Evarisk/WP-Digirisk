@@ -61,6 +61,8 @@ window.digirisk.exportCSV.makeExport = function( event ) {
 			button.addClass( 'loading' );
 		},
 		success: function( response ) {
+			button.closest( 'form' ).find( 'progress' ).attr( 'max', response.data.number_risks );
+			button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
 			if ( response.data.end ) {
 				button.removeClass( 'loading' );
 				window.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
@@ -69,11 +71,7 @@ window.digirisk.exportCSV.makeExport = function( event ) {
 				jQuery( '#digi-export-csv-form input[name="filename"]' ).val( '' );
 				jQuery( '#digi-export-csv-form input[name="number_risks"]' ).val( 0 );
 				jQuery( '#digi-export-csv-form input[name="url_to_file"]' ).val( '' );
-				button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
 			} else {
-				button.closest( 'form' ).find( 'progress' ).attr( 'max', response.data.number_risks );
-				button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
-
 				jQuery( '#digi-export-csv-form input[name="offset"]' ).val( response.data.offset );
 				jQuery( '#digi-export-csv-form input[name="filepath"]' ).val( response.data.filepath );
 				jQuery( '#digi-export-csv-form input[name="filename"]' ).val( response.data.filename );
