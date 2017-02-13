@@ -24,7 +24,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 *
 	 * @var integer
 	 */
-	protected $limit_risk = 2;
+	protected $limit_risk = 10;
 
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util

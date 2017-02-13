@@ -38,6 +38,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						<?php echo do_shortcode( '[digi-import]' ); ?>
 					</div>
 				</div>
+
+				<div class="block">
+					<div class="container">
+						<?php View_Util::exec( 'export_import', 'export-csv' ); ?>
+					</div>
+				</div>
 			</div>
 
 

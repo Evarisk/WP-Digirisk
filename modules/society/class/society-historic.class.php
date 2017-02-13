@@ -44,9 +44,14 @@ class Society_Historic_Class extends Singleton_Util {
 			'status' => 'publish',
 		) );
 
+		$added_risks = $this->get_added_risks_in_period();
+		$added_risks_in_cotation = $this->get_added_risks_in_period_and_in_cotation( 4 );
+
 		View_Util::exec( 'society', 'historic/main', array(
 			'selected_society' => $selected_society,
 			'groupments' => $groupments,
+			'added_risks' => $added_risks,
+			'added_risks_in_cotation' => $added_risks_in_cotation,
 		) );
 	}
 
@@ -59,7 +64,18 @@ class Society_Historic_Class extends Singleton_Util {
 	 * @version 6.2.6.0
 	 */
 	public function get_added_risks_in_period() {
+		$risks = Risk_Class::g()->get( array(
+			'post_status' => 'publish',
+			'posts_per_page' => 10,
+			'date_query' => array(
+				array(
+					'column' => 'post_date_gmt',
+					'after' => '1 year ago',
+				),
+			),
+		) );
 
+		return $risks;
 	}
 
 	/**
@@ -71,19 +87,48 @@ class Society_Historic_Class extends Singleton_Util {
 	 * @version 6.2.6.0
 	 */
 	public function get_deleted_risk_in_period() {
+		$risks = Risk_Class::g()->get( array(
+			'post_status' => 'trash',
+			'posts_per_page' => 10,
+			'date_query' => array(
+				array(
+					'column' => 'post_date_gmt',
+					'after' => '1 year ago',
+				),
+			),
+		) );
 
+		return $risks;
 	}
 
 	/**
 	 * Récupères tous les risques selon leurs cotations dans une période.
 	 *
-	 * @return array Tous les risques récupérés.
+	 * @param integer $cotation La valeur de la cotation.
+	 * @return array            Tous les risques récupérés.
 	 *
 	 * @since 6.2.6.0
 	 * @version 6.2.6.0
 	 */
-	public function get_added_risks_in_period_and_in_cotation() {
+	public function get_added_risks_in_period_and_in_cotation( $cotation ) {
+		$risks = Risk_Class::g()->get( array(
+			'post_status' => 'publish',
+			'posts_per_page' => 10,
+			'date_query' => array(
+				array(
+					'column' => 'post_date_gmt',
+					'after' => '1 year ago',
+				),
+			),
+		) );
 
+		// if ( ! empty( $risks ) ) {
+		// 	foreach ( $risks as $key => $risk ) {
+		// 		echo "<pre>"; print_r($risk->evaluation); echo "</pre>";
+		// 	}
+		// }
+
+		return $risks;
 	}
 }
 
