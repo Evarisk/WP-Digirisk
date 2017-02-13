@@ -96,8 +96,7 @@ class Legal_Display_Action {
 	 * @since 0.1
 	 * @version 6.2.6.0
 	 */
-	 public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
-
+	public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
 		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
 			'inspection_du_travail_nom' => $legal_display->detective_work[0]->full_name,
