@@ -30,5 +30,7 @@ window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
 
 	// Rend le bouton "active".
-	element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	if ( -1 != element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val() ) {
+		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	}
 };
