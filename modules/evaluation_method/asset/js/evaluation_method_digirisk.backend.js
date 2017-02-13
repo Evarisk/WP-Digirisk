@@ -14,6 +14,15 @@ window.digirisk.evaluation_method_digirisk.event = function() {
 	jQuery( document ).on( 'click', '.table.risk .cotation-container li.item:not(.open-popup)', window.digirisk.evaluation_method_digirisk.select_cotation );
 };
 
+/**
+ * Clique sur une des cotations simples.
+ *
+ * @param  {ClickEvent} event L'état du clic.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.6.0
+ */
 window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	var element = jQuery( this );
 	var level = element.data( 'level' );

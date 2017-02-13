@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.5.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package tools
  * @subpackage view
@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			<div id="digi-more" class="tab-content hidden" style="display: none;">
 
-				<span class="fa fa-exclamation-circle"></span><i><?php esc_html_e('Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk'); ?></i>
+				<span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk' ); ?></i>
 
 				<div class="grid-layout w2">
 
@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 					<div class="block">
 						<div class="container">
-							<h3><?php _e( 'Migration de document', 'digirisk' ); ?></h3>
+							<h3><?php esc_html_e( 'Migration de document', 'digirisk' ); ?></h3>
 							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour migrer les documents', 'digirisk' ); ?></p>
 							<p><button class="button blue margin fix-doc" data-nonce="<?php echo esc_attr( wp_create_nonce( 'callback_transfert_doc' ) ); ?>" type="button"><?php esc_html_e( 'Résoudre', 'digirisk' ); ?></button>
 							<ul></ul>
