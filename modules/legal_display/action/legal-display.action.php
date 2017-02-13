@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package legal_display
  * @subpackage class
@@ -36,18 +36,19 @@ class Legal_Display_Action {
 	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.6.0
 	 */
 	 public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
 		 // Récupère les tableaux
-		$emergency_service = !empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
-		$working_hour = !empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
-		$safety_rule = !empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
-		$derogation_schedule = !empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
-		$collective_agreement = !empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
-		$DUER = !empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
-		$rules = !empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
-		$parent_id = !empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$emergency_service = ! empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
+		$working_hour = ! empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
+		$safety_rule = ! empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
+		$derogation_schedule = ! empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
+		$collective_agreement = ! empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
+		$DUER = ! empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
+		$rules = ! empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
+		$participation_agreement = ! empty( $_POST['participation_agreement'] ) ? (array) $_POST['participation_agreement'] : array();
+		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
 		// @todo sécurisé
 		$legal_display_data = array(
@@ -58,6 +59,7 @@ class Legal_Display_Action {
 			'working_hour' => $working_hour,
 			'derogation_schedule' => $derogation_schedule,
 			'collective_agreement' => $collective_agreement,
+			'participation_agreement' => $participation_agreement,
 			'DUER' => $DUER,
 			'rules' => $rules,
 			'parent_id' => $parent_id,
@@ -73,7 +75,7 @@ class Legal_Display_Action {
 		$this->generate_sheet( $legal_display, $element_parent[0], 'A3' );
 
 		wp_send_json_success( array( 'module' => 'legalDisplay', 'callback_success' => 'generatedSuccess', 'legal_display' => $legal_display ) );
-  }
+	}
 
 	/**
 	* Génère l'ODT de l'affichage légal
@@ -135,6 +137,8 @@ class Legal_Display_Action {
 			'vendredi_aprem' => $legal_display->working_hour['friday_afternoon'],
 			'samedi_aprem' => $legal_display->working_hour['saturday_afternoon'],
 			'dimanche_aprem' => $legal_display->working_hour['sunday_afternoon'],
+
+			'modalite_information_ap' => $legal_display->participation_agreement['information_procedures'],
 		);
 
 		$document_creation = document_class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );

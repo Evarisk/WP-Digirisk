@@ -40,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		View_Util::exec( 'legal_display', 'form/collective-agreement', array( 'legal_display' => $legal_display ) );
 		View_Util::exec( 'legal_display', 'form/rule', array( 'legal_display' => $legal_display ) );
 		View_Util::exec( 'legal_display', 'form/duer', array( 'legal_display' => $legal_display ) );
+		View_Util::exec( 'legal_display', 'form/participation-agreement', array( 'legal_display' => $legal_display ) );
 		?>
 	</div>
 

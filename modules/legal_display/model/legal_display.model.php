@@ -203,6 +203,17 @@ class legal_display_model extends post_model {
 					)
 				)
 			),
+			'participation_agreement' => array(
+				'meta_type'	=> 'multiple',
+				'type'			=> 'array',
+				'child' => array(
+					'information_procedures' => array(
+						'type' => 'string',
+						'meta_type'	=> 'multiple',
+						'bydefault' => '',
+					),
+				),
+			),
 		) );
 
 		parent::__construct( $object );

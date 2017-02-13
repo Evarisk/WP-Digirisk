@@ -30,7 +30,7 @@ class Export_CSV_Class extends Singleton_Util {
 	 *
 	 * @var integer
 	 */
-	private $posts_per_page = 10;
+	private $posts_per_page = 50;
 
 	/**
 	 * Constructeur de la classe. Doit être présent même si vide pour coller à la définition "abstract" des parents / Class constructor. Must be present even if empty for matchin with "abstract" definition of ancestors
@@ -64,6 +64,7 @@ class Export_CSV_Class extends Singleton_Util {
 		if ( empty( $args['number_risks'] ) ) {
 			$args['number_risks'] = count( get_posts( array(
 				'post_type' => Risk_Class::g()->get_post_type(),
+				'posts_per_page' => -1,
 			) ) );
 		}
 
