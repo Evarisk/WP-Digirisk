@@ -21,7 +21,7 @@ window.digirisk.danger.event = function() {
  * @return {void}
  *
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 window.digirisk.danger.selectDanger = function( event ) {
 	var element = jQuery( this );

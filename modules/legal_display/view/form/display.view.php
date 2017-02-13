@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" class="form" method="post">
 	<input type="hidden" name="action" value="save_legal_display" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
-	<?php  wp_nonce_field( 'save_legal_display' ); ?>
+	<?php wp_nonce_field( 'save_legal_display' ); ?>
 
 	<div class="grid-layout w2">
 		<?php

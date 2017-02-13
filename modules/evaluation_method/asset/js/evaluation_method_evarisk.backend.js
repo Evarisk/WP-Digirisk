@@ -2,7 +2,7 @@
  * Initialise l'objet "evaluationMethodEvarisk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 window.digirisk.evaluationMethodEvarisk = {};
 
