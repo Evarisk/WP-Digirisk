@@ -44,5 +44,6 @@ class Installer_Action_Test extends \WP_UnitTestCase {
 		}
 
 		$this->assertTrue( update_option( Config_Util::$init['digirisk']->core_option, $core_option ) );
+		$this->assertEquals( Config_Util::$init['digirisk']->core_option, '_digirisk_core' );
 	}
 }
