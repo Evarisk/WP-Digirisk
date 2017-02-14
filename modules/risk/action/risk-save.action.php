@@ -36,7 +36,7 @@ class Risk_Save_Action {
 	 * @param Risk_Model $risk Les données du risque.
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.6.0
 	 */
 	public function callback_save_risk( $risk ) {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
@@ -67,7 +67,7 @@ class Risk_Save_Action {
 				wp_send_json_error();
 			}
 
-			if ( empty( $image_id ) ) {
+			if ( empty( $image_id ) && ! empty( $_POST['associated_document_id']['image'][0] ) ) {
 				$image_id = (int) $_POST['associated_document_id']['image'][0];
 			}
 

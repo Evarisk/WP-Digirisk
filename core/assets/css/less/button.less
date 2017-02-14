@@ -1,0 +1,253 @@
+/**
+ * Les boutons se forment grâce à leurs classes CSS
+ * .button -> classe de base pour un bouton
+ * .float-icon -> Rajoute une icone en haut à droite du bouton
+ * .strong -> texte en gras
+ * .uppercase -> texte en majuscule
+ * .red -> fond du bouton rouge
+ * .green -> fond du bouton vert
+ * .grey -> fond du bouton gris
+ * .dark -> couleur foncé comme l'interface
+ * .light -> pas de fond, couleur de l'icon claire
+ * .w40 -> bouton carré 40px
+ * .w50 -> bouton carré 50px
+ * .w60 -> bouton carré 60px
+ * .w80 -> bouton carré 80px
+ * .float.right -> float right
+ * .float.left -> float left
+ * .margin -> margin haut et bas sur le bouton
+ * .radius -> ajoute un border radius de 4px
+ * .progress -> Active le progress button
+ * 		.load -> le bouton affiche une icone de chargement
+ * 		.success -> le bouton affiche une icone succès
+ * 		.error -> Le bouton affiche une icone erreur
+ */
+.digirisk-wrap {
+
+	.button {
+		display: inline-block;
+		border: 0;
+		box-shadow: none;
+		background: none;
+		color: #fff;
+		padding: 6px 14px !important;
+		vertical-align: middle;
+		height: auto;
+		border-radius: 0;
+		transition: all 0.2s ease-out;
+		position: relative;
+		&:hover {
+			background: none;
+			color: #fff;
+			.float-icon {
+				animation-name: bounceInLight;
+			}
+		}
+		&:active {
+			transform: none;
+		}
+		&.active, &.active:hover {
+			box-shadow: none;
+			transform: translateY(0);
+			border: 0;
+		}
+		&:focus {
+			box-shadow: none;
+			color: #fff;
+		}
+		.icon {
+			transition: all 0.2s ease-out;
+		}
+		.float-icon {
+			position: absolute;
+			top: -6px;
+			right: -6px;
+			background: @grey;
+			padding: 4px;
+			border-radius: 50%;
+			font-size: 12px;
+		}
+		.icon.dashicons {
+			line-height: 1.3;
+		}
+		.icon, span {
+			transition: all 0.2s ease-out;
+		}
+		.icon ~ span {
+			margin-left: 10px;
+		}
+		&.strong {
+			span {
+				font-weight: 700;
+			}
+		}
+		&.uppercase {
+			span {
+				text-transform: uppercase;
+			}
+		}
+		&.blue {
+			background: @a;
+			&:hover {
+				background: @dark_a;
+			}
+		}
+		&.red {
+			background: @red;
+			&:hover {
+				background: darken(@red, 14%);
+			}
+		}
+		&.green {
+			background: @green;
+			&:hover {
+				background: darken(@green, 14%);
+			}
+		}
+		&.dark {
+			background: @b;
+			&:hover {
+				background: darken(@b, 20%);
+			}
+		}
+		&.light {
+			background: none;
+			color: rgba(0, 0, 0, 0.3);
+		}
+		&.grey {
+			background: @grey;
+			color: rgba(0,0,0,0.8);
+			&:hover {
+				background: darken(@grey, 14%);
+			}
+		}
+		&.w30, &.w40, &.w50, &.w60, &.w80, &.h50 {
+			display: flex;
+			align-items: center; /* Fix IE */
+			flex: 0 1 auto;
+			> * {
+				margin: auto;
+			}
+		}
+		&.w30 {
+			width: 30px;
+			min-width: 30px;
+			height: 30px;
+			padding: 0 !important;
+		}
+		&.w40 {
+			width: 40px;
+			min-width: 40px;
+			height: 40px;
+		}
+		&.w50 {
+			width: 50px;
+			min-width: 50px;
+			height: 50px;
+			.icon {
+				font-size: 16px;
+			}
+		}
+		&.w60 {
+			width: 60px;
+			min-width: 60px;
+			height: 60px;
+		}
+		&.w80 {
+			width: 80px;
+			min-width: 80px;
+			height: 80px;
+		}
+		&.h50 {
+			height: 50px;
+		}
+		&.float.left {
+			float: left;
+		}
+		&.float.right {
+			float: right;
+		}
+		&.margin {
+			margin-top: 8px;
+			margin-bottom: 8px;
+		}
+		&.radius {
+			border-radius: 4px;
+		}
+		&.progress {
+			.icon {
+				transition: all 0.2s ease-out;
+				transform: translate(-50%, -50%);
+			}
+			.icon, &:before {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+			&:before {
+				content: '';
+				display: block;
+				opacity: 0;
+				transform: translate(-50%, -90%);
+				transition: all 0.2s ease-out;
+				font-family: 'FontAwesome';
+				font-size: 16px;
+				animation-duration: 1s;
+				animation-fill-mode: both;
+			}
+			&.success, &.load, &.error {
+				pointer-events: none;
+				&:before {
+					opacity: 1;
+					transform: translate(-50%, -50%);
+				}
+				.icon {
+					opacity: 0;
+					transform: translate(-50%, 10%);
+				}
+			}
+			&.success {
+				background: @green;
+				&:before {
+					content: "\f00c";
+					animation-name: progressSuccess;
+				}
+			}
+
+			&.error {
+				background: @red;
+				&:before {
+					content: "\f00d";
+					animation-name: progressError;
+				}
+			}
+			&.load {
+				background: @grey;
+				&:before {
+					display: inline-block;
+					content: '';
+					border: 3px solid #fff;
+					border-top: 3px solid @a;
+					border-radius: 50%;
+					width: 20px;
+					height: 20px;
+					position: absolute;
+					z-index: 99;
+					left: 50%;
+					top: 50%;
+					animation: spin 1s ease-out infinite;
+				}
+			}
+		}
+		&.disable {
+			background: @grey;
+			color: rgba(0,0,0,0.3);
+			&:hover {
+				background: @grey;
+				color: rgba(0,0,0,0.3);
+				cursor: not-allowed;
+			}
+		}
+	}
+
+}

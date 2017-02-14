@@ -105,7 +105,7 @@ window.digirisk.gallery.dessociatedFileSuccess = function( element, response ) {
  * @version 6.2.5.0
  */
 window.digirisk.gallery.successfulSetThumbnail = function( element, response ) {
-	jQuery( '.main-container .main-header .unit-header .media img' ).replaceWith( response.data.template );
+	jQuery( '.media[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 	jQuery( '.navigation-container span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 	jQuery( '.navigation-container .workunit-list span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 };

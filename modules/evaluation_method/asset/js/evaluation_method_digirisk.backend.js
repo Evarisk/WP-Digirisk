@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "evaluation_method_digirisk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.6.0
+ */
 window.digirisk.evaluation_method_digirisk = {};
 
 window.digirisk.evaluation_method_digirisk.init = function() {
@@ -8,6 +14,15 @@ window.digirisk.evaluation_method_digirisk.event = function() {
 	jQuery( document ).on( 'click', '.table.risk .cotation-container li.item:not(.open-popup)', window.digirisk.evaluation_method_digirisk.select_cotation );
 };
 
+/**
+ * Clique sur une des cotations simples.
+ *
+ * @param  {ClickEvent} event L'état du clic.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.6.0
+ */
 window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	var element = jQuery( this );
 	var level = element.data( 'level' );
@@ -28,4 +43,9 @@ window.digirisk.evaluation_method_digirisk.select_cotation = function( event ) {
 	element.closest( 'tr' ).find( 'input.input-hidden-method-id' ).val( methodEvaluationId );
 
 	element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
+
+	// Rend le bouton "active".
+	if ( -1 != element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val() ) {
+		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	}
 };

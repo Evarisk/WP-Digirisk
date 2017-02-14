@@ -1,94 +1,86 @@
+/**
+ * Formulaires
+ */
 
-/* -------------------------------------
-		FORM INTERFACE
-------------------------------------- */
+.digirisk-wrap {
 
-[class*="gridwrapper"] {
-	&.wp-digi-form {
-		display: flex;
+	.form {
 		.form-element {
-			display: inline-flex !important;
-			label {
-				width: 100%;
-			}
-		}
-	}
-}
-
-.wp-digi-form {
-	&.no-form {
-		.form-element {
-			span {
-				font-size: 14px;
-				line-height: 1.4;
-				padding: 0 0 6px 0;
-				margin: 0;
-				border-bottom: 2px solid @c2;
-				color: rgba(0,0,0,0.6);
-				width: 100%;
+			position: relative;
+			width: 100%;
+			margin-bottom: 26px;
+			&:after {
+				content: '';
 				display: block;
 			}
 		}
-	}
-	.form-element {
-		display: inline-block;	
-		position: relative;
-		padding-right: 10px;
-		margin-bottom: 20px;
-		label {
-			display: block;
-			text-transform: uppercase;
-			font-weight: bold;
-			&:focus {
-				opacity: 0;
+		.form-element {
+			&.active input, &.active textarea, input:focus, textarea:focus, select:focus {
+				outline: none;
+				& ~ label {
+					font-size: 12px;
+					color: @a;
+					pointer-events: auto;
+				}
+			}
+			&.active input, input:focus {
+				& ~ label {
+					top: -10px;
+				}
+			}
+			&.active textarea, textarea:focus {
+				& ~ label {
+					top: -16px;
+				}
 			}
 		}
-	}
-	.di-opening-time {
-		label {
-			span {
-				display: block;
-			}
-			input {
-				width: auto;
-				display: inline-block;
-			}
-		}
-		
-	}
-	.single-line {
-		li {
-			margin-bottom: 0;
-		}
-	}
-	.block {
-		width: 100%;
-	}
-	label, input, textarea {
-		font-size: 14px;
-		line-height: 1.4;
-		padding-bottom: 6px;
-	}
-	input[type="text"], input[type="email"], input[type="tel"], textarea {
-		background: none;
-		border: 0;
-		box-shadow: none;
-		width: 100%;
-		border-bottom: 2px solid @c2;
-		color: rgba(0,0,0,0.6);
-		.transition;
-		&:focus {
-			outline: none;
+		input, textarea {
+			border: 0;
+			border-bottom: 1px solid @b;
 			box-shadow: none;
-			border-bottom: 2px solid @c1;
+			padding: 10px 0;
+			margin: 0;
+			width: 100%;
+			font-size: 14px;
+			background: transparent;
+			&:focus ~ .bar {
+				width: 100%;
+			}
+		}
+		label {
+			position: absolute;
+			top: 10px;
+			left: 0;
+			transition: all 0.2s ease-out;
+			font-size: 14px;
+			color: rgba(0,0,0,0.4);
+			pointer-events: none;
+			font-weight: 600;
+		}
+		.bar {
+			position: absolute;
+			width: 0;
+			height: 3px;
+			left: 0;
+			background: @a;
+			transition: all 0.2s ease-out;
+		}
+		input ~ .bar {
+			bottom: 0;
+		}
+		textarea ~ .bar {
+			bottom: 3px;
+		}
+		select {
+			width: 100%;
+	    padding: 6px;
+	    height: 40px;
+	    border: 1px solid rgba(0,0,0,0.8);
+			transition: all 0.2s ease-out;
+			&:focus {
+				border: 1px solid @a;
+			}
 		}
 	}
-	input[type="button"].float {
-		width: auto;
-		padding: 14px;
-	}
-}
-.wp-digi-sheet-generation-button {
-	clear: both;
-	float: right;
+
 }

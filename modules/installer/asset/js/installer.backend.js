@@ -2,7 +2,7 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.5.0
+ * @version 6.2.6.0
  */
 
 window.digirisk.installer = {};
@@ -18,7 +18,7 @@ window.digirisk.installer.event = function() {
 
 window.digirisk.installer.key_up_groupment_title = function( event ) {
 	if ( 13 === event.keyCode ) {
-		jQuery( '.submit-form' ).click();
+		jQuery( '.main-content.society .action-input' ).click();
 	}
 };
 

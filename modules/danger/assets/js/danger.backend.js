@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "danger" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 1.0
+ * @version 6.2.6.0
+ */
 window.digirisk.danger = {};
 
 window.digirisk.danger.init = function() {
@@ -15,7 +21,7 @@ window.digirisk.danger.event = function() {
  * @return {void}
  *
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 window.digirisk.danger.selectDanger = function( event ) {
 	var element = jQuery( this );
@@ -30,4 +36,9 @@ window.digirisk.danger.selectDanger = function( event ) {
 
 	element.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 	event.stopPropagation();
+
+	// Rend le bouton "active".
+	if ( -1 != element.closest( 'tr' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
+		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	}
 };

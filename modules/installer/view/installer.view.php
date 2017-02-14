@@ -21,28 +21,26 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<li class="step step-create-users"><span class="title"><?php esc_html_e( 'Votre personnel', 'digirisk' ); ?></span><i class="circle">3</i></li>
 	</ul>
 
-	<div class="main-content society">
+	<div class="main-content society form">
 		<h2><?php esc_html_e( 'Votre société', 'digirisk' );?></h2>
 
-		<form method="POST" class="form" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
-			<input type="hidden" name="action" value="installer_save_society" />
-			<?php wp_nonce_field( 'ajax_installer_save_society' ); ?>
+		<input type="hidden" name="action" value="installer_save_society" />
+		<?php wp_nonce_field( 'ajax_installer_save_society' ); ?>
 
-			<div class="grid-layout w2">
-				<div class="form-element">
-					<input type="text" name="groupment[title]" />
-					<label>
-						<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
-						<span class="required tooltip red" aria-label="Le nom de votre société est obligatoire.">*</span>
-					</label>
-					<span class="bar"></span>
-				</div>
-				<div>
-				</div>
+		<div class="grid-layout w2">
+			<div class="form-element">
+				<input type="text" name="groupment[title]" />
+				<label>
+					<?php esc_html_e( 'Nom de votre société', 'digirisk' ); ?>
+					<span class="required tooltip red" aria-label="Le nom de votre société est obligatoire.">*</span>
+				</label>
+				<span class="bar"></span>
 			</div>
+			<div>
+			</div>
+		</div>
 
-			<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
-		</form>
+		<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 	</div>
 
 	<div class="hidden main-content wpdigi-components">
@@ -60,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 				<span class="dashicons dashicons-yes hidden"></span>
 			</li>
 			<li class="hidden">
-				<?php esc_html_e( 'Création des recommandations', 'digirisk' ); ?>
+				<?php esc_html_e( 'Création des préconisations', 'digirisk' ); ?>
 				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
 				<span class="dashicons dashicons-yes hidden"></span>
 			</li>
@@ -74,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	<div class="hidden wpdigi-staff">
 		<?php do_shortcode( '[digi_user_dashboard]' ); ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong wp-digi-bton-fourth">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong">
 			<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
 		</a>
 	</div>

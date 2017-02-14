@@ -139,6 +139,9 @@ class affichage_legal_a3_model extends document_model {
 				),
 				'dimanche_aprem' => array(
 					'type' => 'string'
+				),
+				'modalite_information_ap' => array(
+					'type' => 'string'
 				)
 			)
 		);

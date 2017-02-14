@@ -16,6 +16,11 @@ window.digirisk.userDashboard.event = function() {
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.digirisk.userDashboard.keyEnterSendForm );
+
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.digirisk.userDashboard.changeColorInputSubmit );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.digirisk.userDashboard.changeColorInputSubmit );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.digirisk.userDashboard.changeColorInputSubmit );
+
 	jQuery( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', window.digirisk.userDashboard.save_domain_mail );
 };
 
@@ -100,6 +105,19 @@ window.digirisk.userDashboard.keyEnterSendForm = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.user-dashboard table.users tr:last .action-input' ).click();
 	}
+};
+
+/**
+ * Si la ligne a un contenu, change la couleur du bouton.
+ *
+ * @param  {KeyboardEvent} event L'état du clavier.
+ * @return {void}
+ *
+ * @since 6.2.6.0
+ * @version 6.2.6.0
+ */
+window.digirisk.userDashboard.changeColorInputSubmit = function( event ) {
+	jQuery( this ).closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };
 
 /**

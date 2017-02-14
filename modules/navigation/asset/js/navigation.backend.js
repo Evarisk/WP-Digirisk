@@ -2,7 +2,7 @@
  * Initialise l'objet "navigation" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 
 window.digirisk.navigation = {};
@@ -30,6 +30,8 @@ window.digirisk.navigation.init = function() {
 window.digirisk.navigation.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .content li span.action-attribute', window.digirisk.navigation.setItemActiveInToggle );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .workunit-list li span.action-attribute', window.digirisk.navigation.setItemActiveInWorkunitList );
+
+	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container .workunit-add input.title', window.digirisk.navigation.keyUpOnWorkunitTitle );
 };
 
 /**
@@ -56,4 +58,37 @@ window.digirisk.navigation.setItemActiveInToggle = function( event ) {
 window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
 	jQuery( '.digirisk-wrap .navigation-container .workunit-list li.active' ).removeClass( 'active' );
 	jQuery( this ).closest( 'li' ).addClass( 'active' );
+};
+
+/**
+ * Ajoutes la classe "blue" sur l'input action dans l'ajout d'une unité de travail.
+ *
+ * @param  {KeyboardEvent} event L'état du clavier.
+ * @return {void}
+ *
+ * @since 6.2.6.0
+ * @version 6.2.6.0
+ */
+window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
+	jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+};
+
+/**
+ * Méthodes appelé avant la création d'un nouvelle unité de travail.
+ * Vérifies si le champ de texte est vide. Si c'est le cas, affiches l'infobulle pour dire qu'il est obligatoire.
+ *
+ * @param  {ClickEvent} element L'élément déclenchant l'action.
+ * @return {void}
+ *
+ * @since 6.2.6.0
+ * @version 6.2.6.0
+ */
+window.digirisk.navigation.beforeSaveWorkunit = function( element ) {
+	if ( '' === element.closest( '.workunit-add' ).find( 'input.title' ).val() ) {
+		element.closest( '.workunit-add' ).addClass( 'active' );
+		return false;
+	}
+
+	element.closest( '.workunit-add.active' ).removeClass( 'active' );
+	return true;
 };
