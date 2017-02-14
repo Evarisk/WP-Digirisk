@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage view
@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<tr class="risk-row">
+<tr class="risk-row edit">
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="page" value="all_risk" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $risk->parent_id ); ?>" />

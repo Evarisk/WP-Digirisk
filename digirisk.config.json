@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.5.2",
+	"version": "6.2.6.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
