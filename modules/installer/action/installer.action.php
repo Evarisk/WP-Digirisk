@@ -34,24 +34,22 @@ class Installer_Action {
 
 
 	/**
-	 * Test
+	 * Installe la société de base pour le fonctionnement de DigiRisk.
 	 *
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.6.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
-		// $address = Address_Class::g()->create( $_POST['address'] );
 		$groupment = Group_Class::g()->create( $_POST['groupment'] );
-		// $groupment->contact['address_id'][] = $address->id;
-		Group_Class::g()->update( $groupment );
-		// $address->post_id = $groupment->id;
-		// Address_Class::g()->update( $address );
 
-		wp_send_json_success( array( 'module' => 'installer', 'callback_success' => 'savedSociety' ) );
+		wp_send_json_success( array(
+			'module' => 'installer',
+			'callback_success' => 'savedSociety',
+		) );
 	}
 
 	/**
