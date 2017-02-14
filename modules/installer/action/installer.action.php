@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.6.0
  */
 
 namespace digi;
@@ -98,7 +98,7 @@ class Installer_Action {
 	}
 
 	/**
-	 * Tmp
+	 * C'est quoi cette méthode ?
 	 *
 	 * @return void
 	 */
@@ -117,4 +117,4 @@ class Installer_Action {
 	}
 }
 
-new installer_action();
+new Installer_Action();
