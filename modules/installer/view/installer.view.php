@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<li class="step step-create-users"><span class="title"><?php esc_html_e( 'Votre personnel', 'digirisk' ); ?></span><i class="circle">3</i></li>
 	</ul>
 
-	<div class="main-content society form">
+	<div class="main-content hidden society form">
 		<h2><?php esc_html_e( 'Votre société', 'digirisk' );?></h2>
 
 		<input type="hidden" name="action" value="installer_save_society" />
@@ -43,13 +43,17 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 	</div>
 
-	<div class="hidden main-content wpdigi-components">
+	<div class="main-content wpdigi-components">
 		<h2><?php esc_html_e( 'Composants', 'digirisk' ); ?></h2>
 
 		<!-- Le nonce pour la sécurité de la requête -->
 		<?php
 		echo '<input type="hidden" class="nonce-installer-components" value="' . esc_attr( wp_create_nonce( 'ajax_installer_components' ) ) . '" />';
 		?>
+
+		<div>
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+		</div>
 
 		<ul>
 			<li class="active">

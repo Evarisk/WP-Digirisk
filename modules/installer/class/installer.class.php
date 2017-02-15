@@ -21,6 +21,9 @@ class Installer_Class {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 0.1
+	 * @version 6.2.7.0
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
