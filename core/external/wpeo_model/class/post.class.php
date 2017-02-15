@@ -117,6 +117,7 @@ class Post_Class extends singleton_util {
 		} elseif ( isset( $args['schema'] ) ) {
 			$array_posts[] = array();
 		} else {
+
 			$query_posts = new \WP_Query( $args );
 			$array_posts = $query_posts->posts;
 			unset( $query_posts->posts );
