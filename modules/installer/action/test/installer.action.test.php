@@ -1,25 +1,56 @@
 <?php
+/**
+ * Tests unitaires pour l'installation de l'application.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.7.0
+ * @version 6.2.7.0
+ * @copyright 2015-2017 Evarisk
+ * @package installer
+ * @subpackage action\test
+ */
 
 namespace digi;
 
+/**
+ * Tests unitaires pour l'installation de l'application.
+ */
 class Installer_Action_Test extends \WP_UnitTestCase {
 
-	public function test_ajax_installer_save_society_normal_char() {
-		$group = Group_Class::g()->update( array(
-			 'post_title' => 'Evarisk',
-		) );
+	/**
+	 * Testes la méthode pour enregister une société dans la page d'installation de DigiRisk.
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.7.0
+	 * @version 6.2.7.0
+	 */
+	public function test_ajax_installer_save_society() {
+		$data = array(
+			array(
+				'post_title' => 'Evarisk',
+			),
+			array(
+				'post_title' => '%@]<?_²/*>',
+			),
+		);
 
-		$this->assertEquals( 'GP1', $group->unique_identifier );
+		if ( ! empty( $data ) ) {
+			foreach ( $data as $d ) {
+				$group = Group_Class::g()->update( $d );
+				$this->assertStringStartsWith( 'GP', $group->unique_identifier );
+			}
+		}
 	}
 
-	public function test_ajax_installer_save_society_wtf_char() {
-		$group = Group_Class::g()->update( array(
-			 'post_title' => '%@]<?_²/*>',
-		) );
-
-		$this->assertEquals( 'GP1', $group->unique_identifier );
-	}
-
+	/**
+	 * Testes la méthode pour installer les composants de base pour le bon fonctionnement de DigiRisk.
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.7.0
+	 * @version 6.2.7.0
+	 */
 	public function test_ajax_installer_components() {
 		$default_core_option = array(
 			'installed' 									=> false,
