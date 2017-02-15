@@ -69,10 +69,11 @@ class Digirisk_Action {
 	 * @return void nothing
 	 *
 	 * @since 1.0
-	 * @version 6.2.5.0
+	 * @version 6.2.7.0
 	 */
 	public function callback_admin_enqueue_scripts_js() {
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), Config_Util::$init['digirisk']->version, false );
 	}
 
 	/**
@@ -104,13 +105,14 @@ class Digirisk_Action {
 	 * @return void nothing
 	 *
 	 * @since 1.0
-	 * @version 6.2.6.0
+	 * @version 6.2.7.0
 	 */
 	public function callback_admin_enqueue_scripts_css() {
 		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
 		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/datepicker.min.css', array(), Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/css/owl.carousel.min.css', array(), Config_Util::$init['digirisk']->version );
 	}
 
 	/**

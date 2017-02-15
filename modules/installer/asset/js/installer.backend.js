@@ -14,6 +14,13 @@ window.digirisk.installer.init = function() {
 window.digirisk.installer.event = function() {
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.key_up_groupment_title );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.digirisk.installer.key_up_domain_mail );
+	jQuery( document ).on( 'click', '.wpdigi-installer .wpdigi-components .next:not(.disabled)', window.digirisk.installer.nextScreenUser );
+	jQuery( '.owl-carousel' ).owlCarousel( {
+		'items': 1,
+		'loop': true,
+		'autoplay': true,
+		'autoplayHoverPause': true
+	} );
 };
 
 window.digirisk.installer.key_up_groupment_title = function( event ) {
@@ -88,26 +95,43 @@ window.digirisk.installer.requestInstallComponent = function() {
  * @return {void}
  *
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.7.0
  */
 window.digirisk.installer.installedComponentSuccess = function( response ) {
-	jQuery( '.wpdigi-installer .wpdigi-components li.active img' ).hide();
-	jQuery( '.wpdigi-installer .wpdigi-components li.active .dashicons' ).show();
-	jQuery( '.wpdigi-installer .wpdigi-components li.active' ).removeClass( 'active' );
+	var progressValue = 0;
 
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {
-		jQuery( '.wpdigi-installer .wpdigi-components li.hidden:first' ).removeClass( 'hidden' ).addClass( 'active' );
+		if ( ! response.data.core_option.recommendation_installed && response.data.core_option.danger_installed ) {
+			progressValue = 33;
+		} else if ( response.data.core_option.recommendation_installed ) {
+			progressValue = 66;
+		}
 		window.digirisk.installer.requestInstallComponent();
 	} else {
+		progressValue = 100;
+
+		jQuery( '.wpdigi-installer .wpdigi-components .next' ).removeClass( 'disabled' );
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 		}
-
-		// Si l'installation est terminée, nous passons à la prochaine étape.
-		jQuery( '.wpdigi-installer .wpdigi-components' ).hide();
-		jQuery( '.wpdigi-installer .step-create-components' ).removeClass( 'active' );
-		jQuery( '.wpdigi-installer .step-create-users' ).addClass( 'active' );
-		jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
 	}
+
+	jQuery( '.wpdigi-components progress' ).attr( 'value', progressValue );
+};
+
+/**
+ * Passes au prochain écran "Utilisateur" lors du clique sur le bouton "Suivant".
+ *
+ * @param  {ClickEvent} event Le clique sur le bouton
+ * @return {void}
+ *
+ * @since 6.2.7.0
+ * @version 6.2.7.0
+ */
+window.digirisk.installer.nextScreenUser = function( event ) {
+	jQuery( '.wpdigi-installer .wpdigi-components' ).hide();
+	jQuery( '.wpdigi-installer .step-create-components' ).removeClass( 'active' );
+	jQuery( '.wpdigi-installer .step-create-users' ).addClass( 'active' );
+	jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
 };

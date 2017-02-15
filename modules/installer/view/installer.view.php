@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<li class="step step-create-users"><span class="title"><?php esc_html_e( 'Votre personnel', 'digirisk' ); ?></span><i class="circle">3</i></li>
 	</ul>
 
-	<div class="main-content hidden society form">
+	<div class="main-content society form">
 		<h2><?php esc_html_e( 'Votre société', 'digirisk' );?></h2>
 
 		<input type="hidden" name="action" value="installer_save_society" />
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 	</div>
 
-	<div class="main-content wpdigi-components">
+	<div class="main-content hidden wpdigi-components">
 		<h2><?php esc_html_e( 'Composants', 'digirisk' ); ?></h2>
 
 		<!-- Le nonce pour la sécurité de la requête -->
@@ -51,27 +51,17 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		echo '<input type="hidden" class="nonce-installer-components" value="' . esc_attr( wp_create_nonce( 'ajax_installer_components' ) ) . '" />';
 		?>
 
-		<div>
+		<div class="owl-carousel owl-theme">
 			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-2' ); ?>
 		</div>
 
-		<ul>
-			<li class="active">
-				<?php esc_html_e( 'Création des dangers', 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-			<li class="hidden">
-				<?php esc_html_e( 'Création des préconisations', 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-			<li class="hidden">
-				<?php	esc_html_e( "Création des méthodes d'évaluation", 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-		</ul>
+		<progress value="0" max="100">Création des dangers</progress>
+		<button class="button blue next disabled"><span>Suivant</span></button>
 	</div>
 
 	<div class="hidden wpdigi-staff">
