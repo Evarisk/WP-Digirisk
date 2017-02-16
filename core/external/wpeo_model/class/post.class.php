@@ -72,21 +72,26 @@ class Post_Class extends singleton_util {
 	 * Initialise la taxonomy si elle existe.
 	 *
 	 * @see register_post_type
-	 * @return void
+	 * @return boolean
+	 *
+	 * @since 1.0
+	 * @version 6.2.7.0
 	 */
 	public function init_post_type() {
 		$args = array(
-			'public' => config_util::$init['digirisk']->debug ? true : false,
+			'public' => Config_Util::$init['digirisk']->debug ? true : false,
 			'label'  => $this->post_type_name,
 		);
 
-		register_post_type( $this->post_type, $args );
-		\digi\log_class::g()->exec( 'digi_post_type', '', 'Enregistres le post personnalisé : ' . $this->post_type, $args );
+		$return = register_post_type( $this->post_type, $args );
+		\digi\Log_Class::g()->exec( 'digi_post_type', '', 'Enregistres le post personnalisé : ' . $this->post_type, $args );
 
 		if ( ! empty( $this->attached_taxonomy_type ) ) {
 			register_taxonomy( $this->attached_taxonomy_type, $this->post_type );
-			\digi\log_class::g()->exec( 'digi_taxonomy', '', 'Enregistres la taxonomie : ' . $this->attached_taxonomy_type );
+			\digi\Log_Class::g()->exec( 'digi_taxonomy', '', 'Enregistres la taxonomie : ' . $this->attached_taxonomy_type );
 		}
+
+		return $return;
 	}
 
 	public function get_schema() {
