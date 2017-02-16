@@ -13,7 +13,7 @@
 namespace digi;
 
 /**
- * Tests unitaires pour l'installation de l'application.
+ * Tests unitaires pour la gestion des posts.
  */
 class Post_Class_Test extends \WP_UnitTestCase {
 	public function test_init_post_type() {
