@@ -15,23 +15,22 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <tr>
-	<td class="padding"><?php echo esc_html( $i ); ?></td>
+	<td class="padding"><?php echo esc_html( $current_var_index ); ?></td>
 
-	<?php $variables_number = count( $list_evaluation_method_variable ); ?>
-	<?php for ( $x = 0; $x < $variables_number; $x++ ) :
+	<?php for ( $x = 0; $x < $number_variables; $x++ ) :
 		$active = '';
 
 		if ( ! empty( $risk->evaluation ) && ! empty( $risk->evaluation->quotation_detail ) ) :
 			foreach ( $risk->evaluation->quotation_detail as $detail ) :
-				if ( ! empty( $detail['variable_id'] ) && $detail['variable_id'] === $list_evaluation_method_variable[ $x ]->id && $detail['value'] === $list_evaluation_method_variable[ $x ]->survey['request'][ $i ]['seuil'] ) :
+				if ( ! empty( $detail['variable_id'] ) && $detail['variable_id'] == $list_evaluation_method_variable[ $x ]->id && $detail['value'] == $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['seuil'] ) :
 					$active = 'active';
 				endif;
 			endforeach;
 		endif; ?>
 
 		<td class="<?php echo esc_attr( $active ); ?>" data-variable-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->id ); ?>"
-				data-seuil-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->survey['request'][ $i ]['seuil'] ); ?>">
-				<?php echo esc_html( ! empty( $list_evaluation_method_variable[ $x ]->survey['request'][ $i ] ) ? $list_evaluation_method_variable[ $x ]->survey['request'][ $i ]['question'] : '' ); ?>
+				data-seuil-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['seuil'] ); ?>">
+				<?php echo esc_html( ! empty( $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ] ) ? $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['question'] : '' ); ?>
 			</td>
 	<?php endfor; ?>
 

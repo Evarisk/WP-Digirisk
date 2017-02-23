@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					<?php
 					$number_variables = count( $list_evaluation_method_variable );
 					for ( $i = 0; $i < $number_variables; $i++ ) :
-						View_Util::exec( 'evaluation_method', 'popup/row', array( 'i' => $i, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable ) );
+						View_Util::exec( 'evaluation_method', 'popup/row', array( 'current_var_index' => $i, 'risk' => $risk, 'list_evaluation_method_variable' => $list_evaluation_method_variable, 'number_variables' => $number_variables ) );
 					endfor; ?>
 				</tbody>
 			</table>
