@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[eo_upload_button id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="padding">
-		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" type="recommendation_comment" display="edit"]' ); ?>
+		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
 		<?php if ( 0 !== $recommendation->id ) : ?>

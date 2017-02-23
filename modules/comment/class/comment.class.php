@@ -33,14 +33,15 @@ class Digi_Comment_Class extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.7.0
 	 */
 	public function display( $param ) {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 		$type = ! empty( $param ) && ! empty( $param['type'] ) ? $param['type'] : '';
+		$namespace = ! empty( $param ) && ! empty( $param['namespace'] ) ? $param['namespace'] : '';
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
 
-		$model_name = '\digi\\' . $type . '_class';
+		$model_name = '\\' . $namespace . '\\' . $type . '_class';
 
 		if ( 0 !== $id ) {
 			$comments = $model_name::g()->get( array( 'post_id' => $id ) );
