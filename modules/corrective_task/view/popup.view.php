@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<i class="close fa fa-times"></i>
 		</div>
 
-		<div class="content">
+		<div class="content" style="overflow-y: scroll; height: 600px;">
 		</div>
 	</div>
 </div>
