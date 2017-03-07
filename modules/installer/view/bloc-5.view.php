@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		</div>
 
 		<div>
-			<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/installer/02.jpg' ); ?>" alt="01" />
+			<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/installer/05.jpg' ); ?>" alt="01" />
 		</div>
 	</div>
 </div>

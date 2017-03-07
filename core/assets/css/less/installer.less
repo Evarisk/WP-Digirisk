@@ -1,0 +1,54 @@
+/**
+ * Installer de digirisk avec slider
+ * .button -> classe de base pour un bouton
+ */
+.digirisk-wrap {
+
+	.wpdigi-components {
+		h2 {
+			text-align: center;
+			display: block;
+			text-transform: uppercase;
+			font-size: 18px;
+			font-weight: 400;
+			margin: 10px 0 20px 0;
+		}
+		h3 {
+			background: @a;
+			font-weight: 600;
+			text-transform: uppercase;
+			color: #fff;
+			padding: 10px 12px;
+			margin-bottom: 10px;
+		}
+		ul {
+			margin-bottom: 10px;
+			li {
+				padding-left: 16px;
+				&:before {
+					display: block;
+					content: '';
+					width: 5px;
+					height: 5px;
+					border-radius: 50%;
+					background: @a;
+					float: left;
+					margin-right: 10px;
+					margin-top: 7px;
+				}
+			}
+		}
+		p {
+			margin-bottom: 10px;
+			padding-left: 10px;
+		}
+		progress {
+			width: 100%;
+			padding: 10px;
+		}
+		.valid {
+			text-align: center;
+		}
+	}
+
+}

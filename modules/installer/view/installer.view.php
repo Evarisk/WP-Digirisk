@@ -44,7 +44,6 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	</div>
 
 	<div class="main-content hidden wpdigi-components">
-		<h2><?php esc_html_e( 'Composants', 'digirisk' ); ?></h2>
 
 		<!-- Le nonce pour la sécurité de la requête -->
 		<?php
@@ -53,15 +52,16 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 		<div class="owl-carousel owl-theme">
 			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
-			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
-			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
-			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
-			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
 			<?php View_Util::exec( 'installer', 'bloc-2' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-3' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-4' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-5' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-6' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-7' ); ?>
 		</div>
 
 		<progress value="0" max="100">Création des dangers</progress>
-		<button class="button blue next disabled"><span>Suivant</span></button>
+		<div class="valid margin"><button class="button blue next disabled"><span>Suivant</span></button></div>
 	</div>
 
 	<div class="hidden wpdigi-staff">
