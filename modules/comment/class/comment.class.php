@@ -38,10 +38,9 @@ class Digi_Comment_Class extends Singleton_Util {
 	public function display( $param ) {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 		$type = ! empty( $param ) && ! empty( $param['type'] ) ? $param['type'] : '';
-		$namespace = ! empty( $param ) && ! empty( $param['namespace'] ) ? $param['namespace'] : '';
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
 
-		$model_name = '\\' . $namespace . '\\' . $type . '_class';
+		$model_name = '\digi\\' . $type . '_class';
 
 		if ( 0 !== $id ) {
 			$comments = $model_name::g()->get( array( 'post_id' => $id ) );
