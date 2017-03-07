@@ -19,7 +19,8 @@ window.digirisk.installer.event = function() {
 		'items': 1,
 		'loop': true,
 		'autoplay': true,
-		'autoplayHoverPause': true
+		'autoplayHoverPause': true,
+		'autoplayTimeout': 15000
 	} );
 };
 
