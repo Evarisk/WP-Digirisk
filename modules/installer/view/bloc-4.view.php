@@ -21,7 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
 
 			<p><?php _e( '<b>La cotation risque faible</b>, notamment dans le cas des expositions à des produits chimiques, a une signification juridique.', 'digirisk' ); ?></p>
-			<p><?php _e( 'En effet, la définition d\'un risque faible doit respecter une définition légale. Retrouvez les informations ici: http://www.travailler-mieux.gouv.fr/', 'digirisk' ); ?></p>
+			<p>
+				<?php _e( 'En effet, la définition d\'un risque faible doit respecter une définition légale. Retrouvez les informations ici:', 'digirisk' ); ?>
+				<a href="http://www.travailler-mieux.gouv.fr/" target="_blank">travailler-mieux.gouv.fr</a>
+			</p>
 			<p><?php _e( '<b>L\'échelle</b> des cotations du logiciel DigiRisk Comprend au maximum 101 valeurs comprises entre 0 et 100.', 'digirisk' ); ?></p>
 		</div>
 

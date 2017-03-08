@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			<p><?php esc_html_e( 'Définition Risque:', 'digirisk' ); ?></p>
 			<p><?php esc_html_e( 'Possibilité, probabilité d\'un fait, d\'un événement considéré comme un mal ou un dommage: Les risques de guerre augmentent.', 'digirisk' ); ?></p>
 			<p><?php esc_html_e( 'Danger, inconvénient plus ou moins probable auquel on est exposé: Courir le risque d\'un échec. Un pilote qui prend trop de risques.', 'digirisk' ); ?></p>
-			<p><?php esc_html_e( 'Source: http://www.larousse.fr/dictionnaires/francais/risque/69557#8VAKqHCtvXCADLK3.99', 'digirisk' ); ?></p>
+			<p>Source: <a href="http://www.larousse.fr/dictionnaires/francais/risque/69557#8VAKqHCtvXCADLK3.99" target="_blank">larousse.fr</a></p>
 		</div>
 
 		<div>

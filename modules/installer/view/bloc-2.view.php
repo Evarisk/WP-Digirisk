@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 			<h3><?php esc_html_e( 'Définition des Unités de Travail Ministère du travail', 'digirisk' ); ?></h3>
 			<p><?php esc_html_e( 'La notion d’« unité de travail » doit être comprise au sens large, afin de recouvrir les situations très diverses d’organisation du travail. Son champ peut s’étendre d’un poste de travail, à plusieurs types de postes occupés par les travailleurs ou à des situations de travail présentant les mêmes caractéristiques. De même, d’un point de vue géographique, l’unité de travail ne se limite pas forcément à une activité fixe, mais peut aussi bien couvrir des lieux différents (manutention, chantiers, transports, etc.).', 'digirisk' ); ?></p>
-			<p>http://travail-emploi.gouv.fr/publications/picts/bo/05062002/A0100004.htm</p>
+			<p><a href="http://travail-emploi.gouv.fr/publications/picts/bo/05062002/A0100004.htm" target="_blank">Bulletin Officiel du Travail, de l’Emploi et de la Formation Professionnelle</a></p>
 		</div>
 
 		<div>

@@ -19,20 +19,20 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<div class="grid-layout w2">
 		<div class="content">
 			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
-			<p><?php _e( 'La méthode d’évaluation des risques détaillée proposée est basée sur le modèle de classement de KINNEY', 'digirisk' ); ?></p>
-			<p class="center"><strong><?php _e( 'Risque', 'digirisk' ); ?></strong></p>
-			<p class="center"><strong><?php _e( '=', 'digirisk' ); ?></strong></p>
-			<p class="center"><strong><?php _e( 'Gravité * Exposition * Probabilité', 'digirisk' ); ?></strong></p>
+			<p><?php esc_html_e( 'La méthode d’évaluation des risques détaillée proposée est basée sur le modèle de classement de KINNEY', 'digirisk' ); ?></p>
+			<p style="text-align: center;"><strong><?php esc_html_e( 'Risque', 'digirisk' ); ?></strong></p>
+			<p style="text-align: center;"><strong><?php esc_html_e( '=', 'digirisk' ); ?></strong></p>
+			<p style="text-align: center;"><strong><?php esc_html_e( 'Gravité * Exposition * Probabilité', 'digirisk' ); ?></strong></p>
 
-			<p><?php _e( 'P : La probabilité intègre 3 critères:', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'P : La probabilité intègre 3 critères:', 'digirisk' ); ?></p>
 			<ul>
-				<li><?php _e( 'Occurrence de 1 à 4', 'digirisk' ); ?></li>
-				<li><?php _e( 'Formation de 1 à 4', 'digirisk' ); ?></li>
-				<li><?php _e( 'Protection de 1 à 4', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Occurrence de 1 à 4', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Formation de 1 à 4', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Protection de 1 à 4', 'digirisk' ); ?></li>
 			</ul>
 
-			<p><?php _e( 'Ces critères sont multipliés. ', 'digirisk' ); ?></p>
-			<p><?php _e( 'On obtient des valeurs de 0 à 1024 que l\'on ramène sur l\'échelle de 0 à 100.', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Ces critères sont multipliés. ', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'On obtient des valeurs de 0 à 1024 que l\'on ramène sur l\'échelle de 0 à 100.', 'digirisk' ); ?></p>
 		</div>
 
 		<div>

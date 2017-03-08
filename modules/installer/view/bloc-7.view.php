@@ -24,7 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 				<li><?php esc_html_e( 'ED 777 : Signalisation de santé et de sécurité au travail. Réglementation.', 'digirisk' ); ?></li>
 				<li><?php esc_html_e( 'ED 885 : La signalisation de santé et de sécurité au travail', 'digirisk' ); ?></li>
 			</ul>
-			<p><?php esc_html_e( 'Les pictogrammes originaux sont aussi disponibles sur leur site: http://www.inrs.fr/media.html?refINRS=outil10', 'digirisk' ); ?>
+			<p>
+				<?php esc_html_e( 'Les pictogrammes originaux sont aussi disponibles sur leur site:', 'digirisk' ); ?>
+				<a href="http://www.inrs.fr/media.html?refINRS=outil10" target="_blank">inrs.fr</a>
+			</p>
 
 		</div>
 
