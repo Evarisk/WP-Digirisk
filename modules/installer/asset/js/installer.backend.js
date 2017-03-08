@@ -2,7 +2,7 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.6.0
+ * @version 6.2.7.0
  */
 
 window.digirisk.installer = {};
@@ -19,8 +19,8 @@ window.digirisk.installer.event = function() {
 		'items': 1,
 		'loop': true,
 		'autoplay': true,
-		'autoplayHoverPause': true,
-		'autoplayTimeout': 15000
+		'autoplayTimeout': 10000,
+		'nav': true
 	} );
 };
 
