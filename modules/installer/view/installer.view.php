@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.7.0
  */
 
 namespace digi;
