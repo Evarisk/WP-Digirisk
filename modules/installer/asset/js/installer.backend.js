@@ -18,7 +18,8 @@ window.digirisk.installer.event = function() {
 	jQuery( '.owl-carousel' ).owlCarousel( {
 		'items': 1,
 		'loop': true,
-		'nav': true
+		'nav': true,
+		'navText': []
 	} );
 };
 
