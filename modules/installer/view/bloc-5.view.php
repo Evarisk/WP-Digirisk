@@ -15,20 +15,24 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Nous installons la méthode d’évaluation avancée', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
+			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
+			<p><?php _e( 'La méthode d’évaluation des risques détaillée proposée est basée sur le modèle de classement de KINNEY', 'digirisk' ); ?></p>
+			<p class="center"><strong><?php _e( 'Risque', 'digirisk' ); ?></strong></p>
+			<p class="center"><strong><?php _e( '=', 'digirisk' ); ?></strong></p>
+			<p class="center"><strong><?php _e( 'Gravité * Exposition * Probabilité', 'digirisk' ); ?></strong></p>
+
+			<p><?php _e( 'P : La probabilité intègre 3 critères:', 'digirisk' ); ?></p>
 			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
+				<li><?php _e( 'Occurrence de 1 à 4', 'digirisk' ); ?></li>
+				<li><?php _e( 'Formation de 1 à 4', 'digirisk' ); ?></li>
+				<li><?php _e( 'Protection de 1 à 4', 'digirisk' ); ?></li>
 			</ul>
 
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
+			<p><?php _e( 'Ces critères sont multipliés. ', 'digirisk' ); ?></p>
+			<p><?php _e( 'On obtient des valeurs de 0 à 1024 que l\'on ramène sur l\'échelle de 0 à 100.', 'digirisk' ); ?></p>
 		</div>
 
 		<div>

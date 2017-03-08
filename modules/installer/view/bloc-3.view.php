@@ -15,20 +15,15 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Connaissez-vous la différence entre risque et danger ?', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
-			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
-			</ul>
-
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
+			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'Le risque c’est le Danger et l’Homme dans le même espace.', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Définition Risque:', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Possibilité, probabilité d\'un fait, d\'un événement considéré comme un mal ou un dommage: Les risques de guerre augmentent.', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Danger, inconvénient plus ou moins probable auquel on est exposé: Courir le risque d\'un échec. Un pilote qui prend trop de risques.', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Source: http://www.larousse.fr/dictionnaires/francais/risque/69557#8VAKqHCtvXCADLK3.99', 'digirisk' ); ?></p>
 		</div>
 
 		<div>

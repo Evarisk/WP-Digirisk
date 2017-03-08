@@ -15,20 +15,14 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'La méthode simplifiée vous permet une cotation sur 4 niveaux', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
-			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
-			</ul>
+			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
 
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
+			<p><?php _e( '<b>La cotation risque faible</b>, notamment dans le cas des expositions à des produits chimiques, a une signification juridique.', 'digirisk' ); ?></p>
+			<p><?php _e( 'En effet, la définition d\'un risque faible doit respecter une définition légale. Retrouvez les informations ici: http://www.travailler-mieux.gouv.fr/', 'digirisk' ); ?></p>
+			<p><?php _e( '<b>L\'échelle</b> des cotations du logiciel DigiRisk Comprend au maximum 101 valeurs comprises entre 0 et 100.', 'digirisk' ); ?></p>
 		</div>
 
 		<div>

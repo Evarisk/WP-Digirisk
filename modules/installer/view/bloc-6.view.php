@@ -15,20 +15,18 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Nous installons, les risques par défaut, basés sur les 17 familles de risques proposées par l’INRS qui sont consultables dans le document : ED 840', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
+			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'Digirisk contient quelques familles de risques complémentaires:', 'digirisk' ); ?></p>
 			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
+				<li><?php esc_html_e( 'Amiante', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Les risques présents pour la pénibilité', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Certains anciens risques de l’ED 840', 'digirisk' ); ?></li>
 			</ul>
 
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
+			<p><?php esc_html_e( 'S\'il vous en manque il y a toujours la catégorie “autres”', 'digirisk' ); ?></p>
 		</div>
 
 		<div>

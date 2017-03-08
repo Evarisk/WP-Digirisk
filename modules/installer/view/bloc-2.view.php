@@ -15,20 +15,17 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Nous installons les fonctions de gestion des Unités de Travail et des Groupements', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
-		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
-			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
-			</ul>
 
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
+		<div class="content">
+			<h3><?php esc_html_e( 'Au fait, Connaissez-vous la définition d’une Unité de Travail selon l’INRS ?', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'Regroupement (géographique, par métier, par poste, par activité) opéré dans l’entreprise sur la base des “ contextes homogènes d’exposition ” utilisés pour circonscrire l’évaluation et en rendre compte (traçabilité) de l’évaluation des risques.', 'digirisk' ); ?></p>
+			<p><?php esc_html_e( 'Vous pouvez télécharger : ED887.pdf', 'digirisk' ); ?></p>
+
+			<h3><?php esc_html_e( 'Définition des Unités de Travail Ministère du travail', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'La notion d’« unité de travail » doit être comprise au sens large, afin de recouvrir les situations très diverses d’organisation du travail. Son champ peut s’étendre d’un poste de travail, à plusieurs types de postes occupés par les travailleurs ou à des situations de travail présentant les mêmes caractéristiques. De même, d’un point de vue géographique, l’unité de travail ne se limite pas forcément à une activité fixe, mais peut aussi bien couvrir des lieux différents (manutention, chantiers, transports, etc.).', 'digirisk' ); ?></p>
+			<p>http://travail-emploi.gouv.fr/publications/picts/bo/05062002/A0100004.htm</p>
 		</div>
 
 		<div>

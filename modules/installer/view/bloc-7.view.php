@@ -15,20 +15,17 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bienvenue, sur DigiRisk, on vous suggère quelques étapes pour la mise en place du Document Unique', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Les pictogrammes de signalisation de l’INRS', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'I. Préparer la démarche', 'digirisk' ); ?></h3>
+			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'L’INRS met à votre disposition 2 guides pour la signalisation:', 'digirisk' ); ?>
 			<ul>
-				<li>Récupérer les documents</li>
-				<li>Présenter la démarche</li>
-				<li>Informer le personnel</li>
+				<li><?php esc_html_e( 'ED 777 : Signalisation de santé et de sécurité au travail. Réglementation.', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'ED 885 : La signalisation de santé et de sécurité au travail', 'digirisk' ); ?></li>
 			</ul>
+			<p><?php esc_html_e( 'Les pictogrammes originaux sont aussi disponibles sur leur site: http://www.inrs.fr/media.html?refINRS=outil10', 'digirisk' ); ?>
 
-			<h3><?php esc_html_e( 'II. Préparer la démarche', 'digirisk' ); ?></h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis libero eget scelerisque congue. Aenean sed ultrices ipsum. Curabitur ac varius leo. Duis nibh nulla, pellentesque in finibus sit amet, posuere eu ligula. Praesent nec purus venenatis, lobortis felis blandit, sollicitudin erat. Cras vel nunc feugiat, accumsan quam nec, egestas augue. Donec dignissim molestie turpis et fringilla. Maecenas dignissim, nisl ut maximus porttitor, elit eros vestibulum dolor, ut malesuada diam turpis at mauris.
-			</p>
 		</div>
 
 		<div>
