@@ -24,7 +24,15 @@ class Risk_Page_Class extends Singleton_Util {
 	 *
 	 * @var integer
 	 */
-	protected $limit_risk = 10;
+	public $limit_risk = 2;
+
+	/**
+	 * Le nombre de risque par page.
+	 *
+	 * @var integer
+	 */
+	public $option_name = 'risk_per_page';
+
 
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
@@ -45,12 +53,22 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @version 6.2.7.0
 	 */
 	public function display() {
+		$user = get_current_user_id();
+		$screen = get_current_screen();
+		$option = $screen->get_option('per_page', 'option');
+
+		$per_page = get_user_meta($user, $option, true);
+
+		if ( empty ( $per_page) || $per_page < 1 ) {
+			$per_page = $screen->get_option( 'per_page', 'default' );
+		}
+
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
 		$args_where = array(
 			'post_status' => 'publish',
-			'offset' => ( $current_page - 1 ) * $this->limit_risk,
-			'posts_per_page' => $this->limit_risk,
+			'offset' => ( $current_page - 1 ) * $per_page,
+			'posts_per_page' => $per_page,
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );
@@ -61,7 +79,7 @@ class Risk_Page_Class extends Singleton_Util {
 		$args_where['fields'] = array( 'ID' );
 		$count_risk = count( Risk_Class::g()->get( $args_where ) );
 
-		$number_page = ceil( $count_risk / $this->limit_risk );
+		$number_page = ceil( $count_risk / $per_page );
 
 		View_Util::exec( 'risk', 'page/main', array(
 			'current_page' => $current_page,
@@ -82,11 +100,20 @@ class Risk_Page_Class extends Singleton_Util {
 		global $wpdb;
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
+		$user = get_current_user_id();
+		$screen = get_current_screen();
+		$option = $screen->get_option('per_page', 'option');
+
+		$per_page = get_user_meta($user, $option, true);
+
+		if ( empty ( $per_page) || $per_page < 1 ) {
+			$per_page = $screen->get_option( 'per_page', 'default' );
+		}
 
 		$args_where = array(
 			'post_status' => 'publish',
-			'offset' => ( $current_page - 1 ) * $this->limit_risk,
-			'posts_per_page' => $this->limit_risk,
+			'offset' => ( $current_page - 1 ) * $per_page,
+			'posts_per_page' => $per_page,
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );

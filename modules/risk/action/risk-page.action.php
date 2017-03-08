@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.6.0
+ * @version 6.2.7.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -36,10 +36,28 @@ class Risk_Page_Action {
 	 * Définition du sous menu "Risques" dans le menu "Digirisk" de WordPress
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.7.0
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_options', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );
+		$hook = add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_options', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );
+		add_action( 'load-' . $hook, array( $this, 'callback_add_screen_option' ) );
+	}
+
+	/**
+	 * Ajoutes le bouton "Option de l'écran" en haut de la page.
+	 *
+	 * @since 6.2.7.0
+	 * @version 6.2.7.0
+	 */
+	public function callback_add_screen_option() {
+		add_screen_option(
+			'per_page',
+			array(
+				'label' 	=> _x( 'Risques', 'Risque par page' ),
+				'default' => Risk_Page_Class::g()->limit_risk,
+				'option' 	=> Risk_Page_Class::g()->option_name,
+			)
+		);
 	}
 
 	/**
