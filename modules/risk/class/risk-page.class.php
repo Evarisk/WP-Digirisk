@@ -76,6 +76,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @version 6.2.6.0
 	 */
 	public function display_risk_list() {
+		global $wpdb;
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
 		$args_where = array(

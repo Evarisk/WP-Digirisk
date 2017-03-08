@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 	</div>
 
-	<div class="main-content  wpdigi-components">
+	<div class="main-content hidden wpdigi-components">
 
 		<!-- Le nonce pour la sécurité de la requête -->
 		<?php
