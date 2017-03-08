@@ -5345,6 +5345,30 @@
 .digirisk-wrap .wpdigi-components .valid {
   text-align: center;
 }
+.digirisk-wrap .wpdigi-components .owl-carousel {
+  position: relative;
+}
+.digirisk-wrap .wpdigi-components .owl-nav .owl-prev,
+.digirisk-wrap .wpdigi-components .owl-nav .owl-next {
+  font-family: 'FontAwesome', 'Open Sans';
+  position: absolute;
+  top: 50%;
+  font-size: 18px;
+}
+.digirisk-wrap .wpdigi-components .owl-nav .owl-prev {
+  left: -10px;
+}
+.digirisk-wrap .wpdigi-components .owl-nav .owl-next {
+  right: -10px;
+}
+.digirisk-wrap .wpdigi-components .owl-nav .owl-prev:before {
+  display: block;
+  content: '\f053';
+}
+.digirisk-wrap .wpdigi-components .owl-nav .owl-next:before {
+  display: block;
+  content: '\f054';
+}
 /**
  * Import des templates de page
  */

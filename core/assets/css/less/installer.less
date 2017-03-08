@@ -49,6 +49,31 @@
 		.valid {
 			text-align: center;
 		}
+		.owl-carousel {
+			position: relative;
+		}
+		.owl-nav {
+			.owl-prev, .owl-next {
+				font-family: 'FontAwesome', 'Open Sans';
+				position: absolute;
+				top: 50%;
+				font-size: 18px;
+			}
+			.owl-prev {
+				left: -10px;
+			}
+			.owl-next {
+				right: -10px;
+			}
+			.owl-prev:before {
+				display: block;
+				content: '\f053';
+			}
+			.owl-next:before {
+				display: block;
+				content: '\f054';
+			}
+		}
 	}
 
 }
