@@ -12,6 +12,6 @@
 		"class": {
 		}
 	},
-	"log": false,
+	"log": true,
 	"number_decimal_ms": 2
 }

@@ -21,7 +21,7 @@ class document_action {
 	 */
 	function __construct() {
     add_action( 'wp_ajax_wpdigi_delete_sheet', array( $this, 'ajax_delete_sheet' ) );
-    add_action( 'wp_ajax_wpdigi_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
+    add_action( 'wp_ajax_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
 		add_action( 'wp_ajax_paginate_document', array( $this, 'ajax_paginate_document' ) );
   }
 
@@ -63,7 +63,7 @@ class document_action {
 	 * Re-génére un document a partir des données présentes en base de données
 	 */
 	function ajax_regenerate_document() {
-		check_ajax_referer( 'wpdigi_regenerate_document' );
+		check_ajax_referer( 'regenerate_document' );
 
 		$model_name = !empty( $_POST['model_name'] ) ? sanitize_text_field( $_POST['model_name'] ) : '';
 		if ( empty( $model_name ) ) {

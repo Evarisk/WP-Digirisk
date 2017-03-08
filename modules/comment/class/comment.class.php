@@ -5,7 +5,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.4.0
+ * @version 6.2.7.0
  * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage class
@@ -33,7 +33,7 @@ class Digi_Comment_Class extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.7.0
 	 */
 	public function display( $param ) {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';

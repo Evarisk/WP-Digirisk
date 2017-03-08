@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	if ( ! empty( $risk->evaluation ) && ! empty( $risk->evaluation->quotation_detail ) ) :
 		foreach ( $risk->evaluation->quotation_detail as $detail ) :
 			if ( ! empty( $detail['variable_id'] ) ) :
-				if ( $detail['variable_id'] === $list_evaluation_method_variable[ $key ]->id ) :
+				if ( $detail['variable_id'] == $list_evaluation_method_variable[ $key ]->id ) :
 					$value_input = $detail['value'];
 				endif;
 			endif;

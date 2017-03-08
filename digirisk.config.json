@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.6.0",
+	"version": "6.2.7.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
@@ -27,6 +27,8 @@
 		"core/external/wpeo_model/wpeo_model.config.json",
 		"core/external/wpeo_export/wpeo_export.config.json",
 		"core/core.config.json",
+
+		"modules/update-manager/update-manager.config.json",
 
 		"modules/address/address.config.json",
 		"modules/accident/accident.config.json",
@@ -80,5 +82,6 @@
 	"accronym_option": "_digirisk_accronym",
 	"default_tab": "digi-risk",
 	"default_tab_title": "Les risques de",
+	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false
 }

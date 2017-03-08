@@ -90,7 +90,8 @@ window.digirisk.media.selected_file = function( element ) {
 };
 
 window.digirisk.media.display_attachment = function( selected_JSON, element ) {
-  window.digirisk.media.element.find( 'img' ).attr( 'src', selected_JSON.url ).show();
+  window.digirisk.media.element.find( 'img' ).attr( 'src', selected_JSON.sizes.thumbnail.url ).show();
+
   window.digirisk.media.element.find( 'i' ).hide();
   window.digirisk.media.element.find( 'input.input-file-image' ).val( selected_JSON.id );
 };

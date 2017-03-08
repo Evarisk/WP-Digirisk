@@ -107,18 +107,37 @@ class DUER_Class extends Post_Class {
 	}
 
 	/**
-	 * Appelle le template main.view.php dans le dossier /view/document-unique
+	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.7.0
 	 */
 	public function display( $element_id ) {
-		$element = $this->get( array( 'schema' => true ), array() );
-		$element = $element[0];
-		View_Util::exec( 'duer', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
+		$element = $this->get( array(
+			'posts_per_page' => 1,
+			'order' => 'DESC',
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $element[0] ) ) {
+			$element = $element[0];
+		}
+
+		if ( empty( $element ) ) {
+			$element = $this->get( array(
+				'schema' => true,
+			) );
+			$element = $element[0];
+		}
+
+		View_Util::exec( 'duer', 'main', array(
+			'element' => $element,
+			'element_id' => $element_id,
+		) );
 	}
 
 	/**
@@ -128,12 +147,17 @@ class DUER_Class extends Post_Class {
 	 * @return void
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.7.0
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ) );
+		$list_document = $this->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
 
-		view_util::exec( 'duer', 'list', array( 'list_document' => $list_document ) );
+		View_Util::exec( 'duer', 'list', array(
+			'list_document' => $list_document,
+		) );
 	}
 
 	/**

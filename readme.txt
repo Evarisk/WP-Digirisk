@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 4.7.2
-Stable tag: 6.2.6.0
+Tested up to: 4.7.3
+Stable tag: 6.2.7.0
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -75,20 +75,36 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.2.7.0 =
+
+Améliorations
+
+* 4795 - Application: Récupères les dernières informations du dernier DUER pour remplir les champs dans le tableau d'édition.
+* 5284 - Page installation: Ajout d'un diaporama lors de l'installation de DigiRisk à l'étape 2 "Compostants".
+* 7636 - Application: Ajout d'une barre de scrolling dans les tâches correctives.
+* 7676 - Page risques: Le champ de saisie des commentaires est désormais plus grand.
+* 7678 - Page risques: Le nombre de risque affiché par page est maintenant personnalisable grâce au bouton "Options de l'écran".
+
+Corrections
+
+* 7012 - Application: La version des documents (DUER, Fiche de groupement, Fiche de poste, affichage légal) s'incrémente correctement.
+* 7286 - Application: Correction "Quot" en "Cot."
+* 7632 - Application: Lors de l'ajout d'une image au format 16:9, celle-ci n'était pas carré. Ce problème est résolu.
+
 = Version 6.2.6.0 =
 
 Améliorations
 
-* 4155 - Ajout de l'export au format CSV de tous les risques.
-* 4158 - Ajout des changements d'état sur les boutons d'enregistrement.
-* 4523 - Modification de la couleur des utilisateurs.
-* 5840 - Ajout de la pagination dans la page des tous les risques.
-* 6298 - Affiches le résultat de la méthode d'évaluation Evarisk en temps réel dans la popup.
-* 6611 - Compatibilité IE.
-* 6817 - Affichages de toutes les tâches correctives dans le tableau de bord de Task Manager.
-* 6993 - Rajout de la durée de l'entretien des évaluateurs dans la fiche de groupement.
-* 7124 - Rajout du champ "Modalités d'information" dans l'affichage légal.
-* 7127 - Mise à jour du modèle de l'affichage légal en fonction du texte de loi avec helvetica.
+* 4155 - Page outils: Ajout de l'export au format CSV de tous les risques.
+* 4158 - Général: Ajout des changements d'état sur les boutons d'enregistrement.
+* 4523 - Page utilisateur: Modification de la couleur des utilisateurs.
+* 5840 - Page risques: Ajout de la pagination dans la page des tous les risques.
+* 6298 - Application: Affiches le résultat de la méthode d'évaluation Evarisk en temps réel dans la popup.
+* 6611 - Général: Compatibilité IE.
+* 6817 - Task Manager: Affichages de toutes les tâches correctives dans le tableau de bord de Task Manager.
+* 6993 - Application: Rajout de la durée de l'entretien des évaluateurs dans la fiche de groupement.
+* 7124 - Application: Rajout du champ "Modalités d'information" dans l'affichage légal.
+* 7127 - Document: Mise à jour du modèle de l'affichage légal en fonction du texte de loi avec helvetica.
 
 = Version 6.2.5.2 =
 

@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <thead>
 	<tr>
-		<td class="padding">Groupement</td>
-		<td>Unité de travail</td>
-		<td>&nbsp;</td>
-		<td><a class="tooltip hover" aria-label="<?php echo esc_attr( 'Cliquer pour trier par cotation', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></td>
-		<td><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
-		<td><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
+		<td class="w100 padding">Groupement</td>
+		<td class="w100 padding">Unité de travail</td>
+		<td class="w50">&nbsp;</td>
+		<td class="w50"><a class="tooltip hover" aria-label="<?php echo esc_attr( 'Cliquer pour trier par cotation', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' ) . $url_ref_order ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></td>
+		<td class="w50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
+		<td class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
 		<td><?php esc_html_e( 'Comment', 'digirisk' ); ?></td>
 		<td>&nbsp;</td>
 	</tr>

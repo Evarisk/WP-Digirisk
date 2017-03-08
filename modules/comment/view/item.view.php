@@ -20,4 +20,5 @@ $userdata = get_userdata( $comment->author_id ); ?>
 	<span class="user"><?php echo ! empty( $userdata->display_name ) ? $userdata->display_name : 'Indéfini'; ?>, </span>
 	<span class="date"><?php echo $comment->date; ?> : </span>
 	<span class="content"><?php echo $comment->content; ?></span>
+	<span><?php apply_filters( 'digi_' . $type . '_view_end', $comment ); ?></span>
 </li>

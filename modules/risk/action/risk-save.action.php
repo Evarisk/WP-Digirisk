@@ -61,7 +61,10 @@ class Risk_Save_Action {
 				wp_send_json_error();
 			}
 
-			$risk_evaluation = Risk_Evaluation_Class::g()->update( array( 'id' => $risk_obj->current_evaluation_id, 'post_id' => $risk_obj->id ) );
+			$risk_evaluation = Risk_Evaluation_Class::g()->update( array(
+				'id' => $risk_obj->current_evaluation_id,
+				'post_id' => $risk_obj->id,
+			) );
 
 			if ( ! $risk_evaluation ) {
 				wp_send_json_error();
@@ -72,7 +75,7 @@ class Risk_Save_Action {
 			}
 
 			if ( ! empty( $image_id ) ) {
-				File_Management_Class::g()->associate_file( $image_id, $risk_obj->id, 'risk_class' );
+				File_Management_Class::g()->associate_file( $image_id, $risk_obj->id, 'risk_class', 'digi' );
 			}
 		}
 

@@ -29,6 +29,9 @@ $userdata = get_userdata( $author_id );
 	<input type="text" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][date]" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $comment->date ); ?>" />
 	<textarea rows="1" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][content]" placeholder="Entrer un commentaire"><?php echo esc_html( $comment->content ); ?></textarea>
 
+	<!-- Ajout d'un filtre permettant de rajouter des champs à la fin -->
+	<?php apply_filters( 'digi_' . $type . '_edit_end', $comment ); ?>
+
 	<?php if ( 0 !== $id && 0 !== $comment->id ) : ?>
 		<span class="button delete action-delete"
 					data-id="<?php echo esc_attr( $comment->id ); ?>"

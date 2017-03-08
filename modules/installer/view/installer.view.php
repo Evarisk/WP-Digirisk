@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.7.0
  */
 
 namespace digi;
@@ -43,31 +43,25 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<div data-module="installer" data-loader="form" data-parent="form" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Créer ma société', 'digirisk' ); ?></span></div>
 	</div>
 
-	<div class="hidden main-content wpdigi-components">
-		<h2><?php esc_html_e( 'Composants', 'digirisk' ); ?></h2>
+	<div class="main-content hidden wpdigi-components">
 
 		<!-- Le nonce pour la sécurité de la requête -->
 		<?php
 		echo '<input type="hidden" class="nonce-installer-components" value="' . esc_attr( wp_create_nonce( 'ajax_installer_components' ) ) . '" />';
 		?>
 
-		<ul>
-			<li class="active">
-				<?php esc_html_e( 'Création des dangers', 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-			<li class="hidden">
-				<?php esc_html_e( 'Création des préconisations', 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-			<li class="hidden">
-				<?php	esc_html_e( "Création des méthodes d'évaluation", 'digirisk' ); ?>
-				<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
-				<span class="dashicons dashicons-yes hidden"></span>
-			</li>
-		</ul>
+		<div class="owl-carousel owl-theme">
+			<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-2' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-3' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-4' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-5' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-6' ); ?>
+			<?php View_Util::exec( 'installer', 'bloc-7' ); ?>
+		</div>
+
+		<progress value="0" max="100">Création des dangers</progress>
+		<div class="valid margin"><button class="button blue next disabled"><span>Suivant</span></button></div>
 	</div>
 
 	<div class="hidden wpdigi-staff">

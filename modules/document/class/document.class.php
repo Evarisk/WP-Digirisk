@@ -255,7 +255,6 @@ class Document_Class extends attachment_class {
 	public function get_document_type_next_revision( $current_element_type, $element_id ) {
 		global $wpdb;
 
-
 		/**	Récupération de la date courante / Get current date	*/
 		$today = getdate();
 
@@ -264,7 +263,7 @@ class Document_Class extends attachment_class {
 			'nopaging'		=> true,
 			'post_parent'	=> $element_id,
 			'post_type' 	=> $current_element_type[0],
-			'post_status'	=> 'inherit',
+			'post_status'	=> array( 'publish', 'inherit' ),
 			'tax_query' => array(
 				array(
 					'taxonomy' => $this->attached_taxonomy_type,
@@ -281,6 +280,7 @@ class Document_Class extends attachment_class {
 				),
 			),
 		);
+
 		$element_sheet_default_model = new \WP_Query( $get_model_args );
 
 		return ( $element_sheet_default_model->post_count + 1 );
@@ -336,6 +336,30 @@ class Document_Class extends attachment_class {
 			$this->set_model( '\digi\\' . $document_type[0] . '_model' );
 		}
 
+		$types = $document_type;
+
+		// @todo: Temporaire, il faut repenser cette fonction.
+		switch( $document_type[0] ) {
+			case "document_unique":
+				$types[0] = DUER_Class::g()->get_post_type();
+				break;
+			case "fiche_de_groupement":
+				$types[0] = Fiche_De_Groupement_Class::g()->get_post_type();
+				break;
+			case "fiche_de_poste":
+				$types[0] = Fiche_De_Poste_Class::g()->get_post_type();
+				break;
+			case "affichage_legal_A3":
+				$types[0] = Affichage_Legal_A3_Class::g()->get_post_type();
+				break;
+			case "affichage_legal_A4":
+				$types[0] = Affichage_Legal_A4_Class::g()->get_post_type();
+				break;
+			case "zip":
+				$types[0] = ZIP_Class::g()->get_post_type();
+				break;
+		}
+
 		$response = array(
 			'status' => true,
 		);
@@ -346,7 +370,7 @@ class Document_Class extends attachment_class {
 		$model_to_use = $model_response[ 'model_path' ];
 
   	/**	Définition de la révision du document / Define the document version	*/
-  	$document_revision = $this->get_document_type_next_revision( $document_type, $element->id );
+  	$document_revision = $this->get_document_type_next_revision( $types, $element->id );
 
   	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
   	$main_title_part = $element->title;
@@ -397,7 +421,7 @@ class Document_Class extends attachment_class {
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 
-		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $document_type, array( 'printed', ) ), $this->attached_taxonomy_type );
+		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $types, array( 'printed', ) ), $this->attached_taxonomy_type );
 
   	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
   	$document_args = array(

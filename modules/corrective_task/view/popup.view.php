@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.7.0
  * @copyright 2015-2017 Evarisk
  * @package duer
  * @subpackage view
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<i class="close fa fa-times"></i>
 		</div>
 
-		<div class="content">
+		<div class="content" style="overflow-y: scroll; height: 600px;">
 		</div>
 	</div>
 </div>
