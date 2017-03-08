@@ -22,25 +22,13 @@ class risk_evaluation_model extends comment_model {
 						'meta_type'	=> 'multiple',
 						'bydefault'	=> 0,
 						'required'	=> true,
-					)
+					),
 				),
 			),
 			'quotation_detail' => array(
 				'export' => true,
 				'type' => 'array',
 				'meta_type'	=> 'multiple',
-				// 'child' => array(
-				// 	'variable_id' => array(
-				// 		'type' 			=> 'integer',
-				// 		'meta_type'	=> 'multiple',
-				// 		'field'			=> 'variable_id',
-				// 	),
-				// 	'value' => array(
-				// 		'type' 			=> 'integer',
-				// 		'meta_type'	=> 'multiple',
-				// 		'field'			=> 'value'
-				// 	)
-				// )
 			),
 			'scale' => array(
 				'export' => true,
@@ -59,7 +47,7 @@ class risk_evaluation_model extends comment_model {
 				'type' 				=> 'string',
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
-			)
+			),
 		) );
 
 		parent::__construct( $object );

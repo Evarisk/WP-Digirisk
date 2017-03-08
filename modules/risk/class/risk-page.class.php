@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.6.0
+ * @version 6.2.7.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage class
@@ -42,7 +42,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.6.0
+	 * @version 6.2.7.0
 	 */
 	public function display() {
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
@@ -63,7 +63,10 @@ class Risk_Page_Class extends Singleton_Util {
 
 		$number_page = ceil( $count_risk / $this->limit_risk );
 
-		view_util::exec( 'risk', 'page/main', array( 'current_page' => $current_page, 'number_page' => $number_page ) );
+		View_Util::exec( 'risk', 'page/main', array(
+			'current_page' => $current_page,
+			'number_page' => $number_page,
+		) );
 	}
 
 	/**
@@ -73,11 +76,12 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.6.0
+	 * @version 6.2.7.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+
 
 		$args_where = array(
 			'post_status' => 'publish',
@@ -131,6 +135,9 @@ class Risk_Page_Class extends Singleton_Util {
 			}
 		}
 
-		view_util::exec( 'risk', 'page/list', array( 'risk_list' => $risk_list, 'url_ref_order' => $url_ref_order ) );
+		View_Util::exec( 'risk', 'page/list', array(
+			'risk_list' => $risk_list,
+			'url_ref_order' => $url_ref_order,
+		) );
 	}
 }
