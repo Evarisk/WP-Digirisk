@@ -199,6 +199,14 @@ class Group_Class extends Post_Class {
 			$element_children = array_merge( $element_children, $workunit_definition );
 		}
 
+		usort( $work_unit_list, function( $a, $b ) {
+			if ( $a->unique_key === $b->unique_key ) {
+				return 0;
+			}
+
+			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
+		} );
+
 		return $element_children;
 	}
 
