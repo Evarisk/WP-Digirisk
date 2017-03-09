@@ -162,7 +162,7 @@ class Group_Class extends Post_Class {
 	 * @param array  $extra_params ?.
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.8.0
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();

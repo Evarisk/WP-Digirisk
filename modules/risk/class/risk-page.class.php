@@ -50,17 +50,13 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.7.0
+	 * @version 6.2.8.0
 	 */
 	public function display() {
-		$user = get_current_user_id();
-		$screen = get_current_screen();
-		$option = $screen->get_option('per_page', 'option');
+		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
 
-		$per_page = get_user_meta($user, $option, true);
-
-		if ( empty ( $per_page) || $per_page < 1 ) {
-			$per_page = $screen->get_option( 'per_page', 'default' );
+		if ( empty ( $per_page ) || $per_page < 1 ) {
+			$per_page = $this->limit_risk;
 		}
 
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
@@ -100,14 +96,10 @@ class Risk_Page_Class extends Singleton_Util {
 		global $wpdb;
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
-		$user = get_current_user_id();
-		$screen = get_current_screen();
-		$option = $screen->get_option('per_page', 'option');
+		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
 
-		$per_page = get_user_meta($user, $option, true);
-
-		if ( empty ( $per_page) || $per_page < 1 ) {
-			$per_page = $screen->get_option( 'per_page', 'default' );
+		if ( empty ( $per_page ) || $per_page < 1 ) {
+			$per_page = $this->limit_risk;
 		}
 
 		$args_where = array(

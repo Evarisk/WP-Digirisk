@@ -87,7 +87,7 @@ class Corrective_Task_Action {
 			ob_start();
 			View_Util::exec( 'corrective_task', 'need-task-manager' );
 			$view = ob_get_clean();
-		}
+		} // End if().
 
 		wp_send_json_success( array( 'module' => 'correctiveTask', 'callback_success' => 'openedTaskPopup', 'view' => $view ) );
 	}
