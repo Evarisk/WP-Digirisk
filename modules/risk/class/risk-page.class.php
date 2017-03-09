@@ -24,7 +24,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 *
 	 * @var integer
 	 */
-	public $limit_risk = 2;
+	public $limit_risk = 20;
 
 	/**
 	 * Le nombre de risque par page.
