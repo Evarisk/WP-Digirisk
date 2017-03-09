@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.7.0
+ * @version 6.2.8.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage class
@@ -90,7 +90,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.7.0
+	 * @version 6.2.8.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
