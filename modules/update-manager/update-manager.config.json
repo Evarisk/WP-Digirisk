@@ -5,8 +5,10 @@
 	"version": "6.2.7.0",
 	"description": "Le module gérant les mise à jour des données dans les différentes versions de DigiRisk",
 	"path": "modules/update-manager/",
-	"state": false,
+	"state": true,
 	"dependencies": {
-		"action": {}
+		"update": {},
+		"action": {},
+		"class": {}
 	}
 }

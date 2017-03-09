@@ -22,6 +22,7 @@ class Update_Manager_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'check_update' ) );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 	}
 
 	/**
@@ -37,15 +38,26 @@ class Update_Manager_Action {
 			for ( $i = $last_version_done; $i <= $current_version_to_check; $i++ ) {
 				if ( is_file( $update_final_path . 'update-' . $i . '.php' ) ) {
 					global $wpdb;
-					require_once( $update_final_path . 'update-' . $i . '.php' );
+					// require_once( $update_final_path . 'update-' . $i . '.php' );
 					log_class::g()->exec( 'digirisk-update-manager', '', 'Update version ' . $i . ' done.', array() );
 				}
 			}
 		}
 
-		update_option( Config_Util::$init['digirisk']->key_last_update_version, $current_version_to_check );
+		// update_option( Config_Util::$init['digirisk']->key_last_update_version, $current_version_to_check );
 	}
 
+	/**
+	 * Ajoutes une page invisible qui vas permettre la gestion des mises à jour.
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.8.0
+	 * @version 6.2.8.0
+	 */
+	public function callback_admin_menu() {
+		add_submenu_page( '', __( 'DigiRisk mise à jour', 'digirisk' ), __( 'DigiRisk mise à jour', 'digirisk' ), 'manage_options', 'digirisk-update', array( Update_Manager::g(), 'display' ) );
+	}
 }
 
 new Update_Manager_Action();
