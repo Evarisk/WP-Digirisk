@@ -37,7 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		</div>
 
 		<div class="step install">
-			<div class="bar"></div>
+			<div class="bar">
+				<div class="background"></div>
+				<div class="loader"></div>
+			</div>
+			<!-- <div class="bar"></div> -->
 			<ul class="step-list">
 				<li class="step active"><span class="title"><?php esc_html_e( 'Création société', 'digirisk' ); ?></span></li>
 				<li class="step"><span class="title"><?php esc_html_e( 'Installation des catégories de danger', 'digirisk' ); ?></span></li>
