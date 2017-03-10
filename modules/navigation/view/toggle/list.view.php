@@ -26,15 +26,13 @@ if ( ! empty( $groupments ) ) :
 						data-loader="digirisk-wrap"
 						class="action-attribute"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></span>
 
-					<span class="wp-digi-new-group-action">
-						<?php if ( empty( $groupment->count_workunit ) ) : ?>
-							<a
+					<span class="wp-digi-new-group-action <?php echo empty( $groupment->count_workunit ) ? 'action-attribute' : ''; ?>"
 								data-parent-id="<?php echo esc_attr( $groupment->id ); ?>"
 								data-action="create_group"
 								data-nonce="<?php echo esc_attr( wp_create_nonce( 'create_group' ) ); ?>"
-								data-loader="content"
-								href="#"
-								class="wp-digi-action fa fa-plus action-attribute"></a>
+								data-loader="navigation-container">
+						<?php if ( empty( $groupment->count_workunit ) ) : ?>
+							<a href="#"	class="wp-digi-action fa fa-plus"></a>
 						<?php endif; ?>
 					</span>
 				</div>
