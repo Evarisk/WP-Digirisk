@@ -16,7 +16,7 @@ window.digirisk.updateManager = {};
  * @version 6.2.8.0
  */
 window.digirisk.updateManager.init = function() {
-	window.digirisk.updateManager.requestUpdate();
+	// window.digirisk.updateManager.requestUpdate();
 };
 
 window.digirisk.updateManager.requestUpdate = function( args ) {

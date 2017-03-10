@@ -49,5 +49,5 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 	</div>
 
-	<div data-module="installer" data-loader="main-content" data-parent="main-content" data-before-method="beforeCreateSociety" class="float margin right action-input button blue uppercase strong"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
+	<div data-module="installer" data-loader="wpdigi-installer" data-parent="wpdigi-installer" data-before-method="beforeCreateSociety" class="float margin right action-input button blue uppercase strong"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
 </div>

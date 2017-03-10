@@ -92,7 +92,7 @@ class Installer_Action {
 			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
-		update_option( Config_Util::$init['digirisk']->core_option, $core_option );
+		// update_option( Config_Util::$init['digirisk']->core_option, $core_option );
 
 		wp_send_json_success( array(
 			'core_option' => $core_option,

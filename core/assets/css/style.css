@@ -5003,83 +5003,103 @@
 /**
  * Step for installer
  */
-.digirisk-wrap .step-list {
+.digirisk-wrap .step {
   width: 100%;
-  max-width: 500px;
-  margin: auto;
+}
+.digirisk-wrap .step .bar {
+  width: 100%;
+  height: 4px;
+  background: #d6d6d6;
+  position: relative;
+  top: 9px;
+}
+.digirisk-wrap .step .bar:before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 4%;
+  background: #47e58e;
+  -webkit-transition: all 0.6s linear;
+  -o-transition: all 0.6s linear;
+  -moz-transition: all 0.6s linear;
+  transition: all 0.6s linear;
+}
+.digirisk-wrap .step .step-list {
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  /* Fix IE */
 }
-.digirisk-wrap .step-list:after {
+.digirisk-wrap .step .step-list .step:before {
+  display: block;
+  margin: auto;
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #d6d6d6;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.digirisk-wrap .step .step-list .step .title {
+  display: block;
+  text-align: center;
+  margin: auto;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  max-width: 160px;
+  font-weight: 600;
+  padding-top: 10px;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.digirisk-wrap .step .step-list .step:first-child:before,
+.digirisk-wrap .step .step-list .step:first-child .title {
+  margin: 0 auto 0 0;
+  text-align: left;
+}
+.digirisk-wrap .step .step-list .step:last-child:before,
+.digirisk-wrap .step .step-list .step:last-child .title {
+  margin: 0 0 0 auto;
+  text-align: right;
+}
+.digirisk-wrap .step .step-list .step.active:before {
+  background: #47e58e;
+}
+.digirisk-wrap .step .step-list .step.active .title {
+  color: #47e58e;
+}
+.digirisk-wrap .step .step-list:after {
   display: block;
   content: '';
   clear: both;
 }
-.digirisk-wrap .step-list .step {
-  width: 50%;
-  text-align: center;
+.digirisk-wrap .step.install {
+  padding: 0 30px;
 }
-.digirisk-wrap .step-list .step .title {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
+.digirisk-wrap .step.install .step-list .step:first-child {
+  width: 12.5%;
 }
-.digirisk-wrap .step-list .step .circle {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  background: #fff;
-  border: 1px solid #ccc;
-  width: 50px;
-  height: 50px;
-  display: block;
-  text-align: center;
-  line-height: 50px;
-  font-size: 16px;
-  font-weight: 300;
-  color: #3495f0;
-  font-style: normal;
-  margin: auto;
-  margin-top: 12px;
-  position: relative;
-  z-index: 2;
+.digirisk-wrap .step.install .step-list .step:nth-of-type(2) {
+  width: 25%;
 }
-.digirisk-wrap .step-list .step:after {
-  display: block;
-  content: "";
-  width: 100%;
-  height: 1px;
-  background: #ccc;
-  overflow: hidden;
-  position: relative;
-  top: -2em;
-  z-index: 1;
+.digirisk-wrap .step.install .step-list .step:nth-of-type(3) {
+  width: 25%;
 }
-.digirisk-wrap .step-list .step:first-child:after {
-  max-width: 50%;
-  left: 50%;
+.digirisk-wrap .step.install .step-list .step:nth-of-type(4) {
+  width: 25%;
 }
-.digirisk-wrap .step-list .step:last-child:after {
-  max-width: 50%;
-}
-.digirisk-wrap .step-list .step.active .title {
-  color: #3495f0;
-}
-.digirisk-wrap .step-list .step.active .circle {
-  background: #3495f0;
-  border: 1px solid #3495f0;
-  color: #fff;
-}
-.digirisk-wrap .step-list .step.active:after {
-  background: #3495f0;
+.digirisk-wrap .step.install .step-list .step:last-child {
+  width: 12.5%;
 }
 /**
  * Grid
@@ -5302,31 +5322,60 @@
 }
 /**
  * Installer de digirisk avec slider
- * .button -> classe de base pour un bouton
+ * .bloc-create-society -> premier bloc
+ * .w^dogo-components -> Installation des composant, avec slider
+ *
  */
-.digirisk-wrap .wpdigi-components h2 {
+.digirisk-wrap.wpdigi-installer .main-content {
+  padding: 0 0 30px 0;
+  -webkit-box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.05);
+}
+.digirisk-wrap.wpdigi-installer .bloc-create-society {
+  padding: 140px 0;
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+}
+.digirisk-wrap.wpdigi-installer .bloc-create-society .title {
+  font-size: 28px;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 36px;
+}
+.digirisk-wrap.wpdigi-installer .bloc-create-society .society-name {
+  width: 100%;
+  max-width: 460px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 16px 12px;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components h2 {
   text-align: center;
   display: block;
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 400;
-  margin: 10px 0 20px 0;
+  margin: 30px 0 30px 0;
 }
-.digirisk-wrap .wpdigi-components h3 {
+.digirisk-wrap.wpdigi-installer .wpdigi-components h3 {
   background: #3495f0;
   font-weight: 600;
   text-transform: uppercase;
   color: #fff;
   padding: 10px 12px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-.digirisk-wrap .wpdigi-components ul {
-  margin-bottom: 10px;
+.digirisk-wrap.wpdigi-installer .wpdigi-components ul {
+  margin-bottom: 20px;
 }
-.digirisk-wrap .wpdigi-components ul li {
-  padding-left: 16px;
+.digirisk-wrap.wpdigi-installer .wpdigi-components ul li {
+  padding-left: 26px;
 }
-.digirisk-wrap .wpdigi-components ul li:before {
+.digirisk-wrap.wpdigi-installer .wpdigi-components ul li:before {
   display: block;
   content: '';
   width: 5px;
@@ -5338,40 +5387,70 @@
   margin-right: 10px;
   margin-top: 7px;
 }
-.digirisk-wrap .wpdigi-components p {
-  margin-bottom: 10px;
-  padding-left: 10px;
+.digirisk-wrap.wpdigi-installer .wpdigi-components p {
+  margin-bottom: 20px;
+  padding-left: 20px;
 }
-.digirisk-wrap .wpdigi-components progress {
-  width: 100%;
-  padding: 10px;
+.digirisk-wrap.wpdigi-installer .wpdigi-components .grid-layout.w2 {
+  background: rgba(0, 0, 0, 0.05);
 }
-.digirisk-wrap .wpdigi-components .valid {
-  text-align: center;
+.digirisk-wrap.wpdigi-installer .wpdigi-components .grid-layout.w2 > * {
+  padding: 0;
 }
-.digirisk-wrap .wpdigi-components .owl-carousel {
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-carousel {
   position: relative;
+  margin-bottom: 30px;
+  overflow: hidden;
 }
-.digirisk-wrap .wpdigi-components .owl-nav .owl-prev,
-.digirisk-wrap .wpdigi-components .owl-nav .owl-next {
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev,
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next {
   font-family: 'FontAwesome', 'Open Sans';
   position: absolute;
   top: 50%;
   font-size: 18px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 30px;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
 }
-.digirisk-wrap .wpdigi-components .owl-nav .owl-prev {
-  left: -10px;
-}
-.digirisk-wrap .wpdigi-components .owl-nav .owl-next {
-  right: -10px;
-}
-.digirisk-wrap .wpdigi-components .owl-nav .owl-prev:before {
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before,
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
+  position: relative;
   display: block;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:hover,
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:hover {
+  background: #ffffff;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev {
+  left: -40px;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:hover:before {
+  left: 12px;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next {
+  right: -40px;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:hover:before {
+  right: 12px;
+}
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before {
   content: '\f053';
+  left: 16px;
 }
-.digirisk-wrap .wpdigi-components .owl-nav .owl-next:before {
-  display: block;
+.digirisk-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
   content: '\f054';
+  right: 16px;
 }
 /**
  * Import des templates de page

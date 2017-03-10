@@ -13,19 +13,34 @@ window.digirisk.installer.init = function() {
 
 window.digirisk.installer.event = function() {
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.key_up_groupment_title );
+	jQuery( document ).on( 'click', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.emptyPlaceHolder );
+	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="groupment[title]"]', window.digirisk.installer.fillPlaceHolder );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.digirisk.installer.key_up_domain_mail );
-	jQuery( document ).on( 'click', '.wpdigi-installer .wpdigi-components .next:not(.disabled)', window.digirisk.installer.nextScreenUser );
 	jQuery( '.owl-carousel' ).owlCarousel( {
 		'items': 1,
-		'loop': true,
 		'nav': true,
-		'navText': []
+		'navText': [],
+		'autoHeight': true,
+		'autoplay': true,
+		'autoplayTimeout': 25000
 	} );
 };
 
 window.digirisk.installer.key_up_groupment_title = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.main-content.society .action-input' ).click();
+	}
+};
+
+window.digirisk.installer.emptyPlaceHolder = function( event ) {
+	if ( 'Nom de ma société *' === jQuery( this ).val() ) {
+		jQuery( this ).val( '' );
+	}
+};
+
+window.digirisk.installer.fillPlaceHolder = function( event ) {
+	if ( '' === jQuery( this ).val() ) {
+		jQuery( this ).val( 'Nom de ma société *' );
 	}
 };
 
@@ -69,10 +84,9 @@ window.digirisk.installer.beforeCreateSociety = function( element ) {
  * @version 6.2.4.0
  */
 window.digirisk.installer.savedSociety = function( element, response ) {
-	element.closest( 'div.society' ).hide();
-	jQuery( '.wpdigi-installer .step-create-society' ).removeClass( 'active' );
-	jQuery( '.wpdigi-installer .step-create-components' ).addClass( 'active' );
-	jQuery( '.wpdigi-installer .wpdigi-components' ).fadeIn();
+	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
+	jQuery( '.wpdigi-installer .wpdigi-components' ).show();
+	window.digirisk.installer.progressBar( 20 );
 	window.digirisk.installer.requestInstallComponent();
 };
 
@@ -81,8 +95,8 @@ window.digirisk.installer.savedSociety = function( element, response ) {
  * @return {void}
  */
 window.digirisk.installer.requestInstallComponent = function() {
-	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
-	window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
+	// var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
+	// window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
 
 /**
@@ -120,18 +134,6 @@ window.digirisk.installer.installedComponentSuccess = function( response ) {
 	jQuery( '.wpdigi-components progress' ).attr( 'value', progressValue );
 };
 
-/**
- * Passes au prochain écran "Utilisateur" lors du clique sur le bouton "Suivant".
- *
- * @param  {ClickEvent} event Le clique sur le bouton
- * @return {void}
- *
- * @since 6.2.7.0
- * @version 6.2.7.0
- */
-window.digirisk.installer.nextScreenUser = function( event ) {
-	jQuery( '.wpdigi-installer .wpdigi-components' ).hide();
-	jQuery( '.wpdigi-installer .step-create-components' ).removeClass( 'active' );
-	jQuery( '.wpdigi-installer .step-create-users' ).addClass( 'active' );
-	jQuery( '.wpdigi-installer .wpdigi-staff' ).fadeIn();
+window.digirisk.installer.progressBar = function( pourcent ) {
+	jQuery( '.wpdigi-installer .bar:before' ).css( 'width', pourcent + '%' );
 };
