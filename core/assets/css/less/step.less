@@ -4,74 +4,88 @@
 
 .digirisk-wrap {
 
-	.step-list {
+	.step {
 		width: 100%;
-		max-width: 500px;
-		margin: auto;
-		display: flex;
-		align-items: center; /* Fix IE */
-		&:after {
-			display: block;
-			content: '';
-			clear: both;
-		}
-		.step {
-			width: 50%;
-			text-align: center;
-			.title {
-				font-size: 10px;
-				font-weight: 700;
-				text-transform: uppercase;
-			}
-			.circle {
-				border-radius: 50%;
-				background: #fff;
-				border: 1px solid #ccc;
-				width: 50px;
-				height: 50px;
+		.bar {
+			width: 100%;
+			height: 4px;
+			background: #d6d6d6;
+			position: relative;
+			top: 9px;
+			&:before {
 				display: block;
-				text-align: center;
-				line-height: 50px;
-				font-size: 16px;
-				font-weight: 300;
-				color: @a;
-				font-style: normal;
-				margin: auto;
-				margin-top: 12px;
-				position: relative;
-				z-index: 2;
+				content: '';
+				position: absolute;
+				top: 0;
+				height: 4px;
+				width: 4%;
+				background: @green;
+				transition: all 0.6s linear;
+			}
+		}
+		.step-list {
+			width: 100%;
+			display: flex;
+			.step {
+				&:before {
+					display: block;
+					margin: auto;
+					content: '';
+					width: 14px;
+					height: 14px;
+					background: #d6d6d6;
+					border-radius: 50%;
+					transition: all 0.2s ease-out;
+				}
+				.title {
+					display: block;
+					text-align: center;
+					margin: auto;
+					color: rgba(0,0,0,0.3);
+					font-size: 14px;
+					max-width: 160px;
+					font-weight: 600;
+					padding-top: 10px;
+					transition: all 0.2s ease-out;
+				}
+				&:first-child {
+					&:before, .title {
+						margin: 0 auto 0 0;
+						text-align: left;
+					}
+				}
+				&:last-child {
+					&:before, .title {
+						margin: 0 0 0 auto;
+						text-align: right;
+					}
+				}
+				&.active {
+					&:before {
+						background: @green;
+					}
+					.title {
+						color: @green;
+					}
+				}
 			}
 			&:after {
-				z-index: 1;
 				display: block;
-				content: "";
-				width: 100%;
-				height: 1px;
-				background: #ccc;
-				overflow: hidden;
-				position: relative;
-				top: -2em;
-				z-index: 1;
+				content: '';
+				clear: both;
 			}
-			&:first-child:after {
-				max-width: 50%;
-				left: 50%;
-			}
-			&:last-child:after {
-				max-width: 50%;
-			}
-			&.active {
-				.title {
-					color: @a;
-				}
-				.circle {
-					background: @a;
-					border: 1px solid @a;
-					color: #fff;
-				}
-				&:after {
-					background: @a;
-				}
+		}
+	}
+
+	.step.install {
+		padding: 0 30px;
+		.step-list {
+			.step {
+				&:first-child { width: 12.5%; }
+				&:nth-of-type(2) { width: 25%; }
+				&:nth-of-type(3) { width: 25%; }
+				&:nth-of-type(4) { width: 25%; }
+				&:last-child { width: 12.5%; }
 			}
 		}
 	}
