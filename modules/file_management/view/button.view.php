@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<i class="add animated fa fa-plus-circle"></i>
 	<?php
 	if ( ! empty( $element ) && ! empty( $element->thumbnail_id ) ) :
-		echo wp_get_attachment_image( $element->thumbnail_id, 'thumbnail', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail' ) );
+		echo wp_get_attachment_image( $element->thumbnail_id, 'digirisk-element-miniature', false, array( 'class' => 'wp-post-image wp-digi-element-thumbnail' ) );
 	else :
 		?>
 		<i class="default-image fa fa-picture-o"></i>
