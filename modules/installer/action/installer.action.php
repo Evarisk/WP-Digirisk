@@ -61,7 +61,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.4.0
+	 * @version 6.2.8.0
 	 */
 	public function ajax_installer_components() {
 		check_ajax_referer( 'ajax_installer_components' );
@@ -92,9 +92,13 @@ class Installer_Action {
 			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
-		// update_option( Config_Util::$init['digirisk']->core_option, $core_option );
+		update_option( Config_Util::$init['digirisk']->core_option, $core_option );
 
-		wp_send_json_success( array( 'core_option' => $core_option, 'module' => 'installer', 'callback_success' => 'installedComponentSuccess' ) );
+		wp_send_json_success( array(
+			'core_option' => $core_option,
+			'module' => 'installer',
+			'callback_success' => 'installedComponentSuccess',
+		) );
 	}
 
 	/**
