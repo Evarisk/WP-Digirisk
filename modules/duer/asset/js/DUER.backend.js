@@ -91,7 +91,7 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 	};
 
 	popupElement.find( 'h2' ).text( args.title );
-	popupElement.addClass( 'no-close loading' );
+	popupElement.addClass( 'duer no-close loading' );
 	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
