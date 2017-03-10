@@ -22,14 +22,6 @@
 			line-height: 1.2;
 			margin-bottom: 36px;
 		}
-		.society-name {
-			width: 100%;
-			max-width: 460px;
-			border: 0;
-			background: rgba(0,0,0,0.05);
-			box-shadow: none;
-			padding: 16px 12px;
-		}
 	}
 	.wpdigi-components {
 		h2 {
@@ -120,6 +112,33 @@
 				content: '\f054';
 				right: 16px;
 			}
+		}
+	}
+	.button.disable {
+		pointer-events: none;
+	}
+
+	.society-form {
+		position: relative;
+		width: 100%;
+		max-width: 460px;
+		margin: auto;
+
+		.society-name {
+			width: 100%;
+			border: 0;
+			background: rgba(0,0,0,0.05);
+			box-shadow: none;
+			padding: 16px 20px;
+		}
+
+		.society-label {
+			position: absolute;
+			top: 50%;
+			transform: translateY( -50% );
+			left: 20px;
+			color: rgba( 0, 0, 0, 0.3 );
+			pointer-events: none;
 		}
 	}
 

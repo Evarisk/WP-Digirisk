@@ -6,6 +6,7 @@
  */
 
 window.digirisk.installer = {};
+window.digirisk.installer.progressInterval = undefined;
 
 window.digirisk.installer.init = function() {
 	window.digirisk.installer.event();
@@ -30,17 +31,27 @@ window.digirisk.installer.key_up_groupment_title = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.main-content.society .action-input' ).click();
 	}
+
+	if ( jQuery( this ).val() != '' ) {
+		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '12%' );
+		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 12 );
+	}	else {
+		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '0%' );
+		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 0 );
+	}
 };
 
 window.digirisk.installer.emptyPlaceHolder = function( event ) {
-	if ( 'Nom de ma société *' === jQuery( this ).val() ) {
-		jQuery( this ).val( '' );
+	if ( '' === jQuery( this ).val() ) {
+		jQuery( this ).closest( '.society-form' ).find( 'label' ).hide();
 	}
 };
 
 window.digirisk.installer.fillPlaceHolder = function( event ) {
 	if ( '' === jQuery( this ).val() ) {
-		jQuery( this ).val( 'Nom de ma société *' );
+		jQuery( this ).closest( '.society-form' ).find( 'label' ).show();
+		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '0%' );
+		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 0 );
 	}
 };
 
@@ -86,7 +97,11 @@ window.digirisk.installer.beforeCreateSociety = function( element ) {
 window.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components' ).show();
-	window.digirisk.installer.progressBar( 20 );
+	jQuery( '.wpdigi-installer .button.blue' ).hide();
+	jQuery( '.wpdigi-installer .button.green' ).show();
+	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '25%' );
+	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
+	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
 	window.digirisk.installer.requestInstallComponent();
 };
 
@@ -95,8 +110,8 @@ window.digirisk.installer.savedSociety = function( element, response ) {
  * @return {void}
  */
 window.digirisk.installer.requestInstallComponent = function() {
-	// var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
-	// window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
+	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
+	window.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
 
 /**
@@ -112,18 +127,16 @@ window.digirisk.installer.requestInstallComponent = function() {
  * @version 6.2.7.0
  */
 window.digirisk.installer.installedComponentSuccess = function( response ) {
-	var progressValue = 0;
-
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {
 		if ( ! response.data.core_option.recommendation_installed && response.data.core_option.danger_installed ) {
-			progressValue = 33;
+			window.digirisk.installer.progressBar( 55 );
 		} else if ( response.data.core_option.recommendation_installed ) {
-			progressValue = 66;
+			window.digirisk.installer.progressBar( 80 );
 		}
 		window.digirisk.installer.requestInstallComponent();
 	} else {
-		progressValue = 100;
+		window.digirisk.installer.progressBar( 100 );
 
 		jQuery( '.wpdigi-installer .wpdigi-components .next' ).removeClass( 'disabled' );
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
@@ -131,9 +144,29 @@ window.digirisk.installer.installedComponentSuccess = function( response ) {
 		}
 	}
 
-	jQuery( '.wpdigi-components progress' ).attr( 'value', progressValue );
+	// jQuery( '.wpdigi-components progress' ).attr( 'value', progressValue );
 };
 
 window.digirisk.installer.progressBar = function( pourcent ) {
-	jQuery( '.wpdigi-installer .bar:before' ).css( 'width', pourcent + '%' );
+	clearInterval( window.digirisk.installer.progressInterval );
+	window.digirisk.installer.progressInterval = undefined;
+
+	window.digirisk.installer.progressInterval = setInterval( function() {
+		var currentWidth = jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width' );
+		currentWidth++;
+
+		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width', currentWidth + '%' );
+		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', currentWidth );
+
+		jQuery( '.wpdigi-installer .step-list .step[data-width="' + currentWidth + '"]' ).addClass( 'active' );
+
+		if ( jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width' ) >= pourcent ) {
+			clearInterval( window.digirisk.installer.progressInterval );
+			window.digirisk.installer.progressInterval = undefined;
+
+			if ( pourcent === 100 ) {
+				jQuery( '.wpdigi-installer .button.green.disable' ).removeClass( 'disable' );
+			}
+		}
+	}, 100 );
 };

@@ -19,9 +19,9 @@
 				background: #d6d6d6;
 			}
 			.loader {
-				width: 4%;
+				width: 0%;
 				background: @green;
-				transition: all 0.6s linear;
+				transition: all 0.1s linear;
 			}
 		}
 		.step-list {
@@ -29,6 +29,8 @@
 			display: flex;
 			.step {
 				&:before {
+					position: relative;
+					z-index: 90;
 					display: block;
 					margin: auto;
 					content: '';
