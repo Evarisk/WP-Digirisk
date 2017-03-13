@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.6.0
+ * @version 6.2.8.0
  * @copyright 2015-2017 Evarisk
  * @package corrective-task
  * @subpackage filter
@@ -110,7 +110,7 @@ class Corrective_Task_Filter {
 	 * @return string               Le contenu modifié par cette méthode.
 	 *
 	 * @since 6.2.6.0
-	 * @version 6.2.6.0
+	 * @version 6.2.8.0
 	 */
 	public function callback_dashboard_content( $string, $post_parent ) {
 		global $task_controller;
@@ -118,6 +118,14 @@ class Corrective_Task_Filter {
 		$list_task = $task_controller->index( array(
 			'post_parent' => '',
 		) );
+
+		if ( ! empty( $list_task ) ) {
+			foreach ( $list_task as $key => $task ) {
+				if ( 0 === $task->parent_id ) {
+					unset( $list_task[ $key ] );
+				}
+			}
+		}
 
 		ob_start();
 		require( \wpeo_template_01::get_template_part( WPEO_TASK_DIR, WPEO_TASK_TEMPLATES_MAIN_DIR, 'backend', 'main' ) );
