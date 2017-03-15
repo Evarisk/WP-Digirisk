@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
 			<th class="wm130"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Cot.', 'digirisk' ); ?>.</th>
+			<th><?php esc_html_e( 'Cot', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
 			<th class="w150"></th>

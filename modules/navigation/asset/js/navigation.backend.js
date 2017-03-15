@@ -70,7 +70,11 @@ window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
  * @version 6.2.6.0
  */
 window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
-	jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	if ( jQuery( this ).val().length > 0 ) {
+		jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	} else {
+		jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input' ).removeClass( 'blue' ).addClass( 'disable' );
+	}
 };
 
 /**

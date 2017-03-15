@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.7.3
-Stable tag: 6.2.7.0
+Stable tag: 6.2.8.0
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -75,12 +75,30 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.2.8.0 =
+
+Améliorations
+
+* 7645 - Application: Ajout de l'identifiant parent dans les tâches des actions correctives.
+* 7717 - DUER: Ajout du trie par identifiant dans le tableau du chapitre 3.5.2.
+* 7719 - Page risques: La nombre de risque affiché par défaut est passé de 2 à 20.
+* 7726 - Page installation: Refonte de la page installation.
+* 7792 - Général: Mise à jour des modèles des documents (DUER, fiche de groupement et fiche de poste).
+
+Corrections
+
+* 7633 - Le bouton "+" de l'ajout d'une unité de travail passe en grisé si le texte est vide dans le champ "Nouvelle unité de travail".
+* 7710 - Application: Le texte "Cot.." est remplacé par "Cot".
+* 7747 - Application: Le bouton pour crée un groupement réagis sur tout la carré ou se trouve le bouton "+".
+* 7765 - Application: Une barre déroulante a été ajouté dans la popup détaillant les étapes de la génération du DUER pour les cas ou le texte était plus grand que celle-ci.
+* 7766 - Document: La dimension des photos est passée de 2 à 9 centimètres dans la fiche de poste et de groupement.
+
 = Version 6.2.7.0 =
 
 Améliorations
 
 * 4795 - Application: Récupères les dernières informations du dernier DUER pour remplir les champs dans le tableau d'édition.
-* 5284 - Page installation: Ajout d'un diaporama lors de l'installation de DigiRisk à l'étape 2 "Compostants".
+* 5284 - Page installation: Ajout d'un diaporama lors de l'installation de DigiRisk à l'étape 2 "Composants".
 * 7636 - Application: Ajout d'une barre de scrolling dans les tâches correctives.
 * 7676 - Page risques: Le champ de saisie des commentaires est désormais plus grand.
 * 7678 - Page risques: Le nombre de risque affiché par page est maintenant personnalisable grâce au bouton "Options de l'écran".

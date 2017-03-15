@@ -30,6 +30,12 @@ class risk_evaluation_model extends comment_model {
 				'type' => 'array',
 				'meta_type'	=> 'multiple',
 			),
+			'equivalence' => array(
+				'type' 		=> 'integer',
+				'field'		=> '_wpdigi_risk_evaluation_equivalence',
+				'meta_type'	=> 'single',
+				'bydefault'			=> 0,
+			),
 			'scale' => array(
 				'export' => true,
 				'type' 		=> 'integer',

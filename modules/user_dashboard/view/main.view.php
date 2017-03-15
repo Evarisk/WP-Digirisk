@@ -32,4 +32,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<table class="table users">
 		<?php	User_Dashboard_Class::g()->display_list_user(); ?>
 	</table>
+
+	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong">
+		<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
+	</a>
 </div>

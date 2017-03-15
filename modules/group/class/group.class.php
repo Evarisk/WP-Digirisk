@@ -162,7 +162,7 @@ class Group_Class extends Post_Class {
 	 * @param array  $extra_params ?.
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.8.0
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();
@@ -198,6 +198,14 @@ class Group_Class extends Post_Class {
 			}
 			$element_children = array_merge( $element_children, $workunit_definition );
 		}
+
+		usort( $work_unit_list, function( $a, $b ) {
+			if ( $a->unique_key === $b->unique_key ) {
+				return 0;
+			}
+
+			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
+		} );
 
 		return $element_children;
 	}
