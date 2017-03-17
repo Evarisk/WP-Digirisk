@@ -30,7 +30,20 @@ class Corrective_Task_Filter {
 
 		add_filter( 'task_manager_dashboard_content', array( $this, 'callback_dashboard_content' ), 11, 2 );
 	}
-
+	/**
+	 * Transforme le contenu d'un point (html) en chaîne standard
+	 */
+	public function pointToString($element) {
+		$content = $element->content;
+		$content = str_replace("<br/>","\r\n",$content);
+		$content = str_replace("<div>","\r\n",$content);
+		$content = str_replace("</div>","",$content);
+		$content = html_entity_decode($content);
+		$content = strip_tags($content);
+		$content = 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $content . "\r";
+		return $content;
+	}
+	
 	/**
 	 * Récupères dans une chaine de caractère le contenu des tâches correctives.
 	 *
@@ -79,8 +92,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_completed ) ) {
 					foreach ( $list_point_completed as $element ) {
-						$string .= 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $element->content . '
-';
+						$string .= $this->pointToString($element);
 					}
 				}
 
@@ -89,8 +101,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_uncompleted ) ) {
 					foreach ( $list_point_uncompleted as $element ) {
-						$string .= 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $element->content . '
-';
+						$string .= $this->pointToString($element);
 					}
 				}
 
