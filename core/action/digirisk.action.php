@@ -147,7 +147,7 @@ class Digirisk_Action {
 		$digirisk_core = get_option( Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'Digirisk', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon.png', 4 );
+			add_menu_page( __( 'Digirisk', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		}
 	}
 

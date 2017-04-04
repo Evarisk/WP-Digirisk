@@ -21,6 +21,7 @@ window.digirisk.installer.event = function() {
 		'items': 1,
 		'nav': true,
 		'navText': [],
+		'pagination': true,
 		'autoHeight': true,
 		'autoplay': true,
 		'autoplayTimeout': 25000

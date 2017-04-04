@@ -15,17 +15,19 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Nous installons les fonctions de gestion des Unités de Travail et des Groupements', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Nous installons les fonctions de gestion des Unités de Travail', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 
 		<div class="content">
-			<h3><?php esc_html_e( 'Au fait, Connaissez-vous la définition d’une Unité de Travail selon l’INRS ?', 'digirisk' ); ?></h3>
-			<p><?php esc_html_e( 'Regroupement (géographique, par métier, par poste, par activité) opéré dans l’entreprise sur la base des “ contextes homogènes d’exposition ” utilisés pour circonscrire l’évaluation et en rendre compte (traçabilité) de l’évaluation des risques.', 'digirisk' ); ?></p>
-			<p><?php esc_html_e( 'Vous pouvez télécharger : ED887.pdf', 'digirisk' ); ?></p>
-
-			<h3><?php esc_html_e( 'Définition des Unités de Travail Ministère du travail', 'digirisk' ); ?></h3>
-			<p><?php esc_html_e( 'La notion d’« unité de travail » doit être comprise au sens large, afin de recouvrir les situations très diverses d’organisation du travail. Son champ peut s’étendre d’un poste de travail, à plusieurs types de postes occupés par les travailleurs ou à des situations de travail présentant les mêmes caractéristiques. De même, d’un point de vue géographique, l’unité de travail ne se limite pas forcément à une activité fixe, mais peut aussi bien couvrir des lieux différents (manutention, chantiers, transports, etc.).', 'digirisk' ); ?></p>
-			<p><a href="http://travail-emploi.gouv.fr/publications/picts/bo/05062002/A0100004.htm" target="_blank">Bulletin Officiel du Travail, de l’Emploi et de la Formation Professionnelle</a></p>
+			<h3><?php esc_html_e( 'Comment définir vos Unités de Travail ?', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'En regroupement par', 'digirisk' ); ?><br><span class="strong"><?php esc_html_e( 'géographie, métiers, postes, activités', 'digirisk' ); ?></span></p>
+			<p><?php esc_html_e( 'basé sur des', 'digirisk' ); ?><br><span class="strong"><?php esc_html_e( 'contextes homogènes d’expositions', 'digirisk' ); ?></span></p>
+			<p><?php esc_html_e( 'Assurant la', 'digirisk' ); ?><br><span class="strong"><?php esc_html_e( 'traçabilité', 'digirisk' ); ?></span></p>
+			<p><?php esc_html_e( 'de l’évaluation des risques.', 'digirisk' ); ?></p>
+			<ul>
+				<li><a href="http://www.inrs.fr/media.html?refINRS=ED%20887" target="_blank"><?php esc_html_e( 'Guide pour le DUER de l’INRS : ED887.pdf', 'digirisk' ); ?></a></li>
+				<li><a href="http://travail-emploi.gouv.fr/publications/picts/bo/05062002/A0100004.htm" target="_blank"><?php esc_html_e( 'Définition des Unités de Travail Ministère du travail', 'digirisk' ); ?></a></li>
+			</ul>
 		</div>
 
 		<div>
