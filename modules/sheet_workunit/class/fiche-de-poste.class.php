@@ -407,7 +407,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @version 6.2.5.0
 	 */
 	public function get_picture_term( $term_id ) {
-		$picture_definition = wp_get_attachment_image_src( $term_id, 'digirisk-element-thumbnail' );
+		$picture_definition = wp_get_attachment_image_src( $term_id, 'thumbnail' );
 
 		if ( ! $picture_definition ) {
 			return false;
@@ -420,7 +420,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 				'type'		=> 'picture',
 				'value'		=> $picture_final_path,
 				'option'	=> array(
-					'size'	=> 2,
+					'size'	=> 1,
 				),
 			);
 		}
