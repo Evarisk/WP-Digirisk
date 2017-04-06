@@ -42,7 +42,7 @@ class User_Shortcode_Action extends Singleton_Util {
 	 * @version 6.2.4.0
 	 */
 	public function callback_admin_menu() {
-		add_users_page( __( 'Utilisateurs DigiRisk', 'digirisk' ), __( 'Utilisateurs DigiRisk', 'digirisk' ), 'read', 'digirisk-users', array( $this, 'callback_users_page' ) );
+		add_users_page( __( 'Utilisateurs DigiRisk', 'digirisk' ), __( 'Utilisateurs DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-users', array( $this, 'callback_users_page' ) );
 	}
 
 	/**

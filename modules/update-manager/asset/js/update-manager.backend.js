@@ -16,19 +16,17 @@ window.digirisk.updateManager = {};
  * @version 6.2.8.0
  */
 window.digirisk.updateManager.init = function() {
-	// window.digirisk.updateManager.requestUpdate();
+	window.digirisk.updateManager.requestUpdate();
 };
 
 window.digirisk.updateManager.requestUpdate = function( args ) {
 	var versionToUpdate = jQuery( 'input[name="version_available[]"]:first' ).val();
-	var action = jQuery( 'input[name="version[' + versionToUpdate + '][action]' ).val();
-	var description = jQuery( 'input[name="version[' + versionToUpdate + '][description]' ).val();
-	var multipleRequest = jQuery( 'input[name="version[' + versionToUpdate + '][multiple_request]' ).val();
+	var action = jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).val();
+	var description = jQuery( 'input[name="version[' + versionToUpdate + '][description][]"]:first' ).val();
 
 	var data = {
 		action: action,
 		versionToUpdate: versionToUpdate,
-		multipleRequest: multipleRequest,
 		args: args
 	};
 
@@ -37,6 +35,20 @@ window.digirisk.updateManager.requestUpdate = function( args ) {
 	jQuery.post( ajaxurl, data, function( response ) {
 		if ( response.data.done ) {
 			jQuery( '.log' ).append( '<li>Done</li>' );
+
+			jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).remove();
+			jQuery( 'input[name="version[' + versionToUpdate + '][description][]"]:first' ).remove();
+
+			if ( 0 == jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).length ) {
+				jQuery( 'input[name="version_available[]"]:first' ).remove();
+			}
+			if ( 0 == jQuery( 'input[name="version_available[]"]:first' ).length ) {
+				jQuery.post( ajaxurl, { 'action': 'digi_redirect_to_dashboard' }, function( response ) {
+					window.location = response;
+				});
+			} else {
+				window.digirisk.updateManager.requestUpdate( undefined );
+			}
 		} else {
 			window.digirisk.updateManager.requestUpdate( response.data.args );
 		}

@@ -46,7 +46,7 @@ class Installer_Class {
 		}
 
 		if ( empty( $digirisk_core['installed'] ) && ( empty( $old_eva_option ) || ( $old_eva_option < 0 ) ) ) {
-			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_options', 'digi-setup', array( $this, 'setup_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_digirisk', 'digi-setup', array( $this, 'setup_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		}
 	}
 

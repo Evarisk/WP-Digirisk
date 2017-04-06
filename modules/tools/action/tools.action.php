@@ -13,7 +13,7 @@ class tools_action {
 	}
 
 	public function admin_menu() {
-    add_management_page( 'Digirisk', 'Digirisk', 'manage_options', 'digirisk-tools', array( $this, 'add_management_page' ) );
+    add_management_page( 'Digirisk', 'Digirisk', 'manage_digirisk', 'digirisk-tools', array( $this, 'add_management_page' ) );
   }
 
   public function add_management_page() {

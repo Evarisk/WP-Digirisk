@@ -39,7 +39,7 @@ class Risk_Page_Action {
 	 * @version 6.2.7.0
 	 */
 	public function callback_admin_menu() {
-		$hook = add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_options', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		$hook = add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_digirisk', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		add_action( 'load-' . $hook, array( $this, 'callback_add_screen_option' ) );
 	}
 

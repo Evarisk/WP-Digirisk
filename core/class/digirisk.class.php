@@ -47,6 +47,20 @@ class Digirisk_Class extends Singleton_Util {
 	public function display( $id = 0 ) {
 		require( PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php' );
 	}
+
+	/**
+	 * Launch some action when activate the plugin
+	 */
+	public function activation() {
+		/** Set capability to administrator by default */
+		$admin_role = get_role( 'administrator' );
+		if ( ! $admin_role->has_cap( 'manage_digirisk' ) ) {
+			$admin_role->add_cap( 'manage_digirisk' );
+		}
+
+		update_option( Config_Util::$init['digirisk']->key_last_update_version, (int) str_replace( '.', '', Config_Util::$init['digirisk']->version ) );
+	}
+
 }
 
 new Digirisk_Class();

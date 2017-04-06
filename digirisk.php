@@ -31,3 +31,6 @@ require_once 'core/external/wpeo_log/class/log.class.php';
 log_class::g()->start_ms( 'digi_boot' );
 Init_util::g()->exec();
 log_class::g()->exec( 'digi_boot', 'digi_boot', 'Boot l\'application Digirisk' );
+
+/** Call WordPress hook when the plugin is activaed */
+register_activation_hook( __FILE__, array( Digirisk_Class::g(), 'activation' ) );
