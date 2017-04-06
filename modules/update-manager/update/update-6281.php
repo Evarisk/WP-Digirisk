@@ -46,7 +46,7 @@ class Update_6281 {
 	/**
 	 * AJAX Callback - Change danger categories picto
 	 */
-	public function digirisk_update_danger_category_picto() {
+	public function callback_digirisk_update_danger_category_picto() {
 		$done = true;
 
 		Danger_Default_Data_Class::g()->create();
