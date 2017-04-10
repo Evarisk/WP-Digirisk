@@ -38,7 +38,7 @@ $userdata = get_userdata( $author_id );
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment_' . $comment->id ) ); ?>"
 					data-action="delete_comment"><i class="icon fa fa-times"></i></span>
 	<?php else : ?>
-		<?php if ( 0 !== $id ) : ?>
+		<?php if ( 0 !== $id && $add_button ) : ?>
 			<span data-parent="comment"
 						data-action="save_comment"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_comment' ) ); ?>"

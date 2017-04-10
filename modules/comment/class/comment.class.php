@@ -39,7 +39,7 @@ class Digi_Comment_Class extends Singleton_Util {
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 		$type = ! empty( $param ) && ! empty( $param['type'] ) ? $param['type'] : '';
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
-
+		$add_button = ! empty( $param ) && isset( $param['add_button'] ) ? (int) $param['add_button'] : 1;
 		$model_name = '\digi\\' . $type . '_class';
 
 		if ( 0 !== $id ) {
@@ -51,7 +51,14 @@ class Digi_Comment_Class extends Singleton_Util {
 		$comment_new = Comment_Class::g()->get( array( 'schema' => true ) );
 		$comment_new = $comment_new[0];
 
-		View_Util::exec( 'comment', 'main', array( 'id' => $id, 'comments' => $comments, 'comment_new' => $comment_new, 'type' => $type, 'display' => $display ) );
+		View_Util::exec( 'comment', 'main', array(
+			'id' => $id,
+			'comments' => $comments,
+			'comment_new' => $comment_new,
+			'type' => $type,
+			'display' => $display,
+			'add_button' => $add_button,
+		) );
 	}
 }
 

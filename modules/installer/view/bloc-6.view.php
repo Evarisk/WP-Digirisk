@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			<ul>
 				<li><?php esc_html_e( 'Gravité de 0 à 4', 'digirisk' ); ?></li>
 				<li><?php esc_html_e( 'Exposition de 0 à 4', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Occurrence de 1 à 4', 'digirisk' ); ?></li>
 				<li><?php esc_html_e( 'Formation de 1 à 4', 'digirisk' ); ?></li>
 				<li><?php esc_html_e( 'Protection de 1 à 4', 'digirisk' ); ?></li>
 			</ul>

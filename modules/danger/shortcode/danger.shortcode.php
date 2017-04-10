@@ -37,22 +37,48 @@ class Danger_Shortcode {
 	 */
 	public function callback_dropdown_danger( $param ) {
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
+		$danger_id = ! empty( $param ) && ! empty( $param['danger_id'] ) ? (int) $param['danger_id'] : 0;
 		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
+		$preset = ! empty( $param ) && ! empty( $param['preset'] ) ? (int) $param['preset'] : 0;
 
 		if ( 'edit' === $display ) {
 			$danger_category_list = Category_Danger_Class::g()->get();
 
+			$selected_danger = '';
+
 			if ( ! empty( $danger_category_list ) ) {
 				foreach ( $danger_category_list as $element ) {
-					$element->danger = Danger_Class::g()->get( array( 'parent' => $element->id ) );
+					$element->danger = Danger_Class::g()->get( array(
+						'parent' => $element->id,
+					) );
+
+					if ( ! empty( $element->danger ) ) {
+						foreach ( $element->danger as $danger ) {
+							if ( $danger->id === $danger_id && $preset ) {
+								$selected_danger = $danger;
+							}
+						}
+					}
 				}
 			}
 
-			View_Util::exec( 'danger', 'dropdown', array( 'id' => $id, 'danger_category_list' => $danger_category_list ) );
+			View_Util::exec( 'danger', 'dropdown', array(
+				'id' => $id,
+				'danger_category_list' => $danger_category_list,
+				'preset' => $preset,
+				'selected_danger' => $selected_danger,
+			) );
 		} else {
-			$risk = Risk_Class::g()->get( array( 'include' => $id ) );
+			$risk = Risk_Class::g()->get( array(
+				'include' => $id,
+			) );
+
 			$risk = $risk[0];
-			View_Util::exec( 'danger', 'item', array( 'id' => $id, 'risk' => $risk ) );
+
+			View_Util::exec( 'danger', 'item', array(
+				'id' => $id,
+				'risk' => $risk,
+			) );
 		}
 	}
 }

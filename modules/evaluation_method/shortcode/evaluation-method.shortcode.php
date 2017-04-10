@@ -60,7 +60,13 @@ class Evaluation_Method_Shortcode {
 			) );
 
 			$risk = $risk[0];
-			$digi_method_id = max( $risk->taxonomy['digi-method'] );
+
+			if ( $risk->preset ) {
+				$digi_method_id = $term_evarisk_simple->term_id;
+			} else {
+				$digi_method_id = max( $risk->taxonomy['digi-method'] );
+			}
+
 			$scale = ! empty( $risk->evaluation->scale ) ? $risk->evaluation->scale : 0;
 			$equivalence = ! empty( $risk->evaluation->risk_level['equivalence'] ) ? $risk->evaluation->risk_level['equivalence'] : 0;
 			if ( $digi_method_id === $term_evarisk_complex->term_id ) {
@@ -68,6 +74,10 @@ class Evaluation_Method_Shortcode {
 				$class = 'open-popup';
 			} else {
 				$class = '';
+			}
+
+			if ( $risk->preset && ! empty( $risk->taxonomy['digi-method'] ) ) {
+				$digi_method_id = max( $risk->taxonomy['digi-method'] );
 			}
 		} else {
 			$risk = Risk_Class::g()->get( array(

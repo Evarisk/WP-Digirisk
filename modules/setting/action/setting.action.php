@@ -51,8 +51,23 @@ class Setting_Action {
 	public function add_option_page() {
 		$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
+
+		global $wpdb;
+
+		$preset_risks_id = $wpdb->get_col(
+			"SELECT RISK.ID FROM {$wpdb->posts} AS RISK
+				JOIN {$wpdb->postmeta} AS RISK_META ON RISK.ID=RISK_META.post_id
+			WHERE RISK_META.meta_key = '_wpdigi_preset'
+				AND RISK_META.meta_value = 1" );
+
+		$dangers_preset = Risk_Class::g()->get( array(
+			'include' => $preset_risks_id,
+			'order' => 'ASC',
+		) );
+
 		View_Util::exec( 'setting', 'main', array(
 			'list_accronym' => $list_accronym,
+			'dangers_preset' => $dangers_preset,
 		) );
 	}
 

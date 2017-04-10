@@ -57,9 +57,12 @@ class Risk_Action {
 		$page = ! empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
 
 		if ( 'all_risk' === $page ) {
+
 			$module = 'risk_page';
 			ob_start();
-			$risk = Risk_Class::g()->get( array( 'include' => $risk->id ) );
+			$risk = Risk_Class::g()->get( array(
+				'include' => $risk->id,
+			) );
 			$risk = $risk[0];
 			$risk->parent = Society_Class::g()->show_by_type( $risk->parent_id );
 			if ( 'digi-group' === $risk->parent->type ) {
@@ -69,15 +72,35 @@ class Risk_Action {
 				$risk->parent_group = Society_Class::g()->show_by_type( $risk->parent_workunit->parent_id );
 			}
 
-			View_Util::exec( 'risk', '/page/item-edit', array( 'risk' => $risk ) );
+			View_Util::exec( 'risk', '/page/item-edit', array(
+				'risk' => $risk,
+			) );
 			$template = ob_get_clean();
+
+		} elseif ( 'setting_risk' === $page ) {
+
+			$module = 'setting';
+			ob_start();
+			$risk = Risk_Class::g()->get( array(
+				'include' => $risk->id,
+			) );
+			$risk = $risk[0];
+			View_Util::exec( 'setting', '/preset/item', array(
+				'risk' => $risk,
+			) );
+			$template = ob_get_clean();
+
 		} else {
 			ob_start();
 			Risk_Class::g()->display( $society_id );
 			$template = ob_get_clean();
-		}
+		} // End if().
 
-		wp_send_json_success( array( 'module' => $module, 'callback_success' => $callback_success, 'template' => $template ) );
+		wp_send_json_success( array(
+			'module' => $module,
+			'callback_success' => $callback_success,
+			'template' => $template,
+		) );
 	}
 
 	/**

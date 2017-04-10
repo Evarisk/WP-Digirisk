@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Le modèle d'un risque
  */
-class risk_model extends post_model {
+class Risk_Model extends Post_Model {
 
 	/**
 	 * Constructeur
@@ -68,21 +68,29 @@ class risk_model extends post_model {
 					'digi-danger' => array(
 						'meta_type' => 'multiple',
 						'array_type'	=> 'integer',
-						'type' => 'array'
+						'type' => 'array',
 					),
 					'digi-danger-category' => array(
 						'meta_type' => 'multiple',
 						'array_type'	=> 'integer',
-						'type' => 'array'
+						'type' => 'array',
 					),
 					'digi-method' => array(
 						'meta_type' => 'multiple',
 						'array_type'	=> 'integer',
-						'type' => 'array'
-					)
-				)
-			)
+						'type' => 'array',
+					),
+				),
+			),
 		) );
+
+		$this->model['preset'] = array(
+			'type' 				=> 'boolean',
+			'meta_type'		=> 'single',
+			'field'				=> '_wpdigi_preset',
+			'bydefault' 	=> false,
+		);
+
 		parent::__construct( $object );
 	}
 
