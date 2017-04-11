@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<td class="wm130 w150">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $danger->id . ' type="risk"]' ); ?>
-		<?php do_shortcode( '[dropdown_danger id="' . $danger->id . '" type="risk" display="' . ( ( $danger->id !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
+		<?php do_shortcode( '[dropdown_danger id="' . $danger->id . '" danger_id="' . $danger->id . '" preset="1" type="risk" display="' . ( ( $danger->id !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
 	</td>
 	<td class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $danger->id . ']' ); ?>

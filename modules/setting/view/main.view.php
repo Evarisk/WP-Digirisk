@@ -12,13 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		</h2>
 
 		<div class="digirisk-wrap">
-			<div id="digi-accronym" class="tab-content hidden">
+			<div id="digi-accronym" class="tab-content">
 				<?php view_util::exec( 'setting', 'accronym/form', array(
 					'list_accronym' => $list_accronym,
 				) ); ?>
 			</div>
 
-			<div id="digi-danger-preset" class="tab-content">
+			<div id="digi-danger-preset" class="tab-content hidden">
 					<?php View_Util::exec( 'setting', 'preset/main', array(
 						'dangers_preset' => $dangers_preset,
 					) ); ?>

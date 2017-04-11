@@ -48,7 +48,7 @@ class Risk_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_display_risk( $society_id, $risk ) {
 		$module = 'risk';
@@ -86,7 +86,7 @@ class Risk_Action {
 			) );
 			$risk = $risk[0];
 			View_Util::exec( 'setting', '/preset/item', array(
-				'risk' => $risk,
+				'danger' => $risk,
 			) );
 			$template = ob_get_clean();
 
