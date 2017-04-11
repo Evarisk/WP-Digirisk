@@ -41,5 +41,5 @@ window.digirisk.setting.checkTheCheckbox = function( event ) {
 
 window.digirisk.setting.savedRiskSuccess = function( element, response ) {
 	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
-	window.digirisk.risk_page.savePresetRisks( undefined );
+	// window.digirisk.setting.savePresetRisks( undefined );
 };

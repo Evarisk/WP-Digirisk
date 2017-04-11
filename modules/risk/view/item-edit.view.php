@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="edit" add_button="' . ( ( $risk->preset ) ? '0' : '1' ) . '"]' ); ?>
 	</td>
 	<td>
-		<?php if ( 0 !== $risk->id && ! isset( $risk->preset ) ) : ?>
+		<?php if ( 0 !== $risk->id && false === $risk->preset ) : ?>
 			<div class="action grid-layout w3">
 				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
