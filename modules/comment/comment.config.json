@@ -1,7 +1,7 @@
 {
 	"name": "Commentaire",
 	"slug": "comment",
-	"version": "0.2.0.0",
+	"version": "6.2.9.0",
 	"description": "Le module gérant les commentaires de Digirisk",
 	"path": "modules/comment/",
 	"dependencies": {

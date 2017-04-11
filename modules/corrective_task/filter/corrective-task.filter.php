@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.8.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package corrective-task
  * @subpackage filter
@@ -39,7 +39,7 @@ class Corrective_Task_Filter {
 	 * @return string                La chaine de caractère mise au bon format pour le ODT.
 	 *
 	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
 		$data_risk['actionPreventionCompleted'] = '';
@@ -79,8 +79,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_completed ) ) {
 					foreach ( $list_point_completed as $element ) {
-						$string .= 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $element->content . '
-';
+						$string .= Helper_Util::g()->point_to_string( $element );
 					}
 				}
 
@@ -89,8 +88,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_uncompleted ) ) {
 					foreach ( $list_point_uncompleted as $element ) {
-						$string .= 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $element->content . '
-';
+						$string .= Helper_Util::g()->point_to_string( $element );
 					}
 				}
 
@@ -135,4 +133,4 @@ class Corrective_Task_Filter {
 	}
 }
 
-new corrective_task_filter();
+new Corrective_Task_Filter();

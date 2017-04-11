@@ -17,13 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
 
 <div 	class="recommendation categorie-container toggle grid padding tooltip red"
-			aria-label="<?php esc_html_e( 'Vous devez choisir une préconisation.', 'digirisk' ); ?>"
+			aria-label="<?php esc_html_e( 'Vous devez choisir une signalisation.', 'digirisk' ); ?>"
 			data-parent="categorie-container"
 			data-target="content">
 
 	<div class="action">
-		<span><?php esc_html_e( 'Choisir une préconisation', 'digirisk' ); ?></span>
-		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une préconisation', 'digirisk' ); ?>" />
+		<span><?php esc_html_e( 'Choisir une signalisation', 'digirisk' ); ?></span>
+		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une signalisation', 'digirisk' ); ?>" />
 		<i class="icon animated fa fa-angle-down"></i>
 	</div>
 

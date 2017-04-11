@@ -42,8 +42,8 @@ class Recommendation_Filter {
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
 			'type' => 'text',
-			'text' => __( 'Recommendations', 'digirisk' ),
-			'title' => __( 'Les recommendations de', 'digirisk' ),
+			'text' => __( 'Signalisations', 'digirisk' ),
+			'title' => __( 'Les signalisations de', 'digirisk' ),
 		);
 
 		return $list_tab;
