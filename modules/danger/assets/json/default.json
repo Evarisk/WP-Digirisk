@@ -1,6 +1,6 @@
 [ {
 	"name": "Accident de plain-pied",
-	"name_thumbnail": "chutePP_PictoCategorie.png",
+	"name_thumbnail": "chutePP_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -13,7 +13,7 @@
 },
 {
 	"name": "Activité physique",
-	"name_thumbnail": "activitePhysique.png",
+	"name_thumbnail": "activitePhysique_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -24,7 +24,7 @@
 		},
 		{
 			"name": "Travail sur écran",
-			"name_thumbnail": "travailEcran.png",
+			"name_thumbnail": "travailEcran_v2.png",
 			"option": {
 				"status": "valid"
 			}
@@ -33,7 +33,7 @@
 },
 {
 	"name": "Agents biologique",
-	"name_thumbnail": "manqueHygiene_PictoCategorie.png",
+	"name_thumbnail": "manqueHygiene_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -46,7 +46,7 @@
 },
 {
 	"name": "Ambiances climatiques",
-	"name_thumbnail": "climat_PictoCategorie.png",
+	"name_thumbnail": "climat_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -59,7 +59,7 @@
 },
 {
 	"name": "Amiante",
-	"name_thumbnail": "amiante.png",
+	"name_thumbnail": "amiante_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -72,7 +72,7 @@
 },
 {
 	"name": "Autres",
-	"name_thumbnail": "autre_PictoCategorie.png",
+	"name_thumbnail": "autre_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -83,14 +83,14 @@
 		},
 		{
 			"name": "Manque de formation",
-			"name_thumbnail": "manqueFormation_PictoCategorie.png",
+			"name_thumbnail": "manqueFormation_PictoCategorie_v2.png",
 			"option": {
 				"status": "valid"
 			}
 		},
 		{
 			"name": "Société extérieure",
-			"name_thumbnail": "societeExt_PictoCategorie.png",
+			"name_thumbnail": "societeExt_PictoCategorie_v2.png",
 			"option": {
 				"status": "valid"
 			}
@@ -99,7 +99,7 @@
 },
 {
 	"name": "Chute de hauteur",
-	"name_thumbnail": "chuteH_PictoCategorie.png",
+	"name_thumbnail": "chuteH_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -112,7 +112,7 @@
 },
 {
 	"name": "Circulation, déplacements",
-	"name_thumbnail": "circulation_PictoCategorie.png",
+	"name_thumbnail": "circulation_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -125,7 +125,7 @@
 },
 {
 	"name": "Circulations internes",
-	"name_thumbnail": "circulation.png",
+	"name_thumbnail": "circulation_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -138,7 +138,7 @@
 },
 {
 	"name": "Eclairage",
-	"name_thumbnail": "eclairage_PictoCategorie.png",
+	"name_thumbnail": "eclairage_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -151,7 +151,7 @@
 },
 {
 	"name": "Effondrements, chute d'objet",
-	"name_thumbnail": "effondrement_PictoCategorie.png",
+	"name_thumbnail": "effondrement_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -164,7 +164,7 @@
 },
 {
 	"name": "Électricité",
-	"name_thumbnail": "electricite_PictoCategorie.png",
+	"name_thumbnail": "electricite_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -177,7 +177,7 @@
 },
 {
 	"name": "Équipements de travail",
-	"name_thumbnail": "machine_PictoCategorie.png",
+	"name_thumbnail": "machine_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -190,7 +190,7 @@
 },
 {
 	"name": "Incendie, explosion",
-	"name_thumbnail": "incendies_PictoCategorie.png",
+	"name_thumbnail": "incendies_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -215,7 +215,7 @@
 },
 {
 	"name": "Manutention manuelle",
-	"name_thumbnail": "manutentionMa_PictoCategorie.png",
+	"name_thumbnail": "manutentionMa_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -228,7 +228,7 @@
 },
 {
 	"name": "Manutention mécanique",
-	"name_thumbnail": "manutentionMe_PictoCategorie.png",
+	"name_thumbnail": "manutentionMe_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -241,7 +241,7 @@
 },
 {
 	"name": "Nuisances sonores",
-	"name_thumbnail": "nuisances_PictoCategorie.png",
+	"name_thumbnail": "nuisances_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -254,7 +254,7 @@
 },
 {
 	"name": "Postures penibles",
-	"name_thumbnail": "posturePenible.png",
+	"name_thumbnail": "posturePenible_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -267,7 +267,7 @@
 },
 {
 	"name": "Produits, émissions et déchets",
-	"name_thumbnail": "produitsC_PictoCategorie.png",
+	"name_thumbnail": "produitsC_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -280,7 +280,7 @@
 },
 {
 	"name": "Rayonnements",
-	"name_thumbnail": "rayonnement.png",
+	"name_thumbnail": "rayonnement_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -293,7 +293,7 @@
 },
 {
 	"name": "Risques psychosociaux",
-	"name_thumbnail": "rps.png",
+	"name_thumbnail": "rps_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -304,14 +304,14 @@
 		},
 		{
 			"name": "Travail de nuit",
-			"name_thumbnail": "travailDeNuit.png",
+			"name_thumbnail": "travailDeNuit_v2.png",
 			"option": {
 				"status": "valid"
 			}
 		},
 		{
 			"name": "Travail en équipe successives alternantes",
-			"name_thumbnail": "travailEquipeAlternance.png",
+			"name_thumbnail": "travailEquipeAlternance_v2.png",
 			"option": {
 				"status": "valid"
 			}
@@ -344,7 +344,7 @@
 },
 {
 	"name": "Vibrations",
-	"name_thumbnail": "vibrations.png",
+	"name_thumbnail": "vibrations_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {

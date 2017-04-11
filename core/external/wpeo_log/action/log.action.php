@@ -28,7 +28,7 @@ class log_action {
 	* @return void
 	*/
 	public function admin_menu() {
-		add_submenu_page( 'tools.php', __( 'Logs', 'digirisk' ), __( 'Logs', 'digirisk' ), 'manage_options', 'wpeo-log-page', array( &$this, 'render_add_submenu_page' ) );
+		add_submenu_page( 'tools.php', __( 'Logs', 'digirisk' ), __( 'Logs', 'digirisk' ), 'manage_digirisk', 'wpeo-log-page', array( &$this, 'render_add_submenu_page' ) );
 	}
 
 	/**

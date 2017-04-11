@@ -15,15 +15,13 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Connaissez-vous la différence entre risque et danger ?', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
-			<p><?php esc_html_e( 'Le risque c’est le Danger et l’Homme dans le même espace.', 'digirisk' ); ?></p>
-			<p><?php esc_html_e( 'Définition Risque:', 'digirisk' ); ?></p>
-			<p><?php esc_html_e( 'Possibilité, probabilité d\'un fait, d\'un événement considéré comme un mal ou un dommage: Les risques de guerre augmentent.', 'digirisk' ); ?></p>
-			<p><?php esc_html_e( 'Danger, inconvénient plus ou moins probable auquel on est exposé: Courir le risque d\'un échec. Un pilote qui prend trop de risques.', 'digirisk' ); ?></p>
-			<p>Source: <a href="http://www.larousse.fr/dictionnaires/francais/risque/69557#8VAKqHCtvXCADLK3.99" target="_blank">larousse.fr</a></p>
+			<p class="oversize center light"><?php esc_html_e( 'Le risque, c\'est le Danger et l\'Homme dans le même espace', 'digirisk' ); ?></p>
+			<p class="center">
+				<a href="http://www.larousse.fr/dictionnaires/francais/risque/69557#8VAKqHCtvXCADLK3.99" target="_blank"><?php esc_html_e( 'Définition du Larousse', 'digirisk' ); ?></a>
+			</p>
 		</div>
 
 		<div>

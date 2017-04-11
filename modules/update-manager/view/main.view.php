@@ -14,28 +14,15 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-<?php
+<?php if ( ! empty( $waiting_updates ) ) : ?>
+	<?php foreach ( $waiting_updates as $version => $data ) : ?>
+		<input type="hidden" name="version_available[]" value="<?php echo esc_attr( $version ); ?>" />
 
-if ( ! empty( $availables_update ) ) :
-	foreach ( $availables_update as $available_update ) :
-		?><input type="hidden" name="version_available[]" value="<?php echo esc_attr( $available_update ); ?>" /><?php
-	endforeach;
-endif;
-
-if ( ! empty( $versions_data ) ) :
-	foreach ( $versions_data as $version => $version_data ) :
-		if ( ! empty( $version_data ) ) :
-			foreach ( $version_data as $data ) :
-				?>
-				<input type="hidden" name="version[<?php echo esc_attr( $version ); ?>][action]" value="<?php echo esc_attr( $data['action'] ); ?>" />
-				<input type="hidden" name="version[<?php echo esc_attr( $version ); ?>][description]" value="<?php echo esc_attr( $data['description'] ); ?>" />
-				<?php
-			endforeach;
-		endif;
-
-	endforeach;
-endif;
-
-?>
+		<?php foreach ( $data as $index => $def ) : ?>
+			<input type="hidden" name="version[<?php echo esc_attr( $version ); ?>][action][]" value="<?php echo esc_attr( $def['action'] ); ?>" />
+			<input type="hidden" name="version[<?php echo esc_attr( $version ); ?>][description][]" value="<?php echo esc_attr( $def['description'] ); ?>" />
+		<?php endforeach; ?>
+	<?php endforeach; ?>
+<?php endif; ?>
 
 <ul class="log"></ul>

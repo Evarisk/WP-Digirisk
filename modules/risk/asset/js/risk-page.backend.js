@@ -13,7 +13,7 @@ window.digirisk.risk_page.init = function() {
 
 window.digirisk.risk_page.event = function() {
 	jQuery( document ).on( 'click', '.risk-page .save-all:not(.grey)', window.digirisk.risk_page.saveRisks );
-	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), tr .toggle, tr textarea, tr .popup, tr .action', window.digirisk.risk_page.checkTheCheckbox );
+	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), .risk-page tr .toggle, .risk-page tr textarea, .risk-page tr .popup, .risk-page tr .action', window.digirisk.risk_page.checkTheCheckbox );
 
 	jQuery( document ).on( 'click', '.risk-page .wp-digi-pagination a', window.digirisk.risk_page.pagination );
 };

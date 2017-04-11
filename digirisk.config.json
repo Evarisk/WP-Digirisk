@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.8.0",
+	"version": "6.2.9.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
@@ -11,7 +11,8 @@
 		"digirisk-transfert",
 		"digi-setup",
 		"digirisk-handle-sorter",
-		"digirisk-update"
+		"digirisk-update",
+		"digirisk-setting"
 	],
 	"insert_scripts_pages_css": [
 		"digirisk-simple-risk-evaluation",
@@ -21,7 +22,8 @@
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
-		"digirisk-handle-sorter"
+		"digirisk-handle-sorter",
+		"digirisk-setting"
 	],
 	"modules": [
 		"core/external/wpeo_log/wpeo_log.config.json",
@@ -37,6 +39,9 @@
 
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",
+
+		"modules/recommendation/recommendation.config.json",
+		"modules/risk/risk.config.json",
 
 		"modules/danger/danger.config.json",
 		"modules/document/document.config.json",
@@ -58,9 +63,6 @@
 		"modules/installer/installer.config.json",
 
 		"modules/legal_display/legal_display.config.json",
-
-		"modules/recommendation/recommendation.config.json",
-		"modules/risk/risk.config.json",
 
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",

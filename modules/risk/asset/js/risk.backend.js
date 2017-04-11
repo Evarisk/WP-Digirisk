@@ -53,3 +53,18 @@ window.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
 	window.digirisk.date.init();
 };
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "check_predefined_danger".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.2.9.0
+ * @version 6.2.9.0
+ */
+window.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
+	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
+	window.digirisk.date.init();
+};

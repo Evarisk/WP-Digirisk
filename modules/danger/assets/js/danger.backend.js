@@ -2,7 +2,7 @@
  * Initialise l'objet "danger" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.6.0
+ * @version 6.2.9.0
  */
 window.digirisk.danger = {};
 
@@ -25,6 +25,7 @@ window.digirisk.danger.event = function() {
  */
 window.digirisk.danger.selectDanger = function( event ) {
 	var element = jQuery( this );
+	var data = {};
 	element.closest( '.content' ).removeClass( 'active' );
 	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
 	element.closest( '.toggle' ).find( '.action span' ).hide();
@@ -41,4 +42,13 @@ window.digirisk.danger.selectDanger = function( event ) {
 	if ( -1 != element.closest( 'tr' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
 		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 	}
+
+	data.action = 'check_predefined_danger';
+	data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
+	data.danger_id = element.data( 'id' );
+	data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
+
+	jQuery( this ).closest( 'td' ).addClass( 'loading' );
+
+	window.digirisk.request.send( jQuery( this ).closest( '.toggle' ), data );
 };

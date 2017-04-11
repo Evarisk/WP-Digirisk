@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage view
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<thead>
 		<tr>
 			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="wm130"><?php esc_html_e( 'Préconisation', 'digirisk' ); ?></th>
+			<th class="wm130"><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
 			<th class="w100"></th>

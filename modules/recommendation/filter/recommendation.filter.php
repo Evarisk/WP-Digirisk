@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage filter
@@ -42,8 +42,8 @@ class Recommendation_Filter {
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
 			'type' => 'text',
-			'text' => __( 'Recommendations', 'digirisk' ),
-			'title' => __( 'Les recommendations de', 'digirisk' ),
+			'text' => __( 'Signalisations', 'digirisk' ),
+			'title' => __( 'Les signalisations de', 'digirisk' ),
 		);
 
 		return $list_tab;

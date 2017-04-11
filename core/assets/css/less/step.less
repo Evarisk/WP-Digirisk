@@ -8,7 +8,7 @@
 		width: 100%;
 		.bar {
 			position: relative;
-			top: 5px;
+			top: -9px;
 			.background, .loader {
 				position: absolute;
 				top: 0;
@@ -28,7 +28,7 @@
 			width: 100%;
 			display: flex;
 			.step {
-				&:before {
+				&:after {
 					position: relative;
 					z-index: 90;
 					display: block;
@@ -48,23 +48,23 @@
 					font-size: 14px;
 					max-width: 160px;
 					font-weight: 600;
-					padding-top: 10px;
+					padding-bottom: 10px;
 					transition: all 0.2s ease-out;
 				}
 				&:first-child {
-					&:before, .title {
+					&:after, .title {
 						margin: 0 auto 0 0;
 						text-align: left;
 					}
 				}
 				&:last-child {
-					&:before, .title {
+					&:after, .title {
 						margin: 0 0 0 auto;
 						text-align: right;
 					}
 				}
 				&.active {
-					&:before {
+					&:after {
 						background: @green;
 					}
 					.title {
@@ -81,7 +81,8 @@
 	}
 
 	.step.install {
-		padding: 0 30px;
+		margin: 20px auto;
+		max-width: 1200px;
 		.step-list {
 			.step {
 				&:first-child { width: 12.5%; }
@@ -89,6 +90,16 @@
 				&:nth-of-type(3) { width: 25%; }
 				&:nth-of-type(4) { width: 25%; }
 				&:last-child { width: 12.5%; }
+			}
+		}
+	}
+
+	@media screen and (max-width: 1080px) {
+		.step {
+			.step-list {
+				.step .title {
+					font-size: 10px;
+				}
 			}
 		}
 	}

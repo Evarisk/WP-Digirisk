@@ -15,21 +15,18 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
-	<h2><?php esc_html_e( 'La méthode simplifiée vous permet une cotation sur 4 niveaux', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'DigiRisk propose 2 méthodes d\'évaluation des risques', 'digirisk' ); ?></h2>
 	<div class="grid-layout w2">
 		<div class="content">
-			<h3><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h3>
-
-			<p><?php _e( '<b>La cotation risque faible</b>, notamment dans le cas des expositions à des produits chimiques, a une signification juridique.', 'digirisk' ); ?></p>
-			<p>
-				<?php _e( 'En effet, la définition d\'un risque faible doit respecter une définition légale. Retrouvez les informations ici:', 'digirisk' ); ?>
-				<a href="http://www.travailler-mieux.gouv.fr/" target="_blank">travailler-mieux.gouv.fr</a>
-			</p>
-			<p><?php _e( '<b>L\'échelle</b> des cotations du logiciel DigiRisk Comprend au maximum 101 valeurs comprises entre 0 et 100.', 'digirisk' ); ?></p>
+			<h3><?php esc_html_e( 'La méthode simplifiée', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( '4 Priorités ! Gris, Orange, Rouge et Noir', 'digirisk' ); ?></p>
+			<h3><?php esc_html_e( 'La méthode avancée', 'digirisk' ); ?></h3>
+			<p><?php esc_html_e( 'Basée sur la méthode de Kinney', 'digirisk' ); ?></p>
+			<p class="padding center oversize light"><?php esc_html_e( 'Risque  = Gravité * Exposition * Probabilité', 'digirisk' ); ?></p>
 		</div>
 
 		<div>
-			<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/installer/04.jpg' ); ?>" alt="01" />
+			<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/installer/01.jpg' ); ?>" alt="01" />
 		</div>
 	</div>
 </div>

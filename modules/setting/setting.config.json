@@ -4,10 +4,12 @@
 	"version": "0.2.0.0",
 	"description": "Le module gérant les configuration de Digirisk",
 	"path": "modules/setting/",
+	"state": true,
 	"dependencies": {
 		"action": {
 		},
 		"class": {
 		}
-	}
+	},
+	"key_preset_danger": "_wpdigi_preset_danger_installed"
 }

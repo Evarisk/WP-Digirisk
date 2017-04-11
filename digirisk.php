@@ -10,7 +10,7 @@ namespace digi;
  * Plugin Name: Digirisk
  * Plugin URI:  http://www.evarisk.com/document-unique-logiciel
  * Description: Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
- * Version:     6.2.8.0
+ * Version:     6.2.9.0
  * Author:      Evarisk
  * Author URI:  http://www.evarisk.com
  * License:     GPL2
@@ -31,3 +31,6 @@ require_once 'core/external/wpeo_log/class/log.class.php';
 log_class::g()->start_ms( 'digi_boot' );
 Init_util::g()->exec();
 log_class::g()->exec( 'digi_boot', 'digi_boot', 'Boot l\'application Digirisk' );
+
+/** Call WordPress hook when the plugin is activaed */
+register_activation_hook( __FILE__, array( Digirisk_Class::g(), 'activation' ) );
