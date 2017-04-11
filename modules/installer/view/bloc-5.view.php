@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.7.0
- * @version 6.2.7.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package installer
  * @subpackage view
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			<ul>
 				<li><?php esc_html_e( 'Les risques chimiques', 'digirisk' ); ?></li>
 				<li><?php esc_html_e( 'Le niveau d\'empoussièrement pour l\'amiante', 'digirisk' ); ?></li>
-				<li><?php esc_html_e( 'Les résultats de karasek', 'digirisk' ); ?></li>
+				<li><?php esc_html_e( 'Les résultats du questionnaire de Karasek', 'digirisk' ); ?></li>
 			</ul>
 		</div>
 

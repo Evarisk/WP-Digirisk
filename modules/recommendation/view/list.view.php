@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage view
