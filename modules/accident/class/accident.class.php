@@ -1,8 +1,12 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 
-class accident_class extends post_class {
+namespace digi;
 
-	protected $model_name   = 'accident_model';
+if ( !defined( 'ABSPATH' ) ) exit;
+
+class accident_class extends Post_Class {
+
+	protected $model_name   = '\digi\accident_model';
 	protected $post_type    = 'digi-accident';
 	protected $meta_key    	= '_wpdigi_accident';
 
@@ -38,7 +42,9 @@ class accident_class extends post_class {
 	public function display( $society_id ) {
 		$accident = $this->get( array( 'schema' => true ) );
 		$accident = $accident[0];
-		require( ACCIDENT_VIEW_DIR . 'main.view.php' );
+		View_Util::exec( 'accident', 'main', array(
+			'accident' => $accident,
+		) );
 	}
 
 	/**
@@ -55,6 +61,9 @@ class accident_class extends post_class {
 
 		$accident_list = accident_class::g()->get( array( 'post_parent' => $society->id ), array( 'list_risk', 'evaluation', 'list_user' ) );
 
-		require( ACCIDENT_VIEW_DIR . 'list.view.php' );
+		View_Util::exec( 'accident', 'list', array(
+			'society' => $society,
+			'accident_list' => $accident_list,
+		) );
 	}
 }
