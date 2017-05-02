@@ -44,6 +44,7 @@ class accident_class extends Post_Class {
 		$accident = $accident[0];
 		View_Util::exec( 'accident', 'main', array(
 			'accident' => $accident,
+			'society_id' => $society_id,
 		) );
 	}
 

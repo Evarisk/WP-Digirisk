@@ -14,6 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 		Accident_Class::g()->display_accident_list( $society_id );
 		View_Util::exec( 'accident', 'item-edit', array(
 			'accident' => $accident,
+			'society_id' => $society_id,
 		) );
 		?>
 	</ul>
