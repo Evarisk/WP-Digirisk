@@ -25,6 +25,8 @@
 	"amiante": "amiante",
 	"chute-de-hauteur": "chute-de-hauteur",
 
+
+
 	"divers-chute-de-hauteur": "divers-chute-de-hauteur",
 	"divers-activite-physique": "divers-activite-physique",
 	"travail-sur-ecran": "travail-sur-ecran",
@@ -59,7 +61,10 @@
 	"divers-vibrations": "divers-vibrations",
 	"divers-amiante": "divers-amiante",
 	"divers-electricite": "divers-electricite",
+
+	"divers-accident-de-plain-pied": "divers-chute-de-plain-pied",
 	"divers-chute-de-plain-pied": "divers-chute-de-plain-pied",
+
 	"divers-effrondrements-chute-dobjet": "divers-effondrements-chute-dobjet",
 	"divers-effondrements-chute-dobjet": "divers-effondrements-chute-dobjet",
 	"divers-ambiances-climatiques-manque-de-formation": "divers-ambiances-climatiques-manque-de-formation",
