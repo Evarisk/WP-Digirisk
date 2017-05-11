@@ -75,11 +75,11 @@ class tools_action {
 		check_ajax_referer( 'callback_transfert_doc' );
 
 		$types_to_transfert = array(
-			'document_unique' => 'DUER_Class',
-			'fiche_de_groupement' => 'Fiche_De_Groupement_Class',
-			'fiche_de_poste'			=> 'Fiche_De_Poste_Class',
-			'affichage_legal_a4'	=> 'Affichage_Legal_A4_Class',
-			'affichage_legal_a3'	=> 'Affichage_Legal_A3_Class',
+			'document_unique' => '\digi\DUER_Class',
+			'fiche_de_groupement' => '\digi\Fiche_De_Groupement_Class',
+			'fiche_de_poste'			=> '\digi\Fiche_De_Poste_Class',
+			'affichage_legal_a4'	=> '\digi\Affichage_Legal_A4_Class',
+			'affichage_legal_a3'	=> '\digi\Affichage_Legal_A3_Class',
 		);
 
 		if ( ! empty( $types_to_transfert ) ) {
