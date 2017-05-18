@@ -3802,6 +3802,21 @@
     margin-top: 20px;
   }
 }
+@media screen and (max-width: 680px) {
+  .digirisk-wrap .navigation-container {
+    width: 100%;
+    padding-right: 0;
+  }
+  .digirisk-wrap .main-container .main-header .unit-header {
+    width: 100%;
+  }
+  .digirisk-wrap .main-container .main-header .save {
+    margin: 0 0 0 auto;
+  }
+  .digirisk-wrap .main-container .main-header .dut {
+    display: none;
+  }
+}
 /**
  * Style spécifique à la navigation des workunits
  * .unit-header -> Affichage des media et de l'UT ou GP
@@ -4161,6 +4176,14 @@
 .digirisk-wrap .tab .gp:hover {
   background: #c82424 !important;
 }
+@media screen and (max-width: 680px) {
+  .digirisk-wrap .tab .gp {
+    display: none;
+  }
+  .digirisk-wrap .tab .option {
+    margin-left: auto;
+  }
+}
 /**
  * .toggle -> classe de base
  * .list -> Affiche en liste simple
@@ -4277,6 +4300,16 @@
   top: -6px;
   left: 20px;
   border-color: transparent transparent #fff transparent;
+}
+@media screen and (max-width: 680px) {
+  .digirisk-wrap .toggle.option .content {
+    left: auto;
+    right: -10px;
+  }
+  .digirisk-wrap .toggle.option .content:before {
+    left: auto;
+    right: 20px;
+  }
 }
 /**
  * Pagination
@@ -4762,6 +4795,48 @@
   .digirisk-wrap tr,
   .digirisk-wrap td {
     padding: 0 !important;
+  }
+}
+@media screen and (max-width: 680px) {
+  .digirisk-wrap table,
+  .digirisk-wrap tr,
+  .digirisk-wrap thead,
+  .digirisk-wrap tbody,
+  .digirisk-wrap tfoot,
+  .digirisk-wrap td,
+  .digirisk-wrap th {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .digirisk-wrap thead tr {
+    display: none;
+  }
+  .digirisk-wrap td {
+    position: relative;
+    border: 0px solid transparent;
+    padding-left: 50% !important;
+    white-space: normal;
+    text-align: right;
+    height: 50px !important;
+    line-height: 50px;
+  }
+  .digirisk-wrap td:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    padding: 2px 15px;
+    height: 100%;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis !important;
+       text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    text-align: left;
+    background: #f8f8f8;
+    content: attr(data-title);
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.3);
   }
 }
 /**

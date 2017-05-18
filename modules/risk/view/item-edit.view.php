@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="risk[id]" value="<?php echo $risk->preset ? 0 : esc_attr( $risk->id ); ?>" />
 	<input type="hidden" name="risk[preset]" value="0" />
 
-	<td class="padding">
+	<td data-title="Ref." class="padding">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
 
 		<?php if ( $risk->preset ) : ?>
@@ -31,19 +31,19 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 		<?php endif; ?>
 	</td>
-	<td class="wm130 w150">
+	<td data-title="Risque" data-title="Risque" class="wm130 w150">
 		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" danger_id="' . $risk->danger->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
 	</td>
-	<td class="w50">
+	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
 	</td>
-	<td class="w50">
+	<td data-title="Photo" class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	</td>
-	<td class="padding">
+	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="edit" add_button="' . ( ( $risk->preset ) ? '0' : '1' ) . '"]' ); ?>
 	</td>
-	<td>
+	<td data-title="action">
 		<?php if ( 0 !== $risk->id && false === $risk->preset ) : ?>
 			<div class="action grid-layout w3">
 				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
