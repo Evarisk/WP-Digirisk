@@ -4,9 +4,9 @@
  * @since 6.2.5.0
  * @version 6.2.5.0
  */
-window.digirisk.societyAdvancedOptions = {};
+window.eoxiaJS.digirisk.societyAdvancedOptions = {};
 
-window.digirisk.societyAdvancedOptions.init = function() {};
+window.eoxiaJS.digirisk.societyAdvancedOptions.init = function() {};
 
 /**
  * Callback en cas de réussite de la requête Ajax "advanced_options_move_to"
@@ -19,6 +19,6 @@ window.digirisk.societyAdvancedOptions.init = function() {};
  * @since 6.2.5.0
  * @version 6.2.5.0
  */
-window.digirisk.societyAdvancedOptions.savedAdvancedOptionsMoveTo = function( element, response ) {
+window.eoxiaJS.digirisk.societyAdvancedOptions.savedAdvancedOptionsMoveTo = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.view );
 };

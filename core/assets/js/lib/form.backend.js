@@ -1,31 +1,41 @@
-window.digirisk.form = {};
+window.eoxiaJS.form = {};
 
-window.digirisk.form.init = function() {
-    window.digirisk.form.event();
+window.eoxiaJS.form.init = function() {
+    window.eoxiaJS.form.event();
 };
-window.digirisk.form.event = function() {
-    jQuery( document ).on( 'click', '.submit-form', window.digirisk.form.submitForm );
+window.eoxiaJS.form.event = function() {
+    jQuery( document ).on( 'click', '.submit-form', window.eoxiaJS.form.submitForm );
 };
 
-window.digirisk.form.submitForm = function( event ) {
+window.eoxiaJS.form.submitForm = function( event ) {
 	var element = jQuery( this );
-
-	element.closest( 'form' ).addClass( 'loading' );
+	var doAction = true;
 
 	event.preventDefault();
-	element.closest( 'form' ).ajaxSubmit( {
-		success: function( response ) {
-			element.closest( 'form' ).removeClass( 'loading' );
 
-			if ( response && response.success ) {
-				if ( response.data.module && response.data.callback_success ) {
-					window.digirisk[response.data.module][response.data.callback_success]( element, response );
+/** Méthode appelée avant l'action */
+	if ( element.attr( 'data-module' ) && element.attr( 'data-before-method' ) ) {
+		doAction = false;
+		doAction = window.eoxiaJS[element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
+	}
+
+	if ( doAction ) {
+		element.closest( 'form' ).ajaxSubmit( {
+			success: function( response ) {
+				if ( response && response.data.module && response.data.callback ) {
+					window.eoxiaJS[response.data.module][response.data.callback]( element, response );
 				}
-			} else {
-				if ( response.data.module && response.data.callback_error ) {
-					window.digirisk[response.data.module][response.data.callback_error]( element, response );
+
+				if ( response && response.success ) {
+					if ( response.data.module && response.data.callback_success ) {
+						window.eoxiaJS[response.data.module][response.data.callback_success]( element, response );
+					}
+				} else {
+					if ( response.data.module && response.data.callback_error ) {
+						window.eoxiaJS[response.data.module][response.data.callback_error]( element, response );
+					}
 				}
 			}
-		}
-	} );
+		} );
+	}
 };

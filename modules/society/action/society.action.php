@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage action
@@ -37,7 +37,7 @@ class Society_Action {
 	 * Charges le template d'une société
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_load_society() {
 		$template = '';
@@ -45,14 +45,19 @@ class Society_Action {
 		ob_start();
 		Digirisk_Class::g()->display();
 		$template .= ob_get_clean();
-		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'loadedSocietySuccess', 'template' => $template ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'society',
+			'callback_success' => 'loadedSocietySuccess',
+			'template' => $template,
+		) );
 	}
 
 	/**
 	 * Sauvegardes les données d'une societé
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_save_society() {
 		check_ajax_referer( 'save_society' );
@@ -85,7 +90,13 @@ class Society_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display( $id );
-		wp_send_json_success( array( 'module' => 'society', 'callback_success' => 'savedSocietySuccess', 'society' => $society, 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'society',
+			'callback_success' => 'savedSocietySuccess',
+			'society' => $society,
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -94,7 +105,7 @@ class Society_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_delete_society() {
 		check_ajax_referer( 'delete_society' );
@@ -107,7 +118,12 @@ class Society_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'template' => ob_get_clean(), 'module' => 'society', 'callback_success' => 'deletedSocietySuccess' ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean(),
+			'namespace' => 'digirisk',
+			'module' => 'society',
+			'callback_success' => 'deletedSocietySuccess',
+		) );
 	}
 }
 

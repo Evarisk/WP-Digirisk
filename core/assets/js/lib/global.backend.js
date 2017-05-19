@@ -1,15 +1,15 @@
-window.digirisk.global = {};
+window.eoxiaJS.global = {};
 
-window.digirisk.global.init = function() {};
+window.eoxiaJS.global.init = function() {};
 
-window.digirisk.global.downloadFile = function( urlToFile, filename ) {
+window.eoxiaJS.global.downloadFile = function( urlToFile, filename ) {
 	var url = jQuery( '<a href="' + urlToFile + '" download="' + filename + '"></a>' );
 	jQuery( '.wrap' ).append( url );
 	url[0].click();
 	url.remove();
 };
 
-window.digirisk.global.removeDiacritics = function( input ) {
+window.eoxiaJS.global.removeDiacritics = function( input ) {
 	var output = '';
 	var normalized = input.normalize( 'NFD' );
 	var i = 0;

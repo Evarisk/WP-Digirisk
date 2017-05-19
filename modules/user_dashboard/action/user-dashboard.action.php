@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.5.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package user_dashboard
  * @subpackage action
@@ -63,7 +63,7 @@ class User_Shortcode_Action extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
@@ -75,7 +75,13 @@ class User_Shortcode_Action extends Singleton_Util {
 
 		ob_start();
 		User_Dashboard_Class::g()->display_list_user();
-		wp_send_json_success( array( 'module' => 'userDashboard', 'callback_success' => 'savedUserSuccess', 'template' => ob_get_clean(), 'error' => $error ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'userDashboard',
+			'callback_success' => 'savedUserSuccess',
+			'template' => ob_get_clean(),
+			'error' => $error,
+		) );
 	}
 
 	/**
@@ -84,7 +90,7 @@ class User_Shortcode_Action extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_load_user() {
 		check_ajax_referer( 'ajax_load_user' );
@@ -100,7 +106,12 @@ class User_Shortcode_Action extends Singleton_Util {
 
 		ob_start();
 		View_Util::exec( 'user_dashboard', 'item-edit', array( 'user' => $user ) );
-		wp_send_json_success( array( 'module' => 'userDashboard', 'callback_success' => 'loadedUserSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'userDashboard',
+			'callback_success' => 'loadedUserSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -109,7 +120,7 @@ class User_Shortcode_Action extends Singleton_Util {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_delete_user() {
 		check_ajax_referer( 'ajax_delete_user' );
@@ -121,7 +132,11 @@ class User_Shortcode_Action extends Singleton_Util {
 		}
 
 		User_Digi_Class::g()->delete( $id );
-		wp_send_json_success( array( 'module' => 'userDashboard', 'callback_success' => 'deletedUserSuccess' ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'userDashboard',
+			'callback_success' => 'deletedUserSuccess',
+		) );
 	}
 
 	/**

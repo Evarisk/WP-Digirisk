@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.5.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage action
@@ -30,7 +30,7 @@ class Society_Configuration_Action {
 	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
 	 *
 	 * @since 6.2.2.0
-	 * @version 6.2.2.0
+	 * @version 6.2.9.0
 	 *
 	 * @return void
 	 */
@@ -44,7 +44,13 @@ class Society_Configuration_Action {
 
 		$group = Society_Configuration_Class::g()->save( $groupment_data );
 
-		wp_send_json_success( array( 'society' => $group, 'address' => $address, 'module' => 'society', 'callback_success' => 'savedSocietyConfiguration' ) );
+		wp_send_json_success( array(
+			'society' => $group,
+			'address' => $address,
+			'namespace' => 'digirisk',
+			'module' => 'society',
+			'callback_success' => 'savedSocietyConfiguration',
+		) );
 	}
 }
 

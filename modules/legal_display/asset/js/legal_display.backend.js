@@ -5,9 +5,9 @@
  * @version 6.2.4.0
  */
 
-window.digirisk.legalDisplay = {};
+window.eoxiaJS.digirisk.legalDisplay = {};
 
-window.digirisk.legalDisplay.init = function() {};
+window.eoxiaJS.digirisk.legalDisplay.init = function() {};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "save_legal_display".
@@ -20,7 +20,7 @@ window.digirisk.legalDisplay.init = function() {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.legalDisplay.generatedSuccess = function() {
+window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function() {
 	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
 	window.scrollTo( 0, 0 );
 };

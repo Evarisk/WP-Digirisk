@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 		</div>
 
-		<div data-module="installer" data-loader="wpdigi-installer" data-parent="wpdigi-installer" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
+		<div data-module="installer" data-loader="wpdigi-installer" data-parent="wpdigi-installer" data-namespace="digirisk" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
 
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-users' ) ); ?>" type="button" class="hidden disable float right button green uppercase strong">
 			<span><?php esc_html_e( 'Terminer l\'installation', 'digirisk' ); ?></span>

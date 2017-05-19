@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.8.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package corrective-task
  * @subpackage action
@@ -37,15 +37,13 @@ class Corrective_Task_Action {
 	 * @return void
 	 *
 	 * @since 1.0
-	 * @version 6.2.8.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_open_task() {
 		$parent_id = $_POST['id'];
 
-		global $task_controller;
-
-		if ( $task_controller ) {
-			$task = $task_controller->index( array(
+		if ( class_exists( '\task_manager\Task_Class' ) ) {
+			$task = \task_manager\Task_Class::g()->get( array(
 				'post_parent' => $parent_id,
 			) );
 			$risk = Risk_Class::g()->get( array(
@@ -57,31 +55,23 @@ class Corrective_Task_Action {
 			$society = Society_Class::g()->show_by_type( $risk->parent_id );
 
 			if ( empty( $task ) ) {
-				$task = $task_controller->create( array(
+				$task = \task_manager\Task_Class::g()->update( array(
 					'title' => __( $society->unique_identifier . ' ' . $society->title . ' -> risque ' . $risk->unique_identifier, 'task-manager' ),
 					'parent_id' => $parent_id,
 					'author_id' => get_current_user_id(),
-					'option' => array(
-						'user_info' => array(
-							'owner_id' => get_current_user_id(),
-						),
+					'user_info' => array(
+						'owner_id' => get_current_user_id(),
 					),
 				) );
 			} else {
 				$task = $task[0];
 			}
 
-			add_filter( 'action_create_point', function( $action ) {
-				$action = 'create_task_and_point';
-				return $action;
-			} );
-
-			add_filter( 'create_point_additional_option', function() {
-				return '<input type="hidden" name="parent_id" value="' . $_POST['id'] . '" />';
-			} );
 
 			ob_start();
-			View_Util::exec( 'corrective_task', 'form', array( 'task' => $task ) );
+			View_Util::exec( 'corrective_task', 'form', array(
+				'task' => $task,
+			) );
 			$view = ob_get_clean();
 		} else {
 			ob_start();
@@ -89,7 +79,12 @@ class Corrective_Task_Action {
 			$view = ob_get_clean();
 		} // End if().
 
-		wp_send_json_success( array( 'module' => 'correctiveTask', 'callback_success' => 'openedTaskPopup', 'view' => $view ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'correctiveTask',
+			'callback_success' => 'openedTaskPopup',
+			'view' => $view,
+		) );
 	}
 
 	/**
@@ -98,7 +93,7 @@ class Corrective_Task_Action {
 	 * @return void
 	 *
 	 * @since 6.2.5.0
-	 * @version 6.2.8.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_create_task_and_point() {
 		global $task_controller;
@@ -132,7 +127,9 @@ class Corrective_Task_Action {
 		$custom_class = 'wpeo-task-point-sortable';
 		ob_start();
 		require( WPEO_POINT_TEMPLATES_MAIN_DIR . '/backend/point.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean(),
+		) );
 	}
 }
 

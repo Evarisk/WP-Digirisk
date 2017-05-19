@@ -51,9 +51,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php else : ?>
 			<div class="action grid-layout w3">
 				<?php if ( -1 != $risk->danger->id && -1 != $risk->evaluation->scale ) : ?>
-					<div data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
 				<?php else : ?>
-					<div data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon fa fa-plus"></i></div>
+					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon fa fa-plus"></i></div>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

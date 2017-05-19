@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package user
  * @subpackage action
@@ -40,7 +40,7 @@ class User_Action extends Singleton_Util {
 	 * Assignes un utilisateur à element_id dans la base de donnée
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_edit_user_assign() {
 		check_ajax_referer( 'edit_user_assign' );
@@ -97,14 +97,19 @@ class User_Action extends Singleton_Util {
 
 		ob_start();
 		User_Digi_Class::g()->render( $workunit );
-		wp_send_json_success( array( 'module' => 'user', 'callback_success' => 'editUserAssignSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'user',
+			'callback_success' => 'editUserAssignSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
 	 * Dissocies un utilisateur à element_id dans la base de donnée
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_detach_user() {
 		check_ajax_referer( 'detach_user' );
@@ -129,7 +134,12 @@ class User_Action extends Singleton_Util {
 
 		ob_start();
 		User_Digi_Class::g()->render( $workunit );
-		wp_send_json_success( array( 'module' => 'user', 'callback_success' => 'detachUserSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'user',
+			'callback_success' => 'detachUserSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**

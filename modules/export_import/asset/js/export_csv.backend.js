@@ -14,7 +14,7 @@
  * @memberof export
  * @type {Object}
  */
-window.digirisk.exportCSV = {};
+window.eoxiaJS.digirisk.exportCSV = {};
 
 /**
  * La méthode init est appelé automatiquement
@@ -26,8 +26,8 @@ window.digirisk.exportCSV = {};
  *
  * @return {void}
  */
-window.digirisk.exportCSV.init = function() {
-	window.digirisk.exportCSV.event();
+window.eoxiaJS.digirisk.exportCSV.init = function() {
+	window.eoxiaJS.digirisk.exportCSV.event();
 };
 
 /**
@@ -40,8 +40,8 @@ window.digirisk.exportCSV.init = function() {
  *
  * @return {void}
  */
-window.digirisk.exportCSV.event = function() {
-	jQuery( document ).on( 'click', '#digi-export-csv-form button.blue', window.digirisk.exportCSV.makeExport );
+window.eoxiaJS.digirisk.exportCSV.event = function() {
+	jQuery( document ).on( 'click', '#digi-export-csv-form button.blue', window.eoxiaJS.digirisk.exportCSV.makeExport );
 };
 
 /**
@@ -53,7 +53,7 @@ window.digirisk.exportCSV.event = function() {
  * @since 6.2.6.0
  * @version 6.2.6.0
  */
-window.digirisk.exportCSV.makeExport = function( event ) {
+window.eoxiaJS.digirisk.exportCSV.makeExport = function( event ) {
 	var button = jQuery( this );
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
@@ -65,7 +65,7 @@ window.digirisk.exportCSV.makeExport = function( event ) {
 			button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
 			if ( response.data.end ) {
 				button.removeClass( 'loading' );
-				window.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
+				window.eoxiaJS.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
 				jQuery( '#digi-export-csv-form input[name="offset"]' ).val( 0 );
 				jQuery( '#digi-export-csv-form input[name="filepath"]' ).val( '' );
 				jQuery( '#digi-export-csv-form input[name="filename"]' ).val( '' );

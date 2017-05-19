@@ -1,14 +1,14 @@
-window.digirisk.tab = {};
+window.eoxiaJS.tab = {};
 
-window.digirisk.tab.init = function() {
-	window.digirisk.tab.event();
+window.eoxiaJS.tab.init = function() {
+	window.eoxiaJS.tab.event();
 };
 
-window.digirisk.tab.event = function() {
-  jQuery( document ).on( 'click', '.tab-element', window.digirisk.tab.load );
+window.eoxiaJS.tab.event = function() {
+  jQuery( document ).on( 'click', '.tab-element', window.eoxiaJS.tab.load );
 };
 
-window.digirisk.tab.load = function( event ) {
+window.eoxiaJS.tab.load = function( event ) {
 	var tabTriggered = jQuery( this );
 	var data = {};
 
@@ -34,18 +34,18 @@ window.digirisk.tab.load = function( event ) {
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			jQuery( '.' + tabTriggered.data( 'target' ) ).replaceWith( response.data.template );
 
-			window.digirisk.tab.callTabChanged();
+			window.eoxiaJS.tab.callTabChanged();
 		} );
 
 	}
 
 };
 
-window.digirisk.tab.callTabChanged = function() {
+window.eoxiaJS.tab.callTabChanged = function() {
 	var key = undefined;
-	for ( key in window.digirisk ) {
-		if ( window.digirisk[key].tabChanged ) {
-			window.digirisk[key].tabChanged();
+	for ( key in window.eoxiaJS ) {
+		if ( window.eoxiaJS[key].tabChanged ) {
+			window.eoxiaJS[key].tabChanged();
 		}
 	}
 };

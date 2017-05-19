@@ -1,22 +1,49 @@
 'use strict';
 
-window.eoxiaJS = {};
-window.digirisk = {};
+if ( ! window.eoxiaJS ) {
+	window.eoxiaJS = {};
+	window.eoxiaJS.scriptsLoaded = false;
+}
 
-window.eoxiaJS.init = function() {
-	window.eoxiaJS.loadScripts();
-	window.eoxiaJS.initArrayForm();
-};
+window.eoxiaJS.digirisk = {};
 
-window.eoxiaJS.loadScripts = function() {
-	var key;
-	for ( key in window.digirisk ) {
-		window.digirisk[key].init();
-	}
-};
+if ( ! window.eoxiaJS.scriptsLoaded ) {
+	window.eoxiaJS.init = function() {
+		window.eoxiaJS.load_list_script();
+		window.eoxiaJS.init_array_form();
+		window.eoxiaJS.scriptsLoaded = true;
+	};
 
-window.eoxiaJS.initArrayForm = function() {
-	 window.eoxiaJS.arrayForm.init();
-};
+	window.eoxiaJS.load_list_script = function() {
+		var key = undefined, slug = undefined;
+		for ( key in window.eoxiaJS ) {
 
-jQuery( document ).ready( window.eoxiaJS.init );
+			if ( window.eoxiaJS[key].init ) {
+				window.eoxiaJS[key].init();
+			}
+
+			for ( slug in window.eoxiaJS[key] ) {
+
+				if ( window.eoxiaJS[key][slug].init ) {
+					window.eoxiaJS[key][slug].init();
+				}
+
+			}
+		}
+	};
+
+	window.eoxiaJS.init_array_form = function() {
+		 window.eoxiaJS.arrayForm.init();
+	};
+
+	window.eoxiaJS.refresh = function() {
+		var key = undefined;
+		for ( key in window.eoxiaJS ) {
+			if ( window.eoxiaJS[key].refresh ) {
+				window.eoxiaJS[key].refresh();
+			}
+		}
+	};
+
+	jQuery( document ).ready( window.eoxiaJS.init );
+}

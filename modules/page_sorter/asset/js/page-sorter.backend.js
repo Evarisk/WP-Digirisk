@@ -1,10 +1,10 @@
-window.digirisk.page_sorter = {};
+window.eoxiaJS.page_sorter = {};
 window.evaMenu = {};
 window.evaMenu.depth = 0;
 window.evaMenu.prev = undefined;
 window.evaMenu.startDepth = 0;
 window.evaMenu.childs = [];
-window.digirisk.page_sorter.init = function() {
+window.eoxiaJS.page_sorter.init = function() {
 	var menu = jQuery( '.sorter-page .menu' );
 
 	jQuery( '.sorter-page .menu' ).sortable( {

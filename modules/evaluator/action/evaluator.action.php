@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package evaluator
  * @subpackage action
@@ -38,7 +38,7 @@ class Evaluator_Action {
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
@@ -95,14 +95,19 @@ class Evaluator_Action {
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_edit_evaluator_assign_success', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'evaluator',
+			'callback_success' => 'callback_edit_evaluator_assign_success',
+			'template' => ob_get_clean()
+		) );
 	}
 
 	/**
 	 * Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_detach_evaluator() {
 		check_ajax_referer( 'detach_evaluator' );
@@ -138,7 +143,12 @@ class Evaluator_Action {
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
 		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'module' => 'evaluator', 'callback_success' => 'callback_detach_evaluator_success', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'evaluator',
+			'callback_success' => 'callback_detach_evaluator_success',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -169,7 +179,7 @@ class Evaluator_Action {
 	 * @return void
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
 		$element = Society_Class::g()->show_by_type( $id );
@@ -189,7 +199,9 @@ class Evaluator_Action {
 
 		ob_start();
 		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean()
+		) );
 	}
 
 	/**
@@ -200,7 +212,7 @@ class Evaluator_Action {
 	 * @return void
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
 		$element = Society_Class::g()->show_by_type( $id );
@@ -230,8 +242,10 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		view_util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		View_Util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean(),
+		) );
 	}
 }
 

@@ -5,7 +5,7 @@
  * @version 6.2.4.0
  */
 
-window.digirisk.group = {};
+window.eoxiaJS.digirisk.group = {};
 
 /**
  * La méthode appelée automatiquement par la bibliothèque EoxiaJS.
@@ -15,7 +15,7 @@ window.digirisk.group = {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.group.init = function() {};
+window.eoxiaJS.digirisk.group.init = function() {};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "create_group".
@@ -29,7 +29,7 @@ window.digirisk.group.init = function() {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.group.createdGroupSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.group.createdGroupSuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 	jQuery( '.workunit-navigation span.action-attribute[data-groupment-id="' + response.data.groupment_id + '"]' ).click();
 };

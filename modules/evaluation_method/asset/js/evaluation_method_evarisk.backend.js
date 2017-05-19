@@ -4,18 +4,18 @@
  * @since 1.0
  * @version 6.2.6.0
  */
-window.digirisk.evaluationMethodEvarisk = {};
+window.eoxiaJS.digirisk.evaluationMethodEvarisk = {};
 
-window.digirisk.evaluationMethodEvarisk.init = function() {
-	window.digirisk.evaluationMethodEvarisk.event();
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.init = function() {
+	window.eoxiaJS.digirisk.evaluationMethodEvarisk.event();
 };
 
-window.digirisk.evaluationMethodEvarisk.event = function() {
-	jQuery( document ).on( 'click', '.popup.popup-evaluation.active tr td', window.digirisk.evaluationMethodEvarisk.select_variable );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation.active .button.green', window.digirisk.evaluationMethodEvarisk.close_modal );
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.event = function() {
+	jQuery( document ).on( 'click', '.popup.popup-evaluation.active tr td', window.eoxiaJS.digirisk.evaluationMethodEvarisk.select_variable );
+	jQuery( document ).on( 'click', '.popup.popup-evaluation.active .button.green', window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal );
 };
 
-window.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
 	var element = jQuery( this );
 	if ( '' !== element.data( 'seuil-id' ) ) {
 		jQuery( '.popup.popup-evaluation.active tr td[data-variable-id="' + element.data( 'variable-id' ) + '"]' ).removeClass( 'active' );
@@ -49,7 +49,7 @@ window.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
 	}
 };
 
-window.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
 	var element = jQuery( this );
 
   var listVariable = {};

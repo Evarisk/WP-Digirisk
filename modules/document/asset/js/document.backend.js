@@ -1,17 +1,17 @@
-window.digirisk.document = {};
+window.eoxiaJS.digirisk.document = {};
 
-window.digirisk.document.init = function() {
-	window.digirisk.document.event();
+window.eoxiaJS.digirisk.document.init = function() {
+	window.eoxiaJS.digirisk.document.event();
 };
 
-window.digirisk.document.event = function() {
-	jQuery( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", window.digirisk.document.save_element_sheet );
-	jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-regenerate", window.digirisk.document.regenerate_document );
-	jQuery( document ).on( 'click', '.wp-digi-doc-pagination a', window.digirisk.document.pagination );
+window.eoxiaJS.digirisk.document.event = function() {
+	jQuery( ".wp-digi-societytree-right-container" ).on( "click", "#wpdigi-save-element-sheet", window.eoxiaJS.digirisk.document.save_element_sheet );
+	jQuery( ".wp-digi-societytree-right-container" ).on( "click", ".wp-digi-list-document .wp-digi-action-regenerate", window.eoxiaJS.digirisk.document.regenerate_document );
+	jQuery( document ).on( 'click', '.wp-digi-doc-pagination a', window.eoxiaJS.digirisk.document.pagination );
 
 };
 
-window.digirisk.document.save_element_sheet = function ( event ) {
+window.eoxiaJS.digirisk.document.save_element_sheet = function ( event ) {
 	event.preventDefault();
 
 	jQuery( this ).addClass( "wp-digi-loading" );
@@ -40,7 +40,7 @@ window.digirisk.document.save_element_sheet = function ( event ) {
 	jQuery( "#wpdigi-save-element-form" ).ajaxSubmit( options );
 };
 
-window.digirisk.document.regenerate_document = function ( event ) {
+window.eoxiaJS.digirisk.document.regenerate_document = function ( event ) {
 	event.preventDefault();
 
 	var data = {
@@ -53,7 +53,7 @@ window.digirisk.document.regenerate_document = function ( event ) {
 	jQuery.post( window.ajaxurl, data, function() {} );
 };
 
-window.digirisk.document.pagination = function( event ) {
+window.eoxiaJS.digirisk.document.pagination = function( event ) {
 	event.preventDefault();
 
 	var href = jQuery( this ).attr( 'href' ).split( '&' );

@@ -1,11 +1,19 @@
-window.digirisk.date = {};
+window.eoxiaJS.date = {};
 
-window.digirisk.date.init = function() {
+window.eoxiaJS.date.init = function() {
 	jQuery( document ).on( 'click', 'input.date', function( e ) {
-		jQuery( this ).datepicker( {
-			dateFormat: 'dd/mm/yy'
+		jQuery( this ).datetimepicker( {
+			'lang': 'fr',
+			'format': 'd/m/y'
 		} );
+		jQuery( this ).datetimepicker( 'show' );
+	} );
 
-		jQuery( this ).datepicker( 'show' );
+	jQuery( document ).on( 'click', 'input.date-time', function( e ) {
+		jQuery( this ).datetimepicker( {
+			'lang': 'fr',
+			'format': 'd/m/Y h:i'
+		} );
+		jQuery( this ).datetimepicker( 'show' );
 	} );
 };

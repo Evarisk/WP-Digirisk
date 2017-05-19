@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<label class="tooltip red" aria-label="<?php echo esc_attr( 'Domaine de l\'email invalide.', 'digirisk' ); ?>"><?php esc_html_e( 'Domaine de l\'email', 'digirisk' ); ?></label>
 			<span class="bar"></span>
 		</div>
-		<span data-parent="form" data-module="userDashboard" data-before-method="checkDomainEmailValid" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+		<span data-parent="form" data-namespace="digirisk" data-module="userDashboard" data-before-method="checkDomainEmailValid" class="w40 action-input float right button green"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
 	</div>
 
 	<!-- Liste les utilisateurs -->

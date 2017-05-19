@@ -4,14 +4,14 @@
  * @since 1.0
  * @version 6.2.9.0
  */
-window.digirisk.danger = {};
+window.eoxiaJS.digirisk.danger = {};
 
-window.digirisk.danger.init = function() {
-	window.digirisk.danger.event();
+window.eoxiaJS.digirisk.danger.init = function() {
+	window.eoxiaJS.digirisk.danger.event();
 };
 
-window.digirisk.danger.event = function() {
-	jQuery( document ).on( 'click', '.table.risk .categorie-container.danger .item', window.digirisk.danger.selectDanger );
+window.eoxiaJS.digirisk.danger.event = function() {
+	jQuery( document ).on( 'click', '.table.risk .categorie-container.danger .item', window.eoxiaJS.digirisk.danger.selectDanger );
 };
 
 /**
@@ -23,7 +23,7 @@ window.digirisk.danger.event = function() {
  * @since 0.1
  * @version 6.2.6.0
  */
-window.digirisk.danger.selectDanger = function( event ) {
+window.eoxiaJS.digirisk.danger.selectDanger = function( event ) {
 	var element = jQuery( this );
 	var data = {};
 	element.closest( '.content' ).removeClass( 'active' );
@@ -50,5 +50,5 @@ window.digirisk.danger.selectDanger = function( event ) {
 
 	jQuery( this ).closest( 'td' ).addClass( 'loading' );
 
-	window.digirisk.request.send( jQuery( this ).closest( '.toggle' ), data );
+	window.eoxiaJS.request.send( jQuery( this ).closest( '.toggle' ), data );
 };

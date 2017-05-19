@@ -1,7 +1,7 @@
-window.digirisk.workunit = {};
+window.eoxiaJS.digirisk.workunit = {};
 
-window.digirisk.workunit.init = function() {
-	window.digirisk.workunit.event();
+window.eoxiaJS.digirisk.workunit.init = function() {
+	window.eoxiaJS.digirisk.workunit.event();
 };
 
 /**
@@ -14,9 +14,9 @@ window.digirisk.workunit.init = function() {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.workunit.event = function() {
-	jQuery( document ).on( 'keyup', '.digirisk-wrap .workunit-add input[type="text"]', window.digirisk.workunit.keyEnterSendForm );
-	jQuery( document ).on( 'click', '.digirisk-wrap .workunit-list span[data-action="load_society"]', window.digirisk.workunit.setActive );
+window.eoxiaJS.digirisk.workunit.event = function() {
+	jQuery( document ).on( 'keyup', '.digirisk-wrap .workunit-add input[type="text"]', window.eoxiaJS.digirisk.workunit.keyEnterSendForm );
+	jQuery( document ).on( 'click', '.digirisk-wrap .workunit-list span[data-action="load_society"]', window.eoxiaJS.digirisk.workunit.setActive );
 };
 
 /**
@@ -28,7 +28,7 @@ window.digirisk.workunit.event = function() {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.workunit.keyEnterSendForm = function( event ) {
+window.eoxiaJS.digirisk.workunit.keyEnterSendForm = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.digirisk-wrap .workunit-add .add' ).click();
 	}
@@ -45,7 +45,7 @@ window.digirisk.workunit.keyEnterSendForm = function( event ) {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.workunit.saved_workunit_success = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.workunit.saved_workunit_success = function( triggeredElement, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 	jQuery( '.workunit-list .unit-header[data-workunit-id="' + response.data.id + '"] span[data-action="load_society"]' ).click();
 };
@@ -58,7 +58,7 @@ window.digirisk.workunit.saved_workunit_success = function( triggeredElement, re
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.workunit.setActive = function( event ) {
+window.eoxiaJS.digirisk.workunit.setActive = function( event ) {
 	jQuery( '.digirisk-wrap .workunit-list li.active' ).removeClass( 'active' );
 	jQuery( this ).closest( 'li' ).addClass( 'active' );
 };

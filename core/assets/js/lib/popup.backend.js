@@ -1,26 +1,26 @@
-window.digirisk.popup = {};
+window.eoxiaJS.popup = {};
 
-window.digirisk.popup.init = function() {
-	window.digirisk.popup.event();
+window.eoxiaJS.popup.init = function() {
+	window.eoxiaJS.popup.event();
 };
 
-window.digirisk.popup.event = function() {
-	jQuery( document ).on( 'keyup', window.digirisk.popup.keyup );
-  jQuery( document ).on( 'click', '.open-popup, .open-popup i', window.digirisk.popup.open );
-  jQuery( document ).on( 'click', '.open-popup-ajax', window.digirisk.popup.openAjax );
-  jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.digirisk.popup.stop );
-  jQuery( document ).on( 'click', '.popup .container .button.green', window.digirisk.popup.confirm );
-  jQuery( document ).on( 'click', '.popup .close', window.digirisk.popup.close );
-  jQuery( document ).on( 'click', 'body', window.digirisk.popup.close );
+window.eoxiaJS.popup.event = function() {
+	jQuery( document ).on( 'keyup', window.eoxiaJS.popup.keyup );
+  jQuery( document ).on( 'click', '.open-popup, .open-popup i', window.eoxiaJS.popup.open );
+  jQuery( document ).on( 'click', '.open-popup-ajax', window.eoxiaJS.popup.openAjax );
+  jQuery( document ).on( 'click', '.popup .container, .digi-popup-propagation', window.eoxiaJS.popup.stop );
+  jQuery( document ).on( 'click', '.popup .container .button.green', window.eoxiaJS.popup.confirm );
+  jQuery( document ).on( 'click', '.popup .close', window.eoxiaJS.popup.close );
+  jQuery( document ).on( 'click', 'body', window.eoxiaJS.popup.close );
 };
 
-window.digirisk.popup.keyup = function( event ) {
+window.eoxiaJS.popup.keyup = function( event ) {
 	if ( 27 === event.keyCode ) {
 		jQuery( '.popup .close' ).click();
 	}
 };
 
-window.digirisk.popup.open = function( event ) {
+window.eoxiaJS.popup.open = function( event ) {
 	var triggeredElement = jQuery( this );
 
 	if ( triggeredElement.is( 'i' ) ) {
@@ -37,7 +37,7 @@ window.digirisk.popup.open = function( event ) {
 
 		// On récupères les "data" sur l'élement en tant qu'args.
 		triggeredElement.get_data( function( data ) {
-			window.digirisk[cbObject][cbFunc]( triggeredElement, target, event, data );
+			window.eoxiaJS[cbObject][cbFunc]( triggeredElement, target, event, data );
 		} );
 	}
 
@@ -52,21 +52,26 @@ window.digirisk.popup.open = function( event ) {
  * @param  {[type]} event [description]
  * @return {[type]}       [description]
  */
-window.digirisk.popup.openAjax = function( event ) {
+window.eoxiaJS.popup.openAjax = function( event ) {
 	var element = jQuery( this );
 	var target = jQuery( this ).closest(  '.' + jQuery( this ).data( 'parent' ) ).find( '.' + jQuery( this ).data( 'target' ) );
 	target.addClass( 'active' );
+	target.find( '.container' ).addClass( 'loading' );
+
+	if ( jQuery( this ).data( 'title' ) ) {
+		target.find( '.title' ).text( jQuery( this ).data( 'title' ) );
+	}
 
 	jQuery( this ).get_data( function( data ) {
 		delete data.parent;
 		delete data.target;
-		window.digirisk.request.send( element, data );
+		window.eoxiaJS.request.send( element, data );
 	});
 
 	event.stopPropagation();
 };
 
-window.digirisk.popup.confirm = function( event ) {
+window.eoxiaJS.popup.confirm = function( event ) {
 	var triggeredElement = jQuery( this );
 	var cbObject, cbFunc = undefined;
 
@@ -79,17 +84,17 @@ window.digirisk.popup.confirm = function( event ) {
 
 			// On récupères les "data" sur l'élement en tant qu'args.
 			triggeredElement.get_data( function( data ) {
-				window.digirisk[cbObject][cbFunc]( triggeredElement, event, data );
+				window.eoxiaJS[cbObject][cbFunc]( triggeredElement, event, data );
 			} );
 		}
 	}
 };
 
-window.digirisk.popup.stop = function( event ) {
+window.eoxiaJS.popup.stop = function( event ) {
 	event.stopPropagation();
 };
 
-window.digirisk.popup.close = function( event ) {
+window.eoxiaJS.popup.close = function( event ) {
 	jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
 	jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
 };

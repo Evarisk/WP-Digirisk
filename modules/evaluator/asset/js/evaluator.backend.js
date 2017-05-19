@@ -5,15 +5,15 @@
  * @version 6.2.4.0
  */
 
-window.digirisk.evaluator = {};
+window.eoxiaJS.digirisk.evaluator = {};
 
-window.digirisk.evaluator.init = function() {
-	window.digirisk.evaluator.event();
+window.eoxiaJS.digirisk.evaluator.init = function() {
+	window.eoxiaJS.digirisk.evaluator.event();
 };
 
-window.digirisk.evaluator.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap table.evaluators input[type="checkbox"]', window.digirisk.evaluator.setTime );
-	jQuery( document ).on( 'click', '.form-edit-evaluator-assign .wp-digi-pagination a', window.digirisk.evaluator.pagination );
+window.eoxiaJS.digirisk.evaluator.event = function() {
+	jQuery( document ).on( 'click', '.digirisk-wrap table.evaluators input[type="checkbox"]', window.eoxiaJS.digirisk.evaluator.setTime );
+	jQuery( document ).on( 'click', '.form-edit-evaluator-assign .wp-digi-pagination a', window.eoxiaJS.digirisk.evaluator.pagination );
 };
 
 /**
@@ -24,7 +24,7 @@ window.digirisk.evaluator.event = function() {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.evaluator.setTime = function( event ) {
+window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
 	var element = jQuery( this );
 	element.closest( 'tr' ).find( 'input.affect' ).val( jQuery( '.table.evaluators input[type="text"]' ).val() );
 };
@@ -40,7 +40,7 @@ window.digirisk.evaluator.setTime = function( event ) {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
 };
 
@@ -55,7 +55,7 @@ window.digirisk.evaluator.callback_edit_evaluator_assign_success = function( tri
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.evaluator.callback_detach_evaluator_success = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
 };
 
@@ -68,7 +68,7 @@ window.digirisk.evaluator.callback_detach_evaluator_success = function( triggere
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.evaluator.pagination = function( event ) {
+window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 	var href = jQuery( this ).attr( 'href' ).split( '&' );
 	var nextPage = href[1].replace( 'current_page=', '' );
 	var elementId = href[2].replace( 'element_id=', '' );

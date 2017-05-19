@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.6.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package legal_display
  * @subpackage class
@@ -36,7 +36,7 @@ class Legal_Display_Action {
 	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
 	 *
 	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
 
@@ -80,6 +80,7 @@ class Legal_Display_Action {
 		$this->generate_sheet( $legal_display, $element_parent[0], 'A3' );
 
 		wp_send_json_success( array(
+			'namespace' => 'digirisk',
 			'module' => 'legalDisplay',
 			'callback_success' => 'generatedSuccess',
 			'legal_display' => $legal_display,

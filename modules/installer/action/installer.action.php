@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.8.0
+ * @version 6.2.9.0
  */
 
 namespace digi;
@@ -37,7 +37,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
@@ -45,6 +45,7 @@ class Installer_Action {
 		$groupment = Group_Class::g()->create( $_POST['groupment'] );
 
 		wp_send_json_success( array(
+			'namespace' => 'digirisk',
 			'module' => 'installer',
 			'callback_success' => 'savedSociety',
 		) );
@@ -59,7 +60,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.8.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_installer_components() {
 		// check_ajax_referer( 'ajax_installer_components' );
@@ -94,6 +95,7 @@ class Installer_Action {
 
 		wp_send_json_success( array(
 			'core_option' => $core_option,
+			'namespace' => 'digirisk',
 			'module' => 'installer',
 			'callback_success' => 'installedComponentSuccess',
 		) );

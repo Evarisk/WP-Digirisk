@@ -14,7 +14,7 @@
  * @memberof export
  * @type {Object}
  */
-window.digirisk.export = {};
+window.eoxiaJS.digirisk.export = {};
 
 /**
  * La méthode init est appelé automatiquement
@@ -26,8 +26,8 @@ window.digirisk.export = {};
  *
  * @return {void}
  */
-window.digirisk.export.init = function() {
-	window.digirisk.export.event();
+window.eoxiaJS.digirisk.export.init = function() {
+	window.eoxiaJS.digirisk.export.event();
 };
 
 /**
@@ -40,9 +40,9 @@ window.digirisk.export.init = function() {
  *
  * @return {void}
  */
-window.digirisk.export.event = function() {
-	jQuery( document ).on( 'submit', '#digi-data-export #digi-export-form', window.digirisk.export.create_export );
-	jQuery( document ).on( 'change', '#digi-data-export #digi-import-form input[type="file"]', window.digirisk.export.make_import );
+window.eoxiaJS.digirisk.export.event = function() {
+	jQuery( document ).on( 'submit', '#digi-data-export #digi-export-form', window.eoxiaJS.digirisk.export.create_export );
+	jQuery( document ).on( 'change', '#digi-data-export #digi-import-form input[type="file"]', window.eoxiaJS.digirisk.export.make_import );
 };
 
 /**
@@ -54,7 +54,7 @@ window.digirisk.export.event = function() {
  * @param  {Object} event [description]
  * @return {void}
  */
-window.digirisk.export.create_export = function( event ) {
+window.eoxiaJS.digirisk.export.create_export = function( event ) {
 	var form = jQuery( this );
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
@@ -63,7 +63,7 @@ window.digirisk.export.create_export = function( event ) {
 		},
 		success: function( response ) {
 			form.find( 'button' ).removeClass( 'loading' );
-			window.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
+			window.eoxiaJS.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
 		}
 	} );
 },
@@ -77,7 +77,7 @@ window.digirisk.export.create_export = function( event ) {
  * @param  {[type]} event [description]
  * @return {void}
  */
-window.digirisk.export.make_import = function( event ) {
+window.eoxiaJS.digirisk.export.make_import = function( event ) {
 	var data = new FormData();
 
 	event.preventDefault();
@@ -87,7 +87,7 @@ window.digirisk.export.make_import = function( event ) {
 	data.append( '_wpnonce', jQuery( this ).closest( 'form' ).find( 'input[name="_wpnonce"]' ).val() );
 	data.append( 'index_element', 0 );
 
-	window.digirisk.export.request_import( data );
+	window.eoxiaJS.digirisk.export.request_import( data );
 },
 
 /**
@@ -100,7 +100,7 @@ window.digirisk.export.make_import = function( event ) {
  * @param  {object} data Les données pour la requête
  * @return {void}
  */
-window.digirisk.export.request_import = function( data ) {
+window.eoxiaJS.digirisk.export.request_import = function( data ) {
 	jQuery.ajax( {
 		url: ajaxurl,
 		data: data,
@@ -123,7 +123,7 @@ window.digirisk.export.request_import = function( data ) {
 					data.append( 'path_to_json', response.data.path_to_json );
 					data.append( 'index_element', response.data.index_element );
 					jQuery( '.digi-import-detail' ).html( window.digi_tools_in_progress );
-					window.digirisk.export.request_import( data );
+					window.eoxiaJS.digirisk.export.request_import( data );
 				} else {
 					jQuery( '.digi-import-detail' ).html( window.digi_tools_done );
 					if ( jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ) ) {

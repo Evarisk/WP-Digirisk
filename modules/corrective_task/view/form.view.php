@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package corrective-task
  * @subpackage view
@@ -12,14 +12,8 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-global $point_controller; ?>
-
-<div class="wpeo-project-wrap">
-	<div class="wpeo-project-task" data-id="<?php echo esc_attr( $task->id ); ?>">
-		<?php	echo $point_controller->callback_task_content( '', $task );	?>
-	</div>
-</div>
+<?php do_shortcode( '[task id="' . $task->id . '"]' ); ?>
 
 <div class="button green margin uppercase strong float right"><span>OK</span></div>

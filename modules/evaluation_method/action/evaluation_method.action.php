@@ -44,27 +44,30 @@ class evaluation_method_action {
 	}
 
 	/**
-* Appelle la méthode get_scale pour avoir le niveau de l'évaluation
-*
-* array $_POST['list_variable'] La liste des valeurs de la méthode d'évaluation
-* @param array $_POST Les données envoyées par le formulaire
-*
-*/
-public function ajax_get_scale() {
-	check_ajax_referer( 'get_scale' );
-	$list_variable = !empty( $_POST['list_variable'] ) ? (array) $_POST['list_variable'] : array();
-	$level = 1;
-	if ( !empty( $list_variable ) ) {
-		foreach ( $list_variable as $element ) {
-			$level *= $element;
+	* Appelle la méthode get_scale pour avoir le niveau de l'évaluation
+	*
+	* array $_POST['list_variable'] La liste des valeurs de la méthode d'évaluation
+	* @param array $_POST Les données envoyées par le formulaire
+	*
+	*/
+	public function ajax_get_scale() {
+		check_ajax_referer( 'get_scale' );
+		$list_variable = !empty( $_POST['list_variable'] ) ? (array) $_POST['list_variable'] : array();
+		$level = 1;
+		if ( !empty( $list_variable ) ) {
+			foreach ( $list_variable as $element ) {
+				$level *= $element;
+			}
 		}
+		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+		$evaluation_method = evaluation_method_class::g()->get( array( 'id' => $method_evaluation_digirisk_complex->term_id ) );
+		$equivalence = $evaluation_method[0]->matrix[$level];
+		$scale = scale_util::get_scale( $equivalence );
+		wp_send_json_success( array(
+			'equivalence' => $equivalence,
+			'scale' => $scale
+		) );
 	}
-	$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
-	$evaluation_method = evaluation_method_class::g()->get( array( 'id' => $method_evaluation_digirisk_complex->term_id ) );
-	$equivalence = $evaluation_method[0]->matrix[$level];
-	$scale = scale_util::get_scale( $equivalence );
-	wp_send_json_success( array( 'equivalence' => $equivalence, 'scale' => $scale ) );
-}
 }
 
 new evaluation_method_action();

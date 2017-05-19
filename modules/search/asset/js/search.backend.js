@@ -1,15 +1,15 @@
-window.digirisk.search = {};
+window.eoxiaJS.digirisk.search = {};
 
-window.digirisk.search.init = function() {
-	window.digirisk.search.event();
+window.eoxiaJS.digirisk.search.init = function() {
+	window.eoxiaJS.digirisk.search.event();
 };
 
-window.digirisk.search.tabChanged = function() {
-	window.digirisk.search.event();
+window.eoxiaJS.digirisk.search.tabChanged = function() {
+	window.eoxiaJS.digirisk.search.event();
 };
 
-window.digirisk.search.renderChanged = function() {
-	window.digirisk.search.event();
+window.eoxiaJS.digirisk.search.renderChanged = function() {
+	window.eoxiaJS.digirisk.search.event();
 };
 
 /**
@@ -20,7 +20,7 @@ window.digirisk.search.renderChanged = function() {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.search.event = function() {
+window.eoxiaJS.digirisk.search.event = function() {
 
 	/**
 	* Paramètre à ajouter sur la balise html

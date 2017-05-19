@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -37,7 +37,7 @@ class Comment_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_save_comment() {
 		check_ajax_referer( 'save_comment' );
@@ -56,7 +56,12 @@ class Comment_Action {
 
 		ob_start();
 		do_shortcode( '[digi_comment id="' . (int) $_POST['list_comment'][0]['post_id'] . '" type="' . $type . '" display="edit"]' );
-		wp_send_json_success( array( 'view' => ob_get_clean(), 'module' => 'comment', 'callback_success' => 'saved_comment_success' ) );
+		wp_send_json_success( array(
+			'view' => ob_get_clean(),
+			'namespace' => 'digirisk',
+			'module' => 'comment',
+			'callback_success' => 'saved_comment_success',
+		) );
 	}
 
 	/**
@@ -65,7 +70,7 @@ class Comment_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_delete_comment() {
 		check_ajax_referer( 'ajax_delete_comment_' . $_POST['id'] );
@@ -76,7 +81,9 @@ class Comment_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$comment = Comment_Class::g()->get( array( 'id' => $id ) );
+		$comment = Comment_Class::g()->get( array(
+			'id' => $id,
+		) );
 		$comment = $comment[0];
 
 		if ( empty( $comment ) ) {
@@ -87,7 +94,11 @@ class Comment_Action {
 
 		Comment_Class::g()->update( $comment );
 
-		wp_send_json_success( array( 'module' => 'comment', 'callback_success' => 'delete_success' ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'comment',
+			'callback_success' => 'delete_success',
+		) );
 	}
 }
 

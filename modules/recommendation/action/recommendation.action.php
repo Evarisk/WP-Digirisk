@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage action
@@ -36,7 +36,7 @@ class Recommendation_Action {
 	 * Charges une recommendation
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_load_recommendation() {
 		check_ajax_referer( 'ajax_load_recommendation' );
@@ -52,7 +52,12 @@ class Recommendation_Action {
 
 		ob_start();
 		View_Util::exec( 'recommendation', 'item-edit', array( 'society_id' => $recommendation->parent_id, 'recommendation' => $recommendation ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'loadedRecommendationSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'recommendation',
+			'callback_success' => 'loadedRecommendationSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -61,7 +66,7 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
@@ -82,7 +87,12 @@ class Recommendation_Action {
 
 		ob_start();
 		Recommendation_Class::g()->display( $recommendation->parent_id );
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'savedRecommendationSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'recommendation',
+			'callback_success' => 'savedRecommendationSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -91,7 +101,7 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_delete_recommendation() {
 		check_ajax_referer( 'ajax_delete_recommendation' );
@@ -113,7 +123,12 @@ class Recommendation_Action {
 
 		Recommendation_Class::g()->update( $recommendation );
 
-		wp_send_json_success( array( 'module' => 'recommendation', 'callback_success' => 'deletedRecommendationSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'recommendation',
+			'callback_success' => 'deletedRecommendationSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	public function ajax_transfert_recommendation() {
