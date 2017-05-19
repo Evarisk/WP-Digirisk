@@ -280,5 +280,40 @@
 			padding: 0 !important;
 		}
 	}
+	@media screen and (max-width: 680px) {
+		table, tr, thead, tbody, tfoot, td, th {
+			display: block;
+			width: 100% !important;
+			height: auto !important;
+		}
+		thead tr {
+			display: none;
+		}
+		td {
+			position: relative;
+			border: 0px solid transparent;
+			padding-left: 50% !important;
+			white-space: normal;
+			text-align: right;
+			height: 50px !important;
+			line-height: 50px;
+			&:before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 35%;
+				padding: 2px 15px;
+				height: 100%;
+				white-space: nowrap;
+				text-overflow: ellipsis !important;
+				overflow: hidden !important;
+				text-align: left;
+				background: #f8f8f8;
+				content: attr(data-title);
+				font-weight: 800;
+				color: rgba(0,0,0,0.3);
+			}
+		}
+	}
 
 }

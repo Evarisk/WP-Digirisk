@@ -15,25 +15,25 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <tr class="risk-row">
-	<td class="padding">
+	<td data-title="Ref." class="padding">
 		<!-- La popup pour les actions correctives -->
 		<?php View_Util::exec( 'corrective_task', 'popup', array() ); ?>
 
 		<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
-	<td>
+	<td data-title="Risque">
 		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?>
 	</td>
-	<td class="w50">
+	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
 	</td>
-	<td class="w50">
+	<td data-title="Photo" class="w50">
 		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
 	</td>
-	<td class="padding">
+	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
-	<td>
+	<td data-title="Action">
 		<div class="action grid-layout w3">
 			<div 	class="open-popup-ajax button light w50 task"
 						data-parent="risk-row"
