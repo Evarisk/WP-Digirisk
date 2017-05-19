@@ -11,24 +11,27 @@ if ( ! window.eoxiaJS.scriptsLoaded ) {
 	window.eoxiaJS.init = function() {
 		window.eoxiaJS.load_list_script();
 		window.eoxiaJS.init_array_form();
-		window.eoxiaJS.scriptsLoaded = true;
 	};
 
 	window.eoxiaJS.load_list_script = function() {
-		var key = undefined, slug = undefined;
-		for ( key in window.eoxiaJS ) {
+		if ( ! window.eoxiaJS.scriptsLoaded ) {
+			var key = undefined, slug = undefined;
+			for ( key in window.eoxiaJS ) {
 
-			if ( window.eoxiaJS[key].init ) {
-				window.eoxiaJS[key].init();
-			}
-
-			for ( slug in window.eoxiaJS[key] ) {
-
-				if ( window.eoxiaJS[key][slug].init ) {
-					window.eoxiaJS[key][slug].init();
+				if ( window.eoxiaJS[key].init ) {
+					window.eoxiaJS[key].init();
 				}
 
+				for ( slug in window.eoxiaJS[key] ) {
+
+					if ( window.eoxiaJS[key][slug].init ) {
+						window.eoxiaJS[key][slug].init();
+					}
+
+				}
 			}
+
+			window.eoxiaJS.scriptsLoaded = true;
 		}
 	};
 

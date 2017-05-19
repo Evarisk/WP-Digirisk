@@ -1,19 +1,22 @@
-window.eoxiaJS.date = {};
+if ( ! window.eoxiaJS.date ) {
 
-window.eoxiaJS.date.init = function() {
-	jQuery( document ).on( 'click', 'input.date', function( e ) {
-		jQuery( this ).datetimepicker( {
-			'lang': 'fr',
-			'format': 'd/m/y'
-		} );
-		jQuery( this ).datetimepicker( 'show' );
-	} );
+	window.eoxiaJS.date = {};
 
-	jQuery( document ).on( 'click', 'input.date-time', function( e ) {
-		jQuery( this ).datetimepicker( {
-			'lang': 'fr',
-			'format': 'd/m/Y h:i'
+	window.eoxiaJS.date.init = function() {
+		jQuery( document ).on( 'click', 'input.date', function( e ) {
+			jQuery( this ).datetimepicker( {
+				'lang': 'fr',
+				'format': 'd/m/y'
+			} );
+			jQuery( this ).datetimepicker( 'show' );
 		} );
-		jQuery( this ).datetimepicker( 'show' );
-	} );
-};
+
+		jQuery( document ).on( 'click', 'input.date-time', function( e ) {
+			jQuery( this ).datetimepicker( {
+				'lang': 'fr',
+				'format': 'd/m/Y h:i'
+			} );
+			jQuery( this ).datetimepicker( 'show' );
+		} );
+	};
+}
