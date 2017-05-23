@@ -65,7 +65,7 @@ window.eoxiaJS.digirisk.exportCSV.makeExport = function( event ) {
 			button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
 			if ( response.data.end ) {
 				button.removeClass( 'loading' );
-				window.eoxiaJS.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
+				window.eoxiaJS.global.downloadFile( response.data.url_to_file, response.data.filename );
 				jQuery( '#digi-export-csv-form input[name="offset"]' ).val( 0 );
 				jQuery( '#digi-export-csv-form input[name="filepath"]' ).val( '' );
 				jQuery( '#digi-export-csv-form input[name="filename"]' ).val( '' );

@@ -28,6 +28,7 @@ window.eoxiaJS.digirisk.handleModel.event = function() {};
 window.eoxiaJS.digirisk.handleModel.loadedPopupHistoric = function( element, response ) {
 	element.closest( '.block' ).find( '.popup .title' ).text( response.data.title );
 	element.closest( '.block' ).find( '.popup .content' ).html( response.data.view );
+	jQuery( '.container.loading' ).removeClass( 'loading' );
 };
 
 /**

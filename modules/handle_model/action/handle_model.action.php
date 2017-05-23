@@ -71,7 +71,7 @@ class Handle_Model_Action {
 		$model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
-			'module' => 'handle_model',
+			'module' => 'handleModel',
 			'callback_success' => 'reset_default_model_success',
 			'url' => $model['model_url'],
 			'type' => $type,

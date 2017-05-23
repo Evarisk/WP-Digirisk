@@ -116,6 +116,7 @@ class DUER_Action {
 		}
 
 		$response = array(
+			'namespace' => 'digirisk',
 			'module' => 'DUER',
 			'index' => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
 			'creation_response' => ! empty( $generate_response ) && ! empty( $generate_response['creation_response'] ) ? $generate_response['creation_response'] : '',

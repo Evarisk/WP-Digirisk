@@ -63,7 +63,7 @@ window.eoxiaJS.digirisk.export.create_export = function( event ) {
 		},
 		success: function( response ) {
 			form.find( 'button' ).removeClass( 'loading' );
-			window.eoxiaJS.digirisk.global.downloadFile( response.data.url_to_file, response.data.filename );
+			window.eoxiaJS.global.downloadFile( response.data.url_to_file, response.data.filename );
 		}
 	} );
 },

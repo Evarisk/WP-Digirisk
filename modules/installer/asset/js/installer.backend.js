@@ -112,7 +112,7 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
  */
 window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
 	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
-	window.eoxiaJS.digirisk.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
+	window.eoxiaJS.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
 
 /**

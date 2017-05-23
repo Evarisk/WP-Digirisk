@@ -29,16 +29,17 @@ if ( ! window.eoxiaJS.popup  ) {
 		}
 
 		var target = triggeredElement.closest(  '.' + triggeredElement.data( 'parent' ) ).find( '.' + triggeredElement.data( 'target' ) );
-		var cbObject, cbFunc = undefined;
+		var cbObject, cbNamespace, cbFunc = undefined;
 		target.addClass( 'active' );
 
-		if ( target.is( ':visible' ) && triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
+		if ( target.is( ':visible' ) && triggeredElement.data( 'cb-namespace' ) && triggeredElement.data( 'cb-object' ) && triggeredElement.data( 'cb-func' ) ) {
+			cbNamespace = triggeredElement.data( 'cb-namespace' );
 			cbObject = triggeredElement.data( 'cb-object' );
 			cbFunc = triggeredElement.data( 'cb-func' );
 
 			// On récupères les "data" sur l'élement en tant qu'args.
 			triggeredElement.get_data( function( data ) {
-				window.eoxiaJS[cbObject][cbFunc]( triggeredElement, target, event, data );
+				window.eoxiaJS[cbNamespace][cbObject][cbFunc]( triggeredElement, target, event, data );
 			} );
 		}
 
@@ -74,18 +75,19 @@ if ( ! window.eoxiaJS.popup  ) {
 
 	window.eoxiaJS.popup.confirm = function( event ) {
 		var triggeredElement = jQuery( this );
-		var cbObject, cbFunc = undefined;
+		var cbNamespace, cbObject, cbFunc = undefined;
 
 		if ( ! jQuery( '.popup' ).hasClass( 'no-close' ) ) {
 			jQuery( '.popup' ).removeClass( 'active' );
 
-			if ( triggeredElement.attr( 'data-cb-object' ) && triggeredElement.attr( 'data-cb-func' ) ) {
+			if ( triggeredElement.attr( 'data-cb-namespace' ) && triggeredElement.attr( 'data-cb-object' ) && triggeredElement.attr( 'data-cb-func' ) ) {
+				cbNamespace = triggeredElement.attr( 'data-cb-namespace' );
 				cbObject = triggeredElement.attr( 'data-cb-object' );
 				cbFunc = triggeredElement.attr( 'data-cb-func' );
 
 				// On récupères les "data" sur l'élement en tant qu'args.
 				triggeredElement.get_data( function( data ) {
-					window.eoxiaJS[cbObject][cbFunc]( triggeredElement, event, data );
+					window.eoxiaJS[cbNamespace][cbObject][cbFunc]( triggeredElement, event, data );
 				} );
 			}
 		}

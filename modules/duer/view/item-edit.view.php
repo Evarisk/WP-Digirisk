@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition du destinataire"
@@ -36,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<textarea class="hidden textarea-content-methodology" name="methodologie"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la méthodologie"
@@ -47,6 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<textarea class="hidden textarea-content-sources" name="sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la source"
@@ -58,6 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<textarea class="hidden textarea-content-dispo-des-plans" name="dispoDesPlans"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la disposition des plans"
@@ -69,6 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la note importante"
@@ -83,6 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'display_societies_duer' ) ); ?>"
 					data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="popup_for_generate_DUER"
 					data-title="Génération du DUER">

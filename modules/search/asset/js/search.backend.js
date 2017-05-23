@@ -21,7 +21,6 @@ window.eoxiaJS.digirisk.search.renderChanged = function() {
  * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.search.event = function() {
-
 	/**
 	* Paramètre à ajouter sur la balise html
 	* int data-element-id : ID d'un élément ex: workunit_id
@@ -29,7 +28,6 @@ window.eoxiaJS.digirisk.search.event = function() {
 	* string append-to : Le bloc ou sera affiche le rendu
 	*/
 	jQuery.each( jQuery( '.search input, .digi-search' ), function( key, element ) {
-
 		// Automatiser la source.
 		var listOption = {
 			'source': 'admin-ajax.php?action=digi_search' +

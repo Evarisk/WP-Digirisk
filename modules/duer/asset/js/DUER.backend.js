@@ -95,7 +95,7 @@ window.eoxiaJS.digirisk.DUER.popup_for_generate_DUER = function( triggeredElemen
 	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
-	window.eoxiaJS.digirisk.request.send( popupElement, data );
+	window.eoxiaJS.request.send( popupElement, data );
 };
 
 window.eoxiaJS.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
@@ -133,7 +133,7 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
 		data['parent_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'parent-id' );
 	}
 
-	window.eoxiaJS.digirisk.request.send( triggeredElement, data );
+	window.eoxiaJS.request.send( triggeredElement, data );
 };
 
 /**

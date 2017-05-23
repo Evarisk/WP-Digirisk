@@ -45,6 +45,13 @@ if ( ! window.eoxiaJS.scriptsLoaded ) {
 			if ( window.eoxiaJS[key].refresh ) {
 				window.eoxiaJS[key].refresh();
 			}
+
+			for ( slug in window.eoxiaJS[key] ) {
+
+				if ( window.eoxiaJS[key][slug].refresh ) {
+					window.eoxiaJS[key][slug].refresh();
+				}
+			}
 		}
 	};
 

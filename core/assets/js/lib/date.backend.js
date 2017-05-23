@@ -6,7 +6,8 @@ if ( ! window.eoxiaJS.date ) {
 		jQuery( document ).on( 'click', 'input.date', function( e ) {
 			jQuery( this ).datetimepicker( {
 				'lang': 'fr',
-				'format': 'd/m/y'
+				'format': 'd/m/Y',
+				timepicker: false
 			} );
 			jQuery( this ).datetimepicker( 'show' );
 		} );

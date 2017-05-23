@@ -82,7 +82,7 @@ window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail = function( event ) {
 	var firstname = jQuery( '.user-dashboard table.users tr:last .firstname' ).val();
 	var lastname = jQuery( '.user-dashboard table.users tr:last .lastname' ).val();
 	var domainMail = jQuery( '.input-domain-mail' ).val();
-	var together = window.eoxiaJS.digirisk.global.removeDiacritics( firstname + '.' + lastname + '@' + domainMail ).toLowerCase();
+	var together = window.eoxiaJS.global.removeDiacritics( firstname + '.' + lastname + '@' + domainMail ).toLowerCase();
 
 	jQuery( '.user-dashboard table.users tr:last input[name="email"]' ).val( together );
 
