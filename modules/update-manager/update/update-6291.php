@@ -23,6 +23,7 @@ class Update_6291 {
 	public function __construct() {
 		add_action( 'wp_ajax_digirisk_update_recreate_category_danger', array( $this, 'callback_digirisk_update_recreate_category_danger' ) );
 		add_action( 'wp_ajax_digirisk_update_associate_danger_to_risk', array( $this, 'callback_digirisk_update_associate_danger_to_risk' ) );
+		add_action( 'wp_ajax_digirisk_update_roles_2', array( $this, 'callback_digirisk_update_roles_2' ) );
 	}
 
 	/**
@@ -141,6 +142,22 @@ class Update_6291 {
 		return true;
 	}
 
+	/**
+	 * AJAX Callback - Assign capability to site administrator
+	 */
+	public function callback_digirisk_update_roles_2() {
+		$done = true;
+
+		/** Set capability to administrator by default */
+		$admin_role = get_role( 'administrator' );
+		if ( ! $admin_role->has_cap( 'manage_digirisk' ) ) {
+			$admin_role->add_cap( 'manage_digirisk' );
+		}
+
+		wp_send_json_success( array(
+			'done' => $done,
+		) );
+	}
 }
 
 new Update_6291();

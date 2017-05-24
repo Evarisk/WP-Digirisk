@@ -18,4 +18,8 @@ $datas = array(
 		'action' 				=> 'digirisk_update_associate_danger_to_risk',
 		'description' 	=> __( 'Remise en place des dangers dans les risques...', 'digirisk' ),
 	),
+	array(
+		'action' 				=> 'digirisk_update_roles_2',
+		'description' 	=> __( 'Mise à jour des rôles...', 'digirisk' ),
+	),
 );
