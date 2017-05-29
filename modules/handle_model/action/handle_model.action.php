@@ -3,7 +3,7 @@
  * Gestion des actions pour gérer les modèles personnalisés
  *
  * @since 6.2.3.0
- * @version 6.2.5.0
+ * @version 6.2.9.0
  *
  * @package Evarisk\Plugin
  */
@@ -29,7 +29,7 @@ class Handle_Model_Action {
 	 * Supprimes la catégorie "default_model" au modèle par défault courant selon $_POST['type'] qui correspond au type de modèle.
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @version 6.2.9.0
 	 *
 	 * @return void
 	 */
@@ -56,7 +56,10 @@ class Handle_Model_Action {
 			}
 		}
 
-		$models = Document_Class::g()->get( array( 'post_status' => 'inherit', 'tax_query' => $tax_query ) );
+		$models = Document_Class::g()->get( array(
+			'post_status' => 'inherit',
+			'tax_query' => $tax_query,
+		) );
 
 		if ( ! empty( $models ) ) {
 			foreach ( $models as $element ) {
@@ -66,7 +69,13 @@ class Handle_Model_Action {
 
 		// On récupère le modèle officiel de DigiRisk.
 		$model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
-		wp_send_json_success( array( 'module' => 'handle_model', 'callback_success' => 'reset_default_model_success', 'url' => $model['model_url'], 'type' => $type ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'handleModel',
+			'callback_success' => 'reset_default_model_success',
+			'url' => $model['model_url'],
+			'type' => $type,
+		) );
 	}
 
 	/**
@@ -74,7 +83,7 @@ class Handle_Model_Action {
 	 * $type correspond au type du modèle.
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 *
 	 * @return void
 	 */
@@ -121,8 +130,16 @@ class Handle_Model_Action {
 		array_unshift( $models, $default_model_data );
 
 		ob_start();
-		View_Util::exec( 'handle_model', 'popup-list', array( 'models' => $models ) );
-		wp_send_json_success( array( 'module' => 'handleModel', 'callback_success' => 'loadedPopupHistoric', 'title' => $title, 'view' => ob_get_clean() ) );
+		View_Util::exec( 'handle_model', 'popup-list', array(
+			'models' => $models,
+		) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'handleModel',
+			'callback_success' => 'loadedPopupHistoric',
+			'title' => $title,
+			'view' => ob_get_clean(),
+		) );
 	}
 }
 

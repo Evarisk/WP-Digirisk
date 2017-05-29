@@ -10,6 +10,8 @@
 * @subpackage shortcode
 */
 
+namespace digi;
+
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class accident_shortcode {

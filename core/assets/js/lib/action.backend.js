@@ -1,124 +1,134 @@
-window.digirisk.action = {};
+if ( ! window.eoxiaJS.action ) {
+	window.eoxiaJS.action = {};
 
-window.digirisk.action.init = function() {
-	window.digirisk.action.event();
-};
+	window.eoxiaJS.action.init = function() {
+		window.eoxiaJS.action.event();
+	};
 
-window.digirisk.action.event = function() {
-	jQuery( document ).on( 'click', '.action-input:not(.no-action)', window.digirisk.action.execInput );
-	jQuery( document ).on( 'click', '.action-attribute:not(.no-action)', window.digirisk.action.execAttribute );
-	jQuery( document ).on( 'click', '.action-delete:not(.no-action)', window.digirisk.action.execDelete );
-};
+	window.eoxiaJS.action.event = function() {
+		jQuery( document ).on( 'click', '.action-input:not(.no-action)', window.eoxiaJS.action.execInput );
+		jQuery( document ).on( 'click', '.action-attribute:not(.no-action)', window.eoxiaJS.action.execAttribute );
+		jQuery( document ).on( 'click', '.action-delete:not(.no-action)', window.eoxiaJS.action.execDelete );
+	};
 
-window.digirisk.action.execInput = function( event ) {
-	var element = jQuery( this );
-	var parentElement = element;
-	var loaderElement = element;
-	var listInput = undefined;
-	var data = {};
-	var i = 0;
-	var doAction = true;
-	var key = undefined;
+	window.eoxiaJS.action.execInput = function( event ) {
+		var element = jQuery( this );
+		var parentElement = element;
+		var loaderElement = element;
+		var listInput = undefined;
+		var data = {};
+		var i = 0;
+		var doAction = true;
+		var key = undefined;
 
-	if ( element.data( 'loader' ) ) {
-		loaderElement = element.closest( '.' + element.data( 'loader' ) );
-	}
+		event.preventDefault();
 
-	if ( element.data( 'parent' ) ) {
-		parentElement = element.closest( '.' + element.data( 'parent' ) );
-	}
-
-	/** Méthode appelée avant l'action */
-	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
-		doAction = false;
-		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
-	}
-
-	if ( element.hasClass( '.grey' ) ) {
-		doAction = false;
-	}
-
-	if ( doAction ) {
-		loaderElement.addClass( 'loading' );
-
-		listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
-		for ( i = 0; i < listInput.length; i++ ) {
-			if ( listInput[i].name ) {
-				data[listInput[i].name] = listInput[i].value;
-			}
+		if ( element.attr( 'data-loader' ) ) {
+			loaderElement = element.closest( '.' + element.attr( 'data-loader' ) );
 		}
 
-		element.get_data( function( attrData ) {
-			for ( key in attrData ) {
-				data[key] = attrData[key];
+		if ( element.attr( 'data-parent' ) ) {
+			parentElement = element.closest( '.' + element.attr( 'data-parent' ) );
+		}
+
+		/** Méthode appelée avant l'action */
+		if ( element.attr( 'data-namespace' ) && element.attr( 'data-module' ) && element.attr( 'data-before-method' ) ) {
+			doAction = false;
+			doAction = window.eoxiaJS[element.attr( 'data-namespace' )][element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
+		}
+
+		if ( element.hasClass( '.grey' ) ) {
+			doAction = false;
+		}
+
+		if ( doAction ) {
+			loaderElement.addClass( 'loading' );
+
+			listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
+			for ( i = 0; i < listInput.length; i++ ) {
+				if ( listInput[i].name ) {
+					data[listInput[i].name] = listInput[i].value;
+				}
 			}
 
-			window.digirisk.request.send( element, data );
-		} );
-	}
-};
+			element.get_data( function( attrData ) {
+				for ( key in attrData ) {
+					data[key] = attrData[key];
+				}
 
-window.digirisk.action.execAttribute = function( event ) {
-  var element = jQuery( this );
-	var doAction = true;
-	var loaderElement = element;
+				window.eoxiaJS.request.send( element, data );
+			} );
+		}
+	};
 
-	if ( element.data( 'loader' ) ) {
-		loaderElement = element.closest( '.' + element.data( 'loader' ) );
-	}
+	window.eoxiaJS.action.execAttribute = function( event ) {
+	  var element = jQuery( this );
+		var doAction = true;
+		var loaderElement = element;
 
-	/** Méthode appelée avant l'action */
-	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
-		doAction = false;
-		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
-	}
+		event.preventDefault();
 
-	if ( element.hasClass( '.grey' ) ) {
-		doAction = false;
-	}
+		if ( element.data( 'loader' ) ) {
+			loaderElement = element.closest( '.' + element.attr( 'data-loader' ) );
+		}
 
-	if ( doAction ) {
-		if ( jQuery( this ).data( 'confirm' ) ) {
-			if ( window.confirm( jQuery( this ).data( 'confirm' ) ) ) {
+		/** Méthode appelée avant l'action */
+		if ( element.attr( 'data-module' ) && element.attr( 'data-before-method' ) ) {
+			doAction = false;
+			doAction = window.eoxiaJS[element.attr( 'data-namespace' )][element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
+		}
+
+		if ( element.hasClass( '.grey' ) ) {
+			doAction = false;
+		}
+
+		if ( doAction ) {
+			if ( jQuery( this ).attr( 'data-confirm' ) ) {
+				if ( window.confirm( jQuery( this ).attr( 'data-confirm' ) ) ) {
+					element.get_data( function( data ) {
+						loaderElement.addClass( 'loading' );
+						window.eoxiaJS.request.send( element, data );
+					} );
+				}
+			} else {
 				element.get_data( function( data ) {
 					loaderElement.addClass( 'loading' );
-					window.digirisk.request.send( element, data );
+					window.eoxiaJS.request.send( element, data );
 				} );
 			}
-		} else {
-			element.get_data( function( data ) {
-				loaderElement.addClass( 'loading' );
-				window.digirisk.request.send( element, data );
-			} );
 		}
-	}
-};
 
-window.digirisk.action.execDelete = function( event ) {
-  var element = jQuery( this );
-	var doAction = true;
-	var loaderElement = element;
+		event.stopPropagation();
+	};
 
-	if ( element.data( 'loader' ) ) {
-		loaderElement = element.closest( '.' + element.data( 'loader' ) );
-	}
+	window.eoxiaJS.action.execDelete = function( event ) {
+	  var element = jQuery( this );
+		var doAction = true;
+		var loaderElement = element;
 
-	/** Méthode appelée avant l'action */
-	if ( element.data( 'module' ) && element.data( 'before-method' ) ) {
-		doAction = false;
-		doAction = window.digirisk[element.data( 'module' )][element.data( 'before-method' )]( element );
-	}
+		event.preventDefault();
 
-	if ( element.hasClass( '.grey' ) ) {
-		doAction = false;
-	}
-
-	if ( doAction ) {
-		if ( window.confirm( window.digi_confirm_delete ) ) {
-			element.get_data( function( data ) {
-				loaderElement.addClass( 'loading' );
-				window.digirisk.request.send( element, data );
-			} );
+		if ( element.attr( 'data-loader' ) ) {
+			loaderElement = element.closest( '.' + element.attr( 'data-loader' ) );
 		}
-	}
-};
+
+		/** Méthode appelée avant l'action */
+		if ( element.attr( 'data-namespace' ) && element.attr( 'data-module' ) && element.attr( 'data-before-method' ) ) {
+			doAction = false;
+			doAction = window.eoxiaJS[element.attr( 'data-namespace' )][element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
+		}
+
+		if ( element.hasClass( '.grey' ) ) {
+			doAction = false;
+		}
+
+		if ( doAction ) {
+			if ( window.confirm( window.digi_confirm_delete ) ) {
+				element.get_data( function( data ) {
+					loaderElement.addClass( 'loading' );
+					window.eoxiaJS.request.send( element, data );
+				} );
+			}
+		}
+	};
+}

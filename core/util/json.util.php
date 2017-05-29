@@ -3,6 +3,9 @@
  * Gestion des fichiers JSON
  *
  * @package Evarisk\Plugin
+ *
+ * @since 6.2.8.0
+ * @version 6.2.9.1
  */
 
 namespace digi;
@@ -13,11 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Gestion des fichiers JSON
- *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.1.0.0
  */
-class Json_util extends Singleton_util {
+class Json_Util extends Singleton_Util {
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe singleton_util
 	 *
@@ -31,7 +31,7 @@ class Json_util extends Singleton_util {
 	 * @param  string $path_to_json Le chemin vers le fichier JSON.
 	 * @return array              	Les données du fichier JSON
 	 */
-	public function open_and_decode( $path_to_json ) {
+	public function open_and_decode( $path_to_json, $output = 'STDCLASS' ) {
 		if ( ! file_exists( $path_to_json ) ) {
 			if ( function_exists( 'eo_log' ) ) {
 				eo_log( 'digi_open_and_decode', array(
@@ -44,7 +44,11 @@ class Json_util extends Singleton_util {
 
 		$config_content = file_get_contents( $path_to_json );
 
-		$data = json_decode( $config_content );
+		if ( 'STDCLASS' === $output ) {
+			$data = json_decode( $config_content );
+		} elseif ( 'ARRAY_A' === $output ) {
+			$data = json_decode( $config_content, true );
+		}
 
 		if ( null === $data && json_last_error() !== JSON_ERROR_NONE ) {
 			if ( function_exists( 'eo_log' ) ) {

@@ -3,8 +3,8 @@
  * @TODO : A détailler
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 0.1
- * @copyright 2015-2016 Eoxia
+ * @version 6.2.9.0
+ * @copyright 2015-2017
  * @package accident
  * @subpackage action
  */
@@ -93,7 +93,9 @@ class accident_action {
 
 		ob_start();
 		require( ACCIDENT_VIEW_DIR . 'item-edit.php' );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean()
+		) );
 	}
 }
 

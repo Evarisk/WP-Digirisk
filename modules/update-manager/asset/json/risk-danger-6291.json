@@ -1,0 +1,73 @@
+{
+	"accident-de-plain-pied": "accident-de-plain-pied",
+	"activite-physique": "activite-physique",
+	"manutention-mecanique": "manutention-mecanique",
+	"circulation-deplacements": "circulation-deplacements",
+	"effondrements-chute-dobjet": "effondrements-chute-dobjet",
+	"equipements-de-travail": "equipements-de-travail",
+	"nuisances-sonores": "nuisances-sonores",
+	"produits-emissions-et-dechets": "produits-emissions-et-dechets",
+	"incendie-explosion": "incendie-explosion",
+	"electricite": "electricite",
+	"eclairage": "eclairage",
+	"travail-sur-ecran": "travail-sur-ecran",
+	"ambiances-climatiques": "ambiances-climatiques",
+	"agents-biologique": "agents-biologique",
+	"societe-exterieure": "societe-exterieure",
+	"manque-de-formation": "manque-de-formation",
+	"autres": "autres",
+	"circulations-internes": "circulations-internes",
+	"rayonnements": "rayonnements",
+	"risques-psychosociaux": "risques-psychosociaux",
+	"manutention-manuelle": "manutention-manuelle",
+	"postures-penibles": "postures-penibles",
+	"vibrations": "vibrations",
+	"amiante": "amiante",
+	"chute-de-hauteur": "chute-de-hauteur",
+
+
+
+	"divers-chute-de-hauteur": "divers-chute-de-hauteur",
+	"divers-activite-physique": "divers-activite-physique",
+	"travail-sur-ecran": "travail-sur-ecran",
+	"divers-manutention-mecanique": "divers-manutention-mecanique",
+	"divers-circulation-deplacements": "divers-circulation-deplacements",
+
+	"divers-equipements-de-travail": "divers-machines-et-outils",
+	"divers-machines-et-outils": "divers-machines-et-outils",
+
+	"divers-nuisances-sonores": "divers-nuisances-sonores",
+
+	"divers-produits-emissions-et-dechets": "divers-produits-chimiques-dechets",
+	"divers-produits-chimiques-dechets": "divers-produits-chimiques-dechets",
+
+	"divers-incendie-explosion": "divers-incendie-explosion",
+	"divers-eclairage": "divers-eclairage",
+	"divers-ambiances-climatiques": "divers-ambiances-climatiques",
+
+	"divers-agents-biologique": "divers-manque-dhygiene",
+	"divers-manque-dhygiene": "divers-manque-dhygiene",
+
+	"divers-autres": "divers-autres",
+	"manque-de-formation": "manque-de-formation",
+	"societe-exterieure": "societe-exterieure",
+	"divers-circulations-internes": "divers-circulations-internes",
+	"divers-rayonnements": "divers-rayonnements",
+	"divers-risques-psychosociaux": "divers-risques-psychosociaux",
+	"travail-de-nuit": "travail-de-nuit",
+	"travail-en-equipe-successives-alternantes": "travail-en-equipe-successives-alternantes",
+	"divers-manutention-manuelle": "divers-manutention-manuelle",
+	"divers-postures-penibles": "divers-postures-penibles",
+	"divers-vibrations": "divers-vibrations",
+	"divers-amiante": "divers-amiante",
+	"divers-electricite": "divers-electricite",
+
+	"divers-accident-de-plain-pied": "divers-chute-de-plain-pied",
+	"divers-chute-de-plain-pied": "divers-chute-de-plain-pied",
+
+	"divers-effrondrements-chute-dobjet": "divers-effondrements-chute-dobjet",
+	"divers-effondrements-chute-dobjet": "divers-effondrements-chute-dobjet",
+	"divers-ambiances-climatiques-manque-de-formation": "divers-ambiances-climatiques-manque-de-formation",
+	"divers-ambiances-climatiques-societe-exterieure": "divers-ambiances-climatiques-societe-exterieure",
+	"divers-ambiances-climatiques-travail-sur-ecran": "divers-ambiances-climatiques-travail-sur-ecran"
+}

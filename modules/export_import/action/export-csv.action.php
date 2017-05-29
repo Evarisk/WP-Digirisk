@@ -3,7 +3,7 @@
  * Les actions relatives à l'export du CSV.
  *
  * @since 6.2.6.0
- * @version 6.2.6.0
+ * @version 6.2.9.0
  *
  * @package export_import
  * @subpackage shortcode

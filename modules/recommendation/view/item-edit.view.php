@@ -41,7 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w2">
-				<div	data-module="recommendation"
+				<div	data-namespace="digirisk"
+							data-module="recommendation"
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"
 							data-loader="table"

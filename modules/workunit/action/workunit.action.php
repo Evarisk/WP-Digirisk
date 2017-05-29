@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -33,7 +33,7 @@ class Workunit_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_save_workunit() {
 		/**	Check if the ajax request come from a known source	*/
@@ -59,7 +59,13 @@ class Workunit_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'module' => 'workunit', 'callback_success' => 'saved_workunit_success', 'template' => ob_get_clean(), 'id' => $element->id ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'workunit',
+			'callback_success' => 'saved_workunit_success',
+			'template' => ob_get_clean(),
+			'id' => $element->id,
+		) );
 	}
 
 }

@@ -4,20 +4,19 @@
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.risk = {};
+window.eoxiaJS.digirisk.risk = {};
 
-window.digirisk.risk.init = function() {};
+window.eoxiaJS.digirisk.risk.init = function() {};
 
-window.digirisk.risk.deletedRiskSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();
 };
 
-window.digirisk.risk.loadedRiskSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
-	window.digirisk.date.init();
 };
 
-window.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
+window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
 
 	// Remet à 0 les styles.
 	triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
@@ -49,9 +48,8 @@ window.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
-	window.digirisk.date.init();
 };
 
 /**
@@ -64,7 +62,6 @@ window.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
  * @since 6.2.9.0
  * @version 6.2.9.0
  */
-window.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
 	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
-	window.digirisk.date.init();
 };

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package file_management
  * @subpackage action
@@ -31,7 +31,7 @@ class File_Management_Action {
 	 * Vérifie les données et appelle associate_file de la class file_management_class
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_associate_file() {
 		check_ajax_referer( 'associate_file' );
@@ -56,7 +56,9 @@ class File_Management_Action {
 
 		ob_start();
 		View_Util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'namespace' => $namespace, 'type_class' => $type, 'element' => $element ) );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -81,7 +83,10 @@ class File_Management_Action {
 
 		ob_start();
 		do_shortcode( '[digi-handle-model]' );
-		wp_send_json_success( array( 'type' => 'set_model', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'type' => 'set_model',
+			'template' => ob_get_clean(),
+		) );
 	}
 }
 

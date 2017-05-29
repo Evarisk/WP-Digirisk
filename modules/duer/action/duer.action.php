@@ -3,7 +3,7 @@
  * Gères l'action AJAX de la génération du DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.1.9.0
+ * @version 6.2.9.0
  * @copyright 2015-2016 Evarisk
  * @package document
  * @subpackage class
@@ -35,7 +35,7 @@ class DUER_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
@@ -51,8 +51,15 @@ class DUER_Action {
 		$society = $society[0];
 
 		ob_start();
-		View_Util::exec( 'duer', 'tree/main', array( 'society' => $society ) );
-		wp_send_json_success( array( 'module' => 'DUER', 'callback_success' => 'displayedSocietyDUERSuccess', 'view' => ob_get_clean() ) );
+		View_Util::exec( 'duer', 'tree/main', array(
+			'society' => $society,
+		) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'DUER',
+			'callback_success' => 'displayedSocietyDUERSuccess',
+			'view' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -109,6 +116,7 @@ class DUER_Action {
 		}
 
 		$response = array(
+			'namespace' => 'digirisk',
 			'module' => 'DUER',
 			'index' => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
 			'creation_response' => ! empty( $generate_response ) && ! empty( $generate_response['creation_response'] ) ? $generate_response['creation_response'] : '',

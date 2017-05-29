@@ -33,7 +33,7 @@ class Update_Manager_Action {
 	 */
 	public function automatic_update_redirect() {
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
-		if ( empty( $waiting_updates ) ) {
+		if ( empty( $waiting_updates ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin-ajax.php' ) ) {
 			$current_version_to_check = (int) str_replace( '.', '', Config_Util::$init['digirisk']->version );
 			$last_version_done = (int) get_option( Config_Util::$init['digirisk']->key_last_update_version, 6260 );
 

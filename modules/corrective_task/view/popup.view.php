@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="popup corrective-task loading">
+<div class="popup corrective-task">
 	<div class="container">
 
 		<div class="header">

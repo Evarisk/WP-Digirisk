@@ -1,31 +1,43 @@
-window.digirisk.form = {};
+if ( ! window.eoxiaJS.form ) {
+	window.eoxiaJS.form = {};
 
-window.digirisk.form.init = function() {
-    window.digirisk.form.event();
-};
-window.digirisk.form.event = function() {
-    jQuery( document ).on( 'click', '.submit-form', window.digirisk.form.submitForm );
-};
+	window.eoxiaJS.form.init = function() {
+	    window.eoxiaJS.form.event();
+	};
+	window.eoxiaJS.form.event = function() {
+	    jQuery( document ).on( 'click', '.submit-form', window.eoxiaJS.form.submitForm );
+	};
 
-window.digirisk.form.submitForm = function( event ) {
-	var element = jQuery( this );
+	window.eoxiaJS.form.submitForm = function( event ) {
+		var element = jQuery( this );
+		var doAction = true;
 
-	element.closest( 'form' ).addClass( 'loading' );
+		event.preventDefault();
 
-	event.preventDefault();
-	element.closest( 'form' ).ajaxSubmit( {
-		success: function( response ) {
-			element.closest( 'form' ).removeClass( 'loading' );
-
-			if ( response && response.success ) {
-				if ( response.data.module && response.data.callback_success ) {
-					window.digirisk[response.data.module][response.data.callback_success]( element, response );
-				}
-			} else {
-				if ( response.data.module && response.data.callback_error ) {
-					window.digirisk[response.data.module][response.data.callback_error]( element, response );
-				}
-			}
+	/** Méthode appelée avant l'action */
+		if ( element.attr( 'data-module' ) && element.attr( 'data-before-method' ) ) {
+			doAction = false;
+			doAction = window.eoxiaJS[element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
 		}
-	} );
-};
+
+		if ( doAction ) {
+			element.closest( 'form' ).ajaxSubmit( {
+				success: function( response ) {
+					if ( response && response.data.module && response.data.callback ) {
+						window.eoxiaJS[response.data.module][response.data.callback]( element, response );
+					}
+
+					if ( response && response.success ) {
+						if ( response.data.module && response.data.callback_success ) {
+							window.eoxiaJS[response.data.module][response.data.callback_success]( element, response );
+						}
+					} else {
+						if ( response.data.module && response.data.callback_error ) {
+							window.eoxiaJS[response.data.module][response.data.callback_error]( element, response );
+						}
+					}
+				}
+			} );
+		}
+	};
+}

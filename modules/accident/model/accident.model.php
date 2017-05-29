@@ -1,6 +1,10 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 
-class accident_model extends post_model {
+namespace digi;
+
+if ( !defined( 'ABSPATH' ) ) exit;
+
+class accident_model extends Post_Model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(

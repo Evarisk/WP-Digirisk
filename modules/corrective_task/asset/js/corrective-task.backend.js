@@ -5,9 +5,9 @@
  * @version 6.2.4.0
  */
 
-window.digirisk.correctiveTask = {};
+window.eoxiaJS.digirisk.correctiveTask = {};
 
-window.digirisk.correctiveTask.init = function() {};
+window.eoxiaJS.digirisk.correctiveTask.init = function() {};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "open_task".
@@ -20,7 +20,7 @@ window.digirisk.correctiveTask.init = function() {};
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.correctiveTask.openedTaskPopup = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.correctiveTask.openedTaskPopup = function( triggeredElement, response ) {
 	jQuery( '.popup.corrective-task .content' ).html( response.data.view );
-	jQuery( '.popup.corrective-task.loading' ).removeClass( 'loading' );
+	jQuery( '.popup.corrective-task .container.loading' ).removeClass( 'loading' );
 };

@@ -1,7 +1,7 @@
-window.digirisk.user = {};
+window.eoxiaJS.digirisk.user = {};
 
-window.digirisk.user.init = function() {
-	window.digirisk.user.event();
+window.eoxiaJS.digirisk.user.init = function() {
+	window.eoxiaJS.digirisk.user.event();
 };
 
 /**
@@ -12,8 +12,8 @@ window.digirisk.user.init = function() {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.user.event = function() {
-	jQuery( document ).on( 'click', '.form-edit-user-assign .wp-digi-pagination a', window.digirisk.user.pagination );
+window.eoxiaJS.digirisk.user.event = function() {
+	jQuery( document ).on( 'click', '.form-edit-user-assign .wp-digi-pagination a', window.eoxiaJS.digirisk.user.pagination );
 };
 
 /**
@@ -27,8 +27,8 @@ window.digirisk.user.event = function() {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.user.editUserAssignSuccess = function( triggeredElement, response ) {
-	window.digirisk.user.render( response );
+window.eoxiaJS.digirisk.user.editUserAssignSuccess = function( triggeredElement, response ) {
+	window.eoxiaJS.digirisk.user.render( response );
 };
 
 /**
@@ -42,8 +42,8 @@ window.digirisk.user.editUserAssignSuccess = function( triggeredElement, respons
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.user.detachUserSuccess = function( triggeredElement, response ) {
-	window.digirisk.user.render( response );
+window.eoxiaJS.digirisk.user.detachUserSuccess = function( triggeredElement, response ) {
+	window.eoxiaJS.digirisk.user.render( response );
 };
 
 /**
@@ -55,12 +55,12 @@ window.digirisk.user.detachUserSuccess = function( triggeredElement, response ) 
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.user.render = function( response ) {
+window.eoxiaJS.digirisk.user.render = function( response ) {
 	jQuery( 'section.users' ).replaceWith( response.data.template );
-	window.digirisk.render.call_render_changed();
+	window.eoxiaJS.digirisk.render.call_render_changed();
 };
 
-window.digirisk.user.pagination = function( event ) {
+window.eoxiaJS.digirisk.user.pagination = function( event ) {
 	event.preventDefault();
 
 	var href = jQuery( this ).attr( 'href' ).split( '&' );

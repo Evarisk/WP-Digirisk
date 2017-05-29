@@ -4,31 +4,31 @@
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.gallery = {};
+window.eoxiaJS.digirisk.gallery = {};
 
-window.digirisk.gallery.init = function() {
-	window.digirisk.gallery.event();
+window.eoxiaJS.digirisk.gallery.init = function() {
+	window.eoxiaJS.digirisk.gallery.event();
 };
 
-window.digirisk.gallery.event = function() {
-	jQuery( document ).on( 'keyup', window.digirisk.gallery.keyup );
+window.eoxiaJS.digirisk.gallery.event = function() {
+	jQuery( document ).on( 'keyup', window.eoxiaJS.digirisk.gallery.keyup );
 	jQuery( document ).on( 'click', '.gallery', function( event ) { event.preventDefault(); return false; } );
-	jQuery( document ).on( 'click', '.gallery .navigation .prev', window.digirisk.gallery.prevPicture );
-	jQuery( document ).on( 'click', '.gallery .navigation .next', window.digirisk.gallery.nextPicture );
-	jQuery( document ).on( 'click', '.gallery .close', window.digirisk.gallery.close );
+	jQuery( document ).on( 'click', '.gallery .navigation .prev', window.eoxiaJS.digirisk.gallery.prevPicture );
+	jQuery( document ).on( 'click', '.gallery .navigation .next', window.eoxiaJS.digirisk.gallery.nextPicture );
+	jQuery( document ).on( 'click', '.gallery .close', window.eoxiaJS.digirisk.gallery.close );
 };
 
-window.digirisk.gallery.keyup = function( event ) {
+window.eoxiaJS.digirisk.gallery.keyup = function( event ) {
 	if ( 37 === event.keyCode ) {
-		window.digirisk.gallery.prevPicture();
+		window.eoxiaJS.digirisk.gallery.prevPicture();
 	} else if ( 39 === event.keyCode ) {
-		window.digirisk.gallery.nextPicture();
+		window.eoxiaJS.digirisk.gallery.nextPicture();
 	} else if ( 27 === event.keyCode ) {
 		jQuery( '.gallery .close' ).click();
 	}
 };
 
-window.digirisk.gallery.open = function( element, elementId, type, namespace ) {
+window.eoxiaJS.digirisk.gallery.open = function( element, elementId, type, namespace ) {
 	var data = {
 		action: 'load_gallery',
 		id: elementId,
@@ -44,7 +44,7 @@ window.digirisk.gallery.open = function( element, elementId, type, namespace ) {
 	});
 };
 
-window.digirisk.gallery.prevPicture = function( event ) {
+window.eoxiaJS.digirisk.gallery.prevPicture = function( event ) {
 	if ( jQuery( '.gallery .image-list li.current' ).prev().length <= 0 ) {
 		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
 		jQuery( '.gallery .image-list li:last' ).toggleClass( 'hidden current' );
@@ -55,7 +55,7 @@ window.digirisk.gallery.prevPicture = function( event ) {
 	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
 };
 
-window.digirisk.gallery.nextPicture = function( event ) {
+window.eoxiaJS.digirisk.gallery.nextPicture = function( event ) {
 	if ( jQuery( '.gallery .image-list li.current' ).next().length <= 0 ) {
 		jQuery( '.gallery .image-list li.current' ).toggleClass( 'current hidden' );
 		jQuery( '.gallery .image-list li:first' ).toggleClass( 'hidden current' );
@@ -66,7 +66,7 @@ window.digirisk.gallery.nextPicture = function( event ) {
 	jQuery( '.gallery .edit-thumbnail-id' ).attr( 'data-thumbnail-id', jQuery( '.gallery .current' ).attr( 'data-id' ) );
 };
 
-window.digirisk.gallery.close = function( event ) {
+window.eoxiaJS.digirisk.gallery.close = function( event ) {
 	jQuery( '.gallery' ).remove();
 };
 
@@ -81,7 +81,7 @@ window.digirisk.gallery.close = function( event ) {
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.gallery.dessociatedFileSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.gallery.dessociatedFileSuccess = function( element, response ) {
 	if ( response.data.closePopup ) {
 		jQuery( '.gallery' ).remove();
 	}
@@ -104,7 +104,7 @@ window.digirisk.gallery.dessociatedFileSuccess = function( element, response ) {
  * @since 1.0
  * @version 6.2.5.0
  */
-window.digirisk.gallery.successfulSetThumbnail = function( element, response ) {
+window.eoxiaJS.digirisk.gallery.successfulSetThumbnail = function( element, response ) {
 	jQuery( '.media[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 	jQuery( '.navigation-container span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );
 	jQuery( '.navigation-container .workunit-list span[data-id="' + response.data.elementId + '"] img' ).replaceWith( response.data.template );

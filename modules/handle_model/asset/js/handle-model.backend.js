@@ -5,10 +5,10 @@
  * @version 6.2.5.0
  */
 
-window.digirisk.handleModel = {};
+window.eoxiaJS.digirisk.handleModel = {};
 
-window.digirisk.handleModel.init = function() {
-	window.digirisk.handleModel.event();
+window.eoxiaJS.digirisk.handleModel.init = function() {
+	window.eoxiaJS.digirisk.handleModel.event();
 };
 
 /**
@@ -16,7 +16,7 @@ window.digirisk.handleModel.init = function() {
  *
  * @return {void}
  */
-window.digirisk.handleModel.event = function() {};
+window.eoxiaJS.digirisk.handleModel.event = function() {};
 
 /**
  * Après la requête AJAX qui ouvre la popup "Historique des modèles"
@@ -25,9 +25,10 @@ window.digirisk.handleModel.event = function() {};
  * @param  {Object}            response Les données de la réponse de la requête XHR
  * @return {void}
  */
-window.digirisk.handleModel.loadedPopupHistoric = function( element, response ) {
+window.eoxiaJS.digirisk.handleModel.loadedPopupHistoric = function( element, response ) {
 	element.closest( '.block' ).find( '.popup .title' ).text( response.data.title );
 	element.closest( '.block' ).find( '.popup .content' ).html( response.data.view );
+	jQuery( '.container.loading' ).removeClass( 'loading' );
 };
 
 /**
@@ -35,6 +36,6 @@ window.digirisk.handleModel.loadedPopupHistoric = function( element, response ) 
  * @param {HTMLAnchorElement} element  Le lien "Télécharger le modèle courant"
  * @param {void}
  */
-window.digirisk.handleModel.reset_default_model_success = function( element, response ) {
+window.eoxiaJS.digirisk.handleModel.reset_default_model_success = function( element, response ) {
 	element.closest( '.block' ).find( '.wp-digi-bton-second' ).attr( 'href', response.data.url );
 };

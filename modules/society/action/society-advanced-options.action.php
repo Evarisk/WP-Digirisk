@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.5.0
- * @version 6.2.5.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage action
@@ -31,7 +31,7 @@ class Society_Advanced_Options_Action {
 	 * Afin renvoie le template de l'application en entier.
 	 *
 	 * @since 6.2.5.0
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 *
 	 * @return void
 	 */
@@ -51,7 +51,12 @@ class Society_Advanced_Options_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display( $id );
-		wp_send_json_success( array( 'module' => 'societyAdvancedOptions', 'callback_success' => 'savedAdvancedOptionsMoveTo', 'view' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'societyAdvancedOptions',
+			'callback_success' => 'savedAdvancedOptionsMoveTo',
+			'view' => ob_get_clean(),
+		) );
 	}
 }
 

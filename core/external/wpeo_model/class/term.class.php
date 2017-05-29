@@ -23,22 +23,20 @@ class term_class extends singleton_util {
 		/**	Sauvegarde des données dans la base de données / Save data into database	*/
 		if ( empty( $object->id ) ) {
 			$wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
-				'description'	=> !empty( $object->description ) ? $object->description : '',
-				'slug'	=> !empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
-				'parent'	=> !empty( $object->parent_id ) ? (int) $object->parent_id : 0,
+				'description'	=> ! empty( $object->description ) ? $object->description : '',
+				'slug'	=> ! empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
+				'parent'	=> ! empty( $object->parent_id ) ? (int) $object->parent_id : 0,
 			) );
-		}
-		else {
+		} else {
 			$wp_category_danger = wp_update_term( $object->id, $this->get_taxonomy(), $object->do_wp_object() );
 		}
 
-		if ( !is_wp_error( $wp_category_danger ) ) {
+		if ( ! is_wp_error( $wp_category_danger ) ) {
 			$object->id = $wp_category_danger['term_id'];
 			$object->term_taxonomy_id = $wp_category_danger['term_taxonomy_id'];
 
 			save_meta_class::g()->save_meta_data( $object, 'update_term_meta', $this->meta_key );
-		}
-		else {
+		} else {
 			$list_term_model = $this->get( array( 'id' => $wp_category_danger->error_data['term_exists'] ) );
 			return $list_term_model[0];
 		}

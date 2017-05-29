@@ -86,5 +86,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		</li>
 	</ul>
 
-	<button class="float right button green submit-form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
+	<button class="float right button green action-input" data-form="form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
 </form>

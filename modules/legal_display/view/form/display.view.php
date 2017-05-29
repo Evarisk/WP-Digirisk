@@ -74,5 +74,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		?>
 	</div>
 
-	<button class="button blue submit-form float right"><i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span></button>
+	<button class="button blue action-input float right" data-parent="form"><i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span></button>
 </form>

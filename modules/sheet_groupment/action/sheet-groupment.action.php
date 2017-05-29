@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package sheet_groupment
  * @subpackage action
@@ -35,7 +35,7 @@ class Sheet_Groupment_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	function ajax_generate_fiche_de_groupement() {
 		check_ajax_referer( 'ajax_generate_fiche_de_groupement' );
@@ -48,7 +48,11 @@ class Sheet_Groupment_Action {
 
 		Fiche_De_Groupement_Class::g()->generate( $society_id );
 
-		wp_send_json_success( array( 'module' => 'sheet_groupment', 'callback_success' => 'generatedSheetGroupment' ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'sheet_groupment',
+			'callback_success' => 'generatedSheetGroupment'
+		) );
 	}
 
 }

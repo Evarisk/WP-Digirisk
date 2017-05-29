@@ -75,6 +75,12 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.2.9.1 =
+
+Corrections
+
+* 8975 - Inversion de picto suite -> Correction du module de mise à jour.
+
 = Version 6.2.9.0 =
 
 Améliorations

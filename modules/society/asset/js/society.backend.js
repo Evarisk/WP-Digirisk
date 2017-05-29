@@ -1,11 +1,11 @@
-window.digirisk.society = {};
+window.eoxiaJS.digirisk.society = {};
 
-window.digirisk.society.init = function() {
-	window.digirisk.society.event();
+window.eoxiaJS.digirisk.society.init = function() {
+	window.eoxiaJS.digirisk.society.event();
 };
 
-window.digirisk.society.event = function() {
-	jQuery( document ).on( 'keyup', 'input[name="title"]', window.digirisk.society.keyUpSaveIdentity );
+window.eoxiaJS.digirisk.society.event = function() {
+	jQuery( document ).on( 'keyup', 'input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
 };
 
 /**
@@ -19,7 +19,7 @@ window.digirisk.society.event = function() {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.society.loadedSocietySuccess = function( element, response ) {
+window.eoxiaJS.digirisk.society.loadedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 };
 
@@ -33,7 +33,7 @@ window.digirisk.society.loadedSocietySuccess = function( element, response ) {
  * @since 0.1
  * @version 6.2.5.0
  */
-window.digirisk.society.keyUpSaveIdentity = function( event ) {
+window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
 	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).addClass( 'active' );
 
 	if ( 13 === event.keyCode ) {
@@ -52,7 +52,7 @@ window.digirisk.society.keyUpSaveIdentity = function( event ) {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.society.savedSocietySuccess = function( element, response ) {
+window.eoxiaJS.digirisk.society.savedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 };
 
@@ -67,7 +67,7 @@ window.digirisk.society.savedSocietySuccess = function( element, response ) {
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.society.deletedSocietySuccess = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredElement, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
 };
 
@@ -82,7 +82,7 @@ window.digirisk.society.deletedSocietySuccess = function( triggeredElement, resp
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
 		jQuery( '.digirisk-wrap .workunit-navigation .title' ).text( response.data.society.unique_identifier + ' - ' + response.data.society.title );
 	} else {

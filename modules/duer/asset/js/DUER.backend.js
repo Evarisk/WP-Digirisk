@@ -5,13 +5,13 @@
  * @version 6.2.5.0
  */
 
-window.digirisk.DUER = {};
+window.eoxiaJS.digirisk.DUER = {};
 
-window.digirisk.DUER.init = function() {
-	window.digirisk.DUER.event();
+window.eoxiaJS.digirisk.DUER.init = function() {
+	window.eoxiaJS.digirisk.DUER.event();
 };
 
-window.digirisk.DUER.event = function() {};
+window.eoxiaJS.digirisk.DUER.event = function() {};
 
 /**
  * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
@@ -33,7 +33,7 @@ window.digirisk.DUER.event = function() {};
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
+window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
 	var textareaContent = '';
 
 	if ( args ) {
@@ -66,7 +66,7 @@ window.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupE
  * @since 0.1
  * @version 6.2.4.0
  */
-window.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
+window.eoxiaJS.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
 	if ( args ) {
 		popupElement.find( 'h2' ).text( args.title );
 		popupElement.find( 'textarea' ).hide();
@@ -75,7 +75,7 @@ window.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, e
 	}
 };
 
-window.digirisk.DUER.set_textarea_content = function( triggeredElement, event, args ) {
+window.eoxiaJS.digirisk.DUER.set_textarea_content = function( triggeredElement, event, args ) {
 	if ( args && args['target'] ) {
 		var textarea_content = jQuery( '.popup textarea' ).val();
 
@@ -83,7 +83,7 @@ window.digirisk.DUER.set_textarea_content = function( triggeredElement, event, a
 	}
 };
 
-window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popupElement, event, args ) {
+window.eoxiaJS.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popupElement, event, args ) {
 	var data = {
 		action: 'display_societies_duer',
 		id: args.id,
@@ -95,16 +95,16 @@ window.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popup
 	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
-	window.digirisk.request.send( popupElement, data );
+	window.eoxiaJS.request.send( popupElement, data );
 };
 
-window.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
+window.eoxiaJS.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
 	popup.find( '.change-content' ).html( response.data.view );
 
-	window.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { index: 0 } );
+	window.eoxiaJS.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { index: 0 } );
 };
 
-window.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
+window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
 	var data = {};
 	var i = 0;
 	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( 'tr' ) );
@@ -133,7 +133,7 @@ window.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
 		data['parent_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'parent-id' );
 	}
 
-	window.digirisk.request.send( triggeredElement, data );
+	window.eoxiaJS.request.send( triggeredElement, data );
 };
 
 /**
@@ -148,7 +148,7 @@ window.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
 	if ( response.data.creation_response.id  ) {
@@ -156,14 +156,14 @@ window.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	}
 
 	if ( ! response.data.end ) {
-		window.digirisk.DUER.generateDUER( element, response.data );
+		window.eoxiaJS.digirisk.DUER.generateDUER( element, response.data );
 	} else {
 		jQuery( '.popup' ).removeClass( 'no-close' );
 	}
 };
 
-window.digirisk.DUER.callback_generate_duer_error = function() {};
+window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
 
-window.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
+window.eoxiaJS.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
 	jQuery( '.digirisk-wrap .button[data-action="digi_list_duer"]' ).click();
 };

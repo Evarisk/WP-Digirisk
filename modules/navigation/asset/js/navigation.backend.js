@@ -5,7 +5,7 @@
  * @version 6.2.6.0
  */
 
-window.digirisk.navigation = {};
+window.eoxiaJS.digirisk.navigation = {};
 
 /**
  * La méthode appelée automatiquement par la bibliothèque EoxiaJS.
@@ -15,8 +15,8 @@ window.digirisk.navigation = {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.navigation.init = function() {
-	window.digirisk.navigation.event();
+window.eoxiaJS.digirisk.navigation.init = function() {
+	window.eoxiaJS.digirisk.navigation.event();
 };
 
 /**
@@ -27,11 +27,11 @@ window.digirisk.navigation.init = function() {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.navigation.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .content li span.action-attribute', window.digirisk.navigation.setItemActiveInToggle );
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .workunit-list li span.action-attribute', window.digirisk.navigation.setItemActiveInWorkunitList );
+window.eoxiaJS.digirisk.navigation.event = function() {
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .content li span.action-attribute', window.eoxiaJS.digirisk.navigation.setItemActiveInToggle );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .workunit-list li span.action-attribute', window.eoxiaJS.digirisk.navigation.setItemActiveInWorkunitList );
 
-	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container .workunit-add input.title', window.digirisk.navigation.keyUpOnWorkunitTitle );
+	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container .workunit-add input.title', window.eoxiaJS.digirisk.navigation.keyUpOnWorkunitTitle );
 };
 
 /**
@@ -39,10 +39,11 @@ window.digirisk.navigation.event = function() {
  *
  * @return {void}
  *
+ *
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.navigation.setItemActiveInToggle = function( event ) {
+window.eoxiaJS.digirisk.navigation.setItemActiveInToggle = function( event ) {
 	jQuery( '.digirisk-wrap .navigation-container .content div.active' ).removeClass( 'active' );
 	jQuery( this ).closest( 'div' ).addClass( 'active' );
 };
@@ -55,7 +56,7 @@ window.digirisk.navigation.setItemActiveInToggle = function( event ) {
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
+window.eoxiaJS.digirisk.navigation.setItemActiveInWorkunitList = function( event ) {
 	jQuery( '.digirisk-wrap .navigation-container .workunit-list li.active' ).removeClass( 'active' );
 	jQuery( this ).closest( 'li' ).addClass( 'active' );
 };
@@ -69,7 +70,7 @@ window.digirisk.navigation.setItemActiveInInWorkunitList = function( event ) {
  * @since 6.2.6.0
  * @version 6.2.6.0
  */
-window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
+window.eoxiaJS.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
 	if ( jQuery( this ).val().length > 0 ) {
 		jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 	} else {
@@ -87,7 +88,7 @@ window.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
  * @since 6.2.6.0
  * @version 6.2.6.0
  */
-window.digirisk.navigation.beforeSaveWorkunit = function( element ) {
+window.eoxiaJS.digirisk.navigation.beforeSaveWorkunit = function( element ) {
 	if ( '' === element.closest( '.workunit-add' ).find( 'input.title' ).val() ) {
 		element.closest( '.workunit-add' ).addClass( 'active' );
 		return false;

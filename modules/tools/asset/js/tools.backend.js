@@ -1,18 +1,18 @@
-window.digirisk.tools = {};
+window.eoxiaJS.digirisk.tools = {};
 
-window.digirisk.tools.init = function() {
-	window.digirisk.tools.event();
+window.eoxiaJS.digirisk.tools.init = function() {
+	window.eoxiaJS.digirisk.tools.event();
 };
 
-window.digirisk.tools.event = function() {
-	jQuery( document ).on( 'click', '.digi-tools-main-container .nav-tab', window.digirisk.tools.tab_switcher );
-	jQuery( document ).on( 'click', '.reset-method-evaluation', window.digirisk.tools.reset_evaluation_method );
-	jQuery( document ).on( 'click', '.element-risk-compilation', window.digirisk.tools.risk_fixer );
-	jQuery( document ).on( 'click', '.fix-recommendation', window.digirisk.tools.recommendation_fixer );
-	jQuery( document ).on( 'click', '.fix-doc', window.digirisk.tools.doc_fixer );
+window.eoxiaJS.digirisk.tools.event = function() {
+	jQuery( document ).on( 'click', '.digi-tools-main-container .nav-tab', window.eoxiaJS.digirisk.tools.tab_switcher );
+	jQuery( document ).on( 'click', '.reset-method-evaluation', window.eoxiaJS.digirisk.tools.reset_evaluation_method );
+	jQuery( document ).on( 'click', '.element-risk-compilation', window.eoxiaJS.digirisk.tools.risk_fixer );
+	jQuery( document ).on( 'click', '.fix-recommendation', window.eoxiaJS.digirisk.tools.recommendation_fixer );
+	jQuery( document ).on( 'click', '.fix-doc', window.eoxiaJS.digirisk.tools.doc_fixer );
 };
 
-window.digirisk.tools.tab_switcher = function( event ) {
+window.eoxiaJS.digirisk.tools.tab_switcher = function( event ) {
   event.preventDefault();
 
   /**	Remove all calss active on all tabs	*/
@@ -30,7 +30,7 @@ window.digirisk.tools.tab_switcher = function( event ) {
   jQuery( "#" + jQuery( this ).attr( "data-id" ) ).show();
 },
 
-window.digirisk.tools.reset_evaluation_method = function( event ) {
+window.eoxiaJS.digirisk.tools.reset_evaluation_method = function( event ) {
   event.preventDefault();
 
   if ( window.confirm( window.digi_tools_confirm ) ) {
@@ -46,11 +46,11 @@ window.digirisk.tools.reset_evaluation_method = function( event ) {
       _wpnonce: jQuery( this ).data( 'nonce' )
     };
 
-		window.digirisk.tools.exec_request( li, data, this );
+		window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
   }
 },
 
-window.digirisk.tools.risk_fixer = function( event ) {
+window.eoxiaJS.digirisk.tools.risk_fixer = function( event ) {
   event.preventDefault();
 
   jQuery( this ).addClass( "wp-digi-loading" );
@@ -65,10 +65,10 @@ window.digirisk.tools.risk_fixer = function( event ) {
     _wpnonce: jQuery( this ).data( 'nonce' )
   };
 
-  window.digirisk.tools.exec_request( li, data, this );
+  window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
 },
 
-window.digirisk.tools.recommendation_fixer = function( event ) {
+window.eoxiaJS.digirisk.tools.recommendation_fixer = function( event ) {
   event.preventDefault();
 
   jQuery( this ).addClass( "wp-digi-loading" );
@@ -83,10 +83,10 @@ window.digirisk.tools.recommendation_fixer = function( event ) {
     _wpnonce: jQuery( this ).data( 'nonce' )
   };
 
-  window.digirisk.tools.exec_request( li, data, this );
+  window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
 },
 
-window.digirisk.tools.doc_fixer = function( event ) {
+window.eoxiaJS.digirisk.tools.doc_fixer = function( event ) {
   event.preventDefault();
 
   jQuery( this ).addClass( "wp-digi-loading" );
@@ -101,10 +101,10 @@ window.digirisk.tools.doc_fixer = function( event ) {
     _wpnonce: jQuery( this ).data( 'nonce' )
   };
 
-  window.digirisk.tools.exec_request( li, data, this );
+  window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
 },
 
-window.digirisk.tools.exec_request = function( li, data, element ) {
+window.eoxiaJS.digirisk.tools.exec_request = function( li, data, element ) {
 	jQuery.post( window.ajaxurl, data, function() {
 		jQuery( element ).removeClass( "wp-digi-loading" );
 		li.innerHTML += ' ' + window.digi_tools_done;

@@ -97,6 +97,7 @@ class Risk_Action {
 		} // End if().
 
 		wp_send_json_success( array(
+			'namespace' => 'digirisk',
 			'module' => $module,
 			'callback_success' => $callback_success,
 			'template' => $template,
@@ -107,7 +108,7 @@ class Risk_Action {
 	 * Supprimes un risque
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_delete_risk() {
 		check_ajax_referer( 'ajax_delete_risk' );
@@ -129,14 +130,18 @@ class Risk_Action {
 
 		Risk_Class::g()->update( $risk );
 
-		wp_send_json_success( array( 'module' => 'risk', 'callback_success' => 'deletedRiskSuccess' ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'risk',
+			'callback_success' => 'deletedRiskSuccess',
+		) );
 	}
 
 	/**
 	 * Charges un risque
 	 *
 	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_load_risk() {
 		check_ajax_referer( 'ajax_load_risk' );
@@ -152,7 +157,12 @@ class Risk_Action {
 
 		ob_start();
 		View_Util::exec( 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
-		wp_send_json_success( array( 'module' => 'risk', 'callback_success' => 'loadedRiskSuccess', 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'risk',
+			'callback_success' => 'loadedRiskSuccess',
+			'template' => ob_get_clean(),
+		) );
 	}
 
 	/**

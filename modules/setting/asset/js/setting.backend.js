@@ -4,18 +4,18 @@
  * @since 1.0
  * @version 6.2.9.0
  */
-window.digirisk.setting = {};
+window.eoxiaJS.digirisk.setting = {};
 
-window.digirisk.setting.init = function() {
-	window.digirisk.setting.event();
+window.eoxiaJS.digirisk.setting.init = function() {
+	window.eoxiaJS.digirisk.setting.event();
 };
 
-window.digirisk.setting.event = function() {
-	jQuery( document ).on( 'click', '#digi-danger-preset .save-all:not(.grey)', window.digirisk.setting.savePresetRisks );
-	jQuery( document ).on( 'click', '#digi-danger-preset table tr input:not(input[type="checkbox"]), #digi-danger-preset tr .toggle, #digi-danger-preset tr textarea, #digi-danger-preset tr .popup, #digi-danger-preset tr .action', window.digirisk.setting.checkTheCheckbox );
+window.eoxiaJS.digirisk.setting.event = function() {
+	jQuery( document ).on( 'click', '#digi-danger-preset .save-all:not(.grey)', window.eoxiaJS.digirisk.setting.savePresetRisks );
+	jQuery( document ).on( 'click', '#digi-danger-preset table tr input:not(input[type="checkbox"]), #digi-danger-preset tr .toggle, #digi-danger-preset tr textarea, #digi-danger-preset tr .popup, #digi-danger-preset tr .action', window.eoxiaJS.digirisk.setting.checkTheCheckbox );
 };
 
-window.digirisk.setting.savePresetRisks = function( event ) {
+window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
 	if ( event ) {
 		event.preventDefault();
 	}
@@ -33,13 +33,13 @@ window.digirisk.setting.savePresetRisks = function( event ) {
  * @since 6.2.3.0
  * @version 6.2.4.0
  */
-window.digirisk.setting.checkTheCheckbox = function( event ) {
+window.eoxiaJS.digirisk.setting.checkTheCheckbox = function( event ) {
 	jQuery( this ).closest( 'tr' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
 	jQuery( this ).closest( 'tr' ).find( '.edit-risk' ).addClass( 'checked' );
 	jQuery( '#digi-danger-preset .save-all' ).removeClass( 'disable' ).addClass( 'green' );
 };
 
-window.digirisk.setting.savedRiskSuccess = function( element, response ) {
+window.eoxiaJS.digirisk.setting.savedRiskSuccess = function( element, response ) {
 	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
-	// window.digirisk.setting.savePresetRisks( undefined );
+	// window.eoxiaJS.digirisk.setting.savePresetRisks( undefined );
 };

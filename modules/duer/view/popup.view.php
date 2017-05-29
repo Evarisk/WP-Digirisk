@@ -27,7 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<img src='<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>' alt='<?php echo esc_attr( 'Chargement...' ); ?>' />
 			</div>
 
-			<div 	data-cb-object="DUER"
+			<div 	data-cb-namespace="digirisk"
+						data-cb-object="DUER"
 						data-cb-func="set_textarea_content"
 						class="button green margin uppercase strong float right"><span>OK</span></div>
 		</div>

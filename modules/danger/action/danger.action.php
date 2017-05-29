@@ -119,6 +119,7 @@ class Danger_Action {
 
 		wp_send_json_success( array(
 			'view' => ob_get_clean(),
+			'namespace' => 'digirisk',
 			'module' => 'risk',
 			'callback_success' => 'checkedPredefinedDanger',
 		) );

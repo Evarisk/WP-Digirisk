@@ -6,9 +6,9 @@
  * @version 6.2.4.0
  */
 
-window.digirisk.sheet_workunit = {};
+window.eoxiaJS.digirisk.sheet_workunit = {};
 
-window.digirisk.sheet_workunit.init = function() {};
+window.eoxiaJS.digirisk.sheet_workunit.init = function() {};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "generate_fiche_de_poste".
@@ -21,6 +21,6 @@ window.digirisk.sheet_workunit.init = function() {};
  * @since 1.0
  * @version 6.2.4.0
  */
-window.digirisk.sheet_workunit.generatedFicheDePosteSuccess = function() {
+window.eoxiaJS.digirisk.sheet_workunit.generatedFicheDePosteSuccess = function() {
 	jQuery( '.tab-element[data-action="digi-fiche-de-poste"]' ).click();
 };

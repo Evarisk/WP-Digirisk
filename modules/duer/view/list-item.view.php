@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( $element->document_meta['destinataireDUER'] ) ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
 					data-title="Destinataire"
@@ -36,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		<span class="hidden text-content-methodology"><?php echo nl2br( $element->document_meta['methodologie'] ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
 					data-title="Méthodologie"
@@ -47,6 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		<span class="hidden text-content-sources"><?php echo nl2br( $element->document_meta['sources'] ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
 					data-title="Source"
@@ -58,6 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( $element->document_meta['dispoDesPlans'] ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
+					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="view_in_popup"
 					data-title="Disponibilité des plans"
@@ -69,6 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 			<span class="hidden text-content-notes-importantes"><?php echo nl2br( $element->document_meta['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
 			<span data-parent="main-content"
 						data-target="popup"
+						data-cb-namespace="digirisk"
 						data-cb-object="DUER"
 						data-cb-func="view_in_popup"
 						data-title="Note importante"

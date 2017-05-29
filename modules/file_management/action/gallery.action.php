@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.5.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package gallery
  * @subpackage action
@@ -37,7 +37,7 @@ class Gallery_Action {
 	 * @return void
 	 *
 	 * @since 6.2.5.0
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_load_gallery() {
 		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
@@ -58,14 +58,16 @@ class Gallery_Action {
 		ob_start();
 		Gallery_Class::g()->display( $data );
 
-		wp_send_json_success( array( 'view' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'view' => ob_get_clean(),
+		) );
 	}
 
 	/**
 	 * Vérifie les données et appelle associate_file de la class file_management_class
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_set_thumbnail() {
 		if ( 0 === (int) $_POST['element_id'] )
@@ -86,7 +88,13 @@ class Gallery_Action {
 		echo get_the_post_thumbnail( $element_id, 'thumbnail wp-digi-element-thumbnail' );
 		$template = ob_get_clean();
 
-		wp_send_json_success( array( 'template' => $template, 'elementId' => $element_id, 'module' => 'gallery', 'callback_success' => 'successfulSetThumbnail' ) );
+		wp_send_json_success( array(
+			'template' => $template,
+			'elementId' => $element_id,
+			'namespace' => 'digirisk',
+			'module' => 'gallery',
+			'callback_success' => 'successfulSetThumbnail',
+		) );
 	}
 
 	/**
@@ -95,7 +103,7 @@ class Gallery_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.5.0
+	 * @version 6.2.9.0
 	 */
 	public function callback_dessociate_file() {
 		check_ajax_referer( 'dessociate_file' );
@@ -122,7 +130,14 @@ class Gallery_Action {
 
 		ob_start();
 		View_Util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
-		wp_send_json_success( array( 'view' => ob_get_clean(), 'closePopup' => $close_popup, 'elementId' => $element_id, 'module' => 'gallery', 'callback_success' => 'dessociatedFileSuccess' ) );
+		wp_send_json_success( array(
+			'view' => ob_get_clean(),
+			'closePopup' => $close_popup,
+			'elementId' => $element_id,
+			'namespace' => 'digirisk',
+			'module' => 'gallery',
+			'callback_success' => 'dessociatedFileSuccess',
+		) );
 	}
 }
 

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.4.0
+ * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
  * @package group
  * @subpackage action
@@ -38,7 +38,7 @@ class Group_Action {
 	 * Créer un groupement
 	 *
 	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @version 6.2.9.0
 	 */
 	public function ajax_create_group() {
 		check_ajax_referer( 'create_group' );
@@ -56,7 +56,13 @@ class Group_Action {
 
 		ob_start();
 		Digirisk_Class::g()->display();
-		wp_send_json_success( array( 'module' => 'group', 'callback_success' => 'createdGroupSuccess', 'groupment_id' => $group->id, 'template' => ob_get_clean() ) );
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'group',
+			'callback_success' => 'createdGroupSuccess',
+			'groupment_id' => $group->id,
+			'template' => ob_get_clean(),
+		) );
 	}
 }
 
