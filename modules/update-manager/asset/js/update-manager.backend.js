@@ -32,11 +32,17 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 
 	if ( action ) {
 
-		jQuery( '.log' ).append( '<li>' + description + '</li>' );
+		if ( args && args.moreDescription ) {
+			description += args.moreDescription;
+		}
+
+		jQuery( '.log' ).append( '<li>' + description + window.digi_loader + '</li>' );
 
 		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( '.log img' ).remove();
+
 			if ( response.data.done ) {
-				jQuery( '.log' ).append( '<li>Done</li>' );
+				jQuery( '.log' ).append( '<li>Terminé</li>' );
 
 				jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).remove();
 				jQuery( 'input[name="version[' + versionToUpdate + '][description][]"]:first' ).remove();
@@ -45,11 +51,12 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 					jQuery( 'input[name="version_available[]"]:first' ).remove();
 				}
 				if ( 0 == jQuery( 'input[name="version_available[]"]:first' ).length ) {
+					jQuery( '.log' ).append( '<li>Redirection vers l\'application en cours...</li>' );
 					jQuery.post( ajaxurl, { 'action': 'digi_redirect_to_dashboard' }, function( response ) {
 						window.location = response;
 					});
 				} else {
-					window.eoxiaJS.digirisk.updateManager.requestUpdate( undefined );
+					window.eoxiaJS.digirisk.updateManager.requestUpdate( response.data.args );
 				}
 			} else {
 				window.eoxiaJS.digirisk.updateManager.requestUpdate( response.data.args );

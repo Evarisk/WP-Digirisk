@@ -33,15 +33,15 @@ class Update_6291 {
 		$done = false;
 
 		$saved_slug = array();
-
 		$dangers_slug = JSON_Util::g()->open_and_decode( PLUGIN_DIGIRISK_PATH . Config_Util::$init['update-manager']->path . 'asset/json/danger-6291.json' );
+		$number_risk = 0;
 
 		if ( ! empty( $dangers_slug ) ) {
 			foreach ( $dangers_slug as $danger_slug ) {
 				$term = get_term_by( 'slug', $danger_slug, Danger_Class::g()->get_taxonomy() );
 
 				if ( ! empty( $term ) ) {
-					$saved_slug['danger'][ $term->slug ][]['risks_id'] = get_posts( array(
+					$risks_id = get_posts( array(
 						'fields' => 'ids',
 						'posts_per_page' => -1,
 						'post_type' => Risk_Class::g()->get_post_type(),
@@ -54,6 +54,9 @@ class Update_6291 {
 						),
 					) );
 
+					$saved_slug['danger'][ $term->slug ][]['risks_id']  = $risks_id;
+					$number_risk += count( $risks_id );
+
 					wp_delete_term( $term->term_id, Danger_Class::g()->get_taxonomy() );
 				}
 			}
@@ -65,6 +68,10 @@ class Update_6291 {
 
 		wp_send_json_success( array(
 			'done' => true,
+			'args' => array(
+				'numberRisk' => $number_risk,
+				'moreDescription' => ' (0/' . $number_risk . ')',
+			),
 		) );
 	}
 
@@ -74,6 +81,8 @@ class Update_6291 {
 		$liaisons = JSON_Util::g()->open_and_decode( PLUGIN_DIGIRISK_PATH . Config_Util::$init['update-manager']->path . 'asset/json/risk-danger-6291.json', 'ARRAY_A' );
 		$saved_slug = get_option( 'digirisk_update_6291_saved_slug' );
 		$index = 0;
+		$count_risk = ! empty( $_POST['args']['countRisk'] ) ? (int) $_POST['args']['countRisk'] : 0;
+		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
 
 		if ( ! empty( $saved_slug['danger'] ) ) {
 			foreach ( $saved_slug['danger'] as $slug => &$danger ) {
@@ -98,6 +107,7 @@ class Update_6291 {
 										}
 
 										$index++;
+										$count_risk++;
 										if ( $index >= $this->limit_update_risk ) {
 											break;
 										}
@@ -123,6 +133,11 @@ class Update_6291 {
 
 		wp_send_json_success( array(
 			'done' => $done,
+			'args' => array(
+				'numberRisk' => $number_risk,
+				'countRisk' => $count_risk,
+				'moreDescription' => $done ? '' : ' (' . $count_risk . '/' . $number_risk . ')',
+			),
 		) );
 	}
 
