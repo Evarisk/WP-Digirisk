@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * @return void
  */
-class Setting_Class extends Singleton_Util {
+class Setting_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -43,12 +43,12 @@ class Setting_Class extends Singleton_Util {
 	 * @version 6.2.9.0
 	 */
 	public function init_option() {
-		$file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['setting']->path . 'asset/json/default.json' );
+		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->setting->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content, true );
-		$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 
 		if ( empty( $list_accronym ) ) {
-			update_option( config_util::$init['digirisk']->accronym_option, json_encode( $data ) );
+			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, json_encode( $data ) );
 		}
 	}
 
@@ -59,10 +59,10 @@ class Setting_Class extends Singleton_Util {
 	 * @version 6.2.9.0
 	 */
 	public function init_preset_danger() {
-		$digirisk_core = get_option( Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			$preset_danger_installed = get_option( Config_Util::$init['setting']->key_preset_danger, false );
+			$preset_danger_installed = get_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
 
 			if ( ! $preset_danger_installed ) {
 				$danger_category_list = Category_Danger_Class::g()->get();
@@ -90,7 +90,7 @@ class Setting_Class extends Singleton_Util {
 					}
 				}
 
-				update_option( Config_Util::$init['setting']->key_preset_danger, true );
+				update_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
 			}
 		}
 	}

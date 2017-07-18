@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_comment_class extends comment_class {
+class recommendation_comment_class extends \eoxia\comment_class {
 
 	protected $model_name   = '\digi\recommendation_comment_model';
 	protected $meta_key     = '_wpdigi_recommendation_comment';

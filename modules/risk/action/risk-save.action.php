@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage action
@@ -15,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Les actiosn relatives à la sauvegarde des risques
+ * Les actions relatives à la sauvegarde des risques
  */
 class Risk_Save_Action {
 
@@ -36,14 +36,15 @@ class Risk_Save_Action {
 	 * @param Risk_Model $risk Les données du risque.
 	 *
 	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @version 6.2.10.0
 	 */
 	public function callback_save_risk( $risk ) {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
 		if ( isset( $risk['id'] ) ) {
-			$danger = Danger_Class::g()->get( array( 'include' => $risk['danger_id'] ) );
-			$danger = $danger[0];
+			$danger = Danger_Class::g()->get( array(
+				'include' => $risk['danger_id'],
+			), true );
 
 			$image_id = 0;
 
@@ -77,7 +78,13 @@ class Risk_Save_Action {
 			if ( ! empty( $image_id ) ) {
 				File_Management_Class::g()->associate_file( $image_id, $risk_obj->id, 'risk_class', 'digi' );
 			}
-		}
+		} // End if().
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $parent_id,
+			'id' => $risk_obj->id,
+			'content' => __( 'Mise à jour du risque', 'digirisk' ) . ' ' . $risk_obj->unique_identifier,
+		) );
 
 		do_action( 'save_risk_evaluation_comment', $risk_obj, $risk );
 	}

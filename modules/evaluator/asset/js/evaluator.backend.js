@@ -42,6 +42,7 @@ window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
+	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -57,6 +58,7 @@ window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = funct
  */
 window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
+	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -85,5 +87,6 @@ window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 
 	jQuery.post( window.ajaxurl, data, function( view ) {
 		jQuery( '.main-content .grid-layout' ).replaceWith( view );
+		window.eoxiaJS.digirisk.search.renderChanged();
 	} );
 };

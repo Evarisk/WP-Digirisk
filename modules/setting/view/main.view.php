@@ -13,13 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<div class="digirisk-wrap">
 			<div id="digi-accronym" class="tab-content">
-				<?php view_util::exec( 'setting', 'accronym/form', array(
+				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/form', array(
 					'list_accronym' => $list_accronym,
 				) ); ?>
 			</div>
 
 			<div id="digi-danger-preset" class="tab-content hidden">
-					<?php View_Util::exec( 'setting', 'preset/main', array(
+					<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/main', array(
 						'dangers_preset' => $dangers_preset,
 					) ); ?>
 			</div>

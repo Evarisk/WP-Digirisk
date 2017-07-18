@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class TransferData_components_class extends singleton_util {
+class TransferData_components_class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Instanciation des outils pour les transferts spécifiques aux groupements et unités de travail / Instanciate groupements' and work unit specific transfer utilities
@@ -606,7 +606,7 @@ class TransferData_components_class extends singleton_util {
 			$main_config_components_are_transfered = false;
 		}
 
-		view_util::exec( 'transfer_data', 'transfert-components', array(
+		\eoxia\View_Util::exec( 'digirisk', 'transfer_data', 'transfert-components', array(
 			'main_config_components_are_transfered'		=> $main_config_components_are_transfered,
 			'eva_danger_to_transfer'									=> $eva_danger_to_transfer,
 			'eva_danger_transfered'										=> $eva_danger_transfered,

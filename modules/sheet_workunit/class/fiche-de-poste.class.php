@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.4.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package sheet-workunit
  * @subpackage class
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Classe gérant les fiches de poste
  */
-class Fiche_De_Poste_Class extends Post_Class {
+class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nom du modèle
 	 *
@@ -114,7 +114,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	public function display( $element_id ) {
 		$element = $this->get( array( 'schema' => true ), array() );
 		$element = $element[0];
-		view_util::exec( 'sheet_workunit', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		view_util::exec( 'sheet_workunit', 'list', array( 'list_document' => $list_document, 'element_id' => $element_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'list', array( 'list_document' => $list_document, 'element_id' => $element_id ) );
 	}
 
 	/**
@@ -288,7 +288,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 								'idUtilisateur'			=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
 								'nomUtilisateur'		=> $evaluator_affectation_info['user_info']->lastname,
 								'prenomUtilisateur'	=> $evaluator_affectation_info['user_info']->firstname,
-								'dateEntretien'			=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'dateEntretien'			=> mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
 								'dureeEntretien'		=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
@@ -313,7 +313,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 	 * @return array Les risques dans la société
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
@@ -332,7 +332,7 @@ class Fiche_De_Poste_Class extends Post_Class {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
-						$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
+						$comment_list .= mysql2date( 'd/m/y', $comment->date ) . ' : ' . $comment->content . "
 			";
 					endforeach;
 				endif;

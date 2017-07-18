@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class DUER_Class extends Post_Class {
+class DUER_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nom du modèle
 	 *
@@ -134,7 +134,7 @@ class DUER_Class extends Post_Class {
 			$element = $element[0];
 		}
 
-		View_Util::exec( 'duer', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'main', array(
 			'element' => $element,
 			'element_id' => $element_id,
 		) );
@@ -155,7 +155,7 @@ class DUER_Class extends Post_Class {
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
 
-		View_Util::exec( 'duer', 'list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -179,7 +179,7 @@ class DUER_Class extends Post_Class {
 			)
 		);
 
-		view_util::exec( 'duer', 'tree/tree', array( 'societies' => $groupments ) );
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $groupments ) );
 	}
 
 	public function display_workunit_tree( $parent_id = 0 ) {
@@ -192,7 +192,7 @@ class DUER_Class extends Post_Class {
 			)
 		);
 
-		view_util::exec( 'duer', 'tree/tree', array( 'societies' => $workunits ) );
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $workunits ) );
 	}
 }
 

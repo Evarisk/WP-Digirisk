@@ -114,8 +114,8 @@ window.eoxiaJS.digirisk.export.request_import = function( data ) {
 			var data = new FormData();
 
 			if ( response.success ) {
-				jQuery( 'progress' ).attr( 'max', response.data.count_element );
-				jQuery( 'progress' ).val( ( response.data.index_element / response.data.count_element ) * response.data.count_element );
+				jQuery( '#digi-import-form progress' ).attr( 'max', response.data.count_element );
+				jQuery( '#digi-import-form progress' ).val( ( response.data.index_element / response.data.count_element ) * response.data.count_element );
 
 				if ( ! response.data.end ) {
 					data.append( 'action', 'digi_import_data' );
@@ -130,8 +130,8 @@ window.eoxiaJS.digirisk.export.request_import = function( data ) {
 						jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 					}
 
-					jQuery( 'progress' ).attr( 'max', 100 );
-					jQuery( 'progress' ).val( 100 );
+					jQuery( '#digi-import-form progress' ).attr( 'max', 100 );
+					jQuery( '#digi-import-form progress' ).val( 100 );
 				}
 			} else {
 				alert( 'Problème lors de l\'importation du modèle' );

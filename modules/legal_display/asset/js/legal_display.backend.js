@@ -24,3 +24,19 @@ window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function() {
 	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
 	window.scrollTo( 0, 0 );
 };
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "generate_diffusion_information".
+ * Actualises la vue en cliquant sur l'onglet "Informations".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 1.0
+ * @version 6.2.4.0
+ */
+window.eoxiaJS.digirisk.legalDisplay.generatedDiffusionInformationSuccess = function() {
+	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
+	window.scrollTo( 0, 0 );
+};

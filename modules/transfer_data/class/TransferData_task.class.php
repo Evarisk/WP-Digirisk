@@ -3,7 +3,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_task_class extends singleton_util {
+class TransferData_task_class extends \eoxia\Singleton_Util {
 
 	protected function construct() { }
 

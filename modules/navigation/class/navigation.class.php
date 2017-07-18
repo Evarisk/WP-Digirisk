@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Appelle la vue permettant d'afficher la navigation
  */
-class Navigation_Class extends Singleton_Util {
+class Navigation_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -36,7 +36,7 @@ class Navigation_Class extends Singleton_Util {
 	 * @version 6.2.5.0
 	 */
 	public function display( $groupment_id ) {
-		View_Util::exec( 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Navigation_Class extends Singleton_Util {
 		$groupment = Group_Class::g()->get( array( 'post__in' => array( $groupment_id ) ) );
 		$groupment = $groupment[0];
 
-		View_Util::exec( 'navigation', 'toggle/button', array( 'groupment' => $groupment ) );
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/button', array( 'groupment' => $groupment ) );
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Navigation_Class extends Singleton_Util {
 			}
 		}
 
-		view_util::exec( 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Navigation_Class extends Singleton_Util {
 			$workunit_selected_id = (int) $_POST['workunit_id'];
 		}
 
-		View_Util::exec( 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
 	}
 }
 

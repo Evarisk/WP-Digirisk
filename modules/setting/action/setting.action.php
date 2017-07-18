@@ -49,7 +49,7 @@ class Setting_Action {
 	 * @version 6.2.9.0
 	 */
 	public function add_option_page() {
-		$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
 
 		global $wpdb;
@@ -65,7 +65,7 @@ class Setting_Action {
 			'order' => 'ASC',
 		) );
 
-		View_Util::exec( 'setting', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym' => $list_accronym,
 			'dangers_preset' => $dangers_preset,
 		) );
@@ -89,7 +89,7 @@ class Setting_Action {
 			}
 		}
 
-		update_option( Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
+		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
 		wp_safe_redirect( admin_url( 'options-general.php?page=digirisk-setting' ) );
 	}
 }

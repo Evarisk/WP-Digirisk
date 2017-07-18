@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class DUER_Model extends document_model {
+class DUER_Model extends Document_Model {
 
 	/**
 	 * Construit le modèle / Fill the model

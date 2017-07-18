@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * La classe gérant la galerie.
  */
-class Gallery_Class extends Singleton_Util {
+class Gallery_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -58,7 +58,7 @@ class Gallery_Class extends Singleton_Util {
 		$list_id = ! empty( $element->associated_document_id['image'] ) ? $element->associated_document_id['image'] : array();
 		$thumbnail_id = $element->thumbnail_id;
 
-		View_Util::exec( 'file_management', 'gallery', array( 'param' => $param, 'title' => $title, 'namespace' => $namespace, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'file_management', 'gallery', array( 'param' => $param, 'title' => $title, 'namespace' => $namespace, 'element_id' => $element_id, 'element' => $element, 'action' => $action, 'list_id' => $list_id, 'thumbnail_id' => $thumbnail_id ) );
 	}
 }
 

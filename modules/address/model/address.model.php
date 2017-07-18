@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
  * @version 1.1.0.0
  */
-class Address_model extends Comment_model {
+class Address_model extends \eoxia\Comment_model {
 	/**
 	 * La définition d'une addresse
 	 *

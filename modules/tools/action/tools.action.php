@@ -1,8 +1,8 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class tools_action {
+class Tools_Action {
 
 	function __construct() {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -17,7 +17,7 @@ class tools_action {
   }
 
   public function add_management_page() {
-		view_util::exec( 'tools', 'main' );
+		\eoxia\View_Util::exec( 'digirisk', 'tools', 'main' );
   }
 
   public function callback_reset_method_evaluation() {
@@ -70,44 +70,17 @@ class tools_action {
 	 * Passes les documents de type "Affichage_Legal" en post type "affichage_legal" et met à jour l'unique identifiant.
 	 *
 	 * @return void
+	 *
+	 * @since 6.1.x.x
+	 * @version 6.2.10.0
 	 */
 	public function callback_transfert_doc() {
 		check_ajax_referer( 'callback_transfert_doc' );
 
-		$types_to_transfert = array(
-			'document_unique' => '\digi\DUER_Class',
-			'fiche_de_groupement' => '\digi\Fiche_De_Groupement_Class',
-			'fiche_de_poste'			=> '\digi\Fiche_De_Poste_Class',
-			'affichage_legal_a4'	=> '\digi\Affichage_Legal_A4_Class',
-			'affichage_legal_a3'	=> '\digi\Affichage_Legal_A3_Class',
-		);
-
-		if ( ! empty( $types_to_transfert ) ) {
-			foreach ( $types_to_transfert as $type => $type_class ) {
-				$args = array(
-					'post_status' => 'inherit',
-					'tax_query' => array(
-						array(
-							'taxonomy' 	=> document_class::g()->attached_taxonomy_type,
-							'field'			=> 'slug',
-							'terms'			=> $type,
-						),
-					),
-				);
-
-				$list_document = document_class::g()->get( $args );
-
-				if ( ! empty( $list_document ) ) {
-					foreach ( $list_document as $element ) {
-						$element->unique_identifier = str_replace( document_class::g()->element_prefix, $type_class::g()->element_prefix, $element->unique_identifier );
-						$type_class::g()->update( $element );
-					}
-				}
-			}
-		}
+		Tools_Class::g()->transfert_doc();
 
 		wp_send_json_success();
 	}
 }
 
-new tools_action();
+new Tools_Action();

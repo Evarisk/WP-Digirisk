@@ -47,7 +47,7 @@ class Tab_Action {
 		$title .= ' ' . $element->unique_identifier . ' - ' . $element->title;
 
 		ob_start();
-		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
+		\eoxia\View_Util::exec( 'digirisk', 'tab', 'content', array( 'title' => $title, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 }

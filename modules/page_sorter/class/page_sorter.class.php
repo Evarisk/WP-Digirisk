@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Ajoutes la page pour trier les sociétées
  */
-class Page_Sorter_Class extends Singleton_Util {
+class Page_Sorter_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -44,7 +44,7 @@ class Page_Sorter_Class extends Singleton_Util {
 
 		$display_notice = get_transient( 'display_notice' );
 
-		view_util::exec( 'page_sorter', 'main', array( 'display_notice' => $display_notice, 'groupments' => $groupments ) );
+		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'main', array( 'display_notice' => $display_notice, 'groupments' => $groupments ) );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class Page_Sorter_Class extends Singleton_Util {
 			}
 		}
 
-		view_util::exec( 'page_sorter', 'list', array( 'i' => $i, 'groupments' => $groupments ) );
+		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array( 'i' => $i, 'groupments' => $groupments ) );
 	}
 }
 

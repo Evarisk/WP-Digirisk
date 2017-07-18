@@ -11,7 +11,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class File_Management_Class extends singleton_util {
+class File_Management_Class extends \eoxia\Singleton_Util {
 	/**
 	* Le constructeur
 	*/
@@ -84,7 +84,8 @@ class File_Management_Class extends singleton_util {
 	}
 
 	public function upload_model( $type ) {
-		// Upload le fichier vers le dossier ./wp-content/uploads/digirisk/document_template/
+
+		// Upload le fichier vers le dossier ./wp-content/uploads/digirisk/document_template/.
 		$upload_dir = wp_upload_dir();
 		$document_template_path = $upload_dir['basedir'] . '/digirisk/document_template/';
 		wp_mkdir_p( $document_template_path );
@@ -95,11 +96,11 @@ class File_Management_Class extends singleton_util {
 
 		$copy_status = copy( $attachment_current_path, $attachment_copy_path );
 
-		if (!$copy_status) {
+		if ( ! $copy_status ) {
 			return false;
 		}
 
-		// Génère les données du média
+		// Génère les données du média.
 		$document_args = array(
 			'post_content'	=> '',
 			'post_status'	=> 'inherit',
@@ -108,13 +109,13 @@ class File_Management_Class extends singleton_util {
 			'post_title'	=> $attachment->title,
 		);
 
-		$response[ 'id' ] = wp_insert_attachment( $document_args, $attachment_copy_path, 0 );
+		$response['id'] = wp_insert_attachment( $document_args, $attachment_copy_path, 0 );
 
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $attachment_copy_path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
-		wp_set_object_terms( $response[ 'id' ], array( $type, 'default_model', 'model' ), document_class::g()->attached_taxonomy_type );
+		wp_set_object_terms( $response['id'], array( $type, 'default_model', 'model' ), Document_Class::g()->attached_taxonomy_type );
 		$response['model_id'] = $attachment_copy_path;
-		attachment_class::g()->update( $response );
+		Document_Class::g()->update( $response );
 
 		return true;
 	}

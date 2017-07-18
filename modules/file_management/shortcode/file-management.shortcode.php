@@ -66,7 +66,7 @@ class File_Management_Shortcode {
 			$element = null;
 		}
 
-		View_Util::exec( 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'title' => $title, 'type' => $type, 'namespace' => $namespace, 'action' => $action, 'element' => $element ) );
+		\eoxia\View_Util::exec( 'digirisk', 'file_management', 'button', array( 'param' => $param, 'id' => $id, 'title' => $title, 'type' => $type, 'namespace' => $namespace, 'action' => $action, 'element' => $element ) );
 	}
 
 	/**

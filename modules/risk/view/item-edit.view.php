@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php if ( $risk->preset ) : ?>
 			-
 		<?php else : ?>
-			<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
+			<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 		<?php endif; ?>
 	</td>
 	<td data-title="Risque" data-title="Risque" class="wm130 w150">

@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.9.1",
+	"version": "6.2.10.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
@@ -25,13 +25,16 @@
 		"digirisk-handle-sorter",
 		"digirisk-setting"
 	],
-	"modules": [
+	"externals": [
 		"core/external/wpeo_log/wpeo_log.config.json",
 		"core/external/wpeo_model/wpeo_model.config.json",
-		"core/external/wpeo_export/wpeo_export.config.json",
+		"core/external/wpeo_export/wpeo_export.config.json"
+	],
+	"modules": [
 		"core/core.config.json",
 
-		"modules/update-manager/update-manager.config.json",
+		"modules/update_manager/update_manager.config.json",
+		"modules/historic/historic.config.json",
 
 		"modules/address/address.config.json",
 		"modules/accident/accident.config.json",
@@ -48,7 +51,6 @@
 
 		"modules/duer/duer.config.json",
 
-		"modules/epi/epi.config.json",
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
 		"modules/export_import/export_import.config.json",
@@ -72,14 +74,15 @@
 
 		"modules/tab/tab.config.json",
 		"modules/third/third.config.json",
-		"modules/transfer_data/transfer_data.config.json",
 		"modules/tools/tools.config.json",
 
 		"modules/user/user.config.json",
 		"modules/user_dashboard/user_dashboard.config.json",
 
 		"modules/workunit/workunit.config.json",
-		"modules/navigation/navigation.config.json"
+		"modules/navigation/navigation.config.json",
+
+		"modules/transfer_data/transfer_data.config.json"
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",

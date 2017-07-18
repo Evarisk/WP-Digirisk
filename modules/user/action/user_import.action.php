@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_import_action extends singleton_util {
+class user_import_action extends \eoxia\Singleton_Util {
 	public static $response;
 	/**
 	* Le constructeur appelle les actions suivantes:
@@ -29,7 +29,7 @@ class user_import_action extends singleton_util {
 			$path_to_csv = USERS_PATH . '/asset/tmp/' . $_FILES['file']['name'];
 		}
 
-		$data_csv = \csv_util::g()->read_and_set_index( $path_to_csv, array( 'lastname', 'firstname', 'lastname_lower', 'firstname_lower', 'login', 'password', 'email' ) );
+		$data_csv = \eoxia\CSV_Util::g()->read_and_set_index( $path_to_csv, array( 'lastname', 'firstname', 'lastname_lower', 'firstname_lower', 'login', 'password', 'email' ) );
 
 		user_import_action::$response['count_element'] = empty( $_POST['count_element'] ) ? count( $data_csv ) : $_POST['count_element'];
 		user_import_action::$response['index_element'] = (int) $_POST['index_element'];

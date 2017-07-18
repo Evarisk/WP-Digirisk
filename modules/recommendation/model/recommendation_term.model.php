@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_term_model extends term_model {
+class recommendation_term_model extends \eoxia\term_model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(

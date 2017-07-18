@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.3.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package establishment
  * @subpackage filter
@@ -24,7 +24,7 @@ class Society_Shortcode {
 	 */
 	public function __construct() {
 		add_shortcode( 'digi_dashboard', array( $this, 'callback_digi_dashboard' ) );
-		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
+		add_shortcode( 'digi-informations', array( $this, 'callback_informations' ) );
 	}
 
 	/**
@@ -38,8 +38,8 @@ class Society_Shortcode {
 		$display_trash = true;
 
 		if ( $element ) {
-			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : Config_Util::$init['digirisk']->default_tab;
-			$title = Config_Util::$init['digirisk']->default_tab_title . ' ' . $element->unique_identifier . ' - ' . $element->title;
+			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : \eoxia\Config_Util::$init['digirisk']->default_tab;
+			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ' . $element->unique_identifier . ' - ' . $element->title;
 			if ( 'digi-group' === $element->type ) {
 				$group_list = group_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft' ) ) );
 				$element_id = ! empty( $group_list ) ? $group_list[0]->id : 0;
@@ -48,7 +48,12 @@ class Society_Shortcode {
 				}
 			}
 
-			view_util::exec( 'society', 'content', array( 'title' => $title, 'display_trash' => $display_trash, 'element' => $element, 'tab_to_display' => $tab_to_display ) );
+			\eoxia\View_Util::exec( 'digirisk', 'society', 'content', array(
+				'title' => $title,
+				'display_trash' => $display_trash,
+				'element' => $element,
+				'tab_to_display' => $tab_to_display,
+			) );
 		}
 	}
 
@@ -58,12 +63,15 @@ class Society_Shortcode {
 	 * @param array $param Les paramètres du shortcode.
 	 *
 	 * @return void
+	 *
+	 * @since 1.0.0.0
+	 * @version 6.2.10.0
 	 */
-	public function callback_configuration( $param ) {
+	public function callback_informations( $param ) {
 		$element_id = $param['post_id'];
 		$element = Society_Class::g()->show_by_type( $element_id );
 
-		Society_Configuration_Class::g()->display( $element );
+		Society_Informations_Class::g()->display( $element );
 	}
 }
 

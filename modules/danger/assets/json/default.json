@@ -112,7 +112,7 @@
 },
 {
 	"name": "Circulation, déplacements",
-	"name_thumbnail": "circulation_PictoCategorie_v2.png",
+	"name_thumbnail": "circulation_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {
@@ -125,7 +125,7 @@
 },
 {
 	"name": "Circulations internes",
-	"name_thumbnail": "circulation_v2.png",
+	"name_thumbnail": "circulation_PictoCategorie_v2.png",
 	"option": {
 		"status": "valid",
 		"danger": [ {

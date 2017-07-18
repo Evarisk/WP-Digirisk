@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<tbody>
 		<?php
 		foreach ( $dangers_preset as $danger ) :
-			View_Util::exec( 'setting', 'preset/item', array(
+			\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/item', array(
 				'danger' => $danger,
 			) );
 		endforeach;

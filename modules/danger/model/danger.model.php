@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class danger_model extends term_model {
+class danger_model extends \eoxia\Term_Model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(

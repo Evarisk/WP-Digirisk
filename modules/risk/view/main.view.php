@@ -14,4 +14,4 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
-View_Util::exec( 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
+\eoxia\View_Util::exec( 'digirisk', 'risk', 'list', array( 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );

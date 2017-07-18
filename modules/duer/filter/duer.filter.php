@@ -41,7 +41,7 @@ class DUER_Filter {
 	 */
 	public function callback_society_header_end( $element ) {
 		if ( 'digi-group' === $element->type ) {
-			View_Util::exec( 'duer', 'button-generate-duer', array( 'element' => $element ) );
+			\eoxia\View_Util::exec( 'digirisk', 'duer', 'button-generate-duer', array( 'element' => $element ) );
 		}
 	}
 }

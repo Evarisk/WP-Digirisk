@@ -25,9 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 <tbody>
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
-			<?php View_Util::exec( 'sheet_workunit', 'list-item', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+			<?php \eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'list-item', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
 		<?php endforeach; ?>
 	<?php endif; ?>
 
-	<?php View_Util::exec( 'sheet_workunit', 'item-edit', array( 'element_id' => $element_id ) ); ?>
+	<?php \eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'item-edit', array( 'element_id' => $element_id ) ); ?>
 </tbody>

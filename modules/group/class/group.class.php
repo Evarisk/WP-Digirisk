@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les groupements
  */
-class Group_Class extends Post_Class {
+class Group_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -52,14 +52,14 @@ class Group_Class extends Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\convert_date' );
+	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\digi\convert_date' );
+	protected $before_put_function = array( '\eoxia\convert_date' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée

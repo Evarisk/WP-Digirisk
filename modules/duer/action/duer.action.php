@@ -40,7 +40,7 @@ class DUER_Action {
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
 
-		delete_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer );
+		delete_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer );
 
 		$society_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		if ( empty( $society_id ) ) {
@@ -51,7 +51,7 @@ class DUER_Action {
 		$society = $society[0];
 
 		ob_start();
-		View_Util::exec( 'duer', 'tree/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/main', array(
 			'society' => $society,
 		) );
 		wp_send_json_success( array(
@@ -74,7 +74,7 @@ class DUER_Action {
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
 
-		$meta_generate_duer = get_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, true );
+		$meta_generate_duer = get_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer, true );
 		$end = false;
 
 		if ( empty( $meta_generate_duer ) ) {
@@ -104,7 +104,7 @@ class DUER_Action {
 			$duer->zip_path = $generate_response['zip_path'];
 			DUER_Class::g()->update( $duer );
 
-			delete_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer );
+			delete_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer );
 		} else {
 			$post_type = get_post_type( $_POST['society_id'] );
 
@@ -127,7 +127,7 @@ class DUER_Action {
 		} else {
 			if ( ! empty( $generate_response['creation_response'] ) ) {
 				$meta_generate_duer[] = $generate_response['creation_response'];
-				update_user_meta( get_current_user_id(), Config_Util::$init['duer']->meta_key_generate_duer, $meta_generate_duer );
+				update_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer, $meta_generate_duer );
 			}
 		}
 

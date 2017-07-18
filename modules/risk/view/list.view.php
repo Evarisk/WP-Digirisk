@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<tbody>
 		<?php if ( ! empty( $risks ) ) :
 			foreach ( $risks as $risk ) :
-				View_Util::exec( 'risk', 'list-item', array(
+				\eoxia\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
 					'society_id' => $society_id,
 					'risk' => $risk,
 				) );
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	</tbody>
 
 	<tfoot>
-		<?php View_Util::exec( 'risk', 'item-edit', array(
+		<?php \eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
 			'risk' => $risk_schema,
 		) ); ?>

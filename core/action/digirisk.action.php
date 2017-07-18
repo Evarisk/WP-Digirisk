@@ -28,13 +28,13 @@ class Digirisk_Action {
 		// Initialises ses actions que si nous sommes sur une des pages réglés dans le fichier digirisk.config.json dans la clé "insert_scripts_pages".
 		$page = ( ! empty( $_REQUEST['page'] ) ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
 
-		if ( in_array( $page, config_util::$init['digirisk']->insert_scripts_pages_css, true ) ) {
+		if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_css, true ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_css' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts_css' ), 11 );
 			add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts_css' ) );
 		}
 
-		if ( in_array( $page, config_util::$init['digirisk']->insert_scripts_pages_js, true ) ) {
+		if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_js, true ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts_js' ), 11 );
 			add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts_js' ) );
@@ -72,9 +72,9 @@ class Digirisk_Action {
 	 * @version 6.2.7.0
 	 */
 	public function callback_admin_enqueue_scripts_js() {
-		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), Config_Util::$init['digirisk']->version, false );
-		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), Config_Util::$init['digirisk']->version, false );
-		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), Config_Util::$init['digirisk']->version );
+		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
 	/**
@@ -109,11 +109,11 @@ class Digirisk_Action {
 	 * @version 6.2.7.0
 	 */
 	public function callback_admin_enqueue_scripts_css() {
-		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), Config_Util::$init['digirisk']->version );
+		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
-		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.datetimepicker.css', array(), Config_Util::$init['digirisk']->version );
-		wp_enqueue_style( 'digi-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/css/owl.carousel.min.css', array(), Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.datetimepicker.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/css/owl.carousel.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
 	/**
@@ -145,7 +145,7 @@ class Digirisk_Action {
 	 */
 	public function callback_admin_menu() {
 		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
-		$digirisk_core = get_option( Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
 			add_menu_page( __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );

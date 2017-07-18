@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Shortcode principale de l'application.
  */
-class Digirisk_Shortcode extends Singleton_Util {
+class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur

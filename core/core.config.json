@@ -5,7 +5,6 @@
 	"description": "Le module boot de Digirisk",
 	"path": "core/",
 	"dependencies": {
-		"util": {},
 		"action": {},
 		"class": {},
 		"helper": {},

@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.6.0
+ * @version 6.2.10.0
  */
 
 namespace digi;
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Gères la génération de la fiche de groupement
  */
-class Fiche_De_Groupement_Class extends Post_Class {
+class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -117,7 +117,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 
 		$element = $element[0];
 
-		View_Util::exec( 'sheet_groupment', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'main', array(
 			'element' => $element,
 			'element_id' => $element_id,
 		) );
@@ -134,7 +134,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		view_util::exec( 'sheet_groupment', 'list', array( 'list_document' => $list_document ) );
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'list', array( 'list_document' => $list_document ) );
 	}
 
 	/**
@@ -293,7 +293,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 								'idUtilisateur'								=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
 								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
 								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
-								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y H:i', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
 								'dureeEntretien'							=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
@@ -318,7 +318,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 	 * @return array Les risques dans la société
 	 *
 	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
@@ -336,7 +336,7 @@ class Fiche_De_Groupement_Class extends Post_Class {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
-						$comment_list .= mysql2date( 'd/m/y H:i', $comment->date ) . ' : ' . $comment->content . "
+						$comment_list .= mysql2date( 'd/m/y', $comment->date ) . ' : ' . $comment->content . "
 			";
 					endforeach;
 				endif;

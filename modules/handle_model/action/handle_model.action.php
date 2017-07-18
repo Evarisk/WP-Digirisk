@@ -3,7 +3,7 @@
  * Gestion des actions pour gérer les modèles personnalisés
  *
  * @since 6.2.3.0
- * @version 6.2.9.0
+ * @version 6.2.10.0
  *
  * @package Evarisk\Plugin
  */
@@ -29,7 +29,7 @@ class Handle_Model_Action {
 	 * Supprimes la catégorie "default_model" au modèle par défault courant selon $_POST['type'] qui correspond au type de modèle.
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 *
 	 * @return void
 	 */
@@ -43,7 +43,9 @@ class Handle_Model_Action {
 		}
 
 		// On récupères tous les posts qui correspond aux catégories "model" et $type.
-		$tax_query = array( 'relation' => 'AND' );
+		$tax_query = array(
+			'relation' => 'AND',
+		);
 		$types = array( 'model', $type );
 
 		if ( ! empty( $types ) ) {
@@ -83,7 +85,7 @@ class Handle_Model_Action {
 	 * $type correspond au type du modèle.
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 *
 	 * @return void
 	 */
@@ -100,12 +102,18 @@ class Handle_Model_Action {
 
 		// Récupères le modèle par défaut actuel.
 		$default_model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
-		$default_model_data = Document_Class::g()->get( array( 'post_status' => 'inherit', 'post__in' => array( $default_model['model_id'] ) ) );
-		$default_model_data = $default_model_data[0];
+		$default_model_data = Document_Class::g()->get( array(
+			'post_status' => 'inherit',
+			'post__in' => array(
+				$default_model['model_id'],
+			),
+		), true );
 		$default_model_data->url = $default_model['model_url'];
 
 		// On récupères tous les posts qui correspond aux catégories "model" et $type.
-		$tax_query = array( 'relation' => 'AND' );
+		$tax_query = array(
+			'relation' => 'AND',
+		);
 		$types = array( 'model', $type );
 
 		if ( ! empty( $types ) ) {
@@ -118,7 +126,10 @@ class Handle_Model_Action {
 			}
 		}
 
-		$models = Document_Class::g()->get( array( 'post_status' => 'inherit', 'tax_query' => $tax_query ) );
+		$models = Document_Class::g()->get( array(
+			'post_status' => 'inherit',
+			'tax_query' => $tax_query,
+		) );
 
 		if ( ! empty( $models ) ) {
 			foreach ( $models as $element ) {
@@ -130,7 +141,7 @@ class Handle_Model_Action {
 		array_unshift( $models, $default_model_data );
 
 		ob_start();
-		View_Util::exec( 'handle_model', 'popup-list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'handle_model', 'popup-list', array(
 			'models' => $models,
 		) );
 		wp_send_json_success( array(

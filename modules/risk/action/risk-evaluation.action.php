@@ -32,6 +32,8 @@ class Risk_Evaluation_Action {
 	 *
 	 * @since 0.1
 	 * @version 6.2.4.0
+	 *
+	 * @todo: nonce
 	*/
 	public function ajax_edit_risk() {
 		$risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
@@ -46,7 +48,7 @@ class Risk_Evaluation_Action {
 		if ( isset( $risk['id'] ) ) {
 			$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
 
-			if ( !empty( $risk['variable'] ) ) {
+			if ( ! empty( $risk['variable'] ) ) {
 				$risk['evaluation']['variable'] = $risk['variable'];
 			}
 
@@ -54,9 +56,8 @@ class Risk_Evaluation_Action {
 
 			if ( $risk['evaluation'] ) {
 				$risk['current_evaluation_id'] = $risk['evaluation']->id;
-			}
-			else {
-				unset( $list_risk[$key] );
+			} else {
+				unset( $list_risk[ $key ] );
 			}
 		}
 

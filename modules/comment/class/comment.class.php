@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Récupères le commentaire pour ensuiter l'afficher.
  * Fait également l'affichage du formulaire pour ajouter un commentaire.
  */
-class Digi_Comment_Class extends Singleton_Util {
+class Digi_Comment_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -45,13 +45,13 @@ class Digi_Comment_Class extends Singleton_Util {
 		if ( 0 !== $id ) {
 			$comments = $model_name::g()->get( array( 'post_id' => $id ) );
 		} else {
-			$comments = Comment_Class::g()->get( array( 'schema' => true ) );
+			$comments = $model_name::g()->get( array( 'schema' => true ) );
 		}
 
-		$comment_new = Comment_Class::g()->get( array( 'schema' => true ) );
+		$comment_new = $model_name::g()->get( array( 'schema' => true ) );
 		$comment_new = $comment_new[0];
 
-		View_Util::exec( 'comment', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'comment', 'main', array(
 			'id' => $id,
 			'comments' => $comments,
 			'comment_new' => $comment_new,

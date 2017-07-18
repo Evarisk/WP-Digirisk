@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<ul class="menu" id="menu-to-edit">
 			<?php
-			view_util::exec( 'page_sorter', 'list', array( 'i' => 0, 'groupments' => $groupments ) );
+			\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array( 'i' => 0, 'groupments' => $groupments ) );
 			?>
 		</ul>
 

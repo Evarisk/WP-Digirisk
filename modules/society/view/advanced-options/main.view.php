@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-<form method="POST" class="form" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
+<div class="form">
 	<input type="hidden" name="action" value="advanced_options_move_to" />
 	<input type="hidden" name="id" value="<?php echo esc_attr( $selected_society->id ); ?>" />
 	<?php wp_nonce_field( 'advanced_options_move_to' ); ?>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 			</select>
 		</li>
 		<li>
-			<button class="button blue submit-form"><?php esc_html_e( 'Déplacer', 'digirisk' ); ?></button>
+			<button data-parent="form" class="button blue action-input"><?php esc_html_e( 'Déplacer', 'digirisk' ); ?></button>
 		</li>
 	</ul>
-</form>
+</div>

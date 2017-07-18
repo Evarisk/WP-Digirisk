@@ -21,7 +21,7 @@ function construct_identifier( $data ) {
 	$model_name = get_class( $data );
 	$controller_name = str_replace( 'model', 'class', $model_name );
 	$controller_name = str_replace( 'Model', 'Class', $controller_name );
-	$next_identifier = common_util::get_last_unique_key( $controller_name );
+	$next_identifier = \eoxia\Common_Util::get_last_unique_key( $controller_name );
 
 	if ( empty( $data->unique_key ) ) {
 		$data->unique_key = (int) ( $next_identifier + 1 );
@@ -41,7 +41,7 @@ function construct_identifier( $data ) {
  * @return object       Les données du modèle avec l'identifiant personnalisé
  */
 function get_identifier( $data ) {
-	$list_accronym = get_option( config_util::$init['digirisk']->accronym_option );
+	$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 	$list_accronym = json_decode( $list_accronym, true );
 	$model_name = get_class( $data );
 	$controller_name = str_replace( 'model', 'class', $model_name );
@@ -49,25 +49,12 @@ function get_identifier( $data ) {
 	$element_prefix = $controller_name::g()->element_prefix;
 
 	if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
-		$data->unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
+		$data->modified_unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
 	}
 
 	return $data;
 }
 
-/**
- * Convertie la date au format français dd/mm/yy en format SQL
- *
- * @param  object $data Les donnnées du modèle.
- * @return object       Les donnnées du modèle avec la date au format SQL
- */
-function convert_date( $data ) {
-	if ( ! empty( $data ) && ! empty( $data->date ) ) {
-		$data->date = date( 'Y-m-d', strtotime( str_replace( '/', '-', $data->date ) ) );
-	}
-
-	return $data;
-}
 
 /**
  * Convertie la date au format SQL vers le format français

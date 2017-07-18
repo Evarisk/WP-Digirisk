@@ -72,7 +72,7 @@ class Risk_Action {
 				$risk->parent_group = Society_Class::g()->show_by_type( $risk->parent_workunit->parent_id );
 			}
 
-			View_Util::exec( 'risk', '/page/item-edit', array(
+			\eoxia\View_Util::exec( 'digirisk', 'risk', '/page/item-edit', array(
 				'risk' => $risk,
 			) );
 			$template = ob_get_clean();
@@ -85,7 +85,7 @@ class Risk_Action {
 				'include' => $risk->id,
 			) );
 			$risk = $risk[0];
-			View_Util::exec( 'setting', '/preset/item', array(
+			\eoxia\View_Util::exec( 'digirisk', 'setting', '/preset/item', array(
 				'danger' => $risk,
 			) );
 			$template = ob_get_clean();
@@ -108,7 +108,7 @@ class Risk_Action {
 	 * Supprimes un risque
 	 *
 	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function ajax_delete_risk() {
 		check_ajax_referer( 'ajax_delete_risk' );
@@ -119,7 +119,9 @@ class Risk_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$risk = Risk_Class::g()->get( array( 'id' => $id ) );
+		$risk = Risk_Class::g()->get( array(
+			'id' => $id,
+		) );
 		$risk = $risk[0];
 
 		if ( empty( $risk ) ) {
@@ -129,6 +131,12 @@ class Risk_Action {
 		$risk->status = 'trash';
 
 		Risk_Class::g()->update( $risk );
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $risk->parent_id,
+			'id' => $risk->id,
+			'content' => __( 'Suppression du risque', 'digirisk' ) . ' ' . $risk->unique_identifier,
+		) );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
@@ -156,7 +164,7 @@ class Risk_Action {
 		$risk = $risk[0];
 
 		ob_start();
-		View_Util::exec( 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'risk',

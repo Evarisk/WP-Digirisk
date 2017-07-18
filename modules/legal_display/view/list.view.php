@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 <tbody>
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
-			<?php View_Util::exec( 'legal_display', 'list-item', array( 'element' => $element ) ); ?>
+			<?php \eoxia\View_Util::exec( 'digirisk', 'legal_display', 'list-item', array( 'element' => $element ) ); ?>
 		<?php endforeach; ?>
 	<?php else : ?>
 		<tr><td class="padding" colspan="2"><?php esc_html_e( 'Le formulaire ci-dessous permet la génération d\'un affichage légal au format A3 et A4', 'digirisk' ); ?></td></tr>

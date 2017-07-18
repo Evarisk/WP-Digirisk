@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class legal_display_model extends post_model {
+class legal_display_model extends \eoxia\post_model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(

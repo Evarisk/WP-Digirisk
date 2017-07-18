@@ -59,5 +59,9 @@ function get_full_risk( $data ) {
 		$data->comment = $risk_evaluation_comments;
 	}
 
+	if ( ! isset( $data->modified_unique_identifier ) ) {
+		$data->modified_unique_identifier = '';
+	}
+
 	return $data;
 }

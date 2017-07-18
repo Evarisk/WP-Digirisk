@@ -129,7 +129,7 @@ class Gallery_Action {
 		$close_popup = ( 0 === $element[0]->thumbnail_id ) ? true : false;
 
 		ob_start();
-		View_Util::exec( 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
+		\eoxia\View_Util::exec( 'digirisk', 'file_management', 'button', array( 'id' => $element_id, 'thumbnail' => true, 'title' => '', 'action' => 'eo_associate_file', 'file_id' => $thumbnail_id, 'type' => $type, 'type_class' => $type, 'element' => $element[0] ) );
 		wp_send_json_success( array(
 			'view' => ob_get_clean(),
 			'closePopup' => $close_popup,

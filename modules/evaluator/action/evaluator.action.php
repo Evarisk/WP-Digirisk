@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.9.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package evaluator
  * @subpackage action
@@ -38,7 +38,7 @@ class Evaluator_Action {
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
 	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
@@ -53,7 +53,8 @@ class Evaluator_Action {
 			$element_id = (int) $_POST['element_id'];
 		}
 
-		$element = society_class::g()->show_by_type( $element_id );
+		$element = Society_Class::g()->show_by_type( $element_id );
+		$evaluators = array();
 
 		if ( empty( $element ) ) {
 			wp_send_json_error();
@@ -68,6 +69,11 @@ class Evaluator_Action {
 
 				$end_date = new \DateTime( $list_value['on'] );
 				$end_date->add( new \DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
+
+				$tmp_evaluator = Evaluator_Class::g()->get( array(
+					'include' => $user_id,
+				) );
+				$evaluators[] = $tmp_evaluator[0];
 
 				$element->user_info['affected_id']['evaluator'][ $user_id ][] = array(
 					'status' => 'valid',
@@ -90,16 +96,39 @@ class Evaluator_Action {
 		// On met à jour si au moins un utilisateur à été affecté.
 		if ( count( $_POST['list_user'] ) > 0 ) {
 			Society_Class::g()->update_by_type( $element );
+
+			$content = __( 'Mise à jour des évaluateurs', 'digirisk' );
+			$content .= '<br />';
+
+			if ( ! empty( $evaluators ) ) {
+				foreach ( $evaluators as $evaluator ) {
+					$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->id . ' ' . $evaluator->lastname . ' ' . $evaluator->firstname;
+					$content .= '<br />';
+				}
+			}
+
+			do_action( 'digi_add_historic', array(
+				'parent_id' => $element->id,
+				'id' => 'Indisponible',
+				'content' => $content,
+			) );
 		}
 
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
+
 		ob_start();
-		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
+			'element' => $element,
+			'element_id' => $element->id,
+			'list_affected_evaluator' => $list_affected_evaluator,
+		) );
+
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'evaluator',
 			'callback_success' => 'callback_edit_evaluator_assign_success',
-			'template' => ob_get_clean()
+			'template' => ob_get_clean(),
 		) );
 	}
 
@@ -107,7 +136,7 @@ class Evaluator_Action {
 	 * Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
 	 *
 	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function callback_detach_evaluator() {
 		check_ajax_referer( 'detach_evaluator' );
@@ -138,11 +167,22 @@ class Evaluator_Action {
 
 		$element->user_info['affected_id']['evaluator'][ $user_id ][ $affectation_data_id ]['status'] = 'deleted';
 		// do_action( 'delete_compiled_evaluation_id', $element_id, $user_id, $affectation_data_id );.
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $element->id,
+			'id' => 'Indisponible',
+			'content' => 'Mise à jour des évaluateurs',
+		) );
+
 		Society_Class::g()->update_by_type( $element );
 
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
+			'element' => $element,
+			'element_id' => $element->id,
+			'list_affected_evaluator' => $list_affected_evaluator,
+		) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'evaluator',
@@ -166,8 +206,8 @@ class Evaluator_Action {
 			wp_send_json_error();
 		}
 
-		$element = society_class::g()->show_by_type( $element_id );
-		evaluator_class::g()->render( $element );
+		$element = Society_Class::g()->show_by_type( $element_id );
+		Evaluator_Class::g()->render( $element );
 		wp_die();
 	}
 
@@ -198,9 +238,14 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		View_Util::exec( 'evaluator', 'list-evaluator-affected',  array( 'element' => $element, 'element_id' => $element->id, 'list_affected_evaluator' => $list_affected_evaluator ) );
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
+			'element' => $element,
+			'element_id' => $element->id,
+			'list_affected_evaluator' => $list_affected_evaluator,
+		) );
+
 		wp_send_json_success( array(
-			'template' => ob_get_clean()
+			'template' => ob_get_clean(),
 		) );
 	}
 
@@ -242,7 +287,13 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		View_Util::exec( 'evaluator', 'list-evaluator-to-assign', array( 'element' => $element, 'element_id' => $element->id, 'current_page' => $current_page, 'number_page' => $number_page, 'evaluators' => $evaluators ) );
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-to-assign', array(
+			'element' => $element,
+			'element_id' => $element->id,
+			'current_page' => $current_page,
+			'number_page' => $number_page,
+			'evaluators' => $evaluators,
+		) );
 		wp_send_json_success( array(
 			'template' => ob_get_clean(),
 		) );

@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 				<div class="block">
 					<div class="container">
-						<?php View_Util::exec( 'export_import', 'export-csv' ); ?>
+						<?php \eoxia\View_Util::exec( 'digirisk', 'export_import', 'export-csv' ); ?>
 					</div>
 				</div>
 			</div>

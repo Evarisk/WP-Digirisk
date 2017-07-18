@@ -5,6 +5,6 @@
 	<input type="hidden" name="action" value="update_accronym" />
 	<?php wp_nonce_field( 'update_accronym' ); ?>
 
-	<?php view_util::exec( 'setting', 'accronym/list-item', array( 'list_accronym' => $list_accronym ) ); ?>
+	<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/list-item', array( 'list_accronym' => $list_accronym ) ); ?>
 	<?php echo submit_button(); ?>
 </form>

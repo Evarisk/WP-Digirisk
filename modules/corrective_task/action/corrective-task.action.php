@@ -27,7 +27,6 @@ class Corrective_Task_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_open_task', array( $this, 'callback_open_task' ) );
-		add_action( 'wp_ajax_create_task_and_point', array( $this, 'callback_create_task_and_point' ) );
 	}
 
 	/**
@@ -69,13 +68,13 @@ class Corrective_Task_Action {
 
 
 			ob_start();
-			View_Util::exec( 'corrective_task', 'form', array(
+			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'form', array(
 				'task' => $task,
 			) );
 			$view = ob_get_clean();
 		} else {
 			ob_start();
-			View_Util::exec( 'corrective_task', 'need-task-manager' );
+			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'need-task-manager' );
 			$view = ob_get_clean();
 		} // End if().
 
@@ -84,51 +83,6 @@ class Corrective_Task_Action {
 			'module' => 'correctiveTask',
 			'callback_success' => 'openedTaskPopup',
 			'view' => $view,
-		) );
-	}
-
-	/**
-	 * Créer un point dans la tâche "parent_id" avec le contenu du commentaire dans la popup "tâche corrective".
-	 *
-	 * @return void
-	 *
-	 * @since 6.2.5.0
-	 * @version 6.2.9.0
-	 */
-	public function callback_create_task_and_point() {
-		global $task_controller;
-
-		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-
-		$task = $task_controller->index( array(
-			'post_parent' => $parent_id,
-		) );
-		$risk = Risk_Class::g()->get( array(
-			'include' => $parent_id,
-		) );
-
-		$risk = $risk[0];
-		$task = $task[0];
-
-		global $point_controller;
-		$_POST['point']['author_id'] = get_current_user_id();
-		$_POST['point']['status'] = '-34070';
-		$_POST['point']['date'] = current_time( 'mysql' );
-		$_POST['point']['post_id'] = $task->id;
-		$point = $point_controller->create( $_POST['point'] );
-
-		/** Add to the order point */
-		$task->option['task_info']['order_point_id'][] = (int) $point->id;
-		$task_controller->update( $task );
-
-		$object_id = $task->id;
-		$disabled_filter = true;
-
-		$custom_class = 'wpeo-task-point-sortable';
-		ob_start();
-		require( WPEO_POINT_TEMPLATES_MAIN_DIR . '/backend/point.php' );
-		wp_send_json_success( array(
-			'template' => ob_get_clean(),
 		) );
 	}
 }

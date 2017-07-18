@@ -1,8 +1,8 @@
 <?php namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class tools_class extends singleton_util {
+class tools_class extends \eoxia\Singleton_Util {
 
 	protected function construct() { }
 
@@ -47,7 +47,7 @@ class tools_class extends singleton_util {
     $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
-    $file_content = file_get_contents( PLUGIN_DIGIRISK_PATH . config_util::$init['evaluation_method']->path . 'asset/json/default.json' );
+    $file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
     $data_variable_evarisk = array();
@@ -132,6 +132,48 @@ class tools_class extends singleton_util {
 
 				risk_evaluation_class::g()->update( $risk_evaluation );
 		  }
+		}
+	}
+
+	/**
+	 * Transfères les identifiants des documents.
+	 *
+	 * @return void
+	 *
+	 * @since 6.2.10.0
+	 * @version 6.2.10.0
+	 */
+	public function transfert_doc() {
+		$types_to_transfert = array(
+			'document_unique' => '\digi\DUER_Class',
+			'fiche_de_groupement' => '\digi\Fiche_De_Groupement_Class',
+			'fiche_de_poste'			=> '\digi\Fiche_De_Poste_Class',
+			'affichage_legal_a4'	=> '\digi\Affichage_Legal_A4_Class',
+			'affichage_legal_a3'	=> '\digi\Affichage_Legal_A3_Class',
+		);
+
+		if ( ! empty( $types_to_transfert ) ) {
+			foreach ( $types_to_transfert as $type => $type_class ) {
+				$args = array(
+					'post_status' => 'inherit',
+					'tax_query' => array(
+						array(
+							'taxonomy' 	=> Document_Class::g()->attached_taxonomy_type,
+							'field'			=> 'slug',
+							'terms'			=> $type,
+						),
+					),
+				);
+
+				$list_document = Document_Class::g()->get( $args );
+
+				if ( ! empty( $list_document ) ) {
+					foreach ( $list_document as $element ) {
+						$element->unique_identifier = str_replace( Document_Class::g()->element_prefix, $type_class::g()->element_prefix, $element->unique_identifier );
+						$type_class::g()->update( $element );
+					}
+				}
+			}
 		}
 	}
 }

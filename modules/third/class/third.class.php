@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class third_class extends post_class {
+class third_class extends \eoxia\post_class {
   protected $model_name   = '\digi\third_model';
 	protected $post_type    = 'third-display';
 	protected $meta_key    	= 'third_display';

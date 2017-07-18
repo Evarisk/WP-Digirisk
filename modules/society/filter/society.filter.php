@@ -38,10 +38,13 @@ class Society_Filter {
 	 * @return void
 	 *
 	 * @since 6.2.2.0
-	 * @version 6.2.5.0
+	 * @version 6.2.10.0
 	 */
 	public function callback_society_identity( $element, $editable_identity = false ) {
-		View_Util::exec( 'society', 'identity', array( 'element' => $element, 'editable_identity' => $editable_identity ), false );
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'identity', array(
+			'element' => $element,
+			'editable_identity' => $editable_identity,
+		), false );
 	}
 }
 

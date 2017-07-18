@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class evaluation_method_variable_class extends term_class {
+class evaluation_method_variable_class extends \eoxia\Term_Class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use
@@ -31,10 +31,6 @@ class evaluation_method_variable_class extends term_class {
 	 * @var string
 	 */
 	protected $meta_key    	= '_wpdigi_methodvariable';
-
-	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
-	protected $base = 'digirisk/evaluation-method-variable';
-	protected $version = '0.1';
 
 	/**
 	* Le constructeur

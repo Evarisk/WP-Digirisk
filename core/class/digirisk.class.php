@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
  * Classe gérant le boot de l'application DigiRisk.
  * Appelle la vue permettant d'afficher la navigation
  */
-class Digirisk_Class extends Singleton_Util {
+class Digirisk_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -58,7 +58,7 @@ class Digirisk_Class extends Singleton_Util {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
 
-		update_option( Config_Util::$init['digirisk']->key_last_update_version, (int) str_replace( '.', '', Config_Util::$init['digirisk']->version ) );
+		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version ) );
 	}
 
 }

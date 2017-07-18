@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class ZIP_Class extends Post_Class {
+class ZIP_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nom du modèle
 	 *

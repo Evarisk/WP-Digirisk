@@ -5,7 +5,7 @@
  * @package Evarisk\Plugin
  *
  * @since 0.1
- * @version 6.2.9.0
+ * @version 6.2.10.0
  */
 
 namespace digi;
@@ -60,7 +60,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function ajax_installer_components() {
 		// check_ajax_referer( 'ajax_installer_components' );
@@ -73,25 +73,25 @@ class Installer_Action {
 			'evaluation_method_installed' => false,
 		);
 
-		$core_option = get_option( Config_Util::$init['digirisk']->core_option, $default_core_option );
+		$core_option = get_option( \eoxia\Config_Util::$init['digirisk']->core_option, $default_core_option );
 
 		if ( ! $core_option['danger_installed'] ) {
 			Danger_Default_Data_Class::g()->create();
-			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
+			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
 			$core_option['danger_installed'] = true;
 		} elseif ( ! $core_option['recommendation_installed'] ) {
 			Recommendation_Default_Data_Class::g()->create();
-			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
+			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
 			$core_option['recommendation_installed'] = true;
 		} elseif ( ! $core_option['evaluation_method_installed'] ) {
 			Evaluation_Method_Default_Data_Class::g()->create();
-			Log_Class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
+			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
 			$core_option['evaluation_method_installed'] = true;
 			$core_option['installed'] = true;
-			Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
+			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
-		update_option( Config_Util::$init['digirisk']->core_option, $core_option );
+		update_option( \eoxia\Config_Util::$init['digirisk']->core_option, $core_option );
 
 		wp_send_json_success( array(
 			'core_option' => $core_option,

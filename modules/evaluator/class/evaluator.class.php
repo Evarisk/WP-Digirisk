@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les évaluateurs
  */
-class Evaluator_Class extends User_Class {
+class Evaluator_Class extends \eoxia\User_Class {
 
 	/**
 	 * Le nom du modèle
@@ -107,7 +107,7 @@ class Evaluator_Class extends User_Class {
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		View_Util::exec( 'evaluator', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element' => $element,
 			'evaluators' => $evaluators,
 			'list_affected_evaluator' => $list_affected_evaluator,

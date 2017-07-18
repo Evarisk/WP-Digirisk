@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les utilisateurs
  */
-class User_Digi_Class extends User_Class {
+class User_Digi_Class extends \eoxia\User_Class {
 
 	/**
 	 * Le nom du modèle
@@ -170,7 +170,7 @@ class User_Digi_Class extends User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		view_util::exec( 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
 	}
 
 	/**
@@ -204,7 +204,7 @@ class User_Digi_Class extends User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		view_util::exec( 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 	}
 
 	/**

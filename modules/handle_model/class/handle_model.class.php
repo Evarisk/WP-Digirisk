@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Gestion des modèles personnalisés
  */
-class Handle_Model_Class extends Singleton_Util {
+class Handle_Model_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * La liste des documents personnalisables avec leur titre
@@ -51,7 +51,7 @@ class Handle_Model_Class extends Singleton_Util {
 			}
 		}
 
-		view_util::exec( 'handle_model', 'main', array( 'list_type_document' => $this->list_type_document, 'list_document_default' => $list_document_default ) );
+		\eoxia\View_Util::exec( 'digirisk', 'handle_model', 'main', array( 'list_type_document' => $this->list_type_document, 'list_document_default' => $list_document_default ) );
 	}
 }
 

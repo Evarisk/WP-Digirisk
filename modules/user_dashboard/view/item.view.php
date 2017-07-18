@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <tr class="user-row">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
+	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->firstname ) ); ?></span<</td>
 	<td class="padding"><span><?php echo esc_html( $user->email ); ?></span></td>

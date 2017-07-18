@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class group_model extends society_model {
+class group_model extends Society_Model {
 	/**
 	 * Construit le modèle de groupement / Fill the group model
 	 *

@@ -62,7 +62,7 @@ class Danger_Shortcode {
 				}
 			}
 
-			View_Util::exec( 'danger', 'dropdown', array(
+			\eoxia\View_Util::exec( 'digirisk', 'danger', 'dropdown', array(
 				'id' => $id,
 				'danger_category_list' => $danger_category_list,
 				'preset' => $preset,
@@ -75,7 +75,7 @@ class Danger_Shortcode {
 
 			$risk = $risk[0];
 
-			View_Util::exec( 'danger', 'item', array(
+			\eoxia\View_Util::exec( 'digirisk', 'danger', 'item', array(
 				'id' => $id,
 				'risk' => $risk,
 			) );

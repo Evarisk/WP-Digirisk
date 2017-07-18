@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class recommendation_comment_model extends comment_model {
+class recommendation_comment_model extends \eoxia\comment_model {
 	public function __construct( $object ) {
 		parent::__construct( $object );
 	}

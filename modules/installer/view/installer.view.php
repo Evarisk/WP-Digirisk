@@ -48,15 +48,15 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 		<div class="wpdigi-components hidden">
 			<div class="owl-carousel owl-theme">
-				<?php View_Util::exec( 'installer', 'bloc-1' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-2' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-3' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-4' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-5' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-6' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-7' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-8' ); ?>
-				<?php View_Util::exec( 'installer', 'bloc-9' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-1' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-2' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-3' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-4' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-5' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-6' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-7' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-8' ); ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-9' ); ?>
 			</div>
 
 

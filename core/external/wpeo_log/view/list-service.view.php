@@ -1,4 +1,4 @@
-<?php namespace digi;
+<?php namespace eoxia;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
@@ -35,7 +35,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 					<td><a href="<?php echo admin_url( 'tools.php?page=wpeo-log-page&service_id=' . $key . '&action=view&type=warning' ); ?>"><?php echo $service['warning']['count']; ?></a></td>
 					<td>
 						<?php
-						echo !empty( $service['size'] ) ? \digi\size_util::g()->convert_to( $service['size'], $service['format'] , false ) : '';
+						echo !empty( $service['size'] ) ? size_util::g()->convert_to( $service['size'], $service['format'] , false ) : '';
 						echo !empty( $service['format'] ) ? $service['format'] : 'oc'
 						?>
 					</td>

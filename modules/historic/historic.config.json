@@ -1,0 +1,11 @@
+{
+	"name": "Historique",
+	"slug": "historic",
+	"version": "6.2.10.0",
+	"description": "Le module gérant l'hitorique des données",
+	"path": "modules/historic/",
+	"dependencies": {
+		"action": {}
+	},
+	"key_historic": "_wpdigi_historic"
+}

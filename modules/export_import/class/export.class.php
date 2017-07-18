@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Unite de travail
  * Risque
  */
-class Export_Class extends Singleton_Util {
+class Export_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le chemin vers le répertoire uploads/Digirisk/export
 	 *

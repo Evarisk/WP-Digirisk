@@ -32,7 +32,7 @@ class Transfert_Action {
 	 * Call wordpress hook for adding scripts and styles for backend
 	 */
 	public function backend_assets() {
-		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array(), config_util::$init['digirisk']->version );
+		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Transfert_Action {
 		check_ajax_referer( 'wpdigi-datas-transfert' );
 		global $wpdb;
 
-		$log_conf = config_util::$init['wpeo_log'];
+		$log_conf = \eoxia\Config_Util::$init['wpeo_log'];
 		$log_conf->log = true;
 
 		$response = array(
@@ -118,7 +118,7 @@ class Transfert_Action {
 				update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
 				/** Met à jour l'option pour dire que l'installation est terminée */
-				update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
+				update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 			} elseif ( $element_done ) {
 				$sub_action = 'doc';
 

@@ -16,6 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <?php if ( ! empty( $list_document ) ) : ?>
 	<?php foreach ( $list_document as $element ) : ?>
-		<?php View_Util::exec( 'duer', 'list-item', array( 'element' => $element ) ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'list-item', array( 'element' => $element ) ); ?>
 	<?php endforeach; ?>
 <?php endif;

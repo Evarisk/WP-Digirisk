@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Permet de définir l'objet Affichage_Legal_A3
  */
-class Affichage_Legal_A3_Class extends Post_Class {
+class Affichage_Legal_A3_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nom du modèle
 	 *

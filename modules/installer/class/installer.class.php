@@ -38,7 +38,7 @@ class Installer_Class {
 	 * @version 6.2.7.0
 	 */
 	public function admin_menu() {
-		$digirisk_core = get_option( Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		$old_eva_option = '';
 		if ( function_exists( '\digi\getDbOption' ) ) {
@@ -59,7 +59,7 @@ class Installer_Class {
 	 * @version 6.2.7.0
 	 */
 	public function setup_page() {
-		View_Util::exec( 'installer', 'installer' );
+		\eoxia\View_Util::exec( 'digirisk', 'installer', 'installer' );
 	}
 
 }

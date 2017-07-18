@@ -55,7 +55,7 @@ class File_Management_Action {
 		$element = $element[0];
 
 		ob_start();
-		View_Util::exec( 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'namespace' => $namespace, 'type_class' => $type, 'element' => $element ) );
+		\eoxia\View_Util::exec( 'digirisk', 'file_management', 'button', array( 'id' => $id, 'thumbnail' => $thumbnail, 'title' => $title, 'action' => $action, 'file_id' => $file_id, 'type' => $type, 'namespace' => $namespace, 'type_class' => $type, 'element' => $element ) );
 		wp_send_json_success( array(
 			'template' => ob_get_clean(),
 		) );

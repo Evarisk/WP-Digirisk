@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.3.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package comment
  * @subpackage view
@@ -24,6 +24,7 @@ $userdata = get_userdata( $author_id );
 	<input type="hidden" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][post_id]" value="<?php echo esc_attr( $id ); ?>" />
 	<input type="hidden" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][author_id]" value="<?php echo esc_attr( $author_id ); ?>" />
 	<input type="hidden" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][id]" value="<?php echo esc_attr( $comment->id ); ?>" />
+	<input type="hidden" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][parent_id]" value="<?php echo esc_attr( $comment->parent_id ); ?>" />
 
 	<span class="user"><?php echo esc_html( $userdata->display_name ); ?>, </span>
 	<input type="text" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][date]" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $comment->date ); ?>" />

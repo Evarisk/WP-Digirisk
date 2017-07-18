@@ -28,12 +28,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<tbody>
 		<?php if ( ! empty( $recommendations ) ) :
 			foreach ( $recommendations as $recommendation ) :
-				View_Util::exec( 'recommendation', 'list-item', array( 'society_id' => $society_id, 'recommendation' => $recommendation ) );
+				\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list-item', array( 'society_id' => $society_id, 'recommendation' => $recommendation ) );
 			endforeach;
 		endif; ?>
 	</tbody>
 
 	<tfoot>
-		<?php View_Util::exec( 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation_schema ) ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation_schema ) ); ?>
 	</tfoot>
 </table>

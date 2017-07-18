@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Appelle la vue permettant d'afficher la navigation
  */
-class Navigation_Shortcode extends Singleton_Util {
+class Navigation_Shortcode extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur

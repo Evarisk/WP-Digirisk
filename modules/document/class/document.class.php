@@ -14,13 +14,11 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class Document_Class extends attachment_class {
+class Document_Class extends \eoxia\Post_Class {
 	protected $model_name   				= '\digi\document_model';
 	protected $post_type    				= 'attachment';
 	public $attached_taxonomy_type  = 'attachment_category';
 	protected $meta_key    					= '_wpdigi_document';
-	protected $base 								= 'digirisk/printed-document';
-	protected $version 							= '0.1';
 	public $element_prefix 					= 'DOC';
 	protected $before_put_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
@@ -67,7 +65,7 @@ class Document_Class extends attachment_class {
 		), array( 'category' ) );
 		$number_page = 0;//ceil( count ( $list_document ) / $this->limit_document_per_page );
 
-		view_util::exec( 'document', 'printed-list', array( 'element_id' => $element->id, 'list_document' => $list_document, 'number_page' => $number_page, 'current_page' => $current_page, ) );
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'printed-list', array( 'element_id' => $element->id, 'list_document' => $list_document, 'number_page' => $number_page, 'current_page' => $current_page, ) );
 	}
 
 	/**
@@ -355,6 +353,12 @@ class Document_Class extends attachment_class {
 			case "affichage_legal_A4":
 				$types[0] = Affichage_Legal_A4_Class::g()->get_post_type();
 				break;
+			case "diffusion_informations_A3":
+				$types[0] = Diffusion_Informations_A3_Class::g()->get_post_type();
+				break;
+			case "diffusion_informations_A4":
+				$types[0] = Diffusion_Informations_A4_Class::g()->get_post_type();
+				break;
 			case "zip":
 				$types[0] = ZIP_Class::g()->get_post_type();
 				break;
@@ -439,36 +443,44 @@ class Document_Class extends attachment_class {
 
 		// @todo: Temporaire, il faut repenser cette fonction.
 		switch( $document_type[0] ) {
-			case "document_unique":
+			case 'document_unique':
 				$document_args['type'] = DUER_Class::g()->get_post_type();
 				$document = DUER_Class::g()->update( $document_args );
 				break;
-			case "fiche_de_groupement":
+			case 'fiche_de_groupement':
 				$document_args['type'] = Fiche_De_Groupement_Class::g()->get_post_type();
 				$document = Fiche_De_Groupement_Class::g()->update( $document_args );
 				break;
-			case "fiche_de_poste":
+			case 'fiche_de_poste':
 				$document_args['type'] = Fiche_De_Poste_Class::g()->get_post_type();
 				$document = Fiche_De_Poste_Class::g()->update( $document_args );
 				break;
-			case "affichage_legal_A3":
+			case 'affichage_legal_A3':
 				$document_args['type'] = Affichage_Legal_A3_Class::g()->get_post_type();
 				$document = Affichage_Legal_A3_Class::g()->update( $document_args );
 				break;
-			case "affichage_legal_A4":
+			case 'affichage_legal_A4':
 				$document_args['type'] = Affichage_Legal_A4_Class::g()->get_post_type();
 				$document = Affichage_Legal_A4_Class::g()->update( $document_args );
 				break;
-			case "zip":
+			case 'diffusion_informations_A3':
+				$document_args['type'] = Diffusion_Informations_A3_Class::g()->get_post_type();
+				$document = Diffusion_Informations_A3_Class::g()->update( $document_args );
+				break;
+			case 'diffusion_informations_A4':
+				$document_args['type'] = Diffusion_Informations_A4_Class::g()->get_post_type();
+				$document = Diffusion_Informations_A4_Class::g()->update( $document_args );
+				break;
+			case 'zip':
 				$document_args['type'] = ZIP_Class::g()->get_post_type();
 				$document = ZIP_Class::g()->update( $document_args );
 				break;
 			default:
-		  	$document = $this->update( $document_args );
+				$document = $this->update( $document_args );
 				break;
-		}
+		} // End switch().
 
-  	return $response;
+		return $response;
 	}
 }
 

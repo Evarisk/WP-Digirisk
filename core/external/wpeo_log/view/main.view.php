@@ -1,4 +1,4 @@
-<?php namespace digi;
+<?php namespace eoxia;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 
@@ -18,12 +18,12 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php
 	$action = sanitize_text_field( !empty( $_GET['action'] ) ? $_GET['action'] : '' );
 	if ( !empty( $action ) && 'edit' == $action ):
-		require ( PLUGIN_DIGIRISK_PATH . config_util::$init['wpeo_log']->path . '/view/list-service-edit.view.php' );
+		require ( Config_Util::$init['main']->full_plugin_path . \eoxia\Config_Util::$init['wpeo_log']->path . '/view/list-service-edit.view.php' );
 	elseif ( !empty( $action ) && 'view' == $action ):
-		require ( PLUGIN_DIGIRISK_PATH . config_util::$init['wpeo_log']->path . '/view/view-service.view.php' );
-		require ( PLUGIN_DIGIRISK_PATH . config_util::$init['wpeo_log']->path . '/view/chart.view.php' );
+		require ( Config_Util::$init['main']->full_plugin_path . \eoxia\Config_Util::$init['wpeo_log']->path . '/view/view-service.view.php' );
+		require ( Config_Util::$init['main']->full_plugin_path . \eoxia\Config_Util::$init['wpeo_log']->path . '/view/chart.view.php' );
 	else:
-		require ( PLUGIN_DIGIRISK_PATH . config_util::$init['wpeo_log']->path . '/view/list-service.view.php' );
+		require ( Config_Util::$init['main']->full_plugin_path . \eoxia\Config_Util::$init['wpeo_log']->path . '/view/list-service.view.php' );
 	endif;
 	?>
 </div>

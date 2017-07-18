@@ -3,7 +3,7 @@
  * Ajoutes l'onglet Configuration aux unités de travail
  *
  * @since 6.2.2.0
- * @version 6.2.4.0
+ * @version 6.2.10.0
  *
  * @package Evarisk\Plugin
  */
@@ -34,9 +34,15 @@ class Workunit_Filter {
 	 * @return array
 	 *
 	 * @since 6.2.2.0
-	 * @version 6.2.4.0
+	 * @version 6.2.10.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
+		$tab_list['digi-workunit']['informations'] = array(
+			'type' => 'text',
+			'text' => __( 'Informations', 'digirisk' ),
+			'title' => __( 'Informations de', 'digirisk' ),
+		);
+
 		$tab_list['digi-workunit']['more'] = array(
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
@@ -45,13 +51,6 @@ class Workunit_Filter {
 					'type' => 'text',
 					'text' => __( 'Options avancées', 'digirisk' ),
 					'title' => __( 'Les options avancées de', 'digirisk' ),
-					'nonce' => 'load_content',
-					'attributes' => 'data-id=' . $id . '',
-				),
-				'configuration' => array(
-					'type' => 'text',
-					'text' => __( 'Configuration', 'digirisk' ),
-					'title' => __( 'Configuration de', 'digirisk' ),
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),

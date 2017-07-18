@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les utilisateurs dans la page "utilisateur" de WordPress.
  */
-class User_Dashboard_Class extends Singleton_Util {
+class User_Dashboard_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -40,7 +40,7 @@ class User_Dashboard_Class extends Singleton_Util {
 		$list_user = User_Digi_Class::g()->get( array( 'exclude' => array( 1 ) ) );
 		$user_schema = User_Digi_Class::g()->get( array( 'schema' => true ) );
 		$user_schema = $user_schema[0];
-		View_Util::exec( 'user_dashboard', 'list', array( 'list_user' => $list_user, 'user_schema' => $user_schema ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'list', array( 'list_user' => $list_user, 'user_schema' => $user_schema ) );
 	}
 }
 

@@ -1,4 +1,4 @@
-<?php namespace digi;
+<?php namespace eoxia;
 
 if ( !defined( 'ABSPATH' ) ) exit; ?>
 

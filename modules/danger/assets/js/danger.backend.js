@@ -2,7 +2,7 @@
  * Initialise l'objet "danger" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 1.0
- * @version 6.2.9.0
+ * @version 6.2.10.0
  */
 window.eoxiaJS.digirisk.danger = {};
 
@@ -21,7 +21,7 @@ window.eoxiaJS.digirisk.danger.event = function() {
  * @return {void}
  *
  * @since 0.1
- * @version 6.2.6.0
+ * @version 6.2.10.0
  */
 window.eoxiaJS.digirisk.danger.selectDanger = function( event ) {
 	var element = jQuery( this );
@@ -43,12 +43,28 @@ window.eoxiaJS.digirisk.danger.selectDanger = function( event ) {
 		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 	}
 
-	data.action = 'check_predefined_danger';
-	data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
-	data.danger_id = element.data( 'id' );
-	data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
+	// Si aucune donnée est entrée, on lance la requête.
+	if ( ! window.eoxiaJS.digirisk.danger.haveDataInInput( element ) ) {
 
-	jQuery( this ).closest( 'td' ).addClass( 'loading' );
+		data.action = 'check_predefined_danger';
+		data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
+		data.danger_id = element.data( 'id' );
+		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
-	window.eoxiaJS.request.send( jQuery( this ).closest( '.toggle' ), data );
+		jQuery( this ).closest( 'td' ).addClass( 'loading' );
+
+		window.eoxiaJS.request.send( jQuery( this ).closest( '.toggle' ), data );
+	}
+};
+
+window.eoxiaJS.digirisk.danger.haveDataInInput = function( element ) {
+	if ( -1 != element.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
+		return true;
+	}
+
+	if ( '' != element.closest( '.risk-row' ).find( 'textarea[name="list_comment[0][content]"]' ).val() ) {
+		return true;
+	}
+
+	return false;
 };

@@ -64,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-namespace="digirisk"
 					data-cb-object="DUER"
 					data-cb-func="fill_textarea_in_popup"
-					data-title="Édition de la disposition des plans"
+					data-title="Édition de la localisation"
 					data-src="dispo-des-plans"
 					class="open-popup button grey radius w30 span-content-dispo-des-plans"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-location"></span></span>
 	</td>

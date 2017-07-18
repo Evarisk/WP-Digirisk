@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 							<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator['user_info']->id ); ?></strong></span></td>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->lastname ); ?></span></td>
 							<td class="padding"><span><?php echo esc_html( $evaluator['user_info']->firstname ); ?></span></td>
-							<td><?php echo esc_html( mysql2date( 'd/m/Y H:i', $evaluator['affectation_info']['start']['date'], true ) ); ?></td>
+							<td><?php echo esc_html( mysql2date( 'd/m/Y', $evaluator['affectation_info']['start']['date'], true ) ); ?></td>
 							<td class="padding"><?php echo esc_html( Evaluator_Class::g()->get_duration( $evaluator['affectation_info'] ) ); ?></td>
 							<td>
 									<div class="action">

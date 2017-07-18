@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Gestion de l'importation des modèles
  */
-class Import_Class extends Singleton_Util {
+class Import_Class extends \eoxia\Singleton_Util {
 	/**
 	 * La clé courante pour l'élément
 	 *

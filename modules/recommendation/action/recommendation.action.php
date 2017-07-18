@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 1.0
- * @version 6.2.9.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package recommendation
  * @subpackage action
@@ -36,22 +36,30 @@ class Recommendation_Action {
 	 * Charges une recommendation
 	 *
 	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function ajax_load_recommendation() {
 		check_ajax_referer( 'ajax_load_recommendation' );
 
 		if ( 0 === (int) $_POST['id'] ) {
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+			wp_send_json_error();
 		} else {
 			$id = (int) $_POST['id'];
 		}
 
-		$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ) );
+		$recommendation = Recommendation_Class::g()->get( array(
+			'id' => $id,
+		) );
 		$recommendation = $recommendation[0];
 
 		ob_start();
-		View_Util::exec( 'recommendation', 'item-edit', array( 'society_id' => $recommendation->parent_id, 'recommendation' => $recommendation ), array( '\digi\recommendation_category_term', '\digi\recommendation_term' ) );
+		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
+			'society_id' => $recommendation->parent_id,
+			'recommendation' => $recommendation,
+			), array(
+			'\digi\recommendation_category_term',
+			'\digi\recommendation_term',
+		) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'recommendation',
@@ -66,12 +74,15 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
 
-		$recommendation_term = Recommendation_Term_Class::g()->get( array( 'include' => $_POST['taxonomy']['digi-recommendation'] ) );
+		$recommendation_term = Recommendation_Term_Class::g()->get( array(
+			'include' => $_POST['taxonomy']['digi-recommendation'],
+		) );
+
 		$recommendation_term = $recommendation_term[0];
 		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
 		$recommendation = Recommendation_Class::g()->update( $_POST );
@@ -84,6 +95,12 @@ class Recommendation_Action {
 				}
 			}
 		}
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $recommendation->parent_id,
+			'id' => $recommendation->id,
+			'content' => __( 'Modification de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+		) );
 
 		ob_start();
 		Recommendation_Class::g()->display( $recommendation->parent_id );
@@ -101,7 +118,7 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @version 6.2.10.0
 	 */
 	public function ajax_delete_recommendation() {
 		check_ajax_referer( 'ajax_delete_recommendation' );
@@ -112,7 +129,9 @@ class Recommendation_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ) );
+		$recommendation = Recommendation_Class::g()->get( array(
+			'id' => $id,
+		) );
 		$recommendation = $recommendation[0];
 
 		if ( empty( $recommendation ) ) {
@@ -122,6 +141,12 @@ class Recommendation_Action {
 		$recommendation->status = 'trash';
 
 		Recommendation_Class::g()->update( $recommendation );
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $recommendation->parent_id,
+			'id' => $recommendation->id,
+			'content' => __( 'Suppression de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+		) );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',

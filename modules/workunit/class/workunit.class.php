@@ -2,16 +2,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Workunit_Class extends post_class {
+class Workunit_Class extends \eoxia\post_class {
 	public $element_prefix = 'UT';
-	protected $before_post_function = array( '\digi\construct_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\digi\convert_date' );
+	protected $before_put_function = array( '\eoxia\convert_date' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée

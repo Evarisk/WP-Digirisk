@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  */
-class Society_Class extends Singleton_Util {
+class Society_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Constructeur

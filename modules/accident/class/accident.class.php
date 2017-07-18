@@ -42,7 +42,7 @@ class accident_class extends Post_Class {
 	public function display( $society_id ) {
 		$accident = $this->get( array( 'schema' => true ) );
 		$accident = $accident[0];
-		View_Util::exec( 'accident', 'main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main', array(
 			'accident' => $accident,
 			'society_id' => $society_id,
 		) );
@@ -62,7 +62,7 @@ class accident_class extends Post_Class {
 
 		$accident_list = accident_class::g()->get( array( 'post_parent' => $society->id ), array( 'list_risk', 'evaluation', 'list_user' ) );
 
-		View_Util::exec( 'accident', 'list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'list', array(
 			'society' => $society,
 			'accident_list' => $accident_list,
 		) );

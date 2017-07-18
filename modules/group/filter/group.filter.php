@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1
- * @version 6.2.4.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package group
  * @subpackage filter
@@ -35,9 +35,15 @@ class Group_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
 	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @version 6.2.10.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
+		$tab_list['digi-group']['informations'] = array(
+			'type' => 'text',
+			'text' => __( 'Informations', 'digirisk' ),
+			'title' => __( 'Informations de', 'digirisk' ),
+		);
+
 		$tab_list['digi-group']['more'] = array(
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
@@ -56,13 +62,6 @@ class Group_Filter {
 				// 	'nonce' => 'load_content',
 				// 	'attributes' => 'data-id=' . $id . '',
 				// ), // Commented out code.
-				'configuration' => array(
-					'type' => 'text',
-					'text' => __( 'Configuration', 'digirisk' ),
-					'title' => __( 'Configuration de', 'digirisk' ),
-					'nonce' => 'load_content',
-					'attributes' => 'data-id=' . $id . '',
-				),
 				'delete' => array(
 					'type' => 'text',
 					'text' => __( 'Supprimer', 'digirisk' ),

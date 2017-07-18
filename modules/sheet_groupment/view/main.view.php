@@ -18,5 +18,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <table class="table">
 	<?php Fiche_De_Groupement_Class::g()->display_document_list( $element_id ); ?>
-	<?php View_Util::exec( 'sheet_groupment', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+	<?php \eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
 </table>

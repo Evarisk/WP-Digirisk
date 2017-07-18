@@ -1,8 +1,8 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class chemi_product_class extends post_class {
+class chemi_product_class extends \eoxia\post_class {
 
-	protected $model_name   = 'chemi_product_model';
+	protected $model_name   = '\digi\chemi_product_model';
 	protected $post_type    = 'digi-chemi_product';
 	protected $meta_key    	= '_wpdigi_chemical_product';
 

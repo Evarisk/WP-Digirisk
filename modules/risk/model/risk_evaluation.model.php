@@ -2,9 +2,12 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class risk_evaluation_model extends comment_model {
+class Risk_Evaluation_Model extends \eoxia\Comment_Model {
 
 	public function __construct( $object ) {
+		$this->model['date']['bydefault'] = current_time( 'mysql' );
+		$this->model['author_id']['bydefault'] = get_current_user_id();
+
 		$this->model = array_merge( $this->model, array(
 			'risk_level' => array(
 				'export' => true,

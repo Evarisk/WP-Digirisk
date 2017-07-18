@@ -4,6 +4,7 @@
 	"version": "0.2.0.0",
 	"description": "Gestionnaire des logs",
 	"path": "core/external/wpeo_log/",
+	"external": true,
 	"dependencies": {
 		"util": {
 		},

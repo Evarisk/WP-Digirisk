@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Gestion de l'export en CSV des risques.
  */
-class Export_CSV_Class extends Singleton_Util {
+class Export_CSV_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le chemin vers le répertoire uploads/Digirisk/export
 	 *
@@ -65,12 +65,18 @@ class Export_CSV_Class extends Singleton_Util {
 			$args['number_risks'] = count( get_posts( array(
 				'post_type' => Risk_Class::g()->get_post_type(),
 				'posts_per_page' => -1,
+				'meta_key' => '_wpdigi_preset',
+				'meta_value' => 1,
+				'meta_compare' => '!=',
 			) ) );
 		}
 
 		$risks = Risk_Class::g()->get( array(
 			'offset' => $args['offset'],
 			'posts_per_page' => $this->posts_per_page,
+			'meta_key' => '_wpdigi_preset',
+			'meta_value' => 1,
+			'meta_compare' => '!=',
 		) );
 
 		// Au augmente le offset pour la prochaine requête.

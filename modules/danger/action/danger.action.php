@@ -112,7 +112,7 @@ class Danger_Action {
 		$preset_risk = $preset_risk[0];
 
 		ob_start();
-		View_Util::exec( 'risk', 'item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
 			'risk' => $preset_risk,
 		) );

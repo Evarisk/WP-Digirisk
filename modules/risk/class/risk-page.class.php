@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3.0
- * @version 6.2.8.0
+ * @version 6.2.10.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage class
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
-class Risk_Page_Class extends Singleton_Util {
+class Risk_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * La limite des risques a afficher par page
 	 *
@@ -35,7 +35,7 @@ class Risk_Page_Class extends Singleton_Util {
 
 
 	/**
-	 * Le constructeur obligatoirement pour utiliser la classe Singleton_util
+	 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
 	 *
 	 * @return void nothing
 	 *
@@ -50,7 +50,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.8.0
+	 * @version 6.2.10.0
 	 */
 	public function display() {
 		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
@@ -65,6 +65,9 @@ class Risk_Page_Class extends Singleton_Util {
 			'post_status' => 'publish',
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
+			'meta_key' => '_wpdigi_preset',
+			'meta_value' => 1,
+			'meta_compare' => '!=',
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );
@@ -77,7 +80,7 @@ class Risk_Page_Class extends Singleton_Util {
 
 		$number_page = ceil( $count_risk / $per_page );
 
-		View_Util::exec( 'risk', 'page/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/main', array(
 			'current_page' => $current_page,
 			'number_page' => $number_page,
 		) );
@@ -90,7 +93,7 @@ class Risk_Page_Class extends Singleton_Util {
 	 * @return void nothing
 	 *
 	 * @since 6.2.3.0
-	 * @version 6.2.8.0
+	 * @version 6.2.10.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -106,6 +109,9 @@ class Risk_Page_Class extends Singleton_Util {
 			'post_status' => 'publish',
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
+			'meta_key' => '_wpdigi_preset',
+			'meta_value' => 1,
+			'meta_compare' => '!=',
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );
@@ -119,15 +125,11 @@ class Risk_Page_Class extends Singleton_Util {
 			foreach ( $risk_list as $key => $element ) {
 				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->parent_id );
 
-				if ( !$risk_list[ $key ]->parent ) {
-					unset( $risk_list[ $key ] );
+				if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
+					$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
 				} else {
-					if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
-						$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
-					} else {
-						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
-						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
-					}
+					$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
+					$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
 				}
 			}
 		}
@@ -154,7 +156,7 @@ class Risk_Page_Class extends Singleton_Util {
 			}
 		}
 
-		View_Util::exec( 'risk', 'page/list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/list', array(
 			'risk_list' => $risk_list,
 			'url_ref_order' => $url_ref_order,
 		) );

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les dangers
  */
-class Danger_Class extends Term_Class {
+class Danger_Class extends \eoxia\Term_Class {
 
 	/**
 	 * Le nom du modèle

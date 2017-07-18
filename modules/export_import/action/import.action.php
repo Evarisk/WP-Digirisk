@@ -20,7 +20,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @package export_import
  * @subpackage shortcode
  */
-class import_action extends singleton_util {
+class import_action extends \eoxia\Singleton_Util {
 	private $destination_directory;
 	public static $response;
 
@@ -53,11 +53,14 @@ class import_action extends singleton_util {
 			$evaluation_method_created = evaluation_method_default_data_class::g()->create();
 
 			// Met à jours l'option pour dire que l'installation est terminée
-			update_option( config_util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
+			update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array(
+				'installed' => true,
+				'db_version' => 1,
+			) );
 
 			$zip_file = $_FILES['file'];
 
-			$zip_info = zip_util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
+			$zip_info = \eoxia\ZIP_Util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
 			if ( !$zip_info['state'] && empty( $zip_info['list_file'][0] ) ) {
 				wp_send_json_error();
 			}
@@ -71,7 +74,7 @@ class import_action extends singleton_util {
 		import_action::$response['path_to_json'] = str_replace( '\\\\', '/', str_replace( '\\', '/', $path_to_json) );
 		$file_content = file_get_contents( $path_to_json );
 		$data = json_decode( $file_content, true );
-		import_action::$response['count_element'] = array_util::g()->count_recursive( $data, true, array( 'list_group', 'list_workunit', 'danger', 'comment', 'list_risk', 'danger_category', 'evaluation_method', 'variable', 'evaluation' ) ) + 1;
+		import_action::$response['count_element'] = \eoxia\Array_Util::g()->count_recursive( $data, true, array( 'list_group', 'list_workunit', 'danger', 'comment', 'list_risk', 'danger_category', 'evaluation_method', 'variable', 'evaluation' ) ) + 1;
 		import_action::$response['index_element'] = (int) $_POST['index_element'];
 
 		import_class::g()->create( $data );

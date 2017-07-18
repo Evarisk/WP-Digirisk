@@ -38,7 +38,7 @@ class Tab_Filter {
 	 * @version 6.2.4.0
 	 */
 	public function callback_tab_content( $content, $element_id, $tab_to_display, $title ) {
-		View_Util::exec( 'tab', 'content', array( 'title' => $title, 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
+		\eoxia\View_Util::exec( 'digirisk', 'tab', 'content', array( 'title' => $title, 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
 	}
 }
 

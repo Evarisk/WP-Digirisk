@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<ul class="wp-digi-list wp-digi-accident wp-digi-table">
 		<?php
 		Accident_Class::g()->display_accident_list( $society_id );
-		View_Util::exec( 'accident', 'item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'accident' => $accident,
 			'society_id' => $society_id,
 		) );

@@ -1,20 +1,8 @@
 <?php namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
-/**
- * Fichier du controlleur principal de l'extension digirisk pour wordpress / Main controller file for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
 
-/**
- * Classe du controlleur principal de l'extension digirisk pour wordpress / Main controller class for digirisk plugin
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
-class workunit_model extends society_model {
+class Workunit_Model extends Society_Model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
@@ -54,10 +42,6 @@ class workunit_model extends society_model {
 						'type'		=> 'integer',
 					),
 				),
-			),
-			'associated_recommendation' => array(
-				'type' 		=> 'array',
-				'meta_type'	=> 'multiple',
 			),
 		) );
 

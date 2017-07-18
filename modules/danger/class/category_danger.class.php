@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class category_danger_class extends term_class {
+class category_danger_class extends \eoxia\term_class {
 	/**
 	 * Nom du modèle à utiliser / Model name to use
 	 * @var string

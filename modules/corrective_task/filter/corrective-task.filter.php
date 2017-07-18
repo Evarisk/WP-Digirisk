@@ -27,8 +27,6 @@ class Corrective_Task_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'risk_duer_additional_data', array( $this, 'callback_risk_duer_additional_data' ), 10, 2 );
-
-		add_filter( 'task_manager_dashboard_content', array( $this, 'callback_dashboard_content' ), 11, 2 );
 	}
 
 	/**
@@ -98,38 +96,6 @@ class Corrective_Task_Filter {
 		} // End if().
 
 		return $data_risk;
-	}
-
-	/**
-	 * Modifie le chargement des tâches de Task Manager pour afficher toutes les tâches.
-	 *
-	 * @param  string  $string      La vue avant modification par cette méthode.
-	 * @param  integer $post_parent Le post parent qui ne sera pas utilisé par cette méthode.
-	 * @return string               Le contenu modifié par cette méthode.
-	 *
-	 * @since 6.2.6.0
-	 * @version 6.2.8.0
-	 */
-	public function callback_dashboard_content( $string, $post_parent ) {
-		global $task_controller;
-
-		$list_task = $task_controller->index( array(
-			'post_parent' => '',
-		) );
-
-		if ( ! empty( $list_task ) ) {
-			foreach ( $list_task as $key => $task ) {
-				if ( 0 === $task->parent_id ) {
-					unset( $list_task[ $key ] );
-				}
-			}
-		}
-
-		ob_start();
-		require( \wpeo_template_01::get_template_part( WPEO_TASK_DIR, WPEO_TASK_TEMPLATES_MAIN_DIR, 'backend', 'main' ) );
-		$string .= ob_get_clean();
-
-		return $string;
 	}
 }
 

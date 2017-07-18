@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <tr class="risk-row">
 	<td data-title="Ref." class="padding">
 		<!-- La popup pour les actions correctives -->
-		<?php View_Util::exec( 'corrective_task', 'popup', array() ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
 
-		<span><strong><?php echo esc_html( $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
+		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
 	<td data-title="Risque">
 		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?>
