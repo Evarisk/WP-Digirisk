@@ -68,7 +68,7 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 			/**	In case insertion has been successfull, read children in order to do same treatment and save extras informations into meta for the moment	*/
 			if ( is_int( $element_id ) && ( 0 !== (int)$element_id ) ) {
 				/**	Log creation	*/
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), array( 'object_id' => $element->id, ), 0 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $element_id), array( 'object_id' => $element->id, ), 0 );
 
 				/**	Store an option to avoid multiple transfer	*/
 				$digirisk_transfer_options[ $element_type ][] = $element->id;
@@ -137,7 +137,7 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 				}
 			}
 			else {
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), array( 'object_id' => $element_type . '-' . $element->id, ), 2 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $element_type, '', sprintf( __( 'Error transferring from evarisk to post. error %s', 'wp-digi-dtrans-i18n' ), json_encode( $element_id ) ), array( 'object_id' => $element_type . '-' . $element->id, ), 2 );
 			}
 		}
 
@@ -170,7 +170,7 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 		if ( !empty( $survey_results ) ) {
 			foreach ( $survey_results as $original_survey_id => $final_survey ) {
 				update_post_meta( $new_element_id, '_wpes_audit_' . $original_survey_id, $final_survey );
-				log_class::g()->exec( 'digirisk-datas-transfert-survey' , '', __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $original_survey_id, ), 0 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-survey' , '', __( 'Survey association have been transfered to normal way', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $original_survey_id, ), 0 );
 			}
 		}
 	}
@@ -261,7 +261,7 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 				/**	Set the post thumbnail if necessary	*/
 				if ( !empty( $new_element_id ) && ( 'picture' == $main_type ) && ( 'yes' == $document->isMainPicture ) ) {
 					set_post_thumbnail( $new_element_id, $attach_id );
-					log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $attach_id ), array( 'object_id' => $document->id, 'document_old_def' => $document ), 0 );
+					\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $attach_id ), array( 'object_id' => $document->id, 'document_old_def' => $document ), 0 );
 				}
 
 				if ( ! isset( $document->LINK_STATUS ) || ( 'valid' === $document->LINK_STATUS ) ) {
@@ -272,14 +272,14 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 				switch ( $main_type ) {
 					case 'picture':
 						/**	Get the element created for new data transfer	*/
-						$doc_model = attachment_class::g()->get( array( 'p' => $attach_id, 'post_status' => $document_status ) );
+						$doc_model = Document_Class::g()->get( array( 'p' => $attach_id, 'post_status' => $document_status ) );
 						$doc_model = $doc_model[0];
 
 						/**	Build the model for new data storage */
 						$doc_model->parent_id = $new_element_id;
 						$doc_model->unique_key = $document->id;
 						$doc_model->unique_identifier = ELEMENT_IDENTIFIER_PIC . $document->id;
-						attachment_class::g()->update( $doc_model );
+						Document_Class::g()->update( $doc_model );
 					break;
 					case 'document':
 						/** Do a backup of old document */
@@ -294,7 +294,7 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 					break;
 				}
 
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l\'élément %4$s ', 'wp-digi-dtrans-i18n' ), $main_type, $document->id, $attach_id, $new_element_id), array( 'object_id' => $document->id, ), 0 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l\'élément %4$s ', 'wp-digi-dtrans-i18n' ), $main_type, $document->id, $attach_id, $new_element_id), array( 'object_id' => $document->id, ), 0 );
 				$digirisk_transfert_options[ $document_origin ][ 'ok' ][] = $document->id;
 			} else {
 				$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
@@ -340,11 +340,11 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 					$old_evarisk_element = __( 'Document model', 'wp-digi-dtrans-i18n' );
 				}
 
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s', 'wp-digi-dtrans-i18n' ), $main_type, $file, $new_element_id, $old_evarisk_element ), array( 'object_id' => $document->id, ), 2 );
 			}
 		} else {
 			$digirisk_transfert_options[ $document_origin ][ 'nok' ][ $document->id ][ 'file' ] = $file;
-			log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s could not being transfered to wordpress element because it is not a file. Path: %2$s.', 'wp-digi-dtrans-i18n' ), $main_type, $file ), array( 'object_id' => $document->id, ), 2 );
+			\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $main_type , '', sprintf( __( '%1$s could not being transfered to wordpress element because it is not a file. Path: %2$s.', 'wp-digi-dtrans-i18n' ), $main_type, $file ), array( 'object_id' => $document->id, ), 2 );
 		}
 
 		/**	Set the new list of element treated	*/
@@ -375,12 +375,12 @@ class TransferData_common_class extends \eoxia\Singleton_Util {
 				if ( ( null !== $document_id ) && !is_wp_error( $document_id ) ) {
 					if ( 'yes' == $picture->isMainPicture ) {
 						$associated_document_list[ '_thumbnail' ] = $document_id;
-						log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Association de l\'image %2$d à l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Association de l\'image %2$d à l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
 					} elseif ( in_array( $element_type, array( TABLE_RISQUE ) ) ) {
 						/**	Set the post thumbnail in case it is the case	*/
 						set_post_thumbnail( $new_element_id, $document_id );
 						$associated_document_list[ '_thumbnail' ] = $document_id;
-						log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-picture' , '', sprintf( __( 'Définition de l\'image principale %2$d de l\'élément %1$d', 'wp-digi-dtrans-i18n' ), $new_element_id, $document_id ), array( 'object_id' => $picture->id, 'document_old_def' => $picture ), 0 );
 					}
 					$associated_document_list[ 'associated_list' ][] = $document_id;
 				}

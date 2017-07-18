@@ -133,7 +133,7 @@ class TransferData_task_class extends \eoxia\Singleton_Util {
 				update_post_meta( $new_element_id, '_wpeo_element_links', $links );
 			}
 			else {
-				log_class::g()->exec( 'digirisk-datas-transfert-' . $old_element_type , '', sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), array( 'object_id' => $old_element_id, ), 2 );
+				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $old_element_type , '', sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), array( 'object_id' => $old_element_id, ), 2 );
 			}
 		}
 

@@ -103,7 +103,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" id="wpdigi-datastransfer-form" method="post" >
 		<input type="hidden" name="action" value="wpdigi-datas-transfert<?php echo ( false === $main_config_components_are_transfered ) ? '-config_components' : ''; ?>" />
 		<?php $current_type = ( false === $main_config_components_are_transfered ) ? 'config_components' : ( empty( $element_to_treat ) ? 'doc' : 'element' ); ?>
-		<input type="hidden" name="sub_action" value="<?php echo $current_type; ?>" />
+		<input type="text" name="sub_action" value="<?php echo $current_type; ?>" />
 		<?php wp_nonce_field( 'wpdigi-datas-transfert' ); ?>
 		<input type="hidden" name="element_type_to_transfert" value="<?php echo ( empty( $element_to_treat ) ? TransferData_class::g()->element_type[ 0 ] :  $element_to_treat ); ?>" />
 		<input type="hidden" name="number_per_page" value="<?php echo DIGI_DTRANS_NB_ELMT_PER_PAGE; ?>" />
