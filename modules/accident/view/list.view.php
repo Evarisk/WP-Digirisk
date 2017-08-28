@@ -1,18 +1,46 @@
-<?php if ( !defined( 'ABSPATH' ) ) exit; ?>
+<?php
+/**
+ * Affiches la liste des accident
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.3.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
+ */
 
-<li class="wp-digi-accident-list-header wp-digi-table-header">
-	<span class="wp-digi-accident-list-column-id"><?php _e( 'ID', 'digirisk' ); ?></span>
-	<span class="wp-digi-accident-list-column-name"><?php _e( 'Risque associé', 'digirisk' ); ?></span>
-	<span class="wp-digi-accident-list-column-description"><?php _e( 'Date accident', 'digirisk' ); ?> </span>
-	<span class="wp-digi-accident-list-column-serial-number"><?php _e('Personne accidentée', 'digirisk' ); ?></span>
-	<span class="wp-digi-accident-list-column-fabrication-date"><?php _e('Description', 'digirisk'); ?></span>
-	<span class="wp-digi-accident-list-column-shelf-life"><?php _e('Nb. de jour arrêt', 'digirisk'); ?></span>
-	<span class="wp-digi-risk-list-column-actions" >&nbsp;</span>
-</li>
+namespace digi;
 
-<?php $i = 1; ?>
-<?php if ( !empty( $accident_list ) ) : ?>
-	<?php foreach ( $accident_list as $accident ) : ?>
-		<?php require( ACCIDENT_VIEW_DIR . '/list-item.php' ); ?>
-	<?php endforeach; ?>
-<?php endif; ?>
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+
+<table class="table accident">
+	<thead>
+		<tr>
+			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+			<th class="padding"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
+			<th class="padding"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></th>
+			<th class="padding"><?php esc_html_e( 'Identité victime', 'digirisk' ); ?></th>
+			<th class="padding"><?php esc_html_e( 'Circonstances détaillées', 'digirisk' ); ?></th>
+			<th class="padding"><?php esc_html_e( 'Opt. avancés', 'digirisk' ); ?></th>
+			<th class="w100"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php if ( ! empty( $accidents ) ) :
+			foreach ( $accidents as $accident ) :
+				\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-item', array(
+					'society_id' => $society_id,
+					'accident' => $accident,
+				) );
+			endforeach;
+		endif; ?>
+	</tbody>
+
+	<tfoot>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+			'society_id' => $society_id,
+			'accident' => $accident_schema,
+		) ); ?>
+	</tfoot>
+</table>

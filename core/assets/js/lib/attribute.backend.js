@@ -22,4 +22,4 @@ if ( ! jQuery.fn.get_data ) {
 			cb( data );
 		} );
 	};
-	}
+}

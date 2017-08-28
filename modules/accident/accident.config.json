@@ -1,7 +1,7 @@
 {
 	"name": "Accident",
 	"slug": "accident",
-	"version": "0.2.0.0",
+	"version": "6.3.0",
 	"description": "Le module gérant les accidents",
 	"path": "modules/accident/",
 	"dependencies": {
@@ -16,5 +16,5 @@
 		"action": {
 		}
 	},
-	"state": false
+	"state": true
 }

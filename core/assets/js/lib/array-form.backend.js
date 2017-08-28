@@ -1,8 +1,23 @@
-if ( ! window.eoxiaJS.arrayForm ) {
+/**
+ * Action for make request AJAX.
+ *
+ * @since 1.0.0-easy
+ * @version 1.0.0-easy
+ */
 
+if ( ! window.eoxiaJS.arrayForm ) {
+	/**
+	 * Declare the object arrayForm.
+	 *
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @type {Object}
+	 */
 	window.eoxiaJS.arrayForm = {};
 
 	window.eoxiaJS.arrayForm.init = function() {};
+
+	window.eoxiaJS.arrayForm.event = function() {};
 
 	window.eoxiaJS.arrayForm.getInput = function( parent ) {
 		return parent.find( 'input, textarea, select' );
@@ -18,23 +33,4 @@ if ( ! window.eoxiaJS.arrayForm ) {
 				break;
 		}
 	};
-
-	window.eoxiaJS.arrayForm.sendForm = function( event ) {
-		var element = jQuery( this );
-		var parent = element.closest( '.form' );
-		var listInput = window.eoxiaJS.arrayForm.getInput( parent );
-		var data = {};
-		var i = 0;
-
-		event.preventDefault();
-
-		for ( i = 0; i < listInput.length; i++ ) {
-			if ( listInput[i].name ) {
-				data[listInput[i].name] = window.eoxiaJS.arrayForm.getInputValue( listInput[i] );
-			}
-		}
-
-		window.eoxiaJS.request.send( element, data );
-	};
-
-	}
+}

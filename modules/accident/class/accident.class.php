@@ -1,24 +1,72 @@
 <?php
+/**
+ * La classe gérant les accidents
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.3.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
+ */
 
 namespace digi;
 
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class accident_class extends Post_Class {
+/**
+ * La classe gérant les accidents
+ */
+class Accident_Class extends \eoxia\Post_Class {
 
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
 	protected $model_name   = '\digi\accident_model';
+
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
 	protected $post_type    = 'digi-accident';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key    	= '_wpdigi_accident';
 
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to accident from WP Rest API	*/
-	protected $base = 'digirisk/accident';
-	protected $version = '0.1';
-
-	protected $before_post_function = array( '\digi\construct_identifier' );
-	protected $after_get_function = array( '\digi\get_identifier' );
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'AC';
 
-	protected $limit_accident = -1;
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_put_function = array( '\eoxia\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
+
 
 	/**
 	 * Le nom pour le resgister post type
@@ -28,22 +76,37 @@ class accident_class extends Post_Class {
 	protected $post_type_name = 'Accidents';
 
 	/**
-	 * Instanciation principale de l'extension / Plugin instanciation
+	 * Constructeur obligatoire pour Singleton_Util
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 * @return void
 	 */
 	protected function construct() {
 		parent::construct();
 	}
 
 	/**
-	* Affiche la fenêtre principale
-	*
-	* @param int $society_id L'ID de la societé
-	*/
+	 * Affiches la fenêtre principale des accidents
+	 *
+	 * @param  integer $society_id L'ID de la société.
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 * @return void
+	 */
 	public function display( $society_id ) {
-		$accident = $this->get( array( 'schema' => true ) );
-		$accident = $accident[0];
+		$accident_schema = $this->get( array(
+			'schema' => true,
+		), true );
+
+		$accidents = $this->get( array(
+			'post_parent' => $society_id,
+		) );
+
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main', array(
-			'accident' => $accident,
+			'accident_schema' => $accident_schema,
+			'accidents' => $accidents,
 			'society_id' => $society_id,
 		) );
 	}
