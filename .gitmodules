@@ -7,6 +7,6 @@
 [submodule "core/external/wpeo_log"]
 	path = core/external/wpeo_log
 	url = https://github.com/Eoxia/wpeo_log.git
-[submodule "core/external/wpeo-upload"]
-	path = core/external/wpeo-upload
-	url = https://github.com/Eoxia/wpeo-upload.git
+[submodule "core/external/wpeo_upload"]
+	path = core/external/wpeo_upload
+	url = https://github.com/Eoxia/wpeo_upload.git
