@@ -17,35 +17,49 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="edit_accident" />
-	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
-	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $accident->id ); ?>" />
+	<?php wp_nonce_field( 'edit_accident' ); ?>
+	<input type="hidden" name="accident[id]" value="<?php echo esc_attr( $accident->id ); ?>" />
 
 	<td data-title="Ref." class="padding">
-		ref
+		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'popup-edit', array(
+			'accident' => $accident,
+		) ); ?>
+
+		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
 	</td>
-	<td data-title="Risque" data-title="Risque" class="padding">
-		<?php do_shortcode( '[digi_dropdown_risk society_id=' . $society_id . ' element_id=' . $accident->id . ' risk_id=' . $accident->risk_id . ']' ); ?>
-	</td>
-	<td data-title="Date et heure" class="padding">
-		<input type="text" name="" class=".date-time" placeholder="04/01/2017" value="<?php echo esc_html( $accident->date ); ?>" />
+	<td data-title="Date d'inscription dans le registre" class="padding">
+		<?php if ( empty( $accident->id ) ) : ?>
+			<input type="text" class="date" name="accident[registration_date_in_register]" value="<?php echo esc_attr( $accident->registration_date_in_register ); ?>" />
+		<?php else : ?>
+			<span><?php echo esc_html( $accident->registration_date_in_register ); ?></span>
+		<?php endif; ?>
 	</td>
 	<td data-title="Identité victime" class="padding">
-		<input type="text" />
+		<input type="text" data-field="accident[victim_identity_id]" data-type="user" placeholder="" class="digi-search" value="<?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?>" dir="ltr">
+		<input type="hidden" name="accident[victim_identity_id]" value="<?php echo esc_attr( $accident->victim_identity_id ); ?>">
 	</td>
 	<td data-title="Circonstances détaillées" class="padding">
-		<input type="text" />
+		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+	</td>
+	<td data-title="Etat" class="padding">
+		<input type="text" name="accident[state]" value="<?php echo esc_attr( $accident->state ); ?>" />
+	</td>
+	<td data-title="Enquête accident" class="padding">
+		<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
 	</td>
 	<td data-title="Opt. Avancées">
-		opt avancées
+		<div 	class="open-popup button light w50 task"
+					data-parent="accident-row"
+					data-target="popup">YO</div>
 	</td>
 	<td data-title="action">
 		<?php if ( 0 !== $accident->id ) : ?>
 			<div class="action grid-layout w3">
-				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="accident-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+				<div data-loader="table" data-parent="accident-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

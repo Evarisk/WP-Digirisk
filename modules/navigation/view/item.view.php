@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	data-workunit-id="<?php echo esc_attr( $workunit->id ); ?>"
 	data-type="<?php echo esc_attr( $workunit->type ); ?>">
 
-	<?php do_shortcode( '[eo_upload_button id=' . $workunit->id . ' type=' . $workunit->type . ']' ); ?>
+	<?php do_shortcode( '[wpeo_upload id="' . $workunit->id . '" model_name="/digi/' . $workunit->get_class() . '" field_name="image" ]' ); ?>
 
 	<span
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"

@@ -3,11 +3,10 @@
  * Gestion des actions relatif à la recherche
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package search
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -32,8 +31,8 @@ class Search_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.3
+	 * @version 6.3.0
 	 */
 	public function callback_digi_search() {
 		$list = Search_Class::g()->search( $_GET );
@@ -45,7 +44,7 @@ class Search_Action {
 		$return = array();
 
 		foreach ( $list as $element ) {
-			$user = User_Class::g()->get( array( 'include' => array( $element ) ) );
+			$user = User_Digi_Class::g()->get( array( 'include' => array( $element ) ) );
 			$user = $user[0];
 			$return[] = array(
 				'label' => $user->login . ' (' . $user->email . ')',

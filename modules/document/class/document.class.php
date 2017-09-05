@@ -235,9 +235,12 @@ class Document_Class extends \eoxia\Post_Class {
 	}
 
 	public function get_document_path( $element ) {
-		$society = society_class::g()->show_by_type( $element->parent_id, array( false ) );
-		$path = $this->get_digirisk_dir_path( 'baseurl' );
-		$path .= "/" . $society->type . "/" . $society->id . "/";
+		$path = $this->get_digirisk_dir_path( 'baseurl' ) . "/";
+
+		if ( ! empty( $element->parent_id ) ) {
+			$society = society_class::g()->show_by_type( $element->parent_id, array( false ) );
+			$path .= "/" . $society->type . "/" . $society->id . "/";
+		}
 		$path .= $element->title;
 		$path .= $this->mime_type_link[$element->mime_type];
 		return $path;
@@ -328,6 +331,9 @@ class Document_Class extends \eoxia\Post_Class {
 	 * @param array $document_meta Datas to write into the document template / Les données a écrire dans le modèle de document
 	 *
 	 * @return object The result of document creation / le résultat de la création du document
+	 *
+	 * @version 6.3.0
+	 * @todo Cette méthode nécessite réellement une refactorisation.
 	 */
 	public function create_document( $element, $document_type, $document_meta ) {
 		if ( ! empty( $document_type ) && ! empty( $document_type[0] ) && class_exists( '\digi\\' . $document_type[0] . '_model' ) ) {
@@ -359,6 +365,9 @@ class Document_Class extends \eoxia\Post_Class {
 			case "diffusion_informations_A4":
 				$types[0] = Diffusion_Informations_A4_Class::g()->get_post_type();
 				break;
+			case "accident_benin":
+				$types[0] = Accident_Travail_Benin_Class::g()->get_post_type();
+				break;
 			case "zip":
 				$types[0] = ZIP_Class::g()->get_post_type();
 				break;
@@ -374,16 +383,21 @@ class Document_Class extends \eoxia\Post_Class {
 		$model_to_use = $model_response[ 'model_path' ];
 
   	/**	Définition de la révision du document / Define the document version	*/
-  	$document_revision = $this->get_document_type_next_revision( $types, $element->id );
+		$document_revision = 0;
+		$main_title_part = '';
+
+		if ( ! empty( $element ) ) {
+	  	$document_revision = $this->get_document_type_next_revision( $types, $element->id );
+			$main_title_part = $element->title;
+		}
 
   	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
-  	$main_title_part = $element->title;
-  	if ( !empty( $document_type ) && is_array( $document_type ) ) {
+  	if ( ! empty( $document_type ) && is_array( $document_type ) ) {
   		$main_title_part = $document_type[ 0 ] . '_' . $main_title_part;
   	}
 
   	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/
-  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
+  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . ! empty( $element ) && ! empty( $element->unique_identifier ) ? $element->unique_identifier : '' . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
   	$document_args = array(
 			'post_content'	=> '',
 			'post_status'	=> 'inherit',
@@ -403,7 +417,12 @@ class Document_Class extends \eoxia\Post_Class {
 		$path = '';
 
   	if ( null !== $model_to_use ) {
-			$path = $element->type. '/' . $element->id . '/' . $response[ 'filename' ];
+			$path = $response['filename'];
+
+			if ( ! empty( $element ) ) {
+				$path = $element->type. '/' . $element->id . '/' . $response[ 'filename' ];
+			}
+
   		$document_creation = $this->generate_document( $model_to_use, $document_meta, $path );
 
   		if ( !empty( $document_creation ) && !empty( $document_creation[ 'status' ] ) && !empty( $document_creation[ 'link' ] ) ) {
@@ -420,7 +439,7 @@ class Document_Class extends \eoxia\Post_Class {
   		$response[ 'message' ] = $model_response[ 'message' ];
   	}
 
-		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $path, $element->id );
+		$response[ 'id' ] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $path, ! empty( $element ) ? $element->id : 0 );
 
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
@@ -431,7 +450,7 @@ class Document_Class extends \eoxia\Post_Class {
   	$document_args = array(
 			'id'										=> $response[ 'id' ],
 			'title'									=> basename( $response[ 'filename' ], '.odt' ),
-			'parent_id'							=> $element->id,
+			'parent_id'							=> ! empty( $element->id ) ? $element->id : 0,
 			'author_id'							=> get_current_user_id(),
 			'date'									=> current_time( 'mysql', 0 ),
 			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
@@ -470,6 +489,10 @@ class Document_Class extends \eoxia\Post_Class {
 			case 'diffusion_informations_A4':
 				$document_args['type'] = Diffusion_Informations_A4_Class::g()->get_post_type();
 				$document = Diffusion_Informations_A4_Class::g()->update( $document_args );
+				break;
+			case 'accident_benin':
+				$document_args['type'] = Accident_Travail_Benin_Class::g()->get_post_type();
+				$document = Accident_Travail_Benin_Class::g()->update( $document_args );
 				break;
 			case 'zip':
 				$document_args['type'] = ZIP_Class::g()->get_post_type();

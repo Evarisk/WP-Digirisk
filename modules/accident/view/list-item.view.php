@@ -15,42 +15,44 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <tr class="accident-row">
 	<td data-title="Ref." class="padding">
-		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></span></strong>
-	</td>
-	<td data-title="Risque associé" class="padding">
-		Risque
+		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'popup', array(
+			'accident' => $accident,
+		) ); ?>
+		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date et heure" class="padding">
-		Date et heure
+		<span><?php echo esc_html( $accident->registration_date_in_register ); ?></span>
 	</td>
 	<td data-title="Identité victime" class="padding">
-		Identité victime
+		<span><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></span>
 	</td>
 	<td data-title="Circonstances détaillées" class="padding">
-		Circonstances détaillés
+		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?>
+	</td>
+	<td data-title="Etat" class="padding">
+		<span><?php echo esc_html( $accident->state ); ?></span>
+	</td>
+	<td data-title="Enquête accident" class="padding">
+		<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
 	</td>
 	<td data-title="Opt. avancées">
-		icone
+		<div 	class="open-popup button light w50 task"
+					data-parent="accident-row"
+					data-target="popup">YO</div>
 	</td>
 	<td data-title="Action">
-		<div class="action grid-layout w3">
-			<div 	class="open-popup-ajax button light w50 task"
-						data-parent="risk-row"
-						data-target="corrective-task"
-						data-action="open_task"
-						data-id="<?php echo esc_attr( $accident->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
-
-			<!-- Editer un risque -->
+		<div class="action grid-layout w2">
+			<!-- Editer un accident -->
 			<div 	class="button light w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $accident->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
-						data-loader="risk"
-						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_accident' ) ); ?>"
+						data-loader="accident"
+						data-action="load_accident"><i class="icon fa fa-pencil"></i></div>
 
 			<div 	class="button light w50 delete action-delete"
 						data-id="<?php echo esc_attr( $accident->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
-						data-action="delete_risk"><i class="icon fa fa-times"></i></div>
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_accident' ) ); ?>"
+						data-action="delete_accident"><i class="icon fa fa-times"></i></div>
 		</div>
 	</td>
 </tr>

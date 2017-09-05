@@ -1,81 +1,70 @@
-"use strict";
+/**
+ * Initialise l'objet "accident" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident = {};
 
-var digi_accident = {
-	$: undefined,
+window.eoxiaJS.digirisk.accident.init = function() {};
 
-	init: function( event, $ ) {
-		digi_accident.$ = $;
-		if ( event || event === undefined ) {
-			digi_accident.event();
-		}
-	},
+/**
+ * Le callback en cas de réussite à la requête Ajax "edit_accident".
+ * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( 'table.accident' ).replaceWith( response.data.view );
+};
 
-	event: function() {
-		digi_accident.$( document ).on( 'click', '.form-accident .wp-digi-action-new', function( event ) { digi_accident.edit_accident( event, digi_accident.$( this ) ); } );
-		digi_accident.$( document ).on( 'click', '.wp-digi-accident .wp-digi-action-delete', function( event ) { digi_accident.delete_accident( event, digi_accident.$( this ) ); } );
-		digi_accident.$( document ).on( 'click', '.wp-digi-accident .wp-digi-action-load', function( event ) { digi_accident.load_accident( event, digi_accident.$( this ) ); } );
-		// digi_accident.$( document ).on( 'click', '.wp-digi-accident .wp-digi-action-edit', function( event ) { digi_accident.edit_accident( event, digi_accident.$( this ) ); } );
-	},
+/**
+ * Le callback en cas de réussite à la requête Ajax "load_accident".
+ * Remplaces le contenu de la ligne du tableau "accident" par le template renvoyé par la requête Ajax.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( element, response ) {
+	jQuery( element ).closest( 'tr' ).replaceWith( response.data.view );
+	window.eoxiaJS.digirisk.search.renderChanged();
+};
 
-	edit_accident: function( event, element ) {
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_accident".
+ * Supprimes la ligne du tableau.
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( element, response ) {
+	element.closest( 'tr' ).fadeOut();
+};
 
-    digi_accident.$( element ).closest( 'form' ).ajaxSubmit( {
-      'beforeSubmit': function() {
-				digi_accident.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
-      },
-			success: function( response ) {
-				digi_accident.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-				digi_accident.$( '.wp-digi-accident.wp-digi-list' ).replaceWith( response.data.template );
-			}
-		} );
-	},
-
-	delete_accident: function( event, element ) {
-		event.preventDefault();
-
-    if( window.confirm( window.digi_confirm_delete ) ) {
-  		var accident_id = digi_accident.$( element ).data( 'id' );
-
-  		digi_accident.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
-
-  		var data = {
-  			action: 'wpdigi-delete-accident',
-  			_wpnonce: digi_accident.$( element ).data( 'nonce' ),
-  			global: digi_accident.$( element ).data( 'global' ),
-  			accident_id: accident_id,
-  		};
-
-  		digi_accident.$.post( window.ajaxurl, data, function() {
-  			digi_accident.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-  			digi_accident.$( '.wp-digi-list .wp-digi-list-item[data-accident-id="' + accident_id + '"]' ).fadeOut();
-  		} );
-    }
-	},
-
-	load_accident: function( event, element ) {
-		event.preventDefault();
-
-    digi_accident.send_accident();
-
-		var accident_id = digi_accident.$( element ).data( 'id' );
-		digi_accident.$( '.wp-digi-content' ).addClass( "wp-digi-bloc-loading" );
-
-		var data = {
-			action: 'load_accident',
-			_wpnonce: digi_accident.$( element ).data( 'nonce' ),
-			accident_id: accident_id,
-		};
-
-		digi_accident.$.post( window.ajaxurl, data, function( response ) {
-      digi_accident.$( '.wp-digi-list-item .dashicons-edit' ).hide();
-			digi_accident.$( '.wp-digi-content' ).removeClass( "wp-digi-bloc-loading" );
-			digi_accident.$( '.wp-digi-accident .wp-digi-list-item[data-accident-id="' + accident_id + '"]' ).replaceWith( response.data.template );
-		} );
-	},
-
-	send_accident: function() {
-		digi_accident.$( '.wp-digi-table-item-edit' ).each( function() {
-			digi_accident.$( this ).find( '.dashicons-edit' ).click();
-		} );
-	}
+/**
+ * Le callback en cas de réussite à la requête Ajax "generate_accident".
+ * Remplace la vue du tableau
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, response ) {
+	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
 };

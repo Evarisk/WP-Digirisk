@@ -14,7 +14,8 @@ if ( ! window.eoxiaJS.date ) {
 
 		jQuery( document ).on( 'click', 'input.date-time', function( e ) {
 			jQuery( this ).datetimepicker( {
-				'lang': 'fr'
+				'lang': 'fr',
+				'format': 'd/m/Y H:i'
 			} ).datetimepicker( 'show' );
 		} );
 

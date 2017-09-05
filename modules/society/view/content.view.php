@@ -3,18 +3,19 @@
  * Display .... Fichier incompréhensible.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 0.1.0-alpha
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage view
+ * @package DigiRisk
  */
+
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="main-header">
 	<div class="unit-header">
-		<?php do_shortcode( '[eo_upload_button id="' . $element->id . '" type="' . $element->type . '"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $element->id . '" model_name="/digi/' . $element->get_class() . '" field_name="image" ]' ); ?>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
 		<div

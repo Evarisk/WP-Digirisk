@@ -52,12 +52,12 @@ if ( ! window.eoxiaJS.action ) {
 		var element = jQuery( this ), parentElement = element, loaderElement = element, listInput = undefined, data = {}, i = 0, doAction = true, key = undefined, inputAlreadyIn = [];
 		event.preventDefault();
 
-		if ( element.data( 'loader' ) ) {
-			loaderElement = element.closest( '.' + element.attr( 'loader' ) );
+		if ( element.attr( 'data-loader' ) ) {
+			loaderElement = element.closest( '.' + element.attr( 'data-loader' ) );
 		}
 
-		if ( element.data( 'parent' ) ) {
-			parentElement = element.closest( '.' + element.attr( 'parent' ) );
+		if ( element.attr( 'data-parent' ) ) {
+			parentElement = element.closest( '.' + element.attr( 'data-parent' ) );
 		}
 
 		/** Méthode appelée avant l'action */
@@ -72,7 +72,6 @@ if ( ! window.eoxiaJS.action ) {
 
 		if ( doAction ) {
 			loaderElement.addClass( 'loading' );
-
 			listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
 			for ( i = 0; i < listInput.length; i++ ) {
 				if ( listInput[i].name && -1 === inputAlreadyIn.indexOf( listInput[i].name ) ) {

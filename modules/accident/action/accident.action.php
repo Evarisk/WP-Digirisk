@@ -1,102 +1,152 @@
 <?php
 /**
- * @TODO : A détailler
+ * Gestion des actions des accidents.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.9.0
+ * @since 6.3.0
+ * @version 6.3.0
  * @copyright 2015-2017
- * @package accident
- * @subpackage action
+ * @package DigiRisk
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit;
-}
+namespace digi;
 
-class accident_action {
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/**
+ * Gestion des actions des accidents
+ */
+class Accident_Action {
+
 	/**
-	 * Le constructeur appelle une action personnalisée:
-	 * Il appelle également les actions ajax suivantes:
-	 * wp_ajax_wpdigi-delete-accident
-	 * wp_ajax_wpdigi-load-accident
-	 * wp_ajax_wpdigi-edit-accident
+	 * Le constructeur appelle une action personnalisée
+	 * Il appelle également les actions ajax suivantes
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
-		add_action( 'wp_ajax_wpdigi-delete-accident', array( $this, 'ajax_delete_accident' ) );
 		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );
-		add_action( 'wp_ajax_wpdigi-edit-accident', array( $this, 'ajax_edit_accident' ) );
+		add_action( 'wp_ajax_delete_accident', array( $this, 'ajax_delete_accident' ) );
 	}
 
+	public function callback_admin_menu() {
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+	}
+
+	/**
+	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 *
+	 * @return void
+	 */
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
 
-		if ( ! empty( $_POST['accident'] ) ) {
-			foreach ( $_POST['accident'] as $element ) {
-				$element['parent_id'] = $_POST['parent_id'];
-				$accident = accident_class::g()->update( $element );
+		$name_and_signature_of_the_caregiver_id = ! empty( $_POST['name_and_signature_of_the_caregiver_id'] ) ? (int) $_POST['name_and_signature_of_the_caregiver_id'] : 0;
+		$signature_of_the_victim_id = ! empty( $_POST['signature_of_the_victim_id'] ) ? (int) $_POST['signature_of_the_victim_id'] : 0;
 
-				do_action( 'add_compiled_accident_id', $accident );
-				do_action( 'add_compiled_stop_day_id', $accident );
+		$accident = Accident_Class::g()->update( $_POST['accident'] );
+
+		// Associations des images.
+		if ( ! empty( $name_and_signature_of_the_caregiver_id ) ) {
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $name_and_signature_of_the_caregiver_id, '\digi\Accident_Class', 'name_and_signature_of_the_caregiver_id' );
+		}
+		if ( ! empty( $signature_of_the_victim_id ) ) {
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $signature_of_the_victim_id, '\digi\Accident_Class', 'signature_of_the_victim_id' );
+		}
+
+		// Associations des commentaires.
+		if ( ! empty( $_POST['list_comment'] ) ) {
+			foreach ( $_POST['list_comment'] as $comment ) {
+				if ( ! empty( $comment['content'] ) ) {
+					$comment['post_id'] = $accident->id;
+					\eoxia\Comment_Class::g()->update( $comment );
+				}
 			}
 		}
 
 		ob_start();
-		accident_class::g()->display( $_POST['parent_id'] );
-		wp_send_json_success( array( 'template' => ob_get_clean() ) );
+		Accident_Class::g()->display_accident_list();
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'accident',
+			'callback_success' => 'editedAccidentSuccess',
+			'view' => ob_get_clean(),
+		) );
 	}
 
 	/**
-	 * Supprimes un accident
+	 * Charges un accident ainsi que ses images et la liste des commentaires.
 	 *
-	 * int $_POST['accident_id'] L'ID du accident
+	 * @since 6.3.0
+	 * @version 6.3.0
 	 *
-	 * @param array $_POST Les données envoyées par le formulaire
+	 * @return void
 	 */
-	public function ajax_delete_accident() {
-		if ( 0 === (int) $_POST['accident_id'] ) {
-			wp_send_json_error( array( 'error' => __LINE__ ) );
-		} else { 			$accident_id = (int) $_POST['accident_id'];
+	public function ajax_load_accident() {
+		check_ajax_referer( 'ajax_load_accident' );
+
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error();
+		} else {
+			$id = (int) $_POST['id'];
 		}
 
-		check_ajax_referer( 'ajax_delete_accident_' . $accident_id );
+		$accident = Accident_Class::g()->get( array(
+			'id' => $id,
+		), true );
 
-		$accident = accident_class::g()->get( array( 'id' => $accident_id ) );
-		$accident = $accident[0];
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+			'society_id' => $accident->parent_id,
+			'accident' => $accident,
+		)	);
+
+		wp_send_json_success( array(
+			'namespace' => 'digirisk',
+			'module' => 'accident',
+			'callback_success' => 'loadedAccidentSuccess',
+			'view' => ob_get_clean(),
+		) );
+	}
+
+	/**
+	 * Passes le status de l'accident en "trash".
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 *
+	 * @return void
+	 */
+	public function ajax_delete_accident() {
+		check_ajax_referer( 'ajax_delete_accident' );
+
+		if ( 0 === (int) $_POST['id'] ) {
+			wp_send_json_error();
+		} else {
+			$id = (int) $_POST['id'];
+		}
+
+		$accident = Accident_Class::g()->get( array(
+			'id' => $id,
+		), true );
 
 		if ( empty( $accident ) ) {
-			wp_send_json_error( array( 'error' => __LINE__ ) );
+			wp_send_json_error();
 		}
 
 		$accident->status = 'trash';
-		do_action( 'delete_compiled_accident_id', $accident );
-		do_action( 'delete_compiled_stop_day_id', $accident );
 
-		accident_class::g()->update( $accident );
+		Accident_Class::g()->update( $accident );
 
-		wp_send_json_success();
-	}
-
-	/**
-	 * Charges un accident
-	 *
-	 * int $_POST['accident_id'] L'ID du accident
-	 *
-	 * @param array $_POST Les données envoyées par le formulaire
-	 */
-	public function ajax_load_accident() {
-		$accident_id = ! empty( $_POST['accident_id'] ) ? (int) $_POST['accident_id'] : 0;
-
-		check_ajax_referer( 'ajax_load_accident_' . $accident_id );
-		$accident = accident_class::g()->get( array( 'include' => $accident_id ) );
-		$accident = $accident[0];
-		$society_id = $accident->parent_id;
-
-		ob_start();
-		require( ACCIDENT_VIEW_DIR . 'item-edit.php' );
 		wp_send_json_success( array(
-			'template' => ob_get_clean()
+			'namespace' => 'digirisk',
+			'module' => 'accident',
+			'callback_success' => 'deletedAccidentSuccess',
 		) );
 	}
 }
 
-new accident_action();
+new Accident_Action();

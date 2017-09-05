@@ -3,11 +3,10 @@
  * Les actions relatives à la page "Risques"
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.7.0
+ * @since 1.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -22,11 +21,11 @@ class Risk_Page_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 13 );
 		add_action( 'can_update', array( $this, 'callback_can_update' ), 10, 0 );
 
 		add_action( 'wp_ajax_paginate_risk', array( $this, 'callback_paginate_risk' ) );

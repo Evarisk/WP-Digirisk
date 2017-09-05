@@ -5,16 +5,11 @@
 	"description": "Le module gérant les accidents",
 	"path": "modules/accident/",
 	"dependencies": {
-		"shortcode": {
+		"action": {},
+		"helper": {},
+		"shortcode": {},
+		"model": {},
+		"class": {}
 		},
-		"model": {
-		},
-		"class": {
-		},
-		"filter": {
-		},
-		"action": {
-		}
-	},
 	"state": true
 }

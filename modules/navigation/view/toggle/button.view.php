@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <div class="workunit-navigation toggle">
 	<div class="unit-header">
-		<?php do_shortcode( '[eo_upload_button id=' . $groupment->id . ' type=digi-group]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $groupment->id . '" model_name="/digi/' . $groupment->get_class() . '" field_name="image" ]' ); ?>
 		<div class="title toggle" data-parent="workunit-navigation" data-target="content"><?php echo esc_html( $groupment->unique_identifier . ' - ' . $groupment->title ); ?></div>
 		<span class="button w50 toggle" data-parent="workunit-navigation" data-target="content"><i class="icon fa fa-angle-down"></i></span>
 	</div>

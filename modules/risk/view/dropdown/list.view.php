@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <?php
 if ( ! empty( $risks ) ) :
 	?>
-	<select name="">
+	<select name="accident[risk_id]">
 		<?php
 		foreach ( $risks as $risk ) :
 			\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/list-item', array(
 				'risk' => $risk,
-				'risk_id' => 0,
+				'risk_id' => $risk_id,
 			) );
 		endforeach;
 		?>

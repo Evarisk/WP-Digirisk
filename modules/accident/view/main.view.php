@@ -11,15 +11,10 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
-\eoxia\View_Util::exec(
-	'digirisk',
-	'accident',
-	'list',
-	array(
-		'society_id' => $society_id,
-		'accidents' => $accidents,
-		'accident_schema' => $accident_schema,
-	)
-);
+<div class="digirisk-wrap">
+	<?php Accident_Class::g()->display_accident_list(); ?>
+
+	<?php Accident_Travail_Benin_Class::g()->display(); ?>
+</div>

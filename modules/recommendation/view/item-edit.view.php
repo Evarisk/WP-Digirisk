@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[eo_upload_button id="' . $recommendation->id . '" type="recommendation"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->id . '" model_name="/digi/' . $recommendation->get_class() . '" field_name="image" ]' ); ?>
 	</td>
 	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>

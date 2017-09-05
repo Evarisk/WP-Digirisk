@@ -38,27 +38,30 @@ class Accident_Model extends \eoxia\Post_Model {
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
 			),
-			'risk_id' => array(
-				'type'				=> 'integer',
-				'meta_type'	=> 'multiple',
-			),
 			'accident_date' => array(
 				'type'				=> 'string',
-				'meta_type'		=> 'multiple',
+				'meta_type'		=> 'single',
+				'field' 			=> '_wpdigi_accident_date',
 			),
-			'victim_identity' => array(
-				'type'				=> 'string',
-				'meta_type'		=> 'multiple',
+			'victim_identity_id' => array(
+				'type'				=> 'integer',
+				'meta_type'		=> 'single',
+				'field' 			=> '_victim_identity_id',
 			),
 			'registration_date_in_register' => array(
 				'type'				=> 'string',
-				'meta_type'		=> 'multiple',
+				'meta_type'		=> 'single',
+				'field' => '_wpdigi_registration_date_in_register',
 			),
 			'place' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
 			),
 			'location_of_lesions' => array(
+				'type'				=> 'string',
+				'meta_type'		=> 'multiple',
+			),
+			'nature_of_lesions' => array(
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
 			),
@@ -74,13 +77,28 @@ class Accident_Model extends \eoxia\Post_Model {
 				'type'				=> 'string',
 				'meta_type'		=> 'multiple',
 			),
-			'name_and_signature_of_the_caregiver_id' => array(
-				'type'				=> 'array',
-				'meta_type'	=> 'multiple',
+			'state' => array(
+				'type' => 'string',
+				'meta_type' => 'single',
+				'field' => '_wpdigi_state',
 			),
-			'signature_of_the_victim' => array(
+			'associated_document_id' => array(
 				'type'				=> 'array',
 				'meta_type'	=> 'multiple',
+				'child' => array(
+					'name_and_signature_of_the_caregiver_id' => array(
+						'type'				=> 'array',
+						'meta_type'	=> 'multiple',
+					),
+					'signature_of_the_victim_id' => array(
+						'type'				=> 'array',
+						'meta_type'	=> 'multiple',
+					),
+					'accident_investigation_id' => array(
+						'type' => 'array',
+						'meta_type' => 'multiple',
+					),
+				),
 			),
 		) );
 
