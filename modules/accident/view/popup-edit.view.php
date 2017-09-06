@@ -25,48 +25,48 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			<div class="form">
 				<ul class="grid-layout padding w2">
-					<li class="<?php echo ! empty( $accident->accident_date ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->accident_date ) ? 'active': ''; ?>">
 							<input name="accident[accident_date]" type="text" class="date-time" value="<?php echo esc_attr( $accident->accident_date ); ?>">
 							<label><?php esc_html_e( 'Date d\'accident', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
-					<li class="<?php echo ! empty( $accident->place ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->place ) ? 'active': ''; ?>">
 							<input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>">
 							<label><?php esc_html_e( 'Lieu', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
-					<li class="<?php echo ! empty( $accident->location_of_lesions ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->location_of_lesions ) ? 'active': ''; ?>">
 							<input type="text" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->location_of_lesions ); ?>">
 							<label><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
-					<li class="<?php echo ! empty( $accident->nature_of_lesions ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->nature_of_lesions ) ? 'active': ''; ?>">
 							<input type="text" name="accident[nature_of_lesions]" value="<?php echo esc_attr( $accident->nature_of_lesions ); ?>">
 							<label><?php esc_html_e( 'Nature des lésions', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
-					<li class="<?php echo ! empty( $accident->name_and_address_of_witnesses ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_witnesses ) ? 'active': ''; ?>">
 							<textarea name="accident[name_and_address_of_witnesses]"><?php echo $accident->name_and_address_of_witnesses; ?></textarea>
 							<label><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
-					<li class="<?php echo ! empty( $accident->name_and_address_of_third_parties_involved ) ? 'active': ''; ?>">
-						<div class="form-element">
+					<li>
+						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_third_parties_involved ) ? 'active': ''; ?>">
 							<textarea name="accident[name_and_address_of_third_parties_involved]"><?php echo $accident->name_and_address_of_third_parties_involved; ?></textarea>
 							<label><?php esc_html_e( 'Nom et adresse des tiers impliqués', 'digirisk' ); ?></label>
 							<span class="bar"></span>
