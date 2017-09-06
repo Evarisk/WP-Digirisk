@@ -8,7 +8,7 @@ class third_class extends \eoxia\post_class {
 	protected $meta_key    	= 'third_display';
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
-	protected $base = 'digirisk/third';
+	protected $base = 'third';
 	protected $version = '0.1';
 
 	public $element_prefix = 'T';
@@ -18,7 +18,7 @@ class third_class extends \eoxia\post_class {
 	* Le constructeur
 	*/
   protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 	/**

@@ -45,7 +45,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 	= 'digirisk/evaluator';
+	protected $base 	= 'evaluator';
 
 	/**
 	 * La version de l'objet
@@ -72,7 +72,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * Le constructeur
 	 */
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 	/**

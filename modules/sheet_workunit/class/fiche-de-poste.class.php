@@ -51,7 +51,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/fiche-de-poste';
+	protected $base 								= 'fiche-de-poste';
 
 	/**
 	 * La version de l'objet
@@ -99,7 +99,6 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

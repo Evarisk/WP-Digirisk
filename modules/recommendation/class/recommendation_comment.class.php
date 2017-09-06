@@ -8,11 +8,11 @@ class recommendation_comment_class extends \eoxia\comment_class {
 	protected $meta_key     = '_wpdigi_recommendation_comment';
 	protected $comment_type	= 'digi-re-comment';
 
-	protected $base					= 'digirisk/recommendation-comment';
+	protected $base					= 'recommendation-comment';
 	protected $version			= '0.1';
 
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 }

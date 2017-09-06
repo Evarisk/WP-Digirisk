@@ -52,7 +52,7 @@ class DUER_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/document-unique';
+	protected $base 								= 'document-unique';
 
 	/**
 	 * La version pour la Rest API
@@ -103,7 +103,6 @@ class DUER_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

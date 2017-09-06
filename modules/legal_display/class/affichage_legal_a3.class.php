@@ -46,7 +46,7 @@ class Affichage_Legal_A3_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/affichage_legal_a3';
+	protected $base 								= 'affichage_legal_a3';
 
 	/**
 	 * La version de l'objet
@@ -90,7 +90,6 @@ class Affichage_Legal_A3_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 }
 

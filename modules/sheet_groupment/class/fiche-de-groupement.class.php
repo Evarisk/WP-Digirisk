@@ -50,7 +50,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/fiche-de-groupement';
+	protected $base 								= 'fiche-de-groupement';
 
 	/**
 	 * La version de l'objet
@@ -98,7 +98,6 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

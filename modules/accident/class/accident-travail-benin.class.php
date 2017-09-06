@@ -51,7 +51,7 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/accident-travail-benin';
+	protected $base 								= 'accident-travail-benin';
 
 	/**
 	 * La version de l'objet
@@ -99,7 +99,6 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

@@ -23,17 +23,26 @@ class Document_Class extends \eoxia\Post_Class {
 	protected $before_put_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier' );
 
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base = 'document';
+
 	protected $limit_document_per_page = 5;
 
 	public $mime_type_link = array(
 		'application/vnd.oasis.opendocument.text' => '.odt',
 		'application/zip' => '.zip',
 	);
+
 	/**
 	 * Instanciation de la gestion des document imprimés / Instanciate printes document
 	 */
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 	/**

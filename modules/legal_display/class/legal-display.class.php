@@ -45,7 +45,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 			= 'digirisk/legal-display';
+	protected $base 			= 'legal-display';
 
 	/**
 	 * La version de l'objet
@@ -92,7 +92,6 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

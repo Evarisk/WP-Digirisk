@@ -45,7 +45,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 		 *
 		 * @var string
 		 */
-		protected $base 			= 'digirisk/diffusion-information';
+		protected $base 			= 'diffusion-information';
 
 		/**
 		 * La version de l'objet
@@ -91,7 +91,9 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @since 6.2.10.0
 	 * @version 6.2.10.0
 	 */
-	protected function construct() {}
+	protected function construct() {
+		parent::construct();
+	}
 
 	/**
 	 * Appelle le template list.view.php dans le dossier /diffusion_informations/view/

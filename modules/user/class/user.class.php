@@ -66,7 +66,7 @@ class User_Digi_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 	= 'digirisk/user';
+	protected $base 	= 'user';
 
 	/**
 	 * La version de l'objet
@@ -98,12 +98,12 @@ class User_Digi_Class extends \eoxia\User_Class {
 	 * @version 6.2.4.0
 	 */
 	protected function construct() {
+		parent::construct();
 		// Ajout de 4 actions pour ajouter des champs dans la partie utilisateur de WordPress.
 		add_action( 'show_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'edit_user_profile', array( $this, 'callback_user_profile' ) );
 		add_action( 'personal_options_update', array( $this, 'callback_options_update' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'callback_options_update' ) );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

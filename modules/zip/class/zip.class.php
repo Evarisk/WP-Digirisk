@@ -53,7 +53,7 @@ class ZIP_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/zip';
+	protected $base 								= 'zip';
 
 	/**
 	 * La version pour la Rest API
@@ -103,7 +103,6 @@ class ZIP_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

@@ -73,7 +73,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base = 'digirisk/group';
+	protected $base = 'group';
 
 	/**
 	 * La version de l'objet
@@ -97,7 +97,6 @@ class Group_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

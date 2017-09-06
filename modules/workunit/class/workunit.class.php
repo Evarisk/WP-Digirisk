@@ -22,7 +22,7 @@ class Workunit_Class extends \eoxia\post_class {
 	protected $model_name   = '\digi\workunit_model';
 	protected $post_type    = 'digi-workunit';
 	protected $meta_key    	= '_wp_workunit';
-	protected $base = 'digirisk/workunit';
+	protected $base = 'workunit';
 	protected $version = '0.1';
 
 	/**
@@ -34,11 +34,6 @@ class Workunit_Class extends \eoxia\post_class {
 
 	protected function construct() {
 		parent::construct();
-		/**	Création des types d'éléments pour la gestion des entreprises / Create element types for societies management	*/
-
-		/**	Create shortcodes for elements displaying	*/
-		/**	Shortcode for displaying a dropdown with all groups	*/
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 }
 
