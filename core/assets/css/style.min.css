@@ -5032,10 +5032,13 @@
 .digirisk-wrap .form textarea:focus ~ .bar {
   width: 100%;
 }
+.digirisk-wrap .form textarea:focus ~ .bar {
+  width: 100%;
+}
 .digirisk-wrap .form label {
   position: absolute;
   top: 10px;
-  left: 0;
+  left: 0em;
   -webkit-transition: all 0.2s ease-out;
      -moz-transition: all 0.2s ease-out;
        -o-transition: all 0.2s ease-out;
@@ -5050,6 +5053,7 @@
   width: 0;
   height: 3px;
   left: 0;
+  right: 0;
   background: #3495f0;
   -webkit-transition: all 0.2s ease-out;
      -moz-transition: all 0.2s ease-out;
@@ -5057,10 +5061,16 @@
           transition: all 0.2s ease-out;
 }
 .digirisk-wrap .form input ~ .bar {
-  bottom: 0;
+  bottom: -1px;
+}
+.digirisk-wrap .form input:after {
+  display: block;
+  content: '';
 }
 .digirisk-wrap .form textarea ~ .bar {
   bottom: 3px;
+  left: 0;
+  right: 0;
 }
 .digirisk-wrap .form select {
   width: 100%;
@@ -5211,14 +5221,12 @@
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-.digirisk-wrap .grid-layout > * {
-  padding: 0 6px;
+.digirisk-wrap .grid-layout.padding {
+  margin-left: -0.5em;
+  margin-right: -0.5em;
 }
-.digirisk-wrap .grid-layout > *:first-child {
-  padding-left: 0;
-}
-.digirisk-wrap .grid-layout > *:last-child {
-  padding-right: 0;
+.digirisk-wrap .grid-layout.padding > * {
+  padding: 0.5em;
 }
 .digirisk-wrap .grid-layout.w1 > * {
   width: 100%;

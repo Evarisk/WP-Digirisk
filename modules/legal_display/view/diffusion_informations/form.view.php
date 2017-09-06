@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php wp_nonce_field( 'generate_diffusion_information' ); ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
-	<div class="grid-layout w2">
+	<div class="grid-layout padding w2">
 		<ul class="form">
 			<li><h2><?php esc_html_e( 'Délégués du personnel', 'digirisk' ); ?></h2></li>
 			<li class="form-element <?php echo ! empty( $diffusion_information->document_meta['delegues_du_personnels_date'] ) ? 'active' : ''; ?>">

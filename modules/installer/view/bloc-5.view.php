@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'La méthode d\'évaluation des risques simplifiée', 'digirisk' ); ?></h2>
-	<div class="grid-layout w2">
+	<div class="grid-layout padding w2">
 		<div class="content">
 			<h3><?php esc_html_e( 'La méthode simplifiée', 'digirisk' ); ?></h3>
 			<p><?php esc_html_e( 'Cette méthode permet cependant de noter les résultats d’autres méthodes plus complexes comme', 'digirisk' ); ?></p>

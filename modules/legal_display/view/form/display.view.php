@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
 	<?php wp_nonce_field( 'save_legal_display' ); ?>
 
-	<div class="grid-layout w2">
+	<div class="grid-layout padding w2">
 		<?php
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/detective-work', array(
 			'legal_display' => $legal_display,
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		?>
 	</div>
 
-	<div class="grid-layout w2">
+	<div class="grid-layout padding w2">
 		<?php
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/derogations-schedules', array(
 			'legal_display' => $legal_display,

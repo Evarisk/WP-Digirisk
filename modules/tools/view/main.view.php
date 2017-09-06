@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<div class="digirisk-wrap">
 
-			<div id="digi-data-export" class="tab-content grid-layout w2" >
+			<div id="digi-data-export" class="tab-content grid-layout padding w2" >
 				<div class="block">
 					<div class="container">
 						<?php echo do_shortcode( '[digi-export]' ); ?>
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 				<span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk' ); ?></i>
 
-				<div class="grid-layout w2">
+				<div class="grid-layout padding w2">
 
 					<div class="block">
 						<div class="container">

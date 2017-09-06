@@ -48,9 +48,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
 	</td>
 	<td data-title="Opt. Avancées">
-		<div 	class="open-popup button light w50 task"
-					data-parent="accident-row"
-					data-target="popup">YO</div>
+		<span data-parent="accident-row"
+					data-target="popup"
+					class="open-popup button grey radius w30"><i class="float-icon fa fa-pencil animated"></i><span class="fa fa-cog"></span></span>
 	</td>
 	<td data-title="action">
 		<?php if ( 0 !== $accident->id ) : ?>

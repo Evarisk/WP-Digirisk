@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $selected_society->id ); ?>" />
 	<?php wp_nonce_field( 'advanced_options_move_to' ); ?>
 
-	<ul class="grid-layout w2">
+	<ul class="grid-layout padding w2">
 		<li class="form-element">
 			<select name="parent_id">
 				<?php if ( ! empty( $groupments ) ) : ?>

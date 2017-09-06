@@ -47,10 +47,15 @@
 				width: 100%;
 			}
 		}
+		textarea {
+			&:focus ~ .bar {
+				width: 100%;
+			}
+		}
 		label {
 			position: absolute;
 			top: 10px;
-			left: 0;
+			left: 0em;
 			transition: all 0.2s ease-out;
 			font-size: 14px;
 			color: rgba(0,0,0,0.4);
@@ -62,14 +67,22 @@
 			width: 0;
 			height: 3px;
 			left: 0;
+			right: 0;
 			background: @a;
 			transition: all 0.2s ease-out;
 		}
 		input ~ .bar {
-			bottom: 0;
+			bottom: -1px;
+		}
+		input:after {
+			display: block;
+			content: '';
+
 		}
 		textarea ~ .bar {
 			bottom: 3px;
+			left: 0;
+			right: 0;
 		}
 		select {
 			width: 100%;
