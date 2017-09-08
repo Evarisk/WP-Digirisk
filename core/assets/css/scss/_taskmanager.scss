@@ -1,0 +1,33 @@
+/**
+ * Task Manager
+ */
+
+.digirisk-wrap {
+
+	.corrective-task {
+		.wpeo-done-point {
+			width: auto;
+		}
+		.list-task .wpeo-project-task {
+			width: 100%;
+		}
+		.completed-point {
+			width: auto !important;
+			border: 1px solid #000 !important;
+			border-radius: 0 !important;
+		}
+	}
+	.mask-loader {
+		.sk-circle {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50% -50%);
+		}
+	}
+	.wpeo-task-point-use-toggle {
+		> p {
+			background: #fff;
+		}
+	}
+
+}
