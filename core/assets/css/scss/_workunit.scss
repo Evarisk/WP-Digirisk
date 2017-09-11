@@ -268,19 +268,7 @@
 			}
 		}
 	}
-	.unit.active > .unit-container {
-		&:hover {
-			.title {
-				color: #fff;
-			}
-		}
-		.ref {
-			color: rgba(255,255,255,0.4);
-		}
-		.title {
-			background: $primary;
-		}
-	}
+
 	// Liste générale
 	.navigation-container .workunit-list {
 		background: $secondary;
@@ -291,8 +279,22 @@
 			position: relative;
 		}
 		.unit.active > .unit-container {
+			&:hover {
+				.name {
+					color: #fff;
+				}
+			}
+			.ref {
+				color: rgba(255,255,255,0.4);
+			}
 			.title {
 				background: $primary;
+			}
+			.add-container .button.blue {
+				background: $primary_dark;
+				&:hover {
+					background: darken( $primary_dark, 10% );
+				}
 			}
 		}
 	}
@@ -382,6 +384,10 @@
 				font-size: 20px;
 				line-height: 1;
 			}
+		}
+		@media ( max-width: 960px ) {
+			opacity: 1;
+			pointer-events: all;
 		}
 	}
 
