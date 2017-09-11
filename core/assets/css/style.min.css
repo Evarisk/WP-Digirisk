@@ -4053,13 +4053,16 @@
     pointer-events: all; } }
 
 .digirisk-wrap .navigation-container .unit.new {
+  background: #fff;
+  height: 50px;
+  display: none; }
+
+.digirisk-wrap .navigation-container .unit.new.active {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
-  display: flex;
-  background: #fff;
-  height: 50px; }
+  display: flex; }
 
 .digirisk-wrap .navigation-container .unit.new .placeholder-icon {
   margin: auto;

@@ -403,10 +403,13 @@
 
 	// Ajout UT / GP
 	.navigation-container .unit.new {
-		display: flex;
 		background: #fff;
 		height: 50px;
+		display: none;
 
+		&.active {
+			display: flex;
+		}
 		.placeholder-icon {
 			margin: auto;
 			min-width: 40px;
