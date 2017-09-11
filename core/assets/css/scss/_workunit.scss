@@ -284,11 +284,11 @@
 	.unit.active > .unit-container {
 		&:hover {
 			.name {
-				color: #fff;
+				color: #fff !important;
 			}
 		}
 		.ref {
-			color: rgba(255,255,255,0.4);
+			color: rgba(255,255,255,0.4) !important;
 		}
 		.title {
 			background: $primary;
@@ -377,7 +377,7 @@
 		}
 	}
 
-	// Ajout UT / GP
+	// Bouton Ajout UT / GP
 	.navigation-container .unit > .unit-container .add-container {
 		position: absolute;
 		top: 0;
@@ -398,6 +398,33 @@
 		@media ( max-width: 960px ) {
 			opacity: 1;
 			pointer-events: all;
+		}
+	}
+
+	// Ajout UT / GP
+	.navigation-container .unit.new {
+		display: flex;
+		background: #fff;
+		height: 50px;
+
+		.placeholder-icon {
+			margin: auto;
+			min-width: 40px;
+			color: rgba(0,0,0,0.4);
+		}
+		.unit-label {
+			height: 50px;
+			width: 100%;
+			margin: 0;
+			padding: 1em 0.2em;
+			border: 0;
+			&:focus {
+				outline: none;
+			}
+		}
+		.add .icon {
+			font-size: 22px;
+			line-height: 1.2;
 		}
 	}
 

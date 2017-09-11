@@ -28,6 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 
 	<ul class="workunit-list">
+		<li class="unit new">
+			<i class="placeholder-icon dashicons dashicons-admin-multisite"></i>
+			<input class="unit-label" placeholder="Coucou" type="text" />
+			<div class="button w50 add blue"><i class="icon dashicons dashicons-plus"></i></<div>
+		</li>
 		<li class="unit active">
 			<div class="unit-container">
 				<div class="toggle active"><span class="icon"></span></div>

@@ -3938,10 +3938,10 @@
   position: relative; }
 
 .digirisk-wrap .unit.active > .unit-container:hover .name {
-  color: #fff; }
+  color: #fff !important; }
 
 .digirisk-wrap .unit.active > .unit-container .ref {
-  color: rgba(255, 255, 255, 0.4); }
+  color: rgba(255, 255, 255, 0.4) !important; }
 
 .digirisk-wrap .unit.active > .unit-container .title {
   background: #3495f0; }
@@ -4051,6 +4051,34 @@
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     pointer-events: all; } }
+
+.digirisk-wrap .navigation-container .unit.new {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #fff;
+  height: 50px; }
+
+.digirisk-wrap .navigation-container .unit.new .placeholder-icon {
+  margin: auto;
+  min-width: 40px;
+  color: rgba(0, 0, 0, 0.4); }
+
+.digirisk-wrap .navigation-container .unit.new .unit-label {
+  height: 50px;
+  width: 100%;
+  margin: 0;
+  padding: 1em 0.2em;
+  border: 0; }
+
+.digirisk-wrap .navigation-container .unit.new .unit-label:focus {
+  outline: none; }
+
+.digirisk-wrap .navigation-container .unit.new .add .icon {
+  font-size: 22px;
+  line-height: 1.2; }
 
 .digirisk-wrap .navigation-container .unit > .sub-list {
   width: 100%;
