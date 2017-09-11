@@ -245,3 +245,152 @@
 	}
 
 }
+
+
+.digirisk-wrap {
+
+	// Header
+	.navigation-container .society-header {
+		background: lighten( $secondary, 10% );
+		display: flex;
+		height: 50px;
+		padding: 0 1em;
+		.title {
+			line-height: 50px;
+			color: #fff;
+			font-size: 12px;
+			text-transform: uppercase;
+			.icon {
+				display: inline;
+				font-size: 12px;
+				margin-right: 0.4em;
+				line-height: 50px;
+			}
+		}
+	}
+	.unit.active > .unit-container {
+		&:hover {
+			.title {
+				color: #fff;
+			}
+		}
+		.ref {
+			color: rgba(255,255,255,0.4);
+		}
+		.title {
+			background: $primary;
+		}
+	}
+	// Liste générale
+	.navigation-container .workunit-list {
+		background: $secondary;
+		padding: 1em;
+
+		.unit > .unit-container {
+			display: flex;
+			position: relative;
+		}
+		.unit.active > .unit-container {
+			.title {
+				background: $primary;
+			}
+		}
+	}
+
+	// UT / GP
+	.navigation-container .unit > .unit-container {
+		margin: 4px 0;
+
+		&:hover {
+			.title .name {
+				color: $primary;
+			}
+		}
+		.toggle {
+			color: rgba(255,255,255,0.4);
+			line-height: 50px;
+			font-size: 18px;
+			padding-right: 0.4em;
+			transition: all 0.2s ease-out;
+
+			&:hover {
+				cursor: pointer;
+				color: rgba(255,255,255,0.8);
+			}
+			.icon {
+				font-family: 'FontAwesome';
+				&:before {
+					content: $fa-var-angle-right;
+				}
+			}
+			&.active .icon:before {
+				content: $fa-var-angle-down;
+			}
+		}
+		.media {
+			&.no-file {
+				background: darken( $secondary, 6% );
+			}
+		}
+		.title {
+			width: 100%;
+			padding-left: 1em;
+			display: flex;
+
+			.title-container {
+				margin: auto 0;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+			.ref, .name {
+				display: block;
+				line-height: 1;
+				transition: all 0.2s ease-out;
+			}
+			.ref {
+				font-size: 10px;
+				color: rgba(255,255,255,0.2);
+				text-transform: uppercase;
+				font-weight: 800;
+			}
+			.name {
+				font-size: 16px;
+				color: #fff;
+			}
+		}
+		&:hover > .add-container {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+
+	// Ajout UT / GP
+	.navigation-container .unit > .unit-container .add-container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		opacity: 0;
+		pointer-events: none;
+		transition: all 0.2s ease-out;
+
+		.button {
+			float: left;
+			margin-left: 2px;
+			.icon {
+				margin: auto;
+				font-size: 20px;
+				line-height: 1;
+			}
+		}
+	}
+
+	// Sous menu
+	.navigation-container .unit > .sub-list {
+		width: 100%;
+		padding-left: 1em;
+		margin-left: 0.4em;
+		border-left: 1px dashed rgba(255,255,255,0.2);
+	}
+
+}

@@ -3903,6 +3903,149 @@
 .digirisk-wrap .workunit-add .add .icon {
   font-size: 16px; }
 
+.digirisk-wrap .navigation-container .society-header {
+  background: #3d4152;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  padding: 0 1em; }
+
+.digirisk-wrap .navigation-container .society-header .title {
+  line-height: 50px;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase; }
+
+.digirisk-wrap .navigation-container .society-header .title .icon {
+  display: inline;
+  font-size: 12px;
+  margin-right: 0.4em;
+  line-height: 50px; }
+
+.digirisk-wrap .unit.active > .unit-container:hover .title {
+  color: #fff; }
+
+.digirisk-wrap .unit.active > .unit-container .ref {
+  color: rgba(255, 255, 255, 0.4); }
+
+.digirisk-wrap .unit.active > .unit-container .title {
+  background: #3495f0; }
+
+.digirisk-wrap .navigation-container .workunit-list {
+  background: #272a35;
+  padding: 1em; }
+
+.digirisk-wrap .navigation-container .workunit-list .unit > .unit-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative; }
+
+.digirisk-wrap .navigation-container .workunit-list .unit.active > .unit-container .title {
+  background: #3495f0; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container {
+  margin: 4px 0; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container:hover .title .name {
+  color: #3495f0; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle {
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 50px;
+  font-size: 18px;
+  padding-right: 0.4em;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8); }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle .icon {
+  font-family: 'FontAwesome'; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle .icon:before {
+  content: ""; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle.active .icon:before {
+  content: ""; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .media.no-file {
+  background: #1a1c23; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title {
+  width: 100%;
+  padding-left: 1em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title .title-container {
+  margin: auto 0; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title:hover {
+  cursor: pointer; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title .ref, .digirisk-wrap .navigation-container .unit > .unit-container .title .name {
+  display: block;
+  line-height: 1;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title .ref {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  font-weight: 800; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .title .name {
+  font-size: 16px;
+  color: #fff; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container:hover > .add-container {
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  pointer-events: all; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .add-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  pointer-events: none;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .add-container .button {
+  float: left;
+  margin-left: 2px; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .add-container .button .icon {
+  margin: auto;
+  font-size: 20px;
+  line-height: 1; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list {
+  width: 100%;
+  padding-left: 1em;
+  margin-left: 0.4em;
+  border-left: 1px dashed rgba(255, 255, 255, 0.2); }
+
 /**
  * Main tab
  */
