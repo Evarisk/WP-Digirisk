@@ -377,6 +377,9 @@ class Document_Class extends \eoxia\Post_Class {
 			case "accident_benin":
 				$types[0] = Accident_Travail_Benin_Class::g()->get_post_type();
 				break;
+			case "accidents_benin":
+				$types[0] = Registre_Accidents_Travail_Benins_Class::g()->get_post_type();
+				break;
 			case "zip":
 				$types[0] = ZIP_Class::g()->get_post_type();
 				break;
@@ -395,18 +398,16 @@ class Document_Class extends \eoxia\Post_Class {
 		$document_revision = 0;
 		$main_title_part = '';
 
-		if ( ! empty( $element ) ) {
-	  	$document_revision = $this->get_document_type_next_revision( $types, $element->id );
-			$main_title_part = $element->title;
+		$document_revision = $this->get_document_type_next_revision( $types, $element->id );
+		$main_title_part = $element->title;
+
+		/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
+		if ( ! empty( $document_type ) && is_array( $document_type ) ) {
+			$main_title_part = $document_type[ 0 ] . '_' . $main_title_part;
 		}
 
-  	/**	Définition de la partie principale du nom de fichier / Define the main part of file name	*/
-  	if ( ! empty( $document_type ) && is_array( $document_type ) ) {
-  		$main_title_part = $document_type[ 0 ] . '_' . $main_title_part;
-  	}
-
   	/**	Enregistrement de la fiche dans la base de donnée / Save sheet into database	*/
-  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . ! empty( $element ) && ! empty( $element->unique_identifier ) ? $element->unique_identifier : '' . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
+  	$response[ 'filename' ] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_' . sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
   	$document_args = array(
 			'post_content'	=> '',
 			'post_status'	=> 'inherit',
@@ -429,7 +430,7 @@ class Document_Class extends \eoxia\Post_Class {
 			$path = $response['filename'];
 
 			if ( ! empty( $element ) ) {
-				$path = $element->type. '/' . $element->id . '/' . $response[ 'filename' ];
+				$path = $element->type . '/' . $element->id . '/' . $response[ 'filename' ];
 			}
 
   		$document_creation = $this->generate_document( $model_to_use, $document_meta, $path );
@@ -455,6 +456,7 @@ class Document_Class extends \eoxia\Post_Class {
 
 		wp_set_object_terms( $response[ 'id' ], wp_parse_args( $types, array( 'printed', ) ), $this->attached_taxonomy_type );
 
+
   	/**	On met à jour les informations concernant le document dans la base de données / Update data for document into database	*/
   	$document_args = array(
 			'id'										=> $response[ 'id' ],
@@ -462,7 +464,7 @@ class Document_Class extends \eoxia\Post_Class {
 			'parent_id'							=> ! empty( $element->id ) ? $element->id : 0,
 			'author_id'							=> get_current_user_id(),
 			'date'									=> current_time( 'mysql', 0 ),
-			'mime_type'							=> !empty( $filetype[ 'type' ] ) ? $filetype['type'] : $filetype,
+			'mime_type'							=> ! empty( $filetype[ 'type' ] ) ? $filetype['type'] : 'application/vnd.oasis.opendocument.text',
 			'model_id' 							=> $model_to_use,
 			'document_meta' 				=> $document_meta,
 			'status'								=> 'inherit',
@@ -502,6 +504,10 @@ class Document_Class extends \eoxia\Post_Class {
 			case 'accident_benin':
 				$document_args['type'] = Accident_Travail_Benin_Class::g()->get_post_type();
 				$document = Accident_Travail_Benin_Class::g()->update( $document_args );
+				break;
+			case 'accidents_benin':
+				$document_args['type'] = Registre_Accidents_Travail_Benins_Class::g()->get_post_type();
+				$document = Registre_Accidents_Travail_Benins_Class::g()->update( $document_args );
 				break;
 			case 'zip':
 				$document_args['type'] = ZIP_Class::g()->get_post_type();
