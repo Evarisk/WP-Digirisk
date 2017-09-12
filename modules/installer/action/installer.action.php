@@ -2,15 +2,18 @@
 /**
  * Les actions qui se déroulent lors de l'installation.
  *
- * @package Evarisk\Plugin
- *
- * @since 0.1
- * @version 6.2.10.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions qui se déroulent lors de l'installation.
@@ -22,8 +25,8 @@ class Installer_Action {
 	 * save_society (Ajax)
 	 * installer_components (Ajax)
 	 *
-	 * @since 0.1
-	 * @version 6.2.8.0
+	 * @since 0.1.0
+	 * @version 6.2.8
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
@@ -36,13 +39,13 @@ class Installer_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
-		$groupment = Group_Class::g()->create( $_POST['groupment'] );
+		$society = Society_Class::g()->create( $_POST['society'] );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
