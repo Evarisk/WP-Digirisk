@@ -3,15 +3,16 @@
  * Classe gérant la navigation
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package navigation
- * @subpackage class
+ * @package DigiRisk
  */
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Appelle la vue permettant d'afficher la navigation
@@ -27,33 +28,60 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	protected function construct() {}
 
 	/**
-	 * La méthode qui permet d'afficher la page
+	 * La méthode qui permet d'afficher la navigation.
+	 *
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 *
 	 * @param int $groupment_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
 	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
 	 */
-	public function display( $groupment_id ) {
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array( 'groupment_id' => $groupment_id ) );
+	public function display( $society_id ) {
+		$society = Society_Class::g()->get( array(
+			'include' => $society_id,
+		), true );
+
+		$establishments = Society_Class::g()->get( array(
+			'post_parent' => $society_id,
+			'posts_per_page' => -1,
+			'post_type' => array( 'digi-group', 'digi-workunit' ),
+			'post_status' => array( 'publish', 'draft' ),
+			'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array(
+			'establishments' => $establishments,
+			'society' => $society,
+		) );
 	}
 
 	/**
 	 * Charges le groupement sélectionné et l'envoie à la vue navigation/toggle/button.view.php avec comme nom de variable $groupment
 	 *
-	 * @param  int $groupment_id (optional) L'ID du groupement sélectionné.
+	 * @param int    $id (optional) L'ID de la société sélectionné.
+	 * @param string $class (optianal) La classe utilisé pour la vue.
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 */
-	public function display_toggle( $groupment_id = 0 ) {
-		$groupment = Group_Class::g()->get( array( 'post__in' => array( $groupment_id ) ) );
-		$groupment = $groupment[0];
+	public function display_list( $id = 0, $class = 'sub-list' ) {
+		if ( ! empty( $id ) ) {
+			$establishments = Society_Class::g()->get( array(
+				'post_parent' => $id,
+				'posts_per_page' => -1,
+				'post_type' => array( 'digi-group', 'digi-workunit' ),
+				'post_status' => array( 'publish', 'draft' ),
+				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+			) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/button', array( 'groupment' => $groupment ) );
+			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
+				'id' => $id,
+				'establishments' => $establishments,
+				'class' => $class,
+			) );
+		}
 	}
 
 	/**

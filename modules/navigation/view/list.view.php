@@ -1,29 +1,32 @@
 <?php
 /**
- * La liste des unités de travail dans la navigation.
+ * Les établissements dans la navigation.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package navigation
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<ul class="workunit-list">
-	<?php if ( ! empty( $workunits ) ) : ?>
-		<?php foreach ( $workunits as $workunit ) : ?>
-			<?php \eoxia\View_Util::exec( 'digirisk', 'navigation', 'item', array( 'workunit_selected_id' => $workunit_selected_id, 'workunit' => $workunit ) ); ?>
-		<?php endforeach; ?>
-	<?php endif; ?>
+<ul class="<?php echo esc_attr( $class ); ?>">
+	<?php
+	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item-new', array(
+		'id' => $id,
+	) );
+
+	if ( ! empty( $establishments ) ) :
+		foreach ( $establishments as $establishment ) :
+			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item', array(
+				'establishment' => $establishment,
+			) );
+		endforeach;
+	endif;
+	?>
 </ul>
-
-<?php
-if ( $display_create_workunit_form ) :
-	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item-new', array( 'parent_id' => $parent_id ) );
-endif;
-?>

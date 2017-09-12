@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "navigation" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.6.0
+ * @since 1.0.0
+ * @version 6.3.0
  */
 
 window.eoxiaJS.digirisk.navigation = {};
@@ -12,8 +12,8 @@ window.eoxiaJS.digirisk.navigation = {};
  *
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 1.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.navigation.init = function() {
 	window.eoxiaJS.digirisk.navigation.event();
@@ -22,78 +22,153 @@ window.eoxiaJS.digirisk.navigation.init = function() {
 /**
  * La méthode contenant tous les évènements pour la navigation.
  *
- * @return {void}
+ * @since 1.0.0
+ * @version 6.3.0
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @return {void}
  */
 window.eoxiaJS.digirisk.navigation.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .content li span.action-attribute', window.eoxiaJS.digirisk.navigation.setItemActiveInToggle );
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .workunit-list li span.action-attribute', window.eoxiaJS.digirisk.navigation.setItemActiveInWorkunitList );
-
-	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container .workunit-add input.title', window.eoxiaJS.digirisk.navigation.keyUpOnWorkunitTitle );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit-container .toggle', window.eoxiaJS.digirisk.navigation.switchToggle );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button', window.eoxiaJS.digirisk.navigation.displayAddField );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
 };
 
 /**
- * Ajoutes la classe "active" sur l'item cliqué dans le toggle de la navigation.
+ * Gestion du toggle dans la navigation.
  *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {MouseEvent} event Les attributs lors du clic.
  * @return {void}
- *
- *
- * @since 1.0
- * @version 6.2.4.0
  */
-window.eoxiaJS.digirisk.navigation.setItemActiveInToggle = function( event ) {
-	jQuery( '.digirisk-wrap .navigation-container .content div.active' ).removeClass( 'active' );
-	jQuery( this ).closest( 'div' ).addClass( 'active' );
+window.eoxiaJS.digirisk.navigation.switchToggle = function( event ) {
+	event.preventDefault();
+
+	jQuery( this ).closest( '.unit' ).toggleClass( 'toggled' );
+	jQuery( this ).closest( '.unit' ).find( '.unit.new:first.active ' ).removeClass( 'active' );
 };
 
 /**
- * Ajoutes la classe "active" sur l'item cliqué dans la liste des unités de travail de la navigation.
+ * Affiches le champ pour créer un établissement.
  *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {MouseEvent} event Les attributs lors du clic.
  * @return {void}
- *
- * @since 1.0
- * @version 6.2.4.0
  */
-window.eoxiaJS.digirisk.navigation.setItemActiveInWorkunitList = function( event ) {
-	jQuery( '.digirisk-wrap .navigation-container .workunit-list li.active' ).removeClass( 'active' );
-	jQuery( this ).closest( 'li' ).addClass( 'active' );
-};
+window.eoxiaJS.digirisk.navigation.displayAddField = function( event ) {
+	var closest = jQuery( this ).closest( '.society-header' ).length ? jQuery( this ).closest( '.navigation-container' ) : jQuery( this ).closest( '.unit' );
+	event.preventDefault();
 
-/**
- * Ajoutes la classe "blue" sur l'input action dans l'ajout d'une unité de travail.
- *
- * @param  {KeyboardEvent} event L'état du clavier.
- * @return {void}
- *
- * @since 6.2.6.0
- * @version 6.2.6.0
- */
-window.eoxiaJS.digirisk.navigation.keyUpOnWorkunitTitle = function( event ) {
-	if ( jQuery( this ).val().length > 0 ) {
-		jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	closest.addClass( 'toggled' );
+
+	if ( 'Group_Class' === jQuery( this ).data( 'type' ) ) {
+		closest.find( '.unit.new:first .placeholder-icon' ).removeClass( 'dashicons-admin-home' );
+		closest.find( '.unit.new:first .placeholder-icon' ).addClass( 'dashicons-admin-multisite' );
 	} else {
-		jQuery( '.digirisk-wrap .navigation-container .workunit-add .action-input' ).removeClass( 'blue' ).addClass( 'disable' );
+		closest.find( '.unit.new:first .placeholder-icon' ).removeClass( 'dashicons-admin-multisite' );
+		closest.find( '.unit.new:first .placeholder-icon' ).addClass( 'dashicons-admin-home' );
+	}
+
+	if ( closest.find( '.unit.new:first' ).hasClass( 'active' ) && closest.find( '.unit.new:first input[name="class"]' ).val() != jQuery( this ).data( 'type' ) ) {
+	} else {
+		closest.find( '.unit.new:first' ).toggleClass( 'active' );
+	}
+
+	if ( closest.find( '.unit.new:first' ).hasClass( 'active' ) ) {
+		closest.find( '.unit.new:first.active input[type="text"]' ).focus();
+	}
+
+	closest.find( '.unit.new:first input[name="class"]' ).val( jQuery( this ).data( 'type' ) );
+};
+
+/**
+ * Focus le champ 'title' pour créer un établissement
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {MouseEvent} event Les attributs lors du clic.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.focusField = function( event ) {
+	event.preventDefault();
+
+	jQuery( this ).closest( '.unit.new' ).find( 'input[type="text"]' ).focus();
+};
+
+/**
+ * Déplies ou replies tous les éléments enfants
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {MouseEvent} event Les attributs lors du clic
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.toggleAll = function( event ) {
+	event.preventDefault();
+
+	if ( jQuery( this ).hasClass( 'toggle-plus' ) ) {
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit' ).addClass( 'toggled' );
+	}
+
+	if ( jQuery( this ).hasClass( 'toggle-minus' ) ) {
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit.toggled' ).removeClass( 'toggled' );
 	}
 };
 
 /**
- * Méthodes appelé avant la création d'un nouvelle unité de travail.
- * Vérifies si le champ de texte est vide. Si c'est le cas, affiches l'infobulle pour dire qu'il est obligatoire.
+ * Ajout la classe 'active' à l'élément.
  *
- * @param  {ClickEvent} element L'élément déclenchant l'action.
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {HTMLDivElement} element L'attribut de l'élement.
+ * @return {boolean}
+ */
+window.eoxiaJS.digirisk.navigation.setUnitActive = function( element ) {
+	jQuery( '.digirisk-wrap .navigation-container .unit.active' ).removeClass( 'active' );
+	jQuery( element ).closest( '.unit' ).addClass( 'active' );
+	return true;
+};
+
+/**
+ * Callback en cas de réussite de la requête Ajax "create_society"
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {HTMLDivElement} triggeredElement   L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}        response {
+ *     Les données renvoyées par la requête Ajax.
+ *
+ *     @type string $view La vue.
+ * }
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredElement, response ) {
+	if ( jQuery( triggeredElement ).closest( '.sub-list' ).length ) {
+		jQuery( triggeredElement ).closest( '.sub-list' ).replaceWith( response.data.view );
+	} else {
+		jQuery( triggeredElement ).closest( '.workunit-list' ).replaceWith( response.data.view );
+	}
+};
+
+/**
+ * Callback en cas de réussite de la requête Ajax "load_society"
+ * Remplaces le template principale de l'application avec le template reçu dans la réponse de la requête Ajax.
+ *
+ * @param  {HTMLSpanElement} triggeredElement   L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}        response             Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.2.6.0
- * @version 6.2.6.0
+ * @since 0.1.0
+ * @version 6.3.0
  */
-window.eoxiaJS.digirisk.navigation.beforeSaveWorkunit = function( element ) {
-	if ( '' === element.closest( '.workunit-add' ).find( 'input.title' ).val() ) {
-		element.closest( '.workunit-add' ).addClass( 'active' );
-		return false;
-	}
-
-	element.closest( '.workunit-add.active' ).removeClass( 'active' );
-	return true;
+window.eoxiaJS.digirisk.navigation.loadedSocietySuccess = function( element, response ) {
+	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.view );
 };

@@ -2,7 +2,11 @@
 /**
  * Ajoutes le shortcode digi_navigation
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -12,12 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Appelle la vue permettant d'afficher la navigation
+ * Ajoutes le shortcode digi_navigation
  */
 class Navigation_Shortcode extends \eoxia\Singleton_Util {
 
 	/**
-	 * Le constructeur
+	 * Initialise le shortcode digi_navigation
+	 *
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 */
 	protected function construct() {
 		add_shortcode( 'digi_navigation', array( $this, 'callback_digi_navigation' ) );
@@ -46,7 +53,9 @@ class Navigation_Shortcode extends \eoxia\Singleton_Util {
 		}
 
 		if ( 0 === $groupment_id ) {
-			$groupment_id = Group_Class::g()->get_first_groupment_id();
+			// @todo: A voir avec laurent, car cette méthode ne retournera rien.
+			$society = Society_Class::g()->get( array(), true );
+			$groupment_id = $society->id;
 		}
 
 		Navigation_Class::g()->display( $groupment_id );
