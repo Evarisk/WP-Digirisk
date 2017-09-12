@@ -1,0 +1,93 @@
+/**
+ * Affiche un message sur l'écran
+ * .media -> gestion générale des media
+ * .workunit-list -> Module média intégré à la liste des workunits
+ */
+.digirisk-wrap {
+
+	.notification {
+		position: fixed;
+		background: rgba(255,255,255,0.6);
+		transition: all 0.2s ease-out;
+		z-index: 900;
+		padding: 0.6em 1em;
+		bottom: 3em;
+		right: 1em;
+		box-shadow: 0 0 14px 1px rgba(0,0,0,0.2);
+		display: flex;
+		opacity: 0;
+		pointer-events: none;
+
+		&.active {
+			animation: notification 0.8s ease-out;
+			animation-fill-mode: forwards;
+			opacity: 1;
+			pointer-events: all;
+		}
+		> * {
+			margin: auto 0.2em;
+		}
+		.thumbnail {
+			width: 40px;
+			height: 40px;
+			background: rgba(0,0,0,0.1);
+			border-radius: 50%;
+			display: inline-block;
+			overflow: hidden;
+			padding: 0.5em;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+		.title {
+			font-size: 14px;
+			color: rgba(0,0,0,0.7);
+			a {
+				color: $primary;
+			}
+		}
+		.close {
+			padding-left: 0.4em;
+			color: rgba(0,0,0,0.2);
+			transition: all 0.2s ease-out;
+			&:hover {
+				color: rgba(0,0,0,0.6);
+			}
+		}
+		&:hover {
+				background: rgba(255,255,255,1);
+				box-shadow: 0 0 14px 1px rgba(0,0,0,0.4);
+				cursor: pointer;
+		}
+	}
+
+	@keyframes notification {
+	  from, 60%, 75%, 90%, to {
+	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	  }
+
+	  0% {
+	    opacity: 0;
+	    transform: translate3d(0, -40px, 0);
+	  }
+
+	  60% {
+	    opacity: 1;
+	    transform: translate3d(0, 10px, 0);
+	  }
+
+	  75% {
+	    transform: translate3d(0, -10px, 0);
+	  }
+
+	  90% {
+	    transform: translate3d(0, 5px, 0);
+	  }
+
+	  to {
+	    transform: none;
+	  }
+	}
+
+}

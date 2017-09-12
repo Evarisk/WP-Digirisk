@@ -280,10 +280,27 @@
 		}
 	}
 
+	// Toolbar
+	.navigation-container .toolbar {
+		background: $secondary;
+		padding: 0.2em 1em;
+
+		[class*="toggle"] {
+			display: inline-block;
+			color: rgba(255,255,255,0.4);
+			margin-right: 0.4em;
+			transition: all 0.2s ease-out;
+			&:hover {
+				color: rgba(255,255,255,0.8);
+				cursor: pointer;
+			}
+		}
+	}
+
 	// Liste générale
 	.navigation-container .workunit-list {
 		background: $secondary;
-		padding: 1em;
+		padding: 0.2em 1em 1em 1em;
 
 		.unit > .unit-container {
 			display: flex;

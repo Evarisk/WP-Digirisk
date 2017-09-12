@@ -3940,9 +3940,26 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   pointer-events: all; }
 
+.digirisk-wrap .navigation-container .toolbar {
+  background: #272a35;
+  padding: 0.2em 1em; }
+
+.digirisk-wrap .navigation-container .toolbar [class*="toggle"] {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.4);
+  margin-right: 0.4em;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .navigation-container .toolbar [class*="toggle"]:hover {
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer; }
+
 .digirisk-wrap .navigation-container .workunit-list {
   background: #272a35;
-  padding: 1em; }
+  padding: 0.2em 1em 1em 1em; }
 
 .digirisk-wrap .navigation-container .workunit-list .unit > .unit-container {
   display: -webkit-box;
@@ -5596,6 +5613,187 @@
 
 .digirisk-wrap .statistic.active .label {
   color: #3495f0; }
+
+/**
+ * Affiche un message sur l'écran
+ * .media -> gestion générale des media
+ * .workunit-list -> Module média intégré à la liste des workunits
+ */
+.digirisk-wrap .notification {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  z-index: 900;
+  padding: 0.6em 1em;
+  bottom: 3em;
+  right: 1em;
+  -webkit-box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  pointer-events: none; }
+
+.digirisk-wrap .notification.active {
+  -webkit-animation: notification 0.8s ease-out;
+     -moz-animation: notification 0.8s ease-out;
+       -o-animation: notification 0.8s ease-out;
+          animation: notification 0.8s ease-out;
+  -webkit-animation-fill-mode: forwards;
+     -moz-animation-fill-mode: forwards;
+       -o-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  pointer-events: all; }
+
+.digirisk-wrap .notification > * {
+  margin: auto 0.2em; }
+
+.digirisk-wrap .notification .thumbnail {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.5em; }
+
+.digirisk-wrap .notification .thumbnail img {
+  width: 100%;
+  height: auto; }
+
+.digirisk-wrap .notification .title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7); }
+
+.digirisk-wrap .notification .title a {
+  color: #3495f0; }
+
+.digirisk-wrap .notification .close {
+  padding-left: 0.4em;
+  color: rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .notification .close:hover {
+  color: rgba(0, 0, 0, 0.6); }
+
+.digirisk-wrap .notification:hover {
+  background: white;
+  -webkit-box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.4);
+  cursor: pointer; }
+
+@-webkit-keyframes notification {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-transform: translate3d(0, -40px, 0);
+            transform: translate3d(0, -40px, 0); }
+  60% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0); }
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0); }
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+            transform: translate3d(0, 5px, 0); }
+  to {
+    -webkit-transform: none;
+            transform: none; } }
+
+@-moz-keyframes notification {
+  from, 60%, 75%, 90%, to {
+    -moz-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -moz-transform: translate3d(0, -40px, 0);
+         transform: translate3d(0, -40px, 0); }
+  60% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    -moz-transform: translate3d(0, 10px, 0);
+         transform: translate3d(0, 10px, 0); }
+  75% {
+    -moz-transform: translate3d(0, -10px, 0);
+         transform: translate3d(0, -10px, 0); }
+  90% {
+    -moz-transform: translate3d(0, 5px, 0);
+         transform: translate3d(0, 5px, 0); }
+  to {
+    -moz-transform: none;
+         transform: none; } }
+
+@-o-keyframes notification {
+  from, 60%, 75%, 90%, to {
+    -o-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+       animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    transform: translate3d(0, -40px, 0); }
+  60% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    transform: translate3d(0, 10px, 0); }
+  75% {
+    transform: translate3d(0, -10px, 0); }
+  90% {
+    transform: translate3d(0, 5px, 0); }
+  to {
+    -o-transform: none;
+       transform: none; } }
+
+@keyframes notification {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+       -moz-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+         -o-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-transform: translate3d(0, -40px, 0);
+       -moz-transform: translate3d(0, -40px, 0);
+            transform: translate3d(0, -40px, 0); }
+  60% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    -webkit-transform: translate3d(0, 10px, 0);
+       -moz-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0); }
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+       -moz-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0); }
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+       -moz-transform: translate3d(0, 5px, 0);
+            transform: translate3d(0, 5px, 0); }
+  to {
+    -webkit-transform: none;
+       -moz-transform: none;
+         -o-transform: none;
+            transform: none; } }
 
 /**
  * Import des templates de page
