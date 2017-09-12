@@ -255,6 +255,8 @@
 		display: flex;
 		height: 50px;
 		padding: 0 1em;
+		position: relative;
+
 		.title {
 			line-height: 50px;
 			color: #fff;
@@ -266,6 +268,15 @@
 				margin-right: 0.4em;
 				line-height: 50px;
 			}
+		}
+		> .add-container {
+			top: 50% !important;
+			transform: translateY(-50%);
+			right: 1em !important;
+		}
+		&:hover > .add-container {
+			opacity: 1;
+			pointer-events: all;
 		}
 	}
 
@@ -378,7 +389,7 @@
 	}
 
 	// Bouton Ajout UT / GP
-	.navigation-container .unit > .unit-container .add-container {
+	.navigation-container .add-container {
 		position: absolute;
 		top: 0;
 		right: 0;

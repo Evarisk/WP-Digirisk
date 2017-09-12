@@ -25,6 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span class="icon dashicons dashicons-building"></span>
 			Ma société
 		</div>
+		<div class="add-container">
+			<div class="button w30 blue"><span class="icon dashicons dashicons-admin-multisite"></span></div>
+			<div class="button w30 blue"><span class="icon dashicons dashicons-admin-home"></span></div>
+		</div>
 	</div>
 
 	<ul class="workunit-list">
