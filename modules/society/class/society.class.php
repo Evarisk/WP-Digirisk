@@ -3,8 +3,8 @@
  * Classe gérant les sociétés (groupement et unité de travail)
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.5.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage class
@@ -12,20 +12,83 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  */
-class Society_Class extends \eoxia\Singleton_Util {
+class Society_Class extends \eoxia\Post_Class {
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
+	protected $model_name = '\digi\Society_Model';
 
 	/**
-	 * Constructeur
+	 * Le post type
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @var string
 	 */
-	protected function construct() {}
+	protected $post_type = 'digi-society';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key = '_wpdigi_society';
+
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
+	public $element_prefix = 'S';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_put_function = array( '\eoxia\convert_date' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base = 'society';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1';
+
+	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Sociétés';
 
 	/**
 	 * Récupères l'objet par rapport à son post type

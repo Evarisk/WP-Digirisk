@@ -9,21 +9,6 @@ window.eoxiaJS.digirisk.society.event = function() {
 };
 
 /**
- * Callback en cas de réussite de la requête Ajax "load_society"
- * Remplaces le template principale de l'application avec le template reçu dans la réponse de la requête Ajax.
- *
- * @param  {HTMLSpanElement} triggeredElement   L'élement HTML déclenchant la requête Ajax.
- * @param  {Object}        response             Les données renvoyées par la requête Ajax.
- * @return {void}
- *
- * @since 0.1
- * @version 6.2.4.0
- */
-window.eoxiaJS.digirisk.society.loadedSocietySuccess = function( element, response ) {
-	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
-};
-
-/**
  * Lorsque qu'on lache une touche dans le champ de texte "title", on fait apparaitre le bouton "Enregistrer".
  * Si la touche laché est "entrée" on appuie sur le bouton "Enregistrer".
  *
