@@ -37,19 +37,25 @@ function construct_identifier( $data ) {
 /**
  * Remplaces l'identifiant du modèle par l'identifiant personnalisé qui se trouve dans la BDD
  *
+ * @since 6.0.0
+ * @version 6.3.0
+ *
  * @param  object $data Les données du modèle.
  * @return object       Les données du modèle avec l'identifiant personnalisé
  */
 function get_identifier( $data ) {
+	$data->modified_unique_identifier = '';
+
 	$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 	$list_accronym = json_decode( $list_accronym, true );
-	$model_name = get_class( $data );
-	$controller_name = str_replace( 'model', 'class', $model_name );
-	$controller_name = str_replace( 'Model', 'Class', $controller_name );
-	$element_prefix = $controller_name::g()->element_prefix;
+	$type = str_replace( 'digi-', '\\digi\\', $data->type );
+	if ( ! empty( $type ) && class_exists( $type . '_class' ) ) {
+		$type .= '_class';
+		$element_prefix = $type::g()->element_prefix;
 
-	if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
-		$data->modified_unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
+		if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
+			$data->modified_unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
+		}
 	}
 
 	return $data;
