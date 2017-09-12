@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <table class="table accident">
 	<thead>
@@ -28,18 +30,23 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	</thead>
 
 	<tbody>
-		<?php if ( ! empty( $accidents ) ) :
+		<?php
+		if ( ! empty( $accidents ) ) :
 			foreach ( $accidents as $accident ) :
 				\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-item', array(
 					'accident' => $accident,
 				) );
 			endforeach;
-		endif; ?>
+		endif;
+		?>
 	</tbody>
 
 	<tfoot>
-		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'accident' => $accident_schema,
-		) ); ?>
+			'main_society' => $main_society,
+		) );
+		?>
 	</tfoot>
 </table>

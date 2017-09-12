@@ -11,13 +11,17 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="accident-row">
 	<td data-title="Ref." class="padding">
-		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'popup', array(
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'popup', array(
 			'accident' => $accident,
-		) ); ?>
+		) );
+		?>
 		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date et heure" class="padding">
@@ -41,7 +45,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="fa fa-cog"></span></span>
 	</td>
 	<td data-title="Action">
-		<div class="action grid-layout w2">
+		<div class="action grid-layout w3">
+			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>"><i class="fa fa-download icon" aria-hidden="true"></i></a>
 			<!-- Editer un accident -->
 			<div 	class="button light w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $accident->id ); ?>"

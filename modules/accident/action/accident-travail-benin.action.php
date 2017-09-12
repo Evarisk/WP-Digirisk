@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux accident de travail benin (ODT)
@@ -19,36 +21,26 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 class Accident_Travail_Benin_Action {
 
 	/**
-	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_groupment
+	 * Le constructeur ajoutes l'action wp_ajax_generate_accident_benin
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.3.0
+	 * @version 6.3.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_generate_accident_benin', array( $this, 'ajax_generate_accident_benin' ) );
+		add_action( 'generate_accident_benin', array( $this, 'generate_accident_benin' ), 10, 1 );
 	}
 
 	/**
 	 * Appel la méthode "generate" de "Accident_Travail_Benin" afin de générer l'accident de travail bénin (ODT).
 	 *
-	 * @return void
-	 *
 	 * @since 6.3.0
 	 * @version 6.3.0
+	 *
+	 * @param integer $accident_id L'ID de l'accident.
+	 * @return void
 	 */
-	function ajax_generate_accident_benin() {
-		check_ajax_referer( 'ajax_generate_accident_benin' );
-
-		Accident_Travail_Benin_Class::g()->generate();
-
-		ob_start();
-		 Accident_Travail_Benin_Class::g()->display();
-		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'accident',
-			'callback_success' => 'generatedAccidentBenin',
-			'view' => ob_get_clean(),
-		) );
+	public function generate_accident_benin( $accident_id ) {
+		Accident_Travail_Benin_Class::g()->generate( $accident_id );
 	}
 
 }

@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr>
 	<td class="padding"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>

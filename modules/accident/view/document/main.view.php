@@ -11,11 +11,16 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <table class="table document-accident-benins">
-	<?php Accident_Travail_Benin_Class::g()->display_document_list(); ?>
-	<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'document/item-edit', array(
+	<?php
+	Registre_Accidents_Travail_Benins_Class::g()->display_document_list();
+
+	\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/item-edit', array(
 		'element' => $element,
-	) ); ?>
+	) );
+	?>
 </table>

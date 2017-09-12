@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des actions des accidents
@@ -29,6 +31,14 @@ class Accident_Action {
 		add_action( 'wp_ajax_delete_accident', array( $this, 'ajax_delete_accident' ) );
 	}
 
+	/**
+	 * Ajoutes le sous menu 'Accidents'.
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 *
+	 * @return void
+	 */
 	public function callback_admin_menu() {
 		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
@@ -67,6 +77,8 @@ class Accident_Action {
 			}
 		}
 
+		do_action( 'generate_accident_benin', $accident->id );
+
 		ob_start();
 		Accident_Class::g()->display_accident_list();
 		wp_send_json_success( array(
@@ -102,7 +114,7 @@ class Accident_Action {
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'society_id' => $accident->parent_id,
 			'accident' => $accident,
-		)	);
+		) );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',

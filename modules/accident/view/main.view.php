@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="digirisk-wrap">
 	<?php Accident_Class::g()->display_accident_list(); ?>

@@ -46,5 +46,9 @@ function get_full_accident( $data ) {
 		$data->modified_unique_identifier = '';
 	}
 
+	$data->document = Accident_Travail_Benin_Class::g()->get( array(
+		'post_parent' => $data->id,
+	) , true );
+
 	return $data;
 }

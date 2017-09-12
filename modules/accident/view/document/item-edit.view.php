@@ -9,13 +9,15 @@
  * @package DigiRisk
  */
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="accident-row">
-	<input type="hidden" name="action" value="generate_accident_benin" />
-	<?php wp_nonce_field( 'ajax_generate_accident_benin' ); ?>
+	<input type="hidden" name="action" value="generate_registre_accidents_travail_benins" />
+	<?php wp_nonce_field( 'generate_registre_accidents_travail_benins' ); ?>
 	<td></td>
-	<td><?php esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer un accident de travail bénin', 'digirisk' ); ?></td>
+	<td><?php esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer un registre accidents de travail bénins', 'digirisk' ); ?></td>
 	<td>
 		<div class="action">
 			<div class="w50 action-input add button blue" data-loader="table" data-parent="accident-row">

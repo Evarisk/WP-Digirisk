@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="accident-row edit">
 
@@ -19,11 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="action" value="edit_accident" />
 	<?php wp_nonce_field( 'edit_accident' ); ?>
 	<input type="hidden" name="accident[id]" value="<?php echo esc_attr( $accident->id ); ?>" />
+	<input type="hidden" name="accident[parent_id]" value="<?php echo esc_attr( $main_society->id ); ?>" />
 
 	<td data-title="Ref." class="padding">
-		<?php \eoxia\View_Util::exec( 'digirisk', 'accident', 'popup-edit', array(
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'popup-edit', array(
 			'accident' => $accident,
-		) ); ?>
+		) );
+		?>
 
 		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
 	</td>

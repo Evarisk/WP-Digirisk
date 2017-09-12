@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * La classe gérant les accidents
@@ -23,21 +25,35 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   = '\digi\accident_model';
+	protected $model_name = '\digi\accident_model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    = 'digi-accident';
+	protected $post_type = 'digi-accident';
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base = 'accident';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_accident';
+	protected $meta_key = '_wpdigi_accident';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -76,26 +92,15 @@ class Accident_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Accidents';
 
 	/**
-	 * Constructeur obligatoire pour Singleton_Util
-	 *
-	 * @since 6.3.0
-	 * @version 6.3.0
-	 * @return void
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Affiches la fenêtre principale des accidents
 	 *
-	 * @param  integer $society_id L'ID de la société.
-	 *
 	 * @since 6.3.0
 	 * @version 6.3.0
+	 *
+	 * @param integer $society_id L'ID de la société.
 	 * @return void
 	 */
-	public function display() {
+	public function display( $society_id ) {
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main', array() );
 	}
 
@@ -107,6 +112,10 @@ class Accident_Class extends \eoxia\Post_Class {
 	 * @return void
 	 */
 	public function display_accident_list() {
+		$main_society = Society_Class::g()->get( array(
+			'posts_per_page' => 1,
+		), true );
+
 		$accident_schema = $this->get( array(
 			'schema' => true,
 		), true );
@@ -114,8 +123,11 @@ class Accident_Class extends \eoxia\Post_Class {
 		$accidents = $this->get( array() );
 
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'list', array(
+			'main_society' => $main_society,
 			'accident_schema' => $accident_schema,
 			'accidents' => $accidents,
 		) );
 	}
 }
+
+Accident_Class::g();
