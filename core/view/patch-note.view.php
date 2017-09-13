@@ -37,17 +37,17 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 			if ( ! empty( $result->acf->note_de_version ) ) :
 				foreach ( $result->acf->note_de_version as $element ) :
 					?>
-					<p>
-						<strong><?php echo esc_html( $element->numero_de_suivi ); ?></strong>
-						<span><?php echo $element->description; ?></span>
-						<?php
-						if ( ! empty( $element->illustration ) ) :
-							?>
-							<img src="<?php echo esc_attr( $element->illustration ); ?>" alt="<?php echo esc_attr( $element->numero_de_suivi ); ?>" />
+					<div class="note">
+						<div class="entry-title"><?php echo esc_html( $element->numero_de_suivi ); ?></div>
+						<div class="entry-content"><?php echo $element->description; ?></div>
 							<?php
-						endif;
-						?>
-					</p>
+							if ( ! empty( $element->illustration ) ) :
+								?>
+								<img src="<?php echo esc_attr( $element->illustration ); ?>" alt="<?php echo esc_attr( $element->numero_de_suivi ); ?>" />
+								<?php
+							endif;
+							?>
+					</div>
 					<?php
 				endforeach;
 			endif;
