@@ -20,7 +20,10 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 <div class="notification active">
 	<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
 	<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
-	<span class="close"><i class="icon fa fa-times-circle"></i></span>
+	<span class="close action-attribute"
+				data-action="close_change_log"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
+				data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fa fa-times-circle"></i></span>
 </div>
 
 <div class="popup patch-note">
@@ -33,14 +36,19 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 			<?php
 			if ( ! empty( $result->acf->note_de_version ) ) :
 				foreach ( $result->acf->note_de_version as $element ) :
-					echo esc_html( $element->numero_de_suivi );
-					echo $element->description;
-
-					if ( ! empty( $element->illustration ) ) :
-						?>
-						<img src="<?php echo esc_attr( $element->illustration ); ?>" alt="<?php echo esc_attr( $element->numero_de_suivi ); ?>" />
+					?>
+					<p>
+						<strong><?php echo esc_html( $element->numero_de_suivi ); ?></strong>
+						<span><?php echo $element->description; ?></span>
 						<?php
-					endif;
+						if ( ! empty( $element->illustration ) ) :
+							?>
+							<img src="<?php echo esc_attr( $element->illustration ); ?>" alt="<?php echo esc_attr( $element->numero_de_suivi ); ?>" />
+							<?php
+						endif;
+						?>
+					</p>
+					<?php
 				endforeach;
 			endif;
 			?>
