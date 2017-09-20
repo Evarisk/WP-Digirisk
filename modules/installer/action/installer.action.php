@@ -47,6 +47,28 @@ class Installer_Action {
 
 		$society = Society_Class::g()->create( $_POST['society'] );
 
+		// Création des données par default depuis le fichier json installer/asset/json/default.json.
+		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->installer->path . 'asset/json/default.json' );
+		$data = json_decode( $file_content );
+
+		if ( ! empty( $data ) ) {
+			foreach ( $data as $group_object ) {
+				$group = Group_Class::g()->update( array(
+					'title' => $group_object->title,
+					'post_parent' => $society->id,
+				) );
+
+				if ( ! empty( $group_object->workunits ) ) {
+					foreach ( $group_object->workunits as $workunit_object ) {
+						$workunit = Workunit_Class::g()->update( array(
+							'title' => $workunit_object->title,
+							'post_parent' => $group->id,
+						) );
+					}
+				}
+			}
+		}
+
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'installer',
@@ -62,17 +84,17 @@ class Installer_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.10.0
+	 * @since 6.2.3
+	 * @version 6.3.0
 	 */
 	public function ajax_installer_components() {
 		// check_ajax_referer( 'ajax_installer_components' );
 
 		$default_core_option = array(
-			'installed' 									=> false,
-			'db_version'									=> '1',
-			'danger_installed' 						=> false,
-			'recommendation_installed' 		=> false,
+			'installed' => false,
+			'db_version' => '1',
+			'danger_installed' => false,
+			'recommendation_installed' => false,
 			'evaluation_method_installed' => false,
 		);
 
@@ -94,7 +116,13 @@ class Installer_Action {
 			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
+		$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
+		if ( 3 === strlen( $current_version_for_update_manager ) ) {
+			$current_version_for_update_manager *= 10;
+		}
+
 		update_option( \eoxia\Config_Util::$init['digirisk']->core_option, $core_option );
+		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $current_version_for_update_manager );
 
 		wp_send_json_success( array(
 			'core_option' => $core_option,
