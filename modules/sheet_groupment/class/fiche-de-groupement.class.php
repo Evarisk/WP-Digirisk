@@ -1,16 +1,19 @@
 <?php
 /**
- * Gères la génération de la fiche de groupement
+ * Gères la génération de l'ODT: accident travail benin
  *
- * @package Evarisk\Plugin
- *
- * @since 0.1
- * @version 6.2.10.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gères la génération de la fiche de groupement
@@ -22,14 +25,14 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   				= '\digi\Fiche_De_Groupement_Model';
+	protected $model_name = '\digi\Fiche_De_Groupement_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    				= 'fiche_de_groupement';
+	protected $post_type = 'fiche_de_groupement';
 
 	/**
 	 * Le type du document
@@ -43,28 +46,28 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key    					= '_wpdigi_document';
+	protected $meta_key = '_wpdigi_document';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'fiche-de-groupement';
+	protected $base = 'fiche-de-groupement';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 							= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'FGP';
+	public $element_prefix = 'FGP';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -88,26 +91,13 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Fiche de groupement';
 
 	/**
-	 * Le constructeur obligatoire pour hériter de la classe Document_Class
-	 * Appelle le constructeur parent pour initialiser le post type
-	 *
-	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @since 6.0.0
+	 * @version 6.2.6
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
@@ -128,12 +118,18 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.2.5
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'list', array( 'list_document' => $list_document ) );
+		$list_document = $this->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'list', array(
+			'list_document' => $list_document,
+		) );
 	}
 
 	/**
@@ -143,28 +139,24 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @return bool
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function generate( $society_id ) {
-		$society = group_class::g()->get( array( 'post__in' => array( $society_id ) ) );
-
-		if ( empty( $society[0] ) ) {
-			return false;
-		}
-
-		$society = $society[0];
+		$society = group_class::g()->get( array(
+			'id' => $society_id,
+		), true );
 
 		$society_infos = $this->get_infos( $society );
 
 		$sheet_details = array(
-			'reference'			=> $society->unique_identifier,
-			'nom'						=> $society->title,
-			'description'		=> $society->content,
-			'adresse'				=> $society_infos['adresse'],
-			'telephone'			=> ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
-			'codePostal'		=> $society_infos['codePostal'],
-			'ville'					=> $society_infos['ville'],
+			'reference' => $society->unique_identifier,
+			'nom' => $society->title,
+			'description' => $society->content,
+			'adresse' => $society_infos['adresse'],
+			'telephone' => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'codePostal' => $society_infos['codePostal'],
+			'ville' => $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -178,20 +170,32 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 			$society = group_class::g()->update( $society );
 		}
 
-		return array( 'creation_response' => $document_creation_response, 'element' => $society, 'success' => true );
+		return array(
+			'creation_response' => $document_creation_response,
+			'element' => $society,
+			'success' => true,
+		);
 	}
 
 	/**
 	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
 	 *
-	 * @param Group_Model $society L'objet groupement.
-	 * @return array
+	 * @since 6.2.1
+	 * @version 6.3.0
 	 *
-	 * @since 6.2.1.2
-	 * @version 6.2.1.2
+	 * @param Group_Model $society L'objet groupement.
+	 * @return array {
+	 *         @type string adresse    L'adresse de l'entreprise.
+	 *         @type string codePostal Le code postal de l'entreprise.
+	 *         @type string ville      La ville de l'entreprise.
+	 * }
 	 */
 	public function get_infos( $society ) {
-		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
+		$infos = array(
+			'adresse' => '',
+			'codePostal' => '',
+			'ville' => '',
+		);
 
 		$address = Society_Class::g()->get_address( $society );
 		$address = $address[0];
@@ -206,12 +210,17 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	/**
 	 * Définie l'image du document
 	 *
+	 * @since 6.0.0
+	 * @version 6.3.0
+	 *
 	 * @param Group_Model $society L'objet groupement.
-	 *
-	 * @return string|false|array
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @return string|false|array {
+	 *         @type string type   Le type du noeud pour l'ODT.
+	 *         @type string value  Le lien vers le media.
+	 *         @type array  option {
+	 *               @type integer size La taille en CM du media.
+	 *         }
+	 * }
 	 */
 	public function set_picture( $society ) {
 		$picture = __( 'No picture defined', 'digirisk' );
@@ -222,9 +231,9 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 
 			if ( is_file( $picture_path ) ) {
 				$picture = array(
-					'type'		=> 'picture',
-					'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
-					'option'	=> array(
+					'type' => 'picture',
+					'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+					'option' => array(
 						'size' => 9,
 					),
 				);
@@ -241,7 +250,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des utilisateurs affectés et désaffectés à la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_users( $society ) {
@@ -274,7 +283,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
@@ -316,7 +325,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array Les risques dans la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
@@ -335,7 +344,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
-						$comment_list .= mysql2date( 'd/m/y', $comment->date ) . ' : ' . $comment->content . "
+						$comment_list .= $comment->date['date_input']['fr_FR']['date'] . ' : ' . $comment->content . "
 			";
 					endforeach;
 				endif;
