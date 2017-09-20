@@ -56,6 +56,7 @@ class Accident_Action {
 
 		$name_and_signature_of_the_caregiver_id = ! empty( $_POST['name_and_signature_of_the_caregiver_id'] ) ? (int) $_POST['name_and_signature_of_the_caregiver_id'] : 0;
 		$signature_of_the_victim_id = ! empty( $_POST['signature_of_the_victim_id'] ) ? (int) $_POST['signature_of_the_victim_id'] : 0;
+		$accident_investigation_id = ! empty( $_POST['accident_investigation_id'] ) ? (int) $_POST['accident_investigation_id'] : 0;
 
 		$accident = Accident_Class::g()->update( $_POST['accident'] );
 
@@ -65,6 +66,10 @@ class Accident_Action {
 		}
 		if ( ! empty( $signature_of_the_victim_id ) ) {
 			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $signature_of_the_victim_id, '\digi\Accident_Class', 'signature_of_the_victim_id' );
+		}
+
+		if ( ! empty( $accident_investigation_id ) ) {
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $accident_investigation_id, '\digi\Accident_Class', 'accident_investigation_id' );
 		}
 
 		// Associations des commentaires.
@@ -78,6 +83,12 @@ class Accident_Action {
 		}
 
 		do_action( 'generate_accident_benin', $accident->id );
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $accident->parent_id,
+			'id' => $accident->id,
+			'content' => 'Mise à jour de l\'accident ' . $accident->modified_unique_identifier,
+		) );
 
 		ob_start();
 		Accident_Class::g()->display_accident_list();
@@ -106,12 +117,17 @@ class Accident_Action {
 			$id = (int) $_POST['id'];
 		}
 
+		$main_society = Society_Class::g()->get( array(
+			'posts_per_page' => 1,
+		), true );
+
 		$accident = Accident_Class::g()->get( array(
 			'id' => $id,
 		), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+			'main_society' => $main_society,
 			'society_id' => $accident->parent_id,
 			'accident' => $accident,
 		) );

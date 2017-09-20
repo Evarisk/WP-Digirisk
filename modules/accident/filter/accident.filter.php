@@ -3,14 +3,16 @@
  * Gestion des filtres relatifs aux accidents
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0.0
+ * @since 6.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package accident
+ * @package DigiRisk
  * @subpackage filter
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des filtres relatifs aux accidents
@@ -32,16 +34,10 @@ class Accident_Filter {
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 */
 	public function callback_tab( $list_tab, $id ) {
-		$list_tab['digi-group']['accident'] = array(
+		$list_tab['digi-society']['registre-accident'] = array(
 			'type' => 'text',
-			'text' => __( 'Accidents', 'digirisk' ),
-			'title' => __( 'Les accidents de', 'digirisk' ),
-		);
-
-		$list_tab['digi-workunit']['accident'] = array(
-			'type' => 'text',
-			'text' => __( 'Accidents', 'digirisk' ),
-			'title' => __( 'Les accidents de', 'digirisk' ),
+			'text' => __( 'Registre accidents', 'digirisk' ),
+			'title' => __( 'Les registres des accidents de travail bénins de ', 'digirisk' ),
 		);
 
 		return $list_tab;

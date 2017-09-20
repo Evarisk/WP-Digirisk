@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="popup">
 	<div class="container">
@@ -26,15 +28,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<div class="form">
 				<ul class="grid-layout padding w2">
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->accident_date ) ? 'active': ''; ?>">
-							<input name="accident[accident_date]" type="text" class="date-time" value="<?php echo esc_attr( $accident->accident_date ); ?>">
+						<div class="group-date form-element <?php echo ! empty( $accident->accident_date['date_input']['date'] ) ? 'active' : ''; ?>">
+							<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
+							<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
 							<label><?php esc_html_e( 'Date d\'accident', 'digirisk' ); ?></label>
 							<span class="bar"></span>
 						</div>
 					</li>
 
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->place ) ? 'active': ''; ?>">
+						<div class="form-element <?php echo ! empty( $accident->place ) ? 'active' : ''; ?>">
 							<input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>">
 							<label><?php esc_html_e( 'Lieu', 'digirisk' ); ?></label>
 							<span class="bar"></span>
@@ -42,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					</li>
 
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->location_of_lesions ) ? 'active': ''; ?>">
+						<div class="form-element <?php echo ! empty( $accident->location_of_lesions ) ? 'active' : ''; ?>">
 							<input type="text" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->location_of_lesions ); ?>">
 							<label><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></label>
 							<span class="bar"></span>
@@ -50,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					</li>
 
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->nature_of_lesions ) ? 'active': ''; ?>">
+						<div class="form-element <?php echo ! empty( $accident->nature_of_lesions ) ? 'active' : ''; ?>">
 							<input type="text" name="accident[nature_of_lesions]" value="<?php echo esc_attr( $accident->nature_of_lesions ); ?>">
 							<label><?php esc_html_e( 'Nature des lésions', 'digirisk' ); ?></label>
 							<span class="bar"></span>
@@ -58,7 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					</li>
 
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_witnesses ) ? 'active': ''; ?>">
+						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_witnesses ) ? 'active' : ''; ?>">
 							<textarea name="accident[name_and_address_of_witnesses]"><?php echo $accident->name_and_address_of_witnesses; ?></textarea>
 							<label><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></label>
 							<span class="bar"></span>
@@ -66,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					</li>
 
 					<li>
-						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_third_parties_involved ) ? 'active': ''; ?>">
+						<div class="form-element <?php echo ! empty( $accident->name_and_address_of_third_parties_involved ) ? 'active' : ''; ?>">
 							<textarea name="accident[name_and_address_of_third_parties_involved]"><?php echo $accident->name_and_address_of_third_parties_involved; ?></textarea>
 							<label><?php esc_html_e( 'Nom et adresse des tiers impliqués', 'digirisk' ); ?></label>
 							<span class="bar"></span>
@@ -76,20 +79,20 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					<li>
 						<div class="form-element">
 							<p><?php esc_html_e( 'Nom et signature du donneur de soins', 'digirisk' ); ?></p>
-							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="name_and_signature_of_the_caregiver_id" custom_class="caregiver" ]' ); ?>
+							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="name_and_signature_of_the_caregiver_id" custom_class="caregiver" ]' ); ?>
 						</div>
 					</li>
 
 					<li>
 						<div class="form-element">
 							<p><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></p>
-							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="signature_of_the_victim_id" custom_class="victim" ]' ); ?>
+							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="signature_of_the_victim_id" custom_class="victim" ]' ); ?>
 						</div>
 					</li>
 				</ul>
 
 				<ul>
-					<li class="form-element <?php echo ! empty( $accident->observation ) ? 'active': ''; ?>">
+					<li class="form-element <?php echo ! empty( $accident->observation ) ? 'active' : ''; ?>">
 						<textarea name="accident[observation]"><?php echo $accident->observation; ?></textarea>
 						<label><?php esc_html_e( 'Observations (date de la DAT éventuellement)', 'digirisk' ); ?></label>
 						<span class="bar"></span>

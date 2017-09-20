@@ -23,9 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return Accident_Model L'objet avec tous les éléments ajoutés par cette méthode.
  */
 function get_full_accident( $data ) {
-	if ( empty( $data->registration_date_in_register ) ) {
-		$data->registration_date_in_register = current_time( 'd/m/Y' );
-	}
 	$data->victim_identity = User_Digi_Class::g()->get( array(
 		'schema' => true,
 	), true );
@@ -48,7 +45,8 @@ function get_full_accident( $data ) {
 
 	$data->document = Accident_Travail_Benin_Class::g()->get( array(
 		'post_parent' => $data->id,
-	) , true );
+		'posts_per_page' => 1,
+	), true );
 
 	return $data;
 }

@@ -132,13 +132,13 @@ class Accident_Travail_Benin_Model extends Document_Model {
 					'version' => '6.3.0',
 				),
 				'signatureDonneurSoins' => array(
-					'type' => 'string',
+					'type' => 'array',
 					'description' => 'Nom et signature du donneur de soins',
 					'since' => '6.3.0',
 					'version' => '6.3.0',
 				),
 				'signatureVictime' => array(
-					'type' => 'string',
+					'type' => 'array',
 					'description' => 'Signature de la victime',
 					'since' => '6.3.0',
 					'version' => '6.3.0',
@@ -149,6 +149,12 @@ class Accident_Travail_Benin_Model extends Document_Model {
 					'since' => '6.3.0',
 					'version' => '6.3.0',
 				),
+				'enqueteAccident' => array(
+					'type' => 'string',
+					'description' => 'L\'enquête accident',
+					'since' => '6.3.0',
+					'version' => '6.3.0',
+				)
 			),
 		);
 

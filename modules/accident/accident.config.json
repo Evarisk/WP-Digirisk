@@ -5,6 +5,7 @@
 	"description": "Le module gérant les accidents",
 	"path": "modules/accident/",
 	"dependencies": {
+		"filter": {},
 		"action": {},
 		"helper": {},
 		"shortcode": {},

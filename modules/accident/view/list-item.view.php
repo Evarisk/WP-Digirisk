@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date et heure" class="padding">
-		<span><?php echo esc_html( $accident->registration_date_in_register ); ?></span>
+		<span><?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></span>
 	</td>
 	<td data-title="Identité victime" class="padding">
 		<span><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></span>

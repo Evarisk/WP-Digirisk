@@ -67,21 +67,21 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
+	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\eoxia\convert_date' );
+	protected $before_put_function = array( '\digi\get_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display', '\digi\get_full_accident' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_accident' );
 
 
 	/**
@@ -102,6 +102,16 @@ class Accident_Class extends \eoxia\Post_Class {
 	 */
 	public function display( $society_id ) {
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main', array() );
+	}
+
+	/**
+	 * Affiches la fenêtre pour imprimer un registre d'accidents.
+	 *
+	 * @param integer $society_id L'ID de la société.
+	 * @return void
+	 */
+	public function display_registre( $society_id ) {
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'registre-accident/main', array() );
 	}
 
 	/**

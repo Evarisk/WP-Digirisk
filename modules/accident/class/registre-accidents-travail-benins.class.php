@@ -136,28 +136,29 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	/**
 	 * Cette méthode génère l'accident de travail bénin
 	 *
+	 * @param Society_Model $main_society La société.
 	 * @return array
 	 *
 	 * @since 6.3.0
 	 * @version 6.3.0
 	 */
-	public function generate() {
-		$main_society = Society_Class::g()->get( array(
-			'posts_per_page' => 1,
-		), true );
+	public function generate( $main_society ) {
+		$address = Society_Class::g()->get_address( $main_society );
+		$address = $address[0];
 
 		$sheet_details = array(
+			'ref' => '',
 			'raisonSociale' => $main_society->title,
-			'adresse' => '',
-			'telephone' => $main_society->telephone,
+			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
+			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
-			'email' => $main_society->email,
+			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,
 		);
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
 
-		$document_creation_response = document_class::g()->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
+		$document_creation_response = Document_Class::g()->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,

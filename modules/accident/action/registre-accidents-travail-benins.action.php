@@ -41,7 +41,17 @@ class Registre_Accident_Travail_Benin_Action {
 	function ajax_generate_registre_accidents_travail_benins() {
 		check_ajax_referer( 'generate_registre_accidents_travail_benins' );
 
-		Registre_Accidents_Travail_Benins_Class::g()->generate();
+		$main_society = Society_Class::g()->get( array(
+			'posts_per_page' => 1,
+		), true );
+
+		Registre_Accidents_Travail_Benins_Class::g()->generate( $main_society );
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $main_society->id,
+			'id' => 'Indisponible',
+			'content' => 'Génération du registre des accidents de travail bénins.',
+		) );
 
 		ob_start();
 		Registre_Accidents_Travail_Benins_Class::g()->display();

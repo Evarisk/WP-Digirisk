@@ -34,9 +34,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td data-title="Date d'inscription dans le registre" class="padding">
 		<?php if ( empty( $accident->id ) ) : ?>
-			<input type="text" class="date" name="accident[registration_date_in_register]" value="<?php echo esc_attr( $accident->registration_date_in_register ); ?>" />
+			<div class="group-date">
+				<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[registration_date_in_register]" value="<?php echo esc_attr( $accident->registration_date_in_register['date_input']['date'] ); ?>" />
+				<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?>" />
+			</div>
 		<?php else : ?>
-			<span><?php echo esc_html( $accident->registration_date_in_register ); ?></span>
+			<span><?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></span>
 		<?php endif; ?>
 	</td>
 	<td data-title="Identité victime" class="padding">

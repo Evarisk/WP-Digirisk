@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				<ul class="grid-layout padding w2">
 					<li class="">
 						<strong><?php esc_html_e( 'Date d\'accident', 'digirisk' ); ?></strong>
-						<p><?php echo esc_html( $accident->accident_date ); ?></p>
+						<p><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></p>
 					</li>
 
 					<li class="">
@@ -57,12 +57,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 					<li class="">
 						<p><?php esc_html_e( 'Nom et signature du donneur de soins', 'digirisk' ); ?></p>
-						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="name_and_signature_of_the_caregiver_id" custom_class="caregiver"]' ); ?>
+						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="name_and_signature_of_the_caregiver_id" custom_class="caregiver"]' ); ?>
 					</li>
 
 					<li class="">
 						<p><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></p>
-						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="signature_of_the_victim_id" custom_class="victim"]' ); ?>
+						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="signature_of_the_victim_id" custom_class="victim"]' ); ?>
 					</li>
 				</ul>
 

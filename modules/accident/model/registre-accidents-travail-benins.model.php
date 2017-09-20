@@ -78,6 +78,7 @@ class Registre_Accidents_Travail_Benins_Model extends Document_Model {
 					'version' => '6.3.0',
 				),
 				'accidentDebut' => array(
+					'type' => 'array',
 					'child' => array(
 						'ref' => array(
 							'type' => 'string',
@@ -124,6 +125,7 @@ class Registre_Accidents_Travail_Benins_Model extends Document_Model {
 					),
 				),
 				'accidentFin' => array(
+					'type' => 'array',
 					'child' => array(
 						'ref' => array(
 							'type' => 'string',

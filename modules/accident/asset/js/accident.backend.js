@@ -21,6 +21,7 @@ window.eoxiaJS.digirisk.accident.init = function() {};
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.accident' ).replaceWith( response.data.view );
+	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -67,4 +68,19 @@ window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( element, res
  */
 window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, response ) {
 	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "generate_registre_accidents_travail_benins".
+ * Cliques automatiquement sur l'onglet 'Registre accidents'
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
+	jQuery( '.tab-element[data-action="digi-registre-accident"]' ).click();
 };

@@ -145,17 +145,20 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 			'posts_per_page' => 1,
 		), true );
 
+		$address = Society_Class::g()->get_address( $main_society );
+		$address = $address[0];
+
 		$sheet_details = array(
 			'raisonSociale' => $main_society->title,
-			'adresse' => '',
-			'telephone' => $main_society->telephone,
+			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
+			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
-			'email' => $main_society->email,
+			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,
 		);
 
 		$accident = Accident_Class::g()->get( array(
-			'include' => $accident_id,
+			'id' => $accident_id,
 		), true );
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accident( $accident ) );
@@ -198,18 +201,19 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 
 		$accident_details = array(
 			'ref' => $accident->unique_identifier,
-			'dateInscriptionRegistre' => $accident->registration_date_in_register,
-			'nomPrenomMatriculeVictime' => ! empty( $element->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $element->victim_identity->id . ' ' . $element->victim_identity->login : '',
-			'dateHeure' => $accident->accident_date,
+			'dateInscriptionRegistre' => $accident->registration_date_in_register['date_input']['fr_FR']['date'],
+			'nomPrenomMatriculeVictime' => ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : '',
+			'dateHeure' => $accident->accident_date['date_input']['fr_FR']['date_time'],
 			'lieu' => $accident->place,
 			'circonstances' => $comment_content,
 			'siegeLesions' => $accident->location_of_lesions,
 			'natureLesions' => $accident->nature_of_lesions,
 			'nomAdresseTemoins' => $accident->name_and_address_of_witnesses,
 			'nomAdresseTiers' => $accident->name_and_address_of_third_parties_involved,
-			'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] : 0 ),
-			'signatureVictime' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_victim_id'][0] ) ? $element->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
+			'signatureDonneurSoins' => $this->get_picture( ! empty( $accident->associated_document_id['name_and_signature_of_the_caregiver_id'][0] ) ? $accident->associated_document_id['name_and_signature_of_the_caregiver_id'][0] : 0 ),
+			'signatureVictime' => $this->get_picture( ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? $accident->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
 			'observations' => $accident->observation,
+			'enqueteAccident' => ! empty( $accident->associated_document_id['accident_investigation_id'][0] ) ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
 		);
 
 		return $accident_details;
