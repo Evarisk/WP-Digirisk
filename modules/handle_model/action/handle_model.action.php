@@ -1,19 +1,22 @@
 <?php
 /**
- * Gestion des actions pour gérer les modèles personnalisés
+ * Gestion des actions pour gérer les modèles ODT personnalisés.
  *
- * @since 6.2.3.0
- * @version 6.2.10.0
- *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.3
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Gestion des actions pour gérer les modèles personnalisés
+ * Gestion des actions pour gérer les modèles ODT personnalisés.
  */
 class Handle_Model_Action {
 
@@ -21,8 +24,31 @@ class Handle_Model_Action {
 	 * Le constructeur ajoutes le shortcode digi-handle-model
 	 */
 	public function __construct() {
+		add_action( 'wp_ajax_set_model', array( $this, 'set_model' ) );
 		add_action( 'wp_ajax_reset_default_model', array( $this, 'reset_default_model' ) );
 		add_action( 'wp_ajax_view_historic_model', array( $this, 'view_historic_model' ) );
+	}
+
+	/**
+	 * Appelle la méthode "upload_model" de "File_Management_Class"
+	 *
+	 * @since 6.2.1
+	 * @version 6.3.0
+	 */
+	public function set_model() {
+		// check_ajax_referer( 'associate_file' );
+		$type = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 0;
+		$file_id = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
+
+		if ( ! Handle_Model_Class::g()->upload_model( $type, $file_id ) ) {
+			wp_send_json_error();
+		}
+
+		ob_start();
+		do_shortcode( '[digi-handle-model]' );
+		wp_send_json_success( array(
+			'view' => ob_get_clean(),
+		) );
 	}
 
 	/**
@@ -84,8 +110,8 @@ class Handle_Model_Action {
 	 * Charges tous les posts qui contienne la catégorie "model" et "$type".
 	 * $type correspond au type du modèle.
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.10.0
+	 * @since 6.2.3
+	 * @version 6.3.0
 	 *
 	 * @return void
 	 */
@@ -104,10 +130,13 @@ class Handle_Model_Action {
 		$default_model = Document_Class::g()->get_model_for_element( array( $type, 'default_model', 'model' ) );
 		$default_model_data = Document_Class::g()->get( array(
 			'post_status' => 'inherit',
-			'post__in' => array(
-				$default_model['model_id'],
-			),
+			'id' => $default_model['model_id'],
 		), true );
+
+		if ( ! is_object( $default_model_data ) ) {
+			$default_model_data = $default_model_data[0];
+		}
+
 		$default_model_data->url = $default_model['model_url'];
 
 		// On récupères tous les posts qui correspond aux catégories "model" et $type.
@@ -120,8 +149,8 @@ class Handle_Model_Action {
 			foreach ( $types as $element ) {
 				$tax_query[] = array(
 					'taxonomy' => document_class::g()->attached_taxonomy_type,
-					'field'			=> 'slug',
-					'terms'			=> $element,
+					'field' => 'slug',
+					'terms' => $element,
 				);
 			}
 		}
