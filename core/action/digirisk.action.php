@@ -1,20 +1,22 @@
 <?php
 /**
- * Initialise les fichiers .config.json
+ * Classe gérant les actions principales de l'application.
  *
- * @package Evarisk\Plugin
- *
- * @since 0.1
- * @version 6.2.5.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Initialise les scripts JS et CSS du Plugin
- * Ainsi que le fichier MO
+* Classe gérant les actions principales de l'application.
  */
 class Digirisk_Action {
 
@@ -42,6 +44,8 @@ class Digirisk_Action {
 
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+
+		add_action( 'wp_ajax_close_change_log', array( $this, 'callback_close_change_log' ) );
 	}
 
 	/**
@@ -152,6 +156,32 @@ class Digirisk_Action {
 		}
 	}
 
+	/**
+	 * Lors de la fermeture de la notification de la popup.
+	 * Met la metadonnée '_wpdigi_user_change_log' avec le numéro de version actuel à true.
+	 *
+	 * @return void
+	 */
+	public function callback_close_change_log() {
+		check_ajax_referer( 'close_change_log' );
+
+		$version = ! empty( $_POST['version'] ) ? sanitize_text_field( $_POST['version'] ) : '';
+
+		if ( empty( $version ) ) {
+			wp_send_json_error();
+		}
+
+		$meta = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
+
+		if ( empty( $meta ) ) {
+			$meta = array();
+		}
+
+		$meta[ $version ] = true;
+		update_user_meta( get_current_user_id(), '_wpdigi_user_change_log', $meta );
+
+		wp_send_json_success( array() );
+	}
 }
 
 new Digirisk_Action();
