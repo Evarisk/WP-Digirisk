@@ -3,19 +3,17 @@
  * Gestion de l'importation des modèles
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- *
- * @since 6.1.5.5
- * @version 6.2.1.2
- *
- * @copyright 2015-2016 Evarisk
- *
- * @package Digirisk\export_import
- * @subpackage class
+ * @since 6.1.5
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 /**
@@ -85,35 +83,37 @@ class Import_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function create_groupment( &$groupment_json, $groupment = null ) {
-		if ( empty( $groupment_json['id'] ) ) {
-			if ( $groupment ) {
-				$groupment_json['parent_id'] = $groupment->id;
+		if ( 0 !== $groupment_json['parent_id'] ) {
+			if ( empty( $groupment_json['id'] ) ) {
+				if ( $groupment ) {
+					$groupment_json['parent_id'] = $groupment->id;
+				}
+
+				$groupment = group_class::g()->update( $groupment_json );
+				$groupment_json['id'] = $groupment->id;
+				$this->update_json_file();
+				$this->check_index();
+			} else {
+				$groupment = group_class::g()->get( array( 'include' => $groupment_json['id'] ) );
+				$groupment = $groupment[0];
 			}
 
-			$groupment = group_class::g()->update( $groupment_json );
-			$groupment_json['id'] = $groupment->id;
-			$this->update_json_file();
-			$this->check_index();
-		} else {
-			$groupment = group_class::g()->get( array( 'include' => $groupment_json['id'] ) );
-			$groupment = $groupment[0];
-		}
-
-		if ( ! empty( $groupment_json['list_risk'] ) ) {
-			foreach ( $groupment_json['list_risk'] as &$risk_json ) {
-				$this->create_risk( $groupment, $risk_json );
+			if ( ! empty( $groupment_json['list_risk'] ) ) {
+				foreach ( $groupment_json['list_risk'] as &$risk_json ) {
+					$this->create_risk( $groupment, $risk_json );
+				}
 			}
-		}
 
-		if ( ! empty( $groupment_json['list_workunit'] ) ) {
-			foreach ( $groupment_json['list_workunit'] as &$workunit_json ) {
-				$this->create_workunit( $groupment, $workunit_json );
+			if ( ! empty( $groupment_json['list_workunit'] ) ) {
+				foreach ( $groupment_json['list_workunit'] as &$workunit_json ) {
+					$this->create_workunit( $groupment, $workunit_json );
+				}
 			}
-		}
 
-		if ( ! empty( $groupment_json['list_group'] ) ) {
-			foreach ( $groupment_json['list_group'] as &$groupment_json ) {
-				$this->create_groupment( $groupment_json, $groupment );
+			if ( ! empty( $groupment_json['list_group'] ) ) {
+				foreach ( $groupment_json['list_group'] as &$groupment_json ) {
+					$this->create_groupment( $groupment_json, $groupment );
+				}
 			}
 		}
 	}
