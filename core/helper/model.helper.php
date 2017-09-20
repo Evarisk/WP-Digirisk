@@ -48,13 +48,15 @@ function get_identifier( $data ) {
 
 	$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 	$list_accronym = json_decode( $list_accronym, true );
-	$type = str_replace( 'digi-', '\\digi\\', $data->type );
-	if ( ! empty( $type ) && class_exists( $type . '_class' ) ) {
-		$type .= '_class';
-		$element_prefix = $type::g()->element_prefix;
+	if ( isset( $data->type ) ) {
+		$type = str_replace( 'digi-', '\\digi\\', $data->type );
+		if ( ! empty( $type ) && class_exists( $type . '_class' ) ) {
+			$type .= '_class';
+			$element_prefix = $type::g()->element_prefix;
 
-		if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
-			$data->modified_unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
+			if ( ! empty( $data->unique_identifier ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
+				$data->modified_unique_identifier = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $data->unique_identifier );
+			}
 		}
 	}
 
