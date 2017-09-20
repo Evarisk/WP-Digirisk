@@ -1,0 +1,21 @@
+[
+	{
+		"title": "Bâtiment A",
+		"workunits": [
+			{
+				"title": "Unité de travail A1"
+			},
+			{
+				"title": "Unité de travail A2"
+			}
+		]
+	},
+	{
+		"title": "Bâtiment B",
+		"workunits": [
+			{
+				"title": "Unité de travail B1"
+			}
+		]
+	}
+]
