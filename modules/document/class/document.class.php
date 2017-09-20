@@ -74,14 +74,21 @@ class Document_Class extends \eoxia\Post_Class {
 		), array( 'category' ) );
 		$number_page = 0;//ceil( count ( $list_document ) / $this->limit_document_per_page );
 
-		\eoxia\View_Util::exec( 'digirisk', 'document', 'printed-list', array( 'element_id' => $element->id, 'list_document' => $list_document, 'number_page' => $number_page, 'current_page' => $current_page, ) );
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'printed-list', array(
+			'element_id' => $element->id,
+			'list_document' => $list_document,
+			'number_page' => $number_page,
+			'current_page' => $current_page,
+		) );
 	}
 
 	/**
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément / Get file model list for a given element type
 	 *
-	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents / Type list we have to get document model list for.
+	 * @since 6.1.0
+	 * @version 6.3.0
 	 *
+	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents / Type list we have to get document model list for.
 	 * @return array Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants / Response status, a text message if an error occured, model identifier if exists
 	 */
 	public function get_model_for_element( $current_element_type ) {
@@ -90,28 +97,34 @@ class Document_Class extends \eoxia\Post_Class {
 		}
 
 		$response = array(
-			'status'		=> true,
-			'message'		=> __( 'Le modèle utilisé est : ' . PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt', 'digirisk' ),
-			'model_id'		=> null,
-			'model_path'	=> str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
+			'status' => true,
+			'message' => __( 'Le modèle utilisé est : ' . PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt', 'digirisk' ),
+			'model_id' => null,
+			'model_path' => str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
 			'model_url' => str_replace( '\\', '/', PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
 		);
 
 		$tax_query = array(
-			'relation' => 'AND'
+			'relation' => 'AND',
 		);
 
-		if ( !empty( $current_element_type ) ) {
-		  foreach ( $current_element_type as $element ) {
+		if ( ! empty( $current_element_type ) ) {
+			foreach ( $current_element_type as $element ) {
 				$tax_query[] = array(
-					'taxonomy' => document_class::g()->attached_taxonomy_type,
-					'field'			=> 'slug',
-					'terms'			=> $element
+					'taxonomy' => self::g()->attached_taxonomy_type,
+					'field' => 'slug',
+					'terms' => $element,
 				);
-		  }
+			}
 		}
 
-		$query = new \WP_Query( array( 'fields' => 'ids', 'post_status' => 'inherit', 'posts_per_page' => 1, 'tax_query' => $tax_query ) );
+		$query = new \WP_Query( array(
+			'fields' => 'ids',
+			'post_status' => 'inherit',
+			'posts_per_page' => 1,
+			'tax_query' => $tax_query,
+			'post_type' => 'attachment',
+		) );
 
 		if ( $query->have_posts() ) {
 			$upload_dir = wp_upload_dir();
@@ -119,7 +132,7 @@ class Document_Class extends \eoxia\Post_Class {
 			$model_id = $query->posts[0];
 			$attachment_file_path = get_attached_file( $model_id );
 			$response['model_id'] = $model_id;
-			$response['model_path'] =  str_replace( '\\', '/', $attachment_file_path );
+			$response['model_path'] = str_replace( '\\', '/', $attachment_file_path );
 			$response['model_url'] = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
 			$response['message'] = __( 'Le modèle utilisé est : ' . $attachment_file_path, 'digirisk' );
 		}
@@ -166,6 +179,9 @@ class Document_Class extends \eoxia\Post_Class {
 		if ( !empty( $document_content ) ) {
 			/**	Lecture du contenu à écrire dans le document / Read the content to write into document	*/
 			foreach ( $document_content as $data_key => $data_value ) {
+				if ( is_array( $data_value ) && ! empty( $data_value['date_input'] ) ) {
+					$data_value = $data_value['date_input']['fr_FR']['date'];
+				}
 				$DigiOdf = $this->set_document_meta( $data_key, $data_value, $DigiOdf );
 			}
 		}
@@ -244,14 +260,24 @@ class Document_Class extends \eoxia\Post_Class {
 	}
 
 	public function get_document_path( $element ) {
-		$path = $this->get_digirisk_dir_path( 'baseurl' ) . "/";
+		$path = '';
 
-		if ( ! empty( $element->parent_id ) ) {
-			$society = society_class::g()->show_by_type( $element->parent_id, array( false ) );
-			$path .= "/" . $society->type . "/" . $society->id . "/";
+		if ( ! empty( $element ) && is_object( $element ) ) {
+			$path = $this->get_digirisk_dir_path( 'baseurl' ) . "/";
+
+			if ( ! empty( $element->parent_id ) && ! empty( $element->mime_type ) ) {
+				$society = society_class::g()->show_by_type( $element->parent_id, array( false ) );
+				$path .= "/" . $society->type . "/" . $society->id . "/";
+			}
+			$path .= $element->title;
+			if ( ! empty( $element->mime_type ) ) {
+				$path .= $this->mime_type_link[ $element->mime_type ];
+			}
+
+			if ( empty( $element->mime_type ) ) {
+				$path = '';
+			}
 		}
-		$path .= $element->title;
-		$path .= $this->mime_type_link[$element->mime_type];
 		return $path;
 	}
 
