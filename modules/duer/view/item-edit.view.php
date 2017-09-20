@@ -18,8 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td class="padding"></td>
-	<td class="padding"><input type="text" class="date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateDebutAudit" /></td>
-	<td class="padding"><input type="text" class="date" value="<?php echo esc_attr( mysql2date( 'd/m/Y', current_time( 'mysql', 0 ), true ) ); ?>" name="dateFinAudit" /></td>
+	<td class="padding">
+		<div class="group-date form-element <?php echo esc_attr( ! empty( $element->document_meta['dateDebutAudit']['date_input']['date'] ) ? 'active' : '' ); ?>">
+			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateDebutAudit" value="<?php echo esc_attr( $element->document_meta['dateDebutAudit']['date_input']['date'] ); ?>" />
+			<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->document_meta['dateDebutAudit']['date_input']['fr_FR']['date'] ); ?>" />
+		</div>
+	</td>
+	<td class="padding">
+		<div class="group-date form-element <?php echo esc_attr( ! empty( $element->document_meta['dateFinAudit']['date_input']['date'] ) ? 'active' : '' ); ?>">
+			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateFinAudit" value="<?php echo esc_attr( $element->document_meta['dateFinAudit']['date_input']['date'] ); ?>" />
+			<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->document_meta['dateFinAudit']['date_input']['fr_FR']['date'] ); ?>" />
+		</div>
+	</td>
 
 	<td class="padding">
 		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></textarea>

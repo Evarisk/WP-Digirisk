@@ -3,23 +3,24 @@
  * Affichage d'un DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.5.0
+ * @since 6.1.9
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 ?>
 
 <tr>
 	<td class="padding w50"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit'] ); ?></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit'] ); ?></td>
+	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit']['date_input']['fr_FR']['date'] ); ?></td>
+	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit']['date_input']['fr_FR']['date'] ); ?></td>
 
 	<td class="padding padding text-center">
 		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( $element->document_meta['destinataireDUER'] ) ); // WPCS: XSS is ok. ?></span>
@@ -83,7 +84,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 	<td>
 		<div class="action grid-layout w2">
-				<a class="button red h50" href="<?php echo esc_attr( document_class::g()->get_document_path( $element ) ); ?>">
+				<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 					<i class="fa fa-download" aria-hidden="true"></i>
 					<span><?php esc_html_e( 'DUER', 'digirisk' ); ?></span>
 				</a>

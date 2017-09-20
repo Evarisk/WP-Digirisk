@@ -3,16 +3,17 @@
  * Fait l'affichage du template de la liste des documents uniques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
+ * @since 6.1.9
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Fait l'affichage du template de la liste des documents uniques
@@ -23,14 +24,14 @@ class DUER_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   				= '\digi\DUER_Model';
+	protected $model_name = '\digi\DUER_Model';
 
 	/**
 	 * Le type du document
 	 *
 	 * @var string
 	 */
-	protected $post_type    				= 'duer';
+	protected $post_type = 'duer';
 
 	/**
 	 * La taxonomy du post
@@ -45,28 +46,28 @@ class DUER_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key    					= '_wpdigi_document';
+	protected $meta_key = '_wpdigi_document';
 
 	/**
 	 * La base de l'URI pour la Rest API
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'document-unique';
+	protected $base = 'document-unique';
 
 	/**
 	 * La version pour la Rest API
 	 *
 	 * @var string
 	 */
-	protected $version 							= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe pour le champs "unique_key" de l'objet
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'DU';
+	public $element_prefix = 'DU';
 
 	/**
 	 * Fonctions appelées avant le PUT
@@ -97,22 +98,13 @@ class DUER_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'DUER';
 
 	/**
-	 * Ajout du filtre pour la Rest API
-	 *
-	 * @return void
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 1.0
-	 * @version 6.2.7.0
+	 * @since 1.0.0
+	 * @version 6.2.7
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
