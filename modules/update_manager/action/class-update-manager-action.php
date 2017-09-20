@@ -33,15 +33,21 @@ class Update_Manager_Action {
 	 */
 	public function automatic_update_redirect() {
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
+		$core_option = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
-		if ( ! strpos( $_SERVER['REQUEST_URI'], 'admin-ajax.php' ) ) {
+		if ( ! strpos( $_SERVER['REQUEST_URI'], 'admin-ajax.php' ) && ! empty( $core_option ) && ! empty( $core_option['installed'] ) ) {
 			$current_version_to_check = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
 			$last_version_done = (int) get_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, 6260 );
+
+			if ( 3 === strlen( $current_version_to_check ) ) {
+				$current_version_to_check *= 10;
+			}
+
 			if ( $last_version_done !== $current_version_to_check ) {
 				$update_path = \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'update/';
 				$update_data_path = \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'data/';
 
-				for ( $i = ( $last_version_done + 1 ); $i <= $current_version_to_check; $i++ ) {
+				for ( $i = ( (int) substr( $last_version_done, 0, 4 ) + 1 ); $i <= $current_version_to_check; $i++ ) {
 					if ( is_file( $update_data_path . 'update-' . $i . '-data.php' ) ) {
 						require_once( $update_data_path . 'update-' . $i . '-data.php' );
 						$waiting_updates[ $i ] = $datas;
@@ -52,7 +58,7 @@ class Update_Manager_Action {
 			}
 		}
 
-		if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digirisk-update' ) ) {
+		if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digirisk-update' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digi-setup' ) ) {
 			wp_safe_redirect( admin_url( 'admin.php?page=digirisk-update' ) );
 			exit();
 		}
@@ -75,7 +81,11 @@ class Update_Manager_Action {
 	 * AJAX Callback - Return the website url
 	 */
 	public function callback_digi_redirect_to_dashboard() {
-		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version ) );
+		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
+		if ( 3 === strlen( $version ) ) {
+			$version *= 10;
+		}
+		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
 		delete_option( '_digi_waited_updates' );
 		wp_die( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) );
 	}

@@ -34,7 +34,7 @@ class Update_6291 {
 
 		$saved_slug = array();
 		$dangers_slug = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/danger-6291.json' );
-		$number_risk = 0;
+		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
 
 		if ( ! empty( $dangers_slug ) ) {
 			foreach ( $dangers_slug as $danger_slug ) {
