@@ -3,8 +3,8 @@
  * Classe gérant les affichages légaux
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package legal_display
  * @subpackage class
@@ -12,7 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les affichages légaux
@@ -31,28 +33,28 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type  = 'digi-legal-display';
+	protected $post_type = 'digi-legal-display';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key   = '_wpdigi_legal_display';
+	protected $meta_key = '_wpdigi_legal_display';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base 			= 'legal-display';
+	protected $base = 'legal-display';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 		= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -81,18 +83,6 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $post_type_name = 'Affichages légal';
-
-	/**
-	 * Constructeur
-	 *
-	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
-	 */
-	protected function construct() {
-		parent::construct();
-	}
 
 	/**
 	 * Appelle la méthode display_form

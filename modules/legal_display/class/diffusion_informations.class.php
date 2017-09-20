@@ -3,97 +3,85 @@
  * Classe gérant les diffusions d'informations
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les diffusions d'informations
  */
 class Diffusion_Informations_Class extends \eoxia\Post_Class {
 
-		/**
-		 * Le nom du modèle
-		 *
-		 * @var string
-		 */
-		protected $model_name = '\digi\Diffusion_Informations_Model';
-
-		/**
-		 * Le post type
-		 *
-		 * @var string
-		 */
-		protected $post_type  = 'digi-diffusion-info';
-
-		/**
-		 * La clé principale du modèle
-		 *
-		 * @var string
-		 */
-		protected $meta_key   = '_wpdigi_diffusion_information';
-
-		/**
-		 * La route pour accéder à l'objet dans la rest API
-		 *
-		 * @var string
-		 */
-		protected $base 			= 'diffusion-information';
-
-		/**
-		 * La version de l'objet
-		 *
-		 * @var string
-		 */
-		protected $version 		= '0.1';
-
-		/**
-		 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-		 *
-		 * @var array
-		 */
-		protected $before_post_function = array( '\digi\construct_identifier' );
-
-		/**
-		 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-		 *
-		 * @var array
-		 */
-		protected $after_get_function = array( '\digi\get_identifier' );
-
-		/**
-		 * Le préfixe de l'objet dans DigiRisk
-		 *
-		 * @var string
-		 */
-		public $element_prefix = 'DI';
-
-		/**
-		 * Le nom pour le resgister post type
-		 *
-		 * @var string
-		 */
-		protected $post_type_name = 'Diffusion information';
-
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
+	protected $model_name = '\digi\Diffusion_Informations_Model';
 
 	/**
-	 * Constructeur
+	 * Le post type
 	 *
-	 * @return void
-	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @var string
 	 */
-	protected function construct() {
-		parent::construct();
-	}
+	protected $post_type = 'digi-diffusion-info';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key = '_wpdigi_diffusion_information';
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base = 'diffusion-information';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1';
+
+	/**
+	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $before_post_function = array( '\digi\construct_identifier' );
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_get_function = array( '\digi\get_identifier' );
+
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
+	public $element_prefix = 'DI';
+
+	/**
+	 * Le nom pour le resgister post type
+	 *
+	 * @var string
+	 */
+	protected $post_type_name = 'Diffusion information';
 
 	/**
 	 * Appelle le template list.view.php dans le dossier /diffusion_informations/view/
@@ -181,6 +169,8 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @version 6.2.10.0
 	 */
 	public function generate_sheet( $data, $element, $format = 'A3' ) {
+		$data['delegues_du_personnels_date'] = mysql2date( 'd/m/Y', $data['delegues_du_personnels_date'] );
+		$data['membres_du_comite_entreprise_date'] = mysql2date( 'd/m/Y', $data['membres_du_comite_entreprise_date'] );
 		$document_creation = Document_Class::g()->create_document( $element, array( 'diffusion_informations_' . $format ), $data );
 
 		$filetype = 'unknown';
