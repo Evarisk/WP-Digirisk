@@ -107,6 +107,59 @@ class User_Digi_Class extends \eoxia\User_Class {
 	}
 
 	/**
+	 * Insère ou met à jour les données dans la base de donnée.
+	 *
+	 * @since 1.0.0.0
+	 * @version 1.3.0.0
+	 *
+	 * @param  Array $data Les données a insérer ou à mêttre à jour.
+	 * @return Object      L'objet construit grâce au modèle.
+	 */
+	public function update( $data ) {
+		$data = (array) $data;
+		$model_name = $this->model_name;
+
+		if ( empty( $data['id'] ) ) {
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_model_post_function );
+			$data = new $model_name( (array) $data );
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_post_function );
+
+			if ( ! empty( $data->error ) && $data->error ) {
+				return false;
+			}
+
+			while ( username_exists( $data->login ) ) {
+				$data->login .= rand( 1000, 9999 );
+			}
+
+			$data->id = wp_insert_user( $data->do_wp_object() );
+
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->after_post_function );
+		} else {
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_model_put_function );
+			$current_data = $this->get( array(
+				'id' => $data['id'],
+			), true );
+
+			$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
+			$data = new $model_name( (array) $obj_merged );
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_put_function );
+
+			if ( ! empty( $data->error ) && $data->error ) {
+				return false;
+			}
+
+			wp_update_user( $data->do_wp_object() );
+
+			$data = \eoxia\Model_Util::exec_callback( $data, $this->after_put_function );
+		}
+
+		\eoxia\Save_Meta_Class::g()->save_meta_data( $data, 'update_user_meta', $this->meta_key );
+
+		return $data;
+	}
+
+	/**
 	 * Ajout de la date de fin pour l'utilisateur
 	 *
 	 * @param object $user L'utilisateur courant.
