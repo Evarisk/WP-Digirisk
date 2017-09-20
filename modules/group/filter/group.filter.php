@@ -3,14 +3,15 @@
  * Gestion des filtres relatifs aux groupements
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package group
- * @subpackage filter
+ * @package DigiRisk
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des filtres relatifs aux groupements
@@ -20,8 +21,8 @@ class Group_Filter {
 	/**
 	 * Utilises le filtre digi_tab
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 4, 2 );
@@ -34,8 +35,8 @@ class Group_Filter {
 	 * @param  integer $id       L'ID de la société.
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.3.0
 	 */
 	function callback_digi_tab( $tab_list, $id ) {
 		$tab_list['digi-group']['informations'] = array(
@@ -55,19 +56,12 @@ class Group_Filter {
 					'nonce' => 'load_content',
 					'attributes' => 'data-id=' . $id . '',
 				),
-				// 'historic' => array(
-				// 	'type' => 'text',
-				// 	'text' => __( 'Historique', 'digirisk' ),
-				// 	'title' => __( 'Historique de', 'digirisk' ),
-				// 	'nonce' => 'load_content',
-				// 	'attributes' => 'data-id=' . $id . '',
-				// ), // Commented out code.
 				'delete' => array(
 					'type' => 'text',
 					'text' => __( 'Supprimer', 'digirisk' ),
 					'parent_class' => 'action-delete no-tab',
 					'action' => 'delete_society',
-					'attributes' => 'data-loader=digirisk-wrap data-id=' . $id . '',
+					'attributes' => 'data-loader=digirisk-wrap data-id=' . $id . ' data-message-delete=' . __( 'Confirmer', 'digirisk' ),
 					'nonce' => 'delete_society',
 				),
 			),

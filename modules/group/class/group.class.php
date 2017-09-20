@@ -54,21 +54,21 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\eoxia\convert_date' );
+	protected $before_put_function = array();
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -217,41 +217,41 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des risques construite pour l'export / Risks' list builded for export
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function build_risk_list_for_export( $element ) {
-		// if ( empty( $element->option[ 'associated_risk' ] ) )
-		// 	return array();
+		$risk_list = Risk_Class::g()->get( array(
+			'post_parent' => $element->id,
+		) );
 
-		$risk_list = risk_class::g()->get( array( 'post_parent' => $element->id ) );
 		$element_duer_details = array();
 		foreach ( $risk_list as $risk ) {
 			$comment_list = '';
-			if ( !empty( $risk->comment ) ) :
+			if ( ! empty( $risk->comment ) ) :
 				foreach ( $risk->comment as $comment ) :
-					$comment_list .= $comment->date . ' : ' . $comment->content . "
+					$comment_list .= $comment->date['date_input']['fr_FR']['date'] . ' : ' . $comment->content . "
 ";
 				endforeach;
 			endif;
 
 			$element_duer_details[] = apply_filters( 'risk_duer_additional_data', array(
-				'idElement'					=> $element->unique_identifier,
-				'nomElement'				=> $element->unique_identifier. ' - ' . $element->title,
-				'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
-				'quotationRisque'		=> $risk->evaluation->risk_level[ 'equivalence' ],
-				'niveauRisque'			=> $risk->evaluation->scale,
-				'nomDanger'					=> $risk->danger->name,
-				'commentaireRisque'	=> $comment_list,
-				'actionPrevention'	=> '',
+				'idElement' => $element->unique_identifier,
+				'nomElement' => $element->unique_identifier . ' - ' . $element->title,
+				'identifiantRisque' => $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
+				'quotationRisque' => $risk->evaluation->risk_level['equivalence'],
+				'niveauRisque' => $risk->evaluation->scale,
+				'nomDanger' => $risk->danger->name,
+				'commentaireRisque' => $comment_list,
+				'actionPrevention' => '',
 			), $risk );
 		}
 
 		if ( ! empty( $risk_list_to_order ) ) {
 			foreach ( $risk_list_to_order as $risk_level => $risk_for_export ) {
-				$final_level = !empty( Evaluation_Method_Class::g()->list_scale[$risk_level] ) ? Evaluation_Method_Class::g()->list_scale[$risk_level] : '';
-				$element_duer_details[ 'risq' . $final_level ][ 'value' ] = $risk_for_export;
-				$element_duer_details[ 'risqPA' . $final_level ][ 'value' ] = $risk_for_export;
+				$final_level = ! empty( Evaluation_Method_Class::g()->list_scale[ $risk_level ] ) ? Evaluation_Method_Class::g()->list_scale[ $risk_level ] : '';
+				$element_duer_details[ 'risq' . $final_level ]['value'] = $risk_for_export;
+				$element_duer_details[ 'risqPA' . $final_level ]['value'] = $risk_for_export;
 			}
 		}
 
