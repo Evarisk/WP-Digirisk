@@ -3,11 +3,10 @@
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.10.0
+ * @since 6.2.3
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage class
+ * @package DigiRisk
  */
 
 
@@ -92,8 +91,8 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void nothing
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.10.0
+	 * @since 6.2.3
+	 * @version 6.3.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -125,11 +124,15 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 			foreach ( $risk_list as $key => $element ) {
 				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->parent_id );
 
-				if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
-					$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
+				if ( empty( $risk_list[ $key ]->parent ) ) {
+					unset( $risk_list[ $key] );
 				} else {
-					$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
-					$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
+					if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
+						$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
+					} else {
+						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
+						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
+					}
 				}
 			}
 		}

@@ -3,16 +3,17 @@
  * Affiches un risque
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.6.0
+ * @since 6.2.3
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="risk-row edit">
 	<input type="hidden" name="action" value="edit_risk" />
@@ -24,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<td class="padding">
 		<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
 
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id ) ); ?>">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&establishment_id=' . $risk->parent_group->id ) ); ?>">
 			<strong><?php echo esc_attr( $risk->parent_group->unique_identifier ); ?> -</strong>
 			<span><?php echo esc_attr( $risk->parent_group->title ); ?></span>
 		</a>
 	</td>
 	<td class="padding">
 		<?php if ( ! empty( $risk->parent_workunit ) ) : ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&groupment_id=' . $risk->parent_group->id . '&workunit_id=' . $risk->parent_workunit->id ) ); ?>">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&establishment_id=' . $risk->parent_id ) ); ?>">
 			<strong><?php echo esc_attr( $risk->parent_workunit->unique_identifier ); ?> -</strong>
 			<span><?php echo esc_attr( $risk->parent_workunit->title ); ?></span>
 		</a>
@@ -39,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<p><?php esc_html_e( 'Aucune unité de travail', 'digirisk' ); ?></p>
 		<?php endif; ?>
 	</td>
-	<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" ]' ); ?>
+	<td><?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" ]' ); ?></td>
 	<td><?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?></td>
 	<td><?php echo esc_attr( $risk->unique_identifier ); ?> - <?php echo esc_attr( $risk->evaluation->unique_identifier ); ?></td>
 	<td><?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?></td>
