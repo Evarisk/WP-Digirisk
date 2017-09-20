@@ -54,15 +54,6 @@ class Address_class extends \eoxia\Comment_class {
 	protected $version = '0.1';
 
 	/**
-	 * Utilies le filtre pour ajouter la route dans la Rest API
-	 *
-	 * @return void nothing
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Sauvegardes une adresse en utilisant le modèle
 	 *
 	 * @param  array $data 		Les données de l'adresse (voir le fichier ./modules/address/model/adress.model.php).

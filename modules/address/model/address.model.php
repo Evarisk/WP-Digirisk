@@ -1,8 +1,12 @@
 <?php
 /**
- * Définition d'une addresse
+ * Définition des champs d'une adresse.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -12,64 +16,64 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition d'une addresse
- *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.1.0.0
+ * Définition d'une adresse
  */
-class Address_model extends \eoxia\Comment_model {
+class Address_Model extends \eoxia\Comment_model {
+
 	/**
-	 * La définition d'une addresse
+	 * Définition des champs
 	 *
-	 * @param Address_model $object       L'objet avec ses données.
-	 * @param array         $field_wanted Les enfants voulu dans l'objet.
+	 * @param Object $object La définition des champs.
+	 *
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'address' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'additional_address' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'postcode' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'town' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'state' => array(
-					'type' 		=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'country' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> '',
+				'type' => 'string',
+				'meta_type' => 'multiple',
+				'bydefault' => '',
 			),
 			'coordinate' => array(
-				'type' 			=> 'array',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> array(),
-				'child'			=> array(
+				'type' => 'array',
+				'meta_type' => 'multiple',
+				'bydefault' => array(),
+				'child' => array(
 					'longitude' => array(
-						'type' 			=> 'string',
+						'type' => 'string',
 					),
 					'latitude' => array(
-						'type' 			=> 'string',
+						'type' => 'string',
 					),
 				),
 			),
-		)	);
+		) );
 
 		parent::__construct( $object );
 	}
