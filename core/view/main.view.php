@@ -20,5 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="digirisk-wrap" style="clear: both;">
 	<?php do_shortcode( '[digi_navigation id="' . $id . '"]' ); ?>
 	<?php do_shortcode( '[digi_content id="' . $id . '"]' ); ?>
-	<?php require( PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php' ); ?>
+
+	<?php
+	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
+
+	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
+		require( PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php' );
+	endif;
+	?>
 </div>
