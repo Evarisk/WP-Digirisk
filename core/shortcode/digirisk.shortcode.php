@@ -49,7 +49,9 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 		}
 
 		if ( 0 === $establishment_id ) {
-			$society = Society_Class::g()->get( array(), true );
+			$society = Society_Class::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
 			$establishment_id = $society->id;
 		}
 
