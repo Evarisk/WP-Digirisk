@@ -11,7 +11,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <?php
 $author_id = ! empty( $comment->author_id ) ? $comment->author_id : get_current_user_id();
@@ -30,7 +32,10 @@ $userdata = get_userdata( $author_id );
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
-		<input type="text" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][date]" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $comment->date ); ?>" />
+		<div class="group-date">
+			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][date]" value="<?php echo esc_attr( $comment->date['date_input']['date'] ); ?>" />
+			<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $comment->date['date_input']['fr_FR']['date'] ); ?>" />
+		</div>
 	<?php endif; ?>
 
 	<textarea rows="1" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][content]" placeholder="Entrer un commentaire"><?php echo esc_html( $comment->content ); ?></textarea>

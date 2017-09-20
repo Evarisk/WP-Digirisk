@@ -22,7 +22,7 @@ $userdata = get_userdata( $comment->author_id ); ?>
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
-		<span class="date"><?php echo $comment->date; ?> : </span>
+		<span class="date"><?php echo $comment->date['date_input']['fr_FR']['date']; ?> : </span>
 	<?php endif; ?>
 
 	<span class="content"><?php echo $comment->content; ?></span>
