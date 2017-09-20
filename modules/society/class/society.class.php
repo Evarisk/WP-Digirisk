@@ -53,21 +53,21 @@ class Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\eoxia\convert_date' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\eoxia\convert_date' );
+	protected $before_put_function = array();
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\convert_date_display' );
+	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

@@ -5,7 +5,7 @@ window.eoxiaJS.digirisk.society.init = function() {
 };
 
 window.eoxiaJS.digirisk.society.event = function() {
-	jQuery( document ).on( 'keyup', 'input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
+	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
 };
 
 /**

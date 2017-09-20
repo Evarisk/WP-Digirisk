@@ -3,8 +3,8 @@
  * Appelle la vue pour afficher le formulaire de configuration d'une société
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.10.0
+ * @since 6.2.1
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package society
  * @subpackage class
@@ -12,7 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Appelle la vue pour afficher le formulaire de configuration d'une société
@@ -106,20 +108,29 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Sauvegardes les données du groupements
 	 *
+	 * @since 6.2.10
+	 * @version 6.3.0
+	 *
 	 * @param  array $data  Les données à sauvegarder.
-	 * @return Group_Model Le groupement mis à jour.
+	 * @return Society_Model Le groupement mis à jour.
 	 */
 	public function save( $data ) {
-		$society = society_class::g()->show_by_type( $data['id'] );
+		$society = Society_Class::g()->get( array(
+			'id' => $data['id'],
+			'post_type' => array( 'digi-society', 'digi-group', 'digi-workunit' ),
+		), true );
 
 		$society->title = $data['title'];
 		$society->user_info['owner_id'] = $data['user_info']['owner_id'];
 		$society->date = $data['date'];
+		$society->siret_id = ! empty( $data['siret_id'] ) ? $data['siret_id'] : '';
+		$society->number_of_employees = ! empty( $data['number_of_employees'] ) ? $data['number_of_employees'] : 0;
 		$society->contact['phone'][] = $data['contact']['phone'][0];
+		$society->contact['email'] = $data['contact']['email'];
 		$society->contact['address_id'][] = $data['contact']['address_id'][0];
 		$society->content = $data['content'];
 
-		$society = Society_Class::g()->update_by_type( $society );
+		$society = Society_Class::g()->update( $society );
 		return $society;
 	}
 }

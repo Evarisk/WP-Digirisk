@@ -97,24 +97,6 @@ class Society_Model extends \eoxia\Post_Model {
 			'field' => '_wpdigi_siret_id',
 		);
 
-		$this->model['email'] = array(
-			'description' => 'L\'adresse email de la société.',
-			'since' => '6.3.0',
-			'version' => '6.3.0',
-			'type' => 'string',
-			'meta_type' => 'single',
-			'field' => '_wpdigi_email',
-		);
-
-		$this->model['telephone'] = array(
-			'description' => 'Le numéro de téléphone de la société.',
-			'since' => '6.3.0',
-			'version' => '6.3.0',
-			'type' => 'string',
-			'meta_type' => 'single',
-			'field' => '_wpdigi_telephone',
-		);
-
 		$this->model['number_of_employees'] = array(
 			'description' => 'Le nombre d\'employée dans la société.',
 			'since' => '6.3.0',
@@ -122,6 +104,24 @@ class Society_Model extends \eoxia\Post_Model {
 			'type' => 'integer',
 			'meta_type' => 'single',
 			'field' => '_wpdigi_number_of_employees',
+		);
+
+		$this->model['contact'] = array(
+			'type' => 'array',
+			'meta_type' => 'multiple',
+			'child' => array(
+				'phone' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+				'email' => array(
+					'type' => 'string',
+				),
+				'address_id' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+			),
 		);
 
 		parent::__construct( $object );

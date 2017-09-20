@@ -1,19 +1,19 @@
 <?php
 /**
- * Le formulaire pour configurer un groupement
+ * Le formulaire pour configurer un établissement.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.10.0
+ * @since 6.2.1
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <h1>
 	<?php
@@ -23,20 +23,40 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 </h1>
 
 <form method="POST" class="form" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
-	<input type="hidden" name="action" value="save_groupment_configuration" />
-	<input type="hidden" name="groupment[id]" value="<?php echo esc_attr( $element->id ); ?>" />
+	<input type="hidden" name="action" value="save_configuration" />
+	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->id ); ?>" />
 	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->id ); ?>" />
-	<?php wp_nonce_field( 'save_groupment_configuration' ); ?>
+	<?php wp_nonce_field( 'save_configuration' ); ?>
 
 	<ul class="grid-layout padding w2">
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $element->title ) ? 'active' : '' ); ?>">
-				<input name="groupment[title]" type="text" value="<?php echo esc_attr( $element->title ); ?>" />
+				<input name="society[title]" type="text" value="<?php echo esc_attr( $element->title ); ?>" />
 				<label><?php esc_html_e( 'Nom', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
 
+		<?php if ( Society_Class::g()->get_post_type() === $element->type ) : ?>
+			<li>
+				<div class="form-element <?php echo esc_attr( ! empty( $element->siret_id ) ? 'active' : '' ); ?>">
+					<input name="society[siret_id]" type="text" value="<?php echo esc_attr( $element->siret_id ); ?>" />
+					<label><?php esc_html_e( 'SIRET', 'digirisk' ); ?></label>
+					<span class="bar"></span>
+				</div>
+			</li>
+
+			<li>
+				<div class="form-element <?php echo esc_attr( ! empty( $element->number_of_employees ) ? 'active' : '' ); ?>">
+					<input name="society[number_of_employees]" type="text" value="<?php echo ! empty( $element->number_of_employees ) ? esc_attr( $element->number_of_employees ) : ''; ?>" />
+					<label><?php esc_html_e( 'Nombre d\'employée', 'digirisk' ); ?></label>
+					<span class="bar"></span>
+				</div>
+			</li>
+		<?php endif; ?>
+	</ul>
+
+	<ul class="grid-layout padding w2">
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $address->address ) ? 'active' : '' ); ?>">
 				<input name="address[address]" type="text" value="<?php echo esc_attr( $address->address ); ?>" />
@@ -48,14 +68,14 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $owner_user->id ) ? 'active' : '' ); ?>">
 				<input type="text"
-							data-field="groupment[user_info][owner_id]"
+							data-field="society[user_info][owner_id]"
 							data-type="user"
 							placeholder=""
 							class="digi-search"
 							value="<?php echo ! empty( $owner_user->id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ) : ''; ?>" />
 				<label><?php esc_html_e( 'Responsable', 'digirisk' ); ?></label>
 				<span class="bar"></span>
-				<input type="hidden" name="groupment[user_info][owner_id]" />
+				<input type="hidden" name="society[user_info][owner_id]" />
 			</div>
 		</li>
 
@@ -68,9 +88,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		</li>
 
 		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $element->date ) ? 'active' : '' ); ?>">
-				<input type="text" class="date" name="groupment[date]" value="<?php echo esc_attr( ! empty( $element->date ) ? $element->date : date( 'd/m/Y' ) ); ?>" />
-				<label><?php esc_html_e( 'Created date', 'digirisk' ); ?></label>
+			<div class="group-date form-element <?php echo esc_attr( ! empty( $element->date['date_input']['date'] ) ? 'active' : '' ); ?>">
+				<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="society[date]" value="<?php echo esc_attr( $element->date['date_input']['date'] ); ?>" />
+				<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->date['date_input']['fr_FR']['date'] ); ?>" />
+				<label><?php esc_html_e( 'Date de création', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
@@ -93,8 +114,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][0] ) ? 'active' : '' ); ?>">
-				<input type="text" name="groupment[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '' ); ?>" />
+				<input type="text" name="society[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '' ); ?>" />
 				<label><?php esc_html_e( 'Phone', 'digirisk' ); ?></label>
+				<span class="bar"></span>
+			</div>
+		</li>
+
+		<li>
+			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['email'] ) ? 'active' : '' ); ?>">
+				<input type="text" name="society[contact][email]" value="<?php echo esc_attr( $element->contact['email'] ); ?>" />
+				<label><?php esc_html_e( 'Email', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
@@ -103,7 +132,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 	<ul>
 		<li class="form-element <?php echo esc_attr( ! empty( $element->content ) ? 'active' : '' ); ?>">
-			<textarea name="groupment[content]"><?php echo esc_html( $element->content ); ?></textarea>
+			<textarea name="society[content]"><?php echo esc_html( $element->content ); ?></textarea>
 			<label><?php esc_html_e( 'Description', 'digirisk' ); ?></label>
 			<span class="bar"></span>
 		</li>
