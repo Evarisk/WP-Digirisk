@@ -19,8 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="title action-attribute"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 			data-action="load_society"
-			data-groupment-id="<?php echo esc_attr( $society->parent_id ); ?>"
-			data-workunit-id="<?php echo esc_attr( $society->id ); ?>"
+			data-establishment-id="<?php echo esc_attr( $society->id ); ?>"
 			data-loader="digirisk-wrap">
 		<span class="icon dashicons dashicons-building"></span>
 		<?php echo esc_html( $society->title ); ?>

@@ -32,6 +32,7 @@ window.eoxiaJS.digirisk.navigation.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button', window.eoxiaJS.digirisk.navigation.displayAddField );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
+	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container input[name="title"]', window.eoxiaJS.digirisk.navigation.triggerCreateSociety );
 };
 
 /**
@@ -137,6 +138,21 @@ window.eoxiaJS.digirisk.navigation.setUnitActive = function( element ) {
 };
 
 /**
+ * Clic automatiquement sur le 'action-input'.
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {KeyboardEvent} event Les attributs du clavier.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.triggerCreateSociety = function( event ) {
+	if ( event.ctrlKey && 13 === event.keyCode ) {
+		jQuery( this ).closest( '.unit.new' ).find( '.action-input' ).click();
+	}
+};
+
+/**
  * Callback en cas de réussite de la requête Ajax "create_society"
  *
  * @since 6.3.0
@@ -151,11 +167,15 @@ window.eoxiaJS.digirisk.navigation.setUnitActive = function( element ) {
  * @return {void}
  */
 window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredElement, response ) {
+	jQuery( '.workunit-list .unit.active' ).removeClass( 'active' );
+
 	if ( jQuery( triggeredElement ).closest( '.sub-list' ).length ) {
-		jQuery( triggeredElement ).closest( '.sub-list' ).replaceWith( response.data.view );
+		jQuery( triggeredElement ).closest( '.sub-list' ).replaceWith( response.data.navigation_view );
 	} else {
-		jQuery( triggeredElement ).closest( '.workunit-list' ).replaceWith( response.data.view );
+		jQuery( triggeredElement ).closest( '.workunit-list' ).replaceWith( response.data.navigation_view );
 	}
+
+	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.content_view );
 };
 
 /**
@@ -166,7 +186,7 @@ window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredEl
  * @param  {Object}        response             Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 0.1.0
+ * @since 6.0.0
  * @version 6.3.0
  */
 window.eoxiaJS.digirisk.navigation.loadedSocietySuccess = function( element, response ) {

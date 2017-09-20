@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	if ( ! empty( $establishments ) ) :
 		foreach ( $establishments as $establishment ) :
 			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item', array(
+				'selected_establishment_id' => $selected_establishment_id,
 				'establishment' => $establishment,
 			) );
 		endforeach;

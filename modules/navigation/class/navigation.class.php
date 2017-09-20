@@ -33,16 +33,16 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * @since 0.1.0
 	 * @version 6.3.0
 	 *
-	 * @param int $groupment_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
+	 * @param int $selected_establishment_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
 	 * @return void
 	 */
-	public function display( $society_id ) {
+	public function display( $selected_establishment_id ) {
 		$society = Society_Class::g()->get( array(
-			'include' => $society_id,
+			'posts_per_page' => 1,
 		), true );
 
 		$establishments = Society_Class::g()->get( array(
-			'post_parent' => $society_id,
+			'post_parent' => $society->id,
 			'posts_per_page' => -1,
 			'post_type' => array( 'digi-group', 'digi-workunit' ),
 			'post_status' => array( 'publish', 'draft' ),
@@ -50,6 +50,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array(
+			'selected_establishment_id' => $selected_establishment_id,
 			'establishments' => $establishments,
 			'society' => $society,
 		) );
@@ -66,7 +67,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * @since 0.1.0
 	 * @version 6.3.0
 	 */
-	public function display_list( $id = 0, $class = 'sub-list' ) {
+	public function display_list( $id = 0, $selected_establishment_id = 0, $class = 'sub-list' ) {
 		if ( ! empty( $id ) ) {
 			$establishments = Society_Class::g()->get( array(
 				'post_parent' => $id,
@@ -78,6 +79,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 
 			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
 				'id' => $id,
+				'selected_establishment_id' => $selected_establishment_id,
 				'establishments' => $establishments,
 				'class' => $class,
 			) );

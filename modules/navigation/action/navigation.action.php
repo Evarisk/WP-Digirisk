@@ -50,20 +50,27 @@ class Navigation_Action {
 			'posts_per_page' => 1,
 		), true );
 
-		$class::g()->update( array(
+		$establishment = $class::g()->update( array(
 			'title' => $title,
 			'parent_id' => $parent_id,
 		) );
+		$establishment_id = $establishment->id;
 
 		$class = ( $society->id === $parent_id ) ? 'workunit-list' : 'sub-list';
 
 		ob_start();
-		Navigation_Class::g()->display_list( $parent_id, $class );
+		Navigation_Class::g()->display_list( $parent_id, $establishment->id, $class );
+		$navigation_view = ob_get_clean();
+
+		ob_start();
+		require( PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php' );
+		$content_view = ob_get_clean();
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'navigation',
 			'callback_success' => 'createdSocietySuccess',
-			'view' => ob_get_clean(),
+			'navigation_view' => $navigation_view,
+			'content_view' => $content_view,
 		) );
 	}
 

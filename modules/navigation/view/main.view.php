@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	) );
 
 	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
+		'selected_establishment_id' => $selected_establishment_id,
 		'establishments' => $establishments,
 		'id' => $society->id,
 		'class' => 'workunit-list',

@@ -15,13 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<li class="unit">
+<li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>">
 	<div class="unit-container">
-		<div class="toggle"><span class="icon"></span></div>
-		<div class="media no-file">
-			<i class="add animated fa fa-plus-circle"></i>
-			<i class="default-image fa fa-picture-o"></i>
-		</div>
+
+		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type ) : ?>
+			<div class="toggle"><span class="icon"></span></div>
+		<?php else : ?>
+			<div class="spacer"></div>
+		<?php endif; ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $establishment->id . '" model_name="/digi/' . $establishment->get_class() . '" field_name="thumbnail_id" ]' ); ?>
 		<div class="title action-attribute"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 				data-action="load_society"
@@ -46,5 +48,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 		?>
 	</div>
-	<?php Navigation_Class::g()->display_list( $establishment->id ); ?>
+	<?php Navigation_Class::g()->display_list( $establishment->id, $selected_establishment_id ); ?>
 </li>
