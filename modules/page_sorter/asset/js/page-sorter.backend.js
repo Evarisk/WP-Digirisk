@@ -118,8 +118,6 @@ window.evaMenu.updateParentId = function( item ) {
 	var prevDepth = itemDepth - 1;
 	var parent = undefined;
 
-	console.log(itemDepth);
-
 	if ( prevDepth >= 0 ) {
 		parent = item.prevAll( '.menu-item-depth-' + prevDepth ).first();
 		parentId = parent.find( '.menu-item-data-db-id' ).val();

@@ -30,7 +30,7 @@ window.eoxiaJS.digirisk.installer.event = function() {
 
 window.eoxiaJS.digirisk.installer.key_up_groupment_title = function( event ) {
 	if ( 13 === event.keyCode ) {
-		jQuery( '.main-content.society .action-input' ).click();
+		jQuery( '.main-content .action-input:first' ).click();
 	}
 
 	if ( jQuery( this ).val() != '' ) {

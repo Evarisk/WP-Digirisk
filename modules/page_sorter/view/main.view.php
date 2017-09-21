@@ -1,8 +1,12 @@
 <?php
 /**
- * Vue contenant l'affichage de la liste des sociétées
+ * Vue principale contenant la liste des établissements pour gérer l'organiseur.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -26,7 +30,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<ul class="menu" id="menu-to-edit">
 			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array( 'i' => 0, 'groupments' => $groupments ) );
+			\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
+				'i' => 0,
+				'establishments' => $establishments,
+			) );
 			?>
 		</ul>
 

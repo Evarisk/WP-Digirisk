@@ -3,7 +3,7 @@
  * Le header contenu le nom de la société
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
+ * @since 6.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -15,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="society-header">
-	<div class="title action-attribute"
+<div class="society-header action-attribute"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 			data-action="load_society"
 			data-establishment-id="<?php echo esc_attr( $society->id ); ?>"
 			data-loader="digirisk-wrap">
+	<div class="title">
 		<span class="icon dashicons dashicons-building"></span>
 		<?php echo esc_html( $society->title ); ?>
 	</div>

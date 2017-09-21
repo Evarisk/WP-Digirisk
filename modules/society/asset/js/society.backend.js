@@ -64,8 +64,8 @@ window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredEleme
  * @param  {Object}        response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.0
  */
 window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
@@ -75,6 +75,5 @@ window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredE
 		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).attr( 'title', response.data.society.title );
 	}
 
-	jQuery( '.digirisk-wrap .main-content h1' ).text( 'Configuration de ' + response.data.society.unique_identifier + ' - ' + response.data.society.title );
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
 };

@@ -2,7 +2,7 @@
 	"name": "La page de trie",
 	"slug": "page_sorter",
 	"state": true,
-	"version": "0.2.0.0",
+	"version": "6.3.0",
 	"description": "Le module gérant le trie des societées",
 	"path": "modules/page_sorter/",
 	"dependencies": {

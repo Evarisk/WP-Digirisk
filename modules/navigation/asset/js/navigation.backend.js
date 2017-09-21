@@ -63,6 +63,7 @@ window.eoxiaJS.digirisk.navigation.switchToggle = function( event ) {
 window.eoxiaJS.digirisk.navigation.displayAddField = function( event ) {
 	var closest = jQuery( this ).closest( '.society-header' ).length ? jQuery( this ).closest( '.navigation-container' ) : jQuery( this ).closest( '.unit' );
 	event.preventDefault();
+	event.stopPropagation();
 
 	closest.addClass( 'toggled' );
 
