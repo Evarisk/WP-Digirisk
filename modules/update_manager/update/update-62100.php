@@ -64,6 +64,7 @@ class Update_62100 {
 		wp_send_json_success( array(
 			'done' => $done,
 			'args' => array(
+				'more' => true,
 				'index' => $index,
 				'count' => $count,
 				'moreDescription' => ' (' . $index . '/' . $count . ')',
@@ -83,6 +84,9 @@ class Update_62100 {
 		Tools_Class::g()->transfert_doc();
 
 		wp_send_json_success( array(
+			'args' => array(
+				'more' => false,
+			),
 			'done' => true,
 		) );
 	}

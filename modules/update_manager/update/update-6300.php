@@ -35,6 +35,9 @@ class Update_630 {
 
 		if ( ! empty( $society ) ) {
 			wp_send_json_success( array(
+				'args' => array(
+					'more' => false,
+				),
 				'done' => $done,
 			) );
 		}
@@ -52,6 +55,9 @@ class Update_630 {
 			) );
 
 			wp_send_json_success( array(
+				'args' => array(
+					'more' => false,
+				),
 				'done' => $done,
 			) );
 		}
@@ -72,6 +78,9 @@ class Update_630 {
 		}
 
 		wp_send_json_success( array(
+			'args' => array(
+				'more' => false,
+			),
 			'done' => $done,
 		) );
 	}

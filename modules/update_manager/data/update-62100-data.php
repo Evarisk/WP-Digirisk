@@ -5,17 +5,17 @@
  * @package DigiRisk
  * @subpackage Module/Update_Manager
  *
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  */
 
 $datas = array(
 	array(
 		'action' 				=> 'digirisk_update_risk_cotation',
-		'description' 	=> __( 'Déplacement de la valeur de la cotation des risques...', 'digirisk' ),
+		'description' 	=> __( 'Mise à jour de la structure des valeurs de cotation de vos risques...', 'digirisk' ),
 	),
 	array(
 		'action' 				=> 'digirisk_update_doc',
-		'description' 	=> __( 'Transfère des documents...', 'digirisk' ),
+		'description' 	=> __( 'Mise à jour des données de vos fichiers ODT...', 'digirisk' ),
 	),
 );
