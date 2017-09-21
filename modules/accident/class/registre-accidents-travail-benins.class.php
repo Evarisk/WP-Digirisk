@@ -147,7 +147,7 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 		$address = $address[0];
 
 		$sheet_details = array(
-			'ref' => '',
+			'ref' => self::g()->element_prefix . (int) ( \eoxia\Common_Util::g()->get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
 			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',

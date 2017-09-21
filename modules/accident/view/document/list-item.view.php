@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action">
 			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download icon" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Accident de travail bénin', 'digirisk' ); ?></span>
+				<span><?php esc_html_e( 'Registre des AT bénins', 'digirisk' ); ?></span>
 			</a>
 		</div>
 	</td>

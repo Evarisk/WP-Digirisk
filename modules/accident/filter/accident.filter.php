@@ -36,7 +36,7 @@ class Accident_Filter {
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-society']['registre-accident'] = array(
 			'type' => 'text',
-			'text' => __( 'Registre accidents', 'digirisk' ),
+			'text' => __( 'Registre des AT bénins', 'digirisk' ),
 			'title' => __( 'Les registres des accidents de travail bénins de ', 'digirisk' ),
 		);
 
