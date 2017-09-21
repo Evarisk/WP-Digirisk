@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="unit-container">
 
 		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type ) : ?>
-			<div class="toggle"><span class="icon"></span></div>
+			<div class="toggle-unit"><span class="icon"></span></div>
 		<?php else : ?>
 			<div class="spacer"></div>
 		<?php endif; ?>
@@ -43,6 +43,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="add-container">
 				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span></div>
 				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span></div>
+			</div>
+			<div class="mobile-add-container toggle option">
+				<i class="action fa fa-ellipsis-v"></i>
+				<ul class="content">
+					<li class="item" data-type="Group_Class"><i class="icon dashicons dashicons-admin-multisite"></i><?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?></li>
+					<li class="item" data-type="Workunit_Class"><i class="icon dashicons dashicons-admin-home"></i><?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?></li>
+				</ul>
 			</div>
 		<?php
 		endif;

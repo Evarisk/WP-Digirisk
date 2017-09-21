@@ -62,7 +62,7 @@
 			position: absolute;
 			top: -6px;
 			right: -6px;
-			background: $grey;
+			background: #d6d6d6;
 			padding: 4px;
 			border-radius: 50%;
 			font-size: 12px;
@@ -250,13 +250,4 @@
 		}
 	}
 
-}
-
-.wp-core-ui .button-secondary:focus,
-.wp-core-ui .button-secondary:hover,
-.wp-core-ui .button.focus,
-.wp-core-ui .button.hover,
-.wp-core-ui .button:focus,
-.wp-core-ui .button:hover {
-	color: #fff;
 }

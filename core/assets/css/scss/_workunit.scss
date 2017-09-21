@@ -34,7 +34,7 @@
 		&:hover {
 			background: lighten($secondary, 16%);
 			cursor: pointer;
-			.toggle .icon {
+			.toggle-unit .icon {
 				color: #fff;
 			}
 		}
@@ -319,7 +319,7 @@
 			}
 		}
 		.ref {
-			color: rgba(255,255,255,0.4) !important;
+			color: rgba(255,255,255,0.6) !important;
 		}
 		.title {
 			background: $primary;
@@ -338,7 +338,7 @@
 		> .sub-list {
 			display: block !important;
 		}
-		> .unit-container .toggle .icon:before {
+		> .unit-container .toggle-unit .icon:before {
 			content: $fa-var-angle-down !important;
 		}
 	}
@@ -352,12 +352,12 @@
 				color: $primary;
 			}
 		}
-		.toggle {
+		.toggle-unit {
 			color: rgba(255,255,255,0.4);
 			line-height: 50px;
-			font-size: 18px;
-			min-width: 26px;
-			width: 26px;
+			font-size: 22px;
+			min-width: 30px;
+			width: 30px;
 			text-align: center;
 			transition: all 0.2s ease-out;
 
@@ -373,8 +373,8 @@
 			}
 		}
 		.spacer {
-			min-width: 26px;
-			width: 26px;
+			min-width: 30px;
+			width: 30px;
 		}
 		.media {
 			&.no-file {
@@ -399,7 +399,7 @@
 			}
 			.ref {
 				font-size: 10px;
-				color: rgba(255,255,255,0.3);
+				color: $primary;
 				text-transform: uppercase;
 				font-weight: 800;
 			}
@@ -412,6 +412,53 @@
 			opacity: 1;
 			pointer-events: all;
 		}
+	}
+
+	// Toggle responsive
+	.navigation-container .mobile-add-container {
+		display: none;
+		color: rgba(255, 255, 255, 0.4);
+		line-height: 50px;
+		min-width: 32px;
+		width: 32px;
+		text-align: center;
+		transition: all 0.2s ease-out;
+
+		&:hover {
+			cursor: pointer;
+			.action {
+				color: #fff;
+			}
+		}
+		.action {
+			font-size: 18px;
+			transition: all 0.2s ease-out;
+		}
+		.content {
+			left: -0.8em;
+			width: 170px;
+			text-align: left;
+
+			.item {
+				color: rgba(0,0,0,0.8);
+			}
+			.icon {
+				color: rgba(0,0,0,0.5);
+				margin-right: 0.2em;
+				font-size: 16px;
+			}
+		}
+		@media ( max-width: 960px ) {
+			display: block;
+			.content {
+				left: inherit !important;
+			}
+		}
+	}
+	.navigation-container .society-header .toggle.option {
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 
 	// Bouton Ajout UT / GP
@@ -433,8 +480,7 @@
 			}
 		}
 		@media ( max-width: 960px ) {
-			opacity: 1;
-			pointer-events: all;
+			display: none;
 		}
 	}
 
@@ -472,9 +518,18 @@
 	.navigation-container .unit > .sub-list {
 		// width: 100%;
 		padding-left: 0.6em;
-		margin-left: 0.9em;
+		margin-left: 1em;
 		border-left: 1px dashed rgba(255,255,255,0.2);
 		display: none;
 	}
 
+}
+
+.wp-core-ui .navigation-container .button-secondary:focus,
+.wp-core-ui .navigation-container .button-secondary:hover,
+.wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .button:focus,
+.wp-core-ui .navigation-container .button:hover {
+	color: #fff;
 }
