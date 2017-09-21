@@ -28,7 +28,7 @@ window.eoxiaJS.digirisk.navigation.init = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.navigation.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit-container .toggle', window.eoxiaJS.digirisk.navigation.switchToggle );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit-container .toggle-unit', window.eoxiaJS.digirisk.navigation.switchToggle );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button', window.eoxiaJS.digirisk.navigation.displayAddField );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
