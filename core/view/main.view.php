@@ -7,8 +7,8 @@
  *
  * @package Evarisk\Plugin
  *
- * @since 0.1.0
- * @version 6.2.3
+ * @since 6.0.0
+ * @version 6.3.0
  */
 
 namespace digi;
@@ -20,6 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="digirisk-wrap" style="clear: both;">
 	<?php do_shortcode( '[digi_navigation id="' . $id . '"]' ); ?>
 	<?php do_shortcode( '[digi_content id="' . $id . '"]' ); ?>
+
+	<div class="notification active">
+		<a href="https://github.com/Evarisk/Digirisk/issues" class="tooltip hover"  aria-label="<?php echo esc_attr_e( 'Signaler', 'digirisk' ); ?>" target="_blank"><span class="dashicons dashicons-flag"></span></a>
+	</div>
 
 	<?php
 	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );

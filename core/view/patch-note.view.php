@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $result = Digirisk_Class::g()->get_patch_note(); ?>
 
-<div class="notification active">
+<div class="notification patch-note active">
 	<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
 	<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
 	<span class="close action-attribute"
