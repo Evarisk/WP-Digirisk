@@ -3118,12 +3118,12 @@
           transform: translate(-50%, -50%); }
 
 .digirisk-wrap .popup.no-close .button {
-  background: #d6d6d6;
+  background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   pointer-events: none; }
 
 .digirisk-wrap .popup.no-close .button:hover {
-  background: #d6d6d6;
+  background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed; }
 
@@ -3296,11 +3296,11 @@
   color: rgba(0, 0, 0, 0.3); }
 
 .digirisk-wrap .button.grey {
-  background: #d6d6d6;
+  background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.8); }
 
 .digirisk-wrap .button.grey:hover {
-  background: #b2b2b2; }
+  background: rgba(0, 0, 0, 0.1); }
 
 .digirisk-wrap .button.w30, .digirisk-wrap .button.w40, .digirisk-wrap .button.w50, .digirisk-wrap .button.w60, .digirisk-wrap .button.w80, .digirisk-wrap .button.h50 {
   display: -webkit-box;
@@ -3452,7 +3452,7 @@
           animation-name: progressError; }
 
 .digirisk-wrap .button.progress.load {
-  background: #d6d6d6; }
+  background: rgba(0, 0, 0, 0.1); }
 
 .digirisk-wrap .button.progress.load:before {
   display: inline-block;
@@ -3473,21 +3473,13 @@
           animation: spin 1s ease-out infinite; }
 
 .digirisk-wrap .button.disable {
-  background: #d6d6d6;
+  background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3); }
 
 .digirisk-wrap .button.disable:hover {
-  background: #d6d6d6;
+  background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3);
   cursor: not-allowed; }
-
-.wp-core-ui .button-secondary:focus,
-.wp-core-ui .button-secondary:hover,
-.wp-core-ui .button.focus,
-.wp-core-ui .button.hover,
-.wp-core-ui .button:focus,
-.wp-core-ui .button:hover {
-  color: #fff; }
 
 /**
  * Structure de la page
@@ -3627,7 +3619,7 @@
   .digirisk-wrap .navigation-container, .digirisk-wrap .main-container {
     float: none; }
   .digirisk-wrap .navigation-container {
-    width: 50%; }
+    width: 100%; }
   .digirisk-wrap .main-container {
     width: 100%;
     margin-top: 20px; } }
@@ -3747,7 +3739,7 @@
   background: #4a4f64;
   cursor: pointer; }
 
-.digirisk-wrap .workunit-navigation:hover .toggle .icon {
+.digirisk-wrap .workunit-navigation:hover .toggle-unit .icon {
   color: #fff; }
 
 .digirisk-wrap .workunit-navigation .unit-header .title {
@@ -3998,7 +3990,7 @@
 .digirisk-wrap .unit.toggled > .sub-list {
   display: block !important; }
 
-.digirisk-wrap .unit.toggled > .unit-container .toggle .icon:before {
+.digirisk-wrap .unit.toggled > .unit-container .toggle-unit .icon:before {
   content: "" !important; }
 
 .digirisk-wrap .navigation-container .unit > .unit-container {
@@ -4007,7 +3999,7 @@
 .digirisk-wrap .navigation-container .unit > .unit-container:hover .title .name {
   color: #3495f0; }
 
-.digirisk-wrap .navigation-container .unit > .unit-container .toggle {
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle-unit {
   color: rgba(255, 255, 255, 0.4);
   line-height: 50px;
   font-size: 18px;
@@ -4019,14 +4011,14 @@
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .navigation-container .unit > .unit-container .toggle:hover {
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle-unit:hover {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.8); }
 
-.digirisk-wrap .navigation-container .unit > .unit-container .toggle .icon {
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle-unit .icon {
   font-family: 'FontAwesome'; }
 
-.digirisk-wrap .navigation-container .unit > .unit-container .toggle .icon:before {
+.digirisk-wrap .navigation-container .unit > .unit-container .toggle-unit .icon:before {
   content: ""; }
 
 .digirisk-wrap .navigation-container .unit > .unit-container .spacer {
@@ -4074,6 +4066,51 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   pointer-events: all; }
 
+.digirisk-wrap .navigation-container .toggle.option {
+  display: none;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 50px;
+  min-width: 32px;
+  width: 32px;
+  text-align: center;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .navigation-container .toggle.option .action {
+  font-size: 18px; }
+
+.digirisk-wrap .navigation-container .toggle.option .content {
+  left: -0.8em;
+  width: 170px;
+  text-align: left; }
+
+.digirisk-wrap .navigation-container .toggle.option .content .item {
+  color: rgba(0, 0, 0, 0.8); }
+
+.digirisk-wrap .navigation-container .toggle.option .content .icon {
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 0.2em;
+  font-size: 16px; }
+
+@media (max-width: 960px) {
+  .digirisk-wrap .navigation-container .toggle.option {
+    display: block; }
+  .digirisk-wrap .navigation-container .toggle.option .content {
+    left: inherit !important; } }
+
+.digirisk-wrap .navigation-container .society-header .toggle.option {
+  text-align: right;
+  margin-left: auto; }
+
+.digirisk-wrap .navigation-container .society-header .toggle.option .content {
+  left: 0.2em; }
+
+@media (max-width: 960px) {
+  .digirisk-wrap .navigation-container .society-header .toggle.option .content {
+    right: -20px; } }
+
 .digirisk-wrap .navigation-container .add-container {
   position: absolute;
   top: 4px;
@@ -4097,9 +4134,7 @@
 
 @media (max-width: 960px) {
   .digirisk-wrap .navigation-container .add-container {
-    opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    pointer-events: all; } }
+    display: none; } }
 
 .digirisk-wrap .navigation-container .unit.new {
   background: #fff;
@@ -4137,6 +4172,14 @@
   margin-left: 0.9em;
   border-left: 1px dashed rgba(255, 255, 255, 0.2);
   display: none; }
+
+.wp-core-ui .navigation-container .button-secondary:focus,
+.wp-core-ui .navigation-container .button-secondary:hover,
+.wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .button:focus,
+.wp-core-ui .navigation-container .button:hover {
+  color: #fff; }
 
 /**
  * Main tab
@@ -4328,7 +4371,7 @@
 .digirisk-wrap .toggle.option .content:before {
   border-color: transparent transparent #fff transparent; }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 960px) {
   .digirisk-wrap .toggle.option .content {
     left: auto;
     right: -10px; }
@@ -4925,7 +4968,7 @@
   content: attr(aria-label);
   position: absolute;
   left: 50%;
-  z-index: 99;
+  z-index: 999;
   white-space: nowrap;
   padding: 5px 14px;
   background: #272a35;

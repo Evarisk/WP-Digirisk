@@ -34,7 +34,7 @@
 		&:hover {
 			background: lighten($secondary, 16%);
 			cursor: pointer;
-			.toggle .icon {
+			.toggle-unit .icon {
 				color: #fff;
 			}
 		}
@@ -338,7 +338,7 @@
 		> .sub-list {
 			display: block !important;
 		}
-		> .unit-container .toggle .icon:before {
+		> .unit-container .toggle-unit .icon:before {
 			content: $fa-var-angle-down !important;
 		}
 	}
@@ -352,7 +352,7 @@
 				color: $primary;
 			}
 		}
-		.toggle {
+		.toggle-unit {
 			color: rgba(255,255,255,0.4);
 			line-height: 50px;
 			font-size: 18px;
@@ -414,6 +414,52 @@
 		}
 	}
 
+	// Toggle responsive
+	.navigation-container .toggle.option {
+		display: none;
+		color: rgba(255, 255, 255, 0.4);
+		line-height: 50px;
+		min-width: 32px;
+		width: 32px;
+		text-align: center;
+		transition: all 0.2s ease-out;
+		.action {
+			font-size: 18px;
+		}
+		.content {
+			left: -0.8em;
+			width: 170px;
+			text-align: left;
+
+			.item {
+				color: rgba(0,0,0,0.8);
+			}
+			.icon {
+				color: rgba(0,0,0,0.5);
+				margin-right: 0.2em;
+				font-size: 16px;
+			}
+		}
+		@media ( max-width: 960px ) {
+			display: block;
+			.content {
+				left: inherit !important;
+			}
+		}
+	}
+	.navigation-container .society-header .toggle.option {
+		text-align: right;
+		margin-left: auto;
+		.content {
+			left: 0.2em;
+		}
+		@media ( max-width: 960px ) {
+			.content {
+				right: -20px;
+			}
+		}
+	}
+
 	// Bouton Ajout UT / GP
 	.navigation-container .add-container {
 		position: absolute;
@@ -433,8 +479,7 @@
 			}
 		}
 		@media ( max-width: 960px ) {
-			opacity: 1;
-			pointer-events: all;
+			display: none;
 		}
 	}
 
@@ -477,4 +522,13 @@
 		display: none;
 	}
 
+}
+
+.wp-core-ui .navigation-container .button-secondary:focus,
+.wp-core-ui .navigation-container .button-secondary:hover,
+.wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .button:focus,
+.wp-core-ui .navigation-container .button:hover {
+	color: #fff;
 }
