@@ -257,6 +257,9 @@
 		padding: 0 1em;
 		position: relative;
 
+		&:hover {
+			cursor: pointer;
+		}
 		.title {
 			line-height: 50px;
 			color: #fff;
@@ -272,7 +275,7 @@
 		> .add-container {
 			top: 50% !important;
 			transform: translateY(-50%);
-			right: 1em !important;
+			right: 0;
 		}
 		&:hover > .add-container {
 			opacity: 1;
@@ -300,7 +303,7 @@
 	// Liste générale
 	.navigation-container .workunit-list {
 		background: $secondary;
-		padding: 0.2em 1em 1em 1em;
+		padding: 0 0 1em 0;
 
 		.unit > .unit-container {
 			display: flex;
@@ -342,7 +345,7 @@
 
 	// UT / GP
 	.navigation-container .unit > .unit-container {
-		margin: 4px 0;
+		padding: 4px 0 0 0;
 
 		&:hover {
 			.title .name {
@@ -353,7 +356,9 @@
 			color: rgba(255,255,255,0.4);
 			line-height: 50px;
 			font-size: 18px;
-			padding-right: 0.4em;
+			min-width: 26px;
+			width: 26px;
+			text-align: center;
 			transition: all 0.2s ease-out;
 
 			&:hover {
@@ -366,6 +371,10 @@
 					content: $fa-var-angle-right;
 				}
 			}
+		}
+		.spacer {
+			min-width: 26px;
+			width: 26px;
 		}
 		.media {
 			&.no-file {
@@ -390,7 +399,7 @@
 			}
 			.ref {
 				font-size: 10px;
-				color: rgba(255,255,255,0.2);
+				color: rgba(255,255,255,0.3);
 				text-transform: uppercase;
 				font-weight: 800;
 			}
@@ -408,7 +417,7 @@
 	// Bouton Ajout UT / GP
 	.navigation-container .add-container {
 		position: absolute;
-		top: 0;
+		top: 4px;
 		right: 0;
 		opacity: 0;
 		pointer-events: none;
@@ -461,9 +470,9 @@
 
 	// Sous menu
 	.navigation-container .unit > .sub-list {
-		width: 100%;
-		padding-left: 1em;
-		margin-left: 0.4em;
+		// width: 100%;
+		padding-left: 0.6em;
+		margin-left: 0.9em;
 		border-left: 1px dashed rgba(255,255,255,0.2);
 		display: none;
 	}

@@ -41,8 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( 'digi-group' === $establishment->type ) :
 		?>
 			<div class="add-container">
-				<div class="button w30 blue" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span></div>
-				<div class="button w30 blue" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span></div>
+				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span></div>
+				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span></div>
 			</div>
 		<?php
 		endif;

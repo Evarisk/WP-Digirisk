@@ -251,3 +251,12 @@
 	}
 
 }
+
+.wp-core-ui .button-secondary:focus,
+.wp-core-ui .button-secondary:hover,
+.wp-core-ui .button.focus,
+.wp-core-ui .button.hover,
+.wp-core-ui .button:focus,
+.wp-core-ui .button:hover {
+	color: #fff;
+}
