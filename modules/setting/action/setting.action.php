@@ -3,8 +3,8 @@
  * Les actions relatives aux réglages de DigiRisk.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package setting
  * @subpackage action
@@ -35,11 +35,11 @@ class Setting_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function admin_menu() {
-		add_options_page( 'Digirisk', 'Digirisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+		add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
 	}
 
 	/**
