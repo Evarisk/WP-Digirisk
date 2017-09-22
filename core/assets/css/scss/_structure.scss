@@ -82,6 +82,9 @@
 			content: '';
 			clear: both;
 		}
+		@media ( max-width: 480px ) {
+			padding: 16px 0;
+		}
 	}
 
 	&.wpdigi-installer .main-content {
@@ -128,6 +131,12 @@
 					display: none;
 				}
 			}
+		}
+	}
+	@media ( max-width: 480px ) {
+		padding: 10px 10px 10px 0;
+		.main-container {
+			margin-top: 0;
 		}
 	}
 
