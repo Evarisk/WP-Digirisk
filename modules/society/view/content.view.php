@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 				data-parent="unit-header"
 				data-loader="digirisk-wrap"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fa fa-floppy-o"></i></span></div>
+		<div class="mobile-navigation"><i class="icon fa fa-bars"></i></div>
 	</div>
 
 	<?php apply_filters( 'society_header_end', $element ); ?>
