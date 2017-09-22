@@ -3,7 +3,7 @@
  * Classe gérant les actions principales de l'application.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
+ * @since 6.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
-* Classe gérant les actions principales de l'application.
+ * Classe gérant les actions principales de l'application.
  */
 class Digirisk_Action {
 
@@ -63,6 +63,8 @@ class Digirisk_Action {
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
+		wp_enqueue_script( 'jquery-ui-draggable' );
+		wp_enqueue_script( 'jquery-ui-droppable' );
 		wp_enqueue_media();
 		add_thickbox();
 	}
@@ -72,12 +74,13 @@ class Digirisk_Action {
 	 *
 	 * @return void nothing
 	 *
-	 * @since 1.0
-	 * @version 6.2.7.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_admin_enqueue_scripts_js() {
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'digi-script-treetable', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.treetable.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
@@ -109,14 +112,16 @@ class Digirisk_Action {
 	 *
 	 * @return void nothing
 	 *
-	 * @since 1.0
-	 * @version 6.2.7.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_admin_enqueue_scripts_css() {
 		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-style' );
 
 		wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.datetimepicker.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-treetable', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.treetable.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'digi-treetable-default', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.treetable.theme.default.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/css/owl.carousel.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
