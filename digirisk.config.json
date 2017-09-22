@@ -89,7 +89,7 @@
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
 	"default_tab": "digi-informations",
-	"default_tab_title": "Informations de",
+	"default_tab_title": "Informations",
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false
 }
