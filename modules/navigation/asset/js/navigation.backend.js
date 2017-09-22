@@ -29,7 +29,7 @@ window.eoxiaJS.digirisk.navigation.init = function() {
  */
 window.eoxiaJS.digirisk.navigation.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit-container .toggle-unit', window.eoxiaJS.digirisk.navigation.switchToggle );
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button', window.eoxiaJS.digirisk.navigation.displayAddField );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button, .digirisk-wrap .navigation-container .mobile-add-container .item', window.eoxiaJS.digirisk.navigation.displayAddField );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container input[name="title"]', window.eoxiaJS.digirisk.navigation.triggerCreateSociety );
@@ -67,6 +67,9 @@ window.eoxiaJS.digirisk.navigation.displayAddField = function( event ) {
 	var closest = jQuery( this ).closest( '.society-header' ).length ? jQuery( this ).closest( '.navigation-container' ) : jQuery( this ).closest( '.unit' );
 	event.preventDefault();
 	event.stopPropagation();
+
+	// Mobile.
+	jQuery( '.mobile-add-container .content.active' ).removeClass( 'active' );
 
 	closest.addClass( 'toggled' );
 
@@ -227,4 +230,5 @@ window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredEl
  */
 window.eoxiaJS.digirisk.navigation.loadedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.view );
+	jQuery( '.digirisk-wrap .navigation-container' ).removeClass( 'active' );
 };
