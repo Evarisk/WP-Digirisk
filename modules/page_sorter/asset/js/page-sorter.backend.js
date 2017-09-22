@@ -5,6 +5,9 @@ window.evaMenu.prev = undefined;
 window.evaMenu.startDepth = 0;
 window.evaMenu.childs = [];
 window.eoxiaJS.page_sorter.init = function() {
+	jQuery( document ).on( 'click', '.sorter-page .button.button-primary', function( event ) {
+		window.removeEventListener( 'beforeunload', window.eoxiaJS.page_sorter.safeExit );
+	} );
 	var menu = jQuery( '.sorter-page .menu' );
 
 	jQuery( '.sorter-page .menu' ).sortable( {
@@ -58,6 +61,11 @@ window.eoxiaJS.page_sorter.init = function() {
 			ui.placeholder[0].className = 'menu-item-depth-' + window.evaMenu.depth + ' sortable-placeholder';
 		},
 		stop: function(e, ui) {
+
+			window.addEventListener( 'beforeunload', window.eoxiaJS.page_sorter.safeExit );
+
+			jQuery( 'input[type="submit"]' ).attr( 'disabled', false );
+
 			ui.item[0].className = 'menu-item-depth-' + window.evaMenu.depth;
 			ui.item.attr( 'data-depth', window.evaMenu.depth );
 
@@ -125,3 +133,10 @@ window.evaMenu.updateParentId = function( item ) {
 
 	item.find( '.menu-item-data-parent-id' ).val( parentId );
 }
+
+window.eoxiaJS.page_sorter.safeExit = function( event ) {
+	var confirmationMessage = 'Vos données sont en attentent d\'enregistrement';
+
+	event.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+	return confirmationMessage;              // Gecko, WebKit, Chrome <34
+};

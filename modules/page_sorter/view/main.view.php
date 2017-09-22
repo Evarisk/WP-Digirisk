@@ -37,6 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</ul>
 
-		<input type="submit" class="button button-primary" value="<?php esc_html_e( 'Enregistrer', 'digirisk' ); ?>">
+		<input type="submit" class="button button-primary" disabled="true" value="<?php esc_html_e( 'Enregistrer', 'digirisk' ); ?>">
 	</form>
 </div>
