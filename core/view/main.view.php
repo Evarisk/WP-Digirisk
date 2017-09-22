@@ -21,10 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php do_shortcode( '[digi_navigation id="' . $id . '"]' ); ?>
 	<?php do_shortcode( '[digi_content id="' . $id . '"]' ); ?>
 
-	<div class="notification active">
-		<a href="https://github.com/Evarisk/Digirisk/issues" class="tooltip hover"  aria-label="<?php echo esc_attr_e( 'Signaler', 'digirisk' ); ?>" target="_blank"><span class="dashicons dashicons-flag"></span></a>
-	</div>
-
 	<?php
 	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
 
