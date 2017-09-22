@@ -33,6 +33,9 @@ window.eoxiaJS.digirisk.navigation.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container input[name="title"]', window.eoxiaJS.digirisk.navigation.triggerCreateSociety );
+
+	jQuery( document ).on( 'click', '.digirisk-wrap .mobile-navigation', window.eoxiaJS.digirisk.navigation.openNavigationContainer );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container.active .close-popup', window.eoxiaJS.digirisk.navigation.closeNavigationContainer );
 };
 
 /**
@@ -154,6 +157,34 @@ window.eoxiaJS.digirisk.navigation.triggerCreateSociety = function( event ) {
 };
 
 /**
+ * Ajout de la classe 'active' au bloc 'navigation-container'.
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {TouchEvent} event [description]
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.openNavigationContainer = function( event ) {
+	jQuery( '.digirisk-wrap .navigation-container' ).addClass( 'active' );
+};
+
+/**
+ * Enlève la classe 'active' au bloc 'navigation-container'.
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ *
+ * @param  {TouchEvent} event [description]
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.navigation.closeNavigationContainer = function( event ) {
+	event.stopPropagation();
+
+	jQuery( '.digirisk-wrap .navigation-container' ).removeClass( 'active' );
+};
+
+/**
  * Callback en cas de réussite de la requête Ajax "create_society"
  *
  * @since 6.3.0
@@ -162,13 +193,17 @@ window.eoxiaJS.digirisk.navigation.triggerCreateSociety = function( event ) {
  * @param  {HTMLDivElement} triggeredElement   L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}        response {
  *     Les données renvoyées par la requête Ajax.
- *
- *     @type string $view La vue.
+ *     @type {Object} data {
+ *           @type {string} navigation_view La vue de la navigation.
+ *           @type {string} content_view    La vue du contenu principale.
+ *     }
  * }
  * @return {void}
  */
 window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredElement, response ) {
 	jQuery( '.workunit-list .unit.active' ).removeClass( 'active' );
+
+	jQuery( triggeredElement ).closest( '.unit:not(.new)' ).find( '.spacer:first' ).removeClass( 'spacer' ).addClass( 'toggle-unit' );
 
 	if ( jQuery( triggeredElement ).closest( '.sub-list' ).length ) {
 		jQuery( triggeredElement ).closest( '.sub-list' ).replaceWith( response.data.navigation_view );
