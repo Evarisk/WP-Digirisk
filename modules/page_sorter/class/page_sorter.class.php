@@ -34,12 +34,12 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function display() {
-		$society = Society_Class::g()->get( array(
+		$main_society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
 		), true );
 
 		$establishments = Society_Class::g()->get( array(
-			'post_parent' => $society->id,
+			'post_parent' => $main_society->id,
 			'posts_per_page' => -1,
 			'post_type' => array( 'digi-group', 'digi-workunit' ),
 			'post_status' => array( 'publish', 'draft' ),
@@ -61,6 +61,7 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 		$display_notice = get_transient( 'display_notice' );
 
 		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'main', array(
+			'main_society' => $main_society,
 			'display_notice' => $display_notice,
 			'establishments' => $establishments,
 		) );
