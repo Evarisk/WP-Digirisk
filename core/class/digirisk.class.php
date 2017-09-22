@@ -67,7 +67,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 
 		$result = __( 'Aucune note de mise à jour pour cette version.', 'digirisk' );
 
-		if ( ! empty( $json['body'] ) ) {
+		if ( ! empty( $json ) && ! empty( $json['body'] ) ) {
 			$result = json_decode( $json['body'] );
 		}
 
