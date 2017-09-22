@@ -3,16 +3,17 @@
  * Les shortcodes relatif aux sociétés
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package establishment
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les shortcodes relatif aux sociétés
@@ -30,6 +31,9 @@ class Society_Shortcode {
 	/**
 	 * Affiches le contenu d'un établissement
 	 *
+	 * @since 6.2.10
+	 * @version 6.3.0
+	 *
 	 * @param array $param Les arguments du shortcode.
 	 */
 	public function callback_digi_dashboard( $param ) {
@@ -39,7 +43,13 @@ class Society_Shortcode {
 
 		if ( $element ) {
 			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : \eoxia\Config_Util::$init['digirisk']->default_tab;
-			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ' . $element->unique_identifier . ' - ' . $element->title;
+
+			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ';
+			if ( Society_Class::g()->get_post_type() !== $element->type ) {
+				$title .= $element->unique_identifier . ' - ';
+			}
+			$title .= $element->title;
+
 			if ( 'digi-group' === $element->type ) {
 				$group_list = group_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => 0, 'post_status' => array( 'publish', 'draft' ) ) );
 				$element_id = ! empty( $group_list ) ? $group_list[0]->id : 0;

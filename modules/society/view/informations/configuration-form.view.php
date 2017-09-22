@@ -17,8 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h1>
 	<?php
-	esc_html_e( 'Configuration de ', 'digirisk' );
-	echo esc_html( $element->unique_identifier . ' - ' . $element->title );
+	esc_html_e( 'Configuration ', 'digirisk' );
+	if ( Society_Class::g()->get_post_type() !== $element->type ) :
+		echo esc_html( $element->unique_identifier . ' - ' );
+	endif;
+	echo esc_html( $element->title );
 	?>
 </h1>
 
