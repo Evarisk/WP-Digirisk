@@ -3,16 +3,17 @@
  * Les filtres relatifs aux fiches de poste
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package sheet_workunit
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les filtres relatifs aux fiches de poste
@@ -37,14 +38,14 @@ class Sheet_Workunit_Filter {
 	 *
 	 * @return array
 	 *
-	 * @since 6.2.2.0
-	 * @version 6.2.5.0
+	 * @since 6.2.2
+	 * @version 6.3.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
 			'type' => 'text',
 			'text' => __( 'Fiche ', 'digirisk' ) . Workunit_Class::g()->element_prefix,
-			'title' => __( 'Les fiches de poste de', 'digirisk' ),
+			'title' => __( 'Les fiches de poste', 'digirisk' ),
 			'parent_class' => 'gp button red uppercase',
 		);
 

@@ -7,7 +7,6 @@
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
- * @subpackage filter
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,6 +20,9 @@ class Accident_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
@@ -28,6 +30,9 @@ class Accident_Filter {
 
 	/**
 	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
@@ -37,7 +42,7 @@ class Accident_Filter {
 		$list_tab['digi-society']['registre-accident'] = array(
 			'type' => 'text',
 			'text' => __( 'Registre des AT bénins', 'digirisk' ),
-			'title' => __( 'Les registres des accidents de travail bénins de ', 'digirisk' ),
+			'title' => __( 'Les registres des AT bénins', 'digirisk' ),
 		);
 
 		return $list_tab;

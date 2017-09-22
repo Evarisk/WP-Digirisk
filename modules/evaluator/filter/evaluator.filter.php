@@ -3,16 +3,17 @@
  * Gestion des filtres relatifs aux évaluateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package evaluator
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des filtres relatifs aux évaluateurs
@@ -36,20 +37,20 @@ class Evaluator_Filter {
 	 * @param  integer $id       L'ID de la société.
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 *
-	 * @since 1.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Évaluateurs', 'digirisk' ),
-			'title' => __( 'Les évaluateurs de', 'digirisk' ),
+			'title' => __( 'Les évaluateurs', 'digirisk' ),
 		);
 
 		$list_tab['digi-workunit']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Évaluateurs', 'digirisk' ),
-			'title' => __( 'Les évaluateurs de', 'digirisk' ),
+			'title' => __( 'Les évaluateurs', 'digirisk' ),
 		);
 
 		return $list_tab;

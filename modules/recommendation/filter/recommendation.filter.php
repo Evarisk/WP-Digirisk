@@ -3,16 +3,17 @@
  * Les filtres relatifs aux utilisateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les filtres relatifs aux utilisateurs
@@ -36,20 +37,20 @@ class Recommendation_Filter {
 	 * @param  integer $id        L'ID de la société.
 	 * @return array              La liste des onglets et ceux ajoutés par cette méthode.
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.3.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
 			'type' => 'text',
 			'text' => __( 'Signalisations', 'digirisk' ),
-			'title' => __( 'Les signalisations de', 'digirisk' ),
+			'title' => __( 'Les signalisations', 'digirisk' ),
 		);
 
 		$list_tab['digi-group']['recommendation'] = array(
 			'type' => 'text',
 			'text' => __( 'Signalisations', 'digirisk' ),
-			'title' => __( 'Les signalisations de', 'digirisk' ),
+			'title' => __( 'Les signalisation', 'digirisk' ),
 		);
 
 		return $list_tab;

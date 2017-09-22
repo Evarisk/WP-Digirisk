@@ -42,20 +42,13 @@ class Group_Filter {
 		$tab_list['digi-group']['informations'] = array(
 			'type' => 'text',
 			'text' => __( 'Informations', 'digirisk' ),
-			'title' => __( 'Informations de', 'digirisk' ),
+			'title' => __( 'Informations', 'digirisk' ),
 		);
 
 		$tab_list['digi-group']['more'] = array(
 			'type' => 'toggle',
 			'text' => '<i class="action fa fa-ellipsis-v toggle"></i>',
 			'items' => array(
-				'advanced-options' => array(
-					'type' => 'text',
-					'text' => __( 'Options avancées', 'digirisk' ),
-					'title' => __( 'Les options avancées de', 'digirisk' ),
-					'nonce' => 'load_content',
-					'attributes' => 'data-id=' . $id . '',
-				),
 				'delete' => array(
 					'type' => 'text',
 					'text' => __( 'Supprimer', 'digirisk' ),

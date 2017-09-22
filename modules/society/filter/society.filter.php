@@ -64,7 +64,7 @@ class Society_Filter {
 		$tab_list['digi-society']['informations'] = array(
 			'type' => 'text',
 			'text' => __( 'Informations', 'digirisk' ),
-			'title' => __( 'Informations de', 'digirisk' ),
+			'title' => __( 'Informations', 'digirisk' ),
 		);
 
 		return $tab_list;

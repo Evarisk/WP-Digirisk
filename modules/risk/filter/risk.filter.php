@@ -3,17 +3,18 @@
  * Les filtres relatifs aux risques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.2.4
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les filtres relatifs aux risques
@@ -35,20 +36,20 @@ class Risk_Filter {
 	 *
 	 * @return array
 	 *
-	 * @since 6.2.2.0
-	 * @version 6.2.4.0
+	 * @since 6.2.2
+	 * @version 6.3.0
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['risk'] = array(
 			'type' => 'text',
 			'text' => __( 'Risques', 'digirisk' ),
-			'title' => __( 'Les risques de', 'digirisk' ),
+			'title' => __( 'Les risques', 'digirisk' ),
 		);
 
 		$list_tab['digi-workunit']['risk'] = array(
 			'type' => 'text',
 			'text' => __( 'Risques', 'digirisk' ),
-			'title' => __( 'Les risques de', 'digirisk' ),
+			'title' => __( 'Les risques', 'digirisk' ),
 		);
 
 		return $list_tab;
