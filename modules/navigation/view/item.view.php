@@ -18,10 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 <li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>">
 	<div class="unit-container">
 
-		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type ) : ?>
+		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type && \eoxia\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
 			<div class="toggle-unit"><span class="icon"></span></div>
 		<?php else : ?>
-			<div class="spacer"></div>
+			<div class="spacer"><span class="icon"></span></div>
 		<?php endif; ?>
 		<?php do_shortcode( '[wpeo_upload id="' . $establishment->id . '" model_name="/digi/' . $establishment->get_class() . '" field_name="thumbnail_id" ]' ); ?>
 		<div class="title action-attribute"
