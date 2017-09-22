@@ -3682,6 +3682,7 @@
   text-transform: uppercase; }
 
 .digirisk-wrap .unit-header .mobile-navigation {
+  display: none;
   width: 38px;
   min-width: 38px;
   line-height: 50px;
@@ -3701,6 +3702,10 @@
 
 .digirisk-wrap .unit-header .mobile-navigation:hover .icon {
   color: rgba(255, 255, 255, 0.8); }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .unit-header .mobile-navigation {
+    display: block; } }
 
 .digirisk-wrap .workunit-navigation {
   background: #3d4152;
@@ -4175,7 +4180,8 @@
 .digirisk-wrap .navigation-container .close-popup {
   position: absolute;
   right: 0;
-  top: 0; }
+  top: 0;
+  display: none; }
 
 .digirisk-wrap .navigation-container .close-popup .icon {
   -webkit-transition: all 0.2s ease-out;
@@ -4187,10 +4193,18 @@
 .digirisk-wrap .navigation-container .close-popup:hover .icon {
   color: #fff; }
 
+@media (max-width: 480px) {
+  .digirisk-wrap .navigation-container .close-popup {
+    display: block; } }
+
 .digirisk-wrap .navigation-container .society-header .toggle.option {
   position: absolute;
   right: 32px;
   top: 0; }
+
+@media (min-width: 480px) {
+  .digirisk-wrap .navigation-container .society-header .toggle.option {
+    right: 0; } }
 
 .digirisk-wrap .navigation-container .add-container {
   position: absolute;
