@@ -42,7 +42,11 @@ class Society_Shortcode {
 		$display_trash = true;
 
 		if ( $element ) {
-			$tab_to_display = ! empty( $param['tab_to_display'] ) ? $param['tab_to_display'] : \eoxia\Config_Util::$init['digirisk']->default_tab;
+			$tab_to_display = ( $element->type !== Society_Class::g()->get_post_type() ) ? 'digi-risk' : \eoxia\Config_Util::$init['digirisk']->default_tab;
+
+			if ( ! empty( $param['tab_to_display'] ) ) {
+				$tab_to_display = $param['tab_to_display'];
+			}
 
 			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ';
 			if ( Society_Class::g()->get_post_type() !== $element->type ) {
