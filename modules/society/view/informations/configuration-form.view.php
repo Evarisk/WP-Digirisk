@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 </h1>
 
-<form method="POST" class="form" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
+<form method="POST" class="form society-informations" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 	<input type="hidden" name="action" value="save_configuration" />
 	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->id ); ?>" />
 	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->id ); ?>" />
@@ -141,5 +141,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</li>
 	</ul>
 
-	<button class="float right button green action-input" data-parent="form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
+	<button class="float right button green disable action-input" data-parent="form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
 </form>
