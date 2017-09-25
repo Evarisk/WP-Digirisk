@@ -47,7 +47,8 @@ $userdata = get_userdata( $author_id );
 		<span class="button delete action-delete"
 					data-id="<?php echo esc_attr( $comment->id ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment_' . $comment->id ) ); ?>"
-					data-action="delete_comment"><i class="icon fa fa-times"></i></span>
+					data-action="delete_comment"
+					data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon fa fa-times"></i></span>
 	<?php else : ?>
 		<?php if ( 0 !== $id && $add_button ) : ?>
 			<span data-parent="comment"
