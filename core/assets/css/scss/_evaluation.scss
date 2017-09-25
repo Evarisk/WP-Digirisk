@@ -3,7 +3,7 @@
  */
 .digirisk-wrap {
 	border-collapse: collapse;
-	.evaluation {
+	.table-evaluation {
 		th, td {
 			text-align: center;
 			white-space: normal;
@@ -48,6 +48,24 @@
 					background: $primary !important;
 					color: #fff;
 				}
+			}
+		}
+		@media ( max-width: 480px ) {
+			display: table;
+			thead {
+				display: table-header-group;
+			}
+			tbody {
+    		display: table-row-group;
+			}
+			tfoot {
+				display: table-footer-group;
+			}
+			tr {
+				display: table-row;
+			}
+			td, th {
+				display: table-cell;
 			}
 		}
 	}

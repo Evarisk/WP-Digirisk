@@ -3052,7 +3052,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 99999;
   background: rgba(39, 42, 53, 0.9);
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -3070,6 +3070,7 @@
   transition: all 0.2s ease-out;
   width: 100%;
   max-width: 860px;
+  max-height: 100%;
   background: #fff;
   padding: 20px;
   margin: auto;
@@ -3079,7 +3080,8 @@
      -moz-transform: translate(-50%, -54%);
       -ms-transform: translate(-50%, -54%);
        -o-transform: translate(-50%, -54%);
-          transform: translate(-50%, -54%); }
+          transform: translate(-50%, -54%);
+  overflow-y: auto; }
 
 .digirisk-wrap .popup .container .header {
   display: block;
@@ -3088,7 +3090,12 @@
 
 .digirisk-wrap .popup .container .header .title {
   text-transform: uppercase;
-  font-size: 18px; }
+  font-size: 18px;
+  white-space: normal; }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .popup .container .header .title {
+    font-size: 16px; } }
 
 .digirisk-wrap .popup .container .header .close {
   position: absolute;
@@ -3829,7 +3836,8 @@
   white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+     text-overflow: ellipsis;
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .workunit-navigation .content li div span {
   display: block;
@@ -3950,16 +3958,17 @@
          -o-transform: scale(0.95);
             transform: scale(0.95);
     position: fixed;
-    top: 46px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 99999;
     background: #272a35;
     -webkit-transition: 0.2s ease-out;
     -o-transition: 0.2s ease-out;
     -moz-transition: 0.2s ease-out;
-    transition: 0.2s ease-out; }
+    transition: 0.2s ease-out;
+    overflow-y: auto; }
   .digirisk-wrap .navigation-container.active {
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -4026,6 +4035,11 @@
 .digirisk-wrap .navigation-container .toolbar [class*="toggle"]:hover {
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer; }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .navigation-container .toolbar [class*="toggle"] .icon {
+    font-size: 18px;
+    padding: 4px; } }
 
 .digirisk-wrap .navigation-container .workunit-list {
   background: #272a35;
@@ -5032,7 +5046,8 @@
     font-size: 16px; }
   .digirisk-wrap .table.risk .risk-row .comment-container .button {
     position: absolute;
-    right: 0; }
+    right: 0;
+    top: 0; }
   .digirisk-wrap .table.risk .risk-row .comment-container .comment ~ .new.comment {
     padding-top: 10px; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1) {
@@ -5086,50 +5101,64 @@
 .digirisk-wrap {
   border-collapse: collapse; }
 
-.digirisk-wrap .evaluation th, .digirisk-wrap .evaluation td {
+.digirisk-wrap .table-evaluation th, .digirisk-wrap .table-evaluation td {
   text-align: center;
   white-space: normal;
   padding: 12px 16px; }
 
-.digirisk-wrap .evaluation td {
+.digirisk-wrap .table-evaluation td {
   border: 1px solid #d6d6d6; }
 
-.digirisk-wrap .evaluation tbody tr:nth-of-type(even) {
+.digirisk-wrap .table-evaluation tbody tr:nth-of-type(even) {
   background: #fff; }
 
-.digirisk-wrap .evaluation tbody tr td:nth-of-type(odd) {
+.digirisk-wrap .table-evaluation tbody tr td:nth-of-type(odd) {
   background: rgba(0, 0, 0, 0.1); }
 
-.digirisk-wrap .evaluation tbody tr td:nth-of-type(even) {
+.digirisk-wrap .table-evaluation tbody tr td:nth-of-type(even) {
   background: #fff; }
 
-.digirisk-wrap .evaluation tbody tr td:first-child {
+.digirisk-wrap .table-evaluation tbody tr td:first-child {
   background: #3e4851;
   color: #fff;
   font-weight: 600; }
 
-.digirisk-wrap .evaluation tbody td {
+.digirisk-wrap .table-evaluation tbody td {
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .evaluation tbody td:hover {
+.digirisk-wrap .table-evaluation tbody td:hover {
   cursor: pointer; }
 
-.digirisk-wrap .evaluation tbody td:hover:nth-of-type(odd) {
+.digirisk-wrap .table-evaluation tbody td:hover:nth-of-type(odd) {
   background: rgba(0, 0, 0, 0.2); }
 
-.digirisk-wrap .evaluation tbody td:hover:nth-of-type(even) {
+.digirisk-wrap .table-evaluation tbody td:hover:nth-of-type(even) {
   background: rgba(0, 0, 0, 0.1); }
 
-.digirisk-wrap .evaluation tbody td:hover:first-child {
+.digirisk-wrap .table-evaluation tbody td:hover:first-child {
   background: #3e4851;
   cursor: auto; }
 
-.digirisk-wrap .evaluation tbody td.active {
+.digirisk-wrap .table-evaluation tbody td.active {
   background: #3495f0 !important;
   color: #fff; }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .table-evaluation {
+    display: table; }
+  .digirisk-wrap .table-evaluation thead {
+    display: table-header-group; }
+  .digirisk-wrap .table-evaluation tbody {
+    display: table-row-group; }
+  .digirisk-wrap .table-evaluation tfoot {
+    display: table-footer-group; }
+  .digirisk-wrap .table-evaluation tr {
+    display: table-row; }
+  .digirisk-wrap .table-evaluation td, .digirisk-wrap .table-evaluation th {
+    display: table-cell; } }
 
 .digirisk-wrap .popup-evaluation .result-method {
   text-align: center;
