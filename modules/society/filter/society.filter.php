@@ -29,7 +29,7 @@ class Society_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'society_identity', array( $this, 'callback_society_identity' ), 10, 2 );
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
 	}
 
 	/**
