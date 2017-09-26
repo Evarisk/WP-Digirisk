@@ -98,7 +98,9 @@ if ( ! window.eoxiaJS.popup  ) {
 	};
 
 	window.eoxiaJS.popup.close = function( event ) {
-		jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
-		jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
+		if ( ! jQuery( 'body' ).hasClass( 'modal-open' ) ) {
+			jQuery( '.popup:not(.no-close)' ).removeClass( 'active' );
+			jQuery( '.digi-popup:not(.no-close)' ).removeClass( 'active' );
+		}
 	};
 }

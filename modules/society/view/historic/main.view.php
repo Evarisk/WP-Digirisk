@@ -15,7 +15,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 ?>
-<div class="grid-layout w2">
+<div class="grid-layout padding w2">
 	<div>
 		<h2>Les risques ajoutés</h2>
 		<?php

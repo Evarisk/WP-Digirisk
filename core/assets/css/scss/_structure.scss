@@ -1,0 +1,143 @@
+/**
+ * Structure de la page
+ */
+
+.digirisk-wrap {
+
+	padding: 20px 20px 20px 0;
+
+	&:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+	.navigation-container, .main-container {
+		display: block;
+		float: left;
+	}
+	.navigation-container {
+		width:24%;
+		padding-right: 10px;
+	}
+	.main-container {
+		width: 76%;
+		padding-let: 10px;
+	}
+
+	.main-header {
+		background: $secondary;
+		display: flex;
+		align-items: center; /* Fix IE */
+		flex: 0 1 auto;
+		height: 50px;
+		overflow: hidden;
+		.title {
+			width: 100%;
+			input {
+				background: none;
+				border: 0;
+				color: #fff;
+				&:focus {
+					background: rgba(0,0,0,0.2);
+				}
+			}
+		}
+		.title, .dut {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.media {
+			background: darken($secondary, 4%);
+		}
+		.dut, .save {
+			margin-left: auto;
+			display: flex;
+			align-items: center; /* Fix IE */
+			flex: 0 1 auto;
+			height: 50px;
+			span, .icon {
+				margin-top: auto;
+				margin-bottom: auto;
+			}
+		}
+		.save {
+			opacity: 0;
+			transform: translateX(10px);
+			pointer-events: none;
+			transition: all 0.2s ease-out;
+			&.active {
+				opacity: 1;
+				transform: translateX(0);
+				pointer-events: auto;
+			}
+		}
+	}
+
+	.main-content {
+		padding: 16px;
+		background: #fff;
+		&:after {
+			display: block;
+			content: '';
+			clear: both;
+		}
+		@media ( max-width: 480px ) {
+			padding: 16px 0;
+		}
+	}
+
+	&.wpdigi-installer .main-content {
+		margin-top: 20px;
+	}
+
+	/* CSS spécifique pour le champs domaine de l'email dans les utilisateurs */
+	.email-domain {
+		float: right;
+		width: 100%;
+		max-width: 460px;
+		.form-element {
+			width: 80% !important;
+			float: left;
+		}
+	}
+
+	@media screen and (max-width: 1200px) {
+		.navigation-container, .main-container {
+			float: none;
+		}
+		.navigation-container {
+			width: 100%;
+		}
+		.main-container {
+			width: 100%;
+			margin-top: 20px;
+		}
+	}
+	@media screen and (max-width: 680px) {
+		.navigation-container {
+			width: 100%;
+			padding-right: 0;
+		}
+		.main-container {
+			.main-header {
+				.unit-header {
+					width: 100%;
+				}
+				.save {
+					margin: 0 0 0 auto;
+				}
+				.dut {
+					display: none;
+				}
+			}
+		}
+	}
+	@media ( max-width: 480px ) {
+		padding: 10px 10px 10px 0;
+		.main-container {
+			margin-top: 0;
+		}
+	}
+
+}

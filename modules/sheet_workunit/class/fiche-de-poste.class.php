@@ -3,16 +3,17 @@
  * Classe gérant les fiches de poste
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.10.0
+ * @since 6.2.3
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package sheet-workunit
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les fiches de poste
@@ -23,49 +24,49 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   				= '\digi\Fiche_De_Poste_Model';
+	protected $model_name = '\digi\Fiche_De_Poste_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    				= 'fiche_de_poste';
+	protected $post_type = 'fiche_de_poste';
 
 	/**
 	 * Le type du document
 	 *
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key    					= '_wpdigi_document';
+	protected $meta_key = '_wpdigi_document';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/fiche-de-poste';
+	protected $base = 'fiche-de-poste';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 							= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
 	 */
-	public $element_prefix 					= 'FP';
+	public $element_prefix = 'FP';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -89,32 +90,23 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Fiche de poste';
 
 	/**
-	 * Le constructeur obligatoire pour hériter de la classe Document_Class
-	 * Appelle le constructeur parent pour initialiser le post type
-	 *
-	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
-	 */
-	protected function construct() {
-		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
-	}
-
-	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function display( $element_id ) {
-		$element = $this->get( array( 'schema' => true ), array() );
-		$element = $element[0];
-		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'main', array( 'element' => $element, 'element_id' => $element_id ) );
+		$element = $this->get( array(
+			'schema' => true,
+		), true );
+
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'main', array(
+			'element' => $element,
+			'element_id' => $element_id,
+		) );
 	}
 
 	/**
@@ -123,12 +115,19 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array( 'post_parent' => $element_id, 'post_status' => array( 'publish', 'inherit' ) ), array( 'category' ) );
-		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'list', array( 'list_document' => $list_document, 'element_id' => $element_id ) );
+		$list_document = $this->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'sheet_workunit', 'list', array(
+			'list_document' => $list_document,
+			'element_id' => $element_id,
+		) );
 	}
 
 	/**
@@ -138,28 +137,24 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return bool
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function generate( $society_id ) {
-		$society = workunit_class::g()->get( array( 'post__in' => array( $society_id ) ) );
-
-		if ( empty( $society[0] ) ) {
-			return false;
-		}
-
-		$society = $society[0];
+		$society = Workunit_Class::g()->get( array(
+			'id' => $society_id,
+		), true );
 
 		$society_infos = $this->get_infos( $society );
 
 		$sheet_details = array(
-			'referenceUnite'			=> $society->unique_identifier,
-			'nomUnite'						=> $society->title,
-			'description'		=> $society->content,
-			'adresse'				=> $society_infos['adresse'],
-			'codePostal'		=> $society_infos['codePostal'],
-			'ville'					=> $society_infos['ville'],
-			'telephone'			=> ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'referenceUnite' => $society->unique_identifier,
+			'nomUnite' => $society->title,
+			'description' => $society->content,
+			'adresse' => $society_infos['adresse'],
+			'codePostal' => $society_infos['codePostal'],
+			'ville' => $society_infos['ville'],
+			'telephone' => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
@@ -174,7 +169,11 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 			$society = workunit_class::g()->update( $society );
 		}
 
-		return array( 'creation_response' => $document_creation_response, 'element' => $society, 'success' => true );
+		return array(
+			'creation_response' => $document_creation_response,
+			'element' => $society,
+			'success' => true,
+		);
 	}
 
 	/**
@@ -332,7 +331,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 				$comment_list = '';
 				if ( ! empty( $risk->comment ) ) :
 					foreach ( $risk->comment as $comment ) :
-						$comment_list .= mysql2date( 'd/m/y', $comment->date ) . ' : ' . $comment->content . "
+						$comment_list .= $comment->date['date_input']['fr_FR']['date'] . ' : ' . $comment->content . "
 			";
 					endforeach;
 				endif;

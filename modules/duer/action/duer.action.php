@@ -3,10 +3,10 @@
  * Gères l'action AJAX de la génération du DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.9.0
- * @copyright 2015-2016 Evarisk
- * @package document
- * @subpackage class
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -47,8 +47,9 @@ class DUER_Action {
 			wp_send_json_error();
 		}
 
-		$society = Group_Class::g()->get( array( 'post__in' => array( $society_id ) ) );
-		$society = $society[0];
+		$society = Society_Class::g()->get( array(
+			'id' => $society_id,
+		), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/main', array(
@@ -66,10 +67,10 @@ class DUER_Action {
 	 * La méthode qui gère la réponse de la requête.
 	 * Cette méthode appelle la méthode generate de DUER_Generate_Class.
 	 *
-	 * @return void
+	 * @since 6.2.3
+	 * @version 6.3.0
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.4.0
+	 * @return void
 	 */
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
@@ -87,20 +88,32 @@ class DUER_Action {
 			$document_id = ! empty( $_POST ) && is_int( (int) $_POST['element_id'] ) && ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 			if ( ! empty( $document_id ) ) {
 				$parent_id = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-				$parent_element = society_class::g()->show_by_type( $parent_id );
+				$parent_element = Society_Class::g()->show_by_type( $parent_id );
 
-				$current_document = DUER_Class::g()->get( array( 'post__in' => array( $document_id ), 'post_status' => 'any' ) );
-			 	$generate_response = document_class::g()->generate_document( $current_document[0]->model_id, $current_document[0]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[0]->title . '.odt' );
+				$current_document = DUER_Class::g()->get( array(
+					'post__in' => array(
+						$document_id,
+					),
+					'post_status' => 'any',
+				) );
+
+				$generate_response = document_class::g()->generate_document( $current_document[0]->model_id, $current_document[0]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[0]->title . '.odt' );
 			}
 		} elseif ( ! empty( $_POST['zip'] ) ) {
-			$element = Group_Class::g()->get( array( 'post__in' => array( $_POST['element_id'] ) ) );
-			$element = $element[0];
+			$element = Society_Class::g()->get( array(
+				'id' => $_POST['element_id'],
+			), true );
 			$generate_response = ZIP_Class::g()->generate( $element, $meta_generate_duer );
 			$end = true;
 
 			// C'est sur que c'est le 0 le DUER.
-			$duer = DUER_Class::g()->get( array( 'post__in' => array( $meta_generate_duer[0]['id'] ), 'post_status' => array( 'publish', 'inherit' ) ) );
-			$duer = $duer[0];
+			$duer = DUER_Class::g()->get( array(
+				'id' => $meta_generate_duer[0]['id'],
+				'post_status' => array(
+					'publish',
+					'inherit',
+				),
+			), true );
 			$duer->zip_path = $generate_response['zip_path'];
 			DUER_Class::g()->update( $duer );
 
@@ -112,6 +125,10 @@ class DUER_Action {
 				$generate_response = Fiche_De_Groupement_Class::g()->generate( $_POST['society_id'] );
 			} elseif ( 'digi-workunit' === $post_type ) {
 				$generate_response = Fiche_De_Poste_Class::g()->generate( $_POST['society_id'] );
+			} else {
+				$generate_response = array(
+					'success' => true,
+				);
 			}
 		}
 

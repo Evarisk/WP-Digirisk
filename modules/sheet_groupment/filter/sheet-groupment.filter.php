@@ -3,16 +3,17 @@
  * Les filtres relatives aux fiches de groupement
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.2.4
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package sheet_groupment
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Ajoutes le filtre pour ajouter le bouton dans le contenu des onglets
@@ -38,14 +39,14 @@ class Sheet_Groupment_Filter {
 	 * @param  integer $id        L'ID de la société.
 	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
 	 *
-	 * @since 1.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
 			'type' => 'text',
 			'text' => __( 'Fiche ', 'digirisk' ) . Group_Class::g()->element_prefix,
-			'title' => __( 'Les fiches de groupement de', 'digirisk' ),
+			'title' => __( 'Les fiches de groupement', 'digirisk' ),
 			'parent_class' => 'gp button red uppercase',
 		);
 

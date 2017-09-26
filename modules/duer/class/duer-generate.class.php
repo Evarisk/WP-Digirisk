@@ -3,16 +3,17 @@
  * Génères le DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.5.0
+ * @since 6.1.9
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Génères le DUER
@@ -20,20 +21,25 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 class DUER_Generate_Class extends \eoxia\Singleton_Util {
 
 	/**
-	 * Le constructeur
+	 * Le constructeur pour l'héritage de Singleton_Util
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	protected function construct() {}
 
 	/**
 	 * Génères le DUER
 	 *
-	 * @param array $data Les data à mettre dans le ODT.
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @param array $data Les data à mettre dans le ODT.
+	 * @return array {
+	 *         @type array         creation_response Un tableau contenant toutes les réponses de la création de tous les documents nécessaires pour le DUER.
+	 *         @type Society_Model element           Les données de la société.
+	 *         @type boolean       success           Si la génération s'est déroulée avec succés.
+	 * }
 	 */
 	public function generate( $data ) {
 		if ( empty( $data ) || empty( $data['element_id'] ) ) {
@@ -41,23 +47,25 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 		}
 
 		$id = (int) $data['element_id'];
-		$element = group_class::g()->get( array( 'id' => $id ) );
-		$element = $element[0];
+		$element = Society_Class::g()->get( array(
+			'id' => $id,
+		), true );
 
-		/**	Définition des composants du fichier / Define the file component	*/
 		$src_logo = $this->get_logo();
 		$data = $this->securize_duer_data( $data, $element );
 		$data_to_document = $this->prepare_skeleton();
 		$data_to_document = $this->fill_data_duer( $data, $data_to_document, $element );
 		$data_to_document = $this->fill_data_risk( $data_to_document, $element );
 
-		/**	Possibilité de filtrer les données envoyées au document pour ajout, suppression, traitement supplémentaire / Add capability to filter datas sended to the document for addition, deletion or other treatment	*/
 		$data_to_document = apply_filters( 'wpdigi_element_duer_details', $data_to_document );
 
-		/**	Call document creation function / Appel de la fonction de création du document	*/
-		$document_creation_response = document_class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
+		$document_creation_response = Document_Class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
-		return array( 'creation_response' => $document_creation_response, 'element' => $element, 'success' => true );
+		return array(
+			'creation_response' => $document_creation_response,
+			'element' => $element,
+			'success' => true,
+		);
 	}
 
 	/**
@@ -68,24 +76,23 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array Les données sécurisées
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function securize_duer_data( $data, $element ) {
 		$user = wp_get_current_user();
-		$data['nomEntreprise'] 			= $element->title;
-		$data['emetteurDUER'] 			= $user->display_name;
-		$data['telephone'] 					= !empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '';
+		$data['nomEntreprise'] = $element->title;
+		$data['emetteurDUER'] = $user->display_name;
+		$data['telephone'] = ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '';
 
+		$data['dateAudit'] = $this->formatte_audit_date( $data );
+		$data['destinataireDUER'] = ! empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
+		$data['portable'] = ! empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
 
-		$data['dateAudit'] 					= $this->formatte_audit_date( $data );
-		$data['destinataireDUER'] 	= !empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
-		$data['portable'] 					= !empty( $data['portable'] ) ? sanitize_text_field( $data['portable'] ) : '';
-
-		$data['methodologie'] 			= !empty( $data['methodologie'] ) ? $data['methodologie'] : '';
-		$data['sources'] 						= !empty( $data['sources'] ) ? $data['sources'] : '';
-		$data['remarqueImportante'] = !empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
-		$data['dispoDesPlans'] 			= !empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
+		$data['methodologie'] = ! empty( $data['methodologie'] ) ? $data['methodologie'] : '';
+		$data['sources'] = ! empty( $data['sources'] ) ? $data['sources'] : '';
+		$data['remarqueImportante'] = ! empty( $data['remarqueImportante'] ) ? $data['remarqueImportante'] : '';
+		$data['dispoDesPlans'] = ! empty( $data['dispoDesPlans'] ) ? $data['dispoDesPlans'] : '';
 
 		return $data;
 	}
@@ -93,13 +100,22 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Prépares un squelette des données
 	 *
-	 * @return array Le squelette des données
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @return array {
+	 *         Le squelette des données
+	 *
+	 *         @type string identifiantElement
+	 *         @type string nomEntreprise
+	 *         @type string dateAudit
+	 *         @type emetteurDUER
+	 *         @type
+	 * }
+	 *
+	 * @todo: A supprimer
 	 */
 	public function prepare_skeleton() {
-		/**	Définition de la structure des données du document par défaut / Define the default data structure for document	*/
 		$skeleton = array(
 			'identifiantElement'	=> '',
 			'nomEntreprise'				=> '',
@@ -250,14 +266,14 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return string La date de l'audit formatté
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function formatte_audit_date( $data_duer ) {
 		$audit_date = '';
 
-		if ( ! empty( $data_duer['dateDebutAudit' ] ) ) {
-			$audit_date .= sanitize_text_field( $data_duer['dateDebutAudit'] );
+		if ( ! empty( $data_duer['dateDebutAudit'] ) ) {
+			$audit_date .= mysql2date( 'd/m/Y', $data_duer['dateDebutAudit'] );
 		}
 
 		if ( ! empty( $data_duer['dateFinAudit'] ) && $audit_date != $data_duer['dateFinAudit'] ) {
@@ -265,7 +281,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 				$audit_date .= ' - ';
 			}
 
-			$audit_date .= sanitize_text_field( $data_duer['dateFinAudit'] );
+			$audit_date .= mysql2date( 'd/m/Y', $data_duer['dateFinAudit'] );
 		}
 
 		return $audit_date;

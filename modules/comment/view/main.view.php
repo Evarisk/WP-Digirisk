@@ -4,10 +4,9 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.4.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package comment
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -15,11 +14,27 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 <ul class="comment-container">
-	<?php \eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array( 'id' => $id, 'add_button' => $add_button, 'comment_new' => $comment_new, 'comments' => $comments, 'display' => $display, 'type' => $type ) ); ?>
+	<?php \eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array(
+		'id' => $id,
+		'add_button' => $add_button,
+		'comment_new' => $comment_new,
+		'comments' => $comments,
+		'display' => $display,
+		'type' => $type,
+		'display_date' => $display_date,
+		'display_user' => $display_user,
+	) ); ?>
 
 	<?php
 	if ( 'edit' === $display ) :
-		\eoxia\View_Util::exec( 'digirisk', 'comment', 'item-edit', array( 'id' => $id, 'add_button' => $add_button, 'comment' => $comment_new, 'type' => $type ) );
+		\eoxia\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
+			'id' => $id,
+			'add_button' => $add_button,
+			'comment' => $comment_new,
+			'type' => $type,
+			'display_date' => $display_date,
+			'display_user' => $display_user,
+		) );
 	endif;
 	?>
 </ul>

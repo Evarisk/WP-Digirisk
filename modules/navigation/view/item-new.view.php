@@ -1,23 +1,26 @@
 <?php
 /**
- * Affiches le champs de texte et le bouton "Plus" pour créer une unité de travail.
+ * Affiches le champs de texte et le bouton "Plus" pour créer un établissement.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.6.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package navigation
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<div class="workunit-add tooltip red" aria-label="Le nom de l'unité de travail est obligatoire.">
-	<input type="hidden" name="action" value="save_workunit" />
-	<input type="hidden" name="groupment_id" value="<?php echo esc_attr( $parent_id ); ?>" />
-	<?php wp_nonce_field( 'save_workunit' ); ?>
-	<input class="title" type="text" placeholder="<?php _e( 'Nouvelle unité de travail', 'digirisk' ); ?>" name="workunit[title]" />
-	<div class="add button disable w50 action-input" data-loader="add" data-namespace="digirisk" data-module="navigation" data-before-method="beforeSaveWorkunit" data-loader="workunit-add" data-parent="workunit-add"><i class="icon fa fa-plus"></i></div>
-</div>
+<li class="unit new">
+	<i class="placeholder-icon dashicons dashicons-admin-multisite"></i>
+	<input type="hidden" name="action" value="create_society" />
+	<?php wp_nonce_field( 'create_society' ); ?>
+	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $id ); ?>" />
+	<input type="hidden" name="class" value="" />
+	<input class="unit-label" name="title" placeholder="" type="text" />
+	<div class="button w50 add blue action-input" data-parent="new" data-loader="new"><i class="icon dashicons dashicons-plus"></i></<div>
+</li>

@@ -1,8 +1,12 @@
 <?php
 /**
- * Vue principale de la navigation
+ * Vue principale de la navigation.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -13,6 +17,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="navigation-container">
-	<?php Navigation_Class::g()->display_toggle( $groupment_id ); ?>
-	<?php Navigation_Class::g()->display_workunit_list( $groupment_id ); ?>
+	<?php
+	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'header', array(
+		'society' => $society,
+	) );
+
+	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
+		'selected_establishment_id' => $selected_establishment_id,
+		'establishments' => $establishments,
+		'id' => $society->id,
+		'class' => 'workunit-list',
+	) );
+	?>
 </div>

@@ -3,16 +3,17 @@
  * Les actions relatives aux sociétés
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.9.0
+ * @since 1.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux sociétés
@@ -24,33 +25,12 @@ class Society_Action {
 	 * wp_ajax_load_sheet_display
 	 * wp_ajax_save_society
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 1.0.0
+	 * @version 6.2.3.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_load_society', array( $this, 'callback_load_society' ) );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
-	}
-
-	/**
-	 * Charges le template d'une société
-	 *
-	 * @since 1.0
-	 * @version 6.2.9.0
-	 */
-	public function callback_load_society() {
-		$template = '';
-
-		ob_start();
-		Digirisk_Class::g()->display();
-		$template .= ob_get_clean();
-		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'society',
-			'callback_success' => 'loadedSocietySuccess',
-			'template' => $template,
-		) );
 	}
 
 	/**

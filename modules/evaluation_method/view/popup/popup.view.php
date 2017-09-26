@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			<input type="hidden" class="digi-method-evaluation-id" value="<?php echo esc_attr( ! empty( $term_evarisk->term_id ) ? $term_evarisk->term_id : 0 ); ?>" />
 
-			<table class="table evaluation">
+			<table class="table-evaluation">
 				<thead>
 					<tr>
 						<td></td>

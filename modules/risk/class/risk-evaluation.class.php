@@ -6,6 +6,7 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	protected $model_name   = '\digi\risk_evaluation_model';
 	protected $meta_key     = '_wpdigi_risk_evaluation';
 	protected $comment_type	= 'digi-risk-eval';
+	protected $base = 'risk_evaluation';
 
 	public $element_prefix 	= 'E';
 	protected $before_model_post_function = array( '\digi\construct_evaluation' );
@@ -14,7 +15,7 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	protected $after_get_function = array( '\digi\get_identifier' );
 
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 }

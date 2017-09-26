@@ -6,23 +6,27 @@
  * Or display the establisment name without an input.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.3.0
- * @copyright 2015-2016 Eoxia
- * @package establishment
- * @subpackage view
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <span
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 	data-action="load_society"
 	data-id="<?php echo esc_attr( $element->id ); ?>"
 	class="<?php echo ! isset( $editable_identity ) ? 'action-attribute' : ''; ?> title">
-	<strong><?php echo esc_html( $element->unique_identifier ); ?> -</strong>
+
+	<?php if ( Society_Class::g()->get_post_type() !== $element->type ) : ?>
+		<strong><?php echo esc_html( $element->unique_identifier ); ?> -</strong>
+	<?php endif; ?>
 
 	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>
 		<input type="hidden" name="action" value="save_society" />

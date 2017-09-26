@@ -3,8 +3,8 @@
  * Les actions relatives aux affichages légaux
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package legal_display
  * @subpackage class
@@ -12,7 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux affichages légaux
@@ -22,8 +24,8 @@ class Legal_Display_Action {
 	/**
 	 * Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'save_legal_display', array( $this, 'callback_save_legal_display' ), 10, 2 );
@@ -35,8 +37,8 @@ class Legal_Display_Action {
 	 * @param Third_Model $detective_work_third Les données de l'inspecteur du travail.
 	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
 
@@ -69,10 +71,9 @@ class Legal_Display_Action {
 		$legal_display = Legal_Display_Class::g()->save_data( $legal_display_data );
 		$legal_display = Legal_Display_Class::g()->get( array(
 			'id' => $legal_display->id,
-		) );
-		$legal_display = $legal_display[0];
+		), true );
 
-		$element_parent = Group_Class::g()->get( array(
+		$element_parent = Society_Class::g()->get( array(
 			'id' => $parent_id,
 		) );
 
@@ -94,25 +95,24 @@ class Legal_Display_Action {
 	 * @param object $element_parent L'objet parent.
 	 * @param string $format (Optional) Le format voulu A4 ou A3.
 	 *
-	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
-		/**	Définition finale de l'affichage légal	*/
 		$legal_display_sheet_details = array(
-			'inspection_du_travail_nom' => $legal_display->detective_work[0]->full_name,
-			'inspection_du_travail_adresse' => $legal_display->detective_work[0]->address[0]->address,
-			'inspection_du_travail_code_postal' => $legal_display->detective_work[0]->address[0]->postcode,
-			'inspection_du_travail_ville' => $legal_display->detective_work[0]->address[0]->town,
-			'inspection_du_travail_telephone' => $legal_display->detective_work[0]->contact['phone'],
-			'inspection_du_travail_horaire' => $legal_display->detective_work[0]->opening_time,
+			'inspection_du_travail_nom' => $legal_display->detective_work->full_name,
+			'inspection_du_travail_adresse' => $legal_display->detective_work->address->address,
+			'inspection_du_travail_code_postal' => $legal_display->detective_work->address->postcode,
+			'inspection_du_travail_ville' => $legal_display->detective_work->address->town,
+			'inspection_du_travail_telephone' => $legal_display->detective_work->contact['phone'],
+			'inspection_du_travail_horaire' => $legal_display->detective_work->opening_time,
 
-			'service_de_sante_nom' => $legal_display->occupational_health_service[0]->full_name,
-			'service_de_sante_adresse' => $legal_display->occupational_health_service[0]->address[0]->address,
-			'service_de_sante_code_postal' => $legal_display->occupational_health_service[0]->address[0]->postcode,
-			'service_de_sante_ville' => $legal_display->occupational_health_service[0]->address[0]->town,
-			'service_de_sante_telephone' => $legal_display->occupational_health_service[0]->contact['phone'],
-			'service_de_sante_horaire' => $legal_display->occupational_health_service[0]->opening_time,
+			'service_de_sante_nom' => $legal_display->occupational_health_service->full_name,
+			'service_de_sante_adresse' => $legal_display->occupational_health_service->address->address,
+			'service_de_sante_code_postal' => $legal_display->occupational_health_service->address->postcode,
+			'service_de_sante_ville' => $legal_display->occupational_health_service->address->town,
+			'service_de_sante_telephone' => $legal_display->occupational_health_service->contact['phone'],
+			'service_de_sante_horaire' => $legal_display->occupational_health_service->opening_time,
 
 			'samu' => $legal_display->emergency_service['samu'],
 			'police' => $legal_display->emergency_service['police'],
@@ -153,7 +153,7 @@ class Legal_Display_Action {
 			'modalite_information_ap' => $legal_display->participation_agreement['information_procedures'],
 		);
 
-		$document_creation = document_class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
+		$document_creation = Document_Class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
 
 		$filetype = 'unknown';
 		if ( ! empty( $document_creation ) && ! empty( $document_creation['status'] ) && ! empty( $document_creation['link'] ) ) {
@@ -161,7 +161,7 @@ class Legal_Display_Action {
 		}
 
 		$element_parent->associated_document_id['document'][] = $document_creation['id'];
-		group_class::g()->update( $element_parent );
+		Society_Class::g()->update( $element_parent );
 	}
 
 

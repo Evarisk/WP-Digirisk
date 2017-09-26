@@ -10,6 +10,8 @@ if ( ! window.eoxiaJS.request ) {
 			if ( response && response.success ) {
 				if ( response.data.namespace && response.data.module && response.data.callback_success ) {
 					window.eoxiaJS[response.data.namespace][response.data.module][response.data.callback_success]( element, response );
+				} else if ( response.data.module && response.data.callback_success ) {
+					window.eoxiaJS[response.data.module][response.data.callback_success]( element, response );
 				}
 			} else {
 				if ( response.data.namespace && response.data.module && response.data.callback_error ) {

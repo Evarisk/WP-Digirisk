@@ -32,7 +32,7 @@ class category_danger_class extends \eoxia\term_class {
 	protected $meta_key    	= '_wpdigi_dangercategory';
 
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
-	protected $base = 'digirisk/danger-category';
+	protected $base = 'danger-category';
 	protected $version = '0.1';
 
 	protected $before_post_function = array( '\digi\construct_identifier' );
@@ -43,9 +43,9 @@ class category_danger_class extends \eoxia\term_class {
 	 * Instanciation de l'objet cétégories de danger / Danger category instanciation
 	 */
 	protected function construct() {
+		parent::construct();
 		/**	Définition du type de données personnalisées pour les catégories de dangers / Define custom type for danger categories */
 		add_action( 'init', array( $this, 'custom_type_creation' ), 1 );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

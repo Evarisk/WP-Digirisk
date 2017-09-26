@@ -3,16 +3,17 @@
  * Shortcode principale de l'application.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Shortcode principale de l'application.
@@ -22,8 +23,8 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 */
 	protected function construct() {
 		add_shortcode( 'digi_content', array( $this, 'callback_digi_content' ) );
@@ -32,34 +33,26 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 	/**
 	 * La méthode qui permet d'afficher le contenu de l'application
 	 *
-	 * @param  array $atts Les paramètres envoyés dans le shortcode.
+	 * @since 0.1.0
+	 * @version 6.3.0
 	 *
+	 * @param  array $atts Les paramètres envoyés dans le shortcode.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @todo: Doublon avec nagigation.shortcode L44
 	 */
 	public function callback_digi_content( $atts ) {
-		$society_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
+		$establishment_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
 
-		if ( ! empty( $_GET['groupment_id'] ) ) {
-			$society_id = (int) $_GET['groupment_id'];
+		if ( ! empty( $_REQUEST['establishment_id'] ) ) { // WPCS: CRSF ok.
+			$establishment_id = (int) $_REQUEST['establishment_id'];
 		}
 
-		if ( ! empty( $_POST['groupment_id'] ) ) { // WPCS: CSRF ok.
-			$society_id = (int) $_POST['groupment_id'];
-		}
-
-		if ( ! empty( $_GET['workunit_id'] ) ) {
-			$society_id = (int) $_GET['workunit_id'];
-		}
-
-		if ( ! empty( $_POST['workunit_id'] ) ) { // WPCS: CSRF ok.
-			$society_id = (int) $_POST['workunit_id'];
-		}
-
-		if ( 0 === $society_id ) {
-			$society_id = Group_Class::g()->get_first_groupment_id();
+		if ( 0 === $establishment_id ) {
+			$society = Society_Class::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
+			$establishment_id = $society->id;
 		}
 
 		require( PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php' );

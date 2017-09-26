@@ -4,16 +4,17 @@
  * Appelle la vue permettant d'afficher la navigation.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 0.1.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package core
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant le boot de l'application DigiRisk.
@@ -41,13 +42,37 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 0.1.0
+	 * @version 6.2.4
 	 */
 	public function display( $id = 0 ) {
 		require( PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php' );
 	}
 
+	/**
+	 * Récupères le patch note pour la version actuelle.
+	 *
+	 * @since 6.3.0
+	 * @version 6.3.0
+	 *
+	 * @return string|object
+	 */
+	public function get_patch_note() {
+		$patch_note_url = 'https://www.evarisk.com/wp-json/wp/v2/change_log/33014';
+		$json = wp_remote_get( $patch_note_url, array(
+			'headers' => array(
+				'Content-Type' => 'application/json',
+			),
+		) );
+
+		$result = __( 'Aucune note de mise à jour pour cette version.', 'digirisk' );
+
+		if ( ! empty( $json ) && ! empty( $json['body'] ) ) {
+			$result = json_decode( $json['body'] );
+		}
+
+		return $result;
+	}
 	/**
 	 * Launch some action when activate the plugin
 	 */

@@ -1,16 +1,19 @@
 <?php
 /**
- * Affichages des boutons permettant d'envoyer les modèles ODT personnalisés
+ * Gestion des boutons pour upload un modèle ODT.
  *
- * @package Evarisk\Plugin
- *
- * @since 1.0
- * @version 6.2.5.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! empty( $list_type_document ) ) :
 	foreach ( $list_type_document as $key => $title ) :
@@ -22,9 +25,7 @@ if ( ! empty( $list_type_document ) ) :
 				<div class="button blue upload-model margin"
 							data-id="<?php esc_attr( 0 ); ?>"
 							data-type="<?php echo esc_attr( $key ); ?>"
-							data-title="<?php echo esc_attr( $title ); ?>"
-							data-object-name="<?php echo esc_attr( $key ); ?>"
-							data-action="eo_set_model"
+							data-action="set_model"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>">
 					<i class="fa fa-upload"></i>
 					<span>Envoyer votre modèle personnalisé</span>

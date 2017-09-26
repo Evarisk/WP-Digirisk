@@ -1,16 +1,19 @@
 <?php
 /**
- * Affiches l'interface pour installer DigiRisk
+ * * Affiches l'interface pour installer DigiRisk
  *
- * @package Evarisk\Plugin
- *
- * @since 0.1
- * @version 6.2.8.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 0.1.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="wpdigi-installer digirisk-wrap">
 
@@ -38,11 +41,11 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 		<div class="bloc-create-society">
 			<input type="hidden" name="action" value="installer_save_society" />
 			<?php wp_nonce_field( 'ajax_installer_save_society' ); ?>
-			<h2 class="title"><?php esc_html_e( 'Bienvenue sur DigiRisk. Avant de commencer l\'installation, veuillez entrer le nom de votre société.', 'digirisk' );?></h2>
+			<h2 class="title"><?php esc_html_e( 'Bienvenue sur DigiRisk. Avant de commencer l\'installation, veuillez entrer le nom de votre société.', 'digirisk' ); ?></h2>
 
 			<div class="society-form">
 				<label class="society-label"><?php echo esc_html_e( 'Nom de ma société*', 'digirisk' ); ?></label>
-				<input class="society-name" type="text" name="groupment[title]" />
+				<input class="society-name" type="text" name="society[title]" />
 			</div>
 		</div>
 

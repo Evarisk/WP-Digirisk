@@ -1,0 +1,89 @@
+/**
+ * Popup
+ * .no-close -> désactive le bouton
+ */
+
+.digirisk-wrap {
+
+	.popup {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 99999;
+		background: rgba(39,42,53,.9);
+		opacity: 0;
+		pointer-events: none;
+		transition: all 0.2s ease-out;
+
+		.container {
+			position: absolute;
+			transition: all 0.2s ease-out;
+			width: 100%;
+			max-width: 860px;
+			max-height: 100%;
+			background: #fff;
+			padding: 20px;
+			margin: auto;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -54%);
+			overflow-y: auto;
+
+			.header {
+				display: block;
+				position: relative;
+				margin-bottom: 20px;
+				.title {
+					text-transform: uppercase;
+					font-size: 18px;
+					white-space: normal;
+					@media ( max-width: 480px ) {
+						font-size: 16px;
+					}
+				}
+				.close {
+					position: absolute;
+					right: 0;
+					top: 0;
+					color: rgba(0,0,0,0.3);
+					padding: 4px;
+					transition: all 0.2s ease-out;
+					&:hover {
+						cursor: pointer;
+						color: rgba(0,0,0,0.6);
+					}
+				}
+			}
+		}
+		&.active {
+			opacity: 1;
+			pointer-events: auto;
+			.container {
+				transform: translate(-50%, -50%);
+			}
+		}
+		&.no-close {
+			.button {
+				background: $grey;
+				color: rgba(0,0,0,0.4);
+				pointer-events: none;
+				&:hover {
+					background: $grey;
+					color: rgba(0,0,0,0.4);
+					cursor: not-allowed;
+				}
+			}
+		}
+		&.duer {
+			.content {
+				ul {
+					height: 500px;
+					overflow-y: scroll;
+				}
+			}
+		}
+	}
+
+}

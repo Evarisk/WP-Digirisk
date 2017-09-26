@@ -3,16 +3,17 @@
  * Gestion de l'export en CSV des risques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.6.0
- * @version 6.2.6.0
+ * @since 6.2.6
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package Digirisk\dashboard
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion de l'export en CSV des risques.
@@ -110,7 +111,7 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 					'unique_identifier' => $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier,
 					'risque' => $risk->danger->name,
 					'cotation' => $risk->evaluation->risk_level['equivalence'],
-					'comment_date' => $risk->comment[0]->date,
+					'comment_date' => $risk->comment[0]->date['date_input']['fr_FR']['date'],
 					'comment_content' => $risk->comment[0]->content,
 				);
 

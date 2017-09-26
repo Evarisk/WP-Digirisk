@@ -1,60 +1,78 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition des champs d'un DUER.
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Définition des champs d'un DUER.
+ */
 class DUER_Model extends Document_Model {
 
 	/**
-	 * Construit le modèle / Fill the model
+	 * Définition des champs
 	 *
-	 * @param array|WP_Object $object La définition de l'objet dans l'instance actuelle / Object currently present into model instance
-	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
-	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
+	 * @since 6.0.0
+	 * @version 6.3.0
+	 *
+	 * @param DUER_Model $object La définition de l'objet dans l'instance actuelle.
+	 * @return DUER_Model
 	 */
 	public function __construct( $object ) {
 		$this->model['zip_path'] = array(
-			'type'				=> 'string',
-			'meta_type'		=> 'single',
-			'field'				=> 'zip_path',
+			'type' => 'string',
+			'meta_type' => 'single',
+			'field' => 'zip_path',
 		);
 
 		$this->model['document_meta'] = array(
-			'type'				=> 'array',
-			'meta_type' 	=> 'single',
-			'field'				=> 'document_meta',
+			'type' => 'array',
+			'meta_type' => 'single',
+			'field' => 'document_meta',
 			'child' => array(
 				'identifiantElement' => array(
-					'type' => 'string'
+					'type' => 'string',
 				),
 				'nomEntreprise' => array(
-					'type' => 'string'
+					'type' => 'string',
 				),
 				'dateAudit' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'emetteurDUER' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'destinataireDUER' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'dateGeneration' => array(
-					'type'	=> 'string'
+					'type' => 'wpeo_date',
 				),
 				'dateDebutAudit' => array(
-					'type'	=> 'string'
+					'type' => 'wpeo_date',
 				),
 				'dateFinAudit' => array(
-					'type' => 'string'
+					'type' => 'wpeo_date',
 				),
 				'telephone' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'portable' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'methodologie' => array(
-					'type'	=> 'string',
+					'type' => 'string',
 					'bydefault' => '* Étape 1 : Récupération des informations
 - Visite des locaux
 - Récupération des données du personnel
@@ -79,57 +97,57 @@ Dans ce document vous trouverez:
 - Les explications concernant les différentes méthodes d\'évaluation'
 				),
 				'remarqueImportante' => array(
-					'type'	=> 'string',
-					'bydefault' => 'Notes importantes'
+					'type' => 'string',
+					'bydefault' => 'Notes importantes',
 				),
 				'dispoDesPlans' => array(
-					'type'	=> 'string'
+					'type' => 'string',
 				),
 				'elementParHierarchie' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'risq' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'risq48' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'risq51' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'risq80' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'risqueFiche' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'planDactionRisq' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'planDactionRisq48' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'planDactionRisq51' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'planDactionRisq80' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 				'planDaction' => array(
-					'type'	=> 'array',
-					'meta_type' 	=> 'multiple',
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
-			)
+			),
 		);
 
 		parent::__construct( $object );

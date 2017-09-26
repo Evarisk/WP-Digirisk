@@ -44,7 +44,7 @@ class Address_class extends \eoxia\Comment_class {
 	 *
 	 * @var string
 	 */
-	protected $base					= 'digirisk/address';
+	protected $base					= 'address';
 
 	/**
 	 * La version pour l'url de la Rest API
@@ -52,15 +52,6 @@ class Address_class extends \eoxia\Comment_class {
 	 * @var string
 	 */
 	protected $version = '0.1';
-
-	/**
-	 * Utilies le filtre pour ajouter la route dans la Rest API
-	 *
-	 * @return void nothing
-	 */
-	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
-	}
 
 	/**
 	 * Sauvegardes une adresse en utilisant le modèle

@@ -19,6 +19,8 @@ class evaluation_method_class extends \eoxia\term_class {
 	public $element_prefix 	= 'ME';
 	protected $after_get_function = array( '\digi\get_identifier' );
 
+	protected $base = 'evaluation_method';
+
 	public $list_scale = array(
 		1 => 0,
 		2 => 48,
@@ -30,7 +32,7 @@ class evaluation_method_class extends \eoxia\term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 	/**

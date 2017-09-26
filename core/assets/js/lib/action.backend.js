@@ -1,26 +1,55 @@
+/**
+ * Action for make request AJAX.
+ *
+ * @since 1.0.0-easy
+ * @version 1.0.0-easy
+ * @todo Replace the three actions to one.
+ */
+
 if ( ! window.eoxiaJS.action ) {
+	/**
+	 * Declare the object action.
+	 *
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @type {Object}
+	 */
 	window.eoxiaJS.action = {};
 
+	/**
+	 * This method call the event method
+	 *
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @return {void}
+	 */
 	window.eoxiaJS.action.init = function() {
 		window.eoxiaJS.action.event();
 	};
 
+	/**
+	 * This method initialize the click event on three classes.
+	 *
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @return {void}
+	 */
 	window.eoxiaJS.action.event = function() {
 		jQuery( document ).on( 'click', '.action-input:not(.no-action)', window.eoxiaJS.action.execInput );
 		jQuery( document ).on( 'click', '.action-attribute:not(.no-action)', window.eoxiaJS.action.execAttribute );
 		jQuery( document ).on( 'click', '.action-delete:not(.no-action)', window.eoxiaJS.action.execDelete );
 	};
 
+	/**
+	 * Make a request with input value founded inside the parent of the HTML element clicked.
+	 *
+	 * @param  {MouseEvent} event Properties of element triggered by the MouseEvent.
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @return {void}
+	 */
 	window.eoxiaJS.action.execInput = function( event ) {
-		var element = jQuery( this );
-		var parentElement = element;
-		var loaderElement = element;
-		var listInput = undefined;
-		var data = {};
-		var i = 0;
-		var doAction = true;
-		var key = undefined;
-
+		var element = jQuery( this ), parentElement = element, loaderElement = element, listInput = undefined, data = {}, i = 0, doAction = true, key = undefined, inputAlreadyIn = [];
 		event.preventDefault();
 
 		if ( element.attr( 'data-loader' ) ) {
@@ -43,10 +72,10 @@ if ( ! window.eoxiaJS.action ) {
 
 		if ( doAction ) {
 			loaderElement.addClass( 'loading' );
-
 			listInput = window.eoxiaJS.arrayForm.getInput( parentElement );
 			for ( i = 0; i < listInput.length; i++ ) {
-				if ( listInput[i].name ) {
+				if ( listInput[i].name && -1 === inputAlreadyIn.indexOf( listInput[i].name ) ) {
+					inputAlreadyIn.push( listInput[i].name );
 					data[listInput[i].name] = listInput[i].value;
 				}
 			}
@@ -61,6 +90,14 @@ if ( ! window.eoxiaJS.action ) {
 		}
 	};
 
+	/**
+	 * Make a request with data on HTML element clicked.
+	 *
+	 * @param  {MouseEvent} event Properties of element triggered by the MouseEvent.
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @return {void}
+	 */
 	window.eoxiaJS.action.execAttribute = function( event ) {
 	  var element = jQuery( this );
 		var doAction = true;
@@ -68,8 +105,8 @@ if ( ! window.eoxiaJS.action ) {
 
 		event.preventDefault();
 
-		if ( element.data( 'loader' ) ) {
-			loaderElement = element.closest( '.' + element.attr( 'data-loader' ) );
+		if ( element.attr( 'loader' ) ) {
+			loaderElement = element.closest( '.' + element.attr( 'loader' ) );
 		}
 
 		/** Méthode appelée avant l'action */
@@ -101,8 +138,16 @@ if ( ! window.eoxiaJS.action ) {
 		event.stopPropagation();
 	};
 
+	/**
+	 * Make a request with data on HTML element clicked with a custom delete message.
+	 *
+	 * @param  {MouseEvent} event Properties of element triggered by the MouseEvent.
+	 * @since 1.0.0-easy
+	 * @version 1.0.0-easy
+	 * @return {void}
+	 */
 	window.eoxiaJS.action.execDelete = function( event ) {
-	  var element = jQuery( this );
+		var element = jQuery( this );
 		var doAction = true;
 		var loaderElement = element;
 
@@ -123,7 +168,7 @@ if ( ! window.eoxiaJS.action ) {
 		}
 
 		if ( doAction ) {
-			if ( window.confirm( window.digi_confirm_delete ) ) {
+			if ( window.confirm( element.attr( 'data-message-delete' ) ) ) {
 				element.get_data( function( data ) {
 					loaderElement.addClass( 'loading' );
 					window.eoxiaJS.request.send( element, data );

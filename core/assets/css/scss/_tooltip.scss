@@ -1,0 +1,62 @@
+/**
+ * Tooltip
+ * .hover -> affiche la tooltip au hover
+ * .active -> affiche la tooltip
+ * .red -> la tooltip sera sur fond rouge
+ */
+.digirisk-wrap {
+
+	.tooltip {
+		position: relative;
+		&:before, &:after {
+			opacity: 0;
+			pointer-events: none;
+			transform: translate(-50%, -6px);
+			transition: all 0.2s ease-out;
+		}
+		// Cadre
+		&:after {
+			content: attr(aria-label);
+			position: absolute;
+			left: 50%;
+			z-index: 999;
+			white-space: nowrap;
+			padding: 5px 14px;
+			background: $secondary;
+			color: #fff;
+			border-radius: 6px;
+			font-size: 0.8rem;
+			top: -3em;
+			line-height: 1.5;
+		}
+		// Fleche
+		&:before {
+			display: block;
+			content: '';
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 6px 6px 0 6px;
+			border-color: $secondary transparent transparent transparent;
+			position: absolute;
+			top: -0.8em;
+			left: 50%;
+		}
+		// Fond rouge
+		&.red:after {
+			background: $red;
+		}
+		&.red:before {
+			border-color: $red transparent transparent transparent;
+		}
+		&:focus {
+			outline: none;
+		}
+		&.hover:hover:after, &.hover:hover:before, &.active:after, &.active:before {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translate(-50%, 0);
+		}
+	}
+
+}

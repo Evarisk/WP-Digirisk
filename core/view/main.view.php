@@ -7,15 +7,25 @@
  *
  * @package Evarisk\Plugin
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="digirisk-wrap" style="clear: both;">
 	<?php do_shortcode( '[digi_navigation id="' . $id . '"]' ); ?>
 	<?php do_shortcode( '[digi_content id="' . $id . '"]' ); ?>
+
+	<?php
+	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
+
+	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
+		require( PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php' );
+	endif;
+	?>
 </div>

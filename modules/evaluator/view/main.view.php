@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<section class="grid-layout w2">
+<section class="grid-layout padding w2">
 	<!-- Le bloc des utilisateurs affectés -->
 	<div>
 		<?php do_shortcode( '[digi-search id="' . $element->id . '" icon="dashicons dashicons-search" next-action="display_evaluator_affected" type="user" target="affected-evaluator"]' ); ?>

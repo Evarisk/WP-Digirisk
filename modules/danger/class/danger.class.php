@@ -45,7 +45,7 @@ class Danger_Class extends \eoxia\Term_Class {
 	 *
 	 * @var string
 	 */
-	protected $base = 'digirisk/danger';
+	protected $base = 'danger';
 
 	/**
 	 * La version de l'objet
@@ -82,7 +82,7 @@ class Danger_Class extends \eoxia\Term_Class {
 	 * @version 6.2.5.0
 	 */
 	protected function construct() {
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
+		parent::construct();
 	}
 
 	/**

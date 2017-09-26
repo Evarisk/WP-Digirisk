@@ -1,11 +1,12 @@
 <?php
 /**
- * Ajoutes la page pour trier les sociétées
+ * Les actions relatives à la page 'Organiseur'
  *
- * @package Evarisk\Plugin
- *
- * @since 1.0.0.0
- * @version 6.2.5.0
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.3.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -15,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Ajoutes la page pour trier les sociétées
+ * Les actions relatives à la page 'Organiseur'
  */
 class Page_Sorter_Action {
 
@@ -24,8 +25,8 @@ class Page_Sorter_Action {
 	 * -admin_menu
 	 * -admin_post_sorter_parent
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.2.5
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 15 );
@@ -33,10 +34,10 @@ class Page_Sorter_Action {
 	}
 
 	/**
-	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
+	 * Définition du menu dans l'administration de WordPress pour Digirisk
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.2.5
 	 */
 	public function callback_admin_menu() {
 		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Organiseur', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_digirisk', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ) );
@@ -47,11 +48,15 @@ class Page_Sorter_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.2.5
 	 */
 	public function callback_sorter_parent() {
 		check_admin_referer( 'callback_sorter_parent' );
+
+		$main_society = Society_Class::g()->get( array(
+			'posts_per_page' => 1,
+		), true );
 
 		$array_order = array();
 
@@ -60,8 +65,12 @@ class Page_Sorter_Action {
 				$element_id = (int) $element_id;
 				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
-				$society = society_class::g()->show_by_type( $element_id );
+				$society = Society_Class::g()->show_by_type( $element_id );
 				$society->parent_id = $parent_id;
+
+				if ( empty( $society->parent_id ) ) {
+					$society->parent_id = $main_society->id;
+				}
 
 				// Met le menu order.
 				if ( empty( $array_order[ $parent_id ] ) ) {
@@ -71,7 +80,7 @@ class Page_Sorter_Action {
 				$society->order = $array_order[ $parent_id ];
 				$array_order[ $parent_id ]++;
 
-				society_class::g()->update_by_type( $society );
+				Society_Class::g()->update_by_type( $society );
 			}
 		}
 

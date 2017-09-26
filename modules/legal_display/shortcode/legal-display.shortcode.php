@@ -3,16 +3,17 @@
  * Les actions relatives aux affichages légaux.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage shortcode
+ * @package Digirisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux affichages légaux.
@@ -22,8 +23,8 @@ class Legal_Display_Shortcode {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-legal_display', array( $this, 'callback_digi_legal_display' ) );
@@ -34,12 +35,14 @@ class Legal_Display_Shortcode {
 	 *
 	 * @param array $param Les paramètres dans le shortcode.
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_digi_legal_display( $param ) {
 		$element_id = $param['post_id'];
-		$element = Society_Class::g()->show_by_type( $element_id );
+		$element = Society_Class::g()->get( array(
+			'id' => $element_id,
+		), true );
 
 		Legal_Display_Class::g()->display( $element );
 	}

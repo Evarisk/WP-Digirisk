@@ -3,16 +3,17 @@
  * Les actions relatives aux utilisateurs dans la page "utilisateur" de WordPress.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package user_dashboard
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux utilisateurs dans la page "utilisateur" de WordPress.
@@ -62,13 +63,12 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.3.0
 	 */
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		$error = false;
 		$update_state = User_Digi_Class::g()->update( $_POST );
 
 		$error = is_wp_error( $update_state->id );

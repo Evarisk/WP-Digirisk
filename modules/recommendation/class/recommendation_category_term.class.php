@@ -33,7 +33,7 @@ class Recommendation_Category_Term_Class extends \eoxia\term_class {
 	protected $meta_key    	= '_wpdigi_recommendationcategory';
 
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
-	protected $base = 'digirisk/recommendation-category';
+	protected $base = 'recommendation-category';
 	protected $version = '0.1';
 	protected $before_post_function = array( '\digi\construct_identifier' );
 	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_recommendation_category' );
@@ -43,9 +43,9 @@ class Recommendation_Category_Term_Class extends \eoxia\term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
+		parent::construct();
 		/**	Define taxonomy for recommendation categories	*/
 		add_action( 'init', array( $this, 'recommendation_category_type' ), 0 );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

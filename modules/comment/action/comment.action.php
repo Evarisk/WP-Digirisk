@@ -3,17 +3,18 @@
  * Gestion des actions dans les commentaires
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des actions dans les commentaires
@@ -81,7 +82,7 @@ class Comment_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$comment = Comment_Class::g()->get( array(
+		$comment = \eoxia\Comment_Class::g()->get( array(
 			'id' => $id,
 		) );
 		$comment = $comment[0];
@@ -92,7 +93,7 @@ class Comment_Action {
 
 		$comment->status = '-34071';
 
-		Comment_Class::g()->update( $comment );
+		\eoxia\Comment_Class::g()->update( $comment );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',

@@ -5,22 +5,8 @@ window.eoxiaJS.digirisk.society.init = function() {
 };
 
 window.eoxiaJS.digirisk.society.event = function() {
-	jQuery( document ).on( 'keyup', 'input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
-};
-
-/**
- * Callback en cas de réussite de la requête Ajax "load_society"
- * Remplaces le template principale de l'application avec le template reçu dans la réponse de la requête Ajax.
- *
- * @param  {HTMLSpanElement} triggeredElement   L'élement HTML déclenchant la requête Ajax.
- * @param  {Object}        response             Les données renvoyées par la requête Ajax.
- * @return {void}
- *
- * @since 0.1
- * @version 6.2.4.0
- */
-window.eoxiaJS.digirisk.society.loadedSocietySuccess = function( element, response ) {
-	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
+	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
+	jQuery( document ).on( 'keyup', '.digirisk-wrap .form.society-informations .form-element input, .digirisk-wrap .form.society-informations .form-element textarea', window.eoxiaJS.digirisk.society.enableSaveButton );
 };
 
 /**
@@ -39,6 +25,19 @@ window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).click();
 	}
+};
+
+/**
+ * Lorsque qu'on lache une touche dans les champs de texte de 'form society-informations', on rend le bouton 'enabled'
+ *
+ * @param  {KeyboardEvent} event L'état du clavier lors du "keyup"
+ * @return {void}
+ *
+ * @since 6.3.0
+ * @version 6.3.0
+ */
+window.eoxiaJS.digirisk.society.enableSaveButton = function( event ) {
+	jQuery( '.digirisk-wrap .form.society-informations button.green' ).removeClass( 'disable' );
 };
 
 /**
@@ -79,8 +78,8 @@ window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredEleme
  * @param  {Object}        response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.0
  */
 window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
@@ -90,6 +89,5 @@ window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredE
 		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).attr( 'title', response.data.society.title );
 	}
 
-	jQuery( '.digirisk-wrap .main-content h1' ).text( 'Configuration de ' + response.data.society.unique_identifier + ' - ' + response.data.society.title );
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
 };

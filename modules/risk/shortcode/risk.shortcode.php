@@ -3,8 +3,8 @@
  * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'une société.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.3.0
+ * @since 1.0.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage shortcode
@@ -48,8 +48,8 @@ class Risk_Shortcode {
 	 * @param  array $param  Les arguments du shortcode.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @since 1.0.0
+	 * @version 6.3.0
 	 */
 	public function callback_dropdown_risk( $param ) {
 		$society_id = ! empty( $param['society_id'] ) ? (int) $param['society_id'] : 0;
@@ -58,7 +58,23 @@ class Risk_Shortcode {
 
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		require( RISK_VIEW_DIR . 'dropdown/list.view.php' );
+		$risks = Risk_Class::g()->get( array(
+			'post_parent' => $society_id,
+		) );
+
+		if ( count( $risks ) > 1 ) {
+			usort( $risks, function( $a, $b ) {
+				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
+					return 0;
+				}
+				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
+			} );
+		}
+
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/list', array(
+			'risks' => $risks,
+			'risk_id' => $risk_id,
+		) );
 	}
 }
 

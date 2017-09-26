@@ -3,16 +3,17 @@
  * Les actions relatives aux diffusions d'informations
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux diffusions d'informations
@@ -32,8 +33,8 @@ class Diffusion_Informations_Action {
 	/**
 	 * L'action appelant la fonction pour générer la diffusion d'informations.
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.3.0
 	 */
 	public function callback_generate_diffusion_information() {
 		check_ajax_referer( 'generate_diffusion_information' );

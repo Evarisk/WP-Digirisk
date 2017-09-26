@@ -34,7 +34,7 @@ class Update_6291 {
 
 		$saved_slug = array();
 		$dangers_slug = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/danger-6291.json' );
-		$number_risk = 0;
+		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
 
 		if ( ! empty( $dangers_slug ) ) {
 			foreach ( $dangers_slug as $danger_slug ) {
@@ -69,6 +69,7 @@ class Update_6291 {
 		wp_send_json_success( array(
 			'done' => true,
 			'args' => array(
+				'more' => true,
 				'numberRisk' => $number_risk,
 				'moreDescription' => ' (0/' . $number_risk . ')',
 			),
@@ -136,6 +137,7 @@ class Update_6291 {
 		wp_send_json_success( array(
 			'done' => $done,
 			'args' => array(
+				'more' => true,
 				'numberRisk' => $number_risk,
 				'countRisk' => $count_risk,
 				'moreDescription' => $done ? '' : ' (' . $count_risk . '/' . $number_risk . ')',
@@ -172,6 +174,9 @@ class Update_6291 {
 		}
 
 		wp_send_json_success( array(
+			'args' => array(
+				'more' => false,
+			),
 			'done' => $done,
 		) );
 	}

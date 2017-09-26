@@ -3,28 +3,30 @@
  * Ajoutes le champs pour déplacer une societé vers une autre.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.5.0
- * @version 6.2.5.0
+ * @since 6.2.5
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="form">
 	<input type="hidden" name="action" value="advanced_options_move_to" />
 	<input type="hidden" name="id" value="<?php echo esc_attr( $selected_society->id ); ?>" />
 	<?php wp_nonce_field( 'advanced_options_move_to' ); ?>
 
-	<ul class="grid-layout w2">
+	<ul class="grid-layout padding w2">
 		<li class="form-element">
 			<select name="parent_id">
 				<?php if ( ! empty( $groupments ) ) : ?>
 					<?php foreach ( $groupments as $groupment ) : ?>
-						<?php $selected = '';
+						<?php
+						$selected = '';
 						if ( $groupment->id === $selected_society->id ) :
 							$selected = "selected='true'";
 						endif;

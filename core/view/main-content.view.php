@@ -13,5 +13,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="main-container">
-	<?php do_shortcode( '[digi_dashboard id="' . $society_id . '"]' ); ?>
+	<?php do_shortcode( '[digi_dashboard id="' . $establishment_id . '"]' ); ?>
 </div>

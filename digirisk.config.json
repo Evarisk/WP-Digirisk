@@ -1,12 +1,13 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "6.2.10.0",
+	"version": "6.3.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
 		"digirisk-users",
+		"digirisk-accident",
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
@@ -18,6 +19,7 @@
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
 		"digirisk-epi",
+		"digirisk-accident",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -28,7 +30,8 @@
 	"externals": [
 		"core/external/wpeo_log/wpeo_log.config.json",
 		"core/external/wpeo_model/wpeo_model.config.json",
-		"core/external/wpeo_export/wpeo_export.config.json"
+		"core/external/wpeo_export/wpeo_export.config.json",
+		"core/external/wpeo_upload/wpeo_upload.config.json"
 	],
 	"modules": [
 		"core/core.config.json",
@@ -37,7 +40,6 @@
 		"modules/historic/historic.config.json",
 
 		"modules/address/address.config.json",
-		"modules/accident/accident.config.json",
 		"modules/society/society.config.json",
 
 		"modules/comment/comment.config.json",
@@ -51,12 +53,12 @@
 
 		"modules/duer/duer.config.json",
 
+		"modules/accident/accident.config.json",
+
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
 		"modules/export_import/export_import.config.json",
 		"modules/page_sorter/page_sorter.config.json",
-
-		"modules/file_management/file_management.config.json",
 
 		"modules/handle_model/handle_model.config.json",
 
@@ -86,8 +88,8 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"default_tab": "digi-risk",
-	"default_tab_title": "Les risques de",
+	"default_tab": "digi-informations",
+	"default_tab_title": "Informations",
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false
 }

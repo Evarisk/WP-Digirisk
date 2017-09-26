@@ -1,0 +1,104 @@
+/**
+ * .toggle -> classe de base
+ * .list -> Affiche en liste simple
+ * .grid -> Affiche en grille sans marge
+ * 		.padding -> Ajoute des marges aux enfants
+ * .option -> Affiche une liste d'options
+ */
+.digirisk-wrap {
+
+	.toggle {
+		position: relative;
+		// Classe à utiliser en less
+		.arrow {
+			display: block;
+			content: '';
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 6px 6px 6px;
+			position: absolute;
+			top: -6px;
+			left: 20px;
+		}
+		.content {
+			opacity: 0;
+			pointer-events: none;
+			transform: translateY(-6px);
+			transition: all 0.2s ease-out;
+			position: absolute;
+			z-index: 99;
+			background: #fff;
+			&.active {
+					opacity: 1;
+					pointer-events: auto;
+					transform: translateY(0);
+			}
+		}
+		&.grid {
+			.action {
+				// display: inline-block;
+			}
+			.content {
+				box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+				display: flex;
+				flex: 0 1 auto;
+				flex-wrap: wrap;
+				.item {
+					float: left;
+				}
+				&:before {
+					@extend .arrow;
+					border-color: transparent transparent #fff transparent;
+				}
+			}
+			&.padding {
+				.content {
+					.item {
+						padding: 4px;
+					}
+				}
+			}
+		}
+		&.option {
+			.content {
+				background: #fff;
+				box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+				line-height: 1.2;
+				left: -10px;
+				.item {
+					padding: 10px;
+					border-bottom: 1px solid rgba(0,0,0,0.1);
+					transition: all 0.2s ease-out;
+					&:last-child {
+						border-bottom: 0;
+					}
+					&:hover {
+						cursor: pointer;
+						background: rgba(0,0,0,0.05);
+					}
+				}
+				&:before {
+					@extend .arrow;
+					border-color: transparent transparent #fff transparent;
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 960px) {
+		.toggle {
+			&.option {
+				.content {
+					left: auto;
+					right: -10px;
+					&:before {
+						left: auto;
+						right: 20px;
+					}
+				}
+			}
+		}
+	}
+
+}

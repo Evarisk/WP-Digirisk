@@ -37,17 +37,14 @@ class Corrective_Task_Filter {
 	 * @return string                La chaine de caractère mise au bon format pour le ODT.
 	 *
 	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @version 6.2.10.1
 	 */
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
 		$data_risk['actionPreventionCompleted'] = '';
 		$data_risk['actionPreventionUncompleted'] = '';
 
-		if ( class_exists( 'task_controller_01' ) ) {
-			global $task_controller;
-			global $point_controller;
-
-			$task = $task_controller->index( array(
+		if ( class_exists( '\task_manager\task_class' ) ) {
+			$task = \task_manager\Task_Class::g()->get( array(
 				'post_parent' => $risk->id,
 			) );
 
@@ -57,19 +54,20 @@ class Corrective_Task_Filter {
 				$list_point_completed = array();
 				$list_point_uncompleted = array();
 
-				if ( ! empty( $task->option['task_info']['order_point_id'] ) ) {
-					$list_point = $point_controller->index( $task->id, array(
+				if ( ! empty( $task->task_info['order_point_id'] ) ) {
+					$list_point = \task_manager\Point_Class::g()->get( array(
+						'post_id' => $task->id,
 						'orderby' => 'comment__in',
-						'comment__in' => $task->option['task_info']['order_point_id'],
+						'comment__in' => $task->task_info['order_point_id'],
 						'status' => -34070,
 					) );
 
 					$list_point_completed = array_filter( $list_point, function( $point ) {
-						return true === $point->option['point_info']['completed'];
+						return true === $point->point_info['completed'];
 					} );
 
 					$list_point_uncompleted = array_filter( $list_point, function( $point ) {
-						return false === $point->option['point_info']['completed'];
+						return false === $point->point_info['completed'];
 					} );
 				}
 
@@ -77,7 +75,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_completed ) ) {
 					foreach ( $list_point_completed as $element ) {
-						$string .= Helper_Util::g()->point_to_string( $element );
+						$string .= point_to_string( $element );
 					}
 				}
 
@@ -86,7 +84,7 @@ class Corrective_Task_Filter {
 
 				if ( ! empty( $list_point_uncompleted ) ) {
 					foreach ( $list_point_uncompleted as $element ) {
-						$string .= Helper_Util::g()->point_to_string( $element );
+						$string .= point_to_string( $element );
 					}
 				}
 

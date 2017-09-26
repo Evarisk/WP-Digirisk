@@ -32,13 +32,15 @@ class evaluation_method_variable_class extends \eoxia\Term_Class {
 	 */
 	protected $meta_key    	= '_wpdigi_methodvariable';
 
+	protected $base = 'evaluation_method_variable';
+
 	/**
 	* Le constructeur
 	*/
 	protected function construct() {
+		parent::construct();
 		/**	Define taxonomy for evaluation method's vars	*/
 		add_action( 'init', array( $this, 'evaluation_method_vars_type' ), 1 );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

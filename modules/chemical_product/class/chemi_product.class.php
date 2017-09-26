@@ -7,7 +7,7 @@ class chemi_product_class extends \eoxia\post_class {
 	protected $meta_key    	= '_wpdigi_chemical_product';
 
 	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to chemical_product from WP Rest API	*/
-	protected $base = 'digirisk/chemical_product';
+	protected $base = 'chemical_product';
 	protected $version = '0.1';
 
 	protected $before_post_function = array( '\digi\construct_identifier' );

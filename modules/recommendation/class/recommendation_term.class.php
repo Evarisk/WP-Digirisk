@@ -21,7 +21,7 @@ class recommendation_term_class extends \eoxia\term_class {
 	protected $meta_key    	= '_wpdigi_recommendation';
 
 	/**	Défini la route par défaut permettant d'accèder à l'élément depuis WP Rest API  / Define the default route for accessing to element from WP Rest API	*/
-	protected $base = 'digirisk/recommendation-term';
+	protected $base = 'recommendation-term';
 	protected $version = '0.1';
 	public $element_prefix = 'RE';
 
@@ -33,9 +33,9 @@ class recommendation_term_class extends \eoxia\term_class {
 	* Le constructeur
 	*/
 	protected function construct() {
+		parent::construct();
 		/**	Define taxonomy for recommendation	*/
 		add_action( 'init', array( $this, 'recommendation_type' ), 0 );
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 
 	/**

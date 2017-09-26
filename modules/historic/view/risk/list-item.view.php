@@ -3,23 +3,24 @@
  * Affichage d'une cotation (Historique)
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="risk-row">
 	<td data-title="Ref." class="padding">
 		<span><strong><?php echo esc_html( $evaluation->unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date" class="w50 padding">
-		<?php echo esc_html( $evaluation->date ); ?>
+		<?php echo esc_html( $evaluation->date['date_input']['fr_FR']['date_time'] ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<div class="cotation-container grid">
@@ -39,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 							<li class="comment">
 								<span class="user"><?php echo ! empty( $userdata->display_name ) ? esc_html( $userdata->display_name ) : 'Indéfini'; ?>, </span>
-								<span class="date"><?php echo esc_html( $comment->date ); ?> : </span>
+								<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['date'] ); ?> : </span>
 								<span class="content"><?php echo esc_html( $comment->content ); ?></span>
 							</li>
 						<?php

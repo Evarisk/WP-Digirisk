@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1.0
- * @version 6.2.4.0
+ * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage view
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[eo_upload_button id="' . $risk->id . '" type="risk"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>

@@ -40,6 +40,9 @@ class Update_6281 {
 
 		wp_send_json_success( array(
 			'done' => $done,
+			'args' => array(
+				'more' => true,
+			),
 		) );
 	}
 
@@ -53,6 +56,9 @@ class Update_6281 {
 
 		wp_send_json_success( array(
 			'done' => $done,
+			'args' => array(
+				'more' => false,
+			),
 		) );
 	}
 

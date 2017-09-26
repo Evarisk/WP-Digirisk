@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.7.0
+ * @since 1.0.0
+ * @version 6.3.0
  */
 
 window.eoxiaJS.digirisk.installer = {};
@@ -13,9 +13,9 @@ window.eoxiaJS.digirisk.installer.init = function() {
 };
 
 window.eoxiaJS.digirisk.installer.event = function() {
-	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="groupment[title]"]', window.eoxiaJS.digirisk.installer.key_up_groupment_title );
-	jQuery( document ).on( 'click', '.wpdigi-installer input[name="groupment[title]"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
-	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="groupment[title]"]', window.eoxiaJS.digirisk.installer.fillPlaceHolder );
+	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.key_up_groupment_title );
+	jQuery( document ).on( 'click', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
+	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.fillPlaceHolder );
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.eoxiaJS.digirisk.installer.key_up_domain_mail );
 	jQuery( '.owl-carousel' ).owlCarousel( {
 		'items': 1,
@@ -30,7 +30,7 @@ window.eoxiaJS.digirisk.installer.event = function() {
 
 window.eoxiaJS.digirisk.installer.key_up_groupment_title = function( event ) {
 	if ( 13 === event.keyCode ) {
-		jQuery( '.main-content.society .action-input' ).click();
+		jQuery( '.main-content .action-input:first' ).click();
 	}
 
 	if ( jQuery( this ).val() != '' ) {
@@ -72,7 +72,7 @@ window.eoxiaJS.digirisk.installer.key_up_domain_mail = function( event ) {
  * @version 6.2.5.0
  */
 window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
-	if ( '' === element.closest( 'form' ).find( 'input[name="groupment[title]"]' ).val() ) {
+	if ( '' === element.closest( 'form' ).find( 'input[name="society[title]"]' ).val() ) {
 		element.closest( 'form' ).find( 'span.tooltip' ).addClass( 'active' );
 		return false;
 	}
@@ -92,15 +92,15 @@ window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 1.0.0
+ * @version 6.3.0
  */
 window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components' ).show();
 	jQuery( '.wpdigi-installer .button.blue' ).hide();
 	jQuery( '.wpdigi-installer .button.green' ).show();
-	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '25%' );
+	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '30%' );
 	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
 	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
 	window.eoxiaJS.digirisk.installer.requestInstallComponent();
@@ -124,10 +124,11 @@ window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.7.0
+ * @since 1.0.0
+ * @version 6.3.0
  */
 window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response ) {
+
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {
 		if ( ! response.data.core_option.recommendation_installed && response.data.core_option.danger_installed ) {
@@ -144,8 +145,6 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 		}
 	}
-
-	// jQuery( '.wpdigi-components progress' ).attr( 'value', progressValue );
 };
 
 window.eoxiaJS.digirisk.installer.progressBar = function( pourcent ) {

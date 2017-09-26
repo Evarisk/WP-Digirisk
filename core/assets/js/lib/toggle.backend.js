@@ -23,6 +23,7 @@ if ( ! window.eoxiaJS.toggle ) {
 		}
 
 		jQuery( '.toggle .content.active' ).removeClass( 'active' );
+		jQuery( '.toggle' ).closest( '.mask' ).removeClass( 'mask' );
 
 		if ( elementToggle.attr( 'data-parent' ) ) {
 			target = elementToggle.closest( '.' + elementToggle.attr( 'data-parent' ) ).find( '.' + elementToggle.attr( 'data-target' ) );
@@ -31,8 +32,15 @@ if ( ! window.eoxiaJS.toggle ) {
 		}
 
 		if ( target ) {
-		  target.toggleClass( 'active' );
-		  event.stopPropagation();
+			target.toggleClass( 'active' );
+
+			if ( jQuery( event.currentTarget ).hasClass( 'toggle' ) ) {
+				event.stopPropagation();
+			}
+		}
+
+		if ( elementToggle.attr( 'data-mask' ) ) {
+			target.closest( '.' + elementToggle.attr( 'data-mask' ) ).addClass( 'mask' );
 		}
 
 		if ( elementToggle.attr( 'data-action' ) ) {
@@ -57,6 +65,8 @@ if ( ! window.eoxiaJS.toggle ) {
 
 	window.eoxiaJS.toggle.close = function( event ) {
 		jQuery( '.toggle .content' ).removeClass( 'active' );
+		jQuery( '.toggle' ).closest( '.mask' ).removeClass( 'mask' );
+
 		event.stopPropagation();
 	};
 }

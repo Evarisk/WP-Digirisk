@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	 *
 	 * @var string
 	 */
-	protected $base = 'digirisk/risk';
+	protected $base = 'risk';
 
 	/**
 	 * La version de l'objet

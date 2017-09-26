@@ -46,7 +46,7 @@ class Diffusion_Informations_A4_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 								= 'digirisk/diffusion_informations_a4';
+	protected $base 								= 'diffusion_informations_a4';
 
 	/**
 	 * La version de l'objet
@@ -90,7 +90,6 @@ class Diffusion_Informations_A4_Class extends \eoxia\Post_Class {
 	 */
 	protected function construct() {
 		parent::construct();
-		add_filter( 'json_endpoints', array( $this, 'callback_register_route' ) );
 	}
 }
 
