@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php else : ?>
 			<div class="spacer"><span class="icon"></span></div>
 		<?php endif; ?>
-		<?php do_shortcode( '[wpeo_upload id="' . $establishment->id . '" model_name="/digi/' . $establishment->get_class() . '" field_name="thumbnail_id" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $establishment->id . '" model_name="/digi/' . $establishment->get_class() . '" field_name="image" ]' ); ?>
 		<div class="title action-attribute"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 				data-action="load_society"
