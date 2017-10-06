@@ -41,6 +41,11 @@ class Risk_Model extends \eoxia\Post_Model {
 				'meta_type'		=> 'single',
 				'field'				=> '_wpdigi_unique_identifier',
 			),
+			'current_equivalence' => array(
+				'type' => 'integer',
+				'meta_type' => 'single',
+				'field' => '_wpdigi_equivalence',
+			),
 			'current_evaluation_id' => array(
 				'type'			=> 'integer',
 				'meta_type' => 'multiple',

@@ -20,6 +20,11 @@ function construct_evaluation( $data ) {
 		}
 	}
 
+	// @todo: Doublon des données (Doit être supprimer dans les modèles d'évaluation méthode).
+	if ( ! empty(  $data['risk_level'] ) && ! empty(  $data['risk_level']['equivalence'] ) ) {
+		$data['equivalence'] = $data['risk_level']['equivalence'];
+	}
+
 	return $data;
 }
 
