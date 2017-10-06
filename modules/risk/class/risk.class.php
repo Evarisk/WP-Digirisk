@@ -3,11 +3,10 @@
  * Classe gérant les risques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -90,26 +89,14 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	protected $post_type_name = 'Risques';
 
 	/**
-	 * Constructeur
-	 *
-	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Charges la liste des risques même ceux des enfants. Et appelle le template pour les afficher.
 	 * Récupères le schéma d'un risque pour l'entrée d'ajout de risque dans le tableau.
 	 *
 	 * @param  integer $society_id L'ID de la société.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 * @todo Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
@@ -129,7 +116,12 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 			} );
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array( 'society' => $society, 'society_id' => $society_id, 'risks' => $risks, 'risk_schema' => $risk_schema ) );
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
+			'society' => $society,
+			'society_id' => $society_id,
+			'risks' => $risks,
+			'risk_schema' => $risk_schema,
+		) );
 	}
 }
 
