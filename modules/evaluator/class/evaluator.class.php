@@ -3,11 +3,10 @@
  * Classe gérant les évaluateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
- * @package evaluator
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -69,20 +68,13 @@ class Evaluator_Class extends \eoxia\User_Class {
 	public $limit_evaluator = 5;
 
 	/**
-	 * Le constructeur
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Fait le rendu des evaluateurs
 	 *
 	 * @param Group_Model $element L'objet parent.
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 *
-	 * @since 1.0
-	 * @version 6.2.6.0
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 */
 	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
@@ -122,8 +114,8 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @param Group_Model $society La société.
 	 * @return array
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 */
 	public function get_list_affected_evaluator( $society ) {
 		if ( 0 === $society->id || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) ) {
@@ -156,7 +148,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 			}
 		}
 
-		sort( $list_evaluator_affected );
+		krsort( $list_evaluator_affected );
 
 		return $list_evaluator_affected;
 	}
