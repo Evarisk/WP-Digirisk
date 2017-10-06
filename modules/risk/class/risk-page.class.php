@@ -4,11 +4,10 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3
- * @version 6.3.0
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
-
 
 namespace digi;
 
@@ -36,20 +35,20 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
 	 *
-	 * @return void nothing
+	 * @return void
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.4.0
+	 * @since 6.2.3
+	 * @version 6.2.4
 	 */
 	protected function construct() {}
 
 	/**
 	 * Affiches le contenu de la page "Tous les risques"
 	 *
-	 * @return void nothing
+	 * @return void
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.10.0
+	 * @since 6.2.3
+	 * @version 6.3.1
 	 */
 	public function display() {
 		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
@@ -61,12 +60,18 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
 		$args_where = array(
-			'post_status' => 'publish',
+			'post_status' => array( 'publish' ),
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
-			'meta_key' => '_wpdigi_preset',
-			'meta_value' => 1,
-			'meta_compare' => '!=',
+			'meta_key' => '_wpdigi_equivalence',
+			'orderby' => 'meta_value_num',
+			'meta_query' => array(
+				array(
+					'key' => '_wpdigi_preset',
+					'value' => 1,
+					'compare' => '!=',
+				)
+			)
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );
@@ -89,10 +94,10 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 * Charges tous les risques de l'application, ajoutes ses parents dans l'objet, et les tries selon leur cotation.
 	 * Si $_GET['order_key'] et $_GET['order_type'] existent, le trie se fait selon ses critères.
 	 *
-	 * @return void nothing
+	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.0
+	 * @version 6.3.1
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -105,12 +110,18 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		}
 
 		$args_where = array(
-			'post_status' => 'publish',
+			'post_status' => array( 'publish' ),
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
-			'meta_key' => '_wpdigi_preset',
-			'meta_value' => 1,
-			'meta_compare' => '!=',
+			'meta_key' => '_wpdigi_equivalence',
+			'orderby' => 'meta_value_num',
+			'meta_query' => array(
+				array(
+					'key' => '_wpdigi_preset',
+					'value' => 1,
+					'compare' => '!=',
+				)
+			)
 		);
 
 		$risk_list = Risk_Class::g()->get( $args_where );
@@ -133,28 +144,6 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
 						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
 					}
-				}
-			}
-		}
-
-		unset( $element );
-
-		if ( count( $risk_list ) > 1 ) {
-			if ( 'equivalence' === $order_key ) {
-				if ( 'asc' === $order_type ) {
-					usort( $risk_list, function( $a, $b ) {
-						if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
-							return 0;
-						}
-						return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
-					} );
-				} else {
-					usort( $risk_list, function( $a, $b ) {
-						if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
-							return 0;
-						}
-						return ( $a->evaluation->risk_level['equivalence'] < $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
-					} );
 				}
 			}
 		}
