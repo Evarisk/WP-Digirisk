@@ -10,3 +10,6 @@
 [submodule "core/external/wpeo_upload"]
 	path = core/external/wpeo_upload
 	url = https://github.com/Eoxia/wpeo_upload.git
+[submodule "core/external/wpeo_assets"]
+	path = core/external/wpeo_assets
+	url = https://github.com/Eoxia/wpeo_assets.git
