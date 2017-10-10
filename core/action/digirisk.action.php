@@ -57,7 +57,16 @@ class Digirisk_Action {
 	 * @version 6.3.1
 	 */
 	public function callback_before_admin_enqueue_scripts_js() {
-
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'jquery-form' );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'jquery-ui-accordion' );
+		wp_enqueue_script( 'jquery-ui-autocomplete' );
+		wp_enqueue_script( 'jquery-ui-draggable' );
+		wp_enqueue_script( 'jquery-ui-droppable' );
+		wp_enqueue_media();
+		add_thickbox();
 	}
 
 	/**
@@ -69,9 +78,8 @@ class Digirisk_Action {
 	 * @version 6.3.1
 	 */
 	public function callback_admin_enqueue_scripts_js() {
-		wp_enqueue_media();
-		add_thickbox();
-		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'jquery-ui-accordion', 'jquery-ui-autocomplete', 'jquery-ui-draggable', 'jquery-ui-droppable' ), \eoxia\Config_Util::$init['digirisk']->version, false );
+
+		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-treetable', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.treetable.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
