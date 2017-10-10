@@ -78,7 +78,7 @@ class Digirisk_Action {
 	 * @version 6.3.1
 	 */
 	public function callback_admin_enqueue_scripts_js() {
-
+		wp_enqueue_script( 'digi-scripts-lib', PLUGIN_DIGIRISK_URL . 'core/external/wpeo_assets/js/dest/wpeo-assets.js', array( 'jquery', 'jquery-form', 'jquery-ui-datepicker' ), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-treetable', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.treetable.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
@@ -90,7 +90,7 @@ class Digirisk_Action {
 	 *
 	 * @return void nothing
 	 *
-	 * @since 1.0
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function callback_admin_print_scripts_js() {
@@ -102,11 +102,10 @@ class Digirisk_Action {
 	 *
 	 * @return void nothing
 	 *
-	 * @since 1.0
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
-	public function callback_before_admin_enqueue_scripts_css() {
-	}
+	public function callback_before_admin_enqueue_scripts_css() {}
 
 	/**
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
