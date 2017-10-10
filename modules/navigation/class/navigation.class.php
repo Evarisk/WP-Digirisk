@@ -73,7 +73,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 				'post_parent' => $id,
 				'posts_per_page' => -1,
 				'post_type' => array( 'digi-group', 'digi-workunit' ),
-				'post_status' => array( 'publish', 'draft' ),
+				'post_status' => array( 'publish', 'draft', 'inherit' ),
 				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 			) );
 
