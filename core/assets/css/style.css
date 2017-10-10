@@ -3734,6 +3734,10 @@
 .digirisk-wrap .workunit-add .add .icon {
   font-size: 16px; }
 
+.digirisk-wrap .navigation-container .media .default-image {
+  line-height: 50px !important;
+  display: block !important; }
+
 @media (max-width: 480px) {
   .digirisk-wrap .navigation-container {
     opacity: 0;
@@ -3889,6 +3893,12 @@
 
 .digirisk-wrap .navigation-container .unit > .unit-container .media.no-file {
   background: #1a1c23; }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .media.no-file .add {
+  color: rgba(255, 255, 255, 0.4); }
+
+.digirisk-wrap .navigation-container .unit > .unit-container .media.no-file .default-image {
+  color: rgba(255, 255, 255, 0.2); }
 
 .digirisk-wrap .navigation-container .unit > .unit-container .title {
   width: 100%;

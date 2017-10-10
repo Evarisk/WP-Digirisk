@@ -274,6 +274,12 @@
 .digirisk-wrap {
 
 	.navigation-container {
+		.media {
+			.default-image {
+				line-height: 50px !important;
+				display: block !important;
+			}
+		}
 		@media ( max-width: 480px ) {
 			opacity: 0;
 			pointer-events: none;
@@ -431,6 +437,12 @@
 		.media {
 			&.no-file {
 				background: darken( $secondary, 6% );
+				.add {
+					color: rgba(255,255,255,0.4);
+				}
+				.default-image {
+					color: rgba(255,255,255,0.2);
+				}
 			}
 		}
 		.title {
