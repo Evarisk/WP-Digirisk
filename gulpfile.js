@@ -11,8 +11,8 @@ var sass = require('gulp-sass');
 
 var paths = {
 	scss_backend: [ 'core/assets/css/scss/**/*.scss', 'core/assets/css/' ],
-	frontend_js: ['core/assets/js/lib/init.js', 'core/assets/js/lib/*.js', '**/*.frontend.js'],
-  all_js: ['core/assets/js/lib/init.js', '**/*.backend.js'],
+	frontend_js: ['core/assets/js/init.js', 'core/assets/js/lib/*.js', '**/*.frontend.js'],
+  all_js: ['core/assets/js/init.js', '**/*.backend.js'],
 };
 
 gulp.task('build_scss_backend', function() {
