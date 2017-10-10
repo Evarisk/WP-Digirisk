@@ -43,18 +43,14 @@ class Update_631 {
 		$index = ! empty( $_POST['args']['index'] ) ? (int) $_POST['args']['index'] : 0;
 		$count = ! empty( $_POST['args']['count'] ) ? (int) $_POST['args']['count'] : count( get_posts( array(
 			'posts_per_page' => -1,
+			'post_status' => 'any',
 			'post_type' => Risk_Class::g()->get_post_type(),
-			'meta_key' => '_wpdigi_preset',
-			'meta_value' => 1,
-			'meta_compare' => '!=',
 		) ) );
 
 		$risks = Risk_Class::g()->get( array(
 			'posts_per_page' => $this->limit_update_risk,
+			'post_status' => 'any',
 			'offset' => $index,
-			'meta_key' => '_wpdigi_preset',
-			'meta_value' => 1,
-			'meta_compare' => '!=',
 		) );
 
 		if ( ! empty( $risks ) ) {
