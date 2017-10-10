@@ -1,0 +1,12 @@
+.navigation-container, .unit-header {
+	.media {
+		&.no-file {
+			.add {
+				color: rgba(255,255,255,0.4);
+			}
+			.default-image {
+				color: rgba(255,255,255,0.2);
+			}
+		}
+	}
+}
