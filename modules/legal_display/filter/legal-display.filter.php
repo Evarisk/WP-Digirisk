@@ -41,7 +41,7 @@ class Legal_Display_Filter {
 		$list_tab['digi-society']['legal_display'] = array(
 			'type' => 'text',
 			'text' => __( 'Affichage légal', 'digirisk' ),
-			'title' => __( 'Les affichages légal', 'digirisk' ),
+			'title' => __( 'Les affichages légales', 'digirisk' ),
 		);
 		return $list_tab;
 	}
