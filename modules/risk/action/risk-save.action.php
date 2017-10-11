@@ -3,16 +3,17 @@
  * Les actions relatives à la sauvegarde des risques.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.10.0
+ * @since 6.0.0
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives à la sauvegarde des risques
@@ -35,8 +36,8 @@ class Risk_Save_Action {
 	 *
 	 * @param Risk_Model $risk Les données du risque.
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.0
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 */
 	public function callback_save_risk( $risk ) {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
@@ -70,6 +71,9 @@ class Risk_Save_Action {
 			if ( ! $risk_evaluation ) {
 				wp_send_json_error();
 			}
+
+			$risk_obj->current_equivalence = $risk_evaluation->equivalence;
+			Risk_Class::g()->update( $risk_obj );
 
 			if ( empty( $image_id ) && ! empty( $_POST['associated_document_id']['image'][0] ) ) {
 				$image_id = (int) $_POST['associated_document_id']['image'][0];
