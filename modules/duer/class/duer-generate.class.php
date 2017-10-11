@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9
- * @version 6.3.0
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -195,15 +195,15 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array Les données qui seront insérées dans le document
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
 		$data_to_document = array_merge( $data_to_document, $data );
 		$data_to_document['identifiantElement'] = $element->unique_identifier;
 		$data_to_document['dateAudit'] = $this->formatte_audit_date( $data );
 		$data_to_document['dateGeneration'] = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
-		$data_to_document['elementParHierarchie']['value'] = group_class::g()->get_element_sub_tree( $element );
+		$data_to_document['elementParHierarchie']['value'] = Group_Class::g()->get_element_sub_tree( $element );
 
 		return $data_to_document;
 	}
