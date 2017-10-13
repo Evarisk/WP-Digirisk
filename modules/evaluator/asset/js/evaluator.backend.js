@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "evaluator" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.1
  */
 
 window.eoxiaJS.digirisk.evaluator = {};
@@ -17,16 +17,30 @@ window.eoxiaJS.digirisk.evaluator.event = function() {
 };
 
 /**
+* Après le changement d'onglet
+*
+* @since 6.3.1
+* @version 6.3.1
+*/
+window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
+	window.eoxiaJS.digirisk.search.renderChanged();
+};
+
+/**
  * Lorsque que l'utilisateur coche la checkbox "affecter", la valeur dans le champ de texte du header du tableau est remplis dans le champs à gauche de la checkbox.
  *
  * @param {MouseEvent} event Le clique de la souris.
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.3.1
  */
 window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
 	var element = jQuery( this );
-	element.closest( 'tr' ).find( 'input.affect' ).val( jQuery( '.table.evaluators input[type="text"]' ).val() );
+	if ( element.is( ':checked' ) ) {
+		element.closest( 'tr' ).find( 'input.affect' ).val( jQuery( '.table.evaluators input[type="text"]' ).val() );
+	} else {
+		element.closest( 'tr' ).find( 'input.affect' ).val( '' );
+	}
 };
 
 /**

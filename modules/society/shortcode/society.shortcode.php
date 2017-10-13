@@ -51,6 +51,8 @@ class Society_Shortcode {
 			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ';
 			if ( Society_Class::g()->get_post_type() !== $element->type ) {
 				$title .= $element->unique_identifier . ' - ';
+			} else {
+				$title = 'Informations ';
 			}
 			$title .= $element->title;
 

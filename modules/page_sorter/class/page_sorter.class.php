@@ -42,7 +42,7 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 			'post_parent' => $main_society->id,
 			'posts_per_page' => -1,
 			'post_type' => array( 'digi-group', 'digi-workunit' ),
-			'post_status' => array( 'publish', 'draft' ),
+			'post_status' => array( 'publish', 'draft', 'inherit' ),
 			'orderby' => array(
 				'menu_order' => 'ASC',
 				'date' => 'ASC',
@@ -78,11 +78,12 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function display_list( $i, $parent_id = 0 ) {
+
 		$establishments = Society_Class::g()->get( array(
 			'post_parent' => $parent_id,
 			'posts_per_page' => -1,
 			'post_type' => array( 'digi-group', 'digi-workunit' ),
-			'post_status' => array( 'publish', 'draft' ),
+			'post_status' => array( 'publish', 'draft', 'inherit' ),
 			'orderby' => array(
 				'menu_order' => 'ASC',
 				'date' => 'ASC',

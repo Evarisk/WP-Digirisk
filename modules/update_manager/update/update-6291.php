@@ -44,6 +44,7 @@ class Update_6291 {
 					$risks_id = get_posts( array(
 						'fields' => 'ids',
 						'posts_per_page' => -1,
+						'post_status' => 'any',
 						'post_type' => Risk_Class::g()->get_post_type(),
 						'tax_query' => array(
 							array(
@@ -63,6 +64,16 @@ class Update_6291 {
 		}
 
 		update_option( 'digirisk_update_6291_saved_slug', $saved_slug );
+
+		// On assure le nettoyage des catégories de risque.
+		$terms = get_terms( Danger_Class::g()->get_taxonomy(), array( 'fields' => 'ids', 'hide_empty' => false ) );
+		foreach ( $terms as $value ) {
+			wp_delete_term( $value, Danger_Class::g()->get_taxonomy() );
+		}
+		$terms = get_terms( Category_Danger_Class::g()->get_taxonomy(), array( 'fields' => 'ids', 'hide_empty' => false ) );
+		foreach ( $terms as $value ) {
+			wp_delete_term( $value, Category_Danger_Class::g()->get_taxonomy() );
+		}
 
 		Danger_Default_Data_Class::g()->create();
 
@@ -84,6 +95,7 @@ class Update_6291 {
 		$index = 0;
 		$count_risk = ! empty( $_POST['args']['countRisk'] ) ? (int) $_POST['args']['countRisk'] : 0;
 		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
+
 
 		if ( ! empty( $saved_slug['danger'] ) ) {
 			foreach ( $saved_slug['danger'] as $slug => &$danger ) {

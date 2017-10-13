@@ -3,16 +3,17 @@
  * Les filtres relatifs aux tâches correctives.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.3.1
  * @copyright 2015-2017 Evarisk
- * @package corrective-task
- * @subpackage filter
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les filtres relatifs aux tâches correctives.
@@ -36,8 +37,8 @@ class Corrective_Task_Filter {
 	 * @param  Risk_Model $risk      Les données du risque.
 	 * @return string                La chaine de caractère mise au bon format pour le ODT.
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.1
+	 * @since 6.0.0
+	 * @version 6.3.1
 	 */
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
 		$data_risk['actionPreventionCompleted'] = '';
@@ -46,11 +47,9 @@ class Corrective_Task_Filter {
 		if ( class_exists( '\task_manager\task_class' ) ) {
 			$task = \task_manager\Task_Class::g()->get( array(
 				'post_parent' => $risk->id,
-			) );
+			), true );
 
-			if ( ! empty( $task ) ) {
-				$task = $task[0];
-
+			if ( ! empty( $task->id ) ) {
 				$list_point_completed = array();
 				$list_point_uncompleted = array();
 
@@ -63,10 +62,18 @@ class Corrective_Task_Filter {
 					) );
 
 					$list_point_completed = array_filter( $list_point, function( $point ) {
+						if ( 0 === $point->id ) {
+							return false;
+						}
+
 						return true === $point->point_info['completed'];
 					} );
 
 					$list_point_uncompleted = array_filter( $list_point, function( $point ) {
+						if ( 0 === $point->id ) {
+							return false;
+						}
+
 						return false === $point->point_info['completed'];
 					} );
 				}

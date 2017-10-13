@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author: bilponse
  * @author_uri: https://github.com/bilponse
  *
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.3.1
  */
 function point_to_string( $element ) {
 	$content = $element->content;
@@ -29,6 +29,6 @@ function point_to_string( $element ) {
 	$content = str_replace( "</div>","", $content );
 	$content = html_entity_decode( $content );
 	$content = strip_tags( $content );
-	$content = 'Le ' . mysql2date( 'd F Y', $element->date, true ) . ':' . $content . "\r";
+	$content = $element->date['date_human_readable'] . ': ' . $content . "\r";
 	return $content;
 }
