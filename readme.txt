@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.7.3
-Stable tag: 6.2.10.0
+Stable tag: 6.3.1
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -74,6 +74,26 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+
+= Version 6.3.1 =
+
+Corrections
+
+* 11575 - Trie des évaluateurs par date d'affectation.
+* 11623 - Trie de la cotation dans le DUER.
+* 11625 - Trie de la cotation dans la page "Risque".
+* 11848 - Remise en place des actions correctives.
+* 11863 - Correction problème lors de l'affectation d'un évaluateur.
+
+= Version 6.3.0 =
+
+Améliorations
+
+* 11294 - Nouvelle interface navigation.
+* 11295 - Ajout de l'entité "Société".
+* 11296 - Ajout de nouvelle ODT pour les accidents de travail bénins.
+* 11508 - Adaptation mobile.
 
 = Version 6.2.9.1 =
 
