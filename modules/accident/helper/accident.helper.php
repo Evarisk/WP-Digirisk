@@ -50,3 +50,23 @@ function get_full_accident( $data ) {
 
 	return $data;
 }
+
+/**
+ * Compiles le nombre de jour d'arrêt.
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ *
+ * @param  Accident_Model $data L'objet.
+ * @return Accident_Model
+ */
+function accident_compile_stopping_days( $data ) {
+	$data->compiled_stopping_days = 0;
+	if ( ! empty( $data->number_of_stopping_days ) ) {
+		foreach ( $data->number_of_stopping_days as $stopping_days ) {
+			$data->compiled_stopping_days += (int) $stopping_days['stopping_days'];
+		}
+	}
+
+	return $data;
+}

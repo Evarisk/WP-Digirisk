@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="container">
 
 		<div class="header">
-			<h2 class="title"><?php esc_html_e( 'blabla', 'digirisk' ); ?></h2>
+			<h2 class="title"><?php esc_html_e( 'Édition des champs supplémentaires de l\'accident.', 'digirisk' ); ?></h2>
 			<i class="close fa fa-times"></i>
 		</div>
 
@@ -27,23 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="form">
 				<ul class="grid-layout padding w2">
-					<li>
-						<div class="group-date form-element <?php echo ! empty( $accident->accident_date['date_input']['date'] ) ? 'active' : ''; ?>">
-							<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
-							<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
-							<label><?php esc_html_e( 'Date d\'accident', 'digirisk' ); ?></label>
-							<span class="bar"></span>
-						</div>
-					</li>
-
-					<li>
-						<div class="form-element <?php echo ! empty( $accident->place ) ? 'active' : ''; ?>">
-							<input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>">
-							<label><?php esc_html_e( 'Lieu', 'digirisk' ); ?></label>
-							<span class="bar"></span>
-						</div>
-					</li>
-
 					<li>
 						<div class="form-element <?php echo ! empty( $accident->location_of_lesions ) ? 'active' : ''; ?>">
 							<input type="text" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->location_of_lesions ); ?>">
@@ -79,14 +62,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<li>
 						<div class="form-element">
 							<p><?php esc_html_e( 'Nom et signature du donneur de soins', 'digirisk' ); ?></p>
-							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="name_and_signature_of_the_caregiver_id" custom_class="caregiver" ]' ); ?>
+							<canvas></canvas>
+							<i class="fa fa-eraser" aria-hidden="true"></i>
 						</div>
 					</li>
 
 					<li>
 						<div class="form-element">
 							<p><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></p>
-							<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" field_name="signature_of_the_victim_id" custom_class="victim" ]' ); ?>
+							<canvas></canvas>
+							<i class="fa fa-eraser" aria-hidden="true"></i>
 						</div>
 					</li>
 				</ul>
@@ -99,7 +84,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</li>
 				</ul>
 
-				<div class="button green margin uppercase strong float right"><span><?php esc_html_e( 'Save', 'digirisk' ); ?></span></div>
+				<div class="button green margin uppercase strong float right"><span><?php esc_html_e( 'Fermer', 'digirisk' ); ?></span></div>
 			</div>
 		</div>
 	</div>

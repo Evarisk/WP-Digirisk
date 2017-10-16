@@ -58,6 +58,14 @@ class Accident_Action {
 		$signature_of_the_victim_id = ! empty( $_POST['signature_of_the_victim_id'] ) ? (int) $_POST['signature_of_the_victim_id'] : 0;
 		$accident_investigation_id = ! empty( $_POST['accident_investigation_id'] ) ? (int) $_POST['accident_investigation_id'] : 0;
 
+		if ( ! empty( $_POST['accident']['number_of_stopping_days'] ) ) {
+			foreach ( $_POST['accident']['number_of_stopping_days'] as $key => $element ) {
+				if ( empty( $element['stopping_days'] ) ) {
+					array_splice( $_POST['accident']['number_of_stopping_days'], $key, 1 );
+				}
+			}
+		}
+
 		$accident = Accident_Class::g()->update( $_POST['accident'] );
 
 		// Associations des images.

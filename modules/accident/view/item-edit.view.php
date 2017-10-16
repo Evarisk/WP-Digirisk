@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="accident-row edit">
+<tr class="accident-row edit" data-id="<?php echo esc_attr( $accident->id ); ?>">
 
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="edit_accident" />
@@ -30,30 +30,60 @@ if ( ! defined( 'ABSPATH' ) ) {
 		) );
 		?>
 
-		<span><strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong></span>
-	</td>
-	<td data-title="Date d'inscription dans le registre" class="padding">
-		<?php if ( empty( $accident->id ) ) : ?>
-			<div class="group-date">
-				<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[registration_date_in_register]" value="<?php echo esc_attr( $accident->registration_date_in_register['date_input']['date'] ); ?>" />
-				<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?>" />
-			</div>
-		<?php else : ?>
+		<span>
+			<strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong>
 			<span><?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></span>
-		<?php endif; ?>
+		</span>
 	</td>
 	<td data-title="Identité victime" class="padding">
 		<input type="text" data-field="accident[victim_identity_id]" data-type="user" placeholder="" class="digi-search" value="<?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?>" dir="ltr">
 		<input type="hidden" name="accident[victim_identity_id]" value="<?php echo esc_attr( $accident->victim_identity_id ); ?>">
 	</td>
+	<td data-title="Date et heure" class="group-date padding">
+		<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
+		<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
+	</td>
+	<td data-title="Lieu" class="padding">
+		<input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>">
+	</td>
 	<td data-title="Circonstances détaillées" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
 	</td>
-	<td data-title="Etat" class="padding">
-		<input type="text" name="accident[state]" value="<?php echo esc_attr( $accident->state ); ?>" />
+	<td data-title="NB. Jours arrêts" class="padding">
+		<ul class="comment-container">
+			<?php
+			$i = 0;
+
+			if ( ! empty( $accident->number_of_stopping_days ) ) :
+				foreach ( $accident->number_of_stopping_days as $i => $stopping_days ) :
+					?>
+					<li class="comment">
+						<span><?php echo '#' . esc_html( $i ); ?></span>
+						<input type="hidden" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( $stopping_days['date'] ); ?>" />
+						<input type="text" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][stopping_days]" value="<?php echo esc_attr( $stopping_days['stopping_days'] ); ?>" />
+					</li>
+					<?php
+				endforeach;
+			endif;
+			$i++;
+			?>
+			<li class="comment">
+				<span><?php echo '#' . esc_html( $i ); ?></span>
+				<input type="hidden" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
+				<input type="text" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][stopping_days]" />
+			</li>
+		</ul>
+
 	</td>
 	<td data-title="Enquête accident" class="padding">
-		<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
+		<select name="accident[have_investigation]">
+			<option <?php echo ( ! $accident->have_investigation ) ? 'selected="selected"' : ''; ?> value="0"><?php esc_html_e( 'Non', 'digirisk' ); ?></option>
+			<option <?php echo ( $accident->have_investigation ) ? 'selected="selected"' : ''; ?> value="1"><?php esc_html_e( 'Oui', 'digirisk' ); ?></option>
+		</select>
+
+		<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
+			<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
+		</span>
 	</td>
 	<td data-title="Opt. Avancées">
 		<span data-parent="accident-row"

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -67,14 +67,14 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier' );
+	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier', '\digi\accident_compile_stopping_days' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\digi\get_identifier' );
+	protected $before_put_function = array( '\digi\get_identifier', '\digi\accident_compile_stopping_days' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée

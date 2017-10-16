@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -79,10 +79,21 @@ class Accident_Model extends \eoxia\Post_Model {
 				'type' => 'string',
 				'meta_type' => 'multiple',
 			),
-			'state' => array(
-				'type' => 'string',
+			'compiled_stopping_days' => array(
+				'type' => 'integer',
 				'meta_type' => 'single',
-				'field' => '_wpdigi_state',
+				'field' => '_wpdigi_compiled_stopping_days',
+			),
+			'number_of_stopping_days' => array(
+				'type' => 'array',
+				'meta_type' => 'single',
+				'field' => '_wpdigi_number_of_stopping_days',
+			),
+			'have_investigation' => array(
+				'type' => 'boolean',
+				'meta_type' => 'single',
+				'field' => '_wpdigi_have_investigation',
+				'bydefault' => false,
 			),
 			'associated_document_id' => array(
 				'type' => 'array',
