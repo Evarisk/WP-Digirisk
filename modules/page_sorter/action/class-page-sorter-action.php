@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.3.2
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -49,7 +49,7 @@ class Page_Sorter_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5
+	 * @version 6.3.2
 	 */
 	public function callback_sorter_parent() {
 		check_admin_referer( 'callback_sorter_parent' );
@@ -63,6 +63,7 @@ class Page_Sorter_Action {
 		if ( ! empty( $_POST['menu_item_db_id'] ) ) {
 			foreach ( $_POST['menu_item_db_id'] as $element_id ) {
 				$element_id = (int) $element_id;
+
 				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
 				$society = Society_Class::g()->show_by_type( $element_id );
