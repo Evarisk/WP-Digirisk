@@ -3,26 +3,36 @@
  * Affichage d'un commentaire
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.3.0
+ * @since 6.2.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-$userdata = get_userdata( $comment->author_id ); ?>
+$user = User_Digi_Class::g()->get( array(
+	'id' => $comment->author_id,
+), true ); ?>
 
 <li class="comment">
 
 	<?php if ( $display_user ) : ?>
-		<span class="user"><?php echo ! empty( $userdata->display_name ) ? $userdata->display_name : 'Indéfini'; ?>, </span>
+		<span class="user">
+			<div class="avatar tooltip hover" aria-label="<?php echo esc_attr( $user->displayname ); ?>" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;">
+				<span>
+					<?php echo esc_html( $user->initial ); ?>
+				</span>
+			</div>
+		</span>
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
-		<span class="date"><?php echo $comment->date['date_input']['fr_FR']['date']; ?> : </span>
+		<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['short_date'] ); ?> : </span>
 	<?php endif; ?>
 
 	<span class="content"><?php echo $comment->content; ?></span>

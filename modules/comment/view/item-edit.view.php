@@ -3,8 +3,8 @@
  * Edition d'un commentaire
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.3.0
+ * @since 6.2.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -17,7 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php
 $author_id = ! empty( $comment->author_id ) ? $comment->author_id : get_current_user_id();
-$userdata = get_userdata( $author_id );
+
+$user = User_Digi_Class::g()->get( array(
+	'id' => $comment->author_id,
+), true );
 ?>
 
 <li class="<?php echo esc_attr( ( 0 !== $id && 0 === $comment->id ) ? 'new' : '' ); ?> comment">
@@ -28,7 +31,13 @@ $userdata = get_userdata( $author_id );
 	<input type="hidden" name="list_comment[<?php echo esc_attr( $comment->id ); ?>][parent_id]" value="<?php echo esc_attr( $comment->parent_id ); ?>" />
 
 	<?php if ( $display_user ) : ?>
-		<span class="user"><?php echo esc_html( $userdata->display_name ); ?>, </span>
+		<span class="user">
+			<div class="avatar tooltip hover" aria-label="<?php echo esc_attr( $user->displayname ); ?>" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;">
+				<span>
+					<?php echo esc_html( $user->initial ); ?>
+				</span>
+			</div>
+		</span>
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
