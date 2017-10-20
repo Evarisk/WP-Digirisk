@@ -86,13 +86,13 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
 
-		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
-
-		if ( 3 === strlen( $version ) ) {
-			$version *= 10;
-		}
-
-		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
+		// $version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
+		//
+		// if ( 3 === strlen( $version ) ) {
+		// 	$version *= 10;
+		// }
+		//
+		// update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
 	}
 
 }
