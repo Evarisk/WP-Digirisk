@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 		<?php endif; ?>
 	</td>
-	<td data-title="Risque" data-title="Risque" class="wm130 w150">
+	<td data-title="Risque" data-title="Risque" class="wmax70">
 		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">

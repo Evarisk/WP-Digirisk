@@ -94,7 +94,7 @@
 					color: rgba(0,0,0,0.7);
 				}
 				.icon {
-					margin-left: 10px;
+					margin-left: 4px;
 				}
 				&:after {
 					display: table;
@@ -117,6 +117,14 @@
 		.comment-container {
 			padding-top: 6px;
 			padding-bottom: 6px;
+			.avatar {
+				width: 30px;
+				height: 30px;
+				min-width: 30px;
+				span {
+					line-height: 30px;
+				}
+			}
 			.comment {
 				display: flex;
 				flex: 0 1 auto;
@@ -214,7 +222,7 @@
 			text-align: center;
 			span {
 				line-height: 50px;
-				color: #fff;
+				color: #fff !important;
 				font-size: 16px;
 				font-weight: 300;
 				text-transform: uppercase;
@@ -233,6 +241,9 @@
 		td.w50, th.w50 {
 			width: 50px;
 		}
+		td.w70, th.w70 {
+			width: 70px;
+		}
 		td.w100, th.w100 {
 			width: 100px;
 		}
@@ -241,6 +252,10 @@
 		}
 		td.wm40, th.wm40 {
 			min-width: 40px;
+		}
+
+		td.wmax70 {
+			max-width: 70px;
 		}
 		td.w150, th.w150 {
 			width: 150px;
