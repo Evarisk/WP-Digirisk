@@ -32,7 +32,7 @@ $user = User_Digi_Class::g()->get( array(
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
-		<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['short_date'] ); ?> : </span>
+		<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['date'] ); ?> : </span>
 	<?php endif; ?>
 
 	<span class="content"><?php echo $comment->content; ?></span>
