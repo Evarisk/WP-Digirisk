@@ -64,6 +64,11 @@
 			color: $primary;
 		}
 		.cotation-container {
+			&.tooltip {
+				&:hover {
+					cursor: pointer;
+				}
+			}
 			.content {
 				flex-wrap: nowrap !important;
 				flex-direction: row;
@@ -98,7 +103,7 @@
 				}
 			}
 			.content {
-				width: 392px;
+				width: 280px;
 				.tooltip:hover {
 					cursor: pointer;
 				}
