@@ -1,8 +1,12 @@
 <?php
 /**
- * Functions helper pour les risques
+ * Fonctions 'helpers' pour les risques.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -19,27 +23,21 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return Risk_Model L'objet avec tous les éléments ajoutés par cette méthode.
  */
 function get_full_risk( $data ) {
-	$args_dangers = array( 'schema' => true );
-	$args_dangers_categories = array( 'schema' => true );
+	$args_category_risk = array( 'schema' => true );
 	$args_evaluation_method = array( 'schema' => true );
 	$args_evaluation = array( 'schema' => true );
 	$args_risk_evaluation_comment = array( 'schema' => true );
 
 	if ( ! empty( $data->id ) ) {
-		$args_dangers = array( 'include' => $data->taxonomy['digi-danger'] );
-		$args_dangers_categories = array( 'include' => $data->taxonomy['digi-danger-category'] );
+		$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
 		$args_evaluation = array( 'comment__in' => array( $data->current_evaluation_id ) );
 		$args_risk_evaluation_comment = array( 'post_id' => $data->id );
 		$args_evaluation_method = array( 'post_id' => $data->id );
 	}
 
-	// Récupères le danger.
-	$dangers = Danger_Class::g()->get( $args_dangers );
-	$data->danger = $dangers[0];
-
 	// Récupères la catégorie du danger.
-	$danger_categories = Category_Danger_Class::g()->get( $args_dangers_categories );
-	$data->danger_category = $danger_categories[0];
+	$danger_categories = Risk_Category_Class::g()->get( $args_category_risk );
+	$data->risk_category = $danger_categories[0];
 
 	// Récupères la méthode d'évaluation.
 	$evaluation_methods = Evaluation_Method_Class::g()->get( $args_evaluation_method );

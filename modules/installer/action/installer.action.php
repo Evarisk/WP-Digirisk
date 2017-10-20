@@ -3,8 +3,8 @@
  * Les actions qui se déroulent lors de l'installation.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -39,7 +39,7 @@ class Installer_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1.0
+	 * @since 6.0.0
 	 * @version 6.3.0
 	 */
 	public function ajax_installer_save_society() {
@@ -85,7 +85,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function ajax_installer_components() {
 		// check_ajax_referer( 'ajax_installer_components' );
@@ -101,19 +101,15 @@ class Installer_Action {
 		$core_option = get_option( \eoxia\Config_Util::$init['digirisk']->core_option, $default_core_option );
 
 		if ( ! $core_option['danger_installed'] ) {
-			Danger_Default_Data_Class::g()->create();
-			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des dangers effectués', 'digirisk' ) );
+			Risk_Category_Default_Data_Class::g()->create();
 			$core_option['danger_installed'] = true;
 		} elseif ( ! $core_option['recommendation_installed'] ) {
 			Recommendation_Default_Data_Class::g()->create();
-			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation des recommandations effectués', 'digirisk' ) );
 			$core_option['recommendation_installed'] = true;
 		} elseif ( ! $core_option['evaluation_method_installed'] ) {
 			Evaluation_Method_Default_Data_Class::g()->create();
-			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( "Installation des méthodes d'évaluation effectués", 'digirisk' ) );
 			$core_option['evaluation_method_installed'] = true;
 			$core_option['installed'] = true;
-			\eoxia\Log_Class::g()->exec( 'digirisk-installer', '', __( 'Installation de digiRisk effectué', 'digirisk' ) );
 		}
 
 		$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );

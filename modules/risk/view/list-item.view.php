@@ -3,8 +3,8 @@
  * Affichage d'un risque
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.3.0
+ * @since 6.2.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package risk
  * @subpackage view
@@ -12,7 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="risk-row">
 	<td data-title="Ref." class="padding">
@@ -22,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?>
+		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="view"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>

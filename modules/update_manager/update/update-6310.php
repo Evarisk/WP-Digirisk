@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Mise à jour des données pour la version 6.3.1
  */
 class Update_631 {
-	private $limit_update_risk = 10;
+	private $limit_update_risk = 50;
 
 	/**
 	 * Initialise les actions nécessaire pour les mises à jour de la 6.3.1

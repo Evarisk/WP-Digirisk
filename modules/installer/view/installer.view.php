@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- <div class="bar"></div> -->
 		<ul class="step-list">
 			<li class="step active"><span class="title"><?php esc_html_e( 'Création société', 'digirisk' ); ?></span></li>
-			<li class="step" data-width="25"><span class="title"><?php esc_html_e( 'Catégories de danger', 'digirisk' ); ?></span></li>
+			<li class="step" data-width="25"><span class="title"><?php esc_html_e( 'Catégories de risque', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="50"><span class="title"><?php esc_html_e( 'Méthodes d\'évaluation', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="75"><span class="title"><?php esc_html_e( 'Préconisations', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="100"><span class="title"><?php esc_html_e( 'Digirisk est prêt', 'digirisk' ); ?></span></li>

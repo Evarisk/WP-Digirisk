@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -37,13 +37,13 @@ class Risk_Save_Action {
 	 * @param Risk_Model $risk Les données du risque.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.4.0
 	 */
 	public function callback_save_risk( $risk ) {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
 		if ( isset( $risk['id'] ) ) {
-			$danger = Danger_Class::g()->get( array(
+			$danger = Risk_Category_Class::g()->get( array(
 				'include' => $risk['danger_id'],
 			), true );
 
@@ -55,8 +55,7 @@ class Risk_Save_Action {
 
 			$risk['title'] = $danger->name;
 			$risk['parent_id'] = $parent_id;
-			$risk['taxonomy']['digi-danger'][] = $danger->id;
-			$risk['taxonomy']['digi-danger-category'][] = $danger->parent_id;
+			$risk['taxonomy']['digi-category-risk'][] = $danger->id;
 			$risk_obj = Risk_Class::g()->update( $risk );
 
 			if ( ! $risk_obj ) {

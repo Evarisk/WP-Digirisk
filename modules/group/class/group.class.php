@@ -3,11 +3,10 @@
  * Classe gérant les groupements
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.1
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package group
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -241,7 +240,7 @@ class Group_Class extends \eoxia\Post_Class {
 				'identifiantRisque' => $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
 				'quotationRisque' => $risk->evaluation->risk_level['equivalence'],
 				'niveauRisque' => $risk->evaluation->scale,
-				'nomDanger' => $risk->danger->name,
+				'nomDanger' => $risk->risk_category->name,
 				'commentaireRisque' => $comment_list,
 				'actionPrevention' => '',
 			), $risk );

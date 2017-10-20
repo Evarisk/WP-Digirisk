@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -140,10 +140,10 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 * @return bool
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function generate( $society_id ) {
-		$society = group_class::g()->get( array(
+		$society = Group_Class::g()->get( array(
 			'id' => $society_id,
 		), true );
 
@@ -164,10 +164,10 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 
-		$document_creation_response = document_class::g()->create_document( $society, array( 'fiche_de_groupement' ), $sheet_details );
+		$document_creation_response = Document_Class::g()->create_document( $society, array( 'fiche_de_groupement' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
-			$society = group_class::g()->update( $society );
+			$society = Group_Class::g()->update( $society );
 		}
 
 		return array(
@@ -350,7 +350,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 				endif;
 
 				$risk_list_to_order[ $risk->evaluation->scale ][] = array(
-					'nomDanger'					=> $risk->danger->name,
+					'nomDanger'					=> $risk->risk_category->name,
 					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
 					'quotationRisque'		=> $risk->evaluation->risk_level['equivalence'],
 					'commentaireRisque'	=> $comment_list,

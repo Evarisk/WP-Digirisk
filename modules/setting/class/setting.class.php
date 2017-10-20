@@ -3,16 +3,17 @@
  * Classe gérant les configurations de DigiRisk.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.9.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package setting
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les configurations de DigiRisk.
@@ -55,8 +56,8 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Si les "preset danger" n'existent pas dans la bdd, cette méthode à pour but de les initialiser.
 	 *
-	 * @since 6.2.9.0
-	 * @version 6.2.9.0
+	 * @since 6.2.9
+	 * @version 6.4.0
 	 */
 	public function init_preset_danger() {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
@@ -65,27 +66,19 @@ class Setting_Class extends \eoxia\Singleton_Util {
 			$preset_danger_installed = get_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
 
 			if ( ! $preset_danger_installed ) {
-				$danger_category_list = Category_Danger_Class::g()->get();
+				$danger_category_list = Risk_Category_Class::g()->get();
 
 				if ( ! empty( $danger_category_list ) ) {
 					foreach ( $danger_category_list as $element ) {
-						$element->danger = Danger_Class::g()->get( array(
-							'parent' => $element->id,
-						) );
-
-						if ( ! empty( $element->danger ) ) {
-							foreach ( $element->danger as $danger ) {
-								if ( ! empty( $danger->thumbnail_id ) ) {
-									Risk_Class::g()->update( array(
-										'taxonomy' => array(
-											'digi-danger' => array(
-												$danger->id,
-											),
-										),
-										'preset' => true,
-									) );
-								}
-							}
+						if ( ! empty( $element->thumbnail_id ) ) {
+							Risk_Class::g()->update( array(
+								'taxonomy' => array(
+									'digi-category-risk' => array(
+										$element->id,
+									),
+								),
+								'preset' => true,
+							) );
 						}
 					}
 				}
