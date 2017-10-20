@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -47,16 +47,16 @@ class Accident_Action {
 	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @return void
 	 */
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
 
-		$name_and_signature_of_the_caregiver_id = ! empty( $_POST['name_and_signature_of_the_caregiver_id'] ) ? (int) $_POST['name_and_signature_of_the_caregiver_id'] : 0;
-		$signature_of_the_victim_id = ! empty( $_POST['signature_of_the_victim_id'] ) ? (int) $_POST['signature_of_the_victim_id'] : 0;
-		$accident_investigation_id = ! empty( $_POST['accident_investigation_id'] ) ? (int) $_POST['accident_investigation_id'] : 0;
+		$signature_of_the_caregiver = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
+		$signature_of_the_victim = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
+		$accident_investigation = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
 
 		if ( ! empty( $_POST['accident']['number_of_stopping_days'] ) ) {
 			foreach ( $_POST['accident']['number_of_stopping_days'] as $key => $element ) {
@@ -68,12 +68,23 @@ class Accident_Action {
 
 		$accident = Accident_Class::g()->update( $_POST['accident'] );
 
+		$upload_dir = wp_upload_dir();
+
 		// Associations des images.
-		if ( ! empty( $name_and_signature_of_the_caregiver_id ) ) {
-			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $name_and_signature_of_the_caregiver_id, '\digi\Accident_Class', 'name_and_signature_of_the_caregiver_id' );
+		if ( ! empty( $signature_of_the_caregiver ) ) {
+			$encoded_image = explode( ',', $signature_of_the_caregiver )[1];
+			$decoded_image = base64_decode( $encoded_image );
+			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
+			$accident->associated_document_id['signature_of_the_caregiver_id'][0] = $file_id;
 		}
-		if ( ! empty( $signature_of_the_victim_id ) ) {
-			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $signature_of_the_victim_id, '\digi\Accident_Class', 'signature_of_the_victim_id' );
+
+		if ( ! empty( $signature_of_the_victim ) ) {
+			$encoded_image = explode( ',', $signature_of_the_victim )[1];
+			$decoded_image = base64_decode( $encoded_image );
+			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
+			$accident->associated_document_id['signature_of_the_victim_id'][0] = $file_id;
 		}
 
 		if ( ! empty( $accident_investigation_id ) ) {
@@ -89,6 +100,8 @@ class Accident_Action {
 				}
 			}
 		}
+
+		Accident_Class::g()->update( $accident );
 
 		do_action( 'generate_accident_benin', $accident->id );
 
@@ -112,7 +125,7 @@ class Accident_Action {
 	 * Charges un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @return void
 	 */

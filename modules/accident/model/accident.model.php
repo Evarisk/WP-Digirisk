@@ -99,7 +99,7 @@ class Accident_Model extends \eoxia\Post_Model {
 				'type' => 'array',
 				'meta_type' => 'multiple',
 				'child' => array(
-					'name_and_signature_of_the_caregiver_id' => array(
+					'signature_of_the_caregiver_id' => array(
 						'type' => 'array',
 						'meta_type' => 'multiple',
 					),

@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $accident->compiled_stopping_days ); ?></span>
 	</td>
 	<td data-title="Enquête accident" class="padding">
-		<span><?php echo ( $accident->have_investigation ) ? __( 'Oui', 'digirisk') : __( 'Non' ,'digirisk' ); ?></span>
+		<span><?php echo ( $accident->have_investigation ) ? '' : __( 'Non' ,'digirisk' ); ?></span>
 		<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
 			<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
 		</span>

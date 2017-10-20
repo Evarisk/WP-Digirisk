@@ -61,8 +61,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<li>
 						<div class="form-element">
-							<p><?php esc_html_e( 'Nom et signature du donneur de soins', 'digirisk' ); ?></p>
+							<p><?php esc_html_e( 'Signature du donneur de soins', 'digirisk' ); ?></p>
 							<canvas></canvas>
+							<input type="hidden" name="signature_of_the_caregiver" />
+							<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
 							<i class="fa fa-eraser" aria-hidden="true"></i>
 						</div>
 					</li>
@@ -71,6 +73,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div class="form-element">
 							<p><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></p>
 							<canvas></canvas>
+							<input type="hidden" name="signature_of_the_victim" />
+							<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
 							<i class="fa fa-eraser" aria-hidden="true"></i>
 						</div>
 					</li>

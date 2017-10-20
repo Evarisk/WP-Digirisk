@@ -93,11 +93,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="action">
 		<?php if ( 0 !== $accident->id ) : ?>
 			<div class="action grid-layout w3">
-				<div data-parent="accident-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="accident-row" data-loader="table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<div data-loader="table" data-parent="accident-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+				<div data-loader="table" data-parent="accident-row" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

@@ -9,20 +9,26 @@ window.eoxiaJS.digirisk.accident.canvas = [];
 
 window.eoxiaJS.digirisk.accident.init = function() {
 	window.eoxiaJS.digirisk.accident.event();
-	window.eoxiaJS.digirisk.accident.canvas = document.querySelectorAll("canvas");
+	window.eoxiaJS.digirisk.accident.refresh();
+};
 
+window.eoxiaJS.digirisk.accident.refresh = function() {
+	window.eoxiaJS.digirisk.accident.canvas = document.querySelectorAll("canvas");
 	for( var i = 0; i < window.eoxiaJS.digirisk.accident.canvas.length; i++ ) {
 		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad = new SignaturePad( window.eoxiaJS.digirisk.accident.canvas[i], {
-			penColor: "rgb(66, 133, 244)"
+			penColor: "rgb(66, 133, 244)",
+			minWidth: 5,
+			maxWidth: 10
 		} );
 	}
-};
+}
 
 window.eoxiaJS.digirisk.accident.event = function() {
 	jQuery( document ).on( 'click', '.popup-edit', window.eoxiaJS.digirisk.accident.openPopupEditMode );
 	jQuery( document ).on( 'change', '.accident-row select', window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation );
+	jQuery( document ).on( 'click', '.accident-row .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
 
-	// window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
+	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };
 
 /**
@@ -53,6 +59,12 @@ window.eoxiaJS.digirisk.accident.openPopupEditMode = function( event ) {
 		window.eoxiaJS.digirisk.search.renderChanged();
 
 		jQuery( '.accident-row.edit[data-id=' + id + '] .open-popup' ).click();
+
+		window.eoxiaJS.digirisk.accident.refresh();
+		jQuery( '.accident-row[data-id=' + id + '] canvas' ).each( function() {
+			jQuery( this )[0].signaturePad.clear();
+			jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( '.form-element' ).find( '.url' ).val() );
+		} );
 	} );
 };
 
@@ -73,6 +85,20 @@ window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( e
 };
 
 /**
+ * Clear le canvas.
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ *
+ * @param  {Event} event L'état de l'évènement à ce moment T.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.accident.clearCanvas = function( event ) {
+	var canvas = jQuery( this ).closest( '.form-element' ).find( 'canvas' );
+	canvas[0].signaturePad.clear();
+};
+
+/**
  * Quand on "resize" la fenêtre, adapte le canvas.
  *
  * @since 6.4.0
@@ -90,8 +116,16 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
 		window.eoxiaJS.digirisk.accident.canvas[i].getContext( "2d" ).scale( ratio, ratio );
 		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad.clear(); // otherwise isEmpty() might return incorrect value
 	}
+};
 
+window.eoxiaJS.digirisk.accident.saveSignature = function( element ) {
+	var id = jQuery( element ).closest( '.accident-row' ).attr( 'data-id' );
+	var accidentRow = jQuery( element ).closest( '.accident-row[data-id="' + id + '"]' );
 
+	accidentRow.find( 'canvas' ).each( function() {
+		jQuery( this ).closest( '.form-element' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
+	} );
+	return true;
 };
 
 /**
@@ -107,6 +141,7 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.accident' ).replaceWith( response.data.view );
+	window.eoxiaJS.digirisk.accident.refresh();
 	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
