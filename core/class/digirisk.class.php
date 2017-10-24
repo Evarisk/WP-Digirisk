@@ -4,8 +4,8 @@
  * Appelle la vue permettant d'afficher la navigation.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.1
+ * @since 6.0.0
+ * @version 6.3.3
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -77,7 +77,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 * Launch some action when activate the plugin
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.3.3
 	 */
 	public function activation() {
 		/** Set capability to administrator by default */
@@ -85,14 +85,6 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 		if ( ! $admin_role->has_cap( 'manage_digirisk' ) ) {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
-
-		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
-
-		if ( 3 === strlen( $version ) ) {
-			$version *= 10;
-		}
-
-		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
 	}
 
 }

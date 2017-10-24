@@ -48,7 +48,8 @@ class Corrective_Task_Action {
 
 		if ( class_exists( '\task_manager\Task_Class' ) ) {
 			$task = \task_manager\Task_Class::g()->get( array(
-				'id' => 0,
+				'post_parent' => $parent_id,
+				'posts_per_page' => 1,
 			), true );
 
 			$risk = Risk_Class::g()->get( array(

@@ -28,6 +28,8 @@ class Corrective_Task_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'risk_duer_additional_data', array( $this, 'callback_risk_duer_additional_data' ), 10, 2 );
+		add_filter( 'task_manager_task_header_action_end', array( $this, 'callback_task_manager_task_header_action_end' ), 10, 2 );
+		add_filter( 'task_manager_search_parent_query', array( $this, 'task_manager_search_parent_query' ), 10, 2 );
 	}
 
 	/**
@@ -101,6 +103,29 @@ class Corrective_Task_Filter {
 		} // End if().
 
 		return $data_risk;
+	}
+
+	public function callback_task_manager_task_header_action_end( $content, $task_id ) {
+		$task = \task_manager\Task_Class::g()->get( array(
+			'id' => $task_id,
+		), true );
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'move-to', array(
+			'task' => $task,
+		) );
+
+		$content .= ob_get_clean();
+		return $content;
+	}
+
+	public function task_manager_search_parent_query( $query, $term ) {
+		global $wpdb;
+		$query = "SELECT P.ID, P.post_title FROM {$wpdb->posts} AS P
+								JOIN {$wpdb->postmeta} AS PM ON PM.post_id=P.ID
+								WHERE PM.meta_key='_wpdigi_unique_identifier'
+									AND PM.meta_value = '" . $term . "' AND P.post_type='digi-risk'";
+		return $query;
 	}
 }
 
