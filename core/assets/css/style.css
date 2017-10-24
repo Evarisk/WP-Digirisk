@@ -4395,6 +4395,16 @@
  * .full -> cellule de 100%
  * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
  */
+.digirisk-wrap {
+  /**
+ * CSS spécifique
+ * Responsive Table Risk
+ */
+  /**
+ * CSS spécifique
+ * Responsive Table Evaluateurs
+ */ }
+
 .digirisk-wrap .table {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1); }
@@ -4499,6 +4509,8 @@
   padding-bottom: 6px; }
 
 .digirisk-wrap .table .comment-container .avatar {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   width: 30px;
   height: 30px;
   min-width: 30px; }
@@ -4686,13 +4698,17 @@
     padding: 0 !important; } }
 
 @media (max-width: 480px) {
-  .digirisk-wrap table, .digirisk-wrap tr, .digirisk-wrap thead, .digirisk-wrap tbody, .digirisk-wrap tfoot, .digirisk-wrap td, .digirisk-wrap th {
+  .digirisk-wrap .table.risk {
     display: block;
     width: 100% !important;
     height: auto !important; }
-  .digirisk-wrap .table > thead {
+  .digirisk-wrap .table.risk tr, .digirisk-wrap .table.risk thead, .digirisk-wrap .table.risk tbody, .digirisk-wrap .table.risk tfoot, .digirisk-wrap .table.risk td, .digirisk-wrap .table.risk th {
+    display: block;
+    width: 100% !important;
+    height: auto !important; }
+  .digirisk-wrap .table.risk > thead {
     display: none; }
-  .digirisk-wrap .table .risk-row {
+  .digirisk-wrap .table.risk .risk-row {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -4700,18 +4716,10 @@
     display: flex;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap; }
-  .digirisk-wrap .table .risk-row > td {
-    width: 100%; }
-  .digirisk-wrap .table .categorie-container .content {
-    width: 230px; }
-  .digirisk-wrap .table > tfoot {
-    background: #f1f1f1;
-    padding-top: 4em; }
-  .digirisk-wrap .table > tfoot > tr {
-    background: #fff; }
-  .digirisk-wrap .table.risk .risk-row {
+            flex-wrap: wrap;
     padding: 1em !important; }
+  .digirisk-wrap .table.risk .risk-row > td {
+    width: 100%; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1) {
     width: 60% !important;
     display: -webkit-box;
@@ -4723,12 +4731,6 @@
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1) > span {
     width: 30%;
     font-size: 10px; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1):after {
-    display: block;
-    content: attr(data-title);
-    width: 70%;
-    padding-left: 4px;
-    font-weight: 800; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2), .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3), .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) {
     width: 33.333333% !important;
     max-width: 33.333333%;
@@ -4741,6 +4743,8 @@
     text-align: center; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .tooltip img, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .tooltip img, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .tooltip img {
     display: inline-block; }
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .content, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .content, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .content {
+    width: 230px; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2):before, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3):before, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4):before {
     display: block;
     content: attr(data-title);
@@ -4820,6 +4824,11 @@
        -moz-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2; }
+  .digirisk-wrap .table.risk > tfoot {
+    background: #f1f1f1;
+    padding-top: 4em; }
+  .digirisk-wrap .table.risk > tfoot > tr {
+    background: #fff; }
   .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment {
     display: none; }
   .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment:nth-of-type(1) {
@@ -4828,6 +4837,89 @@
     display: -moz-box;
     display: -ms-flexbox;
     display: flex; } }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .table.evaluators tr, .digirisk-wrap .table.evaluators thead, .digirisk-wrap .table.evaluators tbody, .digirisk-wrap .table.evaluators tfoot, .digirisk-wrap .table.evaluators td:not(.hidden), .digirisk-wrap .table.evaluators th, .digirisk-wrap .table.affected-evaluator tr, .digirisk-wrap .table.affected-evaluator thead, .digirisk-wrap .table.affected-evaluator tbody, .digirisk-wrap .table.affected-evaluator tfoot, .digirisk-wrap .table.affected-evaluator td:not(.hidden), .digirisk-wrap .table.affected-evaluator th {
+    display: block;
+    width: 100%;
+    height: auto; }
+  .digirisk-wrap .table.evaluators thead > tr {
+    padding: 1em 6em !important;
+    background: #fff !important;
+    color: rgba(0, 0, 0, 0.8); }
+  .digirisk-wrap .table.evaluators thead th {
+    display: none; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6) {
+    display: block; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6):before {
+    font-weight: 400;
+    display: inline-block;
+    content: '\f017';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6) input {
+    display: inline-block;
+    max-width: 60px; }
+  .digirisk-wrap .table.affected-evaluator thead th {
+    display: none; }
+  .digirisk-wrap .table.evaluators tbody > tr, .digirisk-wrap .table.affected-evaluator tbody > tr {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    padding: 1em;
+    position: relative;
+    padding: 1em 6em !important; }
+  .digirisk-wrap .table.evaluators tbody > tr:nth-child(even), .digirisk-wrap .table.affected-evaluator tbody > tr:nth-child(even) {
+    background: #fff; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(1), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(1) {
+    width: 50px;
+    min-width: 50px;
+    margin-right: 0.6em;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(2), .digirisk-wrap .table.evaluators tbody td:nth-of-type(3), .digirisk-wrap .table.evaluators tbody td:nth-of-type(4), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(2), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(3), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(4) {
+    width: auto;
+    padding: 0 0.2em !important;
+    font-size: 14px; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(6):before, .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(6):before {
+    display: inline-block;
+    content: '\f017';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(6) input, .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(6) input {
+    display: inline-block;
+    max-width: 60px; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(7), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(7) {
+    width: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .digirisk-wrap .table.affected-evaluator tbody tr {
+    background: rgba(0, 0, 0, 0.1) !important; }
+  .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
+    width: 100%; }
+  .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
+    display: inline-block;
+    content: '\f073';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; } }
 
 /**
  * Evaluation method
