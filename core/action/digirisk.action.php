@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
+ * @version 6.3.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -139,11 +139,23 @@ class Digirisk_Action {
 	/**
 	 * Initialise le fichier MO
 	 *
-	 * @since 1.0
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.3.4
 	 */
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
+
+		/** Set capability to subscriber by default */
+		$subscriber_role = get_role( 'subscriber' );
+		if ( ! $subscriber_role->has_cap( 'manage_digirisk' ) ) {
+			$subscriber_role->add_cap( 'manage_digirisk' );
+		}
+
+		/** Set capability to administrator by default */
+		$administrator_role = get_role( 'administrator' );
+		if ( ! $administrator_role->has_cap( 'manage_digirisk' ) ) {
+			$administrator_role->add_cap( 'manage_digirisk' );
+		}
 	}
 
 	/**
