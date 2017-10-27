@@ -3,16 +3,17 @@
  * Affichage d'un risque
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.3.0
+ * @since 6.2.1
+ * @version 6.3.4
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="risk-row">
 	<td data-title="Ref." class="padding">
@@ -28,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
