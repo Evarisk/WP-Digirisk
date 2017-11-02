@@ -9,6 +9,7 @@
 		"digirisk-handle-risk",
 		"digirisk-users",
 		"digirisk-accident",
+		"digirisk-causerie",
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
@@ -21,6 +22,7 @@
 		"digirisk-handle-risk",
 		"digirisk-epi",
 		"digirisk-accident",
+		"digirisk-causerie",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -50,6 +52,7 @@
 		"modules/duer/duer.config.json",
 
 		"modules/accident/accident.config.json",
+		"modules/causerie/causerie.config.json",
 
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
@@ -84,7 +87,7 @@
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
-	"default_tab": "digi-informations",
+	"default_tab": "digi-causerie",
 	"default_tab_title": "Les risques",
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false
