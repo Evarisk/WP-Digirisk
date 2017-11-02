@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
@@ -39,7 +39,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action grid-layout w3">
 			<div 	class="open-popup-ajax button light w50 task"
 						data-parent="risk-row"
-						data-target="corrective-task"
+						data-target="popup"
+						data-class="corrective-task"
 						data-action="open_task"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
 

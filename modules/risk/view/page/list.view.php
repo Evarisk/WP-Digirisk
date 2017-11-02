@@ -3,16 +3,17 @@
  * Affiches la liste des risques
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <thead>
 	<tr>
@@ -31,7 +32,11 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<?php $i = 1; ?>
 	<?php if ( ! empty( $risk_list ) ) : ?>
 		<?php foreach ( $risk_list as $risk ) : ?>
-			<?php \eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array( 'risk' => $risk ) ); ?>
+			<?php
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+				'risk' => $risk,
+			) );
+			?>
 		<?php endforeach; ?>
 	<?php endif; ?>
 </tbody>
