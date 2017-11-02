@@ -15,15 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="table accident">
-	<div class="header">
-		<span><?php esc_html_e( 'Ref.', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Nom, Prénom, matricule interne de la victime', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Lieu', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'NB. jour arrêt', 'digirisk' ); ?></span>
-		<span><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></span>
-	</div>
+<table class="table accident">
+	<thead class="header">
+		<tr>
+			<th><?php esc_html_e( 'Ref.', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Nom, Prénom, matricule interne de la victime', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Lieu', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'NB. jour arrêt', 'digirisk' ); ?></th>
+			<th><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></th>
+		</tr>
+	</thead>
 
 	<?php
 	if ( ! empty( $accidents ) ) :
@@ -41,4 +43,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'main_society' => $main_society,
 	) );
 	?>
-</div>
+</table>
