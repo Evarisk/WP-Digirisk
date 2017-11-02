@@ -17,8 +17,7 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
 	for( var i = 0; i < window.eoxiaJS.digirisk.accident.canvas.length; i++ ) {
 		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad = new SignaturePad( window.eoxiaJS.digirisk.accident.canvas[i], {
 			penColor: "rgb(66, 133, 244)",
-			minWidth: 5,
-			maxWidth: 10
+
 		} );
 	}
 }
