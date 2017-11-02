@@ -21,8 +21,13 @@ class Update_640 {
 	 * Instanciate update for current version
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'callback_init' ) );
 		add_action( 'wp_ajax_digirisk_update_to_ed840_danger', array( $this, 'callback_digirisk_update_to_ed840_danger' ) );
 		add_action( 'wp_ajax_digirisk_update_to_ed840_to_risk', array( $this, 'callback_digirisk_update_to_ed840_to_risk' ) );
+	}
+
+	public function callback_init() {
+		register_taxonomy( 'digi-danger', 'digi-risk' );
 	}
 
 	/**
@@ -39,7 +44,7 @@ class Update_640 {
 			foreach ( $dangers_slug as $danger_slug ) {
 				$term = get_term_by( 'slug', $danger_slug, 'digi-danger' );
 
-				if ( ! empty( $term ) ) {
+				if ( ! empty( $term ) && ! empty( $term->slug ) ) {
 					$risks_id = get_posts( array(
 						'fields' => 'ids',
 						'posts_per_page' => -1,
@@ -74,7 +79,7 @@ class Update_640 {
 			wp_delete_term( $value, 'digi-danger-category' );
 		}
 
-		Danger_Default_Data_Class::g()->create();
+		Risk_Category_Default_Data_Class::g()->create();
 
 		wp_send_json_success( array(
 			'done' => true,
