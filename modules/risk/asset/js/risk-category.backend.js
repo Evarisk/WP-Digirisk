@@ -11,7 +11,7 @@ window.eoxiaJS.digirisk.riskCategory.init = function() {
 };
 
 window.eoxiaJS.digirisk.riskCategory.event = function() {
-	jQuery( document ).on( 'click', '.table.risk .categorie-container.danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
+	jQuery( document ).on( 'click', '.table .categorie-container.danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
 };
 
 /**
@@ -35,7 +35,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
-	element.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 	event.stopPropagation();
 
 	// Rend le bouton "active".
@@ -49,7 +49,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 		data.action = 'check_predefined_danger';
 		data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
 		data.danger_id = element.data( 'id' );
-		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
+		data.society_id = element.closest( '.row' ).find( 'input[name="parent_id"] ' ).val();
 
 		jQuery( this ).closest( 'td' ).addClass( 'loading' );
 
