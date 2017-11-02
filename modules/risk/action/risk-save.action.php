@@ -79,7 +79,7 @@ class Risk_Save_Action {
 			}
 
 			if ( ! empty( $image_id ) ) {
-				File_Management_Class::g()->associate_file( $image_id, $risk_obj->id, 'risk_class', 'digi' );
+				\eoxia\WPEO_Upload_Class::g()->associate_file( $risk_obj->id, $image_id, 'risk_class', 'image' );
 			}
 		} // End if().
 
