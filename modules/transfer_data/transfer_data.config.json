@@ -1,10 +1,10 @@
 {
 	"name": "Transfer data",
 	"slug": "transfer_data",
-	"version": "0.2.0.0",
+	"version": "6.0.0",
 	"description": "Le module gérant le transfert de l'application 5.x.x.x à 6.x.x.x",
 	"path": "modules/transfer_data/",
-	"state": true,
+	"state": false,
 	"dependencies": {
 		"include": {
 		},
