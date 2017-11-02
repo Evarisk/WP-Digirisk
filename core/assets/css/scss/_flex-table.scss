@@ -1,0 +1,187 @@
+/**
+ * Table design
+ * .table -> classe principale
+ * .media
+ * .action -> Boite contenant les actions sur une ligne
+ * 		.task
+ * 		.edit
+ * 		.delete
+ * .w50 -> cellule de 50px
+ * .w100 -> cellule de 100px
+ * .wm130 -> cellule de 130px minimum
+ * .w150 -> cellule de 150px
+ * .full -> cellule de 100%
+ * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
+ */
+.digirisk-wrap .flex-table {
+	width: 100%;
+	border: 1px solid rgba(0,0,0,0.1);
+
+	/* table general */
+	.col, .header-cell, .cell {
+		height: 50px;
+		text-align: left;
+		white-space: nowrap;
+	}
+	.col {
+		display: flex;
+		flex-wrap: nowrap;
+	}
+	.col.advanced {
+		display: block;
+		height: auto;
+
+		.col {
+			width: 100%;
+			background: transparent !important;
+		}
+		.advanced {
+			padding: 8px;
+		}
+	}
+	.cell, .header-cell {
+		width: 100%;
+		margin: auto 0;
+		line-height: 50px;
+	}
+	strong {
+		font-weight: 700;
+		color: $primary;
+	}
+
+	/* table header */
+	> .table-header {
+		background: $secondary;
+		color: #fff;
+		.header-cell {
+			font-weight: 600;
+		}
+		.col {
+			background: $secondary !important;
+		}
+		.icon {
+			padding-right: 4px;
+		}
+	}
+
+	/* table body */
+	> .table-body {
+		.col {
+			&:nth-child(odd) {
+				background: #fff;
+			}
+			&:nth-child(even) {
+				background: rgba(0,0,0,0.1);
+			}
+		}
+		.cell.advanced {
+			width: 100%;
+			min-width: 100%;
+		}
+	}
+
+	/* table body */
+	> .table-footer {
+		border-top: 1px solid rgba(0,0,0,0.05);
+	}
+
+	/* media */
+	.media {
+		background: rgba(0,0,0,0.1);
+		&.no-file .add {
+			color: rgba(0,0,0,0.6);
+		}
+		.default-image {
+			color: rgba(0,0,0,0.3);
+		}
+	}
+
+	/* action */
+	.action {
+		flex-wrap: nowrap;
+		.task:hover .icon {
+			color: rgba(0,0,0,0.6);
+		}
+		.edit:hover .icon {
+			color: $primary;
+		}
+		.delete {
+			background: rgba(0,0,0,0.05);
+			&:hover .icon {
+				color: $red;
+			}
+		}
+		.add, .save {
+			margin-left: auto;
+			.icon {
+				color: #fff !important;
+			}
+		}
+	}
+}
+
+.digirisk-wrap .flex-table {
+	input.affect {
+		width: 50px;
+	}
+	input[type="text"], textarea {
+		width: 100%;
+	}
+
+	/* cell manual width */
+	.cell.w50, .header-cell.w50 {
+		width: 50px;
+		min-width: 50px;
+	}
+	.cell.w70, .header-cell.w70 {
+		width: 70px;
+		min-width: 70px;
+	}
+	.cell.w100, .header-cell.w100 {
+		width: 100px;
+		min-width: 100px;
+	}
+	.cell.w150, .header-cell.w150 {
+		width: 150px;
+		min-width: 150px;
+	}
+
+	/* cell manual min width */
+	.cell.wm130, .header-cell.wm130 {
+		min-width: 130px;
+	}
+	.cell.wm40, .header-cell.wm40 {
+		min-width: 40px;
+	}
+
+	/* cell manual max width */
+	.cell.wmax70 {
+		max-width: 70px;
+	}
+
+	.cell.full, .header-cell.full {
+		width: 100%;
+		input[type="text"], textarea {
+			width: 100%;
+		}
+	}
+	.cell.padding, .header-cell.padding {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+}
+
+.digirisk-wrap .flex-table {
+	@media ( max-width: 480px ) {
+		.col, .cell, .header-cell {
+			height: auto;
+			min-height: 50px;
+		}
+		.cell, .header-cell {
+			line-height: 1;
+		}
+		.col {
+			flex-wrap: wrap;
+		}
+	}
+}
