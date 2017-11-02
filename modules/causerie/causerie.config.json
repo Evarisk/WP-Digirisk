@@ -1,0 +1,16 @@
+{
+	"name": "Causerie",
+	"slug": "causerie",
+	"version": "6.5.0",
+	"description": "Le module gérant les causeries",
+	"path": "modules/causerie/",
+	"dependencies": {
+		"helper": {},
+		"shortcode": {},
+		"filter": {},
+		"action": {},
+		"model": {},
+		"class": {}
+		},
+	"state": true
+}
