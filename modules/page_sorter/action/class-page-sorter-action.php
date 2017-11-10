@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -49,7 +49,7 @@ class Page_Sorter_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5
+	 * @version 6.4.0
 	 */
 	public function callback_sorter_parent() {
 		check_admin_referer( 'callback_sorter_parent' );
@@ -65,22 +65,24 @@ class Page_Sorter_Action {
 				$element_id = (int) $element_id;
 				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
-				$society = Society_Class::g()->show_by_type( $element_id );
-				$society->parent_id = $parent_id;
+				if ( $element_id !== $parent_id ) {
+					$society = Society_Class::g()->show_by_type( $element_id );
+					$society->parent_id = $parent_id;
 
-				if ( empty( $society->parent_id ) ) {
-					$society->parent_id = $main_society->id;
+					if ( empty( $society->parent_id ) ) {
+						$society->parent_id = $main_society->id;
+					}
+
+					// Met le menu order.
+					if ( empty( $array_order[ $parent_id ] ) ) {
+						$array_order[ $parent_id ] = 0;
+					}
+
+					$society->order = $array_order[ $parent_id ];
+					$array_order[ $parent_id ]++;
+
+					Society_Class::g()->update_by_type( $society );
 				}
-
-				// Met le menu order.
-				if ( empty( $array_order[ $parent_id ] ) ) {
-					$array_order[ $parent_id ] = 0;
-				}
-
-				$society->order = $array_order[ $parent_id ];
-				$array_order[ $parent_id ]++;
-
-				Society_Class::g()->update_by_type( $society );
 			}
 		}
 
