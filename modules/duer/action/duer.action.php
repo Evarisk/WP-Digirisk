@@ -122,9 +122,9 @@ class DUER_Action {
 			$post_type = get_post_type( $_POST['society_id'] );
 
 			if ( 'digi-group' === $post_type ) {
-				$generate_response = Fiche_De_Groupement_Class::g()->generate( $_POST['society_id'] );
+				$generate_response = Sheet_Groupment_Class::g()->generate( $_POST['society_id'] );
 			} elseif ( 'digi-workunit' === $post_type ) {
-				$generate_response = Fiche_De_Poste_Class::g()->generate( $_POST['society_id'] );
+				$generate_response = Sheet_Workunit_Class::g()->generate( $_POST['society_id'] );
 			} else {
 				$generate_response = array(
 					'success' => true,
