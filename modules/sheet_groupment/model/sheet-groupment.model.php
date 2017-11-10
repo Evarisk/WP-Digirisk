@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class Fiche_De_Groupement_Model extends Document_Model {
+class Sheet_Groupment_Model extends Document_Model {
 
 	/**
 	 * Construit le modèle / Fill the model

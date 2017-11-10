@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.10
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -165,13 +165,15 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @param  string        $format  Le format de la génération A3 ou A4.
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.4.0
 	 */
 	public function generate_sheet( $data, $element, $format = 'A3' ) {
 		$data['delegues_du_personnels_date'] = mysql2date( 'd/m/Y', $data['delegues_du_personnels_date'] );
 		$data['membres_du_comite_entreprise_date'] = mysql2date( 'd/m/Y', $data['membres_du_comite_entreprise_date'] );
-		$document_creation = Document_Class::g()->create_document( $element, array( 'diffusion_informations_' . $format ), $data );
+
+		$class = '\digi\Diffusion_Informations_' . $format . '_Class';
+		$document_creation = $class::g()->create_document( $element, array( 'diffusion_informations_' . $format ), $data );
 
 		$filetype = 'unknown';
 		if ( ! empty( $document_creation ) && ! empty( $document_creation['status'] ) && ! empty( $document_creation['link'] ) ) {

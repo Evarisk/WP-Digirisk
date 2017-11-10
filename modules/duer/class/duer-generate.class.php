@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9
- * @version 6.3.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 * Génères le DUER
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param array $data Les data à mettre dans le ODT.
 	 * @return array {
@@ -59,7 +59,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 
 		$data_to_document = apply_filters( 'wpdigi_element_duer_details', $data_to_document );
 
-		$document_creation_response = Document_Class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
+		$document_creation_response = DUER_Class::g()->create_document( $element, array( 'document_unique' ), $data_to_document );
 
 		return array(
 			'creation_response' => $document_creation_response,

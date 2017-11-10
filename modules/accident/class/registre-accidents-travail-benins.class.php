@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gères la génération de l'ODT: Registre Accidents de travail benins
  */
-class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
+class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -91,6 +91,13 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Registre Accidents de Travail Benins';
 
 	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'registre_accidents_travail_benins';
+
+	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @return void
@@ -140,14 +147,14 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	 * @return array
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function generate( $main_society ) {
 		$address = Society_Class::g()->get_address( $main_society );
 		$address = $address[0];
 
 		$sheet_details = array(
-			'ref' => self::g()->element_prefix . (int) ( \eoxia\Common_Util::g()->get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
+			'ref' => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
 			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
@@ -158,7 +165,7 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
 
-		$document_creation_response = Document_Class::g()->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
+		$document_creation_response = $this->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,

@@ -3,16 +3,17 @@
  * L'affichage légal, inclus tous les templates nécessaires
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.6.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" class="form" method="post">
 	<input type="hidden" name="action" value="save_legal_display" />

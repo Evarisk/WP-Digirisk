@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class fiche_de_poste_model extends Document_Model {
+class Sheet_Workunit_Model extends Document_Model {
 
 	/**
 	 * Construit le modèle / Fill the model

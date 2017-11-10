@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class affichage_legal_a4_model extends document_model {
+class Legal_Display_A3_Model extends document_model {
 
 	/**
 	 * Construit le modèle / Fill the model

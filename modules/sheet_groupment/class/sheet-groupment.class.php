@@ -1,6 +1,6 @@
 <?php
 /**
- * Gères la génération de l'ODT: accident travail benin
+ * Gères la génération de la fiche de groupement
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gères la génération de la fiche de groupement
  */
-class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
+class Sheet_Groupment_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\Fiche_De_Groupement_Model';
+	protected $model_name = '\digi\Sheet_Groupment_Model';
 
 	/**
 	 * Le post type
@@ -91,20 +91,25 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Fiche de groupement';
 
 	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'groupement';
+
+	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.6
+	 * @version 6.4.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
 			'schema' => true,
-		) );
-
-		$element = $element[0];
+		), true );
 
 		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'main', array(
 			'element' => $element,
@@ -164,7 +169,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 
-		$document_creation_response = Document_Class::g()->create_document( $society, array( 'fiche_de_groupement' ), $sheet_details );
+		$document_creation_response = $this->create_document( $society, array( 'fiche_de_groupement' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
 			$society = Group_Class::g()->update( $society );
@@ -211,7 +216,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	 * Définie l'image du document
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param Group_Model $society L'objet groupement.
 	 * @return string|false|array {
@@ -226,7 +231,7 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 		$picture = __( 'No picture defined', 'digirisk' );
 
 		if ( ! empty( $society->thumbnail_id ) ) {
-			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'medium' );
+			$picture_definition = wp_get_attachment_image_src( $society->thumbnail_id, 'full' );
 			$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 			if ( is_file( $picture_path ) ) {
@@ -371,4 +376,4 @@ class Fiche_De_Groupement_Class extends \eoxia\Post_Class {
 	}
 }
 
-Fiche_De_Groupement_Class::g();
+Sheet_Groupment_Class::g();

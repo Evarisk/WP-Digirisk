@@ -1,13 +1,13 @@
 <?php
 /**
- * Déclares la liste des contenant les fiches de groupements
+ * Appel la méthode pour afficher la liste des fiches de groupement.
+ * Appel la vue "item-edit".
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
+ * @since 6.2.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package sheet_groupment
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -17,6 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <table class="table">
-	<?php Fiche_De_Groupement_Class::g()->display_document_list( $element_id ); ?>
-	<?php \eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+	<?php Sheet_Groupment_Class::g()->display_document_list( $element_id ); ?>
+
+	<?php
+	\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array(
+		'element' => $element,
+		'element_id' => $element_id,
+	) );
+	?>
 </table>

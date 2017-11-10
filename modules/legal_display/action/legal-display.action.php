@@ -4,10 +4,9 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -96,7 +95,7 @@ class Legal_Display_Action {
 	 * @param string $format (Optional) Le format voulu A4 ou A3.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
 		$legal_display_sheet_details = array(
@@ -153,7 +152,8 @@ class Legal_Display_Action {
 			'modalite_information_ap' => $legal_display->participation_agreement['information_procedures'],
 		);
 
-		$document_creation = Document_Class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
+		$class = '\digi\Legal_Display_' . $format . '_Class';
+		$document_creation = $class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
 
 		$filetype = 'unknown';
 		if ( ! empty( $document_creation ) && ! empty( $document_creation['status'] ) && ! empty( $document_creation['link'] ) ) {

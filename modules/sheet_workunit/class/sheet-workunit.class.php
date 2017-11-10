@@ -1,11 +1,11 @@
 <?php
 /**
- * Classe gérant les fiches de poste
+ * Gères la génération de la fiche de poste
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3
  * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2017
  * @package DigiRisk
  */
 
@@ -16,15 +16,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Classe gérant les fiches de poste
+ * Gères la génération de la fiche de poste
  */
-class Fiche_De_Poste_Class extends \eoxia\Post_Class {
+class Sheet_Workunit_Class extends Document_Class {
+
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\Fiche_De_Poste_Model';
+	protected $model_name = '\digi\Sheet_Workunit_Model';
 
 	/**
 	 * Le post type
@@ -88,6 +89,13 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $post_type_name = 'Fiche de poste';
+
+	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'unite_de_travail';
 
 	/**
 	 * Appelle le template main.view.php dans le dossier /view/
@@ -163,7 +171,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
-		$document_creation_response = Document_Class::g()->create_document( $society, array( 'fiche_de_poste' ), $sheet_details );
+		$document_creation_response = $this->create_document( $society, array( 'fiche_de_poste' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
 			$society = Workunit_Class::g()->update( $society );
@@ -205,7 +213,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return string|false|array
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_picture( $society ) {
@@ -236,7 +244,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des utilisateurs affectés et désaffectés à la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_users( $society ) {
@@ -269,7 +277,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
@@ -311,7 +319,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array Les risques dans la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
@@ -364,7 +372,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array Les recommandations dans la société
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function set_recommendations( $society ) {
@@ -402,7 +410,7 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	 * @param  int $term_id    L'ID de la recommendation.
 	 * @return false|string    Le lien vers l'image
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
 	public function get_picture_term( $term_id ) {
@@ -428,4 +436,4 @@ class Fiche_De_Poste_Class extends \eoxia\Post_Class {
 	}
 }
 
-Fiche_De_Poste_Class::g();
+Sheet_Workunit_Class::g();
