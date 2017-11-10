@@ -49,7 +49,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 		data.action = 'check_predefined_danger';
 		data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
 		data.danger_id = element.data( 'id' );
-		data.society_id = element.closest( '.row' ).find( 'input[name="parent_id"] ' ).val();
+		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
 		jQuery( this ).closest( 'td' ).addClass( 'loading' );
 
