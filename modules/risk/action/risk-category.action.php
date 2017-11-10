@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Les actions relatives aux categories de risque.
  */
-class Danger_Action {
+class Risk_Category_Action {
 
 	/**
 	 * Le constructeur appelle l'action WordPress suivante: init (Pour déclarer la taxonomy danger)
 	 *
-	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.2.9
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_check_predefined_danger', array( $this, 'callback_check_predefined_danger' ) );
@@ -36,8 +36,8 @@ class Danger_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.2.9.0
-	 * @version 6.2.9.0
+	 * @since 6.2.9
+	 * @version 6.4.0
 	 */
 	public function callback_check_predefined_danger() {
 		check_ajax_referer( 'check_predefined_danger' );
@@ -85,4 +85,4 @@ class Danger_Action {
 	}
 }
 
-new danger_action();
+new Risk_Category_Action();
