@@ -54,19 +54,28 @@ class Accident_Action {
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
 
+		$accident = ! empty( $_POST['accident'] ) ? (array) $_POST['accident'] : array();
 		$signature_of_the_caregiver = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
 		$signature_of_the_victim = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
 		$accident_investigation = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
 
-		if ( ! empty( $_POST['accident']['number_of_stopping_days'] ) ) {
-			foreach ( $_POST['accident']['number_of_stopping_days'] as $key => $element ) {
-				if ( empty( $element['stopping_days'] ) ) {
-					array_splice( $_POST['accident']['number_of_stopping_days'], $key, 1 );
+		$add = isset( $_POST['add'] ) ? true : false;
+
+		if ( ! empty( $accident['number_of_stopping_days'] ) ) {
+			foreach ( $accident['number_of_stopping_days'] as $key => $element ) {
+				if ( ! isset( $element['date'] ) || ! isset( $element['stopping_days'] ) || empty( $element['stopping_days'] ) ) {
+					array_splice( $accident['number_of_stopping_days'], $key, 1 );
+				} else {
+					$accident['number_of_stopping_days'][ $key ]['stopping_days'] = (int) $accident['number_of_stopping_days'][ $key ]['stopping_days'];
 				}
 			}
 		}
 
-		$accident = Accident_Class::g()->update( $_POST['accident'] );
+		if ( ! empty( $accident['have_investigation'] ) ) {
+			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;
+		}
+
+		$accident = Accident_Class::g()->update( $accident );
 
 		$upload_dir = wp_upload_dir();
 
@@ -101,9 +110,11 @@ class Accident_Action {
 			}
 		}
 
-		Accident_Class::g()->update( $accident );
+		$accident = Accident_Class::g()->update( $accident );
 
-		do_action( 'generate_accident_benin', $accident->id );
+		if ( ! $add ) {
+			do_action( 'generate_accident_benin', $accident->id );
+		}
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $accident->parent_id,
@@ -112,12 +123,19 @@ class Accident_Action {
 		) );
 
 		ob_start();
-		Accident_Class::g()->display_accident_list();
+		if ( $add ) {
+			\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+				'accident' => $accident,
+			) );
+		} else {
+			Accident_Class::g()->display_accident_list();
+		}
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'accident',
 			'callback_success' => 'editedAccidentSuccess',
 			'view' => ob_get_clean(),
+			'add' => $add,
 		) );
 	}
 
@@ -130,7 +148,7 @@ class Accident_Action {
 	 * @return void
 	 */
 	public function ajax_load_accident() {
-		check_ajax_referer( 'ajax_load_accident' );
+		check_ajax_referer( 'load_accident' );
 
 		if ( 0 === (int) $_POST['id'] ) {
 			wp_send_json_error();
@@ -158,6 +176,7 @@ class Accident_Action {
 			'module' => 'accident',
 			'callback_success' => 'loadedAccidentSuccess',
 			'view' => ob_get_clean(),
+			'id' => $id,
 		) );
 	}
 
@@ -170,7 +189,7 @@ class Accident_Action {
 	 * @return void
 	 */
 	public function ajax_delete_accident() {
-		check_ajax_referer( 'ajax_delete_accident' );
+		check_ajax_referer( 'delete_accident' );
 
 		if ( 0 === (int) $_POST['id'] ) {
 			wp_send_json_error();
