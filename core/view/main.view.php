@@ -8,7 +8,7 @@
  * @package Evarisk\Plugin
  *
  * @since 6.0.0
- * @version 6.3.2
+ * @version 6.4.0
  */
 
 namespace digi;
@@ -22,6 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php do_shortcode( '[digi_content id="' . $id . '"]' ); ?>
 
 	<?php
+	$waiting_updates = get_option( '_digi_waited_updates', array() );
+	if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digirisk-update' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digi-setup' ) ) :
+		\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'say-to-update' );
+	endif;
+
 	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
 
 	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->major_version ] ) ) :
