@@ -10,7 +10,7 @@
 */
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class workunit_shortcode {
+class Workunit_Shortcode {
 	/**
 	* Le constructeur
 	*/
@@ -47,18 +47,6 @@ class workunit_shortcode {
 
 		return  $output;
 	}
-
-  /**
-	* Affiches le contenu d'un établissement
-	*
-  * @param array $param
-  */
-  public function callback_digi_sheet_workunit( $param ) {
-		$element_id = (int)$_POST['element_id'];
-    $element = society_class::g()->show_by_type( $element_id );
-		\eoxia\View_Util::exec( 'digirisk', 'workunit', 'sheet-generation-form', array( 'element' => $element ) );
-    document_class::g()->display_document_list( $element );
-  }
 }
 
-new workunit_shortcode();
+new Workunit_Shortcode();
