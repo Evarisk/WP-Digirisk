@@ -120,6 +120,42 @@ class ZIP_Class extends \eoxia\Post_Class {
 	}
 
 	/**
+	 * Create a zip file with a list of file given in parameter / Créé un fichier au format zip a partir d'une liste de fichiers passé en paramètres
+	 *
+	 * @param string $final_file_path The zip file path where to save it / Le chemin vers lequel il faut sauvegarder le fichier zip
+	 * @param array $file_list The file list to add to the zip file / La liste des fichiers à ajouter au fichier zip
+	 * @param object $element The current element where to associate the zip file to / L'élément auquel il faut associer le fichier zip
+	 * @param string $version La version du zip
+	 */
+	 public function create_zip( $final_file_path, $file_list, $element, $version ) {
+		$zip = new \ZipArchive();
+
+		$response = array();
+		if ( $zip->open( $final_file_path, \ZipArchive::CREATE ) !== true ) {
+			$response['status'] = false;
+			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
+		}
+
+		if ( ! empty( $file_list ) ) {
+			foreach ( $file_list as $file ) {
+				if ( ! empty( $file['link'] ) ) {
+					$zip->addFile( $file['link'], $file['filename'] );
+				}
+			}
+		}
+		$zip->close();
+
+		$document_creation_response = document_class::g()->create_document( $element, array( 'zip' ), $file_list, $version );
+		$document_creation_response = wp_parse_args( $document_creation_response, $response );
+		// if ( !empty( $document_creation_response[ 'id' ] ) && !empty( $element ) ) {
+		// 	$element->associated_document_id[ 'document' ][] = $document_creation_response[ 'id' ];
+		// 	group_class::g()->update( $element );
+		// }
+
+		return $document_creation_response;
+	}
+
+	/**
 	 * Génères un zip et le met dans l'élément.
 	 *
 	 * @param Group_Model $element Les données du groupement.
