@@ -83,6 +83,12 @@ class Accident_Class extends \eoxia\Post_Class {
 	 */
 	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_accident' );
 
+	/**
+	 * La fonction appelée automatiquement après la mise à jour de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_put_function = array( '\digi\get_identifier', '\digi\get_full_accident' );
 
 	/**
 	 * Le nom pour le resgister post type

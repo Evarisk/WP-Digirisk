@@ -15,50 +15,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="accident-row" data-id="<?php echo esc_attr( $accident->id ); ?>">
-	<div data-title="Ref." class="padding">
-		<span>
-			<strong><?php echo esc_html( $accident->modified_unique_identifier ); ?></strong>
-			<span class="tooltip hover" aria-label="<?php esc_attr_e( 'Date d\'inscription dans le registre', 'digirisk' ); ?>">
-				<?php echo esc_html( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?>
-			</span>
-		</span>
+<div class="col">
+	<div data-title="Ref." class="cell padding">
+		<ul>
+			<li><strong><?php echo esc_attr( $accident->modified_unique_identifier ); ?></strong></li>
+			<li><?php echo esc_attr( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></li>
+		</ul>
 	</div>
-	<div data-title="Identité victime" class="padding">
-		<span><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></span>
-	</div>
-	<div data-title="Date et heure" class="padding">
-		<span><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></span>
-	</div>
-	<div data-title="Lieu" class="padding">
-		<span><?php echo esc_html( $accident->place ); ?></span>
-	</div>
-	<div data-title="Circonstances détaillées" class="padding">
-		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?>
-	</div>
-	<div data-title="NB. Jours arrêt" class="padding">
-		<span><?php echo esc_html( $accident->compiled_stopping_days ); ?></span>
-	</div>
-	<div data-title="Enquête accident" class="padding">
-		<span><?php echo ( $accident->have_investigation ) ? '' : __( 'Non' ,'digirisk' ); ?></span>
-		<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
-			<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
-		</span>
-	</div>
-	<div data-title="Action">
+	<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding"><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></div>
+	<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding"><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding"><?php echo esc_attr( $accident->place ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Indiciateurs', 'digirisk' ); ?>" class="cell padding"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
+	<div data-title="<?php esc_attr_e( 'action', 'digirisk' ); ?>" class="cell w150">
 		<div class="action grid-layout w3">
-			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>"><i class="fa fa-download icon" aria-hidden="true"></i></a>
-			<!-- Editer un accident -->
+			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
+				<i class="icon fa fa-download" aria-hidden="true"></i>
+				<span>
+					<?php esc_html_e( 'AT ', 'digirisk' ); ?>
+					<?php echo esc_html( strtoupper( substr( $accident->document->type, 16, 2 ) ) ); ?>
+				</span>
+			</a>
 			<div 	class="button light w50 edit action-attribute"
-						data-id="<?php echo esc_attr( $accident->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_accident' ) ); ?>"
-						data-loader="accident"
-						data-action="load_accident"><i class="icon fa fa-pencil"></i></div>
-
+						data-action="load_accident"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_accident' ) ); ?>"
+						data-id="<?php echo esc_attr( $accident->id ); ?>"><i class="icon fa fa-pencil"></i></div>
 			<div 	class="button light w50 delete action-delete"
+						data-action="delete_accident"
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_accident' ) ); ?>"
 						data-id="<?php echo esc_attr( $accident->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_accident' ) ); ?>"
-						data-action="delete_accident"><i class="icon fa fa-times"></i></div>
+						data-message-delete="<?php esc_attr_e( 'Supprimer cet accident', 'digirisk' ); ?>"><i class="icon fa fa-times"></i></div>
 		</div>
 	</div>
 </div>

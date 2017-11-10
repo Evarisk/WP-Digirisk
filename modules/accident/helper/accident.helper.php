@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -48,6 +48,13 @@ function get_full_accident( $data ) {
 		'posts_per_page' => 1,
 	), true );
 
+	if ( empty( $data->document ) ) {
+		$data->document = Accident_Travail_Benin_Class::g()->get( array(
+			'schema' => true,
+		), true);
+	}
+
+	$data->number_field_completed = accident_calcul_completed_field( $data );
 	return $data;
 }
 
@@ -64,9 +71,87 @@ function accident_compile_stopping_days( $data ) {
 	$data->compiled_stopping_days = 0;
 	if ( ! empty( $data->number_of_stopping_days ) ) {
 		foreach ( $data->number_of_stopping_days as $stopping_days ) {
-			$data->compiled_stopping_days += (int) $stopping_days['stopping_days'];
+			if ( isset( $stopping_days['date'] ) && isset( $stopping_days['stopping_days'] ) && is_int( $stopping_days['stopping_days'] ) ) {
+				$data->compiled_stopping_days += (int) $stopping_days['stopping_days'];
+			}
 		}
 	}
 
 	return $data;
+}
+
+/**
+ * Calcule le nombre de champ en DUR complété dans les données.
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ *
+ * @param  Accident_Model $data L'objet.
+ * @return integer       Le nombre de champ complétés.
+ */
+function accident_calcul_completed_field( $data ) {
+	$number_field_completed = 0;
+
+	if ( ! empty( $data->victim_identity_id ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->accident_date ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->place ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->id ) ) {
+		$number_comments = get_comments( array(
+			'post_id' => $data->id,
+			'status' => -34070,
+			'count' => true,
+			'number' => 1,
+		) );
+
+		if ( 0 < $number_comments ) {
+			$number_field_completed++;
+		}
+	}
+
+	if ( ! empty( $data->number_of_stopping_days[0] ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->location_of_lesions ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->nature_of_lesions ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->name_and_address_of_witnesses ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->name_and_address_of_third_parties_involved ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->observation ) ) {
+		$number_field_completed++;
+	}
+
+	if ( ! empty( $data->have_investigation ) ) {
+		$number_field_completed++;
+	}
+
+	if ( 0 < count( $data->associated_document_id['signature_of_the_caregiver_id'] ) ) {
+		$number_field_completed++;
+	}
+
+	if ( 0 < count( $data->associated_document_id['signature_of_the_victim_id'] ) ) {
+		$number_field_completed++;
+	}
+
+	return $number_field_completed;
 }
