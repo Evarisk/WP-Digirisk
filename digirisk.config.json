@@ -1,12 +1,13 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"major_version": "6.3.0",
+	"major_version": "6.4.0",
 	"version": "6.4.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
+		"digirisk-epi",
 		"digirisk-users",
 		"digirisk-accident",
 		"digirisk-causerie",
