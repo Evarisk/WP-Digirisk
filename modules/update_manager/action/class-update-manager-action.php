@@ -57,12 +57,6 @@ class Update_Manager_Action {
 				}
 			}
 		}
-
-		if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digirisk-update' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digi-setup' ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=digirisk-update' ) );
-			exit();
-		}
-
 	}
 
 	/**
