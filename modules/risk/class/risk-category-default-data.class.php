@@ -39,6 +39,7 @@ class Risk_Category_Default_Data_Class extends \eoxia\Singleton_Util {
 				$data = array(
 					'name' => $risk_category_from_json->name,
 					'status' => 'valid',
+					'position' => $risk_category_from_json->position,
 				);
 
 				$risk_category = Risk_Category_Class::g()->create( $data );
