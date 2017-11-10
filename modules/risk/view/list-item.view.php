@@ -6,8 +6,7 @@
  * @since 6.2.1
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
