@@ -56,7 +56,10 @@ class Risk_Category_Shortcode {
 		$preset = ! empty( $param ) && ! empty( $param['preset'] ) ? (int) $param['preset'] : 0;
 
 		if ( 'edit' === $display ) {
-			$risks_categories = Risk_Category_Class::g()->get();
+			$risks_categories = Risk_Category_Class::g()->get( array(
+				'meta_key' => '_position',
+				'orderby' => 'meta_value_num',
+			) );
 
 			$selected_risk_category = '';
 

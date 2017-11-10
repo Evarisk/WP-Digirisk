@@ -4,15 +4,16 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package setting
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux réglages de DigiRisk.
@@ -43,10 +44,11 @@ class Setting_Action {
 	}
 
 	/**
-	 * Appelle la vue main du module setting avec la liste des accronymes.
+	 * Appelle la vue main du module setting avec la liste des accronymes
+	 * et la liste des catégories de risque prédéfinies.
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	public function add_option_page() {
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
@@ -65,6 +67,19 @@ class Setting_Action {
 			'order' => 'ASC',
 		) );
 
+		// Retravaille l'ordre pour respecter celui de l'INRS.
+		uasort( $dangers_preset, function( $a, $b ) {
+			if ( $a->risk_category->position === $b->risk_category->position ) {
+				return 0;
+			}
+
+			if ( $a->risk_category->position > $b->risk_category->position ) {
+				return 1;
+			}
+
+			return 0;
+		} );
+
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym' => $list_accronym,
 			'dangers_preset' => $dangers_preset,
@@ -76,8 +91,8 @@ class Setting_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 1.0.0.0
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.2.9
 	 */
 	public function callback_update_accronym() {
 		$list_accronym = $_POST['list_accronym'];
