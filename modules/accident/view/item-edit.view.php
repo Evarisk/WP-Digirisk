@@ -14,26 +14,27 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
 <div class="col advanced" data-id="<?php echo esc_attr( $accident->id ); ?>">
 	<input type="hidden" name="action" value="edit_accident" />
 	<?php wp_nonce_field( 'edit_accident' ); ?>
 	<input type="hidden" name="accident[id]" value="<?php echo esc_attr( $accident->id ); ?>" />
 	<input type="hidden" name="accident[parent_id]" value="<?php echo esc_attr( $accident->parent_id ); ?>" />
 	<div class="col">
-		<div data-title="Ref." class="cell padding">
+		<div data-title="Ref." class="cell padding w150">
 			<ul>
 				<li><strong><?php echo esc_attr( $accident->modified_unique_identifier ); ?></strong></li>
 				<li><?php echo esc_attr( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></li>
 			</ul>
 		</div>
-		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding"><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></div>
-		<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding"><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding"><?php echo esc_attr( $accident->place ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></div>
+		<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->place ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
-		<div class="action grid-layout w3">
-			<div data-parent="advanced" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
+		<div data-title="<?php esc_attr_e( 'action', 'digirisk' ); ?>" class="cell w150">
+			<div class="action grid-layout w3">
+				<div data-parent="advanced" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+			</div>
 		</div>
 	</div>
 
@@ -62,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="grid-layout padding w2">
 				<div>
 					<label for="champs1"><?php esc_html_e( 'Nombre jours d\'arrêts', 'digirisk' ); ?></label>
-					<p><?php esc_html_e( 'Total des jours d\'arrêt:', 'digirisk' ); ?>&nbsp;<?php echo esc_html( $accident->compiled_stopping_days ); ?></p>
+					<p><?php esc_html_e( 'Total des jours d\'arrêt:', 'digirisk' ); ?>&nbsp;<strong><?php echo esc_html( $accident->compiled_stopping_days ); ?></strong></p>
 
 					<ul class="comment-container">
 						<?php
@@ -81,17 +82,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 						endif;
 						$i++;
 						?>
-						<li class="comment">
+						<li class="new comment">
 							<input type="hidden" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
 							<input type="text" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][stopping_days]" />
+							<span data-parent="comment" data-action="save_comment" data-type="comment" class="button add action-input"><i class="icon fa fa-plus"></i></span>
 						</li>
 					</ul>
 				</div>
 
 				<div>
-					<?php esc_html_e( 'Enquête accident', 'digirisk' ); ?>
-					<input type="checkbox" <?php echo $accident->have_investigation ? 'checked' : ''; ?> id="have_investigation" name="accident[have_investigation]" />
-					<label for="have_investigation"><?php esc_html_e( 'Réaliser une enquête accident', 'digirisk' ); ?></label>
+					<label for="have_investigation"><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></label>
+					<input id="have_investigation" type="checkbox" <?php echo $accident->have_investigation ? 'checked' : ''; ?> id="have_investigation" name="accident[have_investigation]" />
+					<label for="have_investigation" class="no-style"><?php esc_html_e( 'Réaliser une enquête accident', 'digirisk' ); ?></label>
 					<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
 						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" display_type="list" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
 					</span>
@@ -125,24 +127,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="grid-layout padding w2">
 				<div>
 					<label for="textarea"><?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?></label>
-					<i class="fa fa-eraser" aria-hidden="true"></i>
 					<input type="hidden" name="signature_of_the_caregiver" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
 					<canvas></canvas>
+					<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i>
 				</div>
 				<div>
 					<label for="textarea"><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></label>
-					<i class="fa fa-eraser" aria-hidden="true"></i>
 					<input type="hidden" name="signature_of_the_victim" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
 					<canvas></canvas>
+					<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i>
 				</div>
 			</div>
 
 			<label for="textarea"><?php esc_html_e( 'Observations', 'digirisk' ); ?></label>
 			<textarea name="accident[observation]"><?php echo $accident->observation; ?></textarea>
 
-			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input float right"><i class="icon fa fa-floppy-o"></i></div>
 		</div>
 	</div>
 </div>

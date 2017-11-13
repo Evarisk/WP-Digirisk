@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="flex-table accident">
 	<div class="table-header">
 		<div class="col">
-			<div class="header-cell padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
-			<div class="header-cell padding"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?></div>
-			<div class="header-cell padding"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></div>
-			<div class="header-cell padding"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></div>
+			<div class="header-cell padding w150"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
+			<div class="header-cell padding w200"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?></div>
+			<div class="header-cell padding w150"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></div>
+			<div class="header-cell padding w100"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></div>
 			<div class="header-cell padding"><?php esc_html_e( 'Circonstances', 'digirisk' ); ?></div>
-			<div class="header-cell padding"><?php esc_html_e( 'Indicateurs', 'digirisk' ); ?></div>
-			<div class="header-cell padding w100"></div>
+			<div class="header-cell padding w70"><?php esc_html_e( 'Indicateurs', 'digirisk' ); ?></div>
+			<div class="header-cell padding w150"></div>
 		</div>
 	</div>
 

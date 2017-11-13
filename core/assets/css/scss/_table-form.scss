@@ -25,6 +25,10 @@
 			cursor: pointer;
 		}
 	}
+	input[type="radio"], input[type="checkbox"] {
+		width: auto;
+		display: inline-block;
+	}
 
 	label {
 		position: static;
@@ -35,6 +39,13 @@
 		text-transform: uppercase;
 		padding: 0.8em 0 0.4em 0;
 		color: rgba(0,0,0,0.6);
+		&.no-style {
+			font-size: 14px;
+			font-weight: 400;
+			text-transform: none;
+			display: inline;
+			padding-left: 0.4em;
+		}
 	}
 
 }
