@@ -141,7 +141,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	}
 
 	/**
-	 * Cette méthode génère l'accident de travail bénin
+	 * Cette méthode génère le registre AT bénins.
 	 *
 	 * @param Society_Model $main_society La société.
 	 * @return array
@@ -165,6 +165,15 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
 
+		$sheet_details_log = $sheet_details;
+		$sheet_details_log = \wp_json_encode( $sheet_details_log );
+		$sheet_details_log = addslashes( $sheet_details_log );
+		$sheet_details_log = preg_replace_callback( '/\\\\u([0-9a-f]{4})/i', function ( $matches ) {
+			$sym = mb_convert_encoding( pack( 'H*', $matches[1] ), 'UTF-8', 'UTF-16' );
+			return $sym;
+		}, $sheet_details_log );
+
+		\eoxia\LOG_Util::log( $sheet_details_log, 'digirisk' );
 		$document_creation_response = $this->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
 
 		return array(
@@ -179,10 +188,12 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array Les accidents
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function set_accidents() {
-		$accidents = Accident_Class::g()->get();
+		$accidents = Accident_Class::g()->get( array(
+			'posts_per_page' => -1,
+		) );
 
 		$accident_details = array(
 			'accidentDebut' => array(
@@ -213,9 +224,9 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 
 				$accident_details['accidentDebut']['value'][] = array(
 					'ref' => $element->unique_identifier,
-					'dateInscriptionRegistre' => $element->registration_date_in_register,
+					'dateInscriptionRegistre' => $element->registration_date_in_register['date_input']['fr_FR']['date'],
 					'nomPrenomMatriculeVictime' => ! empty( $element->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $element->victim_identity->id . ' ' . $element->victim_identity->login : '',
-					'dateHeure' => $element->accident_date,
+					'dateHeure' => $element->accident_date['date_input']['fr_FR']['date_time'],
 					'lieu' => $element->place,
 					'circonstances' => $comment_content,
 					'siegeLesions' => $element->location_of_lesions,
@@ -237,21 +248,25 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	}
 
 	/**
-	 * A supprimer
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
+	 * Récupères le thumbnail de l'attachment.
+	 *
+	 * @since 6.4.0
+	 * @version 6.4.0
+	 *
+	 * @param  integer $id L'ID de l'attchment.
+	 * @return array       Les données pour l'ODT.
 	 */
 	public function get_picture( $id ) {
 		$picture = '';
 
-		$picture_definition = wp_get_attachment_image_src( $id, 'thumbnail' );
+		$picture_definition = wp_get_attachment_image_src( $id, array( 300, 150 ) );
 		$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 		if ( is_file( $picture_path ) ) {
 			$picture = array(
-				'type'		=> 'picture',
-				'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
-				'option'	=> array(
+				'type' => 'picture',
+				'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+				'option' => array(
 					'size' => 3,
 				),
 			);
