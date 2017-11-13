@@ -3791,7 +3791,8 @@
   line-height: 50px;
   color: #fff;
   font-size: 12px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  width: 100%; }
 
 .digirisk-wrap .navigation-container .society-header .title .icon {
   display: inline;
@@ -4156,7 +4157,7 @@
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis; }
 
-.digirisk-wrap .tab .tab-element.active:not(.toggle) {
+.digirisk-wrap .tab .tab-element.active:not(.toggle):not(.gp) {
   background: #3495f0;
   color: #fff; }
 
