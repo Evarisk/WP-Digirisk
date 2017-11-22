@@ -85,7 +85,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $address->additional_address ) ? 'active' : '' ); ?>">
 				<input type="text" name="address[additional_address]" value="<?php echo esc_attr( $address->additional_address ); ?>" />
-				<label><?php esc_html_e( 'Additional address', 'digirisk' ); ?></label>
+				<label><?php esc_html_e( 'Complément d\'adresse', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
@@ -102,7 +102,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $address->postcode ) ? 'active' : '' ); ?>">
 				<input type="text" name="address[postcode]" value="<?php echo esc_attr( $address->postcode ); ?>" />
-				<label><?php esc_html_e( 'Postcode', 'digirisk' ); ?></label>
+				<label><?php esc_html_e( 'Code postal', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
@@ -110,7 +110,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $address->town ) ? 'active' : '' ); ?>">
 				<input type="text" name="address[town]" value="<?php echo esc_attr( $address->town ); ?>" />
-				<label><?php esc_html_e( 'Town', 'digirisk' ); ?></label>
+				<label><?php esc_html_e( 'Ville', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][0] ) ? 'active' : '' ); ?>">
 				<input type="text" name="society[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '' ); ?>" />
-				<label><?php esc_html_e( 'Phone', 'digirisk' ); ?></label>
+				<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
 		</li>
