@@ -4,8 +4,8 @@
  * Appelle la vue permettant d'afficher la navigation.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.1
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -25,13 +25,12 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	protected function construct() {
-		/**	Création d'une taille d'image dédiée pour les images principales des groupements et unités de travail / Create a deddicated picture size for groups and word unit pictures	*/
+		// Création de différentes tailles d'image dédiée pour les images principales des groupements et unités de travail.
 		add_image_size( 'digirisk-element-thumbnail', 200, 150, true );
-		/**	Création d'une taille d'image dédiée pour les images principales des groupements et unités de travail / Create a deddicated picture size for groups and word unit pictures	*/
 		add_image_size( 'digirisk-element-miniature', 50, 50, true );
 	}
 
@@ -42,7 +41,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1.0
+	 * @since 6.0.0
 	 * @version 6.2.4
 	 */
 	public function display( $id = 0 ) {
@@ -53,12 +52,12 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 * Récupères le patch note pour la version actuelle.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @return string|object
 	 */
 	public function get_patch_note() {
-		$patch_note_url = 'https://www.evarisk.com/wp-json/wp/v2/posts/33101';
+		$patch_note_url = 'https://www.evarisk.com/wp-json/eoxia/v1/change_log/' . \eoxia\Config_Util::$init['digirisk']->version;
 		$json = wp_remote_get( $patch_note_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
@@ -73,11 +72,12 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 
 		return $result;
 	}
+
 	/**
-	 * Launch some action when activate the plugin
+	 * Ajoutes la capacité "manage_digirisk" à l'activation de DigiRisk.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.4.0
 	 */
 	public function activation() {
 		/** Set capability to administrator by default */
@@ -85,16 +85,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 		if ( ! $admin_role->has_cap( 'manage_digirisk' ) ) {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
-
-		// $version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
-		//
-		// if ( 3 === strlen( $version ) ) {
-		// 	$version *= 10;
-		// }
-		//
-		// update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
 	}
-
 }
 
 new Digirisk_Class();
