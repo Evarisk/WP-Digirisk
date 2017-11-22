@@ -101,7 +101,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 * Prépares un squelette des données
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @return array {
 	 *         Le squelette des données
@@ -113,59 +113,61 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *         @type
 	 * }
 	 *
-	 * @todo: A supprimer
+	 * @todo: A supprimer;
+	 * 13/11/2017: Pourquoi supprimer cette méthode ?
+	 * Elle permet d'être sur de ne pas avoir une chaine de caractère innatendu dans le ODT.
 	 */
 	public function prepare_skeleton() {
 		$skeleton = array(
-			'identifiantElement'	=> '',
-			'nomEntreprise'				=> '',
-			'dateAudit'						=> '',
-			'emetteurDUER'				=> '',
-			'destinataireDUER'		=> '',
-			'dateGeneration'			=> '',
-			'telephone'						=> '',
-			'portable'						=> '',
+			'identifiantElement' => '',
+			'nomEntreprise' => '',
+			'dateAudit' => '',
+			'emetteurDUER' => '',
+			'destinataireDUER' => '',
+			'dateGeneration' => '',
+			'telephone' => '',
+			'portable' => '',
 
-			'methodologie'				=> '',
-			'sources'							=> '',
-			'remarqueImportante'	=> '',
-			'dispoDesPlans'				=> '',
+			'methodologie' => '',
+			'sources' => '',
+			'remarqueImportante' => '',
+			'dispoDesPlans' => '',
 
 			'elementParHierarchie' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			),
 
 			'risq' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			),
 
 			'risqueFiche' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			),
 
 			'planDactionRisq' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			),
 
 			'planDaction' => array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			),
 		);
 
-		$level_list = array( 48, 51, 80, );
+		$level_list = array( 48, 51, 80 );
 		foreach ( $level_list as $level ) {
 			$skeleton[ 'risq' . $level ] = array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			);
 			$skeleton[ 'planDactionRisq' . $level ] = array(
-				'type'	=> 'segment',
-				'value'	=> array(),
+				'type' => 'segment',
+				'value' => array(),
 			);
 		}
 
@@ -173,12 +175,12 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
-	 * Récupères le logo: todo: Pas utiliser
+	 * Récupères le logo
+	 *
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 *
 	 * @return string Le chemin vers le logo
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
 	 */
 	public function get_logo() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -287,48 +289,4 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 		return $audit_date;
 	}
 
-	/**
-	 * Génère les ODT enfants de ce DUER
-	 *
-	 * @param object $element L'élement groupement.
-	 *
-	 * @return array La liste des ODT enfants
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
-	 */
-	public function generate_child( $element ) {
-		$list_id = array();
-
-		/**	Build a file list to set into the final zip / Contruit la liste des fichiers a ajouter dans le zip lorsque les générations sont terminées	*/
-		$response = array();
-		$response[] = Fiche_De_Groupement_Class::g()->generate( $element->id );
-
-		/**	Get workunit list for the current group / Récupération de la liste des unités de travail pour le groupement actuel	*/
-		$work_unit_list = Workunit_Class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
-		foreach ( $work_unit_list as $workunit ) {
-			$response[] = Fiche_De_Poste_Class::g()->generate( $workunit->id );
-		}
-
-		$list_id = Group_Class::g()->get_element_sub_tree_id( $element->id, $list_id );
-		if ( ! empty( $list_id ) ) {
-			foreach ( $list_id as $element ) {
-				if ( ! empty( $element['workunit'] ) ) {
-					if ( ! empty( $element['id'] ) ) {
-						$response[] = Fiche_De_Groupement_Class::g()->generate( $element['id'] );
-					}
-					foreach ( $element['workunit'] as $workunit_id ) {
-						$response[] = Fiche_De_Poste_Class::g()->generate( $workunit_id['id'] );
-					}
-				}
-				else {
-					if ( ! empty( $element['id'] ) ) {
-						$response[] = Fiche_De_Groupement_Class::g()->generate( $element['id'] );
-					}
-				}
-			}
-		}
-
-		return $response;
-	}
 }
