@@ -1,13 +1,19 @@
 <?php
 /**
- * Le modèle du ZIP
+ * Définition des champs d'un zip.
  *
- * @package Evarisk\Plugin
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.1.9
+ * @version 6.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Le modèle du ZIP
@@ -17,17 +23,17 @@ class ZIP_Model extends \eoxia\Post_Model {
 	/**
 	 * Le constructeur
 	 *
-	 * @param [type] $object       [description].
-	 * @param array  $field_wanted [description].
-	 * @param array  $args          [description].
+	 * @since 6.1.9
+	 * @version 6.4.0
+	 *
+	 * @param ZIP_Model $object L'objet zip.
 	 */
 	public function __construct( $object ) {
 		$this->model['list_generation_results'] = array(
-			'type' 		=> 'array',
-			'meta_type'	=> 'multiple',
+			'type' => 'array',
+			'meta_type' => 'multiple',
 		);
 
 		parent::__construct( $object );
 	}
-
 }
