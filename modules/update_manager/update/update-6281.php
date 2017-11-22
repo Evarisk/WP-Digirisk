@@ -52,7 +52,9 @@ class Update_6281 {
 	public function callback_digirisk_update_danger_category_picto() {
 		$done = true;
 
-		Danger_Default_Data_Class::g()->create();
+		if ( class_exists( '\digirisk\Danger_Default_Data_Class' ) ) {
+			Danger_Default_Data_Class::g()->create();
+		}
 
 		wp_send_json_success( array(
 			'done' => $done,
