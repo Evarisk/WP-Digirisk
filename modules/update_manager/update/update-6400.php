@@ -1,9 +1,12 @@
 <?php
 /**
- * Mise à jour des données pour les version à partir de 6.4.0
+ * Mise à jour des données pour la version 6.4.0
  *
+ * @author Evarisk
+ * @since 6.4.0
+ * @version 6.4.0
+ * @copyright 2017
  * @package DigiRisk
- * @subpackage Module/Update_Manager
  */
 
 namespace digi;
