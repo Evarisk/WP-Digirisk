@@ -3798,7 +3798,8 @@
   display: inline;
   font-size: 12px;
   margin-right: 0.4em;
-  line-height: 50px; }
+  line-height: 50px;
+  float: left; }
 
 .digirisk-wrap .navigation-container .society-header > .add-container {
   top: 50% !important;
