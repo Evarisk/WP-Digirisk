@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.6
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -50,8 +50,8 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array
 	 *
-	 * @since 6.2.6.0
-	 * @version 6.2.6.0
+	 * @since 6.2.6
+	 * @version 6.4.0
 	 */
 	public function exec( $args ) {
 		if ( empty( $args['filepath'] ) ) {
@@ -99,8 +99,8 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 	 * @param array  $risks    Les données des risques.
 	 * @return void
 	 *
-	 * @since 6.2.6.0
-	 * @version 6.2.6.0
+	 * @since 6.2.6
+	 * @version 6.4.0
 	 */
 	public function write_csv( $filepath, $risks ) {
 		$csv_file = fopen( $filepath, 'a' );
@@ -109,7 +109,7 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 			foreach ( $risks as $risk ) {
 				$risk_data_to_export = array(
 					'unique_identifier' => $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier,
-					'risque' => $risk->danger->name,
+					'risque' => $risk->risk_category->name,
 					'cotation' => $risk->evaluation->risk_level['equivalence'],
 					'comment_date' => $risk->comment[0]->date['date_input']['fr_FR']['date'],
 					'comment_content' => $risk->comment[0]->content,
