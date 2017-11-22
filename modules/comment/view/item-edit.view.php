@@ -64,6 +64,12 @@ $user = User_Digi_Class::g()->get( array(
 						data-action="save_comment"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_comment' ) ); ?>"
 						data-type="<?php echo esc_attr( $type ); ?>"
+						data-namespace="<?php echo esc_attr( $namespace ); ?>"
+						data-display="<?php echo esc_attr( $display ); ?>"
+						data-id="<?php echo esc_attr( $id ); ?>"
+						data-add-button="<?php echo esc_attr( $add_button ); ?>"
+						data-display-date="<?php echo esc_attr( $display_date ); ?>"
+						data-display-user="<?php echo esc_attr( $display_user ); ?>"
 						class="button add action-input"><i class="icon fa fa-plus"></i></span>
 		<?php endif; ?>
 	<?php endif; ?>
