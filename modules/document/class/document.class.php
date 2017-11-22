@@ -31,6 +31,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Le post type
 	 *
 	 * @var string
+	 * @todo:  Détruis la route de WordPress /wp-json/wp/v2/media (A changer très rapidement)
 	 */
 	protected $post_type = 'attachment';
 
