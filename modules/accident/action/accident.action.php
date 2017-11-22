@@ -58,18 +58,11 @@ class Accident_Action {
 		$signature_of_the_caregiver = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
 		$signature_of_the_victim = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
 		$accident_investigation = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
+		$accident_stopping_days = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
 
 		$add = isset( $_POST['add'] ) ? true : false;
 
-		if ( ! empty( $accident['number_of_stopping_days'] ) ) {
-			foreach ( $accident['number_of_stopping_days'] as $key => $element ) {
-				if ( ! isset( $element['date'] ) || ! isset( $element['stopping_days'] ) || empty( $element['stopping_days'] ) ) {
-					array_splice( $accident['number_of_stopping_days'], $key, 1 );
-				} else {
-					$accident['number_of_stopping_days'][ $key ]['stopping_days'] = (int) $accident['number_of_stopping_days'][ $key ]['stopping_days'];
-				}
-			}
-		}
+		Accident_Travail_Stopping_Day_Class::g()->save_stopping_day( $accident_stopping_days );
 
 		if ( ! empty( $accident['have_investigation'] ) ) {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;

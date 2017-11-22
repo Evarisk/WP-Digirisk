@@ -74,7 +74,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\digi\get_identifier', '\digi\accident_compile_stopping_days' );
+	protected $before_put_function = array( '\digi\get_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
@@ -84,11 +84,18 @@ class Accident_Class extends \eoxia\Post_Class {
 	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_accident' );
 
 	/**
+	 * La fonction appelée automatiquement après la création de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
+	protected $after_post_function = array( '\digi\get_identifier', '\digi\get_full_accident', '\digi\accident_compile_stopping_days' );
+
+	/**
 	 * La fonction appelée automatiquement après la mise à jour de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_put_function = array( '\digi\get_identifier', '\digi\get_full_accident' );
+	protected $after_put_function = array( '\digi\get_identifier', '\digi\get_full_accident', '\digi\accident_compile_stopping_days' );
 
 	/**
 	 * Le nom pour le resgister post type

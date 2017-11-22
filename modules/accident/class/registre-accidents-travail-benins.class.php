@@ -157,7 +157,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 			'ref' => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
+			'telephone' => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
 			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,

@@ -54,6 +54,10 @@ function get_full_accident( $data ) {
 		), true);
 	}
 
+	$data->stopping_days = Accident_Travail_Stopping_Day_Class::g()->get( array(
+		'post_parent' => $data->id,
+	) );
+
 	$data->number_field_completed = accident_calcul_completed_field( $data );
 	return $data;
 }
@@ -69,11 +73,10 @@ function get_full_accident( $data ) {
  */
 function accident_compile_stopping_days( $data ) {
 	$data->compiled_stopping_days = 0;
-	if ( ! empty( $data->number_of_stopping_days ) ) {
-		foreach ( $data->number_of_stopping_days as $stopping_days ) {
-			if ( isset( $stopping_days['date'] ) && isset( $stopping_days['stopping_days'] ) && is_int( $stopping_days['stopping_days'] ) ) {
-				$data->compiled_stopping_days += (int) $stopping_days['stopping_days'];
-			}
+
+	if ( ! empty( $data->stopping_days ) ) {
+		foreach ( $data->stopping_days as $stopping_days ) {
+			$data->compiled_stopping_days += (int) $stopping_days->content;
 		}
 	}
 
@@ -117,7 +120,7 @@ function accident_calcul_completed_field( $data ) {
 		}
 	}
 
-	if ( ! empty( $data->number_of_stopping_days[0] ) ) {
+	if ( ! empty( $data->stopping_days ) ) {
 		$number_field_completed++;
 	}
 

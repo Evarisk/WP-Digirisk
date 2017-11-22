@@ -84,12 +84,6 @@ class Accident_Model extends \eoxia\Post_Model {
 				'meta_type' => 'single',
 				'field' => '_wpdigi_compiled_stopping_days',
 			),
-			'number_of_stopping_days' => array(
-				'bydefault' => '',
-				'type' => 'array',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_number_of_stopping_days',
-			),
 			'have_investigation' => array(
 				'type' => 'boolean',
 				'meta_type' => 'single',

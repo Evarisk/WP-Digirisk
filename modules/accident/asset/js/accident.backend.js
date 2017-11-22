@@ -86,16 +86,6 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
 	}
 };
 
-window.eoxiaJS.digirisk.accident.saveSignature = function( element ) {
-	var id = jQuery( element ).closest( '.col.advanced' ).attr( 'data-id' );
-	var accidentRow = jQuery( element ).closest( '.col.advanced[data-id="' + id + '"]' );
-
-	accidentRow.find( 'canvas' ).each( function() {
-		jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-	} );
-	return true;
-};
-
 /**
  * Le callback en cas de réussite à la requête Ajax "edit_accident".
  * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
@@ -135,7 +125,10 @@ window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElem
 	window.eoxiaJS.digirisk.search.renderChanged();
 	jQuery( '.col.advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
 		jQuery( this )[0].signaturePad.clear();
-		jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( 'div' ).find( '.url' ).val() );
+
+		if ( jQuery( this ).closest( 'div' ).find( '.url' ).val() ) {
+			jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( 'div' ).find( '.url' ).val() );
+		}
 	} );
 };
 
@@ -183,3 +176,79 @@ window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, res
 window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
 	jQuery( '.tab-element[data-action="digi-registre-accident"]' ).click();
 };
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "edit_stopping_day".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ */
+window.eoxiaJS.digirisk.accident.editedStoppingDaySuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( 'div' ).html( response.data.view );
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_stopping_day".
+ * Cliques automatiquement sur l'onglet 'Registre accidents'
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ */
+
+window.eoxiaJS.digirisk.accident.deletedStoppingDay = function( triggeredElement, response ) {
+	triggeredElement.closest( '.comment' ).fadeOut();
+};
+
+window.eoxiaJS.digirisk.accident.checkStoppingDayData = function( element ) {
+	element.closest( '.tooltip.active' ).removeClass( 'active' );
+
+	if ( isNaN( element.closest( '.comment' ).find( '.is-number' ).val() ) || '' == element.closest( '.comment' ).find( '.is-number' ).val() ) {
+		element.closest( '.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	return true;
+}
+
+window.eoxiaJS.digirisk.accident.checkAllData = function( element ) {
+	var isNumber = true;
+	jQuery( '.accident.flex-table .tooltip.active' ).removeClass( 'active' );
+
+	jQuery( '.accident.flex-table .comment:not(.new) .is-number' ).each( function() {
+		if ( isNaN( jQuery( this ).val() ) || '' == jQuery( this ).val() ) {
+			jQuery( this ).closest( '.tooltip' ).addClass( 'active' );
+			isNumber = false;
+		}
+	} );
+
+	jQuery( '.accident.flex-table .comment.new .is-number' ).each( function() {
+		if ( isNaN( jQuery( this ).val() ) ) {
+			jQuery( this ).closest( '.tooltip' ).addClass( 'active' );
+			isNumber = false;
+		}
+	} );
+
+	if ( ! isNumber ) {
+		return false;
+	}
+
+	var id = jQuery( element ).closest( '.col.advanced' ).attr( 'data-id' );
+	var accidentRow = jQuery( element ).closest( '.col.advanced[data-id="' + id + '"]' );
+
+	accidentRow.find( 'canvas' ).each( function() {
+		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
+		jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
+	}
+
+	} );
+
+	return true;
+}

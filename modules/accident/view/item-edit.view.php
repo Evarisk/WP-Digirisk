@@ -31,9 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->place ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
-		<div data-title="<?php esc_attr_e( 'action', 'digirisk' ); ?>" class="cell w150">
+		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 			<div class="action grid-layout w3">
-				<div data-parent="advanced" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="button w50 green save action-input float right"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		</div>
 	</div>
@@ -62,37 +62,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="grid-layout padding w2">
 				<div>
-					<label for="champs1"><?php esc_html_e( 'Nombre jours d\'arrêts', 'digirisk' ); ?></label>
-					<p><?php esc_html_e( 'Total des jours d\'arrêt:', 'digirisk' ); ?>&nbsp;<strong><?php echo esc_html( $accident->compiled_stopping_days ); ?></strong></p>
-
-					<ul class="comment-container">
-						<?php
-						$i = 0;
-						if ( ! empty( $accident->number_of_stopping_days ) ) :
-							foreach ( $accident->number_of_stopping_days as $i => $stopping_days ) :
-								if ( isset( $stopping_days['date'] ) && isset( $stopping_days['stopping_days'] ) && is_int( $stopping_days['stopping_days'] ) ) :
-									?>
-									<li class="comment">
-										<input type="hidden" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( $stopping_days['date'] ); ?>" />
-										<input type="text" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][stopping_days]" value="<?php echo esc_attr( $stopping_days['stopping_days'] ); ?>" />
-									</li>
-									<?php
-								endif;
-							endforeach;
-						endif;
-						$i++;
-						?>
-						<li class="new comment">
-							<input type="hidden" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
-							<input type="text" name="accident[number_of_stopping_days][<?php echo esc_attr( $i ); ?>][stopping_days]" />
-							<span data-parent="comment" data-action="save_comment" data-type="comment" class="button add action-input"><i class="icon fa fa-plus"></i></span>
-						</li>
-					</ul>
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
+						'accident' => $accident,
+					) );
+					?>
 				</div>
 
 				<div>
 					<label for="have_investigation"><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></label>
-					<input id="have_investigation" type="checkbox" <?php echo $accident->have_investigation ? 'checked' : ''; ?> id="have_investigation" name="accident[have_investigation]" />
+					<input id="have_investigation" type="checkbox" <?php echo $accident->have_investigation ? 'checked' : ''; ?> name="accident[have_investigation]" />
 					<label for="have_investigation" class="no-style"><?php esc_html_e( 'Réaliser une enquête accident', 'digirisk' ); ?></label>
 					<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
 						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" display_type="list" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
@@ -144,7 +123,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<label for="textarea"><?php esc_html_e( 'Observations', 'digirisk' ); ?></label>
 			<textarea name="accident[observation]"><?php echo $accident->observation; ?></textarea>
 
-			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="saveSignature" class="button w50 green save action-input float right"><i class="icon fa fa-floppy-o"></i></div>
+			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="button w50 green save action-input float right"><i class="icon fa fa-floppy-o"></i></div>
 		</div>
 	</div>
 </div>
