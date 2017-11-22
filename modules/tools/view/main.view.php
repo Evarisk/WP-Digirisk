@@ -91,7 +91,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					<div class="block">
 						<div class="container">
 							<h3><?php esc_html_e( 'En cas de problèmes d\'affichage', 'digirisk' ); ?></h3>
-							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez des problèmes d\'affichage', 'digirisk' ); ?></p>
+							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour recompiler les données des risques, si vous rencontrez des problèmes d\'affichage', 'digirisk' ); ?></p>
 							<p><button class="button blue margin element-risk-compilation" data-nonce="<?php echo esc_attr( wp_create_nonce( 'risk_list_compil' ) ); ?>" type="button" ><?php esc_html_e( 'Recompiler', 'digirisk' ); ?></button>
 							<ul></ul>
 						</div>
