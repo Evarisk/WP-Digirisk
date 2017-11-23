@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->id ); ?>" />
 				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( $stopping_day->date['date_input']['date'] ); ?>" />
 				<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" value="<?php echo esc_attr( $stopping_day->content ); ?>" />
-				<?php do_shortcode( '[wpeo_upload id="' . $stopping_day->id . '" single="true" model_name="/digi/Accident_Travail_Stopping_Day_Class" mime_type="application/odt"]' ); ?>
+				<?php do_shortcode( '[wpeo_upload id="' . $stopping_day->id . '" field_name="document" single="true" title="' . $accident->modified_unique_identifier . ' : ' . __( "jour d'arrêt", 'digirisk' ) . '" model_name="/digi/Accident_Travail_Stopping_Day_Class" mime_type="application"]' ); ?>
 				<span class="button delete action-delete"
 							data-id="<?php echo esc_attr( $stopping_day->id ); ?>"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_stopping_day' ) ); ?>"
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->id ); ?>" />
 		<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
 		<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" />
-		<?php do_shortcode( '[wpeo_upload id="0" model_name="/digi/Accident_Travail_Stopping_Day_Class" single="true" mime_type="application/odt"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="0" model_name="/digi/Accident_Travail_Stopping_Day_Class" field_name="document" single="true" mime_type="application"]' ); ?>
 		<span data-namespace="digirisk"
 					data-module="accident"
 					data-before-method="checkStoppingDayData"
