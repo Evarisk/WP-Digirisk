@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_comment id="' . $danger->id . '" namespace="digi" type="risk_evaluation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
-		<div class="action grid-layout w3">
+		<div class="hidden">
 			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 		</div>
 	</td>
