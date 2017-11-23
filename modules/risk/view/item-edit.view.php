@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . ( ( $risk->preset ) ? 0 : $risk->id ) . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="edit" add_button="' . ( ( $risk->preset ) ? '0' : '1' ) . '"]' ); ?>
