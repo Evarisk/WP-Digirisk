@@ -1,17 +1,21 @@
-<?php namespace digi;
+<?php
 /**
-* Enregistres l'évaluation d'un risque.
-* Gères la méthode d'évaluation simple
-* Géres la méthode d'évalution complexe
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2017 Evarisk
-* @package risk
-* @subpackage action
-*/
+ * Enregistres l'évaluation d'un risque.
+ * Gères la méthode d'évaluation simple
+ * Géres la méthode d'évalution complexe
+ *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
+ */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux évaluations des risques.
@@ -20,8 +24,8 @@ class Risk_Evaluation_Action {
 	/**
 	 * Le constructeur appelle l'action ajax: wp_ajax_save_risk
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_edit_risk', array( $this, 'ajax_edit_risk' ) );
@@ -30,13 +34,15 @@ class Risk_Evaluation_Action {
 	/**
 	 * Enregistres l'évaluation d'un risque
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 *
 	 * @todo: nonce
-	*/
+	 */
 	public function ajax_edit_risk() {
-		$risk = !empty( $_POST['risk'] ) ? $_POST['risk'] : array();
+		$risk = ! empty( $_POST['risk'] ) ? $_POST['risk'] : array();
+
+		$risk['image_id'] = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
 		// Cette action vérifie que la variable $_POST['can_update'] est à true. (Utile pour la page "Tous les risques").
 		do_action( 'can_update' );
