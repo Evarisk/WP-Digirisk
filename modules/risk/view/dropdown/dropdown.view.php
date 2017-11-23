@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<ul class="content">
 		<?php foreach ( $risks_categories as $risk_category ) : ?>
-			<li class="item tooltip hover" aria-label="<?php echo esc_attr( $risk_category->name ); ?>" data-id="<?php echo esc_attr( $risk_category->id ); ?>">
+			<li class="item tooltip hover" data-is-preset="<?php echo esc_attr( $risk_category->is_preset ); ?>" aria-label="<?php echo esc_attr( $risk_category->name ); ?>" data-id="<?php echo esc_attr( $risk_category->id ); ?>">
 				<?php echo wp_get_attachment_image( $risk_category->thumbnail_id, 'thumbnail', false ); ?>
 			</li>
 		<?php endforeach; ?>

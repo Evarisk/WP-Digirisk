@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "risk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.risk = {};
 
@@ -59,9 +59,10 @@ window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, resp
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.2.9.0
- * @version 6.2.9.0
+ * @since 6.2.9
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
+	triggeredElement.closest( 'table' ).removeClass( 'loading' );
 	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
 };

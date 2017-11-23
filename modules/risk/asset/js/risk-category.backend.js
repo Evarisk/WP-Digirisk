@@ -25,6 +25,7 @@ window.eoxiaJS.digirisk.riskCategory.event = function() {
  */
 window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	var element = jQuery( this );
+
 	var data = {};
 	element.closest( '.content' ).removeClass( 'active' );
 	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
@@ -44,14 +45,13 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	}
 
 	// Si aucune donnée est entrée, on lance la requête.
-	if ( ! window.eoxiaJS.digirisk.riskCategory.haveDataInInput( element ) ) {
-
+	if ( element.data( 'is-preset' ) && ! window.eoxiaJS.digirisk.riskCategory.haveDataInInput( element ) ) {
 		data.action = 'check_predefined_danger';
 		data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
 		data.danger_id = element.data( 'id' );
 		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
-		jQuery( this ).closest( 'td' ).addClass( 'loading' );
+		jQuery( this ).closest( 'table' ).addClass( 'loading' );
 
 		window.eoxiaJS.request.send( jQuery( this ).closest( '.toggle' ), data );
 	}
