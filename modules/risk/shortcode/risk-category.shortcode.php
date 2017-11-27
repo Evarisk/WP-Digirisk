@@ -56,6 +56,17 @@ class Risk_Category_Shortcode {
 		$preset = ! empty( $param ) && ! empty( $param['preset'] ) ? (int) $param['preset'] : 0;
 
 		if ( 'edit' === $display ) {
+			$risks_categories_preset = Risk_Class::g()->get( array(
+				'post_status' => array( 'publish' ),
+				'meta_query'  => array(
+					array(
+						'key'     => '_wpdigi_preset',
+						'value'   => 1,
+						'compare' => '=',
+					),
+				),
+			) );
+
 			$risks_categories = Risk_Category_Class::g()->get( array(
 				'meta_key' => '_position',
 				'orderby' => 'meta_value_num',
@@ -64,7 +75,19 @@ class Risk_Category_Shortcode {
 			$selected_risk_category = '';
 
 			if ( ! empty( $risks_categories ) ) {
-				foreach ( $risks_categories as $risk_category ) {
+				foreach ( $risks_categories as &$risk_category ) {
+					$risk_category->is_preset = false;
+
+					// Est-ce que c'est une catégorie de risque prédéfinie ?
+					if ( ! empty( $risks_categories_preset ) ) {
+						foreach ( $risks_categories_preset as $risk_category_preset ) {
+							if ( $risk_category_preset->taxonomy['digi-category-risk'][0] === $risk_category->id && ! empty( $risk_category_preset->taxonomy['digi-method'] ) ) {
+								$risk_category->is_preset = true;
+								break;
+							}
+						}
+					}
+
 					if ( $risk_category->id === $category_risk_id ) {
 						$selected_risk_category = $risk_category;
 					}

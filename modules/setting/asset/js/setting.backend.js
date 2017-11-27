@@ -21,7 +21,7 @@ window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
 		event.preventDefault();
 	}
 
-	jQuery( '#digi-danger-preset tr  .edit-risk.checked:first' ).click();
+	jQuery( '#digi-danger-preset tr.risk-row.edit.checked .save.action-input' ).click();
 	jQuery( '#digi-danger-preset .save-all' ).removeClass( 'green' ).addClass( 'disable' );
 };
 
@@ -61,18 +61,16 @@ window.eoxiaJS.digirisk.setting.pagination = function( event ) {
  * @param  {ClickEvent} event L'état du clic.
  * @return {void}
  *
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.setting.checkTheCheckbox = function( event ) {
-	jQuery( this ).closest( 'tr' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
-	jQuery( this ).closest( 'tr' ).find( '.edit-risk' ).addClass( 'checked' );
+	jQuery( this ).closest( 'tr.risk-row.edit' ).addClass( 'checked' );
 	jQuery( '#digi-danger-preset .save-all' ).removeClass( 'disable' ).addClass( 'green' );
 };
 
 window.eoxiaJS.digirisk.setting.savedRiskSuccess = function( element, response ) {
 	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
-	// window.eoxiaJS.digirisk.setting.savePresetRisks( undefined );
 };
 
 

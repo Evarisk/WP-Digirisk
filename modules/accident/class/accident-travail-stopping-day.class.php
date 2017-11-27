@@ -108,9 +108,20 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	 */
 	public function save_stopping_day( $data ) {
 		if ( ! empty( $data ) ) {
-			foreach ( $data as $stopping_day ) {
-				if ( ! empty( $stopping_day['content'] ) ) {
-					$this->update( $stopping_day );
+			foreach ( $data as $stopping_day_data ) {
+				if ( ! empty( $stopping_day_data['content'] ) ) {
+					$stopping_day = $this->update( $stopping_day_data );
+
+					$associate_file_args = array(
+						'id'         => $stopping_day->id,
+						'field_name' => 'document',
+						'file_id'    => $_POST['document'], // WPCS: CSRF ok.
+						'model_name' => '\digi\Accident_Travail_Stopping_Day_Class',
+					);
+
+					if ( ! empty( $_POST['document'] ) ) { // WPCS: CSRF ok.
+						\eoxia\WPEO_Upload_Class::g()->associate_file( $associate_file_args );
+					}
 				}
 			}
 		}

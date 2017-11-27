@@ -220,7 +220,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 			'signatureDonneurSoins' => $this->get_picture( ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? $accident->associated_document_id['signature_of_the_caregiver_id'][0] : 0 ),
 			'signatureVictime' => $this->get_picture( ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? $accident->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
 			'observations' => $accident->observation,
-			'enqueteAccident' => ! empty( $accident->associated_document_id['accident_investigation_id'][0] ) ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
+			'enqueteAccident' => $accident->have_investigation ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
 		);
 
 		return $accident_details;

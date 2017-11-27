@@ -49,8 +49,8 @@ class Risk_Save_Action {
 
 			$image_id = 0;
 
-			if ( ! empty( $risk['associated_document_id'] ) ) {
-				$image_id = $risk['associated_document_id']['image'][0];
+			if ( ! empty( $risk['image_id'] ) ) {
+				$image_id = (int) $risk['image_id'];
 			}
 
 			$risk['title'] = $danger->name;
@@ -74,12 +74,16 @@ class Risk_Save_Action {
 			$risk_obj->current_equivalence = $risk_evaluation->equivalence;
 			Risk_Class::g()->update( $risk_obj );
 
-			if ( empty( $image_id ) && ! empty( $_POST['associated_document_id']['image'][0] ) ) {
-				$image_id = (int) $_POST['associated_document_id']['image'][0];
-			}
-
 			if ( ! empty( $image_id ) ) {
-				\eoxia\WPEO_Upload_Class::g()->associate_file( $risk_obj->id, $image_id, 'risk_class', 'image' );
+				$args_media = array(
+					'id' => $risk_obj->id,
+					'file_id' => $image_id,
+					'model_name' => '\digi\Risk_Class',
+				);
+
+				\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
+				$args_media['field_name'] = 'image';
+				\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
 			}
 		} // End if().
 

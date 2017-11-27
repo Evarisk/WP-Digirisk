@@ -74,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<input id="have_investigation" type="checkbox" <?php echo $accident->have_investigation ? 'checked' : ''; ?> name="accident[have_investigation]" />
 					<label for="have_investigation" class="no-style"><?php esc_html_e( 'Réaliser une enquête accident', 'digirisk' ); ?></label>
 					<span class="<?php echo ( ! $accident->have_investigation ) ? 'hidden' : ''; ?>">
-						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" display_type="list" field_name="accident_investigation_id" custom_class="investigation"]' ); ?>
+						<?php do_shortcode( '[wpeo_upload id="' . $accident->id . '" model_name="/digi/' . $accident->get_class() . '" single="true" mime_type="application" field_name="accident_investigation_id" custom_class="investigation" title="' . $accident->modified_unique_identifier . ' : ' . __( 'enquête accident', 'digirisk' ) . '"]' ); ?>
 					</span>
 				</div>
 			</div>
