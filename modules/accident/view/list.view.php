@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="table-footer">
 		<?php
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-add', array(
-			'accident' => $accident_schema,
+			'accident'     => $accident_schema,
 			'main_society' => $main_society,
 		) );
 		?>

@@ -16,12 +16,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="col">
-	<div class="cell"></div>
-	<div class="cell"></div>
-	<div class="cell"></div>
-	<div class="cell w100" data-title="action">
+	<div class="cell padding w150"><?php esc_html_e( 'N/A', 'digirisk' ); ?></div>
+	<div class="cell padding w200">
+		<input type="text" data-field="accident[victim_identity_id]" data-type="user" placeholder="" class="digi-search" value="" dir="ltr">
+		<input type="hidden" name="accident[victim_identity_id]" value="">
+	</div>
+	<div class="cell padding w150 group-date">
+		<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
+		<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
+	</div>
+	<div class="cell padding w100"><input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>"></div>
+	<div class="cell padding">
+		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+	</div>
+	<div class="cell w50" data-title="action">
 		<div class="action grid-layout w3">
-			<div class="action-attribute button w50 blue add"
+			<div class="action-input button w50 blue add"
+						data-parent="col"
 						data-action="edit_accident"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_accident' ) ); ?>"
 						data-id="<?php echo esc_attr( $accident->id ); ?>"
