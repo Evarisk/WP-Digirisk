@@ -94,7 +94,7 @@
 					white-space: normal;
 					line-height: 1.3;
 				}
-				* {
+				span, input, textarea {
 					color: rgba(0,0,0,0.7);
 				}
 				.delete, .add {
@@ -146,6 +146,7 @@
 		canvas {
 			background: #fff;
 			border: 1px solid rgba(0,0,0,.2);
+			width: 100%;
 		}
 		.canvas-eraser {
 			width: 20px;
@@ -181,6 +182,11 @@
 		.default-image {
 			color: rgba(0,0,0,0.3);
 		}
+	}
+
+	/* mysql date */
+	.mysql-date {
+		position: absolute;
 	}
 
 	/* action */
@@ -264,8 +270,8 @@
 
 .digirisk-wrap .flex-table {
 	@media ( max-width: 1200px ) {
-		.cell[class*="w"] {
-			min-width: auto;
+		.cell[class*="w"], .header-cell[class*="w"] {
+			min-width: 50px;
 		}
 	}
 }

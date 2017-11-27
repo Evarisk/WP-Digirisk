@@ -105,18 +105,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="grid-layout padding w2">
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?></label>
+					<label for="textarea"><?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?> 	<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
 					<input type="hidden" name="signature_of_the_caregiver" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
 					<canvas></canvas>
-					<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i>
 				</div>
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?></label>
+					<label for="textarea"><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?> <i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
 					<input type="hidden" name="signature_of_the_victim" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
-					<canvas></canvas>
-					<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i>
+					<canvas></canvas>	
 				</div>
 			</div>
 
