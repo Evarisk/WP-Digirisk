@@ -6146,10 +6146,10 @@
 .digirisk-wrap .popup.patch-note .container .entry-content p {
   margin-bottom: 0.6em; }
 
-.navigation-container .media.no-file .add, .unit-header .media.no-file .add {
+.navigation-container .media.no-file .button-add, .navigation-container .wpeo-media.no-file .button-add, .unit-header .media.no-file .button-add, .unit-header .wpeo-media.no-file .button-add {
   color: rgba(255, 255, 255, 0.4); }
 
-.navigation-container .media.no-file .default-image, .unit-header .media.no-file .default-image {
+.navigation-container .media.no-file .default-image, .navigation-container .wpeo-media.no-file .default-image, .unit-header .media.no-file .default-image, .unit-header .wpeo-media.no-file .default-image {
   color: rgba(255, 255, 255, 0.2); }
 
 /**
