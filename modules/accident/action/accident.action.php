@@ -69,7 +69,6 @@ class Accident_Action {
 		}
 
 		$accident = Accident_Class::g()->update( $accident );
-
 		$upload_dir = wp_upload_dir();
 
 		// Associations des images.
@@ -111,8 +110,8 @@ class Accident_Action {
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $accident->parent_id,
-			'id' => $accident->id,
-			'content' => 'Mise à jour de l\'accident ' . $accident->modified_unique_identifier,
+			'id'        => $accident->id,
+			'content'   => 'Mise à jour de l\'accident ' . $accident->modified_unique_identifier,
 		) );
 
 		ob_start();
@@ -124,11 +123,11 @@ class Accident_Action {
 			Accident_Class::g()->display_accident_list();
 		}
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'accident',
+			'namespace'        => 'digirisk',
+			'module'           => 'accident',
 			'callback_success' => 'editedAccidentSuccess',
-			'view' => ob_get_clean(),
-			'add' => $add,
+			'view'             => ob_get_clean(),
+			'add'              => $add,
 		) );
 	}
 

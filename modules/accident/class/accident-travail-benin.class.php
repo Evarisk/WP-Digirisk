@@ -211,7 +211,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 			'dateInscriptionRegistre' => $accident->registration_date_in_register['date_input']['fr_FR']['date'],
 			'nomPrenomMatriculeVictime' => ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : '',
 			'dateHeure' => $accident->accident_date['date_input']['fr_FR']['date_time'],
-			'lieu' => $accident->place,
+			'lieu' => $accident->place->modified_unique_identifier . ' ' . $accident->place->title,
 			'circonstances' => $comment_content,
 			'siegeLesions' => $accident->location_of_lesions,
 			'natureLesions' => $accident->nature_of_lesions,
@@ -247,7 +247,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 				'type' => 'picture',
 				'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 				'option' => array(
-					'size' => 3,
+					'size' => 6,
 				),
 			);
 		}

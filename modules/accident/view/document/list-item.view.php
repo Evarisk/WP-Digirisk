@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -22,7 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action">
 			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download icon" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Registre des AT bénins', 'digirisk' ); ?></span>
 			</a>
 		</div>
 	</td>

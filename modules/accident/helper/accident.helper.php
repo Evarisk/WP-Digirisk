@@ -54,6 +54,10 @@ function get_full_accident( $data ) {
 		), true);
 	}
 
+	if ( ! empty( $data->parent_id ) ) {
+		$data->place = Society_Class::g()->show_by_type( $data->parent_id );
+	}
+
 	$data->stopping_days = Accident_Travail_Stopping_Day_Class::g()->get( array(
 		'post_parent' => $data->id,
 	) );

@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?></div>
 		<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->place ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->place->modified_unique_identifier . ' ' . $accident->place->title ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
 		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
@@ -42,18 +42,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="form">
 			<div class="grid-layout padding w3">
 				<div>
-					<label for="champs1"><?php esc_html_e( 'Nom, Prénom, Matricule de la victime', 'digirisk' ); ?></label>
-					<input type="text" data-field="accident[victim_identity_id]" data-type="user" placeholder="" class="digi-search" value="<?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?>" dir="ltr">
+					<label for="victim"><?php esc_html_e( 'Nom, Prénom, Matricule de la victime', 'digirisk' ); ?></label>
+					<input type="text" id="victim" data-field="accident[victim_identity_id]" data-type="user" placeholder="" class="digi-search" value="<?php echo ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : ''; ?>" dir="ltr">
 					<input type="hidden" name="accident[victim_identity_id]" value="<?php echo esc_attr( $accident->victim_identity_id ); ?>">
 				</div>
 				<div class="group-date">
-					<label for="champs2"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></label>
-					<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
+					<label for="mysql-date"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></label>
+					<input type="text" id="mysql-date" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
 					<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
 				</div>
 				<div>
-					<label for="champs3"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></label>
-					<input name="accident[place]" type="text" value="<?php echo esc_attr( $accident->place ); ?>">
+					<label for="parent"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></label>
+					<div class="form-fields">
+						<input type="text" id="parent" class="search-parent" value="<?php echo esc_attr( $accident->place->modified_unique_identifier . ' ' . $accident->place->title ); ?>" />
+						<input type="hidden" name="accident[parent_id]" value="<?php echo esc_attr( $accident->parent_id ); ?>" />
+					</div>
+
+					<div class="list-posts">
+					</div>
 				</div>
 			</div>
 
@@ -81,45 +87,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="grid-layout padding w2">
 				<div>
-					<label for="champs3"><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></label>
-					<input type="text" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->location_of_lesions ); ?>">
+					<label for="location_of_lesions"><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></label>
+					<input type="text" id="location_of_lesions" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->location_of_lesions ); ?>">
 				</div>
 
 				<div>
-					<label for="champs3"><?php esc_html_e( 'Nature des lésions', 'digirisk' ); ?></label>
-					<input type="text" name="accident[nature_of_lesions]" value="<?php echo esc_attr( $accident->nature_of_lesions ); ?>">
+					<label for="nature_of_lesions"><?php esc_html_e( 'Nature des lésions', 'digirisk' ); ?></label>
+					<input type="text" id="nature_of_lesions" name="accident[nature_of_lesions]" value="<?php echo esc_attr( $accident->nature_of_lesions ); ?>">
 				</div>
 
 			</div>
 
 			<div class="grid-layout padding w2">
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></label>
-					<textarea id="textarea" name="accident[name_and_address_of_witnesses]"><?php echo $accident->name_and_address_of_witnesses; ?></textarea>
+					<label for="name_witnesses"><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></label>
+					<textarea id="name_witnesses" name="accident[name_and_address_of_witnesses]"><?php echo $accident->name_and_address_of_witnesses; ?></textarea>
 				</div>
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Nom et adresse des tiers impliqués', 'digirisk' ); ?></label>
-					<textarea id="textarea" name="accident[name_and_address_of_third_parties_involved]"><?php echo $accident->name_and_address_of_third_parties_involved; ?></textarea>
+					<label for="name_and_address_of_third_parties_involved"><?php esc_html_e( 'Nom et adresse des tiers impliqués', 'digirisk' ); ?></label>
+					<textarea id="name_and_address_of_third_parties_involved" name="accident[name_and_address_of_third_parties_involved]"><?php echo $accident->name_and_address_of_third_parties_involved; ?></textarea>
 				</div>
 			</div>
 
 			<div class="grid-layout padding w2">
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?> 	<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
+					<label><?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?> 	<i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
 					<input type="hidden" name="signature_of_the_caregiver" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
 					<canvas></canvas>
 				</div>
 				<div>
-					<label for="textarea"><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?> <i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
+					<label><?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?> <i class="canvas-eraser fa fa-eraser" aria-hidden="true"></i></label>
 					<input type="hidden" name="signature_of_the_victim" />
 					<input type="hidden" class="url" value="<?php echo ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
-					<canvas></canvas>	
+					<canvas></canvas>
 				</div>
 			</div>
 
-			<label for="textarea"><?php esc_html_e( 'Observations', 'digirisk' ); ?></label>
-			<textarea name="accident[observation]"><?php echo $accident->observation; ?></textarea>
+			<label for="observation"><?php esc_html_e( 'Observations', 'digirisk' ); ?></label>
+			<textarea id="observation" name="accident[observation]"><?php echo $accident->observation; ?></textarea>
 
 			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->id ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="button w50 green save action-input float right"><i class="icon fa fa-floppy-o"></i></div>
 		</div>

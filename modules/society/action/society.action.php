@@ -3,8 +3,8 @@
  * Les actions relatives aux sociétés
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -25,12 +25,13 @@ class Society_Action {
 	 * wp_ajax_load_sheet_display
 	 * wp_ajax_save_society
 	 *
-	 * @since 1.0.0
-	 * @version 6.2.3.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
+		add_action( 'wp_ajax_search_establishment', array( $this, 'callback_search_establishment' ) );
 	}
 
 	/**
@@ -105,6 +106,74 @@ class Society_Action {
 			'callback_success' => 'deletedSocietySuccess',
 		) );
 	}
+
+	public function callback_search_establishment() {
+		global $wpdb;
+		$term = sanitize_text_field( $_GET['term'] );
+
+		$posts_type = array(
+			'digi-group',
+			'digi-workunit',
+		);
+
+		$posts_founded = array();
+		$ids_founded = array();
+
+		$query = "SELECT ID FROM {$wpdb->posts} WHERE ID LIKE '%" . $term . "%' AND post_type IN('" . implode( $posts_type, '\',\'' ) . "')";
+		$results = $wpdb->get_results( $query );
+
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $post ) {
+				$ids_founded[] = $post->ID;
+			}
+		}
+
+		$query = new \WP_Query( array(
+			'post_type' => $posts_type,
+			's' => $term,
+			'post_status' => array( 'publish', 'draft' ),
+		) );
+
+		if ( ! empty( $query->posts ) ) {
+			foreach ( $query->posts as $post ) {
+				if ( ! in_array( $post->ID, $ids_founded, true ) ) {
+					$ids_founded[] = $post->ID;
+				}
+			}
+		}
+
+		$query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_wpdigi_unique_identifier' AND meta_value LIKE '%" . $term . "%'";
+		$results = $wpdb->get_results( $query );
+
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $post ) {
+				$ids_founded[] = $post->post_id;
+			}
+		}
+
+		if ( ! empty( $ids_founded ) ) {
+			foreach ( $ids_founded as $id_founded ) {
+				$s = Society_Class::g()->show_by_type( $id_founded );
+
+				$posts_founded[] = array(
+					'label' => $s->modified_unique_identifier . ' ' . $s->title,
+					'value' => $s->modified_unique_identifier . ' ' . $s->title,
+					'id' => $s->id,
+				);
+			}
+		}
+
+		if ( empty( $posts_founded ) ) {
+			$posts_founded[] = array(
+				'label' => __( 'Aucun résultat', 'digirisk' ),
+				'value' => __( 'Aucun résultat', 'digirisk' ),
+				'id' => 0,
+			);
+		}
+
+		wp_die( wp_json_encode( $posts_founded ) );
+	}
+
 }
 
 new Society_Action();

@@ -55,10 +55,6 @@ class Accident_Model extends \eoxia\Post_Model {
 				'meta_type' => 'single',
 				'field' => '_wpdigi_registration_date_in_register',
 			),
-			'place' => array(
-				'type' => 'string',
-				'meta_type' => 'multiple',
-			),
 			'location_of_lesions' => array(
 				'type' => 'string',
 				'meta_type' => 'multiple',

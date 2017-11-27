@@ -227,7 +227,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 					'dateInscriptionRegistre' => $element->registration_date_in_register['date_input']['fr_FR']['date'],
 					'nomPrenomMatriculeVictime' => ! empty( $element->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $element->victim_identity->id . ' ' . $element->victim_identity->login : '',
 					'dateHeure' => $element->accident_date['date_input']['fr_FR']['date_time'],
-					'lieu' => $element->place,
+					'lieu' => $element->place->modified_unique_identifier . ' ' . $element->place->title,
 					'circonstances' => $comment_content,
 					'siegeLesions' => $element->location_of_lesions,
 				);
@@ -237,7 +237,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 					'natureLesions' => $element->nature_of_lesions,
 					'nomAdresseTemoins' => $element->name_and_address_of_witnesses,
 					'nomAdresseTiers' => $element->name_and_address_of_third_parties_involved,
-					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] : 0 ),
+					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['signature_of_the_caregiver_id'][0] : 0 ),
 					'signatureVictime' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_victim_id'][0] ) ? $element->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
 					'observations' => $element->observation,
 				);
@@ -267,7 +267,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 				'type' => 'picture',
 				'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 				'option' => array(
-					'size' => 3,
+					'size' => 4,
 				),
 			);
 		}

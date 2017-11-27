@@ -149,6 +149,7 @@
 			width: 100%;
 		}
 		.canvas-eraser {
+			pointer-events: auto;
 			width: 20px;
 			min-width: 20px;
 			height: 20px;
