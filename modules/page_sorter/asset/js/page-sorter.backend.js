@@ -2,7 +2,7 @@
  * Initialise l'objet 'legalDisplay' ainsi que la méthode 'init' obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.pageSorter = {};
@@ -30,11 +30,11 @@ window.eoxiaJS.digirisk.pageSorter.init = function() {
 				accept: '.digi-workunit, .digi-group',
 				drop: function( e, ui ) {
 					var droppedEl = ui.draggable.parents( 'tr' );
-					if ( droppedEl.data( 'ttId') == jQuery( this ).data( 'ttParentId' ) ) {
+
+					if ( droppedEl.data( 'ttId' ) == jQuery( this ).data( 'ttParentId' ) ) {
 						e.preventDefault();
 						return false;
 					} else {
-
 						window.addEventListener( 'beforeunload', window.eoxiaJS.digirisk.pageSorter.safeExit );
 
 						jQuery( 'input[type="submit"]' ).attr( 'disabled', false );
@@ -59,13 +59,13 @@ window.eoxiaJS.digirisk.pageSorter.init = function() {
  * Vérification avant la fermeture de la page si toutes les données sont enregistrées.
  *
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  *
  * @param  {WindowEventHandlers} event L'évènement de la fenêtre.
  * @return {string}
  */
 window.eoxiaJS.digirisk.pageSorter.safeExit = function( event ) {
-	var confirmationMessage = 'Vos données sont en attentent d\'enregistrement';
+	var confirmationMessage = 'Vos données sont en attentes d\'enregistrement';
 
 	event.returnValue = confirmationMessage;
 	return confirmationMessage;

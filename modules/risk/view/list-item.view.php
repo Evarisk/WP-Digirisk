@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.3.4
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -23,13 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="view"]' ); ?>
+		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="view"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
@@ -38,7 +38,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action grid-layout w3">
 			<div 	class="open-popup-ajax button light w50 task"
 						data-parent="risk-row"
-						data-target="corrective-task"
+						data-target="popup"
+						data-class="corrective-task"
 						data-action="open_task"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
 

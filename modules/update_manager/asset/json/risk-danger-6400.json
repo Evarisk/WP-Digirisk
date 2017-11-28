@@ -1,0 +1,72 @@
+{
+	"accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
+	"activite-physique": "risques-lies-a-la-charge-physique-de-travail",
+	"manutention-mecanique": "risques-lies-a-la-manutention-mecanique",
+	"circulation-deplacements": "risques-routiers-en-mission",
+	"effondrements-chute-dobjet": "risques-lies-aux-effondrements-et-aux-chutes-dobjets",
+	"equipements-de-travail": "risques-lies-aux-equipements-de-travail",
+	"nuisances-sonores": "risques-et-nuisances-lies-au-bruit",
+	"produits-emissions-et-dechets": "risques-lies-aux-produits-aux-emissions-et-aux-dechets",
+	"incendie-explosion": "risques-dincendie-dexplosion",
+	"electricite": "risques-lies-a-lelectricite",
+	"eclairage": "risques-lies-aux-ambiances-lumineuses",
+	"travail-sur-ecran": "risques-lies-a-la-charge-physique-de-travail",
+	"ambiances-climatiques": "risques-lies-aux-ambiances-thermiques",
+	"agents-biologique": "risques-lies-aux-agents-biologiques",
+	"societe-exterieure": "risques-autres",
+	"manque-de-formation": "risques-autres",
+	"autres": "risques-autres",
+	"circulations-internes": "risques-lies-aux-circulations-internes-de-vehicules",
+	"rayonnements": "risques-lies-aux-rayonnements",
+	"risques-psychosociaux": "risques-psychosociaux",
+	"manutention-manuelle": "risques-lies-a-la-charge-physique-de-travail",
+	"postures-penibles": "risques-lies-a-la-charge-physique-de-travail",
+	"vibrations": "risques-lies-aux-equipements-de-travail",
+	"amiante": "risques-lies-a-lamiante",
+	"chute-de-hauteur": "risques-de-chute-de-hauteur",
+
+
+	"divers-chute-de-hauteur": "risques-de-chute-de-hauteur",
+	"divers-activite-physique": "risques-lies-a-la-charge-physique-de-travail",
+	"travail-sur-ecran": "risques-lies-a-la-charge-physique-de-travail",
+	"divers-manutention-mecanique": "risques-lies-a-la-manutention-mecanique",
+	"divers-circulation-deplacements": "risques-routiers-en-mission",
+
+	"divers-equipements-de-travail": "risques-lies-aux-equipements-de-travail",
+	"divers-machines-et-outils": "risques-lies-aux-equipements-de-travail",
+
+	"divers-nuisances-sonores": "risques-et-nuisances-lies-au-bruit",
+
+	"divers-produits-emissions-et-dechets": "risques-lies-aux-produits-aux-emissions-et-aux-dechets",
+	"divers-produits-chimiques-dechets": "risques-lies-aux-produits-aux-emissions-et-aux-dechets",
+
+	"divers-incendie-explosion": "risques-dincendie-dexplosion",
+	"divers-incendie-explostion": "risques-dincendie-dexplosion",
+	"divers-eclairage": "risques-lies-aux-ambiances-lumineuses",
+	"divers-ambiances-climatiques": "risques-lies-aux-ambiances-thermiques",
+
+	"divers-agents-biologique": "risques-lies-aux-agents-biologiques",
+	"divers-manque-dhygiene": "risques-lies-aux-agents-biologiques",
+
+	"divers-autres": "risques-autres",
+	"manque-de-formation": "risques-autres",
+	"divers-circulations-internes": "risques-lies-aux-circulations-internes-de-vehicules",
+	"divers-rayonnements": "risques-lies-aux-rayonnements",
+	"divers-risques-psychosociaux": "risques-psychosociaux",
+	"travail-de-nuit": "risques-autres",
+	"travail-en-equipe-successives-alternantes": "risques-autres",
+	"divers-manutention-manuelle": "risques-lies-a-la-charge-physique-de-travail",
+	"divers-postures-penibles": "risques-lies-a-la-charge-physique-de-travail",
+	"divers-vibrations": "risques-lies-aux-equipements-de-travail",
+	"divers-amiante": "risques-lies-a-lamiante",
+	"divers-electricite": "risques-lies-a-lelectricite",
+
+	"divers-accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
+	"divers-chute-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
+
+	"divers-effrondrements-chute-dobjet": "risques-lies-aux-effondrements-et-aux-chutes-dobjets",
+	"divers-effondrements-chute-dobjet": "risques-lies-aux-effondrements-et-aux-chutes-dobjets",
+	"divers-ambiances-climatiques-manque-de-formation": "risques-autres",
+	"divers-ambiances-climatiques-societe-exterieure": "risques-autres",
+	"divers-ambiances-climatiques-travail-sur-ecran": "risques-autres"
+}

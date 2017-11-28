@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gères la génération de l'ODT: Registre Accidents de travail benins
  */
-class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
+class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -91,6 +91,13 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Registre Accidents de Travail Benins';
 
 	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'registre_accidents_travail_benins';
+
+	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @return void
@@ -134,23 +141,23 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Cette méthode génère l'accident de travail bénin
+	 * Cette méthode génère le registre AT bénins.
 	 *
 	 * @param Society_Model $main_society La société.
 	 * @return array
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function generate( $main_society ) {
 		$address = Society_Class::g()->get_address( $main_society );
 		$address = $address[0];
 
 		$sheet_details = array(
-			'ref' => self::g()->element_prefix . (int) ( \eoxia\Common_Util::g()->get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
+			'ref' => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
+			'telephone' => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
 			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,
@@ -158,7 +165,16 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
 
-		$document_creation_response = Document_Class::g()->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
+		$sheet_details_log = $sheet_details;
+		$sheet_details_log = \wp_json_encode( $sheet_details_log );
+		$sheet_details_log = addslashes( $sheet_details_log );
+		$sheet_details_log = preg_replace_callback( '/\\\\u([0-9a-f]{4})/i', function ( $matches ) {
+			$sym = mb_convert_encoding( pack( 'H*', $matches[1] ), 'UTF-8', 'UTF-16' );
+			return $sym;
+		}, $sheet_details_log );
+
+		\eoxia\LOG_Util::log( $sheet_details_log, 'digirisk' );
+		$document_creation_response = $this->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,
@@ -172,10 +188,12 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	 * @return array Les accidents
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function set_accidents() {
-		$accidents = Accident_Class::g()->get();
+		$accidents = Accident_Class::g()->get( array(
+			'posts_per_page' => -1,
+		) );
 
 		$accident_details = array(
 			'accidentDebut' => array(
@@ -206,10 +224,10 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 
 				$accident_details['accidentDebut']['value'][] = array(
 					'ref' => $element->unique_identifier,
-					'dateInscriptionRegistre' => $element->registration_date_in_register,
+					'dateInscriptionRegistre' => $element->registration_date_in_register['date_input']['fr_FR']['date'],
 					'nomPrenomMatriculeVictime' => ! empty( $element->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $element->victim_identity->id . ' ' . $element->victim_identity->login : '',
-					'dateHeure' => $element->accident_date,
-					'lieu' => $element->place,
+					'dateHeure' => $element->accident_date['date_input']['fr_FR']['date_time'],
+					'lieu' => $element->place->modified_unique_identifier . ' ' . $element->place->title,
 					'circonstances' => $comment_content,
 					'siegeLesions' => $element->location_of_lesions,
 				);
@@ -219,7 +237,7 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 					'natureLesions' => $element->nature_of_lesions,
 					'nomAdresseTemoins' => $element->name_and_address_of_witnesses,
 					'nomAdresseTiers' => $element->name_and_address_of_third_parties_involved,
-					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['name_and_signature_of_the_caregiver_id'][0] : 0 ),
+					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['signature_of_the_caregiver_id'][0] : 0 ),
 					'signatureVictime' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_victim_id'][0] ) ? $element->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
 					'observations' => $element->observation,
 				);
@@ -230,22 +248,26 @@ class Registre_Accidents_Travail_Benins_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * A supprimer
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
+	 * Récupères le thumbnail de l'attachment.
+	 *
+	 * @since 6.4.0
+	 * @version 6.4.0
+	 *
+	 * @param  integer $id L'ID de l'attchment.
+	 * @return array       Les données pour l'ODT.
 	 */
 	public function get_picture( $id ) {
 		$picture = '';
 
-		$picture_definition = wp_get_attachment_image_src( $id, 'thumbnail' );
+		$picture_definition = wp_get_attachment_image_src( $id, array( 300, 150 ) );
 		$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 		if ( is_file( $picture_path ) ) {
 			$picture = array(
-				'type'		=> 'picture',
-				'value'		=> str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
-				'option'	=> array(
-					'size' => 3,
+				'type' => 'picture',
+				'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+				'option' => array(
+					'size' => 4,
 				),
 			);
 		}

@@ -2928,12 +2928,12 @@
        -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
 
-.digirisk-wrap .popup.no-close .button {
+.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input[type="submit"], .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   pointer-events: none; }
 
-.digirisk-wrap .popup.no-close .button:hover {
+.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed; }
@@ -2994,7 +2994,7 @@
  * 		.success -> le bouton affiche une icone succès
  * 		.error -> Le bouton affiche une icone erreur
  */
-.digirisk-wrap .button {
+.digirisk-wrap .button, .digirisk-wrap .flex-table form input[type="submit"], .digirisk-wrap .flex-table .form input[type="submit"] {
   display: inline-block;
   border: 0;
   -webkit-box-shadow: none;
@@ -3011,22 +3011,22 @@
   transition: all 0.2s ease-out;
   position: relative; }
 
-.digirisk-wrap .button:hover {
+.digirisk-wrap .button:hover, .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table .form input[type="submit"]:hover {
   background: none;
   color: #fff; }
 
-.digirisk-wrap .button:hover .float-icon {
+.digirisk-wrap .button:hover .float-icon, .digirisk-wrap .flex-table form input[type="submit"]:hover .float-icon, .digirisk-wrap .flex-table .form input[type="submit"]:hover .float-icon {
   -webkit-animation-name: bounceInLight;
        -o-animation-name: bounceInLight;
           animation-name: bounceInLight; }
 
-.digirisk-wrap .button:active {
+.digirisk-wrap .button:active, .digirisk-wrap .flex-table form input[type="submit"]:active, .digirisk-wrap .flex-table .form input[type="submit"]:active {
   -webkit-transform: none;
       -ms-transform: none;
        -o-transform: none;
           transform: none; }
 
-.digirisk-wrap .button.active, .digirisk-wrap .button.active:hover {
+.digirisk-wrap .button.active, .digirisk-wrap .flex-table form input.active[type="submit"], .digirisk-wrap .flex-table .form input.active[type="submit"], .digirisk-wrap .button.active:hover, .digirisk-wrap .flex-table form input.active[type="submit"]:hover, .digirisk-wrap .flex-table .form input.active[type="submit"]:hover {
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transform: translateY(0);
@@ -3035,17 +3035,17 @@
           transform: translateY(0);
   border: 0; }
 
-.digirisk-wrap .button:focus {
+.digirisk-wrap .button:focus, .digirisk-wrap .flex-table form input[type="submit"]:focus, .digirisk-wrap .flex-table .form input[type="submit"]:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #fff; }
 
-.digirisk-wrap .button .icon {
+.digirisk-wrap .button .icon, .digirisk-wrap .flex-table form input[type="submit"] .icon, .digirisk-wrap .flex-table .form input[type="submit"] .icon {
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .button .float-icon {
+.digirisk-wrap .button .float-icon, .digirisk-wrap .flex-table form input[type="submit"] .float-icon, .digirisk-wrap .flex-table .form input[type="submit"] .float-icon {
   position: absolute;
   top: -6px;
   right: -6px;
@@ -3055,59 +3055,59 @@
           border-radius: 50%;
   font-size: 12px; }
 
-.digirisk-wrap .button .icon.dashicons {
+.digirisk-wrap .button .icon.dashicons, .digirisk-wrap .flex-table form input[type="submit"] .icon.dashicons, .digirisk-wrap .flex-table .form input[type="submit"] .icon.dashicons {
   line-height: 1.3; }
 
-.digirisk-wrap .button .icon, .digirisk-wrap .button span {
+.digirisk-wrap .button .icon, .digirisk-wrap .flex-table form input[type="submit"] .icon, .digirisk-wrap .flex-table .form input[type="submit"] .icon, .digirisk-wrap .button span, .digirisk-wrap .flex-table form input[type="submit"] span, .digirisk-wrap .flex-table .form input[type="submit"] span {
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .button .icon ~ span {
+.digirisk-wrap .button .icon ~ span, .digirisk-wrap .flex-table form input[type="submit"] .icon ~ span, .digirisk-wrap .flex-table .form input[type="submit"] .icon ~ span {
   margin-left: 10px; }
 
-.digirisk-wrap .button.strong span {
+.digirisk-wrap .button.strong span, .digirisk-wrap .flex-table form input.strong[type="submit"] span, .digirisk-wrap .flex-table .form input.strong[type="submit"] span {
   font-weight: 700; }
 
-.digirisk-wrap .button.uppercase span {
+.digirisk-wrap .button.uppercase span, .digirisk-wrap .flex-table form input.uppercase[type="submit"] span, .digirisk-wrap .flex-table .form input.uppercase[type="submit"] span {
   text-transform: uppercase; }
 
-.digirisk-wrap .button.blue {
+.digirisk-wrap .button.blue, .digirisk-wrap .flex-table form input.blue[type="submit"], .digirisk-wrap .flex-table .form input.blue[type="submit"] {
   background: #3495f0; }
 
-.digirisk-wrap .button.blue:hover {
+.digirisk-wrap .button.blue:hover, .digirisk-wrap .flex-table form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table .form input.blue[type="submit"]:hover {
   background: #1360c8; }
 
-.digirisk-wrap .button.red {
+.digirisk-wrap .button.red, .digirisk-wrap .flex-table form input.red[type="submit"], .digirisk-wrap .flex-table .form input.red[type="submit"] {
   background: #e05353; }
 
-.digirisk-wrap .button.red:hover {
+.digirisk-wrap .button.red:hover, .digirisk-wrap .flex-table form input.red[type="submit"]:hover, .digirisk-wrap .flex-table .form input.red[type="submit"]:hover {
   background: #c82424; }
 
-.digirisk-wrap .button.green {
+.digirisk-wrap .button.green, .digirisk-wrap .flex-table form input[type="submit"], .digirisk-wrap .flex-table .form input[type="submit"] {
   background: #47e58e; }
 
-.digirisk-wrap .button.green:hover {
+.digirisk-wrap .button.green:hover, .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table .form input[type="submit"]:hover {
   background: #1cc86a; }
 
-.digirisk-wrap .button.dark {
+.digirisk-wrap .button.dark, .digirisk-wrap .flex-table form input.dark[type="submit"], .digirisk-wrap .flex-table .form input.dark[type="submit"] {
   background: #272a35; }
 
-.digirisk-wrap .button.dark:hover {
+.digirisk-wrap .button.dark:hover, .digirisk-wrap .flex-table form input.dark[type="submit"]:hover, .digirisk-wrap .flex-table .form input.dark[type="submit"]:hover {
   background: black; }
 
-.digirisk-wrap .button.light {
+.digirisk-wrap .button.light, .digirisk-wrap .flex-table form input.light[type="submit"], .digirisk-wrap .flex-table .form input.light[type="submit"] {
   background: none;
   color: rgba(0, 0, 0, 0.3); }
 
-.digirisk-wrap .button.grey {
+.digirisk-wrap .button.grey, .digirisk-wrap .flex-table form input.grey[type="submit"], .digirisk-wrap .flex-table .form input.grey[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.8); }
 
-.digirisk-wrap .button.grey:hover {
+.digirisk-wrap .button.grey:hover, .digirisk-wrap .flex-table form input.grey[type="submit"]:hover, .digirisk-wrap .flex-table .form input.grey[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.1); }
 
-.digirisk-wrap .button.w30, .digirisk-wrap .button.w40, .digirisk-wrap .button.w50, .digirisk-wrap .button.w60, .digirisk-wrap .button.w80, .digirisk-wrap .button.h50 {
+.digirisk-wrap .button.w30, .digirisk-wrap .flex-table form input.w30[type="submit"], .digirisk-wrap .flex-table .form input.w30[type="submit"], .digirisk-wrap .button.w40, .digirisk-wrap .flex-table form input.w40[type="submit"], .digirisk-wrap .flex-table .form input.w40[type="submit"], .digirisk-wrap .button.w50, .digirisk-wrap .flex-table form input.w50[type="submit"], .digirisk-wrap .flex-table .form input.w50[type="submit"], .digirisk-wrap .button.w60, .digirisk-wrap .flex-table form input.w60[type="submit"], .digirisk-wrap .flex-table .form input.w60[type="submit"], .digirisk-wrap .button.w80, .digirisk-wrap .flex-table form input.w80[type="submit"], .digirisk-wrap .flex-table .form input.w80[type="submit"], .digirisk-wrap .button.h50, .digirisk-wrap .flex-table form input.h50[type="submit"], .digirisk-wrap .flex-table .form input.h50[type="submit"] {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -3125,56 +3125,56 @@
       -ms-flex: 0 1 auto;
           flex: 0 1 auto; }
 
-.digirisk-wrap .button.w30 > *, .digirisk-wrap .button.w40 > *, .digirisk-wrap .button.w50 > *, .digirisk-wrap .button.w60 > *, .digirisk-wrap .button.w80 > *, .digirisk-wrap .button.h50 > * {
+.digirisk-wrap .button.w30 > *, .digirisk-wrap .flex-table form input.w30[type="submit"] > *, .digirisk-wrap .flex-table .form input.w30[type="submit"] > *, .digirisk-wrap .button.w40 > *, .digirisk-wrap .flex-table form input.w40[type="submit"] > *, .digirisk-wrap .flex-table .form input.w40[type="submit"] > *, .digirisk-wrap .button.w50 > *, .digirisk-wrap .flex-table form input.w50[type="submit"] > *, .digirisk-wrap .flex-table .form input.w50[type="submit"] > *, .digirisk-wrap .button.w60 > *, .digirisk-wrap .flex-table form input.w60[type="submit"] > *, .digirisk-wrap .flex-table .form input.w60[type="submit"] > *, .digirisk-wrap .button.w80 > *, .digirisk-wrap .flex-table form input.w80[type="submit"] > *, .digirisk-wrap .flex-table .form input.w80[type="submit"] > *, .digirisk-wrap .button.h50 > *, .digirisk-wrap .flex-table form input.h50[type="submit"] > *, .digirisk-wrap .flex-table .form input.h50[type="submit"] > * {
   margin: auto; }
 
-.digirisk-wrap .button.w30 {
+.digirisk-wrap .button.w30, .digirisk-wrap .flex-table form input.w30[type="submit"], .digirisk-wrap .flex-table .form input.w30[type="submit"] {
   width: 30px;
   min-width: 30px;
   height: 30px;
   padding: 0 !important; }
 
-.digirisk-wrap .button.w40 {
+.digirisk-wrap .button.w40, .digirisk-wrap .flex-table form input.w40[type="submit"], .digirisk-wrap .flex-table .form input.w40[type="submit"] {
   width: 40px;
   min-width: 40px;
   height: 40px; }
 
-.digirisk-wrap .button.w50 {
+.digirisk-wrap .button.w50, .digirisk-wrap .flex-table form input.w50[type="submit"], .digirisk-wrap .flex-table .form input.w50[type="submit"] {
   width: 50px;
   min-width: 50px;
   height: 50px; }
 
-.digirisk-wrap .button.w50 .icon {
+.digirisk-wrap .button.w50 .icon, .digirisk-wrap .flex-table form input.w50[type="submit"] .icon, .digirisk-wrap .flex-table .form input.w50[type="submit"] .icon {
   font-size: 16px; }
 
-.digirisk-wrap .button.w60 {
+.digirisk-wrap .button.w60, .digirisk-wrap .flex-table form input.w60[type="submit"], .digirisk-wrap .flex-table .form input.w60[type="submit"] {
   width: 60px;
   min-width: 60px;
   height: 60px; }
 
-.digirisk-wrap .button.w80 {
+.digirisk-wrap .button.w80, .digirisk-wrap .flex-table form input.w80[type="submit"], .digirisk-wrap .flex-table .form input.w80[type="submit"] {
   width: 80px;
   min-width: 80px;
   height: 80px; }
 
-.digirisk-wrap .button.h50 {
+.digirisk-wrap .button.h50, .digirisk-wrap .flex-table form input.h50[type="submit"], .digirisk-wrap .flex-table .form input.h50[type="submit"] {
   height: 50px; }
 
-.digirisk-wrap .button.float.left {
+.digirisk-wrap .button.float.left, .digirisk-wrap .flex-table form input.float.left[type="submit"], .digirisk-wrap .flex-table .form input.float.left[type="submit"] {
   float: left; }
 
-.digirisk-wrap .button.float.right {
+.digirisk-wrap .button.float.right, .digirisk-wrap .flex-table form input.float.right[type="submit"], .digirisk-wrap .flex-table .form input.float.right[type="submit"] {
   float: right; }
 
-.digirisk-wrap .button.margin {
+.digirisk-wrap .button.margin, .digirisk-wrap .flex-table form input.margin[type="submit"], .digirisk-wrap .flex-table .form input.margin[type="submit"] {
   margin-top: 8px;
   margin-bottom: 8px; }
 
-.digirisk-wrap .button.radius {
+.digirisk-wrap .button.radius, .digirisk-wrap .flex-table form input.radius[type="submit"], .digirisk-wrap .flex-table .form input.radius[type="submit"] {
   -webkit-border-radius: 4px;
           border-radius: 4px; }
 
-.digirisk-wrap .button.progress .icon {
+.digirisk-wrap .button.progress .icon, .digirisk-wrap .flex-table form input.progress[type="submit"] .icon, .digirisk-wrap .flex-table .form input.progress[type="submit"] .icon {
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -3183,12 +3183,12 @@
        -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
 
-.digirisk-wrap .button.progress .icon, .digirisk-wrap .button.progress:before {
+.digirisk-wrap .button.progress .icon, .digirisk-wrap .flex-table form input.progress[type="submit"] .icon, .digirisk-wrap .flex-table .form input.progress[type="submit"] .icon, .digirisk-wrap .button.progress:before, .digirisk-wrap .flex-table form input.progress[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress[type="submit"]:before {
   position: absolute;
   left: 50%;
   top: 50%; }
 
-.digirisk-wrap .button.progress:before {
+.digirisk-wrap .button.progress:before, .digirisk-wrap .flex-table form input.progress[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress[type="submit"]:before {
   content: '';
   display: block;
   opacity: 0;
@@ -3209,10 +3209,10 @@
        -o-animation-fill-mode: both;
           animation-fill-mode: both; }
 
-.digirisk-wrap .button.progress.success, .digirisk-wrap .button.progress.load, .digirisk-wrap .button.progress.error {
+.digirisk-wrap .button.progress.success, .digirisk-wrap .flex-table form input.progress.success[type="submit"], .digirisk-wrap .flex-table .form input.progress.success[type="submit"], .digirisk-wrap .button.progress.load, .digirisk-wrap .flex-table form input.progress.load[type="submit"], .digirisk-wrap .flex-table .form input.progress.load[type="submit"], .digirisk-wrap .button.progress.error, .digirisk-wrap .flex-table form input.progress.error[type="submit"], .digirisk-wrap .flex-table .form input.progress.error[type="submit"] {
   pointer-events: none; }
 
-.digirisk-wrap .button.progress.success:before, .digirisk-wrap .button.progress.load:before, .digirisk-wrap .button.progress.error:before {
+.digirisk-wrap .button.progress.success:before, .digirisk-wrap .flex-table form input.progress.success[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.success[type="submit"]:before, .digirisk-wrap .button.progress.load:before, .digirisk-wrap .flex-table form input.progress.load[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.load[type="submit"]:before, .digirisk-wrap .button.progress.error:before, .digirisk-wrap .flex-table form input.progress.error[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.error[type="submit"]:before {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   -webkit-transform: translate(-50%, -50%);
@@ -3220,7 +3220,7 @@
        -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
 
-.digirisk-wrap .button.progress.success .icon, .digirisk-wrap .button.progress.load .icon, .digirisk-wrap .button.progress.error .icon {
+.digirisk-wrap .button.progress.success .icon, .digirisk-wrap .flex-table form input.progress.success[type="submit"] .icon, .digirisk-wrap .flex-table .form input.progress.success[type="submit"] .icon, .digirisk-wrap .button.progress.load .icon, .digirisk-wrap .flex-table form input.progress.load[type="submit"] .icon, .digirisk-wrap .flex-table .form input.progress.load[type="submit"] .icon, .digirisk-wrap .button.progress.error .icon, .digirisk-wrap .flex-table form input.progress.error[type="submit"] .icon, .digirisk-wrap .flex-table .form input.progress.error[type="submit"] .icon {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   -webkit-transform: translate(-50%, 10%);
@@ -3228,28 +3228,28 @@
        -o-transform: translate(-50%, 10%);
           transform: translate(-50%, 10%); }
 
-.digirisk-wrap .button.progress.success {
+.digirisk-wrap .button.progress.success, .digirisk-wrap .flex-table form input.progress.success[type="submit"], .digirisk-wrap .flex-table .form input.progress.success[type="submit"] {
   background: #47e58e; }
 
-.digirisk-wrap .button.progress.success:before {
+.digirisk-wrap .button.progress.success:before, .digirisk-wrap .flex-table form input.progress.success[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.success[type="submit"]:before {
   content: "\f00c";
   -webkit-animation-name: progressSuccess;
        -o-animation-name: progressSuccess;
           animation-name: progressSuccess; }
 
-.digirisk-wrap .button.progress.error {
+.digirisk-wrap .button.progress.error, .digirisk-wrap .flex-table form input.progress.error[type="submit"], .digirisk-wrap .flex-table .form input.progress.error[type="submit"] {
   background: #e05353; }
 
-.digirisk-wrap .button.progress.error:before {
+.digirisk-wrap .button.progress.error:before, .digirisk-wrap .flex-table form input.progress.error[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.error[type="submit"]:before {
   content: "\f00d";
   -webkit-animation-name: progressError;
        -o-animation-name: progressError;
           animation-name: progressError; }
 
-.digirisk-wrap .button.progress.load {
+.digirisk-wrap .button.progress.load, .digirisk-wrap .flex-table form input.progress.load[type="submit"], .digirisk-wrap .flex-table .form input.progress.load[type="submit"] {
   background: rgba(0, 0, 0, 0.1); }
 
-.digirisk-wrap .button.progress.load:before {
+.digirisk-wrap .button.progress.load:before, .digirisk-wrap .flex-table form input.progress.load[type="submit"]:before, .digirisk-wrap .flex-table .form input.progress.load[type="submit"]:before {
   display: inline-block;
   content: '';
   border: 3px solid #fff;
@@ -3266,14 +3266,32 @@
        -o-animation: spin 1s ease-out infinite;
           animation: spin 1s ease-out infinite; }
 
-.digirisk-wrap .button.disable {
+.digirisk-wrap .button.disable, .digirisk-wrap .flex-table form input.disable[type="submit"], .digirisk-wrap .flex-table .form input.disable[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3); }
 
-.digirisk-wrap .button.disable:hover {
+.digirisk-wrap .button.disable:hover, .digirisk-wrap .flex-table form input.disable[type="submit"]:hover, .digirisk-wrap .flex-table .form input.disable[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3);
   cursor: not-allowed; }
+
+.digirisk-wrap .button.pop, .digirisk-wrap .flex-table form input.pop[type="submit"], .digirisk-wrap .flex-table .form input.pop[type="submit"] {
+  margin: auto;
+  padding: 0 0.6em !important;
+  width: auto !important;
+  height: 30px !important;
+  text-align: center;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .button.pop .icon, .digirisk-wrap .flex-table form input.pop[type="submit"] .icon, .digirisk-wrap .flex-table .form input.pop[type="submit"] .icon {
+  line-height: 30px; }
+
+.digirisk-wrap .button.pop span, .digirisk-wrap .flex-table form input.pop[type="submit"] span, .digirisk-wrap .flex-table .form input.pop[type="submit"] span {
+  margin-left: 4px; }
 
 /**
  * Structure de la page
@@ -3334,8 +3352,7 @@
 .digirisk-wrap .main-header .title, .digirisk-wrap .main-header .dut {
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .main-header .media {
   background: #1e2129; }
@@ -3465,8 +3482,7 @@
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .unit-header .title strong {
   text-transform: uppercase; }
@@ -3569,13 +3585,13 @@
 .digirisk-wrap .workunit-navigation .unit-header .title {
   width: 100%; }
 
-.digirisk-wrap .workunit-navigation .button {
+.digirisk-wrap .workunit-navigation .button, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"], .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"] {
   background: none; }
 
-.digirisk-wrap .workunit-navigation .button:hover {
+.digirisk-wrap .workunit-navigation .button:hover, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"]:hover, .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"]:hover {
   background: none; }
 
-.digirisk-wrap .workunit-navigation .button .icon {
+.digirisk-wrap .workunit-navigation .button .icon, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"] .icon, .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"] .icon, .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"] .icon, .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"] .icon {
   color: rgba(255, 255, 255, 0.4); }
 
 .digirisk-wrap .workunit-navigation .content {
@@ -3615,8 +3631,7 @@
 .digirisk-wrap .workunit-navigation .content li div .wp-digi-global-name {
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   text-overflow: ellipsis; }
 
 .digirisk-wrap .workunit-navigation .content li div span {
@@ -3773,13 +3788,15 @@
   line-height: 50px;
   color: #fff;
   font-size: 12px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  width: 100%; }
 
 .digirisk-wrap .navigation-container .society-header .title .icon {
   display: inline;
   font-size: 12px;
   margin-right: 0.4em;
-  line-height: 50px; }
+  line-height: 50px;
+  float: left; }
 
 .digirisk-wrap .navigation-container .society-header > .add-container {
   top: 50% !important;
@@ -3836,10 +3853,10 @@
 .digirisk-wrap .unit.active > .unit-container .title {
   background: #3495f0; }
 
-.digirisk-wrap .unit.active > .unit-container .add-container .button.blue {
+.digirisk-wrap .unit.active > .unit-container .add-container .button.blue, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table form input.blue[type="submit"], .digirisk-wrap .flex-table form .unit.active > .unit-container .add-container input.blue[type="submit"], .digirisk-wrap .unit.active > .unit-container .add-container .flex-table .form input.blue[type="submit"], .digirisk-wrap .flex-table .form .unit.active > .unit-container .add-container input.blue[type="submit"] {
   background: #1360c8; }
 
-.digirisk-wrap .unit.active > .unit-container .add-container .button.blue:hover {
+.digirisk-wrap .unit.active > .unit-container .add-container .button.blue:hover, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table form .unit.active > .unit-container .add-container input.blue[type="submit"]:hover, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table .form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table .form .unit.active > .unit-container .add-container input.blue[type="submit"]:hover {
   background: #0f4a99; }
 
 .digirisk-wrap .unit.toggled > .sub-list {
@@ -4000,11 +4017,11 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .navigation-container .add-container .button {
+.digirisk-wrap .navigation-container .add-container .button, .digirisk-wrap .navigation-container .add-container .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .navigation-container .add-container input[type="submit"], .digirisk-wrap .navigation-container .add-container .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .navigation-container .add-container input[type="submit"] {
   float: left;
   margin-left: 2px; }
 
-.digirisk-wrap .navigation-container .add-container .button .icon {
+.digirisk-wrap .navigation-container .add-container .button .icon, .digirisk-wrap .navigation-container .add-container .flex-table form input[type="submit"] .icon, .digirisk-wrap .flex-table form .navigation-container .add-container input[type="submit"] .icon, .digirisk-wrap .navigation-container .add-container .flex-table .form input[type="submit"] .icon, .digirisk-wrap .flex-table .form .navigation-container .add-container input[type="submit"] .icon {
   margin: auto;
   font-size: 20px;
   line-height: 1; }
@@ -4046,16 +4063,66 @@
 
 .digirisk-wrap .navigation-container .unit > .sub-list {
   padding-left: 0.6em;
-  margin-left: 1em;
-  border-left: 1px dashed rgba(255, 255, 255, 0.2);
   display: none; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .unit {
+  position: relative;
+  margin-left: 0.6em; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .unit:before {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #50556a; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list > .unit:last-child:before {
+  height: 30px; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .spacer, .digirisk-wrap .navigation-container .unit > .sub-list .toggle-unit {
+  position: relative; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .spacer:before, .digirisk-wrap .navigation-container .unit > .sub-list .toggle-unit:before {
+  display: block;
+  position: absolute;
+  content: '';
+  height: 1px;
+  left: 0;
+  right: 10px;
+  top: 25px;
+  background: #50556a; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .toggle-unit .icon {
+  margin-left: 8px; }
+
+.digirisk-wrap .navigation-container .unit > .sub-list .toggle-unit:before {
+  right: 20px; }
 
 .wp-core-ui .navigation-container .button-secondary:focus,
 .wp-core-ui .navigation-container .button-secondary:hover,
 .wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.focus[type="submit"], .digirisk-wrap .flex-table form
+.wp-core-ui .navigation-container input.focus[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.focus[type="submit"], .digirisk-wrap .flex-table .form
+.wp-core-ui .navigation-container input.focus[type="submit"],
 .wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.hover[type="submit"], .digirisk-wrap .flex-table form
+.wp-core-ui .navigation-container input.hover[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.hover[type="submit"], .digirisk-wrap .flex-table .form
+.wp-core-ui .navigation-container input.hover[type="submit"],
 .wp-core-ui .navigation-container .button:focus,
-.wp-core-ui .navigation-container .button:hover {
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input[type="submit"]:focus, .digirisk-wrap .flex-table form
+.wp-core-ui .navigation-container input[type="submit"]:focus,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input[type="submit"]:focus, .digirisk-wrap .flex-table .form
+.wp-core-ui .navigation-container input[type="submit"]:focus,
+.wp-core-ui .navigation-container .button:hover,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form
+.wp-core-ui .navigation-container input[type="submit"]:hover,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form
+.wp-core-ui .navigation-container input[type="submit"]:hover {
   color: #fff; }
 
 /**
@@ -4085,10 +4152,9 @@
   transition: all 0.2s ease-out;
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
-.digirisk-wrap .tab .tab-element.active:not(.toggle):not(.button) {
+.digirisk-wrap .tab .tab-element.active:not(.toggle):not(.gp) {
   background: #3495f0;
   color: #fff; }
 
@@ -4361,6 +4427,16 @@
  * .full -> cellule de 100%
  * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
  */
+.digirisk-wrap {
+  /**
+ * CSS spécifique
+ * Responsive Table Risk
+ */
+  /**
+ * CSS spécifique
+ * Responsive Table Evaluateurs
+ */ }
+
 .digirisk-wrap .table {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1); }
@@ -4403,6 +4479,9 @@
   font-weight: 700;
   color: #3495f0; }
 
+.digirisk-wrap .table .cotation-container.tooltip:hover {
+  cursor: pointer; }
+
 .digirisk-wrap .table .cotation-container .content {
   -webkit-flex-wrap: nowrap !important;
       -ms-flex-wrap: nowrap !important;
@@ -4439,7 +4518,7 @@
   color: rgba(0, 0, 0, 0.7); }
 
 .digirisk-wrap .table .categorie-container .action .icon {
-  margin-left: 10px; }
+  margin-left: 4px; }
 
 .digirisk-wrap .table .categorie-container .action:after {
   display: table;
@@ -4447,7 +4526,7 @@
   clear: both; }
 
 .digirisk-wrap .table .categorie-container .content {
-  width: 392px; }
+  width: 280px; }
 
 .digirisk-wrap .table .categorie-container .content .tooltip:hover {
   cursor: pointer; }
@@ -4460,6 +4539,16 @@
 .digirisk-wrap .table .comment-container {
   padding-top: 6px;
   padding-bottom: 6px; }
+
+.digirisk-wrap .table .comment-container .avatar {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  min-width: 30px; }
+
+.digirisk-wrap .table .comment-container .avatar span {
+  line-height: 30px; }
 
 .digirisk-wrap .table .comment-container .comment {
   display: -webkit-box;
@@ -4571,7 +4660,7 @@
 
 .digirisk-wrap .table .avatar span {
   line-height: 50px;
-  color: #fff;
+  color: #fff !important;
   font-size: 16px;
   font-weight: 300;
   text-transform: uppercase; }
@@ -4588,6 +4677,9 @@
 .digirisk-wrap .table td.w50, .digirisk-wrap .table th.w50 {
   width: 50px; }
 
+.digirisk-wrap .table td.w70, .digirisk-wrap .table th.w70 {
+  width: 70px; }
+
 .digirisk-wrap .table td.w100, .digirisk-wrap .table th.w100 {
   width: 100px; }
 
@@ -4596,6 +4688,9 @@
 
 .digirisk-wrap .table td.wm40, .digirisk-wrap .table th.wm40 {
   min-width: 40px; }
+
+.digirisk-wrap .table td.wmax70 {
+  max-width: 70px; }
 
 .digirisk-wrap .table td.w150, .digirisk-wrap .table th.w150 {
   width: 150px; }
@@ -4635,13 +4730,17 @@
     padding: 0 !important; } }
 
 @media (max-width: 480px) {
-  .digirisk-wrap table, .digirisk-wrap tr, .digirisk-wrap thead, .digirisk-wrap tbody, .digirisk-wrap tfoot, .digirisk-wrap td, .digirisk-wrap th {
+  .digirisk-wrap .table.risk {
     display: block;
     width: 100% !important;
     height: auto !important; }
-  .digirisk-wrap .table > thead {
+  .digirisk-wrap .table.risk tr, .digirisk-wrap .table.risk thead, .digirisk-wrap .table.risk tbody, .digirisk-wrap .table.risk tfoot, .digirisk-wrap .table.risk td, .digirisk-wrap .table.risk th {
+    display: block;
+    width: 100% !important;
+    height: auto !important; }
+  .digirisk-wrap .table.risk > thead {
     display: none; }
-  .digirisk-wrap .table .risk-row {
+  .digirisk-wrap .table.risk .risk-row {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -4649,18 +4748,10 @@
     display: flex;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap; }
-  .digirisk-wrap .table .risk-row > td {
-    width: 100%; }
-  .digirisk-wrap .table .categorie-container .content {
-    width: 230px; }
-  .digirisk-wrap .table > tfoot {
-    background: #f1f1f1;
-    padding-top: 4em; }
-  .digirisk-wrap .table > tfoot > tr {
-    background: #fff; }
-  .digirisk-wrap .table.risk .risk-row {
+            flex-wrap: wrap;
     padding: 1em !important; }
+  .digirisk-wrap .table.risk .risk-row > td {
+    width: 100%; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1) {
     width: 60% !important;
     display: -webkit-box;
@@ -4672,12 +4763,6 @@
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1) > span {
     width: 30%;
     font-size: 10px; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(1):after {
-    display: block;
-    content: attr(data-title);
-    width: 70%;
-    padding-left: 4px;
-    font-weight: 800; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2), .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3), .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) {
     width: 33.333333% !important;
     max-width: 33.333333%;
@@ -4690,6 +4775,8 @@
     text-align: center; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .tooltip img, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .tooltip img, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .tooltip, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .tooltip img {
     display: inline-block; }
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2) .categorie-container .content, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3) .categorie-container .content, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4) .categorie-container .content {
+    width: 230px; }
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(2):before, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(3):before, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(4):before {
     display: block;
     content: attr(data-title);
@@ -4701,7 +4788,7 @@
   .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .action {
     display: block;
     text-align: right; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button {
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"], .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"] {
     width: 30px !important;
     -webkit-border-radius: 50%;
             border-radius: 50%;
@@ -4712,11 +4799,11 @@
     display: inline-block;
     text-align: center;
     line-height: 30px; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button .dashicons {
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button .dashicons, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table form input[type="submit"] .dashicons, .digirisk-wrap .flex-table form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"] .dashicons, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table .form input[type="submit"] .dashicons, .digirisk-wrap .flex-table .form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"] .dashicons {
     line-height: 30px !important; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button.green {
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button.green, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"], .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .table.risk .risk-row > td:nth-of-type(6) input[type="submit"] {
     background: #47e58e; }
-  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button.blue {
+  .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .button.blue, .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table form input.blue[type="submit"], .digirisk-wrap .flex-table form .table.risk .risk-row > td:nth-of-type(6) input.blue[type="submit"], .digirisk-wrap .table.risk .risk-row > td:nth-of-type(6) .flex-table .form input.blue[type="submit"], .digirisk-wrap .flex-table .form .table.risk .risk-row > td:nth-of-type(6) input.blue[type="submit"] {
     background: #3495f0; }
   .digirisk-wrap .table.risk .risk-row .comment-container .comment {
     -webkit-flex-wrap: wrap;
@@ -4727,7 +4814,7 @@
   .digirisk-wrap .table.risk .risk-row .comment-container .content {
     width: 100%;
     font-size: 16px; }
-  .digirisk-wrap .table.risk .risk-row .comment-container .button {
+  .digirisk-wrap .table.risk .risk-row .comment-container .button, .digirisk-wrap .table.risk .risk-row .comment-container .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .table.risk .risk-row .comment-container input[type="submit"], .digirisk-wrap .table.risk .risk-row .comment-container .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .table.risk .risk-row .comment-container input[type="submit"] {
     position: absolute;
     right: 0;
     top: 0; }
@@ -4769,6 +4856,11 @@
        -moz-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2; }
+  .digirisk-wrap .table.risk > tfoot {
+    background: #f1f1f1;
+    padding-top: 4em; }
+  .digirisk-wrap .table.risk > tfoot > tr {
+    background: #fff; }
   .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment {
     display: none; }
   .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment:nth-of-type(1) {
@@ -4777,6 +4869,373 @@
     display: -moz-box;
     display: -ms-flexbox;
     display: flex; } }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .table.evaluators tr, .digirisk-wrap .table.evaluators thead, .digirisk-wrap .table.evaluators tbody, .digirisk-wrap .table.evaluators tfoot, .digirisk-wrap .table.evaluators td:not(.hidden), .digirisk-wrap .table.evaluators th, .digirisk-wrap .table.affected-evaluator tr, .digirisk-wrap .table.affected-evaluator thead, .digirisk-wrap .table.affected-evaluator tbody, .digirisk-wrap .table.affected-evaluator tfoot, .digirisk-wrap .table.affected-evaluator td:not(.hidden), .digirisk-wrap .table.affected-evaluator th {
+    display: block;
+    width: 100%;
+    height: auto; }
+  .digirisk-wrap .table.evaluators thead > tr {
+    padding: 1em 6em !important;
+    background: #fff !important;
+    color: rgba(0, 0, 0, 0.8); }
+  .digirisk-wrap .table.evaluators thead th {
+    display: none; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6) {
+    display: block; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6):before {
+    font-weight: 400;
+    display: inline-block;
+    content: '\f017';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; }
+  .digirisk-wrap .table.evaluators thead th:nth-of-type(6) input {
+    display: inline-block;
+    max-width: 60px; }
+  .digirisk-wrap .table.affected-evaluator thead th {
+    display: none; }
+  .digirisk-wrap .table.evaluators tbody > tr, .digirisk-wrap .table.affected-evaluator tbody > tr {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    padding: 1em;
+    position: relative;
+    padding: 1em 6em !important; }
+  .digirisk-wrap .table.evaluators tbody > tr:nth-child(even), .digirisk-wrap .table.affected-evaluator tbody > tr:nth-child(even) {
+    background: #fff; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(1), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(1) {
+    width: 50px;
+    min-width: 50px;
+    margin-right: 0.6em;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(2), .digirisk-wrap .table.evaluators tbody td:nth-of-type(3), .digirisk-wrap .table.evaluators tbody td:nth-of-type(4), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(2), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(3), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(4) {
+    width: auto;
+    padding: 0 0.2em !important;
+    font-size: 14px; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(6):before, .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(6):before {
+    display: inline-block;
+    content: '\f017';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(6) input, .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(6) input {
+    display: inline-block;
+    max-width: 60px; }
+  .digirisk-wrap .table.evaluators tbody td:nth-of-type(7), .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(7) {
+    width: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .digirisk-wrap .table.affected-evaluator tbody tr {
+    background: rgba(0, 0, 0, 0.1) !important; }
+  .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
+    width: 100%; }
+  .digirisk-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
+    display: inline-block;
+    content: '\f073';
+    font-family: FontAwesome;
+    font-size: 20px;
+    padding-right: 0.4em; } }
+
+/**
+ * Table design
+ * .table -> classe principale
+ * .media
+ * .action -> Boite contenant les actions sur une ligne
+ * 		.task
+ * 		.edit
+ * 		.delete
+ * .w50 -> cellule de 50px
+ * .w100 -> cellule de 100px
+ * .wm130 -> cellule de 130px minimum
+ * .w150 -> cellule de 150px
+ * .full -> cellule de 100%
+ * .padding -> Ajoute un padding à la cellule de 8px sur les côtés
+ */
+.digirisk-wrap .flex-table {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* table general */
+  /* table header */
+  /* table body */
+  /* table body */
+  /* media */
+  /* mysql date */
+  /* action */ }
+
+.digirisk-wrap .flex-table .col, .digirisk-wrap .flex-table .header-cell, .digirisk-wrap .flex-table .cell {
+  height: auto;
+  text-align: left; }
+
+.digirisk-wrap .flex-table .col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.digirisk-wrap .flex-table .col.advanced {
+  display: block;
+  height: auto; }
+
+.digirisk-wrap .flex-table .col.advanced .col {
+  width: 100%;
+  background: transparent !important; }
+
+.digirisk-wrap .flex-table .col.advanced .advanced {
+  padding: 8px; }
+
+.digirisk-wrap .flex-table .cell, .digirisk-wrap .flex-table .header-cell {
+  width: 100%;
+  margin: auto 0; }
+
+.digirisk-wrap .flex-table strong {
+  font-weight: 700;
+  color: #3495f0; }
+
+.digirisk-wrap .flex-table > .table-header {
+  background: #272a35;
+  color: #fff; }
+
+.digirisk-wrap .flex-table > .table-header .header-cell {
+  font-weight: 600; }
+
+.digirisk-wrap .flex-table > .table-header .col {
+  background: #272a35 !important; }
+
+.digirisk-wrap .flex-table > .table-header .icon {
+  padding-right: 4px; }
+
+.digirisk-wrap .flex-table > .table-body .col:nth-child(odd) {
+  background: #fff; }
+
+.digirisk-wrap .flex-table > .table-body .col:nth-child(even) {
+  background: rgba(0, 0, 0, 0.1); }
+
+.digirisk-wrap .flex-table > .table-body .advanced {
+  width: 100%;
+  min-width: 100%; }
+
+.digirisk-wrap .flex-table > .table-body .advanced:after {
+  display: block;
+  content: '';
+  clear: both; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+     -moz-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment > * {
+  margin: auto 0; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .content {
+  white-space: normal;
+  line-height: 1.3; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment span, .digirisk-wrap .flex-table > .table-body .comment-container .comment input, .digirisk-wrap .flex-table > .table-body .comment-container .comment textarea {
+  color: rgba(0, 0, 0, 0.7); }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .delete, .digirisk-wrap .flex-table > .table-body .comment-container .comment .add {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 !important;
+  text-align: center;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  font-size: 10px; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .delete i, .digirisk-wrap .flex-table > .table-body .comment-container .comment .add i {
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .delete {
+  margin-left: 4px;
+  background: rgba(0, 0, 0, 0.1); }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .delete i {
+  color: rgba(0, 0, 0, 0.2); }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment .delete:hover i {
+  color: #e05353; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .comment ~ .new.comment {
+  padding-top: 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .new.comment {
+  line-height: 2; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .new.comment .date {
+  font-weight: 400; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add {
+  margin-left: 4px;
+  background: #3495f0; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add i {
+  color: #fff; }
+
+.digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add:hover {
+  background: #1360c8; }
+
+.digirisk-wrap .flex-table > .table-body canvas {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%; }
+
+.digirisk-wrap .flex-table > .table-body .canvas-eraser {
+  pointer-events: auto;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 !important;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.digirisk-wrap .flex-table > .table-body .canvas-eraser:hover {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer; }
+
+.digirisk-wrap .flex-table > .table-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05); }
+
+.digirisk-wrap .flex-table .media {
+  background: rgba(0, 0, 0, 0.1); }
+
+.digirisk-wrap .flex-table .media.no-file .add {
+  color: rgba(0, 0, 0, 0.6); }
+
+.digirisk-wrap .flex-table .media .default-image {
+  color: rgba(0, 0, 0, 0.3); }
+
+.digirisk-wrap .flex-table .mysql-date {
+  position: absolute; }
+
+.digirisk-wrap .flex-table .action {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.digirisk-wrap .flex-table .action .task:hover .icon {
+  color: rgba(0, 0, 0, 0.6); }
+
+.digirisk-wrap .flex-table .action .edit:hover .icon {
+  color: #3495f0; }
+
+.digirisk-wrap .flex-table .action .delete {
+  background: rgba(0, 0, 0, 0.05); }
+
+.digirisk-wrap .flex-table .action .delete:hover .icon {
+  color: #e05353; }
+
+.digirisk-wrap .flex-table .action .add, .digirisk-wrap .flex-table .action .save {
+  margin-left: auto; }
+
+.digirisk-wrap .flex-table .action .add .icon, .digirisk-wrap .flex-table .action .save .icon {
+  color: #fff !important; }
+
+.digirisk-wrap .flex-table {
+  /* cell manual width */
+  /* cell manual min width */
+  /* cell manual max width */ }
+
+.digirisk-wrap .flex-table input.affect {
+  width: 50px; }
+
+.digirisk-wrap .flex-table input[type="text"], .digirisk-wrap .flex-table textarea {
+  width: 100%; }
+
+.digirisk-wrap .flex-table .cell.w50, .digirisk-wrap .flex-table .header-cell.w50 {
+  width: 50px;
+  min-width: 50px; }
+
+.digirisk-wrap .flex-table .cell.w70, .digirisk-wrap .flex-table .header-cell.w70 {
+  width: 70px;
+  min-width: 70px; }
+
+.digirisk-wrap .flex-table .cell.w100, .digirisk-wrap .flex-table .header-cell.w100 {
+  width: 100px;
+  min-width: 100px; }
+
+.digirisk-wrap .flex-table .cell.w150, .digirisk-wrap .flex-table .header-cell.w150 {
+  width: 150px;
+  min-width: 150px; }
+
+.digirisk-wrap .flex-table .cell.w200, .digirisk-wrap .flex-table .header-cell.w200 {
+  width: 200px;
+  min-width: 200px; }
+
+.digirisk-wrap .flex-table .cell.wm130, .digirisk-wrap .flex-table .header-cell.wm130 {
+  min-width: 130px; }
+
+.digirisk-wrap .flex-table .cell.wm40, .digirisk-wrap .flex-table .header-cell.wm40 {
+  min-width: 40px; }
+
+.digirisk-wrap .flex-table .cell.wmax70 {
+  max-width: 70px; }
+
+.digirisk-wrap .flex-table .cell.full, .digirisk-wrap .flex-table .header-cell.full {
+  width: 100%; }
+
+.digirisk-wrap .flex-table .cell.full input[type="text"], .digirisk-wrap .flex-table .cell.full textarea, .digirisk-wrap .flex-table .header-cell.full input[type="text"], .digirisk-wrap .flex-table .header-cell.full textarea {
+  width: 100%; }
+
+.digirisk-wrap .flex-table .cell.padding, .digirisk-wrap .flex-table .header-cell.padding {
+  padding-left: 8px;
+  padding-right: 8px; }
+
+@media (max-width: 1200px) {
+  .digirisk-wrap .flex-table .cell[class*="w"], .digirisk-wrap .flex-table .header-cell[class*="w"] {
+    min-width: 50px; } }
+
+@media (max-width: 480px) {
+  .digirisk-wrap .flex-table .col {
+    height: auto;
+    min-height: 50px;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+  .digirisk-wrap .flex-table .cell, .digirisk-wrap .flex-table .header-cell {
+    line-height: 1; } }
 
 /**
  * Evaluation method
@@ -5020,6 +5479,49 @@
   border: 1px solid #3495f0; }
 
 /**
+ * Formulaires présents dans les tableaux
+ */
+.digirisk-wrap .flex-table form input, .digirisk-wrap .flex-table form textarea, .digirisk-wrap .flex-table .form input, .digirisk-wrap .flex-table .form textarea {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 0.6em; }
+
+.digirisk-wrap .flex-table form input:focus, .digirisk-wrap .flex-table form input:active, .digirisk-wrap .flex-table form textarea:focus, .digirisk-wrap .flex-table form textarea:active, .digirisk-wrap .flex-table .form input:focus, .digirisk-wrap .flex-table .form input:active, .digirisk-wrap .flex-table .form textarea:focus, .digirisk-wrap .flex-table .form textarea:active {
+  outline: none; }
+
+.digirisk-wrap .flex-table form input[type="submit"], .digirisk-wrap .flex-table .form input[type="submit"] {
+  display: inline-block;
+  width: auto;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0.6em 0; }
+
+.digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table .form input[type="submit"]:hover {
+  cursor: pointer; }
+
+.digirisk-wrap .flex-table form input[type="radio"], .digirisk-wrap .flex-table form input[type="checkbox"], .digirisk-wrap .flex-table .form input[type="radio"], .digirisk-wrap .flex-table .form input[type="checkbox"] {
+  width: auto;
+  display: inline-block; }
+
+.digirisk-wrap .flex-table form label, .digirisk-wrap .flex-table .form label {
+  position: static;
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.8em 0 0.4em 0;
+  color: rgba(0, 0, 0, 0.6); }
+
+.digirisk-wrap .flex-table form label.no-style, .digirisk-wrap .flex-table .form label.no-style {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: none;
+  display: inline;
+  padding-left: 0.4em; }
+
+/**
  * Step for installer
  */
 .digirisk-wrap .step {
@@ -5148,6 +5650,9 @@
       -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
 
+.digirisk-wrap .grid-layout > * {
+  position: relative; }
+
 .digirisk-wrap .grid-layout.padding {
   margin-left: -0.5em;
   margin-right: -0.5em; }
@@ -5162,7 +5667,7 @@
   width: 50%; }
 
 .digirisk-wrap .grid-layout.w3 > * {
-  width: 33.333333% !important; }
+  width: 33.333333%; }
 
 .digirisk-wrap .grid-layout.w4 > * {
   width: 25%; }
@@ -5394,7 +5899,7 @@
   -webkit-box-shadow: 0px 0px 0px 2px #3495f0;
           box-shadow: 0px 0px 0px 2px #3495f0; }
 
-.digirisk-wrap.wpdigi-installer .button.disable {
+.digirisk-wrap.wpdigi-installer .button.disable, .digirisk-wrap.wpdigi-installer .flex-table form input.disable[type="submit"], .digirisk-wrap.wpdigi-installer .flex-table .form input.disable[type="submit"] {
   pointer-events: none; }
 
 .digirisk-wrap.wpdigi-installer .society-form {
@@ -5643,11 +6148,16 @@
 .digirisk-wrap .popup.patch-note .container .entry-content p {
   margin-bottom: 0.6em; }
 
-.navigation-container .media.no-file .add, .unit-header .media.no-file .add {
+.navigation-container .media.no-file .button-add, .navigation-container .wpeo-media.no-file .button-add, .unit-header .media.no-file .button-add, .unit-header .wpeo-media.no-file .button-add {
   color: rgba(255, 255, 255, 0.4); }
 
-.navigation-container .media.no-file .default-image, .unit-header .media.no-file .default-image {
+.navigation-container .media.no-file .default-image, .navigation-container .wpeo-media.no-file .default-image, .unit-header .media.no-file .default-image, .unit-header .wpeo-media.no-file .default-image {
   color: rgba(255, 255, 255, 0.2); }
+
+.wpeo-gallery * {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; }
 
 /**
  * Import des templates de page
@@ -5729,3 +6239,13 @@
 .digirisk-wrap .note {
   font-style: italic;
   color: rgba(0, 0, 0, 0.4); }
+
+.digirisk-wrap canvas {
+  -moz-user-select: none;
+  /* Firefox */
+  -webkit-user-select: none;
+  /* Chrome, Safari, Opéra depuis la version 15 */
+  -ms-user-select: none;
+  /* Internet explorer depuis la version 10 et Edge */
+  user-select: none;
+  /* Propriété standard */ }

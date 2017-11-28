@@ -70,14 +70,9 @@ class Risk_Model extends \eoxia\Post_Model {
 				'type' => 'array',
 				'meta_type' => 'multiple',
 				'child' => array(
-					'digi-danger' => array(
+					'digi-category-risk' => array(
 						'meta_type' => 'multiple',
-						'array_type'	=> 'integer',
-						'type' => 'array',
-					),
-					'digi-danger-category' => array(
-						'meta_type' => 'multiple',
-						'array_type'	=> 'integer',
+						'array_type' => 'integer',
 						'type' => 'array',
 					),
 					'digi-method' => array(

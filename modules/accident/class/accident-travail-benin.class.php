@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gères la génération de l'ODT: accident travail benin
  */
-class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
+class Accident_Travail_Benin_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -91,6 +91,13 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Accident travail benin';
 
 	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'accident_benin';
+
+	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
 	 * @return void
@@ -132,7 +139,7 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 	 * Cette méthode génère l'accident de travail bénin
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param integer $accident_id L'ID de l'accident.
 	 * @return array {
@@ -151,7 +158,7 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 		$sheet_details = array(
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
+			'telephone' => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
 			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,
@@ -163,7 +170,7 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accident( $accident ) );
 
-		$document_creation_response = Document_Class::g()->create_document( $accident, array( 'accident_benin' ), $sheet_details );
+		$document_creation_response = $this->create_document( $accident, array( 'accident_benin' ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,
@@ -204,16 +211,16 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 			'dateInscriptionRegistre' => $accident->registration_date_in_register['date_input']['fr_FR']['date'],
 			'nomPrenomMatriculeVictime' => ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : '',
 			'dateHeure' => $accident->accident_date['date_input']['fr_FR']['date_time'],
-			'lieu' => $accident->place,
+			'lieu' => $accident->place->modified_unique_identifier . ' ' . $accident->place->title,
 			'circonstances' => $comment_content,
 			'siegeLesions' => $accident->location_of_lesions,
 			'natureLesions' => $accident->nature_of_lesions,
 			'nomAdresseTemoins' => $accident->name_and_address_of_witnesses,
 			'nomAdresseTiers' => $accident->name_and_address_of_third_parties_involved,
-			'signatureDonneurSoins' => $this->get_picture( ! empty( $accident->associated_document_id['name_and_signature_of_the_caregiver_id'][0] ) ? $accident->associated_document_id['name_and_signature_of_the_caregiver_id'][0] : 0 ),
+			'signatureDonneurSoins' => $this->get_picture( ! empty( $accident->associated_document_id['signature_of_the_caregiver_id'][0] ) ? $accident->associated_document_id['signature_of_the_caregiver_id'][0] : 0 ),
 			'signatureVictime' => $this->get_picture( ! empty( $accident->associated_document_id['signature_of_the_victim_id'][0] ) ? $accident->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
 			'observations' => $accident->observation,
-			'enqueteAccident' => ! empty( $accident->associated_document_id['accident_investigation_id'][0] ) ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
+			'enqueteAccident' => $accident->have_investigation ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
 		);
 
 		return $accident_details;
@@ -227,12 +234,12 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 	 * @return array Les données de l'image.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 */
 	public function get_picture( $id ) {
 		$picture = '';
 
-		$picture_definition = wp_get_attachment_image_src( $id, 'thumbnail' );
+		$picture_definition = wp_get_attachment_image_src( $id, array( 300, 150 ) );
 		$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 		if ( is_file( $picture_path ) ) {
@@ -240,7 +247,7 @@ class Accident_Travail_Benin_Class extends \eoxia\Post_Class {
 				'type' => 'picture',
 				'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 				'option' => array(
-					'size' => 3,
+					'size' => 6,
 				),
 			);
 		}

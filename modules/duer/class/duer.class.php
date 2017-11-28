@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Fait l'affichage du template de la liste des documents uniques
  */
-class DUER_Class extends \eoxia\Post_Class {
+class DUER_Class extends Document_Class {
 	/**
 	 * Le nom du modèle
 	 *
@@ -96,6 +96,13 @@ class DUER_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $post_type_name = 'DUER';
+
+	/**
+	 * Le nom de l'ODT sans l'extension; exemple: document_unique
+	 *
+	 * @var string
+	 */
+	protected $odt_name = 'document_unique';
 
 	/**
 	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.

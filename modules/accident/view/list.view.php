@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,21 +15,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table accident">
-	<thead>
-		<tr>
-			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="padding"><?php esc_html_e( 'Date d\'inscription dans le registre' , 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Nom, Prénom, matricule interne de la victime', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Circonstances détaillées', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Etat', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Opt. avancés', 'digirisk' ); ?></th>
-			<th class="w100"></th>
-		</tr>
-	</thead>
+<div class="flex-table accident">
+	<div class="table-header">
+		<div class="col">
+			<div class="header-cell padding w150"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
+			<div class="header-cell padding w200"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?></div>
+			<div class="header-cell padding w150"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></div>
+			<div class="header-cell padding w100"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></div>
+			<div class="header-cell padding"><?php esc_html_e( 'Circonstances', 'digirisk' ); ?></div>
+			<div class="header-cell padding w70"><?php esc_html_e( 'Indicateurs', 'digirisk' ); ?></div>
+			<div class="header-cell padding w150"></div>
+		</div>
+	</div>
 
-	<tbody>
+	<div class="table-body">
 		<?php
 		if ( ! empty( $accidents ) ) :
 			foreach ( $accidents as $accident ) :
@@ -39,14 +38,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		endif;
 		?>
-	</tbody>
+	</div>
 
-	<tfoot>
+	<div class="table-footer">
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
-			'accident' => $accident_schema,
+		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-add', array(
+			'accident'     => $accident_schema,
 			'main_society' => $main_society,
 		) );
 		?>
-	</tfoot>
-</table>
+	</div>
+</div>

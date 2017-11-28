@@ -248,6 +248,23 @@
 				cursor: not-allowed;
 			}
 		}
+
+		&.pop {
+			margin: auto;
+			padding: 0 0.6em !important;
+			width: auto !important;
+			height: 30px !important;
+			text-align: center;
+			border-radius: 4px;
+			transition: all 0.2s ease-out;
+
+			.icon {
+				line-height: 30px;
+			}
+			span {
+				margin-left: 4px;
+			}
+		}
 	}
 
 }

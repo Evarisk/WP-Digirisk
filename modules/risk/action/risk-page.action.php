@@ -70,7 +70,7 @@ class Risk_Page_Action {
 	 */
 	public function callback_can_update() {
 		// Met à true si la variable $_POST "can_update" n'existe pas. Permet de continuer l'exécution de l'action AJAX.
-		$can_update = isset( $_POST['can_update'] ) ? ( ( 'on' === $_POST['can_update'] ) ? true : '' ) : true;
+		$can_update = isset( $_POST['can_update'] ) ? true : false;
 
 		// Si la variable est à false, on stop l'action AJAX pour ne pas modifier le risque.
 		if ( ! $can_update ) {

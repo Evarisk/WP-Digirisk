@@ -3,8 +3,8 @@
  * * Affiches l'interface pour installer DigiRisk
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- <div class="bar"></div> -->
 		<ul class="step-list">
 			<li class="step active"><span class="title"><?php esc_html_e( 'Création société', 'digirisk' ); ?></span></li>
-			<li class="step" data-width="25"><span class="title"><?php esc_html_e( 'Catégories de danger', 'digirisk' ); ?></span></li>
+			<li class="step" data-width="25"><span class="title"><?php esc_html_e( 'Catégories de risque', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="50"><span class="title"><?php esc_html_e( 'Méthodes d\'évaluation', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="75"><span class="title"><?php esc_html_e( 'Préconisations', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="100"><span class="title"><?php esc_html_e( 'Digirisk est prêt', 'digirisk' ); ?></span></li>
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div data-module="installer" data-loader="wpdigi-installer" data-parent="wpdigi-installer" data-namespace="digirisk" data-before-method="beforeCreateSociety" class="float right action-input button blue uppercase strong"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
 
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-users' ) ); ?>" type="button" class="hidden disable float right button green uppercase strong">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-users&from_install=1' ) ); ?>" type="button" class="hidden disable float right button green uppercase strong">
 			<span><?php esc_html_e( 'Terminer l\'installation', 'digirisk' ); ?></span>
 		</a>
 

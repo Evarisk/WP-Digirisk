@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <input type="hidden" class="risk-level" name="risk[evaluation][scale]" value="<?php echo esc_attr( $risk->evaluation->scale ); ?>" />
 
 <div class="cotation-container toggle grid">
-	<div class="action cotation default-cotation level<?php echo esc_attr( $risk->evaluation->scale ); ?> open-popup" data-parent="risk-row" data-target="popup-evaluation">
+	<div class="action cotation default-cotation level<?php echo esc_attr( $risk->evaluation->scale ); ?> open-popup" data-parent="risk-row" data-class="popup-evaluation" data-target="popup-evaluation">
 		<i class="icon fa fa-line-chart" style="<?php echo ( 0 !== $risk->evaluation->id ) ? 'display: none;': ''; ?>"></i>
 		<span>
 			<?php if ( 0 !== $risk->evaluation->id ) :

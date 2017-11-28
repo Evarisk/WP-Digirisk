@@ -3,16 +3,17 @@
  * Edition d'une recommendation
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
+ * @since 6.2.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="recommendation-row edit">
 
@@ -29,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->id . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->id . '" model_name="/digi/' . $recommendation->get_class() . '" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->id . '" model_name="/digi/' . $recommendation->get_class() . '" field_name="image"  title="' . $recommendation->unique_identifier . '"]' ); ?>
 	</td>
 	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>

@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.3.4
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -32,14 +32,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 		<?php endif; ?>
 	</td>
-	<td data-title="Risque" data-title="Risque" class="wm130 w150">
-		<?php do_shortcode( '[dropdown_danger id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" danger_id="' . $risk->danger->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
+	<td data-title="Risque" data-title="Risque" class="wmax70">
+		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . ( ( $risk->preset ) ? 0 : $risk->id ) . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="edit" add_button="' . ( ( $risk->preset ) ? '0' : '1' ) . '"]' ); ?>
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<?php if ( -1 != $risk->danger->id && -1 != $risk->evaluation->scale ) : ?>
+				<?php if ( -1 != $risk->risk_category->id && -1 != $risk->evaluation->scale ) : ?>
 					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
 				<?php else : ?>
 					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon fa fa-plus"></i></div>

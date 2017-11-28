@@ -1,15 +1,3 @@
-[submodule "core/external/wpeo_util"]
-	path = core/external/wpeo_util
-	url = https://github.com/Eoxia/wpeo_util.git
-[submodule "core/external/wpeo_model"]
-	path = core/external/wpeo_model
-	url = https://github.com/Eoxia/wpeo_model.git
-[submodule "core/external/wpeo_log"]
-	path = core/external/wpeo_log
-	url = https://github.com/Eoxia/wpeo_log.git
-[submodule "core/external/wpeo_upload"]
-	path = core/external/wpeo_upload
-	url = https://github.com/Eoxia/wpeo_upload.git
-[submodule "core/external/wpeo_assets"]
-	path = core/external/wpeo_assets
-	url = https://github.com/Eoxia/wpeo_assets.git
+[submodule "core/external/eo-framework"]
+	path = core/external/eo-framework
+	url = https://github.com/Eoxia/eo-framework

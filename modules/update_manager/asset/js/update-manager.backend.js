@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "updateManager" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.2.8.0
- * @version 6.2.8.0
+ * @since 6.2.8
+ * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.updateManager = {};
@@ -12,11 +12,12 @@ window.eoxiaJS.digirisk.updateManager = {};
  *
  * @return {void}
  *
- * @since 6.2.8.0
- * @version 6.2.8.0
+ * @since 6.2.8
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.updateManager.init = function() {
 	window.eoxiaJS.digirisk.updateManager.requestUpdate();
+	window.addEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
 };
 
 window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
@@ -61,6 +62,7 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 
 						jQuery( '.log' ).append( '<li>Redirection vers l\'application en cours...</li>' );
 						jQuery.post( ajaxurl, { 'action': 'digi_redirect_to_dashboard' }, function( response ) {
+							window.removeEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
 							window.location = response;
 						});
 					} else {
@@ -71,5 +73,23 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 				}
 			} );
 		}
+	}
+};
+
+/**
+ * Vérification avant la fermeture de la page si la mise à jour est terminée.
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ *
+ * @param  {WindowEventHandlers} event L'évènement de la fenêtre.
+ * @return {string}
+ */
+window.eoxiaJS.digirisk.updateManager.safeExit = function( event ) {
+	if ( 'admin_page_digirisk-update' === event.currentTarget.adminpage ) {
+		var confirmationMessage = 'Vos données sont en cours de mise à jour, elles risque d\'être corrompues si vous quittez la page de mise à jour.';
+
+		event.returnValue = confirmationMessage;
+		return confirmationMessage;
 	}
 };

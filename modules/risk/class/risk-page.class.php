@@ -58,17 +58,18 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		}
 
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+		$order_type   = ! empty( $_GET['order_type'] ) ? sanitize_text_field( $_GET['order_type'] ) : 'ASC';
 
 		$args_where = array(
-			'post_status' => array( 'publish' ),
-			'offset' => ( $current_page - 1 ) * $per_page,
+			'post_status'    => array( 'publish' ),
+			'offset'         => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
-			'meta_key' => '_wpdigi_equivalence',
-			'orderby' => 'meta_value_num',
+			'meta_key'       => '_wpdigi_equivalence',
+			'orderby'        => 'meta_value_num',
 			'meta_query' => array(
 				array(
-					'key' => '_wpdigi_preset',
-					'value' => 1,
+					'key'     => '_wpdigi_preset',
+					'value'   => 1,
 					'compare' => '!=',
 				)
 			)

@@ -1,7 +1,7 @@
 .navigation-container, .unit-header {
-	.media {
+	.media, .wpeo-media {
 		&.no-file {
-			.add {
+			.button-add {
 				color: rgba(255,255,255,0.4);
 			}
 			.default-image {
@@ -9,4 +9,8 @@
 			}
 		}
 	}
+}
+
+.wpeo-gallery * {
+	box-sizing: border-box;
 }

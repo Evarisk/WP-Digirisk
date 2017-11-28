@@ -3,16 +3,17 @@
  * Informations sur la société.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <section class="details">
 	<header>
@@ -48,5 +49,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 \eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
 	'element' => $element,
 	'address' => $address,
-	'owner_user' => $owner_user,
 ) );

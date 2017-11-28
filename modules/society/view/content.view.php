@@ -4,18 +4,20 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 0.1.0-alpha
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="main-header">
 	<div class="unit-header">
-		<?php do_shortcode( '[wpeo_upload id="' . $element->id . '" model_name="/digi/' . $element->get_class() . '" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $element->id . '" title="' . $element->unique_identifier . ' - ' . $element->title . '" model_name="/digi/' . $element->get_class() . '" field_name="image" single="false" ]' ); ?>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
 		<div

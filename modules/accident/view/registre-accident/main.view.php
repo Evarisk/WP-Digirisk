@@ -16,5 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="digirisk-wrap">
+
+
+
 	<?php Accident_Travail_Benin_Class::g()->display(); ?>
 </div>

@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "historic" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.3.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.historic = {};
 
@@ -20,10 +20,10 @@ window.eoxiaJS.digirisk.historic.event = function() {};
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.3.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.historic.openedHistoricRiskPopup = function( triggeredElement, response ) {
-	jQuery( '.popup.corrective-task .content' ).html( response.data.view );
-	jQuery( '.popup.corrective-task .container.loading' ).removeClass( 'loading' );
+	jQuery( '.popup.historic-risk .content' ).html( response.data.view );
+	jQuery( '.popup.historic-risk .container.loading' ).removeClass( 'loading' );
 };

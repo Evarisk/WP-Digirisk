@@ -1,14 +1,16 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"major_version": "6.3.0",
-	"version": "6.3.4",
+	"major_version": "6.4.0",
+	"version": "6.4.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
 		"digirisk-handle-risk",
+		"digirisk-epi",
 		"digirisk-users",
 		"digirisk-accident",
+		"digirisk-causerie",
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
@@ -21,6 +23,7 @@
 		"digirisk-handle-risk",
 		"digirisk-epi",
 		"digirisk-accident",
+		"digirisk-causerie",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -29,10 +32,6 @@
 		"digirisk-setting"
 	],
 	"externals": [
-		"core/external/wpeo_log/wpeo_log.config.json",
-		"core/external/wpeo_model/wpeo_model.config.json",
-		"core/external/wpeo_export/wpeo_export.config.json",
-		"core/external/wpeo_upload/wpeo_upload.config.json"
 	],
 	"modules": [
 		"core/core.config.json",
@@ -49,12 +48,12 @@
 		"modules/recommendation/recommendation.config.json",
 		"modules/risk/risk.config.json",
 
-		"modules/danger/danger.config.json",
 		"modules/document/document.config.json",
 
 		"modules/duer/duer.config.json",
 
 		"modules/accident/accident.config.json",
+		"modules/causerie/causerie.config.json",
 
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
@@ -68,6 +67,7 @@
 		"modules/installer/installer.config.json",
 
 		"modules/legal_display/legal_display.config.json",
+		"modules/diffusion_informations/diffusion_informations.config.json",
 
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",

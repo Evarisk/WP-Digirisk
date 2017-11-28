@@ -64,7 +64,7 @@
 				transform: translate(-50%, -50%);
 			}
 		}
-		&.no-close {
+		&.no-close:not(.popup-update-manager) {
 			.button {
 				background: $grey;
 				color: rgba(0,0,0,0.4);
@@ -85,5 +85,4 @@
 			}
 		}
 	}
-
 }

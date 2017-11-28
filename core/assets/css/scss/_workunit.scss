@@ -311,11 +311,13 @@
 			color: #fff;
 			font-size: 12px;
 			text-transform: uppercase;
+			width: 100%;
 			.icon {
 				display: inline;
 				font-size: 12px;
 				margin-right: 0.4em;
 				line-height: 50px;
+				float: left;
 			}
 		}
 		> .add-container {
@@ -592,9 +594,45 @@
 	.navigation-container .unit > .sub-list {
 		// width: 100%;
 		padding-left: 0.6em;
-		margin-left: 1em;
-		border-left: 1px dashed rgba(255,255,255,0.2);
 		display: none;
+		.unit {
+			position: relative;
+			margin-left: 0.6em;
+			&:before {
+				display: block;
+				position: absolute;
+				content: '';
+				width: 1px;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background: #50556a;
+			}
+		}
+		> .unit:last-child:before {
+			height: 30px; // chaque élément de fin de liste
+		}
+		.spacer, .toggle-unit {
+			position: relative;
+			&:before {
+				display: block;
+				position: absolute;
+				content: '';
+				height: 1px;
+				left: 0;
+				right: 10px;
+				top: 25px;
+				background: #50556a;
+			}
+		}
+		.toggle-unit {
+			.icon {
+				margin-left: 8px;
+			}
+			&::before {
+				right: 20px;
+			}
+		}
 	}
 
 }

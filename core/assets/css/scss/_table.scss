@@ -64,6 +64,11 @@
 			color: $primary;
 		}
 		.cotation-container {
+			&.tooltip {
+				&:hover {
+					cursor: pointer;
+				}
+			}
 			.content {
 				flex-wrap: nowrap !important;
 				flex-direction: row;
@@ -89,7 +94,7 @@
 					color: rgba(0,0,0,0.7);
 				}
 				.icon {
-					margin-left: 10px;
+					margin-left: 4px;
 				}
 				&:after {
 					display: table;
@@ -98,7 +103,7 @@
 				}
 			}
 			.content {
-				width: 392px;
+				width: 280px;
 				.tooltip:hover {
 					cursor: pointer;
 				}
@@ -112,6 +117,15 @@
 		.comment-container {
 			padding-top: 6px;
 			padding-bottom: 6px;
+			.avatar {
+				border-radius: 50%;
+				width: 30px;
+				height: 30px;
+				min-width: 30px;
+				span {
+					line-height: 30px;
+				}
+			}
 			.comment {
 				display: flex;
 				flex: 0 1 auto;
@@ -209,7 +223,7 @@
 			text-align: center;
 			span {
 				line-height: 50px;
-				color: #fff;
+				color: #fff !important;
 				font-size: 16px;
 				font-weight: 300;
 				text-transform: uppercase;
@@ -228,6 +242,9 @@
 		td.w50, th.w50 {
 			width: 50px;
 		}
+		td.w70, th.w70 {
+			width: 70px;
+		}
 		td.w100, th.w100 {
 			width: 100px;
 		}
@@ -236,6 +253,10 @@
 		}
 		td.wm40, th.wm40 {
 			min-width: 40px;
+		}
+
+		td.wmax70 {
+			max-width: 70px;
 		}
 		td.w150, th.w150 {
 			width: 150px;
@@ -315,141 +336,8 @@
 	// 		}
 	// 	}
 	// }
-	@media ( max-width: 480px ) {
-		table, tr, thead, tbody, tfoot, td, th {
-			display: block;
-			width: 100% !important;
-			height: auto !important;
-		}
-		.table > thead {
-			display: none;
-		}
-		.table .risk-row {
-			display: flex;
-			flex-wrap: wrap;
-			> td {
-				width: 100%;
-			}
-		}
-		.table .categorie-container .content {
-			width: 230px;
-		}
-		.table > tfoot {
-			background: #f1f1f1;
-			padding-top: 4em;
-			> tr {
-				background: #fff;
-			}
-		}
 
-		// Uniquement pour le tableau des risques
-		.table.risk {
-			.risk-row {
-				padding: 1em !important;
-				> td:nth-of-type(1) {
-					width: 60% !important;
-					display: flex;
-					padding: 1em 0 !important;
-					> span {
-						width: 30%;
-						font-size: 10px;
-					}
-					&:after {
-						display: block;
-						content: attr(data-title);
-						width: 70%;
-						padding-left: 4px;
-						font-weight: 800;
-					}
-				}
-				> td:nth-of-type(2), > td:nth-of-type(3), > td:nth-of-type(4) {
-					width: 33.333333% !important;
-					max-width: 33.333333%;
-					padding-top: 0.4em !important;
-					text-align: center;
-					min-width: 0;
-					.cotation, .media {
-						margin: auto;
-					}
-					.categorie-container {
-						.action {
-							text-align: center;
-						}
-						.tooltip, .tooltip img {
-							display: inline-block;
-						}
-					}
-					&:before {
-						display: block;
-						content: attr(data-title);
-						color: rgba(0,0,0,0.4);
-						padding-bottom: 0.4em;
-					}
-				}
-				> td:nth-of-type(6) {
-					width: 40% !important;
-					margin: auto 0;
-					.action {
-						display: block;
-						text-align: right;
-					}
-					.button {
-						width: 30px !important;
-						border-radius: 50%;
-						min-width: 30px;
-						background: $grey;
-						padding: 0 !important;
-						height: 30px !important;
-						display: inline-block;
-						text-align: center;
-						line-height: 30px;
-						.dashicons {
-							line-height: 30px !important;
-						}
-						&.green {
-							background: $green;
-						}
-						&.blue {
-							background: $primary;
-						}
-					}
-				}
-				.comment-container {
-					.comment {
-						flex-wrap: wrap;
-						position: relative;
-						margin-top: 10px;
-					}
-					.content {
-						width: 100%;
-						font-size: 16px;
-					}
-					.button {
-						position: absolute;
-						right: 0;
-						top: 0;
-					}
-					.comment ~ .new.comment {
-						padding-top: 10px;
-					}
-				}
-				> td:nth-of-type(1) { order: 1 }
-				> td:nth-of-type(2) { order: 3 }
-				> td:nth-of-type(3) { order: 4 }
-				> td:nth-of-type(4) { order: 5 }
-				> td:nth-of-type(5) { order: 5 }
-				> td:nth-of-type(6) { order: 2 }
-			}
-			// Seul le dernier commentaire est affiché en mode lecture
-			.risk-row:not(.edit) {
-				.comment-container .comment {
-					display: none;
-					&:nth-of-type(1) {
-						display: flex;
-					}
-				}
-			}
-		}
-	}
+	@import "responsive/table-risk";
+	@import "responsive/table-evaluateur";
 
 }

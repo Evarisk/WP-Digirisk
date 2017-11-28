@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "userDashboard" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.userDashboard = {};
@@ -11,11 +11,20 @@ window.eoxiaJS.digirisk.userDashboard.init = function() {
 	window.eoxiaJS.digirisk.userDashboard.event();
 };
 
+/**
+ * Intialise les évènements.
+ *
+ * @since 6.0.0
+ * @version 6.4.0
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.userDashboard.event = function() {
 	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm );
+	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr input', window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm );
+	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail );
 
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
@@ -30,8 +39,8 @@ window.eoxiaJS.digirisk.userDashboard.event = function() {
  * @param  {HTMLDivElement} triggeredElement
  * @return {void}
  *
- * @since 6.2.5.0
- * @version 6.2.5.0
+ * @since 6.2.5
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.checkDomainEmailValid = function( triggeredElement ) {
 	if ( ! window.regex.validateEndEmail( triggeredElement.closest( '.email-domain' ).find( 'input[type="text"]' ).val() ) ) {
@@ -50,8 +59,8 @@ window.eoxiaJS.digirisk.userDashboard.checkDomainEmailValid = function( triggere
  *
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.save_domain_mail = function( event ) {
 	var element = jQuery( this );
@@ -74,8 +83,8 @@ window.eoxiaJS.digirisk.userDashboard.save_domain_mail = function( event ) {
  * @param  {KeyEvent} event L'état du clavier lors de l'évènement "keyup"
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail = function( event ) {
 	var email = jQuery( '.user-dashboard table.users tr:last .email' ).val();
@@ -98,12 +107,33 @@ window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail = function( event ) {
  * @param  {KeyEvent} event L'état du clavier lors de l'évènement "keyup"
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm = function( event ) {
 	if ( 13 === event.keyCode ) {
-		jQuery( '.user-dashboard table.users tr:last .action-input' ).click();
+		jQuery( this ).closest( '.user-row' ).find( '.action-input' ).click();
+
+		event.preventDefault();
+		return false;
+	}
+};
+
+/**
+ * Si la touche "entrée" est appuyé, appuies sur le bouton "plus" pour enregistrer le domaine de l'email.
+ *
+ * @param  {KeyEvent} event L'état du clavier lors de l'évènement "keyup"
+ * @return {void}
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ */
+window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail = function( event ) {
+	if ( 13 === event.keyCode ) {
+		jQuery( this ).closest( '.form' ).find( '.action-input' ).click();
+
+		event.preventDefault();
+		return false;
 	}
 };
 
@@ -113,11 +143,50 @@ window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm = function( event ) {
  * @param  {KeyboardEvent} event L'état du clavier.
  * @return {void}
  *
- * @since 6.2.6.0
- * @version 6.2.6.0
+ * @since 6.2.6
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event ) {
-	jQuery( this ).closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	var row = jQuery( this ).closest( 'tr' );
+
+	if ( row.find( 'input[name="firstname"]' ).val() && row.find( 'input[name="lastname"]' ).val() && row.find( 'input[name="email"]' ).val() ) {
+		row.find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	} else {
+		row.find( '.action .button' ).addClass( 'disable' ).removeClass( 'blue' );
+	}
+};
+
+/**
+ * Vérifie si les données du formulaire ne soit pas vide.
+ * Toutes les données sont obligatoires.
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ *
+ * @param  {HTMLDivElement} element Le bouton déclenchant l'action.
+ * @return {boolean}                True ou false.
+ */
+window.eoxiaJS.digirisk.userDashboard.checkData = function( element ) {
+	var row = element.closest( 'tr' );
+
+	row.find( '.tooltip.active' ).removeClass( 'active' );
+
+	if ( '' === row.find( 'input[name="lastname"]' ).val() ) {
+		row.find( 'input[name="lastname"]' ).closest( '.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	if ( '' === row.find( 'input[name="firstname"]' ).val() ) {
+		row.find( 'input[name="firstname"]' ).closest( '.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	if ( '' === row.find( 'input[name="email"]' ).val() ) {
+		row.find( 'input[name="email"]' ).closest( '.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+	return true;
 };
 
 /**
@@ -128,8 +197,8 @@ window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event )
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.deletedUserSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();
@@ -143,8 +212,8 @@ window.eoxiaJS.digirisk.userDashboard.deletedUserSuccess = function( element, re
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.loadedUserSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
@@ -160,14 +229,14 @@ window.eoxiaJS.digirisk.userDashboard.loadedUserSuccess = function( element, res
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.savedUserSuccess = function( element, response ) {
 	jQuery( '.user-dashboard table.users .tooltip.red.active' ).removeClass( 'active' );
 
 	if ( response.data.error ) {
-		jQuery( '.user-dashboard table.users .tooltip.red' ).addClass( 'active' );
+		jQuery( '.user-dashboard table.users .tooltip.email.red' ).addClass( 'active' );
 	} else {
 		jQuery( '.user-dashboard table.users' ).html( response.data.template );
 		jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();

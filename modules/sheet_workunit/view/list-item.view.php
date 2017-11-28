@@ -28,7 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php else : ?>
 			<span class="button grey h50 tooltip hover" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-times icon" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?></span>
 			</span>
 		<?php endif; ?>
 		</div>

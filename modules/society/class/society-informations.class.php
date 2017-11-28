@@ -4,10 +4,9 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage class
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -35,14 +34,12 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	 * @param  Group_Model $element L'objet groupement.
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function display( $element ) {
 		$address = Society_Class::g()->get_address( $element );
 		$address = $address[0];
-
-		$owner_user = $this->get_owner_user( $element );
 
 		$total_cotation = 0;
 
@@ -77,58 +74,39 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
-			'element' => $element,
-			'owner_user' => $owner_user,
-			'address' => $address,
-			'number_risks' => count( $risks ),
+			'element'             => $element,
+			'address'             => $address,
+			'number_risks'        => count( $risks ),
 			'more_dangerous_risk' => ! empty( $risks[0] ) ? $risks[0] : null,
-			'total_cotation' => $total_cotation,
-			'historic_update' => $historic_update,
+			'total_cotation'      => $total_cotation,
+			'historic_update'     => $historic_update,
 		) );
-	}
-
-	/**
-	 * Récupères le responsable du groupement
-	 *
-	 * @param  Group_Model $groupment L'objet groupement.
-	 * @return User_Digi_Model				Le responsable du groupement
-	 */
-	public function get_owner_user( $groupment ) {
-		$args_owner_user = array( 'schema' => true );
-
-		if ( ! empty( $groupment->user_info['owner_id'] ) ) {
-			$args_owner_user = array( 'include' => array( $groupment->user_info['owner_id'] ) );
-		}
-
-		$owner_user = User_Digi_Class::g()->get( $args_owner_user );
-
-		return $owner_user[0];
 	}
 
 	/**
 	 * Sauvegardes les données du groupements
 	 *
 	 * @since 6.2.10
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param  array $data  Les données à sauvegarder.
 	 * @return Society_Model Le groupement mis à jour.
 	 */
 	public function save( $data ) {
 		$society = Society_Class::g()->get( array(
-			'id' => $data['id'],
+			'id'        => $data['id'],
 			'post_type' => array( 'digi-society', 'digi-group', 'digi-workunit' ),
 		), true );
 
-		$society->title = $data['title'];
-		$society->user_info['owner_id'] = $data['user_info']['owner_id'];
-		$society->date = $data['date'];
-		$society->siret_id = ! empty( $data['siret_id'] ) ? $data['siret_id'] : '';
-		$society->number_of_employees = ! empty( $data['number_of_employees'] ) ? $data['number_of_employees'] : 0;
-		$society->contact['phone'][] = $data['contact']['phone'][0];
-		$society->contact['email'] = $data['contact']['email'];
+		$society->title                   = $data['title'];
+		$society->owner_id                = $data['owner_id'];
+		$society->date                    = $data['date'];
+		$society->siret_id                = ! empty( $data['siret_id'] ) ? $data['siret_id'] : '';
+		$society->number_of_employees     = ! empty( $data['number_of_employees'] ) ? $data['number_of_employees'] : 0;
+		$society->contact['phone'][]      = $data['contact']['phone'][0];
+		$society->contact['email']        = $data['contact']['email'];
 		$society->contact['address_id'][] = $data['contact']['address_id'][0];
-		$society->content = $data['content'];
+		$society->content                 = $data['content'];
 
 		$society = Society_Class::g()->update( $society );
 		return $society;

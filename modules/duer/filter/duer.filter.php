@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.5
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -34,13 +34,13 @@ class DUER_Filter {
 	 * Appelle la vue button-generate-duer.view.php avec le groupement en paramètre.
 	 *
 	 * @since 6.2.5
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param  Society_Model $element Les données du groupement.
 	 * @return void
 	 */
 	public function callback_society_header_end( $element ) {
-		if ( 'digi-society' === $element->type || 'digi-group' === $element->type ) {
+		if ( 'digi-society' === $element->type ) {
 			\eoxia\View_Util::exec( 'digirisk', 'duer', 'button-generate-duer', array(
 				'element' => $element,
 			) );

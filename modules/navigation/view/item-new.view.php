@@ -3,8 +3,8 @@
  * Affiches le champs de texte et le bouton "Plus" pour créer un établissement.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $id ); ?>" />
 	<input type="hidden" name="class" value="" />
 	<input class="unit-label" name="title" placeholder="" type="text" />
-	<div class="button w50 add blue action-input" data-parent="new" data-loader="new"><i class="icon dashicons dashicons-plus"></i></<div>
+	<div class="button w50 add blue action-input" data-parent="new" data-loader="blue"><i class="icon dashicons dashicons-plus"></i></<div>
 </li>

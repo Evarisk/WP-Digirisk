@@ -3,16 +3,17 @@
  * Les actions relatives aux recommendations
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.10.0
+ * @since 6.0.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux recommendations
@@ -21,7 +22,7 @@ class Recommendation_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.4.0
 	 */
 	function __construct() {
@@ -35,7 +36,7 @@ class Recommendation_Action {
 	/**
 	 * Charges une recommendation
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.10.0
 	 */
 	public function ajax_load_recommendation() {
@@ -73,11 +74,13 @@ class Recommendation_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
+
+		$image_id = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
 		$recommendation_term = Recommendation_Term_Class::g()->get( array(
 			'include' => $_POST['taxonomy']['digi-recommendation'],
@@ -86,6 +89,18 @@ class Recommendation_Action {
 		$recommendation_term = $recommendation_term[0];
 		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
 		$recommendation = Recommendation_Class::g()->update( $_POST );
+
+		if ( ! empty( $image_id ) ) {
+			$args_media = array(
+				'id' => $recommendation->id,
+				'file_id' => $image_id,
+				'model_name' => '\digi\Recommendation_Class',
+			);
+
+			\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
+			$args_media['field_name'] = 'image';
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
+		}
 
 		if ( ! empty( $_POST['list_comment'] ) ) {
 			foreach ( $_POST['list_comment'] as $element ) {
@@ -117,7 +132,7 @@ class Recommendation_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.10.0
 	 */
 	public function ajax_delete_recommendation() {

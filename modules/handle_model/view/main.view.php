@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -42,7 +42,7 @@ if ( ! empty( $list_type_document ) ) :
 							data-parent="block"
 							data-target="popup"
 							data-title="<?php echo esc_attr( 'Historique des modèles: ' . $title ); ?>"
-							data-type="<?php echo esc_attr( $key ); ?>"><span class="dashicons dashicons-visibility"></span>Historique des modèles personnalisés</a>
+							data-type="<?php echo esc_attr( $key ); ?>"><span class="dashicons dashicons-visibility"></span><?php esc_html_e( 'Historique du modèle', 'digirisk' ); ?></a>
 					</li>
 					<li>
 						<a href="#" class="action-attribute"
