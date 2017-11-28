@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "user" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 6.0.0
+ * @version 6.2.4
+ */
 window.eoxiaJS.digirisk.user = {};
 
 window.eoxiaJS.digirisk.user.init = function() {
@@ -9,8 +15,8 @@ window.eoxiaJS.digirisk.user.init = function() {
  *
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.user.event = function() {
 	jQuery( document ).on( 'click', '.form-edit-user-assign .wp-digi-pagination a', window.eoxiaJS.digirisk.user.pagination );
@@ -24,8 +30,8 @@ window.eoxiaJS.digirisk.user.event = function() {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.user.editUserAssignSuccess = function( triggeredElement, response ) {
 	window.eoxiaJS.digirisk.user.render( response );
@@ -39,8 +45,8 @@ window.eoxiaJS.digirisk.user.editUserAssignSuccess = function( triggeredElement,
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.user.detachUserSuccess = function( triggeredElement, response ) {
 	window.eoxiaJS.digirisk.user.render( response );
@@ -52,7 +58,7 @@ window.eoxiaJS.digirisk.user.detachUserSuccess = function( triggeredElement, res
  * @param  {Object} response Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
+ * @since 6.0.0
  * @version 6.2.5.0
  */
 window.eoxiaJS.digirisk.user.render = function( response ) {

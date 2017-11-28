@@ -3,16 +3,17 @@
  * La liste des diffusions d'informations.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
+ * @since 6.2.10
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <thead>
 	<tr>
@@ -25,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 <tbody>
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
-			<?php \eoxia\View_Util::exec( 'digirisk', 'legal_display', 'diffusion_informations/list-item', array(
+			<?php \eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list-item', array(
 				'element' => $element,
 			) ); ?>
 		<?php endforeach; ?>

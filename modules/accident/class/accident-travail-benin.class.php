@@ -139,7 +139,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	 * Cette méthode génère l'accident de travail bénin
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.0
 	 *
 	 * @param integer $accident_id L'ID de l'accident.
 	 * @return array {
@@ -158,7 +158,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 		$sheet_details = array(
 			'raisonSociale' => $main_society->title,
 			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone' => ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '',
+			'telephone' => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
 			'siret' => $main_society->siret_id,
 			'email' => $main_society->contact['email'],
 			'effectif' => $main_society->number_of_employees,

@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.installer = {};
@@ -92,8 +92,8 @@ window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
@@ -103,6 +103,9 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '30%' );
 	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
 	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
+
+	window.eoxiaJS.loader.display( jQuery( '.wpdigi-installer a' ) );
+
 	window.eoxiaJS.digirisk.installer.requestInstallComponent();
 };
 
@@ -144,6 +147,8 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 		}
+
+		window.eoxiaJS.loader.remove( jQuery( '.wpdigi-installer a' ) );
 	}
 };
 

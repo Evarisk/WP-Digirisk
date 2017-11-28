@@ -67,6 +67,7 @@
 		"modules/installer/installer.config.json",
 
 		"modules/legal_display/legal_display.config.json",
+		"modules/diffusion_informations/diffusion_informations.config.json",
 
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",

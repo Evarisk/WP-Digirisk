@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -24,7 +24,7 @@ class Corrective_Task_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.2.5
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_open_task', array( $this, 'callback_open_task' ) );
@@ -35,7 +35,7 @@ class Corrective_Task_Action {
 	 * Appelle la vue contenant le formulaire pour ajouter une tâche corrective.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.4.0
 	 *
 	 * @return void
 	 */
@@ -48,7 +48,7 @@ class Corrective_Task_Action {
 
 		if ( class_exists( '\task_manager\Task_Class' ) ) {
 			$task = \task_manager\Task_Class::g()->get( array(
-				'post_parent ' => $parent_id,
+				'post_parent'    => $parent_id,
 				'posts_per_page' => 1,
 			), true );
 
@@ -82,10 +82,10 @@ class Corrective_Task_Action {
 		} // End if().
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'correctiveTask',
+			'namespace'        => 'digirisk',
+			'module'           => 'correctiveTask',
 			'callback_success' => 'openedTaskPopup',
-			'view' => $view,
+			'view'             => $view,
 		) );
 	}
 }

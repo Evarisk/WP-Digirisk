@@ -89,8 +89,8 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = Diffusion_Informations_A3_Class::g()->get( array(
@@ -118,7 +118,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
 		} );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'diffusion_informations/list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -129,8 +129,8 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @param  object $element La société.
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function display_form( $element ) {
 		$diffusion_information = $this->get( array(
@@ -151,7 +151,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 			$diffusion_information = $diffusion_information[0];
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'diffusion_informations/form', array(
+		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
 			'element_id' => $element->id,
 			'diffusion_information' => $diffusion_information,
 		) );

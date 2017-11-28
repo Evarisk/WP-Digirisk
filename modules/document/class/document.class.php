@@ -40,7 +40,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale du modèle
@@ -91,7 +91,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 */
 	public $mime_type_link = array(
 		'application/vnd.oasis.opendocument.text' => '.odt',
-		'application/zip' => '.zip',
+		'application/zip'                         => '.zip',
 	);
 
 	/**
@@ -132,12 +132,12 @@ class Document_Class extends \eoxia\Post_Class {
 		}
 
 		$response = array(
-			'status' => true,
-			'model_id' => null,
-			'model_path' => str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
-			'model_url' => str_replace( '\\', '/', PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
+			'status'     => true,
+			'model_id'   => null,
+			'model_path' => str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
+			'model_url'  => str_replace( '\\', '/', PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $current_element_type[0] . '.odt' ),
 			// translators: Pour exemple: Le modèle utilisé est: C:\wamp\www\wordpress\wp-content\plugins\digirisk-alpha\core\assets\document_template\document_unique.odt.
-			'message' => sprintf( __( 'Le modèle utilisé est: %1$score/assets/document_template/%2$s.odt', 'digirisk' ), PLUGIN_DIGIRISK_PATH, $this->odt_name ),
+			'message'    => sprintf( __( 'Le modèle utilisé est: %1$score/assets/document_template/%2$s.odt', 'digirisk' ), PLUGIN_DIGIRISK_PATH, $current_element_type[0] ),
 		);
 
 		$tax_query = array(
@@ -148,28 +148,29 @@ class Document_Class extends \eoxia\Post_Class {
 			foreach ( $current_element_type as $element ) {
 				$tax_query[] = array(
 					'taxonomy' => self::g()->attached_taxonomy_type,
-					'field' => 'slug',
-					'terms' => $element,
+					'field'    => 'slug',
+					'terms'    => $element,
 				);
 			}
 		}
 
 		$query = new \WP_Query( array(
-			'fields' => 'ids',
-			'post_status' => 'inherit',
+			'fields'         => 'ids',
+			'post_status'    => 'inherit',
 			'posts_per_page' => 1,
-			'tax_query' => $tax_query,
-			'post_type' => 'attachment',
+			'tax_query'      => $tax_query,
+			'post_type'      => 'attachment',
 		) );
 
 		if ( $query->have_posts() ) {
 			$upload_dir = wp_upload_dir();
 
-			$model_id = $query->posts[0];
-			$attachment_file_path = get_attached_file( $model_id );
-			$response['model_id'] = $model_id;
+			$model_id               = $query->posts[0];
+			$attachment_file_path   = get_attached_file( $model_id );
+			$response['model_id']   = $model_id;
 			$response['model_path'] = str_replace( '\\', '/', $attachment_file_path );
-			$response['model_url'] = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
+			$response['model_url']  = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
+
 			// translators: Pour exemple: Le modèle utilisé est: C:\wamp\www\wordpress\wp-content\plugins\digirisk-alpha\core\assets\document_template\document_unique.odt.
 			$response['message'] = sprintf( __( 'Le modèle utilisé est: %1$s', 'digirisk' ), $attachment_file_path );
 		}

@@ -55,6 +55,15 @@ class Workunit_Model extends Society_Model {
 			),
 		) );
 
+		$this->model['owner_id'] = array(
+			'description' => 'L\'ID responsable de la société',
+			'since'       => '6.4.0',
+			'version'     => '6.4.0',
+			'type'        => 'integer',
+			'meta_type'   => 'single',
+			'field'       => '_digi_owner_id',
+		);
+
 		parent::__construct( $object );
 	}
 

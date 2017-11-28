@@ -45,7 +45,7 @@ window.eoxiaJS.digirisk.accident.initAutoComplete = function() {
 		'source': 'admin-ajax.php?action=search_establishment',
 		'delay': 0,
 		'select': function( event, ui ) {
-			jQuery( 'input[name="to_element_id"]' ).val( ui.item.id );
+			jQuery( 'input[name="accident[parent_id]"]' ).val( ui.item.id );
 			event.stopPropagation();
 		}
 	} );
@@ -108,7 +108,7 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
 		window.eoxiaJS.digirisk.accident.canvas[i].width = window.eoxiaJS.digirisk.accident.canvas[i].offsetWidth * ratio;
 		window.eoxiaJS.digirisk.accident.canvas[i].height = window.eoxiaJS.digirisk.accident.canvas[i].offsetHeight * ratio;
 		window.eoxiaJS.digirisk.accident.canvas[i].getContext( "2d" ).scale( ratio, ratio );
-		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad.clear();
 	}
 };
 

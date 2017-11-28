@@ -99,7 +99,6 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 		) );
 
 		$this->display_form( $element );
-		do_shortcode( '[digi-diffusion-informations post_id="' . $element->id . '"]' );
 	}
 
 	/**

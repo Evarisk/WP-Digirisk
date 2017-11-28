@@ -23,8 +23,8 @@ class Diffusion_Informations_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_diffusion_information', array( $this, 'callback_generate_diffusion_information' ), 10, 2 );
@@ -64,8 +64,8 @@ class Diffusion_Informations_Action {
 		Diffusion_Informations_Class::g()->generate_sheet( $_POST, $element,  'A4' );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'legalDisplay',
+			'namespace'        => 'digirisk',
+			'module'           => 'diffusionInformations',
 			'callback_success' => 'generatedDiffusionInformationSuccess',
 		) );
 	}

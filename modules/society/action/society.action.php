@@ -37,8 +37,8 @@ class Society_Action {
 	/**
 	 * Sauvegardes les données d'une societé
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	public function callback_save_society() {
 		check_ajax_referer( 'save_society' );
@@ -64,19 +64,17 @@ class Society_Action {
 		Society_Class::g()->update_by_type( $society );
 
 		if ( 'digi-workunit' === $society->type ) {
-			$id = $society->parent_id;
-
 			$_POST['workunit_id'] = $society->id;
 		}
 
 		ob_start();
 		Digirisk_Class::g()->display( $id );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'society',
+			'namespace'        => 'digirisk',
+			'module'           => 'society',
 			'callback_success' => 'savedSocietySuccess',
-			'society' => $society,
-			'template' => ob_get_clean(),
+			'society'          => $society,
+			'template'         => ob_get_clean(),
 		) );
 	}
 
@@ -85,8 +83,8 @@ class Society_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.0
 	 */
 	public function callback_delete_society() {
 		check_ajax_referer( 'delete_society' );
@@ -98,15 +96,23 @@ class Society_Action {
 		Society_Class::g()->update_by_type( $society );
 
 		ob_start();
-		Digirisk_Class::g()->display();
+		Digirisk_Class::g()->display( $society->parent_id );
 		wp_send_json_success( array(
-			'template' => ob_get_clean(),
-			'namespace' => 'digirisk',
-			'module' => 'society',
+			'template'         => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'society',
 			'callback_success' => 'deletedSocietySuccess',
 		) );
 	}
 
+	/**
+	 * Recherches une société depuis $_GET['term'].
+	 *
+	 * @since 6.4.0
+	 * @version 6.4.0
+	 *
+	 * @return void
+	 */
 	public function callback_search_establishment() {
 		global $wpdb;
 		$term = sanitize_text_field( $_GET['term'] );
@@ -142,7 +148,11 @@ class Society_Action {
 			}
 		}
 
-		$query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_wpdigi_unique_identifier' AND meta_value LIKE '%" . $term . "%'";
+		$query = "SELECT PM.post_id FROM {$wpdb->postmeta} AS PM
+			JOIN {$wpdb->posts} AS P ON P.ID=PM.post_id
+		WHERE PM.meta_key='_wpdigi_unique_identifier'
+			AND PM.meta_value LIKE '%" . $term . "%'
+			AND P.post_type IN('" . implode( $posts_type, '\',\'' ) . "')";
 		$results = $wpdb->get_results( $query );
 
 		if ( ! empty( $results ) ) {
@@ -155,11 +165,13 @@ class Society_Action {
 			foreach ( $ids_founded as $id_founded ) {
 				$s = Society_Class::g()->show_by_type( $id_founded );
 
-				$posts_founded[] = array(
-					'label' => $s->modified_unique_identifier . ' ' . $s->title,
-					'value' => $s->modified_unique_identifier . ' ' . $s->title,
-					'id' => $s->id,
-				);
+				if ( ! empty( $s ) ) {
+					$posts_founded[] = array(
+						'label' => $s->modified_unique_identifier . ' ' . $s->title,
+						'value' => $s->modified_unique_identifier . ' ' . $s->title,
+						'id'    => $s->id,
+					);
+				}
 			}
 		}
 
@@ -167,7 +179,7 @@ class Society_Action {
 			$posts_founded[] = array(
 				'label' => __( 'Aucun résultat', 'digirisk' ),
 				'value' => __( 'Aucun résultat', 'digirisk' ),
-				'id' => 0,
+				'id'    => 0,
 			);
 		}
 

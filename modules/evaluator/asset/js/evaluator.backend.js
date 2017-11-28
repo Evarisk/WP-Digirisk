@@ -51,12 +51,15 @@ window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.0
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
 	window.eoxiaJS.digirisk.search.renderChanged();
+
+	jQuery( '.form-edit-evaluator-assign input[type="checkbox"]' ).attr( 'checked', false );
+	jQuery( '.form-edit-evaluator-assign .affect:not(:first)' ).val( '' );
 };
 
 /**
@@ -67,8 +70,8 @@ window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = funct
  * @param  {Object}            response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( triggeredElement, response ) {
 	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
@@ -81,8 +84,8 @@ window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( 
  * @param  {ClickEvent} event [description]
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.2.5
  */
 window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 	var href = jQuery( this ).attr( 'href' ).split( '&' );

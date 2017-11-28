@@ -3,19 +3,20 @@
  * La vue contenant le tableau d'édition des utilisateurs ainsi que le domaine de l'email.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
+ * @since 6.2.3
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
- * @package user_dashboard
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="digirisk-wrap user-dashboard">
-	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk' , 'digirisk' ); ?></h1>
+	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk', 'digirisk' ); ?></h1>
 
 	<div class="form email-domain">
 		<div class="form-element active">
@@ -33,7 +34,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<?php	User_Dashboard_Class::g()->display_list_user(); ?>
 	</table>
 
-	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong">
-		<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
-	</a>
+	<?php if ( ! empty( $_GET['from_install'] ) ) : // WPCS: CSRF ok. ?>
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong">
+			<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
+		</a>
+	<?php endif; ?>
 </div>

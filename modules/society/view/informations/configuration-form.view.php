@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.3.0
+ * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -69,16 +69,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</li>
 
 		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $owner_user->id ) ? 'active' : '' ); ?>">
+			<div class="form-element <?php echo esc_attr( ! empty( $element->owner_id ) ? 'active' : '' ); ?>">
 				<input type="text"
-							data-field="society[user_info][owner_id]"
+							data-field="society[owner_id]"
 							data-type="user"
 							placeholder=""
 							class="digi-search"
-							value="<?php echo ! empty( $owner_user->id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $owner_user->id . ' - ' . $owner_user->displayname ) : ''; ?>" />
+							value="<?php echo ! empty( $element->owner_id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $element->owner_id . ' - ' . $element->owner->displayname ) : ''; ?>" />
 				<label><?php esc_html_e( 'Responsable', 'digirisk' ); ?></label>
 				<span class="bar"></span>
-				<input type="hidden" name="society[user_info][owner_id]" />
+				<input type="hidden" name="society[owner_id]" value="<?php echo esc_attr( $element->owner_id ); ?>" />
 			</div>
 		</li>
 

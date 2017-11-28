@@ -2928,12 +2928,12 @@
        -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
 
-.digirisk-wrap .popup.no-close .button, .digirisk-wrap .popup.no-close .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .popup.no-close input[type="submit"], .digirisk-wrap .popup.no-close .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .popup.no-close input[type="submit"] {
+.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input[type="submit"], .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   pointer-events: none; }
 
-.digirisk-wrap .popup.no-close .button:hover, .digirisk-wrap .popup.no-close .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .popup.no-close input[type="submit"]:hover, .digirisk-wrap .popup.no-close .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .popup.no-close input[type="submit"]:hover {
+.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed; }

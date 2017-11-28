@@ -2,15 +2,18 @@
 /**
  * Gestion des modèles personnalisés
  *
+ * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.0
- * @version 6.3.0
- *
- * @package Evarisk\Plugin
+ * @version 6.4.0
+ * @copyright 2015-2017 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des modèles personnalisés
@@ -23,15 +26,15 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 	 * @var array
 	 */
 	private $list_type_document = array(
-		'document_unique' => 'Document unique',
-		'fiche_de_groupement' => 'Fiche de groupement',
-		'fiche_de_poste' => 'Fiche de poste',
-		'affichage_legal_A3' => 'Affichage légal A3',
-		'affichage_legal_A4' => 'Affichage légal A4',
-		'diffusion_informations_A3' => 'Diffusion informations A3',
-		'diffusion_informations_A4' => 'Diffusion informations A4',
-		'accident_benin' => 'Accident de travail bénin',
-		'accidents_benin' => 'Registre accidents de travail bénin',
+		'document_unique'                   => 'Document unique',
+		'groupement'                        => 'Groupement',
+		'unite_de_travail'                  => 'Unité de travail',
+		'affichage_legal_A3'                => 'Affichage légal A3',
+		'affichage_legal_A4'                => 'Affichage légal A4',
+		'diffusion_informations_A3'         => 'Diffusion informations A3',
+		'diffusion_informations_A4'         => 'Diffusion informations A4',
+		'accident_benin'                    => 'Accident de travail bénin',
+		'registre_accidents_travail_benins' => 'Registre accidents de travail bénin',
 	);
 
 	/**
@@ -43,6 +46,9 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Appelle la vue main.view.php pour afficher la gestion des modèles personnalisés.
+	 *
+	 * @since 6.1.0
+	 * @version 6.4.0
 	 *
 	 * @return void
 	 */
@@ -56,7 +62,7 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'handle_model', 'main', array(
-			'list_type_document' => $this->list_type_document,
+			'list_type_document'    => $this->list_type_document,
 			'list_document_default' => $list_document_default,
 		) );
 	}

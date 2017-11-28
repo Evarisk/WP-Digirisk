@@ -62,6 +62,7 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 
 						jQuery( '.log' ).append( '<li>Redirection vers l\'application en cours...</li>' );
 						jQuery.post( ajaxurl, { 'action': 'digi_redirect_to_dashboard' }, function( response ) {
+							window.removeEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
 							window.location = response;
 						});
 					} else {

@@ -67,7 +67,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_society' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
