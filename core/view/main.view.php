@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
 
-	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
+	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->major_version ] ) ) :
 		require( PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php' );
 	endif;
 	?>

@@ -75,6 +75,21 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+<<<<<<< HEAD
+=======
+= Version 6.3.4 =
+
+Corrections
+
+* 12189 - Ajout automatiquement la capacité "manage_digirisk" aux abonnés.
+
+= Version 6.3.3 =
+
+Corrections
+
+* 12032 - Correction des actions correctives.
+
+>>>>>>> master
 = Version 6.3.2 =
 
 Corrections

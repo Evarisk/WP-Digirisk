@@ -63,6 +63,7 @@ class Page_Sorter_Action {
 		if ( ! empty( $_POST['menu_item_db_id'] ) ) {
 			foreach ( $_POST['menu_item_db_id'] as $element_id ) {
 				$element_id = (int) $element_id;
+
 				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
 				if ( $element_id !== $parent_id ) {
