@@ -1,0 +1,15 @@
+.wpeo-dropdown {
+	.dropdown-content {
+		padding: 0.6em;
+
+		.dropdown-item {
+			padding: 0.6em;
+			background: #fff;
+			@include transition();
+			&:hover {
+				cursor: pointer;
+				background: rgba(0,0,0,0.1);
+			}
+		}
+	}
+}
