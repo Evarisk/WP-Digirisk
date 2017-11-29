@@ -5,7 +5,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.1
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -52,12 +52,13 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 * Récupères le patch note pour la version actuelle.
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.0
+	 * @version 6.4.1
 	 *
 	 * @return string|object
 	 */
 	public function get_patch_note() {
 		$patch_note_url = 'https://www.evarisk.com/wp-json/eoxia/v1/change_log/' . \eoxia\Config_Util::$init['digirisk']->version;
+
 		$json = wp_remote_get( $patch_note_url, array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
@@ -66,11 +67,14 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 
 		$result = __( 'Aucune note de mise à jour pour cette version.', 'digirisk' );
 
-		if ( ! empty( $json ) && ! empty( $json['body'] ) ) {
+		if ( ! is_wp_error( $json ) && ! empty( $json ) && ! empty( $json['body'] ) ) {
 			$result = json_decode( $json['body'] );
 		}
 
-		return $result;
+		return array(
+			'status' => is_wp_error( $json ) ? false : true,
+			'content' => $result,
+		);
 	}
 
 	/**
