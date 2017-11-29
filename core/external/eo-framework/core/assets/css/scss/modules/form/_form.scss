@@ -1,0 +1,32 @@
+/*--------------------------------------------------------------
+	Module : Form
+	Version : 1.0.0
+	--------------------------------------------------------------*/
+
+.wpeo-form {
+	.group-date {
+		.mysql-date {
+			visibility: hidden;
+			position: absolute;
+		}
+	}
+	label {
+		display: block;
+		font-size: 12px;
+		text-transform: uppercase;
+		font-weight: 900;
+		margin-bottom: 0.6em;
+		color: rgba(0,0,0,0.8);
+	}
+}
+
+/* Simple */
+.wpeo-form {
+	@import "simple";
+}
+
+
+/* Moderne */
+.wpeo-form {
+	@import "moderne";
+}

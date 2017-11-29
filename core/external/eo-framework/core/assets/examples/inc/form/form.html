@@ -1,0 +1,156 @@
+<h2 id="form" class="module-title">Form</h2>
+
+<p>Utilisez la classe <code class="language-css">"wpeo-form"</code> sur l'élément englobant le formulaire.</p>
+
+<h3 class="module-title">Formulaires simples</h3>
+
+<p><strong>Champs texte</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<div class="form-element">
+		<label for="form1">Label</label>
+		<input id="form1" name="" type="text" value="" />
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<label for="form1">Label</label>
+		<input id="form1" name="" type="text" value="Valeur" />
+	</div>
+</form>
+
+<p><strong>Champs select</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<div class="form-element">
+		<label for="form2">Champs Select</label>
+		<select id="form2">
+			<option value="valeur1">Valeur 1</option>
+			<option value="valeur2" selected>Valeur 2</option>
+			<option value="valeur3">Valeur 3</option>
+		</select>
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<label for="form2">Label</label>
+		<select id="form2">
+			<option value="valeur1">Valeur 1</option>
+			<option value="valeur2" selected>Valeur 2</option>
+			<option value="valeur3">Valeur 3</option>
+		</select>
+	</div>
+</form>
+
+<p><strong>Champs radio</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<label>Votre type</label>
+	<div class="form-element">
+		<input type="radio" id="radio1" name="type" checked value="radio1">
+		<label for="radio1">Choix 1</label>
+
+		<input type="radio" id="radio2" name="type" value="radio2">
+		<label for="radio2">Choix 2</label>
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<label>Votre type</label>
+	<div class="form-element">
+		<input type="radio" id="radio1" name="type" checked value="radio1">
+		<label for="radio1">Choix 1</label>
+
+		<input type="radio" id="radio2" name="type" value="radio2">
+		<label for="radio2">Choix 2</label>
+	</div>
+</form>
+
+<p><strong>Champs checkbox</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<div class="form-element">
+		<input type="checkbox" id="checkbox" value="checkbox">
+		<label for="checkbox">Label de la case à cocher</label>
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<input type="checkbox" id="checkbox" value="checkbox">
+		<label for="checkbox">Label de la case à cocher</label>
+	</div>
+</form>
+
+<h3 class="module-title">Formulaires modernes</h3>
+
+<p><strong>Champs texte</strong></p>
+<p>Rajouter la classe <code class="language-css">"form-modern"</code> au <code class="language-css">"form-element"</code> pour changer son style.<br>
+La classe <code class="language-css">"form-active"</code> est utilisée quand la valeur du champs est remplie.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<div class="form-element form-modern">
+		<input name="" type="text" value="valeur" />
+		<label>Champs texte sans valeur</label>
+		<span class="form-bar"></span>
+	</div>
+	<div class="form-element form-modern form-active">
+		<input name="" type="text" value="valeur" />
+		<label>Champs texte avec valeur</label>
+		<span class="form-bar"></span>
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form" method="post">
+	<div class="wpeo-grid grid-2">
+		<div>
+			<div class="form-element form-active form-modern">
+				<input name="" type="text" value="valeur" />
+				<label>Champs texte avec valeur</label>
+				<span class="form-bar"></span>
+			</div>
+		</div>
+		<div>
+			<div class="form-element form-modern">
+				<input name="" type="text" value="" />
+				<label>Champs texte sans valeur</label>
+				<span class="form-bar"></span>
+			</div>
+		</div>
+	</div>
+</form>
+
+<p><strong>Champs zone de texte</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-form">
+	<div class="form-element form-modern">
+		<textarea></textarea>
+		<label>Contenu textarea</label>
+		<span class="form-bar"></span>
+	</div>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element form-modern">
+		<textarea></textarea>
+		<label>Contenu textarea</label>
+		<span class="form-bar"></span>
+	</div>
+</form>
+
+</div>
+<div>
