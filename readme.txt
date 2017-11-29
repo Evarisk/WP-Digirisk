@@ -75,6 +75,12 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 6.4.2 =
+
+Corrections
+
+* 13300 - Correction création de risque.
+
 = Version 6.4.1 =
 
 Corrections
