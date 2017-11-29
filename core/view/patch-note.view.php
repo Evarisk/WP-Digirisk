@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
+ * @version 6.4.1
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $result = Digirisk_Class::g()->get_patch_note(); ?>
 
-<?php if ( $result ) : ?>
+<?php if ( true === $result['status'] ) : ?>
 	<div class="notification patch-note active">
 		<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
 		<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
@@ -30,13 +30,13 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 	<div class="popup patch-note">
 		<div class="container">
 			<div class="header">
-				<h2 class="title"><?php echo esc_html( 'Note de version: ' . $result->numero_de_version ); ?></h2>
+				<h2 class="title"><?php echo esc_html( 'Note de version: ' . $result['content']->numero_de_version ); ?></h2>
 				<i class="close fa fa-times"></i>
 			</div>
 			<div class="content">
 				<?php
-				if ( ! empty( $result->note_de_version ) ) :
-					foreach ( $result->note_de_version as $element ) :
+				if ( ! empty( $result['content']->note_de_version ) ) :
+					foreach ( $result['content']->note_de_version as $element ) :
 						?>
 						<div class="note">
 							<div class="entry-title"><?php echo esc_html( $element->numero_de_suivi ); ?></div>
