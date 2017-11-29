@@ -1,4 +1,4 @@
-=== Digirisk ===
+﻿=== Digirisk ===
 Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
@@ -74,6 +74,14 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 6.4.0 =
+
+Améliorations
+
+* 10067 - Rangement des catégories de risque dans l'ordre du document ED840
+* 11865 - Mise à jour graphique de l'arbre de navigation
+* 11909 - Ajout de la page "Accident" dans le menu DigiRisk.
 
 = Version 6.3.4 =
 
