@@ -171,7 +171,7 @@ class Sheet_Workunit_Class extends Document_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
-		$document_creation_response = $this->create_document( $society, array( 'fiche_de_poste' ), $sheet_details );
+		$document_creation_response = $this->create_document( $society, array( 'unite_de_travail' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
 			$society = Workunit_Class::g()->update( $society );
