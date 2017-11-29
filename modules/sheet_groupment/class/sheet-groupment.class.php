@@ -169,7 +169,7 @@ class Sheet_Groupment_Class extends Document_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 
-		$document_creation_response = $this->create_document( $society, array( 'fiche_de_groupement' ), $sheet_details );
+		$document_creation_response = $this->create_document( $society, array( 'groupement' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
 			$society = Group_Class::g()->update( $society );
