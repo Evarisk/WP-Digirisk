@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.4.1
+ * @version 6.4.2
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $result = Digirisk_Class::g()->get_patch_note(); ?>
 
-<?php if ( true === $result['status'] ) : ?>
+<?php if ( true === $result['status'] && ! empty( $result['content'] ) ) : ?>
 	<div class="notification patch-note active">
 		<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
 		<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>

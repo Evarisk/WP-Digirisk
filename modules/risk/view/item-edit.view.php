@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
+ * @version 6.4.2
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
 	<input type="hidden" name="risk[id]" value="<?php echo $risk->preset ? 0 : esc_attr( $risk->id ); ?>" />
 	<input type="hidden" name="risk[preset]" value="0" />
+  <input type="hidden" name="can_update" value="true" />
 
 	<td data-title="Ref." class="padding">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
