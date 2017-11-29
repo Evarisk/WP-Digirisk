@@ -1,0 +1,226 @@
+/*--------------------------------------------------------------
+	Module : Animations
+	Version : 1.2.0
+
+	.wpeo-animate => classe de base pour le module
+		.animate-hover => Permet de lancer l'animation au survol
+		.animate-on => ajouter cette classe lors d'un event js pour animer l'element
+--------------------------------------------------------------*/
+
+.wpeo-animate {
+	animation-fill-mode: both;
+	animation-duration: 1s;
+
+	&.flipOutX,
+	&.flipOutY,
+	&.bounceIn,
+	&.bounceOut {
+	  animation-duration: .75s;
+	}
+
+	&.animate-hover:hover, &.animate-on {
+		&.bounce {
+		  animation-name: bounce;
+		  transform-origin: center bottom;
+		}
+		&.flash {
+		  animation-name: flash;
+		}
+		&.headShake {
+		  animation-timing-function: ease-in-out;
+		  animation-name: headShake;
+		}
+		&.jello {
+		  animation-name: jello;
+		  transform-origin: center;
+		}
+		&.pulse {
+		  animation-name: pulse;
+		}
+		&.rubberBand {
+		  animation-name: rubberBand;
+		}
+		&.shake {
+		  animation-name: shake;
+		}
+		&.swing {
+		  transform-origin: top center;
+		  animation-name: swing;
+		}
+		&.tada {
+		  animation-name: tada;
+		}
+		&.wobble {
+		  animation-name: wobble;
+		}
+		&.bounceIn {
+		  animation-name: bounceIn;
+		}
+		&.bounceInDown {
+		  animation-name: bounceInDown;
+		}
+		&.bounceInLeft {
+		  animation-name: bounceInLeft;
+		}
+		&.bounceInRight {
+		  animation-name: bounceInRight;
+		}
+		&.bounceInUp {
+		  animation-name: bounceInUp;
+		}
+		&.bounceOut {
+		  animation-name: bounceOut;
+		}
+		&.bounceOutDown {
+		  animation-name: bounceOutDown;
+		}
+		&.bounceOutLeft {
+		  animation-name: bounceOutLeft;
+		}
+		&.bounceOutRight {
+		  animation-name: bounceOutRight;
+		}
+		&.bounceOutUp {
+		  animation-name: bounceOutUp;
+		}
+		&.fadeIn {
+		  animation-name: fadeIn;
+		}
+		&.fadeInDown {
+		  animation-name: fadeInDown;
+		}
+		&.fadeInDownBig {
+		  animation-name: fadeInDownBig;
+		}
+		&.fadeInLeft {
+		  animation-name: fadeInLeft;
+		}
+		&.fadeInLeftBig {
+		  animation-name: fadeInLeftBig;
+		}
+		&.fadeInRight {
+		  animation-name: fadeInRight;
+		}
+		&.fadeInRightBig {
+		  animation-name: fadeInRightBig;
+		}
+		&.fadeInUp {
+		  animation-name: fadeInUp;
+		}
+		&.fadeInUpBig {
+		  animation-name: fadeInUpBig;
+		}
+		&.fadeOut {
+		  animation-name: fadeOut;
+		}
+		&.fadeOutDown {
+		  animation-name: fadeOutDown;
+		}
+		&.fadeOutDownBig {
+		  animation-name: fadeOutDownBig;
+		}
+		&.fadeOutLeft {
+		  animation-name: fadeOutLeft;
+		}
+		&.fadeOutLeftBig {
+		  animation-name: fadeOutLeftBig;
+		}
+		&.fadeOutRight {
+		  animation-name: fadeOutRight;
+		}
+		&.fadeOutRightBig {
+		  animation-name: fadeOutRightBig;
+		}
+		&.fadeOutUp {
+		  animation-name: fadeOutUp;
+		}
+		&.fadeOutUpBig {
+		  animation-name: fadeOutUpBig;
+		}
+		&.slideInDown {
+		  animation-name: slideInDown;
+		}
+		&.slideInLeft {
+		  animation-name: slideInLeft;
+		}
+		&.slideInRight {
+		  animation-name: slideInRight;
+		}
+		&.slideInUp {
+		  animation-name: slideInUp;
+		}
+		&.slideOutDown {
+			animation-name: slideOutDown;
+		}
+		&.slideOutLeft {
+			animation-name: slideOutLeft;
+		}
+		&.slideOutRight {
+			animation-name: slideOutRight;
+		}
+		&.slideOutUp {
+			animation-name: slideOutUp;
+		}
+		&.bounceInLight{
+			animation-name: bounceInLight;
+		}
+		&.rotate {
+			animation-name: rotate;
+		}
+		&.downAndUp {
+			animation-name: downAndUp;
+		}
+	}
+}
+
+/* Import des animations */
+
+@import "attention_seekers/bounce";
+@import "attention_seekers/flash";
+@import "attention_seekers/headShake";
+@import "attention_seekers/jello";
+@import "attention_seekers/pulse";
+@import "attention_seekers/rubberBand";
+@import "attention_seekers/shake";
+@import "attention_seekers/swing";
+@import "attention_seekers/tada";
+@import "attention_seekers/wobble";
+@import "bouncing_entrances/bounceIn";
+@import "bouncing_entrances/bounceInDown";
+@import "bouncing_entrances/bounceInLeft";
+@import "bouncing_entrances/bounceInRight";
+@import "bouncing_entrances/bounceInUp";
+@import "bouncing_exits/bounceOut";
+@import "bouncing_exits/bounceOutDown";
+@import "bouncing_exits/bounceOutLeft";
+@import "bouncing_exits/bounceOutRight";
+@import "bouncing_exits/bounceOutUp";
+@import "fading_entrances/fadeIn";
+@import "fading_entrances/fadeInDown";
+@import "fading_entrances/fadeInDownBig";
+@import "fading_entrances/fadeInLeft";
+@import "fading_entrances/fadeInLeftBig";
+@import "fading_entrances/fadeInRight";
+@import "fading_entrances/fadeInRightBig";
+@import "fading_entrances/fadeInUp";
+@import "fading_entrances/fadeInUpBig";
+@import "fading_exits/fadeOut";
+@import "fading_exits/fadeOutDown";
+@import "fading_exits/fadeOutDownBig";
+@import "fading_exits/fadeOutLeft";
+@import "fading_exits/fadeOutLeftBig";
+@import "fading_exits/fadeOutRight";
+@import "fading_exits/fadeOutRightBig";
+@import "fading_exits/fadeOutUp";
+@import "fading_exits/fadeOutUpBig";
+@import "sliding_entrances/slideInDown";
+@import "sliding_entrances/slideInLeft";
+@import "sliding_entrances/slideInRight";
+@import "sliding_entrances/slideInUp";
+@import "sliding_exits/slideOutDown";
+@import "sliding_exits/slideOutLeft";
+@import "sliding_exits/slideOutRight";
+@import "sliding_exits/slideOutUp";
+@import "custom/bounceInLight";
+@import "custom/downAndUp";
+@import "custom/rotate";
