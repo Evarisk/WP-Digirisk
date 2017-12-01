@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,21 +15,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="POST" id="digi-import-form" >
-	<h3><?php _e( 'Import', 'digirisk' ); ?></h3>
+<form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" method="POST" id="digi-import-form" >
+	<h3><?php esc_html_e( 'Importer', 'digirisk' ); ?></h3>
 
 	<div class="content">
-		<?php echo esc_html_e( 'Cette fonctionnalitée est indisponible.', 'digirisk' ); ?>
-		<!--<input type="hidden" name="action" value="digi_import_data" />
-		<?php /** Crtéation d'un nonce de sécurité pour le formulaire / Create a security nonce for the form */ wp_nonce_field( 'digi_import_data' ); ?>
-		<input type="hidden" name="element_id" value="<?php echo $element_id; ?>" />
+		<input type="hidden" name="action" value="digi_import_data" />
+		<?php wp_nonce_field( 'digi_import_data' ); ?>
+		<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
-		<span class="digi-import-explanation" ><?php _e( 'Don\'t start from scratch. Use a predefined template by importing it with the button below', 'digirisk' ); ?></span>
+		<span class="digi-import-explanation" ><?php esc_attr_e( 'Ne commencez pas de zéro! Importez un modèle prédéfini en cliquant sur le bouton ci-dessous.', 'digirisk' ); ?></span>
 		<progress value="0" max="100">0%</progress>
 		<input type="file" name="file" id="file" />
-		<span class="digi-import-detail"></span>-->
+		<span class="digi-import-detail"></span>
 	</div>
 
-	<!--<label for="file" class="button blue" ><?php esc_html_e( 'Import Digirisk model (.ZIP)', 'digirisk' ); ?></label><br />-->
+	<label for="file" class="button blue" ><?php esc_html_e( 'Importer un modèle (.ZIP)', 'digirisk' ); ?></label><br />
 
 </form>
