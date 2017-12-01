@@ -39,7 +39,7 @@ class DUER_Class extends Document_Class {
 	 * @todo
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale de l'objet

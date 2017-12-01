@@ -46,13 +46,13 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 			return false;
 		}
 
-		$id = (int) $data['element_id'];
+		$id      = (int) $data['element_id'];
 		$element = Society_Class::g()->get( array(
 			'id' => $id,
 		), true );
 
-		$src_logo = $this->get_logo();
-		$data = $this->securize_duer_data( $data, $element );
+		$src_logo         = $this->get_logo();
+		$data             = $this->securize_duer_data( $data, $element );
 		$data_to_document = $this->prepare_skeleton();
 		$data_to_document = $this->fill_data_duer( $data, $data_to_document, $element );
 		$data_to_document = $this->fill_data_risk( $data_to_document, $element );
@@ -63,8 +63,8 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 
 		return array(
 			'creation_response' => $document_creation_response,
-			'element' => $element,
-			'success' => true,
+			'element'           => $element,
+			'success'           => true,
 		);
 	}
 
@@ -100,6 +100,8 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Prépares un squelette des données
 	 *
+	 * Cette méthode permet de définir des chaines de caractères vide dans l'ODT si les données ne sont pas présente.
+	 *
 	 * @since 6.0.0
 	 * @version 6.4.0
 	 *
@@ -112,10 +114,6 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *         @type emetteurDUER
 	 *         @type
 	 * }
-	 *
-	 * @todo: A supprimer;
-	 * 13/11/2017: Pourquoi supprimer cette méthode ?
-	 * Elle permet d'être sur de ne pas avoir une chaine de caractère innatendu dans le ODT.
 	 */
 	public function prepare_skeleton() {
 		$skeleton = array(
