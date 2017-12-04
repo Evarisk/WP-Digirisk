@@ -82,6 +82,15 @@ class Import_Action extends \eoxia\Singleton_Util {
 				'db_version' => 1,
 			) );
 
+			$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
+
+			// version * 10 car le module de mise à jour parse les mises à jour à faire grâce à des versions à 4 chiffres.
+			if ( 3 === strlen( $current_version_for_update_manager ) ) {
+				$current_version_for_update_manager *= 10;
+			}
+
+			update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $current_version_for_update_manager );
+
 			$zip_file = $_FILES['file'];
 
 			$zip_info = \eoxia\ZIP_Util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
