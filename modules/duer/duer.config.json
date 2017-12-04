@@ -1,7 +1,7 @@
 {
 	"name": "DUER",
 	"slug": "duer",
-	"version": "6.3.0",
+	"version": "6.4.4",
 	"description": "Le module gérant les DUER de Digirisk",
 	"path": "modules/duer/",
 	"dependencies": {
