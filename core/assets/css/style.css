@@ -3352,7 +3352,8 @@
 .digirisk-wrap .main-header .title, .digirisk-wrap .main-header .dut {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis; }
 
 .digirisk-wrap .main-header .media {
   background: #1e2129; }
@@ -3380,6 +3381,20 @@
 .digirisk-wrap .main-header .dut span, .digirisk-wrap .main-header .dut .icon, .digirisk-wrap .main-header .save span, .digirisk-wrap .main-header .save .icon {
   margin-top: auto;
   margin-bottom: auto; }
+
+.digirisk-wrap .main-header .edit {
+  padding: 0 !important; }
+
+.digirisk-wrap .main-header .edit:hover .icon {
+  background: #1bbf65; }
+
+.digirisk-wrap .main-header .edit .icon {
+  display: inline-block;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  padding: 0.4em;
+  font-size: 12px;
+  background: #47e58e; }
 
 .digirisk-wrap .main-header .save {
   opacity: 0;
@@ -3482,7 +3497,8 @@
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis; }
 
 .digirisk-wrap .unit-header .title strong {
   text-transform: uppercase; }
@@ -3631,7 +3647,8 @@
 .digirisk-wrap .workunit-navigation .content li div .wp-digi-global-name {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   text-overflow: ellipsis; }
 
 .digirisk-wrap .workunit-navigation .content li div span {
@@ -4152,7 +4169,8 @@
   transition: all 0.2s ease-out;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis; }
 
 .digirisk-wrap .tab .tab-element.active:not(.toggle):not(.gp) {
   background: #3495f0;
@@ -4989,7 +5007,7 @@
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  height: 50px;
+  min-height: 50px;
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap; }

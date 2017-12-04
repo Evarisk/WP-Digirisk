@@ -61,6 +61,19 @@
 				margin-bottom: auto;
 			}
 		}
+		.edit {
+			padding: 0 !important;
+			&:hover .icon {
+				background: darken($green, 16%);
+			}
+			.icon {
+				display: inline-block;
+				border-radius: 50%;
+				padding: 0.4em;
+				font-size: 12px;
+				background: $green;
+			}
+		}
 		.save {
 			opacity: 0;
 			transform: translateX(10px);
