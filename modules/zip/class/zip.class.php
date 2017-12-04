@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -40,7 +40,7 @@ class ZIP_Class extends Document_Class {
 	 * @todo
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale de l'objet
@@ -101,14 +101,17 @@ class ZIP_Class extends Document_Class {
 	/**
 	 * Convertis le chemin absolu vers le fichier en URL
 	 *
+	 * @since 6.1.9
+	 * @version 6.4.4
+	 *
 	 * @param  string $zip_path Le chemin absolu vers le fichier.
 	 *
 	 * @return string           L'URL vers le fichier
 	 */
 	public function get_zip_url( $zip_path ) {
-		$url = document_class::g()->get_digirisk_dir_path( 'baseurl' );
-		$zip_path_exploded = explode( 'digirisk/', $zip_path );
-		$url .= '/' . $zip_path_exploded[1];
+		$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
+		$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
+		$url = str_replace( $basedir, $baseurl, $zip_path );
 		return $url;
 	}
 
@@ -180,7 +183,7 @@ class ZIP_Class extends Document_Class {
 	 * Génères un zip et le met dans l'élément.
 	 *
 	 * @since 6.1.9
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @param Group_Model $element    Les données du groupement.
 	 * @param array       $files_info Un tableau contenant le nom des fichiers ainsi que le chemin sur le disque dur.
@@ -188,8 +191,8 @@ class ZIP_Class extends Document_Class {
 	 */
 	public function generate( $element, $files_info ) {
 		\eoxia\LOG_Util::log( 'DEBUT - Création ZIP', 'digirisk' );
-		$version  = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-		$zip_path = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
+		$version               = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
+		$zip_path              = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
 		$zip_generation_result = $this->create_zip( $zip_path, $files_info, $element, $version );
 		\eoxia\LOG_Util::log( 'FIN - Création ZIP', 'digirisk' );
 		return array(
