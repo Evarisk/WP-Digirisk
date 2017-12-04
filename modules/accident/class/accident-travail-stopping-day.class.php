@@ -109,7 +109,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	public function save_stopping_day( $data ) {
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $stopping_day_data ) {
-				if ( ! empty( $stopping_day_data['content'] ) ) {
+				if ( isset( $stopping_day_data['content'] ) ) {
 					$stopping_day = $this->update( $stopping_day_data );
 
 					$associate_file_args = array(
