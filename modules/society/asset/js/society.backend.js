@@ -6,6 +6,7 @@ window.eoxiaJS.digirisk.society.init = function() {
 
 window.eoxiaJS.digirisk.society.event = function() {
 	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
+	jQuery( document ).on( 'click', '.main-header .edit', window.eoxiaJS.digirisk.society.focusInputTitle );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .form.society-informations .form-element input, .digirisk-wrap .form.society-informations .form-element textarea', window.eoxiaJS.digirisk.society.enableSaveButton );
 };
 
@@ -25,6 +26,22 @@ window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).click();
 	}
+};
+
+/**
+ * Focus le titre de la société lors du clic sur le bouton "edit".
+ *
+ * @since 6.4.4
+ * @version 6.4.4
+ *
+ * @param  {ClickEvent} event L'état de la souris.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.society.focusInputTitle = function( event ) {
+	jQuery( this ).closest( '.main-header' ).find( 'input[name="title"]' ).focus().select();
+
+	jQuery( this ).hide();
+	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).addClass( 'active' );
 };
 
 /**
