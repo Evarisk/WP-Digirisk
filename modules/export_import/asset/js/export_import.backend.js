@@ -108,6 +108,7 @@ window.eoxiaJS.digirisk.export.request_import = function( data ) {
 		contentType: false,
 		type: 'POST',
 		beforeSend: function() {
+			window.eoxiaJS.loader.display(  jQuery( '#digi-import-form .button.blue' ) );
 			jQuery( '.digi-import-detail' ).html( window.digi_tools_in_progress );
 		},
 		success: function( response ) {
@@ -132,6 +133,8 @@ window.eoxiaJS.digirisk.export.request_import = function( data ) {
 
 					jQuery( '#digi-import-form progress' ).attr( 'max', 100 );
 					jQuery( '#digi-import-form progress' ).val( 100 );
+
+					window.eoxiaJS.loader.remove(  jQuery( '#digi-import-form .button.blue' ) );
 				}
 			} else {
 				alert( 'Problème lors de l\'importation du modèle' );
