@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -28,7 +28,7 @@ if ( ! empty( $list_type_document ) ) :
 							data-action="set_model"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>">
 					<i class="fa fa-upload"></i>
-					<span>Envoyer votre modèle personnalisé</span>
+					<span><?php esc_html_e( 'Envoyer votre modèle personnalisé', 'digirisk' ); ?></span>
 				</div>
 
 				<ul class="margin">
@@ -51,6 +51,8 @@ if ( ! empty( $list_type_document ) ) :
 							data-type="<?php echo esc_attr( $key ); ?>"
 							data-confirm="<?php echo esc_attr( 'Êtes vous sur de vouloir réinitialiser le modèle par défaut' ); ?>"><span class="dashicons dashicons-edit"></span>Réinitialiser le modèle par défaut</a>
 					</li>
+
+					<?php echo apply_filters( 'digi_handle_model_actions_end', '', $key ); ?>
 				</ul>
 			</div>
 

@@ -30,17 +30,18 @@ class Handle_Model_Action {
 	}
 
 	/**
-	 * Appelle la méthode "upload_model" de "File_Management_Class"
+	 * Appelle la méthode "upload_model" de "Handle_Model_Class"
 	 *
 	 * @since 6.2.1
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 */
 	public function set_model() {
 		// check_ajax_referer( 'associate_file' );
-		$type = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 0;
+		$type    = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 0;
 		$file_id = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
 
-		if ( ! Handle_Model_Class::g()->upload_model( $type, $file_id ) ) {
+		$file_path = str_replace( '\\', '/', get_attached_file( $file_id ) );
+		if ( ! Handle_Model_Class::g()->upload_model( $type, $file_path ) ) {
 			wp_send_json_error();
 		}
 
