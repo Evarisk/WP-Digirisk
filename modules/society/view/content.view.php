@@ -3,8 +3,8 @@
  * Display .... Fichier incompréhensible.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0-alpha
- * @version 6.4.0
+ * @since 6.0.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -29,8 +29,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fa fa-floppy-o"></i></span></div>
 		<div class="mobile-navigation"><i class="icon fa fa-bars"></i></div>
 	</div>
-
-	<?php apply_filters( 'society_header_end', $element ); ?>
 </div>
 
 <?php echo do_shortcode( '[digi_tab id="' . $element->id . '" type="' . $element->type . '" display="' . $tab_to_display . '"]' ); ?>
