@@ -187,11 +187,11 @@ class ZIP_Class extends Document_Class {
 	 * @return array
 	 */
 	public function generate( $element, $files_info ) {
-		$version = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
-
+		\eoxia\LOG_Util::log( 'DEBUT - Création ZIP', 'digirisk' );
+		$version  = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
 		$zip_path = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
 		$zip_generation_result = $this->create_zip( $zip_path, $files_info, $element, $version );
-
+		\eoxia\LOG_Util::log( 'FIN - Création ZIP', 'digirisk' );
 		return array(
 			'zip_path' => $zip_path,
 			'creation_response' => $zip_generation_result,
