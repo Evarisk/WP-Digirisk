@@ -165,7 +165,7 @@ class ZIP_Class extends Document_Class {
 			'parent_id' => $element->id,
 			'mime_type' => 'application/zip',
 			'list_generation_results' => $file_list,
-			'status' => 'inherti',
+			'status' => 'inherit',
 			'version' => $document_revision,
 		);
 

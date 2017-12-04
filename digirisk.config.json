@@ -1,7 +1,6 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"major_version": "6.4.0",
 	"version": "6.4.3",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [

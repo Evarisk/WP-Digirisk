@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.4.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -101,7 +101,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	 * Enregistres les nombres de jour d'arrêt.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @param  array $data Les données contenant le nombre de jour d'arrêt.
 	 * @return void
@@ -109,7 +109,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	public function save_stopping_day( $data ) {
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $stopping_day_data ) {
-				if ( isset( $stopping_day_data['content'] ) ) {
+				if ( ! empty( $stopping_day_data['content'] ) && strlen( 0 < $stopping_day_data['content'] ) ) {
 					$stopping_day = $this->update( $stopping_day_data );
 
 					$associate_file_args = array(

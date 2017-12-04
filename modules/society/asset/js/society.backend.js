@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "society" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 6.0.0
+ * @version 6.4.4
+ */
 window.eoxiaJS.digirisk.society = {};
 
 window.eoxiaJS.digirisk.society.init = function() {
@@ -17,10 +23,11 @@ window.eoxiaJS.digirisk.society.event = function() {
  * @param  {KeyboardEvent} event L'état du clavier lors du "keyup"
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
+	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .edit' ).hide();
 	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .action-input.save' ).addClass( 'active' );
 
 	if ( 13 === event.keyCode ) {
