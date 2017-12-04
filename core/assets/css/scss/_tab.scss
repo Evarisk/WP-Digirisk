@@ -55,6 +55,10 @@
 				background: darken($red, 14%) !important;
 			}
 		}
+		.option {
+			margin-left: auto;
+			padding: 0 1.4em;
+		}
 	}
 
 	@media screen and (max-width: 680px) {

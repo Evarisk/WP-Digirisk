@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"><?php echo esc_html( $element->title ); ?></td>
 	<td>
 		<div class="action">
-			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download icon" aria-hidden="true"></i>
 			</a>
 		</div>

@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<th class="w100 padding"><?php esc_html_e( 'Sources', 'digirisk' ); ?></th>
 			<th class="w100 padding"><?php esc_html_e( 'Localisation', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Notes', 'digirisk' ); ?></th>
-			<th class="w150"></th>
+			<th class="w100"></th>
 		</tr>
 	</thead>
 

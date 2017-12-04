@@ -16,6 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<a class="button dark h50" href="<?php echo esc_attr( $zip_url ); ?>">
+<a class="button purple pop h50" href="<?php echo esc_attr( $zip_url ); ?>">
 	<i class="fa fa-file-archive-o" aria-hidden="true"></i>
 </a>

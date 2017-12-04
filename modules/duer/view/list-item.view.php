@@ -84,8 +84,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action grid-layout w2">
-				<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
-					<i class="fa fa-download" aria-hidden="true"></i>
+				<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
 				</a>
 
 			<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>

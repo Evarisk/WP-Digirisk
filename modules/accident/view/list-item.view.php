@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 		<div class="action grid-layout w3">
-			<a class="button red pop" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
+			<a class="button purple pop" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
 				<i class="icon fa fa-download" aria-hidden="true"></i>
 				<?php echo esc_html( strtoupper( substr( $accident->document->type, 16, 2 ) ) ); ?>
 			</a>

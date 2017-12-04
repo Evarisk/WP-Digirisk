@@ -21,12 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<div class="action">
 			<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
-			<a class="button red h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-download icon" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?></span>
+				<!-- <span><?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?></span> -->
 			</a>
 		<?php else : ?>
-			<span class="button grey h50 tooltip hover" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<span class="button grey pop h50 tooltip hover" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 				<i class="fa fa-times icon" aria-hidden="true"></i>
 			</span>
 		<?php endif; ?>

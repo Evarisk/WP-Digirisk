@@ -102,7 +102,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 					data-cb-object="DUER"
 					data-cb-func="popup_for_generate_DUER"
 					data-title="Génération du DUER">
-					<i class="icon fa fa-plus"></i>
+					<i class="icon fa fa-print"></i>
 				</div>
 		</div>
 	</td>
