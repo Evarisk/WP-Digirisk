@@ -3,11 +3,10 @@
  * Le bouton "Télécharger le ZIP"
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
- * @package zip
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -16,6 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<a class="button purple pop h50" href="<?php echo esc_attr( $zip_url ); ?>">
-	<i class="fa fa-file-archive-o" aria-hidden="true"></i>
-</a>
+<?php if ( ! empty( $zip_url ) ) : ?>
+	<a class="button purple h50 tooltip hover"
+		href="<?php echo esc_attr( $zip_url ); ?>"
+		aria-label="<?php echo esc_attr_e( 'ZIP', 'digirisk' ); ?>">
+		<i class="fa fa-file-archive-o" aria-hidden="true"></i>
+	</a>
+<?php else : ?>
+	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+		<i class="fa fa-times icon" aria-hidden="true"></i>
+	</span>
+<?php endif; ?>

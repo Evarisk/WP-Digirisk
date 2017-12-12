@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -29,10 +29,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 		<div class="action grid-layout w3">
-			<a class="button purple pop" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
-				<i class="icon fa fa-download" aria-hidden="true"></i>
-				<?php echo esc_html( strtoupper( substr( $accident->document->type, 16, 2 ) ) ); ?>
-			</a>
+			<?php if ( ! empty( Document_Class::g()->get_document_path( $accident->document ) ) ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
+					<i class="icon fa fa-download" aria-hidden="true"></i>
+					<?php echo esc_html( strtoupper( substr( $accident->document->type, 16, 2 ) ) ); ?>
+				</a>
+			<?php else : ?>
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="">
+					<i class="fa fa-times icon" aria-hidden="true"></i>
+				</span>
+			<?php endif; ?>
 			<div class="button light w50 edit action-attribute"
 				data-action="load_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_accident' ) ); ?>"

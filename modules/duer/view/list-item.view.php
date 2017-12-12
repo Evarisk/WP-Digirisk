@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.1.9
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -84,9 +84,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action grid-layout w2">
-				<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
+				<a class="button purple h50 tooltip hover"
+					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
+					href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
 					<i class="fa fa-file-text-o" aria-hidden="true"></i>
 				</a>
+			<?php else : ?>
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+					<i class="fa fa-times icon" aria-hidden="true"></i>
+				</span>
+			<?php endif; ?>
 
 			<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>
 		</div>
