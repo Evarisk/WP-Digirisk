@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "legalDisplay" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.4
  */
 
 window.eoxiaJS.digirisk.legalDisplay = {};
@@ -17,11 +17,11 @@ window.eoxiaJS.digirisk.legalDisplay.init = function() {};
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.4
  */
-window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function() {
-	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
+window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function( triggeredElement, response ) {
+	jQuery( '.table' ).replaceWith( response.data.view );
 	window.scrollTo( 0, 0 );
 };
 
@@ -33,10 +33,10 @@ window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function() {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
-window.eoxiaJS.digirisk.legalDisplay.generatedDiffusionInformationSuccess = function() {
+window.eoxiaJS.digirisk.legalDisplay.generatedDiffusionInformationSuccess = function( triggeredElement, response ) {
 	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
 	window.scrollTo( 0, 0 );
 };
