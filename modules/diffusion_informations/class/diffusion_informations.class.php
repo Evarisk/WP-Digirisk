@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.10
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -84,6 +84,23 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Diffusion information';
 
 	/**
+	 * Appelle la vue "main".
+	 *
+	 * @since 6.4.4
+	 * @version 6.4.4
+	 *
+	 * @param  integer $element_id L'ID de l'élement.
+	 * @return void
+	 */
+	public function display( $element_id ) {
+		$element = Society_Class::g()->show_by_type( $element_id );
+
+		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'main', array(
+			'element' => $element,
+		) );
+	}
+
+	/**
 	 * Appelle le template list.view.php dans le dossier /diffusion_informations/view/
 	 *
 	 * @param  integer $element_id L'ID de l'élement.
@@ -130,7 +147,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 6.2.10
+	 * @version 6.4.4
 	 */
 	public function display_form( $element ) {
 		$diffusion_information = $this->get( array(
@@ -152,7 +169,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
-			'element_id' => $element->id,
+			'element_id'            => $element->id,
 			'diffusion_information' => $diffusion_information,
 		) );
 	}
