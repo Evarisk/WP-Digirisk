@@ -3,8 +3,8 @@
  * Affiches une unité de travail dans la navigation
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>">
+<li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>"
+	data-id="<?php echo esc_attr( $establishment->id ); ?>">
 	<div class="unit-container">
 
 		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type && \eoxia\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
