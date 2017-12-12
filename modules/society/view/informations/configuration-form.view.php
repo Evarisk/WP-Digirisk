@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -75,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							data-type="user"
 							placeholder=""
 							class="digi-search"
-							value="<?php echo ! empty( $element->owner_id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $element->owner_id . ' - ' . $element->owner->displayname ) : ''; ?>" />
+							value="<?php echo ! empty( $element->owner_id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $element->owner_id . ' - ' . $element->owner->displayname . ' (' . $element->owner->email . ')' ) : ''; ?>" />
 				<label><?php esc_html_e( 'Responsable', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 				<input type="hidden" name="society[owner_id]" value="<?php echo esc_attr( $element->owner_id ); ?>" />
@@ -117,7 +117,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<li>
 			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][0] ) ? 'active' : '' ); ?>">
-				<input type="text" name="society[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '' ); ?>" />
+				<input type="text" name="society[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? end( $element->contact['phone'] ) : '' ); ?>" />
 				<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
 				<span class="bar"></span>
 			</div>
