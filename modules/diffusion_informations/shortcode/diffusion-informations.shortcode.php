@@ -40,11 +40,8 @@ class Diffusion_Informations_Shortcode {
 	 */
 	public function callback_digi_diffusion_informations( $param ) {
 		$element_id = $param['post_id'];
-		$element    = Society_Class::g()->show_by_type( $element_id );
 
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'main', array(
-			'element' => $element,
-		) );
+		Diffusion_Informations_Class::g()->display( $element_id );
 	}
 }
 
