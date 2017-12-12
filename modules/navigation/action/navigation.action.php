@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -35,23 +35,23 @@ class Navigation_Action {
 	 * Créer une société.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 *
 	 * @return void
 	 */
 	public function callback_create_society() {
 		check_ajax_referer( 'create_society' );
 
-		$class = ! empty( $_POST['class'] ) ? '\\digi\\' . sanitize_text_field( $_POST['class'] ) : '';
+		$class     = ! empty( $_POST['class'] ) ? '\\digi\\' . sanitize_text_field( $_POST['class'] ) : '';
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$title     = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
 		$society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
 		), true );
 
-		$establishment = $class::g()->update( array(
-			'title' => $title,
+		$establishment    = $class::g()->update( array(
+			'title'     => $title,
 			'parent_id' => $parent_id,
 		) );
 		$establishment_id = $establishment->id;
@@ -63,14 +63,15 @@ class Navigation_Action {
 		$navigation_view = ob_get_clean();
 
 		ob_start();
-		require( PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php' );
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
 		$content_view = ob_get_clean();
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'navigation',
+			'namespace'        => 'digirisk',
+			'module'           => 'navigation',
 			'callback_success' => 'createdSocietySuccess',
-			'navigation_view' => $navigation_view,
-			'content_view' => $content_view,
+			'navigation_view'  => $navigation_view,
+			'content_view'     => $content_view,
+			'society_id'       => $establishment_id,
 		) );
 	}
 

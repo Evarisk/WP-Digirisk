@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -23,9 +23,9 @@ class Recommendation_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.4.0
+	 * @version 6.2.4
 	 */
-	function __construct() {
+	public function __construct() {
 		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ) );
 		add_action( 'wp_ajax_load_recommendation', array( $this, 'ajax_load_recommendation' ) );
 		add_action( 'wp_ajax_delete_recommendation', array( $this, 'ajax_delete_recommendation' ) );
@@ -37,7 +37,7 @@ class Recommendation_Action {
 	 * Charges une recommendation
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.10.0
+	 * @version 6.2.10
 	 */
 	public function ajax_load_recommendation() {
 		check_ajax_referer( 'ajax_load_recommendation' );
@@ -86,14 +86,14 @@ class Recommendation_Action {
 			'include' => $_POST['taxonomy']['digi-recommendation'],
 		) );
 
-		$recommendation_term = $recommendation_term[0];
+		$recommendation_term                                 = $recommendation_term[0];
 		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
-		$recommendation = Recommendation_Class::g()->update( $_POST );
+		$recommendation                                      = Recommendation_Class::g()->update( $_POST );
 
 		if ( ! empty( $image_id ) ) {
 			$args_media = array(
-				'id' => $recommendation->id,
-				'file_id' => $image_id,
+				'id'         => $recommendation->id,
+				'file_id'    => $image_id,
 				'model_name' => '\digi\Recommendation_Class',
 			);
 
@@ -113,17 +113,18 @@ class Recommendation_Action {
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $recommendation->parent_id,
-			'id' => $recommendation->id,
-			'content' => __( 'Modification de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+			'id'        => $recommendation->id,
+			'content'   => __( 'Modification de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
 		) );
 
 		ob_start();
 		Recommendation_Class::g()->display( $recommendation->parent_id );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'recommendation',
+			'namespace'        => 'digirisk',
+			'module'           => 'recommendation',
 			'callback_success' => 'savedRecommendationSuccess',
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
+			'element'          => $recommendation,
 		) );
 	}
 
@@ -133,7 +134,7 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.10.0
+	 * @version 6.4.4
 	 */
 	public function ajax_delete_recommendation() {
 		check_ajax_referer( 'ajax_delete_recommendation' );
@@ -146,8 +147,7 @@ class Recommendation_Action {
 
 		$recommendation = Recommendation_Class::g()->get( array(
 			'id' => $id,
-		) );
-		$recommendation = $recommendation[0];
+		), true );
 
 		if ( empty( $recommendation ) ) {
 			wp_send_json_error();
@@ -159,20 +159,30 @@ class Recommendation_Action {
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $recommendation->parent_id,
-			'id' => $recommendation->id,
-			'content' => __( 'Suppression de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+			'id'        => $recommendation->id,
+			'content'   => __( 'Suppression de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
 		) );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'recommendation',
+			'namespace'        => 'digirisk',
+			'module'           => 'recommendation',
 			'callback_success' => 'deletedRecommendationSuccess',
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
+			'element'          => $recommendation,
 		) );
 	}
 
+	/**
+	 * Transfère les anciennes recommendations
+	 *
+	 * @since 6.0.0
+	 * @version 6.0.0
+	 *
+	 * @return void
+	 * @todo: Voir si c'est toujours utile (08/12/2017)
+	 */
 	public function ajax_transfert_recommendation() {
-		recommendation_class::g()->transfert();
+		Recommendation_Class::g()->transfert();
 		wp_send_json_success();
 	}
 }

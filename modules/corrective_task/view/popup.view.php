@@ -3,16 +3,17 @@
  * La popup contenant les tâches correctives d'un risque.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.7.0
+ * @since 6.0.0
+ * @version 6.2.7
  * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="popup corrective-task">
 	<div class="container">

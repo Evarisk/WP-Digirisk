@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -31,7 +31,7 @@ class Society_Informations_Action {
 	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
 	 *
 	 * @since 6.2.2
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 *
 	 * @return void
 	 */
@@ -40,17 +40,18 @@ class Society_Informations_Action {
 
 		$data = (array) $_POST['society'];
 
-		$address = Address_Class::g()->save( $_POST['address'] );
+		$address                         = Address_Class::g()->save( $_POST['address'] );
 		$data['contact']['address_id'][] = $address->id;
 
 		$society = Society_Informations_Class::g()->save( $data );
 
 		wp_send_json_success( array(
-			'society' => $society,
-			'address' => $address,
-			'namespace' => 'digirisk',
-			'module' => 'society',
+			'society'          => $society,
+			'address'          => $address,
+			'namespace'        => 'digirisk',
+			'module'           => 'society',
 			'callback_success' => 'savedSocietyConfiguration',
+			'view'             => Tab_Class::g()->load_tab_content( $society->id, 'digi-informations', 'Informations' ),
 		) );
 	}
 }

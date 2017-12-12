@@ -3,17 +3,17 @@
  * Les actions relatives aux risques.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux risques.
@@ -29,8 +29,8 @@ class Risk_Action {
 	 * wp_ajax_wpdigi-edit-risk
 	 * wp_ajax_delete_comment
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 2 );
@@ -47,29 +47,29 @@ class Risk_Action {
 	 * @param  Risk_Model $risk       Les données du risque.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.4
 	 */
 	public function callback_display_risk( $society_id, $risk ) {
-		$module = 'risk';
+		$module           = 'risk';
 		$callback_success = 'savedRiskSuccess';
-		$template = '';
-		$page = ! empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
+		$template         = '';
+		$page             = ! empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
 
 		if ( 'all_risk' === $page ) {
-
 			$module = 'risk_page';
+
 			ob_start();
 			$risk = Risk_Class::g()->get( array(
-				'include' => $risk->id,
-			) );
-			$risk = $risk[0];
+				'id' => $risk->id,
+			), true );
+
 			$risk->parent = Society_Class::g()->show_by_type( $risk->parent_id );
 			if ( 'digi-group' === $risk->parent->type ) {
 				$risk->parent_group = $risk->parent;
 			} else {
 				$risk->parent_workunit = $risk->parent;
-				$risk->parent_group = Society_Class::g()->show_by_type( $risk->parent_workunit->parent_id );
+				$risk->parent_group    = Society_Class::g()->show_by_type( $risk->parent_workunit->parent_id );
 			}
 
 			\eoxia\View_Util::exec( 'digirisk', 'risk', '/page/item-edit', array(
@@ -78,13 +78,13 @@ class Risk_Action {
 			$template = ob_get_clean();
 
 		} elseif ( 'setting_risk' === $page ) {
-
 			$module = 'setting';
+
 			ob_start();
 			$risk = Risk_Class::g()->get( array(
-				'include' => $risk->id,
-			) );
-			$risk = $risk[0];
+				'id' => $risk->id,
+			), true );
+
 			\eoxia\View_Util::exec( 'digirisk', 'setting', '/preset/item', array(
 				'danger' => $risk,
 			) );
@@ -97,18 +97,19 @@ class Risk_Action {
 		} // End if().
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => $module,
+			'namespace'        => 'digirisk',
+			'module'           => $module,
 			'callback_success' => $callback_success,
-			'template' => $template,
+			'template'         => $template,
+			'risk'             => $risk,
 		) );
 	}
 
 	/**
 	 * Supprimes un risque
 	 *
-	 * @since 0.1
-	 * @version 6.2.10.0
+	 * @since 6.0.0
+	 * @version 6.4.4
 	 */
 	public function ajax_delete_risk() {
 		check_ajax_referer( 'ajax_delete_risk' );
@@ -134,21 +135,22 @@ class Risk_Action {
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $risk->parent_id,
-			'id' => $risk->id,
-			'content' => __( 'Suppression du risque', 'digirisk' ) . ' ' . $risk->unique_identifier,
+			'id'        => $risk->id,
+			'content'   => __( 'Suppression du risque', 'digirisk' ) . ' ' . $risk->unique_identifier,
 		) );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'risk',
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
 			'callback_success' => 'deletedRiskSuccess',
+			'risk'             => $risk,
 		) );
 	}
 
 	/**
 	 * Charges un risque
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.9.0
 	 */
 	public function ajax_load_risk() {
@@ -176,7 +178,7 @@ class Risk_Action {
 	/**
 	 * Supprimes un commentaire sur un risque (met le status du commentaire à "trash")
 	 *
-	 * @since 0.1
+	 * @since 6.0.0
 	 * @version 6.2.4.0
 	 */
 	public function callback_delete_comment() {

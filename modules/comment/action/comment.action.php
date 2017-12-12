@@ -4,13 +4,12 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -35,50 +34,51 @@ class Comment_Action {
 	/**
 	 * Sauvegardes un commentaire
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.3
-	 * @version 6.4.0
+	 * @version 6.4.4
+	 *
+	 * @return void
 	 */
 	public function callback_save_comment() {
 		check_ajax_referer( 'save_comment' );
 
-		$type = ! empty( $_POST['type'] ) ? $_POST['type'] : '';
-		$namespace = ! empty( $_POST['namespace'] ) ? $_POST['namespace'] : '';
-		$display = ! empty( $_POST['display'] ) ? $_POST['display'] : 'edit';
-		$id = ! empty( $_POST['id'] ) ? $_POST['id'] : 0;
-		$add_button = isset( $_POST['add_button'] ) ? (int) $_POST['add_button'] : 1;
+		$type         = ! empty( $_POST['type'] ) ? $_POST['type'] : '';
+		$namespace    = ! empty( $_POST['namespace'] ) ? $_POST['namespace'] : '';
+		$display      = ! empty( $_POST['display'] ) ? $_POST['display'] : 'edit';
+		$id           = ! empty( $_POST['id'] ) ? $_POST['id'] : 0;
+		$add_button   = isset( $_POST['add_button'] ) ? (int) $_POST['add_button'] : 1;
 		$display_date = ! empty( $_POST['display_date'] ) ? 'true' : 'false';
 		$display_user = ! empty( $_POST['display_user'] ) ? 'true' : 'false';
 
 		$model_name = '\\' . $namespace . '\\' . $type . '_Class';
 
 		$comment = array(
-			'post_id' => (int) $_POST['list_comment'][0]['post_id'],
+			'post_id'   => (int) $_POST['list_comment'][0]['post_id'],
 			'author_id' => (int) $_POST['list_comment'][0]['author_id'],
-			'date' => ! empty( $_POST['list_comment'][0]['date'] ) ? sanitize_text_field( $_POST['list_comment'][0]['date'] ) : current_time( 'mysql' ),
-			'content' => sanitize_text_field( $_POST['list_comment'][0]['content'] ),
+			'date'      => ! empty( $_POST['list_comment'][0]['date'] ) ? sanitize_text_field( $_POST['list_comment'][0]['date'] ) : current_time( 'mysql' ),
+			'content'   => sanitize_text_field( $_POST['list_comment'][0]['content'] ),
 		);
 
-		$model_name::g()->update( $comment );
+		$object = $model_name::g()->update( $comment );
 
 		ob_start();
 		do_shortcode( '[digi_comment id="' . (int) $_POST['list_comment'][0]['post_id'] . '" namespace="' . $namespace . '" type="' . $type . '" display="edit" display_date="' . $display_date . '" display_user="' . $display_user . '"]' );
 		wp_send_json_success( array(
-			'view' => ob_get_clean(),
-			'namespace' => 'digirisk',
-			'module' => 'comment',
+			'view'             => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'comment',
 			'callback_success' => 'saved_comment_success',
+			'object'           => $object,
 		) );
 	}
 
 	/**
 	 * Supprimes un commentaire en le passant au status -34071 au lieu de -34072
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.2.9.0
+	 * @version 6.4.4
+	 *
+	 * @return void
 	 */
 	public function callback_delete_comment() {
 		check_ajax_referer( 'ajax_delete_comment_' . $_POST['id'] );
@@ -91,8 +91,7 @@ class Comment_Action {
 
 		$comment = \eoxia\Comment_Class::g()->get( array(
 			'id' => $id,
-		) );
-		$comment = $comment[0];
+		), true );
 
 		if ( empty( $comment ) ) {
 			wp_send_json_error();
@@ -103,9 +102,10 @@ class Comment_Action {
 		\eoxia\Comment_Class::g()->update( $comment );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'comment',
+			'namespace'        => 'digirisk',
+			'module'           => 'comment',
 			'callback_success' => 'delete_success',
+			'object'           => $comment,
 		) );
 	}
 }
