@@ -2,7 +2,7 @@
  * Initialise l'objet "accident" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.3.0
- * @version 6.4.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.accident = {};
 window.eoxiaJS.digirisk.accident.canvas = [];
@@ -197,10 +197,10 @@ window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, res
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.3.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
-	jQuery( '.tab-element[data-action="digi-registre-accident"]' ).click();
+	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
 };
 
 /**
