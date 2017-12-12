@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="risk-row">
+
+<tr class="risk-row <?php echo esc_attr( 'method-' . $risk->evaluation_method->slug ); ?>" data-id="<?php echo esc_attr( $risk->id ); ?>">
 	<td data-title="Ref." class="padding">
 		<!-- La popup pour les actions correctives -->
 		<?php \eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
