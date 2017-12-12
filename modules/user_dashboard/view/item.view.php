@@ -3,18 +3,19 @@
  * Affichage d'un utilisateur ainsi que les actions pour l'éditer ou le supprimer.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
+ * @since 6.1.9
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
- * @package user_dashboard
- * @subpackage view
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<tr class="user-row">
+<tr class="user-row" data-id="<?php echo esc_attr( $user->id ); ?>">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
 	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
