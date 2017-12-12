@@ -2,7 +2,7 @@
  * Initialise l'objet "diffusionInformations" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.4.0
- * @version 6.4.0
+ * @version 6.4.4
  */
 
 window.eoxiaJS.digirisk.diffusionInformations = {};
@@ -18,9 +18,9 @@ window.eoxiaJS.digirisk.diffusionInformations.init = function() {};
  * @return {void}
  *
  * @since 6.4.0
- * @version 6.4.0
+ * @version 6.4.4
  */
-window.eoxiaJS.digirisk.diffusionInformations.generatedDiffusionInformationSuccess = function() {
-	jQuery( '.tab-element[data-action="digi-diffusion-informations"]' ).click();
+window.eoxiaJS.digirisk.diffusionInformations.generatedDiffusionInformationSuccess = function( triggeredElement, response ) {
+	jQuery( '.content-diffusions-information' ).replaceWith( response.data.view );
 	window.scrollTo( 0, 0 );
 };
