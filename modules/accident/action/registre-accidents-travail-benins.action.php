@@ -45,7 +45,7 @@ class Registre_Accident_Travail_Benin_Action {
 			'posts_per_page' => 1,
 		), true );
 
-		Registre_Accidents_Travail_Benins_Class::g()->generate( $main_society );
+		$result = Registre_Accidents_Travail_Benins_Class::g()->generate( $main_society );
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $main_society->id,
@@ -59,6 +59,7 @@ class Registre_Accident_Travail_Benin_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'accident',
 			'callback_success' => 'generatedRegistreAccidentBenin',
+			'result'           => $result,
 			'view'             => ob_get_clean(),
 		) );
 	}
