@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="recommendation-row">
+<tr class="recommendation-row" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
 	<td class="padding">
 		<span><strong><?php echo esc_html( $recommendation->unique_identifier ); ?></span></strong>
 	</td>
