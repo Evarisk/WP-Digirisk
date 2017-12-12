@@ -111,7 +111,11 @@ class ZIP_Class extends Document_Class {
 	public function get_zip_url( $zip_path ) {
 		$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
 		$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
-		$url = str_replace( $basedir, $baseurl, $zip_path );
+		$url     = str_replace( $basedir, $baseurl, $zip_path );
+
+		if ( ! file_exists( str_replace( '\\', '/', $zip_path ) ) ) {
+			$url = '';
+		}
 		return $url;
 	}
 
