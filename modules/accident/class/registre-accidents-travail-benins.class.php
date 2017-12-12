@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -39,7 +39,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale du modèle
@@ -188,11 +188,12 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array Les accidents
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 */
 	public function set_accidents() {
 		$accidents = Accident_Class::g()->get( array(
 			'posts_per_page' => -1,
+			'order'          => 'ASC',
 		) );
 
 		$accident_details = array(
