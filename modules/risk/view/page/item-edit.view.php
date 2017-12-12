@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="risk-row edit">
+<tr class="risk-row edit <?php echo esc_attr( 'method-' . $risk->evaluation_method->slug ); ?>">
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="page" value="all_risk" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $risk->parent_id ); ?>" />
