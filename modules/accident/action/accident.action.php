@@ -47,18 +47,18 @@ class Accident_Action {
 	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @return void
 	 */
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
 
-		$accident = ! empty( $_POST['accident'] ) ? (array) $_POST['accident'] : array();
+		$accident                   = ! empty( $_POST['accident'] ) ? (array) $_POST['accident'] : array();
 		$signature_of_the_caregiver = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
-		$signature_of_the_victim = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
-		$accident_investigation = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
-		$accident_stopping_days = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
+		$signature_of_the_victim    = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
+		$accident_investigation     = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
+		$accident_stopping_days     = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
 
 		$add = isset( $_POST['add'] ) ? true : false;
 
@@ -68,7 +68,7 @@ class Accident_Action {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;
 		}
 
-		$accident = Accident_Class::g()->update( $accident );
+		$accident   = Accident_Class::g()->update( $accident );
 		$upload_dir = wp_upload_dir();
 
 		// Associations des images.

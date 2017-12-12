@@ -23,13 +23,11 @@ class Sheet_Groupment_Filter {
 	/**
 	 * Ajoutes le filtres
 	 *
-	 * @see add_filter
-	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.4
+	 * @version 6.2.4
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 6, 2 );
 	}
 
 	/**
@@ -39,15 +37,14 @@ class Sheet_Groupment_Filter {
 	 * @param  integer $id        L'ID de la société.
 	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
 	 *
-	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @since 6.2.4
+	 * @version 6.4.4
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
-			'type' => 'text',
-			'text' => __( 'Fiche ', 'digirisk' ) . Group_Class::g()->element_prefix,
+			'type'  => 'text',
+			'text'  => __( 'Fiche ', 'digirisk' ) . Group_Class::g()->element_prefix,
 			'title' => __( 'Les fiches de groupement', 'digirisk' ),
-			'parent_class' => 'gp button red uppercase',
 		);
 
 		return $list_tab;

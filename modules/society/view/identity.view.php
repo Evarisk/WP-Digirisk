@@ -7,7 +7,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -35,5 +35,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php else : ?>
 		<span title="<?php echo esc_attr( $element->title ); ?>"><?php echo esc_html( $element->title ); ?></span>
 	<?php endif; ?>
-
 </span>

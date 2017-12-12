@@ -35,13 +35,13 @@ class Accident_Travail_Stopping_Day_Action {
 	 * Sauvegardes un "stopping day".
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @return void
 	 */
 	public function callback_save_stopping_day() {
 		$accident_stopping_days = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
-		$accident_id = ! empty( $_POST['accident_id'] ) ? (int) $_POST['accident_id'] : 0;
+		$accident_id            = ! empty( $_POST['accident_id'] ) ? (int) $_POST['accident_id'] : 0;
 
 		if ( empty( $accident_id ) ) {
 			wp_send_json_error();
@@ -68,10 +68,10 @@ class Accident_Travail_Stopping_Day_Action {
 			'accident' => $accident,
 		) );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'accident',
+			'namespace'        => 'digirisk',
+			'module'           => 'accident',
 			'callback_success' => 'editedStoppingDaySuccess',
-			'view' => ob_get_clean(),
+			'view'             => ob_get_clean(),
 		) );
 	}
 

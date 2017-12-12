@@ -1,37 +1,41 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier de gestion des actions pour l'export des données de Digirisk / File managing actions for digirisk datas export
+ * Gestion de l'export des données de DigiRisk.
  *
- * @author Alexandre Techer <dev@evarisk.com>
- * @version 6.1.5.5
- * @copyright 2015-2016 Evarisk
- * @package export_import
- * @subpackage shortcode
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.1.9
+ * @version 6.4.1
+ * @copyright 2015-2017
+ * @package DigiRisk
  */
 
+namespace digi;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Classe de gestion des actions pour l'export des données de Digirisk / Class for managing actions for digirisk datas export
- *
- * @author Alexandre Techer <dev@evarisk.com>
- * @version 6.1.5.5
- * @copyright 2015-2016 Evarisk
- * @package export_import
- * @subpackage shortcode
+ * Gestion de l'export des données de DigiRisk.
  */
 class Export_Action {
 
+	/**
+	 * Initialise l'action 'wp_ajax_digi_export_data'
+	 *
+	 * @since 6.1.9
+	 * @version 6.4.1
+	 */
 	public function __construct() {
-		/** Enqueue les javascripts pour l'administration / Enqueue scripts into backend */
-
-		/** Ecoute l'événement ajax d'export des données / Listen ajax event for datas export */
 		add_action( 'wp_ajax_digi_export_data', array( $this, 'callback_export_data' ) );
 
 	}
 
 	/**
-	 * Fonction de rappel pour l'export des données / Callback function for exporting datas
+	 * Fonction de rappel pour l'export des données
+	 *
+	 * @since 6.1.9
+	 * @version 6.1.9
 	 */
 	public function callback_export_data() {
 		check_ajax_referer( 'digi_export_data' );

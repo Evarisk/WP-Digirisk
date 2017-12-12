@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -87,14 +87,14 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * Appelle la méthode "display_form"
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @param  mixed $element Les données de la société.
 	 * @return void
 	 */
 	public function display( $element ) {
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
-			'element' => $element,
+			'element'    => $element,
 			'element_id' => $element->id,
 		) );
 

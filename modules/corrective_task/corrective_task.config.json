@@ -1,7 +1,7 @@
 {
 	"name": "Tache corrective",
 	"slug": "corrective_task",
-	"version": "6.3.3",
+	"version": "6.4.4",
 	"description": "Le module gérant les tâches correctives",
 	"path": "modules/corrective_task/",
 	"dependencies": {

@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "DUER" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.4.4
  */
 
 window.eoxiaJS.digirisk.DUER = {};
@@ -164,6 +164,18 @@ window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response 
 
 window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
 
+/**
+ * Lors de la fermeture de la popup qui génère le DUER.
+ *
+ * @since 6.0.0
+ * @version 6.4.4
+ *
+ * @param  {HTMLSpanElement} element L'élément déclencheur de l'action.
+ * @param  {ClickEvent} event        L'état de la souris
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
-	jQuery( '.digirisk-wrap .button[data-action="digi_list_duer"]' ).click();
+	if ( jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ) ) {
+		jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ).click();
+	}
 };

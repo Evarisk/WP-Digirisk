@@ -2,7 +2,7 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  */
 
 window.eoxiaJS.digirisk.installer = {};
@@ -93,7 +93,7 @@ window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
@@ -104,7 +104,7 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
 	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
 
-	window.eoxiaJS.loader.display( jQuery( '.wpdigi-installer a' ) );
+	window.eoxiaJS.loader.display( jQuery( '.wpdigi-installer a.end-install' ) );
 
 	window.eoxiaJS.digirisk.installer.requestInstallComponent();
 };

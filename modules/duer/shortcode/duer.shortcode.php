@@ -25,7 +25,7 @@ class DUER_Shortcode {
 	 * Le constructeur
 	 */
 	public function __construct() {
-		add_shortcode( 'digi_list_duer', array( $this, 'callback_digi_list_duer' ) );
+		add_shortcode( 'digi-list-duer', array( $this, 'callback_digi_list_duer' ) );
 	}
 
 	/**

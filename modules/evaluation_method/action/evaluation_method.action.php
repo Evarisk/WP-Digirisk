@@ -46,6 +46,9 @@ class evaluation_method_action {
 	/**
 	* Appelle la méthode get_scale pour avoir le niveau de l'évaluation
 	*
+	* @since 6.0.0
+	* @version 6.4.4
+	*
 	* array $_POST['list_variable'] La liste des valeurs de la méthode d'évaluation
 	* @param array $_POST Les données envoyées par le formulaire
 	*
@@ -65,7 +68,8 @@ class evaluation_method_action {
 		$scale = scale_util::get_scale( $equivalence );
 		wp_send_json_success( array(
 			'equivalence' => $equivalence,
-			'scale' => $scale
+			'scale' => $scale,
+			'callback_success' => 'gettedScale',
 		) );
 	}
 }

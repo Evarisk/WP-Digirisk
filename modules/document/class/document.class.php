@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -121,7 +121,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément
 	 *
 	 * @since 6.1.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents.
 	 * @return array                      Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants.
@@ -166,10 +166,10 @@ class Document_Class extends \eoxia\Post_Class {
 			$upload_dir = wp_upload_dir();
 
 			$model_id               = $query->posts[0];
-			$attachment_file_path   = get_attached_file( $model_id );
+			$attachment_file_path   = str_replace( '\\', '/', get_attached_file( $model_id ) );
 			$response['model_id']   = $model_id;
 			$response['model_path'] = str_replace( '\\', '/', $attachment_file_path );
-			$response['model_url']  = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $attachment_file_path );
+			$response['model_url']  = str_replace( str_replace( '\\', '/', $upload_dir['basedir'] ), str_replace( '\\', '/', $upload_dir['baseurl'] ), $attachment_file_path );
 
 			// translators: Pour exemple: Le modèle utilisé est: C:\wamp\www\wordpress\wp-content\plugins\digirisk-alpha\core\assets\document_template\document_unique.odt.
 			$response['message'] = sprintf( __( 'Le modèle utilisé est: %1$s', 'digirisk' ), $attachment_file_path );
@@ -182,7 +182,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Création d'un fichier odt a partir d'un modèle de document donné et d'un modèle de donnée
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 *
 	 * @param string $model_path       Le chemin vers le fichier modèle a utiliser pour la génération.
 	 * @param array  $document_content Un tableau contenant le contenu du fichier à écrire selon l'élément en cours d'impression.
@@ -197,10 +197,10 @@ class Document_Class extends \eoxia\Post_Class {
 			'link'    => '',
 		);
 
-		require_once( PLUGIN_DIGIRISK_PATH . '/core/external/odtPhpLibrary/odf.php' );
+		require_once PLUGIN_DIGIRISK_PATH . '/core/external/odtPhpLibrary/odf.php';
 
 		$digirisk_directory = $this->get_digirisk_dir_path();
-		$document_path = $digirisk_directory . '/' . $document_name;
+		$document_path      = $digirisk_directory . '/' . $document_name;
 
 		$config = array(
 			'PATH_TO_TMP' => $digirisk_directory . '/tmp',
@@ -234,9 +234,9 @@ class Document_Class extends \eoxia\Post_Class {
 
 		// Dans le cas ou le fichier a bien été généré, on met a jour les informations dans la base de données.
 		if ( is_file( $document_path ) ) {
-			$response['status'] = true;
+			$response['status']  = true;
 			$response['success'] = true;
-			$response['link'] = $document_path;
+			$response['link']    = $document_path;
 		}
 
 		return $response;
@@ -297,33 +297,44 @@ class Document_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Renvoies le chemin vers l'ODT.
+	 * Renvoies le chemin HTTP vers l'ODT.
 	 *
 	 * @since 6.0.0
-	 * @version 6.0.0
+	 * @version 6.4.4
+	 *
 	 * @param  Object $element Le modèle (objet) ODT.
-	 * @return string          Le chemin vers l'ODT.
+	 *
+	 * @return string          Le chemin HTTP vers l'ODT.
 	 */
 	public function get_document_path( $element ) {
-		$path = '';
+		$url = '';
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
-			$path = $this->get_digirisk_dir_path( 'baseurl' ) . "/";
+			$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
+			$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
+			$url     = $baseurl . "/";
 
 			if ( ! empty( $element->parent_id ) && ! empty( $element->mime_type ) ) {
 				$society = Society_Class::g()->show_by_type( $element->parent_id );
-				$path .= "/" . $society->type . "/" . $society->id . "/";
+				$url .= "/" . $society->type . "/" . $society->id . "/";
 			}
-			$path .= $element->title;
+			$url .= $element->title;
 			if ( ! empty( $element->mime_type ) ) {
-				$path .= $this->mime_type_link[ $element->mime_type ];
+				$url .= $this->mime_type_link[ $element->mime_type ];
 			}
 
+			$path = str_replace( $baseurl, $basedir, $url );
+
 			if ( empty( $element->mime_type ) ) {
-				$path = '';
+				$url = '';
+			}
+
+			if ( ! file_exists( $path ) ) {
+				$url = '';
 			}
 		}
-		return $path;
+
+		return $url;
 	}
 
 	/**

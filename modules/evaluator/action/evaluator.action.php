@@ -3,16 +3,17 @@
  * Les actions relatives aux évaluateurs
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.10.0
+ * @since 6.0.0
+ * @version 6.2.10
  * @copyright 2015-2017 Evarisk
- * @package evaluator
- * @subpackage action
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux évaluateurs
@@ -37,8 +38,8 @@ class Evaluator_Action {
 	/**
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
-	 * @since 1.0
-	 * @version 6.2.10.0
+	 * @since 6.0.0
+	 * @version 6.2.10
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
@@ -135,8 +136,8 @@ class Evaluator_Action {
 	/**
 	 * Dissocies un evaluateur de id (Passes le status de l'affectation en "deleted")
 	 *
-	 * @since 1.0
-	 * @version 6.2.10.0
+	 * @since 6.0.0
+	 * @version 6.2.10
 	 */
 	public function callback_detach_evaluator() {
 		check_ajax_referer( 'detach_evaluator' );
@@ -192,13 +193,13 @@ class Evaluator_Action {
 	}
 
 	/**
-	* Fait le rendu de l'utilisateur selon l'élement ID et la page
-	*
-	* int $_POST['element_id'] L'ID de l'élement affecté par la pagination
-	* int $_POST['next_page'] La page de la pagination
-	*
-	* @param array $_POST Les données envoyées par le formulaire
-	*/
+	 * Fait le rendu de l'utilisateur selon l'élement ID et la page
+	 *
+	 * int $_POST['element_id'] L'ID de l'élement affecté par la pagination
+	 * int $_POST['next_page'] La page de la pagination
+	 *
+	 * @param array $_POST Les données envoyées par le formulaire
+	 */
 	public function callback_paginate_evaluator() {
 		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 
@@ -218,11 +219,11 @@ class Evaluator_Action {
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
 	 * @return void
 	 *
-	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.4
 	 */
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element = Society_Class::g()->show_by_type( $id );
+		$element                 = Society_Class::g()->show_by_type( $id );
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 
 		if ( ! empty( $list_affected_evaluator ) ) {
@@ -238,14 +239,15 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
-			'element' => $element,
-			'element_id' => $element->id,
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
+			'element'                 => $element,
+			'element_id'              => $element->id,
 			'list_affected_evaluator' => $list_affected_evaluator,
 		) );
 
 		wp_send_json_success( array(
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
+			'callback_success' => 'searchedDisplayedEvaluatorAffected',
 		) );
 	}
 
@@ -256,8 +258,8 @@ class Evaluator_Action {
 	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
 	 * @return void
 	 *
-	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.4.4
 	 */
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
 		$element = Society_Class::g()->show_by_type( $id );
@@ -274,9 +276,8 @@ class Evaluator_Action {
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( Evaluator_Class::g()->get( $args_where_evaluator ) );
-
-		$number_page = ceil( $count_evaluator / Evaluator_Class::g()->limit_evaluator );
+		$count_evaluator                = count( Evaluator_Class::g()->get( $args_where_evaluator ) );
+		$number_page                    = ceil( $count_evaluator / Evaluator_Class::g()->limit_evaluator );
 
 		if ( ! empty( $evaluators ) ) {
 			foreach ( $evaluators as $key => $evaluator ) {
@@ -288,14 +289,15 @@ class Evaluator_Action {
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-to-assign', array(
-			'element' => $element,
-			'element_id' => $element->id,
+			'element'      => $element,
+			'element_id'   => $element->id,
 			'current_page' => $current_page,
-			'number_page' => $number_page,
-			'evaluators' => $evaluators,
+			'number_page'  => $number_page,
+			'evaluators'   => $evaluators,
 		) );
 		wp_send_json_success( array(
 			'template' => ob_get_clean(),
+			'callback_success' => 'searchedDisplayedEvaluatorToAffect'
 		) );
 	}
 }

@@ -110,12 +110,15 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 			$per_page = $this->limit_risk;
 		}
 
+		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'DESC';
+
 		$args_where = array(
 			'post_status' => array( 'publish' ),
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
 			'meta_key' => '_wpdigi_equivalence',
 			'orderby' => 'meta_value_num',
+			'order' => $order_type,
 			'meta_query' => array(
 				array(
 					'key' => '_wpdigi_preset',
@@ -128,9 +131,8 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$risk_list = Risk_Class::g()->get( $args_where );
 
 		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
-		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'asc';
 		$url_ref_order = '&order_key=equivalence&order_type=';
-		$url_ref_order .= ( 'asc' === $order_type ) ? 'desc' : 'asc';
+		$url_ref_order .= ( 'ASC' === $order_type ) ? 'DESC' : 'ASC';
 
 		if ( ! empty( $risk_list ) ) {
 			foreach ( $risk_list as $key => $element ) {

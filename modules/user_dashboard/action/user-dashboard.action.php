@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -24,8 +24,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * Le constructeur appelle les actions suivantes:
 	 * admin_menu (Pour déclarer le sous menu dans le menu utilisateur de WordPress)
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	protected function construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ) );
@@ -39,8 +39,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Créer la page "Digirisk" dans le menu "Utilisateurs" de WordPress
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function callback_admin_menu() {
 		add_users_page( __( 'Utilisateurs DigiRisk', 'digirisk' ), __( 'Utilisateurs DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-users', array( $this, 'callback_users_page' ) );
@@ -51,8 +51,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function callback_users_page() {
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'main' );
@@ -64,7 +64,7 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 */
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
@@ -76,11 +76,12 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 		ob_start();
 		User_Dashboard_Class::g()->display_list_user();
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'userDashboard',
+			'namespace'        => 'digirisk',
+			'module'           => 'userDashboard',
 			'callback_success' => 'savedUserSuccess',
-			'template' => ob_get_clean(),
-			'error' => $error,
+			'template'         => ob_get_clean(),
+			'error'            => $error,
+			'object'           => $update_state,
 		) );
 	}
 
@@ -89,8 +90,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.2.9
 	 */
 	public function ajax_load_user() {
 		check_ajax_referer( 'ajax_load_user' );
@@ -119,8 +120,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.9.0
+	 * @since 6.0.0
+	 * @version 6.2.9
 	 */
 	public function ajax_delete_user() {
 		check_ajax_referer( 'ajax_delete_user' );
@@ -144,8 +145,8 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function ajax_save_domain_mail() {
 		check_ajax_referer( 'save_domain_mail' );

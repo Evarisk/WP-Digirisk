@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.10
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -38,19 +38,19 @@ class Recommendation_Filter {
 	 * @return array              La liste des onglets et ceux ajoutés par cette méthode.
 	 *
 	 * @since 6.2.10
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['recommendation'] = array(
-			'type' => 'text',
-			'text' => __( 'Signalisations', 'digirisk' ),
+			'type'  => 'text',
+			'text'  => __( 'Signalisations', 'digirisk' ),
 			'title' => __( 'Les signalisations', 'digirisk' ),
 		);
 
 		$list_tab['digi-group']['recommendation'] = array(
-			'type' => 'text',
-			'text' => __( 'Signalisations', 'digirisk' ),
-			'title' => __( 'Les signalisation', 'digirisk' ),
+			'type'  => 'text',
+			'text'  => __( 'Signalisations', 'digirisk' ),
+			'title' => __( 'Les signalisations', 'digirisk' ),
 		);
 
 		return $list_tab;

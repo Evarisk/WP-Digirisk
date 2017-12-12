@@ -3,14 +3,14 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 4.9.0
-Stable tag: 6.4.3
+Tested up to: 4.9.1
+Stable tag: 6.4.4
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
 == Description ==
 
-Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le Document Unique de votre entreprise. Associé à la puissance de WordPres MU, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...
+Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le Document Unique de votre entreprise. Associé à la puissance de WordPress MU, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...
 Digirisk permet aussi la gestion des données liées à la sécurité de votre personnel tel que :
 -La gestion des EPIs
 -L'historique des causeries sécurité
@@ -74,6 +74,15 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 6.4.4 =
+
+Corrections
+
+* 13388 - Remise en place des DUER sous les GP. L'onglet s'appelle "Liste des risques" pour le moment.
+* 13286 - Remise en place du trie par cotation dans la page risque.
+* 12533 - Remise en place de la fonctionnalité d'exportation/importation.
+* 13744 - Remise en place de l'affichage des anciens fichier générés corrompues.
 
 = Version 6.4.3 =
 

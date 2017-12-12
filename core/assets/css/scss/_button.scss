@@ -110,6 +110,12 @@
 				background: darken($secondary, 20%);
 			}
 		}
+		&.purple {
+			background: $purple;
+			&:hover {
+				background: darken($purple, 10%);
+			}
+		}
 		&.light {
 			background: none;
 			color: rgba(0, 0, 0, 0.3);

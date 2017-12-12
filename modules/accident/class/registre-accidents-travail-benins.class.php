@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
+ * @version 6.4.4
  * @copyright 2015-2017
  * @package DigiRisk
  */
@@ -39,7 +39,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale du modèle
@@ -147,20 +147,20 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 */
 	public function generate( $main_society ) {
 		$address = Society_Class::g()->get_address( $main_society );
 		$address = $address[0];
 
 		$sheet_details = array(
-			'ref' => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
+			'ref'           => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
 			'raisonSociale' => $main_society->title,
-			'adresse' => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone' => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
-			'siret' => $main_society->siret_id,
-			'email' => $main_society->contact['email'],
-			'effectif' => $main_society->number_of_employees,
+			'adresse'       => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
+			'telephone'     => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
+			'siret'         => $main_society->siret_id,
+			'email'         => $main_society->contact['email'],
+			'effectif'      => $main_society->number_of_employees,
 		);
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
@@ -174,11 +174,11 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 		}, $sheet_details_log );
 
 		\eoxia\LOG_Util::log( $sheet_details_log, 'digirisk' );
-		$document_creation_response = $this->create_document( $main_society, array( 'accidents_benin' ), $sheet_details );
+		$document_creation_response = $this->create_document( $main_society, array( 'registre_accidents_travail_benins' ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,
-			'success' => true,
+			'success'           => true,
 		);
 	}
 
@@ -188,11 +188,12 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array Les accidents
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.0
+	 * @version 6.4.4
 	 */
 	public function set_accidents() {
 		$accidents = Accident_Class::g()->get( array(
 			'posts_per_page' => -1,
+			'order'          => 'ASC',
 		) );
 
 		$accident_details = array(
