@@ -4,14 +4,16 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.2.3
- * @version 6.3.0
+ * @version 6.4.4
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Gestion des actions des champs de recherche.
@@ -20,8 +22,11 @@ class Search_Action {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 6.2.3
+	 * @version 6.2.3
 	 */
-	function __construct() {
+	public function __construct() {
 		add_action( 'wp_ajax_digi_search', array( $this, 'callback_digi_search' ) );
 	}
 
@@ -32,7 +37,7 @@ class Search_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.0
+	 * @version 6.4.4
 	 */
 	public function callback_digi_search() {
 		$list = Search_Class::g()->search( $_GET );
@@ -44,12 +49,12 @@ class Search_Action {
 		$return = array();
 
 		foreach ( $list as $element ) {
-			$user = User_Digi_Class::g()->get( array( 'include' => array( $element ) ) );
-			$user = $user[0];
+			$user     = User_Digi_Class::g()->get( array( 'include' => array( $element ) ) );
+			$user     = $user[0];
 			$return[] = array(
-				'label' => $user->login . ' (' . $user->email . ')',
-				'value' => $user->login,
-				'id'		=> $user->id,
+				'label' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
+				'value' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
+				'id'    => $user->id,
 			);
 		}
 

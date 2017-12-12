@@ -1,3 +1,9 @@
+/**
+ * Initialise l'objet "search" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
+ *
+ * @since 6.0.0
+ * @version 6.4.4
+ */
 window.eoxiaJS.digirisk.search = {};
 
 window.eoxiaJS.digirisk.search.init = function() {
@@ -17,8 +23,8 @@ window.eoxiaJS.digirisk.search.renderChanged = function() {
  *
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.search.event = function() {
 	/**
@@ -36,7 +42,8 @@ window.eoxiaJS.digirisk.search.event = function() {
 			'&class=' + jQuery( element ).data( 'class' ) +
 			'&id=' + jQuery( element ).data( 'id' ) +
 			'&type=' + jQuery( element ).data( 'type' ),
-			'minLength': 0
+			'minLength': 0,
+			'delay': 15
 		};
 
 		if ( jQuery( element ).data( 'target' ) ) {
