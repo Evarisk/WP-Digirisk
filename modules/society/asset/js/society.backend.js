@@ -103,7 +103,7 @@ window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredEleme
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.3.0
+ * @version 6.4.4
  */
 window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
@@ -114,4 +114,6 @@ window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredE
 	}
 
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
+
+	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
 };
