@@ -75,13 +75,29 @@ class Update_Manager_Action {
 	 * AJAX Callback - Return the website url
 	 */
 	public function callback_digi_redirect_to_dashboard() {
+		$error_version = ! empty( $_POST['error_version'] ) ? sanitize_text_field( $_POST['error_version'] ) : '';
+		$error_status  = ! empty( $_POST['error_status'] ) ? sanitize_text_field( $_POST['error_status'] ) : '';
+		$error_text    = ! empty( $_POST['error_text'] ) ? sanitize_text_field( $_POST['error_text'] ) : '';
+
+		if ( ! empty( $error_version ) ) {
+			\eoxia\LOG_Util::log( apply_filters( 'digi_update_redirect_to_dashboard', 'FIN - Mise à jour ' . $error_version, $error_version, $error_status, $error_text ), 'digirisk' );
+		}
+
+		\eoxia\LOG_Util::log( 'mise à jour end', 'digirisk' );
+
 		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
 		if ( 3 === strlen( $version ) ) {
 			$version *= 10;
 		}
 		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
 		delete_option( '_digi_waited_updates' );
-		wp_die( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) );
+
+		$data = apply_filters( 'digi_redirect_to_dashboard_data', array(
+			'url'     => admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ),
+			'message' => __( 'Redirection vers l\'application DigiRisk', 'digirisk' ),
+		) );
+
+		wp_send_json_success( $data );
 	}
 
 }

@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe gérant les mises à jour de DigiRisk.
+ * Classe gérant les mises à jour.
  *
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.2.7
+ * @version 6.2.7
+ * @copyright 2015-2017 Evarisk
  * @package DigiRisk
- * @subpackage Module/Update_Manager
- *
- * @since 6.2.8.0
- * @version 6.2.8.0
  */
 
 namespace digi;
@@ -20,8 +20,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Update_Manager extends \eoxia\Singleton_Util {
 
+	/**
+	 * Constructeur obligatoire pour Singleton_Util
+	 *
+	 * @since 6.2.7
+	 * @version 6.2.7
+	 *
+	 * @return void
+	 */
 	protected function construct() {}
 
+	/**
+	 * Récupères les mises à jour en attente et appel la vue "main" du module "update_manager".
+	 *
+	 * @since 6.2.7
+	 * @version 6.2.7
+	 *
+	 * @return void
+	 */
 	public function display() {
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
 		\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'main', array(
