@@ -73,7 +73,8 @@ class Accident_Action {
 
 		// Associations des images.
 		if ( ! empty( $signature_of_the_caregiver ) ) {
-			$encoded_image = explode( ',', $signature_of_the_caregiver )[1];
+			$encoded_image = explode( ',', $signature_of_the_caregiver );
+			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
 			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
@@ -81,7 +82,8 @@ class Accident_Action {
 		}
 
 		if ( ! empty( $signature_of_the_victim ) ) {
-			$encoded_image = explode( ',', $signature_of_the_victim )[1];
+			$encoded_image = explode( ',', $signature_of_the_victim );
+			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
 			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
