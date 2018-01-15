@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.4.5
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -97,8 +97,8 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.4.5
 	 */
 	public function get_element_tree_risk( $element ) {
 		$risks_in_tree = array();
@@ -106,12 +106,26 @@ class Group_Class extends \eoxia\Post_Class {
 		$risks_in_tree = $this->build_risk_list_for_export( $element );
 
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
-		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
+		$group_list = self::g()->get( array(
+			'posts_per_page' => -1,
+			'post_parent'    => $element->id,
+			'post_status'    => array( 'publish', 'draft' ),
+			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+			'meta_key'       => '_wpdigi_unique_key',
+		) );
+
 		foreach ( $group_list as $group ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->get_element_tree_risk( $group ) );
 		}
 
-		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
+		$work_unit_list = Workunit_Class::g()->get( array(
+			'posts_per_page' => -1,
+			'post_parent'    => $element->id,
+			'post_status'    => array( 'publish', 'draft' ),
+			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+			'meta_key'       => '_wpdigi_unique_key',
+		) );
+
 		foreach ( $work_unit_list as $workunit ) {
 			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit ) );
 		}
@@ -126,8 +140,8 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @param string $tabulation ?.
 	 * @param array  $extra_params ?.
 	 *
-	 * @since 0.1
-	 * @version 6.2.8.0
+	 * @since 6.0.0
+	 * @version 6.4.5
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();
@@ -143,13 +157,27 @@ class Group_Class extends \eoxia\Post_Class {
 			}
 		}
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
-		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id , 'post_status' => array( 'publish', 'draft', ), ), false );
+		$group_list = self::g()->get( array(
+			'posts_per_page' => -1,
+			'post_parent'    => $element->id,
+			'post_status'    => array( 'publish', 'draft' ),
+			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+			'meta_key'       => '_wpdigi_unique_key',
+		) );
+
 		foreach ( $group_list as $group ) {
 			$element_children = array_merge( $element_children, $this->get_element_sub_tree( $group, $tabulation . '-', $extra_params ) );
 		}
 
 		$tabulation = $tabulation . '-';
-		$work_unit_list = workunit_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+
+		$work_unit_list = Workunit_Class::g()->get( array(
+			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+			'meta_key'       => '_wpdigi_unique_key',
+			'posts_per_page' => -1,
+			'post_parent'    => $element->id,
+			'post_status'    => array( 'publish', 'draft' ),
+		) );
 		foreach ( $work_unit_list as $workunit ) {
 			$workunit_definition[ $workunit->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $workunit->unique_identifier . ' - ' . $workunit->title, );
 
@@ -181,30 +209,37 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @param integer $element_id L'ID de l'élement parent.
 	 * @param array   $list_id La liste des ID.
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.4.5
 	 */
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
-		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id , 'post_status' => array( 'publish', 'draft', ), ) );
+		$group_list = self::g()->get( array(
+			'posts_per_page' => -1,
+			'post_parent'    => $element_id,
+			'post_status'    => array( 'publish', 'draft' ),
+			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+			'meta_key'       => '_wpdigi_unique_key',
+		) );
+
 		if ( ! empty( $group_list ) ) {
 			foreach ( $group_list as $group ) {
 				$list_id[] = array( 'id' => $group->id, 'workunit' => array() );
 				// $list_id[count($list_id) - 1] = array();
 				// $list_id[count($list_id) - 1]['workunit'] = array();
-				$work_unit_list = workunit_class::g()->get( array( 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ), 'posts_per_page' => -1, 'post_parent' => $group->id, 'post_status' => array( 'publish', 'draft', ), ), false );
+				$work_unit_list = Workunit_Class::g()->get( array(
+					'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
+					'meta_key'       => '_wpdigi_unique_key',
+					'posts_per_page' => -1,
+					'post_parent'    => $group->id,
+					'post_status'    => array( 'publish', 'draft' ),
+				) );
+
 				foreach ( $work_unit_list as $workunit ) {
-					$list_id[ (count( $list_id ) - 1) ]['workunit'][]['id'] = $workunit->id;
+					$list_id[ ( count( $list_id ) - 1 ) ]['workunit'][]['id'] = $workunit->id;
 				}
 				$list_id = $this->get_element_sub_tree_id( $group->id, $list_id );
 			}
 		}
-		else {
-			$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element_id, 'post_status' => array( 'publish', 'draft', ), ), false );
-			foreach ( $work_unit_list as $workunit ) {
-				// $list_id[count($list_id) - 1 == -1 ? 0 : count($list_id) - 1]['workunit'][]['id'] = $workunit->id;
-			}
-		}
-
 
 		return $list_id;
 	}
