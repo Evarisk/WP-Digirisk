@@ -3,16 +3,17 @@
  * La popup qui contient les données de l'évaluation complexe de digirisk
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.6.0
- * @copyright 2015-2017 Evarisk
- * @package evaluation_method
- * @subpackage view
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="popup popup-evaluation">
 	<div class="container">

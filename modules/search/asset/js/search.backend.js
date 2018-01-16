@@ -48,7 +48,7 @@ window.eoxiaJS.digirisk.search.event = function() {
 
 		if ( jQuery( element ).data( 'target' ) ) {
 			listOption.search = function( event, ui ) {
-				jQuery( '.' + jQuery( element ).data( 'target' ) ).addClass( 'loading' );
+				window.eoxiaJS.loader.display( jQuery( '.' + jQuery( element ).data( 'target' ) ) );
 			};
 
 			listOption.response = function( event, response ) {
@@ -58,6 +58,10 @@ window.eoxiaJS.digirisk.search.event = function() {
 			listOption.open = function( event, ui ) {
 				jQuery( element ).autocomplete( 'close' );
 			};
+		} else {
+			// listOption.search = function( event, ui ) {
+			// 	window.eoxiaJS.loader.display( jQuery( this ) );
+			// }
 		}
 
 		if ( jQuery( element ).data( 'field' ) ) {

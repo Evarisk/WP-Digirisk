@@ -25,6 +25,9 @@ class Update_630 {
 
 	/**
 	 * AJAX Callback - Assign capability to site administrator
+	 *
+	 * @since 6.3.0
+	 * @version 6.5.0
 	 */
 	public function callback_digirisk_update_create_society() {
 		$done = true;
@@ -43,10 +46,10 @@ class Update_630 {
 		}
 
 		$groups = Group_Class::g()->get( array(
-			'posts_per_page' => 1,
-			'post_parent' => 0,
-			'orderby' => 'ID',
-			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post_parent'    => 0,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
 		) );
 
 		if ( empty( $groups ) ) {
@@ -71,7 +74,7 @@ class Update_630 {
 		if ( ! empty( $groups ) ) {
 			foreach ( $groups as $group ) {
 				Group_Class::g()->update( array(
-					'id' => $group->id,
+					'id'        => $group->id,
 					'parent_id' => $society->id,
 				) );
 			}

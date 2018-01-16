@@ -5444,7 +5444,7 @@
   margin: 0;
   width: 100%;
   font-size: 14px;
-  background: transparent; }
+  background-color: transparent; }
 
 .digirisk-wrap .form input:focus ~ .bar, .digirisk-wrap .form textarea:focus ~ .bar {
   width: 100%; }
@@ -6270,3 +6270,6 @@
   /* Internet explorer depuis la version 10 et Edge */
   user-select: none;
   /* Propriété standard */ }
+
+.digirisk-wrap .red {
+  color: red; }

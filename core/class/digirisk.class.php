@@ -42,10 +42,10 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.4
+	 * @version 6.5.0
 	 */
 	public function display( $id = 0 ) {
-		require( PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php' );
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php';
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 		}
 
 		return array(
-			'status' => is_wp_error( $json ) ? false : true,
+			'status'  => is_wp_error( $json ) ? false : true,
 			'content' => $result,
 		);
 	}

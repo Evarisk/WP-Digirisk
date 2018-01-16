@@ -33,9 +33,10 @@ class Update_631 {
 	}
 
 	/**
+	 * Met à jour l'équivalence de TOUS les risques.
 	 *
 	 * @since 6.3.1
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function callback_digirisk_update_risk_equivalence() {
 		$done = false;
@@ -56,11 +57,14 @@ class Update_631 {
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
 
+				\eoxia\LOG_Util::log( 'callback_digirisk_update_risk_equivalence: ' . $risk->id . ' => ' . wp_json_encode( $risk->evaluation->risk_level ), 'digirisk' );
+
 				$risk->evaluation->equivalence = $risk->evaluation->risk_level['equivalence'];
 				Risk_Evaluation_Class::g()->update( $risk->evaluation );
 
 				$risk->current_equivalence = $risk->evaluation->equivalence;
 				Risk_Class::g()->update( $risk );
+				\eoxia\LOG_Util::log( 'callback_digirisk_update_risk_equivalence: ' . $risk->id . ' => ' . $risk->current_equivalence, 'digirisk' );
 			}
 		}
 
