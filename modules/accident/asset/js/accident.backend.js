@@ -85,7 +85,7 @@ window.eoxiaJS.digirisk.accident.clearCanvas = function( event ) {
 window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
 	var accidentRow = jQuery( this ).closest( '.col' );
 
-	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
+	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
 		accidentRow.find( '.action-input' ).removeClass( 'disable' ).addClass( 'blue' );
 	} else {
 		accidentRow.find( '.action-input' ).removeClass( 'blue' ).addClass( 'disable' );
@@ -254,8 +254,8 @@ window.eoxiaJS.digirisk.accident.checkDataBeforeAdd = function( element ) {
 		return false;
 	}
 
-	if ( '' === accidentRow.find( 'input[name="to_element_id"]' ).val() ) {
-		accidentRow.find( 'input[name="to_element_id"]' ).closest( '.tooltip' ).addClass( 'active' );
+	if ( '' === accidentRow.find( 'input[name="accident[parent_id]"]' ).val() ) {
+		accidentRow.find( 'input[name="accident[parent_id]"]' ).closest( '.tooltip' ).addClass( 'active' );
 		return false;
 	}
 

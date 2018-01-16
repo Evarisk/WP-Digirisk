@@ -3,22 +3,23 @@
  * Affiches les contenu d'un onglet de type toggle
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package tab
- * @subpackage view
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<li class="tab-element toggle option" data-parent="toggle" data-target="content">
-	<i class="action fa fa-ellipsis-v toggle"></i>
-	<ul class="content">
+<li class="tab-element wpeo-dropdown" data-parent="toggle" data-target="content">
+	<div class="dropdown-toggle "><i class="icon fa fa-ellipsis-v"></i></div>
+	<ul class="dropdown-content">
 		<?php foreach ( $element['items'] as $key => $sub_element ) : ?>
-			<li class="tab-element <?php echo esc_attr( ! empty( $sub_element['parent_class'] ) ? $sub_element['parent_class'] : '' ); ?>"
+			<li class="dropdown-item action-delete"
 					data-action="<?php echo esc_attr( ! empty( $sub_element['action'] ) ? $sub_element['action'] : 'digi-' . esc_attr( $key ) ); ?>"
 					data-target="main-content"
 					<?php echo esc_attr( ! empty( $sub_element['nonce'] ) ? 'data-nonce=' . wp_create_nonce( $sub_element['nonce'] ) : '' ); ?>
