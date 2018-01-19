@@ -1,0 +1,24 @@
+@keyframes noFileAdd {
+  0, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% { transform: scale3d(1, 1, 1); }
+  20% { transform: scale3d(1.4, 1.4, 1.4); }
+  40% { transform: scale3d(.9, .9, .9); }
+  60% { transform: scale3d(1.2, 1.2, 1.2); }
+  80% { transform: scale3d(.97, .97, .97); }
+  to { transform: scale3d(1, 1, 1); }
+}
+
+
+@keyframes fileAdd {
+  0, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+  20% { transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4); }
+  40% { transform: translate(-50%, -50%) scale3d(.9, .9, .9); }
+  60% { transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2); }
+  80% { transform: translate(-50%, -50%) scale3d(.97, .97, .97); }
+  to { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+}

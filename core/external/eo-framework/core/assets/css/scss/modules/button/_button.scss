@@ -1,0 +1,398 @@
+/*--------------------------------------------------------------
+	Module : Button
+	Version : 1.2.0
+
+ * Les boutons se forment grâce à leurs classes CSS
+ * .button -> classe de base pour un bouton
+ * 		.primary
+ * 		.light
+ * 		.dark
+ * 		.red
+ * 		.yellow
+ * 		.blue
+ * 		.green
+ * .bordered -> Change l'affichage du bouton. Fonctionne avec les même couleurs
+ * .strong -> texte en gras
+ * .uppercase -> texte en majuscule
+ * .float-right -> float right
+ * .float-left -> float left
+ * .square-40 -> bouton carré 40px
+ * .square-50 -> bouton carré 50px
+ * .square-60 -> bouton carré 60px
+ * .margin -> margin haut et bas sur le bouton
+ * .radius-1 -> Arrondis les bords
+ * .radius-3 -> Arrondis les bords
+ * .radius-3 -> Arrondis les bords
+ * .rounded -> bouton en forme de rond
+ * .disable -> désactive les actions sur le bouton
+ * .size-small -> petite taille
+ * .size-large -> grande taille
+ * .progress -> Active le progress button
+ * 		.load -> le bouton affiche une icone de chargement
+ * 		.success -> le bouton affiche une icone succès
+ * 		.error -> Le bouton affiche une icone erreur
+--------------------------------------------------------------*/
+
+.wpeo-button {
+	display: inline-block;
+	border: 0;
+	box-shadow: none;
+	background: none;
+	padding: 6px 14px;
+	vertical-align: middle;
+	height: auto;
+	border-radius: 0;
+	@include transition;
+	position: relative;
+	border-width: 3px;
+	border-style: solid;
+	font-size: 16px;
+
+	background: $color__primary;
+	border-color: $color__primary;
+	color: #fff;
+
+	&:focus, &:visited {
+		color: #fff;
+	}
+	&:hover {
+		color: #fff;
+		box-shadow: inset 0 -2.6em rgba(255,255,255,0.25);
+		cursor: pointer;
+	}
+	&:focus, &:active {
+		outline: none;
+	}
+}
+
+// Bouton plein
+.wpeo-button {
+	/* par défaut */
+	background: $color__primary;
+	border-color: $color__primary;
+	color: $color__primary-text;
+
+	&.button-main {
+		background: $color__primary;
+		border-color: $color__primary;
+		color: $color__primary-text;
+	}
+	&.button-light {
+		background: #fff;
+		border-color: #fff;
+		color: $color__text-main;
+		&:hover {
+			box-shadow: inset 0 -2.6em rgba(0,0,0,0.1);
+			color: $color__text-main;
+		}
+	}
+	&.button-dark {
+		background: $color__dark;
+		border-color: $color__dark;
+	}
+	&.button-grey {
+		background: $color__grey;
+		border-color: $color__grey;
+		color: $color__text-main;
+		&:hover {
+			box-shadow: inset 0 -2.6em rgba(0,0,0,0.1);
+			color: $color__text-main;
+		}
+	}
+	&.button-red {
+		background: $color__red;
+		border-color: $color__red;
+	}
+	&.button-yellow {
+		background: $color__yellow;
+		border-color: $color__yellow;
+	}
+	&.button-blue {
+		background: $color__blue;
+		border-color: $color__blue;
+	}
+	&.button-green {
+		background: $color__green;
+		border-color: $color__green;
+	}
+}
+
+// Bordered
+.wpeo-button.button-bordered {
+	background: none;
+	/* Par defaut */
+	border-color: $color__primary;
+	color: $color__primary;
+
+	&.button-main {
+		border-color: $color__primary;
+		color: $color__primary;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__primary;
+			color: $color__primary-text;
+		}
+	}
+	&.button-light {
+		border-color: #fff;
+		color: #fff;
+		&:hover {
+			box-shadow: inset 0 -2.6em #fff;
+			color: $color__text-main;
+		}
+	}
+	&.button-dark {
+		border-color: $color__dark;
+		color: $color__dark;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__dark;
+		}
+	}
+	&.button-grey {
+		border-color: $color__grey;
+		color: darken($color__grey, 30%);
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__grey;
+			color: $color__text-main;
+		}
+	}
+	&.button-red {
+		border-color: $color__red;
+		color: $color__red;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__red;
+		}
+	}
+	&.button-yellow {
+		border-color: $color__yellow;
+		color: $color__yellow;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__yellow;
+		}
+	}
+	&.button-blue {
+		border-color: $color__blue;
+		color: $color__blue;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__blue;
+		}
+	}
+	&.button-green {
+		border-color: $color__green;
+		color: $color__green;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__green;
+		}
+	}
+
+	&:hover {
+		box-shadow: inset 0 -2.6em $color__primary;
+		color: #fff;
+	}
+}
+
+// Icon
+.wpeo-button {
+	.button-icon.dashicons {
+		line-height: 1.3;
+	}
+	.button-icon, span {
+		@include transition();
+		position: relative;
+	}
+	.button-icon ~ span {
+		margin-left: 10px;
+	}
+	span ~ .button-icon {
+		margin-left: 10px;
+	}
+}
+
+// Strong
+.wpeo-button.button-strong {
+	span {
+		font-weight: 800;
+	}
+}
+
+// Uppercase
+.wpeo-button.button-uppercase {
+	span {
+		text-transform: uppercase;
+		font-size: 14px;
+	}
+}
+
+// Squared
+.wpeo-button[class*="button-square-"] {
+	text-align: center;
+	overflow: hidden;
+	padding: 0;
+}
+.wpeo-button.button-square-40 {
+	width: 40px;
+	height: 40px;
+	line-height: 34px; // ne pas oublier les bordures : 6px
+}
+.wpeo-button.button-square-50 {
+	width: 50px;
+	height: 50px;
+	line-height: 44px; // ne pas oublier les bordures : 6px
+}
+.wpeo-button.button-square-60 {
+	width: 60px;
+	height: 60px;
+	line-height: 54px; // ne pas oublier les bordures : 6px
+}
+
+// Floats
+.wpeo-button {
+	&.button-float-left {
+		float: left;
+	}
+	&.button-float-right {
+		float: right;
+	}
+}
+
+// margin
+.wpeo-button.button-margin {
+	margin: 1em 0;
+}
+
+// radius
+.wpeo-button {
+	&.button-radius-1 {
+		border-radius: 2px;
+	}
+	&.button-radius-2 {
+		border-radius: 4px;
+	}
+	&.button-radius-3 {
+		border-radius: 6px;
+	}
+	&.button-rounded {
+		border-radius: 50%;
+	}
+}
+
+// disable
+.wpeo-button.button-disable {
+	background: $color__grey !important;
+	border-color: $color__grey !important;
+	color: rgba(0,0,0,0.4) !important;
+	pointer-events: none;
+
+	&:hover {
+		box-shadow: none !important;
+	}
+	&.button-event {
+		pointer-events: all;
+	}
+}
+
+// Taille
+.wpeo-button.button-size-small {
+	font-size: 14px;
+	&.button-uppercase span {
+		font-size: 12px;
+	}
+}
+.wpeo-button.button-size-large {
+	font-size: 18px;
+	&.button-uppercase span {
+		font-size: 16px;
+	}
+}
+
+// Progress
+.wpeo-button.button-progress {
+	position: relative;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		opacity: 0;
+		transform: translate(-50%, -90%);
+		transition: all 0.2s ease-out;
+		font-family: 'FontAwesome';
+		font-size: 16px;
+		animation-duration: 1s;
+		animation-fill-mode: both;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		z-index: 99;
+	}
+	.button-icon, span {
+		display: inline-block;
+	}
+	&.button-success, &.button-load, &.button-error {
+		pointer-events: none;
+		&:before {
+			opacity: 1;
+		}
+		.button-icon, span {
+			opacity: 0;
+			transform: translate(0, 20%);
+		}
+	}
+
+	&.button-success {
+		background: $color__green;
+		border-color: $color__green;
+		color: #fff;
+		&:before {
+			content: "\f00c";
+			animation-name: progressSuccess;
+		}
+	}
+
+	&.button-error {
+		background: $color__red;
+		border-color: $color__red;
+		color: #fff;
+		&:before {
+			content: "\f00d";
+			animation-name: progressError;
+		}
+	}
+	&.button-load {
+		background: $color__grey;
+		&:before {
+			display: inline-block;
+			content: '';
+			border: 3px solid #fff;
+			border-top: 3px solid $color__primary;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			animation: spin 1s ease-out infinite;
+		}
+	}
+}
+
+
+@keyframes progressSuccess {
+  0, 20%, 40%, 60%, 80%, to { animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); }
+  0% { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+  20% { transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4); }
+  40% { transform: translate(-50%, -50%) scale3d(.9, .9, .9); }
+  60% { transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2); }
+  80% { transform: translate(-50%, -50%) scale3d(.97, .97, .97); }
+  to { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+}
+
+@keyframes progressError {
+	from { transform: translate(-50%, -50%); }
+	15% { transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg); }
+	30% { transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg); }
+	45% { transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg); }
+	60% { transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg); }
+	75% { transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg); }
+	to { transform: translate(-50%, -50%); }
+}
+
+@keyframes spin {
+		0% { transform: translate(-50%, -50%) rotate(0deg); }
+		100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
