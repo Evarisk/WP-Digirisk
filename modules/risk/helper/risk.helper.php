@@ -29,15 +29,16 @@ function get_full_risk( $data ) {
 	$args_risk_evaluation_comment = array( 'schema' => true );
 
 	if ( ! empty( $data->id ) ) {
-		$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
+		if ( ! empty( $data->taxonomy['digi-category-risk'] ) ) {
+			$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
+		}
 		$args_evaluation = array( 'comment__in' => array( $data->current_evaluation_id ) );
 		$args_risk_evaluation_comment = array( 'post_id' => $data->id );
 		$args_evaluation_method = array( 'post_id' => $data->id );
 	}
 
 	// Récupères la catégorie du danger.
-	$danger_categories = Risk_Category_Class::g()->get( $args_category_risk );
-	$data->risk_category = $danger_categories[0];
+	$data->risk_category = Risk_Category_Class::g()->get( $args_category_risk, true );
 
 	// Récupères la méthode d'évaluation.
 	$evaluation_methods = Evaluation_Method_Class::g()->get( $args_evaluation_method );
@@ -52,8 +53,7 @@ function get_full_risk( $data ) {
 
 	if ( ! empty( $args['schema'] ) ) {
 		$data->comment = $risk_evaluation_comments[0];
-	}
-	else {
+	} else {
 		$data->comment = $risk_evaluation_comments;
 	}
 

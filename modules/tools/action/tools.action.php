@@ -10,6 +10,7 @@ class Tools_Action {
 		add_action( 'wp_ajax_reset_method_evaluation', array( $this, 'callback_reset_method_evaluation' ) );
 		add_action( 'wp_ajax_compil_risk_list', array( $this, 'callback_risk_compilation' ) );
 		add_action( 'wp_ajax_transfert_doc', array( $this, 'callback_transfert_doc' ) );
+		add_action( 'wp_ajax_digi-fix-categories', array( $this, 'callback_digi_fix_categories' ) );
 	}
 
 	public function admin_menu() {
@@ -78,6 +79,23 @@ class Tools_Action {
 		check_ajax_referer( 'callback_transfert_doc' );
 
 		Tools_Class::g()->transfert_doc();
+
+		wp_send_json_success();
+	}
+
+	public function callback_digi_fix_categories() {
+		check_ajax_referer( 'digi-fix-danger-categories' );
+
+		$query = $wpdb->prepare( "SELECT * FROM `sictomap_posts`
+		INNER JOIN sictomap_term_relationships AS TR1 ON ( TR1.object_id = ID )
+		WHERE `post_type` LIKE 'digi-risk'
+		AND TR1.term_taxonomy_id = %d
+		AND ID NOT IN (
+			SELECT object_id
+		    FROM sictomap_term_relationships AS TR
+			JOIN sictomap_term_taxonomy AS TT ON ( TT.term_taxonomy_id = TR.term_taxonomy_id )
+			WHERE TT.taxonomy = %s
+		)", $_POST['new_term_id'], $_POST['old_term_id'], 'digi-category-risk' );
 
 		wp_send_json_success();
 	}

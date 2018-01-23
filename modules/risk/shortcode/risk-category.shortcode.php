@@ -29,6 +29,8 @@ class Risk_Category_Shortcode {
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-dropdown-categories-risk', array( $this, 'callback_dropdown_categories_risk' ) );
+
+		add_shortcode( 'digi-fix-risk-categories', array( $this, 'callback_fix_risk_categories' ) );
 	}
 
 	/**
@@ -81,7 +83,7 @@ class Risk_Category_Shortcode {
 					// Est-ce que c'est une catégorie de risque prédéfinie ?
 					if ( ! empty( $risks_categories_preset ) ) {
 						foreach ( $risks_categories_preset as $risk_category_preset ) {
-							if ( $risk_category_preset->taxonomy['digi-category-risk'][0] === $risk_category->id && ! empty( $risk_category_preset->taxonomy['digi-method'] ) ) {
+							if ( ! empty( $risk_category_preset ) && ! empty( $risk_category_preset->taxonomy['digi-category-risk'] ) && $risk_category_preset->taxonomy['digi-category-risk'][0] === $risk_category->id && ! empty( $risk_category_preset->taxonomy['digi-method'] ) ) {
 								$risk_category->is_preset = true;
 								break;
 							}
@@ -111,6 +113,42 @@ class Risk_Category_Shortcode {
 			) );
 		}
 	}
+
+	public function callback_fix_risk_categories( $param ) {
+		global $wpdb;
+
+		$json_matching = array();
+		$json_data_file_url_path_et_pif = \eoxia\Config_Util::$init['digirisk']->update_manager->url . 'asset/json/risk-danger-6400.json';
+		$request = wp_remote_get( $json_data_file_url_path_et_pif );
+		if ( ! is_wp_error( $request ) ) {
+			$data = wp_remote_retrieve_body( $request );
+			if ( ! is_wp_error( $data ) ) {
+				$json_matching = json_decode( $data, true );
+			}
+		}
+
+		$digi_danger_category_list = $wpdb->get_results( $wpdb->prepare(
+			"SELECT T.*
+		 	FROM {$wpdb->term_relationships} AS TR
+				JOIN {$wpdb->term_taxonomy} AS TT ON ( TT.term_taxonomy_id = TR.term_taxonomy_id )
+				JOIN {$wpdb->terms} AS T ON ( T.term_id = TT.term_id )
+			WHERE TT.taxonomy = %s
+			GROUP BY T.term_id", 'digi-danger-category' ) );
+
+		$digi_category_risk_list = $wpdb->get_results( $wpdb->prepare(
+			"SELECT T.*
+		 	FROM {$wpdb->term_taxonomy} AS TT
+				JOIN {$wpdb->terms} AS T ON ( T.term_id = TT.term_id )
+			WHERE TT.taxonomy = %s
+			GROUP BY T.term_id", 'digi-category-risk' ) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/main', array(
+			'digi_danger_category_list' => $digi_danger_category_list,
+			'digi_category_risk_list'   => $digi_category_risk_list,
+			'json_matching'             => $json_matching,
+		) );
+	}
+
 }
 
 new Risk_Category_Shortcode();
