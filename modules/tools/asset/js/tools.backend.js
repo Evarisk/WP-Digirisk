@@ -125,8 +125,11 @@ window.eoxiaJS.digirisk.tools.categories_fixer = function( event ) {
 		jQuery( '#digi-tools-fix-categories' ).addClass( 'loading' );
 
 		jQuery.post( window.ajaxurl, data, function( response ) {
-			jQuery( '.digi-tools-category-fixer tr:not(.done):first' ).addClass( 'done' );
-			window.eoxiaJS.digirisk.tools.categories_fixer( event );
+			if ( true == response.success ) {
+				jQuery( '.digi-tools-category-fixer tr:not(.done):first' ).find( 'td.action-result' ).html( response.data.message );
+				jQuery( '.digi-tools-category-fixer tr:not(.done):first' ).addClass( 'done' );
+				window.eoxiaJS.digirisk.tools.categories_fixer( event );
+			}
 		} );
 	} else {
 		jQuery( '#digi-tools-fix-categories' ).removeClass( 'loading' );

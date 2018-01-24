@@ -18,9 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // On fait le traitement uniquement si il existe des "anciennes" catégories.
 if ( ! empty( $digi_danger_category_list )  ) :
+	esc_html_e( 'Vous pouvez utiliser cette interface si vous constatez que vous avec des catégories de risques marquées comme corompues dans votre installation de DigiRisk.', 'digirisk' );
 ?><table class="digi-tools-category-fixer" >
 	<?php foreach ( $digi_danger_category_list as $danger_category ) : ?>
-		<tr class="" >
+		<tr>
 			<td><input name="digi-danger-category" type="hidden" value="<?php echo esc_attr( $danger_category->term_id ); ?>" />#<?php echo esc_html( $danger_category->term_id ); ?> - <?php echo esc_html( $danger_category->name ); ?></td>
 			<td>
 				<?php if ( ! empty( $digi_category_risk_list ) ) : ?>

@@ -102,7 +102,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			</div>
 
-			<div id="digi-danger-categories" class="tab-content grid-layout w2">
+			<div id="digi-danger-categories" class="tab-content hidden" style="display: none;" >
 				<?php do_shortcode( '[digi-fix-risk-categories]' ); ?>
 			</div>
 
