@@ -91,10 +91,10 @@ class Digirisk_Action {
 	 * @return void nothing
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
 	public function callback_admin_print_scripts_js() {
-		require( PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php' );
+		require PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php';
 	}
 
 	/**

@@ -2,10 +2,10 @@
 /**
  * Classe gérant les groupements
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.5
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -25,7 +25,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\group_model';
+	protected $model_name = '\digi\Group_Model';
 
 	/**
 	 * Le post type

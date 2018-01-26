@@ -2,10 +2,10 @@
 /**
  * Classe gérant les diffusions d'informations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -147,25 +147,22 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 */
 	public function display_form( $element ) {
 		$diffusion_information = $this->get( array(
-			'post_parent' => $element->id,
-			'post_status' => array(
+			'post_parent'    => $element->id,
+			'posts_per_page' => 1,
+			'post_status'    => array(
 				'publish',
 				'inherit',
 			),
-		) );
+		), true );
 
 		if ( empty( $diffusion_information ) ) {
 			$diffusion_information = $this->get( array(
 				'schema' => true,
-			) );
-		}
-
-		if ( ! empty( $diffusion_information ) ) {
-			$diffusion_information = $diffusion_information[0];
+			), true );
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(

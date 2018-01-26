@@ -2,10 +2,10 @@
 /**
  * Affichage d'un accident
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -19,11 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="Ref." class="cell padding w150">
 		<ul>
 			<li><strong><?php echo esc_attr( $accident->modified_unique_identifier ); ?></strong></li>
-			<li><?php echo esc_attr( $accident->registration_date_in_register['date_input']['fr_FR']['date'] ); ?></li>
+			<li><?php echo esc_attr( $accident->registration_date_in_register['rendered']['date'] ); ?></li>
 		</ul>
 	</div>
 	<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->victim_identity->id ) ? '<strong>' . User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . '</strong> ' . $accident->victim_identity->login : ''; ?></div>
-	<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><i class="icon fa fa-calendar"></i> <?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><i class="icon fa fa-calendar"></i> <?php echo esc_html( $accident->accident_date['rendered']['date'] ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->place->modified_unique_identifier . ' ' . $accident->place->title ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>

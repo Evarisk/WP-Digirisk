@@ -2,10 +2,10 @@
 /**
  * Gestion de la requête AJAX pour enregistrer la configuration d'un groupement
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -31,7 +31,7 @@ class Society_Informations_Action {
 	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
 	 *
 	 * @since 6.2.2
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @return void
 	 */
@@ -40,8 +40,8 @@ class Society_Informations_Action {
 
 		$data = (array) $_POST['society'];
 
-		$address                         = Address_Class::g()->save( $_POST['address'] );
-		$data['contact']['address_id'][] = $address->id;
+		$address                       = Address_Class::g()->save( $_POST['address'] );
+		$data['contact']['address_id'] = $address->id;
 
 		$society = Society_Informations_Class::g()->save( $data );
 

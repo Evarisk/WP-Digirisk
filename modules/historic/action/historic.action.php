@@ -2,17 +2,18 @@
 /**
  * Les actions relatives aux historiques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10.0
- * @version 6.2.10.0
- * @copyright 2015-2017 Evarisk
- * @package historic
- * @subpackage action
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.10
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux historiques
@@ -22,8 +23,8 @@ class Historic_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function __construct() {
 		add_action( 'digi_add_historic', array( $this, 'callback_add_historic' ), 10, 1 );
@@ -40,8 +41,8 @@ class Historic_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.2.10
 	 */
 	public function callback_add_historic( $data ) {
 		if ( ! empty( $data['parent_id'] ) && ! empty( $data['id'] ) && ! empty( $data['content'] ) ) {
@@ -55,8 +56,8 @@ class Historic_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.2.10.0
-	 * @version 6.2.10.0
+	 * @since 6.2.10
+	 * @version 6.5.0
 	 */
 	public function callback_historic_risk() {
 		check_ajax_referer( 'historic_risk' );
@@ -76,7 +77,7 @@ class Historic_Action {
 			foreach ( $evaluations as &$evaluation ) {
 				$evaluation->comments = Risk_Evaluation_Comment_Class::g()->get( array(
 					'post_id' => $risk_id,
-					'parent' => $evaluation->id,
+					'parent'  => $evaluation->id,
 				) );
 			}
 		}
@@ -88,10 +89,10 @@ class Historic_Action {
 		$view = ob_get_clean();
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'historic',
+			'namespace'        => 'digirisk',
+			'module'           => 'historic',
 			'callback_success' => 'openedHistoricRiskPopup',
-			'view' => $view,
+			'view'             => $view,
 		) );
 	}
 }

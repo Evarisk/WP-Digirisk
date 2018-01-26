@@ -2,10 +2,10 @@
 /**
  * Formulaire pour générer une diffusion d'information.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.10
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -23,10 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="grid-layout padding w2">
 		<ul class="form">
 			<li><h2><?php esc_html_e( 'Délégués du personnel', 'digirisk' ); ?></h2></li>
-			<li class="form-element <?php echo ! empty( $diffusion_information->document_meta['delegues_du_personnels_date']['date_input']['date'] ) ? 'active' : ''; ?>">
+			<li class="form-element <?php echo ! empty( $diffusion_information->document_meta['delegues_du_personnels_date']['raw'] ) ? 'active' : ''; ?>">
 				<div class="group-date form-element <?php echo esc_attr( ! empty( $element->date ) ? 'active' : '' ); ?>">
-					<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="delegues_du_personnels_date" value="<?php echo esc_attr( $diffusion_information->document_meta['delegues_du_personnels_date']['date_input']['date'] ); ?>" />
-					<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $diffusion_information->document_meta['delegues_du_personnels_date']['date_input']['fr_FR']['date'] ); ?>" />
+					<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="delegues_du_personnels_date" value="<?php echo esc_attr( $diffusion_information->document_meta['delegues_du_personnels_date']['raw'] ); ?>" />
+					<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $diffusion_information->document_meta['delegues_du_personnels_date']['rendered']['date'] ); ?>" />
 					<label><?php esc_html_e( 'Date d\'élection', 'digirisk' ); ?></label>
 					<span class="bar"></span>
 				</div>
@@ -47,10 +47,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<ul class="form">
 			<li><h2><?php esc_html_e( 'Membres du comité d\'entreprise', 'digirisk' ); ?></h2></li>
-			<li class="form-element <?php echo ! empty( $diffusion_information->document_meta['membres_du_comite_entreprise_date'] ) ? 'active' : ''; ?>">
-				<div class="group-date form-element <?php echo esc_attr( ! empty( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['date_input']['date'] ) ? 'active' : '' ); ?>">
-					<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="membres_du_comite_entreprise_date" value="<?php echo esc_attr( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['date_input']['date'] ); ?>" />
-					<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['date_input']['fr_FR']['date'] ); ?>" />
+			<li class="form-element <?php echo ! empty( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['raw'] ) ? 'active' : ''; ?>">
+				<div class="group-date form-element <?php echo esc_attr( ! empty( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['raw'] ) ? 'active' : '' ); ?>">
+					<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="membres_du_comite_entreprise_date" value="<?php echo esc_attr( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['raw'] ); ?>" />
+					<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $diffusion_information->document_meta['membres_du_comite_entreprise_date']['rendered']['date'] ); ?>" />
 					<label><?php esc_html_e( 'Date d\'élection', 'digirisk' ); ?></label>
 					<span class="bar"></span>
 				</div>

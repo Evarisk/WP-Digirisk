@@ -2,10 +2,10 @@
 /**
  * Gères la génération de l'ODT: Registre Accidents de travail benins
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.4.4
- * @copyright 2015-2017
+ * @version 6.5.0
+ * @copyright 2015-2018
  * @package DigiRisk
  */
 
@@ -147,11 +147,10 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 */
 	public function generate( $main_society ) {
 		$address = Society_Class::g()->get_address( $main_society );
-		$address = $address[0];
 
 		$sheet_details = array(
 			'ref'           => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),

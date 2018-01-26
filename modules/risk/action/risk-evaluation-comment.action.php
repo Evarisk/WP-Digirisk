@@ -2,18 +2,18 @@
 /**
  * Enregistres les commentaires des risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage action
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Enregistres les commentaires des risques
@@ -23,8 +23,8 @@ class Risk_Evaluation_Comment_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'save_risk_evaluation_comment', array( $this, 'callback_save_risk_evaluation_comment' ), 10, 2 );
@@ -34,23 +34,27 @@ class Risk_Evaluation_Comment_Action {
 	 * Enregistres le commentaire d'une evaluation d'un risque
 	 * Ce callback est hoocké après wp_ajax_save_risk de risk_save_action
 	 *
-	 * @param array $risk_obj Les données envoyées par le formulaire.
-	 * @param array $risk     Les données du risque.
+	 * @param array $risk_obj Les données du risque.
+	 * @param array $risk     Les données envoyées par le formulaire.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function callback_save_risk_evaluation_comment( $risk_obj, $risk ) {
 		if ( isset( $risk_obj->id ) ) {
 			if ( ! empty( $_POST['list_comment'] ) ) {
 				foreach ( $_POST['list_comment'] as $comment ) {
 					if ( ! empty( $comment['content'] ) ) {
-						$comment['post_id'] = $risk_obj->id;
+						$comment['id']        = (int) $comment['id'];
+						$comment['post_id']   = $risk_obj->id;
+						$comment['author_id'] = (int) $comment['author_id'];
 
 						if ( empty( $comment['parent_id'] ) ) {
 							$comment['parent_id'] = $risk_obj->current_evaluation_id;
 						}
+
+						$comment['parent_id'] = (int) $comment['parent_id'];
 
 						if ( empty( $risk['id'] ) ) {
 							unset( $comment['id'] );
@@ -60,8 +64,8 @@ class Risk_Evaluation_Comment_Action {
 
 						do_action( 'digi_add_historic', array(
 							'parent_id' => $_POST['parent_id'],
-							'id' => $risk_obj->id,
-							'content' => __( 'Modification du risque ', 'digirisk' ) . ' ' . $risk_obj->unique_identifier . ' ' . __( 'ajout du commentaire: ', 'digirisk' ) . ' ' . $comment['content'],
+							'id'        => $risk_obj->id,
+							'content'   => __( 'Modification du risque ', 'digirisk' ) . ' ' . $risk_obj->unique_identifier . ' ' . __( 'ajout du commentaire: ', 'digirisk' ) . ' ' . $comment['content'],
 						) );
 					}
 				}

@@ -2,17 +2,18 @@
 /**
  * La liste des préconisations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.9.0
- * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
 

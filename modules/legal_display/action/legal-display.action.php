@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux affichages légaux
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -41,7 +41,7 @@ class Legal_Display_Action {
 	 */
 	public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
 
-		 // Récupère les tableaux.
+		// Récupère les tableaux.
 		$emergency_service       = ! empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
 		$working_hour            = ! empty( $_POST['working_hour'] ) ? (array) $_POST['working_hour'] : array();
 		$safety_rule             = ! empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();

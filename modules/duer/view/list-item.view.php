@@ -2,10 +2,10 @@
 /**
  * Affichage d'un DUER
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -13,14 +13,12 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
-
-?>
+} ?>
 
 <tr>
 	<td class="padding w50"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit']['date_input']['fr_FR']['date'] ); ?></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit']['date_input']['fr_FR']['date'] ); ?></td>
+	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit']['rendered']['date'] ); ?></td>
+	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit']['rendered']['date'] ); ?></td>
 
 	<td class="padding padding text-center">
 		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( $element->document_meta['destinataireDUER'] ) ); // WPCS: XSS is ok. ?></span>

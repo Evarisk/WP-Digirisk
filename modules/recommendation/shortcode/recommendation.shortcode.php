@@ -2,17 +2,18 @@
 /**
  * Ajoutes les shortcodes pour les recommendations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage shortcode
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Ajoutes les shortcodes pour les recommendations
@@ -22,8 +23,8 @@ class Recommendation_Shortcode {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.2.1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.1
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-recommendation', array( $this, 'callback_digi_recommendation' ) );
@@ -36,8 +37,8 @@ class Recommendation_Shortcode {
 	 * @param  array $param Les paramètres du shortcode.
 	 * @return void
 	 *
-	 * @since 6.2.1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.1
+	 * @version 6.2.4
 	 */
 	public function callback_digi_recommendation( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
@@ -51,27 +52,28 @@ class Recommendation_Shortcode {
 	 *
 	 * @return void
 	 *
-	 * @since 6.2.1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.1
+	 * @version 6.5.0
 	 */
 	public function callback_dropdown_recommendation( $param ) {
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
 
-		$recommendation_category_list = Recommendation_Category_Term_Class::g()->get( array() );
-		$first_recommendation = max( $recommendation_category_list[0]->recommendation_term );
-
-		$recommendation = array();
+		$recommendation               = array();
+		$recommendation_category_list = Recommendation_Category_Term_Class::g()->get();
 
 		$display = 'dropdown';
 
 		if ( 0 !== $id ) {
-			$recommendation = Recommendation_Class::g()->get( array( 'post__in' => array( $id ) ) );
-			$recommendation = $recommendation[0];
-			$display = 'item-dropdown';
+			$recommendation = Recommendation_Class::g()->get( array( 'id' => $id ), true );
+			$display        = 'item-dropdown';
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', $display, array( 'recommendation' => $recommendation, 'id' => $id, 'recommendation_category_list' => $recommendation_category_list ) );
+		\eoxia\View_Util::exec( 'digirisk', 'recommendation', $display, array(
+			'recommendation'               => $recommendation,
+			'id'                           => $id,
+			'recommendation_category_list' => $recommendation_category_list,
+		) );
 	}
 }
 
-new recommendation_shortcode();
+new Recommendation_Shortcode();

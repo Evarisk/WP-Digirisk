@@ -2,12 +2,11 @@
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage class
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -97,8 +96,8 @@ class Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @return boolean|object L'objet
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function show_by_type( $id ) {
 		$id = (int) $id;
@@ -113,7 +112,7 @@ class Society_Class extends \eoxia\Post_Class {
 			return false;
 		}
 
-		$model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+		$model_name    = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
 		$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
 
 		if ( empty( $establishment[0] ) ) {
@@ -164,17 +163,11 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @param  mixed $society Les données de la société.
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function get_address( $society ) {
-		$args_address = array( 'schema' => true );
-
-		if ( ! empty( $society->contact['address_id'] ) ) {
-			$args_address = array( 'comment__in' => array( max( $society->contact['address_id'] ) ) );
-		}
-
-		$address = Address_Class::g()->get( $args_address );
+		$address = Address_Class::g()->get( array( 'id' => end( $society->contact['address_id'] ) ), true );
 
 		return $address;
 	}

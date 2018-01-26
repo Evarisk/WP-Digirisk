@@ -4,8 +4,8 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-id="<?php echo esc_attr( $establishment->id ); ?>">
 	<div class="unit-container">
 
-		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type && \eoxia\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
+		<?php if ( Workunit_Class::g()->get_type() !== $establishment->type && \eoxia\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
 			<div class="toggle-unit"><span class="icon"></span></div>
 		<?php else : ?>
 			<div class="spacer"><span class="icon"></span></div>

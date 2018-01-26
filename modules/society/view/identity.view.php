@@ -7,8 +7,8 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-id="<?php echo esc_attr( $element->id ); ?>"
 	class="<?php echo ! isset( $editable_identity ) ? 'action-attribute' : ''; ?> title">
 
-	<?php if ( Society_Class::g()->get_post_type() !== $element->type ) : ?>
+	<?php if ( Society_Class::g()->get_type() !== $element->type ) : ?>
 		<strong><?php echo esc_html( $element->unique_identifier ); ?> -</strong>
 	<?php endif; ?>
 

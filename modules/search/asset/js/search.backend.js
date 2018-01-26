@@ -2,7 +2,7 @@
  * Initialise l'objet "search" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  */
 window.eoxiaJS.digirisk.search = {};
 
@@ -24,7 +24,7 @@ window.eoxiaJS.digirisk.search.renderChanged = function() {
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  */
 window.eoxiaJS.digirisk.search.event = function() {
 	/**
@@ -58,10 +58,6 @@ window.eoxiaJS.digirisk.search.event = function() {
 			listOption.open = function( event, ui ) {
 				jQuery( element ).autocomplete( 'close' );
 			};
-		} else {
-			// listOption.search = function( event, ui ) {
-			// 	window.eoxiaJS.loader.display( jQuery( this ) );
-			// }
 		}
 
 		if ( jQuery( element ).data( 'field' ) ) {

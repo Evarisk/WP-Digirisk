@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux diffusions d'informations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -49,6 +49,7 @@ class Diffusion_Informations_Action {
 
 		$data = array(
 			'parent_id'     => $parent_id,
+			'status'        => 'inherit',
 			'document_meta' => array(
 				'delegues_du_personnels_date'             => ! empty( $_POST['delegues_du_personnels_date'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_date'] ) : '',
 				'delegues_du_personnels_titulaires'       => ! empty( $_POST['delegues_du_personnels_titulaires'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_titulaires'] ) : '',

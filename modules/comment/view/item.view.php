@@ -2,10 +2,10 @@
 /**
  * Affichage d'un commentaire
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -32,7 +32,7 @@ $user = User_Digi_Class::g()->get( array(
 	<?php endif; ?>
 
 	<?php if ( $display_date ) : ?>
-		<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['date'] ); ?> : </span>
+		<span class="date"><?php echo esc_html( $comment->date['rendered']['date'] ); ?> : </span>
 	<?php endif; ?>
 
 	<span class="content"><?php echo $comment->content; ?></span>

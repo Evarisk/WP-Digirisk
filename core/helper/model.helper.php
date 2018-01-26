@@ -1,8 +1,12 @@
 <?php
 /**
- * Les fonctions helpers des modèles
+ * Les fonctions "helpers" principales de DigiRisk
  *
- * @package Evarisk\Plugin
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -14,21 +18,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Construit l'identifiant unique d'un modèle
  *
- * @param  object $data Les données du modèle.
- * @return object       Les données du modèle avec l'identifiant
+ * @since 6.0.0
+ * @version 6.5.0
+ *
+ * @param  array $data Les données du modèle.
+ * @param  array $args Les arguments supplémentaires.
+ *
+ * @return array       Les données du modèle avec l'identifiant
  */
-function construct_identifier( $data ) {
-	$model_name = get_class( $data );
+function construct_identifier( $data, $args ) {
+	$model_name      = $args['model_name'];
 	$controller_name = str_replace( 'model', 'class', $model_name );
 	$controller_name = str_replace( 'Model', 'Class', $controller_name );
 	$next_identifier = get_last_unique_key( $controller_name );
+	$next_identifier++;
 
-	if ( empty( $data->unique_key ) ) {
-		$data->unique_key = (int) ( $next_identifier + 1 );
+	if ( empty( $data['unique_key'] ) ) {
+		$data['unique_key'] = $next_identifier;
 	}
 
-	if ( empty( $data->unique_identifier ) ) {
-		$data->unique_identifier = $controller_name::g()->element_prefix . ( $next_identifier + 1 );
+	if ( empty( $data['unique_identifier'] ) ) {
+		$data['unique_identifier'] = $controller_name::g()->element_prefix . $next_identifier;
 	}
 
 	return $data;
@@ -62,7 +72,6 @@ function get_identifier( $data ) {
 
 	return $data;
 }
-
 
 /**
  * Convertie la date au format SQL vers le format français
@@ -139,19 +148,21 @@ function force_avatar_color( $user ) {
  * Renvoie la dernière clé unique selon le type de l'élement
  *
  * @since 6.3.1
- * @version 6.3.1
+ * @version 6.5.0
  *
- * @param  string $controller Le controller.
- * @return int             		L'identifiant unique
+ * @param string $controller Le nom du controller.
+ *
+ * @return int               L'identifiant unique
  */
 function get_last_unique_key( $controller ) {
-	$element_type = $controller::g()->get_post_type();
+	$element_type = $controller::g()->get_type();
 	$wp_type = $controller::g()->get_identifier_helper();
 	if ( empty( $wp_type ) || empty( $element_type ) || ! is_string( $wp_type ) || ! is_string( $element_type ) ) {
 		return false;
 	}
 
 	global $wpdb;
+
 	switch ( $wp_type ) {
 		case 'post':
 			$query = $wpdb->prepare(

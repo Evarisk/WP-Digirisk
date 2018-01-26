@@ -59,6 +59,7 @@ class Digirisk_Filter {
 
 		return $param;
 	}
+
 }
 
 new Digirisk_Filter();

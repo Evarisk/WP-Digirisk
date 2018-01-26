@@ -2,11 +2,11 @@
 /**
  * Functions helper pour les catégories des préconisations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.2.1.0
- * @copyright 2015-2016 Eoxia
- * @package recommendation
- * @subpackage helper
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;

@@ -1,222 +1,276 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition du schéma des affichages légaux.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class legal_display_model extends \eoxia\post_model {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'occupational_health_service_id' => array(
-				'type'			=> 'integer',
-				'meta_type'	=> 'multiple',
-				'bydefault' => 0,
-			),
-			'detective_work_id' => array(
-				'type'				=> 'integer',
-				'meta_type'	=> 'multiple',
-				'bydefault'		=> 0,
-			),
-			'emergency_service' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'samu' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '15',
-					),
-					'police' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '17',
-					),
-					'pompier' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '18',
-					),
-					'emergency' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '112',
-					),
-					'right_defender' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => 'www.defenseurdesdroits.fr',
-					),
-					'poison_control_center' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => 'www.centres-antipoison.net',
-					),
-				),
-			),
-			'safety_rule' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'responsible_for_preventing' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'phone' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'location_of_detailed_instruction' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					)
-				)
-			),
-			'working_hour' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'monday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'tuesday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'wednesday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'thursday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'friday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'saturday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'sunday_morning' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'monday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'tuesday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'wednesday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'thursday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'friday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'saturday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'sunday_afternoon' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-				),
-			),
-			'derogation_schedule' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'permanent' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'occasional' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-				)
-			),
-			'collective_agreement' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'title_of_the_applicable_collective_agreement' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-					'location_and_access_terms_of_the_agreement' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					)
-				)
-			),
-			'DUER' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'how_access_to_duer' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					)
-				)
-			),
-			'rules' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'location' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					)
-				)
-			),
-			'participation_agreement' => array(
-				'meta_type'	=> 'multiple',
-				'type'			=> 'array',
-				'child' => array(
-					'information_procedures' => array(
-						'type' => 'string',
-						'meta_type'	=> 'multiple',
-						'bydefault' => '',
-					),
-				),
-			),
-		) );
+/**
+ * Définition du schéma des affichages légaux.
+ */
+class Legal_Display_Model extends \eoxia\Post_Model {
 
-		parent::__construct( $object );
+	/**
+	 * Définition du schéma des affichages légaux.
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
+	 */
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['occupational_health_service_id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+			'default'   => 0,
+		);
+
+		$this->schema['detective_work_id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+			'default'   => 0,
+		);
+
+		$this->schema['emergency_service'] = array(
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
+
+		$this->schema['emergency_service']['child']['samu'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '15',
+		);
+
+		$this->schema['emergency_service']['child']['police'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '17',
+		);
+
+		$this->schema['emergency_service']['child']['pompier'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '18',
+		);
+
+		$this->schema['emergency_service']['child']['emergency'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '112',
+		);
+
+		$this->schema['emergency_service']['child']['right_defender'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => 'www.defenseurdesdroits.fr',
+		);
+
+		$this->schema['emergency_service']['child']['poison_control_center'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => 'www.centres-antipoison.net',
+		);
+
+		$this->schema['safety_rule'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['safety_rule']['child']['responsible_for_preventing'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['safety_rule']['child']['phone'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['safety_rule']['child']['location_of_detailed_instruction'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['working_hour']['child']['monday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['tuesday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['wednesday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['thursday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['friday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['saturday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['sunday_morning'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['monday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['tuesday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['wednesday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['thursday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['friday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['saturday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['working_hour']['child']['sunday_afternoon'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['derogation_schedule'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['derogation_schedule']['child']['permanent'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['derogation_schedule']['child']['occasional'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['collective_agreement'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['collective_agreement']['child']['title_of_the_applicable_collective_agreement'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['collective_agreement']['child']['location_and_access_terms_of_the_agreement'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['DUER'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['DUER']['child']['how_access_to_duer'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['rules'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['rules']['child']['location'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		$this->schema['participation_agreement'] = array(
+			'meta_type' => 'multiple',
+			'type'      => 'array',
+			'child'     => array(),
+		);
+
+		$this->schema['participation_agreement']['child']['information_procedures'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
+		);
+
+		parent::__construct( $data, $req_method );
 	}
 
 }

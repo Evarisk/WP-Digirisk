@@ -2,16 +2,18 @@
 /**
  * Déclares le tableau qui contient les documents unique
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package document
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <table class="table duer">
 	<thead>
@@ -33,7 +35,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</tbody>
 
 	<tfoot>
-		<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'item-edit', array(
+			'element'    => $element,
+			'element_id' => $element_id,
+		) );
+		?>
 	</tfoot>
 </table>
 

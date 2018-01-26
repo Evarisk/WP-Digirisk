@@ -1,7 +1,7 @@
 {
 	"name": "Address",
 	"slug": "address",
-	"version": "6.3.0",
+	"version": "6.5.0",
 	"description": "Le module gérant les adresses",
 	"path": "modules/address/",
 	"dependencies": {

@@ -1,11 +1,11 @@
 <?php
 /**
- * Définition des champs d'une société.
+ * Définition du schéma des sociétés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -16,51 +16,58 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- *  Définition des champs d'une société.
+ *  Définition du schéma des sociétés.
  */
 class Society_Model extends \eoxia\Post_Model {
 
 	/**
-	 * Définition des champs
-	 *
-	 * @param Object $object La définition des champs.
+	 * Définition du schéma des sociétés.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
+	public function __construct( $data = null, $req_method = null ) {
 
-		/**
-		 * Les documents et images
-		 */
-		$this->model['associated_document_id'] = array(
+		$this->schema['associated_document_id'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-			'child'     => array(
-				'image'    => array(
-					'type'      => 'array',
-					'meta_type' => 'multiple',
-					'since'     => '6.0.0',
-					'version'   => '6.0.0',
-				),
-				'document' => array(
-					'type'      => 'array',
-					'meta_type' => 'multiple',
-					'since'     => '6.0.0',
-					'version'   => '6.0.0',
-				),
-			),
+			'child'     => array(),
+		);
+
+		$this->schema['associated_document_id']['child']['image'] = array(
+			'type'       => 'array',
+			'array_type' => 'integer',
+			'meta_type'  => 'multiple',
+		);
+
+		$this->schema['associated_document_id']['child']['document'] = array(
+			'type'       => 'array',
+			'array_type' => 'integer',
+			'meta_type'  => 'multiple',
 		);
 
 		/**
 		 * La clé unique.
 		 */
-		$this->model['unique_key'] = array(
-			'type'      => 'string',
+		$this->schema['unique_key'] = array(
+			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_key',
+			'since'     => '6.0.0',
+			'version'   => '6.5.0',
+		);
+
+		/**
+		 * L'identifiant unique.
+		 */
+		$this->schema['unique_identifier'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_identifier',
+			'default'   => '',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
@@ -68,7 +75,7 @@ class Society_Model extends \eoxia\Post_Model {
 		/**
 		 * L'identifiant unique.
 		 */
-		$this->model['unique_identifier'] = array(
+		$this->schema['modified_unique_identifier'] = array(
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_identifier',
@@ -79,61 +86,70 @@ class Society_Model extends \eoxia\Post_Model {
 		/**
 		 * Les recommendations associées
 		 *
-		 * @todo: Est ce utilisé ?
+		 * @todo: 23/01/2018 -> Est ce utilisé ?
 		 */
-		$this->model['associated_recommendation'] = array(
+		$this->schema['associated_recommendation'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
 
-		$this->model['siret_id'] = array(
+		$this->schema['siret_id'] = array(
 			'description' => 'Le SIRET de la société.',
 			'since'       => '6.3.0',
 			'version'     => '6.3.0',
 			'type'        => 'string',
 			'meta_type'   => 'single',
 			'field'       => '_wpdigi_siret_id',
+			'default'     => '',
 		);
 
-		$this->model['number_of_employees'] = array(
+		$this->schema['number_of_employees'] = array(
 			'description' => 'Le nombre d\'employée dans la société.',
 			'since'       => '6.3.0',
-			'version'     => '6.3.0',
+			'version'     => '6.5.0',
 			'type'        => 'integer',
 			'meta_type'   => 'single',
 			'field'       => '_wpdigi_number_of_employees',
+			'default'     => 0,
 		);
 
-		$this->model['contact'] = array(
+		$this->schema['contact'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
-			'child'     => array(
-				'phone'      => array(
-					'type'      => 'array',
-					'meta_type' => 'multiple',
-				),
-				'email'      => array(
-					'type' => 'string',
-				),
-				'address_id' => array(
-					'type'      => 'array',
-					'meta_type' => 'multiple',
-				),
-			),
+			'child'     => array(),
 		);
 
-		$this->model['owner_id'] = array(
+		$this->schema['contact']['child']['phone'] = array(
+			'type'       => 'array',
+			'array_type' => 'string',
+			'meta_type'  => 'multiple',
+		);
+
+		$this->schema['contact']['child']['email'] = array(
+			'type'    => 'string',
+			'default' => '',
+		);
+
+		$this->schema['contact']['child']['address_id'] = array(
+			'type'       => 'array',
+			'array_type' => 'integer',
+			'meta_type'  => 'multiple',
+			'default'    => array( 0 ),
+		);
+
+		$this->schema['owner_id'] = array(
 			'description' => 'L\'ID responsable de la société',
 			'since'       => '6.4.0',
 			'version'     => '6.4.0',
 			'type'        => 'integer',
 			'meta_type'   => 'single',
 			'field'       => '_digi_owner_id',
+			'default'     => 0,
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
 
 }

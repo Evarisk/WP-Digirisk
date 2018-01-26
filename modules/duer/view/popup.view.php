@@ -1,18 +1,19 @@
 <?php
 /**
- * La popup qui contient les données de l'évaluation complexe de digirisk
+ * La popup qui contient les formulaires ainsi que les informations de la génération du DUER.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="popup">
 	<div class="container">

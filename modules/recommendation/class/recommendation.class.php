@@ -2,17 +2,18 @@
 /**
  * Les préconisations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage class
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.2.4
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les préconisations
@@ -24,21 +25,21 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name   = '\digi\recommendation_model';
+	protected $model_name = '\digi\Recommendation_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type    = 'digi-recommendation';
+	protected $post_type = 'digi-recommendation';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_recommendation';
+	protected $meta_key = '_wpdigi_recommendation';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -89,16 +90,6 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 */
 	protected $post_type_name = 'Recommandations';
 
-
-	/**
-	 * Le constructeur
-	 *
-	 * @return void
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
 	/**
 	 * Charges la liste des préconisations. Et appelle le template pour les afficher.
 	 * Récupères le schéma d'une préconisations pour l'entrée d'ajout d'une préconisation dans le tableau.
@@ -106,16 +97,18 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 * @param  integer $society_id L'ID de la société.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function display( $society_id ) {
-		$recommendation_schema = $this->get( array( 'schema' => true ) );
-		$recommendation_schema = $recommendation_schema[0];
+		$recommendation_schema = $this->get( array( 'schema' => true ), true );
+		$recommendations       = $this->get( array( 'post_parent' => $society_id ) );
 
-		$recommendations = $this->get( array( 'post_parent' => $society_id ) );
-
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendations' => $recommendations, 'recommendation_schema' => $recommendation_schema ) );
+		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list', array(
+			'society_id'            => $society_id,
+			'recommendations'       => $recommendations,
+			'recommendation_schema' => $recommendation_schema,
+		) );
 	}
 
 	/**
@@ -123,8 +116,8 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 *
 	 * @return bool
 	 *
-	 * @since 6.2.1.0
-	 * @version 6.2.1.0
+	 * @since 6.2.1
+	 * @version 6.2.1
 	 */
 	public function transfert() {
 		// Récupères toutes les unités de travail avec leurs recommendations.

@@ -98,7 +98,6 @@ class Comment_Action {
 		}
 
 		$comment->status = '-34071';
-
 		\eoxia\Comment_Class::g()->update( $comment );
 
 		wp_send_json_success( array(

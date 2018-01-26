@@ -46,7 +46,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			'post_parent'    => $society->id,
 			'posts_per_page' => -1,
 			'post_type'      => array( 'digi-group', 'digi-workunit' ),
-			'post_status'    => array( 'publish', 'draft' ),
+			'post_status'    => 'inherit',
 			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
 			'meta_key'       => '_wpdigi_unique_key',
 		) );

@@ -1,33 +1,59 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition du schéma des recommandations.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class recommendation_term_model extends \eoxia\term_model {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'unique_key' => array(
-				'type' 				=> 'string',
-				'meta_type'		=> 'single',
-				'field'				=> '_wpdigi_unique_key',
-			),
-			'unique_identifier' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'single',
-				'field'			=> '_wpdigi_unique_identifier',
-			),
-			'type' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-			),
-			'thumbnail_id'	=> array(
-				'type'			=> 'integer',
-				'meta_type'	=> 'single',
-				'field'			=> '_thumbnail_id',
-			),
-		) );
+/**
+ * Définition du schéma des recommandations
+ */
+class Recommendation_Term_Model extends \eoxia\Term_Model {
 
-		parent::__construct( $object );
+	/**
+	 * Définition du schéma des recommandations.
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
+	 */
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['unique_key'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_key',
+		);
+
+		$this->schema['unique_identifier'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_identifier',
+		);
+
+		$this->schema['type'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['thumbnail_id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_thumbnail_id',
+		);
+
+		parent::__construct( $data, $req_method );
 	}
 
 }

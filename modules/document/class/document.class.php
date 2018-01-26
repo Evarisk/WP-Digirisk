@@ -2,9 +2,9 @@
 /**
  * Classe principale gérant tous les documents (ODT) de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -25,7 +25,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\document_model';
+	protected $model_name = '\digi\Document_Model';
 
 	/**
 	 * Le post type
@@ -217,9 +217,10 @@ class Document_Class extends \eoxia\Post_Class {
 		if ( ! empty( $document_content ) ) {
 			// Lecture du contenu à écrire dans le document.
 			foreach ( $document_content as $data_key => $data_value ) {
-				if ( is_array( $data_value ) && ! empty( $data_value['date_input'] ) ) {
-					$data_value = $data_value['date_input']['fr_FR']['date'];
+				if ( is_array( $data_value ) && ! empty( $data_value['raw'] ) ) {
+					$data_value = $data_value['raw'];
 				}
+
 				$odf_php_lib = $this->set_document_meta( $data_key, $data_value, $odf_php_lib );
 			}
 		}

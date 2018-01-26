@@ -1,11 +1,11 @@
 <?php
 /**
- * Définition des champs d'une unité de travail.
+ * Définition du schéma des unité de travail.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -16,46 +16,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition des champs d'une unité de travail.
+ * Définition du schéma des unité de travail.
  */
 class Workunit_Model extends Society_Model {
 
 	/**
-	 * Définition des champs
-	 *
-	 * @param Object $object La définition des champs.
+	 * Définition du schéma des unité de travail.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'user_info' => array(
-				'type' => 'array',
-				'meta_type' => 'multiple',
-				'child' => array(
-					'owner_id' => array(
-						'type' => 'integer',
-						'meta_type' => 'multiple',
-					),
-					'affected_id' => array(
-						'type' => 'array',
-						'meta_type' => 'multiple',
-					),
-				),
-			),
-			'identity' => array(
-				'type' => 'array',
-				'meta_type' => 'multiple',
-				'child' => array(
-					'workforce' => array(
-						'type' => 'integer',
-					),
-				),
-			),
-		) );
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['user_info'] = array(
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
 
-		$this->model['owner_id'] = array(
+		$this->schema['user_info']['child']['owner_id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['user_info']['child']['affected_id'] = array(
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['identity'] = array(
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
+
+		$this->schema['identity']['child']['workforce'] = array(
+			'type' => 'integer',
+		);
+
+		$this->schema['owner_id'] = array(
 			'description' => 'L\'ID responsable de la société',
 			'since'       => '6.4.0',
 			'version'     => '6.4.0',
@@ -64,7 +65,6 @@ class Workunit_Model extends Society_Model {
 			'field'       => '_digi_owner_id',
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
-
 }

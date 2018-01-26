@@ -1,0 +1,24 @@
+{
+	"editRisks": {
+		"simple": [
+			{
+				"cotationLevel": 3
+			},
+			{
+				"cotationLevel": 1
+			}
+		],
+		"complex": [
+			{
+				"cotationLevel": [
+					"itt",
+					"inhabituelle-1-fois-par-mois",
+					"se-produit-tous-les-mois",
+					"pas-de-formation-ni-de-prevention",
+					"individuelle"
+				],
+				"cotationLevelValue": 3
+			}
+		]
+	}
+}

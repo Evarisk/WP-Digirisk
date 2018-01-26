@@ -4,7 +4,7 @@
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
+ * @version 6.5.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -45,26 +45,35 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Initialise les accronymes de DigiRisk.
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.2.9
+	 * @version 6.5.0
+	 *
+	 * @return mixed
 	 */
 	public function init_option() {
-		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->setting->path . 'asset/json/default.json' );
-		$data = json_decode( $file_content, true );
+		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->setting->url . 'asset/json/default.json' );
+
+		if ( is_wp_error( $request ) ) {
+			return false;
+		}
+
+		$request = wp_remote_retrieve_body( $request );
+		$data    = json_decode( $request );
+
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 
 		if ( empty( $list_accronym ) ) {
-			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, json_encode( $data ) );
+			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $data ) );
 		}
+
+		return true;
 	}
 
 	/**
 	 * Si les "preset danger" n'existent pas dans la bdd, cette méthode à pour but de les initialiser.
 	 *
 	 * @since 6.2.9
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
 	public function init_preset_danger() {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
@@ -84,7 +93,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 										$element->id,
 									),
 								),
-								'preset' => true,
+								'preset'   => true,
 							) );
 						}
 					}

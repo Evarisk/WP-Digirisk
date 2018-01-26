@@ -1,8 +1,12 @@
 <?php
 /**
- * Gestion des adresses
+ * Classe gérant les adresses
  *
- * @package Evarisk\Plugin
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -12,19 +16,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Gestion des adresses
- *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
- * @version 1.1.0.0
+ * Classe gérent les adresses
  */
-class Address_class extends \eoxia\Comment_class {
+class Address_Class extends \eoxia\Comment_Class {
 
 	/**
 	 * Le modèle à utiliser
 	 *
 	 * @var string
 	 */
-	protected $model_name   = '\digi\address_model';
+	protected $model_name = '\digi\Address_Model';
 
 	/**
 	 * Le type du commentaire
@@ -37,14 +38,21 @@ class Address_class extends \eoxia\Comment_class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key    	= '_wpdigi_address';
+	protected $meta_key = '_wpdigi_address';
 
 	/**
 	 * L'url pour la Rest API
 	 *
 	 * @var string
 	 */
-	protected $base					= 'address';
+	protected $base = 'address';
+
+	/**
+	 * Préfixes pour les adresses
+	 *
+	 * @var string
+	 */
+	public $element_prefix = 'AD';
 
 	/**
 	 * La version pour l'url de la Rest API
@@ -56,10 +64,16 @@ class Address_class extends \eoxia\Comment_class {
 	/**
 	 * Sauvegardes une adresse en utilisant le modèle
 	 *
-	 * @param  array $data 		Les données de l'adresse (voir le fichier ./modules/address/model/adress.model.php).
-	 * @return address_model  Les données enregistrées
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param  array $data    Les données de l'adresse (voir le fichier ./modules/address/model/adress.model.php).
+	 * @return Address_Model  Les données enregistrées
 	 */
 	public function save( $data ) {
+		$data['content'] = '';
+		$data['post_id'] = ! empty( $data['post_id'] ) ? (int) $data['post_id'] : 0;
+
 		return $this->update( $data );
 	}
 }
