@@ -65,7 +65,8 @@ class Setting_Action {
 		$preset_risks_id = $wpdb->get_col(
 			"SELECT RISK.ID FROM {$wpdb->posts} AS RISK
 				JOIN {$wpdb->postmeta} AS RISK_META ON RISK.ID=RISK_META.post_id
-			WHERE RISK_META.meta_key = '_wpdigi_preset'
+			WHERE RISK.post_status != 'trash'
+				AND RISK_META.meta_key = '_wpdigi_preset'
 				AND RISK_META.meta_value = 1" );
 
 		$dangers_preset = Risk_Class::g()->get( array(

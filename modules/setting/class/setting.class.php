@@ -64,9 +64,10 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 * Si les "preset danger" n'existent pas dans la bdd, cette méthode à pour but de les initialiser.
 	 *
 	 * @since 6.2.9
-	 * @version 6.4.0
+	 * @version 6.4.5
 	 */
 	public function init_preset_danger() {
+		global $wpdb;
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
@@ -78,14 +79,26 @@ class Setting_Class extends \eoxia\Singleton_Util {
 				if ( ! empty( $danger_category_list ) ) {
 					foreach ( $danger_category_list as $element ) {
 						if ( ! empty( $element->thumbnail_id ) ) {
-							Risk_Class::g()->update( array(
-								'taxonomy' => array(
-									'digi-category-risk' => array(
-										$element->id,
+							$preset_risks_id = $wpdb->get_var( $wpdb->prepare(
+								"SELECT RISK.ID FROM {$wpdb->posts} AS RISK
+									JOIN {$wpdb->postmeta} AS RISK_META ON RISK.ID=RISK_META.post_id
+									JOIN {$wpdb->term_relationships} AS TR ON TR.object_id = RISK.ID
+										JOIN {$wpdb->term_taxonomy} AS TT ON TT.term_taxonomy_id = TR.term_taxonomy_id
+								WHERE RISK.post_status != 'trash'
+									AND RISK_META.meta_key = '_wpdigi_preset'
+									AND RISK_META.meta_value = 1
+									AND TT.term_id = %d", $element->id ) );
+
+							if ( null === $preset_risks_id ) {
+								Risk_Class::g()->update( array(
+									'taxonomy' => array(
+										'digi-category-risk' => array(
+											$element->id,
+										),
 									),
-								),
-								'preset' => true,
-							) );
+									'preset' => true,
+								) );
+							}
 						}
 					}
 				}

@@ -10,6 +10,8 @@ window.eoxiaJS.digirisk.tools.event = function() {
 	jQuery( document ).on( 'click', '.element-risk-compilation', window.eoxiaJS.digirisk.tools.risk_fixer );
 	jQuery( document ).on( 'click', '.fix-recommendation', window.eoxiaJS.digirisk.tools.recommendation_fixer );
 	jQuery( document ).on( 'click', '.fix-doc', window.eoxiaJS.digirisk.tools.doc_fixer );
+
+	jQuery( document ).on( 'click', '.digi-risk-preset-reset', window.eoxiaJS.digirisk.tools.risk_preset_reset );
 	jQuery( document ).on( 'click', '#digi-tools-fix-categories', window.eoxiaJS.digirisk.tools.categories_fixer );
 };
 
@@ -135,4 +137,20 @@ window.eoxiaJS.digirisk.tools.categories_fixer = function( event ) {
 		jQuery( '#digi-tools-fix-categories' ).removeClass( 'loading' );
 	}
 
+};
+
+window.eoxiaJS.digirisk.tools.risk_preset_reset = function( event ) {
+	var data = {
+		action: 'digi-risk-preset-reset',
+		_wpnonce: jQuery( this ).data( 'nonce' )
+	};
+	var li = document.createElement( 'li' );
+
+	jQuery( this ).addClass( 'wp-digi-loading' );
+	jQuery( this ).closest( 'div' ).find( 'ul' ).html( '' );
+
+	li.innerHTML = window.digi_tools_in_progress;
+	jQuery( this ).closest( 'div' ).find( 'ul' ).append( li );
+
+	window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
 };

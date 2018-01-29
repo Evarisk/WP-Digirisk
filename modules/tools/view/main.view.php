@@ -57,7 +57,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			</div>
 
 			<div id="digi-more" class="tab-content hidden" style="display: none;">
-
 				<span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk' ); ?></i>
 
 				<div class="grid-layout padding w2">
@@ -98,7 +97,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						</div>
 					</div>
 
-			</div> <!-- grid -->
+					<div class="block">
+						<div class="container">
+							<h3><?php esc_html_e( 'Réinitialisation des risques prédéfinis', 'digirisk' ); ?></h3>
+							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour réinitialiser les risques prédéfinis si vous avez des problèmes de définition.', 'digirisk' ); ?></p>
+							<p><button class="button blue margin digi-risk-preset-reset" data-nonce="<?php echo esc_attr( wp_create_nonce( 'risk_preset_reset' ) ); ?>" type="button" ><?php esc_html_e( 'Réinitialiser', 'digirisk' ); ?></button>
+							<ul></ul>
+						</div>
+					</div>
+
+				</div> <!-- grid -->
 
 			</div>
 

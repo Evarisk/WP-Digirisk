@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // On fait le traitement uniquement si il existe des "anciennes" catégories.
 if ( ! empty( $digi_danger_category_list )  ) :
-	esc_html_e( 'Vous pouvez utiliser cette interface si vous constatez que vous avec des catégories de risques marquées comme corompues dans votre installation de DigiRisk.', 'digirisk' );
-?><table class="digi-tools-category-fixer" >
+?><span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Vous pouvez utiliser cette interface si vous constatez que vous avec des catégories de risques marquées comme corompues dans votre installation de DigiRisk.', 'digirisk' ); ?></i>
+	<table class="digi-tools-category-fixer" >
 	<?php foreach ( $digi_danger_category_list as $danger_category ) : ?>
 		<tr>
 			<td><input name="digi-danger-category" type="hidden" value="<?php echo esc_attr( $danger_category->term_id ); ?>" />#<?php echo esc_html( $danger_category->term_id ); ?> - <?php echo esc_html( $danger_category->name ); ?></td>
@@ -43,7 +43,7 @@ if ( ! empty( $digi_danger_category_list )  ) :
 	<?php endforeach; ?>
 	</table>
 
-	<button data-nonce="<?php echo wp_create_nonce( 'digi-fix-danger-categories' ); ?>" id="digi-tools-fix-categories" class="button blue" ><?php esc_html_e( 'Save' ); ?></button>
+	<button data-nonce="<?php echo esc_attr( wp_create_nonce( 'digi-fix-danger-categories' ) ); ?>" id="digi-tools-fix-categories" class="button blue" ><?php esc_html_e( 'Save' ); ?></button>
 <?php
 else :
 	esc_html_e( 'Il n\'y a aucune action a effectuer. Votre installation semble correcte.', 'digirisk' );
