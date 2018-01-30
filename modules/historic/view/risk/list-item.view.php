@@ -20,7 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><strong><?php echo esc_html( $evaluation->unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date" class="w50 padding">
-		<?php echo esc_html( $evaluation->date['date_input']['fr_FR']['date_time'] ); ?>
+		<?php
+		if ( $evaluation->date['date_input']['date'] == '0000-00-00 00:00:00' ) :
+			esc_html_e( 'N/A', 'digirisk' );
+		else:
+			echo esc_html( $evaluation->date['date_input']['fr_FR']['date_time'] );
+		endif;
+		?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<div class="cotation-container grid">
