@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<a class="nav-tab" href="#" data-id="digi-handle-model" ><?php esc_html_e( 'Modèles ODT', 'digirisk' ); ?></a>
 			<a class="nav-tab hidden" href="#" data-id="digi-data-import-user" ><?php esc_html_e( 'Importer des utilisateurs', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-more"><?php esc_html_e( 'Avancés', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-danger-categories"><?php esc_html_e( 'Catégories de danger', 'digirisk' ); ?></a>
+			<?php apply_filters( 'digi_tools_interface_tabs', '' ); ?>
 		</h2>
 
 		<div class="digirisk-wrap">
@@ -110,10 +110,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			</div>
 
-			<div id="digi-danger-categories" class="tab-content hidden" style="display: none;" >
-				<?php do_shortcode( '[digi-fix-risk-categories]' ); ?>
-			</div>
-
+			<?php apply_filters( 'digi_tools_interface_content', '' ); ?>
 		</div>
 
 	</div><!-- .digirisk-wrap -->

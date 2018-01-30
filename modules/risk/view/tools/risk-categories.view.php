@@ -15,11 +15,16 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+?>
+<div id="digi-danger-categories" class="tab-content hidden grid-layout w2 padding" style="display: none;" >
+	<div class="block">
+		<div class="container">
+			<h3><?php esc_html_e( 'Correction de l\'association des catégories de risques', 'digirisk' ); ?></h3>
+			<p class="content"><?php esc_html_e( 'Cliquez sur ce bouton pour corriger le défaut d\'association des catégories de risques aux risques', 'digirisk' ); ?></p>
+<?php
 // On fait le traitement uniquement si il existe des "anciennes" catégories.
 if ( ! empty( $digi_danger_category_list )  ) :
-?><span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Vous pouvez utiliser cette interface si vous constatez que vous avec des catégories de risques marquées comme corompues dans votre installation de DigiRisk.', 'digirisk' ); ?></i>
-	<table class="digi-tools-category-fixer" >
+?><table class="digi-tools-category-fixer" style="text-align: left; margin: 10px auto;" >
 	<?php foreach ( $digi_danger_category_list as $danger_category ) : ?>
 		<tr>
 			<td><input name="digi-danger-category" type="hidden" value="<?php echo esc_attr( $danger_category->term_id ); ?>" />#<?php echo esc_html( $danger_category->term_id ); ?> - <?php echo esc_html( $danger_category->name ); ?></td>
@@ -43,8 +48,12 @@ if ( ! empty( $digi_danger_category_list )  ) :
 	<?php endforeach; ?>
 	</table>
 
-	<button data-nonce="<?php echo esc_attr( wp_create_nonce( 'digi-fix-danger-categories' ) ); ?>" id="digi-tools-fix-categories" class="button blue" ><?php esc_html_e( 'Save' ); ?></button>
+	<button data-nonce="<?php echo esc_attr( wp_create_nonce( 'digi-fix-danger-categories' ) ); ?>" id="digi-tools-fix-categories" class="button blue" ><?php esc_html_e( 'Corriger les catégories de risques' ); ?></button>
 <?php
 else :
 	esc_html_e( 'Il n\'y a aucune action a effectuer. Votre installation semble correcte.', 'digirisk' );
 endif;
+?>
+		</div>
+	</div>
+</div>

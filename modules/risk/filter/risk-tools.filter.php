@@ -1,47 +1,52 @@
 <?php
 /**
- * Ajoutes le shortcode pour gérer les outils des catégories de risque.
+ * Les filtres relatives aux outils pour les risques
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.5
  * @version 6.4.5
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @copyright 2015-2018 Evarisk
+ * @package risk
+ * @subpackage filter
  */
 
 namespace digi;
 
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
 /**
- * Ajoutes le shortcode pour gérer les outils des catégories de risque.
+ * Les filtres relatives à la page des rsiques.
  */
-class Risk_Category_Tools_Shortcode {
+class Risk_Tools_Filter {
 
 	/**
-	 * Le constructeur
+	 * Appel la définition des filtres utilisés pour les interfaces d'outils
+	 *
+	 * @return void nothing
 	 *
 	 * @since 6.4.5
 	 * @version 6.4.5
 	 */
 	public function __construct() {
-		add_shortcode( 'digi-fix-risk-categories', array( $this, 'callback_fix_risk_categories' ) );
+		add_filter( 'digi_tools_interface_tabs', array( $this, 'callback_digi_tools_interface_tabs' ) );
+		add_filter( 'digi_tools_interface_content', array( $this, 'callback_digi_tools_interface_content' ) );
 	}
 
 	/**
-	 * Shortcode permettant l'affichage de l'interterface de correction d'affectation des catégories de danger aux risques ayant été affectés lors du transfert en version 6.4.à
+	 * Ajout des onglets dans l'interface des outils
 	 *
-	 * @param array $param La liste des arguments passés au shortcode.
-	 *
-	 * @since 6.4.5
-	 * @version 6.4.5
-	 *
-	 * @return void
+	 * @param string $current_output Le contenu actuel que l'on souhaite filtrer.
 	 */
-	public function callback_fix_risk_categories( $param ) {
+	public function callback_digi_tools_interface_tabs( $current_output ) {
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/tab', array() );
+	}
+
+	/**
+	 * Appel de l'interface permettant de ré associer les catégories de dangers
+	 *
+	 * @param string $current_output Le contenu actuel que l'on souhaite filtrer.
+	 */
+	public function callback_digi_tools_interface_content( $current_output ) {
 		global $wpdb;
 
 		// Récupération de la correspondance entre les anciennes catégories de danger et les nouvelles catégories de risques.
@@ -73,7 +78,7 @@ class Risk_Category_Tools_Shortcode {
 			GROUP BY T.term_id", 'digi-category-risk' ) );
 
 		// Affichage de l'interface.
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/risk-categories', array(
 			'digi_danger_category_list' => $digi_danger_category_list,
 			'digi_category_risk_list'   => $digi_category_risk_list,
 			'json_matching'             => $json_matching,
@@ -82,4 +87,4 @@ class Risk_Category_Tools_Shortcode {
 
 }
 
-new Risk_Category_Tools_Shortcode();
+new Risk_Tools_Filter();
