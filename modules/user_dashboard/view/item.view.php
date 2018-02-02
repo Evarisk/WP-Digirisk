@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
 				class="button w50 light edit action-attribute">
-				<i class="icon fa fa-pencil"></i>
+				<i class="icon fas fa-pencil"></i>
 			</div>
 
 			<div
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-loader="users"
 				data-action="delete_user"
 				class="button w50 light delete action-delete" >
-				<i class="icon fa fa-times"></i>
+				<i class="icon far fa-times"></i>
 			</div>
 		</div>
 	</td>
