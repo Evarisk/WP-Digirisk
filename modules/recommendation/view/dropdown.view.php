@@ -1,6 +1,6 @@
 <?php
 /**
- * La liste des préconisations
+ * La liste des recommendations
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="action">
 		<span><?php esc_html_e( 'Choisir une signalisation', 'digirisk' ); ?></span>
 		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une signalisation', 'digirisk' ); ?>" />
-		<i class="icon animated fa fa-angle-down"></i>
+		<i class="icon animated far fa-angle-down"></i>
 	</div>
 
 	<ul class="content">

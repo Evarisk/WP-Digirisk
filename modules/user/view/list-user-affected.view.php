@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 									data-user-id="<?php echo esc_attr( $affected_user->id ); ?>"
 									data-loader="affected-users"
 									class="action-delete button w50 light delete">
-									<i class="icon fa fa-times"></i>
+									<i class="icon far fa-times"></i>
 							</a>
 						</div>
 						</td>

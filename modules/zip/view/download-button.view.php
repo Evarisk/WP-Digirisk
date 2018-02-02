@@ -19,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<a class="button purple h50 tooltip hover"
 		href="<?php echo esc_attr( $zip_url ); ?>"
 		aria-label="<?php echo esc_attr_e( 'ZIP', 'digirisk' ); ?>">
-		<i class="fa fa-file-archive-o" aria-hidden="true"></i>
+		<i class="far fa-file-archive" aria-hidden="true"></i>
 	</a>
 <?php else : ?>
 	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
-		<i class="fa fa-times icon" aria-hidden="true"></i>
+		<i class="far fa-times icon" aria-hidden="true"></i>
 	</span>
 <?php endif; ?>

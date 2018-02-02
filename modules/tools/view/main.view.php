@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 			<div id="digi-more" class="tab-content hidden" style="display: none;">
 
-				<span class="fa fa-exclamation-circle"></span><i><?php esc_html_e( 'Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk' ); ?></i>
+				<span class="fas fa-exclamation-triangle fa-fw"></span> <i><?php esc_html_e( 'Attention, veuillez faire une sauvegarde de votre base de donnée avant toutes actions.', 'digirisk' ); ?></i>
 
 				<div class="grid-layout padding w2">
 

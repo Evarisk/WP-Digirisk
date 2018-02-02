@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php echo esc_html_e( 'Édition de la méthode d\'évaluation Evarisk', 'digirisk' ); ?>
 				<?php echo esc_html( ! empty( $risk ) ? ' : ' . $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier : '' ); ?>
 			</h2>
-			<i class="close fa fa-times"></i>
+			<i class="close far fa-times"></i>
 		</div>
 		<div class="content">
 

@@ -24,14 +24,14 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 		<span class="close action-attribute"
 					data-action="close_change_log"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
-					data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fa fa-times-circle"></i></span>
+					data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fas fa-times-circle"></i></span>
 	</div>
 
 	<div class="popup patch-note">
 		<div class="container">
 			<div class="header">
 				<h2 class="title"><?php echo esc_html( 'Note de version: ' . $result['content']->numero_de_version ); ?></h2>
-				<i class="close fa fa-times"></i>
+				<i class="close far fa-times"></i>
 			</div>
 			<div class="content">
 				<?php

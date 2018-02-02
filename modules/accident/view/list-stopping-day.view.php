@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							data-id="<?php echo esc_attr( $stopping_day->id ); ?>"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_stopping_day' ) ); ?>"
 							data-action="delete_stopping_day"
-							data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon fa fa-times"></i></span>
+							data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
 			</li>
 			<?php
 		endforeach;
@@ -52,6 +52,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-parent="comment"
 					data-accident-id="<?php echo esc_attr( $accident->id ); ?>"
 					data-action="save_stopping_day"
-					class="button add action-input"><i class="icon fa fa-plus"></i></span>
+					class="button add action-input"><i class="icon far fa-plus"></i></span>
 	</li>
 </ul>

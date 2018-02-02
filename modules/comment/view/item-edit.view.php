@@ -54,7 +54,7 @@ $user = User_Digi_Class::g()->get( array(
 					data-id="<?php echo esc_attr( $comment->id ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment_' . $comment->id ) ); ?>"
 					data-action="delete_comment"
-					data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon fa fa-times"></i></span>
+					data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
 	<?php else : ?>
 		<?php if ( 0 !== $id && $add_button ) : ?>
 			<span data-parent="comment"
@@ -67,7 +67,7 @@ $user = User_Digi_Class::g()->get( array(
 						data-add-button="<?php echo esc_attr( $add_button ); ?>"
 						data-display-date="<?php echo esc_attr( $display_date ); ?>"
 						data-display-user="<?php echo esc_attr( $display_user ); ?>"
-						class="button add action-input"><i class="icon fa fa-plus"></i></span>
+						class="button add action-input"><i class="icon far fa-plus"></i></span>
 		<?php endif; ?>
 	<?php endif; ?>
 </li>
