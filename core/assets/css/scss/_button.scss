@@ -39,9 +39,6 @@
 		&:hover {
 			background: none;
 			color: #fff;
-			.float-icon {
-				animation-name: bounceInLight;
-			}
 		}
 		&:active {
 			transform: none;
@@ -57,15 +54,6 @@
 		}
 		.icon {
 			transition: all 0.2s ease-out;
-		}
-		.float-icon {
-			position: absolute;
-			top: -6px;
-			right: -6px;
-			background: #d6d6d6;
-			padding: 4px;
-			border-radius: 50%;
-			font-size: 12px;
 		}
 		.icon.dashicons {
 			line-height: 1.3;
@@ -270,6 +258,32 @@
 			span {
 				margin-left: 4px;
 			}
+		}
+	}
+
+
+	.float-icon {
+		font-size: 34px;
+		.background-icon {
+			color: #d6d6d6;
+		}
+		.fa-layers-counter {
+			font-size: 40px;
+			background: #d6d6d6;
+			color: rgba(0,0,0,0.8);
+		}
+		&:hover .fa-layers-counter {
+			animation-name: bounceInLight;
+		}
+		// position: absolute;
+		// top: -6px;
+		// right: -6px;
+		// background: #d6d6d6;
+		// padding: 4px;
+		// border-radius: 50%;
+		// font-size: 12px;
+		.float-icon {
+			animation-name: bounceInLight;
 		}
 	}
 

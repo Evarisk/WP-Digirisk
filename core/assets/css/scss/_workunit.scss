@@ -393,7 +393,8 @@
 			display: block !important;
 		}
 		> .unit-container .toggle-unit .icon:before {
-			content: $fa-var-angle-down !important;
+			// content: $fa-var-angle-down !important;
+			// @todo
 		}
 	}
 
@@ -422,7 +423,8 @@
 			.icon {
 				font-family: 'FontAwesome';
 				&:before {
-					content: $fa-var-angle-right;
+					// content: $fa-var-angle-right;
+					// @todo
 				}
 			}
 		}

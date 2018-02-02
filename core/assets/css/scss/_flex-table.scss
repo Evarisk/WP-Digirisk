@@ -150,21 +150,14 @@
 		}
 		.canvas-eraser {
 			pointer-events: auto;
-			width: 20px;
-			min-width: 20px;
-			height: 20px;
-			line-height: 20px;
-			padding: 0!important;
-			text-align: center;
-			-webkit-border-radius: 50%;
-			border-radius: 50%;
-			font-size: 10px;
-			background: $grey;
-			color: rgba(0,0,0,0.4);
-			transition: all 0.2s ease-out;
-			&:hover {
-				background: rgba(0,0,0,0.2);
-				cursor: pointer;
+			float: right;
+
+			.fa-circle {
+				color: rgba(0,0,0,0.4);
+				transition: all 0.2s ease-out;
+			}
+			&:hover .fa-circle {
+				color: $red;
 			}
 		}
 	}
