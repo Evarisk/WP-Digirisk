@@ -47,5 +47,5 @@ window.eoxiaJS.digirisk.riskTools.risk_preset_reset = function( event ) {
 	li.innerHTML = window.digi_tools_in_progress;
 	jQuery( this ).closest( 'div' ).find( 'ul' ).append( li );
 
-	window.eoxiaJS.digirisk.riskTools.exec_request( li, data, this );
+	window.eoxiaJS.digirisk.tools.exec_request( li, data, this );
 };
