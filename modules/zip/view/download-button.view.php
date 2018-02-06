@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i class="fa fa-file-archive-o" aria-hidden="true"></i>
 	</a>
 <?php else : ?>
-	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ZIP Corrompu', 'digirisk' ); ?>">
 		<i class="fa fa-times icon" aria-hidden="true"></i>
 	</span>
 <?php endif; ?>

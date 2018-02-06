@@ -14,26 +14,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <tr>
-	<input type="hidden" name="action" value="generate_duer" />
-	<?php wp_nonce_field( 'callback_ajax_generate_duer' ); ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td class="padding"></td>
 	<td class="padding">
-		<div class="group-date form-element <?php echo esc_attr( ! empty( $element->document_meta['dateDebutAudit']['raw'] ) ? 'active' : '' ); ?>">
-			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateDebutAudit" value="<?php echo esc_attr( $element->document_meta['dateDebutAudit']['raw'] ); ?>" />
-			<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->document_meta['dateDebutAudit']['rendered']['date'] ); ?>" />
+		<div class="group-date form-element">
+			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateDebutAudit" value="" />
+			<input type="text" class="date" placeholder="04/01/2017" value="" />
 		</div>
 	</td>
 	<td class="padding">
-		<div class="group-date form-element <?php echo esc_attr( ! empty( $element->document_meta['dateFinAudit']['raw'] ) ? 'active' : '' ); ?>">
-			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateFinAudit" value="<?php echo esc_attr( $element->document_meta['dateFinAudit']['raw'] ); ?>" />
-			<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->document_meta['dateFinAudit']['rendered']['date'] ); ?>" />
+		<div class="group-date form-element">
+			<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="dateFinAudit" value="" />
+			<input type="text" class="date" placeholder="04/01/2017" value="" />
 		</div>
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"><?php echo esc_html( $element->document_meta['destinataireDUER'] ); ?></textarea>
+		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"></textarea>
 		<span data-parent="main-container"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -45,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-methodology" name="methodologie"><?php echo esc_html( $element->document_meta['methodologie'] ); ?></textarea>
+		<textarea class="hidden textarea-content-methodology" name="methodologie"></textarea>
 		<span data-parent="main-container"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -57,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-sources" name="sources"><?php echo esc_html( $element->document_meta['sources'] ); ?></textarea>
+		<textarea class="hidden textarea-content-sources" name="sources"></textarea>
 		<span data-parent="main-container"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -69,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-dispo-des-plans" name="dispoDesPlans"><?php echo esc_html( $element->document_meta['dispoDesPlans'] ); ?></textarea>
+		<textarea class="hidden textarea-content-dispo-des-plans" name="dispoDesPlans"></textarea>
 		<span data-parent="main-container"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -81,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"><?php echo esc_html( $element->document_meta['remarqueImportante'] ); ?></textarea>
+		<textarea class="hidden textarea-content-notes-importantes" name="remarqueImportante"></textarea>
 		<span data-parent="main-container"
 					data-target="popup"
 					data-cb-namespace="digirisk"

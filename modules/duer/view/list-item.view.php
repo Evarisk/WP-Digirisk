@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr>
 	<td class="padding w50"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateDebutAudit']['rendered']['date'] ); ?></td>
-	<td class="padding"><?php echo esc_html( $element->document_meta['dateFinAudit']['rendered']['date'] ); ?></td>
+	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
+	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 
 	<td class="padding padding text-center">
-		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( $element->document_meta['destinataireDUER'] ) ); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( 'test' ) ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-methodology"><?php echo nl2br( $element->document_meta['methodologie'] ); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-methodology"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-sources"><?php echo nl2br( $element->document_meta['sources'] ); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-sources"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( $element->document_meta['dispoDesPlans'] ); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 		<td class="padding text-center">
-			<span class="hidden text-content-notes-importantes"><?php echo nl2br( $element->document_meta['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
+			<span class="hidden text-content-notes-importantes"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
 			<span data-parent="main-content"
 						data-target="popup"
 						data-cb-namespace="digirisk"
@@ -82,14 +82,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action grid-layout w2">
-			<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
+			<?php if ( ! empty( $element->link ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
-					href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+					href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element->link ) ); ?>">
 					<i class="fa fa-file-text-o" aria-hidden="true"></i>
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
 					<i class="fa fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
