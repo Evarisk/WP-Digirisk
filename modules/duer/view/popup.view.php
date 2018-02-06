@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="header">
 			<h2 class="title">Titre de la popup</h2>
-			<i class="close fa fa-times"></i>
+			<i class="close far fa-times"></i>
 		</div>
 
 		<div class="content">

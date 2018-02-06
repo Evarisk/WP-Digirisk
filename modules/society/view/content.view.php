@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[wpeo_upload id="' . $element->id . '" title="' . $element->unique_identifier . ' - ' . $element->title . '" model_name="/digi/' . $element->get_class() . '" field_name="image" single="false" ]' ); ?>
 
 		<?php apply_filters( 'society_identity', $element, true ); ?>
-		<div class="button w50 edit"><i class="icon fa fa-pencil"></i></div>
+		<div class="button w50 edit"><i class="icon fas fa-pencil"></i></div>
 
 		<div
 				class="button green action-input save"
 				data-parent="unit-header"
 				data-loader="digirisk-wrap"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fa fa-floppy-o"></i></span></div>
-		<div class="mobile-navigation"><i class="icon fa fa-bars"></i></div>
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fas fa-save"></i></span></div>
+		<div class="mobile-navigation"><i class="icon fas fa-bars"></i></div>
 	</div>
 </div>
 

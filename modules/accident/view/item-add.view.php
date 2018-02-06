@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-action="edit_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->id ); ?>"
-				data-add="true"><i class="icon fa fa-plus"></i></div>
+				data-add="true"><i class="icon far fa-plus"></i></div>
 		</div>
 	</div>
 </div>

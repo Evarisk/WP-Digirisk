@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td>
 		<div class="action">
 			<div class="action-input button blue add w50" data-loader="table" data-parent="sheet-workunit-row">
-				<i class="icon fa fa-plus"></i>
+				<i class="icon far fa-plus"></i>
 			</div>
 		</div>
 	</td>

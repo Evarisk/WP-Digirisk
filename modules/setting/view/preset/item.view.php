@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td>
 		<div class="hidden">
-			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 		</div>
 	</td>
 </tr>

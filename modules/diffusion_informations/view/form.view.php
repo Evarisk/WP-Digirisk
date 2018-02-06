@@ -70,5 +70,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 	</div>
 
-	<button class="button blue action-input float right" data-parent="form-generate"><i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span></button>
+	<button class="button blue action-input float right" data-parent="form-generate"><i class="icon far fa-sync-alt"></i><span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span></button>
 </form>

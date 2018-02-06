@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 												data-loader="affected-evaluator"
 												data-message-delete="<?php echo esc_attr_e( 'Dissocier l\'évaluateur', 'digirisk' ); ?>"
 												class="action-delete button w50 light delete">
-												<i class="icon fa fa-times"></i>
+												<i class="icon far fa-times"></i>
 											</div>
 										</div>
 								</td>

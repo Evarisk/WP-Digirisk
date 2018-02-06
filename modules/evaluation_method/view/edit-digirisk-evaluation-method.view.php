@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			aria-label="<?php esc_html_e( 'Vous devez coter votre risque.', 'digirisk' ); ?>">
 
 	<div class="action cotation default-cotation level<?php echo esc_attr( $risk->evaluation->scale ); ?>">
-		<i class="icon fa fa-line-chart" style="<?php echo ( 0 !== $risk->evaluation->id ) ? 'display: none;': ''; ?>"></i>
+		<i class="icon fas fa-chart-line" style="<?php echo ( 0 !== $risk->evaluation->id ) ? 'display: none;': ''; ?>"></i>
 		<span>
 			<?php if ( 0 !== $risk->evaluation->id ) :
 				echo esc_html( $risk->evaluation->risk_level['equivalence'] );
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<li data-level="4" class="item cotation level4"><span>80</span></li>
 
 		<?php if ( 0 === $risk->id || $risk->preset ) : ?>
-			<li class="item cotation method open-popup" data-parent="risk-row" data-class="popup-evaluation" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
+			<li class="item cotation method open-popup" data-parent="risk-row" data-class="popup-evaluation" data-target="popup-evaluation"><i class="icon fas fa-cog"></i></li>
 		<?php endif; ?>
 	</ul>
 </div>

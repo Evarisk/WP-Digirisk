@@ -22,11 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action">
 			<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
 			<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
-				<i class="icon fa fa-download" aria-hidden="true"></i>
+				<i class="icon fas fa-download" aria-hidden="true"></i>
 			</a>
 			<?php else : ?>
 				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
-					<i class="fa fa-times icon" aria-hidden="true"></i>
+					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
 		</div>

@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<?php if ( 0 !== $recommendation->id ) : ?>
 			<div class="action grid-layout w2">
-				<div data-parent="recommendation-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="recommendation-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w2">
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"
 							data-loader="table"
-							class="button w50 disable add action-input"><i class="icon fa fa-plus"></i></div>
+							class="button w50 disable add action-input"><i class="icon far fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

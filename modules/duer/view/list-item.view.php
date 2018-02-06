@@ -29,7 +29,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="view_in_popup"
 					data-title="Destinataire"
 					data-src="destinataire-duer"
-					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-users"></span></span>
+					class="fa-layers fa-fw open-popup float-icon">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="far fa-eye"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding text-center">
@@ -41,7 +48,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="view_in_popup"
 					data-title="Méthodologie"
 					data-src="methodology"
-					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-search"></span></span>
+					class="fa-layers fa-fw open-popup float-icon">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="far fa-eye"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding text-center">
@@ -53,7 +67,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="view_in_popup"
 					data-title="Source"
 					data-src="sources"
-					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-links"></span></span>
+					class="fa-layers fa-fw open-popup float-icon">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="far fa-eye"></i>
+			</span>
+		</span>
 		</td>
 
 	<td class="padding text-center">
@@ -65,7 +86,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="view_in_popup"
 					data-title="Disponibilité des plans"
 					data-src="dispo-des-plans"
-					class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-location"></span></span>
+					class="fa-layers fa-fw open-popup float-icon">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="far fa-eye"></i>
+			</span>
+		</span>
 	</td>
 
 		<td class="padding text-center">
@@ -77,7 +105,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-cb-func="view_in_popup"
 						data-title="Note importante"
 						data-src="notes-importantes"
-						class="open-popup button grey radius w30"><i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-clipboard"></span></span>
+						class="fa-layers fa-fw open-popup float-icon">
+
+				<i class="fas fa-square background-icon"></i>
+				<i class="fas fa-file" data-fa-transform="shrink-10"></i>
+				<span class="animated-icon animated">
+					<i class="far fa-eye"></i>
+				</span>
+			</span>
 		</td>
 
 	<td>
@@ -85,12 +120,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php if ( ! empty( $element->link ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
-					href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element->link ) ); ?>">
-					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					href="<?php echo esc_attr( $element->link ); ?>">
+					<i class="icon fas fa-file-alt"></i>
 				</a>
 			<?php else : ?>
 				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
-					<i class="fa fa-times icon" aria-hidden="true"></i>
+					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
 

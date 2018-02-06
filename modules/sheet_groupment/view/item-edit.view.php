@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<div class="action">
 			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">
-				<i class="icon fa fa-plus"></i>
+				<i class="icon far fa-plus"></i>
 			</div>
 		</div>
 	</td>

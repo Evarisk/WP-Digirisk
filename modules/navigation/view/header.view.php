@@ -23,25 +23,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 			data-namespace="digirisk"
 			data-module="navigation"
 			data-before-method="setUnitActive">
-	<span class="icon dashicons dashicons-building"></span>
+	<span class="icon fas fa-building fa-fw"></span>
 	<div class="title">
 		<?php echo esc_html( $society->title ); ?>
 	</div>
 	<div class="add-container">
-		<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span><span class="button-add animated fa fa-plus-circle"></span></div>
-		<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span><span class="button-add animated fa fa-plus-circle"></span></div>
+		<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span><span class="button-add animated far fa-plus-circle"></span></div>
+		<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span><span class="button-add animated far fa-plus-circle"></span></div>
 	</div>
 	<div class="mobile-add-container toggle option" data-parent="toggle" data-target="content">
-		<i class="action fa fa-ellipsis-v"></i>
+		<i class="action far fa-ellipsis-v"></i>
 		<ul class="content">
 			<li class="item" data-type="Group_Class"><i class="icon dashicons dashicons-admin-multisite"></i><?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?></li>
 			<li class="item" data-type="Workunit_Class"><i class="icon dashicons dashicons-admin-home"></i><?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?></li>
 		</ul>
 	</div>
-	<div class="close-popup"><i class="icon fa fa-times"></i></div>
+	<div class="close-popup"><i class="icon far fa-times"></i></div>
 </div>
 
 <div class="toolbar">
-	<div class="toggle-plus tooltip hover" aria-label="<?php echo esc_attr( 'Tout déplier', 'digirisk' ); ?>"><span class="icon fa fa-plus-square"></span></div>
-	<div class="toggle-minus tooltip hover" aria-label="<?php echo esc_attr( 'Tout replier', 'digirisk' ); ?>"><span class="icon fa fa-minus-square"></span></div>
+	<div class="toggle-plus tooltip hover" aria-label="<?php echo esc_attr( 'Tout déplier', 'digirisk' ); ?>"><span class="icon fas fa-plus-square"></span></div>
+	<div class="toggle-minus tooltip hover" aria-label="<?php echo esc_attr( 'Tout replier', 'digirisk' ); ?>"><span class="icon fas fa-minus-square"></span></div>
 </div>

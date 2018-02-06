@@ -186,8 +186,8 @@
 				.add {
 					margin-left: 4px;
 					background: $primary;
-					i {
-						color: #fff;
+					.svg-inline--fa {
+						color: #fff !important;
 					}
 					&:hover {
 						background: $primary_dark;

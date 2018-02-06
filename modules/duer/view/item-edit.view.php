@@ -39,7 +39,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition du destinataire"
 					data-src="destinataire-duer"
-					class="open-popup button grey radius w30 span-content-destinataire-duer"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-admin-users"></span></span>
+					class="fa-layers fa-fw open-popup float-icon span-content-destinataire-duer">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="fas fa-pencil"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding">
@@ -51,7 +58,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la méthodologie"
 					data-src="methodology"
-					class="open-popup button grey w30 radius span-content-methodology"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-search"></span></span>
+					class="fa-layers fa-fw open-popup float-icon span-content-methodology">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="fas fa-pencil"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding">
@@ -63,7 +77,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la source"
 					data-src="sources"
-					class="open-popup button grey radius w30 span-content-sources"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-admin-links"></span></span>
+					class="fa-layers fa-fw open-popup float-icon span-content-sources">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="fas fa-pencil"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding">
@@ -75,7 +96,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la localisation"
 					data-src="dispo-des-plans"
-					class="open-popup button grey radius w30 span-content-dispo-des-plans"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-location"></span></span>
+					class="fa-layers fa-fw open-popup float-icon span-content-dispo-des-plans">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="fas fa-pencil"></i>
+			</span>
+		</span>
 	</td>
 
 	<td class="padding">
@@ -87,7 +115,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-func="fill_textarea_in_popup"
 					data-title="Édition de la note importante"
 					data-src="notes-importantes"
-					class="open-popup button grey radius w30 span-content-notes-importantes"><i class="float-icon fa fa-pencil animated"></i><span class="dashicons dashicons-clipboard"></span></span>
+					class="fa-layers fa-fw open-popup float-icon span-content-notes-importantes">
+
+			<i class="fas fa-square background-icon"></i>
+			<i class="fas fa-file" data-fa-transform="shrink-10"></i>
+			<span class="animated-icon animated">
+				<i class="fas fa-pencil"></i>
+			</span>
+		</span>
 	</td>
 
 	<td>
@@ -101,7 +136,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-cb-object="DUER"
 					data-cb-func="popup_for_generate_DUER"
 					data-title="Génération du DUER">
-					<i class="icon fa fa-print"></i>
+					<i class="icon far fa-plus"></i>
 				</div>
 		</div>
 	</td>
