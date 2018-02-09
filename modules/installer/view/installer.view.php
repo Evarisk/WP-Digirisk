@@ -47,6 +47,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="society-label"><?php echo esc_html_e( 'Nom de ma société*', 'digirisk' ); ?></label>
 				<input class="society-name" type="text" name="society[title]" />
 			</div>
+
+			<div class="bloc-default-data">
+				<div class="form-element checkbox-default-data">
+					<input type="checkbox" id="checkbox" name="install_default_data" value="checkbox">
+					<label for="checkbox"><?php esc_html_e( 'Installer les données par défaut', 'digirisk' ); ?></label>
+				</div>
+
+				<ul class="default-data-details hidden">
+					<?php
+					if ( ! empty( $default_data ) ) :
+						foreach ( $default_data as $key => $data ) :
+							?>
+							<li><?php echo esc_html( Group_Class::g()->element_prefix . ( $key + 1 ) . ' - ' . $data->title ); ?></li>
+							<?php
+
+							if ( ! empty( $data->workunits ) ) :
+								foreach ( $data->workunits as $key_workunit => $workunit ) :
+									?>
+									<li><?php echo esc_html( Workunit_Class::g()->element_prefix . ( $key_workunit + 1 ) . ' - ' . $workunit->title ); ?></li>
+									<?php
+								endforeach;
+							endif;
+						endforeach;
+					endif;
+					?>
+				</ul>
+			</div>
 		</div>
 
 		<div class="wpdigi-components hidden">

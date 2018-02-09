@@ -3344,8 +3344,7 @@
 .digirisk-wrap .main-header .title, .digirisk-wrap .main-header .dut {
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .main-header .media {
   background: #1e2129; }
@@ -3487,8 +3486,7 @@
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .unit-header .title strong {
   text-transform: uppercase; }
@@ -3637,8 +3635,7 @@
 .digirisk-wrap .workunit-navigation .content li div .wp-digi-global-name {
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   text-overflow: ellipsis; }
 
 .digirisk-wrap .workunit-navigation .content li div span {
@@ -4174,8 +4171,7 @@
   transition: all 0.2s ease-out;
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+  text-overflow: ellipsis; }
 
 .digirisk-wrap .tab .tab-element.active:not(.toggle):not(.gp) {
   background: #3495f0;
@@ -5777,6 +5773,14 @@
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: 36px; }
+
+.digirisk-wrap.wpdigi-installer .bloc-create-society .bloc-default-data {
+  text-align: left;
+  max-width: 460px;
+  margin: auto; }
+
+.digirisk-wrap.wpdigi-installer .bloc-create-society .bloc-default-data .checkbox-default-data {
+  margin-top: 20px; }
 
 .digirisk-wrap.wpdigi-installer .wpdigi-components h2 {
   text-align: center;

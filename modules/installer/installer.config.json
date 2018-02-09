@@ -5,7 +5,7 @@
 	"description": "Le module gérant la page d'installation de Digirisk",
 	"path": "modules/installer/",
 	"dependencies": {
-		"action": {},
-		"class": {}
+		"class": {},
+		"action": {}
 	}
 }

@@ -16,6 +16,9 @@ window.eoxiaJS.digirisk.installer.event = function() {
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.key_up_groupment_title );
 	jQuery( document ).on( 'click', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
 	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.fillPlaceHolder );
+
+	jQuery( document ).on( 'click', '.wpdigi-installer input[type="checkbox"]', window.eoxiaJS.digirisk.installer.toggleDefaultInstall );
+
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.eoxiaJS.digirisk.installer.key_up_domain_mail );
 	jQuery( '.owl-carousel' ).owlCarousel( {
 		'items': 1,
@@ -54,6 +57,10 @@ window.eoxiaJS.digirisk.installer.fillPlaceHolder = function( event ) {
 		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '0%' );
 		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 0 );
 	}
+};
+
+window.eoxiaJS.digirisk.installer.toggleDefaultInstall = function( event ) {
+	jQuery( '.wpdigi-installer .bloc-create-society .default-data-details' ).toggleClass( 'hidden' );
 };
 
 window.eoxiaJS.digirisk.installer.key_up_domain_mail = function( event ) {
