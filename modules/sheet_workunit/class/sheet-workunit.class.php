@@ -325,6 +325,13 @@ class Sheet_Workunit_Class extends Document_Class {
 	public function set_risks( $society ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
 
+		usort( $risks, function( $a, $b ) {
+			if( $a->current_equivalence == $b->current_equivalence ) {
+				return 0;
+			}
+			return ( $a->current_equivalence > $b->current_equivalence ) ? -1 : 1;
+		} );
+
 		$risk_details = array(
 			'risq80' => array( 'type' => 'segment', 'value' => array() ),
 			'risq51' => array( 'type' => 'segment', 'value' => array() ),
