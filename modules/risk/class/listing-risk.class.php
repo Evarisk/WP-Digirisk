@@ -145,9 +145,22 @@ class Listing_Risk_Class extends Document_Class {
 	 * @since 6.5.0
 	 * @version 6.5.0
 	 *
-	 * @param int $society_id L'ID de la société.
+	 * @param int    $society_id L'ID de la société.
+	 * @param string $type       Doit être "photos" ou "actions".
+	 *
+	 * @return array
 	 */
-	public function generate( $society_id ) {
+	public function generate( $society_id, $type ) {
+		$response = array(
+			'creation_response' => null,
+			'element'           => null,
+			'success'           => false,
+		);
+
+		if ( empty( $society_id ) || empty( $type ) ) {
+			return $response;
+		}
+
 		$society = Group_Class::g()->get( array(
 			'id' => $society_id,
 		), true );
@@ -156,13 +169,13 @@ class Listing_Risk_Class extends Document_Class {
 		$data_to_document = $this->set_risks( $data_to_document, $society );
 		$data_to_document = apply_filters( 'digi_generate_listing_risk_details', $data_to_document );
 
-		$document_creation_response = $this->create_document( $society, array( 'liste_des_risques_actions' ), $data_to_document );
+		$document_creation_response = $this->create_document( $society, array( 'liste_des_risques_' . $type ), $data_to_document );
 
-		return array(
-			'creation_response' => $document_creation_response,
-			'element'           => $society,
-			'success'           => true,
-		);
+		$response['creation_response'] = $document_creation_response;
+		$response['element']           = $society;
+		$response['success']           = true;
+
+		return $response;
 	}
 
 	/**
@@ -223,7 +236,7 @@ class Listing_Risk_Class extends Document_Class {
 		if ( ! empty( $list_risk ) ) {
 			foreach ( $list_risk as $risk ) {
 				$final_level = ! empty( Evaluation_Method_Class::g()->list_scale[ $risk['niveauRisque'] ] ) ? evaluation_method_class::g()->list_scale[ $risk['niveauRisque'] ] : '';
-				$data_to_document[ 'risq' . $final_level ]['value'][]            = $risk;
+				$data_to_document[ 'risq' . $final_level ]['value'][] = $risk;
 
 				if ( ! isset( $risk_per_element[ $risk['idElement'] ] ) ) {
 					$risk_per_element[ $risk['idElement'] ]['quotationTotale'] = 0;
@@ -246,9 +259,6 @@ class Listing_Risk_Class extends Document_Class {
 				return ( $a['quotationTotale'] > $b['quotationTotale'] ) ? -1 : 1;
 			} );
 		}
-
-		// echo '<pre>'; print_r( $data_to_document ); echo '</pre>';
-		// $data_to_document = $element_sub_tree;
 
 		return $data_to_document;
 	}

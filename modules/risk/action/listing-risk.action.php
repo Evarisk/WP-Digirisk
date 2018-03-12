@@ -42,12 +42,13 @@ class Listing_Risk_Action {
 		check_ajax_referer( 'generate_listing_risk' );
 
 		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$type       = ! empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
 
-		if ( ! $society_id ) {
+		if ( empty( $society_id ) || empty( $type ) ) {
 			wp_send_json_error();
 		}
 
-		Listing_Risk_Class::g()->generate( $society_id );
+		Listing_Risk_Class::g()->generate( $society_id, $type );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

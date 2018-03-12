@@ -19,13 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td></td>
-	<td><?php esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer un listing de risque', 'digirisk' ); ?></td>
+	<td></td>
 	<td>
-		<div class="action">
-			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">
-				<i class="icon fa fa-plus"></i>
+		<div class="action grid-layout w2">
+			<div class="w50 action-input add button blue tooltip hover"
+				data-type="photos"
+				aria-label="<?php esc_attr_e( 'Avec les photos des risques', 'digirisk' ); ?>"
+				data-loader="table"
+				data-parent="sheet-groupment-row">
+				<i class="icon fa fa-file-image-o"></i>
+			</div>
+			<div class="w50 action-input add button blue tooltip hover"
+			data-type="actions"
+				aria-label="<?php esc_attr_e( 'Avec les actions correctives', 'digirisk' ); ?>"
+				data-loader="table"
+				data-parent="sheet-groupment-row">
+				<i class="icon fa fa-file"></i>
 			</div>
 		</div>
 	</td>
-
 </tr>
