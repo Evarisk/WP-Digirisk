@@ -238,12 +238,12 @@ class Group_Class extends \eoxia\Post_Class {
 
 			if ( ! empty( $risk->thumbnail_id ) ) {
 				$picture_definition = wp_get_attachment_image_src( $risk->thumbnail_id, 'full' );
-				$picture_path = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
+				$picture_path       = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 				if ( is_file( $picture_path ) ) {
 					$picture = array(
-						'type' => 'picture',
-						'value' => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+						'type'   => 'picture',
+						'value'  => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
 						'option' => array(
 							'size' => 9,
 						),
