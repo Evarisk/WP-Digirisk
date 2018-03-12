@@ -2,10 +2,10 @@
 /**
  * Gères la génération de la fiche de groupement
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -289,7 +289,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @return array La liste des évéluateurs affectés à la société
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
 	public function set_evaluators( $society ) {
 		$evaluators = array( 'utilisateursPresents' => array( 'type' => 'segment', 'value' => array() ) );
@@ -313,9 +313,18 @@ class Sheet_Groupment_Class extends Document_Class {
 					}
 				}
 
+				if ( count( $affected_evaluators ) > 1 ) {
+					usort( $affected_evaluators, function( $a, $b ) {
+						if( $a['dateAffectationUtilisateur'] == $b['dateAffectationUtilisateur'] ) {
+							return 0;
+						}
+						return ( $a['dateAffectationUtilisateur'] < $b['dateAffectationUtilisateur'] ) ? -1 : 1;
+					} );
+				}
+
 				$evaluators['utilisateursPresents'] = array(
-					'type'	=> 'segment',
-					'value'	=> $affected_evaluators,
+					'type'  => 'segment',
+					'value' => $affected_evaluators,
 				);
 			}
 		}
