@@ -2,10 +2,10 @@
 /**
  * Les filtres relatifs aux tâches correctives.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -23,8 +23,8 @@ class Corrective_Task_Filter {
 	/**
 	 * Constructeur
 	 *
-	 * @since 0.1
-	 * @version 6.2.6.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function __construct() {
 		add_filter( 'risk_duer_additional_data', array( $this, 'callback_risk_duer_additional_data' ), 10, 2 );
@@ -40,10 +40,10 @@ class Corrective_Task_Filter {
 	 * @return string                La chaine de caractère mise au bon format pour le ODT.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
-		$data_risk['actionPreventionCompleted'] = '';
+		$data_risk['actionPreventionCompleted']   = '';
 		$data_risk['actionPreventionUncompleted'] = '';
 
 		if ( class_exists( '\task_manager\task_class' ) ) {

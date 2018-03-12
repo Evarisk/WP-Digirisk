@@ -28,7 +28,6 @@ class DUER_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_group' ), 8, 2 );
 	}
 
 	/**
@@ -46,26 +45,6 @@ class DUER_Filter {
 			'type'  => 'text',
 			'text'  => __( 'DUER ', 'digirisk' ),
 			'title' => __( 'DUER', 'digirisk' ),
-		);
-
-		return $list_tab;
-	}
-
-	/**
-	 * Ajoutes une entrée dans le tableau $list_tab pour les groupements
-	 *
-	 * @param  array   $list_tab  La liste des filtres.
-	 * @param  integer $id        L'ID de la société.
-	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
-	 *
-	 * @since 6.4.4
-	 * @version 6.4.4
-	 */
-	public function callback_digi_tab_group( $list_tab, $id ) {
-		$list_tab['digi-group']['list-duer'] = array(
-			'type'  => 'text',
-			'text'  => __( 'Liste des risques ', 'digirisk' ),
-			'title' => __( 'Liste des risques', 'digirisk' ),
 		);
 
 		return $list_tab;

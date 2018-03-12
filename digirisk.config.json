@@ -30,67 +30,49 @@
 		"digirisk-handle-sorter",
 		"digirisk-setting"
 	],
-	"externals": [
-	],
+	"externals": [],
 	"modules": [
 		"core/core.config.json",
-
 		"modules/update_manager/update_manager.config.json",
 		"modules/historic/historic.config.json",
-
 		"modules/address/address.config.json",
 		"modules/society/society.config.json",
-
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",
-
 		"modules/recommendation/recommendation.config.json",
-		"modules/risk/risk.config.json",
-
 		"modules/document/document.config.json",
-
+		"modules/risk/risk.config.json",
 		"modules/duer/duer.config.json",
-
 		"modules/accident/accident.config.json",
 		"modules/causerie/causerie.config.json",
-
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
 		"modules/export_import/export_import.config.json",
 		"modules/page_sorter/page_sorter.config.json",
-
 		"modules/handle_model/handle_model.config.json",
-
 		"modules/group/group.config.json",
-
 		"modules/installer/installer.config.json",
-
 		"modules/legal_display/legal_display.config.json",
 		"modules/diffusion_informations/diffusion_informations.config.json",
-
 		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",
 		"modules/sheet_groupment/sheet_groupment.config.json",
 		"modules/sheet_workunit/sheet_workunit.config.json",
 		"modules/zip/zip.config.json",
-
 		"modules/tab/tab.config.json",
 		"modules/third/third.config.json",
 		"modules/tools/tools.config.json",
-
 		"modules/user/user.config.json",
 		"modules/user_dashboard/user_dashboard.config.json",
-
 		"modules/workunit/workunit.config.json",
 		"modules/navigation/navigation.config.json",
-
 		"modules/transfer_data/transfer_data.config.json"
 	],
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
 	"default_tab": "digi-informations",
 	"default_tab_title": "Les risques",
-	"key_last_update_version" : "_digirisk_last_update_version",
+	"key_last_update_version": "_digirisk_last_update_version",
 	"debug": false,
 	"block_updates": [
 		"task-manager.php"
