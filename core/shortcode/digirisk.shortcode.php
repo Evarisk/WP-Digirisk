@@ -3,7 +3,7 @@
  * Shortcode principale de l'application.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
+ * @since 6.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -23,7 +23,7 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 0.1.0
+	 * @since 6.0.0
 	 * @version 6.3.0
 	 */
 	protected function construct() {
@@ -33,7 +33,7 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 	/**
 	 * La méthode qui permet d'afficher le contenu de l'application
 	 *
-	 * @since 0.1.0
+	 * @since 6.0.0
 	 * @version 6.3.0
 	 *
 	 * @param  array $atts Les paramètres envoyés dans le shortcode.
@@ -49,13 +49,13 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 		}
 
 		if ( 0 === $establishment_id ) {
-			$society = Society_Class::g()->get( array(
+			$society          = Society_Class::g()->get( array(
 				'posts_per_page' => 1,
 			), true );
 			$establishment_id = $society->id;
 		}
 
-		require( PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php' );
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
 	}
 }
 

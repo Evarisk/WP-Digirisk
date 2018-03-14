@@ -1,0 +1,43 @@
+{
+	"createRiskSimpleCotation": [
+		{
+			"categoryRiskAriaLabel": "Risques d'incendie, d'explosion",
+			"cotationLevel": 3
+		},
+		{
+			"categoryRiskAriaLabel": "Risques liés aux circulations internes de véhicules",
+			"cotationLevel": 2
+		},
+		{
+			"categoryRiskAriaLabel": "Risques liés aux ambiances lumineuses",
+			"cotationLevel": 1
+		}
+	],
+	"editRiskSimpleCotation": {
+		"categoryRiskAriaLabel": "Risques d'incendie, d'explosion",
+		"cotationLevel": 4
+	},
+	"createRiskComplexCotation": {
+		"categoryRiskAriaLabel": "Risques liés aux agents biologiques",
+		"cotationLevel": [
+			"itt",
+			"inhabituelle-1-fois-par-mois",
+			"se-produit-tous-les-mois",
+			"pas-de-formation-ni-de-prevention",
+			"individuelle"
+		],
+		"cotationLevelValue": 3
+	},
+	"editRiskComplexCotation": {
+		"categoryRiskAriaLabel": "Risques liés aux agents biologiques",
+		"cotationLevel": [
+			"menace-sur-la-vie",
+			"frequente-1-fois-par-jour",
+			"se-produit-tous-les-mois",
+			"pas-de-formation-ni-de-prevention",
+			"rien"
+		],
+		"cotationLevelValue": 4
+	},
+	"addComment": "Mon super commentaire de ouf de la mort qui tue sans saut de ligne car je suis un boulet et que je veux faire un putain de texte à rallonge. (Oui jai pas utiliser Lorem Ipsum, et je crois que cest ça le pire!)"
+}

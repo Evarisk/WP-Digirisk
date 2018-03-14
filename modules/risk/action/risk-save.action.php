@@ -37,15 +37,13 @@ class Risk_Save_Action {
 	 * @param Risk_Model $risk Les données du risque.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
 	public function callback_save_risk( $risk ) {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
 		if ( isset( $risk['id'] ) ) {
-			$danger = Risk_Category_Class::g()->get( array(
-				'include' => $risk['danger_id'],
-			), true );
+			$danger = Risk_Category_Class::g()->get( array( 'id' => $risk['danger_id'] ), true );
 
 			$image_id = 0;
 
@@ -53,17 +51,21 @@ class Risk_Save_Action {
 				$image_id = (int) $risk['image_id'];
 			}
 
-			$risk['title'] = $danger->name;
-			$risk['parent_id'] = $parent_id;
-			$risk['taxonomy']['digi-category-risk'][] = $danger->id;
-			$risk_obj = Risk_Class::g()->update( $risk );
+			$risk['id']                               = (int) $risk['id'];
+			$risk['title']                            = $danger->name;
+			$risk['parent_id']                        = $parent_id;
+			$risk['taxonomy']['digi-category-risk'][] = (int) $danger->id;
+			$risk['taxonomy']['digi-method'][0]       = (int) $risk['taxonomy']['digi-method'][0];
+			$risk['preset']                           = (bool) ( $risk['preset'] === 'true' ) ? true : false;
+			$risk['status']                           = 'inherit';
+			$risk_obj                                 = Risk_Class::g()->update( $risk );
 
 			if ( ! $risk_obj ) {
 				wp_send_json_error();
 			}
 
 			$risk_evaluation = Risk_Evaluation_Class::g()->update( array(
-				'id' => $risk_obj->current_evaluation_id,
+				'id'      => $risk_obj->current_evaluation_id,
 				'post_id' => $risk_obj->id,
 			) );
 
@@ -76,8 +78,8 @@ class Risk_Save_Action {
 
 			if ( ! empty( $image_id ) ) {
 				$args_media = array(
-					'id' => $risk_obj->id,
-					'file_id' => $image_id,
+					'id'         => $risk_obj->id,
+					'file_id'    => $image_id,
 					'model_name' => '\digi\Risk_Class',
 				);
 
@@ -89,8 +91,8 @@ class Risk_Save_Action {
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $parent_id,
-			'id' => $risk_obj->id,
-			'content' => __( 'Mise à jour du risque', 'digirisk' ) . ' ' . $risk_obj->unique_identifier,
+			'id'        => $risk_obj->id,
+			'content'   => __( 'Mise à jour du risque', 'digirisk' ) . ' ' . $risk_obj->unique_identifier,
 		) );
 
 		do_action( 'save_risk_evaluation_comment', $risk_obj, $risk );

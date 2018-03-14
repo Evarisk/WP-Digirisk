@@ -37,11 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="action">
 		<?php if ( 0 !== $causerie->id ) : ?>
 			<div class="action grid-layout w3">
-				<div data-parent="causerie-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="causerie-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<div data-loader="table" data-parent="causerie-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+				<div data-loader="table" data-parent="causerie-row" class="button w50 blue add action-input progress"><i class="icon far fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

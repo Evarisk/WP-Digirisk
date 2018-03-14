@@ -5,10 +5,10 @@
  * Unite de travail
  * Risque
  *
- * @author Alexandre Techer <dev@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -65,7 +65,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * Exportes tout le contenu d'un groupement
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @param integer $parent_id (optional) Le groupement parent.
 	 *
@@ -76,7 +76,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 			'posts_per_page' => -1,
 			'post_type'      => array( 'digi-society', 'digi-group' ),
 			'post_parent'    => $parent_id,
-			'post_status'    => array( 'publish', 'draft' ),
+			'post_status'    => array( 'publish', 'inherit', 'draft' ),
 			'order'          => 'ASC',
 		) );
 
@@ -93,6 +93,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 				$groupment_data_to_export = array(
 					'title'         => $element->title,
 					'slug'          => $element->slug,
+					'status'        => $element->status,
 					'content'       => $element->content,
 					'link'          => $element->link,
 					'parent_id'     => $element->parent_id,
@@ -112,7 +113,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * Exportes les champs nécessaires des unités de travail.
 	 *
 	 * @since 6.1.5
-	 * @version 6.3.0
+	 * @version 6.5.0
 	 *
 	 * @param  array $workunits  Le tableau des unités de travail.
 	 * @return array
@@ -123,10 +124,11 @@ class Export_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $workunits ) ) {
 			foreach ( $workunits as $element ) {
 				$tmp_workunit_data = array(
-					'title' => $element->title,
-					'slug' => $element->slug,
-					'content' => $element->content,
-					'link' => $element->link,
+					'title'     => $element->title,
+					'slug'      => $element->slug,
+					'status'    => $element->status,
+					'content'   => $element->content,
+					'link'      => $element->link,
 					'parent_id' => $element->parent_id,
 					'list_risk' => $this->export_risks( $element->list_risk ),
 				);
@@ -142,7 +144,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * Exportes les champs nécessaires d'un risque.
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.1
+	 * @version 6.5.0
 	 *
 	 * @param  array $risks  Le tableau des risques.
 	 * @return array
@@ -155,6 +157,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 				$tmp_risk_data = array(
 					'title'             => $element->title,
 					'slug'              => $element->slug,
+					'status'            => $element->status,
 					'content'           => $element->content,
 					'link'              => $element->link,
 					'parent_id'         => $element->parent_id,

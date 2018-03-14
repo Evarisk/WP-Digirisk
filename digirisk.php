@@ -6,6 +6,7 @@
  */
 
 namespace digi;
+
 /**
  * Plugin Name: Digirisk
  * Plugin URI:  http://www.evarisk.com/document-unique-logiciel

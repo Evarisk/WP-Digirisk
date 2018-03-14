@@ -13,5 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="main-container">
-	<?php do_shortcode( '[digi_dashboard id="' . $establishment_id . '"]' ); ?>
+	<div class="wpeo-tab">
+		<?php do_shortcode( '[digi_dashboard id="' . $establishment_id . '"]' ); ?>
+	</div>
 </div>

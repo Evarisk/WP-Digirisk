@@ -1,42 +1,61 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition du schéma des documents
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class document_model extends \eoxia\Post_Model {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Définition du schéma des documents
+ */
+class Document_Model extends \eoxia\Post_Model {
 
 	/**
-	 * Construit le modèle / Fill the model
+	 * Définition du schéma des risques
 	 *
-	 * @param array|WP_Object $object La définition de l'objet dans l'instance actuelle / Object currently present into model instance
-	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
-	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
-			$this->model['mime_type'] = array(
-			'type' 				=> 'string',
-			'meta_type'		=> 'single',
-			'field'				=> 'post_mime_type'
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['mime_type'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => 'post_mime_type',
 		);
 
-		$this->model['unique_key'] = array(
-			'type' 				=> 'string',
-			'meta_type'		=> 'single',
-			'field'				=> '_wpdigi_unique_key',
+		$this->schema['unique_key'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_key',
 		);
 
-		$this->model['unique_identifier'] = array(
-			'type' 				=> 'string',
-			'meta_type'		=> 'single',
-			'field'				=> '_wpdigi_unique_identifier',
+		$this->schema['unique_identifier'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_identifier',
+			'default'   => '',
 		);
 
-		$this->model['model_id'] = array(
-			'type' 				=> 'string',
-			'meta_type'		=> 'single',
-			'field'				=> '_wpdigi_model_id',
+		$this->schema['model_id'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_model_id',
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
 
 }

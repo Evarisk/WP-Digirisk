@@ -1,21 +1,15 @@
 {
 	"name": "Evaluation méthode",
 	"slug": "evaluation_method",
-	"version": "6.2.9.0",
+	"version": "6.5.0",
 	"description": "Le module gérant les méthode d'évaluation de Digirisk",
 	"path": "modules/evaluation_method/",
 	"dependencies": {
-		"shortcode": {
-		},
-		"helper": {
-		},
-		"util": {
-		},
-		"model": {
-		},
-		"action": {
-		},
-		"class": {
-		}
+		"shortcode": {},
+		"helper": {},
+		"util": {},
+		"model": {},
+		"action": {},
+		"class": {}
 	}
 }

@@ -2,16 +2,14 @@
 /**
  * Ajoutes un shortcode qui permet d'afficher la liste de tous les documents uniques d'un établissement.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 0.1
- * @copyright 2015-2016 Eoxia
- * @package document
- * @subpackage shortcode
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
-
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -23,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DUER_Shortcode {
 	/**
 	 * Le constructeur
+	 *
+	 * @since 6.0.0
+	 * @version 6.0.0
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-list-duer', array( $this, 'callback_digi_list_duer' ) );
@@ -30,6 +31,9 @@ class DUER_Shortcode {
 
 	/**
 	 * Appelle la méthode display de la classe Document_Unique_Class
+	 *
+	 * @since 6.0.0
+	 * @version 6.0.0
 	 *
 	 * @param array $param Les paramètres du shortcode.
 	 * @return void

@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="society-form">
 				<label class="society-label"><?php echo esc_html_e( 'Nom de ma société*', 'digirisk' ); ?></label>
-				<input class="society-name" type="text" name="society[title]" />
+				<input class="society-name" type="text" name="title" />
 			</div>
 		</div>
 

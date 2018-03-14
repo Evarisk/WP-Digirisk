@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-before-method="checkData"
 					data-parent="user-row"
 					data-loader="table">
-					<i class="icon fa fa-plus"></i>
+					<i class="icon far fa-plus"></i>
 				</div>
 			<?php	else : ?>
 				<div class="button w50 green add action-input"
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-before-method="checkData"
 					data-parent="user-row"
 					data-loader="table">
-					<i class="icon fa fa-floppy-o"></i>
+					<i class="icon fas fa-save"></i>
 				</div>
 			<?php	endif; ?>
 		</div>

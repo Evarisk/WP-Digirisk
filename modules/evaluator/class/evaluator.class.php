@@ -2,16 +2,18 @@
 /**
  * Classe gérant les évaluateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les évaluateurs
@@ -23,14 +25,14 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name 	= '\digi\user_digi_model';
+	protected $model_name = '\digi\User_Digi_Model';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key		= '_wpeo_user_info';
+	protected $meta_key = '_wpeo_user_info';
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
@@ -44,14 +46,14 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $base 	= 'evaluator';
+	protected $base = 'evaluator';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 	= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -74,37 +76,37 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 
 		$args_where_evaluator = array(
-			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
-			'exclude' => array( 1 ),
-			'number' => $this->limit_evaluator,
+			'offset'     => ( $current_page - 1 ) * $this->limit_evaluator,
+			'exclude'    => array( 1 ),
+			'number'     => $this->limit_evaluator,
 			'meta_query' => array(
 				'relation' => 'OR',
 			),
 		);
 
-		$evaluators = $this->get( $args_where_evaluator );
+		$evaluators = User_Digi_Class::g()->get( $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( $this->get( $args_where_evaluator ) );
+		$count_evaluator                = count( User_Digi_Class::g()->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
-			'element' => $element,
-			'evaluators' => $evaluators,
+			'element'                 => $element,
+			'evaluators'              => $evaluators,
 			'list_affected_evaluator' => $list_affected_evaluator,
-			'number_page' => $number_page,
-			'current_page' => $current_page,
+			'number_page'             => $number_page,
+			'current_page'            => $current_page,
 		) );
 	}
 
@@ -115,7 +117,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @return array
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function get_list_affected_evaluator( $society ) {
 		if ( 0 === $society->id || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) ) {
@@ -128,9 +130,9 @@ class Evaluator_Class extends \eoxia\User_Class {
 				if ( ! empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {
-							$evaluator = $this->get( array( 'id' => $evaluator_id ) );
-							$list_evaluator[ $evaluator_id ][ $index ]['user_info'] = $evaluator[0];
-							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info'] = $sub_array_value;
+							$evaluator = User_Digi_Class::g()->get( array( 'id' => $evaluator_id ), true );
+							$list_evaluator[ $evaluator_id ][ $index ]['user_info']              = $evaluator;
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']       = $sub_array_value;
 							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']['id'] = $index;
 						}
 					}
@@ -160,8 +162,8 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @return string La durée d'affectation en minutes / Assigment duration in minutes
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.2.4
 	 */
 	public function get_duration( $user_affectation_info ) {
 		if ( empty( $user_affectation_info['start']['date'] ) || empty( $user_affectation_info['end']['date'] ) ) {

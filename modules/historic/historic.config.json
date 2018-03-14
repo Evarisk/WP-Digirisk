@@ -1,7 +1,7 @@
 {
 	"name": "Historique",
 	"slug": "historic",
-	"version": "6.3.0",
+	"version": "6.5.0",
 	"description": "Le module gérant l'hitorique des données",
 	"path": "modules/historic/",
 	"dependencies": {

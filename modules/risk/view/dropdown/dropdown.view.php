@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="action">
 		<span class="<?php echo ! empty( $preset ) && ! empty( $selected_risk_category ) ? 'hidden' : ''; ?>"><?php esc_html_e( 'Risque', 'digirisk' ); ?></span>
 		<img class="<?php echo ! empty( $preset ) ? '' : 'hidden'; ?> tooltip hover" src="<?php echo ! empty( $selected_risk_category ) ? esc_attr( wp_get_attachment_url( $selected_risk_category->thumbnail_id ) ) : ''; ?>" aria-label="" />
-		<i class="icon animated fa fa-angle-down"></i>
+		<i class="icon animated far fa-angle-down"></i>
 	</div>
 
 	<ul class="content">

@@ -2,10 +2,10 @@
 /**
  * Edition d'un accident
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="hidden" name="accident[victim_identity_id]" value="">
 	</div>
 	<div class="cell padding w150 group-date">
-		<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['date_input']['date'] ); ?>" />
-		<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['date_input']['fr_FR']['date_time'] ); ?>" />
+		<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="accident[accident_date]" value="<?php echo esc_attr( $accident->accident_date['raw'] ); ?>" />
+		<input type="text" class="date-time" placeholder="04/01/2017 00:00" value="<?php echo esc_html( $accident->accident_date['rendered']['date'] ); ?>" />
 	</div>
 	<div class="cell padding w100 tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 		<div class="form-fields">
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-action="edit_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->id ); ?>"
-				data-add="true"><i class="icon fa fa-plus"></i></div>
+				data-add="true"><i class="icon far fa-plus"></i></div>
 		</div>
 	</div>
 </div>

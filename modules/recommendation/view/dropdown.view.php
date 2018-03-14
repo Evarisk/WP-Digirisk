@@ -1,18 +1,19 @@
 <?php
 /**
- * La liste des préconisations
+ * La liste des recommendations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.9.0
- * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
 
@@ -24,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<div class="action">
 		<span><?php esc_html_e( 'Choisir une signalisation', 'digirisk' ); ?></span>
 		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une signalisation', 'digirisk' ); ?>" />
-		<i class="icon animated fa fa-angle-down"></i>
+		<i class="icon animated far fa-angle-down"></i>
 	</div>
 
 	<ul class="content">

@@ -1,11 +1,11 @@
 <?php
 /**
- * Les actions relatives aux utilisateurs dans la page "utilisateur" de WordPress.
+ * Les actions relatives aux utilisateurs DigiRisk dans la page "Utilisateurs DigiRisk" du menu "Utilisateurs" de WordPress.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Dev <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Les actions relatives aux utilisateurs dans la page "utilisateur" de WordPress.
+ * Les actions relatives aux utilisateurs DigiRisk dans la page "Utilisateurs DigiRisk" du menu "Utilisateurs" de WordPress.
  */
-class User_Shortcode_Action extends \eoxia\Singleton_Util {
+class User_Dashboard_Action extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur appelle les actions suivantes:
@@ -64,14 +64,32 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 */
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
 
-		$update_state = User_Digi_Class::g()->update( $_POST );
+		$id        = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$lastname  = ! empty( $_POST['lastname'] ) ? sanitize_text_field( $_POST['lastname'] ) : '';
+		$firstname = ! empty( $_POST['firstname'] ) ? sanitize_text_field( $_POST['firstname'] ) : '';
+		$email     = ! empty( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
 
-		$error = is_wp_error( $update_state->id );
+		if ( empty( $lastname ) || empty( $firstname ) || empty( $email ) ) {
+			wp_send_json_error();
+		}
+
+		$user_args = array(
+			'id'        => $id,
+			'login'     => trim( strtolower( remove_accents( sanitize_user( $firstname . $lastname ) ) ) ),
+			'password'  => wp_generate_password(),
+			'lastname'  => $lastname,
+			'firstname' => $firstname,
+			'email'     => $email,
+		);
+
+		$update_state = User_Digi_Class::g()->update( $user_args );
+
+		$error = is_wp_error( $update_state );
 
 		ob_start();
 		User_Dashboard_Class::g()->display_list_user();
@@ -91,27 +109,26 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.9
+	 * @version 6.5.0
 	 */
 	public function ajax_load_user() {
 		check_ajax_referer( 'ajax_load_user' );
 
 		if ( 0 === (int) $_POST['id'] ) {
-			wp_send_json_error( );
+			wp_send_json_error();
 		} else {
 			$id = (int) $_POST['id'];
 		}
 
-		$user = User_Digi_Class::g()->get( array( 'id' => $id ) );
-		$user = $user[0];
+		$user = User_Digi_Class::g()->get( array( 'id' => $id ), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'userDashboard',
+			'namespace'        => 'digirisk',
+			'module'           => 'userDashboard',
 			'callback_success' => 'loadedUserSuccess',
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
 		) );
 	}
 
@@ -121,7 +138,7 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.9
+	 * @version 6.5.0
 	 */
 	public function ajax_delete_user() {
 		check_ajax_referer( 'ajax_delete_user' );
@@ -133,9 +150,10 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 		}
 
 		User_Digi_Class::g()->delete( $id );
+
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'userDashboard',
+			'namespace'        => 'digirisk',
+			'module'           => 'userDashboard',
 			'callback_success' => 'deletedUserSuccess',
 		) );
 	}
@@ -161,4 +179,4 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	}
 }
 
-User_Shortcode_Action::g();
+User_Dashboard_Action::g();

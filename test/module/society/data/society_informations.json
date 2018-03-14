@@ -1,0 +1,12 @@
+{
+	"society[title]": "Evarisk",
+	"society[siret_id]": "123456789",
+	"society[number_of_employees]": "10",
+	"address[address]": "Ma superbe adresse",
+	"address[additional_address]": "Mon complément dadresse",
+	"address[postcode]": "12345",
+	"address[town]": "Ma ville",
+	"society[contact][phone][]": "0467676767",
+	"society[contact][email]": "email@demo.com",
+	"society[content]": "Ma superbe entreprise"
+}

@@ -2,28 +2,30 @@
 /**
  * Classe gérant les risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les risques
  */
- class Risk_Class extends \eoxia\Post_Class {
+class Risk_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\risk_model';
+	protected $model_name = '\digi\Risk_Model';
 
 	/**
 	 * Le post type
@@ -96,16 +98,14 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
-	 * @todo Doit charger les risques des enfants
+	 * @version 6.5.0
+	 * @todo 24/01/2018: Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$risk_schema = $this->get( array( 'schema' => true ) );
-		$risk_schema = $risk_schema[0];
-
-		$risks = $this->get( array( 'post_parent' => $society_id ) );
+		$risk_schema = self::get( array( 'id' => 0 ), true );
+		$risks       = self::get( array( 'post_parent' => $society_id ) );
 
 		if ( count( $risks ) > 1 ) {
 			usort( $risks, function( $a, $b ) {
@@ -117,9 +117,9 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
-			'society' => $society,
-			'society_id' => $society_id,
-			'risks' => $risks,
+			'society'     => $society,
+			'society_id'  => $society_id,
+			'risks'       => $risks,
 			'risk_schema' => $risk_schema,
 		) );
 	}

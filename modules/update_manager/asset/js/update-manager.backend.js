@@ -2,7 +2,7 @@
  * Initialise l'objet "updateManager" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.2.8
- * @version 6.4.0
+ * @version 6.5.0
  */
 
 window.eoxiaJS.digirisk.updateManager = {};
@@ -20,10 +20,14 @@ window.eoxiaJS.digirisk.updateManager.init = function() {
 	window.addEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
 };
 
+window.eoxiaJS.digirisk.updateManager.requestUpdateFunc = {
+	endMethod: []
+};
 window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
+	var key             = jQuery( 'input.current-key' ).val();
 	var versionToUpdate = jQuery( 'input[name="version_available[]"]:first' ).val();
-	var action = jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).val();
-	var description = jQuery( 'input[name="version[' + versionToUpdate + '][description][]"]:first' ).val();
+	var action          = jQuery( 'input[name="version[' + versionToUpdate + '][action][]"]:first' ).val();
+	var description     = jQuery( 'input[name="version[' + versionToUpdate + '][description][]"]:first' ).val();
 
 	if ( versionToUpdate ) {
 		if ( ( args && ! args.more ) || ! args ) {
@@ -60,10 +64,10 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 					if ( 0 == jQuery( 'input[name="version_available[]"]:first' ).length ) {
 						delete response.data.args;
 
-						jQuery( '.log' ).append( '<li>Redirection vers l\'application en cours...</li>' );
-						jQuery.post( ajaxurl, { 'action': 'digi_redirect_to_dashboard' }, function( response ) {
+						jQuery.post( ajaxurl, { action: 'digi_redirect_to_dashboard', key: key }, function( response ) {
+							jQuery( '.log' ).append( '<li>' + response.data.message + '</li>' );
 							window.removeEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
-							window.location = response;
+							window.location = response.data.url;
 						});
 					} else {
 						window.eoxiaJS.digirisk.updateManager.requestUpdate( response.data.args );
@@ -71,8 +75,24 @@ window.eoxiaJS.digirisk.updateManager.requestUpdate = function( args ) {
 				} else {
 					window.eoxiaJS.digirisk.updateManager.requestUpdate( response.data.args );
 				}
+			} )
+			.fail( function( error, t, r ) {
+				jQuery( '.log' ).append( '<li>Erreur: veuillez consulter les logs de la version: ' + versionToUpdate + '</li>' );
+				jQuery.post( ajaxurl, { action: 'digi_redirect_to_dashboard', key: key, error_version: versionToUpdate, error_status: error.status, error_text: error.responseText }, function( response ) {
+					jQuery( '.log' ).append( '<li>' + response.data.message + '</li>' );
+					window.removeEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
+					window.location = response.data.url;
+				});
 			} );
 		}
+	}
+
+	if ( jQuery( '.no-update' ).length ) {
+		jQuery.post( ajaxurl, { action: 'digi_redirect_to_dashboard', key: key }, function( response ) {
+			jQuery( '.log' ).append( '<li>' + response.data.message + '</li>' );
+			window.removeEventListener( 'beforeunload', window.eoxiaJS.digirisk.updateManager.safeExit );
+			window.location = response.data.url;
+		});
 	}
 };
 

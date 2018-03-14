@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="container">
 		<div class="header">
 			<h2 class="title">Historique des modèles</h2>
-			<i class="close fa fa-times"></i>
+			<i class="close far fa-times"></i>
 		</div>
 		<div class="content">
 		</div>

@@ -2,10 +2,10 @@
 /**
  * Classe gérant les affichages légaux
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -25,7 +25,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\legal_display_model';
+	protected $model_name = '\digi\Legal_Display_Model';
 
 	/**
 	 * Le post type
@@ -138,26 +138,25 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * Le formulaire pour générer un affichage légal
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
 	 * @param  object $element L'objet affichage_legal.
 	 * @return void
 	 */
 	public function display_form( $element ) {
 		$legal_display = $this->get( array(
-			'post_parent' => $element->id,
-		) );
+			'posts_per_page' => 1,
+			'post_parent'    => $element->id,
+		), true );
 
 		if ( empty( $legal_display ) ) {
 			$legal_display = $this->get( array(
 				'schema' => true,
-			) );
+			), true );
 		}
 
-		$legal_display = $legal_display[0];
-
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/display', array(
-			'element_id' => $element->id,
+			'element_id'    => $element->id,
 			'legal_display' => $legal_display,
 		) );
 	}

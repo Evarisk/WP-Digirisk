@@ -2,10 +2,10 @@
 /**
  * Gères l'action AJAX de la génération du DUER
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -22,8 +22,11 @@ class DUER_Action {
 
 	/**
 	 * Le constructeur
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
-	function __construct() {
+	public function __construct() {
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
 		add_action( 'wp_ajax_generate_duer', array( $this, 'callback_ajax_generate_duer' ) );
 	}
@@ -35,7 +38,7 @@ class DUER_Action {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.2.9
+	 * @version 6.5.0
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
@@ -56,10 +59,10 @@ class DUER_Action {
 			'society' => $society,
 		) );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'DUER',
+			'namespace'        => 'digirisk',
+			'module'           => 'DUER',
 			'callback_success' => 'displayedSocietyDUERSuccess',
-			'view' => ob_get_clean(),
+			'view'             => ob_get_clean(),
 		) );
 	}
 
@@ -68,15 +71,16 @@ class DUER_Action {
 	 * Cette méthode appelle la méthode generate de DUER_Generate_Class.
 	 *
 	 * @since 6.2.3
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
 	 * @return void
+	 * @todo: 24/01/2018: Déplacer dans la méthode "generate" dans le fichier duer-generate.class.php
 	 */
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'callback_ajax_generate_duer' );
 
 		$meta_generate_duer = get_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer, true );
-		$end = false;
+		$end                = false;
 
 		if ( empty( $meta_generate_duer ) ) {
 			$meta_generate_duer = array();
@@ -89,18 +93,13 @@ class DUER_Action {
 		} elseif ( ! empty( $_POST['generate_duer'] ) ) {
 			$document_id = ! empty( $_POST ) && is_int( (int) $_POST['element_id'] ) && ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 			if ( ! empty( $document_id ) ) {
-				$parent_id = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+				$parent_id      = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 				$parent_element = Society_Class::g()->show_by_type( $parent_id );
 
-				$current_document = DUER_Class::g()->get( array(
-					'post__in' => array(
-						$document_id,
-					),
-					'post_status' => 'any',
-				) );
+				$current_document = DUER_Class::g()->get( array( 'id' => $document_id ), true );
 
 				\eoxia\LOG_Util::log( 'DEBUT - Génération du document DUER', 'digirisk' );
-				$generate_response = Document_Class::g()->generate_document( $current_document[0]->model_id, $current_document[0]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[0]->title . '.odt' );
+				$generate_response = Document_Class::g()->generate_document( $current_document->model_id, $current_document->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document->title . '.odt' );
 				\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
 			}
 		} elseif ( ! empty( $_POST['zip'] ) ) {
@@ -113,13 +112,7 @@ class DUER_Action {
 			$end = true;
 
 			// C'est sur que c'est le 0 le DUER.
-			$duer = DUER_Class::g()->get( array(
-				'id' => $meta_generate_duer[0]['id'],
-				'post_status' => array(
-					'publish',
-					'inherit',
-				),
-			), true );
+			$duer           = DUER_Class::g()->get( array( 'id' => $meta_generate_duer[0]['id'] ), true );
 			$duer->zip_path = $generate_response['zip_path'];
 			DUER_Class::g()->update( $duer );
 
@@ -127,11 +120,11 @@ class DUER_Action {
 		} else {
 			$post_type = get_post_type( $_POST['society_id'] );
 
-			if ( 'digi-group' === $post_type ) {
+			if ( Group_Class::g()->get_type() === $post_type ) {
 				\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $_POST['society_id'], 'digirisk' );
 				$generate_response = Sheet_Groupment_Class::g()->generate( $_POST['society_id'] );
 				\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
-			} elseif ( 'digi-workunit' === $post_type ) {
+			} elseif ( Workunit_Class::g()->get_type() === $post_type ) {
 				\eoxia\LOG_Util::log( 'DEBUT - Génération du document unité de travail #U' . $_POST['society_id'], 'digirisk' );
 				$generate_response = Sheet_Workunit_Class::g()->generate( $_POST['society_id'] );
 				\eoxia\LOG_Util::log( 'FIN - Génération du document unité de travail', 'digirisk' );
@@ -143,9 +136,9 @@ class DUER_Action {
 		}
 
 		$response = array(
-			'namespace' => 'digirisk',
-			'module' => 'DUER',
-			'index' => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'namespace'         => 'digirisk',
+			'module'            => 'DUER',
+			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
 			'creation_response' => ! empty( $generate_response ) && ! empty( $generate_response['creation_response'] ) ? $generate_response['creation_response'] : '',
 		);
 

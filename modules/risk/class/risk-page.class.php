@@ -2,21 +2,24 @@
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
 class Risk_Page_Class extends \eoxia\Singleton_Util {
+
 	/**
 	 * La limite des risques a afficher par page
 	 *
@@ -48,7 +51,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function display() {
 		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
@@ -61,7 +64,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$order_type   = ! empty( $_GET['order_type'] ) ? sanitize_text_field( $_GET['order_type'] ) : 'ASC';
 
 		$args_where = array(
-			'post_status'    => array( 'publish' ),
+			'post_status'    => array( 'publish', 'inherit' ),
 			'offset'         => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
 			'meta_key'       => '_wpdigi_equivalence',
@@ -98,7 +101,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -113,7 +116,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'DESC';
 
 		$args_where = array(
-			'post_status' => array( 'publish' ),
+			'post_status' => array( 'publish', 'inherit' ),
 			'offset' => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
 			'meta_key' => '_wpdigi_equivalence',

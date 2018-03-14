@@ -35,12 +35,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
 						data-loader="table"
-						data-action="load_recommendation"><i class="icon fa fa-pencil"></i></div>
+						data-action="load_recommendation"><i class="icon fas fa-pencil"></i></div>
 
 			<div 	class="button w50 light delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
-						data-action="delete_recommendation"><i class="icon fa fa-times"></i></div>
+						data-action="delete_recommendation"><i class="icon far fa-times"></i></div>
 		</div>
 	</td>
 </tr>

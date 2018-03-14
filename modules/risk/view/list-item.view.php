@@ -49,12 +49,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-id="<?php echo esc_attr( $risk->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
 						data-loader="risk"
-						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
+						data-action="load_risk"><i class="icon fas fa-pencil"></i></div>
 
 			<div 	class="button light w50 delete action-delete"
 						data-id="<?php echo esc_attr( $risk->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
-						data-action="delete_risk"><i class="icon fa fa-times"></i></div>
+						data-action="delete_risk"><i class="icon far fa-times"></i></div>
 		</div>
 	</td>
 </tr>

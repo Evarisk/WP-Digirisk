@@ -139,7 +139,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	 * Cette méthode génère l'accident de travail bénin
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @param integer $accident_id L'ID de l'accident.
 	 * @return array {
@@ -153,7 +153,6 @@ class Accident_Travail_Benin_Class extends Document_Class {
 		), true );
 
 		$address = Society_Class::g()->get_address( $main_society );
-		$address = $address[0];
 
 		$sheet_details = array(
 			'raisonSociale' => $main_society->title,
@@ -208,9 +207,9 @@ class Accident_Travail_Benin_Class extends Document_Class {
 
 		$accident_details = array(
 			'ref' => $accident->unique_identifier,
-			'dateInscriptionRegistre' => $accident->registration_date_in_register['date_input']['fr_FR']['date'],
+			'dateInscriptionRegistre' => $accident->registration_date_in_register['rendered']['date'],
 			'nomPrenomMatriculeVictime' => ! empty( $accident->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $accident->victim_identity->id . ' ' . $accident->victim_identity->login : '',
-			'dateHeure' => $accident->accident_date['date_input']['fr_FR']['date_time'],
+			'dateHeure' => $accident->accident_date['rendered']['date_time'],
 			'lieu' => $accident->place->modified_unique_identifier . ' ' . $accident->place->title,
 			'circonstances' => $comment_content,
 			'siegeLesions' => $accident->location_of_lesions,

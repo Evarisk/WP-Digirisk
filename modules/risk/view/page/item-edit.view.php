@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<a href="#" data-id="<?php echo esc_attr( $risk->id ); ?>"
 								data-parent="risk-row"
 								data-loader="table"
-								class="edit-risk action-input fa fa-floppy-o" aria-hidden="true" style="display: none;" ></a>
+								class="edit-risk action-input fas fa-save" aria-hidden="true" style="display: none;" ></a>
 	</td>
 
 </tr>

@@ -2,10 +2,10 @@
 /**
  * Gères la génération de la fiche de poste
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.4.0
- * @copyright 2015-2017
+ * @version 6.5.0
+ * @copyright 2015-2018
  * @package DigiRisk
  */
 
@@ -187,21 +187,24 @@ class Sheet_Workunit_Class extends Document_Class {
 	/**
 	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
 	 *
-	 * @since 6.2.1.2
-	 * @version 6.2.1.2
+	 * @since 6.2.1
+	 * @version 6.5.0
 	 *
 	 * @param Workunit_Model $society L'objet unité de travail.
 	 * @return array
 	 */
 	public function get_infos( $society ) {
-		$infos = array( 'adresse' => '', 'codePostal' => '', 'ville' => '' );
+		$infos = array(
+			'adresse' => '',
+			'codePostal' => '',
+			'ville' => '',
+		);
 
 		$address = Society_Class::g()->get_address( $society );
-		$address = $address[0];
 
-		$infos['adresse'] = $address->address . ' ' . $address->additional_address;
+		$infos['adresse']    = $address->address . ' ' . $address->additional_address;
 		$infos['codePostal'] = $address->postcode;
-		$infos['ville'] = $address->town;
+		$infos['ville']      = $address->town;
 
 		return $infos;
 	}

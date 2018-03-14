@@ -15,7 +15,7 @@
 				<?php
 			else:
 				?>
-				<a href="#" data-id="<?php echo $chemical_product->id; ?>" class="wp-digi-action wp-digi-action-edit fa fa-floppy-o" aria-hidden="true" ></a>
+				<a href="#" data-id="<?php echo $chemical_product->id; ?>" class="wp-digi-action wp-digi-action-edit fas fa-save" aria-hidden="true" ></a>
 				<?php
 			endif;
 			?>

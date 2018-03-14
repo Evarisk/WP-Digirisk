@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux recommendations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -75,20 +75,28 @@ class Recommendation_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
 
-		$image_id = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
+		$id                     = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$parent_id              = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$image_id               = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
+		$recommendation_term_id = ! empty( $_POST['recommendation_term_id'] ) ? (int) $_POST['recommendation_term_id'] : 0;
 
-		$recommendation_term = Recommendation_Term_Class::g()->get( array(
-			'include' => $_POST['taxonomy']['digi-recommendation'],
-		) );
+		$recommendation_term = Recommendation_Term_Class::g()->get( array( 'id' => $recommendation_term_id ), true );
+		$recommendation_args = array(
+			'id'        => $id,
+			'parent_id' => $parent_id,
+			'status'    => 'publish',
+			'taxonomy'  => array(
+				'digi-recommendation-category' => array( $recommendation_term->parent_id ),
+				'digi-recommendation'          => array( $recommendation_term_id ),
+			),
+		);
 
-		$recommendation_term                                 = $recommendation_term[0];
-		$_POST['taxonomy']['digi-recommendation-category'][] = $recommendation_term->parent_id;
-		$recommendation                                      = Recommendation_Class::g()->update( $_POST );
+		$recommendation = Recommendation_Class::g()->update( $recommendation_args );
 
 		if ( ! empty( $image_id ) ) {
 			$args_media = array(
@@ -105,7 +113,10 @@ class Recommendation_Action {
 		if ( ! empty( $_POST['list_comment'] ) ) {
 			foreach ( $_POST['list_comment'] as $element ) {
 				if ( ! empty( $element['content'] ) ) {
-					$element['post_id'] = $recommendation->id;
+					$element['id']        = (int) $element['id'];
+					$element['parent_id'] = (int) $element['parent_id'];
+					$element['author_id'] = (int) $element['author_id'];
+					$element['post_id']   = (int) $recommendation->id;
 					Recommendation_Comment_Class::g()->update( $element );
 				}
 			}

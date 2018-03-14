@@ -2,10 +2,10 @@
 /**
  * Gestion des actions des accidents.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.4.0
- * @copyright 2015-2017
+ * @version 6.5.0
+ * @copyright 2015-2018
  * @package DigiRisk
  */
 
@@ -47,7 +47,7 @@ class Accident_Action {
 	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @return void
 	 */
@@ -68,12 +68,18 @@ class Accident_Action {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;
 		}
 
-		$accident   = Accident_Class::g()->update( $accident );
+		$accident['id']                 = (int) $accident['id'];
+		$accident['parent_id']          = (int) $accident['parent_id'];
+		$accident['victim_identity_id'] = (int) $accident['victim_identity_id'];
+		$accident['status']             = 'inherit';
+		$accident                       = Accident_Class::g()->update( $accident );
+
 		$upload_dir = wp_upload_dir();
 
 		// Associations des images.
 		if ( ! empty( $signature_of_the_caregiver ) ) {
-			$encoded_image = explode( ',', $signature_of_the_caregiver )[1];
+			$encoded_image = explode( ',', $signature_of_the_caregiver );
+			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
 			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
@@ -81,7 +87,8 @@ class Accident_Action {
 		}
 
 		if ( ! empty( $signature_of_the_victim ) ) {
-			$encoded_image = explode( ',', $signature_of_the_victim )[1];
+			$encoded_image = explode( ',', $signature_of_the_victim );
+			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
 			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
@@ -96,7 +103,10 @@ class Accident_Action {
 		if ( ! empty( $_POST['list_comment'] ) ) {
 			foreach ( $_POST['list_comment'] as $comment ) {
 				if ( ! empty( $comment['content'] ) ) {
-					$comment['post_id'] = $accident->id;
+					$comment['id']        = (int) $comment['id'];
+					$comment['parent_id'] = (int) $comment['parent_id'];
+					$comment['author_id'] = (int) $comment['author_id'];
+					$comment['post_id']   = (int) $accident->id;
 					\eoxia\Comment_Class::g()->update( $comment );
 				}
 			}

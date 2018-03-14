@@ -1,7 +1,7 @@
 /**
  * Import des fichiers less
  */
-@import "font/font";
+// @import "font/font";
 @import "reset";
 @import "variable";
 @import "tools";
@@ -67,6 +67,13 @@
 		-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
 		-ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
 		user-select: none; /* Propriété standard */
+	}
+
+	// Tmp
+	.accident {
+		.red {
+			color: red;
+		}
 	}
 
 }

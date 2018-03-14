@@ -110,30 +110,25 @@ class DUER_Class extends Document_Class {
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 1.0.0
-	 * @version 6.2.7
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
 			'posts_per_page' => 1,
-			'order' => 'DESC',
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-
-		if ( ! empty( $element[0] ) ) {
-			$element = $element[0];
-		}
+			'order'          => 'DESC',
+			'post_parent'    => $element_id,
+			'post_status'    => array( 'publish', 'inherit' ),
+		), true );
 
 		if ( empty( $element ) ) {
 			$element = $this->get( array(
 				'schema' => true,
-			) );
-			$element = $element[0];
+			), true );
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'duer', 'main', array(
-			'element' => $element,
+			'element'    => $element,
 			'element_id' => $element_id,
 		) );
 	}
@@ -144,8 +139,8 @@ class DUER_Class extends Document_Class {
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 1.0
-	 * @version 6.2.7.0
+	 * @since 6.0.0
+	 * @version 6.2.7
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array(

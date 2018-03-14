@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux risques.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -151,7 +151,7 @@ class Risk_Action {
 	 * Charges un risque
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.9.0
+	 * @version 6.5.0
 	 */
 	public function ajax_load_risk() {
 		check_ajax_referer( 'ajax_load_risk' );
@@ -162,16 +162,18 @@ class Risk_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$risk = Risk_Class::g()->get( array( 'id' => $id ) );
-		$risk = $risk[0];
+		$risk = Risk_Class::g()->get( array( 'id' => $id ), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
+			'society_id' => $risk->parent_id,
+			'risk'       => $risk,
+		) );
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'risk',
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
 			'callback_success' => 'loadedRiskSuccess',
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
 		) );
 	}
 

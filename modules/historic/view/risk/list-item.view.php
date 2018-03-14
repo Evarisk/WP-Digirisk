@@ -2,10 +2,10 @@
 /**
  * Affichage d'une cotation (Historique)
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><strong><?php echo esc_html( $evaluation->unique_identifier ); ?></strong></span>
 	</td>
 	<td data-title="Date" class="w50 padding">
-		<?php echo esc_html( $evaluation->date['date_input']['fr_FR']['date_time'] ); ?>
+		<?php echo esc_html( $evaluation->date['rendered']['date_time'] ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<div class="cotation-container grid">
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 							<li class="comment">
 								<span class="user"><?php echo ! empty( $userdata->display_name ) ? esc_html( $userdata->display_name ) : 'Indéfini'; ?>, </span>
-								<span class="date"><?php echo esc_html( $comment->date['date_input']['fr_FR']['date'] ); ?> : </span>
+								<span class="date"><?php echo esc_html( $comment->date['rendered']['date'] ); ?> : </span>
 								<span class="content"><?php echo esc_html( $comment->content ); ?></span>
 							</li>
 						<?php

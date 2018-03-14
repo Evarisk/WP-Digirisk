@@ -48,14 +48,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="action">
 		<?php if ( 0 !== $risk->id && false === $risk->preset ) : ?>
 			<div class="action grid-layout w3">
-				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
 				<?php if ( -1 != $risk->risk_category->id && -1 != $risk->evaluation->scale ) : ?>
-					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon far fa-plus"></i></div>
 				<?php else : ?>
-					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon fa fa-plus"></i></div>
+					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 disable add action-input progress"><i class="icon far fa-plus"></i></div>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

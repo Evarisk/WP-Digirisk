@@ -2,10 +2,10 @@
 /**
  * Classe gérant les onglets de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.4
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -44,7 +44,7 @@ class Tab_Class extends \eoxia\Singleton_Util {
 		$element = Society_Class::g()->show_by_type( $element_id );
 
 		// Si ce n'est pas une société, ajoutes l'identifiant unique: GP ou UT.
-		if ( Society_Class::g()->get_post_type() !== $element->type ) {
+		if ( Society_Class::g()->get_type() !== $element->type ) {
 			$title .= ' ' . $element->unique_identifier . ' -';
 		}
 

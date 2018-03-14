@@ -2,15 +2,16 @@
 /**
  * Gestion du formulaire pour générer une fiche de groupement
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package sheet_groupment
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.2.4
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <tr class="sheet-groupment-row">
 	<input type="hidden" name="action" value="generate_fiche_de_groupement" />
@@ -22,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	<td>
 		<div class="action">
 			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">
-				<i class="icon fa fa-plus"></i>
+				<i class="icon far fa-plus"></i>
 			</div>
 		</div>
 	</td>

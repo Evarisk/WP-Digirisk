@@ -1,7 +1,7 @@
 {
 	"name": "Group",
 	"slug": "group",
-	"version": "6.4.0",
+	"version": "6.5.0",
 	"description": "Le module gérant les groupements",
 	"path": "modules/group/",
 	"dependencies": {

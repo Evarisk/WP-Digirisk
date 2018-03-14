@@ -2,7 +2,7 @@
  * Initialise l'objet "DUER" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  */
 
 window.eoxiaJS.digirisk.DUER = {};
@@ -30,8 +30,8 @@ window.eoxiaJS.digirisk.DUER.event = function() {};
  * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
 	var textareaContent = '';
@@ -63,8 +63,8 @@ window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement
  * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
 	if ( args ) {
@@ -145,8 +145,8 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
+ * @version 6.5.0
  */
 window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
@@ -168,14 +168,14 @@ window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
  * Lors de la fermeture de la popup qui génère le DUER.
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  *
  * @param  {HTMLSpanElement} element L'élément déclencheur de l'action.
  * @param  {ClickEvent} event        L'état de la souris
  * @return {void}
  */
 window.eoxiaJS.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
-	if ( jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ) ) {
-		jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ).click();
+	if ( jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ) ) {
+		jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ).click();
 	}
 };

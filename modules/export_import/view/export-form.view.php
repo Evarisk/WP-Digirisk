@@ -2,10 +2,10 @@
 /**
  * Vue permettant d'exporter un modèle DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -27,13 +27,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<ul class="hidden">
 			<li>
-				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Group_Class::g()->get_post_type() ); ?>" checked="true" /><?php esc_html_e( 'Groupements', 'digirisk' ); ?></label>
+				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Group_Class::g()->get_type() ); ?>" checked="true" /><?php esc_html_e( 'Groupements', 'digirisk' ); ?></label>
 			</li>
 			<li>
-				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Workunit_Class::g()->get_post_type() ); ?>" checked="true" /><?php esc_html_e( 'Unités de travail', 'digirisk' ); ?></label>
+				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Workunit_Class::g()->get_type() ); ?>" checked="true" /><?php esc_html_e( 'Unités de travail', 'digirisk' ); ?></label>
 			</li>
 			<li>
-				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Risk_Class::g()->get_post_type() ); ?>" checked="true" /><?php esc_html_e( 'Risques', 'digirisk' ); ?></label>
+				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Risk_Class::g()->get_type() ); ?>" checked="true" /><?php esc_html_e( 'Risques', 'digirisk' ); ?></label>
 			</li>
 		</ul>
 	</div>

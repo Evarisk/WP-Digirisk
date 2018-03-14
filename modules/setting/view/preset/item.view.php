@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="parent_id" value="0" />
 	<input type="hidden" name="page" value="setting_risk" />
 	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $danger->id ); ?>" />
+	<input type="hidden" name="risk[preset]" value="true" />
+	<input type="hidden" name="can_update" value="true" />
 
 	<td class="wm130 w150">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $danger->id . ' type="risk"]' ); ?>
@@ -35,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td>
 		<div class="hidden">
-			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
+			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 		</div>
 	</td>
 </tr>

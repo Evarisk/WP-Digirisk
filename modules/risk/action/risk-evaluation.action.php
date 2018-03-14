@@ -4,10 +4,10 @@
  * Gères la méthode d'évaluation simple
  * Géres la méthode d'évalution complexe
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -35,12 +35,14 @@ class Risk_Evaluation_Action {
 	 * Enregistres l'évaluation d'un risque
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
 	 * @todo: nonce
 	 */
 	public function ajax_edit_risk() {
 		$risk = ! empty( $_POST['risk'] ) ? $_POST['risk'] : array();
+
+		$risk['evaluation']['scale']   = (int) $risk['evaluation']['scale'];
 
 		$risk['image_id'] = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
@@ -52,7 +54,7 @@ class Risk_Evaluation_Action {
 		}
 
 		if ( isset( $risk['id'] ) ) {
-			$risk['evaluation']['method_id'] = max( $risk['taxonomy']['digi-method'] );
+			$risk['evaluation']['method_id'] = (int) end( $risk['taxonomy']['digi-method'] );
 
 			if ( ! empty( $risk['variable'] ) ) {
 				$risk['evaluation']['variable'] = $risk['variable'];

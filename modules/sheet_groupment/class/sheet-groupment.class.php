@@ -2,10 +2,10 @@
 /**
  * Gères la génération de la fiche de groupement
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017
+ * @version 6.5.0
+ * @copyright 2015-2018
  * @package DigiRisk
  */
 
@@ -39,7 +39,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	public $attached_taxonomy_type  = 'attachment_category';
+	public $attached_taxonomy_type = 'attachment_category';
 
 	/**
 	 * La clé principale du modèle
@@ -104,7 +104,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
@@ -112,7 +112,7 @@ class Sheet_Groupment_Class extends Document_Class {
 		), true );
 
 		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'main', array(
-			'element' => $element,
+			'element'   => $element,
 			'element_id' => $element_id,
 		) );
 	}
@@ -197,17 +197,16 @@ class Sheet_Groupment_Class extends Document_Class {
 	 */
 	public function get_infos( $society ) {
 		$infos = array(
-			'adresse' => '',
+			'adresse'    => '',
 			'codePostal' => '',
-			'ville' => '',
+			'ville'      => '',
 		);
 
 		$address = Society_Class::g()->get_address( $society );
-		$address = $address[0];
 
-		$infos['adresse'] = $address->address . ' ' . $address->additional_address;
+		$infos['adresse']    = $address->address . ' ' . $address->additional_address;
 		$infos['codePostal'] = $address->postcode;
-		$infos['ville'] = $address->town;
+		$infos['ville']      = $address->town;
 
 		return $infos;
 	}

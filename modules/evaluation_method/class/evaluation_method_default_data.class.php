@@ -1,41 +1,82 @@
-<?php namespace digi;
+<?php
 /**
-* @TODO : A détailler
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluation_method
-* @subpackage class
-*/
+ * Gestion des données des méthodes d'évaluation des risque par défaut.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluation_method_default_data_class extends \eoxia\Singleton_Util {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Gestion des données des méthodes d'évaluation des risque par défaut.
+ */
+class Evaluation_Method_Default_Data_Class extends \eoxia\Singleton_Util {
+
+	/**
+	 * Le constructeur
+	 *
+	 * @since 6.0.0
+	 * @version 6.0.0
+	 *
+	 * @return void
+	 */
 	protected function construct() {}
 
 	/**
-	* Créer les méthodes d'évaluation par défaut
-	*/
+	 * Créer les méthodes d'évaluation par défaut
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param array $exclude Les données à exclure.
+	 *
+	 * @return bool          True si tout s'est bien passé sinon false.
+	 */
 	public function create( $exclude = array() ) {
-		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
-		$data = json_decode( $file_content );
+		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->evaluation_method->url . 'asset/json/default.json' );
 
-		if ( !empty( $data ) ) {
+		if ( is_wp_error( $request ) ) {
+			return false;
+		}
+
+		$request = wp_remote_retrieve_body( $request );
+		$data    = json_decode( $request );
+
+		if ( ! empty( $data ) ) {
 			foreach ( $data as $json_evaluation_method ) {
 				if ( ! in_array( $json_evaluation_method->slug, $exclude, true ) ) {
 					$this->create_evaluation_method( $json_evaluation_method );
 				}
 			}
 		}
+
+		return true;
 	}
 
+	/**
+	 * Créer la méthode d'évaluation.
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param  Object $json_evaluation_method Les données de la méthode d'évaluation.
+	 *
+	 * @return void
+	 */
 	private function create_evaluation_method( $json_evaluation_method ) {
-		$evaluation_method = evaluation_method_class::g()->create( array(
-			'name' 				=> $json_evaluation_method->name,
-			'slug' 				=> $json_evaluation_method->slug,
-			'is_default'	=> $json_evaluation_method->option->is_default,
-			'matrix'			=> $json_evaluation_method->option->matrix,
+		$evaluation_method = Evaluation_Method_Class::g()->create( array(
+			'name'       => $json_evaluation_method->name,
+			'slug'       => $json_evaluation_method->slug,
+			'is_default' => $json_evaluation_method->option->is_default,
+			'matrix'     => (array) $json_evaluation_method->option->matrix,
 		) );
 
 		if ( ! is_wp_error( $evaluation_method ) ) {
@@ -43,31 +84,40 @@ class evaluation_method_default_data_class extends \eoxia\Singleton_Util {
 				$this->create_evaluation_method_variable( $evaluation_method, $json_evaluation_method, $json_evaluation_method_variable );
 			}
 		}
-
 	}
 
+	/**
+	 * Créer les variables de la méthode d'évaluation
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param  Evaluation_Method_Model $evaluation_method               Le modèle de la méthode d'évaluation.
+	 * @param  Object                  $json_evaluation_method          Les données de la méthode d'évaluation.
+	 * @param  Object                  $json_evaluation_method_variable Les données des variables de la méthode d'évaluation.
+	 *
+	 * @return void
+	 */
 	private function create_evaluation_method_variable( $evaluation_method, $json_evaluation_method, $json_evaluation_method_variable ) {
-		// On tente de crée les variables de la méthode d'évaluation
-		$evaluation_method_variable = evaluation_method_variable_class::g()->create( array(
-				'name' => $json_evaluation_method_variable->name,
-				'description' => $json_evaluation_method_variable->description,
-				'display_type' => $json_evaluation_method_variable->option->display_type,
-				'range' => $json_evaluation_method_variable->option->range,
-				'survey' => $json_evaluation_method_variable->option->survey,
+		$evaluation_method_variable = Evaluation_Method_Variable_Class::g()->create( array(
+			'name'         => $json_evaluation_method_variable->name,
+			'description'  => $json_evaluation_method_variable->description,
+			'display_type' => $json_evaluation_method_variable->option->display_type,
+			'range'        => $json_evaluation_method_variable->option->range,
+			'survey'       => (array) $json_evaluation_method_variable->option->survey,
 		) );
 
-		// Si elle existe déjà
-		if ( !is_wp_error( $evaluation_method_variable ) ) {
-			if ( $json_evaluation_method->slug == 'evarisk' ) {
+		if ( ! is_wp_error( $evaluation_method_variable ) ) {
+			if ( 'evarisk' === $json_evaluation_method->slug ) {
 				$evaluation_method->formula[] = $evaluation_method_variable->id;
-				$evaluation_method->formula[] = "*";
-			}
-			else {
-				if ( !empty( $evaluation_method_variable->id ) )
+				$evaluation_method->formula[] = '*';
+			} else {
+				if ( ! empty( $evaluation_method_variable->id ) ) {
 					$evaluation_method->formula[] = $evaluation_method_variable->id;
+				}
 			}
 
-			$evaluation_method = evaluation_method_class::g()->update( $evaluation_method );
+			$evaluation_method = Evaluation_Method_Class::g()->update( $evaluation_method );
 		}
 	}
 }
