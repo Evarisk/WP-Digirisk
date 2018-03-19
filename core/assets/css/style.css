@@ -3343,8 +3343,7 @@
 
 .digirisk-wrap .main-header .title, .digirisk-wrap .main-header .dut {
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+  overflow: hidden; }
 
 .digirisk-wrap .main-header .media {
   background: #1e2129; }
@@ -3485,8 +3484,7 @@
   padding: 0 10px;
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+  overflow: hidden; }
 
 .digirisk-wrap .unit-header .title strong {
   text-transform: uppercase; }
