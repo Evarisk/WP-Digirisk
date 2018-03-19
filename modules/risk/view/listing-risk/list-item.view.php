@@ -19,7 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( $element->title ); ?></td>
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action grid-layout w1">
+			<div></div>
 			<div>
 				<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
 					<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
