@@ -2,10 +2,10 @@
 /**
  * Les actions relatives au document.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
  * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -23,7 +23,7 @@ class Document_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.4.0
 	 */
 	public function __construct() {
@@ -33,10 +33,10 @@ class Document_Action {
 	/**
 	 * Re-génére un document a partir des données présentes en base de données
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.4.0
 	 */
-	function ajax_regenerate_document() {
+	public function ajax_regenerate_document() {
 		check_ajax_referer( 'regenerate_document' );
 
 		$model_name = ! empty( $_POST['model_name'] ) ? sanitize_text_field( $_POST['model_name'] ) : '';

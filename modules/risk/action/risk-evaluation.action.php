@@ -28,7 +28,7 @@ class Risk_Evaluation_Action {
 	 * @version 6.2.4
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_edit_risk', array( $this, 'ajax_edit_risk' ) );
+		// add_action( 'wp_ajax_edit_risk', array( $this, 'ajax_edit_risk' ) );
 	}
 
 	/**

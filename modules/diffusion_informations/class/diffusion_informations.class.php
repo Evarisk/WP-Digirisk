@@ -3,7 +3,7 @@
  * Classe gérant les diffusions d'informations
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.2.10
+ * @since 6.4.0
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk

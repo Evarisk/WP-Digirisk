@@ -3,7 +3,7 @@
  * Gestion des données des recommandations par défaut.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -23,8 +23,8 @@ class Recommendation_Default_Data_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.0.0
-	 * @version 6.0.0
+	 * @since 6.1.5
+	 * @version 6.1.5
 	 *
 	 * @return void
 	 */
@@ -33,7 +33,7 @@ class Recommendation_Default_Data_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Créer les données par défaut
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 *
 	 * @return bool True si tout s'est bien passé, sinon false.
@@ -60,7 +60,7 @@ class Recommendation_Default_Data_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Créer les catégories des recommandation
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 *
 	 * @param  Object $json_recommendation_category Les données de la catégorie de recommandation.
@@ -94,7 +94,7 @@ class Recommendation_Default_Data_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Créer une recommandation
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 *
 	 * @param Recommendation_Category_Term_Model $recommendation_category Le modèle d'une catégorie de recommandation.

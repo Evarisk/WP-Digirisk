@@ -1,20 +1,59 @@
-<?php namespace digi;
+<?php
+/**
+ * Classe gérant les commentaires d'un risque.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.5
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class Risk_Evaluation_Comment_Class extends \eoxia\comment_class {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	protected $model_name   = '\digi\risk_evaluation_comment_model';
-	protected $meta_key     = '_wpdigi_risk_evaluation_comment';
-	protected $comment_type	= 'digi-riskevalcomment';
+/**
+ * Classe gérant les risques
+ */
+class Risk_Evaluation_Comment_Class extends \eoxia\Comment_Class {
 
-	protected $base					= 'risk-evaluation-comment';
-	protected $version			= '0.1';
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
+	protected $model_name = '\digi\risk_evaluation_comment_model';
 
-	protected function construct() {
-		parent::construct();
-	}
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key = '_wpdigi_risk_evaluation_comment';
 
+	/**
+	 * Le type
+	 *
+	 * @var string
+	 */
+	protected $comment_type = 'digi-riskevalcomment';
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $base = 'risk-evaluation-comment';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1';
 }
 
 Risk_Evaluation_Comment_Class::g();

@@ -3,10 +3,10 @@
  * Appel la méthode pour afficher la liste des fiches de groupement.
  * Appel la vue "item-edit".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
  * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array(
-		'element' => $element,
+		'element'    => $element,
 		'element_id' => $element_id,
 	) );
 	?>

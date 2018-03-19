@@ -1,16 +1,32 @@
 /**
  * Initialise l'objet "DUER" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.5.0
  */
 
 window.eoxiaJS.digirisk.DUER = {};
 
+/**
+ * Méthode obligatoire pour initialiser l'objet DUER avec EO-Framework.
+ *
+ * @since 6.2.1
+ * @version 6.2.1
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.DUER.init = function() {
 	window.eoxiaJS.digirisk.DUER.event();
 };
 
+/**
+ * Méthode pour initialiser tous les évènements.
+ *
+ * @since 6.2.1
+ * @version 6.2.1
+ *
+ * @return void
+ */
 window.eoxiaJS.digirisk.DUER.event = function() {};
 
 /**
@@ -30,7 +46,7 @@ window.eoxiaJS.digirisk.DUER.event = function() {};
  * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
  * @return {void}
  *
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.2.4
  */
 window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
@@ -63,7 +79,7 @@ window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement
  * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
  * @return {void}
  *
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.2.4
  */
 window.eoxiaJS.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
@@ -91,7 +107,7 @@ window.eoxiaJS.digirisk.DUER.popup_for_generate_DUER = function( triggeredElemen
 	};
 
 	popupElement.find( 'h2' ).text( args.title );
-	popupElement.addClass( 'duer no-close' );
+	popupElement.addClass( 'duer' );
 	popupElement.find( '.change-content' ).html( '<p></p>' );
 	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
 
@@ -101,12 +117,23 @@ window.eoxiaJS.digirisk.DUER.popup_for_generate_DUER = function( triggeredElemen
 window.eoxiaJS.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
 	popup.find( '.change-content' ).html( response.data.view );
 
-	window.eoxiaJS.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { index: 0 } );
+	window.eoxiaJS.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { data: { index: 1 } } );
 };
 
+/**
+ * Construit, et génères tous les documents ainsi que le DUER.
+ *
+ * @since 6.2.1
+ * @version 6.5.0
+ *
+ * @param  {HTMLDivElement} triggeredElement [description]
+ * @param  {object} preData          [description]
+ * @return {void}                   [description]
+ */
 window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
 	var data = {};
 	var i = 0;
+	var key;
 	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( 'tr' ) );
 
 	for ( i = 0; i < listInput.length; i++ ) {
@@ -115,25 +142,17 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
 		}
 	}
 
-	for ( i in preData ) {
-		data[i] = preData[i];
+	for ( key in preData.data ) {
+		data[key] = preData.data[key];
 	}
 
-	data['society_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'id' );
-	data['duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'duer' );
-	data['generate_duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'generate-duer' );
-	data['zip'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'zip' );
+	jQuery( '.popup.duer li:nth-child(' + ( preData.data.index ) + ')' ).get_data( function( attributeData ) {
+		for( key in attributeData ) {
+			data[key] = attributeData[key];
+		}
 
-	if ( data['zip'] ) {
-		data['element_id'] = jQuery( '.popup li:nth-child(3)' ).data( 'id' );
-	}
-
-	if ( data['generate_duer'] ) {
-		data['element_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'element-id' );
-		data['parent_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'parent-id' );
-	}
-
-	window.eoxiaJS.request.send( triggeredElement, data );
+		window.eoxiaJS.request.send( triggeredElement, data );
+	} );
 };
 
 /**
@@ -145,18 +164,16 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.5.0
  */
 window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
 	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
-	if ( response.data.creation_response.id  ) {
-		jQuery( '.popup li:nth-child(' + ( response.data.index + 1 ) + ')' ).attr( 'data-element-id', response.data.creation_response.id );
-	}
 
 	if ( ! response.data.end ) {
-		window.eoxiaJS.digirisk.DUER.generateDUER( element, response.data );
+		response.data.index++;
+		window.eoxiaJS.digirisk.DUER.generateDUER( element, response );
 	} else {
 		jQuery( '.popup' ).removeClass( 'no-close' );
 	}
@@ -167,7 +184,7 @@ window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
 /**
  * Lors de la fermeture de la popup qui génère le DUER.
  *
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.5.0
  *
  * @param  {HTMLSpanElement} element L'élément déclencheur de l'action.

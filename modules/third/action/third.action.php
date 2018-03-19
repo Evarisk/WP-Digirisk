@@ -3,7 +3,7 @@
  * Les actions des tiers.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.3
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -30,7 +30,7 @@ class Third_Action {
 	/**
 	 * Sauvegardes les données de tier pour l'affichage légal
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.3
 	 * @version 6.5.0
 	 */
 	public function callback_save_legal_display() {

@@ -3,7 +3,7 @@
  * Génères le DUER
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
+ * @since 6.2.1
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Génères le DUER
  */
-class DUER_Generate_Class extends \eoxia\Singleton_Util {
+class DUER_Document_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur pour l'héritage de Singleton_Util
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.3.0
 	 */
 	protected function construct() {}
@@ -31,7 +31,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Génères le DUER
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.4.0
 	 *
 	 * @param array $data Les data à mettre dans le ODT.
@@ -76,7 +76,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array Les données sécurisées
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.5.0
 	 */
 	public function securize_duer_data( $data, $element ) {
@@ -102,7 +102,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * Cette méthode permet de définir des chaines de caractères vide dans l'ODT si les données ne sont pas présente.
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.5.0
 	 *
 	 * @return array {
@@ -176,7 +176,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Récupères le logo
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.5.0
 	 *
 	 * @return string Le chemin vers le logo
@@ -196,7 +196,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array Les données qui seront insérées dans le document
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.5.0
 	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
@@ -217,7 +217,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array Les données qui seront insérées dans le document
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5
 	 */
 	public function fill_data_risk( $data_to_document, $element ) {
@@ -267,7 +267,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return string La date de l'audit formatté
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.3.0
 	 */
 	public function formatte_audit_date( $data_duer ) {

@@ -99,6 +99,7 @@ class Risk_Class extends \eoxia\Post_Class {
 	 *
 	 * @since 6.0.0
 	 * @version 6.5.0
+	 *
 	 * @todo 24/01/2018: Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
@@ -109,10 +110,15 @@ class Risk_Class extends \eoxia\Post_Class {
 
 		if ( count( $risks ) > 1 ) {
 			usort( $risks, function( $a, $b ) {
-				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
+				if ( ! isset( $a->current_equivalence ) ) {
 					return 0;
 				}
-				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
+
+				if ( $a->current_equivalence === $b->current_equivalence ) {
+					return 0;
+				}
+
+				return ( $a->current_equivalence > $b->current_equivalence ) ? -1 : 1;
 			} );
 		}
 
@@ -122,6 +128,34 @@ class Risk_Class extends \eoxia\Post_Class {
 			'risks'       => $risks,
 			'risk_schema' => $risk_schema,
 		) );
+	}
+
+	/**
+	 * Sauvegardes un risque dans la base de donnée.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @param  [type] $data                 [description]
+	 * @param  [type] $risk_category_id     [description]
+	 * @param  [type] $method_evaluation_id [description]
+	 * @return [type]                       [description]
+	 */
+	public function save( $data, $risk_category_id, $method_evaluation_id ) {
+		$data['id']        = (int) $data['id'];
+		$data['title']     = sanitize_text_field( $data['title'] );
+		$data['parent_id'] = (int) $data['parent_id'];
+
+		if ( ! isset( $data['status'] ) ) {
+			$data['status'] = 'inherit';
+		}
+
+		$data['$push']['taxonomy'] = array(
+			'digi-category-risk' => $risk_category_id,
+			'digi-method'        => $method_evaluation_id,
+		);
+
+		return $this->update( $data );
 	}
 }
 

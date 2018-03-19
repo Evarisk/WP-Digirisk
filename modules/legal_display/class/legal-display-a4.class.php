@@ -2,10 +2,10 @@
 /**
  * Classe héritant de Document_Class. Permet de définir les attributs "protected".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.0
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.6
  * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 

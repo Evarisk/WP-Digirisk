@@ -3,7 +3,7 @@
  * Les shortcodes en relation avec les fiches de groupement.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.0
  * @version 6.4.0
  * @copyright 2015-2017
  * @package DigiRisk
@@ -23,8 +23,8 @@ class Sheet_Groupement_Shortcode {
 	/**
 	 * Le constructeur ajoutes le shortcode
 	 *
-	 * @since 6.0.0
-	 * @version 6.0.0
+	 * @since 6.1.0
+	 * @version 6.1.0
 	 *
 	 * @todo passer le shortcode avec des "_" au lieu de "-"
 	 * @see add_shortcode
@@ -36,7 +36,7 @@ class Sheet_Groupement_Shortcode {
 	/**
 	 * Appelle la méthode display de la classe Fiche_De_Groupement_Class
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.0
 	 * @version 6.4.0
 	 *
 	 * @param array $atts Les paramètres du shortcode.

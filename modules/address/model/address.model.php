@@ -31,53 +31,71 @@ class Address_Model extends \eoxia\Comment_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['address'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['additional_address'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['postcode'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['town'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['state'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['country'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 
 		$this->schema['coordinate'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'child'     => array(),
 		);
 
 		$this->schema['coordinate']['child']['longitude'] = array(
-			'type' => 'string',
+			'since'   => '6.0.0',
+			'version' => '6.0.0',
+			'type'    => 'string',
 		);
 
 		$this->schema['coordinate']['child']['latitude'] = array(
-			'type' => 'string',
+			'since'   => '6.0.0',
+			'version' => '6.0.0',
+			'type'    => 'string',
 		);
 
 		parent::__construct( $data, $req_method );

@@ -3,7 +3,7 @@
  * Les actions relatives aux fiches de poste
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -23,7 +23,7 @@ class Sheet_Workunit_Action {
 	/**
 	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_workunit
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.4
 	 */
 	public function __construct() {
@@ -35,7 +35,7 @@ class Sheet_Workunit_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.4.0
 	 */
 	public function ajax_generate_fiche_de_poste() {

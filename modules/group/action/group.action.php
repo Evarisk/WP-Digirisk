@@ -2,17 +2,18 @@
 /**
  * Les actions relatives aux groupements
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.9.0
- * @copyright 2015-2017 Evarisk
- * @package group
- * @subpackage action
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.5
+ * @version 6.2.9
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Les actions relatives aux groupements
@@ -27,8 +28,8 @@ class Group_Action {
 	 * wp_ajax_display_ajax_sheet_display
 	 * wp_ajax_wpdigi_generate_duer_digi-group
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.1.5
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_create_group', array( $this, 'ajax_create_group' ) );
@@ -37,8 +38,8 @@ class Group_Action {
 	/**
 	 * Créer un groupement
 	 *
-	 * @since 1.0
-	 * @version 6.2.9.0
+	 * @since 6.1.5
+	 * @version 6.2.9
 	 */
 	public function ajax_create_group() {
 		check_ajax_referer( 'create_group' );

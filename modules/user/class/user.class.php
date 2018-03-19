@@ -39,14 +39,14 @@ class User_Digi_Class extends \eoxia\User_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_model_post_function = array( /*'\digi\construct_login', '\digi\generate_password'*/ );
+ // protected $before_model_post_function = array( );
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array();
+	protected $before_post_function = array( '\eoxia\build_user_initial', '\eoxia\build_avatar_color' );
 
 	/**
 	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
@@ -386,3 +386,5 @@ class User_Digi_Class extends \eoxia\User_Class {
 		return $index_valid_key;
 	}
 }
+
+User_Digi_Class::g();

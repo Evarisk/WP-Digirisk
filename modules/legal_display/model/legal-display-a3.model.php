@@ -3,7 +3,7 @@
  * Définition du schéma des affichages légaux A3 en mode "document".
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.6
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -23,7 +23,7 @@ class Legal_Display_A3_Model extends Document_Model {
 	/**
 	 * Définition du schéma des affichages légaux A3 en mode "document".
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.5.0
 	 *
 	 * @param array $data       Data.
@@ -31,6 +31,8 @@ class Legal_Display_A3_Model extends Document_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['document_meta'] = array(
+			'since'     => '6.1.6',
+			'version'   => '6.5.0',
 			'type'      => 'array',
 			'meta_type' => 'single',
 			'field'     => 'document_meta',

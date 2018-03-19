@@ -31,38 +31,59 @@ class Risk_Evaluation_Model extends \eoxia\Comment_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['risk_level'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'child'     => array(),
 		);
 
 		$this->schema['risk_level']['child']['method_result'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'multiple',
-			'default'   => 0,
-			'required'  => true,
+			'since'      => '6.0.0',
+			'version'    => '6.5.0',
+			'type'       => 'integer',
+			'meta_type'  => 'multiple',
+			'deprecated' => '>= 6.5.0',
 		);
 
 		$this->schema['risk_level']['child']['equivalence'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'multiple',
-			'default'   => 0,
-			'required'  => true,
+			'since'      => '6.0.0',
+			'version'    => '6.5.0',
+			'type'       => 'integer',
+			'meta_type'  => 'multiple',
+			'deprecated' => '>= 6.5.0',
 		);
 
 		$this->schema['quotation_detail'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
+		$this->schema['cotation'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'integer',
+			'field'     => '_wpdigi_risk_evaluation_cotation',
+			'meta_type' => 'single',
+			'default'   => -1,
+			'required'  => true,
+		);
+
 		$this->schema['equivalence'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'integer',
 			'field'     => '_wpdigi_risk_evaluation_equivalence',
 			'meta_type' => 'single',
-			'default'   => 0,
+			'default'   => -1,
+			'required'  => true,
 		);
 
 		$this->schema['scale'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'integer',
 			'field'     => '_wpdigi_risk_evaluation_scale',
 			'meta_type' => 'single',
@@ -71,16 +92,20 @@ class Risk_Evaluation_Model extends \eoxia\Comment_Model {
 		);
 
 		$this->schema['unique_key'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_key',
 		);
 
 		$this->schema['unique_identifier'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_identifier',
-			'default'   => '',
+			'default'   => __( 'N/A', 'digirisk' ),
 		);
 
 		parent::__construct( $data, $req_method );

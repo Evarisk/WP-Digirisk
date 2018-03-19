@@ -2,21 +2,48 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.5.0
  */
 
 window.eoxiaJS.digirisk.installer = {};
 window.eoxiaJS.digirisk.installer.progressInterval = undefined;
 
+/**
+ * Méthodes obligatoire pour utiliser EO-JS.
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.installer.init = function() {
 	window.eoxiaJS.digirisk.installer.event();
+	window.eoxiaJS.digirisk.initOwlCarousel();
 };
 
+/**
+ * Initialise tous les évènements pour la page "digi-setup".
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.installer.event = function() {
-	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.key_up_groupment_title );
-	jQuery( document ).on( 'click', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
-	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="society[title]"]', window.eoxiaJS.digirisk.installer.fillPlaceHolder );
-	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.eoxiaJS.digirisk.installer.key_up_domain_mail );
+	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.keyUpGroupmentTitle );
+	jQuery( document ).on( 'click', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
+	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.fillProgressBar );
+};
+
+/**
+ * Initialise le "owlCarousel" sur l'élement "owl-carousel".
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.initOwlCarousel = function() {
 	jQuery( '.owl-carousel' ).owlCarousel( {
 		'items': 1,
 		'nav': true,
@@ -26,9 +53,19 @@ window.eoxiaJS.digirisk.installer.event = function() {
 		'autoplay': true,
 		'autoplayTimeout': 25000
 	} );
-};
+}
 
-window.eoxiaJS.digirisk.installer.key_up_groupment_title = function( event ) {
+/**
+ * Évènement lors du "keyup" sur le champ "Nom de ma société".
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @param  {KeyEvent} event L'état du clavier.
+ *
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.installer.keyUpGroupmentTitle = function( event ) {
 	if ( 13 === event.keyCode ) {
 		jQuery( '.main-content .action-input:first' ).click();
 	}
@@ -42,23 +79,37 @@ window.eoxiaJS.digirisk.installer.key_up_groupment_title = function( event ) {
 	}
 };
 
+/**
+ * Enlèves le placeholder lors du "click" sur le champ "Nom de ma société".
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @param  {ClickEvent} event L'état du clique.
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.installer.emptyPlaceHolder = function( event ) {
 	if ( '' === jQuery( this ).val() ) {
 		jQuery( this ).closest( '.society-form' ).find( 'label' ).hide();
 	}
 };
 
-window.eoxiaJS.digirisk.installer.fillPlaceHolder = function( event ) {
+/**
+ * Remplie la barre de progression.
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
+ * @param  {FocusEvent} event L'état du focus.
+ *
+ * @return {void}}
+ */
+window.eoxiaJS.digirisk.installer.fillProgressBar = function( event ) {
 	if ( '' === jQuery( this ).val() ) {
 		jQuery( this ).closest( '.society-form' ).find( 'label' ).show();
 		jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '0%' );
 		jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 0 );
-	}
-};
-
-window.eoxiaJS.digirisk.installer.key_up_domain_mail = function( event ) {
-	if ( 13 === event.keyCode ) {
-		jQuery( '.wp-digi-action-save-domain-mail' ).click();
 	}
 };
 
@@ -68,11 +119,11 @@ window.eoxiaJS.digirisk.installer.key_up_domain_mail = function( event ) {
  * @param  {HTMLDivElement} element Le bouton déclenchant la création de la société
  * @return {void}
  *
- * @since 6.2.5.0
- * @version 6.2.5.0
+ * @since 6.0.0
+ * @version 6.5.0
  */
 window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
-	if ( '' === element.closest( 'form' ).find( 'input[name="society[title]"]' ).val() ) {
+	if ( '' === element.closest( 'form' ).find( 'input[name="title"]' ).val() ) {
 		element.closest( 'form' ).find( 'span.tooltip' ).addClass( 'active' );
 		return false;
 	}
@@ -111,6 +162,10 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 
 /**
  * Envoie une requête pour installer les composants nécessaires à l'utilisation de DigiRisk.
+ *
+ * @since 6.0.0
+ * @version 6.0.0
+ *
  * @return {void}
  */
 window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
@@ -127,7 +182,7 @@ window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0.0
+ * @since 6.0.0
  * @version 6.3.0
  */
 window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response ) {
@@ -152,6 +207,16 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response
 	}
 };
 
+/**
+ * Met à jour la barre de progression.
+ *
+ * @since 6.0.0
+ * @version 6.5.0
+ *
+ * @param  {integer} pourcent Le pourcentage courant.
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.installer.progressBar = function( pourcent ) {
 	clearInterval( window.eoxiaJS.digirisk.installer.progressInterval );
 	window.eoxiaJS.digirisk.installer.progressInterval = undefined;

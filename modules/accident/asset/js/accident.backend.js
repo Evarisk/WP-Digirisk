@@ -1,7 +1,7 @@
 /**
  * Initialise l'objet "accident" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.4.4
  */
 window.eoxiaJS.digirisk.accident = {};
@@ -120,7 +120,7 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
@@ -142,7 +142,7 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
@@ -166,7 +166,7 @@ window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElem
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredElement, response ) {

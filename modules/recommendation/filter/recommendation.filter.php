@@ -1,10 +1,10 @@
 <?php
 /**
- * Les filtres relatifs aux utilisateurs
+ * Les filtres relatifs aux recommandations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.4.4
+ * @version 6.5.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -16,15 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Les filtres relatifs aux utilisateurs
+ * Les filtres relatifs aux recommandations
  */
 class Recommendation_Filter {
 
 	/**
 	 * Le constructeur ajoute le filtre digi_tab
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.2.10
+	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 4, 2 );

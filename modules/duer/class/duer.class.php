@@ -2,10 +2,10 @@
 /**
  * Fait l'affichage du template de la liste des documents uniques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Fait l'affichage du template de la liste des documents uniques
  */
 class DUER_Class extends Document_Class {
+
 	/**
 	 * Le nom du modèle
 	 *
@@ -154,38 +155,29 @@ class DUER_Class extends Document_Class {
 	}
 
 	/**
-	 * Permet d'appeler l'affichage pour afficher un arbre de société pour voir la génération des ODT pour chaque société
+	 * Récupères les enfants pour l'affichage dans la popup pour générer le DUER.
 	 *
 	 * @param integer $parent_id L'ID de la société parent.
 	 * @return void
 	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.3.0
+	 * @since 6.2.3
+	 * @version 6.5.0
 	 */
-	public function display_group_tree( $parent_id = 0 ) {
-		$groupments = Group_Class::g()->get(
+	public function display_childs( $parent_id = 0 ) {
+		$societies = Society_Class::g()->get(
 			array(
-				'posts_per_page' 	=> -1,
-				'post_parent'			=> $parent_id,
-				'post_status' 		=> array( 'publish', 'draft' ),
-				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+				'posts_per_page' => -1,
+				'post_parent'    => $parent_id,
+				'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
+				'post_status'    => array( 'publish', 'inherit' ),
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'date'       => 'ASC',
+				),
 			)
 		);
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $groupments ) );
-	}
-
-	public function display_workunit_tree( $parent_id = 0 ) {
-		$workunits = Workunit_Class::g()->get(
-			array(
-				'posts_per_page' 	=> -1,
-				'post_parent'			=> $parent_id,
-				'post_status' 		=> array( 'publish', 'draft' ),
-				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
-			)
-		);
-
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $workunits ) );
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $societies ) );
 	}
 }
 

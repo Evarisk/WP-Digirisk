@@ -103,42 +103,56 @@ class User_Digi_Model extends \eoxia\User_Model {
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['last_evaluation_date'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'bydefault' => 'Pas d\'évaluation',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_workunit_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_evaluation_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_accident_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_stop_day_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_chemical_product_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['dashboard_compiled_data']['child']['list_epi_id'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',

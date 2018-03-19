@@ -117,7 +117,7 @@
 			}
 		},
 		{
-			"name": "Occurence",
+			"name": "Occurrence",
 			"description": "1 : Jamais arrivé 2 : Est déjà arrivé dans des circonstances exeptionnelles 3 : D&eacute;j&agrave; produit 2 fois 4 : Se produit tous les mois",
 			"option": {
 				"display_type": "slide",

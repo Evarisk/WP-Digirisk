@@ -3,7 +3,7 @@
  * Gères l'action AJAX de la génération du DUER
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.2.1
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -23,12 +23,15 @@ class DUER_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.5.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
+		add_action( 'wp_ajax_construct_duer', array( $this, 'callback_ajax_construct_duer' ) );
 		add_action( 'wp_ajax_generate_duer', array( $this, 'callback_ajax_generate_duer' ) );
+		add_action( 'wp_ajax_generate_establishment', array( $this, 'callback_ajax_generate_establishment' ) );
+		add_action( 'wp_ajax_generate_zip', array( $this, 'callback_ajax_generate_zip' ) );
 	}
 
 
@@ -43,7 +46,7 @@ class DUER_Action {
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
 
-		delete_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer );
+		ZIP_Class::g()->clear_temporarly_files_details();
 
 		$society_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		if ( empty( $society_id ) ) {
@@ -67,97 +70,167 @@ class DUER_Action {
 	}
 
 	/**
-	 * La méthode qui gère la réponse de la requête.
-	 * Cette méthode appelle la méthode generate de DUER_Generate_Class.
+	 * Cette méthode construit les données du DUER.
 	 *
 	 * @since 6.2.3
 	 * @version 6.5.0
 	 *
 	 * @return void
-	 * @todo: 24/01/2018: Déplacer dans la méthode "generate" dans le fichier duer-generate.class.php
 	 */
-	public function callback_ajax_generate_duer() {
-		check_ajax_referer( 'callback_ajax_generate_duer' );
-
-		$meta_generate_duer = get_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer, true );
-		$end                = false;
-
-		if ( empty( $meta_generate_duer ) ) {
-			$meta_generate_duer = array();
-		}
-
-		if ( ! empty( $_POST['duer'] ) ) {
-			\eoxia\LOG_Util::log( 'DEBUT - Génération des données du DUER en BDD', 'digirisk' );
-			$generate_response = DUER_Generate_Class::g()->generate( $_POST );
-			\eoxia\LOG_Util::log( 'FIN - Génération des données du DUER en BDD', 'digirisk' );
-		} elseif ( ! empty( $_POST['generate_duer'] ) ) {
-			$document_id = ! empty( $_POST ) && is_int( (int) $_POST['element_id'] ) && ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-			if ( ! empty( $document_id ) ) {
-				$parent_id      = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-				$parent_element = Society_Class::g()->show_by_type( $parent_id );
-
-				$current_document = DUER_Class::g()->get( array( 'id' => $document_id ), true );
-
-				\eoxia\LOG_Util::log( 'DEBUT - Génération du document DUER', 'digirisk' );
-				$generate_response = Document_Class::g()->generate_document( $current_document->model_id, $current_document->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document->title . '.odt' );
-				\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
-			}
-		} elseif ( ! empty( $_POST['zip'] ) ) {
-			$element = Society_Class::g()->get( array(
-				'id' => $_POST['element_id'],
-			), true );
-			\eoxia\LOG_Util::log( 'DEBUT - Génération du ZIP', 'digirisk' );
-			$generate_response = ZIP_Class::g()->generate( $element, $meta_generate_duer );
-			\eoxia\LOG_Util::log( 'FIN - Génération du ZIP', 'digirisk' );
-			$end = true;
-
-			// C'est sur que c'est le 0 le DUER.
-			$duer           = DUER_Class::g()->get( array( 'id' => $meta_generate_duer[0]['id'] ), true );
-			$duer->zip_path = $generate_response['zip_path'];
-			DUER_Class::g()->update( $duer );
-
-			delete_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer );
-		} else {
-			$post_type = get_post_type( $_POST['society_id'] );
-
-			if ( Group_Class::g()->get_type() === $post_type ) {
-				\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $_POST['society_id'], 'digirisk' );
-				$generate_response = Sheet_Groupment_Class::g()->generate( $_POST['society_id'] );
-				\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
-			} elseif ( Workunit_Class::g()->get_type() === $post_type ) {
-				\eoxia\LOG_Util::log( 'DEBUT - Génération du document unité de travail #U' . $_POST['society_id'], 'digirisk' );
-				$generate_response = Sheet_Workunit_Class::g()->generate( $_POST['society_id'] );
-				\eoxia\LOG_Util::log( 'FIN - Génération du document unité de travail', 'digirisk' );
-			} else {
-				$generate_response = array(
-					'success' => true,
-				);
-			}
-		}
+	public function callback_ajax_construct_duer() {
+		check_ajax_referer( 'construct_duer' );
 
 		$response = array(
 			'namespace'         => 'digirisk',
 			'module'            => 'DUER',
-			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
-			'creation_response' => ! empty( $generate_response ) && ! empty( $generate_response['creation_response'] ) ? $generate_response['creation_response'] : '',
+			'callback_success'  => 'generatedDUERSuccess',
+			'index'             => 1,
+			'creation_response' => array(),
 		);
 
-		if ( $end ) {
-			$response['end'] = true;
-		} else {
-			if ( ! empty( $generate_response['creation_response'] ) ) {
-				$meta_generate_duer[] = $generate_response['creation_response'];
-				update_user_meta( get_current_user_id(), \eoxia\Config_Util::$init['digirisk']->duer->meta_key_generate_duer, $meta_generate_duer );
-			}
+		$parent_id             = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$start_audit_date      = ! empty( $_POST['dateDebutAudit'] ) ? sanitize_text_field( $_POST['dateDebutAudit'] ) : '';
+		$end_audit_date        = ! empty( $_POST['dateFinAudit'] ) ? sanitize_text_field( $_POST['dateFinAudit'] ) : '';
+		$recipient             = ! empty( $_POST['destinataireDUER'] ) ? sanitize_text_field( $_POST['destinataireDUER'] ) : '';
+		$methodology           = ! empty( $_POST['methodologie'] ) ? sanitize_text_field( $_POST['methodologie'] ) : '';
+		$sources               = ! empty( $_POST['sources'] ) ? sanitize_text_field( $_POST['sources'] ) : '';
+		$availability_of_plans = ! empty( $_POST['dispoDesPlans'] ) ? sanitize_text_field( $_POST['dispoDesPlans'] ) : '';
+		$important_note        = ! empty( $_POST['remarqueImportante'] ) ? sanitize_text_field( $_POST['remarqueImportante'] ) : '';
+
+		if ( empty( $parent_id ) ) {
+			wp_send_json_error();
 		}
 
-		if ( $generate_response['success'] ) {
-			$response['callback_success'] = 'generatedDUERSuccess';
-			$response['index']++;
-		} else {
-			$response['callback_error'] = 'callback_generate_duer_error';
+		$build_args = array(
+			'element_id'         => $parent_id,
+			'dateDebutAudit'     => $start_audit_date,
+			'dateFinAudit'       => $end_audit_date,
+			'destinataire'       => $recipient,
+			'methodologie'       => $sources,
+			'dispoDesPlans'      => $availability_of_plans,
+			'remarqueImportante' => $important_note,
+		);
+
+		\eoxia\LOG_Util::log( 'DEBUT - Construction des données du DUER en BDD', 'digirisk' );
+		$generation_status = DUER_Document_Class::g()->generate( $build_args );
+		\eoxia\LOG_Util::log( 'FIN - Construction des données du DUER en BDD', 'digirisk' );
+
+		$response['duer_document_id'] = $generation_status['creation_response']['id'];
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Génères le DUER
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @return void
+	 */
+	public function callback_ajax_generate_duer() {
+		check_ajax_referer( 'generate_duer' );
+
+		$response = array(
+			'namespace'         => 'digirisk',
+			'module'            => 'DUER',
+			'callback_success'  => 'generatedDUERSuccess',
+			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'creation_response' => array(),
+		);
+
+		$document_id = ! empty( $_POST['duer_document_id'] ) ? (int) $_POST['duer_document_id'] : 0;
+		$parent_id   = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+
+		if ( empty( $document_id ) || empty( $parent_id ) ) {
+			wp_send_json_error();
 		}
 
+		$society          = Society_Class::g()->get( array( 'id' => $parent_id ), true );
+		$current_document = DUER_Class::g()->get( array( 'id' => $document_id ), true );
+
+		\eoxia\LOG_Util::log( 'DEBUT - Génération du document DUER', 'digirisk' );
+		$generation_status = Document_Class::g()->generate_document( $current_document->model_id, $current_document->document_meta, $society->type . '/' . $society->id . '/' . $current_document->title );
+		\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
+
+		ZIP_Class::g()->update_temporarly_files_details( array(
+			'filename' => $current_document->title,
+			'path'     => $generation_status['path'],
+		) );
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Génères un document de fiche de groupement ou bien de fiche de poste.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @return void
+	 */
+	public function callback_ajax_generate_establishment() {
+		check_ajax_referer( 'generate_establishment' );
+
+		$response = array(
+			'namespace'         => 'digirisk',
+			'module'            => 'DUER',
+			'callback_success'  => 'generatedDUERSuccess',
+			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'creation_response' => array(),
+		);
+
+		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$society    = Society_Class::g()->get( array( 'id' => $element_id ), true );
+
+		if ( Group_Class::g()->get_type() === $society->type ) {
+			\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $element_id, 'digirisk' );
+			$generation_status = Sheet_Groupment_Class::g()->generate( $element_id );
+			\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
+		} elseif ( Workunit_Class::g()->get_type() === $society->type ) {
+			\eoxia\LOG_Util::log( 'DEBUT - Génération du document fiche de poste #UT' . $element_id, 'digirisk' );
+			$generation_status = Sheet_Workunit_Class::g()->generate( $element_id );
+			\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste', 'digirisk' );
+		}
+
+		ZIP_Class::g()->update_temporarly_files_details( array(
+			'filename' => $generation_status['creation_response']['filename'],
+			'path'     => $generation_status['creation_response']['path'],
+		) );
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Génères le ZIP de tous les documents du DUER courant.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @return void
+	 */
+	public function callback_ajax_generate_zip() {
+		check_ajax_referer( 'generate_zip' );
+
+		$response = array(
+			'namespace'         => 'digirisk',
+			'module'            => 'DUER',
+			'callback_success'  => 'generatedDUERSuccess',
+			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'creation_response' => array(),
+		);
+
+		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+
+		$element = Society_Class::g()->get( array(
+			'id' => $element_id,
+		), true );
+
+		\eoxia\LOG_Util::log( 'DEBUT - Génération du ZIP', 'digirisk' );
+		$generate_response = ZIP_Class::g()->generate( $element );
+		\eoxia\LOG_Util::log( 'FIN - Génération du ZIP', 'digirisk' );
+
+		$response['end'] = true;
 		wp_send_json_success( $response );
 	}
 }

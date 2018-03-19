@@ -3,8 +3,8 @@
  * Gestion des shortcodes en relation avec les accidents.
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @version 6.3.0
- * @version 6.3.0
+ * @version 6.1.5
+ * @version 6.1.5
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
@@ -23,8 +23,8 @@ class Accident_Shortcode {
 	/**
 	 * Ajoutes le shortcode digi-accident.
 	 *
-	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @since 6.1.5
+	 * @version 6.1.5
 	 */
 	public function __construct() {
 		add_shortcode( 'digi-registre-accident', array( $this, 'callback_digi_registre_accident' ) );

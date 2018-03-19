@@ -2,10 +2,10 @@
 /**
  * Edition d'un risque
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.4.2
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,24 +20,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
-	<input type="hidden" name="risk[id]" value="<?php echo $risk->preset ? 0 : esc_attr( $risk->id ); ?>" />
-	<input type="hidden" name="risk[preset]" value="0" />
-  <input type="hidden" name="can_update" value="true" />
+	<input type="hidden" name="id" value="<?php echo $risk->preset ? 0 : esc_attr( $risk->id ); ?>" />
+	<?php wp_nonce_field( 'edit_risk' ); ?>
 
 	<td data-title="Ref." class="padding">
-		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
-
 		<?php if ( $risk->preset ) : ?>
 			-
-		<?php else : ?>
-			<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
-		<?php endif; ?>
+		<?php
+		else :
+			if ( 0 !== $risk->id ) :
+				?>
+				<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
+				<?php
+			endif;
+		endif;
+		?>
 	</td>
-	<td data-title="Risque" data-title="Risque" class="wmax70">
+	<td data-title="Risque" data-title="Risque" class="w50">
 		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
-		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>
+		<?php do_shortcode( '[digi_dropdown_simple_evaluation_method risk_id=' . $risk->id . ']' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
 		<?php do_shortcode( '[wpeo_upload id="' . ( ( $risk->preset ) ? 0 : $risk->id ) . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '" ]' ); ?>

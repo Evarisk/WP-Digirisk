@@ -3,7 +3,7 @@
  * Gestion des actions des accidents.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018
  * @package DigiRisk
@@ -46,7 +46,7 @@ class Accident_Action {
 	/**
 	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 *
 	 * @return void
@@ -144,7 +144,7 @@ class Accident_Action {
 	/**
 	 * Charges un accident ainsi que ses images et la liste des commentaires.
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.4.0
 	 *
 	 * @return void
@@ -185,7 +185,7 @@ class Accident_Action {
 	/**
 	 * Passes le status de l'accident en "trash".
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.3.0
 	 *
 	 * @return void

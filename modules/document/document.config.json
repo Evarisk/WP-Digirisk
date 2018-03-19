@@ -1,7 +1,8 @@
 {
 	"name": "Document",
 	"slug": "document",
-	"version": "6.3.0",
+	"since": "6.0.0",
+	"version": "6.5.0",
 	"description": "Le module gérant les documents de Digirisk",
 	"path": "modules/document/",
 	"dependencies": {

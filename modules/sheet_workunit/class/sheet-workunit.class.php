@@ -3,9 +3,9 @@
  * Gères la génération de la fiche de poste
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.2.3
+ * @since 6.2.1
  * @version 6.5.0
- * @copyright 2015-2018
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -103,7 +103,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 * @param  int $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.3.0
 	 */
 	public function display( $element_id ) {
@@ -123,7 +123,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 * @param  integer $element_id L'ID de l'élement.
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.3.0
 	 */
 	public function display_document_list( $element_id ) {
@@ -145,8 +145,8 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return bool
 	 *
-	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @since 6.2.1
+	 * @version 6.5.0
 	 */
 	public function generate( $society_id ) {
 		$society = Workunit_Class::g()->get( array(
@@ -157,30 +157,27 @@ class Sheet_Workunit_Class extends Document_Class {
 
 		$sheet_details = array(
 			'referenceUnite' => $society->unique_identifier,
-			'nomUnite' => $society->title,
-			'description' => $society->content,
-			'adresse' => $society_infos['adresse'],
-			'codePostal' => $society_infos['codePostal'],
-			'ville' => $society_infos['ville'],
-			'telephone' => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'nomUnite'       => $society->title,
+			'description'    => $society->content,
+			'adresse'        => $society_infos['adresse'],
+			'codePostal'     => $society_infos['codePostal'],
+			'ville'          => $society_infos['ville'],
+			'telephone'      => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
+
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
 		$document_creation_response = $this->create_document( $society, array( 'unite_de_travail' ), $sheet_details );
-		if ( ! empty( $document_creation_response['id'] ) ) {
-			$society->associated_document_id['document'][] = $document_creation_response['id'];
-			$society = Workunit_Class::g()->update( $society );
-		}
 
 		return array(
 			'creation_response' => $document_creation_response,
-			'element' => $society,
-			'success' => true,
+			'element'           => $society,
+			'success'           => true,
 		);
 	}
 
@@ -216,7 +213,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return string|false|array
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5.0
 	 */
 	public function set_picture( $society ) {
@@ -247,7 +244,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return array La liste des utilisateurs affectés et désaffectés à la société
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5.0
 	 */
 	public function set_users( $society ) {
@@ -280,7 +277,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
@@ -322,7 +319,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return array Les risques dans la société
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
@@ -375,7 +372,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @return array Les recommandations dans la société
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5.0
 	 */
 	public function set_recommendations( $society ) {
@@ -413,7 +410,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 * @param  int $term_id    L'ID de la recommendation.
 	 * @return false|string    Le lien vers l'image
 	 *
-	 * @since 6.0.0
+	 * @since 6.2.1
 	 * @version 6.2.5.0
 	 */
 	public function get_picture_term( $term_id ) {

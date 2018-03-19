@@ -3,7 +3,7 @@
  * Gestion des filtres relatifs aux accidents
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -21,7 +21,7 @@ class Accident_Filter {
 	/**
 	 * Utilises le filtre digi_tab
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.3.0
 	 */
 	public function __construct() {
@@ -31,7 +31,7 @@ class Accident_Filter {
 	/**
 	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.3.0
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.

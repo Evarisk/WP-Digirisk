@@ -103,7 +103,7 @@ class Digirisk_Action {
 	 * @return void nothing
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
 	public function callback_before_admin_enqueue_scripts_css() {}
 
@@ -131,10 +131,9 @@ class Digirisk_Action {
 	 * @return void nothing
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
-	public function callback_admin_print_scripts_css() {
-	}
+	public function callback_admin_print_scripts_css() {}
 
 	/**
 	 * Initialise le fichier MO
@@ -153,13 +152,12 @@ class Digirisk_Action {
 	}
 
 	/**
-	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
+	 * Définition du menu dans l'administration de WordPress pour Digirisk
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
 	public function callback_admin_menu() {
-		/**	Création du menu de gestion de la société et de l'évaluation des risques / Create the menu for society strcuture management and risk evaluation	*/
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {

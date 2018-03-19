@@ -1,7 +1,8 @@
 {
 	"name": "ZIP",
 	"slug": "zip",
-	"version": "6.2.1.0",
+	"since": "6.2.1",
+	"version": "6.5.0",
 	"description": "Le module gérant les ZIP de DigiRisk",
 	"path": "modules/zip/",
 	"dependencies": {
@@ -9,5 +10,6 @@
 		"class": {},
 		"action": {},
 		"filter": {}
-	}
+	},
+	"key_temporarly_files_details": "_wpdigi_zip_files_details"
 }

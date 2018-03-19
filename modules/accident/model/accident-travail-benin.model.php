@@ -31,6 +31,8 @@ class Accident_Travail_Benin_Model extends Document_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['document_meta'] = array(
+			'since'     => '6.3.0',
+			'version'   => '6.5.0',
 			'type'      => 'array',
 			'meta_type' => 'single',
 			'field'     => 'document_meta',

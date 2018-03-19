@@ -3,7 +3,7 @@
  * Classe gérant les sociétés (groupement et unité de travail)
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.6
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Classe gérant les sociétés (groupement et unité de travail)
  */
 class Society_Class extends \eoxia\Post_Class {
+
 	/**
 	 * Le nom du modèle
 	 *

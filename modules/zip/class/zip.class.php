@@ -2,10 +2,10 @@
 /**
  * Gestion des ZIP
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -120,29 +120,38 @@ class ZIP_Class extends Document_Class {
 	}
 
 	/**
-	 * Create a zip file with a list of file given in parameter / Créé un fichier au format zip a partir d'une liste de fichiers passé en paramètres
+	 * Créé un fichier au format zip a partir d'une liste de fichiers passé en paramètres
 	 *
 	 * @since 6.1.9
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
-	 * @param string $final_file_path Le chemin vers lequel il faut sauvegarder le fichier zip.
-	 * @param array  $file_list       La liste des fichiers à ajouter au fichier zip.
-	 * @param object $element         L'élément auquel il faut associer le fichier zip.
-	 * @param string $version         La version du zip.
+	 * @param string $path     Le chemin vers lequel il faut sauvegarder le fichier zip.
+	 * @param object $element  L'élément auquel il faut associer le fichier zip.
+	 *
+	 * array['status']  boolean True si tout s'est bien passé, sinon false.
+	 * array['message'] string  Le message informatif du résultat de la méthode.
+	 *
+	 * @return array (Voir au dessus).
 	 */
-	public function create_zip( $final_file_path, $file_list, $element, $version ) {
-		$zip = new \ZipArchive();
+	public function create_zip( $path, $element ) {
+		$zip           = new \ZipArchive();
+		$files_details = get_option( \eoxia\Config_Util::$init['digirisk']->zip->key_temporarly_files_details, array() );
+		$response      = array( 'status' => false );
 
-		$response = array();
-		if ( $zip->open( $final_file_path, \ZipArchive::CREATE ) !== true ) {
-			$response['status'] = false;
-			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
+		if ( empty( $files_details ) ) {
+			return $response;
 		}
 
-		if ( ! empty( $file_list ) ) {
-			foreach ( $file_list as $file ) {
-				if ( ! empty( $file['link'] ) ) {
-					$zip->addFile( $file['link'], $file['filename'] );
+		if ( $zip->open( $path, \ZipArchive::CREATE ) !== true ) {
+			$response['status']  = false;
+			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
+			return $response;
+		}
+
+		if ( ! empty( $files_details ) ) {
+			foreach ( $files_details as $file_details ) {
+				if ( ! empty( $file_details['path'] ) ) {
+					$zip->addFile( $file_details['path'], $file_details['filename'] );
 				}
 			}
 		}
@@ -150,61 +159,88 @@ class ZIP_Class extends Document_Class {
 
 		$document_revision = $this->get_document_type_next_revision( array( 'zip' ), $element->id );
 
-		$filename = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
+		$filename  = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
 		$filename .= 'Z' . $element->unique_key . '_';
 		$filename .= sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V';
-		$filename .= $document_revision . '.odt';
+		$filename .= $document_revision . '.zip';
 
 		$attachment_args = array(
-			'post_title' => basename( $filename, '.odt' ),
-			'post_status' => 'inherit',
+			'post_title'     => basename( $filename, '.zip' ),
+			'post_status'    => 'inherit',
 			'post_mime_type' => 'application/zip',
+			'post_parent'    => $element->id,
+			'guid'           => $document_creation['url'],
 		);
-
-		$path = $this->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . $filename;
 
 		$attachment_id = wp_insert_attachment( $attachment_args, $this->get_digirisk_dir_path() . '/' . $path, $element->id );
 		wp_set_object_terms( $attachment_id, array( 'zip', 'printed' ), $this->attached_taxonomy_type );
 
 		$document_args = array(
-			'id' => $attachment_id,
-			'title' => basename( $filename, '.odf' ),
-			'parent_id' => $element->id,
-			'mime_type' => 'application/zip',
-			'list_generation_results' => $file_list,
-			'status' => 'inherit',
-			'version' => $document_revision,
+			'id'                      => $attachment_id,
+			'list_generation_results' => $file_details,
 		);
 
 		$this->update( $document_args );
 
-		return array(
-			'zip_path' => $path,
-		);
+		return $response;
 	}
 
 	/**
 	 * Génères un zip et le met dans l'élément.
 	 *
 	 * @since 6.1.9
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @param Group_Model $element    Les données du groupement.
-	 * @param array       $files_info Un tableau contenant le nom des fichiers ainsi que le chemin sur le disque dur.
+	 *
 	 * @return array
 	 */
-	public function generate( $element, $files_info ) {
+	public function generate( $element ) {
 		\eoxia\LOG_Util::log( 'DEBUT - Création ZIP', 'digirisk' );
 		$version               = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->id );
 		$zip_path              = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->type . '/' . $element->id . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->unique_identifier . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->title ) ) . '_V' . $version . '.zip';
-		$zip_generation_result = $this->create_zip( $zip_path, $files_info, $element, $version );
+		$zip_generation_result = $this->create_zip( $zip_path, $element );
 		\eoxia\LOG_Util::log( 'FIN - Création ZIP', 'digirisk' );
+
 		return array(
-			'zip_path' => $zip_path,
+			'zip_path'          => $zip_path,
 			'creation_response' => $zip_generation_result,
-			'element' => $element,
-			'success' => true,
+			'element'           => $element,
+			'success'           => true,
 		);
+	}
+
+	/**
+	 * Supprimes l'option temporaire des fichiers à zipper.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @return void
+	 */
+	public function clear_temporarly_files_details() {
+		delete_option( \eoxia\Config_Util::$init['digirisk']->zip->key_temporarly_files_details );
+	}
+
+	/**
+	 * Met dans une meta temporaire les fichiers à zipper.
+	 * Cette meta est utilisé et vidé dans la méthode create_zip.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * array['path']     string Le chemin vers le fichier.
+	 * array['filename'] string Le nom du fichier.
+	 *
+	 * @param array $file_details (Voir au dessus).
+	 *
+	 * @return void
+	 */
+	public function update_temporarly_files_details( $file_details ) {
+		$files_details = get_option( \eoxia\Config_Util::$init['digirisk']->zip->key_temporarly_files_details, array() );
+
+		$files_details[] = $file_details;
+		update_option( \eoxia\Config_Util::$init['digirisk']->zip->key_temporarly_files_details, $files_details );
 	}
 }
 

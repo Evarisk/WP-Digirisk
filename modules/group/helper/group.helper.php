@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Récupères tous les éléments nécessaires pour le fonctionnement d'un groupement
  * Groupements enfant, Unités de travail enfant.
  *
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.5.0
  *
  * @param  Group_Model $data L'objet.

@@ -2,8 +2,8 @@
 /**
  * Les actions relatives aux utilisateurs DigiRisk dans la page "Utilisateurs DigiRisk" du menu "Utilisateurs" de WordPress.
  *
- * @author Dev <dev@evarisk.com>
- * @since 6.0.0
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.6
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -21,10 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class User_Dashboard_Action extends \eoxia\Singleton_Util {
 
 	/**
-	 * Le constructeur appelle les actions suivantes:
-	 * admin_menu (Pour déclarer le sous menu dans le menu utilisateur de WordPress)
+	 * Le constructeur
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.2.4
 	 */
 	protected function construct() {
@@ -39,7 +38,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Créer la page "Digirisk" dans le menu "Utilisateurs" de WordPress
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.2.4
 	 */
 	public function callback_admin_menu() {
@@ -49,10 +48,10 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Le callback de "add_users_page" qui permet d'afficher la vue pour le rendu de la page.
 	 *
-	 * @return void
-	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.2.4
+	 *
+	 * @return void
 	 */
 	public function callback_users_page() {
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'main' );
@@ -61,10 +60,10 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Enregistres un utilisateur avec les paramètres reçu par le formulaire.
 	 *
-	 * @return void
-	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.5.0
+	 *
+	 * @return void
 	 */
 	public function ajax_save_user() {
 		check_ajax_referer( 'ajax_save_user' );
@@ -106,10 +105,10 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Charges un utilisateur et renvoie dans la réponse JSON la vue.
 	 *
-	 * @return void
-	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.5.0
+	 *
+	 * @return void
 	 */
 	public function ajax_load_user() {
 		check_ajax_referer( 'ajax_load_user' );
@@ -135,10 +134,10 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	/**
 	 * Supprimes un utilisateur.
 	 *
-	 * @return void
-	 *
-	 * @since 6.0.0
+	 * @since 6.1.6
 	 * @version 6.5.0
+	 *
+	 * @return void
 	 */
 	public function ajax_delete_user() {
 		check_ajax_referer( 'ajax_delete_user' );
@@ -159,21 +158,28 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	}
 
 	/**
-	 * Sauvegardes le domaine de l'email dans la page "Digirisk" dans le menu "Utilisateurs" de WordPress.
+	 * Appel la méthode save_domain_mail.
+	 *
+	 * @see check_ajax_referer()
+	 * @see wp_send_json_error()
+	 * @see wp_send_json_success()
+	 *
+	 * @since 6.1.6
+	 * @version 6.2.4
 	 *
 	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.4
 	 */
 	public function ajax_save_domain_mail() {
 		check_ajax_referer( 'save_domain_mail' );
-		$domain_mail = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		$domain_mail = ! empty( $_POST['domain_mail'] ) ? ( $_POST['domain_mail'] ) : '';
+
 		if ( '' === $domain_mail ) {
 			wp_send_json_error();
 		}
 
-		update_option( 'digirisk_domain_mail', $domain_mail );
+		if ( ! User_Dashboard_Class::g()->save_domain_mail( $domain_mail ) ) {
+			wp_send_json_error();
+		}
 
 		wp_send_json_success();
 	}

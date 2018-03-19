@@ -70,16 +70,6 @@ class Evaluation_Method_Variable_Class extends \eoxia\Term_Class {
 	protected $after_get_function = array();
 
 	/**
-	 * Le constructeur
-	 *
-	 * @since 6.0.0
-	 * @version 6.0.0
-	 */
-	protected function construct() {
-		parent::construct();
-	}
-
-	/**
 	 * Récupères les valeurs des variables selon une formule
 	 *
 	 * @since 6.0.0
@@ -105,4 +95,4 @@ class Evaluation_Method_Variable_Class extends \eoxia\Term_Class {
 
 }
 
-evaluation_method_variable_class::g();
+Evaluation_Method_Variable_Class::g();

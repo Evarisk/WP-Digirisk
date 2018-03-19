@@ -3,7 +3,7 @@
  * Les actions relatives aux recommendations
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -22,7 +22,7 @@ class Recommendation_Action {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.2.4
 	 */
 	public function __construct() {
@@ -36,7 +36,7 @@ class Recommendation_Action {
 	/**
 	 * Charges une recommendation
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.2.10
 	 */
 	public function ajax_load_recommendation() {
@@ -74,7 +74,7 @@ class Recommendation_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 */
 	public function ajax_save_recommendation() {
@@ -144,7 +144,7 @@ class Recommendation_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.4.4
 	 */
 	public function ajax_delete_recommendation() {
@@ -186,8 +186,8 @@ class Recommendation_Action {
 	/**
 	 * Transfère les anciennes recommendations
 	 *
-	 * @since 6.0.0
-	 * @version 6.0.0
+	 * @since 6.1.5
+	 * @version 6.1.5
 	 *
 	 * @return void
 	 * @todo: Voir si c'est toujours utile (08/12/2017)

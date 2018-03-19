@@ -32,74 +32,102 @@ class Risk_Model extends \eoxia\Post_Model {
 	public function __construct( $data = null, $req_method = null ) {
 
 		$this->schema['associated_recommendation'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['risk_date'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['unique_key'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_key',
 		);
 
 		$this->schema['unique_identifier'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_identifier',
 		);
 
 		$this->schema['current_equivalence'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.5.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_equivalence',
+			'default'   => -1,
 		);
 
 		$this->schema['current_evaluation_id'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'multiple',
-			'default'   => 0,
+			'since'      => '6.0.0',
+			'version'    => '6.5.0',
+			'type'       => 'integer',
+			'meta_type'  => 'multiple',
+			'default'    => 0,
+			'deprecated' => '>= 6.5.0',
 		);
 
 		$this->schema['associated_document_id'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['associated_document_id']['child']['image'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['associated_document_id']['child']['document'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.0.0',
 			'type'       => 'array',
 			'array_type' => 'integer',
 			'meta_type'  => 'multiple',
 		);
 
 		$this->schema['taxonomy'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['taxonomy']['child']['digi-category-risk'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.5.0',
 			'meta_type'  => 'multiple',
 			'array_type' => 'integer',
 			'type'       => 'array',
 		);
 
 		$this->schema['taxonomy']['child']['digi-method'] = array(
+			'since'      => '6.0.0',
+			'version'    => '6.5.0',
 			'meta_type'  => 'multiple',
 			'array_type' => 'integer',
 			'type'       => 'array',
 		);
 
 		$this->schema['preset'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'boolean',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_preset',

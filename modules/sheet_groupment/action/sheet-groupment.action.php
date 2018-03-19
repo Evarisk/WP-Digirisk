@@ -3,7 +3,7 @@
  * Les actions relatives aux fiches de groupement
  *
  * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
  * @package DigiRisk
@@ -23,8 +23,8 @@ class Sheet_Groupment_Action {
 	/**
 	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_groupment
 	 *
-	 * @since 6.0.0
-	 * @version 6.0.0
+	 * @since 6.1.0
+	 * @version 6.1.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_fiche_de_groupement', array( $this, 'ajax_generate_fiche_de_groupement' ) );
@@ -33,7 +33,7 @@ class Sheet_Groupment_Action {
 	/**
 	 * Appel la méthode "generate" de "Sheet_Groupment_Class" afin de générer la fiche de groupement.
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.0
 	 * @version 6.4.0
 	 *
 	 * @return void

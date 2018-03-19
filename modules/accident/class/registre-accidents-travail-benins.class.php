@@ -187,7 +187,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return array Les accidents
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 */
 	public function set_accidents() {
 		$accidents = Accident_Class::g()->get( array(
@@ -197,11 +197,11 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 
 		$accident_details = array(
 			'accidentDebut' => array(
-				'type' => 'segment',
+				'type'  => 'segment',
 				'value' => array(),
 			),
 			'accidentFin' => array(
-				'type' => 'segment',
+				'type'  => 'segment',
 				'value' => array(),
 			),
 		);
@@ -210,7 +210,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 			foreach ( $accidents as $element ) {
 				$comments = get_comments( array(
 					'post_id' => $element->id,
-					'status' => -34070,
+					'status'  => -34070,
 				) );
 
 				$comment_content = '';
@@ -223,23 +223,23 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 				}
 
 				$accident_details['accidentDebut']['value'][] = array(
-					'ref' => $element->unique_identifier,
-					'dateInscriptionRegistre' => $element->registration_date_in_register['date_input']['fr_FR']['date'],
+					'ref'                       => $element->unique_identifier,
+					'dateInscriptionRegistre'   => $element->registration_date_in_register['rendered']['date'],
 					'nomPrenomMatriculeVictime' => ! empty( $element->victim_identity->id ) ? User_Digi_Class::g()->element_prefix . $element->victim_identity->id . ' ' . $element->victim_identity->login : '',
-					'dateHeure' => $element->accident_date['date_input']['fr_FR']['date_time'],
-					'lieu' => $element->place->modified_unique_identifier . ' ' . $element->place->title,
-					'circonstances' => $comment_content,
-					'siegeLesions' => $element->location_of_lesions,
+					'dateHeure'                 => $element->accident_date['rendered']['date_time'],
+					'lieu'                      => $element->place->modified_unique_identifier . ' ' . $element->place->title,
+					'circonstances'             => $comment_content,
+					'siegeLesions'              => $element->location_of_lesions,
 				);
 
 				$accident_details['accidentFin']['value'][] = array(
-					'ref' => $element->unique_identifier,
-					'natureLesions' => $element->nature_of_lesions,
-					'nomAdresseTemoins' => $element->name_and_address_of_witnesses,
-					'nomAdresseTiers' => $element->name_and_address_of_third_parties_involved,
+					'ref'                   => $element->unique_identifier,
+					'natureLesions'         => $element->nature_of_lesions,
+					'nomAdresseTemoins'     => $element->name_and_address_of_witnesses,
+					'nomAdresseTiers'       => $element->name_and_address_of_third_parties_involved,
 					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_caregiver_id'][0] ) ? $element->associated_document_id['signature_of_the_caregiver_id'][0] : 0 ),
-					'signatureVictime' => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_victim_id'][0] ) ? $element->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
-					'observations' => $element->observation,
+					'signatureVictime'      => $this->get_picture( ! empty( $element->associated_document_id['signature_of_the_victim_id'][0] ) ? $element->associated_document_id['signature_of_the_victim_id'][0] : 0 ),
+					'observations'          => $element->observation,
 				);
 			}
 		}

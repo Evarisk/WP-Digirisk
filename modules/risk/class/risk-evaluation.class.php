@@ -60,14 +60,14 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	 *
 	 * @var array
 	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\construct_evaluation' );
+	protected $before_post_function = array( '\digi\construct_identifier' );
 
 	/**
 	 * La fonction appelée automatiquement avant la mise à jour de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $before_put_function = array( '\digi\construct_evaluation' );
+	protected $before_put_function = array();
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
@@ -75,6 +75,43 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	 * @var array
 	 */
 	protected $after_get_function = array( '\digi\get_identifier' );
+
+	public function display( $risk ) {
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'risk-evaluation/main', array(
+			'risk' => $risk,
+		) );
+	}
+
+	/**
+	 * Enregistre l'évaluation du risque $risk_id.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @param integer $risk_id L'ID ou doit être affecter l'évaluation du risque.
+	 * @param array   $data (Voir au dessus).
+	 *
+	 * @return boolean|Risk_Evaluation_Model les données de l'évaluation du risque.
+	 */
+	public function save( $risk_id, $method_evaluation_id, $method_variables_data ) {
+		$risk_id = (int) $risk_id;
+
+		if ( empty( $risk_id ) ) {
+			return false;
+		}
+
+		// Récupères la cotation, l'équivalence et la force du risque.
+		$details = Evaluation_Method_Class::g()->get_details( $method_evaluation_id, $method_variables_data );
+
+		$data['post_id']     = $risk_id;
+		$data['scale']       = (int) $details['scale'];
+		$data['cotation']    = (int) $details['cotation'];
+		$data['equivalence'] = (int) $details['equivalence'];
+
+		$risk_evaluation = $this->update( $data );
+
+		return $risk_evaluation;
+	}
 }
 
 Risk_Evaluation_Class::g();

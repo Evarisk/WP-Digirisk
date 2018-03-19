@@ -3,7 +3,7 @@
  * Classe gérant les affichages légaux
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk

@@ -3,7 +3,7 @@
  * Les préconisations
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.2.4
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -97,7 +97,7 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 * @param  integer $society_id L'ID de la société.
 	 * @return void
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.5.0
 	 */
 	public function display( $society_id ) {

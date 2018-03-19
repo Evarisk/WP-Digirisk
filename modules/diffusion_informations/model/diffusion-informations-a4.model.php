@@ -3,7 +3,7 @@
  * Définition du schéma des diffusions d'information au format A4.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.3.0
+ * @since 6.4.0
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -23,7 +23,7 @@ class Diffusion_Informations_A4_Model extends \eoxia\Post_Model {
 	/**
 	 * Définition du schéma des diffusions d'information au format A4.
 	 *
-	 * @since 6.3.0
+	 * @since 6.4.0
 	 * @version 6.5.0
 	 *
 	 * @param array $data       Data.
@@ -31,12 +31,16 @@ class Diffusion_Informations_A4_Model extends \eoxia\Post_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->model['document_meta'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.5.0',
 			'type'      => 'array',
 			'meta_type' => 'single',
 			'field'     => 'document_meta',
 		);
 
 		$this->schema['unique_key'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.5.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_key',
@@ -44,6 +48,8 @@ class Diffusion_Informations_A4_Model extends \eoxia\Post_Model {
 		);
 
 		$this->schema['unique_identifier'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.5.0',
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_identifier',

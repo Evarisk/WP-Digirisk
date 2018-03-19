@@ -31,27 +31,37 @@ class Evaluation_Method_Variable_Model extends \eoxia\Term_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['unique_key'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_key',
 		);
 
 		$this->schema['unique_identifier'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['display_type'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['range'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['survey'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);

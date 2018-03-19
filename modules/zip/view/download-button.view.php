@@ -22,12 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i class="far fa-file-archive" aria-hidden="true"></i>
 	</a>
 <?php else : ?>
-<<<<<<< HEAD
 	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ZIP Corrompu', 'digirisk' ); ?>">
-		<i class="fa fa-times icon" aria-hidden="true"></i>
-=======
-	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
 		<i class="far fa-times icon" aria-hidden="true"></i>
->>>>>>> 4193b35d61798b531a1a17e53fabe874155c4b92
 	</span>
 <?php endif; ?>

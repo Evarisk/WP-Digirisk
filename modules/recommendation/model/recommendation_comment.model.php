@@ -3,8 +3,8 @@
  * Définition du schéma des commentaires de recommandation.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 6.5.0
+ * @since 6.1.6
+ * @version 6.1.6
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */

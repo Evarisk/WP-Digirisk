@@ -2,20 +2,22 @@
 /**
  * La liste des DUER
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.9
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<?php if ( ! empty( $list_document ) ) : ?>
-	<?php foreach ( $list_document as $element ) : ?>
-		<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'list-item', array( 'element' => $element ) ); ?>
-	<?php endforeach; ?>
-<?php endif;
+<?php
+if ( ! empty( $list_document ) ) :
+	foreach ( $list_document as $element ) :
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list-item', array( 'element' => $element ) );
+	endforeach;
+endif;

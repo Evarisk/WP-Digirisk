@@ -2,17 +2,18 @@
 /**
  * La liste des fiches de groupement
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package sheet_groupment
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.9
+ * @version 6.2.4
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <thead>
 	<tr>

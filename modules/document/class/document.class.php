@@ -5,7 +5,7 @@
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -120,7 +120,7 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément
 	 *
-	 * @since 6.1.0
+	 * @since 6.0.0
 	 * @version 6.4.4
 	 *
 	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents.
@@ -182,25 +182,33 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Création d'un fichier odt a partir d'un modèle de document donné et d'un modèle de donnée
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @param string $model_path       Le chemin vers le fichier modèle a utiliser pour la génération.
 	 * @param array  $document_content Un tableau contenant le contenu du fichier à écrire selon l'élément en cours d'impression.
 	 * @param string $document_name    Le nom du document.
 	 *
-	 * @return object                  L'élément courant sur lequel on souhaite générer un document
+	 * array['status']   boolean True si tout s'est bien passé sinon false.
+	 * array['message']  string  Le message informatif de la méthode.
+	 * array['path']     string  Le chemin absolu vers le fichier.
+	 * array['url']      string  L'url vers le fichier.
+	 *
+	 * @return array                   (Voir au dessus).
 	 */
 	public function generate_document( $model_path, $document_content, $document_name ) {
 		$response = array(
-			'status'  => false,
-			'message' => '',
-			'link'    => '',
+			'status'   => false,
+			'message'  => '',
+			'path'     => '',
+			'url'      => '',
 		);
 
 		require_once PLUGIN_DIGIRISK_PATH . '/core/external/odtPhpLibrary/odf.php';
 
-		$digirisk_directory = $this->get_digirisk_dir_path();
-		$document_path      = $digirisk_directory . '/' . $document_name;
+		$digirisk_directory     = $this->get_digirisk_dir_path();
+		$digirisk_directory_url = $this->get_digirisk_dir_path( 'baseurl' );
+		$document_path          = $digirisk_directory . '/' . $document_name;
+		$document_url           = $digirisk_directory_url . '/' . $document_name;
 
 		$config = array(
 			'PATH_TO_TMP' => $digirisk_directory . '/tmp',
@@ -235,9 +243,9 @@ class Document_Class extends \eoxia\Post_Class {
 
 		// Dans le cas ou le fichier a bien été généré, on met a jour les informations dans la base de données.
 		if ( is_file( $document_path ) ) {
-			$response['status']  = true;
-			$response['success'] = true;
-			$response['link']    = $document_path;
+			$response['status'] = true;
+			$response['path']   = $document_path;
+			$response['url']    = $document_url;
 		}
 
 		return $response;
@@ -339,33 +347,29 @@ class Document_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Récupération de la prochaine version pour un type de document
+	 * Récupération de la prochaine version pour un type de document pour le jour J
 	 *
-	 * @param array $current_element_type Le type de document actuellement en cours de création.
-	 * @param integer $element_id         L'ID de l'élément.
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 *
-	 * @return int                        La version +1 du document actuellement en cours de création.
+	 * @param string  $type       Le type de document actuellement en cours de création.
+	 * @param integer $element_id L'ID de l'élément.
+	 *
+	 * @return int                La version +1 du document actuellement en cours de création.
 	 */
-	public function get_document_type_next_revision( $current_element_type, $element_id ) {
+	public function get_document_type_next_revision( $type, $element_id ) {
 		global $wpdb;
 
 		// Récupération de la date courante.
 		$today = getdate();
 
 		// Définition des paramètres de la requête de récupération des documents du type donné pour la date actuelle.
-		$get_model_args = array(
-			'nopaging'=> true,
-			'post_parent' => $element_id,
-			'post_type' => $current_element_type[0],
-			'post_status' => array( 'publish', 'inherit' ),
-			'tax_query' => array(
-				array(
-					'taxonomy' => $this->attached_taxonomy_type,
-					'field'    => 'slug',
-					'terms'    => wp_parse_args( $current_element_type, array( 'printed' ) ),
-					'operator' => 'AND',
-				),
-			),
+		$args = array(
+			'count'          => true,
+			'posts_per_page' => -1,
+			'post_parent'    => $element_id,
+			'post_type'      => $type,
+			'post_status'    => array( 'publish', 'inherit' ),
 			'date_query' => array(
 				array(
 					'year'  => $today['year'],
@@ -375,9 +379,8 @@ class Document_Class extends \eoxia\Post_Class {
 			),
 		);
 
-		$element_sheet_default_model = new \WP_Query( $get_model_args );
-
-		return ( $element_sheet_default_model->post_count + 1 );
+		$document_revision = new \WP_Query( $args );
+		return ( $document_revision->post_count + 1 );
 	}
 
 	/**
@@ -396,7 +399,10 @@ class Document_Class extends \eoxia\Post_Class {
 		$types = $document_type;
 
 		$response = array(
-			'status' => true,
+			'status'   => true,
+			'message'  => '',
+			'filename' => '',
+			'path'     => '',
 		);
 
 		// Définition du modèle de document a utiliser pour l'impression.
@@ -405,78 +411,65 @@ class Document_Class extends \eoxia\Post_Class {
 		$model_to_use = $model_response['model_path'];
 
 		// Définition de la révision du document.
-		$document_revision = 0;
-		$main_title_part = '';
-
-		$document_revision = $this->get_document_type_next_revision( $types, $element->id );
-		$main_title_part = $element->title;
+		$document_revision = $this->get_document_type_next_revision( $this->post_type, $element->id );
 
 		// Définition de la partie principale du nom de fichier.
-		if ( ! empty( $document_type ) && is_array( $document_type ) ) {
-			$main_title_part = $document_type[0] . '_' . $main_title_part;
-		}
-
-		// Enregistrement de la fiche dans la base de donnée.
+		$main_title_part = $types[0] . '_' . $element->title;
 		$response['filename'] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
 		$response['filename'] .= $element->unique_identifier . '_';
+
+		// 05/02/2018: Enlevez la révision et mêttre l'unique identifier du DUER. Utiliser construct_identifier.
 		$response['filename'] .= sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
 
+		if ( null === $model_to_use ) {
+			$response['status'] = false;
+			$response['message'] = __( 'No model to use for generate odt file', 'digirisk' );
+			return $response;
+		}
+
+		$response['path'] = $response['filename'];
+
+		if ( ! empty( $element ) ) {
+			$response['path'] = $element->type . '/' . $element->id . '/' . $response['filename'];
+		}
+
+		// Génères le fichier ODT.
+		$document_creation = $this->generate_document( $model_to_use, $document_meta, $response['path'] );
+
+		if ( ! $document_creation['status'] ) {
+			$response['status'] = false;
+			$response['message'] = __( 'Error when generated odt file', 'digirisk' );
+			return $response;
+		}
+
+		$filetype = wp_check_filetype( $document_creation['path'], null );
+		$response['path'] = $document_creation['path'];
+
+		// Enregistre le fichier et ses métadonnées dans la base de donnée.
 		$document_args = array(
 			'post_status' => 'inherit',
-			'post_title' => basename( $response['filename'], '.odt' ),
+			'post_title'  => basename( $response['filename'] ),
+			'post_parent' => $element->id,
+			'post_type'   => $this->post_type,
+			'guid'        => $document_creation['url'],
+			'mime_type'   => $filetype['type'],
 		);
 
-		$filetype = 'unknown';
+		$response['id'] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $response['path'], $element->id );
 
-		// @todo: A faire
-		if ( in_array( 'zip', $document_type ) ) {
-			$filetype = "application/zip";
-		}
-
-		$path = '';
-
-		if ( null !== $model_to_use ) {
-			$path = $response['filename'];
-
-			if ( ! empty( $element ) ) {
-				$path = $element->type . '/' . $element->id . '/' . $response['filename'];
-			}
-
-			$document_creation = $this->generate_document( $model_to_use, $document_meta, $path );
-
-			if ( !empty( $document_creation ) && !empty( $document_creation['status'] ) && !empty( $document_creation['link'] ) ) {
-				$filetype = wp_check_filetype( $document_creation['link'], null );
-				$response['link'] = $document_creation['link'];
-				$response['message'] = __( 'The sheet have been generated successfully. Please find it below', 'digirisk' );
-			} else {
-				$response = wp_parse_args( $document_creation, $response );
-			}
-		} else {
-			$response['status'] = false;
-			$response['message'] = $model_response['message'];
-		}
-
-		$response['id'] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $path, ! empty( $element ) ? $element->id : 0 );
-
-		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $path );
+		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $response['path'] );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 
 		wp_set_object_terms( $response['id'], wp_parse_args( $types, array( 'printed', ) ), $this->attached_taxonomy_type );
 
 		//	On met à jour les informations concernant le document dans la base de données.
 		$document_args = array(
-			'id' => $response['id'],
-			'title' => basename( $response['filename'], '.odt' ),
-			'parent_id' => ! empty( $element->id ) ? $element->id : 0,
-			'mime_type' => ! empty( $filetype['type'] ) ? $filetype['type'] : 'application/vnd.oasis.opendocument.text',
-			'type' => $this->post_type,
-			'model_id' => $model_to_use,
+			'id'            => $response['id'],
+			'model_id'      => $model_to_use,
 			'document_meta' => $document_meta,
-			'status' => 'inherit',
-			'version' => $document_revision,
 		);
 
-		$dcument = $this->update( $document_args );
+		$this->update( $document_args );
 
 		return $response;
 	}

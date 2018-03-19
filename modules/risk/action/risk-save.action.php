@@ -2,7 +2,7 @@
 /**
  * Les actions relatives à la sauvegarde des risques.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -23,79 +23,52 @@ class Risk_Save_Action {
 	/**
 	 * Le constructeur appelle la méthode personnalisé: save_risk
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
+	 * @version 6.5.0
 	 */
 	public function __construct() {
-		add_action( 'save_risk', array( $this, 'callback_save_risk' ), 10, 1 );
+		add_action( 'wp_ajax_edit_risk', array( $this, 'callback_edit_risk' ) );
 	}
 
 	/**
 	 * Enregistres un risque.
-	 * Ce callback est appelé après le callback callback_save_risk de risk_evaluation_action
-	 *
-	 * @param Risk_Model $risk Les données du risque.
 	 *
 	 * @since 6.0.0
 	 * @version 6.5.0
 	 */
-	public function callback_save_risk( $risk ) {
-		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+	public function callback_edit_risk() {
+		check_ajax_referer( 'edit_risk' );
 
-		if ( isset( $risk['id'] ) ) {
-			$danger = Risk_Category_Class::g()->get( array( 'id' => $risk['danger_id'] ), true );
+		$id                   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$risk_category_id     = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
+		$evaluation_method_id = ! empty( $_POST['evaluation_method_id'] ) ? (int) $_POST['evaluation_method_id'] : 0;
 
-			$image_id = 0;
+		if ( empty( $parent_id ) ) {
+			wp_send_json_error();
+		}
 
-			if ( ! empty( $risk['image_id'] ) ) {
-				$image_id = (int) $risk['image_id'];
-			}
-
-			$risk['id']                               = (int) $risk['id'];
-			$risk['title']                            = $danger->name;
-			$risk['parent_id']                        = $parent_id;
-			$risk['taxonomy']['digi-category-risk'][] = (int) $danger->id;
-			$risk['taxonomy']['digi-method'][0]       = (int) $risk['taxonomy']['digi-method'][0];
-			$risk['preset']                           = (bool) ( $risk['preset'] === 'true' ) ? true : false;
-			$risk['status']                           = 'inherit';
-			$risk_obj                                 = Risk_Class::g()->update( $risk );
-
-			if ( ! $risk_obj ) {
-				wp_send_json_error();
-			}
-
-			$risk_evaluation = Risk_Evaluation_Class::g()->update( array(
-				'id'      => $risk_obj->current_evaluation_id,
-				'post_id' => $risk_obj->id,
-			) );
-
-			if ( ! $risk_evaluation ) {
-				wp_send_json_error();
-			}
-
-			$risk_obj->current_equivalence = $risk_evaluation->equivalence;
-			Risk_Class::g()->update( $risk_obj );
-
-			if ( ! empty( $image_id ) ) {
-				$args_media = array(
-					'id'         => $risk_obj->id,
-					'file_id'    => $image_id,
-					'model_name' => '\digi\Risk_Class',
-				);
-
-				\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
-				$args_media['field_name'] = 'image';
-				\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
-			}
-		} // End if().
-
-		do_action( 'digi_add_historic', array(
+		$risk_data = array(
+			'id'        => $id,
 			'parent_id' => $parent_id,
-			'id'        => $risk_obj->id,
-			'content'   => __( 'Mise à jour du risque', 'digirisk' ) . ' ' . $risk_obj->unique_identifier,
-		) );
+			'title'     => 'Chocolat',
+		);
 
-		do_action( 'save_risk_evaluation_comment', $risk_obj, $risk );
+		$risk = Risk_Class::g()->save( $risk_data, $risk_category_id, $evaluation_method_id );
+
+		if ( ! empty( $risk->errors ) ) {
+			wp_send_json_error( $risk->errors );
+		}
+
+		$evaluation_method_variables = ! empty( $_POST['evaluation_variables'] ) ? (array) $_POST['evaluation_variables'] : array();
+
+		$risk_evaluation = Risk_Evaluation_Class::g()->save( $risk->id, $evaluation_method_id, $evaluation_method_variables );
+
+		$risk->current_equivalence = $risk_evaluation->equivalence;
+
+		Risk_Class::g()->update( $risk );
+
+		wp_send_json_success( array() );
 	}
 }
 

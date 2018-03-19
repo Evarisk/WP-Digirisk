@@ -2,10 +2,10 @@
 /**
  * Affichage d'un utilisateur en mode édition.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -19,15 +19,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="save_user" />
 	<?php wp_nonce_field( 'ajax_save_user' ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $user->id ); ?>" />
-	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
-	<td class="padding tooltip red"
-		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
-		<input type="text" class="lastname" placeholder="Name" name="lastname" value="<?php echo esc_attr( $user->lastname ); ?>" />
+
+	<td>
+		<?php if ( 0 !== $user->id ) : ?>
+			<div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;">
+				<span><?php echo esc_html( $user->initial ); ?></span>
+			</div>
+		<?php endif; ?>
+	</td>
+	<td class="padding">
+		<?php if ( 0 !== $user->id ) : ?>
+			<span>
+				<strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong>
+			</span>
+		<?php endif; ?>
 	</td>
 	<td class="padding tooltip red"
 		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
-		<input type="text" class="firstname" placeholder="Firstname" name="firstname" value="<?php echo esc_attr( $user->firstname ); ?>" />
+		<input type="text" class="lastname" placeholder="<?php esc_attr_e( 'Nom', 'digirisk' ); ?>" name="lastname" value="<?php echo esc_attr( $user->lastname ); ?>" />
+	</td>
+	<td class="padding tooltip red"
+		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+		<input type="text" class="firstname" placeholder="<?php esc_attr_e( 'Prénom', 'digirisk' ); ?>" name="firstname" value="<?php echo esc_attr( $user->firstname ); ?>" />
 	</td>
 	<td class="padding tooltip email red"
 		aria-label="<?php echo esc_attr_e( 'Cette adresse email est déjà utilisée.', 'digirisk' ); ?>">

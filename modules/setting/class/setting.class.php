@@ -88,11 +88,13 @@ class Setting_Class extends \eoxia\Singleton_Util {
 					foreach ( $danger_category_list as $element ) {
 						if ( ! empty( $element->thumbnail_id ) ) {
 							Risk_Class::g()->update( array(
+								'title'    => $element->name,
 								'taxonomy' => array(
 									'digi-category-risk' => array(
 										$element->id,
 									),
 								),
+								'status'   => 'publish',
 								'preset'   => true,
 							) );
 						}

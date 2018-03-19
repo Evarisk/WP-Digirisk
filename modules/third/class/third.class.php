@@ -1,33 +1,81 @@
-<?php namespace digi;
+<?php
+/**
+ * Classe gérant les tiers
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.3
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class third_class extends \eoxia\post_class {
-  protected $model_name   = '\digi\third_model';
-	protected $post_type    = 'third-display';
-	protected $meta_key    	= 'third_display';
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	/**	Défini la route par défaut permettant d'accèder aux sociétés depuis WP Rest API  / Define the default route for accessing to risk from WP Rest API	*/
+/**
+ * Classe gérant les tiers
+ */
+class Third_Class extends \eoxia\Post_Class {
+
+	/**
+	 * Le nom du modèle
+	 *
+	 * @var string
+	 */
+	protected $model_name = '\digi\third_model';
+
+	/**
+	 * Le post type
+	 *
+	 * @var string
+	 */
+	protected $post_type = 'third-display';
+
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
+	protected $meta_key = 'third_display';
+
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'third';
+
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
+	/**
+	 * Le préfixe de l'objet dans DigiRisk
+	 *
+	 * @var string
+	 */
 	public $element_prefix = 'T';
+
+	/**
+	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 *
+	 * @var array
+	 */
 	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
-	* Le constructeur
-	*/
-  protected function construct() {
-		parent::construct();
-	}
-
-	/**
-	* Créer un tier
-	*
-	* @param array $data Les données du tier
-	*
-	* @return object L'objet tier
-	*/
+	 * Créer un tier
+	 *
+	 * @param array $data Les données du tier.
+	 *
+	 * @return object L'objet tier
+	 */
   public function save_data( $data ) {
     // @todo : Sécurité
     // if ( empty( $data ) || empty( $data['full_name' ] ) || empty( $data['contact']['phone'] ) || empty( $data['contact']['address_id'] ) ) {
@@ -38,4 +86,4 @@ class third_class extends \eoxia\post_class {
   }
 }
 
-third_class::g();
+Third_Class::g();

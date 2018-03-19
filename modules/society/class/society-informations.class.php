@@ -95,6 +95,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 		$data = array();
 
 		$data['id']                  = ! empty( $data_form['id'] ) ? (int) $data_form['id'] : 0;
+		$data['type']                = ! empty( $data_form['type'] ) ? sanitize_text_field( $data_form['type'] ) : '';
 		$data['title']               = ! empty( $data_form['title'] ) ? sanitize_text_field( $data_form['title'] ) : '';
 		$data['owner_id']            = ! empty( $data_form['owner_id'] ) ? (int) $data_form['owner_id'] : 0;
 		$data['date']                = ! empty( $data_form['date'] ) ? sanitize_text_field( $data_form['date'] ) : '';

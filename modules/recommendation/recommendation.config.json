@@ -1,6 +1,7 @@
 {
 	"name": "Recommendation",
 	"slug": "recommendation",
+	"since": "6.0.0",
 	"version": "6.5.0",
 	"description": "Le module gérant les recommandation de Digirisk",
 	"path": "modules/recommendation/",

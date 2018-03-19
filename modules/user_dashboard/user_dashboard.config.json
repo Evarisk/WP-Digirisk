@@ -1,6 +1,7 @@
 {
 	"name": "User dashboard",
 	"slug": "user_dashboard",
+	"since": "6.1.6",
 	"version": "6.5.0",
 	"description": "Le module gérant les utilisateurs de Digirisk",
 	"path": "modules/user_dashboard/",

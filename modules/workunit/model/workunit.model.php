@@ -31,29 +31,39 @@ class Workunit_Model extends Society_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['user_info'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'child'     => array(),
 		);
 
 		$this->schema['user_info']['child']['owner_id'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'integer',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['user_info']['child']['affected_id'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 		);
 
 		$this->schema['identity'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'child'     => array(),
 		);
 
 		$this->schema['identity']['child']['workforce'] = array(
-			'type' => 'integer',
+			'since'   => '6.0.0',
+			'version' => '6.0.0',
+			'type'    => 'integer',
 		);
 
 		$this->schema['owner_id'] = array(

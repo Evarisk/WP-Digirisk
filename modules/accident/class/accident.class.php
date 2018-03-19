@@ -3,7 +3,7 @@
  * La classe gérant les accidents
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.3.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -107,7 +107,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	/**
 	 * Affiches la fenêtre principale des accidents
 	 *
-	 * @since 6.3.0
+	 * @since 6.1.5
 	 * @version 6.3.0
 	 *
 	 * @param integer $society_id L'ID de la société.

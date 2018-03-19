@@ -5,7 +5,7 @@
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.5.0
- * @copyright 2015-2018
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -145,7 +145,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @return bool
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
 	public function generate( $society_id ) {
 		$society = Group_Class::g()->get( array(
@@ -155,30 +155,27 @@ class Sheet_Groupment_Class extends Document_Class {
 		$society_infos = $this->get_infos( $society );
 
 		$sheet_details = array(
-			'reference' => $society->unique_identifier,
-			'nom' => $society->title,
+			'reference'   => $society->unique_identifier,
+			'nom'         => $society->title,
 			'description' => $society->content,
-			'adresse' => $society_infos['adresse'],
-			'telephone' => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
-			'codePostal' => $society_infos['codePostal'],
-			'ville' => $society_infos['ville'],
+			'adresse'     => $society_infos['adresse'],
+			'telephone'   => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'codePostal'  => $society_infos['codePostal'],
+			'ville'       => $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
+
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
 
 		$document_creation_response = $this->create_document( $society, array( 'groupement' ), $sheet_details );
-		if ( ! empty( $document_creation_response['id'] ) ) {
-			$society->associated_document_id['document'][] = $document_creation_response['id'];
-			$society = Group_Class::g()->update( $society );
-		}
 
 		return array(
 			'creation_response' => $document_creation_response,
-			'element' => $society,
-			'success' => true,
+			'element'           => $society,
+			'success'           => true,
 		);
 	}
 

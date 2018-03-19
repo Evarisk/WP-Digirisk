@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='<?php echo ! empty( $preset ) ? esc_attr( $selected_risk_category->id ) : '-1'; ?>' />
+<input class="input-hidden-danger" type="hidden" name="risk_category_id" value='<?php echo ! empty( $preset ) ? esc_attr( $selected_risk_category->id ) : '-1'; ?>' />
 
 <div class="danger categorie-container toggle grid padding tooltip red"
 			data-parent="categorie-container"

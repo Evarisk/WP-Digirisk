@@ -2,10 +2,10 @@
 /**
  * La liste des utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -27,11 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Firtname', 'digirisk' ); ?>
-			<span class="tooltip hover red" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Email', 'digirisk' ); ?>
-			<span class="tooltip hover red" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="w100"></td>
 	</tr>

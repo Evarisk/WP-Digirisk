@@ -3,7 +3,7 @@
  * Classe gérant les groupements
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.4.0
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -97,7 +97,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array Les risques pour l'arborescence complète non ordonnées mais construits de façon pour l'export / Unordered risks list for complete tree, already formatted for export
 	 *
-	 * @since 6.0.0
+	 * @since 6.4.0
 	 * @version 6.4.5
 	 */
 	public function get_element_tree_risk( $element ) {
@@ -140,7 +140,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @param string $tabulation ?.
 	 * @param array  $extra_params ?.
 	 *
-	 * @since 6.0.0
+	 * @since 6.4.0
 	 * @version 6.4.5
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
@@ -209,7 +209,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @param integer $element_id L'ID de l'élement parent.
 	 * @param array   $list_id La liste des ID.
 	 *
-	 * @since 6.0.0
+	 * @since 6.4.0
 	 * @version 6.4.5
 	 */
 	public function get_element_sub_tree_id( $element_id, $list_id ) {
@@ -251,7 +251,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @return array La liste des risques construite pour l'export / Risks' list builded for export
 	 *
-	 * @since 6.0.0
+	 * @since 6.4.0
 	 * @version 6.3.0
 	 */
 	public function build_risk_list_for_export( $element ) {

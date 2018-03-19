@@ -53,7 +53,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_method_evaluation' );
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -77,18 +77,6 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 	protected $base = 'evaluation_method';
 
 	/**
-	 * La liste des quotations principaux.
-	 *
-	 * @var Array
-	 */
-	public $list_scale = array(
-		1 => 0,
-		2 => 48,
-		3 => 51,
-		4 => 80,
-	);
-
-	/**
 	 * Créer une méthode d'évaluation
 	 *
 	 * @since 6.0.0
@@ -107,6 +95,65 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 		}
 
 		return $evaluation_method;
+	}
+
+	/**
+	 * Récupères la force, la cotation et l'équivalence selon les variables et la méthode d'évaluation.
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 *
+	 * @param integer $evaluation_method_id        ID de la méthode d'évaluation.
+	 * @param array   $evaluation_method_variables (Voir au dessus).
+	 *
+	 * @return mixedarray                          (Voir au dessus). Ou false si:
+	 *                                                                  -Méthode d'évaluation n'existe pas.
+	 *                                                                  -Une des variables pour la formule est introuvable.
+	 */
+	public function get_details( $evaluation_method_id, $evaluation_method_variables ) {
+		$details = array(
+			'scale'       => 0,
+			'cotation'    => 0,
+			'equivalence' => 0,
+		);
+
+		$evaluation_method = $this->get( array( 'id' => $evaluation_method_id ), true );
+
+		if ( 0 === $evaluation_method->id ) {
+			return false;
+		}
+
+		$evaluation_method_variables_id = array_keys( $evaluation_method_variables );
+
+		// Vires les opérateurs arithmétiques.
+		$formula = array_filter( $evaluation_method->formula, 'is_int' );
+
+		// Le tableau 'formula' contient des entrées de type 'int' et 'string', ex:  => 1, 1 => '*', 2 => 5, 3 => '*', 4 => 10.
+		if ( ! empty( $formula ) ) {
+			foreach ( $formula as $key => $variable_id ) {
+				$variable_id = (int) $variable_id;
+
+				// Est-ce que la valeur est un nombre supérieure à 0.
+				if ( ! empty( $variable_id ) ) {
+
+					if ( ! in_array( $variable_id, $evaluation_method_variables_id, true ) ) {
+						return false;
+					} else {
+						if ( 0 === $key ) {
+							$details['cotation'] = $evaluation_method_variables[ $variable_id ];
+						} else {
+							$details['cotation'] *= $evaluation_method_variables[ $variable_id ];
+						}
+					}
+				}
+			}
+		}
+
+		$details['cotation']    = (int) $details['cotation'];
+		$details['equivalence'] = (int) $evaluation_method->matrix[ $details['cotation'] ];
+		$details['scale']       = (int) Scale_Util::get_scale( $details['equivalence'] );
+
+		return $details;
 	}
 
 }

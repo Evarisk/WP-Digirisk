@@ -3,7 +3,7 @@
  * Les actions relatives aux affichages légaux
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
+ * @since 6.1.5
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
@@ -23,7 +23,7 @@ class Legal_Display_Action {
 	/**
 	 * Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.2.4
 	 */
 	public function __construct() {
@@ -36,10 +36,11 @@ class Legal_Display_Action {
 	 * @param Third_Model $detective_work_third Les données de l'inspecteur du travail.
 	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
 	 *
-	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @since 6.1.5
+	 * @version 6.5.0
 	 */
 	public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
+		check_ajax_referer( 'save_legal_display' );
 
 		// Récupère les tableaux.
 		$emergency_service       = ! empty( $_POST['emergency_service'] ) ? (array) $_POST['emergency_service'] : array();
@@ -47,7 +48,7 @@ class Legal_Display_Action {
 		$safety_rule             = ! empty( $_POST['safety_rule'] ) ? (array) $_POST['safety_rule'] : array();
 		$derogation_schedule     = ! empty( $_POST['derogation_schedule'] ) ? (array) $_POST['derogation_schedule'] : array();
 		$collective_agreement    = ! empty( $_POST['collective_agreement'] ) ? (array) $_POST['collective_agreement'] : array();
-		$DUER                    = ! empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
+		$duer                    = ! empty( $_POST['DUER'] ) ? (array) $_POST['DUER'] : array();
 		$rules                   = ! empty( $_POST['rules'] ) ? (array) $_POST['rules'] : array();
 		$participation_agreement = ! empty( $_POST['participation_agreement'] ) ? (array) $_POST['participation_agreement'] : array();
 		$parent_id               = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
@@ -62,9 +63,10 @@ class Legal_Display_Action {
 			'derogation_schedule'            => $derogation_schedule,
 			'collective_agreement'           => $collective_agreement,
 			'participation_agreement'        => $participation_agreement,
-			'DUER'                           => $DUER,
+			'DUER'                           => $duer,
 			'rules'                          => $rules,
 			'parent_id'                      => $parent_id,
+			'status'                         => 'inherit',
 		);
 
 		$legal_display = Legal_Display_Class::g()->save_data( $legal_display_data );
@@ -74,15 +76,15 @@ class Legal_Display_Action {
 
 		$element_parent = Society_Class::g()->get( array(
 			'id' => $parent_id,
-		) );
+		), true );
 
 		$result = array();
 
-		$result['A3'] = $this->generate_sheet( $legal_display, $element_parent[0] );
-		$result['A4'] = $this->generate_sheet( $legal_display, $element_parent[0], 'A3' );
+		$result['A3'] = $this->generate_sheet( $legal_display, $element_parent, 'A3' );
+		$result['A4'] = $this->generate_sheet( $legal_display, $element_parent );
 
 		ob_start();
-		Legal_Display_Class::g()->display( $element_parent[0] );
+		Legal_Display_Class::g()->display( $element_parent );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'legalDisplay',
@@ -100,7 +102,7 @@ class Legal_Display_Action {
 	 * @param object $element_parent L'objet parent.
 	 * @param string $format (Optional) Le format voulu A4 ou A3.
 	 *
-	 * @since 6.0.0
+	 * @since 6.1.5
 	 * @version 6.4.4
 	 */
 	public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
@@ -167,6 +169,7 @@ class Legal_Display_Action {
 		}
 
 		$element_parent->associated_document_id['document'][] = $document_creation['id'];
+
 		Society_Class::g()->update( $element_parent );
 
 		return $document_creation;

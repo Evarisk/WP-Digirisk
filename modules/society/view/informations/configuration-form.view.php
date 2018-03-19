@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="save_configuration" />
 	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->id ); ?>" />
 	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->id ); ?>" />
+	<input type="hidden" name="society[type]" value="<?php echo esc_attr( $element->type ); ?>" />
 	<?php wp_nonce_field( 'save_configuration' ); ?>
 
 	<ul class="grid-layout padding w2">

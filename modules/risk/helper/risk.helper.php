@@ -28,16 +28,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 function get_full_risk( $data ) {
 	$args_category_risk           = array( 'schema' => true );
 	$args_evaluation_method       = array( 'schema' => true );
-	$args_evaluation              = array( 'schema' => true );
+	$args_risk_evaluation         = array( 'schema' => true );
 	$args_risk_evaluation_comment = array( 'schema' => true );
 
 	if ( ! empty( $data->id ) ) {
-		$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
-
-		if ( 0 !== $data->current_evaluation_id ) {
-			$args_evaluation = array( 'id' => $data->current_evaluation_id );
-		}
-
+		$args_category_risk           = array( 'id' => end( $data->taxonomy['digi-category-risk'] ) );
+		$args_risk_evaluation         = array( 'post_id' => $data->id );
 		$args_risk_evaluation_comment = array( 'post_id' => $data->id );
 		$args_evaluation_method       = array( 'post_id' => $data->id );
 	}
@@ -49,11 +45,11 @@ function get_full_risk( $data ) {
 	$data->evaluation_method = Evaluation_Method_Class::g()->get( $args_evaluation_method, true );
 
 	// Récupères l'évaluation du risque.
-	$data->evaluation = Risk_Evaluation_Class::g()->get( $args_evaluation, true );
+	$data->evaluation = Risk_Evaluation_Class::g()->get( $args_risk_evaluation, true );
 
 	// Récupères les commentaires.
 	$risk_evaluation_comments = Risk_Evaluation_Comment_Class::g()->get( $args_risk_evaluation_comment );
-	$data->comment = $risk_evaluation_comments;
+	$data->comment            = $risk_evaluation_comments;
 
 	if ( ! isset( $data->modified_unique_identifier ) ) {
 		$data->modified_unique_identifier = '';

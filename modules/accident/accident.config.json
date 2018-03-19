@@ -1,6 +1,7 @@
 {
 	"name": "Accident",
 	"slug": "accident",
+	"since": "6.1.5",
 	"version": "6.5.0",
 	"description": "Le module gérant les accidents",
 	"path": "modules/accident/",
