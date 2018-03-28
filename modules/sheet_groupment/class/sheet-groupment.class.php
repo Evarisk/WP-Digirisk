@@ -168,6 +168,7 @@ class Sheet_Groupment_Class extends Document_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
+		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
 		$document_creation_response = $this->create_document( $society, array( 'groupement' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
@@ -389,6 +390,76 @@ class Sheet_Groupment_Class extends Document_Class {
 		}
 
 		return $risk_details;
+	}
+
+	/**
+	 * Récupères les recommandations dans la société
+	 *
+	 * @param Group_Model $society L'objet groupement.
+	 *
+	 * @return array Les recommandations dans la société
+	 *
+	 * @since 6.5.0
+	 * @version 6.5.0
+	 */
+	public function set_recommendations( $society ) {
+		$recommendations = Recommendation_Class::g()->get( array( 'post_parent' => $society->id ) );
+
+		$recommendations_details = array( 'affectedRecommandation' => array( 'type' => 'segment', 'value' => array() ) );
+		$recommendations_filled = array();
+
+		if ( ! empty( $recommendations ) ) {
+			foreach ( $recommendations as $element ) {
+				/** Récupères la catégorie parent */
+				$recommendations_filled[ $element->id ] = array(
+					'recommandationCategoryIcon' => $this->get_picture_term( $element->recommendation_category_term[0]->thumbnail_id ),
+					'recommandationCategoryName' => $element->recommendation_category_term[0]->name,
+				);
+
+				$recommendations_filled[ $element->id ]['recommendations']['type'] = 'sub_segment';
+				$recommendations_filled[ $element->id ]['recommendations']['value'][] = array(
+					'identifiantRecommandation' => $element->unique_identifier,
+					'recommandationIcon'				=> $this->get_picture_term( $element->recommendation_category_term[0]->recommendation_term[0]->thumbnail_id ),
+					'recommandationName'				=> $element->recommendation_category_term[0]->name,
+					'recommandationComment'			=> $element->comment[0]->content,
+				);
+			}
+		}
+
+		$recommendations_details['affectedRecommandation']['value'] = $recommendations_filled;
+
+		return $recommendations_details;
+	}
+
+	/**
+	 * Récupères le lien vers l'image de la recommendation
+	 *
+	 * @param  int $term_id    L'ID de la recommendation.
+	 * @return false|string    Le lien vers l'image
+	 *
+	 * @since 6.0.0
+	 * @version 6.2.5.0
+	 */
+	public function get_picture_term( $term_id ) {
+		$picture_definition = wp_get_attachment_image_src( $term_id, 'thumbnail' );
+
+		if ( ! $picture_definition ) {
+			return false;
+		}
+
+		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ) );
+		$picture = '';
+		if ( is_file( $picture_final_path ) ) {
+			$picture = array(
+				'type'		=> 'picture',
+				'value'		=> $picture_final_path,
+				'option'	=> array(
+					'size'	=> 1,
+				),
+			);
+		}
+
+		return $picture;
 	}
 }
 

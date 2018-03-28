@@ -21,7 +21,7 @@ window.eoxiaJS.digirisk.legalDisplay.init = function() {};
  * @version 6.4.4
  */
 window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function( triggeredElement, response ) {
-	jQuery( '.table' ).replaceWith( response.data.view );
+	jQuery( '.tab-element[data-action="digi-legal_display"]' ).click();
 	window.scrollTo( 0, 0 );
 };
 

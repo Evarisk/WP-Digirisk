@@ -389,7 +389,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 * @return array Les recommandations dans la société
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @version 6.5.0
 	 */
 	public function set_recommendations( $society ) {
 		$recommendations = Recommendation_Class::g()->get( array( 'post_parent' => $society->id ) );
