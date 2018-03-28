@@ -139,6 +139,11 @@ if ( ! class_exists( '\eoxia\Constructor_Data_Class' ) ) {
 					if ( ! is_array( $current_object->$field_name ) && ! is_object( $current_object->$field_name ) && 'float' === $field_def['type'] ) {
 						$current_object->$field_name = str_replace( ',', '.', $current_object->$field_name );
 					}
+
+					if ( 'string' === $field_def['type'] ) {
+						$current_object->$field_name = stripslashes( $current_object->$field_name );
+					}
+
 					settype( $current_object->$field_name, $field_def['type'] );
 
 					if ( ! empty( $field_def['array_type'] ) ) {
