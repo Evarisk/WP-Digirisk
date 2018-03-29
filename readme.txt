@@ -81,6 +81,7 @@ Améliorations
 
 * 15947 - Ajout de la génération du document "Listing risque" avec les photos des risques.
 * 15948 - Ajout de la génération du document "Listing risque" avec les actions correctives des risques.
+* 16504 - Mise à jours des documents: Affichage légal A3/A4, Fiche de groupement et Fiche de poste.
 
 Corrections
 
