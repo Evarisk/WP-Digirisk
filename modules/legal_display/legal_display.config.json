@@ -2,7 +2,7 @@
 	"name": "Legal Display",
 	"slug": "legal_display",
 	"since": "6.1.3",
-	"version": "6.5.0",
+	"version": "7.0.0",
 	"description": "Le module gérant l'affichage légal",
 	"path": "modules/legal_display/",
 	"dependencies": {

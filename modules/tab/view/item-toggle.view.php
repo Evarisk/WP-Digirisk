@@ -2,7 +2,7 @@
 /**
  * Affiches les contenu d'un onglet de type toggle
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.5.0
  * @copyright 2015-2018 Evarisk

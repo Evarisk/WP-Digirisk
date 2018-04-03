@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -39,7 +39,7 @@ class Risk_Evaluation_Comment_Class extends \eoxia\Comment_Class {
 	 *
 	 * @var string
 	 */
-	protected $comment_type = 'digi-riskevalcomment';
+	protected $type = 'digi-riskevalcomment';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -54,6 +54,45 @@ class Risk_Evaluation_Comment_Class extends \eoxia\Comment_Class {
 	 * @var string
 	 */
 	protected $version = '0.1';
+
+	/**
+	 * Enregistres les commentaire des risques.
+	 *
+	 * @since 6.5.0
+	 * @version 7.0.0
+	 *
+	 * @param  Risk_Model $risk     Les données du risque.
+	 * @param  array      $comments La liste des commentaires.
+	 *
+	 * @return void
+	 */
+	public function save( $risk, $comments ) {
+		if ( isset( $risk->data['id'] ) ) {
+			if ( ! empty( $comments ) ) {
+				foreach ( $comments as $comment ) {
+					if ( ! empty( $comment['content'] ) ) {
+						$comment['id']        = (int) $comment['id'];
+						$comment['post_id']   = $risk->data['id'];
+						$comment['author_id'] = (int) $comment['author_id'];
+
+						if ( empty( $comment['parent_id'] ) ) {
+							$comment['parent_id'] = $risk->data['current_evaluation_id'];
+						}
+
+						$comment['parent_id'] = (int) $comment['parent_id'];
+
+						self::g()->update( $comment );
+
+						do_action( 'digi_add_historic', array(
+							'parent_id' => $risk->data['parent_id'],
+							'id'        => $risk->data['id'],
+							'content'   => __( 'Modification du risque ', 'digirisk' ) . ' ' . $risk->data['unique_identifier'] . ' ' . __( 'ajout du commentaire: ', 'digirisk' ) . ' ' . $comment['content'],
+						) );
+					}
+				}
+			}
+		}
+	}
 }
 
 Risk_Evaluation_Comment_Class::g();

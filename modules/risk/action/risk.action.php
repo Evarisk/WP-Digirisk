@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -151,7 +151,7 @@ class Risk_Action {
 	 * Charges un risque
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function ajax_load_risk() {
 		check_ajax_referer( 'ajax_load_risk' );
@@ -166,7 +166,7 @@ class Risk_Action {
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
-			'society_id' => $risk->parent_id,
+			'society_id' => $risk->data['parent_id'],
 			'risk'       => $risk,
 		) );
 		wp_send_json_success( array(

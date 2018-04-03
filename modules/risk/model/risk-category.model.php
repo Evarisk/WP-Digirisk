@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -36,23 +36,6 @@ class Risk_Category_Model extends \eoxia\Term_Model {
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_status',
-			'default'   => '',
-		);
-
-		$this->schema['unique_key'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.4.0',
-			'type'      => 'string',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_unique_key',
-			'default'   => '',
-		);
-
-		$this->schema['unique_identifier'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.4.0',
-			'type'      => 'string',
-			'meta_type' => 'multiple',
 			'default'   => '',
 		);
 

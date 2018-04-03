@@ -2,10 +2,10 @@
 /**
  * Le header contenu le nom de la société
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="society-header action-attribute"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 			data-action="load_society"
-			data-establishment-id="<?php echo esc_attr( $society->id ); ?>"
+			data-establishment-id="<?php echo esc_attr( $society->data['id'] ); ?>"
 			data-loader="digirisk-wrap"
 			data-namespace="digirisk"
 			data-module="navigation"
 			data-before-method="setUnitActive">
 	<span class="icon fas fa-building fa-fw"></span>
 	<div class="title">
-		<?php echo esc_html( $society->title ); ?>
+		<?php echo esc_html( $society->data['title'] ); ?>
 	</div>
 	<div class="add-container">
 		<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span><span class="button-add animated far fa-plus-circle"></span></div>

@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-group';
+	protected $type = 'digi-group';
 
 	/**
 	 * La clé principale du modèle
@@ -47,27 +47,6 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'GP';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_society' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

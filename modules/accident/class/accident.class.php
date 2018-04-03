@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-accident';
+	protected $type = 'digi-accident';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

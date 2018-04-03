@@ -2,10 +2,10 @@
 /**
  * Vue principale de la navigation.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -13,8 +13,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
-?>
+} ?>
 
 <div class="navigation-container">
 	<?php
@@ -23,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	) );
 
 	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
-		'selected_establishment_id' => $selected_establishment_id,
-		'establishments' => $establishments,
-		'id' => $society->id,
-		'class' => 'workunit-list',
+		'selected_society_id' => $selected_society_id,
+		'societies'           => $societies,
+		'id'                  => $society->data['id'],
+		'class'               => 'workunit-list',
 	) );
 	?>
 </div>

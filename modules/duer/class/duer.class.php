@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class DUER_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'duer';
+	protected $type = 'duer';
 
 	/**
 	 * La taxonomy du post

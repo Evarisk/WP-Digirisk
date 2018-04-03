@@ -4,8 +4,8 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -29,7 +29,7 @@ class Risk_Category_Default_Data_Class extends \eoxia\Singleton_Util {
 	 * Créer les données par défaut.
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @return boolean True si tout s'est bien passé, sinon false.
 	 */
@@ -53,9 +53,10 @@ class Risk_Category_Default_Data_Class extends \eoxia\Singleton_Util {
 
 				$risk_category = Risk_Category_Class::g()->create( $risk_category_data );
 
-				$file_id                     = \eoxia\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/categorieDangers/' . $risk_category_from_json->thumbnail_name . '.png', 0 );
-				$risk_category->thumbnail_id = $file_id;
-				$risk_category               = Risk_Category_Class::g()->update( $risk_category );
+				$file_id                             = \eoxia\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/categorieDangers/' . $risk_category_from_json->thumbnail_name . '.png', 0 );
+				$risk_category->data['thumbnail_id'] = $file_id;
+
+				$risk_category = Risk_Category_Class::g()->update( $risk_category->data );
 			}
 		}
 

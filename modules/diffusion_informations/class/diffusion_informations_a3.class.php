@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.4.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -31,7 +31,7 @@ class Diffusion_Informations_A3_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'diffusion_info_A3';
+	protected $type = 'diffusion_info_A3';
 
 	/**
 	 * Le type du document

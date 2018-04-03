@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Risk_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-risk';
+	protected $type = 'digi-risk';
 
 	/**
 	 * La clé principale du modèle
@@ -105,7 +105,7 @@ class Risk_Class extends \eoxia\Post_Class {
 	public function display( $society_id ) {
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$risk_schema = self::get( array( 'id' => 0 ), true );
+		$risk_schema = self::get( array( 'schema' => true ), true );
 		$risks       = self::get( array( 'post_parent' => $society_id ) );
 
 		if ( count( $risks ) > 1 ) {

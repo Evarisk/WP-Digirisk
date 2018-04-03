@@ -2,16 +2,15 @@
 	"name": "Societé",
 	"slug": "society",
 	"since": "6.0.0",
-	"version": "6.4.4",
+	"version": "7.0.0",
 	"description": "Le module gérant les sociétés de DigiRisk (Groupement et unité de travail)",
 	"path": "modules/society/",
 	"dependencies": {
 		"shortcode": {},
 		"action": {},
-		"filter": {},
-		"helper": {},
 		"model": {},
 		"action": {},
-		"class": {}
+		"class": {},
+		"filter": {}
 	}
 }

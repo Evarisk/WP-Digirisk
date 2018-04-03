@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Recommendation_Term_Class extends \eoxia\Term_Class {
 	 *
 	 * @var string
 	 */
-	protected $taxonomy = 'digi-recommendation';
+	protected $type = 'digi-recommendation';
 
 	/**
 	 * Nom du champs (meta) de stockage des données liées

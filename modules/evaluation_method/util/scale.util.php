@@ -1,9 +1,12 @@
 <?php
 /**
- * Tout ce qui est en relation avec les JSON
+ * Fonctions utiles pour les méthodes d'évaluations.
  *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.9
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -12,13 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Fonctions utiles pour les méthodes d'évaluations.
+ */
 class Scale_Util {
 
 	/**
 	 * Récupères le niveau d'évaluation par rapport à son level
 	 *
 	 * @since 6.2.9
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @param int $level Le level de l'évaluation.
 	 *
@@ -30,7 +36,7 @@ class Scale_Util {
 		}
 
 		$method_evaluation_simplified = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
-		$list_scale                   = $method_evaluation_simplified->matrix;
+		$list_scale                   = $method_evaluation_simplified->data['matrix'];
 		if ( empty( $list_scale ) ) {
 			return false;
 		}

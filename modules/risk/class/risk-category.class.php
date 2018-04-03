@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -31,7 +31,7 @@ class Risk_Category_Class extends \eoxia\Term_Class {
 	 *
 	 * @var string
 	 */
-	protected $taxonomy = 'digi-category-risk';
+	protected $type = 'digi-category-risk';
 
 	/**
 	 * Nom du champs (meta) de stockage des données liées
@@ -53,20 +53,6 @@ class Risk_Category_Class extends \eoxia\Term_Class {
 	 * @var string
 	 */
 	protected $version = '0.1';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array();
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk

@@ -71,6 +71,17 @@ class Risk_Evaluation_Model extends \eoxia\Comment_Model {
 			'required'  => true,
 		);
 
+		$this->schema['variables'] = array(
+			'since'      => '7.0.0',
+			'version'    => '7.0.0',
+			'type'       => 'array',
+			'array_type' => 'integer',
+			'key_type'   => 'integer',
+			'meta_type'  => 'multiple',
+			'required'   => true,
+			'default'    => array(),
+		);
+
 		$this->schema['equivalence'] = array(
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',

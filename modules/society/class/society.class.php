@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.6
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-society';
+	protected $type = 'digi-society';
 
 	/**
 	 * La clé principale du modèle
@@ -47,27 +47,6 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'S';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_society' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -91,6 +70,32 @@ class Society_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Sociétés';
 
 	/**
+	 * Récupères les données de la société courante selon la superglobale "society_id" ou sinon récupères la première societé depuis la base de donnée.
+	 *
+	 * @since 7.0.0
+	 * @version 7.0.0
+	 *
+	 * @return Society_Model|Group_Model|Workunit_Model Renvoies les données de la société courante.
+	 */
+	public function get_current_society() {
+		$society_id = 0;
+
+		if ( ! empty( $_REQUEST['society_id'] ) ) { // WPCS: CSRF ok.
+			$society_id = (int) $_REQUEST['society_id'];
+		}
+
+		if ( 0 === $society_id ) {
+			$society = self::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
+		} else {
+			$society = $this->show_by_type( $society_id );
+		}
+
+		return $society;
+	}
+
+	/**
 	 * Récupères l'objet par rapport à son post type
 	 *
 	 * @param integer $id L'ID de l'objet.
@@ -98,7 +103,7 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @return boolean|object L'objet
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function show_by_type( $id ) {
 		$id = (int) $id;
@@ -114,13 +119,9 @@ class Society_Class extends \eoxia\Post_Class {
 		}
 
 		$model_name    = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
-		$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
+		$establishment = $model_name::g()->get( array( 'id' => $id ), true );
 
-		if ( empty( $establishment[0] ) ) {
-			return false;
-		}
-
-		return $establishment[0];
+		return $establishment;
 	}
 
 	/**
@@ -130,8 +131,8 @@ class Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @return object L'objet mis à jour
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 6.2.5
 	 */
 	public function update_by_type( $establishment ) {
 		if ( ! is_object( $establishment ) && ! is_array( $establishment ) ) {
@@ -159,16 +160,49 @@ class Society_Class extends \eoxia\Post_Class {
 	}
 
 	/**
+	 * Récupères toutes les sociétés enfants à $society_id correspondant à $status par ordre croissant de la clé _wpdigi_unique_key.
+	 *
+	 * @since 7.0.0
+	 * @version 7.0.0
+	 *
+	 * @param  integer $society_id L'ID de la société parent.
+	 * @param  string  $status     Le status des sociétés enfant. Inherit par défaut.
+	 *
+	 * @return array               Un tableau contenant toutes les sociétés enfant.
+	 */
+	public function get_societies_in( $society_id, $status = 'inherit' ) {
+		$societies = $this->get( array(
+			'post_parent'    => $society_id,
+			'posts_per_page' => -1,
+			'post_type'      => array( 'digi-group', 'digi-workunit' ),
+			'post_status'    => $status,
+			'orderby'        => array(
+				'menu_order'     => 'ASC',
+				'meta_value_num' => 'ASC',
+			),
+			'meta_key'       => '_wpdigi_unique_key',
+		) );
+
+		return $societies;
+	}
+
+	/**
 	 * Récupères l'adresse du groupement
 	 *
 	 * @param  mixed $society Les données de la société.
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function get_address( $society ) {
-		$address = Address_Class::g()->get( array( 'id' => end( $society->contact['address_id'] ) ), true );
+		$last_address_id = end( $society->data['contact']['address_id'] );
+
+		if ( ! empty( $last_address_id ) ) {
+			$address = Address_Class::g()->get( array( 'id' => $last_address_id ), true );
+		} else {
+			$address = Address_Class::g()->get( array( 'schema' => true ), true );
+		}
 
 		return $address;
 	}

@@ -1,21 +1,22 @@
 <?php
 /**
- * Ajout le shortcode qui permet d'afficher les onglets
+ * Gestion du shortcode pour afficher les onglets et les contenu des onglets.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package tab
- * @subpackage shortcode
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Gestion du shortcode pour afficher les onglets
+ * Gestion du shortcode pour afficher les onglets et les contenu des onglets.
  */
 class Tab_Shortcode {
 
@@ -23,26 +24,33 @@ class Tab_Shortcode {
 	 * Le constructeur
 	 */
 	public function __construct() {
-		add_shortcode( 'digi_tab', array( $this, 'callback_digi_tab' ), 1 );
+		add_shortcode( 'digi_tab', array( $this, 'callback_digi_tab' ) );
 	}
 
 	/**
-	 * Appelle la vue pour afficher les onglets
+	 * Appelle la méthode display_tab de Tab_Class.
 	 *
-	 * @param  array $param Les paramètres du shortcode.
-	 * @return void
+	 * @since 6.0.0
+	 * @version 7.0.0
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * Array['fields']      array   Définition des champs du tableau.
+	 *        ['id']        integer L'ID de la société.
+	 *        ['type']      string  Le type de la société. Peut etre 'digi-society', 'digi-group' ou 'digi-workunit'.
+	 *        ['tab_slug']  string  Le slug de l'onglet.
+	 *        ['tag_title'] string  Le titre du contenu de l'onglet.
+	 *
+	 * @param array $atts Les paramètres du shortcode (See above).
+	 *
+	 * @return string
 	 */
-	public function callback_digi_tab( $param ) {
-		$id = $param['id'];
-		$type = $param['type'];
-		$display = $param['display'];
+	public function callback_digi_tab( $atts ) {
+		$id       = $atts['id'];
+		$tab_slug = $atts['tab_slug'];
+		$type     = $atts['type'];
 
-		$list_tab = apply_filters( 'digi_tab', array(), $id );
-
-		\eoxia\View_Util::exec( 'digirisk', 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		ob_start();
+		Tab_Class::g()->display( $id, $tab_slug, $type );
+		return ob_get_clean();
 	}
 }
 

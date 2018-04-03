@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -65,7 +65,7 @@ class Evaluation_Method_Default_Data_Class extends \eoxia\Singleton_Util {
 	 * Créer la méthode d'évaluation.
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @param  Object $json_evaluation_method Les données de la méthode d'évaluation.
 	 *
@@ -90,7 +90,7 @@ class Evaluation_Method_Default_Data_Class extends \eoxia\Singleton_Util {
 	 * Créer les variables de la méthode d'évaluation
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @param  Evaluation_Method_Model $evaluation_method               Le modèle de la méthode d'évaluation.
 	 * @param  Object                  $json_evaluation_method          Les données de la méthode d'évaluation.
@@ -109,15 +109,15 @@ class Evaluation_Method_Default_Data_Class extends \eoxia\Singleton_Util {
 
 		if ( ! is_wp_error( $evaluation_method_variable ) ) {
 			if ( 'evarisk' === $json_evaluation_method->slug ) {
-				$evaluation_method->formula[] = $evaluation_method_variable->id;
-				$evaluation_method->formula[] = '*';
+				$evaluation_method->data['formula'][] = $evaluation_method_variable->data['id'];
+				$evaluation_method->data['formula'][] = '*';
 			} else {
-				if ( ! empty( $evaluation_method_variable->id ) ) {
-					$evaluation_method->formula[] = $evaluation_method_variable->id;
+				if ( ! empty( $evaluation_method_variable->data['id'] ) ) {
+					$evaluation_method->data['formula'][] = $evaluation_method_variable->data['id'];
 				}
 			}
 
-			$evaluation_method = Evaluation_Method_Class::g()->update( $evaluation_method );
+			Evaluation_Method_Class::g()->update( $evaluation_method->data );
 		}
 	}
 }

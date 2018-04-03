@@ -43,6 +43,7 @@ class Risk_Save_Action {
 		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 		$risk_category_id     = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$evaluation_method_id = ! empty( $_POST['evaluation_method_id'] ) ? (int) $_POST['evaluation_method_id'] : 0;
+		$comments             = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
 
 		if ( empty( $parent_id ) ) {
 			wp_send_json_error();
@@ -62,11 +63,12 @@ class Risk_Save_Action {
 
 		$evaluation_method_variables = ! empty( $_POST['evaluation_variables'] ) ? (array) $_POST['evaluation_variables'] : array();
 
-		$risk_evaluation = Risk_Evaluation_Class::g()->save( $risk->id, $evaluation_method_id, $evaluation_method_variables );
+		$risk_evaluation = Risk_Evaluation_Class::g()->save( $risk->data['id'], $evaluation_method_id, $evaluation_method_variables );
+		Risk_Evaluation_Comment_Class::g()->save( $risk, $comments );
 
-		$risk->current_equivalence = $risk_evaluation->equivalence;
+		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
 
-		Risk_Class::g()->update( $risk );
+		Risk_Class::g()->update( $risk->data );
 
 		wp_send_json_success( array() );
 	}

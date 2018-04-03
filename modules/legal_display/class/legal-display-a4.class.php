@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.6
- * @version 6.4.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Legal_Display_A4_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'affichage_legal_A4';
+	protected $type = 'affichage_legal_A4';
 
 	/**
 	 * Le type du document

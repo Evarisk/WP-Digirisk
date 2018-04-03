@@ -2,10 +2,10 @@
 /**
  * La classe gérant les accidents "stopping days"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -32,7 +32,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-accident-day';
+	protected $type = 'digi-accident-day';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

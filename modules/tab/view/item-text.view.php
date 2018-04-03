@@ -2,9 +2,9 @@
 /**
  * Affiches les contenu d'un onglet de type texte
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since  6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<li class="tab-element <?php echo ( 'digi-' . $key === $display ) ? 'tab-active' : ''; ?> <?php echo esc_attr( ! empty( $element['parent_class'] ) ? $element['parent_class'] : '' ); ?>"
+<li class="tab-element <?php echo ( 'digi-' . $key === $tab->slug ) ? 'tab-active' : ''; ?> <?php echo esc_attr( ! empty( $element['parent_class'] ) ? $element['parent_class'] : '' ); ?>"
 		data-action="load_tab_content"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_content' ) ); ?>"
 		data-target="digi-<?php echo esc_attr( $key ); ?>"

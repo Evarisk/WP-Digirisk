@@ -2,7 +2,7 @@
  * Initialise l'objet "riskCategory" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.0
+ * @version 7.0.0
  */
 window.eoxiaJS.digirisk.riskCategory = {};
 
@@ -11,7 +11,7 @@ window.eoxiaJS.digirisk.riskCategory.init = function() {
 };
 
 window.eoxiaJS.digirisk.riskCategory.event = function() {
-	jQuery( document ).on( 'click', '.table .categorie-container.danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
+	jQuery( document ).on( 'click', '.table .category-danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
 };
 
 /**
@@ -21,20 +21,19 @@ window.eoxiaJS.digirisk.riskCategory.event = function() {
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.4.0
+ * @version 7.0.0
  */
 window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	var element = jQuery( this );
-
 	var data = {};
 	element.closest( '.content' ).removeClass( 'active' );
 	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
-	element.closest( '.toggle' ).find( '.action span' ).hide();
-	element.closest( '.toggle' ).find( '.action img' ).show();
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle span' ).hide();
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).show();
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'srcset', '' );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'sizes', '' );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
 	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 	event.stopPropagation();

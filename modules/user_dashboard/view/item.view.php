@@ -2,10 +2,10 @@
 /**
  * Affichage d'un utilisateur ainsi que les actions pour l'éditer ou le supprimer.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -15,16 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="user-row" data-id="<?php echo esc_attr( $user->id ); ?>">
-	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
-	<td class="padding"><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
-	<td class="padding"><span><?php echo esc_html( stripslashes( $user->firstname ) ); ?></span<</td>
-	<td class="padding"><span><?php echo esc_html( $user->email ); ?></span></td>
+<tr class="user-row" data-id="<?php echo esc_attr( $user->data['id'] ); ?>">
+	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $user->data['initial'] ); ?></span></div></td>
+	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->data['id'] ); ?><strong></span></td>
+	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['lastname'] ) ); ?></span></td>
+	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
+	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td>
 		<div class="action grid-layout w2">
 			<div
-				data-id="<?php echo esc_attr( $user->id ); ?>"
+				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<div
-				data-id="<?php echo esc_attr( $user->id ); ?>"
+				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_user' ) ); ?>"
 				data-loader="users"
 				data-action="delete_user"

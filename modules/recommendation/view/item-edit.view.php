@@ -2,10 +2,10 @@
 /**
  * Edition d'une recommendation
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,23 +20,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="save_recommendation" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
-	<input type="hidden" name="id" value="<?php echo esc_attr( $recommendation->id ); ?>" />
+	<input type="hidden" name="id" value="<?php echo esc_attr( $recommendation->data['id'] ); ?>" />
 	<?php wp_nonce_field( 'save_recommendation' ); ?>
 
 	<td class="padding w50">
-		<span><strong><?php echo esc_html( $recommendation->unique_identifier ); ?></span></strong>
+		<span><strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></span></strong>
 	</td>
 	<td class="wm130 w150">
-		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->id . '" type="recommendation"]' ); ?>
+		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->id . '" model_name="/digi/' . $recommendation->get_class() . '" field_name="image"  title="' . $recommendation->unique_identifier . '"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation_Class" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
 	</td>
 	<td class="padding">
-		<?php do_shortcode( '[digi_comment id="' . $recommendation->id . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>
+		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
-		<?php if ( 0 !== $recommendation->id ) : ?>
+		<?php if ( 0 !== $recommendation->data['id'] ) : ?>
 			<div class="action grid-layout w2">
 				<div data-parent="recommendation-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>

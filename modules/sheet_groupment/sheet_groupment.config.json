@@ -2,7 +2,7 @@
 	"name": "Sheet groupment",
 	"slug": "sheet_groupment",
 	"since": "6.1.0",
-	"version": "6.5.0",
+	"version": "7.0.0",
 	"description": "Le module gérant les fiche de groupement",
 	"path": "modules/sheet_groupment/",
 	"dependencies": {

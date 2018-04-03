@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-legal-display';
+	protected $type = 'digi-legal-display';
 
 	/**
 	 * La clé principale du modèle
@@ -56,20 +56,6 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	protected $version = '0.1';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_legal_display' );
-
-	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
@@ -87,7 +73,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * Appelle la méthode "display_form"
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 7.0.0
 	 *
 	 * @param  mixed $element Les données de la société.
 	 * @return void
@@ -95,7 +81,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	public function display( $element ) {
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
 			'element'    => $element,
-			'element_id' => $element->id,
+			'element_id' => $element->data['id'],
 		) );
 
 		$this->display_form( $element );
@@ -146,7 +132,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	public function display_form( $element ) {
 		$legal_display = $this->get( array(
 			'posts_per_page' => 1,
-			'post_parent'    => $element->id,
+			'post_parent'    => $element->data['id'],
 		), true );
 
 		if ( empty( $legal_display ) ) {
@@ -156,7 +142,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/display', array(
-			'element_id'    => $element->id,
+			'element_id'    => $element->data['id'],
 			'legal_display' => $legal_display,
 		) );
 	}

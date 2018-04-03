@@ -32,7 +32,7 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-recommendation';
+	protected $type = 'digi-recommendation';
 
 	/**
 	 * La clé principale du modèle
@@ -40,20 +40,6 @@ class Recommendation_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $meta_key = '_wpdigi_recommendation';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_recommendation' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

@@ -1,8 +1,8 @@
 {
 	"name": "Navigation",
 	"slug": "navigation",
-	"state": true,
-	"version": "6.5.0",
+	"since": "6.0.0",
+	"version": "7.0.0",
 	"description": "La navigation de DigiRisk",
 	"path": "modules/navigation/",
 	"dependencies": {

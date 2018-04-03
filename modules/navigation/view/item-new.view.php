@@ -2,10 +2,10 @@
 /**
  * Affiches le champs de texte et le bouton "Plus" pour créer un établissement.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="create_society" />
 	<?php wp_nonce_field( 'create_society' ); ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $id ); ?>" />
-	<input type="hidden" name="class" value="" />
 	<input class="unit-label" name="title" placeholder="" type="text" />
+	<input type="hidden" name="class" value="" />
 	<div class="button w50 add blue action-input" data-parent="new" data-loader="blue"><i class="icon dashicons dashicons-plus"></i></<div>
 </li>

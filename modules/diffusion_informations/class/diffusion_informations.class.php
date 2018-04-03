@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-diffusion-info';
+	protected $type = 'digi-diffusion-info';
 
 	/**
 	 * La clé principale du modèle
@@ -54,20 +54,6 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $version = '0.1';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -147,11 +133,11 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function display_form( $element ) {
 		$diffusion_information = $this->get( array(
-			'post_parent'    => $element->id,
+			'post_parent'    => $element->data['id'],
 			'posts_per_page' => 1,
 			'post_status'    => array(
 				'publish',
@@ -166,7 +152,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
-			'element_id'            => $element->id,
+			'element_id'            => $element->data['id'],
 			'diffusion_information' => $diffusion_information,
 		) );
 	}

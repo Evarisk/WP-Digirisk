@@ -42,35 +42,7 @@ class Risk_Evaluation_Comment_Action {
 	 * @version 6.5.0
 	 */
 	public function callback_save_risk_evaluation_comment( $risk_obj, $risk ) {
-		if ( isset( $risk_obj->id ) ) {
-			if ( ! empty( $_POST['list_comment'] ) ) {
-				foreach ( $_POST['list_comment'] as $comment ) {
-					if ( ! empty( $comment['content'] ) ) {
-						$comment['id']        = (int) $comment['id'];
-						$comment['post_id']   = $risk_obj->id;
-						$comment['author_id'] = (int) $comment['author_id'];
 
-						if ( empty( $comment['parent_id'] ) ) {
-							$comment['parent_id'] = $risk_obj->current_evaluation_id;
-						}
-
-						$comment['parent_id'] = (int) $comment['parent_id'];
-
-						if ( empty( $risk['id'] ) ) {
-							unset( $comment['id'] );
-						}
-
-						Risk_Evaluation_Comment_Class::g()->update( $comment );
-
-						do_action( 'digi_add_historic', array(
-							'parent_id' => $_POST['parent_id'],
-							'id'        => $risk_obj->id,
-							'content'   => __( 'Modification du risque ', 'digirisk' ) . ' ' . $risk_obj->unique_identifier . ' ' . __( 'ajout du commentaire: ', 'digirisk' ) . ' ' . $comment['content'],
-						) );
-					}
-				}
-			}
-		}
 
 		do_action( 'display_risk', $_POST['parent_id'], $risk_obj );
 	}

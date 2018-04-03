@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'accidents_benin';
+	protected $type = 'accidents_benin';
 
 	/**
 	 * Le type du document
@@ -68,20 +68,6 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'RATB';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * Le nom pour le resgister post type
@@ -121,15 +107,15 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	 * @return void
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
+	 * @version 7.0.0
 	 */
 	public function display_document_list() {
 		$main_society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
-
 		), true );
+
 		$list_document = $this->get( array(
-			'post_parent' => $main_society->id,
+			'post_parent' => $main_society->data['id'],
 			'post_status' => array(
 				'publish',
 				'inherit',

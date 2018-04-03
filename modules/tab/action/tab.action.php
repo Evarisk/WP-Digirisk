@@ -2,9 +2,9 @@
 /**
  * Gestion des actions relatif aux onglets
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -34,7 +34,7 @@ class Tab_Action {
 	 * Charges le contenu d'un onglet
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function callback_load_tab_content() {
 		check_ajax_referer( 'load_content' );
@@ -43,8 +43,14 @@ class Tab_Action {
 		$target     = ! empty( $_POST['target'] ) ? sanitize_key( $_POST['target'] ) : '';
 		$title      = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
+		$tab        = new \stdClass();
+		$tab->title = $title;
+		$tab->slug  = $target;
+
+		ob_start();
+		Tab_Class::g()->load_tab_content( $element_id, $tab );
 		wp_send_json_success( array(
-			'view' => Tab_Class::g()->load_tab_content( $element_id, $target, $title ),
+			'view' => ob_get_clean(),
 		) );
 	}
 }

@@ -56,29 +56,6 @@ class Society_Model extends \eoxia\Post_Model {
 		);
 
 		/**
-		 * La clé unique.
-		 */
-		$this->schema['unique_key'] = array(
-			'since'     => '6.1.6',
-			'version'   => '6.1.6',
-			'type'      => 'integer',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_unique_key',
-		);
-
-		/**
-		 * L'identifiant unique.
-		 */
-		$this->schema['unique_identifier'] = array(
-			'since'     => '6.1.6',
-			'version'   => '6.1.6',
-			'type'      => 'string',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_unique_identifier',
-			'default'   => '',
-		);
-
-		/**
 		 * Les recommendations associées
 		 *
 		 * @todo: 23/01/2018 -> Est ce utilisé ?
@@ -153,6 +130,36 @@ class Society_Model extends \eoxia\Post_Model {
 		);
 
 		parent::__construct( $data, $req_method );
+	}
+
+
+	/**
+	 * Récupères le nom de la classe selon le type.
+	 *
+	 * @since 1.0.0
+	 * @version 1.0.0
+	 *
+	 * @return string Le nom de la classe avec le namespace si existant.
+	 */
+	public function get_class() {
+		$type       = $this->data['type'];
+		$class_name = '/digi/Society_Class';
+
+		switch ( $type ) {
+			case Society_Class::g()->get_type():
+				$class_name = '/digi/Society_Class';
+				break;
+			case Group_Class::g()->get_type():
+				$class_name = '/digi/Group_Class';
+				break;
+			case Workunit_Class::g()->get_type():
+				$class_name = '/digi/Workunit_Class';
+				break;
+			default:
+				break;
+		}
+
+		return $class_name;
 	}
 
 }

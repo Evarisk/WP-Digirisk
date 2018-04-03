@@ -2,10 +2,10 @@
 /**
  * Gestion des actions relatif à la recherche
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -48,13 +48,12 @@ class Search_Action {
 
 		$return = array();
 
-		foreach ( $list as $element ) {
-			$user     = User_Digi_Class::g()->get( array( 'include' => array( $element ) ) );
-			$user     = $user[0];
+		foreach ( $list as $id ) {
+			$user     = User_Digi_Class::g()->get( array( 'id' => $id ), true );
 			$return[] = array(
-				'label' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
-				'value' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
-				'id'    => $user->id,
+				'label' => User_Digi_Class::g()->element_prefix . $user->data['id'] . ' - ' . $user->data['login'] . ' (' . $user->data['email'] . ')',
+				'value' => User_Digi_Class::g()->element_prefix . $user->data['id'] . ' - ' . $user->data['login'] . ' (' . $user->data['email'] . ')',
+				'id'    => $user->data['id'],
 			);
 		}
 

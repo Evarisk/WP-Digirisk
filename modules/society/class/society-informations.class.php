@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -35,7 +35,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function display( $element ) {
 		$address = Society_Class::g()->get_address( $element );
@@ -43,10 +43,10 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 		$total_cotation = 0;
 
 		$risks = Risk_Class::g()->get( array(
-			'post_parent' => $element->id,
+			'post_parent' => $element->data['id'],
 		) );
 
-		$historic_update = get_post_meta( $element->id, \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
+		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
 
 		if ( empty( $historic_update ) ) {
 			$historic_update = array(
@@ -59,16 +59,16 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 
 		if ( count( $risks ) > 1 ) {
 			usort( $risks, function( $a, $b ) {
-				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
+				if ( $a->data['evaluation']->data['current_equivalence'] === $b->data['evaluation']->data['current_equivalence'] ) {
 					return 0;
 				}
-				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
+				return ( $a->data['evaluation']->data['current_equivalence'] > $b->data['evaluation']->data['current_equivalence'] ) ? -1 : 1;
 			} );
 		}
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$total_cotation += $risk->evaluation->risk_level['equivalence'];
+				$total_cotation += $risk->data['evaluation']->data['current_equivalence'];
 			}
 		}
 

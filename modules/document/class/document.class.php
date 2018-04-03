@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -33,7 +33,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 * @var string
 	 * @todo:  Détruis la route de WordPress /wp-json/wp/v2/media (A changer très rapidement)
 	 */
-	protected $post_type = 'attachment';
+	protected $type = 'attachment';
 
 	/**
 	 * La taxonomie

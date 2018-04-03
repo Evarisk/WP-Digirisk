@@ -2,10 +2,10 @@
 /**
  * Classe héritant de Document_Class. Permet de définir les attributs "protected".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.6
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -31,7 +31,7 @@ class Legal_Display_A3_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'affichage_legal_A3';
+	protected $type = 'affichage_legal_A3';
 
 	/**
 	 * Le type du document

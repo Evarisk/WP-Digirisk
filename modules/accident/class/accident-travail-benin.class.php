@@ -2,10 +2,10 @@
 /**
  * Gères la génération de l'ODT: accident travail benin
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.4.4
- * @copyright 2015-2017
+ * @version 7.0.0
+ * @copyright 2015-2018
  * @package DigiRisk
  */
 
@@ -32,7 +32,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'accident_benin';
+	protected $type = 'accident_benin';
 
 	/**
 	 * Le type du document

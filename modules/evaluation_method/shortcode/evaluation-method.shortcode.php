@@ -6,7 +6,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.9
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -45,15 +45,19 @@ class Evaluation_Method_Shortcode {
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$display = ! empty( $param['display'] ) ? sanitize_text_field( $param['display'] ) : 'edit';
 
-		$risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
+		if ( 0 !== $risk_id ) {
+			$risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
+		} else {
+			$risk = Risk_Class::g()->get( array( 'schema' => true ), true );
+		}
 
-		$method_evaluation_simplified   = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
-		$variable_evaluation_simplified = $method_evaluation_simplified->variables[0];
+		$method_evaluation_simplified = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
+		$variables                    = $method_evaluation_simplified->data['variables'];
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main', array(
-			'risk'                           => $risk,
-			'method_evaluation_simplified'   => $method_evaluation_simplified,
-			'variable_evaluation_simplified' => $variable_evaluation_simplified,
+			'risk'                         => $risk,
+			'method_evaluation_simplified' => $method_evaluation_simplified,
+			'variables'                    => $variables,
 		) );
 	}
 

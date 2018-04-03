@@ -52,7 +52,7 @@ class Group_Action {
 
 		$group = Group_Class::g()->create( array(
 			'parent_id' => $parent_id,
-			'title' => __( 'Undefined', 'digirisk' ),
+			'title'     => __( 'Undefined', 'digirisk' ),
 		) );
 
 		ob_start();

@@ -2,10 +2,10 @@
 /**
  * Affichage principale pour les diffusions d'informations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.4.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="content-diffusions-information">
 	<table class="table">
-		<?php Diffusion_Informations_Class::g()->display_document_list( $element->id ); ?>
+		<?php Diffusion_Informations_Class::g()->display_document_list( $element->data['id'] ); ?>
 	</table>
 
 	<?php Diffusion_Informations_Class::g()->display_form( $element ); ?>

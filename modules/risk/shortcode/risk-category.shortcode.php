@@ -2,9 +2,9 @@
 /**
  * Ajoutes le shortcode pour gérer les catégories de risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -35,7 +35,7 @@ class Risk_Category_Shortcode {
 	 * Si le danger du risque est déjà défini, appel la vue danger-item.view.php
 	 *
 	 * @since 6.4.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @param array $param {
 	 *                     Les propriété de tableau.
@@ -75,19 +75,19 @@ class Risk_Category_Shortcode {
 
 			if ( ! empty( $risks_categories ) ) {
 				foreach ( $risks_categories as &$risk_category ) {
-					$risk_category->is_preset = false;
+					$risk_category->data['is_preset'] = false;
 
 					// Est-ce que c'est une catégorie de risque prédéfinie ?
 					if ( ! empty( $risks_categories_preset ) ) {
 						foreach ( $risks_categories_preset as $risk_category_preset ) {
-							if ( $risk_category_preset->taxonomy['digi-category-risk'][0] === $risk_category->id && ! empty( $risk_category_preset->taxonomy['digi-method'] ) ) {
-								$risk_category->is_preset = true;
+							if ( $risk_category_preset->data['taxonomy']['digi-category-risk'][0] === $risk_category->data['id'] && ! empty( $risk_category_preset->data['taxonomy']['digi-method'] ) ) {
+								$risk_category->data['is_preset'] = true;
 								break;
 							}
 						}
 					}
 
-					if ( $risk_category->id === $category_risk_id ) {
+					if ( $risk_category->data['id'] === $category_risk_id ) {
 						$selected_risk_category = $risk_category;
 					}
 				}

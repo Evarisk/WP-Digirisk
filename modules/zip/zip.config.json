@@ -2,7 +2,7 @@
 	"name": "ZIP",
 	"slug": "zip",
 	"since": "6.2.1",
-	"version": "6.5.0",
+	"version": "7.0.0",
 	"description": "Le module gérant les ZIP de DigiRisk",
 	"path": "modules/zip/",
 	"dependencies": {

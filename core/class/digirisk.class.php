@@ -49,6 +49,29 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
+	 * Affiches le contenu principale de l'application.
+	 *
+	 * @since 7.0.0
+	 * @version 7.0.0
+	 *
+	 * @param  integer $id L'ID de la société.
+	 *
+	 * @return void
+	 */
+	public function display_main_container( $id = 0 ) {
+		if ( 0 === $id ) {
+			$society = Society_Class::g()->get_current_society();
+		} else {
+			$society = Society_Class::g()->show_by_type( $id );
+		}
+
+		$tab_data = Tab_Class::g()->build_tab_to_display( $society );
+
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
+
+	}
+
+	/**
 	 * Récupères le patch note pour la version actuelle.
 	 *
 	 * @since 6.3.0

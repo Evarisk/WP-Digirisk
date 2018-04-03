@@ -30,23 +30,6 @@ class Recommendation_Model extends \eoxia\Post_Model {
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
 	public function __construct( $data = null, $req_method = null ) {
-		$this->schema['unique_key'] = array(
-			'since'     => '6.1.5',
-			'version'   => '6.1.5',
-			'type'      => 'integer',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_unique_key',
-		);
-
-		$this->schema['unique_identifier'] = array(
-			'since'     => '6.1.5',
-			'version'   => '6.1.5',
-			'type'      => 'string',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_unique_identifier',
-			'default'   => '',
-		);
-
 		$this->schema['recommendation_type'] = array(
 			'since'     => '6.1.5',
 			'version'   => '6.1.5',

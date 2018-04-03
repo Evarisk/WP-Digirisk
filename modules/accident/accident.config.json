@@ -2,16 +2,15 @@
 	"name": "Accident",
 	"slug": "accident",
 	"since": "6.1.5",
-	"version": "6.5.0",
+	"version": "7.0.0",
 	"description": "Le module gérant les accidents",
 	"path": "modules/accident/",
 	"dependencies": {
-		"filter": {},
 		"action": {},
-		"helper": {},
 		"shortcode": {},
 		"model": {},
-		"class": {}
+		"class": {},
+		"filter": {}
 		},
 	"state": true
 }

@@ -39,28 +39,23 @@ class Navigation_Shortcode extends \eoxia\Singleton_Util {
 	 * La méthode qui permet d'appeller la méthode display de Navigation_Class
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @param  array $atts Les paramètres envoyés dans le shortcode.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function callback_digi_navigation( $atts ) {
-		$establishment_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
+		$society_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
 
-		if ( ! empty( $_REQUEST['establishment_id'] ) ) { // WPCS: CSRF ok.
-			$establishment_id = (int) $_REQUEST['establishment_id'];
+		if ( 0 === $society_id ) {
+			$society    = Society_Class::g()->get_current_society();
+			$society_id = $society->data['id'];
 		}
 
-		if ( 0 === $establishment_id ) {
-			$society = Society_Class::g()->get( array(
-				'posts_per_page' => 1,
-			), true );
-
-			$establishment_id = $society->id;
-		}
-
-		Navigation_Class::g()->display( $establishment_id );
+		ob_start();
+		Navigation_Class::g()->display( $society_id );
+		return ob_get_clean();
 	}
 }
 

@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Address_Class extends \eoxia\Comment_Class {
 	 *
 	 * @var string
 	 */
-	protected $comment_type = 'digi-address';
+	protected $type = 'digi-address';
 	/**
 	 * La clé de la table comment_meta
 	 *
@@ -74,7 +74,7 @@ class Address_Class extends \eoxia\Comment_Class {
 		$data['content'] = '';
 		$data['post_id'] = ! empty( $data['post_id'] ) ? (int) $data['post_id'] : 0;
 
-		return $this->update( $data );
+		return $this->create( $data );
 	}
 }
 

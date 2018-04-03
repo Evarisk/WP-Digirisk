@@ -170,7 +170,7 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
  */
 window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
 	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
-	window.eoxiaJS.request.get( ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
+	window.eoxiaJS.request.get( undefined, ajaxurl + '?action=installer_components&_wpnonce=' + _wpnonce );
 };
 
 /**
@@ -185,7 +185,7 @@ window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
  * @since 6.0.0
  * @version 6.3.0
  */
-window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( response ) {
+window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( triggeredElement, response ) {
 
 	// Si l'installation n'est pas terminée, on relance une requête avec les prochains composants à installer.
 	if ( ! response.data.core_option.installed ) {

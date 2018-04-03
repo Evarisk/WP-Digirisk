@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -40,7 +40,7 @@ class Installer_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
@@ -56,7 +56,7 @@ class Installer_Action {
 			'status' => 'publish',
 		) );
 
-		\eoxia\LOG_Util::log( sprintf( 'Installeur - Création de la société %s -> success.', $society->title ), 'digirisk' );
+		\eoxia\LOG_Util::log( sprintf( 'Installeur - Création de la société %s -> success.', $society->data['title'] ), 'digirisk' );
 
 		// Création des données par default depuis le fichier json installer/asset/json/default.json.
 		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->installer->url . 'asset/json/default.json' );
@@ -73,7 +73,7 @@ class Installer_Action {
 			foreach ( $data as $group_object ) {
 				$group = Group_Class::g()->update( array(
 					'title'       => $group_object->title,
-					'post_parent' => $society->id,
+					'post_parent' => $society->data['id'],
 					'status'      => 'inherit',
 				) );
 
@@ -81,7 +81,7 @@ class Installer_Action {
 					foreach ( $group_object->workunits as $workunit_object ) {
 						$workunit = Workunit_Class::g()->update( array(
 							'title'       => $workunit_object->title,
-							'post_parent' => $group->id,
+							'post_parent' => $group->data['id'],
 							'status'      => 'inherit',
 						) );
 					}

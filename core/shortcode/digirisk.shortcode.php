@@ -2,10 +2,10 @@
 /**
  * Shortcode principale de l'application.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -24,38 +24,28 @@ class Digirisk_Shortcode extends \eoxia\Singleton_Util {
 	 * Le constructeur
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 7.0.0
 	 */
 	protected function construct() {
-		add_shortcode( 'digi_content', array( $this, 'callback_digi_content' ) );
+		add_shortcode( 'digi_application', array( $this, 'callback_digi_application' ) );
 	}
 
 	/**
 	 * La méthode qui permet d'afficher le contenu de l'application
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 7.0.0
 	 *
 	 * @param  array $atts Les paramètres envoyés dans le shortcode.
-	 * @return void
 	 *
-	 * @todo: Doublon avec nagigation.shortcode L44
+	 * @return void
 	 */
-	public function callback_digi_content( $atts ) {
-		$establishment_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
+	public function callback_digi_application( $atts ) {
+		$society_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
 
-		if ( ! empty( $_REQUEST['establishment_id'] ) ) { // WPCS: CRSF ok.
-			$establishment_id = (int) $_REQUEST['establishment_id'];
-		}
-
-		if ( 0 === $establishment_id ) {
-			$society          = Society_Class::g()->get( array(
-				'posts_per_page' => 1,
-			), true );
-			$establishment_id = $society->id;
-		}
-
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
+		ob_start();
+		Digirisk_Class::g()->display_main_container( $society_id );
+		return ob_get_clean();
 	}
 }
 

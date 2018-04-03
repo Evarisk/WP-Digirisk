@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -33,13 +33,6 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @var string
 	 */
 	protected $meta_key = '_wpeo_user_info';
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\force_avatar_color', '\digi\get_identifier' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -120,13 +113,13 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @version 6.5.0
 	 */
 	public function get_list_affected_evaluator( $society ) {
-		if ( 0 === $society->id || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) ) {
+		if ( 0 === $society->data['id'] || empty( $society->data['user_info'] ) || empty( $society->data['user_info']['affected_id'] ) ) {
 			return false;
 		}
 
 		$list_evaluator = array();
-		if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
-			foreach ( $society->user_info['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+		if ( ! empty( $society->data['user_info']['affected_id']['evaluator'] ) ) {
+			foreach ( $society->data['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
 				if ( ! empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {

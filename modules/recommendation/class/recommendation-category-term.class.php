@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Recommendation_Category_Term_Class extends \eoxia\Term_Class {
 	 *
 	 * @var string
 	 */
-	protected $taxonomy = 'digi-recommendation-category';
+	protected $type = 'digi-recommendation-category';
 
 	/**
 	 * Nom du champs (meta) de stockage des données liées
@@ -54,20 +54,6 @@ class Recommendation_Category_Term_Class extends \eoxia\Term_Class {
 	 * @var string
 	 */
 	protected $version = '0.1';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_recommendation_category' );
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk

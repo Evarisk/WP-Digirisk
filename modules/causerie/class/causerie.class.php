@@ -2,10 +2,10 @@
 /**
  * La classe gérant les causeries
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -32,7 +32,7 @@ class Causerie_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-causerie';
+	protected $type = 'digi-causerie';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -61,27 +61,6 @@ class Causerie_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'C';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\get_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie' );
 
 	/**
 	 * Le nom pour le resgister post type

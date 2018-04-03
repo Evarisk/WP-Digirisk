@@ -41,9 +41,16 @@ class Society_Informations_Action {
 		$data = (array) $_POST['society'];
 
 		$address                       = Address_Class::g()->save( $_POST['address'] );
-		$data['contact']['address_id'] = $address->id;
+		$data['contact']['address_id'] = $address->data['id'];
 
 		$society = Society_Informations_Class::g()->save( $data );
+
+		ob_start();
+		Tab_Class::g()->load_tab_content( $society->data['id'], array(
+			'slug'  => 'digi-informations',
+			'title' => 'Informations',
+		) );
+		$view = ob_get_clean();
 
 		wp_send_json_success( array(
 			'society'          => $society,
@@ -51,7 +58,7 @@ class Society_Informations_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'society',
 			'callback_success' => 'savedSocietyConfiguration',
-			'view'             => Tab_Class::g()->load_tab_content( $society->id, 'digi-informations', 'Informations' ),
+			'view'             => $view,
 		) );
 	}
 }

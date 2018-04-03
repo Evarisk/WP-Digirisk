@@ -2,12 +2,14 @@
 /**
  * Gestion des filtres relatifs aux groupements
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
+
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,15 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion des filtres relatifs aux groupements
  */
-class Group_Filter {
+class Group_Filter extends Identifier_Filter {
 
 	/**
 	 * Utilises le filtre digi_tab
 	 *
 	 * @since 6.2.10
-	 * @version 6.4.4
+	 * @version 7.0.0
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_informations' ), 5, 2 );
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_more' ), 8, 2 );
 	}
@@ -77,6 +81,7 @@ class Group_Filter {
 
 		return $tab_list;
 	}
+
 }
 
 new Group_Filter();

@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -39,7 +39,7 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	 *
 	 * @var string
 	 */
-	protected $comment_type = 'digi-risk-eval';
+	protected $type = 'digi-risk-eval';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -56,26 +56,15 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	public $element_prefix = 'E';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
+	 * Affichages des l'évaluation dans un risque.
 	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la mise à jour de l'objet dans la base de donnée
+	 * @since 6.0.0
+	 * @version 7.0.0
 	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 * @param  Risk_Model $risk Les données du risque.
 	 *
-	 * @var array
+	 * @return void
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
 	public function display( $risk ) {
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'risk-evaluation/main', array(
 			'risk' => $risk,
@@ -107,6 +96,13 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 		$data['scale']       = (int) $details['scale'];
 		$data['cotation']    = (int) $details['cotation'];
 		$data['equivalence'] = (int) $details['equivalence'];
+		$data['variables']   = (array) $method_variables_data;
+
+		if ( ! empty( $data['variables'] ) ) {
+			foreach ( $data['variables'] as $key => $element ) {
+				$data['variables'][ $key ] = (int) $element;
+			}
+		}
 
 		$risk_evaluation = $this->update( $data );
 

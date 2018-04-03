@@ -2,10 +2,10 @@
 /**
  * Classe gérant la navigation
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.4.5
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -32,59 +32,46 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * La méthode qui permet d'afficher la navigation.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.5
+	 * @version 7.0.0
 	 *
-	 * @param int $selected_establishment_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
+	 * @param integer $selected_society_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
 	 * @return void
 	 */
-	public function display( $selected_establishment_id ) {
+	public function display( $selected_society_id ) {
 		$society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
 		), true );
 
-		$establishments = Society_Class::g()->get( array(
-			'post_parent'    => $society->id,
-			'posts_per_page' => -1,
-			'post_type'      => array( 'digi-group', 'digi-workunit' ),
-			'post_status'    => 'inherit',
-			'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
-			'meta_key'       => '_wpdigi_unique_key',
-		) );
+		$societies = Society_Class::g()->get_societies_in( $society->data['id'] );
 
 		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array(
-			'selected_establishment_id' => $selected_establishment_id,
-			'establishments'            => $establishments,
-			'society'                   => $society,
+			'selected_society_id' => $selected_society_id,
+			'societies'           => $societies,
+			'society'             => $society,
 		) );
 	}
 
 	/**
 	 * Charges le groupement sélectionné et l'envoie à la vue navigation/toggle/button.view.php avec comme nom de variable $groupment
 	 *
-	 * @param int    $id (optional) L'ID de la société sélectionné.
-	 * @param string $class (optianal) La classe utilisé pour la vue.
+	 * @since 6.0.0
+	 * @version 7.0.0
+	 *
+	 * @param integer $id (optional)                  L'ID de la société parent.
+	 * @param integer $selected_society_id (optional) L'ID de la société selectionné.
+	 * @param string  $class (optianal)               La classe utilisé pour la vue.
 	 *
 	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.4.5
 	 */
-	public function display_list( $id = 0, $selected_establishment_id = 0, $class = 'sub-list' ) {
+	public function display_list( $id = 0, $selected_society_id = 0, $class = 'sub-list' ) {
 		if ( ! empty( $id ) ) {
-			$establishments = Society_Class::g()->get( array(
-				'post_parent'    => $id,
-				'posts_per_page' => -1,
-				'post_type'      => array( 'digi-group', 'digi-workunit' ),
-				'post_status'    => array( 'publish', 'draft', 'inherit' ),
-				'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
-				'meta_key'       => '_wpdigi_unique_key',
-			) );
+			$societies = Society_Class::g()->get_societies_in( $society->data['id'] );
 
 			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
-				'id'                        => $id,
-				'selected_establishment_id' => $selected_establishment_id,
-				'establishments'            => $establishments,
-				'class'                     => $class,
+				'id'                  => $id,
+				'selected_society_id' => $selected_society_id,
+				'societies'           => $societies,
+				'class'               => $class,
 			) );
 		}
 	}
@@ -93,10 +80,11 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * Charges les groupements selon le parent_id et les envoies à la vue navigation/toggle/list.view.php
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.5
+	 * @version 7.0.0
 	 *
 	 * @param  integer $selected_groupment_id L'ID du groupement sélectionné.
 	 * @param  integer $parent_id (optional) 	L'ID du groupement parent.
+	 *
 	 * @return void
 	 */
 	public function display_toggle_list( $selected_groupment_id, $parent_id = 0 ) {
@@ -112,11 +100,17 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 
 		if ( !empty( $groupments ) ) {
 			foreach ( $groupments as $groupment ) {
-				$groupment->count_workunit = count( Workunit_Class::g()->get( array( 'post_parent' => $groupment->id, 'posts_per_page' => -1 ) ) );
+				$groupment->count_workunit = count( Workunit_Class::g()->get( array(
+					'post_parent' => $groupment->id,
+					'posts_per_page' => -1,
+				) ) );
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
+		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array(
+			'selected_groupment_id' => $selected_groupment_id,
+			'groupments' => $groupments,
+		) );
 	}
 }
 

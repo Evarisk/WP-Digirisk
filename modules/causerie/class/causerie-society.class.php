@@ -2,10 +2,10 @@
 /**
  * La classe gérant les causeries de société
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -32,7 +32,7 @@ class Causerie_Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'dg-causerie-society';
+	protected $type = 'dg-causerie-society';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

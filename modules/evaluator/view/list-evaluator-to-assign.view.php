@@ -2,17 +2,18 @@
 /**
  * Le tableau des évaluateurs qui peuvent être affecté.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package evaluator
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.3
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <form method="POST" class="form-edit-evaluator-assign" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 
@@ -33,13 +34,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<?php if ( ! empty( $evaluators ) ) : ?>
 				<?php foreach ( $evaluators as $evaluator ) : ?>
 					<tr>
-						<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->avatar_color ); ?>;"><span><?php echo esc_html( $evaluator->initial ); ?></span></div></td>
-						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->id ); ?><strong></span></td>
-						<td class="padding"><span><?php echo esc_html( $evaluator->lastname ); ?></span></td>
-						<td class="padding"><span><?php echo esc_html( $evaluator->firstname ); ?></span></td>
-						<td class="padding hidden"><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator->hiring_date ) ) ); ?>"></td>
-						<td class="padding"><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][duration]" value=""></td>
-						<td class="padding"><input type="checkbox" name="list_user[<?php echo esc_attr( $evaluator->id ); ?>][affect]"></td>
+						<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $evaluator->data['initial'] ); ?></span></div></td>
+						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->data['id'] ); ?><strong></span></td>
+						<td class="padding"><span><?php echo esc_html( $evaluator->data['lastname'] ); ?></span></td>
+						<td class="padding"><span><?php echo esc_html( $evaluator->data['firstname'] ); ?></span></td>
+						<td class="padding hidden"><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator->data['hiring_date'] ) ) ); ?>"></td>
+						<td class="padding"><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][duration]" value=""></td>
+						<td class="padding"><input type="checkbox" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][affect]"></td>
 					</tr>
 				<?php endforeach; ?>
 			<?php endif; ?>
@@ -47,17 +48,17 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</table>
 
 	<?php wp_nonce_field( 'edit_evaluator_assign' ); ?>
-	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->id ); ?>" />
+	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
 	<div class="button green uppercase strong float right margin action-input" data-parent="form-edit-evaluator-assign"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
 	<!-- Pagination -->
-	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
+	<?php if ( ! empty( $current_page ) && !empty( $number_page ) ): ?>
 		<div class="wp-digi-pagination">
 			<?php
 			$big = 999999999;
 			echo paginate_links( array(
-				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->id ),
+				'base' => admin_url( 'admin-ajax.php?action=paginate_evaluator&current_page=%_%&element_id=' . $element->data['id'] ),
 				'format' => '%#%',
 				'current' => $current_page,
 				'total' => $number_page,

@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -32,7 +32,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 	 *
 	 * @var string
 	 */
-	protected $taxonomy = 'digi-method';
+	protected $type = 'digi-method';
 
 	/**
 	 * Nom du champs (meta) de stockage des données liées
@@ -47,13 +47,6 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 	 * @var array
 	 */
 	protected $before_post_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_method_evaluation' );
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -119,14 +112,14 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 
 		$evaluation_method = $this->get( array( 'id' => $evaluation_method_id ), true );
 
-		if ( 0 === $evaluation_method->id ) {
+		if ( 0 === $evaluation_method->data['id'] ) {
 			return false;
 		}
 
 		$evaluation_method_variables_id = array_keys( $evaluation_method_variables );
 
 		// Vires les opérateurs arithmétiques.
-		$formula = array_filter( $evaluation_method->formula, 'is_int' );
+		$formula = array_filter( $evaluation_method->data['formula'], 'is_int' );
 
 		// Le tableau 'formula' contient des entrées de type 'int' et 'string', ex:  => 1, 1 => '*', 2 => 5, 3 => '*', 4 => 10.
 		if ( ! empty( $formula ) ) {
@@ -150,7 +143,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 		}
 
 		$details['cotation']    = (int) $details['cotation'];
-		$details['equivalence'] = (int) $evaluation_method->matrix[ $details['cotation'] ];
+		$details['equivalence'] = (int) $evaluation_method->data['matrix'][ $details['cotation'] ];
 		$details['scale']       = (int) Scale_Util::get_scale( $details['equivalence'] );
 
 		return $details;

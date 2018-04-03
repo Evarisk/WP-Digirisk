@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -35,7 +35,7 @@ class Navigation_Action {
 	 * Créer une société.
 	 *
 	 * @since 6.3.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @return void
 	 */
@@ -57,12 +57,12 @@ class Navigation_Action {
 		) );
 
 		// Utiles pour la vue main-content.
-		$establishment_id = $establishment->id;
+		$establishment_id = $establishment->data['id'];
 
-		$class = ( $society->id === $parent_id ) ? 'workunit-list' : 'sub-list';
+		$class = ( $society->data['id'] === $parent_id ) ? 'workunit-list' : 'sub-list';
 
 		ob_start();
-		Navigation_Class::g()->display_list( $parent_id, $establishment->id, $class );
+		Navigation_Class::g()->display_list( $parent_id, $establishment->data['id'], $class );
 		$navigation_view = ob_get_clean();
 
 		ob_start();
@@ -74,7 +74,7 @@ class Navigation_Action {
 			'callback_success' => 'createdSocietySuccess',
 			'navigation_view'  => $navigation_view,
 			'content_view'     => $content_view,
-			'society_id'       => $establishment->id,
+			'society_id'       => $establishment->data['id'],
 		) );
 	}
 
@@ -82,15 +82,15 @@ class Navigation_Action {
 	 * Charges le template d'une société
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @version 7.0.0
 	 *
 	 * @todo: 24/01/2018: Nonce.
 	 */
 	public function callback_load_society() {
-		$establishment_id = ! empty( $_POST['establishment_id'] ) ? (int) $_POST['establishment_id'] : 0;
+		$society_id = ! empty( $_POST['establishment_id'] ) ? (int) $_POST['establishment_id'] : 0;
 
 		ob_start();
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
+		Digirisk_Class::g()->display_main_container( $society_id );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'navigation',
