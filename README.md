@@ -5,10 +5,10 @@ Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le *
 Associé à la puissance de **WordPress MU**, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...
 
 Digirisk permet aussi la gestion des données liées à la sécurité de votre personnel tel que :
--La gestion des EPIs
--L'historique des causeries sécurité
+* La gestion des EPIs
+* L'historique des causeries sécurité
 
 Digirisk génére automatique :
--Affichage légal
--Diffusion d'informations
--Impression du DUER
+* Affichage légal
+* Diffusion d'informations
+* Impression du DUER
