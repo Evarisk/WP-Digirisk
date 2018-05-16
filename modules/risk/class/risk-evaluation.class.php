@@ -96,13 +96,7 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 		$data['scale']       = (int) $details['scale'];
 		$data['cotation']    = (int) $details['cotation'];
 		$data['equivalence'] = (int) $details['equivalence'];
-		$data['variables']   = (array) $method_variables_data;
-
-		if ( ! empty( $data['variables'] ) ) {
-			foreach ( $data['variables'] as $key => $element ) {
-				$data['variables'][ $key ] = (int) $element;
-			}
-		}
+		$data['variables']   = (array) $details['variables'];
 
 		$risk_evaluation = $this->update( $data );
 

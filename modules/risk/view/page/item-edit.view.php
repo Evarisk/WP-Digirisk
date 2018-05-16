@@ -1,11 +1,11 @@
 <?php
 /**
- * Affiches un risque
+ * Édition d'un risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -23,8 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( 'edit_risk' ); ?>
 
 	<td class="padding">
-		<?php echo do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->id . ' type="risk"]' ); ?>
-
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&establishment_id=' . $risk->parent_group->id ) ); ?>">
 			<strong><?php echo esc_attr( $risk->parent_group->unique_identifier ); ?> -</strong>
 			<span><?php echo esc_attr( $risk->parent_group->title ); ?></span>
@@ -43,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td><?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" field_name="image" single="false" title="' . $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '"]' ); ?></td>
 	<td><?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?></td>
 	<td><?php echo esc_attr( $risk->unique_identifier ); ?> - <?php echo esc_attr( $risk->evaluation->unique_identifier ); ?></td>
-	<td><?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="view"]' ); ?></td>
+	<td><?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->id . '" type="risk" display="view"]' ); ?></td>
 	<td><?php do_shortcode( '[digi_comment id="' . $risk->id . '" type="risk_evaluation_comment" display="edit"]' ); ?></td>
 
 	<td>

@@ -11,88 +11,71 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.init = function() {
 };
 
 window.eoxiaJS.digirisk.evaluationMethodEvarisk.event = function() {
-	jQuery( document ).on( 'click', '.popup.popup-evaluation.active tr td', window.eoxiaJS.digirisk.evaluationMethodEvarisk.select_variable );
-	jQuery( document ).on( 'click', '.popup.popup-evaluation.active .button.green', window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal );
+	jQuery( document ).on( 'click', '.wpeo-modal.evaluation-method .wpeo-table.evaluation-method .table-cell.can-select', window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil );
+	jQuery( document ).on( 'click', '.wpeo-modal.evaluation-method .wpeo-button.button-main', window.eoxiaJS.digirisk.evaluationMethodEvarisk.save );
+	jQuery( document ).on( 'click', '.wpeo-modal.evaluation-method .wpeo-button.button-secondary', window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal );
 };
 
-window.eoxiaJS.digirisk.evaluationMethodEvarisk.select_variable = function( event ) {
-	var element = jQuery( this );
-	if ( '' !== element.data( 'seuil-id' ) ) {
-		jQuery( '.popup.popup-evaluation.active tr td[data-variable-id="' + element.data( 'variable-id' ) + '"]' ).removeClass( 'active' );
-		element.addClass( 'active' );
-		jQuery( '.popup.popup-evaluation.active input.variable-' + element.data( 'variable-id' ) ).val( element.data( 'seuil-id' ) );
-	}
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) {
+	jQuery( this ).closest( '.table-row' ).find( '.active' ).removeClass( 'active' );
+	jQuery( this ).addClass( 'active' );
 
-	var listVariable = {};
-	var length = 0;
+	var element      = jQuery( this );
+	var riskID       = element.data( 'id' );
+	var seuil        = element.data( 'seuil' );
+	var variableID   = element.data( 'variable-id' );
+	var evaluationID = element.data( 'evaluation-id' );
+
+	window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables( riskID, evaluationID, variableID, seuil, jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ) );
 
 	var data = {
 		action: 'get_scale',
-		_wpnonce: element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .button.green' ).data( 'nonce' ),
-		list_variable: listVariable
+		method_evaluation_id: evaluationID,
+		variables: jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ).val()
 	};
 
-	element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
-		listVariable[jQuery( f ).attr( 'variable-id' )] = jQuery( f ).val();
-		if ( '' !== jQuery( f ).val() ) {
-			length++;
+	var currentVal    = JSON.parse(jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ).val());
+	var canGetDetails = true;
+	for (var key in currentVal) {
+		if (currentVal[key] == '') {
+			canGetDetails = false;
 		}
-	} );
-
-	if ( 5 === length ) {
-		element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .cotation' ).addClass( 'loading' );
-		jQuery.post( window.ajaxurl, data, function( response ) {
-			element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .cotation' ).removeClass( 'loading' );
-			element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .cotation' )[0].className = element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .cotation' )[0].className.replace( /level[-1]?[0-4]/, 'level' + response.data.scale );
-			element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible .cotation span' ).text( response.data.equivalence );
-		} );
 	}
-};
 
-window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal = function( event ) {
-	var element = jQuery( this );
-
-  var listVariable = {};
-	var length = 0;
-
-	var data = {
-		action: 'get_scale',
-		_wpnonce: element.data( 'nonce' ),
-		list_variable: listVariable
-	};
-
-	element.closest( '.risk-row' ).find( '.popup.popup-evaluation:visible input[type="hidden"]:not(.digi-method-evaluation-id)' ).each(function( key, f ) {
-		listVariable[jQuery( f ).attr( 'variable-id' )] = jQuery( f ).val();
-		if ( '' !== jQuery( f ).val() ) {
-			length++;
-		}
-	} );
-
-	jQuery( '.cotation-container .content.active' ).removeClass( 'active' );
-	if ( 5 === length ) {
-		element.closest( '.risk-row' ).find( '.cotation' ).addClass( 'loading' );
-		element.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
-
+	if ( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .table-cell.active' ).length == 5 ) {
 		jQuery.post( window.ajaxurl, data, function( response ) {
-			element.closest( '.popup.popup-evaluation' ).removeClass( 'active' );
-
-			// Rend le bouton "active".
-			if ( -1 != element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val() ) {
-				element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+			if ( response.data.details ) {
+				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale', response.data.details.scale );
+				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text( response.data.details.equivalence );
+				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .wpeo-button.button-disable' ).removeClass( 'button-disable' ).addClass( 'button-main' );
 			}
-
-			element.closest( '.risk-row' ).find( 'input.input-hidden-method-id' ).val( element.closest( '.popup.popup-evaluation' ).find( 'input.digi-method-evaluation-id' ).val() );
-			element.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val( response.data.scale );
-
-			element.closest( '.risk-row' ).find( '.cotation-container .action span' ).html( response.data.equivalence );
-			element.closest( '.risk-row' ).find( '.cotation-container .action i' ).hide();
-			element.closest( '.risk-row' ).find( '.cotation' ).removeClass( 'loading' );
-
-			element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className = element.closest( '.risk-row' ).find( '.cotation-container .action' )[0].className.replace( /level[-1]?[0-4]/, 'level' + response.data.scale );
-			element.closest( '.risk-row' ).find( 'input[name="risk_evaluation_level"]' ).val( response.data.scale );
 		} );
-	} else {
-		jQuery( '.popup.popup-evaluation' ).removeClass( 'active' );
 	}
-	return false;
+};
+
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.save = function( event ) {
+	var riskID       = jQuery( this ).data( 'id' );
+	var evaluationID = jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .digi-method-evaluation-id' ).val();
+	var value        = jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ).val();
+
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] textarea[name="evaluation_variables"]' ).val( value );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] input[name="evaluation_method_id"]' ).val( evaluationID );
+
+	// On met à jour l'affichage de la cotation.
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
+
+	window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal( undefined, riskID );
+};
+
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal = function( event, riskID ) {
+	if ( ! riskID ) {
+		riskID = jQuery( this ).data( 'id' );
+	}
+
+	jQuery( '.wpeo-modal.modal-active' ).removeClass( 'modal-active' );
+
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-action', '' );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-parent', 'wp-admin' );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-target', 'modal-risk-' + riskID );
 };

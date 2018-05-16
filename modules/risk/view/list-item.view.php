@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->data['id'] . '" type="risk" display="view"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="view"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php Risk_Evaluation_Class::g()->display( $risk ); ?>

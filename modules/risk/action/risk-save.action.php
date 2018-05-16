@@ -61,7 +61,8 @@ class Risk_Save_Action {
 			wp_send_json_error( $risk->errors );
 		}
 
-		$evaluation_method_variables = ! empty( $_POST['evaluation_variables'] ) ? (array) $_POST['evaluation_variables'] : array();
+		$evaluation_method_variables = ! empty( $_POST['evaluation_variables'] ) ? wp_unslash( (string) $_POST['evaluation_variables'] ) : '';
+		$evaluation_method_variables = json_decode( $evaluation_method_variables, true );
 
 		$risk_evaluation = Risk_Evaluation_Class::g()->save( $risk->data['id'], $evaluation_method_id, $evaluation_method_variables );
 		Risk_Evaluation_Comment_Class::g()->save( $risk, $comments );

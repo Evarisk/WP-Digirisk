@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="risk-row edit">
+<tr class="risk-row edit" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>">
 
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="edit_risk" />
@@ -37,10 +37,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</td>
 	<td data-title="Risque" data-title="Risque" class="w50">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->data['id'] . '" type="risk" display="' . ( ( 0 !== $risk->data['id'] && ! $risk->data['preset'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" preset="' . ( ( $risk->data['preset'] ) ? '1' : '0' ) . '"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="' . ( ( 0 !== $risk->data['id'] && ! $risk->data['preset'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" preset="' . ( ( $risk->data['preset'] ) ? '1' : '0' ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
-		<?php do_shortcode( '[digi_dropdown_simple_evaluation_method risk_id=' . $risk->data['id'] . ']' ); ?>
+		<?php do_shortcode( '[digi_dropdown_evaluation_method risk_id=' . $risk->data['id'] . ']' ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
 		<?php do_shortcode( '[wpeo_upload id="' . ( ( $risk->data['preset'] ) ? 0 : $risk->data['id'] ) . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['modified_unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] . '" ]' ); ?>

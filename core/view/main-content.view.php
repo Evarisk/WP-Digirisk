@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'field_name' => 'image',
 					'single'     => 'false',
 				) );
-				?>
 
-				<?php// apply_filters( 'society_identity', $society, true ); ?>
-				<div class="button w50 edit"><i class="icon fas fa-pencil"></i></div>
+
+				require PLUGIN_DIGIRISK_PATH . '/core/view/identity.view.php';
+				?>
 
 				<div
 						class="button green action-input save"

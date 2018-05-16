@@ -29,29 +29,10 @@ class Society_Filter extends Identifier_Filter {
 	public function __construct() {
 		parent::__construct();
 
-		add_filter( 'society_identity', array( $this, 'callback_society_identity' ), 10, 2 );
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
 
 		$current_type = Society_Class::g()->get_type();
 		add_filter( "eo_model_{$current_type}_after_get", array( $this, 'get_full_society' ), 10, 2 );
-	}
-
-	/**
-	 * Affiches l'identité en haut de la vue principale d'une société.
-	 *
-	 * @param  Society_Model $element           Les données de la société.
-	 * @param  boolean       $editable_identity Si le titre est modifiable ou pas.
-	 *
-	 * @return void
-	 *
-	 * @since 6.2.2
-	 * @version 6.2.10
-	 */
-	public function callback_society_identity( $element, $editable_identity = false ) {
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'identity', array(
-			'element' => $element,
-			'editable_identity' => $editable_identity,
-		), false );
 	}
 
 	/**

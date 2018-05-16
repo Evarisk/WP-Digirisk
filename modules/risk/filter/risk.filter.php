@@ -72,38 +72,21 @@ class Risk_Filter extends Identifier_Filter {
 	 * @return Risk_Model L'objet avec tous les éléments ajoutés par cette méthode.
 	 */
 	public function get_full_risk( $object, $args ) {
-		$object->data['risk_category']     = array();
-		$object->data['evaluation_method'] = array();
-		$object->data['evaluation']        = array();
-		$risk_evaluation_comments          = array();
+		$object->data['risk_category']     = Risk_Category_Class::g()->get( array( 'id' => end( $object->data['taxonomy']['digi-category-risk'] ) ), true );
+		$object->data['evaluation_method'] = Evaluation_Method_Class::g()->get( array( 'id' => end( $object->data['taxonomy'][ Evaluation_Method_Class::g()->get_type() ] ) ), true );
 
-		if ( ! empty( $object->data['id'] ) ) {
-			$object->data['risk_category']     = Risk_Category_Class::g()->get( array( 'id' => end( $object->data['taxonomy']['digi-category-risk'] ) ), true );
-			$object->data['evaluation_method'] = Evaluation_Method_Class::g()->get( array( 'id' => end( $object->data['taxonomy'][ Evaluation_Method_Class::g()->get_type() ] ) ), true );
-			$object->data['evaluation']        = Risk_Evaluation_Class::g()->get( array(
+		if ( 0 !== $object->data['id'] ) {
+			$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array(
 				'post_id' => $object->data['id'],
 				'number'  => 1,
 			), true );
-			$risk_evaluation_comments          = Risk_Evaluation_Comment_Class::g()->get( array( 'post_id' => $object->data['id'] ) );
+		} else {
+			if ( empty( $object->data['evaluation'] ) ) {
+				$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array( 'id' => 0 ), true );
+			}
 		}
 
-		if ( 0 === count( $object->data['risk_category'] ) ) {
-			$object->data['risk_category'] = Risk_Category_Class::g()->get( array( 'schema' => true ), true );
-		}
-
-		if ( 0 === count( $object->data['evaluation_method'] ) ) {
-			$object->data['evaluation_method'] = Evaluation_Method_Class::g()->get( array( 'schema' => true ), true );
-		}
-
-		if ( 0 === count( $object->data['evaluation'] ) ) {
-			$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array( 'schema' => true ), true );
-		}
-
-		if ( 0 === count( $risk_evaluation_comments ) ) {
-			$risk_evaluation_comments = Risk_Evaluation_Comment_Class::g()->get( array( 'schema' => true ) );
-		}
-
-		$object->data['comment'] = $risk_evaluation_comments;
+		$object->data['comment'] = Risk_Evaluation_Comment_Class::g()->get( array( 'post_id' => $object->data['id'] ) );
 
 		if ( ! isset( $object->data['modified_unique_identifier'] ) ) {
 			$object->data['modified_unique_identifier'] = '';

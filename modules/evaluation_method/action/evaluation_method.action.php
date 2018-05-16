@@ -4,7 +4,7 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
+ * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -28,37 +28,92 @@ class Evaluation_Method_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_get_scale', array( $this, 'ajax_get_scale' ) );
+		add_action( 'wp_ajax_load_modal_method_evaluation', array( $this, 'ajax_load_modal_method_evaluation' ) );
 	}
 
 	/**
 	 * Appelle la méthode get_scale pour avoir le niveau de l'évaluation
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
-	 *
-	 * array $_POST['list_variable'] La liste des valeurs de la méthode d'évaluation
-	 * @param array $_POST Les données envoyées par le formulaire
+	 * @version 7.0.0
 	 */
 	public function ajax_get_scale() {
-		check_ajax_referer( 'get_scale' );
-		$list_variable = ! empty( $_POST['list_variable'] ) ? (array) $_POST['list_variable'] : array();
-		$level         = 1;
+		$method_evaluation_id        = ! empty( $_POST['method_evaluation_id'] ) ? (int) $_POST['method_evaluation_id'] : 0;
+		$evaluation_method_variables = ! empty( $_POST['variables'] ) ? wp_unslash( (string) $_POST['variables'] ) : '';
 
-		if ( ! empty( $list_variable ) ) {
-			foreach ( $list_variable as $element ) {
-				$level *= (int) $element;
+		if ( empty( $method_evaluation_id ) || empty( $evaluation_method_variables ) ) {
+			wp_send_json_error();
+		}
+
+		$evaluation_method_variables = json_decode( $evaluation_method_variables, true );
+
+		$details = Evaluation_Method_Class::g()->get_details( $method_evaluation_id, $evaluation_method_variables );
+
+		wp_send_json_success( array(
+			'details' => $details,
+		) );
+	}
+
+	/**
+	 * Charges les données selon la méthode d'évaluation puis renvois la vue de la modal.
+	 *
+	 * @since 7.0.0
+	 * @version 7.0.0
+	 *
+	 * @return void
+	 */
+	public function ajax_load_modal_method_evaluation() {
+		check_ajax_referer( 'load_modal_method_evaluation' );
+
+		$id      = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$risk_id = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
+
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$evaluation_method = Evaluation_Method_Class::g()->get( array(
+			'id' => $id,
+		), true );
+
+		$args = array(
+			'id' => $risk_id,
+		);
+
+		if ( 0 === $risk_id ) {
+			$args['schema'] = true;
+		}
+
+		$risk = Risk_Class::g()->get( $args, true );
+
+		if ( 0 === $risk->data['id'] ) {
+			// Ajout de la structure dans variables.
+			if ( ! empty( $evaluation_method->data['variables'] ) ) {
+				foreach ( $evaluation_method->data['variables'] as $variable ) {
+					$risk->data['evaluation']->data['variables'][ $variable->data['id'] ] = '';
+				}
 			}
 		}
 
-		$method_evaluation_digirisk_complex = get_term_by( 'slug', 'evarisk', Evaluation_Method_Class::g()->get_type() );
-		$evaluation_method                  = Evaluation_Method_Class::g()->get( array( 'id' => $method_evaluation_digirisk_complex->term_id ), true );
-		$equivalence                        = (int) $evaluation_method->matrix[ $level ];
-		$scale                              = Scale_Util::get_scale( $equivalence );
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'popup/main', array(
+			'evaluation_method' => $evaluation_method,
+			'risk'              => $risk,
+		) );
+		$main_view = ob_get_clean();
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'popup/footer', array(
+			'risk' => $risk,
+		) );
+		$footer_view = ob_get_clean();
 
 		wp_send_json_success( array(
-			'equivalence'      => $equivalence,
-			'scale'            => $scale,
-			'callback_success' => 'gettedScale',
+			'view'             => $main_view,
+			'buttons_view'     => $footer_view,
+			'namespace'        => 'digirisk',
+			'module'           => 'evaluationMethod',
+			'callback_success' => 'loadedModalMethodEvaluationSuccess',
 		) );
 	}
 }

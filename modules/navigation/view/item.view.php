@@ -51,8 +51,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( 'digi-group' === $society->data['type'] ) :
 		?>
 			<div class="add-container">
-				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span><span class="button-add animated far fa-plus-circle"></span></div>
-				<div class="button w50 blue tooltip hover" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span><span class="button-add animated far fa-plus-circle"></span></div>
+				<div class="button w50 blue wpeo-tooltip-event" data-color="light" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="icon dashicons dashicons-admin-multisite"></span><span class="button-add animated far fa-plus-circle"></span></div>
+				<div class="button w50 blue wpeo-tooltip-event" data-color="light" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="icon dashicons dashicons-admin-home"></span><span class="button-add animated far fa-plus-circle"></span></div>
 			</div>
 			<div class="mobile-add-container toggle option" data-parent="toggle" data-target="content">
 				<i class="action far fa-ellipsis-v"></i>
@@ -65,4 +65,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 		?>
 	</div>
+	<?php Navigation_Class::g()->display_list( $society->data['id'], $selected_society_id ); ?>
 </li>

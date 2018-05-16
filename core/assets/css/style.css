@@ -2032,7 +2032,8 @@
  * .level5 -> cotation 80
  * .method -> cotation personnalisée
  */
-.digirisk-wrap .cotation {
+.digirisk-wrap .cotation, .wpeo-modal .cotation {
+  display: block;
   width: 50px;
   min-width: 50px;
   height: 50px;
@@ -2042,49 +2043,52 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.digirisk-wrap .cotation .icon {
+.digirisk-wrap .cotation .icon, .wpeo-modal .cotation .icon {
   font-size: 16px; }
 
-.digirisk-wrap .cotation:hover {
+.digirisk-wrap .cotation:hover, .wpeo-modal .cotation:hover {
   cursor: pointer; }
 
-.digirisk-wrap .cotation.default-cotation:hover {
+.digirisk-wrap .cotation.default-cotation:hover, .wpeo-modal .cotation.default-cotation:hover {
   background: rgba(0, 0, 0, 0.1); }
 
-.digirisk-wrap .cotation.level1 {
+.digirisk-wrap .cotation[data-scale="1"], .wpeo-modal .cotation[data-scale="1"] {
   background: #e2e2e2;
   color: rgba(0, 0, 0, 0.6); }
 
-.digirisk-wrap .cotation.level1:hover {
+.digirisk-wrap .cotation[data-scale="1"]:hover, .wpeo-modal .cotation[data-scale="1"]:hover {
   background: #cecece; }
 
-.digirisk-wrap .cotation.level2 {
+.digirisk-wrap .cotation[data-scale="2"], .wpeo-modal .cotation[data-scale="2"] {
   background: #e9ad4f;
   color: #fff; }
 
-.digirisk-wrap .cotation.level2:hover {
+.digirisk-wrap .cotation[data-scale="2"]:hover, .wpeo-modal .cotation[data-scale="2"]:hover {
   background: #e49c2b; }
 
-.digirisk-wrap .cotation.level3 {
+.digirisk-wrap .cotation[data-scale="3"], .wpeo-modal .cotation[data-scale="3"] {
   background: #e05353;
   color: #fff; }
 
-.digirisk-wrap .cotation.level3:hover {
+.digirisk-wrap .cotation[data-scale="3"]:hover, .wpeo-modal .cotation[data-scale="3"]:hover {
   background: #da3030; }
 
-.digirisk-wrap .cotation.level4 {
+.digirisk-wrap .cotation[data-scale="4"], .wpeo-modal .cotation[data-scale="4"] {
   background: #2b2b2b;
   color: #fff; }
 
-.digirisk-wrap .cotation.level4:hover {
+.digirisk-wrap .cotation[data-scale="4"]:hover, .wpeo-modal .cotation[data-scale="4"]:hover {
   background: #171717; }
 
-.digirisk-wrap .cotation.method {
+.digirisk-wrap .cotation.method, .wpeo-modal .cotation.method {
   background: #3495f0;
   color: #fff; }
 
-.digirisk-wrap .cotation.method:hover {
+.digirisk-wrap .cotation.method:hover, .wpeo-modal .cotation.method:hover {
   background: #1360c8; }
+
+.wpeo-modal .cotation {
+  float: left; }
 
 /**
  * Table design
@@ -3921,3 +3925,6 @@
 
 .digirisk-wrap .accident .red {
   color: red; }
+
+.wpeo-modal .evaluation-method .table-cell.active {
+  background-color: red; }

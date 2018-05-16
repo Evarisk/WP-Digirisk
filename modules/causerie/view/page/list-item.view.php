@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->title ); ?></span>
 	</td>
 	<td data-title="Catégorie" class="padding">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="view" category_risk_id="' . $causerie->risk_category->id . '"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->id . '" type="causerie" display="view" category_risk_id="' . $causerie->risk_category->id . '"]' ); ?>
 	</td>
 	<td data-title="Descriptif" class="padding">
 		<span><?php echo esc_html( $causerie->content ); ?></span>

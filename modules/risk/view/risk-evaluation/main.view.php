@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<?php if ( ! empty( $risk->data['current_equivalence'] ) && 0 <= $risk->data['current_equivalence'] ) : ?>
+<?php if ( isset( $risk->data['current_equivalence'] ) && 0 <= $risk->data['current_equivalence'] ) : ?>
 	<div class="cotation-container grid open-popup-ajax tooltip hover"
 		data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 		data-action="historic_risk"

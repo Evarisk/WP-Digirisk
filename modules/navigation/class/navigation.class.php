@@ -65,7 +65,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 */
 	public function display_list( $id = 0, $selected_society_id = 0, $class = 'sub-list' ) {
 		if ( ! empty( $id ) ) {
-			$societies = Society_Class::g()->get_societies_in( $society->data['id'] );
+			$societies = Society_Class::g()->get_societies_in( $id );
 
 			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
 				'id'                  => $id,

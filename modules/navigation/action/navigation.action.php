@@ -66,7 +66,7 @@ class Navigation_Action {
 		$navigation_view = ob_get_clean();
 
 		ob_start();
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-content.view.php';
+		Digirisk_Class::g()->display_main_container( $establishment->data['id'] );
 		$content_view = ob_get_clean();
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

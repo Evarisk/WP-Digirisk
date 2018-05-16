@@ -42,13 +42,6 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 	protected $meta_key = '_wpdigi_method';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array();
-
-	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
@@ -108,6 +101,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 			'scale'       => 0,
 			'cotation'    => 0,
 			'equivalence' => 0,
+			'variables'   => array(),
 		);
 
 		$evaluation_method = $this->get( array( 'id' => $evaluation_method_id ), true );
@@ -132,6 +126,8 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 					if ( ! in_array( $variable_id, $evaluation_method_variables_id, true ) ) {
 						return false;
 					} else {
+						$details[ $variable_id ] = (int) $evaluation_method_variables[ $variable_id ];
+
 						if ( 0 === $key ) {
 							$details['cotation'] = $evaluation_method_variables[ $variable_id ];
 						} else {
@@ -145,6 +141,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 		$details['cotation']    = (int) $details['cotation'];
 		$details['equivalence'] = (int) $evaluation_method->data['matrix'][ $details['cotation'] ];
 		$details['scale']       = (int) Scale_Util::get_scale( $details['equivalence'] );
+		$details['variables']   = $evaluation_method_variables;
 
 		return $details;
 	}

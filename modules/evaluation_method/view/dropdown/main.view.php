@@ -16,18 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $method_evaluation_simplified->data['id'] ); ?>" />
+<textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : ''; ?></textarea>
 
-<?php
-if ( ! empty( $variables ) ) :
-	foreach ( $variables as $variable ) :
-		?>
-		<input type="hidden" name="evaluation_variables[<?php echo esc_attr( $variable->data['id'] ); ?>]" value="<?php echo esc_attr( ! empty( $risk->data['evaluation']->data['variables'][ $variable->data['id'] ] ) ? $risk->data['evaluation']->data['variables'][ $variable->data['id'] ] : -1 ); ?>" />
-		<?php
-	endforeach;
-endif;
-?>
 <div class="wpeo-dropdown dropdown-grid dropdown-padding-0 cotation-container">
-	<span class="dropdown-toggle cotation level<?php echo esc_attr( $risk->data['evaluation']->data['scale'] ); ?>">
+	<span class="dropdown-toggle cotation level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>">
 		<?php
 		if ( 0 !== $risk->data['id'] ) :
 			?>
@@ -46,12 +38,30 @@ endif;
 		if ( ! empty( $variables[0]->data['survey']['request'] ) ) :
 			foreach ( $variables[0]->data['survey']['request'] as $request ) :
 				?>
-				<li data-evaluation-id="<?php echo esc_attr( $variables[0]->data['id'] ); ?>" data-level="<?php echo esc_attr( $request['seuil'] ); ?>" class="dropdown-item cotation level<?php echo esc_attr( $request['seuil'] ); ?>"><?php echo esc_html( $method_evaluation_simplified->data['matrix'][ $request['seuil'] ] ); ?></li>
+				<li data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
+						data-evaluation-id="<?php echo esc_attr( $method_evaluation_simplified->data['id'] ); ?>"
+						data-variable-id="<?php echo esc_attr( $variables[0]->data['id'] ); ?>"
+						data-seuil="<?php echo esc_attr( $request['seuil'] ); ?>"
+						class="dropdown-item cotation level<?php echo esc_attr( $request['seuil'] ); ?>"><?php echo esc_html( $method_evaluation_simplified->data['matrix'][ $request['seuil'] ] ); ?></li>
 				<?php
 			endforeach;
 		endif;
 
-		echo apply_filters( 'digi_evaluation_method_dropdown_end', '' );
+		echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
+			'li'  => array(
+				'class'        => array(),
+				'aria-label'   => array(),
+				'data-action'  => array(),
+				'data-class'   => array(),
+				'data-nonce'   => array(),
+				'data-id'      => array(),
+				'data-risk-id' => array(),
+			),
+			'svg' => array(),
+			'i'   => array(
+				'class' => array(),
+			),
+		) );
 		?>
 	</ul>
 </div>

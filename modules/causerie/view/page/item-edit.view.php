@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="text" name="title" />
 	</td>
 	<td>
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="edit" category_risk_id="' . $causerie->risk_category->id . '" preset="0"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->id . '" type="causerie" display="edit" category_risk_id="' . $causerie->risk_category->id . '" preset="0"]' ); ?>
 	</td>
 	<td>
 		<textarea rows="2" name="description"></textarea>

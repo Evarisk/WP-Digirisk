@@ -27,7 +27,7 @@ class Risk_Category_Shortcode {
 	 * @version 6.4.0
 	 */
 	public function __construct() {
-		add_shortcode( 'digi-dropdown-categories-risk', array( $this, 'callback_dropdown_categories_risk' ) );
+		add_shortcode( 'digi_dropdown_categories_risk', array( $this, 'callback_dropdown_categories_risk' ) );
 	}
 
 	/**

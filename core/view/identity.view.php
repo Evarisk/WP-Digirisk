@@ -21,18 +21,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 <span
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 	data-action="load_society"
-	data-id="<?php echo esc_attr( $element->data['id'] ); ?>"
-	class="<?php echo ! isset( $editable_identity ) ? 'action-attribute' : ''; ?> title">
+	data-id="<?php echo esc_attr( $society->data['id'] ); ?>"
+	class="title">
 
-	<?php if ( Society_Class::g()->get_type() !== $element->data['type'] ) : ?>
-		<strong><?php echo esc_html( $element->data['unique_identifier'] ); ?> -</strong>
+	<?php if ( Society_Class::g()->get_type() !== $society->data['type'] ) : ?>
+		<strong><?php echo esc_html( $society->data['unique_identifier'] ); ?> -</strong>
 	<?php endif; ?>
 
-	<?php if ( isset( $editable_identity ) && ( true === $editable_identity ) ) : ?>
 		<input type="hidden" name="action" value="save_society" />
-		<input type="hidden" name="id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
-		<input type="text" name="title" value="<?php echo esc_attr( $element->data['title'] ); ?>" />
-	<?php else : ?>
-		<span title="<?php echo esc_attr( $element->data['title'] ); ?>"><?php echo esc_html( $element->data['title'] ); ?></span>
-	<?php endif; ?>
+		<input type="hidden" name="id" value="<?php echo esc_attr( $society->data['id'] ); ?>" />
+		<input type="text" name="title" value="<?php echo esc_attr( $society->data['title'] ); ?>" />
 </span>
+
+<div class="button w50 edit"><i class="icon fas fa-pencil"></i></div>
