@@ -42,20 +42,6 @@ class Risk_Class extends \eoxia\Post_Class {
 	protected $meta_key = '_wpdigi_risk';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_risk' );
-
-	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
@@ -98,29 +84,19 @@ class Risk_Class extends \eoxia\Post_Class {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 7.0.0
 	 *
 	 * @todo 24/01/2018: Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$risk_schema = self::get( array( 'schema' => true ), true );
-		$risks       = self::get( array( 'post_parent' => $society_id ) );
-
-		if ( count( $risks ) > 1 ) {
-			usort( $risks, function( $a, $b ) {
-				if ( ! isset( $a->current_equivalence ) ) {
-					return 0;
-				}
-
-				if ( $a->current_equivalence === $b->current_equivalence ) {
-					return 0;
-				}
-
-				return ( $a->current_equivalence > $b->current_equivalence ) ? -1 : 1;
-			} );
-		}
+		$risk_schema = $this->get( array( 'schema' => true ), true );
+		$risks       = $this->get( array(
+			'post_parent' => $society_id,
+			'orderby'     => 'meta_value_num',
+			'meta_key'    => '_wpdigi_equivalence',
+		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
 			'society'     => $society,

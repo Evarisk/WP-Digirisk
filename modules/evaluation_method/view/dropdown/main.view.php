@@ -42,7 +42,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-evaluation-id="<?php echo esc_attr( $method_evaluation_simplified->data['id'] ); ?>"
 						data-variable-id="<?php echo esc_attr( $variables[0]->data['id'] ); ?>"
 						data-seuil="<?php echo esc_attr( $request['seuil'] ); ?>"
-						class="dropdown-item cotation level<?php echo esc_attr( $request['seuil'] ); ?>"><?php echo esc_html( $method_evaluation_simplified->data['matrix'][ $request['seuil'] ] ); ?></li>
+						data-scale="<?php echo esc_attr( $request['seuil'] ); ?>"
+						class="dropdown-item cotation"><?php echo esc_html( $method_evaluation_simplified->data['matrix'][ $request['seuil'] ] ); ?></li>
 				<?php
 			endforeach;
 		endif;

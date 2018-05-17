@@ -30,8 +30,9 @@ window.eoxiaJS.digirisk.evaluationMethodDropdown.selectSeuil = function( event )
 	var variableID   = element.data( 'variable-id' );
 	var evaluationID = element.data( 'evaluation-id' );
 
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation-container .cotation span' ).text( jQuery( this ).text() );
-	
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation-container .dropdown-toggle.cotation span' ).text( jQuery( this ).text() );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation-container .dropdown-toggle.cotation' ).attr( 'data-scale', seuil );
+
 
 	if ( variableID && evaluationID && seuil ) {
 		window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables( riskID, evaluationID, variableID, seuil );

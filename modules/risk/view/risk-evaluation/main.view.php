@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		data-class="historic-risk"
 		aria-label="<?php esc_html_e( 'Afficher l\'historique des cotations', 'digirisk' ); ?>">
 
-		<div class="action cotation default-cotation level<?php echo esc_attr( $risk->data['evaluation']->data['scale'] ); ?>">
+		<div class="action cotation default-cotation" data-scale="<?php echo esc_attr( $risk->data['evaluation']->data['scale'] ); ?>">
 			<i class="icon fas fa-chart-line" style="<?php echo ( 0 !== $risk->data['evaluation']->data['scale'] ) ? 'display: none;' : ''; ?>"></i>
 			<span><?php echo esc_html( $risk->data['current_equivalence'] ); ?></span>
 		</div>
