@@ -69,9 +69,16 @@ class Risk_Save_Action {
 
 		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
 
-		Risk_Class::g()->update( $risk->data );
+		$risk = Risk_Class::g()->update( $risk->data );
 
-		wp_send_json_success( array() );
+		ob_start();
+		Risk_Class::g()->display( $risk->data['parent_id'] );
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
+			'callback_success' => 'savedRiskSuccess',
+			'template'         => ob_get_clean(),
+		) );
 	}
 }
 

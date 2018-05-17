@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<ul class="dropdown-content wpeo-grid grid-4">
 		<?php foreach ( $risks_categories as $risk_category ) : ?>
-			<li class="item tooltip hover" data-is-preset="<?php echo esc_attr( $risk_category->data['is_preset'] ); ?>" aria-label="<?php echo esc_attr( $risk_category->data['name'] ); ?>" data-id="<?php echo esc_attr( $risk_category->data['id'] ); ?>">
+			<li class="item dropdown-item tooltip hover" data-is-preset="<?php echo esc_attr( $risk_category->data['is_preset'] ); ?>" aria-label="<?php echo esc_attr( $risk_category->data['name'] ); ?>" data-id="<?php echo esc_attr( $risk_category->data['id'] ); ?>">
 				<?php echo wp_get_attachment_image( $risk_category->data['thumbnail_id'], 'thumbnail', false ); ?>
 			</li>
 		<?php endforeach; ?>

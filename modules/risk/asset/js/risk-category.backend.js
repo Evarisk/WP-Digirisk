@@ -36,7 +36,6 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
 	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
-	event.stopPropagation();
 
 	// Rend le bouton "active".
 	if ( -1 != element.closest( 'tr' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
