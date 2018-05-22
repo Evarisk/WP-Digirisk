@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="parent_id" value="0" />
 	<input type="hidden" name="page" value="setting_risk" />
+	<input type="hidden" name="can_update" value="true" />
 	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $danger->id ); ?>" />
 
 	<td class="wm130 w150">

@@ -34,7 +34,7 @@ class dashboard_action {
 	 *
 	 * @uses add_menu_page()
 	 */
-	function callback_dashboard_menu( ) {
+	function callback_dashboard_menu() {
 		add_menu_page( __( 'Digirisk dashboard', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_digirisk', 'digirisk-dashboard', array( $this, 'callback_dashboard_content' ), WPDIGI_URL . 'core/assets/images/favicon2.png', 4);
 	}
 

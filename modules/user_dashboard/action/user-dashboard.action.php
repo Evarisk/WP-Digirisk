@@ -33,7 +33,6 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
 		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
 		add_action( 'wp_ajax_delete_user', array( $this, 'ajax_delete_user' ) );
-		add_action( 'wp_ajax_save_domain_mail', array( $this, 'ajax_save_domain_mail' ) );
 	}
 
 	/**
@@ -138,26 +137,6 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 			'module' => 'userDashboard',
 			'callback_success' => 'deletedUserSuccess',
 		) );
-	}
-
-	/**
-	 * Sauvegardes le domaine de l'email dans la page "Digirisk" dans le menu "Utilisateurs" de WordPress.
-	 *
-	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.4
-	 */
-	public function ajax_save_domain_mail() {
-		check_ajax_referer( 'save_domain_mail' );
-		$domain_mail = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-		if ( '' === $domain_mail ) {
-			wp_send_json_error();
-		}
-
-		update_option( 'digirisk_domain_mail', $domain_mail );
-
-		wp_send_json_success();
 	}
 }
 
