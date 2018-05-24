@@ -40,66 +40,49 @@ class Causerie_Action {
 	 * @return void
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_digirisk', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_digirisk', 'digirisk-causerie', array( Causerie_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 	/**
 	 * Sauvegardes un causerie ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
+	 * @version 6.6.0
 	 *
 	 * @return void
 	 */
 	public function ajax_edit_causerie() {
 		check_ajax_referer( 'edit_causerie' );
 
-		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-		$description = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
-		$category_risk_id = ! empty( $_POST['risk']['danger_id'] ) ? (int) $_POST['risk']['danger_id'] : 0;
-		$attached_documents = ! empty( $_POST['document'] ) ? (array) $_POST['document'] : array();
-		$image_id = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
+		$id                 = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$title              = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$description        = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
+		$category_risk_id   = ! empty( $_POST['risk']['danger_id'] ) ? (int) $_POST['risk']['danger_id'] : 0;
+		$image_id           = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
 		$causerie = Causerie_Class::g()->update( array(
-			'id' => $id,
-			'parent_id' => $parent_id,
-			'title' => $title,
-			'content' => $description,
-			'taxonomy' => array(
+			'id'        => $id,
+			'title'     => $title,
+			'content'   => $description,
+			'taxonomy'  => array(
 				'digi-category-risk' => $category_risk_id,
 			),
 		) );
 
-		if ( ! empty( $attached_documents ) ) {
-			foreach ( $attached_documents as $document_id ) {
-				if ( ! in_array( $document_id, $causerie->associated_document_id['document'], true ) ) {
-					$causerie->associated_document_id['document'][] = (int) $document_id;
-				}
-			}
-		}
-
 		if ( ! empty( $image_id ) && empty( $causerie->thumbnail_id ) ) {
-			$causerie->thumbnail_id = (int) $image_id;
+			$causerie->thumbnail_id                      = (int) $image_id;
 			$causerie->associated_document_id['image'][] = (int) $image_id;
 		}
 
 		$causerie = Causerie_Class::g()->update( $causerie );
 
-		do_action( 'digi_add_historic', array(
-			'parent_id' => $causerie->parent_id,
-			'id' => $causerie->id,
-			'content' => 'Mise à jour de la causerie ' . $causerie->modified_unique_identifier,
-		) );
-
 		ob_start();
-		Causerie_Class::g()->display_causerie_list();
+		Causerie_Add_Class::g()->display();
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'causerie',
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
 			'callback_success' => 'editedCauserieSuccess',
-			'view' => ob_get_clean(),
+			'view'             => ob_get_clean(),
 		) );
 	}
 
@@ -120,26 +103,20 @@ class Causerie_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$main_society = Society_Class::g()->get( array(
-			'posts_per_page' => 1,
-		), true );
-
 		$causerie = Causerie_Class::g()->get( array(
 			'id' => $id,
 		), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'item-edit', array(
-			'main_society' => $main_society,
-			'society_id' => $causerie->parent_id,
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'add/item-edit', array(
 			'causerie' => $causerie,
 		) );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'causerie',
-			'callback_success' => 'loadedAccidentSuccess',
-			'view' => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
+			'callback_success' => 'loadedCauserieSuccess',
+			'view'             => ob_get_clean(),
 		) );
 	}
 

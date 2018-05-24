@@ -1,6 +1,6 @@
 <?php
 /**
- * Définition des champs d'un causerie.
+ * Définition des champs d'un causerie dans son état "final".
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
@@ -16,14 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition des champs d'un causerie.
+ * Définition des champs d'un causerie dans son état "final".
  */
-class Causerie_Model extends \eoxia\Post_Model {
+class Final_Causerie_Model extends \eoxia\Post_Model {
 
 	/**
 	 * Le constructeur définit les champs
 	 *
-	 * @param Causerie_Model $object Les données de l'accident.
+	 * @param Causerie_Model $object Les données de la causerie dans son état "final".
 	 *
 	 * @since 6.5.0
 	 * @version 6.6.0
@@ -40,26 +40,41 @@ class Causerie_Model extends \eoxia\Post_Model {
 				'meta_type' => 'single',
 				'field'     => '_wpdigi_unique_identifier',
 			),
-			'number_time_realized'   => array(
-				'type'      => 'integer',
+			'former'                 => array(
+				'type'      => 'array',
 				'meta_type' => 'single',
-				'field'     => '_wpdigi_number_time_realized',
+				'field'     => '_wpdigi_former',
+				'child'     => array(
+					'user_id'      => array(
+						'type' => 'integer',
+					),
+					'signature_id' => array(
+						'type' => 'integer',
+					),
+				),
 			),
-			'number_participants'    => array(
-				'type'      => 'integer',
+			'participants'           => array(
+				'type'      => 'array',
 				'meta_type' => 'single',
-				'field'     => '_wpdigi_number_participants',
-			),
-			'last_date_realized'     => array(
-				'type'      => 'wpeo_date',
-				'meta_type' => 'single',
-				'field'     => '_wpdigi_last_date_realized',
+				'field'     => '_wpdigi_former',
+				'child'     => array(
+					'user_id'      => array(
+						'type' => 'array',
+					),
+					'signature_id' => array(
+						'type' => 'array',
+					),
+				),
 			),
 			'associated_document_id' => array(
 				'type'      => 'array',
 				'meta_type' => 'multiple',
 				'child'     => array(
-					'image' => array(
+					'image'    => array(
+						'type'      => 'array',
+						'meta_type' => 'multiple',
+					),
+					'document' => array(
 						'type'      => 'array',
 						'meta_type' => 'multiple',
 					),

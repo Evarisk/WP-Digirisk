@@ -24,17 +24,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="Photo" class="padding">
 		<?php do_shortcode( '[wpeo_upload id="' . $causerie->id . '" model_name="/digi/' . $causerie->get_class() . '" mode="view" single="false" field_name="image" ]' ); ?>
 	</td>
-	<td data-title="Nom" class="padding">
-		<span><?php echo esc_html( $causerie->title ); ?></span>
-	</td>
 	<td data-title="Catégorie" class="padding">
 		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="view" category_risk_id="' . $causerie->risk_category->id . '"]' ); ?>
 	</td>
-	<td data-title="Descriptif" class="padding">
+	<td data-title="Titre et description" class="padding wpeo-grid grid-1">
+		<span><?php echo esc_html( $causerie->title ); ?></span>
 		<span><?php echo esc_html( $causerie->content ); ?></span>
-	</td>
-	<td data-title="Documents joints" class="padding">
-		<?php do_shortcode( '[wpeo_upload id="' . $causerie->id . '" model_name="/digi/' . $causerie->get_class() . '" display_type="list" mode="view" single="false" field_name="document" ]' ); ?>
 	</td>
 	<td>
 		<div class="action grid-layout w2">

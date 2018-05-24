@@ -1,11 +1,11 @@
 <?php
 /**
- * La classe gérant les causeries de société
+ * La classe gérant les causeries dans son état "final".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.6.0
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -16,30 +16,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * La classe gérant les causeries de société
+ * La classe gérant les causeries
  */
-class Causerie_Society_Class extends \eoxia\Post_Class {
+class Final_Causerie_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\Causerie_Society_Model';
+	protected $model_name = '\digi\Final_Causerie_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'dg-causerie-society';
+	protected $post_type = 'digi-final-causerie';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base = 'causerie-society';
+	protected $base = 'final-causerie';
 
 	/**
 	 * La version de l'objet
@@ -53,14 +53,14 @@ class Causerie_Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key = 'dg_causerie_society';
+	protected $meta_key = '_wpdigi_final_causerie';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
 	 */
-	public $element_prefix = 'CS';
+	public $element_prefix = 'F';
 
 	/**
 	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
@@ -88,8 +88,7 @@ class Causerie_Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type_name = 'Causeries society';
-
+	protected $post_type_name = 'Final Causeries';
 }
 
-Causerie_Society_Class::g();
+Final_Causerie_Class::g();

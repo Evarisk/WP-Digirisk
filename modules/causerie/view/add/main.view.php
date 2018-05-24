@@ -2,10 +2,10 @@
 /**
  * Affiches la liste des causeries
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,10 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
 			<th class="w50 padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Catégorie', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Descriptif', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Documents joints', 'digirisk' ); ?>.</th>
+			<th class="w50 padding"><?php esc_html_e( 'Cat', 'digirisk' ); ?>.</th>
+			<th class="w50 padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?>.</th>
 			<th class="w100"></th>
 		</tr>
 	</thead>
@@ -32,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $causeries ) ) :
 			foreach ( $causeries as $causerie ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'page/list-item', array(
+				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'add/list-item', array(
 					'causerie' => $causerie,
 				) );
 			endforeach;
@@ -42,9 +40,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<tfoot>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'page/item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'add/item-edit', array(
 			'causerie' => $causerie_schema,
-			'main_society' => $main_society,
 		) );
 		?>
 	</tfoot>

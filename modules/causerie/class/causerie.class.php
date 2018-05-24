@@ -2,10 +2,10 @@
 /**
  * La classe gérant les causeries
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -91,31 +91,15 @@ class Causerie_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Causeries';
 
 	/**
-	 * Affiches la fenêtre principale des accidents
+	 * Affiches la fenêtre principale des causeries
 	 *
 	 * @since 6.5.0
 	 * @version 6.5.0
 	 *
-	 * @param integer $society_id L'ID de la société.
 	 * @return void
 	 */
-	public function display( $society_id ) {
-		$society = Society_Class::g()->show_by_type( $society_id );
-
-		$causerie_schema = Causerie_Society_Class::g()->get( array(
-			'schema' => true,
-		), true );
-
-		$causeries = Causerie_Society_Class::g()->get( array(
-			'post_parent' => $society_id,
-		) );
-
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'society/main', array(
-			'society_id' => $society_id,
-			'society' => $society,
-			'causerie_schema' => $causerie_schema,
-			'causeries' => $causeries,
-		) );
+	public function display() {
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
 	}
 }
 
