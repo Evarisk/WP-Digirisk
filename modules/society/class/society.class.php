@@ -159,6 +159,64 @@ class Society_Class extends \eoxia\Post_Class {
 	}
 
 	/**
+	 * Supprimes une société ainsi que tous ses éléments enfants.
+	 *
+	 * @since 6.6.0
+	 * @version 6.6.0
+	 *
+	 * @param  integer $id               L'ID de la société.
+	 * @param  boolean $delete_childrens Supprimes les enfants égalements si True.
+	 *
+	 * @return boolean     True si tout s'est bien passé sinon false.
+	 */
+	public function delete( $id, $delete_childrens = true ) {
+		$status = true;
+
+		$society         = $this->show_by_type( $id );
+		$society->status = 'trash';
+
+		$this->update_by_type( $society );
+
+		if ( $delete_childrens ) {
+			$status = $this->delete_childrens( $id );
+		}
+
+		return $society;
+	}
+
+	/**
+	 * Fonctions récursives, supprimes tous les éléments enfant à parent_id et récursivement.
+	 *
+	 * @since 6.6.0
+	 * @version 6.6.0
+	 *
+	 * @param  integer $parent_id L'ID de l'élément parent.
+	 *
+	 * @return boolean
+	 */
+	public function delete_childrens( $parent_id ) {
+		$args = array(
+			'post_status'    => array( 'publish', 'inherit' ),
+			'post_parent'    => $parent_id,
+			'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
+			'posts_per_page' => -1,
+		);
+
+		$societies = get_posts( $args );
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+				$society->post_status = 'trash';
+				wp_update_post( $society );
+
+				$this->delete_childrens( $society->ID );
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Récupères l'adresse du groupement
 	 *
 	 * @param  mixed $society Les données de la société.

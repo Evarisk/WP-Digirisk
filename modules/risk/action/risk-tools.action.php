@@ -4,8 +4,8 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.4.5
- * @version 6.4.5
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -42,7 +42,7 @@ class Risk_Tools_Action {
 	 * @return void
 	 *
 	 * @since 6.4.5
-	 * @version 6.4.5
+	 * @version 6.6.0
 	 */
 	public function callback_digi_risk_preset_reset() {
 		check_ajax_referer( 'risk_preset_reset' );
@@ -64,14 +64,14 @@ class Risk_Tools_Action {
 
 		if ( ! empty( $presets_risks ) ) {
 			foreach ( $presets_risks as $risk ) {
-				$risk_id = $risk->ID;
+				$risk_id      = $risk->ID;
 				$builded_risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
 
 				// Si le risque possède une évaluation c'est qu'il a été défini on ne le supprime pas.
 				if ( 0 === $builded_risk->current_evaluation_id && ( ! isset( $builded_risk->comment ) || empty( $builded_risk->comment ) || ( ( 1 === count( $builded_risk->comment ) ) && ( 0 === $builded_risk->comment[0]->id ) ) ) ) {
 					$builded_risk->status = 'trash';
 					Risk_Class::g()->update( $builded_risk );
-					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d a été mis à la corbeille car rien n\'avait été configuré', 'digirisk' ), $id ), 'digirisk-tools' );
+					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d a été mis à la corbeille car rien n\'avait été configuré', 'digirisk' ), $risk_id ), 'digirisk-tools' );
 				} else {
 					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d n\'a pas été modifié car il avait déjà été configuré.', 'digirisk' ), $risk_id ), 'digirisk-tools' );
 				}

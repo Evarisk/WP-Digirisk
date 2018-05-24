@@ -235,6 +235,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 		if ( !empty( $list_risk ) ) {
 		  foreach ( $list_risk as $risk ) {
 				$final_level = !empty( evaluation_method_class::g()->list_scale[$risk['niveauRisque']] ) ? evaluation_method_class::g()->list_scale[$risk['niveauRisque']] : '';
+				unset( $risk[ 'picture' ] );
 				$data_to_document[ 'risq' . $final_level ][ 'value' ][] = $risk;
 				$data_to_document[ 'planDactionRisq' . $final_level ][ 'value' ][] = $risk;
 
@@ -242,6 +243,7 @@ class DUER_Generate_Class extends \eoxia\Singleton_Util {
 					$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] = 0;
 				}
 				$risk_per_element[ $risk[ 'idElement' ] ][ 'quotationTotale' ] += $risk[ 'quotationRisque' ];
+
 		  }
 		}
 

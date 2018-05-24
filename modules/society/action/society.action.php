@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux sociétés
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -84,16 +84,14 @@ class Society_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.6.0
 	 */
 	public function callback_delete_society() {
 		check_ajax_referer( 'delete_society' );
 
 		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 
-		$society = Society_Class::g()->show_by_type( $id );
-		$society->status = 'trash';
-		Society_Class::g()->update_by_type( $society );
+		$society = Society_Class::g()->delete( $id );
 
 		ob_start();
 		Digirisk_Class::g()->display( $society->parent_id );

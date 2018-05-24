@@ -2,16 +2,18 @@
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
@@ -42,13 +44,32 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 */
 	protected function construct() {}
 
+	public function get_risks( $args ) {
+		$args_where = array(
+			'post_status'         => array( 'publish' ),
+			'meta_key'            => '_wpdigi_equivalence',
+			'orderby'             => 'meta_value_num',
+			'meta_query'          => array(
+				array(
+					'key'     => '_wpdigi_preset',
+					'value'   => 1,
+					'compare' => '!=',
+				),
+			)
+		);
+
+		$args_where = wp_parse_args( $args_where, $args );
+
+		return Risk_Class::g()->get( $args_where );
+	}
+
 	/**
 	 * Affiches le contenu de la page "Tous les risques"
 	 *
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.1
+	 * @version 6.6.0
 	 */
 	public function display() {
 		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
@@ -60,28 +81,15 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
 		$order_type   = ! empty( $_GET['order_type'] ) ? sanitize_text_field( $_GET['order_type'] ) : 'ASC';
 
-		$args_where = array(
-			'post_status'    => array( 'publish' ),
+		$risk_list = $this->get_risks( array(
 			'offset'         => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
-			'meta_key'       => '_wpdigi_equivalence',
-			'orderby'        => 'meta_value_num',
-			'meta_query' => array(
-				array(
-					'key'     => '_wpdigi_preset',
-					'value'   => 1,
-					'compare' => '!=',
-				)
-			)
-		);
+			'order'          => $order_type,
+		) );
 
-		$risk_list = Risk_Class::g()->get( $args_where );
-
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
-		unset( $args_where['offset'] );
-		unset( $args_where['posts_per_page'] );
-		$args_where['fields'] = array( 'ID' );
-		$count_risk = count( Risk_Class::g()->get( $args_where ) );
+		$count_risk = count( $this->get_risks( array(
+			'fields' => 'ids',
+		) ) );
 
 		$number_page = ceil( $count_risk / $per_page );
 
@@ -98,7 +106,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 *
 	 * @since 6.2.3
-	 * @version 6.3.1
+	 * @version 6.6.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -112,32 +120,15 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 		$order_type = ! empty( $_GET['order_type'] ) ? $_GET['order_type'] : 'DESC';
 
-		$args_where = array(
-			'post_status' => array( 'publish' ),
-			'offset' => ( $current_page - 1 ) * $per_page,
+		$risk_list = $this->get_risks( array(
+			'offset'         => ( $current_page - 1 ) * $per_page,
 			'posts_per_page' => $per_page,
-			'meta_key' => '_wpdigi_equivalence',
-			'orderby' => 'meta_value_num',
-			'order' => $order_type,
-			'meta_query' => array(
-				array(
-					'key' => '_wpdigi_preset',
-					'value' => 1,
-					'compare' => '!=',
-				)
-			)
-		);
-
-		$risk_list = Risk_Class::g()->get( $args_where );
-
-		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
-		$url_ref_order = '&order_key=equivalence&order_type=';
-		$url_ref_order .= ( 'ASC' === $order_type ) ? 'DESC' : 'ASC';
+			'order'          => $order_type,
+		) );
 
 		if ( ! empty( $risk_list ) ) {
 			foreach ( $risk_list as $key => $element ) {
 				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->parent_id );
-
 				if ( empty( $risk_list[ $key ]->parent ) ) {
 					unset( $risk_list[ $key] );
 				} else {
@@ -151,8 +142,12 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
+		$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : 'equivalence';
+		$url_ref_order = '&order_key=equivalence&order_type=';
+		$url_ref_order .= ( 'ASC' === $order_type ) ? 'DESC' : 'ASC';
+
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/list', array(
-			'risk_list' => $risk_list,
+			'risk_list'     => $risk_list,
 			'url_ref_order' => $url_ref_order,
 		) );
 	}

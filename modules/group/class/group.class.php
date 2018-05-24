@@ -237,7 +237,7 @@ class Group_Class extends \eoxia\Post_Class {
 			$picture = __( 'No picture defined', 'digirisk' );
 
 			if ( ! empty( $risk->thumbnail_id ) ) {
-				$picture_definition = wp_get_attachment_image_src( $risk->thumbnail_id, 'full' );
+				$picture_definition = wp_get_attachment_image_src( $risk->thumbnail_id, 'digirisk-element-thumbnail' );
 				$picture_path       = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 				if ( is_file( $picture_path ) ) {
