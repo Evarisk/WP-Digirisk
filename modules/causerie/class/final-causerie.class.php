@@ -81,7 +81,7 @@ class Final_Causerie_Class extends \eoxia\Post_Class {
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie' );
 
 	/**
 	 * Le nom pour le resgister post type

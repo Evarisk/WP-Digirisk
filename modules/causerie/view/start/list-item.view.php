@@ -1,11 +1,11 @@
 <?php
 /**
- * Affichage d'une causerie dans l'onglet "Ajouter une causerie".
+ * Affichage d'une causerie
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
+ * @author Jimmy Latour <jimmy@evarisk.com>
+ * @since 6.5.0
+ * @version 6.5.0
+ * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
@@ -38,18 +38,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->content ); ?></span>
 	</td>
 	<td>
-		<div class="action grid-layout w2">
-			<!-- Editer un causerie -->
-			<div 	class="button light w50 edit action-attribute"
-						data-id="<?php echo esc_attr( $causerie->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_causerie' ) ); ?>"
-						data-loader="causerie"
-						data-action="load_causerie"><i class="icon fa fa-pencil"></i></div>
-
-			<div 	class="button light w50 delete action-delete"
-						data-id="<?php echo esc_attr( $causerie->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_causerie' ) ); ?>"
-						data-action="delete_causerie"><i class="icon fa fa-times"></i></div>
+		<div class="action grid-layout w1">
+			<?php if ( Causerie_Class::g()->get_type() === $causerie->type ) : ?>
+				<a class="button light w50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->id ) ); ?>"><i class="icon fa fa-play"></i></a>
+			<?php else : ?>
+				<a class="button light w50 edit" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie->id ) ); ?>"><i class="icon fa fa-play"></i></a>
+			<?php endif; ?>
 		</div>
 	</td>
 </tr>

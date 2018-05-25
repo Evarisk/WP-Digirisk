@@ -31,11 +31,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php Causerie_Dashboard_Class::g()->display(); ?>
 			</div>
 
-			<div id="digi-start-causerie" class="tab-content hidden">
-				Start causerie
+			<div id="digi-start-causerie" class="tab-content">
+				<?php Causerie_Start_Class::g()->display(); ?>
 			</div>
 
-			<div id="digi-add-causerie" class="tab-content">
+			<div id="digi-add-causerie" class="tab-content hidden">
 				<?php Causerie_Add_Class::g()->display(); ?>
 			</div>
 		</div>

@@ -54,17 +54,17 @@ class Causerie_Action {
 	public function ajax_edit_causerie() {
 		check_ajax_referer( 'edit_causerie' );
 
-		$id                 = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		$title              = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-		$description        = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
-		$category_risk_id   = ! empty( $_POST['risk']['danger_id'] ) ? (int) $_POST['risk']['danger_id'] : 0;
-		$image_id           = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
+		$id               = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$title            = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$description      = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
+		$category_risk_id = ! empty( $_POST['risk']['danger_id'] ) ? (int) $_POST['risk']['danger_id'] : 0;
+		$image_id         = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
 		$causerie = Causerie_Class::g()->update( array(
-			'id'        => $id,
-			'title'     => $title,
-			'content'   => $description,
-			'taxonomy'  => array(
+			'id'       => $id,
+			'title'    => $title,
+			'content'  => $description,
+			'taxonomy' => array(
 				'digi-category-risk' => $category_risk_id,
 			),
 		) );
@@ -150,8 +150,8 @@ class Causerie_Action {
 		Causerie_Class::g()->update( $causerie );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'causerie',
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
 			'callback_success' => 'deletedAccidentSuccess',
 		) );
 	}
