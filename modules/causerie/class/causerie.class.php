@@ -89,24 +89,6 @@ class Causerie_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $post_type_name = 'Causeries';
-
-	/**
-	 * Affiches la fenêtre principale des causeries
-	 *
-	 * @since 6.6.0
-	 * @version 6.6.0
-	 *
-	 * @return void
-	 */
-	public function display() {
-		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0; // WPCS: CSRF ok.
-
-		if ( ! empty( $id ) ) {
-			Causerie_Start_Class::g()->display_single( $id );
-		} else {
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
-		}
-	}
 }
 
 Causerie_Class::g();

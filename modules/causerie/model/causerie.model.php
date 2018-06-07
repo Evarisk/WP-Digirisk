@@ -45,6 +45,11 @@ class Causerie_Model extends \eoxia\Post_Model {
 				'meta_type' => 'single',
 				'field'     => '_wpdigi_number_time_realized',
 			),
+			'number_formers'         => array(
+				'type'      => 'integer',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_number_formers',
+			),
 			'number_participants'    => array(
 				'type'      => 'integer',
 				'meta_type' => 'single',
@@ -75,6 +80,11 @@ class Causerie_Model extends \eoxia\Post_Model {
 						'type'       => 'array',
 					),
 				),
+			),
+			'document_meta'          => array(
+				'type'      => 'array',
+				'meta_type' => 'single',
+				'field'     => 'document_meta',
 			),
 		) );
 

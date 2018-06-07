@@ -5,7 +5,7 @@
  * @author Evarisk <dev@evarisk.com>
  * @since 6.6.0
  * @version 6.6.0
- * @copyright 2015-2018 Evarisk
+ * @copyright 2018 Evarisk.
  * @package DigiRisk
  */
 
@@ -17,13 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php esc_html_e( 'Causerie à démarrer', 'digirisk' ); ?></h2>
 
-<table class="table causerie">
+<table class="table start-causerie">
 	<thead>
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
 			<th class="w50 padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?>.</th>
 			<th class="w50 padding"><?php esc_html_e( 'Cat', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?>.</th>
+			<th class="padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?>.</th>
 			<th class="w50"></th>
 		</tr>
 	</thead>
@@ -49,17 +49,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
 			<th class="w50 padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?>.</th>
 			<th class="w50 padding"><?php esc_html_e( 'Cat', 'digirisk' ); ?>.</th>
-			<th class="w50 padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?>.</th>
+			<th class="padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?>.</th>
 			<th class="w50"></th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<?php
-		if ( ! empty( $final_causeries ) ) :
-			foreach ( $final_causeries as $causerie ) :
+		if ( ! empty( $causeries_intervention ) ) :
+			foreach ( $causeries_intervention as $causerie_intervention ) :
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/list-item', array(
-					'causerie' => $causerie,
+					'causerie' => $causerie_intervention,
 				) );
 			endforeach;
 		endif;

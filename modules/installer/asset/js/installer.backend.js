@@ -2,7 +2,7 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.4
+ * @version 6.6.0
  */
 
 window.eoxiaJS.digirisk.installer = {};
@@ -20,7 +20,8 @@ window.eoxiaJS.digirisk.installer.event = function() {
 	jQuery( document ).on( 'click', '.wpdigi-installer input[type="checkbox"]', window.eoxiaJS.digirisk.installer.toggleDefaultInstall );
 
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input.input-domain-mail, .user-dashboard input.input-domain-mail', window.eoxiaJS.digirisk.installer.key_up_domain_mail );
-	jQuery( '.owl-carousel' ).owlCarousel( {
+
+	jQuery( '.wpdigi-installer .owl-carousel' ).owlCarousel( {
 		'items': 1,
 		'nav': true,
 		'navText': [],

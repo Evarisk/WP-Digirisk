@@ -5,7 +5,7 @@
  * @author Evarisk <dev@evarisk.com>
  * @since 6.6.0
  * @version 6.6.0
- * @copyright 2015-2018 Evarisk
+ * @copyright 2018 Evarisk.
  * @package DigiRisk
  */
 
@@ -38,17 +38,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->content ); ?></span>
 	</td>
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action grid-layout w3">
+			<?php if ( ! empty( $causerie->document ) && ! empty( Document_Class::g()->get_document_path( $causerie->document ) ) ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $causerie->document ) ); ?>">
+					<i class="fa fa-download icon" aria-hidden="true"></i>
+					<!-- <span><?php esc_html_e( 'Fiche de groupement', 'digirisk' ); ?></span> -->
+				</a>
+			<?php else : ?>
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+					<i class="fa fa-times icon" aria-hidden="true"></i>
+				</span>
+			<?php endif; ?>
+
 			<!-- Editer un causerie -->
 			<div 	class="button light w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $causerie->id ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_causerie' ) ); ?>"
-						data-loader="causerie"
-						data-action="load_causerie"><i class="icon fa fa-pencil"></i></div>
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_edit_causerie' ) ); ?>"
+						data-loader="causerie-row"
+						data-action="load_edit_causerie"><i class="icon fa fa-pencil"></i></div>
 
 			<div 	class="button light w50 delete action-delete"
 						data-id="<?php echo esc_attr( $causerie->id ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_causerie' ) ); ?>"
+						data-message-delete="<?php echo esc_attr_e( 'Supprimer cette causerie ?', 'digirisk' ); ?>"
 						data-action="delete_causerie"><i class="icon fa fa-times"></i></div>
 		</div>
 	</td>

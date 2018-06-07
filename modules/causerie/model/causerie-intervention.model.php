@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un causerie dans son état "final".
  */
-class Final_Causerie_Model extends \eoxia\Post_Model {
+class Causerie_Intervention_Model extends Causerie_Model {
 
 	/**
 	 * Le constructeur définit les champs
@@ -40,31 +40,50 @@ class Final_Causerie_Model extends \eoxia\Post_Model {
 				'meta_type' => 'single',
 				'field'     => '_wpdigi_unique_identifier',
 			),
+			'second_unique_key'      => array(
+				'type'      => 'string',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_second_unique_key',
+			),
+			'second_identifier'      => array(
+				'type'      => 'string',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_second_identifier',
+			),
+			'current_step'           => array(
+				'type'      => 'integer',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_current_step',
+				'bydefault' => 1,
+			),
+			'date_start'             => array(
+				'type'      => 'wpeo_date',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_date_start',
+			),
+			'date_end'               => array(
+				'type'      => 'wpeo_date',
+				'meta_type' => 'single',
+				'field'     => '_wpdigi_date_end',
+			),
 			'former'                 => array(
 				'type'      => 'array',
-				'meta_type' => 'single',
-				'field'     => '_wpdigi_former',
+				'meta_type' => 'multiple',
 				'child'     => array(
-					'user_id'      => array(
+					'user_id'        => array(
 						'type' => 'integer',
 					),
-					'signature_id' => array(
+					'signature_id'   => array(
 						'type' => 'integer',
+					),
+					'signature_date' => array(
+						'type' => 'wpeo_date',
 					),
 				),
 			),
 			'participants'           => array(
 				'type'      => 'array',
-				'meta_type' => 'single',
-				'field'     => '_wpdigi_former',
-				'child'     => array(
-					'user_id'      => array(
-						'type' => 'array',
-					),
-					'signature_id' => array(
-						'type' => 'array',
-					),
-				),
+				'meta_type' => 'multiple',
 			),
 			'associated_document_id' => array(
 				'type'      => 'array',

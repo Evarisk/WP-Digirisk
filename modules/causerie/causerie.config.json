@@ -7,10 +7,20 @@
 	"path": "modules/causerie/",
 	"dependencies": {
 		"helper": {},
-		"shortcode": {},
-		"action": {},
-		"model": {},
-		"class": {}
+		"model": {
+			"priority": [
+				"causerie"
+			]
 		},
+		"class": {},
+		"action": {}
+	},
+	"steps": {
+		"CAUSERIE_NOT_STARTED": 0,
+		"CAUSERIE_FORMER": 1,
+		"CAUSERIE_PRESENTATION": 2,
+		"CAUSERIE_PARTICIPANT": 3,
+		"CAUSERIE_CLOSED": 4
+	},
 	"state": true
 }

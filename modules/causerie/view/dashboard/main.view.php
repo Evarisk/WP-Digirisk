@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div>
 		<h2><?php esc_html_e( 'Stats d\'avril 2018', 'digirisk' ); ?></h2>
 		<ul>
-			<li>Participants: <strong>40</strong></li>
-			<li>Causeries: <strong>10</strong></li>
-			<li>Formateurs: <strong>3</strong></li>
+			<li><?php esc_html_e( 'Participants:', 'digirisk' ); ?> <strong>40</strong></li>
+			<li><?php esc_html_e( 'Causeries:', 'digirisk' ); ?> <strong>10</strong></li>
+			<li><?php esc_html_e( 'Formateurs:', 'digirisk' ); ?>: <strong>3</strong></li>
 		</ul>
 	</div>
 </div>
@@ -30,21 +30,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2><?php esc_html_e( 'Dernières causeries réalisées', 'digirisk' ); ?></h2>
 
-	<table class="table users">
+	<table class="table closed-causerie">
 		<thead>
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Cat.', 'digirisk' ); ?></td>
+				<td class="w50 padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?></td>
+				<td class="w50 padding"><?php esc_html_e( 'Cat.', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Participants', 'digirisk' ); ?></td>
+				<td class="w50"></td>
 			</tr>
 		</thead>
 		<?php
-		if ( ! empty( $causeries ) ) :
-			foreach ( $causeries as $causerie ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item' );
+		if ( ! empty( $final_causeries ) ) :
+			foreach ( $final_causeries as $causerie ) :
+				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
+					'causerie' => $causerie,
+				) );
 			endforeach;
 		endif;
 		?>
@@ -54,7 +59,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if ( ! empty( $current_page ) && ! empty( $number_page ) ) : ?>
 		<div class="wp-digi-pagination">
 			<?php
-			$big = 999999999;
 			echo paginate_links( array(
 				'base'               => admin_url( 'admin-ajax.php?action=digirisk-setting&tab=digi-capability&current_page=%_%' ),
 				'format'             => '%#%',

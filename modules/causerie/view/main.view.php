@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap">
+<div class="wrap wrap-causerie">
 	<h1><?php esc_html_e( 'Causeries', 'digirisk' ); ?></h1>
 
 	<div class="digi-tools-main-container">
@@ -27,16 +27,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="digirisk-wrap">
 
-			<div id="digi-dashboard" class="tab-content hidden">
-				<?php Causerie_Dashboard_Class::g()->display(); ?>
+			<div id="digi-dashboard" class="tab-content">
+				<?php Causerie_Page_Class::g()->display_dashboard(); ?>
 			</div>
 
-			<div id="digi-start-causerie" class="tab-content">
-				<?php Causerie_Start_Class::g()->display(); ?>
+			<div id="digi-start-causerie" class="tab-content hidden">
+				<?php Causerie_Page_Class::g()->display_start_table(); ?>
 			</div>
 
 			<div id="digi-add-causerie" class="tab-content hidden">
-				<?php Causerie_Add_Class::g()->display(); ?>
+				<?php Causerie_Page_Class::g()->display_edit_form(); ?>
 			</div>
 		</div>
 	</div>

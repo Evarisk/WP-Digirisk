@@ -114,6 +114,11 @@ class Society_Class extends \eoxia\Post_Class {
 		}
 
 		$model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+
+		if ( '\digi\final-causerie_class' === $model_name ) {
+			$model_name = '\digi\Causerie_Intervention_Class';
+		}
+
 		$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
 
 		if ( empty( $establishment[0] ) ) {

@@ -2,10 +2,10 @@
 /**
  * Gestion des actions des causeries.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017
+ * @version 6.6.0
+ * @copyright 2018 Evarisk.
  * @package DigiRisk
  */
 
@@ -25,22 +25,9 @@ class Causerie_Action {
 	 * Il appelle également les actions ajax suivantes
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'wp_ajax_edit_causerie', array( $this, 'ajax_edit_causerie' ) );
-		add_action( 'wp_ajax_load_causerie', array( $this, 'ajax_load_causerie' ) );
+		add_action( 'wp_ajax_load_edit_causerie', array( $this, 'ajax_load_edit_causerie' ) );
 		add_action( 'wp_ajax_delete_causerie', array( $this, 'ajax_delete_causerie' ) );
-	}
-
-	/**
-	 * Ajoutes le sous menu 'Accidents'.
-	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
-	 *
-	 * @return void
-	 */
-	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_digirisk', 'digirisk-causerie', array( Causerie_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 	/**
@@ -74,28 +61,37 @@ class Causerie_Action {
 			$causerie->associated_document_id['image'][] = (int) $image_id;
 		}
 
-		$causerie = Causerie_Class::g()->update( $causerie );
+		Causerie_Class::g()->update( $causerie );
+
+		Sheet_Causerie_Class::g()->generate( $causerie->id );
 
 		ob_start();
-		Causerie_Add_Class::g()->display();
+		Causerie_Page_Class::g()->display_edit_form();
+		$form_causerie_view = ob_get_clean();
+
+		ob_start();
+		Causerie_Page_Class::g()->display_start_table();
+		$start_table_view = ob_get_clean();
+
 		wp_send_json_success( array(
-			'namespace'        => 'digirisk',
-			'module'           => 'causerie',
-			'callback_success' => 'editedCauserieSuccess',
-			'view'             => ob_get_clean(),
+			'namespace'          => 'digirisk',
+			'module'             => 'causerie',
+			'callback_success'   => 'editedCauserieSuccess',
+			'form_causerie_view' => $form_causerie_view,
+			'start_table_view'   => $start_table_view,
 		) );
 	}
 
 	/**
 	 * Charges un causerie ainsi que ses images et la liste des commentaires.
 	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
+	 * @since 6.6.0
+	 * @version 6.6.0
 	 *
 	 * @return void
 	 */
-	public function ajax_load_causerie() {
-		check_ajax_referer( 'ajax_load_causerie' );
+	public function ajax_load_edit_causerie() {
+		check_ajax_referer( 'ajax_load_edit_causerie' );
 
 		if ( 0 === (int) $_POST['id'] ) {
 			wp_send_json_error();
@@ -108,7 +104,7 @@ class Causerie_Action {
 		), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'add/item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
 			'causerie' => $causerie,
 		) );
 

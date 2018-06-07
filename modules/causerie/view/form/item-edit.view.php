@@ -2,11 +2,11 @@
 /**
  * Edition d'une causerie
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.5.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -24,14 +24,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td data-title="Ref." class="padding">
 		<span>
-			<strong><?php echo esc_html( $causerie->modified_unique_identifier ); ?></strong>
+			<strong><?php echo esc_html( $causerie->unique_identifier ); ?></strong>
 		</span>
 	</td>
 	<td>
 		<?php do_shortcode( '[wpeo_upload id="' . $causerie->id . '" model_name="/digi/' . $causerie->get_class() . '" single="false" field_name="image" ]' ); ?>
 	</td>
 	<td>
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="' . ( ( 0 !== $causerie->id ) ? 'view' : 'edit' ) . '" category_risk_id="' . $causerie->risk_category->id . '" preset="0"]' ); ?>
+		<?php
+		do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="' . ( ( 0 !== $causerie->id ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( ( $causerie->risk_category != null ) ? $causerie->risk_category->id : 0 ) . '" preset="0"]' );
+		?>
 	</td>
 	<td class="wpeo-grid grid-1">
 		<div>

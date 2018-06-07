@@ -56,7 +56,7 @@ if ( ! window.eoxiaJS.modal  ) {
 
 	window.eoxiaJS.modal.event = function() {
 		jQuery( document ).on( 'keyup', window.eoxiaJS.modal.keyup );
-		jQuery( document ).on( 'click', '.wpeo-modal-event', window.eoxiaJS.modal.open );
+		jQuery( document ).on( 'click', '.wpeo-modal-event:not(.disabled)', window.eoxiaJS.modal.open );
 		jQuery( document ).on( 'click', '.wpeo-modal .modal-container', window.eoxiaJS.modal.stopPropagation );
 		jQuery( document ).on( 'click', '.wpeo-modal .modal-close', window.eoxiaJS.modal.close );
 		jQuery( document ).on( 'click', 'body', window.eoxiaJS.modal.close );
