@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span><?php esc_html_e( 'Réalisée pour la dernière fois le', 'digirisk' ); ?></span>
 			<span>
 				<?php if ( $main_causerie->number_time_realized > 0 ) : ?>
-					<?php esc_html( $main_causerie->last_date_realized['date_human_readable'] ); ?>
+					<?php echo esc_html( $main_causerie->last_date_realized['date_input']['fr_FR']['date'] ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'NA', 'digirisk' ); ?>
 				<?php endif; ?>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</li>
 </ul>
 
-<h3><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h3>
+<h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>
 
 <table class="table causerie">
 	<thead>

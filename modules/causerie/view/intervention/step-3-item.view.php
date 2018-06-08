@@ -46,6 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="button light w50 delete action-delete"
+			data-id="<?php echo esc_attr( $final_causerie->id ); ?>"
 			data-user-id="<?php echo esc_attr( $participant['user_id'] ); ?>"
 			data-action="<?php echo esc_attr( 'causerie_delete_participant' ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_delete_participant' ) ); ?>"

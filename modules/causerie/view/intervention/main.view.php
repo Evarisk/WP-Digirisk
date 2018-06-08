@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="step">
 			<ul class="step-list">
-				<li class="step <?php echo ( 1 === $final_causerie->current_step ) ? 'active' : ''; ?>"><span class="title"><?php esc_html_e( 'Signature du formateur', 'digirisk' ); ?></span></li>
-				<li class="step <?php echo ( 2 === $final_causerie->current_step ) ? 'active' : ''; ?>" data-width="50"><span class="title"><?php esc_html_e( 'Lecture de la causerie', 'digirisk' ); ?></span></li>
+				<li class="step <?php echo ( in_array( $final_causerie->current_step, array( 1, 2, 3 ) ) ) ? 'active' : ''; ?>"><span class="title"><?php esc_html_e( 'Signature du formateur', 'digirisk' ); ?></span></li>
+				<li class="step <?php echo ( in_array( $final_causerie->current_step, array( 2, 3 ) ) ) ? 'active' : ''; ?>" data-width="50"><span class="title"><?php esc_html_e( 'Lecture de la causerie', 'digirisk' ); ?></span></li>
 				<li class="step <?php echo ( 3 === $final_causerie->current_step ) ? 'active' : ''; ?>" data-width="100"><span class="title"><?php esc_html_e( 'Enregistrement des participants', 'digirisk' ); ?></span></li>
 			</ul>
 
@@ -35,20 +35,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<div class="main-content step-<?php echo esc_attr( $final_causerie->current_step ); ?>">
-			<h3>
+			<h2>
 				<strong><?php echo esc_html( $final_causerie->unique_identifier . ' ' . $final_causerie->second_identifier ); ?></strong>
 				<span><?php echo esc_html( $final_causerie->title ); ?></span>
 				<span><?php echo esc_html( $final_causerie->risk_category->name ); ?></span>
-			</h3>
+			</h2>
 
 			<p><?php echo esc_html( $final_causerie->content ); ?></p>
 
 			<div class="ajax-content">
 				<?php
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-' . $final_causerie->current_step, array(
-					'main_causerie'  => $main_causerie,
-					'final_causerie' => $final_causerie,
-				) );
+				if ( $final_causerie->current_step < 4 ) :
+					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-' . $final_causerie->current_step, array(
+						'main_causerie'  => $main_causerie,
+						'final_causerie' => $final_causerie,
+						'all_signed'     => $all_signed,
+					) );
+				else :
+					?>
+					<h3><?php esc_html_e( 'Cette causerie a déjà était faites.', 'digirisk' ); ?></h3>
+					<?php
+				endif;
 				?>
 			</div>
 		</div>

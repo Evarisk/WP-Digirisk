@@ -65,6 +65,7 @@ class Causerie_Intervention_Page_Action {
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
 					'final_causerie' => $causerie,
+					'all_signed'     => false,
 				) );
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:

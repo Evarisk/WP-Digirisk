@@ -28,6 +28,10 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 window.eoxiaJS.digirisk.causerie.event = function() {
 	jQuery( document ).on ('change', '.search input, .digi-search', window.eoxiaJS.digirisk.causerie.updateModalTitle );
 	jQuery( document ).on( 'click', '.modal-signature .button.blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
+	jQuery( document ).on( 'click', '.causerie-wrap a.disabled', function( event ) {
+		event.preventDefault();
+		return false;
+	} );
 };
 
 window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
@@ -46,7 +50,6 @@ window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
 	jQuery( '.modal-signature' ).find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
 			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-			console.log('here');
 			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'disabled' );
 		}
 	} );
@@ -128,6 +131,12 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
 		percent = 100;
 	}
 
+	if ( jQuery( '.main-content' ).hasClass( 'step-1' ) ) {
+		jQuery( '.main-content' ).removeClass( 'step-1' ).addClass( 'step-2' );
+	} else if ( jQuery( '.main-content' ).hasClass( 'step-2' ) ) {
+		jQuery( '.main-content' ).removeClass( 'step-2' ).addClass( 'step-3' );
+	}
+
 	jQuery( '.causerie-wrap .bar .loader' ).css( 'width',  percent + '%' );
 	jQuery( '.causerie-wrap .bar .loader' ).attr( 'data-width', percent );
 	jQuery( '.causerie-wrap .step-list .step[data-width="' + percent + '"]' ).addClass( 'active' );
@@ -137,11 +146,36 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
 
 window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response ) {
 	jQuery( '.ajax-content' ).html( response.data.view );
+
+	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
+
 	window.eoxiaJS.refresh();
+};
+
+window.eoxiaJS.digirisk.causerie.checkParticipantsSignature = function() {
+	var allSignature = true
+
+	if ( '.step-3 input[name="signature_data"]'.length ) {
+		jQuery( '.step-3 input[name="signature_data"]' ).each( function() {
+			if ( ! jQuery( this ).val() ) {
+				allSignature = false;
+				return false;
+			}
+		} );
+	}
+
+	if ( allSignature ) {
+		jQuery( '.step-3 a.disabled' ).removeClass( 'disabled tooltip hover' );
+	} else {
+		jQuery( '.step-3 a.disabled' ).addClass( 'disabled tooltip hover' );
+	}
 };
 
 window.eoxiaJS.digirisk.causerie.savedSignature = function( element, response ) {
 	element.closest( 'tr' ).replaceWith( response.data.view );
+
+	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
+
 	window.eoxiaJS.digirisk.causerie.refresh();
 };
 

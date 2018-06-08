@@ -78,10 +78,15 @@ class Search_Class extends \eoxia\Singleton_Util {
 
 				$list = array_unique( $list );
 			} else {
-				$list = get_users( array(
+				$data = array(
 					'fields' => 'ID',
 					'exclude' => array( 1 ),
-				) );
+				);
+
+				if ( ! empty( $data['exclude'] ) ) {
+					$data['exclude'] = explode( ',', $data['exclude'] );
+				}
+				$list = get_users( );
 			}
 
 			// Force le tableau de integer.

@@ -56,6 +56,7 @@ class Causerie_Intervention_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
 			'final_causerie' => $final_causerie,
+			'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
 		) );
 
 		wp_send_json_success( array(
@@ -106,6 +107,7 @@ class Causerie_Intervention_Action {
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
 			'participant'    => $current_participant,
 			'final_causerie' => $final_causerie,
+			'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
 		) );
 
 		wp_send_json_success( array(
@@ -119,16 +121,39 @@ class Causerie_Intervention_Action {
 	public function callback_causerie_delete_participant() {
 		check_ajax_referer( 'causerie_delete_participant' );
 
+		$id      = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$user_id = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-		if ( empty( $user_id ) ) {
+		if ( empty( $user_id ) || empty( $id ) ) {
 			wp_send_json_error();
 		}
+
+		$causerie_intervention = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+
+		if ( empty( $causerie_intervention ) ) {
+			wp_send_json_error();
+		}
+
+		if ( ! empty( $causerie_intervention->participants ) ) {
+			foreach ( $causerie_intervention->participants as $key => $participant ) {
+				if ( $user_id === $participant['user_id'] ) {
+					unset( $causerie_intervention->participants[ $key ] );
+				}
+			}
+		}
+
+		Causerie_Intervention_Class::g()->update( $causerie_intervention );
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
+			'final_causerie' => $causerie_intervention,
+		) );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'causerie',
-			'callback_success' => 'deletedPartipant',
+			'callback_success' => 'savedParticipant',
+			'view'             => ob_get_clean(),
 		) );
 	}
 }

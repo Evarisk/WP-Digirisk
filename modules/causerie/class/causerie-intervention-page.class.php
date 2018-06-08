@@ -25,10 +25,27 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->parent_id ), true );
 
+
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
 			'final_causerie' => $final_causerie,
 			'main_causerie'  => $main_causerie,
+			'all_signed'     => $this->check_all_signed( $final_causerie ),
 		) );
+	}
+
+	public function check_all_signed( $causerie ) {
+		$all_signed = true;
+
+		if ( ! empty( $causerie->participants ) ) {
+			foreach ( $causerie->participants as $participant ) {
+				if ( empty( $participant['signature_id'] ) ) {
+					$all_signed = false;
+					break;
+				}
+			}
+		}
+
+		return $all_signed;
 	}
 
 	public function step_former( $causerie, $former_id, $signature_data ) {

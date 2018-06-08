@@ -12,7 +12,7 @@
 	}
 }
 
-.wrap-causerie {
+.wrap-causerie, .causerie-wrap {
 	table.closed-causerie, table.start-causerie, table.final-causerie, table.add-causerie {
 		td {
 			height: auto;
@@ -22,6 +22,32 @@
 		}
 		tr {
 			min-height: 50px;
+		}
+	}
+
+	.step-1 {
+		ul {
+			margin-left: 20px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			display: flex;
+			list-style: disc;
+			li {
+				width: 20%;
+			}
+		}
+	}
+
+	.main-content {
+		margin-top: 10px;
+	}
+
+	.step-list {
+		margin-top: 20px;
+		.step {
+			.title {
+				height: 50px;
+			}
 		}
 	}
 }

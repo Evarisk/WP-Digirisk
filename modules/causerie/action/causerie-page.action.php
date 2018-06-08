@@ -48,7 +48,7 @@ class Causerie_Page_Action {
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->duplicate( $id );
 
-		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->id . '&step=1' ) );
+		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->id ) );
 	}
 
 }

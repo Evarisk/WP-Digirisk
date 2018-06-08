@@ -4150,14 +4150,37 @@
 .digirisk-wrap .signature {
   max-width: 300px; }
 
-.wrap-causerie table.closed-causerie td, .wrap-causerie table.start-causerie td, .wrap-causerie table.final-causerie td, .wrap-causerie table.add-causerie td {
+.wrap-causerie table.closed-causerie td, .wrap-causerie table.start-causerie td, .wrap-causerie table.final-causerie td, .wrap-causerie table.add-causerie td, .causerie-wrap table.closed-causerie td, .causerie-wrap table.start-causerie td, .causerie-wrap table.final-causerie td, .causerie-wrap table.add-causerie td {
   height: auto; }
 
-.wrap-causerie table.closed-causerie th, .wrap-causerie table.start-causerie th, .wrap-causerie table.final-causerie th, .wrap-causerie table.add-causerie th {
+.wrap-causerie table.closed-causerie th, .wrap-causerie table.start-causerie th, .wrap-causerie table.final-causerie th, .wrap-causerie table.add-causerie th, .causerie-wrap table.closed-causerie th, .causerie-wrap table.start-causerie th, .causerie-wrap table.final-causerie th, .causerie-wrap table.add-causerie th {
   height: 50px; }
 
-.wrap-causerie table.closed-causerie tr, .wrap-causerie table.start-causerie tr, .wrap-causerie table.final-causerie tr, .wrap-causerie table.add-causerie tr {
+.wrap-causerie table.closed-causerie tr, .wrap-causerie table.start-causerie tr, .wrap-causerie table.final-causerie tr, .wrap-causerie table.add-causerie tr, .causerie-wrap table.closed-causerie tr, .causerie-wrap table.start-causerie tr, .causerie-wrap table.final-causerie tr, .causerie-wrap table.add-causerie tr {
   min-height: 50px; }
+
+.wrap-causerie .step-1 ul, .causerie-wrap .step-1 ul {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: disc; }
+
+.wrap-causerie .step-1 ul li, .causerie-wrap .step-1 ul li {
+  width: 20%; }
+
+.wrap-causerie .main-content, .causerie-wrap .main-content {
+  margin-top: 10px; }
+
+.wrap-causerie .step-list, .causerie-wrap .step-list {
+  margin-top: 20px; }
+
+.wrap-causerie .step-list .step .title, .causerie-wrap .step-list .step .title {
+  height: 50px; }
 
 /**
  * Main tab

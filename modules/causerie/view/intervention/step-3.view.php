@@ -44,6 +44,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <a class="button grey" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Finir plus tard', 'digirisk' ); ?></a>
 
-<a href="<?php echo esc_attr( wp_nonce_url( admin_url( 'admin-post.php?action=next_step_causerie&id=' . $final_causerie->id ), 'next_step_causerie' ) ); ?>" class="button blue float right">
+<a href="<?php echo esc_attr( wp_nonce_url( admin_url( 'admin-post.php?action=next_step_causerie&id=' . $final_causerie->id ), 'next_step_causerie' ) ); ?>"
+	class="<?php echo ( ! $all_signed ) ? esc_attr( 'disabled tooltip hover' ) : ''; ?> button blue float right"
+	aria-label="<?php esc_attr_e( 'Veuillez ajouter des participants avant de cloturer', 'digirisk' ); ?>">
 	<span><?php esc_html_e( 'Cloturer la causerie', 'digirisk' ); ?></span>
 </a>
