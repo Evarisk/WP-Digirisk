@@ -1,12 +1,12 @@
 <?php
 /**
- * La classe gérant les feuilles de causeries
+ * La classe gérant les feuilles de causeries "intervention"
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Causerie.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * La classe gérant les feuilles de causeries
+ * La classe gérant les feuilles de causeries "intervention"
  */
 class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 

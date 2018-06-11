@@ -2,11 +2,11 @@
 /**
  * Définition des champs d'un causerie.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.5.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.5.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;

@@ -2,11 +2,11 @@
 /**
  * Gestion des actions des causeries pour la lecture.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -118,6 +118,14 @@ class Causerie_Intervention_Action {
 		) );
 	}
 
+	/**
+	 * Supprimes un participant
+	 *
+	 * @since 6.6.0
+	 * @version 6.6.0
+	 *
+	 * @return void
+	 */
 	public function callback_causerie_delete_participant() {
 		check_ajax_referer( 'causerie_delete_participant' );
 

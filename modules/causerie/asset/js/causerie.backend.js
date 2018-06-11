@@ -1,17 +1,39 @@
 /**
  * Initialise l'objet "causerie" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.6.0
+ * @since   6.6.0
  * @version 6.6.0
  */
 window.eoxiaJS.digirisk.causerie = {};
+
+/**
+ * Gestion des signatures.
+ *
+ * @type {HTMLCanvasElement}
+ */
 window.eoxiaJS.digirisk.causerie.canvas;
 
+/**
+ * Initialise les évènements.
+ *
+ * @since   6.6.0
+ * @version 6.6.0
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.causerie.init = function() {
 	window.eoxiaJS.digirisk.causerie.event();
 	window.eoxiaJS.digirisk.causerie.refresh();
 };
 
+/**
+ * Initialise le canvas, ainsi que owlCarousel.
+ *
+ * @since   6.6.0
+ * @version 6.6.0
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.causerie.refresh = function() {
 	window.eoxiaJS.digirisk.causerie.canvas = document.querySelectorAll("canvas");
 	for( var i = 0; i < window.eoxiaJS.digirisk.causerie.canvas.length; i++ ) {
@@ -20,17 +42,37 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 		} );
 	}
 
-	jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( {
-		'items': 1
-	} );
+	jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( { 'items': 1 } );
 };
 
 window.eoxiaJS.digirisk.causerie.event = function() {
-	jQuery( document ).on ('change', '.search input, .digi-search', window.eoxiaJS.digirisk.causerie.updateModalTitle );
+	// Gestion des onglets.
+	jQuery( document ).on( 'click', '.wrap-causerie .tab-element', window.eoxiaJS.digirisk.causerie.loadTab );
+
+	// Gestion du titre de la modal.
+	jQuery( document ).on( 'change', '.search input, .digi-search', window.eoxiaJS.digirisk.causerie.updateModalTitle );
 	jQuery( document ).on( 'click', '.modal-signature .button.blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
+
 	jQuery( document ).on( 'click', '.causerie-wrap a.disabled', function( event ) {
 		event.preventDefault();
 		return false;
+	} );
+};
+
+window.eoxiaJS.digirisk.causerie.loadTab = function( event ) {
+	var element = jQuery( this );
+	var data = {};
+	data._wpnonce = jQuery( '.wrap-causerie .tab' ).data( 'nonce' );
+	data.action   = 'causerie_load_tab';
+	data.tab      = element.data( 'tab' );
+
+	element.addClass( 'loading' );
+
+	jQuery.post( ajaxurl, data, function( response ) {
+		jQuery( '.wrap-causerie .ajax-content' ).html( response.data.view );
+
+		jQuery( '.wrap-causerie .tab-element.active' ).removeClass( 'active' );
+		element.addClass( 'active' ).removeClass( 'loading' );
 	} );
 };
 
@@ -76,8 +118,7 @@ window.eoxiaJS.digirisk.causerie.applySignature = function( element ) {
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.editedCauserieSuccess = function( triggeredElement, response ) {
-	triggeredElement.closest( 'table.add-causerie' ).replaceWith( response.data.form_causerie_view );
-	jQuery( '#digi-start-causerie' ).html( response.data.start_table_view );
+	triggeredElement.closest( 'table.add-causerie' ).replaceWith( response.data.view );
 };
 
 /**

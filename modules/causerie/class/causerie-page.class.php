@@ -2,11 +2,11 @@
 /**
  * La classe gérant la page principale des causeries.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Evarisk.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -62,19 +62,23 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Affichage onglet "Dashboard".
 	 *
+	 * Récupères toutes les causeries "intervention" et les envoies à la vu principale du "dashboard".
+	 *
 	 * @since 6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
 	 */
 	public function display_dashboard() {
-		$final_causeries = Causerie_Intervention_Class::g()->get( array(
+		$causeries_intervention = Causerie_Intervention_Class::g()->get( array(
 			'meta_key'   => '_wpdigi_current_step',
 			'meta_value' => 4,
-		) );
+		), false, true );
+
+		$causeries_intervention = $this->get_documents( $causeries_intervention );
 
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/main', array(
-			'final_causeries' => $final_causeries,
+			'causeries_intervention' => $causeries_intervention,
 		) );
 	}
 
@@ -86,7 +90,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 */
-	public function display_start_table() {
+	public function display_start() {
 		$causeries              = Causerie_Class::g()->get();
 		$causeries_intervention = Causerie_Intervention_Class::g()->get( array(
 			'meta_key'     => '_wpdigi_current_step',
@@ -108,8 +112,9 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 */
-	public function display_edit_form() {
+	public function display_form() {
 		$causeries = Causerie_Class::g()->get();
+		$causeries = $this->get_documents( $causeries );
 
 		$causerie_schema = Causerie_Class::g()->get( array( 'schema' => true ), true );
 
@@ -117,6 +122,39 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 			'causeries'       => $causeries,
 			'causerie_schema' => $causerie_schema,
 		) );
+	}
+
+	/**
+	 * Récupères le document lié à la causerie.
+	 *
+	 * @since   6.6.0
+	 * @version 6.6.0
+	 *
+	 * @param  Causerie_Intervention_Model[]|Causerie_Model[] $causeries Tableau de causeries.
+	 *
+	 * @return Causerie_Intervention_Model[]|Causerie_Model[] $causeries Tableau de causeries avec leurs documents.
+	 */
+	private function get_documents( $causeries ) {
+		if ( ! empty( $causeries ) ) {
+			foreach ( $causeries as &$causerie ) {
+				$class = '\digi\Sheet_Causerie_Class';
+
+				if ( Causerie_Intervention_Class::g()->get_type() === $causerie->type ) {
+					$class = '\digi\Sheet_Causerie_Intervention_Class';
+				}
+
+				$causerie->document = $class::g()->get( array(
+					'post_parent'    => $causerie->id,
+					'posts_per_page' => 1,
+				), true );
+
+				if ( ! empty( $causerie->document ) ) {
+					$causerie->document->path = Document_Class::g()->get_document_path( $causerie->document, $causerie->type );
+				}
+			}
+		}
+
+		return $causeries;
 	}
 }
 

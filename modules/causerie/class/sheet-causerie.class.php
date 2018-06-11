@@ -2,11 +2,11 @@
 /**
  * La classe gérant les feuilles de causeries
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Causerie.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -106,7 +106,10 @@ class Sheet_Causerie_Class extends Document_Class {
 	 * @param integer $causerie_id L'ID de la causerie.
 	 */
 	public function generate( $causerie_id ) {
-		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_id ), true );
+		$causerie                = Causerie_Class::g()->get( array( 'id' => $causerie_id ), true );
+		$causerie->risk_category = Risk_Category_Class::g()->get( array(
+			'id' => max( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ),
+		), true );
 
 		$sheet_details = array(
 			'cleCauserie'         => $causerie->unique_key,

@@ -2,11 +2,11 @@
 /**
  * Affichage d'une causerie dans l'onglet "Ajouter une causerie".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Evarisk.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -39,13 +39,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td>
 		<div class="action grid-layout w3">
-			<?php if ( ! empty( $causerie->document ) && ! empty( Document_Class::g()->get_document_path( $causerie->document ) ) ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $causerie->document ) ); ?>">
+			<?php if ( ! empty( $causerie->document ) && ! empty( $causerie->document->path ) ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( $causerie->document->path ); ?>">
 					<i class="fa fa-download icon" aria-hidden="true"></i>
-					<!-- <span><?php esc_html_e( 'Fiche de groupement', 'digirisk' ); ?></span> -->
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ODT Corrompu', 'digirisk' ); ?>">
 					<i class="fa fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>

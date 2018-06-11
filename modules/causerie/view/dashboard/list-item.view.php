@@ -18,12 +18,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr class="item">
 	<td class="w50 padding">
-		<?php echo esc_html( $causerie->unique_identifier ); ?>
-		<?php
-		if ( ! empty( $causerie->second_identifier ) ) :
-			echo esc_html( ' - ' . $causerie->second_identifier );
-		endif;
-		?>
+		<strong>
+			<span><?php echo esc_html( $causerie->unique_identifier ); ?></span>
+			<?php
+			if ( ! empty( $causerie->second_identifier ) ) :
+				?>
+				<span><?php echo esc_html( ' - ' . $causerie->second_identifier ); ?></span>
+				<?php
+			endif;
+			?>
+		</strong>
 	</td>
 
 	<td data-title="Photo" class="padding">
@@ -32,10 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td data-title="Catégorie" class="padding">
 		<?php
-		if ( isset( $causerie->risk_category ) ) :
-			do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="view" category_risk_id="' . $causerie->risk_category->id . '"]' );
-		else :
-			?>C<?php
+		if ( ! empty( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ) ) :
+			do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="view" category_risk_id="' . max( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ) . '"]' );
 		endif;
 		?>
 	</td>
@@ -93,28 +95,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<div class="wpeo-modal-event button grey radius w30"
-			data-parent="item"
-			data-target="modal-participants">
+		<div class="wpeo-modal-event button grey radius w30 tooltip hover"
+			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
+			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
+			data-id="<?php echo esc_attr( $causerie->id ); ?>"
+			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_modal_participants' ) ); ?>"
+			data-action="load_modal_participants"
+			data-class="digirisk-wrap wpeo-wrap">
 			<i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-users"></span>
 		</div>
-		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/modal-participants', array(
-			'causerie' => $causerie,
-			'title'    => $causerie->unique_identifier . ' - ' . $causerie->title . ': ' . __( 'Les participants', 'digirisk' ),
-		) );
-		?>
 	</td>
 
 	<td>
 		<div class="action grid-layout w1">
-			<?php if ( ! empty( $causerie->document_intervention_causerie ) && ! empty( Document_Class::g()->get_document_path( $causerie->document_intervention_causerie ) ) ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $causerie->document_intervention_causerie ) ); ?>">
+			<?php if ( ! empty( $causerie->document ) && ! empty( $causerie->document->path ) ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( $causerie->document->path ); ?>">
 					<i class="fa fa-download icon" aria-hidden="true"></i>
-					<!-- <span><?php esc_html_e( 'Fiche de groupement', 'digirisk' ); ?></span> -->
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ODT Corrompu', 'digirisk' ); ?>">
 					<i class="fa fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>

@@ -300,25 +300,27 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Renvoies le chemin HTTP vers l'ODT.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 6.6.0
 	 *
 	 * @param  Object $element Le modèle (objet) ODT.
+	 * @param  string $type    Le type de l'élément parent.
 	 *
 	 * @return string          Le chemin HTTP vers l'ODT.
 	 */
-	public function get_document_path( $element ) {
+	public function get_document_path( $element, $type ) {
 		$url = '';
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
-			$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
-			$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
-			$url     = $baseurl . "/";
+			$basedir = $this->get_digirisk_dir_path( 'basedir' );
+			$baseurl = $this->get_digirisk_dir_path( 'baseurl' );
+			$url     = $baseurl . '/';
 
 			if ( ! empty( $element->parent_id ) && ! empty( $element->mime_type ) ) {
-				$society = Society_Class::g()->show_by_type( $element->parent_id );
-				$url .= "/" . $society->type . "/" . $society->id . "/";
+				$url .= '/' . $type . '/' . $element->parent_id . '/';
 			}
+
 			$url .= $element->title;
+
 			if ( ! empty( $element->mime_type ) ) {
 				$url .= $this->mime_type_link[ $element->mime_type ];
 			}

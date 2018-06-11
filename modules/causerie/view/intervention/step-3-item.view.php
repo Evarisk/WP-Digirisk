@@ -2,20 +2,18 @@
 /**
  * Affiches la liste des participants de la causerie.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
-
-?>
+} ?>
 
 <tr class="item">
 	<td class="padding tooltip red former-tooltip" aria-label="<?php esc_attr_e( 'Veuillez renseigner le participant', 'digirisk' ); ?>">

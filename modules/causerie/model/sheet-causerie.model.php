@@ -2,11 +2,11 @@
 /**
  * Le modèle définissant les données d'une fiche de causerie.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Causerie.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;

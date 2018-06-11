@@ -23,22 +23,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return Risk_Model L'objet avec tous les éléments ajoutés par cette méthode.
  */
 function get_full_risk( $data ) {
-	$args_category_risk = array( 'schema' => true );
 	$args_evaluation_method = array( 'schema' => true );
 	$args_evaluation = array( 'schema' => true );
 	$args_risk_evaluation_comment = array( 'schema' => true );
 
 	if ( ! empty( $data->id ) ) {
-		if ( ! empty( $data->taxonomy['digi-category-risk'] ) ) {
-			$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
-		}
 		$args_evaluation = array( 'comment__in' => array( $data->current_evaluation_id ) );
 		$args_risk_evaluation_comment = array( 'post_id' => $data->id );
 		$args_evaluation_method = array( 'post_id' => $data->id );
 	}
-
-	// Récupères la catégorie du danger.
-	$data->risk_category = Risk_Category_Class::g()->get( $args_category_risk, true );
 
 	// Récupères la méthode d'évaluation.
 	$evaluation_methods = Evaluation_Method_Class::g()->get( $args_evaluation_method );
@@ -60,6 +53,21 @@ function get_full_risk( $data ) {
 	if ( ! isset( $data->modified_unique_identifier ) ) {
 		$data->modified_unique_identifier = '';
 	}
+
+	return $data;
+}
+
+function get_risk_category( $data ) {
+	$args_category_risk = array( 'schema' => true );
+
+	if ( ! empty( $data->id ) ) {
+		if ( ! empty( $data->taxonomy['digi-category-risk'] ) ) {
+			$args_category_risk = array( 'include' => $data->taxonomy['digi-category-risk'] );
+		}
+	}
+
+	// Récupères la catégorie du danger.
+	$data->risk_category = Risk_Category_Class::g()->get( $args_category_risk, true );
 
 	return $data;
 }

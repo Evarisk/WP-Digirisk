@@ -28,6 +28,20 @@ class Causerie_Intervention_Page_Action {
 		add_action( 'admin_post_next_step_causerie', array( $this, 'ajax_next_step_causerie' ) );
 	}
 
+	/**
+	 * Gestion des étapes lors de l'intervention.
+	 *
+	 * Passes à la vue suivante (étape suivante) selon l'étape actuel.
+	 *
+	 * Si c'est l'étape du formateur, la causerie passe à l'étape de la présentation.
+	 * Si l'étape est la présentation, la causerie passe à l'étape des participants.
+	 * Si l'étape est les participants, la causerie passe à l'étape finalisée.
+	 *
+	 * @since   6.6.0
+	 * @version 6.6.0
+	 *
+	 * @return void
+	 */
 	public function ajax_next_step_causerie() {
 		wp_verify_nonce( 'next_step_causerie' );
 

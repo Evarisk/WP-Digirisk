@@ -66,19 +66,12 @@ class Causerie_Action {
 		Sheet_Causerie_Class::g()->generate( $causerie->id );
 
 		ob_start();
-		Causerie_Page_Class::g()->display_edit_form();
-		$form_causerie_view = ob_get_clean();
-
-		ob_start();
-		Causerie_Page_Class::g()->display_start_table();
-		$start_table_view = ob_get_clean();
-
+		Causerie_Page_Class::g()->display_form();
 		wp_send_json_success( array(
-			'namespace'          => 'digirisk',
-			'module'             => 'causerie',
-			'callback_success'   => 'editedCauserieSuccess',
-			'form_causerie_view' => $form_causerie_view,
-			'start_table_view'   => $start_table_view,
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
+			'callback_success' => 'editedCauserieSuccess',
+			'view'             => ob_get_clean(),
 		) );
 	}
 
@@ -101,6 +94,10 @@ class Causerie_Action {
 
 		$causerie = Causerie_Class::g()->get( array(
 			'id' => $id,
+		), true );
+
+		$causerie->risk_category = Risk_Category_Class::g()->get( array(
+			'id' => max( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ),
 		), true );
 
 		ob_start();

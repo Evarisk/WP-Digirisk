@@ -77,18 +77,18 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	protected $before_put_function = array( '\digi\get_identifier' );
 
 	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
+	 * Les callback après avoir récupérer l'objet en base de donnée.
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie', '\digi\get_user_renderer' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie' );
 
 	/**
 	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
 	 *
 	 * @var array
 	 */
-	protected $after_put_function = array( '\digi\get_full_causerie', '\digi\get_user_renderer' );
+	protected $after_put_function = array( '\digi\get_full_causerie' );
 
 	/**
 	 * Le nom pour le resgister post type
@@ -103,8 +103,8 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * @since 6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param  [type] $causerie_id [description]
-	 * @return [type]              [description]
+	 * @param  integer $causerie_id        L'ID de la causerie
+	 * @return Causerie_Intervention_Model La causerie "intervention" créé dans cette méthode.
 	 */
 	public function duplicate( $causerie_id ) {
 		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_id ), true );
@@ -181,6 +181,8 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * @param [type]  $user_id        [description]
 	 * @param [type]  $signature_data [description]
 	 * @param boolean $is_former      [description]
+	 *
+	 * @todo: FIXME Commentaire
 	 */
 	public function add_participant( $final_causerie, $user_id, $is_former = false ) {
 
@@ -205,6 +207,8 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * @param [type]  $user_id        [description]
 	 * @param [type]  $signature_data [description]
 	 * @param boolean $is_former      [description]
+	 *
+	 * @todo: FIXME Commentaire
 	 */
 	public function add_signature( $final_causerie, $user_id, $signature_data, $is_former = false ) {
 		$upload_dir = wp_upload_dir();

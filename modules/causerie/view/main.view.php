@@ -1,12 +1,12 @@
 <?php
 /**
- * Gestion des onglets des causeries
+ * Affichage principale de la page "Causeries".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -15,29 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap wrap-causerie">
-	<h1><?php esc_html_e( 'Causeries', 'digirisk' ); ?></h1>
+<div class="wrap wrap-causerie digirisk-wrap">
+	<h2><?php esc_html_e( 'Causeries', 'digirisk' ); ?></h2>
 
-	<div class="digi-tools-main-container">
-		<h2 class="nav-tab-wrapper">
-			<a class="nav-tab nav-tab-active" href="#" data-id="digi-dashboard" ><?php esc_html_e( 'Dashboard', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-start-causerie" ><?php esc_html_e( 'Démarrer une causerie', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-add-causerie" ><?php esc_html_e( 'Ajouter une causerie', 'digirisk' ); ?></a>
-		</h2>
+		<ul class="tab" data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_load_tab' ) ); ?>">
+			<li class="tab-element active" data-tab="dashboard"><?php esc_html_e( 'Dashboard', 'digirisk' ); ?></li>
+			<li class="tab-element" data-tab="start"><?php esc_html_e( 'Démarrer une causerie', 'digirisk' ); ?></li>
+			<li class="tab-element" data-tab="form"><?php esc_html_e( 'Ajouter une causerie', 'digirisk' ); ?></li>
+		</ul>
 
-		<div class="digirisk-wrap">
-
-			<div id="digi-dashboard" class="tab-content">
-				<?php Causerie_Page_Class::g()->display_dashboard(); ?>
-			</div>
-
-			<div id="digi-start-causerie" class="tab-content hidden">
-				<?php Causerie_Page_Class::g()->display_start_table(); ?>
-			</div>
-
-			<div id="digi-add-causerie" class="tab-content hidden">
-				<?php Causerie_Page_Class::g()->display_edit_form(); ?>
-			</div>
-		</div>
+	<div class="ajax-content main-content">
+		<?php Causerie_Page_Class::g()->display_dashboard(); ?>
 	</div>
 </div>

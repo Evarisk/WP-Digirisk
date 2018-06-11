@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td>
 		<?php
-		do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="' . ( ( 0 !== $causerie->id ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( ( $causerie->risk_category != null ) ? $causerie->risk_category->id : 0 ) . '" preset="0"]' );
+		do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="' . ( ( 0 !== $causerie->id ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( isset( $causerie->risk_category ) ? $causerie->risk_category->id : 0 ) . '" preset="0"]' );
 		?>
 	</td>
 	<td class="wpeo-grid grid-1">

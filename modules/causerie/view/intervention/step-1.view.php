@@ -18,16 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <ul>
 	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->number_time_realized ), 'digirisk' ); ?></li>
 	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->number_participants ), 'digirisk' ); ?></li>
-	<li>
+
+	<?php if ( $main_causerie->number_time_realized > 0 ) : ?>
+		<li>
 			<span><?php esc_html_e( 'Réalisée pour la dernière fois le', 'digirisk' ); ?></span>
-			<span>
-				<?php if ( $main_causerie->number_time_realized > 0 ) : ?>
-					<?php echo esc_html( $main_causerie->last_date_realized['date_input']['fr_FR']['date'] ); ?>
-				<?php else : ?>
-					<?php esc_html_e( 'NA', 'digirisk' ); ?>
-				<?php endif; ?>
-			</span>
+			<span><?php echo esc_html( $main_causerie->last_date_realized['date_input']['fr_FR']['date'] ); ?></span>
 		</li>
+	<?php endif; ?>
+
 </ul>
 
 <h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>

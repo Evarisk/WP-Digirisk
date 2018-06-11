@@ -1,12 +1,12 @@
 <?php
 /**
- * Interface "dashboard" des causeries
+ * La page principale des causeries.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -14,18 +14,6 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
-<div class="wpeo-grid grid-2">
-	<div><?php esc_html_e( 'Nombre de risque concernés ce mois-ci', 'digirisk' ); ?></div>
-	<div>
-		<h2><?php esc_html_e( 'Stats d\'avril 2018', 'digirisk' ); ?></h2>
-		<ul>
-			<li><?php esc_html_e( 'Participants:', 'digirisk' ); ?> <strong>40</strong></li>
-			<li><?php esc_html_e( 'Causeries:', 'digirisk' ); ?> <strong>10</strong></li>
-			<li><?php esc_html_e( 'Formateurs:', 'digirisk' ); ?>: <strong>3</strong></li>
-		</ul>
-	</div>
-</div>
 
 <div>
 	<h2><?php esc_html_e( 'Dernières causeries réalisées', 'digirisk' ); ?></h2>
@@ -45,31 +33,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</tr>
 		</thead>
 		<?php
-		if ( ! empty( $final_causeries ) ) :
-			foreach ( $final_causeries as $causerie ) :
+		if ( ! empty( $causeries_intervention ) ) :
+			foreach ( $causeries_intervention as $causerie ) :
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
 					'causerie' => $causerie,
 				) );
 			endforeach;
+		else :
+			?>
+			<tr>
+				<td colspan="5" style="text-align: center;"><?php esc_html_e( 'Aucune causerie réalisée', 'digirisk' ); ?></td>
+			</tr>
+			<?php
 		endif;
 		?>
 	</table>
-
-	<!-- Pagination -->
-	<?php if ( ! empty( $current_page ) && ! empty( $number_page ) ) : ?>
-		<div class="wp-digi-pagination">
-			<?php
-			echo paginate_links( array(
-				'base'               => admin_url( 'admin-ajax.php?action=digirisk-setting&tab=digi-capability&current_page=%_%' ),
-				'format'             => '%#%',
-				'current'            => $current_page,
-				'total'              => $number_page,
-				'before_page_number' => '<span class="screen-reader-text">' . __( 'Page', 'digirisk' ) . ' </span>',
-				'type'               => 'plain',
-				'next_text'          => '<i class="dashicons dashicons-arrow-right"></i>',
-				'prev_text'          => '<i class="dashicons dashicons-arrow-left"></i>',
-			) );
-			?>
-		</div>
-	<?php endif; ?>
 </div>

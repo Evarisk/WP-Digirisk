@@ -1,12 +1,12 @@
 <?php
 /**
- * Définition des champs d'un causerie dans son état "final".
+ * Définition des champs d'un causerie dans son état "intervention".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.5.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition des champs d'un causerie dans son état "final".
+ * Définition des champs d'un causerie dans son état "intervention".
  */
 class Causerie_Intervention_Model extends Causerie_Model {
 

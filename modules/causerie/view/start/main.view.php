@@ -2,11 +2,11 @@
 /**
  * Affiches la liste des causeries
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
  * @copyright 2018 Evarisk.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -36,6 +36,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'causerie' => $causerie,
 				) );
 			endforeach;
+		else :
+			?>
+			<tr>
+				<td colspan="5" style="text-align: center;"><?php esc_html_e( 'Aucune causerie à démarrer', 'digirisk' ); ?></td>
+			</tr>
+			<?php
 		endif;
 		?>
 	</tbody>
@@ -62,6 +68,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'causerie' => $causerie_intervention,
 				) );
 			endforeach;
+		else :
+			?>
+			<tr>
+				<td colspan="5" style="text-align: center;"><?php esc_html_e( 'Aucune causerie en cours', 'digirisk' ); ?></td>
+			</tr>
+			<?php
 		endif;
 		?>
 	</tbody>
