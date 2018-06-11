@@ -190,7 +190,7 @@ if ( ! class_exists( '\eoxia\Post_Class' ) ) {
 		 */
 		public function get( $args = array(
 				'posts_per_page' => -1,
-			), $single = false ) {
+			), $single = false, $helper = true ) {
 
 			$array_posts = array();
 
@@ -251,9 +251,11 @@ if ( ! class_exists( '\eoxia\Post_Class' ) ) {
 
 				$model_name = $this->model_name;
 				$array_posts[ $key ] = new $model_name( $post );
-				$array_posts[ $key ] = $this->get_taxonomies_id( $array_posts[ $key ] );
+				// $array_posts[ $key ] = $this->get_taxonomies_id( $array_posts[ $key ] );
 
-				$array_posts[ $key ] = Model_Util::exec_callback( $array_posts[ $key ], $this->after_get_function );
+				if ( $helper ) {
+					$array_posts[ $key ] = Model_Util::exec_callback( $array_posts[ $key ], $this->after_get_function );
+				}
 			} // End foreach().
 
 			if ( true === $single && 1 === count( $array_posts ) ) {
