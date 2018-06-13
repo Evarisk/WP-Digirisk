@@ -100,7 +100,7 @@ class Sheet_Causerie_Class extends Document_Class {
 	/**
 	 * Cette méthode génère la fiche de causerie
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @param integer $causerie_id L'ID de la causerie.
@@ -108,7 +108,7 @@ class Sheet_Causerie_Class extends Document_Class {
 	public function generate( $causerie_id ) {
 		$causerie                = Causerie_Class::g()->get( array( 'id' => $causerie_id ), true );
 		$causerie->risk_category = Risk_Category_Class::g()->get( array(
-			'id' => max( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ),
+			'id' => end( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ),
 		), true );
 
 		$sheet_details = array(
@@ -142,7 +142,7 @@ class Sheet_Causerie_Class extends Document_Class {
 	/**
 	 * Remplis les données des médias.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @param Causerie_Model $causerie Le modèle de la causerie.
@@ -182,7 +182,7 @@ class Sheet_Causerie_Class extends Document_Class {
 	/**
 	 * Remplis les données des médias.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @param Causerie_Model $causerie Le modèle de la causerie.
@@ -208,7 +208,7 @@ class Sheet_Causerie_Class extends Document_Class {
 				$data['utilisateurs']['value'][] = array(
 					'nomUtilisateur'    => $participant['rendered']['lastname'],
 					'prenomUtilisateur' => $participant['rendered']['firstname'],
-					'dateSignature'     => $participant['signature_date'],
+					'dateSignature'     => \eoxia\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ),
 					'signature'         => $this->set_picture( $participant['signature_id'], 5 ),
 				);
 			}
@@ -220,10 +220,11 @@ class Sheet_Causerie_Class extends Document_Class {
 	/**
 	 * Définie l'image du document
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param integer $id L'ID du média.
+	 * @param integer $id   L'ID du média.
+	 * @param integer $size La taille en CM du media.
 	 *
 	 * @return string|false|array {
 	 *         @type string type   Le type du noeud pour l'ODT.

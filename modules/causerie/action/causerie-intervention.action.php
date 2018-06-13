@@ -32,7 +32,7 @@ class Causerie_Intervention_Action {
 	/**
 	 * Enregistre à participant à la causerie.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -68,9 +68,11 @@ class Causerie_Intervention_Action {
 	}
 
 	/**
-	 * Enregistre la signature d'un utilisateur et lui renvois la vue.
+	 * Enregistres la signature d'un utilisateur.
 	 *
-	 * @since 6.6.0
+	 * Puis renvoie la nouvelle ligne du tableau (HTML).
+	 *
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -78,9 +80,14 @@ class Causerie_Intervention_Action {
 	public function callback_causerie_save_signature() {
 		check_ajax_referer( 'causerie_save_signature' );
 
+		$is_former      = ( isset( $_POST['is_former'] ) && 'true' === $_POST['is_former'] ) ? true : false;
 		$causerie_id    = ! empty( $_POST['causerie_id'] ) ? (int) $_POST['causerie_id'] : 0;
 		$participant_id = ! empty( $_POST['participant_id'] ) ? (int) $_POST['participant_id'] : 0;
 		$signature_data = ! empty( $_POST['signature_data'] ) ? $_POST['signature_data'] : '';
+
+		if ( $is_former ) {
+			$participant_id = ! empty( $_POST['former_id'] ) ? (int) $_POST['former_id'] : 0;
+		}
 
 		if ( empty( $causerie_id ) || empty( $participant_id ) || empty( $signature_data ) ) {
 			wp_send_json_error();
@@ -88,32 +95,38 @@ class Causerie_Intervention_Action {
 
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $causerie_id ), true );
 
-		$final_causerie = Causerie_Intervention_Class::g()->add_signature( $final_causerie, $participant_id, $signature_data );
+		$final_causerie = Causerie_Intervention_Class::g()->add_signature( $final_causerie, $participant_id, $signature_data, $is_former );
 
 		$current_participant = null;
 
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie );
 
-		if ( ! empty( $final_causerie->participants ) ) {
-			foreach ( $final_causerie->participants as $participant ) {
-				if ( $participant_id === $participant['user_id'] ) {
-					$current_participant = $participant;
-					break;
+		if ( ! $is_former ) {
+			if ( ! empty( $final_causerie->participants ) ) {
+				foreach ( $final_causerie->participants as $participant ) {
+					if ( $participant_id === $participant['user_id'] ) {
+						$current_participant = $participant;
+						break;
+					}
 				}
 			}
-		}
 
-		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
-			'participant'    => $current_participant,
-			'final_causerie' => $final_causerie,
-			'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
-		) );
+			ob_start();
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
+				'participant'    => $current_participant,
+				'final_causerie' => $final_causerie,
+				'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
+			) );
+		} else {
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-1-signature', array(
+				'final_causerie' => $final_causerie,
+			) );
+		}
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'causerie',
-			'callback_success' => 'savedSignature',
+			'callback_success' => $is_former ? 'savedFormerSignature' : 'savedSignature',
 			'view'             => ob_get_clean(),
 		) );
 	}
@@ -121,7 +134,7 @@ class Causerie_Intervention_Action {
 	/**
 	 * Supprimes un participant
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void

@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td>
 						<?php
 						if ( ! empty( $participant['signature_date'] ) ) :
-							echo esc_html( $participant['signature_date'] );
+							echo esc_html( \eoxia\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ) );
 						else :
 							esc_html_e( 'N/A', 'digirisk' );
 						endif;

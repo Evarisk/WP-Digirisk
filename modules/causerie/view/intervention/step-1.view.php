@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</thead>
 
 	<tbody>
-		<tr>
+		<tr class="item">
 			<td class="padding tooltip red former-tooltip" aria-label="<?php esc_attr_e( 'Veuillez renseigner le formateur', 'digirisk' ); ?>">
 				<input type="text"
 							data-field="former_id"
@@ -48,15 +48,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 							class="digi-search"
 							value="" />
 				<input type="hidden" name="former_id" value="" />
+				<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->id ); ?>" />
+				<input type="hidden" name="is_former" value="true" />
 			</td>
-			<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du formateur est obligatoire', 'digirisk' ); ?>">
-				<div class="button blue disabled wpeo-modal-event tooltip hover" aria-label="<?php esc_attr_e( 'Veuillez sélectionner un formateur avant de signer', 'digirisk' ); ?>"
-					data-parent="signature"
-					data-target="modal-signature">
-					<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
-				</div>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal' ); ?>
-			</td>
+
+			<?php if ( empty( $final_causerie->former['signature_id'] ) ) : ?>
+				<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du formateur est obligatoire', 'digirisk' ); ?>">
+					<div class="button blue disabled wpeo-modal-event tooltip hover" aria-label="<?php esc_attr_e( 'Veuillez sélectionner un formateur avant de signer', 'digirisk' ); ?>"
+						data-parent="signature"
+						data-target="modal-signature">
+						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
+					</div>
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+						'action' => 'causerie_save_signature',
+					) );
+					?>
+				</td>
+			<?php else : ?>
+				<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->former['signature_id'] ) ); ?>"</td>
+			<?php endif; ?>
 		</tr>
 	</tbody>
 </table>

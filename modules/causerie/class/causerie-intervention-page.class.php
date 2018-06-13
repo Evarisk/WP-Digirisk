@@ -81,22 +81,20 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * L'étape du formateur.
 	 *
-	 * Cette méthode appel "add_participant" et "add_signature" de Causerie_Intervention_Class.
+	 * Cette méthode appel "add_participant" de Causerie_Intervention_Class.
 	 *
-	 * Cette méthode ajoute le formateur et sa signature à l'objet $causerie.
+	 * Cette méthode ajoute le formateur à l'objet $causerie.
 	 *
 	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @param Causerie_Intervention_Model $causerie         L'objet Causerie_Intervention_Model.
 	 * @param integer                     $former_id        L'ID du formateur.
-	 * @param string                      $signature_data   Les données de l'image (base64).
 	 *
 	 * @return Causerie_Intervention_Model                  L'objet Causerie_Intervention_Model avec les données.
 	 */
-	public function step_former( $causerie, $former_id, $signature_data ) {
+	public function step_former( $causerie, $former_id ) {
 		$causerie = Causerie_Intervention_Class::g()->add_participant( $causerie, $former_id, true );
-		$causerie = Causerie_Intervention_Class::g()->add_signature( $causerie, $former_id, $signature_data, true );
 
 		// Passes à l'étape suivante.
 		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION;

@@ -100,7 +100,7 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 	/**
 	 * Cette méthode génère la fiche de causerie
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @param integer $causerie_id L'ID de la causerie.
@@ -130,6 +130,7 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_medias( $causerie_intervention ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $causerie_intervention ) );
 
+		add_filter( 'digi_document_identifier', array( Sheet_Causerie_Filter::g(), 'callback_digi_document_identifier' ), 10, 2 );
 		$document_creation_response = $this->create_document( $causerie_intervention, array( $this->odt_name ), $sheet_details );
 
 		return array(

@@ -22,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action grid-layout w1">
 			<div></div>
 			<div>
-				<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
-					<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+				<?php if ( ! empty( Document_Class::g()->get_document_path( $element, '\digi\Listing_Risk_Class' ) ) ) : ?>
+					<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element, '\digi\Listing_Risk_Class' ) ); ?>">
 						<i class="fa fa-download icon" aria-hidden="true"></i>
 						<!-- <span><?php esc_html_e( 'Listing de risque', 'digirisk' ); ?></span> -->
 					</a>
 				<?php else : ?>
-					<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+					<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
 						<i class="fa fa-times icon" aria-hidden="true"></i>
 					</span>
 				<?php endif; ?>

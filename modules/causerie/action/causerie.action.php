@@ -2,11 +2,11 @@
 /**
  * Gestion des actions des causeries.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.5.0
- * @version 6.6.0
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.5.0
+ * @version   6.6.0
  * @copyright 2018 Evarisk.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -33,7 +33,9 @@ class Causerie_Action {
 	/**
 	 * Sauvegardes un causerie ainsi que ses images et la liste des commentaires.
 	 *
-	 * @since 6.5.0
+	 * Appelle la méthode "generate" de "Sheet_Causerie_Class" afin de générer l'ODT.
+	 *
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -78,7 +80,7 @@ class Causerie_Action {
 	/**
 	 * Charges un causerie ainsi que ses images et la liste des commentaires.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -116,8 +118,8 @@ class Causerie_Action {
 	/**
 	 * Passes le status de l'causerie en "trash".
 	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
+	 * @since   6.6.0
+	 * @version 6.6.0
 	 *
 	 * @return void
 	 */

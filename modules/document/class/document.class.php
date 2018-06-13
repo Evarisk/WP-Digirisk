@@ -401,16 +401,16 @@ class Document_Class extends \eoxia\Post_Class {
 		);
 
 		// Définition du modèle de document a utiliser pour l'impression.
-		$model_to_use = null;
+		$model_to_use   = null;
 		$model_response = $this->get_model_for_element( wp_parse_args( array( 'model', 'default_model' ), $document_type ) );
-		$model_to_use = $model_response['model_path'];
+		$model_to_use   = $model_response['model_path'];
 
 		// Définition de la révision du document.
 		$document_revision = 0;
-		$main_title_part = '';
+		$main_title_part   = '';
 
 		$document_revision = $this->get_document_type_next_revision( $types, $element->id );
-		$main_title_part = $element->title;
+		$main_title_part   = $element->title;
 
 		// Définition de la partie principale du nom de fichier.
 		if ( ! empty( $document_type ) && is_array( $document_type ) ) {
@@ -418,8 +418,8 @@ class Document_Class extends \eoxia\Post_Class {
 		}
 
 		// Enregistrement de la fiche dans la base de donnée.
-		$response['filename'] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
-		$response['filename'] .= $element->unique_identifier . '_';
+		$response['filename']  = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
+		$response['filename'] .= apply_filters( 'digi_document_identifier', $element->unique_identifier . '_', $element );
 		$response['filename'] .= sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
 
 		$document_args = array(

@@ -103,7 +103,8 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * @since 6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param  integer $causerie_id        L'ID de la causerie
+	 * @param integer $causerie_id        L'ID de la causerie.
+	 *
 	 * @return Causerie_Intervention_Model La causerie "intervention" créé dans cette méthode.
 	 */
 	public function duplicate( $causerie_id ) {
@@ -172,45 +173,45 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Expliqué is_former
+	 * Ajoutes un participant (ou un formateur) à la causerie.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param [type]  $final_causerie [description]
-	 * @param [type]  $user_id        [description]
-	 * @param [type]  $signature_data [description]
-	 * @param boolean $is_former      [description]
-	 *
-	 * @todo: FIXME Commentaire
+	 * @param Causerie_Intervention_Model $causerie_intervention Les données d'une causerie "intervention".
+	 * @param integer                     $user_id               ID de l'utilisateur à associer à la causerie "intervention".
+	 * @param boolean                     $is_former             Est-ce un formateur ? Ou un participant.
 	 */
-	public function add_participant( $final_causerie, $user_id, $is_former = false ) {
+	public function add_participant( $causerie_intervention, $user_id, $is_former = false ) {
 
 		if ( $is_former ) {
-			$final_causerie->former['user_id'] = $user_id;
+			$causerie_intervention->former['user_id'] = $user_id;
 		} else {
-			$final_causerie->participants[ $user_id ] = array(
+			$causerie_intervention->participants[ $user_id ] = array(
 				'user_id' => $user_id,
 			);
 		}
 
-		return $final_causerie;
+		return $causerie_intervention;
 	}
 
 	/**
-	 * Expliqué is_former
+	 * Ajoutes l'ID de la signature associté à l'utilisateur dans la causerie.
 	 *
-	 * @since 6.6.0
+	 * La méthode commence par créer l'image dans un répertoire temporaire.
+	 * Elle déplace ensuite l'image dans le bon dossier qui est l'ID de la causerie.
+	 * Puis elle rengistre l'ID de la signature (Attachement WordPress) dans le tableau
+	 * correspondant à l'entrée de l'utilisateur $user_id.
+	 *
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param [type]  $final_causerie [description]
-	 * @param [type]  $user_id        [description]
-	 * @param [type]  $signature_data [description]
-	 * @param boolean $is_former      [description]
-	 *
-	 * @todo: FIXME Commentaire
+	 * @param Causerie_Intervention_Class $causerie_intervention Les données d'une causerie "intervention".
+	 * @param integer                     $user_id               ID de l'utilisateur pour associer la signature à la causerie "intervention".
+	 * @param string                      $signature_data        Base64 de l'image de la signature.
+	 * @param boolean                     $is_former             Est-ce un formateur ? Ou un participant.
 	 */
-	public function add_signature( $final_causerie, $user_id, $signature_data, $is_former = false ) {
+	public function add_signature( $causerie_intervention, $user_id, $signature_data, $is_former = false ) {
 		$upload_dir = wp_upload_dir();
 
 		// Association de la signature.
@@ -218,18 +219,18 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 			$encoded_image = explode( ',', $signature_data )[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $final_causerie->id );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->id );
 
 			if ( $is_former ) {
-				$final_causerie->former['signature_id']   = $file_id;
-				$final_causerie->former['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->former['signature_id']   = $file_id;
+				$causerie_intervention->former['signature_date'] = current_time( 'mysql' );
 			} else {
-				$final_causerie->participants[ $user_id ]['signature_id']   = $file_id;
-				$final_causerie->participants[ $user_id ]['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->participants[ $user_id ]['signature_id']   = $file_id;
+				$causerie_intervention->participants[ $user_id ]['signature_date'] = current_time( 'mysql' );
 			}
 		}
 
-		return $final_causerie;
+		return $causerie_intervention;
 	}
 }
 

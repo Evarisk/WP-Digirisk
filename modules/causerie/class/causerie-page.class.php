@@ -30,7 +30,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Méthodes obligatoire pour Singleton_Util
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -44,7 +44,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * Si $_GET['id'] existe, affiches la vue d'intervention.
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -64,7 +64,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * Récupères toutes les causeries "intervention" et les envoies à la vu principale du "dashboard".
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -85,7 +85,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Affichage onglet "Démarrer une causerie".
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void
@@ -107,7 +107,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Affichage onglet "Ajouter une causerie".
 	 *
-	 * @since 6.6.0
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void

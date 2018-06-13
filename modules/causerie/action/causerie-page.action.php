@@ -110,9 +110,11 @@ class Causerie_Page_Action {
 	}
 
 	/**
-	 * Dupliques la causerie sélectionné puis appel la vue suivante.
+	 * Dupliques la causerie sélectionnée.
 	 *
-	 * @since 6.6.0
+	 * Effectue une redirection vers la page "single" de la nouvelle causerie créée.
+	 *
+	 * @since   6.6.0
 	 * @version 6.6.0
 	 *
 	 * @return void

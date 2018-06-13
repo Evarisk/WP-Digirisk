@@ -6,6 +6,7 @@
 	"description": "Le module gérant les causeries",
 	"path": "modules/causerie/",
 	"dependencies": {
+		"filter": {},
 		"helper": {},
 		"model": {
 			"priority": [

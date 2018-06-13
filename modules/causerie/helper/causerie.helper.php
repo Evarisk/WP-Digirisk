@@ -17,7 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Récupères tous les éléments nécessaires pour le fonctionnement d'une causerie
- * - Categorie de risque
+ * - Catégorie de risque
+ * - Participants
+ * - Formateur
  *
  * @since   6.6.0
  * @version 6.6.0

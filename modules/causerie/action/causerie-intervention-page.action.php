@@ -60,13 +60,12 @@ class Causerie_Intervention_Page_Action {
 		switch ( $causerie->current_step ) {
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_FORMER:
 				$former_id      = ! empty( $_POST['former_id'] ) ? (int) $_POST['former_id'] : 0;
-				$signature_data = ! empty( $_POST['signature_data'] ) ? $_POST['signature_data'] : '';
 
-				if ( empty( $former_id ) || empty( $signature_data ) ) {
+				if ( empty( $former_id ) ) {
 					wp_send_json_error();
 				}
 
-				$causerie = Causerie_Intervention_Page_Class::g()->step_former( $causerie, $former_id, $signature_data );
+				$causerie = Causerie_Intervention_Page_Class::g()->step_former( $causerie, $former_id );
 
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-2', array(
