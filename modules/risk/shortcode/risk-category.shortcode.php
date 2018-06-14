@@ -54,10 +54,6 @@ class Risk_Category_Shortcode {
 		$display          = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'edit';
 		$preset           = ! empty( $param ) && ! empty( $param['preset'] ) ? (int) $param['preset'] : 0;
 
-		if ( 0 === $category_risk_id ) {
-			$display = 'edit';
-		}
-
 		if ( 'edit' === $display ) {
 			$risk = Risk_Class::g()->get( array(
 				'id' => $id,
@@ -109,9 +105,13 @@ class Risk_Category_Shortcode {
 				'risk'                   => $risk,
 			) );
 		} else {
-			$risk_category = Risk_Category_Class::g()->get( array(
-				'id' => $category_risk_id,
-			), true );
+			$risk_category = null;
+			
+			if ( ! empty( $category_risk_id ) ) {
+				$risk_category = Risk_Category_Class::g()->get( array(
+					'id' => $category_risk_id,
+				), true );
+			}
 
 			\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/item', array(
 				'risk_category' => $risk_category,

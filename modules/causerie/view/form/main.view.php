@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Ajouter une causerie', 'digirisk' ); ?></h2>
+	<h2><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></h2>
 
 	<table class="table add-causerie">
 		<thead>

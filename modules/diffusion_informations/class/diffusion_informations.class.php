@@ -2,11 +2,11 @@
 /**
  * Classe gérant les diffusions d'informations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.10
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -138,6 +138,32 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
 			'list_document' => $list_document,
 		) );
+	}
+
+	/**
+	 * Enregistres les informations de la diffusion d'informations
+	 *
+	 * @since 6.6.0
+	 * @version 6.6.0
+	 *
+	 * @param array $data Les données provenant du formulaire de l'onglet "Diffusion informations".
+	 *
+	 * @return void
+	 */
+	public function save_information( $parent_id, $data ) {
+		$data = array(
+			'parent_id'     => $parent_id,
+			'document_meta' => array(
+				'delegues_du_personnels_date'             => ! empty( $data['delegues_du_personnels_date'] ) ? sanitize_text_field( $data['delegues_du_personnels_date'] ) : '',
+				'delegues_du_personnels_titulaires'       => ! empty( $data['delegues_du_personnels_titulaires'] ) ? sanitize_text_field( $data['delegues_du_personnels_titulaires'] ) : '',
+				'delegues_du_personnels_suppleants'       => ! empty( $data['delegues_du_personnels_suppleants'] ) ? sanitize_text_field( $data['delegues_du_personnels_suppleants'] ) : '',
+				'membres_du_comite_entreprise_date'       => ! empty( $data['membres_du_comite_entreprise_date'] ) ? sanitize_text_field( $data['membres_du_comite_entreprise_date'] ) : '',
+				'membres_du_comite_entreprise_titulaires' => ! empty( $data['membres_du_comite_entreprise_titulaires'] ) ? sanitize_text_field( $data['membres_du_comite_entreprise_titulaires'] ) : '',
+				'membres_du_comite_entreprise_suppleants' => ! empty( $data['membres_du_comite_entreprise_suppleants'] ) ? sanitize_text_field( $data['membres_du_comite_entreprise_suppleants'] ) : '',
+			),
+		);
+
+		$this->update( $data );
 	}
 
 	/**

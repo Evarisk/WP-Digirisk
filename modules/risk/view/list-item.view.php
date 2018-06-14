@@ -2,11 +2,11 @@
 /**
  * Affichage d'un risque
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.1
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="view"]' ); ?>
+		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" category_risk_id="' . $risk->risk_category->id . '" display="view"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>

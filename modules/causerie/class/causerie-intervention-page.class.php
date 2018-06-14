@@ -112,7 +112,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @param  Causerie_Intervention_Model $causerie L'objet Causerie_Intervention_Model.
 	 *
-	 * @return Causerie_Intervention_Model           L'objet Casuerie_Intervention_Model avec la donnée current_step modifiée.
+	 * @return Causerie_Intervention_Model           L'objet Causerie_Intervention_Model avec la donnée current_step modifiée.
 	 */
 	public function step_slider( $causerie ) {
 		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
