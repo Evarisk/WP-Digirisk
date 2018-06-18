@@ -2,10 +2,10 @@
 /**
  * Gères la génération de la fiche de groupement
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
  * @package DigiRisk
  */
 
@@ -104,7 +104,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.6.0
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
@@ -112,7 +112,7 @@ class Sheet_Groupment_Class extends Document_Class {
 		), true );
 
 		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'main', array(
-			'element' => $element,
+			'element'    => $element,
 			'element_id' => $element_id,
 		) );
 	}
@@ -145,7 +145,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @return bool
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @version 6.6.0
 	 */
 	public function generate( $society_id ) {
 		$society = Group_Class::g()->get( array(
@@ -155,31 +155,31 @@ class Sheet_Groupment_Class extends Document_Class {
 		$society_infos = $this->get_infos( $society );
 
 		$sheet_details = array(
-			'reference' => $society->unique_identifier,
-			'nom' => $society->title,
+			'reference'   => $society->unique_identifier,
+			'nom'         => $society->title,
 			'description' => $society->content,
-			'adresse' => $society_infos['adresse'],
-			'telephone' => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
-			'codePostal' => $society_infos['codePostal'],
-			'ville' => $society_infos['ville'],
+			'adresse'     => $society_infos['adresse'],
+			'telephone'   => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'codePostal'  => $society_infos['codePostal'],
+			'ville'       => $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $society ) );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
+		$sheet_details                 = wp_parse_args( $sheet_details, $this->set_users( $society ) );
+		$sheet_details                 = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
+		$sheet_details                 = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
+		$sheet_details                 = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
 		$document_creation_response = $this->create_document( $society, array( 'groupement' ), $sheet_details );
 		if ( ! empty( $document_creation_response['id'] ) ) {
 			$society->associated_document_id['document'][] = $document_creation_response['id'];
-			$society = Group_Class::g()->update( $society );
+			$society                                       = Group_Class::g()->update( $society );
 		}
 
 		return array(
 			'creation_response' => $document_creation_response,
-			'element' => $society,
-			'success' => true,
+			'element'           => $society,
+			'success'           => true,
 		);
 	}
 
@@ -285,30 +285,38 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * Récupères les évaluateurs affectés à la société
 	 *
+	 * @since 6.0.0
+	 * @version 6.6.0
+	 *
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
-	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function set_evaluators( $society ) {
-		$evaluators = array( 'utilisateursPresents' => array( 'type' => 'segment', 'value' => array() ) );
+		$evaluators = array(
+			'utilisateursPresents' => array(
+				'type'  => 'segment',
+				'value' => array(),
+			),
+		);
+
 		$affected_evaluators = array();
 
 		if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
-			/**	Récupération de la liste des personnes présentes lors de l'évaluation / Get list of user who were present for evaluation	*/
-			$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $society );
+
+			// Récupération de la liste des personnes présentes lors de l'évaluation.
+			$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $society );
 			if ( ! empty( $list_affected_evaluator ) ) {
 				foreach ( $list_affected_evaluator as $evaluator_id => $evaluator_affectation_info ) {
 					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
 						if ( 'valid' === $evaluator_affectation_info['affectation_info']['status'] ) {
 							$affected_evaluators[] = array(
-								'idUtilisateur'								=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
-								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
-								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
-								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
-								'dureeEntretien'							=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
+								'idUtilisateur'              => Evaluator_Class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
+								'nomUtilisateur'             => $evaluator_affectation_info['user_info']->lastname,
+								'prenomUtilisateur'          => $evaluator_affectation_info['user_info']->firstname,
+								'dateAffectationUtilisateur' => mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'dateTrie'                   => $evaluator_affectation_info['affectation_info']['start']['date'],
+								'dureeEntretien'             => Evaluator_Class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
 					}
@@ -316,10 +324,10 @@ class Sheet_Groupment_Class extends Document_Class {
 
 				if ( count( $affected_evaluators ) > 1 ) {
 					usort( $affected_evaluators, function( $a, $b ) {
-						if( $a['dateAffectationUtilisateur'] == $b['dateAffectationUtilisateur'] ) {
+						if ( $a['dateTrie'] == $b['dateTrie'] ) {
 							return 0;
 						}
-						return ( $a['dateAffectationUtilisateur'] < $b['dateAffectationUtilisateur'] ) ? -1 : 1;
+						return ( $a['dateTrie'] < $b['dateTrie'] ) ? 1 : -1;
 					} );
 				}
 

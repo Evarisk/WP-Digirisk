@@ -52,9 +52,10 @@ class Search_Action {
 			$user     = User_Digi_Class::g()->get( array( 'include' => array( $element ) ) );
 			$user     = $user[0];
 			$return[] = array(
-				'label' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
-				'value' => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
-				'id'    => $user->id,
+				'label'       => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
+				'value'       => User_Digi_Class::g()->element_prefix . $user->id . ' - ' . $user->login . ' (' . $user->email . ')',
+				'displayname' => $user->displayname,
+				'id'          => $user->id,
 			);
 		}
 

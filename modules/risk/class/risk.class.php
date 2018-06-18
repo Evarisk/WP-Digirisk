@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	 *
 	 * @var array
 	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_risk' );
+	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_risk', '\digi\get_risk_category' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

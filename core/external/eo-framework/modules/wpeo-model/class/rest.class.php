@@ -152,6 +152,19 @@ if ( ! class_exists( '\eoxia\Rest_Class' ) ) {
 			return $this->update( $request->get_params() );
 		}
 
+		public function set_callback( $cb_slug, $data ) {
+
+		}
+
+		public function delete_callback( $cb_slug, $func_slug ) {
+			if ( isset( $this->$cb_slug ) ) {
+				foreach ( $this->$cb_slug as $key => $func ) {
+					if ( $func === $func_slug ) {
+						array_splice( $this->$cb_slug, $key, 1 );
+					}
+				}
+			}
+		}
 	}
 
 }

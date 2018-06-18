@@ -38,12 +38,22 @@ class Search_Class extends \eoxia\Singleton_Util {
 
 		if ( 'user' === $data['type'] ) {
 			if ( ! empty( $data['term'] ) ) {
-				$list = get_users( array(
+				if ( ! empty( $data['exclude'] ) ) {
+					$data['exclude'] = explode( ',', $data['exclude'] );
+				}
+
+				$args = array(
 					'fields' => 'ID',
 					'search' => '*' . $data['term'] . '*',
-				) );
+				);
 
-				$list = wp_parse_args( $list, get_users( array(
+				if ( ! empty( $data['exclude'] ) ) {
+					$args['exclude'] = $data['exclude'];
+				}
+
+				$list = get_users( $args  );
+
+				$args = array(
 					'fields' => 'ID',
 					'meta_query' => array(
 						'relation' => 'OR',
@@ -58,14 +68,25 @@ class Search_Class extends \eoxia\Singleton_Util {
 							'compare' => 'LIKE',
 						),
 					),
-				) ) );
+				);
+
+				if ( ! empty( $data['exclude'] ) ) {
+					$args['exclude'] = $data['exclude'];
+				}
+
+				$list = wp_parse_args( $list, get_users( $args ) );
 
 				$list = array_unique( $list );
 			} else {
-				$list = get_users( array(
+				$data = array(
 					'fields' => 'ID',
 					'exclude' => array( 1 ),
-				) );
+				);
+
+				if ( ! empty( $data['exclude'] ) ) {
+					$data['exclude'] = explode( ',', $data['exclude'] );
+				}
+				$list = get_users( );
 			}
 
 			// Force le tableau de integer.

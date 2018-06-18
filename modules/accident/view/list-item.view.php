@@ -2,11 +2,11 @@
 /**
  * Affichage d'un accident
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.3.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.3.0
+ * @version   6.4.4
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -29,8 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->number_field_completed ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 		<div class="action grid-layout w3">
-			<?php if ( ! empty( Document_Class::g()->get_document_path( $accident->document ) ) ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document ) ); ?>">
+			<?php if ( ! empty( Document_Class::g()->get_document_path( $accident->document, 'digi-society' ) ) ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $accident->document, 'digi-society' ) ); ?>">
 					<i class="icon fa fa-download" aria-hidden="true"></i>
 					<?php echo esc_html( strtoupper( substr( $accident->document->type, 16, 2 ) ) ); ?>
 				</a>

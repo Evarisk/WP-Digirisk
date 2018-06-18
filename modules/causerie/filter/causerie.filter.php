@@ -1,52 +1,34 @@
 <?php
 /**
- * Gestion des filtres relatifs aux causerie de sécurité.
+ * La classe gérant les filtres des causeries
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Causerie.
+ * @package   DigiRisk
  */
+
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Gestion des filtres relatifs aux causerie de sécurité.
+ * La classe gérant les filtres des causeries
  */
-class Causerie_Filter {
+class Sheet_Causerie_Filter extends \eoxia\Singleton_Util {
+	protected function construct() {}
 
 	/**
-	 * Utilises le filtre digi_tab
-	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
+	 * [public description]
+	 * @var [type]
 	 */
-	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
-	}
-
-	/**
-	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
-	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
-	 *
-	 * @param  array   $list_tab Les onglets déjà présents.
-	 * @param  integer $id       L'ID de la société.
-	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
-	 */
-	public function callback_tab( $list_tab, $id ) {
-		$list_tab['digi-group']['causerie'] = array(
-			'type' => 'text',
-			'text' => __( 'Causerie sécurité', 'digirisk' ),
-			'title' => __( 'Les causeries sécurité', 'digirisk' ),
-		);
-
-		return $list_tab;
+	public function callback_digi_document_identifier( $unique_identifier, $causerie ) {
+		$unique_identifier = $causerie->unique_identifier . '_' . $causerie->second_identifier . '_';
+		return $unique_identifier;
 	}
 }
 
-new Causerie_Filter();
+Sheet_Causerie_Filter::g();

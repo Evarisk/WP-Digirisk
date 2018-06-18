@@ -1,7 +1,8 @@
 {
 	"name": "Risk",
 	"slug": "risk",
-	"version": "6.4.4",
+	"since": "6.4.4",
+	"version": "6.6.0",
 	"description": "Le module gérant les risques",
 	"path": "modules/risk/",
 	"dependencies": {

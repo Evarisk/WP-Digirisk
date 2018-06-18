@@ -100,10 +100,10 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @since 0.1
 	 * @version 6.2.5.0
 	 */
-	public function get_element_tree_risk( $element ) {
+	public function get_element_tree_risk( $element, $with_picture = true ) {
 		$risks_in_tree = array();
 
-		$risks_in_tree = $this->build_risk_list_for_export( $element );
+		$risks_in_tree = $this->build_risk_list_for_export( $element, $with_picture );
 
 		/**	Liste les enfants direct de l'élément / List children of current element	*/
 		$group_list = group_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
@@ -113,7 +113,7 @@ class Group_Class extends \eoxia\Post_Class {
 
 		$work_unit_list = workunit_class::g()->get( array( 'posts_per_page' => -1, 'post_parent' => $element->id, 'post_status' => array( 'publish', 'draft' ) ), false );
 		foreach ( $work_unit_list as $workunit ) {
-			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit ) );
+			$risks_in_tree = array_merge( $risks_in_tree, $this->build_risk_list_for_export( $workunit, $with_picture ) );
 		}
 
 		return $risks_in_tree;
@@ -219,7 +219,7 @@ class Group_Class extends \eoxia\Post_Class {
 	 * @since 6.0.0
 	 * @version 6.3.0
 	 */
-	public function build_risk_list_for_export( $element ) {
+	public function build_risk_list_for_export( $element, $with_picture = true ) {
 		$risk_list = Risk_Class::g()->get( array(
 			'post_parent' => $element->id,
 		) );
@@ -236,8 +236,8 @@ class Group_Class extends \eoxia\Post_Class {
 
 			$picture = __( 'No picture defined', 'digirisk' );
 
-			if ( ! empty( $risk->thumbnail_id ) ) {
-				$picture_definition = wp_get_attachment_image_src( $risk->thumbnail_id, 'full' );
+			if ( ! empty( $risk->thumbnail_id ) && $with_picture ) {
+				$picture_definition = wp_get_attachment_image_src( $risk->thumbnail_id, 'digirisk-element-thumbnail' );
 				$picture_path       = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
 
 				if ( is_file( $picture_path ) ) {

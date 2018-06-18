@@ -54,6 +54,10 @@ if ( ! class_exists( '\eoxia\Array_Util' ) ) {
 							$count += count( $_array );
 						}
 
+						if ( ! $match_element ) {
+							$count += count( $_array );
+						}
+
 						$count += $this->count_recursive( $_array, false, $match_element );
 					}
 				}

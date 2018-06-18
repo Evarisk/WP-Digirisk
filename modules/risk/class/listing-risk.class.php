@@ -166,7 +166,7 @@ class Listing_Risk_Class extends Document_Class {
 		), true );
 
 		$data_to_document = $this->prepare_skeleton();
-		$data_to_document = $this->set_risks( $data_to_document, $society );
+		$data_to_document = $this->set_risks( $data_to_document, $society, $type );
 		$data_to_document = apply_filters( 'digi_generate_listing_risk_details', $data_to_document );
 
 		$document_creation_response = $this->create_document( $society, array( 'liste_des_risques_' . $type ), $data_to_document );
@@ -220,8 +220,9 @@ class Listing_Risk_Class extends Document_Class {
 	 *
 	 * @return array Les risques dans la société ainsi que les risques enfants.
 	 */
-	public function set_risks( $data_to_document, $element ) {
-		$list_risk        = Group_Class::g()->get_element_tree_risk( $element );
+	public function set_risks( $data_to_document, $element, $type ) {
+		$with_picture     = ( 'actions' === $type ) ? false : true;
+		$list_risk        = Group_Class::g()->get_element_tree_risk( $element, $with_picture );
 		$risk_per_element = array();
 
 		if ( count( $list_risk ) > 1 ) {

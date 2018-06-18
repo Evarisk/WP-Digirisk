@@ -18,6 +18,10 @@ window.eoxiaJS.digirisk.search.renderChanged = function() {
 	window.eoxiaJS.digirisk.search.event();
 };
 
+window.eoxiaJS.digirisk.search.refresh = function() {
+	window.eoxiaJS.digirisk.search.event();
+};
+
 /**
  * Initialise l'évènement pour permettre aux champs de recherche de fonctionner
  *
@@ -63,7 +67,16 @@ window.eoxiaJS.digirisk.search.event = function() {
 		if ( jQuery( element ).data( 'field' ) ) {
 			listOption.select = function( event, ui ) {
 				jQuery( 'input[name="' + jQuery( element ).data( 'field' ) + '"]' ).val( ui.item.id );
+
+				jQuery( element ).trigger( 'change', {
+					element: element,
+					item: ui.item
+				} );
 			};
+		}
+
+		if ( jQuery( element ).data( 'exclude' ) ) {
+			listOption.source += '&exclude=' + jQuery( element ).data( 'exclude' );
 		}
 
 		jQuery( element ).autocomplete( listOption );

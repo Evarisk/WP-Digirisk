@@ -2,11 +2,11 @@
 /**
  * Formulaire pour générer une diffusion d'information.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.10
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -70,5 +70,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 	</div>
 
-	<button class="button blue action-input float right" data-parent="form-generate"><i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span></button>
+	<button class="button blue action-input float right"
+		data-parent="form-generate">
+		<i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
+	</button>
+
+	<button class="button green action-input float right"
+		data-parent="form-generate"
+		data-action="save_diffusion_information"
+		data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_diffusion_information' ) ); ?>">
+		<i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></span>
+	</button>
+
 </form>

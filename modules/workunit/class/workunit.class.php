@@ -59,7 +59,7 @@ class Workunit_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key = '_wp_workunit';
+	protected $meta_key = '_wpdigi_society';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API

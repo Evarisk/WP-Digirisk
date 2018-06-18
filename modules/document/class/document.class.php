@@ -2,10 +2,10 @@
 /**
  * Classe principale gérant tous les documents (ODT) de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.0
+ * @copyright 2018 Evarisk.
  * @package DigiRisk
  */
 
@@ -300,25 +300,27 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Renvoies le chemin HTTP vers l'ODT.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 6.6.0
 	 *
 	 * @param  Object $element Le modèle (objet) ODT.
+	 * @param  string $type    Le type de l'élément parent.
 	 *
 	 * @return string          Le chemin HTTP vers l'ODT.
 	 */
-	public function get_document_path( $element ) {
+	public function get_document_path( $element, $type ) {
 		$url = '';
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
-			$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
-			$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
-			$url     = $baseurl . "/";
+			$basedir = $this->get_digirisk_dir_path( 'basedir' );
+			$baseurl = $this->get_digirisk_dir_path( 'baseurl' );
+			$url     = $baseurl . '/';
 
 			if ( ! empty( $element->parent_id ) && ! empty( $element->mime_type ) ) {
-				$society = Society_Class::g()->show_by_type( $element->parent_id );
-				$url .= "/" . $society->type . "/" . $society->id . "/";
+				$url .= '/' . $type . '/' . $element->parent_id . '/';
 			}
+
 			$url .= $element->title;
+
 			if ( ! empty( $element->mime_type ) ) {
 				$url .= $this->mime_type_link[ $element->mime_type ];
 			}
@@ -399,16 +401,16 @@ class Document_Class extends \eoxia\Post_Class {
 		);
 
 		// Définition du modèle de document a utiliser pour l'impression.
-		$model_to_use = null;
+		$model_to_use   = null;
 		$model_response = $this->get_model_for_element( wp_parse_args( array( 'model', 'default_model' ), $document_type ) );
-		$model_to_use = $model_response['model_path'];
+		$model_to_use   = $model_response['model_path'];
 
 		// Définition de la révision du document.
 		$document_revision = 0;
-		$main_title_part = '';
+		$main_title_part   = '';
 
 		$document_revision = $this->get_document_type_next_revision( $types, $element->id );
-		$main_title_part = $element->title;
+		$main_title_part   = $element->title;
 
 		// Définition de la partie principale du nom de fichier.
 		if ( ! empty( $document_type ) && is_array( $document_type ) ) {
@@ -416,8 +418,8 @@ class Document_Class extends \eoxia\Post_Class {
 		}
 
 		// Enregistrement de la fiche dans la base de donnée.
-		$response['filename'] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
-		$response['filename'] .= $element->unique_identifier . '_';
+		$response['filename']  = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
+		$response['filename'] .= apply_filters( 'digi_document_identifier', $element->unique_identifier . '_', $element );
 		$response['filename'] .= sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
 
 		$document_args = array(

@@ -2,12 +2,11 @@
 /**
  * Les filtres pour les sociétés
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.2
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage filter
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -25,7 +24,7 @@ class Society_Filter {
 	 * Le constructeur
 	 *
 	 * @since 6.2.2
-	 * @version 6.3.0
+	 * @version 6.6.0
 	 */
 	public function __construct() {
 		add_filter( 'society_identity', array( $this, 'callback_society_identity' ), 10, 2 );
@@ -41,11 +40,11 @@ class Society_Filter {
 	 * @return void
 	 *
 	 * @since 6.2.2
-	 * @version 6.2.10
+	 * @version 6.6.0
 	 */
 	public function callback_society_identity( $element, $editable_identity = false ) {
 		\eoxia\View_Util::exec( 'digirisk', 'society', 'identity', array(
-			'element' => $element,
+			'element'           => $element,
 			'editable_identity' => $editable_identity,
 		), false );
 	}

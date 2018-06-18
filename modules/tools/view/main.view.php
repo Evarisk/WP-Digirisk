@@ -2,17 +2,18 @@
 /**
  * Affichages le contenu de la page outils de Digirisk dans WordPress.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.6.0
- * @copyright 2015-2017 Evarisk
- * @package tools
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.6.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="wrap">
 	<h1><?php esc_html_e( 'Digirisk tools', 'digirisk' ); ?></h1>
@@ -22,13 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			<a class="nav-tab nav-tab-active" href="#" data-id="digi-data-export" ><?php esc_html_e( 'Export digirisk datas', 'digirisk' ); ?></a>
 			<a class="nav-tab" href="#" data-id="digi-handle-model" ><?php esc_html_e( 'Modèles ODT', 'digirisk' ); ?></a>
 			<a class="nav-tab hidden" href="#" data-id="digi-data-import-user" ><?php esc_html_e( 'Importer des utilisateurs', 'digirisk' ); ?></a>
-			<a class="nav-tab" href="#" data-id="digi-more"><?php esc_html_e( 'Avancés', 'digirisk' ); ?></a>
 			<?php apply_filters( 'digi_tools_interface_tabs', '' ); ?>
+			<a class="nav-tab" href="#" data-id="digi-more"><?php esc_html_e( 'Avancés', 'digirisk' ); ?></a>
 		</h2>
 
 		<div class="digirisk-wrap">
 
-			<div id="digi-data-export" class="tab-content grid-layout padding w2" >
+			<div id="digi-data-export" class="tab-content grid-layout padding w2">
 				<div class="block">
 					<div class="container">
 						<?php echo do_shortcode( '[digi-export]' ); ?>
@@ -72,8 +73,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 					<div class="block">
 						<div class="container">
-							<h3><?php esc_html_e( 'Problèmes de recommendation', 'digirisk' ); ?></h3>
-							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour résoudre les problèmes de recommendation', 'digirisk' ); ?></p>
+							<h3><?php esc_html_e( 'Problèmes de signalisation', 'digirisk' ); ?></h3>
+							<p class="content"><?php esc_html_e( 'Cliquer sur ce bouton pour résoudre les problèmes de signalisation', 'digirisk' ); ?></p>
 							<p><button class="button blue margin fix-recommendation" data-nonce="<?php echo esc_attr( wp_create_nonce( 'fix_recommendation' ) ); ?>" type="button"><?php esc_html_e( 'Résoudre', 'digirisk' ); ?></button>
 							<ul></ul>
 						</div>

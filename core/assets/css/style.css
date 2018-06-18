@@ -2933,7 +2933,7 @@
   color: rgba(0, 0, 0, 0.4);
   pointer-events: none; }
 
-.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input[type="submit"]:hover {
+.digirisk-wrap .popup.no-close:not(.popup-update-manager) .button:hover, .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table form input:hover[type="submit"], .digirisk-wrap .flex-table form .popup.no-close:not(.popup-update-manager) input:hover[type="submit"], .digirisk-wrap .popup.no-close:not(.popup-update-manager) .flex-table .form input:hover[type="submit"], .digirisk-wrap .flex-table .form .popup.no-close:not(.popup-update-manager) input:hover[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed; }
@@ -3011,22 +3011,22 @@
   transition: all 0.2s ease-out;
   position: relative; }
 
-.digirisk-wrap .button:hover, .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table .form input[type="submit"]:hover {
+.digirisk-wrap .button:hover, .digirisk-wrap .flex-table form input:hover[type="submit"], .digirisk-wrap .flex-table .form input:hover[type="submit"] {
   background: none;
   color: #fff; }
 
-.digirisk-wrap .button:hover .float-icon, .digirisk-wrap .flex-table form input[type="submit"]:hover .float-icon, .digirisk-wrap .flex-table .form input[type="submit"]:hover .float-icon {
+.digirisk-wrap .button:hover .float-icon, .digirisk-wrap .flex-table form input:hover[type="submit"] .float-icon, .digirisk-wrap .flex-table .form input:hover[type="submit"] .float-icon {
   -webkit-animation-name: bounceInLight;
        -o-animation-name: bounceInLight;
           animation-name: bounceInLight; }
 
-.digirisk-wrap .button:active, .digirisk-wrap .flex-table form input[type="submit"]:active, .digirisk-wrap .flex-table .form input[type="submit"]:active {
+.digirisk-wrap .button:active, .digirisk-wrap .flex-table form input:active[type="submit"], .digirisk-wrap .flex-table .form input:active[type="submit"] {
   -webkit-transform: none;
       -ms-transform: none;
        -o-transform: none;
           transform: none; }
 
-.digirisk-wrap .button.active, .digirisk-wrap .flex-table form input.active[type="submit"], .digirisk-wrap .flex-table .form input.active[type="submit"], .digirisk-wrap .button.active:hover, .digirisk-wrap .flex-table form input.active[type="submit"]:hover, .digirisk-wrap .flex-table .form input.active[type="submit"]:hover {
+.digirisk-wrap .button.active, .digirisk-wrap .flex-table form input.active[type="submit"], .digirisk-wrap .flex-table .form input.active[type="submit"], .digirisk-wrap .button.active:hover, .digirisk-wrap .flex-table form input.active:hover[type="submit"], .digirisk-wrap .flex-table .form input.active:hover[type="submit"] {
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transform: translateY(0);
@@ -3035,7 +3035,7 @@
           transform: translateY(0);
   border: 0; }
 
-.digirisk-wrap .button:focus, .digirisk-wrap .flex-table form input[type="submit"]:focus, .digirisk-wrap .flex-table .form input[type="submit"]:focus {
+.digirisk-wrap .button:focus, .digirisk-wrap .flex-table form input:focus[type="submit"], .digirisk-wrap .flex-table .form input:focus[type="submit"] {
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #fff; }
@@ -3075,31 +3075,31 @@
 .digirisk-wrap .button.blue, .digirisk-wrap .flex-table form input.blue[type="submit"], .digirisk-wrap .flex-table .form input.blue[type="submit"] {
   background: #3495f0; }
 
-.digirisk-wrap .button.blue:hover, .digirisk-wrap .flex-table form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table .form input.blue[type="submit"]:hover {
+.digirisk-wrap .button.blue:hover, .digirisk-wrap .flex-table form input.blue:hover[type="submit"], .digirisk-wrap .flex-table .form input.blue:hover[type="submit"] {
   background: #1360c8; }
 
 .digirisk-wrap .button.red, .digirisk-wrap .flex-table form input.red[type="submit"], .digirisk-wrap .flex-table .form input.red[type="submit"] {
   background: #e05353; }
 
-.digirisk-wrap .button.red:hover, .digirisk-wrap .flex-table form input.red[type="submit"]:hover, .digirisk-wrap .flex-table .form input.red[type="submit"]:hover {
+.digirisk-wrap .button.red:hover, .digirisk-wrap .flex-table form input.red:hover[type="submit"], .digirisk-wrap .flex-table .form input.red:hover[type="submit"] {
   background: #c82424; }
 
 .digirisk-wrap .button.green, .digirisk-wrap .flex-table form input[type="submit"], .digirisk-wrap .flex-table .form input[type="submit"] {
   background: #47e58e; }
 
-.digirisk-wrap .button.green:hover, .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table .form input[type="submit"]:hover {
+.digirisk-wrap .button.green:hover, .digirisk-wrap .flex-table form input:hover[type="submit"], .digirisk-wrap .flex-table .form input:hover[type="submit"] {
   background: #1cc86a; }
 
 .digirisk-wrap .button.dark, .digirisk-wrap .flex-table form input.dark[type="submit"], .digirisk-wrap .flex-table .form input.dark[type="submit"] {
   background: #272a35; }
 
-.digirisk-wrap .button.dark:hover, .digirisk-wrap .flex-table form input.dark[type="submit"]:hover, .digirisk-wrap .flex-table .form input.dark[type="submit"]:hover {
+.digirisk-wrap .button.dark:hover, .digirisk-wrap .flex-table form input.dark:hover[type="submit"], .digirisk-wrap .flex-table .form input.dark:hover[type="submit"] {
   background: black; }
 
 .digirisk-wrap .button.purple, .digirisk-wrap .flex-table form input.purple[type="submit"], .digirisk-wrap .flex-table .form input.purple[type="submit"] {
   background: #898de5; }
 
-.digirisk-wrap .button.purple:hover, .digirisk-wrap .flex-table form input.purple[type="submit"]:hover, .digirisk-wrap .flex-table .form input.purple[type="submit"]:hover {
+.digirisk-wrap .button.purple:hover, .digirisk-wrap .flex-table form input.purple:hover[type="submit"], .digirisk-wrap .flex-table .form input.purple:hover[type="submit"] {
   background: #5f65dc; }
 
 .digirisk-wrap .button.light, .digirisk-wrap .flex-table form input.light[type="submit"], .digirisk-wrap .flex-table .form input.light[type="submit"] {
@@ -3110,7 +3110,7 @@
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.8); }
 
-.digirisk-wrap .button.grey:hover, .digirisk-wrap .flex-table form input.grey[type="submit"]:hover, .digirisk-wrap .flex-table .form input.grey[type="submit"]:hover {
+.digirisk-wrap .button.grey:hover, .digirisk-wrap .flex-table form input.grey:hover[type="submit"], .digirisk-wrap .flex-table .form input.grey:hover[type="submit"] {
   background: rgba(0, 0, 0, 0.1); }
 
 .digirisk-wrap .button.w30, .digirisk-wrap .flex-table form input.w30[type="submit"], .digirisk-wrap .flex-table .form input.w30[type="submit"], .digirisk-wrap .button.w40, .digirisk-wrap .flex-table form input.w40[type="submit"], .digirisk-wrap .flex-table .form input.w40[type="submit"], .digirisk-wrap .button.w50, .digirisk-wrap .flex-table form input.w50[type="submit"], .digirisk-wrap .flex-table .form input.w50[type="submit"], .digirisk-wrap .button.w60, .digirisk-wrap .flex-table form input.w60[type="submit"], .digirisk-wrap .flex-table .form input.w60[type="submit"], .digirisk-wrap .button.w80, .digirisk-wrap .flex-table form input.w80[type="submit"], .digirisk-wrap .flex-table .form input.w80[type="submit"], .digirisk-wrap .button.h50, .digirisk-wrap .flex-table form input.h50[type="submit"], .digirisk-wrap .flex-table .form input.h50[type="submit"] {
@@ -3276,7 +3276,7 @@
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3); }
 
-.digirisk-wrap .button.disable:hover, .digirisk-wrap .flex-table form input.disable[type="submit"]:hover, .digirisk-wrap .flex-table .form input.disable[type="submit"]:hover {
+.digirisk-wrap .button.disable:hover, .digirisk-wrap .flex-table form input.disable:hover[type="submit"], .digirisk-wrap .flex-table .form input.disable:hover[type="submit"] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.3);
   cursor: not-allowed; }
@@ -3590,7 +3590,7 @@
 .digirisk-wrap .workunit-navigation .button, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"], .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"], .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"], .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"] {
   background: none; }
 
-.digirisk-wrap .workunit-navigation .button:hover, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"]:hover, .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"]:hover {
+.digirisk-wrap .workunit-navigation .button:hover, .digirisk-wrap .workunit-navigation .flex-table form input:hover[type="submit"], .digirisk-wrap .flex-table form .workunit-navigation input:hover[type="submit"], .digirisk-wrap .workunit-navigation .flex-table .form input:hover[type="submit"], .digirisk-wrap .flex-table .form .workunit-navigation input:hover[type="submit"] {
   background: none; }
 
 .digirisk-wrap .workunit-navigation .button .icon, .digirisk-wrap .workunit-navigation .flex-table form input[type="submit"] .icon, .digirisk-wrap .flex-table form .workunit-navigation input[type="submit"] .icon, .digirisk-wrap .workunit-navigation .flex-table .form input[type="submit"] .icon, .digirisk-wrap .flex-table .form .workunit-navigation input[type="submit"] .icon {
@@ -3859,7 +3859,7 @@
 .digirisk-wrap .unit.active > .unit-container .add-container .button.blue, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table form input.blue[type="submit"], .digirisk-wrap .flex-table form .unit.active > .unit-container .add-container input.blue[type="submit"], .digirisk-wrap .unit.active > .unit-container .add-container .flex-table .form input.blue[type="submit"], .digirisk-wrap .flex-table .form .unit.active > .unit-container .add-container input.blue[type="submit"] {
   background: #1360c8; }
 
-.digirisk-wrap .unit.active > .unit-container .add-container .button.blue:hover, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table form .unit.active > .unit-container .add-container input.blue[type="submit"]:hover, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table .form input.blue[type="submit"]:hover, .digirisk-wrap .flex-table .form .unit.active > .unit-container .add-container input.blue[type="submit"]:hover {
+.digirisk-wrap .unit.active > .unit-container .add-container .button.blue:hover, .digirisk-wrap .unit.active > .unit-container .add-container .flex-table form input.blue:hover[type="submit"], .digirisk-wrap .flex-table form .unit.active > .unit-container .add-container input.blue:hover[type="submit"], .digirisk-wrap .unit.active > .unit-container .add-container .flex-table .form input.blue:hover[type="submit"], .digirisk-wrap .flex-table .form .unit.active > .unit-container .add-container input.blue:hover[type="submit"] {
   background: #0f4a99; }
 
 .digirisk-wrap .unit.toggled > .sub-list {
@@ -4038,7 +4038,7 @@
   top: 10px;
   right: 10px; }
 
-.digirisk-wrap .navigation-container .add-container .button:hover .button-add, .digirisk-wrap .navigation-container .add-container .flex-table form input[type="submit"]:hover .button-add, .digirisk-wrap .flex-table form .navigation-container .add-container input[type="submit"]:hover .button-add, .digirisk-wrap .navigation-container .add-container .flex-table .form input[type="submit"]:hover .button-add, .digirisk-wrap .flex-table .form .navigation-container .add-container input[type="submit"]:hover .button-add {
+.digirisk-wrap .navigation-container .add-container .button:hover .button-add, .digirisk-wrap .navigation-container .add-container .flex-table form input:hover[type="submit"] .button-add, .digirisk-wrap .flex-table form .navigation-container .add-container input:hover[type="submit"] .button-add, .digirisk-wrap .navigation-container .add-container .flex-table .form input:hover[type="submit"] .button-add, .digirisk-wrap .flex-table .form .navigation-container .add-container input:hover[type="submit"] .button-add {
   -webkit-animation-name: noFileAdd;
        -o-animation-name: noFileAdd;
           animation-name: noFileAdd; }
@@ -4121,26 +4121,66 @@
 .wp-core-ui .navigation-container .button-secondary:focus,
 .wp-core-ui .navigation-container .button-secondary:hover,
 .wp-core-ui .navigation-container .button.focus,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.focus[type="submit"], .digirisk-wrap .flex-table form
-.wp-core-ui .navigation-container input.focus[type="submit"],
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.focus[type="submit"], .digirisk-wrap .flex-table .form
-.wp-core-ui .navigation-container input.focus[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.focus[type="submit"],
+.digirisk-wrap .flex-table form .wp-core-ui .navigation-container input.focus[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.focus[type="submit"],
+.digirisk-wrap .flex-table .form .wp-core-ui .navigation-container input.focus[type="submit"],
 .wp-core-ui .navigation-container .button.hover,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.hover[type="submit"], .digirisk-wrap .flex-table form
-.wp-core-ui .navigation-container input.hover[type="submit"],
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.hover[type="submit"], .digirisk-wrap .flex-table .form
-.wp-core-ui .navigation-container input.hover[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input.hover[type="submit"],
+.digirisk-wrap .flex-table form .wp-core-ui .navigation-container input.hover[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input.hover[type="submit"],
+.digirisk-wrap .flex-table .form .wp-core-ui .navigation-container input.hover[type="submit"],
 .wp-core-ui .navigation-container .button:focus,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input[type="submit"]:focus, .digirisk-wrap .flex-table form
-.wp-core-ui .navigation-container input[type="submit"]:focus,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input[type="submit"]:focus, .digirisk-wrap .flex-table .form
-.wp-core-ui .navigation-container input[type="submit"]:focus,
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input:focus[type="submit"],
+.digirisk-wrap .flex-table form .wp-core-ui .navigation-container input:focus[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input:focus[type="submit"],
+.digirisk-wrap .flex-table .form .wp-core-ui .navigation-container input:focus[type="submit"],
 .wp-core-ui .navigation-container .button:hover,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input[type="submit"]:hover, .digirisk-wrap .flex-table form
-.wp-core-ui .navigation-container input[type="submit"]:hover,
-.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input[type="submit"]:hover, .digirisk-wrap .flex-table .form
-.wp-core-ui .navigation-container input[type="submit"]:hover {
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table form input:hover[type="submit"],
+.digirisk-wrap .flex-table form .wp-core-ui .navigation-container input:hover[type="submit"],
+.wp-core-ui .navigation-container .digirisk-wrap .flex-table .form input:hover[type="submit"],
+.digirisk-wrap .flex-table .form .wp-core-ui .navigation-container input:hover[type="submit"] {
   color: #fff; }
+
+.digirisk-wrap .modal-signature canvas {
+  width: 100%;
+  height: 100%;
+  border: solid black 1px; }
+
+.digirisk-wrap .signature {
+  max-width: 300px; }
+
+.wrap-causerie table.closed-causerie td, .wrap-causerie table.start-causerie td, .wrap-causerie table.final-causerie td, .wrap-causerie table.add-causerie td, .causerie-wrap table.closed-causerie td, .causerie-wrap table.start-causerie td, .causerie-wrap table.final-causerie td, .causerie-wrap table.add-causerie td {
+  height: auto; }
+
+.wrap-causerie table.closed-causerie th, .wrap-causerie table.start-causerie th, .wrap-causerie table.final-causerie th, .wrap-causerie table.add-causerie th, .causerie-wrap table.closed-causerie th, .causerie-wrap table.start-causerie th, .causerie-wrap table.final-causerie th, .causerie-wrap table.add-causerie th {
+  height: 50px; }
+
+.wrap-causerie table.closed-causerie tr, .wrap-causerie table.start-causerie tr, .wrap-causerie table.final-causerie tr, .wrap-causerie table.add-causerie tr, .causerie-wrap table.closed-causerie tr, .causerie-wrap table.start-causerie tr, .causerie-wrap table.final-causerie tr, .causerie-wrap table.add-causerie tr {
+  min-height: 50px; }
+
+.wrap-causerie .step-1 ul, .causerie-wrap .step-1 ul {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: disc; }
+
+.wrap-causerie .step-1 ul li, .causerie-wrap .step-1 ul li {
+  width: 20%; }
+
+.wrap-causerie .main-content, .causerie-wrap .main-content {
+  margin-top: 10px; }
+
+.wrap-causerie .step-list, .causerie-wrap .step-list {
+  margin-top: 20px; }
+
+.wrap-causerie .step-list .step .title, .causerie-wrap .step-list .step .title {
+  height: 50px; }
 
 /**
  * Main tab

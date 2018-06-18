@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 4.9.4
-Stable tag: 6.5.0
+Tested up to: 4.9.6
+Stable tag: 6.6.0
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -74,6 +74,21 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 6.6.0 =
+
+Améliorations
+
+* 15950 - Ajout des causeries.
+* 16593 - DigiRisk n'est plus compatible Internet Explorer a partir de cette version. Un message vous indique comment continuer à utiliser DigiRisk avec un autre navigateur.
+* 17240 - Réduction du poids des fichier ODT: DUER, Fiche de Groupement, Fiche de poste et listing des risques.
+* 17658 - Onglet "Diffusion d'information": Ajout du bouton "Enregister les modifications".
+* 19379 - Fiche de groupement: Les évaluateurs sont maintenant affichés par date décroissante.
+
+Corrections
+
+* 17657 - Correction d'un problème lors de l'édition des informations d'une unité de travail.
+* 17892 - Page outils -> Digirisk -> Onglet Avancés: Correction d'une faute d'orthographe. Le texte "Problème de recommendation" est devenu "Problème de signalisation". (Signalée par ifpvps)
 
 = Version 6.5.0 =
 

@@ -2,11 +2,11 @@
 /**
  * Edition d'une causerie
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.5.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -21,27 +21,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="edit_causerie" />
 	<?php wp_nonce_field( 'edit_causerie' ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $causerie->id ); ?>" />
-	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $main_society->id ); ?>" />
 
 	<td data-title="Ref." class="padding">
 		<span>
-			<strong><?php echo esc_html( $causerie->modified_unique_identifier ); ?></strong>
+			<strong><?php echo esc_html( $causerie->unique_identifier ); ?></strong>
 		</span>
 	</td>
 	<td>
 		<?php do_shortcode( '[wpeo_upload id="' . $causerie->id . '" model_name="/digi/' . $causerie->get_class() . '" single="false" field_name="image" ]' ); ?>
 	</td>
 	<td>
-		<input type="text" name="title" />
+		<?php
+		do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="' . ( ( 0 !== $causerie->id ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( isset( $causerie->risk_category ) ? $causerie->risk_category->id : 0 ) . '" preset="0"]' );
+		?>
 	</td>
-	<td>
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->id . '" type="causerie" display="edit" category_risk_id="' . $causerie->risk_category->id . '" preset="0"]' ); ?>
-	</td>
-	<td>
-		<textarea rows="2" name="description"></textarea>
-	</td>
-	<td>
-		<?php do_shortcode( '[wpeo_upload id="' . $causerie->id . '" model_name="/digi/' . $causerie->get_class() . '" single="false" display_type="list" field_name="document" ]' ); ?>
+	<td class="wpeo-grid grid-1">
+		<div>
+			<input type="text" name="title" value="<?php echo esc_attr( $causerie->title ); ?>" />
+		</div>
+		<div>
+			<textarea rows="2" name="description"><?php echo esc_html( $causerie->content ); ?></textarea>
+		</div>
 	</td>
 	<td data-title="action">
 		<?php if ( 0 !== $causerie->id ) : ?>
