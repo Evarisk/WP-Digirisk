@@ -2,14 +2,14 @@
 /**
  * La vue affichant à l'utilisateur que IE n'est pas compatible avec DigiRisk.
  *
- * @author Eoxia <dev@eoxia.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Eoxia
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.6.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
-namespace task_manager;
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="modal-content">
 			<p style="font-size: 1.4em; margin-bottom: 10px;"><?php esc_html_e( 'IE n\'est pas compatible avec DigiRisk', 'digirisk' ); ?></p>
 
-			<img src="https://media3.giphy.com/media/3o85xwSzDvuE1b2tW0/giphy.gif" alt="IE" />
+			<p><a href="https://www.evarisk.com/document-unique-logiciel/documentation/introduction/pre-requis-digirisk/" target="_blank"><?php esc_html_e( 'Voir les navigateurs compatibles', 'digirisk' ); ?></a></p>
 		</div>
 
 		<div class="modal-footer">

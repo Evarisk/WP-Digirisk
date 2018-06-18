@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<i class="icon fa fa-download" aria-hidden="true"></i>
 			</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
 					<i class="fa fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>

@@ -2,11 +2,11 @@
 /**
  * Classe gérant les actions principales de l'application.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   6.6.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -72,13 +72,13 @@ class Digirisk_Action {
 	/**
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
 	 *
-	 * @return void nothing
+	 * @since   6.0.0
+	 * @version 6.6.0
 	 *
-	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @return void nothing
 	 */
 	public function callback_admin_enqueue_scripts_js() {
-		wp_enqueue_script( 'signature-pad', 'https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'signature-pad', PLUGIN_DIGIRISK_URL . 'core/assets/js/signature-pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
@@ -88,13 +88,13 @@ class Digirisk_Action {
 	/**
 	 * Initialise en php le fichier permettant la traduction des variables string JavaScript.
 	 *
-	 * @return void nothing
+	 * @since   6.0.0
+	 * @version 6.6.0
 	 *
-	 * @since 6.0.0
-	 * @version 6.2.5.0
+	 * @return void nothing
 	 */
 	public function callback_admin_print_scripts_js() {
-		require( PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php' );
+		require PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php';
 	}
 
 	/**
@@ -133,8 +133,7 @@ class Digirisk_Action {
 	 * @since 6.0.0
 	 * @version 6.2.5.0
 	 */
-	public function callback_admin_print_scripts_css() {
-	}
+	public function callback_admin_print_scripts_css() {}
 
 	/**
 	 * Initialise le fichier MO
@@ -149,6 +148,36 @@ class Digirisk_Action {
 		$administrator_role = get_role( 'administrator' );
 		if ( ! $administrator_role->has_cap( 'manage_digirisk' ) ) {
 			$administrator_role->add_cap( 'manage_digirisk' );
+		}
+
+		/** Set capability to administrator by default */
+		$administrator_role = get_role( 'administrator' );
+		if ( ! $administrator_role->has_cap( 'manage_causerie' ) ) {
+			$administrator_role->add_cap( 'manage_causerie' );
+		}
+
+		/** Set capability to administrator by default */
+		$administrator_role = get_role( 'administrator' );
+		if ( ! $administrator_role->has_cap( 'create_causerie' ) ) {
+			$administrator_role->add_cap( 'create_causerie' );
+		}
+
+		/** Set capability to editor by default */
+		$editor_role = get_role( 'editor' );
+		if ( ! $editor_role->has_cap( 'manage_causerie' ) ) {
+			$editor_role->add_cap( 'manage_causerie' );
+		}
+
+		/** Set capability to editor by default */
+		$editor_role = get_role( 'editor' );
+		if ( ! $editor_role->has_cap( 'create_causerie' ) ) {
+			$editor_role->add_cap( 'create_causerie' );
+		}
+
+		/** Set capability to author by default */
+		$author_role = get_role( 'author' );
+		if ( ! $author_role->has_cap( 'manage_causerie' ) ) {
+			$author_role->add_cap( 'manage_causerie' );
 		}
 	}
 

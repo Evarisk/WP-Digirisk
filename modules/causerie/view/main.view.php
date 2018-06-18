@@ -20,8 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<ul class="tab" data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_load_tab' ) ); ?>">
 		<li class="tab-element active" data-tab="dashboard"><?php esc_html_e( 'Dashboard', 'digirisk' ); ?></li>
-		<li class="tab-element" data-tab="start"><?php esc_html_e( 'Démarrer une causerie', 'digirisk' ); ?></li>
-		<li class="tab-element" data-tab="form"><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></li>
+
+		<?php
+		if ( user_can( get_current_user_id(), 'manage_causerie' ) ) :
+			?>
+			<li class="tab-element" data-tab="start"><?php esc_html_e( 'Démarrer une causerie', 'digirisk' ); ?></li>
+			<?php
+		endif;
+
+		if ( user_can( get_current_user_id(), 'create_causerie' ) ) :
+			?>
+			<li class="tab-element" data-tab="form"><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></li>
+			<?php
+		endif;
+		?>
 	</ul>
 
 	<div class="ajax-content main-content">
