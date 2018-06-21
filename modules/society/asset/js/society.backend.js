@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "society" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.0.0
+ * @version 7.0.0
  */
 window.eoxiaJS.digirisk.society = {};
 
@@ -102,18 +102,20 @@ window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredEleme
  * @param  {Object}        response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.0.0
+ * @version 7.0.0
  */
-window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
-		jQuery( '.digirisk-wrap .workunit-navigation .title' ).text( response.data.society.unique_identifier + ' - ' + response.data.society.title );
+		jQuery( '.digirisk-wrap .workunit-navigation .title' ).text( response.data.society.data.unique_identifier + ' - ' + response.data.society.data.title );
+	} else if ( 'digi-workunit' === response.data.society.type ) {
+		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.data.id + '"] span' ).text( response.data.society.data.title );
+		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.data.id + '"] span' ).attr( 'title', response.data.society.data.title );
 	} else {
-		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).text( response.data.society.title );
-		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).attr( 'title', response.data.society.title );
+		jQuery( '.digirisk-wrap .navigation-container .society-header .title' ).text( response.data.society.data.title );
 	}
 
-	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
+	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.data.title );
 
 	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
 };

@@ -2,11 +2,11 @@
 /**
  * Les actions relatives aux accident de travail benin (ODT)
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.3.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.3.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -23,7 +23,7 @@ class Registre_Accident_Travail_Benin_Action {
 	/**
 	 * Le constructeur ajoutes l'action wp_ajax_generate_registre_accidents_travail_benins
 	 *
-	 * @since 6.3.0
+	 * @since   6.3.0
 	 * @version 6.3.0
 	 */
 	public function __construct() {
@@ -35,7 +35,7 @@ class Registre_Accident_Travail_Benin_Action {
 	 *
 	 * @return void
 	 *
-	 * @since 6.3.0
+	 * @since   6.3.0
 	 * @version 6.4.4
 	 */
 	public function ajax_generate_registre_accidents_travail_benins() {
@@ -48,7 +48,7 @@ class Registre_Accident_Travail_Benin_Action {
 		$result = Registre_Accidents_Travail_Benins_Class::g()->generate( $main_society );
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $main_society->id,
+			'parent_id' => $main_society->data['id'],
 			'id'        => 'Indisponible',
 			'content'   => 'Génération du registre des accidents de travail bénins.',
 		) );

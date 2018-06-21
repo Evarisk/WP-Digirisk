@@ -23,12 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</li>
 	<li data-action="generate_duer"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate_duer' ) ); ?>"
-			data-parent-id="<?php echo esc_attr( $society->id ); ?>">
+			data-parent-id="<?php echo esc_attr( $society->data['id'] ); ?>">
 		<?php esc_html_e( 'Génération du DUER', 'digirisk' ); ?>
 		<img src="<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>" alt="<?php echo esc_attr( 'Chargement...' ); ?>" />
 	</li>
 
-	<?php DUER_Class::g()->display_childs( $society->id ); ?>
+	<?php DUER_Class::g()->display_childs( $society->data['id'] ); ?>
 
 	<li data-action="generate_zip"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate_zip' ) ); ?>">

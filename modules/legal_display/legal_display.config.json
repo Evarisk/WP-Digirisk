@@ -8,9 +8,8 @@
 	"dependencies": {
 		"shortcode": {},
 		"model": {},
-		"helper": {},
-		"filter": {},
 		"class": {},
+		"filter": {},
 		"action": {}
 	}
 }

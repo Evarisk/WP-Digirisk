@@ -2,11 +2,11 @@
 /**
  * Génères le DUER
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.1
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -31,7 +31,7 @@ class DUER_Document_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Génères le DUER
 	 *
-	 * @since 6.2.1
+	 * @since   6.2.1
 	 * @version 6.4.0
 	 *
 	 * @param array $data Les data à mettre dans le ODT.
@@ -55,7 +55,7 @@ class DUER_Document_Class extends \eoxia\Singleton_Util {
 		$data             = $this->securize_duer_data( $data, $element );
 		$data_to_document = $this->prepare_skeleton();
 		$data_to_document = $this->fill_data_duer( $data, $data_to_document, $element );
-		$data_to_document = $this->fill_data_risk( $data_to_document, $element );
+		// $data_to_document = $this->fill_data_risk( $data_to_document, $element );
 
 		$data_to_document = apply_filters( 'wpdigi_element_duer_details', $data_to_document );
 
@@ -81,9 +81,9 @@ class DUER_Document_Class extends \eoxia\Singleton_Util {
 	 */
 	public function securize_duer_data( $data, $element ) {
 		$user                  = wp_get_current_user();
-		$data['nomEntreprise'] = $element->title;
+		$data['nomEntreprise'] = $element->data['title'];
 		$data['emetteurDUER']  = $user->display_name;
-		$data['telephone']     = ! empty( $element->contact['phone'] ) ? max( $element->contact['phone'] ) : '';
+		$data['telephone']     = ! empty( $element->data['contact']['phone'] ) ? end( $element->data['contact']['phone'] ) : '';
 
 		$data['dateAudit']        = $this->formatte_audit_date( $data );
 		$data['destinataireDUER'] = ! empty( $data['destinataireDUER'] ) ? sanitize_text_field( $data['destinataireDUER'] ) : '';
@@ -190,21 +190,21 @@ class DUER_Document_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Remplis les données du duer
 	 *
+	 * @since   6.2.1
+	 * @version 7.0.0
+	 *
 	 * @param array  $data Les données sécurisées.
 	 * @param array  $data_to_document Les données qui seront insérées dans le document.
 	 * @param object $element L'objet groupement.
 	 *
 	 * @return array Les données qui seront insérées dans le document
-	 *
-	 * @since 6.2.1
-	 * @version 6.5.0
 	 */
 	public function fill_data_duer( $data, $data_to_document, $element ) {
 		$data_to_document                                  = array_merge( $data_to_document, $data );
-		$data_to_document['identifiantElement']            = $element->unique_identifier;
+		$data_to_document['identifiantElement']            = $element->data['unique_identifier'];
 		$data_to_document['dateAudit']                     = $this->formatte_audit_date( $data );
 		$data_to_document['dateGeneration']                = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
-		$data_to_document['elementParHierarchie']['value'] = Group_Class::g()->get_element_sub_tree( $element );
+		// $data_to_document['elementParHierarchie']['value'] = Group_Class::g()->get_element_sub_tree( $element );
 
 		return $data_to_document;
 	}
@@ -221,7 +221,7 @@ class DUER_Document_Class extends \eoxia\Singleton_Util {
 	 * @version 6.2.5
 	 */
 	public function fill_data_risk( $data_to_document, $element ) {
-		$list_risk = group_class::g()->get_element_tree_risk( $element );
+		$list_risk = Group_Class::g()->get_element_tree_risk( $element );
 		$risk_per_element = array();
 
 		if ( count( $list_risk ) > 1 ) {

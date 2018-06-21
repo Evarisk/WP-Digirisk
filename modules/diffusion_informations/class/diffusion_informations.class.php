@@ -2,11 +2,11 @@
 /**
  * Classe gérant les diffusions d'informations
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.4.0
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.4.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -72,7 +72,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	/**
 	 * Appelle la vue "main".
 	 *
-	 * @since 6.4.4
+	 * @since   6.4.4
 	 * @version 6.4.4
 	 *
 	 * @param  integer $element_id L'ID de l'élement.
@@ -87,53 +87,14 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Appelle le template list.view.php dans le dossier /diffusion_informations/view/
-	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 * @return void
-	 *
-	 * @since 6.2.10
-	 * @version 6.2.10
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = Diffusion_Informations_A3_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) );
-
-		$list_document = array_merge( $list_document, Diffusion_Informations_A4_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) ) );
-
-		// Trie le tableau par ordre des clés.
-		usort( $list_document, function( $a, $b ) {
-			if ( $a->unique_key === $b->unique_key ) {
-				return 0;
-			}
-
-			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
-		} );
-
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
 	 * Le formulaire pour générer une diffusion d'information
 	 *
-	 * @param  object $element La société.
-	 * @return void
-	 *
-	 * @since 6.2.10
+	 * @since   6.2.10
 	 * @version 7.0.0
+	 *
+	 * @param  object $element La société.
+	 *
+	 * @return void
 	 */
 	public function display_form( $element ) {
 		$diffusion_information = $this->get( array(
@@ -158,15 +119,57 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	}
 
 	/**
+	* Appelle le template list.view.php dans le dossier /diffusion_informations/view/
+	*
+	* @since   6.2.10
+	* @version 7.0.0
+	*
+	* @param  integer $element_id L'ID de l'élement.
+	*
+	* @return void
+	*/
+	public function display_document_list( $element_id ) {
+		$list_document = Diffusion_Informations_A3_Class::g()->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array(
+				'publish',
+				'inherit',
+			),
+		) );
+
+		$list_document = array_merge( $list_document, Diffusion_Informations_A4_Class::g()->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array(
+				'publish',
+				'inherit',
+			),
+		) ) );
+
+		// Trie le tableau par ordre des clés.
+		usort( $list_document, function( $a, $b ) {
+			if ( $a->data['unique_key'] === $b->data['unique_key'] ) {
+				return 0;
+			}
+
+			return ( $a->data['unique_key'] > $b->data['unique_key'] ) ? -1 : 1;
+		} );
+
+		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
+			'list_document' => $list_document,
+		) );
+	}
+
+	/**
 	 * Génère une fiche de diffusions
+	 *
+	 * @since   6.2.10
+	 * @version 6.4.0
 	 *
 	 * @param  array         $data    Les données du documents.
 	 * @param  Society_Model $element La société.
 	 * @param  string        $format  Le format de la génération A3 ou A4.
-	 * @return void
 	 *
-	 * @since 6.2.10
-	 * @version 6.4.0
+	 * @return void
 	 */
 	public function generate_sheet( $data, $element, $format = 'A3' ) {
 		$data['delegues_du_personnels_date'] = mysql2date( 'd/m/Y', $data['delegues_du_personnels_date'] );

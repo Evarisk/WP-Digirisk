@@ -2,11 +2,11 @@
 /**
  * Classe principale gérant tous les documents (ODT) de DigiRisk.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -308,8 +308,8 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Renvoies le chemin HTTP vers l'ODT.
 	 *
-	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @since   6.0.0
+	 * @version 7.0.0
 	 *
 	 * @param  Object $element Le modèle (objet) ODT.
 	 *
@@ -319,22 +319,22 @@ class Document_Class extends \eoxia\Post_Class {
 		$url = '';
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
-			$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
-			$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
+			$basedir = $this->get_digirisk_dir_path( 'basedir' );
+			$baseurl = $this->get_digirisk_dir_path( 'baseurl' );
 			$url     = $baseurl . "/";
 
-			if ( ! empty( $element->parent_id ) && ! empty( $element->mime_type ) ) {
-				$society = Society_Class::g()->show_by_type( $element->parent_id );
-				$url .= "/" . $society->type . "/" . $society->id . "/";
+			if ( ! empty( $element->data['parent_id'] ) && ! empty( $element->data['mime_type'] ) ) {
+				$society = Society_Class::g()->show_by_type( $element->data['parent_id'] );
+				$url .= "/" . $society->data['type'] . "/" . $society->data['id'] . "/";
 			}
-			$url .= $element->title;
-			if ( ! empty( $element->mime_type ) ) {
-				$url .= $this->mime_type_link[ $element->mime_type ];
+			$url .= $element->data['title'];
+			if ( ! empty( $element->data['mime_type'] ) ) {
+				$url .= $this->mime_type_link[ $element->data['mime_type'] ];
 			}
 
 			$path = str_replace( $baseurl, $basedir, $url );
 
-			if ( empty( $element->mime_type ) ) {
+			if ( empty( $element->data['mime_type'] ) ) {
 				$url = '';
 			}
 
@@ -406,17 +406,17 @@ class Document_Class extends \eoxia\Post_Class {
 		);
 
 		// Définition du modèle de document a utiliser pour l'impression.
-		$model_to_use = null;
+		$model_to_use   = null;
 		$model_response = $this->get_model_for_element( wp_parse_args( array( 'model', 'default_model' ), $document_type ) );
-		$model_to_use = $model_response['model_path'];
+		$model_to_use   = $model_response['model_path'];
 
 		// Définition de la révision du document.
-		$document_revision = $this->get_document_type_next_revision( $this->post_type, $element->id );
+		$document_revision = $this->get_document_type_next_revision( $this->type, $element->data['id'] );
 
 		// Définition de la partie principale du nom de fichier.
-		$main_title_part = $types[0] . '_' . $element->title;
+		$main_title_part = $types[0] . '_' . $element->data['title'];
 		$response['filename'] = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
-		$response['filename'] .= $element->unique_identifier . '_';
+		$response['filename'] .= $element->data['unique_identifier'] . '_';
 
 		// 05/02/2018: Enlevez la révision et mêttre l'unique identifier du DUER. Utiliser construct_identifier.
 		$response['filename'] .= sanitize_title( str_replace( ' ', '_', $main_title_part ) ) . '_V' . $document_revision . '.odt';
@@ -430,7 +430,7 @@ class Document_Class extends \eoxia\Post_Class {
 		$response['path'] = $response['filename'];
 
 		if ( ! empty( $element ) ) {
-			$response['path'] = $element->type . '/' . $element->id . '/' . $response['filename'];
+			$response['path'] = $element->data['type'] . '/' . $element->data['id'] . '/' . $response['filename'];
 		}
 
 		// Génères le fichier ODT.
@@ -449,13 +449,13 @@ class Document_Class extends \eoxia\Post_Class {
 		$document_args = array(
 			'post_status' => 'inherit',
 			'post_title'  => basename( $response['filename'] ),
-			'post_parent' => $element->id,
-			'post_type'   => $this->post_type,
+			'post_parent' => $element->data['id'],
+			'post_type'   => $this->type,
 			'guid'        => $document_creation['url'],
 			'mime_type'   => $filetype['type'],
 		);
 
-		$response['id'] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $response['path'], $element->id );
+		$response['id'] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $response['path'], $element->data['id'] );
 
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $this->get_digirisk_dir_path() . '/' . $response['path'] );
 		wp_update_attachment_metadata( $response['id'], $attach_data );

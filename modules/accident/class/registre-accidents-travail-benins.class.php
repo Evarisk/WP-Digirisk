@@ -2,11 +2,11 @@
 /**
  * Gères la génération de l'ODT: Registre Accidents de travail benins
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.3.0
- * @version 7.0.0
- * @copyright 2015-2018
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.3.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -129,23 +129,23 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	/**
 	 * Cette méthode génère le registre AT bénins.
 	 *
+	 * @since   6.3.0
+	 * @version 7.0.0
+	 *
 	 * @param Society_Model $main_society La société.
 	 * @return array
-	 *
-	 * @since 6.3.0
-	 * @version 6.5.0
 	 */
 	public function generate( $main_society ) {
 		$address = Society_Class::g()->get_address( $main_society );
 
 		$sheet_details = array(
-			'ref'           => self::g()->element_prefix . (int) ( get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
-			'raisonSociale' => $main_society->title,
-			'adresse'       => $address->address . ' ' . $address->additional_address . ' ' . $address->postcode . ' ' . $address->town,
-			'telephone'     => ! empty( $main_society->contact['phone'] ) ? max( $main_society->contact['phone'] ) : '',
-			'siret'         => $main_society->siret_id,
-			'email'         => $main_society->contact['email'],
-			'effectif'      => $main_society->number_of_employees,
+			'ref'           => self::g()->element_prefix . (int) ( Identifier_Filter::get_last_unique_key( '\digi\Registre_Accidents_Travail_Benins_Class' ) + 1 ),
+			'raisonSociale' => $main_society->data['title'],
+			'adresse'       => $address->data['address'] . ' ' . $address->data['additional_address'] . ' ' . $address->data['postcode'] . ' ' . $address->data['town'],
+			'telephone'     => ! empty( $main_society->data['contact']['phone'] ) ? end( $main_society->data['contact']['phone'] ) : '',
+			'siret'         => $main_society->data['siret_id'],
+			'email'         => $main_society->data['contact']['email'],
+			'effectif'      => $main_society->data['number_of_employees'],
 		);
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_accidents() );
