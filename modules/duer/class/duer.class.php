@@ -2,11 +2,11 @@
 /**
  * Fait l'affichage du template de la liste des documents uniques
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.1
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.1
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -108,11 +108,12 @@ class DUER_Class extends Document_Class {
 	/**
 	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.
 	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 *
-	 * @since 6.0.0
+	 * @since   6.0.0
 	 * @version 6.5.0
+	 *
+	 * @param int $element_id L'ID de l'élement.
+	 *
+	 * @return void
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
@@ -157,11 +158,12 @@ class DUER_Class extends Document_Class {
 	/**
 	 * Récupères les enfants pour l'affichage dans la popup pour générer le DUER.
 	 *
-	 * @param integer $parent_id L'ID de la société parent.
-	 * @return void
+	 * @since   6.2.3
+	 * @version 7.0.0
 	 *
-	 * @since 6.2.3
-	 * @version 6.5.0
+	 * @param integer $parent_id L'ID de la société parent.
+	 *
+	 * @return void
 	 */
 	public function display_childs( $parent_id = 0 ) {
 		$societies = Society_Class::g()->get(
@@ -177,7 +179,9 @@ class DUER_Class extends Document_Class {
 			)
 		);
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $societies ) );
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array(
+			'societies' => $societies,
+		) );
 	}
 }
 

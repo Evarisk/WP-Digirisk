@@ -139,7 +139,7 @@ class Identifier_Filter {
 	 *
 	 * @return int               L'identifiant unique
 	 */
-	private function get_last_unique_key( $controller ) {
+	public static function get_last_unique_key( $controller ) {
 		$element_type = $controller::g()->get_type();
 		$wp_type      = $controller::g()->get_identifier_helper();
 

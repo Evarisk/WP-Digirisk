@@ -131,19 +131,15 @@ class Society_Class extends \eoxia\Post_Class {
 	 *
 	 * @return object L'objet mis à jour
 	 *
-	 * @since 6.0.0
-	 * @version 6.2.5
+	 * @since   6.0.0
+	 * @version 7.0.0
 	 */
 	public function update_by_type( $establishment ) {
 		if ( ! is_object( $establishment ) && ! is_array( $establishment ) ) {
 			return false;
 		}
 
-		$type = ( is_object( $establishment ) && isset( $establishment->type ) ) ? $establishment->type : '';
-
-		if ( empty( $type ) ) {
-			$type = ( is_array( $establishment ) && ! empty( $establishment['type'] ) ) ? $establishment['type'] : '';
-		}
+		$type = ( is_object( $establishment ) && isset( $establishment->data['type'] ) ) ? $establishment->data['type'] : '';
 
 		if ( empty( $type ) ) {
 			return false;
@@ -155,7 +151,7 @@ class Society_Class extends \eoxia\Post_Class {
 			return false;
 		}
 
-		$establishment = $model_name::g()->update( $establishment );
+		$establishment = $model_name::g()->update( $establishment->data );
 		return $establishment;
 	}
 
@@ -192,7 +188,7 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @param  mixed $society Les données de la société.
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
-	 * @since 6.0.0
+	 * @since   6.0.0
 	 * @version 7.0.0
 	 */
 	public function get_address( $society ) {

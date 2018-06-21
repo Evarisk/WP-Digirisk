@@ -2,11 +2,11 @@
 /**
  * Les actions relatives aux évaluateurs
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -38,8 +38,8 @@ class Evaluator_Action {
 	/**
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @since   6.0.0
+	 * @version 7.0.0
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
@@ -74,7 +74,7 @@ class Evaluator_Action {
 				$tmp_evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
 				$evaluators[]  = $tmp_evaluator;
 
-				$element->user_info['affected_id']['evaluator'][ $user_id ][] = array(
+				$element->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
 					'status' => 'valid',
 					'start'  => array(
 						'date' => $list_value['on'],
@@ -99,13 +99,13 @@ class Evaluator_Action {
 
 			if ( ! empty( $evaluators ) ) {
 				foreach ( $evaluators as $evaluator ) {
-					$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->id . ' ' . $evaluator->lastname . ' ' . $evaluator->firstname;
+					$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->data['id'] . ' ' . $evaluator->data['lastname'] . ' ' . $evaluator->data['firstname'];
 					$content .= '<br />';
 				}
 			}
 
 			do_action( 'digi_add_historic', array(
-				'parent_id' => $element->id,
+				'parent_id' => $element->data['id'],
 				'id'        => 'Indisponible',
 				'content'   => $content,
 			) );
@@ -117,7 +117,7 @@ class Evaluator_Action {
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
 			'element'                 => $element,
-			'element_id'              => $element->id,
+			'element_id'              => $element->data['id'],
 			'list_affected_evaluator' => $list_affected_evaluator,
 		) );
 

@@ -2,11 +2,11 @@
 /**
  * Classe gérant les évaluateurs
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.3
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.3
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;

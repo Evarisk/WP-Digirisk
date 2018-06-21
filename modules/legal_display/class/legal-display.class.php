@@ -2,11 +2,11 @@
 /**
  * Classe gérant les affichages légaux
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.5
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.1.5
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -88,42 +88,9 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	}
 
 	/**
-	 * Appelle le template list.view.php dans le dossier /view/
-	 *
-	 * @since 6.0.0
-	 * @version 6.4.0
-	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 * @return void
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = Legal_Display_A3_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-		$list_document = array_merge( $list_document, Legal_Display_A4_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) ) );
-
-		// Trie le tableau par ordre des clés.
-		usort( $list_document, function( $a, $b ) {
-			if ( $a->unique_key === $b->unique_key ) {
-				return 0;
-			}
-
-			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
-		} );
-
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
 	 * Le formulaire pour générer un affichage légal
 	 *
-	 * @since 6.0.0
+	 * @since   6.0.0
 	 * @version 6.5.0
 	 *
 	 * @param  object $element L'objet affichage_legal.
@@ -148,9 +115,43 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	}
 
 	/**
+	 * Appelle le template list.view.php dans le dossier /view/
+	 *
+	 * @since   6.0.0
+	 * @version 7.0.0
+	 *
+	 * @param  integer $element_id L'ID de l'élement.
+	 *
+	 * @return void
+	 */
+	public function display_document_list( $element_id ) {
+		$list_document = Legal_Display_A3_Class::g()->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+		$list_document = array_merge( $list_document, Legal_Display_A4_Class::g()->get( array(
+			'post_parent' => $element_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) ) );
+
+		// Trie le tableau par ordre des clés.
+		usort( $list_document, function( $a, $b ) {
+			if ( $a->data['unique_key'] === $b->data['unique_key'] ) {
+				return 0;
+			}
+
+			return ( $a->data['unique_key'] > $b->data['unique_key'] ) ? -1 : 1;
+		} );
+
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'list', array(
+			'list_document' => $list_document,
+		) );
+	}
+
+	/**
 	 * Sauvegardes les données de l'affichage légal
 	 *
-	 * @since 6.0.0
+	 * @since   6.0.0
 	 * @version 6.0.0
 	 *
 	 * @param  array $data  Les données de l'affichage légal.

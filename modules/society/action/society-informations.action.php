@@ -30,17 +30,18 @@ class Society_Informations_Action {
 	/**
 	 * Appelle les méthodes save de Society_Configuration_Class et Address_Class pour enregister les données.
 	 *
-	 * @since 6.2.2
-	 * @version 6.5.0
+	 * @since   6.2.2
+	 * @version 7.0.0
 	 *
 	 * @return void
 	 */
 	public function callback_save_configuration() {
 		check_ajax_referer( 'save_configuration' );
 
-		$data = (array) $_POST['society'];
+		$data    = (array) $_POST['society'];
+		$address = (array) $_POST['address'];
 
-		$address                       = Address_Class::g()->save( $_POST['address'] );
+		$address                       = Address_Class::g()->save( $address );
 		$data['contact']['address_id'] = $address->data['id'];
 
 		$society = Society_Informations_Class::g()->save( $data );
@@ -57,7 +58,7 @@ class Society_Informations_Action {
 			'address'          => $address,
 			'namespace'        => 'digirisk',
 			'module'           => 'society',
-			'callback_success' => 'savedSocietyConfiguration',
+			'callback_success' => 'savedSocietyConfigurationSuccess',
 			'view'             => $view,
 		) );
 	}

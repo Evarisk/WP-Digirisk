@@ -2,11 +2,11 @@
 /**
  * Affichage d'un DUER
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.9
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.1.9
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <tr>
-	<td class="padding w50"><strong><?php echo esc_html( $element->unique_identifier ); ?></strong></td>
+	<td class="padding w50"><strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 
@@ -117,10 +117,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action grid-layout w2">
-			<?php if ( ! empty( $element->link ) ) : ?>
+			<?php if ( ! empty( $element->data['link'] ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
-					href="<?php echo esc_attr( $element->link ); ?>">
+					href="<?php echo esc_attr( $element->data['link'] ); ?>">
 					<i class="icon fas fa-file-alt"></i>
 				</a>
 			<?php else : ?>

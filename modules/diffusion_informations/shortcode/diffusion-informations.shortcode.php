@@ -2,11 +2,11 @@
 /**
  * Les actions relatives aux diffusions informations
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.4.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.4.0
+ * @version   6.4.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -23,7 +23,7 @@ class Diffusion_Informations_Shortcode {
 	/**
 	 * Le constructeur
 	 *
-	 * @since 6.4.0
+	 * @since   6.4.0
 	 * @version 6.4.0
 	 */
 	public function __construct() {
@@ -33,10 +33,12 @@ class Diffusion_Informations_Shortcode {
 	/**
 	 * Appelle la fonction display de la class affichage légal
 	 *
+	 * @since   6.4.0
+	 * @version 6.4.0
+	 *
 	 * @param array $param Les paramètres dans le shortcode.
 	 *
-	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @return void
 	 */
 	public function callback_digi_diffusion_informations( $param ) {
 		$element_id = $param['post_id'];

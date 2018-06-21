@@ -124,14 +124,14 @@ class Group_Class extends \eoxia\Post_Class {
 	 */
 	public function get_element_sub_tree( $element, $tabulation = '', $extra_params = null ) {
 		$element_children = array();
-		$element_tree = '';
+		$element_tree     = '';
 
 		$element_children[ $element->unique_identifier ] = array( 'nomElement' => $tabulation . ' ' . $element->unique_identifier . ' - ' . $element->title, ) ;
 		if ( ! empty( $extra_params ) ) {
 			if ( ! empty( $extra_params['default'] ) ) {
 				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params['default'], $element_children[ $element->unique_identifier ] );
 			}
-			if ( ! empty( $extra_params['value'] ) &&  array_key_exists( $element->unique_identifier, $extra_params['value'] ) ) {
+			if ( ! empty( $extra_params['value'] ) && array_key_exists( $element->unique_identifier, $extra_params['value'] ) ) {
 				$element_children[ $element->unique_identifier ] = wp_parse_args( $extra_params['value'][ $element->unique_identifier ], $element_children[ $element->unique_identifier ] );
 			}
 		}

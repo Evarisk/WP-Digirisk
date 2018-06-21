@@ -2,11 +2,11 @@
 /**
  * Gères l'action AJAX de la génération du DUER
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.1
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.1
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -38,10 +38,10 @@ class DUER_Action {
 	/**
 	 * Appelle la méthode display_societies_tree de DUER_Class pour récupérer la vue dans la tamporisation de sortie.
 	 *
-	 * @return void
+	 * @since   6.2.3
+	 * @version 7.0.0
 	 *
-	 * @since 6.2.3
-	 * @version 6.5.0
+	 * @return void
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
@@ -123,8 +123,8 @@ class DUER_Action {
 	/**
 	 * Génères le DUER
 	 *
-	 * @since 6.5.0
-	 * @version 6.5.0
+	 * @since   6.5.0
+	 * @version 7.0.0
 	 *
 	 * @return void
 	 */
@@ -150,11 +150,11 @@ class DUER_Action {
 		$current_document = DUER_Class::g()->get( array( 'id' => $document_id ), true );
 
 		\eoxia\LOG_Util::log( 'DEBUT - Génération du document DUER', 'digirisk' );
-		$generation_status = Document_Class::g()->generate_document( $current_document->model_id, $current_document->document_meta, $society->type . '/' . $society->id . '/' . $current_document->title );
+		$generation_status = Document_Class::g()->generate_document( $current_document->data['model_id'], $current_document->data['document_meta'], $society->data['type'] . '/' . $society->data['id'] . '/' . $current_document->data['title'] );
 		\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
 
 		ZIP_Class::g()->update_temporarly_files_details( array(
-			'filename' => $current_document->title,
+			'filename' => $current_document->data['title'],
 			'path'     => $generation_status['path'],
 		) );
 
