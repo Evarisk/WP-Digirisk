@@ -30,6 +30,11 @@ class Identifier_Filter {
 		add_filter( 'eo_model_handle_schema', array( $this, 'callback_handle_schema' ), 10, 2 );
 
 		$called_class = str_replace( '_Filter', '_Class', get_called_class() );
+
+		if ( ! class_exists( $called_class ) ) {
+			$called_class = str_replace( '_Class', '', $called_class );
+		}
+
 		$current_type = $called_class::g()->get_type();
 
 		add_filter( "eo_model_{$current_type}_before_post", array( $this, 'construct_identifier' ), 10, 2 );
@@ -83,6 +88,11 @@ class Identifier_Filter {
 		$model_name      = $args['model_name'];
 		$controller_name = str_replace( 'model', 'class', $model_name );
 		$controller_name = str_replace( 'Model', 'Class', $controller_name );
+
+		if ( ! class_exists( $controller_name ) ) {
+			$controller_name = str_replace( '_Class', '', $controller_name );
+		}
+
 		$next_identifier = $this->get_last_unique_key( $controller_name );
 		$next_identifier++;
 
@@ -140,6 +150,9 @@ class Identifier_Filter {
 	 * @return int               L'identifiant unique
 	 */
 	public static function get_last_unique_key( $controller ) {
+		if ( ! class_exists( $controller ) ) {
+			$controller = str_replace( '_Class', '', $controller );
+		}
 		$element_type = $controller::g()->get_type();
 		$wp_type      = $controller::g()->get_identifier_helper();
 

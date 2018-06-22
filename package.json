@@ -6,7 +6,7 @@
     "start": "node node_modules/gulp/bin/gulp.js",
     "test": "mocha"
   },
-  "author": "Eoxia",
+  "author": "Evarisk",
   "contributors": [
     {
       "name": "Evarisk",

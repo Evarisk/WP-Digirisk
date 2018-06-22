@@ -1,22 +1,23 @@
 <?php
 /**
- * Affiches d'une société dans la navigation
+ * Le template pour afficher un item dans le menu de navigation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.0.0
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
-<li class="unit <?php echo ( $society->data['id'] === $selected_society_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $society->data['id'], $selected_society_id ) ) ? 'toggled' : ''; ?>"
-	data-id="<?php echo esc_attr( $society->data['id'] ); ?>">
+<li class="unit" data-id="<?php echo esc_attr( $society->data['id'] ); ?>">
 	<div class="unit-container">
 
 		<?php if ( Workunit_Class::g()->get_type() !== $society->data['type'] && \eoxia\Post_Util::have_child( $society->data['id'], array( 'digi-group', 'digi-workunit' ) ) ) : ?>
@@ -43,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-module="navigation"
 				data-before-method="setUnitActive">
 			<span class="title-container">
-				<span class="ref"><?php echo esc_html( $society->data['modified_unique_identifier'] ); ?></span>
+				<span class="ref"><?php echo esc_html( $society->data['unique_identifier'] ); ?></span>
 				<span class="name"><?php echo esc_html( $society->data['title'] ); ?></span>
 			</span>
 		</div>

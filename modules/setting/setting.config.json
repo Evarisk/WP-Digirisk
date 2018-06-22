@@ -9,5 +9,6 @@
 		"action": {},
 		"class": {}
 	},
-	"key_preset_danger": "_wpdigi_preset_danger_installed"
+	"key_preset_danger": "_wpdigi_preset_danger_installed",
+	"key_accronym": "_wpdigi_accronym_installed"
 }

@@ -1,28 +1,31 @@
 <?php
 /**
- * Les actions relatives aux recommendations
+ * Les actions des signalisations.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.5
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.1.5
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Les actions relatives aux recommendations
  */
 class Recommendation_Action {
+
 	/**
-	 * Le constructeur
+	 * Constructeur.
 	 *
-	 * @since 6.1.5
+	 * @since   6.1.5
 	 * @version 6.2.4
 	 */
 	public function __construct() {
@@ -36,8 +39,8 @@ class Recommendation_Action {
 	/**
 	 * Charges une recommendation
 	 *
-	 * @since 6.1.5
-	 * @version 6.2.10
+	 * @since   6.1.5
+	 * @version 7.0.0
 	 */
 	public function ajax_load_recommendation() {
 		check_ajax_referer( 'ajax_load_recommendation' );
@@ -48,7 +51,7 @@ class Recommendation_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$recommendation = Recommendation_Class::g()->get( array(
+		$recommendation = Recommendation::g()->get( array(
 			'id' => $id,
 		) );
 		$recommendation = $recommendation[0];
@@ -70,12 +73,12 @@ class Recommendation_Action {
 	}
 
 	/**
-	 * Sauvegardes une recommendation ainsi que la liste des commentaires.
+	 * Sauvegardes une signalisation.
+	 *
+	 * @since   6.1.5
+	 * @version 7.0.0
 	 *
 	 * @return void
-	 *
-	 * @since 6.1.5
-	 * @version 6.5.0
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
@@ -83,26 +86,26 @@ class Recommendation_Action {
 		$id                     = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$parent_id              = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 		$image_id               = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
-		$recommendation_term_id = ! empty( $_POST['recommendation_term_id'] ) ? (int) $_POST['recommendation_term_id'] : 0;
+		$recommendation_term_id = ! empty( $_POST['recommendation_category_id'] ) ? (int) $_POST['recommendation_category_id'] : 0;
+		$comments               = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
 
-		$recommendation_term = Recommendation_Term_Class::g()->get( array( 'id' => $recommendation_term_id ), true );
 		$recommendation_args = array(
 			'id'        => $id,
 			'parent_id' => $parent_id,
-			'status'    => 'publish',
-			'taxonomy'  => array(
-				'digi-recommendation-category' => array( $recommendation_term->parent_id ),
-				'digi-recommendation'          => array( $recommendation_term_id ),
-			),
+			'status'    => 'inherit',
 		);
 
-		$recommendation = Recommendation_Class::g()->update( $recommendation_args );
+		$recommendation_args['$push']['taxonomy'] = array(
+			'digi-recommendation-category' => $recommendation_term_id,
+		);
+
+		$recommendation = Recommendation::g()->update( $recommendation_args );
 
 		if ( ! empty( $image_id ) ) {
 			$args_media = array(
-				'id'         => $recommendation->id,
+				'id'         => $recommendation->data['id'],
 				'file_id'    => $image_id,
-				'model_name' => '\digi\Recommendation_Class',
+				'model_name' => '\digi\Recommendation',
 			);
 
 			\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
@@ -110,26 +113,26 @@ class Recommendation_Action {
 			\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
 		}
 
-		if ( ! empty( $_POST['list_comment'] ) ) {
-			foreach ( $_POST['list_comment'] as $element ) {
-				if ( ! empty( $element['content'] ) ) {
-					$element['id']        = (int) $element['id'];
-					$element['parent_id'] = (int) $element['parent_id'];
-					$element['author_id'] = (int) $element['author_id'];
-					$element['post_id']   = (int) $recommendation->id;
-					Recommendation_Comment_Class::g()->update( $element );
+		if ( ! empty( $comments ) ) {
+			foreach ( $comments as $comment ) {
+				if ( ! empty( $comment['content'] ) ) {
+					$comment['id']        = (int) $comment['id'];
+					$comment['parent_id'] = (int) $comment['parent_id'];
+					$comment['author_id'] = (int) $comment['author_id'];
+					$comment['post_id']   = (int) $recommendation->data['id'];
+					Recommendation_Comment_Class::g()->update( $comment );
 				}
 			}
 		}
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $recommendation->parent_id,
-			'id'        => $recommendation->id,
-			'content'   => __( 'Modification de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+			'parent_id' => $recommendation->data['parent_id'],
+			'id'        => $recommendation->data['id'],
+			'content'   => __( 'Modification de la signalisation', 'digirisk' ) . ' ' . $recommendation->data['unique_identifier'],
 		) );
 
 		ob_start();
-		Recommendation_Class::g()->display( $recommendation->parent_id );
+		Recommendation::g()->display( $recommendation->data['parent_id'] );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'recommendation',

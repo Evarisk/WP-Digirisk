@@ -1,30 +1,32 @@
 <?php
 /**
- * Définition du schéma des recommandations
+ * Définition du schéma des signalisations.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.5
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.1.5
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Définition du schéma des recommandations
+ * Recommendation model class.
  */
 class Recommendation_Model extends \eoxia\Post_Model {
 
 	/**
 	 * Définition du schéma des recommandations
 	 *
-	 * @since 6.1.5
-	 * @version 6.1.5
+	 * @since   6.1.5
+	 * @version 7.0.0
 	 *
 	 * @param array $data       Data.
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
@@ -74,20 +76,12 @@ class Recommendation_Model extends \eoxia\Post_Model {
 			'child'     => array(),
 		);
 
-		$this->schema['taxonomy']['child']['digi-recommendation'] = array(
-			'since'      => '6.1.5',
-			'version'    => '6.1.5',
-			'meta_type'  => 'multiple',
-			'type'       => 'array',
-			'array_type' => 'int',
-		);
-
 		$this->schema['taxonomy']['child']['digi-recommendation-category'] = array(
 			'since'      => '6.1.5',
-			'version'    => '6.1.5',
+			'version'    => '7.0.0',
 			'meta_type'  => 'multiple',
 			'type'       => 'array',
-			'array_type' => 'int',
+			'array_type' => 'integer',
 		);
 
 		parent::__construct( $data, $req_method );

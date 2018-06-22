@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 
 	<td class="padding padding text-center">
-		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( nl2br( 'test' ) ); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( 'test' ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-methodology"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-methodology"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-sources"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-sources"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
+		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
 		<span data-parent="main-content"
 					data-target="popup"
 					data-cb-namespace="digirisk"
@@ -97,7 +97,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 		<td class="padding text-center">
-			<span class="hidden text-content-notes-importantes"><?php echo nl2br(); // WPCS: XSS is ok. ?></span>
+			<span class="hidden text-content-notes-importantes"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
 			<span data-parent="main-content"
 						data-target="popup"
 						data-cb-namespace="digirisk"
@@ -128,8 +128,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
-
-			<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $element ); ?>
 		</div>
 	</td>
 </tr>

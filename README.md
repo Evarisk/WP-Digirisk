@@ -1,5 +1,7 @@
 # Digirisk
 
+[![reuse compliant](https://reuse.software/badge/reuse-compliant.svg)](https://reuse.software/)
+
 Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le **Document Unique** de votre entreprise.
 
 Associé à la puissance de **WordPress MU**, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...

@@ -1,42 +1,45 @@
 <?php
 /**
- * La liste des recommendations
+ * Le template pour afficher la selection de la liste des catégories de signalisation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.1
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
-<input class="input-hidden-recommendation" type="hidden" name="taxonomy[digi-recommendation][]" value='-1' />
+<input class="input-hidden-recommendation" type="hidden" name="recommendation_category_id" value='-1' />
 
-<div 	class="recommendation categorie-container toggle grid padding tooltip red"
-			aria-label="<?php esc_html_e( 'Vous devez choisir une signalisation.', 'digirisk' ); ?>"
-			data-parent="categorie-container"
-			data-target="content">
+<div class="wpeo-dropdown categorie-container padding tooltip red"
+	aria-label="<?php esc_html_e( 'Vous devez choisir une signalisation.', 'digirisk' ); ?>">
 
-	<div class="action">
-		<span><?php esc_html_e( 'Choisir une signalisation', 'digirisk' ); ?></span>
-		<img class="hidden" src="" title="<?php echo esc_attr( 'Choisir une signalisation', 'digirisk' ); ?>" />
+	<div class="dropdown-toggle">
+		<span><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></span>
+		<img class="hidden" src="" title="<?php echo esc_attr( 'Signalisation', 'digirisk' ); ?>" />
 		<i class="icon animated far fa-angle-down"></i>
 	</div>
 
-	<ul class="content">
-		<?php foreach ( $recommendation_category_list as $recommendation_category ) : ?>
-				<?php if ( ! empty( $recommendation_category->recommendation_term ) ) : ?>
-					<?php foreach ( $recommendation_category->recommendation_term as $recommendation ) : ?>
-						<li class="item tooltip hover" aria-label="<?php echo esc_attr( $recommendation->name ); ?>" data-id="<?php echo esc_attr( $recommendation->id ); ?>">
-							<?php echo wp_get_attachment_image( $recommendation->thumbnail_id, 'thumbnail', false ); ?>
-						</li>
-					<?php endforeach; ?>
-				<?php endif; ?>
-		<?php endforeach; ?>
+	<ul class="dropdown-content wpeo-grid grid-6" style="width: 400px;">
+		<?php
+		if ( ! empty( $recommendation_categories ) ) :
+			foreach ( $recommendation_categories as $recommendation_category ) :
+				?>
+				<li class="item dropdown-item wpeo-tooltip-event" aria-label="<?php echo esc_attr( $recommendation_category->data['name'] ); ?>"
+					data-id="<?php echo esc_attr( $recommendation_category->data['id'] ); ?>">
+					<?php echo wp_get_attachment_image( $recommendation_category->data['thumbnail_id'], 'thumbnail', false ); ?>
+				</li>
+				<?php
+			endforeach;
+		endif;
+		?>
 	</ul>
 </div>

@@ -1,24 +1,26 @@
 <?php
 /**
- * Définition du schéma des recommandations.
+ * Définition du schéma des catégories de signalisation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.6
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.1.6
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Définition du schéma des recommandations
+ * Recommendation category class.
  */
-class Recommendation_Term_Model extends \eoxia\Term_Model {
+class Recommendation_Category_Model extends \eoxia\Term_Model {
 
 	/**
 	 * Définition du schéma des recommandations.

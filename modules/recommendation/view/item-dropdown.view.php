@@ -1,25 +1,26 @@
 <?php
 /**
- * Affiches la préconisation
+ * Le template de la signalisation en mode "vue".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * Ce template est appelé par le shortcode dropdown_recommendation lorsque le paramètre display est égale à "view".
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.0.0
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
-<div class="categorie-container toggle grid padding">
-	<div class="action">
-		<div class="help" aria-label="<?php echo esc_attr( $recommendation->recommendation_category_term->recommendation_term->name ); ?>">
-			<?php echo wp_get_attachment_image( $recommendation->recommendation_category_term->recommendation_term->thumbnail_id, 'thumbnail', false ); ?>
-		</div>
-		<input class="input-hidden-danger" type="hidden" name="recommendation_term_id" value='<?php echo esc_attr( $recommendation->recommendation_category_term->recommendation_term->id ); ?>' />
-	</div>
+<input type="hidden" name="recommendation_category_id" value='<?php echo esc_attr( $recommendation->data['recommendation_category']->data['id'] ); ?>' />
+
+<div class="categorie-container padding wpeo-tooltip-event" aria-label="<?php echo esc_attr( $recommendation->data['recommendation_category']->data['name'] ); ?>">
+	<?php echo wp_get_attachment_image( $recommendation->data['recommendation_category']->data['thumbnail_id'], 'thumbnail', false ); ?>
 </div>

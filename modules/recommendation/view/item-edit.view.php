@@ -1,19 +1,27 @@
 <?php
 /**
- * Edition d'une recommendation
+ * Le template pour afficher le formulaire d'édition d'une signlisation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.1
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * Ce template utilise 3 shortcodes: dropdown_recommendation permet d'afficher
+ * la liste déroulante contenant les catégories de recommendation. Le shortcode
+ * wpeo_upload permettant de gérer la gestion des images sur un post de
+ * WordPress. Le shortcode digi_comment qui permet de gérer les commentaires
+ * en mode formulaire avec DigiRisk.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <tr class="recommendation-row edit">
 
@@ -30,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation_Class" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
 	</td>
 	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>

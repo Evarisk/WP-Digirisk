@@ -1,33 +1,38 @@
 <?php
 /**
- * Gestion de la popup et de la notification pour les notes de versions.
+ * Gestion de la modal et de la notification pour les notes de mise à jour.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.3.0
- * @version 6.4.2
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.3.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
-$result = Digirisk_Class::g()->get_patch_note(); ?>
+$result = Digirisk::g()->get_patch_note(); ?>
 
 <?php if ( true === $result['status'] && ! empty( $result['content'] ) ) : ?>
-	<div class="notification patch-note active">
-		<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
-		<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
-		<span class="close action-attribute"
-					data-action="close_change_log"
-					data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
-					data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fas fa-times-circle"></i></span>
+	<div class="wpeo-notification patch-note notification-active">
+		<img class="notification-thumbnail" src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" />
+
+		<div class="notification-title">
+			<span>Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
+		</div>
+
+		<div class="notification-close action-attribute"
+			data-action="close_change_log"
+			data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
+			data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>">><i class="far fa-times"></i></div>
 	</div>
 
-	<div class="popup patch-note">
+	<div class="wpeo-modal patch-note">
 		<div class="container">
 			<div class="header">
 				<h2 class="title"><?php echo esc_html( 'Note de version: ' . $result['content']->numero_de_version ); ?></h2>

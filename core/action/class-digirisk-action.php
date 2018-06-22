@@ -1,19 +1,24 @@
 <?php
 /**
- * Classe gérant les actions principales de l'application.
+ * Classe gérant les actions principales de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * Elle ajoute les styles et scripts JS principaux pour le bon fonctionnement de DigiRisk.
+ * Elle ajoute également les textes de traductions (fichiers .mo)
+ * Elle déclare la page principale "DigiRisk".
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Classe gérant les actions principales de l'application.
@@ -21,14 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Digirisk_Action {
 
 	/**
-	 * Le constructeur ajoutes les actions WordPress suivantes:
-	 * admin_enqueue_scripts (Pour appeller les scripts JS et CSS dans l'admin)
-	 * admin_print_scripts (Pour appeler les scripts JS en bas du footer)
-	 * plugins_loaded (Pour appeler le domaine de traduction)
+	 * Constructeur.
+	 *
+	 * @since 7.0.0
 	 */
 	public function __construct() {
-		// Initialises ses actions que si nous sommes sur une des pages réglés dans le fichier digirisk.config.json dans la clé "insert_scripts_pages".
-		$page = ( ! empty( $_REQUEST['page'] ) ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+		$page = ( ! empty( $_REQUEST['page'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 
 		if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_css, true ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_css' ), 10 );
@@ -51,10 +54,7 @@ class Digirisk_Action {
 	/**
 	 * Initialise les fichiers JS inclus dans WordPress (jQuery, wp.media et thickbox)
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
 	 */
 	public function callback_before_admin_enqueue_scripts_js() {
 		wp_enqueue_script( 'jquery' );
@@ -72,13 +72,10 @@ class Digirisk_Action {
 	/**
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function callback_admin_enqueue_scripts_js() {
-		wp_enqueue_script( 'signature-pad', 'https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
+		wp_enqueue_script( 'signature-pad', PLUGIN_DIGIRISK_URL . 'core/assets/js/signature-pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/js/owl.carousel.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
@@ -88,10 +85,7 @@ class Digirisk_Action {
 	/**
 	 * Initialise en php le fichier permettant la traduction des variables string JavaScript.
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function callback_admin_print_scripts_js() {
 		require PLUGIN_DIGIRISK_PATH . '/core/assets/js/define-string.js.php';
@@ -100,20 +94,14 @@ class Digirisk_Action {
 	/**
 	 * Initialise les fichiers JS inclus dans WordPress (jQuery, wp.media et thickbox)
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function callback_before_admin_enqueue_scripts_css() {}
 
 	/**
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
 	 */
 	public function callback_admin_enqueue_scripts_css() {
 		wp_register_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
@@ -128,10 +116,7 @@ class Digirisk_Action {
 	/**
 	 * Initialise en php le fichier permettant la traduction des variables string JavaScript.
 	 *
-	 * @return void nothing
-	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function callback_admin_print_scripts_css() {}
 
@@ -139,29 +124,21 @@ class Digirisk_Action {
 	 * Initialise le fichier MO
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
-
-		/** Set capability to administrator by default */
-		$administrator_role = get_role( 'administrator' );
-		if ( ! $administrator_role->has_cap( 'manage_digirisk' ) ) {
-			$administrator_role->add_cap( 'manage_digirisk' );
-		}
 	}
 
 	/**
 	 * Définition du menu dans l'administration de WordPress pour Digirisk
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function callback_admin_menu() {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-simple-risk-evaluation', array( Digirisk_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+			add_menu_page( __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-simple-risk-evaluation', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		}
 	}
 
@@ -169,12 +146,12 @@ class Digirisk_Action {
 	 * Lors de la fermeture de la notification de la popup.
 	 * Met la metadonnée '_wpdigi_user_change_log' avec le numéro de version actuel à true.
 	 *
-	 * @return void
+	 * @since 6.0.0
 	 */
 	public function callback_close_change_log() {
 		check_ajax_referer( 'close_change_log' );
 
-		$version = ! empty( $_POST['version'] ) ? sanitize_text_field( $_POST['version'] ) : '';
+		$version = ! empty( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : ''; // WPCS: input var ok.
 
 		if ( empty( $version ) ) {
 			wp_send_json_error();
@@ -189,7 +166,7 @@ class Digirisk_Action {
 		$meta[ $version ] = true;
 		update_user_meta( get_current_user_id(), '_wpdigi_user_change_log', $meta );
 
-		wp_send_json_success( array() );
+		wp_send_json_success();
 	}
 }
 

@@ -158,7 +158,7 @@ class Society_Class extends \eoxia\Post_Class {
 	/**
 	 * Récupères toutes les sociétés enfants à $society_id correspondant à $status par ordre croissant de la clé _wpdigi_unique_key.
 	 *
-	 * @since 7.0.0
+	 * @since   7.0.0
 	 * @version 7.0.0
 	 *
 	 * @param  integer $society_id L'ID de la société parent.
@@ -172,11 +172,11 @@ class Society_Class extends \eoxia\Post_Class {
 			'posts_per_page' => -1,
 			'post_type'      => array( 'digi-group', 'digi-workunit' ),
 			'post_status'    => $status,
+			'meta_key'       => '_wpdigi_unique_key',
 			'orderby'        => array(
 				'menu_order'     => 'ASC',
 				'meta_value_num' => 'ASC',
 			),
-			'meta_key'       => '_wpdigi_unique_key',
 		) );
 
 		return $societies;

@@ -77,6 +77,14 @@ class Risk_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Risques';
 
 	/**
+	 * Le nom de la taxonomy.
+	 *
+	 * @since   7.0.0
+	 * @version 7.0.0
+	 */
+	protected $attached_taxonomy_type = 'digi-recommendation-category';
+
+	/**
 	 * Charges la liste des risques même ceux des enfants. Et appelle le template pour les afficher.
 	 * Récupères le schéma d'un risque pour l'entrée d'ajout de risque dans le tableau.
 	 *

@@ -311,34 +311,30 @@ class Document_Class extends \eoxia\Post_Class {
 	 * @since   6.0.0
 	 * @version 7.0.0
 	 *
-	 * @param  Object $element Le modèle (objet) ODT.
+	 * @param mixed  $element     Le modèle (objet) ODT.
+	 * @param string $parent_type Le type de l'élement parent.
 	 *
-	 * @return string          Le chemin HTTP vers l'ODT.
+	 * @return string             Le chemin HTTP vers l'ODT.
 	 */
-	public function get_document_path( $element ) {
+	public function get_document_url( $element, $parent_type ) {
 		$url = '';
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
 			$basedir = $this->get_digirisk_dir_path( 'basedir' );
 			$baseurl = $this->get_digirisk_dir_path( 'baseurl' );
-			$url     = $baseurl . "/";
+			$url     = $baseurl . '/';
 
 			if ( ! empty( $element->data['parent_id'] ) && ! empty( $element->data['mime_type'] ) ) {
-				$society = Society_Class::g()->show_by_type( $element->data['parent_id'] );
-				$url .= "/" . $society->data['type'] . "/" . $society->data['id'] . "/";
+				$url .= '/' . $type . '/' . $element->data['parent_id'] . '/';
 			}
+
 			$url .= $element->data['title'];
+
 			if ( ! empty( $element->data['mime_type'] ) ) {
 				$url .= $this->mime_type_link[ $element->data['mime_type'] ];
 			}
 
-			$path = str_replace( $baseurl, $basedir, $url );
-
 			if ( empty( $element->data['mime_type'] ) ) {
-				$url = '';
-			}
-
-			if ( ! file_exists( $path ) ) {
 				$url = '';
 			}
 		}

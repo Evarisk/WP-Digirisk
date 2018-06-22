@@ -5,42 +5,45 @@ window.eoxiaJS.digirisk.recommendation.init = function() {
 };
 
 window.eoxiaJS.digirisk.recommendation.event = function() {
-	jQuery( document ).on( 'click', '.table.recommendation .categorie-container.recommendation .item', window.eoxiaJS.digirisk.recommendation.selectRecommendation );
+	jQuery( document ).on( 'click', '.table.recommendation .categorie-container .item', window.eoxiaJS.digirisk.recommendation.selectRecommendation );
 };
 
 /**
  * Lors du clic sur une recommendation, remplace le contenu du toggle par l'image de la recommendation sélectionnée.
  *
+ * @since   6.0.0
+ * @version 7.0.0
+ *
  * @param  {ClickEvent} event [description]
  * @return {void}
- *
- * @since 0.1
- * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.recommendation.selectRecommendation = function( event ) {
 	var element = jQuery( this );
+
 	element.closest( '.content' ).removeClass( 'active' );
-	element.closest( 'tr' ).find( 'input.input-hidden-recommendation' ).val( element.data( 'id' ) );
-	element.closest( '.toggle' ).find( '.action span' ).hide();
-	element.closest( '.toggle' ).find( '.action img' ).show();
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'srcset', '' );
-	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
+	element.closest( 'tr' ).find( 'input[name="recommendation_category_id"]' ).val( element.data( 'id' ) );
 
-	element.closest( '.recommendation-row' ).find( '.categorie-container' ).removeClass( 'active' );
-	event.stopPropagation();
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle span' ).hide();
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).show();
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'srcset', '' );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'sizes', '' );
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
+	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+
+	// Rend le bouton "active".
 	element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 };
 
 /**
  * Vérifie que le champs "taxonomy[digi-recommendation][] soit différent de -1".
  *
+ * @since 6.0.0
+ * @version 7.0.0
+ *
  * @param  {HTMLDivElement} triggeredElement L'élément déclenchant l'action.
  * @return {bool}                            Si true, le formulaire est envoyé. Si false, on annule l'envoie du formulaire.
- *
- * @since 0.1
- * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.recommendation.beforeSaveRecommendation = function( triggeredElement ) {
 
@@ -48,7 +51,7 @@ window.eoxiaJS.digirisk.recommendation.beforeSaveRecommendation = function( trig
 	triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container' ).removeClass( 'active' );
 
 	// Vérification du danger.
-	if ( '-1' === triggeredElement.closest( '.recommendation-row' ).find( 'input[name="taxonomy[digi-recommendation][]"]' ).val() ) {
+	if ( '-1' === triggeredElement.closest( '.recommendation-row' ).find( 'input[name="recommendation_category_id"]' ).val() ) {
 		triggeredElement.closest( '.recommendation-row' ).find( '.categorie-container' ).addClass( 'active' );
 		return false;
 	}

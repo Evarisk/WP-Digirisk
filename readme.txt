@@ -5,6 +5,8 @@ Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.9.4
 Stable tag: 7.0.0
+License: AGPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 

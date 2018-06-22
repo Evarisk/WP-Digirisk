@@ -2,11 +2,11 @@
 /**
  * Classe gérant les configurations de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -45,24 +45,25 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Initialise les accronymes de DigiRisk.
 	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @since   6.0.0
+	 * @version 7.0.0
 	 *
 	 * @return mixed
 	 */
 	public function init_option() {
-		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->setting->url . 'asset/json/default.json' );
-
-		if ( is_wp_error( $request ) ) {
-			return false;
-		}
-
-		$request = wp_remote_retrieve_body( $request );
-		$data    = json_decode( $request );
-
-		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, array() );
 
 		if ( empty( $list_accronym ) ) {
+			$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->setting->url . 'asset/json/default.json' );
+
+			if ( is_wp_error( $request ) ) {
+				return false;
+			}
+
+			$request = wp_remote_retrieve_body( $request );
+			$data    = json_decode( $request );
+
+
 			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $data ) );
 		}
 
