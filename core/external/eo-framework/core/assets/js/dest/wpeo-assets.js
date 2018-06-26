@@ -1073,6 +1073,8 @@ if ( ! window.eoxiaJS.tooltip ) {
 
 		var top = 0;
 		var left = 0;
+		
+		console.log(direction);
 
 		switch( jQuery( this ).data( 'direction' ) ) {
 			case 'left':

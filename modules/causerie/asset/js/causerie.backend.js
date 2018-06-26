@@ -160,6 +160,27 @@ window.eoxiaJS.digirisk.causerie.applySignature = function( element ) {
 };
 
 /**
+ * Vérifie que la catégorie de risque soit sélectionné avant d'enregistrer la causerie.
+ *
+ * @since 6.6.0
+ * 
+ * @param  {HTMLDivElement} triggeredElement L'élément déclenchant l'action.
+ * 
+ * @return {boolean}                         True pour continuer l'action. False pour stopper l'action.
+ */
+window.eoxiaJS.digirisk.causerie.beforeSaveCauserie = function( triggeredElement ) {
+	triggeredElement.closest( '.causerie-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+
+	// Vérification du danger.
+	if ( '-1' === triggeredElement.closest( '.causerie-row' ).find( 'input[name="risk[danger_id]"]' ).val() ) {
+		triggeredElement.closest( '.causerie-row' ).find( '.categorie-container.tooltip' ).addClass( 'active' );
+		return false;
+	}
+	
+	return true;
+};
+
+/**
  * Le callback en cas de réussite à la requête Ajax "edit_causerie".
  * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
  *
@@ -281,9 +302,9 @@ window.eoxiaJS.digirisk.causerie.checkParticipantsSignature = function() {
 	}
 
 	if ( allSignature ) {
-		jQuery( '.step-3 a.disabled' ).removeClass( 'disabled tooltip hover' );
+		jQuery( '.step-3 a.disabled' ).removeClass( 'disabled wpeo-tooltip-event' );
 	} else {
-		jQuery( '.step-3 a.disabled' ).addClass( 'disabled tooltip hover' );
+		jQuery( '.step-3 a.disabled' ).addClass( 'disabled wpeo-tooltip-event' );
 	}
 };
 
