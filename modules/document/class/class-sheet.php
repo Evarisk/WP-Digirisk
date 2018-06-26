@@ -1,41 +1,33 @@
 <?php
 /**
- * Gères la génération de la fiche de groupement
+ * Classe gérant les fiches de groupement et poste.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * Elle gère l'affichage des fiches de groupement et poste.
+ * Elle gère également la génération d'une fiche de groupement et de poste.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Gères la génération de la fiche de groupement
+ * Sheet class.
  */
-class Sheet_Groupment_Class extends Document_Class {
-
-	/**
-	 * Le nom du modèle
-	 *
-	 * @var string
-	 */
-	protected $model_name = '\digi\Sheet_Groupment_Model';
-
-	/**
-	 * Le post type
-	 *
-	 * @var string
-	 */
-	protected $type = 'fiche_de_groupement';
+class Sheet_Class extends Document_Class {
 
 	/**
 	 * Le type du document
+	 *
+	 * @since 7.0.0
 	 *
 	 * @var string
 	 */
@@ -44,75 +36,43 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * La clé principale du modèle
 	 *
+	 * @since 7.0.0
+	 *
 	 * @var string
 	 */
 	protected $meta_key = '_wpdigi_document';
 
 	/**
-	 * La route pour accéder à l'objet dans la rest API
-	 *
-	 * @var string
-	 */
-	protected $base = 'fiche-de-groupement';
-
-	/**
 	 * La version de l'objet
+	 *
+	 * @since 7.0.0
 	 *
 	 * @var string
 	 */
 	protected $version = '0.1';
 
 	/**
-	 * Le préfixe de l'objet dans DigiRisk
-	 *
-	 * @var string
-	 */
-	public $element_prefix = 'FGP';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
-	 * Le nom pour le resgister post type
-	 *
-	 * @var string
-	 */
-	protected $post_type_name = 'Fiche de groupement';
-
-	/**
-	 * Le nom de l'ODT sans l'extension; exemple: document_unique
-	 *
-	 * @var string
-	 */
-	protected $odt_name = 'groupement';
-
-	/**
 	 * Appelle le template main.view.php dans le dossier /view/
 	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 * @return void
+	 * @since 7.0.0
 	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @param  integer $element_id L'ID de l'élement.
 	 */
 	public function display( $element_id ) {
 		$element = $this->get( array(
 			'schema' => true,
 		), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'main', array(
-			'element'   => $element,
+		$action = 'generate_fiche_de_groupement';
+
+		if ( $element->data['type'] === Sheet_Workunit_Class::g()->get_type() ) {
+			$action = 'generate_fiche_de_poste';
+		}
+
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'main', array(
+			'_this'      => $this,
+			'action'     => $action,
+			'element'    => $element,
 			'element_id' => $element_id,
 		) );
 	}
@@ -120,11 +80,9 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * Appelle le template list.view.php dans le dossier /view/
 	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
+	 * @since 7.0.0
 	 *
-	 * @since 6.0.0
-	 * @version 6.2.5
+	 * @param integer $element_id L'ID de l'élement.
 	 */
 	public function display_document_list( $element_id ) {
 		$list_document = $this->get( array(
@@ -132,7 +90,8 @@ class Sheet_Groupment_Class extends Document_Class {
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'list', array(
+			'_this'         => $this,
 			'list_document' => $list_document,
 		) );
 	}
@@ -140,37 +99,39 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * Cette méthode génère la fiche de groupement
 	 *
+	 * @since 7.0.0
+	 *
 	 * @param  int $society_id L'ID de la société.
 	 *
-	 * @return bool
-	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @return array
 	 */
 	public function generate( $society_id ) {
-		$society = Group_Class::g()->get( array(
-			'id' => $society_id,
-		), true );
-
+		$society = Society_Class::g()->show_by_type( $society_id );
 		$society_infos = $this->get_infos( $society );
 
 		$sheet_details = array(
-			'reference'   => $society->unique_identifier,
-			'nom'         => $society->title,
-			'description' => $society->content,
+			'reference'   => $society->data['unique_identifier'],
+			'nom'         => $society->data['title'],
+			'description' => $society->data['content'],
 			'adresse'     => $society_infos['adresse'],
-			'telephone'   => ! empty( $society->contact['phone'] ) ? max( $society->contact['phone'] ) : '',
+			'telephone'   => ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '',
 			'codePostal'  => $society_infos['codePostal'],
 			'ville'       => $society_infos['ville'],
 		);
 
 		$sheet_details['photoDefault'] = $this->set_picture( $society );
 
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
+		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
 
-		$document_creation_response = $this->create_document( $society, array( 'groupement' ), $sheet_details );
+		$type = 'groupement';
+
+		if ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
+			$type = 'unite_de_travail';
+		}
+
+		$document_creation_response = $this->create_document( $society, array( $type ), $sheet_details );
 
 		return array(
 			'creation_response' => $document_creation_response,
@@ -183,7 +144,6 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * Récupères les informations comme l'adresse, le code postal, la ville et les renvoies dans un tableau.
 	 *
 	 * @since 6.2.1
-	 * @version 6.3.0
 	 *
 	 * @param Group_Model $society L'objet groupement.
 	 * @return array {
@@ -201,9 +161,9 @@ class Sheet_Groupment_Class extends Document_Class {
 
 		$address = Society_Class::g()->get_address( $society );
 
-		$infos['adresse']    = $address->address . ' ' . $address->additional_address;
-		$infos['codePostal'] = $address->postcode;
-		$infos['ville']      = $address->town;
+		$infos['adresse']    = $address->data['address'] . ' ' . $address->data['additional_address'];
+		$infos['codePostal'] = $address->data['postcode'];
+		$infos['ville']      = $address->data['town'];
 
 		return $infos;
 	}
@@ -211,8 +171,7 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * Définie l'image du document
 	 *
-	 * @since 6.0.0
-	 * @version 6.4.0
+	 * @since 7.0.0
 	 *
 	 * @param Group_Model $society L'objet groupement.
 	 * @return string|false|array {
@@ -245,47 +204,13 @@ class Sheet_Groupment_Class extends Document_Class {
 	}
 
 	/**
-	 * Récupères les utilisateurs affectés et désaffectés de la société
-	 *
-	 * @param Group_Model $society L'objet groupement.
-	 *
-	 * @return array La liste des utilisateurs affectés et désaffectés à la société
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.5.0
-	 */
-	public function set_users( $society ) {
-		$users = array(
-			'utilisateursAffectes' => array( 'type' => 'segment', 'value' => array() ),
-			'utilisateursDesaffectes' => array( 'type' => 'segment', 'value' => array() ),
-		);
-
-		if ( ! empty( $society->user_info['affected_id']['user'] ) ) {
-			$user_affectation_for_export = user_digi_class::g()->build_list_for_document_export( $society->user_info['affected_id']['user'] );
-			if ( null !== $user_affectation_for_export ) {
-				$users['utilisateursAffectes'] = array(
-					'type'	=> 'segment',
-					'value'	=> $user_affectation_for_export['affected'],
-				);
-				$users['utilisateursDesaffectes'] = array(
-					'type'	=> 'segment',
-					'value'	=> $user_affectation_for_export['unaffected'],
-				);
-			}
-		}
-
-		return $users;
-	}
-
-	/**
 	 * Récupères les évaluateurs affectés à la société
+	 *
+	 * @since 7.0.0
 	 *
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array La liste des évéluateurs affectés à la société
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.5.0
 	 */
 	public function set_evaluators( $society ) {
 		$evaluators = array( 'utilisateursPresents' => array( 'type' => 'segment', 'value' => array() ) );
@@ -293,17 +218,17 @@ class Sheet_Groupment_Class extends Document_Class {
 
 		if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
 			/**	Récupération de la liste des personnes présentes lors de l'évaluation / Get list of user who were present for evaluation	*/
-			$list_affected_evaluator = evaluator_class::g()->get_list_affected_evaluator( $society );
+			$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $society );
 			if ( ! empty( $list_affected_evaluator ) ) {
 				foreach ( $list_affected_evaluator as $evaluator_id => $evaluator_affectation_info ) {
 					foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
 						if ( 'valid' === $evaluator_affectation_info['affectation_info']['status'] ) {
 							$affected_evaluators[] = array(
-								'idUtilisateur'								=> evaluator_class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
-								'nomUtilisateur'							=> $evaluator_affectation_info['user_info']->lastname,
-								'prenomUtilisateur'						=> $evaluator_affectation_info['user_info']->firstname,
-								'dateAffectationUtilisateur'	=> mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
-								'dureeEntretien'							=> evaluator_class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
+								'idUtilisateur'              => Evaluator_Class::g()->element_prefix . $evaluator_affectation_info['user_info']->id,
+								'nomUtilisateur'             => $evaluator_affectation_info['user_info']->lastname,
+								'prenomUtilisateur'          => $evaluator_affectation_info['user_info']->firstname,
+								'dateAffectationUtilisateur' => mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+								'dureeEntretien'             => Evaluator_Class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
 							);
 						}
 					}
@@ -322,15 +247,14 @@ class Sheet_Groupment_Class extends Document_Class {
 	/**
 	 * Récupères les risques dans la société
 	 *
+	 * @since 7.0.0
+	 *
 	 * @param Group_Model $society L'objet groupement.
 	 *
 	 * @return array Les risques dans la société
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.10.0
 	 */
 	public function set_risks( $society ) {
-		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->id ) );
+		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->data['id'] ) );
 
 		$risk_details = array(
 			'risq80' => array( 'type' => 'segment', 'value' => array() ),
@@ -340,6 +264,7 @@ class Sheet_Groupment_Class extends Document_Class {
 		);
 
 		$risk_list_to_order = array();
+
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
 				$comment_list = '';
@@ -351,13 +276,14 @@ class Sheet_Groupment_Class extends Document_Class {
 				endif;
 
 				$risk_list_to_order[ $risk->evaluation->scale ][] = array(
-					'nomDanger'					=> $risk->risk_category->name,
-					'identifiantRisque'	=> $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
-					'quotationRisque'		=> $risk->evaluation->risk_level['equivalence'],
-					'commentaireRisque'	=> $comment_list,
+					'nomDanger'         => $risk->risk_category->name,
+					'identifiantRisque' => $risk->unique_identifier . '-' . $risk->evaluation->unique_identifier,
+					'quotationRisque'   => $risk->evaluation->risk_level['equivalence'],
+					'commentaireRisque' => $comment_list,
 				);
 			}
 		}
+
 		krsort( $risk_list_to_order );
 
 		if ( ! empty( $risk_list_to_order ) ) {
@@ -370,6 +296,75 @@ class Sheet_Groupment_Class extends Document_Class {
 
 		return $risk_details;
 	}
+
+	/**
+	 * Récupères les recommandations dans la société
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param Group_Model $society L'objet unité de travail.
+	 *
+	 * @return array Les recommandations dans la société
+	 */
+	public function set_recommendations( $society ) {
+		$recommendations = Recommendation::g()->get( array( 'post_parent' => $society->data['id'] ) );
+
+		$recommendations_details = array( 'affectedRecommandation' => array( 'type' => 'segment', 'value' => array() ) );
+		$recommendations_filled = array();
+
+		if ( ! empty( $recommendations ) ) {
+			foreach ( $recommendations as $element ) {
+				/** Récupères la catégorie parent */
+				$recommendations_filled[ $element->data['id'] ] = array(
+					'recommandationCategoryIcon' => $this->get_picture_term( $element->data['recommendation_category_term'][0]->thumbnail_id ),
+					'recommandationCategoryName' => $element->data['recommendation_category_term'][0]->name,
+				);
+
+				$recommendations_filled[ $element->data['id'] ]['recommendations']['type'] = 'sub_segment';
+				$recommendations_filled[ $element->data['id'] ]['recommendations']['value'][] = array(
+					'identifiantRecommandation' => $element->data['unique_identifier'],
+					'recommandationIcon'        => $this->get_picture_term( $element->data['recommendation_category_term'][0]->recommendation_term[0]->thumbnail_id ),
+					'recommandationName'        => $element->data['recommendation_category_term'][0]->name,
+					'recommandationComment'     => $element->data['comment'][0]->content,
+				);
+			}
+		}
+
+		$recommendations_details['affectedRecommandation']['value'] = $recommendations_filled;
+
+		return $recommendations_details;
+	}
+
+	/**
+	 * Récupères le lien vers l'image de la recommendation
+	 *
+	 * @since 6.2.1
+	 *
+	 * @param  int $term_id    L'ID de la recommendation.
+	 *
+	 * @return false|string    Le lien vers l'image
+	 */
+	public function get_picture_term( $term_id ) {
+		$picture_definition = wp_get_attachment_image_src( $term_id, 'thumbnail' );
+
+		if ( ! $picture_definition ) {
+			return false;
+		}
+
+		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ) );
+		$picture = '';
+		if ( is_file( $picture_final_path ) ) {
+			$picture = array(
+				'type'		=> 'picture',
+				'value'		=> $picture_final_path,
+				'option'	=> array(
+					'size'	=> 1,
+				),
+			);
+		}
+
+		return $picture;
+	}
 }
 
-Sheet_Groupment_Class::g();
+Sheet_Class::g();

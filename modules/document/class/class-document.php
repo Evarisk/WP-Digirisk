@@ -1,27 +1,30 @@
 <?php
 /**
- * Classe principale gérant tous les documents (ODT) de DigiRisk.
+ * Classe gérant les documents ODT de DigiRisk.
  *
  * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
  * @since     6.0.0
- * @version   7.0.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Classe principale gérant tous les documents (ODT) de DigiRisk.
+ * Document class.
  */
 class Document_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
+	 *
+	 * @since 6.0.0
 	 *
 	 * @var string
 	 */
@@ -30,13 +33,17 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Le post type
 	 *
+	 * @since 6.0.0
+	 *
 	 * @var string
-	 * @todo:  Détruis la route de WordPress /wp-json/wp/v2/media (A changer très rapidement)
+	 * @todo:  Détruis la route de WordPress /wp-json/wp/v2/media (A changer très rapidement) (Toujours présent 25/06/2018)
 	 */
 	protected $type = 'attachment';
 
 	/**
 	 * La taxonomie
+	 *
+	 * @since 6.0.0
 	 *
 	 * @var string
 	 */
@@ -45,6 +52,8 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * La clé principale du modèle
 	 *
+	 * @since 6.0.0
+	 *
 	 * @var string
 	 */
 	protected $meta_key = '_wpdigi_document';
@@ -52,26 +61,16 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
+	 * @since 6.0.0
+	 *
 	 * @var string
 	 */
 	public $element_prefix = 'DOC';
 
 	/**
-	 * La fonction appelée automatiquement avant la mise à jour de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
 	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @since 6.0.0
 	 *
 	 * @var string
 	 */
@@ -80,12 +79,16 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nombre de document par page
 	 *
+	 * @since 6.0.0
+	 *
 	 * @var integer
 	 */
 	protected $limit_document_per_page = 5;
 
 	/**
 	 * Les documents acceptés
+	 *
+	 * @since 6.0.0
 	 *
 	 * @var array Un tableau de "string".
 	 */
@@ -97,6 +100,8 @@ class Document_Class extends \eoxia\Post_Class {
 	/**
 	 * Le nom de l'ODT sans l'extension; exemple: document_unique
 	 *
+	 * @since 6.0.0
+	 *
 	 * @var string
 	 */
 	protected $odt_name = '';
@@ -105,7 +110,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Récupères le chemin vers le dossier "digirisk" dans wp-content/uploads
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 *
 	 * @param string $path_type (Optional) Le type de path 'basedir' ou 'baseurl'.
 	 * @return string Le chemin vers le document
@@ -121,7 +125,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Récupération de la liste des modèles de fichiers disponible pour un type d'élément
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
 	 *
 	 * @param array $current_element_type La liste des types pour lesquels il faut récupérer les modèles de documents.
 	 * @return array                      Un statut pour la réponse, un message si une erreur est survenue, le ou les identifiants des modèles si existants.
@@ -182,7 +185,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Création d'un fichier odt a partir d'un modèle de document donné et d'un modèle de donnée
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 *
 	 * @param string $model_path       Le chemin vers le fichier modèle a utiliser pour la génération.
 	 * @param array  $document_content Un tableau contenant le contenu du fichier à écrire selon l'élément en cours d'impression.
@@ -255,7 +257,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Ecris dans le document ODT
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 *
 	 * @param string $data_key    La clé dans le ODT.
 	 * @param string $data_value  La valeur de la clé.
@@ -309,7 +310,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Renvoies le chemin HTTP vers l'ODT.
 	 *
 	 * @since   6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param mixed  $element     Le modèle (objet) ODT.
 	 * @param string $parent_type Le type de l'élement parent.
@@ -346,7 +346,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Récupération de la prochaine version pour un type de document pour le jour J
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 *
 	 * @param string  $type       Le type de document actuellement en cours de création.
 	 * @param integer $element_id L'ID de l'élément.
@@ -383,7 +382,6 @@ class Document_Class extends \eoxia\Post_Class {
 	 * Création du document dans la base de données puis appel de la fonction de génération du fichier
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 *
 	 * @param object $element      L'élément pour lequel il faut créer le document
 	 * @param array $document_type Les catégories auxquelles associer le document généré

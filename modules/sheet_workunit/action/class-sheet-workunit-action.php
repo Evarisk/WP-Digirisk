@@ -1,22 +1,23 @@
 <?php
 /**
- * Les actions relatives aux fiches de poste
+ * Classe gérant les actions des fiches de poste.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Les actions relatives aux fiches de poste
+ * Sheet Workunit Action class.
  */
 class Sheet_Workunit_Action {
 
@@ -24,7 +25,6 @@ class Sheet_Workunit_Action {
 	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_workunit
 	 *
 	 * @since 6.2.1
-	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_fiche_de_poste', array( $this, 'ajax_generate_fiche_de_poste' ) );
@@ -33,15 +33,12 @@ class Sheet_Workunit_Action {
 	/**
 	 * Appelle la méthode generate de Fiche_De_Poste_Class
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.1
-	 * @version 6.4.0
 	 */
 	public function ajax_generate_fiche_de_poste() {
-		check_ajax_referer( 'ajax_generate_fiche_de_poste' );
+		check_ajax_referer( 'generate_fiche_de_poste' );
 
-		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 
 		if ( ! $society_id ) {
 			wp_send_json_error();
@@ -50,8 +47,8 @@ class Sheet_Workunit_Action {
 		Sheet_Workunit_Class::g()->generate( $society_id );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'sheet_workunit',
+			'namespace'        => 'digirisk',
+			'module'           => 'sheet_workunit',
 			'callback_success' => 'generatedFicheDePosteSuccess',
 		) );
 	}

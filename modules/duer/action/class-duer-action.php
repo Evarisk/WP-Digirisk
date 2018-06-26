@@ -1,22 +1,23 @@
 <?php
 /**
- * Gères l'action AJAX de la génération du DUER
+ * Classe gérant les actions pour les DUER.
  *
  * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
  * @since     6.2.1
- * @version   7.0.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Gères l'action AJAX de la génération du DUER
+ * DUER Action class.
  */
 class DUER_Action {
 
@@ -24,7 +25,6 @@ class DUER_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.2.1
-	 * @version 6.5.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
@@ -39,16 +39,14 @@ class DUER_Action {
 	 * Appelle la méthode display_societies_tree de DUER_Class pour récupérer la vue dans la tamporisation de sortie.
 	 *
 	 * @since   6.2.3
-	 * @version 7.0.0
-	 *
-	 * @return void
 	 */
 	public function callback_display_societies_duer() {
 		check_ajax_referer( 'display_societies_duer' );
 
 		ZIP_Class::g()->clear_temporarly_files_details();
 
-		$society_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$society_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+
 		if ( empty( $society_id ) ) {
 			wp_send_json_error();
 		}
@@ -73,9 +71,6 @@ class DUER_Action {
 	 * Cette méthode construit les données du DUER.
 	 *
 	 * @since 6.2.3
-	 * @version 6.5.0
-	 *
-	 * @return void
 	 */
 	public function callback_ajax_construct_duer() {
 		check_ajax_referer( 'construct_duer' );
@@ -88,14 +83,14 @@ class DUER_Action {
 			'creation_response' => array(),
 		);
 
-		$parent_id             = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		$start_audit_date      = ! empty( $_POST['dateDebutAudit'] ) ? sanitize_text_field( $_POST['dateDebutAudit'] ) : '';
-		$end_audit_date        = ! empty( $_POST['dateFinAudit'] ) ? sanitize_text_field( $_POST['dateFinAudit'] ) : '';
-		$recipient             = ! empty( $_POST['destinataireDUER'] ) ? sanitize_text_field( $_POST['destinataireDUER'] ) : '';
-		$methodology           = ! empty( $_POST['methodologie'] ) ? sanitize_text_field( $_POST['methodologie'] ) : '';
-		$sources               = ! empty( $_POST['sources'] ) ? sanitize_text_field( $_POST['sources'] ) : '';
-		$availability_of_plans = ! empty( $_POST['dispoDesPlans'] ) ? sanitize_text_field( $_POST['dispoDesPlans'] ) : '';
-		$important_note        = ! empty( $_POST['remarqueImportante'] ) ? sanitize_text_field( $_POST['remarqueImportante'] ) : '';
+		$parent_id             = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;  // WPCS: input var ok.
+		$start_audit_date      = ! empty( $_POST['dateDebutAudit'] ) ? sanitize_text_field( wp_unslash( $_POST['dateDebutAudit'] ) ) : ''; // WPCS: input var ok.
+		$end_audit_date        = ! empty( $_POST['dateFinAudit'] ) ? sanitize_text_field( wp_unslash( $_POST['dateFinAudit'] ) ) : ''; // WPCS: input var ok.
+		$recipient             = ! empty( $_POST['destinataireDUER'] ) ? sanitize_text_field( wp_unslash( $_POST['destinataireDUER'] ) ) : ''; // WPCS: input var ok.
+		$methodology           = ! empty( $_POST['methodologie'] ) ? sanitize_text_field( wp_unslash( $_POST['methodologie'] ) ) : ''; // WPCS: input var ok.
+		$sources               = ! empty( $_POST['sources'] ) ? sanitize_text_field( wp_unslash( $_POST['sources'] ) ) : ''; // WPCS: input var ok.
+		$availability_of_plans = ! empty( $_POST['dispoDesPlans'] ) ? sanitize_text_field( wp_unslash( $_POST['dispoDesPlans'] ) ) : ''; // WPCS: input var ok.
+		$important_note        = ! empty( $_POST['remarqueImportante'] ) ? sanitize_text_field( wp_unslash( $_POST['remarqueImportante'] ) ) : ''; // WPCS: input var ok.
 
 		if ( empty( $parent_id ) ) {
 			wp_send_json_error();
@@ -124,23 +119,21 @@ class DUER_Action {
 	 * Génères le DUER
 	 *
 	 * @since   6.5.0
-	 * @version 7.0.0
-	 *
-	 * @return void
 	 */
 	public function callback_ajax_generate_duer() {
 		check_ajax_referer( 'generate_duer' );
+
+		$index       = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
+		$document_id = ! empty( $_POST['duer_document_id'] ) ? (int) $_POST['duer_document_id'] : 0; // WPCS: input var ok.
+		$parent_id   = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0; // WPCS: input var ok.
 
 		$response = array(
 			'namespace'         => 'digirisk',
 			'module'            => 'DUER',
 			'callback_success'  => 'generatedDUERSuccess',
-			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'index'             => $index,
 			'creation_response' => array(),
 		);
-
-		$document_id = ! empty( $_POST['duer_document_id'] ) ? (int) $_POST['duer_document_id'] : 0;
-		$parent_id   = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
 
 		if ( empty( $document_id ) || empty( $parent_id ) ) {
 			wp_send_json_error();
@@ -165,29 +158,31 @@ class DUER_Action {
 	 * Génères un document de fiche de groupement ou bien de fiche de poste.
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
-	 *
-	 * @return void
 	 */
 	public function callback_ajax_generate_establishment() {
 		check_ajax_referer( 'generate_establishment' );
+
+		$index      = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
+		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 
 		$response = array(
 			'namespace'         => 'digirisk',
 			'module'            => 'DUER',
 			'callback_success'  => 'generatedDUERSuccess',
-			'index'             => ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0,
+			'index'             => $index,
 			'creation_response' => array(),
 		);
 
-		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		$society    = Society_Class::g()->get( array( 'id' => $element_id ), true );
+		$society = Society_Class::g()->get( array(
+			'id'        => $element_id,
+			'post_type' => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
+		), true );
 
-		if ( Group_Class::g()->get_type() === $society->type ) {
+		if ( Group_Class::g()->get_type() === $society->data['type'] ) {
 			\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $element_id, 'digirisk' );
 			$generation_status = Sheet_Groupment_Class::g()->generate( $element_id );
 			\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
-		} elseif ( Workunit_Class::g()->get_type() === $society->type ) {
+		} elseif ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
 			\eoxia\LOG_Util::log( 'DEBUT - Génération du document fiche de poste #UT' . $element_id, 'digirisk' );
 			$generation_status = Sheet_Workunit_Class::g()->generate( $element_id );
 			\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste', 'digirisk' );
@@ -205,9 +200,6 @@ class DUER_Action {
 	 * Génères le ZIP de tous les documents du DUER courant.
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
-	 *
-	 * @return void
 	 */
 	public function callback_ajax_generate_zip() {
 		check_ajax_referer( 'generate_zip' );

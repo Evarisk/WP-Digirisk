@@ -1,22 +1,23 @@
 <?php
 /**
- * Les actions relatives aux fiches de groupement
+ * Classe gérant les actions des fiches de groupement.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Les actions relatives aux fiches de groupement
+ * Sheet Groupment Action class.
  */
 class Sheet_Groupment_Action {
 
@@ -24,7 +25,6 @@ class Sheet_Groupment_Action {
 	 * Le constructeur ajoutes l'action wp_ajax_generate_sheet_groupment
 	 *
 	 * @since 6.1.0
-	 * @version 6.1.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_fiche_de_groupement', array( $this, 'ajax_generate_fiche_de_groupement' ) );
@@ -34,14 +34,11 @@ class Sheet_Groupment_Action {
 	 * Appel la méthode "generate" de "Sheet_Groupment_Class" afin de générer la fiche de groupement.
 	 *
 	 * @since 6.1.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
-	function ajax_generate_fiche_de_groupement() {
-		check_ajax_referer( 'ajax_generate_fiche_de_groupement' );
+	public function ajax_generate_fiche_de_groupement() {
+		check_ajax_referer( 'generate_fiche_de_groupement' );
 
-		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 
 		if ( ! $society_id ) {
 			wp_send_json_error();
@@ -50,8 +47,8 @@ class Sheet_Groupment_Action {
 		Sheet_Groupment_Class::g()->generate( $society_id );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'sheet_groupment',
+			'namespace'        => 'digirisk',
+			'module'           => 'sheet_groupment',
 			'callback_success' => 'generatedSheetGroupment',
 		) );
 	}
