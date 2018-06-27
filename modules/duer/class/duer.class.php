@@ -136,26 +136,6 @@ class DUER_Class extends Document_Class {
 	}
 
 	/**
-	 * Appelle le template list.view.php dans le dossier /view/document-unique
-	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.7
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
 	 * Récupères les enfants pour l'affichage dans la popup pour générer le DUER.
 	 *
 	 * @since   6.2.3

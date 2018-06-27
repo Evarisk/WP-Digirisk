@@ -1,19 +1,21 @@
 <?php
 /**
- * Déclares la liste des contenant les affichages légaux
+ * Appel la méthode display_document_list de Document_Class pour gérér le template.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package legal_display
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table">
-	<?php Legal_Display_Class::g()->display_document_list( $element_id ); ?>
+	<?php Document_Class::g()->display_document_list( $element_id, array( 'affichage_legal_A3', 'affichage_legal_A4' ) ); ?>
 </table>

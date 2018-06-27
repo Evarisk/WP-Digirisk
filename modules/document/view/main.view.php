@@ -19,7 +19,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table">
-	<?php $_this->display_document_list( $element_id ); ?>
+	<?php Document_Class::g()->display_document_list( $element_id, array( $type ) ); ?>
 
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'document', 'item-edit', array(

@@ -1,19 +1,20 @@
 <?php
 /**
- * La liste des utilisateurs
+ * Le template contenant la liste des utilisateurs dans le tableau de la page "digirisk-users".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.9
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.3
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <thead>
 	<tr>

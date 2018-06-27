@@ -1,22 +1,23 @@
 <?php
 /**
- * Classe gérant la navigation
+ * Classe gérant la navigation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.3
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Appelle la vue permettant d'afficher la navigation
+ * Navigation class.
  */
 class Navigation_Class extends \eoxia\Singleton_Util {
 
@@ -24,7 +25,6 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * Le constructeur
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.4
 	 */
 	protected function construct() {}
 
@@ -32,10 +32,8 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * La méthode qui permet d'afficher la navigation.
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param integer $selected_society_id L'ID du groupement à envoyer à la vue navigation/view/main.view.php.
-	 * @return void
 	 */
 	public function display( $selected_society_id ) {
 		$society = Society_Class::g()->get( array(
@@ -55,13 +53,10 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * Charges le groupement sélectionné et l'envoie à la vue navigation/toggle/button.view.php avec comme nom de variable $groupment
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param integer $id (optional)                  L'ID de la société parent.
 	 * @param integer $selected_society_id (optional) L'ID de la société selectionné.
 	 * @param string  $class (optianal)               La classe utilisé pour la vue.
-	 *
-	 * @return void
 	 */
 	public function display_list( $id = 0, $selected_society_id = 0, $class = 'sub-list' ) {
 		if ( ! empty( $id ) ) {
@@ -80,12 +75,9 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 	 * Charges les groupements selon le parent_id et les envoies à la vue navigation/toggle/list.view.php
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param  integer $selected_groupment_id L'ID du groupement sélectionné.
 	 * @param  integer $parent_id (optional) 	L'ID du groupement parent.
-	 *
-	 * @return void
 	 */
 	public function display_toggle_list( $selected_groupment_id, $parent_id = 0 ) {
 		$groupments = Group_Class::g()->get(

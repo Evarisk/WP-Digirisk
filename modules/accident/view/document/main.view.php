@@ -1,23 +1,24 @@
 <?php
 /**
- * Déclares la liste des contenant les ODT des accidents de travail bénin
+ * Appel la méthode display_document_list de Document_Class pour gérér le template.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.3.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.3.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table document-accident-benins">
 	<?php
-	Registre_Accidents_Travail_Benins_Class::g()->display_document_list();
+	Document_Class::g()->display_document_list( $element->data['id'], array( 'accidents_benin' ) );
 
 	\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/item-edit', array(
 		'element' => $element,

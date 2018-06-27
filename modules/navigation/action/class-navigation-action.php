@@ -39,9 +39,9 @@ class Navigation_Action {
 	public function callback_create_society() {
 		check_ajax_referer( 'create_society' );
 
-		$class     = ! empty( $_POST['class'] ) ? '\\digi\\' . sanitize_text_field( $_POST['class'] ) : '';
-		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-		$title     = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$class     = ! empty( $_POST['class'] ) ? '\\digi\\' . sanitize_text_field( wp_unslash( $_POST['class'] ) ) : ''; // WPCS: input var ok.
+		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0; // WPCS: input var ok.
+		$title     = ! empty( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : ''; // WPCS: input var ok.
 
 		$society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,

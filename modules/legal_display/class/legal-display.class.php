@@ -80,7 +80,6 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 */
 	public function display( $element ) {
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
-			'element'    => $element,
 			'element_id' => $element->data['id'],
 		) );
 

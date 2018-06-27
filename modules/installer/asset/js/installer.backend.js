@@ -2,7 +2,6 @@
  * Initialise l'objet "installer" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.5.0
  */
 
 window.eoxiaJS.digirisk.installer = {};
@@ -12,9 +11,6 @@ window.eoxiaJS.digirisk.installer.progressInterval = undefined;
  * Méthodes obligatoire pour utiliser EO-JS.
  *
  * @since 6.0.0
- * @version 6.0.0
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.init = function() {
 	window.eoxiaJS.digirisk.installer.event();
@@ -25,12 +21,11 @@ window.eoxiaJS.digirisk.installer.init = function() {
  * Initialise tous les évènements pour la page "digi-setup".
  *
  * @since 6.0.0
- * @version 6.0.0
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.event = function() {
 	jQuery( document ).on( 'keyup', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.keyUpGroupmentTitle );
+	jQuery( document ).on( 'click', '.wpdigi-installer input[type="checkbox"]', window.eoxiaJS.digirisk.installer.toggleDefaultInstall );
+
 	jQuery( document ).on( 'click', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.emptyPlaceHolder );
 	jQuery( document ).on( 'blur', '.wpdigi-installer input[name="title"]', window.eoxiaJS.digirisk.installer.fillProgressBar );
 };
@@ -39,9 +34,6 @@ window.eoxiaJS.digirisk.installer.event = function() {
  * Initialise le "owlCarousel" sur l'élement "owl-carousel".
  *
  * @since 6.0.0
- * @version 6.0.0
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.initOwlCarousel = function() {
 	jQuery( '.owl-carousel' ).owlCarousel( {
@@ -59,11 +51,8 @@ window.eoxiaJS.digirisk.initOwlCarousel = function() {
  * Évènement lors du "keyup" sur le champ "Nom de ma société".
  *
  * @since 6.0.0
- * @version 6.0.0
  *
  * @param  {KeyEvent} event L'état du clavier.
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.keyUpGroupmentTitle = function( event ) {
 	if ( 13 === event.keyCode ) {
@@ -80,14 +69,22 @@ window.eoxiaJS.digirisk.installer.keyUpGroupmentTitle = function( event ) {
 };
 
 /**
- * Enlèves le placeholder lors du "click" sur le champ "Nom de ma société".
+ * Ouvre les détails des données par défaut lorsqu'on "check" la case à coché.
+ *
+ * @since 7.0.0
+ *
+ * @param  {MouseEvent} event L'état de la souri lors du clic.
+ */
+window.eoxiaJS.digirisk.installer.toggleDefaultInstall = function( event ) {
+	jQuery( '.wpdigi-installer .bloc-create-society .default-data-details' ).toggleClass( 'hidden' );
+};
+
+/**
+ * Enlèves le placeholder lors du "clic" sur le champ "Nom de ma société".
  *
  * @since 6.0.0
- * @version 6.0.0
  *
  * @param  {ClickEvent} event L'état du clique.
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.emptyPlaceHolder = function( event ) {
 	if ( '' === jQuery( this ).val() ) {
@@ -99,11 +96,8 @@ window.eoxiaJS.digirisk.installer.emptyPlaceHolder = function( event ) {
  * Remplie la barre de progression.
  *
  * @since 6.0.0
- * @version 6.0.0
  *
  * @param  {FocusEvent} event L'état du focus.
- *
- * @return {void}}
  */
 window.eoxiaJS.digirisk.installer.fillProgressBar = function( event ) {
 	if ( '' === jQuery( this ).val() ) {
@@ -116,11 +110,9 @@ window.eoxiaJS.digirisk.installer.fillProgressBar = function( event ) {
 /**
  * Vérifie que le nom de la société ne soit pas vide.
  *
- * @param  {HTMLDivElement} element Le bouton déclenchant la création de la société
- * @return {void}
- *
  * @since 6.0.0
- * @version 6.5.0
+ *
+ * @param  {HTMLDivElement} element Le bouton déclenchant la création de la société
  */
 window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
 	if ( '' === element.closest( 'form' ).find( 'input[name="title"]' ).val() ) {
@@ -144,7 +136,6 @@ window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.4.4
  */
 window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
@@ -164,9 +155,6 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
  * Envoie une requête pour installer les composants nécessaires à l'utilisation de DigiRisk.
  *
  * @since 6.0.0
- * @version 6.0.0
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
 	var _wpnonce = jQuery( '.wpdigi-installer .wpdigi-components .nonce-installer-components' ).val();
@@ -178,12 +166,10 @@ window.eoxiaJS.digirisk.installer.requestInstallComponent = function() {
  * Met le li active en statut "finit" et passes au suivant, tout en relancant la requête pour installer le composant suivant.
  * Si tous les li sont en statut "finit" passes à l'étape suivante qui est "Création des utilisateurs"
  *
+ * @since 6.0.0
+ *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
- * @return {void}
- *
- * @since 6.0.0
- * @version 6.3.0
  */
 window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( triggeredElement, response ) {
 
@@ -211,11 +197,8 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( triggere
  * Met à jour la barre de progression.
  *
  * @since 6.0.0
- * @version 6.5.0
  *
  * @param  {integer} pourcent Le pourcentage courant.
- *
- * @return {void}
  */
 window.eoxiaJS.digirisk.installer.progressBar = function( pourcent ) {
 	clearInterval( window.eoxiaJS.digirisk.installer.progressInterval );

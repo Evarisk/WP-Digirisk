@@ -1,28 +1,31 @@
 <?php
 /**
- * * Affiches l'interface pour installer DigiRisk
+ * Template de la page pour l'installation de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
-<div class="wpdigi-installer digirisk-wrap">
+<div class="wpdigi-installer digirisk-wrap wpeo-wrap">
 
 	<div class="logo">
-		<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/logo_digirisk.png' ); ?>" alt="Digirisk" title="Digirisk" />
+		<img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/logo_digirisk.png' ); ?>"
+			alt="<?php esc_attr_e( 'DigiRisk', 'digirisk' ); ?>"
+			title="<?php esc_attr_e( 'DigiRisk', 'digirisk' ); ?>" />
 	</div>
 
 	<div class="step install">
-		<!-- <div class="bar"></div> -->
+
 		<ul class="step-list">
 			<li class="step active"><span class="title"><?php esc_html_e( 'Création société', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="25"><span class="title"><?php esc_html_e( 'Catégories de risque', 'digirisk' ); ?></span></li>
@@ -30,6 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<li class="step" data-width="75"><span class="title"><?php esc_html_e( 'Préconisations', 'digirisk' ); ?></span></li>
 			<li class="step" data-width="100"><span class="title"><?php esc_html_e( 'Digirisk est prêt', 'digirisk' ); ?></span></li>
 		</ul>
+
 		<div class="bar">
 			<div class="background"></div>
 			<div class="loader" data-width="0"></div>
@@ -46,6 +50,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="society-form">
 				<label class="society-label"><?php echo esc_html_e( 'Nom de ma société*', 'digirisk' ); ?></label>
 				<input class="society-name" type="text" name="title" />
+			</div>
+
+			<div class="bloc-default-data wpeo-form">
+				<div class="form-element checkbox-default-data">
+					<div class="form-field-inline">
+						<input type="checkbox" id="default-data" class="form-field" name="install_default_data" checked="checked">
+						<label for="default-data"><?php esc_html_e( 'Installer les données par défaut', 'digirisk' ); ?></label>
+					</div>
+				</div>
+
+				<ul class="default-data-details">
+					<?php
+					if ( ! empty( $default_data ) ) :
+						foreach ( $default_data as $key_groupment => $data ) :
+							?>
+							<li><?php echo esc_html( Group_Class::g()->element_prefix . ( $key_groupment + 1 ) . ' - ' . $data->title ); ?></li>
+							<?php
+							if ( ! empty( $data->workunits ) ) :
+								foreach ( $data->workunits as $key_workunit => $workunit ) :
+									?>
+									<li><?php echo esc_html( Workunit_Class::g()->element_prefix . ( $key_workunit + 1 ) . ' - ' . $workunit->title ); ?></li>
+									<?php
+								endforeach;
+							endif;
+						endforeach;
+					endif;
+					?>
+				</ul>
 			</div>
 		</div>
 

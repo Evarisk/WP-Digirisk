@@ -116,26 +116,6 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	}
 
 	/**
-	 * Appelle le template list.view.php dans le dossier /view/
-	 *
-	 * @return void
-	 *
-	 * @since 6.3.0
-	 * @version 6.3.0
-	 */
-	public function display_document_list() {
-		$list_document = $this->get( array(
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) );
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
 	 * Cette méthode génère l'accident de travail bénin
 	 *
 	 * @since 6.3.0

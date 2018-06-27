@@ -13,8 +13,8 @@
 	},
 	"default_tab": {
 		"society": {
-			"slug": "digi-list-duer",
-			"title": "DUER"
+			"slug": "digi-informations",
+			"title": "Informations"
 		},
 		"groupment": {
 			"slug": "digi-risk",

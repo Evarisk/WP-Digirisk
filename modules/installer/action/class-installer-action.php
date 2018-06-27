@@ -1,22 +1,28 @@
 <?php
 /**
- * Les actions qui se déroulent lors de l'installation.
+ * Gestion des actions lors de l'installation de DigiRisk.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.0.0
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * Ajoutes la page d'installation dans le menu de WordPress.
+ *
+ * Gères l'enregistrement de la première société ainsi que les données par
+ * défaut pour le fonctionnement de l'application.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Les actions qui se déroulent lors de l'installation.
+ * Installer action class.
  */
 class Installer_Action {
 
@@ -26,26 +32,38 @@ class Installer_Action {
 	 * installer_components (Ajax)
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.8
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+
 		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
 		add_action( 'wp_ajax_installer_components', array( $this, 'ajax_installer_components' ) );
+	}
+
+	/**
+	 * Ajoutes la page "Installeur" dans le menu "DigiRisk"
+	 *
+	 * @since 6.0.0
+	 */
+	public function admin_menu() {
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+
+		if ( empty( $digirisk_core['installed'] ) ) {
+			add_menu_page( __( 'Digirisk installer', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_digirisk', 'digi-setup', array( Installer_Class::g(), 'setup_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		}
 	}
 
 
 	/**
 	 * Installe la société de base pour le fonctionnement de DigiRisk.
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 */
 	public function ajax_installer_save_society() {
 		check_ajax_referer( 'ajax_installer_save_society' );
 
-		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$title                = ! empty( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : ''; // WPCS: input var ok.
+		$install_default_data = ( ! empty( $_POST['install_default_data'] ) && 'true' === $_POST['install_default_data'] ) ? true : false; // WPCS: input var ok.
 
 		if ( empty( $title ) ) {
 			wp_send_json_error();
@@ -58,38 +76,40 @@ class Installer_Action {
 
 		\eoxia\LOG_Util::log( sprintf( 'Installeur - Création de la société %s -> success.', $society->data['title'] ), 'digirisk' );
 
-		// Création des données par default depuis le fichier json installer/asset/json/default.json.
-		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->installer->url . 'asset/json/default.json' );
+		if ( $install_default_data ) {
+			// Création des données par default depuis le fichier json installer/asset/json/default.json.
+			$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->installer->url . 'asset/json/default.json' );
 
-		if ( is_wp_error( $request ) ) {
-			\eoxia\LOG_Util::log( sprintf( 'Installeur - Impossible de lire asset/json/default.json' ), 'digirisk' );
-			wp_send_json_error();
-		}
+			if ( is_wp_error( $request ) ) {
+				\eoxia\LOG_Util::log( sprintf( 'Installeur - Impossible de lire asset/json/default.json' ), 'digirisk' );
+				wp_send_json_error();
+			}
 
-		$request = wp_remote_retrieve_body( $request );
-		$data    = json_decode( $request );
+			$request = wp_remote_retrieve_body( $request );
+			$data    = json_decode( $request );
 
-		if ( ! empty( $data ) ) {
-			foreach ( $data as $group_object ) {
-				$group = Group_Class::g()->update( array(
-					'title'       => $group_object->title,
-					'post_parent' => $society->data['id'],
-					'status'      => 'inherit',
-				) );
+			if ( ! empty( $data ) ) {
+				foreach ( $data as $group_object ) {
+					$group = Group_Class::g()->update( array(
+						'title'       => $group_object->title,
+						'post_parent' => $society->data['id'],
+						'status'      => 'inherit',
+					) );
 
-				if ( ! empty( $group_object->workunits ) ) {
-					foreach ( $group_object->workunits as $workunit_object ) {
-						$workunit = Workunit_Class::g()->update( array(
-							'title'       => $workunit_object->title,
-							'post_parent' => $group->data['id'],
-							'status'      => 'inherit',
-						) );
+					if ( ! empty( $group_object->workunits ) ) {
+						foreach ( $group_object->workunits as $workunit_object ) {
+							$workunit = Workunit_Class::g()->update( array(
+								'title'       => $workunit_object->title,
+								'post_parent' => $group->data['id'],
+								'status'      => 'inherit',
+							) );
+						}
 					}
 				}
 			}
-		}
 
-		\eoxia\LOG_Util::log( 'Installeur - Création des GP et UT par défaut -> success.', 'digirisk' );
+			\eoxia\LOG_Util::log( 'Installeur - Création des GP et UT par défaut -> success.', 'digirisk' );
+		}
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
@@ -104,10 +124,7 @@ class Installer_Action {
 	 * Les méthodes d'évaluations
 	 * Les recommendations
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.3
-	 * @version 6.5.0
 	 */
 	public function ajax_installer_components() {
 		// check_ajax_referer( 'ajax_installer_components' );

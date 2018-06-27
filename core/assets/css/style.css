@@ -3417,6 +3417,12 @@
   max-width: 700px;
   margin: auto; }
 
+.digirisk-wrap.wpdigi-installer .bloc-create-society .bloc-default-data {
+  text-align: left;
+  width: 460px;
+  margin: auto;
+  margin-top: 20px; }
+
 .digirisk-wrap.wpdigi-installer .bloc-create-society .title {
   font-size: 28px;
   color: rgba(0, 0, 0, 0.4);

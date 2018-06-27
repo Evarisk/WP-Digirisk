@@ -1,26 +1,28 @@
 <?php
 /**
- * Classe gérant la recherche
+ * Classe gérant la recherche.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package search
- * @subpackage action
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.2.3
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Classe gérant la recherche
+ * Search class.
  */
 class Search_Class extends \eoxia\Singleton_Util {
 
 	/**
-	 * Le constructeur
+	 * Le constructeur.
 	 */
 	protected function construct() {}
 
@@ -30,8 +32,7 @@ class Search_Class extends \eoxia\Singleton_Util {
 	 * @param  array $data Les données pour la recherche.
 	 * @return array       Les élements trouvés par la recherche.
 	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
+	 * @since 6.2.3
 	 */
 	public function search( $data ) {
 		$list = array();

@@ -4,7 +4,6 @@
  *
  * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 7.0.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -22,8 +21,6 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
-	 *
-	 * @return void
 	 */
 	protected function construct() {}
 
@@ -32,10 +29,8 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	 * Envois les données à la vue group/configuration-form.view.php
 	 *
 	 * @param  Group_Model $element L'objet groupement.
-	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 7.0.0
 	 */
 	public function display( $element ) {
 		$address = Society_Class::g()->get_address( $element );
@@ -116,6 +111,8 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $address_id ) ) {
 			$data['$push']['contact']['address_id'] = $address_id;
 		}
+
+		echo '<pre>'; print_r( $data ); echo '</pre>';exit;
 
 		$society = Society_Class::g()->update( $data );
 		return $society;

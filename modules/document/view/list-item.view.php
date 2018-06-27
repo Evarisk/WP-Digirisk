@@ -1,6 +1,6 @@
 <?php
 /**
- * Affichage d'une ligne contenant les informations et le lien de téléchargement d'une fiche de groupement.
+ * Affichage d'une ligne contenant les informations et le lien de téléchargement d'un document.
  *
  * @author    Evarisk <dev@evarisk.com>
  * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.

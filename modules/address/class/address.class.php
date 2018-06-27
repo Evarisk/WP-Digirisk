@@ -72,7 +72,6 @@ class Address_Class extends \eoxia\Comment_Class {
 	 */
 	public function save( $data ) {
 		$data['content'] = '';
-		$data['post_id'] = ! empty( $data['post_id'] ) ? (int) $data['post_id'] : 0;
 
 		return $this->create( $data );
 	}

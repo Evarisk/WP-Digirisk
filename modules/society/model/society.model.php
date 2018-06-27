@@ -84,7 +84,7 @@ class Society_Model extends \eoxia\Post_Model {
 			'type'        => 'integer',
 			'meta_type'   => 'single',
 			'field'       => '_wpdigi_number_of_employees',
-			'default'     => 0,
+			'default'     => NULL,
 		);
 
 		$this->schema['contact'] = array(

@@ -64,35 +64,19 @@ class Sheet_Class extends Document_Class {
 		), true );
 
 		$action = 'generate_fiche_de_groupement';
+		$type   = 'fiche_de_groupement';
 
 		if ( $element->data['type'] === Sheet_Workunit_Class::g()->get_type() ) {
 			$action = 'generate_fiche_de_poste';
+			$type   = 'fiche_de_poste';
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'document', 'main', array(
 			'_this'      => $this,
 			'action'     => $action,
+			'type'       => $type,
 			'element'    => $element,
 			'element_id' => $element_id,
-		) );
-	}
-
-	/**
-	 * Appelle le template list.view.php dans le dossier /view/
-	 *
-	 * @since 7.0.0
-	 *
-	 * @param integer $element_id L'ID de l'élement.
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-
-		\eoxia\View_Util::exec( 'digirisk', 'document', 'list', array(
-			'_this'         => $this,
-			'list_document' => $list_document,
 		) );
 	}
 

@@ -1,19 +1,20 @@
 <?php
 /**
- * Affichage d'un utilisateur ainsi que les actions pour l'éditer ou le supprimer.
+ * Une ligne du tableau des utilisateurs dans la page "digirisk-users".
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.9
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.3
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <tr class="user-row" data-id="<?php echo esc_attr( $user->data['id'] ); ?>">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $user->data['initial'] ); ?></span></div></td>
@@ -35,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div
 				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_user' ) ); ?>"
+				data-message-delete="<?php esc_attr_e( 'Confirmer la suppression', 'digirisk' ); ?>"
 				data-loader="users"
 				data-action="delete_user"
 				class="button w50 light delete action-delete" >

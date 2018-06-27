@@ -102,31 +102,6 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 	}
 
 	/**
-	 * Appelle le template list.view.php dans le dossier /view/
-	 *
-	 * @return void
-	 *
-	 * @since 6.3.0
-	 * @version 7.0.0
-	 */
-	public function display_document_list() {
-		$main_society = Society_Class::g()->get( array(
-			'posts_per_page' => 1,
-		), true );
-
-		$list_document = $this->get( array(
-			'post_parent' => $main_society->data['id'],
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) );
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
 	 * Cette méthode génère le registre AT bénins.
 	 *
 	 * @since   6.3.0

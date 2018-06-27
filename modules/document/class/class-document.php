@@ -2,6 +2,11 @@
 /**
  * Classe gérant les documents ODT de DigiRisk.
  *
+ * Cette classe génère les documents ODT.
+ * Cette classe affiche les documents ODT.
+ * Cette classe permet d'obtenir le lien de n'importe quel document ODT.
+ * Cette classe permet de récupérer le chemin vers un modèle ODT (document unique, fiche de groupement, ..).
+ *
  * @author    Evarisk <dev@evarisk.com>
  * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
  *
@@ -77,15 +82,6 @@ class Document_Class extends \eoxia\Post_Class {
 	protected $base = 'document';
 
 	/**
-	 * Le nombre de document par page
-	 *
-	 * @since 6.0.0
-	 *
-	 * @var integer
-	 */
-	protected $limit_document_per_page = 5;
-
-	/**
 	 * Les documents acceptés
 	 *
 	 * @since 6.0.0
@@ -105,6 +101,35 @@ class Document_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $odt_name = '';
+
+	/**
+	 * Affiches le tableau contenant la liste des documents selon $parent_id et $types.
+	 *
+	 * @since 6.0.0
+	 *
+	 * @param  integer $parent_id L'élément parent ou les documents sont attachés.
+	 * @param  array   $types     Les types des documents.
+	 */
+	public function display_document_list( $parent_id, $types ) {
+		$documents = $this->get( array(
+			'post_type'   => $types,
+			'post_parent' => $parent_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+
+		// Trie le tableau par ordre des clés.
+		usort( $documents, function( $a, $b ) {
+			if ( $a->data['unique_key'] === $b->data['unique_key'] ) {
+				return 0;
+			}
+
+			return ( $a->data['unique_key'] > $b->data['unique_key'] ) ? -1 : 1;
+		} );
+
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'list', array(
+			'documents' => $documents,
+		) );
+	}
 
 	/**
 	 * Récupères le chemin vers le dossier "digirisk" dans wp-content/uploads
@@ -325,18 +350,15 @@ class Document_Class extends \eoxia\Post_Class {
 			$url     = $baseurl . '/';
 
 			if ( ! empty( $element->data['parent_id'] ) && ! empty( $element->data['mime_type'] ) ) {
-				$url .= '/' . $type . '/' . $element->data['parent_id'] . '/';
+				$url .= '/' . $parent_type . '/' . $element->data['parent_id'] . '/';
 			}
 
 			$url .= $element->data['title'];
 
-			if ( ! empty( $element->data['mime_type'] ) ) {
-				$url .= $this->mime_type_link[ $element->data['mime_type'] ];
-			}
-
 			if ( empty( $element->data['mime_type'] ) ) {
 				$url = '';
 			}
+
 		}
 
 		return $url;
@@ -350,7 +372,7 @@ class Document_Class extends \eoxia\Post_Class {
 	 * @param string  $type       Le type de document actuellement en cours de création.
 	 * @param integer $element_id L'ID de l'élément.
 	 *
-	 * @return int                La version +1 du document actuellement en cours de création.
+	 * @return integer            La version +1 du document actuellement en cours de création.
 	 */
 	public function get_document_type_next_revision( $type, $element_id ) {
 		global $wpdb;
@@ -441,12 +463,12 @@ class Document_Class extends \eoxia\Post_Class {
 
 		// Enregistre le fichier et ses métadonnées dans la base de donnée.
 		$document_args = array(
-			'post_status' => 'inherit',
-			'post_title'  => basename( $response['filename'] ),
-			'post_parent' => $element->data['id'],
-			'post_type'   => $this->type,
-			'guid'        => $document_creation['url'],
-			'mime_type'   => $filetype['type'],
+			'post_status'    => 'inherit',
+			'post_title'     => basename( $response['filename'] ),
+			'post_parent'    => $element->data['id'],
+			'post_type'      => $this->type,
+			'guid'           => $document_creation['url'],
+			'post_mime_type' => $filetype['type'],
 		);
 
 		$response['id'] = wp_insert_attachment( $document_args, $this->get_digirisk_dir_path() . '/' . $response['path'], $element->data['id'] );
