@@ -2,10 +2,10 @@
 /**
  * Gestion de l'affichage d'une fiche de poste
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.1
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -20,13 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"><?php echo esc_html( $element->title ); ?></td>
 	<td>
 		<div class="action">
-			<?php if ( ! empty( Document_Class::g()->get_document_path( $element ) ) ) : ?>
-			<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<?php if ( ! empty( Document_Class::g()->get_document_path( $element, 'digi-workunit' ) ) ) : ?>
+			<a class="button purple pop h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element, 'digi-workunit' ) ); ?>">
 				<i class="fa fa-download icon" aria-hidden="true"></i>
 				<!-- <span><?php esc_html_e( 'Fiche de poste', 'digirisk' ); ?></span> -->
 			</a>
 		<?php else : ?>
-			<span class="button grey h50 tooltip hover" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element ) ); ?>">
+			<span class="button grey h50 tooltip hover" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
 				<i class="fa fa-times icon" aria-hidden="true"></i>
 			</span>
 		<?php endif; ?>

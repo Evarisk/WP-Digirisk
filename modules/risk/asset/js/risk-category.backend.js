@@ -36,7 +36,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'sizes', '' );
 	element.closest( '.toggle' ).find( '.action img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
-	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	element.closest( 'tr' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 	event.stopPropagation();
 
 	// Rend le bouton "active".

@@ -4921,15 +4921,7 @@
     background: #f1f1f1;
     padding-top: 4em; }
   .digirisk-wrap .table.risk > tfoot > tr {
-    background: #fff; }
-  .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment {
-    display: none; }
-  .digirisk-wrap .table.risk .risk-row:not(.edit) .comment-container .comment:nth-of-type(1) {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex; } }
+    background: #fff; } }
 
 @media (max-width: 480px) {
   .digirisk-wrap .table.evaluators tr, .digirisk-wrap .table.evaluators thead, .digirisk-wrap .table.evaluators tbody, .digirisk-wrap .table.evaluators tfoot, .digirisk-wrap .table.evaluators td:not(.hidden), .digirisk-wrap .table.evaluators th, .digirisk-wrap .table.affected-evaluator tr, .digirisk-wrap .table.affected-evaluator thead, .digirisk-wrap .table.affected-evaluator tbody, .digirisk-wrap .table.affected-evaluator tfoot, .digirisk-wrap .table.affected-evaluator td:not(.hidden), .digirisk-wrap .table.affected-evaluator th {

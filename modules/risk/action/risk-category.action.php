@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux categories de risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 6.6.1
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -58,7 +58,7 @@ class Risk_Category_Action {
 					AND RISK_META.meta_value = 1
 				JOIN {$wpdb->postmeta} AS RISK_META_MAIN ON RISK.ID=RISK_META_MAIN.post_id
 					AND RISK_META_MAIN.meta_key = '_wpdigi_risk'
-				WHERE RISK_META_MAIN.meta_value LIKE '%digi-category-risk\":[" . $danger_id . "]%'" );
+				WHERE RISK.post_status='publish' AND RISK_META_MAIN.meta_value LIKE '%digi-category-risk\":[" . $danger_id . "]%'" );
 
 		if ( empty( $preset_risk_id ) ) {
 			wp_send_json_error();

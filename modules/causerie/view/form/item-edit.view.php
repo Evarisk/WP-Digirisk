@@ -4,7 +4,7 @@
  *
  * @author    Evarisk <dev@evarisk.com>
  * @since     6.6.0
- * @version   6.6.0
+ * @version   6.6.1
  * @copyright 2018 Evarisk.
  * @package   DigiRisk
  */
@@ -50,7 +50,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		<?php else : ?>
 			<div class="action grid-layout w3">
-				<div data-loader="table" data-parent="causerie-row" class="button w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
+				<div data-namespace="digirisk" 
+					data-module="causerie"
+					data-before-method="beforeSaveCauserie"
+					data-loader="table"
+					data-parent="causerie-row"
+					class="button disable w50 blue add action-input progress"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>
