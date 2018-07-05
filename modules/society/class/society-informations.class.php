@@ -112,8 +112,6 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			$data['$push']['contact']['address_id'] = $address_id;
 		}
 
-		echo '<pre>'; print_r( $data ); echo '</pre>';exit;
-
 		$society = Society_Class::g()->update( $data );
 		return $society;
 	}

@@ -27,7 +27,7 @@ class Sheet_Groupment_Action {
 	 * @since 6.1.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_generate_fiche_de_groupement', array( $this, 'ajax_generate_fiche_de_groupement' ) );
+		add_action( 'wp_ajax_generate_sheet_groupment', array( $this, 'ajax_generate_sheet_groupment' ) );
 	}
 
 	/**
@@ -35,8 +35,8 @@ class Sheet_Groupment_Action {
 	 *
 	 * @since 6.1.0
 	 */
-	public function ajax_generate_fiche_de_groupement() {
-		check_ajax_referer( 'generate_fiche_de_groupement' );
+	public function ajax_generate_sheet_groupment() {
+		check_ajax_referer( 'generate_sheet_groupment' );
 
 		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 
@@ -44,12 +44,13 @@ class Sheet_Groupment_Action {
 			wp_send_json_error();
 		}
 
-		Sheet_Groupment_Class::g()->generate( $society_id );
+		$response = Sheet_Groupment_Class::g()->prepare_document( $society_id );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'sheet_groupment',
 			'callback_success' => 'generatedSheetGroupment',
+			'data'             => $response,
 		) );
 	}
 }

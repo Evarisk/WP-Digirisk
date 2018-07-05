@@ -70,20 +70,6 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	public $element_prefix = 'AT';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -96,24 +82,6 @@ class Accident_Travail_Benin_Class extends Document_Class {
 	 * @var string
 	 */
 	protected $odt_name = 'accident_benin';
-
-	/**
-	 * Appelle le template main.view.php dans le dossier /view/
-	 *
-	 * @return void
-	 *
-	 * @since 6.3.0
-	 * @version 6.3.0
-	 */
-	public function display() {
-		$element = $this->get( array(
-			'schema' => true,
-		), true );
-
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/main', array(
-			'element' => $element,
-		) );
-	}
 
 	/**
 	 * Cette méthode génère l'accident de travail bénin

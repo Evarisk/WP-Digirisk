@@ -100,7 +100,7 @@ Dans ce document vous trouverez:
 				),
 				'remarqueImportante' => array(
 					'type' => 'string',
-					'bydefault' => 'Notes importantes',
+					'default' => 'Notes importantes',
 				),
 				'dispoDesPlans' => array(
 					'type' => 'string',

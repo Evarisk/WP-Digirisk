@@ -1,24 +1,25 @@
 <?php
 /**
- * Classe gérant les affichages légaux
+ * Controlleur du modèle "Legal_Display_Model".
  *
  * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
  * @since     6.1.5
- * @version   7.0.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Classe gérant les affichages légaux
+ * Legal Display Class.
  */
-class Legal_Display_Class extends \eoxia\Post_Class {
+class Legal_Display_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -70,35 +71,16 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Affichages légal';
 
 	/**
-	 * Appelle la méthode "display_form"
-	 *
-	 * @since 6.0.0
-	 * @version 7.0.0
-	 *
-	 * @param  mixed $element Les données de la société.
-	 * @return void
-	 */
-	public function display( $element ) {
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
-			'element_id' => $element->data['id'],
-		) );
-
-		$this->display_form( $element );
-	}
-
-	/**
 	 * Le formulaire pour générer un affichage légal
 	 *
-	 * @since   6.0.0
-	 * @version 6.5.0
+	 * @since 6.0.0
 	 *
-	 * @param  object $element L'objet affichage_legal.
-	 * @return void
+	 * @param integer $element_id L'ID de la société.
 	 */
-	public function display_form( $element ) {
+	public function display_form( $element_id ) {
 		$legal_display = $this->get( array(
 			'posts_per_page' => 1,
-			'post_parent'    => $element->data['id'],
+			'post_parent'    => $element_id,
 		), true );
 
 		if ( empty( $legal_display ) ) {
@@ -108,42 +90,8 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/display', array(
-			'element_id'    => $element->data['id'],
+			'element_id'    => $element_id,
 			'legal_display' => $legal_display,
-		) );
-	}
-
-	/**
-	 * Appelle le template list.view.php dans le dossier /view/
-	 *
-	 * @since   6.0.0
-	 * @version 7.0.0
-	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 *
-	 * @return void
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = Legal_Display_A3_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-		$list_document = array_merge( $list_document, Legal_Display_A4_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) ) );
-
-		// Trie le tableau par ordre des clés.
-		usort( $list_document, function( $a, $b ) {
-			if ( $a->data['unique_key'] === $b->data['unique_key'] ) {
-				return 0;
-			}
-
-			return ( $a->data['unique_key'] > $b->data['unique_key'] ) ? -1 : 1;
-		} );
-
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'list', array(
-			'list_document' => $list_document,
 		) );
 	}
 
@@ -151,9 +99,9 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * Sauvegardes les données de l'affichage légal
 	 *
 	 * @since   6.0.0
-	 * @version 6.0.0
 	 *
 	 * @param  array $data  Les données de l'affichage légal.
+	 *
 	 * @return Legal_Display_Model L'objet généré
 	 */
 	public function save_data( $data ) {

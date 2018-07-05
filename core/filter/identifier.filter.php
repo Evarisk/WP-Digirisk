@@ -24,7 +24,6 @@ class Identifier_Filter {
 	 * Constructeur.
 	 *
 	 * @since 7.0.0
-	 * @version 7.0.0
 	 */
 	public function __construct() {
 		add_filter( 'eo_model_handle_schema', array( $this, 'callback_handle_schema' ), 10, 2 );
@@ -45,7 +44,6 @@ class Identifier_Filter {
 	 * Ajoutes les entrées "unique_key" et "unique_identifier" dans tous les schémas de DigiRisk.
 	 *
 	 * @since 7.0.0
-	 * @version 7.0.0
 	 *
 	 * @param  array  $schema     Le schéma.
 	 * @param  string $req_method La méthode de la requête.
@@ -77,7 +75,6 @@ class Identifier_Filter {
 	 * Construit l'identifiant unique d'un modèle
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param  array $data Les données du modèle.
 	 * @param  array $args Les arguments supplémentaires.
@@ -88,6 +85,7 @@ class Identifier_Filter {
 		$model_name      = $args['model_name'];
 		$controller_name = str_replace( 'model', 'class', $model_name );
 		$controller_name = str_replace( 'Model', 'Class', $controller_name );
+
 
 		if ( ! class_exists( $controller_name ) ) {
 			$controller_name = str_replace( '_Class', '', $controller_name );
@@ -111,7 +109,6 @@ class Identifier_Filter {
 	 * Remplaces l'identifiant du modèle par l'identifiant personnalisé qui se trouve dans la BDD
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 *
 	 * @param  object $object Les données du modèle.
 	 * @param  array  $args   Les données de la requête.
@@ -143,11 +140,10 @@ class Identifier_Filter {
 	 * Renvoie la dernière clé unique selon le type de l'élement
 	 *
 	 * @since 6.3.1
-	 * @version 6.5.0
 	 *
 	 * @param string $controller Le nom du controller.
 	 *
-	 * @return int               L'identifiant unique
+	 * @return boolean|int       L'identifiant unique
 	 */
 	public static function get_last_unique_key( $controller ) {
 		if ( ! class_exists( $controller ) ) {
@@ -165,6 +161,7 @@ class Identifier_Filter {
 		switch ( $wp_type ) {
 			case 'post':
 			case 'attachment':
+			case 'odt':
 				$query = $wpdb->prepare(
 					"SELECT max( PM.meta_value + 0 )
 					FROM {$wpdb->postmeta} AS PM
@@ -206,6 +203,6 @@ class Identifier_Filter {
 			return 0;
 		}
 
-		return $last_unique_key;
+		return (int) $last_unique_key;
 	}
 }

@@ -71,20 +71,6 @@ class ZIP_Class extends Document_Class {
 	public $element_prefix = 'ZIP';
 
 	/**
-	 * Fonctions appelées avant le PUT
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * Fonctions appelées après le GET
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
 	 * La limite des documents affichés par page
 	 *
 	 * @var integer
@@ -157,7 +143,7 @@ class ZIP_Class extends Document_Class {
 		}
 		$zip->close();
 
-		$document_revision = $this->get_document_type_next_revision( array( 'zip' ), $element->data['id'] );
+		$document_revision = \eoxia\ODT_Class::g()->get_revision( 'zip', $element->data['id'] );
 
 		$filename  = mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_';
 		$filename .= 'Z' . $element->data['unique_key'] . '_';
@@ -172,7 +158,7 @@ class ZIP_Class extends Document_Class {
 			// 'guid'           => $document_creation['url'],
 		);
 
-		$attachment_id = wp_insert_attachment( $attachment_args, $this->get_digirisk_dir_path() . '/' . $path, $element->data['id'] );
+		$attachment_id = wp_insert_attachment( $attachment_args, Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path, $element->data['id'] );
 		wp_set_object_terms( $attachment_id, array( 'zip', 'printed' ), $this->attached_taxonomy_type );
 
 		$document_args = array(
@@ -197,8 +183,8 @@ class ZIP_Class extends Document_Class {
 	 */
 	public function generate( $element ) {
 		\eoxia\LOG_Util::log( 'DEBUT - Création ZIP', 'digirisk' );
-		$version               = Document_Class::g()->get_document_type_next_revision( array( 'zip' ), $element->data['id'] );
-		$zip_path              = Document_Class::g()->get_digirisk_dir_path() . '/' . $element->data['type'] . '/' . $element->data['id'] . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->data['unique_identifier'] . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->data['title'] ) ) . '_V' . $version . '.zip';
+		$version               = \eoxia\ODT_Class::g()->get_revision( 'zip', $element->data['id'] );
+		$zip_path              = Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $element->data['type'] . '/' . $element->data['id'] . '/' . mysql2date( 'Ymd', current_time( 'mysql', 0 ) ) . '_' . $element->data['unique_identifier'] . '_zip_' . sanitize_title( str_replace( ' ', '_', $element->data['title'] ) ) . '_V' . $version . '.zip';
 		$zip_generation_result = $this->create_zip( $zip_path, $element );
 		\eoxia\LOG_Util::log( 'FIN - Création ZIP', 'digirisk' );
 

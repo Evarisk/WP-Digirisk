@@ -52,35 +52,6 @@ class Sheet_Class extends Document_Class {
 	protected $version = '0.1';
 
 	/**
-	 * Appelle le template main.view.php dans le dossier /view/
-	 *
-	 * @since 7.0.0
-	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 */
-	public function display( $element_id ) {
-		$element = $this->get( array(
-			'schema' => true,
-		), true );
-
-		$action = 'generate_fiche_de_groupement';
-		$type   = 'fiche_de_groupement';
-
-		if ( $element->data['type'] === Sheet_Workunit_Class::g()->get_type() ) {
-			$action = 'generate_fiche_de_poste';
-			$type   = 'fiche_de_poste';
-		}
-
-		\eoxia\View_Util::exec( 'digirisk', 'document', 'main', array(
-			'_this'      => $this,
-			'action'     => $action,
-			'type'       => $type,
-			'element'    => $element,
-			'element_id' => $element_id,
-		) );
-	}
-
-	/**
 	 * Cette méthode génère la fiche de groupement
 	 *
 	 * @since 7.0.0
@@ -90,38 +61,7 @@ class Sheet_Class extends Document_Class {
 	 * @return array
 	 */
 	public function generate( $society_id ) {
-		$society = Society_Class::g()->show_by_type( $society_id );
-		$society_infos = $this->get_infos( $society );
 
-		$sheet_details = array(
-			'reference'   => $society->data['unique_identifier'],
-			'nom'         => $society->data['title'],
-			'description' => $society->data['content'],
-			'adresse'     => $society_infos['adresse'],
-			'telephone'   => ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '',
-			'codePostal'  => $society_infos['codePostal'],
-			'ville'       => $society_infos['ville'],
-		);
-
-		$sheet_details['photoDefault'] = $this->set_picture( $society );
-
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_evaluators( $society ) );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_risks( $society ) );
-		$sheet_details = wp_parse_args( $sheet_details, $this->set_recommendations( $society ) );
-
-		$type = 'groupement';
-
-		if ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
-			$type = 'unite_de_travail';
-		}
-
-		$document_creation_response = $this->create_document( $society, array( $type ), $sheet_details );
-
-		return array(
-			'creation_response' => $document_creation_response,
-			'element'           => $society,
-			'success'           => true,
-		);
 	}
 
 	/**

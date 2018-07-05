@@ -25,6 +25,9 @@ class Diffusion_Informations_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
+
+		add_filter( 'digi_diffusion_informations_A4_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
+		add_filter( 'digi_diffusion_informations_A3_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
 	}
 
 	/**
@@ -44,6 +47,20 @@ class Diffusion_Informations_Filter {
 			'title' => __( 'Les diffusions informations', 'digirisk' ),
 		);
 		return $list_tab;
+	}
+
+	/**
+	 * Ajoutes toutes les données nécessaire pour le registre des AT bénins.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  array         $data    Les données pour le registre des AT bénins.
+	 * @param  Society_Model $society Les données de la société.
+	 *
+	 * @return array                  Les données pour le registre des AT bénins modifié.
+	 */
+	public function callback_digi_document_data( $data, $society ) {
+
 	}
 }
 

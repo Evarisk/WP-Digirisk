@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Sheet Groupment class.
  */
-class Sheet_Groupment_Class extends Sheet_Class {
+class Sheet_Groupment_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -41,7 +41,7 @@ class Sheet_Groupment_Class extends Sheet_Class {
 	 *
 	 * @var string
 	 */
-	protected $type = 'fiche_de_groupement';
+	protected $type = 'sheet_groupment';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -77,7 +77,7 @@ class Sheet_Groupment_Class extends Sheet_Class {
 	 *
 	 * @var string
 	 */
-	protected $odt_name = 'groupement';
+	protected $odt_name = 'fiche_de_groupement';
 }
 
 Sheet_Groupment_Class::g();

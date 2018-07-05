@@ -1,32 +1,32 @@
 <?php
 /**
- * Les actions relatives aux sociétés
+ * Classe gérant les actions des sociétés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * Création, modification, recherche.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Les actions relatives aux sociétés
+ * Society Action class.
  */
 class Society_Action {
 
 	/**
-	 * Le constructeur appelle les actions ajax suivantes:
-	 * wp_ajax_load_sheet_display
-	 * wp_ajax_save_society
+	 * Constructeur.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
@@ -38,37 +38,24 @@ class Society_Action {
 	 * Sauvegardes les données d'une societé
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function callback_save_society() {
 		check_ajax_referer( 'save_society' );
 
-		// todo: Doublon ?
-		if ( 0 === (int) $_POST['id'] ) {
+		$id    = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+		$title = ! empty( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : ''; // WPCS: input var ok.
+
+		if ( empty( $id ) ) {
 			wp_send_json_error();
-		} else {
-			$id = (int) $_POST['id'];
 		}
 
-		$group_id = $id;
-		$workunit_id_selected = 0;
-
-		$society = Society_Class::g()->show_by_type( $_POST['id'] );
-		$society->title = $_POST['title'];
-
-		if ( ! empty( $_POST['parent_id'] ) ) {
-			$parent_id = (int) $_POST['parent_id'];
-			$society->parent_id = $_POST['parent_id'];
-		}
+		$society                = Society_Class::g()->show_by_type( $id );
+		$society->data['title'] = $title;
 
 		Society_Class::g()->update_by_type( $society );
 
-		if ( 'digi-workunit' === $society->type ) {
-			$_POST['workunit_id'] = $society->id;
-		}
-
 		ob_start();
-		Digirisk_Class::g()->display( $id );
+		Digirisk::g()->display( $id );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'society',
@@ -81,22 +68,19 @@ class Society_Action {
 	/**
 	 * Supprimes une société
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function callback_delete_society() {
 		check_ajax_referer( 'delete_society' );
 
-		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
-		$society = Society_Class::g()->show_by_type( $id );
-		$society->status = 'trash';
+		$society                 = Society_Class::g()->show_by_type( $id );
+		$society->data['status'] = 'trash';
 		Society_Class::g()->update_by_type( $society );
 
 		ob_start();
-		Digirisk_Class::g()->display( $society->parent_id );
+		Digirisk::g()->display( $society->data['parent_id'] );
 		wp_send_json_success( array(
 			'template'         => ob_get_clean(),
 			'namespace'        => 'digirisk',
@@ -109,9 +93,6 @@ class Society_Action {
 	 * Recherches une société depuis $_GET['term'].
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function callback_search_establishment() {
 		global $wpdb;
@@ -135,8 +116,8 @@ class Society_Action {
 		}
 
 		$query = new \WP_Query( array(
-			'post_type' => $posts_type,
-			's' => $term,
+			'post_type'   => $posts_type,
+			's'           => $term,
 			'post_status' => array( 'publish', 'draft' ),
 		) );
 

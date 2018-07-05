@@ -71,27 +71,6 @@ class DUER_Class extends Document_Class {
 	public $element_prefix = 'DU';
 
 	/**
-	 * Fonctions appelées avant le PUT
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * Fonctions appelées après le GET
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
-	 * La limite des documents affichés par page
-	 *
-	 * @var integer
-	 */
-	protected $limit_document_per_page = 50;
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -106,20 +85,15 @@ class DUER_Class extends Document_Class {
 	protected $odt_name = 'document_unique';
 
 	/**
-	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.
 	 *
-	 * @since   6.0.0
-	 * @version 6.5.0
-	 *
-	 * @param int $element_id L'ID de l'élement.
-	 *
-	 * @return void
+	 * @param  [type] $element_id [description]
+	 * @return [type]             [description]
 	 */
-	public function display( $element_id ) {
+	public function display( $parent_id, $types, $can_add = true ) {
 		$element = $this->get( array(
 			'posts_per_page' => 1,
 			'order'          => 'DESC',
-			'post_parent'    => $element_id,
+			'post_parent'    => $parent_id,
 			'post_status'    => array( 'publish', 'inherit' ),
 		), true );
 
@@ -129,9 +103,15 @@ class DUER_Class extends Document_Class {
 			), true );
 		}
 
+		$documents = $this->get( array(
+			'post_parent' => $parent_id,
+			'post_status' => array( 'publish', 'inherit' ),
+		) );
+
 		\eoxia\View_Util::exec( 'digirisk', 'duer', 'main', array(
 			'element'    => $element,
-			'element_id' => $element_id,
+			'element_id' => $parent_id,
+			'documents'  => $documents,
 		) );
 	}
 
@@ -139,11 +119,8 @@ class DUER_Class extends Document_Class {
 	 * Récupères les enfants pour l'affichage dans la popup pour générer le DUER.
 	 *
 	 * @since   6.2.3
-	 * @version 7.0.0
 	 *
 	 * @param integer $parent_id L'ID de la société parent.
-	 *
-	 * @return void
 	 */
 	public function display_childs( $parent_id = 0 ) {
 		$societies = Society_Class::g()->get(

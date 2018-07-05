@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe héritant de Document_Class. Permet de définir les attributs "protected".
+ * Gères la génération de l'ODT: Registre Accidents de travail benins
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.6
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.3.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,22 +16,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Classe héritant de Document_Class. Permet de définir les attributs "protected".
+ * Gères la génération de l'ODT: Registre Accidents de travail benins
  */
-class Legal_Display_A3_Class extends Document_Class {
+class Registre_AT_Benin_Class extends Document_Class {
+
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\Legal_Display_A3_Model';
+	protected $model_name = '\digi\Registre_AT_Benin_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $type = 'affichage_legal_A3';
+	protected $type = 'registre_at_benin';
 
 	/**
 	 * Le type du document
@@ -52,7 +53,7 @@ class Legal_Display_A3_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $base = 'affichage_legal_a3';
+	protected $base = 'registre-accidents-travail-benins';
 
 	/**
 	 * La version de l'objet
@@ -66,21 +67,21 @@ class Legal_Display_A3_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix = 'AL-A3-';
+	public $element_prefix = 'RATB';
 
 	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
 	 */
-	protected $post_type_name = 'affichage_legal_A3';
+	protected $post_type_name = 'Registre Accidents de Travail Benins';
 
 	/**
 	 * Le nom de l'ODT sans l'extension; exemple: document_unique
 	 *
 	 * @var string
 	 */
-	protected $odt_name = 'affichage_legal_A3';
+	protected $odt_name = 'registre_accidents_travail_benins';
 }
 
-Legal_Display_A3_Class::g();
+Accident_Travail_Benin_Class::g();

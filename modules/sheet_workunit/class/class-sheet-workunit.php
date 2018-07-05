@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Sheet Workunit class.
  */
-class Sheet_Workunit_Class extends Sheet_Class {
+class Sheet_Workunit_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -77,7 +77,7 @@ class Sheet_Workunit_Class extends Sheet_Class {
 	 *
 	 * @var string
 	 */
-	protected $odt_name = 'unite_de_travail';
+	protected $odt_name = 'fiche_de_poste';
 }
 
 Sheet_Workunit_Class::g();

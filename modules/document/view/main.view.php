@@ -18,15 +18,21 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<table class="table">
-	<?php Document_Class::g()->display_document_list( $element_id, array( $type ) ); ?>
-
+<table class="table documents">
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'document', 'item-edit', array(
-		'_this'      => $_this,
-		'action'     => $action,
-		'element'    => $element,
-		'element_id' => $element_id,
+	\eoxia\View_Util::exec( 'digirisk', 'document', 'list', array(
+		'_this'     => $_this,
+		'action'    => 'generate_' . $_this->get_type(),
+		'element'   => $element,
+		'documents' => $documents,
 	) );
+
+	if ( $can_add ) :
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'item-edit', array(
+			'_this'   => $_this,
+			'action'  => 'generate_' . $_this->get_type(),
+			'element' => $element,
+		) );
+	endif;
 	?>
 </table>

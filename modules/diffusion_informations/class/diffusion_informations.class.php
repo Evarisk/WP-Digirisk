@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les diffusions d'informations
  */
-class Diffusion_Informations_Class extends \eoxia\Post_Class {
+class Diffusion_Informations_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -70,35 +70,17 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	protected $post_type_name = 'Diffusion information';
 
 	/**
-	 * Appelle la vue "main".
-	 *
-	 * @since   6.4.4
-	 * @version 6.4.4
-	 *
-	 * @param  integer $element_id L'ID de l'élement.
-	 * @return void
-	 */
-	public function display( $element_id ) {
-		$element = Society_Class::g()->show_by_type( $element_id );
-
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'main', array(
-			'element' => $element,
-		) );
-	}
-
-	/**
 	 * Le formulaire pour générer une diffusion d'information
 	 *
 	 * @since   6.2.10
-	 * @version 7.0.0
 	 *
 	 * @param  object $element La société.
 	 *
 	 * @return void
 	 */
-	public function display_form( $element ) {
+	public function display_form( $element_id ) {
 		$diffusion_information = $this->get( array(
-			'post_parent'    => $element->data['id'],
+			'post_parent'    => $element_id,
 			'posts_per_page' => 1,
 			'post_status'    => array(
 				'publish',
@@ -113,80 +95,10 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
-			'element_id'            => $element->data['id'],
+			'element_id'            => $element_id,
 			'diffusion_information' => $diffusion_information,
 		) );
 	}
-
-	/**
-	* Appelle le template list.view.php dans le dossier /diffusion_informations/view/
-	*
-	* @since   6.2.10
-	* @version 7.0.0
-	*
-	* @param  integer $element_id L'ID de l'élement.
-	*
-	* @return void
-	*/
-	public function display_document_list( $element_id ) {
-		$list_document = Diffusion_Informations_A3_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) );
-
-		$list_document = array_merge( $list_document, Diffusion_Informations_A4_Class::g()->get( array(
-			'post_parent' => $element_id,
-			'post_status' => array(
-				'publish',
-				'inherit',
-			),
-		) ) );
-
-		// Trie le tableau par ordre des clés.
-		usort( $list_document, function( $a, $b ) {
-			if ( $a->data['unique_key'] === $b->data['unique_key'] ) {
-				return 0;
-			}
-
-			return ( $a->data['unique_key'] > $b->data['unique_key'] ) ? -1 : 1;
-		} );
-
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
-			'list_document' => $list_document,
-		) );
-	}
-
-	/**
-	 * Génère une fiche de diffusions
-	 *
-	 * @since   6.2.10
-	 * @version 6.4.0
-	 *
-	 * @param  array         $data    Les données du documents.
-	 * @param  Society_Model $element La société.
-	 * @param  string        $format  Le format de la génération A3 ou A4.
-	 *
-	 * @return void
-	 */
-	public function generate_sheet( $data, $element, $format = 'A3' ) {
-		$data['delegues_du_personnels_date'] = mysql2date( 'd/m/Y', $data['delegues_du_personnels_date'] );
-		$data['membres_du_comite_entreprise_date'] = mysql2date( 'd/m/Y', $data['membres_du_comite_entreprise_date'] );
-
-		$class = '\digi\Diffusion_Informations_' . $format . '_Class';
-		$document_creation = $class::g()->create_document( $element, array( 'diffusion_informations_' . $format ), $data );
-
-		$filetype = 'unknown';
-		if ( ! empty( $document_creation ) && ! empty( $document_creation['status'] ) && ! empty( $document_creation['link'] ) ) {
-			$filetype = wp_check_filetype( $document_creation['link'], null );
-		}
-
-		$element->associated_document_id['document'][] = $document_creation['id'];
-		Society_Class::g()->update_by_type( $element );
-	}
-
 }
 
 Diffusion_Informations_Class::g();

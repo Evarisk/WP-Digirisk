@@ -189,7 +189,6 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
 	 * @since   6.0.0
-	 * @version 7.0.0
 	 */
 	public function get_address( $society ) {
 		$last_address_id = end( $society->data['contact']['address_id'] );

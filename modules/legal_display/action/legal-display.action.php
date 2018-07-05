@@ -4,9 +4,8 @@
  *
  * @author    Evarisk <dev@evarisk.com>
  * @since     6.1.5
- * @version   7.0.0
  * @copyright 2018 Evarisk.
- * @package DigiRisk
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -24,7 +23,6 @@ class Legal_Display_Action {
 	 * Le constructeur appelle l'action personnalisée suivante: save_legal_display (Enregistres les données de l'affichage légal)
 	 *
 	 * @since   6.1.5
-	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'save_legal_display', array( $this, 'callback_save_legal_display' ), 10, 2 );
@@ -34,10 +32,11 @@ class Legal_Display_Action {
 	 * Sauvegardes les données de l'affichage légal dans la base de donnée
 	 *
 	 * @since   6.1.5
-	 * @version 7.0.0
 	 *
 	 * @param Third_Model $detective_work_third Les données de l'inspecteur du travail.
 	 * @param Third_Model $occupational_health_service_third Les données du service de santé au travail.
+	 *
+	 * @todo: Sécurité.
 	 */
 	public function callback_save_legal_display( $detective_work_third, $occupational_health_service_third ) {
 		check_ajax_referer( 'save_legal_display' );
@@ -71,114 +70,18 @@ class Legal_Display_Action {
 
 		$legal_display = Legal_Display_Class::g()->save_data( $legal_display_data );
 
-		$legal_display = Legal_Display_Class::g()->get( array(
-			'id' => $legal_display->data['id'],
-		), true );
-
-		$element_parent = Society_Class::g()->get( array(
-			'id' => $parent_id,
-		), true );
-
-		$result = array();
-
-		$result['A3'] = $this->generate_sheet( $legal_display, $element_parent, 'A3' );
-		$result['A4'] = $this->generate_sheet( $legal_display, $element_parent );
+		$response = Legal_Display_A3_Class::g()->prepare_document( $parent_id );
+		$response = Legal_Display_A4_Class::g()->prepare_document( $parent_id );
 
 		ob_start();
-		Legal_Display_Class::g()->display( $element_parent );
+		Legal_Display_Class::g()->display( $parent_id, array( Legal_Display_A3_Class::g()->get_type(), Legal_Display_A4_Class::g()->get_type() ), false );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'legalDisplay',
 			'callback_success' => 'generatedSuccess',
-			'legal_display'    => $legal_display,
-			'result'           => $result,
 			'view'             => ob_get_clean(),
 		) );
 	}
-
-	/**
-	 * Génère l'ODT de l'affichage légal
-	 *
-	 * @since   6.1.5
-	 * @version 7.0.0
-	 *
-	 * @param array  $legal_display Toutes les données de l'affichage légal.
-	 * @param object $element_parent L'objet parent.
-	 * @param string $format (Optional) Le format voulu A4 ou A3.
-	 *
-	 * @return array $document_creation Les données de la création du document.
-	 */
-	public function generate_sheet( $legal_display, $element_parent, $format = 'A4' ) {
-		$legal_display_sheet_details = array(
-			'inspection_du_travail_nom'            => $legal_display->data['detective_work']->data['full_name'],
-			'inspection_du_travail_adresse'        => $legal_display->data['detective_work']->data['address']->data['address'],
-			'inspection_du_travail_code_postal'    => $legal_display->data['detective_work']->data['address']->data['postcode'],
-			'inspection_du_travail_ville'          => $legal_display->data['detective_work']->data['address']->data['town'],
-			'inspection_du_travail_telephone'      => $legal_display->data['detective_work']->data['contact']['phone'],
-			'inspection_du_travail_horaire'        => $legal_display->data['detective_work']->data['opening_time'],
-
-			'service_de_sante_nom'                 => $legal_display->data['occupational_health_service']->data['full_name'],
-			'service_de_sante_adresse'             => $legal_display->data['occupational_health_service']->data['address']->data['address'],
-			'service_de_sante_code_postal'         => $legal_display->data['occupational_health_service']->data['address']->data['postcode'],
-			'service_de_sante_ville'               => $legal_display->data['occupational_health_service']->data['address']->data['town'],
-			'service_de_sante_telephone'           => $legal_display->data['occupational_health_service']->data['contact']['phone'],
-			'service_de_sante_horaire'             => $legal_display->data['occupational_health_service']->data['opening_time'],
-
-			'samu'                                 => $legal_display->data['emergency_service']['samu'],
-			'police'                               => $legal_display->data['emergency_service']['police'],
-			'pompier'                              => $legal_display->data['emergency_service']['pompier'],
-			'toute_urgence'                        => $legal_display->data['emergency_service']['emergency'],
-			'defenseur_des_droits'                 => $legal_display->data['emergency_service']['right_defender'],
-			'anti_poison'                          => $legal_display->data['emergency_service']['poison_control_center'],
-
-			'responsable_a_prevenir'               => $legal_display->data['safety_rule']['responsible_for_preventing'],
-			'telephone'                            => $legal_display->data['safety_rule']['phone'],
-			'emplacement_des_consignes_detaillees' => $legal_display->data['safety_rule']['location_of_detailed_instruction'],
-
-			'permanente'                           => $legal_display->data['derogation_schedule']['permanent'],
-			'occasionnelle'                        => $legal_display->data['derogation_schedule']['occasional'],
-
-			'intitule'                             => $legal_display->data['collective_agreement']['title_of_the_applicable_collective_agreement'],
-			'lieu_modalite'                        => $legal_display->data['collective_agreement']['location_and_access_terms_of_the_agreement'],
-
-			'lieu_affichage'                       => $legal_display->data['rules']['location'],
-			'modalite_access'                      => $legal_display->data['DUER']['how_access_to_duer'],
-
-			'lundi_matin'                          => $legal_display->data['working_hour']['monday_morning'],
-			'mardi_matin'                          => $legal_display->data['working_hour']['tuesday_morning'],
-			'mercredi_matin'                       => $legal_display->data['working_hour']['wednesday_morning'],
-			'jeudi_matin'                          => $legal_display->data['working_hour']['thursday_morning'],
-			'vendredi_matin'                       => $legal_display->data['working_hour']['friday_morning'],
-			'samedi_matin'                         => $legal_display->data['working_hour']['saturday_morning'],
-			'dimanche_matin'                       => $legal_display->data['working_hour']['sunday_morning'],
-
-			'lundi_aprem'                          => $legal_display->data['working_hour']['monday_afternoon'],
-			'mardi_aprem'                          => $legal_display->data['working_hour']['tuesday_afternoon'],
-			'mercredi_aprem'                       => $legal_display->data['working_hour']['wednesday_afternoon'],
-			'jeudi_aprem'                          => $legal_display->data['working_hour']['thursday_afternoon'],
-			'vendredi_aprem'                       => $legal_display->data['working_hour']['friday_afternoon'],
-			'samedi_aprem'                         => $legal_display->data['working_hour']['saturday_afternoon'],
-			'dimanche_aprem'                       => $legal_display->data['working_hour']['sunday_afternoon'],
-
-			'modalite_information_ap'              => $legal_display->data['participation_agreement']['information_procedures'],
-		);
-
-		$class             = '\digi\Legal_Display_' . $format . '_Class';
-		$document_creation = $class::g()->create_document( $element_parent, array( 'affichage_legal_' . $format ), $legal_display_sheet_details );
-
-		$filetype = 'unknown';
-		if ( ! empty( $document_creation ) && ! empty( $document_creation['status'] ) && ! empty( $document_creation['link'] ) ) {
-			$filetype = wp_check_filetype( $document_creation['link'], null );
-		}
-
-		$element_parent->associated_document_id['document'][] = $document_creation['id'];
-
-		Society_Class::g()->update( $element_parent );
-
-		return $document_creation;
-	}
-
-
 }
 
 new Legal_Display_Action();

@@ -28,9 +28,12 @@ window.eoxiaJS.digirisk.search.event = function() {
 
 /**
  * Lors de la séléction d'un utilisateur, affectes son ID dans un input caché.
+ * Affectes également le "data-result" de l'élement cliqué à l'input
+ * ".autocomplete-search-input".
  *
  * @since 7.0.0
  */
 window.eoxiaJS.digirisk.search.select = function() {
 	jQuery( this ).closest( '.form-element' ).find( 'input[type="hidden"]' ).val( jQuery( this ).data( 'id' ) );
+	jQuery( this ).closest( '.form-element' ).find( '.autocomplete-search-input' ).val( jQuery( this ).data( 'result' ) );
 };

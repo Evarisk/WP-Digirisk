@@ -6,7 +6,7 @@
  * @since 6.0.0
  * @version 6.0.0
  * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @package EOFramework
  */
 
 namespace digi;
@@ -18,13 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition du schéma des documents
  */
-class Document_Model extends \eoxia\Post_Model {
+class Document_Model extends \eoxia\ODT_Model {
 
 	/**
-	 * Définition du schéma des risques
+	 * Définition du schéma des documents
 	 *
 	 * @since 6.0.0
-	 * @version 6.0.0
 	 *
 	 * @param array $data       Data.
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
@@ -53,14 +52,6 @@ class Document_Model extends \eoxia\Post_Model {
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unique_identifier',
 			'default'   => '',
-		);
-
-		$this->schema['model_id'] = array(
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-			'type'      => 'string',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_model_id',
 		);
 
 		parent::__construct( $data, $req_method );

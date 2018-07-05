@@ -1,19 +1,22 @@
 <?php
 /**
- * Déclares le tableau qui contient les documents unique
+ * Ce template affiche le tableau contenant les DUER présent dans l'application DigiRisk.
+ *
+ * Ce template appel la vue: "list" et "item-edit".
  *
  * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
  * @since     6.0.0
- * @version   6.5.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table duer">
 	<thead>
@@ -31,7 +34,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</thead>
 
 	<tbody>
-		<?php DUER_Class::g()->display_document_list( $element_id ); ?>
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
+			'documents' => $documents,
+		) );
+		?>
 	</tbody>
 
 	<tfoot>

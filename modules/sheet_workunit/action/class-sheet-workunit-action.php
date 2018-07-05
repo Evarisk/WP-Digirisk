@@ -44,12 +44,13 @@ class Sheet_Workunit_Action {
 			wp_send_json_error();
 		}
 
-		Sheet_Workunit_Class::g()->generate( $society_id );
+		$response = Sheet_Workunit_Class::g()->prepare_document( $society_id );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'sheet_workunit',
 			'callback_success' => 'generatedFicheDePosteSuccess',
+			'data'             => $response,
 		) );
 	}
 

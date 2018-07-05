@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit; ?>
 <tr class="sheet-groupment-row">
 	<input type="hidden" name="action" value="<?php echo esc_attr( $action ); ?>" />
 	<?php wp_nonce_field( $action ); ?>
-	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
+	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 
 	<td></td>
 	<td>

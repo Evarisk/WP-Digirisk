@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition du schéma des diffusions d'information au format A4.
  */
-class Diffusion_Informations_A4_Model extends \eoxia\Post_Model {
+class Diffusion_Informations_A4_Model extends Document_Model {
 
 	/**
 	 * Définition du schéma des diffusions d'information au format A4.

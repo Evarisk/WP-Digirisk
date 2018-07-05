@@ -25,11 +25,11 @@ defined( 'ABSPATH' ) || exit; ?>
 </thead>
 
 <tbody>
-	<?php if ( ! empty( $list_document ) ) : ?>
-		<?php foreach ( $list_document as $element ) : ?>
+	<?php if ( ! empty( $documents ) ) : ?>
+		<?php foreach ( $documents as $document ) : ?>
 			<?php
 			\eoxia\View_Util::exec( 'digirisk', 'document', 'list-item', array(
-				'element' => $element,
+				'element' => $document,
 			) );
 			?>
 		<?php endforeach; ?>

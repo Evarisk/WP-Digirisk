@@ -6,6 +6,7 @@
 	"path": "modules/document/",
 	"dependencies": {
 		"model": {},
+    "filter": {},
 		"class": {
       "priority": [
         "class-document.php"

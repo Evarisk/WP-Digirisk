@@ -70,20 +70,6 @@ class Legal_Display_A4_Class extends Document_Class {
 	public $element_prefix = 'AL-A4-';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string

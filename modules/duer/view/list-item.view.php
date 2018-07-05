@@ -1,22 +1,23 @@
 <?php
 /**
- * Affichage d'un DUER
+ * Ce template affiche un "DUER" dans le tableau des DUER.
  *
  * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
  * @since     6.1.9
- * @version   7.0.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <tr>
-	<td class="padding w50"><strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong></td>
+	<td class="padding w50"><strong><?php echo esc_html( $document->data['unique_identifier'] ); ?></strong></td>
 	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
 
@@ -117,10 +118,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action grid-layout w2">
-			<?php if ( ! empty( $element->data['link'] ) ) : ?>
+			<?php if ( ! empty( $document->data['link'] ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
-					href="<?php echo esc_attr( $element->data['link'] ); ?>">
+					href="<?php echo esc_attr( $document->data['link'] ); ?>">
 					<i class="icon fas fa-file-alt"></i>
 				</a>
 			<?php else : ?>
