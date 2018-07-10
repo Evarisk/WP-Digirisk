@@ -1,22 +1,23 @@
 <?php
 /**
- * Les filtres relatives aux fiches de groupement
+ * Classe gérant les filtres des fiches de groupement.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.4
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.2.4
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Ajoutes le filtre pour ajouter le bouton dans le contenu des onglets
+ * Sheet Groupement Filter class.
  */
 class Sheet_Groupment_Filter extends Identifier_Filter {
 
@@ -24,7 +25,6 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 	 * Ajoutes le filtres
 	 *
 	 * @since 6.2.4
-	 * @version 6.2.4
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -32,6 +32,10 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 6, 2 );
 
 		add_filter( 'digi_sheet_groupment_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
+		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_header' ), 10, 2 );
+		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_risks' ), 20, 2 );
+		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_evaluators' ), 30, 2 );
+		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_recommendations' ), 40, 2 );
 	}
 
 	/**
@@ -42,7 +46,6 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
 	 *
 	 * @since 6.2.4
-	 * @version 6.4.4
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['fiche-de-groupement'] = array(
@@ -65,16 +68,16 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 	 * @return array                  Les données pour le registre des AT bénins modifié.
 	 */
 	public function callback_digi_document_data( $data, $society ) {
-		$society_infos = Society_Class::g()->get_address( $society );
+		$address = Society_Class::g()->get_address( $society );
 
 		$data = array(
 			'reference'   => $society->data['unique_identifier'],
 			'nom'         => $society->data['title'],
 			'description' => $society->data['content'],
-			'adresse'     => $society_infos['adresse'],
+			'adresse'     => $address->data['address'],
 			'telephone'   => ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '',
-			'codePostal'  => $society_infos['codePostal'],
-			'ville'       => $society_infos['ville'],
+			'codePostal'  => $address->data['postcode'],
+			'ville'       => $address->data['town'],
 		);
 
 		return $data;

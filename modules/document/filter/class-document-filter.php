@@ -69,6 +69,102 @@ class Document_Filter extends \eoxia\Singleton_Util {
 
 		return $data;
 	}
+
+	public function fill_header( $data, $society ) {
+		$address = Society_Class::g()->get_address( $society );
+
+		$data['reference']    = $society->data['unique_identifier'];
+		$data['nom']          = $society->data['title'];
+		$data['adresse']      = $address->data['address'] . ' ' . $address->data['additional_address'];
+		$data['codePostal']   = $address->data['postcode'];
+		$data['ville']        = $address->data['town'];
+		$data['telephone']    = ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '';
+		$data['description']  = $society->data['content'];
+		$data['photoDefault'] = '';
+
+		return $data;
+	}
+
+	public function fill_risks( $data, $society ) {
+		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->data['id'] ) );
+
+		$data['risq80'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq51'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq48'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq']   = array( 'type' => 'segment', 'value' => array() );
+
+		if ( ! empty( $risks ) ) {
+			foreach ( $risks as $risk ) {
+				$comment_list = '';
+
+				if ( ! empty( $risk->data['comment'] ) ) {
+					foreach ( $risk->data['comment'] as $comment ) {
+						$comment_list .= $comment->data['date']['rendered']['date_time'] . ' : ' . $comment->data['content'] . "
+";
+					}
+				}
+
+				$data[ 'risq' . $risk->data['current_equivalence'] ]['value'][] = array(
+					'nomDanger'         => $risk->data['risk_category']->data['name'],
+					'identifiantRisque' => $risk->data['unique_identifier'] . '-' . $risk->data['evaluation']->data['unique_identifier'],
+					'quotationRisque'   => $risk->data['current_equivalence'],
+					'commentaireRisque' => $comment_list,
+				);
+			}
+		}
+
+		return $data;
+	}
+
+	public function fill_evaluators( $data, $society ) {
+		$data['utilisateursPresents'] = array( 'type' => 'segment', 'value' => array() );
+
+		$affecteds_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $society );
+
+		if ( ! empty( $affecteds_evaluator ) ) {
+			foreach ( $affecteds_evaluator as $evaluator_id => $evaluator_affectation_info ) {
+				foreach ( $evaluator_affectation_info as $evaluator_affectation_info ) {
+					if ( 'valid' === $evaluator_affectation_info['affectation_info']['status'] ) {
+						$data['utilisateursPresents']['value'][] = array(
+							'idUtilisateur'              => Evaluator_Class::g()->element_prefix . $evaluator_affectation_info['user_info']->data['id'],
+							'nomUtilisateur'             => $evaluator_affectation_info['user_info']->data['lastname'],
+							'prenomUtilisateur'          => $evaluator_affectation_info['user_info']->data['firstname'],
+							'dateAffectationUtilisateur' => mysql2date( 'd/m/Y', $evaluator_affectation_info['affectation_info']['start']['date'], true ),
+							'dateTrie'                   => $evaluator_affectation_info['affectation_info']['start']['date'],
+							'dureeEntretien'             => Evaluator_Class::g()->get_duration( $evaluator_affectation_info['affectation_info'] ),
+						);
+					}
+				}
+			}
+		}
+
+		return $data;
+	}
+
+	public function fill_recommendations( $data, $society ) {
+		$data['affectedRecommandation'] = array( 'type' => 'segment', 'value' => array() );
+
+		$recommendations = Recommendation::g()->get( array( 'post_parent' => $society->data['id'] ) );
+
+		if ( ! empty( $recommendations ) ) {
+			foreach ( $recommendations as $recommendation ) {
+				/** Récupères la catégorie parent */
+				$data['affectedRecommandation']['value'][ $element->data['id'] ] = array(
+					'recommandationCategoryIcon' => '',
+					'recommandationCategoryName' => $element->data['recommendation_category_term'][0]->name,
+				);
+				$data['affectedRecommandation']['value'][ $element->data['id'] ]['recommendations']['type'] = 'sub_segment';
+				$data['affectedRecommandation']['value'][ $element->data['id'] ]['recommendations']['value'][] = array(
+					'identifiantRecommandation' => $element->data['unique_identifier'],
+					'recommandationIcon'        => '',
+					'recommandationName'        => $element->data['recommendation_category_term'][0]->name,
+					'recommandationComment'     => $element->data['comment'][0]->content,
+				);
+			}
+		}
+
+		return $data;
+	}
 }
 
 Document_Filter::g();
