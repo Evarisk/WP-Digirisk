@@ -32,7 +32,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 	 */
 	protected function construct() {
 		add_filter( 'eo_model_sheet_groupment_before_post', array( $this, 'before_save_doc' ), 10, 2 );
-		add_filter( 'eo_model_fiche_de_poste_before_post', array( $this, 'before_save_doc' ), 10, 2 );
+		add_filter( 'eo_model_sheet_workunit_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_registre_at_benin_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_duer_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_affichage_legal_A3_before_post', array( $this, 'before_save_doc' ), 10, 2 );
@@ -149,16 +149,11 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		if ( ! empty( $recommendations ) ) {
 			foreach ( $recommendations as $recommendation ) {
 				/** Récupères la catégorie parent */
-				$data['affectedRecommandation']['value'][ $element->data['id'] ] = array(
-					'recommandationCategoryIcon' => '',
-					'recommandationCategoryName' => $element->data['recommendation_category_term'][0]->name,
-				);
-				$data['affectedRecommandation']['value'][ $element->data['id'] ]['recommendations']['type'] = 'sub_segment';
-				$data['affectedRecommandation']['value'][ $element->data['id'] ]['recommendations']['value'][] = array(
-					'identifiantRecommandation' => $element->data['unique_identifier'],
-					'recommandationIcon'        => '',
-					'recommandationName'        => $element->data['recommendation_category_term'][0]->name,
-					'recommandationComment'     => $element->data['comment'][0]->content,
+				$data['affectedRecommandation']['value'][] = array(
+					'identifiantRecommandation' => $recommendation->data['unique_identifier'],
+					'recommandationIcon'        => Document_Util_Class::g()->get_picture( $recommendation->data['recommendation_category']->data['thumbnail_id'], 1 ),
+					'recommandationName'        => $recommendation->data['recommendation_category']->data['name'],
+					'recommandationComment'     => $recommendation->data['comment'][0]->data['content'],
 				);
 			}
 		}

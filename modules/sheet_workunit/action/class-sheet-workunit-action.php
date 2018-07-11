@@ -27,7 +27,7 @@ class Sheet_Workunit_Action {
 	 * @since 6.2.1
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_generate_fiche_de_poste', array( $this, 'ajax_generate_fiche_de_poste' ) );
+		add_action( 'wp_ajax_generate_sheet_workunit', array( $this, 'ajax_generate_sheet_workunit' ) );
 	}
 
 	/**
@@ -35,8 +35,8 @@ class Sheet_Workunit_Action {
 	 *
 	 * @since 6.2.1
 	 */
-	public function ajax_generate_fiche_de_poste() {
-		check_ajax_referer( 'generate_fiche_de_poste' );
+	public function ajax_generate_sheet_workunit() {
+		check_ajax_referer( 'generate_sheet_workunit' );
 
 		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 

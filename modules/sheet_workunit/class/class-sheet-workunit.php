@@ -41,7 +41,7 @@ class Sheet_Workunit_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $type = 'fiche_de_poste';
+	protected $type = 'sheet_workunit';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
