@@ -30,7 +30,6 @@ class Risk_Action {
 	 * wp_ajax_delete_comment
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.4
 	 */
 	public function __construct() {
 		add_action( 'display_risk', array( $this, 'callback_display_risk' ), 10, 2 );
@@ -48,13 +47,12 @@ class Risk_Action {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
 	 */
 	public function callback_display_risk( $society_id, $risk ) {
 		$module           = 'risk';
 		$callback_success = 'savedRiskSuccess';
 		$template         = '';
-		$page             = ! empty( $_POST['page'] ) ? sanitize_text_field( $_POST['page'] ) : '';
+		$page             = ! empty( $_POST['page'] ) ? sanitize_text_field( wp_unslash( $_POST['page'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 
 		if ( 'all_risk' === $page ) {
 			$module = 'risk_page';
@@ -109,34 +107,26 @@ class Risk_Action {
 	 * Supprimes un risque
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
 	 */
 	public function ajax_delete_risk() {
 		check_ajax_referer( 'ajax_delete_risk' );
 
-		if ( 0 === (int) $_POST['id'] ) {
-			wp_send_json_error();
-		} else {
-			$id = (int) $_POST['id'];
-		}
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
-		$risk = Risk_Class::g()->get( array(
-			'id' => $id,
-		) );
-		$risk = $risk[0];
-
-		if ( empty( $risk ) ) {
+		if ( empty( $id ) ) {
 			wp_send_json_error();
 		}
 
-		$risk->status = 'trash';
+		$risk = Risk_Class::g()->get( array( 'id' => $id ), true );
 
-		Risk_Class::g()->update( $risk );
+		$risk->data['status'] = 'trash';
+
+		Risk_Class::g()->update( $risk->data );
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $risk->parent_id,
-			'id'        => $risk->id,
-			'content'   => __( 'Suppression du risque', 'digirisk' ) . ' ' . $risk->unique_identifier,
+			'parent_id' => $risk->data['parent_id'],
+			'id'        => $risk->data['id'],
+			'content'   => __( 'Suppression du risque', 'digirisk' ) . ' ' . $risk->data['unique_identifier'],
 		) );
 
 		wp_send_json_success( array(
@@ -151,15 +141,14 @@ class Risk_Action {
 	 * Charges un risque
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
 	 */
 	public function ajax_load_risk() {
 		check_ajax_referer( 'ajax_load_risk' );
 
-		if ( 0 === (int) $_POST['id'] ) {
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+
+		if ( empty( $id ) ) {
 			wp_send_json_error();
-		} else {
-			$id = (int) $_POST['id'];
 		}
 
 		$risk = Risk_Class::g()->get( array( 'id' => $id ), true );
@@ -181,18 +170,19 @@ class Risk_Action {
 	 * Supprimes un commentaire sur un risque (met le status du commentaire à "trash")
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.4.0
 	 */
 	public function callback_delete_comment() {
 		check_ajax_referer( 'ajax_delete_risk_comment' );
 
-		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		$risk_id = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
-		$risk_evaluation_comment = Risk_Evaluation_Comment_Class::g()->get( array( 'id' => $id ) );
-		$risk_evaluation_comment = $risk_evaluation_comment[0];
-		$risk_evaluation_comment->status = 'trash';
-		Risk_Evaluation_Comment_Class::g()->update( $risk_evaluation_comment );
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$risk_evaluation_comment                 = Risk_Evaluation_Comment_Class::g()->get( array( 'id' => $id ), true );
+		$risk_evaluation_comment->data['status'] = 'trash';
+		Risk_Evaluation_Comment_Class::g()->update( $risk_evaluation_comment->data );
 
 		wp_send_json_success();
 	}

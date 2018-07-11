@@ -122,7 +122,6 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 
 				// Est-ce que la valeur est un nombre supérieure à 0.
 				if ( ! empty( $variable_id ) ) {
-
 					if ( ! in_array( $variable_id, $evaluation_method_variables_id, true ) ) {
 						return false;
 					} else {

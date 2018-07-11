@@ -65,8 +65,8 @@ class Evaluation_Method_Action {
 	public function ajax_load_modal_method_evaluation() {
 		check_ajax_referer( 'load_modal_method_evaluation' );
 
-		$id      = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		$risk_id = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
+		$id      = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+		$risk_id = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0; // WPCS: input var ok.
 
 		if ( empty( $id ) ) {
 			wp_send_json_error();

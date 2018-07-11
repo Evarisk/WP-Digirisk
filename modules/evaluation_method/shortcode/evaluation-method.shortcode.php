@@ -49,11 +49,25 @@ class Evaluation_Method_Shortcode {
 		$method_evaluation_simplified = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
 		$variables                    = $method_evaluation_simplified->data['variables'];
 
-		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main', array(
-			'risk'                         => $risk,
-			'method_evaluation_simplified' => $method_evaluation_simplified,
-			'variables'                    => $variables,
-		) );
+		$evaluation_method_id = $risk->data['evaluation_method']->data['id'];
+
+		if ( empty( $evaluation_method_id ) ) {
+			$evaluation_method_id = $method_evaluation_simplified->data['id'];
+		}
+
+		if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id ) {
+			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main', array(
+				'risk'                         => $risk,
+				'evaluation_method_id'         => $evaluation_method_id,
+				'method_evaluation_simplified' => $method_evaluation_simplified,
+				'variables'                    => $variables,
+			) );
+		} else {
+			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/edit-modal', array(
+				'risk_id'                      => $risk_id,
+				'evaluation_method'            => $risk->data['evaluation_method'],
+			) );
+		}
 	}
 }
 

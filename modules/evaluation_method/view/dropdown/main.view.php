@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $method_evaluation_simplified->data['id'] ); ?>" />
+<input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $evaluation_method_id ); ?>" />
 <textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : ''; ?></textarea>
 
 <div class="wpeo-dropdown dropdown-grid dropdown-padding-0 cotation-container">
@@ -48,21 +48,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		endif;
 
-		echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
-			'li'  => array(
-				'class'        => array(),
-				'aria-label'   => array(),
-				'data-action'  => array(),
-				'data-class'   => array(),
-				'data-nonce'   => array(),
-				'data-id'      => array(),
-				'data-risk-id' => array(),
-			),
-			'svg' => array(),
-			'i'   => array(
-				'class' => array(),
-			),
-		) );
+		if ( empty( $risk_id ) ) :
+			echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
+				'li'  => array(
+					'class'        => array(),
+					'aria-label'   => array(),
+					'data-action'  => array(),
+					'data-class'   => array(),
+					'data-nonce'   => array(),
+					'data-id'      => array(),
+					'data-risk-id' => array(),
+				),
+				'svg' => array(),
+				'i'   => array(
+					'class' => array(),
+				),
+			) );
+		endif;
 		?>
 	</ul>
 </div>
