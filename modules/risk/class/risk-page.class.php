@@ -139,12 +139,12 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $risk_list ) ) {
 			foreach ( $risk_list as $key => $element ) {
-				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->parent_id );
+				$risk_list[ $key ]->parent = Society_Class::g()->show_by_type( $element->data['parent_id'] );
 
 				if ( empty( $risk_list[ $key ]->parent ) ) {
 					unset( $risk_list[ $key] );
 				} else {
-					if ( 'digi-group' === $risk_list[ $key ]->parent->type ) {
+					if ( 'digi-group' === $risk_list[ $key ]->parent->data['type'] ) {
 						$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
 					} else {
 						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;

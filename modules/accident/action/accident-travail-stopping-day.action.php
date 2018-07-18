@@ -53,15 +53,15 @@ class Accident_Travail_Stopping_Day_Action {
 			'id' => $accident_id,
 		), true );
 
-		$accident->compiled_stopping_days = 0;
+		$accident->data['compiled_stopping_days'] = 0;
 
-		if ( ! empty( $accident->stopping_days ) ) {
-			foreach ( $accident->stopping_days as $stopping_days ) {
-				$accident->compiled_stopping_days += (int) $stopping_days->content;
+		if ( ! empty( $accident->data['stopping_days'] ) ) {
+			foreach ( $accident->data['stopping_days'] as $stopping_days ) {
+				$accident->data['compiled_stopping_days'] += (int) $stopping_days->data['content'];
 			}
 		}
 
-		$accident = Accident_Class::g()->update( $accident );
+		$accident = Accident_Class::g()->update( $accident->data );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
@@ -79,27 +79,24 @@ class Accident_Travail_Stopping_Day_Action {
 	 * Passes le post en status 'trash'.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function callback_delete_stopping_day() {
 		check_ajax_referer( 'delete_stopping_day' );
 
-		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
 		if ( empty( $id ) ) {
 			wp_send_json_error();
 		}
 
 		Accident_Travail_Stopping_Day_Class::g()->update( array(
-			'id' => $id,
+			'id'     => $id,
 			'status' => 'trash',
 		) );
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'accident',
+			'namespace'        => 'digirisk',
+			'module'           => 'accident',
 			'callback_success' => 'deletedStoppingDay',
 		) );
 	}

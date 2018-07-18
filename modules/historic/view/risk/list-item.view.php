@@ -1,31 +1,32 @@
 <?php
 /**
- * Affichage d'une cotation (Historique)
+ * Template affichant les données d'une cotation.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.2.10
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <tr class="risk-row">
 	<td data-title="Ref." class="padding">
-		<span><strong><?php echo esc_html( $evaluation->unique_identifier ); ?></strong></span>
+		<span><strong><?php echo esc_html( $evaluation->data['unique_identifier'] ); ?></strong></span>
 	</td>
 	<td data-title="Date" class="w50 padding">
-		<?php echo esc_html( $evaluation->date['rendered']['date_time'] ); ?>
+		<?php echo esc_html( $evaluation->data['date']['rendered']['date_time'] ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<div class="cotation-container grid">
-			<div class="action cotation default-cotation level<?php echo esc_attr( $evaluation->scale ); ?>">
-				<span><?php echo esc_html( $evaluation->risk_level['equivalence'] ); ?></span>
+			<div class="action cotation default-cotation level<?php echo esc_attr( $evaluation->data['scale'] ); ?>">
+				<span><?php echo esc_html( $evaluation->data['equivalence'] ); ?></span>
 			</div>
 		</div>
 	</td>
@@ -36,12 +37,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				foreach ( $evaluation->comments as $comment ) :
 					if ( 0 !== $comment->id ) :
 						?>
-							<?php	$userdata = get_userdata( $comment->author_id ); ?>
+							<?php	$userdata = get_userdata( $comment->data['author_id'] ); ?>
 
 							<li class="comment">
 								<span class="user"><?php echo ! empty( $userdata->display_name ) ? esc_html( $userdata->display_name ) : 'Indéfini'; ?>, </span>
-								<span class="date"><?php echo esc_html( $comment->date['rendered']['date'] ); ?> : </span>
-								<span class="content"><?php echo esc_html( $comment->content ); ?></span>
+								<span class="date"><?php echo esc_html( $comment->data['date']['rendered']['date'] ); ?> : </span>
+								<span class="content"><?php echo esc_html( $comment->data['content'] ); ?></span>
 							</li>
 						<?php
 					else :

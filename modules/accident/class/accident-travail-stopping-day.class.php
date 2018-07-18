@@ -63,34 +63,6 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 	public $element_prefix = 'AD';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array();
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la mise à jour de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_put_function = array();
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -110,10 +82,12 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $stopping_day_data ) {
 				if ( ! empty( $stopping_day_data['content'] ) && strlen( 0 < $stopping_day_data['content'] ) ) {
-					$stopping_day = $this->update( $stopping_day_data );
+					$stopping_day_data['parent_id'] = (int) $stopping_day_data['parent_id'];
+					$stopping_day_data['id']        = ! empty( $stopping_day_data['id'] ) ? (int) $stopping_day_data['id'] : 0;
+					$stopping_day                   = $this->update( $stopping_day_data );
 
 					$associate_file_args = array(
-						'id'         => $stopping_day->id,
+						'id'         => (int) $stopping_day->data['id'],
 						'field_name' => 'document',
 						'file_id'    => $_POST['document'], // WPCS: CSRF ok.
 						'model_name' => '\digi\Accident_Travail_Stopping_Day_Class',

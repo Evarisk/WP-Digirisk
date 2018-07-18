@@ -22,6 +22,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 	<?php
+
 	if ( ! empty( $waiting_updates ) && strpos( $request_uri, 'admin.php' ) && ! strpos( $request_uri, 'admin.php?page=digirisk-update' ) && ! strpos( $request_uri, 'admin.php?page=digi-setup' ) ) :
 		\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'say-to-update' );
 	else :

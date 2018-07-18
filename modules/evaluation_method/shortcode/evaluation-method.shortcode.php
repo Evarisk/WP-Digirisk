@@ -34,11 +34,9 @@ class Evaluation_Method_Shortcode {
 	/**
 	 * Récupère le niveau et l'équivalence de la méthode d'évaluation du risque courant.
 	 *
-	 * @param array $param Tableau de donnée.
-	 * @return void
-	 *
 	 * @since 6.2.9
-	 * @version 6.5.0
+	 *
+	 * @param array $param Tableau de donnée.
 	 */
 	public function callback_dropdown_evaluation_method( $param ) {
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
@@ -55,17 +53,31 @@ class Evaluation_Method_Shortcode {
 			$evaluation_method_id = $method_evaluation_simplified->data['id'];
 		}
 
-		if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id ) {
-			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main', array(
+		if ( 'edit' === $display ) {
+			if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id ) {
+				// Méthode simplifié.
+				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main-edit', array(
+					'risk'                         => $risk,
+					'evaluation_method_id'         => $evaluation_method_id,
+					'method_evaluation_simplified' => $method_evaluation_simplified,
+					'variables'                    => $variables,
+					'display'                      => $display,
+				) );
+			} else {
+				// Tout autre méthode nécéssitant une modal.
+				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/edit-modal', array(
+					'risk'                 => $risk,
+					'evaluation_method_id' => $evaluation_method_id,
+					'evaluation_method'    => $risk->data['evaluation_method'],
+				) );
+			}
+		} else {
+			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'main', array(
 				'risk'                         => $risk,
 				'evaluation_method_id'         => $evaluation_method_id,
 				'method_evaluation_simplified' => $method_evaluation_simplified,
 				'variables'                    => $variables,
-			) );
-		} else {
-			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/edit-modal', array(
-				'risk_id'                      => $risk_id,
-				'evaluation_method'            => $risk->data['evaluation_method'],
+				'display'                      => $display,
 			) );
 		}
 	}

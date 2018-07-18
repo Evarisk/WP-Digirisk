@@ -14,7 +14,9 @@
 
 namespace digi;
 
-defined( 'ABSPATH' ) || exit; ?>
+defined( 'ABSPATH' ) || exit;
+
+global $eo_search; ?>
 
 <h1>
 	<?php
@@ -58,20 +60,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			</div>
 		<?php endif; ?>
 
-		<div class="form-element">
-			<span class="form-label"><?php esc_html_e( 'Responsable', 'digirisk' ); ?></span>
-			<input type="hidden" name="society[owner_id]" value="<?php echo esc_attr( $element->data['owner_id'] ); ?>" />
-			<div class="form-field-container">
-				<div class="wpeo-autocomplete" data-action="digi_search" data-nonce="<?php echo esc_attr( wp_create_nonce( 'digi_search' ) ); ?>" data-type="user">
-					<label class="autocomplete-label" for="society-owner">
-						<i class="autocomplete-icon-before far fa-search"></i>
-						<input id="society-owner" autocomplete="off" placeholder="Recherche..." class="autocomplete-search-input" type="text" value="<?php echo ! empty( $element->data['owner'] ) ? esc_attr( $element->data['owner']->data['displayname'] ) : ''; ?>" />
-						<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
-					</label>
-					<ul class="autocomplete-search-list"></ul>
-				</div>
-			</div>
-		</div>
+		<?php $eo_search->display( 'society_information_owner' ); ?>
 
 		<div class="form-element group-date">
 			<span class="form-label"><?php esc_html_e( 'Date de création', 'digirisk' ); ?></span>

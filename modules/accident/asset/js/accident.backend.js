@@ -128,7 +128,7 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
 		triggeredElement.closest( '.flex-table.accident' ).find( '.table-body' ).prepend( response.data.view );
 		jQuery( '.flex-table.accident .col.advanced:first input[type="text"]:first' ).focus();
 	} else {
-		triggeredElement.closest( '.flex-table.accident' ).replaceWith( response.data.view );
+		triggeredElement.closest( '.digirisk-wrap' ).replaceWith( response.data.view );
 	}
 	window.eoxiaJS.digirisk.accident.refresh();
 	window.eoxiaJS.digirisk.search.renderChanged();
@@ -294,9 +294,8 @@ window.eoxiaJS.digirisk.accident.checkAllData = function( element ) {
 
 	accidentRow.find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
-		jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-	}
-
+			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
+		}
 	} );
 
 	return true;

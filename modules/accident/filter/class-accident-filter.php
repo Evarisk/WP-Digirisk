@@ -1,22 +1,23 @@
 <?php
 /**
- * Gestion des filtres relatifs aux accidents
+ * Classe gérant les filtres des accidents.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.5
- * @version 7.0.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Filters
+ *
+ * @since     6.1.5
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Gestion des filtres relatifs aux accidents
+ * Accident Filter class.
  */
 class Accident_Filter extends Identifier_Filter {
 
@@ -24,7 +25,6 @@ class Accident_Filter extends Identifier_Filter {
 	 * Utilises le filtre digi_tab
 	 *
 	 * @since 6.1.5
-	 * @version 7.0.0
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -32,26 +32,23 @@ class Accident_Filter extends Identifier_Filter {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
 
 		$current_type = Accident_Class::g()->get_type();
-		add_filter( "eo_model_{$current_type}_after_get", '\digi\get_identifier', 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_get", '\digi\get_full_accident', 10, 2 );
+		add_filter( "eo_model_{$current_type}_after_get", array( $this, 'get_full_accident' ), 10, 2 );
 
-		add_filter( "eo_model_{$current_type}_after_post", '\digi\get_identifier', 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_post", '\digi\get_full_accident', 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_post", '\digi\accident_compile_stopping_days', 10, 2 );
+		add_filter( "eo_model_{$current_type}_after_post", array( $this, 'get_full_accident' ), 10, 2 );
+		add_filter( "eo_model_{$current_type}_after_post", array( $this, 'accident_compile_stopping_days' ), 10, 2 );
 
-		add_filter( "eo_model_{$current_type}_after_put", '\digi\get_identifier', 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_put", '\digi\get_full_accident', 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_put", '\digi\accident_compile_stopping_days', 10, 2 );
+		add_filter( "eo_model_{$current_type}_after_put", array( $this, 'get_full_accident' ), 10, 2 );
+		add_filter( "eo_model_{$current_type}_after_put", array( $this, 'accident_compile_stopping_days' ), 10, 2 );
 	}
 
 	/**
 	 * Ajoutes l'onglet accident dans les groupements et les unités de travail
 	 *
 	 * @since 6.1.5
-	 * @version 7.0.0
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
+	 *
 	 * @return array             Les onglets déjà présents et ceux ajoutés par cette méthode.
 	 */
 	public function callback_tab( $list_tab, $id ) {
@@ -69,9 +66,11 @@ class Accident_Filter extends Identifier_Filter {
 	 * Risque et commentaire.
 	 *
 	 * @since 6.3.0
-	 * @version 7.0.0
 	 *
-	 * @param  Accident_Model $object L'objet.
+	 * @param Accident_Model $object L'objet
+	 * @param array          $args   Les données lors de la construction de
+	 * l'objet.
+	 *
 	 * @return Accident_Model L'objet avec tous les éléments ajoutés par cette méthode.
 	 */
 	public function get_full_accident( $object, $args ) {
@@ -102,9 +101,13 @@ class Accident_Filter extends Identifier_Filter {
 			$object->data['place'] = Society_Class::g()->show_by_type( $object->data['parent_id'] );
 		}
 
-		$object->data['stopping_days'] = Accident_Travail_Stopping_Day_Class::g()->get( array( 'post_parent' => $object->data['id'] ) );
+		$object->data['stopping_days'] = Accident_Travail_Stopping_Day_Class::g()->get( array(
+			'post_parent' => $object->data['id'],
+			'post_status' => 'publish',
+		 ) );
 
-		$object->data['number_field_completed'] = accident_calcul_completed_field( $object );
+		$object->data['number_field_completed'] = $this->accident_calcul_completed_field( $object, array() );
+
 		return $object;
 	}
 
@@ -112,9 +115,9 @@ class Accident_Filter extends Identifier_Filter {
 	 * Compiles le nombre de jour d'arrêt.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
 	 *
-	 * @param  Accident_Model $data L'objet.
+	 * @param  Accident_Model $object L'objet.
+	 *
 	 * @return Accident_Model
 	 */
 	public function accident_compile_stopping_days( $object, $args ) {
@@ -122,20 +125,20 @@ class Accident_Filter extends Identifier_Filter {
 
 		if ( ! empty( $object->data['stopping_days'] ) ) {
 			foreach ( $object->data['stopping_days'] as $stopping_days ) {
-				$object->data['compiled_stopping_days'] += (int) $stopping_days->content;
+				$object->data['compiled_stopping_days'] += (int) $stopping_days->data['content'];
 			}
 		}
 
-		return $data;
+		return $object;
 	}
 
 	/**
 	 * Calcule le nombre de champ en DUR complété dans les données.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
 	 *
-	 * @param  Accident_Model $data L'objet.
+	 * @param Accident_Model $data L'objet.
+	 *
 	 * @return integer       Le nombre de champ complétés.
 	 */
 	public function accident_calcul_completed_field( $object, $args ) {

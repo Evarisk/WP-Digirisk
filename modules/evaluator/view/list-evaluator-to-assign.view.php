@@ -38,7 +38,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $evaluator->data['id'] ); ?><strong></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->data['lastname'] ); ?></span></td>
 						<td class="padding"><span><?php echo esc_html( $evaluator->data['firstname'] ); ?></span></td>
-						<td class="padding hidden"><input type="text" class="date" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][on]" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $evaluator->data['hiring_date'] ) ) ); ?>"></td>
 						<td class="padding"><input type="text" class="affect" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][duration]" value=""></td>
 						<td class="padding"><input type="checkbox" name="list_user[<?php echo esc_attr( $evaluator->data['id'] ); ?>][affect]"></td>
 					</tr>

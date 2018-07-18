@@ -33,6 +33,8 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	 * @since 6.2.10
 	 */
 	public function display( $element ) {
+		global $eo_search;
+
 		$address = Society_Class::g()->get_address( $element );
 
 		$total_cotation = 0;
@@ -49,7 +51,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 				'content' => 'Indisponible',
 			);
 		} else {
-			$historic_update['date'] = date( '\L\e d F Y à H\hi', strtotime( $historic_update['date'] ) );
+			$historic_update['date'] = date( ' d F Y à H\hi', strtotime( $historic_update['date'] ) );
 		}
 
 		if ( count( $risks ) > 1 ) {
@@ -66,6 +68,15 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 				$total_cotation += $risk->data['evaluation']->data['current_equivalence'];
 			}
 		}
+
+		$eo_search->register_search( 'society_information_owner', array(
+			'label'        => 'Responsable',
+			'icon'         => 'fa-search',
+			'type'         => 'user',
+			'name'         => 'society[owner_id]',
+			'value'        => User_Digi_Class::g()->element_prefix . $element->data['owner']->data['id'] . ' - ' . $element->data['owner']->data['displayname'],
+			'hidden_value' => $element->data['owner_id'],
+		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
 			'element'             => $element,

@@ -1,22 +1,23 @@
 <?php
 /**
- * Gestion des actions des accidents.
+ * Classe gérant les actions des accidents.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.1.5
- * @version 6.5.0
- * @copyright 2015-2018
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Actions
+ *
+ * @since     6.1.5
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Gestion des actions des accidents
+ * Accident Action class.
  */
 class Accident_Action {
 
@@ -26,6 +27,7 @@ class Accident_Action {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+
 		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
 		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );
 		add_action( 'wp_ajax_delete_accident', array( $this, 'ajax_delete_accident' ) );
@@ -35,9 +37,6 @@ class Accident_Action {
 	 * Ajoutes le sous menu 'Accidents'.
 	 *
 	 * @since 6.3.0
-	 * @version 6.3.0
-	 *
-	 * @return void
 	 */
 	public function callback_admin_menu() {
 		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
@@ -47,9 +46,6 @@ class Accident_Action {
 	 * Sauvegardes un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.1.5
-	 * @version 6.5.0
-	 *
-	 * @return void
 	 */
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
@@ -68,7 +64,7 @@ class Accident_Action {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;
 		}
 
-		$accident['id']                 = (int) $accident['id'];
+		$accident['id']                 = ! empty( $accident['id'] ) ? (int) $accident['id'] : 0;
 		$accident['parent_id']          = (int) $accident['parent_id'];
 		$accident['victim_identity_id'] = (int) $accident['victim_identity_id'];
 		$accident['status']             = 'inherit';
@@ -82,8 +78,8 @@ class Accident_Action {
 			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
-			$accident->associated_document_id['signature_of_the_caregiver_id'][0] = $file_id;
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->data['id'] );
+			$accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] = $file_id;
 		}
 
 		if ( ! empty( $signature_of_the_victim ) ) {
@@ -91,12 +87,12 @@ class Accident_Action {
 			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
-			$accident->associated_document_id['signature_of_the_victim_id'][0] = $file_id;
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->data['id'] );
+			$accident->data['associated_document_id']['signature_of_the_victim_id'][0] = $file_id;
 		}
 
 		if ( ! empty( $accident_investigation_id ) ) {
-			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $accident_investigation_id, '\digi\Accident_Class', 'accident_investigation_id' );
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->data['id'], $accident_investigation_id, '\digi\Accident_Class', 'accident_investigation_id' );
 		}
 
 		// Associations des commentaires.
@@ -106,31 +102,33 @@ class Accident_Action {
 					$comment['id']        = (int) $comment['id'];
 					$comment['parent_id'] = (int) $comment['parent_id'];
 					$comment['author_id'] = (int) $comment['author_id'];
-					$comment['post_id']   = (int) $accident->id;
+					$comment['post_id']   = (int) $accident->data['id'];
 					\eoxia\Comment_Class::g()->update( $comment );
 				}
 			}
 		}
 
-		$accident = Accident_Class::g()->update( $accident );
+		$accident = Accident_Class::g()->update( $accident->data );
 
 		if ( ! $add ) {
-			do_action( 'generate_accident_benin', $accident->id );
+			do_action( 'generate_accident_benin', $accident->data['id'] );
 		}
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $accident->parent_id,
-			'id'        => $accident->id,
-			'content'   => 'Mise à jour de l\'accident ' . $accident->modified_unique_identifier,
+			'parent_id' => $accident->data['parent_id'],
+			'id'        => $accident->data['id'],
+			'content'   => 'Mise à jour de l\'accident ' . $accident->data['modified_unique_identifier'],
 		) );
 
 		ob_start();
 		if ( $add ) {
+			Accident_Class::g()->register_search();
+
 			\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 				'accident' => $accident,
 			) );
 		} else {
-			Accident_Class::g()->display_accident_list();
+			Accident_Class::g()->display();
 		}
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
@@ -145,9 +143,6 @@ class Accident_Action {
 	 * Charges un accident ainsi que ses images et la liste des commentaires.
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function ajax_load_accident() {
 		check_ajax_referer( 'load_accident' );
@@ -167,10 +162,18 @@ class Accident_Action {
 		), true );
 
 		ob_start();
+		Accident_Class::g()->register_search( array(
+			'value'        => User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
+			'hidden_value' => $accident->data['victim_identity_id'],
+		), array(
+			'value' => $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'],
+			'hidden_value' => $accident->data['parent_id'],
+		) );
+
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'main_society' => $main_society,
-			'society_id' => $accident->parent_id,
-			'accident' => $accident,
+			'society_id'   => $accident->data['parent_id'],
+			'accident'     => $accident,
 		) );
 
 		wp_send_json_success( array(
@@ -186,9 +189,6 @@ class Accident_Action {
 	 * Passes le status de l'accident en "trash".
 	 *
 	 * @since 6.1.5
-	 * @version 6.3.0
-	 *
-	 * @return void
 	 */
 	public function ajax_delete_accident() {
 		check_ajax_referer( 'delete_accident' );
@@ -207,9 +207,9 @@ class Accident_Action {
 			wp_send_json_error();
 		}
 
-		$accident->status = 'trash';
+		$accident->data['status'] = 'trash';
 
-		Accident_Class::g()->update( $accident );
+		Accident_Class::g()->update( $accident->data );
 
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',

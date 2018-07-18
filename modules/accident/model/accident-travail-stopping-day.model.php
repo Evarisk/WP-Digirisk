@@ -69,7 +69,7 @@ class Accident_Travail_Stopping_Day_Model extends \eoxia\Post_Model {
 			'meta_type' => 'multiple',
 		);
 
-		parent::__construct( $data );
+		parent::__construct( $data, $req_method );
 	}
 
 }

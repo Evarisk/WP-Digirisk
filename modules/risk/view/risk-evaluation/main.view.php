@@ -16,18 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <?php if ( isset( $risk->data['current_equivalence'] ) && 0 <= $risk->data['current_equivalence'] ) : ?>
-	<div class="cotation-container grid open-popup-ajax tooltip hover"
+	<div class="cotation-container grid wpeo-modal-event tooltip hover"
 		data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 		data-action="historic_risk"
 		data-title="<?php echo esc_attr( 'Historique des cotations', 'digirisk' ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'historic_risk' ) ); ?>"
-		data-parent="risk-row"
-		data-target="popup"
 		data-class="historic-risk"
 		aria-label="<?php esc_html_e( 'Afficher l\'historique des cotations', 'digirisk' ); ?>">
 
 		<div class="action cotation default-cotation" data-scale="<?php echo esc_attr( $risk->data['evaluation']->data['scale'] ); ?>">
-			<i class="icon fas fa-chart-line" style="<?php echo ( 0 !== $risk->data['evaluation']->data['scale'] ) ? 'display: none;' : ''; ?>"></i>
 			<span><?php echo esc_html( $risk->data['current_equivalence'] ); ?></span>
 		</div>
 

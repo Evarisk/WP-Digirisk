@@ -65,15 +65,14 @@ class Evaluator_Class extends \eoxia\User_Class {
 	/**
 	 * Fait le rendu des evaluateurs
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param Group_Model $element L'objet parent.
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
-	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function render( $element, $current_page = 1 ) {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
 
 		$args_where_evaluator = array(
 			'offset'     => ( $current_page - 1 ) * $this->limit_evaluator,
@@ -151,12 +150,11 @@ class Evaluator_Class extends \eoxia\User_Class {
 	/**
 	 * Calcul de la durée d'affectation d'un utilisateur selon les dates d'affectation et de désaffectation / User assignment duration calculation depending on assignment and decommissioning dates
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param array $user_affectation_info Les informations d'affectation de l'utilisateur / User assignment informations.
 	 *
 	 * @return string La durée d'affectation en minutes / Assigment duration in minutes
-	 *
-	 * @since 6.0.0
-	 * @version 6.2.4
 	 */
 	public function get_duration( $user_affectation_info ) {
 		if ( empty( $user_affectation_info['start']['date'] ) || empty( $user_affectation_info['end']['date'] ) ) {
@@ -164,13 +162,49 @@ class Evaluator_Class extends \eoxia\User_Class {
 		}
 
 		$start_date = new \DateTime( $user_affectation_info['start']['date'] );
-		$end_date = new \DateTime( $user_affectation_info['end']['date'] );
-		$interval = $start_date->diff( $end_date );
+		$end_date   = new \DateTime( $user_affectation_info['end']['date'] );
+		$interval   = $start_date->diff( $end_date );
 
-		$minutes = $interval->format( '%h' ) * 60;
+		$minutes  = $interval->format( '%h' ) * 60;
 		$minutes += $interval->format( '%i' );
 
 		return $minutes;
+	}
+
+	/**
+	 * Affectes un évaluateur à la société.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  mixed   $society  Les données de la société.
+	 * @param  integer $user_id  L'ID de l'utilisateur.
+	 * @param  array   $data     Les données pour l'affectation.
+	 *
+	 * @return Evaluator_Model   Les données de l'évaluateur.
+	 */
+	public function affect_user( $society, $user_id, $data ) {
+		$end_date = new \DateTime( $data['on'] );
+		$end_date->add( new \DateInterval( 'PT' . $data['duration'] . 'M' ) );
+
+		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
+
+		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
+			'status' => 'valid',
+			'start'  => array(
+				'date' => $data['on'],
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+			'end'    => array(
+				'date' => sanitize_text_field( $end_date->format( 'Y-m-d H:i:s' ) ),
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+		);
+
+		Society_Class::g()->update_by_type( $society );
+
+		return $evaluator;
 	}
 
 }

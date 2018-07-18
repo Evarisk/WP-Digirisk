@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Les actions relatives aux évaluateurs
+ * Evaluator Action class.
  */
 class Evaluator_Action {
 
@@ -39,86 +39,60 @@ class Evaluator_Action {
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
 	 * @since   6.0.0
-	 * @version 7.0.0
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
 
-		if ( empty( $_POST['list_user'] ) || ! is_array( $_POST['list_user'] ) ) {
+		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$users      = ! empty( $_POST['list_user'] ) ? (array) $_POST['list_user'] : array();
+
+		if ( empty( $users ) || empty( $society_id ) ) {
 			wp_send_json_error();
 		}
 
-		if ( 0 === (int) $_POST['element_id'] ) {
-			wp_send_json_error();
-		} else {
-			$element_id = (int) $_POST['element_id'];
-		}
+		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$element    = Society_Class::g()->show_by_type( $element_id );
-		$evaluators = array();
+		$affected_evaluators = array();
 
-		if ( empty( $element ) ) {
-			wp_send_json_error();
-		}
+		if ( ! empty( $users ) ) {
+			foreach ( $users as $user_id => $user ) {
+				$user['affect'] = ( isset( $user['affect'] ) && $user['affect'] == 'true' ) ? true : false;
+				if ( $user['affect'] ) {
 
-		foreach ( $_POST['list_user'] as $user_id => $list_value ) {
-			if ( ! empty( $list_value['duration'] ) && ! empty( $list_value['affect'] ) ) {
-				$list_value['on']  = str_replace( '/', '-', $list_value['on'] );
-				$list_value['on']  = date( 'y-m-d', strtotime( $list_value['on'] ) );
-				$list_value['on'] .= ' ' . current_time( 'H:i:s' );
-				$list_value['on']  = sanitize_text_field( $list_value['on'] );
+					$user['on']       = current_time( 'mysql' );
+					$user['duration'] = ! empty( $user['duration'] ) ? (int) $user['duration'] : 0;
 
-				$end_date = new \DateTime( $list_value['on'] );
-				$end_date->add( new \DateInterval( 'PT' . $list_value['duration'] . 'M' ) );
+					$affected_evaluators[] = Evaluator_Class::g()->affect_user( $society, $user_id, $user );
+				}
 
-				$tmp_evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
-				$evaluators[]  = $tmp_evaluator;
-
-				$element->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
-					'status' => 'valid',
-					'start'  => array(
-						'date' => $list_value['on'],
-						'by'   => get_current_user_id(),
-						'on'   => current_time( 'Y-m-d H:i:s' ),
-					),
-					'end'    => array(
-						'date' => sanitize_text_field( $end_date->format( 'Y-m-d H:i:s' ) ),
-						'by'   => get_current_user_id(),
-						'on'   => current_time( 'Y-m-d H:i:s' ),
-					),
-				);
 			}
 		}
 
-		// On met à jour si au moins un utilisateur à été affecté.
-		if ( count( $_POST['list_user'] ) > 0 ) {
-			Society_Class::g()->update_by_type( $element );
-
+		if ( 0 < count( $affected_evaluators ) ) {
 			$content  = __( 'Mise à jour des évaluateurs', 'digirisk' );
 			$content .= '<br />';
 
-			if ( ! empty( $evaluators ) ) {
-				foreach ( $evaluators as $evaluator ) {
-					$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->data['id'] . ' ' . $evaluator->data['lastname'] . ' ' . $evaluator->data['firstname'];
-					$content .= '<br />';
-				}
+			foreach ( $affected_evaluators as $evaluator ) {
+				$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->data['id'] . ' ' . $evaluator->data['lastname'] . ' ' . $evaluator->data['firstname'];
+				$content .= '<br />';
 			}
 
 			do_action( 'digi_add_historic', array(
-				'parent_id' => $element->data['id'],
+				'parent_id' => $society_id,
 				'id'        => 'Indisponible',
 				'content'   => $content,
 			) );
 		}
 
-		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
+		$society = Society_Class::g()->show_by_type( $society_id );
+		$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
 
 		ob_start();
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
-			'element'                 => $element,
-			'element_id'              => $element->data['id'],
-			'list_affected_evaluator' => $list_affected_evaluator,
+			'element'                 => $society,
+			'element_id'              => $society->data['id'],
+			'list_affected_evaluator' => $affected_evaluators,
 		) );
 
 		wp_send_json_success( array(
@@ -162,10 +136,10 @@ class Evaluator_Action {
 			wp_send_json_error();
 		}
 
-		$element->user_info['affected_id']['evaluator'][ $user_id ][ $affectation_data_id ]['status'] = 'deleted';
+		$element->data['user_info']['affected_id']['evaluator'][ $user_id ][ $affectation_data_id ]['status'] = 'deleted';
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $element->id,
+			'parent_id' => $element->data['id'],
 			'id'        => 'Indisponible',
 			'content'   => 'Mise à jour des évaluateurs',
 		) );
@@ -176,7 +150,7 @@ class Evaluator_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
 			'element'                 => $element,
-			'element_id'              => $element->id,
+			'element_id'              => $element->data['id'],
 			'list_affected_evaluator' => $list_affected_evaluator,
 		) );
 		wp_send_json_success( array(
@@ -193,10 +167,12 @@ class Evaluator_Action {
 	 * int $_POST['element_id'] L'ID de l'élement affecté par la pagination
 	 * int $_POST['next_page'] La page de la pagination
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param array $_POST Les données envoyées par le formulaire
 	 */
 	public function callback_paginate_evaluator() {
-		$element_id = !empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 
 		if ( $element_id === 0 ) {
 			wp_send_json_error();
@@ -210,12 +186,10 @@ class Evaluator_Action {
 	/**
 	 * Méthode appelé par le champs de recherche des évaluateurs affectés
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
-	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.4.4
 	 */
 	public function callback_display_evaluator_affected( $id, $list_user_id ) {
 		$element                 = Society_Class::g()->show_by_type( $id );
@@ -249,12 +223,10 @@ class Evaluator_Action {
 	/**
 	 * Méthode appelé par le champs de recherche des évaluateurs à assigner.
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
-	 * @return void
-	 *
-	 * @since 6.0.0
-	 * @version 6.4.4
 	 */
 	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
 		$element = Society_Class::g()->show_by_type( $id );

@@ -39,6 +39,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		add_filter( 'eo_model_affichage_legal_A4_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_diffusion_info_A3_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_diffusion_info_A4_before_post', array( $this, 'before_save_doc' ), 10, 2 );
+		add_filter( 'eo_model_accident_benin_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 	}
 
 	/**
