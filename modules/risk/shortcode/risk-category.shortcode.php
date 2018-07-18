@@ -100,13 +100,15 @@ class Risk_Category_Shortcode {
 				'selected_risk_category' => $selected_risk_category,
 			) );
 		} else {
-			$risk = Risk_Class::g()->get( array(
-				'id' => $id,
-			), true );
+			$risk_category = null;
 
+			if ( ! empty( $category_risk_id ) ) {
+				$risk_category = Risk_Category_Class::g()->get( array(
+					'id' => $category_risk_id,
+				), true );
+			}
 			\eoxia\View_Util::exec( 'digirisk', 'risk', 'category/item', array(
-				'id'   => $id,
-				'risk' => $risk,
+				'risk_category' => $risk_category,
 			) );
 		}
 	}

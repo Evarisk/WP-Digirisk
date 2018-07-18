@@ -21,7 +21,6 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
 	}
 
 	window.eoxiaJS.digirisk.accident.resizeCanvas();
-	window.eoxiaJS.digirisk.accident.initAutoComplete();
 }
 
 /**
@@ -38,17 +37,6 @@ window.eoxiaJS.digirisk.accident.event = function() {
 	jQuery( document ).on( 'keyup', '.flex-table.accident .col.add input, textarea', window.eoxiaJS.digirisk.accident.checkCanAdd );
 
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
-};
-
-window.eoxiaJS.digirisk.accident.initAutoComplete = function() {
-	jQuery( '.search-parent' ).autocomplete( {
-		'source': 'admin-ajax.php?action=search_establishment',
-		'delay': 0,
-		'select': function( event, ui ) {
-			jQuery( 'input[name="accident[parent_id]"]' ).val( ui.item.id );
-			event.stopPropagation();
-		}
-	} );
 };
 
 /**

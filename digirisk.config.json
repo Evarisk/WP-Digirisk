@@ -68,7 +68,6 @@
 		"modules/legal_display/legal_display.config.json",
 		"modules/diffusion_informations/diffusion_informations.config.json",
 
-		"modules/search/search.config.json",
 		"modules/setting/setting.config.json",
 		"modules/sheet_groupment/sheet_groupment.config.json",
 		"modules/sheet_workunit/sheet_workunit.config.json",
@@ -89,5 +88,21 @@
 	"core_option": "_digirisk_core",
 	"accronym_option": "_digirisk_accronym",
 	"key_last_update_version" : "_digirisk_last_update_version",
-	"debug": false
+	"debug": false,
+  "default_capabilities": {
+    "administrator": [
+      "manage_digirisk",
+      "manage_causerie",
+      "create_causerie",
+      "manage_causerie"
+    ],
+    "editor": [
+      "manage_digirisk",
+      "manage_causerie",
+      "create_causerie"
+    ],
+    "author": [
+      "manage_causerie"
+    ]
+  }
 }

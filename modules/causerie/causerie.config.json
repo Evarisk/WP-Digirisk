@@ -1,16 +1,26 @@
 {
 	"name": "Causerie",
 	"slug": "causerie",
-	"since": "7.0.0",
-	"version": "7.0.0",
+	"since": "6.5.0",
+	"version": "6.6.0",
 	"description": "Le module gérant les causeries",
 	"path": "modules/causerie/",
 	"dependencies": {
-		"shortcode": {},
-		"action": {},
-		"model": {},
-		"class": {},
-		"filter": {}
+		"model": {
+			"priority": [
+				"causerie.model.php"
+			]
 		},
-	"state": false
+		"class": {},
+    "filter": {},
+		"action": {}
+	},
+	"steps": {
+		"CAUSERIE_NOT_STARTED": 0,
+		"CAUSERIE_FORMER": 1,
+		"CAUSERIE_PRESENTATION": 2,
+		"CAUSERIE_PARTICIPANT": 3,
+		"CAUSERIE_CLOSED": 4
+	},
+	"state": true
 }

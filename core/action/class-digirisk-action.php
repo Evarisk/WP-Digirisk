@@ -119,11 +119,28 @@ class Digirisk_Action {
 
 	/**
 	 * Initialise le fichier MO
+	 * Initialise les capabilities des roles.
 	 *
 	 * @since 6.0.0
 	 */
 	public function callback_plugins_loaded() {
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
+
+		if ( ! empty( \eoxia\Config_Util::$init['digirisk']->default_capabilities ) ) {
+			foreach ( \eoxia\Config_Util::$init['digirisk']->default_capabilities as $role => $capabilities ) {
+				$wp_role = get_role( $role );
+
+				if ( $wp_role ) {
+					if ( ! empty( $capabilities ) ) {
+						foreach ( $capabilities as $capability ) {
+							if ( $wp_role && ! $wp_role->has_cap( $capability ) ) {
+								$wp_role->add_cap( $capability );
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
