@@ -9,13 +9,13 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Post_Model' ) ) {
+if ( ! class_exists( '\eoxia001\Post_Model' ) ) {
 	/**
 	 * Définition des données des posts
 	 */

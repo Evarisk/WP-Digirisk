@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition d'une adresse
  */
-class Address_Model extends \eoxia\Comment_model {
+class Address_Model extends \eoxia001\Comment_model {
 
 	/**
 	 * Définition des champs

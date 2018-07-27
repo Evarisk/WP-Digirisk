@@ -9,19 +9,19 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\JSON_Util' ) ) {
+if ( ! class_exists( '\eoxia001\JSON_Util' ) ) {
 	/**
 	 * Méthodes utiles pour les fichiers JSON.
 	 */
-	class JSON_Util extends \eoxia\Singleton_Util {
+	class JSON_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @return void nothing
 		 */

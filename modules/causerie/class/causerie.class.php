@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les causeries
  */
-class Causerie_Class extends \eoxia\Post_Class {
+class Causerie_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle

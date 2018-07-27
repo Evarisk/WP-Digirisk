@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant la page principale des causeries.
  */
-class Causerie_Page_Class extends \eoxia\Singleton_Util {
+class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Accès rapide vers les états d'une causerie.
@@ -36,7 +36,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	protected function construct() {
-		$this->steps = \eoxia\Config_Util::$init['digirisk']->causerie->steps;
+		$this->steps = \eoxia001\Config_Util::$init['digirisk']->causerie->steps;
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $id ) ) {
 			Causerie_Intervention_Page_Class::g()->display_single( $id );
 		} else {
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
+			\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'main' );
 		}
 	}
 
@@ -77,7 +77,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 
 		$causeries_intervention = $this->get_documents( $causeries_intervention );
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'dashboard/main', array(
 			'causeries_intervention' => $causeries_intervention,
 		) );
 	}
@@ -98,7 +98,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 			'meta_compare' => '<',
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'start/main', array(
 			'causeries'              => $causeries,
 			'causeries_intervention' => $causeries_intervention,
 		) );
@@ -118,7 +118,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 
 		$causerie_schema = Causerie_Class::g()->get( array( 'schema' => true ), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'form/main', array(
 			'causeries'       => $causeries,
 			'causerie_schema' => $causerie_schema,
 		) );

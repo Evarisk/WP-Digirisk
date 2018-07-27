@@ -59,7 +59,7 @@ class Setting_Action {
 	public function add_option_page() {
 		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general';
 
-		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
 
 		global $wpdb;
@@ -89,7 +89,7 @@ class Setting_Action {
 			return 0;
 		} );
 
-		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym' => $list_accronym,
 			'dangers_preset' => $dangers_preset,
 			'default_tab' => $default_tab,
@@ -114,7 +114,7 @@ class Setting_Action {
 			}
 		}
 
-		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
+		update_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
 		wp_safe_redirect( admin_url( 'options-general.php?page=digirisk-setting&tab=digi-accronym' ) );
 	}
 

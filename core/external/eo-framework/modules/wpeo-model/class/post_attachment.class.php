@@ -12,11 +12,11 @@
  * @todo: Ne peut pas marcher... A voir
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\Attachment_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Attachment_Class' ) ) {
 
 	/**
 	 * Gestion des attachements (POST, PUT, GET, DELETE)

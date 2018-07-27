@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les mises à jour de DigiRisk.
  */
-class Update_Manager extends \eoxia\Singleton_Util {
+class Update_Manager extends \eoxia001\Singleton_Util {
 
 	protected function construct() {}
 
 	public function display() {
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
-		\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'update_manager', 'main', array(
 			'waiting_updates' => $waiting_updates,
 		) );
 	}

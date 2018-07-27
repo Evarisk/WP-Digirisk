@@ -97,7 +97,7 @@ class Risk_Category_Shortcode {
 				}
 			}
 
-			\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/dropdown', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/dropdown', array(
 				'id'                     => $id,
 				'risks_categories'       => $risks_categories,
 				'preset'                 => $preset,
@@ -113,7 +113,7 @@ class Risk_Category_Shortcode {
 				), true );
 			}
 
-			\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/item', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/item', array(
 				'risk_category' => $risk_category,
 			) );
 		}

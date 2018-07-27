@@ -9,11 +9,11 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\User_Class' ) ) {
+if ( ! class_exists( '\eoxia001\User_Class' ) ) {
 	/**
 	 * Gestion des utilisateurs (POST, PUT, GET, DELETE)
 	 */
@@ -23,7 +23,7 @@ if ( ! class_exists( '\eoxia\User_Class' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $model_name = '\eoxia\User_Model';
+		protected $model_name = '\eoxia001\User_Model';
 
 		/**
 		 * La clé principale pour post_meta
@@ -74,7 +74,7 @@ if ( ! class_exists( '\eoxia\User_Class' ) ) {
 		 *
 		 * @var array
 		 */
-		protected $after_get_function = array( '\eoxia\build_user_initial' );
+		protected $after_get_function = array( '\eoxia001\build_user_initial' );
 
 		/**
 		 * Fonction de callback avant d'insérer les données en mode POST.

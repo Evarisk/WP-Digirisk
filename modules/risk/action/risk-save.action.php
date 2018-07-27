@@ -81,9 +81,9 @@ class Risk_Save_Action {
 					'model_name' => '\digi\Risk_Class',
 				);
 
-				\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
+				\eoxia001\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
 				$args_media['field_name'] = 'image';
-				\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
+				\eoxia001\WPEO_Upload_Class::g()->associate_file( $args_media );
 			}
 		} // End if().
 

@@ -132,7 +132,7 @@ class DUER_Class extends Document_Class {
 			$element = $element[0];
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'main', array(
 			'element' => $element,
 			'element_id' => $element_id,
 		) );
@@ -153,7 +153,7 @@ class DUER_Class extends Document_Class {
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -177,7 +177,7 @@ class DUER_Class extends Document_Class {
 			)
 		);
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $groupments ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $groupments ) );
 	}
 
 	public function display_workunit_tree( $parent_id = 0 ) {
@@ -190,7 +190,7 @@ class DUER_Class extends Document_Class {
 			)
 		);
 
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $workunits ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $workunits ) );
 	}
 }
 

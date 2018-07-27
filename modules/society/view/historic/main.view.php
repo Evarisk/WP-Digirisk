@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<div>
 		<h2>Les risques ajoutés</h2>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
 			'risks' => $added_risks,
 		) );
 		?>
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<div>
 		<h2>Les risques supprimés</h2>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
 			'risks' => $added_risks,
 		) );
 		?>
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<div>
 		<h2>Les risques ajoutés avec une cotation noir</h2>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
 			'risks' => $added_risks_in_cotation,
 		) );
 		?>
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<div>
 		<h2>Les risques ajoutés avec une cotation rouge</h2>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
 			'risks' => $added_risks,
 		) );
 		?>
@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	<div>
 		<h2>Les risques ajoutés avec une cotation orange</h2>
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/table', array(
 			'risks' => $added_risks,
 		) );
 		?>

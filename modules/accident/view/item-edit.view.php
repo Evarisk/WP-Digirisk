@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="grid-layout padding w2">
 				<div>
 					<?php
-					\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
+					\eoxia001\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
 						'accident' => $accident,
 					) );
 					?>

@@ -9,13 +9,13 @@
  * @package EO-Framework/WPEO-Upload
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\WPEO_Upload_Shortcode' ) ) {
+if ( ! class_exists( '\eoxia001\WPEO_Upload_Shortcode' ) ) {
 
 	/**
 	 * Call the main view of the plugin.
@@ -88,7 +88,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Shortcode' ) ) {
 				$nonce_name = 'load_gallery';
 			}
 
-			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/button.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/button.view.php' );
 		}
 	}
 

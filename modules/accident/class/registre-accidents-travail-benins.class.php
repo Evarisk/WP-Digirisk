@@ -110,7 +110,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 			'schema' => true,
 		), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/main', array(
 			'element' => $element,
 		) );
 	}
@@ -135,7 +135,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 				'inherit',
 			),
 		) );
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -173,7 +173,7 @@ class Registre_Accidents_Travail_Benins_Class extends Document_Class {
 			return $sym;
 		}, $sheet_details_log );
 
-		\eoxia\LOG_Util::log( $sheet_details_log, 'digirisk' );
+		\eoxia001\LOG_Util::log( $sheet_details_log, 'digirisk' );
 		$document_creation_response = $this->create_document( $main_society, array( 'registre_accidents_travail_benins' ), $sheet_details );
 
 		return array(

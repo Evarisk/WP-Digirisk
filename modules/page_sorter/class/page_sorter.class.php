@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion de la page 'organiseur'
  */
-class Page_Sorter_Class extends \eoxia\Singleton_Util {
+class Page_Sorter_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -60,7 +60,7 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 
 		$display_notice = get_transient( 'display_notice' );
 
-		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'page_sorter', 'main', array(
 			'main_society' => $main_society,
 			'display_notice' => $display_notice,
 			'establishments' => $establishments,
@@ -99,7 +99,7 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
 			'i' => $i,
 			'establishments' => $establishments,
 		) );

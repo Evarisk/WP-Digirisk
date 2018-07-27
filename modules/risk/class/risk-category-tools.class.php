@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Les actions relatives aux outils pour les categories de risque.
  */
-class Risk_Category_Tools_Class extends \eoxia\Singleton_Util {
+class Risk_Category_Tools_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur fait appel aux actions définies par WordPress.
@@ -64,18 +64,18 @@ class Risk_Category_Tools_Class extends \eoxia\Singleton_Util {
 
 		// Dans le cas où il n'y a pas de risques associés à la catégorie de risques actuellement en traitement.
 		if ( null === $list_id ) {
-			\eoxia\LOG_Util::log( sprintf( __( 'Il n\'y a aucun risque associé à la catégorie %1$d', 'digirisk' ), $digi_danger_category ), 'digirisk-tools' );
+			\eoxia001\LOG_Util::log( sprintf( __( 'Il n\'y a aucun risque associé à la catégorie %1$d', 'digirisk' ), $digi_danger_category ), 'digirisk-tools' );
 		} else {
-			\eoxia\LOG_Util::log( sprintf( 'Liste des risques appartenant à la catégorie %1$d: %2$s', $digi_danger_category, $list_id ), 'digirisk-tools' );
+			\eoxia001\LOG_Util::log( sprintf( 'Liste des risques appartenant à la catégorie %1$d: %2$s', $digi_danger_category, $list_id ), 'digirisk-tools' );
 			$list = explode( ',', $list_id );
 			$total_risk_to_do = count( $list );
 			foreach ( $list as $id ) {
 				$association = $wpdb->insert( $wpdb->term_relationships, array( 'object_id' => $id, 'term_taxonomy_id' => $digi_category_risk ), array( '%d', '%d' ) );
 				if ( false === $association ) {
-					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d n\'a pas pu être associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
+					\eoxia001\LOG_Util::log( sprintf( __( 'Le risque %1$d n\'a pas pu être associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
 				} else {
 					$total_risk_done++;
-					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d a bien été associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
+					\eoxia001\LOG_Util::log( sprintf( __( 'Le risque %1$d a bien été associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
 				}
 			}
 
@@ -127,22 +127,22 @@ class Risk_Category_Tools_Class extends \eoxia\Singleton_Util {
 
 		// Dans le cas où il n'y a pas de risques associés à la catégorie de risques actuellement en traitement.
 		if ( null === $list_id ) {
-			\eoxia\LOG_Util::log( sprintf( __( 'Il n\'y a aucun risque associé à la catégorie %1$d', 'digirisk' ), $digi_danger_category ), 'digirisk-tools' );
+			\eoxia001\LOG_Util::log( sprintf( __( 'Il n\'y a aucun risque associé à la catégorie %1$d', 'digirisk' ), $digi_danger_category ), 'digirisk-tools' );
 		} else {
-			\eoxia\LOG_Util::log( sprintf( 'Liste des risques appartenant à la catégorie %1$d: %2$s', $digi_danger_category, $list_id ), 'digirisk-tools' );
+			\eoxia001\LOG_Util::log( sprintf( 'Liste des risques appartenant à la catégorie %1$d: %2$s', $digi_danger_category, $list_id ), 'digirisk-tools' );
 			$list = explode( ',', $list_id );
 			$total_risk_to_do = count( $list );
 			foreach ( $list as $id ) {
 				$associated = wp_get_object_terms( $id, 'digi-category-risk', array( 'fields' => 'ids' ) );
 				$wpdb->delete( $wpdb->term_relationships, array( 'object_id' => $id, 'term_taxonomy_id' => $associated[0] ), array( '%d', '%d' ) );
-				\eoxia\LOG_Util::log( sprintf( __( 'La catégorie %2$s a été supprimée du risque %1$d', 'digirisk' ), $id, wp_json_encode( $associated ) ), 'digirisk-tools' );
+				\eoxia001\LOG_Util::log( sprintf( __( 'La catégorie %2$s a été supprimée du risque %1$d', 'digirisk' ), $id, wp_json_encode( $associated ) ), 'digirisk-tools' );
 
 				$association = $wpdb->insert( $wpdb->term_relationships, array( 'object_id' => $id, 'term_taxonomy_id' => $digi_category_risk ), array( '%d', '%d' ) );
 				if ( false === $association ) {
-					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d n\'a pas pu être associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
+					\eoxia001\LOG_Util::log( sprintf( __( 'Le risque %1$d n\'a pas pu être associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
 				} else {
 					$total_risk_done++;
-					\eoxia\LOG_Util::log( sprintf( __( 'Le risque %1$d a bien été associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
+					\eoxia001\LOG_Util::log( sprintf( __( 'Le risque %1$d a bien été associé à la catégorie: %2$s', 'digirisk' ), $id, $digi_category_risk ), 'digirisk-tools' );
 				}
 			}
 

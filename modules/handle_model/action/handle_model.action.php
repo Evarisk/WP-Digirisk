@@ -171,7 +171,7 @@ class Handle_Model_Action {
 		array_unshift( $models, $default_model_data );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'handle_model', 'popup-list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'handle_model', 'popup-list', array(
 			'models' => $models,
 		) );
 		wp_send_json_success( array(

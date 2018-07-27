@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition d'un tier
  */
-class Third_Model extends \eoxia\post_model {
+class Third_Model extends \eoxia001\post_model {
 
 	/**
 	 * Définition des champs

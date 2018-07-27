@@ -17,12 +17,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr class="user-row" data-id="<?php echo esc_attr( $user->id ); ?>">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
+	<td class="padding"><span><strong><?php echo esc_html( \eoxia001\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->firstname ) ); ?></span<</td>
 	<td class="padding"><span><?php echo esc_html( $user->email ); ?></span></td>
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action grid-layout w3">
+			<div
+				class="button w50 light wpeo-modal-event tooltip hover" aria-label="Voir les détails"
+				data-action="load_user_details"
+				data-id="<?php echo esc_attr( $user->id ); ?>"
+				data-title="<?php echo esc_attr( 'U' . $user->id . ' ' . $user->displayname . ' - Liste des secteurs' ); ?>">
+				<i class="icon fa fa-eye"></i>
+			</div>
+			
 			<div
 				data-id="<?php echo esc_attr( $user->id ); ?>"
 				data-action="load_user"

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les groupements
  */
-class Group_Class extends \eoxia\Post_Class {
+class Group_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle

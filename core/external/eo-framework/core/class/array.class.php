@@ -9,20 +9,20 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Array_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Array_Util' ) ) {
 
 	/**
 	 * Gestion des tableaux
 	 */
-	class Array_Util extends \eoxia\Singleton_Util {
+	class Array_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0

@@ -38,7 +38,7 @@ class Risk_Tools_Filter {
 	 * @param string $current_output Le contenu actuel que l'on souhaite filtrer.
 	 */
 	public function callback_digi_tools_interface_tabs( $current_output ) {
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/tab', array() );
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'tools/tab', array() );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Risk_Tools_Filter {
 
 		// Récupération de la correspondance entre les anciennes catégories de danger et les nouvelles catégories de risques.
 		$json_matching = array();
-		$json_data_file_url_path_et_pif = \eoxia\Config_Util::$init['digirisk']->update_manager->url . 'asset/json/risk-danger-6400.json';
+		$json_data_file_url_path_et_pif = \eoxia001\Config_Util::$init['digirisk']->update_manager->url . 'asset/json/risk-danger-6400.json';
 		$request = wp_remote_get( $json_data_file_url_path_et_pif );
 		if ( ! is_wp_error( $request ) ) {
 			$data = wp_remote_retrieve_body( $request );
@@ -78,7 +78,7 @@ class Risk_Tools_Filter {
 			GROUP BY T.term_id", 'digi-category-risk' ) );
 
 		// Affichage de l'interface.
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'tools/risk-categories', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'tools/risk-categories', array(
 			'digi_danger_category_list' => $digi_danger_category_list,
 			'digi_category_risk_list'   => $digi_category_risk_list,
 			'json_matching'             => $json_matching,

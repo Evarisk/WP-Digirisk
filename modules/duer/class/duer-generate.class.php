@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Génères le DUER
  */
-class DUER_Generate_Class extends \eoxia\Singleton_Util {
+class DUER_Generate_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur pour l'héritage de Singleton_Util

@@ -14,6 +14,6 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
-\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/list', array(
+\eoxia001\View_Util::exec( 'digirisk', 'historic', 'risk/list', array(
 	'evaluations' => $evaluations,
 ) );

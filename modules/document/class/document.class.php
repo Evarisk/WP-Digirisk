@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe principale gérant tous les documents (ODT) de DigiRisk.
  */
-class Document_Class extends \eoxia\Post_Class {
+class Document_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle

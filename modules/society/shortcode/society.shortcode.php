@@ -42,13 +42,13 @@ class Society_Shortcode {
 		$display_trash = true;
 
 		if ( $element ) {
-			$tab_to_display = ( $element->type !== Society_Class::g()->get_post_type() ) ? 'digi-risk' : \eoxia\Config_Util::$init['digirisk']->default_tab;
+			$tab_to_display = ( $element->type !== Society_Class::g()->get_post_type() ) ? 'digi-risk' : \eoxia001\Config_Util::$init['digirisk']->default_tab;
 
 			if ( ! empty( $param['tab_to_display'] ) ) {
 				$tab_to_display = $param['tab_to_display'];
 			}
 
-			$title = \eoxia\Config_Util::$init['digirisk']->default_tab_title . ' ';
+			$title = \eoxia001\Config_Util::$init['digirisk']->default_tab_title . ' ';
 			if ( Society_Class::g()->get_post_type() !== $element->type ) {
 				$title .= $element->unique_identifier . ' - ';
 			} else {
@@ -64,7 +64,7 @@ class Society_Shortcode {
 				}
 			}
 
-			\eoxia\View_Util::exec( 'digirisk', 'society', 'content', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'society', 'content', array(
 				'title' => $title,
 				'display_trash' => $display_trash,
 				'element' => $element,

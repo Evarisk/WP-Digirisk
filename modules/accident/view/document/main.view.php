@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	Registre_Accidents_Travail_Benins_Class::g()->display_document_list();
 
-	\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/item-edit', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/item-edit', array(
 		'element' => $element,
 	) );
 	?>

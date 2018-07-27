@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php Sheet_Groupment_Class::g()->display_document_list( $element_id ); ?>
 
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'sheet_groupment', 'item-edit', array(
 		'element' => $element,
 		'element_id' => $element_id,
 	) );

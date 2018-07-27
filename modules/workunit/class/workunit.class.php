@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les unités de travail
  */
-class Workunit_Class extends \eoxia\Post_Class {
+class Workunit_Class extends \eoxia001\Post_Class {
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *

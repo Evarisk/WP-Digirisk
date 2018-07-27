@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class document_model extends \eoxia\Post_Model {
+class document_model extends \eoxia001\Post_Model {
 
 	/**
 	 * Construit le modèle / Fill the model

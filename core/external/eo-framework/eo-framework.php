@@ -5,13 +5,13 @@
  * @package EO-Framework
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Init_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Init_Util' ) ) {
 	DEFINE( 'PLUGIN_EO_FRAMEWORK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '/' );
 	DEFINE( 'PLUGIN_EO_FRAMEWORK_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 	DEFINE( 'PLUGIN_EO_FRAMEWORK_DIR', basename( __DIR__ ) );

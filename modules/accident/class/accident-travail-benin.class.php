@@ -110,7 +110,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 			'schema' => true,
 		), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/main', array(
 			'element' => $element,
 		) );
 	}
@@ -130,7 +130,7 @@ class Accident_Travail_Benin_Class extends Document_Class {
 				'inherit',
 			),
 		) );
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/list', array(
 			'list_document' => $list_document,
 		) );
 	}

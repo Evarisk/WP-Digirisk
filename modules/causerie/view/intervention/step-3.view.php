@@ -28,14 +28,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $final_causerie->participants ) ) :
 			foreach ( $final_causerie->participants as $participant ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
 					'final_causerie' => $final_causerie,
 					'participant'    => $participant,
 				) );
 			endforeach;
 		endif;
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item-new', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item-new', array(
 			'final_causerie' => $final_causerie,
 		) );
 		?>

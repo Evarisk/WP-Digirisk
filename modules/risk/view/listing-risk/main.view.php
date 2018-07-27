@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php Listing_Risk_Class::g()->display_document_list( $element_id ); ?>
 
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'risk', 'listing-risk/item-edit', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'risk', 'listing-risk/item-edit', array(
 		'element'    => $element,
 		'element_id' => $element_id,
 	) );

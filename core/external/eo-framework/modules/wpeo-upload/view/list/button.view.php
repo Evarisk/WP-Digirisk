@@ -9,7 +9,7 @@
  * @package EO-Upload
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -31,5 +31,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="fa fa-plus" aria-hidden="true"></i>
 			<?php esc_html_e( 'Add an attached file', 'wpeo-upload' ); ?></a>
 	<?php endif; ?>
-		<?php require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list.view.php' ); ?>
+		<?php require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list.view.php' ); ?>
 </div>

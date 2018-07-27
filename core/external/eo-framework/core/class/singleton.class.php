@@ -9,13 +9,13 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Singleton_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Singleton_Util' ) ) {
 	/**
 	 * Le singleton
 	 */
@@ -23,7 +23,7 @@ if ( ! class_exists( '\eoxia\Singleton_Util' ) ) {
 		/**
 		 * L'instance courant du singleton
 		 *
-		 * @var \eoxia\Singleton_Util
+		 * @var \eoxia001\Singleton_Util
 		 */
 		protected static $instance;
 
@@ -53,7 +53,7 @@ if ( ! class_exists( '\eoxia\Singleton_Util' ) ) {
 		 * @since 0.1.0
 		 * @version 1.0.0
 		 *
-		 * @return \eoxia\Singleton_Util L'instance courante
+		 * @return \eoxia001\Singleton_Util L'instance courante
 		 */
 		final public static function g() {
 			if ( ! isset( self::$instance ) || get_called_class() !== get_class( self::$instance ) ) {

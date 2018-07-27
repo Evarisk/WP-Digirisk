@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class Recommendation_Category_Term_Class extends \eoxia\term_class {
+class Recommendation_Category_Term_Class extends \eoxia001\term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use

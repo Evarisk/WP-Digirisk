@@ -10,11 +10,11 @@
  * @subpackage class
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\Helper_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Helper_Class' ) ) {
 
 	/**
 	 * Classe helper pour les modèles.

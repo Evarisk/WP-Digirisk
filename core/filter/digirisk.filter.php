@@ -74,8 +74,8 @@ class Digirisk_Filter {
 	 */
 	public function stop_plugin_update( $value ) {
 
-		if ( ! empty( \eoxia\Config_Util::$init['digirisk']->block_updates ) ) {
-			foreach ( \eoxia\Config_Util::$init['digirisk']->block_updates as $plugin_slug ) {
+		if ( ! empty( \eoxia001\Config_Util::$init['digirisk']->block_updates ) ) {
+			foreach ( \eoxia001\Config_Util::$init['digirisk']->block_updates as $plugin_slug ) {
 				if ( ! empty( $value->response ) ) {
 					foreach ( $value->response as $update_plugin_slug => $element ) {
 						if ( strpos( $update_plugin_slug, $plugin_slug ) != false ) {

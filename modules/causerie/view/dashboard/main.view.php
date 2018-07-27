@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $causeries_intervention ) ) :
 			foreach ( $causeries_intervention as $causerie ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
 					'causerie' => $causerie,
 				) );
 			endforeach;

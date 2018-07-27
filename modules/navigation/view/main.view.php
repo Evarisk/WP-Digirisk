@@ -18,11 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="navigation-container">
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'header', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'header', array(
 		'society' => $society,
 	) );
 
-	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'list', array(
 		'selected_establishment_id' => $selected_establishment_id,
 		'establishments' => $establishments,
 		'id' => $society->id,

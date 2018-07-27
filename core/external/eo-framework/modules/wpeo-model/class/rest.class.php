@@ -10,11 +10,11 @@
  * @subpackage class
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\Rest_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Rest_Class' ) ) {
 	/**
 	 * Gestion des utilisateurs (POST, PUT, GET, DELETE)
 	 */

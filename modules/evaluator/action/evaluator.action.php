@@ -119,7 +119,7 @@ class Evaluator_Action {
 
 		ob_start();
 
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
+		\eoxia001\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
 			'element' => $element,
 			'element_id' => $element->id,
 			'list_affected_evaluator' => $list_affected_evaluator,
@@ -179,7 +179,7 @@ class Evaluator_Action {
 
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
+		\eoxia001\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected',  array(
 			'element' => $element,
 			'element_id' => $element->id,
 			'list_affected_evaluator' => $list_affected_evaluator,
@@ -239,7 +239,7 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
 			'element'                 => $element,
 			'element_id'              => $element->id,
 			'list_affected_evaluator' => $list_affected_evaluator,
@@ -288,7 +288,7 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-to-assign', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-to-assign', array(
 			'element'      => $element,
 			'element_id'   => $element->id,
 			'current_page' => $current_page,

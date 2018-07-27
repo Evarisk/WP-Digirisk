@@ -29,12 +29,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
 		if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digirisk-update' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=digi-setup' ) ) :
-			\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'say-to-update' );
+			\eoxia001\View_Util::exec( 'digirisk', 'update_manager', 'say-to-update' );
 		endif;
 
 		$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
 
-		if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
+		if ( empty( $version[ \eoxia001\Config_Util::$init['digirisk']->version ] ) ) :
 			require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
 		endif;
 	endif;

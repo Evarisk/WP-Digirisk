@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class evaluation_method_variable_class extends \eoxia\Term_Class {
+class evaluation_method_variable_class extends \eoxia001\Term_Class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use

@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td data-title="Date début" class="padding">
 		<?php
-		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->current_step ) :
+		if ( \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->current_step ) :
 			?>
 			<span><?php echo esc_html( $causerie->date_start['date_human_readable'] ); ?></span>
 			<?php
@@ -63,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td data-title="Date cloture" class="padding">
 		<?php
-		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->current_step ) :
+		if ( \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->current_step ) :
 			?>
 			<span><?php echo esc_html( $causerie->date_end['date_human_readable'] ); ?></span>
 			<?php

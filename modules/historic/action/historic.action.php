@@ -46,7 +46,7 @@ class Historic_Action {
 	public function callback_add_historic( $data ) {
 		if ( ! empty( $data['parent_id'] ) && ! empty( $data['id'] ) && ! empty( $data['content'] ) ) {
 			$data['date'] = current_time( 'mysql' );
-			update_post_meta( $data['parent_id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, $data );
+			update_post_meta( $data['parent_id'], \eoxia001\Config_Util::$init['digirisk']->historic->key_historic, $data );
 		}
 	}
 
@@ -82,7 +82,7 @@ class Historic_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'historic', 'risk/main', array(
 			'evaluations' => $evaluations,
 		) );
 		$view = ob_get_clean();

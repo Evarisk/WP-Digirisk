@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td>
 						<?php
 						if ( ! empty( $participant['signature_date'] ) ) :
-							echo esc_html( \eoxia\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ) );
+							echo esc_html( \eoxia001\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ) );
 						else :
 							esc_html_e( 'N/A', 'digirisk' );
 						endif;
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
 							</div>
 							<?php
-							\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+							\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 								'action' => 'causerie_save_signature',
 							) );
 							?>

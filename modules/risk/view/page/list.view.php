@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if ( ! empty( $risk_list ) ) : ?>
 		<?php foreach ( $risk_list as $risk ) : ?>
 			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
 				'risk' => $risk,
 			) );
 			?>

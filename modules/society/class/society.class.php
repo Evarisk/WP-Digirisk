@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  */
-class Society_Class extends \eoxia\Post_Class {
+class Society_Class extends \eoxia001\Post_Class {
 	/**
 	 * Le nom du modèle
 	 *

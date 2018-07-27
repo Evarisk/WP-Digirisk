@@ -100,7 +100,7 @@ class Causerie_Page_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/modal-participants-list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'dashboard/modal-participants-list', array(
 			'causerie' => $causerie_intervention,
 		) );
 

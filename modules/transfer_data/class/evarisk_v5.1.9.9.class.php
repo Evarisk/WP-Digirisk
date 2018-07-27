@@ -9,7 +9,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 
 /**	Include the different config for the plugin	*/
-require_once( \eoxia\Config_Util::$init['digirisk']->transfer_data->path . '/include/config.php' );
+require_once( \eoxia001\Config_Util::$init['digirisk']->transfer_data->path . '/include/config.php' );
 
 /*	CLEAN UP A VAR BEFORE SENDING IT TO OUTPUT OR DATABASE	*/
 function IsValid_Variable($MyVar2Test,$DefaultValue='')

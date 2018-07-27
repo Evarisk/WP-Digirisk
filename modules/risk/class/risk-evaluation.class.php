@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class Risk_Evaluation_Class extends \eoxia\Comment_Class {
+class Risk_Evaluation_Class extends \eoxia001\Comment_Class {
 	protected $model_name   = '\digi\risk_evaluation_model';
 	protected $meta_key     = '_wpdigi_risk_evaluation';
 	protected $comment_type	= 'digi-risk-eval';

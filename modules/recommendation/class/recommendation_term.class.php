@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_term_class extends \eoxia\term_class {
+class recommendation_term_class extends \eoxia001\term_class {
 
 	/**
 	 * Nom du modèle à utiliser / Model name to use

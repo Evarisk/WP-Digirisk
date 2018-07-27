@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 /**
  * Classe gérant les risques
  */
- class Risk_Class extends \eoxia\Post_Class {
+ class Risk_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -116,7 +116,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 			} );
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'main', array(
 			'society' => $society,
 			'society_id' => $society_id,
 			'risks' => $risks,

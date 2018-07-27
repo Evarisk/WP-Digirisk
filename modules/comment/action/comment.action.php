@@ -89,7 +89,7 @@ class Comment_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$comment = \eoxia\Comment_Class::g()->get( array(
+		$comment = \eoxia001\Comment_Class::g()->get( array(
 			'id' => $id,
 		), true );
 
@@ -99,7 +99,7 @@ class Comment_Action {
 
 		$comment->status = '-34071';
 
-		\eoxia\Comment_Class::g()->update( $comment );
+		\eoxia001\Comment_Class::g()->update( $comment );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

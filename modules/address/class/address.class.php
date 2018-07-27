@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author Jimmy Latour <jimmy.eoxia@gmail.com>
  * @version 1.1.0.0
  */
-class Address_class extends \eoxia\Comment_class {
+class Address_class extends \eoxia001\Comment_class {
 
 	/**
 	 * Le modèle à utiliser

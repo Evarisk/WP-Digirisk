@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un accident "stoppping day"
  */
-class Accident_Travail_Stopping_Day_Model extends \eoxia\Post_Model {
+class Accident_Travail_Stopping_Day_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Le constructeur définit les champs

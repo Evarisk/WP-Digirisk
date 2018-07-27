@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un ODT 'diffusion information'.
  */
-class Diffusion_Informations_Model extends \eoxia\Post_Model {
+class Diffusion_Informations_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Le constructeur définit les champs

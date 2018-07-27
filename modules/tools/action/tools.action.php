@@ -17,7 +17,7 @@ class Tools_Action {
   }
 
   public function add_management_page() {
-		\eoxia\View_Util::exec( 'digirisk', 'tools', 'main' );
+		\eoxia001\View_Util::exec( 'digirisk', 'tools', 'main' );
   }
 
   public function callback_reset_method_evaluation() {

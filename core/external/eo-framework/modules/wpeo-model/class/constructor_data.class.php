@@ -9,13 +9,13 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Constructor_Data_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Constructor_Data_Class' ) ) {
 	/**
 	 * Gestion de la construction des données selon les modèles.
 	 */

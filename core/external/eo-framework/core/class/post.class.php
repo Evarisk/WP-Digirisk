@@ -9,19 +9,19 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Post_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Post_Util' ) ) {
 	/**
 	 * Gestion des posts
 	 */
-	class Post_Util extends \eoxia\Singleton_Util {
+	class Post_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0

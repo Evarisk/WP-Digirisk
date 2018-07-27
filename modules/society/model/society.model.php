@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  *  Définition des champs d'une société.
  */
-class Society_Model extends \eoxia\Post_Model {
+class Society_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Définition des champs

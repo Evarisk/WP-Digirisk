@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="comment-container">
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'comment', 'list', array(
 		'id' => $id,
 		'add_button' => $add_button,
 		'comment_new' => $comment_new,
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	if ( 'edit' === $display ) :
-		\eoxia\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
 			'id' => $id,
 			'add_button' => $add_button,
 			'comment' => $comment_new,

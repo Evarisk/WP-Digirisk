@@ -10,11 +10,11 @@
  * @subpackage model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\User_Model' ) ) {
+if ( ! class_exists( '\eoxia001\User_Model' ) ) {
 	/**
 	 * Définition des données des utilisateurs
 	 */

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les options avancées des sociétés.
  */
-class Society_Advanced_Options_Class extends \eoxia\Singleton_Util {
+class Society_Advanced_Options_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -42,7 +42,7 @@ class Society_Advanced_Options_Class extends \eoxia\Singleton_Util {
 	public function display( $selected_society ) {
 		$groupments = Group_Class::g()->get( array( 'status' => 'publish' ) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'advanced-options/main', array( 'selected_society' => $selected_society, 'groupments' => $groupments ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'advanced-options/main', array( 'selected_society' => $selected_society, 'groupments' => $groupments ) );
 	}
 }
 

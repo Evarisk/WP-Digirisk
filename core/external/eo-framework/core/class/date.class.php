@@ -9,20 +9,20 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Date_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Date_Util' ) ) {
 
 	/**
 	 * Méthodes utilitaires pour les dates.
 	 */
-	class Date_Util extends \eoxia\Singleton_Util {
+	class Date_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0
@@ -84,7 +84,7 @@ if ( ! class_exists( '\eoxia\Date_Util' ) ) {
 		 * @return string                     La date formatée.
 		 */
 		public function convert_to_custom_hours( $min, $display_full_min = true ) {
-			$minut_for_one_day = \eoxia\Config_Util::$init['eo-framework']->hour_equal_one_day * 60;
+			$minut_for_one_day = \eoxia001\Config_Util::$init['eo-framework']->hour_equal_one_day * 60;
 			$day = intval( $min / $minut_for_one_day );
 
 			$sub_min = $min - ( $day * $minut_for_one_day );

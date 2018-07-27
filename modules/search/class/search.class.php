@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant la recherche
  */
-class Search_Class extends \eoxia\Singleton_Util {
+class Search_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -90,7 +90,7 @@ class Search_Class extends \eoxia\Singleton_Util {
 			}
 
 			// Force le tableau de integer.
-			$list = \eoxia\Array_Util::g()->to_int( $list );
+			$list = \eoxia001\Array_Util::g()->to_int( $list );
 
 		} elseif ( 'post' === $data['type'] ) {
 			$model_name = '\digi\\' . $data['class'];

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Récupères le commentaire pour ensuiter l'afficher.
  * Fait également l'affichage du formulaire pour ajouter un commentaire.
  */
-class Digi_Comment_Class extends \eoxia\Singleton_Util {
+class Digi_Comment_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -62,7 +62,7 @@ class Digi_Comment_Class extends \eoxia\Singleton_Util {
 		) );
 		$comment_new = $comment_new[0];
 
-		\eoxia\View_Util::exec( 'digirisk', 'comment', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'comment', 'main', array(
 			'id' => $id,
 			'comments' => $comments,
 			'comment_new' => $comment_new,

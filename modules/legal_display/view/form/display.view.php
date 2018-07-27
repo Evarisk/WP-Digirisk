@@ -22,19 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="grid-layout padding w2">
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/detective-work', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/detective-work', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/occupational-health-service', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/occupational-health-service', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/emergency-service', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/emergency-service', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/safety-rules', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/safety-rules', array(
 			'legal_display' => $legal_display,
 		) );
 
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="clear">
 		<?php
-			\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/working-hours', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/working-hours', array(
 				'legal_display' => $legal_display,
 			) );
 
@@ -52,23 +52,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="grid-layout padding w2">
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/derogations-schedules', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/derogations-schedules', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/collective-agreement', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/collective-agreement', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/rule', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/rule', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/DUER', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/DUER', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/participation-agreement', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/participation-agreement', array(
 			'legal_display' => $legal_display,
 		) );
 

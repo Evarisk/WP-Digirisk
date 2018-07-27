@@ -103,7 +103,7 @@ class Causerie_Action {
 		), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
 			'causerie' => $causerie,
 		) );
 

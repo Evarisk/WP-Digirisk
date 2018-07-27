@@ -15,4 +15,4 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 Recommendation_Class::g()->display( $society_id );
-\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );
+\eoxia001\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation, 'index' => $index ) );

@@ -112,7 +112,7 @@ class Listing_Risk_Class extends Document_Class {
 			'schema' => true,
 		), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'listing-risk/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'listing-risk/main', array(
 			'element'    => $element,
 			'element_id' => $society_id,
 		) );
@@ -134,7 +134,7 @@ class Listing_Risk_Class extends Document_Class {
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'listing-risk/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'listing-risk/list', array(
 			'list_document' => $list_document,
 		) );
 	}

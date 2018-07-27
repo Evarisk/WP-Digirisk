@@ -3,7 +3,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_task_class extends \eoxia\Singleton_Util {
+class TransferData_task_class extends \eoxia001\Singleton_Util {
 
 	protected function construct() { }
 
@@ -133,7 +133,7 @@ class TransferData_task_class extends \eoxia\Singleton_Util {
 				update_post_meta( $new_element_id, '_wpeo_element_links', $links );
 			}
 			else {
-				\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . $old_element_type , '', sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), array( 'object_id' => $old_element_id, ), 2 );
+				\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . $old_element_type , '', sprintf( __( 'Element linked to this %s have not been transfered to %d', 'wp-digi-dtrans-i18n' ), $old_element_type, $new_element_id ), array( 'object_id' => $old_element_id, ), 2 );
 			}
 		}
 

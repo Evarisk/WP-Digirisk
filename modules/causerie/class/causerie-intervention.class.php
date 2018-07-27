@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les causeries
  */
-class Causerie_Intervention_Class extends \eoxia\Post_Class {
+class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -134,7 +134,7 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 
 			foreach ( $tmp_image_ids as $image_id ) {
 				$attachment_path = get_attached_file( $image_id );
-				$file_id         = \eoxia\File_Util::g()->move_file_and_attach( $attachment_path, 0 );
+				$file_id         = \eoxia001\File_Util::g()->move_file_and_attach( $attachment_path, 0 );
 
 				if ( empty( $duplicated_causerie->thumbnail_id ) ) {
 					$duplicated_causerie->thumbnail_id = $file_id;
@@ -219,7 +219,7 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 			$encoded_image = explode( ',', $signature_data )[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->id );
+			$file_id = \eoxia001\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->id );
 
 			if ( $is_former ) {
 				$causerie_intervention->former['signature_id']   = $file_id;
