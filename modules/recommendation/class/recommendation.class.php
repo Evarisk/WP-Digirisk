@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Les préconisations
  */
-class Recommendation_Class extends \eoxia\Post_Class {
+class Recommendation_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -115,7 +115,7 @@ class Recommendation_Class extends \eoxia\Post_Class {
 
 		$recommendations = $this->get( array( 'post_parent' => $society_id ) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendations' => $recommendations, 'recommendation_schema' => $recommendation_schema ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'recommendation', 'list', array( 'society_id' => $society_id, 'recommendations' => $recommendations, 'recommendation_schema' => $recommendation_schema ) );
 	}
 
 	/**

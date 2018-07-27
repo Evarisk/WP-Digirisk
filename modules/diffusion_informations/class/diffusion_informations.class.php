@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les diffusions d'informations
  */
-class Diffusion_Informations_Class extends \eoxia\Post_Class {
+class Diffusion_Informations_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -95,7 +95,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 	public function display( $element_id ) {
 		$element = Society_Class::g()->show_by_type( $element_id );
 
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'diffusion_informations', 'main', array(
 			'element' => $element,
 		) );
 	}
@@ -135,7 +135,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
 		} );
 
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'diffusion_informations', 'list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -194,7 +194,7 @@ class Diffusion_Informations_Class extends \eoxia\Post_Class {
 			$diffusion_information = $diffusion_information[0];
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'diffusion_informations', 'form', array(
 			'element_id'            => $element->id,
 			'diffusion_information' => $diffusion_information,
 		) );

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Le modèle d'un risque
  */
-class Risk_Model extends \eoxia\Post_Model {
+class Risk_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Constructeur

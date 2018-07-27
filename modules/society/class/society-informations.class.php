@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Appelle la vue pour afficher le formulaire de configuration d'une société
  */
-class Society_Informations_Class extends \eoxia\Singleton_Util {
+class Society_Informations_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -47,7 +47,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			'post_parent' => $element->id,
 		) );
 
-		$historic_update = get_post_meta( $element->id, \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
+		$historic_update = get_post_meta( $element->id, \eoxia001\Config_Util::$init['digirisk']->historic->key_historic, true );
 
 		if ( empty( $historic_update ) ) {
 			$historic_update = array(
@@ -73,7 +73,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
 			'element'             => $element,
 			'address'             => $address,
 			'number_risks'        => count( $risks ),

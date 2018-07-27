@@ -56,7 +56,7 @@ if ( ! empty( $list_type_document ) ) :
 				</ul>
 			</div>
 
-			<?php \eoxia\View_Util::exec( 'digirisk', 'handle_model', 'popup' ); ?>
+			<?php \eoxia001\View_Util::exec( 'digirisk', 'handle_model', 'popup' ); ?>
 		</div>
 		<?php
 	endforeach;

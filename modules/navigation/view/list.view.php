@@ -17,13 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="<?php echo esc_attr( $class ); ?>">
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item-new', array(
+	\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'item-new', array(
 		'id' => $id,
 	) );
 
 	if ( ! empty( $establishments ) ) :
 		foreach ( $establishments as $establishment ) :
-			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'item', array(
 				'selected_establishment_id' => $selected_establishment_id,
 				'establishment' => $establishment,
 			) );

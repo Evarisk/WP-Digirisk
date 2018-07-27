@@ -100,12 +100,12 @@ class Evaluation_Method_Shortcode {
 		);
 
 		if ( 'view' === $display ) {
-			\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'view-evaluation-method', $view_data );
+			\eoxia001\View_Util::exec( 'digirisk', 'evaluation_method', 'view-evaluation-method', $view_data );
 		} else {
 			if ( $term_evarisk_simple->term_id === $digi_method_id ) {
-				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'edit-digirisk-evaluation-method', $view_data );
+				\eoxia001\View_Util::exec( 'digirisk', 'evaluation_method', 'edit-digirisk-evaluation-method', $view_data );
 			} else {
-				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'edit-evarisk-evaluation-method', $view_data );
+				\eoxia001\View_Util::exec( 'digirisk', 'evaluation_method', 'edit-evarisk-evaluation-method', $view_data );
 			}
 		}
 	}
@@ -143,7 +143,7 @@ class Evaluation_Method_Shortcode {
 			$risk = ! empty( $risk[0] ) ? $risk[0] : array();
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'popup/popup', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'evaluation_method', 'popup/popup', array(
 			'term_evarisk' => $term_evarisk,
 			'risk_id' => $risk_id,
 			'risk' => $risk,

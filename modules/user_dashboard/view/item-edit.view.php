@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( 'ajax_save_user' ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $user->id ); ?>" />
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
+	<td class="padding"><span><strong><?php echo esc_html( \eoxia001\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
 	<td class="padding tooltip red"
 		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 		<input type="text" class="lastname" placeholder="Name" name="lastname" value="<?php echo esc_attr( $user->lastname ); ?>" />

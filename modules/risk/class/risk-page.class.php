@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant la page "Risques" du menu "Digirisk" de WordPress.
  */
-class Risk_Page_Class extends \eoxia\Singleton_Util {
+class Risk_Page_Class extends \eoxia001\Singleton_Util {
 	/**
 	 * La limite des risques a afficher par page
 	 *
@@ -35,7 +35,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 
 	/**
-	 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+	 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 	 *
 	 * @return void
 	 *
@@ -93,7 +93,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 		$number_page = ceil( $count_risk / $per_page );
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'page/main', array(
 			'current_page' => $current_page,
 			'number_page' => $number_page,
 		) );
@@ -146,7 +146,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 		$url_ref_order = '&order_key=equivalence&order_type=';
 		$url_ref_order .= ( 'ASC' === $order_type ) ? 'DESC' : 'ASC';
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'page/list', array(
 			'risk_list'     => $risk_list,
 			'url_ref_order' => $url_ref_order,
 		) );

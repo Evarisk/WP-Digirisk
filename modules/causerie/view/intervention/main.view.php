@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="ajax-content">
 				<?php
 				if ( $final_causerie->current_step < 4 ) :
-					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-' . $final_causerie->current_step, array(
+					\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-' . $final_causerie->current_step, array(
 						'main_causerie'  => $main_causerie,
 						'final_causerie' => $final_causerie,
 						'all_signed'     => $all_signed,

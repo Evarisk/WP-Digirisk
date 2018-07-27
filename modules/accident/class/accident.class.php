@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les accidents
  */
-class Accident_Class extends \eoxia\Post_Class {
+class Accident_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -114,7 +114,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	 * @return void
 	 */
 	public function display( $society_id ) {
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main', array() );
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'main', array() );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	 * @return void
 	 */
 	public function display_registre( $society_id ) {
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'registre-accident/main', array() );
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'registre-accident/main', array() );
 	}
 
 	/**
@@ -145,7 +145,7 @@ class Accident_Class extends \eoxia\Post_Class {
 
 		$accidents = $this->get( array() );
 
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'list', array(
 			'main_society' => $main_society,
 			'accident_schema' => $accident_schema,
 			'accidents' => $accidents,

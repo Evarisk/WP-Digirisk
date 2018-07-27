@@ -70,7 +70,7 @@ class Recommendation_Shortcode {
 			$display = 'item-dropdown';
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', $display, array( 'recommendation' => $recommendation, 'id' => $id, 'recommendation_category_list' => $recommendation_category_list ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'recommendation', $display, array( 'recommendation' => $recommendation, 'id' => $id, 'recommendation_category_list' => $recommendation_category_list ) );
 	}
 }
 

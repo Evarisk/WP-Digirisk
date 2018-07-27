@@ -46,7 +46,7 @@ function construct_identifier( $data ) {
 function get_identifier( $data ) {
 	$data->modified_unique_identifier = '';
 
-	$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
+	$list_accronym = get_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option );
 	$list_accronym = json_decode( $list_accronym, true );
 	if ( isset( $data->type ) ) {
 		$type = str_replace( 'digi-', '\\digi\\', $data->type );

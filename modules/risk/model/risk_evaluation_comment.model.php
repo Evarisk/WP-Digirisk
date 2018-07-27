@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class risk_evaluation_comment_model extends \eoxia\comment_model {
+class risk_evaluation_comment_model extends \eoxia001\comment_model {
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(
 			'export'	=> array(

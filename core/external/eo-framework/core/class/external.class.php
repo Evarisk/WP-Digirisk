@@ -10,20 +10,20 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\External_Util' ) ) {
+if ( ! class_exists( '\eoxia001\External_Util' ) ) {
 
 	/**
 	 * Gestion des externals
 	 */
-	class External_Util extends \eoxia\Singleton_Util {
+	class External_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0
@@ -48,12 +48,12 @@ if ( ! class_exists( '\eoxia\External_Util' ) ) {
 		 *}
 		 */
 		public function exec( $path, $plugin_slug ) {
-			if ( empty( \eoxia\Config_Util::$init[ $plugin_slug ]->externals ) ) {
+			if ( empty( \eoxia001\Config_Util::$init[ $plugin_slug ]->externals ) ) {
 				return new \WP_Error( 'broke', __( 'Aucun module a charger', $plugin_slug ) );
 			}
 
-			if ( ! empty( \eoxia\Config_Util::$init[ $plugin_slug ]->externals ) ) {
-				foreach ( \eoxia\Config_Util::$init[ $plugin_slug ]->externals as $external_json_path ) {
+			if ( ! empty( \eoxia001\Config_Util::$init[ $plugin_slug ]->externals ) ) {
+				foreach ( \eoxia001\Config_Util::$init[ $plugin_slug ]->externals as $external_json_path ) {
 					self::inc_config( $plugin_slug, $path . $external_json_path );
 					self::inc( $plugin_slug, $path . $external_json_path );
 				}
@@ -63,7 +63,7 @@ if ( ! class_exists( '\eoxia\External_Util' ) ) {
 		}
 
 		/**
-		 * Appelle la méthode init_config de \eoxia\Config_Util pour initialiser les configs du module
+		 * Appelle la méthode init_config de \eoxia001\Config_Util pour initialiser les configs du module
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0
@@ -74,7 +74,7 @@ if ( ! class_exists( '\eoxia\External_Util' ) ) {
 		 * @return void
 		 */
 		public function inc_config( $plugin_slug, $module_json_path ) {
-			\eoxia\Config_Util::g()->init_config( $module_json_path, $plugin_slug );
+			\eoxia001\Config_Util::g()->init_config( $module_json_path, $plugin_slug );
 		}
 
 		/**
@@ -92,8 +92,8 @@ if ( ! class_exists( '\eoxia\External_Util' ) ) {
 			$module_name = basename( $module_json_path, '.config.json' );
 			$module_path = dirname( $module_json_path );
 
-			if ( ! empty( \eoxia\Config_Util::$init['external'] ) ) {
-				foreach ( \eoxia\Config_Util::$init['external'] as $external_name => $config ) {
+			if ( ! empty( \eoxia001\Config_Util::$init['external'] ) ) {
+				foreach ( \eoxia001\Config_Util::$init['external'] as $external_name => $config ) {
 					if ( ! empty( $config->dependencies ) ) {
 						foreach ( $config->dependencies as $folder_name => $folder_conf ) {
 							$path_to_module_and_dependence_folder = $config->path . '/' . $folder_name . '/';
@@ -102,7 +102,7 @@ if ( ! class_exists( '\eoxia\External_Util' ) ) {
 								$this->inc_priority_file( $path_to_module_and_dependence_folder, $folder_name, $folder_conf->priority );
 							}
 
-							\eoxia\Include_util::g()->in_folder( $path_to_module_and_dependence_folder );
+							\eoxia001\Include_util::g()->in_folder( $path_to_module_and_dependence_folder );
 						}
 					}
 				}

@@ -9,7 +9,7 @@
  * @package EO-Framework
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -42,8 +42,8 @@ class Core_Action {
 	 * @return void
 	 */
 	public function callback_mixed_enqueue_scripts() {
-		wp_register_script( 'wpeo-assets-scripts', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/wpeo-assets.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->version, false );
-		wp_enqueue_style( 'wpeo-assets-styles', Config_Util::$init['eo-framework']->core->url . 'assets/css/style.min.css', \eoxia\Config_Util::$init['eo-framework']->version );
+		wp_register_script( 'wpeo-assets-scripts', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/wpeo-assets.js', array( 'jquery' ), \eoxia001\Config_Util::$init['eo-framework']->version, false );
+		wp_enqueue_style( 'wpeo-assets-styles', Config_Util::$init['eo-framework']->core->url . 'assets/css/style.min.css', \eoxia001\Config_Util::$init['eo-framework']->version );
 
 		wp_localize_script( 'wpeo-assets-scripts', 'wpeo_framework', Core_Class::g()->get_localize_script_data() );
 		wp_enqueue_script( 'wpeo-assets-scripts' );

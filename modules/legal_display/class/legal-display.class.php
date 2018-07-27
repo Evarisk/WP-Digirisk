@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les affichages légaux
  */
-class Legal_Display_Class extends \eoxia\Post_Class {
+class Legal_Display_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -93,7 +93,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 	 * @return void
 	 */
 	public function display( $element ) {
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'main', array(
 			'element'    => $element,
 			'element_id' => $element->id,
 		) );
@@ -129,7 +129,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 			return ( $a->unique_key > $b->unique_key ) ? -1 : 1;
 		} );
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'list', array(
 			'list_document' => $list_document,
 		) );
 	}
@@ -156,7 +156,7 @@ class Legal_Display_Class extends \eoxia\Post_Class {
 
 		$legal_display = $legal_display[0];
 
-		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/display', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/display', array(
 			'element_id' => $element->id,
 			'legal_display' => $legal_display,
 		) );

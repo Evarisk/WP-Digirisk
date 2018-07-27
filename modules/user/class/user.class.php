@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant les utilisateurs
  */
-class User_Digi_Class extends \eoxia\User_Class {
+class User_Digi_Class extends \eoxia001\User_Class {
 
 	/**
 	 * Le nom du modèle
@@ -120,9 +120,9 @@ class User_Digi_Class extends \eoxia\User_Class {
 		$model_name = $this->model_name;
 
 		if ( empty( $data['id'] ) ) {
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_model_post_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_model_post_function );
 			$data = new $model_name( (array) $data );
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_post_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_post_function );
 
 			if ( ! empty( $data->error ) && $data->error ) {
 				return false;
@@ -134,16 +134,16 @@ class User_Digi_Class extends \eoxia\User_Class {
 
 			$data->id = wp_insert_user( $data->do_wp_object() );
 
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->after_post_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->after_post_function );
 		} else {
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_model_put_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_model_put_function );
 			$current_data = $this->get( array(
 				'id' => $data['id'],
 			), true );
 
 			$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
 			$data = new $model_name( (array) $obj_merged );
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->before_put_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_put_function );
 
 			if ( ! empty( $data->error ) && $data->error ) {
 				return false;
@@ -151,10 +151,10 @@ class User_Digi_Class extends \eoxia\User_Class {
 
 			wp_update_user( $data->do_wp_object() );
 
-			$data = \eoxia\Model_Util::exec_callback( $data, $this->after_put_function );
+			$data = \eoxia001\Model_Util::exec_callback( $data, $this->after_put_function );
 		}
 
-		\eoxia\Save_Meta_Class::g()->save_meta_data( $data, 'update_user_meta', $this->meta_key );
+		\eoxia001\Save_Meta_Class::g()->save_meta_data( $data, 'update_user_meta', $this->meta_key );
 
 		return $data;
 	}
@@ -223,7 +223,7 @@ class User_Digi_Class extends \eoxia\User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		\eoxia\View_Util::exec( 'digirisk', 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
 	}
 
 	/**
@@ -257,7 +257,7 @@ class User_Digi_Class extends \eoxia\User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		\eoxia\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 	}
 
 	/**

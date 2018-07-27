@@ -71,7 +71,7 @@ class Risk_Category_Action {
 		$preset_risk = $preset_risk[0];
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
 			'risk' => $preset_risk,
 		) );

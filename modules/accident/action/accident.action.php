@@ -76,7 +76,7 @@ class Accident_Action {
 			$encoded_image = explode( ',', $signature_of_the_caregiver )[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
+			$file_id = \eoxia001\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
 			$accident->associated_document_id['signature_of_the_caregiver_id'][0] = $file_id;
 		}
 
@@ -84,12 +84,12 @@ class Accident_Action {
 			$encoded_image = explode( ',', $signature_of_the_victim )[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
+			$file_id = \eoxia001\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->id );
 			$accident->associated_document_id['signature_of_the_victim_id'][0] = $file_id;
 		}
 
 		if ( ! empty( $accident_investigation_id ) ) {
-			\eoxia\WPEO_Upload_Class::g()->associate_file( $accident->id, $accident_investigation_id, '\digi\Accident_Class', 'accident_investigation_id' );
+			\eoxia001\WPEO_Upload_Class::g()->associate_file( $accident->id, $accident_investigation_id, '\digi\Accident_Class', 'accident_investigation_id' );
 		}
 
 		// Associations des commentaires.
@@ -97,7 +97,7 @@ class Accident_Action {
 			foreach ( $_POST['list_comment'] as $comment ) {
 				if ( ! empty( $comment['content'] ) ) {
 					$comment['post_id'] = $accident->id;
-					\eoxia\Comment_Class::g()->update( $comment );
+					\eoxia001\Comment_Class::g()->update( $comment );
 				}
 			}
 		}
@@ -116,7 +116,7 @@ class Accident_Action {
 
 		ob_start();
 		if ( $add ) {
-			\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 				'accident' => $accident,
 			) );
 		} else {
@@ -157,7 +157,7 @@ class Accident_Action {
 		), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'main_society' => $main_society,
 			'society_id' => $accident->parent_id,
 			'accident' => $accident,

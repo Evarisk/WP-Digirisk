@@ -2,13 +2,13 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class recommendation_default_data_class extends \eoxia\Singleton_Util {
+class recommendation_default_data_class extends \eoxia001\Singleton_Util {
 	protected function construct() {}
 	/**
 	* Créer les données par défaut
 	*/
 	public function create() {
-		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->recommendation->path . 'asset/json/default.json' );
+		$file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->recommendation->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
 		if ( !empty( $data ) ) {
@@ -29,7 +29,7 @@ class recommendation_default_data_class extends \eoxia\Singleton_Util {
 			$recommendation_category = $this->get( array( 'id' => $recommendation_category->error_data['term_exists'] ) );
 		}
 
-		$file_id = \eoxia\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/preconisations/' . $json_recommendation_category->name_thumbnail, 0 );
+		$file_id = \eoxia001\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/preconisations/' . $json_recommendation_category->name_thumbnail, 0 );
 
 		$recommendation_category->thumbnail_id = $file_id;
 		$recommendation_category->associated_document_id[] = $file_id;
@@ -48,7 +48,7 @@ class recommendation_default_data_class extends \eoxia\Singleton_Util {
 		) );
 
 		if ( !is_wp_error( $recommandation ) ) {
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
+			$file_id = \eoxia001\File_Util::g()->move_file_and_attach( PLUGIN_DIGIRISK_PATH . '/core/assets/images/preconisations/' . $json_recommandation->name_thumbnail, 0 );
 			$recommandation->thumbnail_id = $file_id;
 			$recommandation = recommendation_term_class::g()->update( $recommandation );
 		}

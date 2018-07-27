@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </section>
 
 <?php
-\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
+\eoxia001\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
 	'element' => $element,
 	'address' => $address,
 ) );

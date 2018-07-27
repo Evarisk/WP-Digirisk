@@ -42,7 +42,7 @@ class Tab_Shortcode {
 
 		$list_tab = apply_filters( 'digi_tab', array(), $id );
 
-		\eoxia\View_Util::exec( 'digirisk', 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'tab', 'list', array( 'id' => $id, 'type' => $type, 'display' => $display, 'list_tab' => $list_tab ) );
 	}
 }
 

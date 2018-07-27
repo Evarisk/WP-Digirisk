@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class tools_class extends \eoxia\Singleton_Util {
+class tools_class extends \eoxia001\Singleton_Util {
 
 	protected function construct() { }
 
@@ -47,7 +47,7 @@ class tools_class extends \eoxia\Singleton_Util {
     $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
-    $file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
+    $file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
     $data_variable_evarisk = array();

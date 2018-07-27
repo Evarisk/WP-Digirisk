@@ -20,11 +20,11 @@ $result = Digirisk_Class::g()->get_patch_note(); ?>
 <?php if ( true === $result['status'] && ! empty( $result['content'] ) ) : ?>
 	<div class="notification patch-note active">
 		<span class="thumbnail"><img src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" /></span>
-		<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?></a></span>
+		<span class="title">Note de mise à jour de la <a href="#">version <?php echo esc_attr( \eoxia001\Config_Util::$init['digirisk']->version ); ?></a></span>
 		<span class="close action-attribute"
 					data-action="close_change_log"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
-					data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fa fa-times-circle"></i></span>
+					data-version="<?php echo esc_attr( \eoxia001\Config_Util::$init['digirisk']->version ); ?>"><i class="icon fa fa-times-circle"></i></span>
 	</div>
 
 	<div class="popup patch-note">

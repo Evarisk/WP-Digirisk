@@ -58,7 +58,7 @@ class Causerie_Intervention_Page_Action {
 		}
 
 		switch ( $causerie->current_step ) {
-			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_FORMER:
+			case \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_FORMER:
 				$former_id      = ! empty( $_POST['former_id'] ) ? (int) $_POST['former_id'] : 0;
 
 				if ( empty( $former_id ) ) {
@@ -68,20 +68,20 @@ class Causerie_Intervention_Page_Action {
 				$causerie = Causerie_Intervention_Page_Class::g()->step_former( $causerie, $former_id );
 
 				ob_start();
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-2', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-2', array(
 					'final_causerie' => $causerie,
 				) );
 				break;
-			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION:
+			case \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION:
 				$causerie = Causerie_Intervention_Page_Class::g()->step_slider( $causerie );
 
 				ob_start();
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
 					'final_causerie' => $causerie,
 					'all_signed'     => false,
 				) );
 				break;
-			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:
+			case \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:
 				// Cette étape n'est pas une requête ajax, mais un admin_post.
 				Causerie_Intervention_Page_Class::g()->step_participants( $causerie );
 

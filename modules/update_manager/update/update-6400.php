@@ -40,7 +40,7 @@ class Update_640 {
 		$done = false;
 
 		$saved_slug = array();
-		$dangers_slug = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/danger-6291.json' );
+		$dangers_slug = \eoxia001\JSON_Util::g()->open_and_decode( \eoxia001\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/danger-6291.json' );
 		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
 
 		if ( ! empty( $dangers_slug ) ) {
@@ -97,7 +97,7 @@ class Update_640 {
 	public function callback_digirisk_update_to_ed840_to_risk() {
 		$done = false;
 
-		$liaisons = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/risk-danger-6400.json', 'ARRAY_A' );
+		$liaisons = \eoxia001\JSON_Util::g()->open_and_decode( \eoxia001\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/risk-danger-6400.json', 'ARRAY_A' );
 		$saved_slug = get_option( 'digirisk_update_6400_saved_slug' );
 		$index = 0;
 		$count_risk = ! empty( $_POST['args']['countRisk'] ) ? (int) $_POST['args']['countRisk'] : 0;

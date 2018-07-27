@@ -9,13 +9,13 @@
  * @package EO-Framework/WPEO-Upload
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
+if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 	/**
 	 * Actions for wpeo_upload.
 	 */
@@ -45,8 +45,8 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
 		 * @version 1.0.0
 		 */
 		public function callback_admin_scripts() {
-			wp_enqueue_style( 'wpeo_upload_style', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/css/style.css', array() );
-			wp_enqueue_script( 'wpeo_upload_script', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/js/wpeo-upload.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->version );
+			wp_enqueue_style( 'wpeo_upload_style', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/css/style.css', array() );
+			wp_enqueue_script( 'wpeo_upload_script', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/js/wpeo-upload.js', array( 'jquery' ), \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->version );
 		}
 
 		/**
@@ -56,7 +56,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
 		 * @version 1.0.0
 		 */
 		public function callback_plugins_loaded() {
-			$path = str_replace( str_replace( '\\', '/', WP_PLUGIN_DIR ), '', str_replace( '\\', '/', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path ) );
+			$path = str_replace( str_replace( '\\', '/', WP_PLUGIN_DIR ), '', str_replace( '\\', '/', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path ) );
 			load_plugin_textdomain( 'wpeo-upload', false, $path . '/asset/language/' );
 		}
 
@@ -105,7 +105,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
 				$filename_only = basename( $filelink );
 				$fileurl_only = wp_get_attachment_url( $data['file_id'] );
 				ob_start();
-				require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/list-item.view.php' );
+				require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/list-item.view.php' );
 				$view = ob_get_clean();
 			}
 
@@ -159,7 +159,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
 			$data = WPEO_Upload_Class::g()->get_post_data( 'load_gallery' );
 
 			ob_start();
-			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/gallery/button-add.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/gallery/button-add.view.php' );
 			$data['title'] .= ob_get_clean();
 
 			ob_start();

@@ -9,20 +9,20 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Init_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Init_Util' ) ) {
 
 	/**
 	 * Cette classe initialise tous les fichiers config.json
 	 */
-	class Init_Util extends \eoxia\Singleton_Util {
+	class Init_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0
@@ -99,7 +99,7 @@ if ( ! class_exists( '\eoxia\Init_Util' ) ) {
 		 */
 		private function init_main_config( $path, $plugin_slug ) {
 			$main_config_path = $plugin_slug . '.config.json';
-			\eoxia\Config_Util::g()->init_config( $path . $main_config_path );
+			\eoxia001\Config_Util::g()->init_config( $path . $main_config_path );
 			Config_Util::$init[ $plugin_slug ]->path = $path;
 		}
 
@@ -119,11 +119,11 @@ if ( ! class_exists( '\eoxia\Init_Util' ) ) {
 				Config_Util::$init['external'] = new \stdClass();
 			}
 
-			\eoxia\External_Util::g()->exec( $path, $plugin_slug );
+			\eoxia001\External_Util::g()->exec( $path, $plugin_slug );
 		}
 
 		/**
-		 * Appelle la méthode exec_module de \eoxia\Module_Util pour initialiser tous les modules
+		 * Appelle la méthode exec_module de \eoxia001\Module_Util pour initialiser tous les modules
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0
@@ -134,7 +134,7 @@ if ( ! class_exists( '\eoxia\Init_Util' ) ) {
 		 * @return void
 		 */
 		private function init_module( $path, $plugin_slug ) {
-			\eoxia\Module_Util::g()->exec_module( $path, $plugin_slug );
+			\eoxia001\Module_Util::g()->exec_module( $path, $plugin_slug );
 		}
 	}
 } // End if().

@@ -14,7 +14,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class user_digi_model extends \eoxia\user_model {
+class user_digi_model extends \eoxia001\user_model {
 
 	/**
 	* Construit le modèle d'un utilisateur / Fill the user model

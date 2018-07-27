@@ -54,7 +54,7 @@ class Recommendation_Action {
 		$recommendation = $recommendation[0];
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
 			'society_id' => $recommendation->parent_id,
 			'recommendation' => $recommendation,
 			), array(
@@ -97,9 +97,9 @@ class Recommendation_Action {
 				'model_name' => '\digi\Recommendation_Class',
 			);
 
-			\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
+			\eoxia001\WPEO_Upload_Class::g()->set_thumbnail( $args_media );
 			$args_media['field_name'] = 'image';
-			\eoxia\WPEO_Upload_Class::g()->associate_file( $args_media );
+			\eoxia001\WPEO_Upload_Class::g()->associate_file( $args_media );
 		}
 
 		if ( ! empty( $_POST['list_comment'] ) ) {

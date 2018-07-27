@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_detail_class extends \eoxia\Singleton_Util {
+class user_detail_class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Instanciation principale de l'extension / Plugin instanciation

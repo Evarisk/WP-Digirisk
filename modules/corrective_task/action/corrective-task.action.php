@@ -73,13 +73,13 @@ class Corrective_Task_Action {
 			}
 
 			ob_start();
-			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'form', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'form', array(
 				'task' => $task,
 			) );
 			$view = ob_get_clean();
 		} else {
 			ob_start();
-			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'need-task-manager' );
+			\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'need-task-manager' );
 			$view = ob_get_clean();
 		} // End if().
 

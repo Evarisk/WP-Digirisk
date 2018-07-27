@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Le modèle du ZIP
  */
-class ZIP_Model extends \eoxia\Post_Model {
+class ZIP_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Le constructeur

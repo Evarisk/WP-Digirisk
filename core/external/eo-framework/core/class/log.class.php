@@ -9,13 +9,13 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\LOG_Util' ) ) {
+if ( ! class_exists( '\eoxia001\LOG_Util' ) ) {
 	define( 'EO_NOTICE', 'EO_NOTICE' );
 	define( 'EO_RESPONSE_ERROR', 'EO_RESPONSE_ERROR' );
 	define( 'EO_RESPONSE_SUCCESS', 'EO_RESPONSE_SUCCESS' );
@@ -23,9 +23,9 @@ if ( ! class_exists( '\eoxia\LOG_Util' ) ) {
 	/**
 	 * Méthodes utiles pour les fichiers JSON.
 	 */
-	class LOG_Util extends \eoxia\Singleton_Util {
+	class LOG_Util extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @return void nothing
 		 */

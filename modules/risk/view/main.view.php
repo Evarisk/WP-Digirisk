@@ -13,7 +13,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {	exit; }
 
-\eoxia\View_Util::exec(
+\eoxia001\View_Util::exec(
 	'digirisk',
 	'risk',
 	'list',

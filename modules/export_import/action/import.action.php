@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion de l'imporation des données de DigiRisk.
  */
-class Import_Action extends \eoxia\Singleton_Util {
+class Import_Action extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le chemin vers le dossier export de WordPress.
@@ -71,29 +71,29 @@ class Import_Action extends \eoxia\Singleton_Util {
 				wp_send_json_error();
 			}
 
-			\eoxia\LOG_Util::log( 'Création catégorie de risque, recommendation et évaluation de méthode par défaut.', 'digirisk' );
+			\eoxia001\LOG_Util::log( 'Création catégorie de risque, recommendation et évaluation de méthode par défaut.', 'digirisk' );
 			$danger_created            = Risk_Category_Default_Data_Class::g()->create();
 			$recommendation_created    = Recommendation_Default_Data_Class::g()->create();
 			$evaluation_method_created = Evaluation_Method_Default_Data_Class::g()->create();
 
 			// Met à jours l'option pour dire que l'installation est terminée.
-			update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array(
+			update_option( \eoxia001\Config_Util::$init['digirisk']->core_option, array(
 				'installed'  => true,
 				'db_version' => 1,
 			) );
 
-			$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
+			$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia001\Config_Util::$init['digirisk']->version );
 
 			// version * 10 car le module de mise à jour parse les mises à jour à faire grâce à des versions à 4 chiffres.
 			if ( 3 === strlen( $current_version_for_update_manager ) ) {
 				$current_version_for_update_manager *= 10;
 			}
 
-			update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $current_version_for_update_manager );
+			update_option( \eoxia001\Config_Util::$init['digirisk']->key_last_update_version, $current_version_for_update_manager );
 
 			$zip_file = $_FILES['file'];
 
-			$zip_info = \eoxia\ZIP_Util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
+			$zip_info = \eoxia001\ZIP_Util::g()->unzip( $zip_file['tmp_name'], $this->destination_directory );
 			if ( ! $zip_info['state'] && empty( $zip_info['list_file'][0] ) ) {
 				wp_send_json_error();
 			}
@@ -107,7 +107,7 @@ class Import_Action extends \eoxia\Singleton_Util {
 		$file_content                   = file_get_contents( $path_to_json );
 		$data                           = json_decode( $file_content, true );
 
-		self::$response['count_element'] = \eoxia\Array_Util::g()->count_recursive( $data, true, array(
+		self::$response['count_element'] = \eoxia001\Array_Util::g()->count_recursive( $data, true, array(
 			'list_group',
 			'list_workunit',
 			'danger',
@@ -121,7 +121,7 @@ class Import_Action extends \eoxia\Singleton_Util {
 
 		self::$response['index_element'] = (int) $_POST['index_element'];
 
-		\eoxia\LOG_Util::log( wp_json_encode( self::$response ), 'digirisk' );
+		\eoxia001\LOG_Util::log( wp_json_encode( self::$response ), 'digirisk' );
 
 		Import_Class::g()->create( $data );
 

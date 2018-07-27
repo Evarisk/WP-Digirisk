@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Les actions relatives aux utilisateurs dans la page "utilisateur" de WordPress.
  */
-class User_Shortcode_Action extends \eoxia\Singleton_Util {
+class User_Shortcode_Action extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur appelle les actions suivantes:
@@ -54,7 +54,7 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 	 * @version 6.2.4
 	 */
 	public function callback_users_page() {
-		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'main' );
+		\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'main' );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class User_Shortcode_Action extends \eoxia\Singleton_Util {
 		$user = $user[0];
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user ) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'userDashboard',

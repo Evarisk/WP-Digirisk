@@ -9,18 +9,18 @@
  * @package EO-Framework/WPEO-Upload
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\WPEO_Upload_Class' ) ) {
+if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 
 	/**
 	 * All methods utils for associate, dessociate and anothers things about upload.
 	 */
-	class WPEO_Upload_Class extends \eoxia\Singleton_Util {
+	class WPEO_Upload_Class extends \eoxia001\Singleton_Util {
 
 		/**
 		 * Need to be declared for Singleton_Util.
@@ -187,7 +187,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Class' ) ) {
 
 			$list_id = ! empty( $element->associated_document_id[ $data['field_name']  ] ) ? $element->associated_document_id[ $data['field_name'] ] : array();
 
-			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/main.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/main.view.php' );
 		}
 
 		/**
@@ -241,7 +241,7 @@ if ( ! class_exists( '\eoxia\WPEO_Upload_Class' ) ) {
 		 * @return void
 		 */
 		public function out_all_attributes( $data ) {
-			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/attributes.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/attributes.view.php' );
 		}
 	}
 

@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class Risk_Evaluation_Model extends \eoxia\Comment_Model {
+class Risk_Evaluation_Model extends \eoxia001\Comment_Model {
 
 	public function __construct( $object ) {
 		$this->model['date']['bydefault'] = current_time( 'mysql' );

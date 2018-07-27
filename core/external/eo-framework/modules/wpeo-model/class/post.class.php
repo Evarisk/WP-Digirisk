@@ -10,13 +10,13 @@
  * @subpackage class
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Post_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Post_Class' ) ) {
 	/**
 	 * Gestion des posts (POST, PUT, GET, DELETE)
 	 */
@@ -27,7 +27,7 @@ if ( ! class_exists( '\eoxia\Post_Class' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $model_name = '\eoxia\Post_Model';
+		protected $model_name = '\eoxia001\Post_Model';
 
 		/**
 		 * Le type du post

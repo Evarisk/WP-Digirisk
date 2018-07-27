@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion du déroulement de l'intervention du quart d'heure sécurité.
  */
-class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
+class Causerie_Intervention_Page_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Constructeur obligatoire pour Singleton_Util.
@@ -44,7 +44,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->parent_id ), true );
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
 			'final_causerie' => $final_causerie,
 			'main_causerie'  => $main_causerie,
 			'all_signed'     => $this->check_all_signed( $final_causerie ),
@@ -97,7 +97,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$causerie = Causerie_Intervention_Class::g()->add_participant( $causerie, $former_id, true );
 
 		// Passes à l'étape suivante.
-		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION;
+		$causerie->current_step = \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION;
 
 		return Causerie_Intervention_Class::g()->update( $causerie );
 	}
@@ -115,7 +115,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * @return Causerie_Intervention_Model           L'objet Causerie_Intervention_Model avec la donnée current_step modifiée.
 	 */
 	public function step_slider( $causerie ) {
-		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
+		$causerie->current_step = \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
 
 		return Causerie_Intervention_Class::g()->update( $causerie );
 	}
@@ -150,7 +150,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		Causerie_Class::g()->update( $causerie );
 
-		$causerie_intervention->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
+		$causerie_intervention->current_step = \eoxia001\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->date_end = current_time( 'mysql' );
 

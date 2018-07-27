@@ -9,13 +9,13 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Comment_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Comment_Class' ) ) {
 	/**
 	 * Gestion des commentaires (POST, PUT, GET, DELETE)
 	 */
@@ -25,7 +25,7 @@ if ( ! class_exists( '\eoxia\Comment_Class' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $model_name = '\eoxia\Comment_Model';
+		protected $model_name = '\eoxia001\Comment_Model';
 
 		/**
 		 * La clé principale pour enregistrer les meta données.

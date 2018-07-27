@@ -71,7 +71,7 @@ class Risk_Shortcode {
 			} );
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/list', array(
 			'risks' => $risks,
 			'risk_id' => $risk_id,
 		) );

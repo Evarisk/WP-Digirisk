@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les onglets de DigiRisk.
  */
-class Tab_Class extends \eoxia\Singleton_Util {
+class Tab_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -51,7 +51,7 @@ class Tab_Class extends \eoxia\Singleton_Util {
 		$title .= ' ' . $element->title;
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'tab', 'content', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'tab', 'content', array(
 			'title'          => $title,
 			'element_id'     => $element_id,
 			'tab_to_display' => $tab_to_display,

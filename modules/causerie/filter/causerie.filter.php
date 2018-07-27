@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les filtres des causeries
  */
-class Sheet_Causerie_Filter extends \eoxia\Singleton_Util {
+class Sheet_Causerie_Filter extends \eoxia001\Singleton_Util {
 	protected function construct() {}
 
 	/**

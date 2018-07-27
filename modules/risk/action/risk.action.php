@@ -72,7 +72,7 @@ class Risk_Action {
 				$risk->parent_group    = Society_Class::g()->show_by_type( $risk->parent_workunit->parent_id );
 			}
 
-			\eoxia\View_Util::exec( 'digirisk', 'risk', '/page/item-edit', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'risk', '/page/item-edit', array(
 				'risk' => $risk,
 			) );
 			$template = ob_get_clean();
@@ -85,7 +85,7 @@ class Risk_Action {
 				'id' => $risk->id,
 			), true );
 
-			\eoxia\View_Util::exec( 'digirisk', 'setting', '/preset/item', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'setting', '/preset/item', array(
 				'danger' => $risk,
 			) );
 			$template = ob_get_clean();
@@ -166,7 +166,7 @@ class Risk_Action {
 		$risk = $risk[0];
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'risk',

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Ajoutes le shortcode digi_navigation
  */
-class Navigation_Shortcode extends \eoxia\Singleton_Util {
+class Navigation_Shortcode extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Initialise le shortcode digi_navigation

@@ -9,18 +9,18 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Config_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Config_Util' ) ) {
 
 	/**
 	 * Gestion de l'objet Config_Util::$init.
 	 */
-	class Config_Util extends \eoxia\Singleton_Util {
+	class Config_Util extends \eoxia001\Singleton_Util {
 
 		/**
 		 * Un tableau contenant toutes les configurations des fichies config.json
@@ -30,7 +30,7 @@ if ( ! class_exists( '\eoxia\Config_Util' ) ) {
 		public static $init = array();
 
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @return void nothing
 		 */

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Classe gérant le boot de l'application DigiRisk.
  * Appelle la vue permettant d'afficher la navigation
  */
-class Digirisk_Class extends \eoxia\Singleton_Util {
+class Digirisk_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -57,7 +57,7 @@ class Digirisk_Class extends \eoxia\Singleton_Util {
 	 * @return string|object
 	 */
 	public function get_patch_note() {
-		$patch_note_url = 'https://www.evarisk.com/wp-json/eoxia/v1/change_log/' . \eoxia\Config_Util::$init['digirisk']->version;
+		$patch_note_url = 'https://www.evarisk.com/wp-json/eoxia/v1/change_log/' . \eoxia001\Config_Util::$init['digirisk']->version;
 
 		$json = wp_remote_get( $patch_note_url, array(
 			'headers' => array(

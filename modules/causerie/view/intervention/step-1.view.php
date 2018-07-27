@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
 					</div>
 					<?php
-					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+					\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 						'action' => 'causerie_save_signature',
 					) );
 					?>

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<?php
 	if ( ! empty( $list_tab[ $type ] ) ) :
 		foreach ( $list_tab[ $type ] as $key => $element ) :
-			\eoxia\View_Util::exec( 'digirisk', 'tab', 'item-' . $element['type'], array( 'display' => $display, 'id' => $id, 'key' => $key, 'element' => $element ) );
+			\eoxia001\View_Util::exec( 'digirisk', 'tab', 'item-' . $element['type'], array( 'display' => $display, 'id' => $id, 'key' => $key, 'element' => $element ) );
 		endforeach;
 	endif; ?>
 </ul>

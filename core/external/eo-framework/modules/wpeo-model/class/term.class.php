@@ -9,11 +9,11 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( '\eoxia\Term_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Term_Class' ) ) {
 	/**
 	 * Gestion des termes (POST, PUT, GET, DELETE)
 	 */

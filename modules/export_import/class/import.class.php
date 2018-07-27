@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion de l'importation des modèles
  */
-class Import_Class extends \eoxia\Singleton_Util {
+class Import_Class extends \eoxia001\Singleton_Util {
 	/**
 	 * La clé courante pour l'élément
 	 *
@@ -89,12 +89,12 @@ class Import_Class extends \eoxia\Singleton_Util {
 		), true );
 
 		if ( ! empty( $society->id ) ) {
-			\eoxia\LOG_Util::log( 'Utilisation société existante ' . wp_json_encode( $society ), 'digirisk' );
+			\eoxia001\LOG_Util::log( 'Utilisation société existante ' . wp_json_encode( $society ), 'digirisk' );
 			return $society;
 		}
 
 		$society = Society_Class::g()->update( $data_json );
-		\eoxia\LOG_Util::log( 'Création d\'une société ' . wp_json_encode( $society ), 'digirisk' );
+		\eoxia001\LOG_Util::log( 'Création d\'une société ' . wp_json_encode( $society ), 'digirisk' );
 
 		return $society;
 	}
@@ -118,17 +118,17 @@ class Import_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function create_groupment( &$groupment_json, $groupment = null ) {
-		\eoxia\LOG_Util::log( 'DEBUT - create_groupment', 'digirisk' );
+		\eoxia001\LOG_Util::log( 'DEBUT - create_groupment', 'digirisk' );
 		if ( 0 !== $groupment_json['parent_id'] ) {
 			if ( empty( $groupment_json['id'] ) ) {
 				if ( $groupment ) {
 					$groupment_json['parent_id'] = $groupment->id;
 				}
 
-				\eoxia\LOG_Util::log( 'Création d\'un groupement avec les données:' . wp_json_encode( $groupment_json ), 'digirisk' );
+				\eoxia001\LOG_Util::log( 'Création d\'un groupement avec les données:' . wp_json_encode( $groupment_json ), 'digirisk' );
 				$groupment            = Group_Class::g()->update( $groupment_json );
 				$groupment_json['id'] = $groupment->id;
-				\eoxia\LOG_Util::log( 'Groupement créé: ' . wp_json_encode( $groupment ), 'digirisk' );
+				\eoxia001\LOG_Util::log( 'Groupement créé: ' . wp_json_encode( $groupment ), 'digirisk' );
 
 				$this->update_json_file();
 				$this->check_index();
@@ -156,7 +156,7 @@ class Import_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\LOG_Util::log( 'fin - create_groupment', 'digirisk' );
+		\eoxia001\LOG_Util::log( 'fin - create_groupment', 'digirisk' );
 	}
 
 	/**
@@ -298,9 +298,9 @@ class Import_Class extends \eoxia\Singleton_Util {
 	public function create_danger_category( $risk, &$danger_category_json ) {
 		if ( empty( $danger_category_json['id'] ) ) {
 
-			\eoxia\LOG_Util::log( 'Création de la catégorie de risque pour le risk ' . wp_json_encode( $risk ) . ' avec les données :' . wp_json_encode( $danger_category_json ), 'digirisk' );
+			\eoxia001\LOG_Util::log( 'Création de la catégorie de risque pour le risk ' . wp_json_encode( $risk ) . ' avec les données :' . wp_json_encode( $danger_category_json ), 'digirisk' );
 			$danger_category = Risk_Category_Class::g()->update( $danger_category_json );
-			\eoxia\LOG_Util::log( 'Utilises la catégorie de risque suivante: ' . wp_json_encode( $danger_category ), 'digirisk' );
+			\eoxia001\LOG_Util::log( 'Utilises la catégorie de risque suivante: ' . wp_json_encode( $danger_category ), 'digirisk' );
 			$risk->taxonomy['digi-category-risk'][] = $danger_category->id;
 			$risk                                   = Risk_Class::g()->update( $risk );
 			$danger_category_json['id']             = $danger_category->id;

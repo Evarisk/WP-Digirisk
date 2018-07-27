@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <tr class="risk-row <?php echo esc_attr( 'method-' . $risk->evaluation_method->slug ); ?>" data-id="<?php echo esc_attr( $risk->id ); ?>">
 	<td data-title="Ref." class="padding">
 		<!-- La popup pour les actions correctives -->
-		<?php \eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
+		<?php \eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
 
 		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
 	</td>

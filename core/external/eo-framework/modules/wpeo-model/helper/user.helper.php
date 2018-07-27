@@ -5,7 +5,7 @@
  * @package Task manager\Plugin
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

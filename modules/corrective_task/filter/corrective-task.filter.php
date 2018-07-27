@@ -111,7 +111,7 @@ class Corrective_Task_Filter {
 		), true );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'move-to', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'move-to', array(
 			'task' => $task,
 		) );
 

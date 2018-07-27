@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
 			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'accident', 'document/list-item', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'accident', 'document/list-item', array(
 				'element' => $element,
 			) );
 			?>

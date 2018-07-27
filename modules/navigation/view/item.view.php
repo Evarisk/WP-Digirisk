@@ -15,11 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>"
+<li class="unit <?php echo ( $establishment->id === $selected_establishment_id ) ? 'active' : ''; echo ( \eoxia001\Post_Util::is_parent( $establishment->id, $selected_establishment_id ) ) ? 'toggled' : ''; ?>"
 	data-id="<?php echo esc_attr( $establishment->id ); ?>">
 	<div class="unit-container">
 
-		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type && \eoxia\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
+		<?php if ( Workunit_Class::g()->get_post_type() !== $establishment->type && \eoxia001\Post_Util::have_child( $establishment->id, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
 			<div class="toggle-unit"><span class="icon"></span></div>
 		<?php else : ?>
 			<div class="spacer"><span class="icon"></span></div>

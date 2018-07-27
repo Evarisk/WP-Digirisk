@@ -11,7 +11,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class evaluation_method_class extends \eoxia\term_class {
+class evaluation_method_class extends \eoxia001\term_class {
 	protected $model_name   = '\digi\evaluation_method_model';
 	protected $taxonomy    	= 'digi-method';
 	protected $meta_key    	= '_wpdigi_method';

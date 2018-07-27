@@ -33,8 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</tbody>
 
 	<tfoot>
-		<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
+		<?php \eoxia001\View_Util::exec( 'digirisk', 'duer', 'item-edit', array( 'element' => $element, 'element_id' => $element_id ) ); ?>
 	</tfoot>
 </table>
 
-<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'popup' ); ?>
+<?php \eoxia001\View_Util::exec( 'digirisk', 'duer', 'popup' ); ?>

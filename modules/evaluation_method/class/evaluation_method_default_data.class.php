@@ -11,14 +11,14 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class evaluation_method_default_data_class extends \eoxia\Singleton_Util {
+class evaluation_method_default_data_class extends \eoxia001\Singleton_Util {
 	protected function construct() {}
 
 	/**
 	* Créer les méthodes d'évaluation par défaut
 	*/
 	public function create( $exclude = array() ) {
-		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
+		$file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
 		if ( !empty( $data ) ) {

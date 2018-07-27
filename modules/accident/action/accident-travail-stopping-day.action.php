@@ -64,7 +64,7 @@ class Accident_Travail_Stopping_Day_Action {
 		$accident = Accident_Class::g()->update( $accident );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
 			'accident' => $accident,
 		) );
 		wp_send_json_success( array(

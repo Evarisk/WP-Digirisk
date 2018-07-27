@@ -39,7 +39,7 @@ class ZIP_Filter {
 		if ( ! empty( $element->zip_path ) ) {
 			ob_start();
 			$zip_url = ZIP_Class::g()->get_zip_url( $element->zip_path );
-			\eoxia\View_Util::exec( 'digirisk', 'zip', 'download-button', array( 'zip_url' => $zip_url ) );
+			\eoxia001\View_Util::exec( 'digirisk', 'zip', 'download-button', array( 'zip_url' => $zip_url ) );
 			$content .= ob_get_clean();
 		}
 		return $content;

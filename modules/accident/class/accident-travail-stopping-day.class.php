@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les accidents "stopping days"
  */
-class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
+class Accident_Travail_Stopping_Day_Class extends \eoxia001\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -120,7 +120,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 					);
 
 					if ( ! empty( $_POST['document'] ) ) { // WPCS: CSRF ok.
-						\eoxia\WPEO_Upload_Class::g()->associate_file( $associate_file_args );
+						\eoxia001\WPEO_Upload_Class::g()->associate_file( $associate_file_args );
 					}
 				}
 			}

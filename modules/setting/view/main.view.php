@@ -28,16 +28,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 			<div id="digi-general" class="tab-content <?php echo ( 'digi-general' === $default_tab ) ? '' : 'hidden'; ?>">
-				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'general/main' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'setting', 'general/main' ); ?>
 			</div>
 
 			<div id="digi-capability" class="tab-content digirisk-wrap <?php echo ( 'digi-capability' === $default_tab ) ? '' : 'hidden'; ?>">
-				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/main' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/main' ); ?>
 			</div>
 
 			<div id="digi-accronym" class="tab-content <?php echo ( 'digi-accronym' === $default_tab ) ? '' : 'hidden'; ?>">
 				<?php
-				\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/form', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'setting', 'accronym/form', array(
 					'list_accronym' => $list_accronym,
 				) );
 				?>
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div id="digi-danger-preset" class="tab-content digirisk-wrap <?php echo ( 'digi-danger-preset' === $default_tab ) ? '' : 'hidden'; ?>">
 					<?php
-					\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/main', array(
+					\eoxia001\View_Util::exec( 'digirisk', 'setting', 'preset/main', array(
 						'dangers_preset' => $dangers_preset,
 					) );
 					?>

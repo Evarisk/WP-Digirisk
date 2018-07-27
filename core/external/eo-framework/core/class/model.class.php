@@ -10,20 +10,20 @@
  * @todo: Est-ce utilisé ?
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Model_Util' ) ) {
+if ( ! class_exists( '\eoxia001\Model_Util' ) ) {
 	/**
 	 * Méthodes utiles pour WPEO_Model.
 	 */
-	class Model_Util extends \eoxia\Singleton_Util {
+	class Model_Util extends \eoxia001\Singleton_Util {
 		public static $namespace = '';
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @return void nothing
 		 */

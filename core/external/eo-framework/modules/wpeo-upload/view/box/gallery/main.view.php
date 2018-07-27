@@ -9,7 +9,7 @@
  * @package EO-Framework/WPEO-Upload
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -50,9 +50,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Corps -->
 		<div class="modal-content">
-			<?php require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/list.view.php' ); ?>
-			<?php require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/navigation-arrow.view.php' ); ?>
-			<?php require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/actions.view.php' ); ?>
+			<?php require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/list.view.php' ); ?>
+			<?php require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/navigation-arrow.view.php' ); ?>
+			<?php require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/actions.view.php' ); ?>
 		</div>
 
 		<!-- Footer -->

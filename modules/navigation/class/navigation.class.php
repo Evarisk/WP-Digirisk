@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Appelle la vue permettant d'afficher la navigation
  */
-class Navigation_Class extends \eoxia\Singleton_Util {
+class Navigation_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -49,7 +49,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'main', array(
 			'selected_establishment_id' => $selected_establishment_id,
 			'establishments' => $establishments,
 			'society' => $society,
@@ -77,7 +77,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 				'orderby' => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
 			) );
 
-			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
+			\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'list', array(
 				'id' => $id,
 				'selected_establishment_id' => $selected_establishment_id,
 				'establishments' => $establishments,
@@ -112,7 +112,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array( 'selected_groupment_id' => $selected_groupment_id, 'groupments' => $groupments ) );
 	}
 
 	/**
@@ -149,7 +149,7 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			$workunit_selected_id = (int) $_POST['workunit_id'];
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'navigation', 'list', array( 'display_create_workunit_form' => $display_create_workunit_form, 'workunit_selected_id' => $workunit_selected_id, 'workunits' => $workunits, 'parent_id' => $parent_id ) );
 	}
 }
 

@@ -9,20 +9,20 @@
  * @package EO_Framework
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Core_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Core_Class' ) ) {
 
 	/**
 	 * La classe principale de EO-Framework
 	 */
-	class Core_Class extends \eoxia\Singleton_Util {
+	class Core_Class extends \eoxia001\Singleton_Util {
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 1.0.0
 		 * @version 1.0.0
@@ -40,11 +40,11 @@ if ( ! class_exists( '\eoxia\Core_Class' ) ) {
 		 */
 		public function get_localize_script_data() {
 			ob_start();
-			require( \eoxia\Config_Util::$init['eo-framework']->path . 'core/view/modal.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->path . 'core/view/modal.view.php' );
 			$view_modal = ob_get_clean();
 
 			ob_start();
-			require( \eoxia\Config_Util::$init['eo-framework']->path . 'core/view/modal-buttons.view.php' );
+			require( \eoxia001\Config_Util::$init['eo-framework']->path . 'core/view/modal-buttons.view.php' );
 			$view_modal_buttons = ob_get_clean();
 
 			$data = array(

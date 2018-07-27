@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <tbody>
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
-			<?php \eoxia\View_Util::exec( 'digirisk', 'sheet_groupment', 'list-item', array( 'element' => $element ) ); ?>
+			<?php \eoxia001\View_Util::exec( 'digirisk', 'sheet_groupment', 'list-item', array( 'element' => $element ) ); ?>
 		<?php endforeach; ?>
 	<?php endif; ?>
 </tbody>

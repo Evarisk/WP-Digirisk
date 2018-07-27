@@ -9,20 +9,20 @@
  * @package WPEO_Util
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\View_Util' ) ) {
+if ( ! class_exists( '\eoxia001\View_Util' ) ) {
 	/**
 	 * Gestion des vues pour les templates.
 	 */
 	class View_Util extends Singleton_Util {
 
 		/**
-		 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
+		 * Le constructeur obligatoirement pour utiliser la classe \eoxia001\Singleton_Util
 		 *
 		 * @since 0.1.0
 		 * @version 1.0.0

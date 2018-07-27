@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return void
  */
-class Setting_Class extends \eoxia\Singleton_Util {
+class Setting_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * La limite des utilisateurs de la page ="digirisk-setting"
@@ -51,12 +51,12 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 * @version 6.2.9
 	 */
 	public function init_option() {
-		$file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->setting->path . 'asset/json/default.json' );
+		$file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->setting->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content, true );
-		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option );
 
 		if ( empty( $list_accronym ) ) {
-			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, json_encode( $data ) );
+			update_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option, json_encode( $data ) );
 		}
 	}
 
@@ -68,10 +68,10 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 */
 	public function init_preset_danger() {
 		global $wpdb;
-		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia001\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			$preset_danger_installed = get_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
+			$preset_danger_installed = get_option( \eoxia001\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
 
 			if ( ! $preset_danger_installed ) {
 				$danger_category_list = Risk_Category_Class::g()->get();
@@ -103,7 +103,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 					}
 				}
 
-				update_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
+				update_option( \eoxia001\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
 			}
 		}
 	}
@@ -119,7 +119,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	public function display_role_has_cap() {
 		$role_subscriber = get_role( 'subscriber' );
 
-		\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/has-cap', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/has-cap', array(
 			'role_subscriber' => $role_subscriber,
 		) );
 	}
@@ -165,7 +165,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/list', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/list', array(
 			'users' => $users,
 			'has_capacity_in_role' => $has_capacity_in_role,
 			'number_page' => $number_page,

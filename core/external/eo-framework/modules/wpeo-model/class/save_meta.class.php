@@ -9,13 +9,13 @@
  * @package WPEO_Model
  */
 
-namespace eoxia;
+namespace eoxia001;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia\Save_Meta_Class' ) ) {
+if ( ! class_exists( '\eoxia001\Save_Meta_Class' ) ) {
 	/**
 	 * Gestion des meta
 	 */

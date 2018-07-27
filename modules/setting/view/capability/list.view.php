@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $users ) ) :
 			foreach ( $users as $user ) :
-				\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/list-item', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/list-item', array(
 					'user' => $user,
 					'has_capacity_in_role' => $has_capacity_in_role,
 				) );
