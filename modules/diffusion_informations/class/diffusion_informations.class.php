@@ -70,6 +70,21 @@ class Diffusion_Informations_Class extends Document_Class {
 	protected $post_type_name = 'Diffusion information';
 
 	/**
+	 * Tableau contenant les messages à afficher dans la vue de la génération de ce document.
+	 *
+	 * @since 7.0.0
+	 */
+	protected $messages = array();
+
+	/**
+	 * Initialises les messages d'information pour la génération de l'ODT.
+	 */
+	protected function construct() {
+		$this->message['empty']    = __( 'Aucun diffusion d\'information générés', 'digirisk' );
+		$this->message['generate'] = __( 'Cliquer pour générer un diffusion d\'information', 'digirisk' );
+	}
+
+	/**
 	 * Le formulaire pour générer une diffusion d'information
 	 *
 	 * @since   6.2.10

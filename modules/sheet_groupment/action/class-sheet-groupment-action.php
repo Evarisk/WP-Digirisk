@@ -46,6 +46,8 @@ class Sheet_Groupment_Action {
 
 		$response = Sheet_Groupment_Class::g()->prepare_document( $society_id );
 
+		Sheet_Groupment_Class::g()->create_document( $response['document']->data['id'] );
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'sheet_groupment',

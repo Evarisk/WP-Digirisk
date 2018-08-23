@@ -62,10 +62,12 @@ class DUER_Model extends Document_Model {
 					'type' => 'wpeo_date',
 				),
 				'dateDebutAudit' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'wpeo_date',
+					'context' => array( 'GET' ),
 				),
 				'dateFinAudit' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'wpeo_date',
+					'context' => array( 'GET' ),
 				),
 				'telephone' => array(
 					'type' => 'string',
@@ -109,19 +111,19 @@ Dans ce document vous trouverez:
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq' => array(
+				'risk1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq48' => array(
+				'risk2' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq51' => array(
+				'risk3' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq80' => array(
+				'risk4' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
@@ -129,19 +131,19 @@ Dans ce document vous trouverez:
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq' => array(
+				'planDactionRisq1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq48' => array(
+				'planDactionRisq2' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq51' => array(
+				'planDactionRisq3' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq80' => array(
+				'planDactionRisq4' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),

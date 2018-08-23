@@ -35,10 +35,20 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * @param integer $id L'ID de la causerie.
 	 */
 	public function display_single( $id ) {
-		global $eo_search;
-
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
+
+		$this->register_search();
+
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
+			'final_causerie' => $final_causerie,
+			'main_causerie'  => $main_causerie,
+			'all_signed'     => $this->check_all_signed( $final_causerie ),
+		) );
+	}
+
+	public function register_search() {
+		global $eo_search;
 
 		$args_causerie_former = array(
 			'type'  => 'user',
@@ -47,11 +57,12 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		$eo_search->register_search( 'causerie_former', $args_causerie_former );
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
-			'final_causerie' => $final_causerie,
-			'main_causerie'  => $main_causerie,
-			'all_signed'     => $this->check_all_signed( $final_causerie ),
-		) );
+		$args_causerie_participants = array(
+			'type'  => 'user',
+			'name'  => 'participant_id',
+		);
+
+		$eo_search->register_search( 'causerie_participants', $args_causerie_participants );
 	}
 
 	/**
@@ -98,9 +109,9 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$causerie = Causerie_Intervention_Class::g()->add_participant( $causerie, $former_id, true );
 
 		// Passes à l'étape suivante.
-		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION;
+		$causerie->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION;
 
-		return Causerie_Intervention_Class::g()->update( $causerie );
+		return Causerie_Intervention_Class::g()->update( $causerie->data );
 	}
 
 	/**
@@ -115,9 +126,9 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * @return Causerie_Intervention_Model           L'objet Causerie_Intervention_Model avec la donnée current_step modifiée.
 	 */
 	public function step_slider( $causerie ) {
-		$causerie->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
+		$causerie->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
 
-		return Causerie_Intervention_Class::g()->update( $causerie );
+		return Causerie_Intervention_Class::g()->update( $causerie->data );
 	}
 
 	/**
@@ -140,22 +151,22 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * ainsi que date_end.
 	 */
 	public function step_participants( $causerie_intervention ) {
-		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_intervention->parent_id ), true );
+		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_intervention->data['parent_id'] ), true );
 
-		$causerie->number_time_realized++;
-		$causerie->number_formers++;
-		$causerie->number_participants = count( $causerie_intervention->participants );
-		$causerie->last_date_realized  = current_time( 'mysql' );
+		$causerie->data['number_time_realized']++;
+		$causerie->data['number_formers']++;
+		$causerie->data['number_participants'] = count( $causerie_intervention->data['participants'] );
+		$causerie->data['last_date_realized']  = current_time( 'mysql' );
 
-		Causerie_Class::g()->update( $causerie );
+		Causerie_Class::g()->update( $causerie->data );
 
-		$causerie_intervention->current_step = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
+		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
-		$causerie_intervention->date_end = current_time( 'mysql' );
+		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
 
-		Sheet_Causerie_Intervention_Class::g()->generate( $causerie_intervention->id );
+		// Sheet_Causerie_Intervention_Class::g()->generate( $causerie_intervention->data['id'] );
 
-		return Causerie_Intervention_Class::g()->update( $causerie_intervention );
+		return Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 	}
 }
 

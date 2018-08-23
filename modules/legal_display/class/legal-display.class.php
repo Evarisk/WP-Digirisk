@@ -71,6 +71,20 @@ class Legal_Display_Class extends Document_Class {
 	protected $post_type_name = 'Affichages légal';
 
 	/**
+	 * Tableau contenant les messages à afficher dans la vue de la génération de ce document.
+	 *
+	 * @since 7.0.0
+	 */
+	protected $messages = array();
+
+	/**
+	 * Initialises les messages d'information pour la génération de l'ODT.
+	 */
+	protected function construct() {
+		$this->message['empty']    = __( 'Aucun affichage légal générés', 'digirisk' );
+	}
+
+	/**
 	 * Le formulaire pour générer un affichage légal
 	 *
 	 * @since 6.0.0

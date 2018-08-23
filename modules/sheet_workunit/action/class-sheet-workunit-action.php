@@ -46,6 +46,8 @@ class Sheet_Workunit_Action {
 
 		$response = Sheet_Workunit_Class::g()->prepare_document( $society_id );
 
+		Sheet_Workunit_Class::g()->create_document( $response['document']->data['id'] );
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'sheet_workunit',

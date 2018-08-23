@@ -35,12 +35,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		<?php endforeach; ?>
 	<?php else : ?>
 		<tr>
-			<td colspan="3">
-				<?php
-				// Translators: Aucun document pour le moment.
-				printf( esc_html__( 'Aucun %s pour le moment', 'digirisk' ), esc_html( 'test' ) );
-				?>
-			</td>
+			<td class="padding" colspan="3"><?php echo esc_html( $_this->message['empty'] ); ?></td>
 		</tr>
 	<?php endif; ?>
 </tbody>

@@ -49,7 +49,7 @@ class Causerie_Filter extends \eoxia\Singleton_Util {
 	public function get_full_causerie( $object, $args ) {
 		if ( ! empty( $object->data['id'] ) ) {
 			$object->data['risk_category'] = Risk_Category_Class::g()->get( array(
-				'id' => max( $object->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ),
+				'id' => end( $object->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ),
 			), true );
 
 			$object->data['exclude_user_ids'] = '';

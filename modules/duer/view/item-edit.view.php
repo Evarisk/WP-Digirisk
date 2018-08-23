@@ -19,14 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"></td>
 	<td class="padding">
 		<div class="group-date form-element">
-			<input type="hidden" class="mysql-date" name="dateDebutAudit" value="" />
-			<input type="text" class="date" placeholder="<?php esc_html( current_time( 'mysql' ) ); ?>" value="" />
+			<input type="hidden" class="mysql-date" name="dateDebutAudit" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
+			<input type="text" class="date" value="<?php echo esc_attr( $element->data['document_meta']['dateDebutAudit']['rendered']['date'] ); ?>" />
 		</div>
 	</td>
 	<td class="padding">
 		<div class="group-date form-element">
-			<input type="hidden" class="mysql-date" name="dateFinAudit" value="" />
-			<input type="text" class="date" placeholder="<?php esc_html( current_time( 'mysql' ) ); ?>" value="" />
+			<input type="hidden" class="mysql-date" name="dateFinAudit" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
+			<input type="text" class="date" value="<?php echo esc_attr( $element->data['document_meta']['dateDebutAudit']['rendered']['date'] ); ?>" />
 		</div>
 	</td>
 

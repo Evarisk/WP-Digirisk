@@ -67,15 +67,15 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 	 *
 	 * @return array                  Les données pour le registre des AT bénins modifié.
 	 */
-	public function callback_digi_document_data( $data, $society ) {
-		$address = Society_Class::g()->get_address( $society );
+	public function callback_digi_document_data( $data, $args ) {
+		$address = Society_Class::g()->get_address( $args['parent'] );
 
 		$data = array(
-			'reference'   => $society->data['unique_identifier'],
-			'nom'         => $society->data['title'],
-			'description' => $society->data['content'],
+			'reference'   => $args['parent']->data['unique_identifier'],
+			'nom'         => $args['parent']->data['title'],
+			'description' => $args['parent']->data['content'],
 			'adresse'     => $address->data['address'],
-			'telephone'   => ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '',
+			'telephone'   => ! empty( $args['parent']->data['contact']['phone'] ) ? end( $args['parent']->data['contact']['phone'] ) : '',
 			'codePostal'  => $address->data['postcode'],
 			'ville'       => $address->data['town'],
 		);

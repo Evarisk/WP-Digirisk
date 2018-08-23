@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <tr>
 	<td class="padding w50"><strong><?php echo esc_html( $document->data['unique_identifier'] ); ?></strong></td>
-	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
-	<td class="padding"><?php echo esc_html( 'test' ); ?></td>
+	<td class="padding"><?php echo esc_html( $document->data['document_meta']['dateDebutAudit']['rendered']['date'] ); ?></td>
+	<td class="padding"><?php echo esc_html( $document->data['document_meta']['dateFinAudit']['rendered']['date'] ); ?></td>
 
 	<td class="padding padding text-center">
 		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( 'test' ); // WPCS: XSS is ok. ?></span>
@@ -118,17 +118,25 @@ defined( 'ABSPATH' ) || exit; ?>
 
 	<td>
 		<div class="action grid-layout w2">
-			<?php if ( ! empty( $document->data['link'] ) ) : ?>
+			<?php if ( ! empty( $document->data['file_generated'] ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
 					href="<?php echo esc_attr( $document->data['link'] ); ?>">
 					<i class="icon fas fa-file-alt"></i>
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
+				<span class="action-attribute button grey h50 wpeo-tooltip-event"
+					data-id="<?php echo esc_attr( $document->data['id'] ); ?>"
+					data-model="<?php echo esc_attr( $document->get_class() ); ?>"
+					data-action="generate_document"
+					data-color="red"
+					data-direction="left"
+					aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
 					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
+
+			<?php echo apply_filters( 'digi_list_duer_single_item_action_end', '', $document ); ?>
 		</div>
 	</td>
 </tr>

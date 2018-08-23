@@ -78,6 +78,21 @@ class Sheet_Groupment_Class extends Document_Class {
 	 * @var string
 	 */
 	protected $odt_name = 'fiche_de_groupement';
+
+	/**
+	 * Tableau contenant les messages à afficher dans la vue de la génération de ce document.
+	 *
+	 * @since 7.0.0
+	 */
+	protected $messages = array();
+
+	/**
+	 * Initialises les messages d'information pour la génération de l'ODT.
+	 */
+	protected function construct() {
+		$this->message['empty']    = __( 'Aucune fiche de groupement', 'digirisk' );
+		$this->message['generate'] = __( 'Cliquer pour générer une fiche de groupement', 'digirisk' );
+	}
 }
 
 Sheet_Groupment_Class::g();

@@ -78,6 +78,21 @@ class Sheet_Workunit_Class extends Document_Class {
 	 * @var string
 	 */
 	protected $odt_name = 'fiche_de_poste';
+
+	/**
+	 * Tableau contenant les messages à afficher dans la vue de la génération de ce document.
+	 *
+	 * @since 7.0.0
+	 */
+	protected $messages = array();
+
+	/**
+	 * Initialises les messages d'information pour la génération de l'ODT.
+	 */
+	protected function construct() {
+		$this->message['empty']    = __( 'Aucune fiche de poste', 'digirisk' );
+		$this->message['generate'] = __( 'Cliquer pour générer une fiche de poste', 'digirisk' );
+	}
 }
 
 Sheet_Workunit_Class::g();

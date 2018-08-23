@@ -24,6 +24,7 @@ if ( ! empty( $evaluations_method ) ) :
 			data-class="evaluation-method modal-risk-<?php echo esc_attr( $risk_id ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_modal_method_evaluation' ) ); ?>"
 			data-id="<?php echo esc_attr( $evaluation_method->data['id'] ); ?>"
+			wpeo-before-cb="digirisk/evaluationMethodEvarisk/fillVariables"
 			data-risk-id="<?php echo esc_attr( $risk_id ); ?>"><i class="icon fa fa-cog"></i></li>
 		<?php
 	endforeach;

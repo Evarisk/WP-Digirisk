@@ -46,22 +46,25 @@ class Diffusion_Informations_Action {
 		$element = Society_Class::g()->show_by_type( $parent_id );
 
 		$data = array(
-			'parent_id'     => $parent_id,
-			'status'        => 'inherit',
-			'document_meta' => array(
-				'delegues_du_personnels_date'             => ! empty( $_POST['delegues_du_personnels_date'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_date'] ) : '',
-				'delegues_du_personnels_titulaires'       => ! empty( $_POST['delegues_du_personnels_titulaires'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_titulaires'] ) : '',
-				'delegues_du_personnels_suppleants'       => ! empty( $_POST['delegues_du_personnels_suppleants'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_suppleants'] ) : '',
-				'membres_du_comite_entreprise_date'       => ! empty( $_POST['membres_du_comite_entreprise_date'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_date'] ) : '',
-				'membres_du_comite_entreprise_titulaires' => ! empty( $_POST['membres_du_comite_entreprise_titulaires'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_titulaires'] ) : '',
-				'membres_du_comite_entreprise_suppleants' => ! empty( $_POST['membres_du_comite_entreprise_suppleants'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_suppleants'] ) : '',
-			),
+			'parent_id'                               => $parent_id,
+			'status'                                  => 'inherit',
+			'delegues_du_personnels_date'             => ! empty( $_POST['delegues_du_personnels_date'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_date'] ) : '',
+			'delegues_du_personnels_titulaires'       => ! empty( $_POST['delegues_du_personnels_titulaires'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_titulaires'] ) : '',
+			'delegues_du_personnels_suppleants'       => ! empty( $_POST['delegues_du_personnels_suppleants'] ) ? sanitize_text_field( $_POST['delegues_du_personnels_suppleants'] ) : '',
+			'membres_du_comite_entreprise_date'       => ! empty( $_POST['membres_du_comite_entreprise_date'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_date'] ) : '',
+			'membres_du_comite_entreprise_titulaires' => ! empty( $_POST['membres_du_comite_entreprise_titulaires'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_titulaires'] ) : '',
+			'membres_du_comite_entreprise_suppleants' => ! empty( $_POST['membres_du_comite_entreprise_suppleants'] ) ? sanitize_text_field( $_POST['membres_du_comite_entreprise_suppleants'] ) : '',
 		);
 
-		Diffusion_Informations_Class::g()->update( $data );
+		$diffusion_information = Diffusion_Informations_Class::g()->update( $data );
 
-		$response = Diffusion_Informations_A3_Class::g()->prepare_document( $parent_id );
-		$response = Diffusion_Informations_A4_Class::g()->prepare_document( $parent_id );
+		$response = Diffusion_Informations_A3_Class::g()->prepare_document( $parent_id, array(
+			'diffusion_information' => $diffusion_information,
+		) );
+
+		$response = Diffusion_Informations_A4_Class::g()->prepare_document( $parent_id, array(
+			'diffusion_information' => $diffusion_information,
+		) );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

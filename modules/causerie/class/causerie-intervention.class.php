@@ -157,9 +157,9 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	public function add_participant( $causerie_intervention, $user_id, $is_former = false ) {
 
 		if ( $is_former ) {
-			$causerie_intervention->former['user_id'] = $user_id;
+			$causerie_intervention->data['former']['user_id'] = $user_id;
 		} else {
-			$causerie_intervention->participants[ $user_id ] = array(
+			$causerie_intervention->data['participants'][ $user_id ] = array(
 				'user_id' => $user_id,
 			);
 		}
@@ -176,7 +176,6 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * correspondant à l'entrée de l'utilisateur $user_id.
 	 *
 	 * @since   6.6.0
-	 * @version 6.6.0
 	 *
 	 * @param Causerie_Intervention_Class $causerie_intervention Les données d'une causerie "intervention".
 	 * @param integer                     $user_id               ID de l'utilisateur pour associer la signature à la causerie "intervention".
@@ -194,11 +193,11 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->data['id'] );
 
 			if ( $is_former ) {
-				$causerie_intervention->former['signature_id']   = $file_id;
-				$causerie_intervention->former['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->data['former']['signature_id']   = $file_id;
+				$causerie_intervention->data['former']['signature_date'] = current_time( 'mysql' );
 			} else {
-				$causerie_intervention->participants[ $user_id ]['signature_id']   = $file_id;
-				$causerie_intervention->participants[ $user_id ]['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->data['participants'][ $user_id ]['signature_id']   = $file_id;
+				$causerie_intervention->data['participants'][ $user_id ]['signature_date'] = current_time( 'mysql' );
 			}
 		}
 

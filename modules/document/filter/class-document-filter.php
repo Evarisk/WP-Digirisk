@@ -71,23 +71,23 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		return $data;
 	}
 
-	public function fill_header( $data, $society ) {
-		$address = Society_Class::g()->get_address( $society );
+	public function fill_header( $data, $args ) {
+		$address = Society_Class::g()->get_address( $args['parent'] );
 
-		$data['reference']    = $society->data['unique_identifier'];
-		$data['nom']          = $society->data['title'];
+		$data['reference']    = $args['parent']->data['unique_identifier'];
+		$data['nom']          = $args['parent']->data['title'];
 		$data['adresse']      = $address->data['address'] . ' ' . $address->data['additional_address'];
 		$data['codePostal']   = $address->data['postcode'];
 		$data['ville']        = $address->data['town'];
-		$data['telephone']    = ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '';
-		$data['description']  = $society->data['content'];
+		$data['telephone']    = ! empty( $args['parent']->data['contact']['phone'] ) ? end( $args['parent']->data['contact']['phone'] ) : '';
+		$data['description']  = $args['parent']->data['content'];
 		$data['photoDefault'] = '';
 
 		return $data;
 	}
 
-	public function fill_risks( $data, $society ) {
-		$risks = Risk_Class::g()->get( array( 'post_parent' => $society->data['id'] ) );
+	public function fill_risks( $data, $args ) {
+		$risks = Risk_Class::g()->get( array( 'post_parent' => $args['parent']->data['id'] ) );
 
 		$data['risq80'] = array( 'type' => 'segment', 'value' => array() );
 		$data['risq51'] = array( 'type' => 'segment', 'value' => array() );
@@ -117,10 +117,10 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		return $data;
 	}
 
-	public function fill_evaluators( $data, $society ) {
+	public function fill_evaluators( $data, $args ) {
 		$data['utilisateursPresents'] = array( 'type' => 'segment', 'value' => array() );
 
-		$affecteds_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $society );
+		$affecteds_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $args['parent'] );
 
 		if ( ! empty( $affecteds_evaluator ) ) {
 			foreach ( $affecteds_evaluator as $evaluator_id => $evaluator_affectation_info ) {
@@ -142,10 +142,10 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		return $data;
 	}
 
-	public function fill_recommendations( $data, $society ) {
+	public function fill_recommendations( $data, $args ) {
 		$data['affectedRecommandation'] = array( 'type' => 'segment', 'value' => array() );
 
-		$recommendations = Recommendation::g()->get( array( 'post_parent' => $society->data['id'] ) );
+		$recommendations = Recommendation::g()->get( array( 'post_parent' => $args['parent']->data['id'] ) );
 
 		if ( ! empty( $recommendations ) ) {
 			foreach ( $recommendations as $recommendation ) {
@@ -154,7 +154,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 					'identifiantRecommandation' => $recommendation->data['unique_identifier'],
 					'recommandationIcon'        => Document_Util_Class::g()->get_picture( $recommendation->data['recommendation_category']->data['thumbnail_id'], 1 ),
 					'recommandationName'        => $recommendation->data['recommendation_category']->data['name'],
-					'recommandationComment'     => $recommendation->data['comment'][0]->data['content'],
+					'recommandationComment'     => ! empty( $recommendation->data['comment'][0] ) ? $recommendation->data['comment'][0]->data['content'] : '',
 				);
 			}
 		}

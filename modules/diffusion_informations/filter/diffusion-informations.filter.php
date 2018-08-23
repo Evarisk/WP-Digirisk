@@ -21,20 +21,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Diffusion_Informations_Filter {
 
 	/**
-	 * Utilises le filtre digi_tab
+	 * Initilises les filtres
+	 *
+	 * @since 6.4.0
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
 
-		add_filter( 'digi_diffusion_informations_A4_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
-		add_filter( 'digi_diffusion_informations_A3_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
+		add_filter( 'digi_diffusion_info_A4_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
+		add_filter( 'digi_diffusion_info_A3_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
 	}
 
 	/**
 	 * Ajoutes l'onglet diffusion informations dans la société.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
 	 *
 	 * @param  array   $list_tab Les onglets déjà présents.
 	 * @param  integer $id       L'ID de la société.
@@ -59,8 +60,18 @@ class Diffusion_Informations_Filter {
 	 *
 	 * @return array                  Les données pour le registre des AT bénins modifié.
 	 */
-	public function callback_digi_document_data( $data, $society ) {
+	public function callback_digi_document_data( $data, $args ) {
+		$diffusion_information = $args['diffusion_information'];
 
+		$data['delegues_du_personnels_date']       = $diffusion_information->data['delegues_du_personnels_date']['rendered']['date'];
+		$data['delegues_du_personnels_titulaires'] = $diffusion_information->data['delegues_du_personnels_titulaires'];
+		$data['delegues_du_personnels_suppleants'] = $diffusion_information->data['delegues_du_personnels_suppleants'];
+
+		$data['membres_du_comite_entreprise_date']       = $diffusion_information->data['membres_du_comite_entreprise_date']['rendered']['date'];
+		$data['membres_du_comite_entreprise_titulaires'] = $diffusion_information->data['membres_du_comite_entreprise_titulaires'];
+		$data['membres_du_comite_entreprise_suppleants'] = $diffusion_information->data['membres_du_comite_entreprise_suppleants'];
+
+		return $data;
 	}
 }
 

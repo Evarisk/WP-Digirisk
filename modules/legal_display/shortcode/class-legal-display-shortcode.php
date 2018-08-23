@@ -39,7 +39,7 @@ class Legal_Display_Shortcode {
 	 */
 	public function callback_digi_legal_display( $atts ) {
 		$element_id = ! empty( $atts['post_id'] ) ? (int) $atts['post_id'] : 0;
-		Legal_Display_Class::g()->display( $element_id, array( Legal_Display_A3_Class::g()->get_type(), Legal_Display_A4_Class::g()->get_type() ), false );
+		Legal_Display_Class::g()->display( $element_id, array( '\digi\Legal_Display_A3_Class', '\digi\Legal_Display_A4_Class' ), false );
 		Legal_Display_Class::g()->display_form( $element_id );
 	}
 }

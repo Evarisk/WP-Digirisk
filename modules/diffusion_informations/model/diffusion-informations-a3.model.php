@@ -38,6 +38,46 @@ class Diffusion_Informations_A3_Model extends Document_Model {
 			'field'     => 'document_meta',
 		);
 
+		$this->schema['document_meta']['child']['delegues_du_personnels_date'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.5.0',
+			'type'    => 'string',
+		);
+
+		$this->schema['document_meta']['child']['delegues_du_personnels_titulaires'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.4.0',
+			'type'    => 'string',
+			'default' => '',
+		);
+
+		$this->schema['document_meta']['child']['delegues_du_personnels_suppleants'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.4.0',
+			'type'    => 'string',
+			'default' => '',
+		);
+
+		$this->schema['document_meta']['child']['membres_du_comite_entreprise_date'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.5.0',
+			'type'    => 'string',
+		);
+
+		$this->schema['document_meta']['child']['membres_du_comite_entreprise_titulaires'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.4.0',
+			'type'    => 'string',
+			'default' => '',
+		);
+
+		$this->schema['document_meta']['child']['membres_du_comite_entreprise_suppleants'] = array(
+			'since'   => '6.4.0',
+			'version' => '6.4.0',
+			'type'    => 'string',
+			'default' => '',
+		);
+
 		$this->schema['unique_key'] = array(
 			'since'     => '6.4.0',
 			'version'   => '6.4.0',

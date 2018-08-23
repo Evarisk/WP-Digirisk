@@ -51,12 +51,14 @@ class Causerie_Intervention_Model extends Causerie_Model {
 			'type'      => 'wpeo_date',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_date_start',
+			'context'   => array( 'GET' ),
 		);
 
 		$this->schema['date_end'] = array(
 			'type'      => 'wpeo_date',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_date_end',
+			'context'   => array( 'GET' ),
 		);
 
 		$this->schema['former'] = array(

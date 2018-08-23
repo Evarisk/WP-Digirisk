@@ -2,7 +2,6 @@
  * Initialise l'objet "causerie" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since   6.6.0
- * @version 6.6.0
  */
 window.eoxiaJS.digirisk.causerie = {};
 
@@ -17,7 +16,6 @@ window.eoxiaJS.digirisk.causerie.canvas;
  * Initialise les évènements.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @return {void}
  */
@@ -30,7 +28,6 @@ window.eoxiaJS.digirisk.causerie.init = function() {
  * Initialise le canvas, ainsi que owlCarousel.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @return {void}
  */
@@ -49,7 +46,6 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
  * Initialise les évènements principaux des causeries.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @return {void}
  */
@@ -108,7 +104,6 @@ window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
  * Appliques la signature.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {[type]} element [description]
  * @return {boolean}         [description]
@@ -149,14 +144,13 @@ window.eoxiaJS.digirisk.causerie.beforeSaveCauserie = function( triggeredElement
  * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.editedCauserieSuccess = function( triggeredElement, response ) {
-	triggeredElement.closest( '.ajax-content' ).html( response.data.view );
+	triggeredElement.closest( '.tab-content' ).html( response.data.view );
 };
 
 /**
@@ -164,7 +158,6 @@ window.eoxiaJS.digirisk.causerie.editedCauserieSuccess = function( triggeredElem
  * Remplaces le contenu de la ligne du tableau "causerie" par le template renvoyé par la requête Ajax.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
@@ -179,7 +172,6 @@ window.eoxiaJS.digirisk.causerie.loadedCauserieSuccess = function( element, resp
  * Supprimes la ligne du tableau.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
@@ -193,14 +185,13 @@ window.eoxiaJS.digirisk.causerie.deletedCauserieSuccess = function( element, res
  * Le callback en cas de réussite à la requête Ajax "save_final_causerie_step_1".
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
-	jQuery( '.ajax-content' ).html( response.data.view );
+	jQuery( '.tab-content' ).html( response.data.view );
 
 	var currentStep = response.data.current_step;
 	var percent     = 0;
@@ -228,7 +219,6 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
  * Ajoutes la nouvelle ligne du participant dans le tableau.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} element  Le bouton déclencahd l'action AJAX.
  * @param  {Object}         response Les données reçu dans le formulaire.
@@ -236,7 +226,7 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response ) {
-	jQuery( '.ajax-content' ).html( response.data.view );
+	jQuery( '.tab-content' ).html( response.data.view );
 
 	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
 
@@ -249,7 +239,6 @@ window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response 
  * Sinon, si une signature est manquante, le bouton est grisé.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @return {boolean}
  */
@@ -320,7 +309,6 @@ window.eoxiaJS.digirisk.causerie.savedFormerSignature = function( element, respo
  * Vérifie que l'utilisateur et que la signature soit bien présente dans le formulaire.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {[type]} element [description]
  * @return {void}
@@ -348,7 +336,6 @@ window.eoxiaJS.digirisk.causerie.checkAllData = function( element ) {
  * Vérifie que l'ID de l'utilisateur soit bien présente dans le formulaire.
  *
  * @since   6.6.0
- * @version 6.6.0
  *
  * @param  {HTMLDivElement} element Le bouton déclenchant cette méthode.
  *

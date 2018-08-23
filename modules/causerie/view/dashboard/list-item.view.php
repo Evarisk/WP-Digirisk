@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td data-title="Photo" class="padding">
-		<?php do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="/digi/' . $causerie->data['get_class']() . '" mode="view" single="false" field_name="image" ]' ); ?>
+		<?php do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="' . $causerie->get_class() . '" mode="view" single="false" field_name="image" ]' ); ?>
 	</td>
 
 	<td data-title="Catégorie" class="padding">
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
-			<span><?php echo esc_html( $causerie->data['date_start']['date_human_readable'] ); ?></span>
+			<span><?php echo esc_html( $causerie->data['date_start']['rendered']['date_time'] ); ?></span>
 			<?php
 		else :
 			?>
@@ -65,7 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
-			<span><?php echo esc_html( $causerie->data['date_end']['date_human_readable'] ); ?></span>
+			<span><?php echo esc_html( $causerie->data['date_end']['rendered']['date_time'] ); ?></span>
 			<?php
 		else :
 			?>
@@ -81,9 +81,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$causerie->data['former']['rendered'] = (array) $causerie->data['former']['rendered'];
 			?>
 		<div class="avatar tooltip hover"
-			aria-label="<?php echo esc_attr( $causerie->data['former']['rendered']['displayname'] ); ?>"
-			style="background-color: #<?php echo esc_attr( $causerie->data['former']['rendered']['avatar_color'] ); ?>;">
-				<span><?php echo esc_html( $causerie->data['former']['rendered']['initial'] ); ?></span>
+			aria-label="<?php echo esc_attr( $causerie->data['former']['rendered']['data']['displayname'] ); ?>"
+			style="background-color: #<?php echo esc_attr( $causerie->data['former']['rendered']['data']['avatar_color'] ); ?>;">
+				<span><?php echo esc_html( $causerie->data['former']['rendered']['data']['initial'] ); ?></span>
 		</div>
 		<?php
 	else :

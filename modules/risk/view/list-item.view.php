@@ -27,13 +27,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="view"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="view" category_risk_id="' . end( $risk->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php Risk_Evaluation_Class::g()->display( $risk ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['modified_unique_identifier'] . '" ]' ); ?>
+		<?php echo do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['modified_unique_identifier'] . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
@@ -54,9 +54,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-loader="risk"
 						data-action="load_risk"><i class="icon fas fa-pencil"></i></div>
 
+			<!-- Supprimer un risque -->
 			<div 	class="button light w50 delete action-delete"
 						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
+						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
 						data-action="delete_risk"><i class="icon far fa-times"></i></div>
 		</div>
 	</td>

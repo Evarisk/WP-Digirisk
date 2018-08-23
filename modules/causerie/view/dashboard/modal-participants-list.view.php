@@ -25,8 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</thead>
 	<tbody>
 		<?php
-		if ( ! empty( $causerie->participants ) ) :
-			foreach ( $causerie->participants as $participant ) :
+		if ( ! empty( $causerie->data['participants'] ) ) :
+			foreach ( $causerie->data['participants'] as $participant ) :
 				?>
 				<tr>
 					<td>
@@ -34,8 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						if ( ! empty( $participant['rendered'] ) ) :
 							$participant['rendered'] = (array) $participant['rendered'];
 							?>
-							<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['initial'] ); ?></span></div>
-							<span><?php echo esc_html( $participant['rendered']['displayname'] ); ?></span>
+							<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']['data']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['data']['initial'] ); ?></span></div>
+							<span><?php echo esc_html( $participant['rendered']['data']['displayname'] ); ?></span>
 							<?php
 						else :
 							?><span><?php esc_html_e( 'N/A', 'digirisk' ); ?></span><?php

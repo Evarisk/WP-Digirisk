@@ -48,7 +48,7 @@ class Causerie_Intervention_Action {
 
 		$final_causerie = Causerie_Intervention_Class::g()->add_participant( $final_causerie, $participant_id );
 
-		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie );
+		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
@@ -93,11 +93,11 @@ class Causerie_Intervention_Action {
 
 		$current_participant = null;
 
-		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie );
+		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
 		if ( ! $is_former ) {
-			if ( ! empty( $final_causerie->participants ) ) {
-				foreach ( $final_causerie->participants as $participant ) {
+			if ( ! empty( $final_causerie->data['participants'] ) ) {
+				foreach ( $final_causerie->data['participants'] as $participant ) {
 					if ( $participant_id === $participant['user_id'] ) {
 						$current_participant = $participant;
 						break;

@@ -24,43 +24,24 @@ class Document_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.2.1
-	 * @version 6.4.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_regenerate_document', array( $this, 'ajax_regenerate_document' ) );
+		add_action( 'wp_ajax_generate_document', array( $this, 'ajax_generate_document' ) );
 	}
 
 	/**
 	 * Re-génére un document a partir des données présentes en base de données
 	 *
 	 * @since 6.2.1
-	 * @version 6.4.0
 	 */
-	public function ajax_regenerate_document() {
-		check_ajax_referer( 'regenerate_document' );
+	public function ajax_generate_document() {
+		$document_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$model_class = ! empty( $_POST['model'] ) ? sanitize_text_field( $_POST['model'] ) : '';
+		$model_class = str_replace( 'digi/', '\digi\\', $model_class );
 
-		$model_name = ! empty( $_POST['model_name'] ) ? sanitize_text_field( $_POST['model_name'] ) : '';
-		if ( empty( $model_name ) ) {
-			wp_send_json_error();
-		}
-		$tmp_name = $model_name;
-		$model_name = '\digi\\' . $model_name . '_class';
+		$model_class::g()->create_document( $document_id );
 
-		$document_id = ! empty( $_POST ) && is_int( (int) $_POST['element_id'] ) && ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		if ( ! empty( $document_id ) ) {
-			$parent_id = ! empty( $_POST ) && is_int( (int) $_POST['parent_id'] ) && ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-			$parent_element = Society_Class::g()->show_by_type( $parent_id );
-
-			$current_document = $model_name::g()->get( array(
-				'id' => $document_id,
-			) );
-			$response = Document_Class::g()->generate_document( $current_document[0]->model_id, $current_document[0]->document_meta, $parent_element->type . '/' . $parent_id . '/' . $current_document[ 0 ]->title . '.odt' );
-			wp_send_json_success( $response );
-		} else {
-			wp_send_json_error( array( 'message' => __( 'No document has been selected', 'digirisk' ), ) );
-		}
-
-		wp_send_json_error( array( 'message' => __( 'An error occured while trying to generate the document', 'digirisk' ), ) );
+		wp_send_json_success();
 	}
 }
 

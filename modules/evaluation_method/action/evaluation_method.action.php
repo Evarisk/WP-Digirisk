@@ -65,8 +65,9 @@ class Evaluation_Method_Action {
 	public function ajax_load_modal_method_evaluation() {
 		check_ajax_referer( 'load_modal_method_evaluation' );
 
-		$id      = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
-		$risk_id = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0; // WPCS: input var ok.
+		$id                          = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+		$risk_id                     = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0; // WPCS: input var ok.
+		$evaluation_method_variables = ! empty( $_POST['variables'] ) ? wp_unslash( (string) $_POST['variables'] ) : '';
 
 		if ( empty( $id ) ) {
 			wp_send_json_error();
@@ -86,12 +87,11 @@ class Evaluation_Method_Action {
 
 		$risk = Risk_Class::g()->get( $args, true );
 
-		if ( 0 === $risk->data['id'] ) {
-			// Ajout de la structure dans variables.
-			if ( ! empty( $evaluation_method->data['variables'] ) ) {
-				foreach ( $evaluation_method->data['variables'] as $variable ) {
-					$risk->data['evaluation']->data['variables'][ $variable->data['id'] ] = '';
-				}
+		$evaluation_method_variables = json_decode( $evaluation_method_variables, true );
+
+		if ( ! empty( $evaluation_method_variables ) ) {
+			foreach ( $evaluation_method_variables as $variable_id => $variable ) {
+				$risk->data['evaluation']->data['variables'][ $variable_id ] = $variable;
 			}
 		}
 

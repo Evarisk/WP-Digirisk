@@ -30,51 +30,48 @@ class Diffusion_Informations_Model extends \eoxia\Post_Model {
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
 	public function __construct( $data = null, $req_method = null ) {
-		$this->schema['document_meta'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.4.0',
-			'type'      => 'array',
-			'meta_type' => 'single',
-			'field'     => 'document_meta',
-			'child'     => array(),
-		);
-
-		$this->schema['document_meta']['child']['delegues_du_personnels_date'] = array(
+		$this->schema['delegues_du_personnels_date'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.5.0',
 			'type'    => 'wpeo_date',
 			'context' => array( 'GET' ),
 		);
 
-		$this->schema['document_meta']['child']['delegues_du_personnels_titulaires'] = array(
+		$this->schema['delegues_du_personnels_titulaires'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.4.0',
 			'type'    => 'string',
 			'default' => '',
 		);
 
-		$this->schema['document_meta']['child']['delegues_du_personnels_suppleants'] = array(
+		$this->schema['delegues_du_personnels_suppleants'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.4.0',
 			'type'    => 'string',
 			'default' => '',
 		);
 
-		$this->schema['document_meta']['child']['membres_du_comite_entreprise_date'] = array(
+		$this->schema['membres_du_comite_entreprise_date'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.5.0',
 			'type'    => 'wpeo_date',
 			'context' => array( 'GET' ),
 		);
 
-		$this->schema['document_meta']['child']['membres_du_comite_entreprise_titulaires'] = array(
+		$this->schema['membres_du_comite_entreprise_titulaires'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.4.0',
 			'type'    => 'string',
 			'default' => '',
 		);
 
-		$this->schema['document_meta']['child']['membres_du_comite_entreprise_suppleants'] = array(
+		$this->schema['membres_du_comite_entreprise_suppleants'] = array(
+			'meta_type' => 'multiple',
 			'since'   => '6.4.0',
 			'version' => '6.4.0',
 			'type'    => 'string',

@@ -105,11 +105,8 @@ class Legal_Display_Filter {
 	 *
 	 * @return array                  Les données pour le registre des AT bénins modifié.
 	 */
-	public function callback_digi_document_data( $data, $society ) {
-		$legal_display = Legal_Display_Class::g()->get( array(
-			'posts_per_page' => 1,
-			'post_parent'    => $society->data['id'],
-		), true );
+	public function callback_digi_document_data( $data, $args ) {
+		$legal_display = $args['legal_display'];
 
 		$data = array(
 			'inspection_du_travail_nom'            => $legal_display->data['detective_work']->data['full_name'],

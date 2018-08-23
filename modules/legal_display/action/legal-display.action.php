@@ -70,11 +70,20 @@ class Legal_Display_Action {
 
 		$legal_display = Legal_Display_Class::g()->save_data( $legal_display_data );
 
-		$response = Legal_Display_A3_Class::g()->prepare_document( $parent_id );
-		$response = Legal_Display_A4_Class::g()->prepare_document( $parent_id );
+		$response = Legal_Display_A3_Class::g()->prepare_document( $parent_id, array(
+			'legal_display' => $legal_display,
+		) );
+
+		Legal_Display_A3_Class::g()->create_document( $response['document']->data['id'] );
+
+		$response = Legal_Display_A4_Class::g()->prepare_document( $parent_id, array(
+			'legal_display' => $legal_display,
+		) );
+
+		Legal_Display_A4_Class::g()->create_document( $response['document']->data['id'] );
 
 		ob_start();
-		Legal_Display_Class::g()->display( $parent_id, array( Legal_Display_A3_Class::g()->get_type(), Legal_Display_A4_Class::g()->get_type() ), false );
+		Legal_Display_Class::g()->display( $parent_id, array( '\digi\Legal_Display_A3_Class', '\digi\Legal_Display_A4_Class' ), false );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'legalDisplay',

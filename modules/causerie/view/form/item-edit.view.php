@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="/digi/Causerie_Class" single="false" field_name="image" ]' ); ?>
 	</td>
 	<td>
-		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->data['id'] . '" type="causerie" display="' . ( ( 0 !== $causerie->data['id'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( isset( $causerie->data['risk_category'] ) ? $causerie->data['risk_category']->id : 0 ) . '" preset="0"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->data['id'] . '" type="causerie" display="' . ( ( 0 !== $causerie->data['id'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . ( isset( $causerie->data['risk_category'] ) ? $causerie->data['risk_category']->data['id'] : 0 ) . '" preset="0"]' ); ?>
 	</td>
 	<td class="wpeo-grid grid-1">
 		<div>

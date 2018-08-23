@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-target="main-content"
 					<?php echo esc_attr( ! empty( $sub_element['nonce'] ) ? 'data-nonce=' . wp_create_nonce( $sub_element['nonce'] ) : '' ); ?>
 					<?php echo ! empty( $sub_element['title'] ) ? 'data-title="' . $sub_element['title'] . '"' : ''; // WPCS: XSS ok. ?>
-					<?php echo ! empty( $sub_element['attributes'] ) ? esc_attr( $sub_element['attributes'] ) : ''; ?>
+					<?php echo ! empty( $sub_element['attributes'] ) ? $sub_element['attributes'] : ''; // WPCS: XSS ok. ?>
 					data-id="<?php echo esc_attr( $id ); ?>">
 				<span <?php echo ! empty( $sub_element['class'] ) ? 'class="' . esc_attr( $sub_element['class'] ) . '"' : ''; ?>
 					><?php echo $sub_element['text']; // WPCS: XSS ok. ?></span>

@@ -74,7 +74,7 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			'icon'         => 'fa-search',
 			'type'         => 'user',
 			'name'         => 'society[owner_id]',
-			'value'        => User_Digi_Class::g()->element_prefix . $element->data['owner']->data['id'] . ' - ' . $element->data['owner']->data['displayname'],
+			'value'        => ! empty( $element->data['owner']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $element->data['owner']->data['id'] . ' - ' . $element->data['owner']->data['displayname'] : '',
 			'hidden_value' => $element->data['owner_id'],
 		) );
 

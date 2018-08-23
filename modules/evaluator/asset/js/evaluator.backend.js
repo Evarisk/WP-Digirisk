@@ -23,7 +23,7 @@ window.eoxiaJS.digirisk.evaluator.event = function() {
 * @version 6.3.1
 */
 window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
-	window.eoxiaJS.digirisk.search.renderChanged();
+	// window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**

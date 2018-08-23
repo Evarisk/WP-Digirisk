@@ -73,7 +73,7 @@ class Group_Filter extends Identifier_Filter {
 					'text'         => __( 'Supprimer', 'digirisk' ),
 					'parent_class' => 'action-delete no-tab',
 					'action'       => 'delete_society',
-					'attributes'   => 'data-loader=digirisk-wrap data-id=' . $id . ' data-message-delete=' . __( 'Confirmer', 'digirisk' ),
+					'attributes'   => 'data-loader=digirisk-wrap data-id=' . $id . ' data-message-delete="' . __( 'Êtes-vous sûr(e) de vouloir supprimer ce groupement ?', 'digirisk' ) . '"',
 					'nonce'        => 'delete_society',
 				),
 			),

@@ -52,9 +52,11 @@ $user = User_Digi_Class::g()->get( array(
 	<?php if ( 0 !== $id && 0 !== $comment->data['id'] ) : ?>
 		<span class="button delete action-delete"
 					data-id="<?php echo esc_attr( $comment->data['id'] ); ?>"
-					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment_' . $comment->data['id'] ) ); ?>"
+					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment' ) ); ?>"
+					data-type="<?php echo esc_attr( $type ); ?>"
+					data-namespace="digi"
 					data-action="delete_comment"
-					data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
+					data-message-delete="<?php echo esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
 	<?php else : ?>
 		<?php if ( 0 !== $id && $add_button ) : ?>
 			<span data-parent="comment"

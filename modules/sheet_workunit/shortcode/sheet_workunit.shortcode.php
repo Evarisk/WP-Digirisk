@@ -42,7 +42,7 @@ class Sheet_Workunit_Shortcode {
 	 */
 	public function callback_digi_fiche_de_poste( $atts ) {
 		$element_id = ! empty( $atts['post_id'] ) ? (int) $atts['post_id'] : 0;
-		Sheet_Workunit_Class::g()->display( $element_id, array( Sheet_Workunit_Class::g()->get_type() ) );
+		Sheet_Workunit_Class::g()->display( $element_id, array( '\digi\Sheet_Workunit_Class' ) );
 	}
 }
 

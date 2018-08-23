@@ -40,7 +40,7 @@ class Diffusion_Informations_Shortcode {
 	public function callback_digi_diffusion_informations( $atts ) {
 		$element_id = ! empty( $atts['post_id'] ) ? (int) $atts['post_id'] : 0;
 
-		Diffusion_Informations_Class::g()->display( $element_id, array( Diffusion_Informations_A4_Class::g()->get_type(), Diffusion_Informations_A3_Class::g()->get_type() ), false );
+		Diffusion_Informations_Class::g()->display( $element_id, array( '\digi\Diffusion_Informations_A4_Class', '\digi\Diffusion_Informations_A3_Class' ), false );
 		Diffusion_Informations_Class::g()->display_form( $element_id );
 	}
 }

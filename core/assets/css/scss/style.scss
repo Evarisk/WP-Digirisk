@@ -1,7 +1,9 @@
 /**
  * Import des fichiers less
  */
-// @import "font/font";
+@import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fontawesome.scss";
+@import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fa-solid.scss";
+@import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fa-brands.scss";
 @import "reset";
 @import "variable";
 @import "tools";

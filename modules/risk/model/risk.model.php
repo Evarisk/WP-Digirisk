@@ -24,7 +24,6 @@ class Risk_Model extends \eoxia\Post_Model {
 	 * Définition du schéma des risques
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 *
 	 * @param array $data       Data.
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.

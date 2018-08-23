@@ -13,5 +13,9 @@
       ]
     },
 		"action": {}
-	}
+	},
+  "messages": [
+    "empty",
+    "generate"
+  ]
 }

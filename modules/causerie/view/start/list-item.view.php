@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="Catégorie" class="padding">
 		<?php
 		if ( isset( $causerie->data['risk_category'] ) ) :
-			do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->data['id'] . '" type="causerie" display="view" category_risk_id="' . $causerie->data['risk_category']->data['id'] . '"]' );
+			do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->data['id'] . '" type="causerie" display="view" category_risk_id="' . $causerie->data['risk_category']->data['id'] . '"]' );
 		else :
 			?>C<?php
 		endif;

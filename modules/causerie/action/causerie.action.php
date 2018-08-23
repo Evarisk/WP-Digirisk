@@ -92,8 +92,8 @@ class Causerie_Action {
 			'id' => $id,
 		), true );
 
-		$causerie->risk_category = Risk_Category_Class::g()->get( array(
-			'id' => max( $causerie->taxonomy[ Risk_Category_Class::g()->get_type() ] ),
+		$causerie->data['risk_category'] = Risk_Category_Class::g()->get( array(
+			'id' => end( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ),
 		), true );
 
 		ob_start();

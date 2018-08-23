@@ -57,7 +57,9 @@ class Causerie_Intervention_Page_Action {
 			wp_send_json_error();
 		}
 
-		switch ( $causerie->current_step ) {
+		Causerie_Intervention_Page_Class::g()->register_search();
+
+		switch ( $causerie->data['current_step'] ) {
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_FORMER:
 				$former_id      = ! empty( $_POST['former_id'] ) ? (int) $_POST['former_id'] : 0;
 
@@ -95,7 +97,7 @@ class Causerie_Intervention_Page_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'causerie',
 			'callback_success' => 'nextStep',
-			'current_step'     => $causerie->current_step,
+			'current_step'     => $causerie->data['current_step'],
 			'view'             => ob_get_clean(),
 		) );
 	}

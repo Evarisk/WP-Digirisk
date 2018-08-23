@@ -22,12 +22,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 
 	<td></td>
-	<td>
-		<?php
-		// Translators: Cliquer sur l'icone d'ajout pour générer une fiche de groupement.
-		sprintf( esc_html_e( 'Cliquer sur l\'icone d\'ajout pour générer une %s', 'digirisk' ), esc_html( $_this->get_post_type_name() ) );
-		?>
-	</td>
+	<td><?php echo esc_html( $_this->message['generate'] ); ?></td>
 	<td>
 		<div class="action">
 			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">

@@ -52,13 +52,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( empty( $risk_id ) ) :
 			echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
 				'li'  => array(
-					'class'        => array(),
-					'aria-label'   => array(),
-					'data-action'  => array(),
-					'data-class'   => array(),
-					'data-nonce'   => array(),
-					'data-id'      => array(),
-					'data-risk-id' => array(),
+					'class'          => array(),
+					'aria-label'     => array(),
+					'data-action'    => array(),
+					'data-class'     => array(),
+					'data-nonce'     => array(),
+					'data-id'        => array(),
+					'data-risk-id'   => array(),
+					'wpeo-before-cb' => array(),
 				),
 				'svg' => array(),
 				'i'   => array(

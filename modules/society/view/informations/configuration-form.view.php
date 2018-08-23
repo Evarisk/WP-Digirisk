@@ -53,7 +53,7 @@ global $eo_search; ?>
 			</div>
 
 			<div class="form-element">
-				<span class="form-label"><?php esc_html_e( 'Nombre d\'employée', 'digirisk' ); ?></span>
+				<span class="form-label"><?php esc_html_e( 'Nombre d\'employés', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<input name="society[number_of_employees]" class="form-field" type="text" value="<?php echo esc_attr( $element->data['number_of_employees'] ); ?>" />
 				</label>

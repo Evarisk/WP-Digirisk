@@ -132,7 +132,6 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @return object L'objet mis à jour
 	 *
 	 * @since   6.0.0
-	 * @version 7.0.0
 	 */
 	public function update_by_type( $establishment ) {
 		if ( ! is_object( $establishment ) && ! is_array( $establishment ) ) {
@@ -159,25 +158,38 @@ class Society_Class extends \eoxia\Post_Class {
 	 * Récupères toutes les sociétés enfants à $society_id correspondant à $status par ordre croissant de la clé _wpdigi_unique_key.
 	 *
 	 * @since   7.0.0
-	 * @version 7.0.0
 	 *
 	 * @param  integer $society_id L'ID de la société parent.
 	 * @param  string  $status     Le status des sociétés enfant. Inherit par défaut.
+	 * @param  boolean $recursive  True pour rendre recursive la récupération
+	 * des sociétés.
 	 *
 	 * @return array               Un tableau contenant toutes les sociétés enfant.
 	 */
-	public function get_societies_in( $society_id, $status = 'inherit' ) {
-		$societies = $this->get( array(
-			'post_parent'    => $society_id,
-			'posts_per_page' => -1,
-			'post_type'      => array( 'digi-group', 'digi-workunit' ),
-			'post_status'    => $status,
-			'meta_key'       => '_wpdigi_unique_key',
-			'orderby'        => array(
-				'menu_order'     => 'ASC',
-				'meta_value_num' => 'ASC',
-			),
-		) );
+	public function get_societies_in( $society_id, $status = 'inherit', $recursive = false ) {
+		if ( 0 !== $society_id ) {
+			$societies = $this->get( array(
+				'post_parent'    => $society_id,
+				'posts_per_page' => -1,
+				'post_type'      => array( 'digi-group', 'digi-workunit' ),
+				'post_status'    => $status,
+				'meta_key'       => '_wpdigi_unique_key',
+				'orderby'        => array(
+					'menu_order'     => 'ASC',
+					'meta_value_num' => 'ASC',
+				),
+			) );
+		} else {
+			$societies = $this->get( array(
+				'posts_per_page' => 1,
+			) );
+		}
+
+		if ( $recursive && ! empty( $societies ) ) {
+			foreach ( $societies as &$society ) {
+				$society->data['childrens'] = $this->get_societies_in( $society->data['id'], 'inherit', true );
+			}
+		}
 
 		return $societies;
 	}
@@ -191,7 +203,11 @@ class Society_Class extends \eoxia\Post_Class {
 	 * @since   6.0.0
 	 */
 	public function get_address( $society ) {
-		$last_address_id = end( $society->data['contact']['address_id'] );
+		$last_address_id = 0;
+
+		if ( ! empty( $society->data['contact']['address_id'] ) ) {
+			$last_address_id = end( $society->data['contact']['address_id'] );
+		}
 
 		if ( ! empty( $last_address_id ) ) {
 			$address = Address_Class::g()->get( array( 'id' => $last_address_id ), true );

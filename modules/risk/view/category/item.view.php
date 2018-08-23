@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="tooltip hover" aria-label="<?php echo esc_attr( $risk_category->data['name'] ); ?>">
 			<?php echo wp_get_attachment_image( $risk_category->data['thumbnail_id'], 'thumbnail', false ); ?>
 		</div>
-		<input class="input-hidden-danger" type="hidden" name="risk[danger_id]" value='<?php echo esc_attr( $risk_category->data['id'] ); ?>' />
+		<input class="input-hidden-danger" type="hidden" name="risk_category_id" value='<?php echo esc_attr( $risk_category->data['id'] ); ?>' />
 	<?php else : ?>
 		<div class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" >
 			<i class="fa fa-times icon" aria-hidden="true"></i>

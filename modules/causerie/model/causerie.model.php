@@ -50,6 +50,7 @@ class Causerie_Model extends \eoxia\Post_Model {
 			'type'      => 'wpeo_date',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_last_date_realized',
+			'context'   => array( 'GET' ),
 		);
 
 		$this->schema['taxonomy'] = array(

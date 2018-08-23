@@ -72,6 +72,8 @@ class Risk_Filter extends Identifier_Filter {
 	 * @return Risk_Model L'objet avec tous les éléments ajoutés par cette méthode.
 	 */
 	public function get_full_risk( $object, $args ) {
+		$object->data['parent']            = null;
+
 		$object->data['risk_category']     = Risk_Category_Class::g()->get( array( 'id' => end( $object->data['taxonomy']['digi-category-risk'] ) ), true );
 		$object->data['evaluation_method'] = Evaluation_Method_Class::g()->get( array( 'id' => end( $object->data['taxonomy'][ Evaluation_Method_Class::g()->get_type() ] ) ), true );
 
@@ -80,6 +82,8 @@ class Risk_Filter extends Identifier_Filter {
 				'post_id' => $object->data['id'],
 				'number'  => 1,
 			), true );
+
+			$object->data['parent'] = Society_Class::g()->show_by_type( $object->data['parent_id'] );
 		} else {
 			if ( empty( $object->data['evaluation'] ) ) {
 				$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array( 'id' => 0 ), true );

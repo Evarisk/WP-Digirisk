@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr class="item">
 	<td class="padding tooltip red former-tooltip" aria-label="<?php esc_attr_e( 'Veuillez renseigner le participant', 'digirisk' ); ?>">
-		<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']->avatar_color ); ?>;"><span><?php echo esc_html( $participant['rendered']->initial ); ?></span></div>
-		<?php echo esc_html( $participant['rendered']->displayname ); ?>
+		<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']->data['initial'] ); ?></span></div>
+		<?php echo esc_html( $participant['rendered']->data['displayname'] ); ?>
 		<input type="hidden" name="participant_id" value="<?php echo esc_attr( $participant['user_id'] ); ?>" />
-		<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->id ); ?>" />
+		<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->data['id'] ); ?>" />
 	</td>
 
 	<?php if ( empty( $participant['signature_id'] ) ) : ?>
@@ -31,9 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
 			</div>
 			<?php
-			\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 				'action' => 'causerie_save_signature',
-				'title'  => __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->displayname,
+				'title'  => __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->data['displayname'],
 			) );
 			?>
 		</td>
@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="button light w50 delete action-delete"
-			data-id="<?php echo esc_attr( $final_causerie->id ); ?>"
+			data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>"
 			data-user-id="<?php echo esc_attr( $participant['user_id'] ); ?>"
 			data-action="<?php echo esc_attr( 'causerie_delete_participant' ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_delete_participant' ) ); ?>"

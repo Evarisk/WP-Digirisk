@@ -103,6 +103,14 @@ class Document_Class extends \eoxia\ODT_Class {
 	protected $odt_name = '';
 
 	/**
+	 * Tableau contenant les messages à afficher dans la vue de la génération
+	 * de ce document.
+	 *
+	 * @since 7.0.0
+	 */
+	protected $messages = array();
+
+	/**
 	 * Affiches le tableau contenant la liste des documents selon $parent_id et
 	 * $types.
 	 *
@@ -117,11 +125,16 @@ class Document_Class extends \eoxia\ODT_Class {
 	public function display( $parent_id, $types, $can_add = true ) {
 		$element = Society_Class::g()->show_by_type( $parent_id );
 
-		$documents = $this->get( array(
-			'post_type'   => $types,
-			'post_parent' => $parent_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
+		$documents = array();
+
+		if ( ! empty( $types ) ) {
+			foreach ( $types as $type ) {
+				$documents = wp_parse_args( $documents, $type::g()->get( array(
+					'post_parent' => $parent_id,
+					'post_status' => array( 'publish', 'inherit' ),
+				) ) );
+			}
+		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'document', 'main', array(
 			'_this'     => $this,
@@ -131,11 +144,17 @@ class Document_Class extends \eoxia\ODT_Class {
 		) );
 	}
 
-	public function prepare_document( $society_id ) {
-		$society       = Society_Class::g()->show_by_type( $society_id );
-		$document_data = apply_filters( 'digi_' . $this->get_type() . '_document_data', array(), $society );
+	public function prepare_document( $parent_id, $args = array() ) {
+		$society = Society_Class::g()->show_by_type( $parent_id );
 
-		return $this->create_document( $society, $document_data );
+		$args = wp_parse_args( $args, array(
+			'parent' => $society,
+		) );
+
+		$document_data = apply_filters( 'digi_' . $this->get_type() . '_document_data', array(), $args );
+
+
+		return $this->save_document_data( $parent_id, $document_data, $args );
 	}
 }
 

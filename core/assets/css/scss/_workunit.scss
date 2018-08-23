@@ -389,11 +389,14 @@
 
 	// UT toggled
 	.unit.toggled {
+		@include fa-icon;
+		@extend .fas;
+
 		> .sub-list {
 			display: block !important;
 		}
 		> .unit-container .toggle-unit .icon:before {
-			// content: $fa-var-angle-down !important;
+			content: fa-content($fa-var-angle-down) !important;
 			// @todo
 		}
 	}
@@ -408,6 +411,7 @@
 			}
 		}
 		.toggle-unit {
+
 			color: rgba(255,255,255,0.4);
 			line-height: 50px;
 			font-size: 22px;
@@ -421,9 +425,10 @@
 				color: rgba(255,255,255,0.8);
 			}
 			.icon {
-				font-family: 'FontAwesome';
+				@include fa-icon;
+				@extend .fas;
 				&:before {
-					// content: $fa-var-angle-right;
+					content: fa-content($fa-var-angle-right);
 					// @todo
 				}
 			}

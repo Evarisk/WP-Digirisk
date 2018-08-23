@@ -42,7 +42,7 @@ class Sheet_Groupement_Shortcode {
 	 */
 	public function callback_digi_fiche_de_groupement( $atts ) {
 		$element_id = ! empty( $atts['post_id'] ) ? (int) $atts['post_id'] : 0;
-		Sheet_Groupment_Class::g()->display( $element_id, array( Sheet_Groupment_Class::g()->get_type() ) );
+		Sheet_Groupment_Class::g()->display( $element_id, array( '\digi\Sheet_Groupment_Class' ) );
 	}
 }
 

@@ -26,7 +26,7 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 	var variableID   = element.data( 'variable-id' );
 	var evaluationID = element.data( 'evaluation-id' );
 
-	window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables( riskID, evaluationID, variableID, seuil, jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ) );
+	window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables( riskID, evaluationID, variableID, seuil, jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' textarea' ) );
 
 	var data = {
 		action: 'get_scale',
@@ -42,12 +42,12 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 		}
 	}
 
-	if ( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .table-cell.active' ).length == 5 ) {
+	if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .table-cell.active' ).length == 5 ) {
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			if ( response.data.details ) {
-				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale', response.data.details.scale );
-				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text( response.data.details.equivalence );
-				jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .wpeo-button.button-disable' ).removeClass( 'button-disable' ).addClass( 'button-main' );
+				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale', response.data.details.scale );
+				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .cotation span' ).text( response.data.details.equivalence );
+				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .wpeo-button.button-disable' ).removeClass( 'button-disable' ).addClass( 'button-main' );
 			}
 		} );
 	}
@@ -55,15 +55,15 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 
 window.eoxiaJS.digirisk.evaluationMethodEvarisk.save = function( event ) {
 	var riskID       = jQuery( this ).data( 'id' );
-	var evaluationID = jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .digi-method-evaluation-id' ).val();
-	var value        = jQuery( '.wpeo-modal.modal-risk-' + riskID + ' textarea' ).val();
+	var evaluationID = jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .digi-method-evaluation-id' ).val();
+	var value        = jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' textarea' ).val();
 
 	jQuery( '.risk-row.edit[data-id="' + riskID + '"] textarea[name="evaluation_variables"]' ).val( value );
 	jQuery( '.risk-row.edit[data-id="' + riskID + '"] input[name="evaluation_method_id"]' ).val( evaluationID );
 
 	// On met à jour l'affichage de la cotation.
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
 
 	window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal( undefined, riskID );
 };
@@ -73,9 +73,9 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal = function( event, r
 		riskID = jQuery( this ).data( 'id' );
 	}
 
-	jQuery( '.wpeo-modal.modal-active' ).removeClass( 'modal-active' );
-
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-action', '' );
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-parent', 'wp-admin' );
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .wpeo-modal-event' ).attr( 'data-target', 'modal-risk-' + riskID );
+	jQuery( '.wpeo-modal.modal-active .modal-close' ).click();
 };
+
+window.eoxiaJS.digirisk.evaluationMethodEvarisk.fillVariables = function( element ) {
+	element.attr( 'data-variables', element.closest( 'td' ).find( 'textarea[name="evaluation_variables"]' ).val() );
+}
