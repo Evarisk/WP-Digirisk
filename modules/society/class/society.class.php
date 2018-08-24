@@ -217,6 +217,25 @@ class Society_Class extends \eoxia\Post_Class {
 
 		return $address;
 	}
+
+	public function delete_child( $id ) {
+		$posts = get_posts( array(
+			'post_type'      => array( 'digi-group', 'digi-workunit' ),
+			'post_parent'    => $id,
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$post->post_status = 'trash';
+
+				$this->delete_child( $post->ID );
+
+				wp_update_post( $post );
+			}
+		}
+	}
 }
 
 Society_Class::g();

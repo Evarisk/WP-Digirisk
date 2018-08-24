@@ -34,6 +34,13 @@ class ZIP_Model extends \eoxia\Post_Model {
 			'meta_type' => 'multiple',
 		);
 
+		$this->schema['path'] = array(
+			'since'     => '7.0.0',
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_path',
+		);
+
 		parent::__construct( $object );
 	}
 }

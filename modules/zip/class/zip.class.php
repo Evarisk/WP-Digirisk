@@ -95,8 +95,10 @@ class ZIP_Class extends Document_Class {
 	 * @return string           L'URL vers le fichier
 	 */
 	public function get_zip_url( $zip_path ) {
-		$basedir = Document_Class::g()->get_digirisk_dir_path( 'basedir' );
-		$baseurl = Document_Class::g()->get_digirisk_dir_path( 'baseurl' );
+		$upload_dir = wp_upload_dir();
+
+		$basedir = str_replace( '\\', '/', $upload_dir['basedir'] );
+		$baseurl = str_replace( '\\', '/', $upload_dir['baseurl'] );
 		$url     = str_replace( $basedir, $baseurl, $zip_path );
 
 		if ( ! file_exists( str_replace( '\\', '/', $zip_path ) ) ) {
@@ -155,7 +157,6 @@ class ZIP_Class extends Document_Class {
 			'post_status'    => 'inherit',
 			'post_mime_type' => 'application/zip',
 			'post_parent'    => $element->data['id'],
-			// 'guid'           => $document_creation['url'],
 		);
 
 		$attachment_id = wp_insert_attachment( $attachment_args, Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path, $element->data['id'] );
@@ -163,6 +164,7 @@ class ZIP_Class extends Document_Class {
 
 		$document_args = array(
 			'id'                      => $attachment_id,
+			'path'                    => $path,
 			'list_generation_results' => $file_details,
 		);
 

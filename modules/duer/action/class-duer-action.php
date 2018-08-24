@@ -140,12 +140,12 @@ class DUER_Action {
 		}
 
 		\eoxia\LOG_Util::log( 'DEBUT - Génération du document DUER', 'digirisk' );
-		$document = DUER_Class::g()->create_document( $document_id );
+		$generation_status = DUER_Class::g()->create_document( $document_id );
 		\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
 
 		ZIP_Class::g()->update_temporarly_files_details( array(
-			'filename' => $document->data['title'],
-			'path'     => $document->data['path'],
+			'filename' => $generation_status['document']->data['title'],
+			'path'     => $generation_status['document']->data['path'],
 		) );
 
 		wp_send_json_success( $response );

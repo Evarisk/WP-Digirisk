@@ -75,6 +75,8 @@ class Society_Action {
 
 		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
+		Society_Class::g()->delete_child( $id );
+
 		$society                 = Society_Class::g()->show_by_type( $id );
 		$society->data['status'] = 'trash';
 		Society_Class::g()->update_by_type( $society );

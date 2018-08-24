@@ -41,8 +41,8 @@ class ZIP_Filter {
 	public function callback_list_duer_single_item_action_end( $content, $element ) {
 		$zip_url = '';
 
-		if ( ! empty( $element->zip_path ) ) {
-			$zip_url = ZIP_Class::g()->get_zip_url( $element->zip_path );
+		if ( ! empty( $element->data['path'] ) ) {
+			$zip_url = ZIP_Class::g()->get_zip_url( $element->data['path'] );
 		}
 
 		ob_start();
