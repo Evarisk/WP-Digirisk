@@ -41,11 +41,30 @@ window.eoxiaJS.digirisk.DUER.event = function() {
  * @return {[type]}       [description]
  */
 window.eoxiaJS.digirisk.DUER.modalOpened = function( event, triggeredElement ) {
-	var textareaContent = jQuery( triggeredElement ).closest( 'tr' ).find( '.textarea-content-' + jQuery( triggeredElement ).data( 'src' ) ).val();
+	jQuery( this ).find( '.modal-content' ).html( '' );
 
-	jQuery( this ).find( '.modal-content' ).html( '<textarea data-to="' + jQuery( triggeredElement ).data( 'src' ) + '" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
+	if ( 'view' !== jQuery( triggeredElement ).data( 'type' ) ) {
+		var textareaContent = jQuery( triggeredElement ).closest( 'tr' ).find( '.textarea-content-' + jQuery( triggeredElement ).data( 'src' ) ).val();
+		jQuery( this ).find( '.modal-content' ).html( '<textarea data-to="' + jQuery( triggeredElement ).data( 'src' ) + '" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
 
-	jQuery( '.duer-modal' ).find( 'textarea' ).val( textareaContent );
+		jQuery( '.duer-modal' ).find( 'textarea' ).val( textareaContent );
+	} else {
+		var content = jQuery( triggeredElement ).closest( 'tr' ).find( '.text-content-' + jQuery( triggeredElement ).data( 'src' ) ).html();
+		jQuery( this ).find( '.modal-content' ).html( '<p></p>' );
+
+		jQuery( '.duer-modal' ).find( 'p' ).html( content );
+	}
+};
+
+/**
+ * [description]
+ *
+ * @since 7.0.0
+ *
+ * @param  {[type]} triggeredElement [description]
+ */
+window.eoxiaJS.digirisk.DUER.viewInPopup = function( triggeredElement ) {
+	return true;
 };
 
 /**

@@ -22,15 +22,13 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td class="padding"><?php echo esc_html( $document->data['document_meta']['dateFinAudit']['rendered']['date'] ); ?></td>
 
 	<td class="padding padding text-center">
-		<span class="hidden text-content-destinataire-duer"><?php echo esc_html( 'test' ); // WPCS: XSS is ok. ?></span>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-namespace="digirisk"
-					data-cb-object="DUER"
-					data-cb-func="view_in_popup"
+		<span class="hidden text-content-destinataire-duer"><?php echo nl2br( $document->data['document_meta']['destinataireDUER'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-container"
+					data-type="view"
+					data-target="duer-modal"
 					data-title="Destinataire"
 					data-src="destinataire-duer"
-					class="fa-layers fa-fw open-popup float-icon">
+					class="fa-layers fa-fw wpeo-modal-event float-icon">
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
@@ -41,15 +39,13 @@ defined( 'ABSPATH' ) || exit; ?>
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-methodology"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-namespace="digirisk"
-					data-cb-object="DUER"
-					data-cb-func="view_in_popup"
+		<span class="hidden text-content-methodology"><?php echo nl2br( $document->data['document_meta']['methodologie'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-container"
+					data-type="view"
+					data-target="duer-modal"
 					data-title="Méthodologie"
 					data-src="methodology"
-					class="fa-layers fa-fw open-popup float-icon">
+					class="fa-layers fa-fw wpeo-modal-event float-icon">
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
@@ -60,15 +56,13 @@ defined( 'ABSPATH' ) || exit; ?>
 	</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-sources"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-namespace="digirisk"
-					data-cb-object="DUER"
-					data-cb-func="view_in_popup"
+		<span class="hidden text-content-sources"><?php echo nl2br( $document->data['document_meta']['sources'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-container"
+					data-type="view"
+					data-target="duer-modal"
 					data-title="Source"
 					data-src="sources"
-					class="fa-layers fa-fw open-popup float-icon">
+					class="fa-layers fa-fw wpeo-modal-event float-icon">
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
@@ -79,15 +73,13 @@ defined( 'ABSPATH' ) || exit; ?>
 		</td>
 
 	<td class="padding text-center">
-		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
-		<span data-parent="main-content"
-					data-target="popup"
-					data-cb-namespace="digirisk"
-					data-cb-object="DUER"
-					data-cb-func="view_in_popup"
+		<span class="hidden text-content-dispo-des-plans"><?php echo nl2br( $document->data['document_meta']['dispoDesPlans'] ); // WPCS: XSS is ok. ?></span>
+		<span data-parent="main-container"
+					data-type="view"
+					data-target="duer-modal"
 					data-title="Disponibilité des plans"
 					data-src="dispo-des-plans"
-					class="fa-layers fa-fw open-popup float-icon">
+					class="fa-layers fa-fw wpeo-modal-event float-icon">
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
@@ -98,15 +90,13 @@ defined( 'ABSPATH' ) || exit; ?>
 	</td>
 
 		<td class="padding text-center">
-			<span class="hidden text-content-notes-importantes"><?php echo nl2br( 'test' ); // WPCS: XSS is ok. ?></span>
-			<span data-parent="main-content"
-						data-target="popup"
-						data-cb-namespace="digirisk"
-						data-cb-object="DUER"
-						data-cb-func="view_in_popup"
+			<span class="hidden text-content-notes-importantes"><?php echo nl2br( $document->data['document_meta']['remarqueImportante'] ); // WPCS: XSS is ok. ?></span>
+			<span data-parent="main-container"
+						data-type="view"
+						data-target="duer-modal"
 						data-title="Note importante"
 						data-src="notes-importantes"
-						class="fa-layers fa-fw open-popup float-icon">
+						class="fa-layers fa-fw wpeo-modal-event float-icon">
 
 				<i class="fas fa-square background-icon"></i>
 				<i class="fas fa-file" data-fa-transform="shrink-10"></i>

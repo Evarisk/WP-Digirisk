@@ -86,11 +86,11 @@ class DUER_Action {
 		$parent_id           = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
 		$date_debut_audit    = ! empty( $_POST['dateDebutAudit'] ) ? sanitize_text_field( wp_unslash( $_POST['dateDebutAudit'] ) ) : ''; // WPCS: input var ok.
 		$date_fin_audit      = ! empty( $_POST['dateFinAudit'] ) ? sanitize_text_field( wp_unslash( $_POST['dateFinAudit'] ) ) : ''; // WPCS: input var ok.
-		$destinataire_duer   = ! empty( $_POST['destinataireDUER'] ) ? sanitize_text_field( wp_unslash( $_POST['destinataireDUER'] ) ) : ''; // WPCS: input var ok.
-		$methodologie        = ! empty( $_POST['methodologie'] ) ? sanitize_text_field( wp_unslash( $_POST['methodologie'] ) ) : ''; // WPCS: input var ok.
-		$sources             = ! empty( $_POST['sources'] ) ? sanitize_text_field( wp_unslash( $_POST['sources'] ) ) : ''; // WPCS: input var ok.
-		$dispo_des_plans     = ! empty( $_POST['dispoDesPlans'] ) ? sanitize_text_field( wp_unslash( $_POST['dispoDesPlans'] ) ) : ''; // WPCS: input var ok.
-		$remarque_importante = ! empty( $_POST['remarqueImportante'] ) ? sanitize_text_field( wp_unslash( $_POST['remarqueImportante'] ) ) : ''; // WPCS: input var ok.
+		$destinataire_duer   = ! empty( $_POST['destinataireDUER'] ) ? sanitize_textarea_field( wp_unslash( $_POST['destinataireDUER'] ) ) : ''; // WPCS: input var ok.
+		$methodologie        = ! empty( $_POST['methodologie'] ) ? sanitize_textarea_field( wp_unslash( $_POST['methodologie'] ) ) : ''; // WPCS: input var ok.
+		$sources             = ! empty( $_POST['sources'] ) ? sanitize_textarea_field( wp_unslash( $_POST['sources'] ) ) : ''; // WPCS: input var ok.
+		$dispo_des_plans     = ! empty( $_POST['dispoDesPlans'] ) ? sanitize_textarea_field( wp_unslash( $_POST['dispoDesPlans'] ) ) : ''; // WPCS: input var ok.
+		$remarque_importante = ! empty( $_POST['remarqueImportante'] ) ? sanitize_textarea_field( wp_unslash( $_POST['remarqueImportante'] ) ) : ''; // WPCS: input var ok.
 
 		if ( empty( $parent_id ) ) {
 			wp_send_json_error();
@@ -133,6 +133,7 @@ class DUER_Action {
 			'index'             => $index,
 			'creation_response' => array(),
 			'element_id'        => $society_id,
+			'duer_document_id'  => $document_id,
 		);
 
 		if ( empty( $document_id ) || empty( $society_id ) ) {
@@ -159,8 +160,9 @@ class DUER_Action {
 	public function callback_ajax_generate_establishment() {
 		check_ajax_referer( 'generate_establishment' );
 
-		$index      = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
-		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
+		$index       = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
+		$element_id  = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
+		$document_id = ! empty( $_POST['duer_document_id'] ) ? (int) $_POST['duer_document_id'] : 0; // WPCS: input var ok.
 
 		$response = array(
 			'namespace'         => 'digirisk',
@@ -193,6 +195,8 @@ class DUER_Action {
 			'path'     => $generation_status['document']->data['path'],
 		) );
 
+		$response['duer_document_id'] = $document_id;
+
 		wp_send_json_success( $response );
 	}
 
@@ -204,8 +208,9 @@ class DUER_Action {
 	public function callback_ajax_generate_zip() {
 		check_ajax_referer( 'generate_zip' );
 
-		$index      = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
-		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
+		$index       = ! empty( $_POST['index'] ) ? (int) $_POST['index'] : 0; // WPCS: input var ok.
+		$element_id  = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0; // WPCS: input var ok.
+		$document_id = ! empty( $_POST['duer_document_id'] ) ? (int) $_POST['duer_document_id'] : 0; // WPCS: input var ok.
 
 		$response = array(
 			'namespace'         => 'digirisk',
@@ -224,6 +229,11 @@ class DUER_Action {
 		\eoxia\LOG_Util::log( 'FIN - Génération du ZIP', 'digirisk' );
 
 		$response['end'] = true;
+
+		$duer = DUER_Class::g()->get( array( 'id' => $document_id ), true );
+		$duer->data['zip_path'] = $generate_response['zip_path'];
+		DUER_Class::g()->update( $duer->data );
+
 		wp_send_json_success( $response );
 	}
 }

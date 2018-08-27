@@ -170,7 +170,9 @@ class ZIP_Class extends Document_Class {
 
 		$this->update( $document_args );
 
-		return $response;
+		return array(
+			'zip_path' => Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path,
+		);
 	}
 
 	/**
