@@ -53,6 +53,7 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 	}
 };
 
+
 window.eoxiaJS.digirisk.evaluationMethodEvarisk.save = function( event ) {
 	var riskID       = jQuery( this ).data( 'id' );
 	var evaluationID = jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .digi-method-evaluation-id' ).val();
@@ -62,8 +63,8 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.save = function( event ) {
 	jQuery( '.risk-row.edit[data-id="' + riskID + '"] input[name="evaluation_method_id"]' ).val( evaluationID );
 
 	// On met à jour l'affichage de la cotation.
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
 
 	window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal( undefined, riskID );
 };

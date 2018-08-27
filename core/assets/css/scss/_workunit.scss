@@ -389,9 +389,6 @@
 
 	// UT toggled
 	.unit.toggled {
-		@include fa-icon;
-		@extend .fas;
-
 		> .sub-list {
 			display: block !important;
 		}
