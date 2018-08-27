@@ -23,8 +23,8 @@ defined( 'ABSPATH' ) || exit; ?>
 <div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 	<?php
 
-	if ( ! empty( $waiting_updates ) && strpos( $request_uri, 'admin.php' ) && ! strpos( $request_uri, 'admin.php?page=digirisk-update' ) && ! strpos( $request_uri, 'admin.php?page=digi-setup' ) ) :
-		\eoxia\View_Util::exec( 'digirisk', 'update_manager', 'say-to-update' );
+	if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=' . \eoxia\Config_Util::$init['digirisk']->update_page_url ) ) :
+		\eoxia\Update_Manager_Class::g()->display_say_to_update( 'digirisk', __( 'Need to update DigiRisk data', 'digirisk' ) );
 	else :
 		echo do_shortcode( '[digi_navigation id="' . $id . '"]' );
 		echo do_shortcode( '[digi_application id="' . $id . '"]' );

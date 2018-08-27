@@ -89,6 +89,7 @@
 	"accronym_option": "_digirisk_accronym",
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false,
+  "update_page_url": "digirisk-update",
   "default_capabilities": {
     "administrator": [
       "manage_digirisk",
