@@ -39,13 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
 	<td data-title="Action">
-		<div class="action grid-layout w3">
-			<div 	class="open-popup-ajax button light w50 task"
-						data-parent="risk-row"
-						data-target="popup"
-						data-class="corrective-task"
-						data-action="open_task"
-						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
+		<div class="action grid-layout w2">
 
 			<!-- Editer un risque -->
 			<div 	class="button light w50 edit action-attribute"

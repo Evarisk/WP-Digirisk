@@ -50,11 +50,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td data-title="action">
 		<?php if ( 0 !== $risk->data['id'] && false === $risk->data['preset'] ) : ?>
-			<div class="action grid-layout w3">
+			<div class="action grid-layout w2">
 				<div data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
-			<div class="action grid-layout w3">
+			<div class="action grid-layout w2">
 				<?php if ( -1 != $risk->data['risk_category']->data['id'] && -1 != $risk->data['evaluation']->data['scale'] ) : ?>
 					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="button w50 blue add action-input progress"><i class="icon far fa-plus"></i></div>
 				<?php else : ?>
