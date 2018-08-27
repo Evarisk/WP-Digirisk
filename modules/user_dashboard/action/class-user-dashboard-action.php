@@ -53,7 +53,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	 * @since 6.1.6
 	 */
 	public function callback_users_page() {
-		$from_install = ( ! empty( $_GET['from_install'] ) && 'true' === $_GET['from_install'] ) ? true : false; // WPCS: input var ok, CSRF ok.
+		$from_install = ( ! empty( $_GET['from_install'] ) && 1 == $_GET['from_install'] ) ? true : false; // WPCS: input var ok, CSRF ok.
 
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'main', array(
 			'from_install' => $from_install,
