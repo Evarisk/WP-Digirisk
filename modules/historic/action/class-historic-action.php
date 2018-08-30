@@ -34,7 +34,8 @@ class Historic_Action {
 	}
 
 	/**
-	 * Enregistres dans la base de donnée les données de $data qui doivent réspecter obligatoirement le schéma suivant:
+	 * Enregistres dans la base de donnée les données de $data qui doivent
+	 * réspecter obligatoirement le schéma suivant:
 	 * - parent ID
 	 * - ID
 	 * - Contenu
@@ -84,11 +85,16 @@ class Historic_Action {
 		) );
 		$view = ob_get_clean();
 
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/modal-button' );
+		$buttons_view = ob_get_clean();
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'historic',
 			'callback_success' => 'openedHistoricRiskPopup',
 			'view'             => $view,
+			'buttons_view'     => $buttons_view,
 		) );
 	}
 }

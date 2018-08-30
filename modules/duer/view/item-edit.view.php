@@ -116,7 +116,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-id="<?php echo esc_attr( $element_id ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'display_societies_duer' ) ); ?>"
 					data-action="display_societies_duer"
-					data-class="generate-duer-modal"
+					data-class="generate-duer-modal modal-force-display"
 					data-title="Génération du DUER">
 					<i class="icon far fa-plus"></i>
 				</div>

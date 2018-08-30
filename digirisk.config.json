@@ -90,6 +90,7 @@
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false,
   "update_page_url": "digirisk-update",
+  "dashboard_page_url": "digirisk-simple-risk-evaluation",
   "default_capabilities": {
     "administrator": [
       "manage_digirisk",
@@ -105,5 +106,6 @@
     "author": [
       "manage_causerie"
     ]
-  }
+  },
+  "key_waiting_updates": "_digi_waited_updates"
 }

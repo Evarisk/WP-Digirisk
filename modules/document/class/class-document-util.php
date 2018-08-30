@@ -64,10 +64,11 @@ class Document_Util_Class extends \eoxia\Singleton_Util {
 	 */
 	public function get_document_url( $element, $parent_type ) {
 		$url = '';
+		$dir = wp_upload_dir();
 
 		if ( ! empty( $element ) && is_object( $element ) ) {
-			$basedir = $this->get_digirisk_dir_path( 'basedir' );
-			$baseurl = $this->get_digirisk_dir_path( 'baseurl' );
+			$basedir = str_replace( '\\', '/', $dir['basedir'] );
+			$baseurl = str_replace( '\\', '/', $dir['baseurl'] );
 			$url     = $baseurl . '/';
 
 			if ( ! empty( $element->data['parent_id'] ) && ! empty( $element->data['mime_type'] ) ) {

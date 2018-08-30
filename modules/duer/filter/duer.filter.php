@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Les filtres relatives au DUER
  */
-class DUER_Filter {
+class DUER_Filter extends Identifier_Filter {
 
 	/**
 	 * Le constructeur ajoute le filtre society_header_end
@@ -26,6 +26,8 @@ class DUER_Filter {
 	 * @since 6.2.5
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_group' ), 8, 2 );
 

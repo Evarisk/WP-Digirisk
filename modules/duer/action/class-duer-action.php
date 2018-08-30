@@ -59,11 +59,21 @@ class DUER_Action {
 		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/main', array(
 			'society' => $society,
 		) );
+		$view = ob_get_clean();
+
+		ob_start();
+		?>
+		<div class="wpeo-button button-main modal-close">
+			<span><?php esc_html_e( 'Fermer', 'digirisk' ); ?></span>
+		</div>
+		<?php
+		$buttons_view = ob_get_clean();
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'DUER',
 			'callback_success' => 'displayedSocietyDUERSuccess',
-			'view'             => ob_get_clean(),
+			'view'             => $view,
+			'buttons_view'     => $buttons_view,
 		) );
 	}
 
@@ -145,7 +155,7 @@ class DUER_Action {
 		\eoxia\LOG_Util::log( 'FIN - Génération du document DUER', 'digirisk' );
 
 		ZIP_Class::g()->update_temporarly_files_details( array(
-			'filename' => $generation_status['document']->data['title'],
+			'filename' => $generation_status['document']->data['title'] . '.odt',
 			'path'     => $generation_status['document']->data['path'],
 		) );
 
@@ -191,7 +201,7 @@ class DUER_Action {
 		}
 
 		ZIP_Class::g()->update_temporarly_files_details( array(
-			'filename' => $generation_status['document']->data['title'],
+			'filename' => $generation_status['document']->data['title'] . '.odt',
 			'path'     => $generation_status['document']->data['path'],
 		) );
 

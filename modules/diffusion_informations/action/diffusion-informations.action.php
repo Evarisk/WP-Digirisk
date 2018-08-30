@@ -62,9 +62,13 @@ class Diffusion_Informations_Action {
 			'diffusion_information' => $diffusion_information,
 		) );
 
+		Diffusion_Informations_A3_Class::g()->create_document( $response['document']->data['id'] );
+
 		$response = Diffusion_Informations_A4_Class::g()->prepare_document( $parent_id, array(
 			'diffusion_information' => $diffusion_information,
 		) );
+
+		Diffusion_Informations_A4_Class::g()->create_document( $response['document']->data['id'] );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

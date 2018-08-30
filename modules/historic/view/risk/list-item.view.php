@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			<?php
 			if ( ! empty( $evaluation->comments ) ) :
 				foreach ( $evaluation->comments as $comment ) :
-					if ( 0 !== $comment->id ) :
+					if ( 0 !== $comment->data['id'] ) :
 						?>
 							<?php	$userdata = get_userdata( $comment->data['author_id'] ); ?>
 

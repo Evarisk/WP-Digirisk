@@ -31,7 +31,7 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 		parent::__construct();
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'wp_loaded', array( $this, 'automatic_update_redirect' ) );
-		add_action( 'wp_ajax_fp_redirect_to_dashboard', array( $this, 'callback_fp_redirect_to_dashboard' ) );
+		add_action( 'wp_ajax_digi_redirect_to_dashboard', array( $this, 'callback_fp_redirect_to_dashboard' ) );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 			'updateComplete'  => true,
 			// Translators: 1. Start of link to dashboard 2. End of link to dashboard.
 			'doneDescription' => sprintf( __( 'You will be redirect to Frais.pro main dashboard. %1$sClick here if nothing append%2$s', 'digirisk' ), '<a href="" >', '</a>' ),
-			'url'             => admin_url( '?page=' . \eoxia\Config_Util::$init['digirisk']->dashboard_page_url ),
+			'url'             => admin_url( 'admin.php?page=' . \eoxia\Config_Util::$init['digirisk']->dashboard_page_url ),
 		) );
 	}
 

@@ -14,5 +14,5 @@ window.eoxiaJS.digirisk.sheet_groupment.init = function() {};
  * @version 6.2.4
  */
 window.eoxiaJS.digirisk.sheet_groupment.generatedSheetGroupment = function( triggeredElement, response ) {
-	jQuery( '.tab-element[data-action="digi-fiche-de-groupement"]' ).click();
+	jQuery( '.tab-element[data-target="digi-fiche-de-groupement"]' ).click();
 };

@@ -32,6 +32,7 @@ window.eoxiaJS.digirisk.DUER.event = function() {
 	jQuery( document ).on( 'click', '.duer-modal .button-main', window.eoxiaJS.digirisk.DUER.applyValueToTextarea );
 
 	jQuery( document ).on( 'modal-opened', '.generate-duer-modal', window.eoxiaJS.digirisk.DUER.generateDUERModalOpened );
+	jQuery( document ).on( 'click', '.generate-duer-modal .button-main', window.eoxiaJS.digirisk.DUER.closeModalGenerateDUER );
 };
 
 /**
@@ -141,7 +142,7 @@ window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response 
 		response.data.index++;
 		window.eoxiaJS.digirisk.DUER.generateDUER( element, response );
 	} else {
-		jQuery( '.generate-duer-modal' ).removeClass( 'no-close' );
+		jQuery( '.generate-duer-modal' ).removeClass( 'no-close modal-force-display' );
 	}
 };
 
@@ -161,7 +162,7 @@ window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
  * @param  {ClickEvent} event        L'état de la souris
  * @return {void}
  */
-window.eoxiaJS.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
+window.eoxiaJS.digirisk.DUER.closeModalGenerateDUER = function( element, event ) {
 	if ( jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ) ) {
 		jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ).click();
 	}

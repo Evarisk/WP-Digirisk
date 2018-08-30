@@ -7,10 +7,10 @@
 	"path": "modules/duer/",
 	"dependencies": {
 		"model": {},
-		"filter": {},
 		"shortcode": {},
 		"class": {},
-		"action": {}
+		"action": {},
+    "filter": {}
 	},
 	"meta_key_generate_duer": "generate_duer_tmp"
 }

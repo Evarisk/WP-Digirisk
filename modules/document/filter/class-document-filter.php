@@ -137,6 +137,16 @@ class Document_Filter extends \eoxia\Singleton_Util {
 					}
 				}
 			}
+
+			if ( count( $data['utilisateursPresents']['value'] ) > 1 ) {
+				usort( $data['utilisateursPresents']['value'], function( $a, $b ) {
+					if ( $a['dateTrie'] == $b['dateTrie'] ) {
+						return 0;
+					}
+
+					return ( $a['dateTrie'] > $b['dateTrie'] ) ? 1 : -1;
+				} );
+			}
 		}
 
 		return $data;
