@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : ''; ?></textarea>
 
 <div class="wpeo-dropdown dropdown-grid dropdown-padding-0 cotation-container">
-	<span class="dropdown-toggle cotation level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>">
+	<span data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>" class="dropdown-toggle cotation level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>">
 		<?php
 		if ( 0 !== $risk->data['id'] ) :
 			?>

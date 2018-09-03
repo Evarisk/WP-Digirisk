@@ -43,8 +43,16 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 	}
 
 	if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .table-cell.active' ).length == 5 ) {
+		if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ).length ) {
+			window.eoxiaJS.loader.display( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ) );
+			jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ).addClass( 'disabled' );
+		}
 		jQuery.post( window.ajaxurl, data, function( response ) {
 			if ( response.data.details ) {
+				if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ).length ) {
+					window.eoxiaJS.loader.remove( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ) );
+					jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ).removeClass( 'disabled' );
+				}
 				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale', response.data.details.scale );
 				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .cotation span' ).text( response.data.details.equivalence );
 				jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .wpeo-button.button-disable' ).removeClass( 'button-disable' ).addClass( 'button-main' );
@@ -63,8 +71,8 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.save = function( event ) {
 	jQuery( '.risk-row.edit[data-id="' + riskID + '"] input[name="evaluation_method_id"]' ).val( evaluationID );
 
 	// On met à jour l'affichage de la cotation.
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
-	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .dropdown-toggle.cotation span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation:first' ).attr( 'data-scale', jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation' ).attr( 'data-scale' ) );
+	jQuery( '.risk-row.edit[data-id="' + riskID + '"] .cotation:first span' ).text( jQuery( '.wpeo-modal.modal-risk-' + riskID + ' .cotation span' ).text() );
 
 	window.eoxiaJS.digirisk.evaluationMethodEvarisk.close_modal( undefined, riskID );
 };

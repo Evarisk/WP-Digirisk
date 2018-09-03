@@ -1,19 +1,20 @@
 <?php
 /**
- * Gestion des modèles personnalisés
+ * Gestion des modèles ODT personnalisés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Classes
+ *
+ * @since     6.1.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Gestion des modèles personnalisés
@@ -26,21 +27,46 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 	 * @var array
 	 */
 	private $list_type_document = array(
-		'document_unique'                   => 'Document unique',
-		'groupement'                        => 'Groupement',
-		'unite_de_travail'                  => 'Unité de travail',
-		'affichage_legal_A3'                => 'Affichage légal A3',
-		'affichage_legal_A4'                => 'Affichage légal A4',
-		'diffusion_informations_A3'         => 'Diffusion informations A3',
-		'diffusion_informations_A4'         => 'Diffusion informations A4',
-		'accident_benin'                    => 'Accident de travail bénin',
-		'registre_accidents_travail_benins' => 'Registre accidents de travail bénin',
+		'duer'                    			=> array(
+			'title' => 'Document unique',
+			'class' => '\digi\DUER_Class',
+		),
+		'groupement'                        => array(
+			'title' => 'Groupement',
+			'class' => '\digi\Sheet_Groupment_Class',
+		),
+		'unite_de_travail'                  => array(
+			'title' => 'Unité de travail',
+			'class' => '\digi\Sheet_Workunit_Class',
+		),
+		'affichage_legal_A3'                => array(
+			'title' => 'Affichage légal A3',
+			'class' => '\digi\legal_display_A3_class',
+		),
+		'affichage_legal_A4'                =>  array(
+			'title' => 'Affichage légal A4',
+			'class' => '\digi\legal_display_A4_class',
+		),
+		'diffusion_informations_A3'         => array(
+			'title' => 'Diffusion informations A3',
+			'class' => '\digi\Diffusion_Informations_A3_Class',
+		),
+		'diffusion_informations_A4'         => array(
+			'title' => 'Diffusion informations A4',
+			'class' => '\digi\Diffusion_Informations_A4_Class',
+		),
+		'accident_benin'                    =>  array(
+			'title' => 'Accident de travail bénin',
+			'class' => '\digi\Accident_Class',
+		),
+		'registre_accidents_travail_benins' => array(
+			'title' => 'Registre accidents de travail bénin',
+			'class' => '\digi\Registre_AT_Benin_Class',
+		),
 	);
 
 	/**
 	 * Le constructeur
-	 *
-	 * @return void
 	 */
 	protected function construct() {}
 
@@ -48,16 +74,13 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 	 * Appelle la vue main.view.php pour afficher la gestion des modèles personnalisés.
 	 *
 	 * @since 6.1.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function display() {
 		$list_document_default = array();
 
 		if ( ! empty( $this->list_type_document ) ) {
 			foreach ( $this->list_type_document as $key => $element ) {
-				$list_document_default[ $key ] = Document_Class::g()->get_model_for_element( array( $key, 'model', 'default_model' ) );
+				$list_document_default[ $key ] = $element['class']::g()->get_default_model( $key );
 			}
 		}
 
@@ -72,7 +95,6 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 	 * Puis génère le POST du fichier.
 	 *
 	 * @since 6.3.0
-	 * @version 6.4.4
 	 *
 	 * @param string $type      Le type du fichier.
 	 * @param string $file_path Le chemin courant du fichier.
@@ -124,7 +146,7 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $document_template_path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
 		wp_set_object_terms( $response['id'], array( $type, 'default_model', 'model' ), Document_Class::g()->attached_taxonomy_type );
-		$response['model_id'] = $document_template_path;
+		$response['model_path'] = $document_template_path;
 		Document_Class::g()->update( $response );
 
 		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Upload du modèle: %1$s vers %2$s', $attachment_current_path, $document_template_path ), 'digirisk' );

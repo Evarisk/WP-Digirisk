@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * La classe gérant les accidents
  */
-class Accident_Class extends \eoxia\Post_Class {
+class Accident_Class extends Document_Class {
 
 	/**
 	 * Le nom du modèle
@@ -77,7 +77,7 @@ class Accident_Class extends \eoxia\Post_Class {
 	 *
 	 * @since 6.1.5
 	 */
-	public function display() {
+	public function display_page() {
 		$this->register_search();
 
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main' );

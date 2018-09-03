@@ -42,13 +42,6 @@ class Accident_Travail_Benin_Action {
 		), true );
 
 		$response = Accident_Travail_Benin_Class::g()->prepare_document( $society->data['id'] );
-
-		wp_send_json_success( array(
-			'namespace'        => 'digirisk',
-			'module'           => 'sheet_workunit',
-			'callback_success' => 'generatedFicheDePosteSuccess',
-			'data'             => $response,
-		) );
 	}
 
 }

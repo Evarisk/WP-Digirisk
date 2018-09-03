@@ -93,6 +93,10 @@ class Evaluation_Method_Action {
 			foreach ( $evaluation_method_variables as $variable_id => $variable ) {
 				$risk->data['evaluation']->data['variables'][ $variable_id ] = $variable;
 			}
+
+			$details = Evaluation_Method_Class::g()->get_details( $evaluation_method->data['id'], $evaluation_method_variables );
+			$risk->data['evaluation']->data['equivalence'] = $details['equivalence'];
+			$risk->data['evaluation']->data['scale']       = $details['scale'];
 		}
 
 		ob_start();

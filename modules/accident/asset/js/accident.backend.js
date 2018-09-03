@@ -119,7 +119,6 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
 		triggeredElement.closest( '.digirisk-wrap' ).replaceWith( response.data.view );
 	}
 	window.eoxiaJS.digirisk.accident.refresh();
-	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -136,10 +135,8 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).replaceWith( response.data.view );
 	window.eoxiaJS.digirisk.accident.refresh();
-	window.eoxiaJS.digirisk.search.renderChanged();
 	jQuery( '.col.advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
 		jQuery( this )[0].signaturePad.clear();
-
 		if ( jQuery( this ).closest( 'div' ).find( '.url' ).val() ) {
 			jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( 'div' ).find( '.url' ).val() );
 		}

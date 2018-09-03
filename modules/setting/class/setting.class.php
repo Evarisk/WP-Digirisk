@@ -87,7 +87,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 
 				if ( ! empty( $danger_category_list ) ) {
 					foreach ( $danger_category_list as $element ) {
-						if ( ! empty( $element->thumbnail_id ) ) {
+						if ( ! empty( $element->data['thumbnail_id'] ) ) {
 							Risk_Class::g()->update( array(
 								'title'    => $element->name,
 								'taxonomy' => array(
@@ -101,6 +101,8 @@ class Setting_Class extends \eoxia\Singleton_Util {
 						}
 					}
 				}
+
+				// MANQUE DU LOG ICI LOG TRES IMPORTANT.
 
 				update_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
 			}
@@ -127,11 +129,8 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 * Récupères la liste des utilisateurs pour les afficher dans la vue "capability/list".
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
 	 *
 	 * @param array $list_user_id La liste des utilisateurs à afficher. Peut être vide pour récupérer tous les utilisateurs.
-	 *
-	 * @return void
 	 */
 	public function display_user_list_capacity( $list_user_id = array() ) {
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
@@ -160,16 +159,16 @@ class Setting_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $users ) ) {
 			foreach ( $users as &$user ) {
-				$user->wordpress_user = new \WP_User( $user->id );
+				$user->data['wordpress_user'] = new \WP_User( $user->data['id'] );
 			}
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/list', array(
-			'users' => $users,
+			'users'                => $users,
 			'has_capacity_in_role' => $has_capacity_in_role,
-			'number_page' => $number_page,
-			'count_user' => $count_user,
-			'current_page' => $current_page,
+			'number_page'          => $number_page,
+			'count_user'           => $count_user,
+			'current_page'         => $current_page,
 		) );
 	}
 }

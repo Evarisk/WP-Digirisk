@@ -21,19 +21,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="parent_id" value="0" />
 	<input type="hidden" name="page" value="setting_risk" />
-	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $danger->id ); ?>" />
+	<input type="hidden" name="risk[id]" value="<?php echo esc_attr( $danger->data['id'] ); ?>" />
 	<input type="hidden" name="risk[preset]" value="true" />
 	<input type="hidden" name="can_update" value="true" />
 
 	<td class="wm130 w150">
-		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $danger->id . ' type="risk"]' ); ?>
-		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $danger->id . '" danger_id="' . $danger->id . '" preset="1" type="risk" display="' . ( ( $danger->id !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
+		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $danger->data['id'] . ' type="risk"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $danger->data['id'] . '" danger_id="' . $danger->data['id'] . '" preset="1" type="risk" display="' . ( ( $danger->data['id'] !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $danger->id . ']' ); ?>
+		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $danger->data['id'] . ']' ); ?>
 	</td>
 	<td class="padding">
-		<?php do_shortcode( '[digi_comment id="' . $danger->id . '" namespace="digi" type="risk_evaluation_comment" display="edit"]' ); ?>
+		<?php do_shortcode( '[digi_comment id="' . $danger->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="edit"]' ); ?>
 	</td>
 	<td>
 		<div class="hidden">

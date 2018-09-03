@@ -39,7 +39,7 @@ class Accident_Action {
 	 * @since 6.3.0
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 	/**
@@ -72,13 +72,20 @@ class Accident_Action {
 
 		$upload_dir = wp_upload_dir();
 
+		$path_tmp       = str_replace( '\\', '/', $upload_dir['basedir'] ) . '/digirisk/tmp/';
+		$path_signature = $path_tmp . '/signature.png';
+
+		if ( ! file_exists( $path_tmp ) ) {
+			wp_mkdir_p( $path_tmp );
+		}
+
 		// Associations des images.
 		if ( ! empty( $signature_of_the_caregiver ) ) {
 			$encoded_image = explode( ',', $signature_of_the_caregiver );
 			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
-			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->data['id'] );
+			file_put_contents( $path_signature, $decoded_image );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $path_signature, $accident->data['id'] );
 			$accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] = $file_id;
 		}
 
@@ -86,8 +93,9 @@ class Accident_Action {
 			$encoded_image = explode( ',', $signature_of_the_victim );
 			$encoded_image = $encoded_image[1];
 			$decoded_image = base64_decode( $encoded_image );
-			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $accident->data['id'] );
+
+			file_put_contents( $path_signature, $decoded_image );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $path_signature, $accident->data['id'] );
 			$accident->data['associated_document_id']['signature_of_the_victim_id'][0] = $file_id;
 		}
 

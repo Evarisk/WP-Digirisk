@@ -31,8 +31,8 @@ class Evaluator_Action {
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
 		add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
 
-		add_action( 'display_evaluator_affected', array( $this, 'callback_display_evaluator_affected' ), 10, 2 );
-		add_action( 'display_evaluator_to_assign', array( $this, 'callback_display_evaluator_to_assign' ), 10, 2 );
+		add_action( 'display_evaluator_affected', array( $this, 'callback_display_evaluator_affected' ), 10, 1 );
+		add_action( 'display_evaluator_to_assign', array( $this, 'callback_display_evaluator_to_assign' ), 10, 1 );
 	}
 
 	/**
@@ -191,15 +191,23 @@ class Evaluator_Action {
 	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
 	 */
-	public function callback_display_evaluator_affected( $id, $list_user_id ) {
-		$element                 = Society_Class::g()->show_by_type( $id );
+	public function callback_display_evaluator_affected( $data ) {
+		$list_user_id = array();
+
+		if ( ! empty( $data['users'] ) ) {
+			foreach ( $data['users'] as $user ) {
+				$list_user_id[] = $user->data['id'];
+			}
+		}
+
+		$element                 = Society_Class::g()->show_by_type( $data['args']['post_id'] );
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 
 		if ( ! empty( $list_affected_evaluator ) ) {
 			foreach ( $list_affected_evaluator as $key => $sub_list ) {
 				foreach ( $sub_list as $evaluator_key => $evaluator ) {
 					if ( is_object( $evaluator['user_info'] ) ) {
-						if ( ! in_array( $evaluator['user_info']->id, $list_user_id, true ) ) {
+						if ( ! in_array( $evaluator['user_info']->data['id'], $list_user_id, true ) ) {
 							unset( $list_affected_evaluator[ $key ][ $evaluator_key ] );
 						}
 					}
@@ -210,13 +218,13 @@ class Evaluator_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
 			'element'                 => $element,
-			'element_id'              => $element->id,
+			'element_id'              => $element->data['id'],
 			'list_affected_evaluator' => $list_affected_evaluator,
 		) );
 
 		wp_send_json_success( array(
-			'template'         => ob_get_clean(),
-			'callback_success' => 'searchedDisplayedEvaluatorAffected',
+			'view'   => ob_get_clean(),
+			'output' => '.affected-evaluator',
 		) );
 	}
 
@@ -228,8 +236,16 @@ class Evaluator_Action {
 	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
 	 */
-	public function callback_display_evaluator_to_assign( $id, $list_user_id ) {
-		$element = Society_Class::g()->show_by_type( $id );
+	public function callback_display_evaluator_to_assign( $data ) {
+		$list_user_id = array();
+
+		if ( ! empty( $data['users'] ) ) {
+			foreach ( $data['users'] as $user ) {
+				$list_user_id[] = $user->data['id'];
+			}
+		}
+
+		$element = Society_Class::g()->show_by_type( $data['args']['post_id'] );
 
 		$args_where_evaluator = array(
 			'exclude' => array( 1 ),
@@ -248,7 +264,7 @@ class Evaluator_Action {
 
 		if ( ! empty( $evaluators ) ) {
 			foreach ( $evaluators as $key => $evaluator ) {
-				if ( ! in_array( $evaluator->id, $list_user_id, true ) ) {
+				if ( ! in_array( $evaluator->data['id'], $list_user_id, true ) ) {
 					unset( $evaluators[ $key ] );
 				}
 			}
@@ -257,14 +273,14 @@ class Evaluator_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-to-assign', array(
 			'element'      => $element,
-			'element_id'   => $element->id,
+			'element_id'   => $element->data['id'],
 			'current_page' => $current_page,
 			'number_page'  => $number_page,
 			'evaluators'   => $evaluators,
 		) );
 		wp_send_json_success( array(
-			'template' => ob_get_clean(),
-			'callback_success' => 'searchedDisplayedEvaluatorToAffect'
+			'view'   => ob_get_clean(),
+			'output' => '.form-edit-evaluator-assign',
 		) );
 	}
 }

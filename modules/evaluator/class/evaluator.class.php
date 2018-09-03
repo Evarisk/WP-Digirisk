@@ -71,6 +71,8 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
 	 */
 	public function render( $element, $current_page = 1 ) {
+		global $eo_search;
+
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
 
@@ -92,6 +94,22 @@ class Evaluator_Class extends \eoxia\User_Class {
 		$count_evaluator                = count( User_Digi_Class::g()->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
+
+		$eo_search->register_search( 'evaluator_to_assign', array(
+			'icon'    => 'fa-search',
+			'type'    => 'user',
+			'name'    => 'evaluator',
+			'action'  => 'display_evaluator_to_assign',
+			'post_id' => $element->data['id'],
+		) );
+
+		$eo_search->register_search( 'evaluator_affected', array(
+			'icon'    => 'fa-search',
+			'type'    => 'user',
+			'name'    => 'evaluator',
+			'action'  => 'display_evaluator_affected',
+			'post_id' => $element->data['id'],
+		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element'                 => $element,

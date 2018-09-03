@@ -52,10 +52,9 @@ class Setting_Action {
 	 * et la liste des catégories de risque prédéfinies.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function add_option_page() {
-		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-capability';
+		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-capability'; // WPCS: var input ok.
 
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
@@ -68,18 +67,22 @@ class Setting_Action {
 			WHERE RISK_META.meta_key = '_wpdigi_preset'
 				AND RISK_META.meta_value = 1" );
 
-		$dangers_preset = Risk_Class::g()->get( array(
-			'include' => $preset_risks_id,
-			'order' => 'ASC',
-		) );
+		$dangers_preset = array();
+
+		if ( ! empty( $preset_risks_id ) ) {
+			$dangers_preset = Risk_Class::g()->get( array(
+				'include' => $preset_risks_id,
+				'order' => 'ASC',
+			) );
+		}
 
 		// Retravaille l'ordre pour respecter celui de l'INRS.
 		uasort( $dangers_preset, function( $a, $b ) {
-			if ( $a->risk_category->position === $b->risk_category->position ) {
+			if ( $a->data['risk_category']->data['position'] === $b->data['risk_category']->data['position'] ) {
 				return 0;
 			}
 
-			if ( $a->risk_category->position > $b->risk_category->position ) {
+			if ( $a->data['risk_category']->data['position'] > $b->data['risk_category']->data['position'] ) {
 				return 1;
 			}
 
@@ -87,9 +90,9 @@ class Setting_Action {
 		} );
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
-			'list_accronym' => $list_accronym,
+			'list_accronym'  => $list_accronym,
 			'dangers_preset' => $dangers_preset,
-			'default_tab' => $default_tab,
+			'default_tab'    => $default_tab,
 		) );
 	}
 
@@ -106,7 +109,7 @@ class Setting_Action {
 
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
-				$element['to'] = sanitize_text_field( $element['to'] );
+				$element['to']          = sanitize_text_field( $element['to'] );
 				$element['description'] = sanitize_text_field( stripslashes( $element['description'] ) );
 			}
 		}
@@ -119,9 +122,6 @@ class Setting_Action {
 	 * Rajoutes la capacité "manager_digirisk" à tous les utilisateurs ou $have_capability est à true.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function callback_save_capability() {
 		check_ajax_referer( 'save_capability' );
@@ -139,8 +139,8 @@ class Setting_Action {
 		}
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'setting',
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
 			'callback_success' => 'savedCapability',
 		) );
 	}

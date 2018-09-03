@@ -23,19 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( 'edit_risk' ); ?>
 
 	<td class="padding">
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&establishment_id=' . $risk->parent_group->data['id'] ) ); ?>">
-			<strong><?php echo esc_attr( $risk->parent_group->data['unique_identifier'] ); ?> -</strong>
-			<span><?php echo esc_attr( $risk->parent_group->data['title'] ); ?></span>
-		</a>
-	</td>
-	<td class="padding">
-		<?php if ( ! empty( $risk->data['parent_workunit'] ) ) : ?>
+		<?php if ( ! empty( $risk->data['parent'] ) ) : ?>
 			<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&establishment_id=' . $risk->data['parent_id'] ) ); ?>">
-				<strong><?php echo esc_attr( $risk->data['parent_workunit']->unique_identifier ); ?> -</strong>
-				<span><?php echo esc_attr( $risk->data['parent_workunit']->title ); ?></span>
+				<strong><?php echo esc_attr( $risk->data['parent']->data['unique_identifier'] ); ?> -</strong>
+				<span><?php echo esc_attr( $risk->data['parent']->data['title'] ); ?></span>
 			</a>
-		<?php else : ?>
-			<p><?php esc_html_e( 'Aucune unité de travail', 'digirisk' ); ?></p>
 		<?php endif; ?>
 	</td>
 	<td><?php do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="/digi/Risk_Class" field_name="image" single="false" title="' . $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] . '"]' ); ?></td>

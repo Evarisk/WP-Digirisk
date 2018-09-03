@@ -41,6 +41,7 @@ class Risk_Save_Action {
 
 		$id                   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$page                 = ! empty( $_POST['page'] ) ? sanitize_text_field( wp_unslash( $_POST['page'] ) ) : '';
 		$risk_category_id     = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$evaluation_method_id = ! empty( $_POST['evaluation_method_id'] ) ? (int) $_POST['evaluation_method_id'] : 0;
 		$comments             = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
@@ -71,11 +72,22 @@ class Risk_Save_Action {
 
 		$risk = Risk_Class::g()->update( $risk->data );
 
+		$module = 'risk';
+
 		ob_start();
-		Risk_Class::g()->display( $risk->data['parent_id'] );
+		if ( 'all_risk' === $page ) {
+			$module = 'risk_page';
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+				'risk' => $risk,
+			) );
+		} else {
+			Risk_Class::g()->display( $risk->data['parent_id'] );
+		}
+
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
-			'module'           => 'risk',
+			'module'           => $module,
 			'callback_success' => 'savedRiskSuccess',
 			'template'         => ob_get_clean(),
 		) );

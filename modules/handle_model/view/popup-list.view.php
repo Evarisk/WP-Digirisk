@@ -27,8 +27,8 @@ if ( ! empty( $models ) ) :
 				<h4>Historique des modèles</h4>
 			<?php endif; ?>
 			<span>
-				<a href="<?php echo esc_attr( $element->url ); ?>">
-					<i class="dashicons-download dashicons"></i>Télécharger ce modèle (<?php echo esc_html( ! empty( $element->date['date_human_readable'] ) ? $element->date['date_human_readable'] : 'Modèle de Digirisk par défaut' ); ?>)
+				<a href="<?php echo esc_attr( $element->data['url'] ); ?>">
+					<i class="dashicons-download dashicons"></i>Télécharger ce modèle (<?php echo esc_html( ! empty( $element->data['date']['rendered']['date_human_readable'] ) ? $element->data['date']['rendered']['date_human_readable'] : 'Modèle de Digirisk par défaut' ); ?>)
 				</a>
 			</span>
 		</li>

@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<span class="cotation level<?php echo esc_attr( ! empty( $risk->data['evaluation'] ) ? $risk->data['evaluation']->data['scale'] : '-1' ); ?>">
+<span data-scale="<?php echo esc_attr( ! empty( $risk->data['evaluation'] ) ? $risk->data['evaluation']->data['scale'] : '-1' ); ?>" class="cotation">
 	<span><?php echo esc_html( ! empty( $risk->data['evaluation'] ) ? $risk->data['evaluation']->data['equivalence'] : 0 ); ?></span>
 </span>
 

@@ -26,6 +26,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_modal_method_evaluation' ) ); ?>"
 	data-id="<?php echo esc_attr( $evaluation_method->data['id'] ); ?>"
 	data-risk-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
+	data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>"
 	wpeo-before-cb="digirisk/evaluationMethodEvarisk/fillVariables">
 	<span><?php echo esc_html( $risk->data['current_equivalence'] ); ?></span>
 </div>

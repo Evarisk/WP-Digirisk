@@ -12,7 +12,7 @@ window.eoxiaJS.digirisk.risk_page.init = function() {
 
 window.eoxiaJS.digirisk.risk_page.event = function() {
 	jQuery( document ).on( 'click', '.risk-page .save-all:not(.grey)', window.eoxiaJS.digirisk.risk_page.saveRisks );
-	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), .risk-page tr .wpeo-dropdown .dropdown-toggle, .risk-page tr textarea, .risk-page tr .popup, .risk-page tr .action', window.eoxiaJS.digirisk.risk_page.checkTheCheckbox );
+	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), .risk-page tr .wpeo-dropdown .dropdown-toggle, .risk-page tr textarea, .risk-page tr .popup, .risk-page tr .action, .risk-page .cotation', window.eoxiaJS.digirisk.risk_page.checkTheCheckbox );
 
 	jQuery( document ).on( 'click', '.risk-page .wp-digi-pagination a', window.eoxiaJS.digirisk.risk_page.pagination );
 };

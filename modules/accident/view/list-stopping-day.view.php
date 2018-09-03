@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							data-id="<?php echo esc_attr( $stopping_day->data['id'] ); ?>"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_stopping_day' ) ); ?>"
 							data-action="delete_stopping_day"
-							data-message-delete="<?php echo esc_attr_e( 'Supprimer', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
+							data-message-delete="<?php echo esc_attr_e( 'Êtes-vous sur(e) de vouloir supprimer cet arrêt de travail ?', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
 			</li>
 			<?php
 		endforeach;

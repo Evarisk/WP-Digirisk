@@ -42,7 +42,7 @@ class Risk_Category_Action {
 	public function callback_check_predefined_danger() {
 		check_ajax_referer( 'check_predefined_danger' );
 
-		$danger_id = ! empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
+		$danger_id  = ! empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
 		$society_id = ! empty( $_POST['society_id'] ) ? (int) $_POST['society_id'] : 0;
 
 		if ( empty( $danger_id ) || empty( $society_id ) ) {
@@ -73,13 +73,13 @@ class Risk_Category_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
-			'risk' => $preset_risk,
+			'risk'       => $preset_risk,
 		) );
 
 		wp_send_json_success( array(
-			'view' => ob_get_clean(),
-			'namespace' => 'digirisk',
-			'module' => 'risk',
+			'view'             => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
 			'callback_success' => 'checkedPredefinedDanger',
 		) );
 	}
