@@ -46,7 +46,6 @@ window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
  * @return {void}
  *
  * @since 6.0.0
- * @version 7.0.0
  */
 window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
@@ -60,7 +59,6 @@ window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, resp
  * @return {void}
  *
  * @since 6.2.9
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table' ).removeClass( 'loading' );

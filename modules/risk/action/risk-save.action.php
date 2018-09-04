@@ -34,21 +34,17 @@ class Risk_Save_Action {
 	 * Enregistres un risque.
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
 	 */
 	public function callback_edit_risk() {
 		check_ajax_referer( 'edit_risk' );
 
 		$id                   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$from_preset          = ! empty( $_POST['from_preset'] ) ? (int) $_POST['from_preset'] : 0;
 		$page                 = ! empty( $_POST['page'] ) ? sanitize_text_field( wp_unslash( $_POST['page'] ) ) : '';
 		$risk_category_id     = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$evaluation_method_id = ! empty( $_POST['evaluation_method_id'] ) ? (int) $_POST['evaluation_method_id'] : 0;
 		$comments             = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
-
-		if ( empty( $parent_id ) ) {
-			wp_send_json_error();
-		}
 
 		$risk_data = array(
 			'id'        => $id,
@@ -66,6 +62,16 @@ class Risk_Save_Action {
 		$evaluation_method_variables = json_decode( $evaluation_method_variables, true );
 
 		$risk_evaluation = Risk_Evaluation_Class::g()->save( $risk->data['id'], $evaluation_method_id, $evaluation_method_variables );
+
+		if ( $from_preset ) {
+			if ( ! empty( $comments ) ) {
+				foreach ( $comments as &$comment ) {
+					$comment['id']      = 0;
+					$comment['post_id'] = $risk->data['id'];
+				}
+			}
+		}
+
 		Risk_Evaluation_Comment_Class::g()->save( $risk, $comments );
 
 		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
@@ -78,6 +84,11 @@ class Risk_Save_Action {
 		if ( 'all_risk' === $page ) {
 			$module = 'risk_page';
 			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+				'risk' => $risk,
+			) );
+		} else if ( 'setting_risk' === $page ) {
+			$module = 'setting';
+			\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/item', array(
 				'risk' => $risk,
 			) );
 		} else {

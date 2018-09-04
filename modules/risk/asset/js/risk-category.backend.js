@@ -45,18 +45,18 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	// Si aucune donnée est entrée, on lance la requête.
 	if ( element.data( 'is-preset' ) && ! window.eoxiaJS.digirisk.riskCategory.haveDataInInput( element ) ) {
 		data.action = 'check_predefined_danger';
-		data._wpnonce = element.closest( '.toggle' ).data( 'nonce' );
+		data._wpnonce = element.closest( '.wpeo-dropdown' ).data( 'nonce' );
 		data.danger_id = element.data( 'id' );
 		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
 		jQuery( this ).closest( 'table' ).addClass( 'loading' );
 
-		window.eoxiaJS.request.send( jQuery( this ).closest( '.toggle' ), data );
+		window.eoxiaJS.request.send( jQuery( this ).closest( '.wpeo-dropdown' ), data );
 	}
 };
 
 window.eoxiaJS.digirisk.riskCategory.haveDataInInput = function( element ) {
-	if ( -1 != element.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
+	if ( '{}' != element.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
 		return true;
 	}
 

@@ -71,8 +71,8 @@ class Setting_Action {
 
 		if ( ! empty( $preset_risks_id ) ) {
 			$dangers_preset = Risk_Class::g()->get( array(
-				'include' => $preset_risks_id,
-				'order' => 'ASC',
+				'post__in' => $preset_risks_id,
+				'order'    => 'ASC',
 			) );
 		}
 

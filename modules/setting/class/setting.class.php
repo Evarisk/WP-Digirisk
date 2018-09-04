@@ -89,21 +89,20 @@ class Setting_Class extends \eoxia\Singleton_Util {
 					foreach ( $danger_category_list as $element ) {
 						if ( ! empty( $element->data['thumbnail_id'] ) ) {
 							Risk_Class::g()->update( array(
-								'title'    => $element->name,
+								'title'    => $element->data['name'],
 								'taxonomy' => array(
 									'digi-category-risk' => array(
-										$element->id,
+										$element->data['id'],
 									),
 								),
-								'status'   => 'publish',
+								'status'   => 'inherit',
 								'preset'   => true,
 							) );
 						}
 					}
 				}
 
-				// MANQUE DU LOG ICI LOG TRES IMPORTANT.
-
+				\eoxia\LOG_Util::log( 'Création des templates de risque.', 'digirisk' );
 				update_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
 			}
 		}

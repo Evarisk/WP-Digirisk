@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
 	<input type="hidden" name="id" value="<?php echo $risk->data['preset'] ? 0 : esc_attr( $risk->data['id'] ); ?>" />
+	<input type="hidden" name="from_preset" value="<?php echo $risk->data['preset'] ? 1 : 0; ?>" />
 	<?php wp_nonce_field( 'edit_risk' ); ?>
 
 	<td data-title="Ref." class="padding">

@@ -6,7 +6,7 @@
  * @since 1.4.0
  * @version 1.4.0
  * @copyright 2015-2018 Eoxia
- * @package Frais.pro
+ * @package DigiRisk
  * @subpackage Update Manager
  */
 
@@ -24,21 +24,23 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 	/**
 	 * Instanciation de la classe de gestions des mises à jour des données suite aux différentes versions de l'extension
 	 *
-	 * @since 1.4.0
-	 * @version 1.4.0
+	 * @since 7.0.0
 	 */
 	public function __construct() {
-		parent::__construct();
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
-		add_action( 'wp_loaded', array( $this, 'automatic_update_redirect' ) );
-		add_action( 'wp_ajax_digi_redirect_to_dashboard', array( $this, 'callback_fp_redirect_to_dashboard' ) );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+
+		if ( ! empty( $digirisk_core['installed'] ) ) {
+			parent::__construct();
+			add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+			add_action( 'wp_loaded', array( $this, 'automatic_update_redirect' ) );
+			add_action( 'wp_ajax_digi_redirect_to_dashboard', array( $this, 'callback_fp_redirect_to_dashboard' ) );
+		}
 	}
 
 	/**
 	 * AJAX Callback - Return the website url
 	 *
-	 * @since 1.4.0
-	 * @version 1.4.0
+	 * @since 7.0.0
 	 */
 	public function callback_fp_redirect_to_dashboard() {
 		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );

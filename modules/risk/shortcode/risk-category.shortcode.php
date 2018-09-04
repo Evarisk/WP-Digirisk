@@ -35,7 +35,6 @@ class Risk_Category_Shortcode {
 	 * Si le danger du risque est déjà défini, appel la vue danger-item.view.php
 	 *
 	 * @since 6.4.0
-	 * @version 7.0.0
 	 *
 	 * @param array $param {
 	 *                     Les propriété de tableau.
@@ -45,8 +44,6 @@ class Risk_Category_Shortcode {
 	 *                     @type string  $display          Le mode d'affichage: 'edit' ou 'view'.
 	 *                     @type integer $preset           1 ou 0.
 	 * }
-	 *
-	 * @return void
 	 */
 	public function callback_dropdown_categories_risk( $param ) {
 		$id               = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
@@ -56,7 +53,7 @@ class Risk_Category_Shortcode {
 
 		if ( 'edit' === $display ) {
 			$risks_categories_preset = Risk_Class::g()->get( array(
-				'post_status' => array( 'publish' ),
+				'post_status' => array( 'publish', 'inherit' ),
 				'meta_query'  => array(
 					array(
 						'key'     => '_wpdigi_preset',
