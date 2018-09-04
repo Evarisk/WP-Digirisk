@@ -33,6 +33,8 @@ class Setting_Action {
 
 		add_action( 'display_setting_user', array( $this, 'callback_display_setting_user' ), 10, 2 );
 		add_action( 'wp_ajax_paginate_setting_page_user', array( $this, 'callback_paginate_setting_page_user' ) );
+
+		add_action( 'wp_ajax_save_general_settings_digirisk', array( $this, 'ajax_save_general_settings_digirisk' ) );
 	}
 
 	/**
@@ -54,7 +56,7 @@ class Setting_Action {
 	 * @since 6.0.0
 	 */
 	public function add_option_page() {
-		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-capability'; // WPCS: var input ok.
+		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general'; // WPCS: var input ok.
 
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
@@ -175,6 +177,21 @@ class Setting_Action {
 	public function callback_paginate_setting_page_user() {
 		Setting_Class::g()->display_user_list_capacity();
 		wp_die();
+	}
+
+	/**
+	 * Sauvegardes le domaine de l'email dans la page "Digirisk" dans le menu "Utilisateurs" de WordPress.
+	 *
+	 * @since 6.0.0
+	 */
+	public function ajax_save_general_settings_digirisk() {
+		check_ajax_referer( 'save_general_settings_digirisk' );
+		$domain_mail = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		if ( '' === $domain_mail ) {
+			wp_send_json_error();
+		}
+		update_option( 'digirisk_domain_mail', $domain_mail );
+		wp_send_json_success();
 	}
 }
 
