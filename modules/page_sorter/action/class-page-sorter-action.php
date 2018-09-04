@@ -26,7 +26,6 @@ class Page_Sorter_Action {
 	 * -admin_post_sorter_parent
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 15 );
@@ -37,7 +36,6 @@ class Page_Sorter_Action {
 	 * Définition du menu dans l'administration de WordPress pour Digirisk
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5
 	 */
 	public function callback_admin_menu() {
 		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Organiseur', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_digirisk', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ) );
@@ -46,10 +44,7 @@ class Page_Sorter_Action {
 	/**
 	 * Met le parent_id à l'élément.
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function callback_sorter_parent() {
 		check_admin_referer( 'callback_sorter_parent' );
@@ -67,19 +62,18 @@ class Page_Sorter_Action {
 				$parent_id = (int) $_POST['menu_item_parent_id'][ $element_id ];
 
 				if ( $element_id !== $parent_id ) {
-					$society = Society_Class::g()->show_by_type( $element_id );
-					$society->parent_id = $parent_id;
+					$society                    = Society_Class::g()->show_by_type( $element_id );
+					$society->data['parent_id'] = $parent_id;
 
-					if ( empty( $society->parent_id ) ) {
-						$society->parent_id = $main_society->id;
+					if ( empty( $society->data['parent_id'] ) ) {
+						$society->data['parent_id'] = $main_society->data['id'];
 					}
 
-					// Met le menu order.
 					if ( empty( $array_order[ $parent_id ] ) ) {
 						$array_order[ $parent_id ] = 0;
 					}
 
-					$society->order = $array_order[ $parent_id ];
+					$society->data['order'] = $array_order[ $parent_id ];
 					$array_order[ $parent_id ]++;
 
 					Society_Class::g()->update_by_type( $society );

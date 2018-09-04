@@ -17,7 +17,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $evaluation_method_id ); ?>" />
-<textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : ''; ?></textarea>
+<textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : '{}'; ?></textarea>
 
 <div class="cotation wpeo-tooltip-event wpeo-modal-event level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>"
 	aria-label="Modifier la cotation"
