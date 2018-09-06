@@ -22,11 +22,11 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td>
 		<div class="action">
 			<?php if ( $element->data['file_generated'] ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( $element->data['link'] ); ?>">
+				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $element->data['link'] ); ?>">
 					<i class="fas fa-download icon" aria-hidden="true"></i>
 				</a>
 			<?php else : ?>
-				<span class="action-attribute button grey h50 wpeo-tooltip-event"
+				<span class="action-attribute wpeo-button button-grey button-square-50 wpeo-tooltip-event"
 					data-id="<?php echo esc_attr( $element->data['id'] ); ?>"
 					data-model="<?php echo esc_attr( $element->get_class() ); ?>"
 					data-action="generate_document"

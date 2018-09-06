@@ -19,13 +19,13 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <input class="input-hidden-recommendation" type="hidden" name="recommendation_category_id" value='-1' />
 
-<div class="wpeo-dropdown categorie-container padding tooltip red"
+<div class="wpeo-dropdown dropdown-large categorie-container padding tooltip red"
 	aria-label="<?php esc_html_e( 'Vous devez choisir une signalisation.', 'digirisk' ); ?>">
 
-	<div class="dropdown-toggle">
+	<div class="dropdown-toggle wpeo-button button-transparent">
 		<span><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></span>
 		<img class="hidden" src="" title="<?php echo esc_attr( 'Signalisation', 'digirisk' ); ?>" />
-		<i class="icon animated far fa-angle-down"></i>
+		<i class="button-icon animated far fa-angle-down"></i>
 	</div>
 
 	<ul class="dropdown-content wpeo-grid grid-6" style="width: 400px;">

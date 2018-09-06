@@ -39,7 +39,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 
 	// Rend le bouton "active".
 	if ( '{}' !== triggeredElement.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
-		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+		element.closest( 'tr' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 	}
 
 	// Si aucune donnée est entrée, on lance la requête.

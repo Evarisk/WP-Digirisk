@@ -33,8 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</span>
 
-
-	<ul class="dropdown-content dropdown-<?php echo esc_attr( $variables[0]->data['display_type'] ); ?>">
+	<ul class="dropdown-content wpeo-gridlayout grid-5 grid-gap-0 dropdown-<?php echo esc_attr( $variables[0]->data['display_type'] ); ?>">
 		<?php
 		if ( ! empty( $variables[0]->data['survey']['request'] ) ) :
 			foreach ( $variables[0]->data['survey']['request'] as $request ) :

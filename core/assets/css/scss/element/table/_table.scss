@@ -78,7 +78,7 @@
 			width: auto !important;
 		}
 	}
-	.category-danger {
+	.wpeo-dropdown {
 		.dropdown-toggle {
 			font-size: 14px;
 			line-height: 44px;
@@ -99,35 +99,6 @@
 			}
 		}
 	}
-	// .categorie-container {
-	// 	.action {
-	// 		padding: 0 8px;
-	// 		transition: all 0.2s ease-out;
-	// 		img {
-	// 			float: left;
-	// 			max-width: 50px;
-	// 		}
-	// 		span, .icon {
-	// 			line-height: 49px;
-	// 			transition: all 0.2s ease-out;
-	// 			color: rgba(0,0,0,0.7);
-	// 		}
-	// 		.icon {
-	// 			margin-left: 4px;
-	// 		}
-	// 		&:after {
-	// 			display: table;
-	// 			content: '';
-	// 			clear: both;
-	// 		}
-	// 	}
-	// 	.content {
-	// 		width: 280px;
-	// 		.tooltip:hover {
-	// 			cursor: pointer;
-	// 		}
-	// 	}
-	// }
 	.user {
 		background: none;
 		color: rgba(0,0,0,0.7);

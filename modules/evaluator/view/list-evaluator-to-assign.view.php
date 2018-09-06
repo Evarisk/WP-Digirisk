@@ -49,7 +49,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( 'edit_evaluator_assign' ); ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 	<input type="hidden" name="action" value="edit_evaluator_assign" />
-	<div class="button green uppercase strong float right margin action-input" data-parent="form-edit-evaluator-assign"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
 	<!-- Pagination -->
 	<?php if ( ! empty( $current_page ) && !empty( $number_page ) ): ?>
@@ -69,4 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</div>
 	<?php endif; ?>
+
+	<div class="wpeo-button button-green action-input alignright" data-parent="form-edit-evaluator-assign"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
+
 </form>

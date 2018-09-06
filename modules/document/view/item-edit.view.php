@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td><?php echo esc_html( $_this->message['generate'] ); ?></td>
 	<td>
 		<div class="action">
-			<div class="w50 action-input add button blue" data-loader="table" data-parent="sheet-groupment-row">
+			<div class="wpeo-button button-square-50 action-input add" data-loader="table" data-parent="sheet-groupment-row">
 				<i class="icon far fa-plus"></i>
 			</div>
 		</div>

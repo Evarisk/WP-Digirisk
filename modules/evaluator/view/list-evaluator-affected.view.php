@@ -49,8 +49,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 												data-affectation-id="<?php echo esc_attr( $evaluator['affectation_info']['id'] ); ?>"
 												data-loader="affected-evaluator"
 												data-message-delete="<?php echo esc_attr_e( 'Dissocier l\'évaluateur', 'digirisk' ); ?>"
-												class="action-delete button w50 light delete">
-												<i class="icon far fa-times"></i>
+												class="action-delete wpeo-button button-square-50 button-transparent delete">
+												<i class="button-icon far fa-times"></i>
 											</div>
 										</div>
 								</td>

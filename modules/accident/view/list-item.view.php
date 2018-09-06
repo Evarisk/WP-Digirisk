@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
-		<div class="action grid-layout w3">
+		<div class="action wpeo-gridlayout grid-3">
 			<?php if ( $accident->data['document']->data['file_generated'] ) : ?>
 				<a class="button purple h50" href="<?php echo esc_attr( $accident->data['document']->data['link'] ); ?>">
 					<i class="fas fa-download icon" aria-hidden="true"></i>

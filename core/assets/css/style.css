@@ -6096,20 +6096,20 @@ readers do not read off random characters that represent icons */
   border: 4px solid #2b2b2b;
   width: auto !important; }
 
-.wpeo-wrap .table .category-danger .dropdown-toggle {
+.wpeo-wrap .table .wpeo-dropdown .dropdown-toggle {
   font-size: 14px;
   line-height: 44px;
   padding: 0 2px;
   color: rgba(0, 0, 0, 0.8); }
 
-.wpeo-wrap .table .category-danger .dropdown-toggle [data-icon] {
+.wpeo-wrap .table .wpeo-dropdown .dropdown-toggle [data-icon] {
   margin-left: 2px; }
 
-.wpeo-wrap .table .category-danger .dropdown-toggle img {
+.wpeo-wrap .table .wpeo-dropdown .dropdown-toggle img {
   float: left;
   max-width: 44px; }
 
-.wpeo-wrap .table .category-danger .wpeo-button:hover {
+.wpeo-wrap .table .wpeo-dropdown .wpeo-button:hover {
   -webkit-box-shadow: inset 0 -3em rgba(0, 0, 0, 0.1);
           box-shadow: inset 0 -3em rgba(0, 0, 0, 0.1); }
 
@@ -6535,7 +6535,7 @@ readers do not read off random characters that represent icons */
     font-size: 20px;
     padding-right: 0.4em; } }
 
-.wpeo-wrap .digirisk-wrap .flex-table {
+.wpeo-wrap .flex-table {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   /* table general */
@@ -6546,11 +6546,11 @@ readers do not read off random characters that represent icons */
   /* mysql date */
   /* action */ }
 
-.wpeo-wrap .digirisk-wrap .flex-table .col, .wpeo-wrap .digirisk-wrap .flex-table .header-cell, .wpeo-wrap .digirisk-wrap .flex-table .cell {
+.wpeo-wrap .flex-table .col, .wpeo-wrap .flex-table .header-cell, .wpeo-wrap .flex-table .cell {
   height: auto;
   text-align: left; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .col {
+.wpeo-wrap .flex-table .col {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -6561,54 +6561,54 @@ readers do not read off random characters that represent icons */
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .col.advanced {
+.wpeo-wrap .flex-table .col.advanced {
   display: block;
   height: auto; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .col.advanced .col {
+.wpeo-wrap .flex-table .col.advanced .col {
   width: 100%;
   background: transparent !important; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .col.advanced .advanced {
+.wpeo-wrap .flex-table .col.advanced .advanced {
   padding: 8px; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .cell, .wpeo-wrap .digirisk-wrap .flex-table .header-cell {
+.wpeo-wrap .flex-table .cell, .wpeo-wrap .flex-table .header-cell {
   width: 100%;
   margin: auto 0; }
 
-.wpeo-wrap .digirisk-wrap .flex-table strong {
+.wpeo-wrap .flex-table strong {
   font-weight: 700;
   color: #3495f0; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-header {
+.wpeo-wrap .flex-table > .table-header {
   background: #272a35;
   color: #fff; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-header .header-cell {
+.wpeo-wrap .flex-table > .table-header .header-cell {
   font-weight: 600; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-header .col {
+.wpeo-wrap .flex-table > .table-header .col {
   background: #272a35 !important; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-header .icon {
+.wpeo-wrap .flex-table > .table-header .icon {
   padding-right: 4px; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .col:nth-child(odd) {
+.wpeo-wrap .flex-table > .table-body .col:nth-child(odd) {
   background: #fff; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .col:nth-child(even) {
+.wpeo-wrap .flex-table > .table-body .col:nth-child(even) {
   background: rgba(0, 0, 0, 0.1); }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .advanced {
+.wpeo-wrap .flex-table > .table-body .advanced {
   width: 100%;
   min-width: 100%; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .advanced:after {
+.wpeo-wrap .flex-table > .table-body .advanced:after {
   display: block;
   content: '';
   clear: both; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -6620,17 +6620,17 @@ readers do not read off random characters that represent icons */
       -ms-flex: 0 1 auto;
           flex: 0 1 auto; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment > * {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment > * {
   margin: auto 0; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .content {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .content {
   white-space: normal;
   line-height: 1.3; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment span, .wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment input, .wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment textarea {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment span, .wpeo-wrap .flex-table > .table-body .comment-container .comment input, .wpeo-wrap .flex-table > .table-body .comment-container .comment textarea {
   color: rgba(0, 0, 0, 0.7); }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .delete, .wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .add {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .delete, .wpeo-wrap .flex-table > .table-body .comment-container .comment .add {
   width: 20px;
   min-width: 20px;
   height: 20px;
@@ -6641,95 +6641,95 @@ readers do not read off random characters that represent icons */
           border-radius: 50%;
   font-size: 10px; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .delete i, .wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .add i {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .delete i, .wpeo-wrap .flex-table > .table-body .comment-container .comment .add i {
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .delete {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .delete {
   margin-left: 4px;
   background: rgba(0, 0, 0, 0.1); }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .delete i {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .delete i {
   color: rgba(0, 0, 0, 0.2); }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment .delete:hover i {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment .delete:hover i {
   color: #e05353; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .comment ~ .new.comment {
+.wpeo-wrap .flex-table > .table-body .comment-container .comment ~ .new.comment {
   padding-top: 4px;
   border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .new.comment {
+.wpeo-wrap .flex-table > .table-body .comment-container .new.comment {
   line-height: 2; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .new.comment .date {
+.wpeo-wrap .flex-table > .table-body .comment-container .new.comment .date {
   font-weight: 400; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add {
+.wpeo-wrap .flex-table > .table-body .comment-container .new.comment .add {
   margin-left: 4px;
   background: #3495f0; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add .svg-inline--fa {
+.wpeo-wrap .flex-table > .table-body .comment-container .new.comment .add .svg-inline--fa {
   color: #fff !important; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .comment-container .new.comment .add:hover {
+.wpeo-wrap .flex-table > .table-body .comment-container .new.comment .add:hover {
   background: #1360c8; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body canvas {
+.wpeo-wrap .flex-table > .table-body canvas {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .canvas-eraser {
+.wpeo-wrap .flex-table > .table-body .canvas-eraser {
   pointer-events: auto;
   float: right; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .canvas-eraser .fa-circle {
+.wpeo-wrap .flex-table > .table-body .canvas-eraser .fa-circle {
   color: rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-body .canvas-eraser:hover .fa-circle {
+.wpeo-wrap .flex-table > .table-body .canvas-eraser:hover .fa-circle {
   color: #e05353; }
 
-.wpeo-wrap .digirisk-wrap .flex-table > .table-footer {
+.wpeo-wrap .flex-table > .table-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.05); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .media {
+.wpeo-wrap .flex-table .media {
   background: rgba(0, 0, 0, 0.1); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .media.no-file .add {
+.wpeo-wrap .flex-table .media.no-file .add {
   color: rgba(0, 0, 0, 0.6); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .media .default-image {
+.wpeo-wrap .flex-table .media .default-image {
   color: rgba(0, 0, 0, 0.3); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .mysql-date {
+.wpeo-wrap .flex-table .mysql-date {
   position: absolute; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action {
+.wpeo-wrap .flex-table .action {
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .task:hover .icon {
+.wpeo-wrap .flex-table .action .task:hover .icon {
   color: rgba(0, 0, 0, 0.6); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .edit:hover .icon {
+.wpeo-wrap .flex-table .action .edit:hover .icon {
   color: #3495f0; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .delete {
+.wpeo-wrap .flex-table .action .delete {
   background: rgba(0, 0, 0, 0.05); }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .delete:hover .icon {
+.wpeo-wrap .flex-table .action .delete:hover .icon {
   color: #e05353; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .add, .wpeo-wrap .digirisk-wrap .flex-table .action .save {
+.wpeo-wrap .flex-table .action .add, .wpeo-wrap .flex-table .action .save {
   margin-left: auto; }
 
-.wpeo-wrap .digirisk-wrap .flex-table .action .add .icon, .wpeo-wrap .digirisk-wrap .flex-table .action .save .icon {
+.wpeo-wrap .flex-table .action .add .icon, .wpeo-wrap .flex-table .action .save .icon {
   color: #fff !important; }
 
 .wpeo-wrap .digirisk-wrap .flex-table {
