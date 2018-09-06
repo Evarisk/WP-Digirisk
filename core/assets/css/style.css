@@ -7097,7 +7097,10 @@ readers do not read off random characters that represent icons */
   background: #3495f0; }
 
 .wpeo-wrap .wpeo-table > thead, .wpeo-wrap .wpeo-table > tfoot {
-  background: #3495f0; }
+  background: #272a35; }
+
+.wpeo-wrap .wpeo-table input, .wpeo-wrap .wpeo-table textarea {
+  width: 100%; }
 
 @media (max-width: 480px) {
   .wpeo-wrap .wpeo-table > tbody td:before, .wpeo-wrap .wpeo-table > tbody th:before {

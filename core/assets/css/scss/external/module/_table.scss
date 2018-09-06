@@ -5,8 +5,15 @@
 
 /* Header, footer */
 .wpeo-table > thead, .wpeo-table > tfoot {
-	background: $color__primary;
+	background: $color__secondary;
 }
+
+.wpeo-table {
+	input, textarea {
+		width: 100%;
+	}
+}
+
 
 @media ( max-width: $media__small ) {
 	.wpeo-table {

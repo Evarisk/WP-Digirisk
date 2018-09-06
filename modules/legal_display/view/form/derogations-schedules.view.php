@@ -15,17 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<ul class="form">
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Dérogations aux horaires de travail', 'digirisk' ); ?></h2></li>
 
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['derogation_schedule']['permanent'] ) ? 'active' : '' ); ?>">
-		<input name="derogation_schedule[permanent]" type="text" value="<?php echo esc_attr( $legal_display->data['derogation_schedule']['permanent'] ); ?>" />
-		<label><?php esc_html_e( 'Permanentes', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Permanentes', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="derogation_schedule[permanent]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['derogation_schedule']['permanent'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['derogation_schedule']['occasional'] ) ? 'active' : '' ); ?>">
-		<input name="derogation_schedule[occasional]" type="text" value="<?php echo esc_attr( $legal_display->data['derogation_schedule']['occasional'] ); ?>" />
-		<label><?php esc_html_e( 'Occasionnelles', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Occasionnelles', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="derogation_schedule[occasional]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['derogation_schedule']['occasional'] ); ?>" />
+		</label>
 	</li>
 </ul>

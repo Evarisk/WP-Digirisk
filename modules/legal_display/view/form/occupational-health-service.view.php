@@ -15,37 +15,43 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<ul class="form">
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Service de santé au travail', 'digirisk' ); ?></h2></li>
 
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['full_name'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[full_name]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['full_name'] ); ?>" />
-		<label><?php esc_html_e( 'Nom du médecin du travail', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Nom du médecin du travail', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[full_name]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['full_name'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['address']->data['address'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[address][address]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['address'] ); ?>" />
-		<label><?php esc_html_e( 'Adresse', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Adresse', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[address][address]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['address'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['address']->data['postcode'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[address][postcode]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['postcode'] ); ?>" />
-		<label><?php esc_html_e( 'Code postal', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Code postal', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[address][postcode]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['postcode'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['address']->data['town'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[address][town]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['town'] ); ?>" />
-		<label><?php esc_html_e( 'Ville', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Ville', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[address][town]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['address']->data['town'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['contact']['phone'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[contact][phone]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['contact']['phone'] ); ?>" />
-		<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[contact][phone]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['contact']['phone'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['occupational_health_service']->data['opening_time'] ) ? 'active' : '' ); ?>">
-		<input name="occupational_health_service[opening_time]" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['opening_time'] ); ?>" />
-		<label><?php esc_html_e( 'Horaires', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Horaires', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="occupational_health_service[opening_time]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['occupational_health_service']->data['opening_time'] ); ?>" />
+		</label>
 	</li>
 </ul>

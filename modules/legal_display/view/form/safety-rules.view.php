@@ -15,22 +15,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<ul class="form">
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Consignes de sécurité', 'digirisk' ); ?></h2></li>
 
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['safety_rule']['responsible_for_preventing'] ) ? 'active' : '' ); ?>">
-		<input name="safety_rule[responsible_for_preventing]" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['responsible_for_preventing'] ); ?>" />
-		<label><?php esc_html_e( 'Responsable à prévenir', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Responsable à prévenir', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="safety_rule[responsible_for_preventing]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['responsible_for_preventing'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['safety_rule']['phone'] ) ? 'active' : '' ); ?>">
-		<input name="safety_rule[phone]" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['phone'] ); ?>" />
-		<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="safety_rule[phone]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['phone'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['safety_rule']['location_of_detailed_instruction'] ) ? 'active' : '' ); ?>">
-		<input name="safety_rule[location_of_detailed_instruction]" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['location_of_detailed_instruction'] ); ?>" />
-		<label><?php esc_html_e( 'Emplacement de la consigne détaillée', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Emplacement de la consigne détaillée', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="safety_rule[location_of_detailed_instruction]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['safety_rule']['location_of_detailed_instruction'] ); ?>" />
+		</label>
 	</li>
 </ul>

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php esc_html_e( 'Horaires de travail', 'digirisk' ); ?></h2>
 
-<table class="table">
+<table class="wpeo-table">
 	<thead>
 		<tr>
 			<th></th>

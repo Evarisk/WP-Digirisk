@@ -15,11 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<ul class="form">
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Accord de participation', 'digirisk' ); ?></h2></li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['participation_agreement']['information_procedures'] ) ? 'active' : '' ); ?>">
-		<input name="participation_agreement[information_procedures]" type="text" value="<?php echo esc_attr( $legal_display->data['participation_agreement']['information_procedures'] ); ?>" />
-		<label><?php esc_html_e( 'Modalités d\'information', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Modalités d\'information', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="participation_agreement[information_procedures]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['participation_agreement']['information_procedures'] ); ?>" />
+		</label>
 	</li>
 </ul>

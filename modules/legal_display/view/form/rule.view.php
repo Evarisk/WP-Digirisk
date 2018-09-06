@@ -15,12 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<ul class="form">
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Règlement intérieur', 'digirisk' ); ?></h2></li>
 
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->data['rules']['location'] ) ? 'active' : '' ); ?>">
-		<input name="rules[location]" type="text" value="<?php echo esc_attr( $legal_display->data['rules']['location'] ); ?>" />
-		<label><?php esc_html_e( 'Lieux d\'affichage', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Lieux d\'affichage', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="rules[location]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['rules']['location'] ); ?>" />
+		</label>
 	</li>
 </ul>
