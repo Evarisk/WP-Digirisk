@@ -1,0 +1,21 @@
+/** Ligne entete */
+.wpeo-table.table-flex .table-row.table-header {
+	background: $color__primary;
+}
+
+/* Header, footer */
+.wpeo-table > thead, .wpeo-table > tfoot {
+	background: $color__primary;
+}
+
+@media ( max-width: $media__small ) {
+	.wpeo-table {
+		> tbody {
+			td, th {
+				&:before {
+					color: $color__primary;
+				}
+			}
+		}
+	}
+}

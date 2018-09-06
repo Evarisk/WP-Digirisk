@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 		<div class="digirisk-wrap">
 
-			<div id="digi-data-export" class="tab-content grid-layout padding w2" >
+			<div id="digi-data-export" class="tab-content wpeo-gridlayout padding grid-2" >
 				<div class="block">
 					<div class="container">
 						<?php echo do_shortcode( '[digi-export]' ); ?>
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 			</div>
 
 
-			<div id="digi-handle-model" class="tab-content grid-layout w2 hidden" style="display: none;" >
+			<div id="digi-handle-model" class="tab-content wpeo-gridlayout grid-2 hidden" style="display: none;" >
 				<?php echo do_shortcode( '[digi-handle-model]' ); ?>
 			</div>
 

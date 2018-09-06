@@ -20,21 +20,21 @@ global $eo_search; ?>
 
 <div class="col add">
 	<div class="cell padding w150"><?php esc_html_e( 'N/A', 'digirisk' ); ?></div>
-	<div class="cell padding w200 tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+	<div class="cell padding grid-200 tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 		<?php $eo_search->display( 'accident_user' ); ?>
 	</div>
 	<div class="cell group-date w100" data-time="true">
 		<input type="hidden" class="mysql-date" name="accident[accident_date]" value="<?php echo esc_attr( $accident->data['accident_date']['raw'] ); ?>" />
 		<input type="text" class="date" value="<?php echo esc_html( $accident->data['accident_date']['rendered']['date'] ); ?>" />
 	</div>
-	<div class="cell padding w200 tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+	<div class="cell padding grid-200 tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 		<?php $eo_search->display( 'accident_post' ); ?>
 	</div>
 	<div class="cell padding tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
 		<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
 	</div>
 	<div class="cell w50" data-title="action">
-		<div class="action grid-layout w3">
+		<div class="action wpeo-gridlayout grid-3">
 			<div class="action-input button w50 add disable"
 				data-parent="col"
 				data-namespace="digirisk"

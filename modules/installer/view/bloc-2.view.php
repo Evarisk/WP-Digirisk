@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'Nous installons les fonctions de gestion des Unités de Travail', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 
 		<div class="content">
 			<h3><?php esc_html_e( 'Comment définir vos Unités de Travail ?', 'digirisk' ); ?></h3>

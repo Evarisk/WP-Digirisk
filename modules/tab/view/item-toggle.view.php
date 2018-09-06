@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<li class="tab-element wpeo-dropdown" data-parent="toggle" data-target="content">
+<li class="tab-element wpeo-dropdown dropdown-right" data-parent="toggle" data-target="content">
 	<div class="dropdown-toggle "><i class="icon far fa-ellipsis-v"></i></div>
 	<ul class="dropdown-content">
 		<?php foreach ( $element['items'] as $key => $sub_element ) : ?>

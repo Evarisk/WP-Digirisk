@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'La méthode d’évaluation des risques avancée', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<div class="content">
 			<h3><?php esc_html_e( 'La méthode avancée', 'digirisk' ); ?></h3>
 			<p><?php esc_html_e( 'Elle est basée sur le modèle de classement de KINNEY', 'digirisk' ); ?></p>

@@ -43,11 +43,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td data-title="action">
 		<?php if ( 0 !== $causerie->data['id'] ) : ?>
-			<div class="action grid-layout w3">
+			<div class="action wpeo-gridlayout grid-3">
 				<div data-parent="causerie-row" data-loader="table" class="button w50 green save action-input"><i class="icon fa fa-floppy-o"></i></div>
 			</div>
 		<?php else : ?>
-			<div class="action grid-layout w3">
+			<div class="action wpeo-gridlayout grid-3">
 				<div data-namespace="digirisk"
 					data-module="causerie"
 					data-before-method="beforeSaveCauserie"

@@ -33,7 +33,7 @@ window.eoxiaJS.digirisk.recommendation.selectRecommendation = function( event ) 
 	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 
 	// Rend le bouton "active".
-	element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	element.closest( 'tr' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 };
 
 /**

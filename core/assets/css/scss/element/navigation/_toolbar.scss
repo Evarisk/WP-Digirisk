@@ -1,0 +1,26 @@
+/**
+ * Toolbar de la navigation UT/GP
+ * @since 7.0.0
+ */
+
+.navigation-container .toolbar {
+	background: $color__secondary;
+	padding: 0.2em 1em;
+
+	[class*="toggle"] {
+		display: inline-block;
+		color: rgba(255,255,255,0.4);
+		margin-right: 0.4em;
+		transition: all 0.2s ease-out;
+		&:hover {
+			color: rgba(255,255,255,0.8);
+			cursor: pointer;
+		}
+		@media ( max-width: 480px ) {
+			.icon {
+				font-size: 18px;
+				padding: 4px;
+			}
+		}
+	}
+}

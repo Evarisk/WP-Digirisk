@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="table-header">
 		<div class="col">
 			<div class="header-cell padding w150"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
-			<div class="header-cell padding w200"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?><span class="red">*</span></div>
+			<div class="header-cell padding grid-200"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?><span class="red">*</span></div>
 			<div class="header-cell padding w150"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?><span class="red">*</span></div>
 			<div class="header-cell padding w100"><?php esc_html_e( 'Lieu', 'digirisk' ); ?><span class="red">*</span></div>
 			<div class="header-cell padding"><?php esc_html_e( 'Circonstances', 'digirisk' ); ?><span class="red">*</span></div>

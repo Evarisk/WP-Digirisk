@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <input type="hidden" class="digi-method-evaluation-id" value="<?php echo esc_attr( ! empty( $evaluation_method->data['id'] ) ? $evaluation_method->data['id'] : 0 ); ?>" />
 <textarea style="display: none" class="tmp_evaluation_variable"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : '{}'; ?></textarea>
+<p><i class="fas fa-info-circle"></i> <?php esc_html_e( 'Cliquez sur les cases du tableau pour remplir votre évaluation', 'digirisk'); ?></p>
 
 <div class="wpeo-table evaluation-method table-flex table-<?php echo esc_attr( $evaluation_method->data['number_variables'] + 1 ); ?>">
 	<div class="table-row table-header">
@@ -25,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'evaluation_method' => $evaluation_method,
 		) );
 		?>
+
 	</div>
 
 	<?php

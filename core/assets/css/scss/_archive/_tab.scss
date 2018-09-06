@@ -1,0 +1,75 @@
+/**
+ * Main tab
+ */
+.digirisk-wrap {
+
+	.tab {
+		display: flex;
+		align-items: center; /* Fix IE */
+		background: #e8e8e8;
+		height: 50px;
+		.tab-element {
+			padding: 0 14px;
+			line-height: 50px;
+			margin: auto 0;
+			transition: all 0.2s ease-out;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			&.active:not(.toggle):not(.gp) {
+				background: $color__primary;
+				color: #fff;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+			&:hover:not(.active) {
+				background: rgba(0,0,0,0.1);
+			}
+			&.toggle {
+				overflow: visible;
+				.action {
+					color: rgba(0,0,0,0.4);
+					transition: all 0.2s ease-out;
+				}
+				&:hover {
+					background: none;
+					.action {
+						color: #000;
+					}
+				}
+			}
+		}
+		.gp {
+			margin-left: auto;
+			display: flex;
+			align-items: center; /* Fix IE */
+			flex: 0 1 auto;
+			height: 50px;
+			span, .icon {
+				margin-top: auto;
+				margin-bottom: auto;
+				line-height: 0;
+			}
+			&:hover {
+				background: darken($color__red, 14%) !important;
+			}
+		}
+		.option {
+			margin-left: auto;
+			padding: 0 1.4em;
+		}
+	}
+
+	@media screen and (max-width: 680px) {
+		.tab {
+			.gp {
+				display: none;
+			}
+			.option {
+				margin-left: auto;
+			}
+		}
+	}
+
+}

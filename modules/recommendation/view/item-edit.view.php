@@ -45,11 +45,11 @@ defined( 'ABSPATH' ) || exit; ?>
 	</td>
 	<td>
 		<?php if ( 0 !== $recommendation->data['id'] ) : ?>
-			<div class="action grid-layout w2">
+			<div class="action wpeo-gridlayout grid-2">
 				<div data-parent="recommendation-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
-			<div class="action grid-layout w2">
+			<div class="action wpeo-gridlayout grid-2">
 				<div	data-namespace="digirisk"
 							data-module="recommendation"
 							data-before-method="beforeSaveRecommendation"

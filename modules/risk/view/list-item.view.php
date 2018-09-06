@@ -39,21 +39,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
 	<td data-title="Action">
-		<div class="action grid-layout w2">
+		<div class="action wpeo-gridlayout grid-gap-0 grid-2">
 
 			<!-- Editer un risque -->
-			<div 	class="button light w50 edit action-attribute"
+			<div 	class="wpeo-button button-square-50 button-transparent w50 edit action-attribute"
 						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
 						data-loader="risk"
-						data-action="load_risk"><i class="icon fas fa-pencil"></i></div>
+						data-action="load_risk"><i class="button-icon fas fa-pencil"></i></div>
 
 			<!-- Supprimer un risque -->
-			<div 	class="button light w50 delete action-delete"
+			<div 	class="wpeo-button button-square-50 button-transparent w50 delete action-delete"
 						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
 						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
-						data-action="delete_risk"><i class="icon far fa-times"></i></div>
+						data-action="delete_risk"><i class="button-icon far fa-times"></i></div>
 		</div>
 	</td>
 </tr>

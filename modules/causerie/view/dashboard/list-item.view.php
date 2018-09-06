@@ -95,7 +95,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<div class="wpeo-modal-event button grey radius w30 tooltip hover"
+		<div class="wpeo-modal-event button grey radius grid-30 tooltip hover"
 			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
 			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
 			data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
@@ -107,7 +107,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td>
-		<div class="action grid-layout w1">
+		<div class="action wpeo-gridlayout w1">
 			<?php if ( ! empty( $causerie->data['document'] ) && ! empty( $causerie->data['document']->data['path'] ) ) : ?>
 				<a class="button purple h50" href="<?php echo esc_attr( $causerie->data['document']->data['path'] ); ?>">
 					<i class="fa fa-download icon" aria-hidden="true"></i>

@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="fas fa-pencil"></i>
 			</span>
 		</span>
@@ -56,7 +56,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="fas fa-pencil"></i>
 			</span>
 		</span>
@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="fas fa-pencil"></i>
 			</span>
 		</span>
@@ -88,7 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="fas fa-pencil"></i>
 			</span>
 		</span>
@@ -104,7 +104,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-file" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="fas fa-pencil"></i>
 			</span>
 		</span>

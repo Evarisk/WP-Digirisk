@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="far fa-eye"></i>
 			</span>
 		</span>
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="far fa-eye"></i>
 			</span>
 		</span>
@@ -66,7 +66,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="far fa-eye"></i>
 			</span>
 		</span>
@@ -83,7 +83,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 			<i class="fas fa-square background-icon"></i>
 			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon animated">
+			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 				<i class="far fa-eye"></i>
 			</span>
 		</span>
@@ -100,14 +100,14 @@ defined( 'ABSPATH' ) || exit; ?>
 
 				<i class="fas fa-square background-icon"></i>
 				<i class="fas fa-file" data-fa-transform="shrink-10"></i>
-				<span class="animated-icon animated">
+				<span class="animated-icon wpeo-animate animate-hover bounceInLight">
 					<i class="far fa-eye"></i>
 				</span>
 			</span>
 		</td>
 
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action wpeo-gridlayout grid-2">
 			<?php if ( ! empty( $document->data['file_generated'] ) ) : ?>
 				<a class="button purple h50 tooltip hover"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"

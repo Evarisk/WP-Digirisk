@@ -59,10 +59,9 @@ window.eoxiaJS.digirisk.export.create_export = function( event ) {
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
 		'beforeSubmit': function() {
-			form.find( 'button' ).addClass( 'loading' );
+			window.eoxiaJS.loader.display( form.find( 'button' ) );
 		},
 		success: function( response ) {
-			form.find( 'button' ).removeClass( 'loading' );
 			window.eoxiaJS.global.downloadFile( response.data.url_to_file, response.data.filename );
 		}
 	} );

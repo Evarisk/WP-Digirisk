@@ -1,0 +1,661 @@
+/**
+ * Style spécifique à la navigation des workunits
+ * .unit-header -> Affichage des media et de l'UT ou GP
+ * .workunit-navigation -> la navigation toggle des workunit -> le toggle devrait disparaitre dans les prochaines versions
+ * .workunit-list -> Liste des UT
+ * .workunit-add -> Ajout d'une UT
+ */
+.digirisk-wrap {
+
+	.unit-header {
+		display: flex;
+		flex: 0 1 auto;
+		height: 50px;
+		transition: all 0.2s ease-out;
+		.title {
+			line-height: 50px;
+			padding: 0 10px;
+			color: rgba(255,255,255,0.7);
+			white-space: nowrap;
+			overflow: hidden;
+			strong {
+				text-transform: uppercase;
+			}
+		}
+		.button {
+			// font-size: 22px;
+		}
+		.mobile-navigation {
+			display: none;
+			width: 38px;
+			min-width: 38px;
+			line-height: 50px;
+			text-align: center;
+
+			.icon {
+				color: rgba(255,255,255,0.4);
+				transition: all 0.2s ease-out;
+				line-height: 1;
+				font-size: 18px;
+			}
+			&:hover {
+				cursor: pointer;
+				.icon {
+					color: rgba(255,255,255,0.8);
+				}
+			}
+			@media ( max-width: 480px ) {
+				display: block;
+			}
+		}
+	}
+	.workunit-navigation {
+		background: lighten($color__secondary, 10%);
+		transition: all 0.2s ease-out;
+		position: relative;
+		&:hover {
+			background: lighten($color__secondary, 16%);
+			cursor: pointer;
+			.toggle-unit .icon {
+				color: #fff;
+			}
+		}
+		.unit-header {
+			.title {
+				width: 100%;
+			}
+		}
+		.button {
+			background: none;
+			&:hover {
+				background: none;
+			}
+			.icon {
+				color: rgba(255,255,255,0.4);
+			}
+		}
+		// Code du menu déroulant, à effacer dans une prochaine version
+		.content {
+			background: $color__secondary !important;
+			top: 42px;
+			left: 0;
+			width: 360px !important;
+			margin: 0;
+			ul, li {
+				margin: 0;
+			}
+			ul.sub-menu {
+				margin-left: 26px;
+				border-left: 1px dashed rgba(255,255,255,0.3);
+			}
+			li {
+				clear: both;
+				div {
+					display: flex;
+					flex-direction: row;
+					transition: all 0.2s ease-out;
+					.wp-digi-global-name {
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						text-overflow: ellipsis;
+					}
+					span {
+						display: block;
+						padding: 12px 16px;
+						color: #fff;
+						transition: all 0.2s ease-out;
+						&:first-child {
+							display: inline-block;
+						}
+						&.wp-digi-new-group-action {
+							width: 50px;
+							float: right;
+							a {
+								color: #fff;
+							}
+						}
+					}
+					&:hover {
+						background: $color__primary;
+						cursor: pointer;
+						a {
+							color: $color__primary;
+						}
+						.wp-digi-new-group-action {
+							background: $color__primary_dark;
+							color: $color__primary;
+						}
+					}
+					span:first-child {
+						width: 100%;
+					}
+					span:last-child {
+						width: 50px;
+						margin-left: auto;
+						a {
+							font-size: 14px;
+							line-height: 1.6;
+						}
+					}
+				}
+				.active {
+					span:first-child, span:last-child:not(.wp-digi-new-group-action)  {
+						background: $color__primary;
+					}
+					span.wp-digi-new-group-action {
+						background: $color__primary_dark;
+						a {
+							color: $color__primary;
+						}
+					}
+				}
+			}
+		}
+		// Fin du code du menu déroulant
+		/*.content {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			top: 50px;
+			left: 0;
+			width: 100%;
+			z-index: 99;
+			background: darken($color__secondary, 4%);
+			width: 280px;
+			&.active {
+				opacity: 1;
+				pointer-events: auto;
+			}
+			.item {
+				height: 40px;
+				.title {
+					float: left;
+					width: 240px;
+					padding: 0 14px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					color: rgba(255,255,255,0.4);
+					transition: all 0.2s ease-out;
+				}
+				.add {
+					&:hover {
+						background: lighten($color__secondary, 4%);
+						.icon {
+							color: #fff;
+						}
+					}
+					.icon {
+						color: rgba(255,255,255,0.7);
+					}
+				}
+				&.active {
+					.title {
+						color: $color__primary;
+					}
+				}
+				&:hover {
+					&.active .title {
+						color: lighten($color__primary, 20%);
+					}
+					.title {
+						color: #fff;
+					}
+				}
+				.sub-menu {
+					width: 100%;
+					padding-left: 20px;
+				}
+			}
+		}*/
+	}
+
+	.workunit-list {
+		.unit-header {
+			background: $color__secondary;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+			&:last-child {
+				border: 0;
+				.delete {
+					height: 50px !important;
+				}
+			}
+			&:hover, &.active {
+				background: $color__primary;
+				cursor: pointer;
+				.media {
+					background: $color__primary_dark;
+				}
+				.delete {
+					background: $color__primary_dark;
+				}
+			}
+			.media {
+				background: darken($color__secondary, 4%);
+			}
+			.title {
+				width: 100%;
+			}
+			.delete {
+				background: darken($color__secondary, 4%);
+				height: 49px;
+				&:hover {
+					.icon {
+						color: rgba(255,255,255,0.7);
+					}
+				}
+				.icon {
+					color: rgba(255,255,255,0.2);
+				}
+			}
+		}
+	}
+
+	.workunit-add {
+		display: flex;
+		flex: 0 1 auto;
+		height: 50px;
+		.title {
+			border: 0;
+			background: #fff;
+			padding: 10px;
+			width: 100%;
+		}
+		.add .icon {
+			font-size: 16px;
+		}
+	}
+
+}
+
+
+.digirisk-wrap {
+
+	.navigation-container {
+		@media ( max-width: 480px ) {
+			opacity: 0;
+			pointer-events: none;
+			transform: scale( 0.95 );
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 99999;
+			background: $color__secondary;
+			transition: 0.2s ease-out;
+			overflow-y: auto;
+
+			&.active {
+				opacity: 1;
+				pointer-events: all;
+				transform: scale( 1 );
+			}
+		}
+	}
+	// Header
+	.navigation-container .society-header {
+		background: lighten( $color__secondary, 10% );
+		display: flex;
+		height: 50px;
+		padding: 0 1em;
+		position: relative;
+
+		&:hover {
+			cursor: pointer;
+		}
+		.icon {
+			display: inline;
+			font-size: 12px;
+			color: #fff;
+			margin: auto 0.4em auto 0;
+			line-height: 1.8;
+		}
+		.title {
+			color: #fff;
+			font-size: 12px;
+			text-transform: uppercase;
+			width: 100%;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+		> .add-container {
+			top: 50% !important;
+			transform: translateY(-50%);
+			right: 0;
+		}
+		&:hover > .add-container {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+
+	// Toolbar
+	.navigation-container .toolbar {
+		background: $color__secondary;
+		padding: 0.2em 1em;
+
+		[class*="toggle"] {
+			display: inline-block;
+			color: rgba(255,255,255,0.4);
+			margin-right: 0.4em;
+			transition: all 0.2s ease-out;
+			&:hover {
+				color: rgba(255,255,255,0.8);
+				cursor: pointer;
+			}
+			@media ( max-width: 480px ) {
+				.icon {
+					font-size: 18px;
+					padding: 4px;
+				}
+			}
+		}
+	}
+
+	// Liste générale
+	.navigation-container .workunit-list {
+		background: $color__secondary;
+		padding: 0 0 1em 0;
+
+		.unit > .unit-container {
+			display: flex;
+			position: relative;
+		}
+	}
+
+	// UT active
+	.unit.active > .unit-container {
+		&:hover {
+			.name {
+				color: #fff !important;
+			}
+		}
+		.ref {
+			color: rgba(255,255,255,0.6) !important;
+		}
+		.title {
+			background: $color__primary;
+		}
+		.add-container .button.blue {
+			background: $color__primary_dark;
+			&:hover {
+				background: darken( $color__primary_dark, 10% );
+			}
+		}
+	}
+
+
+	// UT toggled
+	.unit.toggled {
+		> .sub-list {
+			display: block !important;
+		}
+		> .unit-container .toggle-unit .icon:before {
+			// content: fa-content($fa-var-angle-down) !important;
+			// @todo
+		}
+	}
+
+	// UT / GP
+	.navigation-container .unit > .unit-container {
+		padding: 4px 0 0 0;
+
+		&:hover {
+			.title .name {
+				color: $color__primary;
+			}
+		}
+		.toggle-unit {
+
+			color: rgba(255,255,255,0.4);
+			line-height: 50px;
+			font-size: 22px;
+			min-width: 30px;
+			width: 30px;
+			text-align: center;
+			transition: all 0.2s ease-out;
+
+			&:hover {
+				cursor: pointer;
+				color: rgba(255,255,255,0.8);
+			}
+			.icon {
+				// @include fa-icon;
+				// @extend .fas;
+				&:before {
+					// content: fa-content($fa-var-angle-right);
+					// @todo
+				}
+			}
+		}
+		.spacer {
+			min-width: 30px;
+			width: 30px;
+		}
+		.media {
+			&.no-file {
+				background: darken( $color__secondary, 6% );
+			}
+		}
+		.title {
+			width: 100%;
+			padding-left: 1em;
+			display: flex;
+
+			.title-container {
+				margin: auto 0;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+			.ref, .name {
+				display: block;
+				line-height: 1;
+				transition: all 0.2s ease-out;
+			}
+			.ref {
+				font-size: 10px;
+				color: $color__primary;
+				text-transform: uppercase;
+				font-weight: 800;
+			}
+			.name {
+				font-size: 16px;
+				color: #fff;
+			}
+		}
+		&:hover > .add-container {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+
+	// Toggle responsive
+	.navigation-container .mobile-add-container, .navigation-container .close-popup {
+		display: none;
+		color: rgba(255, 255, 255, 0.4);
+		line-height: 50px;
+		min-width: 32px;
+		width: 32px;
+		text-align: center;
+		transition: all 0.2s ease-out;
+
+		@media ( max-width: 960px ) {
+			display: block;
+			.content {
+				left: inherit !important;
+			}
+		}
+	}
+	.navigation-container .mobile-add-container {
+		&:hover {
+			cursor: pointer;
+			.action {
+				color: #fff;
+			}
+		}
+		.action {
+			font-size: 18px;
+			transition: all 0.2s ease-out;
+		}
+		.content {
+			left: -0.8em;
+			width: 170px;
+			text-align: left;
+
+			.item {
+				color: rgba(0,0,0,0.8);
+			}
+			.icon {
+				color: rgba(0,0,0,0.5);
+				margin-right: 0.2em;
+				font-size: 16px;
+			}
+		}
+	}
+	// Mobile close popup
+	.navigation-container .close-popup {
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: none;
+		.icon {
+			transition: all 0.2s ease-out;
+			font-size: 16px;
+		}
+		&:hover .icon {
+			color: #fff;
+		}
+		@media ( max-width: 480px ) {
+			display: block;
+		}
+	}
+	.navigation-container .society-header .toggle.option {
+		position: absolute;
+		right: 32px;
+		top: 0;
+		@media ( min-width: 480px ) {
+			right: 0;
+		}
+	}
+
+	// Bouton Ajout UT / GP
+	.navigation-container .add-container {
+		position: absolute;
+		top: 4px;
+		right: 0;
+		opacity: 0;
+		pointer-events: none;
+		transition: all 0.2s ease-out;
+
+		.button {
+			float: left;
+			margin-left: 2px;
+			.icon {
+				margin: auto;
+				font-size: 20px;
+				line-height: 1;
+			}
+			.button-add {
+				position: absolute;
+				color: rgba(255,255,255,0.6);
+				transition: all 0.2s ease-out;
+				top: 10px;
+				right: 10px;
+			}
+			&:hover .button-add {
+				animation-name: noFileAdd;
+			}
+		}
+		@media ( max-width: 960px ) {
+			display: none;
+		}
+	}
+
+	// Ajout UT / GP
+	.navigation-container .unit.new {
+		background: #fff;
+		height: 50px;
+		display: none;
+
+		&.active {
+			display: flex;
+		}
+		.placeholder-icon {
+			margin: auto;
+			min-width: 40px;
+			color: rgba(0,0,0,0.4);
+		}
+		.unit-label {
+			height: 50px;
+			width: 100%;
+			margin: 0;
+			padding: 1em 0.2em;
+			border: 0;
+			&:focus {
+				outline: none;
+			}
+		}
+		.add .icon {
+			font-size: 22px;
+			line-height: 1.2;
+		}
+	}
+
+	// Sous menu
+	.navigation-container .unit > .sub-list {
+		// width: 100%;
+		padding-left: 0.6em;
+		display: none;
+		.unit {
+			position: relative;
+			margin-left: 0.6em;
+			&:before {
+				display: block;
+				position: absolute;
+				content: '';
+				width: 1px;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background: #50556a;
+			}
+		}
+		> .unit:last-child:before {
+			height: 30px; // chaque élément de fin de liste
+		}
+		.spacer, .toggle-unit {
+			position: relative;
+			&:before {
+				display: block;
+				position: absolute;
+				content: '';
+				height: 1px;
+				left: 0;
+				right: 10px;
+				top: 25px;
+				background: #50556a;
+			}
+		}
+		.toggle-unit {
+			.icon {
+				margin-left: 8px;
+			}
+			&::before {
+				right: 20px;
+			}
+		}
+	}
+
+}
+
+.wp-core-ui .navigation-container .button-color__secondary:focus,
+.wp-core-ui .navigation-container .button-color__secondary:hover,
+.wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .button:focus,
+.wp-core-ui .navigation-container .button:hover {
+	color: #fff;
+}

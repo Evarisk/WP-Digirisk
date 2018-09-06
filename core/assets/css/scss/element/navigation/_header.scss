@@ -1,0 +1,40 @@
+/**
+ * Header de la navigation UT/GP
+ * @since 7.0.0
+ */
+
+.navigation-container .society-header {
+	background: lighten( $color__secondary, 10% );
+	display: flex;
+	height: 50px;
+	padding: 0 1em;
+	position: relative;
+
+	&:hover {
+		cursor: pointer;
+	}
+	.icon {
+		display: inline;
+		font-size: 12px;
+		color: #fff;
+		margin: auto 0.4em auto 0;
+		line-height: 1.8;
+	}
+	.title {
+		color: #fff;
+		font-size: 12px;
+		text-transform: uppercase;
+		width: 100%;
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+	> .add-container {
+		top: 50% !important;
+		transform: translateY(-50%);
+		right: 0;
+	}
+	&:hover > .add-container {
+		opacity: 1;
+		pointer-events: all;
+	}
+}

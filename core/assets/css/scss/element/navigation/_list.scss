@@ -1,0 +1,241 @@
+/**
+ * Liste de la navigation UT/GP
+ * @since 7.0.0
+ */
+
+// Liste générale
+.navigation-container .workunit-list {
+	background: $color__secondary;
+	padding: 0 0 1em 0;
+	margin: 0;
+
+	.unit {
+		margin-bottom: 0;
+	}
+	.unit > .unit-container {
+		display: flex;
+		position: relative;
+	}
+}
+
+// UT active
+.unit.active > .unit-container {
+	&:hover {
+		.name {
+			color: #fff !important;
+		}
+	}
+	.ref {
+		color: rgba(255,255,255,0.6) !important;
+	}
+	.title {
+		background: $color__primary;
+	}
+	.add-container .wpeo-button {
+		background: $color__primary_dark;
+		border-color: $color__primary_dark;
+	}
+}
+
+
+// UT toggled
+.unit.toggled {
+	> .sub-list {
+		display: block !important;
+	}
+	> .unit-container .toggle-unit .icon {
+		@extend .fal;
+		&::before {
+			content: fa-content($fa-var-angle-down) !important;
+		}
+	}
+}
+
+// UT / GP
+.navigation-container .unit > .unit-container {
+	padding: 4px 0 0 0;
+
+	&:hover {
+		.title .name {
+			color: $color__primary;
+		}
+	}
+	.toggle-unit {
+
+		color: rgba(255,255,255,0.4);
+		line-height: 50px;
+		font-size: 22px;
+		min-width: 30px;
+		width: 30px;
+		text-align: center;
+		transition: all 0.2s ease-out;
+
+		&:hover {
+			cursor: pointer;
+			color: rgba(255,255,255,0.8);
+		}
+		.icon {
+			@extend .fal;
+			&:before {
+				content: fa-content($fa-var-angle-right);
+			}
+		}
+	}
+	.spacer {
+		min-width: 30px;
+		width: 30px;
+	}
+	.media {
+		&.no-file {
+			background: darken( $color__secondary, 6% );
+
+			.button-add {
+				color: rgba(255,255,255,0.2);
+			}
+		}
+		.default-icon-container .svg-inline--fa {
+			color: rgba(255,255,255,0.4);
+		}
+	}
+	.title {
+		width: 100%;
+		padding-left: 1em;
+		display: flex;
+
+		.title-container {
+			margin: auto 0;
+		}
+		&:hover {
+			cursor: pointer;
+		}
+		.ref, .name {
+			display: block;
+			line-height: 1;
+			transition: all 0.2s ease-out;
+		}
+		.ref {
+			font-size: 10px;
+			color: $color__primary;
+			text-transform: uppercase;
+			font-weight: 800;
+		}
+		.name {
+			font-size: 16px;
+			color: #fff;
+		}
+	}
+	&:hover > .add-container {
+		opacity: 1;
+		pointer-events: all;
+	}
+}
+
+// Bouton Ajout UT / GP
+.navigation-container .add-container {
+	position: absolute;
+	top: 4px;
+	right: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.2s ease-out;
+
+	.wpeo-button {
+		float: left;
+		margin-left: 2px;
+		display: flex;
+
+		.button-icon {
+			margin: auto;
+			font-size: 20px;
+			line-height: 1;
+		}
+		.button-add {
+			position: absolute;
+			color: rgba(255,255,255,0.6);
+			transition: all 0.2s ease-out;
+			top: 6px;
+			right: 6px;
+			font-size: 12px;
+		}
+		&:hover .button-add {
+			animation-name: noFileAdd;
+		}
+	}
+	@media ( max-width: 960px ) {
+		display: none;
+	}
+}
+
+// Ajout UT / GP
+.navigation-container .unit.new {
+	background: #fff;
+	height: 50px;
+	display: none;
+
+	&.active {
+		display: flex;
+	}
+	.placeholder-icon {
+		margin: auto;
+		min-width: 40px;
+		color: rgba(0,0,0,0.4);
+	}
+	.unit-label {
+		height: 50px;
+		width: 100%;
+		margin: 0;
+		padding: 1em 0.2em;
+		border: 0;
+		&:focus {
+			outline: none;
+		}
+	}
+	.wpeo-button {
+		min-width: 50px;
+	}
+}
+
+// Sous menu
+.navigation-container .unit > .sub-list {
+	// width: 100%;
+	padding-left: 0.6em;
+	display: none;
+	.unit {
+		position: relative;
+		margin-left: 0.6em;
+		&:before {
+			display: block;
+			position: absolute;
+			content: '';
+			width: 1px;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: #50556a;
+		}
+	}
+	> .unit:last-child:before {
+		height: 30px; // chaque élément de fin de liste
+	}
+	.spacer, .toggle-unit {
+		position: relative;
+		&:before {
+			display: block;
+			position: absolute;
+			content: '';
+			height: 1px;
+			left: 0;
+			right: 10px;
+			top: 25px;
+			background: #50556a;
+		}
+	}
+	.toggle-unit {
+		.icon {
+			margin-left: 8px;
+		}
+		&::before {
+			right: 20px;
+		}
+	}
+}

@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
 	<td>
-		<div class="action grid-layout w1">
+		<div class="action wpeo-gridlayout w1">
 			<?php if ( Causerie_Class::g()->get_type() === $causerie->data['type'] ) : ?>
 				<a class="button light w50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php else : ?>

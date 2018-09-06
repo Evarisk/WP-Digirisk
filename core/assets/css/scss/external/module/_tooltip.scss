@@ -1,0 +1,31 @@
+/* Couleurs */
+@mixin set-arrow-tooltip-color($color) {
+	&.tooltip-top::before {
+		border-color: $color transparent transparent transparent;
+	}
+	&.tooltip-right::before {
+		border-color: transparent $color transparent transparent;
+	}
+	&.tooltip-bottom::before {
+		border-color: transparent transparent $color transparent;
+	}
+	&.tooltip-left::before {
+		border-color: transparent transparent transparent $color;
+	}
+}
+
+.wpeo-tooltip {
+	&.tooltip-primary {
+		background: $color__primary;
+		@include set-arrow-tooltip-color($color__primary);
+	}
+	&.tooltip-light {
+		background: $color__grey;
+		color: rgba(0,0,0,0.6);
+		@include set-arrow-tooltip-color($color__grey);
+	}
+	&.tooltip-red {
+		background: $color__red;
+		@include set-arrow-tooltip-color($color__red);
+	}
+}

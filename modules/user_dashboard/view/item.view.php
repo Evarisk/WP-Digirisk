@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
 	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action wpeo-gridlayout grid-2">
 			<div
 				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"

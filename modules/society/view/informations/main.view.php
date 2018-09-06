@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			?>
 		</p>
 
-		<ul class="grid-layout w3 margin">
+		<ul class="wpeo-gridlayout grid-3 margin">
 			<li class="statistic">
 				<span class="number"><?php echo esc_html( $number_risks ); ?></span>
 				<span class="label"><?php esc_html_e( 'Nombre de risque', 'digirisk' ); ?></span>

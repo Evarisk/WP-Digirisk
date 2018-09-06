@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<section class="users grid-layout w2">
+<section class="users wpeo-gridlayout grid-2">
 	<!-- Le bloc des utilisateurs affectés -->
 	<div>
 		<?php do_shortcode( '[digi-search id="' . $workunit->id . '" icon="dashicons dashicons-search" next-action="display_user_affected" type="user" target="affected-users"]' ); ?>

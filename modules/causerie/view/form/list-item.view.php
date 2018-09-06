@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
 	<td>
-		<div class="action grid-layout w3">
+		<div class="action wpeo-gridlayout grid-3">
 			<?php if ( ! empty( $causerie->data['document'] ) && ! empty( $causerie->data['document']->data['path'] ) ) : ?>
 				<a class="button purple h50" href="<?php echo esc_attr( $causerie->data['document']->data['path'] ); ?>">
 					<i class="fa fa-download icon" aria-hidden="true"></i>

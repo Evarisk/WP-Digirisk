@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		data-action="historic_risk"
 		data-title="<?php echo esc_attr( 'Historique des cotations', 'digirisk' ); ?>"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'historic_risk' ) ); ?>"
-		data-class="historic-risk"
+		data-class="wpeo-wrap historic-risk"
 		aria-label="<?php esc_html_e( 'Afficher l\'historique des cotations', 'digirisk' ); ?>">
 
 		<div class="action cotation default-cotation" data-scale="<?php echo esc_attr( $risk->data['evaluation']->data['scale'] ); ?>">
@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	</div>
 <?php else : ?>
-	<div class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Évaluation du risque corrompue', 'digirisk' ); ?>">
-		<i class="fa fa-times icon" aria-hidden="true" />
+	<div class="wpeo-button button-square-40 wpeo-tooltip-event button-disable button-event" data-direction="top" data-color="red" aria-label="<?php echo esc_attr_e( 'Évaluation du risque corrompue', 'digirisk' ); ?>">
+		<i class="button-icon far fa-times" aria-hidden="true" />
 	</div>
 <?php
 endif;

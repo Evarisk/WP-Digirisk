@@ -1,0 +1,22 @@
+/**
+ * Style spécifique à la navigation des workunits
+ * .unit-header -> Affichage des media et de l'UT ou GP
+ * .workunit-navigation -> la navigation toggle des workunit -> le toggle devrait disparaitre dans les prochaines versions
+ * .workunit-list -> Liste des UT
+ * .workunit-add -> Ajout d'une UT
+ */
+
+
+@import "header";
+@import "toolbar";
+@import "list";
+@import "responsive";
+
+.wp-core-ui .navigation-container .button-color__secondary:focus,
+.wp-core-ui .navigation-container .button-color__secondary:hover,
+.wp-core-ui .navigation-container .button.focus,
+.wp-core-ui .navigation-container .button.hover,
+.wp-core-ui .navigation-container .button:focus,
+.wp-core-ui .navigation-container .button:hover {
+	color: #fff;
+}

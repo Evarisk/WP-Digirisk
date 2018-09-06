@@ -1,0 +1,18 @@
+.wpeo-autocomplete {
+	.autocomplete-label {
+		&:hover {
+			border: 1px solid $color__primary;
+		}
+	}
+}
+
+.wpeo-autocomplete {
+	.autocomplete-label {
+		.autocomplete-loading {
+			background: $color__primary;
+		}
+		.autocomplete-loading-background {
+			background: rgba($color__primary, 0.4);
+		}
+	}
+}

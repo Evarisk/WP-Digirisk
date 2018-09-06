@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="view"]' ); ?>
 	</td>
 	<td>
-		<div class="action grid-layout w2">
+		<div class="action wpeo-gridlayout grid-2">
 			<!-- Editer une recommendation -->
 			<div 	class="button w50 light edit action-attribute"
 						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"

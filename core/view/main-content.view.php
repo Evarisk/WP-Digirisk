@@ -33,10 +33,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 
 				<div
-						class="button green action-input save"
+						class="wpeo-button button-green button-square-50 action-input save"
 						data-parent="unit-header"
 						data-loader="digirisk-wrap"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="fas fa-save"></i></span></div>
+						data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_society' ) ); ?>"><span><i class="button-icon fas fa-save"></i></span></div>
 				<div class="mobile-navigation"><i class="icon fas fa-bars"></i></div>
 			</div>
 		</div>

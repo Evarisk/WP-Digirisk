@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 		<input class="input-hidden-danger" type="hidden" name="risk_category_id" value='<?php echo esc_attr( $risk_category->data['id'] ); ?>' />
 	<?php else : ?>
-		<div class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" >
-			<i class="fa fa-times icon" aria-hidden="true"></i>
+		<div class="wpeo-button button-square-40 wpeo-tooltip-event button-disable button-event" data-direction="top" data-color="red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>" >
+			<i class="button-icon far fa-times" aria-hidden="true"></i>
 		</div>
 	<?php endif; ?>
 	</div>

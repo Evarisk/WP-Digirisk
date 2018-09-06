@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'Les pictogrammes de signalisation de l’INRS', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<div class="content">
 			<h3><?php esc_html_e( 'L’INRS met à votre disposition 2 guides pour la signalisation :', 'digirisk' ); ?></h3>
 			<ul>

@@ -50,13 +50,13 @@ $user = User_Digi_Class::g()->get( array(
 	<?php apply_filters( 'digi_' . $type . '_edit_end', $comment ); ?>
 
 	<?php if ( 0 !== $id && 0 !== $comment->data['id'] ) : ?>
-		<span class="button delete action-delete"
+		<span class="wpeo-button button-square-30 button-grey button-rounded delete action-delete"
 					data-id="<?php echo esc_attr( $comment->data['id'] ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment' ) ); ?>"
 					data-type="<?php echo esc_attr( $type ); ?>"
 					data-namespace="digi"
 					data-action="delete_comment"
-					data-message-delete="<?php echo esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?', 'digirisk' ); ?>"><i class="icon far fa-times"></i></span>
+					data-message-delete="<?php echo esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?', 'digirisk' ); ?>"><i class="button-icon far fa-times"></i></span>
 	<?php else : ?>
 		<?php if ( 0 !== $id && $add_button ) : ?>
 			<span data-parent="comment"
@@ -69,7 +69,7 @@ $user = User_Digi_Class::g()->get( array(
 						data-add-button="<?php echo esc_attr( $add_button ); ?>"
 						data-display-date="<?php echo esc_attr( $display_date ); ?>"
 						data-display-user="<?php echo esc_attr( $display_user ); ?>"
-						class="button add action-input"><i class="icon far fa-plus"></i></span>
+						class="wpeo-button button-square-30 button-main button-rounded add action-input"><i class="button-icon far fa-plus"></i></span>
 		<?php endif; ?>
 	<?php endif; ?>
 </li>

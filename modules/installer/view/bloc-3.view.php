@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'Le saviez-vous ?', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<div class="content">
 			<p class="oversize center light"><?php esc_html_e( 'Le risque, c\'est le Danger et l\'Homme dans le même espace', 'digirisk' ); ?></p>
 			<p class="center">

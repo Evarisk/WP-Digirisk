@@ -28,13 +28,13 @@ global $eo_search; ?>
 				<li><?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?></li>
 			</ul>
 		</div>
-		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
+		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding grid-200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
 		<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w100"><?php echo esc_attr( $accident->data['place']->data['modified_unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
-			<div class="action grid-layout w3">
+			<div class="action wpeo-gridlayout grid-3">
 				<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="button w50 green save action-input float right"><i class="icon fas fa-save"></i></div>
 			</div>
 		</div>
@@ -42,7 +42,7 @@ global $eo_search; ?>
 
 	<div class="advanced">
 		<div class="form">
-			<div class="grid-layout padding w3">
+			<div class="wpeo-gridlayout padding grid-3">
 				<?php $eo_search->display( 'accident_user' ); ?>
 
 				<div class="group-date" data-time="true">
@@ -57,7 +57,7 @@ global $eo_search; ?>
 			<label for="textarea"><?php esc_html_e( 'Circonstances détaillées', 'digirisk' ); ?></label>
 			<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
 
-			<div class="grid-layout padding w2">
+			<div class="wpeo-gridlayout padding grid-2">
 				<div>
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
@@ -76,7 +76,7 @@ global $eo_search; ?>
 				</div>
 			</div>
 
-			<div class="grid-layout padding w2">
+			<div class="wpeo-gridlayout padding grid-2">
 				<div>
 					<label for="location_of_lesions"><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></label>
 					<input type="text" id="location_of_lesions" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->data['location_of_lesions'] ); ?>">
@@ -89,7 +89,7 @@ global $eo_search; ?>
 
 			</div>
 
-			<div class="grid-layout padding w2">
+			<div class="wpeo-gridlayout padding grid-2">
 				<div>
 					<label for="name_witnesses"><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></label>
 					<textarea id="name_witnesses" name="accident[name_and_address_of_witnesses]"><?php echo $accident->data['name_and_address_of_witnesses']; ?></textarea>
@@ -100,7 +100,7 @@ global $eo_search; ?>
 				</div>
 			</div>
 
-			<div class="grid-layout padding w2">
+			<div class="wpeo-gridlayout padding grid-2">
 				<div>
 					<label>
 						<?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?>

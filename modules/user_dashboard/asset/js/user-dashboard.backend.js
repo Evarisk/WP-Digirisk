@@ -150,9 +150,9 @@ window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event )
 	var row = jQuery( this ).closest( 'tr' );
 
 	if ( row.find( 'input[name="firstname"]' ).val() && row.find( 'input[name="lastname"]' ).val() && row.find( 'input[name="email"]' ).val() ) {
-		row.find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+		row.find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 	} else {
-		row.find( '.action .button' ).addClass( 'disable' ).removeClass( 'blue' );
+		row.find( '.action .wpeo-button' ).addClass( 'button-disable' );
 	}
 };
 

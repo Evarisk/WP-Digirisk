@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<section class="grid-layout padding w2">
+<section class="wpeo-gridlayout padding grid-2">
 	<!-- Le bloc des utilisateurs affectés -->
 	<div>
 		<?php $eo_search->display( 'evaluator_affected' ); ?>
