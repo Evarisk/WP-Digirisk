@@ -48,10 +48,12 @@ class Registre_Accident_Travail_Benin_Action {
 
 		$response = Registre_AT_Benin_Class::g()->prepare_document( $society_id );
 
+		Registre_AT_Benin_Class::g()->create_document( $response['document']->data['id'] );
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
-			'module'           => 'sheet_groupment',
-			'callback_success' => 'generatedSheetGroupment',
+			'module'           => 'accident',
+			'callback_success' => 'generatedRegistreATBenin',
 			'data'             => $response,
 		) );
 	}

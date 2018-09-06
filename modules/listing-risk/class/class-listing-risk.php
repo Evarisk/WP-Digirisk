@@ -34,7 +34,7 @@ class Listing_Risk_Class extends Document_Class {
 	 * @var string
 	 */
 
-	protected $post_type = 'listing_risk';
+	protected $type = 'listing_risk';
 
 	/**
 	 * Le type du document
@@ -83,7 +83,7 @@ class Listing_Risk_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $odt_name = 'listing-risk';
+	protected $odt_name = 'liste_des_risques_actions';
 
 	/**
 	 * Constructor.
@@ -124,6 +124,7 @@ class Listing_Risk_Class extends Document_Class {
 			'post_parent' => $element_id,
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
+
 		\eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'list', array(
 			'list_document' => $list_document,
 		) );

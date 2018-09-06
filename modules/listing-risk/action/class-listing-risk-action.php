@@ -24,7 +24,6 @@ class Listing_Risk_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_generate_listing_risk', array( $this, 'callback_generate_listing_risk' ) );
@@ -34,9 +33,6 @@ class Listing_Risk_Action {
 	 * Appelle la méthode generate de Listing_Risk_Class.
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
-	 *
-	 * @return void
 	 */
 	public function callback_generate_listing_risk() {
 		check_ajax_referer( 'generate_listing_risk' );
@@ -48,7 +44,11 @@ class Listing_Risk_Action {
 			wp_send_json_error();
 		}
 
-		Listing_Risk_Class::g()->generate( $society_id, $type );
+		$response = Listing_Risk_Class::g()->prepare_document( $society_id, array(
+			'type' => $type,
+		) );
+
+		Listing_Risk_Class::g()->create_document( $response['document']->data['id'] );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

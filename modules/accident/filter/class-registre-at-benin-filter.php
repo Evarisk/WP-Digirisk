@@ -42,7 +42,8 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 	 *
 	 * @return array                  Les données pour le registre des AT bénins modifié.
 	 */
-	public function callback_digi_document_data( $data, $society ) {
+	public function callback_digi_document_data( $data, $args ) {
+		$society = $args['parent'];
 		$address = Society_Class::g()->get_address( $society );
 
 		$data['reference']  = Registre_AT_Benin_Class::g()->element_prefix;
@@ -88,7 +89,7 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 		if ( ! empty( $accidents ) ) {
 			foreach ( $accidents as $accident ) {
 				$comments = get_comments( array(
-					'post_id' => $element->data['id'],
+					'post_id' => $accident->data['id'],
 				) );
 
 				$comment_content = '';
@@ -99,23 +100,23 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 					}
 				}
 				$data['accidentDebut']['value'][] = array(
-					'ref'                       => $element->data['unique_identifier'],
-					'dateInscriptionRegistre'   => $element->data['registration_date_in_register']['date_input']['fr_FR']['date'],
-					'nomPrenomMatriculeVictime' => ! empty( $element->data['victim_identity']->id ) ? User_Digi_Class::g()->element_prefix . $element->data['victim_identity']->id . ' ' . $element->data['victim_identity']->login : '',
-					'dateHeure'                 => $element->data['accident_date']['date_input']['fr_FR']['date_time'],
-					'lieu'                      => $element->data['place']->modified_unique_identifier . ' ' . $element->data['place']->title,
+					'ref'                       => $accident->data['unique_identifier'],
+					'dateInscriptionRegistre'   => $accident->data['registration_date_in_register']['rendered']['date'],
+					'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->id ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->id . ' ' . $accident->data['victim_identity']->login : '',
+					'dateHeure'                 => $accident->data['accident_date']['rendered']['date_time'],
+					'lieu'                      => $accident->data['place']->data['modified_unique_identifier'] . ' ' . $accident->data['place']->data['title'],
 					'circonstances'             => $comment_content,
-					'siegeLesions'              => $element->data['location_of_lesions'],
+					'siegeLesions'              => $accident->data['location_of_lesions'],
 				);
 
 				$data['accidentFin']['value'][] = array(
-					'ref'                   => $element->data['unique_identifier'],
-					'natureLesions'         => $element->data['nature_of_lesions'],
-					'nomAdresseTemoins'     => $element->data['name_and_address_of_witnesses'],
-					'nomAdresseTiers'       => $element->data['name_and_address_of_third_parties_involved'],
-					'signatureDonneurSoins' => $this->get_picture( ! empty( $element->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? $element->data['associated_document_id']['signature_of_the_caregiver_id'][0] : 0 ),
-					'signatureVictime'      => $this->get_picture( ! empty( $element->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? $element->data['associated_document_id']['signature_of_the_victim_id'][0] : 0 ),
-					'observations'          => $element->data['observation'],
+					'ref'                   => $accident->data['unique_identifier'],
+					'natureLesions'         => $accident->data['nature_of_lesions'],
+					'nomAdresseTemoins'     => $accident->data['name_and_address_of_witnesses'],
+					'nomAdresseTiers'       => $accident->data['name_and_address_of_third_parties_involved'],
+					'signatureDonneurSoins' => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] : 0, 6, 'full' ),
+					'signatureVictime'      => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_victim_id'][0] : 0, 6, 'full' ),
+					'observations'          => $accident->data['observation'],
 				);
 			}
 		}

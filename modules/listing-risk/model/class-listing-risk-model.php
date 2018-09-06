@@ -26,14 +26,27 @@ class Listing_Risk_Model extends Document_Model {
 	 *
 	 * @since 6.5.0
 	 */
-	protected function construct() {
+	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['document_meta'] = array(
 			'type'      => 'array',
 			'meta_type' => 'single',
 			'field'     => 'document_meta',
 			'child'     => array(
-				'identifiantElement' => array(
-					'type' => 'string',
+				'risk1' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+				'risk2' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+				'risk3' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+				'risk4' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
 				),
 			),
 		);

@@ -46,7 +46,7 @@ class Accident_Shortcode {
 	 */
 	public function callback_digi_registre_accident( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		Registre_AT_Benin_Class::g()->display( $element_id, array( Registre_AT_Benin_Class::g()->get_type() ) );
+		Registre_AT_Benin_Class::g()->display( $element_id, array( '\digi\Registre_AT_Benin_Class' ) );
 	}
 
 	/**

@@ -20,18 +20,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="padding"><?php echo esc_html( $element->data['title'] ); ?></td>
 	<td>
 		<div class="action grid-layout w1">
-			<div></div>
-			<div>
-				<?php if ( ! empty( Document_Class::g()->get_document_path( $element, 'digi-group' ) ) ) : ?>
-					<a class="button purple h50" href="<?php echo esc_attr( Document_Class::g()->get_document_path( $element, 'digi-group' ) ); ?>">
-						<i class="fa fa-download icon" aria-hidden="true"></i>
-					</a>
-				<?php else : ?>
-					<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
-						<i class="fa fa-times icon" aria-hidden="true"></i>
-					</span>
-				<?php endif; ?>
-			</div>
+			<?php if ( $element->data['file_generated'] ) : ?>
+				<a class="button purple h50" href="<?php echo esc_attr( $element->data['link'] ); ?>">
+					<i class="fas fa-download icon" aria-hidden="true"></i>
+				</a>
+			<?php else : ?>
+				<span class="action-attribute button grey h50 wpeo-tooltip-event"
+					data-id="<?php echo esc_attr( $element->data['id'] ); ?>"
+					data-model="<?php echo esc_attr( $element->get_class() ); ?>"
+					data-action="generate_document"
+					data-color="red"
+					data-direction="left"
+					aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
+					<i class="far fa-times icon" aria-hidden="true"></i>
+				</span>
+			<?php endif; ?>
 		</div>
 	</td>
 </tr>
