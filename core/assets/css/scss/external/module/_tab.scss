@@ -1,3 +1,11 @@
+.wpeo-tab .tab-content{
+	&::after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+}
+
 .wpeo-tab .tab-list {
 	background: rgba(0,0,0,.1);
 

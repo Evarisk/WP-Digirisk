@@ -7056,6 +7056,11 @@ readers do not read off random characters that represent icons */
 .wpeo-wrap .wpeo-popover.popover-red.popover-left:before {
   border-color: transparent transparent transparent #e05353; }
 
+.wpeo-wrap .wpeo-tab .tab-content:after {
+  display: block;
+  content: '';
+  clear: both; }
+
 .wpeo-wrap .wpeo-tab .tab-list {
   background: rgba(0, 0, 0, 0.1); }
 
