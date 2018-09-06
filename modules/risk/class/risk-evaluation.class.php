@@ -62,8 +62,6 @@ class Risk_Evaluation_Class extends \eoxia\Comment_Class {
 	 * @version 7.0.0
 	 *
 	 * @param  Risk_Model $risk Les données du risque.
-	 *
-	 * @return void
 	 */
 	public function display( $risk ) {
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'risk-evaluation/main', array(

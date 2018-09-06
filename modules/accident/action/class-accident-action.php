@@ -130,13 +130,19 @@ class Accident_Action {
 
 		ob_start();
 		if ( $add ) {
-			Accident_Class::g()->register_search();
+			Accident_Class::g()->register_search( array(
+				'value'        => User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
+				'hidden_value' => $accident->data['victim_identity_id'],
+			), array(
+				'value'        => $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'],
+				'hidden_value' => $accident->data['parent_id'],
+			) );
 
 			\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 				'accident' => $accident,
 			) );
 		} else {
-			Accident_Class::g()->display();
+			Accident_Class::g()->display_page();
 		}
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

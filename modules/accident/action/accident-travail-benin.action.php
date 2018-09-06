@@ -41,7 +41,9 @@ class Accident_Travail_Benin_Action {
 			'posts_per_page' => 1,
 		), true );
 
-		$response = Accident_Travail_Benin_Class::g()->prepare_document( $society->data['id'] );
+		$response = Accident_Travail_Benin_Class::g()->prepare_document( $accident_id );
+
+		Accident_Travail_Benin_Class::g()->create_document( $response['document']->data['id'] );
 	}
 
 }

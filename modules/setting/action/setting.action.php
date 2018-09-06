@@ -40,13 +40,14 @@ class Setting_Action {
 	/**
 	 * La fonction de callback de l'action admin_menu de WordPress
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
 	 */
 	public function admin_menu() {
-		add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+
+		if ( ! empty( $digirisk_core['installed'] ) ) {
+			add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+		}
 	}
 
 	/**

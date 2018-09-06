@@ -192,16 +192,17 @@ class Export_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $element ) {
 				$tmp_risk_data = array(
-					'title'             => $element->data['title'],
-					'slug'              => $element->data['slug'],
-					'status'            => $element->data['status'],
-					'content'           => $element->data['content'],
-					'link'              => $element->data['link'],
-					'parent_id'         => $element->data['parent_id'],
-					'danger_category'   => $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.
-					'evaluation'        => $this->export_evaluation( $element->data['evaluation'] ),
-					'evaluation_method' => $this->export_evaluation_method( $element->data['evaluation_method'] ),
-					'comment'           => $this->export_comments( $element->data['comment'] ),
+					'title'               => $element->data['title'],
+					'slug'                => $element->data['slug'],
+					'status'              => $element->data['status'],
+					'content'             => $element->data['content'],
+					'link'                => $element->data['link'],
+					'parent_id'           => $element->data['parent_id'],
+					'current_equivalence' => $element->data['current_equivalence'],
+					'danger_category'     => $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.
+					'evaluation'          => $this->export_evaluation( $element->data['evaluation'] ),
+					'evaluation_method'   => $this->export_evaluation_method( $element->data['evaluation_method'] ),
+					'comment'             => $this->export_comments( $element->data['comment'] ),
 				);
 
 				$data_risks_to_export[] = $tmp_risk_data;
@@ -244,9 +245,10 @@ class Export_Class extends \eoxia\Singleton_Util {
 			'date'             => $evaluation->data['date'],
 			'content'          => $evaluation->data['content'],
 			'status'           => $evaluation->data['status'],
-			'risk_level'       => $evaluation->data['risk_level'],
-			'quotation_detail' => $evaluation->data['quotation_detail'],
 			'scale'            => $evaluation->data['scale'],
+			'cotation'         => $evaluation->data['cotation'],
+			'equivalence'      => $evaluation->data['equivalence'],
+			'variables'        => $evaluation->data['variables'],
 			'post_id'          => $evaluation->data['post_id'],
 		);
 
@@ -286,7 +288,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $comments ) ) {
 			foreach ( $comments as $element ) {
-				if ( ! empty( $element->id ) ) {
+				if ( ! empty( $element->data['id'] ) ) {
 					$tmp_comment_to_export = array(
 						'date'      => $element->data['date'],
 						'content'   => $element->data['content'],
@@ -308,7 +310,6 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * Créer le zip avec le fichier .json
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.1
 	 *
 	 * @param array $list_data_exported La liste des données à exporter.
 	 * @return array

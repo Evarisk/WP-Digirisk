@@ -16,7 +16,8 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<li class="unit <?php echo ( $society->data['id'] === $selected_society_id ) ? 'active' : ''; ?>" data-id="<?php echo esc_attr( $society->data['id'] ); ?>">
+<li class="unit <?php echo ( $society->data['id'] === $selected_society_id ) ? 'active' : ''; echo ( \eoxia\Post_Util::is_parent( $society->data['id'], $selected_society_id ) ) ? 'toggled' : ''; ?>"
+	data-id="<?php echo esc_attr( $society->data['id'] ); ?>">
 	<div class="unit-container">
 
 		<?php if ( Workunit_Class::g()->get_type() !== $society->data['type'] && \eoxia\Post_Util::have_child( $society->data['id'], array( 'digi-group', 'digi-workunit' ) ) ) : ?>

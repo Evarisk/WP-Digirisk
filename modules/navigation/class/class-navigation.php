@@ -70,40 +70,6 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			) );
 		}
 	}
-
-	/**
-	 * Charges les groupements selon le parent_id et les envoies à la vue navigation/toggle/list.view.php
-	 *
-	 * @since 6.0.0
-	 *
-	 * @param  integer $selected_groupment_id L'ID du groupement sélectionné.
-	 * @param  integer $parent_id (optional) 	L'ID du groupement parent.
-	 */
-	public function display_toggle_list( $selected_groupment_id, $parent_id = 0 ) {
-		$groupments = Group_Class::g()->get(
-			array(
-				'posts_per_page' => -1,
-				'post_parent'    => $parent_id,
-				'post_status'    => array( 'publish', 'draft' ),
-				'orderby'        => array( 'menu_order' => 'ASC', 'meta_value_num' => 'ASC' ),
-				'meta_key'       => '_wpdigi_unique_key',
-			)
-		);
-
-		if ( !empty( $groupments ) ) {
-			foreach ( $groupments as $groupment ) {
-				$groupment->count_workunit = count( Workunit_Class::g()->get( array(
-					'post_parent' => $groupment->id,
-					'posts_per_page' => -1,
-				) ) );
-			}
-		}
-
-		\eoxia\View_Util::exec( 'digirisk', 'navigation', 'toggle/list', array(
-			'selected_groupment_id' => $selected_groupment_id,
-			'groupments' => $groupments,
-		) );
-	}
 }
 
 new Navigation_Class();

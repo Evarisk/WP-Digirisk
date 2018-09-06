@@ -71,16 +71,16 @@ class Import_Action extends \eoxia\Singleton_Util {
 				wp_send_json_error();
 			}
 
-			\eoxia\LOG_Util::log( 'Création catégorie de risque, recommendation et évaluation de méthode par défaut.', 'digirisk' );
-			$danger_created            = Risk_Category_Default_Data_Class::g()->create();
-			$recommendation_created    = Recommendation_Default_Data_Class::g()->create();
-			$evaluation_method_created = Evaluation_Method_Default_Data_Class::g()->create();
-
-			// Met à jours l'option pour dire que l'installation est terminée.
-			update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array(
-				'installed'  => true,
-				'db_version' => 1,
-			) );
+			// \eoxia\LOG_Util::log( 'Création catégorie de risque, recommendation et évaluation de méthode par défaut.', 'digirisk' );
+			// $danger_created            = Risk_Category_Default_Data_Class::g()->create();
+			// $recommendation_created    = Recommendation_Default_Data_Class::g()->create();
+			// $evaluation_method_created = Evaluation_Method_Default_Data_Class::g()->create();
+			//
+			// // Met à jours l'option pour dire que l'installation est terminée.
+			// update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array(
+			// 	'installed'  => true,
+			// 	'db_version' => 1,
+			// ) );
 
 			$current_version_for_update_manager = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
 
@@ -141,7 +141,7 @@ class Import_Action extends \eoxia\Singleton_Util {
 	public function fast_response( $end = false ) {
 		self::$response['end'] = $end;
 		if ( self::$response['end'] ) {
-			Tools_Class::g()->reset_method_evaluation();
+			// Tools_Class::g()->reset_method_evaluation();
 		}
 		wp_send_json_success( self::$response );
 	}

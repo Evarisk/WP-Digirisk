@@ -13,20 +13,24 @@ class Tools_Action {
 	}
 
 	public function admin_menu() {
-    add_management_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-tools', array( $this, 'add_management_page' ) );
-  }
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
-  public function add_management_page() {
+		if ( ! empty( $digirisk_core['installed'] ) ) {
+			add_management_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-tools', array( $this, 'add_management_page' ) );
+		}
+ 	}
+
+	public function add_management_page() {
 		\eoxia\View_Util::exec( 'digirisk', 'tools', 'main' );
-  }
+	}
 
-  public function callback_reset_method_evaluation() {
-    check_ajax_referer( 'reset_method_evaluation' );
+	public function callback_reset_method_evaluation() {
+		check_ajax_referer( 'reset_method_evaluation' );
 
-    tools_class::g()->reset_method_evaluation();
+		tools_class::g()->reset_method_evaluation();
 
-    wp_send_json_success();
-  }
+		wp_send_json_success();
+	}
 
 	/**
 	 * Callback function for fixing risk list in element when some errors are detected / Fonction de rappel pour la correction de la liste des risques dans les éléments
