@@ -28,13 +28,10 @@ defined( 'ABSPATH' ) || exit; ?>
 					data-target="duer-modal"
 					data-title="Destinataire"
 					data-src="destinataire-duer"
-					class="fa-layers fa-fw wpeo-modal-event float-icon">
+					class="wpeo-modal-event wpeo-button-pulse">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="far fa-eye"></i>
-			</span>
+			<i class="button-icon fas fa-user"></i>
+			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</span>
 	</td>
 
@@ -45,13 +42,10 @@ defined( 'ABSPATH' ) || exit; ?>
 					data-target="duer-modal"
 					data-title="Méthodologie"
 					data-src="methodology"
-					class="fa-layers fa-fw wpeo-modal-event float-icon">
+					class="wpeo-modal-event wpeo-button-pulse">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="far fa-eye"></i>
-			</span>
+			<i class="button-icon fas fa-search"></i>
+			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</span>
 	</td>
 
@@ -62,13 +56,10 @@ defined( 'ABSPATH' ) || exit; ?>
 					data-target="duer-modal"
 					data-title="Source"
 					data-src="sources"
-					class="fa-layers fa-fw wpeo-modal-event float-icon">
+					class="wpeo-modal-event wpeo-button-pulse">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="far fa-eye"></i>
-			</span>
+			<i class="button-icon fas fa-link"></i>
+			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</span>
 		</td>
 
@@ -79,13 +70,10 @@ defined( 'ABSPATH' ) || exit; ?>
 					data-target="duer-modal"
 					data-title="Disponibilité des plans"
 					data-src="dispo-des-plans"
-					class="fa-layers fa-fw wpeo-modal-event float-icon">
+					class="wpeo-modal-event wpeo-button-pulse">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="far fa-eye"></i>
-			</span>
+			<i class="button-icon fas fa-map-marker-alt"></i>
+			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</span>
 	</td>
 
@@ -96,26 +84,23 @@ defined( 'ABSPATH' ) || exit; ?>
 						data-target="duer-modal"
 						data-title="Note importante"
 						data-src="notes-importantes"
-						class="fa-layers fa-fw wpeo-modal-event float-icon">
+						class="wpeo-modal-event wpeo-button-pulse">
 
-				<i class="fas fa-square background-icon"></i>
-				<i class="fas fa-file" data-fa-transform="shrink-10"></i>
-				<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-					<i class="far fa-eye"></i>
-				</span>
+				<i class="button-icon fas fa-file"></i>
+				<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 			</span>
 		</td>
 
 	<td>
-		<div class="action wpeo-gridlayout grid-2">
+		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
 			<?php if ( ! empty( $document->data['file_generated'] ) ) : ?>
-				<a class="button purple h50 tooltip hover"
+				<a class="wpeo-button button-purple button-square-50 wpeo-tooltip-event"
 					aria-label="<?php echo esc_attr_e( 'DUER', 'digirisk' ); ?>"
 					href="<?php echo esc_attr( $document->data['link'] ); ?>">
 					<i class="icon fas fa-file-alt"></i>
 				</a>
 			<?php else : ?>
-				<span class="action-attribute button grey h50 wpeo-tooltip-event"
+				<span class="action-attribute wpeo-button button-grey button-square-50 wpeo-tooltip-event"
 					data-id="<?php echo esc_attr( $document->data['id'] ); ?>"
 					data-model="<?php echo esc_attr( $document->get_class() ); ?>"
 					data-action="generate_document"

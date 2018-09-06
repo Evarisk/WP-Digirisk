@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr>
+<tr class="edit">
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
 	<td class="padding"></td>
@@ -32,17 +32,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td class="padding">
 		<textarea class="hidden textarea-content-destinataire-duer" name="destinataireDUER"><?php echo esc_html( $element->data['document_meta']['destinataireDUER'] ); ?></textarea>
+
 		<span data-parent="main-container"
 				data-target="duer-modal"
 				data-title="Édition du destinataire"
 				data-src="destinataire-duer"
-				class="fa-layers fa-fw wpeo-modal-event float-icon span-content-destinataire-duer">
+				class="wpeo-modal-event wpeo-button-pulse span-content-destinataire-duer">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-user" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="fas fa-pencil"></i>
-			</span>
+			<i class="button-icon fas fa-user"></i>
+			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
 		</span>
 	</td>
 
@@ -52,13 +50,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-target="duer-modal"
 					data-title="Édition de la méthodologie"
 					data-src="methodology"
-					class="fa-layers fa-fw wpeo-modal-event float-icon span-content-methodology">
+					class="wpeo-modal-event wpeo-button-pulse span-content-methodology">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-search" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="fas fa-pencil"></i>
-			</span>
+			<i class="button-icon fas fa-search"></i>
+			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
 		</span>
 	</td>
 
@@ -68,13 +63,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-target="duer-modal"
 					data-title="Édition de la source"
 					data-src="sources"
-					class="fa-layers fa-fw wpeo-modal-event float-icon span-content-sources">
+					class="wpeo-modal-event wpeo-button-pulse span-content-sources">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-link" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="fas fa-pencil"></i>
-			</span>
+			<i class="button-icon fas fa-link"></i>
+			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
 		</span>
 	</td>
 
@@ -84,13 +76,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-target="duer-modal"
 					data-title="Édition de la localisation"
 					data-src="dispo-des-plans"
-					class="fa-layers fa-fw wpeo-modal-event float-icon span-content-dispo-des-plans">
+					class="wpeo-modal-event wpeo-button-pulse span-content-dispo-des-plans">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-map-marker-alt" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="fas fa-pencil"></i>
-			</span>
+			<i class="button-icon fas fa-map-marker-alt"></i>
+			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
 		</span>
 	</td>
 
@@ -100,25 +89,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-target="duer-modal"
 					data-title="Édition de la note importante"
 					data-src="notes-importantes"
-					class="fa-layers fa-fw wpeo-modal-event float-icon span-content-notes-importantes">
+					class="wpeo-modal-event wpeo-button-pulse span-content-notes-importantes">
 
-			<i class="fas fa-square background-icon"></i>
-			<i class="fas fa-file" data-fa-transform="shrink-10"></i>
-			<span class="animated-icon wpeo-animate animate-hover bounceInLight">
-				<i class="fas fa-pencil"></i>
-			</span>
+			<i class="button-icon fas fa-file"></i>
+			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
 		</span>
 	</td>
 
 	<td>
 		<div class="action w50">
-			<div class="wpeo-modal-event add button blue w50"
+			<div class="wpeo-modal-event add wpeo-button button-square-50"
 					data-id="<?php echo esc_attr( $element_id ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'display_societies_duer' ) ); ?>"
 					data-action="display_societies_duer"
 					data-class="generate-duer-modal modal-force-display"
 					data-title="Génération du DUER">
-					<i class="icon far fa-plus"></i>
+					<i class="button-icon far fa-plus"></i>
 				</div>
 		</div>
 	</td>

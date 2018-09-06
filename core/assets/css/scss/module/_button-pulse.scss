@@ -1,0 +1,37 @@
+.wpeo-wrap .wpeo-button-pulse {
+	width: 30px;
+	min-width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background: rgba(0,0,0,0.1);
+	display: block;
+	text-align: center;
+	border-radius: 4px;
+	padding: 0 !important;
+	position: relative;
+	@include transition();
+
+	.button-icon {
+		display: inline-block;
+	}
+	.button-float-icon {
+		position: absolute;
+		top: -6px;
+		right: -6px;
+		background: #d6d6d6;
+		padding: 0;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		font-size: 10px;
+	}
+	&:hover {
+		background: rgba(0,0,0,0.3);
+		cursor: pointer;
+
+		.animated {
+			@extend .bounce-in-light;
+		}
+	}
+}
