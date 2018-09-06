@@ -127,7 +127,6 @@ class Risk_Class extends \eoxia\Post_Class {
 	 */
 	public function save( $data, $risk_category_id, $method_evaluation_id ) {
 		$data['id']        = (int) $data['id'];
-		$data['title']     = sanitize_text_field( $data['title'] );
 		$data['parent_id'] = (int) $data['parent_id'];
 
 		if ( ! isset( $data['status'] ) ) {
@@ -138,6 +137,10 @@ class Risk_Class extends \eoxia\Post_Class {
 			'digi-category-risk' => $risk_category_id,
 			'digi-method'        => $method_evaluation_id,
 		);
+
+		$risk_category = Risk_Category_Class::g()->get( array( 'id' => $risk_category_id ), true );
+
+		$data['title'] = $risk_category->data['name'];
 
 		return $this->update( $data );
 	}

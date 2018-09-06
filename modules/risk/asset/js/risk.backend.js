@@ -17,19 +17,18 @@ window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
-
 	// Remet à 0 les styles.
-	triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	triggeredElement.closest( '.risk-row' ).find( '.category-danger.tooltip' ).removeClass( 'active' );
 	triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
 
 	// Vérification du danger.
-	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[danger_id]"]' ).val() ) {
-		triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).addClass( 'active' );
+	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk_category_id"]' ).val() ) {
+		triggeredElement.closest( '.risk-row' ).find( '.category-danger.tooltip' ).addClass( 'active' );
 		return false;
 	}
 
 	// Vérification de la cotation.
-	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
+	if ( '{}' === triggeredElement.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
 		triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).addClass( 'active' );
 		return false;
 	}

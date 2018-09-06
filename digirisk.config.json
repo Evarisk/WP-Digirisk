@@ -50,6 +50,7 @@
 		"modules/document/document.config.json",
 
 		"modules/duer/duer.config.json",
+		"modules/listing-risk/listing-risk.config.json",
 
 		"modules/accident/accident.config.json",
 		"modules/causerie/causerie.config.json",

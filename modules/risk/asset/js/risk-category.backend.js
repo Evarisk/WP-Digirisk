@@ -38,7 +38,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 
 	// Rend le bouton "active".
-	if ( -1 != element.closest( 'tr' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
+	if ( '{}' !== triggeredElement.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
 		element.closest( 'tr' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
 	}
 

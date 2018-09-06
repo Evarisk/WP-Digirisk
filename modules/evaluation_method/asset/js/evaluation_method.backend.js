@@ -29,4 +29,9 @@ window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables = function( riskID
 	if ( updateEvaluationID ) {
 		jQuery( '.risk-row.edit[data-id="' + riskID + '"] input[name="evaluation_method_id"]' ).val( evaluationID );
 	}
+
+	// Rend le bouton "active".
+	if ( '-1' !== jQuery( '.risk-row.edit[data-id="' + riskID + '"]' ).find( 'input[name="risk_category_id"]' ).val() ) {
+		jQuery( '.risk-row.edit[data-id="' + riskID + '"]' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+	}
 };

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $evaluation_method_id ); ?>" />
 <textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : '{}'; ?></textarea>
 
-<div class="wpeo-dropdown dropdown-grid dropdown-padding-0 cotation-container">
+<div class="wpeo-dropdown dropdown-grid dropdown-padding-0 cotation-container tooltip red" aria-label="<?php esc_attr_e( 'Veuillez remplir la cotation', 'digirisk' ); ?>">
 	<span data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>" class="dropdown-toggle cotation level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>">
 		<?php
 		if ( 0 !== $risk->data['id'] ) :

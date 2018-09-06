@@ -49,7 +49,6 @@ class Risk_Save_Action {
 		$risk_data = array(
 			'id'        => $id,
 			'parent_id' => $parent_id,
-			'title'     => 'Chocolat',
 		);
 
 		$risk = Risk_Class::g()->save( $risk_data, $risk_category_id, $evaluation_method_id );
