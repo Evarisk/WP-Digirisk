@@ -14,13 +14,13 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="digirisk-wrap risk-page">
+<div class="digirisk-wrap wpeo-wrap risk-page">
 
 	<table class="table risk">
 		<?php Risk_Page_Class::g()->display_risk_list(); ?>
 	</table>
 
-	<a href="#" class="margin button disable save-all right">Enregistrer</a>
+	<a href="#" class="wpeo-button button-disable button-green button-margin save-all alignright"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>
 
 	<!-- Pagination -->
 	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>

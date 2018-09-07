@@ -23,7 +23,7 @@ window.eoxiaJS.digirisk.risk_page.saveRisks = function( event ) {
 	}
 
 	jQuery( '.risk-page tr  .edit-risk.checked:first' ).click();
-	jQuery( '.risk-page .save-all' ).removeClass( 'green' ).addClass( 'disable' );
+	jQuery( '.risk-page .save-all' ).addClass( 'button-disable' );
 };
 
 /**
@@ -37,7 +37,7 @@ window.eoxiaJS.digirisk.risk_page.saveRisks = function( event ) {
 window.eoxiaJS.digirisk.risk_page.checkTheCheckbox = function( event ) {
 	jQuery( this ).closest( 'tr' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
 	jQuery( this ).closest( 'tr' ).find( '.edit-risk' ).addClass( 'checked' );
-	jQuery( '.risk-page .save-all' ).removeClass( 'disable' ).addClass( 'green' );
+	jQuery( '.risk-page .save-all' ).removeClass( 'button-disable' );
 };
 
 window.eoxiaJS.digirisk.risk_page.savedRiskSuccess = function( element, response ) {
