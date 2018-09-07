@@ -167,14 +167,14 @@ class Recommendation_Action {
 			wp_send_json_error();
 		}
 
-		$recommendation->status = 'trash';
+		$recommendation->data['status'] = 'trash';
 
-		Recommendation_Class::g()->update( $recommendation );
+		Recommendation_Class::g()->update( $recommendation->data );
 
 		do_action( 'digi_add_historic', array(
-			'parent_id' => $recommendation->parent_id,
-			'id'        => $recommendation->id,
-			'content'   => __( 'Suppression de la signalisation', 'digirisk' ) . ' ' . $recommendation->unique_identifier,
+			'parent_id' => $recommendation->data['parent_id'],
+			'id'        => $recommendation->data['id'],
+			'content'   => __( 'Suppression de la signalisation', 'digirisk' ) . ' ' . $recommendation->data['unique_identifier'],
 		) );
 
 		wp_send_json_success( array(
