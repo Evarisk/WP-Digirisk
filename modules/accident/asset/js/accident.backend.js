@@ -46,9 +46,9 @@ window.eoxiaJS.digirisk.accident.event = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( event ) {
-	jQuery( this ).closest( 'div' ).find( 'span:first' ).addClass( 'hidden' );
+	jQuery( this ).closest( '.investigation-group' ).find( '.investigation-media' ).addClass( 'hidden' );
 	if ( jQuery( this ).is( ':checked' ) ) {
-		jQuery( this ).closest( 'div' ).find( 'span:first' ).removeClass( 'hidden' );
+		jQuery( this ).closest( '.investigation-group' ).find( '.investigation-media' ).removeClass( 'hidden' );
 	}
 };
 
@@ -70,9 +70,9 @@ window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
 	var accidentRow = jQuery( this ).closest( '.col' );
 
 	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
-		accidentRow.find( '.action-input' ).removeClass( 'disable' ).addClass( 'blue' );
+		accidentRow.find( '.action-input' ).removeClass( 'button-disable' );
 	} else {
-		accidentRow.find( '.action-input' ).removeClass( 'blue' ).addClass( 'disable' );
+		accidentRow.find( '.action-input' ).addClass( 'button-disable' );
 	}
 };
 
