@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Listing Risk Model class.
  */
-class Listing_Risk_Model extends Document_Model {
+class Listing_Risk_Corrective_Task_Model extends Document_Model {
 
 	/**
 	 * Constructor.

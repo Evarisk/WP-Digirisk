@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<th><?php esc_html_e( 'Cot', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
-			<th class="w100"></th>
+			<th class="w150"></th>
 		</tr>
 	</thead>
 

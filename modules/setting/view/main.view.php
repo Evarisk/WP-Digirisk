@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap">
+<div class="wrap wpeo-wrap">
 	<h1><?php esc_html_e( 'Digirisk settings', 'digirisk' ); ?></h1>
 
 	<div class="digi-tools-main-container">

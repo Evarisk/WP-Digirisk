@@ -15,9 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<?php do_shortcode( '[task id="' . $task->id . '"]' ); ?>
+<?php echo do_shortcode( '[task id="' . $task->data['id'] . '"]' ); ?>
 
-<a href="<?php echo esc_attr( admin_url( 'admin.php?page=wpeomtm-dashboard&term=' . $task->id ) ); ?>"><?php esc_html_e( 'Aller vers la tâche', 'digirisk' ); ?></a>
+<a href="<?php echo esc_attr( admin_url( 'admin.php?page=wpeomtm-dashboard&term=' . $task->data['id'] ) ); ?>"><?php esc_html_e( 'Aller vers la tâche', 'digirisk' ); ?></a>
 
 <p class="message hidden"><?php esc_html_e( 'Cliquez sur le + blue pour créer votre action corrective.', 'digirisk' ); ?></p>
-<div class="button green margin uppercase strong float right"><span><?php esc_html_e( 'Fermer', 'digirisk' ); ?></span></div>

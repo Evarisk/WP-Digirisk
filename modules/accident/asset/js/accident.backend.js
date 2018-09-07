@@ -2,7 +2,6 @@
  * Initialise l'objet "accident" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.1.5
- * @version 6.4.4
  */
 window.eoxiaJS.digirisk.accident = {};
 window.eoxiaJS.digirisk.accident.canvas = [];
@@ -27,7 +26,6 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
  * Initialise les évènements
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @return {void}
  */
@@ -43,7 +41,6 @@ window.eoxiaJS.digirisk.accident.event = function() {
  * Affiches le champs 'upload' quand la select box est sur 'true'.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'évènement lors du changement de la select box.
  * @return {void}
@@ -59,7 +56,6 @@ window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( e
  * Clear le canvas.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'état de l'évènement à ce moment T.
  * @return {void}
@@ -84,7 +80,6 @@ window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
  * Quand on "resize" la fenêtre, adapte le canvas.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'état de l'évènement à ce moment T.
  * @return {void}
@@ -109,7 +104,6 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
  * @return {void}
  *
  * @since 6.1.5
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
 	if ( response.data.add ) {
@@ -130,7 +124,6 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
  * @return {void}
  *
  * @since 6.1.5
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).replaceWith( response.data.view );
@@ -152,7 +145,6 @@ window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElem
  * @return {void}
  *
  * @since 6.1.5
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).fadeOut();
@@ -167,7 +159,6 @@ window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredEle
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.3.0
  */
 window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, response ) {
 	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
@@ -182,7 +173,6 @@ window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, res
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.4.4
  */
 window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
 	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
@@ -196,7 +186,6 @@ window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( elem
  * @return {void}
  *
  * @since 6.4.0
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.editedStoppingDaySuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'div' ).html( response.data.view );
@@ -211,7 +200,6 @@ window.eoxiaJS.digirisk.accident.editedStoppingDaySuccess = function( triggeredE
  * @return {void}
  *
  * @since 6.4.0
- * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.accident.deletedStoppingDay = function( triggeredElement, response ) {

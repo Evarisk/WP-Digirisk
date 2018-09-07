@@ -50,3 +50,5 @@ defined( 'ABSPATH' ) || exit; ?>
 		?>
 	</tfoot>
 </table>
+
+<?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'popup' ); ?>

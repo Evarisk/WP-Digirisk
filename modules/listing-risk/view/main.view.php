@@ -17,7 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <table class="table">
-	<?php Listing_Risk_Class::g()->display_document_list( $element_id ); ?>
+	<thead>
+		<tr>
+			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
+			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
+			<th class="w50"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php if ( ! empty( $documents ) ) : ?>
+			<?php foreach ( $documents as $element ) : ?>
+				<?php \eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'list-item', array( 'element' => $element ) ); ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+	</tbody>
+
 
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'item-edit', array(

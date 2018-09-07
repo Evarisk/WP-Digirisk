@@ -44,11 +44,22 @@ class Listing_Risk_Action {
 			wp_send_json_error();
 		}
 
-		$response = Listing_Risk_Class::g()->prepare_document( $society_id, array(
-			'type' => $type,
-		) );
+		switch ( $type ) {
+			case 'photos':
+				$response = Listing_Risk_Picture_Class::g()->prepare_document( $society_id, array(
+					'type' => $type,
+				) );
 
-		Listing_Risk_Class::g()->create_document( $response['document']->data['id'] );
+				Listing_Risk_Picture_Class::g()->create_document( $response['document']->data['id'] );
+				break;
+			case 'actions':
+				$response = Listing_Risk_Corrective_Task_Class::g()->prepare_document( $society_id, array(
+					'type' => $type,
+				) );
+
+				Listing_Risk_Corrective_Task_Class::g()->create_document( $response['document']->data['id'] );
+				break;
+		}
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

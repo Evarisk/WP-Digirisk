@@ -170,9 +170,15 @@ class DUER_Filter extends Identifier_Filter {
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$output_comment                       = '';
-				$output_action_prevention_uncompleted = '';
-				$output_action_prevention_completed   = '';
+				$output_comment = '';
+
+				if ( ! empty( $risk->data['comment'] ) ) {
+					foreach ( $risk->data['comment'] as $comment ) {
+						$output_comment .= point_to_string( $comment );
+					}
+				}
+
+				$risk = Corrective_Task_Class::g()->output_odt( $risk );
 
 				$risk_data = array(
 					'nomElement'                  => $risk->data['parent']->data['title'],
@@ -180,8 +186,8 @@ class DUER_Filter extends Identifier_Filter {
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'nomDanger'                   => $risk->data['risk_category']->data['name'],
 					'commentaireRisque'           => $output_comment,
-					'actionPreventionUncompleted' => $output_action_prevention_uncompleted,
-					'actionPreventionCompleted'   => $output_action_prevention_completed,
+					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
 				);
 
 				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;

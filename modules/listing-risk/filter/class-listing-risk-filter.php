@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Lsting Risk Filter class.
  */
-class Listing_Risk_Filter extends Identifier_Filter {
+class Listing_Risk_Filter {
 
 	/**
 	 * Constructor.
@@ -27,11 +27,10 @@ class Listing_Risk_Filter extends Identifier_Filter {
 	 * @since 6.5.0
 	 */
 	public function __construct() {
-		parent::__construct();
-
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
 
-		add_filter( 'digi_listing_risk_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
+		add_filter( 'digi_listing_risk_action_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
+		add_filter( 'digi_listing_risk_picture_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 	}
 
 	/**
@@ -55,6 +54,7 @@ class Listing_Risk_Filter extends Identifier_Filter {
 
 	public function callback_digi_document_data( $data, $args ) {
 		$args['parent_id'] = $args['parent']->data['id'];
+		$with_picture      = ( 'actions' === $args['type'] ) ? false : true;
 
 		$args_where = array(
 			'post_parent'    => $args['parent_id'],
@@ -87,20 +87,35 @@ class Listing_Risk_Filter extends Identifier_Filter {
 		if ( ! empty( $data['risks'] ) ) {
 			foreach ( $data['risks'] as $risk ) {
 				$output_comment                       = '';
-				$output_action_prevention_uncompleted = '';
-				$output_action_prevention_completed   = '';
 
-				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][] = array(
+				if ( ! empty( $risk->data['comment'] ) ) {
+					foreach ( $risk->data['comment'] as $comment ) {
+						$output_comment .= point_to_string( $comment );
+					}
+				}
+
+				$risk = Corrective_Task_Class::g()->output_odt( $risk );
+
+				$risk_odt = array(
 					'nomElement'                  => $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'nomDanger'                   => $risk->data['risk_category']->data['name'],
 					'commentaireRisque'           => $output_comment,
-					'actionPreventionUncompleted' => $output_action_prevention_uncompleted,
-					'actionPreventionCompleted'   => $output_action_prevention_completed,
+					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
+					'photoAssociee'               => '',
 				);
+
+				if ( $with_picture && ! empty( $risk->data['thumbnail_id'] ) ) {
+					$risk_odt['photoAssociee'] = Document_Util_Class::g()->get_picture( ! empty( $risk->data['thumbnail_id'] ) ? $risk->data['thumbnail_id'] : 0, 6, 'full' );
+
+				}
+
+				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_odt;
 			}
 		}
+
 
 		unset( $data['risks'] );
 

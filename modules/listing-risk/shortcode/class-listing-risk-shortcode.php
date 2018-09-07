@@ -39,7 +39,7 @@ class Listing_Risk_Shortcode {
 	 */
 	public function callback_digi_listing_risk( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		Listing_Risk_Class::g()->display( $element_id, array( '\digi\Listing_Risk_Class' ) );
+		Listing_Risk_Class::g()->display( $element_id, array( '\digi\Listing_Risk_Corrective_Task_Class', '\digi\Listing_Risk_Picture_Class' ) );
 	}
 }
 
