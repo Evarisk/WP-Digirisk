@@ -134,4 +134,21 @@
 		background: $color__primary;
 		color: #fff;
 	}
+	.table-row:not(.header) {
+		.table-cell:nth-of-type(2).active::after {
+			background: darken($color__primary, 0);
+		}
+		.table-cell:nth-of-type(3).active::after {
+			background: darken($color__primary, 15%);
+		}
+		.table-cell:nth-of-type(4).active::after {
+			background: darken($color__primary, 30%);
+		}
+		.table-cell:nth-of-type(5).active::after {
+			background: darken($color__primary, 45%);
+		}
+		.table-cell:nth-of-type(6).active::after {
+			background: darken($color__primary, 60%);
+		}
+	}
 }
