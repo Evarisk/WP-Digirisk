@@ -20,4 +20,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 </span>
 
 <span class="wpeo-button button-grey" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><span><?php esc_html_e( 'Annuler', 'digirisk' ); ?></span></span>
-<span class="wpeo-button <?php echo ! empty( $risk->data['evaluation']->data['id'] ) ? 'button-green' : 'button-disable'; ?>" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><span><?php esc_html_e( 'Enregistrer la cotation', 'digirisk' ); ?></span></span>
+<span class="wpeo-button <?php echo ! empty( $risk->data['evaluation']->data['id'] ) ? 'button-main' : 'button-disable'; ?>" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><span><?php esc_html_e( 'Enregistrer la cotation', 'digirisk' ); ?></span></span>

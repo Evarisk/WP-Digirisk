@@ -19,10 +19,10 @@ defined( 'ABSPATH' ) || exit; ?>
 <input type="hidden" name="evaluation_method_id" value="<?php echo esc_attr( $evaluation_method_id ); ?>" />
 <textarea style="display: none;" name="evaluation_variables"><?php echo ! empty( $risk->data['evaluation']->data ) ? wp_json_encode( $risk->data['evaluation']->data['variables'], JSON_FORCE_OBJECT ) : '{}'; ?></textarea>
 
-<div class="cotation wpeo-tooltip-event wpeo-modal-event level<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>"
+<div class="cotation wpeo-tooltip-event wpeo-modal-event"
 	aria-label="Modifier la cotation"
 	data-action="load_modal_method_evaluation"
-	data-class="evaluation-method modal-risk-<?php echo esc_attr( $risk->data['id'] ); ?>"
+	data-class="evaluation-method wpeo-wrap modal-risk-<?php echo esc_attr( $risk->data['id'] ); ?>"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_modal_method_evaluation' ) ); ?>"
 	data-id="<?php echo esc_attr( $evaluation_method->data['id'] ); ?>"
 	data-risk-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
