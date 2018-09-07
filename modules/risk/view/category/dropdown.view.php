@@ -17,7 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <input class="input-hidden-danger" type="hidden" name="risk_category_id" value='<?php echo ! empty( $preset ) ? esc_attr( $selected_risk_category->data['id'] ) : '-1'; ?>' />
 
-<div class="wpeo-dropdown dropdown-large category-danger padding tooltip red"
+<div class="wpeo-dropdown dropdown-large category-danger padding wpeo-tooltip-event"
+			data-tooltip-persist="true"
+			data-color="red"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'check_predefined_danger' ) ); ?>"
 			aria-label="<?php esc_html_e( 'Vous devez choisir une catégorie de risque.', 'digirisk' ); ?>">
 

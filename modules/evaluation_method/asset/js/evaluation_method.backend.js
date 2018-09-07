@@ -32,6 +32,6 @@ window.eoxiaJS.digirisk.evaluationMethod.updateInputVariables = function( riskID
 
 	// Rend le bouton "active".
 	if ( '-1' !== jQuery( '.risk-row.edit[data-id="' + riskID + '"]' ).find( 'input[name="risk_category_id"]' ).val() ) {
-		jQuery( '.risk-row.edit[data-id="' + riskID + '"]' ).find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+		jQuery( '.risk-row.edit[data-id="' + riskID + '"]' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 	}
 };

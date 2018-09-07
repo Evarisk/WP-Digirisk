@@ -57,9 +57,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php else : ?>
 			<div class="action">
 				<?php if ( -1 != $risk->data['risk_category']->data['id'] && -1 != $risk->data['evaluation']->data['scale'] ) : ?>
-					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="wpeo-button button-square-50 add action-input button-progress"><i class="button-icon far fa-plus"></i></div>
+					<div data-namespace="digirisk"
+						data-module="risk"
+						data-before-method="beforeSaveRisk"
+						data-loader="table"
+						data-parent="risk-row"
+						class="wpeo-button button-square-50 add action-input button-progress">
+							<i class="button-icon far fa-plus"></i></div>
 				<?php else : ?>
-					<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-loader="table" data-parent="risk-row" class="wpeo-button button-square-50 button-disable add action-input button-progress"><i class="button-icon far fa-plus"></i></div>
+					<div data-namespace="digirisk"
+						data-module="risk"
+						data-before-method="beforeSaveRisk"
+						data-loader="table"
+						data-parent="risk-row"
+						class="wpeo-button button-square-50 button-disable button-event add action-input button-progress">
+							<i class="button-icon far fa-plus"></i></div>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

@@ -35,10 +35,10 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'sizes', '' );
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
-	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	window.eoxiaJS.tooltip.remove( element.closest( '.risk-row' ).find( '.category-danger.wpeo-tooltip-event' ) );
 
 	// Rend le bouton "active".
-	if ( '{}' !== triggeredElement.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
+	if ( '{}' !== element.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() ) {
 		element.closest( 'tr' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 	}
 
