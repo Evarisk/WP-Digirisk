@@ -16,7 +16,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="digirisk-wrap user-dashboard">
+<div class="digirisk-wrap user-dashboard wpeo-wrap">
 	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk', 'digirisk' ); ?></h1>
 
 	<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	</table>
 
 	<?php if ( ! empty( $from_install ) ) : ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="float right button blue uppercase strong">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">
 			<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
 		</a>
 	<?php endif; ?>

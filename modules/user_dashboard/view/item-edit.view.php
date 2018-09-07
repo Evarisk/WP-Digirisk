@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="user-row">
+<tr class="user-row edit">
 	<input type="hidden" name="action" value="save_user" />
 	<?php wp_nonce_field( 'ajax_save_user' ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $user->data['id'] ); ?>" />
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<div class="action">
 			<?php if ( empty( $user->data['id'] ) ) : ?>
-				<div class="button w50 disable add action-input"
+				<div class="wpeo-button button-square-50 button-disable add action-input"
 					data-namespace="digirisk"
 					data-module="userDashboard"
 					data-before-method="checkData"
@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<i class="icon far fa-plus"></i>
 				</div>
 			<?php	else : ?>
-				<div class="button w50 green add action-input"
+				<div class="wpeo-button button-square-50 button-green add action-input"
 					data-namespace="digirisk"
 					data-module="userDashboard"
 					data-before-method="checkData"

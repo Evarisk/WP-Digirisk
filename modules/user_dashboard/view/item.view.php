@@ -23,14 +23,14 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
 	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td>
-		<div class="action wpeo-gridlayout grid-2">
+		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
 			<div
 				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
-				class="button w50 light edit action-attribute">
-				<i class="icon fas fa-pencil"></i>
+				class="wpeo-button button-square-50 button-transparent edit action-attribute">
+				<i class="button-icon fas fa-pencil"></i>
 			</div>
 
 			<div
@@ -39,8 +39,8 @@ defined( 'ABSPATH' ) || exit; ?>
 				data-message-delete="<?php esc_attr_e( 'Confirmer la suppression', 'digirisk' ); ?>"
 				data-loader="users"
 				data-action="delete_user"
-				class="button w50 light delete action-delete" >
-				<i class="icon far fa-times"></i>
+				class="wpeo-button button-square-50 button-transparent delete action-delete" >
+				<i class="button-icon far fa-times"></i>
 			</div>
 		</div>
 	</td>
