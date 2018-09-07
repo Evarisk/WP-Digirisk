@@ -140,8 +140,8 @@ window.eoxiaJS.digirisk.installer.beforeCreateSociety = function( element ) {
 window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components' ).show();
-	jQuery( '.wpdigi-installer .button.blue' ).hide();
-	jQuery( '.wpdigi-installer .button.green' ).show();
+	jQuery( '.wpdigi-installer .start-install' ).hide();
+	jQuery( '.wpdigi-installer .end-install' ).show();
 	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '30%' );
 	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
 	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
@@ -184,7 +184,7 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( triggere
 	} else {
 		window.eoxiaJS.digirisk.installer.progressBar( 100 );
 
-		jQuery( '.wpdigi-installer .wpdigi-components .next' ).removeClass( 'disabled' );
+		jQuery( '.wpdigi-installer .wpdigi-components .next' ).removeClass( 'button-disable' );
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
 			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
 		}
@@ -218,7 +218,7 @@ window.eoxiaJS.digirisk.installer.progressBar = function( pourcent ) {
 			window.eoxiaJS.digirisk.installer.progressInterval = undefined;
 
 			if ( pourcent === 100 ) {
-				jQuery( '.wpdigi-installer .button.green.disable' ).removeClass( 'disable' );
+				jQuery( '.wpdigi-installer .end-install.button-disable' ).removeClass( 'button-disable' );
 			}
 		}
 	}, 100 );
