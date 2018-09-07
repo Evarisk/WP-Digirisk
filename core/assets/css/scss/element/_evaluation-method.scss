@@ -39,6 +39,9 @@
 			background: rgba(0,0,0,0.1);
 		}
 	}
+	&[data-scale="2"], &[data-scale="3"], &[data-scale="4"] {
+		color: #fff !important;
+	}
 	&[data-scale="1"], &.level1 {
 		background: #e2e2e2;
 		color: rgba(0,0,0,0.6);

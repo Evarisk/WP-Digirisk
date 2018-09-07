@@ -16,6 +16,7 @@
 .flex-table {
 	width: 100%;
 	border: 1px solid rgba(0,0,0,0.1);
+	background: #fff;
 
 	/* table general */
 	.col, .header-cell, .cell {
@@ -81,9 +82,33 @@
 				content: '';
 				clear: both;
 			}
+
+			.comment-container {
+				.comment {
+					margin: 0.2em 0;
+
+					&.new {
+						border-top: 0 !important;
+						padding-top: 1em !important;
+					}
+				}
+				.comment textarea, .comment input {
+					padding: 0.6em;
+					line-height: 1;
+					background: #ececec;
+					box-shadow: none;
+					@include transition();
+
+					&:hover {
+						background: #dfdfdf;
+					}
+				}
+			}
 		}
 
 		.comment-container {
+			width: 100%;
+
 			.comment {
 				display: flex;
 				flex: 0 1 auto;
@@ -96,6 +121,7 @@
 				}
 				span, input, textarea {
 					color: rgba(0,0,0,0.7);
+
 				}
 				.delete, .add {
 					width: 20px;
@@ -169,9 +195,19 @@
 
 	/* media */
 	.media {
+		margin: auto 0.6em !important;
 		background: rgba(0,0,0,0.1);
-		&.no-file .add {
+		width: 36px;
+		height: 36px;
+		min-width: 36px;
+
+		&.no-file .button-add {
 			color: rgba(0,0,0,0.6);
+			top: 4px;
+			right: 4px;
+		}
+		.default-icon-container {
+			line-height: 36px;
 		}
 		.default-image {
 			color: rgba(0,0,0,0.3);
@@ -186,6 +222,8 @@
 	/* action */
 	.action {
 		flex-wrap: nowrap;
+		text-align: right;
+
 		.task:hover .icon {
 			color: rgba(0,0,0,0.6);
 		}
@@ -207,7 +245,7 @@
 	}
 }
 
-.digirisk-wrap .flex-table {
+.flex-table {
 	input.affect {
 		width: 50px;
 	}
@@ -262,7 +300,21 @@
 	}
 }
 
-.digirisk-wrap .flex-table {
+/** Autocompelte */
+.flex-table .table-footer .wpeo-autocomplete {
+	.autocomplete-label {
+		padding: 0.6em;
+		background: #fff;
+		box-shadow: none;
+		border: 1px solid rgba(0,0,0,0.1);
+
+		.autocomplete-search-list {
+			background: #fff;
+		}
+	}
+}
+
+.flex-table {
 	@media ( max-width: 1200px ) {
 		.cell[class*="w"], .header-cell[class*="w"] {
 			min-width: 50px;
@@ -270,7 +322,7 @@
 	}
 }
 
-.digirisk-wrap .flex-table {
+.flex-table {
 	@media ( max-width: 480px ) {
 		.col {
 			height: auto;

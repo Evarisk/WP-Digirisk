@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap digirisk-wrap">
+<div class="wrap wpeo-wrap digirisk-wrap">
 	<h1><?php esc_html_e( 'Les accidents bénins', 'digirisk' ); ?></h1>
 
 	<?php Accident_Class::g()->display_accident_list(); ?>

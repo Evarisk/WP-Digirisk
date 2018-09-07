@@ -89,6 +89,7 @@ class Accident_Class extends Document_Class {
 		$args_accident_user = array(
 			'type'  => 'user',
 			'name'  => 'accident[victim_identity_id]',
+			'icon'  => 'fa-search'
 		);
 
 		$args_accident_user = wp_parse_args( $args_accident_user, $user_values );
@@ -115,6 +116,7 @@ class Accident_Class extends Document_Class {
 					),
 				)
 			),
+			'icon' => 'fa-search'
 		);
 
 		$args_accident_post = wp_parse_args( $args_accident_post, $post_values );

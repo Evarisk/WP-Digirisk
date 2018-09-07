@@ -28,13 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
-		<div class="action wpeo-gridlayout grid-3">
+		<div class="action wpeo-gridlayout grid-3 grid-gap-0">
 			<?php if ( $accident->data['document']->data['file_generated'] ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( $accident->data['document']->data['link'] ); ?>">
-					<i class="fas fa-download icon" aria-hidden="true"></i>
+				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $accident->data['document']->data['link'] ); ?>">
+					<i class="fas fa-download button-icon" aria-hidden="true"></i>
 				</a>
 			<?php else : ?>
-				<span class="action-attribute button grey h50 wpeo-tooltip-event"
+				<span class="action-attribute wpeo-button button-grey button-square-50 wpeo-tooltip-event"
 					data-id="<?php echo esc_attr( $accident->data['document']->data['id'] ); ?>"
 					data-model="<?php echo esc_attr( $accident->data['document']->get_class() ); ?>"
 					data-action="generate_document"
@@ -44,11 +44,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
-			<div class="button light w50 edit action-attribute"
+			<div class="wpeo-button button-transparent button-square-50 edit action-attribute"
 				data-action="load_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"><i class="icon fas fa-pencil"></i></div>
-			<div class="button light w50 delete action-delete"
+			<div class="wpeo-button button-transparent button-square-50 delete action-delete"
 				data-action="delete_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"
