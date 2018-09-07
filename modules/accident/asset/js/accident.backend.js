@@ -174,8 +174,8 @@ window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, res
  *
  * @since 6.3.0
  */
-window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
-	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
+window.eoxiaJS.digirisk.accident.generatedRegistreATBenin = function( element, response ) {
+	jQuery( '.tab-list .tab-element[data-target="digi-registre-accident"]' ).click();
 };
 
 /**

@@ -104,7 +104,7 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 					'dateInscriptionRegistre'   => $accident->data['registration_date_in_register']['rendered']['date'],
 					'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->id ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->id . ' ' . $accident->data['victim_identity']->login : '',
 					'dateHeure'                 => $accident->data['accident_date']['rendered']['date_time'],
-					'lieu'                      => $accident->data['place']->data['modified_unique_identifier'] . ' ' . $accident->data['place']->data['title'],
+					'lieu'                      => $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'],
 					'circonstances'             => $comment_content,
 					'siegeLesions'              => $accident->data['location_of_lesions'],
 				);

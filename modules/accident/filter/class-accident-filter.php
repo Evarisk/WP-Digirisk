@@ -84,8 +84,8 @@ class Accident_Filter extends Identifier_Filter {
 			$object->data['victim_identity'] = User_Digi_Class::g()->get( array( 'id' => $object->data['victim_identity_id'] ), true );
 		}
 
-		if ( ! isset( $object->data['modified_unique_identifier'] ) ) {
-			$object->data['modified_unique_identifier'] = '';
+		if ( ! isset( $object->data['unique_identifier'] ) ) {
+			$object->data['unique_identifier'] = '';
 		}
 
 		$object->data['document'] = Accident_Travail_Benin_Class::g()->get( array(

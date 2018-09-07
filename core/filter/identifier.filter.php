@@ -116,10 +116,10 @@ class Identifier_Filter {
 	 * @return object       Les données du modèle avec l'identifiant personnalisé
 	 */
 	public function get_identifier( $object, $args ) {
-		$object->data['modified_unique_identifier'] = '';
 
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = json_decode( $list_accronym, true );
+
 		if ( isset( $object->data['type'] ) ) {
 			$type = str_replace( 'digi-', '\\digi\\', $object->data['type'] );
 			if ( ! empty( $type ) && class_exists( $type . '_class' ) ) {
@@ -128,7 +128,7 @@ class Identifier_Filter {
 				$element_prefix = $type::g()->element_prefix;
 
 				if ( ! empty( $object->data['unique_identifier'] ) && ! empty( $list_accronym[ $element_prefix ] ) ) {
-					$object->data['modified_unique_identifier'] = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $object->data['unique_identifier'] );
+					$object->data['unique_identifier'] = str_replace( $element_prefix, $list_accronym[ $element_prefix ]['to'], $object->data['unique_identifier'] );
 				}
 			}
 		}

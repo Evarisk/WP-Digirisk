@@ -150,8 +150,8 @@ class Society_Action {
 
 				if ( ! empty( $s ) ) {
 					$posts_founded[] = array(
-						'label' => $s->modified_unique_identifier . ' ' . $s->title,
-						'value' => $s->modified_unique_identifier . ' ' . $s->title,
+						'label' => $s->unique_identifier . ' ' . $s->title,
+						'value' => $s->unique_identifier . ' ' . $s->title,
 						'id'    => $s->id,
 					);
 				}

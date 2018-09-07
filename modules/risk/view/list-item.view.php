@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<span>
 			<strong>
-				<?php echo esc_html( $risk->data['modified_unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] ); ?>
+				<?php echo esc_html( $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] ); ?>
 			</strong>
 		</span>
 	</td>
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php Risk_Evaluation_Class::g()->display( $risk ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php echo do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['modified_unique_identifier'] . '" ]' ); ?>
+		<?php echo do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['unique_identifier'] . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>

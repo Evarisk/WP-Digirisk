@@ -125,7 +125,7 @@ class Accident_Action {
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $accident->data['parent_id'],
 			'id'        => $accident->data['id'],
-			'content'   => 'Mise à jour de l\'accident ' . $accident->data['modified_unique_identifier'],
+			'content'   => 'Mise à jour de l\'accident ' . $accident->data['unique_identifier'],
 		) );
 
 		ob_start();

@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="col">
 	<div data-title="Ref." class="cell padding w150">
 		<ul>
-			<li><strong><?php echo esc_attr( $accident->data['modified_unique_identifier'] ); ?></strong></li>
+			<li><strong><?php echo esc_attr( $accident->data['unique_identifier'] ); ?></strong></li>
 			<li><?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?></li>
 		</ul>
 	</div>
 	<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? '<strong>' . User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . '</strong> ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
 	<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><i class="icon far fa-calendar-alt"></i> <?php echo esc_html( $accident->data['accident_date']['rendered']['date'] ); ?></div>
-	<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['modified_unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">

@@ -92,8 +92,8 @@ class Risk_Filter extends Identifier_Filter {
 
 		$object->data['comment'] = Risk_Evaluation_Comment_Class::g()->get( array( 'post_id' => $object->data['id'] ) );
 
-		if ( ! isset( $object->data['modified_unique_identifier'] ) ) {
-			$object->data['modified_unique_identifier'] = '';
+		if ( ! isset( $object->data['unique_identifier'] ) ) {
+			$object->data['unique_identifier'] = '';
 		}
 
 		return $object;
