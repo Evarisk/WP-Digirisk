@@ -15,243 +15,6 @@
 /* Bleu ciel, couleur principale */
 /* Bleu fonce, couleur de l'interface */
 /* Autres couleurs */
-/** Temporary */
-/**
- * Import des fichiers less
- */
-/**
- * Step for installer
- */
-.digirisk-wrap .step {
-  width: 100%; }
-
-.digirisk-wrap .step .bar {
-  position: relative;
-  top: -9px; }
-
-.digirisk-wrap .step .bar .background, .digirisk-wrap .step .bar .loader {
-  position: absolute;
-  top: 0;
-  height: 4px; }
-
-.digirisk-wrap .step .bar .background {
-  width: 100%;
-  background: #d6d6d6; }
-
-.digirisk-wrap .step .bar .loader {
-  width: 0%;
-  background: #47e58e;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  transition: all 0.1s linear; }
-
-.digirisk-wrap .step .step-list {
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex; }
-
-.digirisk-wrap .step .step-list .step:after {
-  position: relative;
-  z-index: 90;
-  display: block;
-  margin: auto;
-  content: '';
-  width: 14px;
-  height: 14px;
-  background: #d6d6d6;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out; }
-
-.digirisk-wrap .step .step-list .step .title {
-  display: block;
-  text-align: center;
-  margin: auto;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 14px;
-  max-width: 160px;
-  font-weight: 600;
-  padding-bottom: 10px;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out; }
-
-.digirisk-wrap .step .step-list .step:first-child:after, .digirisk-wrap .step .step-list .step:first-child .title {
-  margin: 0 auto 0 0;
-  text-align: left; }
-
-.digirisk-wrap .step .step-list .step:last-child:after, .digirisk-wrap .step .step-list .step:last-child .title {
-  margin: 0 0 0 auto;
-  text-align: right; }
-
-.digirisk-wrap .step .step-list .step.active:after {
-  background: #47e58e; }
-
-.digirisk-wrap .step .step-list .step.active .title {
-  color: #47e58e; }
-
-.digirisk-wrap .step .step-list:after {
-  display: block;
-  content: '';
-  clear: both; }
-
-.digirisk-wrap .step.install {
-  margin: 20px auto;
-  max-width: 1200px; }
-
-.digirisk-wrap .step.install .step-list .step:first-child {
-  width: 12.5%; }
-
-.digirisk-wrap .step.install .step-list .step:nth-of-type(2) {
-  width: 25%; }
-
-.digirisk-wrap .step.install .step-list .step:nth-of-type(3) {
-  width: 25%; }
-
-.digirisk-wrap .step.install .step-list .step:nth-of-type(4) {
-  width: 25%; }
-
-.digirisk-wrap .step.install .step-list .step:last-child {
-  width: 12.5%; }
-
-@media screen and (max-width: 1080px) {
-  .digirisk-wrap .step .step-list .step .title {
-    font-size: 10px; } }
-
-/**
- * Search bar
- */
-.digirisk-wrap .statistic {
-  text-align: center; }
-
-.digirisk-wrap .statistic .number {
-  width: 60px;
-  height: 60px;
-  color: #fff;
-  font-size: 22px;
-  font-weight: 700;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  line-height: 60px;
-  background: #e9ad4f;
-  display: block;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  margin: 0 auto 10px auto; }
-
-.digirisk-wrap .statistic .label {
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.7); }
-
-.digirisk-wrap .statistic.active .number {
-  background: #3495f0; }
-
-.digirisk-wrap .statistic.active .label {
-  color: #3495f0; }
-
-/**
- * Import des templates de page
- */
-/**
- * Tools page interface
- */
-.digirisk-wrap .nav-tab-wrapper {
-  margin-bottom: 20px !important; }
-
-.digirisk-wrap .block {
-  padding: 10px;
-  text-align: center; }
-
-.digirisk-wrap .block .container {
-  background: #fff;
-  padding: 20px;
-  min-height: 220px; }
-
-.digirisk-wrap .block h3 {
-  margin: 0 0 6px 0;
-  text-transform: uppercase;
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.8); }
-
-.digirisk-wrap .block .wp-digi-bton-first {
-  background: #3495f0;
-  display: inline-block; }
-
-.digirisk-wrap .block .content {
-  padding: 10px 0; }
-
-.digirisk-wrap .block input[type="file"] {
-  display: none; }
-
-.digirisk-wrap .block .content {
-  color: rgba(0, 0, 0, 0.4); }
-
-.digirisk-wrap .block progress {
-  display: block;
-  width: 80%;
-  margin: 20px auto; }
-
-.digirisk-wrap .block [class^="wp-digi-bton"] {
-  display: block;
-  max-width: 60%;
-  margin: auto;
-  margin-bottom: 10px; }
-
-.digirisk-wrap .block .upload.wp-digi-bton-first {
-  padding: 0 16px;
-  line-height: 1.4; }
-
-.digirisk-wrap a {
-  text-decoration: none; }
-
-/* display none input type file */
-/**
- * Propriétés générales
- */
-.digirisk-wrap * {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box; }
-
-.digirisk-wrap h1 {
-  font-size: 18px;
-  text-transform: uppercase;
-  margin: 6px 0; }
-
-.digirisk-wrap h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 6px 0 14px 0; }
-
-.digirisk-wrap .note {
-  font-style: italic;
-  color: rgba(0, 0, 0, 0.4); }
-
-.digirisk-wrap canvas {
-  -moz-user-select: none;
-  /* Firefox */
-  -webkit-user-select: none;
-  /* Chrome, Safari, Opéra depuis la version 15 */
-  -ms-user-select: none;
-  /* Internet explorer depuis la version 10 et Edge */
-  user-select: none;
-  /* Propriété standard */ }
-
-.digirisk-wrap .accident .color__red {
-  color: color__red; }
-
-.wpeo-modal .evaluation-method .table-cell.active {
-  background-color: color__red; }
-
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
@@ -288,6 +51,9 @@ readers do not read off random characters that represent icons */
  * Structure de la page
  */
   /* CSS spécifique pour le champs domaine de l'email dans les utilisateurs */
+  /**
+ * Search bar
+ */
   /**
  * .cotation -> classe de base
  * .default-cotation -> par défaut
@@ -371,6 +137,9 @@ readers do not read off random characters that represent icons */
  *
  */
   /** Classe parente .wpeo-wrap */
+  /**
+ * Step for installer
+ */
   /** Progress button */
   /** Couleur */
   /* Couleurs */
@@ -5248,6 +5017,81 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .main-header .mobile-navigation {
     display: block; } }
 
+.wpeo-wrap .statistic {
+  text-align: center; }
+
+.wpeo-wrap .statistic .number {
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  line-height: 60px;
+  background: #e9ad4f;
+  display: block;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  margin: 0 auto 10px auto; }
+
+.wpeo-wrap .statistic .label {
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7); }
+
+.wpeo-wrap .statistic.active .number {
+  background: #3495f0; }
+
+.wpeo-wrap .statistic.active .label {
+  color: #3495f0; }
+
+.wpeo-wrap .digi-tools-main-container .block {
+  padding: 10px;
+  text-align: center; }
+
+.wpeo-wrap .digi-tools-main-container .block .container {
+  background: #fff;
+  padding: 20px;
+  min-height: 220px; }
+
+.wpeo-wrap .digi-tools-main-container .block h3 {
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8); }
+
+.wpeo-wrap .digi-tools-main-container .block .wp-digi-bton-first {
+  background: #3495f0;
+  display: inline-block; }
+
+.wpeo-wrap .digi-tools-main-container .block .content {
+  padding: 10px 0; }
+
+.wpeo-wrap .digi-tools-main-container .block input[type="file"] {
+  display: none; }
+
+.wpeo-wrap .digi-tools-main-container .block .content {
+  color: rgba(0, 0, 0, 0.4); }
+
+.wpeo-wrap .digi-tools-main-container .block progress {
+  display: block;
+  width: 80%;
+  margin: 20px auto; }
+
+.wpeo-wrap .digi-tools-main-container .block [class^="wp-digi-bton"] {
+  display: block;
+  max-width: 60%;
+  margin: auto;
+  margin-bottom: 10px; }
+
+.wpeo-wrap .digi-tools-main-container .block .upload.wp-digi-bton-first {
+  padding: 0 16px;
+  line-height: 1.4; }
+
 .wpeo-wrap .cotation-container .dropdown-toggle:hover {
   background: rgba(0, 0, 0, 0.1); }
 
@@ -6782,6 +6626,107 @@ readers do not read off random characters that represent icons */
   left: 20px;
   color: rgba(0, 0, 0, 0.3);
   pointer-events: none; }
+
+.wpeo-wrap .step {
+  width: 100%; }
+
+.wpeo-wrap .step .bar {
+  position: relative;
+  top: -9px; }
+
+.wpeo-wrap .step .bar .background, .wpeo-wrap .step .bar .loader {
+  position: absolute;
+  top: 0;
+  height: 4px; }
+
+.wpeo-wrap .step .bar .background {
+  width: 100%;
+  background: #d6d6d6; }
+
+.wpeo-wrap .step .bar .loader {
+  width: 0%;
+  background: #47e58e;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear; }
+
+.wpeo-wrap .step .step-list {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.wpeo-wrap .step .step-list .step:after {
+  position: relative;
+  z-index: 90;
+  display: block;
+  margin: auto;
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #d6d6d6;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.wpeo-wrap .step .step-list .step .title {
+  display: block;
+  text-align: center;
+  margin: auto;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  max-width: 160px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.wpeo-wrap .step .step-list .step:first-child:after, .wpeo-wrap .step .step-list .step:first-child .title {
+  margin: 0 auto 0 0;
+  text-align: left; }
+
+.wpeo-wrap .step .step-list .step:last-child:after, .wpeo-wrap .step .step-list .step:last-child .title {
+  margin: 0 0 0 auto;
+  text-align: right; }
+
+.wpeo-wrap .step .step-list .step.active:after {
+  background: #47e58e; }
+
+.wpeo-wrap .step .step-list .step.active .title {
+  color: #47e58e; }
+
+.wpeo-wrap .step .step-list:after {
+  display: block;
+  content: '';
+  clear: both; }
+
+.wpeo-wrap .step.install {
+  margin: 20px auto;
+  max-width: 1200px; }
+
+.wpeo-wrap .step.install .step-list .step:first-child {
+  width: 12.5%; }
+
+.wpeo-wrap .step.install .step-list .step:nth-of-type(2) {
+  width: 25%; }
+
+.wpeo-wrap .step.install .step-list .step:nth-of-type(3) {
+  width: 25%; }
+
+.wpeo-wrap .step.install .step-list .step:nth-of-type(4) {
+  width: 25%; }
+
+.wpeo-wrap .step.install .step-list .step:last-child {
+  width: 12.5%; }
+
+@media screen and (max-width: 1080px) {
+  .wpeo-wrap .step .step-list .step .title {
+    font-size: 10px; } }
 
 .wpeo-wrap .wpeo-autocomplete .autocomplete-label {
   padding: 1em; }

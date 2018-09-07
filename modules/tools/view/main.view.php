@@ -14,7 +14,7 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<div class="wrap">
+<div class="wrap wpeo-wrap">
 	<h1><?php esc_html_e( 'Digirisk tools', 'digirisk' ); ?></h1>
 
 	<div class="digi-tools-main-container">
