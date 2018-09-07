@@ -124,32 +124,6 @@
     font-size: 10px; } }
 
 /**
- * Task Manager
- */
-.digirisk-wrap .corrective-task .wpeo-done-point {
-  width: auto; }
-
-.digirisk-wrap .corrective-task .list-task .wpeo-project-task {
-  width: 100%; }
-
-.digirisk-wrap .corrective-task .completed-point {
-  width: auto !important;
-  border: 1px solid #000 !important;
-  -webkit-border-radius: 0 !important;
-          border-radius: 0 !important; }
-
-.digirisk-wrap .mask-loader .sk-circle {
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50% -50%);
-      -ms-transform: translate(-50% -50%);
-       -o-transform: translate(-50% -50%);
-          transform: translate(-50% -50%); }
-
-.digirisk-wrap .wpeo-task-point-use-toggle > p {
-  background: #fff; }
-
-/**
  * Installer de digirisk avec slider
  * .bloc-create-society -> premier bloc
  * .w^dogo-components -> Installation des composant, avec slider
@@ -613,7 +587,8 @@ readers do not read off random characters that represent icons */
   /* Vertical */
   /** Ligne entete */
   /* Header, footer */
-  /* Couleurs */ }
+  /* Couleurs */
+  /** La classe parente est .wpeo--wrap */ }
 
 .wpeo-wrap .fa,
 .wpeo-wrap .fas,
@@ -5595,6 +5570,21 @@ readers do not read off random characters that represent icons */
   background: #3495f0;
   color: #fff; }
 
+.wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(2).active:after {
+  background: #3495f0; }
+
+.wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(3).active:after {
+  background: #0f6fc9; }
+
+.wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(4).active:after {
+  background: #0a4781; }
+
+.wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(5).active:after {
+  background: #04203a; }
+
+.wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(6).active:after {
+  background: black; }
+
 .wpeo-wrap .navigation-container .society-header {
   background: #3d4152;
   display: -webkit-box;
@@ -7148,6 +7138,24 @@ readers do not read off random characters that represent icons */
 
 .wpeo-wrap .wpeo-tooltip.tooltip-red.tooltip-left:before {
   border-color: transparent transparent transparent #e05353; }
+
+.wpeo-wrap.corrective-task .wpeo-project-task {
+  width: 100% !important; }
+
+.wpeo-wrap.corrective-task .wpeo-project-task .wpeo-done-point {
+  width: auto; }
+
+.wpeo-wrap.corrective-task .wpeo-project-task .list-task .wpeo-project-task {
+  width: 100%; }
+
+.wpeo-wrap.corrective-task .wpeo-project-task .completed-point {
+  width: auto !important;
+  border: 1px solid #000 !important;
+  -webkit-border-radius: 0 !important;
+          border-radius: 0 !important; }
+
+.wpeo-wrap.corrective-task .wpeo-project-task .wpeo-task-point-use-toggle > p {
+  background: #fff; }
 
 /*---
   Animations from animate.css

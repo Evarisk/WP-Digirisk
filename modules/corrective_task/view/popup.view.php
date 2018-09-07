@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wpeo-modal corrective-task">
+<div class="wpeo-modal wpeo-wrap corrective-task">
 	<div class="container">
 
 		<div class="header">
