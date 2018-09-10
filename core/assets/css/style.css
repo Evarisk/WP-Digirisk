@@ -4896,10 +4896,12 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .navigation-container, .wpeo-wrap .main-container {
     float: none; }
   .wpeo-wrap .navigation-container {
-    width: 100%; }
+    width: 100%;
+    padding-right: 0; }
   .wpeo-wrap .main-container {
     width: 100%;
-    margin-top: 20px; } }
+    margin-top: 20px;
+    padding-left: 0; } }
 
 @media screen and (max-width: 680px) {
   .wpeo-wrap .navigation-container {
@@ -5159,12 +5161,20 @@ readers do not read off random characters that represent icons */
 .wpeo-wrap .wpeo-table.evaluation-method .table-header {
   background: #272a35 !important; }
 
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-table.evaluation-method .table-header {
+    display: none; } }
+
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell {
   margin: 0;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0.8em 0.4em;
   position: relative; }
+
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-table.evaluation-method .table-cell {
+    width: 100% !important; } }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell.can-select:after {
   display: block;
@@ -5212,6 +5222,10 @@ readers do not read off random characters that represent icons */
 .wpeo-wrap .wpeo-table.evaluation-method .table-row > .table-cell:first-child {
   background: #3495f0;
   color: #fff; }
+
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-table.evaluation-method .table-row > .table-cell:first-child {
+    background: #272a35; } }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-row:not(.header) .table-cell:nth-of-type(2).active:after {
   background: #3495f0; }
@@ -5946,9 +5960,9 @@ readers do not read off random characters that represent icons */
     width: 40% !important;
     margin: auto 0; }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .action {
-    display: block;
+    display: block !important;
     text-align: right; }
-  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .button {
+  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button {
     width: 30px !important;
     -webkit-border-radius: 50%;
             border-radius: 50%;
@@ -5958,12 +5972,13 @@ readers do not read off random characters that represent icons */
     height: 30px !important;
     display: inline-block;
     text-align: center;
-    line-height: 30px; }
-  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .button .dashicons {
+    line-height: 24px;
+    font-size: 14px; }
+  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button [data-icon] {
     line-height: 30px !important; }
-  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .button.color__green {
+  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button.button-green {
     background: #47e58e; }
-  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .button.blue {
+  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button.button-main, .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button.add {
     background: #3495f0; }
   .wpeo-wrap .table.risk .risk-row .comment-container .comment {
     -webkit-flex-wrap: wrap;
@@ -5974,12 +5989,16 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .table.risk .risk-row .comment-container .content {
     width: 100%;
     font-size: 16px; }
-  .wpeo-wrap .table.risk .risk-row .comment-container .button {
+  .wpeo-wrap .table.risk .risk-row .comment-container .wpeo-button {
     position: absolute;
     right: 0;
     top: 0; }
   .wpeo-wrap .table.risk .risk-row .comment-container .comment ~ .new.comment {
     padding-top: 10px; }
+  .wpeo-wrap .table.risk .risk-row .wpeo-dropdown.dropdown-large .dropdown-content {
+    width: 200px; }
+  .wpeo-wrap .table.risk .risk-row .wpeo-dropdown.dropdown-large .dropdown-content .dropdown-item {
+    width: 33.333333%; }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
     -webkit-box-ordinal-group: 2;
     -webkit-order: 1;
@@ -6042,12 +6061,12 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .table.evaluators thead th {
     display: none; }
   .wpeo-wrap .table.evaluators thead th:nth-of-type(6) {
-    display: block; }
+    display: block;
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400; }
   .wpeo-wrap .table.evaluators thead th:nth-of-type(6):before {
-    font-weight: 400;
     display: inline-block;
-    content: '\f017';
-    font-family: FontAwesome;
+    content: "\f017";
     font-size: 20px;
     padding-right: 0.4em; }
   .wpeo-wrap .table.evaluators thead th:nth-of-type(6) input {
@@ -6084,16 +6103,18 @@ readers do not read off random characters that represent icons */
     width: auto;
     padding: 0 0.2em !important;
     font-size: 14px; }
-  .wpeo-wrap .table.evaluators tbody td:nth-of-type(6):before, .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6):before {
+  .wpeo-wrap .table.evaluators tbody td:nth-of-type(5), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400; }
+  .wpeo-wrap .table.evaluators tbody td:nth-of-type(5):before, .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
+    content: "\f017";
     display: inline-block;
-    content: '\f017';
-    font-family: FontAwesome;
     font-size: 20px;
     padding-right: 0.4em; }
-  .wpeo-wrap .table.evaluators tbody td:nth-of-type(6) input, .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6) input {
+  .wpeo-wrap .table.evaluators tbody td:nth-of-type(5) input, .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5) input {
     display: inline-block;
     max-width: 60px; }
-  .wpeo-wrap .table.evaluators tbody td:nth-of-type(7), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(7) {
+  .wpeo-wrap .table.evaluators tbody td:nth-of-type(6) {
     width: auto;
     position: absolute;
     right: 10px;
@@ -6105,13 +6126,34 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .table.affected-evaluator tbody tr {
     background: rgba(0, 0, 0, 0.1) !important; }
   .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
-    width: 100%; }
+    width: 100%;
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400; }
   .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
     display: inline-block;
-    content: '\f073';
-    font-family: FontAwesome;
+    content: "\f073";
     font-size: 20px;
-    padding-right: 0.4em; } }
+    padding-right: 0.4em; }
+  .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6) {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400; }
+  .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6):before {
+    content: "\f017";
+    display: inline-block;
+    font-size: 20px;
+    padding-right: 0.4em; }
+  .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6) input {
+    display: inline-block;
+    max-width: 60px; }
+  .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(7) {
+    width: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); } }
 
 .wpeo-wrap .flex-table {
   width: 100%;
