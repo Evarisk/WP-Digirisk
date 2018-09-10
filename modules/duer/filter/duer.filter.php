@@ -81,6 +81,8 @@ class DUER_Filter extends Identifier_Filter {
 		$data['remarqueImportante'] = $args['remarque_importante'];
 		$data['dispoDesPlans']      = $args['dispo_des_plans'];
 		$data['dateGeneration']     = mysql2date( get_option( 'date_format' ), current_time( 'mysql', 0 ), true );
+		$data['dateDebutAudit']     = $args['date_debut_audit'];
+		$data['dateFinAudit']       = $args['date_fin_audit'];
 
 		$audit_date = '';
 

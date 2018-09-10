@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			</li>
 
 			<li class="statistic">
-				<span class="number"><?php echo ! empty( $more_dangerous_risk->unique_identifier ) ? esc_html( $more_dangerous_risk->unique_identifier ) : esc_html( 'N/A', 'digirisk' ); ?></span>
+				<span class="number"><?php echo ! empty( $more_dangerous_risk->data['unique_identifier'] ) ? esc_html( $more_dangerous_risk->data['unique_identifier'] ) : esc_html( 'N/A', 'digirisk' ); ?></span>
 				<span class="label"><?php esc_html_e( 'Le risque le plus élevé', 'digirisk' ); ?></span>
 			</li>
 

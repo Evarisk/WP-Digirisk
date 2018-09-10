@@ -28,7 +28,7 @@ class ZIP_Model extends \eoxia\Post_Model {
 	 *
 	 * @param ZIP_Model $object L'objet zip.
 	 */
-	public function __construct( $object ) {
+	public function __construct( $data = null, $req_method = null ) {
 		$this->model['list_generation_results'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
@@ -41,6 +41,6 @@ class ZIP_Model extends \eoxia\Post_Model {
 			'field'     => '_wpdigi_path',
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
 }

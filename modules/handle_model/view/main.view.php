@@ -64,8 +64,6 @@ if ( ! empty( $list_type_document ) ) :
 					<?php echo apply_filters( 'digi_handle_model_actions_end', '', $key ); ?>
 				</ul>
 			</div>
-
-			<?php \eoxia\View_Util::exec( 'digirisk', 'handle_model', 'popup' ); ?>
 		</div>
 		<?php
 	endforeach;

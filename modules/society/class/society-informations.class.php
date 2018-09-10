@@ -56,16 +56,16 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 
 		if ( count( $risks ) > 1 ) {
 			usort( $risks, function( $a, $b ) {
-				if ( $a->data['evaluation']->data['current_equivalence'] === $b->data['evaluation']->data['current_equivalence'] ) {
+				if ( $a->data['current_equivalence'] === $b->data['current_equivalence'] ) {
 					return 0;
 				}
-				return ( $a->data['evaluation']->data['current_equivalence'] > $b->data['evaluation']->data['current_equivalence'] ) ? -1 : 1;
+				return ( $a->data['current_equivalence'] > $b->data['current_equivalence'] ) ? -1 : 1;
 			} );
 		}
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$total_cotation += $risk->data['evaluation']->data['current_equivalence'];
+				$total_cotation += $risk->data['current_equivalence'];
 			}
 		}
 
@@ -123,7 +123,18 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			$data['$push']['contact']['address_id'] = $address_id;
 		}
 
-		$society = Society_Class::g()->update( $data );
+		switch ( $data['type'] ) {
+			case 'digi-society':
+				$society = Society_Class::g()->update( $data );
+				break;
+			case 'digi-group':
+				$society = Group_Class::g()->update( $data );
+				break;
+			case 'digi-workunit':
+				$society = Workunit_Class::g()->update( $data );
+				break;
+		}
+
 		return $society;
 	}
 }

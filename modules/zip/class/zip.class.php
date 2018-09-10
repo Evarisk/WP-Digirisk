@@ -138,7 +138,7 @@ class ZIP_Class extends Document_Class {
 
 		if ( ! empty( $files_details ) ) {
 			foreach ( $files_details as $file_details ) {
-				if ( ! empty( $file_details['path'] ) ) {
+				if ( ! empty( $file_details['path'] ) && ! empty( $file_details['filename'] ) ) {
 					$zip->addFile( $file_details['path'], $file_details['filename'] );
 				}
 			}
@@ -152,23 +152,19 @@ class ZIP_Class extends Document_Class {
 		$filename .= sanitize_title( str_replace( ' ', '_', $element->data['title'] ) ) . '_V';
 		$filename .= $document_revision . '.zip';
 
-		$attachment_args = array(
-			'post_title'     => basename( $filename, '.zip' ),
-			'post_status'    => 'inherit',
-			'post_mime_type' => 'application/zip',
-			'post_parent'    => $element->data['id'],
-		);
-
-		$attachment_id = wp_insert_attachment( $attachment_args, Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path, $element->data['id'] );
-		wp_set_object_terms( $attachment_id, array( 'zip', 'printed' ), $this->attached_taxonomy_type );
-
+		// base de données.
 		$document_args = array(
-			'id'                      => $attachment_id,
-			'path'                    => $path,
+			'link'                    => Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path,
+			'title'                   => basename( $filename, '.zip' ),
+			'mime_type'               => 'application/zip',
+			'parent_id'               => $element->data['id'],
+			'parent'                  => $element,
+			'status'                  => 'inherit',
 			'list_generation_results' => $file_details,
 		);
 
-		$this->update( $document_args );
+		$document = $this->update( $document_args );
+		wp_set_object_terms( $document->data['id'], array( 'zip', 'printed' ), $this->attached_taxonomy_type );
 
 		return array(
 			'zip_path' => Document_Util_Class::g()->get_digirisk_upload_dir() . '/' . $path,

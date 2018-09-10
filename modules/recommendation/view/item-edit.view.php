@@ -38,7 +38,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
+		<?php echo do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
 	</td>
 	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>

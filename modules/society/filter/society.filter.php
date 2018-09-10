@@ -33,6 +33,8 @@ class Society_Filter extends Identifier_Filter {
 
 		$current_type = Society_Class::g()->get_type();
 		add_filter( "eo_model_{$current_type}_after_get", array( $this, 'get_full_society' ), 10, 2 );
+		add_filter( "eo_model_digi-group_after_get", array( $this, 'get_full_society' ), 10, 2 );
+		add_filter( "eo_model_digi-workunit_after_get", array( $this, 'get_full_society' ), 10, 2 );
 
 		add_filter( "eo_search_results_accident_post", array( $this, 'callback_search_results' ) );
 	}

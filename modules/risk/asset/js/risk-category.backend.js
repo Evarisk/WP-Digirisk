@@ -49,7 +49,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 		data.danger_id = element.data( 'id' );
 		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
-		jQuery( this ).closest( 'table' ).addClass( 'loading' );
+		window.eoxiaJS.loader.display( jQuery( this ).closest( 'table' ) );
 
 		window.eoxiaJS.request.send( jQuery( this ).closest( '.wpeo-dropdown' ), data );
 	}

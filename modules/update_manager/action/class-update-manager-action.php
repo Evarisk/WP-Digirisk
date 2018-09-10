@@ -53,7 +53,7 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 		wp_send_json_success( array(
 			'updateComplete'  => true,
 			// Translators: 1. Start of link to dashboard 2. End of link to dashboard.
-			'doneDescription' => sprintf( __( 'You will be redirect to Frais.pro main dashboard. %1$sClick here if nothing append%2$s', 'digirisk' ), '<a href="" >', '</a>' ),
+			'doneDescription' => sprintf( __( 'Vous allez être redirigé vers DigiRisk.. %1$sCliquez ici si rien ne se passe.%2$s', 'digirisk' ), '<a href="" >', '</a>' ),
 			'url'             => admin_url( 'admin.php?page=' . \eoxia\Config_Util::$init['digirisk']->dashboard_page_url ),
 		) );
 	}

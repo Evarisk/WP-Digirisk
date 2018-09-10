@@ -18,12 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gères l'action AJAX de la génération du DUER
  */
-class ZIP_Filter {
+class ZIP_Filter extends Identifier_Filter {
 
 	/**
 	 * Le constructeur
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		add_filter( 'digi_list_duer_single_item_action_end', array( $this, 'callback_list_duer_single_item_action_end' ), 10, 2 );
 	}
 

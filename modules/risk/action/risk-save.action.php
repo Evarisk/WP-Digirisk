@@ -77,6 +77,12 @@ class Risk_Save_Action {
 
 		$risk = Risk_Class::g()->update( $risk->data );
 
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $parent_id,
+			'id'        => $risk->data['id'],
+			'content'   => sprintf( __( 'Mise à jour du risque %s', 'digirisk' ), $risk->data['unique_identifier'] ),
+		) );
+
 		$module = 'risk';
 
 		ob_start();
@@ -93,7 +99,6 @@ class Risk_Save_Action {
 		} else {
 			Risk_Class::g()->display( $risk->data['parent_id'] );
 		}
-
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

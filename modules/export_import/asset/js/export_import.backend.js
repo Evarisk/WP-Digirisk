@@ -1,10 +1,9 @@
 /**
  * Gères l'export et l'import des modèles de donnée de DigiRisk
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  *
  * @since 6.1.5.5
- * @version 6.2.1.2
  *
  * @memberof export
  */
@@ -20,7 +19,6 @@ window.eoxiaJS.digirisk.export = {};
  * La méthode init est appelé automatiquement
  *
  * @since 6.1.5.5
- * @version 6.2.1.2
  *
  * @memberof export
  *
@@ -34,7 +32,6 @@ window.eoxiaJS.digirisk.export.init = function() {
  * Initialies les évènements submit et change
  *
  * @since 6.1.5.5
- * @version 6.2.1.2
  *
  * @memberof export
  *
@@ -49,7 +46,6 @@ window.eoxiaJS.digirisk.export.event = function() {
  * Lances la requête XHR pour créer le fichier .zip de l'export du modèle de donnée.
  *
  * @since 6.1.5.5
- * @version 6.2.5.0
  *
  * @param  {Object} event [description]
  * @return {void}
@@ -62,6 +58,7 @@ window.eoxiaJS.digirisk.export.create_export = function( event ) {
 			window.eoxiaJS.loader.display( form.find( 'button' ) );
 		},
 		success: function( response ) {
+			window.eoxiaJS.loader.remove( form.find( 'button' ) );
 			window.eoxiaJS.global.downloadFile( response.data.url_to_file, response.data.filename );
 		}
 	} );
@@ -71,7 +68,6 @@ window.eoxiaJS.digirisk.export.create_export = function( event ) {
  * Prépare la première requête pour importer un modèle de donnée.
  *
  * @since 6.1.5.5
- * @version 6.2.5.0
  *
  * @param  {[type]} event [description]
  * @return {void}
@@ -94,7 +90,6 @@ window.eoxiaJS.digirisk.export.make_import = function( event ) {
  * Modifie la barre de progression.
  *
  * @since 6.1.5.5
- * @version 6.2.5.0
  *
  * @param  {object} data Les données pour la requête
  * @return {void}

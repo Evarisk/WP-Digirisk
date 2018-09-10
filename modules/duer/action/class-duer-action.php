@@ -244,6 +244,14 @@ class DUER_Action {
 		$duer->data['zip_path'] = $generate_response['zip_path'];
 		DUER_Class::g()->update( $duer->data );
 
+		ZIP_Class::g()->clear_temporarly_files_details();
+
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $element_id,
+			'id'        => $duer->data['id'],
+			'content'   => sprintf( __( 'Génération du DUER %s', 'digirisk' ), $duer->data['unique_identifier'] ),
+		) );
+
 		wp_send_json_success( $response );
 	}
 }

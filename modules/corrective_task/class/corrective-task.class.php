@@ -10,6 +10,9 @@ class Corrective_Task_Class extends \eoxia\Singleton_Util {
 	protected function construct() {}
 
 	public function output_odt( $risk ) {
+		$risk->data['output_action_prevention_uncompleted'] = '';
+		$risk->data['output_action_prevention_completed']   = '';
+
 		if ( class_exists( '\task_manager\Task_Class' ) ) {
 			$task = \task_manager\Task_Class::g()->get( array(
 				'post_parent'    => $risk->data['id'],

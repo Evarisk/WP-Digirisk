@@ -50,6 +50,12 @@ class Registre_Accident_Travail_Benin_Action {
 
 		Registre_AT_Benin_Class::g()->create_document( $response['document']->data['id'] );
 
+		do_action( 'digi_add_historic', array(
+			'parent_id' => $society_id,
+			'id'        => $response['document']->data['id'],
+			'content'   => sprintf( __( 'Génération du registre des accidents de travail bénins %s', 'digirisk' ), $response['document']->data['unique_identifier'] ),
+		) );
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'accident',

@@ -38,11 +38,22 @@ class Group_Model extends Society_Model {
 			'child'     => array(),
 		);
 
+		$this->schema['owner_id'] = array(
+			'since'       => '6.4.0',
+			'version'     => '6.4.0',
+			'description' => 'L\'ID responsable de la société',
+			'type'        => 'integer',
+			'meta_type'   => 'single',
+			'field'       => '_digi_owner_id',
+			'default'     => 0,
+		);
+
 		$this->schema['user_info']['child']['owner_id'] = array(
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-			'type'      => 'integer',
-			'meta_type' => 'multiple',
+			'since'       => '6.0.0',
+			'version'     => '6.0.0',
+			'description' => 'old storage',
+			'type'        => 'integer',
+			'meta_type'   => 'multiple',
 		);
 
 		$this->schema['user_info']['child']['affected_id'] = array(
@@ -93,15 +104,6 @@ class Group_Model extends Society_Model {
 			'version'   => '6.0.0',
 			'type'      => 'string',
 			'meta_type' => 'multiple',
-		);
-
-		$this->model['owner_id'] = array(
-			'since'       => '6.4.0',
-			'version'     => '6.4.0',
-			'description' => 'L\'ID responsable de la société',
-			'type'        => 'integer',
-			'meta_type'   => 'single',
-			'field'       => '_digi_owner_id',
 		);
 
 		parent::__construct( $data, $req_method );
