@@ -27,23 +27,22 @@
 			color: #fff;
 		}
 	}
-	.action {
-		font-size: 18px;
-		transition: all 0.2s ease-out;
+	.dropdown-toggle {
+		width: 100%;
 	}
-	.content {
-		left: -0.8em;
-		width: 170px;
+	.dropdown-content {
 		text-align: left;
+		line-height: 1.6;
 
-		.item {
-			color: rgba(0,0,0,0.8);
-		}
 		.icon {
 			color: rgba(0,0,0,0.5);
 			margin-right: 0.2em;
 			font-size: 16px;
 		}
+	}
+	.action {
+		font-size: 18px;
+		transition: all 0.2s ease-out;
 	}
 }
 // Mobile close popup
@@ -61,14 +60,6 @@
 	}
 	@media ( max-width: 480px ) {
 		display: block;
-	}
-}
-.navigation-container .society-header .toggle.option {
-	position: absolute;
-	right: 32px;
-	top: 0;
-	@media ( min-width: 480px ) {
-		right: 0;
 	}
 }
 

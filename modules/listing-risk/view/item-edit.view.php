@@ -21,15 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td></td>
 	<td></td>
 	<td>
-		<div class="action grid-layout w2">
-			<div class="w50 action-input add button blue tooltip hover"
+		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
+			<div class="wpeo-button button-square-50 button-main action-input add wpeo-tooltip-event"
 				data-type="photos"
 				aria-label="<?php esc_attr_e( 'Avec les photos des risques', 'digirisk' ); ?>"
 				data-loader="table"
 				data-parent="sheet-groupment-row">
-				<i class="icon fa fa-file-image-o"></i>
+				<i class="icon fa fa-file-image"></i>
 			</div>
-			<div class="w50 action-input add button blue tooltip hover"
+			<div class="wpeo-button button-square-50 button-main action-input add wpeo-tooltip-event"
 			data-type="actions"
 				aria-label="<?php esc_attr_e( 'Avec les actions correctives', 'digirisk' ); ?>"
 				data-loader="table"

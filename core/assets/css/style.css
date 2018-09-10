@@ -5551,24 +5551,23 @@ readers do not read off random characters that represent icons */
 .wpeo-wrap .navigation-container .mobile-add-container:hover .action {
   color: #fff; }
 
+.wpeo-wrap .navigation-container .mobile-add-container .dropdown-toggle {
+  width: 100%; }
+
+.wpeo-wrap .navigation-container .mobile-add-container .dropdown-content {
+  text-align: left;
+  line-height: 1.6; }
+
+.wpeo-wrap .navigation-container .mobile-add-container .dropdown-content .icon {
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 0.2em;
+  font-size: 16px; }
+
 .wpeo-wrap .navigation-container .mobile-add-container .action {
   font-size: 18px;
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
-
-.wpeo-wrap .navigation-container .mobile-add-container .content {
-  left: -0.8em;
-  width: 170px;
-  text-align: left; }
-
-.wpeo-wrap .navigation-container .mobile-add-container .content .item {
-  color: rgba(0, 0, 0, 0.8); }
-
-.wpeo-wrap .navigation-container .mobile-add-container .content .icon {
-  color: rgba(0, 0, 0, 0.5);
-  margin-right: 0.2em;
-  font-size: 16px; }
 
 .wpeo-wrap .navigation-container .close-popup {
   position: absolute;
@@ -5588,15 +5587,6 @@ readers do not read off random characters that represent icons */
 @media (max-width: 480px) {
   .wpeo-wrap .navigation-container .close-popup {
     display: block; } }
-
-.wpeo-wrap .navigation-container .society-header .toggle.option {
-  position: absolute;
-  right: 32px;
-  top: 0; }
-
-@media (min-width: 480px) {
-  .wpeo-wrap .navigation-container .society-header .toggle.option {
-    right: 0; } }
 
 @media (max-width: 480px) {
   .wpeo-wrap .navigation-container {
