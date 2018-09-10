@@ -31,11 +31,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="wpeo-button button-square-50 wpeo-tooltip-event" data-direction="bottom" data-color="light" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="button-icon dashicons dashicons-admin-multisite"></span><span class="button-add animated fas fa-plus-circle"></span></div>
 		<div class="wpeo-button button-square-50 wpeo-tooltip-event" data-direction="bottom" data-color="light" aria-label="<?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?>" data-type="Workunit_Class"><span class="button-icon dashicons dashicons-admin-home"></span><span class="button-add animated fas fa-plus-circle"></span></div>
 	</div>
-	<div class="mobile-add-container toggle option" data-parent="toggle" data-target="content">
-		<i class="action far fa-ellipsis-v"></i>
-		<ul class="content">
-			<li class="item" data-type="Group_Class"><i class="icon dashicons dashicons-admin-multisite"></i><?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?></li>
-			<li class="item" data-type="Workunit_Class"><i class="icon dashicons dashicons-admin-home"></i><?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?></li>
+	<div class="mobile-add-container wpeo-dropdown dropdown-right option">
+		<div class="dropdown-toggle"><i class="action far fa-ellipsis-v"></i></div>
+		<ul class="dropdown-content">
+			<li class="dropdown-item" data-type="Group_Class"><i class="icon dashicons dashicons-admin-multisite"></i><?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?></li>
+			<li class="dropdown-item" data-type="Workunit_Class"><i class="icon dashicons dashicons-admin-home"></i><?php echo esc_attr( 'Ajouter unité', 'digirisk' ); ?></li>
 		</ul>
 	</div>
 	<div class="close-popup"><i class="icon far fa-times"></i></div>
