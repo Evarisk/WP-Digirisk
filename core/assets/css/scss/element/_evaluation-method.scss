@@ -89,6 +89,10 @@
 .wpeo-table.evaluation-method {
 	.table-header {
 		background: $color__secondary !important;
+
+		@media ( max-width: $media__small ) {
+			display: none;
+		}
 	}
 	.table-cell {
 		margin: 0;
@@ -96,6 +100,10 @@
 		border: 1px solid rgba(0,0,0,0.1);
 		padding: 0.8em 0.4em;
 		position: relative;
+
+		@media ( max-width: $media__small ) {
+			width: 100% !important;
+		}
 
 		&.can-select {
 			&::after {
@@ -133,6 +141,10 @@
 	.table-row > .table-cell:first-child {
 		background: $color__primary;
 		color: #fff;
+
+		@media ( max-width: $media__small ) {
+			background: $color__secondary;
+		}
 	}
 	.table-row:not(.header) {
 		.table-cell:nth-of-type(2).active::after {

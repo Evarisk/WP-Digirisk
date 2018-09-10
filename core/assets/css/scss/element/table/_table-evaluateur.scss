@@ -23,11 +23,11 @@
 		}
 		th:nth-of-type(6) {
 			display: block;
+			font-family: 'Font Awesome 5 Pro';
+			font-weight: 400;
 			&:before {
-				font-weight: 400;
 				display: inline-block;
-				content: '\f017';
-				font-family: FontAwesome;
+				content: fa-content($fa-var-clock);
 				font-size: 20px;
 				padding-right: 0.4em;
 			}
@@ -69,20 +69,23 @@
 			padding: 0 0.2em !important;
 			font-size: 14px;
 		}
-		td:nth-of-type(6) {
+		td:nth-of-type(5) {
+			font-family: 'Font Awesome 5 Pro';
+			font-weight: 400;
 			&:before {
+				content: fa-content($fa-var-clock);
 				display: inline-block;
-				content: '\f017';
-				font-family: FontAwesome;
 				font-size: 20px;
-    		padding-right: 0.4em;
+				padding-right: 0.4em;
 			}
 			input {
 				display: inline-block;
 				max-width: 60px;
 			}
 		}
-		td:nth-of-type(7) {
+	}
+	.table.evaluators tbody {
+		td:nth-of-type(6) {
 			width: auto;
 			position: absolute;
 			right: 10px;
@@ -96,13 +99,36 @@
 		}
 		td:nth-of-type(5) {
 			width: 100%;
+			font-family: 'Font Awesome 5 Pro';
+			font-weight: 400;
+
 			&:before {
 				display: inline-block;
-				content: '\f073';
-				font-family: FontAwesome;
+				content: fa-content($fa-var-calendar-alt);
 				font-size: 20px;
 				padding-right: 0.4em;
 			}
+		}
+		td:nth-of-type(6) {
+			font-family: 'Font Awesome 5 Pro';
+			font-weight: 400;
+			&:before {
+				content: fa-content($fa-var-clock);
+				display: inline-block;
+				font-size: 20px;
+				padding-right: 0.4em;
+			}
+			input {
+				display: inline-block;
+				max-width: 60px;
+			}
+		}
+		td:nth-of-type(7) {
+			width: auto;
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
 		}
 	}
 }
