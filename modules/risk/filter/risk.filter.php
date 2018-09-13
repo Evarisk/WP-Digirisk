@@ -80,6 +80,8 @@ class Risk_Filter extends Identifier_Filter {
 		if ( 0 !== $object->data['id'] ) {
 			$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array(
 				'post_id' => $object->data['id'],
+				'orderby' => 'comment_ID',
+				'order'   => 'DESC',
 				'number'  => 1,
 			), true );
 

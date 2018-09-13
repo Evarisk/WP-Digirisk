@@ -28,5 +28,4 @@ require_once 'core/external/eo-framework/eo-framework.php';
 
 \eoxia\Init_Util::g()->exec( PLUGIN_DIGIRISK_PATH, basename( __FILE__, '.php' ) );
 
-/** Call WordPress hook when the plugin is activaed */
 register_activation_hook( __FILE__, array( Digirisk::g(), 'activation' ) );

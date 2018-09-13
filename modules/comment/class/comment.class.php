@@ -52,6 +52,7 @@ class Digi_Comment_Class extends \eoxia\Singleton_Util {
 			$comments = $model_name::g()->get( array(
 				'post_id' => $id,
 			) );
+
 		}
 
 		$comment_new = $model_name::g()->get( array(
