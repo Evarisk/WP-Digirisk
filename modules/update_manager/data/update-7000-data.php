@@ -113,4 +113,28 @@ $datas = array(
 		'update_index'   => '700l',
 		'count_callback' => '',
 	),
+	array(
+		'action'         => 'digirisk_update_700_registre_at_benin',
+		'title'          => __( 'Update Registre AT Benin', 'digirisk' ),
+		'description'    => __( 'Risk', 'digirisk' ),
+		'since'          => '7.0.0',
+		'update_index'   => '700m',
+		'count_callback' => '',
+	),
+	array(
+		'action'         => 'digirisk_update_700_recommendation_comments',
+		'title'          => __( 'Update Recommendation Comments', 'digirisk' ),
+		'description'    => __( 'Risk', 'digirisk' ),
+		'since'          => '7.0.0',
+		'update_index'   => '700n',
+		'count_callback' => '',
+	),
+	array(
+		'action'         => 'digirisk_update_700_listing_risk',
+		'title'          => __( 'Update Listing Risk', 'digirisk' ),
+		'description'    => __( 'Risk', 'digirisk' ),
+		'since'          => '7.0.0',
+		'update_index'   => '700o',
+		'count_callback' => '',
+	),
 );

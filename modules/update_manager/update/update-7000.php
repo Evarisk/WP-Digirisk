@@ -41,6 +41,9 @@ class Update_7000 {
 		add_action( 'wp_ajax_digirisk_update_700_update_duer', array( $this, 'callback_digirisk_update_700_update_duer' ) );
 		add_action( 'wp_ajax_digirisk_update_700_update_evaluation_method', array( $this, 'callback_digirisk_update_700_update_evaluation_method' ) );
 		add_action( 'wp_ajax_digirisk_update_700_update_accident', array( $this, 'callback_digirisk_update_700_update_accident' ) );
+		add_action( 'wp_ajax_digirisk_update_700_registre_at_benin', array( $this, 'callback_digirisk_update_700_registre_at_benin' ) );
+		add_action( 'wp_ajax_digirisk_update_700_recommendation_comments', array( $this, 'callback_digirisk_update_700_recommendation_comments' ) );
+		add_action( 'wp_ajax_digirisk_update_700_listing_risk', array( $this, 'callback_digirisk_update_700_listing_risk' ) );
 	}
 
 	public function callback_digirisk_update_700_update_society() {
@@ -161,7 +164,7 @@ class Update_7000 {
 		) );
 
 		$comments = array_merge( $comments, get_comments( array(
-			'type' => 'digi-risk-evalcomment',
+			'type' => 'digi-riskevalcomment',
 			'status' => '-34071',
 		) ) );
 
@@ -329,6 +332,35 @@ class Update_7000 {
 						'%d'
 					) );
 				}
+			}
+		}
+
+		$posts = get_posts( array(
+			'post_type'      => 'digi-diffusion-info',
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$document_meta = get_post_meta( $post->ID, 'document_meta', true );
+				$document_meta = \eoxia\JSON_Util::g()->decode( $document_meta );
+
+				if ( ! empty ( $document_meta['delegues_du_personnels_date']['date_input'] ) ) {
+					$document_meta['delegues_du_personnels_date'] = preg_replace('#(\d{2})/(\d{2})/(\d{4})\s(.*)#', '$3-$2-$1 $4', $document_meta['delegues_du_personnels_date']['date_input']['fr_FR']['date_time'] );
+				}
+				if ( ! empty ( $document_meta['membres_du_comite_entreprise_date']['date_input'] ) ) {
+					$document_meta['membres_du_comite_entreprise_date'] = preg_replace('#(\d{2})/(\d{2})/(\d{4})\s(.*)#', '$3-$2-$1 $4', $document_meta['membres_du_comite_entreprise_date']['date_input']['fr_FR']['date_time'] );
+				}
+
+				$document_meta = \wp_json_encode( $document_meta );
+				$document_meta = addslashes( $document_meta );
+				$document_meta = preg_replace_callback( '/\\\\u([0-9a-f]{4})/i', function ( $matches ) {
+					$sym = mb_convert_encoding( pack( 'H*', $matches[1] ), 'UTF-8', 'UTF-16' );
+					return $sym;
+				}, $document_meta );
+
+				update_post_meta( $post->ID, '_wpdigi_diffusion_information', $document_meta );
 			}
 		}
 
@@ -674,6 +706,154 @@ class Update_7000 {
 			}
 		}
 
+
+		wp_send_json_success( array(
+			'updateComplete'    => false,
+			'done'              => true,
+			'progression'       => '100',
+			'doneDescription'   => '',
+			'doneElementNumber' => 0,
+			'errors'            => null,
+		) );
+	}
+
+	public function callback_digirisk_update_700_registre_at_benin() {
+		global $wpdb;
+		$dir = wp_upload_dir();
+
+		$basedir = str_replace( '\\', '/', $dir['basedir'] );
+		$baseurl = str_replace( '\\', '/', $dir['baseurl'] );
+
+		$posts = get_posts( array(
+			'post_type'      => 'accidents_benin',
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				update_post_meta( $post->ID, '_file_generated', true );
+
+				if ( 0 !== $post->post_parent ) {
+
+					$post_parent = get_post( $post->post_parent );
+
+					$guid  = $baseurl . '/digirisk/';
+					$guid .= '/' . $post_parent->post_type . '/' . $post->post_parent . '/';
+					$guid .= $post->post_title . '.odt';
+
+					$wpdb->update( $wpdb->posts, array(
+						'guid'      => $guid,
+						'post_type' => 'registre_at_benin',
+					),
+					array( 'ID' => $post->ID ),
+					array(
+						'%s'
+					),
+					array(
+						'%d'
+					) );
+				}
+			}
+		}
+
+		wp_send_json_success( array(
+			'updateComplete'    => false,
+			'done'              => true,
+			'progression'       => '100',
+			'doneDescription'   => '',
+			'doneElementNumber' => 0,
+			'errors'            => null,
+		) );
+	}
+
+	public function callback_digirisk_update_700_recommendation_comments() {
+		$comments = get_comments( array(
+			'type' => 'digi-re-comment',
+			'status' => '-34070',
+		) );
+
+		$comments = array_merge( $comments, get_comments( array(
+			'type' => 'digi-re-comment',
+			'status' => '-34071',
+		) ) );
+
+		if ( ! empty( $comments ) ) {
+			foreach ( $comments as $comment ) {
+				if ( '-34070' == $comment->comment_approved ) {
+					$comment->comment_approved = '1';
+				}
+
+				if ( '-34071' == $comment->comment_approved ) {
+					$comment->comment_approved = 'trash';
+				}
+
+				wp_update_comment( array(
+					'comment_ID'       => $comment->comment_ID,
+					'comment_approved' => $comment->comment_approved,
+				) );
+			}
+		}
+
+		wp_send_json_success( array(
+			'updateComplete'    => false,
+			'done'              => true,
+			'progression'       => '100',
+			'doneDescription'   => '',
+			'doneElementNumber' => 0,
+			'errors'            => null,
+		) );
+	}
+
+	public function callback_digirisk_update_700_listing_risk() {
+		// Mise à jour des listing de risque.
+		global $wpdb;
+		$dir = wp_upload_dir();
+
+		$basedir = str_replace( '\\', '/', $dir['basedir'] );
+		$baseurl = str_replace( '\\', '/', $dir['baseurl'] );
+
+		$posts = get_posts( array(
+			'post_type'      => 'listing_risk',
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				update_post_meta( $post->ID, '_file_generated', true );
+
+				if ( 0 !== $post->post_parent ) {
+
+					$post_parent = get_post( $post->post_parent );
+
+					$guid  = $baseurl . '/digirisk/';
+					$guid .= '/' . $post_parent->post_type . '/' . $post->post_parent . '/';
+					$guid .= $post->post_title . '.odt';
+
+					$post_type = 'listing_risk_action';
+
+
+					$terms = wp_get_object_terms( $post->ID, 'attachment_category' );
+
+					if ( ! empty( $terms[0] ) && 'liste_des_risques_actions' !== $terms[0]->slug ) {
+						$post_type = 'listing_risk_picture';
+					}
+
+					$wpdb->update( $wpdb->posts, array(
+						'guid'      => $guid,
+						'post_type' => $post_type,
+					),
+					array( 'ID' => $post->ID ),
+					array(
+						'%s'
+					),
+					array(
+						'%d'
+					) );
+				}
+			}
+		}
 
 		wp_send_json_success( array(
 			'updateComplete'    => false,

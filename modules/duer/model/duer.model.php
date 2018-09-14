@@ -59,8 +59,7 @@ class DUER_Model extends Document_Model {
 					'type' => 'string',
 				),
 				'dateGeneration' => array(
-					'type'    => 'wpeo_date',
-					'context' => array( 'GET' ),
+					'type'    => 'string',
 				),
 				'dateDebutAudit' => array(
 					'type'    => 'wpeo_date',
