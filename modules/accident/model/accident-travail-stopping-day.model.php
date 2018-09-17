@@ -2,7 +2,7 @@
 /**
  * Définition des champs d'un accident "stoppping day"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.4.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk

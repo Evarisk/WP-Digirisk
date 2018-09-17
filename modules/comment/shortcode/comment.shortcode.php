@@ -2,7 +2,7 @@
 /**
  * Ajoutes un shortcode permettant d'afficher un commentaire d'un post n'importe ou.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.1
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk

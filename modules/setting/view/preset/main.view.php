@@ -36,4 +36,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 </table>
 
-<a href="#" class="margin button disable save-all right"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>
+<a href="#" class="margin wpeo-button save-all"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>

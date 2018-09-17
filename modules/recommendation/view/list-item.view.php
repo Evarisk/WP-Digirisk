@@ -42,7 +42,8 @@ defined( 'ABSPATH' ) || exit; ?>
 			<div 	class="wpeo-button button-square-50 button-transparent delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
-						data-action="delete_recommendation"><i class="button-icon far fa-times"></i></div>
+						data-action="delete_recommendation"
+						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?', 'digirisk' ); ?>"><i class="button-icon far fa-times"></i></div>
 		</div>
 	</td>
 </tr>

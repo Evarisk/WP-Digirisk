@@ -2,7 +2,7 @@
 /**
  * La popup contenant les tâches correctives d'un risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.2.7
  * @copyright 2015-2017 Evarisk

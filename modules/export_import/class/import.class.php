@@ -2,7 +2,7 @@
 /**
  * Gestion de l'importation des modèles
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.1.5
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk

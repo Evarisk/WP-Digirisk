@@ -2,7 +2,7 @@
 /**
  * Les filtres relatives aux utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 0.1
  * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk

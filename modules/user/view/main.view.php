@@ -2,7 +2,7 @@
 /**
  * La vue contenant les deux blocs pour afficher les utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.3.0
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk

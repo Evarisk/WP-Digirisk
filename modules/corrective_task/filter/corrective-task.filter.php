@@ -2,7 +2,7 @@
 /**
  * Les filtres relatifs aux tâches correctives.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.3.1
  * @copyright 2015-2017 Evarisk

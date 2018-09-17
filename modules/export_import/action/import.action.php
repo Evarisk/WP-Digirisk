@@ -2,7 +2,7 @@
 /**
  * Gestion de l'imporation des données de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.1.9
  * @version 6.4.3
  * @copyright 2015-2017

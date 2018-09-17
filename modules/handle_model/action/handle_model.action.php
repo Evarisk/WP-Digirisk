@@ -2,7 +2,7 @@
 /**
  * Gestion des actions pour gérer les modèles ODT personnalisés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.3
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk

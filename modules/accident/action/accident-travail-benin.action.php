@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux accident de travail benin (ODT)
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.3.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk

@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 1.0
  * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk

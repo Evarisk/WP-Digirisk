@@ -38,20 +38,14 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le constructeur obligatoirement pour utiliser la classe \eoxia\Singleton_Util
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.3
-	 * @version 6.2.4
 	 */
 	protected function construct() {}
 
 	/**
 	 * Affiches le contenu de la page "Tous les risques"
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.3
-	 * @version 6.5.0
 	 */
 	public function display() {
 		$per_page = get_user_meta( get_current_user_id(), $this->option_name, true );
@@ -98,10 +92,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 	 * Charges tous les risques de l'application, ajoutes ses parents dans l'objet, et les tries selon leur cotation.
 	 * Si $_GET['order_key'] et $_GET['order_type'] existent, le trie se fait selon ses critères.
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.3
-	 * @version 6.5.0
 	 */
 	public function display_risk_list() {
 		global $wpdb;
@@ -148,14 +139,14 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 						$risk_list[ $key ]->parent_group = $risk_list[ $key ]->parent;
 					} else {
 						$risk_list[ $key ]->parent_workunit = $risk_list[ $key ]->parent;
-						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->parent_id );
+						$risk_list[ $key ]->parent_group = Society_Class::g()->show_by_type( $risk_list[ $key ]->parent_workunit->data['parent_id'] );
 					}
 				}
 			}
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/list', array(
-			'risk_list' => $risk_list,
+			'risk_list'     => $risk_list,
 			'url_ref_order' => $url_ref_order,
 		) );
 	}

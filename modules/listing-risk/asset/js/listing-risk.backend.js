@@ -31,8 +31,7 @@ window.eoxiaJS.digirisk.listingRisk.event = function() {};
  * @return {void}
  *
  * @since 6.5.0
- * @version 6.5.0
  */
 window.eoxiaJS.digirisk.listingRisk.generatedListingRiskSuccess = function( triggeredElement, response ) {
-	jQuery( '.tab-element[data-action="digi-listing-risk"]' ).click();
+	jQuery( '.tab-element[data-target="digi-listing-risk"]' ).click();
 };

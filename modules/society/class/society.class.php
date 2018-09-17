@@ -178,7 +178,7 @@ class Society_Class extends \eoxia\Post_Class {
 					'menu_order'     => 'ASC',
 					'meta_value_num' => 'ASC',
 				),
-			) );
+			) ); // WPCS: slow query ok.
 		} else {
 			$societies = $this->get( array(
 				'posts_per_page' => 1,

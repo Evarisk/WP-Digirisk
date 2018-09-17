@@ -61,9 +61,10 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		$upload_dir = wp_upload_dir();
 
 		$data['title']  = current_time( 'Ymd' ) . '_';
-		$data['title'] .= $data['parent']->data['unique_identifier'] . '_' . $data['parent']->data['type'] . '_';
-		$data['title'] .= sanitize_title( $data['parent']->data['title'] ) . '_' . sanitize_title( $data['type'] ) . '_';
+		$data['title'] .= $data['parent']->data['unique_identifier'] . '_' . sanitize_title( $data['type'] ) . '_';
+		$data['title'] .= sanitize_title( $data['parent']->data['title'] ) . '_';
 		$data['title'] .= 'V' . \eoxia\ODT_Class::g()->get_revision( $data['type'], $data['parent']->data['id'] );
+		$data['title']  = str_replace( '-', '_', $data['title'] );
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/' . $data['parent']->data['type'] . '/' . $data['parent']->data['id'] . '/' . sanitize_title( $data['title'] ) . '.odt';
 		$data['path'] = $upload_dir['basedir'] . '/digirisk/' . $data['parent']->data['type'] . '/' . $data['parent']->data['id'] . '/' . sanitize_title( $data['title'] ) . '.odt';
@@ -85,6 +86,10 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		$data['telephone']    = ! empty( $args['parent']->data['contact']['phone'] ) ? end( $args['parent']->data['contact']['phone'] ) : '';
 		$data['description']  = $args['parent']->data['content'];
 		$data['photoDefault'] = '';
+
+		if ( ! empty( $args['parent']->data['thumbnail_id'] ) ) {
+			$data['photoDefault'] = Document_Util_Class::g()->get_picture( ! empty( $args['parent']->data['thumbnail_id'] ) ? $args['parent']->data['thumbnail_id'] : 0, 6, 'medium' );
+		}
 
 		return $data;
 	}

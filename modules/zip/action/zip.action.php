@@ -2,7 +2,7 @@
 /**
  * Gères l'action AJAX de la génération d'un ZIP
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @version 6.2.1
  * @copyright 2015-2016 Evarisk
  * @package zip

@@ -32,43 +32,40 @@ class Recommendation_Action {
 		add_action( 'wp_ajax_save_recommendation', array( $this, 'ajax_save_recommendation' ) );
 		add_action( 'wp_ajax_load_recommendation', array( $this, 'ajax_load_recommendation' ) );
 		add_action( 'wp_ajax_delete_recommendation', array( $this, 'ajax_delete_recommendation' ) );
-
-		add_action( 'wp_ajax_transfert_recommendation', array( $this, 'ajax_transfert_recommendation' ) );
 	}
 
 	/**
 	 * Charges une recommendation
 	 *
 	 * @since   6.1.5
-	 * @version 7.0.0
 	 */
 	public function ajax_load_recommendation() {
 		check_ajax_referer( 'ajax_load_recommendation' );
 
-		if ( 0 === (int) $_POST['id'] ) {
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		if ( empty( $id ) ) {
 			wp_send_json_error();
-		} else {
-			$id = (int) $_POST['id'];
 		}
 
 		$recommendation = Recommendation::g()->get( array(
 			'id' => $id,
-		) );
-		$recommendation = $recommendation[0];
+		), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
-			'society_id' => $recommendation->parent_id,
+			'society_id'     => $recommendation->data['parent_id'],
 			'recommendation' => $recommendation,
 			), array(
 			'\digi\recommendation_category_term',
 			'\digi\recommendation_term',
 		) );
+
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'recommendation',
+			'namespace'        => 'digirisk',
+			'module'           => 'recommendation',
 			'callback_success' => 'loadedRecommendationSuccess',
-			'template' => ob_get_clean(),
+			'template'         => ob_get_clean(),
 		) );
 	}
 
@@ -76,9 +73,6 @@ class Recommendation_Action {
 	 * Sauvegardes une signalisation.
 	 *
 	 * @since   6.1.5
-	 * @version 7.0.0
-	 *
-	 * @return void
 	 */
 	public function ajax_save_recommendation() {
 		check_ajax_referer( 'save_recommendation' );
@@ -159,7 +153,7 @@ class Recommendation_Action {
 			$id = (int) $_POST['id'];
 		}
 
-		$recommendation = Recommendation_Class::g()->get( array(
+		$recommendation = Recommendation::g()->get( array(
 			'id' => $id,
 		), true );
 
@@ -169,7 +163,7 @@ class Recommendation_Action {
 
 		$recommendation->data['status'] = 'trash';
 
-		Recommendation_Class::g()->update( $recommendation->data );
+		Recommendation::g()->update( $recommendation->data );
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $recommendation->data['parent_id'],
@@ -184,20 +178,6 @@ class Recommendation_Action {
 			'template'         => ob_get_clean(),
 			'element'          => $recommendation,
 		) );
-	}
-
-	/**
-	 * Transfère les anciennes recommendations
-	 *
-	 * @since 6.1.5
-	 * @version 6.1.5
-	 *
-	 * @return void
-	 * @todo: Voir si c'est toujours utile (08/12/2017)
-	 */
-	public function ajax_transfert_recommendation() {
-		Recommendation_Class::g()->transfert();
-		wp_send_json_success();
 	}
 }
 

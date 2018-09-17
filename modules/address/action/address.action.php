@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion des adresses
  *
- * @author Jimmy Latour <jimmy.eoxia@gmail.com>
+ * @author Evarisk <jimmy.eoxia@gmail.com>
  * @version 1.1.0.0
  */
 class Address_action {

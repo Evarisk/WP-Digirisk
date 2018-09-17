@@ -2,7 +2,7 @@
 /**
  * Le formulaire pour ajouter une tâche corrective.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk

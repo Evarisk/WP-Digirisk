@@ -2,7 +2,7 @@
 /**
  * Définition des champs d'un zip.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.1
  * @version 6.2.1
  * @copyright 2015-2017 Evarisk

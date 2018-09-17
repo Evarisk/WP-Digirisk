@@ -45,6 +45,7 @@ class Risk_Save_Action {
 		$risk_category_id     = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$evaluation_method_id = ! empty( $_POST['evaluation_method_id'] ) ? (int) $_POST['evaluation_method_id'] : 0;
 		$comments             = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
+		$image                = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
 		$risk_data = array(
 			'id'        => $id,
@@ -76,6 +77,18 @@ class Risk_Save_Action {
 		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
 
 		$risk = Risk_Class::g()->update( $risk->data );
+
+		if ( ! empty( $image ) && empty( $id ) ) {
+			$args = array(
+				'id'         => $risk->data['id'],
+				'model_name' => '\digi\Risk_Class',
+				'field_name' => 'image',
+				'file_id'    => $image,
+			);
+
+			\eoxia\WPEO_Upload_Class::g()->set_thumbnail( $args );
+			\eoxia\WPEO_Upload_Class::g()->associate_file( $args );
+		}
 
 		do_action( 'digi_add_historic', array(
 			'parent_id' => $parent_id,
