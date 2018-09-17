@@ -99,7 +99,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 		<div data-module="installer" data-loader="wpdigi-installer" data-parent="wpdigi-installer" data-namespace="digirisk" data-before-method="beforeCreateSociety" class="action-input wpeo-button button-main margin alignright start-install"><span><?php esc_html_e( 'Installer', 'digirisk' ); ?></span></div>
 
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-users&from_install=1' ) ); ?>" class="end-install hidden button-disable wpeo-button button-green alignright margin">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-users&from_install=1' ) ); ?>" class="end-install wpeo-util-hidden button-disable wpeo-button button-green alignright margin">
 			<span><?php esc_html_e( 'Terminer l\'installation', 'digirisk' ); ?></span>
 		</a>
 
