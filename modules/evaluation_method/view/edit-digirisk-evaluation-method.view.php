@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 		<li data-level="4" class="item cotation level4"><span>80</span></li>
 
 		<?php 
-		$can_edit_type_cotation = (bool) get_option( 'edit_type_cotation', false );
+		$can_edit_type_cotation = (bool) ( 1 == (int) get_option( 'edit_type_cotation', false ) ) ? true : false;
 		
 		if ( 0 === $risk->id || $risk->preset || $can_edit_type_cotation ) : ?>
 			<li class="item cotation method open-popup" data-parent="risk-row" data-class="popup-evaluation" data-target="popup-evaluation"><i class="icon fa fa-cog"></i></li>
