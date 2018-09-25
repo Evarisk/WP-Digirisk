@@ -43,11 +43,12 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 	 * @since 7.0.0
 	 */
 	public function callback_digi_redirect_to_dashboard() {
+		$path_version = ! empty( $_POST['version'] ) ? (int) $_POST['path_version'] : 0;
 		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
 		if ( 3 === strlen( $version ) ) {
 			$version *= 10;
 		}
-		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $version );
+		update_option( \eoxia\Config_Util::$init['digirisk']->key_last_update_version, $path_version );
 		delete_option( \eoxia\Config_Util::$init['digirisk']->key_waiting_updates );
 
 		$url = admin_url( 'admin.php?page=' . \eoxia\Config_Util::$init['digirisk']->dashboard_page_url );
@@ -59,8 +60,11 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 				foreach ( $sites as $site ) {
 					switch_to_blog( $site->blog_id );
 
+					$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 					$last_update_version = get_option( '_digirisk_last_update_version', true );
-					if ( (int) $version > (int) $last_update_version ) {
+					if ( (int) $version > (int) $last_update_version && ! empty( $digirisk_core['installed'] ) ) {
+						delete_option( \eoxia\Config_Util::$init['digirisk']->key_waiting_updates );
+						$this->automatic_update_redirect();
 						$url = admin_url( 'admin.php?page=digirisk-update' );
 						break;
 					}
