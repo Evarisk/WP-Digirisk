@@ -74,6 +74,7 @@ class Historic_Action {
 			foreach ( $evaluations as &$evaluation ) {
 				$evaluation->comments = Risk_Evaluation_Comment_Class::g()->get( array(
 					'post_id' => $risk_id,
+					'parent'  => $evaluation->data['id'],
 				) );
 			}
 		}

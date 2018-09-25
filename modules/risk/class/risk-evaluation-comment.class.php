@@ -76,7 +76,7 @@ class Risk_Evaluation_Comment_Class extends \eoxia\Comment_Class {
 						$comment['author_id'] = (int) $comment['author_id'];
 
 						if ( empty( $comment['parent_id'] ) ) {
-							$comment['parent_id'] = $risk->data['current_evaluation_id'];
+							$comment['parent_id'] = $risk->data['evaluation']->data['id'];
 						}
 
 						$comment['parent_id'] = (int) $comment['parent_id'];

@@ -72,11 +72,12 @@ class Risk_Save_Action {
 			}
 		}
 
-		Risk_Evaluation_Comment_Class::g()->save( $risk, $comments );
 
 		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
 
 		$risk = Risk_Class::g()->update( $risk->data );
+
+		Risk_Evaluation_Comment_Class::g()->save( $risk, $comments );
 
 		if ( ! empty( $image ) && empty( $id ) ) {
 			$args = array(
