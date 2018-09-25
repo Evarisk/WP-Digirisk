@@ -34,7 +34,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endif; ?>
 	</td>
 	<td data-title="Risque" data-title="Risque" class="wmax70">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); ?>
+		<?php
+		if ( $can_edit_risk_category ) :
+			do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="' . ( ( 0 !== $risk->id && ! $risk->preset ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); 
+		else :
+			do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" display="edit" category_risk_id="' . $risk->risk_category->id . '" preset="' . ( ( $risk->preset ) ? '1' : '0' ) . '"]' ); 
+		endif;
+		?>
 	</td>
 	<td data-title="Cot." class="w50">
 		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ']' ); ?>

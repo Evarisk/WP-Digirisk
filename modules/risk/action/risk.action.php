@@ -164,6 +164,8 @@ class Risk_Action {
 
 		$risk = Risk_Class::g()->get( array( 'id' => $id ) );
 		$risk = $risk[0];
+		
+		$can_edit_risk_category = (bool) get_option( 'edit_risk_category', false );
 
 		ob_start();
 		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
@@ -172,6 +174,7 @@ class Risk_Action {
 			'module' => 'risk',
 			'callback_success' => 'loadedRiskSuccess',
 			'template' => ob_get_clean(),
+			'can_edit_risk_category' => $can_edit_risk_category,
 		) );
 	}
 

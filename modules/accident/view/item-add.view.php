@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 	<div class="cell padding tooltip red" aria-label="<?php esc_html_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
-		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+		<?php do_shortcode( '[digi_comment id="' . $accident->id . '" namespace="eoxia001" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
 	</div>
 	<div class="cell w50" data-title="action">
 		<div class="action grid-layout w3">
