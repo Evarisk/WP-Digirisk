@@ -164,9 +164,14 @@ class Risk_Action {
 
 		$risk = Risk_Class::g()->get( array( 'id' => $id ) );
 		$risk = $risk[0];
-
+		$can_edit_risk_category = (bool) ( 1 == (int) get_option( 'edit_risk_category', false ) ) ? true : false;
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 'society_id' => $risk->parent_id, 'risk' => $risk ) );
+		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array( 
+			'society_id' => $risk->parent_id,
+			'risk' => $risk,
+			'can_edit_risk_category' => $can_edit_risk_category,
+		) );
+		
 		wp_send_json_success( array(
 			'namespace' => 'digirisk',
 			'module' => 'risk',

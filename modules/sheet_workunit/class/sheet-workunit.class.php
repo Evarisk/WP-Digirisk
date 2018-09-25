@@ -304,10 +304,10 @@ class Sheet_Workunit_Class extends Document_Class {
 
 				if ( count( $affected_evaluators ) > 1 ) {
 					usort( $affected_evaluators, function( $a, $b ) {
-						if( $a['dateAffectationUtilisateur'] == $b['dateAffectationUtilisateur'] ) {
+						if( $a['dateEntretien'] == $b['dateEntretien'] ) {
 							return 0;
 						}
-						return ( $a['dateAffectationUtilisateur'] < $b['dateAffectationUtilisateur'] ) ? -1 : 1;
+						return ( $a['dateEntretien'] < $b['dateEntretien'] ) ? -1 : 1;
 					} );
 				}
 
