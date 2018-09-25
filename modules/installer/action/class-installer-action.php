@@ -49,7 +49,7 @@ class Installer_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'DigiRisk installer', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digi-setup', array( Installer_Class::g(), 'setup_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+			add_menu_page( __( 'Installation de DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digi-setup', array( Installer_Class::g(), 'setup_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		}
 	}
 

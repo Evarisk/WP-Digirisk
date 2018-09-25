@@ -27,7 +27,7 @@ class Listing_Risk_Filter {
 	 * @since 6.5.0
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 6, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 7, 2 );
 
 		add_filter( 'digi_listing_risk_action_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 		add_filter( 'digi_listing_risk_picture_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
@@ -45,8 +45,8 @@ class Listing_Risk_Filter {
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-group']['listing-risk'] = array(
 			'type'  => 'text',
-			'text'  => __( 'Listing risk ', 'digirisk' ),
-			'title' => __( 'Listing risk', 'digirisk' ),
+			'text'  => __( 'Listing des risques ', 'digirisk' ),
+			'title' => __( 'Listing des risques', 'digirisk' ),
 		);
 
 		return $list_tab;

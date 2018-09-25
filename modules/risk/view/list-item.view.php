@@ -44,6 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-parent="risk-row"
 					data-class="wpeo-wrap corrective-task"
 					data-action="open_task"
+					data-title="<?php echo 'Les actions correctives du risque: ' . $risk->data['unique_identifier']; ?>"
 					data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="button-icon far fa-list-ul"></i></div>
 
 			<!-- Editer un risque -->

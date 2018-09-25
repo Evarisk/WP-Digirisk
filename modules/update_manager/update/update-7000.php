@@ -602,7 +602,6 @@ class Update_7000 {
 				$meta = get_term_meta( $method->term_id, '_wpdigi_method', true );
 				$meta = \eoxia\JSON_Util::g()->decode( $meta );
 
-
 				if ( ! empty( $meta['formula'] ) ) {
 					foreach ( $meta['formula'] as $key => $element ) {
 						if ( $element != '*' ) {
@@ -610,6 +609,12 @@ class Update_7000 {
 						} else {
 							$meta['formula'][ $key ] = $element;
 						}
+					}
+				}
+
+				if ( 'evarisk-simplified' === $method->slug ) {
+					if ( 4 === count( $meta['formula'] ) ) {
+						array_splice( $meta['formula'], 1, 3 );
 					}
 				}
 
