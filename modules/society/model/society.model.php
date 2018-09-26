@@ -132,6 +132,31 @@ class Society_Model extends \eoxia001\Post_Model {
 			'meta_type'   => 'single',
 			'field'       => '_digi_owner_id',
 		);
+		
+		$this->model['user_info'] = array(
+			'type' => 'array',
+			'meta_type' => 'multiple',
+			'child' => array(
+				'owner_id' => array(
+					'type' => 'integer',
+					'meta_type' => 'multiple',
+				),
+				'affected_id' => array(
+					'type' => 'array',
+					'meta_type' => 'multiple',
+				),
+			),
+		);
+		
+		$this->model['identity'] = array(
+			'type' => 'array',
+			'meta_type' => 'multiple',
+			'child' => array(
+				'workforce' => array(
+					'type' => 'integer',
+				),
+			),
+		);
 
 		parent::__construct( $object );
 	}
