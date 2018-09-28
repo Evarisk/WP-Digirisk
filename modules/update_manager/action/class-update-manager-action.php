@@ -43,7 +43,7 @@ class Update_Manager_Action extends \eoxia\Update_Manager_Action {
 	 * @since 7.0.0
 	 */
 	public function callback_digi_redirect_to_dashboard() {
-		$path_version = ! empty( $_POST['version'] ) ? (int) $_POST['path_version'] : 0;
+		$path_version = ! empty( $_POST['version'] ) ? (int) $_POST['version'] : 0;
 		$version = (int) str_replace( '.', '', \eoxia\Config_Util::$init['digirisk']->version );
 		if ( 3 === strlen( $version ) ) {
 			$version *= 10;

@@ -129,6 +129,36 @@ class Society_Model extends \eoxia\Post_Model {
 			'default'     => 0,
 		);
 
+		$this->schema['user_info'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
+
+		$this->schema['user_info']['child']['affected_id'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['identity'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
+
+		$this->schema['identity']['child']['workforce'] = array(
+			'since'   => '6.0.0',
+			'version' => '6.0.0',
+			'type'    => 'integer',
+		);
+
+
 		parent::__construct( $data, $req_method );
 	}
 

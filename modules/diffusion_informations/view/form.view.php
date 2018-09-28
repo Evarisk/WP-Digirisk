@@ -16,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <form class="form-generate">
-	<input type="hidden" name="action" value="generate_diffusion_information" />
 	<?php wp_nonce_field( 'generate_diffusion_information' ); ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
@@ -73,5 +72,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 	</div>
 
-	<div><button class="wpeo-button button-main button-margin action-input alignright" data-parent="form-generate"><i class="button-icon far fa-sync-alt"></i><span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span></button></div>
+	<div class="alignright">
+		<button data-action="save_diffusion_information" class="wpeo-button button-main button-green action-input" data-parent="form-generate">
+			<i class="button-icon far fa-sync-alt"></i>
+			<span><?php esc_html_e( 'Enregister les modifications', 'digirisk' ); ?></span>
+		</button>
+
+		<button data-action="generate_diffusion_information" class="wpeo-button button-main action-input" data-parent="form-generate">
+			<i class="button-icon far fa-sync-alt"></i>
+			<span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
+		</button>
+	</div>
 </form>

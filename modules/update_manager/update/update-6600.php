@@ -59,7 +59,7 @@ class Update_660 {
 		wp_send_json_success( array(
 			'updateComplete'    => false,
 			'done'              => true,
-			'progression'       => '100',
+			'progressionPerCent'       => '100',
 			'doneDescription'   => '',
 			'doneElementNumber' => 0,
 			'errors'            => null,
@@ -94,7 +94,7 @@ class Update_660 {
 		wp_send_json_success( array(
 			'updateComplete'    => false,
 			'done'              => $done,
-			'progression'       => '100',
+			'progressionPerCent'       => '100',
 			'doneDescription'   => '',
 			'doneElementNumber' => $index,
 			'errors'            => null,

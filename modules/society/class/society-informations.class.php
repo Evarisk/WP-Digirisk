@@ -98,40 +98,36 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	 * @return Society_Model     Le groupement mis à jour.
 	 */
 	public function save( $data_form ) {
-		$data = array();
+		$society = Society_Class::g()->show_by_type( $data_form['id'] );
 
-		$data['id']                  = ! empty( $data_form['id'] ) ? (int) $data_form['id'] : 0;
-		$data['type']                = ! empty( $data_form['type'] ) ? sanitize_text_field( $data_form['type'] ) : '';
-		$data['title']               = ! empty( $data_form['title'] ) ? sanitize_text_field( $data_form['title'] ) : '';
-		$data['owner_id']            = ! empty( $data_form['owner_id'] ) ? (int) $data_form['owner_id'] : 0;
-		$data['date']                = ! empty( $data_form['date'] ) ? sanitize_text_field( $data_form['date'] ) : '';
-		$data['siret_id']            = ! empty( $data_form['siret_id'] ) ? sanitize_text_field( $data_form['siret_id'] ) : '';
-		$data['number_of_employees'] = ! empty( $data_form['number_of_employees'] ) ? (int) $data_form['number_of_employees'] : 0;
-		$data['contact']['email']    = ! empty( $data_form['contact']['email'] ) ? sanitize_email( $data_form['contact']['email'] ) : '';
-		$data['content']             = ! empty( $data_form['content'] ) ? sanitize_text_field( $data_form['content'] ) : '';
+		$society->data['title']               = ! empty( $data_form['title'] ) ? sanitize_text_field( $data_form['title'] ) : '';
+		$society->data['owner_id']            = ! empty( $data_form['owner_id'] ) ? (int) $data_form['owner_id'] : 0;
+		$society->data['date']                = ! empty( $data_form['date'] ) ? sanitize_text_field( $data_form['date'] ) : '';
+		$society->data['siret_id']            = ! empty( $data_form['siret_id'] ) ? sanitize_text_field( $data_form['siret_id'] ) : '';
+		$society->data['number_of_employees'] = ! empty( $data_form['number_of_employees'] ) ? (int) $data_form['number_of_employees'] : 0;
+		$society->data['contact']['email']    = ! empty( $data_form['contact']['email'] ) ? sanitize_email( $data_form['contact']['email'] ) : '';
+		$society->data['content']             = ! empty( $data_form['content'] ) ? sanitize_text_field( $data_form['content'] ) : '';
 
 		$phone      = ! empty( $data_form['contact']['phone'] ) ? sanitize_text_field( $data_form['contact']['phone'] ) : '';
 		$address_id = ! empty( $data_form['contact']['address_id'] ) ? (int) $data_form['contact']['address_id'] : 0;
 
-		$data['$push']['contact'] = array();
-
 		if ( ! empty( $phone ) ) {
-			$data['$push']['contact']['phone'] = $phone;
+			$society->data['contact']['phone'][] = $phone;
 		}
 
 		if ( ! empty( $address_id ) ) {
-			$data['$push']['contact']['address_id'] = $address_id;
+			$society->data['contact']['address_id'][] = $address_id;
 		}
 
-		switch ( $data['type'] ) {
+		switch ( $society->data['type'] ) {
 			case 'digi-society':
-				$society = Society_Class::g()->update( $data );
+				$society = Society_Class::g()->update( $society->data );
 				break;
 			case 'digi-group':
-				$society = Group_Class::g()->update( $data );
+				$society = Group_Class::g()->update( $society->data );
 				break;
 			case 'digi-workunit':
-				$society = Workunit_Class::g()->update( $data );
+				$society = Workunit_Class::g()->update( $society->data );
 				break;
 		}
 
