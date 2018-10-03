@@ -29,6 +29,8 @@ class Listing_Risk_Filter {
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 7, 2 );
 
+		add_filter( 'eo_model_listing_risk_action_before_post', array( $this, 'before_save_doc' ), 10, 2 );
+		add_filter( 'eo_model_listing_risk_picture_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'digi_listing_risk_action_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 		add_filter( 'digi_listing_risk_picture_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 	}
@@ -50,6 +52,44 @@ class Listing_Risk_Filter {
 		);
 
 		return $list_tab;
+	}
+
+	/**
+	 * Ajoutes le titre du document ainsi que le GUID et le chemin vers celui-ci.
+	 *
+	 * Cette méthode est appelée avant l'ajout du document en base de donnée.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  array $data Les données du document.
+	 * @param  array $args Les données de la requête.
+	 *
+	 * @return mixed
+	 */
+	public function before_save_doc( $data, $args ) {
+		$upload_dir = wp_upload_dir();
+
+		$type = '';
+
+		if ( 'listing_risk_picture' === $data['type'] ) {
+			$type = 'listing_risque_photo';
+		} else {
+			$type = 'listing_risque_action';
+		}
+
+		$data['title']  = current_time( 'Ymd' ) . '_';
+		$data['title'] .= $data['parent']->data['unique_identifier'] . '_' . sanitize_title( $type ) . '_';
+		$data['title'] .= sanitize_title( $data['parent']->data['title'] ) . '_';
+		$data['title'] .= 'V' . \eoxia\ODT_Class::g()->get_revision( $data['type'], $data['parent']->data['id'] );
+		$data['title']  = str_replace( '-', '_', $data['title'] );
+
+		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/' . $data['parent']->data['type'] . '/' . $data['parent']->data['id'] . '/' . sanitize_title( $data['title'] ) . '.odt';
+		$data['path'] = $upload_dir['basedir'] . '/digirisk/' . $data['parent']->data['type'] . '/' . $data['parent']->data['id'] . '/' . sanitize_title( $data['title'] ) . '.odt';
+		$data['path'] = str_replace( '\\', '/', $data['path'] );
+
+		$data['_wp_attached_file'] = '/digirisk/' . $data['parent']->data['type'] . '/' . $data['parent']->data['id'] . '/' . sanitize_title( $data['title'] ) . '.odt';
+
+		return $data;
 	}
 
 	public function callback_digi_document_data( $data, $args ) {
