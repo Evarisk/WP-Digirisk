@@ -19,16 +19,16 @@ defined( 'ABSPATH' ) || exit;
 $datas = array(
 	array(
 		'action'         => 'digirisk_get_societies_status',
-		'title'          => __( 'Society status', 'digirisk' ),
-		'description'    => __( 'Society', 'digirisk' ),
+		'title'          => __( 'Récupères les status des sociétés', 'digirisk' ),
+		'description'    => __( 'Récupères les status.', 'digirisk' ),
 		'since'          => '7.0.0',
 		'update_index'   => '660a',
 		'count_callback' => '',
 	),
 	array(
 		'action'         => 'digirisk_update_societies_status',
-		'title'          => __( 'Society status', 'digirisk' ),
-		'description'    => __( 'Society', 'digirisk' ),
+		'title'          => __( 'Mise à jour des status des sociétés', 'digirisk' ),
+		'description'    => __( 'Mise à jour des status.', 'digirisk' ),
 		'since'          => '7.0.0',
 		'update_index'   => '660b',
 		'count_callback' => '',

@@ -31,7 +31,13 @@ $user = User_Digi_Class::g()->get( array(
 		<span class="user">
 			<div class="avatar tooltip hover" aria-label="<?php echo esc_attr( $user->data['displayname'] ); ?>" style="background-color: #<?php echo esc_attr( $user->data['avatar_color'] ); ?>;">
 				<span>
-					<?php echo esc_html( $user->data['initial'] ); ?>
+					<?php
+					if ( ! empty( $user->data['initial'] ) ) :
+						echo esc_html( $user->data['initial'] );
+					else:
+						esc_html_e( 'N/A', 'digirisk' );
+					endif;
+					?>
 				</span>
 			</div>
 		</span>

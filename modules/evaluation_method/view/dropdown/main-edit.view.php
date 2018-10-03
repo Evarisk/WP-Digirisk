@@ -58,6 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'aria-label'     => array(),
 					'data-action'    => array(),
 					'data-class'     => array(),
+					'data-title'     => array(),
 					'data-nonce'     => array(),
 					'data-id'        => array(),
 					'data-risk-id'   => array(),

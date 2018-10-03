@@ -103,7 +103,7 @@ window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 	event.preventDefault();
 
 	jQuery.post( window.ajaxurl, data, function( view ) {
-		jQuery( '.tab-content .grid-layout' ).replaceWith( view );
+		jQuery( '.tab-content .wpeo-gridlayout' ).replaceWith( view );
 		window.eoxiaJS.digirisk.search.renderChanged();
 	} );
 };

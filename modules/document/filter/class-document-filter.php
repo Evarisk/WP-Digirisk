@@ -97,10 +97,10 @@ class Document_Filter extends \eoxia\Singleton_Util {
 	public function fill_risks( $data, $args ) {
 		$risks = Risk_Class::g()->get( array( 'post_parent' => $args['parent']->data['id'] ) );
 
-		$data['risq80'] = array( 'type' => 'segment', 'value' => array() );
-		$data['risq51'] = array( 'type' => 'segment', 'value' => array() );
-		$data['risq48'] = array( 'type' => 'segment', 'value' => array() );
-		$data['risq']   = array( 'type' => 'segment', 'value' => array() );
+		$data['risq4'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq3'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq2'] = array( 'type' => 'segment', 'value' => array() );
+		$data['risq1']   = array( 'type' => 'segment', 'value' => array() );
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
@@ -113,7 +113,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 					}
 				}
 
-				$data[ 'risq' . $risk->data['current_equivalence'] ]['value'][] = array(
+				$data[ 'risq' . $risk->data['evaluation']->data['scale'] ]['value'][] = array(
 					'nomDanger'         => $risk->data['risk_category']->data['name'],
 					'identifiantRisque' => $risk->data['unique_identifier'] . '-' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'   => $risk->data['current_equivalence'],
