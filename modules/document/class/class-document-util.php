@@ -96,7 +96,12 @@ class Document_Util_Class extends \eoxia\Singleton_Util {
 		}
 
 		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ) );
-		$picture = '';
+
+		$picture = array(
+			'type'  => 'picture',
+			'value' => '',
+		);
+
 		if ( is_file( $picture_final_path ) ) {
 			$picture = array(
 				'type'		=> 'picture',

@@ -79,8 +79,8 @@ class Accident_Travail_Benin_Filter extends Identifier_Filter {
 			'natureLesions'             => $accident->data['nature_of_lesions'],
 			'nomAdresseTemoins'         => $accident->data['name_and_address_of_witnesses'],
 			'nomAdresseTiers'           => $accident->data['name_and_address_of_third_parties_involved'],
-			'signatureDonneurSoins'     => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] : 0, 6, 'full' ),
-			'signatureVictime'          => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_victim_id'][0] : 0, 6, 'full' ),
+			'signatureDonneurSoins'     => ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? Document_Util_Class::g()->get_picture( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0], 6, 'full' ) : array(),
+			'signatureVictime'          => ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? Document_Util_Class::g()->get_picture(  $accident->data['associated_document_id']['signature_of_the_victim_id'][0], 6, 'full' ) : array(),
 			'observations'              => $accident->data['observation'],
 			'enqueteAccident'           => $accident->data['have_investigation'] ? __( 'Oui', 'digirisk' ) : __( 'Non', 'digirisk' ),
 		);
