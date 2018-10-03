@@ -89,18 +89,13 @@ class Document_Util_Class extends \eoxia\Singleton_Util {
 	public function get_picture( $id, $size_odt, $size = 'thumbnail' ) {
 		$picture_definition = wp_get_attachment_image_src( $id, $size );
 		if ( ! $picture_definition ) {
-			return array(
-				'type'  => 'picture',
-				'value' => '',
-			);
+			return array();
 		}
 
-		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ) );
+		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'http' ), ABSPATH, $picture_definition[0] ) );
+		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'https' ), ABSPATH, $picture_definition[0] ) );
 
-		$picture = array(
-			'type'  => 'picture',
-			'value' => '',
-		);
+		$picture = array();
 
 		if ( is_file( $picture_final_path ) ) {
 			$picture = array(
