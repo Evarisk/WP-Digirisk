@@ -99,10 +99,11 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 ';
 					}
 				}
+
 				$data['accidentDebut']['value'][] = array(
 					'ref'                       => $accident->data['unique_identifier'],
 					'dateInscriptionRegistre'   => $accident->data['registration_date_in_register']['rendered']['date'],
-					'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->id ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->id . ' ' . $accident->data['victim_identity']->login : '',
+					'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : '',
 					'dateHeure'                 => $accident->data['accident_date']['rendered']['date_time'],
 					'lieu'                      => $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'],
 					'circonstances'             => $comment_content,
@@ -114,8 +115,8 @@ class Registre_AT_Benin_Filter extends Identifier_Filter {
 					'natureLesions'         => $accident->data['nature_of_lesions'],
 					'nomAdresseTemoins'     => $accident->data['name_and_address_of_witnesses'],
 					'nomAdresseTiers'       => $accident->data['name_and_address_of_third_parties_involved'],
-					'signatureDonneurSoins' => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] : 0, 6, 'full' ),
-					'signatureVictime'      => Document_Util_Class::g()->get_picture( ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? $accident->data['associated_document_id']['signature_of_the_victim_id'][0] : 0, 6, 'full' ),
+					'signatureDonneurSoins' => ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? Document_Util_Class::g()->get_picture( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0], 6, 'full' ) : '',
+					'signatureVictime'      => ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? Document_Util_Class::g()->get_picture( $accident->data['associated_document_id']['signature_of_the_victim_id'][0], 6, 'full' ) : '',
 					'observations'          => $accident->data['observation'],
 				);
 			}
