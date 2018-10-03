@@ -4,6 +4,7 @@ Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive :
 * Votre Document Unique
 * Les fiches d'Unités de Travail
 * Les risques par photo
+* Impression du plan du listing de risque avec photo et/ou avec le plan d'action par Groupement et/ou responsable
 * Les causeries sécurités
 * Votre affichage légal
 * Votre diffusion d'information
@@ -16,7 +17,7 @@ Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive :
 
 DigiRisk associé à la puissance de WordPressMU, vous permet de gérer l'ensemble de votre Système de Management de la Sécurité de façon homogène et en toute simplicité.
 DigiRisk intergre de facon native la possibilité de créer des modèles duplicables, il suffit de les personnaliser par société.
-Vous gérez un groupe avec plusieurs sociétés, une collectivité de communes, vous êtes consultants avec plusieurs clients la gestion avec WordPressMU est faites pour vous...
+Vous gérez un groupe avec plusieurs sociétés, une collectivité de communes, vous êtes consultants avec plusieurs clients la gestion avec WordPressMU est faite pour vous...
 
 # DigiRisk et autres plugins
 
