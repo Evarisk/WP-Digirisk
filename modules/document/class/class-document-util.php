@@ -93,7 +93,7 @@ class Document_Util_Class extends \eoxia\Singleton_Util {
 		}
 
 		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'http' ), ABSPATH, $picture_definition[0] ) );
-		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'https' ), ABSPATH, $picture_definition[0] ) );
+		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'https' ), ABSPATH, $picture_final_path ) );
 
 		$picture = array();
 

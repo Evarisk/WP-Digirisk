@@ -31,7 +31,7 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 6, 2 );
 
-		add_filter( 'digi_sheet_groupment_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
+		add_filter( 'digi_sheet_groupment_document_data', array( $this, 'callback_digi_document_data' ), 9, 2 );
 		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_header' ), 10, 2 );
 		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_risks' ), 20, 2 );
 		add_filter( 'digi_sheet_groupment_document_data', array( Document_Filter::g(), 'fill_evaluators' ), 30, 2 );

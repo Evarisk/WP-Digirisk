@@ -183,7 +183,7 @@ class DUER_Filter extends Identifier_Filter {
 				$risk = Corrective_Task_Class::g()->output_odt( $risk );
 
 				$risk_data = array(
-					'nomElement'                  => $risk->data['parent']->data['title'],
+					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'nomDanger'                   => $risk->data['risk_category']->data['name'],
@@ -195,11 +195,11 @@ class DUER_Filter extends Identifier_Filter {
 				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
 				$data[ 'planDactionRisq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
 
-				if ( empty( $quotationsTotal[ $risk->data['parent']->data['title'] ] ) ) {
-					$quotationsTotal[ $risk->data['parent']->data['title'] ] = 0;
+				if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
+					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
 				}
 
-				$quotationsTotal[ $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
+				$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 			}
 		}
 
