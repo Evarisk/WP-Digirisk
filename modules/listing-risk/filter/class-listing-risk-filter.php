@@ -67,15 +67,24 @@ class Listing_Risk_Filter {
 	 * @return mixed
 	 */
 	public function before_save_doc( $data, $args ) {
+
+		$identifier_filter = new Identifier_Filter();
+
 		$upload_dir = wp_upload_dir();
 
 		$type = '';
+		$model_name = '';
 
 		if ( 'listing_risk_picture' === $data['type'] ) {
 			$type = 'listing_risque_photo';
+			$model_name = '\digi\Listing_Risk_Picture_Model';
 		} else {
 			$type = 'listing_risque_action';
+			$model_name = '\digi\Listing_Risk_Corrective_Task_Model';
 		}
+
+		$data = $identifier_filter->construct_identifier( $data, array( 'model_name' => $model_name ) );
+		$data['document_meta']['reference'] = $data['unique_identifier'];
 
 		$data['title']  = current_time( 'Ymd' ) . '_';
 		$data['title'] .= $data['parent']->data['unique_identifier'] . '_' . sanitize_title( $type ) . '_';
@@ -137,7 +146,7 @@ class Listing_Risk_Filter {
 				$risk = Corrective_Task_Class::g()->output_odt( $risk );
 
 				$risk_odt = array(
-					'nomElement'                  => $risk->data['parent']->data['title'],
+					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'nomDanger'                   => $risk->data['risk_category']->data['name'],
