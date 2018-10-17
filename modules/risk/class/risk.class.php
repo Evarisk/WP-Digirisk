@@ -92,9 +92,6 @@ class Risk_Class extends \eoxia\Post_Class {
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 7.0.0
-	 *
-	 * @todo 24/01/2018: Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
 		$society = Society_Class::g()->show_by_type( $society_id );
@@ -118,7 +115,6 @@ class Risk_Class extends \eoxia\Post_Class {
 	 * Sauvegardes un risque dans la base de donnée.
 	 *
 	 * @since 6.5.0
-	 * @version 6.5.0
 	 *
 	 * @param  [type] $data                 [description]
 	 * @param  [type] $risk_category_id     [description]
@@ -133,9 +129,9 @@ class Risk_Class extends \eoxia\Post_Class {
 			$data['status'] = 'inherit';
 		}
 
-		$data['$push']['taxonomy'] = array(
-			'digi-category-risk' => $risk_category_id,
-			'digi-method'        => $method_evaluation_id,
+		$data['taxonomy'] = array(
+			'digi-category-risk' => array( $risk_category_id ),
+			'digi-method'        => array( $method_evaluation_id ),
 		);
 
 		$risk_category = Risk_Category_Class::g()->get( array( 'id' => $risk_category_id ), true );

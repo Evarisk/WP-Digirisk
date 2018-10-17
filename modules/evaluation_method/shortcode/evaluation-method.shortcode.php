@@ -44,6 +44,7 @@ class Evaluation_Method_Shortcode {
 
 		$risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
 
+		$can_edit_type_cotation       = (bool) get_option( 'edit_type_cotation', false );
 		$method_evaluation_simplified = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
 		$variables                    = $method_evaluation_simplified->data['variables'];
 
@@ -54,7 +55,7 @@ class Evaluation_Method_Shortcode {
 		}
 
 		if ( 'edit' === $display ) {
-			if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id ) {
+			if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id || $can_edit_type_cotation ) {
 				// Méthode simplifié.
 				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main-edit', array(
 					'risk'                         => $risk,
@@ -62,6 +63,7 @@ class Evaluation_Method_Shortcode {
 					'method_evaluation_simplified' => $method_evaluation_simplified,
 					'variables'                    => $variables,
 					'display'                      => $display,
+					'can_edit_type_cotation'       => $can_edit_type_cotation,
 				) );
 			} else {
 				// Tout autre méthode nécéssitant une modal.
