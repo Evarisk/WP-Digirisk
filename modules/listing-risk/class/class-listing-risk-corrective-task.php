@@ -69,7 +69,7 @@ class Listing_Risk_Corrective_Task_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix = 'LR';
+	public $element_prefix = 'LRA';
 
 	/**
 	 * Le nom pour le resgister post type
