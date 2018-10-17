@@ -34,10 +34,12 @@ class Identifier_Filter {
 			$called_class = str_replace( '_Class', '', $called_class );
 		}
 
-		$current_type = $called_class::g()->get_type();
+		if ( class_exists( $called_class ) ) {
+			$current_type = $called_class::g()->get_type();
 
-		add_filter( "eo_model_{$current_type}_before_post", array( $this, 'construct_identifier' ), 10, 2 );
-		add_filter( "eo_model_{$current_type}_after_get", array( $this, 'get_identifier' ), 10, 2 );
+			add_filter( "eo_model_{$current_type}_before_post", array( $this, 'construct_identifier' ), 10, 2 );
+			add_filter( "eo_model_{$current_type}_after_get", array( $this, 'get_identifier' ), 10, 2 );
+		}
 	}
 
 	/**
