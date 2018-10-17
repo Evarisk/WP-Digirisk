@@ -92,10 +92,15 @@ class Setting_Action {
 			return 0;
 		} );
 
+		$can_edit_risk_category = (bool) get_option( 'edit_risk_category', false );
+		$can_edit_type_cotation = (bool) get_option( 'edit_type_cotation', false );
+
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
-			'list_accronym'  => $list_accronym,
-			'dangers_preset' => $dangers_preset,
-			'default_tab'    => $default_tab,
+			'list_accronym'          => $list_accronym,
+			'dangers_preset'         => $dangers_preset,
+			'default_tab'            => $default_tab,
+			'can_edit_risk_category' => $can_edit_risk_category,
+			'can_edit_type_cotation' => $can_edit_type_cotation,
 		) );
 	}
 
@@ -187,11 +192,19 @@ class Setting_Action {
 	 */
 	public function ajax_save_general_settings_digirisk() {
 		check_ajax_referer( 'save_general_settings_digirisk' );
-		$domain_mail = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+
+		$domain_mail            = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		$can_edit_risk_category = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
+		$can_edit_type_cotation = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
+
 		if ( '' === $domain_mail ) {
 			wp_send_json_error();
 		}
+
 		update_option( 'digirisk_domain_mail', $domain_mail );
+		update_option( 'edit_risk_category', $can_edit_risk_category );
+		update_option( 'edit_type_cotation', $can_edit_type_cotation );
+
 		wp_send_json_success();
 	}
 }
