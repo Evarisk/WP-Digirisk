@@ -32,6 +32,10 @@ class Listing_Risk_Picture_Model extends Document_Model {
 			'meta_type' => 'single',
 			'field'     => 'document_meta',
 			'child'     => array(
+				'reference' => array(
+					'type'      => 'string',
+					'meta_type' => 'multiple',
+				),
 				'risk1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
