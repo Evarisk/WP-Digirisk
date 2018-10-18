@@ -31,8 +31,6 @@ class Document_Filter extends \eoxia\Singleton_Util {
 	 * @since 7.0.0
 	 */
 	protected function construct() {
-		add_filter( 'eo_model_sheet_groupment_before_post', array( $this, 'before_save_doc' ), 10, 2 );
-		add_filter( 'eo_model_sheet_workunit_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_registre_at_benin_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_duer_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_affichage_legal_A3_before_post', array( $this, 'before_save_doc' ), 10, 2 );
