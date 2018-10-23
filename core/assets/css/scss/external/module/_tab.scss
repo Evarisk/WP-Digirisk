@@ -1,0 +1,59 @@
+.wpeo-tab .tab-content{
+	&::after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+}
+
+.wpeo-tab .tab-list {
+	background: rgba(0,0,0,.1);
+
+	.tab-element {
+		margin-bottom: 0;
+		text-transform: none;
+		font-size: 14px !important;
+		padding: 1em 1.4em;
+		background: transparent;
+
+		&:hover {
+			background: rgba(0,0,0,0.1);
+		}
+		&.tab-active {
+			background: #fff;
+		}
+	}
+}
+
+/** Colors */
+.wpeo-tab .tab-list {
+	.tab-element {
+
+		&::before {
+			background: $color__primary;
+		}
+		/* Active */
+		&.tab-active {
+			color: $color__primary;
+
+			> a {
+				color: $color__primary;
+			}
+		}
+	}
+}
+
+/* Vertical */
+.wpeo-tab.tab-vertical {
+	.tab-list {
+		.tab-element {
+			/* Active */
+			&.tab-active {
+				color: $color__primary;
+				a {
+					color: $color__primary;
+				}
+			}
+		}
+	}
+}

@@ -13,7 +13,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 99999;
+	z-index: 99998;
 	background: rgba(39,42,53,.9);
 	opacity: 0;
 	pointer-events: none;
@@ -26,13 +26,9 @@
 			transform: translate(-50%, -50%);
 		}
 	}
-	&.no-close {
+	&.modal-force-display {
 		.modal-close {
 			display: none;
-		}
-		.modal-container .modal-footer {
-			opacity: 0.5;
-			pointer-events: none;
 		}
 	}
 }

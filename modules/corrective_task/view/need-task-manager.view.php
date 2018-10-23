@@ -2,7 +2,7 @@
 /**
  * Affiches le message comme quoi il faut installer Task Manager
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.2.5
  * @copyright 2015-2017 Evarisk

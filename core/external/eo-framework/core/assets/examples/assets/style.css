@@ -217,7 +217,7 @@ th {
 *,
 *:before,
 *:after {
- box-sizing: inherit;
+ box-sizing: border-box;
 }
 
 /* --------------------------------------
@@ -294,6 +294,7 @@ th {
 	text-decoration: none;
 	font-size: 14px;
 	line-height: 1.8;
+	transition: all 0.2s ease-out;
 }
 #page-sidebar li a:hover {
 	color: rgba(0,0,0,1);
@@ -302,6 +303,10 @@ th {
 	font-size: 18px;
 	color: rgba(0,0,0,0.8);
 	font-weight: 700;
+}
+#page-sidebar li a.active {
+	color: #957bbe;
+	padding-left: 6px;
 }
 
 /* --------------------------------------
@@ -356,4 +361,9 @@ th {
 }
 .box.secondary {
 	background: #80bdff;
+}
+
+.wpeo-notification.static {
+	position: static;
+	margin: 1em 0;
 }

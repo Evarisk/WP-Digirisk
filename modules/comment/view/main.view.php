@@ -2,7 +2,7 @@
 /**
  * Affichage principale pour les commentaires
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.1
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="comment-container">
 	<?php
-	\eoxia001\View_Util::exec( 'digirisk', 'comment', 'list', array(
+	\eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array(
 		'id' => $id,
 		'add_button' => $add_button,
 		'comment_new' => $comment_new,
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	if ( 'edit' === $display ) :
-		\eoxia001\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
 			'id' => $id,
 			'add_button' => $add_button,
 			'comment' => $comment_new,

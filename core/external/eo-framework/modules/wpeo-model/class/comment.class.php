@@ -2,30 +2,30 @@
 /**
  * Gestion des commentaires (POST, PUT, GET, DELETE)
  *
- * @author Jimmy Latour <dev@eoxia.com>
+ * @author Eoxia <dev@eoxia.com>
  * @since 0.1.0
- * @version 1.5.0
- * @copyright 2015-2017
- * @package WPEO_Model
+ * @version 1.0.0
+ * @copyright 2015-2018
+ * @package EO_Framework\EO_Model\Class
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia001\Comment_Class' ) ) {
+if ( ! class_exists( '\eoxia\Comment_Class' ) ) {
 	/**
 	 * Gestion des commentaires (POST, PUT, GET, DELETE)
 	 */
-	class Comment_Class extends Rest_Class {
+	class Comment_Class extends Object_Class {
 		/**
 		 * Le nom du modèle à utiliser.
 		 *
 		 * @var string
 		 */
-		protected $model_name = '\eoxia001\Comment_Model';
+		protected $model_name = '\eoxia\Comment_Model';
 
 		/**
 		 * La clé principale pour enregistrer les meta données.
@@ -39,7 +39,7 @@ if ( ! class_exists( '\eoxia001\Comment_Class' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $comment_type = '';
+		protected $type = 'ping';
 
 		/**
 		 * Slug de base pour la route dans l'api rest
@@ -61,80 +61,51 @@ if ( ! class_exists( '\eoxia001\Comment_Class' ) ) {
 		 * @var array
 		 */
 		protected $capabilities = array(
-			'get' => 'read',
-			'put' => 'moderate_comments',
-			'post' => 'moderate_comments',
+			'get'    => 'read',
+			'put'    => 'moderate_comments',
+			'post'   => 'moderate_comments',
 			'delete' => 'moderate_comments',
 		);
 
 		/**
-		 * Fonction de callback après avoir récupérer le modèle en mode GET.
+		 * Initialise pre_get_comments
 		 *
-		 * @var array
+		 * @since 1.0.0
+		 * @version 1.0.0
+		 *
+		 * @return void
 		 */
-		protected $after_get_function = array();
+		protected function construct() {
+			parent::construct();
+
+			if ( ! in_array( $this->get_type(), \eoxia\Config_Util::$init['eo-framework']->not__in_display_comment ) ) {
+				add_action( 'pre_get_comments', array( $this, 'callback_pre_get_comments' ) );
+			}
+		}
 
 		/**
-		 * Fonction de callback avant d'insérer les données en mode POST.
+		 * N'affiches pas les commentaires dans la liste des commentaires.
 		 *
-		 * @var array
+		 * @since 1.0.0
+		 * @version 1.0.0
+		 *
+		 * @param  WP_Comment_Query $query Query args.
+		 *
+		 * @return void
 		 */
-		protected $before_post_function = array();
+		public function callback_pre_get_comments( $query ) {
+			global $pagenow;
 
-		/**
-		 * Fonction de callback avant de dispatcher les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $before_model_post_function = array();
-
-		/**
-		 * Fonction de callback après avoir inséré les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $after_post_function = array();
-
-		/**
-		 * Fonction de callback avant de mêttre à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $before_put_function = array();
-
-		/**
-		 * Fonction de callback avant de dispatcher les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $before_model_put_function = array();
-
-		/**
-		 * Fonction de callback après avoir mis à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $after_put_function = array();
-
-		/**
-		 * Permet de récupérer le schéma avec les données du modèle par défault.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return Comment_Model
-		 */
-		public function get_schema() {
-			$model_name = $this->model_name;
-			$model = new $model_name( array() );
-			return $model->get_model();
+			if ( $query->query_vars['type'] !== $this->get_type() && 'edit-comments.php' === $pagenow ) {
+				$query->query_vars['type__not_in'] = array_merge( (array) $query->query_vars['type__not_in'], array( $this->get_type() ) );
+			}
 		}
 
 		/**
 		 * Récupères les données selon le modèle définis.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
 		 * @param array   $args Les paramètres de get_comments @https://codex.wordpress.org/Function_Reference/get_comments.
 		 * @param boolean $single Si on veut récupérer un tableau, ou qu'une seule entrée.
@@ -142,171 +113,144 @@ if ( ! class_exists( '\eoxia001\Comment_Class' ) ) {
 		 * @return Comment_Model
 		 */
 		public function get( $args = array(), $single = false ) {
-			$array_model = array();
-			$array_comment = array();
+			$array_comments = array();
 
-			if ( ! empty( $this->comment_type ) ) {
-				$args['type'] = $this->comment_type;
-				$args['status'] = '-34070';
-			}
+			$default_args = array(
+				'type' => $this->get_type(),
+			);
 
-			if ( empty( $args['status'] ) && ! empty( $this->status ) ) {
-				$args['status'] = $this->status;
-			}
-
+			// Si le paramètre "id" est passé on le transforme en "ID" qui est le paramètre attendu par get_comments.
+			// Dans un souci d'homogénéité du code, le paramètre "id" remplace "ID".
+			$args['id'] = ! empty( $args['comment_ID'] ) ? $args['comment_ID'] : ( isset( $args['id'] ) ? $args['id'] : null );
 			if ( ! empty( $args['id'] ) ) {
-				$array_comment[] = get_comment( $args['id'], ARRAY_A );
-			} elseif ( isset( $args['schema'] ) ) {
-				$array_comment[] = array();
-			} else {
-				$array_comment = get_comments( $args );
-			}
-
-			$list_comment = array();
-
-			if ( ! empty( $array_comment ) ) {
-				foreach ( $array_comment as $key => $comment ) {
-					$comment = (array) $comment;
-
-					if ( ! empty( $comment['comment_ID'] ) ) {
-						$list_meta = get_comment_meta( $comment['comment_ID'] );
-						foreach ( $list_meta as &$meta ) {
-							$meta = array_shift( $meta );
-						}
-
-						$comment = array_merge( $comment, $list_meta );
-
-						if ( ! empty( $comment[ $this->meta_key ] ) ) {
-							$comment = array_merge( $comment, json_decode( $comment[ $this->meta_key ], true ) );
-							unset( $comment[ $this->meta_key ] );
-						}
-					}
-
-					$model_name = $this->model_name;
-					$list_comment[ $key ] = new $model_name( $comment );
-					$list_comment[ $key ] = Model_Util::exec_callback( $list_comment[ $key ], $this->after_get_function );
+				if ( isset( $args['comment_ID'] ) ) {
+					unset( $args['comment_ID'] );
 				}
-			} else {
-				$model_name = $this->model_name;
-				$list_comment[0] = new $model_name( array() );
-				$list_comment[0] = Model_Util::exec_callback( $list_comment[0], $this->after_get_function );
-			} // End if().
+				if ( ! isset( $args['comment__in'] ) ) {
+					$args['comment__in'] = array();
+				}
+				$args['comment__in'] = array_merge( (array) $args['id'], $args['comment__in'] );
+			} elseif ( isset( $args['id'] ) ) {
+				$args['schema'] = true;
+			}
+			unset( $args['id'] );
 
-			if ( true === $single && 1 === count( $list_comment ) ) {
-				$list_comment = $list_comment[0];
+			$args_cb    = array(
+				'args'         => $args,
+				'default_args' => $default_args,
+			);
+			$final_args = apply_filters( 'eo_model_comment_before_get', wp_parse_args( $args, $default_args ), $args_cb );
+			// Il ne faut pas lancer plusieurs fois pour ping.
+			if ( 'ping' !== $this->get_type() ) {
+				$final_args = apply_filters( 'eo_model_' . $this->get_type() . '_before_get', $final_args, $args_cb );
 			}
 
-			return $list_comment;
+			// Si l'argument "schema" est présent c'est lui qui prend le dessus et ne va pas récupérer d'élément dans la base de données.
+			if ( isset( $args['schema'] ) ) {
+				$array_comments[] = $final_args;
+			} else { // On lance la requête pour récupèrer les "comments" demandés.
+				$array_comments = get_comments( $final_args );
+			}
+
+			// Traitement de la liste des résultats pour le retour.
+			$array_comments = $this->prepare_items_for_response( $array_comments, 'comment', $this->meta_key, 'comment_ID' );
+
+			// Si on a demandé qu'une seule entrée et qu'il n'y a bien qu'une seule entrée correspondant à la demande alors on ne retourne que cette entrée.
+			if ( true === $single && 1 === count( $array_comments ) ) {
+				$array_comments = $array_comments[0];
+			}
+
+			return $array_comments;
 		}
 
 		/**
-		 * Appelle la méthode update.
+		 * Insère ou met à jour les données dans la base de données.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
-		 * @param  Array $data Les données.
-		 * @return Array $data Les données
-		 */
-		public function create( $data ) {
-			return $this->update( $data );
-		}
-
-		/**
-		 * Insère ou met à jour les données dans la base de donnée.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @param  Array $data Les données a insérer ou à mêttre à jour.
-		 * @return Object      L'objet construit grâce au modèle.
+		 * @param  Array $data Les données a insérer ou à mettre à jour.
 		 */
 		public function update( $data ) {
-			$data = (array) $data;
 			$model_name = $this->model_name;
+			$data       = (array) $data;
+			$req_method = ( ! empty( $data['id'] ) ) ? 'put' : 'post';
+			$args_cb    = array(
+				'model_name' => $model_name,
+				'req_method' => $req_method,
+				'meta_key'   => $this->meta_key,
+			);
+
+			// Vérifie l'existence du type.
+			if ( empty( $data['type'] ) ) {
+				$data['type'] = $this->get_type();
+			}
 
 			if ( empty( $data['id'] ) ) {
-				$data = Model_Util::exec_callback( $data, $this->before_model_post_function );
-				$data = new $model_name( $data, array( false ) );
 
-				// Ajout du comment type et du status.
-				// @todo: Enlevez ce truc bizarre.
-				if ( empty( $data->type ) ) {
-					$data->type = $this->comment_type;
-					$data->status = '-34070';
+				if ( ! empty( $data['author_id'] ) ) {
+					$user = get_userdata( $data['author_id'] );
+				} else {
+					$user = wp_get_current_user();
 				}
 
-				$data = Model_Util::exec_callback( $data, $this->before_post_function );
+				if ( $user->exists() ) {
+					if ( empty( $data['author_id'] ) ) {
+						$data['author_id'] = $user->ID;
+					}
 
-				if ( ! empty( $data->error ) && $data->error ) {
-					return false;
+					if ( empty( $data['author_nicename'] ) ) {
+						$data['author_nicename'] = $user->display_name;
+					}
+
+					if ( empty( $data['author_email'] ) ) {
+						$data['author_email'] = $user->user_email;
+					}
+
+					if ( empty( $data['author_url'] ) ) {
+						$data['author_url'] = $user->user_url;
+					}
+				}
+			}
+
+			$data = apply_filters( 'eo_model_comment_before_' . $req_method, $data, $args_cb );
+			// Il ne faut pas lancer plusieurs fois pour ping.
+			if ( 'ping' !== $this->get_type() ) {
+				$data = apply_filters( 'eo_model_' . $this->get_type() . '_before_' . $req_method, $data, $args_cb );
+			}
+			$args_cb['data'] = $data;
+
+			$object = new $model_name( $data, $req_method );
+
+			if ( empty( $object->data['id'] ) ) {
+				add_filter( 'duplicate_comment_id', '__return_false' );
+				add_filter( 'pre_comment_approved', function( $approved, $comment_data ) {
+					return $comment_data['comment_approved'];
+				}, 10, 2 );
+				$inserted_comment = wp_insert_comment( $object->convert_to_wordpress() );
+				if ( is_wp_error( $inserted_comment ) ) {
+					return $inserted_comment;
 				}
 
-				$cloned_data = clone $data;
-				$data->id = wp_insert_comment( $cloned_data->do_wp_object() );
-
-				$data = Model_Util::exec_callback( $data, $this->after_post_function );
+				$object->data['id'] = $inserted_comment;
 			} else {
-				$data = Model_Util::exec_callback( $data, $this->before_model_put_function );
-				$current_data = $this->get( array(
-					'id' => $data['id'],
-				), true );
+				wp_update_comment( $object->convert_to_wordpress() );
+			}
 
-				$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
-				$data = new $model_name( (array) $obj_merged );
-				$data = Model_Util::exec_callback( $data, $this->before_put_function );
+			$object = apply_filters( 'eo_model_comment_after_' . $req_method, $object, $args_cb );
 
-				if ( ! empty( $data->error ) && $data->error ) {
-					return false;
-				}
+			$object = $this->get( array(
+				'id'     => $object->data['id'],
+				'status' => array( '1', 'trash' ),
+			), true );
 
-				$cloned_data = clone $data;
-				wp_update_comment( $cloned_data->do_wp_object() );
+			// Il ne faut pas lancer plusieurs fois pour ping.
+			if ( 'ping' !== $this->get_type() ) {
+				$object = apply_filters( 'eo_model_' . $this->get_type() . '_after_' . $req_method, $object, $args_cb );
+			}
 
-				$data = Model_Util::exec_callback( $data, $this->after_put_function );
-			} // End if().
-
-			Save_Meta_Class::g()->save_meta_data( $data, 'update_comment_meta', $this->meta_key );
-
-			return $data;
+			return $object;
 		}
 
-		/**
-		 * Renvoie le type du commentaire
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string Le type du commentaire.
-		 */
-		public function get_type() {
-			return $this->comment_type;
-		}
-
-		/**
-		 * Pourquoi cette function ?
-		 *
-		 * @todo: Pourquoi cette function ?
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string Le type du commentaire.
-		 */
-		public function get_post_type() {
-			return $this->get_type();
-		}
-
-		/**
-		 * Utile uniquement pour DigiRisk.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string L'identifiant des commentaires pour DigiRisk.
-		 */
-		public function get_identifier_helper() {
-			return $this->identifier_helper;
-		}
 	}
 } // End if().

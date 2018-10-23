@@ -2,7 +2,7 @@
 /**
  * Les filtres relatives aux utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 0.1
  * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
@@ -22,31 +22,20 @@ class User_Filter {
 	/**
 	 * Le constructeur ajoute le filtre digi_tab
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 7.0.0
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 3, 2 );
+		add_filter( 'eo_search_results_accident_user', array( $this, 'callback_eo_search' ) );
+		add_filter( 'eo_search_results_society_information_owner', array( $this, 'callback_eo_search' ) );
 	}
 
-	/**
-	 * Ajoutes l'onglet "Utilisateurs" dans les unités de travail.
-	 *
-	 * @param  array   $list_tab  La liste des onglets.
-	 * @param  integer $id        L'ID de la société.
-	 * @return array              La liste des onglets et ceux ajoutés par cette méthode.
-	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
-	 */
-	public function callback_tab( $list_tab, $id ) {
-		// $list_tab['digi-workunit']['user'] = array(
-		// 	'type' => 'text',
-		// 	'text' => __( 'Utilisateurs', 'digirisk' ),
-		// 	'title' => __( 'Les utilisateurs de', 'digirisk' ),
-		// );
-
-		return $list_tab;
+	public function callback_eo_search( $results ) {
+		if ( ! empty( $results ) ) {
+			foreach ( $results as &$result ) {
+				$result->data['displayname'] = User_Digi_Class::g()->element_prefix . $result->data['id'] . ' - ' . $result->data['displayname'];
+			}
+		}
+		return $results;
 	}
 }
 

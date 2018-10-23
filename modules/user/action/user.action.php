@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 1.0
  * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Les actions relatives aux utilisateurs
  */
-class User_Action extends \eoxia001\Singleton_Util {
+class User_Action extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur appelle les actions suivantes:
@@ -166,7 +166,7 @@ class User_Action extends \eoxia001\Singleton_Util {
 
 		ob_start();
 
-		\eoxia001\View_Util::exec( 'digirisk', 'user', 'list-user-affected', array( 'workunit' => $workunit, 'list_affected_user' => $list_affected_user ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'list-user-affected', array( 'workunit' => $workunit, 'list_affected_user' => $list_affected_user ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
@@ -208,7 +208,7 @@ class User_Action extends \eoxia001\Singleton_Util {
 		}
 
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 

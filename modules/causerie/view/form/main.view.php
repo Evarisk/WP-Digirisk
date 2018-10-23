@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			if ( ! empty( $causeries ) ) :
 				foreach ( $causeries as $causerie ) :
-					\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'form/list-item', array(
+					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/list-item', array(
 						'causerie' => $causerie,
 					) );
 				endforeach;
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<tfoot>
 			<?php
-			\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
 				'causerie' => $causerie_schema,
 			) );
 			?>

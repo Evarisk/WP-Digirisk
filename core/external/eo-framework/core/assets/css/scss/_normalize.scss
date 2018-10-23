@@ -130,6 +130,7 @@ textarea {
 	color: inherit;
 	font: inherit;
 	margin: 0;
+	box-shadow: none;
 }
 
 button {
@@ -207,10 +208,4 @@ table {
 td,
 th {
 	padding: 0;
-}
-
-*,
-*:before,
-*:after {
- box-sizing: inherit;
 }

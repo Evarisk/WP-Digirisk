@@ -5,10 +5,10 @@
  * Unite de travail
  * Risque
  *
- * @author Alexandre Techer <dev@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.5
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Unite de travail
  * Risque
  */
-class Export_Class extends \eoxia001\Singleton_Util {
+class Export_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le chemin vers le répertoire uploads/Digirisk/export
 	 *
@@ -65,7 +65,7 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 * Exportes tout le contenu d'un groupement
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.4
+	 * @version 6.5.0
 	 *
 	 * @param integer $parent_id (optional) Le groupement parent.
 	 *
@@ -76,7 +76,7 @@ class Export_Class extends \eoxia001\Singleton_Util {
 			'posts_per_page' => -1,
 			'post_type'      => array( 'digi-society', 'digi-group' ),
 			'post_parent'    => $parent_id,
-			'post_status'    => array( 'publish', 'draft' ),
+			'post_status'    => array( 'publish', 'inherit', 'draft' ),
 			'order'          => 'ASC',
 		) );
 
@@ -84,21 +84,22 @@ class Export_Class extends \eoxia001\Singleton_Util {
 
 		if ( ! empty( $list_group ) ) {
 			foreach ( $list_group as $element ) {
-				$element = get_full_group( $element );
+				$element = $this->get_full_group( $element );
 
 				uasort( $element->list_workunit, function( $a, $b ) {
-					return ( $a->id < $b->id ) ? -1 : 1;
+					return ( $a->data['id'] < $b->data['id'] ) ? -1 : 1;
 				});
 
 				$groupment_data_to_export = array(
-					'title'         => $element->title,
-					'slug'          => $element->slug,
-					'content'       => $element->content,
-					'link'          => $element->link,
-					'parent_id'     => $element->parent_id,
+					'title'         => $element->data['title'],
+					'slug'          => $element->data['slug'],
+					'status'        => $element->data['status'],
+					'content'       => $element->data['content'],
+					'link'          => $element->data['link'],
+					'parent_id'     => $element->data['parent_id'],
 					'list_workunit' => $this->export_workunits( $element->list_workunit ),
 					'list_risk'     => $this->export_risks( $element->list_risk ),
-					'list_group'    => $this->export_groupments( $element->id ),
+					'list_group'    => $this->export_groupments( $element->data['id'] ),
 				);
 
 				$list_data_exported[] = $groupment_data_to_export;
@@ -109,10 +110,47 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	}
 
 	/**
+	* Récupères tous les éléments nécessaires pour le fonctionnement d'un groupement
+	* Groupements enfant, Unités de travail enfant.
+	*
+	* @param  Group_Model $data L'objet.
+	* @return Group_Model L'objet avec tous les éléments ajoutés par cette méthode.
+	*/
+	function get_full_group( $element ) {
+		// Récupères les risques du groupement.
+		$element->list_risk = Risk_Class::g()->get( array( 'post_parent' => $element->data['id'] ) );
+
+		$element->list_workunit = Workunit_Class::g()->get( array( 'post_parent' => $element->data['id'], 'posts_per_page' => -1 ) );
+
+		if ( ! empty( $element->list_workunit ) ) {
+			foreach ( $element->list_workunit as $workunit ) {
+				$workunit->list_risk = Risk_Class::g()->get( array( 'post_parent' => $workunit->data['id'] ) );
+			}
+		}
+
+		$element->list_group = Group_Class::g()->get(
+			array(
+				'posts_per_page' 	=> -1,
+				'post_parent'			=> $element->data['id'],
+				'post_status' 		=> array( 'publish', 'draft' ),
+				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+			)
+		);
+
+		if ( ! empty( $element->list_group ) ) {
+			foreach ( $element->list_group as $group ) {
+				$group = get_full_group( $group );
+			}
+		}
+
+		return $element;
+	}
+
+	/**
 	 * Exportes les champs nécessaires des unités de travail.
 	 *
 	 * @since 6.1.5
-	 * @version 6.3.0
+	 * @version 6.5.0
 	 *
 	 * @param  array $workunits  Le tableau des unités de travail.
 	 * @return array
@@ -123,11 +161,12 @@ class Export_Class extends \eoxia001\Singleton_Util {
 		if ( ! empty( $workunits ) ) {
 			foreach ( $workunits as $element ) {
 				$tmp_workunit_data = array(
-					'title' => $element->title,
-					'slug' => $element->slug,
-					'content' => $element->content,
-					'link' => $element->link,
-					'parent_id' => $element->parent_id,
+					'title'     => $element->data['title'],
+					'slug'      => $element->data['slug'],
+					'status'    => $element->data['status'],
+					'content'   => $element->data['content'],
+					'link'      => $element->data['link'],
+					'parent_id' => $element->data['parent_id'],
 					'list_risk' => $this->export_risks( $element->list_risk ),
 				);
 
@@ -142,7 +181,7 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 * Exportes les champs nécessaires d'un risque.
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.1
+	 * @version 6.5.0
 	 *
 	 * @param  array $risks  Le tableau des risques.
 	 * @return array
@@ -153,15 +192,17 @@ class Export_Class extends \eoxia001\Singleton_Util {
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $element ) {
 				$tmp_risk_data = array(
-					'title'             => $element->title,
-					'slug'              => $element->slug,
-					'content'           => $element->content,
-					'link'              => $element->link,
-					'parent_id'         => $element->parent_id,
-					'danger_category'   => $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.
-					'evaluation'        => $this->export_evaluation( $element->evaluation ),
-					'evaluation_method' => $this->export_evaluation_method( $element->evaluation_method ),
-					'comment'           => $this->export_comments( $element->comment ),
+					'title'               => $element->data['title'],
+					'slug'                => $element->data['slug'],
+					'status'              => $element->data['status'],
+					'content'             => $element->data['content'],
+					'link'                => $element->data['link'],
+					'parent_id'           => $element->data['parent_id'],
+					'current_equivalence' => $element->data['current_equivalence'],
+					'danger_category'     => $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.
+					'evaluation'          => $this->export_evaluation( $element->data['evaluation'] ),
+					'evaluation_method'   => $this->export_evaluation_method( $element->data['evaluation_method'] ),
+					'comment'             => $this->export_comments( $element->data['comment'] ),
 				);
 
 				$data_risks_to_export[] = $tmp_risk_data;
@@ -182,9 +223,9 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 */
 	public function export_danger_category( $element ) {
 		$danger_category_data = array(
-			'name'      => $element->risk_category->name,
-			'slug'      => $element->risk_category->slug,
-			'parent_id' => $element->risk_category->parent_id,
+			'name'      => $element->data['risk_category']->data['name'],
+			'slug'      => $element->data['risk_category']->data['slug'],
+			'parent_id' => $element->data['risk_category']->data['parent_id'],
 		);
 
 		return $danger_category_data;
@@ -201,13 +242,14 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 */
 	public function export_evaluation( $evaluation ) {
 		$data = array(
-			'date' => $evaluation->date,
-			'content' => $evaluation->content,
-			'status' => $evaluation->status,
-			'risk_level' => $evaluation->risk_level,
-			'quotation_detail' => $evaluation->quotation_detail,
-			'scale' => $evaluation->scale,
-			'post_id' => $evaluation->post_id,
+			'date'             => $evaluation->data['date'],
+			'content'          => $evaluation->data['content'],
+			'status'           => $evaluation->data['status'],
+			'scale'            => $evaluation->data['scale'],
+			'cotation'         => $evaluation->data['cotation'],
+			'equivalence'      => $evaluation->data['equivalence'],
+			'variables'        => $evaluation->data['variables'],
+			'post_id'          => $evaluation->data['post_id'],
 		);
 
 		return $data;
@@ -224,9 +266,9 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 */
 	public function export_evaluation_method( $evaluation_method ) {
 		$data = array(
-			'name' => $evaluation_method->name,
-			'slug' => $evaluation_method->slug,
-			'parent_id' => $evaluation_method->parent_id,
+			'name'      => $evaluation_method->data['name'],
+			'slug'      => $evaluation_method->data['slug'],
+			'parent_id' => $evaluation_method->data['parent_id'],
 		);
 
 		return $data;
@@ -246,14 +288,14 @@ class Export_Class extends \eoxia001\Singleton_Util {
 
 		if ( ! empty( $comments ) ) {
 			foreach ( $comments as $element ) {
-				if ( ! empty( $element->id ) ) {
+				if ( ! empty( $element->data['id'] ) ) {
 					$tmp_comment_to_export = array(
-						'date' => $element->date,
-						'content' => $element->content,
-						'status' => $element->status,
-						'post_id' => $element->post_id,
-						'parent_id' => $element->parent_id,
-						'author_id' => $element->author_id,
+						'date'      => $element->data['date'],
+						'content'   => $element->data['content'],
+						'status'    => $element->data['status'],
+						'post_id'   => $element->data['post_id'],
+						'parent_id' => $element->data['parent_id'],
+						'author_id' => $element->data['author_id'],
 					);
 
 					$comments_to_export[] = $tmp_comment_to_export;
@@ -268,7 +310,6 @@ class Export_Class extends \eoxia001\Singleton_Util {
 	 * Créer le zip avec le fichier .json
 	 *
 	 * @since 6.1.5
-	 * @version 6.4.1
 	 *
 	 * @param array $list_data_exported La liste des données à exporter.
 	 * @return array
@@ -288,17 +329,18 @@ class Export_Class extends \eoxia001\Singleton_Util {
 
 		file_put_contents( $json_filename, wp_json_encode( $list_data_exported, JSON_PRETTY_PRINT ) );
 
-		/** Ajout du fichier json au fichier zip */
-		$sub_response = ZIP_Class::g()->create_zip( $export_base . '.zip', array(
-			array(
-				'link'     => $json_filename,
-				'filename' => basename( $json_filename ),
-			),
-		), $element, null );
+		$zip = new \ZipArchive();
+
+		if ( $zip->open( $export_base . '.zip', \ZipArchive::CREATE ) !== true ) {
+			$response['status']  = false;
+			$response['message'] = __( 'An error occured while opening zip file to write', 'digirisk' );
+			return $response;
+		}
+
+		$zip->addFile( $json_filename, basename( $json_filename ) );
+		$zip->close();
 
 		$response = array();
-
-		$response = array_merge( $response, $sub_response );
 
 		/** Suppression du fichier json après l'enregistrement dans le fichier zip / Delete the json file after zip saving */
 		@unlink( $json_filename );

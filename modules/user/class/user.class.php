@@ -2,78 +2,51 @@
 /**
  * Classe gérant les utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.5.0
- * @copyright 2015-2017 Evarisk
- * @package user
- * @subpackage class
+ * @author Evarisk <jimmy@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les utilisateurs
  */
-class User_Digi_Class extends \eoxia001\User_Class {
+class User_Digi_Class extends \eoxia\User_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name 	= '\digi\user_digi_model';
+	protected $model_name = '\digi\User_Digi_Model';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key		= '_wpeo_user_info';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans le script PHP
-	 *
-	 * @var array
-	 */
-	protected $before_model_post_function = array( '\digi\construct_login', '\digi\generate_password' );
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\build_user_initial', '\digi\build_avatar_color' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\build_user_initial' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\get_identifier', '\digi\build_user_initial', '\digi\force_avatar_color' );
+	protected $meta_key = '_wpeo_user_info';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base 	= 'user';
+	protected $base = 'user';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 	= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -83,19 +56,9 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	public $element_prefix = 'U';
 
 	/**
-	 * La limite des utilisateurs a affiché par page
-	 *
-	 * @var integer
-	 */
-	public $limit_user = 5;
-
-	/**
 	 * Le constructeur
 	 *
-	 * @return void
-	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	protected function construct() {
 		parent::construct();
@@ -107,65 +70,11 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	}
 
 	/**
-	 * Insère ou met à jour les données dans la base de donnée.
-	 *
-	 * @since 1.0.0.0
-	 * @version 1.3.0.0
-	 *
-	 * @param  Array $data Les données a insérer ou à mêttre à jour.
-	 * @return Object      L'objet construit grâce au modèle.
-	 */
-	public function update( $data ) {
-		$data = (array) $data;
-		$model_name = $this->model_name;
-
-		if ( empty( $data['id'] ) ) {
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_model_post_function );
-			$data = new $model_name( (array) $data );
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_post_function );
-
-			if ( ! empty( $data->error ) && $data->error ) {
-				return false;
-			}
-
-			while ( username_exists( $data->login ) ) {
-				$data->login .= rand( 1000, 9999 );
-			}
-
-			$data->id = wp_insert_user( $data->do_wp_object() );
-
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->after_post_function );
-		} else {
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_model_put_function );
-			$current_data = $this->get( array(
-				'id' => $data['id'],
-			), true );
-
-			$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
-			$data = new $model_name( (array) $obj_merged );
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->before_put_function );
-
-			if ( ! empty( $data->error ) && $data->error ) {
-				return false;
-			}
-
-			wp_update_user( $data->do_wp_object() );
-
-			$data = \eoxia001\Model_Util::exec_callback( $data, $this->after_put_function );
-		}
-
-		\eoxia001\Save_Meta_Class::g()->save_meta_data( $data, 'update_user_meta', $this->meta_key );
-
-		return $data;
-	}
-
-	/**
 	 * Ajout de la date de fin pour l'utilisateur
 	 *
 	 * @param object $user L'utilisateur courant.
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function callback_user_profile( $user ) {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
@@ -179,8 +88,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @param int $user_id L'ID de l'utilisateur.
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function callback_options_update( $user_id ) {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
@@ -196,8 +104,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 * @param object  $workunit L'objet parent.
 	 * @param integer $current_page La page courant.
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
 	 */
 	public function render( $workunit, $current_page = 1 ) {
 		$array = $this->list_affected_user( $workunit );
@@ -223,7 +130,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'main', array( 'current_page' => $current_page, 'list_affected_user' => $list_affected_user, 'list_affected_id' => $list_affected_id, 'list_user_to_assign' => $list_user_to_assign, 'number_page' => $number_page, 'workunit' => $workunit ) );
 	}
 
 	/**
@@ -231,8 +138,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @param object $workunit L'objet.
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function render_list_user_to_assign( $workunit ) {
 		$current_page = ! empty( $_REQUEST['next_page'] ) ? (int) $_REQUEST['next_page'] : 1;
@@ -257,7 +163,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 		$count_user = count( $this->get( $args_where_user ) );
 		$number_page = ceil( $count_user / $this->limit_user );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'list-user-to-assign', array( 'workunit' => $workunit, 'current_page' => $current_page, 'number_page' => $number_page, 'users' => $list_user_to_assign, 'list_affected_id' => $list_affected_id ) );
 	}
 
 	/**
@@ -268,8 +174,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @return array list users affected
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function list_affected_user( $workunit ) {
 		if ( !is_object( $workunit) ) {
@@ -312,8 +217,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @return array si aucun utilisateur n'a été spécifié | Un tableau contenant les utilisateurs actuellement affectés ou ayant été affectés auparavant / null if no user have been specified | An array with affected users or users who have been affected
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function build_list_for_document_export( $users ) {
 		if ( !is_array( $users ) ) {
@@ -362,8 +266,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @return bool
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function add_user( $data ) {
 		if ( empty( $data[0] ) && empty( $data[3] ) )
@@ -413,8 +316,7 @@ class User_Digi_Class extends \eoxia001\User_Class {
 	 *
 	 * @return bool|int La clé de l'utilisateur
 	 *
-	 * @since 0.1
-	 * @version 6.2.4.0
+	 * @since 6.0.0
 	 */
 	public function get_valid_in_workunit_by_user_id( $workunit, $user_id ) {
 
@@ -438,3 +340,5 @@ class User_Digi_Class extends \eoxia001\User_Class {
 		return $index_valid_key;
 	}
 }
+
+User_Digi_Class::g();

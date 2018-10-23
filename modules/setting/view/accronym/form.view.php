@@ -16,7 +16,7 @@ namespace digi; ?>
 	<?php wp_nonce_field( 'update_accronym' ); ?>
 
 	<?php
-	\eoxia001\View_Util::exec( 'digirisk', 'setting', 'accronym/list-item', array(
+	\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/list-item', array(
 		'list_accronym' => $list_accronym,
 	) );
 	?>

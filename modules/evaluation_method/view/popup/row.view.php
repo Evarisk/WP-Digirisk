@@ -2,10 +2,10 @@
 /**
  * La ligne des valeurs des variables de l'évaluation complexe de digirisk
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -15,26 +15,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr>
-	<td class="padding"><?php echo esc_html( $current_var_index ); ?></td>
+<div class="table-row">
+	<div class="table-cell"><?php echo esc_html( $variable->data['name'] ); ?></div>
 
 	<?php
-	for ( $x = 0; $x < $number_variables; $x++ ) :
-		$active = '';
+	if ( ! empty( $variable->data['survey']['request'] ) ) :
+		foreach ( $variable->data['survey']['request'] as $request ) :
+			$is_active = '';
 
-		if ( ! empty( $risk->evaluation ) && ! empty( $risk->evaluation->quotation_detail ) ) :
-			foreach ( $risk->evaluation->quotation_detail as $detail ) :
-				if ( ! empty( $detail['variable_id'] ) && $detail['variable_id'] == $list_evaluation_method_variable[ $x ]->id && $detail['value'] == $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['seuil'] ) :
-					$active = 'active';
-				endif;
-			endforeach;
-		endif;
-		?>
-
-		<td data-slug="<?php echo esc_attr( sanitize_title( $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['question'] ) ); ?>" class="<?php echo esc_attr( $active ); ?>" data-variable-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->id ); ?>"
-				data-seuil-id="<?php echo esc_attr( $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['seuil'] ); ?>">
-				<?php echo esc_html( ! empty( $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ] ) ? $list_evaluation_method_variable[ $x ]->survey['request'][ $current_var_index ]['question'] : '' ); ?>
-			</td>
-	<?php endfor; ?>
-
-</tr>
+			if ( $request['seuil'] == $selected_seuil && ! empty( $request['seuil'] ) ) :
+				$is_active = 'active';
+			endif;
+			?>
+			<div class="table-cell <?php echo isset( $request['seuil'] ) ? esc_attr( 'can-select' ) : ''; ?> <?php echo esc_attr( $is_active ); ?>"
+				data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
+				data-evaluation-id="<?php echo esc_attr( $evaluation_id ); ?>"
+				data-variable-id="<?php echo esc_attr( $variable->data['id'] ); ?>"
+				data-seuil="<?php echo esc_attr( $request['seuil'] ); ?>"><?php echo esc_html( $request['question'] ); ?></div>
+			<?php
+		endforeach;
+	endif;
+	?>
+</div>

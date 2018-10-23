@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Fichier du squelette du formulaire permettant de lancer l'importation des utilisateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @version 6.1.5.5
  * @copyright 2015-2016 Evarisk
  * @package user

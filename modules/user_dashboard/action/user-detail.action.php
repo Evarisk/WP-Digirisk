@@ -2,64 +2,27 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_detail_action extends \eoxia001\Singleton_Util {
+class user_detail_action extends \eoxia\Singleton_Util {
 	/**
 	* Le constructeur appelle les actions suivantes:
 	*/
 	protected function construct() {
-		add_action( 'wp_ajax_load_user_details', array( $this, 'load_user_detail' ) );
+		add_action( 'wp_ajax_load_user_detail', array( $this, 'load_user_detail' ) );
 		add_action( 'wp_ajax_load_data', array( $this, 'load_data' ) );
 	}
 
 	public function load_user_detail() {
-		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-		
-		if ( empty( $id ) ) {
+		$user_id = !empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
+
+		if ( $user_id === 0) {
 			wp_send_json_error();
 		}
-		
-		$societies = Group_Class::g()->get( array(
-			'posts_per_page' => -1,
-		) );
-		
-		$affected_to = array();
-		
-		if ( ! empty( $societies ) ) {
-			foreach ( $societies as $society ) {
-				if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
-					foreach ( $society->user_info['affected_id']['evaluator'] as $user_id => $data ) {
-						if ( $id === $user_id && ! array_key_exists( $society->id, $affected_to ) ) {
-							$affected_to[ $society->id ] = $society;
-						}
-					}
-				}
-			}
-		}
-		
-		$societies = Workunit_Class::g()->get( array(
-			'posts_per_page' => -1,
-		) );
-		
-		if ( ! empty( $societies ) ) {
-			foreach ( $societies as $society ) {
-				if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
-					foreach ( $society->user_info['affected_id']['evaluator'] as $user_id => $data ) {
-						if ( $id === $user_id && ! array_key_exists( $society->id, $affected_to ) ) {
-							$affected_to[ $society->id ] = $society;
-						}
-					}
-				}
-			}
-		}
-		
+
+		check_ajax_referer( 'ajax_view_user_detail_' . $user_id );
+
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'society/main', array(
-			'affected_to' => $affected_to,
-		) );		
-		$view = ob_get_clean();
-		wp_send_json_success( array(
-			'view' => $view,
-		) );
+		do_shortcode( '[digi-user-detail id=' . $user_id . ']' );
+		wp_send_json_success( array( 'template' => ob_get_clean() ) );
 	}
 
 	public function load_data() {

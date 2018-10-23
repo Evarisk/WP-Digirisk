@@ -2,7 +2,7 @@
 /**
  * Gestion des actions dans les commentaires
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -73,23 +73,23 @@ class Comment_Action {
 	}
 
 	/**
-	 * Supprimes un commentaire en le passant au status -34071 au lieu de -34072
+	 * Supprimes un commentaire.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
-	 *
-	 * @return void
 	 */
 	public function callback_delete_comment() {
-		check_ajax_referer( 'ajax_delete_comment_' . $_POST['id'] );
+		check_ajax_referer( 'ajax_delete_comment' );
 
-		if ( 0 === (int) $_POST['id'] ) {
+		$id           = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$type         = ! empty( $_POST['type'] ) ? $_POST['type'] : '';
+		$namespace    = ! empty( $_POST['namespace'] ) ? $_POST['namespace'] : '';
+		$model_name   = '\\' . $namespace . '\\' . $type . '_class';
+
+		if ( empty( $id ) ) {
 			wp_send_json_error();
-		} else {
-			$id = (int) $_POST['id'];
 		}
 
-		$comment = \eoxia001\Comment_Class::g()->get( array(
+		$comment = $model_name::g()->get( array(
 			'id' => $id,
 		), true );
 
@@ -97,9 +97,8 @@ class Comment_Action {
 			wp_send_json_error();
 		}
 
-		$comment->status = '-34071';
-
-		\eoxia001\Comment_Class::g()->update( $comment );
+		$comment->data['status'] = 'trash';
+		$model_name::g()->update( $comment->data );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

@@ -1,0 +1,86 @@
+/**
+ * Structure de la page
+ */
+
+
+.navigation-container, .main-container {
+	display: block;
+	float: left;
+	margin-top: 1em;
+}
+.navigation-container {
+	width: 24%;
+	padding-right: 10px;
+}
+.main-container {
+	width: 76%;
+	padding-left: 10px;
+}
+
+.main-content {
+	padding: 16px;
+	background: #fff;
+	&:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+	@media ( max-width: 480px ) {
+		padding: 16px 0;
+	}
+}
+
+&.wpdigi-installer .main-content {
+	margin-top: 20px;
+}
+
+/* CSS spécifique pour le champs domaine de l'email dans les utilisateurs */
+.email-domain {
+	float: right;
+	width: 100%;
+	max-width: 460px;
+	.form-element {
+		width: 80% !important;
+		float: left;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.navigation-container, .main-container {
+		float: none;
+	}
+	.navigation-container {
+		width: 100%;
+		padding-right: 0;
+	}
+	.main-container {
+		width: 100%;
+		margin-top: 20px;
+		padding-left: 0;
+	}
+}
+@media screen and (max-width: 680px) {
+	.navigation-container {
+		width: 100%;
+		padding-right: 0;
+	}
+	.main-container {
+		.main-header {
+			.unit-header {
+				width: 100%;
+			}
+			.save {
+				margin: 0 0 0 auto;
+			}
+			.dut {
+				display: none;
+			}
+		}
+	}
+}
+@media ( max-width: 480px ) {
+	padding: 10px 10px 10px 0;
+	.main-container {
+		margin-top: 0;
+	}
+}

@@ -100,7 +100,7 @@ class Causerie_Page_Action {
 		}
 
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'dashboard/modal-participants-list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/modal-participants-list', array(
 			'causerie' => $causerie_intervention,
 		) );
 
@@ -122,11 +122,11 @@ class Causerie_Page_Action {
 	 * @todo: FIXME 28/05/2018: nonce
 	 */
 	public function callback_start_causerie() {
-		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0; // WPCS: input var ok.
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->duplicate( $id );
 
-		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->id ) );
+		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->data['id'] ) );
 	}
 
 }

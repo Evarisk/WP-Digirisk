@@ -1,8 +1,7 @@
 /**
  * Initialise l'objet "society" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.0.0
  */
 window.eoxiaJS.digirisk.society = {};
 
@@ -21,10 +20,8 @@ window.eoxiaJS.digirisk.society.event = function() {
  * Si la touche laché est "entrée" on appuie sur le bouton "Enregistrer".
  *
  * @param  {KeyboardEvent} event L'état du clavier lors du "keyup"
- * @return {void}
  *
  * @since 6.0.0
- * @version 6.4.4
  */
 window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
 	jQuery( '.digirisk-wrap .main-container .main-header .unit-header .edit' ).hide();
@@ -39,10 +36,8 @@ window.eoxiaJS.digirisk.society.keyUpSaveIdentity = function( event ) {
  * Focus le titre de la société lors du clic sur le bouton "edit".
  *
  * @since 6.4.4
- * @version 6.4.4
  *
  * @param  {ClickEvent} event L'état de la souris.
- * @return {void}
  */
 window.eoxiaJS.digirisk.society.focusInputTitle = function( event ) {
 	jQuery( this ).closest( '.main-header' ).find( 'input[name="title"]' ).focus().select();
@@ -58,7 +53,6 @@ window.eoxiaJS.digirisk.society.focusInputTitle = function( event ) {
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.3.0
  */
 window.eoxiaJS.digirisk.society.enableSaveButton = function( event ) {
 	jQuery( '.digirisk-wrap .form.society-informations button.green' ).removeClass( 'disable' );
@@ -72,8 +66,7 @@ window.eoxiaJS.digirisk.society.enableSaveButton = function( event ) {
  * @param  {Object}        response            Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
  */
 window.eoxiaJS.digirisk.society.savedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
@@ -87,8 +80,7 @@ window.eoxiaJS.digirisk.society.savedSocietySuccess = function( element, respons
  * @param  {Object}        response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 0.1
- * @version 6.2.4.0
+ * @since 6.0.0
  */
 window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredElement, response ) {
 	jQuery( '.digirisk-wrap' ).replaceWith( response.data.template );
@@ -102,18 +94,19 @@ window.eoxiaJS.digirisk.society.deletedSocietySuccess = function( triggeredEleme
  * @param  {Object}        response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.0.0
  */
-window.eoxiaJS.digirisk.society.savedSocietyConfiguration = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( triggeredElement, response ) {
 	if ( 'digi-group' === response.data.society.type ) {
-		jQuery( '.digirisk-wrap .workunit-navigation .title' ).text( response.data.society.unique_identifier + ' - ' + response.data.society.title );
+		jQuery( '.digirisk-wrap .workunit-navigation .title' ).text( response.data.society.data.unique_identifier + ' - ' + response.data.society.data.title );
+	} else if ( 'digi-workunit' === response.data.society.type ) {
+		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.data.id + '"] span' ).text( response.data.society.data.title );
+		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.data.id + '"] span' ).attr( 'title', response.data.society.data.title );
 	} else {
-		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).text( response.data.society.title );
-		jQuery( '.digirisk-wrap .workunit-list span[data-workunit-id="' + response.data.society.id + '"] span' ).attr( 'title', response.data.society.title );
+		jQuery( '.digirisk-wrap .navigation-container .society-header .title' ).text( response.data.society.data.title );
 	}
 
-	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.title );
+	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.data.title );
 
 	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
 };

@@ -1,4 +1,22 @@
+/**
+ * @namespace EO_Framework_Attribute
+ *
+ * @author Eoxia <dev@eoxia.com>
+ * @copyright 2015-2018 Eoxia
+ */
+/*
+
+ */
 if ( ! jQuery.fn.get_data ) {
+
+	/**
+	 * [description]
+	 *
+	 * @memberof EO_Framework_Attribute
+	 *
+	 * @param  {Function} cb [description]
+	 * @returns {void}      [description]
+	 */
 	jQuery.fn.get_data = function( cb ) {
 		this.each( function() {
 			var data = {};

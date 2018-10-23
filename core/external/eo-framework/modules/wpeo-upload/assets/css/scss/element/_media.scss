@@ -1,0 +1,96 @@
+/*--------------------------------------------------------------
+# WPEO MEDIA
+	# .wpeo-media -> classe principale
+	# .no-file -> permet de savoir si le module possède une image ou non
+
+--------------------------------------------------------------*/
+
+.media, .wpeo-media {
+	display: block;
+	width: 50px;
+	min-width: 50px;
+	height: 50px;
+	position: relative;
+	background: rgba(0,0,0,0.1);
+	text-align: center;
+	@include transition;
+
+	.default-icon-container {
+		width: 100%;
+		line-height: 50px;
+		text-align: center;
+
+		.svg-inline--fa {
+			color: rgba(0,0,0,0.4);
+			line-height: 50px;
+			font-weight: 400;
+			font-size: 16px;
+		}
+	}
+	.button-add {
+		position: absolute;
+		display: inline-block;
+		pointer-events: none;
+		@include transition;
+	}
+
+	&:not(.no-file) .button-add {
+		opacity: 0;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		color: #fff;
+	}
+	&.no-file .button-add {
+		opacity: 1;
+		top: 10px;
+		right: 10px;
+		color: rgba(0,0,0,0.2);
+	}
+
+	&:hover {
+		cursor: pointer;
+		.button-add {
+			animation-fill-mode: both;
+			animation-duration: 1s;
+			opacity: 1;
+		}
+		&:not(.no-file) .button-add {
+			animation-name: fileAdd;
+		}
+		&.no-file .button-add {
+			animation-name: noFileAdd;
+		}
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/** Mode lecture seulement */
+.media, .wpeo-media {
+	&[data-mode="view"] {
+		&.no-file {
+			pointer-events: none;
+
+			&:hover {
+				cursor: auto;
+			}
+		}
+		.button-add {
+			display: none;
+		}
+	}
+}
+
+/* Document */
+.media, .wpeo-media {
+	&:not(.no-file) .document {
+		background: $color__blue;
+		.svg-inline--fa {
+			color: #fff !important;
+		}
+	}
+}

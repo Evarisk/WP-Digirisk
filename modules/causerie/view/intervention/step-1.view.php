@@ -13,16 +13,18 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} ?>
+}
+
+global $eo_search; ?>
 
 <ul>
-	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->number_time_realized ), 'digirisk' ); ?></li>
-	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->number_participants ), 'digirisk' ); ?></li>
+	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->data['number_time_realized'] ), 'digirisk' ); ?></li>
+	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->data['number_participants'] ), 'digirisk' ); ?></li>
 
-	<?php if ( $main_causerie->number_time_realized > 0 ) : ?>
+	<?php if ( $main_causerie->data['number_time_realized'] > 0 ) : ?>
 		<li>
 			<span><?php esc_html_e( 'Réalisée pour la dernière fois le', 'digirisk' ); ?></span>
-			<span><?php echo esc_html( $main_causerie->last_date_realized['date_input']['fr_FR']['date'] ); ?></span>
+			<span><?php echo esc_html( $main_causerie->data['last_date_realized']['rendered']['date'] ); ?></span>
 		</li>
 	<?php endif; ?>
 
@@ -41,18 +43,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tbody>
 		<tr class="item">
 			<td class="padding tooltip red former-tooltip" aria-label="<?php esc_attr_e( 'Veuillez renseigner le formateur', 'digirisk' ); ?>">
-				<input type="text"
-							data-field="former_id"
-							data-type="user"
-							placeholder=""
-							class="digi-search"
-							value="" />
-				<input type="hidden" name="former_id" value="" />
-				<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->id ); ?>" />
+				<?php $eo_search->display( 'causerie_former' ); ?>
+				<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->data['id'] ); ?>" />
 				<input type="hidden" name="is_former" value="true" />
 			</td>
 
-			<?php if ( empty( $final_causerie->former['signature_id'] ) ) : ?>
+			<?php if ( empty( $final_causerie->data['former']['signature_id'] ) ) : ?>
 				<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du formateur est obligatoire', 'digirisk' ); ?>">
 					<div class="button blue disabled wpeo-modal-event tooltip hover" aria-label="<?php esc_attr_e( 'Veuillez sélectionner un formateur avant de signer', 'digirisk' ); ?>"
 						data-parent="signature"
@@ -60,13 +56,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
 					</div>
 					<?php
-					\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 						'action' => 'causerie_save_signature',
 					) );
 					?>
 				</td>
 			<?php else : ?>
-				<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->former['signature_id'] ) ); ?>"</td>
+				<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->data['former']['signature_id'] ) ); ?>"</td>
 			<?php endif; ?>
 		</tr>
 	</tbody>
@@ -80,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-parent="ajax-content"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"
-	data-id="<?php echo esc_attr( $final_causerie->id ); ?>"
+	data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>"
 	data-namespace="digirisk"
 	data-module="causerie"
 	data-before-method="checkAllData">

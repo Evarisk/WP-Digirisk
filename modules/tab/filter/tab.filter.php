@@ -2,7 +2,7 @@
 /**
  * Gestion des filtres relatifs aux onglets
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 0.1
  * @version 6.2.4.0
  * @copyright 2015-2017 Evarisk
@@ -38,7 +38,7 @@ class Tab_Filter {
 	 * @version 6.2.4.0
 	 */
 	public function callback_tab_content( $content, $element_id, $tab_to_display, $title ) {
-		\eoxia001\View_Util::exec( 'digirisk', 'tab', 'content', array( 'title' => $title, 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
+		\eoxia\View_Util::exec( 'digirisk', 'tab', 'content', array( 'title' => $title, 'content' => $content, 'element_id' => $element_id, 'tab_to_display' => $tab_to_display ), false );
 	}
 }
 

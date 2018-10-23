@@ -2,7 +2,7 @@
 /**
  * La liste des diffusions d'informations.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.10
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <tbody>
 	<?php if ( ! empty( $list_document ) ) : ?>
 		<?php foreach ( $list_document as $element ) : ?>
-			<?php \eoxia001\View_Util::exec( 'digirisk', 'diffusion_informations', 'list-item', array(
+			<?php \eoxia\View_Util::exec( 'digirisk', 'diffusion_informations', 'list-item', array(
 				'element' => $element,
 			) ); ?>
 		<?php endforeach; ?>

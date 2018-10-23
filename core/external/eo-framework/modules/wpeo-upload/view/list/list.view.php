@@ -2,14 +2,14 @@
 /**
  * List of media on the post.
  *
- * @author Eoxia
+ * @author Eoxia <dev@eoxia.com>
  * @since 1.2.0
  * @version 1.2.0
- * @copyright 2017
- * @package EO-Upload
+ * @copyright 2017-2018 Eoxia
+ * @package EO_Framework\EO_Upload\List\View
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$filename_only = basename( $filelink );
 			$fileurl_only = wp_get_attachment_url( $file_id );
 
-			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list-item.view.php' );
+			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list-item.view.php' );
 		endforeach;
 	else :
 		if ( 0 != $atts['id'] ) :

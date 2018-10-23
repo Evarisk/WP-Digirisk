@@ -2,20 +2,21 @@
 /**
  * Gestion des meta
  *
- * @author Jimmy Latour <dev@eoxia.com>
- * @since 1.0.0
- * @version 1.5.0
- * @copyright 2015-2017
- * @package WPEO_Model
+ * @author Eoxia <dev@eoxia.com>
+ * @since 0.1.0
+ * @version 1.0.0
+ * @copyright 2015-2018
+ * @package EO_Framework\EO_Model\Class
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia001\Save_Meta_Class' ) ) {
+if ( ! class_exists( '\eoxia\Save_Meta_Class' ) ) {
+
 	/**
 	 * Gestion des meta
 	 */
@@ -24,38 +25,38 @@ if ( ! class_exists( '\eoxia001\Save_Meta_Class' ) ) {
 		/**
 		 * Le constructeur
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 1.0.0
+		 * @version 1.0.0
 		 */
 		protected function construct() {}
 
 		/**
 		 * Apelle la méthode selon si la définition du champ est en meta "single" ou "multiple".
 		 *
+		 * @since 1.0.0
+		 * @version 1.0.0
+		 *
 		 * @param  object $object   L'objet courant.
 		 * @param  string $function La méthode a appeler.
 		 * @param  string $meta_key Le nom de la meta key.
-		 *
-		 * @since 1.0.0.0
-		 * @ersion 1.3.0.0
 		 */
 		public static function save_meta_data( $object, $function, $meta_key ) {
 			$schema = $object->get_model();
 
 			$list_meta_json = array();
 
-			if ( ! empty( $object->id ) ) {
+			if ( ! empty( $object->data['id'] ) ) {
 				foreach ( $schema as $field_name => $field_def ) {
-					if ( ! empty( $field_def['meta_type'] ) && isset( $object->$field_name ) ) {
+					if ( ! empty( $field_def['meta_type'] ) && isset( $object->data[ $field_name ] ) ) {
 						if ( 'single' === $field_def['meta_type'] ) {
-							self::g()->save_single_meta_data( $object->id, $object->$field_name, $function, $field_def['field'] );
+							self::g()->save_single_meta_data( $object->data['id'], $object->data[ $field_name ], $function, $field_def['field'] );
 						} else {
-							$list_meta_json[ $field_name ] = $object->$field_name;
+							$list_meta_json[ $field_name ] = $object->data[ $field_name ];
 						}
 					}
 				}
 
-				self::g()->save_multiple_meta_data( $object->id, $list_meta_json, $function, $meta_key );
+				self::g()->save_multiple_meta_data( $object->data['id'], $list_meta_json, $function, $meta_key );
 			}
 		}
 
@@ -67,8 +68,8 @@ if ( ! class_exists( '\eoxia001\Save_Meta_Class' ) ) {
 		 * @param string $function La function a appeler.
 		 * @param string $meta_key Le nom de la meta.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 1.0.0
+		 * @version 1.0.0
 		 */
 		private function save_single_meta_data( $id, $value, $function, $meta_key ) {
 			$data = $value;
@@ -93,12 +94,16 @@ if ( ! class_exists( '\eoxia001\Save_Meta_Class' ) ) {
 		 * @param string $function    La function a appeler.
 		 * @param string $meta_key    Le nom de la meta.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 1.0.0
+		 * @version 1.0.0
 		 */
 		private function save_multiple_meta_data( $id, $array_value, $function, $meta_key ) {
-			$data = \wp_json_encode( $array_value );
+			$data = wp_json_encode( $array_value );
+
+			// Pour échapper les caractères car les update_*_meta enlève un slashes après.
 			$data = addslashes( $data );
+
+			// Remplaces le paramètre $options de json_encode disponible à partir de php 5.4.0: JSON_UNESCAPED_UNICODE.
 			$data = preg_replace_callback( '/\\\\u([0-9a-f]{4})/i', function ( $matches ) {
 				$sym = mb_convert_encoding( pack( 'H*', $matches[1] ), 'UTF-8', 'UTF-16' );
 				return $sym;

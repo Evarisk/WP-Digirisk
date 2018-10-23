@@ -2,11 +2,11 @@
 /**
  * Fait l'affichage du template de la liste des documents uniques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.1
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Fait l'affichage du template de la liste des documents uniques
  */
 class DUER_Class extends Document_Class {
+
 	/**
 	 * Le nom du modèle
 	 *
@@ -31,7 +32,7 @@ class DUER_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'duer';
+	protected $type = 'duer';
 
 	/**
 	 * La taxonomy du post
@@ -70,27 +71,6 @@ class DUER_Class extends Document_Class {
 	public $element_prefix = 'DU';
 
 	/**
-	 * Fonctions appelées avant le PUT
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * Fonctions appelées après le GET
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
-	 * La limite des documents affichés par page
-	 *
-	 * @var integer
-	 */
-	protected $limit_document_per_page = 50;
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -105,92 +85,60 @@ class DUER_Class extends Document_Class {
 	protected $odt_name = 'document_unique';
 
 	/**
-	 * Récupères les données du dernier DUER généré et appelle le template main.view.php.
 	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 *
-	 * @since 1.0.0
-	 * @version 6.2.7
+	 * @param  [type] $element_id [description]
+	 * @return [type]             [description]
 	 */
-	public function display( $element_id ) {
+	public function display( $parent_id, $types, $can_add = true ) {
 		$element = $this->get( array(
 			'posts_per_page' => 1,
-			'order' => 'DESC',
-			'post_parent' => $element_id,
-			'post_status' => array( 'publish', 'inherit' ),
-		) );
-
-		if ( ! empty( $element[0] ) ) {
-			$element = $element[0];
-		}
+			'order'          => 'DESC',
+			'post_parent'    => $parent_id,
+			'post_status'    => array( 'publish', 'inherit' ),
+		), true );
 
 		if ( empty( $element ) ) {
 			$element = $this->get( array(
 				'schema' => true,
-			) );
-			$element = $element[0];
+			), true );
 		}
 
-		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'main', array(
-			'element' => $element,
-			'element_id' => $element_id,
-		) );
-	}
-
-	/**
-	 * Appelle le template list.view.php dans le dossier /view/document-unique
-	 *
-	 * @param  int $element_id L'ID de l'élement.
-	 * @return void
-	 *
-	 * @since 1.0
-	 * @version 6.2.7.0
-	 */
-	public function display_document_list( $element_id ) {
-		$list_document = $this->get( array(
-			'post_parent' => $element_id,
+		$documents = $this->get( array(
+			'post_parent' => $parent_id,
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'list', array(
-			'list_document' => $list_document,
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'main', array(
+			'element'    => $element,
+			'element_id' => $parent_id,
+			'documents'  => $documents,
 		) );
 	}
 
 	/**
-	 * Permet d'appeler l'affichage pour afficher un arbre de société pour voir la génération des ODT pour chaque société
+	 * Récupères les enfants pour l'affichage dans la popup pour générer le DUER.
+	 *
+	 * @since   6.2.3
 	 *
 	 * @param integer $parent_id L'ID de la société parent.
-	 * @return void
-	 *
-	 * @since 6.2.3.0
-	 * @version 6.2.3.0
 	 */
-	public function display_group_tree( $parent_id = 0 ) {
-		$groupments = Group_Class::g()->get(
+	public function display_childs( $parent_id = 0 ) {
+		$societies = Society_Class::g()->get(
 			array(
-				'posts_per_page' 	=> -1,
-				'post_parent'			=> $parent_id,
-				'post_status' 		=> array( 'publish', 'draft' ),
-				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
+				'posts_per_page' => -1,
+				'post_parent'    => $parent_id,
+				'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
+				'post_status'    => array( 'publish', 'inherit' ),
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'date'       => 'ASC',
+				),
 			)
 		);
 
-		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $groupments ) );
-	}
-
-	public function display_workunit_tree( $parent_id = 0 ) {
-		$workunits = Workunit_Class::g()->get(
-			array(
-				'posts_per_page' 	=> -1,
-				'post_parent'			=> $parent_id,
-				'post_status' 		=> array( 'publish', 'draft' ),
-				'orderby'					=> array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
-			)
-		);
-
-		\eoxia001\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array( 'societies' => $workunits ) );
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'tree/tree', array(
+			'societies' => $societies,
+		) );
 	}
 }
 

@@ -2,22 +2,25 @@
 /**
  * Gestion des termes (POST, PUT, GET, DELETE)
  *
- * @author Jimmy Latour <dev@eoxia.com>
- * @since 1.0.0
- * @version 1.5.0
- * @copyright 2015-2017
- * @package WPEO_Model
+ * @author Eoxia <dev@eoxia.com>
+ * @since 0.1.0
+ * @version 1.0.0
+ * @copyright 2015-2018
+ * @package EO_Framework\EO_Model\Class
  */
 
-namespace eoxia001;
+namespace eoxia;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-if ( ! class_exists( '\eoxia001\Term_Class' ) ) {
+if ( ! class_exists( '\eoxia\Term_Class' ) ) {
+
 	/**
 	 * Gestion des termes (POST, PUT, GET, DELETE)
 	 */
-	class Term_Class extends Rest_Class {
+	class Term_Class extends Object_Class {
 
 		/**
 		 * Le nom du modèle
@@ -38,14 +41,21 @@ if ( ! class_exists( '\eoxia001\Term_Class' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $taxonomy = 'category';
+		protected $type = 'category';
 
 		/**
 		 * Slug de base pour la route dans l'api rest
 		 *
 		 * @var string
 		 */
-		protected $base  = 'category';
+		protected $base = 'category';
+
+		/**
+		 * Pour l'association de la taxonomy
+		 *
+		 * @var string|array
+		 */
+		protected $associate_post_types = array();
 
 		/**
 		 * Utiles pour récupérer la clé unique
@@ -61,78 +71,50 @@ if ( ! class_exists( '\eoxia001\Term_Class' ) ) {
 		 * @var array
 		 */
 		protected $capabilities = array(
-			'get'			=> 'read',
-			'put' 		=> 'manage_categories',
-			'post' 		=> 'manage_categories',
-			'delete' 	=> 'manage_categories',
+			'get'    => 'read',
+			'put'    => 'manage_categories',
+			'post'   => 'manage_categories',
+			'delete' => 'manage_categories',
 		);
-
-		/**
-		 * Fonction de callback après avoir récupérer le modèle en mode GET.
-		 *
-		 * @var array
-		 */
-		protected $after_get_function = array();
-
-		/**
-		 * Fonction de callback avant d'insérer les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $before_post_function = array();
-
-		/**
-		 * Fonction de callback après avoir inséré les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $after_post_function = array();
-
-		/**
-		 * Fonction de callback avant de mêttre à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $before_put_function = array();
-
-		/**
-		 * Fonction de callback après avoir mis à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $after_put_function = array();
 
 		/**
 		 * Le constructeur
 		 *
 		 * @return void
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 */
 		protected function construct() {
 			parent::construct();
+
+			add_action( 'init', array( $this, 'callback_init' ) );
 		}
 
 		/**
-		 * Permet de récupérer le schéma avec les données du modèle par défault.
+		 * Initialise la taxonomie
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 1.0.0
+		 * @version 1.0.0
 		 *
-		 * @return Object
+		 * @return void
 		 */
-		public function get_schema() {
-			$model_name = $this->model_name;
-			$model = new $model_name( array(), array() );
-			return $model->get_model();
+		public function callback_init() {
+			$args = array(
+				'hierarchical'      => true,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'query_var'         => true,
+			);
+
+			register_taxonomy( $this->get_type(), $this->associate_post_types, $args );
 		}
 
 		/**
 		 * Récupères les données selon le modèle définis.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
 		 * @param array   $args Les paramètres de get_terms @https://codex.wordpress.org/Function_Reference/get_terms.
 		 * @param boolean $single Si on veut récupérer un tableau, ou qu'une seule entrée.
@@ -140,179 +122,125 @@ if ( ! class_exists( '\eoxia001\Term_Class' ) ) {
 		 * @return Object
 		 */
 		public function get( $args = array(), $single = false ) {
-			$list_term = array();
-			$array_term = array();
+			$array_terms = array();
 
-			$model_name = $this->model_name;
-
-			$term_final_args = array_merge( $args, array(
+			$default_args = array(
 				'hide_empty' => false,
-			) );
+				'taxonomy'   => $this->get_type(),
+			);
 
+			// Si le paramètre "id" est passé on le transforme en "include" qui est la paramètre attendu par WP_Term_Query.
+			// Dans un soucis d'homogénéité du code, le paramètre "id" remplace le paramètre "include" dans les appels de la fonction.
+			$args['id'] = ! empty( $args['term_id'] ) ? $args['term_id'] : ( isset( $args['id'] ) ? $args['id'] : null );
 			if ( ! empty( $args['id'] ) ) {
-				$array_term[] = get_term_by( 'id', $args['id'], $this->taxonomy, ARRAY_A );
-			} elseif ( ! empty( $args['post_id'] ) ) {
-				$array_term = wp_get_post_terms( $args['post_id'], $this->taxonomy, $term_final_args );
-
-				if ( empty( $array_term ) ) {
-					$array_term[] = array();
+				if ( isset( $args['term_id'] ) ) {
+					unset( $args['term_id'] );
 				}
-			} elseif ( isset( $args['schema'] ) ) {
-				$array_term[] = array();
-			} else {
-				$array_term = get_terms( $this->taxonomy, $term_final_args );
-			}
-
-			if ( ! empty( $array_term ) ) {
-				foreach ( $array_term as $key => $term ) {
-					$term = (array) $term;
-
-					if ( ! empty( $args['post_id'] ) ) {
-						$term['post_id'] = $args['post_id'];
-					}
-
-					if ( ! empty( $term['term_id'] ) ) {
-						$list_meta = get_term_meta( $term['term_id'] );
-						foreach ( $list_meta as &$meta ) {
-							$meta = array_shift( $meta );
-						}
-
-						$term = array_merge( $term, $list_meta );
-
-						if ( ! empty( $term[ $this->meta_key ] ) ) {
-							$term = array_merge( $term, json_decode( $term[ $this->meta_key ], true ) );
-							unset( $term[ $this->meta_key ] );
-						}
-					}
-
-					$list_term[ $key ] = new $model_name( $term );
-
-					$list_term[ $key ] = Model_Util::exec_callback( $list_term[ $key ], $this->after_get_function );
+				if ( ! isset( $args['include'] ) ) {
+					$args['include'] = array();
 				}
+				$args['include'] = array_merge( $args['include'], (array) $args['id'] );
+			} elseif ( isset( $args['id'] ) ) {
+				$args['schema'] = true;
+			}
+			unset( $args['id'] );
+
+			// @Todo: a voir pourquoi wp_get_post_terms et pas wp_get_object_terms et si pas d'autre moyen que ici.
+			// elseif ( isset( $args['post_id'] ) ) {
+			// 	$array_term = wp_get_post_terms( $args['post_id'], $this->get_type(), $term_final_args );
+			//
+			// 	if ( empty( $array_term ) ) {
+			// 		$array_term[] = array();
+			// 	}
+			// }
+
+			$args_cb    = array(
+				'args'         => $args,
+				'default_args' => $default_args,
+			);
+			$final_args = apply_filters( 'eo_model_term_before_get', wp_parse_args( $args, $default_args ), $args_cb );
+			// Il ne faut pas lancer plusieurs fois pour term.
+			if ( 'term' !== $this->get_type() ) {
+				$final_args = apply_filters( 'eo_model_' . $this->get_type() . '_before_get', $final_args, $args_cb );
 			}
 
-			if ( true === $single && 1 === count( $list_term ) ) {
-				$list_term = $list_term[0];
+			// Si l'argument "schema" est présent c'est lui qui prend le dessus et ne va pas récupérer d'élément dans la base de données.
+			if ( isset( $args['schema'] ) ) {
+				$array_terms[] = $final_args;
+			} else { // On lance la requête pour récupèrer les "terms" demandés.
+				$query_terms = new \WP_Term_Query( $final_args );
+				$array_terms = $query_terms->terms;
+				unset( $query_terms->terms );
 			}
 
-			return $list_term;
-		}
+			// Traitement de la liste des résultats pour le retour.
+			$array_terms = $this->prepare_items_for_response( $array_terms, 'term', $this->meta_key, 'term_id' );
 
-		/**
-		 * Appelle la méthode update.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @param  Array $data Les données.
-		 * @return Array $data Les données
-		 */
-		public function create( $data ) {
-			return $this->update( $data );
+			// Si on a demandé qu'une seule entrée et qu'il n'y a bien qu'une seule entrée correspondant à la demande alors on ne retourne que cette entrée.
+			if ( true === $single && 1 === count( $array_terms ) ) {
+				$array_terms = $array_terms[0];
+			}
+
+			return $array_terms;
 		}
 
 		/**
 		 * Insère ou met à jour les données dans la base de donnée.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
 		 * @param  Array $data Les données a insérer ou à mêttre à jour.
 		 * @return Object      L'objet construit grâce au modèle.
 		 */
 		public function update( $data ) {
 			$model_name = $this->model_name;
-			$object = new $model_name( (array) $data );
+			$data       = (array) $data;
+			$req_method = ( ! empty( $data['id'] ) ) ? 'put' : 'post';
+			$args_cb    = array(
+				'model_name' => $model_name,
+				'req_method' => $req_method,
+				'meta_key'   => $this->meta_key,
+			);
 
-			/**	Sauvegarde des données dans la base de données / Save data into database	*/
-			if ( empty( $object->id ) ) {
-				$object = Model_Util::exec_callback( $object, $this->before_post_function );
-				$wp_category_danger = wp_insert_term( $object->name, $this->get_taxonomy(), array(
-					'description'	=> ! empty( $object->description ) ? $object->description : '',
-					'slug'	=> ! empty( $object->slug ) ? $object->slug : sanitize_title( $object->name ),
-					'parent'	=> ! empty( $object->parent_id ) ? (int) $object->parent_id : 0,
-				) );
-				$object = Model_Util::exec_callback( $object, $this->after_post_function );
+			$data = apply_filters( 'eo_model_term_before_' . $req_method, $data, $args_cb );
+			// Il ne faut pas lancer plusieurs fois pour category.
+			if ( 'category' !== $this->get_type() ) {
+				$data = apply_filters( 'eo_model_' . $this->get_type() . '_before_' . $req_method, $data, $args_cb );
+			}
+			$args_cb['data'] = $data;
+
+			$object = new $model_name( $data, $req_method );
+
+			if ( empty( $object->data['id'] ) ) {
+				$term = wp_insert_term( $object->data['name'], $this->get_type(), $object->convert_to_wordpress() );
 			} else {
-				$object = Model_Util::exec_callback( $object, $this->before_put_function );
-
-				$cloned_object = clone $object;
-				$wp_category_danger = wp_update_term( $object->id, $this->get_taxonomy(), $cloned_object->do_wp_object() );
-				$object = Model_Util::exec_callback( $object, $this->after_put_function );
+				$term = wp_update_term( $object->data['id'], $this->get_type(), $object->convert_to_wordpress() );
 			}
 
-			if ( ! is_wp_error( $wp_category_danger ) ) {
-				$object->id = $wp_category_danger['term_id'];
-				$object->term_taxonomy_id = $wp_category_danger['term_taxonomy_id'];
-
-				save_meta_class::g()->save_meta_data( $object, 'update_term_meta', $this->meta_key );
-			} else {
-				if ( ! empty( $wp_category_danger->error_data['term_exists'] ) && is_int( $wp_category_danger->error_data['term_exists'] ) ) {
-					$list_term_model = $this->get( array(
-						'id' => $wp_category_danger->error_data['term_exists'],
-					) );
-					return $list_term_model[0];
-				} else {
-					return array();
+			if ( is_wp_error( $term ) ) {
+				if ( ! empty( $term->error_data['term_exists'] ) && is_int( $term->error_data['term_exists'] ) ) {
+					return $this->get( array(
+						'id' => $term->error_data['term_exists'],
+					), true );
 				}
+
+				return $term;
+			}
+
+			// Lors de la création, $object->data['id'] est vide là, du coup le get ne marchait pas.
+			$object->data['id'] = $term['term_id'];
+
+			$object = apply_filters( 'eo_model_term_after_' . $req_method, $object, $args_cb );
+			$object = $this->get( array( 'id' => $object->data['id'] ), true );
+
+			// Il ne faut pas lancer plusieurs fois pour category.
+			if ( 'category' !== $this->get_type() ) {
+				$object = apply_filters( 'eo_model_' . $this->get_type() . '_after_' . $req_method, $object, $args_cb );
 			}
 
 			return $object;
 		}
 
-		/**
-		 * Supprime un term
-		 *
-		 * @todo: Inutile ?
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @param int $id L'ID du term (term_id).
-		 */
-		public function delete( $id ) {
-			wp_delete_term( $id );
-		}
-
-		/**
-		 * Récupères la taxonomie
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.6.0
-		 *
-		 * @return string Le nom de la taxonomie
-		 */
-		public function get_taxonomy() {
-			return $this->taxonomy;
-		}
-
-		/**
-		 * Retourne la taxonomie
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string Le post type
-		 *
-		 * @todo: Doublon
-		 */
-		public function get_post_type() {
-			return $this->get_taxonomy();
-		}
-		public function get_type() {
-			return $this->get_taxonomy();
-		}
-
-		/**
-		 * Utile uniquement pour DigiRisk.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string L'identifiant des commentaires pour DigiRisk.
-		 */
-		public function get_identifier_helper() {
-			return $this->identifier_helper;
-		}
 	}
 } // End if().

@@ -2,8 +2,7 @@
  * Initialise l'objet "sheet_workunit" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  * Gères le callback en cas de réussite de la génération d'une fiche de poste.
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.2.4
  */
 
 window.eoxiaJS.digirisk.sheet_workunit = {};
@@ -18,9 +17,8 @@ window.eoxiaJS.digirisk.sheet_workunit.init = function() {};
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.2.4
  */
 window.eoxiaJS.digirisk.sheet_workunit.generatedFicheDePosteSuccess = function() {
-	jQuery( '.tab-element[data-action="digi-fiche-de-poste"]' ).click();
+	jQuery( '.tab-element[data-target="digi-fiche-de-poste"]' ).click();
 };

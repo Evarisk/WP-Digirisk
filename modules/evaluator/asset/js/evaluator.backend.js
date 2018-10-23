@@ -23,7 +23,7 @@ window.eoxiaJS.digirisk.evaluator.event = function() {
 * @version 6.3.1
 */
 window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
-	window.eoxiaJS.digirisk.search.renderChanged();
+	// window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -92,7 +92,7 @@ window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 	var nextPage = href[1].replace( 'current_page=', '' );
 	var elementId = href[2].replace( 'element_id=', '' );
 
-	jQuery( '.main-content .form-edit-evaluator-assign' ).addClass( 'loading' );
+	window.eoxiaJS.loader.display( jQuery( '.tab-content .form-edit-evaluator-assign' ) );
 
 	var data = {
 		action: 'paginate_evaluator',
@@ -103,7 +103,7 @@ window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 	event.preventDefault();
 
 	jQuery.post( window.ajaxurl, data, function( view ) {
-		jQuery( '.main-content .grid-layout' ).replaceWith( view );
+		jQuery( '.tab-content .wpeo-gridlayout' ).replaceWith( view );
 		window.eoxiaJS.digirisk.search.renderChanged();
 	} );
 };

@@ -2,7 +2,7 @@
 /**
  * Classe gérant l'historique des sociétés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.6.0
  * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Classe gérant l'historique des sociétés.
  */
-class Society_Historic_Class extends \eoxia001\Singleton_Util {
+class Society_Historic_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -47,7 +47,7 @@ class Society_Historic_Class extends \eoxia001\Singleton_Util {
 		$added_risks = $this->get_added_risks_in_period();
 		$added_risks_in_cotation = $this->get_added_risks_in_period_and_in_cotation( 4 );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'society', 'historic/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'historic/main', array(
 			'selected_society' => $selected_society,
 			'groupments' => $groupments,
 			'added_risks' => $added_risks,

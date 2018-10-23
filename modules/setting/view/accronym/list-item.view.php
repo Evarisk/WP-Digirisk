@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit; ?>
 	<?php
 	if ( !empty( $list_accronym ) ):
 	  foreach ( $list_accronym as $key => $element ):
-			\eoxia001\View_Util::exec( 'digirisk', 'setting', 'accronym/item', array( 'key' => $key, 'element' => $element ) );
+			\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/item', array( 'key' => $key, 'element' => $element ) );
 	  endforeach;
 	endif;
 	?>

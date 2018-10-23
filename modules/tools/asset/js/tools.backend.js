@@ -109,4 +109,4 @@ window.eoxiaJS.digirisk.tools.exec_request = function( li, data, element ) {
 		jQuery( element ).removeClass( "wp-digi-loading" );
 		li.innerHTML += ' ' + window.digi_tools_done;
 	} );
-},
+}

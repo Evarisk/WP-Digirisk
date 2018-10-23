@@ -1,0 +1,140 @@
+// Bouton plein
+.wpeo-button {
+	/* par défaut */
+	background: $color__primary;
+	border-color: $color__primary;
+
+	&.button-main {
+		background: $color__primary;
+		border-color: $color__primary;
+	}
+	&.button-dark {
+		background: $color__secondary;
+		border-color: $color__secondary;
+	}
+	&.button-grey {
+		background: $color__grey;
+		border-color: $color__grey;
+	}
+	&.button-red {
+		background: $color__red;
+		border-color: $color__red;
+	}
+	&.button-yellow {
+		background: $color__yellow;
+		border-color: $color__yellow;
+	}
+	&.button-green {
+		background: $color__green;
+		border-color: $color__green;
+	}
+	&.button-pink {
+		background: $color__pink;
+		border-color: $color__pink;
+	}
+	&.button-purple {
+		background: $color__purple;
+		border-color: $color__purple;
+	}
+	&.button-grey {
+		background: $color__grey;
+		border-color: $color__grey;
+	}
+	&.button-transparent {
+		background: transparent;
+		border-color: transparent;
+	}
+}
+
+// Bordered
+.wpeo-button.button-bordered {
+	border-color: $color__primary;
+	color: $color__primary;
+
+	&.button-main {
+		border-color: $color__primary;
+		color: $color__primary;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__primary;
+		}
+	}
+	&.button-dark {
+		border-color: $color__secondary;
+		color: $color__secondary;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__secondary;
+		}
+	}
+	&.button-grey {
+		border-color: $color__grey;
+		color: darken($color__grey, 30%);
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__grey;
+		}
+	}
+	&.button-red {
+		border-color: $color__red;
+		color: $color__red;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__red;
+		}
+	}
+	&.button-yellow {
+		border-color: $color__yellow;
+		color: $color__yellow;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__yellow;
+		}
+	}
+	&.button-green {
+		border-color: $color__green;
+		color: $color__green;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__green;
+		}
+	}
+	&.button-pink {
+		border-color: $color__pink;
+		color: $color__pink;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__pink;
+		}
+	}
+	&.button-purple {
+		border-color: $color__purple;
+		color: $color__purple;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__purple;
+		}
+	}
+	&.button-grey {
+		border-color: $color__grey;
+		color: $color__grey;
+		&:hover {
+			box-shadow: inset 0 -2.6em $color__grey;
+		}
+	}
+
+	&:hover {
+		box-shadow: inset 0 -2.6em $color__primary;
+	}
+}
+
+
+/** Progress button */
+.wpeo-button.button-progress {
+	&.button-success {
+		background: $color__green;
+		border-color: $color__green;
+	}
+	&.button-error {
+		background: $color__red;
+		border-color: $color__red;
+	}
+	&.button-load {
+		background: $color__grey;
+		&:before {
+			border-top: 3px solid $color__primary;
+		}
+	}
+}

@@ -2,11 +2,11 @@
 /**
  * L'affichage légal, inclus tous les templates nécessaires
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,25 +16,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" class="form" method="post">
-	<input type="hidden" name="action" value="save_legal_display" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
 	<?php wp_nonce_field( 'save_legal_display' ); ?>
 
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<?php
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/detective-work', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/detective-work', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/occupational-health-service', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/occupational-health-service', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/emergency-service', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/emergency-service', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/safety-rules', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/safety-rules', array(
 			'legal_display' => $legal_display,
 		) );
 
@@ -43,37 +42,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="clear">
 		<?php
-			\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/working-hours', array(
+			\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/working-hours', array(
 				'legal_display' => $legal_display,
 			) );
 
 		?>
 	</div>
 
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<?php
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/derogations-schedules', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/derogations-schedules', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/collective-agreement', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/collective-agreement', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/rule', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/rule', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/DUER', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/DUER', array(
 			'legal_display' => $legal_display,
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'legal_display', 'form/participation-agreement', array(
+		\eoxia\View_Util::exec( 'digirisk', 'legal_display', 'form/participation-agreement', array(
 			'legal_display' => $legal_display,
 		) );
 
 		?>
 	</div>
 
-	<button class="button blue action-input float right" data-parent="form"><i class="icon fa fa-refresh"></i><span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span></button>
+	<div class="alignright">
+		<button data-action="save_legal_display" class="wpeo-button button-main button-green action-input" data-parent="form">
+			<i class="button-icon far fa-sync-alt"></i>
+			<span><?php esc_html_e( 'Enregister les modifications', 'digirisk' ); ?></span>
+		</button>
+
+		<button data-action="generate_legal_display" class="wpeo-button button-main action-input" data-parent="form">
+			<i class="button-icon far fa-sync-alt"></i>
+			<span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span>
+		</button>
+	</div>
 </form>

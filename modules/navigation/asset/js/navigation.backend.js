@@ -1,8 +1,8 @@
 /**
  * Initialise l'objet "navigation" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 1.0.0
- * @version 6.3.0
+ * @since 6.0.0
+ * @version 7.0.0
  */
 
 window.eoxiaJS.digirisk.navigation = {};
@@ -12,7 +12,7 @@ window.eoxiaJS.digirisk.navigation = {};
  *
  * @return {void}
  *
- * @since 1.0.0
+ * @since 6.0.0
  * @version 6.2.4
  */
 window.eoxiaJS.digirisk.navigation.init = function() {
@@ -22,14 +22,14 @@ window.eoxiaJS.digirisk.navigation.init = function() {
 /**
  * La méthode contenant tous les évènements pour la navigation.
  *
- * @since 1.0.0
+ * @since 6.0.0
  * @version 6.3.0
  *
  * @return {void}
  */
 window.eoxiaJS.digirisk.navigation.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit-container .toggle-unit', window.eoxiaJS.digirisk.navigation.switchToggle );
-	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .button, .digirisk-wrap .navigation-container .mobile-add-container .item', window.eoxiaJS.digirisk.navigation.displayAddField );
+	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .add-container .wpeo-button, .digirisk-wrap .navigation-container .mobile-add-container .dropdown-item', window.eoxiaJS.digirisk.navigation.displayAddField );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .toolbar div', window.eoxiaJS.digirisk.navigation.toggleAll );
 	jQuery( document ).on( 'click', '.digirisk-wrap .navigation-container .unit.new .placeholder-icon', window.eoxiaJS.digirisk.navigation.focusField );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .navigation-container input[name="title"]', window.eoxiaJS.digirisk.navigation.triggerCreateSociety );
@@ -226,7 +226,7 @@ window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredEl
  * @return {void}
  *
  * @since 6.0.0
- * @version 6.3.0
+ * @version 7.0.0
  */
 window.eoxiaJS.digirisk.navigation.loadedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.view );

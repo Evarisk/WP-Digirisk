@@ -1,0 +1,13 @@
+{
+	"source": {
+		"include": ["core/assets/js/"],
+		"exclude": ["core/assets/js/dest/"]
+	},
+	"opts": {
+		"destination": "./docsjs"
+	},
+	"plugins": [
+		"plugins/summarize",
+		"plugins/markdown"
+	]
+}

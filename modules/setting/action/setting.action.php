@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux réglages de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -40,13 +40,14 @@ class Setting_Action {
 	/**
 	 * La fonction de callback de l'action admin_menu de WordPress
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.3.0
 	 */
 	public function admin_menu() {
-		add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+
+		if ( ! empty( $digirisk_core['installed'] ) ) {
+			add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+		}
 	}
 
 	/**
@@ -54,12 +55,11 @@ class Setting_Action {
 	 * et la liste des catégories de risque prédéfinies.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.0
 	 */
 	public function add_option_page() {
-		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general';
+		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general'; // WPCS: var input ok.
 
-		$list_accronym = get_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
 
 		global $wpdb;
@@ -67,32 +67,35 @@ class Setting_Action {
 		$preset_risks_id = $wpdb->get_col(
 			"SELECT RISK.ID FROM {$wpdb->posts} AS RISK
 				JOIN {$wpdb->postmeta} AS RISK_META ON RISK.ID=RISK_META.post_id
-			WHERE RISK.post_status != 'trash'
-				AND RISK_META.meta_key = '_wpdigi_preset'
+			WHERE RISK_META.meta_key = '_wpdigi_preset'
 				AND RISK_META.meta_value = 1" );
 
-		$dangers_preset = Risk_Class::g()->get( array(
-			'include' => $preset_risks_id,
-			'order' => 'ASC',
-		) );
+		$dangers_preset = array();
+
+		if ( ! empty( $preset_risks_id ) ) {
+			$dangers_preset = Risk_Class::g()->get( array(
+				'post__in' => $preset_risks_id,
+				'order'    => 'ASC',
+			) );
+		}
 
 		// Retravaille l'ordre pour respecter celui de l'INRS.
 		uasort( $dangers_preset, function( $a, $b ) {
-			if ( $a->risk_category->position === $b->risk_category->position ) {
+			if ( $a->data['risk_category']->data['position'] === $b->data['risk_category']->data['position'] ) {
 				return 0;
 			}
 
-			if ( $a->risk_category->position > $b->risk_category->position ) {
+			if ( $a->data['risk_category']->data['position'] > $b->data['risk_category']->data['position'] ) {
 				return 1;
 			}
 
 			return 0;
 		} );
-		
+
 		$can_edit_risk_category = (bool) get_option( 'edit_risk_category', false );
 		$can_edit_type_cotation = (bool) get_option( 'edit_type_cotation', false );
-		
-		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'main', array(
+
+		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'          => $list_accronym,
 			'dangers_preset'         => $dangers_preset,
 			'default_tab'            => $default_tab,
@@ -114,12 +117,12 @@ class Setting_Action {
 
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
-				$element['to'] = sanitize_text_field( $element['to'] );
+				$element['to']          = sanitize_text_field( $element['to'] );
 				$element['description'] = sanitize_text_field( stripslashes( $element['description'] ) );
 			}
 		}
 
-		update_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
+		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
 		wp_safe_redirect( admin_url( 'options-general.php?page=digirisk-setting&tab=digi-accronym' ) );
 	}
 
@@ -127,9 +130,6 @@ class Setting_Action {
 	 * Rajoutes la capacité "manager_digirisk" à tous les utilisateurs ou $have_capability est à true.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
-	 *
-	 * @return void
 	 */
 	public function callback_save_capability() {
 		check_ajax_referer( 'save_capability' );
@@ -147,8 +147,8 @@ class Setting_Action {
 		}
 
 		wp_send_json_success( array(
-			'namespace' => 'digirisk',
-			'module' => 'setting',
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
 			'callback_success' => 'savedCapability',
 		) );
 	}
@@ -185,14 +185,10 @@ class Setting_Action {
 		wp_die();
 	}
 
-
 	/**
 	 * Sauvegardes le domaine de l'email dans la page "Digirisk" dans le menu "Utilisateurs" de WordPress.
 	 *
-	 * @return void
-	 *
 	 * @since 6.0.0
-	 * @version 6.6.0
 	 */
 	public function ajax_save_general_settings_digirisk() {
 		check_ajax_referer( 'save_general_settings_digirisk' );
@@ -200,7 +196,7 @@ class Setting_Action {
 		$domain_mail            = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
 		$can_edit_risk_category = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
 		$can_edit_type_cotation = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
-		
+
 		if ( '' === $domain_mail ) {
 			wp_send_json_error();
 		}

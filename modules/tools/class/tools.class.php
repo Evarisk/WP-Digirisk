@@ -2,13 +2,13 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class tools_class extends \eoxia001\Singleton_Util {
+class tools_class extends \eoxia\Singleton_Util {
 
 	protected function construct() { }
 
 	public function reset_method_evaluation() {
 		// Récupères la méthode d'évaluation
-    $term_method_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_taxonomy() );
+    $term_method_evarisk = get_term_by( 'slug', 'evarisk', evaluation_method_class::g()->get_type() );
     $method_evaluation = evaluation_method_class::g()->get( array( 'id' => $term_method_evarisk->term_id ) );
 		$method_evaluation = $method_evaluation[0];
 
@@ -19,7 +19,7 @@ class tools_class extends \eoxia001\Singleton_Util {
     if ( !empty( $method_evaluation->formula ) ) {
       foreach ( $method_evaluation->formula as $element ) {
         if ( $element != '*' ) {
-          wp_delete_term( (int) $element, evaluation_method_class::g()->get_taxonomy() );
+          wp_delete_term( (int) $element, evaluation_method_class::g()->get_type() );
 
 					if ( !in_array( (int) $element, $list_old_variable_id ) ) {
 						$list_old_variable_id[] = (int)$element;
@@ -31,10 +31,10 @@ class tools_class extends \eoxia001\Singleton_Util {
     // Suppresion également des variables par leurs noms ( Au cas ou certains sont passé à coté de la première suppression )
     $array_slug = array( 'Gravite', 'Exposition', 'Occurence', 'Formation', 'Protection' );
     foreach ( $array_slug as $element ) {
-      $term = get_term_by( 'name', $element, evaluation_method_variable_class::g()->get_taxonomy() );
+      $term = get_term_by( 'name', $element, evaluation_method_variable_class::g()->get_type() );
       if ( !empty( $term ) && ( $term->term_id ) ) {
         // evaluation_method_variable_class::g()->delete( $term->term_id ); Ne supprimes pas le term ? bug
-        wp_delete_term( $term->term_id, evaluation_method_variable_class::g()->get_taxonomy() );
+        wp_delete_term( $term->term_id, evaluation_method_variable_class::g()->get_type() );
 
 				if ( !in_array( $term->term_id, $list_old_variable_id ) ) {
 					$list_old_variable_id[] = $term->term_id;
@@ -42,12 +42,12 @@ class tools_class extends \eoxia001\Singleton_Util {
       }
     }
 
-    // On met à jours la méthode d'évaluation pour enlever les formules
-    unset( $method_evaluation->formula );
-    $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
+		// On met à jours la méthode d'évaluation pour enlever les formules
+		$method_evaluation->formula = array();
+		$method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
 
     // Ajout des nouvelles variables
-    $file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
+    $file_content = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
 		$data = json_decode( $file_content );
 
     $data_variable_evarisk = array();
@@ -77,20 +77,19 @@ class tools_class extends \eoxia001\Singleton_Util {
 		tools_class::g()->fix_all_risk( $term_method_evarisk->term_id, $list_old_variable_id, $list_new_variable_id);
 	}
 
-  public function add_variable( $method_evaluation, $variable ) {
-    // On tente de crée les variables de la méthode d'évaluation
-    $evaluation_method_variable = evaluation_method_variable_class::g()->create( array(
-        'name' => $variable->name,
-        'description' => $variable->description,
-        'display_type' => $variable->option->display_type,
-        'range' => $variable->option->range,
-        'survey' => $variable->option->survey,
-    ) );
+	public function add_variable( $method_evaluation, $variable ) {
+		// On tente de crée les variables de la méthode d'évaluation
+		$evaluation_method_variable = evaluation_method_variable_class::g()->create( array(
+			'name'         => $variable->name,
+			'description'  => $variable->description,
+			'display_type' => $variable->option->display_type,
+			'range'        => $variable->option->range,
+			'survey'       => (array)$variable->option->survey,
+		) );
 
     if ( !is_wp_error( $evaluation_method_variable ) ) {
       $method_evaluation->formula[] = $evaluation_method_variable->id;
-      $method_evaluation->formula[] = "*";
-
+      $method_evaluation->formula[] = '*';
       $method_evaluation = evaluation_method_class::g()->update( $method_evaluation );
     }
 
@@ -104,12 +103,11 @@ class tools_class extends \eoxia001\Singleton_Util {
 
 		// On récupère les risques
 		$query = "SELECT ID FROM {$wpdb->posts} WHERE post_type=%s";
-		$list_post = $wpdb->get_results( $wpdb->prepare( $query, array( risk_class::g()->get_post_type() ) ) );
+		$list_post = $wpdb->get_results( $wpdb->prepare( $query, array( risk_class::g()->get_Type() ) ) );
 
 		if ( !empty( $list_post ) ) {
 		  foreach ( $list_post as $element ) {
-				$risk = risk_class::g()->get( array( 'id' => $element->ID ) );
-				$risk = $risk[0];
+				$risk = risk_class::g()->get( array( 'id' => $element->ID ), true );
 				if ( !empty( $risk->taxonomy['digi-method'][0] ) && $risk->taxonomy['digi-method'][0] == $term_method_evarisk_id ) {
 					$list_risk[] = $risk;
 				}

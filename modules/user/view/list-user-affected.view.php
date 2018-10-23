@@ -2,7 +2,7 @@
 /**
  * Le tableau des utilisateurs qui sont affectés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.3.0
  * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 									data-user-id="<?php echo esc_attr( $affected_user->id ); ?>"
 									data-loader="affected-users"
 									class="action-delete button w50 light delete">
-									<i class="icon fa fa-times"></i>
+									<i class="icon far fa-times"></i>
 							</a>
 						</div>
 						</td>

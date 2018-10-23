@@ -1,0 +1,9 @@
+.wpeo-modal {
+	.modal-container .modal-header {
+		.modal-close {
+			&:hover {
+				color: $color__primary;
+			}
+		}
+	}
+}

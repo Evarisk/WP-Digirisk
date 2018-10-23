@@ -2,23 +2,24 @@
 /**
  * Affiches la liste des risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1.0
- * @version 6.2.7.0
- * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage view
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <table class="table risk">
 	<thead>
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="w70"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
+			<th class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Cot', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
 			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
@@ -27,20 +28,24 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 	</thead>
 
 	<tbody>
-		<?php if ( ! empty( $risks ) ) :
+		<?php
+		if ( ! empty( $risks ) ) :
 			foreach ( $risks as $risk ) :
-				\eoxia001\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
+				\eoxia\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
 					'society_id' => $society_id,
-					'risk' => $risk,
+					'risk'       => $risk,
 				) );
 			endforeach;
-		endif; ?>
+		endif;
+		?>
 	</tbody>
 
 	<tfoot>
-		<?php \eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
-			'risk' => $risk_schema,
-		) ); ?>
+			'risk'       => $risk_schema,
+		) );
+		?>
 	</tfoot>
 </table>

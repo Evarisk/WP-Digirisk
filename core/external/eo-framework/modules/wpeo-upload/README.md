@@ -29,7 +29,7 @@ Les différents paramètres:
 * __title__ (string)        : Le titre de la galerie (popup). *default: "Téléverser un média".
 * __mode__ (string)         : Mode édition, ou vue. *default: "edit". Peut être "edit" ou "view".
 * __field_name__ (string)   : Le champ ou vas être enregistrer les ID des ressources. *defaut: thumbnail_id*
-* __model_name__ (string)   : Obligatoire pour **WPEO_Model**. *defaut: \\eoxia001\\Post_Class*
+* __model_name__ (string)   : Obligatoire pour **WPEO_Model**. *defaut: \\eoxia\\Post_Class*
 * __custom_class__ (string) : Utiles si vous devez utiliser plusieurs fois le bouton dans un même template pour le même POST. *defaut: empty*
 * __size__ (string)         :  Comme les tailles de WordPress: thumbnail, medium, full. *defaut: thumbnail*
 * __single__ (string)       :  Si vous voulez pouvoir uploader plusieurs ressources pour cet élément ou pas. *défaut: true*

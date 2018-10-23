@@ -32,7 +32,7 @@ class Transfert_Action {
 	 * Call wordpress hook for adding scripts and styles for backend
 	 */
 	public function backend_assets() {
-		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array(), \eoxia001\Config_Util::$init['digirisk']->version );
+		wp_enqueue_style( 'atst-backend-css', PLUGIN_DIGIRISK_URL . 'modules/transfer_data/asset/css/backend.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Transfert_Action {
 		check_ajax_referer( 'wpdigi-datas-transfert' );
 		global $wpdb;
 
-		$log_conf = \eoxia001\Config_Util::$init['wpeo_log'];
+		$log_conf = \eoxia\Config_Util::$init['wpeo_log'];
 		$log_conf->log = true;
 
 		$response = array(
@@ -118,7 +118,7 @@ class Transfert_Action {
 				update_option( '_wpdigirisk-dtransfert', $digirisk_transfert_options );
 
 				/** Met à jour l'option pour dire que l'installation est terminée */
-				update_option( \eoxia001\Config_Util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
+				update_option( \eoxia\Config_Util::$init['digirisk']->core_option, array( 'installed' => true, 'db_version' => 1 ) );
 			} elseif ( $element_done ) {
 				$sub_action = 'doc';
 
@@ -235,13 +235,13 @@ class Transfert_Action {
 									$set_parent = $wpdb->query( $query );
 									if ( false !== $set_parent ) {
 										$treated_tree_element[] = $element->id;
-										\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément parent %1$d a bien été associé à %2$d', 'wp-digi-dtrans-i18n' ), $element_parent->id, $element->id ), array( 'object_id' => $element->id ), 0 );
+										\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément parent %1$d a bien été associé à %2$d', 'wp-digi-dtrans-i18n' ), $element_parent->id, $element->id ), array( 'object_id' => $element->id ), 0 );
 									} else {
-										\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'Aucun parent n\'a pu être associé à %d', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 2 );
+										\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'Aucun parent n\'a pu être associé à %d', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 2 );
 									}
 								} else {
 									$treated_tree_element[] = $element->id;
-									\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément %d ne possédait pas d\'élément parent', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 1 );
+									\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT . '-tree', '', sprintf( __( 'L\'élément %d ne possédait pas d\'élément parent', 'wp-digi-dtrans-i18n' ), $element->id ), array( 'object_id' => $element->id ), 1 );
 								}
 							}
 						break;

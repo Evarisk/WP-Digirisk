@@ -20,15 +20,62 @@ window.eoxiaJS.digirisk.userDashboard.init = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.userDashboard.event = function() {
+	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr input', window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm );
+	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail );
 
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
 	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
+
+	jQuery( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', window.eoxiaJS.digirisk.userDashboard.save_domain_mail );
 };
 
+/**
+ * Vérifie si le domaine de l'email a un format valide.
+ *
+ * @param  {HTMLDivElement} triggeredElement
+ * @return {void}
+ *
+ * @since 6.2.5
+ * @version 6.2.5
+ */
+window.eoxiaJS.digirisk.userDashboard.checkDomainEmailValid = function( triggeredElement ) {
+	if ( ! window.regex.validateEndEmail( triggeredElement.closest( '.email-domain' ).find( 'input[type="text"]' ).val() ) ) {
+		triggeredElement.closest( '.email-domain' ).find( 'label' ).addClass( 'active' );
+		return false;
+	} else {
+		triggeredElement.closest( '.email-domain' ).find( 'label' ).removeClass( 'active' );
+		return true;
+	}
+};
+
+/**
+ * Envoies une requête pour enregister le domaine de l'email.
+ *
+ * @param  {ClickEvent} event L'état de la souris lors du clic sur le bouton.
+ *
+ * @return {void}
+ *
+ * @since 6.0.0
+ * @version 6.2.5
+ */
+window.eoxiaJS.digirisk.userDashboard.save_domain_mail = function( event ) {
+	var element = jQuery( this );
+	var data = {};
+
+	event.preventDefault();
+
+	data = {
+		action: 'save_domain_mail',
+		_wpnonce: element.data( 'nonce' ),
+		domain_mail: element.closest( '.form-element' ).find( 'input' ).val()
+	};
+
+	jQuery.post( window.ajaxurl, data );
+};
 
 /**
  * Lors qu'une touche est en status "keyup" on met à jour le champ de texte "email" avec les données du champs de texte "nom", "prénom" et "Domaine de l'email".
@@ -72,6 +119,23 @@ window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm = function( event ) {
 	}
 };
 
+/**
+ * Si la touche "entrée" est appuyé, appuies sur le bouton "plus" pour enregistrer le domaine de l'email.
+ *
+ * @param  {KeyEvent} event L'état du clavier lors de l'évènement "keyup"
+ * @return {void}
+ *
+ * @since 6.4.0
+ * @version 6.4.0
+ */
+window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail = function( event ) {
+	if ( 13 === event.keyCode ) {
+		jQuery( this ).closest( '.form' ).find( '.action-input' ).click();
+
+		event.preventDefault();
+		return false;
+	}
+};
 
 /**
  * Si la ligne a un contenu, change la couleur du bouton.
@@ -86,9 +150,9 @@ window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event )
 	var row = jQuery( this ).closest( 'tr' );
 
 	if ( row.find( 'input[name="firstname"]' ).val() && row.find( 'input[name="lastname"]' ).val() && row.find( 'input[name="email"]' ).val() ) {
-		row.find( '.action .button.disable' ).removeClass( 'disable' ).addClass( 'blue' );
+		row.find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 	} else {
-		row.find( '.action .button' ).addClass( 'disable' ).removeClass( 'blue' );
+		row.find( '.action .wpeo-button' ).addClass( 'button-disable' );
 	}
 };
 

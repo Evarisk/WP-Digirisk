@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+	<parser>
+		<target>docs</target>
+	</parser>
+	<transformer>
+		<target>docs</target>
+	</transformer>
+	<transformations>
+		<template name="eoxia" />
+	</transformations>
+	<files>
+		<directory>.</directory>
+		<ignore>*/index.php</ignore>
+	</files>
+</phpdoc>

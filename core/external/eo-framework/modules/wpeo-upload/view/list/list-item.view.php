@@ -2,14 +2,14 @@
 /**
  * The file.
  *
- * @author Eoxia
+ * @author Eoxia <dev@eoxia.com>
  * @since 1.2.0
  * @version 1.2.0
- * @copyright 2017
- * @package EO-Upload
+ * @copyright 2017-2018 Eoxia
+ * @package EO_Framework\EO_Upload\List\View
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <li>
 	<input type="hidden" name="<?php echo esc_attr( $field_name ) . '[]'; ?>" value="<?php echo esc_attr( $file_id ); ?>" />
 	<a target="_blank" href="<?php echo esc_attr( $fileurl_only ); ?>">
-		<i class="fa fa-download" aria-hidden="true"></i>
+		<i class="fas fa-download" aria-hidden="true"></i>
 		<?php echo esc_attr( $filename_only ); ?>
 	</a>
 </li>

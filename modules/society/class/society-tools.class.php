@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les sociétés dans la page outils.
  */
-class Society_Tools_Class extends \eoxia001\Singleton_Util {
+class Society_Tools_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Constructeur obligatoire pour Singleton_Util.

@@ -208,7 +208,7 @@ class Sheet_Causerie_Class extends Document_Class {
 				$data['utilisateurs']['value'][] = array(
 					'nomUtilisateur'    => $participant['rendered']['lastname'],
 					'prenomUtilisateur' => $participant['rendered']['firstname'],
-					'dateSignature'     => \eoxia001\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ),
+					'dateSignature'     => \eoxia\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ),
 					'signature'         => $this->set_picture( $participant['signature_id'], 5 ),
 				);
 			}

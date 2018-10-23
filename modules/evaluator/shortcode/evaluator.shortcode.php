@@ -1,35 +1,49 @@
-<?php namespace digi;
+<?php
 /**
-* Ajoutes un shortcode qui permet d'afficher le page des evaluateurs
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @version 0.1
-* @copyright 2015-2016 Eoxia
-* @package evaluator
-* @subpackage shortcode
-*/
+ * Ajoutes un shortcode qui permet d'afficher la liste de tous les documents uniques d'un établissement.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   6.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluator_shortcode {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Ajoutes un shortcode qui permet d'afficher la liste de tous les documents uniques d'un établissement.
+ */
+class Evaluator_Shortcode {
+
 	/**
-	* Le constructeur
-	*/
+	 * Le constructeur
+	 *
+	 * @since   6.0.0
+	 * @version 6.0.0
+	 */
 	public function __construct() {
 		add_shortcode( 'digi-evaluator', array( $this, 'callback_digi_evaluator' ) );
 	}
 
 	/**
-	* Affiches la page des evaluateurs
-	*
-	* @param array $param
-	*/
+	 * Affiches la page des evaluateurs
+	 *
+	 * @since   6.0.0
+	 * @version 6.0.0
+	 *
+	 * @param array $param Description.
+	 */
 	public function callback_digi_evaluator( $param ) {
 		$element_id = $param['post_id'];
-    $element = society_class::g()->show_by_type( $element_id );
+		$element    = Society_Class::g()->show_by_type( $element_id );
 
-		evaluator_class::g()->render( $element );
+		Evaluator_Class::g()->render( $element );
 	}
 }
 
-new evaluator_shortcode();
+new Evaluator_Shortcode();

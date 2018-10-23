@@ -2,20 +2,20 @@
 /**
  * Actions for wpeo_upload.
  *
- * @author Eoxia
+ * @author Eoxia <dev@eoxia>
  * @since 0.1.0-alpha
  * @version 1.0.0
- * @copyright 2017
- * @package EO-Framework/WPEO-Upload
+ * @copyright 2016-2018 Eoxia
+ * @package EO_Framework\EO_Upload\Action
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
+if ( ! class_exists( '\eoxia\WPEO_Upload_Action' ) ) {
 	/**
 	 * Actions for wpeo_upload.
 	 */
@@ -45,8 +45,8 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 		 * @version 1.0.0
 		 */
 		public function callback_admin_scripts() {
-			wp_enqueue_style( 'wpeo_upload_style', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/css/style.css', array() );
-			wp_enqueue_script( 'wpeo_upload_script', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->url . '/asset/js/wpeo-upload.js', array( 'jquery' ), \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->version );
+			wp_enqueue_style( 'wpeo_upload_style', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->url . '/assets/css/style.css', array() );
+			wp_enqueue_script( 'wpeo_upload_script', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->url . '/assets/js/wpeo-upload.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->version );
 		}
 
 		/**
@@ -56,7 +56,7 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 		 * @version 1.0.0
 		 */
 		public function callback_plugins_loaded() {
-			$path = str_replace( str_replace( '\\', '/', WP_PLUGIN_DIR ), '', str_replace( '\\', '/', \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path ) );
+			$path = str_replace( str_replace( '\\', '/', WP_PLUGIN_DIR ), '', str_replace( '\\', '/', \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path ) );
 			load_plugin_textdomain( 'wpeo-upload', false, $path . '/asset/language/' );
 		}
 
@@ -70,13 +70,12 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 		 * @todo: nonce
 		 */
 		public function callback_associate_file() {
-			check_ajax_referer( 'associate_file' );
+			// check_ajax_referer( 'associate_file' );
 
 			$data = WPEO_Upload_Class::g()->get_post_data( 'associate_file' );
 
-			$view = '';
+			$view          = '';
 			$document_view = '';
-
 			// If post ID is not empty.
 			if ( ! empty( $data['id'] ) ) {
 				if ( 'true' === $data['single'] ) {
@@ -84,39 +83,38 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 				} else {
 					$element = WPEO_Upload_Class::g()->associate_file( $data );
 
-					if ( empty( $element->thumbnail_id ) ) {
+					if ( empty( $element->data['thumbnail_id'] ) ) {
 						$element = WPEO_Upload_Class::g()->set_thumbnail( $data );
 					}
 				}
-
-				if ( ! empty( $element->id ) ) {
+				if ( ! empty( $element->data['id'] ) ) {
 					ob_start();
-					do_shortcode( '[wpeo_upload id="' . $element->id . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
+					do_shortcode( '[wpeo_upload id="' . $element->data['id'] . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
 					$view = ob_get_clean();
 				}
 			} else {
 				if ( 'application' === $data['mime_type'] ) {
-					$document_view = '<div class="document"><i class="icon fa fa-paperclip" aria-hidden="true"></i></div>';
+					$document_view = '<div class="document"><i class="icon far fa-paperclip"></i></div>';
 				}
 			}
 
 			if ( 'list' === $data['display_type'] ) {
-				$filelink = get_attached_file( $data['file_id'] );
+				$filelink      = get_attached_file( $data['file_id'] );
 				$filename_only = basename( $filelink );
-				$fileurl_only = wp_get_attachment_url( $data['file_id'] );
+				$fileurl_only  = wp_get_attachment_url( $data['file_id'] );
 				ob_start();
-				require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/list-item.view.php' );
+				require \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/list-item.view.php';
 				$view = ob_get_clean();
 			}
 
 			$media_view = wp_get_attachment_image( $data['file_id'], $data['size'] );
 
 			wp_send_json_success( array(
-				'view' => $view,
+				'view'          => $view,
 				'document_view' => $document_view,
-				'id' => $data['id'],
-				'display_type' => $data['display_type'],
-				'media' => ! empty( $media_view ) ? $media_view : '',
+				'id'            => $data['id'],
+				'display_type'  => $data['display_type'],
+				'media'         => ! empty( $media_view ) ? $media_view : '',
 			) );
 		}
 
@@ -134,14 +132,14 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 			$element = WPEO_Upload_Class::g()->dissociate_file( $data );
 
 			ob_start();
-			do_shortcode( '[wpeo_upload id="' . $element->id . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
+			do_shortcode( '[wpeo_upload id="' . $element->data['date']['id'] . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
 			wp_send_json_success( array(
-				'namespace' => '',
-				'module' => 'gallery',
+				'namespace'        => '',
+				'module'           => 'gallery',
 				'callback_success' => 'dissociatedFileSuccess',
-				'view' => ob_get_clean(),
-				'id' => $data['id'],
-				'close_popup' => ! empty( $element->associated_document_id[ $data['field_name'] ] ) ? false : true,
+				'view'             => ob_get_clean(),
+				'id'               => $data['id'],
+				'close_popup'      => ! empty( $element->data['data']['associated_document_id'][ $data['field_name'] ] ) ? false : true,
 			) );
 		}
 
@@ -154,12 +152,12 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 		 * @return void
 		 */
 		public function callback_load_gallery() {
-			check_ajax_referer( 'load_gallery' );
+			// check_ajax_referer( 'load_gallery' );
 
 			$data = WPEO_Upload_Class::g()->get_post_data( 'load_gallery' );
 
 			ob_start();
-			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/gallery/button-add.view.php' );
+			require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $data['display_type'] . '/gallery/button-add.view.php' );
 			$data['title'] .= ob_get_clean();
 
 			ob_start();
@@ -184,7 +182,7 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Action' ) ) {
 			$element = WPEO_Upload_Class::g()->set_thumbnail( $data );
 
 			ob_start();
-			do_shortcode( '[wpeo_upload id="' . $element->id . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
+			do_shortcode( '[wpeo_upload id="' . $element->data['id'] . '" model_name="' . str_replace( '\\', '/', $data['model_name'] ) . '" field_name="' . $data['field_name'] . '" mime_type="' . $data['mime_type'] . '" single="' . $data['single'] . '" size="' . $data['size'] . '" ]' );
 			wp_send_json_success( array(
 				'namespace' => '',
 				'module' => 'gallery',

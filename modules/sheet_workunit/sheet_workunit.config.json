@@ -1,14 +1,15 @@
 {
 	"name": "Sheet workunit",
 	"slug": "sheet_workunit",
-	"version": "6.4.4",
+	"since": "6.2.1",
+	"version": "7.0.0",
 	"description": "Le module gérant les fiches des unités de travail",
 	"path": "modules/sheet_workunit/",
 	"dependencies": {
 		"shortcode": {},
 		"model": {},
-		"filter": {},
 		"class": {},
+    "filter": {},
 		"action": {}
 	}
 }

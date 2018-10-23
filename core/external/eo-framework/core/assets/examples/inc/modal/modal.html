@@ -8,7 +8,7 @@
 	<!-- Le bouton déclenchant louverture de la popup -->
 	<a class="wpeo-button button-main wpeo-modal-event"
 		data-parent="parent-container"
-		data-target="wpeo-modal"><i class="button-icon fa fa-hand-pointer-o"></i> <span>Cliquer pour ouvrir la modal</span></a>
+		data-target="wpeo-modal"><i class="button-icon fal fa-hand-pointer"></i> <span>Cliquer pour ouvrir la modal</span></a>
 
 	<!-- Structure -->
 	<div class="wpeo-modal">
@@ -17,7 +17,7 @@
 			<!-- Entête -->
 			<div class="modal-header">
 				<h2 class="modal-title">Titre de la popup</h2>
-				<i class="modal-close fa fa-times"></i>
+				<div class="modal-close"><i class="fal fa-times"></i></div>
 			</div>
 
 			<!-- Corps -->
@@ -45,13 +45,13 @@
 <div class="parent-container">
 	<a class="wpeo-button button-main wpeo-modal-event"
 		data-parent="parent-container"
-		data-target="wpeo-modal"><i class="button-icon fa fa-hand-pointer-o"></i> <span>Cliquer pour ouvrir la modal</span></a>
+		data-target="wpeo-modal"><i class="button-icon fal fa-hand-pointer"></i> <span>Cliquer pour ouvrir la modal</span></a>
 
 	<div class="wpeo-modal">
 		<div class="modal-container">
 			<div class="modal-header">
 				<h2 class="modal-title">Titre de la popup</h2>
-				<i class="modal-close fa fa-times"></i>
+				<div class="modal-close"><i class="fal fa-times"></i></div>
 			</div>
 			<div class="modal-content">
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a libero nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus quis dui tincidunt, aliquam nibh nec, tempor lectus. Aenean laoreet ligula at mollis auctor. Suspendisse non laoreet mi, eget vestibulum mauris. Aenean bibendum arcu at augue commodo imperdiet. Nam a sapien placerat erat fermentum hendrerit. Nullam in ultricies lacus, vitae rutrum mauris. Nulla id cursus nibh. Nulla interdum libero tortor. Proin placerat nulla risus, eu euismod felis hendrerit a.</p>
@@ -66,3 +66,33 @@
 		</div>
 	</div>
 </div>
+
+<p class="entete">Bouton déclenchant l'ouverture d'une modal</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-main wpeo-modal-event"
+	data-parent="parent-container"
+	data-target="wpeo-modal">
+	<i class="button-icon fal fa-hand-pointer"></i> <span>Cliquer pour ouvrir la modal</span>
+</div>
+</script></code></pre>
+
+<p class="entete">Bouton déclenchant l'ouverture d'une modal avec une requête AJAX</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-main wpeo-modal-event"
+	data-action="load_modal_content">
+	<i class="button-icon fal fa-hand-pointer"></i> <span>Cliquer pour ouvrir la modal</span>
+</div>
+</script></code></pre>
+
+<p class="entete">Les attributs du bouton</p>
+<ul>
+	<li><strong>data-action</strong>: permet de lancer une action en AJAX</li>
+	<li><strong>data-title</strong>: permet de définir le titre de la modal</li>
+	<li><strong>data-parent</strong>: permet de définir le contenaire parent, cet attribut est <strong>obligatoire</strong> pour utiliser <strong>data-target</strong></li>
+	<li><strong>data-target</strong>: permet de cibler la modal définie dans la vue, cet attribute doit être utiliser avec <strong>data-parent</strong></li>
+</ul>
+
+<p class="entete">Envoyer des données en AJAX</p>
+<p>Tous les <strong>data-*</strong> dans le bouton sont envoyés dans la requête AJAX déclenché par le bouton</p>

@@ -58,13 +58,13 @@ window.eoxiaJS.digirisk.exportCSV.makeExport = function( event ) {
 	event.preventDefault();
 	jQuery( this ).closest( 'form' ).ajaxSubmit( {
 		'beforeSubmit': function() {
-			button.addClass( 'loading' );
+			window.eoxiaJS.loader.display( button );
 		},
 		success: function( response ) {
 			button.closest( 'form' ).find( 'progress' ).attr( 'max', response.data.number_risks );
 			button.closest( 'form' ).find( 'progress' ).val( ( response.data.offset / response.data.number_risks ) * response.data.number_risks );
 			if ( response.data.end ) {
-				button.removeClass( 'loading' );
+				window.eoxiaJS.loader.remove( button );
 				window.eoxiaJS.global.downloadFile( response.data.url_to_file, response.data.filename );
 				jQuery( '#digi-export-csv-form input[name="offset"]' ).val( 0 );
 				jQuery( '#digi-export-csv-form input[name="filepath"]' ).val( '' );

@@ -2,11 +2,11 @@
 /**
  * Ajoutes le shortcode pour gérer les catégories de risque.
  *
- * @author    Evarisk <dev@evarisk.com>
- * @since     6.4.0
- * @version   6.6.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.4.0
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -27,7 +27,7 @@ class Risk_Category_Shortcode {
 	 * @version 6.4.0
 	 */
 	public function __construct() {
-		add_shortcode( 'digi-dropdown-categories-risk', array( $this, 'callback_dropdown_categories_risk' ) );
+		add_shortcode( 'digi_dropdown_categories_risk', array( $this, 'callback_dropdown_categories_risk' ) );
 	}
 
 	/**
@@ -35,7 +35,6 @@ class Risk_Category_Shortcode {
 	 * Si le danger du risque est déjà défini, appel la vue danger-item.view.php
 	 *
 	 * @since 6.4.0
-	 * @version 6.6.0
 	 *
 	 * @param array $param {
 	 *                     Les propriété de tableau.
@@ -45,8 +44,6 @@ class Risk_Category_Shortcode {
 	 *                     @type string  $display          Le mode d'affichage: 'edit' ou 'view'.
 	 *                     @type integer $preset           1 ou 0.
 	 * }
-	 *
-	 * @return void
 	 */
 	public function callback_dropdown_categories_risk( $param ) {
 		$id               = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
@@ -55,12 +52,8 @@ class Risk_Category_Shortcode {
 		$preset           = ! empty( $param ) && ! empty( $param['preset'] ) ? (int) $param['preset'] : 0;
 
 		if ( 'edit' === $display ) {
-			$risk = Risk_Class::g()->get( array(
-				'id' => $id,
-			), true );
-
 			$risks_categories_preset = Risk_Class::g()->get( array(
-				'post_status' => array( 'publish' ),
+				'post_status' => array( 'publish', 'inherit' ),
 				'meta_query'  => array(
 					array(
 						'key'     => '_wpdigi_preset',
@@ -79,46 +72,43 @@ class Risk_Category_Shortcode {
 
 			if ( ! empty( $risks_categories ) ) {
 				foreach ( $risks_categories as &$risk_category ) {
-					$risk_category->is_preset = false;
+					$risk_category->data['is_preset'] = false;
 
 					// Est-ce que c'est une catégorie de risque prédéfinie ?
 					if ( ! empty( $risks_categories_preset ) ) {
 						foreach ( $risks_categories_preset as $risk_category_preset ) {
-							if ( ! empty( $risk_category_preset ) && ! empty( $risk_category_preset->taxonomy['digi-category-risk'] ) && $risk_category_preset->taxonomy['digi-category-risk'][0] === $risk_category->id && ! empty( $risk_category_preset->taxonomy['digi-method'] ) ) {
-								$risk_category->is_preset = true;
+							if ( $risk_category_preset->data['taxonomy']['digi-category-risk'][0] === $risk_category->data['id'] && ! empty( $risk_category_preset->data['taxonomy']['digi-method'] ) ) {
+								$risk_category->data['is_preset'] = true;
 								break;
 							}
 						}
 					}
 
-					if ( $risk_category->id === $category_risk_id ) {
+					if ( $risk_category->data['id'] === $category_risk_id ) {
 						$selected_risk_category = $risk_category;
 					}
 				}
 			}
 
-			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/dropdown', array(
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'category/dropdown', array(
 				'id'                     => $id,
 				'risks_categories'       => $risks_categories,
 				'preset'                 => $preset,
 				'selected_risk_category' => $selected_risk_category,
-				'risk'                   => $risk,
 			) );
 		} else {
 			$risk_category = null;
-			
+
 			if ( ! empty( $category_risk_id ) ) {
 				$risk_category = Risk_Category_Class::g()->get( array(
 					'id' => $category_risk_id,
 				), true );
 			}
-
-			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/item', array(
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'category/item', array(
 				'risk_category' => $risk_category,
 			) );
 		}
 	}
-
 }
 
 new Risk_Category_Shortcode();

@@ -1,0 +1,166 @@
+/**
+ * .cotation -> classe de base
+ * .default-cotation -> par défaut
+ * .level1 -> cotaiton 0
+ * .level2 -> cotation 48
+ * .level4 -> cotation 51
+ * .level5 -> cotation 80
+ * .method -> cotation personnalisée
+ */
+
+.cotation-container {
+	.dropdown-toggle {
+		&:hover {
+			background: rgba(0,0,0,0.1);
+		}
+	}
+}
+
+.cotation {
+	display: block;
+	width: 50px;
+	min-width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	transition: all 0.2s ease-out;
+	> * {
+		// line-height: 50px;
+	}
+
+	.icon {
+		font-size: 16px;
+	}
+	&:hover {
+		cursor: pointer;
+	}
+	&.default-cotation {
+		&:hover {
+			background: rgba(0,0,0,0.1);
+		}
+	}
+	&[data-scale="2"], &[data-scale="3"], &[data-scale="4"] {
+		color: #fff !important;
+	}
+	&[data-scale="1"], &.level1 {
+		background: #e2e2e2;
+		color: rgba(0,0,0,0.6);
+		&:hover {
+			background: darken(#e2e2e2, 8%);
+		}
+	}
+	&[data-scale="2"], &.level2 {
+		background: $color__yellow;
+		color: #fff;
+		&:hover {
+			background: darken($color__yellow, 8%);
+		}
+	}
+	&[data-scale="3"], &.level3 {
+		background: $color__red;
+		color: #fff;
+		&:hover {
+			background: darken($color__red, 8%);
+		}
+	}
+	&[data-scale="4"], &.level4 {
+		background: #2b2b2b;
+		color: #fff;
+		&:hover {
+			background: darken(#2b2b2b, 8%);
+		}
+	}
+	&.method {
+		background: $color__primary;
+		color: #fff;
+		&:hover {
+			background: $color__primary_dark;
+		}
+	}
+}
+
+/** table */
+.wpeo-modal {
+	.cotation {
+		float: left;
+	}
+}
+
+.wpeo-table.evaluation-method {
+	.table-header {
+		background: $color__secondary !important;
+
+		@media ( max-width: $media__small ) {
+			display: none;
+		}
+	}
+	.table-cell {
+		margin: 0;
+		text-align: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		padding: 0.8em 0.4em;
+		position: relative;
+
+		@media ( max-width: $media__small ) {
+			width: 100% !important;
+		}
+
+		&.can-select {
+			&::after {
+				display: block;
+				content: '';
+				position: absolute;
+				top: 0.4em;
+				right: 0.4em;
+				bottom: 0.4em;
+				left: 0.4em;
+				background: rgba(0,0,0,0.1);
+				transform: scale(0);
+				opacity: 0;
+				@include transition();
+			}
+			&:hover {
+				cursor: pointer;
+				&::after {
+					transform: scale(1);
+					opacity: 1;
+				}
+			}
+			&.active {
+				color: #fff;
+
+				&::after {
+					transform: scale(1) !important;
+					opacity: 1 !important;
+					background: $color__primary;
+					z-index: -1;
+				}
+			}
+		}
+	}
+	.table-row > .table-cell:first-child {
+		background: $color__primary;
+		color: #fff;
+
+		@media ( max-width: $media__small ) {
+			background: $color__secondary;
+		}
+	}
+	.table-row:not(.header) {
+		.table-cell:nth-of-type(2).active::after {
+			background: darken($color__primary, 0);
+		}
+		.table-cell:nth-of-type(3).active::after {
+			background: darken($color__primary, 15%);
+		}
+		.table-cell:nth-of-type(4).active::after {
+			background: darken($color__primary, 30%);
+		}
+		.table-cell:nth-of-type(5).active::after {
+			background: darken($color__primary, 45%);
+		}
+		.table-cell:nth-of-type(6).active::after {
+			background: darken($color__primary, 60%);
+		}
+	}
+}

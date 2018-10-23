@@ -57,12 +57,12 @@ class Update_660 {
 		$done = true;
 
 		wp_send_json_success( array(
-			'done' => $done,
-			'args' => array(
-				'more'            => true,
-				'moreDescription' => '0/' . count( $list_to_recompile ),
-				'count'           => count( $list_to_recompile ),
-			),
+			'updateComplete'    => false,
+			'done'              => true,
+			'progressionPerCent'       => '100',
+			'doneDescription'   => '',
+			'doneElementNumber' => 0,
+			'errors'            => null,
 		) );
 	}
 
@@ -92,13 +92,12 @@ class Update_660 {
 		}
 
 		wp_send_json_success( array(
-			'done' => $done,
-			'args' => array(
-				'more'            => true,
-				'index'           => $index,
-				'count'           => $count,
-				'moreDescription' => $index . '/' . $count,
-			),
+			'updateComplete'    => false,
+			'done'              => $done,
+			'progressionPerCent'       => '100',
+			'doneDescription'   => '',
+			'doneElementNumber' => $index,
+			'errors'            => null,
 		) );
 	}
 }

@@ -2,10 +2,10 @@
 /**
  * La classe gérant les accidents "stopping days"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les accidents "stopping days"
  */
-class Accident_Travail_Stopping_Day_Class extends \eoxia001\Post_Class {
+class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -32,7 +32,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia001\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-accident-day';
+	protected $type = 'digi-accident-day';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -63,34 +63,6 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia001\Post_Class {
 	public $element_prefix = 'AD';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array();
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la mise à jour de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_put_function = array();
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -109,18 +81,20 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia001\Post_Class {
 	public function save_stopping_day( $data ) {
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $stopping_day_data ) {
-				if ( isset( $stopping_day_data['content'] ) && strlen( $stopping_day_data['content'] ) > 0 ) {
-					$stopping_day = $this->update( $stopping_day_data );
+				if ( ! empty( $stopping_day_data['content'] ) && strlen( 0 < $stopping_day_data['content'] ) ) {
+					$stopping_day_data['parent_id'] = (int) $stopping_day_data['parent_id'];
+					$stopping_day_data['id']        = ! empty( $stopping_day_data['id'] ) ? (int) $stopping_day_data['id'] : 0;
+					$stopping_day                   = $this->update( $stopping_day_data );
 
 					$associate_file_args = array(
-						'id'         => $stopping_day->id,
+						'id'         => (int) $stopping_day->data['id'],
 						'field_name' => 'document',
 						'file_id'    => $_POST['document'], // WPCS: CSRF ok.
 						'model_name' => '\digi\Accident_Travail_Stopping_Day_Class',
 					);
 
 					if ( ! empty( $_POST['document'] ) ) { // WPCS: CSRF ok.
-						\eoxia001\WPEO_Upload_Class::g()->associate_file( $associate_file_args );
+						\eoxia\WPEO_Upload_Class::g()->associate_file( $associate_file_args );
 					}
 				}
 			}

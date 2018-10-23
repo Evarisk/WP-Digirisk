@@ -1,12 +1,11 @@
 {
 	"name": "Installeur",
 	"slug": "installer",
-	"since": "6.0.0",
-	"version": "6.6.0",
+	"since": "6.4.4",
 	"description": "Le module gérant la page d'installation de Digirisk",
 	"path": "modules/installer/",
 	"dependencies": {
-		"class": {},
-		"action": {}
+		"action": {},
+		"class": {}
 	}
 }

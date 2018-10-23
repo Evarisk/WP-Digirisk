@@ -1,112 +1,106 @@
 /**
  * Initialise l'objet "DUER" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.2.1
+ * @version 7.0.0
  */
 
 window.eoxiaJS.digirisk.DUER = {};
 
+/**
+ * Méthode obligatoire pour initialiser l'objet DUER avec EO-Framework.
+ *
+ * @since 6.2.1
+ * @version 6.2.1
+ *
+ * @return {void}
+ */
 window.eoxiaJS.digirisk.DUER.init = function() {
 	window.eoxiaJS.digirisk.DUER.event();
 };
 
-window.eoxiaJS.digirisk.DUER.event = function() {};
-
 /**
- * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
+ * Méthode pour initialiser tous les évènements.
  *
- * Remplis la popup avec:
- * -la balise <h2> qui est égale au titre data-title de triggeredElement.
- * -la balise <textarea> qui est égale au contenu du textarea de args.src dans le tableau de l'édition d'un DUER.
- * -Modifie le contenu de ".change-content" par un <textarea>. On modifie le contenu car la Popup est utilisé dans d'autres cas.
- * -Rend invisible la balise <p>. Cette balise <p> est utilisé quand on veut voir le contenu de la popup et non le modifier.
+ * @since   6.2.1
+ * @version 7.0.0
  *
- * -Met args.src dans l'attribut data-target du "bouton vert" qui permet de valider l'édition.
- *
- * @param  {HTMLSpanElement} triggeredElement L'icone qui déclenche l'action.
- * @param  {HTMLDivElement}  popupElement     La popup.
- * @param  {MouseEvent}      event            Le clic sur l'icone.
- * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
- * @return {void}
- *
- * @since 0.1
- * @version 6.2.4.0
+ * @return void
  */
-window.eoxiaJS.digirisk.DUER.fill_textarea_in_popup = function( triggeredElement, popupElement, event, args ) {
-	var textareaContent = '';
+window.eoxiaJS.digirisk.DUER.event = function() {
+	jQuery( document ).on( 'modal-opened', '.duer-modal', window.eoxiaJS.digirisk.DUER.modalOpened );
+	jQuery( document ).on( 'click', '.duer-modal .button-main', window.eoxiaJS.digirisk.DUER.applyValueToTextarea );
 
-	if ( args ) {
-		popupElement.find( 'h2' ).text( args.title );
-		popupElement.find( '.change-content' ).html( '<textarea class="hidden" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
-
-		// On récupères le textarea caché avec le contenu actuel.
-		textareaContent = triggeredElement.closest( 'tr' ).find( '.textarea-content-' + args.src ).val();
-		popupElement.find( 'textarea' ).show();
-		popupElement.find( 'p' ).hide();
-		popupElement.find( 'textarea' ).val( textareaContent );
-		popupElement.find( '.button' ).attr( 'data-target', args.src );
-	}
+	jQuery( document ).on( 'modal-opened', '.generate-duer-modal', window.eoxiaJS.digirisk.DUER.generateDUERModalOpened );
+	jQuery( document ).on( 'click', '.generate-duer-modal .button-main', window.eoxiaJS.digirisk.DUER.closeModalGenerateDUER );
 };
 
 /**
- * Cette méthode est appelée lors du clique sur une des icones dans le tableau d'édition des DUER.
- *
- * Remplis la popup avec:
- * -la balise <h2> qui est égale au titre data-title de triggeredElement.
- * -Cache la balise <textarea>.
- * -Modifie le contenu de ".change-content" par un paragraphe vide pour ensuite ajouter le contenu.
- *
- * @param  {HTMLSpanElement} triggeredElement L'icone qui déclenche l'action.
- * @param  {HTMLDivElement}  popupElement     La popup.
- * @param  {MouseEvent}      event            Le clic sur l'icone.
- * @param  {Object}          args             Les données sur l'élement HTMLSpanElement. (l'icone)
- * @return {void}
- *
- * @since 0.1
- * @version 6.2.4.0
+ * @todo
+ * @param  {[type]} event [description]
+ * @param  {[type]} data  [description]
+ * @return {[type]}       [description]
  */
-window.eoxiaJS.digirisk.DUER.view_in_popup = function( triggeredElement, popupElement, event, args ) {
-	if ( args ) {
-		popupElement.find( 'h2' ).text( args.title );
-		popupElement.find( 'textarea' ).hide();
-		popupElement.find( '.change-content' ).html( '<p></p>' );
-		popupElement.find( 'p' ).html( triggeredElement.closest( 'tr' ).find( '.text-content-' + args.src ).html() ).show();
+window.eoxiaJS.digirisk.DUER.modalOpened = function( event, triggeredElement ) {
+	jQuery( this ).find( '.modal-content' ).html( '' );
+
+	if ( 'view' !== jQuery( triggeredElement ).data( 'type' ) ) {
+		var textareaContent = jQuery( triggeredElement ).closest( 'tr' ).find( '.textarea-content-' + jQuery( triggeredElement ).data( 'src' ) ).val();
+		jQuery( this ).find( '.modal-content' ).html( '<textarea data-to="' + jQuery( triggeredElement ).data( 'src' ) + '" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
+
+		jQuery( '.duer-modal' ).find( 'textarea' ).val( textareaContent );
+	} else {
+		var content = jQuery( triggeredElement ).closest( 'tr' ).find( '.text-content-' + jQuery( triggeredElement ).data( 'src' ) ).html();
+		jQuery( this ).find( '.modal-content' ).html( '<p></p>' );
+
+		jQuery( '.duer-modal' ).find( 'p' ).html( content );
 	}
 };
 
-window.eoxiaJS.digirisk.DUER.set_textarea_content = function( triggeredElement, event, args ) {
-	if ( args && args['target'] ) {
-		var textarea_content = jQuery( '.popup textarea' ).val();
-
-		jQuery( '.textarea-content-' + args['target'] ).val( textarea_content );
-	}
+/**
+ * [description]
+ *
+ * @since 7.0.0
+ *
+ * @param  {[type]} triggeredElement [description]
+ */
+window.eoxiaJS.digirisk.DUER.viewInPopup = function( triggeredElement ) {
+	return true;
 };
 
-window.eoxiaJS.digirisk.DUER.popup_for_generate_DUER = function( triggeredElement, popupElement, event, args ) {
-	var data = {
-		action: 'display_societies_duer',
-		id: args.id,
-		_wpnonce: args._wpnonce
-	};
+/**
+ * @todo
+ * @param  {[type]} event [description]
+ * @return {[type]}       [description]
+ */
+window.eoxiaJS.digirisk.DUER.applyValueToTextarea = function( event ) {
+	var textarea =  jQuery( '.duer-modal' ).find( 'textarea' );
 
-	popupElement.find( 'h2' ).text( args.title );
-	popupElement.addClass( 'duer no-close' );
-	popupElement.find( '.change-content' ).html( '<p></p>' );
-	popupElement.find( '.button.green' ).attr( 'data-cb-func', 'close_popup_generate_DUER' );
-
-	window.eoxiaJS.request.send( popupElement, data );
+	jQuery( '.table.duer tfoot .textarea-content-' + textarea.attr( 'data-to' ) ).val( textarea.val() );
 };
 
-window.eoxiaJS.digirisk.DUER.displayedSocietyDUERSuccess = function( popup, response ) {
-	popup.find( '.change-content' ).html( response.data.view );
+window.eoxiaJS.digirisk.DUER.generateDUERModalOpened = function( event, triggeredElement ) {
+	window.eoxiaJS.digirisk.DUER.generateDUER( jQuery( triggeredElement ), {
+		data: {
+			index: 1
+		}
+	} );
+}
 
-	window.eoxiaJS.digirisk.DUER.generateDUER( jQuery( '.open-popup.add' ), { index: 0 } );
-};
-
+/**
+ * Construit, et génères tous les documents ainsi que le DUER.
+ *
+ * @since   6.2.1
+ * @version 7.0.0
+ *
+ * @param  {HTMLDivElement} triggeredElement [description]
+ * @param  {object} preData          [description]
+ * @return {void}                   [description]
+ */
 window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData ) {
 	var data = {};
 	var i = 0;
+	var key;
 	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( 'tr' ) );
 
 	for ( i = 0; i < listInput.length; i++ ) {
@@ -115,25 +109,17 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
 		}
 	}
 
-	for ( i in preData ) {
-		data[i] = preData[i];
+	for ( key in preData.data ) {
+		data[key] = preData.data[key];
 	}
 
-	data['society_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'id' );
-	data['duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'duer' );
-	data['generate_duer'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'generate-duer' );
-	data['zip'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'zip' );
+	jQuery( '.generate-duer-modal li:nth-child(' + ( preData.data.index ) + ')' ).get_data( function( attributeData ) {
+		for( key in attributeData ) {
+			data[key] = attributeData[key];
+		}
 
-	if ( data['zip'] ) {
-		data['element_id'] = jQuery( '.popup li:nth-child(3)' ).data( 'id' );
-	}
-
-	if ( data['generate_duer'] ) {
-		data['element_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'element-id' );
-		data['parent_id'] = jQuery( '.popup li:nth-child(' + ( data.index + 1 ) + ')' ).data( 'parent-id' );
-	}
-
-	window.eoxiaJS.request.send( triggeredElement, data );
+		window.eoxiaJS.request.send( triggeredElement, data );
+	} );
 };
 
 /**
@@ -145,37 +131,39 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since   6.2.1
+ * @version 6.5.0
  */
 window.eoxiaJS.digirisk.DUER.generatedDUERSuccess = function( element, response ) {
-	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
-	jQuery( '.popup li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
-	if ( response.data.creation_response.id  ) {
-		jQuery( '.popup li:nth-child(' + ( response.data.index + 1 ) + ')' ).attr( 'data-element-id', response.data.creation_response.id );
-	}
+	jQuery( '.generate-duer-modal li:nth-child(' + ( response.data.index ) + ')' ).find( 'img' ).remove();
+	jQuery( '.generate-duer-modal li:nth-child(' + ( response.data.index ) + ')' ).append( '<span class="dashicons dashicons-yes"></span>' );
 
 	if ( ! response.data.end ) {
-		window.eoxiaJS.digirisk.DUER.generateDUER( element, response.data );
+		response.data.index++;
+		window.eoxiaJS.digirisk.DUER.generateDUER( element, response );
 	} else {
-		jQuery( '.popup' ).removeClass( 'no-close' );
+		jQuery( '.generate-duer-modal' ).removeClass( 'no-close modal-force-display' );
 	}
 };
 
+/**
+ * @todo
+ * @return {[type]} [description]
+ */
 window.eoxiaJS.digirisk.DUER.callback_generate_duer_error = function() {};
 
 /**
  * Lors de la fermeture de la popup qui génère le DUER.
  *
- * @since 6.0.0
- * @version 6.4.4
+ * @since   6.2.1
+ * @version 6.5.0
  *
  * @param  {HTMLSpanElement} element L'élément déclencheur de l'action.
  * @param  {ClickEvent} event        L'état de la souris
  * @return {void}
  */
-window.eoxiaJS.digirisk.DUER.close_popup_generate_DUER = function( element, event ) {
-	if ( jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ) ) {
-		jQuery( '.digirisk-wrap .tab-element[data-action="digi-list-duer"]' ).click();
+window.eoxiaJS.digirisk.DUER.closeModalGenerateDUER = function( element, event ) {
+	if ( jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ) ) {
+		jQuery( '.digirisk-wrap .tab-element[data-target="digi-list-duer"]' ).click();
 	}
 };

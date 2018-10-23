@@ -1,18 +1,25 @@
 <?php
 /**
- * Affiches la liste des préconisations
+ * Le template pour afficher le tableau des signalisations.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.9.0
- * @copyright 2015-2017 Evarisk
- * @package recommendation
- * @subpackage view
+ * Ce template appel deux templates supplémentaires, "list-item" qui correspond
+ * aux lignes du tableau, et "item-edit" qui correspond à la ligne d'ajout
+ * d'une signalisation.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-only.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
+ * @version   7.0.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table recommendation">
 	<thead>
@@ -26,14 +33,24 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</thead>
 
 	<tbody>
-		<?php if ( ! empty( $recommendations ) ) :
+		<?php
+		if ( ! empty( $recommendations ) ) :
 			foreach ( $recommendations as $recommendation ) :
-				\eoxia001\View_Util::exec( 'digirisk', 'recommendation', 'list-item', array( 'society_id' => $society_id, 'recommendation' => $recommendation ) );
+				\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list-item', array(
+					'society_id'     => $society_id,
+					'recommendation' => $recommendation,
+				) );
 			endforeach;
-		endif; ?>
+		endif;
+		?>
 	</tbody>
 
 	<tfoot>
-		<?php \eoxia001\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array( 'society_id' => $society_id, 'recommendation' => $recommendation_schema ) ); ?>
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
+			'society_id'     => $society_id,
+			'recommendation' => $recommendation_schema,
+		) );
+		?>
 	</tfoot>
 </table>

@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * La classe gérant les causeries
+ * Causerie Intevention Class.
  */
-class Causerie_Intervention_Class extends \eoxia001\Post_Class {
+class Causerie_Intervention_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -32,7 +32,7 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-final-causerie';
+	protected $type = 'digi-final-causerie';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -63,34 +63,6 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 	public $element_prefix = 'F';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\get_identifier' );
-
-	/**
-	 * Les callback après avoir récupérer l'objet en base de donnée.
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_put_function = array( '\digi\get_full_causerie' );
-
-	/**
 	 * Le nom pour le resgister post type
 	 *
 	 * @var string
@@ -114,39 +86,39 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 		$duplicated_causerie = clone $causerie;
 
 		// On met l'ID à 0 pour en créer un nouveau.
-		$duplicated_causerie->id                = 0;
-		$duplicated_causerie->parent_id         = $causerie->id;
-		$duplicated_causerie->unique_identifier = $duplicated_causerie->unique_identifier;
-		$duplicated_causerie->second_unique_key = $this->get_unique_key( $causerie->id );
-		$duplicated_causerie->second_identifier = $this->element_prefix . $duplicated_causerie->second_unique_key;
-		$duplicated_causerie->type              = $this->get_type();
+		$duplicated_causerie->data['id']                = 0;
+		$duplicated_causerie->data['parent_id']         = $causerie->data['id'];
+		$duplicated_causerie->data['unique_identifier'] = $duplicated_causerie->data['unique_identifier'];
+		$duplicated_causerie->data['second_unique_key'] = $this->get_unique_key( $causerie->data['id'] );
+		$duplicated_causerie->data['second_identifier'] = $this->element_prefix . $duplicated_causerie->data['second_unique_key'];
+		$duplicated_causerie->data['type']              = $this->get_type();
 
-		$tmp_image_ids = $duplicated_causerie->associated_document_id['image'];
+		$tmp_image_ids = $duplicated_causerie->data['associated_document_id']['image'];
 		// Supprimes les liaisons avec les images, qui seront par la suite dupliquées.
-		unset( $duplicated_causerie->associated_document_id['image'] );
-		$duplicated_causerie->thumbnail_id = 0;
+		unset( $duplicated_causerie->data['associated_document_id']['image'] );
+		$duplicated_causerie->data['thumbnail_id'] = 0;
 
-		$duplicated_causerie = $this->update( $duplicated_causerie );
+		$duplicated_causerie = $this->update( $duplicated_causerie->data );
 
 		// Duplication des images.
 		if ( ! empty( $tmp_image_ids ) ) {
-			$duplicated_causerie->associated_document_id['image'] = array();
+			$duplicated_causerie->data['associated_document_id']['image'] = array();
 
 			foreach ( $tmp_image_ids as $image_id ) {
 				$attachment_path = get_attached_file( $image_id );
-				$file_id         = \eoxia001\File_Util::g()->move_file_and_attach( $attachment_path, 0 );
+				$file_id         = \eoxia\File_Util::g()->move_file_and_attach( $attachment_path, 0 );
 
-				if ( empty( $duplicated_causerie->thumbnail_id ) ) {
-					$duplicated_causerie->thumbnail_id = $file_id;
+				if ( empty( $duplicated_causerie->data['thumbnail_id'] ) ) {
+					$duplicated_causerie->data['thumbnail_id'] = $file_id;
 				}
 
-				$duplicated_causerie->associated_document_id['image'][] = $file_id;
+				$duplicated_causerie->data['associated_document_id']['image'][] = $file_id;
 			}
 		}
 
-		$duplicated_causerie->date_start = current_time( 'mysql' );
+		$duplicated_causerie->data['date_start'] = current_time( 'mysql' );
 
-		return $this->update( $duplicated_causerie );
+		return $this->update( $duplicated_causerie->data );
 	}
 
 	/**
@@ -185,9 +157,9 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 	public function add_participant( $causerie_intervention, $user_id, $is_former = false ) {
 
 		if ( $is_former ) {
-			$causerie_intervention->former['user_id'] = $user_id;
+			$causerie_intervention->data['former']['user_id'] = $user_id;
 		} else {
-			$causerie_intervention->participants[ $user_id ] = array(
+			$causerie_intervention->data['participants'][ $user_id ] = array(
 				'user_id' => $user_id,
 			);
 		}
@@ -204,7 +176,6 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 	 * correspondant à l'entrée de l'utilisateur $user_id.
 	 *
 	 * @since   6.6.0
-	 * @version 6.6.0
 	 *
 	 * @param Causerie_Intervention_Class $causerie_intervention Les données d'une causerie "intervention".
 	 * @param integer                     $user_id               ID de l'utilisateur pour associer la signature à la causerie "intervention".
@@ -219,14 +190,14 @@ class Causerie_Intervention_Class extends \eoxia001\Post_Class {
 			$encoded_image = explode( ',', $signature_data )[1];
 			$decoded_image = base64_decode( $encoded_image );
 			file_put_contents( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $decoded_image );
-			$file_id = \eoxia001\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->id );
+			$file_id = \eoxia\File_Util::g()->move_file_and_attach( $upload_dir['basedir'] . '/digirisk/tmp/signature.png', $causerie_intervention->data['id'] );
 
 			if ( $is_former ) {
-				$causerie_intervention->former['signature_id']   = $file_id;
-				$causerie_intervention->former['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->data['former']['signature_id']   = $file_id;
+				$causerie_intervention->data['former']['signature_date'] = current_time( 'mysql' );
 			} else {
-				$causerie_intervention->participants[ $user_id ]['signature_id']   = $file_id;
-				$causerie_intervention->participants[ $user_id ]['signature_date'] = current_time( 'mysql' );
+				$causerie_intervention->data['participants'][ $user_id ]['signature_id']   = $file_id;
+				$causerie_intervention->data['participants'][ $user_id ]['signature_date'] = current_time( 'mysql' );
 			}
 		}
 

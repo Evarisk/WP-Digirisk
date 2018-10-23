@@ -13,18 +13,13 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} ?>
+}
+
+global $eo_search; ?>
 
 <tr class="item">
 	<td class="padding tooltip red user-tooltip" aria-label="<?php esc_attr_e( 'Veuillez renseigner le participant', 'digirisk' ); ?>">
-		<input type="text"
-					data-field="participant_id"
-					data-type="user"
-					placeholder=""
-					class="digi-search"
-					data-exclude="<?php echo esc_attr( $final_causerie->exclude_user_ids ); ?>"
-					value="" />
-		<input type="hidden" name="participant_id" value="" />
+		<?php $eo_search->display( 'causerie_participants' ); ?>
 	</td>
 
 	<td class="w50"></td>
@@ -35,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			data-parent="item"
 			data-action="causerie_save_participant"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_save_participant' ) ); ?>"
-			data-id="<?php echo esc_attr( $final_causerie->id ); ?>"
+			data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>"
 			data-namespace="digirisk"
 			data-module="causerie"
 			data-before-method="checkUserID">

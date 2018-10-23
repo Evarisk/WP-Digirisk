@@ -1,12 +1,12 @@
 <?php
 /**
- * Définition des champs d'un DUER.
+ * Définition des champs d'un document DUER.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.5.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -16,31 +16,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition des champs d'un DUER.
+ * Définition des champs d'un document DUER.
  */
 class DUER_Model extends Document_Model {
 
 	/**
 	 * Définition des champs
 	 *
-	 * @since 6.0.0
-	 * @version 6.3.0
+	 * @since   6.5.0
+	 * @version 7.0.0
 	 *
-	 * @param DUER_Model $object La définition de l'objet dans l'instance actuelle.
-	 * @return DUER_Model
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
-		$this->model['zip_path'] = array(
-			'type' => 'string',
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['zip_path'] = array(
+			'since'     => '6.2.1',
+			'version'   => '6.2.1',
+			'type'      => 'string',
 			'meta_type' => 'single',
-			'field' => 'zip_path',
+			'field'     => 'zip_path',
 		);
 
-		$this->model['document_meta'] = array(
-			'type' => 'array',
+		$this->schema['document_meta'] = array(
+			'type'      => 'array',
 			'meta_type' => 'single',
-			'field' => 'document_meta',
-			'child' => array(
+			'field'     => 'document_meta',
+			'child'     => array(
 				'identifiantElement' => array(
 					'type' => 'string',
 				),
@@ -57,13 +59,15 @@ class DUER_Model extends Document_Model {
 					'type' => 'string',
 				),
 				'dateGeneration' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'string',
 				),
 				'dateDebutAudit' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'wpeo_date',
+					'context' => array( 'GET' ),
 				),
 				'dateFinAudit' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'wpeo_date',
+					'context' => array( 'GET' ),
 				),
 				'telephone' => array(
 					'type' => 'string',
@@ -73,7 +77,7 @@ class DUER_Model extends Document_Model {
 				),
 				'methodologie' => array(
 					'type' => 'string',
-					'bydefault' => '* Étape 1 : Récupération des informations
+					'default' => '* Étape 1 : Récupération des informations
 - Visite des locaux
 - Récupération des données du personnel
 
@@ -91,14 +95,14 @@ class DUER_Model extends Document_Model {
 				),
 				'sources' => array(
 					'type' => 'string',
-					'bydefault' => 'La sensibilisation des risques est définie dans l\'ed840 édité par l\'INRS.
+					'default' => 'La sensibilisation des risques est définie dans l\'ed840 édité par l\'INRS.
 Dans ce document vous trouverez:
 - La définition d\'un risque, d\'un danger et un schéma explicatif
 - Les explications concernant les différentes méthodes d\'évaluation'
 				),
 				'remarqueImportante' => array(
 					'type' => 'string',
-					'bydefault' => 'Notes importantes',
+					'default' => 'Notes importantes',
 				),
 				'dispoDesPlans' => array(
 					'type' => 'string',
@@ -107,19 +111,19 @@ Dans ce document vous trouverez:
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq' => array(
+				'risk1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq48' => array(
+				'risk2' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq51' => array(
+				'risk3' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risq80' => array(
+				'risk4' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
@@ -127,19 +131,19 @@ Dans ce document vous trouverez:
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq' => array(
+				'planDactionRisq1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq48' => array(
+				'planDactionRisq2' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq51' => array(
+				'planDactionRisq3' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq80' => array(
+				'planDactionRisq4' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
@@ -150,7 +154,7 @@ Dans ce document vous trouverez:
 			),
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
 
 }

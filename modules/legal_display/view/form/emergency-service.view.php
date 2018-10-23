@@ -1,48 +1,57 @@
-<?php namespace digi;
+<?php
 /**
-* Service d'urgence
-*
-* @author Jimmy Latour <jimmy@evarisk.com>
-* @since 0.1
-* @version 6.2.4.0
-* @copyright 2015-2017 Evarisk
-* @package legal_display
-* @subpackage view
-*/
+ * Service d'urgence
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
+ */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+namespace digi;
 
-<ul class="form">
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
+
+<ul class="wpeo-form">
 	<li><h2><?php esc_html_e( 'Service d\'urgence', 'digirisk' ); ?></h2></li>
 
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['samu'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[samu]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['samu'] ); ?>" />
-		<label><?php esc_html_e( 'Samu', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Samu', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[samu]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['samu'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['police'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[police]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['police'] ); ?>" />
-		<label><?php esc_html_e( 'Police/Gendarmerie', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Police/Gendarmerie', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[police]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['police'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['pompier'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[pompier]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['pompier'] ); ?>" />
-		<label><?php esc_html_e( 'Pompiers', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Pompiers', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[pompier]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['pompier'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['emergency'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[emergency]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['emergency'] ); ?>" />
-		<label><?php esc_html_e( 'Toute urgence', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Toute urgence', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[emergency]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['emergency'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['right_defender'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[right_defender]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['right_defender'] ); ?>" />
-		<label><?php esc_html_e( 'Défenseur des droits', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Défenseur des droits', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[right_defender]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['right_defender'] ); ?>" />
+		</label>
 	</li>
-	<li class="form-element <?php echo esc_attr( ! empty( $legal_display->emergency_service['poison_control_center'] ) ? 'active' : '' ); ?>">
-		<input name="emergency_service[poison_control_center]" type="text" value="<?php echo esc_attr( $legal_display->emergency_service['poison_control_center'] ); ?>" />
-		<label><?php esc_html_e( 'Centre anti poison', 'digirisk' ); ?></label>
-		<span class="bar"></span>
+	<li class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Centre anti poison', 'digirisk' ); ?></span>
+		<label class="form-field-container">
+			<input name="emergency_service[poison_control_center]" class="form-field" type="text" value="<?php echo esc_attr( $legal_display->data['emergency_service']['poison_control_center'] ); ?>" />
+		</label>
 	</li>
 </ul>

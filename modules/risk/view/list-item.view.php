@@ -2,11 +2,11 @@
 /**
  * Affichage d'un risque
  *
- * @author    Evarisk <dev@evarisk.com>
- * @since     6.2.1
- * @version   6.6.0
- * @copyright 2018 Evarisk.
- * @package   DigiRisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.1
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -15,46 +15,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-
-<tr class="risk-row <?php echo esc_attr( 'method-' . $risk->evaluation_method->slug ); ?>" data-id="<?php echo esc_attr( $risk->id ); ?>">
+<tr class="risk-row <?php echo esc_attr( 'method-' . $risk->data['evaluation_method']->data['slug'] ); ?>" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>">
 	<td data-title="Ref." class="padding">
 		<!-- La popup pour les actions correctives -->
-		<?php \eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'popup', array() ); ?>
 
-		<span><strong><?php echo esc_html( $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier ); ?></span></strong>
+		<span>
+			<strong>
+				<?php echo esc_html( $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] ); ?>
+			</strong>
+		</span>
 	</td>
 	<td data-title="Risque">
-		<?php do_shortcode( '[digi-dropdown-categories-risk id="' . $risk->id . '" type="risk" category_risk_id="' . $risk->risk_category->id . '" display="view"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="view" category_risk_id="' . end( $risk->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '"]' ); ?>
 	</td>
 	<td data-title="Cot." class="w50">
-		<?php do_shortcode( '[digi_evaluation_method risk_id=' . $risk->id . ' display="view"]' ); ?>
+		<?php Risk_Evaluation_Class::g()->display( $risk ); ?>
 	</td>
 	<td data-title="Photo" class="w50">
-		<?php do_shortcode( '[wpeo_upload id="' . $risk->id . '" model_name="/digi/' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->modified_unique_identifier . ' - ' . $risk->evaluation->unique_identifier . '" ]' ); ?>
+		<?php echo do_shortcode( '[wpeo_upload id="' . $risk->data['id'] . '" model_name="' . $risk->get_class() . '" single="false" field_name="image" title="' . $risk->data['unique_identifier'] . '" ]' ); ?>
 	</td>
 	<td data-title="Commentaire" class="padding">
-		<?php do_shortcode( '[digi_comment id="' . $risk->id . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
+		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
 	<td data-title="Action">
-		<div class="action grid-layout w3">
-			<div 	class="open-popup-ajax button light w50 task"
-						data-parent="risk-row"
-						data-target="popup"
-						data-class="corrective-task"
-						data-action="open_task"
-						data-id="<?php echo esc_attr( $risk->id ); ?>"><i class="icon dashicons dashicons-schedule"></i></div>
+		<div class="action wpeo-gridlayout grid-gap-0 grid-3">
+			<div 	class="wpeo-modal-event wpeo-button button-transparent button-square-50"
+					data-parent="risk-row"
+					data-class="wpeo-wrap corrective-task"
+					data-action="open_task"
+					data-title="<?php echo 'Les actions correctives du risque: ' . $risk->data['unique_identifier']; ?>"
+					data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="button-icon far fa-list-ul"></i></div>
 
 			<!-- Editer un risque -->
-			<div 	class="button light w50 edit action-attribute"
-						data-id="<?php echo esc_attr( $risk->id ); ?>"
+			<div 	class="wpeo-button button-square-50 button-transparent w50 edit action-attribute"
+						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
 						data-loader="risk"
-						data-action="load_risk"><i class="icon fa fa-pencil"></i></div>
+						data-action="load_risk"><i class="button-icon fas fa-pencil"></i></div>
 
-			<div 	class="button light w50 delete action-delete"
-						data-id="<?php echo esc_attr( $risk->id ); ?>"
+			<!-- Supprimer un risque -->
+			<div 	class="wpeo-button button-square-50 button-transparent w50 delete action-delete"
+						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
-						data-action="delete_risk"><i class="icon fa fa-times"></i></div>
+						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
+						data-action="delete_risk"><i class="button-icon far fa-times"></i></div>
 		</div>
 	</td>
 </tr>

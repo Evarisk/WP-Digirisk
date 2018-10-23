@@ -1,0 +1,10 @@
+.wpeo-pagination .pagination-element {
+	&.pagination-current {
+		a {
+			background: $color__primary;
+			&:hover {
+				background: $color__primary;
+			}
+		}
+	}
+}

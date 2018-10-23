@@ -2,7 +2,7 @@
 /**
  * Gestion de la requête AJAX pour enregistrer les options avancées des sociétés.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.5
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk

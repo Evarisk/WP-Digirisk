@@ -1,19 +1,22 @@
 <?php
 /**
- * Informations sur la société.
+ * Template pour les informations de la société.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.10
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * Ce template appel également le template pour afficher le formulaire pour régler les informations de la société.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.10
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <section class="details">
 	<header>
@@ -25,14 +28,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</p>
 
-		<ul class="grid-layout w3 margin">
+		<ul class="wpeo-gridlayout grid-3 margin">
 			<li class="statistic">
 				<span class="number"><?php echo esc_html( $number_risks ); ?></span>
 				<span class="label"><?php esc_html_e( 'Nombre de risque', 'digirisk' ); ?></span>
 			</li>
 
 			<li class="statistic">
-				<span class="number"><?php echo ! empty( $more_dangerous_risk->unique_identifier ) ? esc_html( $more_dangerous_risk->unique_identifier ) : esc_html( 'N/A', 'digirisk' ); ?></span>
+				<span class="number"><?php echo ! empty( $more_dangerous_risk->data['unique_identifier'] ) ? esc_html( $more_dangerous_risk->data['unique_identifier'] ) : esc_html( 'N/A', 'digirisk' ); ?></span>
 				<span class="label"><?php esc_html_e( 'Le risque le plus élevé', 'digirisk' ); ?></span>
 			</li>
 
@@ -46,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </section>
 
 <?php
-\eoxia001\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
+\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
 	'element' => $element,
 	'address' => $address,
 ) );

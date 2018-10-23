@@ -27,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<tbody>
 		<?php
 		foreach ( $dangers_preset as $danger ) :
-			\eoxia001\View_Util::exec( 'digirisk', 'setting', 'preset/item', array(
-				'danger' => $danger,
+			\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/item', array(
+				'risk' => $danger,
 			) );
 		endforeach;
 		?>
@@ -36,4 +36,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
 </table>
 
-<a href="#" class="margin button disable save-all right"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>
+<a href="#" class="margin wpeo-button save-all"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>

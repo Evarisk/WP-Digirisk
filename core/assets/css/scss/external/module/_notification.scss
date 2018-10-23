@@ -1,0 +1,34 @@
+.wpeo-notification {
+	.notification-title {
+		a {
+			color: $color__primary;
+		}
+	}
+	.notification-close {
+		&:hover {
+			color: $color__primary;
+		}
+	}
+}
+
+/** Couleur */
+.wpeo-notification {
+	&.notification-green {
+		border-left: 4px solid $color__green;
+		.notification-icon {
+			color: $color__green;
+		}
+	}
+	&.notification-orange {
+		border-left: 4px solid $color__yellow;
+		.notification-icon {
+			color: $color__yellow;
+		}
+	}
+	&.notification-red {
+		border-left: 4px solid $color__red;
+		.notification-icon {
+			color: $color__red;
+		}
+	}
+}

@@ -1,0 +1,88 @@
+/**
+ * Import des fichiers less
+ */
+// @import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fontawesome.scss";
+// @import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fa-solid.scss";
+// @import "./../../../external/eo-framework/core/assets/css/scss/font/font-awesome/fa-brands.scss";
+// @import "reset";
+// @import "variable";
+// @import "tools";
+// @import "animation";
+// @import "loader";
+// @import "popup";
+// @import "search";
+// @import "button";
+// @import "structure";
+// @import "list";
+// @import "workunit";
+// @import "tab";
+// @import "toggle";
+// @import "pagination";
+// @import "cotation";
+// @import "table";
+// @import "flex-table";
+// @import "evaluation";
+// @import "tooltip";
+// @import "form";
+// @import "table-form";
+// @import "step";
+// @import "grid";
+// @import "taskmanager";
+// @import "installer";
+// @import "statistic";
+// @import "notification";
+// @import "patchnote";
+// @import "media";
+
+/**
+ * Import des templates de page
+ */
+// @import "template-tools";
+
+
+/**
+ * Propriétés générales
+ */
+.digirisk-wrap {
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1 {
+		font-size: 18px;
+		text-transform: uppercase;
+		margin: 6px 0;
+	}
+	h2 {
+		font-size: 16px;
+		font-weight: 600;
+		margin: 6px 0 14px 0;
+	}
+	.note {
+		font-style: italic;
+		color: rgba(0,0,0,0.4);
+	}
+
+	canvas {
+		-moz-user-select: none; /* Firefox */
+		-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+		-ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+		user-select: none; /* Propriété standard */
+	}
+
+	// Tmp
+	.accident {
+		.color__red {
+			color: color__red;
+		}
+	}
+}
+
+.wpeo-modal {
+	.evaluation-method {
+		.table-cell.active {
+			background-color: color__red;
+		}
+	}
+}

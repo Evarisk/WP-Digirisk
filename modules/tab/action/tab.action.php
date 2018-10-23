@@ -2,10 +2,10 @@
 /**
  * Gestion des actions relatif aux onglets
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -34,18 +34,23 @@ class Tab_Action {
 	 * Charges le contenu d'un onglet
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
+	 * @version 7.0.0
 	 */
 	public function callback_load_tab_content() {
 		check_ajax_referer( 'load_content' );
 
-		$element_id     = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		$tab_to_display = ! empty( $_POST['tab_to_display'] ) ? sanitize_key( $_POST['tab_to_display'] ) : '';
-		$title          = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+		$element_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$target     = ! empty( $_POST['target'] ) ? sanitize_key( $_POST['target'] ) : '';
+		$title      = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
 
+		$tab        = new \stdClass();
+		$tab->title = $title;
+		$tab->slug  = $target;
+
+		ob_start();
+		Tab_Class::g()->load_tab_content( $element_id, $tab );
 		wp_send_json_success( array(
-			'template'         => Tab_Class::g()->load_tab_content( $element_id, $tab_to_display, $title ),
-			'callback_success' => 'loadedTabContent',
+			'view' => ob_get_clean(),
 		) );
 	}
 }

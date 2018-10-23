@@ -25,8 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</thead>
 	<tbody>
 		<?php
-		if ( ! empty( $causerie->participants ) ) :
-			foreach ( $causerie->participants as $participant ) :
+		if ( ! empty( $causerie->data['participants'] ) ) :
+			foreach ( $causerie->data['participants'] as $participant ) :
 				?>
 				<tr>
 					<td>
@@ -34,8 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						if ( ! empty( $participant['rendered'] ) ) :
 							$participant['rendered'] = (array) $participant['rendered'];
 							?>
-							<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['initial'] ); ?></span></div>
-							<span><?php echo esc_html( $participant['rendered']['displayname'] ); ?></span>
+							<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']['data']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['data']['initial'] ); ?></span></div>
+							<span><?php echo esc_html( $participant['rendered']['data']['displayname'] ); ?></span>
 							<?php
 						else :
 							?><span><?php esc_html_e( 'N/A', 'digirisk' ); ?></span><?php
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td>
 						<?php
 						if ( ! empty( $participant['signature_date'] ) ) :
-							echo esc_html( \eoxia001\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ) );
+							echo esc_html( \eoxia\Date_Util::g()->mysqldate2wordpress( $participant['signature_date'] ) );
 						else :
 							esc_html_e( 'N/A', 'digirisk' );
 						endif;
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
 							</div>
 							<?php
-							\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+							\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 								'action' => 'causerie_save_signature',
 							) );
 							?>

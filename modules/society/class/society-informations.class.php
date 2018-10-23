@@ -2,10 +2,9 @@
 /**
  * Appelle la vue pour afficher le formulaire de configuration d'une société
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -18,12 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Appelle la vue pour afficher le formulaire de configuration d'une société
  */
-class Society_Informations_Class extends \eoxia001\Singleton_Util {
+class Society_Informations_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
-	 *
-	 * @return void
 	 */
 	protected function construct() {}
 
@@ -32,48 +29,56 @@ class Society_Informations_Class extends \eoxia001\Singleton_Util {
 	 * Envois les données à la vue group/configuration-form.view.php
 	 *
 	 * @param  Group_Model $element L'objet groupement.
-	 * @return void
 	 *
 	 * @since 6.2.10
-	 * @version 6.2.10
 	 */
 	public function display( $element ) {
+		global $eo_search;
+
 		$address = Society_Class::g()->get_address( $element );
-		$address = $address[0];
 
 		$total_cotation = 0;
 
 		$risks = Risk_Class::g()->get( array(
-			'post_parent' => $element->id,
+			'post_parent' => $element->data['id'],
 		) );
 
-		$historic_update = get_post_meta( $element->id, \eoxia001\Config_Util::$init['digirisk']->historic->key_historic, true );
+		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
 
 		if ( empty( $historic_update ) ) {
 			$historic_update = array(
-				'date' => 'Indisponible',
+				'date'    => 'Indisponible',
 				'content' => 'Indisponible',
 			);
 		} else {
-			$historic_update['date'] = date( '\L\e d F Y à H\hi', strtotime( $historic_update['date'] ) );
+			$historic_update['date'] = date( ' d F Y à H\hi', strtotime( $historic_update['date'] ) );
 		}
 
 		if ( count( $risks ) > 1 ) {
 			usort( $risks, function( $a, $b ) {
-				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
+				if ( $a->data['current_equivalence'] === $b->data['current_equivalence'] ) {
 					return 0;
 				}
-				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
+				return ( $a->data['current_equivalence'] > $b->data['current_equivalence'] ) ? -1 : 1;
 			} );
 		}
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$total_cotation += $risk->evaluation->risk_level['equivalence'];
+				$total_cotation += $risk->data['current_equivalence'];
 			}
 		}
 
-		\eoxia001\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
+		$eo_search->register_search( 'society_information_owner', array(
+			'label'        => 'Responsable',
+			'icon'         => 'fa-search',
+			'type'         => 'user',
+			'name'         => 'society[owner_id]',
+			'value'        => ! empty( $element->data['owner']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $element->data['owner']->data['id'] . ' - ' . $element->data['owner']->data['displayname'] : '',
+			'hidden_value' => $element->data['owner_id'],
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
 			'element'             => $element,
 			'address'             => $address,
 			'number_risks'        => count( $risks ),
@@ -87,28 +92,45 @@ class Society_Informations_Class extends \eoxia001\Singleton_Util {
 	 * Sauvegardes les données du groupements
 	 *
 	 * @since 6.2.10
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
-	 * @param  array $data  Les données à sauvegarder.
-	 * @return Society_Model Le groupement mis à jour.
+	 * @param  array $data_form  Les données à sauvegarder.
+	 * @return Society_Model     Le groupement mis à jour.
 	 */
-	public function save( $data ) {
-		$society = Society_Class::g()->get( array(
-			'id'        => $data['id'],
-			'post_type' => array( 'digi-society', 'digi-group', 'digi-workunit' ),
-		), true );
+	public function save( $data_form ) {
+		$society = Society_Class::g()->show_by_type( $data_form['id'] );
 
-		$society->title                   = $data['title'];
-		$society->owner_id                = $data['owner_id'];
-		$society->date                    = $data['date'];
-		$society->siret_id                = ! empty( $data['siret_id'] ) ? $data['siret_id'] : '';
-		$society->number_of_employees     = ! empty( $data['number_of_employees'] ) ? $data['number_of_employees'] : 0;
-		$society->contact['phone'][]      = $data['contact']['phone'][0];
-		$society->contact['email']        = $data['contact']['email'];
-		$society->contact['address_id'][] = $data['contact']['address_id'][0];
-		$society->content                 = $data['content'];
+		$society->data['title']               = ! empty( $data_form['title'] ) ? sanitize_text_field( $data_form['title'] ) : '';
+		$society->data['owner_id']            = ! empty( $data_form['owner_id'] ) ? (int) $data_form['owner_id'] : 0;
+		$society->data['date']                = ! empty( $data_form['date'] ) ? sanitize_text_field( $data_form['date'] ) : '';
+		$society->data['siret_id']            = ! empty( $data_form['siret_id'] ) ? sanitize_text_field( $data_form['siret_id'] ) : '';
+		$society->data['number_of_employees'] = ! empty( $data_form['number_of_employees'] ) ? (int) $data_form['number_of_employees'] : 0;
+		$society->data['contact']['email']    = ! empty( $data_form['contact']['email'] ) ? sanitize_email( $data_form['contact']['email'] ) : '';
+		$society->data['content']             = ! empty( $data_form['content'] ) ? sanitize_text_field( $data_form['content'] ) : '';
 
-		$society = Society_Class::g()->update( $society );
+		$phone      = ! empty( $data_form['contact']['phone'] ) ? sanitize_text_field( $data_form['contact']['phone'] ) : '';
+		$address_id = ! empty( $data_form['contact']['address_id'] ) ? (int) $data_form['contact']['address_id'] : 0;
+
+		if ( ! empty( $phone ) ) {
+			$society->data['contact']['phone'][] = $phone;
+		}
+
+		if ( ! empty( $address_id ) ) {
+			$society->data['contact']['address_id'][] = $address_id;
+		}
+
+		switch ( $society->data['type'] ) {
+			case 'digi-society':
+				$society = Society_Class::g()->update( $society->data );
+				break;
+			case 'digi-group':
+				$society = Group_Class::g()->update( $society->data );
+				break;
+			case 'digi-workunit':
+				$society = Workunit_Class::g()->update( $society->data );
+				break;
+		}
+
 		return $society;
 	}
 }

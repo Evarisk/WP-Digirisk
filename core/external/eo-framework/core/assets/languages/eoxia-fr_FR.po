@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Eoxia\n"
+"POT-Creation-Date: 2018-04-09 16:37+0200\n"
+"PO-Revision-Date: 2018-04-09 16:43+0200\n"
+"Last-Translator: \n"
+"Language-Team: Eoxia <technique@eoxia.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_attr_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: core/assets/node_modules\n"
+
+#: core/util/class-config-util.php:55
+msgid "Unable to load file"
+msgstr "Unable to load file"
+
+#: core/util/class-config-util.php:61
+msgid "This plugin need to have a slug"
+msgstr "This plugin need to have a slug"
+
+#: core/util/class-external-util.php:52
+msgid "Aucun module a charger"
+msgstr "Aucun module a charger"
+
+#: core/util/class-init-util.php:66 core/util/class-init-util.php:76
+msgid "Impossible de charger les fichiers .utils"
+msgstr "Impossible de charger les fichiers .utils"
+
+#: core/util/class-init-util.php:70
+msgid "$path_to_core_folder_util n'est pas un dossier"
+msgstr "$path_to_core_folder_util n'est pas un dossier"
+
+#: core/util/class-json-util.php:41
+msgid "Enabled to load JSON file"
+msgstr "Enabled to load JSON file"
+
+#: core/util/class-json-util.php:53
+msgid "Error in JSON file"
+msgstr "Error in JSON file"
+
+#: core/util/class-module-util.php:51
+#, php-format
+msgid "Main config %s not init"
+msgstr "Main config %s not init"
+
+#: core/util/class-module-util.php:55
+msgid "No module to load"
+msgstr "No module to load"
+
+#: modules/wpeo-model/class/data.class.php:219
+#, php-format
+msgid "%1$s => %2$s: %3$s ( %4$s ) is not a %5$s"
+msgstr "%1$s => %2$s: %3$s ( %4$s ) n'est pas %5$s"
+
+#: modules/wpeo-update-manager/action/class-update-manager-action.php:96
+msgid "Update Manager"
+msgstr "Mise à jour des données"
+
+#: modules/wpeo-update-manager/view/main.view.php:26
+#, php-format
+msgid "List of updates for version %s"
+msgstr "Liste des mises à jour pour la version %s"
+
+#: modules/wpeo-update-manager/view/main.view.php:29
+msgid "Be careful, before using this data update manager, please back up your datas"
+msgstr "Attention, avant d'utiliser ce module de mise à jour de donnée, sauvegardez vos données"
+
+#: modules/wpeo-update-manager/view/main.view.php:30
+msgid "You may loose data if you quit this page until the update is in progress"
+msgstr "Si vous quittez la mise à jour lors de sa progression, vous risques de perdre vos données"
+
+#: modules/wpeo-update-manager/view/main.view.php:42
+msgid "No update requires for your installation"
+msgstr "Pas de mise à jour requise dans votre installation"
+
+#: modules/wpeo-update-manager/view/main.view.php:83
+msgid "Update manager"
+msgstr "Module de mise à jour"
+
+#: modules/wpeo-update-manager/view/main.view.php:84
+msgid "No updates available for current version"
+msgstr "Pas de mise à jour disponible pour la version actuelle"
+
+#: modules/wpeo-update-manager/view/main.view.php:85
+msgid "Back to main application"
+msgstr "Revenir à l'application"
+
+#: modules/wpeo-update-manager/view/say-to-update.view.php:21
+msgid "Update required"
+msgstr "Une mise à jour est requise"
+
+#: modules/wpeo-update-manager/view/say-to-update.view.php:25
+msgid "Warning! Stop the update process can destroy your data."
+msgstr "Attention! Arrêtez la mise à jour peut détruire vos données."
+
+#: modules/wpeo-update-manager/view/say-to-update.view.php:30
+msgid "Start update"
+msgstr "Lancer la mise à jour"
+
+#: modules/wpeo-update-manager/view/say-to-update.view.php:32
+msgid "Back"
+msgstr "Retour"
+
+#: modules/wpeo-upload/shortcode/class-wpeo-upload-shortcode.php:53
+msgid "Upload media"
+msgstr "Téléversez un média"
+
+#: modules/wpeo-upload/view/box/gallery/button-add.view.php:25
+msgid "Add new media"
+msgstr "Ajouter un nouveau média"
+
+#: modules/wpeo-upload/view/box/gallery/list.view.php:31
+#: modules/wpeo-upload/view/box/gallery/list.view.php:54
+msgid "Preview not available"
+msgstr "Prévisualisation non disponible"
+
+#: modules/wpeo-upload/view/box/gallery/main.view.php:64
+msgid "Close"
+msgstr "Fermer"
+
+#: modules/wpeo-upload/view/list/button.view.php:32
+msgid "Add an attached file"
+msgstr "Associer un média"
+
+#: modules/wpeo-upload/view/list/list.view.php:32
+msgid "No file attached"
+msgstr "Pas de média"

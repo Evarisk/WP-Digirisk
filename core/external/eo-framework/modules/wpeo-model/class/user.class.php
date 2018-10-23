@@ -2,28 +2,30 @@
 /**
  * Gestion des utilisateurs (POST, PUT, GET, DELETE)
  *
- * @author Jimmy Latour <dev@eoxia.com>
- * @since 1.0.0
- * @version 1.5.0
- * @copyright 2015-2017
- * @package WPEO_Model
+ * @author Eoxia <dev@eoxia.com>
+ * @since 0.1.0
+ * @version 1.0.0
+ * @copyright 2015-2018
+ * @package EO_Framework\EO_Model\Class
  */
 
-namespace eoxia001;
+namespace eoxia;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-if ( ! class_exists( '\eoxia001\User_Class' ) ) {
+if ( ! class_exists( '\eoxia\User_Class' ) ) {
 	/**
 	 * Gestion des utilisateurs (POST, PUT, GET, DELETE)
 	 */
-	class User_Class extends Rest_Class {
+	class User_Class extends Object_Class {
 		/**
 		 * Le nom du modèle
 		 *
 		 * @var string
 		 */
-		protected $model_name = '\eoxia001\User_Model';
+		protected $model_name = '\eoxia\User_Model';
 
 		/**
 		 * La clé principale pour post_meta
@@ -50,18 +52,6 @@ if ( ! class_exists( '\eoxia001\User_Class' ) ) {
 		protected $type = 'user';
 
 		/**
-		 * La liste des droits a avoir pour accèder aux différentes méthodes
-		 *
-		 * @var array
-		 */
-		protected $capabilities = array(
-			'get'			=> 'list_users',
-			'put' 		=> 'edit_users',
-			'post' 		=> 'edit_users',
-			'delete' 	=> 'delete_users',
-		);
-
-		/**
 		 * Utiles pour DigiRisk
 		 *
 		 * @todo Rien à faire ici
@@ -70,248 +60,125 @@ if ( ! class_exists( '\eoxia001\User_Class' ) ) {
 		public $element_prefix = 'U';
 
 		/**
-		 * Fonction de callback après avoir récupérer les données dans la base de donnée en mode GET.
+		 * La liste des droits a avoir pour accèder aux différentes méthodes
 		 *
 		 * @var array
 		 */
-		protected $after_get_function = array( '\eoxia001\build_user_initial' );
-
-		/**
-		 * Fonction de callback avant d'insérer les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $before_post_function = array();
-
-		/**
-		 * Fonction de callback avant de dispatcher les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $before_model_post_function = array();
-
-		/**
-		 * Fonction de callback après avoir inséré les données en mode POST.
-		 *
-		 * @var array
-		 */
-		protected $after_post_function = array();
-
-		/**
-		 * Fonction de callback avant de mêttre à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $before_put_function = array();
-
-		/**
-		 * Fonction de callback avant de dispatcher les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $before_model_put_function = array();
-
-		/**
-		 * Fonction de callback après avoir mis à jour les données en mode PUT.
-		 *
-		 * @var array
-		 */
-		protected $after_put_function = array();
+		protected $capabilities = array(
+			'get'    => 'list_users',
+			'put'    => 'edit_users',
+			'post'   => 'edit_users',
+			'delete' => 'delete_users',
+		);
 
 		/**
 		 * Slug de base pour la route dans l'api rest
 		 *
 		 * @var string
 		 */
-		protected $base  = 'user';
-
-		/**
-		 * Le constructeur pour Singleton_Util
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return void
-		 */
-		protected function construct() {
-			parent::construct();
-		}
-
-		/**
-		 * Permet de récupérer le schéma avec les données du modèle par défault.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return Object
-		 */
-		public function get_schema() {
-			$model_name = $this->model_name;
-			$model = new $model_name( array(), array() );
-			return $model->get_model();
-		}
-
-		/**
-		 * Get current element type
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string The element type.
-		 */
-		public function get_type() {
-			return $this->type;
-		}
+		protected $base = 'user';
 
 		/**
 		 * Récupères les données selon le modèle définis.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
-		 * @param array   $args Les paramètres de get_users @https://codex.wordpress.org/Function_Reference/get_users.
+		 * @param array   $args Les paramètres de WP_User_Query @see https://codex.wordpress.org/Class_Reference/WP_User_Query.
 		 * @param boolean $single Si on veut récupérer un tableau, ou qu'une seule entrée.
 		 *
 		 * @return Comment_Model
 		 */
 		public function get( $args = array(), $single = false ) {
-			$list_user = array();
-			$list_model_user = array();
-
-			$model_name = $this->model_name;
+			$array_users = array();
 
 			if ( ! empty( $args['id'] ) ) {
-				$list_user[] = get_user_by( 'id', $args['id'] );
-			} elseif ( isset( $args['schema'] ) ) {
-				$list_user[] = array();
-			} else {
-				$list_user = get_users( $args );
-			}
-
-			if ( ! empty( $list_user ) ) {
-				foreach ( $list_user as $element ) {
-					$element = (array) $element;
-
-					if ( ! empty( $element['ID'] ) ) {
-						$list_meta = get_user_meta( $element['ID'] );
-						foreach ( $list_meta as &$meta ) {
-							$meta = array_shift( $meta );
-						}
-
-						$element = array_merge( $element, $list_meta );
-
-						if ( ! empty( $element['data'] ) ) {
-							$element = array_merge( $element, (array) $element['data'] );
-							unset( $element['data'] );
-						}
-
-						if ( ! empty( $element[ $this->meta_key ] ) ) {
-							$element = array_merge( $element, json_decode( $element[ $this->meta_key ], true ) );
-							unset( $element[ $this->meta_key ] );
-						}
-					}
-
-					$data = new $model_name( $element );
-					$data = Model_Util::exec_callback( $data, $this->after_get_function );
-					$list_model_user[] = $data;
+				if ( ! isset( $args['include'] ) ) {
+					$args['include'] = array();
 				}
+				$args['include'] = array_merge( (array) $args['id'], $args['include'] );
+				unset( $args['id'] );
+			} elseif ( isset( $args['id'] ) ) {
+				$args['schema'] = true;
 			}
 
-			if ( true === $single && 1 === count( $list_model_user ) ) {
-				$list_model_user = $list_model_user[0];
+			$args = apply_filters( 'eo_model_user_before_get', $args );
+
+			if ( isset( $args['schema'] ) ) {
+				$array_users[] = $args;
+			} else {
+				$array_users = get_users( $args );
 			}
 
-			return $list_model_user;
-		}
+			// Traitement de la liste des résultats pour le retour.
+			$array_users = $this->prepare_items_for_response( $array_users, 'user', $this->meta_key, 'ID' );
 
-		/**
-		 * Appelle la méthode update.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @param  Array $data Les données.
-		 * @return Array $data Les données
-		 */
-		public function create( $data ) {
-			return $this->update( $data );
+			if ( true === $single && 1 === count( $array_users ) ) {
+				$array_users = $array_users[0];
+			}
+
+			return $array_users;
 		}
 
 		/**
 		 * Insère ou met à jour les données dans la base de donnée.
 		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
+		 * @since 0.1.0
+		 * @version 1.0.0
 		 *
 		 * @param  Array $data Les données a insérer ou à mêttre à jour.
 		 * @return Object      L'objet construit grâce au modèle.
 		 */
 		public function update( $data ) {
-			$data = (array) $data;
 			$model_name = $this->model_name;
+			$data       = (array) $data;
+			$req_method = ( ! empty( $data['id'] ) ) ? 'put' : 'post';
+			$args_cb    = array(
+				'model_name' => $model_name,
+				'req_method' => $req_method,
+				'meta_key'   => $this->meta_key,
+			);
 
-			if ( empty( $data['id'] ) ) {
-				$data = Model_Util::exec_callback( $data, $this->before_model_post_function );
-				$data = new $model_name( (array) $data );
-				$data = Model_Util::exec_callback( $data, $this->before_post_function );
-
-				if ( ! empty( $data->error ) && $data->error ) {
-					return false;
+			if ( 'post' === $req_method ) {
+				while ( username_exists( $data['login'] ) ) {
+					$data['login'] .= wp_rand( 1000, 9999 );
 				}
+			}
 
-				$cloned_data = clone $data;
-				$data->id = wp_insert_user( $cloned_data->do_wp_object() );
-
-				$data = Model_Util::exec_callback( $data, $this->after_post_function );
-			} else {
-				$data = Model_Util::exec_callback( $data, $this->before_model_put_function );
+			if ( ! empty( $data['id'] ) ) {
 				$current_data = $this->get( array(
 					'id' => $data['id'],
 				), true );
-
-				$obj_merged = (object) array_merge( (array) $current_data, (array) $data );
-				$data = new $model_name( (array) $obj_merged );
-				$data = Model_Util::exec_callback( $data, $this->before_put_function );
-
-				if ( ! empty( $data->error ) && $data->error ) {
-					return false;
-				}
-
-				$cloned_data = clone $data;
-				wp_update_user( $cloned_data->do_wp_object() );
-
-				$data = Model_Util::exec_callback( $data, $this->after_put_function );
+				$data         = Array_Util::g()->recursive_wp_parse_args( $data, $current_data->data );
 			}
 
-			Save_Meta_Class::g()->save_meta_data( $data, 'update_user_meta', $this->meta_key );
+			$data = apply_filters( 'eo_model_user_before_' . $req_method, $data, $args_cb );
 
-			return $data;
+			$args_cb['data'] = $data;
+
+			$object = new $model_name( $data, $req_method );
+
+			if ( empty( $object->data['id'] ) ) {
+				$inserted_user = wp_insert_user( $object->convert_to_wordpress() );
+				if ( is_wp_error( $inserted_user ) ) {
+					return $inserted_user;
+				}
+
+				$object->data['id'] = $inserted_user;
+			} else {
+
+				$updated_user = wp_update_user( $object->convert_to_wordpress() );
+				if ( is_wp_error( $updated_user ) ) {
+					return $updated_user;
+				}
+
+				$object->data['id'] = $updated_user;
+			}
+
+			$object = apply_filters( 'eo_model_user_after_' . $req_method, $object, $args_cb );
+
+			return $object;
 		}
 
-		/**
-		 * Supprimes un utilisateur
-		 *
-		 * @todo: Utile ?
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @param  integer $id L'ID de l'utilisateur.
-		 */
-		public function delete( $id ) {
-			wp_delete_user( $id );
-		}
-
-		/**
-		 * Utile uniquement pour DigiRisk.
-		 *
-		 * @since 1.0.0.0
-		 * @version 1.3.0.0
-		 *
-		 * @return string L'identifiant des commentaires pour DigiRisk.
-		 */
-		public function get_identifier_helper() {
-			return $this->identifier_helper;
-		}
 	}
 } // End if().

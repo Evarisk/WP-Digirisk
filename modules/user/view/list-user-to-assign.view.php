@@ -2,7 +2,7 @@
 /**
  * Le tableau des utilisateurs qui peuvent être affecté.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.3.0
  * @version 6.2.5.0
  * @copyright 2015-2017 Evarisk

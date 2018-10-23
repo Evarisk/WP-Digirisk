@@ -2,7 +2,7 @@
 /**
  * Le bouton "Télécharger le ZIP"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -16,13 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <?php if ( ! empty( $zip_url ) ) : ?>
-	<a class="button purple h50 tooltip hover"
+	<a class="wpeo-button button-purple button-square-50 wpeo-tooltip-event"
 		href="<?php echo esc_attr( $zip_url ); ?>"
 		aria-label="<?php echo esc_attr_e( 'ZIP', 'digirisk' ); ?>">
-		<i class="fa fa-file-archive-o" aria-hidden="true"></i>
+		<i class="far fa-file-archive" aria-hidden="true"></i>
 	</a>
 <?php else : ?>
-	<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
-		<i class="fa fa-times icon" aria-hidden="true"></i>
+	<span class="wpeo-button button-grey button-square-50 wpeo-tooltip-event" data-color="red" aria-label="<?php echo esc_attr_e( 'ZIP Corrompu', 'digirisk' ); ?>">
+		<i class="far fa-times button-icon" aria-hidden="true"></i>
 	</span>
 <?php endif; ?>

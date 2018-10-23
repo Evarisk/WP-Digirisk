@@ -1,0 +1,31 @@
+/* Couleurs */
+@mixin set-arrow-color($color) {
+	&.popover-top::before {
+		border-color: $color transparent transparent transparent;
+	}
+	&.popover-right::before {
+		border-color: transparent $color transparent transparent;
+	}
+	&.popover-bottom::before {
+		border-color: transparent transparent $color transparent;
+	}
+	&.popover-left::before {
+		border-color: transparent transparent transparent $color;
+	}
+}
+
+.wpeo-popover {
+	&.popover-primary {
+		background: $color__primary;
+		@include set-arrow-color($color__primary);
+	}
+	&.popover-light {
+		background: $color__grey;
+		color: rgba(0,0,0,0.6);
+		@include set-arrow-color($color__grey);
+	}
+	&.popover-red {
+		background: $color__red;
+		@include set-arrow-color($color__red);
+	}
+}

@@ -2,17 +2,18 @@
 /**
  * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'une société.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 1.0.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package risk
- * @subpackage shortcode
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Ajoutes un shortcode qui permet d'afficher la liste de tous les risques d'une société.
@@ -34,8 +35,8 @@ class Risk_Shortcode {
 	 * @param  array $param  Les arguments du shortcode.
 	 * @return void
 	 *
-	 * @since 0.1
-	 * @version 6.2.3.0
+	 * @since 6.0.0
+	 * @version 6.2.3
 	 */
 	public function callback_digi_risk( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
@@ -48,13 +49,13 @@ class Risk_Shortcode {
 	 * @param  array $param  Les arguments du shortcode.
 	 * @return void
 	 *
-	 * @since 1.0.0
+	 * @since 6.0.0
 	 * @version 6.3.0
 	 */
 	public function callback_dropdown_risk( $param ) {
 		$society_id = ! empty( $param['society_id'] ) ? (int) $param['society_id'] : 0;
 		$element_id = ! empty( $param['element_id'] ) ? (int) $param['element_id'] : 0;
-		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
+		$risk_id    = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 
 		$society = Society_Class::g()->show_by_type( $society_id );
 
@@ -71,8 +72,8 @@ class Risk_Shortcode {
 			} );
 		}
 
-		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'dropdown/list', array(
-			'risks' => $risks,
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'dropdown/list', array(
+			'risks'   => $risks,
 			'risk_id' => $risk_id,
 		) );
 	}

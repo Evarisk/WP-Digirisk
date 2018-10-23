@@ -2,7 +2,7 @@
  * Initialise l'objet "risk" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
  * @since 6.0.0
- * @version 6.4.0
+ * @version 7.0.0
  */
 window.eoxiaJS.digirisk.risk = {};
 
@@ -17,20 +17,19 @@ window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
-
 	// Remet à 0 les styles.
-	triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
-	triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).removeClass( 'active' );
+	window.eoxiaJS.tooltip.remove( triggeredElement.closest( '.risk-row' ).find( '.category-danger.wpeo-tooltip-event' ) );
+	window.eoxiaJS.tooltip.remove( triggeredElement.closest( '.risk-row' ).find( '.cotation-container.wpeo-tooltip-event' ) );
 
 	// Vérification du danger.
-	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[danger_id]"]' ).val() ) {
-		triggeredElement.closest( '.risk-row' ).find( '.categorie-container.tooltip' ).addClass( 'active' );
+	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk_category_id"]' ).val() && ! jQuery( '#digi-danger-preset' ).length ) {
+		window.eoxiaJS.tooltip.display( triggeredElement.closest( '.risk-row' ).find( '.category-danger.wpeo-tooltip-event' ) );
 		return false;
 	}
 
 	// Vérification de la cotation.
-	if ( '-1' === triggeredElement.closest( '.risk-row' ).find( 'input[name="risk[evaluation][scale]"]' ).val() ) {
-		triggeredElement.closest( '.risk-row' ).find( '.cotation-container.tooltip' ).addClass( 'active' );
+	if ( '{}' === triggeredElement.closest( '.risk-row' ).find( 'textarea[name="evaluation_variables"]' ).val() && ! jQuery( '#digi-danger-preset' ).length ) {
+		window.eoxiaJS.tooltip.display( triggeredElement.closest( '.risk-row' ).find( '.cotation-container.wpeo-tooltip-event' ) );
 		return false;
 	}
 
@@ -45,8 +44,7 @@ window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.0.0
  */
 window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
@@ -60,7 +58,6 @@ window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, resp
  * @return {void}
  *
  * @since 6.2.9
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table' ).removeClass( 'loading' );

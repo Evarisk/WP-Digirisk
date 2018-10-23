@@ -1,145 +1,130 @@
 <?php
 /**
- * Le formulaire pour configurer un établissement.
+ * Ce template affiche le formulaire pour configurer les informations d'une société.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.1
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.1
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit;
+
+global $eo_search; ?>
 
 <h1>
 	<?php
 	esc_html_e( 'Configuration ', 'digirisk' );
-	if ( Society_Class::g()->get_post_type() !== $element->type ) :
-		echo esc_html( $element->unique_identifier . ' - ' );
+	if ( Society_Class::g()->get_type() !== $element->data['type'] ) :
+		echo esc_html( $element->data['unique_identifier'] . ' - ' );
 	endif;
-	echo esc_html( $element->title );
+
+	echo esc_html( $element->data['title'] );
 	?>
 </h1>
 
-<form method="POST" class="form society-informations" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
+<form class="wpeo-form">
 	<input type="hidden" name="action" value="save_configuration" />
-	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->id ); ?>" />
-	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->id ); ?>" />
+	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
+	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
+	<input type="hidden" name="society[type]" value="<?php echo esc_attr( $element->data['type'] ); ?>" />
 	<?php wp_nonce_field( 'save_configuration' ); ?>
 
-	<ul class="grid-layout padding w2">
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $element->title ) ? 'active' : '' ); ?>">
-				<input name="society[title]" type="text" value="<?php echo esc_attr( $element->title ); ?>" />
-				<label><?php esc_html_e( 'Nom', 'digirisk' ); ?></label>
-				<span class="bar"></span>
+	<div class="wpeo-gridlayout grid-2 grid-gap-1">
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Nom', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="society[title]" class="form-field" type="text" value="<?php echo esc_attr( $element->data['title'] ); ?>" />
+			</label>
+		</div>
+
+		<?php if ( Society_Class::g()->get_type() === $element->data['type'] ) : ?>
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'SIRET', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<input name="society[siret_id]" class="form-field" type="text" value="<?php echo esc_attr( $element->data['siret_id'] ); ?>" />
+				</label>
 			</div>
-		</li>
 
-		<?php if ( Society_Class::g()->get_post_type() === $element->type ) : ?>
-			<li>
-				<div class="form-element <?php echo esc_attr( ! empty( $element->siret_id ) ? 'active' : '' ); ?>">
-					<input name="society[siret_id]" type="text" value="<?php echo esc_attr( $element->siret_id ); ?>" />
-					<label><?php esc_html_e( 'SIRET', 'digirisk' ); ?></label>
-					<span class="bar"></span>
-				</div>
-			</li>
-
-			<li>
-				<div class="form-element <?php echo esc_attr( ! empty( $element->number_of_employees ) ? 'active' : '' ); ?>">
-					<input name="society[number_of_employees]" type="text" value="<?php echo ! empty( $element->number_of_employees ) ? esc_attr( $element->number_of_employees ) : ''; ?>" />
-					<label><?php esc_html_e( 'Nombre d\'employée', 'digirisk' ); ?></label>
-					<span class="bar"></span>
-				</div>
-			</li>
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Nombre d\'employés', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<input name="society[number_of_employees]" class="form-field" type="text" value="<?php echo esc_attr( $element->data['number_of_employees'] ); ?>" />
+				</label>
+			</div>
 		<?php endif; ?>
-	</ul>
 
-	<ul class="grid-layout padding w2">
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $address->address ) ? 'active' : '' ); ?>">
-				<input name="address[address]" type="text" value="<?php echo esc_attr( $address->address ); ?>" />
-				<label><?php esc_html_e( 'Adresse', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+		<?php $eo_search->display( 'society_information_owner' ); ?>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $element->owner_id ) ? 'active' : '' ); ?>">
-				<input type="text"
-							data-field="society[owner_id]"
-							data-type="user"
-							placeholder=""
-							class="digi-search"
-							value="<?php echo ! empty( $element->owner_id ) ? esc_attr( User_Digi_Class::g()->element_prefix . $element->owner_id . ' - ' . $element->owner->displayname . ' (' . $element->owner->email . ')' ) : ''; ?>" />
-				<label><?php esc_html_e( 'Responsable', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-				<input type="hidden" name="society[owner_id]" value="<?php echo esc_attr( $element->owner_id ); ?>" />
-			</div>
-		</li>
+		<div class="form-element group-date">
+			<span class="form-label"><?php esc_html_e( 'Date de création', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input type="hidden" class="mysql-date" name="society[date]" value="<?php echo esc_attr( $element->data['date']['raw'] ); ?>" />
+				<input class="form-field date" type="text" value="<?php echo esc_attr( $element->data['date']['rendered']['date'] ); ?>" />
+			</label>
+		</div>
+	</div>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $address->additional_address ) ? 'active' : '' ); ?>">
-				<input type="text" name="address[additional_address]" value="<?php echo esc_attr( $address->additional_address ); ?>" />
-				<label><?php esc_html_e( 'Complément d\'adresse', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+	<div class="wpeo-gridlayout grid-2 grid-gap-1">
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Adresse', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="address[address]" class="form-field" type="text" value="<?php echo esc_attr( $address->data['address'] ); ?>" />
+			</label>
+		</div>
 
-		<li>
-			<div class="group-date form-element <?php echo esc_attr( ! empty( $element->date['date_input']['date'] ) ? 'active' : '' ); ?>">
-				<input type="text" class="mysql-date" style="width: 0px; padding: 0px; border: none;" name="society[date]" value="<?php echo esc_attr( $element->date['date_input']['date'] ); ?>" />
-				<input type="text" class="date" placeholder="04/01/2017" value="<?php echo esc_html( $element->date['date_input']['fr_FR']['date'] ); ?>" />
-				<label><?php esc_html_e( 'Date de création', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $address->postcode ) ? 'active' : '' ); ?>">
-				<input type="text" name="address[postcode]" value="<?php echo esc_attr( $address->postcode ); ?>" />
-				<label><?php esc_html_e( 'Code postal', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Complément d\'adresse', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="address[additional_address]" class="form-field" type="text" value="<?php echo esc_attr( $address->data['additional_address'] ); ?>" />
+			</label>
+		</div>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $address->town ) ? 'active' : '' ); ?>">
-				<input type="text" name="address[town]" value="<?php echo esc_attr( $address->town ); ?>" />
-				<label><?php esc_html_e( 'Ville', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Code postal', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="address[postcode]" class="form-field" type="text" value="<?php echo esc_attr( $address->data['postcode'] ); ?>" />
+			</label>
+		</div>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['phone'][0] ) ? 'active' : '' ); ?>">
-				<input type="text" name="society[contact][phone][]" value="<?php echo esc_attr( ! empty( $element->contact['phone'] ) ? end( $element->contact['phone'] ) : '' ); ?>" />
-				<label><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Ville', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="address[town]" class="form-field" type="text" value="<?php echo esc_attr( $address->data['town'] ); ?>" />
+			</label>
+		</div>
 
-		<li>
-			<div class="form-element <?php echo esc_attr( ! empty( $element->contact['email'] ) ? 'active' : '' ); ?>">
-				<input type="text" name="society[contact][email]" value="<?php echo esc_attr( $element->contact['email'] ); ?>" />
-				<label><?php esc_html_e( 'Email', 'digirisk' ); ?></label>
-				<span class="bar"></span>
-			</div>
-		</li>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Téléphone', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="society[contact][phone]" class="form-field" type="text" value="<?php echo esc_attr( ! empty( $element->data['contact']['phone'] ) ? end( $element->data['contact']['phone'] ) : '' ); ?>" />
+			</label>
+		</div>
 
-	</ul>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Email', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input name="society[contact][email]" class="form-field" type="text" value="<?php echo esc_attr( $element->data['contact']['email'] ); ?>" />
+			</label>
+		</div>
 
-	<ul>
-		<li class="form-element <?php echo esc_attr( ! empty( $element->content ) ? 'active' : '' ); ?>">
-			<textarea name="society[content]"><?php echo esc_html( $element->content ); ?></textarea>
-			<label><?php esc_html_e( 'Description', 'digirisk' ); ?></label>
-			<span class="bar"></span>
-		</li>
-	</ul>
+		<div class="form-element gridw-2">
+			<span class="form-label"><?php esc_html_e( 'Description', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<textarea name="society[content]" class="form-field" rows="6"><?php echo esc_html( $element->data['content'] ); ?></textarea>
+			</label>
+		</div>
 
-	<button class="float right button green disable action-input" data-parent="form"><?php esc_html_e( 'Modifier', 'digirisk' ); ?></button>
+		<div class="gridw-2">
+			<button class="wpeo-button button-main action-input alignright" data-parent="wpeo-form"><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></button>
+		</div>
+	</div>
+
 </form>

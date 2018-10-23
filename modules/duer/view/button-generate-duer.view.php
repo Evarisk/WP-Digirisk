@@ -2,7 +2,7 @@
 /**
  * La vue du bouton "Télécharger le document unique".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.5
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-target="main-content"
 	data-action="digi-list-duer"
 	data-id="<?php echo esc_attr( $element->id ); ?>"
-	data-title="<?php echo esc_attr( 'Les documents uniques de', 'digirisk' ); ?>"><i class="icon fa fa-download"></i>
+	data-title="<?php echo esc_attr( 'Les documents uniques de', 'digirisk' ); ?>"><i class="icon fas fa-download"></i>
 
 	<span><?php esc_html_e( 'DUER', 'digirisk' ); ?></span>
 </div>

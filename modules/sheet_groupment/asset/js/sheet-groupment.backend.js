@@ -10,9 +10,9 @@ window.eoxiaJS.digirisk.sheet_groupment.init = function() {};
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 1.0
- * @version 6.2.4.0
+ * @since 6.1.0
+ * @version 6.2.4
  */
 window.eoxiaJS.digirisk.sheet_groupment.generatedSheetGroupment = function( triggeredElement, response ) {
-	jQuery( '.tab-element[data-action="digi-fiche-de-groupement"]' ).click();
+	jQuery( '.tab-element[data-target="digi-fiche-de-groupement"]' ).click();
 };

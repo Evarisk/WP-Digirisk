@@ -1,0 +1,22 @@
+
+/** La classe parente est .wpeo--wrap */
+&.corrective-task .wpeo-project-task {
+	width: 100% !important;
+
+	.wpeo-done-point {
+		width: auto;
+	}
+	.list-task .wpeo-project-task {
+		width: 100%;
+	}
+	.completed-point {
+		width: auto !important;
+		border: 1px solid #000 !important;
+		border-radius: 0 !important;
+	}
+	.wpeo-task-point-use-toggle {
+		> p {
+			background: #fff;
+		}
+	}
+}

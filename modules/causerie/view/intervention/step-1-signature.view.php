@@ -15,4 +15,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->former['signature_id'] ) ); ?>"</td>
+<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->data['former']['signature_id'] ) ); ?>"</td>

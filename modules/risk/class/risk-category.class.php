@@ -2,10 +2,10 @@
 /**
  * Gestion des catégories de risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -18,20 +18,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion des catégories de risque.
  */
-class Risk_Category_Class extends \eoxia001\Term_Class {
+class Risk_Category_Class extends \eoxia\Term_Class {
 	/**
 	 * Nom du modèle à utiliser
 	 *
 	 * @var string
 	 */
-	protected $model_name  = '\digi\Risk_Category_Model';
+	protected $model_name = '\digi\Risk_Category_Model';
 
 	/**
 	 * Type de l'élément dans WordPress.
 	 *
 	 * @var string
 	 */
-	protected $taxonomy = 'digi-category-risk';
+	protected $type = 'digi-category-risk';
 
 	/**
 	 * Nom du champs (meta) de stockage des données liées
@@ -55,20 +55,6 @@ class Risk_Category_Class extends \eoxia001\Term_Class {
 	protected $version = '0.1';
 
 	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
-
-	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
@@ -82,8 +68,6 @@ class Risk_Category_Class extends \eoxia001\Term_Class {
 	 * @version 6.4.0
 	 */
 	protected function construct() {
-		parent::construct();
-
 		add_action( 'init', array( $this, 'custom_type_creation' ), 1 );
 	}
 
@@ -91,9 +75,9 @@ class Risk_Category_Class extends \eoxia001\Term_Class {
 	 * Création du type d'élément interne de WordPress pour gérer les catégories de risque.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
-	function custom_type_creation() {
+	public function custom_type_creation() {
 		$labels = array(
 			'name'              => __( 'Danger categories', 'digirisk' ),
 			'singular_name'     => __( 'Danger category', 'digirisk' ),
@@ -104,7 +88,7 @@ class Risk_Category_Class extends \eoxia001\Term_Class {
 			'edit_item'         => __( 'Edit Danger category', 'digirisk' ),
 			'update_item'       => __( 'Update Danger category', 'digirisk' ),
 			'add_new_item'      => __( 'Add New Danger category', 'digirisk' ),
-			'new_item_name'     => __( 'New Danger category Name' , 'digirisk' ),
+			'new_item_name'     => __( 'New Danger category Name', 'digirisk' ),
 			'menu_name'         => __( 'Danger category', 'digirisk' ),
 		);
 
@@ -119,7 +103,7 @@ class Risk_Category_Class extends \eoxia001\Term_Class {
 			),
 		);
 
-		register_taxonomy( $this->taxonomy, array( risk_class::g()->get_post_type() ), $args );
+		register_taxonomy( $this->get_type(), array( Risk_Class::g()->get_type() ), $args );
 	}
 }
 

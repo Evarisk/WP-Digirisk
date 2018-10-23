@@ -1,0 +1,12 @@
+{
+	"name": "Update manager",
+	"slug": "wpeo_update_manager",
+	"since": "1.0.0",
+	"version": "1.0.0",
+	"description": "Le module gérant les mises à jour",
+	"path": "modules/wpeo-update-manager",
+	"dependencies": {
+		"class": {},
+		"action": {}
+	}
+}

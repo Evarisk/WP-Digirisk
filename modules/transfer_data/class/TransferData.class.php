@@ -4,7 +4,7 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class TransferData_class extends \eoxia001\Singleton_Util {
+class TransferData_class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Déclaration de la correspondance entre les anciens types Evarisk et les nouveaux types dans wordpress / Declare an array for making correspondance between evarisk old types and wordpress new type

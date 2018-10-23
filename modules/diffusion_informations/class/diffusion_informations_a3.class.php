@@ -2,10 +2,10 @@
 /**
  * Classe héritant de Document_Class. Permet de définir les attributs "protected".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.4.0
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -31,7 +31,7 @@ class Diffusion_Informations_A3_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'diffusion_info_A3';
+	protected $type = 'diffusion_info_A3';
 
 	/**
 	 * Le type du document
@@ -67,20 +67,6 @@ class Diffusion_Informations_A3_Class extends Document_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'DI-A3-';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * Le nom pour le resgister post type

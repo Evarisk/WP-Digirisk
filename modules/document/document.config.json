@@ -1,12 +1,21 @@
 {
 	"name": "Document",
 	"slug": "document",
-	"version": "6.3.0",
+	"since": "6.0.0",
 	"description": "Le module gérant les documents de Digirisk",
 	"path": "modules/document/",
 	"dependencies": {
 		"model": {},
-		"class": {},
+    "filter": {},
+		"class": {
+      "priority": [
+        "class-document.php"
+      ]
+    },
 		"action": {}
-	}
+	},
+  "messages": [
+    "empty",
+    "generate"
+  ]
 }

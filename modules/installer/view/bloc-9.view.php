@@ -2,7 +2,7 @@
 /**
  * Le bloc de présentation lors de l'installation
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.7.0
  * @version 6.2.7.0
  * @copyright 2015-2017 Evarisk
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'Félicitations, l\'installation est terminée !', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<div class="content">
 			<h3><?php esc_html_e( 'DigiRisk génère aussi l\'affichage légal !', 'digirisk' ); ?></h3>
 			<p><?php esc_html_e( 'Remplissez les champs, téléchargez votre affichage légal gratuitement au format libreoffice A3 ou A4', 'digirisk' ); ?></p>

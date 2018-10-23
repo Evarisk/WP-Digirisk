@@ -2,7 +2,7 @@
 /**
 * @TODO : A détailler
 *
-* @author Jimmy Latour <jimmy@evarisk.com>
+* @author Evarisk <jimmy@evarisk.com>
 * @version 0.1
 * @copyright 2015-2016 Eoxia
 * @package chemical_product

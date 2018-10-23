@@ -1,14 +1,15 @@
 {
 	"name": "Update manager",
 	"slug": "update_manager",
-	"since": "6.2.7",
-	"version": "6.4.0",
-	"description": "Le module gérant les mises à jour de Digirisk",
+	"since": "1.4.0",
+	"version": "1.4.0",
+	"description": "Le module gérant les mises à jour",
 	"path": "modules/update_manager/",
 	"state": true,
 	"dependencies": {
 		"update": {},
 		"action": {},
 		"class": {}
-	}
+	},
+	"first_version": 1300
 }

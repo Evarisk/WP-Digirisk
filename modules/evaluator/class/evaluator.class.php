@@ -2,56 +2,51 @@
 /**
  * Classe gérant les évaluateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.3
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.2.3
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les évaluateurs
  */
-class Evaluator_Class extends \eoxia001\User_Class {
+class Evaluator_Class extends \eoxia\User_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name 	= '\digi\user_digi_model';
+	protected $model_name = '\digi\User_Digi_Model';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key		= '_wpeo_user_info';
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_hiring_date', '\digi\force_avatar_color', '\digi\get_identifier' );
+	protected $meta_key = '_wpeo_user_info';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base 	= 'evaluator';
+	protected $base = 'evaluator';
 
 	/**
 	 * La version de l'objet
 	 *
 	 * @var string
 	 */
-	protected $version 	= '0.1';
+	protected $version = '0.1';
 
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
@@ -70,41 +65,58 @@ class Evaluator_Class extends \eoxia001\User_Class {
 	/**
 	 * Fait le rendu des evaluateurs
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param Group_Model $element L'objet parent.
 	 * @param integer     $current_page Le numéro de la page pour la pagination.
-	 *
-	 * @since 6.0.0
-	 * @version 6.3.1
 	 */
 	public function render( $element, $current_page = 1 ) {
+		global $eo_search;
+
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
+		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
 
 		$args_where_evaluator = array(
-			'offset' => ( $current_page - 1 ) * $this->limit_evaluator,
-			'exclude' => array( 1 ),
-			'number' => $this->limit_evaluator,
+			'offset'     => ( $current_page - 1 ) * $this->limit_evaluator,
+			'exclude'    => array( 1 ),
+			'number'     => $this->limit_evaluator,
 			'meta_query' => array(
 				'relation' => 'OR',
 			),
 		);
 
-		$evaluators = $this->get( $args_where_evaluator );
+		$evaluators = User_Digi_Class::g()->get( $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator = count( $this->get( $args_where_evaluator ) );
+		$count_evaluator                = count( User_Digi_Class::g()->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
-			'element' => $element,
-			'evaluators' => $evaluators,
+		$eo_search->register_search( 'evaluator_to_assign', array(
+			'icon'    => 'fa-search',
+			'type'    => 'user',
+			'name'    => 'evaluator',
+			'action'  => 'display_evaluator_to_assign',
+			'post_id' => $element->data['id'],
+		) );
+
+		$eo_search->register_search( 'evaluator_affected', array(
+			'icon'    => 'fa-search',
+			'type'    => 'user',
+			'name'    => 'evaluator',
+			'action'  => 'display_evaluator_affected',
+			'post_id' => $element->data['id'],
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
+			'element'                 => $element,
+			'evaluators'              => $evaluators,
 			'list_affected_evaluator' => $list_affected_evaluator,
-			'number_page' => $number_page,
-			'current_page' => $current_page,
+			'number_page'             => $number_page,
+			'current_page'            => $current_page,
 		) );
 	}
 
@@ -115,22 +127,22 @@ class Evaluator_Class extends \eoxia001\User_Class {
 	 * @return array
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
+	 * @version 6.5.0
 	 */
 	public function get_list_affected_evaluator( $society ) {
-		if ( 0 === $society->id || empty( $society->user_info ) || empty( $society->user_info['affected_id'] ) ) {
+		if ( 0 === $society->data['id'] || empty( $society->data['user_info'] ) || empty( $society->data['user_info']['affected_id'] ) ) {
 			return false;
 		}
 
 		$list_evaluator = array();
-		if ( ! empty( $society->user_info['affected_id']['evaluator'] ) ) {
-			foreach ( $society->user_info['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+		if ( ! empty( $society->data['user_info']['affected_id']['evaluator'] ) ) {
+			foreach ( $society->data['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
 				if ( ! empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {
-							$evaluator = $this->get( array( 'id' => $evaluator_id ) );
-							$list_evaluator[ $evaluator_id ][ $index ]['user_info'] = $evaluator[0];
-							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info'] = $sub_array_value;
+							$evaluator = User_Digi_Class::g()->get( array( 'id' => $evaluator_id ), true );
+							$list_evaluator[ $evaluator_id ][ $index ]['user_info']              = $evaluator;
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']       = $sub_array_value;
 							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']['id'] = $index;
 						}
 					}
@@ -156,12 +168,11 @@ class Evaluator_Class extends \eoxia001\User_Class {
 	/**
 	 * Calcul de la durée d'affectation d'un utilisateur selon les dates d'affectation et de désaffectation / User assignment duration calculation depending on assignment and decommissioning dates
 	 *
+	 * @since 6.0.0
+	 *
 	 * @param array $user_affectation_info Les informations d'affectation de l'utilisateur / User assignment informations.
 	 *
 	 * @return string La durée d'affectation en minutes / Assigment duration in minutes
-	 *
-	 * @since 1.0
-	 * @version 6.2.4.0
 	 */
 	public function get_duration( $user_affectation_info ) {
 		if ( empty( $user_affectation_info['start']['date'] ) || empty( $user_affectation_info['end']['date'] ) ) {
@@ -169,13 +180,49 @@ class Evaluator_Class extends \eoxia001\User_Class {
 		}
 
 		$start_date = new \DateTime( $user_affectation_info['start']['date'] );
-		$end_date = new \DateTime( $user_affectation_info['end']['date'] );
-		$interval = $start_date->diff( $end_date );
+		$end_date   = new \DateTime( $user_affectation_info['end']['date'] );
+		$interval   = $start_date->diff( $end_date );
 
-		$minutes = $interval->format( '%h' ) * 60;
+		$minutes  = $interval->format( '%h' ) * 60;
 		$minutes += $interval->format( '%i' );
 
 		return $minutes;
+	}
+
+	/**
+	 * Affectes un évaluateur à la société.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  mixed   $society  Les données de la société.
+	 * @param  integer $user_id  L'ID de l'utilisateur.
+	 * @param  array   $data     Les données pour l'affectation.
+	 *
+	 * @return Evaluator_Model   Les données de l'évaluateur.
+	 */
+	public function affect_user( $society, $user_id, $data ) {
+		$end_date = new \DateTime( $data['on'] );
+		$end_date->add( new \DateInterval( 'PT' . $data['duration'] . 'M' ) );
+
+		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
+
+		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
+			'status' => 'valid',
+			'start'  => array(
+				'date' => $data['on'],
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+			'end'    => array(
+				'date' => sanitize_text_field( $end_date->format( 'Y-m-d H:i:s' ) ),
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+		);
+
+		Society_Class::g()->update_by_type( $society );
+
+		return $evaluator;
 	}
 
 }

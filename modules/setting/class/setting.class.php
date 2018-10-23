@@ -2,11 +2,11 @@
 /**
  * Classe gérant les configurations de DigiRisk.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return void
  */
-class Setting_Class extends \eoxia001\Singleton_Util {
+class Setting_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * La limite des utilisateurs de la page ="digirisk-setting"
@@ -45,65 +45,65 @@ class Setting_Class extends \eoxia001\Singleton_Util {
 	/**
 	 * Initialise les accronymes de DigiRisk.
 	 *
-	 * @return void
+	 * @since   6.0.0
+	 * @version 7.0.0
 	 *
-	 * @since 6.0.0
-	 * @version 6.2.9
+	 * @return mixed
 	 */
 	public function init_option() {
-		$file_content = file_get_contents( \eoxia001\Config_Util::$init['digirisk']->setting->path . 'asset/json/default.json' );
-		$data = json_decode( $file_content, true );
-		$list_accronym = get_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option );
+		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, array() );
 
 		if ( empty( $list_accronym ) ) {
-			update_option( \eoxia001\Config_Util::$init['digirisk']->accronym_option, json_encode( $data ) );
+			$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->setting->url . 'asset/json/default.json' );
+
+			if ( is_wp_error( $request ) ) {
+				return false;
+			}
+
+			$request = wp_remote_retrieve_body( $request );
+			$data    = json_decode( $request );
+
+
+			update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $data ) );
 		}
+
+		return true;
 	}
 
 	/**
 	 * Si les "preset danger" n'existent pas dans la bdd, cette méthode à pour but de les initialiser.
 	 *
 	 * @since 6.2.9
-	 * @version 6.4.5
+	 * @version 6.5.0
 	 */
 	public function init_preset_danger() {
-		global $wpdb;
-		$digirisk_core = get_option( \eoxia001\Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			$preset_danger_installed = get_option( \eoxia001\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
+			$preset_danger_installed = get_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, false );
 
 			if ( ! $preset_danger_installed ) {
 				$danger_category_list = Risk_Category_Class::g()->get();
 
 				if ( ! empty( $danger_category_list ) ) {
 					foreach ( $danger_category_list as $element ) {
-						if ( ! empty( $element->thumbnail_id ) ) {
-							$preset_risks_id = $wpdb->get_var( $wpdb->prepare(
-								"SELECT RISK.ID FROM {$wpdb->posts} AS RISK
-									JOIN {$wpdb->postmeta} AS RISK_META ON RISK.ID=RISK_META.post_id
-									JOIN {$wpdb->term_relationships} AS TR ON TR.object_id = RISK.ID
-										JOIN {$wpdb->term_taxonomy} AS TT ON TT.term_taxonomy_id = TR.term_taxonomy_id
-								WHERE RISK.post_status != 'trash'
-									AND RISK_META.meta_key = '_wpdigi_preset'
-									AND RISK_META.meta_value = 1
-									AND TT.term_id = %d", $element->id ) );
-
-							if ( null === $preset_risks_id ) {
-								Risk_Class::g()->update( array(
-									'taxonomy' => array(
-										'digi-category-risk' => array(
-											$element->id,
-										),
+						if ( ! empty( $element->data['thumbnail_id'] ) ) {
+							Risk_Class::g()->update( array(
+								'title'    => $element->data['name'],
+								'taxonomy' => array(
+									'digi-category-risk' => array(
+										$element->data['id'],
 									),
-									'preset' => true,
-								) );
-							}
+								),
+								'status'   => 'inherit',
+								'preset'   => true,
+							) );
 						}
 					}
 				}
 
-				update_option( \eoxia001\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
+				\eoxia\LOG_Util::log( 'Création des templates de risque.', 'digirisk' );
+				update_option( \eoxia\Config_Util::$init['digirisk']->setting->key_preset_danger, true );
 			}
 		}
 	}
@@ -119,7 +119,7 @@ class Setting_Class extends \eoxia001\Singleton_Util {
 	public function display_role_has_cap() {
 		$role_subscriber = get_role( 'subscriber' );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/has-cap', array(
+		\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/has-cap', array(
 			'role_subscriber' => $role_subscriber,
 		) );
 	}
@@ -128,11 +128,8 @@ class Setting_Class extends \eoxia001\Singleton_Util {
 	 * Récupères la liste des utilisateurs pour les afficher dans la vue "capability/list".
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
 	 *
 	 * @param array $list_user_id La liste des utilisateurs à afficher. Peut être vide pour récupérer tous les utilisateurs.
-	 *
-	 * @return void
 	 */
 	public function display_user_list_capacity( $list_user_id = array() ) {
 		$current_page = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1;
@@ -161,16 +158,16 @@ class Setting_Class extends \eoxia001\Singleton_Util {
 
 		if ( ! empty( $users ) ) {
 			foreach ( $users as &$user ) {
-				$user->wordpress_user = new \WP_User( $user->id );
+				$user->data['wordpress_user'] = new \WP_User( $user->data['id'] );
 			}
 		}
 
-		\eoxia001\View_Util::exec( 'digirisk', 'setting', 'capability/list', array(
-			'users' => $users,
+		\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/list', array(
+			'users'                => $users,
 			'has_capacity_in_role' => $has_capacity_in_role,
-			'number_page' => $number_page,
-			'count_user' => $count_user,
-			'current_page' => $current_page,
+			'number_page'          => $number_page,
+			'count_user'           => $count_user,
+			'current_page'         => $current_page,
 		) );
 	}
 }

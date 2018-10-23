@@ -1,0 +1,14 @@
+{
+	"name": "Listing Risk",
+	"slug": "listing-risk",
+	"since": "6.5.0",
+	"description": "Le module gérant les listing de risque",
+	"path": "modules/listing-risk/",
+	"dependencies": {
+    "shortcode": {},
+		"model": {},
+		"class": {},
+		"action": {},
+		"filter": {}
+	}
+}

@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @author Evarisk development team <dev@evarisk.com>
  * @version 6.0
  */
-class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
+class wpdigi_transferdata_society_class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Instanciation des outils pour les transferts spécifiques aux groupements et unités de travail / Instanciate groupements' and work unit specific transfer utilities
@@ -57,7 +57,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 		$new_group = group_class::g()->update( $group_mdl );
 		if ( ! empty( $new_group ) && ! empty( $new_group->id ) ) {
 			/**	Log creation	*/
-			\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $new_group->id ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 0 );
+			\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', sprintf( __( 'Transfered from evarisk on post having id. %d', 'wp-digi-dtrans-i18n' ), $new_group->id ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 0 );
 
 			/**
 			 * Transfert element associated risk
@@ -73,7 +73,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 			update_post_meta( $new_group->id, '_wpdigi_element_old_definition', wp_json_encode( array( TABLE_GROUPEMENT, serialize( $groupement ) ) ) );
 		} else {
 			/**	Log creation	*/
-			\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', __( 'An error occured while transfering the element to wordpress', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 2 );
+			\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-' . TABLE_GROUPEMENT, '', __( 'An error occured while transfering the element to wordpress', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $groupement->id, 'error' => $new_group, 'object' => $group_mdl ), 2 );
 		}
 
 		return $new_group;
@@ -207,7 +207,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 					$this->transfer_recommendation( $old_risk_id, TABLE_RISQUE, $wp_risk->id );
 
 					/**	Log creation	*/
-					\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk', '', sprintf( __( 'Risk have been successfully transfered to wordpress system id. %d', 'wp-digi-dtrans-i18n' ), $wp_risk->id ), array( 'object_id' => $old_risk_id, ), 0 );
+					\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk', '', sprintf( __( 'Risk have been successfully transfered to wordpress system id. %d', 'wp-digi-dtrans-i18n' ), $wp_risk->id ), array( 'object_id' => $old_risk_id, ), 0 );
 
 					/**	Store the other data into meta	*/
 					update_post_meta( $wp_risk->id, '_wpdigi_element_computed_identifier', TABLE_RISQUE . '#value_sep#' . $old_risk_id );
@@ -224,7 +224,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 					if ( ! empty( $new_danger_category ) && ! empty( $new_danger_category->term_id )  ) {
 						$wp_risk->taxonomy['digi-danger-category'][] = (int) $new_danger_category->term_id;
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category %1$s - %2$d have been associated to risk', 'wp-digi-dtrans-i18n' ), category_danger_class::g()->get_taxonomy(), (int) $new_danger_category->term_id ), array( 'object_id' => $wp_risk->id ), 0 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category %1$s - %2$d have been associated to risk', 'wp-digi-dtrans-i18n' ), category_danger_class::g()->get_taxonomy(), (int) $new_danger_category->term_id ), array( 'object_id' => $wp_risk->id ), 0 );
 
 						$danger_category_thumbnail = get_term_meta( $new_danger_category->term_id, '_thumbnail_id', true );
 						if ( ! empty( $danger_category_thumbnail ) ) {
@@ -232,7 +232,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 						}
 					} else {
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), wp_json_encode( $new_danger_category ) ), array( 'object_id' => $wp_risk->id, 'error' => $wp_risk ), 2 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger category to associate have not been found. %d', 'wp-digi-dtrans-i18n' ), wp_json_encode( $new_danger_category ) ), array( 'object_id' => $wp_risk->id, 'error' => $wp_risk ), 2 );
 					}
 
 					$risk_associated_file = TransferData_common_class::g()->transfert_picture_linked_to_element( TABLE_RISQUE, $old_risk_id, $wp_risk->id );
@@ -252,10 +252,10 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 					if ( ! empty( $new_danger_id ) ) {
 						$wp_risk->taxonomy['digi-danger'][] = (int) $new_danger_id;
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger %1$s - %2$d have been associated to risk', 'wp-digi-dtrans-i18n' ), danger_class::g()->get_taxonomy(), (int) $new_danger_id ), array( 'object_id' => $wp_risk->id ), 0 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Danger %1$s - %2$d have been associated to risk', 'wp-digi-dtrans-i18n' ), danger_class::g()->get_taxonomy(), (int) $new_danger_id ), array( 'object_id' => $wp_risk->id ), 0 );
 					} else {
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', __( 'Danger to associate have not been found.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $wp_risk->id ), 2 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', __( 'Danger to associate have not been found.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $wp_risk->id ), 2 );
 					}
 
 					/**	Définition de la catégorie de danger pour le risque selon les nouveaux rangements / Define the danger category for risk into new storage	*/
@@ -269,10 +269,10 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 					if ( ! empty( $new_method_id ) ) {
 						$wp_risk->taxonomy[ 'digi-method' ][] = (int)$new_method_id;
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Method %d have been associated to risk', 'wp-digi-dtrans-i18n' ), (int)$new_method_id ), array( 'object_id' => $wp_risk->id, ), 0 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Method %d have been associated to risk', 'wp-digi-dtrans-i18n' ), (int)$new_method_id ), array( 'object_id' => $wp_risk->id, ), 0 );
 					} else {
 						/**	Log creation	*/
-						\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', __( 'Method to associate have not been found.', 'wp-digi-dtrans-i18n'), array( 'object_id' => $wp_risk->id, ), 2 );
+						\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', __( 'Method to associate have not been found.', 'wp-digi-dtrans-i18n'), array( 'object_id' => $wp_risk->id, ), 2 );
 					}
 
 					/**	Création de chaque évaluation du risque / Create each risk evaluation	*/
@@ -337,7 +337,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 								$wp_risk->associated_evaluation[] = $wp_risk_evaluation->id;
 
 								/**	Log creation	*/
-								\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation %1$d have been associated to risk under %2$s', 'wp-digi-dtrans-i18n' ), (int) $risk_evaluation_definition['unique_key'], $wp_risk_evaluation->id ), array( 'object_id' => $wp_risk->id ), 0 );
+								\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation %1$d have been associated to risk under %2$s', 'wp-digi-dtrans-i18n' ), (int) $risk_evaluation_definition['unique_key'], $wp_risk_evaluation->id ), array( 'object_id' => $wp_risk->id ), 0 );
 
 								$query = $wpdb->prepare(
 									"SELECT *
@@ -379,7 +379,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 										$wp_risk_evaluation_comment_class = risk_evaluation_comment_class::g()->create( $risk_comment_definition );
 										if ( ! empty( $wp_risk_evaluation_comment_class->id ) ) {
 											/**	Log creation	*/
-											\eoxia001\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation comment %1$d have been associated to risk under %2$s', 'wp-digi-dtrans-i18n' ), (int) $comment->id, $wp_risk_evaluation_comment_class->id ), array( 'object_id' => $wp_risk->id ), 0 );
+											\eoxia\log_class::g()->exec( 'digirisk-datas-transfert-risk-association', '', sprintf( __( 'Evaluation comment %1$d have been associated to risk under %2$s', 'wp-digi-dtrans-i18n' ), (int) $comment->id, $wp_risk_evaluation_comment_class->id ), array( 'object_id' => $wp_risk->id ), 0 );
 										}
 									}
 								}
@@ -389,7 +389,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 								}
 							} else {
 								/**	Log creation	*/
-								\eoxia001\log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'wp-digi-dtrans-i18n' ), wp_json_encode( $wp_risk_evaluation ) ), array( 'object_id' => $old_risk_id ), 2 );
+								\eoxia\log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', sprintf( __( 'Unable to transfer risk evaluation to wordpress system. Error: %s', 'wp-digi-dtrans-i18n' ), wp_json_encode( $wp_risk_evaluation ) ), array( 'object_id' => $old_risk_id ), 2 );
 							}
 						}
 					}
@@ -398,7 +398,7 @@ class wpdigi_transferdata_society_class extends \eoxia001\Singleton_Util {
 					risk_class::g()->update( $wp_risk );
 				} else {
 					/**	Log creation	*/
-					\eoxia001\log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $old_risk_id, 'error' => $wp_risk ), 2 );
+					\eoxia\log_class::g()->exec( 'digirisk-datas-tranfert-risk', '', __( 'Unable to transfer risk to wordpress system.', 'wp-digi-dtrans-i18n' ), array( 'object_id' => $old_risk_id, 'error' => $wp_risk ), 2 );
 				}
 			}
 		}

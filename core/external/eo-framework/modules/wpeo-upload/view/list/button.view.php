@@ -2,14 +2,14 @@
 /**
  * The link for upload media.
  *
- * @author Eoxia
+ * @author Eoxia <dev@eoxia.com>
  * @since 1.2.0
  * @version 1.2.0
- * @copyright 2017
- * @package EO-Upload
+ * @copyright 2017-2018 Eoxia
+ * @package EO_Framework\EO_Upload\List\View
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if ( 'edit' === $atts['mode'] ) : ?>
 		<a href="#"
 			class="upload"
-			data-id="<?php echo esc_attr( $element->id ); ?>"
+			data-id="<?php echo esc_attr( $element->data['id'] ); ?>"
 			data-model-name="<?php echo esc_attr( $atts['model_name'] ); ?>"
 			data-field-name="<?php echo esc_attr( $atts['field_name'] ); ?>"
 			data-custom-class="<?php echo ! empty( $atts['custom_class'] ) ? esc_attr( $atts['custom_class'] ) : ''; ?>"
@@ -28,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			data-mime-type="<?php echo esc_attr( $atts['mime_type'] ); ?>"
 			data-size="<?php echo esc_attr( $atts['size'] ); ?>"
 			data-display-type="<?php echo esc_attr( $atts['display_type'] ); ?>">
-			<i class="fa fa-plus" aria-hidden="true"></i>
+			<i class="far fa-plus" aria-hidden="true"></i>
 			<?php esc_html_e( 'Add an attached file', 'wpeo-upload' ); ?></a>
 	<?php endif; ?>
-		<?php require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list.view.php' ); ?>
+		<?php require( \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/' . $atts['display_type'] . '/list.view.php' ); ?>
 </div>

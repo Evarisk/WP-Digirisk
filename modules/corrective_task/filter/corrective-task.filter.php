@@ -2,10 +2,10 @@
 /**
  * Les filtres relatifs aux tâches correctives.
  *
- * @author Evarisk <dev@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.5.0
- * @copyright 2015-2018 Evarisk
+ * @version 6.3.1
+ * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
@@ -23,8 +23,8 @@ class Corrective_Task_Filter {
 	/**
 	 * Constructeur
 	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @since 0.1
+	 * @version 6.2.6.0
 	 */
 	public function __construct() {
 		add_filter( 'risk_duer_additional_data', array( $this, 'callback_risk_duer_additional_data' ), 10, 2 );
@@ -40,10 +40,10 @@ class Corrective_Task_Filter {
 	 * @return string                La chaine de caractère mise au bon format pour le ODT.
 	 *
 	 * @since 6.0.0
-	 * @version 6.5.0
+	 * @version 6.3.1
 	 */
 	public function callback_risk_duer_additional_data( $data_risk, $risk ) {
-		$data_risk['actionPreventionCompleted']   = '';
+		$data_risk['actionPreventionCompleted'] = '';
 		$data_risk['actionPreventionUncompleted'] = '';
 
 		if ( class_exists( '\task_manager\task_class' ) ) {
@@ -111,7 +111,7 @@ class Corrective_Task_Filter {
 		), true );
 
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'move-to', array(
+		\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'move-to', array(
 			'task' => $task,
 		) );
 

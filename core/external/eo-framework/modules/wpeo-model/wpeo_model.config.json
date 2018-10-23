@@ -1,7 +1,8 @@
 {
 	"name": "WPEO Model",
 	"slug": "wpeo_model",
-	"version": "1.5.0",
+	"since": "0.1.0",
+	"version": "1.0.0",
 	"api_version": "1",
 	"description": "Le moteur de donnée et de définition de schéma pour WordPress",
 	"state": true,
@@ -9,12 +10,19 @@
 	"dependencies": {
 		"class": {
 			"priority": [
-				"helper",
-				"rest"
+				"helper.class.php",
+				"rest.class.php",
+				"object.class.php",
+				"post.class.php"
 			]
 		},
-		"model": {},
-		"helper": {}
+		"model": {
+			"priority": [
+				"class-post-model.php",
+				"class-attachment-model.php"
+			]
+		},
+		"filter": {}
 	},
 	"allowed_ip_for_unauthentified_access_rest": [
 		"127.0.0.1",

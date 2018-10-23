@@ -1,0 +1,107 @@
+/*--------------------------------------------------------------
+	Module : Popover
+	Version : 1.0.0
+
+	.wpeo-popover -> classe de base du mobule
+	.popover-primary -> popover sur fond rouge
+	.popover-light -> popover sur fond rouge
+	.popover-red -> popover sur fond rouge
+--------------------------------------------------------------*/
+
+.wpeo-popover {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 99999;
+	white-space: nowrap;
+	background: $color__dark;
+	color: #fff;
+	border-radius: 6px;
+	font-size: 0.8rem;
+	padding: 0 1em;
+	height: 2.2em;
+	line-height: 2.2em;
+
+	&::before {
+		display: block;
+		content: '';
+		width: 0;
+		height: 0;
+		border-style: solid;
+		position: absolute;
+	}
+	&:focus {
+		outline: none;
+	}
+}
+
+/* Couleurs */
+@mixin set-arrow-color($color) {
+	&.tooltip-top::before {
+		border-color: $color transparent transparent transparent;
+	}
+	&.tooltip-right::before {
+		border-color: transparent $color transparent transparent;
+	}
+	&.tooltip-bottom::before {
+		border-color: transparent transparent $color transparent;
+	}
+	&.tooltip-left::before {
+		border-color: transparent transparent transparent $color;
+	}
+}
+
+.wpeo-popover {
+	&.popover-dark {
+		background: $color__dark;
+		@include set-arrow-color($color__dark);
+	}
+	&.popover-primary {
+		background: $color__primary;
+		@include set-arrow-color($color__primary);
+	}
+	&.popover-light {
+		background: $color__grey;
+		color: rgba(0,0,0,0.6);
+		@include set-arrow-color($color__grey);
+	}
+	&.popover-red {
+		background: $color__red;
+		@include set-arrow-color($color__red);
+	}
+}
+
+/* Position de la fleche */
+.wpeo-popover {
+	&.popover-top::before {
+		border-width: 6px 6px 0 6px;
+		border-color: $color__dark transparent transparent transparent;
+		bottom: -6px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&.popover-right::before {
+		border-width: 6px 6px 6px 0;
+		border-color: transparent $color__dark transparent transparent;
+		top: 50%;
+		transform: translateY(-50%);
+		left: -6px;
+	}
+	&.popover-bottom::before {
+		border-width: 0 6px 6px 6px;
+		border-color: transparent transparent $color__dark transparent;
+		top: -6px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&.popover-left::before {
+			border-width: 6px 0 6px 6px;
+			border-color: transparent transparent transparent $color__dark;
+			top: 50%;
+			transform: translateY(-50%);
+			right: -6px;
+	}
+}

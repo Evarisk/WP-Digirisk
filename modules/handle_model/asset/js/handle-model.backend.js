@@ -91,7 +91,7 @@ window.eoxiaJS.digirisk.handleModel.associateFile = function() {
 		file_id: window.eoxiaJS.digirisk.handleModel.selectedInfos.id
 	};
 
-	window.eoxiaJS.digirisk.handleModel.currentButton.addClass( 'loading' );
+	window.eoxiaJS.loader.display( window.eoxiaJS.digirisk.handleModel.currentButton );
 
 	jQuery.post( window.ajaxurl, data, function( response ) {
 		jQuery( '#digi-handle-model' ).html( response.data.view );

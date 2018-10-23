@@ -1,7 +1,8 @@
 {
 	"name": "Tab",
 	"slug": "tab",
-	"version": "6.4.4",
+	"since": "6.4.4",
+	"version": "7.0.0",
 	"description": "Le module gérant les onglets",
 	"path": "modules/tab/",
 	"dependencies": {
@@ -9,5 +10,19 @@
 		"shortcode": {},
 		"filter": {},
 		"action": {}
+	},
+	"default_tab": {
+		"society": {
+			"slug": "digi-informations",
+			"title": "Informations"
+		},
+		"groupment": {
+			"slug": "digi-risk",
+			"title": "Les risques"
+		},
+		"workunit": {
+			"slug": "digi-risk",
+			"title": "Les risques"
+		}
 	}
 }

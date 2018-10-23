@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant la page principale des causeries.
  */
-class Causerie_Page_Class extends \eoxia001\Singleton_Util {
+class Causerie_Page_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Accès rapide vers les états d'une causerie.
@@ -36,7 +36,7 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 	 * @return void
 	 */
 	protected function construct() {
-		$this->steps = \eoxia001\Config_Util::$init['digirisk']->causerie->steps;
+		$this->steps = \eoxia\Config_Util::$init['digirisk']->causerie->steps;
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 		if ( ! empty( $id ) ) {
 			Causerie_Intervention_Page_Class::g()->display_single( $id );
 		} else {
-			\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'main' );
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
 		}
 	}
 
@@ -77,7 +77,7 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 
 		$causeries_intervention = $this->get_documents( $causeries_intervention );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'dashboard/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/main', array(
 			'causeries_intervention' => $causeries_intervention,
 		) );
 	}
@@ -98,7 +98,7 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 			'meta_compare' => '<',
 		) );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'start/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/main', array(
 			'causeries'              => $causeries,
 			'causeries_intervention' => $causeries_intervention,
 		) );
@@ -108,9 +108,6 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 	 * Affichage onglet "Ajouter une causerie".
 	 *
 	 * @since   6.6.0
-	 * @version 6.6.0
-	 *
-	 * @return void
 	 */
 	public function display_form() {
 		$causeries = Causerie_Class::g()->get();
@@ -118,7 +115,7 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 
 		$causerie_schema = Causerie_Class::g()->get( array( 'schema' => true ), true );
 
-		\eoxia001\View_Util::exec( 'digirisk', 'causerie', 'form/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/main', array(
 			'causeries'       => $causeries,
 			'causerie_schema' => $causerie_schema,
 		) );
@@ -139,17 +136,17 @@ class Causerie_Page_Class extends \eoxia001\Singleton_Util {
 			foreach ( $causeries as &$causerie ) {
 				$class = '\digi\Sheet_Causerie_Class';
 
-				if ( Causerie_Intervention_Class::g()->get_type() === $causerie->type ) {
+				if ( Causerie_Intervention_Class::g()->get_type() === $causerie->data['type'] ) {
 					$class = '\digi\Sheet_Causerie_Intervention_Class';
 				}
 
 				$causerie->document = $class::g()->get( array(
-					'post_parent'    => $causerie->id,
+					'post_parent'    => $causerie->data['id'],
 					'posts_per_page' => 1,
 				), true );
 
-				if ( ! empty( $causerie->document ) ) {
-					$causerie->document->path = Document_Class::g()->get_document_path( $causerie->document, $causerie->type );
+				if ( ! empty( $causerie->data['document'] ) ) {
+					// $causerie->document->path = Document_Class::g()->get_document_path( $causerie->document, $causerie->type );
 				}
 			}
 		}

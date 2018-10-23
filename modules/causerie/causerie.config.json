@@ -6,14 +6,13 @@
 	"description": "Le module gérant les causeries",
 	"path": "modules/causerie/",
 	"dependencies": {
-		"filter": {},
-		"helper": {},
 		"model": {
 			"priority": [
-				"causerie"
+				"causerie.model.php"
 			]
 		},
 		"class": {},
+    "filter": {},
 		"action": {}
 	},
 	"steps": {
@@ -23,5 +22,5 @@
 		"CAUSERIE_PARTICIPANT": 3,
 		"CAUSERIE_CLOSED": 4
 	},
-	"state": true
+	"state": false
 }

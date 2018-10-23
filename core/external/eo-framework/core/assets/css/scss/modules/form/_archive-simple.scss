@@ -1,0 +1,117 @@
+// General
+.form-element {
+	width: 100%;
+}
+
+// Design
+.form-element {
+	label {
+		display: block;
+		font-size: 12px;
+		text-transform: uppercase;
+		font-weight: 900;
+		margin-bottom: 0.6em;
+		color: rgba(0,0,0,0.8);
+	}
+	input, textarea, select {
+		display: block;
+		background: $color__grey;
+		border: 0;
+		font-size: 14px;
+		padding: 1em;
+		transition: all 0.2s ease-out;
+		width: 100%;
+		border: 1px solid transparent;
+		&:hover {
+			background: darken($color__grey, 5%);
+			box-shadow: none;
+		}
+		&:focus, &:active {
+			outline: none;
+			background: darken($color__grey, 5%);
+			border: 1px solid $color__primary;
+			box-shadow: none;
+		}
+	}
+
+	/* Type radoi */
+	input[type="radio"] {
+		display: inline-block;
+		width: auto;
+		appearance: none;
+		border-radius: 50%;
+		width: 16px;
+		height: 16px;
+		padding: 0;
+		border: 0;
+		background: #fff;
+		border: 1px solid rgba(0,0,0,0.4);
+		transition: 0.2s all linear;
+		outline: none;
+		position: relative;
+		top: 2px;
+		&:hover {
+			cursor: pointer;
+			border: 1px solid $color__primary;
+			box-shadow: 0 0 0 1px $color__primary inset;
+		}
+		&:checked {
+			border: 1px solid $color__primary;
+			box-shadow: 0 0 0 4px $color__primary inset;
+		}
+		& + label {
+			text-transform: none;
+			font-weight: 400;
+			font-size: 14px;
+			display: inline-block;
+			margin-right: 1em;
+			&:hover {
+				cursor: pointer;
+			}
+			&:active {
+				outline: none;
+			}
+		}
+	}
+
+	/* type checkbox */
+	input[type="checkbox"] {
+		width: auto;
+		visibility: hidden;
+		display: none;
+		& + label {
+			text-transform: none;
+			font-weight: 400;
+			font-size: 14px;
+			display: inline-block;
+			margin-right: 1em;
+			position: relative;
+			&:hover {
+				cursor: pointer;
+			}
+			&:active {
+				outline: none;
+			}
+			&::before {
+				display: inline-block;
+				content: '';
+				width: 14px;
+				height: 14px;
+				background: #fff;
+				box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+				border: 2px solid #fff;
+				@include transition();
+				margin-right: 0.6em;
+			}
+		}
+		&:not(:checked) + label:hover::before {
+			box-shadow: 0 0 0 2px $color__primary;
+		}
+		&:checked + label {
+			&::before {
+				box-shadow: 0 0 0 2px $color__primary;
+				background: $color__primary;
+			}
+		}
+	}
+}

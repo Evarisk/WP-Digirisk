@@ -2,12 +2,11 @@
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1.0
- * @version 6.3.0
- * @copyright 2015-2017 Evarisk
- * @package society
- * @subpackage class
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.6
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
 namespace digi;
@@ -19,7 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les sociétés (groupement et unité de travail)
  */
-class Society_Class extends \eoxia001\Post_Class {
+class Society_Class extends \eoxia\Post_Class {
+
 	/**
 	 * Le nom du modèle
 	 *
@@ -32,7 +32,7 @@ class Society_Class extends \eoxia001\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-society';
+	protected $type = 'digi-society';
 
 	/**
 	 * La clé principale du modèle
@@ -47,27 +47,6 @@ class Society_Class extends \eoxia001\Post_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'S';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_society' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -91,14 +70,40 @@ class Society_Class extends \eoxia001\Post_Class {
 	protected $post_type_name = 'Sociétés';
 
 	/**
+	 * Récupères les données de la société courante selon la superglobale "society_id" ou sinon récupères la première societé depuis la base de donnée.
+	 *
+	 * @since 7.0.0
+	 * @version 7.0.0
+	 *
+	 * @return Society_Model|Group_Model|Workunit_Model Renvoies les données de la société courante.
+	 */
+	public function get_current_society() {
+		$society_id = 0;
+
+		if ( ! empty( $_REQUEST['society_id'] ) ) { // WPCS: CSRF ok.
+			$society_id = (int) $_REQUEST['society_id'];
+		}
+
+		if ( 0 === $society_id ) {
+			$society = self::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
+		} else {
+			$society = $this->show_by_type( $society_id );
+		}
+
+		return $society;
+	}
+
+	/**
 	 * Récupères l'objet par rapport à son post type
 	 *
 	 * @param integer $id L'ID de l'objet.
 	 *
 	 * @return boolean|object L'objet
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since 6.0.0
+	 * @version 7.0.0
 	 */
 	public function show_by_type( $id ) {
 		$id = (int) $id;
@@ -113,19 +118,10 @@ class Society_Class extends \eoxia001\Post_Class {
 			return false;
 		}
 
-		$model_name = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+		$model_name    = '\digi\\' . str_replace( 'digi-', '', $post_type ) . '_class';
+		$establishment = $model_name::g()->get( array( 'id' => $id ), true );
 
-		if ( '\digi\final-causerie_class' === $model_name ) {
-			$model_name = '\digi\Causerie_Intervention_Class';
-		}
-
-		$establishment = $model_name::g()->get( array( 'include' => array( $id ) ) );
-
-		if ( empty( $establishment[0] ) ) {
-			return false;
-		}
-
-		return $establishment[0];
+		return $establishment;
 	}
 
 	/**
@@ -135,19 +131,14 @@ class Society_Class extends \eoxia001\Post_Class {
 	 *
 	 * @return object L'objet mis à jour
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since   6.0.0
 	 */
 	public function update_by_type( $establishment ) {
 		if ( ! is_object( $establishment ) && ! is_array( $establishment ) ) {
 			return false;
 		}
 
-		$type = ( is_object( $establishment ) && isset( $establishment->type ) ) ? $establishment->type : '';
-
-		if ( empty( $type ) ) {
-			$type = ( is_array( $establishment ) && ! empty( $establishment['type'] ) ) ? $establishment['type'] : '';
-		}
+		$type = ( is_object( $establishment ) && isset( $establishment->data['type'] ) ) ? $establishment->data['type'] : '';
 
 		if ( empty( $type ) ) {
 			return false;
@@ -159,66 +150,48 @@ class Society_Class extends \eoxia001\Post_Class {
 			return false;
 		}
 
-		$establishment = $model_name::g()->update( $establishment );
+		$establishment = $model_name::g()->update( $establishment->data );
 		return $establishment;
 	}
 
 	/**
-	 * Supprimes une société ainsi que tous ses éléments enfants.
+	 * Récupères toutes les sociétés enfants à $society_id correspondant à $status par ordre croissant de la clé _wpdigi_unique_key.
 	 *
-	 * @since 6.6.0
-	 * @version 6.6.0
+	 * @since   7.0.0
 	 *
-	 * @param  integer $id               L'ID de la société.
-	 * @param  boolean $delete_childrens Supprimes les enfants égalements si True.
+	 * @param  integer $society_id L'ID de la société parent.
+	 * @param  string  $status     Le status des sociétés enfant. Inherit par défaut.
+	 * @param  boolean $recursive  True pour rendre recursive la récupération
+	 * des sociétés.
 	 *
-	 * @return boolean     True si tout s'est bien passé sinon false.
+	 * @return array               Un tableau contenant toutes les sociétés enfant.
 	 */
-	public function delete( $id, $delete_childrens = true ) {
-		$status = true;
-
-		$society         = $this->show_by_type( $id );
-		$society->status = 'trash';
-
-		$this->update_by_type( $society );
-
-		if ( $delete_childrens ) {
-			$status = $this->delete_childrens( $id );
+	public function get_societies_in( $society_id, $status = 'inherit', $recursive = false ) {
+		if ( 0 !== $society_id ) {
+			$societies = $this->get( array(
+				'post_parent'    => $society_id,
+				'posts_per_page' => -1,
+				'post_type'      => array( 'digi-group', 'digi-workunit' ),
+				'post_status'    => $status,
+				'meta_key'       => '_wpdigi_unique_key',
+				'orderby'        => array(
+					'menu_order'     => 'ASC',
+					'meta_value_num' => 'ASC',
+				),
+			) ); // WPCS: slow query ok.
+		} else {
+			$societies = $this->get( array(
+				'posts_per_page' => 1,
+			) );
 		}
 
-		return $society;
-	}
-
-	/**
-	 * Fonctions récursives, supprimes tous les éléments enfant à parent_id et récursivement.
-	 *
-	 * @since 6.6.0
-	 * @version 6.6.0
-	 *
-	 * @param  integer $parent_id L'ID de l'élément parent.
-	 *
-	 * @return boolean
-	 */
-	public function delete_childrens( $parent_id ) {
-		$args = array(
-			'post_status'    => array( 'publish', 'inherit' ),
-			'post_parent'    => $parent_id,
-			'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
-			'posts_per_page' => -1,
-		);
-
-		$societies = get_posts( $args );
-
-		if ( ! empty( $societies ) ) {
-			foreach ( $societies as $society ) {
-				$society->post_status = 'trash';
-				wp_update_post( $society );
-
-				$this->delete_childrens( $society->ID );
+		if ( $recursive && ! empty( $societies ) ) {
+			foreach ( $societies as &$society ) {
+				$society->data['childrens'] = $this->get_societies_in( $society->data['id'], 'inherit', true );
 			}
 		}
 
-		return true;
+		return $societies;
 	}
 
 	/**
@@ -227,19 +200,41 @@ class Society_Class extends \eoxia001\Post_Class {
 	 * @param  mixed $society Les données de la société.
 	 * @return Address_Model  L'adresse du groupement ou le schéma d'une adresse.
 	 *
-	 * @since 0.1
-	 * @version 6.2.5.0
+	 * @since   6.0.0
 	 */
 	public function get_address( $society ) {
-		$args_address = array( 'schema' => true );
+		$last_address_id = 0;
 
-		if ( ! empty( $society->contact['address_id'] ) ) {
-			$args_address = array( 'comment__in' => array( max( $society->contact['address_id'] ) ) );
+		if ( ! empty( $society->data['contact']['address_id'] ) ) {
+			$last_address_id = end( $society->data['contact']['address_id'] );
 		}
 
-		$address = Address_Class::g()->get( $args_address );
+		if ( ! empty( $last_address_id ) ) {
+			$address = Address_Class::g()->get( array( 'id' => $last_address_id ), true );
+		} else {
+			$address = Address_Class::g()->get( array( 'schema' => true ), true );
+		}
 
 		return $address;
+	}
+
+	public function delete_child( $id ) {
+		$posts = get_posts( array(
+			'post_type'      => array( 'digi-group', 'digi-workunit' ),
+			'post_parent'    => $id,
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$post->post_status = 'trash';
+
+				$this->delete_child( $post->ID );
+
+				wp_update_post( $post );
+			}
+		}
 	}
 }
 

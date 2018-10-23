@@ -2,7 +2,7 @@
 /**
  * Le bloc de présentation lors de l'installation
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.7.0
  * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
 
 <div>
 	<h2><?php esc_html_e( 'Les pictogrammes de signalisation de l’INRS', 'digirisk' ); ?></h2>
-	<div class="grid-layout padding w2">
+	<div class="wpeo-gridlayout padding grid-2">
 		<div class="content">
 			<h3><?php esc_html_e( 'L’INRS met à votre disposition 2 guides pour la signalisation :', 'digirisk' ); ?></h3>
 			<ul>

@@ -1,0 +1,24 @@
+.wpeo-form .form-element {
+	input[type="checkbox"].form-field {
+		&:not(:checked) + label:hover::before {
+			box-shadow: 0 0 0 2px $color__primary;
+		}
+		&:checked + label {
+			&::before {
+				box-shadow: 0 0 0 2px $color__primary;
+				background: $color__primary;
+			}
+		}
+	}
+
+	input[type="radio"].form-field {
+		&:hover {
+			border: 1px solid $color__primary;
+			box-shadow: 0 0 0 1px $color__primary inset;
+		}
+		&:checked {
+			border: 1px solid $color__primary;
+			box-shadow: 0 0 0 4px $color__primary inset;
+		}
+	}
+}

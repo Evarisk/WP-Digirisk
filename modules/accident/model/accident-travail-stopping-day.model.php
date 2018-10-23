@@ -2,7 +2,7 @@
 /**
  * Définition des champs d'un accident "stoppping day"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.4.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -18,46 +18,58 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un accident "stoppping day"
  */
-class Accident_Travail_Stopping_Day_Model extends \eoxia001\Post_Model {
+class Accident_Travail_Stopping_Day_Model extends \eoxia\Post_Model {
 
 	/**
 	 * Le constructeur définit les champs
 	 *
-	 * @param Accident_Model $object Les données de l'accident.
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 */
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'unique_key' => array(
-				'type' => 'string',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_unique_key',
-			),
-			'unique_identifier' => array(
-				'type' => 'string',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_unique_identifier',
-			),
-			'number_day' => array(
-				'type' => 'integer',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_number_day',
-			),
-			'associated_document_id' => array(
-				'type' => 'array',
-				'meta_type' => 'multiple',
-				'child' => array(
-					'document' => array(
-						'type' => 'array',
-						'meta_type' => 'multiple',
-					),
-				),
-			),
-		) );
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['unique_key'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_key',
+		);
 
-		parent::__construct( $object );
+		$this->schema['unique_identifier'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_identifier',
+		);
+
+		$this->schema['number_day'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_number_day',
+		);
+
+		$this->schema['associated_document_id'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'child'     => array(),
+		);
+
+		$this->schema['associated_document_id']['child']['document'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+		);
+
+		parent::__construct( $data, $req_method );
 	}
 
 }

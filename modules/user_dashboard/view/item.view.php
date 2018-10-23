@@ -1,52 +1,46 @@
 <?php
 /**
- * Affichage d'un utilisateur ainsi que les actions pour l'éditer ou le supprimer.
+ * Une ligne du tableau des utilisateurs dans la page "digirisk-users".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.3
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
-<tr class="user-row" data-id="<?php echo esc_attr( $user->id ); ?>">
-	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->avatar_color ); ?>;"><span><?php echo esc_html( $user->initial ); ?></span></div></td>
-	<td class="padding"><span><strong><?php echo esc_html( \eoxia001\User_Class::g()->element_prefix . $user->id ); ?><strong></span></td>
-	<td class="padding"><span><?php echo esc_html( stripslashes( $user->lastname ) ); ?></span></td>
-	<td class="padding"><span><?php echo esc_html( stripslashes( $user->firstname ) ); ?></span<</td>
-	<td class="padding"><span><?php echo esc_html( $user->email ); ?></span></td>
+<tr class="user-row" data-id="<?php echo esc_attr( $user->data['id'] ); ?>">
+	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $user->data['initial'] ); ?></span></div></td>
+	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->data['id'] ); ?><strong></span></td>
+	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['lastname'] ) ); ?></span></td>
+	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
+	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td>
-		<div class="action grid-layout w3">
+		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
 			<div
-				class="button w50 light wpeo-modal-event tooltip hover" aria-label="Voir les détails"
-				data-action="load_user_details"
-				data-id="<?php echo esc_attr( $user->id ); ?>"
-				data-title="<?php echo esc_attr( 'U' . $user->id . ' ' . $user->displayname . ' - Liste des secteurs' ); ?>">
-				<i class="icon fa fa-eye"></i>
-			</div>
-			
-			<div
-				data-id="<?php echo esc_attr( $user->id ); ?>"
+				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
-				class="button w50 light edit action-attribute">
-				<i class="icon fa fa-pencil"></i>
+				class="wpeo-button button-square-50 button-transparent edit action-attribute">
+				<i class="button-icon fas fa-pencil"></i>
 			</div>
 
 			<div
-				data-id="<?php echo esc_attr( $user->id ); ?>"
+				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_user' ) ); ?>"
+				data-message-delete="<?php esc_attr_e( 'Confirmer la suppression', 'digirisk' ); ?>"
 				data-loader="users"
 				data-action="delete_user"
-				class="button w50 light delete action-delete" >
-				<i class="icon fa fa-times"></i>
+				class="wpeo-button button-square-50 button-transparent delete action-delete" >
+				<i class="button-icon far fa-times"></i>
 			</div>
 		</div>
 	</td>

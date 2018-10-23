@@ -2,11 +2,11 @@
 /**
  * Les boutons par défaut dans la modal.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Eoxia <dev@eoxia.com>
  * @since 1.0.0
  * @version 1.0.0
- * @copyright 2015-2017 Evarisk
- * @package EO_Framework
+ * @copyright 2015-2018 Eoxia
+ * @package EO_Framework\Core\View
  */
 
 namespace digi;

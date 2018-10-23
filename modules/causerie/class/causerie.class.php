@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les causeries
  */
-class Causerie_Class extends \eoxia001\Post_Class {
+class Causerie_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
@@ -32,7 +32,7 @@ class Causerie_Class extends \eoxia001\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-causerie';
+	protected $type = 'digi-causerie';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -61,27 +61,6 @@ class Causerie_Class extends \eoxia001\Post_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'C';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier', '\digi\get_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\get_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_causerie' );
 
 	/**
 	 * Le nom pour le resgister post type

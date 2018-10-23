@@ -1,22 +1,21 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du controlleur pour la gestion des différentes évaluations pour un risque / Main controller file for managing each evaluation for a risk
+ * Définition du schéma des commentaires de recommandation.
  *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.6
+ * @version 6.1.6
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
  */
 
-/**
- * Classe du controlleur pour la gestion des différentes évaluations pour un risque / Main controller class for managing each evaluation for a risk
- *
- * @author Evarisk development team <dev@evarisk.com>
- * @version 6.0
- */
-class recommendation_comment_model extends \eoxia001\comment_model {
-	public function __construct( $object ) {
-		parent::__construct( $object );
-	}
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
+
+/**
+ * Définition du schéma des commentaires de recommandation.
+ */
+class Recommendation_Comment_Model extends \eoxia\Comment_Model {}

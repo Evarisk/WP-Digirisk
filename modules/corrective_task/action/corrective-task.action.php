@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux tâches correctives.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -24,7 +24,6 @@ class Corrective_Task_Action {
 	 * Le constructeur
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.5
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_open_task', array( $this, 'callback_open_task' ) );
@@ -35,14 +34,9 @@ class Corrective_Task_Action {
 	 * Appelle la vue contenant le formulaire pour ajouter une tâche corrective.
 	 *
 	 * @since 6.0.0
-	 * @version 6.4.4
-	 *
-	 * @return void
-	 *
-	 * @todo: nonce
 	 */
 	public function callback_open_task() {
-		$parent_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$parent_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
 
 		if ( empty( $parent_id ) ) {
 			wp_send_json_error();
@@ -58,11 +52,11 @@ class Corrective_Task_Action {
 				'id' => $parent_id,
 			), true );
 
-			$society = Society_Class::g()->show_by_type( $risk->parent_id );
+			$society = Society_Class::g()->show_by_type( $risk->data['parent_id'] );
 
-			if ( empty( $task->id ) ) {
+			if ( empty( $task->data['id'] ) ) {
 				$task = \task_manager\Task_Class::g()->update( array(
-					'title'     => __( $society->unique_identifier . ' ' . $society->title . ' -> risque ' . $risk->unique_identifier, 'task-manager' ),
+					'title'     => __( $society->data['unique_identifier'] . ' ' . $society->data['title'] . ' -> risque ' . $risk->data['unique_identifier'], 'task-manager' ),
 					'parent_id' => $parent_id,
 					'author_id' => get_current_user_id(),
 					'user_info' => array(
@@ -73,13 +67,13 @@ class Corrective_Task_Action {
 			}
 
 			ob_start();
-			\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'form', array(
+			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'form', array(
 				'task' => $task,
 			) );
 			$view = ob_get_clean();
 		} else {
 			ob_start();
-			\eoxia001\View_Util::exec( 'digirisk', 'corrective_task', 'need-task-manager' );
+			\eoxia\View_Util::exec( 'digirisk', 'corrective_task', 'need-task-manager' );
 			$view = ob_get_clean();
 		} // End if().
 

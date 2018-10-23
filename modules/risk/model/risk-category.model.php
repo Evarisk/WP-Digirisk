@@ -1,11 +1,11 @@
 <?php
 /**
- * Définition du modèle d'une catégorie de risque.
+ * Définition du schéma des catégories de risque.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -16,52 +16,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition du modèle d'une catégorie de risque.
+ * Définition du schéma des catégories de risque.
  */
-class Risk_Category_Model extends \eoxia001\Term_Model {
+class Risk_Category_Model extends \eoxia\Term_Model {
 
 	/**
-	 * Le constructeur.
+	 * Définition du schéma des catégories de risque.
 	 *
 	 * @since 6.4.0
-	 * @version 6.4.0
+	 * @version 6.5.0
 	 *
-	 * @param Object $object L'objet.
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'status' => array(
-				'type' => 'string',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_status',
-				'bydefault' => '',
-			),
-			'unique_key' => array(
-				'type' => 'string',
-				'meta_type' => 'single',
-				'field' => '_wpdigi_unique_key',
-				'bydefault' => '',
-			),
-			'unique_identifier' => array(
-				'type' => 'string',
-				'meta_type' => 'multiple',
-				'bydefault' => '',
-			),
-			'thumbnail_id' => array(
-				'type' => 'integer',
-				'meta_type' => 'single',
-				'field' => '_thumbnail_id',
-				'bydefault' => 0,
-			),
-			'position' => array(
-				'type' => 'integer',
-				'meta_type' => 'single',
-				'field' => '_position',
-				'bydefault' => 1,
-			),
-		) );
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['status'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_status',
+			'default'   => '',
+		);
 
-		parent::__construct( $object );
+		$this->schema['thumbnail_id'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.4.0',
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_thumbnail_id',
+			'default'   => 0,
+		);
+
+		$this->schema['position'] = array(
+			'since'     => '6.4.0',
+			'version'   => '6.5.0',
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_position',
+			'default'   => 1,
+		);
+
+		parent::__construct( $data, $req_method );
 	}
 
 }

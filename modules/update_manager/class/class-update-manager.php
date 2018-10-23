@@ -1,33 +1,49 @@
 <?php
 /**
- * Classe gérant les mises à jour de DigiRisk.
+ * Classe gérant les mises à jour.
  *
- * @package DigiRisk
- * @subpackage Module/Update_Manager
- *
- * @since 6.2.8.0
- * @version 6.2.8.0
+ * @author Eoxia <dev@eoxia.com>
+ * @since 1.4.0
+ * @version 1.4.0
+ * @copyright 2015-2018 Eoxia
+ * @package Task_Manager
  */
 
-namespace digi;
+namespace digirisk;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Classe gérant les mises à jour de DigiRisk.
+ * Classe gérant les mises à jour.
  */
-class Update_Manager extends \eoxia001\Singleton_Util {
+class Update_Manager extends \Eoxia\Singleton_Util {
 
+	/**
+	 * Constructeur obligatoire pour Singleton_Util
+	 *
+	 * @since 1.4.0
+	 * @version 1.4.0
+	 *
+	 * @return void
+	 */
 	protected function construct() {}
 
+	/**
+	 * Récupères les mises à jour en attente et appel la vue "main" du module "update_manager".
+	 *
+	 * @since 1.4.0
+	 * @version 1.4.0
+	 *
+	 * @return void
+	 */
 	public function display() {
-		$waiting_updates = get_option( '_digi_waited_updates', array() );
-		\eoxia001\View_Util::exec( 'digirisk', 'update_manager', 'main', array(
-			'waiting_updates' => $waiting_updates,
+		\eoxia\View_Util::exec( 'eo-framework', 'wpeo_update_manager', 'main', array(
+			'waiting_updates' => get_option( \eoxia\Config_Util::$init['digirisk']->key_waiting_updates, array() ),
+			'redirect_action' => 'digi_redirect_to_dashboard',
+			'dashboard_url'   => \eoxia\Config_Util::$init['digirisk']->dashboard_page_url,
 		) );
 	}
-}
 
-new Update_Manager();
+}

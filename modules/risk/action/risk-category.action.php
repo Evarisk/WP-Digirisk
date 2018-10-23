@@ -2,10 +2,10 @@
 /**
  * Les actions relatives aux categories de risque.
  *
- * @author Evarisk <dev@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
- * @version 6.6.1
- * @copyright 2015-2018 Evarisk
+ * @version 6.4.0
+ * @copyright 2015-2017 Evarisk
  * @package DigiRisk
  */
 
@@ -24,7 +24,6 @@ class Risk_Category_Action {
 	 * Le constructeur appelle l'action WordPress suivante: init (Pour déclarer la taxonomy danger)
 	 *
 	 * @since 6.0.0
-	 * @version 6.2.9
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_check_predefined_danger', array( $this, 'callback_check_predefined_danger' ) );
@@ -34,16 +33,13 @@ class Risk_Category_Action {
 	 * Vérifie si ce danger est prédéfini.
 	 * Si c'est le cas, renvoie toutes les données prédéfinis.
 	 *
-	 * @return void
-	 *
 	 * @since 6.2.9
-	 * @version 6.4.0
 	 */
 	public function callback_check_predefined_danger() {
 		check_ajax_referer( 'check_predefined_danger' );
 
-		$danger_id = ! empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0;
-		$society_id = ! empty( $_POST['society_id'] ) ? (int) $_POST['society_id'] : 0;
+		$danger_id  = ! empty( $_POST['danger_id'] ) ? (int) $_POST['danger_id'] : 0; // WPCS: input var ok.
+		$society_id = ! empty( $_POST['society_id'] ) ? (int) $_POST['society_id'] : 0; // WPCS: input var ok.
 
 		if ( empty( $danger_id ) || empty( $society_id ) ) {
 			wp_send_json_error();
@@ -58,28 +54,27 @@ class Risk_Category_Action {
 					AND RISK_META.meta_value = 1
 				JOIN {$wpdb->postmeta} AS RISK_META_MAIN ON RISK.ID=RISK_META_MAIN.post_id
 					AND RISK_META_MAIN.meta_key = '_wpdigi_risk'
-				WHERE RISK.post_status='publish' AND RISK_META_MAIN.meta_value LIKE '%digi-category-risk\":[" . $danger_id . "]%'" );
+				WHERE RISK.post_status='inherit'
+					AND RISK_META_MAIN.meta_value LIKE '%digi-category-risk\":[" . $danger_id . "]%'" );
 
 		if ( empty( $preset_risk_id ) ) {
 			wp_send_json_error();
 		}
 
 		$preset_risk = Risk_Class::g()->get( array(
-			'include' => array( $preset_risk_id ),
-		) );
-
-		$preset_risk = $preset_risk[0];
+			'id' => $preset_risk_id,
+		), true );
 
 		ob_start();
-		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
 			'society_id' => $society_id,
-			'risk' => $preset_risk,
+			'risk'       => $preset_risk,
 		) );
 
 		wp_send_json_success( array(
-			'view' => ob_get_clean(),
-			'namespace' => 'digirisk',
-			'module' => 'risk',
+			'view'             => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
 			'callback_success' => 'checkedPredefinedDanger',
 		) );
 	}

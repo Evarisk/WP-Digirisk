@@ -1,37 +1,59 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition du schéma des variables des méthodes d'évaluation.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.0.0
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
-class evaluation_method_variable_model extends \eoxia001\term_model {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	public function __construct( $object ) {
-		$this->model = array_merge( $this->model, array(
-			'unique_key' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'single',
-				'field'			=> '_wpdigi_unique_key',
-				'bydefault'	=> 0,
-			),
-			'unique_identifier' => array(
-				'type' 			=> 'string',
-				'meta_type'	=> 'multiple',
-				'bydefault'	=> 0,
-			),
-			'display_type' => array(
-				'type' 		=> 'string',
-				'meta_type'	=> 'multiple',
-			),
-			'range' => array(
-				'type' 		=> 'array',
-				'meta_type'	=> 'multiple',
-			),
-			'survey' => array(
-				'type' 		=> 'array',
-				'meta_type'	=> 'multiple',
-			),
-		) );
+/**
+ * Définition du schéma des variables des méthodes d'évaluation.
+ */
+class Evaluation_Method_Variable_Model extends \eoxia\Term_Model {
 
-		parent::__construct( $object );
+	/**
+	 * Définition du schéma des variables des méthodes d'évaluation.
+	 *
+	 * @since 6.0.0
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
+	 */
+	public function __construct( $data = null, $req_method = null ) {
+
+
+		$this->schema['display_type'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['range'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+		);
+
+		$this->schema['survey'] = array(
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+		);
+
+		parent::__construct( $data, $req_method );
 	}
 
 }

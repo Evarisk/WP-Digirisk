@@ -2,25 +2,25 @@
 /**
  * All methods utils for associate, dessociate and anothers things about upload.
  *
- * @author Eoxia
+ * @author Eoxia <dev@eoxia.com>
  * @since 0.1.0-alpha
  * @version 1.0.0
- * @copyright 2017
- * @package EO-Framework/WPEO-Upload
+ * @copyright 2017-2018 Eoxia
+ * @package EO_Framework\EO_Upload\Class
  */
 
-namespace eoxia001;
+namespace eoxia;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
+if ( ! class_exists( '\eoxia\WPEO_Upload_Class' ) ) {
 
 	/**
 	 * All methods utils for associate, dessociate and anothers things about upload.
 	 */
-	class WPEO_Upload_Class extends \eoxia001\Singleton_Util {
+	class WPEO_Upload_Class extends \eoxia\Singleton_Util {
 
 		/**
 		 * Need to be declared for Singleton_Util.
@@ -55,20 +55,20 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 		 * }
 		 */
 		public function get_post_data( $nonce_name ) {
-			check_ajax_referer( $nonce_name );
+			// check_ajax_referer( $nonce_name );
 
-			$data = array();
-			$data['id']             = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
-			$data['title']          = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-			$data['mode']           = ! empty( $_POST['mode'] ) ? sanitize_text_field( $_POST['mode'] ) : '';
-			$data['field_name']     = ! empty( $_POST['field_name'] ) ? sanitize_text_field( $_POST['field_name'] ) : '';
-			$data['model_name']     = ! empty( $_POST['model_name'] ) ? stripslashes( sanitize_text_field( $_POST['model_name'] ) ) : '';
-			$data['custom_class']   = ! empty( $_POST['custom_class'] ) ? stripslashes( sanitize_text_field( $_POST['custom_class'] ) ) : '';
-			$data['size']           = ! empty( $_POST['size'] ) ? sanitize_text_field( $_POST['size'] ) : 'thumbnail';
-			$data['single']         = ! empty( $_POST['single'] ) ? sanitize_text_field( $_POST['single'] ) : 'false';
-			$data['mime_type']      = ! empty( $_POST['mime_type'] ) ? sanitize_text_field( $_POST['mime_type'] ) : '';
-			$data['display_type']   = ! empty( $_POST['display_type'] ) ? sanitize_text_field( $_POST['display_type'] ) : '';
-			$data['file_id']        = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
+			$data                 = array();
+			$data['id']           = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+			$data['title']        = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
+			$data['mode']         = ! empty( $_POST['mode'] ) ? sanitize_text_field( $_POST['mode'] ) : '';
+			$data['field_name']   = ! empty( $_POST['field_name'] ) ? sanitize_text_field( $_POST['field_name'] ) : '';
+			$data['model_name']   = ! empty( $_POST['model_name'] ) ? stripslashes( sanitize_text_field( $_POST['model_name'] ) ) : '';
+			$data['custom_class'] = ! empty( $_POST['custom_class'] ) ? stripslashes( sanitize_text_field( $_POST['custom_class'] ) ) : '';
+			$data['size']         = ! empty( $_POST['size'] ) ? sanitize_text_field( $_POST['size'] ) : 'thumbnail';
+			$data['single']       = ! empty( $_POST['single'] ) ? sanitize_text_field( $_POST['single'] ) : 'false';
+			$data['mime_type']    = ! empty( $_POST['mime_type'] ) ? sanitize_text_field( $_POST['mime_type'] ) : '';
+			$data['display_type'] = ! empty( $_POST['display_type'] ) ? sanitize_text_field( $_POST['display_type'] ) : '';
+			$data['file_id']      = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0;
 
 			return $data;
 		}
@@ -98,8 +98,8 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 					'id' => $data['id'],
 				), true );
 
-				$element->associated_document_id[ $data['field_name'] ][] = (int) $data['file_id'];
-				$data['model_name']::g()->update( $element );
+				$element->data['associated_document_id'][ $data['field_name'] ][] = (int) $data['file_id'];
+				$data['model_name']::g()->update( $element->data );
 			}
 
 			return $element;
@@ -128,24 +128,24 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 			), true );
 
 			// Check if the file is in associated file list.
-			if ( isset( $element->associated_document_id ) && isset( $element->associated_document_id[ $data['field_name'] ] ) ) {
-				$key = array_search( $data['file_id'], $element->associated_document_id[ $data['field_name'] ], true );
+			if ( isset( $element->data['associated_document_id'] ) && isset( $element->data['associated_document_id'][ $data['field_name'] ] ) ) {
+				$key = array_search( $data['file_id'], $element->data['associated_document_id'][ $data['field_name'] ], true );
 				if ( false !== $key ) {
-					array_splice( $element->associated_document_id[ $data['field_name'] ], $key, 1 );
+					array_splice( $element->data['associated_document_id'][ $data['field_name'] ], $key, 1 );
 				}
 			}
 
 			// Check if the file is set as thumbnail.
-			if ( $data['file_id'] === $element->thumbnail_id ) {
-				$element->thumbnail_id = 0;
+			if ( $data['file_id'] === $element->data['thumbnail_id'] ) {
+				$element->data['thumbnail_id'] = 0;
 			}
 
 			// Set another thumbnail id.
-			if ( empty( $element->thumbnail_id ) && ! empty( $element->associated_document_id[ $data['field_name'] ] ) ) {
-				$element->thumbnail_id = $element->associated_document_id[ $data['field_name'] ][0];
+			if ( empty( $element->data['thumbnail_id'] ) && ! empty( $element->data['associated_document_id'][ $data['field_name'] ] ) ) {
+				$element->data['thumbnail_id'] = $element->data['associated_document_id'][ $data['field_name'] ][0];
 			}
 
-			$data['model_name']::g()->update( $element );
+			$data['model_name']::g()->update( $element->data );
 
 			return $element;
 		}
@@ -179,15 +179,15 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 				'id' => $data['id'],
 			), true );
 
-			$main_picture_id = $element->thumbnail_id;
+			$main_picture_id = $element->data['thumbnail_id'];
 
 			if ( empty( $main_picture_id ) ) {
-				$main_picture_id = $element->associated_document_id[ $data['field_name'] ][0];
+				$main_picture_id = $element->data['associated_document_id'][ $data['field_name'] ][0];
 			}
 
-			$list_id = ! empty( $element->associated_document_id[ $data['field_name']  ] ) ? $element->associated_document_id[ $data['field_name'] ] : array();
+			$list_id = ! empty( $element->data['associated_document_id'][ $data['field_name']  ] ) ? $element->data['associated_document_id'][ $data['field_name'] ] : array();
 
-			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/main.view.php' );
+			require \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/main.view.php';
 		}
 
 		/**
@@ -208,10 +208,11 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 		 * @return mixed
 		 */
 		public function set_thumbnail( $data ) {
-			$element = $data['model_name']::g()->update( array(
-				'id' => $data['id'],
-				'thumbnail_id' => $data['file_id'],
-			) );
+			$element = $data['model_name']::g()->get( array( 'id' => $data['id'] ), true );
+
+			$element->data['thumbnail_id'] = $data['file_id'];
+
+			$element = $data['model_name']::g()->update( $element->data );
 
 			return $element;
 		}
@@ -241,7 +242,7 @@ if ( ! class_exists( '\eoxia001\WPEO_Upload_Class' ) ) {
 		 * @return void
 		 */
 		public function out_all_attributes( $data ) {
-			require( \eoxia001\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/attributes.view.php' );
+			require \eoxia\Config_Util::$init['eo-framework']->wpeo_upload->path . '/view/box/gallery/attributes.view.php';
 		}
 	}
 

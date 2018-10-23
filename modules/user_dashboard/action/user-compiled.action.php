@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_compiled_action extends \eoxia001\Singleton_Util {
+class user_compiled_action extends \eoxia\Singleton_Util {
 	/**
 	* Le constructeur appelle les actions suivantes:
 	*/

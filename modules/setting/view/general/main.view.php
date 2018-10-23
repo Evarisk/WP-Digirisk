@@ -2,18 +2,19 @@
 /**
  * Gestion des réglages générales de DigiRisk.
  *
- * @author Evarisk <dev@evarisk.com>
- * @since 6.6.0
- * @version 6.6.0
- * @copyright 2015-2018 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     7.0.0
  */
 
-namespace digirisk;
+namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <div class="wpeo-form">
 	<input type="hidden" name="action" value="save_general_settings_digirisk" />
@@ -26,21 +27,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<input type="text" name="domain_mail" class="form-field" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 		</label>
 	</div>
-	
+
 	<div class="form-element">
 		<label class="form-field-container">
 			<div class="form-field-inline">
 				<input type="checkbox" id="edit_risk_category" class="form-field" name="edit_risk_category" <?php echo $can_edit_risk_category ? 'checked' : ''; ?> />
-				<label for="edit_risk_category">Autoriser la modification des catégories de risques</label>
+				<label for="edit_risk_category"><?php esc_html_e( 'Autoriser la modification des catégories de risques', 'digirisk' ); ?></label>
 			</div>
 		</label>
 	</div>
-	
+
 	<div class="form-element">
 		<label class="form-field-container">
 			<div class="form-field-inline">
 				<input type="checkbox" id="edit_type_cotation" class="form-field" name="edit_type_cotation" <?php echo $can_edit_type_cotation ? 'checked' : ''; ?> />
-				<label for="edit_type_cotation">Autoriser la modification des types de cotation</label>
+				<label for="edit_type_cotation"><?php esc_html_e( 'Autoriser la modification des types de cotation', 'digirisk' ); ?></label>
 			</div>
 		</label>
 	</div>

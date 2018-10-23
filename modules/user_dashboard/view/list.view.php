@@ -1,19 +1,20 @@
 <?php
 /**
- * La liste des utilisateurs
+ * Le template contenant la liste des utilisateurs dans le tableau de la page "digirisk-users".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
- * @package DigiRisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.2.3
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <thead>
 	<tr>
@@ -27,11 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Firtname', 'digirisk' ); ?>
-			<span class="tooltip hover red" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Email', 'digirisk' ); ?>
-			<span class="tooltip hover red" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="w100"></td>
 	</tr>
@@ -41,11 +42,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	if ( ! empty( $list_user ) ) :
 		foreach ( $list_user as $user ) :
-			\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'item', array( 'user' => $user ) );
+			\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item', array( 'user' => $user ) );
 		endforeach;
 	endif;
 
 	// Formulaire d'édition pour une nouvelle entrée.
-	\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user_schema ) );
+	\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user_schema ) );
 	?>
 </tbody>

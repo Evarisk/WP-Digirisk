@@ -1,14 +1,13 @@
 {
 	"name": "Group",
 	"slug": "group",
-	"version": "6.4.0",
+	"since": "6.1.5",
+	"version": "7.0.0",
 	"description": "Le module gérant les groupements",
 	"path": "modules/group/",
 	"dependencies": {
 		"model": {},
-		"filter": {},
 		"class": {},
-		"action": {},
-		"helper": {}
+		"filter": {}
 	}
 }

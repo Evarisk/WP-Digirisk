@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class chemi_product_model extends \eoxia001\post_model {
+class chemi_product_model extends \eoxia\post_model {
 
 	public function __construct( $object ) {
 		$this->model = array_merge( $this->model, array(

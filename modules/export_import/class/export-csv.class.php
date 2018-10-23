@@ -2,7 +2,7 @@
 /**
  * Gestion de l'export en CSV des risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.2.6
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion de l'export en CSV des risques.
  */
-class Export_CSV_Class extends \eoxia001\Singleton_Util {
+class Export_CSV_Class extends \eoxia\Singleton_Util {
 	/**
 	 * Le chemin vers le répertoire uploads/Digirisk/export
 	 *

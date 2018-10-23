@@ -2,35 +2,37 @@
 /**
  * Classe gérant les risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.3.1
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Classe gérant les risques
  */
- class Risk_Class extends \eoxia001\Post_Class {
+class Risk_Class extends \eoxia\Post_Class {
 
 	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\risk_model';
+	protected $model_name = '\digi\Risk_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-risk';
+	protected $type = 'digi-risk';
 
 	/**
 	 * La clé principale du modèle
@@ -38,20 +40,6 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	 * @var string
 	 */
 	protected $meta_key = '_wpdigi_risk';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_risk', '\digi\get_risk_category' );
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -89,6 +77,14 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	protected $post_type_name = 'Risques';
 
 	/**
+	 * Le nom de la taxonomy.
+	 *
+	 * @since   7.0.0
+	 * @version 7.0.0
+	 */
+	protected $attached_taxonomy_type = 'digi-recommendation-category';
+
+	/**
 	 * Charges la liste des risques même ceux des enfants. Et appelle le template pour les afficher.
 	 * Récupères le schéma d'un risque pour l'entrée d'ajout de risque dans le tableau.
 	 *
@@ -96,32 +92,53 @@ if ( ! defined( 'ABSPATH' ) ) {	exit; }
 	 * @return void
 	 *
 	 * @since 6.0.0
-	 * @version 6.3.1
-	 * @todo Doit charger les risques des enfants
 	 */
 	public function display( $society_id ) {
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$risk_schema = $this->get( array( 'schema' => true ) );
-		$risk_schema = $risk_schema[0];
+		$risk_schema = $this->get( array( 'schema' => true ), true );
+		$risks       = $this->get( array(
+			'post_parent' => $society_id,
+			'orderby'     => 'meta_value_num',
+			'meta_key'    => '_wpdigi_equivalence',
+		) );
 
-		$risks = $this->get( array( 'post_parent' => $society_id ) );
-
-		if ( count( $risks ) > 1 ) {
-			usort( $risks, function( $a, $b ) {
-				if ( $a->evaluation->risk_level['equivalence'] === $b->evaluation->risk_level['equivalence'] ) {
-					return 0;
-				}
-				return ( $a->evaluation->risk_level['equivalence'] > $b->evaluation->risk_level['equivalence'] ) ? -1 : 1;
-			} );
-		}
-
-		\eoxia001\View_Util::exec( 'digirisk', 'risk', 'main', array(
-			'society' => $society,
-			'society_id' => $society_id,
-			'risks' => $risks,
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
+			'society'     => $society,
+			'society_id'  => $society_id,
+			'risks'       => $risks,
 			'risk_schema' => $risk_schema,
 		) );
+	}
+
+	/**
+	 * Sauvegardes un risque dans la base de donnée.
+	 *
+	 * @since 6.5.0
+	 *
+	 * @param  [type] $data                 [description]
+	 * @param  [type] $risk_category_id     [description]
+	 * @param  [type] $method_evaluation_id [description]
+	 * @return [type]                       [description]
+	 */
+	public function save( $data, $risk_category_id, $method_evaluation_id ) {
+		$data['id']        = (int) $data['id'];
+		$data['parent_id'] = (int) $data['parent_id'];
+
+		if ( ! isset( $data['status'] ) ) {
+			$data['status'] = 'inherit';
+		}
+
+		$data['taxonomy'] = array(
+			'digi-category-risk' => array( $risk_category_id ),
+			'digi-method'        => array( $method_evaluation_id ),
+		);
+
+		$risk_category = Risk_Category_Class::g()->get( array( 'id' => $risk_category_id ), true );
+
+		$data['title'] = $risk_category->data['name'];
+
+		return $this->update( $data );
 	}
 }
 

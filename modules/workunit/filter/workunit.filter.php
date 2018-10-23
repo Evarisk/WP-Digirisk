@@ -2,12 +2,14 @@
 /**
  * Gestion des filtres relatifs aux unités de travail.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.10
- * @version 6.4.4
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
+
+namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Ajoutes l'onglet Configuration aux unités de travail
  */
-class Workunit_Filter {
+class Workunit_Filter extends Identifier_Filter {
 
 	/**
 	 * Le constructeur
@@ -25,6 +27,8 @@ class Workunit_Filter {
 	 * @version 6.2.2
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_informations' ), 5, 2 );
 		add_filter( 'digi_tab', array( $this, 'callback_digi_tab_more' ), 7, 2 );
 	}
@@ -64,14 +68,14 @@ class Workunit_Filter {
 	public function callback_digi_tab_more( $tab_list, $id ) {
 		$tab_list['digi-workunit']['more'] = array(
 			'type'  => 'toggle',
-			'text'  => '<i class="action fa fa-ellipsis-v toggle"></i>',
+			'text'  => '<i class="action far fa-ellipsis-v toggle"></i>',
 			'items' => array(
 				'delete' => array(
 					'type'         => 'text',
 					'text'         => __( 'Supprimer', 'digirisk' ),
 					'parent_class' => 'action-delete no-tab',
 					'action'       => 'delete_society',
-					'attributes'   => 'data-loader=digirisk-wrap data-id=' . $id . ' data-message-delete=' . __( 'Confirmer', 'digirisk' ),
+					'attributes'   => 'data-loader=digirisk-wrap data-id=' . $id . ' data-message-delete="' . __( 'Êtes-vous sûr(e) de vouloir supprimer cette unité de travail ?', 'digirisk' ) . '"',
 					'nonce'        => 'delete_society',
 				),
 			),

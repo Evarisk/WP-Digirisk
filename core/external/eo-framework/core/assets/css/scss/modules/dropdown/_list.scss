@@ -1,7 +1,5 @@
 .wpeo-dropdown {
 	.dropdown-content {
-		padding: 0.6em;
-
 		.dropdown-item {
 			padding: 0.6em;
 			background: #fff;
@@ -10,6 +8,23 @@
 				cursor: pointer;
 				background: rgba(0,0,0,0.1);
 			}
+		}
+	}
+}
+
+.wpeo-dropdown.dropdown-list {
+	.dropdown-content {
+		text-align: left;
+	}
+	.dropdown-item {
+		&::after {
+			display: block;
+			content: '';
+			clear: both;
+		}
+		img {
+			float: left;
+			margin-right: 0.4em;
 		}
 	}
 }

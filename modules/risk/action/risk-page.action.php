@@ -2,7 +2,7 @@
 /**
  * Les actions relatives à la page "Risques"
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 1.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk

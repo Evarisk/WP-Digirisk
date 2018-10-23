@@ -1,97 +1,44 @@
-<?php namespace digi;
+<?php
+/**
+ * Définition du schéma d'une fiche de groupement.
+ *
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.1.6
+ * @version 6.5.0
+ * @copyright 2015-2018 Evarisk
+ * @package DigiRisk
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit;
+namespace digi;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Définition du schéma d'une fiche de groupement.
+ */
 class Sheet_Groupment_Model extends Document_Model {
 
 	/**
-	 * Construit le modèle / Fill the model
+	 * Définition du schéma d'une fiche de groupement.
 	 *
-	 * @param array|WP_Object $object La définition de l'objet dans l'instance actuelle / Object currently present into model instance
-	 * @param string $meta_key Le nom de la metakey utilisée pour le rangement des données associées à l'élément / The main metakey used to store data associated to current object
-	 * @param boolean $cropped Permet de ne récupèrer que les données principales de l'objet demandé / If true, return only main informations about object
+	 * @since 6.1.6
+	 * @version 6.5.0
+	 *
+	 * @param array $data       Data.
+	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
-	public function __construct( $object ) {
-		$this->model['document_meta'] = array(
-			'type'				=> 'array',
-			'meta_type' 	=> 'single',
-			'field'				=> 'document_meta',
-			'child' => array(
-				'reference' => array(
-					'type' => 'string',
-				),
-				'nom' => array(
-					'type'	=> 'string',
-				),
-				'photoDefault'	=> array(
-					'type'	=> 'array',
-				),
-				'description'	=> array(
-					'type'	=> 'string',
-				),
-				'adresse'	=> array(
-					'type'	=> 'string',
-				),
-				'telephone' => array(
-					'type'	=> 'string'
-				),
-				'utilisateursDesaffectes' => array(
-					'type'	=> 'array'
-				),
-				'utilisateursAffectes' => array(
-					'type'	=> 'array'
-				),
-				'utilisateursPresents' => array(
-					'type'	=> 'array'
-				),
-				'risq' => array(
-					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
-				),
-				'risq48' => array(
-					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
-				),
-				'risq51' => array(
-					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
-				),
-				'risq80' => array(
-					'type'	=> 'array',
-					'child' => array(
-						'segment' => array(
-							'type' => 'string'
-						),
-						'value' => array(
-							'type'	=> 'array'
-						)
-					)
-				),
-			)
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['document_meta'] = array(
+			'since'     => '6.1.6',
+			'version'   => '6.5.0',
+			'type'      => 'array',
+			'meta_type' => 'single',
+			'field'     => 'document_meta',
 		);
 
-		parent::__construct( $object );
+		parent::__construct( $data, $req_method );
 	}
 
 }

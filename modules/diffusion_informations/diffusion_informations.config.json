@@ -1,14 +1,15 @@
 {
 	"name": "Diffusion informations",
 	"slug": "diffusion_informations",
-	"version": "6.4.4",
+	"since": "6.4.0",
+	"version": "7.0.0",
 	"description": "Le module gérant l'ODT diffusion information",
 	"path": "modules/diffusion_informations/",
 	"dependencies": {
 		"shortcode": {},
 		"model": {},
-		"filter": {},
 		"class": {},
+    "filter": {},
 		"action": {}
 	}
 }

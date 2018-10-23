@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="owl-carousel owl-theme" style="width: 800px; margin: auto;">
 	<?php
-	if ( ! empty( $final_causerie->associated_document_id['image'] ) ) :
-		foreach ( $final_causerie->associated_document_id['image'] as $image_id ) :
+	if ( ! empty( $final_causerie->data['associated_document_id']['image'] ) ) :
+		foreach ( $final_causerie->data['associated_document_id']['image'] as $image_id ) :
 			?>
 			<img style="width: 800px;" src="<?php echo wp_get_attachment_image_url( $image_id, 'full' ); ?>" />
 			<?php
@@ -30,6 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="button blue float right action-attribute"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"
-	data-id="<?php echo esc_attr( $final_causerie->id ); ?>">
+	data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>">
 	<?php esc_html_e( 'Ajouter des participants', 'digirisk' ); ?></span>
 </div>

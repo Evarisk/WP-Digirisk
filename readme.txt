@@ -3,8 +3,10 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 4.9.6
-Stable tag: 6.6.3
+Tested up to: 4.9.4
+Stable tag: 7.0.1
+License: AGPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le Document Unique de votre entreprise.
 
@@ -75,59 +77,17 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
-= Version 6.6.3 =
-
-* 22245 - Mise à jour: correction des données des unités de travail
-
-= Version 6.6.2 =
-
-* 20897 - Ajout d'un affichage pour voir ou les évaluateurs sont affectés
-* 20898 - Correction du problème des catégories de risque sur la page de tous les risques
-* 20899 - Correction du conflit entre EOFramework < 1.0.0 a EOFramework 1.0.0
-
-= Version 6.6.1 =
+= Version 7.0.1 =
 
 Corrections
 
-* 19665 - Correction de l'affichage de la catégorie des risques pour les templates de risque.
-* 19635 - Bibliothèque des causeries: la catégorie de risque est désormais obligatoire.
-* 19633 - Correction du lien de téléchargement des fiches de poste.
-* 19380 - Affichage de plusieurs commentaires en mode mobile dans le tableau des risques.
+* 22924 - Correction du mot clé {reference} dans l'ODT listing de risque.
 
-= Version 6.6.0 =
+= Version 7.0.0 =
+
+* 15032 - Mise à jour EO Framework 1.0.0.
 
 Améliorations
-
-* 15950 - Ajout des causeries.
-* 16593 - DigiRisk n'est plus compatible Internet Explorer a partir de cette version. Un message vous indique comment continuer à utiliser DigiRisk avec un autre navigateur.
-* 17240 - Réduction du poids des fichier ODT: DUER, Fiche de Groupement, Fiche de poste et listing des risques.
-* 17658 - Onglet "Diffusion d'information": Ajout du bouton "Enregister les modifications".
-* 19379 - Fiche de groupement: Les évaluateurs sont maintenant affichés par date décroissante.
-
-Corrections
-
-* 17657 - Correction d'un problème lors de l'édition des informations d'une unité de travail.
-* 17892 - Page outils -> Digirisk -> Onglet Avancés: Correction d'une faute d'orthographe. Le texte "Problème de recommendation" est devenu "Problème de signalisation". (Signalée par ifpvps)
-
-= Version 6.5.0 =
-
-Améliorations
-
-* 15947 - Ajout de la génération du document "Listing risque" avec les photos des risques.
-* 15948 - Ajout de la génération du document "Listing risque" avec les actions correctives des risques.
-* 16504 - Mise à jours des documents: Affichage légal A3/A4, Fiche de groupement et Fiche de poste.
-
-Corrections
-
-* 16245 - Correction de l'affichage des trois points "..." du titre d'une société sur Firefox ESR.
-* 15971 - Fiche de poste et groupement: Le trie des évaluateurs est maintenant fait selon la date d'entretien la plus récente.
-
-= Version 6.4.5 =
-
-Corrections
-
-* 14750 - Remise en place des risques dans les nouvelles catégories.
-* 14795 - Correction des risques pré-définis.
 
 = Version 6.4.4 =
 

@@ -1,6 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit;
 
-class chemi_product_class extends \eoxia001\post_class {
+class chemi_product_class extends \eoxia\post_class {
 
 	protected $model_name   = '\digi\chemi_product_model';
 	protected $post_type    = 'digi-chemi_product';

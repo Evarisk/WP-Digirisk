@@ -17,10 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <thead>
 	<tr>
-		<td class="w100 padding">Groupement</td>
-		<td class="w100 padding">Unité de travail</td>
-		<td class="w50">&nbsp;</td>
-		<td class="w50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i></a></td>
+		<td class="w100 padding"><?php esc_html_e( 'Parent', 'digirisk' ); ?></td>
+		<td>&nbsp;</td>
+		<td class="w50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="far fa-chart-line"></i></a></td>
 		<td class="w50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
 		<td class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
 		<td><?php esc_html_e( 'Comment', 'digirisk' ); ?></td>
@@ -33,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if ( ! empty( $risk_list ) ) : ?>
 		<?php foreach ( $risk_list as $risk ) : ?>
 			<?php
-			\eoxia001\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
 				'risk' => $risk,
 			) );
 			?>

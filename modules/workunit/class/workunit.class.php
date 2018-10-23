@@ -2,10 +2,10 @@
 /**
  * Classe gérant les unités de travail.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @version 7.0.0
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -18,27 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les unités de travail
  */
-class Workunit_Class extends \eoxia001\Post_Class {
+class Workunit_Class extends \eoxia\Post_Class {
+
 	/**
 	 * Le préfixe de l'objet dans DigiRisk
 	 *
 	 * @var string
 	 */
 	public $element_prefix = 'UT';
-
-	/**
-	 * La fonction appelée automatiquement avant la modification de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array();
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier', '\digi\get_full_society' );
 
 	/**
 	 * Le nom du modèle
@@ -52,7 +39,7 @@ class Workunit_Class extends \eoxia001\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'digi-workunit';
+	protected $type = 'digi-workunit';
 
 	/**
 	 * La clé principale du modèle
@@ -82,12 +69,6 @@ class Workunit_Class extends \eoxia001\Post_Class {
 	 */
 	protected $post_type_name = 'Unitée de travail';
 
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_post_function = array( '\digi\construct_identifier' );
 }
 
 Workunit_Class::g();

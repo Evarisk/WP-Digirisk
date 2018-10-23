@@ -1,36 +1,38 @@
 <?php
 /**
- * La popup qui contient les données de l'évaluation complexe de digirisk
+ * La popup qui contient les formulaires ainsi que les informations de la génération du DUER.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 0.1
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @since     6.0.0
+ * @version   7.0.0
+ * @copyright 2018 Evarisk.
+ * @package   DigiRisk
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
-<div class="popup">
-	<div class="container">
+<div class="wpeo-modal duer-modal">
+	<div class="modal-container">
 
-		<div class="header">
-			<h2 class="title">Titre de la popup</h2>
-			<i class="close fa fa-times"></i>
+		<!-- Entête -->
+		<div class="modal-header">
+			<h2 class="modal-title">{{title}}</h2>
+			<div class="modal-close"><i class="fal fa-times"></i></div>
 		</div>
 
-		<div class="content">
-			<div class="change-content">
-				<img src='<?php echo esc_attr( admin_url( '/images/loading.gif' ) ); ?>' alt='<?php echo esc_attr( 'Chargement...' ); ?>' />
-			</div>
+		<!-- Corps -->
+		<div class="modal-content">
+			<p>...</p>
+		</div>
 
-			<div 	data-cb-namespace="digirisk"
-						data-cb-object="DUER"
-						data-cb-func="set_textarea_content"
-						class="button green margin uppercase strong float right"><span>OK</span></div>
+		<!-- Footer -->
+		<div class="modal-footer">
+			<a class="wpeo-button button-grey button-uppercase modal-close"><span>Annuler</span></a>
+			<a class="wpeo-button button-main button-uppercase modal-close"><span>Valider</span></a>
 		</div>
 	</div>
 </div>

@@ -4,14 +4,14 @@ namespace digi;
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class user_import_class extends \eoxia001\Singleton_Util {
+class user_import_class extends \eoxia\Singleton_Util {
 	private $index;
 	private $data;
 
 	protected function construct() {}
 
 	public function render() {
-		\eoxia001\View_Util::exec( 'digirisk', 'user', 'import' );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'import' );
 	}
 
 	public function create( $data ) {

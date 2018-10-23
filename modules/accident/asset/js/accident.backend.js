@@ -1,8 +1,7 @@
 /**
  * Initialise l'objet "accident" ainsi que la méthode "init" obligatoire pour la bibliothèque EoxiaJS.
  *
- * @since 6.3.0
- * @version 6.4.4
+ * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident = {};
 window.eoxiaJS.digirisk.accident.canvas = [];
@@ -21,14 +20,12 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
 	}
 
 	window.eoxiaJS.digirisk.accident.resizeCanvas();
-	window.eoxiaJS.digirisk.accident.initAutoComplete();
 }
 
 /**
  * Initialise les évènements
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @return {void}
  */
@@ -40,30 +37,18 @@ window.eoxiaJS.digirisk.accident.event = function() {
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };
 
-window.eoxiaJS.digirisk.accident.initAutoComplete = function() {
-	jQuery( '.search-parent' ).autocomplete( {
-		'source': 'admin-ajax.php?action=search_establishment',
-		'delay': 0,
-		'select': function( event, ui ) {
-			jQuery( 'input[name="accident[parent_id]"]' ).val( ui.item.id );
-			event.stopPropagation();
-		}
-	} );
-};
-
 /**
  * Affiches le champs 'upload' quand la select box est sur 'true'.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'évènement lors du changement de la select box.
  * @return {void}
  */
 window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( event ) {
-	jQuery( this ).closest( 'div' ).find( 'span:first' ).addClass( 'hidden' );
+	jQuery( this ).closest( '.investigation-group' ).find( '.investigation-media' ).addClass( 'hidden' );
 	if ( jQuery( this ).is( ':checked' ) ) {
-		jQuery( this ).closest( 'div' ).find( 'span:first' ).removeClass( 'hidden' );
+		jQuery( this ).closest( '.investigation-group' ).find( '.investigation-media' ).removeClass( 'hidden' );
 	}
 };
 
@@ -71,7 +56,6 @@ window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( e
  * Clear le canvas.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'état de l'évènement à ce moment T.
  * @return {void}
@@ -85,10 +69,10 @@ window.eoxiaJS.digirisk.accident.clearCanvas = function( event ) {
 window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
 	var accidentRow = jQuery( this ).closest( '.col' );
 
-	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
-		accidentRow.find( '.action-input' ).removeClass( 'disable' ).addClass( 'blue' );
+	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
+		accidentRow.find( '.action-input' ).removeClass( 'button-disable' );
 	} else {
-		accidentRow.find( '.action-input' ).removeClass( 'blue' ).addClass( 'disable' );
+		accidentRow.find( '.action-input' ).addClass( 'button-disable' );
 	}
 };
 
@@ -96,7 +80,6 @@ window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
  * Quand on "resize" la fenêtre, adapte le canvas.
  *
  * @since 6.4.0
- * @version 6.4.0
  *
  * @param  {Event} event L'état de l'évènement à ce moment T.
  * @return {void}
@@ -120,18 +103,16 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
- * @version 6.4.0
+ * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
 	if ( response.data.add ) {
 		triggeredElement.closest( '.flex-table.accident' ).find( '.table-body' ).prepend( response.data.view );
 		jQuery( '.flex-table.accident .col.advanced:first input[type="text"]:first' ).focus();
 	} else {
-		triggeredElement.closest( '.flex-table.accident' ).replaceWith( response.data.view );
+		triggeredElement.closest( '.digirisk-wrap' ).replaceWith( response.data.view );
 	}
 	window.eoxiaJS.digirisk.accident.refresh();
-	window.eoxiaJS.digirisk.search.renderChanged();
 };
 
 /**
@@ -142,16 +123,13 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
- * @version 6.4.0
+ * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).replaceWith( response.data.view );
 	window.eoxiaJS.digirisk.accident.refresh();
-	window.eoxiaJS.digirisk.search.renderChanged();
 	jQuery( '.col.advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
 		jQuery( this )[0].signaturePad.clear();
-
 		if ( jQuery( this ).closest( 'div' ).find( '.url' ).val() ) {
 			jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( 'div' ).find( '.url' ).val() );
 		}
@@ -166,8 +144,7 @@ window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElem
  * @param  {Object}         response          Les données renvoyées par la requête Ajax.
  * @return {void}
  *
- * @since 6.3.0
- * @version 6.4.0
+ * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).fadeOut();
@@ -182,7 +159,6 @@ window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredEle
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.3.0
  */
 window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, response ) {
 	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
@@ -197,10 +173,9 @@ window.eoxiaJS.digirisk.accident.generatedAccidentBenin = function( element, res
  * @return {void}
  *
  * @since 6.3.0
- * @version 6.4.4
  */
-window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( element, response ) {
-	jQuery( '.document-accident-benins' ).replaceWith( response.data.view );
+window.eoxiaJS.digirisk.accident.generatedRegistreATBenin = function( element, response ) {
+	jQuery( '.tab-list .tab-element[data-target="digi-registre-accident"]' ).click();
 };
 
 /**
@@ -211,7 +186,6 @@ window.eoxiaJS.digirisk.accident.generatedRegistreAccidentBenin = function( elem
  * @return {void}
  *
  * @since 6.4.0
- * @version 6.4.0
  */
 window.eoxiaJS.digirisk.accident.editedStoppingDaySuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( 'div' ).html( response.data.view );
@@ -226,7 +200,6 @@ window.eoxiaJS.digirisk.accident.editedStoppingDaySuccess = function( triggeredE
  * @return {void}
  *
  * @since 6.4.0
- * @version 6.4.0
  */
 
 window.eoxiaJS.digirisk.accident.deletedStoppingDay = function( triggeredElement, response ) {
@@ -254,8 +227,8 @@ window.eoxiaJS.digirisk.accident.checkDataBeforeAdd = function( element ) {
 		return false;
 	}
 
-	if ( '' === accidentRow.find( 'input[name="to_element_id"]' ).val() ) {
-		accidentRow.find( 'input[name="to_element_id"]' ).closest( '.tooltip' ).addClass( 'active' );
+	if ( '' === accidentRow.find( 'input[name="accident[parent_id]"]' ).val() ) {
+		accidentRow.find( 'input[name="accident[parent_id]"]' ).closest( '.tooltip' ).addClass( 'active' );
 		return false;
 	}
 
@@ -294,9 +267,8 @@ window.eoxiaJS.digirisk.accident.checkAllData = function( element ) {
 
 	accidentRow.find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
-		jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-	}
-
+			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
+		}
 	} );
 
 	return true;

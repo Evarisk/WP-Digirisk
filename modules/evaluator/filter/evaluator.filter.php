@@ -2,7 +2,7 @@
 /**
  * Gestion des filtres relatifs aux évaluateurs
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <jimmy@evarisk.com>
  * @since 6.0.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
@@ -28,6 +28,8 @@ class Evaluator_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'digi_tab', array( $this, 'callback_tab' ), 2, 2 );
+
+		add_filter( 'eo_model_user_after_get', array( $this, 'callback_after_get' ), 10, 2 );
 	}
 
 	/**
@@ -54,6 +56,11 @@ class Evaluator_Filter {
 		);
 
 		return $list_tab;
+	}
+
+	public function callback_after_get( $object, $args ) {
+		$object->data['avatar_color'] = '50a1ed';
+		return $object;
 	}
 }
 

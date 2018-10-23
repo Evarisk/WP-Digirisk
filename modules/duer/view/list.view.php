@@ -1,21 +1,23 @@
 <?php
 /**
- * La liste des DUER
+ * Ce template appel la vue: "liste-item" pour chaque document.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.1.9.0
- * @version 6.2.4.0
- * @copyright 2015-2017 Evarisk
- * @package duer
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.1.9
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+defined( 'ABSPATH' ) || exit;
 
-<?php if ( ! empty( $list_document ) ) : ?>
-	<?php foreach ( $list_document as $element ) : ?>
-		<?php \eoxia001\View_Util::exec( 'digirisk', 'duer', 'list-item', array( 'element' => $element ) ); ?>
-	<?php endforeach; ?>
-<?php endif;
+if ( ! empty( $documents ) ) :
+	foreach ( $documents as $document ) :
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list-item', array( 'document' => $document ) );
+	endforeach;
+endif;
