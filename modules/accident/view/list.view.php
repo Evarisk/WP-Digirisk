@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $accidents ) ) :
 			foreach ( $accidents as $accident ) :
-				\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-item', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'accident', 'list-item', array(
 					'accident' => $accident,
 				) );
 			endforeach;
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="table-footer">
 		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-add', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'accident', 'item-add', array(
 			'accident'     => $accident_schema,
 			'main_society' => $main_society,
 		) );

@@ -79,19 +79,46 @@ defined( 'ABSPATH' ) || exit; ?>
 					?>
 				</ul>
 			</div>
+
+			<div class="bloc-default-data">
+				<div class="form-element checkbox-default-data">
+					<input type="checkbox" id="checkbox" name="install_default_data" value="checkbox">
+					<label for="checkbox"><?php esc_html_e( 'Installer les données par défaut', 'digirisk' ); ?></label>
+				</div>
+
+				<ul class="default-data-details hidden">
+					<?php
+					if ( ! empty( $default_data ) ) :
+						foreach ( $default_data as $key => $data ) :
+							?>
+							<li><?php echo esc_html( Group_Class::g()->element_prefix . ( $key + 1 ) . ' - ' . $data->title ); ?></li>
+							<?php
+
+							if ( ! empty( $data->workunits ) ) :
+								foreach ( $data->workunits as $key_workunit => $workunit ) :
+									?>
+									<li><?php echo esc_html( Workunit_Class::g()->element_prefix . ( $key_workunit + 1 ) . ' - ' . $workunit->title ); ?></li>
+									<?php
+								endforeach;
+							endif;
+						endforeach;
+					endif;
+					?>
+				</ul>
+			</div>
 		</div>
 
 		<div class="wpdigi-components hidden">
 			<div class="owl-carousel owl-theme">
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-1' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-2' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-3' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-4' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-5' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-6' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-7' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-8' ); ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'installer', 'bloc-9' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-1' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-2' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-3' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-4' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-5' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-6' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-7' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-8' ); ?>
+				<?php \eoxia001\View_Util::exec( 'digirisk', 'installer', 'bloc-9' ); ?>
 			</div>
 
 

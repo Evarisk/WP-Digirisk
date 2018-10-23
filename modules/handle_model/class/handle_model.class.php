@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Gestion des modèles personnalisés
  */
-class Handle_Model_Class extends \eoxia\Singleton_Util {
+class Handle_Model_Class extends \eoxia001\Singleton_Util {
 
 	/**
 	 * La liste des documents personnalisables avec leur titre
@@ -84,7 +84,7 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 			}
 		}
 
-		\eoxia\View_Util::exec( 'digirisk', 'handle_model', 'main', array(
+		\eoxia001\View_Util::exec( 'digirisk', 'handle_model', 'main', array(
 			'list_type_document'    => $this->list_type_document,
 			'list_document_default' => $list_document_default,
 		) );
@@ -102,24 +102,24 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 	 * @return boolean
 	 */
 	public function upload_model( $type, $file_path ) {
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Start: pour le site %1$d', get_current_blog_id() ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Start: pour le site %1$d', get_current_blog_id() ), 'digirisk' );
 
 		// Upload le fichier vers le dossier ./wp-content/uploads/digirisk/document_template/.
 		$upload_dir             = wp_upload_dir();
 		$document_template_path = str_replace( '\\', '/', $upload_dir['basedir'] ) . '/digirisk/document_template/';
 		$mkdir_status           = wp_mkdir_p( $document_template_path );
 		$mkdir_status_string    = $mkdir_status ? 'true' : 'false';
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Création du dossier %1$s avec le status %2$s pour le site %3$d', $document_template_path, $mkdir_status_string, get_current_blog_id() ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Création du dossier %1$s avec le status %2$s pour le site %3$d', $document_template_path, $mkdir_status_string, get_current_blog_id() ), 'digirisk' );
 
 		$attachment_current_path = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_path );
 		$document_template_path .= basename( $file_path );
 
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Tentative de copie: %1$s vers %2$s', $attachment_current_path, $document_template_path ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Tentative de copie: %1$s vers %2$s', $attachment_current_path, $document_template_path ), 'digirisk' );
 
 		$copy_status        = copy( $attachment_current_path, $document_template_path );
 		$copy_status_string = $copy_status ? 'true' : 'false';
 
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Résultat: cp status %1$s => %2$s vers %3$s', $copy_status_string, $attachment_current_path, $document_template_path ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Résultat: cp status %1$s => %2$s vers %3$s', $copy_status_string, $attachment_current_path, $document_template_path ), 'digirisk' );
 
 		if ( ! $copy_status ) {
 			return false;
@@ -139,9 +139,9 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 		);
 		$response      = array();
 
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Début: Insertion de l\'attachement %1$s avec le chemin %2$s', wp_json_encode( $document_args ), $document_template_path ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Début: Insertion de l\'attachement %1$s avec le chemin %2$s', wp_json_encode( $document_args ), $document_template_path ), 'digirisk' );
 		$response['id'] = wp_insert_attachment( $document_args, $end_guid, 0 );
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Fin: Insertion attachement ID %1$d', $response['id'] ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Fin: Insertion attachement ID %1$d', $response['id'] ), 'digirisk' );
 
 		$attach_data = wp_generate_attachment_metadata( $response['id'], $document_template_path );
 		wp_update_attachment_metadata( $response['id'], $attach_data );
@@ -149,9 +149,9 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 		$response['model_path'] = $document_template_path;
 		Document_Class::g()->update( $response );
 
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Upload du modèle: %1$s vers %2$s', $attachment_current_path, $document_template_path ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Upload du modèle: %1$s vers %2$s', $attachment_current_path, $document_template_path ), 'digirisk' );
 
-		\eoxia\LOG_Util::log( sprintf( 'upload_model -> Fin: pour le site %1$d', get_current_blog_id() ), 'digirisk' );
+		\eoxia001\LOG_Util::log( sprintf( 'upload_model -> Fin: pour le site %1$d', get_current_blog_id() ), 'digirisk' );
 
 		return true;
 	}

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition du schéma des catégories de risque.
  */
-class Risk_Category_Model extends \eoxia\Term_Model {
+class Risk_Category_Model extends \eoxia001\Term_Model {
 
 	/**
 	 * Définition du schéma des catégories de risque.

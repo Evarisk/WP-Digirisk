@@ -1,16 +1,26 @@
-# Digirisk
+# DigiRisk
 
-[![reuse compliant](https://reuse.software/badge/reuse-compliant.svg)](https://reuse.software/)
+Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive : 
+* Votre Document Unique
+* Les fiches d'Unités de Travail
+* Les risques par photo
+* Impression du plan du listing de risque avec photo et/ou avec le plan d'action par Groupement et/ou responsable
+* Les causeries sécurités
+* Votre affichage légal
+* Votre diffusion d'information
+* La gestion de votre registre des accidents bénins
+* La gestion de votre intranet sécurité grâce à WP
+* Le fonctionnement sur vos téléphones, tablettes natifs, sans installation de appli, DigiRisk est responsive
+* De nombreuses autres fonctions sont disponible sur le site www.digirisk.com
 
-Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive, le **Document Unique** de votre entreprise.
+# DigiRisk et WordPressMU
 
-Associé à la puissance de **WordPress MU**, Digirisk permet de gérer les DUER pour un ensemble de sociétés. Ce point est pratique pour les consultants, les groupes etc...
+DigiRisk associé à la puissance de WordPressMU, vous permet de gérer l'ensemble de votre Système de Management de la Sécurité de façon homogène et en toute simplicité.
+DigiRisk intergre de facon native la possibilité de créer des modèles duplicables, il suffit de les personnaliser par société.
+Vous gérez un groupe avec plusieurs sociétés, une collectivité de communes, vous êtes consultants avec plusieurs clients la gestion avec WordPressMU est faite pour vous...
 
-Digirisk permet aussi la gestion des données liées à la sécurité de votre personnel tel que :
-* La gestion des EPIs
-* L'historique des causeries sécurité
+# DigiRisk et autres plugins
 
-Digirisk génére automatique :
-* Affichage légal
-* Diffusion d'informations
-* Impression du DUER
+DigiRisk peut être associé à d'autres plugins :
+* La gestion des EPIs, utilisez THEPI facile, gratuit et intégrable en 1 clic
+* Le plan d'actions, utilisez TaskManager, la symbiose est juste parfaite

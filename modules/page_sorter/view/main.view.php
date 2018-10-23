@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit; ?>
 					</td>
 				</tr>
 				<?php
-				\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
 					'i' => 0,
 					'establishments' => $establishments,
 				) );

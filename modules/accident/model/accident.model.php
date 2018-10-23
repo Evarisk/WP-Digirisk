@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un accident.
  */
-class Accident_Model extends \eoxia\Post_Model {
+class Accident_Model extends \eoxia001\Post_Model {
 
 	/**
 	 * Définition des champs d'un accident

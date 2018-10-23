@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<tbody>
 		<?php if ( ! empty( $evaluations ) ) :
 			foreach ( $evaluations as $evaluation ) :
-				\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/list-item', array(
+				\eoxia001\View_Util::exec( 'digirisk', 'historic', 'risk/list-item', array(
 					'evaluation' => $evaluation,
 				) );
 			endforeach;

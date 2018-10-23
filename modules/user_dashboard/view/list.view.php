@@ -42,11 +42,11 @@ defined( 'ABSPATH' ) || exit; ?>
 	<?php
 	if ( ! empty( $list_user ) ) :
 		foreach ( $list_user as $user ) :
-			\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item', array( 'user' => $user ) );
+			\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'item', array( 'user' => $user ) );
 		endforeach;
 	endif;
 
 	// Formulaire d'édition pour une nouvelle entrée.
-	\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user_schema ) );
+	\eoxia001\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user_schema ) );
 	?>
 </tbody>

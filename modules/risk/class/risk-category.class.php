@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Gestion des catégories de risque.
  */
-class Risk_Category_Class extends \eoxia\Term_Class {
+class Risk_Category_Class extends \eoxia001\Term_Class {
 	/**
 	 * Nom du modèle à utiliser
 	 *

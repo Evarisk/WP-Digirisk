@@ -30,14 +30,14 @@ class menu_action {
 	 * Définition du menu dans l'administration de wordpress pour Digirisk / Define the menu for wordpress administration
 	 */
 	public function callback_admin_menu() {
-		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+		$digirisk_core = get_option( \eoxia001\Config_Util::$init['digirisk']->core_option );
 		if ( empty( $digirisk_core['installed'] ) && getDbOption( 'base_evarisk' ) > 0 ) {
 			add_menu_page( __( 'Digirisk : Manage datas transfert from digirisk V5.X', 'digirisk' ), __( 'Digirisk', 'digirisk' ), 'manage_digirisk', 'digirisk-transfert', array( &$this, 'transfer_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 		}
 	}
 
 	public function transfer_page() {
-		\eoxia\View_Util::exec( 'digirisk', 'transfer_data', 'transfert' );
+		\eoxia001\View_Util::exec( 'digirisk', 'transfer_data', 'transfert' );
 	}
 }
 

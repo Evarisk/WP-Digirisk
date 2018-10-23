@@ -127,14 +127,5 @@
 				background: #fff;
 			}
 		}
-		// Seul le dernier commentaire est affiché en mode lecture
-		.risk-row:not(.edit) {
-			.comment-container .comment {
-				display: none;
-				&:nth-of-type(1) {
-					display: flex;
-				}
-			}
-		}
 	}
 }
