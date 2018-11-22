@@ -144,17 +144,14 @@ class Document_Class extends \eoxia\ODT_Class {
 		) );
 	}
 
-	public function prepare_document( $parent_id, $args = array() ) {
-		$society = Society_Class::g()->show_by_type( $parent_id );
-
+	public function prepare_document( $parent, $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'parent' => $society,
+			'parent' => $parent,
 		) );
 
 		$document_data = apply_filters( 'digi_' . $this->get_type() . '_document_data', array(), $args );
 
-
-		return $this->save_document_data( $parent_id, $document_data, $args );
+		return $this->save_document_data( $parent->data['id'], $document_data, $args );
 	}
 }
 

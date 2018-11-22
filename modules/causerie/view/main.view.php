@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap wrap-causerie digirisk-wrap">
+<div class="wrap wrap-causerie digirisk-wrap wpeo-wrap">
 	<h2><?php esc_html_e( 'Causeries', 'digirisk' ); ?></h2>
 
 	<div class="wpeo-tab">
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 
 		<div class="tab-content main-content">
-			<?php Causerie_Page_Class::g()->display_start(); ?>
+			<?php Causerie_Page_Class::g()->display_dashboard(); ?>
 		</div>
 	</div>
 </div>

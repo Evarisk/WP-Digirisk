@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap digirisk-wrap causerie-wrap">
+<div class="wrap digirisk-wrap causerie-wrap wpeo-wrap">
 	<div>
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Retour', 'digirisk' ); ?></a>
 

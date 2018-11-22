@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php esc_html_e( 'Causerie à démarrer', 'digirisk' ); ?></h2>
 
-<table class="table start-causerie">
+<table class="wpeo-table start-causerie">
 	<thead>
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php esc_html_e( 'Causerie en cours', 'digirisk' ); ?></h2>
 
-<table class="table final-causerie">
+<table class="wpeo-table final-causerie">
 	<thead>
 		<tr>
 			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>

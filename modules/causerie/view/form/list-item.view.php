@@ -37,26 +37,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php echo esc_html( $causerie->data['title'] ); ?></span>
 		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
-	<td>
-		<div class="action wpeo-gridlayout grid-3">
-			<?php if ( ! empty( $causerie->data['document'] ) && ! empty( $causerie->data['document']->data['path'] ) ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( $causerie->data['document']->data['path'] ); ?>">
-					<i class="fa fa-download icon" aria-hidden="true"></i>
+	<td class="w150">
+		<div class="action wpeo-gridlayout grid-gap-0 grid-3">
+			<?php if ( $causerie->data['sheet'] && $causerie->data['sheet']->data['file_generated'] ) : ?>
+				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $causerie->data['sheet']->data['link'] ); ?>">
+					<i class="fas fa-download icon" aria-hidden="true"></i>
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ODT Corrompu', 'digirisk' ); ?>">
-					<i class="fa fa-times icon" aria-hidden="true"></i>
+				<span class="action-attribute wpeo-button button-grey button-square-50 wpeo-tooltip-event"
+					data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
+					data-model="<?php echo esc_attr( $causerie->get_class() ); ?>"
+					data-action="generate_document"
+					data-color="red"
+					data-direction="left"
+					aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
+					<i class="far fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
 
 			<!-- Editer un causerie -->
-			<div 	class="button light w50 edit action-attribute"
+			<div 	class="wpeo-button light button-square-50 edit action-attribute"
 						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_edit_causerie' ) ); ?>"
 						data-loader="causerie-row"
 						data-action="load_edit_causerie"><i class="icon fa fa-pencil"></i></div>
 
-			<div 	class="button light w50 delete action-delete"
+			<div 	class="wpeo-button light button-square-50 delete action-delete button-transparent"
 						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_causerie' ) ); ?>"
 						data-message-delete="<?php echo esc_attr_e( 'Supprimer cette causerie ?', 'digirisk' ); ?>"

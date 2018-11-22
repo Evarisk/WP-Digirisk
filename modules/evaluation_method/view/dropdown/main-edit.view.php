@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		endif;
 
-		if ( empty( $risk->data['id'] ) || $can_edit_type_cotation ) :
+		if ( empty( $risk->data['id'] ) || $can_edit_type_cotation || $preset ) :
 			echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
 				'li'  => array(
 					'class'          => array(),

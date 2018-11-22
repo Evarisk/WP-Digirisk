@@ -24,9 +24,25 @@ class Causerie_Intervention_Action {
 	 * Constructeur.
 	 */
 	public function __construct() {
+		add_action( 'wp_ajax_causerie_save_former', array( $this, 'callback_save_former' ) );
 		add_action( 'wp_ajax_causerie_save_participant', array( $this, 'callback_causerie_save_participant' ) );
 		add_action( 'wp_ajax_causerie_save_signature', array( $this, 'callback_causerie_save_signature' ) );
 		add_action( 'wp_ajax_causerie_delete_participant', array( $this, 'callback_causerie_delete_participant' ) );
+	}
+
+	public function callback_save_former() {
+		$id        = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+		$former_id = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0; // WPCS: input var ok.
+
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$final_causerie->data['former']['user_id'] = $former_id;
+		Causerie_Intervention_Class::g()->update( $final_causerie->data );
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -88,7 +104,6 @@ class Causerie_Intervention_Action {
 		}
 
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $causerie_id ), true );
-
 		$final_causerie = Causerie_Intervention_Class::g()->add_signature( $final_causerie, $participant_id, $signature_data, $is_former );
 
 		$current_participant = null;

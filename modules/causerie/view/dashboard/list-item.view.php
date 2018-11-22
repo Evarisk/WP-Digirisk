@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 
-<tr class="item">
+<tr class="item" data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>">
 	<td class="w50 padding">
 		<strong>
 			<span><?php echo esc_html( $causerie->data['unique_identifier'] ); ?></span>
@@ -31,13 +31,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td data-title="Photo" class="padding">
-		<?php do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="' . $causerie->get_class() . '" mode="view" single="false" field_name="image" ]' ); ?>
+		<?php echo do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="' . $causerie->get_class() . '" mode="view" single="false" field_name="image" ]' ); ?>
 	</td>
 
 	<td data-title="Catégorie" class="padding">
 		<?php
 		if ( ! empty( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) ) :
-			do_shortcode( '[digi-dropdown-categories-risk id="' . $causerie->data['id'] . '" type="causerie" display="view" category_risk_id="' . max( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '"]' );
+			do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->data['id'] . '" type="causerie" display="view" category_risk_id="' . max( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '"]' );
 		endif;
 		?>
 	</td>
@@ -107,15 +107,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td>
-		<div class="action wpeo-gridlayout w1">
-			<?php if ( ! empty( $causerie->data['document'] ) && ! empty( $causerie->data['document']->data['path'] ) ) : ?>
-				<a class="button purple h50" href="<?php echo esc_attr( $causerie->data['document']->data['path'] ); ?>">
-					<i class="fa fa-download icon" aria-hidden="true"></i>
+		<div class="action">
+			<?php if ( $causerie->data['sheet_intervention']->data['file_generated'] ) : ?>
+				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $causerie->data['sheet_intervention']->data['link'] ); ?>">
+					<i class="fas fa-download icon" aria-hidden="true"></i>
 				</a>
 			<?php else : ?>
-				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'ODT Corrompu', 'digirisk' ); ?>">
-					<i class="fa fa-times icon" aria-hidden="true"></i>
-				</span>
+				<?php if ( $causerie->data['sheet_intervention'] ) : ?>
+					<span class="action-attribute wpeo-button button-grey button-square-50 wpeo-tooltip-event"
+						data-id="<?php echo esc_attr( $causerie->data['sheet_intervention']->data['id'] ); ?>"
+						data-model="<?php echo esc_attr( $causerie->data['sheet_intervention']->get_class() ); ?>"
+						data-action="generate_document"
+						data-color="red"
+						data-direction="left"
+						aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
+						<i class="far fa-times icon" aria-hidden="true"></i>
+					</span>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 	</td>

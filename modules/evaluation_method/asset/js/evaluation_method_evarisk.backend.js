@@ -42,8 +42,6 @@ window.eoxiaJS.digirisk.evaluationMethodEvarisk.selectSeuil = function( event ) 
 		}
 	}
 
-	console.log(jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .table-cell.active' ).length );
-
 	if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .table-cell.active' ).length == 5 ) {
 		if ( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ).length ) {
 			window.eoxiaJS.loader.display( jQuery( '.wpeo-modal.modal-active.modal-risk-' + riskID + ' .button-main' ) );

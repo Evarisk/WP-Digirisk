@@ -53,7 +53,7 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 	// Gestion du titre de la modal.
 	jQuery( document ).on( 'change', '.wpeo-autocomplete', window.eoxiaJS.digirisk.causerie.updateModalTitle );
 
-	jQuery( document ).on( 'click', '.modal-signature .button.blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
+	jQuery( document ).on( 'click', '.modal-signature .wpeo-button.button-blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
 
 	jQuery( document ).on( 'click', '.causerie-wrap a.disabled', function( event ) {
 		event.preventDefault();
@@ -71,12 +71,20 @@ window.eoxiaJS.digirisk.causerie.event = function() {
  */
 window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
 	var title = '';
+	var element  = jQuery( this );
 
 	if ( data && data.element ) {
-		title = 'Signature de l\'utilisateur: ' + data.element.data( 'result' );
+		var request_data = {};
+		request_data.action  = 'causerie_save_former';
+		request_data.id      = jQuery( this ).closest( 'tr' ).find( 'input[name="causerie_id"]' ).val();
+		request_data.user_id = jQuery( this ).closest( 'tr' ).find( 'input[name="former_id"]' ).val();
 
-		jQuery( this ).closest( 'tr' ).find( '.modal-signature .modal-title' ).text( title );
-		jQuery( this ).closest( 'tr' ).find( '.wpeo-modal-event' ).removeClass( 'disabled' );
+		window.eoxiaJS.loader.display( jQuery( this ) );
+		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, resposne) {
+			title = 'Signature de l\'utilisateur: ' + data.element.data( 'result' );
+			element.closest( 'tr' ).find( '.wpeo-modal-event' ).attr( 'data-title', title );
+			element.closest( 'tr' ).find( '.wpeo-modal-event' ).removeClass( 'button-disable' );
+		} );
 	}
 };
 
@@ -95,7 +103,7 @@ window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
 	jQuery( '.modal-signature' ).find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
 			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'disabled' );
+			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'button-disabled' );
 		}
 	} );
 };
@@ -128,11 +136,11 @@ window.eoxiaJS.digirisk.causerie.applySignature = function( element ) {
  * @return {boolean}                         True pour continuer l'action. False pour stopper l'action.
  */
 window.eoxiaJS.digirisk.causerie.beforeSaveCauserie = function( triggeredElement ) {
-	triggeredElement.closest( '.causerie-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	window.eoxiaJS.tooltip.remove( triggeredElement.closest( '.causerie-row' ).find( '.category-danger.wpeo-tooltip-event' ) );
 
 	// Vérification du danger.
-	if ( '-1' === triggeredElement.closest( '.causerie-row' ).find( 'input[name="risk[danger_id]"]' ).val() ) {
-		triggeredElement.closest( '.causerie-row' ).find( '.categorie-container.tooltip' ).addClass( 'active' );
+	if ( '-1' === triggeredElement.closest( '.causerie-row' ).find( 'input[name="risk_category_id"]' ).val() ) {
+		window.eoxiaJS.tooltip.display( triggeredElement.closest( '.causerie-row' ).find( '.category-danger.wpeo-tooltip-event' ) );
 		return false;
 	}
 
@@ -191,7 +199,7 @@ window.eoxiaJS.digirisk.causerie.deletedCauserieSuccess = function( element, res
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
-	jQuery( '.tab-content' ).html( response.data.view );
+	jQuery( '.ajax-content' ).html( response.data.view );
 
 	var currentStep = response.data.current_step;
 	var percent     = 0;
@@ -226,7 +234,7 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response ) {
-	jQuery( '.tab-content' ).html( response.data.view );
+	jQuery( '.ajax-content' ).html( response.data.view );
 
 	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
 

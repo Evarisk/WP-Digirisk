@@ -68,6 +68,13 @@ class Causerie_Class extends \eoxia\Post_Class {
 	 * @var string
 	 */
 	protected $post_type_name = 'Causeries';
+
+	protected function construct() {
+		$wp_upload_dir          = wp_upload_dir();
+		$this->export_directory = $wp_upload_dir['basedir'] . '/digirisk/tmp/';
+
+		wp_mkdir_p( $this->export_directory );
+	}
 }
 
 Causerie_Class::g();

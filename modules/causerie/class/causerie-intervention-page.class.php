@@ -38,7 +38,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
 
-		$this->register_search();
+		$this->register_search( $final_causerie );
 
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
 			'final_causerie' => $final_causerie,
@@ -47,12 +47,18 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
-	public function register_search() {
+	public function register_search( $causerie ) {
 		global $eo_search;
 
+		if ( ! empty( $causerie->data['former'] ) && ! empty( $causerie->data['former']['user_id'] ) ) {
+			$user = get_userdata( $causerie->data['former']['user_id'] );
+		}
+
 		$args_causerie_former = array(
-			'type'  => 'user',
-			'name'  => 'former_id',
+			'type'         => 'user',
+			'name'         => 'former_id',
+			'value'        => $user->data->display_name,
+			'hidden_value' => (int) $user->data->ID,
 		);
 
 		$eo_search->register_search( 'causerie_former', $args_causerie_former );
@@ -164,9 +170,12 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
 
-		// Sheet_Causerie_Intervention_Class::g()->generate( $causerie_intervention->data['id'] );
+		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
-		return Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
+		$response = Sheet_Causerie_Intervention_Class::g()->prepare_document( $causerie_intervention, array( 'causerie' => $causerie ) );
+		Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
+
+		return $causerie_intervention;
 	}
 }
 

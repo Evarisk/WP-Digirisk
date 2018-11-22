@@ -47,9 +47,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<div class="action wpeo-gridlayout w1">
 			<?php if ( Causerie_Class::g()->get_type() === $causerie->data['type'] ) : ?>
-				<a class="button light w50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
+				<a class="wpeo-button light button-square-50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php else : ?>
-				<a class="button light w50 edit tooltip hover" aria-label="<?php echo esc_attr_e( 'Reprendre la causerie', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
+				<a class="wpeo-button light button-square-50 edit wpeo-tooltip-event hover" aria-label="<?php echo esc_attr_e( 'Reprendre la causerie', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php endif; ?>
 		</div>
 	</td>

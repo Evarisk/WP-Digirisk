@@ -41,6 +41,7 @@ class Evaluation_Method_Shortcode {
 	public function callback_dropdown_evaluation_method( $param ) {
 		$risk_id = ! empty( $param['risk_id'] ) ? (int) $param['risk_id'] : 0;
 		$display = ! empty( $param['display'] ) ? sanitize_text_field( $param['display'] ) : 'edit';
+		$preset  = ! empty( $param['preset'] ) ? true : false;
 
 		$risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
 
@@ -55,7 +56,7 @@ class Evaluation_Method_Shortcode {
 		}
 
 		if ( 'edit' === $display ) {
-			if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id || $can_edit_type_cotation ) {
+			if ( $method_evaluation_simplified->data['id'] === $evaluation_method_id || $can_edit_type_cotation || $preset ) {
 				// Méthode simplifié.
 				\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/main-edit', array(
 					'risk'                         => $risk,
@@ -64,6 +65,7 @@ class Evaluation_Method_Shortcode {
 					'variables'                    => $variables,
 					'display'                      => $display,
 					'can_edit_type_cotation'       => $can_edit_type_cotation,
+					'preset'                       => $preset,
 				) );
 			} else {
 				// Tout autre méthode nécéssitant une modal.

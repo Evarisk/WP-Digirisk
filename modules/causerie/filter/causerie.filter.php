@@ -18,12 +18,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * La classe gérant les filtres des causeries
  */
-class Causerie_Filter extends \eoxia\Singleton_Util {
+class Causerie_Filter extends Identifier_Filter {
 
-	protected function construct() {
+	public function __construct() {
+		parent::__construct();
+
 		$current_type = Causerie_Class::g()->get_type();
 		add_filter( "eo_model_digi-causerie_after_get", array( $this, 'get_full_causerie' ), 10, 2 );
+		add_filter( "eo_model_digi-causerie_after_put", array( $this, 'get_full_causerie' ), 10, 2 );
 		add_filter( "eo_model_digi-final-causerie_after_get", array( $this, 'get_full_causerie' ), 10, 2 );
+		add_filter( "eo_model_digi-final-causerie_after_put", array( $this, 'get_full_causerie' ), 10, 2 );
 	}
 
 	/**
@@ -74,10 +78,15 @@ class Causerie_Filter extends \eoxia\Singleton_Util {
 			}
 
 			$object->data['exclude_user_ids'] = substr( $object->data['exclude_user_ids'], 0, -1 );
+
+			$object->data['sheet'] = Sheet_Causerie_Class::g()->get( array(
+				'posts_per_page' => 1,
+				'post_parent'    => $object->data['id'],
+			), true );
 		}
 
 		return $object;
 	}
 }
 
-Causerie_Filter::g();
+new Causerie_Filter();

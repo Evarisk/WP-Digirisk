@@ -203,7 +203,7 @@ if ( ! window.eoxiaJS.modal  ) {
 			jQuery( target ).find( 'h2.modal-title' ).text( '{{title}}' );
 
 			if ( triggeredElement.attr( 'data-title' ) ) {
-				target[0].innerHTML = target[0].innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
+				target[0].querySelector( '.modal-title' ).innerHTML = target[0].querySelector( '.modal-title' ).innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
 			}
 
 			if ( triggeredElement.attr( 'data-class' ) ) {

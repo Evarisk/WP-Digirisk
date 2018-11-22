@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></h2>
 
-	<table class="table add-causerie">
+	<table class="wpeo-table add-causerie">
 		<thead>
 			<tr>
 				<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
@@ -39,15 +39,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				endforeach;
 			endif;
 			?>
-		</tbody>
 
-		<tfoot>
 			<?php
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
 				'causerie' => $causerie_schema,
 			) );
 			?>
-		</tfoot>
+		</tbody>
 	</table>
 
 </div>

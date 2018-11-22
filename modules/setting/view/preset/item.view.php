@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" category_risk_id="' . end( $risk->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '" danger_id="' . $risk->data['id'] . '" preset="1" type="risk" display="' . ( ( $risk->data['id'] !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
 	</td>
 	<td class="w50">
-		<?php do_shortcode( '[digi_dropdown_evaluation_method risk_id=' . $risk->data['id'] . ']' ); ?>
+		<?php do_shortcode( '[digi_dropdown_evaluation_method preset=1 risk_id=' . $risk->data['id'] . ']' ); ?>
 	</td>
 	<td class="padding">
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="edit"]' ); ?>

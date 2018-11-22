@@ -49,8 +49,8 @@ global $eo_search; ?>
 			</td>
 
 			<?php if ( empty( $final_causerie->data['former']['signature_id'] ) ) : ?>
-				<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du formateur est obligatoire', 'digirisk' ); ?>">
-					<div class="button blue disabled wpeo-modal-event tooltip hover" aria-label="<?php esc_attr_e( 'Veuillez sélectionner un formateur avant de signer', 'digirisk' ); ?>"
+				<td class="signature w50 padding">
+					<div class="wpeo-button button-blue wpeo-modal-event button-disable"
 						data-parent="signature"
 						data-target="modal-signature">
 						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
@@ -68,11 +68,11 @@ global $eo_search; ?>
 	</tbody>
 </table>
 
-<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>" class="button grey">
+<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>" class="wpeo-button button-grey">
 	<span><?php esc_html_e( 'Retour', 'digirisk' ); ?></span>
 </a>
 
-<div class="button blue action-input float right disabled"
+<div class="wpeo-button button-blue action-input float right <?php echo ( empty( $final_causerie->data['former']['user_id'] ) && empty( $final_causerie->data['former']['signature_id'] ) ) ? 'button-disable' : ''; ?>"
 	data-parent="ajax-content"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"

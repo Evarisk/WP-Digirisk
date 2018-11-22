@@ -1500,7 +1500,7 @@ if ( ! window.eoxiaJS.modal  ) {
 			jQuery( target ).find( 'h2.modal-title' ).text( '{{title}}' );
 
 			if ( triggeredElement.attr( 'data-title' ) ) {
-				target[0].innerHTML = target[0].innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
+				target[0].querySelector( '.modal-title' ).innerHTML = target[0].querySelector( '.modal-title' ).innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
 			}
 
 			if ( triggeredElement.attr( 'data-class' ) ) {
@@ -2012,6 +2012,7 @@ if ( ! window.eoxiaJS.tab ) {
 					tabTriggered.closest( '.wpeo-tab' ).find( '.tab-content.tab-active' ).removeClass( 'tab-active' );
 					tabTriggered.closest( '.wpeo-tab' ).find( '.tab-content' ).addClass( 'tab-active' );
 					tabTriggered.closest( '.wpeo-tab' ).find( '.tab-content' ).html( response.data.view );
+					window.eoxiaJS.loader.remove( tabTriggered.closest( '.wpeo-tab' ).find( '.tab-content' ) );
 
 					window.eoxiaJS.tab.callTabChanged();
 				} );
