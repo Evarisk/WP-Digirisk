@@ -66,6 +66,8 @@ class Causerie_Intervention_Action {
 
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
+		Causerie_Intervention_Page_Class::g()->register_search( null, null );
+
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
 			'final_causerie' => $final_causerie,

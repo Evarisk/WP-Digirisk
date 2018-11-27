@@ -99,9 +99,7 @@ if ( ! window.eoxiaJS.action ) {
 			doAction = false;
 			doAction = window.eoxiaJS[element.attr( 'data-namespace' )][element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
 		} else {
-			if ( ! doAction ) {
-				doAction = window.eoxiaJS.action.checkBeforeCB(element);
-			}
+			doAction = window.eoxiaJS.action.checkBeforeCB(element);
 		}
 
 		if ( doAction ) {

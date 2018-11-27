@@ -106,8 +106,10 @@ class DUER_Action {
 			wp_send_json_error();
 		}
 
+		$society = Society_Class::g()->show_by_type( $parent_id );
+
 		\eoxia\LOG_Util::log( 'DEBUT - Construction des données du DUER en BDD', 'digirisk' );
-		$data = DUER_Class::g()->prepare_document( $parent_id, array(
+		$data = DUER_Class::g()->prepare_document( $society, array(
 			'parent_id'           => 0,
 			'date_debut_audit'    => $date_debut_audit,
 			'date_fin_audit'      => $date_fin_audit,
@@ -186,14 +188,14 @@ class DUER_Action {
 
 		if ( Group_Class::g()->get_type() === $society->data['type'] ) {
 			\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $element_id, 'digirisk' );
-			$generation_status = Sheet_Groupment_Class::g()->prepare_document( $element_id, array(
+			$generation_status = Sheet_Groupment_Class::g()->prepare_document( $society, array(
 				'parent' => $society,
 			) );
 			Sheet_Groupment_Class::g()->create_document( $generation_status['document']->data['id'] );
 			\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
 		} elseif ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
 			\eoxia\LOG_Util::log( 'DEBUT - Génération du document fiche de poste #UT' . $element_id, 'digirisk' );
-			$generation_status = Sheet_Workunit_Class::g()->prepare_document( $element_id, array(
+			$generation_status = Sheet_Workunit_Class::g()->prepare_document( $society, array(
 				'parent' => $society,
 			) );
 			Sheet_Workunit_Class::g()->create_document( $generation_status['document']->data['id'] );

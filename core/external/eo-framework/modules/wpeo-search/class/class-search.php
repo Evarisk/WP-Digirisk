@@ -95,7 +95,7 @@ class Search_Class extends Singleton_Util {
 	public function search( $term, $type, $args ) {
 		switch ( $type ) {
 			case "user":
-				$results = $this->search_user( $term );
+				$results = $this->search_user( $term, $args );
 				break;
 			case "post":
 				$results = $this->search_post( $term, $args );
@@ -107,11 +107,17 @@ class Search_Class extends Singleton_Util {
 		return $results;
 	}
 
-	private function search_user( $term ) {
+	private function search_user( $term, $data ) {
 		if ( ! empty( $term ) ) {
-			$results = User_Class::g()->get( array(
+			$args = array(
 				'search' => '*' . $term . '*',
-			) );
+			);
+
+			if ( ! empty( $data['args'] ) ) {
+				$args = array_merge( $args, $data['args'] );
+			}
+
+			$results = User_Class::g()->get( $args );
 		} else {
 			$results = User_Class::g()->get( array(
 				'exclude' => array( 1 ),
@@ -124,16 +130,22 @@ class Search_Class extends Singleton_Util {
 	private function search_post( $term, $data ) {
 		$results = array();
 
+		$get_args = array( 'meta_or_title' => $term );
+
+
+		if ( ! empty( $data['args']['meta_query'] ) ) {
+			$get_args['meta_query'] = $this->construct_meta_query( $term, $data['args']['meta_query'] );
+		}
+
+		$get_args = array_merge( $get_args, $data['args'] );
+
 		if ( ! empty( $data['args']['model_name'] ) ) {
 			foreach ( $data['args']['model_name'] as $model_name ) {
-				$get_args = array( '_meta_or_title' => $term );
-
-				if ( ! empty( $data['args']['meta_query'] ) ) {
-					$get_args['meta_query'] = $this->construct_meta_query( $term, $data['args']['meta_query'] );
-				}
-
 				$results = array_merge( $results, $model_name::g()->get( $get_args ) );
 			}
+		} else {
+			$get_args['posts_per_page'] = -1;
+			$results = get_posts( $get_args );
 		}
 
 		return $results;

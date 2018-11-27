@@ -27,7 +27,8 @@ class Listing_Risk_Shortcode {
 	 * @since 6.5.0
 	 */
 	public function __construct() {
-		add_shortcode( 'digi-listing-risk', array( $this, 'callback_digi_listing_risk' ) );
+		add_shortcode( 'digi-listing-risk-action-corrective', array( $this, 'callback_digi_listing_risk_action_corrective' ) );
+		add_shortcode( 'digi-listing-risk-photo', array( $this, 'callback_digi_listing_risk_photo' ) );
 	}
 
 	/**
@@ -37,9 +38,21 @@ class Listing_Risk_Shortcode {
 	 *
 	 * @param  array $param  Les arguments du shortcode.
 	 */
-	public function callback_digi_listing_risk( $param ) {
+	public function callback_digi_listing_risk_action_corrective( $param ) {
 		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
-		Listing_Risk_Class::g()->display( $element_id, array( '\digi\Listing_Risk_Corrective_Task_Class', '\digi\Listing_Risk_Picture_Class' ) );
+		Listing_Risk_Corrective_Task_Class::g()->display( $element_id, array( '\digi\Listing_Risk_Corrective_Task_Class' ) );
+	}
+
+	/**
+	 * Appelle la méthode display de l'objet Risk_Class pour gérer le rendu du listing des risques.
+	 *
+	 * @version 7.0.0
+	 *
+	 * @param  array $param  Les arguments du shortcode.
+	 */
+	public function callback_digi_listing_risk_photo( $param ) {
+		$element_id = ! empty( $param['post_id'] ) ? (int) $param['post_id'] : 0;
+		Listing_Risk_Picture_Class::g()->display( $element_id, array( '\digi\Listing_Risk_Picture_Class' ) );
 	}
 }
 

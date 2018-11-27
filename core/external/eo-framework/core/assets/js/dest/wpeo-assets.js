@@ -237,9 +237,7 @@ if ( ! window.eoxiaJS.action ) {
 			doAction = false;
 			doAction = window.eoxiaJS[element.attr( 'data-namespace' )][element.attr( 'data-module' )][element.attr( 'data-before-method' )]( element );
 		} else {
-			if ( ! doAction ) {
-				doAction = window.eoxiaJS.action.checkBeforeCB(element);
-			}
+			doAction = window.eoxiaJS.action.checkBeforeCB(element);
 		}
 
 		if ( doAction ) {
@@ -1457,10 +1455,6 @@ if ( ! window.eoxiaJS.modal  ) {
 						el[0].typeModal = 'ajax';
 						triggeredElement[0].modalElement = el;
 
-						if ( triggeredElement.attr( 'data-title' ) ) {
-							el[0].innerHTML = el[0].innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
-						}
-
 						if ( triggeredElement.attr( 'data-class' ) ) {
 							el[0].className += ' ' + triggeredElement.attr( 'data-class' );
 						}
@@ -1475,7 +1469,11 @@ if ( ! window.eoxiaJS.modal  ) {
 							el[0].innerHTML = el[0].innerHTML.replace( '{{buttons}}', window.eoxiaJS.modal.defaultButtons );
 						}
 
-						if ( ! triggeredElement.attr( 'data-title' ) ) {
+						if ( triggeredElement.attr( 'data-title' ) ) {
+							el[0].innerHTML = el[0].innerHTML.replace( '{{title}}', triggeredElement.attr( 'data-title' ) );
+						} else if ( response.data.modal_title ) {
+							el[0].innerHTML = el[0].innerHTML.replace( '{{title}}', response.data.modal_title );
+						} else if ( ! triggeredElement.attr( 'data-title' ) ) {
 							el[0].innerHTML = el[0].innerHTML.replace( '{{title}}', window.eoxiaJS.modal.defaultTitle );
 						}
 

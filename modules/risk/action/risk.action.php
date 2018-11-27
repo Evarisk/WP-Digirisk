@@ -37,6 +37,7 @@ class Risk_Action {
 		add_action( 'wp_ajax_load_risk', array( $this, 'ajax_load_risk' ) );
 		add_action( 'wp_ajax_wpdigi-edit-risk', array( $this, 'ajax_edit_risk' ) );
 		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
+		add_action( 'wp_ajax_move_risk_to', array( $this, 'callback_move_risk_to' ) );
 	}
 
 	/**
@@ -188,6 +189,25 @@ class Risk_Action {
 		Risk_Evaluation_Comment_Class::g()->update( $risk_evaluation_comment->data );
 
 		wp_send_json_success();
+	}
+
+	public function callback_move_risk_to() {
+		$risk_id       = ! empty( $_POST['risk_id'] ) ? (int) $_POST['risk_id'] : 0;
+		$to_society_id = ! empty( $_POST['to_society_id'] ) ? (int) $_POST['to_society_id'] : 0;
+
+		if ( empty( $risk_id ) || empty( $to_society_id ) ) {
+			wp_send_json_error();
+		}
+
+		$risk = Risk_Class::g()->get( array( 'id' => $risk_id ), true );
+		$risk->data['parent_id'] = $to_society_id;
+		Risk_Class::g()->update( $risk->data );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'risk',
+			'callback_success' => 'movedRiskSuccess',
+		) );
 	}
 }
 

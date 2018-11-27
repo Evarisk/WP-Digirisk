@@ -19,4 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	'society_id'  => $society_id,
 	'risks'       => $risks,
 	'risk_schema' => $risk_schema,
+	'eo_search'   => $eo_search,
 ) );

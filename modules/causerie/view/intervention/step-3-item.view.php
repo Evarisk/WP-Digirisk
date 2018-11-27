@@ -25,7 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php if ( empty( $participant['signature_id'] ) ) : ?>
 		<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du participant est obligatoire', 'digirisk' ); ?>">
-			<div class="button blue wpeo-modal-event"
+			<div class="wpeo-button button-blue wpeo-modal-event"
+				data-title="<?php echo __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->data['displayname']; ?>"
 				data-parent="signature"
 				data-target="modal-signature">
 				<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
@@ -43,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 	<td>
-		<div class="button light w50 delete action-delete"
+		<div class="wpeo-button button-grey button-square-50 delete action-delete"
 			data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>"
 			data-user-id="<?php echo esc_attr( $participant['user_id'] ); ?>"
 			data-action="<?php echo esc_attr( 'causerie_delete_participant' ); ?>"

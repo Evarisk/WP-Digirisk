@@ -63,3 +63,16 @@ window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElemen
 	triggeredElement.closest( 'table' ).removeClass( 'loading' );
 	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
 };
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "to_society_id".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 7.1.0
+ */
+window.eoxiaJS.digirisk.risk.movedRiskSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( '.risk-row' ).fadeOut();
+};

@@ -25,7 +25,7 @@ global $eo_search; ?>
 	<td class="w50"></td>
 
 	<td>
-		<div class="w50 action-input add button blue"
+		<div class="button-square-50 action-input add wpeo-button button-blue"
 			data-loader="table"
 			data-parent="item"
 			data-action="causerie_save_participant"

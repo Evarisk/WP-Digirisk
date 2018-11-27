@@ -42,7 +42,7 @@ class Risk_Evaluation_Action {
 	public function ajax_edit_risk() {
 		$risk = ! empty( $_POST['risk'] ) ? $_POST['risk'] : array();
 
-		$risk['evaluation']['scale']   = (int) $risk['evaluation']['scale'];
+		$risk['evaluation']['scale'] = (int) $risk['evaluation']['scale'];
 
 		$risk['image_id'] = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 

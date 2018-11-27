@@ -36,7 +36,7 @@ class Scale_Util {
 		}
 
 		$method_evaluation_simplified = Evaluation_Method_Class::g()->get( array( 'slug' => 'evarisk-simplified' ), true );
-		$list_scale                   = $method_evaluation_simplified->data['matrix'];
+		$list_scale                   = array( 1 => 0, 2 => 48, 3 => 51, 4 => 80 );
 		if ( empty( $list_scale ) ) {
 			return false;
 		}

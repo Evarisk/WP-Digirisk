@@ -50,7 +50,8 @@ global $eo_search; ?>
 
 			<?php if ( empty( $final_causerie->data['former']['signature_id'] ) ) : ?>
 				<td class="signature w50 padding">
-					<div class="wpeo-button button-blue wpeo-modal-event button-disable"
+					<div class="wpeo-button button-blue wpeo-modal-event <?php echo empty( $final_causerie->data['former']['user_id'] ) ? 'button-disable' : ''; ?>"
+						data-title="<?php echo empty( $user ) ? '' : 'Signature de l\'utilisateur: ' . $user->data->display_name; ?>"
 						data-parent="signature"
 						data-target="modal-signature">
 						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>

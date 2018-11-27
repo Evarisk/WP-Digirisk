@@ -322,7 +322,7 @@ if ( ! class_exists( '\eoxia\Post_Class' ) ) {
 		public function get_attached_taxonomy() {
 			return $this->attached_taxonomy_type;
 		}
-
+		
 		/**
 		 * Retournes le nom du post type.
 		 *

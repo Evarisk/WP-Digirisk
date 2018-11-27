@@ -6039,6 +6039,11 @@ readers do not read off random characters that represent icons */
     display: -ms-flexbox;
     display: flex; } }
 
+@media (max-width: 770px) {
+  .wpeo-wrap .table .comment-container .comment textarea {
+    min-width: 100px;
+    height: 150px; } }
+
 @media (max-width: 480px) {
   .wpeo-wrap .table.evaluators tr, .wpeo-wrap .table.evaluators thead, .wpeo-wrap .table.evaluators tbody, .wpeo-wrap .table.evaluators tfoot, .wpeo-wrap .table.evaluators td:not(.hidden), .wpeo-wrap .table.evaluators th, .wpeo-wrap .table.affected-evaluator tr, .wpeo-wrap .table.affected-evaluator thead, .wpeo-wrap .table.affected-evaluator tbody, .wpeo-wrap .table.affected-evaluator tfoot, .wpeo-wrap .table.affected-evaluator td:not(.hidden), .wpeo-wrap .table.affected-evaluator th {
     display: block;

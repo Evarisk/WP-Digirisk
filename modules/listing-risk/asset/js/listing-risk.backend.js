@@ -33,5 +33,9 @@ window.eoxiaJS.digirisk.listingRisk.event = function() {};
  * @since 6.5.0
  */
 window.eoxiaJS.digirisk.listingRisk.generatedListingRiskSuccess = function( triggeredElement, response ) {
-	jQuery( '.tab-element[data-target="digi-listing-risk"]' ).click();
+	if ( 'photos' === response.data.type ) {
+		jQuery( '.tab-element[data-target="digi-listing-risk-photo"]' ).click();
+	} else {
+		jQuery( '.tab-element[data-target="digi-listing-risk-action-corrective"]' ).click();
+	}
 };

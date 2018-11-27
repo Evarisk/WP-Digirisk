@@ -83,8 +83,8 @@ if ( ! class_exists( '\eoxia\Date_Util' ) ) {
 				$formatter                   = new \IntlDateFormatter( $locale, \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT );
 				$data['date_human_readable'] = \ucwords( $formatter->format( $date ) );
 			} else {
-				$data['date'] = $date->format( 'n/j/y' );
-				$data['date_time'] = $date->format( 'n/j/y, g:i A' );
+				$data['date'] = $date->format( 'n/j/Y' );
+				$data['date_time'] = $date->format( 'n/j/Y, g:i A' );
 				$data['time'] = $date->format( 'g:i A' );
 				$data['date_human_readable'] = $date->format( 'l, F j, Y \A\t g:i A' );
 			}

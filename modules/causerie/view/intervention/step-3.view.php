@@ -42,10 +42,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</tbody>
 </table>
 
-<a class="button grey" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Finir plus tard', 'digirisk' ); ?></a>
+<a class="wpeo-button button-grey" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Finir plus tard', 'digirisk' ); ?></a>
 
 <a href="<?php echo esc_attr( wp_nonce_url( admin_url( 'admin-post.php?action=next_step_causerie&id=' . $final_causerie->data['id'] ), 'next_step_causerie' ) ); ?>"
-	class="<?php echo ( ! $all_signed ) ? esc_attr( 'disabled wpeo-tooltip-event' ) : ''; ?> button blue float right"
+	class="<?php echo ( ! $all_signed ) ? esc_attr( 'button-disable wpeo-tooltip-event' ) : ''; ?> wpeo-button button-blue float right"
 	aria-label="<?php esc_attr_e( 'Veuillez ajouter des participants et les faire signer avant de cloturer la causerie', 'digirisk' ); ?>"
 	data-direction="left">
 	<span><?php esc_html_e( 'Cloturer la causerie', 'digirisk' ); ?></span>

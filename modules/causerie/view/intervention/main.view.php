@@ -50,6 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'main_causerie'  => $main_causerie,
 						'final_causerie' => $final_causerie,
 						'all_signed'     => $all_signed,
+						'user'           => $user,
 						'signature_id'   => 0,
 					) );
 				else :

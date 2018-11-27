@@ -37,28 +37,30 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	public function display_single( $id ) {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
+		$user           = null;
 
-		$this->register_search( $final_causerie );
+		if ( ! empty( $final_causerie->data['former'] ) && ! empty( $final_causerie->data['former']['user_id'] ) ) {
+			$user = get_userdata( $final_causerie->data['former']['user_id'] );
+		}
+
+		$this->register_search( $final_causerie, $user );
 
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
 			'final_causerie' => $final_causerie,
 			'main_causerie'  => $main_causerie,
+			'user'           => $user,
 			'all_signed'     => $this->check_all_signed( $final_causerie ),
 		) );
 	}
 
-	public function register_search( $causerie ) {
+	public function register_search( $causerie, $former ) {
 		global $eo_search;
-
-		if ( ! empty( $causerie->data['former'] ) && ! empty( $causerie->data['former']['user_id'] ) ) {
-			$user = get_userdata( $causerie->data['former']['user_id'] );
-		}
 
 		$args_causerie_former = array(
 			'type'         => 'user',
 			'name'         => 'former_id',
-			'value'        => $user->data->display_name,
-			'hidden_value' => (int) $user->data->ID,
+			'value'        => ! empty( $former ) ? $former->data->display_name : '',
+			'hidden_value' => ! empty( $former ) ? (int) $former->data->ID : 0,
 		);
 
 		$eo_search->register_search( 'causerie_former', $args_causerie_former );

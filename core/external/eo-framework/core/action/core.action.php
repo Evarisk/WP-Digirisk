@@ -44,7 +44,7 @@ class Core_Action {
 	 */
 	public function callback_mixed_enqueue_scripts() {
 		wp_register_script( 'wpeo-assets-scripts', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/wpeo-assets.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->version, false );
-		wp_register_script( 'wpeo-assets-fontawesome', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/font/fontawesome-all.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->version, false );
+		// wp_register_script( 'wpeo-assets-fontawesome', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/font/fontawesome-all.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->version, false );
 		wp_enqueue_script( 'wpeo-assets-datepicker-js', Config_Util::$init['eo-framework']->core->url . 'assets/js/dest/jquery.datetimepicker.full.js', array( 'jquery' ), \eoxia\Config_Util::$init['eo-framework']->version, false );
 
 		wp_enqueue_style( 'wpeo-assets-styles', Config_Util::$init['eo-framework']->core->url . 'assets/css/style.min.css', \eoxia\Config_Util::$init['eo-framework']->version );
@@ -52,7 +52,7 @@ class Core_Action {
 
 		wp_localize_script( 'wpeo-assets-scripts', 'wpeo_framework', $this->get_localize_script_data() );
 		wp_enqueue_script( 'wpeo-assets-scripts' );
-		wp_enqueue_script( 'wpeo-assets-fontawesome' );
+		// wp_enqueue_script( 'wpeo-assets-fontawesome' );
 	}
 
 	/**

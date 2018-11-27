@@ -44,7 +44,8 @@ class Sheet_Workunit_Action {
 			wp_send_json_error();
 		}
 
-		$response = Sheet_Workunit_Class::g()->prepare_document( $society_id );
+		$society  = Society_Class::g()->show_by_type( $society_id );
+		$response = Sheet_Workunit_Class::g()->prepare_document( $society );
 
 		Sheet_Workunit_Class::g()->create_document( $response['document']->data['id'] );
 

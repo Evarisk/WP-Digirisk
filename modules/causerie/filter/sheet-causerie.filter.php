@@ -91,7 +91,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			'dateDebutCauserie'   => __( 'N/A', 'digirisk' ),
 			'dateClotureCauserie' => __( 'N/A', 'digirisk' ),
 			'nombreCauserie'      => 0,
-			'dateCreation'        => 'tyest',
+			'dateCreation'        => $causerie->data['date']['rendered']['date_human_readable'],
 			'nombreFormateur'     => 0,
 			'nombreUtilisateur'   => 0,
 		);
@@ -103,8 +103,8 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$data['cleFinalCauserie']    = (string) $causerie_intervention->data['second_unique_key'];
 			$data['formateur']           = $causerie_intervention->data['former']['rendered']->data['displayname'];
 			$data['formateurSignature']  = $this->set_picture( $causerie_intervention->data['former']['signature_id'], 5 );
-			$data['dateDebutCauserie']   = $causerie_intervention->data['date_start']['date_human_readable'];
-			$data['dateClotureCauserie'] = $causerie_intervention->data['date_end']['date_human_readable'];
+			$data['dateDebutCauserie']   = $causerie_intervention->data['date_start']['rendered']['date_human_readable'];
+			$data['dateClotureCauserie'] = $causerie_intervention->data['date_end']['rendered']['date_human_readable'];
 			$data['nombreCauserie']      = $causerie->data['number_time_realized'];
 			$data['nombreFormateur']     = $causerie->data['number_formers'];
 			$data['nombreUtilisateur']   = $causerie->data['number_participants'];
@@ -187,6 +187,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
 				$participant['rendered'] = (array) $participant['rendered'];
+
 				$data['utilisateurs']['value'][] = array(
 					'nomUtilisateur'    => $participant['rendered']['data']['lastname'],
 					'prenomUtilisateur' => $participant['rendered']['data']['firstname'],

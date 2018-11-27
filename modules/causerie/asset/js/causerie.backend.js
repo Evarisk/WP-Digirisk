@@ -103,7 +103,8 @@ window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
 	jQuery( '.modal-signature' ).find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
 			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'button-disabled' );
+			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'button-disable' );
+			jQuery( '.step-3 a.button-disable' ).removeClass( 'button-disable' );
 		}
 	} );
 };

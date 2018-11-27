@@ -78,9 +78,12 @@ class User_Digi_Class extends \eoxia\User_Class {
 	 */
 	public function callback_user_profile( $user ) {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
-		$hiring_date = ! empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
+		$hiring_date      = ! empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
 
-		require_once( wpdigi_utils::get_template_part( WPDIGI_USERS_DIR, WPDIGI_USERS_TEMPLATES_MAIN_DIR, 'backend', 'user-profile' ) );
+		\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile', array(
+			'user_information' => $user_information,
+			'hiring_date'      => $hiring_date,
+		) );
 	}
 
 	/**

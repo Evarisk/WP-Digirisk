@@ -57,7 +57,7 @@ class Causerie_Intervention_Page_Action {
 			wp_send_json_error();
 		}
 
-		Causerie_Intervention_Page_Class::g()->register_search();
+		Causerie_Intervention_Page_Class::g()->register_search( null, null );
 
 		switch ( $causerie->data['current_step'] ) {
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_FORMER:
