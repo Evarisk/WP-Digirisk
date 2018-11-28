@@ -1,0 +1,13 @@
+{
+	"name": "Child",
+	"slug": "child",
+	"since": "7.1.0",
+	"description": "Le module gérant la liaison avec DigiRisk Dashboard",
+	"path": "modules/child/",
+	"dependencies": {
+		"action": {},
+    "class": {}
+	},
+  "security_id_key": "digi_security_id",
+  "site_parent_key": "digi_site_parent"
+}

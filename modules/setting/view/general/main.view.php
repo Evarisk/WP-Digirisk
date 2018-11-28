@@ -46,6 +46,22 @@ defined( 'ABSPATH' ) || exit; ?>
 		</label>
 	</div>
 
+	<div class="form-element">
+		<label class="form-field-container">
+			<div class="form-field-inline">
+				<input type="checkbox" id="require_unique_security_id" class="form-field" name="require_unique_security_id" <?php echo $require_unique_security_id ? 'checked' : ''; ?> />
+				<label for="require_unique_security_id"><?php esc_html_e( 'Exiger un ID de sécurité unique', 'digirisk' ); ?></label>
+			</div>
+		</label>
+	</div>
+
+	<?php if ( $require_unique_security_id ) : ?>
+		<h3>
+			<?php esc_html_e( 'Votre ID de sécurité unique est : ', 'digirisk' ); ?>
+			<span><?php echo esc_html( $unique_security_id['security_id'] ); ?></span>
+		</h3>
+	<?php endif; ?>
+
 	<div class="wpeo-button button-main action-input" data-parent="wpeo-form">
 		<span><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></span>
 	</div>

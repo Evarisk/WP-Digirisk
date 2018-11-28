@@ -30,8 +30,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div id="digi-general" class="tab-content <?php echo ( 'digi-general' === $default_tab ) ? '' : 'hidden'; ?>">
 				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'general/main', array(
-					'can_edit_risk_category' => $can_edit_risk_category,
-					'can_edit_type_cotation' => $can_edit_type_cotation,
+					'can_edit_risk_category'     => $can_edit_risk_category,
+					'can_edit_type_cotation'     => $can_edit_type_cotation,
+					'require_unique_security_id' => $require_unique_security_id,
+					'unique_security_id'         => $unique_security_id,
 				) ); ?>
 			</div>
 

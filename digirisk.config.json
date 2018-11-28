@@ -37,6 +37,7 @@
 
 		"modules/update_manager/update_manager.config.json",
 		"modules/historic/historic.config.json",
+		"modules/child/child.config.json",
 
 		"modules/address/address.config.json",
 		"modules/society/society.config.json",

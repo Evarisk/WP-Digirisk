@@ -92,15 +92,19 @@ class Setting_Action {
 			return 0;
 		} );
 
-		$can_edit_risk_category = (bool) get_option( 'edit_risk_category', false );
-		$can_edit_type_cotation = (bool) get_option( 'edit_type_cotation', false );
+		$can_edit_risk_category     = (bool) get_option( 'edit_risk_category', false );
+		$can_edit_type_cotation     = (bool) get_option( 'edit_type_cotation', false );
+		$require_unique_security_id = (bool) get_option( 'require_unique_security_id', false );
+		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
-			'list_accronym'          => $list_accronym,
-			'dangers_preset'         => $dangers_preset,
-			'default_tab'            => $default_tab,
-			'can_edit_risk_category' => $can_edit_risk_category,
-			'can_edit_type_cotation' => $can_edit_type_cotation,
+			'list_accronym'              => $list_accronym,
+			'dangers_preset'             => $dangers_preset,
+			'default_tab'                => $default_tab,
+			'can_edit_risk_category'     => $can_edit_risk_category,
+			'can_edit_type_cotation'     => $can_edit_type_cotation,
+			'require_unique_security_id' => $require_unique_security_id,
+			'unique_security_id'         => $unique_security_id,
 		) );
 	}
 
@@ -193,17 +197,29 @@ class Setting_Action {
 	public function ajax_save_general_settings_digirisk() {
 		check_ajax_referer( 'save_general_settings_digirisk' );
 
-		$domain_mail            = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-		$can_edit_risk_category = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
-		$can_edit_type_cotation = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
+		$domain_mail                = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		$can_edit_risk_category     = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
+		$can_edit_type_cotation     = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
+		$require_unique_security_id = ( isset( $_POST['require_unique_security_id'] ) && 'true' == $_POST['require_unique_security_id'] ) ? true : false;
 
-		if ( '' === $domain_mail ) {
-			wp_send_json_error();
+		if ( $require_unique_security_id ) {
+			$security_id_key    = \eoxia\Config_Util::$init['digirisk']->child->security_id_key;
+			$security_id_option = get_option(  $security_id_key, false );
+
+			if ( ! $security_id_option ) {
+				$security_id = Child_Class::g()->generate_security_id();
+
+				update_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, array(
+					'security_id' => $security_id,
+					'used'        => false,
+				) );
+			}
 		}
 
 		update_option( 'digirisk_domain_mail', $domain_mail );
 		update_option( 'edit_risk_category', $can_edit_risk_category );
 		update_option( 'edit_type_cotation', $can_edit_type_cotation );
+		update_option( 'require_unique_security_id', $require_unique_security_id );
 
 		wp_send_json_success();
 	}
