@@ -36,9 +36,9 @@ class Child_Action {
 			'callback' => array( $this, 'callback_register_site' ),
 		) );
 
-		register_rest_route( 'digi/v1', '/duer/tree', array(
+		register_rest_route( 'digi/v1', '/duer/generate', array(
 			'methods'  => 'GET',
-			'callback' => array( $this, 'callback_duer_tree' ),
+			'callback' => array( $this, 'callback_generate' ),
 		) );
 	}
 
@@ -78,14 +78,47 @@ class Child_Action {
 		return $response;
 	}
 
-	public function callback_duer_tree( \WP_REST_Request $request ) {
-		$society = Society_Class::g()->get( array(
-			'posts_per_page' => 1,
-		), true );
+	public function callback_generate( \WP_REST_Request $request ) {
+		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
+		$parent_id = $parent->data['id'];
+		$links     = array();
 
-		$societies = Society_Class::g()->get_societies_in( $society->data['id'], 'inherit' );
+		$generation_status = DUER_Class::g()->generate_full_duer( $parent_id, '', '', '', '', '', '', '' );
+		$links[]           = $generation_status['document']->data['link'];
 
-		$response = new \WP_REST_Response( $societies );
+		$societies = Society_Class::g()->get_societies_in( $parent_id, 'inherit' );
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+				$societies = array_merge( $societies, Society_Class::g()->get_societies_in( $society->data['id'], 'inherit' ) );
+			}
+		}
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+				if ( Group_Class::g()->get_type() === $society->data['type'] ) {
+					\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $element_id, 'digirisk' );
+					$generation_status = Sheet_Groupment_Class::g()->prepare_document( $society, array(
+						'parent' => $society,
+					) );
+					$links[]           = $generation_status['document']->data['link'];
+
+					Sheet_Groupment_Class::g()->create_document( $generation_status['document']->data['id'] );
+					\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
+				} elseif ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
+					\eoxia\LOG_Util::log( 'DEBUT - Génération du document fiche de poste #UT' . $element_id, 'digirisk' );
+					$generation_status = Sheet_Workunit_Class::g()->prepare_document( $society, array(
+						'parent' => $society,
+					) );
+					$links[]           = $generation_status['document']->data['link'];
+
+					Sheet_Workunit_Class::g()->create_document( $generation_status['document']->data['id'] );
+					\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste', 'digirisk' );
+				}
+			}
+		}
+
+		$response = new \WP_REST_Response( $links );
 
 		return $response;
 	}

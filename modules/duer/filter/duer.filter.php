@@ -72,7 +72,7 @@ class DUER_Filter extends Identifier_Filter {
 		$user = wp_get_current_user();
 
 		$data['nomEntreprise']      = $society->data['title'];
-		$data['emetteurDUER']       = $user->display_name;
+		$data['emetteurDUER']       = ! empty( $user->display_name ) ? $user->display_name : '';
 		$data['destinataireDUER']   = $args['destinataire_duer'];
 		$data['telephone']          = ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '';
 		$data['portable']           = '';
