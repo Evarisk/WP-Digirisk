@@ -41,7 +41,7 @@ class Child_Action {
 			'callback' => array( $this, 'callback_get_society' ),
 		) );
 
-		register_rest_route( 'digi/v1', '/duer/society/tree', array(
+		register_rest_route( 'digi/v1', '/duer/society/tree/(?P<id>\d+)', array(
 			'methods'  => 'GET',
 			'callback' => array( $this, 'callback_get_society_tree' ),
 		) );
@@ -110,12 +110,13 @@ class Child_Action {
 	public function callback_get_society_tree( \WP_REST_Request $request ) {
 		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 		$parent_id = $parent->data['id'];
-		$args['parent_id'] = $parent_id;
+		$args['parent_id']    = $parent_id;
+		$args['dashboard_id'] = $request->get_param('id');
 
 
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
 		array_unshift( $data['elementParHierarchie']['value'], array(
-			'nomElement' => $parent->data['title'],
+			'nomElement' => 'D' . $request->get_param('id') . ' - ' . $parent->data['title'],
 		) );
 
 		$response = new \WP_REST_Response( $data );
