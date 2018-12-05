@@ -46,6 +46,11 @@ class Child_Action {
 			'callback' => array( $this, 'callback_get_society_tree' ),
 		) );
 
+		register_rest_route( 'digi/v1', '/duer/risk', array(
+			'methods'  => 'GET',
+			'callback' => array( $this, 'callback_get_risk' ),
+		) );
+
 		register_rest_route( 'digi/v1', '/duer/generate', array(
 			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_generate' ),
@@ -108,6 +113,49 @@ class Child_Action {
 		$args['parent_id'] = $parent_id;
 
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
+
+		$response = new \WP_REST_Response( $data );
+		return $response;
+	}
+
+	public function callback_get_risk( \WP_REST_Request $request ) {
+		$args_where = array(
+			'post_status'    => array( 'publish', 'inherit' ),
+			'meta_key'       => '_wpdigi_equivalence',
+			'orderby'        => 'meta_value_num',
+			'meta_query' => array(
+				array(
+					'key'     => '_wpdigi_preset',
+					'value'   => 1,
+					'compare' => '!=',
+				)
+			)
+		);
+
+		$risks = Risk_Class::g()->get( $args_where );
+		$data = array();
+
+		if ( ! empty( $risks ) ) {
+			foreach ( $risks as &$risk ) {
+				$output_comment = '';
+				if ( ! empty( $risk->data['comment'] ) ) {
+					foreach ( $risk->data['comment'] as $comment ) {
+						$output_comment .= point_to_string( $comment );
+					}
+				}
+				$risk = Corrective_Task_Class::g()->output_odt( $risk );
+				$data[] = array(
+					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
+					'quotationRisque'             => $risk->data['current_equivalence'],
+					'scale'                       => $risk->data['evaluation']->data['scale'],
+					'nomDanger'                   => $risk->data['risk_category']->data['name'],
+					'commentaireRisque'           => $output_comment,
+					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
+				);
+			}
+		}
 
 		$response = new \WP_REST_Response( $data );
 		return $response;
