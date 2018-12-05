@@ -46,7 +46,7 @@ class Child_Action {
 			'callback' => array( $this, 'callback_get_society_tree' ),
 		) );
 
-		register_rest_route( 'digi/v1', '/duer/risk', array(
+		register_rest_route( 'digi/v1', '/duer/risk/(?p<id>\d+)', array(
 			'methods'  => 'GET',
 			'callback' => array( $this, 'callback_get_risk' ),
 		) );
@@ -124,6 +124,8 @@ class Child_Action {
 	}
 
 	public function callback_get_risk( \WP_REST_Request $request ) {
+		$dashboard_id = $request->get_param('id');
+
 		$args_where = array(
 			'post_status'    => array( 'publish', 'inherit' ),
 			'meta_key'       => '_wpdigi_equivalence',
@@ -150,9 +152,8 @@ class Child_Action {
 				}
 
 				$risk = Corrective_Task_Class::g()->output_odt( $risk );
-
 				$data[] = array(
-					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+					'nomElement'                  => 'D' . $dashboard_id . ' -- ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'scale'                       => $risk->data['evaluation']->data['scale'],
