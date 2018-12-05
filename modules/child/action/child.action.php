@@ -112,7 +112,11 @@ class Child_Action {
 		$parent_id = $parent->data['id'];
 		$args['parent_id'] = $parent_id;
 
+
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
+		array_unshift( $data['elementParHierarchie']['value'], array(
+			'nomElement' => $parent->data['title'],
+		) );
 
 		$response = new \WP_REST_Response( $data );
 		return $response;
@@ -143,7 +147,9 @@ class Child_Action {
 						$output_comment .= point_to_string( $comment );
 					}
 				}
+
 				$risk = Corrective_Task_Class::g()->output_odt( $risk );
+
 				$data[] = array(
 					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
