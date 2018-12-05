@@ -126,30 +126,7 @@ class DUER_Filter extends Identifier_Filter {
 	}
 
 	public function callback_hierarchy( $data, $args ) {
-		$societies = Society_Class::g()->get_societies_in( $args['parent_id'], 'inherit' );
-
-		if ( ! empty( $societies ) ) {
-			foreach ( $societies as $society ) {
-
-				$tabulation = '';
-
-				for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
-					$tabulation .= '-';
-				}
-
-				$data['elementParHierarchie']['value'][] = array(
-					'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
-				);
-
-				$args['parent_id'] = $society->data['id'];
-
-				$data = $this->callback_hierarchy( $data, $args );
-
-				$tabulation .= '-';
-			}
-		}
-
-		return $data;
+		return DUER_Class::g()->get_hierarchy( $data, $args );
 	}
 
 	public function callback_risks( $data, $args ) {

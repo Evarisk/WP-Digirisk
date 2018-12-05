@@ -41,6 +41,10 @@ class Child_Class extends \eoxia\Singleton_Util {
 
 		return $security_id;
 	}
+
+	public function check_hash( $hash ) {
+		return true;
+	}
 }
 
 new Child_Action();

@@ -160,6 +160,33 @@ class DUER_Class extends Document_Class {
 
 		return $data;
 	}
+
+	public function get_hierarchy_duer( $data, $args ) {
+		$societies = Society_Class::g()->get_societies_in( $args['parent_id'], 'inherit' );
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+
+				$tabulation = '';
+
+				for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
+					$tabulation .= '-';
+				}
+
+				$data['elementParHierarchie']['value'][] = array(
+					'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+				);
+
+				$args['parent_id'] = $society->data['id'];
+
+				$data = $this->get_hierarchy_duer( $data, $args );
+
+				$tabulation .= '-';
+			}
+		}
+
+		return $data;
+	}
 }
 
 DUER_Class::g();

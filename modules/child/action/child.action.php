@@ -36,8 +36,18 @@ class Child_Action {
 			'callback' => array( $this, 'callback_register_site' ),
 		) );
 
-		register_rest_route( 'digi/v1', '/duer/generate', array(
+		register_rest_route( 'digi/v1', '/duer/society', array(
 			'methods'  => 'GET',
+			'callback' => array( $this, 'callback_get_society' ),
+		) );
+
+		register_rest_route( 'digi/v1', '/duer/society/tree', array(
+			'methods'  => 'GET',
+			'callback' => array( $this, 'callback_get_society_tree' ),
+		) );
+
+		register_rest_route( 'digi/v1', '/duer/generate', array(
+			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_generate' ),
 		) );
 	}
@@ -78,7 +88,39 @@ class Child_Action {
 		return $response;
 	}
 
+	public function callback_get_society( \WP_REST_Request $request ) {
+		$params = $request->get_params();
+
+		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
+			$response = new \WP_REST_Response( '', 404 );
+			return $response;
+		}
+
+		$parent   = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
+		$response = new \WP_REST_Response( $parent->data );
+
+		return $response;
+	}
+
+	public function callback_get_society_tree( \WP_REST_Request $request ) {
+		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
+		$parent_id = $parent->data['id'];
+		$args['parent_id'] = $parent_id;
+
+		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
+
+		$response = new \WP_REST_Response( $data );
+		return $response;
+	}
+
 	public function callback_generate( \WP_REST_Request $request ) {
+		$params = $request->get_params();
+
+		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
+			$response = new \WP_REST_Response( '', 404 );
+			return $response;
+		}
+
 		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 		$parent_id = $parent->data['id'];
 		$links     = array();
