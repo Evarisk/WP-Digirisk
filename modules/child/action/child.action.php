@@ -46,7 +46,7 @@ class Child_Action {
 			'callback' => array( $this, 'callback_get_society_tree' ),
 		) );
 
-		register_rest_route( 'digi/v1', '/duer/risk/(?p<id>\d+)', array(
+		register_rest_route( 'digi/v1', '/duer/risk/(?P<id>\d+)', array(
 			'methods'  => 'GET',
 			'callback' => array( $this, 'callback_get_risk' ),
 		) );
