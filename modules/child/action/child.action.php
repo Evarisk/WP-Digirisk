@@ -59,8 +59,8 @@ class Child_Action {
 
 	public function callback_register_site( \WP_REST_Request $request ) {
 		$check_fields = array(
+			'url_parent' => 'esc_url_raw',
 			'url'        => 'esc_url_raw',
-			'login'      => 'sanitize_user',
 			'unique_key' => 'sanitize_text_field',
 		);
 
@@ -74,18 +74,49 @@ class Child_Action {
 		}
 
 		$unique_security_id = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
+		$site_key           = \eoxia\Config_Util::$init['digirisk']->child->site_parent_key;
+		$sites              = get_option( $site_key, array() );
 
-		$string_to_hash = implode( '', $data );
-		$string_to_hash = hash( 'sha256', $string_to_hash );
-		update_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, $string_to_hash );
+		$last_id = 0;
+
+		$already_exist = false;
+
+		if ( ! empty( $sites ) ) {
+			foreach ( $sites as $id => $site ) {
+				if ( $data['url_parent'] == $site['url_parent'] ) {
+					$already_exist = true;
+				}
+
+				$last_id = $id;
+			}
+		}
 
 		$response = new \WP_REST_Response( array(
 			'title' => get_bloginfo( 'name' ),
 		) );
 
 		if ( $unique_security_id['security_id'] !== $data['unique_key'] ) {
-			$response->set_status( 404 );
+			$response->set_status( 200 );
+			$response->data['error_code'] = 1;
 		} else {
+			if ( ! $already_exist ) {
+				$url_parent = $data['url_parent'];
+
+				unset( $data['url_parent'] );
+				$string_to_hash = implode( '', $data );
+				$string_to_hash = hash( 'sha256', $string_to_hash );
+
+				$sites[ $last_id + 1 ] = array(
+					'url'        => $data['url'],
+					'url_parent' => $url_parent,
+					'hash'       => $string_to_hash,
+				);
+
+				update_option( $site_key, $sites );
+			} else {
+				$response->data['error_code'] = 2;
+			}
+
 			$response->set_status( 200 );
 		}
 

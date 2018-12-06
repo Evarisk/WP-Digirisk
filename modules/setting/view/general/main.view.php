@@ -62,6 +62,24 @@ defined( 'ABSPATH' ) || exit; ?>
 		</h3>
 	<?php endif; ?>
 
+	<?php
+	if ( ! empty( $sites ) ) :
+		?>
+		<h4>Mes sites parents</h4>
+
+		<ul>
+			<?php
+			foreach ( $sites as $site ) :
+				?>
+				<li><?php echo esc_html( $site['url_parent'] ); ?></li>
+				<?php
+			endforeach;
+			?>
+		</ul>
+		<?php
+	endif;
+	?>
+
 	<div class="wpeo-button button-main action-input" data-parent="wpeo-form">
 		<span><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></span>
 	</div>

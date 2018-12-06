@@ -96,6 +96,7 @@ class Setting_Action {
 		$can_edit_type_cotation     = (bool) get_option( 'edit_type_cotation', false );
 		$require_unique_security_id = (bool) get_option( 'require_unique_security_id', false );
 		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
+		$sites                      = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
@@ -105,6 +106,7 @@ class Setting_Action {
 			'can_edit_type_cotation'     => $can_edit_type_cotation,
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
+			'sites'                      => $sites,
 		) );
 	}
 

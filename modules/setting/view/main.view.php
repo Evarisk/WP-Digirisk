@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'can_edit_type_cotation'     => $can_edit_type_cotation,
 					'require_unique_security_id' => $require_unique_security_id,
 					'unique_security_id'         => $unique_security_id,
+					'sites'                      => $sites,
 				) ); ?>
 			</div>
 
