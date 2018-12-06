@@ -45,6 +45,29 @@ class Child_Class extends \eoxia\Singleton_Util {
 	public function check_hash( $hash ) {
 		return true;
 	}
+
+	public function delete_site_by_hash( $hash ) {
+		$site_key = \eoxia\Config_Util::$init['digirisk']->child->site_parent_key;
+		$sites    = get_option( $site_key, array() );
+		$founded  = false;
+		$status   = false;
+
+		if ( ! empty( $sites ) ) {
+			foreach ( $sites as $key => $site ) {
+				if ( $site['hash'] == $hash ) {
+					$founded = true;
+					break;
+				}
+			}
+		}
+
+		if ( $founded ) {
+			$sites  = array_splice( $key, 1 );
+			$status = update_option( $site_key, $sites );
+		}
+
+		return $status;
+	}
 }
 
 new Child_Action();

@@ -36,6 +36,11 @@ class Child_Action {
 			'callback' => array( $this, 'callback_register_site' ),
 		) );
 
+		register_rest_route( 'digi/v1', '/delete-site', array(
+			'methods'  => 'POST',
+			'callback' => array( $this, 'callback_delete_site' ),
+		) );
+
 		register_rest_route( 'digi/v1', '/duer/society', array(
 			'methods'  => 'GET',
 			'callback' => array( $this, 'callback_get_society' ),
@@ -121,6 +126,15 @@ class Child_Action {
 		}
 
 
+		return $response;
+	}
+
+	public function callback_delete_site( \WP_REST_Request $request ) {
+		$params = $request->get_params();
+
+		$status = Child_Class::g()->delete_site_by_hash( $params['hash'] );
+
+		$response = new \WP_REST_Response( $status );
 		return $response;
 	}
 
