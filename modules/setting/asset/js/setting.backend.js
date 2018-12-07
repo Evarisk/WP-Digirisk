@@ -87,3 +87,17 @@ window.eoxiaJS.digirisk.setting.savedRiskSuccess = function( element, response )
  * @since 6.4.0
  */
 window.eoxiaJS.digirisk.setting.savedCapability = function( triggeredElement, response ) {};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "general_settings".
+ * Affiches le message de "success".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 6.4.0
+ */
+window.eoxiaJS.digirisk.setting.generalSettingsSaved = function( triggeredElement, response ) {
+	document.location.href = response.data.url;
+};

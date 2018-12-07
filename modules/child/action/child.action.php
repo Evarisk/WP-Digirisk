@@ -227,7 +227,10 @@ class Child_Action {
 		$links     = array();
 
 		$generation_status = DUER_Class::g()->generate_full_duer( $parent_id, '', '', '', '', '', '', '' );
-		$links[]           = $generation_status['document']->data['link'];
+		$links[] = array(
+			'link'  => $generation_status['document']->data['link'],
+			'title' => $generation_status['document']->data['title'],
+		);
 
 		$societies = Society_Class::g()->get_societies_in( $parent_id, 'inherit' );
 
@@ -244,7 +247,10 @@ class Child_Action {
 					$generation_status = Sheet_Groupment_Class::g()->prepare_document( $society, array(
 						'parent' => $society,
 					) );
-					$links[]           = $generation_status['document']->data['link'];
+					$links[] = array(
+						'link'  => $generation_status['document']->data['link'],
+						'title' => $generation_status['document']->data['title'],
+					);
 
 					Sheet_Groupment_Class::g()->create_document( $generation_status['document']->data['id'] );
 					\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
@@ -253,7 +259,10 @@ class Child_Action {
 					$generation_status = Sheet_Workunit_Class::g()->prepare_document( $society, array(
 						'parent' => $society,
 					) );
-					$links[]           = $generation_status['document']->data['link'];
+					$links[] = array(
+						'link'  => $generation_status['document']->data['link'],
+						'title' => $generation_status['document']->data['title'],
+					);
 
 					Sheet_Workunit_Class::g()->create_document( $generation_status['document']->data['id'] );
 					\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste', 'digirisk' );

@@ -223,7 +223,12 @@ class Setting_Action {
 		update_option( 'edit_type_cotation', $can_edit_type_cotation );
 		update_option( 'require_unique_security_id', $require_unique_security_id );
 
-		wp_send_json_success();
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'generalSettingsSaved',
+			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+		) );
 	}
 }
 

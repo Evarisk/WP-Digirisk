@@ -126,7 +126,7 @@ class DUER_Filter extends Identifier_Filter {
 	}
 
 	public function callback_hierarchy( $data, $args ) {
-		return DUER_Class::g()->get_hierarchy( $data, $args );
+		return DUER_Class::g()->get_hierarchy_duer( $data, $args );
 	}
 
 	public function callback_risks( $data, $args ) {
