@@ -77,6 +77,13 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.0.2 =
+
+Corrections
+
+* 24376 - Correction de la mauvaise couleur pour une cotation supérieure à 80.
+* 24377 - Correction du bug empêchant l'affichage du bouton "Mettre à jour le profil" dans la page "Votre profil" de WordPress.
+
 = Version 7.0.1 =
 
 Corrections

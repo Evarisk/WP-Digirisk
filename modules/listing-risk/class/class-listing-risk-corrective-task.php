@@ -86,13 +86,6 @@ class Listing_Risk_Corrective_Task_Class extends Document_Class {
 	protected $odt_name = 'liste_des_risques_actions';
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 6.5.0
-	 */
-	protected function construct() {}
-
-	/**
 	 * Affichage principale
 	 *
 	 * @since 7.0.0

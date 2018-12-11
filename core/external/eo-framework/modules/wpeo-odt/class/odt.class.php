@@ -97,6 +97,9 @@ if ( ! class_exists( '\eoxia\ODT_Class' ) ) {
 		 */
 		protected $odt_name = '';
 
+		protected $path = '';
+		protected $url = '';
+
 		/**
 		 * Récupères le chemin vers le dossier frais-pro dans wp-content/uploads
 		 *
@@ -127,10 +130,10 @@ if ( ! class_exists( '\eoxia\ODT_Class' ) ) {
 			$response = array(
 				'status'  => true,
 				'id'      => null,
-				'path'    => str_replace( '\\', '/', PLUGIN_DIGIRISK_PATH . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
-				'url'     => str_replace( '\\', '/', PLUGIN_DIGIRISK_URL . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
+				'path'    => str_replace( '\\', '/', $this->path . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
+				'url'     => str_replace( '\\', '/', $this->url . 'core/assets/document_template/' . $this->odt_name . '.odt' ),
 				// translators: Pour exemple: Le modèle utilisé est: C:\wamp\www\wordpress\wp-content\plugins\digirisk-alpha\core\assets\document_template\document_unique.odt.
-				'message' => sprintf( __( 'Le modèle utilisé est: %1$score/assets/document_template/%2$s.odt', 'digirisk' ), PLUGIN_DIGIRISK_PATH, $this->odt_name ),
+				'message' => sprintf( __( 'Le modèle utilisé est: %1$score/assets/document_template/%2$s.odt', 'digirisk' ), $this->path, $this->odt_name ),
 			);
 
 			// Merge tous les types ensembles.
@@ -381,7 +384,7 @@ if ( ! class_exists( '\eoxia\ODT_Class' ) ) {
 			@ini_set( 'memory_limit', '256M' );
 
 
-			require_once PLUGIN_DIGIRISK_PATH . '/core/external/odtPhpLibrary/odf.php';
+			require_once $this->path . '/core/external/odtPhpLibrary/odf.php';
 
 			$upload_dir = wp_upload_dir();
 			$directory  = str_replace( '\\', '/', $upload_dir['basedir'] );

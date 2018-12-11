@@ -226,11 +226,11 @@ class Child_Action {
 		$parent_id = $parent->data['id'];
 		$links     = array();
 
-		$generation_status = DUER_Class::g()->generate_full_duer( $parent_id, '', '', '', '', '', '', '' );
-		$links[] = array(
-			'link'  => $generation_status['document']->data['link'],
-			'title' => $generation_status['document']->data['title'],
-		);
+		// $generation_status = DUER_Class::g()->generate_full_duer( $parent_id, '', '', '', '', '', '', '' );
+		// $links[] = array(
+		// 	'link'  => $generation_status['document']->data['link'],
+		// 	'title' => $generation_status['document']->data['title'],
+		// );
 
 		$societies = Society_Class::g()->get_societies_in( $parent_id, 'inherit' );
 

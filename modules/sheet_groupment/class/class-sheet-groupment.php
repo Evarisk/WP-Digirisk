@@ -92,6 +92,8 @@ class Sheet_Groupment_Class extends Document_Class {
 	protected function construct() {
 		$this->message['empty']    = __( 'Aucune fiche de groupement', 'digirisk' );
 		$this->message['generate'] = __( 'Cliquer pour générer une fiche de groupement', 'digirisk' );
+
+		parent::construct();
 	}
 }
 

@@ -92,6 +92,8 @@ class Sheet_Workunit_Class extends Document_Class {
 	protected function construct() {
 		$this->message['empty']    = __( 'Aucune fiche de poste', 'digirisk' );
 		$this->message['generate'] = __( 'Cliquer pour générer une fiche de poste', 'digirisk' );
+
+		parent::construct();
 	}
 }
 

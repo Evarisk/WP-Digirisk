@@ -110,6 +110,12 @@ class Document_Class extends \eoxia\ODT_Class {
 	 */
 	protected $messages = array();
 
+	protected function construct() {
+		$this->path = PLUGIN_DIGIRISK_PATH;
+		$this->url  = PLUGIN_DIGIRISK_URL;
+		parent::construct();
+	}
+
 	/**
 	 * Affiches le tableau contenant la liste des documents selon $parent_id et
 	 * $types.
