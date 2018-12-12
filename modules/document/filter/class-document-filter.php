@@ -97,7 +97,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		$data['risq4'] = array( 'type' => 'segment', 'value' => array() );
 		$data['risq3'] = array( 'type' => 'segment', 'value' => array() );
 		$data['risq2'] = array( 'type' => 'segment', 'value' => array() );
-		$data['risq1']   = array( 'type' => 'segment', 'value' => array() );
+		$data['risq1'] = array( 'type' => 'segment', 'value' => array() );
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {

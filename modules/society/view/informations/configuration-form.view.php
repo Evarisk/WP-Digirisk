@@ -118,7 +118,7 @@ global $eo_search; ?>
 		<div class="form-element gridw-2">
 			<span class="form-label"><?php esc_html_e( 'Description', 'digirisk' ); ?></span>
 			<label class="form-field-container">
-				<textarea name="society[content]" class="form-field" rows="6"><?php echo esc_html( $element->data['content'] ); ?></textarea>
+				<textarea name="society[content]" class="form-field" rows="6"><?php echo $element->data['content']; ?></textarea>
 			</label>
 		</div>
 

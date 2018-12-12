@@ -48,7 +48,7 @@ class Society_Informations_Action {
 		$society_data['date']                = ! empty( $_POST['society']['date'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['date'] ) ) : ''; // WPCS: input var ok.
 		$society_data['contact']['phone']    = ! empty( $_POST['society']['contact']['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['phone'] ) ) : ''; // WPCS: input var ok.
 		$society_data['contact']['email']    = ! empty( $_POST['society']['contact']['email'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['email'] ) ) : ''; // WPCS: input var ok.
-		$society_data['content']             = ! empty( $_POST['society']['content'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['content'] ) ) : ''; // WPCS: input var ok.
+		$society_data['content']             = ! empty( $_POST['society']['content'] ) ? wp_unslash( $_POST['society']['content'] ) : ''; // WPCS: input var ok.
 
 		$address_data                       = array();
 		$address_data['post_id']            = $society_data['id'];

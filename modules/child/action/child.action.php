@@ -42,17 +42,17 @@ class Child_Action {
 		) );
 
 		register_rest_route( 'digi/v1', '/duer/society', array(
-			'methods'  => 'GET',
+			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_get_society' ),
 		) );
 
 		register_rest_route( 'digi/v1', '/duer/society/tree/(?P<id>\d+)', array(
-			'methods'  => 'GET',
+			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_get_society_tree' ),
 		) );
 
 		register_rest_route( 'digi/v1', '/duer/risk/(?P<id>\d+)', array(
-			'methods'  => 'GET',
+			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_get_risk' ),
 		) );
 
@@ -108,6 +108,7 @@ class Child_Action {
 				$url_parent = $data['url_parent'];
 
 				unset( $data['url_parent'] );
+
 				$string_to_hash = implode( '', $data );
 				$string_to_hash = hash( 'sha256', $string_to_hash );
 
@@ -153,15 +154,22 @@ class Child_Action {
 	}
 
 	public function callback_get_society_tree( \WP_REST_Request $request ) {
+		$params = $request->get_params();
+
 		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 		$parent_id = $parent->data['id'];
 		$args['parent_id']    = $parent_id;
-		$args['dashboard_id'] = $request->get_param('id');
+		$args['dashboard_id'] = $params['id'];
+
+		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
+			$response = new \WP_REST_Response( '', 404 );
+			return $response;
+		}
 
 
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
 		array_unshift( $data['elementParHierarchie']['value'], array(
-			'nomElement' => 'D' . $request->get_param('id') . ' - ' . $parent->data['title'],
+			'nomElement' => 'D' . $params['id'] . ' - ' . $parent->data['title'],
 		) );
 
 		$response = new \WP_REST_Response( $data );
@@ -169,7 +177,13 @@ class Child_Action {
 	}
 
 	public function callback_get_risk( \WP_REST_Request $request ) {
-		$dashboard_id = $request->get_param('id');
+		$params       = $request->get_params();
+		$dashboard_id = $params['id'];
+
+		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
+			$response = new \WP_REST_Response( '', 404 );
+			return $response;
+		}
 
 		$args_where = array(
 			'post_status'    => array( 'publish', 'inherit' ),
@@ -218,7 +232,7 @@ class Child_Action {
 		$params = $request->get_params();
 
 		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
-			$response = new \WP_REST_Response( '', 404 );
+			$response = new \WP_REST_Response( $params['hash'], 404 );
 			return $response;
 		}
 
