@@ -1,0 +1,37 @@
+.main-content {
+	margin-top: 1em;
+
+	.causerie-title {
+		font-size: 18px;
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0;
+	}
+	.causerie-description {
+		margin-top: 0;
+		color: rgba(0,0,0,0.6);
+	}
+	.causerie-stats {
+		li {
+			list-style-type: disc;
+			margin-left: 1.4em;
+		}
+	}
+	.wpeo-autocomplete .autocomplete-label {
+		padding: 0.6em;
+	}
+	img.signature {
+		max-height: 50px;
+	}
+}
+
+.table.causerie-step-3 {
+	.avatar {
+		float: left;
+		margin-right: 10px;
+	}
+	.participant {
+		display: block;
+		line-height: 50px;
+	}
+}

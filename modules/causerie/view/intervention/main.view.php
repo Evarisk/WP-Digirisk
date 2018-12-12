@@ -35,13 +35,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<div class="main-content step-<?php echo esc_attr( $final_causerie->data['current_step'] ); ?>">
-			<h2>
+			<h2 class="causerie-title">
 				<strong><?php echo esc_html( $final_causerie->data['unique_identifier'] . ' ' . $final_causerie->data['second_identifier'] ); ?></strong>
 				<span><?php echo esc_html( $final_causerie->data['title'] ); ?></span>
 				<span><?php echo esc_html( $final_causerie->data['risk_category']->data['name'] ); ?></span>
 			</h2>
 
-			<p><?php echo esc_html( $final_causerie->data['content'] ); ?></p>
+			<p class="causerie-description"><?php echo esc_html( $final_causerie->data['content'] ); ?></p>
 
 			<div class="ajax-content">
 				<?php

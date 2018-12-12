@@ -32,6 +32,10 @@
 	ul, li {
 		margin: 0;
 	}
+
+	&.causerie-wrap {
+		@import "page/causerie/causerie";
+	}
 }
 .wpeo-wrap {
 	// @import "normalize";

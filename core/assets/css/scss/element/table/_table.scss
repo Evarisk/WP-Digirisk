@@ -53,6 +53,13 @@
 			}
 		}
 	}
+	.row-title, .row-subtitle {
+		display: block;
+	}
+	.row-title {
+		font-size: 18px !important;
+		font-weight: 400;
+	}
 	.media {
 		background: rgba(0,0,0,0.1);
 		&.no-file .add {
@@ -334,3 +341,5 @@
 @import "table-risk";
 @import "table-evaluateur";
 @import "table-flex";
+@import "wpeo-table";
+@import "table-causerie";

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<ul>
+<ul class="causerie-stats wpeo-gridlayout grid-3">
 	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->data['number_time_realized'] ), 'digirisk' ); ?></li>
 	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->data['number_participants'] ), 'digirisk' ); ?></li>
 
@@ -54,7 +54,7 @@ global $eo_search; ?>
 						data-title="<?php echo empty( $user ) ? '' : 'Signature de l\'utilisateur: ' . $user->data->display_name; ?>"
 						data-parent="signature"
 						data-target="modal-signature">
-						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
+						<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
 					</div>
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(

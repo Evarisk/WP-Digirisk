@@ -33,9 +33,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 		?>
 	</td>
-	<td data-title="Titre et description" class="padding wpeo-grid grid-1">
-		<span><?php echo esc_html( $causerie->data['title'] ); ?></span>
-		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
+	<td data-title="Titre et description" class="padding">
+		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
+		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
 	<td class="w150">
 		<div class="action wpeo-gridlayout grid-gap-0 grid-3">

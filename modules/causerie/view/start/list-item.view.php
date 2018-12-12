@@ -40,12 +40,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 		?>
 	</td>
-	<td data-title="Titre et description" class="padding wpeo-grid grid-1">
-		<span><?php echo esc_html( $causerie->data['title'] ); ?></span>
-		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
+	<td data-title="Titre et description" class="padding causerie-description">
+		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
+		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
 	<td>
-		<div class="action wpeo-gridlayout w1">
+		<div class="action wpeo-gridlayout grid-1 grid-gap-0">
 			<?php if ( Causerie_Class::g()->get_type() === $causerie->data['type'] ) : ?>
 				<a class="wpeo-button light button-square-50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php else : ?>

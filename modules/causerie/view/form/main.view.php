@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></h2>
 
-	<table class="wpeo-table add-causerie">
+	<table class="table add-causerie">
 		<thead>
 			<tr>
 				<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>

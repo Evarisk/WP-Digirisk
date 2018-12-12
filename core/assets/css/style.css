@@ -34,6 +34,37 @@
 .wpeo-wrap ul, .wpeo-wrap li {
   margin: 0; }
 
+.wpeo-wrap.causerie-wrap .main-content {
+  margin-top: 1em; }
+
+.wpeo-wrap.causerie-wrap .main-content .causerie-title {
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0; }
+
+.wpeo-wrap.causerie-wrap .main-content .causerie-description {
+  margin-top: 0;
+  color: rgba(0, 0, 0, 0.6); }
+
+.wpeo-wrap.causerie-wrap .main-content .causerie-stats li {
+  list-style-type: disc;
+  margin-left: 1.4em; }
+
+.wpeo-wrap.causerie-wrap .main-content .wpeo-autocomplete .autocomplete-label {
+  padding: 0.6em; }
+
+.wpeo-wrap.causerie-wrap .main-content img.signature {
+  max-height: 50px; }
+
+.wpeo-wrap.causerie-wrap .table.causerie-step-3 .avatar {
+  float: left;
+  margin-right: 10px; }
+
+.wpeo-wrap.causerie-wrap .table.causerie-step-3 .participant {
+  display: block;
+  line-height: 50px; }
+
 .wpeo-wrap {
   /*--------------------------------------------------------------
 	# Fonticons
@@ -5656,6 +5687,13 @@ readers do not read off random characters that represent icons */
 .wpeo-wrap .table > tbody tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.1); }
 
+.wpeo-wrap .table .row-title, .wpeo-wrap .table .row-subtitle {
+  display: block; }
+
+.wpeo-wrap .table .row-title {
+  font-size: 18px !important;
+  font-weight: 400; }
+
 .wpeo-wrap .table .media {
   background: rgba(0, 0, 0, 0.1); }
 
@@ -6454,6 +6492,22 @@ readers do not read off random characters that represent icons */
   .wpeo-wrap .flex-table .cell, .wpeo-wrap .flex-table .header-cell {
     line-height: 1; } }
 
+.wpeo-wrap .wpeo-table .row-title, .wpeo-wrap .wpeo-table .row-subtitle {
+  display: block; }
+
+.wpeo-wrap .wpeo-table .row-title {
+  font-size: 18px !important;
+  font-weight: 400; }
+
+.wpeo-wrap .table .causerie-description {
+  height: 100%;
+  padding: 8px;
+  white-space: normal; }
+
+.wpeo-wrap .table .causerie-description input, .wpeo-wrap .table .causerie-description textarea {
+  display: block;
+  margin: 0.4em 0; }
+
 .wpeo-wrap.wpdigi-installer .logo {
   width: 100%;
   text-align: center;
@@ -6720,7 +6774,8 @@ readers do not read off random characters that represent icons */
   padding-bottom: 10px;
   -webkit-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out; }
+  transition: all 0.2s ease-out;
+  min-height: 45px; }
 
 .wpeo-wrap .step .step-list .step:first-child:after, .wpeo-wrap .step .step-list .step:first-child .title {
   margin: 0 auto 0 0;

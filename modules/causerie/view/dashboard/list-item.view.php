@@ -42,9 +42,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</td>
 
-	<td data-title="Titre et description" class="padding wpeo-grid grid-1">
-		<span><?php echo esc_html( $causerie->data['title'] ); ?></span>
-		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
+	<td data-title="Titre et description" class="padding causerie-description">
+		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
+		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
 
 	<td data-title="Date début" class="padding">
@@ -95,14 +95,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 
 	<td class="padding">
-		<div class="wpeo-modal-event button grey radius grid-30 tooltip hover"
+		<div class="wpeo-modal-event wpeo-button-pulse tooltip hover"
 			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
 			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
 			data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_modal_participants' ) ); ?>"
 			data-action="load_modal_participants"
 			data-class="digirisk-wrap wpeo-wrap">
-			<i class="float-icon fa fa-eye animated"></i><span class="dashicons dashicons-admin-users"></span>
+			<i class="button-icon fas fa-user"></i>
+			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</div>
 	</td>
 
