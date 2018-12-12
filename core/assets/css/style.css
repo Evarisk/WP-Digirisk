@@ -4953,8 +4953,7 @@ readers do not read off random characters that represent icons */
   background: none;
   border: 0;
   color: #fff;
-  width: 100%;
-  text-transform: uppercase; }
+  width: 100%; }
 
 .wpeo-wrap .main-header .title input:focus {
   background: #fff;
