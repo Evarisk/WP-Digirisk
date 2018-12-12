@@ -10,6 +10,10 @@ window.eoxiaJS.digirisk.risk_page.init = function() {
 	window.eoxiaJS.digirisk.risk_page.event();
 };
 
+window.eoxiaJS.digirisk.risk_page.refresh = function() {
+	autosize(document.querySelectorAll('textarea'));
+};
+
 window.eoxiaJS.digirisk.risk_page.event = function() {
 	jQuery( document ).on( 'click', '.risk-page .save-all:not(.grey)', window.eoxiaJS.digirisk.risk_page.saveRisks );
 	jQuery( document ).on( 'click', '.risk-page table tr input:not(input[type="checkbox"]), .risk-page tr .wpeo-dropdown .dropdown-toggle, .risk-page tr textarea, .risk-page tr .popup, .risk-page tr .action, .risk-page .cotation', window.eoxiaJS.digirisk.risk_page.checkTheCheckbox );
@@ -68,5 +72,6 @@ window.eoxiaJS.digirisk.risk_page.pagination = function( event ) {
 
 	jQuery.post( window.ajaxurl, data, function( view ) {
 		jQuery( '.risk-page' ).replaceWith( view );
+		window.eoxiaJS.digirisk.risk_page.refresh();
 	} );
 };

@@ -153,7 +153,8 @@ class DUER_Filter extends Identifier_Filter {
 
 				if ( ! empty( $risk->data['comment'] ) ) {
 					foreach ( $risk->data['comment'] as $comment ) {
-						$output_comment .= point_to_string( $comment );
+						$output_comment .= point_to_string( $comment ) . '
+';
 					}
 				}
 

@@ -36,7 +36,7 @@ if ( ! empty( $comment ) && ! empty( $comment->data['author_id'] ) ) :
 			<span class="date"><?php echo esc_html( $comment->data['date']['rendered']['date'] ); ?> : </span>
 		<?php endif; ?>
 
-		<span class="content"><?php echo $comment->data['content']; ?></span>
+		<span class="content"><?php echo nl2br( $comment->data['content'] ); ?></span>
 
 		<span><?php apply_filters( 'digi_' . $type . '_view_end', $comment ); ?></span>
 	</li>

@@ -6,7 +6,13 @@
  */
 window.eoxiaJS.digirisk.risk = {};
 
-window.eoxiaJS.digirisk.risk.init = function() {};
+window.eoxiaJS.digirisk.risk.init = function() {
+	window.eoxiaJS.digirisk.risk.refresh();
+};
+
+window.eoxiaJS.digirisk.risk.refresh = function() {
+	autosize(document.querySelectorAll('textarea'));
+};
 
 window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();
@@ -14,6 +20,7 @@ window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) 
 
 window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
+  window.eoxiaJS.digirisk.risk.refresh();
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
