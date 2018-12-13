@@ -16,7 +16,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<p>L'utilisateur <?Php echo esc_html( $user->data['displayname'] ); ?> est affecté aux établissements suivants:</p>
+<p>L'utilisateur <strong><?Php echo esc_html( $user->data['displayname'] ); ?></strong> est affecté aux établissements suivants:</p>
 
 <table class="wpeo-table">
 	<thead>
