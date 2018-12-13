@@ -31,6 +31,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				class="wpeo-button button-square-50 button-transparent wpeo-modal-event">
 				<i class="button-icon fas fa-eye"></i>
 			</div>
+
 			<div
 				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"

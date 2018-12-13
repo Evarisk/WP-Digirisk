@@ -249,7 +249,7 @@ if ( ! window.eoxiaJS.modal  ) {
 				setTimeout( function() {
 					popup.remove();
 				}, 200 );
-
+			}
 
 			popup.trigger( 'modal-closed', popup );
 		} );
