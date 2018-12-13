@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				?>
 				<tr>
 					<td data-title="Identifiant"><?php echo $affected_group->data['unique_identifier']; ?></td>
-					<td data-title="Nom"><?php echo $affected_group->data['title']; ?></td>
+					<td data-title="Nom"><a target="_blank" href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $affected_group->data['id'] ); ?>"><?php echo $affected_group->data['title']; ?></a></td>
 				</tr>
 				<?php
 			endforeach;
