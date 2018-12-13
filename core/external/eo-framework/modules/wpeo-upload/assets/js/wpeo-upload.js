@@ -190,7 +190,7 @@ window.eoxiaJS.upload.refreshButton = function( data ) {
 					window.eoxiaJS.upload.currentButton[0].initialButton.find( 'img' ).replaceWith( data.media );
 				}
 				window.eoxiaJS.upload.currentButton.find( 'img' ).replaceWith( data.media );
-				window.eoxiaJS.upload.currentButton.find( 'svg.fa-image' ).hide();
+				window.eoxiaJS.upload.currentButton.find( '.default-image.fa-image' ).hide();
 
 				window.eoxiaJS.upload.currentButton.find( 'input[type="hidden"]' ).val( window.eoxiaJS.upload.selectedInfos.JSON.id );
 			}

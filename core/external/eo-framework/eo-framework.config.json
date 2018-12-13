@@ -1,7 +1,7 @@
 {
 	"name": "EO Framework",
 	"slug": "eo-framework",
-	"version": "1.0.0-cache",
+	"version": "1.0.0",
 	"description": "L'application EO Framework",
 	"externals": [],
 	"modules": [
