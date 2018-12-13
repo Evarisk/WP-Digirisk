@@ -15,4 +15,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-_e( 'Il faut installer l\'extension <a href="https://wordpress.org/plugins/task-manager/" target="_blank">Task Manager</a> pour créer des tâches correctives.', 'digirisk' ); // WPCS: XSS is ok.
+_e( 'Il faut installer l\'extension <a href="https://wordpress.org/plugins/task-manager/" target="_blank">Task Manager</a> pour créer des actions correctives.', 'digirisk' ); // WPCS: XSS is ok.
