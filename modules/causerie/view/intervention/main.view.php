@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span><?php echo esc_html( $final_causerie->data['risk_category']->data['name'] ); ?></span>
 			</h2>
 
-			<p class="causerie-description"><?php echo esc_html( $final_causerie->data['content'] ); ?></p>
+			<p class="causerie-description"><?php echo nl2br( $final_causerie->data['content'] ); ?></p>
 
 			<div class="ajax-content">
 				<?php

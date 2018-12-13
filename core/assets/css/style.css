@@ -7649,5 +7649,12 @@ readers do not read off random characters that represent icons */
 .owl-carousel .owl-dots .owl-dot.active span {
   background: #3495f0; }
 
+.wpeo-modal.modal-signature .modal-container .modal-content {
+  overflow: hidden; }
+
 canvas {
-  border: solid black 1px; }
+  border: solid black 1px;
+  height: 100%; }
+
+.causerie-wrap .float.right {
+  float: right; }

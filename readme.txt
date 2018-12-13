@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 4.9.4
-Stable tag: 7.0.1
+Stable tag: 7.1.0
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

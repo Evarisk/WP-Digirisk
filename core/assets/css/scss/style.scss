@@ -52,6 +52,17 @@
 
 @import "module/module";
 
+.wpeo-modal.modal-signature .modal-container .modal-content {
+	overflow: hidden;
+}
+
 canvas {
 	border: solid black 1px;
+	height: 100%;
+}
+
+.causerie-wrap {
+	.float.right {
+		float: right;
+	}
 }

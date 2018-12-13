@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td data-title="Titre et description" class="padding">
 		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
-		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
+		<span class="row-subtitle"><?php echo nl2br( $causerie->data['content'] ); ?></span>
 	</td>
 	<td class="w150">
 		<div class="action wpeo-gridlayout grid-gap-0 grid-3">

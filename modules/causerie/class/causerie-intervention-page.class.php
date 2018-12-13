@@ -87,6 +87,10 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	public function check_all_signed( $causerie ) {
 		$all_signed = true;
 
+		if ( empty( $causerie->data['participants'] ) ) {
+			$all_signed = false;
+		}
+
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
 				if ( empty( $participant['signature_id'] ) ) {

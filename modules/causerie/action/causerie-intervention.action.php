@@ -163,15 +163,15 @@ class Causerie_Intervention_Action {
 			wp_send_json_error();
 		}
 
-		if ( ! empty( $causerie_intervention->participants ) ) {
-			foreach ( $causerie_intervention->participants as $key => $participant ) {
+		if ( ! empty( $causerie_intervention->data['participants'] ) ) {
+			foreach ( $causerie_intervention->data['participants'] as $key => $participant ) {
 				if ( $user_id === $participant['user_id'] ) {
-					unset( $causerie_intervention->participants[ $key ] );
+					unset( $causerie_intervention->data['participants'][ $key ] );
 				}
 			}
 		}
 
-		Causerie_Intervention_Class::g()->update( $causerie_intervention );
+		Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(

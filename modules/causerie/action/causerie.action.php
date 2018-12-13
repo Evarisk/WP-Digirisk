@@ -42,7 +42,7 @@ class Causerie_Action {
 
 		$id               = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$title            = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-		$description      = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
+		$description      = ! empty( $_POST['description'] ) ? $_POST['description'] : '';
 		$category_risk_id = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$image_id         = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
