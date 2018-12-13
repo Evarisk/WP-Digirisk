@@ -16,7 +16,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<p>L'utilisateur <?Php echo esc_html( $user->data['displayname'] ); ?> est affecté aux groupements suivants:</p>
+<p>L'utilisateur <?Php echo esc_html( $user->data['displayname'] ); ?> est affecté aux établissements suivants:</p>
 
 <table class="wpeo-table">
 	<thead>
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		else:
 			?>
 			<tr>
-				<td colspan="2"><?php esc_html_e( 'Cet utilisateur n\'est affecté à aucun groupement', 'digirisk' ); ?></td>
+				<td colspan="2"><?php esc_html_e( 'Cet utilisateur n\'est affecté à aucun établissement', 'digirisk' ); ?></td>
 			</tr>
 			<?php
 		endif;

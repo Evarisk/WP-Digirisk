@@ -164,6 +164,9 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 		$groups          = Group_Class::g()->get( array(
 			'posts_per_page' => -1,
 		) );
+		$groups          = array_merge( $groups, Workunit_Class::g()->get( array(
+			'posts_per_page' => -1,
+		) ) );
 		$affected_groups = array();
 
 		if ( ! empty( $groups ) ) {
