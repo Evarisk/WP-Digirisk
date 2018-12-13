@@ -1,0 +1,21 @@
+.owl-carousel {
+	.owl-dots {
+		text-align: center;
+
+		.owl-dot {
+			display: inline-block;
+
+			span {
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				margin: 0 0.2em;
+				background: rgba(0,0,0,0.3);
+			}
+			&.active span {
+				background: $color__primary;
+			}
+		}
+	}
+}

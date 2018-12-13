@@ -40,14 +40,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td data-title="action">
 		<?php if ( 0 !== $causerie->data['id'] ) : ?>
 			<div class="action">
-				<div data-parent="causerie-row" data-loader="wpeo-table" class="wpeo-button button-square-50 green save action-input"><i class="icon fas fa-save"></i></div>
+				<div data-parent="causerie-row" data-loader="table" class="wpeo-button button-square-50 green save action-input"><i class="icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action">
 				<div data-namespace="digirisk"
 					data-module="causerie"
 					data-before-method="beforeSaveCauserie"
-					data-loader="wpeo-table"
+					data-loader="table"
 					data-parent="causerie-row"
 					class="wpeo-button button-disable button-event button-square-50 add action-input"><i class="icon fa fa-plus"></i></div>
 			</div>
