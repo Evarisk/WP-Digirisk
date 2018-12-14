@@ -41,14 +41,13 @@ class Evaluation_Method_Default_Data_Class extends \eoxia\Singleton_Util {
 	 * @return bool          True si tout s'est bien passé sinon false.
 	 */
 	public function create( $exclude = array() ) {
-		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->evaluation_method->url . 'asset/json/default.json' );
+		$request = file_get_contents( \eoxia\Config_Util::$init['digirisk']->evaluation_method->path . 'asset/json/default.json' );
 
-		if ( is_wp_error( $request ) ) {
+		if ( ! $request ) {
 			return false;
 		}
 
-		$request = wp_remote_retrieve_body( $request );
-		$data    = json_decode( $request );
+		$data = json_decode( $request );
 
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $json_evaluation_method ) {

@@ -34,14 +34,13 @@ class Risk_Category_Default_Data_Class extends \eoxia\Singleton_Util {
 	 * @return boolean True si tout s'est bien passé, sinon false.
 	 */
 	public function create() {
-		$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->risk->url . 'asset/json/default.json' );
+		$request = file_get_contents( \eoxia\Config_Util::$init['digirisk']->risk->path . 'asset/json/default.json' );
 
-		if ( is_wp_error( $request ) ) {
+		if ( ! $request ) {
 			return false;
 		}
 
-		$request = wp_remote_retrieve_body( $request );
-		$data    = json_decode( $request );
+		$data = json_decode( $request );
 
 		if ( ! empty( $data ) ) {
 			foreach ( $data as $risk_category_from_json ) {

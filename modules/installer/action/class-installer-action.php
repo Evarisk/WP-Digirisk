@@ -69,46 +69,13 @@ class Installer_Action {
 			wp_send_json_error();
 		}
 
-		$society = Society_Class::g()->create( array(
-			'title'  => $title,
-			'status' => 'publish',
-		) );
-
-		\eoxia\LOG_Util::log( sprintf( 'Installeur - Création de la société %s -> success.', $society->data['title'] ), 'digirisk' );
+		Installer_Class::g()->create_install_society( $title );
 
 		if ( $install_default_data ) {
 			// Création des données par default depuis le fichier json installer/asset/json/default.json.
-			$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->installer->url . 'asset/json/default.json' );
-
-			if ( is_wp_error( $request ) ) {
-				\eoxia\LOG_Util::log( sprintf( 'Installeur - Impossible de lire asset/json/default.json' ), 'digirisk' );
-				wp_send_json_error();
+			if ( Installer_Class::g()->create_default_data( $society->data['id'] ) ) {
+				\eoxia\LOG_Util::log( 'Installeur - Création des GP et UT par défaut -> success.', 'digirisk' );
 			}
-
-			$request = wp_remote_retrieve_body( $request );
-			$data    = json_decode( $request );
-
-			if ( ! empty( $data ) ) {
-				foreach ( $data as $group_object ) {
-					$group = Group_Class::g()->update( array(
-						'title'       => $group_object->title,
-						'post_parent' => $society->data['id'],
-						'status'      => 'inherit',
-					) );
-
-					if ( ! empty( $group_object->workunits ) ) {
-						foreach ( $group_object->workunits as $workunit_object ) {
-							$workunit = Workunit_Class::g()->update( array(
-								'title'       => $workunit_object->title,
-								'post_parent' => $group->data['id'],
-								'status'      => 'inherit',
-							) );
-						}
-					}
-				}
-			}
-
-			\eoxia\LOG_Util::log( 'Installeur - Création des GP et UT par défaut -> success.', 'digirisk' );
 		}
 
 		wp_send_json_success( array(
@@ -155,6 +122,7 @@ class Installer_Action {
 			} else {
 				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de recommendation ERROR', 'digirisk' );
 			}
+
 		} elseif ( ! $core_option['evaluation_method_installed'] ) {
 			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des méthodes d\'évaluation', 'digirisk' );
 			if ( Evaluation_Method_Default_Data_Class::g()->create() ) {
