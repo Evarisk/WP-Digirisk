@@ -14,7 +14,7 @@ SKIP_DB_CREATE=${6-false}
 
 TMPDIR=${TMPDIR-/tmp}
 TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
-WP_TESTS_DIR=C:/cygwin64/tmp/wordpress-tests-lib
+WP_TESTS_DIR=C:/tmp/wordpress-tests-lib
 WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 
 download() {

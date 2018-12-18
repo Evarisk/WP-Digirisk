@@ -115,6 +115,7 @@ class Installer_Action {
 				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de risque ERROR', 'digirisk' );
 			}
 		} elseif ( ! $core_option['recommendation_installed'] ) {
+
 			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégorie de recommendation', 'digirisk' );
 			if ( Recommendation_Default_Data_Class::g()->create() ) {
 				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de recommendation SUCCESS', 'digirisk' );

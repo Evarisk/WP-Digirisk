@@ -6,6 +6,9 @@
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
+	cacheResult="false"
+	cacheTokens="false"
+	processIsolation="false"
 	>
 	<testsuites>
 		<testsuite>
