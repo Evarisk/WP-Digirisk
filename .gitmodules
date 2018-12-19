@@ -1,0 +1,3 @@
+[submodule "core/external/eo-framework"]
+	path = core/external/eo-framework
+	url = https://github.com/Eoxia/eo-framework
