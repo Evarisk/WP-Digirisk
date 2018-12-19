@@ -15,8 +15,9 @@ class Ajax_Test extends WP_Ajax_UnitTestCase {
 
 	public function test_ajax_installer_save_society() {
 		try {
-			$_POST['title']    = 'Ma société';
-			$_POST['_wpnonce'] = wp_create_nonce( 'ajax_installer_save_society' );
+			$_POST['title']                = 'Ma société';
+			$_POST['install_default_data'] = 'true';
+			$_POST['_wpnonce']             = wp_create_nonce( 'ajax_installer_save_society' );
 			$this->_handleAjax( 'installer_save_society' );
 		} catch ( WPAjaxDieContinueException $e ) {}
 

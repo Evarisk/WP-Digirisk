@@ -5,7 +5,7 @@
  * @package Digirisk710
  */
 
-$_tests_dir = 'C:/tmp/wordpress-tests-lib';
+$_tests_dir = 'C:/cygwin64/tmp/wordpress-tests-lib';
 
 if ( ! $_tests_dir ) {
 	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
