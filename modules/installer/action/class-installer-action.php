@@ -69,7 +69,7 @@ class Installer_Action {
 			wp_send_json_error();
 		}
 
-		Installer_Class::g()->create_install_society( $title );
+		$society = Installer_Class::g()->create_install_society( $title );
 
 		if ( $install_default_data ) {
 			// Création des données par default depuis le fichier json installer/asset/json/default.json.
