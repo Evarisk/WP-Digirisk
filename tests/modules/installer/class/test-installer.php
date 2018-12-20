@@ -1,12 +1,19 @@
 <?php
 /**
- * Class SampleTest
+ * Testes la class "installer".
  *
- * @package Digirisk710
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Tests
+ *
+ * @since     7.1.0
  */
 
 /**
- * Sample test case.
+ * Test Installer class.
  */
 class Installer_Test extends WP_UnitTestCase {
 

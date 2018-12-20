@@ -1,12 +1,19 @@
 <?php
 /**
- * Class TestRisk
+ * Testes la classe des risques
  *
- * @package Digirisk
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Tests
+ *
+ * @since     7.1.0
  */
 
 /**
- * Test Risk
+ * Installer Risk class.
  */
 class Installer_Risk extends WP_UnitTestCase {
 
@@ -19,7 +26,7 @@ class Installer_Risk extends WP_UnitTestCase {
 		$data = array();
 
 		$data['parent_id'] = 1;
-		$data['status'] = 'inherit';
+		$data['status']    = 'inherit';
 
 		$data['taxonomy'] = array(
 			'digi-category-risk' => array( 1 ),

@@ -2,17 +2,19 @@
 /**
  * Le tableau des utilisateurs qui peuvent être affecté.
  *
- * @author Evarisk <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.5.0
- * @copyright 2015-2017 Evarisk
- * @package user
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.3.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <form method="POST" class="form-edit-user-assign" action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>">
 
@@ -51,19 +53,19 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	<div class="button green uppercase strong float right margin submit-form"><span><?php esc_html_e( 'Mettre à jour', 'digirisk' ); ?></span></div>
 
 	<!-- Pagination -->
-	<?php if ( !empty( $current_page ) && !empty( $number_page ) ): ?>
+	<?php if ( ! empty( $current_page ) && ! empty( $number_page ) ) : ?>
 		<div class="wp-digi-pagination">
 			<?php
 			$big = 999999999;
 			echo paginate_links( array(
-				'base' => admin_url( 'admin-ajax.php?action=paginate_user&current_page=%_%&element_id=' . $workunit->id ),
-				'format' => '%#%',
-				'current' => $current_page,
-				'total' => $number_page,
-				'before_page_number' => '<span class="screen-reader-text">'. __( 'Page', 'digirisk' ) .' </span>',
-				'type' => 'plain',
-				'next_text' => '<i class="dashicons dashicons-arrow-right"></i>',
-				'prev_text' => '<i class="dashicons dashicons-arrow-left"></i>'
+				'base'               => admin_url( 'admin-ajax.php?action=paginate_user&current_page=%_%&element_id=' . $workunit->id ),
+				'format'             => '%#%',
+				'current'            => $current_page,
+				'total'              => $number_page,
+				'before_page_number' => '<span class="screen-reader-text">' . __( 'Page', 'digirisk' ) . ' </span>',
+				'type'               => 'plain',
+				'next_text'          => '<i class="dashicons dashicons-arrow-right"></i>',
+				'prev_text'          => '<i class="dashicons dashicons-arrow-left"></i>',
 			) );
 			?>
 		</div>

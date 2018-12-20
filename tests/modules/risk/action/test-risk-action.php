@@ -1,18 +1,41 @@
 <?php
+/**
+ * Testes les actions des risques
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Tests
+ *
+ * @since     7.1.0
+ */
 
 /**
-* @group risk
-*/
-
+ * Test Risk Action class.
+ */
 class Test_Risk_Action extends WP_Ajax_UnitTestCase {
+
+	/**
+	 * Au setup du test
+	 *
+	 * @since 7.1.0
+	 */
 	public function setup() {
 		parent::setup();
 
 		$this->_setRole( 'administrator' );
 	}
 
+	/**
+	 * Testes l'action edit_risk.
+	 *
+	 * @since 7.1.0
+	 */
 	public function test_ajax_save_risk() {
 		remove_all_filters( 'comments_clauses' );
+
 		\digi\Evaluation_Method_Default_Data_Class::g()->create();
 		\digi\Risk_Category_Default_Data_Class::g()->create();
 
@@ -23,6 +46,8 @@ class Test_Risk_Action extends WP_Ajax_UnitTestCase {
 		$variable_simple = \digi\Evaluation_Method_Variable_Class::g()->get( array(
 			'slug' => 'evarisk',
 		), true );
+
+		$variable_simple_id = $variable_simple->data['id'];
 
 		$risk_category = \digi\Risk_Category_Class::g()->get( array(
 			'slug' => 'risques-de-chute-de-hauteur',
@@ -35,10 +60,12 @@ class Test_Risk_Action extends WP_Ajax_UnitTestCase {
 			$_POST['risk_category_id']     = $risk_category_id;
 			$_POST['evaluation_method_id'] = $evaluation_method_id;
 			$_POST['evaluation_variables'] = json_encode( array(
-				$variable_simple->data['id'] => 3 // Equivalence 51
+				$variable_simple_id => 3,
 			) );
 			$this->_handleAjax( 'edit_risk' );
-		} catch ( WPAjaxDieContinueException $e ) {}
+		} catch ( WPAjaxDieContinueException $e ) {
+			// Required for ajax test.
+		}
 
 		$response = json_decode( $this->_last_response, true );
 
