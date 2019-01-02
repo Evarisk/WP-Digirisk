@@ -106,12 +106,12 @@ class DUER_Filter extends Identifier_Filter {
 		$level_risk = array( '1', '2', '3', '4' );
 
 		foreach( $level_risk as $level ) {
-			$data[ 'risk' . $level ] = array(
-				'type'  => 'segment',
-				'value' => array(),
-			);
+			// $data[ 'risk' . $level ] = array(
+			// 	'type'  => 'segment',
+			// 	'value' => array(),
+			// );
 
-			$data[ 'planDactionRisq' . $level ] = array(
+			$data[ 'risq' . $level ] = array(
 				'type'  => 'segment',
 				'value' => array(),
 			);
@@ -149,35 +149,37 @@ class DUER_Filter extends Identifier_Filter {
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$output_comment = '';
+				if ( ! empty( $risk->data['parent'] ) && ! empty( $risk->data['evaluation'] ) && ! empty( $risk->data['risk_category'] ) ) {
+					$output_comment = '';
 
-				if ( ! empty( $risk->data['comment'] ) ) {
-					foreach ( $risk->data['comment'] as $comment ) {
-						$output_comment .= point_to_string( $comment ) . '
-';
+					if ( ! empty( $risk->data['comment'] ) ) {
+						foreach ( $risk->data['comment'] as $comment ) {
+							$output_comment .= point_to_string( $comment ) . '
+	';
+						}
 					}
+
+					$risk = Corrective_Task_Class::g()->output_odt( $risk );
+
+					$risk_data = array(
+						'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+						'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
+						'quotationRisque'             => $risk->data['current_equivalence'],
+						'nomDanger'                   => $risk->data['risk_category']->data['name'],
+						'commentaireRisque'           => $output_comment,
+						'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+						'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
+					);
+
+					// $data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
+					$data[ 'risq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
+
+					if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
+						$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
+					}
+
+					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 				}
-
-				$risk = Corrective_Task_Class::g()->output_odt( $risk );
-
-				$risk_data = array(
-					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
-					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
-					'quotationRisque'             => $risk->data['current_equivalence'],
-					'nomDanger'                   => $risk->data['risk_category']->data['name'],
-					'commentaireRisque'           => $output_comment,
-					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
-					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
-				);
-
-				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
-				$data[ 'planDactionRisq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
-
-				if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
-					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
-				}
-
-				$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 			}
 		}
 

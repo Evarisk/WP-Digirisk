@@ -174,7 +174,7 @@ class DUER_Class extends Document_Class {
 				}
 
 				$data['elementParHierarchie']['value'][] = array(
-					'nomElement' => $tabulation . ' D' . $args['dashboard_id'] . ' - ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+					'nomElement' => $society->data['unique_identifier'] . ' - ' . $society->data['title'],
 				);
 
 				$args['parent_id'] = $society->data['id'];

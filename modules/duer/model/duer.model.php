@@ -111,39 +111,23 @@ Dans ce document vous trouverez:
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'risk1' => array(
-					'type' => 'array',
-					'meta_type' => 'multiple',
-				),
-				'risk2' => array(
-					'type' => 'array',
-					'meta_type' => 'multiple',
-				),
-				'risk3' => array(
-					'type' => 'array',
-					'meta_type' => 'multiple',
-				),
-				'risk4' => array(
-					'type' => 'array',
-					'meta_type' => 'multiple',
-				),
 				'risqueFiche' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq1' => array(
+				'risq2' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq2' => array(
+				'risq3' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq3' => array(
+				'risq4' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
-				'planDactionRisq4' => array(
+				'risq1' => array(
 					'type' => 'array',
 					'meta_type' => 'multiple',
 				),
