@@ -152,6 +152,11 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 		) );
 	}
 
+	/**
+	 * Récupères les détails de l'utilisateur.
+	 *
+	 * @since 7.1.0
+	 */
 	public function callback_load_user_details() {
 		check_ajax_referer( 'load_user_details' );
 		$user_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
@@ -172,7 +177,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 		if ( ! empty( $groups ) ) {
 			foreach ( $groups as $group ) {
 				if ( ! empty( $group->data['user_info']['affected_id']['evaluator'] ) ) {
-					foreach ( $group->data['user_info']['affected_id']['evaluator'] as $user_affected_id => $affected_info  ) {
+					foreach ( $group->data['user_info']['affected_id']['evaluator'] as $user_affected_id => $affected_info ) {
 						if ( $user_affected_id === $user_id ) {
 							$affected_groups[] = $group;
 							break;

@@ -1,16 +1,21 @@
-<?php namespace digi;
-
-if ( !defined( 'ABSPATH' ) ) exit;
+<?php
 /**
- * Fichier du squelette du formulaire permettant de lancer l'importation des utilisateurs
+ * Formulaire pour importer des utilisateur.
  *
- * @author Evarisk <jimmy@evarisk.com>
- * @version 6.1.5.5
- * @copyright 2015-2016 Evarisk
- * @package user
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.1.0
  */
-?>
+
+namespace digi;
+
+defined( 'ABSPATH' ) || exit; ?>
+
 <form action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="POST" id="digi-import-form" >
 	<h3><?php _e( 'Import', 'digirisk' ); ?></h3>
 

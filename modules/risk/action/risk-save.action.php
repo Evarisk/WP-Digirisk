@@ -72,7 +72,6 @@ class Risk_Save_Action {
 			}
 		}
 
-
 		$risk->data['current_equivalence'] = $risk_evaluation->data['equivalence'];
 
 		$risk = Risk_Class::g()->update( $risk->data );
@@ -117,6 +116,7 @@ class Risk_Save_Action {
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => $module,
+			'risk'             => $risk->data,
 			'callback_success' => 'savedRiskSuccess',
 			'template'         => ob_get_clean(),
 		) );

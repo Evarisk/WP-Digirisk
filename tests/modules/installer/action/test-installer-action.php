@@ -1,24 +1,47 @@
 <?php
+/**
+ * Testes les actions de l'installeur.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006 2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Tests
+ *
+ * @since     7.1.0
+ */
 
 /**
-*
-*
-* @group ajax
-*/
+ * Test Installer Action class.
+ */
+class Test_Installer_Action_Class extends WP_Ajax_UnitTestCase {
 
-class Ajax_Test extends WP_Ajax_UnitTestCase {
+	/**
+	 * Setup
+	 *
+	 * @since 7.1.0
+	 */
 	public function setup() {
 		parent::setup();
 
 		$this->_setRole( 'administrator' );
 	}
 
+	/**
+	 * Testes l'action "installer_save_society".
+	 *
+	 * @since 7.1.0
+	 */
 	public function test_ajax_installer_save_society() {
 		try {
-			$_POST['title']    = 'Ma société';
-			$_POST['_wpnonce'] = wp_create_nonce( 'ajax_installer_save_society' );
+			$_POST['title']                = 'Ma société';
+			$_POST['install_default_data'] = 'true';
+			$_POST['_wpnonce']             = wp_create_nonce( 'ajax_installer_save_society' );
 			$this->_handleAjax( 'installer_save_society' );
-		} catch ( WPAjaxDieContinueException $e ) {}
+		} catch ( WPAjaxDieContinueException $e ) {
+			// Required pour l'ajax.
+		}
 
 		$response = json_decode( $this->_last_response, true );
 
@@ -26,10 +49,17 @@ class Ajax_Test extends WP_Ajax_UnitTestCase {
 		$this->assertInternalType( 'array', $response['data'] );
 	}
 
-	public function test_ajax_install_danger() {
+	/**
+	 * Testes l'action "installer_components".
+	 *
+	 * @since 7.1.0
+	 */
+	public function test_ajax_install_components() {
 		try {
 			$this->_handleAjax( 'installer_components' );
-		} catch ( WPAjaxDieContinueException $e ) {}
+		} catch ( WPAjaxDieContinueException $e ) {
+			// Required pour l'ajax.
+		}
 
 		$response = json_decode( $this->_last_response, true );
 		$this->assertTrue( $response['success'] );
@@ -40,7 +70,9 @@ class Ajax_Test extends WP_Ajax_UnitTestCase {
 
 		try {
 			$this->_handleAjax( 'installer_components' );
-		} catch ( WPAjaxDieContinueException $e ) {}
+		} catch ( WPAjaxDieContinueException $e ) {
+			// Required pour l'ajax.
+		}
 
 		$response = json_decode( $this->_last_response, true );
 		$this->assertTrue( $response['success'] );
@@ -51,7 +83,9 @@ class Ajax_Test extends WP_Ajax_UnitTestCase {
 
 		try {
 			$this->_handleAjax( 'installer_components' );
-		} catch ( WPAjaxDieContinueException $e ) {}
+		} catch ( WPAjaxDieContinueException $e ) {
+			// Required pour l'ajax.
+		}
 
 		$response = json_decode( $this->_last_response, true );
 		$this->assertTrue( $response['success'] );

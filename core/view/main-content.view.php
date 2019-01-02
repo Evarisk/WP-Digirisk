@@ -11,9 +11,7 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <div class="main-container">
 	<div class="wpeo-tab">

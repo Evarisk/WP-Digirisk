@@ -2,11 +2,9 @@
 	"name": "Workunit",
 	"slug": "workunit",
 	"since": "6.0.0",
-	"version": "7.0.0",
 	"description": "Le module gérant les unitées de travail",
 	"path": "modules/workunit/",
 	"dependencies": {
-		"shortcode": {},
 		"model": {},
 		"class": {},
 		"filter": {}

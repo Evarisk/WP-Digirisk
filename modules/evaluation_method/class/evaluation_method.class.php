@@ -115,7 +115,7 @@ class Evaluation_Method_Class extends \eoxia\Term_Class {
 		// Vires les opérateurs arithmétiques.
 		$formula = array_filter( $evaluation_method->data['formula'], 'is_int' );
 
-		// Le tableau 'formula' contient des entrées de type 'int' et 'string', ex:  => 1, 1 => '*', 2 => 5, 3 => '*', 4 => 10.
+		// Le tableau 'formula' contient des entrées de type 'int' et 'string', ex: 0 => 1, 1 => '*', 2 => 5, 3 => '*', 4 => 10.
 		if ( ! empty( $formula ) ) {
 			foreach ( $formula as $key => $variable_id ) {
 				$variable_id = (int) $variable_id;

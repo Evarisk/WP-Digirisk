@@ -36,7 +36,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				</tr>
 				<?php
 			endforeach;
-		else:
+		else :
 			?>
 			<tr>
 				<td colspan="2"><?php esc_html_e( 'Cet utilisateur n\'est affecté à aucun établissement', 'digirisk' ); ?></td>

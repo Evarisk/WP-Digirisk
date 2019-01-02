@@ -2,17 +2,19 @@
 /**
  * Le tableau des utilisateurs qui sont affectés.
  *
- * @author Evarisk <jimmy@evarisk.com>
- * @since 6.2.3.0
- * @version 6.2.5.0
- * @copyright 2015-2017 Evarisk
- * @package user
- * @subpackage view
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.3.0
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+defined( 'ABSPATH' ) || exit; ?>
 
 <table class="table affected-users">
 	<thead>
@@ -27,8 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 	</thead>
 
 	<tbody>
-		<?php if ( ! empty( $list_affected_user ) ) :
-			foreach ( $list_affected_user as $affected_user ) : ?>
+		<?php
+		if ( ! empty( $list_affected_user ) ) :
+			foreach ( $list_affected_user as $affected_user ) :
+				?>
 				<tr>
 					<td class="w50"><div class="avatar" style="background-color: #<?php echo esc_attr( $affected_user->avatar_color ); ?>;"><span><?php echo esc_html( $affected_user->initial ); ?></span></div></td>
 					<td class="padding"><span><strong><?php echo esc_html( Evaluator_Class::g()->element_prefix . $affected_user->id ); ?></strong></span></td>
@@ -48,7 +52,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 						</div>
 						</td>
 				</tr>
-			<?php endforeach; ?>
-		<?php endif; ?>
+			<?php
+			endforeach;
+		endif;
+		?>
 	</tbody>
 </table>
