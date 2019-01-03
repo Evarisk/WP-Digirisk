@@ -1,0 +1,73 @@
+/*--------------------------------------------------------------
+	Table Standard
+--------------------------------------------------------------*/
+
+.wpeo-table {
+	width: 100%;
+	border: 1px solid rgba(0,0,0,0.1);
+	font-size: 14px;
+	border-collapse: collapse;
+
+	td, th, tr {
+		text-align: left;
+		vertical-align: middle;
+	}
+	th {
+		font-weight: 700;
+	}
+	th, td {
+		padding: 0.8em 0.6em;
+		@media( max-width: $media__medium ) {
+			padding: 0.4em;
+		}
+	}
+}
+
+/* Header, footer */
+.wpeo-table > thead, .wpeo-table > tfoot {
+	background: $color__primary;
+	color: #fff;
+}
+
+/* Body */
+.wpeo-table > tbody {
+	tr:nth-child(odd) {
+		background: #fff;
+	}
+	tr:nth-child(even) {
+		background: rgba(0,0,0,0.05);
+	}
+}
+
+/* Responsive */
+@media ( max-width: $media__small ) {
+	.wpeo-table {
+		> thead {
+			display: none;
+		}
+		> tbody {
+			tr {
+				border-bottom: 1px solid rgba(0,0,0,0.1);
+				&:nth-child(even) {
+					background: #fff;
+				}
+				&:last-child {
+					border-bottom: 0;
+				}
+			}
+			td, th {
+				display: block;
+				width: 100%;
+				font-size: 14px;
+				padding: 0.4em 0.6em;
+				&:before {
+					content: attr(data-title);
+					display: inline-block;
+					color: $color__primary;
+					width: 100%;
+					max-width: 160px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "WPEO ODT",
+	"slug": "wpeo_odt",
+	"since": "1.1.0",
+	"description": "Gestion des fichiers ODT",
+	"state": true,
+	"path": "core/external/wpeo_odt",
+	"dependencies": {
+		"class": {},
+    "model": {}
+	}
+}

@@ -1,0 +1,264 @@
+/*--------------------------------------------------------------
+	Module : Gallery
+	Version : 1.2.0
+--------------------------------------------------------------*/
+
+/* Apparence de la modal */
+.wpeo-gallery {
+	.modal-container {
+		max-width: 1000px;
+		max-height: 700px;
+	}
+	.modal-header .upload {
+		font-size: 12px;
+		text-transform: none;
+		font-weight: 400;
+		border-radius: 4px;
+		padding: 4px 8px;
+		margin-left: 0.2em;
+	}
+	.wpeo-button .button-icon~span {
+		margin-left: 6px;
+	}
+	.modal-content {
+		display: flex;
+		flex-direction: column;
+		flex: 0 1 auto;
+		position: relative;
+		.image-list {
+			width: 80%;
+			height: 90%;
+			margin: auto;
+		}
+		.action {
+			width: 100%;
+			height: 10%;
+		}
+	}
+}
+
+/* Images de la galerie */
+.wpeo-gallery .modal-content {
+	.image-list {
+		padding-top: 1em;
+		li {
+			margin: auto;
+			padding: 0;
+			overflow: hidden;
+			height: 100%;
+			position: relative;
+		}
+		img, .document {
+			margin: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		.document {
+			text-align: center;
+			.icon {
+				font-size: 180px;
+				color: rgba(0,0,0,0.2);
+			}
+			p {
+				font-size: 14px;
+				color: rgba(0,0,0,0.7);
+				font-style: italic;
+				span {
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}
+
+/* Boutons actions */
+.wpeo-gallery .modal-content {
+	.action {
+		margin: 0;
+		text-align: center;
+		padding-top: 1em;
+		a {
+			@include transition();
+		}
+		li {
+			display: inline-block;
+			margin: 0 0.2em;
+		}
+		.icon {
+			font-size: 18px;
+		}
+		.featured-thumbnail {
+			color: #ffc509;
+			&:hover {
+				color: #ff8d09;
+			}
+		}
+		.edit-link {
+			color: $color__blue;
+			&:hover {
+				color: darken($color__blue, 20%);
+			}
+		}
+		.dissociate-thumbnail {
+			color: $color__dark;
+			&:hover {
+				color: darken($color__dark, 20%);
+			}
+		}
+	}
+}
+
+/* Navigation */
+.wpeo-gallery .modal-content .navigation {
+	margin: 0;
+	.navigation-prev, .navigation-next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		a {
+			text-decoration: none;
+			background: $color__grey;
+			color: rgba(0,0,0,0.6);
+			font-size: 12px;
+			width: 30px;
+			line-height: 30px;
+			border-radius: 50%;
+			text-align: center;
+			display: inline-block;
+			margin: 0;
+			@include transition();
+			&:hover {
+				background: darken($color__grey, 10%);
+			}
+			i {
+				font-size: 12px;
+				line-height: 30px;
+			}
+		}
+	}
+	.navigation-prev {
+		left: 1em;
+	}
+	.navigation-next {
+		right: 1em;
+	}
+}
+
+// .wpeo-gallery, .eo-gallery {
+// 	background: rgba(0,0,0,0.9);
+// 	position: fixed;
+// 	top: 0;
+// 	left: 0;
+// 	width: 100%;
+// 	height: 100%;
+// 	z-index: 99999;
+//
+// 	a {
+// 		text-decoration: none;
+// 	}
+//
+// 	/* Bouton pour fermer la galerie */
+// 	.close {
+// 		position: absolute;
+// 		right: 30px;
+// 		top: 30px;
+// 		padding: 10px;
+// 		font-size: 16px;
+// 		color: #fff;
+// 		@include transition;
+// 		&:hover {
+// 			color: $color__primary;
+// 		}
+// 	}
+//
+// 	/* Flêches pour naviguer entre les images */
+// 	.navigation {
+// 		li {
+// 			position: absolute;
+// 			top: 50%;
+// 			transform: translateY(-50%);
+//
+// 			&:first-child {
+// 				left: 2em;
+// 			}
+// 			&:last-child {
+// 				right: 2em;
+// 			}
+// 			a {
+// 				transition: all 0.2s ease-out;
+// 				line-height: 1;
+// 				padding: 6px;
+// 				border: 1px solid #fff;
+// 				display: inline-block;
+// 				font-size: 8px;
+// 				border-radius: 50%;
+// 				color: #fff;
+// 			}
+// 			&:hover a {
+// 				background: $color__primary;
+// 				border: 1px solid $color__primary;
+// 				color: #fff;
+// 			}
+// 		}
+// 	}
+//
+// 	/* Liste des images */
+// 	.image-list {
+// 		@include flexbox;
+// 		width: 100%;
+// 		height: 100%;
+//
+// 		.current {
+// 			margin: auto;
+// 		}
+// 		img {
+// 			max-width: 1000px;
+// 			width: 100%;
+// 			height: auto;
+// 		}
+// 	}
+//
+// 	/* Barre d'action en bas de la fenêtre */
+// 	.action {
+// 		position: absolute;
+// 		bottom: 0px;
+// 		left: 0px;
+// 		text-align: center;
+// 		background: #fff;
+// 		width: 100%;
+//
+// 		li {
+// 			display: inline-block;
+// 			line-height: 1;
+// 			@include transition;
+// 			margin: 0;
+// 			background: #fff;
+// 			a {
+// 				display: inline-block;
+// 				padding: 14px 20px;
+// 				color: rgba(0,0,0,0.7);
+// 				font-weight: 600;
+// 				font-size: 13px;
+// 				background: none;
+// 				@include transition;
+// 			}
+// 			&:hover {
+// 				background: $color__primary;
+// 				a {
+// 					color: $color__primary-text;
+// 				}
+// 			}
+// 		}
+// 		.media {
+// 			width: auto;
+// 			height: auto;
+// 			line-height: 1;
+// 		}
+// 	}
+// }

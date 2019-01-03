@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------
+	Templates
+	Version : 1.0.0
+
+--------------------------------------------------------------*/
+
+/* Vertical */
+.wpeo-tab.tab-vertical {
+	@include flexbox();
+	flex-wrap: nowrap;
+
+	.tab-list {
+		flex-direction: column;
+		min-width: 180px;
+
+		.tab-element {
+			&::before {
+				width: 2px;
+				height: 0;
+			}
+
+			/* Active */
+			&.tab-active {
+				color: $color__primary;
+				a {
+					color: $color__primary;
+				}
+				&::before {
+					height: 100%;
+				}
+			}
+
+			/* Icon */
+			.tab-icon {
+				display: inline-block;
+				margin: 0 0.4em 0 0;
+				font-size: 14px;
+				text-align: left;
+			}
+		}
+	}
+
+	.tab-container {
+		width: 100%;;
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "Core",
+	"slug": "core",
+	"since": "0.1.0",
+	"version": "1.0.0",
+	"description": "Core",
+	"path": "core/",
+	"dependencies": {
+		"action": {}
+	}
+}

@@ -1,0 +1,188 @@
+/*--------------------------------------------------------------
+	Module : Autocomplete
+	Version : 1.2.0
+
+	.wpeo-autocomplete => classe de base pour le module
+		.autocomplete-loading -> Fais apparaître la barre de Chargement
+		.autocomplete-full -> Fais apparaître la croix
+--------------------------------------------------------------*/
+
+.wpeo-autocomplete {
+	position: relative;
+
+	&.autocomplete-active .autocomplete-search-list {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+}
+
+/** Couleur */
+.wpeo-autocomplete {
+	.autocomplete-label {
+		background: $color__grey;
+	}
+	.autocomplete-search-list {
+		background: $color__grey;
+	}
+}
+.wpeo-autocomplete.autocomplete-light {
+	.autocomplete-label {
+		background: #fff;
+	}
+	.autocomplete-search-list {
+		background: #fff;
+	}
+}
+
+/** Label */
+.wpeo-autocomplete {
+	.autocomplete-label {
+		display: block;
+		padding: 1em;
+		margin: 0;
+		position: relative;
+		box-shadow: 0 2px 2px 0px rgba(0,0,0,0.3);
+		@include transition();
+		border: 1px solid transparent;
+
+		&:hover {
+			cursor: text;
+			border: 1px solid $color__primary;
+		}
+	}
+	.autocomplete-search-input {
+		background-color: transparent;
+		border: 0;
+		width: 100%;
+		padding: 0 1.6em;
+		font-size: 14px;
+		font-weight: 400;
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
+	.autocomplete-icon-before, .autocomplete-icon-after {
+		position: absolute;
+		top: 50%;
+	}
+	.autocomplete-icon-before {
+		left: 1em;
+		transform: translateY(-50%);
+	}
+}
+
+/** Chargement */
+.wpeo-autocomplete {
+	.autocomplete-label {
+		.autocomplete-loading, .autocomplete-loading-background {
+			display: block;
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			@include transition(width, 0.6s, linear);
+			height: 3px;
+		}
+		.autocomplete-loading {
+			width: 10%;
+			background: $color__primary;
+		}
+		.autocomplete-loading-background {
+			width: 100%;
+			background: rgba($color__primary, 0.4);
+		}
+	}
+}
+
+/** Croix */
+.wpeo-autocomplete {
+	.autocomplete-icon-after {
+		right: 0;
+		padding: 1em;
+		color: rgba(0,0,0,0.4);
+		@include transition();
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(-50%) translateX(10px);
+		transform-origin: 50%;
+		&:hover {
+			color: rgba(0,0,0,0.8);
+			cursor: pointer;
+		}
+	}
+	&.autocomplete-full {
+		.autocomplete-icon-after {
+			opacity: 1;
+			pointer-events: all;
+			transform: translateY(-50%) translateX(0);
+		}
+	}
+}
+
+/** Liste de résultats */
+.wpeo-autocomplete .autocomplete-search-list {
+	opacity: 0;
+	@include transition();
+	transform: translateY(-10px);
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	box-shadow: 0 2px 2px 0px rgba(0,0,0,0.3);
+	border-top: 1px solid rgba(0,0,0,0.1);
+	z-index: 99;
+	width: 300px;
+	pointer-events: none;
+
+	.autocomplete-result, .autocomplete-result-text {
+		list-style-type: none;
+		padding: 0.6em 2.6em;
+		@include flexbox();
+		margin: 0;
+	}
+	.autocomplete-result {
+		@include transition();
+
+		&:hover {
+			background: rgba(0,0,0,0.05);
+			cursor: pointer;
+		}
+	}
+	.autocomplete-result-image {
+		margin-right: 1em;
+		width: auto;
+
+		&.autocomplete-image-rounded {
+			border-radius: 50%;
+		}
+	}
+	.autocomplete-result-container {
+		margin: auto 0;
+	}
+	.autocomplete-result-title, .autocomplete-result-subtitle {
+		display: block;
+	}
+	.autocomplete-result-title {
+		font-size: 14px;
+	}
+	.autocomplete-result-subtitle {
+		font-size: 12px;
+		color: rgba(0,0,0,0.5);
+	}
+}
+
+/** Taille de la liste */
+
+// Taille
+.wpeo-autocomplete {
+	&.autocomplete-small .autocomplete-search-list {
+		width: 200px;
+	}
+	&.autocomplete-medium .autocomplete-search-list {
+		width: 300px;
+	}
+	&.autocomplete-large .autocomplete-search-list {
+		width: 400px;
+	}
+}

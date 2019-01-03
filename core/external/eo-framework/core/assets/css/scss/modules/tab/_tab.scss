@@ -1,0 +1,119 @@
+/*--------------------------------------------------------------
+	Module : Tab
+	Version : 1.0.0
+
+	.wpeo-tab -> classe de base du mobule
+--------------------------------------------------------------*/
+
+/* Liste */
+.wpeo-tab .tab-list {
+	margin: 0;
+	padding: 0;
+	@include flexbox();
+
+	.tab-element {
+		list-style-type: none;
+		padding: 1.6em 2.4em;
+		margin: 0;
+		text-transform: uppercase;
+		font-size: 12px !important;
+		position: relative;
+		background: rgba(0,0,0,0.1);
+		color: rgba(0,0,0,0.6);
+		@include transition();
+
+		&::before {
+			display: block;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0px;
+			height: 2px;
+			background: $color__primary;
+			@include transition(all, 0.2s, ease-out);
+		}
+		&:hover {
+			cursor: pointer;
+			&:not(.tab-active) {
+				background: rgba(0,0,0,0.2);
+			}
+		}
+		> a {
+			color: rgba(0,0,0,0.6);
+		}
+
+		/* Active */
+		&.tab-active {
+			background: #fff;
+			color: $color__primary;
+
+			> a {
+				color: $color__primary;
+			}
+			&::before {
+				width: 100%;
+			}
+		}
+
+		/* Disabled */
+		&.tab-disabled {
+			color: rgba(0,0,0,0.2);
+			pointer-events: none;
+
+			> a {
+				color: rgba(0,0,0,0.4);
+			}
+		}
+
+		/* Icon */
+		.tab-icon {
+			display: block;
+			text-align: center;
+			font-size: 20px;
+			margin-bottom: 0.4em;
+		}
+	}
+}
+
+/* Content */
+.wpeo-tab .tab-container {
+	position: relative;
+
+	.tab-content {
+		display: block;
+		width: 100%;
+		padding: 2em;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		opacity: 0;
+		pointer-events: none;
+		background: #fff;
+		@include transition();
+		z-index: 10;
+
+		&.tab-active {
+			opacity: 1;
+			pointer-events: all;
+			position: static;
+		}
+	}
+}
+
+/* Dropdown Compatibility */
+.wpeo-tab .tab-list {
+	.tab-element.wpeo-dropdown {
+		padding: 0;
+
+		.dropdown-toggle {
+			padding: 1.6em 2.4em;
+		}
+	}
+}
+
+
+/* Liste des effets */
+@import "template";
+@import "effect";
