@@ -37,6 +37,12 @@ class Test_Evaluator_Action extends WP_Ajax_UnitTestCase {
 		try {
 			$_POST['_wpnonce']   = wp_create_nonce( 'edit_evaluator_assign' );
 			$_POST['element_id'] = 1;
+			$_POST['list_user'] = array(
+				array(
+					'duration' => 15,
+					'affect'   => true,
+				),
+			);
 			$this->_handleAjax( 'edit_evaluator_assign' );
 		} catch ( WPAjaxDieContinueException $e ) {
 			// Required for ajax test.

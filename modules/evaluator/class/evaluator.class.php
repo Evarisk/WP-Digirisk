@@ -25,7 +25,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\User_Digi_Model';
+	protected $model_name = '\digi\User_Model';
 
 	/**
 	 * La clé principale du modèle
