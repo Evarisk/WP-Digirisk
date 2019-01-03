@@ -77,6 +77,21 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.1.0 =
+
+Améliorations
+
+* 22464 - Ajout d'une fonctionnalité pour déplacer un risque vers une autre entité (GP ou UT).
+* 24101 - La page "Causerie" est de nouveau accessible.
+* 24200 - Ajout d'un tableau permettant de visualiser où un utilisateur est affecté. Ce tableau est accessible dans la page "DigiRisk" dans le sous menu "Utilisateur" de WordPress.
+* 24452 - La taille des photos dans les documents font maintenant 9 cm.
+* 24611 - Les champs "commentaire" s'ajuste en hauteur selon leur contenu.
+
+Corrections
+
+* 24444 - Les sauts à la ligne des commentaires sont maintenant pris en compte dans le DUER. (https://github.com/Evarisk/Digirisk/issues/62)
+* 24445 - Le titre dans le bandeau supérieure de l'application n'est plus forcé en majuscule.
+
 = Version 7.0.2 =
 
 Corrections
