@@ -131,7 +131,7 @@ class Accident_Action {
 		ob_start();
 		if ( $add ) {
 			Accident_Class::g()->register_search( array(
-				'value'        => User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
+				'value'        => User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
 				'hidden_value' => $accident->data['victim_identity_id'],
 			), array(
 				'value'        => $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'],
@@ -177,7 +177,7 @@ class Accident_Action {
 
 		ob_start();
 		Accident_Class::g()->register_search( array(
-			'value'        => User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
+			'value'        => User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' - ' . $accident->data['victim_identity']->data['displayname'],
 			'hidden_value' => $accident->data['victim_identity_id'],
 		), array(
 			'value' => $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'],

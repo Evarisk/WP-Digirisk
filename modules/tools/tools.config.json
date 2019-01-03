@@ -5,7 +5,6 @@
 	"description": "Le module gérant les outils de Digirisk",
 	"path": "modules/tools/",
 	"dependencies": {
-		"class": {},
 		"action": {}
 	}
 }

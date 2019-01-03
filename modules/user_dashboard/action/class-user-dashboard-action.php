@@ -87,7 +87,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 			'email'     => $email,
 		);
 
-		$update_state = User_Digi_Class::g()->update( $user_args );
+		$update_state = User_Class::g()->update( $user_args );
 
 		$error = is_wp_error( $update_state );
 
@@ -117,7 +117,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 			wp_send_json_error();
 		}
 
-		$user = User_Digi_Class::g()->get( array( 'id' => $id ), true );
+		$user = User_Class::g()->get( array( 'id' => $id ), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user ) );

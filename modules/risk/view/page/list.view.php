@@ -2,7 +2,7 @@
 /**
  * Affiches la liste des risques
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.3
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk

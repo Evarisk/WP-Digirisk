@@ -2,7 +2,7 @@
 /**
  * Affiches les rôles qui ont les capacités "manage_digirisk".
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk

@@ -2,7 +2,7 @@
 /**
  * Affichages le contenu de la page outils de Digirisk dans WordPress.
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.1.0
  * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
@@ -12,7 +12,9 @@
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <div class="wrap wpeo-wrap">
 	<h1><?php esc_html_e( 'DigiRisk outils', 'digirisk' ); ?></h1>

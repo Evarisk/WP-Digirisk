@@ -2,7 +2,7 @@
 /**
  * Affichage d'un risque à preset.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.9
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td class="w50">
 		<?php do_shortcode( '[digi_evaluation_method_evarisk risk_id=' . $risk->data['id'] . ' type="risk"]' ); ?>
-		<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" category_risk_id="' . end( $risk->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '" danger_id="' . $risk->data['id'] . '" preset="1" type="risk" display="' . ( ( $risk->data['id'] !== 0 ) ? "view" : "edit" ) . '"]' ); ?>
+		<?php do_shortcode( '[digi_dropdown_categories_risk id=' . $risk->data['id'] . ' category_risk_id=' . end( $risk->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . ' danger_id=' . $risk->data['id'] . ' preset=1 type=risk display=' . ( ( 0 !== $risk->data['id'] ) ? 'view' : 'edit' ) . ']' ); ?>
 	</td>
 	<td class="w50">
 		<?php do_shortcode( '[digi_dropdown_evaluation_method preset=1 risk_id=' . $risk->data['id'] . ']' ); ?>
@@ -37,7 +37,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td>
 		<div class="hidden">
-			<div data-namespace="digirisk" data-module="risk" data-before-method="beforeSaveRisk" data-parent="risk-row" data-loader="table" class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
+			<div data-namespace="digirisk"
+				data-module="risk"
+				data-before-method="beforeSaveRisk"
+				data-parent="risk-row"
+				data-loader="table"
+				class="button w50 green save action-input"><i class="icon fas fa-save"></i></div>
 		</div>
 	</td>
 </tr>

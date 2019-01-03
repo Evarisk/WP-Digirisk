@@ -37,8 +37,8 @@ class User_Dashboard_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function display_list_user() {
-		$list_user   = User_Digi_Class::g()->get( array( 'exclude' => array( 1 ) ) );
-		$user_schema = User_Digi_Class::g()->get( array( 'schema' => true ), true );
+		$list_user   = User_Class::g()->get( array( 'exclude' => array( 1 ) ) );
+		$user_schema = User_Class::g()->get( array( 'schema' => true ), true );
 
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'list', array(
 			'list_user'   => $list_user,

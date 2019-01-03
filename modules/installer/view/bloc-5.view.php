@@ -2,7 +2,7 @@
 /**
  * Le bloc de présentation lors de l'installation
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.7.0
  * @version 6.2.9.0
  * @copyright 2015-2017 Evarisk

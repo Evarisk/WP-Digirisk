@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! empty( $comment ) && ! empty( $comment->data['author_id'] ) ) :
-	$user = User_Digi_Class::g()->get( array(
+	$user = User_Class::g()->get( array(
 		'id' => $comment->data['author_id'],
 	), true ); ?>
 

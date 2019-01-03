@@ -2,7 +2,7 @@
 /**
  * La vue du bouton "Télécharger le document unique".
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.5
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk

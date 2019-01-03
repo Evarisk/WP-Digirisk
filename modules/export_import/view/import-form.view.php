@@ -2,7 +2,7 @@
 /**
  * Vue permettant d'impoter un modèle DigiRisk.
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk

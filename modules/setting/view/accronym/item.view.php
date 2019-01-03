@@ -1,6 +1,20 @@
-<?php namespace digi;
+<?php
+/**
+ * Affichage d'un champ texte pour modifier l'accronyme.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2019 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     7.0.0
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
+
+defined( 'ABSPATH' ) || exit; ?>
 
 <li>
 	<label for="accronym-<?php echo $key; ?>"><?php echo $key; ?>

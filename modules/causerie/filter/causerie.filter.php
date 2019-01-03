@@ -65,13 +65,13 @@ class Causerie_Filter extends Identifier_Filter {
 			$object->data['former']['rendered'] = null;
 
 			if ( ! empty( $object->data['former']['user_id'] ) ) {
-				$object->data['former']['rendered'] = User_Digi_Class::g()->get( array( 'id' => $object->data['former']['user_id'] ), true );
+				$object->data['former']['rendered'] = User_Class::g()->get( array( 'id' => $object->data['former']['user_id'] ), true );
 			}
 
 			if ( ! empty( $object->data['participants'] ) ) {
 				foreach ( $object->data['participants'] as &$participant ) {
 					if ( ! empty( $participant['user_id'] ) ) {
-						$participant['rendered'] = User_Digi_Class::g()->get( array( 'id' => $participant['user_id'] ), true );
+						$participant['rendered'] = User_Class::g()->get( array( 'id' => $participant['user_id'] ), true );
 						$object->data['exclude_user_ids'] .= $participant['user_id'] . ',';
 					}
 				}
