@@ -86,11 +86,30 @@ class Listing_Risk_Corrective_Task_Class extends Document_Class {
 	protected $odt_name = 'liste_des_risques_actions';
 
 	/**
-	 * Constructor.
+	 * Affichage principale
 	 *
-	 * @since 6.5.0
+	 * @since 7.0.0
+	 *
+	 * @param integer $parent_id [description]
 	 */
-	protected function construct() {}
+	public function display( $parent_id, $types, $can_add = true ) {
+		$documents = array();
+
+		if ( ! empty( $types ) ) {
+			foreach ( $types as $type ) {
+				$documents = wp_parse_args( $documents, $type::g()->get( array(
+					'post_parent' => $parent_id,
+					'post_status' => array( 'publish', 'inherit' ),
+				) ) );
+			}
+		}
+
+		\eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'main', array(
+			'element_id' => $parent_id,
+			'documents'  => $documents,
+			'type'       => 'corrective-task',
+		) );
+	}
 }
 
 new Listing_Risk_Corrective_Task_Class();

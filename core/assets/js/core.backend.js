@@ -28,8 +28,8 @@ window.eoxiaJS.digirisk.core.init = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.core.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap .notification.patch-note.active', window.eoxiaJS.digirisk.core.openPopup );
-	jQuery( document ).on( 'click', '.digirisk-wrap .notification.patch-note .close', window.eoxiaJS.digirisk.core.closeNotification );
+	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note.notification-active', window.eoxiaJS.digirisk.core.openPopup );
+	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note .notification-close', window.eoxiaJS.digirisk.core.closeNotification );
 	jQuery( document ).on( 'click', '.popup-update-manager .back-update', window.eoxiaJS.digirisk.core.confirmBack );
 };
 
@@ -44,7 +44,8 @@ window.eoxiaJS.digirisk.core.event = function() {
  */
 window.eoxiaJS.digirisk.core.openPopup = function( event ) {
 	event.stopPropagation();
-	jQuery( '.digirisk-wrap .popup.patch-note' ).addClass( 'active' );
+	event.preventDefault();
+	jQuery( '.digirisk-wrap .wpeo-modal.patch-note' ).addClass( 'modal-active' );
 };
 
 /**
@@ -58,7 +59,7 @@ window.eoxiaJS.digirisk.core.openPopup = function( event ) {
  */
 window.eoxiaJS.digirisk.core.closeNotification = function( event ) {
 	event.stopPropagation();
-	jQuery( this ).closest( '.notification' ).removeClass( 'active' );
+	jQuery( this ).closest( '.wpeo-notification' ).removeClass( 'notification-active' );
 };
 
 /**

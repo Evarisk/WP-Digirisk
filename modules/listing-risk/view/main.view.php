@@ -37,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'item-edit', array(
 		'element_id' => $element_id,
+		'type'       => $type,
 	) );
 	?>
 </table>

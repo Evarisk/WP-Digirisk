@@ -140,6 +140,53 @@ class DUER_Class extends Document_Class {
 			'societies' => $societies,
 		) );
 	}
+
+	public function generate_full_duer( $parent_id, $date_debut_audit, $date_fin_audit, $destinataire_duer, $methodologie, $sources, $dispo_des_plans, $remarque_importante ) {
+		$society = Society_Class::g()->show_by_type( $parent_id );
+
+		\eoxia\LOG_Util::log( 'DEBUT - Construction des données du DUER en BDD', 'digirisk' );
+		$data = DUER_Class::g()->prepare_document( $society, array(
+			'parent_id'           => 0,
+			'date_debut_audit'    => $date_debut_audit,
+			'date_fin_audit'      => $date_fin_audit,
+			'destinataire_duer'   => $destinataire_duer,
+			'methodologie'        => $methodologie,
+			'sources'             => $sources,
+			'dispo_des_plans'     => $dispo_des_plans,
+			'remarque_importante' => $remarque_importante,
+		) );
+		\eoxia\LOG_Util::log( 'FIN - Construction des données du DUER en BDD', 'digirisk' );
+		$generation_status = DUER_Class::g()->create_document( $data['document']->data['id'] );
+
+		return $data;
+	}
+
+	public function get_hierarchy_duer( $data, $args ) {
+		$societies = Society_Class::g()->get_societies_in( $args['parent_id'], 'inherit' );
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+
+				$tabulation = '';
+
+				for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
+					$tabulation .= '-';
+				}
+
+				$data['elementParHierarchie']['value'][] = array(
+					'nomElement' => $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+				);
+
+				$args['parent_id'] = $society->data['id'];
+
+				$data = $this->get_hierarchy_duer( $data, $args );
+
+				$tabulation .= '-';
+			}
+		}
+
+		return $data;
+	}
 }
 
 DUER_Class::g();

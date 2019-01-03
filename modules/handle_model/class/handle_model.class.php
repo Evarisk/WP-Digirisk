@@ -31,11 +31,11 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 			'title' => 'Document unique',
 			'class' => '\digi\DUER_Class',
 		),
-		'groupement'                        => array(
+		'sheet_groupment'                    => array(
 			'title' => 'Groupement',
 			'class' => '\digi\Sheet_Groupment_Class',
 		),
-		'unite_de_travail'                  => array(
+		'sheet_workunit' => array(
 			'title' => 'Unité de travail',
 			'class' => '\digi\Sheet_Workunit_Class',
 		),
@@ -59,7 +59,7 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 			'title' => 'Accident de travail bénin',
 			'class' => '\digi\Accident_Class',
 		),
-		'registre_accidents_travail_benins' => array(
+		'registre_at_benin'                 => array(
 			'title' => 'Registre accidents de travail bénin',
 			'class' => '\digi\Registre_AT_Benin_Class',
 		),

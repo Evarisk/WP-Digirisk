@@ -106,10 +106,12 @@ class Society_Action {
 		);
 
 		$posts_founded = array();
-		$ids_founded = array();
+		$ids_founded   = array();
 
-		$query = "SELECT ID FROM {$wpdb->posts} WHERE ID LIKE '%" . $term . "%' AND post_type IN('" . implode( $posts_type, '\',\'' ) . "')";
-		$results = $wpdb->get_results( $query );
+		$results = $wpdb->query( $wpdb->prepare( 'SELECT ID FROM {$wpdb->posts} WHERE ID LIKE %s AND post_type IN(%s)', array(
+			'%' . $term . '%',
+			implode( $posts_type, ',' ),
+		) ) );
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $post ) {
@@ -131,12 +133,15 @@ class Society_Action {
 			}
 		}
 
-		$query = "SELECT PM.post_id FROM {$wpdb->postmeta} AS PM
-			JOIN {$wpdb->posts} AS P ON P.ID=PM.post_id
-		WHERE PM.meta_key='_wpdigi_unique_identifier'
-			AND PM.meta_value LIKE '%" . $term . "%'
-			AND P.post_type IN('" . implode( $posts_type, '\',\'' ) . "')";
-		$results = $wpdb->get_results( $query );
+		$results = $wpdb->query(
+			$wpdb->prepare(
+				'SELECT PM.post_id FROM {$wpdb->postmeta} AS PM
+					JOIN {$wpdb->posts} AS P ON P.ID=PM.post_id
+				WHERE PM.meta_key="_wpdigi_unique_identifier"
+					AND PM.meta_value LIKE %s
+					AND P.post_type IN(%s)', array( '%' . $term . '%', implode( $posts_type, ',' ) )
+			)
+		);
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $post ) {

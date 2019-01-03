@@ -2,7 +2,7 @@
 /**
  * Gestion des filtres relatifs aux produits chimiques
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 0.1
  * @version 6.2.3.0
  * @copyright 2015-2017 Evarisk

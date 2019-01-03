@@ -74,14 +74,14 @@ class Accident_Filter extends Identifier_Filter {
 	 * @return Accident_Model L'objet avec tous les éléments ajoutés par cette méthode.
 	 */
 	public function get_full_accident( $object, $args ) {
-		$object->data['victim_identity'] = User_Digi_Class::g()->get( array( 'schema' => true ), true );
+		$object->data['victim_identity'] = User_Class::g()->get( array( 'schema' => true ), true );
 
 		if ( ! empty( $object->data['risk_id'] ) ) {
 			$object->data['risk'] = Risk_Class::g()->get( array( 'id' => $object->data['risk_id'] ), true );
 		}
 
 		if ( ! empty( $object->data['victim_identity_id'] ) ) {
-			$object->data['victim_identity'] = User_Digi_Class::g()->get( array( 'id' => $object->data['victim_identity_id'] ), true );
+			$object->data['victim_identity'] = User_Class::g()->get( array( 'id' => $object->data['victim_identity_id'] ), true );
 		}
 
 		if ( ! isset( $object->data['unique_identifier'] ) ) {

@@ -71,7 +71,7 @@ class Accident_Travail_Benin_Filter extends Identifier_Filter {
 			'effectif'                  => $main_society->data['number_of_employees'],
 			'ref'                       => $accident->data['unique_identifier'],
 			'dateInscriptionRegistre'   => $accident->data['registration_date_in_register']['rendered']['date'],
-			'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Digi_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : '',
+			'nomPrenomMatriculeVictime' => ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : '',
 			'dateHeure'                 => $accident->data['accident_date']['rendered']['date_time'],
 			'lieu'                      => $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'],
 			'circonstances'             => $comment_content,

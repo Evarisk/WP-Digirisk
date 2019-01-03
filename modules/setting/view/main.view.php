@@ -2,7 +2,7 @@
 /**
  * Gestion des onglets dans la page "digirisk-setting".
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk
@@ -29,14 +29,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="digirisk-wrap">
 
 			<div id="digi-general" class="tab-content <?php echo ( 'digi-general' === $default_tab ) ? '' : 'hidden'; ?>">
-				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'general/main', array(
-					'can_edit_risk_category' => $can_edit_risk_category,
-					'can_edit_type_cotation' => $can_edit_type_cotation,
-				) ); ?>
+				<?php
+				\eoxia\View_Util::exec( 'digirisk', 'setting', 'general/main', array(
+					'can_edit_risk_category'     => $can_edit_risk_category,
+					'can_edit_type_cotation'     => $can_edit_type_cotation,
+					'require_unique_security_id' => $require_unique_security_id,
+					'unique_security_id'         => $unique_security_id,
+					'sites'                      => $sites,
+				) );
+				?>
 			</div>
 
 			<div id="digi-capability" class="tab-content <?php echo ( 'digi-capability' === $default_tab ) ? '' : 'hidden'; ?>">
-				<?php \eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/main' ); ?>
+				<?php
+				\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/main' );
+				?>
 			</div>
 
 			<div id="digi-accronym" class="tab-content <?php echo ( 'digi-accronym' === $default_tab ) ? '' : 'hidden'; ?>">

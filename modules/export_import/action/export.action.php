@@ -2,7 +2,7 @@
 /**
  * Gestion de l'export des données de DigiRisk.
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.1.9
  * @version 6.4.1
  * @copyright 2015-2017

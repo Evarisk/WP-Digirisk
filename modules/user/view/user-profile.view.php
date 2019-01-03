@@ -1,6 +1,20 @@
-<?php namespace digi;
+<?php
+/**
+ * Permet d'ajouter des champs en plus dans la page profile des utilisateurs.
+ *
+ * @author    Evarisk <dev@evarisk.com>
+ * @copyright (c) 2006-2018 Evarisk <dev@evarisk.com>.
+ *
+ * @license   AGPLv3 <https://spdx.org/licenses/AGPL-3.0-or-later.html>
+ *
+ * @package   DigiRisk\Templates
+ *
+ * @since     6.0.0
+ */
 
-if ( !defined( 'ABSPATH' ) ) exit; ?>
+namespace digi;
+
+defined( 'ABSPATH' ) || exit; ?>
 
 <h3><?php _e( 'Digirisk', 'digirisk' ); ?></h3>
 

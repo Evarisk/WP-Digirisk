@@ -88,13 +88,15 @@ class Legal_Display_Action {
 			'posts_per_page' => 1,
 		), true );
 
-		$response = Legal_Display_A3_Class::g()->prepare_document( $parent_id, array(
+		$society = Society_Class::g()->show_by_type( $parent_id );
+
+		$response = Legal_Display_A3_Class::g()->prepare_document( $society, array(
 			'legal_display' => $legal_display,
 		) );
 
 		Legal_Display_A3_Class::g()->create_document( $response['document']->data['id'] );
 
-		$response = Legal_Display_A4_Class::g()->prepare_document( $parent_id, array(
+		$response = Legal_Display_A4_Class::g()->prepare_document( $society, array(
 			'legal_display' => $legal_display,
 		) );
 

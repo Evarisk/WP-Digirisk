@@ -2,7 +2,7 @@
 /**
  * Affichage pour gérer les capacités des utilisateurs.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
  * @version 6.4.0
  * @copyright 2015-2017 Evarisk

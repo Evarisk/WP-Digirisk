@@ -25,14 +25,14 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\Sheet_Causerie_Model';
+	protected $model_name = '\digi\Sheet_Causerie_Intervention_Model';
 
 	/**
 	 * Le post type
 	 *
 	 * @var string
 	 */
-	protected $post_type = 'sheet-causerie-inter';
+	protected $type = 'sheet-causerie-inter';
 
 	/**
 	 * Le type du document
@@ -68,20 +68,6 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 	 * @var string
 	 */
 	public $element_prefix = 'FCI';
-
-	/**
-	 * La fonction appelée automatiquement avant la création de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $before_put_function = array( '\digi\construct_identifier' );
-
-	/**
-	 * La fonction appelée automatiquement après la récupération de l'objet dans la base de donnée
-	 *
-	 * @var array
-	 */
-	protected $after_get_function = array( '\digi\get_identifier' );
 
 	/**
 	 * Le nom pour le resgister post type

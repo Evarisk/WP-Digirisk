@@ -2,7 +2,7 @@
 /**
  * Ajoute le bouton pour exporter les risques au format CSV
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @version 6.2.6.0
  * @copyright 2015-2017 Evarisk
  * @package export_import

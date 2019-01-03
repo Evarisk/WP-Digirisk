@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap digirisk-wrap causerie-wrap">
+<div class="wrap digirisk-wrap causerie-wrap wpeo-wrap">
 	<div>
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Retour', 'digirisk' ); ?></a>
 
@@ -35,13 +35,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<div class="main-content step-<?php echo esc_attr( $final_causerie->data['current_step'] ); ?>">
-			<h2>
+			<h2 class="causerie-title">
 				<strong><?php echo esc_html( $final_causerie->data['unique_identifier'] . ' ' . $final_causerie->data['second_identifier'] ); ?></strong>
 				<span><?php echo esc_html( $final_causerie->data['title'] ); ?></span>
 				<span><?php echo esc_html( $final_causerie->data['risk_category']->data['name'] ); ?></span>
 			</h2>
 
-			<p><?php echo esc_html( $final_causerie->data['content'] ); ?></p>
+			<p class="causerie-description"><?php echo nl2br( $final_causerie->data['content'] ); ?></p>
 
 			<div class="ajax-content">
 				<?php
@@ -50,6 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'main_causerie'  => $main_causerie,
 						'final_causerie' => $final_causerie,
 						'all_signed'     => $all_signed,
+						'user'           => $user,
 						'signature_id'   => 0,
 					) );
 				else :

@@ -2,7 +2,7 @@
 /**
  * Les actions relatives aux accident de travail benin (ODT)
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk
@@ -41,8 +41,8 @@ class Accident_Travail_Benin_Action {
 			'posts_per_page' => 1,
 		), true );
 
-		$response = Accident_Travail_Benin_Class::g()->prepare_document( $accident_id );
-
+		$accident = Accident_Class::g()->get( array( 'id' => $accident_id ), true );
+		$response = Accident_Travail_Benin_Class::g()->prepare_document( $accident );
 		Accident_Travail_Benin_Class::g()->create_document( $response['document']->data['id'] );
 	}
 

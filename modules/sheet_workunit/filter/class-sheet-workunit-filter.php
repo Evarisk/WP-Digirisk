@@ -93,10 +93,10 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 	 *
 	 * @since 7.0.0
 	 *
-	 * @param  array         $data    Les données pour le registre des AT bénins.
-	 * @param  Society_Model $society Les données de la société.
+	 * @param  array $data Les données pour le registre des AT bénins.
+	 * @param  array $args Les données supplémentaire utiles pour la génération de fiche de poste.
 	 *
-	 * @return array                  Les données pour le registre des AT bénins modifié.
+	 * @return array       Les données pour le registre des AT bénins modifié.
 	 */
 	public function callback_digi_document_data( $data, $args ) {
 		$address = Society_Class::g()->get_address( $args['parent'] );

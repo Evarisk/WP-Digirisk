@@ -11,7 +11,7 @@ window.eoxiaJS.digirisk.riskCategory.init = function() {
 };
 
 window.eoxiaJS.digirisk.riskCategory.event = function() {
-	jQuery( document ).on( 'click', '.table .category-danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
+	jQuery( document ).on( 'click', '.table .category-danger .item, .wpeo-table .category-danger .item', window.eoxiaJS.digirisk.riskCategory.selectDanger );
 };
 
 /**

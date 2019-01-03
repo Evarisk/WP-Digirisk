@@ -32,6 +32,10 @@
 	ul, li {
 		margin: 0;
 	}
+
+	&.causerie-wrap {
+		@import "page/causerie/causerie";
+	}
 }
 .wpeo-wrap {
 	// @import "normalize";
@@ -47,3 +51,22 @@
 }
 
 @import "module/module";
+
+.wpeo-modal.modal-signature .modal-container .modal-content {
+	overflow: hidden;
+}
+
+canvas {
+	border: solid black 1px;
+	height: 100%;
+}
+
+.causerie-wrap {
+	.float.right {
+		float: right;
+	}
+}
+
+.digirisk-wrap .comment-container .comment .content {
+	word-break: break-word;
+}

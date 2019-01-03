@@ -2,25 +2,26 @@
 /**
  * Affiches le tableau de donnée
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
- * @since 6.2.6.0
- * @version 6.2.6.0
- * @copyright 2015-2017 Evarisk
+ * @author Evarisk <dev@evarisk.com>
+ * @since 6.2.6
+ * @copyright 2015-2019 Evarisk
  * @package society
  * @subpackage view
  */
 
 namespace digi;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} ?>
 
 <table class="table addded-risks">
 	<thead>
 		<tr>
-			<th>Date de création</th>
-			<th class="w100">Ref</th>
-			<th class="w50">Risque</th>
-			<th class="w50">Quot.</th>
+			<th><?php esc_html_e( 'Date de création', 'digirisk' ); ?></th>
+			<th class="w100"><?php esc_html_e( 'Ref', 'digirisk' ); ?></th>
+			<th class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
+			<th class="w50"><?php esc_html_e( 'Quot.', 'digirisk' ); ?></th>
 		</tr>
 	</thead>
 

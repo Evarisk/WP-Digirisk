@@ -42,27 +42,24 @@ class Causerie_Action {
 
 		$id               = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 		$title            = ! empty( $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) : '';
-		$description      = ! empty( $_POST['description'] ) ? sanitize_text_field( $_POST['description'] ) : '';
+		$description      = ! empty( $_POST['description'] ) ? $_POST['description'] : '';
 		$category_risk_id = ! empty( $_POST['risk_category_id'] ) ? (int) $_POST['risk_category_id'] : 0;
 		$image_id         = ! empty( $_POST['image'] ) ? (int) $_POST['image'] : 0;
 
-		$causerie = Causerie_Class::g()->update( array(
-			'id'       => $id,
-			'title'    => $title,
-			'content'  => $description,
-			'taxonomy' => array(
-				'digi-category-risk' => array( $category_risk_id ),
-			),
-		) );
+		$causerie = Causerie_Class::g()->get( array( 'id' => $id ), true );
 
-		if ( ! empty( $image_id ) && empty( $causerie->data['thumbnail_id'] ) ) {
+		$causerie->data['title']                            = $title;
+		$causerie->data['content']                          = $description;
+		$causerie->data['taxonomy']['digi-category-risk'][] = $category_risk_id;
+
+		if ( empty( $id ) && ! empty( $image_id ) && empty( $causerie->data['thumbnail_id'] ) ) {
 			$causerie->data['thumbnail_id']                      = (int) $image_id;
 			$causerie->data['associated_document_id']['image'][] = (int) $image_id;
 		}
 
-		Causerie_Class::g()->update( $causerie->data );
-
-		// Sheet_Causerie_Class::g()->generate( $causerie->data['id'] );
+		$causerie = Causerie_Class::g()->update( $causerie->data );
+		$response = Sheet_Causerie_Class::g()->prepare_document( $causerie );
+		Sheet_Causerie_Class::g()->create_document( $response['document']->data['id'] );
 
 		ob_start();
 		Causerie_Page_Class::g()->display_form();

@@ -46,7 +46,8 @@ class Registre_Accident_Travail_Benin_Action {
 			wp_send_json_error();
 		}
 
-		$response = Registre_AT_Benin_Class::g()->prepare_document( $society_id );
+		$society  = Society_Class::g()->show_by_type( $society_id );
+		$response = Registre_AT_Benin_Class::g()->prepare_document( $society );
 
 		Registre_AT_Benin_Class::g()->create_document( $response['document']->data['id'] );
 

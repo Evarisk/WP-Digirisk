@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<ul>
+<ul class="causerie-stats wpeo-gridlayout grid-3">
 	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->data['number_time_realized'] ), 'digirisk' ); ?></li>
 	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->data['number_participants'] ), 'digirisk' ); ?></li>
 
@@ -49,11 +49,12 @@ global $eo_search; ?>
 			</td>
 
 			<?php if ( empty( $final_causerie->data['former']['signature_id'] ) ) : ?>
-				<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du formateur est obligatoire', 'digirisk' ); ?>">
-					<div class="button blue disabled wpeo-modal-event tooltip hover" aria-label="<?php esc_attr_e( 'Veuillez sélectionner un formateur avant de signer', 'digirisk' ); ?>"
+				<td class="signature w50 padding">
+					<div class="wpeo-button button-blue wpeo-modal-event <?php echo empty( $final_causerie->data['former']['user_id'] ) ? 'button-disable' : ''; ?>"
+						data-title="<?php echo empty( $user ) ? '' : 'Signature de l\'utilisateur: ' . $user->data->display_name; ?>"
 						data-parent="signature"
 						data-target="modal-signature">
-						<span><?php esc_html_e( 'Signé', 'digirisk' ); ?></span>
+						<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
 					</div>
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
@@ -68,11 +69,11 @@ global $eo_search; ?>
 	</tbody>
 </table>
 
-<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>" class="button grey">
+<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>" class="wpeo-button button-grey">
 	<span><?php esc_html_e( 'Retour', 'digirisk' ); ?></span>
 </a>
 
-<div class="button blue action-input float right disabled"
+<div class="wpeo-button button-blue action-input float right <?php echo ( empty( $final_causerie->data['former']['user_id'] ) && empty( $final_causerie->data['former']['signature_id'] ) ) ? 'button-disable' : ''; ?>"
 	data-parent="ajax-content"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"

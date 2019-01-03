@@ -24,9 +24,25 @@ class Causerie_Intervention_Action {
 	 * Constructeur.
 	 */
 	public function __construct() {
+		add_action( 'wp_ajax_causerie_save_former', array( $this, 'callback_save_former' ) );
 		add_action( 'wp_ajax_causerie_save_participant', array( $this, 'callback_causerie_save_participant' ) );
 		add_action( 'wp_ajax_causerie_save_signature', array( $this, 'callback_causerie_save_signature' ) );
 		add_action( 'wp_ajax_causerie_delete_participant', array( $this, 'callback_causerie_delete_participant' ) );
+	}
+
+	public function callback_save_former() {
+		$id        = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+		$former_id = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0; // WPCS: input var ok.
+
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$final_causerie->data['former']['user_id'] = $former_id;
+		Causerie_Intervention_Class::g()->update( $final_causerie->data );
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -49,6 +65,8 @@ class Causerie_Intervention_Action {
 		$final_causerie = Causerie_Intervention_Class::g()->add_participant( $final_causerie, $participant_id );
 
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
+
+		Causerie_Intervention_Page_Class::g()->register_search( null, null );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
@@ -88,7 +106,6 @@ class Causerie_Intervention_Action {
 		}
 
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $causerie_id ), true );
-
 		$final_causerie = Causerie_Intervention_Class::g()->add_signature( $final_causerie, $participant_id, $signature_data, $is_former );
 
 		$current_participant = null;
@@ -146,15 +163,15 @@ class Causerie_Intervention_Action {
 			wp_send_json_error();
 		}
 
-		if ( ! empty( $causerie_intervention->participants ) ) {
-			foreach ( $causerie_intervention->participants as $key => $participant ) {
+		if ( ! empty( $causerie_intervention->data['participants'] ) ) {
+			foreach ( $causerie_intervention->data['participants'] as $key => $participant ) {
 				if ( $user_id === $participant['user_id'] ) {
-					unset( $causerie_intervention->participants[ $key ] );
+					unset( $causerie_intervention->data['participants'][ $key ] );
 				}
 			}
 		}
 
-		Causerie_Intervention_Class::g()->update( $causerie_intervention );
+		Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(

@@ -6,7 +6,13 @@
  */
 window.eoxiaJS.digirisk.risk = {};
 
-window.eoxiaJS.digirisk.risk.init = function() {};
+window.eoxiaJS.digirisk.risk.init = function() {
+	window.eoxiaJS.digirisk.risk.refresh();
+};
+
+window.eoxiaJS.digirisk.risk.refresh = function() {
+	autosize(document.querySelectorAll('textarea'));
+};
 
 window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();
@@ -14,6 +20,7 @@ window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) 
 
 window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
   element.closest( 'tr' ).replaceWith( response.data.template );
+  window.eoxiaJS.digirisk.risk.refresh();
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
@@ -62,4 +69,17 @@ window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, resp
 window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
 	triggeredElement.closest( 'table' ).removeClass( 'loading' );
 	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
+};
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "to_society_id".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 7.1.0
+ */
+window.eoxiaJS.digirisk.risk.movedRiskSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( '.risk-row' ).fadeOut();
 };

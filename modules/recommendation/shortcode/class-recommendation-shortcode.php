@@ -63,7 +63,7 @@ class Recommendation_Shortcode {
 
 		$recommendation            = array();
 		$recommendation_categories = Recommendation_Category::g()->get( array(
-			'orderby'    => 'term_id',
+			'orderby' => 'term_id',
 		) );
 
 		$display = 'dropdown';

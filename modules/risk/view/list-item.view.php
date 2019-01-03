@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="view"]' ); ?>
 	</td>
 	<td data-title="Action">
-		<div class="action wpeo-gridlayout grid-gap-0 grid-3">
+		<div class="action wpeo-gridlayout grid-gap-0 grid-4">
 			<div 	class="wpeo-modal-event wpeo-button button-transparent button-square-50"
 					data-parent="risk-row"
 					data-class="wpeo-wrap corrective-task"
@@ -60,6 +60,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
 						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
 						data-action="delete_risk"><i class="button-icon far fa-times"></i></div>
+
+			<div class="wpeo-dropdown dropdown-right">
+				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon far fa-ellipsis-v"></i></div>
+				<div class="dropdown-content" style="width: 400px;">
+					<div class="wpeo-form">
+						<div style="float: left; width: 320px;">
+							<?php $eo_search->display( 'to_society_id' ); ?>
+						</div>
+						<div style="float: right; margin-top: 30px;" class="wpeo-button button-blue button-square-50 action-input"
+							data-risk-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
+							data-action="move_risk_to"
+							data-parent="wpeo-form"><?php esc_html_e( 'OK', 'digirisk' ); ?></div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</td>
 </tr>

@@ -2,7 +2,7 @@
 /**
  * Affichage principale pour les diffusions d'informations
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.4.0
  * @version 7.0.0
  * @copyright 2015-2018 Evarisk

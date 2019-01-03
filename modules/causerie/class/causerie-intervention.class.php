@@ -93,13 +93,12 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 		$duplicated_causerie->data['second_identifier'] = $this->element_prefix . $duplicated_causerie->data['second_unique_key'];
 		$duplicated_causerie->data['type']              = $this->get_type();
 
-		$tmp_image_ids = $duplicated_causerie->data['associated_document_id']['image'];
+		$tmp_image_ids = $causerie->data['associated_document_id']['image'];
 		// Supprimes les liaisons avec les images, qui seront par la suite dupliquées.
 		unset( $duplicated_causerie->data['associated_document_id']['image'] );
 		$duplicated_causerie->data['thumbnail_id'] = 0;
 
 		$duplicated_causerie = $this->update( $duplicated_causerie->data );
-
 		// Duplication des images.
 		if ( ! empty( $tmp_image_ids ) ) {
 			$duplicated_causerie->data['associated_document_id']['image'] = array();
@@ -135,10 +134,10 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 
 		$final_causeries = get_posts( array(
 			'post_parent'    => $causerie_id,
+			'post_status'    => array( 'publish', 'inherit', 'any' ),
 			'posts_per_page' => -1,
 			'post_type'      => $this->get_type(),
 		) );
-
 		$unique_key = count( $final_causeries ) + 1;
 
 		return $unique_key;

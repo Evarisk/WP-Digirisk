@@ -2,7 +2,7 @@
 /**
  * Gestion des actions dans les commentaires
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.0.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -56,7 +56,7 @@ class Comment_Action {
 			'post_id'   => (int) $_POST['list_comment'][0]['post_id'],
 			'author_id' => (int) $_POST['list_comment'][0]['author_id'],
 			'date'      => ! empty( $_POST['list_comment'][0]['date'] ) ? sanitize_text_field( $_POST['list_comment'][0]['date'] ) : current_time( 'mysql' ),
-			'content'   => sanitize_text_field( $_POST['list_comment'][0]['content'] ),
+			'content'   => $_POST['list_comment'][0]['content'],
 		);
 
 		$object = $model_name::g()->update( $comment );

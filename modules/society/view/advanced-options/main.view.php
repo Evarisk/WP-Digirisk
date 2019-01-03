@@ -2,7 +2,7 @@
 /**
  * Ajoutes le champs pour déplacer une societé vers une autre.
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.5
  * @version 6.3.0
  * @copyright 2015-2017 Evarisk

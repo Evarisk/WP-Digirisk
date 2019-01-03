@@ -94,7 +94,7 @@ class Causerie_Page_Action {
 		if ( ! empty( $causerie_intervention->participants ) ) {
 			foreach ( $causerie_intervention->participants as &$participant ) {
 				if ( ! empty( $participant['user_id'] ) ) {
-					$participant['rendered'] = User_Digi_Class::g()->get( array( 'id' => $participant['user_id'] ), true );
+					$participant['rendered'] = User_Class::g()->get( array( 'id' => $participant['user_id'] ), true );
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 /**
  * Apelle la vue list.view du module accident
  *
- * @author Jimmy Latour <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.3.0
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk

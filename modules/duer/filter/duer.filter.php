@@ -2,7 +2,7 @@
 /**
  * Les filtres relatives au DUER
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.5
  * @version 6.4.4
  * @copyright 2015-2017 Evarisk
@@ -72,7 +72,7 @@ class DUER_Filter extends Identifier_Filter {
 		$user = wp_get_current_user();
 
 		$data['nomEntreprise']      = $society->data['title'];
-		$data['emetteurDUER']       = $user->display_name;
+		$data['emetteurDUER']       = ! empty( $user->display_name ) ? $user->display_name : '';
 		$data['destinataireDUER']   = $args['destinataire_duer'];
 		$data['telephone']          = ! empty( $society->data['contact']['phone'] ) ? end( $society->data['contact']['phone'] ) : '';
 		$data['portable']           = '';
@@ -106,12 +106,12 @@ class DUER_Filter extends Identifier_Filter {
 		$level_risk = array( '1', '2', '3', '4' );
 
 		foreach( $level_risk as $level ) {
-			$data[ 'risk' . $level ] = array(
-				'type'  => 'segment',
-				'value' => array(),
-			);
+			// $data[ 'risk' . $level ] = array(
+			// 	'type'  => 'segment',
+			// 	'value' => array(),
+			// );
 
-			$data[ 'planDactionRisq' . $level ] = array(
+			$data[ 'risq' . $level ] = array(
 				'type'  => 'segment',
 				'value' => array(),
 			);
@@ -126,30 +126,7 @@ class DUER_Filter extends Identifier_Filter {
 	}
 
 	public function callback_hierarchy( $data, $args ) {
-		$societies = Society_Class::g()->get_societies_in( $args['parent_id'], 'inherit' );
-
-		if ( ! empty( $societies ) ) {
-			foreach ( $societies as $society ) {
-
-				$tabulation = '';
-
-				for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
-					$tabulation .= '-';
-				}
-
-				$data['elementParHierarchie']['value'][] = array(
-					'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
-				);
-
-				$args['parent_id'] = $society->data['id'];
-
-				$data = $this->callback_hierarchy( $data, $args );
-
-				$tabulation .= '-';
-			}
-		}
-
-		return $data;
+		return DUER_Class::g()->get_hierarchy_duer( $data, $args );
 	}
 
 	public function callback_risks( $data, $args ) {
@@ -172,34 +149,37 @@ class DUER_Filter extends Identifier_Filter {
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				$output_comment = '';
+				if ( ! empty( $risk->data['parent'] ) && ! empty( $risk->data['evaluation'] ) && ! empty( $risk->data['risk_category'] ) ) {
+					$output_comment = '';
 
-				if ( ! empty( $risk->data['comment'] ) ) {
-					foreach ( $risk->data['comment'] as $comment ) {
-						$output_comment .= point_to_string( $comment );
+					if ( ! empty( $risk->data['comment'] ) ) {
+						foreach ( $risk->data['comment'] as $comment ) {
+							$output_comment .= point_to_string( $comment ) . '
+	';
+						}
 					}
+
+					$risk = Corrective_Task_Class::g()->output_odt( $risk );
+
+					$risk_data = array(
+						'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+						'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
+						'quotationRisque'             => $risk->data['current_equivalence'],
+						'nomDanger'                   => $risk->data['risk_category']->data['name'],
+						'commentaireRisque'           => $output_comment,
+						'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+						'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
+					);
+
+					// $data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
+					$data[ 'risq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
+
+					if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
+						$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
+					}
+
+					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 				}
-
-				$risk = Corrective_Task_Class::g()->output_odt( $risk );
-
-				$risk_data = array(
-					'nomElement'                  => $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
-					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
-					'quotationRisque'             => $risk->data['current_equivalence'],
-					'nomDanger'                   => $risk->data['risk_category']->data['name'],
-					'commentaireRisque'           => $output_comment,
-					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
-					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
-				);
-
-				$data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
-				$data[ 'planDactionRisq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
-
-				if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
-					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
-				}
-
-				$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 			}
 		}
 

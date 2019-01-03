@@ -82,7 +82,9 @@ class Digirisk extends \eoxia\Singleton_Util {
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			),
+			'verify_ssl' => false,
 		) );
+
 
 		$result = __( 'Aucune note de mise à jour pour cette version.', 'digirisk' );
 

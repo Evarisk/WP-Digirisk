@@ -1,7 +1,11 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
+<<<<<<< HEAD
 	"version": "7.0.2",
+=======
+	"version": "7.1.0",
+>>>>>>> 7.1.0
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
@@ -37,6 +41,7 @@
 
 		"modules/update_manager/update_manager.config.json",
 		"modules/historic/historic.config.json",
+		"modules/child/child.config.json",
 
 		"modules/address/address.config.json",
 		"modules/society/society.config.json",

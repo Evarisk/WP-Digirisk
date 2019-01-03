@@ -2,10 +2,9 @@
 /**
  * Gestion de l'export en CSV des risques
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.6
- * @version 6.4.0
- * @copyright 2015-2017 Evarisk
+ * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
 
@@ -37,9 +36,9 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 	 * Constructeur de la classe. Doit être présent même si vide pour coller à la définition "abstract" des parents / Class constructor. Must be present even if empty for matchin with "abstract" definition of ancestors
 	 */
 	function construct() {
-		/** Définition des chemins vers les exports / Define path where export will be saved */
-		$wp_upload_dir = wp_upload_dir();
+		$wp_upload_dir          = wp_upload_dir();
 		$this->export_directory = $wp_upload_dir['basedir'] . '/digirisk/export/';
+
 		wp_mkdir_p( $this->export_directory );
 	}
 
@@ -51,33 +50,32 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 	 * @return array
 	 *
 	 * @since 6.2.6
-	 * @version 6.4.0
 	 */
 	public function exec( $args ) {
 		if ( empty( $args['filepath'] ) ) {
-			$upload_dir = wp_upload_dir();
-			$current_time = current_time( 'YmdHis' );
-			$args['filepath'] = $this->export_directory . $current_time . '_export_risks.csv';
-			$args['filename'] = $current_time . '_export_risks.csv';
+			$upload_dir          = wp_upload_dir();
+			$current_time        = current_time( 'YmdHis' );
+			$args['filepath']    = $this->export_directory . $current_time . '_export_risks.csv';
+			$args['filename']    = $current_time . '_export_risks.csv';
 			$args['url_to_file'] = $upload_dir['baseurl'] . '/digirisk/export/' . $current_time . '_export_risks.csv';
 		}
 
 		if ( empty( $args['number_risks'] ) ) {
 			$args['number_risks'] = count( get_posts( array(
-				'post_type' => Risk_Class::g()->get_post_type(),
+				'post_type'      => Risk_Class::g()->get_type(),
 				'posts_per_page' => -1,
-				'meta_key' => '_wpdigi_preset',
-				'meta_value' => 1,
-				'meta_compare' => '!=',
+				'meta_key'       => '_wpdigi_preset',
+				'meta_value'     => 1,
+				'meta_compare'   => '!=',
 			) ) );
 		}
 
 		$risks = Risk_Class::g()->get( array(
-			'offset' => $args['offset'],
+			'offset'         => $args['offset'],
 			'posts_per_page' => $this->posts_per_page,
-			'meta_key' => '_wpdigi_preset',
-			'meta_value' => 1,
-			'meta_compare' => '!=',
+			'meta_key'       => '_wpdigi_preset',
+			'meta_value'     => 1,
+			'meta_compare'   => '!=',
 		) );
 
 		// Au augmente le offset pour la prochaine requête.
@@ -108,11 +106,11 @@ class Export_CSV_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
 				$risk_data_to_export = array(
-					'unique_identifier' => $risk->unique_identifier . ' - ' . $risk->evaluation->unique_identifier,
-					'risque' => $risk->risk_category->name,
-					'cotation' => $risk->evaluation->risk_level['equivalence'],
-					'comment_date' => $risk->comment[0]->date['date_input']['fr_FR']['date'],
-					'comment_content' => $risk->comment[0]->content,
+					'unique_identifier' => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
+					'risque'            => $risk->data['risk_category']->data['name'],
+					'cotation'          => $risk->data['evaluation']->data['equivalence'],
+					'comment_date'      => $risk->data['comment'][0]->data['date']['rendered']['date'],
+					'comment_content'   => $risk->data['comment'][0]->data['content'],
 				);
 
 				fputcsv( $csv_file, $risk_data_to_export, ',' );

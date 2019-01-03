@@ -36,6 +36,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
 		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
 		add_action( 'wp_ajax_delete_user', array( $this, 'ajax_delete_user' ) );
+		add_action( 'wp_ajax_load_user_details', array( $this, 'callback_load_user_details' ) );
 	}
 
 	/**
@@ -86,7 +87,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 			'email'     => $email,
 		);
 
-		$update_state = User_Digi_Class::g()->update( $user_args );
+		$update_state = User_Class::g()->update( $user_args );
 
 		$error = is_wp_error( $update_state );
 
@@ -116,7 +117,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 			wp_send_json_error();
 		}
 
-		$user = User_Digi_Class::g()->get( array( 'id' => $id ), true );
+		$user = User_Class::g()->get( array( 'id' => $id ), true );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'item-edit', array( 'user' => $user ) );
@@ -148,6 +149,58 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 			'namespace'        => 'digirisk',
 			'module'           => 'userDashboard',
 			'callback_success' => 'deletedUserSuccess',
+		) );
+	}
+
+	/**
+	 * Récupères les détails de l'utilisateur.
+	 *
+	 * @since 7.1.0
+	 */
+	public function callback_load_user_details() {
+		check_ajax_referer( 'load_user_details' );
+		$user_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		if ( empty( $user_id ) ) {
+			wp_send_json_error();
+		}
+
+		$user            = \eoxia\User_Class::g()->get( array( 'id' => $user_id ), true );
+		$groups          = Group_Class::g()->get( array(
+			'posts_per_page' => -1,
+		) );
+		$groups          = array_merge( $groups, Workunit_Class::g()->get( array(
+			'posts_per_page' => -1,
+		) ) );
+		$affected_groups = array();
+
+		if ( ! empty( $groups ) ) {
+			foreach ( $groups as $group ) {
+				if ( ! empty( $group->data['user_info']['affected_id']['evaluator'] ) ) {
+					foreach ( $group->data['user_info']['affected_id']['evaluator'] as $user_affected_id => $affected_info ) {
+						if ( $user_affected_id === $user_id ) {
+							$affected_groups[] = $group;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'user-detail/modal/main', array(
+			'user'            => $user,
+			'affected_groups' => $affected_groups,
+		) );
+		$view = ob_get_clean();
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'user-detail/modal/button' );
+		$button_view = ob_get_clean();
+		wp_send_json_success( array(
+			'modal_title'  => 'Information de l\'utilisateur: ' . $user->data['displayname'],
+			'view'         => $view,
+			'buttons_view' => $button_view,
 		) );
 	}
 }

@@ -23,7 +23,15 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
 	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td>
-		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
+		<div class="action wpeo-gridlayout grid-3 grid-gap-0">
+			<div
+				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
+				data-action="load_user_details"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_user_details' ) ); ?>"
+				class="wpeo-button button-square-50 button-transparent wpeo-modal-event">
+				<i class="button-icon fas fa-eye"></i>
+			</div>
+
 			<div
 				data-id="<?php echo esc_attr( $user->data['id'] ); ?>"
 				data-action="load_user"

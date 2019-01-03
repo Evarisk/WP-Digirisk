@@ -85,7 +85,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		$data['photoDefault'] = '';
 
 		if ( ! empty( $args['parent']->data['thumbnail_id'] ) ) {
-			$data['photoDefault'] = Document_Util_Class::g()->get_picture( ! empty( $args['parent']->data['thumbnail_id'] ) ? $args['parent']->data['thumbnail_id'] : 0, 6, 'medium' );
+			$data['photoDefault'] = Document_Util_Class::g()->get_picture( ! empty( $args['parent']->data['thumbnail_id'] ) ? $args['parent']->data['thumbnail_id'] : 0, 9, 'medium' );
 		}
 
 		return $data;
@@ -97,7 +97,7 @@ class Document_Filter extends \eoxia\Singleton_Util {
 		$data['risq4'] = array( 'type' => 'segment', 'value' => array() );
 		$data['risq3'] = array( 'type' => 'segment', 'value' => array() );
 		$data['risq2'] = array( 'type' => 'segment', 'value' => array() );
-		$data['risq1']   = array( 'type' => 'segment', 'value' => array() );
+		$data['risq1'] = array( 'type' => 'segment', 'value' => array() );
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {

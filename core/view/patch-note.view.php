@@ -29,7 +29,7 @@ $result = Digirisk::g()->get_patch_note(); ?>
 		<div class="notification-close action-attribute"
 			data-action="close_change_log"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'close_change_log' ) ); ?>"
-			data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>">><i class="far fa-times"></i></div>
+			data-version="<?php echo esc_attr( \eoxia\Config_Util::$init['digirisk']->version ); ?>"><i class="far fa-times"></i></div>
 	</div>
 
 	<div class="wpeo-modal patch-note">

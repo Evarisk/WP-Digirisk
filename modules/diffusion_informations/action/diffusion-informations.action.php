@@ -88,13 +88,13 @@ class Diffusion_Informations_Action {
 
 		$diffusion_information = Diffusion_Informations_Class::g()->update( $data );
 
-		$response = Diffusion_Informations_A3_Class::g()->prepare_document( $parent_id, array(
+		$response = Diffusion_Informations_A3_Class::g()->prepare_document( $element, array(
 			'diffusion_information' => $diffusion_information,
 		) );
 
 		Diffusion_Informations_A3_Class::g()->create_document( $response['document']->data['id'] );
 
-		$response = Diffusion_Informations_A4_Class::g()->prepare_document( $parent_id, array(
+		$response = Diffusion_Informations_A4_Class::g()->prepare_document( $element, array(
 			'diffusion_information' => $diffusion_information,
 		) );
 

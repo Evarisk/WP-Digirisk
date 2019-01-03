@@ -24,9 +24,6 @@ class Update_Manager extends \Eoxia\Singleton_Util {
 	 * Constructeur obligatoire pour Singleton_Util
 	 *
 	 * @since 1.4.0
-	 * @version 1.4.0
-	 *
-	 * @return void
 	 */
 	protected function construct() {}
 
@@ -34,9 +31,6 @@ class Update_Manager extends \Eoxia\Singleton_Util {
 	 * Récupères les mises à jour en attente et appel la vue "main" du module "update_manager".
 	 *
 	 * @since 1.4.0
-	 * @version 1.4.0
-	 *
-	 * @return void
 	 */
 	public function display() {
 		\eoxia\View_Util::exec( 'eo-framework', 'wpeo_update_manager', 'main', array(

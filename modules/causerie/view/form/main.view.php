@@ -39,15 +39,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				endforeach;
 			endif;
 			?>
-		</tbody>
 
-		<tfoot>
 			<?php
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/item-edit', array(
 				'causerie' => $causerie_schema,
 			) );
 			?>
-		</tfoot>
+		</tbody>
 	</table>
 
 </div>

@@ -44,16 +44,18 @@ class Listing_Risk_Action {
 			wp_send_json_error();
 		}
 
+		$society = Society_Class::g()->show_by_type( $society_id );
+
 		switch ( $type ) {
 			case 'photos':
-				$response = Listing_Risk_Picture_Class::g()->prepare_document( $society_id, array(
+				$response = Listing_Risk_Picture_Class::g()->prepare_document( $society, array(
 					'type' => $type,
 				) );
 
 				Listing_Risk_Picture_Class::g()->create_document( $response['document']->data['id'] );
 				break;
 			case 'actions':
-				$response = Listing_Risk_Corrective_Task_Class::g()->prepare_document( $society_id, array(
+				$response = Listing_Risk_Corrective_Task_Class::g()->prepare_document( $society, array(
 					'type' => $type,
 				) );
 
@@ -65,6 +67,7 @@ class Listing_Risk_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'listingRisk',
 			'callback_success' => 'generatedListingRiskSuccess',
+			'type'             => $type,
 		) );
 	}
 }

@@ -25,7 +25,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\User_Digi_Model';
+	protected $model_name = '\digi\User_Model';
 
 	/**
 	 * La clé principale du modèle
@@ -85,13 +85,13 @@ class Evaluator_Class extends \eoxia\User_Class {
 			),
 		);
 
-		$evaluators = User_Digi_Class::g()->get( $args_where_evaluator );
+		$evaluators = User_Class::g()->get( $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator                = count( User_Digi_Class::g()->get( $args_where_evaluator ) );
+		$count_evaluator                = count( User_Class::g()->get( $args_where_evaluator ) );
 
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
@@ -140,7 +140,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 				if ( ! empty( $array_value ) ) {
 					foreach ( $array_value as $index => $sub_array_value ) {
 						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {
-							$evaluator = User_Digi_Class::g()->get( array( 'id' => $evaluator_id ), true );
+							$evaluator = User_Class::g()->get( array( 'id' => $evaluator_id ), true );
 							$list_evaluator[ $evaluator_id ][ $index ]['user_info']              = $evaluator;
 							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']       = $sub_array_value;
 							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']['id'] = $index;

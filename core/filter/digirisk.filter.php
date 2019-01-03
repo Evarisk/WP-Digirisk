@@ -2,7 +2,7 @@
 /**
  * Gestion des filtres principaux de l'application.
  *
- * @author Evarisk <jimmy@evarisk.com>
+ * @author Evarisk <dev@evarisk.com>
  * @since 6.2.5
  * @version 6.3.1
  * @copyright 2015-2017 Evarisk

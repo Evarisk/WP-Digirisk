@@ -40,16 +40,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 		?>
 	</td>
-	<td data-title="Titre et description" class="padding wpeo-grid grid-1">
-		<span><?php echo esc_html( $causerie->data['title'] ); ?></span>
-		<span><?php echo esc_html( $causerie->data['content'] ); ?></span>
+	<td data-title="Titre et description" class="padding causerie-description">
+		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
+		<span class="row-subtitle"><?php echo nl2br( $causerie->data['content'] ); ?></span>
 	</td>
 	<td>
-		<div class="action wpeo-gridlayout w1">
+		<div class="action wpeo-gridlayout grid-1 grid-gap-0">
 			<?php if ( Causerie_Class::g()->get_type() === $causerie->data['type'] ) : ?>
-				<a class="button light w50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
+				<a class="wpeo-button light button-square-50 edit" href="<?php echo esc_attr( admin_url( 'admin-post.php?action=start_causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php else : ?>
-				<a class="button light w50 edit tooltip hover" aria-label="<?php echo esc_attr_e( 'Reprendre la causerie', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
+				<a class="wpeo-button light button-square-50 edit wpeo-tooltip-event hover" aria-label="<?php echo esc_attr_e( 'Reprendre la causerie', 'digirisk' ); ?>" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie->data['id'] ) ); ?>"><i class="icon fa fa-play"></i></a>
 			<?php endif; ?>
 		</div>
 	</td>

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 </div>
 
-<div class="button blue float right action-attribute"
+<div class="wpeo-button button-blue alignright action-attribute"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"
 	data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>">

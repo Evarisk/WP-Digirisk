@@ -140,3 +140,14 @@
 		}
 	}
 }
+
+@media ( max-width: $media__medium ) {
+	.table {
+		.comment-container {
+			.comment textarea {
+				min-width: 100px;
+				height: 150px;
+			}
+		}
+	}
+}

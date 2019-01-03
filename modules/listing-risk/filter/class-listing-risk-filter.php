@@ -27,32 +27,13 @@ class Listing_Risk_Filter {
 	 * @since 6.5.0
 	 */
 	public function __construct() {
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 7, 2 );
-
 		add_filter( 'eo_model_listing_risk_action_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'eo_model_listing_risk_picture_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'digi_listing_risk_action_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 		add_filter( 'digi_listing_risk_picture_document_data', array( $this, 'callback_digi_document_data' ), 12, 2 );
 	}
 
-	/**
-	 * Ajoutes une entrée dans le tableau $list_tab pour la société.
-	 *
-	 * @param  array   $list_tab  La liste des filtres.
-	 * @param  integer $id        L'ID de la société.
-	 * @return array              La liste des filtres + le filtre ajouté par cette méthode.
-	 *
-	 * @since 6.4.4
-	 */
-	public function callback_digi_tab( $list_tab, $id ) {
-		$list_tab['digi-group']['listing-risk'] = array(
-			'type'  => 'text',
-			'text'  => __( 'Listing des risques ', 'digirisk' ),
-			'title' => __( 'Listing des risques', 'digirisk' ),
-		);
 
-		return $list_tab;
-	}
 
 	/**
 	 * Ajoutes le titre du document ainsi que le GUID et le chemin vers celui-ci.

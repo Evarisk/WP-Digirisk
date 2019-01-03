@@ -215,6 +215,7 @@ window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredEl
 	}
 
 	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.content_view );
+	window.eoxiaJS.digirisk.risk.refresh();
 };
 
 /**
@@ -231,4 +232,5 @@ window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredEl
 window.eoxiaJS.digirisk.navigation.loadedSocietySuccess = function( element, response ) {
 	jQuery( '.digirisk-wrap .main-container' ).replaceWith( response.data.view );
 	jQuery( '.digirisk-wrap .navigation-container' ).removeClass( 'active' );
+	window.eoxiaJS.digirisk.risk.refresh();
 };

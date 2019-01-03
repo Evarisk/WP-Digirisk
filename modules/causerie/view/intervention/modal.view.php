@@ -43,10 +43,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- Footer -->
 
 		<div class="modal-footer">
-			<a class="button grey button-uppercase modal-close"><span>Annuler</span></a>
+			<a class="wpeo-button button-grey button-uppercase modal-close"><span>Annuler</span></a>
 
 			<?php if ( isset( $action ) ) : ?>
-				<a class="button blue button-uppercase action-input"
+				<a class="wpeo-button button-blue button-uppercase action-input"
 					data-namespace="digirisk"
 					data-module="causerie"
 					data-before-method="applySignature"
@@ -54,7 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-action="<?php echo esc_attr( $action ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( $action ) ); ?>"><span>Valider</span></a>
 			<?php else : ?>
-					<a class="button blue button-uppercase modal-close"><span>Valider</span></a>
+					<a class="wpeo-button button-blue button-uppercase modal-close"><span>Valider</span></a>
 			<?php endif; ?>
 
 		</div>

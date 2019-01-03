@@ -537,13 +537,13 @@ class Update_7000 {
 				$document_meta = get_post_meta( $duer->ID, 'document_meta', true );
 				$document_meta = \eoxia\JSON_Util::g()->decode( $document_meta );
 
-				if ( ! empty ( $document_meta['dateGeneration']['date_input'] ) ) {
+				if ( ! empty ( $document_meta['dateGeneration']['date_input'] ) && ! empty( $document_meta['dateGeneration']['date_input']['fr_FR'] ) && ! empty( $document_meta['dateGeneration']['date_input']['fr_FR']['date_time'] ) ) {
 					$document_meta['dateGeneration'] = preg_replace('#(\d{2})/(\d{2})/(\d{4})\s(.*)#', '$3-$2-$1 $4', $document_meta['dateGeneration']['date_input']['fr_FR']['date_time'] );
 				}
-				if ( ! empty ( $document_meta['dateDebutAudit']['date_input'] ) ) {
+				if ( ! empty ( $document_meta['dateDebutAudit']['date_input'] ) && ! empty( $document_meta['dateDebutAudit']['date_input']['fr_FR'] ) && ! empty( $document_meta['dateDebutAudit']['date_input']['fr_FR']['date_time'] ) ) {
 					$document_meta['dateDebutAudit'] = preg_replace('#(\d{2})/(\d{2})/(\d{4})\s(.*)#', '$3-$2-$1 $4', $document_meta['dateDebutAudit']['date_input']['fr_FR']['date_time'] );
 				}
-				if ( ! empty ( $document_meta['dateFinAudit']['date_input'] ) ) {
+				if ( ! empty ( $document_meta['dateFinAudit']['date_input'] ) && ! empty( $document_meta['dateFinAudit']['date_input']['fr_FR'] ) && ! empty( $document_meta['dateFinAudit']['date_input']['fr_FR']['date_time'] ) ) {
 					$document_meta['dateFinAudit'] = preg_replace('#(\d{2})/(\d{2})/(\d{4})\s(.*)#', '$3-$2-$1 $4', $document_meta['dateFinAudit']['date_input']['fr_FR']['date_time'] );
 				}
 
