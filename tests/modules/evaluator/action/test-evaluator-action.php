@@ -34,9 +34,11 @@ class Test_Evaluator_Action extends WP_Ajax_UnitTestCase {
 	 * @since 7.1.0
 	 */
 	public function test_ajax_assign_evaluator() {
+		$society = \digi\Society_Class::g()->update( array( 'post_title' => 'Test' ) );
+
 		try {
 			$_POST['_wpnonce']   = wp_create_nonce( 'edit_evaluator_assign' );
-			$_POST['element_id'] = 1;
+			$_POST['element_id'] = $society->data['id'];
 			$_POST['list_user'] = array(
 				array(
 					'duration' => 15,
