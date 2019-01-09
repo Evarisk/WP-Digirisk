@@ -77,6 +77,14 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.1.1 =
+
+Corrections
+
+* 25655 - Correction du bouton créer une unité de travail qui ne fonctionnait plus.
+* 25658 - Correction de la recherche des évaluateurs.
+* 25663 - Correction: Ajout des UT et GP avec une somme de cotation à 0 dans le tableau 3.7.5 du DUER.
+
 = Version 7.1.0 =
 
 Améliorations
