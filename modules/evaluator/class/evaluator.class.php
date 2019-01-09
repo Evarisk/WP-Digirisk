@@ -96,19 +96,19 @@ class Evaluator_Class extends \eoxia\User_Class {
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 
 		$eo_search->register_search( 'evaluator_to_assign', array(
-			'icon'    => 'fa-search',
-			'type'    => 'user',
-			'name'    => 'evaluator',
-			'action'  => 'display_evaluator_to_assign',
-			'post_id' => $element->data['id'],
+			'icon'        => 'fa-search',
+			'type'        => 'user',
+			'name'        => 'evaluator',
+			'next_action' => 'display_evaluator_to_assign',
+			'post_id'     => $element->data['id'],
 		) );
 
 		$eo_search->register_search( 'evaluator_affected', array(
-			'icon'    => 'fa-search',
-			'type'    => 'user',
-			'name'    => 'evaluator',
-			'action'  => 'display_evaluator_affected',
-			'post_id' => $element->data['id'],
+			'icon'        => 'fa-search',
+			'type'        => 'user',
+			'name'        => 'evaluator',
+			'next_action' => 'display_evaluator_affected',
+			'post_id'     => $element->data['id'],
 		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
