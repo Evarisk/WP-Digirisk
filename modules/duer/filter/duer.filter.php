@@ -33,6 +33,7 @@ class DUER_Filter extends Identifier_Filter {
 		add_filter( 'digi_duer_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
 		add_filter( 'digi_duer_document_data', array( $this, 'callback_hierarchy' ), 11, 2 );
 		add_filter( 'digi_duer_document_data', array( $this, 'callback_risks' ), 12, 2 );
+		add_filter( 'digi_duer_document_data', array( $this, 'callback_cotation_society' ), 13, 2 );
 	}
 
 	/**
@@ -106,11 +107,6 @@ class DUER_Filter extends Identifier_Filter {
 		$level_risk = array( '1', '2', '3', '4' );
 
 		foreach( $level_risk as $level ) {
-			// $data[ 'risk' . $level ] = array(
-			// 	'type'  => 'segment',
-			// 	'value' => array(),
-			// );
-
 			$data[ 'risq' . $level ] = array(
 				'type'  => 'segment',
 				'value' => array(),
@@ -121,6 +117,8 @@ class DUER_Filter extends Identifier_Filter {
 			'type'  => 'segment',
 			'value' => array(),
 		);
+
+		$data['already_inserted_id'] = array();
 
 		return $data;
 	}
@@ -171,7 +169,6 @@ class DUER_Filter extends Identifier_Filter {
 						'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
 					);
 
-					// $data[ 'risk' . $risk->data['evaluation']->data['scale'] ]['value'][]            = $risk_data;
 					$data[ 'risq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
 
 					if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
@@ -179,6 +176,7 @@ class DUER_Filter extends Identifier_Filter {
 					}
 
 					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
+					$data['already_inserted_id'][] = $risk->data['parent']->data['id'];
 				}
 			}
 		}
@@ -202,6 +200,10 @@ class DUER_Filter extends Identifier_Filter {
 		}
 
 		return $data;
+	}
+
+	public function callback_cotation_society( $data, $args ) {
+		return DUER_Class::g()->get_society_cotation( $data, $args );
 	}
 }
 

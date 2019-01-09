@@ -187,6 +187,42 @@ class DUER_Class extends Document_Class {
 
 		return $data;
 	}
+
+	public function get_society_cotation( $data, $args ) {
+		$societies = Society_Class::g()->get(
+			array(
+				'posts_per_page' => -1,
+				'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
+				'post_status'    => array( 'publish', 'inherit' ),
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'date'       => 'ASC',
+				),
+			)
+		);
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $society ) {
+				if ( ! in_array($society->data['id'], $data['already_inserted_id'] ) ) {
+					$data['risqueFiche']['value'][] = array(
+						'nomElement'      => $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+						'quotationTotale' => 0
+					);
+				}
+			}
+		}
+
+		if ( count( $data['risqueFiche']['value'] ) > 1 ) {
+			uasort( $data['risqueFiche']['value'], function( $a, $b ) {
+				if( $a['quotationTotale'] == $b['quotationTotale'] ) {
+					return 0;
+				}
+				return ( $a < $b ) ? -1 : 1;
+			} );
+		}
+
+		return $data;
+	}
 }
 
 DUER_Class::g();
