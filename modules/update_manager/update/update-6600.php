@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class managing updates for version 6.6.0
  */
 class Update_660 {
-	private $limit_update = 1;
+	private $limit_update = 50;
 	/**
 	 * Instanciate update for current version
 	 */
