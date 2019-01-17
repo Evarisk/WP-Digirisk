@@ -10,3 +10,107 @@
 		}
 	}
 }
+
+/** Responsive Table Causeries */
+@media ( max-width: 800px ) {
+	.table.closed-causerie {
+		display: block;
+		width: 100% !important;
+		height: auto !important;
+		font-size: 18px;
+
+		tr, thead, tbody, tfoot, td, th {
+			display: block;
+			width: 100% !important;
+			height: auto !important;
+		}
+		> thead {
+			display: none;
+		}
+
+		tr.item {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0.4em !important;
+
+			> td {
+				width: 100%;
+
+				&[data-title]:before {
+					display: block;
+					content: attr(data-title);
+					color: rgba(0,0,0,0.4);
+					padding-bottom: 0.4em;
+				}
+			}
+			> td:nth-of-type(1) { order: 1 }
+			> td:nth-of-type(2) { order: 4 }
+			> td:nth-of-type(3) { order: 5 }
+			> td:nth-of-type(4) { order: 3 }
+			> td:nth-of-type(5) { order: 6 }
+			> td:nth-of-type(6) { order: 7 }
+			> td:nth-of-type(7) { order: 8 }
+			> td:nth-of-type(8) { order: 9 }
+			> td:nth-of-type(9) { order: 2 }
+
+			/** Ref */
+			> td:nth-of-type(1) {
+				width: 30% !important;
+				margin: auto 0;
+			}
+			/** Actions */
+			> td:nth-of-type(9) {
+				width: 70% !important;
+				margin: auto 0;
+
+				.action {
+					display: block !important;
+					text-align: right;
+				}
+				.wpeo-button {
+					width: 50px !important;
+					border-radius: 50%;
+					min-width: 50px;
+					background: $color__grey;
+					border-color: $color__grey;
+					padding: 0 !important;
+					height: 50px !important;
+					display: inline-block;
+					text-align: center;
+					line-height: 44px;
+					font-size: 16px;
+					color: rgba(0,0,0,0.6);
+
+					[data-icon] {
+						line-height: 50px !important;
+					}
+				}
+			}
+			/** Titre */
+			> td:nth-of-type(4) {
+				padding: 0.4em 0 !important;
+
+				.row-title {
+					font-size: 26px !important;
+					font-weight: 600;
+				}
+			}
+			/** Photo et catégorie */
+			> td:nth-of-type(2), > td:nth-of-type(3), > td:nth-of-type(5), > td:nth-of-type(6), > td:nth-of-type(7), > td:nth-of-type(8) {
+				width: 50% !important;
+				text-align: center;
+				padding: 0.6em !important;
+
+				.media, .avatar, .wpeo-button-pulse {
+					margin: auto;
+				}
+			}
+			.wpeo-button-pulse {
+				width: 50px;
+				min-width: 50px;
+				height: 50px;
+				line-height: 50px;
+			}
+		}
+	}
+}
