@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</td>
 
-	<td data-title="Titre et description" class="padding causerie-description">
+	<td class="padding causerie-description">
 		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
 		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
 	</td>
@@ -75,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</td>
 
-	<td class="padding">
+	<td data-title="Formateur" class="padding">
 		<?php
 		if ( ! empty( $causerie->data['former']['user_id'] ) && ! empty( $causerie->data['former']['rendered'] ) ) :
 			$causerie->data['former']['rendered'] = (array) $causerie->data['former']['rendered'];
@@ -94,7 +94,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 	</td>
 
-	<td class="padding">
+	<td data-title="Participant(s)" class="padding">
 		<div class="wpeo-modal-event wpeo-button-pulse tooltip hover"
 			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
 			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
