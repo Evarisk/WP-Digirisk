@@ -3097,6 +3097,12 @@
   background: rgba(0, 0, 0, 0.3);
   cursor: pointer; }
 
+.owl-carousel {
+  width: 100% !important; }
+
+.owl-carousel .owl-item img {
+  width: 100% !important; }
+
 .owl-carousel .owl-dots {
   text-align: center; }
 
