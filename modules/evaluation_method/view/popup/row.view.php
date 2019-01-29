@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		foreach ( $variable->data['survey']['request'] as $request ) :
 			$is_active = '';
 
-			if ( $request['seuil'] == $selected_seuil && ! empty( $request['seuil'] ) ) :
+			if ( $request['seuil'] == $selected_seuil && isset( $request['seuil'] ) ) :
 				$is_active = 'active';
 			endif;
 			?>
