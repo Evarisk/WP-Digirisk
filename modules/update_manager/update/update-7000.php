@@ -134,7 +134,19 @@ class Update_7000 {
 							$risk_evaluation['variables'] = array();
 						}
 
-						$risk_evaluation['variables'][ (int) $quotation_detail['variable_id'] ] = (int) $quotation_detail['value'];
+						$variable_id = $risk_evaluation['quotation_detail']['variable_id'];
+
+						$tmp_term = get_term_by( 'term_id', $risk_evaluation['quotation_detail']['variable_id'], 'digi-method' );
+
+						if ( ! empty( $tmp_term ) ) {
+							$tmp_term = get_term_by( 'slug', 'evarisk', 'digi-method-variable' );
+
+							if ( ! empty( $tmp_term ) ) {
+								$variable_id = (int) $tmp_term->term_id;
+							}
+						}
+
+						$risk_evaluation['variables'][ (int) $variable_id ] = (int) $risk_evaluation['quotation_detail']['value'];
 					}
 
 					if ( ! empty( $risk_evaluation['quotation_detail'] ) ) {
