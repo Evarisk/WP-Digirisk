@@ -16,8 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $user = User_Class::g()->get( array(
-	'id' => $comment->data['author_id'],
+	'id'      => $comment->data['author_id'],
+	'blog_id' => 0,
 ), true );
+
 ?>
 
 <li class="<?php echo esc_attr( ( 0 !== $id && 0 === $comment->data['id'] ) ? 'new' : '' ); ?> comment">

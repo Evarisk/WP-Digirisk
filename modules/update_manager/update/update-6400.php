@@ -41,7 +41,7 @@ class Update_640 {
 
 		$saved_slug = array();
 		$dangers_slug = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/danger-6291.json' );
-		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
+		$number_risk = 0;
 
 		if ( ! empty( $dangers_slug ) ) {
 			foreach ( $dangers_slug as $danger_slug ) {
@@ -52,7 +52,7 @@ class Update_640 {
 						'fields' => 'ids',
 						'posts_per_page' => -1,
 						'post_status' => 'any',
-						'post_type' => Risk_Class::g()->get_post_type(),
+						'post_type' => Risk_Class::g()->get_type(),
 						'tax_query' => array(
 							array(
 								'taxonomy' => 'digi-danger',
@@ -71,6 +71,8 @@ class Update_640 {
 		}
 
 		update_option( 'digirisk_update_6400_saved_slug', $saved_slug );
+		update_option( 'digirisk_update_6400_number_risk', $number_risk );
+
 
 		// On assure le nettoyage des catÃ©gories de risque.
 		$terms = get_terms( 'digi-danger', array( 'fields' => 'ids', 'hide_empty' => false ) );
@@ -99,8 +101,8 @@ class Update_640 {
 		$liaisons = \eoxia\JSON_Util::g()->open_and_decode( \eoxia\Config_Util::$init['digirisk']->update_manager->path . 'asset/json/risk-danger-6400.json', 'ARRAY_A' );
 		$saved_slug = get_option( 'digirisk_update_6400_saved_slug' );
 		$index = 0;
-		$count_risk = ! empty( $_POST['args']['countRisk'] ) ? (int) $_POST['args']['countRisk'] : 0;
-		$number_risk = ! empty( $_POST['args']['numberRisk'] ) ? (int) $_POST['args']['numberRisk'] : 0;
+		$count_risk = get_option( 'digirisk_update_6400_count_risk', 0 );
+		$number_risk = get_option( 'digirisk_update_6400_number_risk', 0 );
 
 		if ( ! empty( $saved_slug['danger'] ) ) {
 			foreach ( $saved_slug['danger'] as $slug => &$danger ) {
@@ -108,12 +110,15 @@ class Update_640 {
 					foreach ( $danger as &$data ) {
 						if ( ! empty( $data['risks_id'] ) ) {
 							$risks = Risk_Class::g()->get( array(
-								'include' => $data['risks_id'],
+								'post__in'    => $data['risks_id'],
+								'post_status' => 'any',
 							) );
+
 							if ( ! empty( $liaisons[ $slug ] ) ) {
-								$term = get_term_by( 'slug', $liaisons[ $slug ], Risk_Category_Class::g()->get_taxonomy() );
+								$term = get_term_by( 'slug', $liaisons[ $slug ], Risk_Category_Class::g()->get_type() );
 								if ( ! empty( $term ) && ! empty( $risks ) ) {
 									foreach ( $risks as $risk ) {
+
 										$risk->data['taxonomy']['digi-category-risk'][] = (int) $term->term_id;
 										Risk_Class::g()->update( $risk->data );
 										$key = array_search( $risk->data['id'], $data['risks_id'], true );
@@ -148,12 +153,13 @@ class Update_640 {
 		}
 
 		update_option( 'digirisk_update_6400_saved_slug', $saved_slug );
+		update_option( 'digirisk_update_6400_count_risk', $count_risk );
 
 		wp_send_json_success( array(
 			'updateComplete'     => false,
 			'done'               => $done,
 			'progression'        => $count_risk . '/' . $number_risk,
-			'progressionPerCent' => 0 !== $count_risk ? ( ( $count_risk * 100 ) / $number_risk ) : 0,
+			'progressionPerCent' => 0 !== $number_risk ? ( ( $count_risk * 100 ) / $number_risk ) : 0,
 			// Translators: 1. Number of treated points 2. Previsionnal number of points to treat.
 			'doneElementNumber'  => $count_risk,
 			'errors'             => null,
