@@ -174,7 +174,7 @@ class DUER_Class extends Document_Class {
 				}
 
 				$data['elementParHierarchie']['value'][] = array(
-					'nomElement' => $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+					'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
 				);
 
 				$args['parent_id'] = $society->data['id'];
@@ -203,23 +203,29 @@ class DUER_Class extends Document_Class {
 
 		if ( ! empty( $societies ) ) {
 			foreach ( $societies as $society ) {
-				if ( ! in_array($society->data['id'], $data['already_inserted_id'] ) ) {
+				if ( ! in_array( $society->data['id'], $data['already_inserted_id'] ) ) {
+					$tabulation = '';
+
+					for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
+						$tabulation .= '-';
+					}
+
 					$data['risqueFiche']['value'][] = array(
-						'nomElement'      => $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+						'nomElement'      => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
 						'quotationTotale' => 0
 					);
 				}
 			}
 		}
 
-		if ( count( $data['risqueFiche']['value'] ) > 1 ) {
-			uasort( $data['risqueFiche']['value'], function( $a, $b ) {
-				if( $a['quotationTotale'] == $b['quotationTotale'] ) {
-					return 0;
-				}
-				return ( $a < $b ) ? -1 : 1;
-			} );
-		}
+		// if ( count( $data['risqueFiche']['value'] ) > 1 ) {
+		// 	uasort( $data['risqueFiche']['value'], function( $a, $b ) {
+		// 		if( $a['quotationTotale'] == $b['quotationTotale'] ) {
+		// 			return 0;
+		// 		}
+		// 		return ( $a < $b ) ? -1 : 1;
+		// 	} );
+		// }
 
 		return $data;
 	}
