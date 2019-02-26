@@ -24,34 +24,8 @@ class Update_660 {
 	 * Instanciate update for current version
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_digirisk_update_recreate_category_danger', array( $this, 'callback_digirisk_update_recreate_category_danger' ) );
-		add_action( 'wp_ajax_digirisk_update_associate_danger_to_risk', array( $this, 'callback_digirisk_update_associate_danger_to_risk' ) );
-		add_action( 'wp_ajax_digirisk_update_risk_equivalence', array( $this, 'callback_digirisk_update_risk_equivalence' ) );
-		add_action( 'wp_ajax_digirisk_update_to_ed840_danger', array( $this, 'callback_digirisk_update_to_ed840_danger' ) );
-		add_action( 'wp_ajax_digirisk_update_to_ed840_to_risk', array( $this, 'callback_digirisk_update_to_ed840_to_risk' ) );
-
 		add_action( 'wp_ajax_digirisk_get_societies_status', array( $this, 'callback_digirisk_get_societies_status' ) );
 		add_action( 'wp_ajax_digirisk_update_societies_status', array( $this, 'callback_digirisk_update_societies_status' ) );
-	}
-
-	public function callback_digirisk_update_recreate_category_danger() {
-
-	}
-
-	public function callback_digirisk_update_associate_danger_to_risk() {
-
-	}
-
-	public function callback_digirisk_update_risk_equivalence() {
-
-	}
-
-	public function callback_digirisk_update_to_ed840_danger() {
-
-	}
-
-	public function callback_digirisk_update_to_ed840_to_risk() {
-
 	}
 
 	/**
