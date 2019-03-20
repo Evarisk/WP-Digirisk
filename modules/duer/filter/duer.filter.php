@@ -171,11 +171,17 @@ class DUER_Filter extends Identifier_Filter {
 
 					$data[ 'risq' . $risk->data['evaluation']->data['scale'] ]['value'][] = $risk_data;
 
-					if ( empty( $quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
-						$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
+					$tabulation = '';
+
+					for ( $i = 0; $i < count( get_post_ancestors( $risk->data['parent']->data['id'] ) ); $i++) {
+						$tabulation .= '-';
 					}
 
-					$quotationsTotal[ $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
+					if ( empty( $quotationsTotal[ $tabulation . ' ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] ) ) {
+						$quotationsTotal[ $tabulation . ' ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] = 0;
+					}
+
+					$quotationsTotal[ $tabulation . ' ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'] ] += $risk->data['current_equivalence'];
 					$data['already_inserted_id'][] = $risk->data['parent']->data['id'];
 				}
 			}

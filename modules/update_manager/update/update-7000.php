@@ -103,8 +103,12 @@ class Update_7000 {
 		// mise à jour des équivalences.
 		$risks = get_posts( array(
 			'posts_per_page' => -1,
+			'post_status'    => 'any',
 			'post_type'      => 'digi-risk',
 		) );
+
+		$number_risk         = count( $risks );
+		$number_risk_treated = 0;
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
@@ -117,11 +121,33 @@ class Update_7000 {
 				) );
 
 				if ( ! empty( $eval ) ) {
+					\eoxia\Log_Util::log( 'Mise à jour évaluation pour le risque ' . $risk->ID . ' evaluation : ' . json_encode( $eval[0] ), 'digirisk-maj' );
 					$equivalence = get_comment_meta( $eval[0]->comment_ID, '_wpdigi_risk_evaluation_equivalence', true );
 					update_post_meta( $risk->ID, '_wpdigi_equivalence', $equivalence );
 
 					$risk_evaluation = get_comment_meta( $eval[0]->comment_ID, '_wpdigi_risk_evaluation', true );
 					$risk_evaluation = \eoxia\JSON_Util::g()->decode( $risk_evaluation );
+
+					\eoxia\Log_Util::log( 'Eval #' . $eval[0]->comment_ID . ' risk_evaluation : ' . json_encode( $risk_evaluation ), 'digirisk-maj' );
+					if ( ! empty( $risk_evaluation['quotation_detail'] ) && isset( $risk_evaluation['quotation_detail']['variable_id'] ) && isset( $risk_evaluation['quotation_detail']['value'] ) ) {
+						if ( ! isset( $risk_evaluation['variables'] ) ) {
+							$risk_evaluation['variables'] = array();
+						}
+
+						$variable_id = $risk_evaluation['quotation_detail']['variable_id'];
+
+						$tmp_term = get_term_by( 'term_id', $risk_evaluation['quotation_detail']['variable_id'], 'digi-method' );
+
+						if ( ! empty( $tmp_term ) ) {
+							$tmp_term = get_term_by( 'slug', 'evarisk', 'digi-method-variable' );
+
+							if ( ! empty( $tmp_term ) ) {
+								$variable_id = (int) $tmp_term->term_id;
+							}
+						}
+
+						$risk_evaluation['variables'][ (int) $variable_id ] = (int) $risk_evaluation['quotation_detail']['value'];
+					}
 
 					if ( ! empty( $risk_evaluation['quotation_detail'] ) ) {
 						foreach ( $risk_evaluation['quotation_detail'] as $quotation_detail ) {
@@ -141,19 +167,23 @@ class Update_7000 {
 						$sym = mb_convert_encoding( pack( 'H*', $matches[1] ), 'UTF-8', 'UTF-16' );
 						return $sym;
 					}, $risk_evaluation );
+					\eoxia\Log_Util::log( 'Eval #' . $eval[0]->comment_ID . ' UPDATED risk_evaluation : ' . json_encode( $risk_evaluation ), 'digirisk-maj' );
 
 					update_comment_meta( $eval[0]->comment_ID, '_wpdigi_risk_evaluation', $risk_evaluation );
+
 				}
+
+				$number_risk_treated++;
 			}
 		}
 
 		wp_send_json_success( array(
-			'updateComplete'    => false,
-			'done'              => true,
-			'progressionPerCent'       => '100',
-			'doneDescription'   => '',
-			'doneElementNumber' => 0,
-			'errors'            => null,
+			'updateComplete'     => false,
+			'done'               => true,
+			'progression'        => $number_risk_treated . '/' . $number_risk,
+			'progressionPerCent' => 0 !== $number_risk ? ( ( $number_risk_treated * 100 ) / $number_risk ) : 0,
+			'doneElementNumber'  => $number_risk_treated,
+			'errors'             => null,
 		) );
 	}
 
