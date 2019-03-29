@@ -105,6 +105,15 @@ class Listing_Risk_Filter {
 
 		$data = $this->callback_hierarchy( $data, $args );
 
+		if ( count( $data['risks'] ) > 1 ) {
+			uasort( $data['risks'], function( $a, $b ) {
+				if( $a->data['current_equivalence'] == $b->data['current_equivalence'] ) {
+					return 0;
+				}
+				return ( $a->data['current_equivalence'] > $b->data['current_equivalence'] ) ? -1 : 1;
+			} );
+		}
+
 		$level_risk = array( '1', '2', '3', '4' );
 
 		foreach( $level_risk as $level ) {
