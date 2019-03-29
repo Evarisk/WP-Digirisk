@@ -233,10 +233,10 @@ window.eoxiaJS.digirisk.userDashboard.loadedUserSuccess = function( element, res
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.savedUserSuccess = function( element, response ) {
-	jQuery( '.user-dashboard table.users .tooltip.red.active' ).removeClass( 'active' );
+	jQuery( '.user-dashboard table.users .email-already-used' ).hide();
 
 	if ( response.data.error ) {
-		jQuery( '.user-dashboard table.users .tooltip.email.red' ).addClass( 'active' );
+		jQuery( '.user-dashboard table.users .email-already-used' ).show();
 	} else {
 		jQuery( '.user-dashboard table.users' ).html( response.data.template );
 		jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();

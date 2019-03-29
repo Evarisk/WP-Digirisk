@@ -34,17 +34,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</span>
 		<?php endif; ?>
 	</td>
-	<td class="padding tooltip red"
-		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+	<td class="padding">
 		<input type="text" class="lastname" placeholder="<?php esc_attr_e( 'Nom', 'digirisk' ); ?>" name="lastname" value="<?php echo esc_attr( $user->data['lastname'] ); ?>" />
 	</td>
-	<td class="padding tooltip red"
-		aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">
+	<td class="padding">
 		<input type="text" class="firstname" placeholder="<?php esc_attr_e( 'Prénom', 'digirisk' ); ?>" name="firstname" value="<?php echo esc_attr( $user->data['firstname'] ); ?>" />
 	</td>
-	<td class="padding tooltip email red"
-		aria-label="<?php echo esc_attr_e( 'Cette adresse email est déjà utilisée.', 'digirisk' ); ?>">
+	<td class="padding email">
 		<input type="text" class="email" placeholder="demo@<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" name="email" value="<?php echo esc_attr( $user->data['email'] ); ?>" />
+		<p class="email-already-used" style="display: none; line-height: 0; color: red;"><?php esc_html_e( 'Adresse de messagerie déjà utilisée', 'digirisk' ); ?></p>
 	</td>
 	<td>
 		<div class="action">

@@ -48,7 +48,7 @@ class Sheet_Causerie_Intervention_Filter extends Identifier_Filter {
 		$upload_dir = wp_upload_dir();
 
 		$data['title']  = current_time( 'Ymd' ) . '_';
-		$data['title'] .= '_fiche_causerie_intervention';
+		$data['title'] .= '_fiche_causerie_intervention_' . $data['parent']->data['unique_identifier'] . '_' . $data['parent']->data['second_identifier'];
 		$data['title']  = str_replace( '-', '_', $data['title'] );
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';

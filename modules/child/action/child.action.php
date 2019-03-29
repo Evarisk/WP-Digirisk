@@ -169,7 +169,7 @@ class Child_Action {
 
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
 		array_unshift( $data['elementParHierarchie']['value'], array(
-			'nomElement' => 'D' . $params['id'] . ' - ' . $parent->data['title'],
+			'nomElement' => 'S' . $params['id'] . ' - ' . $parent->data['title'],
 		) );
 
 		$response = new \WP_REST_Response( $data );
@@ -212,7 +212,7 @@ class Child_Action {
 
 				$risk = Corrective_Task_Class::g()->output_odt( $risk );
 				$data[] = array(
-					'nomElement'                  => 'D' . $dashboard_id . ' -- ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+					'nomElement'                  => 'S' . $dashboard_id . ' -- ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
 					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
 					'quotationRisque'             => $risk->data['current_equivalence'],
 					'scale'                       => $risk->data['evaluation']->data['scale'],

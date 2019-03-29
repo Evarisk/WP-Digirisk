@@ -1,4 +1,10 @@
 .owl-carousel {
+	width: 100% !important;
+
+	.owl-item img {
+		width: 100% !important;
+	}
+
 	.owl-dots {
 		text-align: center;
 
