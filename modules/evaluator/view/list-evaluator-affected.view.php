@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 												data-loader="affected-evaluator"
 												data-message-delete="<?php echo esc_attr_e( 'Dissocier l\'évaluateur', 'digirisk' ); ?>"
 												class="action-delete wpeo-button button-square-50 button-transparent delete">
-												<i class="button-icon far fa-times"></i>
+												<i class="button-icon fas fa-times"></i>
 											</div>
 										</div>
 								</td>

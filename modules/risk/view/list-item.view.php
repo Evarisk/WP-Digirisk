@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-class="wpeo-wrap corrective-task"
 					data-action="open_task"
 					data-title="<?php echo 'Les actions correctives du risque: ' . $risk->data['unique_identifier']; ?>"
-					data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="button-icon far fa-list-ul"></i></div>
+					data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="button-icon fas fa-list-ul"></i></div>
 
 			<!-- Editer un risque -->
 			<div 	class="wpeo-button button-square-50 button-transparent w50 edit action-attribute"
@@ -59,10 +59,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_risk' ) ); ?>"
 						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
-						data-action="delete_risk"><i class="button-icon far fa-times"></i></div>
+						data-action="delete_risk"><i class="button-icon fas fa-times"></i></div>
 
 			<div class="wpeo-dropdown dropdown-right">
-				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon far fa-ellipsis-v"></i></div>
+				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></div>
 				<div class="dropdown-content" style="width: 400px;">
 					<div class="wpeo-form">
 						<div style="float: left; width: 320px;">

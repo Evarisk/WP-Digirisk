@@ -107,7 +107,7 @@ defined( 'ABSPATH' ) || exit; ?>
 					data-color="red"
 					data-direction="left"
 					aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
-					<i class="far fa-times icon" aria-hidden="true"></i>
+					<i class="fas fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
 

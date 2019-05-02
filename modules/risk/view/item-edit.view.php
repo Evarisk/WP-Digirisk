@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			-
 		<?php
 		else :
-			if ( 0 !== $risk->data['id'] ) :
+			if ( null !== $risk->data['id'] ) :
 				?>
 				<span><strong><?php echo esc_html( $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'] ); ?></span></strong>
 				<?php
@@ -56,7 +56,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" namespace="digi" type="risk_evaluation_comment" display="edit" add_button="' . ( ( $risk->data['preset'] ) ? '0' : '1' ) . '"]' ); ?>
 	</td>
 	<td data-title="action">
-		<?php if ( 0 !== $risk->data['id'] && false === $risk->data['preset'] ) : ?>
+		<?php if ( null !== $risk->data['id'] && false === $risk->data['preset'] ) : ?>
 			<div class="action">
 				<div data-parent="risk-row" data-loader="table" class="wpeo-button button-square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
 			</div>
@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-loader="table"
 						data-parent="risk-row"
 						class="wpeo-button button-square-50 add action-input button-progress">
-							<i class="button-icon far fa-plus"></i></div>
+							<i class="button-icon fas fa-plus"></i></div>
 				<?php else : ?>
 					<div data-namespace="digirisk"
 						data-module="risk"
@@ -77,7 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-loader="table"
 						data-parent="risk-row"
 						class="wpeo-button button-square-50 button-disable button-event add action-input button-progress">
-							<i class="button-icon far fa-plus"></i></div>
+							<i class="button-icon fas fa-plus"></i></div>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

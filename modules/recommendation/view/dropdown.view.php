@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<div class="dropdown-toggle wpeo-button button-transparent">
 		<span><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></span>
 		<img class="hidden" src="" title="<?php echo esc_attr( 'Signalisation', 'digirisk' ); ?>" />
-		<i class="button-icon animated far fa-angle-down"></i>
+		<i class="button-icon animated fas fa-angle-down"></i>
 	</div>
 
 	<ul class="dropdown-content wpeo-grid grid-6" style="width: 400px;">

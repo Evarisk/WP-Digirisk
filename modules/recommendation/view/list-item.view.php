@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || exit; ?>
 						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
 						data-action="delete_recommendation"
-						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?', 'digirisk' ); ?>"><i class="button-icon far fa-times"></i></div>
+						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?', 'digirisk' ); ?>"><i class="button-icon fas fa-times"></i></div>
 		</div>
 	</td>
 </tr>

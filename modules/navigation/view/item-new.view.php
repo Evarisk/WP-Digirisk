@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $id ); ?>" />
 	<input class="unit-label" name="title" placeholder="" type="text" />
 	<input type="hidden" name="class" value="" />
-	<div class="wpeo-button button-square-50 add action-input" data-parent="new" data-loader="wpeo-button"><i class="button-icon far fa-plus"></i></<div>
+	<div class="wpeo-button button-square-50 add action-input" data-parent="new" data-loader="wpeo-button"><i class="button-icon fas fa-plus"></i></<div>
 </li>

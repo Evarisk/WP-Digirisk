@@ -48,7 +48,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				data-loader="users"
 				data-action="delete_user"
 				class="wpeo-button button-square-50 button-transparent delete action-delete" >
-				<i class="button-icon far fa-times"></i>
+				<i class="button-icon fas fa-times"></i>
 			</div>
 		</div>
 	</td>

@@ -43,7 +43,7 @@ global $eo_search; ?>
 				data-action="edit_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"
-				data-add="true"><i class="button-icon far fa-plus"></i></div>
+				data-add="true"><i class="button-icon fas fa-plus"></i></div>
 		</div>
 	</div>
 </div>

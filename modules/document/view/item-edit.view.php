@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td>
 		<div class="action">
 			<div class="wpeo-button button-square-50 action-input add" data-loader="table" data-parent="sheet-groupment-row">
-				<i class="icon far fa-plus"></i>
+				<i class="icon fas fa-plus"></i>
 			</div>
 		</div>
 	</td>

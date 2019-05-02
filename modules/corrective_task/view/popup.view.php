@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="header">
 			<h2 class="title"><?php esc_html_e( 'Édition des tâches correctives', 'digirisk' ); ?></h2>
-			<i class="close far fa-times"></i>
+			<i class="close fas fa-times"></i>
 		</div>
 
 		<div class="content" style="overflow-y: scroll; height: 600px;">

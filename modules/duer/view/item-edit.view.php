@@ -104,7 +104,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-action="display_societies_duer"
 					data-class="generate-duer-modal modal-force-display"
 					data-title="Génération du DUER">
-					<i class="button-icon far fa-plus"></i>
+					<i class="button-icon fas fa-plus"></i>
 				</div>
 		</div>
 	</td>

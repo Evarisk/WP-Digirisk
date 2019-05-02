@@ -74,12 +74,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="alignright">
 		<button data-action="save_diffusion_information" class="wpeo-button button-main button-green action-input" data-parent="form-generate">
-			<i class="button-icon far fa-sync-alt"></i>
+			<i class="button-icon fas fa-sync-alt"></i>
 			<span><?php esc_html_e( 'Enregister les modifications', 'digirisk' ); ?></span>
 		</button>
 
 		<button data-action="generate_diffusion_information" class="wpeo-button button-main action-input" data-parent="form-generate">
-			<i class="button-icon far fa-sync-alt"></i>
+			<i class="button-icon fas fa-sync-alt"></i>
 			<span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
 		</button>
 	</div>

@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 <?php else : ?>
 	<div class="wpeo-button button-square-40 wpeo-tooltip-event button-disable button-event" data-direction="top" data-color="red" aria-label="<?php echo esc_attr_e( 'Évaluation du risque corrompue', 'digirisk' ); ?>">
-		<i class="button-icon far fa-times" aria-hidden="true" />
+		<i class="button-icon fas fa-times" aria-hidden="true" />
 	</div>
 <?php
 endif;

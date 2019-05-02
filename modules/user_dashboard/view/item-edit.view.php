@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-before-method="checkData"
 					data-parent="user-row"
 					data-loader="table">
-					<i class="icon far fa-plus"></i>
+					<i class="icon fas fa-plus"></i>
 				</div>
 			<?php	else : ?>
 				<div class="wpeo-button button-square-50 button-green add action-input"

@@ -66,7 +66,7 @@ class Group_Filter extends Identifier_Filter {
 	public function callback_digi_tab_more( $tab_list, $id ) {
 		$tab_list['digi-group']['more'] = array(
 			'type'  => 'toggle',
-			'text'  => '<i class="action far fa-ellipsis-v toggle"></i>',
+			'text'  => '<i class="action fas fa-ellipsis-v toggle"></i>',
 			'items' => array(
 				'delete' => array(
 					'type'         => 'text',

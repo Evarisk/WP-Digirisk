@@ -55,7 +55,7 @@ defined( 'ABSPATH' ) || exit; ?>
 							data-before-method="beforeSaveRecommendation"
 							data-parent="recommendation-row"
 							data-loader="table"
-							class="wpeo-button button-square-50 button-disable button-event add action-input"><i class="button-icon far fa-plus"></i></div>
+							class="wpeo-button button-square-50 button-disable button-event add action-input"><i class="button-icon fas fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>

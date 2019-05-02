@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tr>
 		<td class="w100 padding"><?php esc_html_e( 'Parent', 'digirisk' ); ?></td>
 		<td>&nbsp;</td>
-		<td class="w50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="far fa-chart-line"></i></a></td>
+		<td class="w50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="fas fa-chart-line"></i></a></td>
 		<td class="w50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
 		<td class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
 		<td><?php esc_html_e( 'Comment', 'digirisk' ); ?></td>

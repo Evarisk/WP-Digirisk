@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 			<?php else : ?>
 				<span class="button grey h50 tooltip hover red" aria-label="<?php echo esc_attr_e( 'Corrompu', 'digirisk' ); ?>">
-					<i class="far fa-times icon" aria-hidden="true"></i>
+					<i class="fas fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
 		</div>
