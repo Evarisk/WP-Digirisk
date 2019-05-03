@@ -59,6 +59,7 @@ class Evaluation_Method_Filter extends Identifier_Filter {
 			'exclude'    => $excluded_evaluation_method->data['id'],
 		) );
 
+
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluation_method', 'dropdown/button-modal-methods', array(
 			'evaluations_method' => $evaluations_method,

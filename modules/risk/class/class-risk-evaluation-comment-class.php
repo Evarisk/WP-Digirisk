@@ -71,9 +71,9 @@ class Risk_Evaluation_Comment_Class extends \eoxia\Comment_Class {
 			if ( ! empty( $comments ) ) {
 				foreach ( $comments as $comment ) {
 					if ( ! empty( $comment['content'] ) ) {
-						$comment['id']        = (int) $comment['id'];
+						$comment['id']        = ! empty( $comment['id'] ) ? (int) $comment['id'] : 0;
 						$comment['post_id']   = $risk->data['id'];
-						$comment['author_id'] = (int) $comment['author_id'];
+						$comment['author_id'] = ! empty( $comment['author_id'] ) ? (int) $comment['author_id'] : 0;
 
 						if ( empty( $comment['parent_id'] ) ) {
 							$comment['parent_id'] = $risk->data['evaluation']->data['id'];

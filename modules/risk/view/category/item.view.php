@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="categorie-container toggle grid padding">
 	<div class="action">
-	<?php if ( isset( $risk_category ) && 0 !== $risk_category->data['id'] ) : ?>
+	<?php if ( isset( $risk_category ) && null !== $risk_category->data['id'] ) : ?>
 		<div class="wpeo-tooltip-event hover" aria-label="<?php echo esc_attr( $risk_category->data['name'] ); ?>">
 			<?php echo wp_get_attachment_image( $risk_category->data['thumbnail_id'], 'thumbnail', false ); ?>
 		</div>

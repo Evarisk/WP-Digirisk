@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( isset( $can_edit_risk_category ) && $can_edit_risk_category ) :
 			do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="edit" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" preset="' . ( ( $risk->data['preset'] ) ? '1' : '0' ) . '"]' );
 		else :
-			do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="' . ( ( 0 !== $risk->data['id'] && ! $risk->data['preset'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" preset="' . ( ( $risk->data['preset'] ) ? '1' : '0' ) . '"]' );
+			do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" type="risk" display="' . ( ( null !== $risk->data['id'] && ! $risk->data['preset'] ) ? 'view' : 'edit' ) . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" preset="' . ( ( $risk->data['preset'] ) ? '1' : '0' ) . '"]' );
 		endif;
 		?>
 	</td>

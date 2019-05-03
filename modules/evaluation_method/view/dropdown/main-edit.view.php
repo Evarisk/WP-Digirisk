@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-tooltip-persist="true">
 	<span data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>" class="dropdown-toggle cotation">
 		<?php
-		if ( 0 !== $risk->data['id'] && -1 !== $risk->data['current_equivalence'] ) :
+		if ( null !== $risk->data['id'] && -1 !== $risk->data['current_equivalence'] ) :
 			?>
 			<span><?php echo esc_html( $risk->data['current_equivalence'] ); ?></span>
 			<?php
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		endif;
 
-		if ( empty( $risk->data['id'] ) || $can_edit_type_cotation || $preset ) :
+		if ( null === $risk->data['id'] || $can_edit_type_cotation || $preset ) :
 			echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
 				'li'  => array(
 					'class'          => array(),
