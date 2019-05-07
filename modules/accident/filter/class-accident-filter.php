@@ -54,8 +54,8 @@ class Accident_Filter extends Identifier_Filter {
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-society']['registre-accident'] = array(
 			'type'  => 'text',
-			'text'  => __( 'Registre des AT bénins', 'digirisk' ),
-			'title' => __( 'Les registres des AT bénins', 'digirisk' ),
+			'text'  => __( 'Minor accidents register', 'digirisk' ),
+			'title' => __( 'Minor accidents registers', 'digirisk' ),
 		);
 
 		return $list_tab;

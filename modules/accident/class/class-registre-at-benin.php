@@ -94,8 +94,8 @@ class Registre_AT_Benin_Class extends Document_Class {
 	 * Initialises les messages d'information pour la génération de l'ODT.
 	 */
 	protected function construct() {
-		$this->message['empty']    = __( 'Aucun registre des AT bénins générés', 'digirisk' );
-		$this->message['generate'] = __( 'Cliquer pour générer un registre des AT bénins', 'digirisk' );
+		$this->message['empty']    = __( 'No generated register', 'digirisk' );
+		$this->message['generate'] = __( 'Click to generate a minor accidents register', 'digirisk' );
 
 		parent::construct();
 	}
