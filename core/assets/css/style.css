@@ -3122,3 +3122,6 @@ canvas {
 
 .digirisk-wrap .comment-container .comment .content {
   word-break: break-word; }
+
+.digirisk-wrap.wpeo-wrap .flex-table .table-footer .wpeo-autocomplete .autocomplete-label {
+  padding: 0.2em; }
