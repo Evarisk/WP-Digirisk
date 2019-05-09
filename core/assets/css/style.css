@@ -179,12 +179,12 @@
 
 .wpeo-wrap .fa,
 .wpeo-wrap .fas,
+.wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon,
 .wpeo-wrap .far,
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev,
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next,
 .wpeo-wrap .fal,
 .wpeo-wrap .unit.toggled > .unit-container .toggle-unit .icon,
-.wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon,
 .wpeo-wrap .fab {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -197,21 +197,10 @@
 .wpeo-wrap .fab {
   font-family: 'Font Awesome 5 Brands'; }
 
-.wpeo-wrap .fal,
-.wpeo-wrap .unit.toggled > .unit-container .toggle-unit .icon,
-.wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon {
-  font-family: 'Font Awesome 5 Pro';
-  font-weight: 300; }
-
-.wpeo-wrap .far,
-.wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev,
-.wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next {
-  font-family: 'Font Awesome 5 Pro';
-  font-weight: 400; }
-
 .wpeo-wrap .fa,
-.wpeo-wrap .fas {
-  font-family: 'Font Awesome 5 Pro';
+.wpeo-wrap .fas,
+.wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon {
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
 .wpeo-wrap canvas {

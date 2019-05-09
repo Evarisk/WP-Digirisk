@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit; ?>
 						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
 						data-loader="table"
-						data-action="load_recommendation"><i class="button-icon fas fa-pencil"></i></div>
+						data-action="load_recommendation"><i class="button-icon fas fa-pencil-alt"></i></div>
 
 			<div 	class="wpeo-button button-square-50 button-transparent delete action-delete"
 						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"

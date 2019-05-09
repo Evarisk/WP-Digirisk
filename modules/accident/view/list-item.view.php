@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="wpeo-button button-transparent button-square-50 edit action-attribute"
 				data-action="load_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_accident' ) ); ?>"
-				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"><i class="icon fas fa-pencil"></i></div>
+				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"><i class="icon fas fa-pencil-alt"></i></div>
 			<div class="wpeo-button button-transparent button-square-50 delete action-delete"
 				data-action="delete_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_accident' ) ); ?>"

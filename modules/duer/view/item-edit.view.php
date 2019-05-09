@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				class="wpeo-modal-event wpeo-button-pulse span-content-destinataire-duer">
 
 			<i class="button-icon fas fa-user"></i>
-			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
+			<span class="button-float-icon animated"><i class="fas fa-pencil-alt"></i></span>
 		</span>
 	</td>
 
@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="wpeo-modal-event wpeo-button-pulse span-content-methodology">
 
 			<i class="button-icon fas fa-search"></i>
-			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
+			<span class="button-float-icon animated"><i class="fas fa-pencil-alt"></i></span>
 		</span>
 	</td>
 
@@ -66,7 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="wpeo-modal-event wpeo-button-pulse span-content-sources">
 
 			<i class="button-icon fas fa-link"></i>
-			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
+			<span class="button-float-icon animated"><i class="fas fa-pencil-alt"></i></span>
 		</span>
 	</td>
 
@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="wpeo-modal-event wpeo-button-pulse span-content-dispo-des-plans">
 
 			<i class="button-icon fas fa-map-marker-alt"></i>
-			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
+			<span class="button-float-icon animated"><i class="fas fa-pencil-alt"></i></span>
 		</span>
 	</td>
 
@@ -92,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					class="wpeo-modal-event wpeo-button-pulse span-content-notes-importantes">
 
 			<i class="button-icon fas fa-file"></i>
-			<span class="button-float-icon animated"><i class="fas fa-pencil"></i></span>
+			<span class="button-float-icon animated"><i class="fas fa-pencil-alt"></i></span>
 		</span>
 	</td>
 
