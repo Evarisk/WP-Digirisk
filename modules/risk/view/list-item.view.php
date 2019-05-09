@@ -64,7 +64,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="wpeo-dropdown dropdown-right risk-options">
 				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></div>
 				<div class="dropdown-content" style="width: 500px;">
-					<?php \eoxia\View_Util::exec( 'digirisk', 'risk', 'options' ); ?>
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'risk', 'options', array(
+						'risk'      => $risk,
+						'societies' => $societies,
+					) );
+					?>
 				</div>
 			</div>
 		</div>

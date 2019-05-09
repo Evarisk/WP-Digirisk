@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				\eoxia\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
 					'society_id' => $society_id,
 					'risk'       => $risk,
-					'eo_search'  => $eo_search,
+					'societies'  => $societies,
 				) );
 			endforeach;
 		endif;

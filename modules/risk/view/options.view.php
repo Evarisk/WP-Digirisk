@@ -17,6 +17,9 @@ namespace digirisk;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="wpeo-form">
+
+	<input type="hidden" name="to_society_id" />
+
 	<div class="wpeo-dropdown dropdown-move-to">
 		<div class="form-element">
 			<span class="form-label"><?php esc_html_e( 'Déplacer vers GP ou UT', 'digirisk' ); ?></span>
@@ -29,10 +32,18 @@ defined( 'ABSPATH' ) || exit; ?>
 			</label>
 		</div>
 
-		<ul class="dropdown-content" style="width: 482px;">
-			<li class="dropdown-item">
-				<span>GP3 - Site péri-analytique</span>
-			</li>
+		<ul class="dropdown-content hidden" style="width: 482px;">
+			<?php
+			if ( ! empty( $societies ) ) :
+				foreach ( $societies as $society ) :
+					?>
+					<li data-id="<?php echo esc_attr( $society->data['id'] ); ?>" class="dropdown-item">
+						<span><?php echo esc_html( $society->data['unique_identifier'] . ' - ' . $society->data['title'] ); ?></span>
+					</li>
+					<?php
+				endforeach;
+			endif;
+			?>
 		</ul>
 	</div>
 </div>
