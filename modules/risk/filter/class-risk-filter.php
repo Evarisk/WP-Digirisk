@@ -77,7 +77,7 @@ class Risk_Filter extends Identifier_Filter {
 		$object->data['risk_category']     = Risk_Category_Class::g()->get( array( 'id' => end( $object->data['taxonomy']['digi-category-risk'] ) ), true );
 		$object->data['evaluation_method'] = Evaluation_Method_Class::g()->get( array( 'id' => end( $object->data['taxonomy'][ Evaluation_Method_Class::g()->get_type() ] ) ), true );
 
-		if ( null !== $object->data['id'] ) {
+		if ( 0 !== $object->data['id'] ) {
 			$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array(
 				'post_id' => $object->data['id'],
 				'orderby' => 'comment_ID',
@@ -88,7 +88,7 @@ class Risk_Filter extends Identifier_Filter {
 			$object->data['parent'] = Society_Class::g()->show_by_type( $object->data['parent_id'] );
 		} else {
 			if ( empty( $object->data['evaluation'] ) ) {
-				$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array( 'schema' => true ), true );
+				$object->data['evaluation'] = Risk_Evaluation_Class::g()->get( array( 'id' => 0 ), true );
 			}
 		}
 

@@ -166,22 +166,23 @@ class DUER_Class extends Document_Class {
 
 		if ( ! empty( $societies ) ) {
 			foreach ( $societies as $society ) {
+				if ( get_post_status( $society->data['parent_id'] ) != 'trash' ) {
+					$tabulation = '';
 
-				$tabulation = '';
+					for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
+						$tabulation .= '-';
+					}
 
-				for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {
+					$data['elementParHierarchie']['value'][] = array(
+						'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
+					);
+
+					$args['parent_id'] = $society->data['id'];
+
+					$data = $this->get_hierarchy_duer( $data, $args );
+
 					$tabulation .= '-';
 				}
-
-				$data['elementParHierarchie']['value'][] = array(
-					'nomElement' => $tabulation . ' ' . $society->data['unique_identifier'] . ' - ' . $society->data['title'],
-				);
-
-				$args['parent_id'] = $society->data['id'];
-
-				$data = $this->get_hierarchy_duer( $data, $args );
-
-				$tabulation .= '-';
 			}
 		}
 
@@ -203,7 +204,7 @@ class DUER_Class extends Document_Class {
 
 		if ( ! empty( $societies ) ) {
 			foreach ( $societies as $society ) {
-				if ( ! in_array( $society->data['id'], $data['already_inserted_id'] ) ) {
+				if ( ! in_array( $society->data['id'], $data['already_inserted_id'] ) && ! empty( $society->data['parent'] ) && get_post_status( $society->data['parent_id'] ) != 'trash' ) {
 					$tabulation = '';
 
 					for ( $i = 0; $i < count( get_post_ancestors( $society->data['id'] ) ); $i++) {

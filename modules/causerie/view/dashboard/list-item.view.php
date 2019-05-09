@@ -51,7 +51,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
-			<span><?php echo esc_html( $causerie->data['date_start']['rendered']['date_time'] ); ?></span>
+			<span>
+				<?php
+				if ( isset( $causerie->data['date_start']['rendered'] ) ):
+					echo esc_html( $causerie->data['date_start']['rendered']['date_time'] );
+				else:
+					echo 'NA';
+				endif;
+				?>
+			</span>
 			<?php
 		else :
 			?>
@@ -65,7 +73,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
-			<span><?php echo esc_html( $causerie->data['date_end']['rendered']['date_time'] ); ?></span>
+			<span>
+				<?php
+				if ( isset( $causerie->data['date_end']['rendered'] ) ):
+					echo esc_html( $causerie->data['date_end']['rendered']['date_time'] );
+				else:
+					echo 'NA';
+				endif;
+				?>
+			</span>
 			<?php
 		else :
 			?>

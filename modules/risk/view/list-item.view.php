@@ -61,18 +61,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce risque ?', 'digirisk' ); ?>"
 						data-action="delete_risk"><i class="button-icon fas fa-times"></i></div>
 
-			<div class="wpeo-dropdown dropdown-right">
+			<div class="wpeo-dropdown dropdown-right risk-options">
 				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></div>
-				<div class="dropdown-content" style="width: 400px;">
-					<div class="wpeo-form">
-						<div style="float: left; width: 320px;">
-							<?php $eo_search->display( 'to_society_id' ); ?>
-						</div>
-						<div style="float: right; margin-top: 30px;" class="wpeo-button button-blue button-square-50 action-input"
-							data-risk-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
-							data-action="move_risk_to"
-							data-parent="wpeo-form"><?php esc_html_e( 'OK', 'digirisk' ); ?></div>
-					</div>
+				<div class="dropdown-content" style="width: 500px;">
+					<?php \eoxia\View_Util::exec( 'digirisk', 'risk', 'options' ); ?>
 				</div>
 			</div>
 		</div>

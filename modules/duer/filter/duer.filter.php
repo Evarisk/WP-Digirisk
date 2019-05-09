@@ -147,7 +147,7 @@ class DUER_Filter extends Identifier_Filter {
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as $risk ) {
-				if ( ! empty( $risk->data['parent'] ) && ! empty( $risk->data['evaluation'] ) && ! empty( $risk->data['risk_category'] ) ) {
+				if ( ! empty( $risk->data['parent'] ) && get_post_status( $risk->data['parent']->data['parent_id'] ) != 'trash' && ! empty( $risk->data['evaluation'] ) && ! empty( $risk->data['risk_category'] ) ) {
 					$output_comment = '';
 
 					if ( ! empty( $risk->data['comment'] ) ) {

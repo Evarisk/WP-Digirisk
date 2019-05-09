@@ -166,7 +166,6 @@ class Child_Action {
 			return $response;
 		}
 
-
 		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
 		array_unshift( $data['elementParHierarchie']['value'], array(
 			'nomElement' => 'S' . $params['id'] . ' - ' . $parent->data['title'],
@@ -186,7 +185,7 @@ class Child_Action {
 		}
 
 		$args_where = array(
-			'post_status'    => array( 'publish', 'inherit' ),
+			'post_status'    => array( 'inherit', 'publish' ),
 			'meta_key'       => '_wpdigi_equivalence',
 			'orderby'        => 'meta_value_num',
 			'meta_query' => array(
@@ -203,24 +202,26 @@ class Child_Action {
 
 		if ( ! empty( $risks ) ) {
 			foreach ( $risks as &$risk ) {
-				$output_comment = '';
-				if ( ! empty( $risk->data['comment'] ) ) {
-					foreach ( $risk->data['comment'] as $comment ) {
-						$output_comment .= point_to_string( $comment );
+				if ( 0 !== $risk->data['parent_id'] && ! empty( $risk->data['parent'] ) && get_post_status( $risk->data['parent_id'] ) != 'trash' ) {
+					$output_comment = '';
+					if ( ! empty( $risk->data['comment'] ) ) {
+						foreach ( $risk->data['comment'] as $comment ) {
+							$output_comment .= point_to_string( $comment );
+						}
 					}
-				}
 
-				$risk = Corrective_Task_Class::g()->output_odt( $risk );
-				$data[] = array(
-					'nomElement'                  => 'S' . $dashboard_id . ' -- ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
-					'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
-					'quotationRisque'             => $risk->data['current_equivalence'],
-					'scale'                       => $risk->data['evaluation']->data['scale'],
-					'nomDanger'                   => $risk->data['risk_category']->data['name'],
-					'commentaireRisque'           => $output_comment,
-					'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
-					'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
-				);
+					$risk = Corrective_Task_Class::g()->output_odt( $risk );
+					$data[] = array(
+						'nomElement'                  => 'S' . $dashboard_id . ' -- ' . $risk->data['parent']->data['unique_identifier'] . ' - ' . $risk->data['parent']->data['title'],
+						'identifiantRisque'           => $risk->data['unique_identifier'] . ' - ' . $risk->data['evaluation']->data['unique_identifier'],
+						'quotationRisque'             => $risk->data['current_equivalence'],
+						'scale'                       => $risk->data['evaluation']->data['scale'],
+						'nomDanger'                   => $risk->data['risk_category']->data['name'],
+						'commentaireRisque'           => $output_comment,
+						'actionPreventionUncompleted' => $risk->data['output_action_prevention_uncompleted'],
+						'actionPreventionCompleted'   => $risk->data['output_action_prevention_completed'],
+					);
+				}
 			}
 		}
 

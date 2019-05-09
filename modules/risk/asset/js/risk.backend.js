@@ -8,11 +8,20 @@ window.eoxiaJS.digirisk.risk = {};
 
 window.eoxiaJS.digirisk.risk.init = function() {
 	window.eoxiaJS.digirisk.risk.refresh();
+	window.eoxiaJS.digirisk.risk.event();
 };
 
 window.eoxiaJS.digirisk.risk.refresh = function() {
 	autosize(document.querySelectorAll('textarea'));
 };
+
+window.eoxiaJS.digirisk.risk.event = function() {
+	jQuery( document ).on( 'dropdown-before-close', '.risk-row .risk-options .dropdown-move-to .dropdown-item', window.eoxiaJS.digirisk.risk.beforeClose );
+};
+
+window.eoxiaJS.digirisk.risk.beforeClose = function( event, dropdown, element, triggerObject ) {
+	triggerObject.close = true;
+}
 
 window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();

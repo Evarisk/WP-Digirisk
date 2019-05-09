@@ -182,6 +182,7 @@ class Society_Class extends \eoxia\Post_Class {
 		} else {
 			$societies = $this->get( array(
 				'posts_per_page' => 1,
+				'post_status'    => 'publish',
 			) );
 		}
 

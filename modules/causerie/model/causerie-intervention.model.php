@@ -72,7 +72,8 @@ class Causerie_Intervention_Model extends Causerie_Model {
 					'type' => 'integer',
 				),
 				'signature_date' => array(
-					'type' => 'wpeo_date',
+					'type'    => 'wpeo_date',
+					'context' => array( 'GET' ),
 				),
 			),
 		);
