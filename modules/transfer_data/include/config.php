@@ -119,7 +119,7 @@ DEFINE('DAY_BEFORE_TODAY_GANTT', 14);
 DEFINE('DAY_AFTER_TODAY_GANTT', DAY_BEFORE_TODAY_GANTT);
 DEFINE('LARGEUR_INDENTATION_GANTT_EN_EM', 1.5);
 
-$linkToDownloadOpenOffice = 'http://www.openoffice.org/fr/Telecharger';
+$linkToDownloadOpenOffice = 'https://www.libreoffice.org/download/download/';
 DEFINE('LINK_TO_DOWNLOAD_OPEN_OFFICE', $linkToDownloadOpenOffice);
 
 /**
@@ -166,7 +166,7 @@ $optionAciddentConsequence['death'] = __('D&eacute;c&egrave;s', 'evarisk');
  *	Define information about the work accident document
 */
 DEFINE('CERFA_ACCIDENT_TRAVAIL_IDENTIFIER', '50261#01');
-DEFINE('CERFA_ACCIDENT_TRAVAIL_LINK', 'http://www.ameli.fr/fileadmin/user_upload/formulaires/S6200.pdf');
+DEFINE('CERFA_ACCIDENT_TRAVAIL_LINK', 'https://www.ameli.fr/sites/default/files/formualires/128/s6200.pdf');
 
 /**
  *	Define the option possible value
