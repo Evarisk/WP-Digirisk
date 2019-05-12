@@ -28,11 +28,11 @@ global $eo_search; ?>
 				<li><?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?></li>
 			</ul>
 		</div>
-		<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
-		<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
+		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
+		<div data-title="<?php esc_attr_e( 'Date et hour', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 			<div class="action">
 				<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
