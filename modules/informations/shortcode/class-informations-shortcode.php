@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Les shortcodes relatif aux sociétés
  */
-class Society_Shortcode {
+class Informations_Shortcode {
 
 	/**
 	 * Le constructeur
@@ -26,7 +26,7 @@ class Society_Shortcode {
 	 * @since 6.2.10
 	 */
 	public function __construct() {
-		add_shortcode( 'digi-configuration', array( $this, 'callback_configuration' ) );
+		add_shortcode( 'digi-informations', array( $this, 'callback_informations' ) );
 	}
 
 	/**
@@ -36,12 +36,12 @@ class Society_Shortcode {
 	 *
 	 * @since 6.2.10
 	 */
-	public function callback_configuration( $param ) {
+	public function callback_informations( $param ) {
 		$element_id = $param['post_id'];
 		$element    = Society_Class::g()->show_by_type( $element_id );
 
-		Society_Configuration_Class::g()->display( $element );
+		Informations_Class::g()->display( $element );
 	}
 }
 
-new Society_Shortcode();
+new Informations_Shortcode();

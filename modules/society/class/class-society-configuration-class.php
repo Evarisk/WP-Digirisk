@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Appelle la vue pour afficher le formulaire de configuration d'une société
  */
-class Society_Informations_Class extends \eoxia\Singleton_Util {
+class Society_Configuration_Class extends \eoxia\Singleton_Util {
 
 	/**
 	 * Le constructeur
@@ -37,38 +37,6 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 
 		$address = Society_Class::g()->get_address( $element );
 
-		$total_cotation = 0;
-
-		$risks = Risk_Class::g()->get( array(
-			'post_parent' => $element->data['id'],
-		) );
-
-		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
-
-		if ( empty( $historic_update ) ) {
-			$historic_update = array(
-				'date'    => 'Indisponible',
-				'content' => 'Indisponible',
-			);
-		} else {
-			$historic_update['date'] = date( ' d F Y à H\hi', strtotime( $historic_update['date'] ) );
-		}
-
-		if ( count( $risks ) > 1 ) {
-			usort( $risks, function( $a, $b ) {
-				if ( $a->data['current_equivalence'] === $b->data['current_equivalence'] ) {
-					return 0;
-				}
-				return ( $a->data['current_equivalence'] > $b->data['current_equivalence'] ) ? -1 : 1;
-			} );
-		}
-
-		if ( ! empty( $risks ) ) {
-			foreach ( $risks as $risk ) {
-				$total_cotation += $risk->data['current_equivalence'];
-			}
-		}
-
 		$eo_search->register_search( 'society_information_owner', array(
 			'label'        => 'Responsable',
 			'icon'         => 'fa-search',
@@ -78,13 +46,9 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 			'hidden_value' => $element->data['owner_id'],
 		) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/main', array(
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
 			'element'             => $element,
 			'address'             => $address,
-			'number_risks'        => count( $risks ),
-			'more_dangerous_risk' => ! empty( $risks[0] ) ? $risks[0] : null,
-			'total_cotation'      => $total_cotation,
-			'historic_update'     => $historic_update,
 		) );
 	}
 
@@ -135,4 +99,4 @@ class Society_Informations_Class extends \eoxia\Singleton_Util {
 	}
 }
 
-Society_Informations_Class::g();
+Society_Configuration_Class::g();

@@ -50,10 +50,10 @@ class Society_Filter extends Identifier_Filter {
 	 * @return array
 	 */
 	public function callback_tab( $tab_list, $id ) {
-		$tab_list['digi-society']['informations'] = array(
+		$tab_list['digi-society']['configuration'] = array(
 			'type'  => 'text',
-			'text'  => __( 'Informations', 'digirisk' ),
-			'title' => __( 'Informations', 'digirisk' ),
+			'text'  => __( 'Configuration', 'digirisk' ),
+			'title' => __( 'Configuration', 'digirisk' ),
 		);
 
 		return $tab_list;
