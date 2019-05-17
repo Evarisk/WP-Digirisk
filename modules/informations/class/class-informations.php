@@ -80,7 +80,7 @@ class Informations_Class extends \eoxia\Singleton_Util {
 		$average = 'N/A';
 
 		if ( $total_users != 0 ) {
-			$average = $number_evaluator / $total_users * 100;
+			$average = round( $number_evaluator / $total_users * 100 );
 			$average .= '%';
 		}
 

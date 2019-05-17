@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <div class="wpeo-gridlayout grid-3">
 	<p>
-		<span>Date dernière impréssion:</span>
+		<span>Date dernière impression:</span>
 		<span><strong><?php echo ( ! empty( $current_duer ) ) ? $current_duer->data['date']['rendered']['date'] : 'N/A'; ?></strong></span>
 	</p>
 	<p>Mise à jour obligatoire tous les <strong>N/A</strong> jours</p>
@@ -76,21 +76,21 @@ defined( 'ABSPATH' ) || exit; ?>
 		<div class="table-cell" data-title="Nombre de risques sur le DU précédent">Nombre de risque sur le DU précédent</div>
 		<div class="table-cell"><?php echo $old_duer_info['total_risk']; ?></div>
 		<div class="table-cell"><?php echo $old_duer_info['quotation_total']; ?></div>
-		<div class="table-cell"><?php echo $old_duer_info['average']; ?></div>
+		<div class="table-cell"><?php echo round( $old_duer_info['average'] ); ?></div>
 	</div>
 
 	<div class="table-row">
 		<div class="table-cell" data-title="Nombre de risque sur le DU actuel">Nombre de risque sur le DU actuel</div>
 		<div class="table-cell"><?php echo $current_duer_info['total_risk']; ?></div>
 		<div class="table-cell"><?php echo $current_duer_info['quotation_total']; ?></div>
-		<div class="table-cell"><?php echo $current_duer_info['average']; ?></div>
+		<div class="table-cell"><?php echo round( $current_duer_info['average'] ); ?></div>
 	</div>
 
 	<div class="table-row">
 		<div class="table-cell" data-title="Progression">Progression</div>
 		<div class="table-cell"><?php echo $diff_info['total_risk']; ?></div>
 		<div class="table-cell"><?php echo $diff_info['quotation_total']; ?></div>
-		<div class="table-cell"><?php echo $diff_info['average']; ?></div>
+		<div class="table-cell"><?php echo round( $diff_info['average'] ); ?></div>
 	</div>
 </div>
 

@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 5.2.0
-Stable tag: 7.1.3
+Stable tag: 7.2.0
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,11 +77,12 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
-= Version 7.1.3 =
+= Version 7.2.0 =
 
 * 31023 - Correction de la taille des champs dans l'interface des accidents.
 * 31024 - Correction de l'interface pour déplacer un risque.
 * 31025 - Correction des risques présents dans le DUER alors qu'ils étaient attachés à un GP/UT supprimé.
+* 31303 - Ajout de l'onglet "Informations".
 
 = Version 7.1.2 =
 

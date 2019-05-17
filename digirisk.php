@@ -3,7 +3,7 @@
  * Plugin Name: Digirisk
  * Plugin URI:  http://www.evarisk.com/document-unique-logiciel
  * Description: Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
- * Version:     7.1.3
+ * Version:     7.2.0
  * Author:      Evarisk
  * Author URI:  http://www.evarisk.com
  * License:     AGPLv3
