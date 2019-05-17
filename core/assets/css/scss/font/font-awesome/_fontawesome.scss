@@ -5,17 +5,12 @@
 @import 'variables';
 @import 'mixins';
 @import 'core';
-// @import 'larger';
-// @import 'fixed-width';
-// @import 'list';
-// @import 'bordered-pulled';
-// @import 'animated';
-// @import 'rotated-flipped';
-// @import 'stacked';
-// @import 'icons';
-// @import 'screen-reader';
-//
-// @import "fa-solid";
-// @import "fa-regular";
-// @import "fa-light";
-// @import "fa-brands";
+
+.fab {
+  font-family: 'Font Awesome 5 Brands';
+}
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Society informations action.
  */
-class Society_Informations_Action {
+class Society_Configuration_Action {
 
 	/**
 	 * Constructeur.
@@ -60,7 +60,7 @@ class Society_Informations_Action {
 		$address                               = Address_Class::g()->save( $address_data );
 		$society_data['contact']['address_id'] = $address->data['id'];
 
-		$society = Society_Informations_Class::g()->save( $society_data );
+		$society = Society_Configuration_Class::g()->save( $society_data );
 
 		ob_start();
 		Tab_Class::g()->load_tab_content( $society->data['id'], array(
@@ -80,4 +80,4 @@ class Society_Informations_Action {
 	}
 }
 
-new Society_Informations_Action();
+new Society_Configuration_Action();

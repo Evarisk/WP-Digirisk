@@ -24,15 +24,15 @@ defined( 'ABSPATH' ) || exit; ?>
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Lastname', 'digirisk' ); ?>
-			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'This field is required', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Firtname', 'digirisk' ); ?>
-			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'This field is required', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="padding">
 			<?php esc_html_e( 'Email', 'digirisk' ); ?>
-			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'Ce champ est obligatoire', 'digirisk' ); ?>">*</span>
+			<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'This field is required', 'digirisk' ); ?>">*</span>
 		</td>
 		<td class="w100"></td>
 	</tr>

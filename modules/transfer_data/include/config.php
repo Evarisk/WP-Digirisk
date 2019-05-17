@@ -126,15 +126,15 @@ DEFINE('LINK_TO_DOWNLOAD_OPEN_OFFICE', $linkToDownloadOpenOffice);
  *	Define the option possible value
 */
 $optionYesNoList = array();
-$optionYesNoList['oui'] = __('Oui', 'evarisk');
-$optionYesNoList['non'] = __('Non', 'evarisk');
+$optionYesNoList['Yes'] = __('Yes', 'evarisk');
+$optionYesNoList['Non'] = __('No', 'evarisk');
 
 /**
  *	Define the option possible value
 */
 $optionUserGender = array();
-$optionUserGender['F'] = __('Femme', 'evarisk');
-$optionUserGender['H'] = __('Homme', 'evarisk');
+$optionUserGender['F'] = __('Women', 'evarisk');
+$optionUserGender['H'] = __('Man', 'evarisk');
 
 /**
  *	Define the option possible value

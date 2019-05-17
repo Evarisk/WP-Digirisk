@@ -38,7 +38,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_user' ) ); ?>"
 				data-loader="users"
 				class="wpeo-button button-square-50 button-transparent edit action-attribute">
-				<i class="button-icon fas fa-pencil"></i>
+				<i class="button-icon fas fa-pencil-alt"></i>
 			</div>
 
 			<div

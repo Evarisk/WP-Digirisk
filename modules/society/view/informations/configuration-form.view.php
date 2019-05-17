@@ -18,17 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
 global $eo_search; ?>
 
-<h1>
-	<?php
-	esc_html_e( 'Configuration ', 'digirisk' );
-	if ( Society_Class::g()->get_type() !== $element->data['type'] ) :
-		echo esc_html( $element->data['unique_identifier'] . ' - ' );
-	endif;
-
-	echo esc_html( $element->data['title'] );
-	?>
-</h1>
-
 <form class="wpeo-form">
 	<input type="hidden" name="action" value="save_configuration" />
 	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->data['id'] ); ?>" />

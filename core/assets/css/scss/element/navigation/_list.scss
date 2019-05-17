@@ -75,7 +75,7 @@
 			color: rgba(255,255,255,0.8);
 		}
 		.icon {
-			@extend .fal;
+			@extend .fas;
 			&:before {
 				content: fa-content($fa-var-angle-right);
 			}

@@ -17,11 +17,32 @@ window.eoxiaJS.digirisk.risk.refresh = function() {
 
 window.eoxiaJS.digirisk.risk.event = function() {
 	jQuery( document ).on( 'dropdown-before-close', '.risk-row .risk-options .dropdown-move-to .dropdown-item', window.eoxiaJS.digirisk.risk.beforeClose );
+	jQuery( document ).on( 'keyup', '.dropdown-move-to input.form-field', window.eoxiaJS.digirisk.risk.searchMoveTo );
 };
 
-window.eoxiaJS.digirisk.risk.beforeClose = function( event, dropdown, element, triggerObject ) {
-	triggerObject.close = true;
-}
+window.eoxiaJS.digirisk.risk.beforeClose = function( event, toggle, element, obj ) {
+	obj.close = false;
+
+	element.closest( '.wpeo-form' ).find( 'input[type="hidden"]' ).val( element.data( 'id' ) );
+	element.closest( '.wpeo-form' ).find( 'input[type="text"]' ).val( element.text().trim() );
+
+	element.closest( '.wpeo-dropdown' ).find( '.dropdown-content' ).addClass( 'hidden' );
+};
+
+window.eoxiaJS.digirisk.risk.searchMoveTo = function( event ) {
+	jQuery( this ).closest( '.wpeo-dropdown' ).find( '.dropdown-content' ).removeClass( 'hidden' );
+
+	var entries = jQuery( this ).closest( '.wpeo-dropdown' ).find( '.dropdown-content .dropdown-item' );
+	entries.show();
+
+	var val = jQuery( this ).val().toLowerCase();
+
+	for ( var i = 0; i < entries.length; i++ ) {
+		if ( jQuery( entries[i] ).text().toLowerCase().indexOf( val ) == -1 ) {
+			jQuery( entries[i] ).hide();
+		}
+	}
+};
 
 window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
 	element.closest( 'tr' ).fadeOut();

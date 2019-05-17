@@ -1,0 +1,13 @@
+{
+	"name": "Informations",
+	"slug": "informations",
+	"since": "7.2.0",
+	"description": "Le module informations",
+	"path": "modules/informations/",
+	"dependencies": {
+		"action": {},
+		"class": {},
+    "filter": {},
+    "shortcode": {}
+	}
+}

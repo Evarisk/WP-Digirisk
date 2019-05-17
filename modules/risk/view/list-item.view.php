@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_risk' ) ); ?>"
 						data-loader="risk"
-						data-action="load_risk"><i class="button-icon fas fa-pencil"></i></div>
+						data-action="load_risk"><i class="button-icon fas fa-pencil-alt"></i></div>
 
 			<!-- Supprimer un risque -->
 			<div 	class="wpeo-button button-square-50 button-transparent w50 delete action-delete"
@@ -64,7 +64,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="wpeo-dropdown dropdown-right risk-options">
 				<div class="button-transparent wpeo-button button-square-50 dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></div>
 				<div class="dropdown-content" style="width: 500px;">
-					<?php \eoxia\View_Util::exec( 'digirisk', 'risk', 'options' ); ?>
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'risk', 'options', array(
+						'risk'      => $risk,
+						'societies' => $societies,
+					) );
+					?>
 				</div>
 			</div>
 		</div>

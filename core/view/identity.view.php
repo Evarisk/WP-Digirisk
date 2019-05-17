@@ -33,4 +33,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="text" name="title" value="<?php echo esc_attr( $society->data['title'] ); ?>" />
 </span>
 
-<div class="wpeo-button button-square-50 button-transparent edit"><i class="button-icon fas fa-pencil"></i></div>
+<div class="wpeo-button button-square-50 button-transparent edit"><i class="button-icon fas fa-pencil-alt"></i></div>

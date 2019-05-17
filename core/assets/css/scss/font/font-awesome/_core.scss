@@ -15,19 +15,6 @@
   line-height: 1;
 }
 
-.fab {
-  font-family: 'Font Awesome 5 Brands';
-}
-.fal {
-  font-family: 'Font Awesome 5 Pro';
-  font-weight: 300;
-}
-.far {
-  font-family: 'Font Awesome 5 Pro';
-  font-weight: 400;
-}
-.fa,
-.fas {
-  font-family: 'Font Awesome 5 Pro';
-  font-weight: 900;
+%fa-icon {
+  @include fa-icon;
 }

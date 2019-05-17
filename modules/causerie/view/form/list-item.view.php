@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_edit_causerie' ) ); ?>"
 						data-loader="causerie-row"
-						data-action="load_edit_causerie"><i class="icon fa fa-pencil"></i></div>
+						data-action="load_edit_causerie"><i class="icon fa fa-pencil-alt"></i></div>
 
 			<div 	class="wpeo-button light button-square-50 delete action-delete button-transparent"
 						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"

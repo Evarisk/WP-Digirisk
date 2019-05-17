@@ -95,8 +95,6 @@ class Risk_Class extends \eoxia\Post_Class {
 	 * @since 6.0.0
 	 */
 	public function display( $society_id ) {
-		global $eo_search;
-
 		$society = Society_Class::g()->show_by_type( $society_id );
 
 		$risk_schema = $this->get( array( 'schema' => true ), true );
@@ -106,38 +104,18 @@ class Risk_Class extends \eoxia\Post_Class {
 			'meta_key'    => '_wpdigi_equivalence',
 		) );
 
-		$args_to_society_id = array(
-			'label' => 'Déplacer le risque vers le GP ou l\'UT:',
-			'type'  => 'post',
-			'name'  => 'to_society_id',
-			'icon'  => 'fa-search',
-			'args'  => array(
-				'model_name' => array(
-					'\digi\Group_Class',
-					'\digi\Workunit_Class',
-				),
-				'meta_query' => array(
-					'relation' => 'OR',
-					array(
-						'key'     => '_wpdigi_unique_identifier',
-						'compare' => 'LIKE',
-					),
-					array(
-						'key'     => '_wpdigi_unique_key',
-						'compare' => 'LIKE',
-					),
-				),
-			),
-		);
-
-		$eo_search->register_search( 'to_society_id', $args_to_society_id );
+		$societies = Society_Class::g()->get( array(
+			'post_type'      => array( 'digi-group', 'digi-workunit' ),
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'inherit' ),
+		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'main', array(
 			'society'     => $society,
 			'society_id'  => $society_id,
 			'risks'       => $risks,
 			'risk_schema' => $risk_schema,
-			'eo_search'   => $eo_search,
+			'societies'   => $societies
 		) );
 	}
 
