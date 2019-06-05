@@ -34,13 +34,19 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @param integer $id L'ID de la causerie.
 	 */
-	public function display_single( $id ) {
+	public function display_single( $id, $taskid ) {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
+		echo '<pre>'; print_r( $main_causerie->data[ 'document_meta' ] ); echo '</pre>';
 		$user           = null;
 
 		if ( ! empty( $final_causerie->data['former'] ) && ! empty( $final_causerie->data['former']['user_id'] ) ) {
 			$user = get_userdata( $final_causerie->data['former']['user_id'] );
+		}
+
+		$task = array();
+		if( class_exists( 'task_manager\Task_Class' ) ){
+			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );
 		}
 
 		$this->register_search( $final_causerie, $user );
@@ -50,6 +56,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 			'main_causerie'  => $main_causerie,
 			'user'           => $user,
 			'all_signed'     => $this->check_all_signed( $final_causerie ),
+			'task'         => ! empty( $task ) ? $task : array()
 		) );
 	}
 
@@ -137,9 +144,8 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return Causerie_Intervention_Model           L'objet Causerie_Intervention_Model avec la donnée current_step modifiée.
 	 */
-	public function step_slider( $causerie ) {
-		$causerie->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
-
+	public function step_slider( $causerie, $nextstep ) {
+		$causerie->data['current_step'] = $nextstep;
 		return Causerie_Intervention_Class::g()->update( $causerie->data );
 	}
 
@@ -163,6 +169,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * ainsi que date_end.
 	 */
 	public function step_participants( $causerie_intervention ) {
+		echo '<pre>'; print_r( '- 1 -' ); echo '</pre>';
 		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_intervention->data['parent_id'] ), true );
 
 		$causerie->data['number_time_realized']++;
@@ -172,16 +179,38 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		Causerie_Class::g()->update( $causerie->data );
 
-		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
+		// $causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
+		$causerie_intervention->data['titreTache'] = 'titre';
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
+		echo '<pre>'; print_r( ' - 2 - ' ); echo '</pre>';
 		$response = Sheet_Causerie_Intervention_Class::g()->prepare_document( $causerie_intervention, array( 'causerie' => $causerie ) );
-		Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
+		echo '<pre>'; print_r( ' - 3 - ' ); echo '</pre>';
+		$a = Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
+		echo '<pre>'; print_r( $a[ 'document' ][ 'data' ][ 'path' ] ); echo '</pre>';
 
 		return $causerie_intervention;
+	}
+
+	public function create_task_link_to_causerie( $parent_id ){
+		$title = __( 'Causerie', 'digirisk' ) . ' ' . $parent_id . ' - ' . __( 'date', 'digirisk' ) . ' ' . date( 'd/m/Y' );
+
+		if( class_exists( 'task_manager\Task_Class' ) ){
+			$task_args = array(
+				'title'     => $title,
+				'parent_id' => $parent_id,
+				'status'    => 'inherit',
+			);
+
+			$task = \task_manager\Task_Class::g()->create( $task_args, true );
+		}else{
+			$task = false;
+		}
+
+		return $task;
 	}
 }
 

@@ -126,6 +126,12 @@ class Causerie_Page_Action {
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->duplicate( $id );
 
+		$task = Causerie_Intervention_Page_Class::g()->create_task_link_to_causerie( $causerie_intervention->data['id'] );
+		$id  = 0;
+		if( $task ){
+			$id = $task->data[ 'id' ];
+		}
+
 		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->data['id'] ) );
 	}
 

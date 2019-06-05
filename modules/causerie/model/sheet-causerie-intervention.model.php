@@ -106,6 +106,14 @@ class Sheet_Causerie_Intervention_Model extends Document_Model {
 			'type' => 'array',
 		);
 
+		$this->schema['document_meta']['child']['titreTache'] = array(
+			'type' => 'string',
+		);
+
+		$this->schema['document_meta']['child']['points'] = array(
+			'type' => 'array',
+		);
+
 		parent::__construct( $object, $req_method );
 	}
 

@@ -53,7 +53,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0; // WPCS: CSRF ok.
 
 		if ( ! empty( $id ) ) {
-			Causerie_Intervention_Page_Class::g()->display_single( $id );
+			Causerie_Intervention_Page_Class::g()->display_single( $id, $taskid );
 		} else {
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
 		}
@@ -72,7 +72,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	public function display_dashboard() {
 		$causeries_intervention = Causerie_Intervention_Class::g()->get( array(
 			'meta_key'   => '_wpdigi_current_step',
-			'meta_value' => 4,
+			'meta_value' => \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED,
 		), false, true );
 
 		$causeries_intervention = $this->get_documents( $causeries_intervention );

@@ -123,6 +123,10 @@ class Digirisk_Action {
 	 * @since 6.0.0
 	 */
 	public function callback_plugins_loaded() {
+		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
+			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk-causerie';
+		}
+
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
 
 		if ( ! empty( \eoxia\Config_Util::$init['digirisk']->default_capabilities ) ) {

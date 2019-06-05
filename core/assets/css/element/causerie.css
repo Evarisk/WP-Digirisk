@@ -1,0 +1,34 @@
+.owl-prev {
+	float: left;
+	font-size: 200px;
+	width: 15px;
+	height: 100px;
+	position: absolute;
+	top: 40%;
+	border: 0px solid black;
+}
+
+.owl-next {
+	float: left;
+	width: 15px;
+	font-size: 200px;
+	height: 100px;
+	position: absolute;
+	top: 40%;
+	right: 45px;
+	display: block !important;
+	border: 0px solid black;
+}
+
+.owl-dots{
+	margin: 50px;
+}
+.owl-dots .owl-dot button {
+  background: none;
+  border: none;
+  padding-right: 10px;
+  color: #555555;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -39,9 +39,20 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 		} );
 	}
 
-	jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( {
+	/*jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( {
 		'items': 1,
 		'dots' : true
+	} );*/
+
+	jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( {
+		'nav': 1,
+		'loop': 1,
+		'items': 1,
+		'autoHeight': true,
+		'margin':10,
+		'dots' : true,
+		'navText' : ['<span class="owl-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>','<span class="owl-next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>'],
+		'dotsData': true,
 	} );
 };
 
@@ -107,7 +118,7 @@ window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
 			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
 			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'button-disable' );
-			jQuery( '.step-3 a.button-disable' ).removeClass( 'button-disable' );
+			jQuery( '.step-4 a.button-disable' ).removeClass( 'button-disable' );
 		}
 	} );
 };
@@ -209,15 +220,21 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
 	var percent     = 0;
 
 	if ( 2 === currentStep ) {
-		percent = 50;
+		percent = 37;
 	} else if ( 3 === currentStep ) {
+		percent = 62;
+	}else if( 4 === currentStep ) {
 		percent = 100;
+	}else{
+		percent = 0;
 	}
 
 	if ( jQuery( '.main-content' ).hasClass( 'step-1' ) ) {
 		jQuery( '.main-content' ).removeClass( 'step-1' ).addClass( 'step-2' );
 	} else if ( jQuery( '.main-content' ).hasClass( 'step-2' ) ) {
 		jQuery( '.main-content' ).removeClass( 'step-2' ).addClass( 'step-3' );
+	}else if ( jQuery( '.main-content' ).hasClass( 'step-3' ) ) {
+		jQuery( '.main-content' ).removeClass( 'step-3' ).addClass( 'step-4' );
 	}
 
 	jQuery( '.causerie-wrap .bar .loader' ).css( 'width',  percent + '%' );
@@ -257,8 +274,8 @@ window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response 
 window.eoxiaJS.digirisk.causerie.checkParticipantsSignature = function() {
 	var allSignature = true
 
-	if ( '.step-3 input[name="signature_data"]'.length ) {
-		jQuery( '.step-3 input[name="signature_data"]' ).each( function() {
+	if ( '.step-4 input[name="signature_data"]'.length ) {
+		jQuery( '.step-4 input[name="signature_data"]' ).each( function() {
 			if ( ! jQuery( this ).val() ) {
 				allSignature = false;
 				return false;
@@ -267,9 +284,9 @@ window.eoxiaJS.digirisk.causerie.checkParticipantsSignature = function() {
 	}
 
 	if ( allSignature ) {
-		jQuery( '.step-3 a.disabled' ).removeClass( 'disabled wpeo-tooltip-event' );
+		jQuery( '.step-4 a.disabled' ).removeClass( 'disabled wpeo-tooltip-event' );
 	} else {
-		jQuery( '.step-3 a.disabled' ).addClass( 'disabled wpeo-tooltip-event' );
+		jQuery( '.step-4 a.disabled' ).addClass( 'disabled wpeo-tooltip-event' );
 	}
 };
 
