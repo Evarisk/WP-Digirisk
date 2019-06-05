@@ -57,8 +57,17 @@ defined( 'ABSPATH' ) || exit; ?>
 
 	<?php if ( $require_unique_security_id ) : ?>
 		<h3>
-			<?php esc_html_e( 'Votre ID de sécurité unique est : ', 'digirisk' ); ?>
-			<span><?php echo esc_html( $unique_security_id['security_id'] ); ?></span>
+			<ul>
+				<li>
+					<?php esc_html_e( 'Votre URL', 'digirisk' ); ?>
+					<span><?php echo get_site_url(); ?></span>
+				</li>
+
+				<li>
+					<?php esc_html_e( 'Votre ID de sécurité unique est : ', 'digirisk' ); ?>
+					<span><?php echo esc_html( $unique_security_id['security_id'] ); ?></span>
+				</li>
+			</ul>
 		</h3>
 	<?php endif; ?>
 

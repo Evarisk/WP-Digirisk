@@ -31,6 +31,11 @@ class Child_Action {
 	}
 
 	public function callback_rest_api_init() {
+		register_rest_route( 'digi/v1', '/statut', array(
+			'methods'  => 'POST',
+			'callback' => array( $this, 'callback_status' ),
+		) );
+
 		register_rest_route( 'digi/v1', '/register-site', array(
 			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_register_site' ),
@@ -60,6 +65,17 @@ class Child_Action {
 			'methods'  => 'POST',
 			'callback' => array( $this, 'callback_generate' ),
 		) );
+	}
+
+	public function callback_status( \WP_REST_Request $request ) {
+		$params = $request->get_params();
+
+		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
+			$response = new \WP_REST_Response( '', 404 );
+			return $response;
+		}
+
+		return new \WP_REST_Response( true );
 	}
 
 	public function callback_register_site( \WP_REST_Request $request ) {
