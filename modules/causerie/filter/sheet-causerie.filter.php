@@ -117,7 +117,6 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$data = wp_parse_args(  $this->set_users( $causerie_intervention ), $data );
 		}
 
-
 		return $data;
 	}
 
@@ -254,7 +253,6 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			if( ! empty( $task ) ){
 				$title = $task->data[ 'title' ];
 				if( $task->data[ 'count_all_points' ] > 0 ){
-					echo '<pre>'; print_r( '-' ); echo '</pre>';
 					$points = \task_manager\Point_Class::g()->get( array( 'post_id' => $task->data[ 'id' ] ) );
 					foreach( $points as $key => $point ){
 						$points_task[ 'value' ][] = array( 'pointtext' => $point->data[ 'content' ] );

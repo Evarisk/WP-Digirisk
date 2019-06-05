@@ -37,7 +37,6 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	public function display_single( $id, $taskid ) {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
-		echo '<pre>'; print_r( $main_causerie->data[ 'document_meta' ] ); echo '</pre>';
 		$user           = null;
 
 		if ( ! empty( $final_causerie->data['former'] ) && ! empty( $final_causerie->data['former']['user_id'] ) ) {
@@ -169,7 +168,6 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 * ainsi que date_end.
 	 */
 	public function step_participants( $causerie_intervention ) {
-		echo '<pre>'; print_r( '- 1 -' ); echo '</pre>';
 		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_intervention->data['parent_id'] ), true );
 
 		$causerie->data['number_time_realized']++;
@@ -179,18 +177,15 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		Causerie_Class::g()->update( $causerie->data );
 
-		// $causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
+		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
 		$causerie_intervention->data['titreTache'] = 'titre';
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
-		echo '<pre>'; print_r( ' - 2 - ' ); echo '</pre>';
 		$response = Sheet_Causerie_Intervention_Class::g()->prepare_document( $causerie_intervention, array( 'causerie' => $causerie ) );
-		echo '<pre>'; print_r( ' - 3 - ' ); echo '</pre>';
-		$a = Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
-		echo '<pre>'; print_r( $a[ 'document' ][ 'data' ][ 'path' ] ); echo '</pre>';
+		Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
 
 		return $causerie_intervention;
 	}

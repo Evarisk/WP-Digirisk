@@ -35,6 +35,3 @@ data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>">
 <i class="fas fa-arrow-right"></i>
 </span>
 </div>
-
-<?php // echo '<pre>'; print_r( $task ); echo '</pre>'; ?>
-<?php // echo '<pre>'; print_r( $causerie ); echo '</pre>'; ?>

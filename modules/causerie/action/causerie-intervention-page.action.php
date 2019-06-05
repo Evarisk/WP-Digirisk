@@ -67,8 +67,6 @@ class Causerie_Intervention_Page_Action {
 				}
 
 				$causerie = Causerie_Intervention_Page_Class::g()->step_former( $causerie, $former_id );
-				echo '<pre>'; print_r( $causerie ); echo '</pre>'; exit;
-
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-2', array(
 					'final_causerie' => $causerie,
@@ -100,13 +98,9 @@ class Causerie_Intervention_Page_Action {
 				) );
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:
-			// case 5:
 
 				// Cette étape n'est pas une requête ajax, mais un admin_post.
-				echo '<pre>'; print_r( 'attends' ); echo '</pre>';
 				Causerie_Intervention_Page_Class::g()->step_participants( $causerie );
-				echo '<pre>'; print_r( '- ENDS -' ); echo '</pre>';
-				exit;
 
 				wp_redirect( admin_url( 'admin.php?page=digirisk-causerie' ) );
 				break;
