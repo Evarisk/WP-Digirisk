@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || exit; ?>
 <div class="wpeo-gridlayout grid-3">
 	<p>
 		<span>Date de l'action:</span>
-		<span><strong><?php echo ( ! empty( $historic_update ) ) ? $historic_update['date']['date'] : 'N/A'; ?></strong></span>
+		<span><strong><?php echo ( ! empty( $historic_update ) && isset( $historic_update['date']['date'] ) ) ? $historic_update['date']['date'] : 'N/A'; ?></strong></span>
 	</p>
 	<p>UT ou GP: <strong><?php echo ( ! empty( $historic_update['parent_id'] ) ) ? $historic_update['parent']->data['unique_identifier'] . ' - ' . $historic_update['parent']->data['title'] : 'N/A'; ?></strong></p>
 	<p>Description de l'action: <strong><?php echo ! empty( $historic_update ) ? $historic_update['content'] : 'N/A'; ?></strong></p>
