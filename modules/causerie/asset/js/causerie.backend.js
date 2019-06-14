@@ -73,6 +73,11 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 		event.preventDefault();
 		return false;
 	} );
+
+	jQuery( document ).on( 'click', '.digi-import-add-keyword > .wpeo-button', window.eoxiaJS.digirisk.causerie.addKeywordToTextarea );
+
+	jQuery( document ).on( 'click', '.digi-import-add-keyword .dropdown-content .item', window.eoxiaJS.digirisk.causerie.itemSelectToTextarea );
+
 };
 
 /**
@@ -381,3 +386,15 @@ window.eoxiaJS.digirisk.causerie.checkUserID = function( element ) {
 
 	return true;
 };
+
+window.eoxiaJS.digirisk.causerie.addKeywordToTextarea = function( event ){
+	var importContent = jQuery( this ).closest( '.digi-import-causeries.modal-active' ).find( 'textarea' );
+	var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
+	importContent.focus().val( importContent.val() + '\r\n' + keyword );
+}
+
+window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
+	var keyword = jQuery( this ).attr( 'aria-label' );
+	var importContent = jQuery( this ).closest( '.digi-import-causeries.modal-active' ).find( 'textarea' );
+	importContent.val( importContent.val() + '\r\n' + '%risque%' + keyword );
+}

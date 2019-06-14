@@ -34,7 +34,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @param integer $id L'ID de la causerie.
 	 */
-	public function display_single( $id, $taskid ) {
+	public function display_single( $id ) {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
 		$user           = null;

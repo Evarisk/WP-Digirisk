@@ -28,6 +28,9 @@ class Causerie_Action {
 		add_action( 'wp_ajax_edit_causerie', array( $this, 'ajax_edit_causerie' ) );
 		add_action( 'wp_ajax_load_edit_causerie', array( $this, 'ajax_load_edit_causerie' ) );
 		add_action( 'wp_ajax_delete_causerie', array( $this, 'ajax_delete_causerie' ) );
+
+		add_action( 'wp_ajax_digi_import_causeries', array( $this, 'callback_digi_import_causeries' ) );
+
 	}
 
 	/**
@@ -136,6 +139,27 @@ class Causerie_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'causerie',
 			'callback_success' => 'deletedAccidentSuccess',
+		) );
+	}
+
+	public function callback_digi_import_causeries(){
+		check_ajax_referer( 'digi_import_causeries' );
+
+		$content = ! empty( $_POST ) && ! empty( $_POST['content'] ) ? trim( $_POST['content'] ) : null;
+
+		if ( null === $content ) {
+			wp_send_json_error( array( 'message' => __( 'Le contenu de l\'import est vide', 'digirisk' ) ) );
+		}
+
+		$response = Causerie_Class::g()->treat_content_import_causerie( $content );
+
+		ob_start();
+		Causerie_Page_Class::g()->display_form();
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
+			'callback_success' => 'editedCauserieSuccess',
+			'view'             => ob_get_clean(),
 		) );
 	}
 }

@@ -75,6 +75,133 @@ class Causerie_Class extends \eoxia\Post_Class {
 
 		wp_mkdir_p( $this->export_directory );
 	}
+
+	public function display_textarea(){
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-content',array() );
+	}
+
+	public function treat_content_import_causerie( $content ){
+
+		$content_by_lines = preg_split( '/\r\n|\r|\n/', $content );
+		$line_error = array();
+
+		if ( ! empty( $content_by_lines ) ) {
+			$list_id = array();
+			foreach ( $content_by_lines as $index => $line ) {
+				if ( false !== strpos( $line, '%causerie%' ) ) {
+					$line = str_replace( '%causerie%', '', $line );
+					if( ! empty( $line ) ){
+						$create_causerie = Causerie_class::g()->create(
+							array(
+								'title'   => $line
+							)
+						);
+
+						array_push( $list_id, $create_causerie->data[ 'id' ] );
+					}else{
+						$error = array(
+							'line' => $line,
+							'error' => __( 'Ligne vide', 'digirisk' )
+						);
+						array_push( $line_error, $error);
+					}
+
+				}else if( false !== strpos( $line, '%description%' ) ) {
+					$line = str_replace( '%description%', '', $line );
+					if( ! empty( $line ) && ! empty( $list_id ) && $list_id[ count( $list_id ) - 1 ] > 0 ){
+						$causerie = Causerie_Class::g()->get( array( 'id' => $list_id[ count( $list_id ) - 1 ] ), true );
+
+						$causerie->data[ 'content' ] = $line;
+						Causerie_Class::g()->update( $causerie->data );
+					}else{
+						$error = array(
+							'line' => $line,
+							'error' => __( 'Ligne vide/ Causerie ID invalide', 'digirisk' )
+						);
+						array_push( $line_error, $error);
+					}
+				}else if( false !== strpos( $line, '%media%' ) ){
+					$line = str_replace( '%media%', '', $line );
+					if( ! empty( $line ) && ! empty( $list_id ) && $list_id[ count( $list_id ) - 1 ] > 0 ){
+
+						$media_query = new \WP_Query(
+						    array(
+								'title'          => $line,
+						        'post_type'      => 'attachment',
+						        'post_status'    => 'inherit',
+						        'posts_per_page' => 1,
+						    )
+						);
+
+						if( ! empty( $media_query->posts ) ){
+							$image_id = $media_query->posts[ 0 ]->ID;
+
+							$causerie->data['thumbnail_id']                      = (int) $image_id;
+							$causerie->data['associated_document_id']['image'][] = (int) $image_id;
+							Causerie_Class::g()->update( $causerie->data );
+
+						}else{
+							$error = array(
+								'line' => $line,
+								'error' => __( 'Image introuvable', 'digirisk' )
+							);
+							array_push( $line_error, $error);
+						}
+					}else{
+						$error = array(
+							'line' => $line,
+							'error' => __( 'Ligne vide/ Causerie ID invalide', 'digirisk' )
+						);
+						array_push( $line_error, $error);
+					}
+
+				}else if( false !== strpos( $line, '%risque%' ) ){
+					$line = str_replace( '%risque%', '', $line );
+					if( ! empty( $line ) && ! empty( $list_id ) && $list_id[ count( $list_id ) - 1 ] > 0 ){
+						$causerie = Causerie_Class::g()->get( array( 'id' => $list_id[ count( $list_id ) - 1 ] ), true );
+						$risque = Risk_Category_Class::g()->get( array( 'name' => $line ), true );
+						if( ! empty( $risque ) ){
+							$causerie->data['taxonomy']['digi-category-risk'][] = $risque->data[ 'thumbnail_id' ];
+							Causerie_Class::g()->update( $causerie->data );
+						}else{
+							$error = array(
+								'line'  => $line,
+								'error' => sprintf( __( 'Risque introuvable %s', 'digirisk' ), $line )
+							);
+							array_push( $line_error, $error);
+						}
+					}else{
+						$error = array(
+							'line'  => $line,
+							'error' => sprintf( __( 'Ligne vide/ Causerie ID invalide : %s', 'digirisk' ), $list_id[ count( $list_id ) - 1 ] )
+						);
+						array_push( $line_error, $error);
+					}
+				}else {
+					$error = array(
+						'line'  => $line,
+						'error' => sprintf( __( 'La ligne contient seulement du text', 'digirisk' ) )
+					);
+					array_push( $line_error, $error);
+				}
+			}
+		}else{
+			$error = array(
+				'line'  => 'Le text est vide',
+				'error' => sprintf( __( 'Text vide', 'digirisk' ) )
+			);
+			array_push( $line_error, $error);
+		}
+
+		foreach( $list_id as $causerie_id ){ // On créait les documents de causerie
+			$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_id ), true );
+
+			$response = Sheet_Causerie_Class::g()->prepare_document( $causerie );
+			Sheet_Causerie_Class::g()->create_document( $response['document']->data['id'] );
+		}
+
+		return array( 'list' => $list_id, 'error' => $line_error );
+	}
 }
 
 Causerie_Class::g();

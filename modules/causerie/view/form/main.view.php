@@ -47,5 +47,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</tbody>
 	</table>
-
 </div>
+
+<?php
+	\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-import', array() );
+?>

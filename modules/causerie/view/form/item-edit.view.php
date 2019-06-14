@@ -44,12 +44,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		<?php else : ?>
 			<div class="action">
-				<div data-namespace="digirisk"
-					data-module="causerie"
-					data-before-method="beforeSaveCauserie"
-					data-loader="table"
-					data-parent="causerie-row"
-					class="wpeo-button button-disable button-event button-square-50 add action-input"><i class="icon fa fa-plus"></i></div>
+				<div class="wpeo-button button-event button-square-50 add action-input"
+				data-loader="table"
+				data-parent="causerie-row"><i class="icon fa fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
 	</td>
