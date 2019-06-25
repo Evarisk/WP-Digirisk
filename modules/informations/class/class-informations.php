@@ -34,8 +34,8 @@ class Informations_Class extends \eoxia\Singleton_Util {
 	 */
 	public function display( $element ) {
 		$duers        = DUER_Class::g()->get( array( 'posts_per_page' => 2 ), true );
-		$current_duer = is_array( $duers ) && ! empty( $duers ) ? $duers[0] : $duers;
-		$old_duer     = is_array( $duers ) && ! empty( $duers ) ? $duers[1] : null;
+		$current_duer = is_array( $duers ) ? $duers[0] : $duers;
+		$old_duer     = is_array( $duers ) ? $duers[1] : null;
 
 		$accident    = Accident_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 
@@ -90,14 +90,8 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'average'         => 'N/A',
 		);
 
-		if( ! empty( $current_duer ) ){
-			$current_duer_info = $this->duer_info( $current_duer->data );
-			$old_duer_info     = $this->duer_info( array() );
-		}else{
-			$current_duer_info = array();
-			$old_duer_info = array();
-		}
-
+		$current_duer_info = $this->duer_info( $current_duer->data );
+		$old_duer_info     = $this->duer_info( array() );
 		if ( ! empty( $old_duer ) ) {
 			$old_duer_info = $this->duer_info( $old_duer->data );
 
