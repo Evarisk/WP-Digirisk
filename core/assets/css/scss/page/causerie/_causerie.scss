@@ -33,42 +33,42 @@
 	}
 }
 
-.owl-prev {
-	float: left;
-	font-size: 200px;
-	width: 15px;
-	height: 100px;
-	position: absolute;
-	top: 40%;
-	border: 0px solid black;
-}
+.step-2 {
+	.owl-nav {
+		height: 100%;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		position: absolute;
+		top: 0;
+		div {
+			width: auto;
+			height: auto;
+		}
 
-.owl-next {
-	float: left;
-	width: 15px;
-	font-size: 200px;
-	height: 100px;
-	position: absolute;
-	top: 40%;
-	right: 45px;
-	display: block !important;
-	border: 0px solid black;
-}
+		div.owl-next {
+			margin-left: auto;
+		}
 
-.owl-dots{
-	margin: 50px;
-	.active button{
-		color: blue !important;
 	}
-}
-.owl-dots .owl-dot button {
-  background: none;
-  border: none;
-  padding-right: 10px;
-  color: #555555;
-  font-size: 50px;
-  font-weight: bold;
-  cursor: pointer;
+
+	.owl-dots {
+		margin: 50px;
+		.active button{
+			color: blue !important;
+		}
+	}
+	.owl-dots .owl-dot button {
+	  background: none;
+	  border: none;
+	  padding-right: 10px;
+	  color: #555555;
+	  font-size: 50px;
+	  font-weight: bold;
+	  cursor: pointer;
+	}
+
 }
 
 .step-list {

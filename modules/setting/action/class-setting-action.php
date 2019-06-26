@@ -58,6 +58,8 @@ class Setting_Action {
 	public function add_option_page() {
 		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general'; // WPCS: var input ok.
 
+		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
+
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
 
@@ -106,6 +108,7 @@ class Setting_Action {
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
 			'sites'                      => $sites,
+			'general_options'            => $general_options,
 		) );
 	}
 
@@ -199,6 +202,9 @@ class Setting_Action {
 		$can_edit_risk_category     = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
 		$can_edit_type_cotation     = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
 		$require_unique_security_id = ( isset( $_POST['require_unique_security_id'] ) && 'true' == $_POST['require_unique_security_id'] ) ? true : false;
+		$general_data_options       = ! empty( $_POST['general_options'] ) ? (array) $_POST['general_options'] : array();
+
+		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
 		if ( $require_unique_security_id ) {
 			$security_id_key    = \eoxia\Config_Util::$init['digirisk']->child->security_id_key;
@@ -218,6 +224,10 @@ class Setting_Action {
 		update_option( 'edit_risk_category', $can_edit_risk_category );
 		update_option( 'edit_type_cotation', $can_edit_type_cotation );
 		update_option( 'require_unique_security_id', $require_unique_security_id );
+
+		$general_options['required_duer_day'] = $general_data_options['required_duer_day'];
+
+		update_option( \eoxia\Config_Util::$init['digirisk']->general_options, $general_options );
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',

@@ -90,6 +90,7 @@
 		"modules/transfer_data/transfer_data.config.json"
 	],
 	"core_option": "_digirisk_core",
+  "general_options": "_digirisk_general_options",
 	"accronym_option": "_digirisk_accronym",
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false,

@@ -29,6 +29,9 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 */
 	private $limit_user = 20;
 
+	public $default_general_options = array(
+		'required_duer_day' => 365,
+	);
 	/**
 	 * Le constructeur
 	 *

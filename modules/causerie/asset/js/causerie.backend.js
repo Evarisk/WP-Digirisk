@@ -48,11 +48,8 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 		'nav': 1,
 		'loop': 1,
 		'items': 1,
-		'autoHeight': true,
-		'margin':10,
-		'dots' : true,
-		'navText' : ['<span class="owl-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>','<span class="owl-next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>'],
-		'dotsData': true,
+		'dots' : false,
+		'navText' : ['<span class="owl-prev"><i class="fa fa-angle-left fa-8x" aria-hidden="true"></i></span>','<span class="owl-next"><i class="fa fa-angle-right fa-8x" aria-hidden="true"></i></span>'],
 	} );
 };
 
