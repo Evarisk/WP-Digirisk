@@ -22,11 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<li><?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?></li>
 		</ul>
 	</div>
-	<div data-title="<?php esc_attr_e( 'Nom., Prénom.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? '<strong>' . User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . '</strong> ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
-	<div data-title="<?php esc_attr_e( 'Date et heure', 'digirisk' ); ?>" class="cell padding w150"><i class="icon fas fa-calendar-alt"></i> <?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
-	<div data-title="<?php esc_attr_e( 'Lieu', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['place'] ) ? '<strong>' . esc_attr( $accident->data['place']->data['unique_identifier'] ) . '</strong> ' . esc_attr( $accident->data['place']->data['title'] ) : __( 'N/A', 'digirisk' ); ?></div>
-	<div data-title="<?php esc_attr_e( 'Circonstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
-	<div data-title="<?php esc_attr_e( 'Indicateurs', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
+	<div data-title="<?php esc_attr_e( 'Name., Surname.. victim', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? '<strong>' . User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . '</strong> ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
+	<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="cell padding w150"><i class="icon fas fa-calendar-alt"></i> <?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['place'] ) ? '<strong>' . esc_attr( $accident->data['place']->data['unique_identifier'] ) . '</strong> ' . esc_attr( $accident->data['place']->data['title'] ) : __( 'N/A', 'digirisk' ); ?></div>
+	<div data-title="<?php esc_attr_e( 'circumstances', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+	<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 	<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
 		<div class="action wpeo-gridlayout grid-3 grid-gap-0">
 			<?php if ( $accident->data['document']->data['file_generated'] ) : ?>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-action="generate_document"
 					data-color="red"
 					data-direction="left"
-					aria-label="<?php echo esc_attr_e( 'Corrompu. Cliquer pour regénérer.', 'digirisk' ); ?>">
+					aria-label="<?php echo esc_attr_e( 'Corrupt. Click to regenerate.', 'digirisk' ); ?>">
 					<i class="fas fa-times icon" aria-hidden="true"></i>
 				</span>
 			<?php endif; ?>
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-action="delete_accident"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_accident' ) ); ?>"
 				data-id="<?php echo esc_attr( $accident->data['id'] ); ?>"
-				data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cet accident ?', 'digirisk' ); ?>"><i class="icon fas fa-times"></i></div>
+				data-message-delete="<?php esc_attr_e( 'Are you sure you want to delete this accident?', 'digirisk' ); ?>"><i class="icon fas fa-times"></i></div>
 		</div>
 	</div>
 </div>
