@@ -1,11 +1,11 @@
 <?php
 /**
- * Affiches la liste des causeries
+ * Etape de recuperation des tasks
  *
  * @author    Evarisk <dev@evarisk.com>
  * @since     6.6.0
  * @version   6.6.0
- * @copyright 2018 Evarisk.
+ * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */
 
@@ -15,38 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table causerie causerie-step-3">
-	<thead>
-		<tr>
-			<th class="padding"><?php esc_html_e( 'Participant', 'digirisk' ); ?></th>
-			<th class="w50 padding"><?php esc_html_e( 'Signature', 'digirisk' ); ?></th>
-			<th class="w50"><?php esc_html_e( 'Actions', 'digirisk' ); ?></th>
-		</tr>
-	</thead>
 
-	<tbody>
-		<?php
-		if ( ! empty( $final_causerie->data['participants'] ) ) :
-			foreach ( $final_causerie->data['participants'] as $participant ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
-					'final_causerie' => $final_causerie,
-					'participant'    => $participant,
-				) );
-			endforeach;
-		endif;
-
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item-new', array(
-			'final_causerie' => $final_causerie,
+<?php
+	if( ! empty( $task ) ):
+		\eoxia\View_Util::exec( 'task-manager', 'task', 'backend/task', array(
+			'task' => $task
 		) );
-		?>
-	</tbody>
-</table>
+	else:
+		esc_html_e( 'Veuillez activer Task-Manager pour cette interface', 'digirisk' );
 
-<a class="wpeo-button button-grey" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Finir plus tard', 'digirisk' ); ?></a>
+	endif;
+?>
 
-<a href="<?php echo esc_attr( wp_nonce_url( admin_url( 'admin-post.php?action=next_step_causerie&id=' . $final_causerie->data['id'] ), 'next_step_causerie' ) ); ?>"
-	class="<?php echo ( ! $all_signed ) ? esc_attr( 'button-disable wpeo-tooltip-event' ) : ''; ?> wpeo-button button-blue alignright"
-	aria-label="<?php esc_attr_e( 'Veuillez ajouter des participants et les faire signer avant de cloturer la causerie', 'digirisk' ); ?>"
-	data-direction="left">
-	<span><?php esc_html_e( 'Cloturer la causerie', 'digirisk' ); ?></span>
+<a href="<?php echo Causerie_Intervention_Class::g()->get_link( $final_causerie, 2 ); ?>" class="wpeo-button button-grey">
+	<i class="fas fa-arrow-left"></i>
+	<span><?php esc_html_e( 'Lecture de la causerie', 'digirisk' ); ?></span>
 </a>
+
+<div class="wpeo-button button-blue alignright action-attribute"
+	data-action="next_step_causerie"
+	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"
+	data-id="<?php echo esc_attr( $final_causerie->data['id'] ); ?>">
+	<?php esc_html_e( 'Participant(s)', 'digirisk' ); ?>
+	<i class="fas fa-arrow-right"></i>
+	</span>
+</div>

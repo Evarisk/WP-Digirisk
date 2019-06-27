@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <tr class="user-row">
 	<td><div class="avatar" style="background-color: #<?php echo esc_attr( $user->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $user->data['initial'] ); ?></span></div></td>
 	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->data['id'] ); ?><strong></span></td>
+	<td class="padding"><span><?php echo esc_html( $user->data['lastname'] ); ?></span></td>
+	<td class="padding"><span><?php echo esc_html( $user->data['firstname'] ); ?></span></td>
 	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
 	<td class="padding"><span><?php echo esc_html( implode( ', ', $user->data['wordpress_user']->roles ) ); ?></span></td>
 	<td>

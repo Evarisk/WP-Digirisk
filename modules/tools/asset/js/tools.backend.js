@@ -110,3 +110,7 @@ window.eoxiaJS.digirisk.tools.exec_request = function( li, data, element ) {
 		li.innerHTML += ' ' + window.digi_tools_done;
 	} );
 }
+
+window.eoxiaJS.digirisk.tools.fixedHiddenSociety = function( triggeredElement, response ) {
+	jQuery( triggeredElement ).closest( '.tab-content' ).find( 'progress' ).val( 100 );
+}

@@ -202,6 +202,14 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 
 		return $causerie_intervention;
 	}
+
+	public function get_link( $causerie, $step_number, $skip = false ) {
+		if ( $causerie->data['current_step'] < $step_number && ! $skip ) {
+			return '#';
+		}
+
+		return admin_url( 'admin-post.php?action=change_step_causerie&id=' . $causerie->data['id'] . '&step=' . $step_number );
+	}
 }
 
 Causerie_Intervention_Class::g();

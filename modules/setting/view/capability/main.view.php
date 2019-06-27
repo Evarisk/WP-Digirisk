@@ -29,5 +29,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php Setting_Class::g()->display_user_list_capacity(); ?>
 
-	<a href="#" class="margin action-input button blue right" data-parent="section-capability"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>
+	<div class="alignright action-input wpeo-button button-blue button-disable" data-parent="section-capability"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 </div>

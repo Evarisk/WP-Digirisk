@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<ul class="causerie-stats wpeo-gridlayout grid-3">
+<ul class="causerie-stats wpeo-gridlayout grid-4">
 	<li><?php esc_html_e( sprintf( 'Cette causerie à été réalisée %d fois', $main_causerie->data['number_time_realized'] ), 'digirisk' ); ?></li>
 	<li><?php esc_html_e( sprintf( '%d personnes y ont déjà participés', $main_causerie->data['number_participants'] ), 'digirisk' ); ?></li>
 
@@ -27,7 +27,6 @@ global $eo_search; ?>
 			<span><?php echo esc_html( $main_causerie->data['last_date_realized']['rendered']['date'] ); ?></span>
 		</li>
 	<?php endif; ?>
-
 </ul>
 
 <h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>

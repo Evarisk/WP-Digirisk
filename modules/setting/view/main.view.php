@@ -36,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'require_unique_security_id' => $require_unique_security_id,
 					'unique_security_id'         => $unique_security_id,
 					'sites'                      => $sites,
+					'general_options'            => $general_options,
 				) );
 				?>
 			</div>

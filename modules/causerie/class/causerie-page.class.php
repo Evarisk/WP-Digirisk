@@ -72,7 +72,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	public function display_dashboard() {
 		$causeries_intervention = Causerie_Intervention_Class::g()->get( array(
 			'meta_key'   => '_wpdigi_current_step',
-			'meta_value' => 4,
+			'meta_value' => \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED,
 		), false, true );
 
 		$causeries_intervention = $this->get_documents( $causeries_intervention );

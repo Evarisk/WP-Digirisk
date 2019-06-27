@@ -125,7 +125,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td>
 		<div class="action">
-			<?php if ( $causerie->data['sheet_intervention']->data['file_generated'] ) : ?>
+			<?php if ( isset( $causerie->data['sheet_intervention']->data['file_generated'] ) && $causerie->data['sheet_intervention']->data['file_generated'] ) : ?>
 				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $causerie->data['sheet_intervention']->data['link'] ); ?>">
 					<i class="fas fa-download icon" aria-hidden="true"></i>
 				</a>

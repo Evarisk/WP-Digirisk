@@ -110,8 +110,9 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 			'nombreCauserie'      => $causerie->number_time_realized,
 			'dateCreation'        => $causerie->date['date_input']['fr_FR']['date'],
 			'nombreFormateur'     => $causerie->number_formers,
-			'nombreUtilisateur'   => $causerie->number_participants,
+			'nombreUtilisateur'   => $causerie->number_participants
 		);
+
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_medias( $causerie_intervention ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $causerie_intervention ) );

@@ -69,7 +69,7 @@ class Causerie_Intervention_Action {
 		Causerie_Intervention_Page_Class::g()->register_search( null, null );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4', array(
 			'final_causerie' => $final_causerie,
 			'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
 		) );
@@ -112,6 +112,7 @@ class Causerie_Intervention_Action {
 
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
+		ob_start();
 		if ( ! $is_former ) {
 			if ( ! empty( $final_causerie->data['participants'] ) ) {
 				foreach ( $final_causerie->data['participants'] as $participant ) {
@@ -122,8 +123,7 @@ class Causerie_Intervention_Action {
 				}
 			}
 
-			ob_start();
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3-item', array(
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item', array(
 				'participant'    => $current_participant,
 				'final_causerie' => $final_causerie,
 				'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
@@ -174,7 +174,7 @@ class Causerie_Intervention_Action {
 		Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-3', array(
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4', array(
 			'final_causerie' => $causerie_intervention,
 		) );
 

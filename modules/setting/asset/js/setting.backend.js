@@ -13,6 +13,7 @@ window.eoxiaJS.digirisk.setting.event = function() {
 	jQuery( document ).on( 'click', '#digi-danger-preset .save-all', window.eoxiaJS.digirisk.setting.savePresetRisks );
 	jQuery( document ).on( 'click', '#digi-danger-preset table tr input:not(input[type="checkbox"]), #digi-danger-preset tr .toggle, #digi-danger-preset .dropdown-toggle, #digi-danger-preset tr textarea, #digi-danger-preset tr .popup, #digi-danger-preset tr .action', window.eoxiaJS.digirisk.setting.checkTheCheckbox );
 	jQuery( document ).on( 'click', '.settings_page_digirisk-setting .list-users .wp-digi-pagination a', window.eoxiaJS.digirisk.setting.pagination );
+	jQuery( document ).on( 'click', '.section-capability input[type="checkbox"]', window.eoxiaJS.digirisk.setting.activeSave );
 };
 
 window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
@@ -101,3 +102,7 @@ window.eoxiaJS.digirisk.setting.savedCapability = function( triggeredElement, re
 window.eoxiaJS.digirisk.setting.generalSettingsSaved = function( triggeredElement, response ) {
 	document.location.href = response.data.url;
 };
+
+window.eoxiaJS.digirisk.setting.activeSave = function( event ) {
+	jQuery( this ).closest( '.section-capability' ).find( '.wpeo-button.button-blue' ).removeClass( 'button-disable' );
+}

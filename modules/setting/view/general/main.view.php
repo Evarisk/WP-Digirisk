@@ -29,6 +29,15 @@ defined( 'ABSPATH' ) || exit; ?>
 	</div>
 
 	<div class="form-element">
+		<span class="form-label"><?php esc_html_e( 'Nombre de jour obligatoire pour le DUER', 'digirisk' ); ?></span>
+
+		<label class="form-field-container">
+			<input type="text" name="general_options[required_duer_day]" class="form-field" value="<?php echo esc_attr( $general_options['required_duer_day'] ); ?>" />
+		</label>
+	</div>
+
+
+	<div class="form-element">
 		<label class="form-field-container">
 			<div class="form-field-inline">
 				<input type="checkbox" id="edit_risk_category" class="form-field" name="edit_risk_category" <?php echo $can_edit_risk_category ? 'checked' : ''; ?> />
@@ -57,8 +66,17 @@ defined( 'ABSPATH' ) || exit; ?>
 
 	<?php if ( $require_unique_security_id ) : ?>
 		<h3>
-			<?php esc_html_e( 'Votre ID de sécurité unique est : ', 'digirisk' ); ?>
-			<span><?php echo esc_html( $unique_security_id['security_id'] ); ?></span>
+			<ul>
+				<li>
+					<?php esc_html_e( 'Votre URL', 'digirisk' ); ?>
+					<span><?php echo get_site_url(); ?></span>
+				</li>
+
+				<li>
+					<?php esc_html_e( 'Votre ID de sécurité unique est : ', 'digirisk' ); ?>
+					<span><?php echo esc_html( $unique_security_id['security_id'] ); ?></span>
+				</li>
+			</ul>
 		</h3>
 	<?php endif; ?>
 

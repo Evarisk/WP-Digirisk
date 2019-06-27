@@ -43,6 +43,14 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 			$user = get_userdata( $final_causerie->data['former']['user_id'] );
 		}
 
+		if ( class_exists( 'task_manager\Task_Class' ) && $final_causerie->data['current_step'] == 3 ) {
+			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $final_causerie->data['id'] ), true );
+
+			if ( empty( $task ) ) {
+				$task = Causerie_Intervention_Page_Class::g()->create_task_link_to_causerie( $final_causerie );
+			}
+		}
+
 		$this->register_search( $final_causerie, $user );
 
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
@@ -50,6 +58,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 			'main_causerie'  => $main_causerie,
 			'user'           => $user,
 			'all_signed'     => $this->check_all_signed( $final_causerie ),
+			'task'         => ! empty( $task ) ? $task : array()
 		) );
 	}
 
@@ -137,9 +146,8 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return Causerie_Intervention_Model           L'objet Causerie_Intervention_Model avec la donnée current_step modifiée.
 	 */
-	public function step_slider( $causerie ) {
-		$causerie->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
-
+	public function step_slider( $causerie, $nextstep ) {
+		$causerie->data['current_step'] = $nextstep;
 		return Causerie_Intervention_Class::g()->update( $causerie->data );
 	}
 
@@ -175,6 +183,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
+		$causerie_intervention->data['titreTache'] = 'titre';
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 
@@ -182,6 +191,24 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
 
 		return $causerie_intervention;
+	}
+
+	public function create_task_link_to_causerie( $causerie ){
+		$title = __( 'Causerie', 'digirisk' ) . ' ' . $causerie->data['unique_identifier'] . ' ' . $causerie->data['second_identifier'] . ' - ' . __( 'date', 'digirisk' ) . ' ' . date( 'd/m/Y' );
+
+		if( class_exists( 'task_manager\Task_Class' ) ){
+			$task_args = array(
+				'title'     => $title,
+				'parent_id' => $causerie->data['id'],
+				'status'    => 'inherit',
+			);
+
+			$task = \task_manager\Task_Class::g()->create( $task_args, true );
+		}else{
+			$task = false;
+		}
+
+		return $task;
 	}
 }
 

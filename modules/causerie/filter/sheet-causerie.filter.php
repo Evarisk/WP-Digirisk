@@ -95,12 +95,18 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			'dateCreation'        => $causerie->data['date']['rendered']['date_human_readable'],
 			'nombreFormateur'     => 0,
 			'nombreUtilisateur'   => 0,
+			'titreTache'          => '',
+			'points'              => array(
+				'type'  => 'segment',
+				'value' => array(),
+			),
 		);
 
 		$data = wp_parse_args( $data, $this->set_medias( $causerie ) );
 		$data = wp_parse_args( $data, $this->set_users( $causerie ) );
 
 		if ( isset( $args['causerie'] ) ) {
+			$taskmanager_data = $this->check_if_this_causerie_have_task_enable( $causerie_intervention->data[ 'id' ] );
 			$data['cleFinalCauserie']    = (string) $causerie_intervention->data['second_unique_key'];
 			$data['formateur']           = $causerie_intervention->data['former']['rendered']->data['displayname'];
 			$data['formateurSignature']  = $this->set_picture( $causerie_intervention->data['former']['signature_id'], 5 );
@@ -109,7 +115,8 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$data['nombreCauserie']      = $causerie->data['number_time_realized'];
 			$data['nombreFormateur']     = $causerie->data['number_formers'];
 			$data['nombreUtilisateur']   = $causerie->data['number_participants'];
-
+			$data['titreTache']          = $taskmanager_data[ 'title' ];
+			$data['points']               = $taskmanager_data[ 'points' ];
 			$data = wp_parse_args(  $this->set_users( $causerie_intervention ), $data );
 		}
 
@@ -237,6 +244,28 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		}
 
 		return $picture;
+	}
+
+	public function check_if_this_causerie_have_task_enable( $id ){
+		$title                = '';
+		$points_task          = array();
+		$points_task['type']  = 'segment';
+		$points_task['value'] = array();
+
+		if( class_exists( 'task_manager\Task_Class' ) ){
+			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );
+			if( ! empty( $task ) ){
+				$title = $task->data[ 'title' ];
+				if( $task->data[ 'count_all_points' ] > 0 ){
+					$points = \task_manager\Point_Class::g()->get( array( 'post_id' => $task->data[ 'id' ] ) );
+					foreach( $points as $key => $point ){
+						$points_task[ 'value' ][] = array( 'pointtext' => $point->data[ 'content' ] );
+					}
+				}
+			}
+		}
+
+		return array( 'title' => $title, 'points' => $points_task );
 	}
 }
 
