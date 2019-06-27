@@ -26,6 +26,7 @@ class Causerie_Intervention_Page_Action {
 	public function __construct() {
 		add_action( 'wp_ajax_next_step_causerie', array( $this, 'ajax_next_step_causerie' ) );
 		add_action( 'admin_post_next_step_causerie', array( $this, 'ajax_next_step_causerie' ) );
+		add_action( 'admin_post_change_step_causerie', array( $this, 'change_step_causerie' ) );
 	}
 
 	/**
@@ -78,6 +79,10 @@ class Causerie_Intervention_Page_Action {
 
 				if( class_exists( 'task_manager\Task_Class' ) ){
 					$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );
+
+					if ( empty( $task ) ) {
+						$task = Causerie_Intervention_Page_Class::g()->create_task_link_to_causerie( $causerie );
+					}
 				}
 
 				ob_start();
@@ -115,6 +120,21 @@ class Causerie_Intervention_Page_Action {
 			'current_step'     => $causerie->data['current_step'],
 			'view'             => ob_get_clean(),
 		) );
+	}
+
+	public function change_step_causerie() {
+		$id   = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+		$step = ! empty( $_GET['step'] ) ? (int) $_GET['step'] : 0;
+
+
+		$causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+
+
+		$causerie->data['current_step'] = $step;
+
+		Causerie_Intervention_Class::g()->update( $causerie->data );
+
+		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $id ) );
 	}
 }
 

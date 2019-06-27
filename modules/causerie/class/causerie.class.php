@@ -161,7 +161,7 @@ class Causerie_Class extends \eoxia\Post_Class {
 						$causerie = Causerie_Class::g()->get( array( 'id' => $list_id[ count( $list_id ) - 1 ] ), true );
 						$risque = Risk_Category_Class::g()->get( array( 'name' => $line ), true );
 						if( ! empty( $risque ) ){
-							$causerie->data['taxonomy']['digi-category-risk'][] = $risque->data[ 'thumbnail_id' ];
+							$causerie->data['taxonomy']['digi-category-risk'][] = $risque->data[ 'id' ];
 							Causerie_Class::g()->update( $causerie->data );
 						}else{
 							$error = array(

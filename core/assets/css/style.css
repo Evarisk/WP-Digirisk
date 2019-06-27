@@ -45,6 +45,7 @@
 
 .wpeo-wrap.causerie-wrap .main-content .causerie-description {
   margin-top: 0;
+  margin-bottom: 20px;
   color: rgba(0, 0, 0, 0.6); }
 
 .wpeo-wrap.causerie-wrap .main-content .causerie-stats li {
@@ -105,7 +106,12 @@
   font-weight: bold;
   cursor: pointer; }
 
-.wpeo-wrap.causerie-wrap .step-list {
+.wpeo-wrap.causerie-wrap h2 {
+  font-size: 2.2em;
+  line-height: 1em;
+  margin: .200em 0 0 0; }
+
+.wpeo-wrap.causerie-wrap .step .step-list {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -113,15 +119,22 @@
   display: -ms-flexbox;
   display: flex; }
 
-.wpeo-wrap.causerie-wrap .step-list .step:after {
+.wpeo-wrap.causerie-wrap .step .step-list .step {
+  text-decoration: none; }
+
+.wpeo-wrap.causerie-wrap .step .step-list .step .title {
+  padding-bottom: 0px;
+  min-height: 30px; }
+
+.wpeo-wrap.causerie-wrap .step .step-list .step:after {
   position: relative;
   z-index: 90;
   display: block;
   margin: auto;
   content: '';
-  top: -26px;
-  width: 14px;
-  height: 14px;
+  width: 30px;
+  height: 30px;
+  top: 8px;
   background: #d6d6d6;
   -webkit-border-radius: 50%;
           border-radius: 50%;
@@ -3192,3 +3205,13 @@ canvas {
 
 .digirisk-wrap.wpeo-wrap .flex-table .table-footer .wpeo-autocomplete .autocomplete-label {
   padding: 0.2em; }
+
+.wrap-causerie .header {
+  margin-top: 50px; }
+
+.wrap-causerie .section {
+  background-color: #FFF;
+  padding: 10px; }
+
+.wrap-causerie #stats-causerie {
+  border: none; }

@@ -395,3 +395,17 @@ window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
 	var importContent = jQuery( this ).closest( '.digi-import-causeries.modal-active' ).find( 'textarea' );
 	importContent.val( importContent.val() + '\r\n' + '%risque%' + keyword );
 }
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_started_causerie".
+ * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
+ *
+ * @since   7.3.0
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.causerie.deletedStartedCauserie = function( triggeredElement, response ) {
+	triggeredElement.closest( '.causerie-row' ).fadeOut();
+};

@@ -29,6 +29,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 </div>
 
+<a href="<?php echo Causerie_Intervention_Class::g()->get_link( $final_causerie, 1 ); ?>" class="wpeo-button button-grey">
+	<i class="fas fa-arrow-left"></i>
+	<span><?php esc_html_e( 'Signature du formateur', 'digirisk' ); ?></span>
+</a>
+
 <div class="wpeo-button button-blue alignright action-attribute"
 	data-action="next_step_causerie"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_causerie' ) ); ?>"
@@ -37,3 +42,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<i class="fas fa-arrow-right"></i>
 	</span>
 </div>
+
+<a href="<?php echo Causerie_Intervention_Class::g()->get_link( $final_causerie, 4, true ); ?>" style="clear: both;" class="wpeo-button button-grey alignright">
+	<span><?php esc_html_e( 'Passer à l\'étape des participants', 'digirisk' ); ?></span>
+	<i class="fas fa-arrow-right"></i>
+
+</a>

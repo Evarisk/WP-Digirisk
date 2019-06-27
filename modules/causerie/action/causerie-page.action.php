@@ -30,6 +30,8 @@ class Causerie_Page_Action {
 		add_action( 'wp_ajax_load_modal_participants', array( $this, 'callback_load_modal_participants' ) );
 
 		add_action( 'admin_post_start_causerie', array( $this, 'callback_start_causerie' ) );
+
+		add_action( 'wp_ajax_delete_started_causerie', array( $this, 'callback_delete_started_causerie' ) );
 	}
 
 	/**
@@ -126,15 +128,35 @@ class Causerie_Page_Action {
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->duplicate( $id );
 
-		$task = Causerie_Intervention_Page_Class::g()->create_task_link_to_causerie( $causerie_intervention->data['id'] );
-		$id  = 0;
-		if( $task ){
-			$id = $task->data[ 'id' ];
-		}
-
 		wp_redirect( admin_url( 'admin.php?page=digirisk-causerie&id=' . $causerie_intervention->data['id'] ) );
 	}
 
+	/**
+	 * Supprimes une causerie en cours.
+	 *
+	 * @since 7.3.0
+	 */
+	public function callback_delete_started_causerie() {
+		check_ajax_referer( 'delete_started_causerie' );
+
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+
+		$causerie->data['status'] = 'trash';
+
+		Causerie_Intervention_Class::g()->update( $causerie->data );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
+			'callback_success' => 'deletedStartedCauserie',
+		) );
+	}
 }
 
 new Causerie_Page_Action();

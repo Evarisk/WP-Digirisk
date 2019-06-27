@@ -43,9 +43,12 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 			$user = get_userdata( $final_causerie->data['former']['user_id'] );
 		}
 
-		$task = array();
-		if( class_exists( 'task_manager\Task_Class' ) ){
-			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );
+		if ( class_exists( 'task_manager\Task_Class' ) && $final_causerie->data['current_step'] == 3 ) {
+			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $final_causerie->data['id'] ), true );
+
+			if ( empty( $task ) ) {
+				$task = Causerie_Intervention_Page_Class::g()->create_task_link_to_causerie( $final_causerie );
+			}
 		}
 
 		$this->register_search( $final_causerie, $user );
@@ -190,13 +193,13 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		return $causerie_intervention;
 	}
 
-	public function create_task_link_to_causerie( $parent_id ){
-		$title = __( 'Causerie', 'digirisk' ) . ' ' . $parent_id . ' - ' . __( 'date', 'digirisk' ) . ' ' . date( 'd/m/Y' );
+	public function create_task_link_to_causerie( $causerie ){
+		$title = __( 'Causerie', 'digirisk' ) . ' ' . $causerie->data['unique_identifier'] . ' ' . $causerie->data['second_identifier'] . ' - ' . __( 'date', 'digirisk' ) . ' ' . date( 'd/m/Y' );
 
 		if( class_exists( 'task_manager\Task_Class' ) ){
 			$task_args = array(
 				'title'     => $title,
-				'parent_id' => $parent_id,
+				'parent_id' => $causerie->data['id'],
 				'status'    => 'inherit',
 			);
 

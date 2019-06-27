@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ( $causeries as $causerie ) :
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/list-item', array(
 					'causerie' => $causerie,
+					'started'  => false,
 				) );
 			endforeach;
 		else :
@@ -66,6 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ( $causeries_intervention as $causerie_intervention ) :
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/list-item', array(
 					'causerie' => $causerie_intervention,
+					'started'  => true,
 				) );
 			endforeach;
 		else :

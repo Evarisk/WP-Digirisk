@@ -16,7 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></h2>
+	<h2>
+		<?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-import', array() ); ?>
+	</h2>
 
 	<table class="table add-causerie">
 		<thead>
@@ -48,7 +51,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tbody>
 	</table>
 </div>
-
-<?php
-	\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-import', array() );
-?>
