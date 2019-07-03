@@ -402,7 +402,6 @@ window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
 	importContent.val( importContent.val() + '\r\n' + '%risque%' + keyword );
 }
 
-<<<<<<< HEAD
 window.eoxiaJS.digirisk.causerie.buttonLinkExternalText = function( element, importContent ){
 
 	if( element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).attr( 'data-import' ) == "true" ){
@@ -455,7 +454,6 @@ window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = funct
 	element.attr( 'data-link', "no" );
 	element.find( '.tm_link_external' ).val( "no" );
 }
-=======
 /**
  * Le callback en cas de réussite à la requête Ajax "delete_started_causerie".
  * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
@@ -469,4 +467,3 @@ window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = funct
 window.eoxiaJS.digirisk.causerie.deletedStartedCauserie = function( triggeredElement, response ) {
 	triggeredElement.closest( '.causerie-row' ).fadeOut();
 };
->>>>>>> 7833a354fdf8631927c57627bbcfe4ec657d22a5
