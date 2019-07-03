@@ -160,6 +160,7 @@ class Causerie_Action {
 			'module'           => 'causerie',
 			'callback_success' => 'editedCauserieSuccess',
 			'view'             => ob_get_clean(),
+			'data'             => $response
 		) );
 	}
 }
