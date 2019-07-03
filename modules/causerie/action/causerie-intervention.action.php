@@ -112,6 +112,7 @@ class Causerie_Intervention_Action {
 
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
+		ob_start();
 		if ( ! $is_former ) {
 			if ( ! empty( $final_causerie->data['participants'] ) ) {
 				foreach ( $final_causerie->data['participants'] as $participant ) {
@@ -122,7 +123,6 @@ class Causerie_Intervention_Action {
 				}
 			}
 
-			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item', array(
 				'participant'    => $current_participant,
 				'final_causerie' => $final_causerie,

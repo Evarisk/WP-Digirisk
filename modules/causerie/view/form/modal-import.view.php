@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="digi-import-causeries-container" >
 	<!-- Bouton d'ouverture de la modal pour l'import des causeries -->
 	<a href="#" class="page-title-action wpeo-modal-event"
+		data-title="<?php esc_html_e( 'Importer une causerie', 'digirisk' ); ?>"
 		data-target="digi-import-causeries"
 		data-parent="digi-import-causeries-container">
 		<i class="fas fa-download" ></i>

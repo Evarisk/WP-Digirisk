@@ -33,11 +33,19 @@ class Informations_Class extends \eoxia\Singleton_Util {
 	 * @since 7.2.0
 	 */
 	public function display( $element ) {
-		$duers        = DUER_Class::g()->get( array( 'posts_per_page' => 2 ), true );
-		$current_duer = is_array( $duers ) ? $duers[0] : $duers;
-		$old_duer     = is_array( $duers ) ? $duers[1] : null;
+		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
-		$accident    = Accident_Class::g()->get( array( 'posts_per_page' => 1 ), true );
+		$duers        = DUER_Class::g()->get( array( 'posts_per_page' => 2 ), true );
+		$current_duer = null;
+
+		$date_before_next_duer = null;
+
+		if ( ! empty( $duers ) ) {
+			$current_duer = ( is_array( $duers ) ) ? $duers[0] : $duers;
+			$old_duer     = is_array( $duers ) ? $duers[1] : null;
+		}
+
+		$accident = Accident_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 
 		$count_users = count_users();
 
@@ -88,10 +96,25 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'total_risk'      => 'N/A',
 			'quotation_total' => 'N/A',
 			'average'         => 'N/A',
+			'number_risk'     => array( 0, 0, 0, 0, 0 ),
 		);
 
-		$current_duer_info = $this->duer_info( $current_duer->data );
+		$current_duer_info = $this->duer_info( array() );
 		$old_duer_info     = $this->duer_info( array() );
+
+		if ( ! empty( $current_duer ) ) {
+			$current_duer_info = $this->duer_info( $current_duer->data );
+
+			$date         = new \DateTime( $current_duer->data['date']['raw'] );
+			$date_compare = new \DateTime( $current_duer->data['date']['raw'] );
+			$current_date = new \DateTime( 'now' );
+
+			$date_compare->add( new \DateInterval( 'P' . $general_options['required_duer_day'] . 'D' ) );
+
+			$interval              = $current_date->diff( $date_compare );
+			$date_before_next_duer = $interval->format( '%a' );
+		}
+
 		if ( ! empty( $old_duer ) ) {
 			$old_duer_info = $this->duer_info( $old_duer->data );
 
@@ -112,17 +135,37 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'orderby'  => 'meta_value_num',
 		) );
 
+
+		$risks = Risk_Class::g()->get();
+
 		if ( ! empty( $risks_categories ) ) {
 			foreach ( $risks_categories as &$risk_category ) {
 				for ( $i = 1; $i < 5; $i++ ) {
-					$risk_category->data['level' . $i ] = 0;
+					if ( ! isset( $risk_category->data['level' . $i ] )  ) {
+						$risk_category->data['level' . $i ] = 0;
+					}
+				}
 
-					if ( ! empty( $current_duer->data['document_meta'][ 'risq' . $i ]['value'] ) ) {
-						foreach ( $current_duer->data['document_meta'][ 'risq' . $i ]['value'] as $risk ) {
-							if ( $risk_category->data['name'] === $risk['nomDanger'] ) {
-								$risk_category->data['level' . $i ]++;
-							}
-						}
+				$risks = Risk_Class::g()->get( array(
+					'tax_query' => array(
+						array(
+							'taxonomy' => Risk_Category_Class::g()->get_type(),
+							'field'    => 'term_id',
+							'terms'    => $risk_category->data['id'],
+						),
+					),
+					'meta_query' => array(
+						array(
+							'key'     => '_wpdigi_preset',
+							'value'   => 1,
+							'compare' => '!=',
+						),
+					),
+				) );
+
+				if ( ! empty( $risks ) ) {
+					foreach ( $risks as $risk ) {
+						$risk_category->data['level' . $risk->data['evaluation']->data['scale'] ]++;
 					}
 				}
 			}
@@ -131,17 +174,19 @@ class Informations_Class extends \eoxia\Singleton_Util {
 		unset( $risk_category );
 
 		\eoxia\View_Util::exec( 'digirisk', 'informations', 'main', array(
-			'current_duer'      => $current_duer,
-			'current_duer_info' => $current_duer_info,
-			'old_duer_info'     => $old_duer_info,
-			'accident'          => $accident,
-			'count_users'       => $count_users,
-			'historic_update'   => $historic_update,
-			'number_evaluator'  => count( $evaluator_ids ),
-			'average'           => $average,
-			'total_users'       => $total_users,
-			'diff_info'         => $diff_info,
-			'risks_categories'  => $risks_categories,
+			'current_duer'          => $current_duer,
+			'current_duer_info'     => $current_duer_info,
+			'old_duer_info'         => $old_duer_info,
+			'accident'              => $accident,
+			'count_users'           => $count_users,
+			'historic_update'       => $historic_update,
+			'number_evaluator'      => count( $evaluator_ids ),
+			'average'               => $average,
+			'total_users'           => $total_users,
+			'diff_info'             => $diff_info,
+			'risks_categories'      => $risks_categories,
+			'general_options'       => $general_options,
+			'date_before_next_duer' => $date_before_next_duer,
 		) );
 	}
 

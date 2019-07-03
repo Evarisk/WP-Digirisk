@@ -21,6 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<td class="w50"></td>
 				<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Email', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Rôle', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'A les droit sur DigiRisk', 'digirisk' ); ?></td>

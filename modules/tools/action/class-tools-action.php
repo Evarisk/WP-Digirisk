@@ -30,6 +30,7 @@ class Tools_Action {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'wp_ajax_fix_hidden_society', array( $this, 'fix_hidden_society' ) );
 	}
 
 	/**
@@ -52,6 +53,28 @@ class Tools_Action {
 	 */
 	public function add_management_page() {
 		\eoxia\View_Util::exec( 'digirisk', 'tools', 'main' );
+	}
+
+	public function fix_hidden_society() {
+		ini_set( 'memory_limit', -1 );
+		if ( is_multisite() ) {
+			$sites = get_sites();
+			if ( ! empty( $sites ) ) {
+				foreach ( $sites as $site ) {
+					Tools_Class::g()->fix_hidden_society();
+				}
+
+				restore_current_blog();
+			}
+		} else {
+			Tools_Class::g()->fix_hidden_society();
+		}
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'tools',
+			'callback_success' => 'fixedHiddenSociety',
+		) );
 	}
 }
 

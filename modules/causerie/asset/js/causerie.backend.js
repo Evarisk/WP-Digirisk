@@ -48,11 +48,8 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 		'nav': 1,
 		'loop': 1,
 		'items': 1,
-		'autoHeight': true,
-		'margin':10,
-		'dots' : true,
-		'navText' : ['<span class="owl-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>','<span class="owl-next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>'],
-		'dotsData': true,
+		'dots' : false,
+		'navText' : ['<span class="owl-prev"><i class="fa fa-angle-left fa-8x" aria-hidden="true"></i></span>','<span class="owl-next"><i class="fa fa-angle-right fa-8x" aria-hidden="true"></i></span>'],
 	} );
 };
 
@@ -405,6 +402,7 @@ window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
 	importContent.val( importContent.val() + '\r\n' + '%risque%' + keyword );
 }
 
+<<<<<<< HEAD
 window.eoxiaJS.digirisk.causerie.buttonLinkExternalText = function( element, importContent ){
 
 	if( element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).attr( 'data-import' ) == "true" ){
@@ -457,3 +455,18 @@ window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = funct
 	element.attr( 'data-link', "no" );
 	element.find( '.tm_link_external' ).val( "no" );
 }
+=======
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_started_causerie".
+ * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.
+ *
+ * @since   7.3.0
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ */
+window.eoxiaJS.digirisk.causerie.deletedStartedCauserie = function( triggeredElement, response ) {
+	triggeredElement.closest( '.causerie-row' ).fadeOut();
+};
+>>>>>>> 7833a354fdf8631927c57627bbcfe4ec657d22a5

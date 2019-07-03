@@ -27,20 +27,6 @@ global $eo_search; ?>
 			<span><?php echo esc_html( $main_causerie->data['last_date_realized']['rendered']['date'] ); ?></span>
 		</li>
 	<?php endif; ?>
-	<li><?php if( ! empty( $task ) ): ?>
-		<span>
-			<a href="<?php echo esc_attr( admin_url( 'admin.php?page=wpeomtm-dashboard&term=' . $task->data[ 'id' ] ) ); ?>" target="_blank" style="color : green">
-				<?php esc_html_e( sprintf( 'Tache créée ! %s', $task->data[ 'title' ] ), 'digirisk' ); ?>
-			</a>
-		</span>
-
-	<?php else:?>
-		<span>
-			<a href="<?php echo esc_attr( admin_url( 'plugin-install.php?s=task-manager&tab=search&type=term' ) ); ?>" target="_blank" style="color : red">
-				<?php esc_html_e( 'Erreur lors de la création de la tache : Veuillez activer Task Manager', 'task-manager' ); ?>
-			</a>
-		</span>
-	<?php endif;?></li>
 </ul>
 
 <h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>

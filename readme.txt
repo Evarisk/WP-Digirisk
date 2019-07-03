@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 5.2.0
-Stable tag: 7.2.0
+Tested up to: 5.2.2
+Stable tag: 7.3.0
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,19 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.3.0 =
+
+* 32669 - Causerie: Possibilité de sauter l'étape de la création d'une tâche.
+* 31804 - Causerie: Ajout d'une tâche pour les actions de la causerie.
+* 31803 - Causerie: Ajout des flèches dans le diaporama pour naviguer.
+* 28525 - Causerie: Ajout d'un import de d'un modèle de causerie.
+* 25971 - Causerie: Possibilité de revenir à l'étape précédente.
+* 24614 - Accident: Enlève la chaine de texte "N/A" dans la colonne "REF".
+* 19363 - Causerie: Possibilité de supprimer une causerie en cours.
+* 12920 - Informations: Mise à jour des indicateurs.
+* 32667 - DigiRisk: Modification de l'icône pour créer un listing de risque.
+* 32656 - Frontend: Les commentaires de DigiRisk n'apparaissent plus.
 
 = Version 7.2.0 =
 

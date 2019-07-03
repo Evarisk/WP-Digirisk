@@ -29,7 +29,7 @@ global $eo_search; ?>
 			</ul>
 		</div>
 		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
-		<div data-title="<?php esc_attr_e( 'Date et hour', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
@@ -44,14 +44,14 @@ global $eo_search; ?>
 		<div class="wpeo-form">
 			<div class="wpeo-gridlayout padding grid-3">
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nom., Prénom.. victime', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Name., Surname.. victime', 'digirisk' ); ?></span>
 					<div class="form-field-container">
 						<?php $eo_search->display( 'accident_user' ); ?>
 					</div>
 				</div>
 
 				<div class="form-element group-date">
-					<span class="form-label"><?php esc_html_e( 'Date et heure', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Date & hour', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<span class="form-field-icon-prev"><i class="fal fa-calendar-alt"></i></span>
 						<input type="hidden" class="mysql-date" name="accident[accident_date]" value="<?php echo esc_attr( $accident->data['accident_date']['raw'] ); ?>" />
@@ -68,7 +68,7 @@ global $eo_search; ?>
 			</div>
 
 			<div class="form-element">
-				<span class="form-label"><?php esc_html_e( 'Circonstances détaillées', 'digirisk' ); ?></span>
+				<span class="form-label"><?php esc_html_e( 'Detailed circumstances', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
 				</label>
@@ -83,11 +83,11 @@ global $eo_search; ?>
 
 				<div class="investigation-group">
 					<div class="form-element">
-						<span class="form-label"><?php esc_html_e( 'Enquête accident', 'digirisk' ); ?></span>
+						<span class="form-label"><?php esc_html_e( 'Accident investigation', 'digirisk' ); ?></span>
 						<label class="form-field-container">
 							<div class="form-field-inline">
 								<input id="have_investigation" class="form-field" type="checkbox" <?php echo $accident->data['have_investigation'] ? 'checked' : ''; ?> name="accident[have_investigation]" />
-								<label for="have_investigation"><?php esc_html_e( 'Réaliser une enquête accident', 'digirisk' ); ?></label>
+								<label for="have_investigation"><?php esc_html_e( 'Carry out an accident investigation', 'digirisk' ); ?></label>
 							</div>
 						</label>
 					</div>
@@ -100,14 +100,14 @@ global $eo_search; ?>
 
 			<div class="wpeo-gridlayout padding grid-2">
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Siège des lésions (préciser droite ou gauche)', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Seat lesions (specify right or left)', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<input type="text" class="form-field" id="location_of_lesions" name="accident[location_of_lesions]" value="<?php echo esc_attr( $accident->data['location_of_lesions'] ); ?>">
 					</label>
 				</div>
 
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nature des lésions', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Nature of lesions', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<input class="form-field" type="text" id="nature_of_lesions" name="accident[nature_of_lesions]" value="<?php echo esc_attr( $accident->data['nature_of_lesions'] ); ?>">
 					</label>
@@ -116,14 +116,14 @@ global $eo_search; ?>
 
 			<div class="wpeo-gridlayout padding grid-2">
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nom et adresse des témoins', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Name and address of witnesses', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<textarea class="form-field" id="name_witnesses" name="accident[name_and_address_of_witnesses]"><?php echo $accident->data['name_and_address_of_witnesses']; ?></textarea>
 					</label>
 				</div>
 
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nom et adresse des tiers impliqués', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Name and address of third parties involved', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<textarea class="form-field" id="name_and_address_of_third_parties_involved" name="accident[name_and_address_of_third_parties_involved]"><?php echo $accident->data['name_and_address_of_third_parties_involved']; ?></textarea>
 					</label>
@@ -133,7 +133,7 @@ global $eo_search; ?>
 			<div class="wpeo-gridlayout padding grid-2">
 				<div class="form-element">
 					<span class="form-label">
-						<?php esc_html_e( 'Signature du donneur de soin', 'digirisk' ); ?>
+						<?php esc_html_e( 'Signature of the caregiver', 'digirisk' ); ?>
 						<span class="canvas-eraser fa-layers fa-fw">
 							<i class="fas fa-circle" data-fa-transform="grow-8"></i>
 							<i class="fa-inverse fas fa-eraser" data-fa-transform="shrink-2"></i>
@@ -147,7 +147,7 @@ global $eo_search; ?>
 				</div>
 				<div class="form-element">
 					<span class="form-label">
-						<?php esc_html_e( 'Signature de la victime', 'digirisk' ); ?>
+						<?php esc_html_e( 'Signature of the victim', 'digirisk' ); ?>
 						<span class="canvas-eraser fa-layers fa-fw">
 							<i class="fas fa-circle" data-fa-transform="grow-8"></i>
 							<i class="fa-inverse fas fa-eraser" data-fa-transform="shrink-2"></i>
@@ -162,7 +162,7 @@ global $eo_search; ?>
 			</div>
 
 			<div class="form-element">
-				<span class="form-label"><?php esc_html_e( 'Observations', 'digirisk' ); ?></span>
+				<span class="form-label"><?php esc_html_e( 'Note', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<textarea class="form-field" id="observation" name="accident[observation]"><?php echo $accident->data['observation']; ?></textarea>
 				</label>

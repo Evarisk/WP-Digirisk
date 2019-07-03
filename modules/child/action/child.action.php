@@ -182,7 +182,7 @@ class Child_Action {
 			return $response;
 		}
 
-		$data = DUER_Class::g()->get_hierarchy_duer( $data, $args );
+		$data = DUER_Class::g()->get_hierarchy_duer( $params, $args );
 		array_unshift( $data['elementParHierarchie']['value'], array(
 			'nomElement' => 'S' . $params['id'] . ' - ' . $parent->data['title'],
 		) );
@@ -247,7 +247,6 @@ class Child_Action {
 
 	public function callback_generate( \WP_REST_Request $request ) {
 		$params = $request->get_params();
-
 		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
 			$response = new \WP_REST_Response( $params['hash'], 404 );
 			return $response;
@@ -274,7 +273,6 @@ class Child_Action {
 		if ( ! empty( $societies ) ) {
 			foreach ( $societies as $society ) {
 				if ( Group_Class::g()->get_type() === $society->data['type'] ) {
-					\eoxia\LOG_Util::log( 'DEBUT - Génération du document groupement #GP' . $element_id, 'digirisk' );
 					$generation_status = Sheet_Groupment_Class::g()->prepare_document( $society, array(
 						'parent' => $society,
 					) );
@@ -286,7 +284,6 @@ class Child_Action {
 					Sheet_Groupment_Class::g()->create_document( $generation_status['document']->data['id'] );
 					\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
 				} elseif ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
-					\eoxia\LOG_Util::log( 'DEBUT - Génération du document fiche de poste #UT' . $element_id, 'digirisk' );
 					$generation_status = Sheet_Workunit_Class::g()->prepare_document( $society, array(
 						'parent' => $society,
 					) );

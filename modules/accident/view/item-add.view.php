@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 global $eo_search; ?>
 
 <div class="col add">
-	<div class="cell padding w150"><?php esc_html_e( 'N/A', 'digirisk' ); ?></div>
+	<div class="cell padding w150"></div>
 	<div class="cell padding w200 tooltip red" aria-label="<?php esc_html_e( 'This field is required', 'digirisk' ); ?>">
 		<?php $eo_search->display( 'accident_user' ); ?>
 	</div>

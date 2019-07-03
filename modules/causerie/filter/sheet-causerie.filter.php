@@ -96,7 +96,10 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			'nombreFormateur'     => 0,
 			'nombreUtilisateur'   => 0,
 			'titreTache'          => '',
-			'points'               => array()
+			'points'              => array(
+				'type'  => 'segment',
+				'value' => array(),
+			),
 		);
 
 		$data = wp_parse_args( $data, $this->set_medias( $causerie ) );
@@ -244,9 +247,10 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 	}
 
 	public function check_if_this_causerie_have_task_enable( $id ){
-		$title = '';
-		$points_task = array();
-		$points_task[ 'type' ] = 'segment';
+		$title                = '';
+		$points_task          = array();
+		$points_task['type']  = 'segment';
+		$points_task['value'] = array();
 
 		if( class_exists( 'task_manager\Task_Class' ) ){
 			$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );

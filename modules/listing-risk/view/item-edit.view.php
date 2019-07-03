@@ -23,22 +23,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td>
 		<div class="action wpeo-gridlayout grid-1 grid-gap-0">
 			<?php if ( 'picture' === $type ) : ?>
-				<div class="wpeo-button button-square-50 button-main action-input add wpeo-tooltip-event"
+				<div class="wpeo-button button-square-50 button-main action-input add"
 					data-type="photos"
-					aria-label="<?php esc_attr_e( 'Avec les photos des risques', 'digirisk' ); ?>"
 					data-loader="table"
 					data-parent="sheet-groupment-row">
-					<i class="icon fa fa-file-image"></i>
+					<i class="icon fa fa-plus"></i>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( 'corrective-task' === $type ) : ?>
-				<div class="wpeo-button button-square-50 button-main action-input add wpeo-tooltip-event"
+				<div class="wpeo-button button-square-50 button-main action-input add"
 				data-type="actions"
-					aria-label="<?php esc_attr_e( 'Avec les actions correctives', 'digirisk' ); ?>"
 					data-loader="table"
 					data-parent="sheet-groupment-row">
-					<i class="icon fa fa-file"></i>
+					<i class="icon fa fa-plus"></i>
 				</div>
 			<?php endif; ?>
 		</div>

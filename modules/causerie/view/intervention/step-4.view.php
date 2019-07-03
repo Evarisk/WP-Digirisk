@@ -42,7 +42,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</tbody>
 </table>
 
-<a class="wpeo-button button-grey" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>"><?php esc_html_e( 'Finir plus tard', 'digirisk' ); ?></a>
+<a href="<?php echo Causerie_Intervention_Class::g()->get_link( $final_causerie, 3 ); ?>" class="wpeo-button button-grey">
+	<i class="fas fa-arrow-left"></i>
+	<span><?php esc_html_e( 'Tâche liée', 'digirisk' ); ?></span>
+</a>
 
 <a href="<?php echo esc_attr( wp_nonce_url( admin_url( 'admin-post.php?action=next_step_causerie&id=' . $final_causerie->data['id'] ), 'next_step_causerie' ) ); ?>"
 	class="<?php echo ( ! $all_signed ) ? esc_attr( 'button-disable wpeo-tooltip-event' ) : ''; ?> wpeo-button button-blue alignright"
