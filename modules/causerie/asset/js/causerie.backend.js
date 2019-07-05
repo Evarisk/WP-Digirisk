@@ -75,6 +75,8 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-import-add-keyword .dropdown-content .item', window.eoxiaJS.digirisk.causerie.itemSelectToTextarea );
 
+	jQuery( document ).on( 'keyup', '.digi-import-add-keyword .tm-info-import-link input', window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl );
+
 };
 
 /**
@@ -386,8 +388,12 @@ window.eoxiaJS.digirisk.causerie.checkUserID = function( element ) {
 
 window.eoxiaJS.digirisk.causerie.addKeywordToTextarea = function( event ){
 	var importContent = jQuery( this ).closest( '.digi-import-causeries.modal-active' ).find( 'textarea' );
-	var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
-	importContent.focus().val( importContent.val() + '\r\n' + keyword );
+	if( jQuery( this ).attr( 'data-type' ) == "link" ){
+		window.eoxiaJS.digirisk.causerie.buttonLinkExternalText( jQuery( this ), importContent );
+	}else{
+		var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
+		importContent.focus().val( importContent.val() + '\r\n' + keyword );
+	}
 }
 
 window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
@@ -396,6 +402,58 @@ window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
 	importContent.val( importContent.val() + '\r\n' + '%risque%' + keyword );
 }
 
+window.eoxiaJS.digirisk.causerie.buttonLinkExternalText = function( element, importContent ){
+
+	if( element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).attr( 'data-import' ) == "true" ){
+		//send request
+		var data         = {};
+		data.action  = 'get_text_from_url';
+		data.content = element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).val(); // On recupere le contenu
+
+		window.eoxiaJS.loader.display( jQuery( '.digi-import-add-keyword' ) );
+		window.eoxiaJS.request.send( element, data );
+	}else{
+		if( element.attr( 'data-link' ) == "no"){
+			element.find( '.tm_save_backup' ).val( importContent.val() ); // On recupere le contenu
+
+			var next_step = 'yes';
+			element.removeClass( 'button-grey' ).addClass( 'button-green' );
+			element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).show( '200' );
+		}else{
+			importContent.focus().val( element.find( '.tm_save_backup' ).val() );
+
+			var next_step = 'no';
+			element.removeClass( 'button-green' ).addClass( 'button-grey' );
+			element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).hide( '200' );
+		}
+
+		element.attr( 'data-link', next_step );
+		element.find( '.tm_link_external' ).val( next_step );
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl = function( event ){
+	if( jQuery( this ).val().trim() != "" ){
+		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.tm-icon-import-from-url' ).removeClass( 'fa-link' ).addClass( 'fa-file-import' );
+		jQuery( this ).attr( 'data-import', "true" );
+	}else{
+		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.tm-icon-import-from-url' ).removeClass( 'fa-file-import' ).addClass( 'fa-link' );
+		jQuery( this ).attr( 'data-import', "false" );
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = function( element, response ){
+	if( response.data.error == "" ){
+		element.closest( '.tm-import-tasks.modal-active' ).find( 'textarea' ).val( response.data.content );
+	}
+
+	element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).val( '' );
+	element.removeClass( 'button-green' ).addClass( 'button-grey' );
+	element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).hide( '200' );
+
+	element.attr( 'data-link', "no" );
+	element.find( '.tm_link_external' ).val( "no" );
+}
 /**
  * Le callback en cas de réussite à la requête Ajax "delete_started_causerie".
  * Remplaces le contenu du tableau par la vue renvoyée par la réponse Ajax.

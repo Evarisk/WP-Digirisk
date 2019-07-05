@@ -51,3 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 </div>
+
+<div class="modal-info-error">
+
+</div>

@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 5.2.2
-Stable tag: 7.3.0
+Stable tag: 7.3.1
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,12 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.3.1 =
+
+* 33009 - Correction de l'import des causeries.
+* 33010 - Correction de la popup contenant le Changelog.
+* 33011 - Ajout des fonctionnalités pour générer un listing de risque avec ou sans photo au niveau de la société.
 
 = Version 7.3.0 =
 

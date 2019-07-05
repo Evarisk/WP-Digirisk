@@ -3,10 +3,16 @@ namespace digi;
 ?>
 
 <div class="move-to move-to-risk">
-	<?php $risk = Risk_Class::g()->get( array(
-		'id' => $task->parent_id,
-	), true ); ?>
-	<p>Cette tâche est associé au risque <strong><?php echo $risk->unique_identifier; ?></strong></p>
+	<?php
+	if( isset( $task->parent_id ) ):
+		$risk = Risk_Class::g()->get( array(
+			'id' => $task->parent_id,
+		), true );
+	endif;
+
+	if( ! empty( $risk ) ):
+	?>
+	<p>Cette tâche est associé au risque <strong><?php echo esc_attr( $risk->unique_identifier ); ?></strong></p>
 	<div>
 		<input type="hidden" name="task_id" value="<?php echo esc_attr( $task->id ); ?>" />
 		<input type="hidden" name="action" value="move_task_to" />
@@ -21,4 +27,5 @@ namespace digi;
 		<div class="list-posts">
 		</div>
 	</div>
+<?php endif; ?>
 </div>

@@ -33,12 +33,12 @@ $result = Digirisk::g()->get_patch_note(); ?>
 	</div>
 
 	<div class="wpeo-modal patch-note">
-		<div class="container">
-			<div class="header">
+		<div class="modal-container">
+			<div class="modal-header">
 				<h2 class="title"><?php echo esc_html( 'Note de version: ' . $result['content']->numero_de_version ); ?></h2>
-				<i class="close fas fa-times"></i>
+				<div class="modal-close"><i class="fas fa-times"></i></div>
 			</div>
-			<div class="content">
+			<div class="modal-content">
 				<?php
 				if ( ! empty( $result['content']->note_de_version ) ) :
 					foreach ( $result['content']->note_de_version as $element ) :

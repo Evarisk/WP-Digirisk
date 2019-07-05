@@ -25,6 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<?php
 		endforeach;
+	else:
+		esc_html_e( 'Aucune Image à afficher', 'digirisk' );
 	endif;
 	?>
 </div>
