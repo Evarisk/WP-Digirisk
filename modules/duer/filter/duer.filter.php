@@ -28,7 +28,7 @@ class DUER_Filter extends Identifier_Filter {
 	public function __construct() {
 		parent::__construct();
 
-		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 5, 2 );
+		add_filter( 'digi_tab', array( $this, 'callback_digi_tab' ), 10, 2 );
 
 		add_filter( 'digi_duer_document_data', array( $this, 'callback_digi_document_data' ), 10, 2 );
 		add_filter( 'digi_duer_document_data', array( $this, 'callback_hierarchy' ), 11, 2 );

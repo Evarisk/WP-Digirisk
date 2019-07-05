@@ -41,6 +41,12 @@ class Listing_Risk_Picture_Filter extends Identifier_Filter {
 	 * @since 7.1.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
+		$list_tab['digi-society']['listing-risk-photo'] = array(
+			'type'  => 'text',
+			'text'  => __( 'Listing des risques photo ', 'digirisk' ),
+			'title' => __( 'Listing des risques photo', 'digirisk' ),
+		);
+
 		$list_tab['digi-group']['listing-risk-photo'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques photo ', 'digirisk' ),

@@ -41,6 +41,12 @@ class Listing_Risk_Corrective_Task_Filter extends Identifier_Filter {
 	 * @since 7.1.0
 	 */
 	public function callback_digi_tab( $list_tab, $id ) {
+		$list_tab['digi-society']['listing-risk-action-corrective'] = array(
+			'type'  => 'text',
+			'text'  => __( 'Listing des risques action corrective ', 'digirisk' ),
+			'title' => __( 'Listing des risques action corrective', 'digirisk' ),
+		);
+
 		$list_tab['digi-group']['listing-risk-action-corrective'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques action corrective ', 'digirisk' ),
