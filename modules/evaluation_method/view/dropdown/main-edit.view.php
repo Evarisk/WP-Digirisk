@@ -36,40 +36,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</span>
 
-	<ul class="dropdown-content wpeo-gridlayout grid-5 grid-gap-0 dropdown-<?php echo esc_attr( $variables[0]->data['display_type'] ); ?>">
-		<?php
-		if ( ! empty( $variables[0]->data['survey']['request'] ) ) :
-			foreach ( $variables[0]->data['survey']['request'] as $request ) :
-				?>
-				<li data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
-						data-evaluation-id="<?php echo esc_attr( $method_evaluation_simplified->data['id'] ); ?>"
-						data-variable-id="<?php echo esc_attr( $variables[0]->data['id'] ); ?>"
-						data-seuil="<?php echo esc_attr( $request['seuil'] ); ?>"
-						data-scale="<?php echo esc_attr( $request['seuil'] ); ?>"
-						class="dropdown-item cotation"><?php echo esc_html( $method_evaluation_simplified->data['matrix'][ $request['seuil'] ] ); ?></li>
-				<?php
-			endforeach;
-		endif;
 
-		if ( 0 === $risk->data['id'] || $can_edit_type_cotation || $preset ) :
-			echo wp_kses( apply_filters( 'digi_evaluation_method_dropdown_end', $risk->data['id'] ), array(
-				'li'  => array(
-					'class'          => array(),
-					'aria-label'     => array(),
-					'data-action'    => array(),
-					'data-class'     => array(),
-					'data-title'     => array(),
-					'data-nonce'     => array(),
-					'data-id'        => array(),
-					'data-risk-id'   => array(),
-					'wpeo-before-cb' => array(),
-				),
-				'svg' => array(),
-				'i'   => array(
-					'class' => array(),
-				),
-			) );
-		endif;
-		?>
-	</ul>
 </div>

@@ -126,9 +126,7 @@ class Causerie_Intervention_Page_Action {
 		$id   = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0;
 		$step = ! empty( $_GET['step'] ) ? (int) $_GET['step'] : 0;
 
-
 		$causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
-
 
 		$causerie->data['current_step'] = $step;
 

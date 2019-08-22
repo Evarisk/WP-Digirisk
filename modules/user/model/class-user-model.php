@@ -158,6 +158,14 @@ class User_Model extends \eoxia\User_Model {
 			'meta_type'  => 'multiple',
 		);
 
+		$this->schema['prevention_parent'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+			'bydefault' => '0',
+			'since'     => '7.3.0',
+			'version'   => '7.3.0',
+		);
+
 		parent::__construct( $data, $req_method );
 	}
 }

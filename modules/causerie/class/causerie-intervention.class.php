@@ -154,7 +154,6 @@ class Causerie_Intervention_Class extends \eoxia\Post_Class {
 	 * @param boolean                     $is_former             Est-ce un formateur ? Ou un participant.
 	 */
 	public function add_participant( $causerie_intervention, $user_id, $is_former = false ) {
-
 		if ( $is_former ) {
 			$causerie_intervention->data['former']['user_id'] = $user_id;
 		} else {

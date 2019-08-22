@@ -1,0 +1,14 @@
+{
+	"name": "Risk",
+	"slug": "risk",
+	"since": "6.0.0",
+	"description": "Le module gérant les risques",
+	"path": "modules/risk/",
+	"dependencies": {
+		"shortcode": {},
+		"model": {},
+		"class": {},
+		"action": {},
+		"filter": {}
+	}
+}

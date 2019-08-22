@@ -64,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<p class="causerie-description"><?php echo nl2br( $final_causerie->data['content'] ); ?></p>
 
-		<div class="ajax-content">
+		<div class="ajax-content digi-causerie-parent">
 			<?php
 			if ( $final_causerie->data['current_step'] < 5 ) :
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-' . $final_causerie->data['current_step'], array(

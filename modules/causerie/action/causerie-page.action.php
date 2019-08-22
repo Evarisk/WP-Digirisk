@@ -57,8 +57,7 @@ class Causerie_Page_Action {
 	 * @return  void
 	 */
 	public function callback_causerie_load_tab() {
-		check_ajax_referer( 'causerie_load_tab' );
-
+		/*check_ajax_referer( 'causerie_load_tab' );
 		$tab = ! empty( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : '';
 
 		if ( empty( $tab ) ) {
@@ -69,7 +68,7 @@ class Causerie_Page_Action {
 		call_user_func( array( Causerie_Page_Class::g(), 'display_' . $tab ) );
 		wp_send_json_success( array(
 			'view' => ob_get_clean(),
-		) );
+		) );*/
 	}
 
 	/**
