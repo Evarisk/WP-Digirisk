@@ -16,28 +16,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Dernièrs plan de préventions réalisés', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
+	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Dernièrs plan de préventions réalisés', 'digirisk' ); ?></h2>
 
 	<table class="table closed-causerie">
 		<thead>
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
-				<td class="w50 padding"><?php esc_html_e( 'Photo', 'digirisk' ); ?></td>
-				<td class="w50 padding"><?php esc_html_e( 'Cat.', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Titre et description', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Participants', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></td>
 				<td class="w50"></td>
 			</tr>
 		</thead>
 		<?php
+
 		if ( ! empty( $preventions ) ) :
 			foreach ( $preventions as $prevention ) :
-				/*\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
-					'causerie' => $causerie,
-				) );*/
+				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'dashboard/list-item', array(
+					'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
+				) );
 			endforeach;
 		else :
 			?>

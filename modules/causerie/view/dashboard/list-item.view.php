@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-
 <tr class="item" data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>">
 	<td class="w50 padding">
 		<strong>

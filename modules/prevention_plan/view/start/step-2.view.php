@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-action="next_step_prevention"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 	data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
-	data-parent="digi-prenvention-parent"
+	data-parent="digi-prevention-parent"
 	style="float:right; margin-top: 10px">
 	<span>
 		<?php esc_html_e( 'Valider', 'digirisk' ); ?>

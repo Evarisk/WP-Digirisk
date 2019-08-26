@@ -119,10 +119,8 @@ window.eoxiaJS.digirisk.preventionPlan.updateModalTitleMaitreOeuvre = function( 
 
 		window.eoxiaJS.loader.display( jQuery( this ) );
 		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, response ) {
-			triggeredElement.closest( '.information-maitre-oeuvre' ).find( 'section' ).replaceWith( response.data.view );
-			// title = 'Signature de l\'utilisateur: ' + data.element.data( 'result' );
-			// element.closest( 'tr' ).find( '.wpeo-modal-event' ).attr( 'data-title', title );
-			// element.closest( 'tr' ).find( '.wpeo-modal-event' ).removeClass( 'button-disable' );
+			triggeredElement.closest( '.information-maitre-oeuvre' ).find( '.maitre-name-part' ).html( response.data.view );
+			window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( element );
 		} );
 	}
 }
@@ -146,6 +144,10 @@ window.eoxiaJS.digirisk.preventionPlan.saveSignatureURL = function( event ) {
 };
 
 window.eoxiaJS.digirisk.preventionPlan.nextStep = function( element, response ) {
+	if( response.data.url ){
+		window.location.replace( response.data.url );
+	}
+
 	jQuery( '.ajax-content' ).html( response.data.view );
 
 	var currentStep = response.data.current_step;
@@ -328,12 +330,20 @@ window.eoxiaJS.digirisk.preventionPlan.displaySignatureLastPage = function( trig
 	var element = jQuery( '.digi-prevention-parent' ).find( class_parent );
 	element.find( '.signature-info-element .signature' ).replaceWith( response.data.view );
 
-	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( jQuery( this ) );
+	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( triggeredElement );
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat = function( event ){
 	var content = jQuery( this ).val();
+	if( ! content ){
+		return;
+	}
 	var text = content.match(/\d/g);
+
+	if( text == null ){
+		jQuery( this ).val( '' );
+		return;
+	}
 	content = text.join("");
 
 	if( content.length == 10 ){
@@ -362,16 +372,21 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish = functi
 	var maitre_oeuvre_element = parent_element.find( '.information-maitre-oeuvre' );
 	var intervenant_exterieur_element = parent_element.find( '.information-intervenant-exterieur' );
 	var error = false;
+	console.log( ' - - - - ' );
 
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-name', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-lastname', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-phone', error );
-	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'maitre-oeuvre-signature', error );
+	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-signature', error );
+
+	console.log( error );
 
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-name', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-phone', error );
-	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'intervenant-exterieur-signature', error );
+	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
+
+	console.log( error );
 
 	if( ! error ){
 		parent_element.find( '.prevention-cloture' ).removeClass( 'button-disable' );

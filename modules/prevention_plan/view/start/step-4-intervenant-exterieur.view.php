@@ -40,11 +40,11 @@ global $eo_search; ?>
 	</div>
 
 	<div class="wpeo-form">
-		<div class="form-element">
+		<div class="form-element element-phone">
 			<span class="form-label"><?php esc_html_e( 'Portable', 'task-manager' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-				<input type="text" name="intervenant-phone" class="form-field" value="">
+				<input type="text" class="form-field element-phone-input" name="intervenant-phone" value="">
 			</label>
 		</div>
 	</div>
@@ -53,8 +53,8 @@ global $eo_search; ?>
 		<div class="form-element signature-info-element">
 			<span class="form-label"><?php esc_html_e( 'Signature', 'task-manager' ); ?></span>
 			<?php if ( empty( $prevention->data['intervenant_exterieur']['signature_id'] ) ) : ?>
-				<input type="hidden" name="intervenant-exterieur-signature">
 				<div class="signature w50 padding">
+					<input type="hidden" name="intervenant-exterieur-signature" value="-1">
 					<div class="wpeo-button button-blue wpeo-modal-event"
 						data-parent="form-element"
 						data-target="modal-signature">

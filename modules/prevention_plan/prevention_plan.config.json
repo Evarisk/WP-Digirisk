@@ -11,6 +11,7 @@
 				"prevention.model.php"
 			]
 		},
+    "filter": {},
 		"class": {},
 		"action": {}
 	},

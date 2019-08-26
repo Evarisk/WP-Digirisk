@@ -21,4 +21,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if( isset( $user_type_attr ) && $user_type_attr != "" ): ?>
 	<input type="hidden" name="<?php echo esc_attr( $user_type_attr ); ?>" value="ok">
-<?php else: ?>
+<?php endif; ?>

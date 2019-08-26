@@ -65,15 +65,8 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 			'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED,
 		) );
 
-		if( ! empty( $preventions ) ){
-			echo '<pre>'; print_r( $preventions ); echo '</pre>'; exit;
-		}
-
-		$nbr = count( Prevention_Class::g()->get( array() ) );
-
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'dashboard/main', array(
-			'preventions' => $preventions,
-			'nbr' => $nbr
+			'preventions' => $preventions
 		) );
 	}
 
@@ -175,11 +168,17 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT;
 		$prevention->data['date_closure'] = current_time( 'mysql' );
 
-		// $response = Sheet_Causerie_Intervention_Class::g()->prepare_document( $prevention, array( 'causerie' => $causerie ) );
-		// Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
-
 		return Prevention_Class::g()->update( $prevention->data );;
 	}
+
+
+	public function step_close_prevention( $prevention, $society, $legal_display ){
+		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED;
+		$prevention->data['date_closure'] = date( 'Y-m-d', strtotime( 'now' ) );
+
+		return Prevention_Class::g()->update( $prevention->data );
+	}
+
 
 	public function next_step( $prevention, $nextstep ) {
 		// Passes à l'étape suivante.

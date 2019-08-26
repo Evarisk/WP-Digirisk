@@ -33,6 +33,19 @@ class Prevention_Page_Action {
 		add_action( 'admin_post_next_step_prevention', array( $this, 'ajax_next_step_prevention' ) );
 
 		add_action( 'admin_post_change_step_prevention', array( $this, 'change_step_prevention' ) );
+		// $this->salut();
+	}
+
+	public function salut(){
+		echo '<pre>'; print_r( '---' ); echo '</pre>';
+		$blog_id = get_current_blog_id();
+        if ( is_main_site($blog_id) ) {
+          $site_id = $blog_id;
+        }else {
+            $site_id = $blog_id;
+        }
+		echo '<pre>'; print_r( $site_id ); echo '</pre>'; exit;
+		exit;
 	}
 
 	public function callback_admin_menu() {
@@ -78,12 +91,15 @@ class Prevention_Page_Action {
 			'posts_per_page' => 1,
 		), true );
 
+		$legal_display = '';
 		if( ! empty( $society ) ){
 			$legal_display = Legal_Display_Class::g()->get( array(
 				'posts_per_page' => 1,
 				'post_parent'    => $society->data[ 'id' ],
 			), true );
 		}
+
+		$url_redirect = '';
 
 		Prevention_Page_Class::g()->register_search( null, null );
 		switch ( $prevention->data['step'] ) {
@@ -108,7 +124,6 @@ class Prevention_Page_Action {
 					'date_end'   => isset( $_POST[ 'end_date' ] ) ? sanitize_text_field( $_POST[ 'end_date' ] ) : ''
 				);
 				$prevention = Prevention_Class::g()->update_information_prevention( $prevention, $data );
-
 				$prevention = Prevention_Page_Class::g()->next_step( $prevention, $nextstep );
 
 				ob_start();
@@ -130,8 +145,9 @@ class Prevention_Page_Action {
 
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT:
-				echo '<pre>'; print_r( 'end' ); echo '</pre>'; exit;
-				// wp_redirect( admin_url( 'admin.php?page=digirisk-causerie' ) );
+				$prevention = Prevention_Class::g()->save_info_maitre_oeuvre();
+				Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
+				$url_redirect = admin_url( 'admin.php?page=digirisk-prevention' );
 				break;
 			default:
 				break;
@@ -142,6 +158,7 @@ class Prevention_Page_Action {
 			'module'           => 'preventionPlan',
 			'callback_success' => 'nextStep',
 			'current_step'     => $prevention->data['step'],
+			'url'              => $url_redirect,
 			'view'             => ob_get_clean(),
 		) );
 	}
@@ -159,6 +176,7 @@ class Prevention_Page_Action {
 
 		wp_redirect( admin_url( 'admin.php?page=digirisk-prevention&id=' . $id ) );
 	}
+
 }
 
 new Prevention_Page_Action();

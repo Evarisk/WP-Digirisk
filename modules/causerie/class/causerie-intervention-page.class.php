@@ -183,7 +183,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
-		$causerie_intervention->data['titreTache'] = 'titre';
+		$causerie_intervention->data['titreTache'] = 'titre'; // Wtf ? 23/08/2019
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 

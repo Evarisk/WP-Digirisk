@@ -204,6 +204,90 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return $prevention;
 	}
 
+	public function save_info_maitre_oeuvre(){
+		$id   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		$mo_name     = ! empty( $_POST['maitre-oeuvre-name'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-name'] ) : '';
+		$mo_lastname = ! empty( $_POST['maitre-oeuvre-lastname'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-lastname'] ) : '';
+		$mo_phone    = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
+		$mo_sign     = ! empty( $_POST['maitre-oeuvre-signature'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-signature'] ) : '';
+
+		$i_name      = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
+		$i_lastname = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
+		$i_phone    = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
+		$i_sign     = ! empty( $_POST['intervenant-exterieur-signature'] ) ? sanitize_text_field( $_POST['intervenant-exterieur-signature'] ) : '';
+
+		if( ! $id || ! $mo_name || ! $mo_lastname || ! $mo_phone || ! $mo_sign ){
+			wp_send_json_error( 'Erreur in master ouvrage' );
+		}
+
+		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_sign ){
+			wp_send_json_error( 'Erreur in intervenant exterieur' );
+		}
+
+
+		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+
+		$data_mo = array(
+			'firstname' => $mo_name,
+			'lastname'  => $mo_lastname,
+			'phone'     => $mo_phone
+		);
+
+		$prevention->data[ 'maitre_oeuvre' ] = wp_parse_args( $data_mo, $prevention->data[ 'maitre_oeuvre' ] );
+
+		$data_i = array(
+			'firstname' => $i_name,
+			'lastname'  => $i_lastname,
+			'phone'     => $i_phone
+		);
+		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
+
+		return Prevention_Class::g()->update( $prevention->data );
+	}
+
+
+	public function add_information_to_prevention( $prevention ){
+		$avatar_color = array( 'e9ad4f', '50a1ed', 'e05353', 'e454a2', '47e58e', '734fe9' );
+
+		$id = $prevention->data[ 'former' ][ 'user_id' ];
+		$user_info = get_user_by( 'id', $id );
+
+		$prevention->data[ 'former' ] = wp_parse_args( $user_info, $prevention->data[ 'former' ] );
+		$color = $id % count( $avatar_color );
+		$prevention->data[ 'former' ][ 'data' ]->avator_color = $avatar_color[ $color ];
+
+		$prevention->data[ 'intervention' ] = Prevention_Intervention_Class::g()->get( array( 'post_parent' => $prevention->data[ 'id' ] ) );
+		$inital = substr( $user_info->first_name, 0, 1 ) . ' ' . substr( $user_info->last_name, 0, 1 );
+		$prevention->data[ 'former' ][ 'data' ]->initial = $inital;
+		return $prevention;
+	}
+
+
+	public function generate_document_odt_prevention( $prevention ){
+
+		$legal_display = Legal_Display_Class::g()->get( array(
+			'posts_per_page' => 1
+		), true );
+
+		if ( empty( $legal_display ) ) {
+			$legal_display = Legal_Display_Class::g()->get( array(
+				'schema' => true,
+			), true );
+		}
+
+		$society = Society_Class::g()->get( array(
+			'posts_per_page' => 1,
+		), true );
+
+		$data = array(
+			'legal_display' => $legal_display,
+			'society' => $society
+		);
+
+		$response = Sheet_Prevention_Class::g()->prepare_document( $prevention, $data );
+		Sheet_Prevention_Class::g()->create_document( $response['document']->data['id'] );
+	}
 }
 
 Prevention_Class::g();

@@ -43,6 +43,8 @@ class Prevention_Action {
 
 		add_action( 'wp_ajax_prevention_save_signature_maitre_oeuvre', array( $this, 'callback_prevention_save_signature_maitre_oeuvre' ) );
 
+		add_action( 'wp_ajax_generate_document_prevention', array( $this, 'callback_generate_document_prevention' ) );
+
 	}
 
 
@@ -321,17 +323,17 @@ class Prevention_Action {
 			wp_send_json_error( 'Error in request' );
 		}
 
-		// $prevention = Prevention_Class::g()->get( array( 'id' => $prevention_id ), true );
 		$user_info = get_user_by( 'id', $user_id);
+		$prevention = Prevention_Class::g()->get( array( 'id' => $prevention_id ), true );
 
 		ob_start();
-		Prevention_Class::g()->display_maitre_oeuvre( $user_info, $prevention_id );
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-name', array(
+			'prevention' => $prevention,
+			'user'       => $user_info
+		) );
 		$view = ob_get_clean();
 
 		wp_send_json_success( array(
-			'namespace'        => 'digirisk',
-			'module'           => 'preventionPlan',
-			'callback_success' => 'displayMaitreOeuvre',
 			'view'             => $view
 		) );
 	}
@@ -354,7 +356,7 @@ class Prevention_Action {
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-1-signature', array(
 			'prevention' => $prevention,
 			'user_type'  => $user_type,
-			'user_type_attr' => $user_type == 'maitre_oeuvre' ? 'maitre-oeuvre' : 'intervenant-exterieur',
+			'user_type_attr' => $user_type == 'maitre_oeuvre' ? 'maitre-oeuvre-signature' : 'intervenant-exterieur-signature',
 
 		) );
 		$view = ob_get_clean();
@@ -366,6 +368,17 @@ class Prevention_Action {
 			'view'             => $view,
 			'class_parent'     => $user_type == 'maitre_oeuvre' ? 'information-maitre-oeuvre' : 'information-intervenant-exterieur',
 		) );
+	}
+	public function callback_generate_document_prevention(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+
+		Prevention_Class::g()->generate_document_odt_prevention( $prevention );
 	}
 }
 

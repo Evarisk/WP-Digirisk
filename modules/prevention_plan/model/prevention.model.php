@@ -135,25 +135,6 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'meta_type' => 'multiple',
 		);
 
-		$this->schema['second_unique_key'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_second_unique_key',
-		);
-
-		$this->schema['second_identifier'] = array(
-			'type'      => 'string',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_second_identifier',
-		);
-
-		$this->schema['current_step'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'single',
-			'field'     => '_wpdigi_current_step',
-			'default' => 1,
-		);
-
 		$this->schema['taxonomy'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
@@ -165,7 +146,6 @@ class Prevention_Model extends \eoxia\Post_Model {
 				),
 			),
 		);
-
 
 		parent::__construct( $object, $req_method );
 	}
