@@ -34,7 +34,7 @@ global $eo_search; ?>
 <?php /* ?>
 <div class="wpeo-button button-blue action-input wpeo-tooltip-event button-disable prevention-cloture"
 */
-?><div class="wpeo-button button-blue action-input wpeo-tooltip-event prevention-cloture"
+?><div class="wpeo-button button-disable action-input wpeo-tooltip-event prevention-cloture"
 	data-action="next_step_prevention"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 	data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"

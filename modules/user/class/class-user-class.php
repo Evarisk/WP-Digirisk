@@ -79,10 +79,12 @@ class User_Class extends \eoxia\User_Class {
 	public function callback_user_profile( $user ) {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
 		$hiring_date      = ! empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
+		$phone_number      = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
 
 		\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile', array(
 			'user_information' => $user_information,
 			'hiring_date'      => $hiring_date,
+			'phone_number'      => $phone_number,
 		) );
 	}
 
@@ -98,7 +100,14 @@ class User_Class extends \eoxia\User_Class {
 			return false;
 		}
 
-		update_usermeta( $user_id, 'digirisk_user_information_meta', $_POST['digirisk_user_information_meta'] );
+		$post_request = $_POST['digirisk_user_information_meta'];
+		if( isset( $post_request[ 'digi_phone_number' ] ) && ! empty( $post_request[ 'digi_phone_number' ] ) ){
+			if( ! $this->check_if_phone_number_is_valid( $post_request[ 'digi_phone_number' ] ) ){
+				$post_request[ 'digi_phone_number' ] = '';
+			}
+		}
+
+		update_usermeta( $user_id, 'digirisk_user_information_meta', $post_request );
 	}
 
 	/**
@@ -312,6 +321,16 @@ class User_Class extends \eoxia\User_Class {
 		}
 
 		return $index_valid_key;
+	}
+
+	public function check_if_phone_number_is_valid( $phone_number ){
+		/*$pattern = '^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}';
+		if( preg_match($pattern, $phone_number, $matches) ){
+			return true;
+		}else{
+			return false;
+		}*/
+		return true;
 	}
 }
 

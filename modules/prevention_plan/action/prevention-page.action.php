@@ -33,19 +33,6 @@ class Prevention_Page_Action {
 		add_action( 'admin_post_next_step_prevention', array( $this, 'ajax_next_step_prevention' ) );
 
 		add_action( 'admin_post_change_step_prevention', array( $this, 'change_step_prevention' ) );
-		// $this->salut();
-	}
-
-	public function salut(){
-		echo '<pre>'; print_r( '---' ); echo '</pre>';
-		$blog_id = get_current_blog_id();
-        if ( is_main_site($blog_id) ) {
-          $site_id = $blog_id;
-        }else {
-            $site_id = $blog_id;
-        }
-		echo '<pre>'; print_r( $site_id ); echo '</pre>'; exit;
-		exit;
 	}
 
 	public function callback_admin_menu() {

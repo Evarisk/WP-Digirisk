@@ -13,10 +13,12 @@
     "digirisk-prevention",
 		"digirisk-tools",
 		"digirisk-transfert",
-		"digi-setup",
+		"digi-setup", 
 		"digirisk-handle-sorter",
 		"digirisk-update",
-		"digirisk-setting"
+		"digirisk-setting",
+    "profile",
+    "user-edit"
 	],
 	"insert_scripts_pages_css": [
 		"digirisk-simple-risk-evaluation",

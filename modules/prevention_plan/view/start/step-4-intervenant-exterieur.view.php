@@ -71,7 +71,7 @@ global $eo_search; ?>
 				<input type="hidden" name="intervenant-exterieur-signature" value="ok">
 				<div>
 					<input type="hidden" name="intervenant-signature">
-					<img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $prevention->data['maitre_oeuvre']['signature_id'] ) ); ?>">
+					<img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $prevention->data['intervenant_exterieur']['signature_id'] ) ); ?>">
 				</div>
 			<?php endif; ?>
 		</div>

@@ -16,16 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $eo_search; ?>
-
-
 <div class="wpeo-form">
-	<div class="form-element element-maitre-oeuvre">
+	<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] ) ): ?>
+		<div class="form-element element-maitre-oeuvre form-element-disable">
+	<?php else: ?>
+		<div class="form-element element-maitre-oeuvre">
+	<?php endif; ?>
 		<input type="hidden" name="prevention_id" value="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>">
 		<span class="form-label"><?php esc_html_e( 'Nom', 'task-manager' ); ?></span>
-		<?php if( ! empty( $user ) && isset( $user->first_name ) ): ?>
+		<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ) ): ?>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-				<input type="text" class="form-field" name="maitre-oeuvre-name" value="<?php echo esc_attr( $user->first_name ); ?>">
+				<input type="text" class="form-field" name="maitre-oeuvre-name" value="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ); ?>">
 			</label>
 		<?php else: ?>
 			<input type="hidden" name="maitre-oeuvre-name" value="-1">
@@ -35,12 +37,16 @@ global $eo_search; ?>
 </div>
 
 <div class="wpeo-form">
-	<div class="form-element">
+	<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name) ): ?>
+		<div class="form-element element-maitre-oeuvre form-element-disable">
+	<?php else: ?>
+		<div class="form-element element-maitre-oeuvre">
+	<?php endif; ?>
 		<span class="form-label"><?php esc_html_e( 'Prénom', 'task-manager' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-				<?php if( ! empty( $user ) && isset( $user->last_name ) ): ?>
-					<input type="text" class="form-field" name="maitre-oeuvre-lastname" value="<?php echo esc_attr( $user->last_name ); ?>">
+				<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name ) ): ?>
+					<input type="text" class="form-field" name="maitre-oeuvre-lastname" value="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name ); ?>">
 				<?php else: ?>
 					<input type="text" class="form-field" name="maitre-oeuvre-lastname" value="">
 				<?php endif; ?>

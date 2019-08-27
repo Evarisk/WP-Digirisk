@@ -111,7 +111,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			foreach( $prevention->data[ 'intervention' ] as $intervention ){
 				$risk = Risk_Category_Class::g()->get( array( 'id' => $intervention->data[ 'risk' ] ), true );
 				$data_temp = array(
-					'key_unique'    => '?_' . $intervention->data[ 'parent_id' ] . '_' . $intervention->data[ 'id' ],
+					'key_unique'    => $intervention->data[ 'key_unique' ],
 					'unite_travail' => Prevention_Intervention_Class::g()->return_name_workunit( $intervention->data[ 'unite_travail' ] ),
 					'action'        => $intervention->data[ 'action_realise' ],
 					'risk'          => $risk->data[ 'name' ],
@@ -136,9 +136,9 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				'type'  => 'segment',
 				'value' => $data_interventions,
 			),
-			'maitre_oeuvre_fname' => $maitre_e[ 'firstname' ],
-			'maitre_oeuvre_lname' => $maitre_e[ 'lastname' ],
-			'maitre_oeuvre_phone' => $maitre_e[ 'phone' ],
+			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
+			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
+			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
 			'maitre_oeuvre_signature_id' => $maitre_e[ 'signature_id' ],
 			'maitre_oeuvre_signature_date' => date( 'd/m/Y', strtotime( $maitre_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
 			'maitre_oeuvre_signature' => $this->set_picture( $maitre_e[ 'signature_id' ], 5 ),

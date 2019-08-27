@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <tr class="item" data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>">
-	<td class="w50 padding">
+	<td class="w50 padding" style="height: 60px">
 		#<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>
 	</td>
 	<td class="padding">
@@ -28,17 +28,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="w100 padding">
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_closure' ][ 'raw' ] ) ) ); ?>
 	</td>
-	<td class="padding">
+	<td class="padding avatar-info-prevention">
 		<div class="avatar tooltip hover wpeo-tooltip-event"
 			aria-label="<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->display_name ); ?>"
-			style="background-color: #<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->avator_color ); ?>;">
+			style="background-color: #<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
 				<span><?php echo esc_html( $prevention->data[ 'former' ][ 'data' ]->initial ); ?></span>
 		</div>
+		<div class="info-text" style="display : none">
+			<span><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->first_name ); ?></span> -
+			<span><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->last_name ); ?></span>
+			<span>( <i><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->phone ); ?></i> )</span>
+		</div>
 	</td>
-	<td class="padding">
-		<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'firstname' ] ); ?> -
-		<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'lastname' ] ); ?>
-		<i>(<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'phone' ] ); ?>)</i>
+	<td class="padding avatar-info-prevention">
+		<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
+			<div class="avatar tooltip hover wpeo-tooltip-event"
+				aria-label="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->display_name ); ?>"
+				style="background-color: #<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
+					<span><?php echo esc_html( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->initial ); ?></span>
+			</div>
+			<div class="info-text" style="display : none">
+				<span><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ); ?></span> -
+				<span><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name ); ?></span>
+				<span>( <i><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone ); ?></i> )</span>
+			</div>
+		<?php else: ?>
+			<?php esc_html_e( 'Aucun maitre oeuvre', 'digirisk' ); ?>
+		<?php endif; ?>
 	</td>
 	<td class="padding">
 		<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?> -

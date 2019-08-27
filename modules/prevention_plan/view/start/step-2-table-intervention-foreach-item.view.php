@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $eo_search;
 ?>
 
-<tr class="intervention-row readonly">
+<tr class="intervention-row readonly" style="height : 60px">
 	<td class="w100 padding" data-title="<?php esc_html_e( 'IdRPP', 'digirisk' ); ?>">
 		#<?php echo esc_attr( $intervention->data['key_unique'] ); ?>
 	</td>

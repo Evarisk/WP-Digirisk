@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Dernièrs plan de préventions réalisés', 'digirisk' ); ?></h2>
 
-	<table class="table closed-causerie">
+	<table class="table closed-prevention">
 		<thead>
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>

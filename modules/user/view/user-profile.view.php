@@ -23,4 +23,8 @@ defined( 'ABSPATH' ) || exit; ?>
 		<th><label for="digi-hiring-date"><?php _e( 'Hiring date', 'digirisk' ); ?></label></th>
 		<td><input type="text" name="digirisk_user_information_meta[digi_hiring_date]" id="digi-hiring-date" value="<?php echo esc_attr( $hiring_date ); ?>" class="regular-text eva-date" /><br /></td>
 	</tr>
+	<tr>
+		<th><label for="digi-hiring-date"><?php _e( 'Phone Number', 'digirisk' ); ?></label></th>
+		<td><input type="text" name="digirisk_user_information_meta[digi_phone_number]" id="digi-phone-number" value="<?php echo esc_attr( $phone_number ); ?>" class="regular-text eva-date" /><br /></td>
+	</tr>
 </table>

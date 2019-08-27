@@ -88,15 +88,6 @@ class Prevention_Model extends \eoxia\Post_Model {
 				'user_id'        => array(
 					'type' => 'integer',
 				),
-				'firstname'        => array(
-					'type' => 'string',
-				),
-				'lastname'        => array(
-					'type' => 'string',
-				),
-				'phone'        => array(
-					'type' => 'string',
-				),
 				'signature_id'   => array(
 					'type' => 'integer',
 				),

@@ -44,9 +44,17 @@ class Prevention_Action {
 		add_action( 'wp_ajax_prevention_save_signature_maitre_oeuvre', array( $this, 'callback_prevention_save_signature_maitre_oeuvre' ) );
 
 		add_action( 'wp_ajax_generate_document_prevention', array( $this, 'callback_generate_document_prevention' ) );
-
+		// $this->a();
 	}
 
+	public function a(){
+		$prevention = Prevention_Class::g()->get( array( 'id' => 138 ), true );
+		$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
+		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
+		$prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
+		$prevention->data[ 'taxonomy' ] = array();
+		$prevention = Prevention_Class::g()->update( $prevention->data );
+	}
 
 	public function callback_prevention_save_former(){
 		$id        = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
@@ -57,7 +65,6 @@ class Prevention_Action {
 		}
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
-		// echo '<pre>'; print_r( get_user_by( 'id', $former_id ) ); echo '</pre>'; exit;
 		$prevention->data['former']['user_id'] = $former_id;
 		Prevention_Class::g()->update( $prevention->data );
 
@@ -323,18 +330,24 @@ class Prevention_Action {
 			wp_send_json_error( 'Error in request' );
 		}
 
-		$user_info = get_user_by( 'id', $user_id);
-		$prevention = Prevention_Class::g()->get( array( 'id' => $prevention_id ), true );
+		$user_info = get_user_by( 'id', $user_id );
+		$prevention = Prevention_Class::g()->update_maitre_oeuvre( $prevention_id, $user_id );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-name', array(
-			'prevention' => $prevention,
-			'user'       => $user_info
+			'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention )
 		) );
-		$view = ob_get_clean();
+		$view_name = ob_get_clean();
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-phone', array(
+			'prevention' => $prevention
+		) );
+		$view_phone = ob_get_clean();
 
 		wp_send_json_success( array(
-			'view'             => $view
+			'view_name'  => $view_name,
+			'view_phone' => $view_phone
 		) );
 	}
 	public function callback_prevention_save_signature_maitre_oeuvre(){
@@ -377,8 +390,17 @@ class Prevention_Action {
 		}
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+		$response = Prevention_Class::g()->generate_document_odt_prevention( $prevention );
 
-		Prevention_Class::g()->generate_document_odt_prevention( $prevention );
+		$link = isset( $response[ 'document' ]->data[ 'link' ] ) ? $response[ 'document' ]->data[ 'link' ] : '';
+		$title = isset( $response[ 'document' ]->data[ 'title' ] ) ? $response[ 'document' ]->data[ 'title' ] : '';
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'preventionPlan',
+			'callback_success' => 'generateDocumentPreventionSuccess',
+			'link'             => $link,
+			'filename'         => $title
+		) );
 	}
 }
 

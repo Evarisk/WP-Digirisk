@@ -43,18 +43,28 @@ class Prevention_Intervention_Action {
 			wp_send_json_error( 'Erreur dans la requete' );
 		}
 
+		$key = array( // Clé unique pour chaque intervention du plan de prévention
+			'site_mu' => get_current_blog_id(), // ID du site
+			'post_parent' => $parent,// ID du plan de prévention
+			'id_inter' => $id // ID de l'intervention actuelle
+		);
+
 		$intervention = array(
 			'post_parent'            => $parent, // plan de prévention
 			'id'                     => $id,
-			'key_unique'             => $unite_id . '-' . $risk_id,
+			'key_unique'             => 'undefined',
 			'unite_travail'          => $unite_id,
 			'action_realise'         => $action,
 			'risk'                   => $risk_id,
 			'moyen_prevention'       => $prevention
 		);
 
-		$b = Prevention_Intervention_Class::g()->update( $intervention );
+		$intervention = Prevention_Intervention_Class::g()->update( $intervention );
 
+		$key[ 'id_inter' ] = $intervention->data[ 'id' ];
+		$intervention->data[ 'key_unique' ] = $key[ 'site_mu' ] . '-' . $key[ 'post_parent' ] . '-' . $key[ 'id_inter' ];
+
+		$intervention = Prevention_Intervention_Class::g()->update( $intervention->data );
 		Prevention_Page_Class::g()->register_search( null, null );
 		ob_start();
 		$view_prevention = Prevention_Intervention_Class::g()->display_table( $parent );

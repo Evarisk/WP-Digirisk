@@ -97,14 +97,13 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 				'post_parent'    => $society->data[ 'id' ],
 			), true );
 		}
-
 		$this->register_search( $user );
 		if( $prevention->data[ 'step' ] >= \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED ){
 			echo '<pre>'; print_r( 'FINIE' ); echo '</pre>'; exit;
 		}else{
 			$file = "step-" . $prevention->data[ 'step' ];
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/' . $file, array(
-				'prevention' => $prevention,
+				'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
 				'all_signed' => false,
 				'society'       => $society,
 				'legal_display' => $legal_display

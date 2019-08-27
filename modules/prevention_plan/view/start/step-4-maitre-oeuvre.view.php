@@ -17,35 +17,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<?php // echo '<pre>'; print_r( $user ); echo '</pre>'; exit; ?>
-<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
+<section class="wpeo-gridlayout padding grid-2 content-maitre-oeuvre" style="margin-bottom: 10px;">
 	<input type='hidden' name="prevention_id" value="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 	<section class="wpeo-gridlayout padding grid-2 maitre-name-part" style="margin-bottom: 10px;">
 		<?php
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-name', array(
-			'prevention' => $prevention,
-			'user'       => $user
+			'prevention' => $prevention
 		) );
 		?>
 	</section>
 	<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
 
-		<div class="wpeo-form">
-			<div class="form-element element-phone">
-				<span class="form-label"><?php esc_html_e( 'Portable', 'task-manager' ); ?></span>
-				<label class="form-field-container">
-					<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-					<input type="text" class="form-field element-phone-input" name="maitre-oeuvre-phone" value="" data-verif="false">
-				</label>
-			</div>
+		<div class="wpeo-form maitre-phone-part">
+			<?php
+				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-phone', array(
+					'prevention' => $prevention
+				) );
+			?>
 		</div>
 		<div class="wpeo-form">
 			<div class="form-element signature-info-element">
 				<span class="form-label"><?php esc_html_e( 'Signature', 'task-manager' ); ?></span>
-				<?php if ( empty( $prevention->data['maitre_oeuvre']['signature_id'] ) ) : ?>
+				<?php if ( empty( $prevention->data['maitre_oeuvre']['signature_id'] ) ): ?>
 					<div class="signature w50 padding">
 						<input type="hidden" name="maitre-oeuvre-signature" value="-1">
-						<div class="wpeo-button button-blue wpeo-modal-event"
+						<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] ) ): ?>
+							<div class="wpeo-button button-blue wpeo-modal-event"
+						<?php else: ?>
+							<div class="wpeo-button button-blue wpeo-modal-event"
+						<?php endif; ?>
 							data-parent="form-element"
 							data-target="modal-signature">
 							<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
