@@ -99,15 +99,21 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		}
 
 		if( isset( $args[ 'society' ] ) && ! empty( $args[ 'society' ] ) ){
+			$moyen_generaux = $args[ 'society' ]->data[ 'moyen_generaux' ] != "" ? $args[ 'society' ]->data[ 'moyen_generaux' ] : esc_html__( 'Vide', 'digirisk' );
+			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
+
 			$data_society = array(
 				'society_title'    => $args[ 'society' ]->data[ 'title' ],
-				'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : ''
+				'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
+				'moyen_generaux_mis_disposition' => $moyen_generaux,
+				'consigne_generale'              => $consigne_generale
 			);
 		}
 
 		$data_interventions = array();
+		$interventions_info = "";
 
-		if( $prevention->data[ 'intervention' ] ){
+		if( ! empty( $prevention->data[ 'intervention' ] ) ){
 			foreach( $prevention->data[ 'intervention' ] as $intervention ){
 				$risk = Risk_Category_Class::g()->get( array( 'id' => $intervention->data[ 'risk' ] ), true );
 				$data_temp = array(
@@ -119,23 +125,54 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				);
 				$data_interventions[] = $data_temp;
 			}
+			$nbr = count( $prevention->data[ 'intervention' ] );
+			$interventions_info = esc_html__( sprintf( 'Il y a %1$d intervention(s)', $nbr ), 'digirisk' );
+		}else{
+			$data_interventions[0] = array(
+				'key_unique' => '',
+				'unite_travail' => '',
+				'action' => '',
+				'risk' => '',
+				'prevention' => ''
+			);
+			$interventions_info = esc_html__( 'Aucune intervention définie' );
+		}
+
+		$intervenants_info = "";
+		if( empty( $prevention->data[ 'intervenants' ] ) ){
+			$prevention->data[ 'intervenants' ][0] = array(
+				'name' => '',
+				'lastname' => '',
+				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' )
+			);
+			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
+		}else{
+			$nbr = count( $prevention->data[ 'intervenants' ] );
+			$intervenants_info = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
 		}
 
 		$inter_e = $prevention->data[ 'intervenant_exterieur' ];
 		$maitre_e = $prevention->data[ 'maitre_oeuvre' ];
+		if( $maitre_e[ 'data' ]->phone == "" ){
+			$maitre_e[ 'data' ]->phone = $prevention->data[ 'maitre_oeuvre' ][ 'phone' ];
+		}
+
 		$data = array(
+			'yep' => true,
 			'id' => $prevention->data['id'],
 			'titrePrevention' => $prevention->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
-			'date_end_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_closure' ][ 'rendered' ][ 'mysql' ] ) ),
+			'date_end_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) ),
 			'intervenants' => array(
 				'type'  => 'segment',
 				'value' => $prevention->data[ 'intervenants' ],
 			),
+			'intervenants_info' => $intervenants_info,
 			'interventions' => array(
 				'type'  => 'segment',
 				'value' => $data_interventions,
 			),
+			'interventions_info' => $interventions_info,
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
 			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
@@ -152,7 +189,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 
 		$data = wp_parse_args( $data_legal_display, $data );
 		$data = wp_parse_args( $data_society, $data );
-
+		// echo '<pre>'; print_r( $data ); echo '</pre>'; exit;
 		return $data;
 	}
 

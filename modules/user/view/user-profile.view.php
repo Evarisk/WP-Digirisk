@@ -25,6 +25,18 @@ defined( 'ABSPATH' ) || exit; ?>
 	</tr>
 	<tr>
 		<th><label for="digi-hiring-date"><?php _e( 'Phone Number', 'digirisk' ); ?></label></th>
-		<td><input type="text" name="digirisk_user_information_meta[digi_phone_number]" id="digi-phone-number" value="<?php echo esc_attr( $phone_number ); ?>" class="regular-text eva-date" /><br /></td>
+		<td class="digi-phone-user">
+			<?php
+				\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
+					'local' => get_locale(),
+					'width' => '10%',
+					'name'  => 'digirisk_user_information_meta[digi_phone_callingcode]'
+					) );
+			?>
+			<input type="text" name="digirisk_user_information_meta[digi_phone_number]" id="digi-phone-number" value="<?php echo esc_attr( $phone_number ); ?>" class="regular-text eva-date" />
+			<br />
+		</td>
 	</tr>
+
+
 </table>

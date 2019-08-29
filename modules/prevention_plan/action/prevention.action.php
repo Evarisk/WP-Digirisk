@@ -44,11 +44,13 @@ class Prevention_Action {
 		add_action( 'wp_ajax_prevention_save_signature_maitre_oeuvre', array( $this, 'callback_prevention_save_signature_maitre_oeuvre' ) );
 
 		add_action( 'wp_ajax_generate_document_prevention', array( $this, 'callback_generate_document_prevention' ) );
+
+		add_action( 'wp_ajax_delete_document_prevention', array( $this, 'callback_delete_document_prevention' ) );
 		// $this->a();
 	}
 
 	public function a(){
-		$prevention = Prevention_Class::g()->get( array( 'id' => 138 ), true );
+		$prevention = Prevention_Class::g()->get( array( 'id' => 474 ), true );
 		$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
 		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
 		$prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
@@ -400,6 +402,29 @@ class Prevention_Action {
 			'callback_success' => 'generateDocumentPreventionSuccess',
 			'link'             => $link,
 			'filename'         => $title
+		) );
+	}
+
+	public function callback_delete_document_prevention(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+		$prevention->data[ 'status' ] = "trash";
+		Prevention_Class::g()->update( $prevention->data );
+
+		ob_start();
+		Prevention_Page_Class::g()->display_dashboard();
+		$dashboard_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'preventionPlan',
+			'callback_success' => 'deleteDocumentPreventionSuccess',
+			'dashboard_view'   => $dashboard_view
 		) );
 	}
 }

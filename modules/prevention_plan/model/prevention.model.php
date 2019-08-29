@@ -50,11 +50,11 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'context'   => array( 'GET' ),
 		);
 
-		$this->schema['date_end_exist'] = array(
+		$this->schema['date_end_define'] = array(
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_prevention_date_end_exist',
-			'context'   => array( 'GET' ),
+			'default'   => 0
 		);
 
 		$this->schema['date_closure'] = array(
@@ -87,6 +87,9 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'child'     => array(
 				'user_id'        => array(
 					'type' => 'integer',
+				),
+				'phone'        => array(
+					'type' => 'string',
 				),
 				'signature_id'   => array(
 					'type' => 'integer',

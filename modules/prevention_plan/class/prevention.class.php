@@ -85,42 +85,30 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return $prevention;
 	}
 
-	public function step_former( $prevention, $former_id ) {
-		$prevention = $this->add_participant( $prevention, $former_id, true );
+	public function step_maitreoeuvre( $prevention ) {
+
+		// $prevention = $this->add_participant( $prevention, $former_id, true );
+		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
+		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-phone-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone-callingcode'] ) : '';
+
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION;
 
-		return Prevention_Class::g()->update( $prevention->data );
-	}
+		if( $mo_phone != "" ){
+			$mo_phone_code = $mo_phone_code != "" ? '(' . $mo_phone_code . ')' : '';
+			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = $mo_phone_code . $mo_phone;
 
-	public function add_participant( $prevention, $user_id, $is_former = false ) {
-		if ( $is_former ) {
-			$prevention->data['former']['user_id'] = $user_id;
-		} else {
-			$prevention->data['participants'][ $user_id ] = array(
-				'user_id' => $user_id,
-			);
-		}
+			if( $prevention->data[ 'maitre_oeuvre'][ 'user_id' ] ){
 
-		return $prevention;
-	}
+				$user_information = get_the_author_meta( 'digirisk_user_information_meta', $prevention->data[ 'maitre_oeuvre'][ 'user_id' ] );
+				$user_information = ! empty( $user_information ) ? $user_information : array();
+				$user_information[ 'digi_phone_number' ] = $mo_phone;
+				$user_information[ 'digi_phone_number_full' ] = $mo_phone_code . $mo_phone;
 
-	public function check_all_signed( $causerie ) {
-		$all_signed = true;
-
-		if ( empty( $causerie->data['participants'] ) ) {
-			$all_signed = false;
-		}
-
-		if ( ! empty( $causerie->data['participants'] ) ) {
-			foreach ( $causerie->data['participants'] as $participant ) {
-				if ( empty( $participant['signature_id'] ) ) {
-					$all_signed = false;
-					break;
-				}
+				update_user_meta( $prevention->data[ 'maitre_oeuvre'][ 'user_id' ], 'digirisk_user_information_meta', $user_information );
 			}
 		}
 
-		return $all_signed;
+		return Prevention_Class::g()->update( $prevention->data );
 	}
 
 	// public function all_user_in_prevention_id( $id ){
@@ -150,10 +138,13 @@ class Prevention_Class extends \eoxia\Post_Class {
 			$data[ 'date_start' ] = date( 'd-m-Y', strtotime( 'now' ) );
 		}
 
-		if( ! isset( $data[ 'date_end' ] ) || $data[ 'date_end' ] == '' || strtotime( $data[ 'date_start' ] ) > strtotime( $data[ 'date_end' ] ) ){
-			$data[ 'date_end_exist' ] = 0;
+		if( ! isset( $data[ 'date_end' ] ) || $data[ 'date_end' ] == '' ){
+			$data[ 'date_end_define' ] = 0;
 		}else{
-			$data[ 'date_end_exist' ] = 1;
+			$data[ 'date_end_define' ] = 1;
+			if( strtotime( $data[ 'date_start' ] ) > strtotime( $data[ 'date_end' ] ) ){
+				$data[ 'date_end' ] = date( 'd-m-Y', strtotime( $data[ 'date_start' ] ) + 86400 );
+			}
 		}
 
 		$prevention_data = wp_parse_args( $data, $prevention->data );
@@ -207,40 +198,31 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function save_info_maitre_oeuvre(){
 		$id   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 
-/*		$mo_name     = ! empty( $_POST['maitre-oeuvre-name'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-name'] ) : '';
-		$mo_lastname = ! empty( $_POST['maitre-oeuvre-lastname'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-lastname'] ) : '';
-		$mo_phone    = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
-		$mo_sign     = ! empty( $_POST['maitre-oeuvre-signature'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-signature'] ) : '';
-*/
-		$i_name      = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
-		$i_lastname = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
-		$i_phone    = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
-		//$i_sign     = ! empty( $_POST['intervenant-exterieur-signature'] ) ? sanitize_text_field( $_POST['intervenant-exterieur-signature'] ) : '';
+		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
+		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-callingcode'] ) : '';
 
-		/*if( ! $id || ! $mo_name || ! $mo_lastname || ! $mo_phone || ! $mo_sign ){
-			wp_send_json_error( 'Erreur in master ouvrage' );
-		}*/
+		$i_name        = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
+		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
+		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
+		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
 
 		if( ! $i_name || ! $i_lastname || ! $i_phone ){
 			wp_send_json_error( 'Erreur in intervenant exterieur' );
 		}
 
-
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
-		/*$data_mo = array(
-			'firstname' => $mo_name,
-			'lastname'  => $mo_lastname,
-			'phone'     => $mo_phone
-		);
-
-		$prevention->data[ 'maitre_oeuvre' ] = wp_parse_args( $data_mo, $prevention->data[ 'maitre_oeuvre' ] );*/
+		if( $mo_phone != ""  ){
+			echo '<pre>'; print_r( '----' ); echo '</pre>';
+			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = '(' . $mo_phone_code . ')' . $mo_phone;
+		}
 
 		$data_i = array(
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
-			'phone'     => $i_phone
+			'phone'     => '(' . $i_phone_code . ')' . $i_phone
 		);
+
 		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
 
 		return Prevention_Class::g()->update( $prevention->data );
@@ -250,16 +232,14 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function add_information_to_prevention( $prevention ){
 		$prevention->data[ 'intervention' ] = Prevention_Intervention_Class::g()->get( array( 'post_parent' => $prevention->data[ 'id' ] ) ); // Recupere la liste des interventions
 
-		$id = $prevention->data[ 'former' ][ 'user_id' ];
-		if( $id > 0 ){
+		/*$id = $prevention->data[ 'former' ][ 'user_id' ];
+		if( $prevention->data[ 'former' ][ 'user_id' ] > 0 ){
 			$prevention = $this->get_information_from_user( $id, $prevention, 'former' );
-		}
+		}*/
 
 		if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ){ // Maitre d'oeuvre data
-
 			$id = $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ];
 			$prevention = $this->get_information_from_user( $id, $prevention, 'maitre_oeuvre' );
-
 		}
 		return $prevention;
 	}
@@ -282,7 +262,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $id );
-		$phone_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
+		$phone_number = ! empty( $user_information['digi_phone_number_full'] ) ? $user_information['digi_phone_number_full'] : '';
 		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_number;
 
 		return $prevention;

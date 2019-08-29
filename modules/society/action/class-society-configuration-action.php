@@ -49,6 +49,8 @@ class Society_Configuration_Action {
 		$society_data['contact']['phone']    = ! empty( $_POST['society']['contact']['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['phone'] ) ) : ''; // WPCS: input var ok.
 		$society_data['contact']['email']    = ! empty( $_POST['society']['contact']['email'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['email'] ) ) : ''; // WPCS: input var ok.
 		$society_data['content']             = ! empty( $_POST['society']['content'] ) ? wp_unslash( $_POST['society']['content'] ) : ''; // WPCS: input var ok.
+		$society_data['moyen_generaux']      = ! empty( $_POST['society']['moyen'] ) ? wp_unslash( $_POST['society']['moyen'] ) : ''; // WPCS: input var ok.
+		$society_data['consigne_generale']   = ! empty( $_POST['society']['consigne'] ) ? wp_unslash( $_POST['society']['consigne'] ) : ''; // WPCS: input var ok.
 
 		$address_data                       = array();
 		$address_data['post_id']            = $society_data['id'];
@@ -61,6 +63,7 @@ class Society_Configuration_Action {
 		$society_data['contact']['address_id'] = $address->data['id'];
 
 		$society = Society_Configuration_Class::g()->save( $society_data );
+		$society = Society_Class::g()->show_by_type( $id );
 
 		ob_start();
 		Tab_Class::g()->load_tab_content( $society->data['id'], array(

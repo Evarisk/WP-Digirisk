@@ -17,15 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<div class="information-maitre-oeuvre" style="background-color: #fff; padding: 1em;">
-	<input type="hidden" name="user-type" value="maitre_oeuvre">
-	<h2 style="text-align:center">
-		<?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?> -
-		<i><?php echo esc_attr( $society->data[ 'title' ] ); ?></i>
-	</h2>
-	<?php Prevention_Class::g()->display_maitre_oeuvre( array(), $prevention->data[ 'id' ] ); ?>
-</div>
-
 <div class="information-intervenant-exterieur" style="background-color: #fff; padding: 1em;">
 	<input type="hidden" name="user-type" value="intervenant_exterieur">
 	<h2 style="text-align:center"><?php esc_html_e( 'Intervenant Extérieur', 'digirisk' ); ?></h2>

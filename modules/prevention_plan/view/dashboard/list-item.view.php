@@ -26,9 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>
 	</td>
 	<td class="w100 padding">
-		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_closure' ][ 'raw' ] ) ) ); ?>
+		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
 	</td>
-	<td class="padding avatar-info-prevention">
+	<!-- <td class="padding avatar-info-prevention">
 		<div class="avatar tooltip hover wpeo-tooltip-event"
 			aria-label="<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->display_name ); ?>"
 			style="background-color: #<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
@@ -39,11 +39,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->last_name ); ?></span>
 			<span>( <i><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->phone ); ?></i> )</span>
 		</div>
-	</td>
+	</td> -->
 	<td class="padding avatar-info-prevention">
+		<?php $name_and_phone = $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
 		<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
 			<div class="avatar tooltip hover wpeo-tooltip-event"
-				aria-label="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->display_name ); ?>"
+				aria-label="<?php echo esc_attr( $name_and_phone ); ?>"
 				style="background-color: #<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
 					<span><?php echo esc_html( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->initial ); ?></span>
 			</div>
@@ -75,6 +76,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-action="<?php echo esc_attr( wp_create_nonce( 'generate_document_prevention' ) ); ?>"
 				aria-label="<?php echo esc_attr_e( 'Générer le document', 'digirisk' ); ?>">
 				<i class="fas fa-download"></i>
+			</span>
+			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-prevention-plan"
+				data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
+				data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce plan de prévention', 'digirisk' ); ?>"
+				data-action="delete_document_prevention"
+				data-action="<?php echo esc_attr( wp_create_nonce( 'delete_document_prevention' ) ); ?>"
+				aria-label="<?php echo esc_attr_e( 'Supprimer le plan de prévention', 'digirisk' ); ?>">
+				<i class="fas fa-times"></i>
 			</span>
 		</div>
 	</td>

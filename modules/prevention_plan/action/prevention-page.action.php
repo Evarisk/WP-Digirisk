@@ -91,13 +91,7 @@ class Prevention_Page_Action {
 		Prevention_Page_Class::g()->register_search( null, null );
 		switch ( $prevention->data['step'] ) {
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_FORMER:
-				$former_id      = ! empty( $_POST['former_id'] ) ? (int) $_POST['former_id'] : 0;
-
-				if ( empty( $former_id ) ) {
-					wp_send_json_error();
-				}
-
-				$prevention = Prevention_Class::g()->step_former( $prevention, $former_id );
+				$prevention = Prevention_Class::g()->step_maitreoeuvre( $prevention );
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2', array(
 					'prevention' => $prevention,

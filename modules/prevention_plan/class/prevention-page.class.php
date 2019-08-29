@@ -63,6 +63,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	public function display_dashboard() {
 		$preventions = Prevention_Class::g()->get( array(
 			'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED,
+			'post_status'     => "publish"
 		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'dashboard/main', array(
@@ -173,7 +174,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 
 	public function step_close_prevention( $prevention, $society, $legal_display ){
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED;
-		$prevention->data['date_closure'] = date( 'Y-m-d', strtotime( 'now' ) );
+		// $prevention->data['date_closure'] = date( 'Y-m-d', strtotime( 'now' ) );
 
 		return Prevention_Class::g()->update( $prevention->data );
 	}

@@ -111,6 +111,20 @@ global $eo_search; ?>
 			</label>
 		</div>
 
+		<div class="form-element gridw-2">
+			<span class="form-label"><?php esc_html_e( 'Moyen Generaux Mis à Disposition', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<textarea name="society[moyen]" class="form-field" rows="6"><?php echo $element->data['moyen_generaux']; ?></textarea>
+			</label>
+		</div>
+
+		<div class="form-element gridw-2">
+			<span class="form-label"><?php esc_html_e( 'Consignes Générales', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<textarea name="society[consigne]" class="form-field" rows="6"><?php echo $element->data['consigne_generale']; ?></textarea>
+			</label>
+		</div>
+
 		<div class="gridw-2">
 			<button class="wpeo-button button-main action-input alignright" data-parent="wpeo-form"><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></button>
 		</div>

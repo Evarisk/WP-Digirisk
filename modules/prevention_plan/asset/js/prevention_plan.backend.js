@@ -85,10 +85,13 @@ window.eoxiaJS.digirisk.preventionPlan.event = function() {
 
 	jQuery( document ).on( 'keyup', '.digi-prevention-parent .element-phone .element-phone-input', window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat );
 
-	jQuery( document ).on( 'keyup', '.digi-prevention-parent .information-maitre-oeuvre input[type="text"]', window.eoxiaJS.digirisk.preventionPlan.preventionPlanCanBeFinish );
-	jQuery( document ).on( 'keyup', '.digi-prevention-parent .information-intervenant-exterieur input[type="text"]', window.eoxiaJS.digirisk.preventionPlan.preventionPlanCanBeFinish );
+	jQuery( document ).on( 'keyup', '.digi-prevention-parent .information-maitre-oeuvre input[type="text"]', window.eoxiaJS.digirisk.preventionPlan.preventionPlanCanBeFinishMaitreOeuvre );
+
+	jQuery( document ).on( 'keyup', '.digi-prevention-parent .information-intervenant-exterieur input[type="text"]', window.eoxiaJS.digirisk.preventionPlan.PreventionPlanCanBeFinishIntervenantExterieur );
 
 	jQuery( document ).on( 'click', '.wrap-prevention .closed-prevention .avatar-info-prevention .avatar', window.eoxiaJS.digirisk.preventionPlan.displayUserInfo );
+
+	jQuery( document ).on( 'click', '.wrap-prevention .closed-prevention .action .delete-this-prevention-plan', window.eoxiaJS.digirisk.preventionPlan.deleteThisPreventionPlan );
 
 };
 
@@ -125,7 +128,7 @@ window.eoxiaJS.digirisk.preventionPlan.updateModalTitleMaitreOeuvre = function( 
 				triggeredElement.closest( '.information-maitre-oeuvre' ).find( '.content-maitre-oeuvre .maitre-phone-part' ).html( response.data.view_phone );
 				triggeredElement.closest( '.information-maitre-oeuvre' ).find( '.content-maitre-oeuvre .maitre-name-part' ).html( response.data.view_name );
 			}
-			window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( element );
+			window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre( element );
 		} );
 	}
 }
@@ -294,11 +297,13 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfInterventionCanBeAdd = function( e
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid = function( parent_element, element, error = false ){
+	console.log( error );
 	if( error ){
 		return true;
 	}
-
 	var content = parent_element.find( '[name="' + element + '"]').val();
+	console.log( content );
+	console.log( element );
 	if( content == "" || content == "-1" || content == null ){
 		return true;
 	}else{
@@ -341,15 +346,20 @@ window.eoxiaJS.digirisk.preventionPlan.editIntervenantPrevention = function( tri
 window.eoxiaJS.digirisk.preventionPlan.displaySignatureLastPage = function( triggeredElement, response ){
 	var class_parent = '.' + response.data.class_parent;
 	var element_parent = triggeredElement.closest( '.digi-prevention-parent' );
-	var futur_element = element_parent.find( '.prevention-cloture' );
 
 	var element = jQuery( '.digi-prevention-parent' ).find( class_parent );
 	element.find( '.signature-info-element .signature' ).replaceWith( response.data.view );
 
-	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( futur_element );
+	if( response.data.class_parent == "information-maitre-oeuvre" ){
+		window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre( element_parent );
+	}else{
+		window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervenantExterieur( element_parent );
+	}
+
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat = function( event ){
+
 	var content = jQuery( this ).val();
 	if( ! content ){
 		return;
@@ -362,37 +372,64 @@ window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat = function( event ){
 	}
 	content = text.join("");
 
-	if( content.length == 10 ){
-		jQuery( this ).attr( 'verif', 'true' );
-		var result = content.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1.$2.$3.$4.$5');
+	var lengthMin = jQuery( this ).closest( '.digi-phone-user' ).find( '.list-country-calling-code option:selected').attr( 'data-lengthmin' );
+	var lengthMax = jQuery( this ).closest( '.digi-phone-user' ).find( '.list-country-calling-code option:selected').attr( 'data-lengthmax' );
+	var callingCode = jQuery( this ).closest( '.digi-phone-user' ).find( '.list-country-calling-code option:selected').attr( 'data-countryCode' );
 
-		jQuery( this ).val( result );
-		jQuery( this ).closest( '.form-field-container' ).css( 'border-bottom' , 'solid 2px green' );
+	content.replace( /\./g, '' ); // On enleve les points
+	content.replace( /\-/g, '' ); // On enleve les tirets
 
-	}else if( content.length < 14 ){
-		jQuery( this ).attr( 'verif', 'false' );
-		jQuery( this ).val( content.replace( /\./g, '' ) );
-		jQuery( this ).closest( '.form-field-container' ).css( 'border-bottom' , 'solid 2px red' );
+	if( lengthMax != null && lengthMax > 0 && lengthMin != null && lengthMin > 0 ){
+		if( content.length > lengthMax ){
+			jQuery( this ).closest( '.form-field-container' ).css( 'border-bottom' , 'solid 2px red' );
 
-	}else{
+		}else if( content.length < lengthMin ){
+			jQuery( this ).closest( '.form-field-container' ).css( 'border-bottom' , 'solid 2px red' );
 
+		}else{
+
+			if( callingCode == "FR" ){ // Téléphone français
+				content = content.replace(/(\d{1})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1.$2.$3.$4.$5');
+			}
+			jQuery( this ).closest( '.form-field-container' ).css( 'border-bottom' , 'solid 2px green' );
+		}
 	}
-}
-window.eoxiaJS.digirisk.preventionPlan.preventionPlanCanBeFinish = function( event ){
-	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish( jQuery( this ) );
+
+	jQuery( this ).val( content );
 }
 
-window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish = function( element ){
+window.eoxiaJS.digirisk.preventionPlan.preventionPlanCanBeFinishMaitreOeuvre = function( event ){
+	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre( jQuery( this ) );
+}
+
+window.eoxiaJS.digirisk.preventionPlan.PreventionPlanCanBeFinishIntervenantExterieur = function( event ){
+	window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervenantExterieur( jQuery( this ) );
+}
+
+window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre = function( element ){
 	var parent_element = element.closest( '.digi-prevention-parent' );
 
 	var maitre_oeuvre_element = parent_element.find( '.information-maitre-oeuvre' );
-	var intervenant_exterieur_element = parent_element.find( '.information-intervenant-exterieur' );
 	var error = false;
-
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-name', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-lastname', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-phone', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-signature', error );
+
+	console.log( error );
+
+	if( ! error ){
+		parent_element.find( '.prevention-start' ).removeClass( 'button-disable' );
+	}else{
+		parent_element.find( '.prevention-start' ).addClass( 'button-disable' );
+	}
+}
+
+window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervenantExterieur = function( element ){
+	var parent_element = element.closest( '.digi-prevention-parent' );
+
+	var intervenant_exterieur_element = parent_element.find( '.information-intervenant-exterieur' );
+	var error = false;
 
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-name', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
@@ -405,6 +442,8 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinish = functi
 		parent_element.find( '.prevention-cloture' ).addClass( 'button-disable' );
 	}
 }
+
+
 
 window.eoxiaJS.digirisk.preventionPlan.generateDocumentPreventionSuccess = function( triggeredElement, response ){
 	if( response.data.link != "" ){
@@ -430,4 +469,23 @@ window.eoxiaJS.digirisk.preventionPlan.displayUserInfo = function( event ){
 		element.hide();
 	}
 
+}
+
+window.eoxiaJS.digirisk.preventionPlan.deleteThisPreventionPlan = function( event ){
+	console.log( '---' );
+	var message = jQuery( this ).attr( 'data-message' );
+	if( confirm( message ) ){
+		var data = {};
+
+		data.action = jQuery( this ).attr( 'data-action' );
+		data._wpnonce = jQuery( this ).attr( 'data-nonce' );
+		data.id = jQuery( this ).attr( 'data-id' );
+
+		window.eoxiaJS.loader.display( jQuery( this ).closest( '.item' ) );
+		window.eoxiaJS.request.send( jQuery( this ), data );
+	}
+}
+
+window.eoxiaJS.digirisk.preventionPlan.deleteDocumentPreventionSuccess = function( trigerredElement, response ){
+	trigerredElement.closest( '.main-content' ).html( response.data.dashboard_view );
 }

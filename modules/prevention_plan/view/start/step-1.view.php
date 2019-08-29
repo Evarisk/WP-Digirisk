@@ -22,8 +22,35 @@ global $eo_search; ?>
 	Some stats here
 </ul>
 
-<h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>
+<div class="information-maitre-oeuvre">
 
+	<div class="information-maitre-oeuvre" style="background-color: #fff; padding: 1em;">
+		<input type="hidden" name="user-type" value="maitre_oeuvre">
+		<h2 style="text-align:center">
+			<?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?> -
+			<i><?php echo esc_attr( $society->data[ 'title' ] ); ?></i>
+		</h2>
+		<?php Prevention_Class::g()->display_maitre_oeuvre( array(), $prevention->data[ 'id' ] ); ?>
+	</div>
+
+<?php if( isset( $prevention->data[ 'maitre_oeuvre' ][ 'data' ] ) && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name != "" && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name != ""  && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone && $prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] != 0 ): ?>
+	<div class="wpeo-button button-blue action-input float right prevention-start"
+<?php else: ?>
+	<div class="wpeo-button button-blue action-input float right prevention-start button-disable"
+<?php endif; ?>
+		data-parent="ajax-content"
+		data-action="next_step_prevention"
+		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
+		data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
+		style="float:right">
+		<span><?php esc_html_e( 'Débuter', 'digirisk' ); ?></span>
+	</div>
+</div>
+
+
+<?php /* ?>
+
+<h2><?php esc_html_e( 'Formateur', 'digirisk' ); ?></h2>
 <table class="table prevention" style="margin-bottom : 10px">
 	<thead>
 		<tr>
@@ -80,3 +107,5 @@ global $eo_search; ?>
 	style="float:right">
 	<span><?php esc_html_e( 'Valider formateur', 'digirisk' ); ?></span>
 </div>
+
+*/ ?>

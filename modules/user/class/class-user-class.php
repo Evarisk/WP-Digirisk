@@ -104,6 +104,8 @@ class User_Class extends \eoxia\User_Class {
 		if( isset( $post_request[ 'digi_phone_number' ] ) && ! empty( $post_request[ 'digi_phone_number' ] ) ){
 			if( ! $this->check_if_phone_number_is_valid( $post_request[ 'digi_phone_number' ] ) ){
 				$post_request[ 'digi_phone_number' ] = '';
+			}else{
+				$post_request[ 'digi_phone_number_full' ] = '(' . $post_request[ 'digi_phone_callingcode' ] . ')' . $post_request[ 'digi_phone_number' ];
 			}
 		}
 

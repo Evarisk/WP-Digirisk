@@ -71,6 +71,8 @@ class Society_Configuration_Class extends \eoxia\Singleton_Util {
 		$society->data['number_of_employees'] = ! empty( $data_form['number_of_employees'] ) ? (int) $data_form['number_of_employees'] : 0;
 		$society->data['contact']['email']    = ! empty( $data_form['contact']['email'] ) ? sanitize_email( $data_form['contact']['email'] ) : '';
 		$society->data['content']             = ! empty( $data_form['content'] ) ? $data_form['content'] : '';
+		$society->data['moyen_generaux']      = ! empty( $data_form['moyen_generaux'] ) ? $data_form['moyen_generaux'] : '';
+		$society->data['consigne_generale']   = ! empty( $data_form['consigne_generale'] ) ? $data_form['consigne_generale'] : '';
 
 		$phone      = ! empty( $data_form['contact']['phone'] ) ? sanitize_text_field( $data_form['contact']['phone'] ) : '';
 		$address_id = ! empty( $data_form['contact']['address_id'] ) ? (int) $data_form['contact']['address_id'] : 0;

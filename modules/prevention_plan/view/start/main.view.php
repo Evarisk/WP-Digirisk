@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="step-list">
 			<a href="<?php echo Prevention_Class::g()->get_link( $prevention, 1 ); ?>" class="step	<?php echo ( in_array( $prevention->data['step'], array( 1, 2, 3, 4 ) ) ) ? 'active' : ''; ?>"
 				style="text-decoration: none;">
-				<span class="title"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></span></a>
+				<span class="title"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></span></a>
 			<a href="<?php echo Prevention_Class::g()->get_link( $prevention, 2 ); ?>" class="step <?php echo ( in_array( $prevention->data['step'], array( 2, 3, 4 ) ) ) ? 'active' : ''; ?>"
 				data-width="37" style="text-decoration: none;">
 				<span class="title"><?php esc_html_e( 'Plan de prévention', 'digirisk' ); ?></span></a>

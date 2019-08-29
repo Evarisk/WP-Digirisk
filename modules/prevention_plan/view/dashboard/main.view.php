@@ -23,10 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Début intervention', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Fin intervention', 'digirisk' ); ?></td>
+				<!-- <td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td> -->
+				<td class="w50 padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></td>

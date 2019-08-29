@@ -86,8 +86,16 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'array',
 		); // OK
 
+		$this->schema['document_meta']['child']['intervenants_info'] = array(
+			'type' => 'string',
+		); // OK
+
 		$this->schema['document_meta']['child']['interventions'] = array(
 			'type' => 'array',
+		); // OK
+
+		$this->schema['document_meta']['child']['interventions_info'] = array(
+			'type' => 'string',
 		); // OK
 
 		$this->schema['document_meta']['child']['titrePrevention'] = array(
@@ -96,6 +104,10 @@ class Sheet_Prevention_Model extends Document_Model {
 // --------------------------
 		$this->schema['document_meta']['child']['maitre_oeuvre_fname'] = array(
 			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['yep'] = array(
+			'type' => 'boolean',
 		); // OK
 
 		$this->schema['document_meta']['child']['maitre_oeuvre_lname'] = array(
@@ -143,40 +155,13 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'array',
 		);
 
-// --------------------------
-
-		// -----
-		/*
-
-		$this->schema['document_meta']['child']['formateur'] = array(
+		$this->schema['document_meta']['child']['moyen_generaux_mis_disposition'] = array(
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['formateurSignature'] = array(
+		$this->schema['document_meta']['child']['consigne_generale'] = array(
 			'type' => 'string',
 		); // OK
-
-		$this->schema['document_meta']['child']['maitreOeuvre'] = array(
-			'type' => 'string',
-		); // OK
-
-		$this->schema['document_meta']['child']['maitreOeuvreSignature'] = array(
-			'type' => 'string',
-		); // OK
-
-		$this->schema['document_meta']['child']['intervenantExterieur'] = array(
-			'type' => 'string',
-		); // OK
-
-		$this->schema['document_meta']['child']['intervenantExterieurSignature'] = array(
-			'type' => 'string',
-		); // OK
-
-
-
-		$this->schema['document_meta']['child']['interventions'] = array(
-			'type' => 'array',
-		); // OK*/
 
 		parent::__construct( $object, $req_method );
 	}

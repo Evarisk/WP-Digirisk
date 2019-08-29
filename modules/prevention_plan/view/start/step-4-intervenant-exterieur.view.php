@@ -21,17 +21,7 @@ global $eo_search; ?>
 	<input type='hidden' name="prevention_id" value="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 	<div class="wpeo-form">
 		<div class="form-element">
-			<span class="form-label"><?php esc_html_e( 'Nom', 'task-manager' ); ?></span>
-			<label class="form-field-container">
-				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-				<input type="text" name="intervenant-name" class="form-field" value="">
-			</label>
-		</div>
-	</div>
-
-	<div class="wpeo-form">
-		<div class="form-element">
-			<span class="form-label"><?php esc_html_e( 'Prénom', 'task-manager' ); ?></span>
+			<span class="form-label"><?php esc_html_e( 'Nom', 'digirisk' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
 				<input type="text" name="intervenant-lastname" class="form-field" value="">
@@ -40,18 +30,43 @@ global $eo_search; ?>
 	</div>
 
 	<div class="wpeo-form">
-		<div class="form-element element-phone">
-			<span class="form-label"><?php esc_html_e( 'Portable', 'task-manager' ); ?></span>
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></span>
 			<label class="form-field-container">
-				<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-				<input type="text" class="form-field element-phone-input" name="intervenant-phone" value="">
+				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+				<input type="text" name="intervenant-name" class="form-field" value="">
 			</label>
 		</div>
 	</div>
 
 	<div class="wpeo-form">
+		<section class="wpeo-gridlayout padding grid-2  digi-phone-user" style="margin-bottom: 10px;">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Code', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
+						'local' => get_locale(),
+						'width' => 'none',
+						'name' => 'intervenant-phone-callingcode'
+					) );
+					?>
+				</label>
+			</div>
+
+			<div class="form-element element-phone">
+				<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
+					<input type="text" class="form-field element-phone-input" name="intervenant-phone" value="" style="width: auto;">
+				</label>
+			</div>
+		</section>
+	</div>
+
+	<div class="wpeo-form">
 		<div class="form-element signature-info-element">
-			<span class="form-label"><?php esc_html_e( 'Signature', 'task-manager' ); ?></span>
+			<span class="form-label"><?php esc_html_e( 'Signature', 'digirisk' ); ?></span>
 			<?php if ( empty( $prevention->data['intervenant_exterieur']['signature_id'] ) ) : ?>
 				<div class="signature w50 padding">
 					<input type="hidden" name="intervenant-exterieur-signature" value="-1">

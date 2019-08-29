@@ -33,31 +33,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="wpeo-gridlayout padding grid-2">
 			<div class="wpeo-form">
 				<div class="form-element group-date">
-					<span class="form-label"><?php esc_html_e( 'Date début', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Début d\'intervention', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
 						<input type="text" class="mysql-date" name="start_date"
 						value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
 						<input type="text" class="form-field date"
-						value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>" disabled>
+						value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
 					</label>
 				</div>
 			</div>
 
 			<div class="wpeo-form">
 				<div class="form-element group-date">
-					<span class="form-label"><?php esc_html_e( 'Date fin', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Fin d\'intervention', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<?php if( $prevention->data[ 'date_end_exist' ] ): ?>
+						<?php if( $prevention->data[ 'date_end_define' ] ): ?>
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
 							<input type="text" class="mysql-date" name="end_date"
-							value="<?php echo esc_attr( date( 'd-m-Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
+							value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
 							<input type="text" class="form-field date"
 							value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
 						<?php else: ?>
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-							<input type="text" class="mysql-date" name="end_date">
-							<input type="text" class="form-field date">
+							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
+							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
 						<?php endif; ?>
 					</label>
 				</div>
