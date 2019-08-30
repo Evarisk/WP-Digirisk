@@ -93,6 +93,9 @@ window.eoxiaJS.digirisk.preventionPlan.event = function() {
 
 	jQuery( document ).on( 'click', '.wrap-prevention .closed-prevention .action .delete-this-prevention-plan', window.eoxiaJS.digirisk.preventionPlan.deleteThisPreventionPlan );
 
+	jQuery( document ).on( 'click', '.digi-prevention-parent .end-date-element .action-button-end-date', window.eoxiaJS.digirisk.preventionPlan.updateEndDatePrevention );
+
+	jQuery( document ).on( 'click', '.digi-prevention-parent .title-information-option .action-button-title', window.eoxiaJS.digirisk.preventionPlan.updateTitleOption );
 };
 
 window.eoxiaJS.digirisk.preventionPlan.updateModalTitle = function( event, data ){
@@ -493,4 +496,34 @@ window.eoxiaJS.digirisk.preventionPlan.deleteThisPreventionPlan = function( even
 
 window.eoxiaJS.digirisk.preventionPlan.deleteDocumentPreventionSuccess = function( trigerredElement, response ){
 	trigerredElement.closest( '.main-content' ).html( response.data.dashboard_view );
+}
+
+window.eoxiaJS.digirisk.preventionPlan.updateEndDatePrevention = function( event ){
+	jQuery( this ).closest( '.end-date-element' ).find( '.wpeo-button' ).removeClass( 'button-blue' ).addClass( 'button-grey' );
+	jQuery( this ).removeClass( 'button-grey' ).addClass( 'button-blue' );
+	jQuery( this ).closest( '.end-date-element' ).find( 'input[name="date_end__is_define"]' ).val( jQuery( this ).attr( 'data-action' ) );
+
+	var form_element = jQuery( this ).closest( '.end-date-element' ).find( '.form-element' );
+	if( jQuery( this ).attr( 'data-action' ) == "undefined" ){
+		form_element.addClass( 'form-element-disable' );
+	}else{
+		form_element.removeClass( 'form-element-disable' );
+	}
+}
+
+window.eoxiaJS.digirisk.preventionPlan.updateTitleOption = function( event ){
+	// jQuery( this ).closest( '.title-information-option' ).find( '.wpeo-button' ).removeClass( 'button-blue' ).addClass( 'button-grey' );3
+	var type = jQuery( this ).attr( 'data-type' );
+	if( jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val() == "1" ){
+		console.log( '--' );
+		jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val( '0' );
+		jQuery( this ).removeClass( 'button-blue' ).addClass( 'button-grey' );
+		jQuery( this ).find( '.button-icon' ).removeClass( 'fa-check-square' ).addClass( 'fa-square' );
+	}else{
+		console.log( '-...-' );
+		jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val( '1' );
+		jQuery( this ).removeClass( 'button-grey' ).addClass( 'button-blue' );
+		jQuery( this ).find( 'input[name="' + type + '"]' ).val( '1' );
+		jQuery( this ).find( '.button-icon' ).removeClass( 'fa-square' ).addClass( 'fa-check-square' );
+	}
 }

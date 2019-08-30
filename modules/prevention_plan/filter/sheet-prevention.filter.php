@@ -157,12 +157,31 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			$maitre_e[ 'data' ]->phone = $prevention->data[ 'maitre_oeuvre' ][ 'phone' ];
 		}
 
+		$date_end = "";
+		if( $prevention->data[ 'date_end__is_define' ] == "defined" ){
+			$date_end = date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
+		}else{
+			$date_end = esc_html__( 'En cours', 'digirisk' );
+		}
+
+		$raison_du_plan_de_prevention = "";
+		if( $prevention->data['more_than_400_hours'] ){
+			$raison_du_plan_de_prevention = esc_html__( 'Plus de 400 heures' );
+		}
+		if( $prevention->data['imminent_danger'] ){
+			if( $raison_du_plan_de_prevention != "" ){
+				$raison_du_plan_de_prevention .= ", " . esc_html__( 'Danger grave et imminent' );
+			}else{
+				$raison_du_plan_de_prevention = esc_html__( 'Danger grave et imminent' );
+			}
+		}
+
 		$data = array(
 			'yep' => true,
 			'id' => $prevention->data['id'],
-			'titrePrevention' => $prevention->data['title'], // 'dateDebutPrevention',
+			'titre_prevention' => $prevention->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
-			'date_end_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) ),
+			'date_end_intervention_PPP' => $date_end,
 			'intervenants' => array(
 				'type'  => 'segment',
 				'value' => $prevention->data[ 'intervenants' ],
@@ -172,7 +191,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				'type'  => 'segment',
 				'value' => $data_interventions,
 			),
-			'interventions_info' => $interventions_info,
+			'raison_du_plan_de_prevention' => $raison_du_plan_de_prevention,
+			'interventions_info'  => $interventions_info,
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
 			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,

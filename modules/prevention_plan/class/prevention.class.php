@@ -138,13 +138,12 @@ class Prevention_Class extends \eoxia\Post_Class {
 			$data[ 'date_start' ] = date( 'd-m-Y', strtotime( 'now' ) );
 		}
 
-		if( ! isset( $data[ 'date_end' ] ) || $data[ 'date_end' ] == '' ){
-			$data[ 'date_end_define' ] = 0;
-		}else{
-			$data[ 'date_end_define' ] = 1;
-			if( strtotime( $data[ 'date_start' ] ) > strtotime( $data[ 'date_end' ] ) ){
-				$data[ 'date_end' ] = date( 'd-m-Y', strtotime( $data[ 'date_start' ] ) + 86400 );
-			}
+		if( strtotime( $data[ 'date_start' ] ) > strtotime( $data[ 'date_end' ] ) ){
+			$data[ 'date_end' ] = date( 'd-m-Y', strtotime( $data[ 'date_start' ] ) + 86400 );
+		}
+
+		if( ! isset( $data[ 'date_end__is_define' ] ) || $data[ 'date_end__is_define' ] == '' ){
+			$data[ 'end_date_is_define' ] == 'undefined';
 		}
 
 		$prevention_data = wp_parse_args( $data, $prevention->data );
@@ -213,7 +212,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
 		if( $mo_phone != ""  ){
-			echo '<pre>'; print_r( '----' ); echo '</pre>';
 			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = '(' . $mo_phone_code . ')' . $mo_phone;
 		}
 

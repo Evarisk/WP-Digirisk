@@ -100,9 +100,12 @@ class Prevention_Page_Action {
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION:
 				$nextstep = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE;
 				$data = array(
-					'title' => isset( $_POST[ 'prevention-title' ] ) ? sanitize_text_field( $_POST[ 'prevention-title' ] ) : '',
-					'date_start' => isset( $_POST[ 'start_date' ] ) ? sanitize_text_field( $_POST[ 'start_date' ] ) : '',
-					'date_end'   => isset( $_POST[ 'end_date' ] ) ? sanitize_text_field( $_POST[ 'end_date' ] ) : ''
+					'title'=> isset( $_POST[ 'prevention-title' ] ) ? sanitize_text_field( $_POST[ 'prevention-title' ] ) : '',
+					'more_than_400_hours' => isset( $_POST[ 'more_than_400_hours' ] ) ? (int) $_POST[ 'more_than_400_hours' ] : '0',
+					'imminent_danger'     => isset( $_POST[ 'imminent_danger' ] ) ? (int) $_POST[ 'imminent_danger' ]: '0',
+					'date_start'          => isset( $_POST[ 'start_date' ] ) ? sanitize_text_field( $_POST[ 'start_date' ] ) : '',
+					'date_end'            => isset( $_POST[ 'end_date' ] ) ? sanitize_text_field( $_POST[ 'end_date' ] ) : '',
+					'date_end__is_define' => isset( $_POST[ 'date_end__is_define' ] ) ? sanitize_text_field( $_POST[ 'date_end__is_define' ] ) : 'defined'
 				);
 				$prevention = Prevention_Class::g()->update_information_prevention( $prevention, $data );
 				$prevention = Prevention_Page_Class::g()->next_step( $prevention, $nextstep );

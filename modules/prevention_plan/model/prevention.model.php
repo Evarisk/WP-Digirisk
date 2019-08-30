@@ -50,11 +50,11 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'context'   => array( 'GET' ),
 		);
 
-		$this->schema['date_end_define'] = array(
-			'type'      => 'integer',
+		$this->schema['date_end__is_define'] = array(
+			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_prevention_date_end_exist',
-			'default'   => 0
+			'default'   => 'undefined'
 		);
 
 		$this->schema['date_closure'] = array(
@@ -127,6 +127,18 @@ class Prevention_Model extends \eoxia\Post_Model {
 		$this->schema['intervenants'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',
+		);
+
+		$this->schema['more_than_400_hours'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+			'default' => 0,
+		);
+
+		$this->schema['imminent_danger'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
+			'default' => 0,
 		);
 
 		$this->schema['taxonomy'] = array(

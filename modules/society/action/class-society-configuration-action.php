@@ -63,7 +63,7 @@ class Society_Configuration_Action {
 		$society_data['contact']['address_id'] = $address->data['id'];
 
 		$society = Society_Configuration_Class::g()->save( $society_data );
-		$society = Society_Class::g()->show_by_type( $id );
+		$society = Society_Class::g()->show_by_type( $society_data['id'] );
 
 		ob_start();
 		Tab_Class::g()->load_tab_content( $society->data['id'], array(

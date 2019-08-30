@@ -98,16 +98,17 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['titrePrevention'] = array(
-			'type' => 'string',
-		); // OK
-// --------------------------
-		$this->schema['document_meta']['child']['maitre_oeuvre_fname'] = array(
+		$this->schema['document_meta']['child']['titre_prevention'] = array(
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['yep'] = array(
-			'type' => 'boolean',
+		$this->schema['document_meta']['child']['raison_du_plan_de_prevention'] = array(
+			'type' => 'string',
+		); // OK
+
+// --------------------------
+		$this->schema['document_meta']['child']['maitre_oeuvre_fname'] = array(
+			'type' => 'string',
 		); // OK
 
 		$this->schema['document_meta']['child']['maitre_oeuvre_lname'] = array(
