@@ -21,15 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Entête -->
 		<div class="modal-header">
-			<h2 class="modal-title">
-				<?php
-				if ( ! empty( $title ) ) :
-					echo esc_html( $title );
-				else :
-					esc_html_e( 'Signature de ', 'digirisk' );
-				endif;
-				?>
-			</h2>
+			<h2 class="modal-title">dzqdqdqzdqzdzq</h2>
 			<i class="modal-close fa fa-times"></i>
 		</div>
 

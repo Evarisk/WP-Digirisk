@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="title"><?php esc_html_e( 'Information de la société', 'digirisk' ); ?></span></a>
 			<a href="<?php echo Prevention_Class::g()->get_link( $prevention, 4 ); ?>" class="step <?php echo ( 4 === $prevention->data['step'] ) ? 'active' : ''; ?>"
 				data-width="100" style="text-decoration: none;">
-				<span class="title" style="max-width : none !important;"><?php esc_html_e( 'Participants', 'digirisk' ); ?></span></a>
+				<span class="title" style="max-width : none !important;"><?php esc_html_e( 'Intervenant Exterieur', 'digirisk' ); ?></span></a>
 		</div>
 
 		<div class="bar">

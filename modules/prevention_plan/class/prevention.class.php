@@ -263,7 +263,9 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $id );
 		$phone_number = ! empty( $user_information['digi_phone_number_full'] ) ? $user_information['digi_phone_number_full'] : '';
+		$phone_only_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
 		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_number;
+		$prevention->data[ $type_user ][ 'data' ]->phone_nbr = $phone_only_number;
 
 		return $prevention;
 	}

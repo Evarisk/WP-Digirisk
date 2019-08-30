@@ -23,18 +23,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Participants', 'digirisk' ); ?></td>
-				<td class="w50"></td>
+				<td class="w100 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></td>
+				<td class="w100 padding"><?php esc_html_e( 'Progression', 'digirisk' ); ?></td>
+				<td class="w100"></td>
 			</tr>
 		</thead>
 		<?php
 		if ( ! empty( $preventions ) ) :
 			foreach ( $preventions as $prevention ) :
 				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'progress/table-item', array(
-					'prevention' => $prevention,
+					'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
 				) );
 			endforeach;
 		else :

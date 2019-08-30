@@ -407,9 +407,14 @@ window.eoxiaJS.digirisk.preventionPlan.PreventionPlanCanBeFinishIntervenantExter
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre = function( element ){
+	console.log( element );
+
 	var parent_element = element.closest( '.digi-prevention-parent' );
+	console.log( parent_element );
 
 	var maitre_oeuvre_element = parent_element.find( '.information-maitre-oeuvre' );
+
+	console.log( maitre_oeuvre_element );
 	var error = false;
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-name', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-lastname', error );

@@ -14,6 +14,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
+
 <tr class="item" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 	<td class="w50 padding">
 		<strong>
@@ -38,22 +39,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</span>
 	</td>
 
-	<td class="padding">
-		<?php if( ! empty( $prevention->data[ 'former' ] ) && $prevention->data[ 'former' ][ 'user_id' ] != 0 ): ?>
-			<?php $user = get_user_by( 'id', $prevention->data[ 'former' ][ 'user_id' ] ) ?>
-			<span>
-				<?php echo esc_attr( $user->data->display_name ); ?>
-			</span>
-		<?php else: ?>
+	<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ] ) && $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] != 0 ): ?>
+		<td class="padding avatar-info-prevention">
+			<?php $name_and_phone = $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
+			<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
+				<div class="avatar tooltip hover wpeo-tooltip-event"
+					aria-label="<?php echo esc_attr( $name_and_phone ); ?>"
+					style="background-color: #<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
+						<span><?php echo esc_html( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->initial ); ?></span>
+				</div>
+				<div class="info-text" style="display : none">
+					<span><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ); ?></span> -
+					<span><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name ); ?></span>
+					<span>( <i><?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone ); ?></i> )</span>
+				</div>
+			<?php else: ?>
+				<?php esc_html_e( 'Aucun maitre oeuvre', 'digirisk' ); ?>
+			<?php endif; ?>
+		</td>
+	<?php else: ?>
+		<td class="padding">
 			<span>
 				<?php esc_html_e( 'Aucun', 'digirisk' ); ?>
 			</span>
-		<?php endif; ?>
-	</td>
+		</td>
+	<?php endif; ?>
 
 	<td class="padding">
 		<span>
-			X<?php esc_html_e( 'participant(s)', 'digirisk' ); ?>
+			<?php echo esc_attr( $prevention->data[ 'step' ] ); ?> /5
 		</span>
 	</td>
 	<td class="padding">

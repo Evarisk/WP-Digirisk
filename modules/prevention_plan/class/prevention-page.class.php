@@ -72,7 +72,12 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	}
 
 	public function display_progress() {
-		$preventions = Prevention_Class::g()->get( array() );
+		$args = array(
+            'meta_key' => '_wpdigi_prevention_prevention_step',
+            'meta_value' => 5,
+            'meta_compare' => '<'
+        );
+		$preventions = Prevention_Class::g()->get( $args );
 
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'progress/main', array(
 			'preventions' => $preventions,
