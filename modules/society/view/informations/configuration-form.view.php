@@ -49,7 +49,9 @@ global $eo_search; ?>
 			</div>
 		<?php endif; ?>
 
-		<?php $eo_search->display( 'society_information_owner' ); ?>
+		<?php
+			Society_Configuration_Class::g()->display_form_owner( $element );
+		?>
 
 		<div class="form-element group-date">
 			<span class="form-label"><?php esc_html_e( 'Date de création', 'digirisk' ); ?></span>

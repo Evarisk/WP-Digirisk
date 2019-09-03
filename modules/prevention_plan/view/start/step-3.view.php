@@ -25,7 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'schema' => true,
 		), true );
 	}
-
 ?>
 
 <div class="information-society" style="background-color: #fff; padding: 1em;">
@@ -36,6 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="form-element form-element-disable">
 					<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
 					<label class="form-field-container">
+						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
 						<?php if( ! empty( $society ) ): ?>
 							<input type="text" class="form-field" value="<?php echo esc_attr( $society->data[ 'title' ] ); ?>">
 						<?php else: ?>
@@ -46,46 +46,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<div class="wpeo-form">
-				<div class="form-element form-element-disable">
-					<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-users"></i></span>
-						<?php if( ! empty( $society ) ): ?>
-							<input type="text" class="form-field" value="<?php echo esc_attr( $society->data[ 'siret_id' ] ); ?>">
-						<?php else: ?>
-							<input type="text" class="form-field" value="">
-						<?php endif; ?>
-					</label>
-				</div>
+				<?php if( ! empty( $society->data[ 'siret_id' ] ) ): ?>
+					<div class="form-element form-element-disable">
+						<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
+							<?php if( ! empty( $society ) ): ?>
+								<input type="text" class="form-field" value="<?php echo esc_attr( $society->data[ 'siret_id' ] ); ?>">
+							<?php else: ?>
+								<input type="text" class="form-field" value="">
+							<?php endif; ?>
+						</label>
+					</div>
+				<?php else: ?>
+					<div class="form-element">
+						<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
+							<input type="text" name="siret_id" class="form-field" value="">
+						</label>
+					</div>
+				<?php endif; ?>
 			</div>
 		</section>
 
 		<section class="wpeo-gridlayout padding grid-3" style="margin-bottom: 10px;">
 			<div class="wpeo-form">
-				<div class="form-element form-element-disable">
-					<span class="form-label"><?php esc_html_e( 'Nom du Responsable', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<?php if( ! empty( $society ) ): ?>
-							<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] ); ?>">
-						<?php else: ?>
-							<input type="text" class="form-field" value="">
-						<?php endif; ?>
-					</label>
-				</div>
+				<?php if( ! empty( $legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] ) ): ?>
+					<div class="form-element form-element-disable">
+						<span class="form-label"><?php esc_html_e( 'Nom du Responsable', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+							<?php if( ! empty( $society ) ): ?>
+								<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] ); ?>">
+							<?php else: ?>
+								<input type="text" class="form-field" value="">
+							<?php endif; ?>
+						</label>
+					</div>
+				<?php else: ?>
+					<div class="form-element">
+						<span class="form-label"><?php esc_html_e( 'Nom du Responsable', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+							<input type="text" class="form-field" name="responsible_for_preventing_name">
+						</label>
+					</div>
+				<?php endif; ?>
 			</div>
 
 			<div class="wpeo-form">
-				<div class="form-element form-element-disable">
-					<span class="form-label"><?php esc_html_e( 'Téléphone du Responsable', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-users"></i></span>
-						<?php if( ! empty( $society ) ): ?>
-							<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'phone' ] ); ?>">
-						<?php else: ?>
-							<input type="text" class="form-field" value="">
-						<?php endif; ?>
-					</label>
-				</div>
+				<?php if( ! empty( $legal_display->data[ 'safety_rule' ][ 'phone' ] ) ): ?>
+
+					<div class="form-element form-element-disable">
+						<span class="form-label"><?php esc_html_e( 'Téléphone du Responsable', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
+							<?php if( ! empty( $society ) ): ?>
+								<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'phone' ] ); ?>">
+							<?php else: ?>
+								<input type="text" class="form-field" value="">
+							<?php endif; ?>
+						</label>
+					</div>
+				<?php else: ?>
+					<div class="form-element">
+						<span class="form-label"><?php esc_html_e( 'Téléphone du Responsable', 'digirisk' ); ?></span>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
+							<input type="text" class="form-field" name="responsible_for_preventing_phone">
+						</label>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="button-save-information-society" style="display : block">
 				<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $society->data['id'] ); ?>" target="_blank">
@@ -156,19 +188,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</section>
-	<section class="wpeo-gridlayout padding grid-4" style="margin-bottom: 10px;">
-
-		<div class="">
-		</div>
-		<div class="">
-		</div>
-		</section>
-
 	 <?php Prevention_Class::g()->display_list_intervenant( $prevention->data['id'] ); ?>
 </div>
 
 	<div class="wpeo-button button-blue action-input wpeo-tooltip-event"
 		data-action="next_step_prevention"
+		data-parent="digi-prevention-parent"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 		data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
 		aria-label="<?php esc_html_e( 'Prochaine étape', 'digirisk' ); ?>"

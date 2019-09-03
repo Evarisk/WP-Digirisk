@@ -46,9 +46,21 @@ class Society_Configuration_Class extends \eoxia\Singleton_Util {
 			'hidden_value' => $element->data['owner_id'],
 		) );
 
+		$user_info = array();
+		if( $element->data[ 'owner_id' ] != 0 ){
+			$user_info = get_user_by( 'id', $element->data[ 'owner_id' ] );
+		}
+
+		// \eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
+		// 	'element'   => $element,
+		// 	'address'   => $address,
+		// 	'user_info' => $user_info
+		// ) );
+
 		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
-			'element'             => $element,
-			'address'             => $address,
+			'element'   => $element,
+			'address'   => $address,
+			'user_info' => $user_info
 		) );
 	}
 
@@ -98,6 +110,25 @@ class Society_Configuration_Class extends \eoxia\Singleton_Util {
 		}
 
 		return $society;
+	}
+
+	public function display_form_owner( $element ){
+		global $eo_search;
+
+		$user_info = get_user_by( 'id', $element->data[ 'owner_id' ] );
+
+		$eo_search->register_search( 'society_information_owner', array(
+			'label'        => 'Responsable',
+			'icon'         => 'fa-search',
+			'type'         => 'user',
+			'name'         => 'society[owner_id]',
+			'value'        => ! empty( $user_info->data->ID ) ? User_Class::g()->element_prefix . $user_info->data->ID . ' - ' . $user_info->data->display_name : '',
+			'hidden_value' => ! empty( $user_info->data->ID ) ? $user_info->data->ID : -1,
+		) );
+
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form-owner', array(
+			'element' => $element,
+		) );
 	}
 }
 

@@ -212,6 +212,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
 		if( $mo_phone != ""  ){
+			echo '<pre>'; print_r( '----' ); echo '</pre>';
 			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = '(' . $mo_phone_code . ')' . $mo_phone;
 		}
 
@@ -230,15 +231,11 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function add_information_to_prevention( $prevention ){
 		$prevention->data[ 'intervention' ] = Prevention_Intervention_Class::g()->get( array( 'post_parent' => $prevention->data[ 'id' ] ) ); // Recupere la liste des interventions
 
-		/*$id = $prevention->data[ 'former' ][ 'user_id' ];
-		if( $prevention->data[ 'former' ][ 'user_id' ] > 0 ){
-			$prevention = $this->get_information_from_user( $id, $prevention, 'former' );
-		}*/
-
 		if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ){ // Maitre d'oeuvre data
 			$id = $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ];
 			$prevention = $this->get_information_from_user( $id, $prevention, 'maitre_oeuvre' );
 		}
+		// echo '<pre>'; print_r( $prevention->data ); echo '</pre>'; exit;
 		return $prevention;
 	}
 
@@ -250,8 +247,8 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$color = $id % count( $avatar_color );
 		$prevention->data[ $type_user ][ 'data' ]->avator_color = $avatar_color[ $color ]; // De l'avatar
 
-		$prevention->data[ $type_user ][ 'data' ]->first_name = $user_info->first_name; // De l'avatar
-		$prevention->data[ $type_user ][ 'data' ]->last_name = $user_info->last_name; // De l'avatar
+		$prevention->data[ $type_user ][ 'data' ]->first_name = $user_info->first_name != "" ? $user_info->first_name : $user_info->data->display_name; // De l'avatar
+		$prevention->data[ $type_user ][ 'data' ]->last_name = $user_info->last_name != "" ? $user_info->last_name : $user_info->data->display_name; // De l'avatar
 
 		if( $user_info->first_name != "" || $user_info->last_name != "" ){ // Inital
 			$prevention->data[ $type_user ][ 'data' ]->initial = substr( $user_info->first_name, 0, 1 ) . ' ' . substr( $user_info->last_name, 0, 1 );

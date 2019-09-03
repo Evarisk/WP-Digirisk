@@ -118,12 +118,11 @@ class Prevention_Page_Action {
 				) );
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE:
-				Prevention_Page_Class::g()->step_participants( $prevention );
+				$prevention = Prevention_Page_Class::g()->save_society_information( $prevention, $society, $legal_display );
 
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-4', array(
 					'prevention' => $prevention,
-					'society'       => $society,
 					'all_signed' => false
 				) );
 

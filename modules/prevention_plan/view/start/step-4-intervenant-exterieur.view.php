@@ -72,7 +72,8 @@ global $eo_search; ?>
 					<input type="hidden" name="intervenant-exterieur-signature" value="-1">
 					<div class="wpeo-button button-blue wpeo-modal-event"
 						data-parent="form-element"
-						data-target="modal-signature">
+						data-target="modal-signature"
+						data-title="<?php esc_html_e( 'Signature Intervenant exterieur', 'task-manager' ); ?>">
 						<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
 					</div>
 					<?php

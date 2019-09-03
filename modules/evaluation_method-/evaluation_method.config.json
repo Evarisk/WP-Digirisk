@@ -1,0 +1,15 @@
+{
+	"name": "Evaluation méthode",
+	"slug": "evaluation_method",
+	"since": "6.0.0",
+	"description": "Le module gérant les méthode d'évaluation de Digirisk",
+	"path": "modules/evaluation_method/",
+	"dependencies": {
+		"shortcode": {},
+		"util": {},
+		"model": {},
+		"action": {},
+		"class": {},
+		"filter": {}
+	}
+}

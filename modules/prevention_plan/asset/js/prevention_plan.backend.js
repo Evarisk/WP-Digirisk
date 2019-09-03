@@ -515,12 +515,10 @@ window.eoxiaJS.digirisk.preventionPlan.updateTitleOption = function( event ){
 	// jQuery( this ).closest( '.title-information-option' ).find( '.wpeo-button' ).removeClass( 'button-blue' ).addClass( 'button-grey' );3
 	var type = jQuery( this ).attr( 'data-type' );
 	if( jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val() == "1" ){
-		console.log( '--' );
 		jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val( '0' );
 		jQuery( this ).removeClass( 'button-blue' ).addClass( 'button-grey' );
 		jQuery( this ).find( '.button-icon' ).removeClass( 'fa-check-square' ).addClass( 'fa-square' );
 	}else{
-		console.log( '-...-' );
 		jQuery( this ).closest( '.title-information-option' ).find( 'input[name="' + type + '"]' ).val( '1' );
 		jQuery( this ).removeClass( 'button-grey' ).addClass( 'button-blue' );
 		jQuery( this ).find( 'input[name="' + type + '"]' ).val( '1' );

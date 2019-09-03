@@ -50,7 +50,7 @@ class Prevention_Action {
 	}
 
 	public function a(){
-		$prevention = Prevention_Class::g()->get( array( 'id' => 474 ), true );
+		$prevention = Prevention_Class::g()->get( array( 'id' => 137 ), true );
 		$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
 		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
 		$prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
@@ -334,6 +334,8 @@ class Prevention_Action {
 
 		$user_info = get_user_by( 'id', $user_id );
 		$prevention = Prevention_Class::g()->update_maitre_oeuvre( $prevention_id, $user_id );
+
+		Prevention_Page_Class::g()->register_search( null, null );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-name', array(

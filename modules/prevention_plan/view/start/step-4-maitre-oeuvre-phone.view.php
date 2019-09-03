@@ -49,7 +49,7 @@ global $eo_search; ?>
 		<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
 		<label class="form-field-container">
 			<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-			<input type="hidden" class="form-field element-phone-input" value="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone_nbr ); ?>" name="maitre-oeuvre-phone" data-verif="false">
+			<input type="hidden" class="form-field element-phone-input" value="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone ); ?>" name="maitre-oeuvre-phone" data-verif="false">
 			<input type="text" class="form-field element-phone-input" value="<?php echo esc_attr( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone ); ?>" data-verif="false">
 		</label>
 	</div>

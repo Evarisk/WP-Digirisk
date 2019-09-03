@@ -109,4 +109,12 @@ window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( tri
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.data.title );
 
 	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
+
+	if( response.data.view_owner != "" ){
+		triggeredElement.closest( '.wpeo-form' ).find( 'input[name="society[owner_id]"}' ).closest( '.form-element' ).html( '' );
+	}
 };
+
+window.eoxiaJS.digirisk.society.deleteOwnerIdSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( '.form-element' ).replaceWith( response.data.view );
+}

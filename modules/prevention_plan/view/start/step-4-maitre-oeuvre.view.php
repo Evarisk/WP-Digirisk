@@ -47,7 +47,8 @@ global $eo_search; ?>
 							<div class="wpeo-button button-blue wpeo-modal-event"
 						<?php endif; ?>
 							data-parent="form-element"
-							data-target="modal-signature">
+							data-target="modal-signature"
+							data-title="<?php esc_html_e( 'Signature Maitre d\'oeuvre', 'task-manager' ); ?>">
 							<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
 						</div>
 						<?php

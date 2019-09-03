@@ -175,6 +175,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				$raison_du_plan_de_prevention = esc_html__( 'Danger grave et imminent' );
 			}
 		}
+		$raison_du_plan_de_prevention = $raison_du_plan_de_prevention != "" ? $raison_du_plan_de_prevention : 'Non-précisé';
+
 
 		$data = array(
 			'yep' => true,

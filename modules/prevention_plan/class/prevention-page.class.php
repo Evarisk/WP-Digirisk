@@ -169,11 +169,23 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		$eo_search->register_search( 'accident_post', $args_accident_post );
 	}
 
-	public function step_participants( $prevention ) {
-		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT;
-		$prevention->data['date_closure'] = current_time( 'mysql' );
+	public function save_society_information( $prevention, $society, $legal_display ) {
+		if( isset( $_POST[ 'responsible_for_preventing_name' ] ) ){
+			$legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] = $_POST[ 'responsible_for_preventing_name' ];
+			$a = Legal_Display_Class::g()->update( $legal_display->data );
+		}
+		if( isset( $_POST[ 'responsible_for_preventing_phone' ] ) ){
+			$legal_display->data[ 'safety_rule' ][ 'phone' ] = $_POST[ 'responsible_for_preventing_phone' ];
+			Legal_Display_Class::g()->update( $legal_display->data );
+		}
 
-		return Prevention_Class::g()->update( $prevention->data );;
+		if( isset( $_POST[ 'siret_id' ] ) ){
+			$society->data[ 'siret_id' ] = $_POST[ 'siret_id' ];
+			Society_Class::g()->update( $society->data );
+		}
+
+		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT;
+		return Prevention_Class::g()->update( $prevention->data );
 	}
 
 
