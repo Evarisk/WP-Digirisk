@@ -50,7 +50,7 @@ class Corrective_Task_Class extends \eoxia\Singleton_Util {
 
 				if ( ! empty( $list_point_completed ) ) {
 					foreach ( $list_point_completed as $element ) {
-						$string .= point_to_string( $element );
+						$string .= point_to_string( $element ) . "\n";
 					}
 				}
 
@@ -59,7 +59,7 @@ class Corrective_Task_Class extends \eoxia\Singleton_Util {
 
 				if ( ! empty( $list_point_uncompleted ) ) {
 					foreach ( $list_point_uncompleted as $element ) {
-						$string .= point_to_string( $element );
+						$string .= point_to_string( $element ) . "\n";
 					}
 				}
 

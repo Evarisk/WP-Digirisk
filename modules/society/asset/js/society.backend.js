@@ -13,6 +13,7 @@ window.eoxiaJS.digirisk.society.event = function() {
 	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
 	jQuery( document ).on( 'click', '.main-header .edit', window.eoxiaJS.digirisk.society.focusInputTitle );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .form.society-informations .form-element input, .digirisk-wrap .form.society-informations .form-element textarea', window.eoxiaJS.digirisk.society.enableSaveButton );
+	jQuery( document ).on( 'click', '.main-container .bloc-information-society', window.eoxiaJS.digirisk.society.requestGetViewEdit )
 };
 
 /**
@@ -117,4 +118,42 @@ window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( tri
 
 window.eoxiaJS.digirisk.society.deleteOwnerIdSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.form-element' ).replaceWith( response.data.view );
+}
+
+window.eoxiaJS.digirisk.society.findEditView = function( element ){
+	var element = element.closest( '.tab-content' ).find( '.bloc-information-society[data-edit="true"]' );
+	return element;
+}
+
+window.eoxiaJS.digirisk.society.requestGetViewEdit = function( event ){
+	if( jQuery( this ).attr( 'data-edit' ) == "true" ){
+		return;
+	}
+
+	var element_close = "";
+	var element = window.eoxiaJS.digirisk.society.findEditView( jQuery( this ) );
+	if( element.length > 0 ){
+		element_close = element.attr( 'data-element' );
+	}
+	var data = {};
+	data.action        = jQuery( this ).attr( 'data-action' );
+	data._wpnonce      = jQuery( this ).attr( 'data-nonce' );
+	data.element       = jQuery( this ).attr( 'data-element' );
+	data.element_close = element_close;
+
+	window.eoxiaJS.loader.display( jQuery( this ) );
+	window.eoxiaJS.request.send( jQuery( this ), data );
+}
+
+window.eoxiaJS.digirisk.society.displayEditViewSuccess = function( triggeredElement, response ) {
+	if( response.data.view_close != "" ){
+		console.log( '---' );
+		var element = window.eoxiaJS.digirisk.society.findEditView( triggeredElement );
+		console.log( 'oui' );
+		console.log( element );
+		element.replaceWith( response.data.view_close );
+	}
+	triggeredElement.attr( 'data-edit', 'true' );
+	triggeredElement.find( '.bloc-content' ).html( response.data.view );
+	triggeredElement.css( 'border' , 'solid blue 1px' );
 }

@@ -90,10 +90,11 @@ class Prevention_Class extends \eoxia\Post_Class {
 		// $prevention = $this->add_participant( $prevention, $former_id, true );
 		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
 		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-phone-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone-callingcode'] ) : '';
+		$update = ! empty( $_POST['update'] ) ? false : true;
 
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION;
 
-		if( $mo_phone != "" ){
+		if( $mo_phone != "" && $update ){
 			$mo_phone_code = $mo_phone_code != "" ? '(' . $mo_phone_code . ')' : '';
 			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = $mo_phone_code . $mo_phone;
 
@@ -212,7 +213,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
 		if( $mo_phone != ""  ){
-			echo '<pre>'; print_r( '----' ); echo '</pre>';
 			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = '(' . $mo_phone_code . ')' . $mo_phone;
 		}
 

@@ -242,6 +242,38 @@ class Society_Class extends \eoxia\Post_Class {
 			}
 		}
 	}
+
+	public function displayEditView( $society, $legal_display, $element ){
+		if( $element == "bloc-information-society-edit" ){
+			$address = Society_Class::g()->get_address( $society );
+			\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/bloc-information-society-edit', array(
+				'element' => $society,
+				'address' => $address,
+			) );
+		}else if( $element == "bloc-information-society-more-edit" ){
+			$address = Society_Class::g()->get_address( $society );
+			\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/bloc-information-society-more-edit', array(
+				'element' => $society,
+				'address' => $address,
+			) );
+		}
+	}
+
+	public function displayReadOnlyView( $society, $legal_display, $element ){
+		if( $element == "bloc-information-society-edit" ){
+			$address = Society_Class::g()->get_address( $society );
+			\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/bloc-information-society', array(
+				'element' => $society,
+				'address' => $address,
+			) );
+		}else if( $element == "bloc-information-society-more-edit" ){
+			$address = Society_Class::g()->get_address( $society );
+			\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/bloc-information-society-more', array(
+				'element' => $society,
+				'address' => $address,
+			) );
+		}
+	}
 }
 
 Society_Class::g();

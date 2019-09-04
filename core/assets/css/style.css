@@ -3601,3 +3601,8 @@ canvas {
 .wrap-causerie #stats-causerie {
   border: none;
 }
+
+.bloc-information-society:hover{
+	border: solid blue 1px;
+	cursor : pointer
+}

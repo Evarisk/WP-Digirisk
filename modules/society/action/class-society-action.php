@@ -32,6 +32,9 @@ class Society_Action {
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
 		add_action( 'wp_ajax_search_establishment', array( $this, 'callback_search_establishment' ) );
+		add_action( 'wp_ajax_display_edit_view', array( $this, 'callback_display_edit_view' ) );
+
+
 	}
 
 	/**
@@ -172,6 +175,57 @@ class Society_Action {
 		}
 
 		wp_die( wp_json_encode( $posts_founded ) );
+	}
+
+	public function callback_display_edit_view(){
+		check_ajax_referer( 'display_edit_view' );
+		$element          = isset( $_POST[ 'element' ] ) ? sanitize_text_field( $_POST[ 'element' ] ) : '';
+		$element_close    = isset( $_POST[ 'element_close' ] ) ? sanitize_text_field( $_POST[ 'element_close' ] ) : '';
+		$society_id       = isset( $_POST[ 'society_id' ] ) ? (int) $_POST[ 'society_id' ] : 0;
+		$legal_display_id = isset( $_POST[ 'legal_display_id' ] ) ? (int) $_POST[ 'legal_display_id' ] : 0;
+
+		if ( 0 === $society_id ) {
+			$society = Society_Class::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
+		} else {
+			$society = Society_Class::g()->show_by_type( $society_id );
+		}
+
+		if( 0 === $legal_display_id ){
+			$legal_display = Legal_Display_Class::g()->get( array(
+				'schema' => true,
+			), true );
+		}else{
+			$legal_display = Legal_Display_Class::g()->get( array(
+				'posts_per_page' => 1,
+				'post_parent'    => $legal_display_id,
+			), true );
+		}
+
+		$view = "";
+		$view_close = "";
+
+		if( $element != "" ){
+			ob_start();
+			Society_Class::g()->displayEditView( $society, $legal_display, $element );
+			$view = ob_get_clean();
+		}
+
+		if( $element_close != "" ){
+			ob_start();
+			Society_Class::g()->displayReadOnlyView( $society, $legal_display, $element_close );
+			$view_close = ob_get_clean();
+		}
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'society',
+			'callback_success' => 'displayEditViewSuccess',
+			'view'             => $view,
+			'view_close'       => $view_close
+		) );
+
 	}
 
 }

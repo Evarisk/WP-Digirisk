@@ -46,21 +46,14 @@ class Society_Configuration_Class extends \eoxia\Singleton_Util {
 			'hidden_value' => $element->data['owner_id'],
 		) );
 
-		$user_info = array();
-		if( $element->data[ 'owner_id' ] != 0 ){
-			$user_info = get_user_by( 'id', $element->data[ 'owner_id' ] );
-		}
-
 		// \eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
-		// 	'element'   => $element,
-		// 	'address'   => $address,
-		// 	'user_info' => $user_info
+	// 	'element' => $element,
+	// 	'address' => $address
 		// ) );
 
-		\eoxia\View_Util::exec( 'digirisk', 'society', 'informations/configuration-form', array(
-			'element'   => $element,
-			'address'   => $address,
-			'user_info' => $user_info
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/main', array(
+			'element' => $element,
+			'address' => $address,
 		) );
 	}
 
