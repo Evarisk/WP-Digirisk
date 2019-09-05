@@ -1,6 +1,6 @@
 <?php
 /**
- * Définition des champs d'une intervention, liés à un plan de prévention
+ * Définition des champs d'une intervention, liés à un permis de feu
  *
  * @author    Evarisk <dev@evarisk.com>
  * @since     7.3.0
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'une intervention d'un plan de prévention.
  */
-class Prevention_Intervention_Model extends \eoxia\Post_Model {
+class Permis_Feu_Intervention_Model extends \eoxia\Post_Model {
 
 	/**
 	 * Le constructeur définit les champs
 	 *
-	 * @param Prevention_Intervention_Model $object Les données de l'accident.
+	 * @param Permis_Feu_Intervention_Model $object Les données de l'accident.
 	 *
-	 * @since 6.6.0
+	 * @since 7.3.0
 	 */
 	public function __construct( $object, $req_method ) {
 
@@ -35,7 +35,6 @@ class Prevention_Intervention_Model extends \eoxia\Post_Model {
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_unite_travail',
 		);
-
 
 		$this->schema['key_unique'] = array(
 			'type'      => 'string',

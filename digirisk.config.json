@@ -11,9 +11,10 @@
 		"digirisk-accident",
 		"digirisk-causerie",
     "digirisk-prevention",
+    "digirisk-permis-feu",
 		"digirisk-tools",
 		"digirisk-transfert",
-		"digi-setup", 
+		"digi-setup",
 		"digirisk-handle-sorter",
 		"digirisk-update",
 		"digirisk-setting",
@@ -27,6 +28,7 @@
 		"digirisk-accident",
 		"digirisk-causerie",
     "digirisk-prevention",
+    "digirisk-permis-feu",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -60,8 +62,10 @@
 		"modules/listing-risk/listing-risk.config.json",
 
 		"modules/accident/accident.config.json",
+
     "modules/causerie/causerie.config.json",
     "modules/prevention_plan/prevention_plan.config.json",
+    "modules/permis_feu/permis_feu.config.json",
 
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",

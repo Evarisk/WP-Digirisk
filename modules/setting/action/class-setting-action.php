@@ -164,7 +164,7 @@ class Setting_Action {
 	/**
 	 * Méthode appelé par le champs de recherche dans la page "digirisk-epi"
 	 *
-	 * @param  integer $id           L'ID de la société.
+	 * @param  integer $id L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
 	 * @return void
 	 *

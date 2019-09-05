@@ -46,16 +46,6 @@ class Prevention_Action {
 		add_action( 'wp_ajax_generate_document_prevention', array( $this, 'callback_generate_document_prevention' ) );
 
 		add_action( 'wp_ajax_delete_document_prevention', array( $this, 'callback_delete_document_prevention' ) );
-		// $this->a();
-	}
-
-	public function a(){
-		$prevention = Prevention_Class::g()->get( array( 'id' => 137 ), true );
-		$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
-		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
-		$prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
-		$prevention->data[ 'taxonomy' ] = array();
-		$prevention = Prevention_Class::g()->update( $prevention->data );
 	}
 
 	public function callback_prevention_save_former(){
@@ -354,6 +344,7 @@ class Prevention_Action {
 			'view_phone' => $view_phone
 		) );
 	}
+
 	public function callback_prevention_save_signature_maitre_oeuvre(){
 		check_ajax_referer( 'prevention_save_signature_maitre_oeuvre' );
 
