@@ -212,7 +212,6 @@ window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeu = function( even
 
 window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
-		console.log( 'oui' );
 		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).addClass( 'button-disable' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
@@ -309,10 +308,8 @@ window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_el
 
 	var content = parent_element.find( '[name="' + element + '"]').val();
 	if( content == "" || content == "-1" || content == null ){
-		console.log( 'true => ' + element + ' : ' + content);
 		return true;
 	}else{
-		console.log( 'false => ' + element + ' : ' + content);
 		return false;
 	}
 }
