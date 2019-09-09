@@ -103,6 +103,7 @@ class Installer_Action {
 			'danger_installed'            => false,
 			'recommendation_installed'    => false,
 			'evaluation_method_installed' => false,
+			'worktype_installed'          => false,
 		);
 
 		$core_option = get_option( \eoxia\Config_Util::$init['digirisk']->core_option, $default_core_option );
@@ -135,6 +136,14 @@ class Installer_Action {
 				$core_option['installed']                   = true;
 			} else {
 				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des méthodes d\'évaluation ERROR', 'digirisk' );
+			}
+		}elseif ( ! $core_option['worktype_installed'] ){
+			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégories de types de travaux', 'digirisk' );
+			if ( Worktype_Category_Default_Data_Class::g()->create() ) {
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de types de travaux SUCCESS', 'digirisk' );
+				$core_option['worktype_installed'] = true;
+			} else {
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de types de travaux ERROR', 'digirisk' );
 			}
 		}
 
