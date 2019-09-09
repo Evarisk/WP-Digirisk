@@ -298,13 +298,11 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfInterventionCanBeAdd = function( e
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid = function( parent_element, element, error = false ){
-	console.log( error );
 	if( error ){
 		return true;
 	}
+
 	var content = parent_element.find( '[name="' + element + '"]').val();
-	console.log( content );
-	console.log( element );
 	if( content == "" || content == "-1" || content == null ){
 		return true;
 	}else{
@@ -436,9 +434,9 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervena
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
 
 	if( ! error ){
-		parent_element.find( '.prevention-cloture' ).removeClass( 'button-disable' );
+		parent_element.find( '.go-to-last-step-prevention' ).removeClass( 'button-disable' );
 	}else{
-		parent_element.find( '.prevention-cloture' ).addClass( 'button-disable' );
+		parent_element.find( '.go-to-last-step-prevention' ).addClass( 'button-disable' );
 	}
 }
 

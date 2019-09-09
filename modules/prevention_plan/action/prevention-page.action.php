@@ -118,6 +118,7 @@ class Prevention_Page_Action {
 				) );
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE:
+				$prevention = Prevention_Class::g()->save_info_maitre_oeuvre();
 				$prevention = Prevention_Page_Class::g()->save_society_information( $prevention, $society, $legal_display );
 
 				ob_start();
@@ -128,7 +129,6 @@ class Prevention_Page_Action {
 
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT:
-				$prevention = Prevention_Class::g()->save_info_maitre_oeuvre();
 				Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
 				$url_redirect = admin_url( 'admin.php?page=digirisk-prevention' );
 				break;

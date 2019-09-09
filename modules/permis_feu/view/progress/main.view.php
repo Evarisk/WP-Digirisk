@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Listes des plans de préventions en cours', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
+	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Listes des permis de feu en cours', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
 
-	<table class="table closed-prevention">
+	<table class="table closed-permis-feu">
 		<thead>
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
@@ -31,10 +31,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</tr>
 		</thead>
 		<?php
-		if ( ! empty( $preventions ) ) :
-			foreach ( $preventions as $prevention ) :
-				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'progress/table-item', array(
-					'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
+		if ( ! empty( $permis_feu ) ) :
+			foreach ( $permis_feu as $permis_feu_single ) :
+				\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'progress/table-item', array(
+					'permis_feu' => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu_single ),
 				) );
 			endforeach;
 		else :

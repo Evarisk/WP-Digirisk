@@ -198,9 +198,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function save_info_maitre_oeuvre(){
 		$id   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
 
-		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
-		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-callingcode'] ) : '';
-
 		$i_name        = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
 		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
 		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
@@ -212,18 +209,14 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
-		if( $mo_phone != ""  ){
-			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = '(' . $mo_phone_code . ')' . $mo_phone;
-		}
-
 		$data_i = array(
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
-			'phone'     => '(' . $i_phone_code . ')' . $i_phone
+			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
+			'phone_nbr' => $i_phone
 		);
 
 		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
-
 		return Prevention_Class::g()->update( $prevention->data );
 	}
 
@@ -306,6 +299,13 @@ class Prevention_Class extends \eoxia\Post_Class {
 			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = $phone_number;*/
 		}
 		return Prevention_Class::g()->update( $prevention->data );
+	}
+
+	public function intervenant_is_valid( $idata ){
+		if( $idata[ 'firstname' ] && $idata[ 'lastname' ] && $idata[ 'phone' ] && $idata[ 'signature_id' ] ){
+			return true;
+		}
+		return false;
 	}
 }
 

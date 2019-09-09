@@ -114,6 +114,9 @@ class Prevention_Model extends \eoxia\Post_Model {
 				'phone'        => array(
 					'type' => 'string',
 				),
+				'phone_nbr'        => array(
+					'type' => 'string',
+				),
 				'signature_id'   => array(
 					'type' => 'integer',
 				),
@@ -139,6 +142,18 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'type'      => 'integer',
 			'meta_type' => 'multiple',
 			'default' => 0,
+		);
+
+		$this->schema['society_outside_name'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => 'Entreprise Exterieur',
+		);
+
+		$this->schema['society_outside_siret'] = array(
+			'type'      => 'string',
+			'meta_type' => 'multiple',
+			'default'   => '',
 		);
 
 		$this->schema['taxonomy'] = array(

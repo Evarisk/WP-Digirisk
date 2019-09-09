@@ -192,6 +192,7 @@ window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisDeFeu = function( event, 
 
 window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
+		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).removeClass( 'button-disable' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -211,6 +212,8 @@ window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeu = function( even
 
 window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
+		console.log( 'oui' );
+		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).addClass( 'button-disable' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -319,6 +322,9 @@ window.eoxiaJS.digirisk.permisFeu.addInterventionLinePermisFeuSuccess = function
 }
 
 window.eoxiaJS.digirisk.permisFeu.editInterventionLineSuccess = function( triggeredElement, response ){
-	console.log( ' - - - ' );
 	triggeredElement.closest( '.intervention-row' ).replaceWith( response.data.view );
+}
+
+window.eoxiaJS.digirisk.permisFeu.preventionLoadTabSuccess = function( element, response ){
+	element.closest( '.main-content' ).html( response.data.view );
 }

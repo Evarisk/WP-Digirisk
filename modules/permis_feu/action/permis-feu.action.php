@@ -32,6 +32,8 @@ class Permis_Feu_Action {
 
 		add_action( 'wp_ajax_display_button_odt_pointchaud', array( $this, 'callback_display_button_odt_pointchaud' ) );
 
+		add_action( 'wp_ajax_permisfeu_load_tab', array( $this, 'callback_permisfeu_load_tab' ) );
+
 		// $this->a();
 	}
 
@@ -197,6 +199,29 @@ class Permis_Feu_Action {
 			'module'           => 'permisFeu',
 			'callback_success' => 'displayButtonUniteDeTravailSuccess',
 			'view'             => ob_get_clean(),
+		) );
+	}
+
+
+	public function callback_permisfeu_load_tab(){
+		check_ajax_referer( 'permisfeu_load_tab' );
+		$tab = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : ''; // WPCS: input var ok.
+
+		ob_start();
+		switch( $tab ){
+			case 'progress':
+				Permis_Feu_Page_Class::g()->display_progress();
+				break;
+			default:
+				Permis_Feu_Page_Class::g()->display_dashboard();
+				break;
+		}
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'preventionLoadTabSuccess',
+			'view'             => ob_get_clean()
 		) );
 	}
 }

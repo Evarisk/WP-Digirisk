@@ -24,7 +24,7 @@ global $eo_search; ?>
 			<span class="form-label"><?php esc_html_e( 'Nom', 'digirisk' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-				<input type="text" name="intervenant-lastname" class="form-field" value="">
+				<input type="text" name="intervenant-lastname" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'lastname' ] ); ?>">
 			</label>
 		</div>
 	</div>
@@ -34,7 +34,7 @@ global $eo_search; ?>
 			<span class="form-label"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-				<input type="text" name="intervenant-name" class="form-field" value="">
+				<input type="text" name="intervenant-name" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?>">
 			</label>
 		</div>
 	</div>
@@ -58,7 +58,7 @@ global $eo_search; ?>
 				<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-					<input type="text" class="form-field element-phone-input" name="intervenant-phone" value="" style="width: auto;">
+					<input type="text" class="form-field element-phone-input" name="intervenant-phone" value="<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'phone_nbr' ] ); ?>" style="width: auto;">
 				</label>
 			</div>
 		</section>

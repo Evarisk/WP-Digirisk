@@ -18,7 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="" style="background-color: #fff; padding: 1em;">
 
-	<h2 style="text-align : center"><?php esc_html_e( 'Informations sur le plan de prévention', 'digirisk' ); ?></h2>
+	<h2 style="text-align : center">
+		<?php esc_html_e( 'Informations sur le plan de prévention', 'digirisk' ); ?>
+		<span class="wpeo-tooltip-event"
+		aria-label="<?php esc_html_e( 'Information primaire du plan de prévention', 'task-manager' ); ?>"
+		style="color : dodgerblue; cursor : pointer">
+			<i class="fas fa-info-circle"></i>
+		</span></h2>
 	<section class="wpeo-gridlayout padding grid-2">
 		<div class="wpeo-gridlayout padding grid-1">
 			<div class="wpeo-form">

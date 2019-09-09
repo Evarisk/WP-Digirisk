@@ -71,6 +71,20 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
+	public function display_progress() {
+		$args = array(
+            'meta_key' => '_wpdigi_permis_feu_step',
+            'meta_value' => 5,
+            'meta_compare' => '<'
+        );
+		$permis_feu = Permis_Feu_Class::g()->get( $args );
+
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'progress/main', array(
+			'permis_feu' => $permis_feu,
+			'nbr' => count( $permis_feu )
+		) );
+	}
+
 	public function register_search( $former, $post_values = array() ) {
 		global $eo_search;
 
@@ -170,10 +184,10 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		}
 	}
 
-	public function next_step( $prevention, $nextstep ) {
+	public function next_step( $permis_feu, $nextstep ) {
 		// Passes à l'étape suivante.
-		$prevention->data['step'] = $nextstep;
-		return Prevention_Class::g()->update( $prevention->data );
+		$permis_feu->data['step'] = $nextstep;
+		return permis_feu_Class::g()->update( $permis_feu->data );
 	}
 }
 
