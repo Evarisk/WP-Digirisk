@@ -41,7 +41,7 @@ global $eo_search;
 		<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-prevention-from-permis-feu"
 			data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 			data-action="delete_prevention_from_permis_feu"
-			data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce plan de prévention', 'digirisk' ); ?>"
+			data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer la liaison avec ce plan de prévention', 'digirisk' ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_prevention_from_permis_feu' ) ); ?>"
 			aria-label="<?php echo esc_attr_e( 'Supprimer la liaison avec ce plan de prévention', 'digirisk' ); ?>"
 			style="margin-left: 10px;">

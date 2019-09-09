@@ -64,6 +64,15 @@ window.eoxiaJS.digirisk.permisFeu.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-permis-feu-parent .end-date-element .button-permis-feu-title', window.eoxiaJS.digirisk.permisFeu.updateEndDatePrevention );
 
+	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-element .autocomplete-search-list .autocomplete-result',  window.eoxiaJS.digirisk.permisFeu.displayButtonUniteDeTravail );
+
+	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-class .display-modal-unite',  window.eoxiaJS.digirisk.permisFeu.displayModalUniteDeTravail );
+
+	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-class .worktype-element .dropdown-content .item',  window.eoxiaJS.digirisk.permisFeu.selectRisqueInDropdown );
+
+	jQuery( document ).on( 'keyup', '.digi-permis-feu-parent .unite-de-travail-class [name="moyen-de-prevention"]',  window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd );
+
+	jQuery( document ).on( 'keyup', '.digi-permis-feu-parent .unite-de-travail-class [name="description-des-actions"]',  window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd );
 };
 
 window.eoxiaJS.digirisk.permisFeu.updateModalTitleMaitreOeuvre = function( event, data ){
@@ -121,9 +130,7 @@ window.eoxiaJS.digirisk.permisFeu.displaySignatureLastPage = function( triggered
 	var element_parent = triggeredElement.closest( '.digi-permis-feu-parent' );
 
 	var element = jQuery( '.digi-permis-feu-parent' ).find( class_parent );
-	console.log( element );
 	var a = element.find( '.signature-info-element .signature' );
-	console.log( response.data.view );
 	a.html( response.data.view );
 
 	if( response.data.class_parent == "information-maitre-oeuvre" ){
@@ -219,4 +226,99 @@ window.eoxiaJS.digirisk.permisFeu.updateEndDatePrevention = function( event ){
 	}else{
 		form_element.removeClass( 'form-element-disable' );
 	}
+}
+
+window.eoxiaJS.digirisk.permisFeu.displayButtonUniteDeTravail = function( event ){
+	var id = jQuery( this ).attr( 'data-id' );
+	if ( id > 0 ) {
+		var request_data = {};
+		request_data.action = 'display_button_odt_pointchaud';
+		request_data.id     = id;
+
+		window.eoxiaJS.loader.display( jQuery( this ) );
+		window.eoxiaJS.request.send( jQuery( this ), request_data );
+	}
+}
+
+
+window.eoxiaJS.digirisk.permisFeu.displayButtonUniteDeTravailSuccess = function( trigerredElement, response ){
+	trigerredElement.closest( '.unite-de-travail-class' ).find( '.button-unite-de-travail' ).html( response.data.view );
+	var error = window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd( '', trigerredElement );
+	if( ! error ){
+		var parent_element = trigerredElement.closest( '.unite-de-travail-class' );
+		parent_element.find( '.button-add-row-intervention' ).removeClass( 'button-disable' ).addClass( 'button-blue' );
+	}
+}
+
+window.eoxiaJS.digirisk.permisFeu.displayModalUniteDeTravail = function( event ){
+	jQuery( this ).closest( '.button-unite-de-travail' ).find( '.digirisk-modal-unite' ).addClass( 'modal-active' );
+}
+
+window.eoxiaJS.digirisk.permisFeu.selectRisqueInDropdown = function( event ){
+	var parent_element = jQuery( this ).closest( '.form-element' );
+	var info_element = parent_element.find( '.category-worktype .dropdown-toggle' );
+	info_element.css( 'padding', '0' );
+	info_element.find( 'span' ).hide();
+	info_element.find( '.button-icon' ).hide();
+
+	parent_element.find( '[name="worktype_category_id"]' ).val( jQuery( this ).attr( 'data-id' ) );
+	var img_src = jQuery( this ).find( 'img' ).attr( 'src' );
+	info_element.find( 'img' ).attr( 'src', img_src );
+	info_element.find( 'img' ).removeClass( 'hidden' ).removeClass( 'wpeo-tooltip-event' ).addClass( 'wpeo-tooltip-event' );
+
+	info_element.find( 'img' ).attr( 'aria-label', jQuery( this ).attr( 'aria-label' ) );
+	var error = window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd( '', jQuery( this ) );
+	if( ! error ){
+		var parent_element = jQuery( this ).closest( '.unite-de-travail-class' );
+		parent_element.find( '.button-add-row-intervention' ).removeClass( 'button-disable' ).addClass( 'button-blue' );
+	}
+}
+
+
+window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd = function( event, element = "" ){
+
+	if( element == "" ){
+		element = jQuery( this );
+	}
+
+	var parent_element = element.closest( '.unite-de-travail-class' );
+	var error = false;
+
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'unitedetravail', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'description-des-actions', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'moyen-de-prevention', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'worktype_category_id', error );
+
+	if( ! error ){
+		parent_element.find( '.button-add-row-intervention' ).removeClass( 'button-disable' ).addClass( 'button-blue' );
+	}else{
+		parent_element.find( '.button-add-row-intervention' ).removeClass( 'button-blue' ).addClass( 'button-disable' );
+	}
+
+
+	return error;
+}
+
+window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_element, element, error = false ){
+	if( error ){
+		return true;
+	}
+
+	var content = parent_element.find( '[name="' + element + '"]').val();
+	if( content == "" || content == "-1" || content == null ){
+		console.log( 'true => ' + element + ' : ' + content);
+		return true;
+	}else{
+		console.log( 'false => ' + element + ' : ' + content);
+		return false;
+	}
+}
+
+window.eoxiaJS.digirisk.permisFeu.addInterventionLinePermisFeuSuccess = function( triggeredElement, response ){
+	triggeredElement.closest( '.intervention-table' ).html( response.data.table_view );
+}
+
+window.eoxiaJS.digirisk.permisFeu.editInterventionLineSuccess = function( triggeredElement, response ){
+	console.log( ' - - - ' );
+	triggeredElement.closest( '.intervention-row' ).replaceWith( response.data.view );
 }

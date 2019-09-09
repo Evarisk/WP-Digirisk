@@ -3,8 +3,8 @@
  * Gestion des actions des interventions de plan de prévention
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     6.6.0
- * @version   6.6.0
+ * @since     7.3.0
+ * @version   7.3.0
  * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Causerie Prevention Action Class.
+ * Intervention des plans de prévention
  */
 class Prevention_Intervention_Action {
 	/**

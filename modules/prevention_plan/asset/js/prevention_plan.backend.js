@@ -213,7 +213,6 @@ window.eoxiaJS.digirisk.preventionPlan.savedParticipant = function( element, res
 
 window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravail = function( event ){
 	var id = jQuery( this ).attr( 'data-id' );
-
 	if ( id > 0 ) {
 		var request_data = {};
 		request_data.action = 'display_button_odt_unitedetravail';
@@ -222,7 +221,6 @@ window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravail = function( e
 		window.eoxiaJS.loader.display( jQuery( this ) );
 		window.eoxiaJS.request.send( jQuery( this ), request_data );
 	}
-
 }
 
 window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravailSuccess = function( trigerredElement, response ){

@@ -63,8 +63,10 @@ class Permis_Feu_Intervention_Class extends \eoxia\Post_Class {
 	public $element_prefix = 'C';
 
 
-	public function display_intervention_table( $permis_feu ){
-		$interventions = Permis_Feu_Intervention_Class::g()->get( array( 'id' => $permis_feu->data['id'] ), true );
+	public function display_intervention_table( $permis_feu_id ){
+
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $permis_feu_id ), true );
+		$interventions = Permis_Feu_Intervention_Class::g()->get( array( 'post_parent' => $permis_feu_id ) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2-table-intervention-foreach', array(
 			'interventions' => $interventions,
@@ -72,6 +74,13 @@ class Permis_Feu_Intervention_Class extends \eoxia\Post_Class {
 		) );
 	}
 
+	public function return_name_workunit( $id = 0 ){
+		$workunit = get_post( $id );
+		if( ! empty( $workunit ) ){
+			return $workunit->post_title;
+		}
+		return '';
+	}
 
 }
 

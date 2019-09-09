@@ -47,7 +47,8 @@ global $eo_search;
 			<div class="form-element">
 				<div class="form-field-container" style="margin-left:2%">
 					<?php
-						do_shortcode( '[digi_dropdown_categories_risk id="' . $intervention->data['id'] . '" type="causerie" display="view" category_risk_id="' . $intervention->data[ 'risk' ] . '"]' );
+					do_shortcode( '[digi_dropdown_worktype category_worktype_id="' . $intervention->data[ 'worktype' ] . '" display="view"]' );
+						// do_shortcode( '[digi_dropdown_categories_risk id="' . $intervention->data['id'] . '" type="causerie" display="view" category_risk_id="' . $intervention->data[ 'risk' ] . '"]' );
 					?>
 				</div>
 			</div>
@@ -66,8 +67,8 @@ global $eo_search;
 	<td class="w50 padding" data-title="action">
 		<div class="wpeo-button button-blue action-input"
 		 data-id="<?php echo esc_attr( $intervention->data[ 'id' ] ); ?>"
-		 data-action="edit_intervention_line"
-		 data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervention_line' ) ); ?>">
+		 data-action="edit_intervention_line_permisfeu"
+		 data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervention_line_permisfeu' ) ); ?>">
 			<span><i class="fas fa-pen"></i></span>
 		</div>
 	</td>

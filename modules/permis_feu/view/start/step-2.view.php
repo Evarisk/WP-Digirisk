@@ -97,7 +97,7 @@ global $eo_search;
 	<div class="intervention-table" style="margin-top: 30px">
 		<span style="text-align : center"><h2><?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?></h2></span>
 		<?php
-			Permis_Feu_Intervention_Class::g()->display_intervention_table( $permis_feu );
+			Permis_Feu_Intervention_Class::g()->display_intervention_table( $permis_feu->data[ 'id' ] );
 		?>
 	</div>
 

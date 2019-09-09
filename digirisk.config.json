@@ -54,7 +54,9 @@
 		"modules/corrective_task/corrective_task.config.json",
 
 		"modules/recommendation/recommendation.config.json",
-		"modules/risk/risk.config.json",
+    "modules/risk/risk.config.json",
+
+		"modules/worktype/worktype.config.json",
 
 		"modules/document/document.config.json",
 

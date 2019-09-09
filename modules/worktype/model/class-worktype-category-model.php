@@ -1,10 +1,10 @@
 <?php
 /**
- * Définition du schéma des catégories de risque.
+ * Définition du schéma des unité de travail.
  *
  * @author Evarisk <dev@evarisk.com>
- * @since 6.4.0
- * @version 7.0.0
+ * @since 7.3.0
+ * @version 7.3.0
  * @copyright 2015-2018 Evarisk
  * @package DigiRisk
  */
@@ -16,23 +16,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Définition du schéma des catégories de risque.
+ * Définition du schéma des types de travaux
  */
-class Risk_Category_Model extends \eoxia\Term_Model {
+
+class Worktype_Category_Model extends \eoxia\Term_Model {
 
 	/**
-	 * Définition du schéma des catégories de risque.
+	 * Définition du schéma des catégories de types de travaux
 	 *
-	 * @since 6.4.0
-	 * @version 6.5.0
+	 * @since 7.3.0
+	 * @version 7.3.0
 	 *
 	 * @param array $data       Data.
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['status'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.4.0',
+			'since'     => '7.3.0',
+			'version'   => '7.3.0',
 			'type'      => 'string',
 			'meta_type' => 'single',
 			'field'     => '_wpdigi_status',
@@ -40,8 +41,8 @@ class Risk_Category_Model extends \eoxia\Term_Model {
 		);
 
 		$this->schema['thumbnail_id'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.4.0',
+			'since'     => '7.3.0',
+			'version'   => '7.3.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_thumbnail_id',
@@ -49,8 +50,8 @@ class Risk_Category_Model extends \eoxia\Term_Model {
 		);
 
 		$this->schema['position'] = array(
-			'since'     => '6.4.0',
-			'version'   => '6.5.0',
+			'since'     => '7.3.0',
+			'version'   => '7.3.0',
 			'type'      => 'integer',
 			'meta_type' => 'single',
 			'field'     => '_position',

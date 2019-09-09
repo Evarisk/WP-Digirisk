@@ -30,13 +30,14 @@ class Permis_Feu_Action {
 		add_action( 'wp_ajax_add_prevention_to_permis_feu', array( $this, 'callback_add_prevention_to_permis_feu' ) );
 		add_action( 'wp_ajax_delete_prevention_from_permis_feu', array( $this, 'callback_delete_prevention_from_permis_feu' ) );
 
+		add_action( 'wp_ajax_display_button_odt_pointchaud', array( $this, 'callback_display_button_odt_pointchaud' ) );
 
 		// $this->a();
 	}
 
 	public function a(){
-		$a = \eoxia\Config_Util::$init['digirisk']->risk->path;
-		echo '<pre>'; print_r( $a ); echo '</pre>'; exit;
+		$a = \eoxia\Config_Util::$init['digirisk'];
+		echo '<pre>'; print_r( $b ); echo '</pre>'; exit;
 		$prevention = Permis_Feu_Class::g()->get( array( 'id' => 174 ), true );
 		// $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
 		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
@@ -164,6 +165,38 @@ class Permis_Feu_Action {
 			'module'           => 'permisFeu',
 			'callback_success' => 'deletePreventionFromPermisFeuSuccess',
 			'view'             => $view,
+		) );
+	}
+
+	public function callback_display_button_odt_pointchaud(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Erreur ID' );
+		}
+
+		$element_id = $id;
+		$target     = "digi-fiche-de-poste";
+		$title      = esc_html__( 'Les fiches de poste', 'digirisk' );
+
+		$tab        = new \stdClass();
+		$tab->title = $title;
+		$tab->slug  = $target;
+
+		ob_start();
+		$element = Society_Class::g()->show_by_type( $id );
+		$tab = Tab_Class::g()->build_tab_to_display( $element, $tab );
+
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-unite-de-travail', array(
+			'id'  => $id,
+			'tab' => $tab
+		) );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'displayButtonUniteDeTravailSuccess',
+			'view'             => ob_get_clean(),
 		) );
 	}
 }
