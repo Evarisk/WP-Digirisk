@@ -514,3 +514,9 @@ window.eoxiaJS.digirisk.preventionPlan.updateTitleOption = function( event ){
 		jQuery( this ).find( '.button-icon' ).removeClass( 'fa-square' ).addClass( 'fa-check-square' );
 	}
 }
+
+window.eoxiaJS.digirisk.preventionPlan.editThisPreventionSuccess = function( trigerredElement, response ){
+	if( response.data.url ){
+		window.location.replace( response.data.url );
+	}
+}

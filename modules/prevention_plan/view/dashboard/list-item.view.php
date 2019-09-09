@@ -72,11 +72,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action">
 			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
 				data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
+				data-action="edit_this_prevention"
+				data-action="<?php echo esc_attr( wp_create_nonce( 'edit_this_prevention' ) ); ?>"
+				aria-label="<?php echo esc_attr_e( 'Modifier ce plan de prévention', 'digirisk' ); ?>">
+				<i class="fas fa-3x fa-caret-right" style="margin-top: -2px;"></i>
+			</span>
+
+			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
+				data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
 				data-action="generate_document_prevention"
 				data-action="<?php echo esc_attr( wp_create_nonce( 'generate_document_prevention' ) ); ?>"
 				aria-label="<?php echo esc_attr_e( 'Générer le document', 'digirisk' ); ?>">
 				<i class="fas fa-download"></i>
 			</span>
+
 			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-prevention-plan"
 				data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
 				data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce plan de prévention', 'digirisk' ); ?>"

@@ -46,6 +46,8 @@ class Prevention_Action {
 		add_action( 'wp_ajax_generate_document_prevention', array( $this, 'callback_generate_document_prevention' ) );
 
 		add_action( 'wp_ajax_delete_document_prevention', array( $this, 'callback_delete_document_prevention' ) );
+
+		add_action( 'wp_ajax_edit_this_prevention', array( $this, 'callback_edit_this_prevention' ) );
 	}
 
 	public function callback_prevention_save_former(){
@@ -419,6 +421,24 @@ class Prevention_Action {
 			'callback_success' => 'deleteDocumentPreventionSuccess',
 			'dashboard_view'   => $dashboard_view
 		) );
+	}
+
+	public function callback_edit_this_prevention(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+		$prevention->data[ 'step' ] = 1;
+		Prevention_Class::g()->update( $prevention->data );
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'preventionPlan',
+			'callback_success' => 'editThisPreventionSuccess',
+			'url'              => admin_url( 'admin.php?page=digirisk-prevention&id=' . $prevention->data['id'] )
+		) );
+
 	}
 }
 
