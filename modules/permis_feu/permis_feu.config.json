@@ -22,5 +22,9 @@
     "PERMIS_FEU_ENTERPRISE": 3,
     "PERMIS_FEU_PARTICIPANT": 4,
     "PERMIS_FEU_CLOSED": 5
+  },
+  "status":{
+    "PERMIS_FEU_IN_PROGRESS" : 0,
+    "PERMIS_FEU_IS_ENDED" : 1
   }
 }

@@ -1,11 +1,11 @@
 <?php
 /**
- * Plan de prévention déja effecutés (dashboard)
+ * Permis de feu déja effectués
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     6.6.0
- * @version   6.6.0
- * @copyright 2018 Evarisk.
+ * @since     7.3.0
+ * @version   7.3.0
+ * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */
 
@@ -28,18 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<td class="w100 padding">
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
 	</td>
-	<!-- <td class="padding avatar-info-prevention">
-		<div class="avatar tooltip hover wpeo-tooltip-event"
-			aria-label="<?php echo esc_attr( $permis_feu->data[ 'former' ][ 'data' ]->display_name ); ?>"
-			style="background-color: #<?php echo esc_attr( $permis_feu->data[ 'former' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
-				<span><?php echo esc_html( $permis_feu->data[ 'former' ][ 'data' ]->initial ); ?></span>
-		</div>
-		<div class="info-text" style="display : none">
-			<span><?php echo esc_attr( $permis_feu->data[ 'former' ][ 'data' ]->first_name ); ?></span> -
-			<span><?php echo esc_attr( $permis_feu->data[ 'former' ][ 'data' ]->last_name ); ?></span>
-			<span>( <i><?php echo esc_attr( $permis_feu->data[ 'former' ][ 'data' ]->phone ); ?></i> )</span>
-		</div>
-	</td> -->
 	<td class="padding avatar-info-prevention">
 		<?php $name_and_phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
 		<?php if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
@@ -72,16 +60,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="action">
 			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
 				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-				data-action="generate_document_prevention"
-				data-action="<?php echo esc_attr( wp_create_nonce( 'generate_document_prevention' ) ); ?>"
+				data-action="edit_this_permis_feu"
+				data-action="<?php echo esc_attr( wp_create_nonce( 'edit_this_permis_feu' ) ); ?>"
+				aria-label="<?php echo esc_attr_e( 'Modifier ce plan de prévention', 'digirisk' ); ?>">
+				<i class="fas fa-3x fa-caret-right" style="margin-top: -2px;"></i>
+			</span>
+
+			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
+				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
+				data-action="generate_document_permis_feu"
+				data-action="<?php echo esc_attr( wp_create_nonce( 'generate_document_permis_feu' ) ); ?>"
 				aria-label="<?php echo esc_attr_e( 'Générer le document', 'digirisk' ); ?>">
 				<i class="fas fa-download"></i>
 			</span>
-			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-prevention-plan"
+
+			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-permis_feu-plan"
 				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 				data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce plan de prévention', 'digirisk' ); ?>"
-				data-action="delete_document_prevention"
-				data-action="<?php echo esc_attr( wp_create_nonce( 'delete_document_prevention' ) ); ?>"
+				data-action="delete_document_permis_feu"
+				data-action="<?php echo esc_attr( wp_create_nonce( 'delete_document_permis_feu' ) ); ?>"
 				aria-label="<?php echo esc_attr_e( 'Supprimer le plan de prévention', 'digirisk' ); ?>">
 				<i class="fas fa-times"></i>
 			</span>

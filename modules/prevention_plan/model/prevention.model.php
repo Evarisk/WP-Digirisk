@@ -36,6 +36,13 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'default' => 1,
 		);
 
+		$this->schema['is_end'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_prevention_prevention_is_end',
+			'default' 	=> 0,
+		);
+
 		$this->schema['date_start'] = array(
 			'type'      => 'wpeo_date',
 			'meta_type' => 'single',

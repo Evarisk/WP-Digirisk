@@ -26,9 +26,9 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 	 * @since 6.6.0
 	 * @version 6.6.0
 	 *
-	 * @param  Permis_Feu_Model $object La définition de l'objet dans l'instance actuelle.
+	 * @param  Sheet_Permis_Feu_Model $object La définition de l'objet dans l'instance actuelle.
 	 *
-	 * @return Permis_Feu_Model
+	 * @return Sheet_Permis_Feu_Model
 	 */
 	public function __construct( $object, $req_method ) {
 		$this->schema['document_meta'] = array(
@@ -66,14 +66,6 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['responsible_name'] = array(
-			'type' => 'string',
-		); // OK
-
-		$this->schema['document_meta']['child']['responsible_phone'] = array(
-			'type' => 'string',
-		); // OK
-
 		$this->schema['document_meta']['child']['society_title'] = array(
 			'type' => 'string',
 		); // OK
@@ -98,15 +90,27 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['titre_prevention'] = array(
+		$this->schema['document_meta']['child']['titre_plan_prevention'] = array(
 			'type' => 'string',
 		); // OK
 
-		$this->schema['document_meta']['child']['raison_du_plan_de_prevention'] = array(
+		$this->schema['document_meta']['child']['raison_plan_prevention'] = array(
 			'type' => 'string',
 		); // OK
 
-// --------------------------
+		$this->schema['document_meta']['child']['date_start_intervention_pre'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['date_end_intervention_pre'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['intervention_pre_info'] = array(
+			'type' => 'string',
+		); // OK
+
+		// --------------------------
 		$this->schema['document_meta']['child']['maitre_oeuvre_fname'] = array(
 			'type' => 'string',
 		); // OK
@@ -130,7 +134,7 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 		$this->schema['document_meta']['child']['maitre_oeuvre_signature'] = array(
 			'type' => 'array',
 		);
-// --------------------------
+		// --------------------------
 
 		$this->schema['document_meta']['child']['intervenant_exterieur_fname'] = array(
 			'type' => 'string',
@@ -166,5 +170,4 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 
 		parent::__construct( $object, $req_method );
 	}
-
 }

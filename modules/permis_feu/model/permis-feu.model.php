@@ -36,6 +36,13 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 			'default' => 1,
 		);
 
+		$this->schema['is_end'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_permis_feu_is_end',
+			'default' 	=> 0,
+		);
+
 		$this->schema['prevention_id'] = array(
 			'type'      => 'integer',
 			'meta_type' => 'single',
@@ -121,6 +128,9 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 				'phone'        => array(
 					'type' => 'string',
 				),
+				'phone_nbr'        => array(
+					'type' => 'string',
+				),
 				'signature_id'   => array(
 					'type' => 'integer',
 				),
@@ -136,16 +146,16 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 			'meta_type' => 'multiple',
 		);
 
-		$this->schema['more_than_400_hours'] = array(
-			'type'      => 'integer',
+		$this->schema['society_outside_name'] = array(
+			'type'      => 'string',
 			'meta_type' => 'multiple',
-			'default' => 0,
+			'default'   => 'Entreprise Exterieur',
 		);
 
-		$this->schema['imminent_danger'] = array(
-			'type'      => 'integer',
+		$this->schema['society_outside_siret'] = array(
+			'type'      => 'string',
 			'meta_type' => 'multiple',
-			'default' => 0,
+			'default'   => '',
 		);
 
 		$this->schema['taxonomy'] = array(

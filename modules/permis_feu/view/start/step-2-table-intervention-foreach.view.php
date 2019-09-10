@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  			<th class="w50 padding"></th> <!--  class="w50 padding" -->
 			<th class="padding"><?php esc_html_e( 'Description des actions réalisées', 'digirisk' ); ?></th>
 			<th class="w100 padding" ><?php esc_html_e( 'Risque IRNF', 'digirisk' ); ?></th>
- 			<th class="padding"><?php esc_html_e( 'Moyens de prévention', 'digirisk' ); ?></th> <!--  class="w50" -->
+ 			<th class="padding"><?php esc_html_e( 'Matériels utilisés', 'digirisk' ); ?></th> <!--  class="w50" -->
  			<th class="w50 padding"></th> <!--  class="w150" -->
  		</tr>
  	</thead>

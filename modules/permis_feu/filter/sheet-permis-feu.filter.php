@@ -29,8 +29,172 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	public function __construct() {
 		parent::__construct();
 
-		// add_filter( 'eo_model_sheet-prevention_before_post', array( $this, 'before_save_doc' ), 10, 2 );
-		// add_filter( 'digi_sheet-prevention_document_data', array( $this, 'callback_digi_document_data' ), 9, 2 );
+		add_filter( 'eo_model_sheet-permisfeu_before_post', array( $this, 'before_save_doc' ), 10, 2 );
+		add_filter( 'digi_sheet-permisfeu_document_data', array( $this, 'callback_digi_document_data' ), 9, 2 );
+	}
+
+	/**
+	 * Ajoutes le titre du document ainsi que le GUID et le chemin vers celui-ci.
+	 *
+	 * Cette méthode est appelée avant l'ajout du document en base de donnée.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  array $data Les données du document.
+	 * @param  array $args Les données de la requête.
+	 *
+	 * @return mixed
+	 */
+	public function before_save_doc( $data, $args ) {
+		$upload_dir = wp_upload_dir();
+
+		$data['title']  = current_time( 'Ymd' ) . '_';
+		$data['title'] .= '_fiche_permisfeu_';
+
+		$data[ 'title' ] .= $data['parent']->data['id'];
+
+		// $data['title'] .= $data['parent']->data['unique_identifier'];
+		$data['title']  = str_replace( '-', '_', $data['title'] );
+
+		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';
+		$data['path'] = $upload_dir['basedir'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';
+		$data['path'] = str_replace( '\\', '/', $data['path'] );
+
+		$data['_wp_attached_file'] = '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';
+		return $data;
+	}
+
+	/**
+	 * Ajoutes toutes les données nécessaire pour le registre des AT bénins.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @param  array         $data    Les données pour le registre des AT bénins.
+	 * @param  Society_Model $society Les données de la société.
+	 *
+	 * @return array                  Les données pour le registre des AT bénins modifié.
+	 */
+	public function callback_digi_document_data( $data, $args ) {
+		$permis_feu = Permis_Feu_Class::g()->add_information_to_permis_feu( $args['parent'] );
+		$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
+
+		$data_odt = array();
+
+		if( isset( $args[ 'legal_display' ] ) && ! empty( $args[ 'legal_display' ] ) ){
+			$data_legal_display = array(
+				'pompier_number'    => $args[ 'legal_display' ]->data[ 'emergency_service' ][ 'pompier' ],
+				'police_number'     => $args[ 'legal_display' ]->data[ 'emergency_service' ][ 'police' ],
+				'samu_number'       => $args[ 'legal_display' ]->data[ 'emergency_service' ][ 'samu' ],
+				'emergency_number'  => $args[ 'legal_display' ]->data[ 'emergency_service' ][ 'emergency' ],
+			);
+			$data_odt = wp_parse_args( $data_legal_display, $data_odt );
+		}
+
+		if( isset( $args[ 'society' ] ) && ! empty( $args[ 'society' ] ) ){
+			$moyen_generaux = $args[ 'society' ]->data[ 'moyen_generaux' ] != "" ? $args[ 'society' ]->data[ 'moyen_generaux' ] : esc_html__( 'Vide', 'digirisk' );
+			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
+
+			$data_society = array(
+				'society_title'    => $args[ 'society' ]->data[ 'title' ],
+				'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
+				'moyen_generaux_mis_disposition' => $moyen_generaux,
+				'consigne_generale'              => $consigne_generale
+			);
+			$data_odt = wp_parse_args( $data_society, $data_odt );
+		}
+
+		$return = Permis_Feu_Class::g()->prepare_permis_feu_to_odt_intervention( $permis_feu );
+
+		$data_interventions = $return[ 'data' ];
+		$interventions_info = $return[ 'text' ];
+
+		$intervenants_info = "";
+		if( empty( $permis_feu->data[ 'intervenants' ] ) ){
+			$permis_feu->data[ 'intervenants' ][0] = array(
+				'name' => '',
+				'lastname' => '',
+				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' )
+			);
+			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
+		}else{
+			$nbr = count( $permis_feu->data[ 'intervenants' ] );
+			$intervenants_info = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
+		}
+
+		$inter_e = $permis_feu->data[ 'intervenant_exterieur' ];
+		$maitre_e = $permis_feu->data[ 'maitre_oeuvre' ];
+		if( $maitre_e[ 'data' ]->phone == "" ){
+			$maitre_e[ 'data' ]->phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'phone' ];
+		}
+
+		$date_end = "";
+		if( $permis_feu->data[ 'date_end__is_define' ] == "defined" ){
+			$date_end = date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
+		}else{
+			$date_end = esc_html__( 'En cours', 'digirisk' );
+		}
+
+
+		$prevention_args = Permis_Feu_Class::g()->prepare_permis_feu_to_odt_prevention( $prevention );
+		$data_odt = wp_parse_args( $prevention_args, $data_odt );
+
+		$data = array(
+			'id' => $permis_feu->data['id'],
+			'titre_permis_feu' => $permis_feu->data['title'], // 'dateDebutPrevention',
+			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
+			'date_end_intervention_PPP' => $date_end,
+			'intervenants' => array(
+				'type'  => 'segment',
+				'value' => $permis_feu->data[ 'intervenants' ],
+			),
+			'intervenants_info' => $intervenants_info,
+			'interventions' => array(
+				'type'  => 'segment',
+				'value' => $data_interventions,
+			),
+			'intervenants_pre_info' => $intervenants_info,
+			'interventions_pre' => array(
+				'type'  => 'segment',
+				'value' => $data_interventions,
+			),
+			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
+			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
+			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
+			'maitre_oeuvre_signature_id' => $maitre_e[ 'signature_id' ],
+			'maitre_oeuvre_signature_date' => date( 'd/m/Y', strtotime( $maitre_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
+			'maitre_oeuvre_signature' => $this->set_picture( $maitre_e[ 'signature_id' ], 5 ),
+			'intervenant_exterieur_fname' => $inter_e[ 'firstname' ],
+			'intervenant_exterieur_lname' => $inter_e[ 'lastname' ],
+			'intervenant_exterieur_phone' => $inter_e[ 'phone' ],
+			'intervenant_exterieur_signature' => $this->set_picture( $inter_e[ 'signature_id' ], 5 ),
+			'intervenant_exterieur_signature_id' => $inter_e[ 'signature_id' ],
+			'intervenant_exterieur_signature_date' => date( 'd/m/Y', strtotime( $inter_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
+		);
+
+		$data_odt = wp_parse_args( $data, $data_odt );
+		return $data_odt;
+	}
+
+	public function set_picture( $id, $size = 9 ) {
+		$id = intval( $id );
+		$picture = __( 'No picture defined', 'digirisk' );
+
+		if ( ! empty( $id ) ) {
+			$picture_definition = wp_get_attachment_image_src( $id, 'medium' );
+			$picture_path       = str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] );
+
+			if ( is_file( $picture_path ) ) {
+				$picture = array(
+					'type'   => 'picture',
+					'value'  => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+					'option' => array(
+						'size' => $size,
+					),
+				);
+			}
+		}
+
+		return $picture;
 	}
 
 }

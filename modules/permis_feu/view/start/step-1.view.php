@@ -27,6 +27,11 @@ global $eo_search; ?>
 	<h2 style="text-align:center">
 		<?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?> -
 		<i><?php echo esc_attr( $society->data[ 'title' ] ); ?></i>
+		<span class="wpeo-tooltip-event"
+		aria-label="<?php esc_html_e( 'Responsable de la maitrise d\'ouvrage', 'digirisk' ); ?>"
+		style="color : dodgerblue; cursor : pointer">
+			<i class="fas fa-info-circle"></i>
+		</span>
 	</h2>
 	<?php Permis_Feu_Class::g()->display_maitre_oeuvre( $permis_feu ); ?>
 </div>

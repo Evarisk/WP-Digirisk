@@ -21,10 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<h2 style="text-align : center">
 		<?php esc_html_e( 'Informations sur le plan de prévention', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
-		aria-label="<?php esc_html_e( 'Information primaire du plan de prévention', 'task-manager' ); ?>"
+		aria-label="<?php esc_html_e( 'Information primaire du plan de prévention', 'digirisk' ); ?>"
 		style="color : dodgerblue; cursor : pointer">
 			<i class="fas fa-info-circle"></i>
-		</span></h2>
+		</span>
+	</h2>
 	<section class="wpeo-gridlayout padding grid-2">
 		<div class="wpeo-gridlayout padding grid-1">
 			<div class="wpeo-form">
@@ -89,8 +90,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<div class="wpeo-form end-date-element">
-				<input type="hidden" name="date_end__is_define" value="defined">
-				<?php if( $prevention->data[ 'date_end__is_define' ] == "define" ): ?>
+				<input type="hidden" name="date_end__is_define" value="<?php echo esc_attr( $prevention->data[ 'date_end__is_define' ] ); ?>">
+				<?php if( $prevention->data[ 'date_end__is_define' ] == "defined" ): ?>
 					<div class="form-element group-date">
 				<?php else: ?>
 					<div class="form-element group-date form-element-disable">
@@ -100,7 +101,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php esc_html_e( 'Fin d\'intervention', 'digirisk' ); ?>
 						</span>
 						<div class="" style="margin-left: 2%; display: flex;">
-							<?php if( $prevention->data[ 'date_end__is_define' ] == "define" ): ?>
+							<?php if( $prevention->data[ 'date_end__is_define' ] == "defined" ): ?>
 								<div class="wpeo-button button-blue action-button-end-date button-radius-3 button-prevention-title" data-action="defined">
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
@@ -118,16 +119,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					</span>
 
-					<label class="form-field-container">
+					<?php if( $prevention->data[ 'date_end__is_define' ] == "defined" ): ?>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
+							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
+							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
+						</label>
+					<?php else: ?>
+						<label class="form-field-container">
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
 							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
 							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
-					</label>
+						</label>
+					<?php endif; ?>
+
+
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="intervention-table" style="margin-top: 20px">
+	<div class="intervention-table" style="margin-top: 30px">
+		<span style="text-align : center"><h2>
+			<?php esc_html_e( 'Intervention', 'digirisk' ); ?>
+			<span class="wpeo-tooltip-event"
+			aria-label="<?php esc_html_e( 'Listes des interventions associés aux risques', 'digirisk' ); ?>"
+			style="color : dodgerblue; cursor : pointer">
+				<i class="fas fa-info-circle"></i>
+			</span>
+		</h2></span>
 		<?php
 			Prevention_Intervention_Class::g()->display_table( $prevention->data[ 'id' ] );
 		?>

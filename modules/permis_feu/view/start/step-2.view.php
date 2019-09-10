@@ -20,7 +20,14 @@ global $eo_search;
 
 <div class="" style="background-color: #fff; padding: 1em;">
 
-	<h2 style="text-align : center"><?php esc_html_e( 'Informations sur les permis de feu', 'digirisk' ); ?></h2>
+	<h2 style="text-align : center">
+		<?php esc_html_e( 'Informations sur le permis de feu', 'digirisk' ); ?>
+		<span class="wpeo-tooltip-event"
+		aria-label="<?php esc_html_e( 'Information primaire du permis de feu', 'digirisk' ); ?>"
+		style="color : dodgerblue; cursor : pointer">
+			<i class="fas fa-info-circle"></i>
+		</span>
+	</h2>
 	<section class="wpeo-gridlayout padding grid-2">
 		<div class="wpeo-gridlayout padding grid-1">
 			<div class="wpeo-form">
@@ -48,8 +55,8 @@ global $eo_search;
 			</div>
 
 			<div class="wpeo-form end-date-element">
-				<input type="hidden" name="date_end__is_define" value="defined">
-				<?php if( $permis_feu->data[ 'date_end__is_define' ] == "define" ): ?>
+				<input type="hidden" name="date_end__is_define" value="<?php echo esc_attr( $permis_feu->data[ 'date_end__is_define' ] ); ?>">
+				<?php if( $permis_feu->data[ 'date_end__is_define' ] == "defined" ): ?>
 					<div class="form-element group-date">
 				<?php else: ?>
 					<div class="form-element group-date form-element-disable">
@@ -59,7 +66,7 @@ global $eo_search;
 							<?php esc_html_e( 'Fin d\'intervention', 'digirisk' ); ?>
 						</span>
 						<div class="" style="margin-left: 2%; display: flex;">
-							<?php if( $permis_feu->data[ 'date_end__is_define' ] == "define" ): ?>
+							<?php if( $permis_feu->data[ 'date_end__is_define' ] == "defined" ): ?>
 								<div class="wpeo-button button-blue action-button-end-date button-radius-3 button-permis-feu-title" data-action="defined">
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
@@ -77,11 +84,19 @@ global $eo_search;
 						</div>
 					</span>
 
-					<label class="form-field-container">
+					<?php if( $permis_feu->data[ 'date_end__is_define' ] == "defined" ): ?>
+						<label class="form-field-container">
+							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
+							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $permis_feu->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
+							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
+						</label>
+					<?php else: ?>
+						<label class="form-field-container">
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
 							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $permis_feu->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
 							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
-					</label>
+						</label>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -95,7 +110,15 @@ global $eo_search;
 
 
 	<div class="intervention-table" style="margin-top: 30px">
-		<span style="text-align : center"><h2><?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?></h2></span>
+		<span style="text-align : center">
+			<h2><?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?>
+				<span class="wpeo-tooltip-event"
+				aria-label="<?php esc_html_e( 'Listes des interventions associés aux types de travaux', 'digirisk' ); ?>"
+				style="color : dodgerblue; cursor : pointer">
+					<i class="fas fa-info-circle"></i>
+				</span>
+			</h2>
+		</span>
 		<?php
 			Permis_Feu_Intervention_Class::g()->display_intervention_table( $permis_feu->data[ 'id' ] );
 		?>
@@ -111,8 +134,8 @@ global $eo_search;
 	data-action="next_step_permis_feu"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
 	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-	data-parent="digi-permis_feu-parent"
-	aria-label="<?php esc_html_e( 'Définissez un plan de prévention pour continuer', 'digirisk' ); ?>"
+	data-parent="digi-permis-feu-parent"
+	aria-label="<?php esc_html_e( 'Valider', 'digirisk' ); ?>"
 	style="float:right; margin-top: 10px">
 	<span>
 		<?php esc_html_e( 'Valider', 'digirisk' ); ?>

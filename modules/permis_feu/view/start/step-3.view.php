@@ -28,108 +28,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="information-society" style="background-color: #fff; padding: 1em;">
-	<h2 style="text-align:center"><?php esc_html_e( 'Information société extérieur et sur les intervenants', 'digirisk' ); ?></h2>
+	<h2 style="text-align:center">
+		<?php esc_html_e( 'Information société extérieur', 'digirisk' ); ?>
+		<span class="wpeo-tooltip-event"
+		aria-label="<?php esc_html_e( 'Information de la société intervenante', 'digirisk' ); ?>"
+		style="color : dodgerblue; cursor : pointer">
+			<i class="fas fa-info-circle"></i>
+		</span>
+	</h2>
 	<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
 		<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
 			<div class="wpeo-form">
-				<div class="form-element form-element-disable">
+				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
 					<label class="form-field-container">
 						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
-						<?php if( ! empty( $society ) ): ?>
-							<input type="text" class="form-field" value="<?php echo esc_attr( $society->data[ 'title' ] ); ?>">
-						<?php else: ?>
-							<input type="text" class="form-field" value="">
-						<?php endif; ?>
+						<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_name' ] ); ?>">
 					</label>
 				</div>
 			</div>
 
 			<div class="wpeo-form">
-				<?php if( ! empty( $society->data[ 'siret_id' ] ) ): ?>
-					<div class="form-element form-element-disable">
-						<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
-							<?php if( ! empty( $society ) ): ?>
-								<input type="text" class="form-field" value="<?php echo esc_attr( $society->data[ 'siret_id' ] ); ?>">
-							<?php else: ?>
-								<input type="text" class="form-field" value="">
-							<?php endif; ?>
-						</label>
-					</div>
-				<?php else: ?>
-					<div class="form-element">
-						<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
-							<input type="text" name="siret_id" class="form-field" value="">
-						</label>
-					</div>
-				<?php endif; ?>
+				<div class="form-element">
+					<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+					<label class="form-field-container">
+						<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
+						<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_siret' ] ); ?>">
+					</label>
+				</div>
 			</div>
 		</section>
-
-		<section class="wpeo-gridlayout padding grid-3" style="margin-bottom: 10px;">
-			<div class="wpeo-form">
-				<?php if( ! empty( $legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] ) ): ?>
-					<div class="form-element form-element-disable">
-						<span class="form-label"><?php esc_html_e( 'Nom du Responsable', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-							<?php if( ! empty( $society ) ): ?>
-								<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'responsible_for_preventing' ] ); ?>">
-							<?php else: ?>
-								<input type="text" class="form-field" value="">
-							<?php endif; ?>
-						</label>
-					</div>
-				<?php else: ?>
-					<div class="form-element">
-						<span class="form-label"><?php esc_html_e( 'Nom du Responsable', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-							<input type="text" class="form-field" name="responsible_for_preventing_name">
-						</label>
-					</div>
-				<?php endif; ?>
-			</div>
-
-			<div class="wpeo-form">
-				<?php if( ! empty( $legal_display->data[ 'safety_rule' ][ 'phone' ] ) ): ?>
-
-					<div class="form-element form-element-disable">
-						<span class="form-label"><?php esc_html_e( 'Téléphone du Responsable', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-							<?php if( ! empty( $society ) ): ?>
-								<input type="text" class="form-field" value="<?php echo esc_attr( $legal_display->data[ 'safety_rule' ][ 'phone' ] ); ?>">
-							<?php else: ?>
-								<input type="text" class="form-field" value="">
-							<?php endif; ?>
-						</label>
-					</div>
-				<?php else: ?>
-					<div class="form-element">
-						<span class="form-label"><?php esc_html_e( 'Téléphone du Responsable', 'digirisk' ); ?></span>
-						<label class="form-field-container">
-							<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-							<input type="text" class="form-field" name="responsible_for_preventing_phone">
-						</label>
-					</div>
-				<?php endif; ?>
-			</div>
-			<div class="button-save-information-society" style="display : block">
-				<a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $society->data['id'] ); ?>" target="_blank">
-					<div class="wpeo-button button-green wpeo-tooltip-event"  style="float : right" aria-label="<?php esc_html_e( 'Modifier les données', 'digirisk' ); ?>">
-						<?php // esc_html_e( 'Modifier ces informations', 'digirisk' ); ?>
-						<i class="fas fa-external-link-alt"></i>
-					</div>
-				</a>
-			</div>
-		</section>
-
 	</section>
+
+	<div class="information-intervenant-exterieur" style="">
+		<input type="hidden" name="user-type" value="intervenant_exterieur">
+		<h2 style="text-align:center">
+			<?php esc_html_e( 'Responsable des intervenants extérieur', 'digirisk' ); ?>
+			<span class="wpeo-tooltip-event"
+			aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
+			style="color : dodgerblue; cursor : pointer">
+				<i class="fas fa-info-circle"></i>
+			</span>
+		</h2>
+		<?php Permis_feu_Class::g()->display_intervenant_exterieur( array(), $permis_feu->data[ 'id' ] ); ?>
+	</div>
+
+	<h2 style="text-align:center">
+		<?php esc_html_e( 'Informations complémentaires', 'digirisk' ); ?>
+		<span class="wpeo-tooltip-event"
+		aria-label="<?php esc_html_e( 'Ces informations ont été définies dans l\'affichage légal de Digirisk', 'digirisk' ); ?>"
+		style="color : dodgerblue; cursor : pointer">
+			<i class="fas fa-info-circle"></i>
+		</span>
+	</h2>
 	<section class="wpeo-gridlayout padding grid-4 information-element-society" style="margin-bottom: 10px;">
 
 		<div class="wpeo-form">
@@ -188,15 +139,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</section>
-	 <?php // Prevention_Class::g()->display_list_intervenant( $permis_feu->data['id'] ); ?>
 </div>
 
-<!-- <div class="wpeo-button button-blue action-input wpeo-tooltip-event" -->
-	<div class="wpeo-button button-blue wpeo-tooltip-event"
+<?php if( Prevention_Class::g()->intervenant_is_valid( $permis_feu->data[ 'intervenant_exterieur' ] ) ): ?>
+	<div class="wpeo-button button-blue action-input wpeo-tooltip-event go-to-last-step-prevention"
+<?php else: ?>
+	<div class="wpeo-button button-blue button-disable action-input wpeo-tooltip-event go-to-last-step-prevention"
+<?php endif; ?>
+		data-action="next_step_permis_feu"
 		data-parent="digi-permis-feu-parent"
-		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
+		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 		data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 		aria-label="<?php esc_html_e( 'Prochaine étape', 'digirisk' ); ?>"
 		style="float:right; margin-top: 10px">
-		<span>En cours de DEV :)<i class="fas fa-long-arrow-alt-right"></i></span>
+		<span>
+			<?php esc_html_e( 'Continuer', 'digirisk' ); ?>
+			<i class="fas fa-long-arrow-alt-right"></i>
+		</span>
 	</div>

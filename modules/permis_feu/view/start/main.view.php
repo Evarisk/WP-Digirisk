@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="wrap digirisk-wrap permis-feu-wrap wpeo-wrap">
-	<a class="back" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-prevention' ) ); ?>">
+	<a class="back" href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-permis-feu' ) ); ?>">
 		<i class="fas fa-arrow-left"></i>
-		<span><?php esc_html_e( 'Retour à la liste des plans de préventions', 'digirisk' ); ?>
+		<span><?php esc_html_e( 'Retour à la liste des permis de feu', 'digirisk' ); ?>
 	</a>
 
 	<h2 style="font-size: 25px; font-weight: 400">

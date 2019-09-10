@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-
 <div class="wrap wrap-permis-feu digirisk-wrap wpeo-wrap">
 	<span style="display: flex;">
 		<h2 style="font-size: 23px; font-weight: 400;"><?php esc_html_e( 'Permis de Feu', 'digirisk' ); ?></h2>

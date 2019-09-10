@@ -39,6 +39,7 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 	 * @return void
 	 */
 	public function display() {
+		Permis_feu_Class::g()->generate_worktype_if_not_exist();
 		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0; // WPCS: CSRF ok.
 
 		if ( ! empty( $id ) ) {
@@ -62,8 +63,8 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 
 	public function display_dashboard(){
 		$list_permis_feu = Permis_Feu_Class::g()->get( array(
-			'meta_value' => \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_CLOSED,
-			'post_status'     => "publish"
+			'meta_key'   => '_wpdigi_permis_feu_is_end',
+            'meta_value' => \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED,
 		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'dashboard/main', array(
@@ -73,10 +74,19 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 
 	public function display_progress() {
 		$args = array(
-            'meta_key' => '_wpdigi_permis_feu_step',
-            'meta_value' => 5,
-            'meta_compare' => '<'
-        );
+		    'meta_query' => array(
+				'relation' => 'OR',
+        		array(
+		            'key'     => '_wpdigi_permis_feu_is_end',
+		            'compare' => 'NOT EXISTS',
+		        ),
+		        array(
+		            'key'	  => '_wpdigi_permis_feu_is_end',
+		            'value'   => \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IN_PROGRESS,
+		        ),
+		    ),
+		);
+
 		$permis_feu = Permis_Feu_Class::g()->get( $args );
 
 		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'progress/main', array(
@@ -139,9 +149,8 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 				),
 				'meta_query' => array(
 					array(
-						'key' => '_wpdigi_prevention_prevention_step',
-						'compare' => '=',
-						'value' => 5,
+						'key' => '_wpdigi_prevention_prevention_is_end',
+						'value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
 					)
 				)
 			),
@@ -188,6 +197,25 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		// Passes à l'étape suivante.
 		$permis_feu->data['step'] = $nextstep;
 		return permis_feu_Class::g()->update( $permis_feu->data );
+	}
+
+
+	public function save_society_information( $permis_feu, $society, $legal_display ) {
+		$name  = isset( $_POST[ 'outisde_name' ] ) ? sanitize_text_field( $_POST[ 'outisde_name' ] ) : '';
+		$siret = isset( $_POST[ 'outside_siret' ] ) ? sanitize_text_field( $_POST[ 'outside_siret' ] ) : '';
+
+		$permis_feu->data[ 'society_outside_name' ] = $name;
+		$permis_feu->data[ 'society_outside_siret' ] = $siret;
+		$permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT;
+		$permis_feu->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED;
+
+		return Permis_Feu_Class::g()->update( $permis_feu->data );
+	}
+
+	public function step_close_permis_feu( $permis_feu, $society, $legal_display ){
+		$permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_CLOSED;
+
+		return Permis_Feu_Class::g()->update( $permis_feu->data );
 	}
 }
 

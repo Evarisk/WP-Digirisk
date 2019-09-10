@@ -132,15 +132,15 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 	public function update_information_prevention( $prevention, $data = array() ){
 		if( ! isset( $data[ 'title' ] ) || $data[ 'title' ] == '' ){
-			$data[ 'title' ] = esc_html__( 'Aucun titre', 'task-manager' );
+			$data[ 'title' ] = esc_html__( 'Aucun titre', 'digirisk' );
 		}
 
 		if( ! isset( $data[ 'date_start' ] ) || $data[ 'date_start' ] == '' ){
-			$data[ 'date_start' ] = date( 'd-m-Y', strtotime( 'now' ) );
+			$data[ 'date_start' ] = date( 'Y-m-d', strtotime( 'now' ) );
 		}
 
 		if( strtotime( $data[ 'date_start' ] ) > strtotime( $data[ 'date_end' ] ) ){
-			$data[ 'date_end' ] = date( 'd-m-Y', strtotime( $data[ 'date_start' ] ) + 86400 );
+			$data[ 'date_end' ] = date( 'Y-m-d', strtotime( $data[ 'date_start' ] ) + 86400 );
 		}
 
 		if( ! isset( $data[ 'date_end__is_define' ] ) || $data[ 'date_end__is_define' ] == '' ){
@@ -148,8 +148,8 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 
 		$prevention_data = wp_parse_args( $data, $prevention->data );
-		return Prevention_Class::g()->update( $prevention_data );
 
+		return Prevention_Class::g()->update( $prevention_data );
 	}
 
 	public function display_list_intervenant( $id ){
@@ -228,7 +228,13 @@ class Prevention_Class extends \eoxia\Post_Class {
 			$id = $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ];
 			$prevention = $this->get_information_from_user( $id, $prevention, 'maitre_oeuvre' );
 		}
-		// echo '<pre>'; print_r( $prevention->data ); echo '</pre>'; exit;
+
+		if( $prevention->data[ 'step' ] >= \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED ){
+			$prevention->data[ 'is_end' ] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED;
+			$prevention->data[ 'step' ] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_FORMER;
+			Prevention_Class::g()->update( $prevention->data );
+		}
+
 		return $prevention;
 	}
 

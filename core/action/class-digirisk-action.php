@@ -188,8 +188,9 @@ class Digirisk_Action {
 
 	public function callback_before_admin_enqueue_scripts_js_global(){
 		$screen = get_current_screen();
-		wp_enqueue_script( 'digirisk-user-page', PLUGIN_DIGIRISK_URL . 'modules/user/asset/js/user.page.js', array(), \eoxia\Config_Util::$init['task-manager']->version );
-
+		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
+			wp_enqueue_script( 'digirisk-user-page', PLUGIN_DIGIRISK_URL . 'modules/user/asset/js/user.page.js', array(), \eoxia\Config_Util::$init['task-manager']->version );
+		}
 	}
 }
 

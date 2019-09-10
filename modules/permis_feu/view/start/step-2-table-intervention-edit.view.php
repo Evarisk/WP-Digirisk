@@ -76,9 +76,9 @@ global $eo_search;
 			<div class="form-element">
 				<label class="form-field-container">
 					<?php if( isset( $intervention ) ): ?>
-						<input type="text" name="moyen-de-prevention" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'moyen_prevention' ] ); ?>">
+						<input type="text" name="materiel-utilise" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'materiel_utilise' ] ); ?>">
 					<?php else: ?>
-						<input type="text" name="moyen-de-prevention" class="form-field">
+						<input type="text" name="materiel-utilise" class="form-field">
 					<?php endif; ?>
 				</label>
 			</div>

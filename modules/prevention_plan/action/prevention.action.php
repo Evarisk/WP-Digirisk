@@ -379,6 +379,7 @@ class Prevention_Action {
 			'class_parent'     => $user_type == 'maitre_oeuvre' ? 'information-maitre-oeuvre' : 'information-intervenant-exterieur',
 		) );
 	}
+
 	public function callback_generate_document_prevention(){
 		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
 

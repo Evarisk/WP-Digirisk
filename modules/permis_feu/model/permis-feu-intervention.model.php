@@ -54,10 +54,10 @@ class Permis_Feu_Intervention_Model extends \eoxia\Post_Model {
 			'field'     => '_wpdigi_worktype',
 		);
 
-		$this->schema['moyen_prevention'] = array(
+		$this->schema['materiel_utilise'] = array(
 			'type'      => 'string',
 			'meta_type' => 'single',
-			'field'     => '_wpdigi_moyen_prevention',
+			'field'     => '_wpdigi_materiel_utilises',
 		);
 
 		$this->schema['taxonomy'] = array(

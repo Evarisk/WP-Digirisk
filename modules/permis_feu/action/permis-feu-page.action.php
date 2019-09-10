@@ -104,30 +104,36 @@ class Permis_Feu_Page_Action {
 				   'date_end'            => isset( $_POST[ 'end_date' ] ) ? sanitize_text_field( $_POST[ 'end_date' ] ) : '',
 				   'date_end__is_define' => isset( $_POST[ 'date_end__is_define' ] ) ? sanitize_text_field( $_POST[ 'date_end__is_define' ] ) : 'defined'
 			   );
-			   $permis_feu = Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu, $data );
+			   $permis_feu = Permis_Feu_Class::g()->update_information_permis_feu( $permis_feu, $data );
 			   $permis_feu = Permis_Feu_Page_Class::g()->next_step( $permis_feu, $nextstep );
 
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-3', array(
-				   'permis_feu'    => $permis_feu,
+				   'permis_feu'    => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu ),
 				   'society'       => $society,
 				   'legal_display' => $legal_display
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_ENTERPRISE:
-			   $permis_feu = Permis_Feu_Page_Class::g()->save_society_information( $permis_feu, $society, $legal_display );
+		   		$permis_feu = Permis_Feu_Class::g()->save_info_maitre_oeuvre();
+				$permis_feu = Permis_Feu_Page_Class::g()->save_society_information( $permis_feu, $society, $legal_display );
 
+				$text_info = "";
+				if( empty( $permis_feu->data[ 'intervenants' ] ) ){
+					$data_return = Permis_Feu_Class::g()->import_list_intervenant( $permis_feu );
+					$permis_feu = $data_return[ 'permis_feu' ];
+					$text_info = $data_return[ 'text_info' ];
+				}
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-4', array(
 				   'permis_feu' => $permis_feu,
-				   'all_signed' => false
+				   'all_signed' => false,
+				   'text_info'       => $text_info
 			   ) );
-
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT:
-			   $permis_feu = Permis_Feu_Class::g()->save_info_maitre_oeuvre();
 			   Permis_Feu_Page_Class::g()->step_close_permis_feu( $permis_feu, $society, $legal_display );
-			   $url_redirect = admin_url( 'admin.php?page=digirisk-permis_feu' );
+			   $url_redirect = admin_url( 'admin.php?page=digirisk-permis-feu' );
 			   break;
 		   default:
 			   break;

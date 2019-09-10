@@ -27,7 +27,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	 */
 	protected function construct() {}
 
-
 	/**
 	 * Affiches la vue principale de la page "Causerie".
 	 *
@@ -62,8 +61,8 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 
 	public function display_dashboard() {
 		$preventions = Prevention_Class::g()->get( array(
-			'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED,
-			'post_status'     => "publish"
+			'meta_key'   => '_wpdigi_prevention_prevention_is_end',
+            'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
 		) );
 
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'dashboard/main', array(
@@ -73,10 +72,19 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 
 	public function display_progress() {
 		$args = array(
-            'meta_key' => '_wpdigi_prevention_prevention_step',
-            'meta_value' => 5,
-            'meta_compare' => '<'
-        );
+		    'meta_query' => array(
+				'relation' => 'OR',
+        		array(
+		            'key'     => '_wpdigi_prevention_prevention_is_end',
+		            'compare' => 'NOT EXISTS',
+		        ),
+		        array(
+		            'key' => '_wpdigi_prevention_prevention_is_end',
+		            'value'   => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IN_PROGRESS,
+		        ),
+		    ),
+		);
+
 		$preventions = Prevention_Class::g()->get( $args );
 
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'progress/main', array(
@@ -91,6 +99,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $prevention->data['former'] ) && ! empty( $prevention->data['former']['user_id'] ) ) {
 			$user = get_userdata( $prevention->data['former']['user_id'] );
 		}
+		$url = "";
 
 
 		$society = Society_Class::g()->get( array(
@@ -104,17 +113,14 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 			), true );
 		}
 		$this->register_search( $user );
-		if( $prevention->data[ 'step' ] >= \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED ){
-			echo '<pre>'; print_r( 'FINIE' ); echo '</pre>'; exit;
-		}else{
-			$file = "step-" . $prevention->data[ 'step' ];
-			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/' . $file, array(
-				'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
-				'all_signed' => false,
-				'society'       => $society,
-				'legal_display' => $legal_display
-			) );
-		}
+
+		$file = "step-" . $prevention->data[ 'step' ];
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/' . $file, array(
+			'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
+			'all_signed' => false,
+			'society'       => $society,
+			'legal_display' => $legal_display
+		) );
 	}
 
 	public function register_search( $former, $post_values = array() ) {
@@ -176,6 +182,8 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		$prevention->data[ 'society_outside_name' ] = $name;
 		$prevention->data[ 'society_outside_siret' ] = $siret;
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT;
+		$prevention->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED;
+
 		return Prevention_Class::g()->update( $prevention->data );
 	}
 

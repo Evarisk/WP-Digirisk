@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Prenom', 'task-manager' ); ?></div>
  		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Email', 'task-manager' ); ?></div>
  	</div>
-	<?php if( ! empty( $prevention->data[ 'intervenants' ] ) ):
-		foreach( $prevention->data[ 'intervenants' ] as $key => $user ): ?>
+	<?php if( ! empty( $permis_feu->data[ 'intervenants' ] ) ):
+		foreach( $permis_feu->data[ 'intervenants' ] as $key => $user ): ?>
 		<div class="table-row">
 	 		<div class="table-cell">
 	 			<div class="wpeo-form">
@@ -55,9 +55,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 		<div class="table-cell table-end">
 	 			<div class="wpeo-button button-main button-bordered action-attribute"
 	 				data-key="<?php echo esc_attr( $key ); ?>"
-					data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>"
-					data-action="<?php echo esc_attr( 'edit_intervenant_prevention' ); ?>"
-					data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervenant_prevention' ) ); ?>">
+					data-id="<?php echo esc_attr( $permis_feu->data[ 'id' ] ); ?>"
+					data-action="<?php echo esc_attr( 'edit_intervenant_permis_feu' ); ?>"
+					data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervenant_permis_feu' ) ); ?>">
 	 				<i class="fas fa-pen" style="color : white"></i>
 	 			</div>
 	 		</div>
@@ -97,10 +97,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
  		<div class="table-cell table-end">
  			<div class="wpeo-button button-main button-bordered action-input"
-				data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>"
+				data-id="<?php echo esc_attr( $permis_feu->data[ 'id' ] ); ?>"
  				data-parent="table-row"
-				data-action="add_intervenant_to_prevention"
-				data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_prevention' ) ); ?>">
+				data-action="add_intervenant_to_permis_feu"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_permis_feu' ) ); ?>">
  				<i class="fas fa-plus" style="color: white;"></i>
  			</div>
  		</div>

@@ -22,7 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</a>
 
 	<h2 style="font-size: 25px; font-weight: 400">
-		<?php esc_html_e( 'Prevention en cours', 'digirisk' ); ?> (#<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>)
+		<?php if( $prevention->data[ 'is_end' ] ): ?>
+			<?php esc_html_e( 'Plan de Prevention en modification', 'digirisk' ); ?> (#<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>)
+		<?php else: ?>
+			<?php esc_html_e( 'Plan de Prevention en cours', 'digirisk' ); ?> (#<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>)
+	<?php endif; ?>
 	</h2>
 
 	<div class="step" style="margin-top: 20px; margin-bottom: 40px;">

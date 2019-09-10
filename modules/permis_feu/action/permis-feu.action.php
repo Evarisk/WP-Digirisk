@@ -34,6 +34,15 @@ class Permis_Feu_Action {
 
 		add_action( 'wp_ajax_permisfeu_load_tab', array( $this, 'callback_permisfeu_load_tab' ) );
 
+		add_action( 'wp_ajax_add_intervenant_to_permis_feu', array( $this, 'callback_add_intervenant_to_permis_feu' ) );
+		add_action( 'wp_ajax_edit_intervenant_permis_feu', array( $this, 'callback_edit_intervenant_permis_feu' ) );
+
+		add_action( 'wp_ajax_edit_this_permis_feu', array( $this, 'callback_edit_this_permis_feu' ) );
+
+		add_action( 'wp_ajax_generate_document_permis_feu', array( $this, 'callback_generate_document_permis_feu' ) );
+
+		add_action( 'wp_ajax_delete_document_permis_feu', array( $this, 'callback_delete_document_permis_feu' ) );
+
 		// $this->a();
 	}
 
@@ -222,6 +231,116 @@ class Permis_Feu_Action {
 			'module'           => 'permisFeu',
 			'callback_success' => 'preventionLoadTabSuccess',
 			'view'             => ob_get_clean()
+		) );
+	}
+
+	public function callback_add_intervenant_to_permis_feu(){
+		check_ajax_referer( 'add_intervenant_to_permis_feu' );
+
+		$id       = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+		$name     = isset( $_POST[ 'name' ] ) ? sanitize_text_field( $_POST[ 'name' ] ) : '';
+		$lastname = isset( $_POST[ 'lastname' ] ) ? sanitize_text_field( $_POST[ 'lastname' ] ) : '';
+		$mail     = isset( $_POST[ 'mail' ] ) ? sanitize_text_field( $_POST[ 'mail' ] ) : '';
+
+		$key = isset( $_POST[ 'key' ] ) ? (int) $_POST[ 'key' ] : -1;
+
+		if( ! $id || ! $name || ! $lastname || ! $mail ){
+			wp_send_json_error( 'Erreur in request' );
+		}
+
+		$user = array(
+			'name'     => $name,
+			'lastname' => $lastname,
+			'mail'     => $mail
+		);
+
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+		if( ! empty( $permis_feu->data[ 'intervenants' ] ) && $key != -1 && isset( $permis_feu->data[ 'intervenants' ][ $key ] ) ){
+			$permis_feu->data[ 'intervenants' ][ $key ] = $user;
+		}else{
+			$permis_feu->data[ 'intervenants' ][] = $user;
+		}
+
+		$permis_feu = Permis_Feu_Class::g()->update( $permis_feu->data );
+
+		ob_start();
+		Permis_Feu_Class::g()->display_list_intervenant( $id );
+		$view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'addIntervenantToPrevention',
+			'view'             => $view
+		) );
+	}
+
+	public function callback_edit_intervenant_permis_feu(){
+
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+		$key = isset( $_POST[ 'key' ] ) ? (int) $_POST[ 'key' ] : -1;
+
+		if( ! $id || $key == "-1" ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+		if( ! isset( $permis_feu->data[ 'intervenants' ][ $key ] ) ){
+			wp_send_json_error( 'Error in permis feu' );
+		}
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-3-table-users-edit', array(
+			'id'   => $id,
+			'key'  => $key,
+			'user' => $permis_feu->data[ 'intervenants' ][ $key ]
+		) );
+		$view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'editIntervenantPrevention',
+			'view'             => $view
+		) );
+	}
+
+	public function callback_edit_this_permis_feu(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+		$permis_feu->data[ 'step' ] = 1;
+		Permis_Feu_Class::g()->update( $permis_feu->data );
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'editThisPreventionSuccess',
+			'url'              => admin_url( 'admin.php?page=digirisk-permis-feu&id=' . $permis_feu->data['id'] )
+		) );
+	}
+
+	public function callback_generate_document_permis_feu(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+		$response = Permis_Feu_Class::g()->generate_document_odt_prevention( $permis_feu );
+
+		$link = isset( $response[ 'document' ]->data[ 'link' ] ) ? $response[ 'document' ]->data[ 'link' ] : '';
+		$title = isset( $response[ 'document' ]->data[ 'title' ] ) ? $response[ 'document' ]->data[ 'title' ] : '';
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'preventionPlan',
+			'callback_success' => 'generateDocumentPreventionSuccess',
+			'link'             => $link,
+			'filename'         => $title
 		) );
 	}
 }

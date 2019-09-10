@@ -49,8 +49,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		   data-key="<?php echo esc_attr( $key ); ?>"
 		   data-id="<?php echo esc_attr( $id ); ?>"
 		   data-parent="table-row"
-		   data-action="add_intervenant_to_prevention"
-		   data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_prevention' ) ); ?>">
+		   data-action="add_intervenant_to_permis_feu"
+		   data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_permis_feu' ) ); ?>">
 		   <i class="fas fa-save" style="color: white;"></i>
 	   </div>
    </div>

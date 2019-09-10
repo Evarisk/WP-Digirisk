@@ -26,8 +26,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		), true );
 	}
 ?>
-<?php // echo '<pre>'; print_r( $prevention->data[ 'society_outside_name' ] ); echo '</pre>'; ?>
-<?php // echo '<pre>'; print_r( $prevention->data[ 'society_outside_siret' ] ); echo '</pre>'; exit; ?>
 <div class="information-society" style="background-color: #fff; padding: 1em;">
 	<h2 style="text-align:center">
 		<?php esc_html_e( 'Information société extérieur', 'digirisk' ); ?>
@@ -77,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<h2 style="text-align:center">
 		<?php esc_html_e( 'Informations complémentaires', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
-		aria-label="<?php esc_html_e( 'Ces informations ont étaient définis dans l\'affichage légal de Digirisk', 'digirisk' ); ?>"
+		aria-label="<?php esc_html_e( 'Ces informations ont été définies dans l\'affichage légal de Digirisk', 'digirisk' ); ?>"
 		style="color : dodgerblue; cursor : pointer">
 			<i class="fas fa-info-circle"></i>
 		</span>

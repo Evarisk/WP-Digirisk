@@ -54,11 +54,11 @@ global $eo_search;
 			</div>
 		</div>
 	</td>
-	<td class="padding" data-title="Moyen de prévention">
+	<td class="padding" data-title="Matériels utilisés">
 		<div class="wpeo-form">
 			<div class="form-element form-element-disable">
 				<label class="form-field-container">
-					<input type="text" name="description-des-actions" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'moyen_prevention' ] ); ?>">
+					<input type="text" name="materiel-utilise" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'materiel_utilise' ] ); ?>">
 				</label>
 			</div>
 		</div>

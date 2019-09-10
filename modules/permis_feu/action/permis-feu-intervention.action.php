@@ -36,12 +36,12 @@ class Permis_Feu_Intervention_Action {
 		$unite_id      = isset( $_POST[ 'unitedetravail' ] ) ? (int) $_POST[ 'unitedetravail' ] : 0;
 		$worktype_id   = isset( $_POST[ 'worktype_category_id' ] ) ? (int) $_POST[ 'worktype_category_id' ] : 0;
 		$action = isset( $_POST[ 'description-des-actions' ] ) ? sanitize_text_field( $_POST[ 'description-des-actions' ] ) : 0;
-		$moyen_prevention = isset( $_POST[ 'moyen-de-prevention' ] ) ? sanitize_text_field( $_POST[ 'moyen-de-prevention' ] ) : 0;
+		$materiel_utilise = isset( $_POST[ 'materiel-utilise' ] ) ? sanitize_text_field( $_POST[ 'materiel-utilise' ] ) : 0;
 
 		$permis_feu_id = isset( $_POST[ 'parentid' ] ) ? (int) $_POST[ 'parentid' ] : 0;
 		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
 
-		if( ! $unite_id || ! $worktype_id || ! $action || ! $moyen_prevention || ! $permis_feu_id ){
+		if( ! $unite_id || ! $worktype_id || ! $action || ! $materiel_utilise || ! $permis_feu_id ){
 			wp_send_json_error( 'Erreur dans la requete' );
 		}
 
@@ -58,7 +58,7 @@ class Permis_Feu_Intervention_Action {
 			'unite_travail'          => $unite_id,
 			'action_realise'         => $action,
 			'worktype'               => $worktype_id,
-			'moyen_prevention'       => $moyen_prevention
+			'materiel_utilise'       => $materiel_utilise
 		);
 
 		$intervention = Permis_Feu_Intervention_Class::g()->update( $intervention );
