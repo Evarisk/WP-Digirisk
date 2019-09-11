@@ -23,6 +23,7 @@ class Causerie_Intervention_Filter extends Identifier_Filter {
 	public function __construct() {
 		$current_type = Causerie_Class::g()->get_type();
 		add_filter( "eo_model_digi-final-causerie_after_get", array( $this, 'get_full_causerie_intervention' ), 11, 2 );
+		add_filter( 'wp_get_attachment_url', array( $this, 'honor_ssl_for_attachments' ));
 	}
 
 	/**
@@ -45,6 +46,12 @@ class Causerie_Intervention_Filter extends Identifier_Filter {
 		}
 
 		return $object;
+	}
+
+	public function honor_ssl_for_attachments($url) {
+		$http = site_url(FALSE, 'http');
+		$https = site_url(FALSE, 'https');
+		return ( is_ssl() ) ? str_replace($http, $https, $url) : $url;
 	}
 }
 

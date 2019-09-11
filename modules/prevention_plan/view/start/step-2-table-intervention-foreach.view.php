@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<th class="padding" style="width: 15%;"><?php esc_html_e( 'Unité de travail', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
  			<th class="w50 padding"></th> <!--  class="w50 padding" -->
 			<th class="padding"><?php esc_html_e( 'Description des actions', 'digirisk' ); ?></th>
-			<th class="w100 padding" ><?php esc_html_e( 'Risque IRNF', 'digirisk' ); ?></th>
+			<th class="w100 padding" ><?php esc_html_e( 'Risque INRS', 'digirisk' ); ?></th>
  			<th class="padding"><?php esc_html_e( 'Moyens de prévention', 'digirisk' ); ?></th> <!--  class="w50" -->
  			<th class="w50 padding"></th> <!--  class="w150" -->
  		</tr>
