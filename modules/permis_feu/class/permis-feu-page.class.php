@@ -207,14 +207,14 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		$permis_feu->data[ 'society_outside_name' ] = $name;
 		$permis_feu->data[ 'society_outside_siret' ] = $siret;
 		$permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT;
-		$permis_feu->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED;
 
 		return Permis_Feu_Class::g()->update( $permis_feu->data );
 	}
 
 	public function step_close_permis_feu( $permis_feu, $society, $legal_display ){
 		$permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_CLOSED;
-
+		$permis_feu->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED;
+		$permis_feu->data['unique_identifier'] = Permis_feu_Class::g()->get_identifier_permis_feu();
 		return Permis_Feu_Class::g()->update( $permis_feu->data );
 	}
 }

@@ -69,10 +69,16 @@ class Causerie_Action {
 			$causerie->data['associated_document_id']['image'][] = (int) $image_id;
 		}
 
+		echo '<pre>'; print_r( $causerie->data[ 'unique_identifier'] ); echo '</pre>';
+		echo '<pre>'; print_r( '.' ); echo '</pre>';
 		$causerie = Causerie_Class::g()->update( $causerie->data );
+		echo '<pre>'; print_r( '.' ); echo '</pre>';
+		echo '<pre>'; print_r( $causerie->data[ 'unique_identifier'] ); echo '</pre>'; exit;
+
 		$response = Sheet_Causerie_Class::g()->prepare_document( $causerie );
 		Sheet_Causerie_Class::g()->create_document( $response['document']->data['id'] );
 
+		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie->data[ 'id' ] ), true );
 		ob_start();
 		Causerie_Page_Class::g()->display_form();
 		wp_send_json_success( array(

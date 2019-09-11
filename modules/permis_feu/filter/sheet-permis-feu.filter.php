@@ -146,6 +146,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 
 		$data = array(
 			'id' => $permis_feu->data['id'],
+			'unique_identifier' => $permis_feu->data['unique_identifier'],
 			'titre_permis_feu' => $permis_feu->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
 			'date_end_intervention_PPP' => $date_end,

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr class="item" data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>">
 	<td class="w50 padding" style="height: 60px">
-		#<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>
+		<?php echo esc_attr( $prevention->data[ 'unique_identifier' ] ); ?>
 	</td>
 	<td class="padding">
 		<?php echo esc_attr( $prevention->data[ 'title' ] ); ?>
@@ -26,20 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>
 	</td>
 	<td class="w100 padding">
-		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
+		<?php if( $prevention->data[ 'date_end__is_define' ] == "undefined" ): ?>
+			<?php esc_html_e( 'En cours', 'digirisk' ); ?>
+		<?php else: ?>
+			<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
+		<?php endif; ?>
 	</td>
-	<!-- <td class="padding avatar-info-prevention">
-		<div class="avatar tooltip hover wpeo-tooltip-event"
-			aria-label="<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->display_name ); ?>"
-			style="background-color: #<?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
-				<span><?php echo esc_html( $prevention->data[ 'former' ][ 'data' ]->initial ); ?></span>
-		</div>
-		<div class="info-text" style="display : none">
-			<span><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->first_name ); ?></span> -
-			<span><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->last_name ); ?></span>
-			<span>( <i><?php echo esc_attr( $prevention->data[ 'former' ][ 'data' ]->phone ); ?></i> )</span>
-		</div>
-	</td> -->
 	<td class="padding avatar-info-prevention">
 		<?php $name_and_phone = $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
 		<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>

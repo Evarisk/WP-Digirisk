@@ -235,6 +235,17 @@ class Prevention_Class extends \eoxia\Post_Class {
 			Prevention_Class::g()->update( $prevention->data );
 		}
 
+
+		// Go supprimer les 5 prochaines lignes d'ici le 30/09/2019
+		// Avec la fonction -> C'était pour update l'identifier de chaque prévention
+		if( $prevention->data[ 'is_end' ] == \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED ){
+			if( $prevention->data[ 'unique_identifier' ] == '' ){
+				$prevention->data[ 'unique_identifier' ] = $this->find_this_unique_identifier( $prevention->data[ 'id' ] );
+				Prevention_Class::g()->update( $prevention->data );
+			}
+		}
+		// Jusqu'ici - Corentin (Meme function dans permis-feu.class.php)
+
 		return $prevention;
 	}
 
@@ -337,6 +348,42 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}
+
+	public function get_identifier_prevention(){
+		$unique_key = 0;
+		$list_prevention = get_posts( array(
+		  	'post_status'    => array( 'publish', 'inherit', 'any' ),
+		  	'posts_per_page' => -1,
+		  	'post_type'      => $this->get_type(),
+  			'meta_key'   => '_wpdigi_prevention_prevention_is_end',
+            'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
+		) );
+		$nbr_prevention = count( $list_prevention ) + 1;
+		$unique_key = 'PPS_' . $nbr_prevention;
+		return $unique_key;
+	}
+
+	public function find_this_unique_identifier( $id ){ // A SUPPRIMER POUR LE 30/09
+		$list_prevention = get_posts( array(
+			'post_status'    => array( 'publish', 'inherit', 'any' ),
+			'posts_per_page' => -1,
+			'post_type'      => $this->get_type(),
+			'meta_key'   => '_wpdigi_prevention_prevention_is_end',
+			'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
+		) );
+		$i = 0;
+		if( ! empty( $list_prevention ) ){
+			foreach( $list_prevention as $prevention ){
+				if( $prevention->ID == $id ){
+					$nbr = count( $list_prevention ) - $i;
+					return 'PPS_' . $nbr;
+				}else{
+					$i ++;
+				}
+			}
+		}
+		return 'PPS_?';
+	}  // A SUPPRIMER
 }
 
 Prevention_Class::g();

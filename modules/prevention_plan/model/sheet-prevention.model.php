@@ -42,6 +42,10 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'integer',
 		); // OK
 
+		$this->schema['document_meta']['child']['unique_identifier'] = array(
+			'type' => 'string',
+		); // OK
+
 		$this->schema['document_meta']['child']['pompier_number'] = array(
 			'type' => 'string',
 		); // OK

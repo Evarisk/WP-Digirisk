@@ -129,7 +129,9 @@ class Prevention_Page_Action {
 
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT:
-				Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
+				if( ! $prevention->data[ 'is_end' ] ){
+					Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
+				}
 				$url_redirect = admin_url( 'admin.php?page=digirisk-prevention' );
 				break;
 			default:

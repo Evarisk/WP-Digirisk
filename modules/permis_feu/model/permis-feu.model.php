@@ -36,6 +36,13 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 			'default' => 1,
 		);
 
+		$this->schema['unique_identifier'] = array(
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'field'     => '_wpdigi_unique_identifier_permis_feu',
+			'default'   => '',
+		);
+
 		$this->schema['is_end'] = array(
 			'type'      => 'integer',
 			'meta_type' => 'single',

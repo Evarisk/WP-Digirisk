@@ -48,6 +48,7 @@ class Prevention_Action {
 		add_action( 'wp_ajax_delete_document_prevention', array( $this, 'callback_delete_document_prevention' ) );
 
 		add_action( 'wp_ajax_edit_this_prevention', array( $this, 'callback_edit_this_prevention' ) );
+
 	}
 
 	public function callback_prevention_save_former(){

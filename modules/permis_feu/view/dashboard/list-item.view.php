@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <tr class="item" data-id="<?php echo esc_attr( $permis_feu->data[ 'id' ] ); ?>">
 	<td class="w50 padding" style="height: 60px">
-		#<?php echo esc_attr( $permis_feu->data[ 'id' ] ); ?>
+		<?php echo esc_attr( $permis_feu->data[ 'unique_identifier' ] ); ?>
 	</td>
 	<td class="padding">
 		<?php echo esc_attr( $permis_feu->data[ 'title' ] ); ?>
@@ -26,7 +26,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'raw' ] ) ) ); ?>
 	</td>
 	<td class="w100 padding">
-		<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
+		<?php if( $permis_feu->data[ 'date_end__is_define' ] == "undefined" ): ?>
+			<?php esc_html_e( 'En cours', 'digirisk' ); ?>
+		<?php else: ?>
+			<?php echo esc_attr( date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
+		<?php endif; ?>
 	</td>
 	<td class="padding avatar-info-prevention">
 		<?php $name_and_phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
