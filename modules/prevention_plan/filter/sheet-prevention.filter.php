@@ -158,7 +158,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data = array(
 			'id' => $prevention->data['id'],
 			'unique_identifier' => $prevention->data['unique_identifier'],
-			'society_title' => $prevention->data['society_outside_name'],
+			'society_title'    => $prevention->data['society_outside_name'],
 			'society_siret_id' => $prevention->data['society_outside_siret'],
 			'titre_prevention' => $prevention->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),

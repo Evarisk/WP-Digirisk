@@ -96,8 +96,8 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
 
 			$data_society = array(
-				'society_title'    => $args[ 'society' ]->data[ 'title' ],
-				'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
+				// 'society_title'    => $args[ 'society' ]->data[ 'title' ],
+				// 'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
 				'moyen_generaux_mis_disposition' => $moyen_generaux,
 				'consigne_generale'              => $consigne_generale
 			);
@@ -147,6 +147,8 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 		$data = array(
 			'id' => $permis_feu->data['id'],
 			'unique_identifier' => $permis_feu->data['unique_identifier'],
+			'society_title'    => $permis_feu->data['society_outside_name'],
+			'society_siret_id' => $permis_feu->data['society_outside_siret'],
 			'titre_permis_feu' => $permis_feu->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
 			'date_end_intervention_PPP' => $date_end,
