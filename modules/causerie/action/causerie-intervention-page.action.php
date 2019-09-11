@@ -102,11 +102,10 @@ class Causerie_Intervention_Page_Action {
 					'all_signed'     => false,
 				) );
 				break;
-			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:
+			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED:
 
 				// Cette étape n'est pas une requête ajax, mais un admin_post.
 				Causerie_Intervention_Page_Class::g()->step_participants( $causerie );
-
 				wp_redirect( admin_url( 'admin.php?page=digirisk-causerie' ) );
 				break;
 			default:
