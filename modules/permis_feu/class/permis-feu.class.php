@@ -268,9 +268,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		);
 
 		$response = Sheet_Permis_Feu_Class::g()->prepare_document( $permis_feu, $data );
-		echo '<pre>'; print_r( $response['document']->data['id'] ); echo '</pre>';
 		$response = Sheet_Permis_Feu_Class::g()->create_document( $response['document']->data['id'] );
-		echo '<pre>'; print_r( $response ); echo '</pre>';
 		return $response;
 	}
 
@@ -345,8 +343,8 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 					'key_unique'    => $intervention->data[ 'key_unique' ],
 					'unite_travail' => Prevention_Intervention_Class::g()->return_name_workunit( $intervention->data[ 'unite_travail' ] ),
 					'action'        => $intervention->data[ 'action_realise' ],
-					'risk'          => $worktype->data[ 'name' ],
-					'prevention'    => $intervention->data[ 'materiel_utilise' ]
+					'type_de_travaux' => $worktype->data[ 'name' ],
+					'materiel'    => $intervention->data[ 'materiel_utilise' ]
 				);
 				$data_interventions[] = $data_temp;
 			}

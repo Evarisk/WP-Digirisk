@@ -110,33 +110,10 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			);
 		}
 
-		$data_interventions = array();
-		$interventions_info = "";
+		$return = Prevention_Class::g()->prepare_prevention_to_odt_intervention( $prevention );
 
-		if( ! empty( $prevention->data[ 'intervention' ] ) ){
-			foreach( $prevention->data[ 'intervention' ] as $intervention ){
-				$risk = Risk_Category_Class::g()->get( array( 'id' => $intervention->data[ 'risk' ] ), true );
-				$data_temp = array(
-					'key_unique'    => $intervention->data[ 'key_unique' ],
-					'unite_travail' => Prevention_Intervention_Class::g()->return_name_workunit( $intervention->data[ 'unite_travail' ] ),
-					'action'        => $intervention->data[ 'action_realise' ],
-					'risk'          => $risk->data[ 'name' ],
-					'prevention'    => $intervention->data[ 'moyen_prevention' ]
-				);
-				$data_interventions[] = $data_temp;
-			}
-			$nbr = count( $prevention->data[ 'intervention' ] );
-			$interventions_info = esc_html__( sprintf( 'Il y a %1$d intervention(s)', $nbr ), 'digirisk' );
-		}else{
-			$data_interventions[0] = array(
-				'key_unique' => '',
-				'unite_travail' => '',
-				'action' => '',
-				'risk' => '',
-				'prevention' => ''
-			);
-			$interventions_info = esc_html__( 'Aucune intervention définie' );
-		}
+		$data_interventions = $return[ 'data' ];
+		$interventions_info = $return[ 'text' ];
 
 		$intervenants_info = "";
 		if( empty( $prevention->data[ 'intervenants' ] ) ){

@@ -77,6 +77,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	public function callback_digi_document_data( $data, $args ) {
 		$permis_feu = Permis_Feu_Class::g()->add_information_to_permis_feu( $args['parent'] );
 		$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
+		$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
 
 		$data_odt = array();
 
@@ -107,6 +108,11 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 
 		$data_interventions = $return[ 'data' ];
 		$interventions_info = $return[ 'text' ];
+
+		$return_pre = Prevention_Class::g()->prepare_prevention_to_odt_intervention( $prevention );
+
+		$data_interventions_pre = $return_pre[ 'data' ];
+		$interventions_info_pre = $return_pre[ 'text' ];
 
 		$intervenants_info = "";
 		if( empty( $permis_feu->data[ 'intervenants' ] ) ){
@@ -152,10 +158,10 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 				'type'  => 'segment',
 				'value' => $data_interventions,
 			),
-			'intervenants_pre_info' => $intervenants_info,
+			'intervenants_pre_info' => $interventions_info_pre,
 			'interventions_pre' => array(
 				'type'  => 'segment',
-				'value' => $data_interventions,
+				'value' => $data_interventions_pre,
 			),
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,

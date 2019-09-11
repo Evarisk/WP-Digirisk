@@ -51,6 +51,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i>(<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'phone' ] ); ?>)</i>
 	</td>
 	<td class="padding">
+		<?php if( isset( $permis_feu->data[ 'prevention_data' ] ) && ! empty( $permis_feu->data[ 'prevention_data' ] ) ): ?>
+			<?php echo esc_attr( $permis_feu->data[ 'prevention_data' ][ 'title' ] ); ?>
+		<?php else: ?>
+			<?php esc_html_e( 'Aucun', 'digirisk' ); ?>
+		<?php endif; ?>
+	</td>
+	<td class="padding">
 		<?php echo esc_attr( count( $permis_feu->data[ 'intervenants' ] ) ); ?> <?php esc_html_e( 'intervenant(s)', 'digirisk' ); ?>
 	</td>
 	<td class="padding">

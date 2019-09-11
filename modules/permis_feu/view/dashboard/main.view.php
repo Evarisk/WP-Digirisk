@@ -28,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- <td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td> -->
 				<td class="w50 padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'P de prévention', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></td>
 				<td class="w50"></td>

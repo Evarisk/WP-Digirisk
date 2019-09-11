@@ -90,6 +90,18 @@ class Sheet_Permis_Feu_Model extends Document_Model {
 			'type' => 'string',
 		); // OK
 
+		$this->schema['document_meta']['child']['interventions_pre'] = array(
+			'type' => 'array',
+		); // OK
+
+		$this->schema['document_meta']['child']['interventions_pre_info'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['titre_permis_feu'] = array(
+			'type' => 'string',
+		); // OK
+
 		$this->schema['document_meta']['child']['titre_plan_prevention'] = array(
 			'type' => 'string',
 		); // OK

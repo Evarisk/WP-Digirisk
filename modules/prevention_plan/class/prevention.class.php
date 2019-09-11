@@ -297,12 +297,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 		if( ! empty( $user_info ) ){
 			$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] =  intval( $user_info->data->ID );
-			// $prevention->data[ 'maitre_oeuvre' ][ 'firstname' ] = $user_info->first_name;
-			// $prevention->data[ 'maitre_oeuvre' ][ 'lastname' ] = $user_info->last_name;
-
-			/*$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user_id );
-			$phone_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
-			$prevention->data[ 'maitre_oeuvre' ][ 'phone' ] = $phone_number;*/
 		}
 		return Prevention_Class::g()->update( $prevention->data );
 	}
@@ -312,6 +306,36 @@ class Prevention_Class extends \eoxia\Post_Class {
 			return true;
 		}
 		return false;
+	}
+
+	public function prepare_prevention_to_odt_intervention( $prevention ){
+		$data_interventions = array();
+		$interventions_info = "";
+		if( ! empty( $prevention->data[ 'intervention' ] ) ){
+			foreach( $prevention->data[ 'intervention' ] as $intervention ){
+				$risk = Risk_Category_Class::g()->get( array( 'id' => $intervention->data[ 'risk' ] ), true );
+				$data_temp = array(
+					'key_unique'    => $intervention->data[ 'key_unique' ],
+					'unite_travail' => Prevention_Intervention_Class::g()->return_name_workunit( $intervention->data[ 'unite_travail' ] ),
+					'action'        => $intervention->data[ 'action_realise' ],
+					'risk'          => $risk->data[ 'name' ],
+					'prevention'    => $intervention->data[ 'moyen_prevention' ]
+				);
+				$data_interventions[] = $data_temp;
+			}
+			$nbr = count( $prevention->data[ 'intervention' ] );
+			$interventions_info = esc_html__( sprintf( 'Il y a %1$d intervention(s)', $nbr ), 'digirisk' );
+		}else{
+			$data_interventions[0] = array(
+				'key_unique' => '',
+				'unite_travail' => '',
+				'action' => '',
+				'risk' => '',
+				'prevention' => ''
+			);
+			$interventions_info = esc_html__( 'Aucune intervention définie' );
+		}
+		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}
 }
 
