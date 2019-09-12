@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a class="nav-tab <?php echo ( 'digi-capability' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-capability" ><?php esc_html_e( 'Capacités', 'digirisk' ); ?></a>
 			<a class="nav-tab <?php echo ( 'digi-accronym' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-accronym" ><?php esc_html_e( 'Accronymes', 'digirisk' ); ?></a>
 			<a class="nav-tab <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-danger-preset" ><?php esc_html_e( 'Danger preset', 'digirisk' ); ?></a>
+			<a class="nav-tab <?php echo ( 'digi-define-prefix' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-define-prefix" ><?php esc_html_e( 'Prefix ODT', 'digirisk' ); ?></a>
 		</h2>
 
 		<div class="digirisk-wrap">
@@ -59,6 +60,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/main', array(
 						'dangers_preset' => $dangers_preset,
+					) );
+					?>
+			</div>
+
+			<div id="digi-define-prefix" class="tab-content <?php echo ( 'digi-define-prefix' === $default_tab ) ? '' : 'hidden'; ?>">
+					<?php
+					\eoxia\View_Util::exec( 'digirisk', 'setting', 'prefix/main', array(
+						'prefix' => $prefix,
 					) );
 					?>
 			</div>

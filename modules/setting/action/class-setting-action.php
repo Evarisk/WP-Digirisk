@@ -34,6 +34,8 @@ class Setting_Action {
 		add_action( 'wp_ajax_paginate_setting_page_user', array( $this, 'callback_paginate_setting_page_user' ) );
 
 		add_action( 'wp_ajax_save_general_settings_digirisk', array( $this, 'ajax_save_general_settings_digirisk' ) );
+
+		add_action( 'wp_ajax_save_prefix_settings_digirisk', array( $this, 'callback_save_prefix_settings_digirisk' ) );
 	}
 
 	/**
@@ -99,6 +101,8 @@ class Setting_Action {
 		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
 		$sites                      = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
 
+		$prefix = Setting_Class::g()->get_all_prefix();
+
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
 			'dangers_preset'             => $dangers_preset,
@@ -109,6 +113,7 @@ class Setting_Action {
 			'unique_security_id'         => $unique_security_id,
 			'sites'                      => $sites,
 			'general_options'            => $general_options,
+			'prefix'                     => $prefix
 		) );
 	}
 
@@ -234,6 +239,26 @@ class Setting_Action {
 			'module'           => 'setting',
 			'callback_success' => 'generalSettingsSaved',
 			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+		) );
+	}
+
+	public function callback_save_prefix_settings_digirisk(){
+		check_ajax_referer( 'save_prefix_settings_digirisk' );
+		$prefix_causerie              = isset( $_POST[ 'causerie' ] ) ? sanitize_text_field( $_POST[ 'causerie' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE;
+		$prefix_causerie_intervention = isset( $_POST[ 'causerie_intervention' ] ) ? sanitize_text_field( $_POST[ 'causerie_intervention' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE;
+		$prefix_plan_prevention       = isset( $_POST[ 'plan_prevention' ] ) ? sanitize_text_field( $_POST[ 'plan_prevention' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PLAN_PREVENTION;
+		$prefix_permis_feu            = isset( $_POST[ 'permis_feu' ] ) ? sanitize_text_field( $_POST[ 'permis_feu' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PERMIS_FEU;
+
+		update_option( 'edit_prefix_causerie', $prefix_causerie );
+		update_option( 'edit_prefix_causerie_intervention', $prefix_causerie_intervention );
+		update_option( 'edit_prefix_plan_prevention', $prefix_plan_prevention );
+		update_option( 'edit_prefix_permis_feu', $prefix_permis_feu );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'savePrefixSettingsDigiriskSuccess',
+			'text_info'        => esc_html__( 'Sauvegardé avec succés !', 'digirisk' )
 		) );
 	}
 }

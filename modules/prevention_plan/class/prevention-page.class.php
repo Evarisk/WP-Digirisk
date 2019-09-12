@@ -190,7 +190,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	public function step_close_prevention( $prevention, $society, $legal_display ){
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED;
 		$prevention->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED;
-		$prevention->data['unique_identifier'] = Prevention_Class::g()->get_identifier_prevention();
+		$prevention->data['unique_identifier_int'] = Prevention_Class::g()->get_identifier_prevention();
 		return Prevention_Class::g()->update( $prevention->data );
 	}
 

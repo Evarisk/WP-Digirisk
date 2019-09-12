@@ -16,7 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Dernièrs plan de préventions réalisés', 'digirisk' ); ?></h2>
+	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px; float: left;"><?php esc_html_e( 'Dernièrs plan de préventions réalisés', 'digirisk' ); ?></h2>
+	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-setting&tab=digi-define-prefix' ) ); ?>"
+		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Modifier la référence des plans de préventions', 'digirisk' ); ?>" >
+		<div class="wpeo-button button-main" style="float: right;">
+			<span><i class="icon fa fa-cog"></i></span>
+		</div>
+	</a>
 
 	<table class="table closed-prevention">
 		<thead>

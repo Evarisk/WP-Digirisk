@@ -53,6 +53,7 @@ class Causerie_Intervention_Page_Action {
 		}
 
 		$causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 
 		if ( empty( $causerie ) ) {
 			wp_send_json_error();
@@ -68,6 +69,8 @@ class Causerie_Intervention_Page_Action {
 				}
 
 				$causerie = Causerie_Intervention_Page_Class::g()->step_former( $causerie, $former_id );
+				$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
+
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-2', array(
 					'final_causerie' => $causerie,
@@ -76,6 +79,7 @@ class Causerie_Intervention_Page_Action {
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PRESENTATION:
 				$nextstep = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_TASK;
 				$causerie = Causerie_Intervention_Page_Class::g()->step_slider( $causerie, $nextstep );
+				$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 
 				if( class_exists( 'task_manager\Task_Class' ) ){
 					$task = \task_manager\Task_Class::g()->get( array( 'post_parent' => $id ), true );
@@ -95,6 +99,7 @@ class Causerie_Intervention_Page_Action {
 			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_TASK: // ------
 				$nextstep = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT;
 				$causerie = Causerie_Intervention_Page_Class::g()->step_slider( $causerie, $nextstep );
+				$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 
 				ob_start();
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4', array(
@@ -102,13 +107,13 @@ class Causerie_Intervention_Page_Action {
 					'all_signed'     => false,
 				) );
 				break;
-			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED:
-
+			case \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_PARTICIPANT:
 				// Cette étape n'est pas une requête ajax, mais un admin_post.
 				Causerie_Intervention_Page_Class::g()->step_participants( $causerie );
 				wp_redirect( admin_url( 'admin.php?page=digirisk-causerie' ) );
 				break;
 			default:
+				wp_redirect( admin_url( 'admin.php?page=digirisk-causerie' ) );
 				break;
 		}
 

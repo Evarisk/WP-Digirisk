@@ -239,11 +239,14 @@ class Prevention_Class extends \eoxia\Post_Class {
 		// Go supprimer les 5 prochaines lignes d'ici le 30/09/2019
 		// Avec la fonction -> C'était pour update l'identifier de chaque prévention
 		if( $prevention->data[ 'is_end' ] == \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED ){
-			if( $prevention->data[ 'unique_identifier' ] == '' ){
-				$prevention->data[ 'unique_identifier' ] = $this->find_this_unique_identifier( $prevention->data[ 'id' ] );
+			if( $prevention->data[ 'unique_identifier_int' ] == 0 ){
+				$prevention->data[ 'unique_identifier_int' ] = $this->find_this_unique_identifier( $prevention->data[ 'id' ], false );
 				Prevention_Class::g()->update( $prevention->data );
 			}
+
+			$prevention->data[ 'unique_identifier' ] = Setting_Class::g()->get_prefix_prevention_plan() . $prevention->data[ 'unique_identifier_int' ];
 		}
+
 		// Jusqu'ici - Corentin (Meme function dans permis-feu.class.php)
 
 		return $prevention;
@@ -349,7 +352,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}
 
-	public function get_identifier_prevention(){
+	public function get_identifier_prevention( $with_prefix = false ){
 		$unique_key = 0;
 		$list_prevention = get_posts( array(
 		  	'post_status'    => array( 'publish', 'inherit', 'any' ),
@@ -359,11 +362,16 @@ class Prevention_Class extends \eoxia\Post_Class {
             'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
 		) );
 		$nbr_prevention = count( $list_prevention ) + 1;
-		$unique_key = 'PPS_' . $nbr_prevention;
+		if( $with_prefix ){
+			$prefix_prevention_plan = Setting_Class::g()->get_prefix_prevention_plan();
+			$unique_key = $prefix_prevention_plan . $nbr_prevention;
+		}else{
+			$unique_key = $nbr_prevention;
+		}
 		return $unique_key;
 	}
 
-	public function find_this_unique_identifier( $id ){ // A SUPPRIMER POUR LE 30/09
+	public function find_this_unique_identifier( $id, $with_prefix = false ){ // A SUPPRIMER POUR LE 30/09
 		$list_prevention = get_posts( array(
 			'post_status'    => array( 'publish', 'inherit', 'any' ),
 			'posts_per_page' => -1,
@@ -375,14 +383,28 @@ class Prevention_Class extends \eoxia\Post_Class {
 		if( ! empty( $list_prevention ) ){
 			foreach( $list_prevention as $prevention ){
 				if( $prevention->ID == $id ){
-					$nbr = count( $list_prevention ) - $i;
-					return 'PPS_' . $nbr;
+					$nbr_prevention = count( $list_prevention ) - $i;
+					if( $with_prefix ){
+						$prefix_prevention_plan = Setting_Class::g()->get_prefix_prevention_plan();
+						$unique_key = $prefix_prevention_plan . $nbr_prevention;
+					}else{
+						$unique_key = $nbr_prevention;
+					}
+					return $unique_key;
 				}else{
 					$i ++;
 				}
 			}
 		}
-		return 'PPS_?';
+
+		$nbr_prevention = 0;
+		if( $with_prefix ){
+			$prefix_prevention_plan = Setting_Class::g()->get_prefix_prevention_plan();
+			$unique_key = $prefix_prevention_plan . $nbr_prevention;
+		}else{
+			$unique_key = $nbr_prevention;
+		}
+		return $unique_key;
 	}  // A SUPPRIMER
 }
 

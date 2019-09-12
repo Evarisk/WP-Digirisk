@@ -28,6 +28,7 @@ class Causerie_Filter extends Identifier_Filter {
 		add_filter( "eo_model_digi-causerie_after_put", array( $this, 'get_full_causerie' ), 10, 2 );
 		add_filter( "eo_model_digi-final-causerie_after_get", array( $this, 'get_full_causerie' ), 10, 2 );
 		add_filter( "eo_model_digi-final-causerie_after_put", array( $this, 'get_full_causerie' ), 10, 2 );
+		add_filter( "digi_add_custom_key_to_causerie", array( $this, 'add_custom_key_to_causerie' ), 10, 2 );
 	}
 
 	/**
@@ -86,6 +87,20 @@ class Causerie_Filter extends Identifier_Filter {
 		}
 
 		return $object;
+	}
+
+	public function add_custom_key_to_causerie( $causerie ){
+		if( isset( $causerie->data[ 'unique_identifier' ] ) ){
+			$prefix = Setting_Class::g()->get_prefix_causerie();
+			$causerie->data[ 'unique_identifier' ] = $prefix . $causerie->data[ 'unique_key' ];
+		}
+
+		if( isset( $causerie->data[ 'second_identifier' ] ) ){
+			$prefix = Setting_Class::g()->get_prefix_causerie_intervention();
+			$causerie->data[ 'second_identifier' ] = $prefix . $causerie->data[ 'second_unique_key' ];
+		}
+
+		return $causerie;
 	}
 }
 

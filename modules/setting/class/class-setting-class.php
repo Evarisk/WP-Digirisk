@@ -172,6 +172,60 @@ class Setting_Class extends \eoxia\Singleton_Util {
 			'current_page'         => $current_page,
 		) );
 	}
+
+	public function get_all_prefix(){
+		$prefix = array();
+
+		$prefix[] = array( // Causerie
+			'value'   => $this->get_prefix_causerie(),
+			'element' => 'causerie',
+			'title'   => esc_html__( 'Causerie', 'digirisk' ),
+			'page'    => admin_url( 'admin.php?page=digirisk-causerie&tab=form' )
+		);
+
+		$prefix[] = array( // Causerie intervention
+			'value'   => $this->get_prefix_causerie_intervention(),
+			'element' => 'causerie_intervention',
+			'title'   => esc_html__( 'Causerie Intervention', 'digirisk' ),
+			'page'    => admin_url( 'admin.php?page=digirisk-causerie' )
+		);
+
+		$prefix[] = $plan_prevention = array( // Plan de prévention
+			'value'   => $this->get_prefix_prevention_plan(),
+			'element' => 'plan_prevention',
+			'title'   => esc_html__( 'Plan de Prévention', 'digirisk' ),
+			'page'    => admin_url( 'admin.php?page=digirisk-prevention' )
+		);
+
+		$prefix[] = array( // Permis de feu
+			'value'   => $this->get_prefix_permis_feu(),
+			'element' => 'permis_feu',
+			'title'   => esc_html__( 'Permis de Feu', 'digirisk' ),
+			'page'    => admin_url( 'admin.php?page=digirisk-permis-feu' )
+		);
+
+		return $prefix;
+	}
+
+	public function get_prefix_causerie(){
+		$default_prefix_causerie = \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE;
+		return get_option( 'edit_prefix_causerie', $default_prefix_causerie );
+	}
+
+	public function get_prefix_causerie_intervention(){
+		$default_prefix_causerie = \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE_INTERVENTION;
+		return get_option( 'edit_prefix_causerie_intervention', $default_prefix_causerie );
+	}
+
+	public function get_prefix_prevention_plan(){
+		$default_prefix_plan_prevention = \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PLAN_PREVENTION;
+		return get_option( 'edit_prefix_plan_prevention', $default_prefix_plan_prevention );
+	}
+
+	public function get_prefix_permis_feu(){
+		$default_prefix_permis_feu = \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PERMIS_FEU;
+		return get_option( 'edit_prefix_permis_feu', $default_prefix_permis_feu );
+	}
 }
 
 Setting_Class::g();

@@ -47,8 +47,10 @@ class Sheet_Causerie_Intervention_Filter extends Identifier_Filter {
 	public function before_save_doc( $data, $args ) {
 		$upload_dir = wp_upload_dir();
 
+		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $data['parent'] );
+
 		$data['title']  = current_time( 'Ymd' ) . '_';
-		$data['title'] .= '_fiche_causerie_intervention_' . $data['parent']->data['unique_identifier'] . '_' . $data['parent']->data['second_identifier'];
+		$data['title'] .= '_fiche_causerie_intervention_' . $causerie->data['unique_identifier'] . '_' . $causerie->data['second_identifier'];
 		$data['title']  = str_replace( '-', '_', $data['title'] );
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';

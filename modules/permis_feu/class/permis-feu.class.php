@@ -86,11 +86,13 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 
 		// Go supprimer les 5 prochaines lignes d'ici le 30/09/2019
 		// Avec la fonction -> C'était pour update l'identifier de chaque prévention
-		if( $permis_feu->data[ 'is_end' ] == \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED ){
-			if( $permis_feu->data[ 'unique_identifier' ] == '' ){
-				$permis_feu->data[ 'unique_identifier' ] = $this->find_this_unique_identifier( $permis_feu->data[ 'id' ] );
+		if( $permis_feu->data[ 'is_end' ] == \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED ){
+			if( $permis_feu->data[ 'unique_identifier_int' ] == 0 ){
+				$permis_feu->data[ 'unique_identifier_int' ] = $this->find_this_unique_identifier( $permis_feu->data[ 'id' ], false );
 				Permis_Feu_Class::g()->update( $permis_feu->data );
 			}
+
+			$permis_feu->data[ 'unique_identifier' ] = Setting_Class::g()->get_prefix_permis_feu() . $permis_feu->data[ 'unique_identifier_int' ];
 		}
 		// Jusqu'ici - Corentin (Meme function dans prevention.class.php)
 
@@ -374,7 +376,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}
 
-	public function get_identifier_permis_feu(){
+	public function get_identifier_permis_feu( $with_prefix = false ){
 		$unique_key = 0;
 		$list_permis_feu = get_posts( array(
 			'post_status'    => array( 'publish', 'inherit', 'any' ),
@@ -384,11 +386,16 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 			'meta_value' => \eoxia\Config_Util::$init['digirisk']->permis_feu->status->PERMIS_FEU_IS_ENDED,
 		) );
 		$nbr_permis_feu = count( $list_permis_feu ) + 1;
-		$unique_key = 'PF_' . $nbr_permis_feu;
+		if( $with_prefix ){
+			$prefix_permis_feu = Setting_Class::g()->get_prefix_permis_feu();
+			$unique_key = $prefix_permis_feu . $nbr_permis_feu;
+		}else{
+			$unique_key = $nbr_permis_feu;
+		}
 		return $unique_key;
 	}
 
-	public function find_this_unique_identifier( $id ){ // A SUPPRIMER POUR LE 30/09
+	public function find_this_unique_identifier( $id, $with_prefix = false  ){ // A SUPPRIMER POUR LE 30/09
 		$list_permis_feu = get_posts( array(
 			'post_status'    => array( 'publish', 'inherit', 'any' ),
 			'posts_per_page' => -1,
@@ -400,14 +407,28 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		if( ! empty( $list_permis_feu ) ){
 			foreach( $list_permis_feu as $permis_feu ){
 				if( $permis_feu->ID == $id ){
-					$nbr = count( $list_permis_feu ) - $i;
-					return 'PF_' . $nbr;
+					$nbr_permis_feu = count( $list_permis_feu ) - $i;
+					if( $with_prefix ){
+						$prefix_permis_feu = Setting_Class::g()->get_prefix_permis_feu();
+						$unique_key = $prefix_permis_feu . $nbr_permis_feu;
+					}else{
+						$unique_key = $nbr_permis_feu;
+					}
+					return $unique_key;
 				}else{
 					$i ++;
 				}
 			}
 		}
-		return 'PF_';
+
+		$nbr_permis_feu = 0;
+		if( $with_prefix ){
+			$prefix_permis_feu = Setting_Class::g()->get_prefix_permis_feu();
+			$unique_key = $prefix_permis_feu . $nbr_permis_feu;
+		}else{
+			$unique_key = $nbr_permis_feu;
+		}
+		return $unique_key;
 	}  // A SUPPRIMER
 }
 

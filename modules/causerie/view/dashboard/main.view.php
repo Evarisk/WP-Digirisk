@@ -16,7 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2><?php esc_html_e( 'Dernières causeries réalisées', 'digirisk' ); ?></h2>
+	<h2 style="float: left"><?php esc_html_e( 'Dernières causeries réalisées', 'digirisk' ); ?></h2>
+	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-setting&tab=digi-define-prefix' ) ); ?>"
+		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Modifier la référence des permis de feu', 'digirisk' ); ?>" >
+		<div class="wpeo-button button-main" style="float: right;">
+			<span><i class="icon fa fa-cog"></i></span>
+		</div>
+	</a>
 
 	<table class="table closed-causerie">
 		<thead>
@@ -35,6 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $causeries_intervention ) ) :
 			foreach ( $causeries_intervention as $causerie ) :
+				$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'dashboard/list-item', array(
 					'causerie' => $causerie,
 				) );

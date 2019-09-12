@@ -443,7 +443,6 @@ class Causerie_Class extends \eoxia\Post_Class {
 		}else{
 			$data[ 'success' ] = false; // Type introuvable / pas pris en compte
 		}
-
 		return $data;
 	}
 
