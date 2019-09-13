@@ -367,8 +367,8 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 				'key_unique' => '',
 				'unite_travail' => '',
 				'action' => '',
-				'risk' => '',
-				'prevention' => ''
+				'type_de_travaux' => '',
+				'materiel' => ''
 			);
 			$interventions_info = esc_html__( 'Aucune intervention définie' );
 		}
@@ -379,7 +379,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	public function get_identifier_permis_feu( $with_prefix = false ){
 		$unique_key = 0;
 		$list_permis_feu = get_posts( array(
-			'post_status'    => array( 'publish', 'inherit', 'any' ),
+			'post_status'    => array( 'publish', 'inherit', 'any', 'trash' ),
 			'posts_per_page' => -1,
 			'post_type'      => $this->get_type(),
 			'meta_key'   => '_wpdigi_permis_feu_is_end',

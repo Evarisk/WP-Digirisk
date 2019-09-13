@@ -51,10 +51,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 		$data['title']  = current_time( 'Ymd' ) . '_';
 		$data['title'] .= '_fiche_permisfeu_';
 
-		$data[ 'title' ] .= $data['parent']->data['id'];
-
-		// $data['title'] .= $data['parent']->data['unique_identifier'];
-		$data['title']  = str_replace( '-', '_', $data['title'] );
+		$data[ 'title' ] .= $data[ 'parent' ]->data[ 'unique_identifier' ];
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';
 		$data['path'] = $upload_dir['basedir'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';

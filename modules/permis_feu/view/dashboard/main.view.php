@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</a>
 
-	<table class="table closed-prevention">
+	<table class="table closed-permis-feu">
 		<thead>
 			<tr>
 				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>

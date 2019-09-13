@@ -469,7 +469,6 @@ window.eoxiaJS.digirisk.preventionPlan.displayUserInfo = function( event ){
 }
 
 window.eoxiaJS.digirisk.preventionPlan.deleteThisPreventionPlan = function( event ){
-	console.log( '---' );
 	var message = jQuery( this ).attr( 'data-message' );
 	if( confirm( message ) ){
 		var data = {};

@@ -186,7 +186,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		return Prevention_Class::g()->update( $prevention->data );
 	}
 
-
 	public function step_close_prevention( $prevention, $society, $legal_display ){
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_CLOSED;
 		$prevention->data['is_end'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED;

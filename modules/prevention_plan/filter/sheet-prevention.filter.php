@@ -51,9 +51,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data['title']  = current_time( 'Ymd' ) . '_';
 		$data['title'] .= '_fiche_prevention_';
 
-		$data[ 'title' ] .= $data['parent']->data['id'];
+		$data[ 'title' ] .= $data[ 'parent' ]->data[ 'unique_identifier' ];
 
-		// $data['title'] .= $data['parent']->data['unique_identifier'];
 		$data['title']  = str_replace( '-', '_', $data['title'] );
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';

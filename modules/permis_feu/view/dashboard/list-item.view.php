@@ -85,9 +85,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<i class="fas fa-download"></i>
 			</span>
 
-			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-permis_feu-plan"
+			<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-this-permis-feu-plan"
 				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-				data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce plan de prévention', 'digirisk' ); ?>"
+				data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer ce permis de feu ?', 'digirisk' ); ?>"
 				data-action="delete_document_permis_feu"
 				data-action="<?php echo esc_attr( wp_create_nonce( 'delete_document_permis_feu' ) ); ?>"
 				aria-label="<?php echo esc_attr_e( 'Supprimer le plan de prévention', 'digirisk' ); ?>">

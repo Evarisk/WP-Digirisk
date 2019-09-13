@@ -32,7 +32,8 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
 window.eoxiaJS.digirisk.accident.event = function() {
 	jQuery( document ).on( 'change', '.flex-table.accident .col.advanced input[type="checkbox"]', window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation );
 	jQuery( document ).on( 'click', '.flex-table.accident .col.advanced .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
-	jQuery( document ).on( 'keyup', '.flex-table.accident .col.add input, textarea', window.eoxiaJS.digirisk.accident.checkCanAdd );
+	jQuery( document ).on( 'keyup', '.flex-table.accident .col.add input, textarea', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
+	jQuery( document ).on( 'click', '.flex-table.accident .col.add .autocomplete-search-list li', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
 
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };
@@ -65,10 +66,15 @@ window.eoxiaJS.digirisk.accident.clearCanvas = function( event ) {
 	canvas[0].signaturePad.clear();
 };
 
-
-window.eoxiaJS.digirisk.accident.checkCanAdd = function( event ) {
-	var accidentRow = jQuery( this ).closest( '.col' );
-
+window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd = function( event ) {
+	window.eoxiaJS.digirisk.accident.checkCanAdd( jQuery( this ) );
+}
+window.eoxiaJS.digirisk.accident.checkCanAdd = function( element ) {
+	var accidentRow = element.closest( '.col' );
+	console.log( 'identity victime : ' + accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() );
+	console.log( 'accident : ' + accidentRow.find( 'input[name="accident[parent_id]"]' ).val() );
+	console.log( 'textarea : ' + accidentRow.find( '.comment textarea' ).val() );
+	console.log( '.' + accidentRow.find( '.comment textarea' ).val() + '.' );
 	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
 		accidentRow.find( '.action-input' ).removeClass( 'button-disable' );
 	} else {

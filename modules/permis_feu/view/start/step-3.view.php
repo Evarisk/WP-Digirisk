@@ -36,42 +36,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
-	<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
-		<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
-			<div class="wpeo-form">
-				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
-						<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_name' ] ); ?>">
-					</label>
-				</div>
+	<section class="wpeo-gridlayout padding grid-4" style="margin-bottom: 10px;">
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
+					<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_name' ] ); ?>">
+				</label>
 			</div>
+		</div>
 
-			<div class="wpeo-form">
-				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
-						<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_siret' ] ); ?>">
-					</label>
-				</div>
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
+					<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_siret' ] ); ?>">
+				</label>
 			</div>
-		</section>
+		</div>
+
 	</section>
-
-	<div class="information-intervenant-exterieur" style="">
-		<input type="hidden" name="user-type" value="intervenant_exterieur">
-		<h2 style="text-align:center">
-			<?php esc_html_e( 'Responsable des intervenants extérieur', 'digirisk' ); ?>
-			<span class="wpeo-tooltip-event"
-			aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
-			style="color : dodgerblue; cursor : pointer">
-				<i class="fas fa-info-circle"></i>
-			</span>
-		</h2>
-		<?php Permis_feu_Class::g()->display_intervenant_exterieur( array(), $permis_feu->data[ 'id' ] ); ?>
-	</div>
 
 	<h2 style="text-align:center">
 		<?php esc_html_e( 'Informations complémentaires', 'digirisk' ); ?>
@@ -139,13 +125,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</section>
+
+
+	 <div style="">
+	 	<h2 style="text-align:center">
+			<?php esc_html_e( 'Liste des intervenants extérieur', 'digirisk' ); ?>
+			<span class="wpeo-tooltip-event"
+			aria-label="<?php esc_html_e( 'Liste des intervenants du permis de feu', 'digirisk' ); ?>"
+			style="color : dodgerblue; cursor : pointer">
+				<i class="fas fa-info-circle"></i>
+			</span>
+		</h2>
+		<?php if( isset( $text_info ) && $text_info != "" ): ?>
+			<span style="color : green">
+			<?php echo esc_attr( $text_info ); ?>
+		</span>
+		<?php endif; ?>
+		<?php Permis_Feu_Class::g()->display_list_intervenant( $permis_feu->data['id'] ); ?>
+
+	 </div>
 </div>
 
-<?php if( Prevention_Class::g()->intervenant_is_valid( $permis_feu->data[ 'intervenant_exterieur' ] ) ): ?>
-	<div class="wpeo-button button-blue action-input wpeo-tooltip-event go-to-last-step-prevention"
-<?php else: ?>
-	<div class="wpeo-button button-blue button-disable action-input wpeo-tooltip-event go-to-last-step-prevention"
-<?php endif; ?>
+<div class="wpeo-button button-blue action-input wpeo-tooltip-event"
 		data-action="next_step_permis_feu"
 		data-parent="digi-permis-feu-parent"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"

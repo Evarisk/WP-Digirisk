@@ -115,9 +115,7 @@ class Permis_Feu_Page_Action {
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_ENTERPRISE:
-		   		$permis_feu = Permis_Feu_Class::g()->save_info_maitre_oeuvre();
 				$permis_feu = Permis_Feu_Page_Class::g()->save_society_information( $permis_feu, $society, $legal_display );
-
 				$text_info = "";
 				if( empty( $permis_feu->data[ 'intervenants' ] ) ){
 					$data_return = Permis_Feu_Class::g()->import_list_intervenant( $permis_feu );
@@ -132,9 +130,10 @@ class Permis_Feu_Page_Action {
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT:
-			   Permis_Feu_Page_Class::g()->step_close_permis_feu( $permis_feu, $society, $legal_display );
-			   $url_redirect = admin_url( 'admin.php?page=digirisk-permis-feu' );
-			   break;
+		   		$permis_feu = Permis_Feu_Class::g()->save_info_maitre_oeuvre();
+			   	Permis_Feu_Page_Class::g()->step_close_permis_feu( $permis_feu, $society, $legal_display );
+			   	$url_redirect = admin_url( 'admin.php?page=digirisk-permis-feu' );
+			   	break;
 		   default:
 			   break;
 	   }

@@ -343,6 +343,29 @@ class Permis_Feu_Action {
 			'filename'         => $title
 		) );
 	}
+
+	public function callback_delete_document_permis_feu(){
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$prevention = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+		$prevention->data[ 'status' ] = "trash";
+		Permis_Feu_Class::g()->update( $prevention->data );
+
+		ob_start();
+		Permis_Feu_Page_Class::g()->display_dashboard();
+		$dashboard_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'deleteDocumentPermisFeuSuccess',
+			'dashboard_view'   => $dashboard_view
+		) );
+	}
 }
 
 new Permis_Feu_Action();

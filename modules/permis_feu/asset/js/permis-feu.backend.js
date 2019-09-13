@@ -79,6 +79,8 @@ window.eoxiaJS.digirisk.permisFeu.event = function() {
 	jQuery( document ).on( 'keyup', '.digi-permis-feu-parent .table-row .update-mail-auto input',  window.eoxiaJS.digirisk.preventionPlan.preShotEmailUser );
 
 	jQuery( document ).on( 'keyup', '.digi-permis-feu-parent .element-phone .element-phone-input', window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat );
+
+	jQuery( document ).on( 'click', '.wrap-permis-feu .closed-permis-feu .action .delete-this-permis-feu-plan', window.eoxiaJS.digirisk.permisFeu.deleteThisPreventionPlan );
 };
 
 window.eoxiaJS.digirisk.permisFeu.updateModalTitleMaitreOeuvre = function( event, data ){
@@ -129,11 +131,11 @@ window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieu
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-phone', error );
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
-
+	console.log( error );
 	if( ! error ){
-		parent_element.find( '.go-to-last-step-prevention' ).removeClass( 'button-disable' );
+		parent_element.find( '.close-permis-feu' ).removeClass( 'button-disable' );
 	}else{
-		parent_element.find( '.go-to-last-step-prevention' ).addClass( 'button-disable' );
+		parent_element.find( '.close-permis-feu' ).addClass( 'button-disable' );
 	}
 }
 
@@ -216,7 +218,7 @@ window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisDeFeu = function( event, 
 
 window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
-		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).removeClass( 'button-disable' );
+		// triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).removeClass( 'button-disable' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -236,7 +238,7 @@ window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeu = function( even
 
 window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
-		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).addClass( 'button-disable' );
+		// triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).addClass( 'button-disable' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -369,4 +371,22 @@ window.eoxiaJS.digirisk.permisFeu.editThisPreventionSuccess = function( trigerre
 	if( response.data.url ){
 		window.location.replace( response.data.url );
 	}
+}
+
+window.eoxiaJS.digirisk.permisFeu.deleteThisPreventionPlan = function( event ){
+	var message = jQuery( this ).attr( 'data-message' );
+	if( confirm( message ) ){
+		var data = {};
+
+		data.action = jQuery( this ).attr( 'data-action' );
+		data._wpnonce = jQuery( this ).attr( 'data-nonce' );
+		data.id = jQuery( this ).attr( 'data-id' );
+
+		window.eoxiaJS.loader.display( jQuery( this ).closest( '.item' ) );
+		window.eoxiaJS.request.send( jQuery( this ), data );
+	}
+}
+
+window.eoxiaJS.digirisk.permisFeu.deleteDocumentPermisFeuSuccess = function( trigerredElement, response ){
+	trigerredElement.closest( '.main-content' ).html( response.data.dashboard_view );
 }

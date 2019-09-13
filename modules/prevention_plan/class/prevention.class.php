@@ -355,12 +355,13 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function get_identifier_prevention( $with_prefix = false ){
 		$unique_key = 0;
 		$list_prevention = get_posts( array(
-		  	'post_status'    => array( 'publish', 'inherit', 'any' ),
+		  	'post_status'    => array( 'publish', 'inherit', 'any', 'trash' ),
 		  	'posts_per_page' => -1,
 		  	'post_type'      => $this->get_type(),
   			'meta_key'   => '_wpdigi_prevention_prevention_is_end',
             'meta_value' => \eoxia\Config_Util::$init['digirisk']->prevention_plan->status->PREVENTION_IS_ENDED,
 		) );
+
 		$nbr_prevention = count( $list_prevention ) + 1;
 		if( $with_prefix ){
 			$prefix_prevention_plan = Setting_Class::g()->get_prefix_prevention_plan();

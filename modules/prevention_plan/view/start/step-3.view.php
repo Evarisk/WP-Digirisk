@@ -59,19 +59,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</section>
 	</section>
 
-	<div class="information-intervenant-exterieur" style="">
-		<input type="hidden" name="user-type" value="intervenant_exterieur">
-		<h2 style="text-align:center">
-			<?php esc_html_e( 'Responsable des intervenants extérieur', 'digirisk' ); ?>
-			<span class="wpeo-tooltip-event"
-			aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
-			style="color : dodgerblue; cursor : pointer">
-				<i class="fas fa-info-circle"></i>
-			</span>
-		</h2>
-		<?php Prevention_Class::g()->display_intervenant_exterieur( array(), $prevention->data[ 'id' ] ); ?>
-	</div>
-
 	<h2 style="text-align:center">
 		<?php esc_html_e( 'Informations complémentaires', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
@@ -138,13 +125,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</section>
+
+	<div>
+	   <h2 style="text-align:center">
+		   <?php esc_html_e( 'Liste des intervenants extérieur', 'digirisk' ); ?>
+		   <span class="wpeo-tooltip-event"
+		   aria-label="<?php esc_html_e( 'Liste des intervenants du plan de  prévention', 'digirisk' ); ?>"
+		   style="color : dodgerblue; cursor : pointer">
+			   <i class="fas fa-info-circle"></i>
+		   </span>
+	   </h2>
+		<?php Prevention_Class::g()->display_list_intervenant( $prevention->data['id'] ); ?>
+	</div>
 </div>
 
-<?php if( Prevention_Class::g()->intervenant_is_valid( $prevention->data[ 'intervenant_exterieur' ] ) ): ?>
-	<div class="wpeo-button button-blue action-input wpeo-tooltip-event go-to-last-step-prevention"
-<?php else: ?>
-	<div class="wpeo-button button-blue button-disable action-input wpeo-tooltip-event go-to-last-step-prevention"
-<?php endif; ?>
+<div class="wpeo-button button-blue action-input wpeo-tooltip-event"
 		data-action="next_step_prevention"
 		data-parent="digi-prevention-parent"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
