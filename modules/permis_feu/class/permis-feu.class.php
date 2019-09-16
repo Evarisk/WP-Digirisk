@@ -75,7 +75,9 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		}
 		if( $permis_feu->data[ 'prevention_id' ] != 0 ){
 			$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
-			$permis_feu->data[ 'prevention_data' ] = $prevention->data;
+			if( ! empty( $prevention ) ){
+				$permis_feu->data[ 'prevention_data' ] = $prevention->data;
+			}
 		}
 
 		if( $permis_feu->data[ 'step' ] >= \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_CLOSED ){

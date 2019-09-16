@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2 style="float: left"><?php esc_html_e( 'Dernières causeries réalisées', 'digirisk' ); ?></h2>
 	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-setting&tab=digi-define-prefix' ) ); ?>"
-		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Modifier la référence des permis de feu', 'digirisk' ); ?>" >
-		<div class="wpeo-button button-main" style="float: right;">
+		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Référence des permis de feu', 'digirisk' ); ?>" style="float: right;">
+		<div class="wpeo-button button-main">
 			<span><i class="icon fa fa-cog"></i></span>
 		</div>
 	</a>
