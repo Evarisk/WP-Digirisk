@@ -27,6 +27,7 @@ class Permis_Feu_Intervention_Action {
 
 		add_action( 'wp_ajax_edit_intervention_line_permisfeu', array( $this, 'callback_edit_intervention_line_permisfeu' ) );
 
+		add_action( 'wp_ajax_delete_intervention_line_permisfeu', array( $this, 'callback_delete_intervention_line_permisfeu' ) );
 
 	}
 
@@ -110,6 +111,33 @@ class Permis_Feu_Intervention_Action {
 			'callback_success' => 'editInterventionLineSuccess',
 			'view'             => $view,
 			'workunitName'     => $workunit_name
+		) );
+	}
+
+	public function callback_delete_intervention_line_permisfeu(){
+		check_ajax_referer( 'delete_intervention_line_permisfeu' );
+
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error ID not valid' );
+		}
+
+		$intervention = Permis_Feu_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$intervention->data[ 'status' ] = "trash";
+		$parent = $intervention->data[ 'parent_id' ];
+		Permis_Feu_Intervention_Class::g()->update( $intervention->data );
+
+		Permis_Feu_Page_Class::g()->register_search( null, null );
+		ob_start();
+		$view_prevention = Permis_Feu_Intervention_Class::g()->display_intervention_table( $parent );
+		$table_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'permisFeu',
+			'callback_success' => 'addInterventionLinePermisFeuSuccess',
+			'table_view'       => $table_view
 		) );
 	}
 }

@@ -15,6 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
+<div id="container1" class="bigbox">
+</div>
+
+<div id="container2" class="bigbox">
+</div>
+
+<div id="container3" class="bigbox">
+</div>
 <div>
 	<h2 style="float:left">
 		<?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?>
@@ -57,7 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tbody>
 	</table>
 	<div class="" style="margin-top: 10px; float: right;">
-		<?php \eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-import', array() ); ?>
+		<?php \eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/import', array() ); ?>
 	</div>
 
 </div>

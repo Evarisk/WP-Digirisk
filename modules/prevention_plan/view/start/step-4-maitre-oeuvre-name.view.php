@@ -36,11 +36,7 @@ global $eo_search; ?>
 	</div>
 </div>
 <div class="wpeo-form">
-	<?php if( ! empty( $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ) ): ?>
-		<div class="form-element element-maitre-oeuvre form-element-disable">
-	<?php else: ?>
-		<div class="form-element element-maitre-oeuvre">
-	<?php endif; ?>
+	<div class="form-element element-maitre-oeuvre form-element-disable">
 		<span class="form-label"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></span>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>

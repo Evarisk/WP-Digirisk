@@ -226,6 +226,17 @@ class Setting_Class extends \eoxia\Singleton_Util {
 		$default_prefix_permis_feu = \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PERMIS_FEU;
 		return get_option( 'edit_prefix_permis_feu', $default_prefix_permis_feu );
 	}
+
+	public function save_prefix_settings_digirisk( $list_prefix ){
+
+		$prefix = Setting_Class::g()->get_all_prefix();
+		foreach( $prefix as $key => $element ){
+			if( isset( $list_prefix[ $element[ 'element' ] ] ) && ! empty( $list_prefix[ $element[ 'element' ] ] ) ){
+				update_option( 'edit_prefix_' . $prefix[ $key ][ 'element' ], $list_prefix[ $element[ 'element' ] ][ 'to' ] );
+			}
+		}
+
+	}
 }
 
 Setting_Class::g();

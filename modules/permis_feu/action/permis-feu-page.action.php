@@ -106,27 +106,27 @@ class Permis_Feu_Page_Action {
 			   );
 			   $permis_feu = Permis_Feu_Class::g()->update_information_permis_feu( $permis_feu, $data );
 			   $permis_feu = Permis_Feu_Page_Class::g()->next_step( $permis_feu, $nextstep );
+			   $text_info = "";
+			   if( empty( $permis_feu->data[ 'intervenants' ] ) ){
+				   $data_return = Permis_Feu_Class::g()->import_list_intervenant( $permis_feu );
+				   $permis_feu = $data_return[ 'permis_feu' ];
+				   $text_info = $data_return[ 'text_info' ];
+			   }
 
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-3', array(
 				   'permis_feu'    => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu ),
 				   'society'       => $society,
-				   'legal_display' => $legal_display
+				   'legal_display' => $legal_display,
+				   'text_info'     => $text_info,
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_ENTERPRISE:
 				$permis_feu = Permis_Feu_Page_Class::g()->save_society_information( $permis_feu, $society, $legal_display );
-				$text_info = "";
-				if( empty( $permis_feu->data[ 'intervenants' ] ) ){
-					$data_return = Permis_Feu_Class::g()->import_list_intervenant( $permis_feu );
-					$permis_feu = $data_return[ 'permis_feu' ];
-					$text_info = $data_return[ 'text_info' ];
-				}
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-4', array(
-				   'permis_feu' => $permis_feu,
 				   'all_signed' => false,
-				   'text_info'       => $text_info
+				   'permis_feu' => $permis_feu
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT:
@@ -154,10 +154,12 @@ class Permis_Feu_Page_Action {
 
 	   $permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
 
-	   if ( $permis_feu->data['step'] >= $step ) {
+	   if ( $permis_feu->data['maitre_oeuvre'][ 'user_id' ] && $permis_feu->data['maitre_oeuvre'][ 'signature_id'] ) {
 		   $permis_feu->data['step'] = $step;
-		   Permis_Feu_Class::g()->update( $permis_feu->data );
+	   }else{
+		   $permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_FORMER;
 	   }
+	   Permis_Feu_Class::g()->update( $permis_feu->data );
 
 	   wp_redirect( admin_url( 'admin.php?page=digirisk-permis-feu&id=' . $id ) );
    }

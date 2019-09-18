@@ -21,7 +21,11 @@ global $eo_search; ?>
 
 	<div class="wpeo-form">
 		<section class="wpeo-gridlayout padding grid-2  digi-phone-user" style="margin-bottom: 10px;">
-			<div class="form-element">
+			<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] ): ?>
+				<div class="form-element">
+			<?php else: ?>
+				<div class="form-element form-element-disable">
+			<?php endif; ?>
 				<span class="form-label"><?php esc_html_e( 'Code', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<?php
@@ -34,7 +38,11 @@ global $eo_search; ?>
 				</label>
 			</div>
 
-			<div class="form-element element-phone">
+			<?php if( $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] ): ?>
+				<div class="form-element element-phone">
+			<?php else: ?>
+				<div class="form-element form-element-disable element-phone">
+			<?php endif; ?>
 				<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>

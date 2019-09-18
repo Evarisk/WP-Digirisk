@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<section class="wpeo-gridlayout padding grid-4" style="margin-bottom: 10px;">
+<section class="wpeo-gridlayout padding grid-3" style="margin-bottom: 10px;">
 	<input type='hidden' name="prevention_id" value="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 	<div class="wpeo-form">
 		<div class="form-element">
@@ -35,6 +35,16 @@ global $eo_search; ?>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
 				<input type="text" name="intervenant-name" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?>">
+			</label>
+		</div>
+	</div>
+
+	<div class="wpeo-form">
+		<div class="form-element">
+			<span class="form-label"><?php esc_html_e( 'Email', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+				<input type="text" name="intervenant-email" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'email' ] ); ?>">
 			</label>
 		</div>
 	</div>

@@ -64,6 +64,9 @@ global $eo_search; ?>
 						<img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $permis_feu->data['maitre_oeuvre']['signature_id'] ) ); ?>">
 					</div>
 				<?php endif; ?>
+				<div class="">
+
+				</div>
 			</div>
 		</div>
 	</section>

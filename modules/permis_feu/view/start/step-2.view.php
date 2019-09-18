@@ -107,21 +107,40 @@ global $eo_search;
 		?>
 	</section>
 
+	<div class="intervention-prevention-plan">
+	<?php if( $permis_feu->data['prevention_id'] != 0 ):  ?>
+			<?php
+				\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2-intervention-prevention-plan', array(
+					'id' => $permis_feu->data['prevention_id'],
+					'edit' => false
+				) );
+			 ?>
+	<?php endif; ?>
+	</div>
 
 
 	<div class="intervention-table" style="margin-top: 30px">
 		<span style="text-align : center">
-			<h2><?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?>
+			<h2>
+				<?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?>
 				<span class="wpeo-tooltip-event"
 				aria-label="<?php esc_html_e( 'Listes des interventions associés aux types de travaux', 'digirisk' ); ?>"
 				style="color : dodgerblue; cursor : pointer">
 					<i class="fas fa-info-circle"></i>
 				</span>
+				<a class="page-title-action wpeo-tooltip-event display-line-intervention"
+				 aria-label="<?php esc_html_e( 'Ajouter une intervention', 'digirisk' ); ?>"
+				 style="margin-left: 5px; height: 100%; margin-top: 24px;">
+					<?php esc_html_e( 'Nouveau', 'digirisk' ); ?>
+				</a>
 			</h2>
+
 		</span>
-		<?php
-			Permis_Feu_Intervention_Class::g()->display_intervention_table( $permis_feu->data[ 'id' ] );
-		?>
+		<div class="intervention-content">
+			<?php
+				Permis_Feu_Intervention_Class::g()->display_intervention_table( $permis_feu->data[ 'id' ] );
+			?>
+		</div>
 	</div>
 
 </div>
@@ -141,6 +160,10 @@ global $eo_search;
 		<?php esc_html_e( 'Valider', 'digirisk' ); ?>
 		<i class="fas fa-long-arrow-alt-right"></i>
 	</span>
+</div>
+
+<div style="height : 200px">
+
 </div>
 
 <style>

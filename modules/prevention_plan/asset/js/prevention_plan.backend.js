@@ -69,7 +69,7 @@ window.eoxiaJS.digirisk.preventionPlan.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-prevention-parent .unite-de-travail-element .autocomplete-search-list .autocomplete-result',  window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravail );
 
-	jQuery( document ).on( 'click', '.digi-prevention-parent .unite-de-travail-class .display-modal-unite',  window.eoxiaJS.digirisk.preventionPlan.displayModalUniteDeTravail );
+	jQuery( document ).on( 'click', '.digi-prevention-parent .readonly .display-modal-unite',  window.eoxiaJS.digirisk.preventionPlan.displayModalUniteDeTravail );
 
 	/*jQuery( document ).on( 'keyup', '.digi-prevention-parent .information-element-society input',  window.eoxiaJS.digirisk.preventionPlan.displayButtonSaveInformation );*/
 
@@ -119,6 +119,7 @@ window.eoxiaJS.digirisk.preventionPlan.updateModalTitle = function( event, data 
 
 window.eoxiaJS.digirisk.preventionPlan.updateModalTitleMaitreOeuvre = function( event, data ){
 	var element  = jQuery( this );
+
 	if ( data && data.element ) {
 		var request_data = {};
 		request_data.action  = 'prevention_display_maitre_oeuvre';
@@ -131,7 +132,10 @@ window.eoxiaJS.digirisk.preventionPlan.updateModalTitleMaitreOeuvre = function( 
 				triggeredElement.closest( '.information-maitre-oeuvre' ).find( '.content-maitre-oeuvre .maitre-phone-part' ).html( response.data.view_phone );
 				triggeredElement.closest( '.information-maitre-oeuvre' ).find( '.content-maitre-oeuvre .maitre-name-part' ).html( response.data.view_name );
 			}
-			window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre( element );
+
+			if( jQuery( '.content-maitre-oeuvre input[name="maitre-oeuvre-signature"]' ).val() != "-1" ){
+				jQuery( '.digi-prevention-parent .prevention-start' ).removeClass( 'button-disable' );
+			}
 		} );
 	}
 }
@@ -212,15 +216,7 @@ window.eoxiaJS.digirisk.preventionPlan.savedParticipant = function( element, res
 };
 
 window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravail = function( event ){
-	var id = jQuery( this ).attr( 'data-id' );
-	if ( id > 0 ) {
-		var request_data = {};
-		request_data.action = 'display_button_odt_unitedetravail';
-		request_data.id     = id;
-
-		window.eoxiaJS.loader.display( jQuery( this ) );
-		window.eoxiaJS.request.send( jQuery( this ), request_data );
-	}
+	window.eoxiaJS.digirisk.preventionPlan.checkIfInterventionCanBeAdd( '', jQuery( this ) );
 }
 
 window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravailSuccess = function( trigerredElement, response ){
@@ -327,7 +323,7 @@ window.eoxiaJS.digirisk.preventionPlan.addInterventionLine = function( event ){
 }
 
 window.eoxiaJS.digirisk.preventionPlan.addInterventionLineSuccess = function( triggeredElement, response ){
-	triggeredElement.closest( '.intervention-table' ).html( response.data.table_view );
+	triggeredElement.closest( '.intervention-content' ).html( response.data.table_view );
 }
 
 window.eoxiaJS.digirisk.preventionPlan.editInterventionLineSuccess = function( triggeredElement, response ){
@@ -406,14 +402,20 @@ window.eoxiaJS.digirisk.preventionPlan.PreventionPlanCanBeFinishIntervenantExter
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeuvre = function( element ){
 	var parent_element = element.closest( '.digi-prevention-parent' );
-
 	var maitre_oeuvre_element = parent_element.find( '.information-maitre-oeuvre' );
 
 	var error = false;
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-name', error );
+	console.log( error );
+
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-lastname', error );
+	console.log( error );
+
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-phone', error );
+	console.log( error );
+
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( maitre_oeuvre_element, 'maitre-oeuvre-signature', error );
+	console.log( error );
 
 	if( ! error ){
 		parent_element.find( '.prevention-start' ).removeClass( 'button-disable' );
@@ -432,6 +434,7 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervena
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-phone', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
+	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-email', error );
 
 	if( ! error ){
 		parent_element.find( '.go-to-last-step-prevention' ).removeClass( 'button-disable' );

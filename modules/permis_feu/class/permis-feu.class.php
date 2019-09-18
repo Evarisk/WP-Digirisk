@@ -76,6 +76,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		if( $permis_feu->data[ 'prevention_id' ] != 0 ){
 			$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
 			if( ! empty( $prevention ) ){
+				// $prevention = Prevention_Class::g()->add_information_to_prevention( $prevention ); // Trop lourd
 				$permis_feu->data[ 'prevention_data' ] = $prevention->data;
 			}
 		}
@@ -97,6 +98,10 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 			$permis_feu->data[ 'unique_identifier' ] = Setting_Class::g()->get_prefix_permis_feu() . $permis_feu->data[ 'unique_identifier_int' ];
 		}
 		// Jusqu'ici - Corentin (Meme function dans prevention.class.php)
+
+		if( strlen( $permis_feu->data[ 'title' ] ) > 35 ){
+			$permis_feu->data[ 'title' ] = substr( $permis_feu->data[ 'title' ], 0, 35 );
+		}
 
 		return $permis_feu;
 	}
@@ -234,8 +239,9 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
 		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
 		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
+		$i_mail  = ! empty( $_POST['intervenant-email'] ) ? sanitize_text_field( $_POST['intervenant-email'] ) : '';
 
-		if( ! $i_name || ! $i_lastname || ! $i_phone ){
+		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_mail ){
 			wp_send_json_error( 'Erreur in intervenant exterieur' );
 		}
 
@@ -245,7 +251,8 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
 			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
-			'phone_nbr' => $i_phone
+			'phone_nbr' => $i_phone,
+			'email'     => $i_mail
 		);
 
 		$permis_feu->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $permis_feu->data[ 'intervenant_exterieur' ] );

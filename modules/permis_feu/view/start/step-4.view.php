@@ -22,7 +22,7 @@ global $eo_search; ?>
 <div class="information-intervenant-exterieur" style="background-color: #fff; padding: 1em;">
 	<input type="hidden" name="user-type" value="intervenant_exterieur">
 	<h2 style="text-align:center">
-		<?php esc_html_e( 'Responsable des intervenants extérieur', 'digirisk' ); ?>
+		<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
 		aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
 		style="color : dodgerblue; cursor : pointer">

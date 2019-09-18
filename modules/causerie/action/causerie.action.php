@@ -38,6 +38,7 @@ class Causerie_Action {
 		add_action( 'wp_ajax_execute_this_txt_totextarea', array( $this, 'callback_execute_this_txt_totextarea' ) );
 
 		add_action( 'wp_ajax_execute_git_txt', array( $this, 'callback_execute_git_txt' ) );
+		add_action( 'wp_ajax_ia_import_txt_from_url', array( $this, 'callback_ia_import_txt_from_url' ) );
 
 
 	}
@@ -350,6 +351,13 @@ class Causerie_Action {
 			'view'             => ob_get_clean(),
 			'data'             => $response
 		) );
+	}
+
+	public function callback_ia_import_txt_from_url(){
+		check_ajax_referer( 'execute_git_txt' );
+		$content = ! empty( $_POST ) && ! empty( $_POST['content'] ) ? trim( $_POST['content'] ) : null;
+
+
 	}
 }
 

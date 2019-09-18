@@ -16,7 +16,7 @@ window.eoxiaJS.digirisk.setting.event = function() {
 	jQuery( document ).on( 'click', '.section-capability input[type="checkbox"]', window.eoxiaJS.digirisk.setting.activeSave );
 
 	jQuery( document ).on( 'click', '.wpeo-notification .notification-close', window.eoxiaJS.digirisk.setting.closeWpeo );
-	jQuery( document ).on( 'keyup', '#digi-define-prefix input[type="text"]', window.eoxiaJS.digirisk.setting.buttonSave )
+	jQuery( document ).on( 'keyup', '#digi-accronym input[type="text"]', window.eoxiaJS.digirisk.setting.buttonSave )
 };
 
 window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
@@ -124,6 +124,6 @@ window.eoxiaJS.digirisk.setting.closeWpeo = function( event ){
 }
 
 window.eoxiaJS.digirisk.setting.buttonSave = function( event ){
-	jQuery( '#digi-define-prefix .save-prefix' ).removeClass( 'button-disable' );
-	jQuery( '#digi-define-prefix .prefix-response-success' ).hide( '200' );
+	jQuery( '#digi-accronym .save-prefix' ).removeClass( 'button-disable' );
+	jQuery( '#digi-accronym .prefix-response-success' ).hide( '200' );
 }

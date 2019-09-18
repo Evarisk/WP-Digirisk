@@ -18,29 +18,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $eo_search; ?>
 
 <?php if( empty( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone ) ): ?>
-
 	<div class="wpeo-form">
 		<section class="wpeo-gridlayout padding grid-2  digi-phone-user" style="margin-bottom: 10px;">
-			<div class="form-element">
-				<span class="form-label"><?php esc_html_e( 'Code', 'digirisk' ); ?></span>
-				<label class="form-field-container">
-					<?php
-					\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
-						'local' => get_locale(),
-						'width' => 'none',
-						'name' => 'maitre-oeuvre-phone-callingcode'
-					) );
-					?>
-				</label>
-			</div>
-
-			<div class="form-element element-phone">
-				<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
-				<label class="form-field-container">
-					<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-					<input type="text" class="form-field element-phone-input" name="maitre-oeuvre-phone" value="" style="width: auto;">
-				</label>
-			</div>
+			<?php if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] ): ?>
+				<div class="form-element">
+			<?php else: ?>
+				<div class="form-element form-element-disable">
+			<?php endif; ?>
+					<span class="form-label"><?php esc_html_e( 'Code', 'digirisk' ); ?></span>
+					<label class="form-field-container">
+						<?php
+						\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
+							'local' => get_locale(),
+							'width' => 'none',
+							'name' => 'maitre-oeuvre-phone-callingcode',
+							'disabled' => 'true'
+						) );
+						?>
+					</label>
+				</div>
+			<?php if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] ): ?>
+				<div class="form-element element-phone">
+			<?php else: ?>
+				<div class="form-element form-element-disable element-phone">
+			<?php endif; ?>
+					<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
+					<label class="form-field-container">
+						<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
+						<input type="text" class="form-field element-phone-input" name="maitre-oeuvre-phone" value="" style="width: auto;">
+					</label>
+				</div>
 		</section>
 	</div>
 

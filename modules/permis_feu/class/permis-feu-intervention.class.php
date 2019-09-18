@@ -68,6 +68,21 @@ class Permis_Feu_Intervention_Class extends \eoxia\Post_Class {
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $permis_feu_id ), true );
 		$interventions = Permis_Feu_Intervention_Class::g()->get( array( 'post_parent' => $permis_feu_id ) );
 
+		foreach( $interventions as $key => $intervention ){
+			$id = $intervention->data[ 'unite_travail' ];
+			$target = "digi-fiche-de-poste";
+			$title  = esc_html__( 'Les fiches de poste', 'digirisk' );
+
+			$tab        = new \stdClass();
+			$tab->title = $title;
+			$tab->slug  = $target;
+
+			$element = Society_Class::g()->show_by_type( $id );
+			$tab = Tab_Class::g()->build_tab_to_display( $element, $tab );
+
+			$interventions[ $key ]->data[ 'unite_travail_tab' ] = $tab;
+		}
+
 		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2-table-intervention-foreach', array(
 			'interventions' => $interventions,
 			'permis_feu'    => $permis_feu

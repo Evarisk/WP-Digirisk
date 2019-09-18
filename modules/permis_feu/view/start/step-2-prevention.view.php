@@ -31,21 +31,26 @@ global $eo_search;
 		</div>
 	</div>
 	<div class="action-permis-feu-prevention" style="margin-top : 30px">
-		<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
+
+		<span class="action-attribute wpeo-button button-green button-square-50 wpeo-tooltip-event"
 			data-id="<?php echo esc_attr( $permis_feu->data['prevention_id'] ); ?>"
 			data-action="generate_document_prevention"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate_document_prevention' ) ); ?>"
 			aria-label="<?php echo esc_attr_e( 'Générer le document', 'digirisk' ); ?>">
 			<i class="fas fa-download"></i>
 		</span>
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-prevention&id=' . $permis_feu->data[ 'prevention_id' ] ) ); ?>"
+			class="wpeo-button button-blue button-square-50 wpeo-tooltip-event"
+			aria-label="<?php esc_html_e( 'Editer', 'digirisk' ); ?>">
+		 		<i class="fas fa-pen"></i>
+		</a>
 		<span class="wpeo-button button-red button-square-50 wpeo-tooltip-event delete-prevention-from-permis-feu"
 			data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 			data-action="delete_prevention_from_permis_feu"
 			data-message="<?php esc_html_e( 'Voulez-vous vraiment supprimer la liaison avec ce plan de prévention', 'digirisk' ); ?>"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_prevention_from_permis_feu' ) ); ?>"
-			aria-label="<?php echo esc_attr_e( 'Supprimer la liaison avec ce plan de prévention', 'digirisk' ); ?>"
-			style="margin-left: 10px;">
-			<i class="fas fa-times"></i>
+			aria-label="<?php echo esc_attr_e( 'Supprimer la liaison avec ce plan de prévention', 'digirisk' ); ?>">
+			<i class="fas fa-unlink"></i>
 		</span>
 	</div>
 

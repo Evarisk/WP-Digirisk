@@ -202,8 +202,9 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
 		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
 		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
+		$i_email  = ! empty( $_POST['intervenant-email'] ) ? sanitize_text_field( $_POST['intervenant-email'] ) : '';
 
-		if( ! $i_name || ! $i_lastname || ! $i_phone ){
+		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_email ){
 			wp_send_json_error( 'Erreur in intervenant exterieur' );
 		}
 
@@ -213,7 +214,8 @@ class Prevention_Class extends \eoxia\Post_Class {
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
 			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
-			'phone_nbr' => $i_phone
+			'phone_nbr' => $i_phone,
+			'email' => $i_email,
 		);
 
 		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
@@ -246,8 +248,12 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 			$prevention->data[ 'unique_identifier' ] = Setting_Class::g()->get_prefix_prevention_plan() . $prevention->data[ 'unique_identifier_int' ];
 		}
-
 		// Jusqu'ici - Corentin (Meme function dans permis-feu.class.php)
+
+		if( strlen( $prevention->data[ 'title' ] ) > 35 ){
+			$prevention->data[ 'title' ] = substr( $prevention->data[ 'title' ], 0, 35 );
+		}
+
 
 		return $prevention;
 	}
@@ -407,6 +413,20 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 		return $unique_key;
 	}  // A SUPPRIMER
+
+	public function verify_all_intervenant( $intervenants ){
+		foreach( $intervenants as $key => $user ){
+			if( ! isset( $user[ 'phone' ] ) || $user[ 'phone' ] == "" ){
+				$intervenants[ $key ][ 'phone' ] = esc_html__( 'Téléphone non-défini', 'digirisk' );
+			}
+
+			if( ! isset( $user[ 'mail' ] ) || $user[ 'mail' ] == "" ){
+				$intervenants[ $key ][ 'mail' ] = esc_html__( 'Mail non-défini', 'digirisk' );
+			}
+		}
+
+		return $intervenants;
+	}
 }
 
 Prevention_Class::g();

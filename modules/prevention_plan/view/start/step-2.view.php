@@ -139,19 +139,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</section>
 	<div class="intervention-table" style="margin-top: 30px">
-		<span style="text-align : center"><h2>
-			<?php esc_html_e( 'Intervention', 'digirisk' ); ?>
-			<span class="wpeo-tooltip-event"
-			aria-label="<?php esc_html_e( 'Listes des interventions associés aux risques', 'digirisk' ); ?>"
-			style="color : dodgerblue; cursor : pointer">
-				<i class="fas fa-info-circle"></i>
-			</span>
-		</h2></span>
-		<?php
-			Prevention_Intervention_Class::g()->display_table( $prevention->data[ 'id' ] );
-		?>
-	</div>
+		<span style="text-align : center">
+			<h2>
+				<?php esc_html_e( 'Intervention', 'digirisk' ); ?>
+				<span class="wpeo-tooltip-event"
+				aria-label="<?php esc_html_e( 'Listes des interventions associés aux risques', 'digirisk' ); ?>"
+				style="color : dodgerblue; cursor : pointer">
+					<i class="fas fa-info-circle"></i>
+				</span>
+				<a class="page-title-action wpeo-tooltip-event display-line-intervention"
+				 aria-label="<?php esc_html_e( 'Ajouter une intervention', 'digirisk' ); ?>"
+				 style="margin-left: 5px; height: 100%; margin-top: 24px;">
+					<?php esc_html_e( 'Nouveau', 'digirisk' ); ?>
+				</a>
+			</h2>
+		</span>
+		<div class="intervention-content">
 
+			<?php
+				Prevention_Intervention_Class::g()->display_table( $prevention->data[ 'id' ] );
+			?>
+		</div>
+	</div>
 </div>
 
 <div class="wpeo-button button-blue action-input"
@@ -165,7 +174,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i class="fas fa-long-arrow-alt-right"></i>
 	</span>
 </div>
+<div style="height : 200px">
 
+</div>
 <style>
 .button-prevention-title{
 	padding-top: 2px;

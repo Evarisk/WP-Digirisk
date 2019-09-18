@@ -138,6 +138,9 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 				'phone_nbr'        => array(
 					'type' => 'string',
 				),
+				'email'        => array(
+					'type' => 'string',
+				),
 				'signature_id'   => array(
 					'type' => 'integer',
 				),

@@ -73,8 +73,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 				data-action="edit_this_permis_feu"
 				data-action="<?php echo esc_attr( wp_create_nonce( 'edit_this_permis_feu' ) ); ?>"
-				aria-label="<?php echo esc_attr_e( 'Modifier ce plan de prévention', 'digirisk' ); ?>">
-				<i class="fas fa-3x fa-caret-right" style="margin-top: -2px;"></i>
+				aria-label="<?php echo esc_attr_e( 'Modifier ce permis de feu', 'digirisk' ); ?>">
+				<i class="fas fa-pen" style="margin-top: -2px;"></i>
 			</span>
 
 			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"

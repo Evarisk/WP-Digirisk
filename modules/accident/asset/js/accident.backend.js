@@ -71,10 +71,6 @@ window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd = function( event ) {
 }
 window.eoxiaJS.digirisk.accident.checkCanAdd = function( element ) {
 	var accidentRow = element.closest( '.col' );
-	console.log( 'identity victime : ' + accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() );
-	console.log( 'accident : ' + accidentRow.find( 'input[name="accident[parent_id]"]' ).val() );
-	console.log( 'textarea : ' + accidentRow.find( '.comment textarea' ).val() );
-	console.log( '.' + accidentRow.find( '.comment textarea' ).val() + '.' );
 	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
 		accidentRow.find( '.action-input' ).removeClass( 'button-disable' );
 	} else {

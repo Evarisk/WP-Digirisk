@@ -48,7 +48,18 @@ class Prevention_Action {
 		add_action( 'wp_ajax_delete_document_prevention', array( $this, 'callback_delete_document_prevention' ) );
 
 		add_action( 'wp_ajax_edit_this_prevention', array( $this, 'callback_edit_this_prevention' ) );
+		// $this->a();
+	}
 
+
+	public function a(){
+		$a = \eoxia\Config_Util::$init['digirisk'];
+		$prevention = Prevention_Class::g()->get( array( 'id' => 899 ), true );
+		$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
+		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
+		// $prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
+		$prevention->data[ 'taxonomy' ] = array();
+		$prevention = Prevention_Class::g()->update( $prevention->data );
 	}
 
 	public function callback_prevention_save_former(){
@@ -252,17 +263,19 @@ class Prevention_Action {
 		$name     = isset( $_POST[ 'name' ] ) ? sanitize_text_field( $_POST[ 'name' ] ) : '';
 		$lastname = isset( $_POST[ 'lastname' ] ) ? sanitize_text_field( $_POST[ 'lastname' ] ) : '';
 		$mail     = isset( $_POST[ 'mail' ] ) ? sanitize_text_field( $_POST[ 'mail' ] ) : '';
+		$phone    = isset( $_POST[ 'phone' ] ) ? sanitize_text_field( $_POST[ 'phone' ] ) : '';
 
 		$key = isset( $_POST[ 'key' ] ) ? (int) $_POST[ 'key' ] : -1;
 
-		if( ! $id || ! $name || ! $lastname || ! $mail ){
+		if( ! $id || ! $name || ! $lastname ){
 			wp_send_json_error( 'Erreur in request' );
 		}
 
 		$user = array(
 			'name'     => $name,
 			'lastname' => $lastname,
-			'mail'     => $mail
+			'mail'     => $mail,
+			'phone'    => $phone
 		);
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );

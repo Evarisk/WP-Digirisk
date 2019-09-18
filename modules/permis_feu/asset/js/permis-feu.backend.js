@@ -66,7 +66,7 @@ window.eoxiaJS.digirisk.permisFeu.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-element .autocomplete-search-list .autocomplete-result',  window.eoxiaJS.digirisk.permisFeu.displayButtonUniteDeTravail );
 
-	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-class .display-modal-unite',  window.eoxiaJS.digirisk.permisFeu.displayModalUniteDeTravail );
+	jQuery( document ).on( 'click', '.digi-permis-feu-parent .readonly .display-modal-unite',  window.eoxiaJS.digirisk.permisFeu.displayModalUniteDeTravail );
 
 	jQuery( document ).on( 'click', '.digi-permis-feu-parent .unite-de-travail-class .worktype-element .dropdown-content .item',  window.eoxiaJS.digirisk.permisFeu.selectRisqueInDropdown );
 
@@ -81,6 +81,10 @@ window.eoxiaJS.digirisk.permisFeu.event = function() {
 	jQuery( document ).on( 'keyup', '.digi-permis-feu-parent .element-phone .element-phone-input', window.eoxiaJS.digirisk.preventionPlan.checkPhoneFormat );
 
 	jQuery( document ).on( 'click', '.wrap-permis-feu .closed-permis-feu .action .delete-this-permis-feu-plan', window.eoxiaJS.digirisk.permisFeu.deleteThisPreventionPlan );
+
+	jQuery( document ).on( 'click', '.display-line-intervenant', window.eoxiaJS.digirisk.permisFeu.displayFirstLineIntervenant );
+
+	jQuery( document ).on( 'click', '.display-line-intervention', window.eoxiaJS.digirisk.permisFeu.displayFirstLineIntervention)
 };
 
 window.eoxiaJS.digirisk.permisFeu.updateModalTitleMaitreOeuvre = function( event, data ){
@@ -131,7 +135,8 @@ window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieu
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-phone', error );
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
-	console.log( error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-email', error );
+
 	if( ! error ){
 		parent_element.find( '.close-permis-feu' ).removeClass( 'button-disable' );
 	}else{
@@ -219,6 +224,7 @@ window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisDeFeu = function( event, 
 window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
 		// triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).removeClass( 'button-disable' );
+		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.intervention-prevention-plan' ).html( response.data.pre_i_view );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -238,7 +244,7 @@ window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeu = function( even
 
 window.eoxiaJS.digirisk.permisFeu.deletePreventionFromPermisFeuSuccess = function( triggeredElement, response ){
 	if( response.data.view != "" ){
-		// triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.next-step-need-prevention' ).addClass( 'button-disable' );
+		triggeredElement.closest( '.digi-permis-feu-parent' ).find( '.intervention-prevention-plan' ).html( '' );
 		triggeredElement.closest( '.wpeo-gridlayout' ).html( response.data.view );
 	}
 }
@@ -257,15 +263,7 @@ window.eoxiaJS.digirisk.permisFeu.updateEndDatePrevention = function( event ){
 }
 
 window.eoxiaJS.digirisk.permisFeu.displayButtonUniteDeTravail = function( event ){
-	var id = jQuery( this ).attr( 'data-id' );
-	if ( id > 0 ) {
-		var request_data = {};
-		request_data.action = 'display_button_odt_pointchaud';
-		request_data.id     = id;
-
-		window.eoxiaJS.loader.display( jQuery( this ) );
-		window.eoxiaJS.request.send( jQuery( this ), request_data );
-	}
+	window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd( '', jQuery( this ) );
 }
 
 
@@ -340,7 +338,7 @@ window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_el
 }
 
 window.eoxiaJS.digirisk.permisFeu.addInterventionLinePermisFeuSuccess = function( triggeredElement, response ){
-	triggeredElement.closest( '.intervention-table' ).html( response.data.table_view );
+	triggeredElement.closest( '.intervention-content' ).html( response.data.table_view );
 }
 
 window.eoxiaJS.digirisk.permisFeu.editInterventionLineSuccess = function( triggeredElement, response ){
@@ -389,4 +387,13 @@ window.eoxiaJS.digirisk.permisFeu.deleteThisPreventionPlan = function( event ){
 
 window.eoxiaJS.digirisk.permisFeu.deleteDocumentPermisFeuSuccess = function( trigerredElement, response ){
 	trigerredElement.closest( '.main-content' ).html( response.data.dashboard_view );
+}
+
+window.eoxiaJS.digirisk.permisFeu.displayFirstLineIntervenant = function( event ){
+	jQuery( this ).closest( '.intervenant-bloc' ).find( '.table-new-line-intervenant' ).show( '200' );
+}
+
+window.eoxiaJS.digirisk.permisFeu.displayFirstLineIntervention = function( event ){
+	console.log( 'oui' );
+	jQuery( this ).closest( '.intervention-table' ).find( '.new-line-intervention' ).show( '200' );
 }

@@ -26,6 +26,9 @@ class Prevention_Intervention_Action {
 		add_action( 'wp_ajax_add_intervention_line', array( $this, 'callback_add_intervention_line' ) );
 
 		add_action( 'wp_ajax_edit_intervention_line', array( $this, 'callback_edit_intervention_line' ) );
+
+		add_action( 'wp_ajax_delete_intervention_line', array( $this, 'callback_delete_intervention_line' ) );
+
 	}
 
 	public function callback_add_intervention_line(){
@@ -109,6 +112,35 @@ class Prevention_Intervention_Action {
 			'workunitName'    => $workunit_name
 		) );
 	}
+
+	public function callback_delete_intervention_line(){
+		check_ajax_referer( 'delete_intervention_line' );
+
+		$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+
+		if( ! $id ){
+			wp_send_json_error( 'Error ID not valid' );
+		}
+
+		$intervention = Prevention_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$intervention->data[ 'status' ] = "trash";
+		$parent = $intervention->data[ 'parent_id' ];
+		Prevention_Intervention_Class::g()->update( $intervention->data );
+
+		Prevention_Page_Class::g()->register_search( null, null );
+		ob_start();
+		Prevention_Intervention_Class::g()->display_table( $parent );
+		$table_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'preventionPlan',
+			'callback_success' => 'addInterventionLineSuccess',
+			'table_view'       => $table_view
+		) );
+	}
+
+
 }
 
 new Prevention_Intervention_Action();

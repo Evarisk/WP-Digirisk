@@ -22,6 +22,8 @@ window.eoxiaJS.digirisk.causerie.canvas;
 window.eoxiaJS.digirisk.causerie.init = function() {
 	window.eoxiaJS.digirisk.causerie.event();
 	window.eoxiaJS.digirisk.causerie.refresh();
+
+	window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique();
 };
 
 /**
@@ -77,7 +79,7 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 
 	jQuery( document ).on( 'keyup', '.digi-import-add-keyword .digi-info-import-link input', window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl );
 
-	jQuery( document ).on( 'click', '.wpeo-modal .digi-import-display-view i', window.eoxiaJS.digirisk.causerie.displayGitView );
+	jQuery( document ).on( 'click', '.wpeo-modal .import-git-button', window.eoxiaJS.digirisk.causerie.importGitContent );
 
 	jQuery( document ).on( 'click', '.modal-footer .digi-display-view-git .digi-content-git', window.eoxiaJS.digirisk.causerie.txtHiddenGitToTextArea );
 
@@ -493,18 +495,18 @@ window.eoxiaJS.digirisk.causerie.getContentFromUrl = function( triggeredElement,
 	}
 }
 
-window.eoxiaJS.digirisk.causerie.displayGitView = function( event ){
-	var textarea_element = jQuery( this ).closest( '.modal-container' ).find( '.view-textarea-element' );
-	var git_element = jQuery( this ).closest( '.modal-container' ).find( '.view-git-element' );
+window.eoxiaJS.digirisk.causerie.importGitContent = function( event ){
+	var url = jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.import-git-input input[type="text"]' );
+	var textarea_element = jQuery( this ).closest( '.digi-view-textarea' );
 
-	if( jQuery( this ).attr( 'data-display' ) == "git" ){ // Display view GIT
-		textarea_element.hide();
-		git_element.show();
-		jQuery( this ).closest( '.modal-container' ).find( '.modal-footer-view-git .digi-footer-git-import input[ type="text"]' ).focus();
-	}else if( jQuery( this ).attr( 'data-display' ) == "textarea" ){ // Display textarea
-		git_element.hide();
-		textarea_element.show();
-	}
+	var data         = {};
+	data.url  = url;
+	data.action  = jQuery( this ).attr( 'data-action' );
+	data._wpnonce  = jQuery( this ).attr( 'data-nonce' );
+	data.url  = jQuery( this ).attr( 'data-url' );
+
+	window.eoxiaJS.loader.display( jQuery( this ).parent() );
+	window.eoxiaJS.request.send( jQuery( this ), data );
 }
 
 window.eoxiaJS.digirisk.causerie.importPictureToMediaSuccess = function( triggeredElement, response ){
@@ -618,3 +620,364 @@ window.eoxiaJS.digirisk.causerie.tabSelectRedirect = function( event ){
 	var url = jQuery( this ).attr( 'data-url' );
 	window.location.href = url;
 }
+
+
+window.eoxiaJS.digirisk.causerie.deletedAccidentSuccess = function( triggeredElement, response ){
+	triggeredElement.closest( '.causerie-row' ).hide( '200' );
+}
+
+window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
+	var interval = 0;
+	var myReq;
+	var k = [13, 13]; //  13, 13, 13, 13, 13, 13, 13, 13]
+	n = 0;
+
+	var oui = false;
+	var color = [];
+
+	var p = 0;
+	jQuery(document).keyup(function (e) {
+	   	if (e.keyCode === k[n++]) {
+		 	if (n === k.length) {
+				if( p == 0 ){
+					p = 1;
+					draw2();
+				}
+		 	}
+	   }
+
+	   function createAudioContext(desiredSampleRate) {
+
+		  var AudioCtor = window.AudioContext || window.webkitAudioContext;
+		  desiredSampleRate = typeof desiredSampleRate === 'number' ? desiredSampleRate : 44100;
+		  var context = new AudioCtor();
+		  // Check if hack is necessary. Only occurs in iOS6+ devices
+		  // and only when you first boot the iPhone, or play a audio/video
+		  // with a different sample rate
+		  if (/(iPhone|iPad)/i.test(navigator.userAgent) && context.sampleRate !== desiredSampleRate) {
+			  var buffer = context.createBuffer(1, 1, desiredSampleRate);
+			  var dummy = context.createBufferSource();
+			  dummy.buffer = buffer;
+			  dummy.connect(context.destination);
+			  dummy.start(0);
+			  dummy.disconnect();
+			  context.close();
+			  // dispose old context
+			  context = new AudioCtor();
+		  }
+		  return context;
+	  }
+	  var audioContext = new createAudioContext();
+	  var mixGain = audioContext.createGain();
+	  var filterGain = audioContext.createGain();
+	  var kickButton = document.querySelector('#kickButton');
+	  var snareButton = document.querySelector('#snareButton');
+	  var hihatButton = document.querySelector('#hihatButton');
+	  var mixButton = document.querySelector('#mixButton');
+
+	  //SOUNDS
+	  function kick() {
+
+		  var osc = audioContext.createOscillator();
+		  var osc2 = audioContext.createOscillator();
+		  var gainOsc = audioContext.createGain();
+		  var gainOsc2 = audioContext.createGain();
+
+		  osc.type = 'triangle';
+		  osc2.type = 'sine';
+
+		  gainOsc.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  gainOsc.connect(audioContext.destination);
+		  gainOsc2.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc2.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  gainOsc2.connect(audioContext.destination);
+		  osc.frequency.setValueAtTime(120, audioContext.currentTime);
+		  osc.frequency.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  osc2.frequency.setValueAtTime(50, audioContext.currentTime);
+
+		  //Connections
+		  osc.connect(gainOsc);
+		  osc2.connect(gainOsc2);
+		  gainOsc2.connect(mixGain);
+		  gainOsc.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+
+		  osc.start(audioContext.currentTime);
+		  osc2.start(audioContext.currentTime);
+		  osc.stop(audioContext.currentTime + 0.5);
+		  osc2.stop(audioContext.currentTime + 0.5);
+	  }
+
+	  function snare() {
+
+		  var osc3 = audioContext.createOscillator();
+		  var gainOsc3 = audioContext.createGain();
+
+		  filterGain.gain.setValueAtTime(1, audioContext.currentTime);
+		  filterGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+		  osc3.type = 'triangle';
+		  osc3.frequency.value = 100;
+
+		  gainOsc3.gain.value = 0;
+		  gainOsc3.gain.setValueAtTime(0, audioContext.currentTime);
+		  //gainOsc3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+		  //Connections
+		  osc3.connect(gainOsc3);
+		  gainOsc3.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+
+		  osc3.start(audioContext.currentTime);
+		  osc3.stop(audioContext.currentTime + 0.2);
+
+		  var node = audioContext.createBufferSource(),
+			  buffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate),
+			  data = buffer.getChannelData(0);
+
+		  var filter = audioContext.createBiquadFilter();
+
+		  filter.type = 'highpass';
+		  filter.frequency.setValueAtTime(100, audioContext.currentTime);
+		  filter.frequency.linearRampToValueAtTime(1000, audioContext.currentTime + 0.2);
+
+		  for (var i = 0; i < 4096; i++) {
+			  data[i] = Math.random();
+		  }
+
+		  node.buffer = buffer;
+		  node.loop = true;
+
+		  //Connections
+		  node.connect(filter);
+		  filter.connect(filterGain);
+		  filterGain.connect(mixGain);
+
+		  node.start(audioContext.currentTime);
+		  node.stop(audioContext.currentTime + 0.2);
+
+	  }
+
+	  function hihat() {
+
+		  var gainOsc4 = audioContext.createGain();
+		  var fundamental = 40;
+		  var ratios = [
+			  2,
+			  3,
+			  4.16,
+			  5.43,
+			  6.79,
+			  8.21
+		  ];
+		  var bandpass = audioContext.createBiquadFilter();
+		  bandpass.type = 'bandpass';
+		  bandpass.frequency.value = 10000;
+		  var highpass = audioContext.createBiquadFilter();
+		  highpass.type = 'highpass';
+		  highpass.frequency.value = 7000;
+		  ratios.forEach(function(ratio) {
+			  var osc4 = audioContext.createOscillator();
+			  osc4.type = 'square';
+			  osc4.frequency.value = fundamental * ratio;
+			  osc4.connect(bandpass);
+			  osc4.start(audioContext.currentTime);
+			  osc4.stop(audioContext.currentTime + 0.05);
+		  });
+
+		  gainOsc4.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc4.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+
+		  bandpass.connect(highpass);
+		  highpass.connect(gainOsc4);
+		  gainOsc4.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+	  }
+
+	  function custom_song() {
+
+		  var gainOsc4 = audioContext.createGain();
+		  var fundamental = 80;
+		  var ratios = [
+			  2,
+			  3,
+			  4.16,
+			  5.43,
+			  6.79,
+			  8.21
+		  ];
+		  var bandpass = audioContext.createBiquadFilter();
+		  bandpass.type = 'bandpass';
+		  bandpass.frequency.value = 8500;
+		  var highpass = audioContext.createBiquadFilter();
+		  highpass.type = 'highpass';
+		  highpass.frequency.value = 7000;
+		  ratios.forEach(function(ratio) {
+			  var osc4 = audioContext.createOscillator();
+			  osc4.type = 'triangle';
+			  osc4.frequency.value = fundamental * ratio;
+			  osc4.connect(bandpass);
+			  osc4.start(audioContext.currentTime);
+			  osc4.stop(audioContext.currentTime + 0.4);
+		  });
+
+		  gainOsc4.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc4.gain.exponentialRampToValueAtTime(0.02, audioContext.currentTime + 0.4);
+
+		  bandpass.connect(highpass);
+		  highpass.connect(gainOsc4);
+		  gainOsc4.connect(mixGain);
+
+		  mixGain.gain.value = 1.5;
+	  }
+
+	  //BUTTON
+
+	  //INTERVALS
+	  function interval(func, wait, times) {
+		  var interv = function(w, t) {
+			  return function() {
+				  if (typeof t === 'undefined' || t-- > 0) {
+					  setTimeout(interv, w);
+					  try {
+						  func.call(null);
+					  } catch (e) {
+						  t = 0;
+						  throw e.toString();
+					  }
+				  }
+			  };
+		  }(wait, times);
+		  setTimeout(interv, wait);
+	  }
+	  mixGain.connect(audioContext.destination);
+	  mixGain.gain.value = 0;
+	  filterGain.gain.value = 0;
+
+	  //EXAMPLE SOUNDS
+	  var kickMixGain = audioContext.createGain();
+	  var kickOsc = audioContext.createOscillator();
+	  var kickOsc2 = audioContext.createOscillator();
+	  var kickGainOsc = audioContext.createGain();
+	  var kickGainOsc2 = audioContext.createGain();
+
+	  kickOsc.type = 'triangle';
+	  kickOsc.frequency.value = 40;
+	  kickGainOsc.gain.value = 1;
+	  kickOsc2.type = 'sine';
+	  kickOsc2.frequency.value = 80;
+	  kickGainOsc2.gain.value = 1;
+
+	  //Connections
+	  kickOsc.connect(kickGainOsc);
+	  kickOsc2.connect(kickGainOsc2);
+	  kickGainOsc2.connect(kickMixGain);
+	  kickGainOsc.connect(kickMixGain);
+	  kickMixGain.gain.value = 0;
+	  kickOsc.start(audioContext.currentTime);
+	  kickOsc2.start(audioContext.currentTime);
+
+	  //DRAW BOXES
+	function createBox(instrument) {
+	  	switch (true) {
+		  	case instrument === hihat:
+			  	hihat();
+			  	break;
+		  	case instrument === kick:
+			  	kick();
+			  	break;
+		  	case instrument === snare:
+			  	snare();
+			  	break;
+			case instrument === custom_song:
+			custom_song();
+			break;
+		}
+	};
+
+	  function draw2() {
+		  var elements = 0;
+		  var tour = 1;
+
+		  var Timer = setInterval(function() {
+
+			  elements ++;
+			  console.log( '1 :' + elements );
+
+				if (elements % 2 == 0 || elements == 0 ) {
+					createBox(hihat);
+				}
+
+			  	if ( tour == 2 || tour > 3 ) {
+					var a = ( elements + 1 ) % 2;
+					if( a == 0 || elements == 0 ){
+						createBox(kick);
+					}
+			  	}
+
+				if ( ( elements % 4 == 0 || elements == 0 ) && tour > 2 ) {
+				  	createBox(snare);
+				}
+				if( tour < 4 ){ // 4
+					if( elements > 11) {
+						tour ++;
+						elements = 0;
+						console.log( 'Tour : ' + tour );
+					}
+				}else{
+					if( elements === 24 ){
+						clearInterval(Timer);
+						refrain();
+					}
+				}
+		  }, 250 );
+
+		  var stopIt = document.getElementById('stopButton');
+	  }
+
+	  function refrain(){
+		  var elements = 0;
+
+		  var new_Timer = setInterval(function() {
+			  console.log( '2 : ' + elements );
+			  elements ++;
+
+				if (elements % 2 == 0 || elements == 0 ) {
+					createBox(hihat);
+				}
+
+				var a = ( elements + 1 ) % 2;
+				var b = ( elements + 1 ) % 4;
+				if( b == 0 ){
+					createBox(kick);
+				}
+
+				if( a == 0 ){
+					createBox(custom_song);
+				}
+
+				if ( elements % 4 == 0 ) {
+				  	createBox(snare);
+				}
+
+				if( elements >= 50 ){
+					clearInterval(new_Timer);
+					console.log( 'END' );
+				}
+		  }, 200 );
+	  }
+
+		(function setButtonStyle() {
+			// var buttons = document.querySelector(".btnz");
+			// buttons.style.width = '900px';
+			// buttons.style.height = '60px';
+			// buttons.style.position = 'relative';
+			// buttons.style.border = '10px solid white';
+			// buttons.style.display = 'in-line';
+		}());
+	});
+};

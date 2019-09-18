@@ -69,15 +69,31 @@ class Prevention_Intervention_Class extends \eoxia\Post_Class {
 	 */
 	protected $post_type_name = 'Prevention_Intervention';
 
-	public function display_table( $prevention_id ){
+	public function display_table( $prevention_id, $edit = true ){
 		$parentid = $prevention_id;
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $prevention_id ), true );
 		$interventions = Prevention_Intervention_Class::g()->get( array( 'post_parent' => $parentid ) );
 
+		foreach( $interventions as $key => $intervention ){
+			$id = $intervention->data[ 'unite_travail' ];
+			$target = "digi-fiche-de-poste";
+			$title  = esc_html__( 'Les fiches de poste', 'digirisk' );
+
+			$tab        = new \stdClass();
+			$tab->title = $title;
+			$tab->slug  = $target;
+
+			$element = Society_Class::g()->show_by_type( $id );
+			$tab = Tab_Class::g()->build_tab_to_display( $element, $tab );
+
+			$interventions[ $key ]->data[ 'unite_travail_tab' ] = $tab;
+		}
+
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-table-intervention-foreach', array(
 			'interventions' => $interventions,
-			'prevention' => $prevention
+			'prevention' => $prevention,
+			'edit' => $edit
 		) );
 	}
 

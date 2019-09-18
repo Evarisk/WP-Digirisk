@@ -21,19 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  		<tr>
 			<th class="w100 padding"><?php esc_html_e( 'IdRPP', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
 			<th class="padding" style="width: 15%;"><?php esc_html_e( 'Unité de travail', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
- 			<th class="w50 padding"></th> <!--  class="w50 padding" -->
 			<th class="padding"><?php esc_html_e( 'Description des actions', 'digirisk' ); ?></th>
 			<th class="w100 padding" ><?php esc_html_e( 'Risque INRS', 'digirisk' ); ?></th>
  			<th class="padding"><?php esc_html_e( 'Moyens de prévention', 'digirisk' ); ?></th> <!--  class="w50" -->
- 			<th class="w50 padding"></th> <!--  class="w150" -->
+			<th class="w50 padding"></th> <!--  DL unité de travail ODT -->
+			<?php if( $edit ): ?>
+				<th class="w50 padding"></th> <!--  Edition de la ligne -->
+ 				<th class="w50 padding"></th> <!--  Suppression de la ligne -->
+			<?php endif; ?>
  		</tr>
  	</thead>
  	<tbody>
  		<?php
  		if ( ! empty( $interventions ) ) :
- 			foreach ( $interventions as $intervention ) :
+ 			foreach ( array_reverse( $interventions ) as $intervention ) :
  				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-table-intervention-foreach-item', array(
- 					'intervention' => $intervention
+ 					'intervention' => $intervention,
+					'edit' => $edit
  				) );
  			endforeach;
  		endif;
@@ -41,9 +45,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  	</tbody>
  	<tfoot>
  		<?php
- 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-table-intervention-edit', array(
- 			'prevention' => $prevention
- 		) );
+		if( $edit ):
+	 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-table-intervention-edit', array(
+	 			'prevention' => $prevention,
+				'new_line'   => true
+	 		) );
+		endif;
  		?>
  	</tfoot>
  </table>
+
+ <?php
+	 if( ! $edit && empty( $interventions ) ): ?>
+
+	 <div class="" style="font-size:15px; color : red; margin-top : 4px">
+		<?php esc_html_e( 'Aucunes interventions définies dans ce plan de prévention', 'digirisk' ); ?> <i class="far fa-frown"></i>
+	</div>
+
+		<?php
+	 endif;
+  ?>

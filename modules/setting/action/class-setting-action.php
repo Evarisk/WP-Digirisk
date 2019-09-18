@@ -35,7 +35,9 @@ class Setting_Action {
 
 		add_action( 'wp_ajax_save_general_settings_digirisk', array( $this, 'ajax_save_general_settings_digirisk' ) );
 
-		add_action( 'wp_ajax_save_prefix_settings_digirisk', array( $this, 'callback_save_prefix_settings_digirisk' ) );
+		add_action( 'wp_ajax_update_accronym', array( $this, 'callback_update_accronym' ) );
+
+		// add_action( 'wp_ajax_save_prefix_settings_digirisk', array( $this, 'callback_save_prefix_settings_digirisk' ) );
 	}
 
 	/**
@@ -103,6 +105,15 @@ class Setting_Action {
 
 		$prefix = Setting_Class::g()->get_all_prefix();
 
+		foreach( $prefix as $element ){
+			$list_accronym[ $element[ 'element' ] ] = array(
+				'description' => $element[ 'title' ],
+				'to'          => $element[ 'value' ],
+				'element'     => $element[ 'element' ],
+				'page'        => $element[ 'page' ]
+			);
+		}
+
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
 			'dangers_preset'             => $dangers_preset,
@@ -112,8 +123,7 @@ class Setting_Action {
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
 			'sites'                      => $sites,
-			'general_options'            => $general_options,
-			'prefix'                     => $prefix
+			'general_options'            => $general_options
 		) );
 	}
 
@@ -126,7 +136,9 @@ class Setting_Action {
 	 * @version 6.2.9
 	 */
 	public function callback_update_accronym() {
+		check_ajax_referer( 'update_accronym' );
 		$list_accronym = $_POST['list_accronym'];
+		$list_prefix   = $_POST['list_prefix'];
 
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
@@ -134,9 +146,16 @@ class Setting_Action {
 				$element['description'] = sanitize_text_field( stripslashes( $element['description'] ) );
 			}
 		}
-
 		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
-		wp_safe_redirect( admin_url( 'options-general.php?page=digirisk-setting&tab=digi-accronym' ) );
+
+		Setting_Class::g()->save_prefix_settings_digirisk( $list_prefix );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'savePrefixSettingsDigiriskSuccess',
+			'text_info'        => esc_html__( 'Sauvegardé avec succés', 'digirisk' )
+		) );
 	}
 
 	/**
@@ -239,26 +258,6 @@ class Setting_Action {
 			'module'           => 'setting',
 			'callback_success' => 'generalSettingsSaved',
 			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
-		) );
-	}
-
-	public function callback_save_prefix_settings_digirisk(){
-		check_ajax_referer( 'save_prefix_settings_digirisk' );
-		$prefix_causerie              = isset( $_POST[ 'causerie' ] ) ? sanitize_text_field( $_POST[ 'causerie' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE;
-		$prefix_causerie_intervention = isset( $_POST[ 'causerie_intervention' ] ) ? sanitize_text_field( $_POST[ 'causerie_intervention' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->CAUSERIE;
-		$prefix_plan_prevention       = isset( $_POST[ 'plan_prevention' ] ) ? sanitize_text_field( $_POST[ 'plan_prevention' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PLAN_PREVENTION;
-		$prefix_permis_feu            = isset( $_POST[ 'permis_feu' ] ) ? sanitize_text_field( $_POST[ 'permis_feu' ] ) : \eoxia\Config_Util::$init['digirisk']->setting->prefix_default->PERMIS_FEU;
-
-		update_option( 'edit_prefix_causerie', $prefix_causerie );
-		update_option( 'edit_prefix_causerie_intervention', $prefix_causerie_intervention );
-		update_option( 'edit_prefix_plan_prevention', $prefix_plan_prevention );
-		update_option( 'edit_prefix_permis_feu', $prefix_permis_feu );
-
-		wp_send_json_success( array(
-			'namespace'        => 'digirisk',
-			'module'           => 'setting',
-			'callback_success' => 'savePrefixSettingsDigiriskSuccess',
-			'text_info'        => esc_html__( 'Sauvegardé avec succés !', 'digirisk' )
 		) );
 	}
 }

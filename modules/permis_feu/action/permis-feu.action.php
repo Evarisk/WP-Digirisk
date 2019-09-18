@@ -42,20 +42,8 @@ class Permis_Feu_Action {
 		add_action( 'wp_ajax_generate_document_permis_feu', array( $this, 'callback_generate_document_permis_feu' ) );
 
 		add_action( 'wp_ajax_delete_document_permis_feu', array( $this, 'callback_delete_document_permis_feu' ) );
-
-		// $this->a();
 	}
 
-	public function a(){
-		$a = \eoxia\Config_Util::$init['digirisk'];
-		echo '<pre>'; print_r( $b ); echo '</pre>'; exit;
-		$prevention = Permis_Feu_Class::g()->get( array( 'id' => 174 ), true );
-		// $prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] = 0;
-		$prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] = 0;
-		// $prevention->data[ 'intervenant_exterieur' ][ 'signature_id' ] = 0;
-		$prevention->data[ 'taxonomy' ] = array();
-		$prevention = Permis_Feu_Class::g()->update( $prevention->data );
-	}
 
 	public function callback_permis_feu_display_maitre_oeuvre(){
 
@@ -125,6 +113,9 @@ class Permis_Feu_Action {
 
 	public function callback_add_prevention_to_permis_feu(){
 		check_ajax_referer( 'add_prevention_to_permis_feu' );
+
+		Permis_Feu_Page_Class::g()->register_search( null, null );
+
 		$prevention_id = isset( $_POST[ 'prevention_id' ] ) ? (int) $_POST[ 'prevention_id' ] : 0;
 		$permis_feu_id = isset( $_POST[ 'permis_feu_id' ] ) ? (int) $_POST[ 'permis_feu_id' ] : 0;
 
@@ -147,11 +138,19 @@ class Permis_Feu_Action {
 		Permis_Feu_Class::g()->display_prevention( $permis_feu );
 		$view = ob_get_clean();
 
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2-intervention-prevention-plan', array(
+			'id' => $prevention_id,
+			'edit' => false
+		) );
+		$pre_i_view = ob_get_clean();
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'permisFeu',
 			'callback_success' => 'addPreventionToPermisFeuSuccess',
 			'view'             => $view,
+			'pre_i_view'       => $pre_i_view
 		) );
 	}
 
@@ -241,17 +240,19 @@ class Permis_Feu_Action {
 		$name     = isset( $_POST[ 'name' ] ) ? sanitize_text_field( $_POST[ 'name' ] ) : '';
 		$lastname = isset( $_POST[ 'lastname' ] ) ? sanitize_text_field( $_POST[ 'lastname' ] ) : '';
 		$mail     = isset( $_POST[ 'mail' ] ) ? sanitize_text_field( $_POST[ 'mail' ] ) : '';
+		$phone     = isset( $_POST[ 'phone' ] ) ? sanitize_text_field( $_POST[ 'phone' ] ) : '';
 
 		$key = isset( $_POST[ 'key' ] ) ? (int) $_POST[ 'key' ] : -1;
 
-		if( ! $id || ! $name || ! $lastname || ! $mail ){
+		if( ! $id || ! $name || ! $lastname ){
 			wp_send_json_error( 'Erreur in request' );
 		}
 
 		$user = array(
 			'name'     => $name,
 			'lastname' => $lastname,
-			'mail'     => $mail
+			'mail'     => $mail,
+			'phone'    => $phone
 		);
 
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );

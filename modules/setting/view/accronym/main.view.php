@@ -22,29 +22,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach( $prefix as $element ): ?>
-			<tr>
-				<td class="padding">
-					<span><?php echo esc_attr( $element[ 'title' ] ); ?></span>
-				</td>
-				<td class="padding">
-					<input type="text" name="<?php echo esc_attr( $element[ 'element' ] ); ?>" value="<?php echo esc_attr( $element[ 'value' ] ); ?>" />
-				</td>
-				<td class="w100 padding wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Accéder à la page', 'digirisk' ); ?>" style="text-align: center;">
-					<a href="<?php echo esc_attr( $element[ 'page' ] ); ?>">
-						<div class="wpeo-button button-blue">
-							<i class="fas fa-share"></i>
-						</div>
-					</a>
-				</td>
-			</tr>
-		<?php endforeach; ?>
+		<ul>
+			<?php
+			if ( ! empty( $list_accronym ) ) :
+				foreach ( $list_accronym as $key => $element ) :
+					\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/item-prefix', array(
+						'key'     => $key,
+						'element' => $element,
+					) );
+				endforeach;
+			endif;
+			?>
+		</ul>
 	</tbody>
 </table>
 
 <a href="#" class="margin wpeo-button button-disable action-input save-prefix"
-data-action="save_prefix_settings_digirisk"
-data-nonce="<?php echo esc_attr( wp_create_nonce( 'save_prefix_settings_digirisk' ) ); ?>"
+data-action="update_accronym"
+data-nonce="<?php echo esc_attr( wp_create_nonce( 'update_accronym' ) ); ?>"
 data-parent="tab-content"
 style="float: right; margin-top: 10px;">
 	<?php esc_html_e( 'Enregistrer', 'digirisk' ); ?>

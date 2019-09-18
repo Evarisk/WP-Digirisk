@@ -77,7 +77,7 @@ class Causerie_Class extends \eoxia\Post_Class {
 	}
 
 	public function display_textarea(){
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-content',array() );
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/content',array() );
 	}
 
 	public function display_gitview( $data = array(), $args = array() ){

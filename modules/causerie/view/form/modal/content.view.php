@@ -28,11 +28,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span><?php esc_html_e( 'Média', 'digirisk' ); ?></span>
 	</div>
 	<?php do_shortcode( '[digi_dropdown_categories_risk type="causerie" display="edit"]' ); ?>
+
+	<div class="wpeo-form import-git-input">
+	    <div class="form-element">
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-globe"></i></span>
+				<input type="text" class="form-field">
+			</label>
+		</div>
+	</div>
+	<div class="wpeo-button button-blue import-git-button"
+	data-action="ia_import_txt_from_url"
+	data-action="<?php echo esc_attr( wp_create_nonce( 'ia_import_txt_from_url' ) ); ?>">
+		<i class="fas fa-2x fa-file-import" style="margin-top:-2px"></i>
+	</div>
+
 </div>
 
-<div class="digi-import-display-view" style="float : right; cursor : pointer">
-	<span>
-		<i class="fab fa-git-square fa-3x" data-display="git"></i>
-	</span>
-</div>
-<textarea name="content" style="width: 100%; height: 300px;" ><?= isset( $default_content ) ? esc_html( $default_content ) : '' ?></textarea>
+<textarea name="content" style="width: 100%; min-height: 400px;" >
+	<?= isset( $default_content ) ? esc_html( $default_content ) : '' ?>
+</textarea>

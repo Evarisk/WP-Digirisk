@@ -127,6 +127,10 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'integer',
 		); // OK
 
+		$this->schema['document_meta']['child']['maitre_oeuvre_email'] = array(
+			'type' => 'string',
+		); // OK
+
 		$this->schema['document_meta']['child']['maitre_oeuvre_signature_date'] = array(
 			'type' => 'string',
 		); // OK
@@ -145,6 +149,10 @@ class Sheet_Prevention_Model extends Document_Model {
 		); // OK
 
 		$this->schema['document_meta']['child']['intervenant_exterieur_phone'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['intervenant_exterieur_email'] = array(
 			'type' => 'string',
 		); // OK
 

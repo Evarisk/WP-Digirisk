@@ -154,10 +154,13 @@ class Prevention_Page_Action {
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
 
-		if ( $prevention->data['step'] >= $step ) {
+		if ( $prevention->data['maitre_oeuvre'][ 'user_id' ] && $prevention->data['maitre_oeuvre'][ 'signature_id'] ) {
 			$prevention->data['step'] = $step;
-			Prevention_Class::g()->update( $prevention->data );
+		}else{
+			$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_FORMER;
 		}
+		Prevention_Class::g()->update( $prevention->data );
+
 
 		wp_redirect( admin_url( 'admin.php?page=digirisk-prevention&id=' . $id ) );
 	}

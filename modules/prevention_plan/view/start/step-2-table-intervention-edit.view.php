@@ -18,8 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $eo_search;
 ?>
 
-
-<tr class="intervention-row edit unite-de-travail-class" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
+<?php if( isset( $new_line ) && $new_line ): ?>
+	<tr class="intervention-row edit unite-de-travail-class new-line-intervention" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>" style="display : none">
+<?php else: ?>
+	<tr class="intervention-row edit unite-de-travail-class" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
+<?php endif; ?>
 	<?php if( isset( $intervention ) ): ?>
 		<input type="hidden" name="unite-travail-hidden" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'unite_travail' ] ); ?>">
 	<?php endif; ?>
@@ -38,11 +41,6 @@ global $eo_search;
 		</div>
 
 	</td>
-	<td class="w50 padding" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
-		<div class="wpeo-form button-unite-de-travail" style="float: right;">
-		</div>
-	</td>
-
 	<td data-title="Description des actions">
 		<div class="wpeo-form">
 			<div class="form-element">
@@ -82,6 +80,8 @@ global $eo_search;
 			</div>
 		</div>
 	</td>
+	<td></td>
+	<td></td>
 
 	<td class="w50 padding" data-title="action">
 		<div class="intervention-action">

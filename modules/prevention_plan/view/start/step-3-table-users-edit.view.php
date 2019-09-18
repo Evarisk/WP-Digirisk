@@ -43,6 +43,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 		   </div>
 	   </div>
    </div>
+   <div class="table-cell">
+	  <div class="wpeo-form">
+		  <div class="form-element">
+			  <label class="form-field-container">
+				  <?php if( isset( $user[ 'phone' ] ) ): ?>
+					  <input type="text" name="phone" class="form-field" value="<?php echo esc_attr( $user[ 'phone' ] ); ?>">
+				  <?php else: ?>
+					  <input type="text" name="phone" class="form-field" value="">
+				  <?php endif; ?>
+			  </label>
+		  </div>
+	  </div>
+   </div>
 
    <div class="table-cell table-end">
 	   <div class="wpeo-button button-main button-bordered action-input"

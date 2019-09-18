@@ -35,25 +35,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 						Causerie_Class::g()->display_textarea();
 				 	?>
 			 	</div>
-				<div class="digi-view-git view-git-element" style="display : none">
-					<?php
-						Causerie_Class::g()->display_gitview();
-					?>
-				</div>
-				<div class="digi-view-execute digi-content-execute" style="display : none">
-
-				</div>
 			</div>
 
 			<div class="modal-footer">
 				<div class="modal-footer-view-textarea view-textarea-element">
 					<?php
-						\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-footer-textarea', array() );
+						\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/footer', array() );
 					?>
 				</div>
 				<div class="modal-footer-view-git view-git-element" style="display : none">
 					<?php
-						\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-footer-git', array() );
+						// \eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-footer-git', array() );
 					?>
 				</div>
 				<div class="digi-view-execute digi-footer-execute" style="display : none">

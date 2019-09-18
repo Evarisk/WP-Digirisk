@@ -19,11 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  	<div class="table-row table-header">
  		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Nom', 'task-manager' ); ?></div>
  		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Prenom', 'task-manager' ); ?></div>
- 		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Email', 'task-manager' ); ?></div>
+		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Email', 'task-manager' ); ?></div>
+		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Phone', 'task-manager' ); ?></div>
+ 		<div class="table-cell" style="text-align : center"></div>
  	</div>
 	<?php if( ! empty( $prevention->data[ 'intervenants' ] ) ):
 		foreach( $prevention->data[ 'intervenants' ] as $key => $user ): ?>
-		<div class="table-row">
+		<div class="table-row table-row-intervenant">
 	 		<div class="table-cell">
 	 			<div class="wpeo-form">
 	 				<div class="form-element">
@@ -51,6 +53,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 				</div>
 	 			</div>
 	 		</div>
+			<div class="table-cell">
+				<div class="wpeo-form">
+					<div class="form-element">
+						<label class="form-field-container">
+							<span>
+								<?php if( isset( $user[ 'phone' ] ) ): ?>
+									<?php echo esc_attr( $user[ 'phone' ] ); ?>
+								<?php else: ?>
+									-
+								<?php endif; ?>
+							</span>
+						</label>
+					</div>
+				</div>
+			</div>
 
 	 		<div class="table-cell table-end">
 	 			<div class="wpeo-button button-main button-bordered action-attribute"
@@ -66,7 +83,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endforeach;
 	endif; ?>
 
- 	<div class="table-row">
+ 	<div class="table-row table-new-line-intervenant" style="display : none">
  		<div class="table-cell update-mail-auto">
  			<div class="wpeo-form">
  				<div class="form-element">
@@ -94,6 +111,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  				</div>
  			</div>
  		</div>
+		<div class="table-cell">
+			<div class="wpeo-form">
+				<div class="form-element">
+					<label class="form-field-container">
+						<input type="text" name="phone" class="form-field">
+					</label>
+				</div>
+			</div>
+		</div>
 
  		<div class="table-cell table-end">
  			<div class="wpeo-button button-main button-bordered action-input"

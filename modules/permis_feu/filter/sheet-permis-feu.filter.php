@@ -121,6 +121,8 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
 		}else{
 			$nbr = count( $permis_feu->data[ 'intervenants' ] );
+			$intervenants = Prevention_Class::g()->verify_all_intervenant( $permis_feu->data[ 'intervenants' ] );
+			$permis_feu->data[ 'intervenants' ] = $intervenants;
 			$intervenants_info = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
 		}
 
@@ -166,12 +168,14 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
 			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
+			'maitre_oeuvre_email' => $maitre_e[ 'data' ]->user_email,
 			'maitre_oeuvre_signature_id' => $maitre_e[ 'signature_id' ],
 			'maitre_oeuvre_signature_date' => date( 'd/m/Y', strtotime( $maitre_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
 			'maitre_oeuvre_signature' => $this->set_picture( $maitre_e[ 'signature_id' ], 5 ),
 			'intervenant_exterieur_fname' => $inter_e[ 'firstname' ],
 			'intervenant_exterieur_lname' => $inter_e[ 'lastname' ],
 			'intervenant_exterieur_phone' => $inter_e[ 'phone' ],
+			'intervenant_exterieur_email' => $inter_e[ 'email' ],
 			'intervenant_exterieur_signature' => $this->set_picture( $inter_e[ 'signature_id' ], 5 ),
 			'intervenant_exterieur_signature_id' => $inter_e[ 'signature_id' ],
 			'intervenant_exterieur_signature_date' => date( 'd/m/Y', strtotime( $inter_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
