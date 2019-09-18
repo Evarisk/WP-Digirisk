@@ -16,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $eo_search; ?>
-
 <section class="wpeo-gridlayout padding grid-3" style="margin-bottom: 10px;">
 	<input type='hidden' name="prevention_id" value="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 	<div class="wpeo-form">

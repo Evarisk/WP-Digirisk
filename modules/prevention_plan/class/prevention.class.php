@@ -322,7 +322,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 	}
 
 	public function intervenant_is_valid( $idata ){
-		if( $idata[ 'firstname' ] && $idata[ 'lastname' ] && $idata[ 'phone' ] && $idata[ 'signature_id' ] ){
+		if( $idata[ 'firstname' ] && $idata[ 'lastname' ] && $idata[ 'phone_nbr' ] && $idata[ 'signature_id' ] && $idata[ 'email' ] ){
 			return true;
 		}
 		return false;

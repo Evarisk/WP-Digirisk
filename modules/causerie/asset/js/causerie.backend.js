@@ -629,7 +629,7 @@ window.eoxiaJS.digirisk.causerie.deletedAccidentSuccess = function( triggeredEle
 window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 	var interval = 0;
 	var myReq;
-	var k = [13, 13]; //  13, 13, 13, 13, 13, 13, 13, 13]
+	var k = [13, 13, 13, 13, 13];
 	n = 0;
 
 	var oui = false;
