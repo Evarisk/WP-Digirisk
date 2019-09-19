@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<div class="modal-content">
-				<div class="digi-view-textarea view-textarea-element">
+				<div class="digi-view-textarea">
 					<?php
 						Causerie_Class::g()->display_textarea();
 				 	?>
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<div class="modal-footer">
-				<div class="modal-footer-view-textarea view-textarea-element">
+				<div class="modal-footer-view-textarea">
 					<?php
 						\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/footer', array() );
 					?>

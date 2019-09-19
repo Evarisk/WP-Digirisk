@@ -315,14 +315,73 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		return Permis_feu_Class::g()->update( $permis_feu_data );
 	}
 
-	public function import_list_intervenant( $permis_feu ){
-		$text_info = "";
+	public function import_data_prevention( $permis_feu ){
+		$text_info = array(
+			'intervenants' => '',
+			'society'      => ''
+		);
+		if( $permis_feu->data[ 'prevention_id' ] != 0 ){
+			$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
+
+			if( empty( $permis_feu->data[ 'intervenants' ] ) ){
+				$permis_feu->data[ 'intervenants' ] = $prevention->data[ 'intervenants' ];
+				$text_info[ 'intervenants' ] = esc_html__( sprintf( 'Récupération des intervenants définies dans le plan de prévention ( %1$d )', count( $permis_feu->data[ 'intervenants' ] ) ), 'dirigisk' );
+			}
+
+			if( $permis_feu->data[ 'society_outside_name' ] == "" || $permis_feu->data[ 'society_outside_siret' ] == "" ){
+				$text_info[ 'society' ] = esc_html__( 'Récupération des informations de société définies dans le plan de prévention', 'dirigisk' );
+
+				if( $permis_feu->data[ 'society_outside_name' ] == "" ){
+					$permis_feu->data[ 'society_outside_name' ] = $prevention->data[ 'society_outside_name' ];
+				}
+				if( $permis_feu->data[ 'society_outside_siret' ] == "" ){
+					$permis_feu->data[ 'society_outside_siret' ] = $prevention->data[ 'society_outside_siret' ];
+				}
+
+			}
+
+			$permis_feu = Permis_feu_Class::g()->update( $permis_feu->data );
+		}
+
+		return array( 'permis_feu' => $permis_feu, 'text_info' => $text_info );
+	}
+
+	public function import_intervenant_prevention( $permis_feu ){
+		$text_info = array(
+			'intervenant_exterieur' => ''
+		);
 
 		if( $permis_feu->data[ 'prevention_id' ] != 0 ){
 			$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
-			$permis_feu->data[ 'intervenants' ] = $prevention->data[ 'intervenants' ];
+
+			$intervenant = $permis_feu->data[ 'intervenant_exterieur' ];
+			if( $intervenant[ 'firstname' ] == "" || $intervenant[ 'lastname' ] == "" || $intervenant[ 'lastname' ] == "" || $intervenant[ 'phone_nbr' ] == "" || $intervenant[ 'email' ] == "" ){
+				$text_info[ 'intervenant_exterieur' ] = esc_html__( 'Récupération des informations de l\'intervenant définie dans le plan de prévention', 'dirigisk' );
+
+				if( $intervenant[ 'firstname' ] == "" ){
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'firstname' ] = $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ];
+				}
+
+				if( $intervenant[ 'lastname' ] == "" ){
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'lastname' ] = $prevention->data[ 'intervenant_exterieur' ][ 'lastname' ];
+				}
+
+				if( $intervenant[ 'lastname' ] == "" ){
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'lastname' ] = $prevention->data[ 'intervenant_exterieur' ][ 'lastname' ];
+				}
+
+				if( $intervenant[ 'phone_nbr' ] == "" ){
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'phone_nbr' ] = $prevention->data[ 'intervenant_exterieur' ][ 'phone_nbr' ];
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'phone' ] = $prevention->data[ 'intervenant_exterieur' ][ 'phone' ];
+				}
+
+				if( $intervenant[ 'email' ] == "" ){
+					$permis_feu->data[ 'intervenant_exterieur' ][ 'email' ] = $prevention->data[ 'intervenant_exterieur' ][ 'email' ];
+				}
+			}
+
+
 			$permis_feu = Permis_feu_Class::g()->update( $permis_feu->data );
-			$text_info = esc_html__( sprintf( 'Récupération des intervenants définies dans le plan de prévention ( %1$d )', count( $permis_feu->data[ 'intervenants' ] ) ), 'dirigisk' );
 		}
 
 		return array( 'permis_feu' => $permis_feu, 'text_info' => $text_info );

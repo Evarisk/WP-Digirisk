@@ -16,12 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <tr class="item" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
-	<td class="w50 padding">
-		<strong>
-			<span><?php echo esc_html( $prevention->data['id'] ); ?></span>
-		</strong>
-	</td>
-
 	<td class="padding causerie-description">
 		<span class="row-title"><?php echo esc_html( $prevention->data['title'] ); ?></span>
 		<span class="row-subtitle"><?php echo esc_html( $prevention->data['content'] ); ?></span>
@@ -29,13 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td class="padding">
 		<span>
-			<?php echo esc_attr( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ); ?>
-		</span>
-	</td>
-
-	<td class="padding">
-		<span>
-			<?php echo esc_attr( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ); ?>
+			<?php echo esc_attr( date( 'd-m-Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ) ); ?>
 		</span>
 	</td>
 
@@ -67,13 +55,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td class="padding">
 		<span>
+			<?php if( $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ] != "" ): ?>
+				<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?> -
+				<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'lastname' ] ); ?> -
+				(<?php echo esc_attr( $prevention->data[ 'intervenant_exterieur' ][ 'phone' ] ); ?>)
+			<?php else: ?>
+				<?php esc_html_e( 'Non-Défini', 'digirisk' ); ?>
+			<?php endif; ?>
+		</span>
+	</td>
+
+	<td class="padding">
+		<span>
+			<?php esc_html_e( sprintf( '%1$d Intervention(s)', count( $prevention->data[ 'intervention' ] ) ), 'digirisk' ); ?>
+		</span>
+	</td>
+
+	<td class="padding">
+		<span>
+			<?php esc_html_e( sprintf( '%1$d Intervenant(s)', count( $prevention->data[ 'intervenants' ] ) ), 'digirisk' ); ?>
+		</span>
+	</td>
+
+	<td class="padding">
+		<span>
 			<?php echo esc_attr( $prevention->data[ 'step' ] ); ?> /5
 		</span>
 	</td>
 	<td class="padding">
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-prevention&id=' . $prevention->data[ 'id' ] ) ); ?>">
 			<div class="wpeo-button button-blue">
-				<i class="fas fa-play"></i>
+				<i class="fas fa-pen"></i>
 			</div>
 		</a>
 	</td>

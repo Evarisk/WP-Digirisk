@@ -38,7 +38,7 @@ class Causerie_Action {
 		add_action( 'wp_ajax_execute_this_txt_totextarea', array( $this, 'callback_execute_this_txt_totextarea' ) );
 
 		add_action( 'wp_ajax_execute_git_txt', array( $this, 'callback_execute_git_txt' ) );
-		add_action( 'wp_ajax_ia_import_txt_from_url', array( $this, 'callback_ia_import_txt_from_url' ) );
+		add_action( 'wp_ajax_causerie_import_txt_from_url', array( $this, 'callback_causerie_import_txt_from_url' ) );
 
 
 	}
@@ -158,13 +158,28 @@ class Causerie_Action {
 		check_ajax_referer( 'digi_import_causeries' );
 
 		$content = ! empty( $_POST ) && ! empty( $_POST['content'] ) ? trim( $_POST['content'] ) : null;
+		$downloadjpg = ! empty( $_POST['downloadjpg'] ) ? (array) $_POST['downloadjpg'] : array(); // WPCS: input var ok.
 
 		if ( null === $content ) {
 			wp_send_json_error( array( 'message' => __( 'Le contenu de l\'import est vide', 'digirisk' ) ) );
 		}
 
-		$response = Causerie_Class::g()->treat_content_import_causerie( $content );
+		$list_image_upload = array();
+		if( ! empty( $downloadjpg ) ){
+			foreach ($downloadjpg as $key => $image) {
+				$image[ 'filename' ] = preg_replace( '/\\.[^.\\s]{3,4}$/', '', $image[ 'filename' ] );
+				$id_media = Causerie_class::g()->upload_to_wordpress_library( $image[ 'url' ], $image[ 'filename' ] );
 
+				$list_image_upload[] = array(
+					'filename' => $image[ 'filename' ],
+					'url'      => $image[ 'url' ],
+					'id'       => $id_media
+				);
+			}
+		}
+
+
+		$response = Causerie_Class::g()->treat_content_import_causerie( $content );
 		ob_start();
 		Causerie_Page_Class::g()->display_form();
 		wp_send_json_success( array(
@@ -292,9 +307,9 @@ class Causerie_Action {
 	}
 
 	public function callback_execute_this_txt_totextarea( $url = "" ){
-
+/*
 		$url = isset( $_POST[ 'url' ] ) ? sanitize_text_field( $_POST[ 'url' ] ) : '';
-		$git_file = isset( $_POST[ 'git' ] ) ? $_POST[ 'git' ] : 'nono';
+		$git_file = isset( $_POST[ 'git' ] ) ? $_POST[ 'git' ] : '';
 
 		if( ! $url  ){
 			wp_send_json_error( 'URL manquant' );
@@ -330,8 +345,9 @@ class Causerie_Action {
 				'view'             => $view,
 				'view_footer'      => $view_footer
 			)
-		);
+		);*/
 	}
+
 	public function callback_execute_git_txt(){
 		check_ajax_referer( 'execute_git_txt' );
 		$content = ! empty( $_POST ) && ! empty( $_POST['content'] ) ? trim( $_POST['content'] ) : null;
@@ -353,11 +369,54 @@ class Causerie_Action {
 		) );
 	}
 
-	public function callback_ia_import_txt_from_url(){
-		check_ajax_referer( 'execute_git_txt' );
-		$content = ! empty( $_POST ) && ! empty( $_POST['content'] ) ? trim( $_POST['content'] ) : null;
+	public function callback_causerie_import_txt_from_url(){
+		check_ajax_referer( 'causerie_import_txt_from_url' );
+		$url = ! empty( $_POST ) && ! empty( $_POST['url'] ) ? trim( $_POST['url'] ) : '';
 
+		if( ! $url ){
+			wp_send_json_error( 'Erreur dans la requete' );
+		}
 
+		$response = Causerie_Class::g()->download_repos_from_git_hub( $url );
+		$view = "";
+		$content = "";
+		if( $response[ 'success' ] && ! empty( $response[ 'data' ] ) ){
+			foreach( $response[ 'data' ] as $key => $element ){
+				if( $element[ 'type' ] == "file"){
+					if( pathinfo( $element[ 'name' ] )[ 'extension' ] == "txt" ){
+						$data = array(
+							'key' => $key,
+							'name' => $element[ 'name' ],
+							'url'  => $element[ 'download_url' ]
+						);
+
+						$content = file_get_contents( $element[ 'download_url' ] );
+						$content = mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true)); // pour les accents
+
+						break;
+					}
+				}
+			}
+		}
+
+		$view = "";
+		if( $content != "" && ! empty( $response[ 'data' ] ) ){
+			$info = Causerie_Class::g()->check_if_content_is_correct( $content, $response[ 'data' ] );
+			ob_start();
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/content-execute', array(
+				'lines' => $info,
+				'content' => $content
+			) );
+			$view = ob_get_clean();
+		}
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'causerie',
+			'callback_success' => 'causerieImportTxtFromUrl',
+			'view'             => $view,
+			'content'          => $content
+		) );
 	}
 }
 

@@ -3036,3 +3036,7 @@ canvas {
 
 .wrap-causerie #stats-causerie {
   border: none; }
+
+  #wpfooter{
+     display : none
+  }

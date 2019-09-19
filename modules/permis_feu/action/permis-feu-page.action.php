@@ -106,12 +106,10 @@ class Permis_Feu_Page_Action {
 			   );
 			   $permis_feu = Permis_Feu_Class::g()->update_information_permis_feu( $permis_feu, $data );
 			   $permis_feu = Permis_Feu_Page_Class::g()->next_step( $permis_feu, $nextstep );
-			   $text_info = "";
-			   if( empty( $permis_feu->data[ 'intervenants' ] ) ){
-				   $data_return = Permis_Feu_Class::g()->import_list_intervenant( $permis_feu );
-				   $permis_feu = $data_return[ 'permis_feu' ];
-				   $text_info = $data_return[ 'text_info' ];
-			   }
+
+			   $data_return = Permis_Feu_Class::g()->import_data_prevention( $permis_feu );
+			   $permis_feu = $data_return[ 'permis_feu' ];
+			   $text_info = $data_return[ 'text_info' ];
 
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-3', array(
@@ -123,10 +121,15 @@ class Permis_Feu_Page_Action {
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_ENTERPRISE:
 				$permis_feu = Permis_Feu_Page_Class::g()->save_society_information( $permis_feu, $society, $legal_display );
+				$data_return = Permis_Feu_Class::g()->import_intervenant_prevention( $permis_feu );
+				$permis_feu = $data_return[ 'permis_feu' ];
+			  	$text_info = $data_return[ 'text_info' ];
+
 			   ob_start();
 			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-4', array(
 				   'all_signed' => false,
-				   'permis_feu' => $permis_feu
+				   'permis_feu' => $permis_feu,
+				   'text_info'  => $text_info
 			   ) );
 			   break;
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT:

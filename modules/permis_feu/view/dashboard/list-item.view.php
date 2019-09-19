@@ -77,7 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<i class="fas fa-pen" style="margin-top: -2px;"></i>
 			</span>
 
-			<span class="action-attribute wpeo-button button-blue button-square-50 wpeo-tooltip-event"
+			<span class="action-attribute wpeo-button button-green button-square-50 wpeo-tooltip-event"
 				data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 				data-action="generate_document_permis_feu"
 				data-action="<?php echo esc_attr( wp_create_nonce( 'generate_document_permis_feu' ) ); ?>"

@@ -36,13 +36,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
+	<?php if( isset( $text_info[ 'society' ] ) && $text_info[ 'society' ] != "" ): ?>
+		<span style="color : green">
+			<?php echo esc_attr( $text_info[ 'society' ] ); ?>
+		</span>
+	<?php endif; ?>
 	<section class="wpeo-gridlayout padding grid-4" style="margin-bottom: 10px;">
 		<div class="wpeo-form">
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
-					<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_name' ] ); ?>">
+					<?php if( $permis_feu->data[ 'society_outside_name' ] == "" ): ?>
+						<input type="text" class="form-field" name="outisde_name" value="<?php esc_html_e( 'Entreprise Exterieur', 'digirisk' ); ?>">
+					<?php else: ?>
+						<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside_name' ] ); ?>">
+					<?php endif; ?>
 				</label>
 			</div>
 		</div>
@@ -73,10 +82,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php esc_html_e( 'Nouveau', 'digirisk' ); ?>
 			</a>
 		</h2>
-		<?php if( isset( $text_info ) && $text_info != "" ): ?>
+		<?php if( isset( $text_info[ 'intervenants' ] ) && $text_info[ 'intervenants' ] != "" ): ?>
 			<span style="color : green">
-			<?php echo esc_attr( $text_info ); ?>
-		</span>
+				<?php echo esc_attr( $text_info[ 'intervenants' ] ); ?>
+			</span>
 		<?php endif; ?>
 		<?php Permis_Feu_Class::g()->display_list_intervenant( $permis_feu->data['id'] ); ?>
 

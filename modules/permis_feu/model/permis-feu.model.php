@@ -159,7 +159,7 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 		$this->schema['society_outside_name'] = array(
 			'type'      => 'string',
 			'meta_type' => 'multiple',
-			'default'   => 'Entreprise Exterieur',
+			'default'   => '',
 		);
 
 		$this->schema['society_outside_siret'] = array(

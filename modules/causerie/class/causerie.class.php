@@ -88,7 +88,6 @@ class Causerie_Class extends \eoxia\Post_Class {
 	}
 
 	public function treat_content_import_causerie( $content ){
-
 		$content_by_lines = preg_split( '/\r\n|\r|\n/', $content );
 		$line_error = array();
 
@@ -144,10 +143,10 @@ class Causerie_Class extends \eoxia\Post_Class {
 					$line = str_replace( '%media%', '', $line );
 					$line = str_replace( '%Media%', '', $line );
 					if( ! empty( $line ) && ! empty( $list_id ) && $id_actual > 0 ){
-						$live_without_extension = preg_replace('/\\.[^.\\s]{3,4}$/', '', $line);
+						$line_without_extension = preg_replace('/\\.[^.\\s]{3,4}$/', '', $line);
 						$media_query = new \WP_Query(
 						    array(
-								'title'          => $live_without_extension,
+								'title'          => $line_without_extension,
 						        'post_type'      => 'attachment',
 						        'post_status'    => 'inherit',
 						        'posts_per_page' => 1,
@@ -354,28 +353,12 @@ class Causerie_Class extends \eoxia\Post_Class {
 		$lines = preg_split('/\r\n|\n|\r/', $content );
 		$data = array();
 		foreach( $lines as $key => $line ){
-			$temp = array(
-				'line'    => $line,
-				'type'    => '',
-				'error'    => '',
-				'info'     => ''
-			);
 
 			if( $line != "" ){
 				$data_line = $this->check_if_line_is_correct_to_causerie( $line, $git_file );
-				if( $data_line[ 'success' ] ){
-					if( $data_line[ 'type_valid' ] ){
-						$temp[ 'info' ] = $data_line[ 'type_info' ];
-					}else{
-						$temp[ 'error' ] = $data_line[ 'type_info' ];
-					}
-				}else{
-					$temp[ 'error' ] = esc_html__( 'Ligne invalide', 'digirisk' );
-				}
-			}else{
-				$temp[ 'error' ] = esc_html__( 'Ligne vide', 'digirisk' );
+
+				$data[ $key ] = $data_line;
 			}
-			$data[ $key ] = $temp;
 		}
 
 		return $data;
@@ -384,29 +367,32 @@ class Causerie_Class extends \eoxia\Post_Class {
 	public function check_if_line_is_correct_to_causerie( $line, $git_file ){
 		$line_error = array();
 		$data = array(
+			'line' => $line,
 			'success'    => true,
 			'type'       => '',
 			'type_valid' => false,
-			'type_info'  => ''
+			'info'  => '',
+			'url'   => '',
+			'filename' => ''
 		);
 
 		if ( false !== strpos( strtolower( $line ), '%causerie%' ) ) {
 			$data[ 'type' ] = 'causerie';
 			$data[ 'type_valid' ] = true;
-			$data[ 'type_info' ] = esc_html__( 'Causerie valid', 'digirisk' );
+			$data[ 'info' ] = esc_html__( 'Causerie valide', 'digirisk' );
 		}else if( false !== strpos( strtolower( $line ), '%description%' ) ) {
 			$data[ 'type' ] = "description";
 			$data[ 'type_valid' ] = true;
-			$data[ 'type_info' ] = esc_html__( 'Description valid', 'digirisk' );
+			$data[ 'info' ] = esc_html__( 'Description valide', 'digirisk' );
 		}else if( false !== strpos( strtolower( $line ), '%media%' ) ){ // Si c'est une photo on vérifie qu'elle existe
 			$data[ 'type' ] = "media";
 			$line = str_replace( '%media%', '', $line );
 			$line = str_replace( '%Media%', '', $line );
 
-			$live_without_extension = preg_replace( '/\\.[^.\\s]{3,4}$/', '', $line );
+			$line_without_extension = preg_replace( '/\\.[^.\\s]{3,4}$/', '', $line );
 			$media_query = new \WP_Query(
 				array(
-					'title'          => $live_without_extension,
+					'title'          => $line_without_extension,
 					'post_type'      => 'attachment',
 					'post_status'    => 'inherit',
 					'posts_per_page' => 1,
@@ -415,17 +401,21 @@ class Causerie_Class extends \eoxia\Post_Class {
 
 			if( ! empty( $media_query->posts ) ){ // Photo trouvé !
 				$data[ 'type_valid' ] = true;
-				$data[ 'type_info' ] = esc_html__( 'Media valid', 'digirisk' );
+				$data[ 'info' ] = esc_html__( 'Photo trouvée la galerie des médias', 'digirisk' );
 			}else{ // Photo introuvable dans les medias
 				if( ! empty( $git_file ) ){ // Check si la photo se trouve dans l'import
 					$media_is_in_import = $this->check_if_media_is_in_import( $line, $git_file );
-					if( $media_is_in_import ){
-						$data[ 'type_info' ] = esc_html__( 'Media trouvé dans l\'import', 'digirisk' );
+					if( ! empty( $media_is_in_import ) ){
+						$data[ 'info' ] = esc_html__( 'Photo trouvée dans l\'import', 'digirisk' );
+						$data[ 'url' ] = $media_is_in_import[ 'download_url' ];
+						$data[ 'filename' ] = $media_is_in_import[ 'name' ];
 					}else{
-						$data[ 'type_info' ] = esc_html__( 'Media introuvable (gallery et import)', 'digirisk' );
+						$data[ 'info' ] = esc_html__( 'Media introuvable (gallery et import)', 'digirisk' );
+						$data[ 'success' ] = false;
 					}
 				}else{
-					$data[ 'type_info' ] = esc_html__( 'Media introuvable dans la gallery', 'digirisk' );
+					$data[ 'info' ] = esc_html__( 'Media introuvable dans la gallery', 'digirisk' );
+					$data[ 'success' ] = false;
 				}
 			}
 		}else if( false !== strpos( strtolower( $line ), '%risque%' ) ){
@@ -436,9 +426,10 @@ class Causerie_Class extends \eoxia\Post_Class {
 			$risque = Risk_Category_Class::g()->get( array( 'name' => $line ), true );
 			if( ! empty( $risque ) ){
 				$data[ 'type_valid' ] = true;
-				$data[ 'type_info' ] = esc_html__( 'Risque valide', 'digirisk' );
+				$data[ 'info' ] = esc_html__( 'Risque trouvé dans les catégories de risque', 'digirisk' );
 			}else{
-				$data[ 'type_info' ] = esc_html__( 'Risque introuvable', 'digirisk' );
+				$data[ 'info' ] = esc_html__( 'Risque introuvable', 'digirisk' );
+				$data[ 'success' ] = false;
 			}
 		}else{
 			$data[ 'success' ] = false; // Type introuvable / pas pris en compte
@@ -449,10 +440,10 @@ class Causerie_Class extends \eoxia\Post_Class {
 	public function check_if_media_is_in_import( $line, $git_file ){
 		foreach( $git_file as $element ){
 			if( $element[ 'name' ] == $line ){
-				return true;
+				return $element;
 			}
 		}
-		return false;
+		return array();
 	}
 }
 

@@ -29,6 +29,11 @@ global $eo_search; ?>
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
+	<?php if( isset( $text_info[ 'intervenant_exterieur' ] ) && $text_info[ 'intervenant_exterieur' ] != "" ): ?>
+		<span style="color : green">
+			<?php echo esc_attr( $text_info[ 'intervenant_exterieur' ] ); ?>
+		</span>
+	<?php endif; ?>
 	<?php Permis_feu_Class::g()->display_intervenant_exterieur( array(), $permis_feu->data[ 'id' ] ); ?>
 </div>
 

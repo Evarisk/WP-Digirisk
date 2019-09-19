@@ -72,7 +72,7 @@ class Society_Configuration_Action {
 			'title' => 'Informations',
 		) );
 		$view = ob_get_clean();*/
-		$view = ''; // CA MARCHE CA ? 02/08/2019
+		$view = ''; // CA MARCHE CA ? 02/08/2019 - JSP 19/09/2019
 
 		ob_start();
 		Society_Configuration_Class::g()->display_form_owner( $society );

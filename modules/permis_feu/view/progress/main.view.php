@@ -21,13 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<table class="table closed-permis-feu">
 		<thead>
 			<tr>
-				<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Date cloture', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Intervention(s)	', 'digirisk' ); ?></td>
 				<td class="w100 padding"><?php esc_html_e( 'Progression', 'digirisk' ); ?></td>
-				<td class="w100"></td>
+				<td class="w50"></td>
 			</tr>
 		</thead>
 		<?php

@@ -41,10 +41,10 @@ class Tab_Class extends \eoxia\Singleton_Util {
 
 		$element = Society_Class::g()->show_by_type( $id );
 
+		// $tab_slug = "digi-configuration";
 		$tab       = new \stdClass();
 		$tab->slug = $tab_slug;
 		$tab       = $this->build_tab_to_display( $element, $tab_slug );
-
 		\eoxia\View_Util::exec( 'digirisk', 'tab', 'main', array(
 			'id'       => $id,
 			'tab'      => $tab,

@@ -33,18 +33,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    <div class="form-element">
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-globe"></i></span>
-				<input type="text" class="form-field">
+				<input type="text" name="url" class="form-field" value="https://github.com/Evarisk/bibliotheque-media-risque/tree/master/causerie/prevention/9_principes_prevention">
 			</label>
 		</div>
 	</div>
-	<div class="wpeo-button button-blue import-git-button"
-	data-action="ia_import_txt_from_url"
-	data-action="<?php echo esc_attr( wp_create_nonce( 'ia_import_txt_from_url' ) ); ?>">
+	<div class="wpeo-button button-blue action-input"
+	data-action="causerie_import_txt_from_url"
+	data-parent="digi-view-textarea"
+	data-nonce="<?php echo esc_attr( wp_create_nonce( 'causerie_import_txt_from_url' ) ); ?>">
 		<i class="fas fa-2x fa-file-import" style="margin-top:-2px"></i>
 	</div>
 
 </div>
 
-<textarea name="content" style="width: 100%; min-height: 400px;" >
-	<?= isset( $default_content ) ? esc_html( $default_content ) : '' ?>
-</textarea>
+<div class="digi-import-modal-content-main">
+	<textarea name="content" style="width: 100%; min-height: 400px;" >
+		<?= isset( $default_content ) ? esc_html( $default_content ) : '' ?>
+	</textarea>
+</div>
+<div class="digi-import-modal-content-git" style="display : none">
+
+</div>

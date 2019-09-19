@@ -116,6 +116,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			$permis_feu->data[ 'intervenants' ][0] = array(
 				'name' => '',
 				'lastname' => '',
+				'phone' => '',
 				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' )
 			);
 			$intervenants_info = esc_html__( 'Aucun intervenant défini' );

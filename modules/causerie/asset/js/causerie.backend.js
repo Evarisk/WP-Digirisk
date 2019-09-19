@@ -79,7 +79,7 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 
 	jQuery( document ).on( 'keyup', '.digi-import-add-keyword .digi-info-import-link input', window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl );
 
-	jQuery( document ).on( 'click', '.wpeo-modal .import-git-button', window.eoxiaJS.digirisk.causerie.importGitContent );
+	// jQuery( document ).on( 'click', '.wpeo-modal .import-git-button', window.eoxiaJS.digirisk.causerie.importGitContent );
 
 	jQuery( document ).on( 'click', '.modal-footer .digi-display-view-git .digi-content-git', window.eoxiaJS.digirisk.causerie.txtHiddenGitToTextArea );
 
@@ -92,6 +92,8 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 	jQuery( document ).on( 'click', '.modal-container .digi-footer-execute .digi-import-execute-run', window.eoxiaJS.digirisk.causerie.importModalExecuteIt );
 
 	jQuery( document ).on( 'click', '.wrap-causerie .tab-select-redirect .tab-element', window.eoxiaJS.digirisk.causerie.tabSelectRedirect );
+
+	jQuery( document ).on( 'click', '.wrap-causerie .modal-footer-view-textarea .digi-display-textarea', window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea );
 
 };
 
@@ -408,8 +410,10 @@ window.eoxiaJS.digirisk.causerie.addKeywordToTextarea = function( event ){
 	if( jQuery( this ).attr( 'data-type' ) == "link" ){
 		window.eoxiaJS.digirisk.causerie.buttonLinkExternalText( jQuery( this ), importContent );
 	}else{
-		var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
-		importContent.focus().val( importContent.val() + '\r\n' + keyword );
+		if( jQuery( this ).attr( 'data-type' ) != "" && jQuery( this ).attr( 'data-type' ) != null ){
+			var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
+			importContent.focus().val( importContent.val() + '\r\n' + keyword );
+		}
 	}
 }
 
@@ -981,3 +985,28 @@ window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 		}());
 	});
 };
+
+window.eoxiaJS.digirisk.causerie.causerieImportTxtFromUrl = function( triggeredElement, response ){
+	if( response.data.view != "" ){
+		var parent_element = triggeredElement.closest( '.digi-view-textarea' );
+		parent_element.find( '.digi-import-add-keyword' ).hide();
+		parent_element.find( '.digi-import-modal-content-main' ).hide();
+		parent_element.find( '.digi-import-modal-content-main textarea' ).val( response.data.content );
+
+		parent_element.find( '.digi-import-modal-content-git' ).show();
+		parent_element.find( '.digi-import-modal-content-git' ).html( response.data.view );
+
+		triggeredElement.closest( '.modal-container' ).find( '.digi-button-import-git' ).show();
+		triggeredElement.closest( '.modal-container' ).find( '.digi-button-import' ).hide();
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea = function( event ){
+	console.log( '----' );
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-modal-content-main' ).show();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-add-keyword' ).show();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-button-import' ).show();
+
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-modal-content-git' ).hide();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-button-import-git' ).hide();
+}
