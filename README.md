@@ -32,4 +32,4 @@ DigiRisk peut être associé à d'autres plugins :
 * Le plan d'actions, utilisez [Task Manager](https://taskmanager.fr/ "Task Manager"), la symbiose est juste parfaite
 
 # Open Source
-Vous souhaitez participez au projet faites un tour sur [opensource.guide]](https://opensource.guide "OpenSource.Guide")
+Vous souhaitez participez au projet faites un tour sur [opensource.guide](https://opensource.guide/ "OpenSource.Guide")
