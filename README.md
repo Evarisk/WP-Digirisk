@@ -1,6 +1,6 @@
 # DigiRisk
 
-Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive : 
+Le plugin DigiRisk vous permet de réaliser, de façon simple et intuitive : 
 * Votre Document Unique
 * Les fiches d'Unités de Travail
 * Les risques par photo
@@ -29,4 +29,7 @@ Associé à [DigiRisk Dashboard](https://github.com/Evarisk/digirisk-dashboard "
 
 DigiRisk peut être associé à d'autres plugins :
 * La gestion des EPIs, utilisez [Theepi.fr](https://www.theepi.fr/ "Theepi.fr") facile, gratuit et intégrable en 1 clic
-* Le plan d'actions, utilisez [Task Manager](http://taskmanager.fr/ "Task Manager"), la symbiose est juste parfaite
+* Le plan d'actions, utilisez [Task Manager](https://taskmanager.fr/ "Task Manager"), la symbiose est juste parfaite
+
+# Open Source
+Vous souhaitez participez au projet faites un tour sur [opensource.guide](]https://opensource.guide "OpenSource.Guide")
