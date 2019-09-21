@@ -11,11 +11,11 @@ Le plugin DigiRisk vous permet de réaliser, de façon simple et intuitive :
 * La gestion de votre registre des accidents bénins
 * La gestion de votre intranet sécurité grâce à WP
 * Le fonctionnement sur vos téléphones, tablettes natifs, sans installation de appli, DigiRisk est responsive
-* De nombreuses autres fonctions sont disponible sur le site [digirisk.com](www.digirisk.com "digirisk.com")
+* De nombreuses autres fonctions sont disponible sur le site [digirisk.com](www.digirisk.com "DigiRisk.com")
 
 # DigiRisk et WordPressMU
 
-Vous devez gerer du Multisites : 
+Vous gerez de nombreux établissments : 
 * Ensembles de sociétés (Groupe, holding etc.)
 * Etablissements (Lycées, collèges etc.)
 * Sites (SDIS, sictom, etc.)
@@ -23,7 +23,7 @@ Vous devez gerer du Multisites :
 * Clients (pour les consultants)
 DigiRisk et WordPressMU est fait pour vous... Votre Système de Management de la Sécurité sera géré de façon homogène et en toute simplicité.
 DigiRisk intégre de facon native la possibilité de créer des modèles duplicables, il suffit de les personnaliser par société.
-Associé à [DigiRisk Dashboard](https://github.com/Evarisk/digirisk-dashboard "DigiRisk Dashboard") vous pourrez avoir une vue global sur le pilotage.
+Associé à [DigiRisk Dashboard](https://github.com/Evarisk/digirisk-dashboard "DigiRisk Dashboard") vous pourrez avoir une vue globale sur le pilotage.
 
 # DigiRisk et autres plugins
 
