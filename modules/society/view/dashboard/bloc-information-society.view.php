@@ -42,15 +42,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div class="" style="margin-top:20px; margin-bottom:10px; color: rgb(36, 124, 255);; font-size : 15px">
 					<span>
-						<i class="fas fa-hashtag"></i><b style="color : #3d4052;">2278</b>
+						<i class="fas fa-hashtag"></i><b style="color : #3d4052;"><?php echo esc_attr( $element->data[ 'id' ] ); ?></b>
 					</span>
 					<span class="wpeo-tooltip-event" aria-label="Dernière modification" style="margin-left:20px">
 						<i class="fas fa-clock"></i>
 						<b style="color : #3d4052;">
-							 26/10/2017				</b>
+							<?php echo esc_attr( date( 'd/m/Y', strtotime( $element->data[ 'date_modified' ][ 'raw' ] ) ) ); ?>
+						 </b>
 					</span>
 					<span class="wpeo-tooltip-event" aria-label="Nom de l'entreprise" style="margin-left:20px">
-						<i class="fas fa-building"></i><b style="color : #3d4052;"> COPAC Beauchamp</b>
+						<i class="fas fa-building"></i><b style="color : #3d4052;"> <?php echo esc_attr( $element->data[ 'title' ] ); ?></b>
 					</span>
 				</div>
 			</div>

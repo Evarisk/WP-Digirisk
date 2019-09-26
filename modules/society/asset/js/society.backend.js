@@ -140,12 +140,13 @@ window.eoxiaJS.digirisk.society.requestGetViewEdit = function( event ){
 
 window.eoxiaJS.digirisk.society.displayEditViewSuccess = function( triggeredElement, response ) {
 	var class_element = triggeredElement.closest( '.bloc-information-society' ).attr( 'data-element' );
-	console.log( class_element );
 
 	triggeredElement.closest( '.main-information-society' ).replaceWith( response.data.view );
 	if( response.data.element == "" ){
 		var parent_element = jQuery( '.digirisk-wrap .tab-container' );
 		var element = parent_element.find( '.bloc-information-society[data-element="' + class_element + '"]' );
 		element.css( "border", "solid green 1px" );
+	}else{
+		jQuery( '.tab-content .main-information-society' ).find( '.bloc-information-society[data-edit="true"]' ).removeClass( 'wpeo-tooltip-event' ); // Enleve la POPUP au survol
 	}
 }
