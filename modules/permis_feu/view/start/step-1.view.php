@@ -37,15 +37,16 @@ global $eo_search; ?>
 </div>
 
 <?php if( isset( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ] ) && $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name != "" && $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name != ""  && $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone && $permis_feu->data[ 'maitre_oeuvre' ][ 'signature_id' ] != 0 ): ?>
-	<div class="wpeo-button button-blue action-input float right permis-feu-start"
+	<div class="wpeo-button wpeo-tooltip-event button-blue action-input permis-feu-start"
 <?php else: ?>
-	<div class="wpeo-button button-blue action-input float right permis-feu-start button-disable"
+	<div class="wpeo-button wpeo-tooltip-event button-blue action-input permis-feu-start button-disable"
 <?php endif; ?>
 		data-parent="ajax-content"
 		data-action="next_step_permis_feu"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
 		data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
+		aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
 		style="float:right">
-		<span><?php esc_html_e( 'Débuter', 'digirisk' ); ?></span>
+		<span><i class="fas fa-2x fa-long-arrow-alt-right"></i></span>
 	</div>
 </div>

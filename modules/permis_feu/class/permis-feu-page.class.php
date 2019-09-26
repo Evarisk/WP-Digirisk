@@ -201,11 +201,16 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 
 
 	public function save_society_information( $permis_feu, $society, $legal_display ) {
-		$name  = isset( $_POST[ 'outisde_name' ] ) ? sanitize_text_field( $_POST[ 'outisde_name' ] ) : '';
-		$siret = isset( $_POST[ 'outside_siret' ] ) ? sanitize_text_field( $_POST[ 'outside_siret' ] ) : '';
+		$data = array(
+			'name' => isset( $_POST[ 'outside_name' ] ) ? sanitize_text_field( $_POST[ 'outside_name' ] ) : '',
+			'siret' => isset( $_POST[ 'outside_siret' ] ) ? sanitize_text_field( $_POST[ 'outside_siret' ] ) : '',
+			'address' => isset( $_POST[ 'outside_address' ] ) ? sanitize_text_field( $_POST[ 'outside_address' ] ) : '',
+			'postal' => isset( $_POST[ 'outside_postalcode' ] ) ? sanitize_text_field( $_POST[ 'outside_postalcode' ] ) : '',
+			'town' => isset( $_POST[ 'outside_town' ] ) ? sanitize_text_field( $_POST[ 'outside_town' ] ) : '',
+		);
 
-		$permis_feu->data[ 'society_outside_name' ] = $name;
-		$permis_feu->data[ 'society_outside_siret' ] = $siret;
+		$permis_feu->data[ 'society_outside' ] = $data;
+
 		$permis_feu->data['step'] = \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_PARTICIPANT;
 
 		return Permis_Feu_Class::g()->update( $permis_feu->data );

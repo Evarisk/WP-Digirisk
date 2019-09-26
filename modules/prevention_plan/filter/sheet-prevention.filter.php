@@ -102,8 +102,6 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
 
 			$data_society = array(
-				// 'society_title'    => $args[ 'society' ]->data[ 'title' ],
-				// 'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
 				'moyen_generaux_mis_disposition' => $moyen_generaux,
 				'consigne_generale'              => $consigne_generale
 			);
@@ -160,8 +158,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data = array(
 			'id' => $prevention->data['id'],
 			'unique_identifier' => $prevention->data['unique_identifier'],
-			'society_title'    => $prevention->data['society_outside_name'],
-			'society_siret_id' => $prevention->data['society_outside_siret'],
+			'society_outside'    => $prevention->data['society_outside'],
 			'titre_prevention' => $prevention->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
 			'date_end_intervention_PPP' => $date_end,
@@ -191,6 +188,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			'intervenant_exterieur_signature_id' => $inter_e[ 'signature_id' ],
 			'intervenant_exterieur_signature_date' => date( 'd/m/Y', strtotime( $inter_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
 		);
+
 
 		$data = wp_parse_args( $data_legal_display, $data );
 		$data = wp_parse_args( $data_society, $data );

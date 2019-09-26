@@ -161,16 +161,26 @@ class Prevention_Model extends \eoxia\Post_Model {
 			'default' => 0,
 		);
 
-		$this->schema['society_outside_name'] = array(
-			'type'      => 'string',
+		$this->schema['society_outside'] = array(
+			'type'      => 'array',
 			'meta_type' => 'multiple',
-			'default'   => 'Entreprise Exterieur',
-		);
-
-		$this->schema['society_outside_siret'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'default'   => '',
+			'child'     => array(
+				'name'        => array(
+					'type' => 'string',
+				),
+				'siret'        => array(
+					'type' => 'string',
+				),
+				'address'        => array(
+					'type' => 'string',
+				),
+				'postal' => array(
+					'type' => 'string',
+				),
+				'town' => array(
+					'type' => 'string',
+				),
+			),
 		);
 
 		$this->schema['taxonomy'] = array(

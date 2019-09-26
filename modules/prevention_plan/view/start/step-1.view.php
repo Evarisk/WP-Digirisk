@@ -37,15 +37,16 @@ global $eo_search; ?>
 </div>
 
 <?php if( isset( $prevention->data[ 'maitre_oeuvre' ][ 'data' ] ) && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name != "" && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name != ""  && $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->phone && $prevention->data[ 'maitre_oeuvre' ][ 'signature_id' ] != 0 ): ?>
-	<div class="wpeo-button button-blue action-input float right prevention-start"
+	<div class="wpeo-button wpeo-tooltip-event button-blue action-input prevention-start"
 <?php else: ?>
-	<div class="wpeo-button button-blue action-input float right prevention-start button-disable"
+	<div class="wpeo-button wpeo-tooltip-event button-blue action-input prevention-start button-disable"
 <?php endif; ?>
 		data-parent="ajax-content"
 		data-action="next_step_prevention"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 		data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
+		aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
 		style="float:right; margin-top : 10px">
-		<span><?php esc_html_e( 'Débuter', 'digirisk' ); ?></span>
+		<span><i class="fas fa-2x fa-long-arrow-alt-right"></i></span>
 	</div>
 </div>

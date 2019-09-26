@@ -35,28 +35,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
+	<section class="wpeo-gridlayout padding grid-4" style="margin-bottom: 10px;">
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
+					<input type="text" class="form-field" name="outside_name" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'name' ] ); ?>">
+				</label>
+			</div>
+		</div>
+
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
+					<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'siret' ] ); ?>">
+				</label>
+			</div>
+		</div>
+	</section>
 	<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span class="form-label"><?php esc_html_e( 'Adresse', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="fas fa-location-arrow"></i></span>
+						<input type="text" class="form-field" name="outside_address" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'address' ] ); ?>">
+				</label>
+			</div>
+		</div>
 		<section class="wpeo-gridlayout padding grid-2" style="margin-bottom: 10px;">
 			<div class="wpeo-form">
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Nom de l\'entreprise', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Code Postal', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
-						<input type="text" class="form-field" name="outisde_name" value="<?php echo esc_attr( $prevention->data[ 'society_outside_name' ] ); ?>">
+						<span class="form-field-icon-prev"><i class="fas fa-map-marker-alt"></i></span>
+						<input type="text" class="form-field" name="outside_postalcode" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'postal' ] ); ?>">
 					</label>
 				</div>
 			</div>
-
 			<div class="wpeo-form">
 				<div class="form-element">
-					<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
+					<span class="form-label"><?php esc_html_e( 'Ville', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
-						<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $prevention->data[ 'society_outside_siret' ] ); ?>">
+						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
+						<input type="text" class="form-field" name="outside_town" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'town' ] ); ?>">
 					</label>
 				</div>
 			</div>
 		</section>
+
+
 	</section>
 
 	<div class="intervenant-bloc">
@@ -82,10 +113,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		data-parent="digi-prevention-parent"
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 		data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
-		aria-label="<?php esc_html_e( 'Prochaine étape', 'digirisk' ); ?>"
+		aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
 		style="float:right; margin-top: 10px">
 		<span>
-			<?php esc_html_e( 'Continuer', 'digirisk' ); ?>
-			<i class="fas fa-long-arrow-alt-right"></i>
+			<i class="fas fa-2x fa-long-arrow-alt-right"></i>
 		</span>
 	</div>

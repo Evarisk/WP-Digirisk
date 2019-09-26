@@ -47,7 +47,7 @@ global $eo_search; ?>
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
 	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 	data-parent="digi-permis-feu-parent"
-	aria-label="<?php esc_html_e( 'Valider', 'digirisk' ); ?>"
+	aria-label="<?php esc_html_e( 'Terminer', 'digirisk' ); ?>"
 	style="float:right; margin-top: 10px">
-	<span><?php esc_html_e( 'Finish', 'digirisk' ); ?> <i class="fas fa-thumbs-up"></i></span>
+	<span><i class="fas fa-2x fa-check"></i></span>
 </div>

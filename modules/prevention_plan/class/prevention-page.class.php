@@ -176,11 +176,16 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	}
 
 	public function save_society_information( $prevention, $society, $legal_display ) {
-		$name  = isset( $_POST[ 'outisde_name' ] ) ? sanitize_text_field( $_POST[ 'outisde_name' ] ) : '';
-		$siret = isset( $_POST[ 'outside_siret' ] ) ? sanitize_text_field( $_POST[ 'outside_siret' ] ) : '';
+		$data = array(
+			'name' => isset( $_POST[ 'outside_name' ] ) ? sanitize_text_field( $_POST[ 'outside_name' ] ) : '',
+			'siret' => isset( $_POST[ 'outside_siret' ] ) ? sanitize_text_field( $_POST[ 'outside_siret' ] ) : '',
+			'address' => isset( $_POST[ 'outside_address' ] ) ? sanitize_text_field( $_POST[ 'outside_address' ] ) : '',
+			'postal' => isset( $_POST[ 'outside_postalcode' ] ) ? sanitize_text_field( $_POST[ 'outside_postalcode' ] ) : '',
+			'town' => isset( $_POST[ 'outside_town' ] ) ? sanitize_text_field( $_POST[ 'outside_town' ] ) : '',
+		);
 
-		$prevention->data[ 'society_outside_name' ] = $name;
-		$prevention->data[ 'society_outside_siret' ] = $siret;
+		$prevention->data[ 'society_outside' ] = $data;
+
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT;
 
 		return Prevention_Class::g()->update( $prevention->data );

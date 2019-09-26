@@ -106,14 +106,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
 								<div class="wpeo-button button-grey action-button-end-date button-radius-3 button-prevention-title" style="margin-left: 5px;" data-action="undefined">
-									<span><?php esc_html_e( 'En cours', 'digirisk' ); ?></span>
+									<span><?php esc_html_e( 'Sans limite', 'digirisk' ); ?></span>
 								</div>
 							<?php else: ?>
 								<div class="wpeo-button button-grey action-button-end-date button-radius-3 button-prevention-title" data-action="defined">
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
 								<div class="wpeo-button button-blue action-button-end-date button-radius-3 button-prevention-title" style="margin-left: 5px;" data-action="undefined">
-									<span><?php esc_html_e( 'En cours', 'digirisk' ); ?></span>
+									<span><?php esc_html_e( 'Sans limite', 'digirisk' ); ?></span>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -163,15 +163,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<div class="wpeo-button button-blue action-input"
+<div class="wpeo-button  wpeo-tooltip-event button-blue action-input"
 	data-action="next_step_prevention"
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 	data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
 	data-parent="digi-prevention-parent"
+	aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
 	style="float:right; margin-top: 10px">
 	<span>
-		<?php esc_html_e( 'Valider', 'digirisk' ); ?>
-		<i class="fas fa-long-arrow-alt-right"></i>
+		<i class="fas fa-2x fa-long-arrow-alt-right"></i>
 	</span>
 </div>
 <div style="height : 200px">

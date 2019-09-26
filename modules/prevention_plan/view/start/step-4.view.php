@@ -45,7 +45,7 @@ global $eo_search; ?>
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
 	data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
 	data-parent="digi-prevention-parent"
-	aria-label="<?php esc_html_e( 'Valider', 'digirisk' ); ?>"
+	aria-label="<?php esc_html_e( 'Terminer', 'digirisk' ); ?>"
 	style="float:right; margin-top: 10px">
-	<span><?php esc_html_e( 'Finish', 'task-manager' ); ?> <i class="fas fa-thumbs-up"></i></span>
+	<span><i class="fas fa-2x fa-check"></i></span>
 </div>

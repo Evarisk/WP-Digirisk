@@ -328,22 +328,51 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 				$text_info[ 'intervenants' ] = esc_html__( sprintf( 'Récupération des intervenants définies dans le plan de prévention ( %1$d )', count( $permis_feu->data[ 'intervenants' ] ) ), 'dirigisk' );
 			}
 
-			if( $permis_feu->data[ 'society_outside_name' ] == "" || $permis_feu->data[ 'society_outside_siret' ] == "" ){
-				$text_info[ 'society' ] = esc_html__( 'Récupération des informations de société définies dans le plan de prévention', 'dirigisk' );
-
-				if( $permis_feu->data[ 'society_outside_name' ] == "" ){
-					$permis_feu->data[ 'society_outside_name' ] = $prevention->data[ 'society_outside_name' ];
-				}
-				if( $permis_feu->data[ 'society_outside_siret' ] == "" ){
-					$permis_feu->data[ 'society_outside_siret' ] = $prevention->data[ 'society_outside_siret' ];
-				}
-
-			}
+			$return = $this->check_if_society_can_be_update( $permis_feu->data[ 'society_outside' ], $prevention->data[ 'society_outside' ] );
+			$permis_feu->data[ 'society_outside' ] = $return[ 'society' ];
+			$text_info[ 'society' ] = $return[ 'txt' ];
 
 			$permis_feu = Permis_feu_Class::g()->update( $permis_feu->data );
 		}
 
 		return array( 'permis_feu' => $permis_feu, 'text_info' => $text_info );
+	}
+
+	public function check_if_society_can_be_update( $pf_society, $pp_society ){
+
+		$modif = false;
+		$txt = '';
+
+		if( $pf_society[ 'name' ] == "" && $pp_society[ 'name' ] != "" ){
+			$modif = true;
+			$pf_society[ 'name' ] = $pp_society[ 'name' ];
+		}
+
+		if( $pf_society[ 'siret' ] == "" && $pp_society[ 'siret' ] != "" ){
+			$modif = true;
+			$pf_society[ 'siret' ] = $pp_society[ 'siret' ];
+		}
+
+		if( $pf_society[ 'address' ] == "" && $pp_society[ 'address' ] != "" ){
+			$modif = true;
+			$pf_society[ 'address' ] = $pp_society[ 'address' ];
+		}
+
+		if( $pf_society[ 'postal' ] == "" && $pp_society[ 'postal' ] != "" ){
+			$modif = true;
+			$pf_society[ 'postal' ] = $pp_society[ 'postal' ];
+		}
+
+		if( $pf_society[ 'town' ] == "" && $pp_society[ 'town' ] != "" ){
+			$modif = true;
+			$pf_society[ 'town' ] = $pp_society[ 'town' ];
+		}
+
+		if( $modif ){
+			$txt = esc_html__( 'Récupération des informations de société définies dans le plan de prévention', 'dirigisk' );
+		}
+
+		return array( 'society' => $pf_society, 'txt' => $txt );
 	}
 
 	public function import_intervenant_prevention( $permis_feu ){

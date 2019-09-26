@@ -107,53 +107,45 @@ window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( tri
 		jQuery( '.digirisk-wrap .navigation-container .society-header .title' ).text( response.data.society.data.title );
 	}
 
+	/*
+
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.data.title );
 
 	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
 
 	if( response.data.view_owner != "" ){
-		triggeredElement.closest( '.wpeo-form' ).find( 'input[name="society[owner_id]"}' ).closest( '.form-element' ).html( '' );
-	}
+		triggeredElement.closest( '.wpeo-form' ).find( 'input[name="society[owner_id]]"}' ).closest( '.form-element' ).html( '' );
+	}*/
 };
 
 window.eoxiaJS.digirisk.society.deleteOwnerIdSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.form-element' ).replaceWith( response.data.view );
 }
 
-window.eoxiaJS.digirisk.society.findEditView = function( element ){
-	var element = element.closest( '.tab-content' ).find( '.bloc-information-society[data-edit="true"]' );
-	return element;
-}
-
 window.eoxiaJS.digirisk.society.requestGetViewEdit = function( event ){
+
+	element = jQuery( this ).attr( 'data-element' );
 	if( jQuery( this ).attr( 'data-edit' ) == "true" ){
 		return;
 	}
 
-	var element_close = "";
-	var element = window.eoxiaJS.digirisk.society.findEditView( jQuery( this ) );
-	if( element.length > 0 ){
-		element_close = element.attr( 'data-element' );
-	}
 	var data = {};
 	data.action        = jQuery( this ).attr( 'data-action' );
 	data._wpnonce      = jQuery( this ).attr( 'data-nonce' );
-	data.element       = jQuery( this ).attr( 'data-element' );
-	data.element_close = element_close;
+	data.element       = element;
 
 	window.eoxiaJS.loader.display( jQuery( this ) );
 	window.eoxiaJS.request.send( jQuery( this ), data );
 }
 
 window.eoxiaJS.digirisk.society.displayEditViewSuccess = function( triggeredElement, response ) {
-	if( response.data.view_close != "" ){
-		console.log( '---' );
-		var element = window.eoxiaJS.digirisk.society.findEditView( triggeredElement );
-		console.log( 'oui' );
-		console.log( element );
-		element.replaceWith( response.data.view_close );
+	var class_element = triggeredElement.closest( '.bloc-information-society' ).attr( 'data-element' );
+	console.log( class_element );
+
+	triggeredElement.closest( '.main-information-society' ).replaceWith( response.data.view );
+	if( response.data.element == "" ){
+		var parent_element = jQuery( '.digirisk-wrap .tab-container' );
+		var element = parent_element.find( '.bloc-information-society[data-element="' + class_element + '"]' );
+		element.css( "border", "solid green 1px" );
 	}
-	triggeredElement.attr( 'data-edit', 'true' );
-	triggeredElement.find( '.bloc-content' ).html( response.data.view );
-	triggeredElement.css( 'border' , 'solid blue 1px' );
 }

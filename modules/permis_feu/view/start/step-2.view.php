@@ -71,14 +71,14 @@ global $eo_search;
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
 								<div class="wpeo-button button-grey action-button-end-date button-radius-3 button-permis-feu-title" style="margin-left: 5px;" data-action="undefined">
-									<span><?php esc_html_e( 'En cours', 'digirisk' ); ?></span>
+									<span><?php esc_html_e( 'Sans limite', 'digirisk' ); ?></span>
 								</div>
 							<?php else: ?>
 								<div class="wpeo-button button-grey action-button-end-date button-radius-3 button-permis-feu-title" data-action="defined">
 									<span><?php esc_html_e( 'Défini', 'digirisk' ); ?></span>
 								</div>
 								<div class="wpeo-button button-blue action-button-end-date button-radius-3 button-permis-feu-title" style="margin-left: 5px;" data-action="undefined">
-									<span><?php esc_html_e( 'En cours', 'digirisk' ); ?></span>
+									<span><?php esc_html_e( 'Sans limite', 'digirisk' ); ?></span>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -154,11 +154,10 @@ global $eo_search;
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
 	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
 	data-parent="digi-permis-feu-parent"
-	aria-label="<?php esc_html_e( 'Valider', 'digirisk' ); ?>"
+	aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
 	style="float:right; margin-top: 10px">
 	<span>
-		<?php esc_html_e( 'Valider', 'digirisk' ); ?>
-		<i class="fas fa-long-arrow-alt-right"></i>
+		<i class="fas fa-2x fa-long-arrow-alt-right"></i>
 	</span>
 </div>
 

@@ -94,7 +94,6 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 	jQuery( document ).on( 'click', '.wrap-causerie .tab-select-redirect .tab-element', window.eoxiaJS.digirisk.causerie.tabSelectRedirect );
 
 	jQuery( document ).on( 'click', '.wrap-causerie .modal-footer-view-textarea .digi-display-textarea', window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea );
-
 };
 
 /**
@@ -623,6 +622,7 @@ window.eoxiaJS.digirisk.causerie.executeGitTxtSuccess =  function ( triggeredEle
 window.eoxiaJS.digirisk.causerie.tabSelectRedirect = function( event ){
 	var url = jQuery( this ).attr( 'data-url' );
 	window.location.href = url;
+	console.log( 'efjkopEFKLfEEFZ' );
 }
 
 

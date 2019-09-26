@@ -19,11 +19,11 @@ defined( 'ABSPATH' ) || exit;
 global $eo_search; ?>
 
 <form class="wpeo-form">
-	<input type="hidden" name="action" value="save_configuration" />
+	<input type="hidden" name="action" value="save_society_information_more" />
 	<input type="hidden" name="society[id]" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 	<input type="hidden" name="address[post_id]" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 	<input type="hidden" name="society[type]" value="<?php echo esc_attr( $element->data['type'] ); ?>" />
-	<?php wp_nonce_field( 'save_configuration' ); ?>
+	<?php wp_nonce_field( 'save_society_information_more' ); ?>
 
 	<div class="wpeo-gridlayout grid-2 grid-gap-1">
 		<div class="form-element">

@@ -89,3 +89,34 @@ canvas {
 		border: none;
 	}
 }
+
+
+.wpeo-wrap.causerie-wrap .step .step-list .step:after, .wpeo-wrap.permis-feu-wrap .step .step-list .step:after, .wpeo-wrap.prevention-wrap .step .step-list .step:after {
+    position: relative;
+    z-index: 90;
+    display: block;
+    margin: auto;
+    content: '';
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    background: #d6d6d6;
+    border-radius: 50%;
+    -webkit-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.wpeo-wrap .step .step-list .step:after {
+    position: relative;
+    z-index: 90;
+    display: block;
+    margin: auto;
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: #d6d6d6;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}

@@ -121,6 +121,75 @@ class Legal_Display_Class extends Document_Class {
 	public function save_data( $data ) {
 		return $this->create( $data );
 	}
+
+	public function get_legal_display( $id ){
+
+		$legal_display = $this->get( array(
+			'post_status'    => array( 'any', 'publish', 'inherit', 'anyauto-draft' ),
+			'posts_per_page' => 1,
+			'post_parent'    => $id,
+			'orderby'        => 'ID',
+			'order'          => 'DESC'
+		), true );
+
+		if ( empty( $legal_display ) ) {
+			$legal_display = $this->get( array(
+				'schema' => true,
+			), true );
+		}
+
+		return $legal_display;
+	}
+
+	public function get_diffusion_information( $id ){
+		$diffusion_information = Diffusion_Informations_Class::g()->get( array(
+			'post_parent'    => $id,
+			'posts_per_page' => 1,
+			'post_status'    => array(
+				'publish',
+				'inherit',
+			),
+		), true );
+
+		if ( empty( $diffusion_information ) ) {
+			$diffusion_information = Diffusion_Informations_Class::g()->get( array(
+				'schema' => true,
+			), true );
+		}
+
+		return $diffusion_information;
+	}
+
+	public function get_default_data_save(){
+
+		$society_id       = isset( $_POST[ 'society_id' ] ) ? (int) $_POST[ 'society_id' ] : 0;
+		$society = Society_Class::g()->get_actual_society( $society_id );
+
+		$legal_display = Legal_Display_Class::g()->get_legal_display( $society->data[ 'id' ] );
+		$legal_display->data[ 'id' ] = 0;// @TODO Delete cette ligne pour bloquer la création d'un nouveau Legal Display
+		$legal_display->data[ 'parent_id' ] = $society->data[ 'id' ];
+		$legal_display->data[ 'post_parent' ] = $society->data[ 'id' ];
+
+		$diffusion_information = $this->get_diffusion_information( $society->data[ 'id' ] );
+		return array( 'society' => $society,
+			'legal_display' => $legal_display,
+			'diffusion_information' => $diffusion_information,
+	  	);
+	}
+
+	public function display_configuration_view( $society, $focus_element = "" ){
+		ob_start();
+		Society_Class::g()->displayEditView( $society, $focus_element );
+		$view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'society',
+			'callback_success' => 'displayEditViewSuccess',
+			'view'             => $view,
+			'element'          => $focus_element
+		) );
+	}
 }
 
 Legal_Display_Class::g();

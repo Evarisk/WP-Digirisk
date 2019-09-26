@@ -40,6 +40,7 @@ global $eo_search;
 			<i class="fas fa-download"></i>
 		</span>
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-prevention&id=' . $permis_feu->data[ 'prevention_id' ] ) ); ?>"
+			target="_blank"
 			class="wpeo-button button-blue button-square-50 wpeo-tooltip-event"
 			aria-label="<?php esc_html_e( 'Editer', 'digirisk' ); ?>">
 		 		<i class="fas fa-pen"></i>

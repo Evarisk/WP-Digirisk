@@ -125,7 +125,7 @@ class Society_Model extends \eoxia\Post_Model {
 			'since'   => '6.1.6',
 			'version' => '6.1.6',
 			'type'    => 'string',
-			'default' => '',
+			'meta_type'  => 'multiple'
 		);
 
 		$this->schema['contact']['child']['address_id'] = array(

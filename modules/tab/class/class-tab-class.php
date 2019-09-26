@@ -41,10 +41,10 @@ class Tab_Class extends \eoxia\Singleton_Util {
 
 		$element = Society_Class::g()->show_by_type( $id );
 
-		// $tab_slug = "digi-configuration";
+		$tab_slug = apply_filters( 'digi_tab_get', $tab_slug, $list_tab );
 		$tab       = new \stdClass();
 		$tab->slug = $tab_slug;
-		$tab       = $this->build_tab_to_display( $element, $tab_slug );
+		$tab       = $this->build_tab_to_display( $element, $tab_slug, true );
 		\eoxia\View_Util::exec( 'digirisk', 'tab', 'main', array(
 			'id'       => $id,
 			'tab'      => $tab,
@@ -82,7 +82,7 @@ class Tab_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array                                             Les données de l'onglet.
 	 */
-	public function build_tab_to_display( $element, $tab = null ) {
+	public function build_tab_to_display( $element, $tab = null, $tab_is_str = false ) {
 		if ( null === $tab ) {
 			$tab = new \stdClass();
 		}
@@ -104,6 +104,10 @@ class Tab_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $tab->slug ) ) {
 			$default_tab->slug = $tab->slug;
+		}
+
+		if( $tab_is_str ){
+			$default_tab->slug = $tab;
 		}
 
 		if ( ! empty( $tab->title ) ) {

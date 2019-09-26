@@ -27,6 +27,7 @@ class Tab_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'tab_content', array( $this, 'callback_tab_content' ), 10, 4 );
+		add_filter( 'digi_tab_get', array( $this, 'callback_digi_tab_get' ), 10, 4 );
 	}
 
 	/**
@@ -46,6 +47,28 @@ class Tab_Filter {
 			'element_id'     => $element_id,
 			'tab_to_display' => $tab_to_display,
 		), false );
+	}
+
+	public function callback_digi_tab_get( $tab_slug = "", $list_tab = array() ){
+		$tab = isset( $_GET[ 'tab' ] ) ? sanitize_text_field( $_GET[ 'tab' ] ) : '';
+		if( ! $tab ){
+			return $tab_slug;
+		}
+
+		$tab_is_valid = false;
+		foreach( $list_tab[ 'digi-society' ] as $name => $family ){
+			if( $name == $tab ){
+				$tab = "digi-" . $name;
+				$tab_is_valid = true;
+				break;
+			}
+		}
+
+		if( ! $tab_is_valid ){
+			$tab = $tab_slug;
+		}
+
+		return $tab;
 	}
 }
 
