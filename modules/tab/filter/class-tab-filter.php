@@ -68,6 +68,7 @@ class Tab_Filter {
 			$tab = $tab_slug;
 		}
 
+
 		return $tab;
 	}
 }

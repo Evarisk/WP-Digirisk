@@ -633,7 +633,8 @@ window.eoxiaJS.digirisk.causerie.deletedAccidentSuccess = function( triggeredEle
 window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 	var interval = 0;
 	var myReq;
-	var k = [13, 13, 13, 13, 13];
+	var k = [13, 13, 13, 13, 13, 13];
+	var f = [32, 32, 32, 32, 32, 32];
 	n = 0;
 
 	var oui = false;
@@ -649,6 +650,15 @@ window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 				}
 		 	}
 	   }
+
+	   if (e.keyCode === f[n++]) {
+		   if (n === f.length) {
+			   if( p == 0 ){
+				   p = 1;
+				   draw3();
+			   }
+		   }
+	  }
 
 	   function createAudioContext(desiredSampleRate) {
 
@@ -947,7 +957,6 @@ window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 		  var elements = 0;
 
 		  var new_Timer = setInterval(function() {
-			  console.log( '2 : ' + elements );
 			  elements ++;
 
 				if (elements % 2 == 0 || elements == 0 ) {
@@ -973,6 +982,38 @@ window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
 					console.log( 'END' );
 				}
 		  }, 200 );
+	  }
+
+	  function draw3() {
+		  var elements = 0;
+		  var tour = 1;
+
+		  var Timer = setInterval(function() {
+
+				elements ++;
+				if ( elements == 5 ){
+					createBox(custom_song);
+					createBox(hihat);
+				}
+
+				if( elements == 10 ){
+					createBox(kick);
+				}
+
+				if ( elements == 15 ){
+					createBox(hihat);
+				}
+
+				if( elements == 20 ){
+					createBox(snare);
+				}
+
+				if( elements > 20 ) {
+					tour ++;
+					elements = 0;
+				}
+		  }, 50 );
+
 	  }
 
 		(function setButtonStyle() {
