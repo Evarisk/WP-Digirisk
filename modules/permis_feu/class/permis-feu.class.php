@@ -444,6 +444,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	public function prepare_permis_feu_to_odt_intervention( $permis_feu ){
 
 		$data_interventions = array();
+		$nbr = 0;
 
 		if( ! empty( $permis_feu->data[ 'intervention' ] ) ){
 			foreach( $permis_feu->data[ 'intervention' ] as $intervention ){
@@ -458,7 +459,6 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 				$data_interventions[] = $data_temp;
 			}
 			$nbr = count( $permis_feu->data[ 'intervention' ] );
-			$interventions_info = esc_html__( sprintf( 'Il y a %1$d intervention(s)', $nbr ), 'digirisk' );
 		}else{
 			$data_interventions[0] = array(
 				'key_unique' => '',
@@ -467,8 +467,9 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 				'type_de_travaux' => '',
 				'materiel' => ''
 			);
-			$interventions_info = esc_html__( 'Aucune intervention définie' );
+			// $interventions_info = esc_html__( 'Aucune intervention définie' );
 		}
+		$interventions_info = (string) $nbr;
 
 		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}

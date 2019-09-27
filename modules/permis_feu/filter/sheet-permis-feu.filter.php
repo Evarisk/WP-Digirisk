@@ -88,18 +88,24 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			$data_odt = wp_parse_args( $data_legal_display, $data_odt );
 		}
 
+		$data_society = array();
 		if( isset( $args[ 'society' ] ) && ! empty( $args[ 'society' ] ) ){
 			$moyen_generaux = $args[ 'society' ]->data[ 'moyen_generaux' ] != "" ? $args[ 'society' ]->data[ 'moyen_generaux' ] : esc_html__( 'Vide', 'digirisk' );
 			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
 
 			$data_society = array(
-				// 'society_title'    => $args[ 'society' ]->data[ 'title' ],
-				// 'society_siret_id' => $args[ 'society' ]->data[ 'siret_id' ] != "" ? $args[ 'society' ]->data[ 'siret_id' ] : '',
 				'moyen_generaux_mis_disposition' => $moyen_generaux,
 				'consigne_generale'              => $consigne_generale
 			);
-			$data_odt = wp_parse_args( $data_society, $data_odt );
 		}
+
+		$s_o = $prevention->data[ 'society_outside' ];
+		$data_society[ 'society_title' ] =  $s_o[ 'name' ];
+		$data_society[ 'society_siret_id' ] = $s_o[ 'siret' ];
+		$data_society[ 'society_address' ] =  $s_o[ 'address' ];
+		$data_society[ 'society_postcode' ] = $s_o[ 'postal' ];
+		$data_society[ 'society_town' ] = $s_o[ 'town' ];
+
 
 		$return = Permis_Feu_Class::g()->prepare_permis_feu_to_odt_intervention( $permis_feu );
 
@@ -111,21 +117,21 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 		$data_interventions_pre = $return_pre[ 'data' ];
 		$interventions_info_pre = $return_pre[ 'text' ];
 
-		$intervenants_info = "";
 		if( empty( $permis_feu->data[ 'intervenants' ] ) ){
 			$permis_feu->data[ 'intervenants' ][0] = array(
-				'name' => '',
-				'lastname' => '',
-				'phone' => '',
+				'id' => 0,
+				'name' => ' - ',
+				'lastname' => ' - ',
+				'phone' => ' - ',
 				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' )
 			);
-			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
+			$nbr = 0;
 		}else{
 			$nbr = count( $permis_feu->data[ 'intervenants' ] );
 			$intervenants = Prevention_Class::g()->verify_all_intervenant( $permis_feu->data[ 'intervenants' ] );
 			$permis_feu->data[ 'intervenants' ] = $intervenants;
-			$intervenants_info = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
 		}
+		$intervenants_info = esc_html__( sprintf( '%1$d intervenant(s)', $nbr ), 'digirisk' );
 
 		$inter_e = $permis_feu->data[ 'intervenant_exterieur' ];
 		$maitre_e = $permis_feu->data[ 'maitre_oeuvre' ];
@@ -147,8 +153,6 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 		$data = array(
 			'id' => $permis_feu->data['id'],
 			'unique_identifier' => $permis_feu->data['unique_identifier'],
-			'society_title'    => $permis_feu->data['society_outside_name'],
-			'society_siret_id' => $permis_feu->data['society_outside_siret'],
 			'titre_permis_feu' => $permis_feu->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $permis_feu->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
 			'date_end_intervention_PPP' => $date_end,
@@ -161,11 +165,12 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 				'type'  => 'segment',
 				'value' => $data_interventions,
 			),
-			'intervenants_pre_info' => $interventions_info_pre,
+			'interventions_info' => $interventions_info,
 			'interventions_pre' => array(
 				'type'  => 'segment',
 				'value' => $data_interventions_pre,
 			),
+			'interventions_pre_info' => $interventions_info_pre,
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
 			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
@@ -182,7 +187,9 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 			'intervenant_exterieur_signature_date' => date( 'd/m/Y', strtotime( $inter_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
 		);
 
+		$data_odt = wp_parse_args( $data_society, $data_odt );
 		$data_odt = wp_parse_args( $data, $data_odt );
+
 		return $data_odt;
 	}
 

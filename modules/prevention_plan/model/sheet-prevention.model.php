@@ -86,6 +86,18 @@ class Sheet_Prevention_Model extends Document_Model {
 			'type' => 'string',
 		); // OK
 
+		$this->schema['document_meta']['child']['society_address'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['society_postcode'] = array(
+			'type' => 'string',
+		); // OK
+
+		$this->schema['document_meta']['child']['society_town'] = array(
+			'type' => 'string',
+		); // OK
+
 		$this->schema['document_meta']['child']['intervenants'] = array(
 			'type' => 'array',
 		); // OK

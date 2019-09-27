@@ -97,6 +97,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			);
 		}
 
+		$data_society = array();
 		if( isset( $args[ 'society' ] ) && ! empty( $args[ 'society' ] ) ){
 			$moyen_generaux = $args[ 'society' ]->data[ 'moyen_generaux' ] != "" ? $args[ 'society' ]->data[ 'moyen_generaux' ] : esc_html__( 'Vide', 'digirisk' );
 			$consigne_generale = $args[ 'society' ]->data[ 'consigne_generale' ] != "" ? $args[ 'society' ]->data[ 'consigne_generale' ] : esc_html__( 'Vide', 'digirisk' );
@@ -106,6 +107,13 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				'consigne_generale'              => $consigne_generale
 			);
 		}
+
+		$s_o = $prevention->data[ 'society_outside' ];
+		$data_society[ 'society_title' ] =  $s_o[ 'name' ];
+		$data_society[ 'society_siret_id' ] = $s_o[ 'siret' ];
+		$data_society[ 'society_address' ] =  $s_o[ 'address' ];
+		$data_society[ 'society_postcode' ] = $s_o[ 'postal' ];
+		$data_society[ 'society_town' ] = $s_o[ 'town' ];
 
 		$return = Prevention_Class::g()->prepare_prevention_to_odt_intervention( $prevention );
 
@@ -118,7 +126,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 				'name' => '',
 				'lastname' => '',
 				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' ),
-				'phone' => ''
+				'phone' => '',
+				'id'    => 0
 			);
 			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
 		}else{
@@ -158,7 +167,6 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data = array(
 			'id' => $prevention->data['id'],
 			'unique_identifier' => $prevention->data['unique_identifier'],
-			'society_outside'    => $prevention->data['society_outside'],
 			'titre_prevention' => $prevention->data['title'], // 'dateDebutPrevention',
 			'date_start_intervention_PPP' => date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ),
 			'date_end_intervention_PPP' => $date_end,

@@ -331,6 +331,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 	public function prepare_prevention_to_odt_intervention( $prevention ){
 		$data_interventions = array();
 		$interventions_info = "";
+		$nbr = 0;
 		if( ! empty( $prevention->data[ 'intervention' ] ) ){
 			foreach( $prevention->data[ 'intervention' ] as $intervention ){
 				$risk = Risk_Category_Class::g()->get( array( 'id' => $intervention->data[ 'risk' ] ), true );
@@ -344,7 +345,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 				$data_interventions[] = $data_temp;
 			}
 			$nbr = count( $prevention->data[ 'intervention' ] );
-			$interventions_info = esc_html__( sprintf( 'Il y a %1$d intervention(s)', $nbr ), 'digirisk' );
 		}else{
 			$data_interventions[0] = array(
 				'key_unique' => '',
@@ -353,8 +353,9 @@ class Prevention_Class extends \eoxia\Post_Class {
 				'risk' => '',
 				'prevention' => ''
 			);
-			$interventions_info = esc_html__( 'Aucune intervention définie' );
+			// $interventions_info = esc_html__( 'Aucune intervention définie' );
 		}
+		$interventions_info = esc_html__( sprintf( '%1$d intervention(s)', $nbr ), 'digirisk' );
 		return array( 'data' => $data_interventions, 'text' => $interventions_info );
 	}
 
@@ -416,6 +417,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 	public function verify_all_intervenant( $intervenants ){
 		foreach( $intervenants as $key => $user ){
+			$intervenants[ $key ][ 'id' ] = $key + 1;
 			if( ! isset( $user[ 'phone' ] ) || $user[ 'phone' ] == "" ){
 				$intervenants[ $key ][ 'phone' ] = esc_html__( 'Téléphone non-défini', 'digirisk' );
 			}
