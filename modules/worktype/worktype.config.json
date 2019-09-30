@@ -1,0 +1,13 @@
+{
+	"name": "Worktype",
+	"slug": "worktype",
+	"since": "7.3.3",
+	"description": "Le module gérant les types de travaux (utilisés pour les permis de feu)",
+	"path": "modules/worktype/",
+	"dependencies": {
+		"model": {},
+		"class": {},
+    "shortcode": {},
+		"filter": {}
+	}
+}

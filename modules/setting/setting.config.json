@@ -10,5 +10,11 @@
 		"class": {}
 	},
 	"key_preset_danger": "_wpdigi_preset_danger_installed",
-	"key_accronym": "_wpdigi_accronym_installed"
+	"key_accronym": "_wpdigi_accronym_installed",
+  "prefix_default":{
+    "CAUSERIE" : "C_",
+    "CAUSERIE_INTERVENTION" : "F_",
+    "PLAN_PREVENTION" : "PP_",
+    "PERMIS_FEU" : "PF_"
+  }
 }

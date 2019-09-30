@@ -68,7 +68,7 @@ global $eo_search; ?>
 	</tbody>
 </table>
 
-<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie' ) ); ?>" class="wpeo-button button-grey">
+<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&tab=start' ) ); ?>" class="wpeo-button button-grey">
 	<span><?php esc_html_e( 'Retour', 'digirisk' ); ?></span>
 </a>
 

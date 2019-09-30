@@ -242,6 +242,31 @@ class Society_Class extends \eoxia\Post_Class {
 			}
 		}
 	}
+
+	public function displayEditView( $society, $element ){
+		$address = Society_Class::g()->get_address( $society );
+		$legal_display = Legal_Display_Class::g()->get_legal_display( $society->data[ 'id' ] );
+		$diffusion_information = Legal_Display_Class::g()->get_diffusion_information( $society->data[ 'id' ] );
+
+		\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/main', array(
+			'element' => $society,
+			'address' => $address,
+			'focus_bloc' => $element,
+			'legal_display' => $legal_display,
+			'diffusion_information' => $diffusion_information
+		) );
+	}
+
+	public function get_actual_society( $id ){
+		if ( 0 === $id ) {
+			$society = Society_Class::g()->get( array(
+				'posts_per_page' => 1,
+			), true );
+		} else {
+			$society = Society_Class::g()->show_by_type( $id );
+		}
+		return $society;
+	}
 }
 
 Society_Class::g();

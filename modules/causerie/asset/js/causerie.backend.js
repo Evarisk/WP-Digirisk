@@ -22,6 +22,8 @@ window.eoxiaJS.digirisk.causerie.canvas;
 window.eoxiaJS.digirisk.causerie.init = function() {
 	window.eoxiaJS.digirisk.causerie.event();
 	window.eoxiaJS.digirisk.causerie.refresh();
+
+	window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique();
 };
 
 /**
@@ -62,9 +64,9 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
  */
 window.eoxiaJS.digirisk.causerie.event = function() {
 	// Gestion du titre de la modal.
-	jQuery( document ).on( 'change', '.wpeo-autocomplete', window.eoxiaJS.digirisk.causerie.updateModalTitle );
+	jQuery( document ).on( 'change', '.digi-causerie-parent .wpeo-autocomplete', window.eoxiaJS.digirisk.causerie.updateModalTitle );
 
-	jQuery( document ).on( 'click', '.modal-signature .wpeo-button.button-blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
+	jQuery( document ).on( 'click', '.causerie .modal-signature .wpeo-button.button-blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
 
 	jQuery( document ).on( 'click', '.causerie-wrap a.disabled', function( event ) {
 		event.preventDefault();
@@ -75,8 +77,23 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-import-add-keyword .dropdown-content .item', window.eoxiaJS.digirisk.causerie.itemSelectToTextarea );
 
-	jQuery( document ).on( 'keyup', '.digi-import-add-keyword .tm-info-import-link input', window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl );
+	jQuery( document ).on( 'keyup', '.digi-import-add-keyword .digi-info-import-link input', window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl );
 
+	// jQuery( document ).on( 'click', '.wpeo-modal .import-git-button', window.eoxiaJS.digirisk.causerie.importGitContent );
+
+	jQuery( document ).on( 'click', '.modal-footer .digi-display-view-git .digi-content-git', window.eoxiaJS.digirisk.causerie.txtHiddenGitToTextArea );
+
+	jQuery( document ).on( 'click', '.modal-container .digi-import-git-success .digi-picture-download', window.eoxiaJS.digirisk.causerie.importAllPictureToMedia );
+
+	jQuery( document ).on( 'click', '.modal-container .modal-footer-view-git .digi-footer-git-display ', window.eoxiaJS.digirisk.causerie.displayImportGitInput );
+
+	jQuery( document ).on( 'click', '.modal-container .digi-view-execute .digi-view-execute-hide', window.eoxiaJS.digirisk.causerie.displayImportGitFromExecute );
+
+	jQuery( document ).on( 'click', '.modal-container .digi-footer-execute .digi-import-execute-run', window.eoxiaJS.digirisk.causerie.importModalExecuteIt );
+
+	jQuery( document ).on( 'click', '.wrap-causerie .tab-select-redirect .tab-element', window.eoxiaJS.digirisk.causerie.tabSelectRedirect );
+
+	jQuery( document ).on( 'click', '.wrap-causerie .modal-footer-view-textarea .digi-display-textarea', window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea );
 };
 
 /**
@@ -98,7 +115,7 @@ window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
 		request_data.user_id = jQuery( this ).closest( 'tr' ).find( 'input[name="former_id"]' ).val();
 
 		window.eoxiaJS.loader.display( jQuery( this ) );
-		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, resposne) {
+		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, response ) {
 			title = 'Signature de l\'utilisateur: ' + data.element.data( 'result' );
 			element.closest( 'tr' ).find( '.wpeo-modal-event' ).attr( 'data-title', title );
 			element.closest( 'tr' ).find( '.wpeo-modal-event' ).removeClass( 'button-disable' );
@@ -347,6 +364,7 @@ window.eoxiaJS.digirisk.causerie.savedFormerSignature = function( element, respo
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.checkAllData = function( element ) {
+	console.log( '- - ' );
 	jQuery( '.step-1 .former-tooltip' ).removeClass( 'active' );
 	jQuery( '.step-1 .signature-tooltip' ).removeClass( 'active' );
 
@@ -391,8 +409,10 @@ window.eoxiaJS.digirisk.causerie.addKeywordToTextarea = function( event ){
 	if( jQuery( this ).attr( 'data-type' ) == "link" ){
 		window.eoxiaJS.digirisk.causerie.buttonLinkExternalText( jQuery( this ), importContent );
 	}else{
-		var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
-		importContent.focus().val( importContent.val() + '\r\n' + keyword );
+		if( jQuery( this ).attr( 'data-type' ) != "" && jQuery( this ).attr( 'data-type' ) != null ){
+			var keyword       = '%' + jQuery( this ).attr( 'data-type' ) + '% ';
+			importContent.focus().val( importContent.val() + '\r\n' + keyword );
+		}
 	}
 }
 
@@ -404,40 +424,38 @@ window.eoxiaJS.digirisk.causerie.itemSelectToTextarea = function( event ){
 
 window.eoxiaJS.digirisk.causerie.buttonLinkExternalText = function( element, importContent ){
 
-	if( element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).attr( 'data-import' ) == "true" ){
-		//send request
+	if( element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link input' ).attr( 'data-import' ) == "true" ){
 		var data         = {};
 		data.action  = 'get_text_from_url';
-		data.content = element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).val(); // On recupere le contenu
+		data.content = element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link input' ).val(); // On recupere le contenu
 
 		window.eoxiaJS.loader.display( jQuery( '.digi-import-add-keyword' ) );
 		window.eoxiaJS.request.send( element, data );
 	}else{
 		if( element.attr( 'data-link' ) == "no"){
-			element.find( '.tm_save_backup' ).val( importContent.val() ); // On recupere le contenu
+			element.find( '.digi_save_backup' ).val( importContent.val() ); // On recupere le contenu
 
 			var next_step = 'yes';
 			element.removeClass( 'button-grey' ).addClass( 'button-green' );
-			element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).show( '200' );
+			element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link' ).show( '200' );
 		}else{
-			importContent.focus().val( element.find( '.tm_save_backup' ).val() );
+			importContent.focus().val( element.find( '.digi_save_backup' ).val() );
 
 			var next_step = 'no';
 			element.removeClass( 'button-green' ).addClass( 'button-grey' );
-			element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).hide( '200' );
+			element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link' ).hide( '200' );
 		}
-
 		element.attr( 'data-link', next_step );
-		element.find( '.tm_link_external' ).val( next_step );
+		element.find( '.digi_link_external' ).val( next_step );
 	}
 }
 
 window.eoxiaJS.digirisk.causerie.updateImportTextFromUrl = function( event ){
 	if( jQuery( this ).val().trim() != "" ){
-		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.tm-icon-import-from-url' ).removeClass( 'fa-link' ).addClass( 'fa-file-import' );
+		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.digi-icon-import-from-url' ).removeClass( 'fa-link' ).addClass( 'fa-file-import' );
 		jQuery( this ).attr( 'data-import', "true" );
 	}else{
-		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.tm-icon-import-from-url' ).removeClass( 'fa-file-import' ).addClass( 'fa-link' );
+		jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.digi-icon-import-from-url' ).removeClass( 'fa-file-import' ).addClass( 'fa-link' );
 		jQuery( this ).attr( 'data-import', "false" );
 	}
 }
@@ -447,12 +465,12 @@ window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = funct
 		element.closest( '.tm-import-tasks.modal-active' ).find( 'textarea' ).val( response.data.content );
 	}
 
-	element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link input' ).val( '' );
+	element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link input' ).val( '' );
 	element.removeClass( 'button-green' ).addClass( 'button-grey' );
-	element.closest( '.digi-import-add-keyword' ).find( '.tm-info-import-link' ).hide( '200' );
+	element.closest( '.digi-import-add-keyword' ).find( '.digi-info-import-link' ).hide( '200' );
 
 	element.attr( 'data-link', "no" );
-	element.find( '.tm_link_external' ).val( "no" );
+	element.find( '.digi_link_external' ).val( "no" );
 }
 /**
  * Le callback en cas de réussite à la requête Ajax "delete_started_causerie".
@@ -467,3 +485,569 @@ window.eoxiaJS.digirisk.causerie.get_content_from_url_to_import_textarea = funct
 window.eoxiaJS.digirisk.causerie.deletedStartedCauserie = function( triggeredElement, response ) {
 	triggeredElement.closest( '.causerie-row' ).fadeOut();
 };
+
+window.eoxiaJS.digirisk.causerie.getContentFromUrl = function( triggeredElement, response ){
+	var data = response.data.response_git;
+
+	if( data.success ){
+		triggeredElement.closest( '.modal-container' ).find( '.digi-view-git' ).html( response.data.view );
+
+	}else{
+		triggeredElement.closest( '.modal-footer-view-git' ).find( '.digi-info-git-error' ).show();
+		triggeredElement.closest( '.modal-footer-view-git' ).find( '.digi-info-git-error .notice-title' ).html( response.data.error );
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.importGitContent = function( event ){
+	var url = jQuery( this ).closest( '.digi-import-add-keyword' ).find( '.import-git-input input[type="text"]' );
+	var textarea_element = jQuery( this ).closest( '.digi-view-textarea' );
+
+	var data         = {};
+	data.url  = url;
+	data.action  = jQuery( this ).attr( 'data-action' );
+	data._wpnonce  = jQuery( this ).attr( 'data-nonce' );
+	data.url  = jQuery( this ).attr( 'data-url' );
+
+	window.eoxiaJS.loader.display( jQuery( this ).parent() );
+	window.eoxiaJS.request.send( jQuery( this ), data );
+}
+
+window.eoxiaJS.digirisk.causerie.importPictureToMediaSuccess = function( triggeredElement, response ){
+	var success_element = triggeredElement.closest( '.modal-container' ).find( '.digi-info-git-success' );
+	if( response.data.id > 0 ){
+		triggeredElement.removeClass( 'action-attribute' );
+		triggeredElement.removeClass( 'button-green' ).addClass( 'button-grey' );
+		triggeredElement.html( '<i class="fas fa-check"></i>' );
+		triggeredElement.closest( '.table-row' ).css( 'border', 'solid 2px green' );
+
+		var id = " (#" + response.data.id + ")";
+		success_element.html( '<a href="' + response.data.link + '" target="_blank"> ' + response.data.text_info + id + '</a>' );
+		success_element.show();
+
+		triggeredElement.closest( '.modal-container' ).find( '.modal-footer-view-git .digi-footer-git-import' ).hide();
+		triggeredElement.closest( '.modal-container' ).find( '.modal-footer-view-git .digi-footer-git-display' ).show();
+
+
+
+		triggeredElement.closest( '.modal-container' ).find( '.digi-display-view-git [data-display="git"]' ).attr( 'data-buttongit', true );
+		var str = triggeredElement.closest( '.modal-container' ).find( '.digi-display-view-git [name="contentgit"]' ).val();
+		triggeredElement.closest( '.modal-container' ).find( '.digi-display-view-git [name="contentgit"]' ).val( str + '\r\n' + response.data.content );
+
+		triggeredElement.attr( 'data-alreadydl', 'true' );
+
+		var nbr = triggeredElement.closest( '.modal-container' ).find( '.digi-import-git-success .digi-number-picture' ).html();
+		nbr = parseInt( nbr ) - 1;
+		if( nbr > 0 ){
+			triggeredElement.closest( '.modal-container' ).find( '.digi-import-git-success .digi-number-picture' ).html( nbr );
+		}else{
+			triggeredElement.closest( '.modal-container' ).find( '.digi-import-git-success .digi-picture-download' ).hide( '200' );
+		}
+
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.importTxtToTextareaSuccess = function( triggeredElement, response ){
+	triggeredElement.closest( '.modal-content' ).find( '.digi-view-textarea [name="content"]' ).val( response.data.content );
+
+	var success_element = triggeredElement.closest( '.modal-container' ).find( '.digi-info-git-success' );
+
+	success_element.html( response.data.text_info );
+	success_element.show();
+}
+
+window.eoxiaJS.digirisk.causerie.txtHiddenGitToTextArea = function( event ){
+	var gitstr = jQuery( this ).find( '[name ="contentgit"]' ).val();
+	var str = jQuery( this ).closest( '.modal-container').find( '.digi-view-textarea textarea[ name="content" ]' ).val();
+	jQuery( this ).closest( '.modal-container').find( '.digi-view-textarea textarea[ name="content" ]' ).val( str + gitstr );
+}
+
+window.eoxiaJS.digirisk.causerie.importAllPictureToMedia = function( event ){
+	var button_element = jQuery( this );
+	jQuery( this ).closest( '.digi-view-git' ).find( '.digi-display-response-git .table-row .digi-this-is-a-picture' ).each( function( e ){
+		if( jQuery( this ).attr( 'data-alreadydl' ) == "false" ){
+			jQuery( this ).attr( 'data-alreadydl', 'true' );
+
+			var data         = {};
+			data.filename  = jQuery( this ).attr( 'data-filename' );
+			data.url  = jQuery( this ).attr( 'data-url' );
+			data.action  = jQuery( this ).attr( 'data-action' );
+			data._wpnonce  = jQuery( this ).attr( 'data-nonce' );
+			data.url  = jQuery( this ).attr( 'data-url' );
+
+			window.eoxiaJS.loader.display( jQuery( this ).parent() );
+			window.eoxiaJS.request.send( jQuery( this ), data );
+		}
+	})
+}
+
+window.eoxiaJS.digirisk.causerie.displayImportGitInput = function( event ){
+	jQuery( this ).closest( '.modal-footer' ).find( '.modal-footer-view-git .digi-footer-git-import' ).show();
+	jQuery( this ).closest( '.modal-footer' ).find( '.modal-footer-view-git .digi-info-git-success' ).hide();
+	jQuery( this ).hide();
+}
+
+window.eoxiaJS.digirisk.causerie.executeTxtToTextareaSuccess = function( triggeredElement, response ){
+	triggeredElement.closest( '.modal-container' ).find( '.view-git-element' ).hide( '200' );
+	triggeredElement.closest( '.modal-container' ).find( '.digi-view-execute' ).show();
+	triggeredElement.closest( '.modal-container' ).find( '.digi-content-execute' ).html( response.data.view );
+	triggeredElement.closest( '.modal-container' ).find( '.digi-footer-execute' ).html( response.data.view_footer );
+}
+
+window.eoxiaJS.digirisk.causerie.displayImportGitFromExecute = function( event ){
+	jQuery( this ).closest( '.modal-container' ).find( '.view-git-element' ).show( '200' );
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-view-execute' ).hide();
+}
+
+
+window.eoxiaJS.digirisk.causerie.importModalExecuteIt =  function ( event ){
+
+	var content = '';
+	jQuery( this ).closest( '.modal-container' ).find('.digi-view-execute .digi-import-execute-success' ).each( function( e ){
+		content += jQuery( this ).find( 'span' ).html();
+	})
+
+	var request_data = {};
+	request_data.action   = 'execute_git_txt';
+	request_data.content  = content;
+	request_data._wpnonce = jQuery( this ).attr( 'data-nonce' );
+
+	window.eoxiaJS.loader.display( jQuery( this ) );
+	window.eoxiaJS.request.send( jQuery( this ), request_data );
+}
+
+window.eoxiaJS.digirisk.causerie.executeGitTxtSuccess =  function ( triggeredElement, response ){
+	triggeredElement.closest( '.modal-container' ).find( '.tab-content' ).html( response.data.view );
+}
+
+window.eoxiaJS.digirisk.causerie.tabSelectRedirect = function( event ){
+	var url = jQuery( this ).attr( 'data-url' );
+	window.location.href = url;
+	console.log( 'efjkopEFKLfEEFZ' );
+}
+
+
+window.eoxiaJS.digirisk.causerie.deletedAccidentSuccess = function( triggeredElement, response ){
+	triggeredElement.closest( '.causerie-row' ).hide( '200' );
+}
+
+window.eoxiaJS.digirisk.causerie.leBouttonPlayCestPourLaMusique = function( e ){
+	var interval = 0;
+	var myReq;
+	var k = [13, 13, 13, 13, 13, 13];
+	var f = [32, 32, 32, 32, 32, 32];
+	n = 0;
+
+	var oui = false;
+	var color = [];
+
+	var p = 0;
+	jQuery(document).keyup(function (e) {
+	   	if (e.keyCode === k[n++]) {
+		 	if (n === k.length) {
+				if( p == 0 ){
+					p = 1;
+					draw2();
+				}
+		 	}
+	   }
+
+	   if (e.keyCode === f[n++]) {
+		   if (n === f.length) {
+			   if( p == 0 ){
+				   p = 1;
+				   draw3();
+			   }
+		   }
+	  }
+
+	   function createAudioContext(desiredSampleRate) {
+
+		  var AudioCtor = window.AudioContext || window.webkitAudioContext;
+		  desiredSampleRate = typeof desiredSampleRate === 'number' ? desiredSampleRate : 44100;
+		  var context = new AudioCtor();
+		  // Check if hack is necessary. Only occurs in iOS6+ devices
+		  // and only when you first boot the iPhone, or play a audio/video
+		  // with a different sample rate
+		  if (/(iPhone|iPad)/i.test(navigator.userAgent) && context.sampleRate !== desiredSampleRate) {
+			  var buffer = context.createBuffer(1, 1, desiredSampleRate);
+			  var dummy = context.createBufferSource();
+			  dummy.buffer = buffer;
+			  dummy.connect(context.destination);
+			  dummy.start(0);
+			  dummy.disconnect();
+			  context.close();
+			  // dispose old context
+			  context = new AudioCtor();
+		  }
+		  return context;
+	  }
+	  var audioContext = new createAudioContext();
+	  var mixGain = audioContext.createGain();
+	  var filterGain = audioContext.createGain();
+	  var kickButton = document.querySelector('#kickButton');
+	  var snareButton = document.querySelector('#snareButton');
+	  var hihatButton = document.querySelector('#hihatButton');
+	  var mixButton = document.querySelector('#mixButton');
+
+	  //SOUNDS
+	  function kick() {
+
+		  var osc = audioContext.createOscillator();
+		  var osc2 = audioContext.createOscillator();
+		  var gainOsc = audioContext.createGain();
+		  var gainOsc2 = audioContext.createGain();
+
+		  osc.type = 'triangle';
+		  osc2.type = 'sine';
+
+		  gainOsc.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  gainOsc.connect(audioContext.destination);
+		  gainOsc2.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc2.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  gainOsc2.connect(audioContext.destination);
+		  osc.frequency.setValueAtTime(120, audioContext.currentTime);
+		  osc.frequency.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+		  osc2.frequency.setValueAtTime(50, audioContext.currentTime);
+
+		  //Connections
+		  osc.connect(gainOsc);
+		  osc2.connect(gainOsc2);
+		  gainOsc2.connect(mixGain);
+		  gainOsc.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+
+		  osc.start(audioContext.currentTime);
+		  osc2.start(audioContext.currentTime);
+		  osc.stop(audioContext.currentTime + 0.5);
+		  osc2.stop(audioContext.currentTime + 0.5);
+	  }
+
+	  function snare() {
+
+		  var osc3 = audioContext.createOscillator();
+		  var gainOsc3 = audioContext.createGain();
+
+		  filterGain.gain.setValueAtTime(1, audioContext.currentTime);
+		  filterGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+		  osc3.type = 'triangle';
+		  osc3.frequency.value = 100;
+
+		  gainOsc3.gain.value = 0;
+		  gainOsc3.gain.setValueAtTime(0, audioContext.currentTime);
+		  //gainOsc3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+		  //Connections
+		  osc3.connect(gainOsc3);
+		  gainOsc3.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+
+		  osc3.start(audioContext.currentTime);
+		  osc3.stop(audioContext.currentTime + 0.2);
+
+		  var node = audioContext.createBufferSource(),
+			  buffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate),
+			  data = buffer.getChannelData(0);
+
+		  var filter = audioContext.createBiquadFilter();
+
+		  filter.type = 'highpass';
+		  filter.frequency.setValueAtTime(100, audioContext.currentTime);
+		  filter.frequency.linearRampToValueAtTime(1000, audioContext.currentTime + 0.2);
+
+		  for (var i = 0; i < 4096; i++) {
+			  data[i] = Math.random();
+		  }
+
+		  node.buffer = buffer;
+		  node.loop = true;
+
+		  //Connections
+		  node.connect(filter);
+		  filter.connect(filterGain);
+		  filterGain.connect(mixGain);
+
+		  node.start(audioContext.currentTime);
+		  node.stop(audioContext.currentTime + 0.2);
+
+	  }
+
+	  function hihat() {
+
+		  var gainOsc4 = audioContext.createGain();
+		  var fundamental = 40;
+		  var ratios = [
+			  2,
+			  3,
+			  4.16,
+			  5.43,
+			  6.79,
+			  8.21
+		  ];
+		  var bandpass = audioContext.createBiquadFilter();
+		  bandpass.type = 'bandpass';
+		  bandpass.frequency.value = 10000;
+		  var highpass = audioContext.createBiquadFilter();
+		  highpass.type = 'highpass';
+		  highpass.frequency.value = 7000;
+		  ratios.forEach(function(ratio) {
+			  var osc4 = audioContext.createOscillator();
+			  osc4.type = 'square';
+			  osc4.frequency.value = fundamental * ratio;
+			  osc4.connect(bandpass);
+			  osc4.start(audioContext.currentTime);
+			  osc4.stop(audioContext.currentTime + 0.05);
+		  });
+
+		  gainOsc4.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc4.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+
+		  bandpass.connect(highpass);
+		  highpass.connect(gainOsc4);
+		  gainOsc4.connect(mixGain);
+
+		  mixGain.gain.value = 1;
+	  }
+
+	  function custom_song() {
+
+		  var gainOsc4 = audioContext.createGain();
+		  var fundamental = 80;
+		  var ratios = [
+			  2,
+			  3,
+			  4.16,
+			  5.43,
+			  6.79,
+			  8.21
+		  ];
+		  var bandpass = audioContext.createBiquadFilter();
+		  bandpass.type = 'bandpass';
+		  bandpass.frequency.value = 8500;
+		  var highpass = audioContext.createBiquadFilter();
+		  highpass.type = 'highpass';
+		  highpass.frequency.value = 7000;
+		  ratios.forEach(function(ratio) {
+			  var osc4 = audioContext.createOscillator();
+			  osc4.type = 'triangle';
+			  osc4.frequency.value = fundamental * ratio;
+			  osc4.connect(bandpass);
+			  osc4.start(audioContext.currentTime);
+			  osc4.stop(audioContext.currentTime + 0.4);
+		  });
+
+		  gainOsc4.gain.setValueAtTime(1, audioContext.currentTime);
+		  gainOsc4.gain.exponentialRampToValueAtTime(0.02, audioContext.currentTime + 0.4);
+
+		  bandpass.connect(highpass);
+		  highpass.connect(gainOsc4);
+		  gainOsc4.connect(mixGain);
+
+		  mixGain.gain.value = 1.5;
+	  }
+
+	  //BUTTON
+
+	  //INTERVALS
+	  function interval(func, wait, times) {
+		  var interv = function(w, t) {
+			  return function() {
+				  if (typeof t === 'undefined' || t-- > 0) {
+					  setTimeout(interv, w);
+					  try {
+						  func.call(null);
+					  } catch (e) {
+						  t = 0;
+						  throw e.toString();
+					  }
+				  }
+			  };
+		  }(wait, times);
+		  setTimeout(interv, wait);
+	  }
+	  mixGain.connect(audioContext.destination);
+	  mixGain.gain.value = 0;
+	  filterGain.gain.value = 0;
+
+	  //EXAMPLE SOUNDS
+	  var kickMixGain = audioContext.createGain();
+	  var kickOsc = audioContext.createOscillator();
+	  var kickOsc2 = audioContext.createOscillator();
+	  var kickGainOsc = audioContext.createGain();
+	  var kickGainOsc2 = audioContext.createGain();
+
+	  kickOsc.type = 'triangle';
+	  kickOsc.frequency.value = 40;
+	  kickGainOsc.gain.value = 1;
+	  kickOsc2.type = 'sine';
+	  kickOsc2.frequency.value = 80;
+	  kickGainOsc2.gain.value = 1;
+
+	  //Connections
+	  kickOsc.connect(kickGainOsc);
+	  kickOsc2.connect(kickGainOsc2);
+	  kickGainOsc2.connect(kickMixGain);
+	  kickGainOsc.connect(kickMixGain);
+	  kickMixGain.gain.value = 0;
+	  kickOsc.start(audioContext.currentTime);
+	  kickOsc2.start(audioContext.currentTime);
+
+	  //DRAW BOXES
+	function createBox(instrument) {
+	  	switch (true) {
+		  	case instrument === hihat:
+			  	hihat();
+			  	break;
+		  	case instrument === kick:
+			  	kick();
+			  	break;
+		  	case instrument === snare:
+			  	snare();
+			  	break;
+			case instrument === custom_song:
+			custom_song();
+			break;
+		}
+	};
+
+	  function draw2() {
+		  var elements = 0;
+		  var tour = 1;
+
+		  var Timer = setInterval(function() {
+
+			  elements ++;
+			  console.log( '1 :' + elements );
+
+				if (elements % 2 == 0 || elements == 0 ) {
+					createBox(hihat);
+				}
+
+			  	if ( tour == 2 || tour > 3 ) {
+					var a = ( elements + 1 ) % 2;
+					if( a == 0 || elements == 0 ){
+						createBox(kick);
+					}
+			  	}
+
+				if ( ( elements % 4 == 0 || elements == 0 ) && tour > 2 ) {
+				  	createBox(snare);
+				}
+				if( tour < 4 ){ // 4
+					if( elements > 11) {
+						tour ++;
+						elements = 0;
+						console.log( 'Tour : ' + tour );
+					}
+				}else{
+					if( elements === 24 ){
+						clearInterval(Timer);
+						refrain();
+					}
+				}
+		  }, 250 );
+
+		  var stopIt = document.getElementById('stopButton');
+	  }
+
+	  function refrain(){
+		  var elements = 0;
+
+		  var new_Timer = setInterval(function() {
+			  elements ++;
+
+				if (elements % 2 == 0 || elements == 0 ) {
+					createBox(hihat);
+				}
+
+				var a = ( elements + 1 ) % 2;
+				var b = ( elements + 1 ) % 4;
+				if( b == 0 ){
+					createBox(kick);
+				}
+
+				if( a == 0 ){
+					createBox(custom_song);
+				}
+
+				if ( elements % 4 == 0 ) {
+				  	createBox(snare);
+				}
+
+				if( elements >= 50 ){
+					clearInterval(new_Timer);
+					console.log( 'END' );
+				}
+		  }, 200 );
+	  }
+
+	  function draw3() {
+		  var elements = 0;
+		  var tour = 1;
+
+		  var Timer = setInterval(function() {
+
+				elements ++;
+				if ( elements == 5 ){
+					createBox(custom_song);
+					createBox(hihat);
+				}
+
+				if( elements == 10 ){
+					createBox(kick);
+				}
+
+				if ( elements == 15 ){
+					createBox(hihat);
+				}
+
+				if( elements == 20 ){
+					createBox(snare);
+				}
+
+				if( elements > 20 ) {
+					tour ++;
+					elements = 0;
+				}
+		  }, 50 );
+
+	  }
+
+		(function setButtonStyle() {
+			// var buttons = document.querySelector(".btnz");
+			// buttons.style.width = '900px';
+			// buttons.style.height = '60px';
+			// buttons.style.position = 'relative';
+			// buttons.style.border = '10px solid white';
+			// buttons.style.display = 'in-line';
+		}());
+	});
+};
+
+window.eoxiaJS.digirisk.causerie.causerieImportTxtFromUrl = function( triggeredElement, response ){
+	if( response.data.view != "" ){
+		var parent_element = triggeredElement.closest( '.digi-view-textarea' );
+		parent_element.find( '.digi-import-add-keyword' ).hide();
+		parent_element.find( '.digi-import-modal-content-main' ).hide();
+		parent_element.find( '.digi-import-modal-content-main textarea' ).val( response.data.content );
+
+		parent_element.find( '.digi-import-modal-content-git' ).show();
+		parent_element.find( '.digi-import-modal-content-git' ).html( response.data.view );
+
+		triggeredElement.closest( '.modal-container' ).find( '.digi-button-import-git' ).show();
+		triggeredElement.closest( '.modal-container' ).find( '.digi-button-import' ).hide();
+	}
+}
+
+window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea = function( event ){
+	console.log( '----' );
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-modal-content-main' ).show();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-add-keyword' ).show();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-button-import' ).show();
+
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-import-modal-content-git' ).hide();
+	jQuery( this ).closest( '.modal-container' ).find( '.digi-button-import-git' ).hide();
+}

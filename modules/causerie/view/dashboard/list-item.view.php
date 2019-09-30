@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-
 <tr class="item" data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>">
 	<td class="w50 padding">
 		<strong>
@@ -109,8 +108,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	endif;
 	?>
 	</td>
-
-	<td data-title="Participant(s)" class="padding">
+	<td data-title="Participant(s)" class="padding" style="display : flex">
 		<div class="wpeo-modal-event wpeo-button-pulse tooltip hover"
 			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
 			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
@@ -121,6 +119,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="button-icon fas fa-user"></i>
 			<span class="button-float-icon animated"><i class="fas fa-eye"></i></span>
 		</div>
+		<i style="margin-top: 10px">
+			( <?php echo esc_attr( count( $causerie->data[ 'participants' ] ) ); ?> )
+		</i>
 	</td>
 
 	<td>

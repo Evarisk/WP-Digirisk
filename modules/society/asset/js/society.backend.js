@@ -13,6 +13,7 @@ window.eoxiaJS.digirisk.society.event = function() {
 	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
 	jQuery( document ).on( 'click', '.main-header .edit', window.eoxiaJS.digirisk.society.focusInputTitle );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .form.society-informations .form-element input, .digirisk-wrap .form.society-informations .form-element textarea', window.eoxiaJS.digirisk.society.enableSaveButton );
+	jQuery( document ).on( 'click', '.main-information-society .bloc-information-society', window.eoxiaJS.digirisk.society.requestGetViewEdit )
 };
 
 /**
@@ -106,7 +107,46 @@ window.eoxiaJS.digirisk.society.savedSocietyConfigurationSuccess = function( tri
 		jQuery( '.digirisk-wrap .navigation-container .society-header .title' ).text( response.data.society.data.title );
 	}
 
+	/*
+
 	jQuery( '.digirisk-wrap .main-container .main-header input[name="title"]' ).val( response.data.society.data.title );
 
 	jQuery( '.digirisk-wrap .main-content' ).replaceWith( response.data.view );
+
+	if( response.data.view_owner != "" ){
+		triggeredElement.closest( '.wpeo-form' ).find( 'input[name="society[owner_id]]"}' ).closest( '.form-element' ).html( '' );
+	}*/
 };
+
+window.eoxiaJS.digirisk.society.deleteOwnerIdSuccess = function( triggeredElement, response ) {
+	triggeredElement.closest( '.form-element' ).replaceWith( response.data.view );
+}
+
+window.eoxiaJS.digirisk.society.requestGetViewEdit = function( event ){
+
+	element = jQuery( this ).attr( 'data-element' );
+	if( jQuery( this ).attr( 'data-edit' ) == "true" ){
+		return;
+	}
+
+	var data = {};
+	data.action        = jQuery( this ).attr( 'data-action' );
+	data._wpnonce      = jQuery( this ).attr( 'data-nonce' );
+	data.element       = element;
+
+	window.eoxiaJS.loader.display( jQuery( this ) );
+	window.eoxiaJS.request.send( jQuery( this ), data );
+}
+
+window.eoxiaJS.digirisk.society.displayEditViewSuccess = function( triggeredElement, response ) {
+	var class_element = triggeredElement.closest( '.bloc-information-society' ).attr( 'data-element' );
+
+	triggeredElement.closest( '.main-information-society' ).replaceWith( response.data.view );
+	if( response.data.element == "" ){
+		var parent_element = jQuery( '.digirisk-wrap .tab-container' );
+		var element = parent_element.find( '.bloc-information-society[data-element="' + class_element + '"]' );
+		element.css( "border", "solid green 1px" );
+	}else{
+		jQuery( '.tab-content .main-information-society' ).find( '.bloc-information-society[data-edit="true"]' ).removeClass( 'wpeo-tooltip-event' ); // Enleve la POPUP au survol
+	}
+}

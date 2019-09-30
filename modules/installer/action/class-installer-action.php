@@ -38,6 +38,7 @@ class Installer_Action {
 
 		add_action( 'wp_ajax_installer_save_society', array( $this, 'ajax_installer_save_society' ) );
 		add_action( 'wp_ajax_installer_components', array( $this, 'ajax_installer_components' ) );
+		// $this->ajax_installer_components();
 	}
 
 	/**
@@ -102,26 +103,29 @@ class Installer_Action {
 			'danger_installed'            => false,
 			'recommendation_installed'    => false,
 			'evaluation_method_installed' => false,
+			'worktype_installed'          => false,
 		);
 
 		$core_option = get_option( \eoxia\Config_Util::$init['digirisk']->core_option, $default_core_option );
 
+		// $b = Worktype_Category_Default_Data_Class::g()->create();
+
 		if ( ! $core_option['danger_installed'] ) {
-			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégorie de risque', 'digirisk' );
+			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégories de risque', 'digirisk' );
 			if ( Risk_Category_Default_Data_Class::g()->create() ) {
 				$core_option['danger_installed'] = true;
-				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de risque SUCCESS', 'digirisk' );
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de risque SUCCESS', 'digirisk' );
 			} else {
-				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de risque ERROR', 'digirisk' );
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de risque ERROR', 'digirisk' );
 			}
 		} elseif ( ! $core_option['recommendation_installed'] ) {
 
-			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégorie de recommendation', 'digirisk' );
+			\eoxia\LOG_Util::log( 'Installeur composant - DEBUT: Création des catégories de recommendation', 'digirisk' );
 			if ( Recommendation_Default_Data_Class::g()->create() ) {
-				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de recommendation SUCCESS', 'digirisk' );
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de recommendation SUCCESS', 'digirisk' );
 				$core_option['recommendation_installed'] = true;
 			} else {
-				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégorie de recommendation ERROR', 'digirisk' );
+				\eoxia\LOG_Util::log( 'Installeur composant - FIN: Création des catégories de recommendation ERROR', 'digirisk' );
 			}
 
 		} elseif ( ! $core_option['evaluation_method_installed'] ) {

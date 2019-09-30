@@ -49,7 +49,9 @@ global $eo_search; ?>
 			</div>
 		<?php endif; ?>
 
-		<?php $eo_search->display( 'society_information_owner' ); ?>
+		<?php
+			Society_Configuration_Class::g()->display_form_owner( $element );
+		?>
 
 		<div class="form-element group-date">
 			<span class="form-label"><?php esc_html_e( 'Date de création', 'digirisk' ); ?></span>
@@ -108,6 +110,20 @@ global $eo_search; ?>
 			<span class="form-label"><?php esc_html_e( 'Description', 'digirisk' ); ?></span>
 			<label class="form-field-container">
 				<textarea name="society[content]" class="form-field" rows="6"><?php echo $element->data['content']; ?></textarea>
+			</label>
+		</div>
+
+		<div class="form-element gridw-2">
+			<span class="form-label"><?php esc_html_e( 'Moyen Generaux Mis à Disposition', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<textarea name="society[moyen]" class="form-field" rows="6"><?php echo $element->data['moyen_generaux']; ?></textarea>
+			</label>
+		</div>
+
+		<div class="form-element gridw-2">
+			<span class="form-label"><?php esc_html_e( 'Consignes Générales', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<textarea name="society[consigne]" class="form-field" rows="6"><?php echo $element->data['consigne_generale']; ?></textarea>
 			</label>
 		</div>
 

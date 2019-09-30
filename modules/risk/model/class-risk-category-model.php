@@ -59,5 +59,4 @@ class Risk_Category_Model extends \eoxia\Term_Model {
 
 		parent::__construct( $data, $req_method );
 	}
-
 }

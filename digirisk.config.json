@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "7.3.1",
+	"version": "7.4.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
 		"digirisk-simple-risk-evaluation",
@@ -10,12 +10,16 @@
 		"digirisk-users",
 		"digirisk-accident",
 		"digirisk-causerie",
+    "digirisk-prevention",
+    "digirisk-permis-feu",
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
 		"digirisk-handle-sorter",
 		"digirisk-update",
-		"digirisk-setting"
+		"digirisk-setting",
+    "profile",
+    "user-edit"
 	],
 	"insert_scripts_pages_css": [
 		"digirisk-simple-risk-evaluation",
@@ -23,6 +27,8 @@
 		"digirisk-epi",
 		"digirisk-accident",
 		"digirisk-causerie",
+    "digirisk-prevention",
+    "digirisk-permis-feu",
 		"digirisk-users",
 		"digirisk-tools",
 		"digirisk-transfert",
@@ -41,14 +47,16 @@
 
 		"modules/address/address.config.json",
     "modules/society/society.config.json",
-    
+
 		"modules/informations/informations.config.json",
 
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",
 
 		"modules/recommendation/recommendation.config.json",
-		"modules/risk/risk.config.json",
+    "modules/risk/risk.config.json",
+
+		"modules/worktype/worktype.config.json",
 
 		"modules/document/document.config.json",
 
@@ -56,7 +64,10 @@
 		"modules/listing-risk/listing-risk.config.json",
 
 		"modules/accident/accident.config.json",
-		"modules/causerie/causerie.config.json",
+
+    "modules/causerie/causerie.config.json",
+    "modules/prevention_plan/prevention_plan.config.json",
+    "modules/permis_feu/permis_feu.config.json",
 
 		"modules/evaluation_method/evaluation_method.config.json",
 		"modules/evaluator/evaluator.config.json",
@@ -101,7 +112,7 @@
       "manage_digirisk",
       "manage_causerie",
       "create_causerie",
-      "manage_causerie"
+      "manage_preventionplan"
     ],
     "editor": [
       "manage_digirisk",

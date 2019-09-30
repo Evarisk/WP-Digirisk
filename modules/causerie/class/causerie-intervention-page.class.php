@@ -36,7 +36,11 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 	 */
 	public function display_single( $id ) {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$final_causerie = apply_filters( 'digi_add_custom_key_to_causerie', $final_causerie );
+
 		$main_causerie  = Causerie_Class::g()->get( array( 'id' => $final_causerie->data['parent_id'] ), true );
+		$main_causerie = apply_filters( 'digi_add_custom_key_to_causerie', $main_causerie );
+
 		$user           = null;
 
 		if ( ! empty( $final_causerie->data['former'] ) && ! empty( $final_causerie->data['former']['user_id'] ) ) {
@@ -183,7 +187,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$causerie_intervention->data['current_step'] = \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED;
 
 		$causerie_intervention->data['date_end'] = current_time( 'mysql' );
-		$causerie_intervention->data['titreTache'] = 'titre';
+		$causerie_intervention->data['titreTache'] = 'titre'; // Wtf ? 23/08/2019
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->update( $causerie_intervention->data );
 

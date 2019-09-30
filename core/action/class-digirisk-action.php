@@ -32,19 +32,18 @@ class Digirisk_Action {
 	 */
 	public function __construct() {
 		$page = ( ! empty( $_REQUEST['page'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : ''; // WPCS: input var ok, CSRF ok.
-
 		if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_css, true ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_css' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts_css' ), 11 );
 			add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts_css' ) );
 		}
-
-		if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_js, true ) ) {
+			if ( in_array( $page, \eoxia\Config_Util::$init['digirisk']->insert_scripts_pages_js, true ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'callback_admin_enqueue_scripts_js' ), 11 );
 			add_action( 'admin_print_scripts', array( $this, 'callback_admin_print_scripts_js' ) );
 		}
 
+		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js_global' ), 10 );
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 
@@ -72,6 +71,7 @@ class Digirisk_Action {
 	 * Initialise le fichier style.min.css et backend.min.js du plugin DigiRisk.
 	 *
 	 * @since 6.0.0
+
 	 */
 	public function callback_admin_enqueue_scripts_js() {
 		wp_enqueue_script( 'signature-pad', PLUGIN_DIGIRISK_URL . 'core/assets/js/signature-pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
@@ -184,6 +184,14 @@ class Digirisk_Action {
 		update_user_meta( get_current_user_id(), '_wpdigi_user_change_log', $meta );
 
 		wp_send_json_success();
+	}
+
+	public function callback_before_admin_enqueue_scripts_js_global(){
+		$screen = get_current_screen();
+		wp_enqueue_script( 'digirisk-chart', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js' );
+		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
+			wp_enqueue_script( 'digirisk-user-page', PLUGIN_DIGIRISK_URL . 'modules/user/asset/js/user.page.js', array(), \eoxia\Config_Util::$init['task-manager']->version );
+		}
 	}
 }
 

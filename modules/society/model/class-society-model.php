@@ -57,7 +57,7 @@ class Society_Model extends \eoxia\Post_Model {
 		/**
 		 * Les recommendations associées
 		 *
-		 * @todo: 23/01/2018 -> Est ce utilisé ?
+		 * @todo: 23/01/2018 -> Est ce utilisé ? | 28/08/2019 -> Peut etre :)
 		 */
 		$this->schema['associated_recommendation'] = array(
 			'since'     => '6.1.6',
@@ -86,6 +86,25 @@ class Society_Model extends \eoxia\Post_Model {
 			'default'     => null,
 		);
 
+
+		$this->schema['moyen_generaux'] = array(
+			'since'       => '7.1.3',
+			'version'     => '7.1.3',
+			'meta_type' => 'multiple',
+			'description' => 'Moyen généraux mis à disposition',
+			'type'        => 'string',
+			'default'     => '',
+		);
+
+		$this->schema['consigne_generale'] = array(
+			'since'       => '7.1.3',
+			'version'     => '7.1.3',
+			'meta_type' => 'multiple',
+			'description' => 'Consigne Générale',
+			'type'        => 'string',
+			'default'     => '',
+		);
+
 		$this->schema['contact'] = array(
 			'since'     => '6.1.6',
 			'version'   => '6.1.6',
@@ -106,7 +125,7 @@ class Society_Model extends \eoxia\Post_Model {
 			'since'   => '6.1.6',
 			'version' => '6.1.6',
 			'type'    => 'string',
-			'default' => '',
+			'meta_type'  => 'multiple'
 		);
 
 		$this->schema['contact']['child']['address_id'] = array(
@@ -156,6 +175,7 @@ class Society_Model extends \eoxia\Post_Model {
 			'version' => '6.0.0',
 			'type'    => 'integer',
 		);
+
 
 		parent::__construct( $data, $req_method );
 	}

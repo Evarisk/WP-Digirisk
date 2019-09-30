@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $causeries ) ) :
 			foreach ( $causeries as $causerie ) :
+				$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/list-item', array(
 					'causerie' => $causerie,
 					'started'  => false,
@@ -65,6 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		if ( ! empty( $causeries_intervention ) ) :
 			foreach ( $causeries_intervention as $causerie_intervention ) :
+				$causerie_intervention = apply_filters( 'digi_add_custom_key_to_causerie', $causerie_intervention );
 				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'start/list-item', array(
 					'causerie' => $causerie_intervention,
 					'started'  => true,

@@ -1,0 +1,30 @@
+  {
+	"name": "Prevention Plan",
+	"slug": "prevention_plan",
+	"since": "6.1.3",
+	"version": "7.0.0",
+	"description": "Plan de préventon",
+	"path": "modules/prevention_plan/",
+  "dependencies": {
+		"model": {
+			"priority": [
+				"prevention.model.php"
+			]
+		},
+    "filter": {},
+		"class": {},
+		"action": {}
+	},
+  "steps": {
+    "PREVENTION_NOT_STARTED": 0,
+    "PREVENTION_FORMER": 1,
+    "PREVENTION_INFORMATION": 2,
+    "PREVENTION_ENTERPRISE": 3,
+    "PREVENTION_PARTICIPANT": 4,
+    "PREVENTION_CLOSED": 5
+  },
+  "status":{
+    "PREVENTION_IN_PROGRESS" : 0,
+    "PREVENTION_IS_ENDED" : 1
+  }
+}

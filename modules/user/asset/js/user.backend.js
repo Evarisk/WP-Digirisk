@@ -20,6 +20,7 @@ window.eoxiaJS.digirisk.user.init = function() {
  */
 window.eoxiaJS.digirisk.user.event = function() {
 	jQuery( document ).on( 'click', '.form-edit-user-assign .wp-digi-pagination a', window.eoxiaJS.digirisk.user.pagination );
+	jQuery( document ).on( 'keyup', '#digi-phone-number', window.eoxiaJS.digirisk.user.updatePhoneNumber );
 };
 
 /**
@@ -85,3 +86,8 @@ window.eoxiaJS.digirisk.user.pagination = function( event ) {
 		jQuery( '.form-edit-user-assign' ).replaceWith( view );
 	} );
 };
+
+window.eoxiaJS.digirisk.user.updatePhoneNumber = function( event ) {
+	console.log( jQuery( this ) );
+	console.log( "------" );
+}

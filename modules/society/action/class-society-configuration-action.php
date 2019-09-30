@@ -28,6 +28,7 @@ class Society_Configuration_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_save_configuration', array( $this, 'callback_save_configuration' ) );
+		// add_action( 'wp_ajax_delete_owner_id', array( $this, 'callback_delete_owner_id' ) );
 	}
 
 	/**
@@ -49,6 +50,8 @@ class Society_Configuration_Action {
 		$society_data['contact']['phone']    = ! empty( $_POST['society']['contact']['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['phone'] ) ) : ''; // WPCS: input var ok.
 		$society_data['contact']['email']    = ! empty( $_POST['society']['contact']['email'] ) ? sanitize_text_field( wp_unslash( $_POST['society']['contact']['email'] ) ) : ''; // WPCS: input var ok.
 		$society_data['content']             = ! empty( $_POST['society']['content'] ) ? wp_unslash( $_POST['society']['content'] ) : ''; // WPCS: input var ok.
+		$society_data['moyen_generaux']      = ! empty( $_POST['society']['moyen'] ) ? wp_unslash( $_POST['society']['moyen'] ) : ''; // WPCS: input var ok.
+		$society_data['consigne_generale']   = ! empty( $_POST['society']['consigne'] ) ? wp_unslash( $_POST['society']['consigne'] ) : ''; // WPCS: input var ok.
 
 		$address_data                       = array();
 		$address_data['post_id']            = $society_data['id'];
@@ -59,15 +62,21 @@ class Society_Configuration_Action {
 
 		$address                               = Address_Class::g()->save( $address_data );
 		$society_data['contact']['address_id'] = $address->data['id'];
-
 		$society = Society_Configuration_Class::g()->save( $society_data );
+		$id = $society->data[ 'id' ];
+		$society = Society_Class::g()->show_by_type( $id );
 
-		ob_start();
+		/*ob_start();
 		Tab_Class::g()->load_tab_content( $society->data['id'], array(
 			'slug'  => 'digi-informations',
 			'title' => 'Informations',
 		) );
-		$view = ob_get_clean();
+		$view = ob_get_clean();*/
+		$view = ''; // CA MARCHE CA ? 02/08/2019 - JSP 19/09/2019
+
+		ob_start();
+		Society_Configuration_Class::g()->display_form_owner( $society );
+		$view_owner = ob_get_clean();
 
 		wp_send_json_success( array(
 			'society'          => $society,
@@ -76,8 +85,33 @@ class Society_Configuration_Action {
 			'module'           => 'society',
 			'callback_success' => 'savedSocietyConfigurationSuccess',
 			'view'             => $view,
+			'view_owner'       => $view_owner
 		) );
 	}
+
+	// public function callback_delete_owner_id(){
+	// 	check_ajax_referer( 'delete_owner_id' );
+	// 	$id = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+	//
+	// 	if( ! $id ){
+	// 		wp_send_json_error( 'Error ID' );
+	// 	}
+	//
+	// 	$society = Society_Class::g()->show_by_type( $id );
+	// 	$society->data[ 'owner_id' ] = 0;
+	// 	$element = Society_Class::g()->update( $society->data );
+	//
+	// 	ob_start();
+	// 	Society_Configuration_Class::g()->display_form_owner( $element );
+	// 	$view = ob_get_clean();
+	//
+	// 	wp_send_json_success( array(
+	// 		'namespace'        => 'digirisk',
+	// 		'module'           => 'society',
+	// 		'callback_success' => 'deleteOwnerIdSuccess',
+	// 		'view'             => $view,
+	// 	) );
+	// }
 }
 
 new Society_Configuration_Action();

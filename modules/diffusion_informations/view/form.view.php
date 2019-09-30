@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
+<?php /* ?>
 <form class="form-generate">
 	<?php wp_nonce_field( 'generate_diffusion_information' ); ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element_id ); ?>" />
@@ -78,9 +79,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span><?php esc_html_e( 'Enregister les modifications', 'digirisk' ); ?></span>
 		</button>
 
-		<button data-action="generate_diffusion_information" class="wpeo-button button-main action-input" data-parent="form-generate">
-			<i class="button-icon fas fa-sync-alt"></i>
-			<span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
-		</button>
 	</div>
 </form>
+
+<?php
+*/
+?>
+
+<button data-action="generate_diffusion_information" class="wpeo-button button-main action-input" data-parent="form-generate">
+	<i class="button-icon fas fa-sync-alt"></i>
+	<span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
+</button>
+
+<a href="<?php echo esc_attr( admin_url() . 'options-general.php?page=digirisk-setting&tab=digi-configuration' );  ?>">
+	<button class="wpeo-button button-main wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Accéder aux réglages des données', 'digirisk' ); ?>">
+		<i class="fas fa-cog"></i>
+	</button>
+</a>

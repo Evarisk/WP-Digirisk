@@ -77,11 +77,17 @@ class Causerie_Class extends \eoxia\Post_Class {
 	}
 
 	public function display_textarea(){
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-content',array() );
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal/content',array() );
+	}
+
+	public function display_gitview( $data = array(), $args = array() ){
+		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'form/modal-content-git',array(
+			'data' => $data,
+			'args' => $args
+		) );
 	}
 
 	public function treat_content_import_causerie( $content ){
-
 		$content_by_lines = preg_split( '/\r\n|\r|\n/', $content );
 		$line_error = array();
 
@@ -89,8 +95,9 @@ class Causerie_Class extends \eoxia\Post_Class {
 			$list_id = array();
 			$id_actual = -1;
 			foreach ( $content_by_lines as $index => $line ) {
-				if ( false !== strpos( $line, '%causerie%' ) ) {
+				if ( false !== strpos( strtolower( $line ), '%causerie%' ) ) {
 					$line = str_replace( '%causerie%', '', $line );
+					$line = str_replace( '%Causerie%', '', $line );
 					if( ! empty( $line ) ){
 						$create_causerie = Causerie_class::g()->create(
 							array(
@@ -116,8 +123,9 @@ class Causerie_Class extends \eoxia\Post_Class {
 						array_push( $line_error, $error);
 					}
 
-				}else if( false !== strpos( $line, '%description%' ) ) {
+				}else if( false !== strpos( strtolower( $line ), '%description%' ) ) {
 					$line = str_replace( '%description%', '', $line );
+					$line = str_replace( '%Description%', '', $line );
 					if( ! empty( $line ) && ! empty( $list_id ) && $id_actual > 0 ){
 						$causerie = Causerie_Class::g()->get( array( 'id' => $id_actual ), true );
 
@@ -131,13 +139,14 @@ class Causerie_Class extends \eoxia\Post_Class {
 						);
 						array_push( $line_error, $error );
 					}
-				}else if( false !== strpos( $line, '%media%' ) ){
+				}else if( false !== strpos( strtolower( $line ), '%media%' ) ){
 					$line = str_replace( '%media%', '', $line );
+					$line = str_replace( '%Media%', '', $line );
 					if( ! empty( $line ) && ! empty( $list_id ) && $id_actual > 0 ){
-						$live_without_extension = preg_replace('/\\.[^.\\s]{3,4}$/', '', $line);
+						$line_without_extension = preg_replace('/\\.[^.\\s]{3,4}$/', '', $line);
 						$media_query = new \WP_Query(
 						    array(
-								'title'          => $live_without_extension,
+								'title'          => $line_without_extension,
 						        'post_type'      => 'attachment',
 						        'post_status'    => 'inherit',
 						        'posts_per_page' => 1,
@@ -170,8 +179,9 @@ class Causerie_Class extends \eoxia\Post_Class {
 						array_push( $line_error, $error);
 					}
 
-				}else if( false !== strpos( $line, '%risque%' ) ){
+				}else if( false !== strpos( strtolower( $line ), '%risque%' ) ){
 					$line = str_replace( '%risque%', '', $line );
+					$line = str_replace( '%Risque%', '', $line );
 					if( ! empty( $line ) && ! empty( $list_id ) && $id_actual > 0 ){
 						$causerie = Causerie_Class::g()->get( array( 'id' => $id_actual ), true );
 						$risque = Risk_Category_Class::g()->get( array( 'name' => $line ), true );
@@ -222,6 +232,218 @@ class Causerie_Class extends \eoxia\Post_Class {
 		}
 
 		return array( 'list' => $list_id, 'error' => $line_error );
+	}
+
+	public function download_repos_from_git_hub( $content ){
+		$data_return = array(
+			'success' => false,
+			'error'   => '',
+			'data'    => array()
+		);
+
+		if( strpos($content, 'github.com') === false ){
+			$data_return[ 'error' ] = 'Link no valid (Need contains github)';
+			return $data_return;
+		}
+
+		$link = str_replace( 'github.com', 'api.github.com/repos', $content );
+		$link = str_replace( 'tree/master', 'contents', $link );
+		$link .= '?ref=master';
+		$result = $this->github_request_api( $link );
+		if( ! $result || empty( $result ) ){
+			$data_return[ 'error' ] = 'This url seems not good';
+			return $data_return;
+		}
+
+		$data_return[ 'data' ] = $result;
+		$data_return[ 'success' ] = true;
+
+		return $data_return;
+	}
+
+	function github_request_api( $url = "" ){
+	    $curl = curl_init();
+		curl_setopt( $curl, CURLOPT_URL, $url);
+	    curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'User-Agent: Eoxia' ));
+
+	    $response = curl_exec( $curl );
+
+	    curl_close( $curl );
+	    return json_decode( $response, true );
+	}
+
+	public function upload_to_wordpress_library( $image_url, $media_name = "" ){
+		require_once(ABSPATH . 'wp-admin/includes/image.php');
+		require_once( ABSPATH . '/wp-includes/pluggable.php' );
+
+		$image = $image_url;
+	    $get = wp_remote_get( $image );
+	    $type = wp_remote_retrieve_header( $get, 'content-type' );
+
+	    if (!$type)
+	        return false;
+
+	    $mirror = wp_upload_bits( basename( $image ), '', wp_remote_retrieve_body( $get ) );
+	    $attachment = array(
+			'guid'           => $mirror['url'] . '/' . $mirror['file'],
+	        'post_title'     => $media_name,
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+	        'post_mime_type' => $type
+	    );
+	    $attach_id = wp_insert_attachment( $attachment, $mirror['file'] );
+
+	    $attach_data = wp_generate_attachment_metadata( $attach_id, $mirror['file'] );
+
+	    wp_update_attachment_metadata( $attach_id, $attach_data );
+
+	    return $attach_id;
+	}
+
+	public function check_if_gitelement_is_valid( $element, $key ){
+		$data_element = array(
+			'key'     => $key,
+			'success' => false,
+			'info' => ''
+		);
+
+		if( empty( $element ) ){
+			$data_element[ 'info' ] = esc_html__( 'Element vide', 'digirisk' );
+		}
+
+		$data_element[ 'name' ] = isset( $element[ 'name' ] ) ? $element[ 'name' ] : 'No name';
+		$data_element[ 'url' ] = isset( $element[ 'url' ] ) ? $element[ 'url' ] : 'No url';
+		$data_element[ 'type' ] = isset( $element[ 'type' ] ) ? $element[ 'type' ] : 'No type';
+		$data_element[ 'extension' ] = isset( $element[ 'path' ] ) ? pathinfo( $element[ 'path' ] )[ 'extension' ] : 'No path';
+
+		return $data_element;
+
+	}
+
+	public function trad_this_gittype( $type = "", $name = "" ){
+		if( ! $type ){
+			return '';
+		}
+
+		$data = array(
+			'type' => $type,
+			'extension' => ''
+		);
+
+		switch( $type ){
+			case 'file' :
+				$data[ 'type' ] = esc_html__( 'Fichier', 'digirisk' );
+				if( $name ){
+					$data[ 'extension' ] = pathinfo( $name )[ 'extension' ];
+				}
+				break;
+			case 'dir' :
+				$data[ 'type' ] = esc_html__( 'Dossier', 'digirisk' );
+				break;
+			default:
+				break;
+		}
+		return $data[ 'type' ] . ' ' . $data[ 'extension' ];
+	}
+
+	public function check_if_content_is_correct( $content, $git_file ){
+		$lines = preg_split('/\r\n|\n|\r/', $content );
+		$data = array();
+		foreach( $lines as $key => $line ){
+
+			if( $line != "" ){
+				$data_line = $this->check_if_line_is_correct_to_causerie( $line, $git_file );
+
+				$data[ $key ] = $data_line;
+			}
+		}
+
+		return $data;
+	}
+
+	public function check_if_line_is_correct_to_causerie( $line, $git_file ){
+		$line_error = array();
+		$data = array(
+			'line' => $line,
+			'success'    => true,
+			'type'       => '',
+			'type_valid' => false,
+			'info'  => '',
+			'url'   => '',
+			'filename' => ''
+		);
+
+		if ( false !== strpos( strtolower( $line ), '%causerie%' ) ) {
+			$data[ 'type' ] = 'causerie';
+			$data[ 'type_valid' ] = true;
+			$data[ 'info' ] = esc_html__( 'Causerie valide', 'digirisk' );
+		}else if( false !== strpos( strtolower( $line ), '%description%' ) ) {
+			$data[ 'type' ] = "description";
+			$data[ 'type_valid' ] = true;
+			$data[ 'info' ] = esc_html__( 'Description valide', 'digirisk' );
+		}else if( false !== strpos( strtolower( $line ), '%media%' ) ){ // Si c'est une photo on vérifie qu'elle existe
+			$data[ 'type' ] = "media";
+			$line = str_replace( '%media%', '', $line );
+			$line = str_replace( '%Media%', '', $line );
+
+			$line_without_extension = preg_replace( '/\\.[^.\\s]{3,4}$/', '', $line );
+			$media_query = new \WP_Query(
+				array(
+					'title'          => $line_without_extension,
+					'post_type'      => 'attachment',
+					'post_status'    => 'inherit',
+					'posts_per_page' => 1,
+				)
+			);
+
+			if( ! empty( $media_query->posts ) ){ // Photo trouvé !
+				$data[ 'type_valid' ] = true;
+				$data[ 'info' ] = esc_html__( 'Photo trouvée la galerie des médias', 'digirisk' );
+			}else{ // Photo introuvable dans les medias
+				if( ! empty( $git_file ) ){ // Check si la photo se trouve dans l'import
+					$media_is_in_import = $this->check_if_media_is_in_import( $line, $git_file );
+					if( ! empty( $media_is_in_import ) ){
+						$data[ 'info' ] = esc_html__( 'Photo trouvée dans l\'import', 'digirisk' );
+						$data[ 'url' ] = $media_is_in_import[ 'download_url' ];
+						$data[ 'filename' ] = $media_is_in_import[ 'name' ];
+					}else{
+						$data[ 'info' ] = esc_html__( 'Media introuvable (gallery et import)', 'digirisk' );
+						$data[ 'success' ] = false;
+					}
+				}else{
+					$data[ 'info' ] = esc_html__( 'Media introuvable dans la gallery', 'digirisk' );
+					$data[ 'success' ] = false;
+				}
+			}
+		}else if( false !== strpos( strtolower( $line ), '%risque%' ) ){
+			$data[ 'type' ] = "risque";
+			$line = str_replace( '%risque%', '', $line );
+			$line = str_replace( '%Risque%', '', $line );
+
+			$risque = Risk_Category_Class::g()->get( array( 'name' => $line ), true );
+			if( ! empty( $risque ) ){
+				$data[ 'type_valid' ] = true;
+				$data[ 'info' ] = esc_html__( 'Risque trouvé dans les catégories de risque', 'digirisk' );
+			}else{
+				$data[ 'info' ] = esc_html__( 'Risque introuvable', 'digirisk' );
+				$data[ 'success' ] = false;
+			}
+		}else{
+			$data[ 'success' ] = false; // Type introuvable / pas pris en compte
+		}
+		return $data;
+	}
+
+	public function check_if_media_is_in_import( $line, $git_file ){
+		foreach( $git_file as $element ){
+			if( $element[ 'name' ] == $line ){
+				return $element;
+			}
+		}
+		return array();
 	}
 }
 

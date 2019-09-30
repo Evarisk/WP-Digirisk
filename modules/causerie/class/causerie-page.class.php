@@ -51,11 +51,13 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 	 */
 	public function display() {
 		$id = ! empty( $_GET['id'] ) ? (int) $_GET['id'] : 0; // WPCS: CSRF ok.
+		$page = ! empty( $_GET[ 'tab' ] ) ? sanitize_text_field( $_GET[ 'tab' ] ) : 'dashboard';
 
 		if ( ! empty( $id ) ) {
 			Causerie_Intervention_Page_Class::g()->display_single( $id );
 		} else {
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main' );
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main',	array( 'page' => $page )
+			);
 		}
 	}
 

@@ -17,9 +17,19 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <li>
-	<label for="accronym-<?php echo $key; ?>"><?php echo $key; ?>
+	<label for="accronym-<?php echo $key; ?>">
+	<?php if( ! isset( $element['element' ] ) ): ?>
+		<?php echo $key; ?>
 		<span>(<?php echo $element['description']; ?>)</span>
-		<input type="text" id="accronym-<?php echo $key; ?>" name="list_accronym[<?php echo $key; ?>][to]" value="<?php echo $element['to']; ?>" />
-	</label>
-	<input type="hidden" name="list_accronym[<?php echo $key; ?>][description]" value="<?php echo $element['description']; ?>" />
+			<input type="text" id="accronym-<?php echo $key; ?>" name="list_accronym[<?php echo $key; ?>][to]" value="<?php echo $element['to']; ?>" />
+		</label>
+		<input type="hidden" name="list_accronym[<?php echo $key; ?>][description]" value="<?php echo $element['description']; ?>" />
+
+	<?php else: ?>
+		<?php echo $element[ 'to' ]; ?>
+		<span>(<?php echo $element['description']; ?>)</span>
+			<input type="text" id="accronym-<?php echo $key; ?>" name="list_prefix[<?php echo $element['element' ]; ?>][to]" value="<?php echo $element['to']; ?>" />
+		</label>
+		<input type="hidden" name="list_prefix[<?php echo $element[ 'element' ]; ?>][description]" value="<?php echo $element['description']; ?>" />
+	<?php endif; ?>
 </li>

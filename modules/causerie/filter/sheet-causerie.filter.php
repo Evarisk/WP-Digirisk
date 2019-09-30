@@ -49,9 +49,11 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 	public function before_save_doc( $data, $args ) {
 		$upload_dir = wp_upload_dir();
 
+		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $data['parent'] );
+
 		$data['title']  = current_time( 'Ymd' ) . '_';
 		$data['title'] .= '_fiche_causerie_';
-		$data['title'] .= $data['parent']->data['unique_identifier'];
+		$data['title'] .= $causerie->data['unique_identifier'];
 		$data['title']  = str_replace( '-', '_', $data['title'] );
 
 		$data['guid'] = $upload_dir['baseurl'] . '/digirisk/0/' . sanitize_title( $data['title'] ) . '.odt';
@@ -80,9 +82,10 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$causerie              = $args['causerie'];
 			$causerie_intervention = $args['parent'];
 		}
+		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 
 		$data = array(
-			'cleCauserie'         => (string) $causerie->data['unique_key'],
+			'cleCauserie'         => (string) $causerie->data['unique_identifier'],
 			'cleFinalCauserie'    => __( 'N/A', 'digirisk' ),
 			'titreCauserie'       => $causerie->data['title'],
 			'categorieINRS'       => $causerie->data['risk_category']->data['name'],
@@ -107,7 +110,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 
 		if ( isset( $args['causerie'] ) ) {
 			$taskmanager_data = $this->check_if_this_causerie_have_task_enable( $causerie_intervention->data[ 'id' ] );
-			$data['cleFinalCauserie']    = (string) $causerie_intervention->data['second_unique_key'];
+			$data['cleFinalCauserie']    = (string) $causerie_intervention->data['second_identifier'];
 			$data['formateur']           = $causerie_intervention->data['former']['rendered']->data['displayname'];
 			$data['formateurSignature']  = $this->set_picture( $causerie_intervention->data['former']['signature_id'], 5 );
 			$data['dateDebutCauserie']   = $causerie_intervention->data['date_start']['rendered']['date_human_readable'];

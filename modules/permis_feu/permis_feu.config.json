@@ -1,0 +1,30 @@
+  {
+	"name": "Permis de feu",
+	"slug": "permis_feu",
+	"since": "7.3.3",
+	"version": "7.3.3",
+	"description": "Page des permis de feu",
+	"path": "modules/permis_feu/",
+  "dependencies": {
+		"model": {
+			"priority": [
+				"permis-feu.model.php"
+			]
+		},
+    "filter": {},
+		"class": {},
+		"action": {}
+	},
+  "steps": {
+    "PERMIS_FEU_NOT_STARTED": 0,
+    "PERMIS_FEU_FORMER": 1,
+    "PERMIS_FEU_INFORMATION": 2,
+    "PERMIS_FEU_ENTERPRISE": 3,
+    "PERMIS_FEU_PARTICIPANT": 4,
+    "PERMIS_FEU_CLOSED": 5
+  },
+  "status":{
+    "PERMIS_FEU_IN_PROGRESS" : 0,
+    "PERMIS_FEU_IS_ENDED" : 1
+  }
+}

@@ -34,6 +34,10 @@ class Setting_Action {
 		add_action( 'wp_ajax_paginate_setting_page_user', array( $this, 'callback_paginate_setting_page_user' ) );
 
 		add_action( 'wp_ajax_save_general_settings_digirisk', array( $this, 'ajax_save_general_settings_digirisk' ) );
+
+		add_action( 'wp_ajax_update_accronym', array( $this, 'callback_update_accronym' ) );
+
+		// add_action( 'wp_ajax_save_prefix_settings_digirisk', array( $this, 'callback_save_prefix_settings_digirisk' ) );
 	}
 
 	/**
@@ -99,6 +103,17 @@ class Setting_Action {
 		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
 		$sites                      = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
 
+		$prefix = Setting_Class::g()->get_all_prefix();
+
+		foreach( $prefix as $element ){
+			$list_accronym[ $element[ 'element' ] ] = array(
+				'description' => $element[ 'title' ],
+				'to'          => $element[ 'value' ],
+				'element'     => $element[ 'element' ],
+				'page'        => $element[ 'page' ]
+			);
+		}
+
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
 			'dangers_preset'             => $dangers_preset,
@@ -108,7 +123,7 @@ class Setting_Action {
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
 			'sites'                      => $sites,
-			'general_options'            => $general_options,
+			'general_options'            => $general_options
 		) );
 	}
 
@@ -121,7 +136,9 @@ class Setting_Action {
 	 * @version 6.2.9
 	 */
 	public function callback_update_accronym() {
+		check_ajax_referer( 'update_accronym' );
 		$list_accronym = $_POST['list_accronym'];
+		$list_prefix   = $_POST['list_prefix'];
 
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
@@ -129,9 +146,16 @@ class Setting_Action {
 				$element['description'] = sanitize_text_field( stripslashes( $element['description'] ) );
 			}
 		}
-
 		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
-		wp_safe_redirect( admin_url( 'options-general.php?page=digirisk-setting&tab=digi-accronym' ) );
+
+		Setting_Class::g()->save_prefix_settings_digirisk( $list_prefix );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'savePrefixSettingsDigiriskSuccess',
+			'text_info'        => esc_html__( 'Sauvegardé avec succés', 'digirisk' )
+		) );
 	}
 
 	/**
@@ -164,7 +188,7 @@ class Setting_Action {
 	/**
 	 * Méthode appelé par le champs de recherche dans la page "digirisk-epi"
 	 *
-	 * @param  integer $id           L'ID de la société.
+	 * @param  integer $id L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évaluateurs trouvés par la recherche.
 	 * @return void
 	 *

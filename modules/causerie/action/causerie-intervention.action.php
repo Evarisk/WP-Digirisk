@@ -63,7 +63,6 @@ class Causerie_Intervention_Action {
 		$final_causerie = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
 
 		$final_causerie = Causerie_Intervention_Class::g()->add_participant( $final_causerie, $participant_id );
-
 		$final_causerie = Causerie_Intervention_Class::g()->update( $final_causerie->data );
 
 		Causerie_Intervention_Page_Class::g()->register_search( null, null );
@@ -158,6 +157,7 @@ class Causerie_Intervention_Action {
 		}
 
 		$causerie_intervention = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		Causerie_Intervention_Page_Class::g()->register_search( null, null );
 
 		if ( empty( $causerie_intervention ) ) {
 			wp_send_json_error();

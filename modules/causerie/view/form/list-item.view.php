@@ -55,18 +55,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</span>
 			<?php endif; ?>
 
-			<!-- Editer un causerie -->
+			<!-- Editer une causerie -->
 			<div 	class="wpeo-button light button-square-50 edit action-attribute"
-						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_edit_causerie' ) ); ?>"
-						data-loader="causerie-row"
-						data-action="load_edit_causerie"><i class="icon fa fa-pencil-alt"></i></div>
+				data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_edit_causerie' ) ); ?>"
+				data-loader="causerie-row"
+				data-action="load_edit_causerie"><i class="icon fa fa-pencil-alt"></i></div>
 
 			<div 	class="wpeo-button light button-square-50 delete action-delete button-transparent"
-						data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_causerie' ) ); ?>"
-						data-message-delete="<?php echo esc_attr_e( 'Supprimer cette causerie ?', 'digirisk' ); ?>"
-						data-action="delete_causerie"><i class="icon fa fa-times"></i></div>
+				data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_causerie' ) ); ?>"
+				data-message-delete="<?php echo esc_attr_e( 'Supprimer cette causerie ?', 'digirisk' ); ?>"
+				data-loader="causerie-row"
+				data-action="delete_causerie"><i class="icon fa fa-times"></i></div>
 		</div>
 	</td>
 </tr>

@@ -38,7 +38,6 @@ defined( 'ABSPATH' ) || exit; ?>
 				<div class="mobile-navigation"><i class="icon fas fa-bars"></i></div>
 			</div>
 		</div>
-
 		<?php echo do_shortcode( '[digi_tab id="' . $society->data['id'] . '" type="' . $society->data['type'] . '" tab_slug="' . $tab_data->slug . '"]' ); ?>
 	</div>
 </div>
