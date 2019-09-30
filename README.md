@@ -11,16 +11,22 @@ Le plugin Digirisk vous permet de réaliser, de façon simple et intuitive :
 * La gestion de votre registre des accidents bénins
 * La gestion de votre intranet sécurité grâce à WP
 * Le fonctionnement sur vos téléphones, tablettes natifs, sans installation de appli, DigiRisk est responsive
-* De nombreuses autres fonctions sont disponible sur le site www.digirisk.com
+* De nombreuses autres fonctions sont disponible sur le site [digirisk.com](www.digirisk.com "digirisk.com")
 
 # DigiRisk et WordPressMU
 
-DigiRisk associé à la puissance de WordPressMU, vous permet de gérer l'ensemble de votre Système de Management de la Sécurité de façon homogène et en toute simplicité.
-DigiRisk intergre de facon native la possibilité de créer des modèles duplicables, il suffit de les personnaliser par société.
-Vous gérez un groupe avec plusieurs sociétés, une collectivité de communes, vous êtes consultants avec plusieurs clients la gestion avec WordPressMU est faite pour vous...
+Vous devez gerer du Multisites : 
+* Ensembles de sociétés (Groupe, holding etc.)
+* Etablissements (Lycées, collèges etc.)
+* Sites (SDIS, sictom, etc.)
+* Mairies (pour les collectivités de communes)
+* Clients (pour les consultants)
+DigiRisk et WordPressMU est fait pour vous... Votre Système de Management de la Sécurité sera géré de façon homogène et en toute simplicité.
+DigiRisk intégre de facon native la possibilité de créer des modèles duplicables, il suffit de les personnaliser par société.
+Associé à [DigiRisk Dashboard](https://github.com/Evarisk/digirisk-dashboard "DigiRisk Dashboard") vous pourrez avoir une vue global sur le pilotage.
 
 # DigiRisk et autres plugins
 
 DigiRisk peut être associé à d'autres plugins :
-* La gestion des EPIs, utilisez THEPI facile, gratuit et intégrable en 1 clic
-* Le plan d'actions, utilisez TaskManager, la symbiose est juste parfaite
+* La gestion des EPIs, utilisez [Theepi.fr](https://www.theepi.fr/ "Theepi.fr") facile, gratuit et intégrable en 1 clic
+* Le plan d'actions, utilisez [Task Manager](http://taskmanager.fr/ "Task Manager"), la symbiose est juste parfaite
