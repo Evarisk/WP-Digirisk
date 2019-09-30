@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="information-society" style="background-color: #fff; padding: 1em;">
 	<h2 style="text-align:center">
-		<?php esc_html_e( 'Information société extérieur', 'digirisk' ); ?>
+		<?php esc_html_e( 'Information société extérieure', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
 		aria-label="<?php esc_html_e( 'Information de la société intervenante', 'digirisk' ); ?>"
 		style="color : dodgerblue; cursor : pointer">
@@ -92,9 +92,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="intervenant-bloc">
 	   <h2 style="text-align:center">
-		   <?php esc_html_e( 'Liste des intervenants extérieur', 'digirisk' ); ?>
+		   <?php esc_html_e( 'Liste des intervenants extérieurs', 'digirisk' ); ?>
 		   <span class="wpeo-tooltip-event"
-		   aria-label="<?php esc_html_e( 'Liste des intervenants du plan de  prévention', 'digirisk' ); ?>"
+		   aria-label="<?php esc_html_e( 'Liste des intervenants du plan de prévention', 'digirisk' ); ?>"
 		   style="color : dodgerblue; cursor : pointer">
 			   <i class="fas fa-info-circle"></i>
 		   </span>

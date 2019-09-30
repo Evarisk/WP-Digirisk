@@ -124,7 +124,7 @@ global $eo_search;
 			<h2>
 				<?php esc_html_e( 'Intervention par points chauds', 'digirisk' ); ?>
 				<span class="wpeo-tooltip-event"
-				aria-label="<?php esc_html_e( 'Listes des interventions associés aux types de travaux', 'digirisk' ); ?>"
+				aria-label="<?php esc_html_e( 'Listes des interventions associées aux types de travaux', 'digirisk' ); ?>"
 				style="color : dodgerblue; cursor : pointer">
 					<i class="fas fa-info-circle"></i>
 				</span>

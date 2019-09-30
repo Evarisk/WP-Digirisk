@@ -143,7 +143,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<h2>
 				<?php esc_html_e( 'Intervention', 'digirisk' ); ?>
 				<span class="wpeo-tooltip-event"
-				aria-label="<?php esc_html_e( 'Listes des interventions associés aux risques', 'digirisk' ); ?>"
+				aria-label="<?php esc_html_e( 'Listes des interventions associées aux risques', 'digirisk' ); ?>"
 				style="color : dodgerblue; cursor : pointer">
 					<i class="fas fa-info-circle"></i>
 				</span>

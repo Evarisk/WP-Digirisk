@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="information-society" style="background-color: #fff; padding: 1em;">
 	<h2 style="text-align:center">
-		<?php esc_html_e( 'Information société extérieur', 'digirisk' ); ?>
+		<?php esc_html_e( 'Information société extérieure', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
 		aria-label="<?php esc_html_e( 'Information de la société intervenante', 'digirisk' ); ?>"
 		style="color : dodgerblue; cursor : pointer">
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
 					<?php if( $permis_feu->data[ 'society_outside' ][ 'name' ] == "" ): ?>
-						<input type="text" class="form-field" name="outside_name" value="<?php esc_html_e( 'Entreprise Exterieur', 'digirisk' ); ?>">
+						<input type="text" class="form-field" name="outside_name" value="<?php esc_html_e( 'Entreprise Exterieure', 'digirisk' ); ?>">
 					<?php else: ?>
 						<input type="text" class="form-field" name="outside_name" value="<?php echo esc_attr( $permis_feu->data[ 'society_outside' ][ 'name' ] ); ?>">
 					<?php endif; ?>
@@ -103,7 +103,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	 <div class="intervenant-bloc">
 	 	<h2 style="text-align:center">
-			<?php esc_html_e( 'Liste des intervenants extérieur', 'digirisk' ); ?>
+			<?php esc_html_e( 'Liste des intervenants extérieurs', 'digirisk' ); ?>
 			<span class="wpeo-tooltip-event"
 			aria-label="<?php esc_html_e( 'Liste des intervenants du permis de feu', 'digirisk' ); ?>"
 			style="color : dodgerblue; cursor : pointer">

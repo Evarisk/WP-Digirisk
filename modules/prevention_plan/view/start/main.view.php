@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="title"><?php esc_html_e( 'Plan de prévention', 'digirisk' ); ?></span></a>
 			<a href="<?php echo Prevention_Class::g()->get_link( $prevention, 3 ); ?>" class="step <?php echo ( in_array( $prevention->data['step'], array( 3, 4 ) ) ) ? 'active' : ''; ?>"
 				data-width="62" style="text-decoration: none;">
-				<span class="title"><?php esc_html_e( 'Société extérieur', 'digirisk' ); ?></span></a>
+				<span class="title"><?php esc_html_e( 'Société extérieure', 'digirisk' ); ?></span></a>
 			<a href="<?php echo Prevention_Class::g()->get_link( $prevention, 4 ); ?>" class="step <?php echo ( 4 === $prevention->data['step'] ) ? 'active' : ''; ?>"
 				data-width="100" style="text-decoration: none;">
 				<span class="title" style="max-width : none !important;"><?php esc_html_e( 'Intervenant Exterieur', 'digirisk' ); ?></span></a>
