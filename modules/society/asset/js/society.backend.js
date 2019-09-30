@@ -13,7 +13,7 @@ window.eoxiaJS.digirisk.society.event = function() {
 	jQuery( document ).on( 'keyup', '.main-header input[name="title"]', window.eoxiaJS.digirisk.society.keyUpSaveIdentity );
 	jQuery( document ).on( 'click', '.main-header .edit', window.eoxiaJS.digirisk.society.focusInputTitle );
 	jQuery( document ).on( 'keyup', '.digirisk-wrap .form.society-informations .form-element input, .digirisk-wrap .form.society-informations .form-element textarea', window.eoxiaJS.digirisk.society.enableSaveButton );
-	jQuery( document ).on( 'click', '.main-container .bloc-information-society', window.eoxiaJS.digirisk.society.requestGetViewEdit )
+	jQuery( document ).on( 'click', '.main-information-society .bloc-information-society', window.eoxiaJS.digirisk.society.requestGetViewEdit )
 };
 
 /**

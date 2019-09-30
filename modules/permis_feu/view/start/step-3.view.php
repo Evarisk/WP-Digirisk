@@ -100,7 +100,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 	</section>
-
 	 <div class="intervenant-bloc">
 	 	<h2 style="text-align:center">
 			<?php esc_html_e( 'Liste des intervenants extérieurs', 'digirisk' ); ?>

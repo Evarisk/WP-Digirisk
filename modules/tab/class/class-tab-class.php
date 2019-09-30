@@ -46,9 +46,11 @@ class Tab_Class extends \eoxia\Singleton_Util {
 		$tab->slug = $tab_slug;
 		$tab       = $this->build_tab_to_display( $element, $tab_slug, true );
 
-		unset( $list_tab[ 'digi-society' ][ 'diffusion-informations' ] ); // @TODO Page Diffusion delete
-		unset( $list_tab[ 'digi-society' ][ 'legal_display' ] );	// @TODO Page Legal Display delete
+		// unset( $list_tab[ 'digi-society' ][ 'diffusion-informations' ] ); // @TODO Page Diffusion delete
+		// unset( $list_tab[ 'digi-society' ][ 'legal_display' ] );	// @TODO Page Legal Display delete
 		// TODO Ces deux pages ont étées regroupé dans la page configuration
+
+		unset( $list_tab[ 'digi-society' ][ 'configuration' ] );	// @TODO Page Configuration delete
 
 		\eoxia\View_Util::exec( 'digirisk', 'tab', 'main', array(
 			'id'       => $id,

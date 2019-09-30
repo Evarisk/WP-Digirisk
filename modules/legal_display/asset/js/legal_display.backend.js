@@ -54,7 +54,7 @@ window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus 
 
 		var canvasDonut = document.getElementById( id_indicator ).getContext('2d');
 		var data_canvas_donut = {
-			labels : [ window.indicatorString.completed, window.indicatorString.uncompleted ],
+			labels : [ 'Completed', 'Uncompleted' ],
 			datasets: [
 					{
 						backgroundColor: [ color, "rgb(230,230,230)" ],

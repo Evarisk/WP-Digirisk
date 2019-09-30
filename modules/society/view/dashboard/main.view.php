@@ -89,10 +89,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 
 	  	<style media="screen">
-		  .bloc-information-society:hover{
-			  border: solid blue 1px;
-			  cursor : pointer
-		  }
+			.main-information-society .bloc-information-society:hover{
+				border: solid blue 1px !important;
+		  		cursor : pointer
+			}
 
 			.notice-title-custom{
 				font-size: 20px;

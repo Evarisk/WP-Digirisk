@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a class="nav-tab <?php echo ( 'digi-capability' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-capability" ><?php esc_html_e( 'Capacités', 'digirisk' ); ?></a>
 			<a class="nav-tab <?php echo ( 'digi-accronym' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-accronym" ><?php esc_html_e( 'Accronymes', 'digirisk' ); ?></a>
 			<a class="nav-tab <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-danger-preset" ><?php esc_html_e( 'Danger preset', 'digirisk' ); ?></a>
+			<a class="nav-tab <?php echo ( 'digi-configuration' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-configuration" ><?php esc_html_e( 'Configuration', 'digirisk' ); ?></a>
 			<?php /* <a class="nav-tab <?php echo ( 'digi-define-prefix' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-define-prefix" ><?php esc_html_e( 'Prefix ODT', 'digirisk' ); ?></a> */ ?>
 		</h2>
 
@@ -62,6 +63,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'dangers_preset' => $dangers_preset,
 					) );
 					?>
+			</div>
+
+			<div id="digi-configuration" class="tab-content <?php echo ( 'digi-configuration' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div class="">
+					<?php
+					$element    = Society_Class::g()->get_societies_in( 0 );
+					Society_Configuration_Class::g()->display( $element[0] );
+					?>
+				</div>
+				<style media="screen">
+					.main-information-society .wpeo-notice{
+						border : solid #c1b5b5 1px;
+						background-color : #c3c3c366;
+					}
+				</style>
 			</div>
 
 			<?php /*
