@@ -1,11 +1,11 @@
 <?php
 /**
- * Gestion des actions des plan de prévention pour la lecture.
+ * Gestion des actions des permis de feu pour la lecture.
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     6.6.0
- * @version   6.6.0
- * @copyright 2018 Evarisk.
+ * @since     7.4.0
+ * @version   7.4.0
+ * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */
 

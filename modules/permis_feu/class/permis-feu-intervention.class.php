@@ -3,8 +3,8 @@
  * La classe gérant les interventions des permis de feu
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     7.3.0
- * @version   7.3.0
+ * @since     7.4.0
+ * @version   7.4.0
  * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */

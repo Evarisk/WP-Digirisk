@@ -1,10 +1,10 @@
 <?php
 /**
- * La classe gérant les plans de prévention
+ * La classe gérant les permis de feu
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     6.6.0
- * @version   6.6.0
+ * @since     7.4.0
+ * @version   7.4.0
  * @copyright 2019 Evarisk.
  * @package   DigiRisk
  */

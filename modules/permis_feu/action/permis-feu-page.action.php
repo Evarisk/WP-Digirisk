@@ -1,10 +1,10 @@
 <?php
 /**
- * Gestion des actions des causeries pour la lecture.
+ * Gestion des actions des permis de feu
  *
  * @author    Evarisk <dev@evarisk.com>
- * @since     6.6.0
- * @version   6.6.0
+ * @since     7.4.0
+ * @version   7.4.0
  * @copyright 2018 Evarisk.
  * @package   DigiRisk
  */
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Gestion des actions des causeries pour la lecture.
+ * Gestion des actions des permis de feu pour la lecture.
  */
 class Permis_Feu_Page_Action {
 
