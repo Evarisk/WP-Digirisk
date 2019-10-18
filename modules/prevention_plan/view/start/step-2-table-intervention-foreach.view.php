@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  	<thead>
  		<tr>
 			<th class="w100 padding"><?php esc_html_e( 'IdRPP', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
-			<th class="padding" style="width: 15%;"><?php esc_html_e( 'Société', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
+			<th class="padding" style="width: 15%;"><?php esc_html_e( 'Lieu', 'digirisk' ); ?></th> <!--  class="w50 padding" -->
 			<th class="padding"><?php esc_html_e( 'Description des actions', 'digirisk' ); ?></th>
 			<th class="w100 padding" ><?php esc_html_e( 'Risque INRS', 'digirisk' ); ?></th>
  			<th class="padding"><?php esc_html_e( 'Moyens de prévention', 'digirisk' ); ?></th> <!--  class="w50" -->

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="form-element">
-	<div class="wpeo-button button-green display-modal-unite">
+	<div class="wpeo-button button-purple display-modal-unite">
 		<i class="fas fa-download"></i>
 	</div>
 </div>

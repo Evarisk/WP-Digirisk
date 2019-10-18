@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 ?>
 <div class="information-society" style="background-color: #fff; padding: 1em;">
-	<h2 style="text-align:center">
+	<h2>
 		<?php esc_html_e( 'Information société extérieure', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
 		aria-label="<?php esc_html_e( 'Information de la société intervenante', 'digirisk' ); ?>"
@@ -50,7 +50,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Numero Siret', 'digirisk' ); ?></span>
 				<label class="form-field-container">
-					<span class="form-field-icon-prev"><i class="fas fa-barcode"></i></span>
 					<input type="text" class="form-field" name="outside_siret" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'siret' ] ); ?>">
 				</label>
 			</div>
@@ -61,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Adresse', 'digirisk' ); ?></span>
 				<label class="form-field-container">
-					<span class="form-field-icon-prev"><i class="fas fa-location-arrow"></i></span>
+					<span class="form-field-icon-prev"><i class="fas fa-map-marker-alt"></i></span>
 						<input type="text" class="form-field" name="outside_address" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'address' ] ); ?>">
 				</label>
 			</div>
@@ -71,7 +70,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Code Postal', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-map-marker-alt"></i></span>
 						<input type="text" class="form-field" name="outside_postalcode" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'postal' ] ); ?>">
 					</label>
 				</div>
@@ -80,7 +78,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Ville', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="far fa-building"></i></span>
 						<input type="text" class="form-field" name="outside_town" value="<?php echo esc_attr( $prevention->data[ 'society_outside' ][ 'town' ] ); ?>">
 					</label>
 				</div>
@@ -91,7 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</section>
 
 	<div class="intervenant-bloc">
-	   <h2 style="text-align:center">
+	   <h2>
 		   <?php esc_html_e( 'Liste des intervenants extérieurs', 'digirisk' ); ?>
 		   <span class="wpeo-tooltip-event"
 		   aria-label="<?php esc_html_e( 'Liste des intervenants du plan de prévention', 'digirisk' ); ?>"

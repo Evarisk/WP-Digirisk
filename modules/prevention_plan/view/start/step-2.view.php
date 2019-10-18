@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="" style="background-color: #fff; padding: 1em;">
 
-	<h2 style="text-align : center">
+	<h2>
 		<?php esc_html_e( 'Informations sur le plan de prévention', 'digirisk' ); ?>
 		<span class="wpeo-tooltip-event"
 		aria-label="<?php esc_html_e( 'Information primaire du plan de prévention', 'digirisk' ); ?>"
@@ -26,68 +26,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
-	<section class="wpeo-gridlayout padding grid-2">
-		<div class="wpeo-gridlayout padding grid-1">
-			<div class="wpeo-form">
-				<div class="form-element">
-					<span style="display : flex">
-						<span class="form-label">
-							<?php esc_html_e( 'Titre', 'digirisk' ); ?>
-						</span>
-						<div class="title-information-option" style="margin-left: 2%; display: flex;">
-							<input type="hidden" name="more_than_400_hours" value="<?php echo esc_attr( $prevention->data[ 'more_than_400_hours' ] ); ?>">
-							<input type="hidden" name="imminent_danger" value="<?php echo esc_attr( $prevention->data[ 'imminent_danger' ] ); ?>">
-							<?php if( $prevention->data[ 'more_than_400_hours' ] ): ?>
-								<div class="wpeo-button button-blue action-button-title button-radius-3 button-prevention-title" data-type="more_than_400_hours">
-									<span>
-										<i class="button-icon fas fa-check-square"></i>
-										<?php esc_html_e( 'Plus de 400 heures', 'digirisk' ); ?>
-									</span>
-								</div>
-							<?php else: ?>
-								<div class="wpeo-button button-grey action-button-title button-radius-3 button-prevention-title" data-type="more_than_400_hours">
-									<span>
-										<i class="button-icon fas fa-square"></i>
-										<?php esc_html_e( 'Plus de 400 heures', 'digirisk' ); ?>
-									</span>
-								</div>
-							<?php endif; ?>
-							<?php if( $prevention->data[ 'imminent_danger' ] ): ?>
-								<div class="wpeo-button button-blue action-button-title button-radius-3 button-prevention-title" data-type="imminent_danger" style="margin-left : 5px">
-									<span>
-										<i class="button-icon fas fa-check-square"></i>
-										<?php esc_html_e( 'Danger grave et imminent', 'digirisk' ); ?>
-									</span>
-								</div>
-							<?php else: ?>
-								<div class="wpeo-button button-grey action-button-title button-radius-3 button-prevention-title" data-type="imminent_danger" style="margin-left : 5px">
-									<span>
-										<i class="button-icon fas fa-square"></i>
-										<?php esc_html_e( 'Danger grave et imminent', 'digirisk' ); ?>
-									</span>
-								</div>
-							<?php endif; ?>
-						</div>
+	<section class="wpeo-gridlayout padding grid-3">
+		<div class="wpeo-form">
+			<div class="form-element">
+				<span style="display : flex">
+					<span class="form-label">
+						<?php esc_html_e( 'Titre', 'digirisk' ); ?>
 					</span>
-					<label class="form-field-container">
-						<input type="text" name="prevention-title" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'title' ] ); ?>">
-					</label>
-				</div>
+				</span>
+				<label class="form-field-container">
+					<input type="text" name="prevention-title" class="form-field" value="<?php echo esc_attr( $prevention->data[ 'title' ] ); ?>">
+				</label>
 			</div>
 		</div>
-		<div class="wpeo-gridlayout padding grid-2">
-			<div class="wpeo-form">
-				<div class="form-element group-date">
-					<span class="form-label"><?php esc_html_e( 'Début d\'intervention', 'digirisk' ); ?></span>
-					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-						<input type="text" class="mysql-date" name="start_date"
-						value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
-						<input type="text" class="form-field date"
-						value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
-					</label>
-				</div>
+		<div class="wpeo-form">
+			<div class="form-element group-date">
+				<span class="form-label"><?php esc_html_e( 'Début d\'intervention', 'digirisk' ); ?></span>
+				<label class="form-field-container">
+					<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
+					<input type="text" class="mysql-date" name="start_date"
+					value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
+					<input type="text" class="form-field date"
+					value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
+				</label>
 			</div>
+		</div>
 
 			<div class="wpeo-form end-date-element">
 				<input type="hidden" name="date_end__is_define" value="<?php echo esc_attr( $prevention->data[ 'date_end__is_define' ] ); ?>">
@@ -132,14 +95,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
 						</label>
 					<?php endif; ?>
-
-
 				</div>
 			</div>
-		</div>
 	</section>
 	<div class="intervention-table" style="margin-top: 30px">
-		<span style="text-align : center">
+		<span>
 			<h2>
 				<?php esc_html_e( 'Intervention', 'digirisk' ); ?>
 				<span class="wpeo-tooltip-event"
@@ -154,6 +114,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</a>
 			</h2>
 		</span>
+
+		<div class="title-information-option" style="display: flex;">
+			<input type="hidden" name="more_than_400_hours" value="<?php echo esc_attr( $prevention->data[ 'more_than_400_hours' ] ); ?>">
+			<input type="hidden" name="imminent_danger" value="<?php echo esc_attr( $prevention->data[ 'imminent_danger' ] ); ?>">
+			<?php if( $prevention->data[ 'more_than_400_hours' ] ): ?>
+				<div class="wpeo-button button-blue action-button-title button-radius-3 button-prevention-title" data-type="more_than_400_hours">
+					<span>
+						<i class="button-icon fas fa-check-square"></i>
+						<?php esc_html_e( 'Plus de 400 heures', 'digirisk' ); ?>
+					</span>
+				</div>
+			<?php else: ?>
+				<div class="wpeo-button button-grey action-button-title button-radius-3 button-prevention-title" data-type="more_than_400_hours">
+					<span>
+						<i class="button-icon fas fa-square"></i>
+						<?php esc_html_e( 'Plus de 400 heures', 'digirisk' ); ?>
+					</span>
+				</div>
+			<?php endif; ?>
+			<?php if( $prevention->data[ 'imminent_danger' ] ): ?>
+				<div class="wpeo-button button-blue action-button-title button-radius-3 button-prevention-title" data-type="imminent_danger" style="margin-left : 5px">
+					<span>
+						<i class="button-icon fas fa-check-square"></i>
+						<?php esc_html_e( 'Danger grave et imminent', 'digirisk' ); ?>
+					</span>
+				</div>
+			<?php else: ?>
+				<div class="wpeo-button button-grey action-button-title button-radius-3 button-prevention-title" data-type="imminent_danger" style="margin-left : 5px">
+					<span>
+						<i class="button-icon fas fa-square"></i>
+						<?php esc_html_e( 'Danger grave et imminent', 'digirisk' ); ?>
+					</span>
+				</div>
+			<?php endif; ?>
+		</div>
+
 		<div class="intervention-content">
 
 			<?php

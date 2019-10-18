@@ -74,7 +74,7 @@ global $eo_search;
 	</td>
 	<?php if( $edit ): ?>
 		<td class="w50 padding" data-title="action">
-			<div class="wpeo-button button-blue action-input"
+			<div class="wpeo-button button-transparent action-input button-square-40"
 			 data-id="<?php echo esc_attr( $intervention->data[ 'id' ] ); ?>"
 			 data-action="edit_intervention_line"
 			 data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervention_line' ) ); ?>">
@@ -82,7 +82,7 @@ global $eo_search;
 			</div>
 		</td>
 		<td class="w50 padding" data-title="action">
-			<div class="wpeo-button button-red action-delete"
+			<div class="wpeo-button button-transparent action-delete button-square-40"
 			 data-id="<?php echo esc_attr( $intervention->data[ 'id' ] ); ?>"
 			 data-message-delete="<?php esc_html_e( 'Voulez-vous supprimer cette intervention ?', 'digirisk' ); ?>"
 			 data-action="delete_intervention_line"
