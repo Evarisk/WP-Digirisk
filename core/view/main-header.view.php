@@ -11,14 +11,17 @@
 namespace digi;
 
 defined( 'ABSPATH' ) || exit;
+
 $current_user = wp_get_current_user();
 
-$old_user = \user_switching::get_old_user();
 $link     = '';
-if ( ! empty( $old_user ) ) {
-	$link = add_query_arg( array(
-		'redirect_to' => urlencode( \user_switching::current_url() ),
-	), \user_switching::switch_back_url( $old_user ) );
+if ( class_exists( 'user_switching' ) ) {
+$old_user = \user_switching::get_old_user();
+	if ( ! empty( $old_user ) ) {
+		$link = add_query_arg( array(
+			'redirect_to' => urlencode( \user_switching::current_url() ),
+		), \user_switching::switch_back_url( $old_user ) );
+	}
 }
 ?>
 

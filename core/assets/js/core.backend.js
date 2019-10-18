@@ -31,6 +31,17 @@ window.eoxiaJS.digirisk.core.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note.notification-active', window.eoxiaJS.digirisk.core.openPopup );
 	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note .notification-close', window.eoxiaJS.digirisk.core.closeNotification );
 	jQuery( document ).on( 'click', '.popup-update-manager .back-update', window.eoxiaJS.digirisk.core.confirmBack );
+
+
+	var action = {
+		action: 'have_patch_note',
+	};
+
+	jQuery.post( ajaxurl, action, function ( response ) {
+		if ( response.data.status ) {
+			jQuery( '.digirisk-wrap' ).append( response.data.view );
+		}
+	} );
 };
 
 /**

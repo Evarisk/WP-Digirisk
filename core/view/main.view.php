@@ -56,11 +56,5 @@ defined( 'ABSPATH' ) || exit; ?>
 				</p>
 			</div>
 		</div>
-
-		<?php
-		if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
-			require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
-		endif;
-		?>
 	</div>
 </div>

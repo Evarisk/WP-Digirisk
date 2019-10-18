@@ -48,6 +48,7 @@ class Digirisk_Action {
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'admin_init', array( $this, 'redirect_to' ) );
 
+		add_action( 'wp_ajax_have_patch_note', array( $this, 'have_patch_note' ) );
 		add_action( 'wp_ajax_close_change_log', array( $this, 'callback_close_change_log' ) );
 
 		add_action( 'switch_to_user', array( $this, 'switch_to' ), 10, 4 );
@@ -185,6 +186,18 @@ class Digirisk_Action {
 
 			die();
 		}
+	}
+
+	public function have_patch_note() {
+		$result = DigiRisk::g()->get_patch_note();
+
+		ob_start();
+		require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
+		wp_send_json_success( array(
+			'status'  => $result['status'],
+			'result'  => $result,
+			'view'    => ob_get_clean(),
+		) );
 	}
 
 	/**
