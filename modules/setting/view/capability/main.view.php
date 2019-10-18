@@ -13,7 +13,9 @@ namespace digi;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} ?>
+}
+
+global $eo_search; ?>
 
 <div class="section-capability">
 	<input type="hidden" name="action" value="save_capability" />
@@ -25,9 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php Setting_Class::g()->display_role_has_cap(); ?>
 
-	<?php do_shortcode( '[digi-search icon="dashicons dashicons-search" next-action="display_setting_user" type="user" target="list-users"]' ); ?>
+	<?php $eo_search->display( 'user_list_capacity' ); ?>
 
-	<?php Setting_Class::g()->display_user_list_capacity(); ?>
+	<div class="list-users">
+		<?php Setting_Class::g()->display_user_list_capacity(); ?>
+	</div>
 
 	<div class="alignright action-input wpeo-button button-blue button-disable" data-parent="section-capability"><span><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></span></div>
 </div>

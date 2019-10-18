@@ -4,7 +4,8 @@
 	"version": "7.4.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
-		"digirisk-simple-risk-evaluation",
+    "digirisk-welcome",
+		"digirisk-du",
 		"digirisk-handle-risk",
 		"digirisk-epi",
 		"digirisk-users",
@@ -22,7 +23,8 @@
     "user-edit"
 	],
 	"insert_scripts_pages_css": [
-		"digirisk-simple-risk-evaluation",
+    "digirisk-welcome",
+		"digirisk-du",
 		"digirisk-handle-risk",
 		"digirisk-epi",
 		"digirisk-accident",
@@ -109,15 +111,34 @@
   "dashboard_page_url": "digirisk-simple-risk-evaluation",
   "default_capabilities": {
     "administrator": [
-      "manage_digirisk",
-      "manage_causerie",
       "create_causerie",
+      "manage_digirisk",
+      "manage_du",
+      "manage_accident",
+      "manage_causerie",
+      "manage_prevention",
+      "manage_permis_feu",
+      "manage_listing_risque",
+      "manage_sorter",
+      "manage_users",
+      "manage_tools",
+      "manage_setting",
       "manage_preventionplan"
     ],
     "editor": [
+      "create_causerie",
       "manage_digirisk",
+      "manage_du",
+      "manage_accident",
       "manage_causerie",
-      "create_causerie"
+      "manage_prevention",
+      "manage_permis_feu",
+      "manage_listing_risque",
+      "manage_sorter",
+      "manage_users",
+      "manage_tools",
+      "manage_setting",
+      "manage_preventionplan"
     ],
     "author": [
       "manage_causerie"

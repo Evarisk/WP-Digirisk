@@ -145,11 +145,14 @@ class Setting_Class extends \eoxia\Singleton_Util {
 			$args_user['include'] = $list_user_id;
 		}
 
+		if ( ! empty( $_POST['s'] ) ) {
+			$args_user['search'] = '*' . $_POST['s'] . '*';
+		}
+
 		$users = User_Class::g()->get( $args_user );
 
 		unset( $args_user['offset'] );
 		unset( $args_user['number'] );
-		unset( $args_user['include'] );
 		$args_user['fields'] = array( 'ID' );
 
 		$count_user  = count( User_Class::g()->get( $args_user ) );
@@ -171,6 +174,62 @@ class Setting_Class extends \eoxia\Singleton_Util {
 			'count_user'           => $count_user,
 			'current_page'         => $current_page,
 		) );
+	}
+
+	public function display_htpasswd( $error_message = '' ) {
+		$htaccess_info = $this->get_htaccess_info();
+
+		\eoxia\View_Util::exec( 'digirisk', 'setting', 'htpasswd/main', array(
+			'error_message' => $error_message,
+			'notices'       => $htaccess_info['notices'],
+			'htpasswd_path' => $htaccess_info['htpasswd_path'],
+			'login'         => $htaccess_info['login'],
+		) );
+	}
+
+	public function get_htaccess_info() {
+		$notices               = array( __( 'Par précaution veuillez être sur de posséder les identifiants FTP de votre site. Cette interface modifie votre fichier htaccess.', 'digirisk' ) );
+		$htaccess_path         = get_home_path() . '.htaccess';
+		$htpasswd_path         = '';
+		$htpasswd_file_content = '';
+		$login                 = '';
+		$password              = '';
+
+		if ( ! file_exists( $htaccess_path ) ) {
+			$htaccess_path = null;
+		}
+
+		$htaccess_file         = fopen( $htaccess_path, "r" );
+		$htaccess_file_content = fread( $htaccess_file, filesize( $htaccess_path ) );
+		fclose( $htaccess_file );
+
+
+		if ( strpos( $htaccess_file_content, 'AuthType Basic' ) ) {
+			$notices[] = __( 'Un htpasswd est déjà présent sur votre instance DigiRisk. Cette interface vous permet de modifier l\'identifiant et le mot de passe de celui-ci. Êtes vous sur de vouloir faire celà ?', 'digirisk' );
+		}
+
+		preg_match( '/AuthUserFile ?"?\'?([^"?\'?]+)/', $htaccess_file_content, $matches );
+
+		if ( ! empty( $matches ) ) {
+			$htpasswd_path = $matches[1];
+
+			$htpasswd_file         = fopen( $htpasswd_path, "r" );
+			$htpasswd_file_content = fread( $htpasswd_file, filesize( $htpasswd_path ) );
+			fclose( $htpasswd_file );
+
+			$htpasswd_file_content = explode( ':', $htpasswd_file_content );
+
+			$login    = ! empty( $htpasswd_file_content[0] ) ? $htpasswd_file_content[0] : '';
+			$password = ! empty( $htpasswd_file_content[1] ) ? $htpasswd_file_content[1] : '';
+		}
+
+		return array(
+			'htaccess_path'         => $htaccess_path,
+			'htpasswd_path'         => $htpasswd_path,
+			'login'                 => $login,
+			'password'              => $password,
+			'notices'               => $notices,
+		);
 	}
 
 	public function get_all_prefix(){

@@ -18,10 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-<ul class="prevention-stats wpeo-gridlayout grid-4">
-	Some stats here
-</ul>
-
 <div class="information-maitre-oeuvre" style="background-color: #fff; padding: 1em;">
 	<input type="hidden" name="user-type" value="maitre_oeuvre">
 	<h2 style="text-align:center">

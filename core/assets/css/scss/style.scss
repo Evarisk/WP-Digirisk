@@ -53,9 +53,26 @@
 
 @import "module/module";
 
+/*--------------------------------------------------------------
+# Import Main Menu
+--------------------------------------------------------------*/
+@import "element/main-menu";
+
+/*--------------------------------------------------------------
+# Temporaire à ranger
+--------------------------------------------------------------*/
+.wpeo-button.button-main {
+	background: #3495f0;
+	border-color: #3495f0;
+}
+.wpeo-button.button-main  i {
+	color: white;
+}
+
 .wpeo-modal.modal-signature .modal-container .modal-content {
 	overflow: hidden;
 }
+
 
 canvas {
 	border: solid black 1px;
@@ -120,3 +137,61 @@ canvas {
     -webkit-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
 }
+
+.phone-bloc {
+	display: flex;
+}
+
+.wpeo-wrap .wpeo-button-pulse {
+	height: 47px!important;
+	width: 47px!important;
+}
+
+.document-unique_page_digirisk-causerie .wpeo-wrap .wpeo-button-pulse {
+	height: 36px!important;
+	width: 36px!important;
+}
+
+.wpeo-wrap img.signature {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+#user_switching.notice {
+	display: none;
+}
+
+.toplevel_page_digirisk-welcome {
+	.top-content {
+
+		margin-top: 80px;
+		margin-bottom: 50px;
+		div {
+			margin: auto;
+			text-align: center;
+		}
+	}
+
+	h2 {
+	    font-weight: 700;
+	    font-style: normal;
+	    text-transform: uppercase;
+		font-size: 26.6px;
+		text-align: center;
+	}
+
+	h3 {
+	    font-weight: 700;
+	    font-style: normal;
+    	text-transform: uppercase;
+		font-size: 20px;
+
+	}
+}
+/*--------------------------------------------------------------
+# Fin temporaire à ranger
+--------------------------------------------------------------*/

@@ -55,6 +55,8 @@ class Page_Sorter_Class extends \eoxia\Singleton_Util {
 
 		$display_notice = get_transient( 'display_notice' );
 
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
+
 		\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'main', array(
 			'main_society'   => $main_society,
 			'display_notice' => $display_notice,

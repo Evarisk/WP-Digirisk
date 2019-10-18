@@ -127,6 +127,9 @@ class Prevention_Action {
 			case 'progress':
 				Prevention_Page_Class::g()->display_progress();
 				break;
+			case 'outofdate':
+				Prevention_Page_Class::g()->display_outofdate();
+				break;
 			default:
 				Prevention_Page_Class::g()->display_dashboard();
 				break;
@@ -247,11 +250,12 @@ class Prevention_Action {
 	public function callback_add_intervenant_to_prevention(){
 		check_ajax_referer( 'add_intervenant_to_prevention' );
 
-		$id       = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
-		$name     = isset( $_POST[ 'name' ] ) ? sanitize_text_field( $_POST[ 'name' ] ) : '';
-		$lastname = isset( $_POST[ 'lastname' ] ) ? sanitize_text_field( $_POST[ 'lastname' ] ) : '';
-		$mail     = isset( $_POST[ 'mail' ] ) ? sanitize_text_field( $_POST[ 'mail' ] ) : '';
-		$phone    = isset( $_POST[ 'phone' ] ) ? sanitize_text_field( $_POST[ 'phone' ] ) : '';
+		$id                = isset( $_POST[ 'id' ] ) ? (int) $_POST[ 'id' ] : 0;
+		$name              = isset( $_POST[ 'name' ] ) ? sanitize_text_field( $_POST[ 'name' ] ) : '';
+		$lastname          = isset( $_POST[ 'lastname' ] ) ? sanitize_text_field( $_POST[ 'lastname' ] ) : '';
+		$mail              = isset( $_POST[ 'mail' ] ) ? sanitize_text_field( $_POST[ 'mail' ] ) : '';
+		$phone             = isset( $_POST[ 'phone' ] ) ? sanitize_text_field( $_POST[ 'phone' ] ) : '';
+		$phone_callingcode = isset( $_POST[ 'phone-callingcode' ] ) ? sanitize_text_field( $_POST[ 'phone-callingcode' ] ) : '';
 
 		$key = isset( $_POST[ 'key' ] ) ? (int) $_POST[ 'key' ] : -1;
 
@@ -260,10 +264,11 @@ class Prevention_Action {
 		}
 
 		$user = array(
-			'name'     => $name,
-			'lastname' => $lastname,
-			'mail'     => $mail,
-			'phone'    => $phone
+			'name'              => $name,
+			'lastname'          => $lastname,
+			'mail'              => $mail,
+			'phone'             => $phone,
+			'phone_callingcode' => $phone_callingcode,
 		);
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
@@ -355,6 +360,7 @@ class Prevention_Action {
 		$prevention_id    = ! empty( $_POST['prevention_id'] ) ? (int) $_POST['prevention_id'] : 0; // WPCS: input var ok.
 		$signature_data = ! empty( $_POST['signature_data'] ) ? $_POST['signature_data'] : ''; // WPCS: input var ok.
 		$user_type = ! empty( $_POST['user-type'] ) ? $_POST['user-type'] : ''; // WPCS: input var ok.
+		$parent = ! empty( $_POST['parent'] ) ? $_POST['parent'] : '';
 
 		if ( ! $prevention_id || ! $signature_data ) {
 			wp_send_json_error( 'Error in request' );
@@ -368,6 +374,7 @@ class Prevention_Action {
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-1-signature', array(
 			'prevention' => $prevention,
 			'user_type'  => $user_type,
+			'parent'     => $parent,
 			'user_type_attr' => $user_type == 'maitre_oeuvre' ? 'maitre-oeuvre-signature' : 'intervenant-exterieur-signature',
 
 		) );

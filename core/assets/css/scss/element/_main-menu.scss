@@ -1,0 +1,137 @@
+.toplevel_page_digi-setup, .admin_page_digirisk-du, .admin_page_digirisk-causerie, .toplevel_page_digirisk-welcome, .profile_page_digirisk-users, .toplevel_page_digirisk-simple-risk-evaluation, .users_page_digirisk-users, .document-unique_page_digirisk-accident, .settings_page_digirisk-setting, .tools_page_digirisk-tools, .document-unique_page_digirisk-handle-sorter, .document-unique_page_digirisk-handle-risk, .document-unique_page_digirisk-permis-feu, .document-unique_page_digirisk-prevention, .document-unique_page_digirisk-causerie {
+
+	// Fait disparaitre le menu et l'admin bar
+	#adminmenuwrap, #wpadminbar, #adminmenumain, #screen-meta-links, #wpfooter {
+		display: none!important;
+	}
+
+	// Enlève la marge sur le contenu principale car le menu custom ne fait pas la même taille
+	#wpcontent {
+		margin-left: 0!important;
+		padding-left: 0;
+	}
+
+	// Menu navigation
+	.nav-wrap {
+		background: #1c1d1b;
+		width: 200px;
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0px;
+
+		#logo {
+			margin: auto;
+			text-align: center;
+		}
+
+		.nav-menu {
+			.item {
+				transition: background .1s ease,box-shadow .1s ease,color .1s ease,-webkit-box-shadow .1s ease;
+
+				&:before {
+					position: absolute;
+					content: '';
+					width: 100%;
+					height: 1px;
+					background: rgba(255,255,255,.08);
+				}
+
+				&:hover {
+					background: rgba(255,255,255,.15);
+				}
+
+				a, span {
+					padding: 16px;
+					padding-left: 20px;
+					font-size: 1.1em;
+					display: block;
+					color: #eee;
+					text-decoration: none;
+					font-weight: bolder;
+					&.disabled {
+						background: rgba(0,0,0,.50);
+						opacity: 0.4;
+					}
+				}
+
+				&.item-bottom {
+					position: absolute;
+					width: 200px;
+					bottom: 0;
+				}
+
+				&.item-active {
+					a {
+						background: rgba(255,255,255,.15);
+					}
+				}
+			}
+		}
+	}
+
+	// Contenu principale
+	.content-wrap {
+		background: #fafafa;
+		margin-left: 200px;
+
+		.digirisk-wrap {
+			padding-left: 20px;
+
+			&.wrap {
+				margin-right: 0;
+			}
+		}
+
+		// Header
+		#top-header {
+			background-color: white;
+			border-bottom: solid black 2px;
+			min-height: 60px;
+
+			.nav-header {
+				margin: 0;
+			}
+
+			.nav-right {
+				line-height: 50px;
+				font-size: 1.2em;
+				li {
+					img {
+						vertical-align: middle;
+					}
+				}
+			}
+
+			.page-title {
+				margin: 0;
+				font-size: 2em;
+				padding-top: 20px;
+				padding-left: 20px;
+			}
+
+			/** Bouton Ajouter dans le header */
+			.wpeo-button {
+				margin-top: 12px;
+				margin-left: 20px;
+			}
+
+			.alignright {
+				padding-right: 20px;
+				margin: 0;
+			}
+		}
+
+		// Contenu
+		.wrap-frais-pro {
+			padding-right: 0;
+			padding-left: 20px;
+		}
+	}
+}
+
+// Enlève le padding par défaut de WordPress pour l'admin bar. Cette ligne est éxécuté que sur les pages commençant par digirisk dans le $_GET['page']
+// ex: https://<address>/wp-admin/admin.php?page=digirisk
+html.wp-toolbar{
+    padding-top: 0;
+}

@@ -38,7 +38,7 @@ class Permis_Feu_Page_Action {
 	//\\SYNO1512\public\evarisk\illustrations en attente\stand alone\source
 
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Permis', 'digirisk' ), __( 'Permis de feu', 'digirisk' ), 'manage_digirisk', 'digirisk-permis-feu', array( Permis_Feu_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Permis de feu', 'digirisk' ), __( 'Permis de feu', 'digirisk' ), 'manage_permis_feu', 'digirisk-permis-feu', array( Permis_Feu_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 	public function callback_start_permis_feu() {

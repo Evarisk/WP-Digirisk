@@ -134,9 +134,8 @@ global $eo_search; ?>
 				<div class="form-element">
 					<span class="form-label">
 						<?php esc_html_e( 'Signature of the caregiver', 'digirisk' ); ?>
-						<span class="canvas-eraser fa-layers fa-fw">
-							<i class="fas fa-circle" data-fa-transform="grow-8"></i>
-							<i class="fa-inverse fas fa-eraser" data-fa-transform="shrink-2"></i>
+						<span class="canvas-eraser">
+							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
 						</span>
 					</span>
 					<label class="form-field-container">
@@ -148,9 +147,8 @@ global $eo_search; ?>
 				<div class="form-element">
 					<span class="form-label">
 						<?php esc_html_e( 'Signature of the victim', 'digirisk' ); ?>
-						<span class="canvas-eraser fa-layers fa-fw">
-							<i class="fas fa-circle" data-fa-transform="grow-8"></i>
-							<i class="fa-inverse fas fa-eraser" data-fa-transform="shrink-2"></i>
+						<span class="canvas-eraser">
+							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
 						</span>
 					</span>
 					<label class="form-field-container">

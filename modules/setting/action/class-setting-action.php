@@ -37,7 +37,9 @@ class Setting_Action {
 
 		add_action( 'wp_ajax_update_accronym', array( $this, 'callback_update_accronym' ) );
 
-		// add_action( 'wp_ajax_save_prefix_settings_digirisk', array( $this, 'callback_save_prefix_settings_digirisk' ) );
+		add_action( 'display_user_capacity', array( $this, 'callback_display_user_capacity' ), 10, 1 );
+
+		add_action( 'wp_ajax_save_htpasswd', array( $this, 'callback_save_htpasswd' ) );
 	}
 
 	/**
@@ -49,7 +51,7 @@ class Setting_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_options_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-setting', array( $this, 'add_option_page' ) );
+			add_options_page( 'Réglages', 'DigiRisk', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ) );
 		}
 	}
 
@@ -61,6 +63,15 @@ class Setting_Action {
 	 */
 	public function add_option_page() {
 		$default_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'digi-general'; // WPCS: var input ok.
+
+		global $eo_search;
+
+		$eo_search->register_search( 'user_list_capacity', array(
+			'icon'        => 'fa-search',
+			'type'        => 'user',
+			'name'        => 'user_list',
+			'next_action' => 'display_user_capacity',
+		) );
 
 		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
@@ -113,6 +124,8 @@ class Setting_Action {
 				'page'        => $element[ 'page' ]
 			);
 		}
+
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
@@ -170,11 +183,18 @@ class Setting_Action {
 			foreach ( $_POST['users'] as $user_id => $data ) {
 				$user = new \WP_User( $user_id );
 
-				if ( 'true' == $data['capability'] ) {
-					$user->add_cap( 'manage_digirisk' );
-				} else {
-					$user->remove_cap( 'manage_digirisk' );
+				if ( ! empty( $data['capability'] ) ) {
+					foreach ( $data['capability'] as $key => $capability ) {
+						$capability = $capability == 'true' ? true : false;
+						if ( $capability ) {
+							$user->add_cap( $key );
+						} else {
+							$user->remove_cap( $key );
+						}
+					}
 				}
+
+
 			}
 		}
 
@@ -258,6 +278,83 @@ class Setting_Action {
 			'module'           => 'setting',
 			'callback_success' => 'generalSettingsSaved',
 			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+		) );
+	}
+
+	/**
+	 * Méthode appelé par le champs de recherche des utilisateurs dans les
+	 * réglages.
+	 *
+	 * @since 7.5.0
+	 *
+	 * @param array $data
+	 */
+	public function callback_display_user_capacity( $data ) {
+		$list_user_id = array();
+
+		if ( ! empty( $data['users'] ) ) {
+			foreach ( $data['users'] as $key => &$user ) {
+				$list_user_id[] = $user->data['id'];
+			}
+		}
+
+		ob_start();
+		Setting_Class::g()->display_user_list_capacity( $list_user_id );
+		wp_send_json_success( array(
+			'view'   => ob_get_clean(),
+			'output' => '.settings-users-content',
+		) );
+	}
+
+	public function callback_save_htpasswd() {
+		$login     = ! empty( $_POST['login'] ) ? sanitize_text_field( $_POST['login'] ) : '';
+		$password  = ! empty( $_POST['password'] ) ? sanitize_text_field( $_POST['password'] ) : '';
+		$rpassword = ! empty( $_POST['repeat_password'] ) ? sanitize_text_field( $_POST['repeat_password'] ) : '';
+
+		$error_message = '';
+
+		if ( empty( $login ) || empty( $password ) || empty( $rpassword ) ) {
+			$error_message = __( 'Tous les champs doivent être renseignés.', 'digirisk' );
+		}
+
+		if ( $password != $rpassword ) {
+			$error_message = __( 'Les mots de passe ne sont pas identique.', 'digirisk' );
+		}
+
+		if ( ! empty( $error_message ) ) {
+			$error_message .= __( ' Aucune modification n\'a était apporté', 'digirisk' );
+		} else {
+			$content_htaccess_to_add = 'AuthName "Veuillez-vous identifiez"
+			AuthType Basic
+			AuthUserFile "' . get_home_path() . '.htpasswd"
+			Require valid-user';
+			$htaccess_info = Setting_Class::g()->get_htaccess_info();
+
+			// Check if htaccess have Auth Basic line
+			$htaccess_file         = fopen( $htaccess_info['htaccess_path'], "r" );
+			$htaccess_file_content = fread( $htaccess_file, filesize( $htaccess_info['htaccess_path'] ) );
+			fclose( $htaccess_file );
+
+			if ( ! strpos( $htaccess_file_content, 'AuthType Basic' ) ) {
+				// Add line.
+				file_put_contents( $htaccess_info['htaccess_path'], PHP_EOL . $content_htaccess_to_add, FILE_APPEND );
+			}
+
+			$password = crypt_apr1_md5( $password );
+
+			$new_content = $login . ':' . $password;
+			$fh = fopen( get_home_path() . '.htpasswd', 'w' );
+			fwrite( $fh, $new_content );
+			fclose($fh);
+		}
+
+		ob_start();
+		Setting_Class::g()->display_htpasswd( $error_message );
+		wp_send_json_success( array(
+			'view'             => ob_get_clean(),
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'savedHtpasswd',
 		) );
 	}
 }

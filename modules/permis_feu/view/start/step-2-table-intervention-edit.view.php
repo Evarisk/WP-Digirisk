@@ -35,7 +35,7 @@ global $eo_search;
 			-
 		<?php endif; ?>
 	</td>
-	<td class="w150 padding unite-de-travail-element" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
+	<td class="w150 padding unite-de-travail-element" data-title="<?php esc_html_e( 'Société', 'digirisk' ); ?>">
 		<div class="wpeo-form">
 			<div class="form-element">
 				<?php $eo_search->display( 'accident_post' ); ?>

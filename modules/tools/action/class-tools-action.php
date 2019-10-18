@@ -42,7 +42,7 @@ class Tools_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_management_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-tools', array( $this, 'add_management_page' ) );
+			add_management_page( 'Outils', 'DigiRisk', 'manage_tools', 'digirisk-tools', array( $this, 'add_management_page' ) );
 		}
 	}
 
@@ -52,6 +52,8 @@ class Tools_Action {
 	 * @since 6.0.0
 	 */
 	public function add_management_page() {
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
+
 		\eoxia\View_Util::exec( 'digirisk', 'tools', 'main' );
 	}
 

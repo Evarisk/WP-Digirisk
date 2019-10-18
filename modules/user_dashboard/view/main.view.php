@@ -16,19 +16,20 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="digirisk-wrap user-dashboard wpeo-wrap">
-	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk', 'digirisk' ); ?></h1>
+<div class="content-wrap">
+	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<div class="digirisk-wrap user-dashboard wpeo-wrap wrap">
+		<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 
-	<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
+		<!-- Liste les utilisateurs -->
+		<table class="table users">
+			<?php User_Dashboard_Class::g()->display_list_user(); ?>
+		</table>
 
-	<!-- Liste les utilisateurs -->
-	<table class="table users">
-		<?php User_Dashboard_Class::g()->display_list_user(); ?>
-	</table>
-
-	<?php if ( ! empty( $from_install ) ) : ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">
-			<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
-		</a>
-	<?php endif; ?>
+		<?php if ( ! empty( $from_install ) ) : ?>
+			<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">
+				<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
+			</a>
+		<?php endif; ?>
+	</div>
 </div>

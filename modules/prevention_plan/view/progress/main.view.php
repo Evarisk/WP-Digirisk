@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div>
-	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Listes des plans de préventions en cours', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
+	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Listes des plans de préventions brouillons', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
 
 	<table class="table closed-prevention">
 		<thead>
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
 				<td class="w150 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
 				<td class="w150 padding"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
+				<td class="w150 padding"><?php esc_html_e( 'Responsable de la société extérieure', 'digirisk' ); ?></td>
 				<td class="w150 padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
 				<td class="w150 padding"><?php esc_html_e( 'Intervention(s)	', 'digirisk' ); ?></td>
 				<td class="w100 padding"><?php esc_html_e( 'Progression', 'digirisk' ); ?></td>

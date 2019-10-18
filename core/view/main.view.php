@@ -20,19 +20,47 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
-	<?php
-	if ( ! empty( $waiting_updates ) && strpos( $_SERVER['REQUEST_URI'], 'admin.php' ) && ! strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=' . \eoxia\Config_Util::$init['digirisk']->update_page_url ) ) :
-		\eoxia\Update_Manager_Class::g()->display_say_to_update( 'digirisk', __( 'Need to update DigiRisk data', 'digirisk' ) );
-	else :
-		echo do_shortcode( '[digi_navigation id="' . $id . '"]' );
-		echo do_shortcode( '[digi_application id="' . $id . '"]' );
-	endif;
+<div class="content-wrap">
+	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
 
-	$version = get_user_meta( get_current_user_id(), '_wpdigi_user_change_log', true );
+	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 
-	if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
-		require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
-	endif;
-	?>
+		<h2>GÉREZ VOTRE DOCUMENT UNIQUE, AFFICHAGE LÉGAL, ET BIEN PLUS...</h2>
+
+		<div class="wpeo-gridlayout grid-3 top-content">
+			<div>
+				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/ressources-humaines.png" /></div>
+				<h3>GESTION DES RISQUES</h3>
+				<p>Les risques son traités comme suit :<br />
+					Selon la société et/ou groupement<br />
+					Selon unité de travail<br />
+					Selon photo<br />
+				</p>
+			</div>
+
+			<div>
+				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/document-unique.png" /></div>
+				<h3>DOCUMENT UNIQUE</h3>
+				<p>Impression en un clic de votre Document Unique<br />
+					Personnalisation des fiches de poste<br />
+					Impression des fiches de poste<br />
+					Export natif au format Open Office<br />
+					Personnalisable facilement avec Open Office
+				</p>
+			</div>
+
+			<div>
+				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/gestion-des-risques.png" /></div>
+				<h3>GESTION AFFICHAGE LÉGAL</h3>
+				<p>Impression de l'affichage légal<br />Impression des fiches de postes
+				</p>
+			</div>
+		</div>
+
+		<?php
+		if ( empty( $version[ \eoxia\Config_Util::$init['digirisk']->version ] ) ) :
+			require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
+		endif;
+		?>
+	</div>
 </div>

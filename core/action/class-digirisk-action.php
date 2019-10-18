@@ -46,8 +46,12 @@ class Digirisk_Action {
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js_global' ), 10 );
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_init', array( $this, 'redirect_to' ) );
 
 		add_action( 'wp_ajax_close_change_log', array( $this, 'callback_close_change_log' ) );
+
+		add_action( 'switch_to_user', array( $this, 'switch_to' ), 10, 4 );
+		add_action( 'switch_back_user', array( $this, 'switch_back' ), 10, 4 );
 	}
 
 	/**
@@ -129,7 +133,9 @@ class Digirisk_Action {
 
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
 
-		if ( ! empty( \eoxia\Config_Util::$init['digirisk']->default_capabilities ) ) {
+		$cap_init = get_option( 'digi_cap_init' );
+
+		if ( ! empty( \eoxia\Config_Util::$init['digirisk']->default_capabilities ) && ! $cap_init ) {
 			foreach ( \eoxia\Config_Util::$init['digirisk']->default_capabilities as $role => $capabilities ) {
 				$wp_role = get_role( $role );
 
@@ -143,6 +149,7 @@ class Digirisk_Action {
 					}
 				}
 			}
+			update_option( 'digi_cap_init', true );
 		}
 	}
 
@@ -155,7 +162,28 @@ class Digirisk_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'manage_digirisk', 'digirisk-simple-risk-evaluation', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+			add_menu_page( __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk-welcome', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		}
+	}
+
+	/**
+	 * Permet de redirigé l'utilisateur vers la page de DigiRisk.
+	 *
+	 * @since 7.5.0
+	 */
+	public function redirect_to() {
+		$_pos = strlen( $_SERVER[ 'REQUEST_URI' ] ) - strlen( '/wp-admin/' );
+
+		if ( strpos( $_SERVER['REQUEST_URI'], '/wp-admin/' ) !== false && strpos( $_SERVER['REQUEST_URI'], '/wp-admin/' ) == $_pos ) {
+			$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
+
+			if ( ! empty( $digirisk_core['installed'] ) ) {
+				wp_redirect( admin_url( 'admin.php?page=digirisk-welcome' ) );
+			} else {
+				wp_redirect( admin_url( 'admin.php?page=digi-setup' ) );
+			}
+
+			die();
 		}
 	}
 
@@ -190,8 +218,18 @@ class Digirisk_Action {
 		$screen = get_current_screen();
 		wp_enqueue_script( 'digirisk-chart', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js' );
 		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
-			wp_enqueue_script( 'digirisk-user-page', PLUGIN_DIGIRISK_URL . 'modules/user/asset/js/user.page.js', array(), \eoxia\Config_Util::$init['task-manager']->version );
+			wp_enqueue_script( 'digirisk-user-page', PLUGIN_DIGIRISK_URL . 'modules/user/asset/js/user.page.js', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		}
+	}
+
+	public function switch_to( $user_id, $old_user_id, $new_token, $old_token ) {
+		wp_redirect( admin_url( 'admin.php?page=digirisk-welcome' ) );
+		exit;
+	}
+
+	public function switch_back( $user_id, $old_user_id, $new_token, $old_token ) {
+		wp_redirect( admin_url( 'admin.php?page=digirisk-welcome' ) );
+		exit;
 	}
 }
 

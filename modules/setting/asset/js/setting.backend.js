@@ -16,7 +16,7 @@ window.eoxiaJS.digirisk.setting.event = function() {
 	jQuery( document ).on( 'click', '.section-capability input[type="checkbox"]', window.eoxiaJS.digirisk.setting.activeSave );
 
 	jQuery( document ).on( 'click', '.wpeo-notification .notification-close', window.eoxiaJS.digirisk.setting.closeWpeo );
-	jQuery( document ).on( 'keyup', '#digi-accronym input[type="text"]', window.eoxiaJS.digirisk.setting.buttonSave )
+	jQuery( document ).on( 'keyup', '#digi-accronym input[type="text"], #digi-htpasswd input', window.eoxiaJS.digirisk.setting.buttonSave )
 };
 
 window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
@@ -46,13 +46,14 @@ window.eoxiaJS.digirisk.setting.pagination = function( event ) {
 
 	var data = {
 		action: 'paginate_setting_page_user',
-		next_page: nextPage
+		next_page: nextPage,
+		s: jQuery( '.autocomplete-search-input' ).val()
 	};
 
 	event.preventDefault();
 
 	jQuery.post( window.ajaxurl, data, function( view ) {
-		jQuery( '.list-users' ).replaceWith( view );
+		jQuery( '.settings-users-content' ).replaceWith( view );
 		window.eoxiaJS.digirisk.search.renderChanged();
 	} );
 };
@@ -124,6 +125,20 @@ window.eoxiaJS.digirisk.setting.closeWpeo = function( event ){
 }
 
 window.eoxiaJS.digirisk.setting.buttonSave = function( event ){
-	jQuery( '#digi-accronym .save-prefix' ).removeClass( 'button-disable' );
+	jQuery( this ).closest( '.tab-content ').find( '.button-disable' ).removeClass( 'button-disable' );
 	jQuery( '#digi-accronym .prefix-response-success' ).hide( '200' );
 }
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "save_htpasswd".
+ * Affiches le message de "success".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 7.5.0
+ */
+window.eoxiaJS.digirisk.setting.savedHtpasswd = function( triggeredElement, response ) {
+	jQuery( '.section-htpasswd' ).replaceWith( response.data.view );
+};

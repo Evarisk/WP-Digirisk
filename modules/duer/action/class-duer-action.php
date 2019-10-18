@@ -27,11 +27,17 @@ class DUER_Action {
 	 * @since 6.2.1
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
 		add_action( 'wp_ajax_construct_duer', array( $this, 'callback_ajax_construct_duer' ) );
 		add_action( 'wp_ajax_generate_duer', array( $this, 'callback_ajax_generate_duer' ) );
 		add_action( 'wp_ajax_generate_establishment', array( $this, 'callback_ajax_generate_establishment' ) );
 		add_action( 'wp_ajax_generate_zip', array( $this, 'callback_ajax_generate_zip' ) );
+	}
+
+	public function callback_admin_menu() {
+		add_submenu_page( 'digirisk-du', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 

@@ -144,7 +144,7 @@ window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieu
 	}
 }
 
-window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_element, element, error = false ){
+window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_element, element, error ){
 	if( error ){
 		return true;
 	}
@@ -301,7 +301,7 @@ window.eoxiaJS.digirisk.permisFeu.selectRisqueInDropdown = function( event ){
 }
 
 
-window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd = function( event, element = "" ){
+window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd = function( event, element ){
 	if( element == "" ){
 		element = jQuery( this );
 	}
@@ -324,7 +324,7 @@ window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd = function( event,
 	return error;
 }
 
-window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_element, element, error = false ){
+window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid = function( parent_element, element, error ){
 	if( error ){
 		return true;
 	}

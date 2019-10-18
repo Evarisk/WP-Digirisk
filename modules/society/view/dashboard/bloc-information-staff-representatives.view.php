@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<input type="hidden" name="indicator-nbr-valid" value="<?php echo esc_attr( $element->data[ 'indicator' ][ 'staff-representatives' ][ 'nbr_valid' ] ); ?>">
 			<div class="" style="float:left">
 				<div class="notice-title-custom">
-					<?php esc_html_e( 'Délégués du personnel - Membres du comité d\'entreprise', 'digirisk' ); ?>
+					<?php esc_html_e( 'Délégués du personnel - Comité social et économique (CSE)', 'digirisk' ); ?>
 				</div>
 				<div class="notice-subtitle">
 					<?php esc_html_e( 'Données complémentaires à la société, possiblement utilisé dans la réalisation de Causerie/ Plan de prévention', 'digirisk' ); ?>

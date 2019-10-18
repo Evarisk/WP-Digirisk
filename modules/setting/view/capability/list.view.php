@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="list-users">
+<div class="settings-users-content">
 	<table class="table users">
 		<thead>
 			<tr>
@@ -25,7 +25,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<td class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Email', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Rôle', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'A les droit sur DigiRisk', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Tous', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'DU', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Accidents', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Causeries', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Prevention plan', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Permis feu', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Listing risque', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Organisation UT', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Utilisateurs', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Outils', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Réglages', 'digirisk' ); ?></td>
 			</tr>
 		</thead>
 		<?php

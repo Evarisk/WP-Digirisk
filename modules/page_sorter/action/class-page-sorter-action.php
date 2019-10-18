@@ -38,7 +38,7 @@ class Page_Sorter_Action {
 	 * @since 6.0.0
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Organiseur', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_digirisk', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ) );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Orgnisation des UT', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_sorter', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ) );
 	}
 
 	/**

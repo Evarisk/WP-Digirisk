@@ -23,6 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Digirisk extends \eoxia\Singleton_Util {
 
+	public $menu = array();
+
 	/**
 	 * Le constructeur
 	 *
@@ -31,6 +33,83 @@ class Digirisk extends \eoxia\Singleton_Util {
 	protected function construct() {
 		add_image_size( 'digirisk-element-thumbnail', 200, 150, true );
 		add_image_size( 'digirisk-element-miniature', 50, 50, true );
+
+		$menu_def = array(
+			'digirisk-welcome' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-welcome' ),
+				'title' => __( 'Bienvenue', 'digirisk' ),
+				'class' => '',
+				'right' => 'read',
+			),
+			'digirisk-du' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-du' ),
+				'title' => __( 'Document Unique', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_du',
+			),
+			'digirisk-accident' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-accident' ),
+				'title' => __( 'Accidents', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_accident',
+			),
+			'digirisk-causerie' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-causerie' ),
+				'title' => __( 'Causeries', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_causerie',
+			),
+			'digirisk-prevention' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-prevention' ),
+				'title' => __( 'Plan de prévention', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_prevention',
+			),
+			'digirisk-permis-feu' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-permis-feu' ),
+				'title' => __( 'Permis de feu', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_permis_feu',
+			),
+			'digirisk-handle-risk' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-handle-risk' ),
+				'title' => __( 'Listing de risque', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_listing_risque',
+			),
+			'digirisk-handle-sorter' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-handle-sorter' ),
+				'title' => __( 'Organisation des UT', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_sorter',
+			),
+			'digirisk-users' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-users' ),
+				'title' => __( 'Utilisateurs', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_users',
+			),
+			'digirisk-tools' => array(
+				'link'  => admin_url( 'tools.php?page=digirisk-tools' ),
+				'title' => __( 'Outils', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_tools',
+			),
+			'digirisk-setting' => array(
+				'link'  => admin_url( 'options-general.php?page=digirisk-setting' ),
+				'title' => __( 'Réglages', 'digirisk' ),
+				'class' => '',
+				'right' => 'manage_setting',
+			),
+			'back-to-wp' => array(
+				'link'  => admin_url( 'index.php' ),
+				'title' => __( 'Go to WP Admin', 'digirisk' ),
+				'class' => 'item-bottom',
+				'right' => '',
+			),
+		);
+
+		$this->menu = apply_filters( 'digi_nav_items', $menu_def );
 	}
 
 	/**
@@ -42,10 +121,11 @@ class Digirisk extends \eoxia\Singleton_Util {
 	 *
 	 * @param integer $id L'ID de la société à afficher.
 	 */
-	public function display( $id = 0 ) {
+	public function display() {
 		$request_uri     = ! empty( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
 
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 		require PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php';
 	}
 
@@ -110,6 +190,7 @@ class Digirisk extends \eoxia\Singleton_Util {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
 	}
+
 }
 
 new Digirisk();

@@ -80,6 +80,7 @@ class Accident_Class extends Document_Class {
 	public function display_page() {
 		$this->register_search();
 
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'main' );
 	}
 

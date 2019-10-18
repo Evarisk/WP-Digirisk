@@ -19,13 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px; float: left;">
 		<?php esc_html_e( sprintf( 'Liste des plans de préventions réalisés (%1$d)', ! empty( $preventions ) ? count( $preventions ) : '0' ), 'digirisk' ); ?>
 	</h2>
-	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-setting&tab=digi-accronym' ) ); ?>"
-		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Référence des plans de préventions', 'digirisk' ); ?>"
-		style="float: right;">
-		<div class="wpeo-button button-main">
-			<span><i class="icon fa fa-cog"></i></span>
-		</div>
-	</a>
 
 	<table class="table closed-prevention">
 		<thead>
@@ -36,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<td class="w100 padding"><?php esc_html_e( 'Fin intervention', 'digirisk' ); ?></td>
 				<!-- <td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td> -->
 				<td class="w50 padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
+				<td class="padding"><?php esc_html_e( 'Responsable de la société extérieure', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
 				<td class="padding"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></td>
 				<td class="w50"></td>

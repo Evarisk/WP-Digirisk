@@ -22,7 +22,7 @@ global $eo_search;
 	<td class="w100 padding" data-title="<?php esc_html_e( 'IdRPP', 'digirisk' ); ?>">
 		#<?php echo esc_attr( $intervention->data['key_unique'] ); ?>
 	</td>
-	<td class="w150 padding" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
+	<td class="w150 padding" data-title="<?php esc_html_e( 'Société', 'digirisk' ); ?>">
 		<div class="wpeo-form">
 			<div class="form-element form-element-disable">
 				<label class="form-field-container">

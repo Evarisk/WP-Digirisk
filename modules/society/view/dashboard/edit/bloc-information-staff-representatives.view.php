@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<span style="text-align:  center; margin-top : 20px">
-			<h2><?php esc_html_e( 'Membres du comité d\'entreprise', 'digirisk' ); ?></h2>
+			<h2><?php esc_html_e( 'Comité social et économique (CSE)', 'digirisk' ); ?></h2>
 		</span>
 
 		<div class="form-element">

@@ -39,7 +39,7 @@ class Accident_Action {
 	 * @since 6.3.0
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Les accidents bénins', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_accident', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
 	}
 
 	/**
