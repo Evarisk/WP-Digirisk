@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <div class="nav-wrap">
 	<div id="logo">
-		<h1><a href="<?php echo admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ); ?>"><img src="<?php echo PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png'; ?>" alt="DigiRisk" /></a></h1>
+		<h1><a href="<?php echo admin_url( 'admin.php?page=digirisk-welcome' ); ?>"><img src="<?php echo PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png'; ?>" alt="DigiRisk" /></a></h1>
 	</div>
 
 	<div class="nav-menu">
