@@ -2529,7 +2529,7 @@
 }
 
 .wpeo-wrap .step .step-list .step.active:after {
-  background: #47e58e;
+  background: #47e58e !important;
 }
 
 .wpeo-wrap .step .step-list .step.active .title {
