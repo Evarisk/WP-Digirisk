@@ -41,9 +41,8 @@ class Document_Class extends \eoxia\ODT_Class {
 	 * @since 6.0.0
 	 *
 	 * @var string
-	 * @todo:  Détruis la route de WordPress /wp-json/wp/v2/media (A changer très rapidement) (Toujours présent 25/06/2018)
 	 */
-	protected $type = 'attachment';
+	protected $type = 'document-odt';
 
 	/**
 	 * La taxonomie
