@@ -54,5 +54,18 @@ defined( 'ABSPATH' ) || exit; ?>
 			endforeach;
 		endif;
 		?>
+		<div class="nav-menu item-bottom">
+			<?php
+			if ( ! empty( Digirisk::g()->menu_bottom ) ) :
+				foreach ( Digirisk::g()->menu_bottom as $key => $item ) :
+					?>
+					<div class="item">
+						<a href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
+					</div>
+					<?php
+				endforeach;
+			endif;
+			?>
+		</div>
 	</div>
 </div>
