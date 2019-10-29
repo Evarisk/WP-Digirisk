@@ -61,7 +61,7 @@ class Digirisk_Action {
 	 * @since 6.0.0
 	 */
 	public function callback_before_admin_enqueue_scripts_js() {
-		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'jquery-form' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'jquery-ui-accordion' );
@@ -241,7 +241,7 @@ class Digirisk_Action {
 	}
 
 	public function switch_back( $user_id, $old_user_id, $new_token, $old_token ) {
-		wp_redirect( admin_url( 'admin.php?page=digirisk-welcome' ) );
+		wp_redirect( admin_url('admin.php?page=digirisk-welcome' ) );
 		exit;
 	}
 }
