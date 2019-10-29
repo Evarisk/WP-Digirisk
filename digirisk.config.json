@@ -20,7 +20,8 @@
 		"digirisk-update",
 		"digirisk-setting",
     "profile",
-    "user-edit"
+    "user-edit",
+    "digirisk-dashboard-duer"
 	],
 	"insert_scripts_pages_css": [
     "digirisk-welcome",
@@ -36,7 +37,8 @@
 		"digirisk-transfert",
 		"digi-setup",
 		"digirisk-handle-sorter",
-		"digirisk-setting"
+		"digirisk-setting",
+    "digirisk-dashboard-duer"
 	],
 	"externals": [
 	],
