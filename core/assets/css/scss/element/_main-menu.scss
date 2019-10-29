@@ -17,7 +17,10 @@
 .document-unique_page_digirisk-prevention,
 .admin_page_digirisk-handle-risk,
 .admin_page_digirisk-handle-sorter,
-.document-unique_page_digirisk-causerie {
+.document-unique_page_digirisk-causerie,
+.toplevel_page_digirisk-dashboard-sites,
+.admin_page_digirisk-dashboard-add,
+.toplevel_page_digirisk-dashboard-duer {
 
 	// Fait disparaitre le menu et l'admin bar
 	#adminmenuwrap, #wpadminbar, #adminmenumain, #screen-meta-links, #wpfooter {
@@ -74,19 +77,21 @@
 					}
 				}
 
-				&.item-bottom {
-					position: absolute;
-					width: 200px;
-					bottom: 0;
-				}
-
 				&.item-active {
 					a {
 						background: rgba(255,255,255,.15);
 					}
 				}
 			}
+
+			&.item-bottom {
+				position: absolute;
+				width: 200px;
+				bottom: 0;
+			}
 		}
+
+
 	}
 
 	// Contenu principale
