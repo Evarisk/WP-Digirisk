@@ -26,5 +26,6 @@
   "status":{
     "PERMIS_FEU_IN_PROGRESS" : 0,
     "PERMIS_FEU_IS_ENDED" : 1
-  }
+  },
+  "state": true
 }
