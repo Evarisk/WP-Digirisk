@@ -28,6 +28,8 @@ class Child_Action {
 	 */
 	public function __construct() {
 		add_action( 'rest_api_init', array( $this, 'callback_rest_api_init' ) );
+
+		add_action( 'wp_ajax_delete_child_parent', array( $this, 'delete_parent_site' ) );
 	}
 
 	public function callback_rest_api_init() {
@@ -71,15 +73,23 @@ class Child_Action {
 		$params = $request->get_params();
 
 		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
-			$response = new \WP_REST_Response( '', 404 );
-			return $response;
+			return new \WP_REST_Response( array(
+				'statut'        => false,
+				'error_code'    => '0x01',
+				'error_message' => __( 'Invalid hash', 'digirisk' ),
+			) );
 		}
 
-		return new \WP_REST_Response( true );
+		return new \WP_REST_Response( array(
+			'statut'        => true,
+			'error_code'    => null,
+			'error_message' => null,
+		) );
 	}
 
 	public function callback_register_site( \WP_REST_Request $request ) {
 		$check_fields = array(
+			'id'         => 'int',
 			'url_parent' => 'esc_url_raw',
 			'url'        => 'esc_url_raw',
 			'unique_key' => 'sanitize_text_field',
@@ -90,21 +100,26 @@ class Child_Action {
 
 		if ( ! empty( $check_fields ) ) {
 			foreach ( $check_fields as $key => $value ) {
-				$data[ $key ] = call_user_func( $value, $params[ $key ] );
+				if ( $value == 'int' ) {
+					$data[ $key ] = (int) $params[ $key ];
+				} else {
+					$data[ $key ] = call_user_func( $value, $params[ $key ] );
+				}
 			}
 		}
 
 		$unique_security_id = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
 		$site_key           = \eoxia\Config_Util::$init['digirisk']->child->site_parent_key;
 		$sites              = get_option( $site_key, array() );
+		$sites              = empty( $sites ) ? array() : $sites;
 
 		$last_id = 0;
 
 		$already_exist = false;
 
-		if ( ! empty( $sites ) ) {
+		if ( ! empty( $sites ) && empty( $data['id'] ) ) {
 			foreach ( $sites as $id => $site ) {
-				if ( $data['url_parent'] == $site['url_parent'] ) {
+				if ( $data['url_parent'] === $site['url_parent'] ) {
 					$already_exist = true;
 				}
 
@@ -112,32 +127,37 @@ class Child_Action {
 			}
 		}
 
-		$response = new \WP_REST_Response( array(
-			'title' => get_bloginfo( 'name' ),
-		) );
+		$response = new \WP_REST_Response(
+			array(
+				'title' => get_bloginfo( 'name' ),
+			)
+		);
 
 		if ( $unique_security_id['security_id'] !== $data['unique_key'] ) {
 			$response->set_status( 200 );
 			$response->data['error_code'] = 1;
 		} else {
+			$url_parent = $data['url_parent'];
+			unset( $data['url_parent'] );
+
+			$string_to_hash = implode( '', $data );
+			$hash           = hash( 'sha256', $string_to_hash );
+
 			if ( ! $already_exist ) {
-				$url_parent = $data['url_parent'];
-
-				unset( $data['url_parent'] );
-
-				$string_to_hash = implode( '', $data );
-				$string_to_hash = hash( 'sha256', $string_to_hash );
-
 				$sites[ $last_id + 1 ] = array(
 					'url'        => $data['url'],
 					'url_parent' => $url_parent,
-					'hash'       => $string_to_hash,
+					'hash'       => $hash,
 				);
-
-				update_option( $site_key, $sites );
 			} else {
-				$response->data['error_code'] = 2;
+				$sites[ $data['id'] ] = array(
+					'url'        => $data['url'],
+					'url_parent' => $url_parent,
+					'hash'       => $hash,
+				);
 			}
+
+			update_option( $site_key, $sites );
 
 			$response->set_status( 200 );
 		}
@@ -255,13 +275,6 @@ class Child_Action {
 		$parent    = Society_Class::g()->get( array( 'posts_per_page' => 1 ), true );
 		$parent_id = $parent->data['id'];
 		$links     = array();
-
-		// $generation_status = DUER_Class::g()->generate_full_duer( $parent_id, '', '', '', '', '', '', '' );
-		// $links[] = array(
-		// 	'link'  => $generation_status['document']->data['link'],
-		// 	'title' => $generation_status['document']->data['title'],
-		// );
-
 		$societies = Society_Class::g()->get_societies_in( $parent_id, 'inherit' );
 
 		if ( ! empty( $societies ) ) {
@@ -298,9 +311,32 @@ class Child_Action {
 			}
 		}
 
-		$response = new \WP_REST_Response( $links );
+		$response = new \WP_REST_Response( array( 'statut' => true, 'links' => $links ) );
 
 		return $response;
+	}
+
+	public function delete_parent_site() {
+		check_ajax_referer( 'delete_child_parent' );
+
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		if ( empty( $id ) ) {
+			wp_send_json_error();
+		}
+
+		$parent_sites = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
+
+		if ( isset( $parent_sites[ $id ] ) ) {
+			unset( $parent_sites[ $id ] );
+			update_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, $parent_sites );
+		}
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'deletedParentSite',
+		) );
 	}
 }
 
