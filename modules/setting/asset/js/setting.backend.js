@@ -142,3 +142,17 @@ window.eoxiaJS.digirisk.setting.buttonSave = function( event ){
 window.eoxiaJS.digirisk.setting.savedHtpasswd = function( triggeredElement, response ) {
 	jQuery( '.section-htpasswd' ).replaceWith( response.data.view );
 };
+
+/**
+ * Le callback en cas de réussite à la requête Ajax "delete_parent_site".
+ * Affiches le message de "success".
+ *
+ * @param  {HTMLDivElement} triggeredElement  L'élement HTML déclenchant la requête Ajax.
+ * @param  {Object}         response          Les données renvoyées par la requête Ajax.
+ * @return {void}
+ *
+ * @since 7.5.0
+ */
+window.eoxiaJS.digirisk.setting.deletedParentSite = function( triggeredElement, response ) {
+	triggeredElement.closest( '.table-row' ).fadeOut();
+};
