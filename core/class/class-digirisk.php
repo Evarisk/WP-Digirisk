@@ -25,6 +25,8 @@ class Digirisk extends \eoxia\Singleton_Util {
 
 	public $menu = array();
 
+	public $menu_bottom = array();
+
 	/**
 	 * Le constructeur
 	 *
@@ -101,6 +103,17 @@ class Digirisk extends \eoxia\Singleton_Util {
 				'class' => '',
 				'right' => 'manage_setting',
 			),
+		);
+
+		$this->menu = apply_filters( 'digi_nav_items', $menu_def );
+
+		$menu_bottom_def = array(
+			'digirisk-dashboard' => array(
+				'link'  => admin_url( 'admin.php?page=digirisk-dashboard-sites' ),
+				'title' => __( 'Go to Dashboard', 'digirisk' ),
+				'class' => 'item-bottom',
+				'right' => '',
+			),
 			'back-to-wp' => array(
 				'link'  => admin_url( 'index.php' ),
 				'title' => __( 'Go to WP Admin', 'digirisk' ),
@@ -109,7 +122,7 @@ class Digirisk extends \eoxia\Singleton_Util {
 			),
 		);
 
-		$this->menu = apply_filters( 'digi_nav_items', $menu_def );
+		$this->menu_bottom = apply_filters( 'digi_nav_items_bottom', $menu_bottom_def );
 	}
 
 	/**
