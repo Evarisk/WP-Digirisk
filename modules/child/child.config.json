@@ -9,5 +9,6 @@
     "class": {}
 	},
   "security_id_key": "digi_security_id",
-  "site_parent_key": "digi_site_parent"
+  "site_parent_key": "digi_site_parent",
+  "state": true
 }
