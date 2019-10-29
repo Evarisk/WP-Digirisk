@@ -35,6 +35,8 @@ class Setting_Action {
 
 		add_action( 'wp_ajax_save_general_settings_digirisk', array( $this, 'ajax_save_general_settings_digirisk' ) );
 
+		add_action( 'wp_ajax_save_child_settings', array( $this, 'save_child_settings' ) );
+
 		add_action( 'wp_ajax_update_accronym', array( $this, 'callback_update_accronym' ) );
 
 		add_action( 'display_user_capacity', array( $this, 'callback_display_user_capacity' ), 10, 1 );
@@ -112,16 +114,16 @@ class Setting_Action {
 		$can_edit_type_cotation     = (bool) get_option( 'edit_type_cotation', false );
 		$require_unique_security_id = (bool) get_option( 'require_unique_security_id', false );
 		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
-		$sites                      = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
+		$parent_sites               = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
 
 		$prefix = Setting_Class::g()->get_all_prefix();
 
-		foreach( $prefix as $element ){
-			$list_accronym[ $element[ 'element' ] ] = array(
-				'description' => $element[ 'title' ],
-				'to'          => $element[ 'value' ],
-				'element'     => $element[ 'element' ],
-				'page'        => $element[ 'page' ]
+		foreach ( $prefix as $element ) {
+			$list_accronym[ $element['element'] ] = array(
+				'description' => $element['title'],
+				'to'          => $element['value'],
+				'element'     => $element['element'],
+				'page'        => $element['page'],
 			);
 		}
 
@@ -135,8 +137,8 @@ class Setting_Action {
 			'can_edit_type_cotation'     => $can_edit_type_cotation,
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
-			'sites'                      => $sites,
-			'general_options'            => $general_options
+			'parent_sites'               => $parent_sites,
+			'general_options'            => $general_options,
 		) );
 	}
 
@@ -150,6 +152,7 @@ class Setting_Action {
 	 */
 	public function callback_update_accronym() {
 		check_ajax_referer( 'update_accronym' );
+
 		$list_accronym = $_POST['list_accronym'];
 		$list_prefix   = $_POST['list_prefix'];
 
@@ -172,7 +175,7 @@ class Setting_Action {
 	}
 
 	/**
-	 * Rajoutes la capacité "manager_digirisk" à tous les utilisateurs ou $have_capability est à true.
+	 * Rajoutes la capacité "manage_digirisk" à tous les utilisateurs ou $have_capability est à true.
 	 *
 	 * @since 6.4.0
 	 */
@@ -245,10 +248,32 @@ class Setting_Action {
 		$domain_mail                = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
 		$can_edit_risk_category     = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
 		$can_edit_type_cotation     = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
-		$require_unique_security_id = ( isset( $_POST['require_unique_security_id'] ) && 'true' == $_POST['require_unique_security_id'] ) ? true : false;
 		$general_data_options       = ! empty( $_POST['general_options'] ) ? (array) $_POST['general_options'] : array();
 
 		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
+
+		update_option( 'digirisk_domain_mail', $domain_mail );
+		update_option( 'edit_risk_category', $can_edit_risk_category );
+		update_option( 'edit_type_cotation', $can_edit_type_cotation );
+
+		$general_options['required_duer_day'] = $general_data_options['required_duer_day'];
+
+		update_option( \eoxia\Config_Util::$init['digirisk']->general_options, $general_options );
+
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'generalSettingsSaved',
+			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+		) );
+	}
+
+	public function save_child_settings() {
+		check_ajax_referer( 'save_child_settings' );
+
+		$require_unique_security_id = ( isset( $_POST['require_unique_security_id'] ) && 'true' == $_POST['require_unique_security_id'] ) ? true : false;
+		update_option( 'require_unique_security_id', $require_unique_security_id );
+
 
 		if ( $require_unique_security_id ) {
 			$security_id_key    = \eoxia\Config_Util::$init['digirisk']->child->security_id_key;
@@ -264,20 +289,12 @@ class Setting_Action {
 			}
 		}
 
-		update_option( 'digirisk_domain_mail', $domain_mail );
-		update_option( 'edit_risk_category', $can_edit_risk_category );
-		update_option( 'edit_type_cotation', $can_edit_type_cotation );
-		update_option( 'require_unique_security_id', $require_unique_security_id );
-
-		$general_options['required_duer_day'] = $general_data_options['required_duer_day'];
-
-		update_option( \eoxia\Config_Util::$init['digirisk']->general_options, $general_options );
-
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'setting',
-			'callback_success' => 'generalSettingsSaved',
-			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+			'callback_success' => 'savedChildSettings',
+			'url'              => admin_url( 'options-general.php?page=digirisk-setting&tab=digi-child' ),
+
 		) );
 	}
 
