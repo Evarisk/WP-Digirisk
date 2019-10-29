@@ -26,5 +26,6 @@
   "status":{
     "PREVENTION_IN_PROGRESS" : 0,
     "PREVENTION_IS_ENDED" : 1
-  }
+  },
+  "state": true
 }
