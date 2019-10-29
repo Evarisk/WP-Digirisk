@@ -18,39 +18,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="content-wrap">
 	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
 	<div class="wrap wpeo-wrap digirisk-wrap">
-		<div class="digi-tools-main-container">
-			<h2 class="nav-tab-wrapper">
-				<a class="nav-tab <?php echo ( 'digi-general' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-general" ><?php esc_html_e( 'Général', 'digirisk' ); ?></a>
-				<a class="nav-tab <?php echo ( 'digi-capability' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-capability" ><?php esc_html_e( 'Capacités', 'digirisk' ); ?></a>
-				<a class="nav-tab <?php echo ( 'digi-accronym' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-accronym" ><?php esc_html_e( 'Accronymes', 'digirisk' ); ?></a>
-				<a class="nav-tab <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-danger-preset" ><?php esc_html_e( 'Danger preset', 'digirisk' ); ?></a>
-				<a class="nav-tab <?php echo ( 'digi-configuration' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-configuration" ><?php esc_html_e( 'Configuration', 'digirisk' ); ?></a>
-				<a class="nav-tab <?php echo ( 'digi-htpasswd' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-htpasswd" ><?php esc_html_e( 'Htpasswd', 'digirisk' ); ?></a>
+		<div class="wpeo-tab">
+			<ul class="tab-list">
+				<li class="tab-element <?php echo ( 'digi-general' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-general" ><?php esc_html_e( 'Général', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-capability' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-capability" ><?php esc_html_e( 'Capacités', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-accronym' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-accronym" ><?php esc_html_e( 'Accronymes', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-danger-preset" ><?php esc_html_e( 'Danger preset', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-child' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-child" ><?php esc_html_e( 'Enfant', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-configuration' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-configuration" ><?php esc_html_e( 'Configuration', 'digirisk' ); ?></li>
+				<li class="tab-element <?php echo ( 'digi-htpasswd' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-htpasswd" ><?php esc_html_e( 'Htpasswd', 'digirisk' ); ?></li>
+			</ul>
 				<?php /* <a class="nav-tab <?php echo ( 'digi-define-prefix' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-define-prefix" ><?php esc_html_e( 'Prefix ODT', 'digirisk' ); ?></a> */ ?>
-			</h2>
-
-			<div class="digirisk-wrap">
-
-				<div id="digi-general" class="tab-content <?php echo ( 'digi-general' === $default_tab ) ? '' : 'hidden'; ?>">
+			<div class="tab-container">
+				<div id="digi-general" class="tab-content <?php echo ( 'digi-general' === $default_tab ) ? 'tab-active' : ''; ?>">
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'setting', 'general/main', array(
 						'can_edit_risk_category'     => $can_edit_risk_category,
 						'can_edit_type_cotation'     => $can_edit_type_cotation,
-						'require_unique_security_id' => $require_unique_security_id,
-						'unique_security_id'         => $unique_security_id,
-						'sites'                      => $sites,
 						'general_options'            => $general_options,
 					) );
 					?>
 				</div>
 
-				<div id="digi-capability" class="tab-content <?php echo ( 'digi-capability' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-capability" class="tab-content <?php echo ( 'digi-capability' === $default_tab ) ? 'tab-active' : ''; ?>">
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'setting', 'capability/main' );
 					?>
 				</div>
 
-				<div id="digi-accronym" class="tab-content <?php echo ( 'digi-accronym' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-accronym" class="tab-content <?php echo ( 'digi-accronym' === $default_tab ) ? 'tab-active' : ''; ?>">
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/form', array(
 						'list_accronym' => $list_accronym,
@@ -58,7 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 				</div>
 
-				<div id="digi-danger-preset" class="tab-content <?php echo ( 'digi-danger-preset' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-danger-preset" class="tab-content <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'tab-active' : ''; ?>">
 						<?php
 						\eoxia\View_Util::exec( 'digirisk', 'setting', 'preset/main', array(
 							'dangers_preset' => $dangers_preset,
@@ -66,7 +62,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 				</div>
 
-				<div id="digi-configuration" class="tab-content <?php echo ( 'digi-configuration' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-child" class="tab-content <?php echo ( 'digi-child' === $default_tab ) ? 'tab-active' : ''; ?>">
+						<?php
+						\eoxia\View_Util::exec( 'digirisk', 'setting', 'child/main', array(
+							'require_unique_security_id' => $require_unique_security_id,
+							'unique_security_id'         => $unique_security_id,
+							'parent_sites'               => $parent_sites,
+						) );
+						?>
+				</div>
+
+				<div id="digi-configuration" class="tab-content <?php echo ( 'digi-configuration' === $default_tab ) ? 'tab-active' : ''; ?>">
 					<div class="">
 						<?php
 						$element    = Society_Class::g()->get_societies_in( 0 );
@@ -81,12 +87,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</style>
 				</div>
 
-				<div id="digi-htpasswd" class="tab-content <?php echo ( 'digi-htpasswd' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-htpasswd" class="tab-content <?php echo ( 'digi-htpasswd' === $default_tab ) ? 'tab-active' : ''; ?>">
 					<?php Setting_Class::g()->display_htpasswd(); ?>
 				</div>
 
 				<?php /*
-				<div id="digi-define-prefix" class="tab-content <?php echo ( 'digi-define-prefix' === $default_tab ) ? '' : 'hidden'; ?>">
+				<div id="digi-define-prefix" class="tab-content <?php echo ( 'digi-define-prefix' === $default_tab ) ? 'tab-active' : ''; ?>">
 						<?php
 						\eoxia\View_Util::exec( 'digirisk', 'setting', 'prefix/main', array(
 							'prefix' => $prefix,
