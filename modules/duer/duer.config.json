@@ -12,5 +12,6 @@
 		"action": {},
     "filter": {}
 	},
-	"meta_key_generate_duer": "generate_duer_tmp"
+	"meta_key_generate_duer": "generate_duer_tmp",
+  "state": true
 }
