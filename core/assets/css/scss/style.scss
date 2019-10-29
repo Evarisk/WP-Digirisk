@@ -195,6 +195,22 @@ canvas {
 
 	}
 }
+
+.dropdown-sites {
+	overflow-y: scroll;
+	max-height: 500px;
+}
+
+.sorter-page {
+	table.treetable tbody tr td {
+		padding: 10px;
+
+		&:hover {
+			background-color: rgba(0,0,0,0.2);
+			cursor: pointer;
+		}
+	}
+}
 /*--------------------------------------------------------------
 # Fin temporaire à ranger
 --------------------------------------------------------------*/

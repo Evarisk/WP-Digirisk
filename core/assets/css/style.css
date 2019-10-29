@@ -75,8 +75,11 @@
 .wpeo-wrap.causerie-wrap .step-2 .owl-nav {
   height: 100%;
   width: 100%;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
   display: flex;
   position: absolute;
   top: 0;
@@ -117,6 +120,7 @@
 
 .wpeo-wrap.causerie-wrap .step .step-list {
   width: 100%;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -140,6 +144,7 @@
   top: 8px;
   background: #d6d6d6;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -401,9 +406,12 @@
 
 .wpeo-wrap .main-header .unit-header {
   position: relative;
+  display: -webkit-box;
   display: flex;
-  flex: 0 1 auto;
+  -webkit-box-flex: 0;
+          flex: 0 1 auto;
   height: 50px;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -434,10 +442,12 @@
 
 .wpeo-wrap .main-header .edit {
   margin-left: auto;
+  -webkit-transition: none;
   transition: none;
 }
 
 .wpeo-wrap .main-header .edit .button-icon {
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   color: rgba(255, 255, 255, 0.4);
 }
@@ -451,6 +461,7 @@
   position: absolute;
   right: -5px;
   pointer-events: none;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -470,6 +481,7 @@
 
 .wpeo-wrap .main-header .mobile-navigation .icon {
   color: rgba(255, 255, 255, 0.4);
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   line-height: 1;
   font-size: 18px;
@@ -589,6 +601,7 @@
   height: 50px;
   line-height: 50px;
   text-align: center;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -690,8 +703,10 @@
   bottom: 0.4em;
   left: 0.4em;
   background: rgba(0, 0, 0, 0.1);
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
   opacity: 0;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -700,7 +715,8 @@
 }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell.can-select:hover::after {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
   opacity: 1;
 }
 
@@ -709,7 +725,8 @@
 }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell.can-select.active::after {
-  transform: scale(1) !important;
+  -webkit-transform: scale(1) !important;
+          transform: scale(1) !important;
   opacity: 1 !important;
   background: #3495f0;
   z-index: -1;
@@ -748,6 +765,7 @@
 
 .wpeo-wrap .navigation-container .society-header {
   background: #3d4152;
+  display: -webkit-box;
   display: flex;
   height: 50px;
   padding: 0 1em;
@@ -777,7 +795,8 @@
 
 .wpeo-wrap .navigation-container .society-header > .add-container {
   top: 50% !important;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   right: 0;
 }
 
@@ -795,6 +814,7 @@
   display: inline-block;
   color: rgba(255, 255, 255, 0.4);
   margin-right: 0.4em;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -821,6 +841,7 @@
 }
 
 .wpeo-wrap .navigation-container .workunit-list .unit > .unit-container {
+  display: -webkit-box;
   display: flex;
   position: relative;
 }
@@ -865,6 +886,7 @@
   min-width: 30px;
   width: 30px;
   text-align: center;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -897,6 +919,7 @@
 .wpeo-wrap .navigation-container .unit > .unit-container .title {
   width: 100%;
   padding-left: 1em;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -911,6 +934,7 @@
 .wpeo-wrap .navigation-container .unit > .unit-container .title .ref, .wpeo-wrap .navigation-container .unit > .unit-container .title .name {
   display: block;
   line-height: 1;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -937,12 +961,14 @@
   right: 0;
   opacity: 0;
   pointer-events: none;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .wpeo-wrap .navigation-container .add-container .wpeo-button {
   float: left;
   margin-left: 2px;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -955,6 +981,7 @@
 .wpeo-wrap .navigation-container .add-container .wpeo-button .button-add {
   position: absolute;
   color: rgba(255, 255, 255, 0.6);
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   top: 6px;
   right: 6px;
@@ -979,6 +1006,7 @@
 }
 
 .wpeo-wrap .navigation-container .unit.new.active {
+  display: -webkit-box;
   display: flex;
 }
 
@@ -1059,6 +1087,7 @@
   min-width: 32px;
   width: 32px;
   text-align: center;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1096,6 +1125,7 @@
 
 .wpeo-wrap .navigation-container .mobile-add-container .action {
   font-size: 18px;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1107,6 +1137,7 @@
 }
 
 .wpeo-wrap .navigation-container .close-popup .icon {
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   font-size: 16px;
 }
@@ -1125,7 +1156,8 @@
   .wpeo-wrap .navigation-container {
     opacity: 0;
     pointer-events: none;
-    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
     position: fixed;
     top: 0;
     left: 0;
@@ -1133,13 +1165,15 @@
     height: 100%;
     z-index: 99999;
     background: #272a35;
+    -webkit-transition: 0.2s ease-out;
     transition: 0.2s ease-out;
     overflow-y: auto;
   }
   .wpeo-wrap .navigation-container.active {
     opacity: 1;
     pointer-events: all;
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
@@ -1272,8 +1306,10 @@
 }
 
 .wpeo-wrap .table .comment-container .comment {
+  display: -webkit-box;
   display: flex;
-  flex: 0 1 auto;
+  -webkit-box-flex: 0;
+          flex: 0 1 auto;
   line-height: 1.8;
   margin-top: 4px;
 }
@@ -1310,6 +1346,7 @@
 }
 
 .wpeo-wrap .table .comment-container .comment .delete i, .wpeo-wrap .table .comment-container .comment .add i {
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1499,6 +1536,7 @@
     display: none;
   }
   .wpeo-wrap .table.risk .risk-row {
+    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 1em !important;
@@ -1508,6 +1546,7 @@
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
     width: 60% !important;
+    display: -webkit-box;
     display: flex;
     padding: 1em 0 !important;
   }
@@ -1593,22 +1632,28 @@
     width: 33.333333%;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
-    order: 1;
+    -webkit-box-ordinal-group: 2;
+            order: 1;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(2) {
-    order: 3;
+    -webkit-box-ordinal-group: 4;
+            order: 3;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(3) {
-    order: 4;
+    -webkit-box-ordinal-group: 5;
+            order: 4;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(4) {
-    order: 5;
+    -webkit-box-ordinal-group: 6;
+            order: 5;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(5) {
-    order: 5;
+    -webkit-box-ordinal-group: 6;
+            order: 5;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) {
-    order: 2;
+    -webkit-box-ordinal-group: 3;
+            order: 2;
   }
   .wpeo-wrap .table.risk > tfoot {
     background: #f1f1f1;
@@ -1621,6 +1666,7 @@
     display: none;
   }
   .wpeo-wrap .table.risk .risk-row:not(.edit) .comment-container .comment:nth-of-type(1) {
+    display: -webkit-box;
     display: flex;
   }
 }
@@ -1665,6 +1711,7 @@
     display: none;
   }
   .wpeo-wrap .table.evaluators tbody > tr, .wpeo-wrap .table.affected-evaluator tbody > tr {
+    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 1em;
@@ -1681,7 +1728,8 @@
     position: absolute;
     left: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
   .wpeo-wrap .table.evaluators tbody td:nth-of-type(2), .wpeo-wrap .table.evaluators tbody td:nth-of-type(3), .wpeo-wrap .table.evaluators tbody td:nth-of-type(4), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(2), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(3), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(4) {
     width: auto;
@@ -1707,7 +1755,8 @@
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
   .wpeo-wrap .table.affected-evaluator tbody tr {
     background: rgba(0, 0, 0, 0.1) !important;
@@ -1742,7 +1791,8 @@
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
 }
 
@@ -1765,6 +1815,7 @@
 }
 
 .wpeo-wrap .flex-table .col {
+  display: -webkit-box;
   display: flex;
   min-height: 50px;
   flex-wrap: nowrap;
@@ -1844,6 +1895,7 @@
   line-height: 1;
   background: #ececec;
   box-shadow: none;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1856,8 +1908,10 @@
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment {
+  display: -webkit-box;
   display: flex;
-  flex: 0 1 auto;
+  -webkit-box-flex: 0;
+          flex: 0 1 auto;
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment > * {
@@ -1885,6 +1939,7 @@
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment .delete i, .wpeo-wrap .flex-table > .table-body .comment-container .comment .add i {
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1940,6 +1995,7 @@
 
 .wpeo-wrap .flex-table > .table-body .canvas-eraser .fa-circle {
   color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2134,6 +2190,7 @@
     display: none;
   }
   .wpeo-wrap .table.closed-causerie tr.item {
+    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 0.4em !important;
@@ -2152,31 +2209,40 @@
     padding-bottom: 0.4em;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(1) {
-    order: 1;
+    -webkit-box-ordinal-group: 2;
+            order: 1;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(2) {
-    order: 4;
+    -webkit-box-ordinal-group: 5;
+            order: 4;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(3) {
-    order: 5;
+    -webkit-box-ordinal-group: 6;
+            order: 5;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(4) {
-    order: 3;
+    -webkit-box-ordinal-group: 4;
+            order: 3;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(5) {
-    order: 6;
+    -webkit-box-ordinal-group: 7;
+            order: 6;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(6) {
-    order: 7;
+    -webkit-box-ordinal-group: 8;
+            order: 7;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(7) {
-    order: 8;
+    -webkit-box-ordinal-group: 9;
+            order: 8;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(8) {
-    order: 9;
+    -webkit-box-ordinal-group: 10;
+            order: 9;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(9) {
-    order: 2;
+    -webkit-box-ordinal-group: 3;
+            order: 2;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(1) {
     width: 30% !important;
@@ -2366,6 +2432,7 @@
   background: rgba(255, 255, 255, 0.6);
   padding: 30px;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
 }
@@ -2373,6 +2440,7 @@
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before, .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
   position: relative;
   display: block;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2425,6 +2493,7 @@
   background: #fff;
   border-radius: 50%;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2455,7 +2524,8 @@
 .wpeo-wrap.wpdigi-installer .society-form .society-label {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   left: 20px;
   color: rgba(0, 0, 0, 0.3);
   pointer-events: none;
@@ -2484,11 +2554,13 @@
 .wpeo-wrap .step .bar .loader {
   width: 0%;
   background: #47e58e;
+  -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
 }
 
 .wpeo-wrap .step .step-list {
   width: 100%;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -2502,6 +2574,7 @@
   height: 14px;
   background: #d6d6d6;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2514,6 +2587,7 @@
   max-width: 160px;
   font-weight: 600;
   padding-bottom: 10px;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   min-height: 45px;
 }
@@ -3066,22 +3140,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
   20% {
-    transform: scale3d(1.4, 1.4, 1.4);
+    -webkit-transform: scale3d(1.4, 1.4, 1.4);
+            transform: scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    transform: scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    transform: scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3091,22 +3171,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
   20% {
-    transform: scale3d(1.4, 1.4, 1.4);
+    -webkit-transform: scale3d(1.4, 1.4, 1.4);
+            transform: scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    transform: scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    transform: scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3121,22 +3207,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
   20% {
-    transform: scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
   }
   40% {
-    transform: scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: scale3d(1.1, 1.1, 1.1);
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
   }
   80% {
-    transform: scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3146,22 +3238,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
   20% {
-    transform: scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
   }
   40% {
-    transform: scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: scale3d(1.1, 1.1, 1.1);
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
   }
   80% {
-    transform: scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3172,19 +3270,23 @@
 
 @-webkit-keyframes rotate {
   0% {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   100% {
-    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
   }
 }
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   100% {
-    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
   }
 }
 
@@ -3195,25 +3297,31 @@
 
 @-webkit-keyframes downAndUp {
   0% {
-    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
   50% {
-    transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px);
   }
   100% {
-    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
 }
 
 @keyframes downAndUp {
   0% {
-    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
   50% {
-    transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px);
   }
   100% {
-    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
 }
 
@@ -3224,19 +3332,23 @@
 
 @-webkit-keyframes spin {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 @keyframes spin {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -3246,22 +3358,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
   20% {
-    transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
 }
 
@@ -3271,22 +3389,28 @@
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
   20% {
-    transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
   }
   to {
-    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
 }
 
@@ -3297,49 +3421,63 @@
 
 @-webkit-keyframes progressError {
   from {
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
   }
   15% {
-    transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
   30% {
-    transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
   45% {
-    transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
   60% {
-    transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
   75% {
-    transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
   to {
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
   }
 }
 
 @keyframes progressError {
   from {
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
   }
   15% {
-    transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
   30% {
-    transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
   45% {
-    transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
   60% {
-    transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
   75% {
-    transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
   to {
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
   }
 }
 
@@ -3367,6 +3505,7 @@
   border-radius: 4px;
   padding: 0 !important;
   position: relative;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -3519,7 +3658,22 @@
 .document-unique_page_digirisk-causerie #wpadminbar,
 .document-unique_page_digirisk-causerie #adminmenumain,
 .document-unique_page_digirisk-causerie #screen-meta-links,
-.document-unique_page_digirisk-causerie #wpfooter {
+.document-unique_page_digirisk-causerie #wpfooter,
+.toplevel_page_digirisk-dashboard-sites #adminmenuwrap,
+.toplevel_page_digirisk-dashboard-sites #wpadminbar,
+.toplevel_page_digirisk-dashboard-sites #adminmenumain,
+.toplevel_page_digirisk-dashboard-sites #screen-meta-links,
+.toplevel_page_digirisk-dashboard-sites #wpfooter,
+.admin_page_digirisk-dashboard-add #adminmenuwrap,
+.admin_page_digirisk-dashboard-add #wpadminbar,
+.admin_page_digirisk-dashboard-add #adminmenumain,
+.admin_page_digirisk-dashboard-add #screen-meta-links,
+.admin_page_digirisk-dashboard-add #wpfooter,
+.toplevel_page_digirisk-dashboard-duer #adminmenuwrap,
+.toplevel_page_digirisk-dashboard-duer #wpadminbar,
+.toplevel_page_digirisk-dashboard-duer #adminmenumain,
+.toplevel_page_digirisk-dashboard-duer #screen-meta-links,
+.toplevel_page_digirisk-dashboard-duer #wpfooter {
   display: none !important;
 }
 
@@ -3542,7 +3696,10 @@
 .document-unique_page_digirisk-prevention #wpcontent,
 .admin_page_digirisk-handle-risk #wpcontent,
 .admin_page_digirisk-handle-sorter #wpcontent,
-.document-unique_page_digirisk-causerie #wpcontent {
+.document-unique_page_digirisk-causerie #wpcontent,
+.toplevel_page_digirisk-dashboard-sites #wpcontent,
+.admin_page_digirisk-dashboard-add #wpcontent,
+.toplevel_page_digirisk-dashboard-duer #wpcontent {
   margin-left: 0 !important;
   padding-left: 0;
 }
@@ -3566,7 +3723,10 @@
 .document-unique_page_digirisk-prevention .nav-wrap,
 .admin_page_digirisk-handle-risk .nav-wrap,
 .admin_page_digirisk-handle-sorter .nav-wrap,
-.document-unique_page_digirisk-causerie .nav-wrap {
+.document-unique_page_digirisk-causerie .nav-wrap,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap,
+.admin_page_digirisk-dashboard-add .nav-wrap,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap {
   background: #1c1d1b;
   width: 200px;
   position: fixed;
@@ -3594,7 +3754,10 @@
 .document-unique_page_digirisk-prevention .nav-wrap #logo,
 .admin_page_digirisk-handle-risk .nav-wrap #logo,
 .admin_page_digirisk-handle-sorter .nav-wrap #logo,
-.document-unique_page_digirisk-causerie .nav-wrap #logo {
+.document-unique_page_digirisk-causerie .nav-wrap #logo,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap #logo,
+.admin_page_digirisk-dashboard-add .nav-wrap #logo,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap #logo {
   margin: auto;
   text-align: center;
 }
@@ -3618,7 +3781,11 @@
 .document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item,
 .admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item {
+  -webkit-transition: background .1s ease,box-shadow .1s ease,color .1s ease;
   transition: background .1s ease,box-shadow .1s ease,color .1s ease;
 }
 
@@ -3641,7 +3808,10 @@
 .document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item:before,
 .admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item:before,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item:before,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:before {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:before,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item:before,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item:before,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:before {
   position: absolute;
   content: '';
   width: 100%;
@@ -3668,7 +3838,10 @@
 .document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item:hover,
 .admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item:hover,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item:hover,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:hover {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:hover,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item:hover,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item:hover,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -3710,7 +3883,13 @@
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span,
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item a,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item span,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span {
   padding: 16px;
   padding-left: 20px;
   font-size: 1.1em;
@@ -3758,34 +3937,15 @@
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a.disabled,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span.disabled,
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span.disabled {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span.disabled,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item a.disabled,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item span.disabled,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a.disabled,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span.disabled,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a.disabled,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0.4;
-}
-
-.toplevel_page_digi-setup .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-du .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-causerie .nav-wrap .nav-menu .item.item-bottom,
-.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item.item-bottom,
-.profile_page_digirisk-users .nav-wrap .nav-menu .item.item-bottom,
-.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item.item-bottom,
-.users_page_digirisk-users .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-accident .nav-wrap .nav-menu .item.item-bottom,
-.settings_page_digirisk-setting .nav-wrap .nav-menu .item.item-bottom,
-.tools_page_digirisk-tools .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-prevention .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item.item-bottom,
-.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item.item-bottom,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item.item-bottom {
-  position: absolute;
-  width: 200px;
-  bottom: 0;
 }
 
 .toplevel_page_digi-setup .nav-wrap .nav-menu .item.item-active a,
@@ -3807,8 +3967,39 @@
 .document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item.item-active a,
 .admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item.item-active a,
 .admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item.item-active a,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item.item-active a {
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item.item-active a,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item.item-active a,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item.item-active a,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item.item-active a {
   background: rgba(255, 255, 255, 0.15);
+}
+
+.toplevel_page_digi-setup .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-du .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-causerie .nav-wrap .nav-menu.item-bottom,
+.toplevel_page_digirisk-welcome .nav-wrap .nav-menu.item-bottom,
+.profile_page_digirisk-users .nav-wrap .nav-menu.item-bottom,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu.item-bottom,
+.users_page_digirisk-users .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-accident .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-accident .nav-wrap .nav-menu.item-bottom,
+.settings_page_digirisk-setting .nav-wrap .nav-menu.item-bottom,
+.tools_page_digirisk-tools .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-permis-feu .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-prevention .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-prevention .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-handle-risk .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu.item-bottom,
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu.item-bottom,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu.item-bottom,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu.item-bottom {
+  position: absolute;
+  width: 200px;
+  bottom: 0;
 }
 
 .toplevel_page_digi-setup .content-wrap,
@@ -3830,7 +4021,10 @@
 .document-unique_page_digirisk-prevention .content-wrap,
 .admin_page_digirisk-handle-risk .content-wrap,
 .admin_page_digirisk-handle-sorter .content-wrap,
-.document-unique_page_digirisk-causerie .content-wrap {
+.document-unique_page_digirisk-causerie .content-wrap,
+.toplevel_page_digirisk-dashboard-sites .content-wrap,
+.admin_page_digirisk-dashboard-add .content-wrap,
+.toplevel_page_digirisk-dashboard-duer .content-wrap {
   background: #fafafa;
   margin-left: 200px;
 }
@@ -3854,7 +4048,10 @@
 .document-unique_page_digirisk-prevention .content-wrap .digirisk-wrap,
 .admin_page_digirisk-handle-risk .content-wrap .digirisk-wrap,
 .admin_page_digirisk-handle-sorter .content-wrap .digirisk-wrap,
-.document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap {
+.document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap,
+.toplevel_page_digirisk-dashboard-sites .content-wrap .digirisk-wrap,
+.admin_page_digirisk-dashboard-add .content-wrap .digirisk-wrap,
+.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap {
   padding-left: 20px;
 }
 
@@ -3877,7 +4074,10 @@
 .document-unique_page_digirisk-prevention .content-wrap .digirisk-wrap.wrap,
 .admin_page_digirisk-handle-risk .content-wrap .digirisk-wrap.wrap,
 .admin_page_digirisk-handle-sorter .content-wrap .digirisk-wrap.wrap,
-.document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap.wrap {
+.document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap.wrap,
+.toplevel_page_digirisk-dashboard-sites .content-wrap .digirisk-wrap.wrap,
+.admin_page_digirisk-dashboard-add .content-wrap .digirisk-wrap.wrap,
+.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap.wrap {
   margin-right: 0;
 }
 
@@ -3900,7 +4100,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header,
 .admin_page_digirisk-handle-risk .content-wrap #top-header,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header,
-.document-unique_page_digirisk-causerie .content-wrap #top-header {
+.document-unique_page_digirisk-causerie .content-wrap #top-header,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header {
   background-color: white;
   border-bottom: solid black 2px;
   min-height: 60px;
@@ -3926,7 +4129,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .nav-header,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .nav-header,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .nav-header,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-header {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-header,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-header,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-header,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-header {
   margin: 0;
 }
 
@@ -3949,7 +4155,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .nav-right,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .nav-right,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .nav-right,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-right,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-right,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right {
   line-height: 50px;
   font-size: 1.2em;
 }
@@ -3973,7 +4182,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .nav-right li img,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .nav-right li img,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .nav-right li img,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right li img {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right li img,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-right li img,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-right li img,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right li img {
   vertical-align: middle;
 }
 
@@ -3996,7 +4208,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .page-title,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .page-title,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .page-title,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .page-title {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .page-title,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .page-title,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .page-title,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .page-title {
   margin: 0;
   font-size: 2em;
   padding-top: 20px;
@@ -4022,7 +4237,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .wpeo-button,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .wpeo-button,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .wpeo-button,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .wpeo-button {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .wpeo-button,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .wpeo-button,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .wpeo-button,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .wpeo-button {
   margin-top: 12px;
   margin-left: 20px;
 }
@@ -4046,7 +4264,10 @@
 .document-unique_page_digirisk-prevention .content-wrap #top-header .alignright,
 .admin_page_digirisk-handle-risk .content-wrap #top-header .alignright,
 .admin_page_digirisk-handle-sorter .content-wrap #top-header .alignright,
-.document-unique_page_digirisk-causerie .content-wrap #top-header .alignright {
+.document-unique_page_digirisk-causerie .content-wrap #top-header .alignright,
+.toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .alignright,
+.admin_page_digirisk-dashboard-add .content-wrap #top-header .alignright,
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .alignright {
   padding-right: 20px;
   margin: 0;
 }
@@ -4070,7 +4291,10 @@
 .document-unique_page_digirisk-prevention .content-wrap .wrap-frais-pro,
 .admin_page_digirisk-handle-risk .content-wrap .wrap-frais-pro,
 .admin_page_digirisk-handle-sorter .content-wrap .wrap-frais-pro,
-.document-unique_page_digirisk-causerie .content-wrap .wrap-frais-pro {
+.document-unique_page_digirisk-causerie .content-wrap .wrap-frais-pro,
+.toplevel_page_digirisk-dashboard-sites .content-wrap .wrap-frais-pro,
+.admin_page_digirisk-dashboard-add .content-wrap .wrap-frais-pro,
+.toplevel_page_digirisk-dashboard-duer .content-wrap .wrap-frais-pro {
   padding-right: 0;
   padding-left: 20px;
 }
@@ -4136,6 +4360,7 @@ canvas {
   top: 8px;
   background: #d6d6d6;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -4149,10 +4374,12 @@ canvas {
   height: 14px;
   background: #d6d6d6;
   border-radius: 50%;
+  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .phone-bloc {
+  display: -webkit-box;
   display: flex;
 }
 
@@ -4202,6 +4429,20 @@ canvas {
   font-style: normal;
   text-transform: uppercase;
   font-size: 20px;
+}
+
+.dropdown-sites {
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.sorter-page table.treetable tbody tr td {
+  padding: 10px;
+}
+
+.sorter-page table.treetable tbody tr td:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 /*--------------------------------------------------------------
