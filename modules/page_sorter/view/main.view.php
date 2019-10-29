@@ -31,8 +31,8 @@ defined( 'ABSPATH' ) || exit; ?>
 
 			<table class="treetable">
 				<caption>
-					<a href="#" onclick="jQuery( '.treetable' ).treetable( 'expandAll' ); return false;">Tout déplier</a>
-					<a href="#" onclick="jQuery( '.treetable' ).treetable( 'collapseAll' ); return false;">Tout replier</a>
+					<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'expandAll' ); return false;">Tout déplier</a>
+					<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'collapseAll' ); return false;">Tout replier</a>
 				</caption>
 				<tbody>
 					<tr class="branch expanded" data-tt-id="<?php echo esc_attr( $main_society->data['id'] ); ?>" data-tt-parent-id="<?php echo esc_attr( $main_society->data['parent_id'] ); ?>">
