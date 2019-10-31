@@ -3673,7 +3673,22 @@
 .toplevel_page_digirisk-dashboard-duer #wpadminbar,
 .toplevel_page_digirisk-dashboard-duer #adminmenumain,
 .toplevel_page_digirisk-dashboard-duer #screen-meta-links,
-.toplevel_page_digirisk-dashboard-duer #wpfooter {
+.toplevel_page_digirisk-dashboard-duer #wpfooter,
+.toplevel_page_digirisk-dashboard-model #adminmenuwrap,
+.toplevel_page_digirisk-dashboard-model #wpadminbar,
+.toplevel_page_digirisk-dashboard-model #adminmenumain,
+.toplevel_page_digirisk-dashboard-model #screen-meta-links,
+.toplevel_page_digirisk-dashboard-model #wpfooter,
+.admin_page_digirisk-dashboard-duer #adminmenuwrap,
+.admin_page_digirisk-dashboard-duer #wpadminbar,
+.admin_page_digirisk-dashboard-duer #adminmenumain,
+.admin_page_digirisk-dashboard-duer #screen-meta-links,
+.admin_page_digirisk-dashboard-duer #wpfooter,
+.admin_page_digirisk-dashboard-model #adminmenuwrap,
+.admin_page_digirisk-dashboard-model #wpadminbar,
+.admin_page_digirisk-dashboard-model #adminmenumain,
+.admin_page_digirisk-dashboard-model #screen-meta-links,
+.admin_page_digirisk-dashboard-model #wpfooter {
   display: none !important;
 }
 
@@ -3699,7 +3714,10 @@
 .document-unique_page_digirisk-causerie #wpcontent,
 .toplevel_page_digirisk-dashboard-sites #wpcontent,
 .admin_page_digirisk-dashboard-add #wpcontent,
-.toplevel_page_digirisk-dashboard-duer #wpcontent {
+.toplevel_page_digirisk-dashboard-duer #wpcontent,
+.toplevel_page_digirisk-dashboard-model #wpcontent,
+.admin_page_digirisk-dashboard-duer #wpcontent,
+.admin_page_digirisk-dashboard-model #wpcontent {
   margin-left: 0 !important;
   padding-left: 0;
 }
@@ -3726,7 +3744,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap,
 .admin_page_digirisk-dashboard-add .nav-wrap,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap,
+.toplevel_page_digirisk-dashboard-model .nav-wrap,
+.admin_page_digirisk-dashboard-duer .nav-wrap,
+.admin_page_digirisk-dashboard-model .nav-wrap {
   background: #1c1d1b;
   width: 200px;
   position: fixed;
@@ -3757,7 +3778,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap #logo,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap #logo,
 .admin_page_digirisk-dashboard-add .nav-wrap #logo,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap #logo {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap #logo,
+.toplevel_page_digirisk-dashboard-model .nav-wrap #logo,
+.admin_page_digirisk-dashboard-duer .nav-wrap #logo,
+.admin_page_digirisk-dashboard-model .nav-wrap #logo {
   margin: auto;
   text-align: center;
 }
@@ -3784,7 +3808,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item {
   -webkit-transition: background .1s ease,box-shadow .1s ease,color .1s ease;
   transition: background .1s ease,box-shadow .1s ease,color .1s ease;
 }
@@ -3811,7 +3838,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:before,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item:before,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item:before,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:before {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:before,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item:before,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:before,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item:before {
   position: absolute;
   content: '';
   width: 100%;
@@ -3841,7 +3871,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item:hover,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item:hover,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item:hover,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:hover {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:hover,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item:hover,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item:hover,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -3889,7 +3922,13 @@
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span,
 .toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span {
   padding: 16px;
   padding-left: 20px;
   font-size: 1.1em;
@@ -3943,7 +3982,13 @@
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a.disabled,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span.disabled,
 .toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a.disabled,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span.disabled,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a.disabled,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a.disabled,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span.disabled {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0.4;
 }
@@ -3970,7 +4015,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item.item-active a,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item.item-active a,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item.item-active a,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item.item-active a {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item.item-active a,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item.item-active a,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item.item-active a,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item.item-active a {
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -3996,7 +4044,10 @@
 .document-unique_page_digirisk-causerie .nav-wrap .nav-menu.item-bottom,
 .toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu.item-bottom,
 .admin_page_digirisk-dashboard-add .nav-wrap .nav-menu.item-bottom,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu.item-bottom {
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu.item-bottom,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu.item-bottom,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu.item-bottom {
   position: absolute;
   width: 200px;
   bottom: 0;
@@ -4024,7 +4075,10 @@
 .document-unique_page_digirisk-causerie .content-wrap,
 .toplevel_page_digirisk-dashboard-sites .content-wrap,
 .admin_page_digirisk-dashboard-add .content-wrap,
-.toplevel_page_digirisk-dashboard-duer .content-wrap {
+.toplevel_page_digirisk-dashboard-duer .content-wrap,
+.toplevel_page_digirisk-dashboard-model .content-wrap,
+.admin_page_digirisk-dashboard-duer .content-wrap,
+.admin_page_digirisk-dashboard-model .content-wrap {
   background: #fafafa;
   margin-left: 200px;
 }
@@ -4051,7 +4105,10 @@
 .document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap,
 .toplevel_page_digirisk-dashboard-sites .content-wrap .digirisk-wrap,
 .admin_page_digirisk-dashboard-add .content-wrap .digirisk-wrap,
-.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap {
+.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap,
+.toplevel_page_digirisk-dashboard-model .content-wrap .digirisk-wrap,
+.admin_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap,
+.admin_page_digirisk-dashboard-model .content-wrap .digirisk-wrap {
   padding-left: 20px;
 }
 
@@ -4077,7 +4134,10 @@
 .document-unique_page_digirisk-causerie .content-wrap .digirisk-wrap.wrap,
 .toplevel_page_digirisk-dashboard-sites .content-wrap .digirisk-wrap.wrap,
 .admin_page_digirisk-dashboard-add .content-wrap .digirisk-wrap.wrap,
-.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap.wrap {
+.toplevel_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap.wrap,
+.toplevel_page_digirisk-dashboard-model .content-wrap .digirisk-wrap.wrap,
+.admin_page_digirisk-dashboard-duer .content-wrap .digirisk-wrap.wrap,
+.admin_page_digirisk-dashboard-model .content-wrap .digirisk-wrap.wrap {
   margin-right: 0;
 }
 
@@ -4103,7 +4163,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header {
   background-color: white;
   border-bottom: solid black 2px;
   min-height: 60px;
@@ -4132,7 +4195,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .nav-header,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-header,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-header,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-header {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-header,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .nav-header,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .nav-header,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .nav-header {
   margin: 0;
 }
 
@@ -4158,7 +4224,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-right,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-right,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .nav-right,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .nav-right {
   line-height: 50px;
   font-size: 1.2em;
 }
@@ -4185,7 +4254,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .nav-right li img,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .nav-right li img,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .nav-right li img,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right li img {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right li img,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .nav-right li img,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .nav-right li img,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .nav-right li img {
   vertical-align: middle;
 }
 
@@ -4211,7 +4283,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .page-title,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .page-title,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .page-title,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .page-title {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .page-title,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .page-title,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .page-title,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .page-title {
   margin: 0;
   font-size: 2em;
   padding-top: 20px;
@@ -4240,7 +4315,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .wpeo-button,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .wpeo-button,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .wpeo-button,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .wpeo-button {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .wpeo-button,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .wpeo-button,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .wpeo-button,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .wpeo-button {
   margin-top: 12px;
   margin-left: 20px;
 }
@@ -4267,7 +4345,10 @@
 .document-unique_page_digirisk-causerie .content-wrap #top-header .alignright,
 .toplevel_page_digirisk-dashboard-sites .content-wrap #top-header .alignright,
 .admin_page_digirisk-dashboard-add .content-wrap #top-header .alignright,
-.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .alignright {
+.toplevel_page_digirisk-dashboard-duer .content-wrap #top-header .alignright,
+.toplevel_page_digirisk-dashboard-model .content-wrap #top-header .alignright,
+.admin_page_digirisk-dashboard-duer .content-wrap #top-header .alignright,
+.admin_page_digirisk-dashboard-model .content-wrap #top-header .alignright {
   padding-right: 20px;
   margin: 0;
 }
@@ -4294,7 +4375,10 @@
 .document-unique_page_digirisk-causerie .content-wrap .wrap-frais-pro,
 .toplevel_page_digirisk-dashboard-sites .content-wrap .wrap-frais-pro,
 .admin_page_digirisk-dashboard-add .content-wrap .wrap-frais-pro,
-.toplevel_page_digirisk-dashboard-duer .content-wrap .wrap-frais-pro {
+.toplevel_page_digirisk-dashboard-duer .content-wrap .wrap-frais-pro,
+.toplevel_page_digirisk-dashboard-model .content-wrap .wrap-frais-pro,
+.admin_page_digirisk-dashboard-duer .content-wrap .wrap-frais-pro,
+.admin_page_digirisk-dashboard-model .content-wrap .wrap-frais-pro {
   padding-right: 0;
   padding-left: 20px;
 }
