@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="content-wrap">
-	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<?php Digirisk::g()->display_header(); ?>
+
 	<div class="wrap wpeo-wrap digirisk-wrap">
 		<div class="wpeo-tab">
 			<ul class="tab-list">

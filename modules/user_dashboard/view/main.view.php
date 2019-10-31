@@ -17,7 +17,8 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="content-wrap">
-	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<?php Digirisk::g()->display_header(); ?>
+
 	<div class="digirisk-wrap user-dashboard wpeo-wrap wrap">
 		<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 

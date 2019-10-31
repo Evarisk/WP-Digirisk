@@ -17,7 +17,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="content-wrap">
-	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<?php Digirisk::g()->display_header(); ?>
 
 	<div class="wrap sorter-page digirisk-wrap wpeo-wrap">
 		<form action="<?php echo esc_attr( admin_url( 'admin-post.php' ) ); ?>" method="POST">
