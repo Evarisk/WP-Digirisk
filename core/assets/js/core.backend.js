@@ -32,6 +32,9 @@ window.eoxiaJS.digirisk.core.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note .notification-close', window.eoxiaJS.digirisk.core.closeNotification );
 	jQuery( document ).on( 'click', '.popup-update-manager .back-update', window.eoxiaJS.digirisk.core.confirmBack );
 
+	jQuery( document ).on( 'click', '.current-site .wpeo-dropdown .dropdown-toggle', window.eoxiaJS.digirisk.core.focusHeaderSearch );
+	jQuery( document ).on( 'keyup', '.search-item input', window.eoxiaJS.digirisk.core.searchItems );
+
 
 	var action = {
 		action: 'have_patch_note',
@@ -89,3 +92,20 @@ window.eoxiaJS.digirisk.core.confirmBack = function( event ) {
 		return false;
 	}
 };
+
+window.eoxiaJS.digirisk.core.focusHeaderSearch = function (event) {
+	jQuery( '.current-site .search-item input').focus()
+}
+
+window.eoxiaJS.digirisk.core.searchItems = function (event) {
+	var sites = jQuery( '#top-header .dropdown-sites a' );
+
+	sites.show();
+
+	for ( var i = 0; i < sites.length; i++ ) {
+		if ( jQuery( sites[i] ).text().toLowerCase().indexOf( jQuery( this ).val().toLowerCase() ) == -1 ) {
+			jQuery( sites[i] ).hide();
+		}
+	}
+};
+
