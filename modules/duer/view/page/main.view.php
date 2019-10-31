@@ -21,7 +21,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="content-wrap">
-	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<?php Digirisk::g()->display_header(); ?>
 
 	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 		<?php
