@@ -109,7 +109,7 @@ class User_Class extends \eoxia\User_Class {
 			}
 		}
 
-		update_usermeta( $user_id, 'digirisk_user_information_meta', $post_request );
+		update_user_meta( $user_id, 'digirisk_user_information_meta', $post_request );
 	}
 
 	/**
