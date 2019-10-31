@@ -11,8 +11,8 @@
 		"digirisk-users",
 		"digirisk-accident",
 		"digirisk-causerie",
-    "digirisk-prevention",
-    "digirisk-permis-feu",
+        "digirisk-prevention",
+        "digirisk-permis-feu",
 		"digirisk-tools",
 		"digirisk-transfert",
 		"digi-setup",
@@ -21,7 +21,9 @@
 		"digirisk-setting",
     "profile",
     "user-edit",
-    "digirisk-dashboard-duer"
+    "digirisk-dashboard-duer",
+      "digirisk-dashboard-model",
+      "toplevel_page_digirisk-dashboard-model"
 	],
 	"insert_scripts_pages_css": [
     "digirisk-welcome",
@@ -38,7 +40,9 @@
 		"digi-setup",
 		"digirisk-handle-sorter",
 		"digirisk-setting",
-    "digirisk-dashboard-duer"
+    "digirisk-dashboard-duer",
+      "digirisk-dashboard-model",
+      "toplevel_page_digirisk-dashboard-model"
 	],
 	"externals": [
 	],
