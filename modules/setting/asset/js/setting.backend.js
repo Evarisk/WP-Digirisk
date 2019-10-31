@@ -156,3 +156,7 @@ window.eoxiaJS.digirisk.setting.savedHtpasswd = function( triggeredElement, resp
 window.eoxiaJS.digirisk.setting.deletedParentSite = function( triggeredElement, response ) {
 	triggeredElement.closest( '.table-row' ).fadeOut();
 };
+
+window.eoxiaJS.digirisk.setting.savedChildSettings = function( triggeredElement, response ) {
+	window.location.href = response.data.url;
+};
