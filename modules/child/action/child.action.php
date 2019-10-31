@@ -266,9 +266,10 @@ class Child_Action {
 	}
 
 	public function callback_generate( \WP_REST_Request $request ) {
+		set_time_limit (0);
 		$params = $request->get_params();
 		if ( ! Child_Class::g()->check_hash( $params['hash'] ) ) {
-			$response = new \WP_REST_Response( $params['hash'], 404 );
+			$response = new \WP_REST_Response( false );
 			return $response;
 		}
 
@@ -295,8 +296,9 @@ class Child_Action {
 					);
 
 					Sheet_Groupment_Class::g()->create_document( $generation_status['document']->data['id'] );
-					\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
+					//\eoxia\LOG_Util::log( 'FIN - Génération du document groupement', 'digirisk' );
 				} elseif ( Workunit_Class::g()->get_type() === $society->data['type'] ) {
+					\eoxia\LOG_Util::log( 'Génération du document fiche de poste pour la société: ' . $society->data['unique_identifier'], 'digirisk_duer_mu' );
 					$generation_status = Sheet_Workunit_Class::g()->prepare_document( $society, array(
 						'parent' => $society,
 					) );
@@ -306,7 +308,7 @@ class Child_Action {
 					);
 
 					Sheet_Workunit_Class::g()->create_document( $generation_status['document']->data['id'] );
-					\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste', 'digirisk' );
+					\eoxia\LOG_Util::log( 'FIN - Génération du document fiche de poste la société: ' . $society->data['unique_identifier'], 'digirisk_duer_mu' );
 				}
 			}
 		}
