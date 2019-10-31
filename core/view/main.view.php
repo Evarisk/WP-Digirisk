@@ -21,7 +21,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="content-wrap">
-	<?php require PLUGIN_DIGIRISK_PATH . '/core/view/main-header.view.php'; ?>
+	<?php Digirisk::g()->display_header(); ?>
 
 	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			<div>
 				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/ressources-humaines.png" /></div>
 				<h3>GESTION DES RISQUES</h3>
-				<p>Les risques son traités comme suit :<br />
+				<p>Les risques sont traités comme suit :<br />
 					Selon la société et/ou groupement<br />
 					Selon unité de travail<br />
 					Selon photo<br />
