@@ -33,6 +33,7 @@ if ( ! empty( $list_type_document ) ) :
 							data-id="<?php esc_attr( 0 ); ?>"
 							data-type="<?php echo esc_attr( $key ); ?>"
 							data-action="set_model"
+					 		data-dashboard="<?php echo ! empty( $dashboard ) ? true : false; ?>"
 							data-nonce="<?php echo esc_attr( wp_create_nonce( 'associate_file' ) ); ?>">
 					<i class="fas fa-upload fa-fw"></i>
 					<span><?php esc_html_e( 'Envoyer votre modèle personnalisé', 'digirisk' ); ?></span>
