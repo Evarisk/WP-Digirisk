@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			foreach ( Digirisk::g()->menu as $key => $item ) :
 				$active = "";
 
-				if ( $key == $_GET['page'] ) :
+				if ( $key == $_REQUEST['page'] ) :
 					$active = "item-active";
 				endif;
 
@@ -39,9 +39,18 @@ defined( 'ABSPATH' ) || exit; ?>
 
 				if ( $have_right ) :
 					?>
-					<div class="item <?php echo esc_attr( $item['class'] ); ?> <?php echo esc_attr( $active ); ?>">
-						<a href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
-					</div>
+					<a class="item <?php echo esc_attr( $item['class'] ); ?> <?php echo esc_attr( $active ); ?>" href="<?php echo esc_url( $item['link'] ); ?>">
+						<div>
+							<?php
+							if ( ! empty( $item['icon'] ) ) :
+								?>
+								<i class="<?php echo esc_attr( $item['icon'] ); ?>"></i>
+								<?php
+							endif;
+							?>
+							<span href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['title'] ); ?></span>
+						</div>
+					</a>
 					<?php
 				else :
 					?>
@@ -59,9 +68,18 @@ defined( 'ABSPATH' ) || exit; ?>
 			if ( ! empty( Digirisk::g()->menu_bottom ) ) :
 				foreach ( Digirisk::g()->menu_bottom as $key => $item ) :
 					?>
-					<div class="item">
-						<a href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
-					</div>
+					<a class="item <?php echo esc_attr( $item['class'] ); ?>" href="<?php echo esc_url( $item['link'] ); ?>">
+						<div>
+							<?php
+							if ( ! empty( $item['icon'] ) ) :
+								?>
+								<i class="<?php echo esc_attr( $item['icon'] ); ?>"></i>
+								<?php
+							endif;
+							?>
+							<span><?php echo esc_html( $item['title'] ); ?></span>
+						</div>
+					</a>
 					<?php
 				endforeach;
 			endif;

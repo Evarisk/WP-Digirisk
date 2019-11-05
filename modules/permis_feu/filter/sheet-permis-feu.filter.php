@@ -220,7 +220,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	}
 
 	public function back_button( $content ) {
-		if ( 'digirisk-permis-feu' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/back-icon' );
 			$content .= ob_get_clean();
@@ -229,7 +229,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	}
 
 	public function change_title( $content ) {
-		if ( 'digirisk-permis-feu' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			$prevention = Permis_Feu_Class::g()->get( array( 'id' => $_GET['id'] ), true );
 
 			if ( $prevention->data[ 'is_end' ] ) {
@@ -243,7 +243,7 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	}
 
 	public function add_new_button( $content ) {
-		if ( 'digirisk-permis-feu' === $_GET['page'] && ! isset( $_GET['id'] ) ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && ! isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'new-button' );
 			$content .= ob_get_clean();

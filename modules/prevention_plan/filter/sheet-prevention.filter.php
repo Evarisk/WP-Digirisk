@@ -232,7 +232,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 	}
 
 	public function back_button( $content ) {
-		if ( 'digirisk-prevention' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-prevention' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/back-icon' );
 			$content .= ob_get_clean();
@@ -241,7 +241,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 	}
 
 	public function change_title( $content ) {
-		if ( 'digirisk-prevention' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-prevention' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			$prevention = Prevention_Class::g()->get( array( 'id' => $_GET['id'] ), true );
 
 			if ( $prevention->data[ 'is_end' ] ) {
@@ -255,7 +255,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 	}
 
 	public function add_new_button( $content ) {
-		if ( 'digirisk-prevention' === $_GET['page'] && ! isset( $_GET['id'] ) ) {
+		if ( 'digirisk-prevention' === $_REQUEST['page'] && ! isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'new-button' );
 			$content .= ob_get_clean();

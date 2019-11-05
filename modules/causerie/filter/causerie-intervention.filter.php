@@ -58,7 +58,7 @@ class Causerie_Intervention_Filter extends Identifier_Filter {
 	}
 
 	public function back_button( $content ) {
-		if ( 'digirisk-causerie' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-causerie' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/back-icon' );
 			$content .= ob_get_clean();
@@ -67,7 +67,7 @@ class Causerie_Intervention_Filter extends Identifier_Filter {
 	}
 
 	public function change_title( $content ) {
-		if ( 'digirisk-causerie' === $_GET['page'] && isset( $_GET['id'] ) ) {
+		if ( 'digirisk-causerie' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
 			$prevention = Causerie_Intervention_Class::g()->get( array( 'id' => $_GET['id'] ), true );
 
 			$content = __( sprintf( 'Causerie en cours en cours #%s', (int) $_GET['id'] ), 'digirisk' );

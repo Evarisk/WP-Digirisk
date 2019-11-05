@@ -20,7 +20,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="content-wrap">
+<div class="content-wrap content-reduce">
 	<?php Digirisk::g()->display_header(); ?>
 
 	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">

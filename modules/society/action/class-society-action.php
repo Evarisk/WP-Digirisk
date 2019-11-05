@@ -56,7 +56,7 @@ class Society_Action {
 		Society_Class::g()->update_by_type( $society );
 
 		ob_start();
-		Digirisk::g()->display( $id );
+		Digirisk::g()->display_page( $id );
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'society',

@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 		<input type="hidden" name="action" value="save_society" />
+		<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
 		<input type="hidden" name="id" value="<?php echo esc_attr( $society->data['id'] ); ?>" />
 		<input type="text" name="title" value="<?php echo esc_attr( $society->data['title'] ); ?>" />
 </span>
