@@ -290,17 +290,6 @@
   line-height: 1;
 }
 
-.wpeo-wrap .fab {
-  font-family: 'Font Awesome 5 Brands';
-}
-
-.wpeo-wrap .fa,
-.wpeo-wrap .fas,
-.wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-}
-
 .wpeo-wrap canvas {
   width: 100%;
 }
@@ -868,6 +857,7 @@
 }
 
 .wpeo-wrap .unit.toggled > .unit-container .toggle-unit .icon::before {
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
   content: "\f107" !important;
 }
 
@@ -896,6 +886,7 @@
 }
 
 .wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon:before {
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
   content: "\f105";
 }
 
@@ -1694,10 +1685,10 @@
   }
   .wpeo-wrap .table.evaluators thead th:nth-of-type(6) {
     display: block;
-    font-family: 'Font Awesome 5 Pro';
-    font-weight: 400;
   }
   .wpeo-wrap .table.evaluators thead th:nth-of-type(6):before {
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+    font-weight: 400;
     display: inline-block;
     content: "\f017";
     font-size: 20px;
@@ -1736,11 +1727,9 @@
     padding: 0 0.2em !important;
     font-size: 14px;
   }
-  .wpeo-wrap .table.evaluators tbody td:nth-of-type(5), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
-    font-family: 'Font Awesome 5 Pro';
-    font-weight: 400;
-  }
   .wpeo-wrap .table.evaluators tbody td:nth-of-type(5):before, .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+    font-weight: 400;
     content: "\f017";
     display: inline-block;
     font-size: 20px;
@@ -1763,20 +1752,18 @@
   }
   .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5) {
     width: 100%;
-    font-family: 'Font Awesome 5 Pro';
-    font-weight: 400;
   }
   .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(5):before {
     display: inline-block;
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+    font-weight: 400;
     content: "\f073";
     font-size: 20px;
     padding-right: 0.4em;
   }
-  .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6) {
-    font-family: 'Font Awesome 5 Pro';
-    font-weight: 400;
-  }
   .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(6):before {
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+    font-weight: 400;
     content: "\f017";
     display: inline-block;
     font-size: 20px;
@@ -2466,11 +2453,13 @@
 
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before {
   left: 16px;
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
   content: "\f104";
 }
 
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
   right: 16px;
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
   content: "\f105";
 }
 
@@ -3722,6 +3711,65 @@
   padding-left: 0;
 }
 
+.toplevel_page_digi-setup .content-wrap,
+.admin_page_digirisk-du .content-wrap,
+.admin_page_digirisk-causerie .content-wrap,
+.toplevel_page_digirisk-welcome .content-wrap,
+.profile_page_digirisk-users .content-wrap,
+.toplevel_page_digirisk-simple-risk-evaluation .content-wrap,
+.users_page_digirisk-users .content-wrap,
+.document-unique_page_digirisk-accident .content-wrap,
+.admin_page_digirisk-accident .content-wrap,
+.settings_page_digirisk-setting .content-wrap,
+.tools_page_digirisk-tools .content-wrap,
+.document-unique_page_digirisk-handle-sorter .content-wrap,
+.document-unique_page_digirisk-handle-risk .content-wrap,
+.document-unique_page_digirisk-permis-feu .content-wrap,
+.admin_page_digirisk-permis-feu .content-wrap,
+.admin_page_digirisk-prevention .content-wrap,
+.document-unique_page_digirisk-prevention .content-wrap,
+.admin_page_digirisk-handle-risk .content-wrap,
+.admin_page_digirisk-handle-sorter .content-wrap,
+.document-unique_page_digirisk-causerie .content-wrap,
+.toplevel_page_digirisk-dashboard-sites .content-wrap,
+.admin_page_digirisk-dashboard-add .content-wrap,
+.toplevel_page_digirisk-dashboard-duer .content-wrap,
+.toplevel_page_digirisk-dashboard-model .content-wrap,
+.admin_page_digirisk-dashboard-duer .content-wrap,
+.admin_page_digirisk-dashboard-model .content-wrap {
+  -webkit-transition: margin-left 0.2s ease-in;
+  transition: margin-left 0.2s ease-in;
+}
+
+.toplevel_page_digi-setup .content-wrap.content-reduce,
+.admin_page_digirisk-du .content-wrap.content-reduce,
+.admin_page_digirisk-causerie .content-wrap.content-reduce,
+.toplevel_page_digirisk-welcome .content-wrap.content-reduce,
+.profile_page_digirisk-users .content-wrap.content-reduce,
+.toplevel_page_digirisk-simple-risk-evaluation .content-wrap.content-reduce,
+.users_page_digirisk-users .content-wrap.content-reduce,
+.document-unique_page_digirisk-accident .content-wrap.content-reduce,
+.admin_page_digirisk-accident .content-wrap.content-reduce,
+.settings_page_digirisk-setting .content-wrap.content-reduce,
+.tools_page_digirisk-tools .content-wrap.content-reduce,
+.document-unique_page_digirisk-handle-sorter .content-wrap.content-reduce,
+.document-unique_page_digirisk-handle-risk .content-wrap.content-reduce,
+.document-unique_page_digirisk-permis-feu .content-wrap.content-reduce,
+.admin_page_digirisk-permis-feu .content-wrap.content-reduce,
+.admin_page_digirisk-prevention .content-wrap.content-reduce,
+.document-unique_page_digirisk-prevention .content-wrap.content-reduce,
+.admin_page_digirisk-handle-risk .content-wrap.content-reduce,
+.admin_page_digirisk-handle-sorter .content-wrap.content-reduce,
+.document-unique_page_digirisk-causerie .content-wrap.content-reduce,
+.toplevel_page_digirisk-dashboard-sites .content-wrap.content-reduce,
+.admin_page_digirisk-dashboard-add .content-wrap.content-reduce,
+.toplevel_page_digirisk-dashboard-duer .content-wrap.content-reduce,
+.toplevel_page_digirisk-dashboard-model .content-wrap.content-reduce,
+.admin_page_digirisk-dashboard-duer .content-wrap.content-reduce,
+.admin_page_digirisk-dashboard-model .content-wrap.content-reduce {
+  margin-left: 50px;
+}
+
 .toplevel_page_digi-setup .nav-wrap,
 .admin_page_digirisk-du .nav-wrap,
 .admin_page_digirisk-causerie .nav-wrap,
@@ -3754,6 +3802,300 @@
   left: 0;
   top: 0;
   bottom: 0px;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce,
+.users_page_digirisk-users .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce {
+  width: 50px;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce .nav-menu,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce .nav-menu,
+.users_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce .nav-menu,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce .nav-menu,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu {
+  width: 50px;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce .nav-menu a,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce .nav-menu a,
+.users_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce .nav-menu a,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce .nav-menu a,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a {
+  width: 50px;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a span,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce .nav-menu a span,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a span,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce .nav-menu a span,
+.users_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a span,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce .nav-menu a span,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a span,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a span,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce .nav-menu a span,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a span,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a span,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a span {
+  display: none;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a div,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce .nav-menu a div,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a div,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce .nav-menu a div,
+.users_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a div,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce .nav-menu a div,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a div,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a div,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce .nav-menu a div,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a div,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a div,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a div {
+  padding-left: 16px;
+  text-align: center;
+  margin: auto;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a i,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce .nav-menu a i,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a i,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce .nav-menu a i,
+.users_page_digirisk-users .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce .nav-menu a i,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce .nav-menu a i,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce .nav-menu a i,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce .nav-menu a i,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce .nav-menu a i,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a i,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce .nav-menu a i,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce .nav-menu a i {
+  margin: auto;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce #logo,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce #logo,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce #logo,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce #logo,
+.users_page_digirisk-users .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce #logo,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce #logo,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce #logo,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce #logo,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo {
+  height: 40px;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce #logo h1,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce #logo h1,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce #logo h1,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce #logo h1,
+.users_page_digirisk-users .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce #logo h1,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce #logo h1,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo h1,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce #logo h1,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce #logo h1,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo h1,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo h1,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo h1 {
+  height: inherit;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce #logo a,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce #logo a,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce #logo a,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce #logo a,
+.users_page_digirisk-users .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce #logo a,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce #logo a,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo a,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce #logo a,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce #logo a,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo a,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo a,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo a {
+  height: inherit;
+}
+
+.toplevel_page_digi-setup .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-du .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-causerie .nav-wrap.wrap-reduce #logo img,
+.toplevel_page_digirisk-welcome .nav-wrap.wrap-reduce #logo img,
+.profile_page_digirisk-users .nav-wrap.wrap-reduce #logo img,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap.wrap-reduce #logo img,
+.users_page_digirisk-users .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-accident .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-accident .nav-wrap.wrap-reduce #logo img,
+.settings_page_digirisk-setting .nav-wrap.wrap-reduce #logo img,
+.tools_page_digirisk-tools .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-permis-feu .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-prevention .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-prevention .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-handle-risk .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-handle-sorter .nav-wrap.wrap-reduce #logo img,
+.document-unique_page_digirisk-causerie .nav-wrap.wrap-reduce #logo img,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-dashboard-add .nav-wrap.wrap-reduce #logo img,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo img,
+.toplevel_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-dashboard-duer .nav-wrap.wrap-reduce #logo img,
+.admin_page_digirisk-dashboard-model .nav-wrap.wrap-reduce #logo img {
+  height: inherit;
 }
 
 .toplevel_page_digi-setup .nav-wrap #logo,
@@ -3782,8 +4124,41 @@
 .toplevel_page_digirisk-dashboard-model .nav-wrap #logo,
 .admin_page_digirisk-dashboard-duer .nav-wrap #logo,
 .admin_page_digirisk-dashboard-model .nav-wrap #logo {
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
   margin: auto;
   text-align: center;
+}
+
+.toplevel_page_digi-setup .nav-wrap .nav-menu,
+.admin_page_digirisk-du .nav-wrap .nav-menu,
+.admin_page_digirisk-causerie .nav-wrap .nav-menu,
+.toplevel_page_digirisk-welcome .nav-wrap .nav-menu,
+.profile_page_digirisk-users .nav-wrap .nav-menu,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu,
+.users_page_digirisk-users .nav-wrap .nav-menu,
+.document-unique_page_digirisk-accident .nav-wrap .nav-menu,
+.admin_page_digirisk-accident .nav-wrap .nav-menu,
+.settings_page_digirisk-setting .nav-wrap .nav-menu,
+.tools_page_digirisk-tools .nav-wrap .nav-menu,
+.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu,
+.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu,
+.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu,
+.admin_page_digirisk-permis-feu .nav-wrap .nav-menu,
+.admin_page_digirisk-prevention .nav-wrap .nav-menu,
+.document-unique_page_digirisk-prevention .nav-wrap .nav-menu,
+.admin_page_digirisk-handle-risk .nav-wrap .nav-menu,
+.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu,
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu {
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  overflow: hidden;
 }
 
 .toplevel_page_digi-setup .nav-wrap .nav-menu .item,
@@ -3812,8 +4187,12 @@
 .toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item,
 .admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item,
 .admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item {
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  display: block;
   -webkit-transition: background .1s ease,box-shadow .1s ease,color .1s ease;
   transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+  text-decoration: none;
 }
 
 .toplevel_page_digi-setup .nav-wrap .nav-menu .item:before,
@@ -3878,117 +4257,67 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-.toplevel_page_digi-setup .nav-wrap .nav-menu .item a, .toplevel_page_digi-setup .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-du .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-du .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-causerie .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-causerie .nav-wrap .nav-menu .item span,
-.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item span,
-.profile_page_digirisk-users .nav-wrap .nav-menu .item a,
-.profile_page_digirisk-users .nav-wrap .nav-menu .item span,
-.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item span,
-.users_page_digirisk-users .nav-wrap .nav-menu .item a,
-.users_page_digirisk-users .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-accident .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-accident .nav-wrap .nav-menu .item span,
-.settings_page_digirisk-setting .nav-wrap .nav-menu .item a,
-.settings_page_digirisk-setting .nav-wrap .nav-menu .item span,
-.tools_page_digirisk-tools .nav-wrap .nav-menu .item a,
-.tools_page_digirisk-tools .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-prevention .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-prevention .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item a,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span,
-.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span,
-.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a,
-.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span,
-.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a,
-.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span {
+.toplevel_page_digi-setup .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-du .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-causerie .nav-wrap .nav-menu .item div,
+.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item div,
+.profile_page_digirisk-users .nav-wrap .nav-menu .item div,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item div,
+.users_page_digirisk-users .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-accident .nav-wrap .nav-menu .item div,
+.settings_page_digirisk-setting .nav-wrap .nav-menu .item div,
+.tools_page_digirisk-tools .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-prevention .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item div,
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item div,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item div,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item div,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item div,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item div {
   padding: 16px;
   padding-left: 20px;
-  font-size: 1.1em;
+  font-size: 1.05em;
   display: block;
   color: #eee;
   text-decoration: none;
   font-weight: bolder;
 }
 
-.toplevel_page_digi-setup .nav-wrap .nav-menu .item a.disabled, .toplevel_page_digi-setup .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-du .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-du .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-causerie .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-causerie .nav-wrap .nav-menu .item span.disabled,
-.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item span.disabled,
-.profile_page_digirisk-users .nav-wrap .nav-menu .item a.disabled,
-.profile_page_digirisk-users .nav-wrap .nav-menu .item span.disabled,
-.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item span.disabled,
-.users_page_digirisk-users .nav-wrap .nav-menu .item a.disabled,
-.users_page_digirisk-users .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-accident .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-accident .nav-wrap .nav-menu .item span.disabled,
-.settings_page_digirisk-setting .nav-wrap .nav-menu .item a.disabled,
-.settings_page_digirisk-setting .nav-wrap .nav-menu .item span.disabled,
-.tools_page_digirisk-tools .nav-wrap .nav-menu .item a.disabled,
-.tools_page_digirisk-tools .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-prevention .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-prevention .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item span.disabled,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item a.disabled,
-.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item span.disabled,
-.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item span.disabled,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled,
-.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a.disabled,
-.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item span.disabled,
-.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item a.disabled,
-.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item span.disabled {
+.toplevel_page_digi-setup .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-du .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-causerie .nav-wrap .nav-menu .item div.disabled,
+.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item div.disabled,
+.profile_page_digirisk-users .nav-wrap .nav-menu .item div.disabled,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item div.disabled,
+.users_page_digirisk-users .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-accident .nav-wrap .nav-menu .item div.disabled,
+.settings_page_digirisk-setting .nav-wrap .nav-menu .item div.disabled,
+.tools_page_digirisk-tools .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-prevention .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item div.disabled,
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item div.disabled,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item div.disabled,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item div.disabled,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item div.disabled,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item div.disabled {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0.4;
 }
@@ -4022,6 +4351,35 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+.toplevel_page_digi-setup .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-du .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-causerie .nav-wrap .nav-menu .item i,
+.toplevel_page_digirisk-welcome .nav-wrap .nav-menu .item i,
+.profile_page_digirisk-users .nav-wrap .nav-menu .item i,
+.toplevel_page_digirisk-simple-risk-evaluation .nav-wrap .nav-menu .item i,
+.users_page_digirisk-users .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-accident .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-accident .nav-wrap .nav-menu .item i,
+.settings_page_digirisk-setting .nav-wrap .nav-menu .item i,
+.tools_page_digirisk-tools .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-handle-sorter .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-handle-risk .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-permis-feu .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-permis-feu .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-prevention .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-prevention .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-handle-risk .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-handle-sorter .nav-wrap .nav-menu .item i,
+.document-unique_page_digirisk-causerie .nav-wrap .nav-menu .item i,
+.toplevel_page_digirisk-dashboard-sites .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-dashboard-add .nav-wrap .nav-menu .item i,
+.toplevel_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item i,
+.toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item i,
+.admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item i {
+  margin-right: 10px;
+}
+
 .toplevel_page_digi-setup .nav-wrap .nav-menu.item-bottom,
 .admin_page_digirisk-du .nav-wrap .nav-menu.item-bottom,
 .admin_page_digirisk-causerie .nav-wrap .nav-menu.item-bottom,
@@ -4048,6 +4406,8 @@
 .toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu.item-bottom,
 .admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu.item-bottom,
 .admin_page_digirisk-dashboard-model .nav-wrap .nav-menu.item-bottom {
+  color: red;
+  display: block;
   position: absolute;
   width: 200px;
   bottom: 0;
