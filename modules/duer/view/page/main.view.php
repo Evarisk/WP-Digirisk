@@ -20,13 +20,9 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="content-wrap">
-	<?php Digirisk::g()->display_header(); ?>
-
-	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
-		<?php
-		echo do_shortcode( '[digi_navigation id="' . $id . '"]' );
-		echo do_shortcode( '[digi_application id="' . $id . '"]' );
-		?>
-	</div>
+<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
+	<?php
+	echo do_shortcode( '[digi_navigation id="' . $id . '"]' );
+	echo do_shortcode( '[digi_application id="' . $id . '"]' );
+	?>
 </div>

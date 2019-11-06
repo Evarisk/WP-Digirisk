@@ -16,40 +16,36 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="content-wrap">
-	<?php Digirisk::g()->display_header(); ?>
+<div class="wrap sorter-page digirisk-wrap wpeo-wrap">
+	<form action="<?php echo esc_attr( admin_url( 'admin-post.php' ) ); ?>" method="POST">
+		<input type="hidden" name="action" value="sorter_parent" />
+		<?php wp_nonce_field( 'callback_sorter_parent' ); ?>
+		<div class="updated settings-error notice <?php echo $display_notice ? '' : 'hidden'; ?>">
+			<p>
+				<strong><?php esc_html_e( 'Organisation enregistrées.', 'digirisk' ); ?></strong>
+			</p>
+		</div>
 
-	<div class="wrap sorter-page digirisk-wrap wpeo-wrap">
-		<form action="<?php echo esc_attr( admin_url( 'admin-post.php' ) ); ?>" method="POST">
-			<input type="hidden" name="action" value="sorter_parent" />
-			<?php wp_nonce_field( 'callback_sorter_parent' ); ?>
-			<div class="updated settings-error notice <?php echo $display_notice ? '' : 'hidden'; ?>">
-				<p>
-					<strong><?php esc_html_e( 'Organisation enregistrées.', 'digirisk' ); ?></strong>
-				</p>
-			</div>
+		<table class="treetable">
+			<caption>
+				<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'expandAll' ); return false;">Tout déplier</a>
+				<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'collapseAll' ); return false;">Tout replier</a>
+			</caption>
+			<tbody>
+				<tr class="branch expanded" data-tt-id="<?php echo esc_attr( $main_society->data['id'] ); ?>" data-tt-parent-id="<?php echo esc_attr( $main_society->data['parent_id'] ); ?>">
+					<td>
+						<span class="<?php echo esc_attr( $main_society->data['type'] ); ?>"><?php echo esc_html( $main_society->data['title'] ); ?></span>
+					</td>
+				</tr>
+				<?php
+				\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
+					'i' => 0,
+					'establishments' => $establishments,
+				) );
+				?>
+			</tbody>
+		</table>
 
-			<table class="treetable">
-				<caption>
-					<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'expandAll' ); return false;">Tout déplier</a>
-					<a href="#" class="wpeo-button button-main" onclick="jQuery( '.treetable' ).treetable( 'collapseAll' ); return false;">Tout replier</a>
-				</caption>
-				<tbody>
-					<tr class="branch expanded" data-tt-id="<?php echo esc_attr( $main_society->data['id'] ); ?>" data-tt-parent-id="<?php echo esc_attr( $main_society->data['parent_id'] ); ?>">
-						<td>
-							<span class="<?php echo esc_attr( $main_society->data['type'] ); ?>"><?php echo esc_html( $main_society->data['title'] ); ?></span>
-						</td>
-					</tr>
-					<?php
-					\eoxia\View_Util::exec( 'digirisk', 'page_sorter', 'list', array(
-						'i' => 0,
-						'establishments' => $establishments,
-					) );
-					?>
-				</tbody>
-			</table>
-
-			<input type="submit" class="button button-primary" disabled="true" value="<?php esc_html_e( 'Enregistrer', 'digirisk' ); ?>">
-		</form>
-	</div>
+		<input type="submit" class="button button-primary" disabled="true" value="<?php esc_html_e( 'Enregistrer', 'digirisk' ); ?>">
+	</form>
 </div>

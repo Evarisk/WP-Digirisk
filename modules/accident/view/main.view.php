@@ -15,10 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="content-wrap">
-	<?php Digirisk::g()->display_header(); ?>
-
-	<div class="wrap wpeo-wrap digirisk-wrap">
-		<?php Accident_Class::g()->display_accident_list(); ?>
-	</div>
+<div class="wrap wpeo-wrap digirisk-wrap">
+	<?php Accident_Class::g()->display_accident_list(); ?>
 </div>

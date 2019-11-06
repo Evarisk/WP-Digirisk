@@ -43,7 +43,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $id ) ) {
 			$this->display_single( $id );
 		} else {
-			require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'main' );
 		}
 	}
@@ -51,8 +50,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	public function display_single( $id ){
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
-
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 
 		if ( ! empty( $prevention ) ) {
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(

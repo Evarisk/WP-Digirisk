@@ -45,7 +45,6 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $id ) ) {
 			$this->display_single( $id );
 		} else {
-			require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'main' );
 		}
 	}
@@ -53,7 +52,6 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 	public function display_single( $id ){
 
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 		if ( ! empty( $permis_feu ) ) {
 			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/main', array(
 				'permis_feu' => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu )

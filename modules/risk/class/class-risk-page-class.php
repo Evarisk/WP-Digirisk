@@ -95,8 +95,6 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 		$risk_categories = Risk_Category_Class::g()->get();
 
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
-
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/main', array(
 			'current_page'    => $current_page,
 			'number_page'     => $number_page,

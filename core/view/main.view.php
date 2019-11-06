@@ -20,41 +20,38 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="content-wrap content-reduce">
-	<?php Digirisk::g()->display_header(); ?>
 
-	<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
+<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 
-		<h2>GÉREZ VOTRE DOCUMENT UNIQUE, AFFICHAGE LÉGAL, ET BIEN PLUS...</h2>
+	<h2>GÉREZ VOTRE DOCUMENT UNIQUE, AFFICHAGE LÉGAL, ET BIEN PLUS...</h2>
 
-		<div class="wpeo-gridlayout grid-3 top-content">
-			<div>
-				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/ressources-humaines.png" /></div>
-				<h3>GESTION DES RISQUES</h3>
-				<p>Les risques sont traités comme suit :<br />
-					Selon la société et/ou groupement<br />
-					Selon unité de travail<br />
-					Selon photo<br />
-				</p>
-			</div>
+	<div class="wpeo-gridlayout grid-3 top-content">
+		<div>
+			<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/ressources-humaines.png" /></div>
+			<h3>GESTION DES RISQUES</h3>
+			<p>Les risques sont traités comme suit :<br />
+				Selon la société et/ou groupement<br />
+				Selon unité de travail<br />
+				Selon photo<br />
+			</p>
+		</div>
 
-			<div>
-				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/document-unique.png" /></div>
-				<h3>DOCUMENT UNIQUE</h3>
-				<p>Impression en un clic de votre Document Unique<br />
-					Personnalisation des fiches de poste<br />
-					Impression des fiches de poste<br />
-					Export natif au format Open Office<br />
-					Personnalisable facilement avec Open Office
-				</p>
-			</div>
+		<div>
+			<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/document-unique.png" /></div>
+			<h3>DOCUMENT UNIQUE</h3>
+			<p>Impression en un clic de votre Document Unique<br />
+				Personnalisation des fiches de poste<br />
+				Impression des fiches de poste<br />
+				Export natif au format Open Office<br />
+				Personnalisable facilement avec Open Office
+			</p>
+		</div>
 
-			<div>
-				<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/gestion-des-risques.png" /></div>
-				<h3>GESTION AFFICHAGE LÉGAL</h3>
-				<p>Impression de l'affichage légal<br />Impression des fiches de postes
-				</p>
-			</div>
+		<div>
+			<div><img src="https://www.digirisk.com/wp-content/uploads/2017/11/gestion-des-risques.png" /></div>
+			<h3>GESTION AFFICHAGE LÉGAL</h3>
+			<p>Impression de l'affichage légal<br />Impression des fiches de postes
+			</p>
 		</div>
 	</div>
 </div>

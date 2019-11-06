@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -43,7 +45,7 @@ class Causerie_Page_Action {
 	 * @return  void
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		CMH::register_menu( 'digirisk', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), 'fa fa-comments', 4 );
 	}
 
 	/**

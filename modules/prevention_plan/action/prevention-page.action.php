@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -36,7 +38,7 @@ class Prevention_Page_Action {
 	}
 
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Plan de prévention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_prevention', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		CMH::register_menu( 'digirisk', __( 'Plan de prévention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_prevention', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), 'fa fa-info', 4 );
 	}
 
 	/**

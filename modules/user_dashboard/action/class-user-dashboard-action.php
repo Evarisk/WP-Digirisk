@@ -18,6 +18,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -31,7 +33,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	 * @since 6.1.6
 	 */
 	protected function construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 30 );
 
 		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
 		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );
@@ -45,7 +47,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	 * @since 6.1.6
 	 */
 	public function callback_admin_menu() {
-		add_users_page( __( 'Utilisateurs', 'digirisk' ), __( 'Utilisateurs DigiRisk', 'digirisk' ), 'manage_users', 'digirisk-users', array( $this, 'callback_users_page' ) );
+		CMH::register_menu( 'digirisk', __( 'Utilisateurs', 'digirisk' ), __( 'Utilisateurs', 'digirisk' ), 'manage_users', 'digirisk-users', array( $this, 'callback_users_page' ), 'fa fa-user' );
 	}
 
 	/**

@@ -35,9 +35,6 @@ window.eoxiaJS.digirisk.core.event = function() {
 	jQuery( document ).on( 'click', '.current-site .wpeo-dropdown .dropdown-toggle', window.eoxiaJS.digirisk.core.focusHeaderSearch );
 	jQuery( document ).on( 'keyup', '.search-item input', window.eoxiaJS.digirisk.core.searchItems );
 
-	jQuery( document ).on( 'click', '.nav-wrap .minimize-menu', window.eoxiaJS.digirisk.core.handleMinimizeMenu );
-
-
 	var action = {
 		action: 'have_patch_note',
 	};
@@ -110,16 +107,3 @@ window.eoxiaJS.digirisk.core.searchItems = function (event) {
 		}
 	}
 };
-
-window.eoxiaJS.digirisk.core.handleMinimizeMenu = function (event) {
-	if ( jQuery( this ).find( 'i' ).hasClass( 'fa-arrow-left' ) ) {
-		jQuery('.nav-wrap').addClass('wrap-reduce');
-		jQuery( '.content-wrap' ).addClass( 'content-reduce' );
-		jQuery(this).find( 'i' ).removeClass('fa-arrow-left').addClass('fa-arrow-right');
-	} else {
-		jQuery('.nav-wrap').removeClass('wrap-reduce');
-		jQuery( '.content-wrap' ).removeClass( 'content-reduce' );
-		jQuery(this).find( 'i' ).addClass('fa-arrow-left').removeClass('fa-arrow-right');
-	}
-};
-

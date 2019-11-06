@@ -19,6 +19,8 @@
 namespace digi;
 
 defined( 'ABSPATH' ) || exit;
+use \eoxia\Custom_Menu_Handler as CMH;
+
 
 /**
  * Classe gérant les actions principales de l'application.
@@ -46,7 +48,7 @@ class Digirisk_Action {
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js_global' ), 10 );
 		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
-		add_action( 'admin_init', array( $this, 'redirect_to' ) );
+//		add_action( 'admin_init', array( $this, 'redirect_to' ) );
 
 		add_action( 'wp_ajax_have_patch_note', array( $this, 'have_patch_note' ) );
 		add_action( 'wp_ajax_close_change_log', array( $this, 'callback_close_change_log' ) );
@@ -163,7 +165,7 @@ class Digirisk_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_menu_page( __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk-welcome', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk-welcome', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 		}
 	}
 

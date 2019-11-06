@@ -40,9 +40,6 @@ class User_Dashboard_Class extends \eoxia\Singleton_Util {
 		$list_user   = User_Class::g()->get( array( 'exclude' => array( 1 ) ) );
 		$user_schema = User_Class::g()->get( array( 'schema' => true ), true );
 
-		if ( $use_nav ) {
-			require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
-		}
 		\eoxia\View_Util::exec( 'digirisk', 'user_dashboard', 'list', array(
 			'list_user'   => $list_user,
 			'user_schema' => $user_schema,

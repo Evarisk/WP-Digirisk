@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -26,7 +28,7 @@ class Setting_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 60 );
 		add_action( 'admin_post_update_accronym', array( $this, 'callback_update_accronym' ) );
 		add_action( 'wp_ajax_save_capability', array( $this, 'callback_save_capability' ) );
 
@@ -53,7 +55,7 @@ class Setting_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_options_page( 'Réglages', 'DigiRisk', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ) );
+			CMH::register_menu( 'digirisk', 'Réglages', 'Réglages', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ), 'fa fa-cog' );
 		}
 	}
 
@@ -126,8 +128,6 @@ class Setting_Action {
 				'page'        => $element['page'],
 			);
 		}
-
-		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
 
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,

@@ -14,6 +14,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -37,7 +39,7 @@ class DUER_Action {
 	}
 
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-du', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		CMH::register_menu( 'digirisk', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), 'fa fa-exclamation-triangle', 'bottom' );
 	}
 
 
