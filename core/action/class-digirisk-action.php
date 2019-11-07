@@ -164,8 +164,10 @@ class Digirisk_Action {
 	public function callback_admin_menu() {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
+		CMH::register_container( 'DigiRisk', 'DigiRisk', 'manage_options', 'digirisk' );
+
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk-welcome', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
+			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 		}
 	}
 
