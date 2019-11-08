@@ -27,8 +27,17 @@ class Navigation_Action {
 	 * @since 6.3.0
 	 */
 	public function __construct() {
+		add_action( 'wp_ajax_load_navigation', array( $this, 'load_navigation' ) );
 		add_action( 'wp_ajax_create_society', array( $this, 'callback_create_society' ) );
 		add_action( 'wp_ajax_load_society', array( $this, 'callback_load_society' ) );
+	}
+
+	public function load_navigation() {
+		ob_start();
+		echo do_shortcode( '[digi_navigation with_children="true"]' );
+		wp_send_json_success( array(
+			'view' => ob_get_clean(),
+		) );
 	}
 
 	/**

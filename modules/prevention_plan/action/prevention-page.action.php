@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -36,7 +38,7 @@ class Prevention_Page_Action {
 	}
 
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Prevention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_digirisk', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		CMH::register_menu( 'digirisk', __( 'Plan de prévention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_prevention', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), 'fa fa-info', 4 );
 	}
 
 	/**
@@ -119,19 +121,11 @@ class Prevention_Page_Action {
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE:
 				$prevention = Prevention_Page_Class::g()->save_society_information( $prevention, $society, $legal_display );
-
-				ob_start();
-				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-4', array(
-					'prevention' => $prevention,
-					'all_signed' => false
-				) );
-
-				break;
-			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT:
 				$prevention = Prevention_Class::g()->save_info_maitre_oeuvre();
 				if( ! $prevention->data[ 'is_end' ] ){
 					Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
 				}
+
 				$url_redirect = admin_url( 'admin.php?page=digirisk-prevention' );
 				break;
 			default:

@@ -15,6 +15,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -22,6 +24,10 @@ defined( 'ABSPATH' ) || exit;
  * Appelle la vue permettant d'afficher la navigation
  */
 class Digirisk extends \eoxia\Singleton_Util {
+
+	public $menu = array();
+
+	public $menu_bottom = array();
 
 	/**
 	 * Le constructeur
@@ -31,6 +37,8 @@ class Digirisk extends \eoxia\Singleton_Util {
 	protected function construct() {
 		add_image_size( 'digirisk-element-thumbnail', 200, 150, true );
 		add_image_size( 'digirisk-element-miniature', 50, 50, true );
+
+		CMH::add_logo( PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk-welcome' ) );
 	}
 
 	/**
@@ -42,7 +50,7 @@ class Digirisk extends \eoxia\Singleton_Util {
 	 *
 	 * @param integer $id L'ID de la société à afficher.
 	 */
-	public function display( $id = 0 ) {
+	public function display() {
 		$request_uri     = ! empty( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
 
@@ -110,6 +118,7 @@ class Digirisk extends \eoxia\Singleton_Util {
 			$admin_role->add_cap( 'manage_digirisk' );
 		}
 	}
+
 }
 
 new Digirisk();

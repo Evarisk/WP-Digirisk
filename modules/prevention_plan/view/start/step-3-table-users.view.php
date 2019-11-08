@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<label class="form-field-container">
 							<span>
 								<?php if( isset( $user[ 'phone' ] ) ): ?>
-									<?php echo esc_attr( $user[ 'phone' ] ); ?>
+									<?php echo esc_attr( '(' . $user['phone_callingcode'] . ')' . $user[ 'phone' ] ); ?>
 								<?php else: ?>
 									-
 								<?php endif; ?>
@@ -112,10 +112,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  			</div>
  		</div>
 		<div class="table-cell">
-			<div class="wpeo-form">
+			<div class="wpeo-form phone-bloc digi-phone-user">
 				<div class="form-element">
 					<label class="form-field-container">
-						<input type="text" name="phone" class="form-field">
+						<?php
+						\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
+							'local' => get_locale(),
+							'width' => 'none',
+							'name'  => 'phone-callingcode',
+							'value' => 0,
+						) );
+						?>
+					</label>
+				</div>
+
+				<div class="form-element">
+					<label class="form-field-container">
+						<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
+						<input type="text" class="form-field element-phone-input" name="phone" value="" style="width: auto;">
 					</label>
 				</div>
 			</div>

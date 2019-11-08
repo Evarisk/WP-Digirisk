@@ -153,10 +153,12 @@
 			}
 			.owl-prev:before {
 				left: 16px;
+				font-family: $font__icon;
 				content: fa-content($fa-var-angle-left);
 			}
 			.owl-next:before {
 				right: 16px;
+				font-family: $font__icon;
 				content: fa-content($fa-var-angle-right);
 			}
 		}

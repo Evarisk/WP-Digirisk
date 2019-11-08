@@ -23,11 +23,11 @@ global $eo_search;
 <?php else: ?>
 	<tr class="intervention-row edit unite-de-travail-class" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 <?php endif; ?>
-	<?php if( isset( $intervention ) ): ?>
+	<?php if ( isset( $intervention ) ) : ?>
 		<input type="hidden" name="unite-travail-hidden" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'unite_travail' ] ); ?>">
 	<?php endif; ?>
 	<td class="w100 padding" data-title="<?php esc_html_e( 'IdRPP', 'digirisk' ); ?>" style="padding: 30px;">
-		<?php if( isset( $intervention ) ): ?>
+		<?php if ( isset( $intervention ) ) : ?>
 			<?php echo esc_attr( $intervention->data['key_unique'] ); ?>
 		<?php else: ?>
 			-
@@ -36,7 +36,15 @@ global $eo_search;
 	<td class="w150 padding unite-de-travail-element" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
 		<div class="wpeo-form">
 			<div class="form-element">
-				<?php $eo_search->display( 'accident_post' ); ?>
+				<?php
+				$name_unite = '';
+				if ( ! empty( $intervention->data ) ) {
+					$post       = get_post( $intervention->data['unite_travail'] );
+					$unique     = get_post_meta( $intervention->data['unite_travail'], '_wpdigi_unique_identifier', true );
+					$name_unite = $unique . ' - ' . $post->post_title;
+				}
+				$eo_search->display( 'accident_post', $name_unite );
+				?>
 			</div>
 		</div>
 

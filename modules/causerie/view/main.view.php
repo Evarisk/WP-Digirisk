@@ -16,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="wrap wrap-causerie digirisk-wrap wpeo-wrap">
-	<h2><?php esc_html_e( 'Causeries', 'digirisk' ); ?></h2>
 	<div class="wpeo-tab">
 		<ul class="tab-list tab-select-redirect">
 			<li class="tab-element <?php echo $page == "dashboard" ? 'tab-active' : ''; ?>" data-tab="dashboard" data-url="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&tab=dashboard' ) ); ?>">

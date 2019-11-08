@@ -44,7 +44,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	   </div>
    </div>
    <div class="table-cell">
-	  <div class="wpeo-form">
+	  <div class="wpeo-form phone-bloc digi-phone-user">
+		  <div class="form-element">
+			  <label class="form-field-container">
+				  <?php
+				  \eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
+					  'local' => get_locale(),
+					  'width' => 'none',
+					  'name'  => 'phone-callingcode',
+					  'value' => $user['phone_callingcode'],
+				  ) );
+				  ?>
+			  </label>
+		  </div>
+
 		  <div class="form-element">
 			  <label class="form-field-container">
 				  <?php if( isset( $user[ 'phone' ] ) ): ?>

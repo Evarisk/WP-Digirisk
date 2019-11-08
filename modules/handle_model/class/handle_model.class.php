@@ -31,10 +31,6 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 			'title' => 'Document unique',
 			'class' => '\digi\DUER_Class',
 		),
-		'duer_mu'                            => array(
-			'title' => 'Document unique Mu',
-			'class' => '\digirisk_dashboard\DUER_Class',
-		),
 		'sheet_groupment'                    => array(
 			'title' => 'Groupement',
 			'class' => '\digi\Sheet_Groupment_Class',
@@ -67,12 +63,34 @@ class Handle_Model_Class extends \eoxia\Singleton_Util {
 			'title' => 'Registre accidents de travail bénin',
 			'class' => '\digi\Registre_AT_Benin_Class',
 		),
+		'causerie'                          => array(
+			'title' => 'Causerie sécurité',
+			'class' => '\digi\Sheet_Causerie_Class',
+		),
+		'liste_des_risques_actions'         => array(
+			'title' => 'Liste des risques avec actions',
+			'class' => '\digi\Listing_Risk_Corrective_Task_Class',
+		),
+		'liste_des_risques_photos'          => array(
+			'title' => 'Liste des risques avec photos',
+			'class' => '\digi\Listing_Risk_Picture_Class',
+		),
+		'plan_prevention'                 => array(
+			'title' => 'Plan prévention',
+			'class' => '\digi\Sheet_Prevention_Class',
+		),
+		'permis_de_feu'                   => array(
+			'title' => 'Permis de feu',
+			'class' => '\digi\Sheet_Permis_Feu_Class',
+		),
 	);
 
 	/**
 	 * Le constructeur
 	 */
-	protected function construct() {}
+	protected function construct() {
+		$this->list_type_document = apply_filters( 'digi_model_odt', $this->list_type_document );
+	}
 
 	/**
 	 * Appelle la vue main.view.php pour afficher la gestion des modèles personnalisés.

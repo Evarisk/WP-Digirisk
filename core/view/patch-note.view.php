@@ -16,9 +16,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit;
 
-$result = Digirisk::g()->get_patch_note(); ?>
-
-<?php if ( true === $result['status'] && ! empty( $result['content'] ) ) : ?>
+if ( true === $result['status'] && ! empty( $result['content'] ) ) : ?>
 	<div class="wpeo-notification patch-note notification-active">
 		<img class="notification-thumbnail" src="<?php echo esc_attr( PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon_hd.png' ); ?>" />
 

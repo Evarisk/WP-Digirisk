@@ -31,6 +31,10 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 
 		add_filter( 'eo_model_sheet-permisfeu_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'digi_sheet-permisfeu_document_data', array( $this, 'callback_digi_document_data' ), 9, 2 );
+
+		add_filter( 'eoxia_main_header_before', array( $this, 'back_button' ) );
+		add_filter( 'eoxia_main_header_title', array( $this, 'change_title' ) );
+		add_filter( 'eoxia_main_header_li', array( $this, 'add_new_button' ) );
 	}
 
 	/**
@@ -48,8 +52,8 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 	public function before_save_doc( $data, $args ) {
 		$upload_dir = wp_upload_dir();
 
-		$data['title']  = current_time( 'Ymd' ) . '_';
-		$data['title'] .= '_fiche_permisfeu_';
+		$data['title']  = current_time( 'Ymd' );
+		$data['title'] .= '_permisfeu_';
 
 		$data[ 'title' ] .= $data[ 'parent' ]->data[ 'unique_identifier' ];
 
@@ -213,6 +217,39 @@ class Sheet_Permis_Feu_Filter extends Identifier_Filter {
 		}
 
 		return $picture;
+	}
+
+	public function back_button( $content ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
+			ob_start();
+			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/back-icon' );
+			$content .= ob_get_clean();
+		}
+		return $content;
+	}
+
+	public function change_title( $content ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && isset( $_GET['id'] ) ) {
+			$prevention = Permis_Feu_Class::g()->get( array( 'id' => $_GET['id'] ), true );
+
+			if ( $prevention->data[ 'is_end' ] ) {
+				$content = __( sprintf( 'Plan de Prevention en modification #%s', (int) $_GET['id'] ), 'digirisk' );
+			} else {
+				$content = __( sprintf( 'Plan de Prevention en cours #%s', (int) $_GET['id'] ), 'digirisk' );
+
+			}
+		}
+		return $content;
+	}
+
+	public function add_new_button( $content ) {
+		if ( 'digirisk-permis-feu' === $_REQUEST['page'] && ! isset( $_GET['id'] ) ) {
+			ob_start();
+			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'new-button' );
+			$content .= ob_get_clean();
+		}
+
+		return $content;
 	}
 
 }

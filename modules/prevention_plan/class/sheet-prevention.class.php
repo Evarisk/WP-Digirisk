@@ -81,7 +81,7 @@ class Sheet_Prevention_Class extends Document_Class {
 	 *
 	 * @var string
 	 */
-	protected $odt_name = 'plan_prevention_simplifie';
+		protected $odt_name = 'plan_prevention_simplifie-2';
 
 	/**
 	 * Cette méthode génère la fiche du plan de prévention

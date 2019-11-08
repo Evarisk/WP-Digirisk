@@ -50,11 +50,12 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	public function display_single( $id ){
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
-		if( ! empty( $prevention ) ){
+
+		if ( ! empty( $prevention ) ) {
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(
 				'prevention' => $prevention
 			) );
-		}else{
+		} else{
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'main' );
 		}
 	}
@@ -93,6 +94,32 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
+	public function display_outofdate() {
+		$args = array(
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_wpdigi_prevention_date_end_exist',
+					'compare' => '=',
+					'value'   => 'defined',
+				),
+				array(
+					'key'     => '_wpdigi_prevention_date_end',
+					'value'   => date( "Y-m-d" ),
+					'compare' => '<',
+					'type'    => 'DATE',
+				),
+			),
+		);
+
+		$preventions = Prevention_Class::g()->get( $args );
+
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'outofdate/main', array(
+			'preventions' => $preventions,
+			'nbr' => count( $preventions )
+		) );
+	}
+
 	public function display_step_nbr( $prevention ){
 		$user = null;
 
@@ -112,7 +139,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 				'post_parent'    => $society->data[ 'id' ],
 			), true );
 		}
-		$this->register_search( $user );
+		$this->register_search( $user, $prevention );
 
 		$file = "step-" . $prevention->data[ 'step' ];
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/' . $file, array(
@@ -123,7 +150,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
-	public function register_search( $former, $post_values = array() ) {
+	public function register_search( $former, $prevention, $post_values = array() ) {
 		global $eo_search;
 
 		$args_causerie_former = array(
@@ -141,6 +168,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 
 		$eo_search->register_search( 'prevention_participants', $args_prevention_participants );
 
+
 		$args_accident_post = array(
 			'type'  => 'post',
 			'name'  => 'unitedetravail',
@@ -148,6 +176,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 				'model_name' => array(
 					'\digi\Group_Class',
 					'\digi\Workunit_Class',
+					'\digi\Society_Class',
 				),
 				'meta_query' => array(
 					'relation' => 'OR',

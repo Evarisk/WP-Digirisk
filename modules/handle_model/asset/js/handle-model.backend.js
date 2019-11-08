@@ -88,13 +88,18 @@ window.eoxiaJS.digirisk.handleModel.associateFile = function() {
 	var data = {
 		action: 'set_model',
 		type: window.eoxiaJS.digirisk.handleModel.currentButton.data( 'type' ),
-		file_id: window.eoxiaJS.digirisk.handleModel.selectedInfos.id
+		file_id: window.eoxiaJS.digirisk.handleModel.selectedInfos.id,
+		dashboard: window.eoxiaJS.digirisk.handleModel.currentButton.data( 'dashboard' )
 	};
 
 	window.eoxiaJS.loader.display( window.eoxiaJS.digirisk.handleModel.currentButton );
 
 	jQuery.post( window.ajaxurl, data, function( response ) {
-		jQuery( '#digi-handle-model' ).html( response.data.view );
+		if ( response.data.dashboard ) {
+			jQuery( '.model-items' ).replaceWith( response.data.view );
+		} else {
+			jQuery('#digi-handle-model').html(response.data.view);
+		}
 	} );
 };
 

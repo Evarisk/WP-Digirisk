@@ -10,6 +10,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -37,8 +39,7 @@ class Risk_Page_Action {
 	 * @since 6.2.7
 	 */
 	public function callback_admin_menu() {
-		$hook = add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Risques', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_digirisk', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
-		add_action( 'load-' . $hook, array( $this, 'callback_add_screen_option' ) );
+		$hook = CMH::register_menu( 'digirisk', __( 'Listing de risque', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_listing_risque', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), 'fa fa-list', 4 );
 	}
 
 	/**

@@ -11,9 +11,16 @@
  *
  * @since     6.0.0
  * @version   7.0.0
+ *
  */
 
 namespace digi;
+
+/**
+ * @var Society_Model $society             La société.
+ * @var integer       $selected_society_id L'ID de la société actuellement séléctionnée.
+ * @var Society_Model[] $societies         Les sociétés enfant de la société principale.
+ */
 
 defined( 'ABSPATH' ) || exit; ?>
 
@@ -26,7 +33,9 @@ defined( 'ABSPATH' ) || exit; ?>
 	\eoxia\View_Util::exec( 'digirisk', 'navigation', 'list', array(
 		'selected_society_id' => $selected_society_id,
 		'societies'           => $societies,
-		'id'                  => $society->data['id'],
+		'id'                  => $society->ID,
+		'society'             => $society,
+		'with_children'       => $with_children,
 		'class'               => 'workunit-list',
 	) );
 	?>

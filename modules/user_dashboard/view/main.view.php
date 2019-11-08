@@ -16,9 +16,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="digirisk-wrap user-dashboard wpeo-wrap">
-	<h1><?php esc_html_e( 'Les utilisateurs de Digirisk', 'digirisk' ); ?></h1>
-
+<div class="digirisk-wrap user-dashboard wpeo-wrap wrap">
 	<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 
 	<!-- Liste les utilisateurs -->

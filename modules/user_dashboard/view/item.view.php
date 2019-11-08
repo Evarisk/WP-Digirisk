@@ -21,7 +21,10 @@ defined( 'ABSPATH' ) || exit; ?>
 	<td class="padding"><span><strong><?php echo esc_html( \eoxia\User_Class::g()->element_prefix . $user->data['id'] ); ?><strong></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['lastname'] ) ); ?></span></td>
 	<td class="padding"><span><?php echo esc_html( stripslashes( $user->data['firstname'] ) ); ?></span<</td>
-	<td class="padding"><span><?php echo esc_html( $user->data['email'] ); ?></span></td>
+	<td class="padding">
+		<span><?php echo esc_html( $user->data['email'] ); ?></span>
+		<?php echo apply_filters( 'digi_user_dashboard_item_email_after' , $user ); ?>
+	</td>
 	<td>
 		<div class="action wpeo-gridlayout grid-3 grid-gap-0">
 			<div

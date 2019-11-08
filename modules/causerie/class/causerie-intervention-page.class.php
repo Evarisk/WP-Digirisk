@@ -57,6 +57,8 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		$this->register_search( $final_causerie, $user );
 
+		require PLUGIN_DIGIRISK_PATH . '/core/view/main-navigation.view.php';
+
 		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/main', array(
 			'final_causerie' => $final_causerie,
 			'main_causerie'  => $main_causerie,

@@ -21,11 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'id' => $id,
 	) );
 
-	if ( ! empty( $societies ) ) :
-		foreach ( $societies as $society ) :
+	if ( ! empty( $societies->posts ) ) :
+		foreach ( $societies->posts as $society ) :
 			\eoxia\View_Util::exec( 'digirisk', 'navigation', 'item', array(
 				'selected_society_id' => $selected_society_id,
 				'society'             => $society,
+				'with_children'       => $with_children,
 			) );
 		endforeach;
 	endif;

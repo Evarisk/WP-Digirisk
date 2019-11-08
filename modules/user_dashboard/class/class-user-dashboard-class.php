@@ -36,7 +36,7 @@ class User_Dashboard_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return void
 	 */
-	public function display_list_user() {
+	public function display_list_user( $use_nav = true ) {
 		$list_user   = User_Class::g()->get( array( 'exclude' => array( 1 ) ) );
 		$user_schema = User_Class::g()->get( array( 'schema' => true ), true );
 

@@ -17,5 +17,6 @@
   "messages": [
     "empty",
     "generate"
-  ]
+  ],
+  "state": true
 }

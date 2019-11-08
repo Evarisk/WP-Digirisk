@@ -56,8 +56,7 @@ class Causerie_Page_Class extends \eoxia\Singleton_Util {
 		if ( ! empty( $id ) ) {
 			Causerie_Intervention_Page_Class::g()->display_single( $id );
 		} else {
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main',	array( 'page' => $page )
-			);
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'main', array( 'page' => $page ) );
 		}
 	}
 

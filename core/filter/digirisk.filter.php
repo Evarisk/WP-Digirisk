@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use digirisk_dashboard\Class_Digirisk_Dashboard_Core;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -59,7 +61,6 @@ class Digirisk_Filter {
 
 		return $param;
 	}
-
 }
 
 new Digirisk_Filter();

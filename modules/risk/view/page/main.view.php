@@ -15,10 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="digirisk-wrap wpeo-wrap risk-page">
-	
-	<h2>Tous les risques</h2>
-	
+
+<div class="digirisk-wrap wpeo-wrap risk-page wrap">
+
 	<form method="GET" action="<?php echo admin_url( 'admin.php' ); ?>" class="">
 		<input type="hidden" name="page" value="digirisk-handle-risk" />
 		<div class="form-element" style="float: left;">
@@ -26,11 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<label class="form-field-container">
 				<select name="category_risk_id" class="form-field">
 					<option value="0">Toutes les catégories</option>
-					<?php 
+					<?php
 					if ( ! empty( $risk_categories ) ) :
 						foreach ( $risk_categories as $category ) :
 							$selected = '';
-							
+
 							if ( $category->data['id'] == $_GET['category_risk_id'] ) :
 								$selected = 'selected="selected"';
 							endif;
@@ -43,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</select>
 			</label>
 		</div>
-		
+
 		<div class="form-element">
 			<input type="submit" value="Filtrer" />
 		</div>

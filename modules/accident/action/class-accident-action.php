@@ -14,6 +14,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -39,7 +41,7 @@ class Accident_Action {
 	 * @since 6.3.0
 	 */
 	public function callback_admin_menu() {
-		add_submenu_page( 'digirisk-simple-risk-evaluation', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_digirisk', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), PLUGIN_DIGIRISK_URL . 'core/assets/images/favicon2.png', 4 );
+		CMH::register_menu( 'digirisk', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_accident', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), 'fa fa-user-injured', 4 );
 	}
 
 	/**

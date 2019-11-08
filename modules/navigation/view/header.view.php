@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="society-header action-attribute"
 			data-nonce="<?php echo esc_attr( wp_create_nonce( 'load_right_container' ) ); ?>"
 			data-action="load_society"
-			data-establishment-id="<?php echo esc_attr( $society->data['id'] ); ?>"
+			data-establishment-id="<?php echo esc_attr( $society->ID ); ?>"
 			data-loader="digirisk-wrap"
 			data-namespace="digirisk"
 			data-module="navigation"
 			data-before-method="setUnitActive">
 	<span class="icon fas fa-building fa-fw"></span>
 	<div class="title">
-		<?php echo esc_html( $society->data['title'] ); ?>
+		<?php echo esc_html( $society->post_title ); ?>
 	</div>
 	<div class="add-container">
 		<div class="wpeo-button button-square-50 wpeo-tooltip-event" data-direction="bottom" data-color="light" aria-label="<?php echo esc_attr( 'Ajouter groupement', 'digirisk' ); ?>" data-type="Group_Class"><span class="button-icon dashicons dashicons-admin-multisite"></span><span class="button-add animated fas fa-plus-circle"></span></div>

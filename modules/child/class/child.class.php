@@ -42,13 +42,22 @@ class Child_Class extends \eoxia\Singleton_Util {
 		return $security_id;
 	}
 
+	/**
+	 * Found instance by hash.
+	 *
+	 * @since 7.4.0
+	 *
+	 * @param string $hash Hash to check.
+	 *
+	 * @return bool
+	 */
 	public function check_hash( $hash ) {
 		$site_key = \eoxia\Config_Util::$init['digirisk']->child->site_parent_key;
 		$sites    = get_option( $site_key, array() );
 
 		if ( ! empty( $sites ) ) {
 			foreach ( $sites as $key => $site ) {
-				if ( $site['hash'] == $hash ) {
+				if ( $site['hash'] === $hash ) {
 					return true;
 				}
 			}

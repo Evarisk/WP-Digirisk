@@ -16,6 +16,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -29,7 +31,7 @@ class Tools_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 50);
 		add_action( 'wp_ajax_fix_hidden_society', array( $this, 'fix_hidden_society' ) );
 	}
 
@@ -42,7 +44,7 @@ class Tools_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			add_management_page( 'DigiRisk', 'DigiRisk', 'manage_digirisk', 'digirisk-tools', array( $this, 'add_management_page' ) );
+			CMH::register_menu( 'digirisk','Outils', 'Outils', 'manage_tools', 'digirisk-tools', array( $this, 'add_management_page' ), 'fa fa-wrench' );
 		}
 	}
 

@@ -46,6 +46,7 @@
 	> .unit-container .toggle-unit .icon {
 		@extend .fal;
 		&::before {
+			font-family: $font__icon;
 			content: fa-content($fa-var-angle-down) !important;
 		}
 	}
@@ -77,6 +78,7 @@
 		.icon {
 			@extend .fas;
 			&:before {
+				font-family: $font__icon;
 				content: fa-content($fa-var-angle-right);
 			}
 		}

@@ -23,9 +23,9 @@
 		}
 		th:nth-of-type(6) {
 			display: block;
-			font-family: 'Font Awesome 5 Pro';
-			font-weight: 400;
 			&:before {
+				font-family: $font__icon;
+				font-weight: 400;
 				display: inline-block;
 				content: fa-content($fa-var-clock);
 				font-size: 20px;
@@ -70,9 +70,9 @@
 			font-size: 14px;
 		}
 		td:nth-of-type(5) {
-			font-family: 'Font Awesome 5 Pro';
-			font-weight: 400;
 			&:before {
+				font-family: $font__icon;
+				font-weight: 400;
 				content: fa-content($fa-var-clock);
 				display: inline-block;
 				font-size: 20px;
@@ -99,20 +99,20 @@
 		}
 		td:nth-of-type(5) {
 			width: 100%;
-			font-family: 'Font Awesome 5 Pro';
-			font-weight: 400;
 
 			&:before {
 				display: inline-block;
+				font-family: $font__icon;
+				font-weight: 400;
 				content: fa-content($fa-var-calendar-alt);
 				font-size: 20px;
 				padding-right: 0.4em;
 			}
 		}
 		td:nth-of-type(6) {
-			font-family: 'Font Awesome 5 Pro';
-			font-weight: 400;
 			&:before {
+				font-family: $font__icon;
+				font-weight: 400;
 				content: fa-content($fa-var-clock);
 				display: inline-block;
 				font-size: 20px;

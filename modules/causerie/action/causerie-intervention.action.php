@@ -128,8 +128,15 @@ class Causerie_Intervention_Action {
 				'all_signed'     => Causerie_Intervention_Page_Class::g()->check_all_signed( $final_causerie ),
 			) );
 		} else {
+			$user = null;
+
+			if ( ! empty( $final_causerie->data['former'] ) && ! empty( $final_causerie->data['former']['user_id'] ) ) {
+				$user = get_userdata( $final_causerie->data['former']['user_id'] );
+			}
+
 			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-1-signature', array(
 				'final_causerie' => $final_causerie,
+				'user'           => $user,
 			) );
 		}
 

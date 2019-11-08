@@ -35,6 +35,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- Footer -->
 
 		<div class="modal-footer">
+			<a class="wpeo-button button-erase-signature button-grey button-uppercase">
+				<i class="fas fa-eraser"></i>
+				<span>Effacer</span>
+			</a>
+
 			<a class="wpeo-button button-grey button-uppercase modal-close"><span>Annuler</span></a>
 
 			<?php if ( isset( $action ) ) : ?>

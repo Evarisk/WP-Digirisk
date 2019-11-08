@@ -24,7 +24,7 @@ window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function( triggeredEleme
 	window.scrollTo( 0, 0 );
 };
 
-window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus = "" ) {
+window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus ) {
 	jQuery( '.main-information-society .bloc-information-society' ).each( function( index ){
 		if( jQuery( this ).find( 'input[name="indicator-id"]' ).length == 0 || jQuery( this ).find( 'input[name="indicator-id"]' ).val() == "" ){
 			return;
@@ -48,7 +48,6 @@ window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus 
 			percent = jQuery( this ).find( '.bloc-indicator' ).attr( 'data-percent' );
 		}
 
-
 		// RED, ORANGE, YELLOW, GREEN
 		var color = window.eoxiaJS.digirisk.legalDisplay.getColorFromPercent( percent );
 
@@ -62,6 +61,11 @@ window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus 
 					}
 				],
 		};
+
+		if ( 0 == percent ) {
+			data_canvas_donut.datasets[0].backgroundColor = [ color, 'red' ];
+		}
+
 
 		var option = {
 			title: {},
@@ -118,10 +122,6 @@ window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator = function( focus 
 	} );
 };
 
-var color =
-
-
-
 window.eoxiaJS.digirisk.legalDisplay.getColorFromPercent = function ( percent ){
 	var color = [ 'rgb(255,1,1)', 'rgb(255,153,0)', 'rgb(255,213,0)', 'rgb(71,229,142)' ];
 
@@ -132,6 +132,6 @@ window.eoxiaJS.digirisk.legalDisplay.getColorFromPercent = function ( percent ){
 	}else if( percent > 25 ){
 		return color[1];
 	}else{
-		return color[0];
+		return color[1];
 	}
 }

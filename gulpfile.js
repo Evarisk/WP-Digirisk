@@ -35,7 +35,7 @@ var paths = {
 gulp.task('build_js_backend', function() {
 	return gulp.src( paths.js_backend)
 		.pipe(concat('backend.min.js'))
-		.pipe( uglify() )
+		// .pipe( uglify() )
 		.pipe(gulp.dest('core/assets/js/'))
 });
 
@@ -69,8 +69,8 @@ gulp.task('build_scss_frontend', function() {
 
 
 gulp.task('default', function() {
-	gulp.watch( paths.js_backend[0], gulp.series("build_js_backend") );
-	gulp.watch( paths.js_frontend[0], gulp.series("build_js_frontend") );
+	gulp.watch( paths.js_backend, gulp.series("build_js_backend") );
+	gulp.watch( paths.js_frontend, gulp.series("build_js_frontend") );
 	gulp.watch( paths.scss_backend[0], gulp.series("build_scss_backend") );
 	gulp.watch( paths.scss_frontend[0], gulp.series("build_scss_frontend") );
 });

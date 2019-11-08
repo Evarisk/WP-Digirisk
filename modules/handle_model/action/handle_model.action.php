@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use digirisk_dashboard\Model_Class;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -33,12 +35,15 @@ class Handle_Model_Action {
 	 * Appelle la méthode "upload_model" de "Handle_Model_Class"
 	 *
 	 * @since 6.2.1
+	 *
+	 * @todo: Nonce
 	 */
 	public function set_model() {
 		// check_ajax_referer( 'associate_file' );
-		//
-		$type    = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 0; // WPCS: input var ok.
-		$file_id = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0; // WPCS: input var ok.
+
+		$type      = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 0; // WPCS: input var ok.
+		$file_id   = ! empty( $_POST['file_id'] ) ? (int) $_POST['file_id'] : 0; // WPCS: input var ok.
+		$dashboard = ( isset( $_POST['dashboard'] ) && '1' == $_POST['dashboard'] ) ? true : false;
 
 		$file_path = str_replace( '\\', '/', get_attached_file( $file_id ) );
 		if ( ! Handle_Model_Class::g()->upload_model( $type, $file_path ) ) {
@@ -46,9 +51,14 @@ class Handle_Model_Action {
 		}
 
 		ob_start();
-		do_shortcode( '[digi-handle-model]' );
+		if ( $dashboard ) {
+			Model_Class::g()->display_items();
+		} else {
+			do_shortcode('[digi-handle-model]');
+		}
 		wp_send_json_success( array(
-			'view' => ob_get_clean(),
+			'dashboard' => $dashboard,
+			'view'      => ob_get_clean(),
 		) );
 	}
 

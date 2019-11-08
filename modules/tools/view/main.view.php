@@ -16,9 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="wrap wpeo-wrap">
-	<h1><?php esc_html_e( 'DigiRisk outils', 'digirisk' ); ?></h1>
-
+<div class="wrap wpeo-wrap digirisk-wrap">
 	<div class="wpeo-tab">
 		<ul class="tab-list">
 			<li class="tab-element tab-active" data-target="digi-data-export" ><?php esc_html_e( 'Export digirisk datas', 'digirisk' ); ?></li>

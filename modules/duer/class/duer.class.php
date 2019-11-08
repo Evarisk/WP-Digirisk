@@ -84,6 +84,13 @@ class DUER_Class extends Document_Class {
 	 */
 	protected $odt_name = 'document_unique';
 
+	public function display_page( $id = 0, $with_children = false ) {
+		\eoxia\View_Util::exec( 'digirisk', 'duer', 'page/main', array(
+			'id'            => $id,
+			'with_children' => $with_children,
+		) );
+	}
+
 	/**
 	 *
 	 * @param  [type] $element_id [description]

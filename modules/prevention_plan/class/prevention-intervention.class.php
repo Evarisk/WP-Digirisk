@@ -99,8 +99,9 @@ class Prevention_Intervention_Class extends \eoxia\Post_Class {
 
 	public function return_name_workunit( $id = 0 ){
 		$workunit = get_post( $id );
+		$identifier = get_post_meta( $id, '_wpdigi_unique_identifier', true );
 		if( ! empty( $workunit ) ){
-			return $workunit->post_title;
+			return $identifier . ' - ' . $workunit->post_title;
 		}
 		return '';
 	}

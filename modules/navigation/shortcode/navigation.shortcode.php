@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -46,7 +48,8 @@ class Navigation_Shortcode extends \eoxia\Singleton_Util {
 	 * @return string
 	 */
 	public function callback_digi_navigation( $atts ) {
-		$society_id = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
+		$society_id    = ! empty( $atts['id'] ) ? (int) $atts['id'] : 0;
+		$with_children = isset( $atts['with_children'] ) && $atts['with_children'] == 'true' ? true : false;
 
 		if ( 0 === $society_id ) {
 			$society    = Society_Class::g()->get_current_society();
@@ -54,9 +57,9 @@ class Navigation_Shortcode extends \eoxia\Singleton_Util {
 		}
 
 		ob_start();
-		Navigation_Class::g()->display( $society_id );
+		Navigation_Class::g()->display( $society_id, $with_children );
 		return ob_get_clean();
 	}
 }
 
-new Navigation_Shortcode();
+Navigation_Shortcode::g();

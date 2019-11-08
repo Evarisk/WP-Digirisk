@@ -70,9 +70,9 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 					'compare' => '!=',
 				),
 			),
-			
+
 		);
-		
+
 		if ( ! empty( $_GET['category_risk_id'] ) ) {
 			$args_where['tax_query'] = array(
 				array(
@@ -92,7 +92,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 
 		$count_risk  = count( Risk_Class::g()->get( $args_where ) );
 		$number_page = ceil( $count_risk / $per_page );
-		
+
 		$risk_categories = Risk_Category_Class::g()->get();
 
 		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/main', array(
@@ -135,7 +135,7 @@ class Risk_Page_Class extends \eoxia\Singleton_Util {
 				),
 			),
 		);
-		
+
 		if ( ! empty( $_GET['category_risk_id'] ) ) {
 			$args_where['tax_query'] = array(
 				array(
