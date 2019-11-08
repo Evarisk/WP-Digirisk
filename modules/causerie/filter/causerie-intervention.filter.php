@@ -25,8 +25,8 @@ class Causerie_Intervention_Filter extends Identifier_Filter {
 		add_filter( "eo_model_digi-final-causerie_after_get", array( $this, 'get_full_causerie_intervention' ), 11, 2 );
 		add_filter( 'wp_get_attachment_url', array( $this, 'honor_ssl_for_attachments' ));
 
-		add_filter( 'digirisk_main_header_before', array( $this, 'back_button' ) );
-		add_filter( 'digirisk_main_header_title', array( $this, 'change_title' ) );
+		add_filter( 'eoxia_main_header_before', array( $this, 'back_button' ) );
+		add_filter( 'eoxia_main_header_title', array( $this, 'change_title' ) );
 	}
 
 	/**

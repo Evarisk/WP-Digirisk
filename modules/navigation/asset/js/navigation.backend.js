@@ -50,8 +50,13 @@ window.eoxiaJS.digirisk.navigation.event = function() {
 window.eoxiaJS.digirisk.navigation.switchToggle = function( event ) {
 	event.preventDefault();
 
-	jQuery( this ).closest( '.unit' ).toggleClass( 'toggled' );
-	jQuery( this ).closest( '.unit' ).find( '.unit.new:first.active ' ).removeClass( 'active' );
+	if ( jQuery( this ).find( 'i' ).hasClass( 'fa-chevron-down' ) ) {
+		jQuery(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+		jQuery(this).closest('.unit').removeClass('toggled');
+	} else {
+		jQuery(this).find('i').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+		jQuery(this).closest('.unit').addClass('toggled');
+	}
 };
 
 /**
@@ -121,11 +126,13 @@ window.eoxiaJS.digirisk.navigation.toggleAll = function( event ) {
 	event.preventDefault();
 
 	if ( jQuery( this ).hasClass( 'toggle-plus' ) ) {
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit i').removeClass( 'fa-chevron-right').addClass( 'fa-chevron-down' );
 		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit' ).addClass( 'toggled' );
 	}
 
 	if ( jQuery( this ).hasClass( 'toggle-minus' ) ) {
 		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit.toggled' ).removeClass( 'toggled' );
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit i').addClass( 'fa-chevron-right').removeClass( 'fa-chevron-down' );
 	}
 };
 

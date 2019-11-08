@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use digirisk_dashboard\Class_Digirisk_Dashboard_Core;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -29,9 +31,6 @@ class Digirisk_Filter {
 	public function __construct() {
 		add_filter( 'upload_size_limit', array( $this, 'callback_upload_size_limit' ) );
 		add_filter( 'task_manager_get_tasks_args', array( $this, 'callback_task_manager_get_tasks_args' ) );
-
-		add_filter( 'digirisk_main_header_ul_after', array( $this, 'add_header_multisite' ) );
-
 	}
 
 	/**
@@ -62,43 +61,6 @@ class Digirisk_Filter {
 
 		return $param;
 	}
-
-	public function add_header_multisite( $content ) {
-		if ( is_multisite() ) {
-			$current_site = get_blog_details(get_current_blog_id());
-
-			$sites = get_sites();
-
-			usort($sites, function ($a, $b) {
-				$al = strtolower($a->blogname);
-				$bl = strtolower($b->blogname);
-
-				if ($al == $bl) {
-					return 0;
-				}
-				return ($al > $bl) ? +1 : -1;
-			});
-
-			if (!empty($sites)) {
-				foreach ($sites as $key => $site) {
-					if (!is_super_admin(get_current_user_id()) &&
-						($site->blog_id == $current_site->blog_id
-							|| empty(get_user_meta(get_current_user_id(), 'wp_' . $site->blog_id . '_user_level', true)))) {
-						unset($sites[$key]);
-					} else {
-						$sites[$key]->site_info = get_blog_details($sites[$key]->blog_id);
-					}
-				}
-			}
-
-			ob_start();
-			require(PLUGIN_DIGIRISK_PATH . '/core/view/header-multisite.view.php');
-			$content .= ob_get_clean();
-		}
-
-		return $content;
-	}
-
 }
 
 new Digirisk_Filter();

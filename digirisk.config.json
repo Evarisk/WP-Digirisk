@@ -1,10 +1,11 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "7.4.0",
+	"version": "7.5.0",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
-    "digirisk-welcome",
+      "digirisk-welcome",
+        "digirisk",
 		"digirisk-du",
 		"digirisk-handle-risk",
 		"digirisk-epi",
@@ -26,6 +27,7 @@
       "toplevel_page_digirisk-dashboard-model"
 	],
 	"insert_scripts_pages_css": [
+      "digirisk",
     "digirisk-welcome",
 		"digirisk-du",
 		"digirisk-handle-risk",

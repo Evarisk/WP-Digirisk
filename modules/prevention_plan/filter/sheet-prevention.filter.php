@@ -32,9 +32,9 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		add_filter( 'eo_model_sheet-prevention_before_post', array( $this, 'before_save_doc' ), 10, 2 );
 		add_filter( 'digi_sheet-prevention_document_data', array( $this, 'callback_digi_document_data' ), 9, 2 );
 
-		add_filter( 'digirisk_main_header_before', array( $this, 'back_button' ) );
-		add_filter( 'digirisk_main_header_title', array( $this, 'change_title' ) );
-		add_filter( 'digirisk_main_header_li', array( $this, 'add_new_button' ) );
+		add_filter( 'eoxia_main_header_before', array( $this, 'back_button' ) );
+		add_filter( 'eoxia_main_header_title', array( $this, 'change_title' ) );
+		add_filter( 'eoxia_main_header_li', array( $this, 'add_new_button' ) );
 	}
 
 	/**

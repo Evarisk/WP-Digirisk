@@ -302,7 +302,7 @@ window.eoxiaJS.digirisk.permisFeu.selectRisqueInDropdown = function( event ){
 
 
 window.eoxiaJS.digirisk.permisFeu.checkIfInterventionCanBeAdd = function( event, element ){
-	if( element == "" ){
+	if( ! element ){
 		element = jQuery( this );
 	}
 

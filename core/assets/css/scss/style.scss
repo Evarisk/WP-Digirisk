@@ -40,6 +40,8 @@
 		@import "page/plan-prevention/plan-prevention";
 	}
 }
+
+
 .wpeo-wrap {
 	// @import "normalize";
 	/*--------------------------------------------------------------
@@ -64,6 +66,14 @@
 /*--------------------------------------------------------------
 # Temporaire à ranger
 --------------------------------------------------------------*/
+.toplevel_page_digirisk {
+	.top-content {
+		> div {
+			margin: auto;
+		}
+	}
+}
+
 .wpeo-button.button-main {
 	background: #3495f0;
 	border-color: #3495f0;

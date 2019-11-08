@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <div class="digirisk-wrap wpeo-wrap" style="clear: both;">
 	<?php
-	echo do_shortcode( '[digi_navigation id="' . $id . '"]' );
+	echo do_shortcode( '[digi_navigation id="' . $id . '" with_children="' . $with_children . '"]' );
 	echo do_shortcode( '[digi_application id="' . $id . '"]' );
 	?>
 </div>

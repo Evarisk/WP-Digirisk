@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 5.2.2
-Stable tag: 7.4.0
+Tested up to: 5.2.4
+Stable tag: 7.5.0
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,9 +75,17 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 == Changelog ==
 
-= Version 7.4.0 =
-
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.5.0 =
+
+* 36975 - Arbre de navigation: Chargement différé des groupements et unités de travail.
+* 36897 - Plan prévention: Mise à jour du modèle ODT.
+* 35843 - Général: Mise en place d'un nouveau menu pour toute l'application DigiRisk.
+* 35427 - Outils -> Modèles ODT: Correction d'une erreur fatale empéchant l'affichage de la page.
+* 36702 - Permis de feu: Mise en place de l'interface.
+
+= Version 7.4.0 =
 
 * 35381 - Permis de feu: Création de la page / Possibilité de télécharger le pdf.
 * 35383 - Plan de prévention: Création de la page / Possibilité de télécharger le pdf.
