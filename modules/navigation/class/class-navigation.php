@@ -87,6 +87,11 @@ class Navigation_Class extends \eoxia\Singleton_Util {
 			'posts_per_page' => -1,
 			'post_type'      => array( Group_Class::g()->get_type(), Workunit_Class::g()->get_type() ),
 			'post_status'    => 'inherit',
+			'meta_key'       => '_wpdigi_unique_key',
+			'orderby'        => array(
+				'menu_order'     => 'ASC',
+				'meta_value_num' => 'ASC',
+			),
 		) );
 
 		if ( ! empty( $societies->posts ) ) {

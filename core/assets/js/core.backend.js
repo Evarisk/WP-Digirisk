@@ -99,3 +99,7 @@ window.eoxiaJS.digirisk.core.confirmBack = function( event ) {
 		return false;
 	}
 };
+
+window.eoxiaJS.digirisk.core.settedDefaultApp = function( triggeredElement, response ) {
+	triggeredElement.closest( '.wpeo-modal' ).removeClass( 'modal-active' );
+};

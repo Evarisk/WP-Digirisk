@@ -38,5 +38,13 @@ defined( 'ABSPATH' ) || exit; ?>
 		</td>
 	</tr>
 
+	<tr>
+		<th><label for="digi-auto-connect-to-digirisk"><?php esc_html_e( 'Se connecter automatiquement à DigiRisk', 'digirisk' ); ?></label></th>
+		<td><input type="checkbox" name="digirisk_user_information_meta[auto_connect]" id="digi-auto-connect-to-digirisk" <?php echo $auto_connect ? 'checked="checked"' : ''; ?> class="regular-text" /><br /></td>
+	</tr>
 
+	<tr>
+		<th><label for="digi-modal-auto-connect-to-digirisk"><?php esc_html_e( 'Me demander de régler DigiRisk en application par défaut.', 'digirisk' ); ?></label></th>
+		<td><input type="checkbox" name="digirisk_user_information_meta[ask_auto_connect]" id="digi-modal-auto-connect-to-digirisk" <?php echo $ask_auto_connect ? 'checked="checked"' : ''; ?> class="regular-text" /><br /></td>
+	</tr>
 </table>

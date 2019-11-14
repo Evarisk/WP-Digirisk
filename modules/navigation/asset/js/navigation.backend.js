@@ -50,11 +50,11 @@ window.eoxiaJS.digirisk.navigation.event = function() {
 window.eoxiaJS.digirisk.navigation.switchToggle = function( event ) {
 	event.preventDefault();
 
-	if ( jQuery( this ).find( 'i' ).hasClass( 'fa-chevron-down' ) ) {
-		jQuery(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+	if ( jQuery( this ).find( '.toggle-icon' ).hasClass( 'fa-chevron-down' ) ) {
+		jQuery(this).find( '.toggle-icon' ).removeClass('fa-chevron-down').addClass('fa-chevron-right');
 		jQuery(this).closest('.unit').removeClass('toggled');
 	} else {
-		jQuery(this).find('i').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+		jQuery(this).find( '.toggle-icon' ).removeClass('fa-chevron-right').addClass('fa-chevron-down');
 		jQuery(this).closest('.unit').addClass('toggled');
 	}
 };
@@ -126,13 +126,13 @@ window.eoxiaJS.digirisk.navigation.toggleAll = function( event ) {
 	event.preventDefault();
 
 	if ( jQuery( this ).hasClass( 'toggle-plus' ) ) {
-		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit i').removeClass( 'fa-chevron-right').addClass( 'fa-chevron-down' );
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit .toggle-icon').removeClass( 'fa-chevron-right').addClass( 'fa-chevron-down' );
 		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit' ).addClass( 'toggled' );
 	}
 
 	if ( jQuery( this ).hasClass( 'toggle-minus' ) ) {
 		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit.toggled' ).removeClass( 'toggled' );
-		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit i').addClass( 'fa-chevron-right').removeClass( 'fa-chevron-down' );
+		jQuery( '.digirisk-wrap .navigation-container .workunit-list .unit .toggle-icon').addClass( 'fa-chevron-right').removeClass( 'fa-chevron-down' );
 	}
 };
 
@@ -213,7 +213,7 @@ window.eoxiaJS.digirisk.navigation.closeNavigationContainer = function( event ) 
 window.eoxiaJS.digirisk.navigation.createdSocietySuccess = function( triggeredElement, response ) {
 	jQuery( '.workunit-list .unit.active' ).removeClass( 'active' );
 
-	jQuery( triggeredElement ).closest( '.unit:not(.new)' ).find( '.spacer:first' ).removeClass( 'spacer' ).addClass( 'toggle-unit' );
+	jQuery( triggeredElement ).closest( '.unit:not(.new)' ).find( '.spacer:first' ).removeClass( 'spacer' ).addClass( 'toggle-unit' ).append('<i class="toggle-icon fas fa-chevron-down"></i>');
 
 	if ( jQuery( triggeredElement ).closest( '.sub-list' ).length ) {
 		jQuery( triggeredElement ).closest( '.sub-list' ).replaceWith( response.data.navigation_view );

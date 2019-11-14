@@ -54,6 +54,10 @@ class Digirisk extends \eoxia\Singleton_Util {
 		$request_uri     = ! empty( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 		$waiting_updates = get_option( '_digi_waited_updates', array() );
 
+		$user_information = get_the_author_meta( 'digirisk_user_information_meta', get_current_user_id() );
+		$auto_connect     = isset( $user_information['auto_connect'] ) ? $user_information['auto_connect'] : false;
+		$ask_auto_connect = isset( $user_information['ask_auto_connect'] ) ? $user_information['ask_auto_connect'] : true;
+
 		require PLUGIN_DIGIRISK_PATH . '/core/view/main.view.php';
 	}
 

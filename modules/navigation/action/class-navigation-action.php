@@ -57,18 +57,16 @@ class Navigation_Action {
 		), true );
 
 		$establishment = $class::g()->update( array(
-			'title'     => $title,
-			'parent_id' => $parent_id,
-			'status'    => 'inherit',
+			'title'       => $title,
+			'parent_id'   => $parent_id,
+			'post_status' => 'inherit',
 		) );
 
 		// Utiles pour la vue main-content.
-		$establishment_id = $establishment->data['id'];
-
 		$class = ( $society->data['id'] === $parent_id ) ? 'workunit-list' : 'sub-list';
 
 		ob_start();
-		Navigation_Class::g()->display_list( $parent_id, $establishment->data['id'], $class );
+		Navigation_Class::g()->display_list( $parent_id, $establishment->data['id'], true, $class );
 		$navigation_view = ob_get_clean();
 
 		ob_start();

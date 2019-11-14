@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit; ?>
 	</table>
 
 	<?php if ( ! empty( $from_install ) ) : ?>
-		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">
+		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">
 			<span><?php esc_html_e( 'Aller sur l\'application', 'digirisk' ); ?></span>
 		</a>
 	<?php endif; ?>

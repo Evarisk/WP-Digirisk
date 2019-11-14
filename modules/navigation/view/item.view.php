@@ -20,12 +20,13 @@ defined( 'ABSPATH' ) || exit; ?>
 	data-id="<?php echo esc_attr( $society->ID ); ?>">
 	<div class="unit-container">
 
-		<?php if ( Workunit_Class::g()->get_type() !== $society->post_type && \eoxia\Post_Util::have_child( $society->ID, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
+		<?php
+		if ( Workunit_Class::g()->get_type() !== $society->post_type && \eoxia\Post_Util::have_child( $society->ID, array( 'digi-group', 'digi-workunit' ) ) ) : ?>
 			<div class="toggle-unit">
-				<i class="fas fa-chevron-right"></i>
+				<i class="toggle-icon fas fa-chevron-right"></i>
 			</div>
 		<?php else : ?>
-			<div class="spacer"><span class="icon"></span></div>
+			<div class="spacer"></div>
 		<?php endif; ?>
 
 		<?php
