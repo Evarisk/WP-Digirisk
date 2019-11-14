@@ -189,10 +189,10 @@ class Digirisk_Action {
 			if (strpos($_SERVER['REQUEST_URI'], '/wp-admin/') !== false && strpos($_SERVER['REQUEST_URI'], '/wp-admin/') == $_pos) {
 				$digirisk_core = get_option(\eoxia\Config_Util::$init['digirisk']->core_option);
 
-				if (!empty($digirisk_core['installed'])) {
-					wp_redirect(admin_url('admin.php?page=digirisk'));
+				if ( ! empty( $digirisk_core['installed'] ) ) {
+					wp_redirect( admin_url( 'admin.php?page=digirisk' ) );
 				} else {
-					wp_redirect(admin_url('admin.php?page=digi-setup'));
+					wp_redirect( admin_url( 'admin.php?page=digi-setup' ) );
 				}
 
 				die();
