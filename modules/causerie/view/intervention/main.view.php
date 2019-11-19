@@ -15,8 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="content-wrap">
-	<?php Digirisk::g()->display_header(); ?>
 
 	<div class="wrap digirisk-wrap causerie-wrap wpeo-wrap">
 		<div class="step" style="margin-top: 20px; margin-bottom: 40px;">
@@ -78,4 +76,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</div>
-</div>

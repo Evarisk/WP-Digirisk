@@ -47,7 +47,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	 * @since 6.1.6
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Utilisateurs', 'digirisk' ), __( 'Utilisateurs', 'digirisk' ), 'manage_users', 'digirisk-users', array( $this, 'callback_users_page' ), 'fa fa-user' );
+		$menu = CMH::register_menu( 'digirisk', __( 'Utilisateurs', 'digirisk' ), __( 'Utilisateurs', 'digirisk' ), 'manage_users', 'digirisk-users', array( $this, 'callback_users_page' ), 'fa fa-user' );
 	}
 
 	/**

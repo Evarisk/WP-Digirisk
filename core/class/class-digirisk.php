@@ -38,7 +38,6 @@ class Digirisk extends \eoxia\Singleton_Util {
 		add_image_size( 'digirisk-element-thumbnail', 200, 150, true );
 		add_image_size( 'digirisk-element-miniature', 50, 50, true );
 
-		CMH::add_logo( PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk-welcome' ) );
 	}
 
 	/**
