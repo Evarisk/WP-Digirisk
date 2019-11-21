@@ -1,0 +1,50 @@
+/**
+ * Affiche l'image d'entête
+ * .media -> gestion générale des media
+ * .workunit-list -> Module média intégré à la liste des workunits
+ */
+
+.media {
+	width: 50px;
+	min-width: 50px;
+	height: 50px;
+	position: relative;
+	display: flex;
+	flex: 0 1 auto;
+	align-items: center; /* Fix IE */
+	transition: all 0.2s ease-out;
+
+	&:hover {
+		cursor: pointer;
+		.add {
+			animation-name: bounceIn;
+			opacity: 1 !important;
+		}
+	}
+	.add {
+		position: absolute;
+		transition: all 0.2s ease-out;
+		pointer-events: none;
+	}
+	&:not(.no-file) .add {
+		opacity: 0;
+		left: 18px;
+		top: 18px;
+		color: #fff;
+	}
+	&.no-file .add {
+		opacity: 1;
+		top: 10px;
+		right: 10px;
+		color: rgba(255,255,255,0.6);
+	}
+	.default-image {
+		margin: auto;
+		color: rgba(255,255,255,0.2);
+		font-size: 16px;
+	}
+	img {
+		width: 100%;
+		height: auto;
+	}
+}

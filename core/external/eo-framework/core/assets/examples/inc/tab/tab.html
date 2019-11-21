@@ -1,0 +1,215 @@
+<h2 id="tab" class="module-title">Tab</h2>
+
+<p class="entete">Le module utilise la classe : <code class="language-css">"wpeo-tab"</code></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+	</ul>
+
+	<div class="tab-container">
+		<div id="tab1" class="tab-content">Je suis le contenu du premier onglet</div>
+		<div id="tab2" class="tab-content">Je suis le contenu du deuxieme onglet</div>
+	</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+	</ul>
+	<div class="tab-container">
+		<div id="tab1" class="tab-content tab-active">
+			<p>Je suis le contenu du premier onglet</p>
+		</div>
+		<div id="tab2" class="tab-content">
+			<p>Je suis le contenu du deuxième onglet</p>
+		</div>
+	</div>
+</div>
+
+<h3 class="module-title">Format vertical</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab tab-vertical">...</div>
+</script></code></pre>
+
+<div class="wpeo-tab tab-vertical">
+	<ul class="tab-list">
+		<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+	</ul>
+	<div class="tab-container">
+		<div id="tab1" class="tab-content tab-active">
+			<p>Je suis le contenu du premier onglet</p>
+		</div>
+		<div id="tab2" class="tab-content">
+			<p>Je suis le contenu du deuxième onglet</p>
+		</div>
+	</div>
+</div>
+
+<h3 class="module-title">Icones</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element" data-id="tab1"><span class="tab-icon"><i class="fas fa-smile"></i></span><span>Onglet 1</span></li>
+	</ul>
+</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-2">
+	<div>
+		<div class="wpeo-tab">
+			<ul class="tab-list">
+				<li class="tab-element tab-active" data-id="tab1"><span class="tab-icon"><i class="fas fa-smile"></i></span>Onglet 1</li>
+				<li class="tab-element" data-id="tab2"><span class="tab-icon"><i class="fas fa-heart fa-fw"></i></span>Onglet 2</li>
+			</ul>
+			<div class="tab-container">
+				<div id="tab1" class="tab-content tab-active">
+					<p>Je suis le contenu du premier onglet</p>
+				</div>
+				<div id="tab2" class="tab-content">
+					<p>Je suis le contenu du deuxième onglet</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-tab tab-vertical">
+			<ul class="tab-list">
+				<li class="tab-element tab-active" data-id="tab1"><span class="tab-icon"><i class="fas fa-smile"></i></span>Onglet 1</li>
+				<li class="tab-element" data-id="tab2"><span class="tab-icon"><i class="fas fa-heart fa-fw"></i></span>Onglet 2</li>
+			</ul>
+			<div class="tab-container">
+				<div id="tab1" class="tab-content tab-active">
+					<p>Je suis le contenu du premier onglet</p>
+				</div>
+				<div id="tab2" class="tab-content">
+					<p>Je suis le contenu du deuxième onglet</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h3 class="module-title">Tab désactivée</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element tab-disabled" data-id="tab1"><i class="tab-icon fas fa-smile"></i><span>Onglet 1</span></li>
+	</ul>
+</div>
+</script></code></pre>
+
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+		<li class="tab-element tab-disabled" data-id="tab2">Onglet 3</li>
+	</ul>
+	<div class="tab-container">
+		<div id="tab1" class="tab-content tab-active">
+			<p>Je suis le contenu du premier onglet</p>
+		</div>
+		<div id="tab2" class="tab-content">
+			<p>Je suis le contenu du deuxième onglet</p>
+		</div>
+	</div>
+</div>
+
+
+<h3 class="module-title">Effets</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab tab-fade-vertical">...</div>
+<div class="wpeo-tab tab-fade-horizontal">...</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-2">
+	<div>
+		<h4>Fade Vertical</h4>
+		<div class="wpeo-tab tab-fade-vertical">
+			<ul class="tab-list">
+				<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+				<li class="tab-element" data-id="tab2">Onglet 2</li>
+			</ul>
+			<div class="tab-container">
+				<div id="tab1" class="tab-content tab-active">
+					<p>Je suis le contenu du premier onglet</p>
+				</div>
+				<div id="tab2" class="tab-content">
+					<p>Je suis le contenu du deuxième onglet</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<h4>Fade Horizontal</h4>
+		<div class="wpeo-tab tab-vertical tab-fade-horizontal">
+			<ul class="tab-list">
+				<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+				<li class="tab-element" data-id="tab2">Onglet 2</li>
+			</ul>
+			<div class="tab-container">
+				<div id="tab1" class="tab-content tab-active">
+					<p>Je suis le contenu du premier onglet</p>
+				</div>
+				<div id="tab2" class="tab-content">
+					<p>Je suis le contenu du deuxième onglet</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h3 class="module-title">Dropdown</h3>
+
+<p>Il est possible d'ajouter le module Dropdown du framework dans les onglets du module Tab</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+		<li class="tab-element wpeo-dropdown">
+			<div class="dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></div>
+			<ul class="dropdown-content">
+				<li class="dropdown-item">Item 1</li>
+				<li class="dropdown-item">Item 2</li>
+				<li class="dropdown-item">Item 3</li>
+			</ul>
+		</li>
+	</ul>
+
+	<div class="tab-container">...</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-tab">
+	<ul class="tab-list">
+		<li class="tab-element tab-active" data-id="tab1">Onglet 1</li>
+		<li class="tab-element" data-id="tab2">Onglet 2</li>
+		<li class="tab-element wpeo-dropdown">
+				<span class="dropdown-toggle"><i class="icon fas fa-ellipsis-v"></i></span>
+				<ul class="dropdown-content">
+					<li class="dropdown-item">Item 1</li>
+					<li class="dropdown-item">Item 2</li>
+					<li class="dropdown-item">Item 3</li>
+				</ul>
+		</li>
+	</ul>
+	<div class="tab-container">
+		<div id="tab1" class="tab-content tab-active">
+			<p>Je suis le contenu du premier onglet</p>
+		</div>
+		<div id="tab2" class="tab-content">
+			<p>Je suis le contenu du deuxième onglet</p>
+		</div>
+	</div>
+</div>

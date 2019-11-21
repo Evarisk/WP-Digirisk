@@ -1,0 +1,148 @@
+<h2 id="button" class="module-title">Boutons</h2>
+
+<p class="entete">Le module permet de nombreuses personnalisations en ajoutant des classes à celle de base : <code class="language-css">"wpeo-button"</code></p>
+
+<h3 class="module-title">Simple</h3>
+
+<p>Si aucune couleur n'est précisée, la classe <code class="language-css">"button-main"</code> est appliquée.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-main">
+	<span>Label bouton</span>
+</div>
+</script></code></pre>
+
+<div class="wpeo-button button-main"><span>.button-main</span></div>
+<div class="wpeo-button button-red"><span>.button-red</span></div>
+<div class="wpeo-button button-yellow"><span>.button-yellow</span></div>
+<div class="wpeo-button button-blue"><span>.button-blue</span></div>
+<div class="wpeo-button button-green"><span>.button-green</span></div>
+<div class="wpeo-button button-light"><span>.button-light</span></div>
+<div class="wpeo-button button-grey"><span>.button-grey</span></div>
+<div class="wpeo-button button-dark"><span>.button-dark</span></div>
+<div class="wpeo-button button-transparent"><span>.button-transparent</span></div>
+
+<h3 class="module-title">Bordered</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-main button-bordered">
+	<span>Label bouton</span>
+</div>
+</script></code></pre>
+
+<div class="wpeo-button button-bordered button-main"><span>.button-main</span></div>
+<div class="wpeo-button button-bordered button-red"><span>.button-red</span></div>
+<div class="wpeo-button button-bordered button-yellow"><span>.button-yellow</span></div>
+<div class="wpeo-button button-bordered button-blue"><span>.button-blue</span></div>
+<div class="wpeo-button button-bordered button-green"><span>.button-green</span></div>
+<div class="wpeo-button button-bordered button-light"><span>.button-light</span></div>
+<div class="wpeo-button button-bordered button-grey"><span>.button-grey</span></div>
+<div class="wpeo-button button-bordered button-dark"><span>.button-dark</span></div>
+
+<h3 class="module-title">Avec button-icone</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-main">
+	<i class="button-icon fas fa-heart"></i>
+	<span>Label bouton</span>
+</div>
+
+<div class="wpeo-button button-main">
+	<span>Label bouton</span>
+	<i class="button-icon fas fa-heart"></i>
+</div>
+</script></code></pre>
+
+<div class="wpeo-button button-main"><span>Bouton</span><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-main"><i class="button-icon fas fa-heart"></i><span>Bouton</span></div>
+
+<h3 class="module-title">Carré</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-square-30"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-40"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-50"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-60"><i class="button-icon fas fa-heart"></i></div>
+</script></code></pre>
+
+<div class="wpeo-button button-square-30"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-40"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-50"><i class="button-icon fas fa-heart"></i></div>
+<div class="wpeo-button button-square-60"><i class="button-icon fas fa-heart"></i></div>
+
+<h3 class="module-title">Arrondis</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-radius-1"><span>Label Bouton</span></div>
+<div class="wpeo-button button-radius-2"><span>Label Bouton</span></div>
+<div class="wpeo-button button-radius-3"><span>Label Bouton</span></div>
+<!-- Pour faire un bouton totalement arrondi, il est conseillé d utiliser la propriété .button-square -->
+<div class="wpeo-button button-square-40 button-rounded"><i class="button-icon fas fa-heart"></i></div>
+</script></code></pre>
+
+<div class="wpeo-button button-radius-1"><span>.button-radius-1</span></div>
+<div class="wpeo-button button-radius-2"><span>.button-radius-2</span></div>
+<div class="wpeo-button button-radius-3"><span>.button-radius-3</span></div>
+<div class="wpeo-button button-square-40 button-rounded"><i class="button-icon fas fa-heart"></i></div>
+
+<h3 class="module-title">Désactiver</h3>
+
+<p>La classe utilise la propriété <code class="language-css">"pointer-events: none;"</code> pour désactiver totalement les actions sur le bouton.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-disable"><span>Label Bouton</span></div>
+</script></code></pre>
+
+<div class="wpeo-button button-disable"><span>.button-disabled</span></div>
+
+<p>Il existe certains cas où vous souhaitez que votre bouton ai seulement l'apparence d'être désactivé car vous avez besoin d'accrocher des évènements dessus.<br>
+Utilisez dans ce cas la classe <code class="language-css">"button-event"</code> pour réactiver la propriété CSS pointer event.</p>
+<p class="note"><strong>Exemple :</strong> Votre bouton semble désactivé et vous pouvez afficher un message d'erreur lorsque l'on clique dessus.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-disable button-event"><span>Label Bouton</span></div> <!-- Les animations sont activées -->
+</script></code></pre>
+
+<div class="wpeo-button button-disable button-event"><span>.button-disabled.button-event</span></div>
+
+<h3 class="module-title">Taille</h3>
+
+<p class="note"><strong>Note :</strong> Il n'y a pas besoin d'utiliser de classe pour la taille standard</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-button button-size-small"><span>Label Bouton</span></div>
+<div class="wpeo-button button-size-large"><span>Label Bouton</span></div>
+</script></code></pre>
+
+<div class="wpeo-button button-size-small"><span>.button-size-small</span></div>
+<div class="wpeo-button"><span>taille standard</span></div>
+<div class="wpeo-button button-size-large"><span>.button-size-large</span></div>
+
+<h3 class="module-title">Progress</h3>
+
+<p>Cette classe permet l'animation d'un bouton en cas de chargement, réussite et échec d'une action. Il suffit de rajouter la classe en fonction du code javascript.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<!-- Chargement de l action -->
+<div class="wpeo-button button-progress button-load"><span>Label Bouton</span></div>
+<!-- Action réussie -->
+<div class="wpeo-button button-progress button-success"><span>Label Bouton</span></div>
+<!-- Action échouée -->
+<div class="wpeo-button button-progress button-error"><span>Label Bouton</span></div>
+</script></code></pre>
+
+<p>Cliquer sur les boutons pour activer les animations :</p>
+
+<div id="button-load" class="wpeo-button button-progress"><i class="button-icon fas fa-pencil"></i><span>.button-load</span></div>
+<div id="button-success" class="wpeo-button button-progress"><i class="button-icon fas fa-pencil"></i><span>.button-success</span></div>
+<div id="button-error" class="wpeo-button button-progress"><i class="button-icon fas fa-pencil"></i><span>.button-error</span></div>
+
+<h3 class="module-title">Autres classes</h3>
+
+<ul>
+	<li><strong>button-margin</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> Espace en haut et en bas du bouton</li>
+	<li><strong>button-strong</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> label du bouton en gras</li>
+	<li><strong>button-uppercase</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> label du bouton en capital</li>
+	<li><strong>button-float-left</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> Le bouton se positionne à gauche du contenu</li>
+	<li><strong>button-float-right</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> Le bouton se positionne à droite du contenu</li>
+</ul>

@@ -1,0 +1,92 @@
+// Progress
+.wpeo-button.button-progress {
+	position: relative;
+
+	&::before {
+		display: inline-block;
+		@include fa-icon;
+		content: '';
+		opacity: 0;
+		transform: translate(-50%, -90%);
+		font-size: 16px;
+		animation-duration: 1s;
+		animation-fill-mode: both;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		z-index: 99;
+		@include transition();
+	}
+	.button-icon, span {
+		@include transition();
+		display: inline-block;
+	}
+	&.button-success, &.button-load, &.button-error {
+		pointer-events: none;
+		&::before {
+			opacity: 1;
+			transform: translate(-50%, -50%);
+		}
+		.button-icon, span {
+			opacity: 0;
+			transform: translate(0, 40%);
+		}
+	}
+
+	&.button-success {
+		background: $color__green;
+		border-color: $color__green;
+		color: #fff;
+		&:before {
+			content: fa-content($fa-var-check);
+			animation-name: progressSuccess;
+		}
+	}
+
+	&.button-error {
+		background: $color__red;
+		border-color: $color__red;
+		color: #fff;
+		&:before {
+			content: fa-content($fa-var-times);
+			animation-name: progressError;
+		}
+	}
+	&.button-load {
+		background: $color__grey;
+		&:before {
+			opacity: 1;
+			border: 3px solid #fff;
+			border-top: 3px solid $color__primary;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			animation: spin 1s ease-out infinite;
+		}
+	}
+}
+
+@keyframes progressSuccess {
+  0, 20%, 40%, 60%, 80%, to { animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); }
+  0% { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+  20% { transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4); }
+  40% { transform: translate(-50%, -50%) scale3d(.9, .9, .9); }
+  60% { transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2); }
+  80% { transform: translate(-50%, -50%) scale3d(.97, .97, .97); }
+  to { transform: translate(-50%, -50%) scale3d(1, 1, 1); }
+}
+
+@keyframes progressError {
+	from { transform: translate(-50%, -50%); }
+	15% { transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg); }
+	30% { transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg); }
+	45% { transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg); }
+	60% { transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg); }
+	75% { transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg); }
+	to { transform: translate(-50%, -50%); }
+}
+
+@keyframes spin {
+		0% { transform: translate(-50%, -50%) rotate(0deg); }
+		100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

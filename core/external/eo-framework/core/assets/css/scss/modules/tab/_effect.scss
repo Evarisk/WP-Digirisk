@@ -1,0 +1,50 @@
+/*--------------------------------------------------------------
+	Effets
+	Version : 1.0.0
+
+--------------------------------------------------------------*/
+
+/* FADE VERTICAL */
+.wpeo-tab.tab-fade-vertical .tab-container {
+	.tab-content {
+		transform: translateY(-40px);
+		animation: 0.3s linear 0s disappear_tab;
+	}
+	.tab-content.tab-active {
+		transform: translateY(0);
+		animation: 0.2s ease-out 0s appear_tab;
+	}
+}
+
+@keyframes disappear_tab {
+	from { opacity: 1; transform: translateY(0px); }
+	to { opacity: 0; transform: translateY(40px); }
+}
+
+@keyframes appear_tab {
+	from { opacity: 0; transform: translateY(-40px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* FADE HORIZONTAL */
+.wpeo-tab.tab-fade-horizontal .tab-container {
+	.tab-content {
+		transform: translateX(-40px);
+		animation: 0.4s linear 0s disappear_tab_2;
+	}
+	.tab-content.tab-active {
+		transform: translateX(0);
+		animation: 0.2s ease-out 0s appear_tab_2;
+	}
+}
+
+@keyframes disappear_tab_2 {
+	from { opacity: 1; transform: translateX(0px); }
+	to { opacity: 0; transform: translateX(40px); }
+}
+
+@keyframes appear_tab_2 {
+	from { opacity: 0; transform: translateX(-40px); }
+	to { opacity: 1; transform: translateX(0); }
+}

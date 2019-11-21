@@ -1,0 +1,98 @@
+// General
+.form-element.form-modern {
+	position: relative;
+	width: 100%;
+	margin-bottom: 26px;
+
+	&:after {
+		content: '';
+		display: block;
+	}
+}
+
+// Design
+.form-element.form-modern {
+	input, textarea {
+		border: 0;
+		border-bottom: 1px solid $color__dark;
+		box-shadow: none;
+		padding: 10px 0;
+		margin: 0;
+		width: 100%;
+		font-size: 14px;
+		background: transparent;
+		&:focus ~ .form-bar {
+			width: 100%;
+		}
+	}
+	textarea {
+		&:focus ~ .form-bar {
+			width: 100%;
+		}
+	}
+	label {
+		position: absolute;
+		top: 10px;
+		left: 0em;
+		transition: all 0.2s ease-out;
+		font-size: 14px;
+		color: rgba(0,0,0,0.4);
+		pointer-events: none;
+		font-weight: 600;
+		font-size: 14px;
+	}
+	.form-bar {
+		position: absolute;
+		width: 0;
+		height: 3px;
+		left: 0;
+		right: 0;
+		background: $color__primary;
+		transition: all 0.2s ease-out;
+	}
+	input ~ .form-bar {
+		bottom: -1px;
+	}
+	input:after {
+		display: block;
+		content: '';
+
+	}
+	textarea ~ .form-bar {
+		bottom: -1px;
+		left: 0;
+		right: 0;
+	}
+	select {
+		width: 100%;
+		padding: 6px;
+		height: 40px;
+		border: 1px solid rgba(0,0,0,0.8);
+		transition: all 0.2s ease-out;
+		&:focus {
+			border: 1px solid $color__primary;
+		}
+	}
+}
+
+// Active
+.form-element.form-modern {
+	&.form-active input, &.form-active textarea, input:focus, textarea:focus, select:focus {
+		outline: none;
+		& ~ label {
+			font-size: 12px;
+			color: $color__primary;
+			pointer-events: auto;
+		}
+	}
+	&.form-active input, input:focus {
+		& ~ label {
+			top: -10px;
+		}
+	}
+	&.form-active textarea, textarea:focus {
+		& ~ label {
+			top: -16px;
+		}
+	}
+}

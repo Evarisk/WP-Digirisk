@@ -1,0 +1,23 @@
+{
+	"name": "EO Framework",
+	"slug": "eo-framework",
+	"version": "1.0.0",
+	"description": "L'application EO Framework",
+	"externals": [],
+	"modules": [
+		"core/core.config.json",
+      
+      "modules/wpeo-custom-menu/wpeo_custom_menu.config.json",
+      "modules/wpeo-update-manager/wpeo_update_manager.config.json",
+		"modules/wpeo-model/wpeo_model.config.json",
+    "modules/wpeo-upload/wpeo_upload.config.json",
+    "modules/wpeo-search/wpeo_search.config.json",
+    "modules/wpeo-odt/wpeo_odt.config.json"
+	],
+	"debug": false,
+	"hour_equal_one_day": 24,
+	"not__in_display_comment": [
+		"ping",
+		""
+	]
+}

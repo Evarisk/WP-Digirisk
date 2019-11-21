@@ -1,0 +1,143 @@
+/*--------------------------------------------------------------
+	Module : Notification
+	Version : 1.0.0
+
+	.wpeo-notification -> classe de base du mobule
+	.notification-active -> lance l'apparition de la notification
+--------------------------------------------------------------*/
+
+/* General */
+.wpeo-notification {
+	position: fixed;
+	background: rgba(255,255,255,0.6);
+	@include transition();
+	z-index: 900;
+	padding: 1em;
+	bottom: 3em;
+	right: 1em;
+	max-width: 600px;
+	box-shadow: 0 0 14px 1px rgba(0,0,0,0.2);
+	display: flex;
+	opacity: 0;
+	pointer-events: none;
+
+	&:hover {
+			background: rgba(255,255,255,1);
+			box-shadow: 0 0 14px 1px rgba(0,0,0,0.4);
+			cursor: pointer;
+	}
+	&.notification-active {
+		animation: notification 0.8s ease-out;
+		animation-fill-mode: forwards;
+		opacity: 1;
+		pointer-events: all;
+	}
+}
+
+/* Content */
+.wpeo-notification {
+	> * {
+		margin: auto 0.2em;
+	}
+	/* Thumbnail */
+	.notification-thumbnail {
+		width: 40px;
+		height: 40px;
+		background: rgba(0,0,0,0.1);
+		border-radius: 50%;
+		display: inline-block;
+		overflow: hidden;
+		margin-right: 0.4em;
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+	/* Icon */
+	.notification-icon {
+		margin-right: 0.4em;
+	}
+	/* Title */
+	.notification-title {
+		font-size: 14px;
+		color: rgba(0,0,0,0.7);
+		a {
+			color: $color__primary;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	/* Close button */
+	.notification-close {
+		padding-left: 0.4em;
+		color: rgba(0,0,0,0.2);
+		transition: all 0.2s ease-out;
+		margin-left: auto;
+
+		&:hover {
+			color: $color__primary;
+		}
+	}
+}
+
+/** Couleur */
+.wpeo-notification {
+	.notification-icon {
+		color: rgba(0,0,0,0.3);
+	}
+	&.notification-green {
+		border-left: 4px solid $color__green;
+		.notification-icon {
+			color: $color__green;
+		}
+	}
+	&.notification-orange {
+		border-left: 4px solid $color__yellow;
+		.notification-icon {
+			color: $color__yellow;
+		}
+	}
+	&.notification-red {
+		border-left: 4px solid $color__red;
+		.notification-icon {
+			color: $color__red;
+		}
+	}
+	&.notification-blue {
+		border-left: 4px solid $color__blue;
+		.notification-icon {
+			color: $color__blue;
+		}
+	}
+}
+
+@keyframes notification {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}

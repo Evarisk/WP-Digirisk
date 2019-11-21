@@ -1,0 +1,13 @@
+{
+	"name": "WPEO Search",
+	"slug": "wpeo_search",
+	"version": "1.1.0",
+	"since": "1.1.0",
+	"description": "Able to search post or user",
+	"path": "modules/wpeo-search",
+	"dependencies": {
+		"action": {},
+		"class": {},
+		"shortcode": {}
+	}
+}

@@ -1,0 +1,141 @@
+/**
+ * Interface de mise à jour des données
+ */
+.wpeo-project-wrap {
+	.notice {
+		margin-left: 0;
+	}
+	.wpeo-project-update-manager {
+		.wpeo-grid {
+			width: 100%;
+		}
+
+		.wpeo-update-item {
+			display: block;
+			background-color: #fff;
+			font-size: 14px;
+			display: flex;
+			height: 100%;
+			transition: all 0.2s ease-out;
+
+			&::after {
+				display: block;
+				content: '';
+				clear: both;
+			}
+
+			.wpeo-update-item-spin {
+				width: 80px;
+				position: relative;
+				border-left: 6px solid #4c4c4c;
+
+				.wpeo-update-spinner, .icon {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					margin: 0;
+					padding: 0;
+					font-size: 20px;
+				}
+				.wpeo-update-spinner {
+					opacity: 0;
+					transform: translate(-50%, -120%);
+					transition: all 0.2s ease-out;
+				}
+				.icon {
+					transform: translate(-50%, -50%);
+					transition: all 0.2s ease-out;
+
+					&::before {
+						@include fa-icon;
+						content: fa-content( $fa-var-unlock-alt );
+					}
+				}
+			}
+
+			.wpeo-update-item-container {
+				width: 100%;
+				margin: auto 0;
+				padding: 2em 2em 2em 0em;
+			}
+
+			.wpeo-update-item-content {
+				.wpeo-update-item-title {
+					font-size: 12px;
+					text-transform: uppercase;
+					color: rgba(0,0,0,0.8);
+					font-weight: 900;
+					margin-bottom: 0.4em;
+				}
+				.wpeo-update-item-description {
+					font-size: 14px;
+					color: rgba(0,0,0,0.5);
+				}
+			}
+
+			.wpeo-update-item-progress {
+				background: rgba(0,0,0,0.1);
+				position: relative;
+				display: block;
+				padding: 0 1em;
+				height: 26px;
+				line-height: 26px;
+				border-radius: 20px;
+				overflow: hidden;
+				margin-top: 2em;
+
+				.wpeo-update-item-progression {
+					position: absolute;
+					background-color: $color__green;
+					top: 0;
+					left: 0;
+					width: 0%;
+					height: 100%;
+					transition: all 0.2s ease-out;
+				}
+				.wpeo-update-item-stats {
+					position: relative;
+					font-size: 12px;
+				}
+			}
+
+			&.wpeo-update-in-progress-item {
+				transform: translateX(-10px);
+
+				.wpeo-update-item-spin {
+					border-left: 6px solid $color__blue;
+
+					.fa-spin {
+						color: $color__blue;
+					}
+				}
+				.wpeo-update-spinner {
+					opacity: 1;
+					transform: translate(-50%, -50%);
+				}
+				.icon {
+					transform: translate(-50%, 0%);
+					opacity: 0;
+				}
+			}
+
+			&.wpeo-update-done-item {
+				.wpeo-update-item-spin {
+					border-left: 6px solid $color__green;
+				}
+				.icon::before {
+					@include fa-icon;
+					content: fa-content( $fa-var-check );
+					color: $color__green;
+				}
+			}
+		}
+
+		.wpeo-update-general-message {
+			width: 80%;
+			margin: 0 auto;
+			font-size: 14px;
+			text-align: center;
+		}
+	}
+}

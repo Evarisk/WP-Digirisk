@@ -1,0 +1,205 @@
+<h2 id="table" class="module-title">Tableau</h2>
+
+<p>Utiliser la classe : <code class="language-css">"wpeo-table"</code> sur la balise <code class="language-markup"><script type="prism-html-markup"><table></script></code></p>
+
+<h3 class="module-title">Standard</h3>
+
+<!-- <p>Si aucune couleur n'est précisée, la classe <code class="language-css">"primary"</code> est appliquée.</p> -->
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<table class="wpeo-table">
+  <thead>
+    <tr>
+      <th data-title="Identifiant">#</th>
+      <th data-title="Nom">Nom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th data-title="Identifiant">1</th>
+      <td data-title="Nom">Snow</td>
+    </tr>
+  </tbody>
+	<tfoot>
+		<tr>
+			<th data-title="Identifiant">#</th>
+			<th data-title="Nom">Nom</th>
+		</tr>
+	</tfoot>
+</table>
+</script></code></pre>
+
+<table class="wpeo-table">
+  <thead>
+    <tr>
+      <th data-title="">#</th>
+      <th data-title="Nom">Nom</th>
+      <th data-title="Prénom">Prénom</th>
+      <th data-title="Pseudo">Genre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th data-title="">1</th>
+      <td data-title="Nom">Snow</td>
+      <td data-title="Nom">Jon</td>
+      <td data-title="Pseudo">Home</td>
+    </tr>
+    <tr>
+      <th data-title="">2</th>
+      <td data-title="Nom">Targaryen</td>
+      <td data-title="Prénom">Daenerys</td>
+      <td data-title="Pseudo">ND</td>
+    </tr>
+    <tr>
+      <th data-title="">3</th>
+      <td data-title="Nom">Stark</td>
+      <td data-title="Prénom">Arya</td>
+      <td data-title="Pseudo">Femme</td>
+    </tr>
+  </tbody>
+	<tfoot>
+		<tr>
+			<th data-title="">#</th>
+      <th data-title="Nom">Nom</th>
+      <th data-title="Prénom">Prénom</th>
+      <th data-title="Pseudo">Genre</th>
+		</tr>
+	</tfoot>
+</table>
+
+<h3 class="module-title">Flexibles</h3>
+
+<p class="entete">Les tableaux flexibles utilisent la propriété CSS Flexbox. Ils sont donc beaucoup plus permissif (multiligne, responsif, changement d'apparence, etc..)</p>
+<p class="note">Attention, bien que la classe principale du module soit la même, le HTML est différent</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-table table-flex table-4">
+	<div class="table-row table-header">
+		<div class="table-cell">#</div>
+		<div class="table-cell">Nom</div>
+		<div class="table-cell">Prénom</div>
+		<div class="table-cell">Genre</div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell">1</div>
+		<div class="table-cell">Snow</div>
+		<div class="table-cell">Jon</div>
+		<div class="table-cell">Home</div>
+	</div>
+	<div class="table-row">
+	<div class="table-cell">2</div>
+	<div class="table-cell">Targaryen</div>
+	<div class="table-cell">Daenerys</div>
+	<div class="table-cell">ND</div>
+	</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-table table-flex table-4">
+	<div class="table-row table-header">
+		<div class="table-cell">#</div>
+		<div class="table-cell">Nom</div>
+		<div class="table-cell">Prénom</div>
+		<div class="table-cell">Genre</div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell">1</div>
+		<div class="table-cell">Snow</div>
+		<div class="table-cell">Jon</div>
+		<div class="table-cell">Home</div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell">2</div>
+		<div class="table-cell">Targaryen</div>
+		<div class="table-cell">Daenerys</div>
+		<div class="table-cell">ND</div>
+	</div>
+</div>
+
+<p><strong>Taille générales des cellules</strong></p>
+<p>Appliquer cette classe <code class="language-css">"table-{NOMBRE_CELLULE}"</code> en fonction du nombre de cellule(s) de votre tableau.<br/>
+<strong>Exemple</strong> : vous avez 4 cellules, utiliser la classe table-4. Vous pouvez aller jusqu'à 10 cellules.</p>
+<p class="note">Cette classe permet d'éviter les erreurs d'affichage en responsive</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-table table-flex table-2">
+	<div class="table-row">
+		<div class="table-cell">1</div>
+		<div class="table-cell">Snow</div>
+	</div>
+</div>
+</script></code></pre>
+
+<p><strong>Changer la taille d'une cellule</strong></p>
+<p>Rajouter certaines classes aux cellules en elles-même changent leur taille. Voici les classes disponibles :</p>
+<ul>
+	<li><code class="language-css">"table-25"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 25px;</li>
+	<li><code class="language-css">"table-50"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 50px;</li>
+	<li><code class="language-css">"table-75"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 75px;</li>
+	<li><code class="language-css">"table-100"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 100px;</li>
+	<li><code class="language-css">"table-125"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 125px;</li>
+	<li><code class="language-css">"table-150"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 150px;</li>
+	<li><code class="language-css">"table-175"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 175px;</li>
+	<li><code class="language-css">"table-200"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> max-width: 200px;</li>
+</ul>
+
+<p><strong>Alignement d'une cellule</strong></p>
+<p>Utiliser la classe <code class="language-css">"table-end"</code> justifie la cellule sur la droite</p>
+
+<p><strong>Autre(s) classe(s)</strong></p>
+<ul>
+	<li><code class="language-css">"table-padding-0"</code> <i class=" fas fa-long-arrow-alt-right fa-fw"  ></i> enlève la padding</li>
+</ul>
+
+<p><strong>Exemple regroupant les cas de figure</strong></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-table table-flex table-5">
+	<div class="table-row table-header">
+		<div class="table-cell table-50">#</div>
+		<div class="table-cell table-150">Nom</div>
+		<div class="table-cell table-150">Prénom</div>
+		<div class="table-cell">Genre</div>
+		<div class="table-cell table-50 table-end"></div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell table-50"><strong>1</strong></div>
+		<div class="table-cell table-150">Snow</div>
+		<div class="table-cell table-150">Jon</div>
+		<div class="table-cell">Home</div>
+		<div class="table-cell table-50 table-end"><i class="table-icon fas fa-times"></i></div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell table-50"><strong>2</strong></div>
+		<div class="table-cell table-150">Targaryen</div>
+		<div class="table-cell table-150">Daenerys</div>
+		<div class="table-cell">ND</div>
+		<div class="table-cell table-50 table-end"><i class="table-icon fas fa-times"></i></div>
+	</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-table table-flex table-5">
+	<div class="table-row table-header">
+		<div class="table-cell table-50">#</div>
+		<div class="table-cell table-150">Nom</div>
+		<div class="table-cell table-150">Prénom</div>
+		<div class="table-cell">Genre</div>
+		<div class="table-cell table-50 table-end"></div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell table-50"><strong>1</strong></div>
+		<div class="table-cell table-150">Snow</div>
+		<div class="table-cell table-150">Jon</div>
+		<div class="table-cell">Home</div>
+		<div class="table-cell table-50 table-end"><i class="table-icon fas fa-times"></i></div>
+	</div>
+	<div class="table-row">
+		<div class="table-cell table-50"><strong>2</strong></div>
+		<div class="table-cell table-150">Targaryen</div>
+		<div class="table-cell table-150">Daenerys</div>
+		<div class="table-cell">ND</div>
+		<div class="table-cell table-50 table-end"><i class="table-icon fas fa-times"></i></div>
+	</div>
+</div>

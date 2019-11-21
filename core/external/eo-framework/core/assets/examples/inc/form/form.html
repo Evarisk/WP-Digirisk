@@ -1,0 +1,597 @@
+<h2 id="form" class="module-title">Form</h2>
+
+<p class="entete">Utilisez la classe <code class="language-css">"wpeo-form"</code> sur l'élément englobant le formulaire.</p>
+<p class="note">Le formulaire ci-dessous utilise le module Grid pour la mise en page</p>
+
+<form class="wpeo-grid grid-2 grid-padding-1 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Votre nom</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element">
+			<span class="form-label">Votre Prénom</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div class="grid-2">
+		<div class="form-element form-element-required">
+			<span class="form-label">Votre Email</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Hobbies</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox1" class="form-field" name="type" checked value="checkbox1">
+					<label for="checkbox1">Jeux vidéos</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox2" class="form-field" name="type" value="checkbox2">
+					<label for="checkbox2">Séries</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Origine</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="radio" id="radio1" class="form-field" name="type" checked value="radio1">
+					<label for="radio1">Homme</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="radio" id="radio2" class="form-field" name="type" value="radio2">
+					<label for="radio2">Femme</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="radio" id="radio3" class="form-field" name="type" value="radio3">
+					<label for="radio3">Les deux</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div class="grid-2">
+		<div class="form-element">
+			<span class="form-label">Un message</span>
+			<label class="form-field-container">
+				<textarea class="form-field" rows="6"></textarea>
+			</label>
+			<span class="form-sublabel">Ne donnez pas d'informations trop personnelles</span>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-button button-main">
+			<span>Envoyer le formulaire</span>
+		</div>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<form class="wpeo-grid grid-2 grid-padding-1 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Votre nom</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element">
+			<span class="form-label">Votre Prénom</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div class="grid-2">
+		<div class="form-element form-element-required">
+			<span class="form-label">Votre Email</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Hobbies</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox1" class="form-field" name="type" checked value="checkbox1">
+					<label for="checkbox1">Jeux vidéos</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox2" class="form-field" name="type" value="checkbox2">
+					<label for="checkbox2">Séries</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Origine</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="radio" id="radio1" class="form-field" name="type" checked value="radio1">
+					<label for="radio1">Homme</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="radio" id="radio2" class="form-field" name="type" value="radio2">
+					<label for="radio2">Femme</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="radio" id="radio3" class="form-field" name="type" value="radio3">
+					<label for="radio3">Les deux</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div class="grid-2">
+		<div class="form-element">
+			<span class="form-label">Un message</span>
+			<label class="form-field-container">
+				<textarea class="form-field" rows="6"></textarea>
+			</label>
+			<span class="form-sublabel">Ne donnez pas trop d informations personnelles</span>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-button button-main">
+			<span>Envoyer le formulaire</span>
+		</div>
+	</div>
+</form>
+</script></code></pre>
+
+<h3 class="module-title">Détails des champs</h3>
+
+<p>Tous les champs sont à placer dans la balise <code class="language-css">"wpeo-form"</code></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<form class="wpeo-form">
+	...
+</form>
+</script></code></pre>
+
+<p><strong>Texte</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Champs texte</span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" />
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Champs texte</span>
+	<label class="form-field-container">
+		<input type="text" class="form-field" />
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Textarea</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Champs textarea</span>
+			<label class="form-field-container">
+				<textarea class="form-field" rows="5"></textarea>
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Champs textarea</span>
+	<label class="form-field-container">
+		<textarea class="form-field" rows="5"></textarea>
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Select simple</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Champs Select</span>
+			<label class="form-field-container">
+				<select id="monselect" class="form-field">
+					<option value="valeur1">Valeur 1</option>
+					<option value="valeur2" selected>Valeur 2</option>
+					<option value="valeur3">Valeur 3</option>
+				</select>
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Champs Select</span>
+	<label class="form-field-container">
+		<select id="monselect" class="form-field">
+			<option value="valeur1">Valeur 1</option>
+			<option value="valeur2" selected>Valeur 2</option>
+			<option value="valeur3">Valeur 3</option>
+		</select>
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Radio</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Champs Radio</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="radio" id="radio10" class="form-field" name="type" checked value="radio10">
+					<label for="radio10">Label 1</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="radio" id="radio20" class="form-field" name="type" value="radio20">
+					<label for="radio20">Label 2</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element form-align-horizontal">
+	<span class="form-label">Champs Radio</span>
+	<label class="form-field-container">
+		<div class="form-field-inline">
+			<input type="radio" id="radio1" class="form-field" name="type" checked value="radio1">
+			<label for="radio1">Label 1</label>
+		</div>
+		<div class="form-field-inline">
+			<input type="radio" id="radio2" class="form-field" name="type" value="radio2">
+			<label for="radio2">Label 2</label>
+		</div>
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Checkbox</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element form-align-horizontal">
+			<span class="form-label">Champs Checkbox</span>
+			<label class="form-field-container">
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox10" class="form-field" name="type" checked value="checkbox10">
+					<label for="checkbox10">checkbox 1</label>
+				</div>
+				<div class="form-field-inline">
+					<input type="checkbox" id="checkbox20" class="form-field" name="type" value="checkbox20">
+					<label for="checkbox20">Checkbox 2</label>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element form-align-horizontal">
+	<span class="form-label">Champs Checkbox</span>
+	<label class="form-field-container">
+		<div class="form-field-inline">
+			<input type="checkbox" id="checkbox10" class="form-field" name="type" checked value="checkbox10">
+			<label for="checkbox10">checkbox 1</label>
+		</div>
+		<div class="form-field-inline">
+			<input type="checkbox" id="checkbox20" class="form-field" name="type" value="checkbox20">
+			<label for="checkbox20">Checkbox 2</label>
+		</div>
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Champs date</strong></p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element group-date">
+			<span class="form-label">Champs Date</span>
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
+				<input type="text" class="mysql-date" name="start_date" />
+				<input type="text" class="form-field date" />
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element group-date">
+	<span class="form-label">Champs Date</span>
+	<label class="form-field-container">
+		<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
+		<input type="text" class="mysql-date" name="start_date" />
+		<input type="text" class="form-field date" />
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Champs Dropdown</strong></p>
+
+<p class="note">Ce champs utilise le module Dropdown</p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Champs Dropdown</span>
+			<label class="form-field-container">
+				<div class="wpeo-dropdown">
+					<span class="dropdown-toggle form-field"><span>Label du champs dropdown</span> <i class="fas fa-caret-down"></i></span>
+					<ul class="dropdown-content">
+						<li class="dropdown-item">Item 1</li>
+						<li class="dropdown-item">Item 2</li>
+						<li class="dropdown-item">Item 3</li>
+					</ul>
+				</div>
+			</label>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Champs Date</span>
+	<label class="form-field-container">
+		<div class="wpeo-dropdown">
+			<span class="dropdown-toggle form-field"><span>Label du champs dropdown</span> <i class="fas fa-caret-down"></i></span>
+			<ul class="dropdown-content">
+				<li class="dropdown-item">Item 1</li>
+				<li class="dropdown-item">Item 2</li>
+				<li class="dropdown-item">Item 3</li>
+			</ul>
+		</div>
+	</label>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<p><strong>Champs Autocomplete</strong></p>
+
+<p class="note">Ce champs utilise le module Autocomplete</p>
+
+<div class="wpeo-grid grid-2 wpeo-form">
+	<div>
+		<div class="form-element">
+			<span class="form-label">Champs Autocomplete</span>
+			<div class="form-field-container">
+				<label class="wpeo-autocomplete">
+					<label class="autocomplete-label" for="mon-autocomplete-form">
+						<i class="autocomplete-icon-before fas fa-search"></i>
+						<input id="mon-autocomplete-form" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+						<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+					</label>
+					<ul class="autocomplete-search-list">
+						<li class="autocomplete-result">
+							<div class="autocomplete-result-container">
+								<span class="autocomplete-result-title">Résultat 1</span>
+							</div>
+						</li>
+					</ul>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div>
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Champs Autocomplete</span>
+	<div class="form-field-container">
+		<div class="wpeo-autocomplete">
+			<label class="autocomplete-label" for="mon-autocomplete">
+				<i class="autocomplete-icon-before fas fa-search"></i>
+				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+				<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+			</label>
+			<ul class="autocomplete-search-list">
+				<li class="autocomplete-result">
+					<div class="autocomplete-result-container">
+						<span class="autocomplete-result-title">Résultat 1</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</script></code></pre>
+	</div>
+</div>
+
+<h3 class="module-title">Icones</h3>
+
+<p><strong>Icone simple</strong></p>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Label</span>
+	<label class="form-field-container">
+		<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+		<input type="text" class="form-field" placeholder="Texte" />
+	</label>
+</div>
+</script></code></pre>
+
+<p><strong>Icone/texte avant et après le champs</strong></p>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<span class="form-field-label-prev"><i class="fas fa-euro-sign"></i></span>
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Label</span>
+	<label class="form-field-container">
+		<span class="form-field-label-prev"><i class="fas fa-euro-sign"></i></span>
+		<input type="text" class="form-field" placeholder="Texte" />
+	</label>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<input type="text" class="form-field" placeholder="Texte" />
+			<span class="form-field-label-next"><i class="fas fa-euro-sign"></i></span>
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Label</span>
+	<label class="form-field-container">
+		<input type="text" class="form-field" placeholder="Texte" />
+		<span class="form-field-label-next"><i class="fas fa-euro-sign"></i></span>
+	</label>
+</div>
+</script></code></pre>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<span class="form-field-label-prev">Texte</span>
+			<input type="text" class="form-field" placeholder="Texte" />
+			<span class="form-field-label-next"><i class="fas fa-euro-sign"></i></span>
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Label</span>
+	<label class="form-field-container">
+		<span class="form-field-label-prev">Texte</span>
+		<input type="text" class="form-field" placeholder="Texte" />
+		<span class="form-field-label-next"><i class="fas fa-euro-sign"></i></span>
+	</label>
+</div>
+</script></code></pre>
+
+<h3 class="module-title">Champs requis</h3>
+
+<form class="wpeo-form">
+	<div class="form-element form-element-required">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element form-element-required">...</div>
+</script></code></pre>
+
+<h3 class="module-title">Champs Disable</h3>
+
+<form class="wpeo-form">
+	<div class="form-element form-element-disable">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element form-element-disable">...</div>
+</script></code></pre>
+
+<h3 class="module-title">Erreur sur un champs</h3>
+
+<form class="wpeo-form">
+	<div class="form-element form-element-error">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element form-element-error">...</div>
+</script></code></pre>
+
+<h3 class="module-title">Label secondaire</h3>
+
+<form class="wpeo-form">
+	<div class="form-element">
+		<span class="form-label">Label</span>
+		<label class="form-field-container">
+			<input type="text" class="form-field" placeholder="Texte" />
+		</label>
+		<span class="form-sublabel">Phrase supplémentaire</span>
+	</div>
+</form>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="form-element">
+	<span class="form-label">Label</span>
+	<label class="form-field-container">
+		<input type="text" class="form-field" placeholder="Texte" />
+	</label>
+	<span class="form-sublabel">Phrase supplémentaire</span>
+</div>
+</script></code></pre>
+
+<h3 class="module-title">Couleurs</h3>
+
+<p class="note">Les classes s'utilise au même niveau que la classe <code class="language-css">"wpeo-form"</code></p>
+
+<ul>
+	<li><strong>form-light</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> Change la couleur des champs en blanc</li>
+</ul>

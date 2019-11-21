@@ -1,0 +1,210 @@
+.eo-custom-page #adminmenuwrap,
+.eo-custom-page #wpadminbar,
+.eo-custom-page #adminmenumain,
+.eo-custom-page #screen-meta-links,
+.eo-custom-page #wpfooter {
+	display: none !important;
+}
+
+.eo-custom-page #wpcontent {
+	margin-left: 0 !important;
+	padding-left: 0;
+}
+
+.eo-custom-page .content-wrap {
+	-webkit-transition: margin-left 0.2s ease-in;
+	transition: margin-left 0.2s ease-in;
+}
+
+.eo-custom-page .nav-wrap {
+	background: #1c1d1b;
+	width: 200px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0px;
+	-webkit-transition: width 0.2s ease-in;
+	transition: width 0.2s ease-in;
+}
+
+.eo-custom-page .nav-wrap #logo {
+	height: 130px;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce {
+	width: 50px;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu {
+	width: 50px;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu a {
+	width: 50px;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu a span {
+	display: none;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu a div {
+	padding-left: 16px;
+	text-align: center;
+	margin: auto;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu a i {
+	margin: auto;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce .nav-menu a img {
+	margin: auto;
+}
+
+.eo-custom-page .nav-wrap.wrap-reduce #logo {
+	height: 40px;
+}
+
+.eo-custom-page .nav-wrap #logo h1 {
+	height: inherit;
+}
+
+.eo-custom-page .nav-wrap #logo a {
+	height: inherit;
+}
+
+.eo-custom-page .nav-wrap #logo img {
+	height: inherit;
+}
+
+.eo-custom-page .nav-wrap #logo {
+	-webkit-transition: width 0.2s ease-in;
+	transition: width 0.2s ease-in;
+	margin: auto;
+	text-align: center;
+}
+
+.eo-custom-page .nav-wrap .nav-menu {
+	-webkit-transition: width 0.2s ease-in;
+	transition: width 0.2s ease-in;
+	overflow: hidden;
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item {
+	-webkit-transition: width 0.2s ease-in;
+	transition: width 0.2s ease-in;
+	display: block;
+	-webkit-transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+	transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+	text-decoration: none;
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item:before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item:hover {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item div {
+	padding: 16px;
+	padding-left: 20px;
+	font-size: 1.05em;
+	display: block;
+	color: #eee;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item div.disabled {
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0.4;
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item.item-active {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item i {
+	margin-right: 10px;
+}
+
+.eo-custom-page .nav-wrap .nav-menu .item img {
+	margin-right: 10px;
+	height: 13px;
+}
+
+.eo-custom-page .nav-wrap .nav-menu.nav-bottom {
+	color: red;
+	display: block;
+	position: absolute;
+	width: 200px;
+	bottom: 0;
+}
+
+.eo-custom-page .content-wrap {
+	background: #fafafa;
+	margin-left: 200px;
+}
+.eo-custom-page .content-wrap.content-reduce {
+	margin-left: 50px;
+}
+
+.eo-custom-page .content-wrap .digirisk-wrap {
+	padding-left: 20px;
+}
+
+.eo-custom-page .content-wrap .digirisk-wrap.wrap {
+	margin-right: 0;
+}
+
+.eo-custom-page .content-wrap #top-header {
+	background-color: white;
+	border-bottom: solid black 2px;
+	min-height: 60px;
+	/** Bouton Ajouter dans le header */
+}
+
+.eo-custom-page .content-wrap #top-header .nav-header {
+	margin: 0;
+}
+
+.eo-custom-page .content-wrap #top-header .nav-right {
+	line-height: 50px;
+	font-size: 1.2em;
+}
+
+.eo-custom-page .content-wrap #top-header .nav-right li img {
+	vertical-align: middle;
+}
+
+.eo-custom-page .content-wrap #top-header .page-title {
+	margin: 0;
+	font-size: 2em;
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.eo-custom-page .content-wrap #top-header .wpeo-button {
+	margin-top: 12px;
+	margin-left: 20px;
+}
+
+.eo-custom-page .content-wrap #top-header .alignright {
+	padding-right: 20px;
+	margin: 0;
+}
+
+.eo-custom-page .content-wrap .wrap-frais-pro {
+	padding-right: 0;
+	padding-left: 20px;
+}
+
+html.wp-toolbar {
+	padding-top: 0;
+}

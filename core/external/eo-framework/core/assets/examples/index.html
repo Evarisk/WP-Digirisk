@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Doc Framework CSS Eoxia</title>
+	<script src="assets/jquery.min.js" crossorigin="anonymous"></script>
+	<script type='text/javascript'>
+		/* <![CDATA[ */
+		var wpeo_framework = {"modalDefaultTitle":"\r\nD\u00e9faut modal titre\r\n","modalView":"\r\n<!-- Structure -->\r\n<div class=\"modal-container\">\r\n\r\n\t<!-- Ent\u00eate -->\r\n\t<div class=\"modal-header\">\r\n\t\t<h2 class=\"modal-title\">{{title}}<\/h2>\r\n\t\t<div class=\"modal-close\"><i class=\"fal fa-times\"><\/i><\/div>\r\n\t<\/div>\r\n\r\n\t<!-- Corps -->\r\n\t<div class=\"modal-content\">{{content}}<\/div>\r\n\r\n\t<!-- Footer -->\r\n\t<div class=\"modal-footer\">{{buttons}}<\/div>\r\n<\/div>\r\n","modalDefaultButtons":"\r\n<a class=\"wpeo-button button-grey button-uppercase modal-close\"><span>Annuler<\/span><\/a>\r\n<a class=\"wpeo-button button-main button-uppercase modal-close\"><span>Valider<\/span><\/a>\r\n"};
+		/* ]]> */
+		FontAwesomeConfig = { searchPseudoElements: true };
+	</script>
+	<!-- Google font -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,800" rel="stylesheet"> -->
+	<!-- Include HTML -->
+	<script src="assets/includejs.js"></script>
+	<script src="../js/dest/wpeo-assets.js"></script>
+	<!-- <script src="../js/dest/font/fontawesome-all.min.js"></script> -->
+	<!-- Highlight -->
+	<link rel="stylesheet" href="assets/prism.min.css">
+	<!-- Framework -->
+	<link rel="stylesheet" href="../css/fontawesome/fontawesome-all.min.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="assets/style.css" />
+	<script src="assets/script.js"></script>
+</head>
+<body>
+
+<header id="page-header">
+	<div class="site-title"><a href="index.html">Eoxia Framework</a></div>
+	<div class="version">V1.3.0</div>
+</header>
+
+<div id="page">
+	<div id="page-sidebar">
+		<ul>
+			<li class="primary"><a href="#heading" class="scroll-to">Général</a></li>
+			<li><a href="#heading" class="scroll-to">Titres</a></li>
+			<li class="primary"><a href="#grid" class="scroll-to">Mise en page</a></li>
+			<li><a href="#grid" class="scroll-to">Grid</a></li>
+			<li><a href="#table" class="scroll-to">Tableaux</a></li>
+			<li><a href="#pagination" class="scroll-to">Pagination</a></li>
+			<li class="primary"><a href="#animation" class="scroll-to">Composants</a></li>
+			<li><a href="#animation" class="scroll-to">Animations</a></li>
+			<li><a href="#autocomplete" class="scroll-to">Autocomplete</a></li>
+			<li><a href="#button" class="scroll-to">Boutons</a></li>
+			<li><a href="#dropdown" class="scroll-to">Dropdown</a></li>
+			<li><a href="#form" class="scroll-to">Formulaires</a></li>
+			<li><a href="#loader" class="scroll-to">Loader</a></li>
+			<li><a href="#modal" class="scroll-to">Modal</a></li>
+			<li><a href="#notice" class="scroll-to">Notice</a></li>
+			<li><a href="#notification" class="scroll-to">Notification</a></li>
+			<li><a href="#tab" class="scroll-to">Tab</a></li>
+			<li><a href="#tooltip" class="scroll-to">Tooltip</a></li>
+			<li><a href="#util" class="scroll-to">Util</a></li>
+		</ul>
+	</div>
+
+	<div id="page-content" class="wpeo-wrap">
+		<div w3-include-html="./inc/heading/heading.html"></div>
+		<div w3-include-html="./inc/grid/grid.html"></div>
+		<div w3-include-html="./inc/table/table.html"></div>
+		<div w3-include-html="./inc/pagination/pagination.html"></div>
+		<div w3-include-html="./inc/animation/animation.html"></div>
+		<div w3-include-html="./inc/autocomplete/autocomplete.html"></div>
+		<div w3-include-html="./inc/button/button.html"></div>
+		<div w3-include-html="./inc/dropdown/dropdown.html"></div>
+		<div w3-include-html="./inc/form/form.html"></div>
+		<div w3-include-html="./inc/loader/loader.html"></div>
+		<div w3-include-html="./inc/modal/modal.html"></div>
+		<div w3-include-html="./inc/notice/notice.html"></div>
+		<div w3-include-html="./inc/notification/notification.html"></div>
+		<div w3-include-html="./inc/tab/tab.html"></div>
+		<div w3-include-html="./inc/tooltip/tooltip.html"></div>
+		<div w3-include-html="./inc/util/util.html"></div>
+	</div>
+
+</div>
+
+<script src="assets/prism.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<h2 id="grid" class="module-title">Grid</h2>
+
+<p class="entete">Le module de grille est géré avec la propriété CSS Flexbox. Elle permet de créer des mises en pages simples et avancées.</p>
+
+<h3>Simple</h3>
+<p>La classe de base se nomme <code class="language-css">"wpeo-grid"</code>. Les classes <code class="language-css">"grid-1", "grid-2", "grid-3", "grid-4", "grid-5", "grid-6"</code> définissent le nombre d'élément par ligne.</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-grid grid-4">
+	<div>Element 1</div>
+	<div>Element 2</div>
+	<div>Element 3</div>
+	<div>Element 4</div>
+</div>
+<div class="wpeo-grid grid-2">
+	<div>Element 1</div>
+	<div>Element 2</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-4">
+	<div class=""><div class="box primary">Element 1</div></div>
+	<div class=""><div class="box primary">Element 2</div></div>
+	<div class=""><div class="box primary">Element 3</div></div>
+	<div class=""><div class="box primary">Element 4</div></div>
+</div>
+
+<div class="wpeo-grid grid-2">
+	<div class=""><div class="box secondary">Element 1</div></div>
+	<div class=""><div class="box secondary">Element 2</div></div>
+</div>
+
+<h3>Avancé</h3>
+
+<p>Le module permet de créer des affichages plus complexe en ajouant des tailles aux blocs enfants.<br>Par exemple, ajouter la classe <code class="language-css">"grid-2"</code>
+permettra au bloc de faire 2 fois sa taille. <code class="language-css">"grid-3"</code> lui permettra de faire 3 fois sa taille, etc...</p>
+<p>Nous pouvons dire que chaque bloc a, par défaut, la classe <code class="language-css">"grid-1"</code></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-grid grid-4">
+	<div>Element 1</div>
+	<div class="grid-3">Element 2</div>
+	<div>Element 3</div>
+	<div>Element 4</div>
+	<div>Element 5</div>
+	<div>Element 6</div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-4">
+	<div><div class="box primary">Element 1 (.grid-1)</div></div>
+	<div class="grid-3"><div class="box primary">Element 2 (.grid-3)</div></div>
+	<div><div class="box primary">Element 3 (.grid-1)</div></div>
+	<div><div class="box primary">Element 4 (.grid-1)</div></div>
+	<div><div class="box primary">Element 5 (.grid-1)</div></div>
+	<div><div class="box primary">Element 6 (.grid-1)</div></div>
+</div>
+
+
+<p class="note"><strong>Note :</strong> sur une grille de 3 blocs. Un bloc ne peut pas faire plus de 3 fois sa taille, car il dépasserait les 100%. les classes <code class="language-css">"grid-4"</code>
+et plus ne fonctionnent pas sur le bloc dans ce cas-là.</p>
+
+<h3>Padding</h3>
+
+<ul>
+	<li><strong>grid-padding-0</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Pas de padding pour le contenu</li>
+	<li><strong>grid-padding-1</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Padding de 0.2em pour le contenu</li>
+	<li><strong>grid-padding-1</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Padding de 0.5em pour le contenu</li>
+	<li><strong>grid-padding-3</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Padding de 1em pour le contenu</li>
+</ul>

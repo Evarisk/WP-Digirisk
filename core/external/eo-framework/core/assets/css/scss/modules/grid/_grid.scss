@@ -1,0 +1,79 @@
+/*--------------------------------------------------------------
+	Module : Grid
+	Version : 1.0.0
+
+	.wpeo-grid -> classe de base du mobule
+	.grid-x -> Définit le nombre d'élément par ligne
+		.grid-x -> Sur un élément, multiplie sa taille par le nombre X
+	.grid-padding-x -> ajoute du padding
+--------------------------------------------------------------*/
+
+.wpeo-grid {
+	@include flexbox();
+	margin-left: -0.5em;
+	margin-right: -0.5em;
+	width: 100%;
+
+	> * {
+		padding: 0.5em !important;
+	}
+	@for $i from 1 through 6 {
+		&.grid-#{$i} > * {
+			width: 100%/$i;
+		}
+		// Chaque élément enfant peut modifier sa propre taille par rapport au container
+		@for $y from 1 through 6 {
+			@if ( $y <= $i ) {
+				&.grid-#{$i} > .grid-#{$y} {
+					width: (100%/$i) * $y;
+				}
+			}
+		}
+	}
+
+	@media ( max-width: $media__medium ) {
+		&.grid-1 > * {
+			width: 100%;
+		}
+		&.grid-2 > *, &.grid-3 > *, &.grid-4 > *, &.grid-5 > *, &.grid-6 > * {
+			width: 50%;
+		}
+	}
+	@media ( max-width: $media__small ) {
+		&.grid-1 > *, &.grid-2 > *, &.grid-3 > *, &.grid-4 > *, &.grid-5 > *, &.grid-6 > * {
+			width: 100%;
+		}
+	}
+}
+
+/** Grid Padding */
+.wpeo-grid {
+	&.grid-padding-0 {
+		margin-left: 0;
+		margin-right: 0;
+		> * {
+			padding: 0 !important;
+		}
+	}
+	&.grid-padding-1 {
+		margin-left: -0.2em;
+		margin-right: -0.2em;
+		> * {
+			padding: 0.2em !important;
+		}
+	}
+	&.grid-padding-2 {
+		margin-left: -0.5em;
+		margin-right: -0.5em;
+		> * {
+			padding: 0.5em !important; // Par défaut
+		}
+	}
+	&.grid-padding-3 {
+		margin-left: -1em;
+		margin-right: -1em;
+		> * {
+			padding: 1em !important;
+		}
+	}
+}

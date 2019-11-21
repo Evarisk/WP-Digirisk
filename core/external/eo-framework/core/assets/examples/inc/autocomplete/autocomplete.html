@@ -1,0 +1,219 @@
+<h2 id="autocomplete" class="module-title">Autocomplete</h2>
+
+<h3 class="module-title">Standard</h3>
+
+<p><strong>autocomplete-icon-before</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> L'icone loupe. Peut être remplacée par n'importe qu'elle Font Awesome</p>
+<p><strong>autocomplete-icon-after</strong> <i class=" fas fa-long-arrow-alt-right fa-fw"   aria-hidden="true"></i> La croix pour supprimer le texte. Peut être remplacée par n'importe qu'elle Font Awesome</p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Résultat 1</span>
+			</div>
+		</li>
+	</ul>
+</div>
+</script></code></pre>
+
+
+<div class="wpeo-autocomplete autocomplete-active">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Résultat 1</span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+
+<h3 class="module-title" style="margin-top: 4em;">Couleur</h3>
+
+<ul>
+	<li>Gris (par défaut) : <code class="language-css">"autocomplete-grey"</code></li>
+	<li>Blanc : <code class="language-css">"autocomplete-light"</code></li>
+</ul>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete autocomplete-light">
+...
+</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-2">
+	<div>
+		<div class="wpeo-autocomplete autocomplete-active">
+			<label class="autocomplete-label" for="mon-autocomplete">
+				<i class="autocomplete-icon-before fas fa-search"></i>
+				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+				<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+			</label>
+			<ul class="autocomplete-search-list">
+				<li class="autocomplete-result">
+					<div class="autocomplete-result-container">
+						<span class="autocomplete-result-title">Résultat 1</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div>
+		<div class="wpeo-autocomplete autocomplete-light autocomplete-active">
+			<label class="autocomplete-label" for="mon-autocomplete">
+				<i class="autocomplete-icon-before fas fa-search"></i>
+				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+				<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+			</label>
+			<ul class="autocomplete-search-list">
+				<li class="autocomplete-result">
+					<div class="autocomplete-result-container">
+						<span class="autocomplete-result-title">Résultat 1</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<h3 class="module-title" style="margin-top: 4em;">Loader</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete autocomplete-loading">
+...
+</div>
+</script></code></pre>
+
+<div class="wpeo-autocomplete autocomplete-loading autocomplete-active">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Résultat 1</span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<h3 class="module-title" style="margin-top: 4em;">Suppression</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete autocomplete-full">
+...
+</div>
+</script></code></pre>
+
+<div class="wpeo-autocomplete autocomplete-full autocomplete-active">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Résultat 1</span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<h3 class="module-title" style="margin-top: 4em;">Pas de résultat / résultat textuel </h3>
+
+<p>La classe <code class="language-css">"autocomplete-result"</code> devient <code class="language-css">"autocomplete-result-text"</code></p>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result-text">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Pas de résultats</span>
+				<span class="autocomplete-result-subtitle">Essayez en changeant les mots clés</span>
+			</div>
+		</li>
+	</ul>
+</div>
+</script></code></pre>
+
+<div class="wpeo-autocomplete autocomplete-active">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result-text">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Pas de résultats</span>
+				<span class="autocomplete-result-subtitle">Essayez en changeant les mots clés</span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<h3 class="module-title" style="margin-top: 4em;">Autocomplete avancé</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-autocomplete">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<img class="autocomplete-result-image" src="https://pbs.twimg.com/profile_images/378800000483044729/a9887ba5faac56724e7988ce95c5bab0_normal.png" />
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Titre</span>
+				<span class="autocomplete-result-subtitle">Sous-titre</span>
+			</div>
+		</li>
+	</ul>
+</div>
+</script></code></pre>
+
+<div class="wpeo-autocomplete autocomplete-active" style="margin-bottom: 6em;">
+	<label class="autocomplete-label" for="mon-autocomplete">
+		<i class="autocomplete-icon-before fas fa-search"></i>
+		<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
+		<span class="autocomplete-icon-after"><i class="fas fa-times"></i></span>
+	</label>
+	<ul class="autocomplete-search-list">
+		<li class="autocomplete-result">
+			<img class="autocomplete-result-image" src="https://pbs.twimg.com/profile_images/378800000483044729/a9887ba5faac56724e7988ce95c5bab0_normal.png" />
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title">Titre</span>
+				<span class="autocomplete-result-subtitle">Sous-titre</span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<h3 class="module-title">Taille</h3>
+
+<ul>
+	<li><strong>autocomplete-small</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Contenu taille 200px</li>
+	<li><strong>autocomplete-medium</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Contenu taille 300px <strong>(par défaut)</strong></li>
+	<li><strong>autocomplete-large</strong> <i class="fas fa-long-arrow-alt-right fa-fw" aria-hidden="true"></i> Contenu taille 400px</li>
+</ul>

@@ -1,0 +1,103 @@
+<h2 id="notification" class="module-title">Notification</h2>
+
+<p class="entete">Le module utilise la classe : <code class="language-css">"wpeo-notification"</code></p>
+<p>La notification est invisible. Lorsqu'on lui ajoute la classe <code class="language-css">"notification-active"</code>, elle apparaît en bas à droite de l'écran.</p>
+
+<h3 class="module-title">Notification simple</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-notification">
+	<div class="notification-title">Texte de la notification</div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-notification static notification-active">
+	<div class="notification-title">Texte de la notification</div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+
+<h3 class="module-title">Notification avec texte avancé</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-notification">
+	<div class="notification-title"><strong>Utilisateur</strong> ajouté dans la section. <a href="#">Voir</a></div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-notification static notification-active">
+	<div class="notification-title"><strong>Utilisateur</strong> ajouté dans la section. <a href="#">Voir</a></div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+
+<h3 class="module-title">Image</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-notification">
+	<img class="notification-thumbnail" src="url" />
+	<div class="notification-title">Texte de la notification/div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-notification static notification-active">
+	<img class="notification-thumbnail" src="assets/img/gravatar.jpg" />
+	<div class="notification-title">Texte de la notification</div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+
+<h3 class="module-title">Icone</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-notification">
+	<i class="notification-icon fas fa-heart"></i>
+	<div class="notification-title">Texte de la notification/div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+</script></code></pre>
+
+<div class="wpeo-notification static notification-active">
+	<i class="notification-icon fas fa-heart"></i>
+	<div class="notification-title">Texte de la notification</div>
+	<div class="notification-close"><i class="fas fa-times"></i></div>
+</div>
+
+<h3 class="module-title">Couleurs</h3>
+
+<pre><code class="language-markup"><script type="prism-html-markup">
+<div class="wpeo-notification notification-green">
+	...
+</div>
+</script></code></pre>
+
+<div class="wpeo-grid grid-2">
+	<div>
+		<div class="wpeo-notification static notification-active notification-green">
+			<i class="notification-icon fas fa-heart"></i>
+			<div class="notification-title"><strong>Classe</strong> .notification-green</div>
+			<div class="notification-close"><i class="fas fa-times"></i></div>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-notification static notification-active notification-blue">
+			<i class="notification-icon fas fa-heart"></i>
+			<div class="notification-title"><strong>Classe</strong> .notification-blue</div>
+			<div class="notification-close"><i class="fas fa-times"></i></div>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-notification static notification-active notification-orange">
+			<i class="notification-icon fas fa-heart"></i>
+			<div class="notification-title"><strong>Classe</strong> .notification-orange</div>
+			<div class="notification-close"><i class="fas fa-times"></i></div>
+		</div>
+	</div>
+	<div>
+		<div class="wpeo-notification static notification-active notification-red">
+			<i class="notification-icon fas fa-heart"></i>
+			<div class="notification-title"><strong>Classe</strong> .notification-red</div>
+			<div class="notification-close"><i class="fas fa-times"></i></div>
+		</div>
+	</div>
+</div>
