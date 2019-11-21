@@ -46,7 +46,7 @@ class Digirisk_Action {
 		}
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'callback_before_admin_enqueue_scripts_js_global' ), 10 );
-		add_action( 'init', array( $this, 'callback_plugins_loaded' ) );
+		add_action( 'init', array( $this, 'callback_plugins_loaded' ), 1 );
 		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
 		add_action( 'admin_init', array( $this, 'redirect_to' ) );
 
@@ -134,6 +134,7 @@ class Digirisk_Action {
 	public function callback_plugins_loaded() {
 		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
 			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk-causerie';
+			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk_page_digirisk-du';
 		}
 
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );
@@ -207,7 +208,7 @@ class Digirisk_Action {
 		ob_start();
 		require PLUGIN_DIGIRISK_PATH . '/core/view/patch-note.view.php';
 		wp_send_json_success( array(
-			'status'  => $result['status'],
+			'status'  => false,//$result['status'],
 			'result'  => $result,
 			'view'    => ob_get_clean(),
 		) );
