@@ -40,7 +40,7 @@ class Page_Sorter_Action {
 	 * @since 6.0.0
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Orgnisation des UT', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_sorter', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ), 'fa fa-network-wired' );
+		CMH::register_menu( 'digirisk', __( 'Organisation des UT', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_sorter', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ), 'fa fa-network-wired' );
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * Plugin Name: Digirisk
  * Plugin URI:  http://www.evarisk.com/document-unique-logiciel
  * Description: Avec le plugin Digirisk vous pourrez réaliser, de façon simple et intuitive, le ou les documents uniques de vos entreprises et gérer toutes les données liées à la sécurité de votre personnel.
- * Version:     7.5.0
+ * Version:     7.5.1
  * Author:      Evarisk
  * Author URI:  http://www.evarisk.com
  * License:     AGPLv3
@@ -23,8 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 DEFINE( 'PLUGIN_DIGIRISK_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_DIR', basename( __DIR__ ) );
+DEFINE( 'PLUGIN_DIGIRSK_DEV_MODE', true );
 
-require_once 'core/external/eo-framework/eo-framework.php';
+if ( ! PLUGIN_DIGIRSK_DEV_MODE ) {
+	require_once 'core/external/eo-framework/eo-framework.php';
+}
 
 \eoxia\Init_Util::g()->exec( PLUGIN_DIGIRISK_PATH, basename( __FILE__, '.php' ) );
 

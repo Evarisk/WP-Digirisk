@@ -103,7 +103,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   		</style>
 		<?php
 		$focus = isset( $focus_bloc ) ? $focus_bloc : '';
-		echo '<script>$(function(){
+		echo '<script>jQuery( document ).ready(function(){
 			window.eoxiaJS.digirisk.legalDisplay.generateSocietyIndicator("' . $focus . '");
 		});</script>'; ?>
 

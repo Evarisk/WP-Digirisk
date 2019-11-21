@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "7.5.0",
+	"version": "7.5.1",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
       "digirisk-welcome",

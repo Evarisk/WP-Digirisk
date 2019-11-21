@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 5.2.4
-Stable tag: 7.5.0
+Tested up to: 5.3
+Stable tag: 7.5.1
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,14 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.5.1 =
+
+* 37141 - Document: Correction de la génération du document "permis de feu".
+* 37074 - Autres: Correction ortographique de "Orgnisation des UT" vers Organisation des UT. 
+* 37075 - Multisite: Navigation entre les différentes instances de DigiRisk améliorée.
+* 37076 - Causerie: La bibliothèque des causeries est de nouveau fonctionnel.
+* 37077 - DU: Remise en place de l'ordre de l'arbre de navigation.
 
 = Version 7.5.0 =
 

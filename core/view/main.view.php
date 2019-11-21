@@ -54,4 +54,46 @@ defined( 'ABSPATH' ) || exit; ?>
 			</p>
 		</div>
 	</div>
+
+	<?php
+	if ( $ask_auto_connect ) :
+		?>
+		<div class="wpeo-modal modal-active modal-interface">
+			<div class="modal-container">
+
+				<!-- Entête -->
+				<div class="modal-header">
+					<h2 class="modal-title">Interface par défaut</h2>
+					<div class="modal-close"><i class="fas fa-times"></i></div>
+				</div>
+
+				<!-- Corps -->
+				<div class="modal-content">
+					<p>DigiRisk n'est pas votre interface par défaut. Voulez-vous la définir en tant qu'interface par défaut ?</p>
+					<div class="wpeo-form">
+						<div class="form-element">
+							<div class="form-field-inline">
+								<input type="checkbox" id="no-ask-again" class="form-field" checked="checked" name="ask_again" />
+								<label for="no-ask-again">Toujours effectuer cette vérification au démarrage de DigiRisk.</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer -->
+				<div class="modal-footer">
+					<a class="action-input wpeo-button button-main button-uppercase"
+						data-parent="wpeo-modal"
+					   data-set-default="true"
+					   data-action="set_default_app"><span>Faire de DigiRisk mon interface par défaut.</span></a>
+					<a class="action-input wpeo-button button-grey button-uppercase"
+						data-parent="wpeo-modal"
+					   	data-set-default="false"
+						data-action="set_default_app"><span>Plus tard</span></a>
+				</div>
+			</div>
+		</div>
+		<?php
+		endif;
+	?>
 </div>

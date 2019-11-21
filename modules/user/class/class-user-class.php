@@ -79,12 +79,16 @@ class User_Class extends \eoxia\User_Class {
 	public function callback_user_profile( $user ) {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $user->ID );
 		$hiring_date      = ! empty( $user_information['digi_hiring_date'] ) ? $user_information['digi_hiring_date'] : '';
-		$phone_number      = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
+		$phone_number     = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
+		$auto_connect     = isset( $user_information['auto_connect'] ) ? $user_information['auto_connect'] : false;
+		$ask_auto_connect = isset( $user_information['ask_auto_connect'] ) ? $user_information['ask_auto_connect'] : true;
 
 		\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile', array(
 			'user_information' => $user_information,
 			'hiring_date'      => $hiring_date,
-			'phone_number'      => $phone_number,
+			'phone_number'     => $phone_number,
+			'auto_connect'     => $auto_connect,
+			'ask_auto_connect' => $ask_auto_connect,
 		) );
 	}
 
@@ -100,16 +104,20 @@ class User_Class extends \eoxia\User_Class {
 			return false;
 		}
 
-		$post_request = $_POST['digirisk_user_information_meta'];
+		$user_information = get_the_author_meta( 'digirisk_user_information_meta', get_current_user_id() );
+		$post_request     = $_POST['digirisk_user_information_meta'];
+
 		if( isset( $post_request[ 'digi_phone_number' ] ) && ! empty( $post_request[ 'digi_phone_number' ] ) ){
 			if( ! $this->check_if_phone_number_is_valid( $post_request[ 'digi_phone_number' ] ) ){
-				$post_request[ 'digi_phone_number' ] = '';
+				$user_information['digi_phone_number'] = '';
 			}else{
-				$post_request[ 'digi_phone_number_full' ] = '(' . $post_request[ 'digi_phone_callingcode' ] . ')' . $post_request[ 'digi_phone_number' ];
+				$user_information['digi_phone_number_full'] = '(' . $post_request[ 'digi_phone_callingcode' ] . ')' . $post_request[ 'digi_phone_number' ];
 			}
 		}
+		$user_information['auto_connect']     = ( isset( $_POST['digirisk_user_information_meta']['auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['auto_connect'] ) ? true : false;
+		$user_information['ask_auto_connect'] = ( isset( $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) ? true : false;
 
-		update_user_meta( $user_id, 'digirisk_user_information_meta', $post_request );
+		update_user_meta( $user_id, 'digirisk_user_information_meta', $user_information );
 	}
 
 	/**
