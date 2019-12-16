@@ -243,14 +243,15 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfInterventionCanBeAdd = function( e
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid = function( parent_element, element, error ){
-	if( error ){
+	if ( error ) {
 		return true;
 	}
 
-	var content = parent_element.find( '[name="' + element + '"]').val();
+	var content = parent_element.find( '[name="' + element + '"]' ).val();
+
 	if( content == "" || content == "-1" || content == null ){
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
@@ -311,7 +312,7 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishMaitreOeu
 }
 
 window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervenantExterieur = function( element ){
-	var parent_element = element.closest( '.digi-prevention-plan-parent' );
+	var parent_element = jQuery( '.digi-prevention-plan-parent' );
 
 	var intervenant_exterieur_element = parent_element.find( '.information-intervenant-exterieur' );
 	var error = false;
@@ -322,9 +323,9 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfPreventionPlanCanBeFinishIntervena
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-email', error );
 	error = window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid( intervenant_exterieur_element, 'user_signature', error );
 
-	if( ! error ){
+	if ( ! error ) {
 		parent_element.find( '.prevention-start' ).removeClass( 'button-disable' );
-	}else{
+	} else {
 		parent_element.find( '.prevention-start' ).addClass( 'button-disable' );
 	}
 }

@@ -48,6 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="hidden" name="prevention_id" value="<?php echo esc_attr( $prevention->data['id'] ); ?>" />
 
 		<?php Prevention_Page_Class::g()->display_step_nbr( $prevention ); ?>
+		<?php Prevention_Class::g()->step_is_valid( $prevention->data['step'], $prevention ); ?>
 
 		<!-- Next button -->
 		<div class="wpeo-button wpeo-tooltip-event button-blue action-input prevention-start

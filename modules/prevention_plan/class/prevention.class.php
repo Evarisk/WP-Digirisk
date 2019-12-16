@@ -200,7 +200,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$i_name        = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
 		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
 		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
-		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
 		$i_email  = ! empty( $_POST['intervenant-email'] ) ? sanitize_text_field( $_POST['intervenant-email'] ) : '';
 
 		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_email ){
@@ -212,9 +211,8 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$data_i = array(
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
-			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
-			'phone_nbr' => $i_phone,
-			'email' => $i_email,
+			'phone'     => $i_phone,
+			'email'     => $i_email,
 		);
 
 		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
@@ -277,7 +275,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $id );
 		$phone_number = ! empty( $user_information['digi_phone_number_full'] ) ? $user_information['digi_phone_number_full'] : '';
 		$phone_only_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
-		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_number;
+		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_only_number;
 		$prevention->data[ $type_user ][ 'data' ]->phone_nbr = $phone_only_number;
 
 		return $prevention;
@@ -444,7 +442,14 @@ class Prevention_Class extends \eoxia\Post_Class {
 				return true;
 				break;
 			case 4:
-				return true;
+				$signature_id = (int) get_post_meta( $prevention_plan->data['id'], 'intervenant_exterieur_signature_id', true );
+
+				if ( isset( $prevention_plan->data['intervenant_exterieur'] ) && $prevention_plan->data['intervenant_exterieur']['lastname'] != "" &&
+				     $prevention_plan->data['intervenant_exterieur']['firstname'] != ""  &&
+				     $prevention_plan->data['intervenant_exterieur']['email'] != "" &&
+				     $prevention_plan->data['intervenant_exterieur']['phonenbr'] != "" && $signature_id != 0 ) {
+					return true;
+				}
 				break;
 			default:
 				break;

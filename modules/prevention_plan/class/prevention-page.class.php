@@ -225,7 +225,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		return Prevention_Class::g()->update( $prevention->data );
 	}
 
-
 	public function next_step( $prevention, $nextstep ) {
 		$prevention->data['step'] = $nextstep;
 		return Prevention_Class::g()->update( $prevention->data );

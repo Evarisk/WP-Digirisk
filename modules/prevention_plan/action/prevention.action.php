@@ -117,7 +117,7 @@ class Prevention_Action {
 		) );
 	}
 
-	public function callback_prevention_load_tab(){
+	public function callback_prevention_load_tab() {
 		$tab = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : ''; // WPCS: input var ok.
 
 		ob_start();
@@ -395,12 +395,13 @@ class Prevention_Action {
 
 		$link = isset( $response[ 'document' ]->data[ 'link' ] ) ? $response[ 'document' ]->data[ 'link' ] : '';
 		$title = isset( $response[ 'document' ]->data[ 'title' ] ) ? $response[ 'document' ]->data[ 'title' ] : '';
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'preventionPlan',
 			'callback_success' => 'generateDocumentPreventionSuccess',
 			'link'             => $link,
-			'filename'         => $title
+			'filename'         => $title,
 		) );
 	}
 
