@@ -95,7 +95,7 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
-	public function register_search( $former, $post_values = array() ) {
+	public function register_search( $permis_feu, $post_values = array() ) {
 		global $eo_search;
 
 		$args_permis_feu_participants = array(
@@ -130,10 +130,16 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 
 		$args_accident_post = wp_parse_args( $args_accident_post, $post_values );
 
+
 		$args_permis_feu_maitreoeuvre = array(
-			'type'  => 'user',
-			'name'  => 'user_id',
+			'type'         => 'user',
+			'name'         => 'user_id',
+			'label'        => __( 'Nom', 'digirisk' ),
+			'value'        => ! empty( $permis_feu->data['maitre_oeuvre']['user_id'] ) ? $permis_feu->data['maitre_oeuvre']['data']->last_name : '',
+			'hidden_value' => $permis_feu->data['maitre_oeuvre']['user_id'],
+			'class'        => ! empty( $permis_feu->data['maitre_oeuvre']['user_id'] ) ? 'form-element-disable' : '',
 		);
+
 		$eo_search->register_search( 'maitre_oeuvre', $args_permis_feu_maitreoeuvre );
 
 		$eo_search->register_search( 'accident_post', $args_accident_post );
@@ -155,9 +161,21 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 				)
 			),
 			'icon' => 'fa-search',
+			'next_action' => 'digi_permis_feu_search_prevention',
 		);
 
 		$eo_search->register_search( 'prevention_list', $args_prevention );
+
+		$args_permis_feu_intervenant = array(
+			'type'         => 'user',
+			'name'         => 'user_id',
+			'label'        => __( 'Nom', 'digirisk' ),
+			'value'        => ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? $permis_feu->data['intervenant_exterieur']['data']->last_name : '',
+			'hidden_value' => $permis_feu->data['intervenant_exterieur']['user_id'],
+			'class'        => ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? 'form-element-disable' : '',
+		);
+
+		$eo_search->register_search( 'intervenant_exterieur', $args_permis_feu_intervenant );
 	}
 
 
@@ -179,12 +197,13 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 			), true );
 		}
 
-		$this->register_search( $user );
+		$this->register_search( $permis_feu );
 
 		if( $permis_feu->data[ 'step' ] >= \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_CLOSED ){
 			echo '<pre>'; print_r( 'FINIE' ); echo '</pre>'; exit;
-		}else{
-			$file = "step-" . $permis_feu->data[ 'step' ];
+		} else {
+			$file = "step-" . $permis_feu->data['step'];
+
 			\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/' . $file, array(
 				'permis_feu'    => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu ),
 				'society'       => $society,

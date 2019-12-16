@@ -45,6 +45,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 
 	<div class="ajax-content digi-permis-feu-parent step-<?php echo esc_attr( $permis_feu->data['step'] ); ?>">
+		<input type="hidden" name="permis_feu_id" value="<?php echo esc_attr( $permis_feu->data['id'] ); ?>" />
+
 		<?php Permis_Feu_Page_Class::g()->display_step_nbr( $permis_feu ); ?>
+
+		<!-- Next button -->
+		<div class="wpeo-button wpeo-tooltip-event button-blue action-input permis-feu-start
+			<?php echo Permis_Feu_Class::g()->step_is_valid( $permis_feu->data['step'], $permis_feu ) ? '' : 'button-disable'; ?>"
+		     data-parent="ajax-content"
+		     data-action="next_step_permis_feu"
+		     data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
+		     data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
+		     aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
+		     style="float:right">
+			<span><i class="fas fa-2x fa-long-arrow-alt-right"></i></span>
+		</div>
+
 	</div>
 </div>

@@ -1,0 +1,12 @@
+{
+  "name": "Signature",
+  "slug": "signature",
+  "since": "7.5.2",
+  "description": "Le module gérant les signatures des utilisateurs",
+  "path": "modules/signature/",
+  "dependencies": {
+    "shortcode": {},
+    "class": {},
+    "action": {}
+  }
+}

@@ -62,6 +62,8 @@ class Prevention_Page_Action {
  	}
 
 	public function ajax_next_step_prevention() {
+		ini_set( 'display_errors', true );
+		error_reporting( E_ALL );
 		wp_verify_nonce( 'next_step_causerie' );
 
 		$id = ! empty( $_REQUEST['id'] ) ? (int) $_REQUEST['id'] : 0;
@@ -71,6 +73,7 @@ class Prevention_Page_Action {
 		}
 
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
+		$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
 
 		if ( empty( $prevention ) ) {
 			wp_send_json_error();
@@ -90,30 +93,36 @@ class Prevention_Page_Action {
 
 		$url_redirect = '';
 
-		Prevention_Page_Class::g()->register_search( null, null );
+		Prevention_Page_Class::g()->register_search( null, $prevention );
+
 		switch ( $prevention->data['step'] ) {
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_FORMER:
 				$prevention = Prevention_Class::g()->step_maitreoeuvre( $prevention );
+				$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
+
 				ob_start();
-				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2', array(
+				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(
 					'prevention' => $prevention,
 				) );
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION:
 				$nextstep = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE;
 				$data = array(
-					'title'=> isset( $_POST[ 'prevention-title' ] ) ? sanitize_text_field( $_POST[ 'prevention-title' ] ) : '',
+					'title'               => isset( $_POST[ 'prevention-title' ] ) ? sanitize_text_field( $_POST[ 'prevention-title' ] ) : '',
 					'more_than_400_hours' => isset( $_POST[ 'more_than_400_hours' ] ) ? (int) $_POST[ 'more_than_400_hours' ] : '0',
 					'imminent_danger'     => isset( $_POST[ 'imminent_danger' ] ) ? (int) $_POST[ 'imminent_danger' ]: '0',
 					'date_start'          => isset( $_POST[ 'start_date' ] ) ? sanitize_text_field( $_POST[ 'start_date' ] ) : '',
 					'date_end'            => isset( $_POST[ 'end_date' ] ) ? sanitize_text_field( $_POST[ 'end_date' ] ) : '',
 					'date_end__is_define' => isset( $_POST[ 'date_end__is_define' ] ) ? sanitize_text_field( $_POST[ 'date_end__is_define' ] ) : 'defined'
 				);
+
 				$prevention = Prevention_Class::g()->update_information_prevention( $prevention, $data );
 				$prevention = Prevention_Page_Class::g()->next_step( $prevention, $nextstep );
+				$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
+
 
 				ob_start();
-				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-3', array(
+				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(
 					'prevention'    => $prevention,
 					'society'       => $society,
 					'legal_display' => $legal_display
@@ -121,11 +130,19 @@ class Prevention_Page_Action {
 				break;
 			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_ENTERPRISE:
 				$prevention = Prevention_Page_Class::g()->save_society_information( $prevention, $society, $legal_display );
+				$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
+				ob_start();
+				\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(
+					'prevention'    => $prevention,
+					'society'       => $society,
+					'legal_display' => $legal_display
+				) );
+				break;
+			case \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_PARTICIPANT:
 				$prevention = Prevention_Class::g()->save_info_maitre_oeuvre();
-				if( ! $prevention->data[ 'is_end' ] ){
+				if( ! $prevention->data['is_end'] ){
 					Prevention_Page_Class::g()->step_close_prevention( $prevention, $society, $legal_display );
 				}
-
 				$url_redirect = admin_url( 'admin.php?page=digirisk-prevention' );
 				break;
 			default:

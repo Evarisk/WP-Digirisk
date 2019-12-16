@@ -12,7 +12,7 @@ window.eoxiaJS.digirisk.setting.init = function() {
 window.eoxiaJS.digirisk.setting.event = function() {
 	jQuery( document ).on( 'click', '#digi-danger-preset .save-all', window.eoxiaJS.digirisk.setting.savePresetRisks );
 	jQuery( document ).on( 'click', '#digi-danger-preset table tr input:not(input[type="checkbox"]), #digi-danger-preset tr .toggle, #digi-danger-preset .dropdown-toggle, #digi-danger-preset tr textarea, #digi-danger-preset tr .popup, #digi-danger-preset tr .action', window.eoxiaJS.digirisk.setting.checkTheCheckbox );
-	jQuery( document ).on( 'click', '.settings_page_digirisk-setting .list-users .wp-digi-pagination a', window.eoxiaJS.digirisk.setting.pagination );
+	jQuery( document ).on( 'click', '.digirisk_page_digirisk-setting .list-users .wp-digi-pagination a', window.eoxiaJS.digirisk.setting.pagination );
 	jQuery( document ).on( 'click', '.section-capability input[type="checkbox"]', window.eoxiaJS.digirisk.setting.activeSave );
 
 	jQuery( document ).on( 'click', '.wpeo-notification .notification-close', window.eoxiaJS.digirisk.setting.closeWpeo );

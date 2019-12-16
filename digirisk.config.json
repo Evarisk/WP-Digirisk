@@ -20,7 +20,7 @@
 		"digirisk-handle-sorter",
 		"digirisk-update",
 		"digirisk-setting",
-    "profile",
+      "profile",
     "user-edit",
     "digirisk-dashboard-duer",
       "digirisk-dashboard-model",
@@ -54,6 +54,8 @@
 		"modules/update_manager/update_manager.config.json",
 		"modules/historic/historic.config.json",
 		"modules/child/child.config.json",
+      
+      "modules/signature/signature.config.json",
 
 		"modules/address/address.config.json",
     "modules/society/society.config.json",

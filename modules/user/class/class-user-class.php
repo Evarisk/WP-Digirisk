@@ -107,15 +107,9 @@ class User_Class extends \eoxia\User_Class {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', get_current_user_id() );
 		$post_request     = $_POST['digirisk_user_information_meta'];
 
-		if( isset( $post_request[ 'digi_phone_number' ] ) && ! empty( $post_request[ 'digi_phone_number' ] ) ){
-			if( ! $this->check_if_phone_number_is_valid( $post_request[ 'digi_phone_number' ] ) ){
-				$user_information['digi_phone_number'] = '';
-			}else{
-				$user_information['digi_phone_number_full'] = '(' . $post_request[ 'digi_phone_callingcode' ] . ')' . $post_request[ 'digi_phone_number' ];
-			}
-		}
-		$user_information['auto_connect']     = ( isset( $_POST['digirisk_user_information_meta']['auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['auto_connect'] ) ? true : false;
-		$user_information['ask_auto_connect'] = ( isset( $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) ? true : false;
+		$user_information['digi_phone_number'] = $post_request['digi_phone_number'];
+		$user_information['auto_connect']      = ( isset( $_POST['digirisk_user_information_meta']['auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['auto_connect'] ) ? true : false;
+		$user_information['ask_auto_connect']  = ( isset( $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) && 'on' == $_POST['digirisk_user_information_meta']['ask_auto_connect'] ) ? true : false;
 
 		update_user_meta( $user_id, 'digirisk_user_information_meta', $user_information );
 	}
@@ -331,16 +325,6 @@ class User_Class extends \eoxia\User_Class {
 		}
 
 		return $index_valid_key;
-	}
-
-	public function check_if_phone_number_is_valid( $phone_number ){
-		/*$pattern = '^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}';
-		if( preg_match($pattern, $phone_number, $matches) ){
-			return true;
-		}else{
-			return false;
-		}*/
-		return true;
 	}
 }
 

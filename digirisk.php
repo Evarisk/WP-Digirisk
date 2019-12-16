@@ -25,6 +25,7 @@ DEFINE( 'PLUGIN_DIGIRISK_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 DEFINE( 'PLUGIN_DIGIRISK_DIR', basename( __DIR__ ) );
 DEFINE( 'PLUGIN_DIGIRSK_DEV_MODE', false );
 
+
 if ( ! PLUGIN_DIGIRSK_DEV_MODE ) {
 	require_once 'core/external/eo-framework/eo-framework.php';
 }

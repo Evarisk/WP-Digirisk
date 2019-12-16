@@ -60,7 +60,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix = 'C';
+	public $element_prefix = 'PP_';
 
 
 	public function add_signature( $prevention, $user_id, $signature_data, $is_former = false ) {
@@ -89,7 +89,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 		// $prevention = $this->add_participant( $prevention, $former_id, true );
 		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
-		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-phone-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone-callingcode'] ) : '';
 		$update = ! empty( $_POST['update'] ) ? false : true;
 
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION;
@@ -284,7 +283,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return $prevention;
 	}
 
-
 	public function generate_document_odt_prevention( $prevention ){
 
 		$legal_display = Legal_Display_Class::g()->get( array(
@@ -311,12 +309,11 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return $response;
 	}
 
-	public function update_maitre_oeuvre( $id, $user_id ){
+	public function update_maitre_oeuvre( $id, $user_info ){
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
-		$user_info = get_user_by( 'id', $user_id );
 
 		if( ! empty( $user_info ) ){
-			$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] =  intval( $user_info->data->ID );
+			$prevention->data['maitre_oeuvre']['user_id'] = intval( $user_info->data->ID );
 		}
 		return Prevention_Class::g()->update( $prevention->data );
 	}
@@ -428,6 +425,32 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 
 		return $intervenants;
+	}
+
+	public function step_is_valid( $step, $prevention_plan ) {
+		switch( $step ) {
+			case 1:
+				$signature_id = (int) get_post_meta( $prevention_plan->data['id'], 'maitre_oeuvre_signature_id', true );
+
+				if ( isset( $prevention_plan->data['maitre_oeuvre']['data'] ) && $prevention_plan->data['maitre_oeuvre']['data']->first_name != "" &&
+				     $prevention_plan->data['maitre_oeuvre']['data']->last_name != ""  && $signature_id != 0 ) {
+					return true;
+				}
+				break;
+			case 2:
+				return true;
+				break;
+			case 3:
+				return true;
+				break;
+			case 4:
+				return true;
+				break;
+			default:
+				break;
+		}
+
+		return false;
 	}
 }
 

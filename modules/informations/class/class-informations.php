@@ -35,17 +35,29 @@ class Informations_Class extends \eoxia\Singleton_Util {
 	public function display( $element ) {
 		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
-		$duers        = DUER_Class::g()->get( array( 'posts_per_page' => 2 ), true );
+		$duers = DUER_Class::g()->get( array(
+			'posts_per_page' => 2,
+			'post_parent'    => $element->data['id'],
+		) );
+
 		$current_duer = null;
 
 		$date_before_next_duer = null;
 
 		if ( ! empty( $duers ) ) {
-			$current_duer = ( is_array( $duers ) ) ? $duers[0] : $duers;
+			$current_duer = is_array( $duers ) ? $duers[0] : $duers;
 			$old_duer     = is_array( $duers ) ? $duers[1] : null;
 		}
 
-		$accident = Accident_Class::g()->get( array( 'posts_per_page' => 1 ), true );
+		$accident  = null;
+		$accidents = get_posts( array(
+			'posts_per_page' => 1,
+			'post_type'      => Accident_Class::g()->get_type(),
+		) );
+
+		if ( count( $accidents ) > 0 ) {
+			$accident = $accidents[0];
+		}
 
 		$count_users = count_users();
 
@@ -130,49 +142,6 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			);
 		}
 
-		$risks_categories = Risk_Category_Class::g()->get( array(
-			'meta_key' => '_position',
-			'orderby'  => 'meta_value_num',
-		) );
-
-
-		$risks = Risk_Class::g()->get();
-
-		if ( ! empty( $risks_categories ) ) {
-			foreach ( $risks_categories as &$risk_category ) {
-				for ( $i = 1; $i < 5; $i++ ) {
-					if ( ! isset( $risk_category->data['level' . $i ] )  ) {
-						$risk_category->data['level' . $i ] = 0;
-					}
-				}
-
-				$risks = Risk_Class::g()->get( array(
-					'tax_query' => array(
-						array(
-							'taxonomy' => Risk_Category_Class::g()->get_type(),
-							'field'    => 'term_id',
-							'terms'    => $risk_category->data['id'],
-						),
-					),
-					'meta_query' => array(
-						array(
-							'key'     => '_wpdigi_preset',
-							'value'   => 1,
-							'compare' => '!=',
-						),
-					),
-				) );
-
-				if ( ! empty( $risks ) ) {
-					foreach ( $risks as $risk ) {
-						$risk_category->data['level' . $risk->data['evaluation']->data['scale'] ]++;
-					}
-				}
-			}
-		}
-
-		unset( $risk_category );
-
 		\eoxia\View_Util::exec( 'digirisk', 'informations', 'main', array(
 			'current_duer'          => $current_duer,
 			'current_duer_info'     => $current_duer_info,
@@ -184,7 +153,6 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'average'               => $average,
 			'total_users'           => $total_users,
 			'diff_info'             => $diff_info,
-			'risks_categories'      => $risks_categories,
 			'general_options'       => $general_options,
 			'date_before_next_duer' => $date_before_next_duer,
 		) );
@@ -205,8 +173,10 @@ class Informations_Class extends \eoxia\Singleton_Util {
 
 			if ( ! empty( $risk_level ) ) {
 				foreach ( $risk_level as $level ) {
-					$number_risk[ $level ] = count( $duer['document_meta'][ 'risq' . $level ]['value'] );
-					$total_risk += count( $duer['document_meta'][ 'risq' . $level ]['value'] );
+					if ( isset( $duer['document_meta'][ 'risq' . $level ]['value'] ) ) {
+						$number_risk[ $level ] = count( $duer['document_meta'][ 'risq' . $level ]['value'] );
+						$total_risk            += count( $duer['document_meta'][ 'risq' . $level ]['value'] );
+					}
 				}
 			}
 
@@ -216,7 +186,11 @@ class Informations_Class extends \eoxia\Singleton_Util {
 				}
 			}
 
-			$average = $quotation_total / $total_risk;
+			$average = 0;
+
+			if ( $quotation_total != 0 && $total_risk != 0 ) {
+				$average = $quotation_total / $total_risk;
+			}
 		}
 
 		return array(

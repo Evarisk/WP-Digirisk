@@ -67,12 +67,18 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	}
 
 	public function add_information_to_permis_feu( $permis_feu ){
-		$permis_feu->data[ 'intervention' ] = Permis_Feu_Intervention_Class::g()->get( array( 'post_parent' => $permis_feu->data[ 'id' ] ) ); // Recupere la liste des interventions
+		$permis_feu->data['intervention'] = Permis_Feu_Intervention_Class::g()->get( array( 'post_parent' => $permis_feu->data[ 'id' ] ) ); // Recupere la liste des interventions.
 
-		if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ){ // Maitre d'oeuvre data
-			$id = $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ];
+		if ( $permis_feu->data['maitre_oeuvre']['user_id'] > 0 ) { // Maitre d'oeuvre data.
+			$id = $permis_feu->data['maitre_oeuvre']['user_id'];
 			$permis_feu = $this->get_information_from_user( $id, $permis_feu, 'maitre_oeuvre' );
 		}
+
+		if ( $permis_feu->data['intervenant_exterieur']['user_id'] > 0 ){ // Maitre d'oeuvre data
+			$id = $permis_feu->data['intervenant_exterieur']['user_id'];
+			$permis_feu = $this->get_information_from_user( $id, $permis_feu, 'intervenant_exterieur' );
+		}
+
 		if( $permis_feu->data[ 'prevention_id' ] != 0 ){
 			$prevention = Prevention_Class::g()->get( array( 'id' => $permis_feu->data[ 'prevention_id' ] ), true );
 			if( ! empty( $prevention ) ){
@@ -107,7 +113,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	}
 
 	public function display_maitre_oeuvre( $permis_feu ){
-		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-4-maitre-oeuvre', array(
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-1-maitre-oeuvre', array(
 			'permis_feu' => $permis_feu
 		) );
 	}
@@ -115,9 +121,20 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	public function update_maitre_oeuvre( $id, $user_info ){
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
 
-		if( ! empty( $user_info ) ){
-			$permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] =  intval( $user_info->data->ID );
+		if ( ! empty( $user_info ) ) {
+			$permis_feu->data['maitre_oeuvre']['user_id'] =  intval( $user_info->data->ID );
 		}
+
+		return Permis_Feu_Class::g()->update( $permis_feu->data );
+	}
+
+	public function update_intervenant( $id, $user_info ){
+		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
+
+		if ( ! empty( $user_info ) ) {
+			$permis_feu->data['intervenant_exterieur']['user_id'] =  intval( $user_info->data->ID );
+		}
+
 		return Permis_Feu_Class::g()->update( $permis_feu->data );
 	}
 
@@ -138,11 +155,9 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 			$permis_feu->data[ $type_user ][ 'data' ]->initial = substr( $user_info->display_name, 0, 1 );
 		}
 
-		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $id );
-		$phone_number = ! empty( $user_information['digi_phone_number_full'] ) ? $user_information['digi_phone_number_full'] : '';
-		$phone_only_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
+		$user_information                                = get_the_author_meta( 'digirisk_user_information_meta', $id );
+		$phone_number                                    = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
 		$permis_feu->data[ $type_user ][ 'data' ]->phone = $phone_number;
-		$permis_feu->data[ $type_user ][ 'data' ]->phone_nbr = $phone_only_number;
 
 		return $permis_feu;
 	}
@@ -233,26 +248,21 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 	}
 
 	public function save_info_maitre_oeuvre(){
-		$id   = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$id      = ! empty( $_POST['permis_feu_id'] ) ? (int) $_POST['permis_feu_id'] : 0;
+		$user_id = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-		$i_name        = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
-		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
-		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
-		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
-		$i_mail  = ! empty( $_POST['intervenant-email'] ) ? sanitize_text_field( $_POST['intervenant-email'] ) : '';
-
-		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_mail ){
-			wp_send_json_error( 'Erreur in intervenant exterieur' );
-		}
+		$user_info  = get_user_by( 'id', $user_id );
 
 		$permis_feu = Permis_feu_Class::g()->get( array( 'id' => $id ), true );
 
+		$user_information                                = get_the_author_meta( 'digirisk_user_information_meta', $user_id );
+		$phone_number                                    = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
+
 		$data_i = array(
-			'firstname' => $i_name,
-			'lastname'  => $i_lastname,
-			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
-			'phone_nbr' => $i_phone,
-			'email'     => $i_mail
+			'firstname' => $user_info->first_name,
+			'lastname'  => $user_info->last_name,
+			'phone'     => $phone_number,
+			'email'     => $user_info->email,
 		);
 
 		$permis_feu->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $permis_feu->data[ 'intervenant_exterieur' ] );
@@ -285,7 +295,7 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 
 		$data = array(
 			'legal_display' => $legal_display,
-			'society' => $society
+			'society'       => $society
 		);
 
 		$response = Sheet_Permis_Feu_Class::g()->prepare_document( $permis_feu, $data );
@@ -528,6 +538,32 @@ class Permis_Feu_Class extends \eoxia\Post_Class {
 		}
 		return $unique_key;
 	}  // A SUPPRIMER
+
+	public function step_is_valid( $step, $permis_feu ) {
+		switch( $step ) {
+			case 1:
+				$signature_id = (int) get_post_meta( $permis_feu->data['id'], 'maitre_oeuvre_signature_id', true );
+
+				if ( isset( $permis_feu->data['maitre_oeuvre']['data'] ) && $permis_feu->data['maitre_oeuvre']['data']->first_name != "" &&
+					$permis_feu->data['maitre_oeuvre']['data']->last_name != ""  && $signature_id != 0 ) {
+					return true;
+				}
+				break;
+			case 2:
+			case 3:
+				return true;
+				break;
+			case 4:
+				$signature_id = (int) get_post_meta( $permis_feu->data['id'], 'intervenant_exterieur_signature_id', true );
+				if ( isset( $permis_feu->data['intervenant_exterieur']['data'] ) && $permis_feu->data['intervenant_exterieur']['data']->first_name != "" &&
+				     $permis_feu->data['intervenant_exterieur']['data']->last_name != ""  && $signature_id != 0 ) {
+					return true;
+				}
+				break;
+		}
+
+		return false;
+	}
 }
 
 Permis_Feu_Class::g();

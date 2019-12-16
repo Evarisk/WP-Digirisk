@@ -132,30 +132,10 @@ global $eo_search; ?>
 
 			<div class="wpeo-gridlayout padding grid-2">
 				<div class="form-element">
-					<span class="form-label">
-						<?php esc_html_e( 'Signature of the caregiver', 'digirisk' ); ?>
-						<span class="canvas-eraser">
-							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
-						</span>
-					</span>
-					<label class="form-field-container">
-						<input type="hidden" name="signature_of_the_caregiver" />
-						<input type="hidden" class="url" value="<?php echo ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
-						<canvas></canvas>
-					</label>
+					<?php echo do_shortcode( '[digi_signature id="' . $accident->data['id'] . '"]' ); ?>
 				</div>
 				<div class="form-element">
-					<span class="form-label">
-						<?php esc_html_e( 'Signature of the victim', 'digirisk' ); ?>
-						<span class="canvas-eraser">
-							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
-						</span>
-					</span>
-					<label class="form-field-container">
-						<input type="hidden" name="signature_of_the_victim" />
-						<input type="hidden" class="url" value="<?php echo ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
-						<canvas></canvas>
-					</label>
+					<?php echo do_shortcode( '[digi_signature id="' . $accident->data['id'] . '"]' ); ?>
 				</div>
 			</div>
 

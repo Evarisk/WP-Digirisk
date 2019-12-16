@@ -124,14 +124,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 </div>
 </div>
 
-<div class="wpeo-button button-blue action-input wpeo-tooltip-event"
-	data-action="next_step_permis_feu"
-	data-parent="digi-permis-feu-parent"
-	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
-	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-	aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
-	style="float:right; margin-top: 10px">
-	<span>
-		<i class="fas fa-2x fa-long-arrow-alt-right"></i>
-	</span>
-</div>

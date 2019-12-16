@@ -17,37 +17,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $eo_search; ?>
 
-
-
-<div class="information-intervenant-exterieur" style="background-color: #fff; padding: 1em;">
-	<input type="hidden" name="user-type" value="intervenant_exterieur">
+<div class="information-intervenant-exterieur wpeo-form" style="background-color: #fff; padding: 1em;">
 	<h2 style="text-align:center">
-		<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>
+		<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?> -
+		<i><?php echo esc_attr( $society->data['title'] ); ?></i>
 		<span class="wpeo-tooltip-event"
-		aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
-		style="color : dodgerblue; cursor : pointer">
+		      aria-label="<?php esc_html_e( 'Responsable de la société intervenante', 'digirisk' ); ?>"
+		      style="color : dodgerblue; cursor : pointer">
 			<i class="fas fa-info-circle"></i>
 		</span>
 	</h2>
-	<?php if( isset( $text_info[ 'intervenant_exterieur' ] ) && $text_info[ 'intervenant_exterieur' ] != "" ): ?>
-		<span style="color : green">
-			<?php echo esc_attr( $text_info[ 'intervenant_exterieur' ] ); ?>
-		</span>
-	<?php endif; ?>
-	<?php Permis_feu_Class::g()->display_intervenant_exterieur( array(), $permis_feu->data[ 'id' ] ); ?>
-</div>
 
+	<div class="wpeo-gridlayout grid-4" style="align-items: end">
+		<?php $eo_search->display( 'intervenant_exterieur' ); ?>
 
- <?php if( Prevention_Class::g()->intervenant_is_valid( $permis_feu->data[ 'intervenant_exterieur' ] ) ): ?>
-	 <div class="wpeo-button button-blue action-input wpeo-tooltip-event close-permis-feu"
- <?php else: ?>
-	 <div class="wpeo-button button-blue button-disable action-input wpeo-tooltip-event close-permis-feu"
- <?php endif; ?>
-	data-action="next_step_permis_feu"
-	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
-	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-	data-parent="digi-permis-feu-parent"
-	aria-label="<?php esc_html_e( 'Terminer', 'digirisk' ); ?>"
-	style="float:right; margin-top: 10px">
-	<span><i class="fas fa-2x fa-check"></i></span>
+		<div class="form-element <?php echo ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? 'form-element-disable' : ''; ?>">
+			<span class="form-label"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" value="<?php echo ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? $permis_feu->data['intervenant_exterieur']['data']->first_name : ''; ?>" />
+			</label>
+		</div>
+
+		<div class="form-element <?php echo ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? 'form-element-disable' : ''; ?>">
+			<span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
+			<label class="form-field-container">
+				<input type="text" class="form-field" value="<?php echo ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? $permis_feu->data['intervenant_exterieur']['data']->phone : ''; ?>" />
+			</label>
+		</div>
+
+		<div>
+			<?php echo do_shortcode( '[digi_signature id="' . $permis_feu->data['id'] . '" key="intervenant_exterieur_signature_id"]' ); ?>
+		</div>
+	</div>
 </div>

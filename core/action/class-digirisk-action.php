@@ -169,8 +169,8 @@ class Digirisk_Action {
 
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_container( 'DigiRisk', 'DigiRisk', 'manage_options', 'digirisk' );
-			CMH::add_logo( 'digirisk', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk-welcome' ) );
+			CMH::register_container( 'DigiRisk', 'DigiRisk', 'read', 'digirisk' );
+			CMH::add_logo( 'digirisk', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk' ) );
 			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 			CMH::register_others_menu( 'others', 'digirisk-dashboard', __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', 'bottom' );
 		}
@@ -250,12 +250,12 @@ class Digirisk_Action {
 	}
 
 	public function switch_to( $user_id, $old_user_id, $new_token, $old_token ) {
-		wp_redirect( admin_url( 'admin.php?page=digirisk-welcome' ) );
+		wp_redirect( admin_url( 'admin.php?page=digirisk' ) );
 		exit;
 	}
 
 	public function switch_back( $user_id, $old_user_id, $new_token, $old_token ) {
-		wp_redirect( admin_url('admin.php?page=digirisk-welcome' ) );
+		wp_redirect( admin_url('admin.php?page=digirisk' ) );
 		exit;
 	}
 

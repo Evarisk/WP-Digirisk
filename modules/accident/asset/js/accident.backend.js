@@ -8,10 +8,11 @@ window.eoxiaJS.digirisk.accident.canvas = [];
 
 window.eoxiaJS.digirisk.accident.init = function() {
 	window.eoxiaJS.digirisk.accident.event();
-	window.eoxiaJS.digirisk.accident.refresh();
+	// window.eoxiaJS.digirisk.accident.refresh();
 };
 
 window.eoxiaJS.digirisk.accident.refresh = function() {
+	/*alert('ok');
 	window.eoxiaJS.digirisk.accident.canvas = document.querySelectorAll("canvas");
 	for( var i = 0; i < window.eoxiaJS.digirisk.accident.canvas.length; i++ ) {
 		window.eoxiaJS.digirisk.accident.canvas[i].signaturePad = new SignaturePad( window.eoxiaJS.digirisk.accident.canvas[i], {
@@ -19,7 +20,7 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
 		} );
 	}
 
-	window.eoxiaJS.digirisk.accident.resizeCanvas();
+	window.eoxiaJS.digirisk.accident.resizeCanvas();*/
 }
 
 /**
@@ -114,7 +115,7 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
 	} else {
 		triggeredElement.closest( '.digirisk-wrap' ).replaceWith( response.data.view );
 	}
-	window.eoxiaJS.digirisk.accident.refresh();
+	// window.eoxiaJS.digirisk.accident.refresh();
 };
 
 /**
@@ -129,7 +130,7 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
  */
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
 	triggeredElement.closest( '.col' ).replaceWith( response.data.view );
-	window.eoxiaJS.digirisk.accident.refresh();
+	// window.eoxiaJS.digirisk.accident.refresh();
 	jQuery( '.col.advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
 		jQuery( this )[0].signaturePad.clear();
 		if ( jQuery( this ).closest( 'div' ).find( '.url' ).val() ) {

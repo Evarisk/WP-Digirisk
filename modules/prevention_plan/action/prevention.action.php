@@ -25,8 +25,6 @@ class Prevention_Action {
 	public function __construct() {
 		add_action( 'wp_ajax_prevention_save_former', array( $this, 'callback_prevention_save_former' ) );
 
-		add_action( 'wp_ajax_prevention_save_signature', array( $this, 'callback_prevention_save_signature' ) );
-
 		add_action( 'wp_ajax_prevention_load_tab', array( $this, 'callback_prevention_load_tab' ) );
 
 		add_action( 'wp_ajax_prevention_save_participant', array( $this, 'callback_prevention_save_participant' ) );
@@ -323,34 +321,30 @@ class Prevention_Action {
 	}
 
 	public function callback_prevention_display_maitre_oeuvre(){
-
 		$prevention_id = isset( $_POST[ 'prevention_id' ] ) ? (int) $_POST[ 'prevention_id' ] : 0;
-		$user_id = isset( $_POST[ 'user_id' ] ) ? (int) $_POST[ 'user_id' ] : 0;
+		$user_id       = isset( $_POST[ 'user_id' ] ) ? (int) $_POST[ 'user_id' ] : 0;
 
-		if( ! $user_id || ! $prevention_id ){
+		if( ! $user_id || ! $prevention_id ) {
 			wp_send_json_error( 'Error in request' );
 		}
 
-		$user_info = get_user_by( 'id', $user_id );
-		$prevention = Prevention_Class::g()->update_maitre_oeuvre( $prevention_id, $user_id );
+		$user_info  = get_user_by( 'id', $user_id );
+		$prevention = Prevention_Class::g()->update_maitre_oeuvre( $prevention_id, $user_info );
 
-		Prevention_Page_Class::g()->register_search( null, null );
+		$prevention = Prevention_Class::g()->add_information_to_prevention( $prevention );
+		Prevention_Page_Class::g()->register_search( $prevention, null );
 
-		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-name', array(
-			'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention )
-		) );
-		$view_name = ob_get_clean();
+		$society = Society_Class::g()->get_current_society();
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/step-4-maitre-oeuvre-phone', array(
-			'prevention' => $prevention
+		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', '/start/main', array(
+			'prevention' => $prevention,
+			'society'    => $society,
 		) );
-		$view_phone = ob_get_clean();
+		$view = ob_get_clean();
 
 		wp_send_json_success( array(
-			'view_name'  => $view_name,
-			'view_phone' => $view_phone
+			'view' => $view,
 		) );
 	}
 

@@ -21,7 +21,7 @@ window.eoxiaJS.digirisk.causerie.canvas;
  */
 window.eoxiaJS.digirisk.causerie.init = function() {
 	window.eoxiaJS.digirisk.causerie.event();
-	window.eoxiaJS.digirisk.causerie.refresh();
+	// window.eoxiaJS.digirisk.causerie.refresh();
 };
 
 /**
@@ -32,6 +32,7 @@ window.eoxiaJS.digirisk.causerie.init = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.refresh = function() {
+	/*alert('ok');
 	window.eoxiaJS.digirisk.causerie.canvas = document.querySelectorAll("canvas");
 	for( var i = 0; i < window.eoxiaJS.digirisk.causerie.canvas.length; i++ ) {
 		window.eoxiaJS.digirisk.causerie.canvas[i].signaturePad = new SignaturePad( window.eoxiaJS.digirisk.causerie.canvas[i], {
@@ -39,7 +40,7 @@ window.eoxiaJS.digirisk.causerie.refresh = function() {
 		} );
 	}
 
-	window.eoxiaJS.digirisk.causerie.resizeCanvas();
+	window.eoxiaJS.digirisk.causerie.resizeCanvas();*/
 
 	/*jQuery( '.causerie-wrap .owl-carousel' ).owlCarousel( {
 		'items': 1,
@@ -283,7 +284,7 @@ window.eoxiaJS.digirisk.causerie.nextStep = function( element, response ) {
 	jQuery( '.causerie-wrap .bar .loader' ).attr( 'data-width', percent );
 	jQuery( '.causerie-wrap .step-list .step[data-width="' + percent + '"]' ).addClass( 'active' );
 
-	window.eoxiaJS.refresh();
+	// window.eoxiaJS.refresh();
 };
 
 /**
@@ -301,7 +302,7 @@ window.eoxiaJS.digirisk.causerie.savedParticipant = function( element, response 
 
 	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
 
-	window.eoxiaJS.refresh();
+	// window.eoxiaJS.refresh();
 };
 
 /**
@@ -352,7 +353,7 @@ window.eoxiaJS.digirisk.causerie.savedSignature = function( element, response ) 
 
 	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
 
-	window.eoxiaJS.digirisk.causerie.refresh();
+	// window.eoxiaJS.digirisk.causerie.refresh();
 };
 
 /**
@@ -373,7 +374,7 @@ window.eoxiaJS.digirisk.causerie.savedSignature = function( element, response ) 
 window.eoxiaJS.digirisk.causerie.savedFormerSignature = function( element, response ) {
 	element.closest( 'tr' ).find( 'td.signature' ).replaceWith( response.data.view );
 
-	window.eoxiaJS.digirisk.causerie.refresh();
+	// window.eoxiaJS.digirisk.causerie.refresh();
 };
 
 /**

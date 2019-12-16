@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Phone', 'task-manager' ); ?></div>
  		<div class="table-cell" style="text-align : center"></div>
  	</div>
+
 	<?php if( ! empty( $prevention->data[ 'intervenants' ] ) ):
 		foreach( $prevention->data[ 'intervenants' ] as $key => $user ): ?>
 		<div class="table-row table-row-intervenant">
@@ -113,19 +114,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  		</div>
 		<div class="table-cell">
 			<div class="wpeo-form phone-bloc digi-phone-user">
-				<div class="form-element">
-					<label class="form-field-container">
-						<?php
-						\eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
-							'local' => get_locale(),
-							'width' => 'none',
-							'name'  => 'phone-callingcode',
-							'value' => 0,
-						) );
-						?>
-					</label>
-				</div>
-
 				<div class="form-element">
 					<label class="form-field-container">
 						<span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>

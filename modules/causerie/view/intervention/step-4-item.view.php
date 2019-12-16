@@ -23,42 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="hidden" name="causerie_id" value="<?php echo esc_attr( $final_causerie->data['id'] ); ?>" />
 	</td>
 
-	<?php if ( empty( $participant['signature_id'] ) ) : ?>
-		<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du participant est obligatoire', 'digirisk' ); ?>">
-			<div class="wpeo-button button-blue wpeo-modal-event"
-				data-title="<?php echo __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->data['displayname']; ?>"
-				data-parent="signature"
-				data-target="modal-signature">
-				<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
-			</div>
-			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
-				'action' => 'causerie_save_signature',
-				'title'  => __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->data['displayname'],
-			) );
-			?>
-		</td>
-
-	<?php else : ?>
-		<td class="signature w50 padding">
-			<input type="hidden" name="have_signature" value="true" />
-
-			<div class="signature-image wpeo-button-pulse wpeo-modal-event"
-				data-url="<?php echo wp_get_attachment_url( $participant['signature_id'] ); ?>"
-				aria-label="Modifier la signature"
-				data-parent="signature"
-				data-target="modal-signature"
-				data-title="<?php echo __( 'Signature de: ', 'digirisk' ) . $participant['rendered']->data['displayname']; ?>">
-				<img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $participant['signature_id'] ) ); ?>">
-				<span class="button-float-icon animated wpeo-tooltip-event" aria-label="Modifier la signature"><i class="fas fa-pencil-alt"></i></span>
-				<?php
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
-					'action' => 'causerie_save_signature',
-				) );
-				?>
-			</div>
-		</td>
-	<?php endif; ?>
+	<td>
+		<?php echo do_shortcode( '[digi_signature id="' . $participant['user_id'] . '" parent_id="' . $final_causerie->data['id'] . '" key="participants_signature_id" type="user"]' ); ?>
+	</td>
 
 	<td>
 		<div class="wpeo-button button-grey button-square-50 delete action-delete"

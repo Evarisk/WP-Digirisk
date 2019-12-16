@@ -297,7 +297,7 @@
 .wpeo-wrap img.signature {
   width: 100%;
   max-width: 150px;
-  height: auto;
+  height: 100%;
 }
 
 .wpeo-wrap .navigation-container, .wpeo-wrap .main-container {
@@ -4779,7 +4779,8 @@ html.wp-toolbar {
 
 canvas {
   border: solid black 1px;
-  height: 100%;
+  height: 90%;
+  width: 99%;
 }
 
 .causerie-wrap .float.right {
@@ -4852,7 +4853,6 @@ canvas {
 }
 
 .wpeo-wrap img.signature {
-  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -4901,6 +4901,14 @@ canvas {
 .sorter-page table.treetable tbody tr td:hover {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+.digirisk_page_digirisk-permis-feu .wpeo-form .wpeo-autocomplete .autocomplete-label, .digirisk_page_digirisk-prevention .wpeo-form .wpeo-autocomplete .autocomplete-label {
+  padding: 0 !important;
+}
+
+.digirisk_page_digirisk-permis-feu .wpeo-autocomplete .autocomplete-search-input, .digirisk_page_digirisk-prevention .wpeo-autocomplete .autocomplete-search-input {
+  padding: 1em;
 }
 
 /*--------------------------------------------------------------

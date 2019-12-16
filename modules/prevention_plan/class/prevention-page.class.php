@@ -53,7 +53,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $prevention ) ) {
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/main', array(
-				'prevention' => $prevention
+				'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
 			) );
 		} else{
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'main' );
@@ -120,15 +120,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		) );
 	}
 
-	public function display_step_nbr( $prevention ){
-		$user = null;
-
-		if ( ! empty( $prevention->data['former'] ) && ! empty( $prevention->data['former']['user_id'] ) ) {
-			$user = get_userdata( $prevention->data['former']['user_id'] );
-		}
-		$url = "";
-
-
+	public function display_step_nbr( $prevention ) {
 		$society = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
 		), true );
@@ -139,7 +131,7 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 				'post_parent'    => $society->data[ 'id' ],
 			), true );
 		}
-		$this->register_search( $user, $prevention );
+		$this->register_search( null, $prevention );
 
 		$file = "step-" . $prevention->data[ 'step' ];
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/' . $file, array(
@@ -153,13 +145,16 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 	public function register_search( $former, $prevention, $post_values = array() ) {
 		global $eo_search;
 
-		$args_causerie_former = array(
+		$args_former = array(
 			'type'         => 'user',
 			'name'         => 'former_id',
-			'value'        => ! empty( $former ) ? $former->data->display_name : '',
+			'label'        => __( 'Nom', 'digirisk' ),
+			'value'        => ! empty( $prevention->data['former']['user_id'] ) ? $prevention->data['former']['data']->last_name : '',
+			'hidden_value' => $prevention->data['former']['user_id'],
+			'class'        => ! empty( $prevention->data['former']['user_id'] ) ? 'form-element-disable' : '',
 		);
 
-		$eo_search->register_search( 'prevention_former', $args_causerie_former );
+		$eo_search->register_search( 'prevention_former', $args_former );
 
 		$args_prevention_participants = array(
 			'type'  => 'user',
@@ -167,7 +162,6 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		);
 
 		$eo_search->register_search( 'prevention_participants', $args_prevention_participants );
-
 
 		$args_accident_post = array(
 			'type'  => 'post',
@@ -196,10 +190,14 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 		$args_accident_post = wp_parse_args( $args_accident_post, $post_values );
 
 		$args_prevention_maitreoeuvre = array(
-			'type'  => 'user',
-			'name'  => 'user_id',
+			'type'         => 'user',
+			'name'         => 'user_id',
+			'label'        => __( 'Nom', 'digirisk' ),
+			'value'        => ! empty( $prevention->data['maitre_oeuvre']['user_id'] ) ? $prevention->data['maitre_oeuvre']['data']->last_name : '',
+			'hidden_value' => $prevention->data['maitre_oeuvre']['user_id'],
+			'class'        => ! empty( $prevention->data['maitre_oeuvre']['user_id'] ) ? 'form-element-disable' : '',
 		);
-		$eo_search->register_search( 'maitre_oeuvre', $args_prevention_maitreoeuvre );
+		$eo_search->register_search( 'prevention_maitre_oeuvre', $args_prevention_maitreoeuvre );
 
 		$eo_search->register_search( 'accident_post', $args_accident_post );
 	}

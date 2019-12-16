@@ -37,8 +37,6 @@ class Permis_Feu_Page_Action {
 		add_action( 'admin_post_change_step_permis_feu', array( $this, 'change_step_permis_feu' ) );
 	}
 
-	//\\SYNO1512\public\evarisk\illustrations en attente\stand alone\source
-
 	public function callback_admin_menu() {
 		CMH::register_menu( 'digirisk', __( 'Permis de feu', 'digirisk' ), __( 'Permis de feu', 'digirisk' ), 'manage_permis_feu', 'digirisk-permis-feu', array( Permis_Feu_Page_Class::g(), 'display' ), 'fa fa-fire-alt', 4 );
 	}
@@ -89,12 +87,12 @@ class Permis_Feu_Page_Action {
 
 	   $url_redirect = '';
 
-	   Permis_Feu_Page_Class::g()->register_search( null, null );
+	   Permis_Feu_Page_Class::g()->register_search( $permis_feu, null );
 	   switch ( $permis_feu->data['step'] ) {
 		   case \eoxia\Config_Util::$init['digirisk']->permis_feu->steps->PERMIS_FEU_FORMER:
 			   $permis_feu = Permis_Feu_Class::g()->step_maitreoeuvre( $permis_feu );
 			   ob_start();
-			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2', array(
+			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/main', array(
 				   'permis_feu' => $permis_feu,
 			   ) );
 			   break;
@@ -114,7 +112,7 @@ class Permis_Feu_Page_Action {
 			   $text_info = $data_return[ 'text_info' ];
 
 			   ob_start();
-			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-3', array(
+			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/main', array(
 				   'permis_feu'    => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu ),
 				   'society'       => $society,
 				   'legal_display' => $legal_display,
@@ -128,9 +126,9 @@ class Permis_Feu_Page_Action {
 			  	$text_info = $data_return[ 'text_info' ];
 
 			   ob_start();
-			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-4', array(
+			   \eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/main', array(
 				   'all_signed' => false,
-				   'permis_feu' => $permis_feu,
+				   'permis_feu' => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu ),
 				   'text_info'  => $text_info
 			   ) );
 			   break;
