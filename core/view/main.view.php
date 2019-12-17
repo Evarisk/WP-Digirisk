@@ -21,7 +21,7 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 
-<div class="digirisk-wrap wpeo-wrap" style="clear: both;">
+<div class="digirisk-wrap wpeo-wrap wpeo-box" style="clear: both;">
 
 	<h2>GÉREZ VOTRE DOCUMENT UNIQUE, AFFICHAGE LÉGAL, ET BIEN PLUS...</h2>
 
