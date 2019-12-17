@@ -91,7 +91,7 @@ class Prevention_Intervention_Action {
 		}
 
 		$intervention = Prevention_Intervention_Class::g()->get( array( 'id' => $id ), true );
-		$prevention = Prevention_Class::g()->get( array( 'id' => $intervention->data[ 'parent_id' ] ), true );
+		$prevention   = Prevention_Class::g()->get( array( 'id' => $intervention->data[ 'parent_id' ] ), true );
 
 		Prevention_Page_Class::g()->register_search( null, null );
 

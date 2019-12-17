@@ -25,8 +25,6 @@ global $eo_search; ?>
 
 	<p><?php esc_html_e( 'Définissez les droits d\'accés à l\'application DigiRisk', 'digirisk' ); ?></p>
 
-	<?php Setting_Class::g()->display_role_has_cap(); ?>
-
 	<?php $eo_search->display( 'user_list_capacity' ); ?>
 
 	<div class="list-users">

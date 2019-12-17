@@ -16,7 +16,9 @@ window.eoxiaJS.digirisk.setting.event = function() {
 	jQuery( document ).on( 'click', '.section-capability input[type="checkbox"]', window.eoxiaJS.digirisk.setting.activeSave );
 
 	jQuery( document ).on( 'click', '.wpeo-notification .notification-close', window.eoxiaJS.digirisk.setting.closeWpeo );
-	jQuery( document ).on( 'keyup', '#digi-accronym input[type="text"], #digi-htpasswd input', window.eoxiaJS.digirisk.setting.buttonSave )
+	jQuery( document ).on( 'keyup', '#digi-accronym input[type="text"], #digi-htpasswd input', window.eoxiaJS.digirisk.setting.buttonSave );
+
+	jQuery( document ).on( 'click', '.section-capability .all', window.eoxiaJS.digirisk.setting.checkAllCapability );
 };
 
 window.eoxiaJS.digirisk.setting.savePresetRisks = function( event ) {
@@ -91,7 +93,9 @@ window.eoxiaJS.digirisk.setting.savedRiskSuccess = function( element, response )
  *
  * @since 6.4.0
  */
-window.eoxiaJS.digirisk.setting.savedCapability = function( triggeredElement, response ) {};
+window.eoxiaJS.digirisk.setting.savedCapability = function( triggeredElement, response ) {
+	jQuery( '.section-capability .action-input' ).addClass( 'button-disable' );
+};
 
 /**
  * Le callback en cas de réussite à la requête Ajax "general_settings".
@@ -159,4 +163,16 @@ window.eoxiaJS.digirisk.setting.deletedParentSite = function( triggeredElement, 
 
 window.eoxiaJS.digirisk.setting.savedChildSettings = function( triggeredElement, response ) {
 	window.location.href = response.data.url;
+};
+
+window.eoxiaJS.digirisk.setting.checkAllCapability = function( event ) {
+	if ( jQuery( this ).is( ':checked' ) ) {
+		jQuery(this).closest('.user-row').find('input[type="checkbox"]').each(function () {
+			jQuery(this).prop('checked', true);
+		} );
+	} else {
+		jQuery(this).closest('.user-row').find('input[type="checkbox"]').each(function () {
+			jQuery(this).prop('checked', false);
+		} );
+	}
 };

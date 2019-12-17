@@ -2,6 +2,8 @@ window.eoxiaJS.digirisk.signature = {};
 
 window.eoxiaJS.digirisk.signature.canvas;
 
+window.eoxiaJS.digirisk.signature.buttonSignature;
+
 window.eoxiaJS.digirisk.signature.init = function() {
 	window.eoxiaJS.digirisk.signature.event();
 };
@@ -10,7 +12,10 @@ window.eoxiaJS.digirisk.signature.event = function() {
 	jQuery( document ).on( 'modal-opened', '.modal-signature', window.eoxiaJS.digirisk.signature.modalSignatureOpened );
 };
 
-window.eoxiaJS.digirisk.signature.modalSignatureOpened = function() {
+window.eoxiaJS.digirisk.signature.modalSignatureOpened = function( event, triggeredElement ) {
+	console.log(triggeredElement);
+	window.eoxiaJS.digirisk.signature.buttonSignature = triggeredElement;
+
 	var ratio =  Math.max( window.devicePixelRatio || 1, 1 );
 
 	window.eoxiaJS.digirisk.signature.canvas = document.querySelector('.modal-signature canvas' );
@@ -43,8 +48,10 @@ window.eoxiaJS.digirisk.signature.applySignature = function( triggeredElement ) 
 };
 
 window.eoxiaJS.digirisk.signature.savedSignatureSuccess = function( triggeredElement, response ) {
-	jQuery( '.button-signature' ).replaceWith( response.data.view );
-	jQuery( '.button-signature' ).trigger( 'saved-signature-success', triggeredElement, response );
+	jQuery( window.eoxiaJS.digirisk.signature.buttonSignature ).replaceWith( response.data.view );
+	// window.eoxiaJS.digirisk.signature.buttonSignature.trigger( 'saved-signature-success', triggeredElement, response );
 	triggeredElement.closest( '.wpeo-modal' ).remove();
+
+	window.eoxiaJS.digirisk.signature.buttonSignature = undefined;
 
 };

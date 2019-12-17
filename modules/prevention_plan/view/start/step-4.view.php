@@ -61,7 +61,7 @@ global $eo_search; ?>
 			 <span class="form-label"><?php esc_html_e( 'Portable', 'digirisk' ); ?></span>
 			 <label class="form-field-container">
 				 <span class="form-field-icon-prev"><i class="fas fa-mobile-alt"></i></span>
-				 <input type="text" class="form-field element-phone-input" name="intervenant-phone" value="<?php echo esc_attr( $prevention->data['intervenant_exterieur']['phone_nbr'] ); ?>">
+				 <input type="text" class="form-field element-phone-input" name="intervenant-phone" value="<?php echo esc_attr( $prevention->data['intervenant_exterieur']['phone'] ); ?>">
 			 </label>
 		 </div>
 

@@ -20,15 +20,15 @@
 		"digirisk-handle-sorter",
 		"digirisk-update",
 		"digirisk-setting",
-      "profile",
-    "user-edit",
-    "digirisk-dashboard-duer",
-      "digirisk-dashboard-model",
-      "toplevel_page_digirisk-dashboard-model"
+        "profile",
+        "user-edit",
+        "digirisk-dashboard-duer",
+        "digirisk-dashboard-model",
+        "toplevel_page_digirisk-dashboard-model"
 	],
 	"insert_scripts_pages_css": [
       "digirisk",
-    "digirisk-welcome",
+      "digirisk-welcome",
 		"digirisk-du",
 		"digirisk-handle-risk",
 		"digirisk-epi",

@@ -189,7 +189,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			'interventions_info'  => $interventions_info,
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
-			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
+			'maitre_oeuvre_phone' => ! empty( $maitre_e[ 'data' ]->phone ) ? $maitre_e[ 'data' ]->phone : '-',
 			'maitre_oeuvre_email' => $maitre_e[ 'data' ]->user_email,
 			'maitre_oeuvre_signature_id' => $maitre_oeuvre_signature_id,
 			'maitre_oeuvre_signature_date' => date( 'd/m/Y', strtotime( $maitre_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
@@ -207,6 +207,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data = wp_parse_args( $data_legal_display, $data );
 		$data = wp_parse_args( $data_society, $data );
 
+
 		return $data;
 	}
 
@@ -221,7 +222,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			if ( is_file( $picture_path ) ) {
 				$picture = array(
 					'type'   => 'picture',
-					'value'  => $picture_definition[0],
+					'value'  => $picture_path,
 					'option' => array(
 						'size' => $size,
 					),

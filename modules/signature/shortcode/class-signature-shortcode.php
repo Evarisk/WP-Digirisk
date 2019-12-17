@@ -22,16 +22,20 @@ class Signature_Shortcode {
 
 	public function display( $atts ) {
 		$atts = shortcode_atts( array(
-			'id'        => 0,
-			'parent_id' => 0,
-			'key'       => '',
-			'type'      => 'post',
+			'id'          => 0,
+			'parent_id'   => 0,
+			'key'         => '',
+			'type'        => 'post',
+			'title'       => '',
+			'title_modal' => '',
 		), $atts );
 
-		$atts['id']        = (int) $atts['id'];
-		$atts['parent_id'] = (int) $atts['parent_id'];
-		$atts['key']       = sanitize_text_field( $atts['key'] );
-		$atts['type']      = sanitize_text_field( $atts['type'] );
+		$atts['id']          = (int) $atts['id'];
+		$atts['parent_id']   = (int) $atts['parent_id'];
+		$atts['key']         = sanitize_text_field( $atts['key'] );
+		$atts['type']        = sanitize_text_field( $atts['type'] );
+		$atts['title']       = sanitize_text_field( $atts['title'] );
+		$atts['title_modal'] = sanitize_text_field( $atts['title_modal'] );
 
 		if ( is_multisite() && 'user' === $atts['type'] ) {
 			$atts['key'] = $GLOBALS['wpdb']->prefix . $atts['key'];
@@ -62,6 +66,8 @@ class Signature_Shortcode {
 				'key'          => $atts['key'],
 				'type'         => $atts['type'],
 				'signature_id' => $signature_id,
+				'title'        => $atts['title'],
+				'title_modal'  => $atts['title_modal'],
 			)
 		);
 	}

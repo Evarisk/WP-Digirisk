@@ -447,7 +447,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 				if ( isset( $prevention_plan->data['intervenant_exterieur'] ) && $prevention_plan->data['intervenant_exterieur']['lastname'] != "" &&
 				     $prevention_plan->data['intervenant_exterieur']['firstname'] != ""  &&
 				     $prevention_plan->data['intervenant_exterieur']['email'] != "" &&
-				     $prevention_plan->data['intervenant_exterieur']['phonenbr'] != "" && $signature_id != 0 ) {
+				     $prevention_plan->data['intervenant_exterieur']['phone'] != "" && $signature_id != 0 ) {
 					return true;
 				}
 				break;

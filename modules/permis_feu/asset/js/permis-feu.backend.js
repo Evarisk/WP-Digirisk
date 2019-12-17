@@ -53,7 +53,8 @@ window.eoxiaJS.digirisk.permisFeu.event = function() {
 	jQuery( document ).on( 'change', '.digi-permis-feu-parent .information-intervenant-exterieur .wpeo-autocomplete', window.eoxiaJS.digirisk.permisFeu.setIntervenant );
 
 	// Add Signature check field.
-	jQuery( document ).on( 'saved-signature-success', '.digi-permis-feu-parent .button-signature', window.eoxiaJS.digirisk.permisFeu.updatedMaitreOeuvreSignature );
+	jQuery( document ).on( 'saved-signature-success', '.digi-permis-feu-parent .information-maitre-oeuvre .button-signature', window.eoxiaJS.digirisk.permisFeu.updatedMaitreOeuvreSignature );
+	jQuery( document ).on( 'saved-signature-success', '.digi-permis-feu-parent .information-intervenant-exterieur .button-signature', window.eoxiaJS.digirisk.permisFeu.updatedIntervenantSignature );
 
 	jQuery( document ).on( 'click', '.digi-permis-feu-parent .select-prevention .autocomplete-result', window.eoxiaJS.digirisk.permisFeu.addPreventionToPermisDeFeu );
 
@@ -121,6 +122,11 @@ window.eoxiaJS.digirisk.permisFeu.updatedMaitreOeuvreSignature = function( trigg
 	window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishMaitreOeuvre( element );
 };
 
+window.eoxiaJS.digirisk.permisFeu.updatedIntervenantSignature = function( triggeredElement, response ) {
+	var element = jQuery( this );
+	window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieur( element );
+};
+
 window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishMaitreOeuvre = function( element ){
 	var parent_element = element.closest( '.digi-permis-feu-parent' );
 	var maitre_oeuvre_element = parent_element.find( '.information-maitre-oeuvre' );
@@ -137,21 +143,19 @@ window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishMaitreOeuvre = func
 }
 
 window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieur = function( element ){
-	var parent_element = element.closest( '.digi-permis-feu-parent' );
+	var parent_element = jQuery( '.permis-feu-wrap' );
 
-	var intervenant_exterieur_element = parent_element.find( '.information-intervenant-exterieur' );
 	var error = false;
 
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-name', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-lastname', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-phone', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-exterieur-signature', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( intervenant_exterieur_element, 'intervenant-email', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'user_id', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'intervenant-firstname', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'intervenant-phone', error );
+	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'user_signature', error );
 
 	if( ! error ){
-		parent_element.find( '.close-permis-feu' ).removeClass( 'button-disable' );
+		parent_element.find( '.permis-feu-start' ).removeClass( 'button-disable' );
 	}else{
-		parent_element.find( '.close-permis-feu' ).addClass( 'button-disable' );
+		parent_element.find( '.permis-feu-start' ).addClass( 'button-disable' );
 	}
 }
 
@@ -175,7 +179,7 @@ window.eoxiaJS.digirisk.permisFeu.nextStep = function( element, response ) {
 		window.location.replace( response.data.url );
 	} else {
 
-		jQuery('.permis-feu-wrap').html(response.data.view);
+		jQuery('.permis-feu-wrap').replaceWith(response.data.view);
 
 		var currentStep = response.data.current_step;
 		var percent = 0;

@@ -186,6 +186,7 @@ class Accident_Action {
 			'hidden_value' => $accident->data['parent_id'],
 		) );
 
+
 		\eoxia\View_Util::exec( 'digirisk', 'accident', 'item-edit', array(
 			'main_society' => $main_society,
 			'society_id'   => $accident->data['parent_id'],
