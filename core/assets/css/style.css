@@ -761,6 +761,12 @@
   position: relative;
 }
 
+@media (max-width: 480px) {
+  .wpeo-wrap .navigation-container .society-header {
+    padding: 0 0 0 1em;
+  }
+}
+
 .wpeo-wrap .navigation-container .society-header:hover {
   cursor: pointer;
 }
@@ -1121,9 +1127,6 @@
 }
 
 .wpeo-wrap .navigation-container .close-popup {
-  position: absolute;
-  right: 0;
-  top: 0;
   display: none;
 }
 
