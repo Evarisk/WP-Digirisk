@@ -33,26 +33,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endif; ?>
 	</td>
 	<td class="padding avatar-info-prevention">
-		<?php $name_and_phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
-		<?php if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
+		<?php
+		$name_and_phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name;
+		if ( ! empty( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone ) ) :
+			$name_and_phone .= ' (' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')';
+		endif;
+
+		if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
 			<div class="avatar tooltip hover wpeo-tooltip-event"
 				aria-label="<?php echo esc_attr( $name_and_phone ); ?>"
 				style="background-color: #<?php echo esc_attr( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->avator_color ); ?>; cursor : pointer">
 					<span><?php echo esc_html( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->initial ); ?></span>
-			</div>
-			<div class="info-text" style="display : none">
-				<span><?php echo esc_attr( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name ); ?></span> -
-				<span><?php echo esc_attr( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name ); ?></span>
-				<span>( <i><?php echo esc_attr( $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone ); ?></i> )</span>
 			</div>
 		<?php else: ?>
 			<?php esc_html_e( 'Aucun maitre oeuvre', 'digirisk' ); ?>
 		<?php endif; ?>
 	</td>
 	<td class="padding">
-		<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?> -
-		<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'lastname' ] ); ?>
-		<i>(<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'phone' ] ); ?>)</i>
+		<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ]['data']->display_name ); ?>
+		<?php
+		if ( ! empty( $permis_feu->data[ 'intervenant_exterieur' ][ 'phone' ] ) ) :
+			?>
+			<i>(<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'phone' ] ); ?>)</i>
+			<?php
+		endif;
+		?>
+
 	</td>
 	<td class="padding">
 		<?php if( isset( $permis_feu->data[ 'prevention_data' ] ) && ! empty( $permis_feu->data[ 'prevention_data' ] ) ): ?>

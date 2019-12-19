@@ -52,7 +52,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 
 					</td>
-					<?php if ( empty( $participant['signature_id'] ) ) : ?>
+					<?php
+					$signature_id = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
+					if ( empty( $signature_id ) ) : ?>
 						<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du participant est obligatoire', 'digirisk' ); ?>">
 							<div class="wpeo-button button-blue wpeo-modal-event"
 								data-parent="signature"
@@ -67,7 +69,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</td>
 
 					<?php else : ?>
-						<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $participant['signature_id'] ) ); ?>"</td>
+						<?php var_dump( $signature_id ); ?>
+						<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $signature_id ) ); ?>"</td>
 					<?php endif; ?>
 				</tr>
 				<?php

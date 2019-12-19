@@ -27,7 +27,7 @@ class Signature_Shortcode {
 			'key'         => '',
 			'type'        => 'post',
 			'title'       => '',
-			'title_modal' => '',
+			'title_modal' => __( 'Signature', 'digirisk' ),
 		), $atts );
 
 		$atts['id']          = (int) $atts['id'];

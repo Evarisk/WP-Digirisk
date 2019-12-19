@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<label class="form-field-container">
 							<span>
 								<?php if( isset( $user[ 'phone' ] ) ): ?>
-									<?php echo esc_attr( '(' . $user['phone_callingcode'] . ')' . $user[ 'phone' ] ); ?>
+									<?php echo esc_attr( $user[ 'phone' ] ); ?>
 								<?php else: ?>
 									-
 								<?php endif; ?>

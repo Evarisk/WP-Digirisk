@@ -42,6 +42,7 @@ class Signature_Action {
 		wp_send_json_success( array(
 			'view'         => $modal_view,
 			'buttons_view' => $buttons_view,
+			'modal_title'  => __( 'Signature', 'digirisk' ),
 		) );
 	}
 

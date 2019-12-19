@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	  <div class="wpeo-form phone-bloc digi-phone-user">
 		  <div class="form-element">
 			  <label class="form-field-container">
-				  <input type="text" name="phone" class="form-field" value="">
+				  <input type="text" name="phone" class="form-field" value="<?php echo $user['phone']; ?>">
 			  </label>
 		  </div>
 	  </div>

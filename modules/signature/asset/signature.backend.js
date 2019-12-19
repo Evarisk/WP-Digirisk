@@ -10,6 +10,7 @@ window.eoxiaJS.digirisk.signature.init = function() {
 
 window.eoxiaJS.digirisk.signature.event = function() {
 	jQuery( document ).on( 'modal-opened', '.modal-signature', window.eoxiaJS.digirisk.signature.modalSignatureOpened );
+	jQuery( document ).on( 'click', '.modal-signature .button-erase-signature', window.eoxiaJS.digirisk.signature.clearCanvas );
 };
 
 window.eoxiaJS.digirisk.signature.modalSignatureOpened = function( event, triggeredElement ) {

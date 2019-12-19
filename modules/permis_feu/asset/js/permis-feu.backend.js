@@ -124,7 +124,7 @@ window.eoxiaJS.digirisk.permisFeu.updatedMaitreOeuvreSignature = function( trigg
 
 window.eoxiaJS.digirisk.permisFeu.updatedIntervenantSignature = function( triggeredElement, response ) {
 	var element = jQuery( this );
-	window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieur( element );
+	window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieur( jQuery( '.permis-feu-wrap' ) );
 };
 
 window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishMaitreOeuvre = function( element ){
@@ -148,8 +148,6 @@ window.eoxiaJS.digirisk.permisFeu.checkIfPermisFeuCanBeFinishIntervenantExterieu
 	var error = false;
 
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'user_id', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'intervenant-firstname', error );
-	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'intervenant-phone', error );
 	error = window.eoxiaJS.digirisk.permisFeu.checkIfThisChampsIsValid( parent_element, 'user_signature', error );
 
 	if( ! error ){
