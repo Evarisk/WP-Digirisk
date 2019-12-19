@@ -187,6 +187,11 @@ class Prevention_Page_Class extends \eoxia\Singleton_Util {
 			'icon' => 'fa-search',
 		);
 
+		if ( ! empty( $post_values['intervention'] ) ) {
+			$args_accident_post['hidden_value'] = $post_values['intervention']->data['unite_travail'];
+			$args_accident_post['value']        = Prevention_Intervention_Class::g()->return_name_workunit( $post_values['intervention']->data[ 'unite_travail' ] );
+		}
+
 		$args_accident_post = wp_parse_args( $args_accident_post, $post_values );
 
 		$args_prevention_maitreoeuvre = array(

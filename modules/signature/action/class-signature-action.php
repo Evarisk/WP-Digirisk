@@ -70,6 +70,7 @@ class Signature_Action {
 				'id'           => $id,
 				'signature_id' => $signature_id,
 				'key'          => $key,
+				'type'         => $type,
 			)
 		);
 

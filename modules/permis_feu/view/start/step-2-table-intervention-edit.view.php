@@ -87,7 +87,7 @@ global $eo_search;
 
 	<td class="w50 padding" data-title="action">
 		<div class="intervention-action">
-			<div class="wpeo-button button-disable button-add-row-intervention action-input"
+			<div class="wpeo-button button-add-row-intervention action-input <?php echo ! empty( $intervention->data[ 'unite_travail' ] ) ? '' : 'button-disable'; ?>"
 			data-parentid="<?php echo esc_attr( $permis_feu->data[ 'id' ] ); ?>"
 			data-id="<?php echo esc_attr( isset( $intervention ) ? $intervention->data[ 'id' ] : 0 ); ?>"
 			data-action="<?php echo esc_attr( 'add_intervention_line_permisfeu' ); ?>"

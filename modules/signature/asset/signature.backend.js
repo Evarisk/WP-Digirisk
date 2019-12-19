@@ -48,7 +48,7 @@ window.eoxiaJS.digirisk.signature.applySignature = function( triggeredElement ) 
 };
 
 window.eoxiaJS.digirisk.signature.savedSignatureSuccess = function( triggeredElement, response ) {
-	jQuery( window.eoxiaJS.digirisk.signature.buttonSignature ).replaceWith( response.data.view );
+	jQuery( window.eoxiaJS.digirisk.signature.buttonSignature ).closest( '.form-element' ).replaceWith( response.data.view );
 	jQuery( '.form-element.' + response.data.key + ' .signature-image' ).trigger( 'saved-signature-success', triggeredElement, response );
 	triggeredElement.closest( '.wpeo-modal' ).remove();
 

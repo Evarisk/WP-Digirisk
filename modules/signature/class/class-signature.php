@@ -42,13 +42,15 @@ class Signature extends \eoxia\Singleton_Util {
 				switch ( $type ) {
 					case 'post':
 						update_post_meta( $id, $key, $file_id );
+						update_post_meta( $id, $key . '_' . $file_id . '_date', current_time( 'mysql' ) );
 						break;
 					case 'user':
 						update_user_meta( $id, $key, $file_id );
+						update_user_meta( $id, $key . '_' . $file_id . '_date', current_time( 'mysql' ) );
 						break;
 					default:
 						update_post_meta( $id, $key, $file_id );
-
+						update_post_meta( $id, $key . '_' . $file_id . '_date', current_time( 'mysql' ) );
 						break;
 				}
 			}

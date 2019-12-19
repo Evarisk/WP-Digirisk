@@ -198,7 +198,8 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
 				$participant['rendered'] = (array) $participant['rendered'];
-				$participant['signature_id'] = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
+				$participant['signature_id']   = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
+				$participant['signature_date'] = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'] . '_' . $participant['signature_id'] . '_date', true );
 
 
 				$data['utilisateurs']['value'][] = array(
