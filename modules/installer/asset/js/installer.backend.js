@@ -186,7 +186,7 @@ window.eoxiaJS.digirisk.installer.installedComponentSuccess = function( triggere
 
 		jQuery( '.wpdigi-installer .wpdigi-components .next' ).removeClass( 'button-disable' );
 		if ( 0 < jQuery( '#toplevel_page_digi-setup a' ).length ) {
-			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+			jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-du' ) );
 		}
 
 		window.eoxiaJS.loader.remove( jQuery( '.wpdigi-installer a' ) );

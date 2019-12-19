@@ -68,6 +68,7 @@ class Signature_Action {
 			array(
 				'id'           => $id,
 				'signature_id' => $signature_id,
+				'key'          => $key,
 			)
 		);
 
@@ -76,6 +77,7 @@ class Signature_Action {
 			'module'           => 'signature',
 			'callback_success' => 'savedSignatureSuccess',
 			'view'             => ob_get_clean(),
+			'key'              => $key,
 		) );
 	}
 }

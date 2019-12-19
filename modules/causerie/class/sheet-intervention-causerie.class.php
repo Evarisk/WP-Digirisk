@@ -113,6 +113,11 @@ class Sheet_Causerie_Intervention_Class extends Sheet_Causerie_Class {
 			'nombreUtilisateur'   => $causerie->number_participants
 		);
 
+		echo '<pre>';
+		print_r( $causerie_intervention->data );
+		echo '</pre>';
+		exit;
+
 
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_medias( $causerie_intervention ) );
 		$sheet_details = wp_parse_args( $sheet_details, $this->set_users( $causerie_intervention ) );

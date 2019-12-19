@@ -33,8 +33,8 @@ window.eoxiaJS.digirisk.preventionPlan.init = function() {
  */
 window.eoxiaJS.digirisk.preventionPlan.event = function() {
 	jQuery( document ).on( 'change', '.digi-prevention-plan-parent .information-maitre-oeuvre .wpeo-autocomplete', window.eoxiaJS.digirisk.preventionPlan.setMaitreOeuvre );
-	jQuery( document ).on( 'saved-signature-success', '.digi-prevention-plan-parent.step-1 .button-signature', window.eoxiaJS.digirisk.preventionPlan.updatedMaitreOeuvreSignature );
-	jQuery( document ).on( 'saved-signature-success', '.digi-prevention-plan-parent.step-4 .button-signature', window.eoxiaJS.digirisk.preventionPlan.updatedIntervenantExterieurSignature );
+	jQuery( document ).on( 'saved-signature-success', '.digi-prevention-plan-parent.step-1 .form-element', window.eoxiaJS.digirisk.preventionPlan.updatedMaitreOeuvreSignature );
+	jQuery( document ).on( 'saved-signature-success', '.digi-prevention-plan-parent.step-4 .form-element', window.eoxiaJS.digirisk.preventionPlan.updatedIntervenantExterieurSignature );
 
 	// Recherche GP/UT
 	jQuery( document ).on( 'click', '.digi-prevention-plan-parent .unite-de-travail-element .autocomplete-search-list .autocomplete-result',  window.eoxiaJS.digirisk.preventionPlan.displayButtonUniteDeTravail );
@@ -249,7 +249,7 @@ window.eoxiaJS.digirisk.preventionPlan.checkIfThisChampsIsValid = function( pare
 
 	var content = parent_element.find( '[name="' + element + '"]' ).val();
 
-	if( content == "" || content == "-1" || content == null ){
+	if( content == "" || content == "-1" || content == null || content == 0 ){
 		return true;
 	} else {
 		return false;

@@ -85,8 +85,7 @@ window.eoxiaJS.digirisk.causerie.resizeCanvas = function( event ) {
 window.eoxiaJS.digirisk.causerie.event = function() {
 	// Gestion du titre de la modal.
 	jQuery( document ).on( 'change', '.digi-causerie-parent .wpeo-autocomplete', window.eoxiaJS.digirisk.causerie.updateModalTitle );
-
-	jQuery( document ).on( 'click', '.causerie .modal-signature .wpeo-button.button-blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
+	jQuery( document ).on( 'click', '.digirisk_page_digirisk-causerie .modal-signature .wpeo-button.button-blue', window.eoxiaJS.digirisk.causerie.saveSignatureURL );
 
 	jQuery( document ).on( 'click', '.causerie-wrap a.disabled', function( event ) {
 		event.preventDefault();
@@ -114,8 +113,6 @@ window.eoxiaJS.digirisk.causerie.event = function() {
 	jQuery( document ).on( 'click', '.wrap-causerie .tab-select-redirect .tab-element', window.eoxiaJS.digirisk.causerie.tabSelectRedirect );
 
 	jQuery( document ).on( 'click', '.wrap-causerie .modal-footer-view-textarea .digi-display-textarea', window.eoxiaJS.digirisk.causerie.causerieImportDisplayTextarea );
-
-	jQuery( document ).on( 'click', '.wpeo-modal .button-erase-signature', window.eoxiaJS.digirisk.causerie.clearCanvas );
 };
 
 /**
@@ -156,14 +153,25 @@ window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
  */
 window.eoxiaJS.digirisk.causerie.saveSignatureURL = function( event ) {
 	event.preventDefault();
+	if ( jQuery( '.step-4' ).length ) {
+		var allNotEmpty = true;
+		jQuery( '.step-4 .signature-image').each(function () {
+			if ( jQuery( this ).attr( 'data-url') == '' ) {
+				allNotEmpty = false;
+			}
+		});
+		if (allNotEmpty) {
+			jQuery('.step-4 a.button-disable').removeClass('button-disable');
 
-	jQuery( '.modal-signature' ).find( 'canvas' ).each( function() {
-		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {
-			jQuery( this ).closest( 'div' ).find( 'input:first' ).val( jQuery( this )[0].toDataURL() );
-			jQuery( '.step-1 .action-input[data-action="next_step_causerie"]' ).removeClass( 'button-disable' );
-			jQuery( '.step-4 a.button-disable' ).removeClass( 'button-disable' );
 		}
-	} );
+	} else {
+		jQuery('.modal-signature').find('canvas').each(function () {
+			if (!jQuery(this)[0].signaturePad.isEmpty()) {
+				jQuery(this).closest('div').find('input:first').val(jQuery(this)[0].toDataURL());
+				jQuery('.step-1 .action-input[data-action="next_step_causerie"]').removeClass('button-disable');
+			}
+		});
+	}
 };
 
 /**

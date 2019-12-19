@@ -28,6 +28,8 @@ class Causerie_Intervention_Action {
 		add_action( 'wp_ajax_causerie_save_participant', array( $this, 'callback_causerie_save_participant' ) );
 		add_action( 'wp_ajax_causerie_save_signature', array( $this, 'callback_causerie_save_signature' ) );
 		add_action( 'wp_ajax_causerie_delete_participant', array( $this, 'callback_causerie_delete_participant' ) );
+
+		add_action( 'wp_ajax_generate_causerie', array( $this, 'callback_generate_causerie' ) );
 	}
 
 	public function callback_save_former() {
@@ -191,6 +193,18 @@ class Causerie_Intervention_Action {
 			'callback_success' => 'savedParticipant',
 			'view'             => ob_get_clean(),
 		) );
+	}
+
+	public function callback_generate_causerie() {
+		$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+
+		$causerie_intervention = Causerie_Intervention_Class::g()->get( array( 'id' => $id ), true );
+		$causerie = Causerie_Class::g()->get( array( 'id' => $causerie_intervention->data['parent_id'] ), true );
+
+		$response = Sheet_Causerie_Intervention_Class::g()->prepare_document( $causerie_intervention, array( 'causerie' => $causerie ) );
+		Sheet_Causerie_Intervention_Class::g()->create_document( $response['document']->data['id'] );
+
+		wp_send_json_success();
 	}
 }
 

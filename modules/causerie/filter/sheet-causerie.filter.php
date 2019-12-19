@@ -106,7 +106,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		);
 
 		$data = wp_parse_args( $data, $this->set_medias( $causerie ) );
-		$data = wp_parse_args( $data, $this->set_users( $causerie ) );
+		$data = wp_parse_args( $data, $this->set_users( $causerie_intervention ) );
 
 		if ( isset( $args['causerie'] ) ) {
 			$taskmanager_data = $this->check_if_this_causerie_have_task_enable( $causerie_intervention->data[ 'id' ] );
@@ -198,6 +198,8 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
 				$participant['rendered'] = (array) $participant['rendered'];
+				$participant['signature_id'] = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
+
 
 				$data['utilisateurs']['value'][] = array(
 					'nomUtilisateur'    => $participant['rendered']['data']['lastname'],

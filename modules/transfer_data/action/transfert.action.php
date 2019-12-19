@@ -109,7 +109,7 @@ class Transfert_Action {
 			if ( $element_done && $document_done ) {
 				$response['status'] = true;
 				$response['reload_transfert'] = false;
-				$response['redirect_to_url'] = admin_url( 'admin.php?page=digirisk-simple-risk-evaluation' );
+				$response['redirect_to_url'] = admin_url( 'admin.php?page=digirisk' );
 				$response['message'] = __( 'All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface', 'wp-digi-dtrans-i18n' );
 
 				/**	Enregistrement de la fin du transfert dans la base de données / Save transfer end into database */

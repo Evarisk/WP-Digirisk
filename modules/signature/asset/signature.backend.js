@@ -13,7 +13,6 @@ window.eoxiaJS.digirisk.signature.event = function() {
 };
 
 window.eoxiaJS.digirisk.signature.modalSignatureOpened = function( event, triggeredElement ) {
-	console.log(triggeredElement);
 	window.eoxiaJS.digirisk.signature.buttonSignature = triggeredElement;
 
 	var ratio =  Math.max( window.devicePixelRatio || 1, 1 );
@@ -49,7 +48,7 @@ window.eoxiaJS.digirisk.signature.applySignature = function( triggeredElement ) 
 
 window.eoxiaJS.digirisk.signature.savedSignatureSuccess = function( triggeredElement, response ) {
 	jQuery( window.eoxiaJS.digirisk.signature.buttonSignature ).replaceWith( response.data.view );
-	// window.eoxiaJS.digirisk.signature.buttonSignature.trigger( 'saved-signature-success', triggeredElement, response );
+	jQuery( '.form-element.' + response.data.key + ' .signature-image' ).trigger( 'saved-signature-success', triggeredElement, response );
 	triggeredElement.closest( '.wpeo-modal' ).remove();
 
 	window.eoxiaJS.digirisk.signature.buttonSignature = undefined;

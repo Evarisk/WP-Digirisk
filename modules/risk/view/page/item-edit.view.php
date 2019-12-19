@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<td class="padding">
 		<?php if ( ! empty( $risk->data['parent'] ) ) : ?>
-			<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-simple-risk-evaluation&society_id=' . $risk->data['parent_id'] ) ); ?>">
+			<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-du&society_id=' . $risk->data['parent_id'] ) ); ?>">
 				<strong><?php echo esc_attr( $risk->data['parent']->data['unique_identifier'] ); ?> -</strong>
 				<span><?php echo esc_attr( $risk->data['parent']->data['title'] ); ?></span>
 			</a>
