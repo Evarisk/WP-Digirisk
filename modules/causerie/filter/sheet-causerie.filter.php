@@ -198,8 +198,15 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
 				$participant['rendered'] = (array) $participant['rendered'];
-				$participant['signature_id']   = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'], true );
-				$participant['signature_date'] = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'] . '_' . $participant['signature_id'] . '_date', true );
+
+				$key = 'participants_signature_id_' . $causerie->data['id'];
+
+				if( is_multisite() ) :
+					$key = $GLOBALS['wpdb']->prefix . $key;
+				endif;
+
+				$participant['signature_id']   = get_user_meta( $participant['user_id'], $key, true );
+				$participant['signature_date'] = get_user_meta( $participant['user_id'], $key . '_' . $participant['signature_id'] . '_date', true );
 
 
 				$data['utilisateurs']['value'][] = array(
