@@ -1,7 +1,7 @@
 {
 	"name": "Digirisk",
 	"slug": "digirisk",
-	"version": "7.5.1",
+	"version": "7.5.2",
 	"description": "L'application Digirisk",
 	"insert_scripts_pages_js": [
       "digirisk-welcome",
@@ -20,15 +20,15 @@
 		"digirisk-handle-sorter",
 		"digirisk-update",
 		"digirisk-setting",
-    "profile",
-    "user-edit",
-    "digirisk-dashboard-duer",
-      "digirisk-dashboard-model",
-      "toplevel_page_digirisk-dashboard-model"
+        "profile",
+        "user-edit",
+        "digirisk-dashboard-duer",
+        "digirisk-dashboard-model",
+        "toplevel_page_digirisk-dashboard-model"
 	],
 	"insert_scripts_pages_css": [
       "digirisk",
-    "digirisk-welcome",
+      "digirisk-welcome",
 		"digirisk-du",
 		"digirisk-handle-risk",
 		"digirisk-epi",
@@ -54,6 +54,8 @@
 		"modules/update_manager/update_manager.config.json",
 		"modules/historic/historic.config.json",
 		"modules/child/child.config.json",
+      
+      "modules/signature/signature.config.json",
 
 		"modules/address/address.config.json",
     "modules/society/society.config.json",
@@ -116,7 +118,7 @@
 	"key_last_update_version" : "_digirisk_last_update_version",
 	"debug": false,
   "update_page_url": "digirisk-update",
-  "dashboard_page_url": "digirisk-simple-risk-evaluation",
+  "dashboard_page_url": "digirisk",
   "default_capabilities": {
     "administrator": [
       "create_causerie",

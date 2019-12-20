@@ -122,7 +122,7 @@ window.eoxiaJS.digirisk.export.request_import = function( data ) {
 				} else {
 					jQuery( '.digi-import-detail' ).html( window.digi_tools_done );
 					if ( jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ) ) {
-						jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk-simple-risk-evaluation' ) );
+						jQuery( '#toplevel_page_digi-setup a' ).attr( 'href', jQuery( '#toplevel_page_digi-setup a' ).attr( 'href' ).replace( 'digi-setup', 'digirisk' ) );
 					}
 
 					jQuery( '#digi-import-form progress' ).attr( 'max', 100 );

@@ -83,7 +83,6 @@ class Causerie_Intervention_Model extends Causerie_Model {
 			'meta_type' => 'multiple',
 		);
 
-
 		$this->schema['taxonomy'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',

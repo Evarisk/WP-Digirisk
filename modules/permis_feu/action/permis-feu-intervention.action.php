@@ -94,7 +94,7 @@ class Permis_Feu_Intervention_Action {
 		$intervention = Permis_Feu_Intervention_Class::g()->get( array( 'id' => $id ), true );
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $intervention->data[ 'parent_id' ] ), true );
 
-		Permis_Feu_Page_Class::g()->register_search( null, null );
+		Permis_Feu_Page_Class::g()->register_search( null, array( 'intervention' => $intervention ) );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', 'start/step-2-table-intervention-edit', array(

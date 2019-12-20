@@ -145,21 +145,7 @@ global $eo_search;
 
 </div>
 
-<?php // if( $permis_feu->data[ 'prevention_id' ] ): ?>
-	<div class="wpeo-button button-blue action-input next-step-need-prevention wpeo-tooltip-event"
-<?php /*  else: ?>
-	<div class="wpeo-button button-blue button-disable action-input next-step-need-prevention wpeo-tooltip-event"
-<?php // endif; */ ?>
-	data-action="next_step_permis_feu"
-	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_permis_feu' ) ); ?>"
-	data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>"
-	data-parent="digi-permis-feu-parent"
-	aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
-	style="float:right; margin-top: 10px">
-	<span>
-		<i class="fas fa-2x fa-long-arrow-alt-right"></i>
-	</span>
-</div>
+
 
 <div style="height : 200px">
 

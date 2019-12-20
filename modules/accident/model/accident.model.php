@@ -138,18 +138,20 @@ class Accident_Model extends \eoxia\Post_Model {
 			'child'     => array(),
 		);
 
-		$this->schema['associated_document_id']['child']['signature_of_the_caregiver_id'] = array(
+		$this->schema['signature_of_the_caregiver_id'] = array(
+			'field'     => '_digi_signature_caregiver_id',
 			'since'     => '6.3.0',
-			'version'   => '6.3.0',
+			'version'   => '7.5.2',
 			'type'      => 'array',
-			'meta_type' => 'multiple',
+			'meta_type' => 'single',
 		);
 
-		$this->schema['associated_document_id']['child']['signature_of_the_victim_id'] = array(
+		$this->schema['signature_of_the_victim_id'] = array(
+			'field'     => '_digi_signature_victim_id',
 			'since'     => '6.3.0',
-			'version'   => '6.3.0',
+			'version'   => '7.5.2',
 			'type'      => 'array',
-			'meta_type' => 'multiple',
+			'meta_type' => 'single',
 		);
 
 		$this->schema['associated_document_id']['child']['accident_investigation_id'] = array(

@@ -105,10 +105,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<?php
-\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-4', array(
-	'prevention' => Prevention_Class::g()->add_information_to_prevention( $prevention ),
-	'all_signed' => false,
-	'society'       => $society,
-	'legal_display' => $legal_display
-) );

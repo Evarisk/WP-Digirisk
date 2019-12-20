@@ -196,13 +196,14 @@ class Accident_Filter extends Identifier_Filter {
 			$number_field_completed++;
 		}
 
-		if ( ! empty( $object->data['associated_document_id']['signature_of_the_caregiver_id'] ) &&
-			0 < count( $object->data['associated_document_id']['signature_of_the_caregiver_id'] ) ) {
+		$signature_of_the_caregiver_id = (int) get_post_meta( $object->data['id'], 'signature_of_the_caregiver_id', true );
+		$signature_of_the_victim_id    = (int) get_post_meta( $object->data['id'], 'signature_of_the_victim_id', true );
+
+		if ( ! empty( $signature_of_the_caregiver_id ) ) {
 			$number_field_completed++;
 		}
 
-		if ( ! empty( $object->data['associated_document_id']['signature_of_the_victim_id'] ) &&
-			0 < count( $object->data['associated_document_id']['signature_of_the_victim_id'] ) ) {
+		if ( ! empty( $signature_of_the_victim_id ) ) {
 			$number_field_completed++;
 		}
 

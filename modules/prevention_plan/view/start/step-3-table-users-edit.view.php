@@ -47,24 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	  <div class="wpeo-form phone-bloc digi-phone-user">
 		  <div class="form-element">
 			  <label class="form-field-container">
-				  <?php
-				  \eoxia\View_Util::exec( 'digirisk', 'user', 'user-profile-list-calling-code', array(
-					  'local' => get_locale(),
-					  'width' => 'none',
-					  'name'  => 'phone-callingcode',
-					  'value' => $user['phone_callingcode'],
-				  ) );
-				  ?>
-			  </label>
-		  </div>
-
-		  <div class="form-element">
-			  <label class="form-field-container">
-				  <?php if( isset( $user[ 'phone' ] ) ): ?>
-					  <input type="text" name="phone" class="form-field" value="<?php echo esc_attr( $user[ 'phone' ] ); ?>">
-				  <?php else: ?>
-					  <input type="text" name="phone" class="form-field" value="">
-				  <?php endif; ?>
+				  <input type="text" name="phone" class="form-field" value="<?php echo $user['phone']; ?>">
 			  </label>
 		  </div>
 	  </div>

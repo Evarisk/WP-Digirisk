@@ -62,6 +62,9 @@ class Accident_Travail_Benin_Filter extends Identifier_Filter {
 			}
 		}
 
+		$signature_of_the_caregiver_id = (int) get_post_meta( $accident->data['id'], 'signature_of_the_caregiver_id', true );
+		$signature_of_the_victim_id    = (int) get_post_meta( $accident->data['id'], 'signature_of_the_victim_id', true );
+
 		$data = array(
 			'raisonSociale'             => $main_society->data['title'],
 			'adresse'                   => $address->data['address'] . ' ' . $address->data['additional_address'] . ' ' . $address->data['postcode'] . ' ' . $address->data['town'],
@@ -79,8 +82,8 @@ class Accident_Travail_Benin_Filter extends Identifier_Filter {
 			'natureLesions'             => $accident->data['nature_of_lesions'],
 			'nomAdresseTemoins'         => $accident->data['name_and_address_of_witnesses'],
 			'nomAdresseTiers'           => $accident->data['name_and_address_of_third_parties_involved'],
-			'signatureDonneurSoins'     => ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? Document_Util_Class::g()->get_picture( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0], 6, 'full' ) : array(),
-			'signatureVictime'          => ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? Document_Util_Class::g()->get_picture(  $accident->data['associated_document_id']['signature_of_the_victim_id'][0], 6, 'full' ) : array(),
+			'signatureDonneurSoins'     => ! empty( $signature_of_the_caregiver_id ) ? Document_Util_Class::g()->get_picture( $signature_of_the_caregiver_id, 6, 'full' ) : array(),
+			'signatureVictime'          => ! empty( $signature_of_the_victim_id ) ? Document_Util_Class::g()->get_picture(  $signature_of_the_victim_id, 6, 'full' ) : array(),
 			'observations'              => $accident->data['observation'],
 			'enqueteAccident'           => $accident->data['have_investigation'] ? __( 'Yes', 'digirisk' ) : __( 'No', 'digirisk' ),
 		);

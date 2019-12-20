@@ -24,6 +24,7 @@ class Permis_Feu_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_permis_feu_display_maitre_oeuvre', array( $this, 'callback_permis_feu_display_maitre_oeuvre' ) );
+		add_action( 'wp_ajax_permis_feu_display_intervenant', array( $this, 'callback_permis_feu_display_intervenant' ) );
 
 		add_action( 'wp_ajax_permis_feu_save_signature_maitre_oeuvre', array( $this, 'callback_permis_feu_save_signature_maitre_oeuvre' ) );
 
@@ -44,45 +45,68 @@ class Permis_Feu_Action {
 		add_action( 'wp_ajax_delete_document_permis_feu', array( $this, 'callback_delete_document_permis_feu' ) );
 	}
 
+	public function callback_permis_feu_display_maitre_oeuvre() {
+		$permis_feu_id = isset( $_POST['permis_feu_id'] ) ? (int) $_POST['permis_feu_id'] : 0;
+		$user_id       = isset( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-	public function callback_permis_feu_display_maitre_oeuvre(){
-
-		$permis_feu_id = isset( $_POST[ 'permis_feu_id' ] ) ? (int) $_POST[ 'permis_feu_id' ] : 0;
-		$user_id = isset( $_POST[ 'user_id' ] ) ? (int) $_POST[ 'user_id' ] : 0;
-
-		if( ! $user_id || ! $permis_feu_id ){
+		if ( ! $user_id || ! $permis_feu_id ) {
 			wp_send_json_error( 'Error in request' );
 		}
 
-		$user_info = get_user_by( 'id', $user_id );
+		$user_info  = get_user_by( 'id', $user_id );
 		$permis_feu = Permis_Feu_Class::g()->update_maitre_oeuvre( $permis_feu_id, $user_info );
 
-		Permis_Feu_Page_Class::g()->register_search( null, null );
+		$permis_feu = Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu );
+		Permis_Feu_Page_Class::g()->register_search( $permis_feu, null );
+
+		$society = Society_Class::g()->get_current_society();
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', '/start/step-4-maitre-oeuvre-name', array(
-			'permis_feu' => Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu )
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', '/start/step-1', array(
+			'permis_feu' => $permis_feu,
+			'society'    => $society,
 		) );
-		$view_name = ob_get_clean();
-
-		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', '/start/step-4-maitre-oeuvre-phone', array(
-			'permis_feu' => $permis_feu
-		) );
-		$view_phone = ob_get_clean();
+		$view = ob_get_clean();
 
 		wp_send_json_success( array(
-			'view_name'  => $view_name,
-			'view_phone' => $view_phone
+			'view'  => $view,
+		) );
+	}
+
+	public function callback_permis_feu_display_intervenant() {
+		$permis_feu_id = isset( $_POST['permis_feu_id'] ) ? (int) $_POST['permis_feu_id'] : 0;
+		$user_id       = isset( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
+
+		if ( ! $user_id || ! $permis_feu_id ) {
+			wp_send_json_error( 'Error in request' );
+		}
+
+		$user_info  = get_user_by( 'id', $user_id );
+		$permis_feu = Permis_Feu_Class::g()->update_intervenant( $permis_feu_id, $user_info );
+
+		$permis_feu = Permis_Feu_Class::g()->add_information_to_permis_feu( $permis_feu );
+		Permis_Feu_Page_Class::g()->register_search( $permis_feu, null );
+
+		$society = Society_Class::g()->get_current_society();
+
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'permis_feu', '/start/step-4', array(
+			'permis_feu' => $permis_feu,
+			'society'    => $society,
+		) );
+		$view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'view'  => $view,
 		) );
 	}
 
 	public function callback_permis_feu_save_signature_maitre_oeuvre(){
 		check_ajax_referer( 'permis_feu_save_signature_maitre_oeuvre' );
 
-		$permis_feu_id    = ! empty( $_POST['permis_feu_id'] ) ? (int) $_POST['permis_feu_id'] : 0; // WPCS: input var ok.
+		$permis_feu_id  = ! empty( $_POST['permis_feu_id'] ) ? (int) $_POST['permis_feu_id'] : 0; // WPCS: input var ok.
 		$signature_data = ! empty( $_POST['signature_data'] ) ? $_POST['signature_data'] : ''; // WPCS: input var ok.
-		$user_type = ! empty( $_POST['user-type'] ) ? $_POST['user-type'] : ''; // WPCS: input var ok.
+		$user_type      = ! empty( $_POST['user-type'] ) ? $_POST['user-type'] : ''; // WPCS: input var ok.
 
 		if ( ! $permis_feu_id || ! $signature_data ) {
 			wp_send_json_error( 'Error in request' );
@@ -210,7 +234,6 @@ class Permis_Feu_Action {
 		) );
 	}
 
-
 	public function callback_permisfeu_load_tab(){
 		check_ajax_referer( 'permisfeu_load_tab' );
 		$tab = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : ''; // WPCS: input var ok.
@@ -332,7 +355,7 @@ class Permis_Feu_Action {
 		}
 
 		$permis_feu = Permis_Feu_Class::g()->get( array( 'id' => $id ), true );
-		$response = Permis_Feu_Class::g()->generate_document_odt_prevention( $permis_feu );
+		$response   = Permis_Feu_Class::g()->generate_document_odt_prevention( $permis_feu );
 
 		$link = isset( $response[ 'document' ]->data[ 'link' ] ) ? $response[ 'document' ]->data[ 'link' ] : '';
 		$title = isset( $response[ 'document' ]->data[ 'title' ] ) ? $response[ 'document' ]->data[ 'title' ] : '';

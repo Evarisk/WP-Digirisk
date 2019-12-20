@@ -127,18 +127,18 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$intervenants_info = "";
 		if( empty( $prevention->data[ 'intervenants' ] ) ){
 			$prevention->data[ 'intervenants' ][0] = array(
-				'name' => '',
+				'name'     => '',
 				'lastname' => '',
-				'mail' => esc_html__( 'Aucun intervenant', 'digirisk' ),
-				'phone' => '',
-				'id'    => 0
+				'mail'     => esc_html__( 'Aucun intervenant', 'digirisk' ),
+				'phone'    => '',
+				'id'       => 0
 			);
 			$intervenants_info = esc_html__( 'Aucun intervenant défini' );
 		}else{
-			$nbr = count( $prevention->data[ 'intervenants' ] );
-			$intervenants = Prevention_Class::g()->verify_all_intervenant( $prevention->data[ 'intervenants' ] );
+			$nbr                                = count( $prevention->data[ 'intervenants' ] );
+			$intervenants                       = Prevention_Class::g()->verify_all_intervenant( $prevention->data[ 'intervenants' ] );
 			$prevention->data[ 'intervenants' ] = $intervenants;
-			$intervenants_info = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
+			$intervenants_info                  = esc_html__( sprintf( 'Il y a %1$d intervenant(s)', $nbr ), 'digirisk' );
 		}
 
 		$inter_e = $prevention->data[ 'intervenant_exterieur' ];
@@ -167,6 +167,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		}
 		$raison_du_plan_de_prevention = $raison_du_plan_de_prevention != "" ? $raison_du_plan_de_prevention : 'Non-précisé';
 
+		$maitre_oeuvre_signature_id = (int) get_post_meta( $prevention->data['id'], 'maitre_oeuvre_signature_id', true );
+		$intervenant_signature_id   = (int) get_post_meta( $prevention->data['id'], 'intervenant_exterieur_signature_id', true );
 
 		$data = array(
 			'id' => $prevention->data['id'],
@@ -187,17 +189,17 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			'interventions_info'  => $interventions_info,
 			'maitre_oeuvre_fname' => $maitre_e[ 'data' ]->first_name,
 			'maitre_oeuvre_lname' => $maitre_e[ 'data' ]->last_name,
-			'maitre_oeuvre_phone' => $maitre_e[ 'data' ]->phone,
+			'maitre_oeuvre_phone' => ! empty( $maitre_e[ 'data' ]->phone ) ? $maitre_e[ 'data' ]->phone : '-',
 			'maitre_oeuvre_email' => $maitre_e[ 'data' ]->user_email,
-			'maitre_oeuvre_signature_id' => $maitre_e[ 'signature_id' ],
+			'maitre_oeuvre_signature_id' => $maitre_oeuvre_signature_id,
 			'maitre_oeuvre_signature_date' => date( 'd/m/Y', strtotime( $maitre_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
-			'maitre_oeuvre_signature' => $this->set_picture( $maitre_e[ 'signature_id' ], 5 ),
+			'maitre_oeuvre_signature' => $this->set_picture( $maitre_oeuvre_signature_id, 5 ),
 			'intervenant_exterieur_fname' => $inter_e[ 'firstname' ],
 			'intervenant_exterieur_lname' => $inter_e[ 'lastname' ],
 			'intervenant_exterieur_phone' => $inter_e[ 'phone' ],
 			'intervenant_exterieur_email' => $inter_e[ 'email' ],
-			'intervenant_exterieur_signature' => $this->set_picture( $inter_e[ 'signature_id' ], 5 ),
-			'intervenant_exterieur_signature_id' => $inter_e[ 'signature_id' ],
+			'intervenant_exterieur_signature' => $this->set_picture( $intervenant_signature_id, 5 ),
+			'intervenant_exterieur_signature_id' => $intervenant_signature_id,
 			'intervenant_exterieur_signature_date' => date( 'd/m/Y', strtotime( $inter_e[ 'signature_date' ][ 'rendered' ][ 'mysql' ] ) ),
 		);
 
@@ -205,7 +207,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		$data = wp_parse_args( $data_legal_display, $data );
 		$data = wp_parse_args( $data_society, $data );
 
-		// echo '<pre>'; print_r( $data ); echo '</pre>'; exit;
+
 		return $data;
 	}
 
@@ -220,7 +222,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 			if ( is_file( $picture_path ) ) {
 				$picture = array(
 					'type'   => 'picture',
-					'value'  => str_replace( site_url( '/' ), ABSPATH, $picture_definition[0] ),
+					'value'  => $picture_path,
 					'option' => array(
 						'size' => $size,
 					),

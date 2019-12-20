@@ -91,14 +91,14 @@ class Prevention_Intervention_Action {
 		}
 
 		$intervention = Prevention_Intervention_Class::g()->get( array( 'id' => $id ), true );
-		$prevention = Prevention_Class::g()->get( array( 'id' => $intervention->data[ 'parent_id' ] ), true );
-
-		Prevention_Page_Class::g()->register_search( null, null );
+		$prevention   = Prevention_Class::g()->get( array( 'id' => $intervention->data[ 'parent_id' ] ), true );
+		
+		Prevention_Page_Class::g()->register_search( null, $prevention, array( 'intervention' => $intervention ) );
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'start/step-2-table-intervention-edit', array(
 			'intervention' => $intervention,
-			'prevention' => $prevention
+			'prevention'   => $prevention
 		 ) );
 		$view = ob_get_clean();
 

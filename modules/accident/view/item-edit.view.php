@@ -132,30 +132,10 @@ global $eo_search; ?>
 
 			<div class="wpeo-gridlayout padding grid-2">
 				<div class="form-element">
-					<span class="form-label">
-						<?php esc_html_e( 'Signature of the caregiver', 'digirisk' ); ?>
-						<span class="canvas-eraser">
-							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
-						</span>
-					</span>
-					<label class="form-field-container">
-						<input type="hidden" name="signature_of_the_caregiver" />
-						<input type="hidden" class="url" value="<?php echo ! empty( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->data['associated_document_id']['signature_of_the_caregiver_id'][0] ) ) : ''; ?>" />
-						<canvas></canvas>
-					</label>
+					<?php echo do_shortcode( '[digi_signature title="' . __( 'Signature du soignant', 'digirisk' ) . '" key="signature_of_the_caregiver_id" id="' . $accident->data['id'] . '"]' ); ?>
 				</div>
 				<div class="form-element">
-					<span class="form-label">
-						<?php esc_html_e( 'Signature of the victim', 'digirisk' ); ?>
-						<span class="canvas-eraser">
-							<i class="fas fa-eraser" data-fa-transform="shrink-2"></i>
-						</span>
-					</span>
-					<label class="form-field-container">
-						<input type="hidden" name="signature_of_the_victim" />
-						<input type="hidden" class="url" value="<?php echo ! empty( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ? esc_attr( wp_get_attachment_url( $accident->data['associated_document_id']['signature_of_the_victim_id'][0] ) ) : ''; ?>" />
-						<canvas></canvas>
-					</label>
+					<?php echo do_shortcode( '[digi_signature title="' . __( 'Signature de la victime', 'digirisk' ) . '" key="signature_of_the_victim_id" id="' . $accident->data['id'] . '"]' ); ?>
 				</div>
 			</div>
 
@@ -165,8 +145,6 @@ global $eo_search; ?>
 					<textarea class="form-field" id="observation" name="accident[observation]"><?php echo $accident->data['observation']; ?></textarea>
 				</label>
 			</div>
-
-
 
 			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input alignright"><i class="button-icon fas fa-save"></i></div>
 		</div>

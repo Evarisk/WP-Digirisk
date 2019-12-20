@@ -1,0 +1,16 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Eoxia",
+      "email": "webmaster@eoxia.com"
+    }
+  ],
+  "require": {
+    "squizlabs/php_codesniffer": "3.5.3",
+    "wp-coding-standards/wpcs": "2.2.0"
+  }
+}

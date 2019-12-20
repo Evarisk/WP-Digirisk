@@ -60,7 +60,7 @@ class Prevention_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	public $element_prefix = 'C';
+	public $element_prefix = 'PP_';
 
 
 	public function add_signature( $prevention, $user_id, $signature_data, $is_former = false ) {
@@ -89,7 +89,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 
 		// $prevention = $this->add_participant( $prevention, $former_id, true );
 		$mo_phone      = ! empty( $_POST['maitre-oeuvre-phone'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone'] ) : '';
-		$mo_phone_code = ! empty( $_POST['maitre-oeuvre-phone-callingcode'] ) ? sanitize_text_field( $_POST['maitre-oeuvre-phone-callingcode'] ) : '';
 		$update = ! empty( $_POST['update'] ) ? false : true;
 
 		$prevention->data['step'] = \eoxia\Config_Util::$init['digirisk']->prevention_plan->steps->PREVENTION_INFORMATION;
@@ -201,7 +200,6 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$i_name        = ! empty( $_POST['intervenant-name'] ) ? sanitize_text_field( $_POST['intervenant-name'] ) : '';
 		$i_lastname    = ! empty( $_POST['intervenant-lastname'] ) ? sanitize_text_field( $_POST['intervenant-lastname'] ) : '';
 		$i_phone       = ! empty( $_POST['intervenant-phone'] ) ? sanitize_text_field( $_POST['intervenant-phone'] ) : '';
-		$i_phone_code  = ! empty( $_POST['intervenant-phone-callingcode'] ) ? sanitize_text_field( $_POST['intervenant-phone-callingcode'] ) : '';
 		$i_email  = ! empty( $_POST['intervenant-email'] ) ? sanitize_text_field( $_POST['intervenant-email'] ) : '';
 
 		if( ! $i_name || ! $i_lastname || ! $i_phone || ! $i_email ){
@@ -213,9 +211,8 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$data_i = array(
 			'firstname' => $i_name,
 			'lastname'  => $i_lastname,
-			'phone'     => '(' . $i_phone_code . ')' . $i_phone,
-			'phone_nbr' => $i_phone,
-			'email' => $i_email,
+			'phone'     => $i_phone,
+			'email'     => $i_email,
 		);
 
 		$prevention->data[ 'intervenant_exterieur' ] = wp_parse_args( $data_i, $prevention->data[ 'intervenant_exterieur' ] );
@@ -278,12 +275,11 @@ class Prevention_Class extends \eoxia\Post_Class {
 		$user_information = get_the_author_meta( 'digirisk_user_information_meta', $id );
 		$phone_number = ! empty( $user_information['digi_phone_number_full'] ) ? $user_information['digi_phone_number_full'] : '';
 		$phone_only_number = ! empty( $user_information['digi_phone_number'] ) ? $user_information['digi_phone_number'] : '';
-		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_number;
+		$prevention->data[ $type_user ][ 'data' ]->phone = $phone_only_number;
 		$prevention->data[ $type_user ][ 'data' ]->phone_nbr = $phone_only_number;
 
 		return $prevention;
 	}
-
 
 	public function generate_document_odt_prevention( $prevention ){
 
@@ -311,12 +307,11 @@ class Prevention_Class extends \eoxia\Post_Class {
 		return $response;
 	}
 
-	public function update_maitre_oeuvre( $id, $user_id ){
+	public function update_maitre_oeuvre( $id, $user_info ){
 		$prevention = Prevention_Class::g()->get( array( 'id' => $id ), true );
-		$user_info = get_user_by( 'id', $user_id );
 
 		if( ! empty( $user_info ) ){
-			$prevention->data[ 'maitre_oeuvre' ][ 'user_id' ] =  intval( $user_info->data->ID );
+			$prevention->data['maitre_oeuvre']['user_id'] = intval( $user_info->data->ID );
 		}
 		return Prevention_Class::g()->update( $prevention->data );
 	}
@@ -428,6 +423,39 @@ class Prevention_Class extends \eoxia\Post_Class {
 		}
 
 		return $intervenants;
+	}
+
+	public function step_is_valid( $step, $prevention_plan ) {
+		switch( $step ) {
+			case 1:
+				$signature_id = (int) get_post_meta( $prevention_plan->data['id'], 'maitre_oeuvre_signature_id', true );
+
+				if ( isset( $prevention_plan->data['maitre_oeuvre']['data'] ) && $prevention_plan->data['maitre_oeuvre']['data']->first_name != "" &&
+				     $prevention_plan->data['maitre_oeuvre']['data']->last_name != ""  && $signature_id != 0 ) {
+					return true;
+				}
+				break;
+			case 2:
+				return true;
+				break;
+			case 3:
+				return true;
+				break;
+			case 4:
+				$signature_id = (int) get_post_meta( $prevention_plan->data['id'], 'intervenant_exterieur_signature_id', true );
+
+				if ( isset( $prevention_plan->data['intervenant_exterieur'] ) && $prevention_plan->data['intervenant_exterieur']['lastname'] != "" &&
+				     $prevention_plan->data['intervenant_exterieur']['firstname'] != ""  &&
+				     $prevention_plan->data['intervenant_exterieur']['email'] != "" &&
+				     $prevention_plan->data['intervenant_exterieur']['phone'] != "" && $signature_id != 0 ) {
+					return true;
+				}
+				break;
+			default:
+				break;
+		}
+
+		return false;
 	}
 }
 

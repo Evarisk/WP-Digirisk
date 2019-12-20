@@ -126,6 +126,9 @@ class Permis_Feu_Model extends \eoxia\Post_Model {
 			'type'      => 'array',
 			'meta_type' => 'multiple',
 			'child'     => array(
+				'user_id'          => array(
+					'type' => 'integer',
+				),
 				'firstname'        => array(
 					'type' => 'string',
 				),

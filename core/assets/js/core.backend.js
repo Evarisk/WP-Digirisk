@@ -52,6 +52,18 @@ window.eoxiaJS.digirisk.core.event = function() {
 			jQuery('.navigation-container').replaceWith(response.data.view);
 		});
 	}
+
+	if ( jQuery( '.section-risk' ).length ) {
+		var action = {
+			action: 'load_risks_information',
+		};
+
+		window.eoxiaJS.loader.display(jQuery( '.section-risk' ));
+		jQuery.post(ajaxurl, action, function (response) {
+			jQuery( '.section-risk' ).html( response.data.view );
+			window.eoxiaJS.loader.remove(jQuery( '.section-risk' ));
+		} );
+	}
 };
 
 /**

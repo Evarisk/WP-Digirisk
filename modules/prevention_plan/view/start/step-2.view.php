@@ -159,17 +159,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<div class="wpeo-button  wpeo-tooltip-event button-blue action-input"
-	data-action="next_step_prevention"
-	data-nonce="<?php echo esc_attr( wp_create_nonce( 'next_step_prevention' ) ); ?>"
-	data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>"
-	data-parent="digi-prevention-parent"
-	aria-label="<?php esc_html_e( 'Suivant', 'digirisk' ); ?>"
-	style="float:right; margin-top: 10px">
-	<span>
-		<i class="fas fa-2x fa-long-arrow-alt-right"></i>
-	</span>
-</div>
 <div style="height : 200px">
 
 </div>

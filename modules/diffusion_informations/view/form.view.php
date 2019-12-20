@@ -91,7 +91,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<span><?php esc_html_e( 'Générer les diffusions d\'informations A3 et A4', 'digirisk' ); ?></span>
 </button>
 
-<a href="<?php echo esc_attr( admin_url() . 'options-general.php?page=digirisk-setting&tab=digi-configuration' );  ?>">
+<a href="<?php echo esc_attr( admin_url() . 'admin.php?page=digirisk-setting&tab=digi-configuration' );  ?>">
 	<button class="wpeo-button button-main wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Accéder aux réglages des données', 'digirisk' ); ?>">
 		<i class="fas fa-cog"></i>
 	</button>

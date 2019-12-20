@@ -3,3 +3,4 @@ npm-debug.log
 test
 phpunit.xml
 .idea
+vendor

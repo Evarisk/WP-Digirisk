@@ -31,11 +31,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tr>
 					<td>
 						<?php
+
+						$key = 'participants_signature_id_' . $causerie->data['id'];
+
+						if( is_multisite() ) :
+							$key = $GLOBALS['wpdb']->prefix . $key;
+						endif;
+
+						$signature_id = get_user_meta( $participant['user_id'], $key, true );
+						$participant['signature_date'] = get_user_meta( $participant['user_id'], $key . '_' . $signature_id . '_date', true );
 						if ( ! empty( $participant['rendered'] ) ) :
 							$participant['rendered'] = (array) $participant['rendered'];
 							?>
-							<div class="avatar" style="background-color: #<?php echo esc_attr( $participant['rendered']['data']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['data']['initial'] ); ?></span></div>
-							<span><?php echo esc_html( $participant['rendered']['data']['displayname'] ); ?></span>
+							<div class="avatar wpeo-tooltip-event" aria-label="<?php echo esc_attr( $participant['rendered']['data']['displayname'] ); ?>" style="background-color: #<?php echo esc_attr( $participant['rendered']['data']['avatar_color'] ); ?>;"><span><?php echo esc_html( $participant['rendered']['data']['initial'] ); ?></span></div>
 							<?php
 						else :
 							?><span><?php esc_html_e( 'N/A', 'digirisk' ); ?></span><?php
@@ -52,7 +60,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 
 					</td>
-					<?php if ( empty( $participant['signature_id'] ) ) : ?>
+					<?php
+					if ( empty( $signature_id ) ) : ?>
 						<td class="signature w50 padding tooltip red signature-tooltip" aria-label="<?php esc_attr_e( 'La signature du participant est obligatoire', 'digirisk' ); ?>">
 							<div class="wpeo-button button-blue wpeo-modal-event"
 								data-parent="signature"
@@ -67,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</td>
 
 					<?php else : ?>
-						<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $participant['signature_id'] ) ); ?>"</td>
+						<td><img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $signature_id ) ); ?>"</td>
 					<?php endif; ?>
 				</tr>
 				<?php
