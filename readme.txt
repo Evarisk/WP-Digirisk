@@ -77,6 +77,10 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.5.2 =
+
+* 38339 - Correction de divers bugs: Plan de prévention, permis de feu, causerie et accident
+
 = Version 7.5.1 =
 
 * 37141 - Document: Correction de la génération du document "permis de feu".
