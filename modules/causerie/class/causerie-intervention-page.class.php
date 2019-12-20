@@ -106,7 +106,13 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $causerie->data['participants'] ) ) {
 			foreach ( $causerie->data['participants'] as $participant ) {
-				$signature_id = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
+				$key = 'participants_signature_id_' . $causerie->data['id'];
+
+				if( is_multisite() ) :
+					$key = $GLOBALS['wpdb']->prefix . $key;
+				endif;
+
+				$signature_id = get_user_meta( $participant['user_id'], $key, true );
 				if ( empty( $signature_id ) ) {
 					$all_signed = false;
 					break;
