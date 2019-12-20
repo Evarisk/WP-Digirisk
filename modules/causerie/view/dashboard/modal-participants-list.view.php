@@ -31,8 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tr>
 					<td>
 						<?php
-						$signature_id = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'], true );
-						$participant['signature_date'] = get_user_meta( $participant['user_id'], 'participants_signature_id_' . $causerie->data['id'] . '_' . $signature_id . '_date', true );
+
+						$signature_id = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'], true );
+						$participant['signature_date'] = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'] . '_' . $signature_id . '_date', true );
 						if ( ! empty( $participant['rendered'] ) ) :
 							$participant['rendered'] = (array) $participant['rendered'];
 							?>
