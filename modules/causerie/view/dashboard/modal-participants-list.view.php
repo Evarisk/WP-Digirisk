@@ -32,8 +32,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td>
 						<?php
 
-						$signature_id = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'], true );
-						$participant['signature_date'] = get_user_meta( $participant['user_id'], $GLOBALS['wpdb']->prefix . 'participants_signature_id_' . $causerie->data['id'] . '_' . $signature_id . '_date', true );
+						$key = 'participants_signature_id_' . $causerie->data['id'];
+
+						if( is_multisite() ) :
+							$key = $GLOBALS['wpdb']->prefix . $key;
+						endif;
+
+						$signature_id = get_user_meta( $participant['user_id'], $key, true );
+						$participant['signature_date'] = get_user_meta( $participant['user_id'], $key . '_' . $signature_id . '_date', true );
 						if ( ! empty( $participant['rendered'] ) ) :
 							$participant['rendered'] = (array) $participant['rendered'];
 							?>
