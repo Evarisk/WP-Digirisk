@@ -220,9 +220,3 @@
 		}
 	}
 }
-
-// Enlève le padding par défaut de WordPress pour l'admin bar. Cette ligne est éxécuté que sur les pages commençant par digirisk dans le $_GET['page']
-// ex: https://<address>/wp-admin/admin.php?page=digirisk
-html.wp-toolbar{
-    padding-top: 0;
-}
