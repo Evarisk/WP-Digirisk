@@ -53,6 +53,7 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Fiche ', 'digirisk' ) . Workunit_Class::g()->element_prefix,
 			'title' => __( 'Les fiches de poste', 'digirisk' ),
+			'icon'  => 'UT',
 		);
 
 		return $list_tab;

@@ -45,12 +45,14 @@ class Listing_Risk_Corrective_Task_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques action corrective ', 'digirisk' ),
 			'title' => __( 'Listing des risques action corrective', 'digirisk' ),
+			'icon'  => '<i class="fas fa-exclamation"></i>',
 		);
 
 		$list_tab['digi-group']['listing-risk-action-corrective'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques action corrective ', 'digirisk' ),
 			'title' => __( 'Listing des risques action corrective', 'digirisk' ),
+			'icon'  => '<i class="fas fa-exclamation"></i>',
 		);
 
 		return $list_tab;

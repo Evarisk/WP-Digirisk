@@ -45,12 +45,14 @@ class Listing_Risk_Picture_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques photo ', 'digirisk' ),
 			'title' => __( 'Listing des risques photo', 'digirisk' ),
+			'icon'  => '<i class="fas fa-images"></i>',
 		);
 
 		$list_tab['digi-group']['listing-risk-photo'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Listing des risques photo ', 'digirisk' ),
 			'title' => __( 'Listing des risques photo', 'digirisk' ),
+			'icon'  => '<i class="fas fa-images"></i>',
 		);
 
 		return $list_tab;

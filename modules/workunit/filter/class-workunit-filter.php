@@ -47,6 +47,7 @@ class Workunit_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Informations', 'digirisk' ),
 			'title' => __( 'Informations ', 'digirisk' ),
+			'icon'  => '<i class="fas fa-info-circle"></i>',
 		);
 
 		return $tab_list;

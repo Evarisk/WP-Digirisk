@@ -21,6 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		data-target="digi-<?php echo esc_attr( $key ); ?>"
 		<?php echo ! empty( $element['title'] ) ? 'data-title="' . $element['title'] . '"' : ''; // WPCS: XSS ok. ?>
 		data-id="<?php echo esc_attr( $id ); ?>">
-	<span <?php echo ! empty( $element['class'] ) ? 'class="' . esc_attr( $element['class'] ) . '"' : ''; ?>
-		><?php echo $element['text']; // WPCS: XSS ok. ?></span>
+
+	<?php if ( $element['icon'] ) : ?>
+		<span class="tab-icon"><?php echo $element['icon']; ?></span>
+	<?php endif; ?>
+	<span <?php echo ! empty( $element['class'] ) ? 'class="' . esc_attr( $element['class'] ) . '"' : ''; ?>>
+		<?php echo $element['text']; // WPCS: XSS ok. ?>
+	</span>
 </li>

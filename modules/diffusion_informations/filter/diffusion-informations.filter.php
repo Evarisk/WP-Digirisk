@@ -46,6 +46,7 @@ class Diffusion_Informations_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Diffusion informations', 'digirisk' ),
 			'title' => __( 'Les diffusions informations', 'digirisk' ),
+			'icon'  => '<i class="fas fa-comment-exclamation"></i>',
 		);
 		return $list_tab;
 	}

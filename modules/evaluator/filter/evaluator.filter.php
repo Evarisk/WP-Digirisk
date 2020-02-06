@@ -47,12 +47,14 @@ class Evaluator_Filter {
 			'type' => 'text',
 			'text' => __( 'Évaluateurs', 'digirisk' ),
 			'title' => __( 'Les évaluateurs', 'digirisk' ),
+			'icon'  => '<i class="fas fa-user-check"></i>',
 		);
 
 		$list_tab['digi-workunit']['evaluator'] = array(
 			'type' => 'text',
 			'text' => __( 'Évaluateurs', 'digirisk' ),
 			'title' => __( 'Les évaluateurs', 'digirisk' ),
+			'icon'  => '<i class="fas fa-user-check"></i>',
 		);
 
 		return $list_tab;

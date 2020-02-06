@@ -47,12 +47,14 @@ class Risk_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Risques', 'digirisk' ),
 			'title' => __( 'Les risques', 'digirisk' ),
+			'icon'  => '<i class="fas fa-exclamation-triangle"></i>',
 		);
 
 		$list_tab['digi-workunit']['risk'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Risques', 'digirisk' ),
 			'title' => __( 'Les risques', 'digirisk' ),
+			'icon'  => '<i class="fas fa-exclamation-triangle"></i>',
 		);
 
 		return $list_tab;
