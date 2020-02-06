@@ -24,7 +24,7 @@
 				width: 100%;
 			}
 			> td:nth-of-type(1) {
-				width: 60% !important;
+				width: 40% !important;
 				display: flex;
 				padding: 1em 0 !important;
 				> span {
@@ -60,7 +60,7 @@
 				}
 			}
 			> td:nth-of-type(6) {
-				width: 40% !important;
+				width: 60% !important;
 				margin: auto 0;
 				.action {
 					display: block !important;
@@ -78,8 +78,8 @@
 					line-height: 24px;
 					font-size: 14px;
 
-					[data-icon] {
-						line-height: 30px !important;
+					.button-icon {
+						line-height: 26px !important;
 					}
 					&.button-green {
 						background: $color__green;

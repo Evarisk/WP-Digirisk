@@ -805,6 +805,12 @@
   padding: 0.2em 1em;
 }
 
+@media (max-width: 480px) {
+  .wpeo-wrap .navigation-container .toolbar {
+    padding-left: 2.2em;
+  }
+}
+
 .wpeo-wrap .navigation-container .toolbar [class*="toggle"] {
   display: inline-block;
   color: rgba(255, 255, 255, 0.4);
@@ -820,7 +826,7 @@
 
 @media (max-width: 480px) {
   .wpeo-wrap .navigation-container .toolbar [class*="toggle"] .icon {
-    font-size: 18px;
+    font-size: 24px;
     padding: 4px;
   }
 }
@@ -1539,7 +1545,7 @@
     width: 100%;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
-    width: 60% !important;
+    width: 40% !important;
     display: -webkit-box;
     display: flex;
     padding: 1em 0 !important;
@@ -1574,7 +1580,7 @@
     padding-bottom: 0.4em;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) {
-    width: 40% !important;
+    width: 60% !important;
     margin: auto 0;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .action {
@@ -1593,8 +1599,8 @@
     line-height: 24px;
     font-size: 14px;
   }
-  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button [data-icon] {
-    line-height: 30px !important;
+  .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button .button-icon {
+    line-height: 26px !important;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) .wpeo-button.button-green {
     background: #47e58e;
@@ -3113,6 +3119,12 @@
 
 .wpeo-wrap.corrective-task .wpeo-project-task .wpeo-task-point-use-toggle > p {
   background: #fff;
+}
+
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-tab .tab-container .tab-content {
+    padding: 0;
+  }
 }
 
 /*---
@@ -4750,7 +4762,7 @@
 # Temporaire à ranger
 --------------------------------------------------------------*/
 .toplevel_page_digirisk .top-content > div {
-  margin: auto;
+  text-align: center;
 }
 
 .toplevel_page_digirisk .modal-interface .modal-container {

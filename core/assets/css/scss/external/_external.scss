@@ -13,3 +13,9 @@
 @import "module/tooltip";
 
 @import "taskmanager";
+
+.wpeo-tab .tab-container .tab-content {
+	@media ( max-width: 480px ) {
+		padding: 0;
+	}
+}
