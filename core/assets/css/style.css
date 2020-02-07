@@ -264,6 +264,7 @@
   /** Progress button */
   /** Couleur */
   /* Couleurs */
+  /** Responsive */
   /** Colors */
   /* Vertical */
   /** Ligne entete */
@@ -2992,6 +2993,18 @@
   background: #fff;
 }
 
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-tab .tab-container .tab-content {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpeo-wrap .wpeo-tab .tab-element > span:not(.tab-icon) {
+    display: none;
+  }
+}
+
 .wpeo-wrap .wpeo-tab .tab-list .tab-element {
   /* Active */
 }
@@ -3119,12 +3132,6 @@
 
 .wpeo-wrap.corrective-task .wpeo-project-task .wpeo-task-point-use-toggle > p {
   background: #fff;
-}
-
-@media (max-width: 480px) {
-  .wpeo-wrap .wpeo-tab .tab-container .tab-content {
-    padding: 0;
-  }
 }
 
 /*---
