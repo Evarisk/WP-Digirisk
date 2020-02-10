@@ -44,18 +44,21 @@ class Statistics_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Statistiques', 'digirisk' ),
 			'title' => __( 'Les statistiques', 'digirisk' ),
+			'icon'  => '<i class="fas fa-chart-bar"></i>',
 		);
 
 		$list_tab['digi-group']['statistic'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Statistiques', 'digirisk' ),
 			'title' => __( 'Les statistiques', 'digirisk' ),
+			'icon'  => '<i class="fas fa-chart-bar"></i>',
 		);
 
 		$list_tab['digi-workunit']['statistic'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Statistiques', 'digirisk' ),
 			'title' => __( 'Les statistiques', 'digirisk' ),
+			'icon'  => '<i class="fas fa-chart-bar"></i>',
 		);
 
 		return $list_tab;
