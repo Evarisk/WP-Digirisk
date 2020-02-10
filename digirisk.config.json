@@ -61,6 +61,7 @@
     "modules/society/society.config.json",
 
 		"modules/informations/informations.config.json",
+        "modules/statistics/statistics.config.json",
 
 		"modules/comment/comment.config.json",
 		"modules/corrective_task/corrective_task.config.json",

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo ! empty( $element['title'] ) ? 'data-title="' . $element['title'] . '"' : ''; // WPCS: XSS ok. ?>
 		data-id="<?php echo esc_attr( $id ); ?>">
 
-	<?php if ( $element['icon'] ) : ?>
+	<?php if ( ! empty ( $element['icon'] ) ) : ?>
 		<span class="tab-icon"><?php echo $element['icon']; ?></span>
 	<?php endif; ?>
 	<span <?php echo ! empty( $element['class'] ) ? 'class="' . esc_attr( $element['class'] ) . '"' : ''; ?>>

@@ -1,0 +1,15 @@
+{
+  "name": "Statistics",
+  "slug": "statistics",
+  "since": "7.5.3",
+  "version": "7.5.3",
+  "description": "Le module gérant les statistiques de DigiRisk",
+  "path": "modules/statistics/",
+  "dependencies": {
+    "shortcode": {},
+    "action": {},
+    "class": {},
+    "filter": {}
+  },
+  "state" : true
+}
