@@ -50,7 +50,7 @@ class Legal_Display_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Affichage légal', 'digirisk' ),
 			'title' => __( 'Les affichages légales', 'digirisk' ),
-			'icon'  => '<i class="fas fa-file-certificate"></i>',
+			'icon'  => '<i class="fas fa-file-alt"></i>',
 		);
 		return $list_tab;
 	}
