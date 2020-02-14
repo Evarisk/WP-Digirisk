@@ -27,7 +27,7 @@ class Risk_Page_Action {
 	 * @since 6.3.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 13 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 22 );
 		add_action( 'can_update', array( $this, 'callback_can_update' ), 10, 0 );
 
 		add_action( 'wp_ajax_paginate_risk', array( $this, 'callback_paginate_risk' ) );

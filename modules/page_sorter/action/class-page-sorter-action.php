@@ -30,7 +30,7 @@ class Page_Sorter_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 15 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 21 );
 		add_action( 'admin_post_sorter_parent', array( $this, 'callback_sorter_parent' ) );
 	}
 

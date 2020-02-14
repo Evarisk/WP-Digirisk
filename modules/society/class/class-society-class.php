@@ -189,6 +189,7 @@ class Society_Class extends \eoxia\Post_Class {
 		if ( $recursive && ! empty( $societies ) ) {
 			foreach ( $societies as &$society ) {
 				$society->data['childrens'] = $this->get_societies_in( $society->data['id'], 'inherit', true );
+				$society = apply_filters( 'digi_get_risks_recursive', $society );
 			}
 		}
 

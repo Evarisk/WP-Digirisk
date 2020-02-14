@@ -46,7 +46,7 @@ class Informations_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $duers ) ) {
 			$current_duer = is_array( $duers ) ? $duers[0] : $duers;
-			$old_duer     = is_array( $duers ) ? $duers[1] : null;
+			//$old_duer     = is_array( $duers ) ? $duers[1] : null;
 		}
 
 		$accident  = null;

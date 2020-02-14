@@ -30,31 +30,18 @@ class Statistics_Filter {
 	}
 
 	/**
-	 * Ajoutes l'onglet statistique à la société, aux groupements et aux unités de travail
+	 * Ajoutes l'onglet statistique à la société.
 	 *
 	 * @param  array   $list_tab La liste des filtres.
 	 * @param  integer $id L'ID de la société.
 	 *
 	 * @return array
 	 *
-	 * @since 6.2.2
+	 * @since 7.5.3
+	 * @version 7.5.3
 	 */
 	public function callback_tab( $list_tab, $id ) {
 		$list_tab['digi-society']['statistic'] = array(
-			'type'  => 'text',
-			'text'  => __( 'Statistiques', 'digirisk' ),
-			'title' => __( 'Les statistiques', 'digirisk' ),
-			'icon'  => '<i class="fas fa-chart-bar"></i>',
-		);
-
-		$list_tab['digi-group']['statistic'] = array(
-			'type'  => 'text',
-			'text'  => __( 'Statistiques', 'digirisk' ),
-			'title' => __( 'Les statistiques', 'digirisk' ),
-			'icon'  => '<i class="fas fa-chart-bar"></i>',
-		);
-
-		$list_tab['digi-workunit']['statistic'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Statistiques', 'digirisk' ),
 			'title' => __( 'Les statistiques', 'digirisk' ),
@@ -82,16 +69,7 @@ class Statistics_Filter {
 			'post_status' => array( 'publish', 'inherit' ),'a'
 		) );
 
-//		$risks = Risk_Class::g()->get( array(
-//			'post_parent' => $society->data['id'],
-//		) );
 		$society->data['childrens'][] = $risks;
-
-//		if ( ! empty( $risks ) ) {
-//			foreach ( $risks as $risk ) {
-//
-//			}
-//		}
 
 		return $society;
 	}

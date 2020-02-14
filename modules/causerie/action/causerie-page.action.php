@@ -26,7 +26,7 @@ class Causerie_Page_Action {
 	 * Le constructeur appelle une action personnalisée
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 40 );
 
 		add_action( 'wp_ajax_causerie_load_tab', array( $this, 'callback_causerie_load_tab' ) );
 		add_action( 'wp_ajax_load_modal_participants', array( $this, 'callback_load_modal_participants' ) );

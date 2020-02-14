@@ -33,7 +33,7 @@ class User_Dashboard_Action extends \eoxia\Singleton_Util {
 	 * @since 6.1.6
 	 */
 	protected function construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 30 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 50 );
 
 		add_action( 'wp_ajax_save_user', array( $this, 'ajax_save_user' ) );
 		add_action( 'wp_ajax_load_user', array( $this, 'ajax_load_user' ) );

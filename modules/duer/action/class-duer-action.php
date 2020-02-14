@@ -29,7 +29,7 @@ class DUER_Action {
 	 * @since 6.2.1
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 20 );
 
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
 		add_action( 'wp_ajax_construct_duer', array( $this, 'callback_ajax_construct_duer' ) );

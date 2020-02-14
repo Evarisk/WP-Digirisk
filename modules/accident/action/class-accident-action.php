@@ -28,7 +28,7 @@ class Accident_Action {
 	 * Il appelle également les actions ajax suivantes
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 30 );
 
 		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
 		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );

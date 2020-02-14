@@ -28,7 +28,7 @@ class Setting_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 60 );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 61 );
 		add_action( 'admin_post_update_accronym', array( $this, 'callback_update_accronym' ) );
 		add_action( 'wp_ajax_save_capability', array( $this, 'callback_save_capability' ) );
 

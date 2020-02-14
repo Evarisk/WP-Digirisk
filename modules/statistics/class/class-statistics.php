@@ -11,6 +11,9 @@
 
 namespace digi;
 
+use eoxia\Singleton_Util;
+use eoxia\View_Util;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -18,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Classe gérant les statistiques
  */
-class Statistics_Class extends \eoxia\Singleton_Util {
+class Statistics_Class extends Singleton_Util {
 	/**
 	 * Le chemin vers le répertoire uploads/Digirisk/statistics
 	 *
@@ -45,7 +48,31 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 	 * @since 6.0.0
 	 */
 	public function display( $society_id ) {
-		\eoxia\View_Util::exec( 'digirisk', 'statistics', 'main', array( 'id' => $society_id ) );
+
+		$element          = get_post( $society_id );
+		$nb_chart_display = 0;
+
+		switch ( $element->post_type ) {
+			case 'digi-society':
+				$nb_chart_display = 6;
+				break;
+			case 'digi-group':
+				$nb_chart_display = 1;
+				break;
+			case 'digi-workunit':
+				$nb_chart_display = 1;
+				break;
+		}
+
+		View_Util::exec(
+			'digirisk',
+			'statistics',
+			'main',
+			array(
+				'id'               => $society_id,
+				'nb_chart_display' => $nb_chart_display,
+			)
+		);
 	}
 
 	/**
@@ -81,20 +108,19 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 	 * @param string $delimiter  The CSV delimiter you wish to use. The default ";" is used for a compatibility with microsoft excel.
 	 * @param string $enclosure  The type of enclosure used in the CSV file, by default it will be a quote ".
 	 */
-	function write_data_to_csv( $data, $filepath, $filename='export', $delimiter = ';', $enclosure = '"' ) {
+	function write_data_to_csv( $data_header, $data, $filepath, $filename='export', $delimiter = ';', $enclosure = '"' ) {
 
 		// I open PHP memory as a file.
 		$csv_file = fopen( $filepath, 'w' );
 
+		// Insert the UTF-8 BOM in the file.
+		fputs( $csv_file, $bom = ( chr( 0xEF ) . chr( 0xBB ) . chr( 0xBF ) ) );
+
 		// I add the array keys as CSV headers.
-		fputcsv( $csv_file, array_keys( $data[0] ), $delimiter, $enclosure );
+		fputcsv( $csv_file, $data_header, $delimiter, $enclosure );
 
 		// Add all the data in the file.
 		foreach ( $data as $fields ) {
-			echo '<pre>';
-			print_r( $data );
-			echo '</pre>';
-			exit;
 			fputcsv( $csv_file, $fields, $delimiter, $enclosure );
 		}
 
@@ -133,10 +159,17 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 						if ( ! empty( $society['risks'] ) ) {
 							foreach ( $society['risks'] as &$risk ) {
 								$query = "SELECT evalmeta.meta_value 
-											FROM {$wpdb->prefix}comments AS eval 
+											FROM {$wpdb->prefix}comments AS eval
 										INNER JOIN {$wpdb->prefix}commentmeta AS evalmeta
-										 	ON evalmeta.comment_id=eval.comment_ID 
-										WHERE eval.comment_post_ID=%d 
+										 	ON evalmeta.comment_id=eval.comment_ID
+										WHERE eval.comment_post_ID=%d
+											AND eval.comment_type='digi-risk-eval'
+											AND evalmeta.meta_key='_wpdigi_risk_evaluation_scale'";
+								$queryCount = "SELECT COUNT( * )
+											FROM {$wpdb->prefix}comments AS eval
+										INNER JOIN {$wpdb->prefix}commentmeta AS evalmeta
+										 	ON evalmeta.comment_id=eval.comment_ID
+										WHERE eval.comment_post_ID=%d
 											AND eval.comment_type='digi-risk-eval'
 											AND evalmeta.meta_key='_wpdigi_risk_evaluation_scale'";
 
@@ -147,10 +180,12 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 									'post_parent' => $risk->post_parent,
 									'post_status' => $risk->post_status,
 									'post-type'   => $risk->post_type,
-									'scale' => '',
+									'scale'       => '',
 									'parent_name' => $society['post_title'],
 								);
-								$risk['scale'] = $wpdb->get_var( $wpdb->prepare( $query, $risk['ID'] ) );
+								$count = $wpdb->get_var( $wpdb->prepare( $queryCount, $risk['ID'] ) );
+
+								$risk['scale'] = $wpdb->get_var( $wpdb->prepare( $query, $risk['ID'] ), 0,  $count - 1 );
 							}
 						}
 						$societies_array_filter[$society['post_parent']][] = $society;
@@ -170,12 +205,41 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 		$filename     = $current_time . '_statistics.csv';
 		$url_to_file  = $upload_dir['baseurl'] . '/digirisk/statistics/' . $current_time . '_statistics.csv';
 
-		$data = $this->get_recursive_risks( $society_id );
-		echo '<pre>';
-		print_r( $data );
-		echo '</pre>';
-		exit;
-		$this->write_data_to_csv( $data, $filepath, $filename, $delimiter = ';', $enclosure = '"' );
+		$societies = $this->get_recursive_risks( $society_id );
+
+		$data_header = array (
+			 'Name',
+			'Black Risk',
+			'Red Risk',
+			'Orange Risk',
+			'Grey Risk',
+		);
+
+		$data_csv = array();
+		$risk_level       = array();
+
+		if ( ! empty( $societies ) ) {
+			foreach ( $societies as $parent_id => $sub_societies ) {
+				if ( ! empty( $sub_societies ) ) {
+					foreach ( $sub_societies as &$society ) {
+						if ( ! empty( $society['risks']) ) {
+							foreach ( $society['risks'] as &$risk ) {
+								$risk_level[ $society['post_name'] ][ $risk['scale'] ][]   = $risk;
+								$data_all[ $society['post_name'] ][ $risk['scale'] ]       = count( $risk_level[ $society['post_name'] ][ $risk['scale'] ] );
+							}
+						}
+						$data['Name']        = $society['post_title'];
+						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
+						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
+						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
+						$data['Grey Risk']   = isset( $data_all[ $society['post_name'] ]['1'] ) ? $data_all[ $society['post_name'] ]['1'] : 0;
+						$data_csv[] = $data;
+					}
+				}
+			}
+		}
+
+		$this->write_data_to_csv( $data_header, $data_csv, $filepath, $filename, $delimiter = ';', $enclosure = '"' );
 
 		$args = array(
 			'filepath'    => $filepath,
@@ -184,6 +248,18 @@ class Statistics_Class extends \eoxia\Singleton_Util {
 		);
 
 		return $args;
+	}
+
+	public function load_data_chart_society () {
+
+	}
+
+	public function load_data_chart_group () {
+
+	}
+
+	public function load_data_chart_work_unit () {
+
 	}
 }
 

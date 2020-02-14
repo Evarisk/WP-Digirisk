@@ -26,7 +26,7 @@ class Prevention_Page_Action {
 	 * Le constructeur appelle une action personnalisée
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 41 );
 
 		add_action( 'wp_ajax_start_prevention', array( $this, 'callback_start_prevention' ) );
 		add_action( 'admin_post_start_prevention', array( $this, 'callback_start_prevention' ) );

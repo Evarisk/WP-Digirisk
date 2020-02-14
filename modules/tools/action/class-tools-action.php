@@ -31,7 +31,7 @@ class Tools_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 50);
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 60 );
 		add_action( 'wp_ajax_fix_hidden_society', array( $this, 'fix_hidden_society' ) );
 	}
 
