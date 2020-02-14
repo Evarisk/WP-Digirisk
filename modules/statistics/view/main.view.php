@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || exit; ?>
 <br>
 
 <div class="statistics-chart" data-id="<?php echo esc_attr( $id ); ?>">
-	<div class="wpeo-gridlayout grid-2">
+	<div class="wpeo-gridlayout grid-1">
 		<?php for ( $i = 0; $i < $nb_chart_display; $i++ ) : ?>
 		<div>
 			<canvas id="myChart[<?php echo esc_attr( $i ); ?>]" max-width="400" max-height="400"></canvas>

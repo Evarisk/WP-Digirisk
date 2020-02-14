@@ -172,7 +172,7 @@ class Statistics_Action {
 					);
 
 					$chart[] = array(
-						'type'    => 'bar',
+						'type'    => 'horizontalBar',
 						'data'    => $data_chart,
 						'options' => $options,
 					);
@@ -292,7 +292,7 @@ class Statistics_Action {
 					);
 
 					$chart[] = array(
-						'type'    => isset( $type ) ? $type : 'bar',
+						'type'    => isset( $type ) ? $type : 'horizontalBar',
 						'data'    => $data_chart,
 						'options' => $options,
 					);
@@ -387,7 +387,7 @@ class Statistics_Action {
 					);
 
 					$chart[] = array(
-						'type'    => 'bar',
+						'type'    => 'horizontalBar',
 						'data'    => $data_chart,
 						'options' => $options,
 					);
