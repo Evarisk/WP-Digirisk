@@ -53,19 +53,6 @@
     define( 'PCLZIP_ERROR_EXTERNAL', 0 );
   }
 
-  // ----- Optional static temporary directory
-  //       By default temporary files are generated in the script current
-  //       path.
-  //       If defined :
-  //       - MUST BE terminated by a '/'.
-  //       - MUST be a valid, already created directory
-  //       Samples :
-  // define( 'PCLZIP_TEMPORARY_DIR', '/temp/' );
-  // define( 'PCLZIP_TEMPORARY_DIR', 'C:/Temp/' );
-  if (!defined('PCLZIP_TEMPORARY_DIR')) {
-    define( 'PCLZIP_TEMPORARY_DIR', '' );
-  }
-
   // ----- Optional threshold ratio for use of temporary files
   //       Pclzip sense the size of the file to add/extract and decide to
   //       use or not temporary file. The algorythm is looking for
@@ -192,6 +179,9 @@
     // ----- Filename of the zip file
     var $zipname = '';
 
+    // ----- Temporary directory
+    var $tmpdir = './';
+
     // ----- File descriptor of the zip file
     var $zip_fd = 0;
 
@@ -212,7 +202,7 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
-  function __construct($p_zipname)
+  function __construct($p_zipname, $p_tmpdir = './')
   {
 
     // ----- Tests the zlib
@@ -223,6 +213,11 @@
 
     // ----- Set the attributes
     $this->zipname = $p_zipname;
+    // support for legacy configuration
+    $p_tmpdir = ( defined('PCLZIP_TEMPORARY_DIR') ? PCLZIP_TEMPORARY_DIR : $p_tmpdir );
+    if (substr($p_tmpdir, -1) != '/')
+      $p_tmpdir .= '/';
+    $this->tmpdir = $p_tmpdir;
     $this->zip_fd = 0;
     $this->magic_quotes_status = -1;
 
@@ -1243,7 +1238,7 @@
     {
 
       // ----- Create a temporary archive
-      $v_object_archive = new digiPclZip($p_archive_to_add);
+      $v_object_archive = new digiPclZip($p_archive_to_add, $this->tmpdir);
 
       // ----- Merge the archive
       $v_result = $this->privMerge($v_object_archive);
@@ -2198,7 +2193,7 @@
     @rewind($this->zip_fd);
 
     // ----- Creates a temporay file
-    $v_zip_temp_name = PCLZIP_TEMPORARY_DIR.uniqid('pclzip-').'.tmp';
+    $v_zip_temp_name = $this->tmpdir.uniqid('pclzip-').'.tmp';
 
     // ----- Open the temporary file in write mode
     if (($v_zip_temp_fd = @fopen($v_zip_temp_name, 'wb')) == 0)
@@ -2811,7 +2806,7 @@
     }
 
     // ----- Creates a compressed temporary file
-    $v_gzip_temp_name = PCLZIP_TEMPORARY_DIR.uniqid('pclzip-').'.gz';
+    $v_gzip_temp_name = $this->tmpdir.uniqid('pclzip-').'.gz';
     if (($v_file_compressed = @gzopen($v_gzip_temp_name, "wb")) == 0) {
       fclose($v_file);
       digiPclZip::privErrorLog(PCLZIP_ERR_WRITE_OPEN_FAIL, 'Unable to open temporary file \''.$v_gzip_temp_name.'\' in binary write mode');
@@ -3969,7 +3964,7 @@
     $v_result=1;
 
     // ----- Creates a temporary file
-    $v_gzip_temp_name = PCLZIP_TEMPORARY_DIR.uniqid('pclzip-').'.gz';
+    $v_gzip_temp_name = $this->tmpdir.uniqid('pclzip-').'.gz';
     if (($v_dest_file = @fopen($v_gzip_temp_name, "wb")) == 0) {
       fclose($v_file);
       digiPclZip::privErrorLog(PCLZIP_ERR_WRITE_OPEN_FAIL, 'Unable to open temporary file \''.$v_gzip_temp_name.'\' in binary write mode');
@@ -4828,10 +4823,10 @@
     if ($v_nb_extracted > 0) {
 
         // ----- Creates a temporay file
-        $v_zip_temp_name = PCLZIP_TEMPORARY_DIR.uniqid('pclzip-').'.tmp';
+        $v_zip_temp_name = $this->tmpdir.uniqid('pclzip-').'.tmp';
 
         // ----- Creates a temporary zip archive
-        $v_temp_zip = new digiPclZip($v_zip_temp_name);
+        $v_temp_zip = new digiPclZip($v_zip_temp_name, $this->tmpdir);
 
         // ----- Open the temporary zip file in write mode
         if (($v_result = $v_temp_zip->privOpenFd('wb')) != 1) {
@@ -5113,7 +5108,7 @@
     @rewind($p_archive_to_add->zip_fd);
 
     // ----- Creates a temporay file
-    $v_zip_temp_name = PCLZIP_TEMPORARY_DIR.uniqid('pclzip-').'.tmp';
+    $v_zip_temp_name = $this->tmpdir.uniqid('pclzip-').'.tmp';
 
     // ----- Open the temporary file in write mode
     if (($v_zip_temp_fd = @fopen($v_zip_temp_name, 'wb')) == 0)
