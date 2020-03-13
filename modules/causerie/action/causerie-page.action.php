@@ -45,7 +45,9 @@ class Causerie_Page_Action {
 	 * @return  void
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), 'fa fa-comments', 4 );
+		if ( user_can( get_current_user_id(), 'manage_causerie' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), 'fa fa-comments', 4 );
+		}
 	}
 
 	/**

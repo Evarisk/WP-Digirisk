@@ -38,7 +38,9 @@ class Permis_Feu_Page_Action {
 	}
 
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Permis de feu', 'digirisk' ), __( 'Permis de feu', 'digirisk' ), 'manage_permis_feu', 'digirisk-permis-feu', array( Permis_Feu_Page_Class::g(), 'display' ), 'fa fa-fire-alt', 4 );
+		if ( user_can( get_current_user_id(), 'manage_permis_feu' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Permis de feu', 'digirisk' ), __( 'Permis de feu', 'digirisk' ), 'manage_permis_feu', 'digirisk-permis-feu', array( Permis_Feu_Page_Class::g(), 'display' ), 'fa fa-fire-alt', 4 );
+		}
 	}
 
 	public function callback_start_permis_feu() {

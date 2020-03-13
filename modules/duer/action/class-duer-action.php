@@ -39,9 +39,10 @@ class DUER_Action {
 	}
 
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), 'fa fa-exclamation-triangle', 'bottom' );
+		if ( user_can( get_current_user_id(), 'manage_du' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), 'fa fa-exclamation-triangle', 'bottom' );
+		}
 	}
-
 
 	/**
 	 * Appelle la méthode display_societies_tree de DUER_Class pour récupérer la vue dans la tamporisation de sortie.

@@ -135,24 +135,6 @@
       "manage_tools",
       "manage_setting",
       "manage_preventionplan"
-    ],
-    "editor": [
-      "create_causerie",
-      "manage_digirisk",
-      "manage_du",
-      "manage_accident",
-      "manage_causerie",
-      "manage_prevention",
-      "manage_permis_feu",
-      "manage_listing_risque",
-      "manage_sorter",
-      "manage_users",
-      "manage_tools",
-      "manage_setting",
-      "manage_preventionplan"
-    ],
-    "author": [
-      "manage_causerie"
     ]
   },
   "key_waiting_updates": "_digi_waited_updates"

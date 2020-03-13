@@ -55,7 +55,9 @@ class Setting_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_menu( 'digirisk', 'Réglages', 'Réglages', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ), 'fa fa-cog' );
+			if ( user_can( get_current_user_id(), 'manage_setting' ) ) {
+				CMH::register_menu( 'digirisk', 'Réglages', 'Réglages', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ), 'fa fa-cog' );
+			}
 		}
 	}
 
