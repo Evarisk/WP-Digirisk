@@ -7,6 +7,10 @@
 	background: $color__secondary;
 	padding: 0.2em 1em;
 
+	@media ( max-width: 480px ) {
+		padding-left: 2.2em;
+	}
+
 	[class*="toggle"] {
 		display: inline-block;
 		color: rgba(255,255,255,0.4);
@@ -18,7 +22,7 @@
 		}
 		@media ( max-width: 480px ) {
 			.icon {
-				font-size: 18px;
+				font-size: 24px;
 				padding: 4px;
 			}
 		}

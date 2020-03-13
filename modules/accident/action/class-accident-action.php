@@ -28,7 +28,7 @@ class Accident_Action {
 	 * Il appelle également les actions ajax suivantes
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 30 );
 
 		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
 		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );
@@ -41,7 +41,9 @@ class Accident_Action {
 	 * @since 6.3.0
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_accident', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), 'fa fa-user-injured', 4 );
+		if ( user_can( get_current_user_id(), 'manage_accident' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Accidents', 'digirisk' ), __( 'Accidents', 'digirisk' ), 'manage_accident', 'digirisk-accident', array( Accident_Class::g(), 'display_page' ), 'fa fa-user-injured', 4 );
+		}
 	}
 
 	/**

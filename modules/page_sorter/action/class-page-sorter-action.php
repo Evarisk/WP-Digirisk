@@ -30,7 +30,7 @@ class Page_Sorter_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 15 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 21 );
 		add_action( 'admin_post_sorter_parent', array( $this, 'callback_sorter_parent' ) );
 	}
 
@@ -40,7 +40,9 @@ class Page_Sorter_Action {
 	 * @since 6.0.0
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Organisation des UT', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_sorter', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ), 'fa fa-network-wired' );
+		if ( user_can( get_current_user_id(), 'manage_sorter' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Organisation des UT', 'digirisk' ), __( 'Organiseur', 'digirisk' ), 'manage_sorter', 'digirisk-handle-sorter', array( Page_Sorter_Class::g(), 'display' ), 'fa fa-network-wired' );
+		}
 	}
 
 	/**

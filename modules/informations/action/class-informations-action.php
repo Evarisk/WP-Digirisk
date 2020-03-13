@@ -14,6 +14,8 @@
 
 namespace digi;
 
+use eoxia\View_Util;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -31,6 +33,9 @@ class Society_Informations_Action {
 	}
 
 	public function load_risks_information() {
+		$element_id = $_POST['id'] ? (int) $_POST['id'] : 0;
+		$element    = Society_Class::g()->show_by_type( $element_id );
+
 		$diff_info = array(
 			'total_risk'      => 'N/A',
 			'quotation_total' => 'N/A',
@@ -101,12 +106,18 @@ class Society_Informations_Action {
 		unset( $risk_category );
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'informations', 'risks', array(
-			'old_duer_info'     => $old_duer_info,
-			'current_duer_info' => $current_duer_info,
-			'diff_info'         => $diff_info,
-			'risks_categories'   => $risks_categories,
-		) );
+		View_Util::exec(
+			'digirisk',
+			'informations',
+			'risks',
+			array(
+				'old_duer_info'     => $old_duer_info,
+				'current_duer_info' => $current_duer_info,
+				'diff_info'         => $diff_info,
+				'risks_categories'  => $risks_categories,
+				'type'              => $element->data['type'],
+			)
+		);
 		$view = ob_get_clean();
 
 		wp_send_json_success( array(

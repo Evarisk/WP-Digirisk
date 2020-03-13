@@ -46,7 +46,7 @@ class Informations_Class extends \eoxia\Singleton_Util {
 
 		if ( ! empty( $duers ) ) {
 			$current_duer = is_array( $duers ) ? $duers[0] : $duers;
-			$old_duer     = is_array( $duers ) ? $duers[1] : null;
+			//$old_duer     = is_array( $duers ) ? $duers[1] : null;
 		}
 
 		$accident  = null;
@@ -155,6 +155,7 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'diff_info'             => $diff_info,
 			'general_options'       => $general_options,
 			'date_before_next_duer' => $date_before_next_duer,
+			'type'                  => $element->data['type'],
 		) );
 	}
 

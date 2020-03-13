@@ -51,8 +51,9 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
 			'type'  => 'text',
-			'text'  => __( 'Fiche ', 'digirisk' ) . Workunit_Class::g()->element_prefix,
-			'title' => __( 'Les fiches de poste', 'digirisk' ),
+			'text'  => __( 'Unité de travail', 'digirisk' ),
+			'title' => __( 'Unité de travail', 'digirisk' ),
+			'icon'  => 'UT',
 		);
 
 		return $list_tab;
@@ -74,7 +75,7 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 		$upload_dir = wp_upload_dir();
 
 		$data['title']  = current_time( 'Ymd' ) . '_';
-		$data['title'] .= $data['parent']->data['unique_identifier'] . '_fiche_de_poste_';
+		$data['title'] .= $data['parent']->data['unique_identifier'] . '_';
 		$data['title'] .= sanitize_title( $data['parent']->data['title'] ) . '_';
 		$data['title'] .= 'V' . \eoxia\ODT_Class::g()->get_revision( $data['type'], $data['parent']->data['id'] );
 		$data['title']  = str_replace( '-', '_', $data['title'] );

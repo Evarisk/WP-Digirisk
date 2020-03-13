@@ -29,7 +29,7 @@ class DUER_Action {
 	 * @since 6.2.1
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 20 );
 
 		add_action( 'wp_ajax_display_societies_duer', array( $this, 'callback_display_societies_duer' ) );
 		add_action( 'wp_ajax_construct_duer', array( $this, 'callback_ajax_construct_duer' ) );
@@ -39,9 +39,10 @@ class DUER_Action {
 	}
 
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), 'fa fa-exclamation-triangle', 'bottom' );
+		if ( user_can( get_current_user_id(), 'manage_du' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Document Unique', 'digirisk' ), __( 'Document Unique', 'digirisk' ), 'manage_du', 'digirisk-du', array( DUER_Class::g(), 'display_page' ), 'fa fa-exclamation-triangle', 'bottom' );
+		}
 	}
-
 
 	/**
 	 * Appelle la méthode display_societies_tree de DUER_Class pour récupérer la vue dans la tamporisation de sortie.

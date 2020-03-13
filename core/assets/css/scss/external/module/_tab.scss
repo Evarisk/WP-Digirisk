@@ -25,6 +25,21 @@
 	}
 }
 
+/** Responsive */
+.wpeo-tab .tab-container .tab-content {
+	@media ( max-width: 480px ) {
+		padding: 0;
+	}
+}
+.wpeo-tab .tab-element {
+	@media ( max-width: 480px ) {
+		> span:not(.tab-icon) {
+			display: none;
+		}
+	}
+}
+
+
 /** Colors */
 .wpeo-tab .tab-list {
 	.tab-element {

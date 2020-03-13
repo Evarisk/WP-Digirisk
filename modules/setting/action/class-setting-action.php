@@ -28,7 +28,7 @@ class Setting_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 60 );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 61 );
 		add_action( 'admin_post_update_accronym', array( $this, 'callback_update_accronym' ) );
 		add_action( 'wp_ajax_save_capability', array( $this, 'callback_save_capability' ) );
 
@@ -55,7 +55,9 @@ class Setting_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_menu( 'digirisk', 'Réglages', 'Réglages', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ), 'fa fa-cog' );
+			if ( user_can( get_current_user_id(), 'manage_setting' ) ) {
+				CMH::register_menu( 'digirisk', 'Réglages', 'Réglages', 'manage_setting', 'digirisk-setting', array( $this, 'add_option_page' ), 'fa fa-cog' );
+			}
 		}
 	}
 

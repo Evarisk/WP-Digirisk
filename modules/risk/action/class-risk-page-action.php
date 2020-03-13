@@ -27,7 +27,7 @@ class Risk_Page_Action {
 	 * @since 6.3.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 13 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 22 );
 		add_action( 'can_update', array( $this, 'callback_can_update' ), 10, 0 );
 
 		add_action( 'wp_ajax_paginate_risk', array( $this, 'callback_paginate_risk' ) );
@@ -39,13 +39,15 @@ class Risk_Page_Action {
 	 * @since 6.2.7
 	 */
 	public function callback_admin_menu() {
-		$menu = CMH::register_menu( 'digirisk', __( 'Listing de risque', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_listing_risque', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), 'fa fa-list', 4 );
-		$screen = \WP_Screen::get($menu->wp);
-		$screen->add_option( 'per_page', array(
-			'label'   => _x( 'Risques', 'Risque par page' ),
-			'default' => Risk_Page_Class::g()->limit_risk,
-			'option'  => Risk_Page_Class::g()->option_name,
-		) );
+		if ( user_can( get_current_user_id(), 'manage_listing_risque' ) ) {
+			$menu = CMH::register_menu( 'digirisk', __( 'Listing de risque', 'digirisk' ), __( 'Risques', 'digirisk' ), 'manage_listing_risque', 'digirisk-handle-risk', array( Risk_Page_Class::g(), 'display' ), 'fa fa-list', 4 );
+			$screen = \WP_Screen::get($menu->wp);
+			$screen->add_option( 'per_page', array(
+				'label'   => _x( 'Risques', 'Risque par page' ),
+				'default' => Risk_Page_Class::g()->limit_risk,
+				'option'  => Risk_Page_Class::g()->option_name,
+			) );
+		}
 	}
 
 	/**

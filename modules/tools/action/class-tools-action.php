@@ -31,7 +31,7 @@ class Tools_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 50);
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 60 );
 		add_action( 'wp_ajax_fix_hidden_society', array( $this, 'fix_hidden_society' ) );
 	}
 
@@ -44,7 +44,9 @@ class Tools_Action {
 		$digirisk_core = get_option( \eoxia\Config_Util::$init['digirisk']->core_option );
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_menu( 'digirisk','Outils', 'Outils', 'manage_tools', 'digirisk-tools', array( $this, 'add_management_page' ), 'fa fa-wrench' );
+			if ( user_can( get_current_user_id(), 'manage_tools' ) ) {
+				CMH::register_menu( 'digirisk','Outils', 'Outils', 'manage_tools', 'digirisk-tools', array( $this, 'add_management_page' ), 'fa fa-wrench' );
+			}
 		}
 	}
 

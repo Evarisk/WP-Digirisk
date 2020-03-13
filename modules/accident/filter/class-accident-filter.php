@@ -56,6 +56,7 @@ class Accident_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Registre des accidents bénins', 'digirisk' ),
 			'title' => __( 'Registre des accidents bénins', 'digirisk' ),
+			'icon'  => 'AT',
 		);
 
 		return $list_tab;

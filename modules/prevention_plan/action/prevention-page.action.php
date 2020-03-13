@@ -26,7 +26,7 @@ class Prevention_Page_Action {
 	 * Le constructeur appelle une action personnalisée
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 41 );
 
 		add_action( 'wp_ajax_start_prevention', array( $this, 'callback_start_prevention' ) );
 		add_action( 'admin_post_start_prevention', array( $this, 'callback_start_prevention' ) );
@@ -38,7 +38,9 @@ class Prevention_Page_Action {
 	}
 
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Plan de prévention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_prevention', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), 'fa fa-info', 4 );
+		if ( user_can( get_current_user_id(), 'manage_prevention' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Plan de prévention', 'digirisk' ), __( 'Plan de prévention', 'digirisk' ), 'manage_prevention', 'digirisk-prevention', array( Prevention_Page_Class::g(), 'display' ), 'fa fa-info', 4 );
+		}
 	}
 
 	/**

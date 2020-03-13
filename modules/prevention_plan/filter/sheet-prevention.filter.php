@@ -257,6 +257,7 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 	}
 
 	public function add_new_button( $content ) {
+
 		if ( 'digirisk-prevention' === $_REQUEST['page'] && ! isset( $_GET['id'] ) ) {
 			ob_start();
 			\eoxia\View_Util::exec( 'digirisk', 'prevention_plan', 'new-button' );

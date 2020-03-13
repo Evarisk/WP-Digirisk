@@ -50,6 +50,7 @@ class DUER_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'DUER ', 'digirisk' ),
 			'title' => __( 'DUER', 'digirisk' ),
+			'icon'  => 'DU',
 		);
 
 		return $list_tab;

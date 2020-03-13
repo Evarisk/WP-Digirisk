@@ -26,7 +26,7 @@ class Causerie_Page_Action {
 	 * Le constructeur appelle une action personnalisée
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 12 );
+		add_action( 'admin_menu', array( $this, 'callback_admin_menu' ), 40 );
 
 		add_action( 'wp_ajax_causerie_load_tab', array( $this, 'callback_causerie_load_tab' ) );
 		add_action( 'wp_ajax_load_modal_participants', array( $this, 'callback_load_modal_participants' ) );
@@ -45,7 +45,9 @@ class Causerie_Page_Action {
 	 * @return  void
 	 */
 	public function callback_admin_menu() {
-		CMH::register_menu( 'digirisk', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), 'fa fa-comments', 4 );
+		if ( user_can( get_current_user_id(), 'manage_causerie' ) ) {
+			CMH::register_menu( 'digirisk', __( 'Causeries', 'digirisk' ), __( 'Causeries', 'digirisk' ), 'manage_causerie', 'digirisk-causerie', array( Causerie_Page_Class::g(), 'display' ), 'fa fa-comments', 4 );
+		}
 	}
 
 	/**

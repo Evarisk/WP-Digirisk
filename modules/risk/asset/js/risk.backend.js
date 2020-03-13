@@ -49,8 +49,8 @@ window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) 
 };
 
 window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
-  element.closest( 'tr' ).replaceWith( response.data.template );
-  window.eoxiaJS.digirisk.risk.refresh();
+	element.closest( 'tr' ).replaceWith( response.data.template );
+	window.eoxiaJS.digirisk.risk.refresh();
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {

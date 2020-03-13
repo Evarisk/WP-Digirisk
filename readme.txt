@@ -77,6 +77,13 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.5.3 =
+
+* 39694 - Correction de divers bugs : Setting, Media, Installation de Digirisk.
+* 39934 - Nouvelle fonctionnalité : Création d'un onglet statisques pour visualiser différentes concernant la société.
+		- Ajout d'un fichier CSV en lien avec les statisques.
+* 38194 - Amélioration du responsive sur divers éléments.
+
 = Version 7.5.2 =
 
 * 38339 - Correction de divers bugs: Plan de prévention, permis de feu, causerie et accident

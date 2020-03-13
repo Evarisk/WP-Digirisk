@@ -53,6 +53,7 @@ class Sheet_Groupment_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Fiche ', 'digirisk' ) . Group_Class::g()->element_prefix,
 			'title' => __( 'Les fiches de groupement', 'digirisk' ),
+			'icon'  => 'GP',
 		);
 
 		return $list_tab;

@@ -52,12 +52,14 @@ class Recommendation_Filter extends Identifier_Filter {
 			'type'  => 'text',
 			'text'  => __( 'Signalisations', 'digirisk' ),
 			'title' => __( 'Les signalisations', 'digirisk' ),
+			'icon'  => '<i class="fas fa-map-signs"></i>',
 		);
 
 		$list_tab['digi-group']['recommendation'] = array(
 			'type'  => 'text',
 			'text'  => __( 'Signalisations', 'digirisk' ),
 			'title' => __( 'Les signalisations', 'digirisk' ),
+			'icon'  => '<i class="fas fa-map-signs"></i>',
 		);
 
 		return $list_tab;

@@ -32,67 +32,67 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td class="padding"><span><?php echo esc_html( implode( ', ', $user->data['wordpress_user']->roles ) ); ?></span></td>
 	<td>
-		<input class="all" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_du' ) ) ? 'checked' : ''; ?>
-			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_du]"
-			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
-				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
-	</td>
-	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_digirisk' ) ) ? 'checked' : ''; ?>
+		<input class="all" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_digirisk' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_digirisk]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_accident' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_du' ) ) ? 'checked' : ''; ?>
+			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_du]"
+			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
+				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
+	</td>
+	<td>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_accident' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_accident]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_causerie' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_causerie' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_causerie]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_prevention' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_prevention' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_prevention]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_permis_feu' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_permis_feu' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_permis_feu]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_listing_risque' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_listing_risque' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_listing_risque]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_sorter' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_sorter' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_sorter]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_users' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_users' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_users]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_tools' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_tools' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_tools]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_setting' ) ) ? 'checked' : ''; ?>
+		<input class="one" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_setting' ) ) ? 'checked' : ''; ?>
 			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_setting]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
