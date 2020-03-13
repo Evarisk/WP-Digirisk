@@ -141,7 +141,7 @@ window.eoxiaJS.digirisk.installer.savedSociety = function( element, response ) {
 	jQuery( '.wpdigi-installer .bloc-create-society' ).hide();
 	jQuery( '.wpdigi-installer .wpdigi-components' ).show();
 	jQuery( '.wpdigi-installer .start-install' ).hide();
-	jQuery( '.wpdigi-installer .end-install' ).show();
+	jQuery( '.wpdigi-installer .end-install' ).removeClass( 'wpeo-util-hidden' );
 	jQuery( '.wpdigi-installer .bar .loader' ).css( 'width',  '30%' );
 	jQuery( '.wpdigi-installer .bar .loader' ).attr( 'data-width', 25 );
 	jQuery( '.wpdigi-installer .step-list .step[data-width="' + 25 + '"]' ).addClass( 'active' );
