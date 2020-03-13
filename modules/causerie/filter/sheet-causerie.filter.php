@@ -83,6 +83,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$causerie_intervention = $args['parent'];
 		}
 		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
+		$causerie_intervention = '';
 
 		$data = array(
 			'cleCauserie'         => (string) $causerie->data['unique_identifier'],

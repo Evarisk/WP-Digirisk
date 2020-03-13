@@ -32,14 +32,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</td>
 	<td class="padding"><span><?php echo esc_html( implode( ', ', $user->data['wordpress_user']->roles ) ); ?></span></td>
 	<td>
-		<input class="all" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_du' ) ) ? 'checked' : ''; ?>
-			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_du]"
+		<input class="all" <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_digirisk' ) ) ? 'checked' : ''; ?>
+			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_digirisk]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>
 	<td>
-		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_digirisk' ) ) ? 'checked' : ''; ?>
-			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_digirisk]"
+		<input <?php echo ( $user->data['wordpress_user']->has_cap( 'manage_du' ) ) ? 'checked' : ''; ?>
+			name="users[<?php echo esc_attr( $user->data['id'] ); ?>][capability][manage_du]"
 			id="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>" type="checkbox" />
 				<label for="have_capability_<?php echo esc_attr( $user->data['id'] ); ?>"></label>
 	</td>

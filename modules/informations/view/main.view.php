@@ -16,27 +16,29 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<h3><?php esc_html_e( 'Document unique', 'digirisk' ); ?></h3>
+<?php if ( ( $type != 'digi-group' ) && ( $type != 'digi-workunit' ) ) : ?>
+	<h3><?php esc_html_e( 'Document unique', 'digirisk' ); ?></h3>
 
-<div class="wpeo-gridlayout grid-3">
-	<p>
-		<span><?php esc_html_e( 'Date dernière impression:', 'digirisk' ); ?></span>
-		<span><strong><?php echo ( ! empty( $current_duer ) ) ? $current_duer->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
-	</p>
-	<p><?php printf( __( 'Mise à jour obligatoire tous les <strong>%d</strong> jours', 'digirisk' ), $general_options['required_duer_day'] ); ?></p>
-	<p><?php printf( __( 'Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>%s</strong> jours', 'digirisk' ), ! empty( $date_before_next_duer ) ? $date_before_next_duer : 'N/A' ); ?></p>
-</div>
+	<div class="wpeo-gridlayout grid-3">
+		<p>
+			<span><?php esc_html_e( 'Date dernière impression:', 'digirisk' ); ?></span>
+			<span><strong><?php echo ( ! empty( $current_duer ) ) ? $current_duer->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
+		</p>
+		<p><?php printf( __( 'Mise à jour obligatoire tous les <strong>%d</strong> jours', 'digirisk' ), $general_options['required_duer_day'] ); ?></p>
+		<p><?php printf( __( 'Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>%s</strong> jours', 'digirisk' ), ! empty( $date_before_next_duer ) ? $date_before_next_duer : 'N/A' ); ?></p>
+	</div>
 
-<h3><?php esc_html_e( 'Accident', 'digirisk' ); ?></h3>
+	<h3><?php esc_html_e( 'Accident', 'digirisk' ); ?></h3>
 
-<div class="wpeo-gridlayout grid-3">
-	<p>
-		<span><?php esc_html_e( 'Date du dernier accident:', 'digirisk' ); ?></span>
-		<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
-	</p>
-	<p><?php _e( 'Nombre de jour sans Accident: <strong>N/A</strong> jours', 'digirisk' ); ?></p>
-	<p><?php printf( __( 'Unité de Travail concernée: <strong>%s</strong>', 'digirisk' ), ! empty( $accident ) ? $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'] : 'N/A' ); ?></p>
-</div>
+	<div class="wpeo-gridlayout grid-3">
+		<p>
+			<span><?php esc_html_e( 'Date du dernier accident:', 'digirisk' ); ?></span>
+			<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
+		</p>
+		<p><?php _e( 'Nombre de jour sans Accident: <strong>N/A</strong> jours', 'digirisk' ); ?></p>
+		<p><?php printf( __( 'Unité de Travail concernée: <strong>%s</strong>', 'digirisk' ), ! empty( $accident ) ? $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'] : 'N/A' ); ?></p>
+	</div>
+<?php endif; ?>
 
 <h3><?php esc_html_e( 'Analyse par unité de travail ou GP', 'digirisk' ); ?></h3>
 

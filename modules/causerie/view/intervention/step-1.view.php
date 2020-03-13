@@ -58,6 +58,7 @@ global $eo_search; ?>
 					<?php
 					\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 						'action' => 'causerie_save_signature',
+						'id' => get_current_user_id(),
 					) );
 					?>
 				</td>

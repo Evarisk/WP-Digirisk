@@ -31,6 +31,7 @@ window.eoxiaJS.digirisk.core.event = function() {
 	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note.notification-active', window.eoxiaJS.digirisk.core.openPopup );
 	jQuery( document ).on( 'click', '.digirisk-wrap .wpeo-notification.patch-note .notification-close', window.eoxiaJS.digirisk.core.closeNotification );
 	jQuery( document ).on( 'click', '.popup-update-manager .back-update', window.eoxiaJS.digirisk.core.confirmBack );
+	jQuery( document ).on( 'click', '.digirisk-wrap .main-container .tab-list li[data-target=digi-informations]', window.eoxiaJS.digirisk.core.loadRiskInformation );
 
 	var action = {
 		action: 'have_patch_note',
@@ -51,18 +52,6 @@ window.eoxiaJS.digirisk.core.event = function() {
 		jQuery.post(ajaxurl, action, function (response) {
 			jQuery('.navigation-container').replaceWith(response.data.view);
 		});
-	}
-
-	if ( jQuery( '.section-risk' ).length ) {
-		var action = {
-			action: 'load_risks_information',
-		};
-
-		window.eoxiaJS.loader.display(jQuery( '.section-risk' ));
-		jQuery.post(ajaxurl, action, function (response) {
-			jQuery( '.section-risk' ).html( response.data.view );
-			window.eoxiaJS.loader.remove(jQuery( '.section-risk' ));
-		} );
 	}
 };
 
@@ -114,4 +103,17 @@ window.eoxiaJS.digirisk.core.confirmBack = function( event ) {
 
 window.eoxiaJS.digirisk.core.settedDefaultApp = function( triggeredElement, response ) {
 	triggeredElement.closest( '.wpeo-modal' ).removeClass( 'modal-active' );
+};
+
+window.eoxiaJS.digirisk.core.loadRiskInformation = function( event ) {
+	var action = {
+		action: 'load_risks_information',
+		id: jQuery( '.digirisk-wrap .main-container .tab-list' ).find( 'li[data-target=digi-informations]' ).attr( 'data-id' ),
+	};
+
+	window.eoxiaJS.loader.display(jQuery( '.section-risk' ));
+	jQuery.post(ajaxurl, action, function (response) {
+		jQuery( '.section-risk' ).html( response.data.view );
+		window.eoxiaJS.loader.remove(jQuery( '.section-risk' ));
+	} );
 };

@@ -51,7 +51,7 @@ class Sheet_Workunit_Filter extends Identifier_Filter {
 	public function callback_digi_tab( $list_tab, $id ) {
 		$list_tab['digi-workunit']['fiche-de-poste'] = array(
 			'type'  => 'text',
-			'text'  => __( 'Fiche ', 'digirisk' ) . Workunit_Class::g()->element_prefix,
+			'text'  => __( 'Fiche de Poste', 'digirisk' ),
 			'title' => __( 'Les fiches de poste', 'digirisk' ),
 			'icon'  => 'UT',
 		);
