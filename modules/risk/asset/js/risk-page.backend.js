@@ -39,8 +39,8 @@ window.eoxiaJS.digirisk.risk_page.saveRisks = function( event ) {
  * @since 6.2.3
  */
 window.eoxiaJS.digirisk.risk_page.checkTheCheckbox = function( event ) {
-	jQuery( this ).closest( 'tr' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
-	jQuery( this ).closest( 'tr' ).find( '.edit-risk' ).addClass( 'checked' );
+	jQuery( this ).closest( 'tr, .table-row' ).find( 'input[type="checkbox"]' ).prop( 'checked', true );
+	jQuery( this ).closest( 'tr, .table-row' ).find( '.edit-risk' ).addClass( 'checked' );
 	jQuery( '.risk-page .save-all' ).removeClass( 'button-disable' );
 };
 

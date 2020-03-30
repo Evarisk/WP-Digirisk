@@ -27,7 +27,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 	var element = jQuery( this );
 	var data = {};
 	element.closest( '.content' ).removeClass( 'active' );
-	element.closest( 'tr' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
+	element.closest( 'tr, .table-row' ).find( 'input.input-hidden-danger' ).val( element.data( 'id' ) );
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle span' ).hide();
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).show();
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'src', element.find( 'img' ).attr( 'src' ) );
@@ -49,7 +49,7 @@ window.eoxiaJS.digirisk.riskCategory.selectDanger = function( event ) {
 		data.danger_id = element.data( 'id' );
 		data.society_id = element.closest( '.risk-row' ).find( 'input[name="parent_id"] ' ).val();
 
-		window.eoxiaJS.loader.display( jQuery( this ).closest( 'table' ) );
+		window.eoxiaJS.loader.display( jQuery( this ).closest( 'table, .wpeo-table' ) );
 
 		window.eoxiaJS.request.send( jQuery( this ).closest( '.wpeo-dropdown' ), data );
 	}

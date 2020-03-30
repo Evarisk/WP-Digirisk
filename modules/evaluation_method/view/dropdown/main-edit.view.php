@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 		else :
 			?>
-			<span><i class="fas fa-chart-line"></i></span>
+			<span><i class="fas fa-chart-line"></i><i class="fas fa-plus-circle icon-add"></i></span>
 			<?php
 		endif;
 		?>

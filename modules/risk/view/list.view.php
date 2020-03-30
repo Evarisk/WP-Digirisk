@@ -15,38 +15,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table risk">
-	<thead>
-		<tr>
-			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Cot', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
-			<th class="w150"></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex table-risk">
+	<div class="table-row table-header">
+		<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
+		<div class="table-cell table-50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></div>
+		<div class="table-cell table-50"><?php esc_html_e( 'Cot', 'digirisk' ); ?></div>
+		<div class="table-cell table-50"><?php esc_html_e( 'Photo', 'digirisk' ); ?></div>
+		<div class="table-cell"><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></div>
+		<div class="table-cell table-100 table-end"></div>
+	</div>
 
-	<tbody>
-		<?php
-		if ( ! empty( $risks ) ) :
-			foreach ( $risks as $risk ) :
-				\eoxia\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
-					'society_id' => $society_id,
-					'risk'       => $risk,
-					'societies'  => $societies,
-				) );
-			endforeach;
-		endif;
-		?>
-	</tbody>
+	<?php
+	if ( ! empty( $risks ) ) :
+		foreach ( $risks as $risk ) :
+			\eoxia\View_Util::exec( 'digirisk', 'risk', 'list-item', array(
+				'society_id' => $society_id,
+				'risk'       => $risk,
+				'societies'  => $societies,
+			) );
+		endforeach;
+	endif;
 
-	<tfoot>
-		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
-			'society_id' => $society_id,
-			'risk'       => $risk_schema,
-		) );
-		?>
-	</tfoot>
-</table>
+	\eoxia\View_Util::exec( 'digirisk', 'risk', 'item-edit', array(
+		'society_id' => $society_id,
+		'risk'       => $risk_schema,
+	) );
+	?>
+</div>
