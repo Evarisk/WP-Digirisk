@@ -1435,7 +1435,7 @@ le responsive sera activé manuellement.
     margin-bottom: 0.6em;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row.edit .cell-reference {
-    display: none;
+    width: 100%;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row.edit .cell-action {
     -webkit-box-ordinal-group: 11;
