@@ -148,7 +148,8 @@ class Evaluator_Action {
 
 		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
+
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
 			'element'                 => $element,
 			'element_id'              => $element->data['id'],
 			'list_affected_evaluator' => $list_affected_evaluator,

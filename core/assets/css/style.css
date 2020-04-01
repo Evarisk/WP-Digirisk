@@ -1253,6 +1253,22 @@ le responsive sera activé manuellement.
   width: 100%;
 }
 
+.wpeo-wrap .wpeo-table .avatar {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.wpeo-wrap .wpeo-table .avatar span {
+  line-height: 50px;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
 .wpeo-wrap .wpeo-table.table-flex .comment-container .comment {
   display: -webkit-box;
   display: flex;
