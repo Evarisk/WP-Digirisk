@@ -288,13 +288,13 @@ class Causerie_Class extends \eoxia\Post_Class {
 
 	    $mirror = wp_upload_bits( basename( $image ), '', wp_remote_retrieve_body( $get ) );
 	    $attachment = array(
-			'guid'           => $mirror['url'] . '/' . $mirror['file'],
+			'guid'           => $mirror['url'],
 	        'post_title'     => $media_name,
 			'post_content'   => '',
 			'post_status'    => 'inherit',
 	        'post_mime_type' => $type
 	    );
-	    $attach_id = wp_insert_attachment( $attachment, $mirror['file'] );
+	    $attach_id = wp_insert_attachment( $attachment, $mirror['file'], 0, true );
 
 	    $attach_data = wp_generate_attachment_metadata( $attach_id, $mirror['file'] );
 
