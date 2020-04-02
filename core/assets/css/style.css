@@ -584,10 +584,6 @@ le responsive sera activé manuellement.
   line-height: 1.4;
 }
 
-.wpeo-wrap .cotation-container .dropdown-toggle:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-
 .wpeo-wrap .cotation {
   display: block;
   width: 50px;
@@ -597,28 +593,6 @@ le responsive sera activé manuellement.
   text-align: center;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
-}
-
-.wpeo-wrap .cotation .icon-add {
-  position: absolute;
-  top: 12px;
-  right: 8px;
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.3);
-  -webkit-transition: color 0.2s ease-out;
-  transition: color 0.2s ease-out;
-}
-
-.wpeo-wrap .cotation .icon {
-  font-size: 16px;
-}
-
-.wpeo-wrap .cotation:hover {
-  cursor: pointer;
-}
-
-.wpeo-wrap .cotation:hover .icon-add {
-  color: #3495f0;
 }
 
 .wpeo-wrap .cotation.default-cotation:hover {
@@ -1344,7 +1318,7 @@ le responsive sera activé manuellement.
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.wpeo-wrap .button-cotation {
+.wpeo-wrap .dropdown-add-button {
   display: block;
   width: 50px;
   min-width: 50px;
@@ -1356,7 +1330,7 @@ le responsive sera activé manuellement.
   transition: all 0.2s ease-out;
 }
 
-.wpeo-wrap .button-cotation .icon-add {
+.wpeo-wrap .dropdown-add-button .icon-add {
   position: absolute;
   top: 12px;
   right: 8px;
@@ -1366,16 +1340,16 @@ le responsive sera activé manuellement.
   transition: color 0.2s ease-out;
 }
 
-.wpeo-wrap .button-cotation .icon {
+.wpeo-wrap .dropdown-add-button .icon {
   font-size: 16px;
 }
 
-.wpeo-wrap .button-cotation:hover {
+.wpeo-wrap .dropdown-add-button:hover {
   cursor: pointer;
   background: rgba(0, 0, 0, 0.1);
 }
 
-.wpeo-wrap .button-cotation:hover .icon-add {
+.wpeo-wrap .dropdown-add-button:hover .icon-add {
   color: #3495f0;
 }
 

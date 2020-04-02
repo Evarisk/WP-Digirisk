@@ -23,40 +23,39 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<tr class="recommendation-row edit">
-
+<div class="table-row recommendation-row edit">
 	<!-- Les champs obligatoires pour le formulaire -->
 	<input type="hidden" name="action" value="save_recommendation" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $society_id ); ?>" />
 	<input type="hidden" name="id" value="<?php echo esc_attr( $recommendation->data['id'] ); ?>" />
 	<?php wp_nonce_field( 'save_recommendation' ); ?>
 
-	<td class="padding w50">
-		<span><strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></span></strong>
-	</td>
-	<td class="wm130 w150">
+	<div class="table-cell table-75">
+		<strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></strong>
+	</div>
+	<div class="table-cell table-100">
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation"]' ); ?>
-	</td>
-	<td class="w50">
+	</div>
+	<div class="table-cell table-50">
 		<?php echo do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image"  title="' . $recommendation->data['unique_identifier'] . '"]' ); ?>
-	</td>
-	<td class="padding">
+	</div>
+	<div class="table-cell">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="edit"]' ); ?>
-	</td>
-	<td>
+	</div>
+	<div class="table-cell table-100 table-end">
 		<?php if ( 0 !== $recommendation->data['id'] ) : ?>
 			<div class="action">
-				<div data-parent="recommendation-row" data-loader="table" class="wpeo-button button_square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
+				<div data-parent="recommendation-row" data-loader="table-recommendation" class="wpeo-button button_square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
 			</div>
 		<?php else : ?>
 			<div class="action">
 				<div	data-namespace="digirisk"
-							data-module="recommendation"
-							data-before-method="beforeSaveRecommendation"
-							data-parent="recommendation-row"
-							data-loader="table"
-							class="wpeo-button button-square-50 button-disable button-event add action-input"><i class="button-icon fas fa-plus"></i></div>
+				        data-module="recommendation"
+				        data-before-method="beforeSaveRecommendation"
+				        data-parent="recommendation-row"
+				        data-loader="table-recommendation"
+				        class="wpeo-button button-square-50 button-disable button-event add action-input"><i class="button-icon fas fa-plus"></i></div>
 			</div>
 		<?php endif; ?>
-	</td>
-</tr>
+	</div>
+</div>

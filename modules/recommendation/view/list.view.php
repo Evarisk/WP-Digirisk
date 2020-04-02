@@ -21,36 +21,28 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<table class="table recommendation">
-	<thead>
-		<tr>
-			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="wm130"><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Photo', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
-			<th class="w100"></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex table-recommendation">
+	<div class="table-row table-header">
+		<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
+		<div class="table-cell table-100"><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></div>
+		<div class="table-cell table-50"><?php esc_html_e( 'Photo', 'digirisk' ); ?></div>
+		<div class="table-cell"><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></div>
+		<div class="table-cell table-100 table-end"></div>
+	</div>
 
-	<tbody>
-		<?php
-		if ( ! empty( $recommendations ) ) :
-			foreach ( $recommendations as $recommendation ) :
-				\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list-item', array(
-					'society_id'     => $society_id,
-					'recommendation' => $recommendation,
-				) );
-			endforeach;
-		endif;
-		?>
-	</tbody>
+	<?php
+	if ( ! empty( $recommendations ) ) :
+		foreach ( $recommendations as $recommendation ) :
+			\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list-item', array(
+				'society_id'     => $society_id,
+				'recommendation' => $recommendation,
+			) );
+		endforeach;
+	endif;
 
-	<tfoot>
-		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
-			'society_id'     => $society_id,
-			'recommendation' => $recommendation_schema,
-		) );
-		?>
-	</tfoot>
-</table>
+	\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'item-edit', array(
+		'society_id'     => $society_id,
+		'recommendation' => $recommendation_schema,
+	) );
+	?>
+</div>

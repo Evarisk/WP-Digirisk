@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-nonce="<?php echo esc_attr( wp_create_nonce( 'check_predefined_danger' ) ); ?>"
 	aria-label="<?php esc_html_e( 'Vous devez choisir une catégorie de risque.', 'digirisk' ); ?>">
 
-	<div class="dropdown-toggle button-cotation">
+	<div class="dropdown-toggle dropdown-add-button button-cotation">
 		<span class="<?php echo ! empty( $selected_risk_category ) && ! empty( $selected_risk_category ) ? 'hidden' : ''; ?>"><i class="fas fa-exclamation-triangle"></i><i class="fas fa-plus-circle icon-add"></i></span>
 		<img class="<?php echo ! empty( $selected_risk_category ) ? '' : 'hidden'; ?> tooltip hover" src="<?php echo ! empty( $selected_risk_category ) ? esc_attr( wp_get_attachment_url( $selected_risk_category->data['thumbnail_id'] ) ) : ''; ?>" aria-label="" />
 	</div>
