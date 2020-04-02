@@ -16,19 +16,18 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<tr class="sheet-groupment-row">
+<div class="table-row documents-row sheet-groupment-row">
+
 	<input type="hidden" name="action" value="<?php echo esc_attr( $action ); ?>" />
 	<?php wp_nonce_field( $action ); ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 
-	<td></td>
-	<td><?php echo esc_html( $_this->message['generate'] ); ?></td>
-	<td>
+	<div class="table-cell"><?php echo esc_html( $_this->message['generate'] ); ?></div>
+	<div class="table-cell table-50 table-end">
 		<div class="action">
-			<div class="wpeo-button button-square-50 action-input add" data-loader="table" data-parent="sheet-groupment-row">
+			<div class="wpeo-button button-square-50 action-input add" data-loader="table-documents" data-parent="documents-row">
 				<i class="icon fas fa-plus"></i>
 			</div>
 		</div>
-	</td>
-
-</tr>
+	</div>
+</div>

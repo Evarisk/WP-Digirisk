@@ -16,26 +16,22 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<thead>
-	<tr>
-		<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-		<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
-		<th class="w50"></th>
-	</tr>
-</thead>
+<div class="table-row table-header">
+	<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?></div>
+	<div class="table-cell"><?php esc_html_e( 'Nom', 'digirisk' ); ?></div>
+	<div class="table-cell table-50 table-end"></div>
+</div>
 
-<tbody>
-	<?php if ( ! empty( $documents ) ) : ?>
-		<?php foreach ( $documents as $document ) : ?>
-			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'document', 'list-item', array(
-				'element' => $document,
-			) );
-			?>
-		<?php endforeach; ?>
-	<?php else : ?>
-		<tr>
-			<td class="padding" colspan="3"><?php echo esc_html( $_this->message['empty'] ); ?></td>
-		</tr>
-	<?php endif; ?>
-</tbody>
+<?php if ( ! empty( $documents ) ) : ?>
+	<?php foreach ( $documents as $document ) : ?>
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'document', 'list-item', array(
+			'element' => $document,
+		) );
+		?>
+	<?php endforeach; ?>
+<?php else : ?>
+	<div class="table-row documents-row">
+		<?php echo esc_html( $_this->message['empty'] ); ?>
+	</div>
+<?php endif; ?>

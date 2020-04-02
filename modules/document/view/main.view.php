@@ -18,7 +18,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<table class="table documents">
+<div class="wpeo-table table-flex table-documents">
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'document', 'list', array(
 		'_this'     => $_this,
@@ -35,4 +35,4 @@ defined( 'ABSPATH' ) || exit; ?>
 		) );
 	endif;
 	?>
-</table>
+</div>
