@@ -13,32 +13,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="sheet-groupment-row">
+<div class="table-row listing-risk-row">
 	<input type="hidden" name="action" value="generate_listing_risk" />
 	<?php wp_nonce_field( 'generate_listing_risk' ); ?>
 	<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
-	<td></td>
-	<td></td>
-	<td>
-		<div class="action wpeo-gridlayout grid-1 grid-gap-0">
+	<div class="table-cell table-50 table-end">
+		<div class="action">
 			<?php if ( 'picture' === $type ) : ?>
 				<div class="wpeo-button button-square-50 button-main action-input add"
 					data-type="photos"
-					data-loader="table"
-					data-parent="sheet-groupment-row">
+					data-loader="table-listing-risk"
+					data-parent="listing-risk-row">
 					<i class="icon fa fa-plus"></i>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( 'corrective-task' === $type ) : ?>
 				<div class="wpeo-button button-square-50 button-main action-input add"
-				data-type="actions"
-					data-loader="table"
-					data-parent="sheet-groupment-row">
+					data-type="actions"
+					data-loader="table-listing-risk"
+					data-parent="listing-risk-row">
 					<i class="icon fa fa-plus"></i>
 				</div>
 			<?php endif; ?>
 		</div>
-	</td>
-</tr>
+	</div>
+</div>
