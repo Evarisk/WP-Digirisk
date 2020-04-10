@@ -22,22 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php esc_html_e( 'Dashboard', 'digirisk' ); ?>
 			</li>
 
-			<?php
-			if ( user_can( get_current_user_id(), 'manage_causerie' ) ) :
-				?>
+			<?php if ( user_can( get_current_user_id(), 'manage_causerie' ) ) : ?>
 				<li class="tab-element <?php echo $page == "start" ? 'tab-active' : ''; ?>" data-url="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&tab=start' ) ); ?>" data-tab="start">
 					<?php esc_html_e( 'Démarrer une causerie', 'digirisk' ); ?>
 				</li>
-
-				<?php
-			endif;
-
-			if ( user_can( get_current_user_id(), 'create_causerie' ) ) :
-				?>
-				<li class="tab-element <?php echo $page == "form" ? 'tab-active' : ''; ?>" data-url="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&tab=form' ) ); ?>" data-tab="form"><?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?></li>
-				<?php
-			endif;
-			?>
+				<li class="tab-element <?php echo $page == "form" ? 'tab-active' : ''; ?>" data-url="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-causerie&tab=form' ) ); ?>" data-tab="form">
+					<?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?>
+				</li>
+			<?php endif; ?>
 		</ul>
 
 		<div class="tab-content main-content">

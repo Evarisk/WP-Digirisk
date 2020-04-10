@@ -294,6 +294,7 @@ class Causerie_Class extends \eoxia\Post_Class {
 			'post_status'    => 'inherit',
 	        'post_mime_type' => $type
 	    );
+
 	    $attach_id = wp_insert_attachment( $attachment, $mirror['file'], 0, true );
 
 	    $attach_data = wp_generate_attachment_metadata( $attach_id, $mirror['file'] );
