@@ -17,13 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 <?php
-	if( ! empty( $task ) ):
-		\eoxia\View_Util::exec( 'task-manager', 'task', 'backend/task', array(
-			'task' => $task
-		) );
-	else:
+	if( ! empty( $task ) ) :
+		echo do_shortcode( '[task id="' . $task->data['id'] . '"]' );
+	else :
 		esc_html_e( 'Veuillez activer Task-Manager pour cette interface', 'digirisk' );
-
 	endif;
 ?>
 

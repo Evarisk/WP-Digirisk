@@ -120,7 +120,7 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 			$data['nombreFormateur']     = $causerie->data['number_formers'];
 			$data['nombreUtilisateur']   = $causerie->data['number_participants'];
 			$data['titreTache']          = $taskmanager_data[ 'title' ];
-			$data['points']               = $taskmanager_data[ 'points' ];
+			$data['points']              = $taskmanager_data[ 'points' ];
 			$data = wp_parse_args(  $this->set_users( $causerie_intervention ), $data );
 		}
 
