@@ -1,3 +1,26 @@
 .wpeo-gridlayout {
 	display: grid !important;
 }
+
+
+/**
+Ne pas activer le responsive pour les grilles dans les tableaux.
+le responsive sera activé manuellement.
+*/
+.wpeo-gridlayout {
+	/** Du parent */
+	@for $i from 1 through 6 {
+		&.grid-#{$i} {
+			grid-template-columns: repeat( $i, 1fr ) !important;
+		}
+
+		/** Chaque enfant peut modifier sa propre taille */
+		@for $y from 1 through 6 {
+			@if ( $y <= $i ) {
+				&.grid-#{$i} > .gridw-#{$y} {
+					grid-column: auto / span $y !important;
+				}
+			}
+		}
+	}
+}

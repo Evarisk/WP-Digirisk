@@ -139,14 +139,14 @@
 			}
 			.owl-prev {
 				left: -40px;
-				@extend .fas;
+				@extend .far;
 				&:hover:before {
 					left: 12px;
 				}
 			}
 			.owl-next {
 				right: -40px;
-				@extend .fas;
+				@extend .far;
 				&:hover:before {
 					right: 12px;
 				}
@@ -154,13 +154,11 @@
 			.owl-prev:before {
 				left: 16px;
 				font-family: $font__icon;
-				font-weight: 900;
 				content: fa-content($fa-var-angle-left);
 			}
 			.owl-next:before {
 				right: 16px;
 				font-family: $font__icon;
-				font-weight: 900;
 				content: fa-content($fa-var-angle-right);
 			}
 		}

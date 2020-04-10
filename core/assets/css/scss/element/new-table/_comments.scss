@@ -1,0 +1,73 @@
+.wpeo-table.table-flex .comment-container {
+	.comment {
+		display: flex;
+		margin-top: 0.2em;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		.avatar {
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			min-width: 30px;
+			text-align: center;
+			color: #fff;
+
+			span {
+				line-height: 30px;
+			}
+		}
+
+		.date {
+			font-weight: 700;
+			width: 84px;
+			margin: auto 4px;
+			font-size: 13px;
+		}
+
+		.content {
+			white-space: normal;
+			margin: auto 0;
+		}
+
+		.delete, .add {
+			width: 30px;
+			height: 30px;
+			line-height: 24px;
+			min-width: 30px;
+			margin-left: 4px;
+		}
+		.delete {
+			&:hover {
+				color: $color__red;
+			}
+		}
+		.add {
+			color: #fff;
+		}
+
+		.mysql-date {
+			display: none;
+		}
+		.group-date {
+			margin: auto 4px;
+
+			input.date {
+				width: 84px;
+			}
+		}
+		input.date, textarea {
+			width: 100%;
+			margin: 0;
+			padding: 0.2em;
+		}
+	}
+
+	.comment.new {
+		margin-bottom: 0.5em;
+		padding-bottom: 0.5em;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+}

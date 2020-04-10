@@ -74,7 +74,7 @@ window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = funct
  * @version 6.2.4
  */
 window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( triggeredElement, response ) {
-	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
+	jQuery( '.wpeo-table.table-evaluator' ).replaceWith( response.data.template );
 	window.eoxiaJS.digirisk.search.renderChanged();
 };
 

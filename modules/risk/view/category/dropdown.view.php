@@ -17,15 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <input class="input-hidden-danger" type="hidden" name="risk_category_id" value='<?php echo ! empty( $selected_risk_category ) ? esc_attr( $selected_risk_category->data['id'] ) : '-1'; ?>' />
 
 <div class="wpeo-dropdown dropdown-large category-danger padding wpeo-tooltip-event"
-			data-tooltip-persist="true"
-			data-color="red"
-			data-nonce="<?php echo esc_attr( wp_create_nonce( 'check_predefined_danger' ) ); ?>"
-			aria-label="<?php esc_html_e( 'Vous devez choisir une catégorie de risque.', 'digirisk' ); ?>">
+	data-tooltip-persist="true"
+	data-color="red"
+	data-nonce="<?php echo esc_attr( wp_create_nonce( 'check_predefined_danger' ) ); ?>"
+	aria-label="<?php esc_html_e( 'Vous devez choisir une catégorie de risque.', 'digirisk' ); ?>">
 
-	<div class="dropdown-toggle wpeo-button button-transparent">
-		<span class="<?php echo ! empty( $selected_risk_category ) && ! empty( $selected_risk_category ) ? 'hidden' : ''; ?>"><?php esc_html_e( 'Risque', 'digirisk' ); ?></span>
+	<div class="dropdown-toggle dropdown-add-button button-cotation">
+		<span class="<?php echo ! empty( $selected_risk_category ) && ! empty( $selected_risk_category ) ? 'hidden' : ''; ?>"><i class="fas fa-exclamation-triangle"></i><i class="fas fa-plus-circle icon-add"></i></span>
 		<img class="<?php echo ! empty( $selected_risk_category ) ? '' : 'hidden'; ?> tooltip hover" src="<?php echo ! empty( $selected_risk_category ) ? esc_attr( wp_get_attachment_url( $selected_risk_category->data['thumbnail_id'] ) ) : ''; ?>" aria-label="" />
-		<i class="button-icon fas fa-angle-down"></i>
 	</div>
 
 	<ul class="dropdown-content wpeo-grid grid-5">

@@ -45,12 +45,12 @@ window.eoxiaJS.digirisk.risk.searchMoveTo = function( event ) {
 };
 
 window.eoxiaJS.digirisk.risk.deletedRiskSuccess = function( element, response ) {
-	element.closest( 'tr' ).fadeOut();
+	element.closest( 'tr, .table-row' ).fadeOut();
 };
 
 window.eoxiaJS.digirisk.risk.loadedRiskSuccess = function( element, response ) {
-	element.closest( 'tr' ).replaceWith( response.data.template );
-	window.eoxiaJS.digirisk.risk.refresh();
+  element.closest( 'tr, .table-row' ).replaceWith( response.data.template );
+  window.eoxiaJS.digirisk.risk.refresh();
 };
 
 window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
@@ -84,7 +84,7 @@ window.eoxiaJS.digirisk.risk.beforeSaveRisk = function( triggeredElement ) {
  * @since 6.0.0
  */
 window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, response ) {
-	triggeredElement.closest( 'table.risk' ).replaceWith( response.data.template );
+	triggeredElement.closest( 'table.risk, .wpeo-table.table-risk' ).replaceWith( response.data.template );
 };
 
 /**
@@ -97,7 +97,7 @@ window.eoxiaJS.digirisk.risk.savedRiskSuccess = function( triggeredElement, resp
  * @since 6.2.9
  */
 window.eoxiaJS.digirisk.risk.checkedPredefinedDanger = function( triggeredElement, response ) {
-	triggeredElement.closest( 'table' ).removeClass( 'loading' );
+	triggeredElement.closest( 'table, .wpeo-table' ).removeClass( 'loading' );
 	triggeredElement.closest( '.risk-row' ).replaceWith( response.data.view );
 };
 

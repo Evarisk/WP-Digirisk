@@ -16,23 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table">
-	<thead>
-		<tr>
-			<th class="padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
-			<th class="w50"></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex table-listing-risk">
+	<div class="table-row table-header">
+		<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
+		<div class="table-cell"><?php esc_html_e( 'Nom', 'digirisk' ); ?></div>
+		<div class="table-50 table-end"></div>
+	</div>
 
-	<tbody>
-		<?php if ( ! empty( $documents ) ) : ?>
-			<?php foreach ( $documents as $element ) : ?>
-				<?php \eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'list-item', array( 'element' => $element ) ); ?>
-			<?php endforeach; ?>
-		<?php endif; ?>
-	</tbody>
-
+	<?php if ( ! empty( $documents ) ) : ?>
+		<?php foreach ( $documents as $element ) : ?>
+			<?php \eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'list-item', array( 'element' => $element ) ); ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
 
 	<?php
 	\eoxia\View_Util::exec( 'digirisk', 'listing-risk', 'item-edit', array(
@@ -40,4 +35,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'type'       => $type,
 	) );
 	?>
-</table>
+</div>

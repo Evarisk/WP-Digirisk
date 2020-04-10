@@ -11,7 +11,7 @@ window.eoxiaJS.digirisk.evaluationMethodDropdown.init = function() {
 };
 
 window.eoxiaJS.digirisk.evaluationMethodDropdown.event = function() {
-	jQuery( document ).on( 'click', '.table.risk .dropdown-list li.dropdown-item:not(.open-popup)', window.eoxiaJS.digirisk.evaluationMethodDropdown.selectSeuil );
+	jQuery( document ).on( 'click', '.table.risk .dropdown-list li.dropdown-item:not(.open-popup), .wpeo-table.table-risk .dropdown-list li.dropdown-item:not(.open-popup)', window.eoxiaJS.digirisk.evaluationMethodDropdown.selectSeuil );
 };
 
 /**

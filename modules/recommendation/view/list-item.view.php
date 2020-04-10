@@ -17,33 +17,33 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<tr class="recommendation-row" data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>">
-	<td class="padding">
-		<span><strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></span></strong>
-	</td>
-	<td>
+<div class="table-row recommendation-row">
+	<div class="table-cell table-75">
+		<strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></strong>
+	</div>
+	<div class="table-cell table-100">
 		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation" display="view"]' ); ?>
-	</td>
-	<td class="w50">
+	</div>
+	<div class="table-cell table-50">
 		<?php echo do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image" title="' . $recommendation->data['unique_identifier'] . '" ]' ); ?>
-	</td>
-	<td class="padding">
+	</div>
+	<div class="table-cell">
 		<?php do_shortcode( '[digi_comment id="' . $recommendation->data['id'] . '" namespace="digi" type="recommendation_comment" display="view"]' ); ?>
-	</td>
-	<td>
-		<div class="action wpeo-gridlayout grid-2">
+	</div>
+	<div class="table-cell table-100 table-end">
+		<div class="action wpeo-gridlayout grid-2 grid-gap-0">
 			<!-- Editer une recommendation -->
 			<div 	class="wpeo-button button-square-50 button-transparent edit action-attribute"
-						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
-						data-loader="table"
-						data-action="load_recommendation"><i class="button-icon fas fa-pencil-alt"></i></div>
+			        data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
+			        data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_load_recommendation' ) ); ?>"
+			        data-loader="table-recommendation"
+			        data-action="load_recommendation"><i class="button-icon fas fa-pencil-alt"></i></div>
 
-			<div 	class="wpeo-button button-square-50 button-transparent delete action-delete"
-						data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
-						data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
-						data-action="delete_recommendation"
-						data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?', 'digirisk' ); ?>"><i class="button-icon fas fa-times"></i></div>
+			<div 	class="wpeo-button button-square-50 button-grey delete action-delete"
+			        data-id="<?php echo esc_attr( $recommendation->data['id'] ); ?>"
+			        data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_recommendation' ) ); ?>"
+			        data-action="delete_recommendation"
+			        data-message-delete="<?php esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?', 'digirisk' ); ?>"><i class="button-icon fas fa-trash"></i></div>
 		</div>
-	</td>
-</tr>
+	</div>
+</div>

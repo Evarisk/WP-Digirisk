@@ -8,13 +8,13 @@
  * .method -> cotation personnalisée
  */
 
-.cotation-container {
-	.dropdown-toggle {
-		&:hover {
-			background: rgba(0,0,0,0.1);
-		}
-	}
-}
+//.cotation-container {
+//	.dropdown-toggle {
+//		&:hover {
+//			background: rgba(0,0,0,0.1);
+//		}
+//	}
+//}
 
 .cotation {
 	display: block;
@@ -24,16 +24,30 @@
 	line-height: 50px;
 	text-align: center;
 	transition: all 0.2s ease-out;
+
 	> * {
 		// line-height: 50px;
 	}
 
-	.icon {
-		font-size: 16px;
-	}
-	&:hover {
-		cursor: pointer;
-	}
+	//.icon-add {
+	//	position: absolute;
+	//	top: 12px;
+	//	right: 8px;
+	//	font-size: 12px;
+	//	color: rgba(0,0,0,0.3);
+	//	transition: color 0.2s ease-out;
+	//}
+
+	//.icon {
+	//	font-size: 16px;
+	//}
+	//&:hover {
+	//	cursor: pointer;
+	//
+	//	.icon-add {
+	//		color: $color__primary;
+	//	}
+	//}
 	&.default-cotation {
 		&:hover {
 			background: rgba(0,0,0,0.1);
@@ -87,8 +101,10 @@
 }
 
 .wpeo-table.evaluation-method {
-	.table-header {
-		background: $color__secondary !important;
+	background: none !important;
+
+	.table-row.table-header {
+		background: #fff !important;
 
 		@media ( max-width: $media__small ) {
 			display: none;
