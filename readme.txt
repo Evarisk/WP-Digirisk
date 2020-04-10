@@ -3,7 +3,7 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 5.3.4
+Tested up to: 5.4
 Stable tag: 7.5.4
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
