@@ -20,7 +20,7 @@ window.eoxiaJS.digirisk.legalDisplay.init = function() {};
  * @since 6.0.0
  */
 window.eoxiaJS.digirisk.legalDisplay.generatedSuccess = function( triggeredElement, response ) {
-	jQuery( '.table.documents' ).replaceWith( response.data.view );
+	jQuery( '.wpeo-table.table-documents' ).replaceWith( response.data.view );
 	window.scrollTo( 0, 0 );
 };
 

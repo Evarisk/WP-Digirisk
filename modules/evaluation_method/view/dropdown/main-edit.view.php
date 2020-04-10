@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	aria-label="<?php esc_attr_e( 'Veuillez remplir la cotation', 'digirisk' ); ?>"
 	data-color="red"
 	data-tooltip-persist="true">
-	<span data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>" class="dropdown-toggle cotation">
+	<span data-scale="<?php echo ! empty( $risk->data['evaluation'] ) ? esc_attr( $risk->data['evaluation']->data['scale'] ) : 0; ?>" class="dropdown-toggle dropdown-add-button cotation">
 		<?php
 		if ( 0 !== $risk->data['id'] && -1 !== $risk->data['current_equivalence'] ) :
 			?>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 		else :
 			?>
-			<span><i class="fas fa-chart-line"></i></span>
+			<span><i class="fas fa-chart-line"></i><i class="fas fa-plus-circle icon-add"></i></span>
 			<?php
 		endif;
 		?>

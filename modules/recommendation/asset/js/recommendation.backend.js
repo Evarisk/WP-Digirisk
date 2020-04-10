@@ -5,7 +5,7 @@ window.eoxiaJS.digirisk.recommendation.init = function() {
 };
 
 window.eoxiaJS.digirisk.recommendation.event = function() {
-	jQuery( document ).on( 'click', '.table.recommendation .categorie-container .item', window.eoxiaJS.digirisk.recommendation.selectRecommendation );
+	jQuery( document ).on( 'click', '.wpeo-table.table-recommendation .categorie-container .item', window.eoxiaJS.digirisk.recommendation.selectRecommendation );
 };
 
 /**
@@ -21,7 +21,7 @@ window.eoxiaJS.digirisk.recommendation.selectRecommendation = function( event ) 
 	var element = jQuery( this );
 
 	element.closest( '.content' ).removeClass( 'active' );
-	element.closest( 'tr' ).find( 'input[name="recommendation_category_id"]' ).val( element.data( 'id' ) );
+	element.closest( '.table-row' ).find( 'input[name="recommendation_category_id"]' ).val( element.data( 'id' ) );
 
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle span' ).hide();
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).show();
@@ -30,10 +30,10 @@ window.eoxiaJS.digirisk.recommendation.selectRecommendation = function( event ) 
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'sizes', '' );
 	element.closest( '.wpeo-dropdown' ).find( '.dropdown-toggle img' ).attr( 'aria-label', element.closest( '.tooltip' ).attr( 'aria-label' ) );
 
-	element.closest( '.row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
+	element.closest( '.table-row' ).find( '.categorie-container.tooltip' ).removeClass( 'active' );
 
 	// Rend le bouton "active".
-	element.closest( 'tr' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
+	element.closest( '.table-row' ).find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
 };
 
 /**
@@ -71,7 +71,7 @@ window.eoxiaJS.digirisk.recommendation.beforeSaveRecommendation = function( trig
  * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.recommendation.savedRecommendationSuccess = function( element, response ) {
-	jQuery( 'table.recommendation' ).replaceWith( response.data.template );
+	jQuery( '.wpeo-table.table-recommendation' ).replaceWith( response.data.template );
 	window.eoxiaJS.digirisk.date.init();
 };
 
@@ -87,7 +87,7 @@ window.eoxiaJS.digirisk.recommendation.savedRecommendationSuccess = function( el
  * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.recommendation.loadedRecommendationSuccess = function( element, response ) {
-	jQuery( element ).closest( 'tr' ).replaceWith( response.data.template );
+	jQuery( element ).closest( '.table-row' ).replaceWith( response.data.template );
 	window.eoxiaJS.digirisk.date.init();
 };
 
@@ -103,5 +103,5 @@ window.eoxiaJS.digirisk.recommendation.loadedRecommendationSuccess = function( e
  * @version 6.2.4.0
  */
 window.eoxiaJS.digirisk.recommendation.deletedRecommendationSuccess = function( element, response ) {
-	jQuery( element ).closest( 'tr' ).fadeOut();
+	jQuery( element ).closest( '.table-row' ).fadeOut();
 };

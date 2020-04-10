@@ -16,10 +16,14 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<tr>
-	<td class="padding"><strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong></td>
-	<td class="padding"><?php echo esc_html( $element->data['title'] ); ?></td>
-	<td>
+<div class="table-row documents-row">
+	<div class="table-cell table-75">
+		<strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong>
+	</div>
+	<div class="table-cell">
+		<?php echo esc_html( $element->data['title'] ); ?>
+	</div>
+	<div class="table-cell table-end table-50">
 		<div class="action">
 			<?php if ( $element->data['file_generated'] ) : ?>
 				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $element->data['link'] ); ?>">
@@ -37,5 +41,5 @@ defined( 'ABSPATH' ) || exit; ?>
 				</span>
 			<?php endif; ?>
 		</div>
-	</td>
-</tr>
+	</div>
+</div>

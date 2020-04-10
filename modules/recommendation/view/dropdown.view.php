@@ -22,10 +22,9 @@ defined( 'ABSPATH' ) || exit; ?>
 <div class="wpeo-dropdown dropdown-large categorie-container padding tooltip red"
 	aria-label="<?php esc_html_e( 'Vous devez choisir une signalisation.', 'digirisk' ); ?>">
 
-	<div class="dropdown-toggle wpeo-button button-transparent">
-		<span><?php esc_html_e( 'Signalisation', 'digirisk' ); ?></span>
+	<div class="dropdown-toggle dropdown-add-button">
+		<span><i class="icon fas fa-map-signs"></i><i class="fas fa-plus-circle icon-add"></i></span>
 		<img class="hidden" src="" title="<?php echo esc_attr( 'Signalisation', 'digirisk' ); ?>" />
-		<i class="button-icon animated fas fa-angle-down"></i>
 	</div>
 
 	<ul class="dropdown-content wpeo-grid grid-6" style="width: 400px;">

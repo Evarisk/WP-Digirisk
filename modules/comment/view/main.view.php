@@ -17,20 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="comment-container">
 	<?php
-	\eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array(
-		'id' => $id,
-		'add_button' => $add_button,
-		'comment_new' => $comment_new,
-		'comments' => $comments,
-		'display' => $display,
-		'type' => $type,
-		'namespace' => $namespace,
-		'display_date' => $display_date,
-		'display_user' => $display_user,
-	) );
-	?>
-
-	<?php
 	if ( 'edit' === $display ) :
 		\eoxia\View_Util::exec( 'digirisk', 'comment', 'item-edit', array(
 			'id' => $id,
@@ -43,5 +29,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'display_user' => $display_user,
 		) );
 	endif;
+	?>
+
+	<?php
+	\eoxia\View_Util::exec( 'digirisk', 'comment', 'list', array(
+		'id' => $id,
+		'add_button' => $add_button,
+		'comment_new' => $comment_new,
+		'comments' => $comments,
+		'display' => $display,
+		'type' => $type,
+		'namespace' => $namespace,
+		'display_date' => $display_date,
+		'display_user' => $display_user,
+	) );
 	?>
 </ul>
