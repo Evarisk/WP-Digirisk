@@ -3866,10 +3866,10 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .wpeo-button-pulse {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
   background: rgba(0, 0, 0, 0.1);
   display: block;
   text-align: center;
@@ -5218,11 +5218,6 @@ canvas {
 .phone-bloc {
   display: -webkit-box;
   display: flex;
-}
-
-.wpeo-wrap .wpeo-button-pulse {
-  height: 47px !important;
-  width: 47px !important;
 }
 
 .document-unique_page_digirisk-causerie .wpeo-wrap .wpeo-button-pulse {
