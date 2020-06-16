@@ -48,9 +48,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</form>
 
-	<table class="table risk">
+	<div class="wpeo-table table-flex table-listing-risk">
 		<?php Risk_Page_Class::g()->display_risk_list(); ?>
-	</table>
+	</div>
 
 	<a href="#" class="wpeo-button button-disable button-green button-margin save-all alignright"><?php esc_html_e( 'Enregistrer', 'digirisk' ); ?></a>
 

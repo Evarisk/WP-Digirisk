@@ -3931,6 +3931,11 @@ le responsive sera activé manuellement.
   background: #3495f0;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto !important;
+}
+
 /*--------------------------------------------------------------
 # Import Main Menu
 --------------------------------------------------------------*/
