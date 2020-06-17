@@ -121,8 +121,8 @@ window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
 		window.eoxiaJS.loader.display( jQuery( this ) );
 		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, response ) {
 			title = 'Signature de l\'utilisateur: ' + data.element.data( 'result' );
-			element.closest( 'tr' ).find( '.wpeo-modal-event' ).attr( 'data-title', title );
-			element.closest( 'tr' ).find( '.wpeo-modal-event' ).removeClass( 'button-disable' );
+			element.closest( '.table-row' ).find( '.wpeo-modal-event' ).attr( 'data-title', title );
+			element.closest( '.table-row' ).find( '.wpeo-modal-event' ).removeClass( 'button-disable' );
 		} );
 	}
 };
@@ -223,7 +223,7 @@ window.eoxiaJS.digirisk.causerie.editedCauserieSuccess = function( triggeredElem
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.loadedCauserieSuccess = function( element, response ) {
-	jQuery( element ).closest( 'tr' ).replaceWith( response.data.view );
+	jQuery( element ).closest( '.table-row' ).replaceWith( response.data.view );
 };
 
 /**
@@ -237,7 +237,7 @@ window.eoxiaJS.digirisk.causerie.loadedCauserieSuccess = function( element, resp
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.deletedCauserieSuccess = function( element, response ) {
-	element.closest( 'tr' ).fadeOut();
+	element.closest( '.table-row' ).fadeOut();
 };
 
 /**
@@ -407,10 +407,10 @@ window.eoxiaJS.digirisk.causerie.checkAllData = function( element ) {
  * @return {boolean}                True si le formateur à été choisi, sinon false pour stopper la requête XHR.
  */
 window.eoxiaJS.digirisk.causerie.checkUserID = function( element ) {
-	element.closest( 'tr' ).find( '.user-tooltip' ).removeClass( 'active' );
+	element.closest( '.table-row' ).find( '.user-tooltip' ).removeClass( 'active' );
 
-	if ( ! element.closest( 'tr' ).find( 'input[name="participant_id"]' ).val() ) {
-		element.closest( 'tr' ).find( '.user-tooltip' ).addClass( 'active' );
+	if ( ! element.closest( '.table-row' ).find( 'input[name="participant_id"]' ).val() ) {
+		element.closest( '.table-row' ).find( '.user-tooltip' ).addClass( 'active' );
 
 		return false;
 	}

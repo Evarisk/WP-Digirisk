@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<td class="signature w50 padding">
+<div class="table-cell signature table-100">
 	<input type="hidden" name="have_signature" value="true" />
 
 	<div class="signature-image wpeo-button-pulse wpeo-modal-event"
@@ -32,4 +32,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		) );
 		?>
 	</div>
-</td>
+</div>

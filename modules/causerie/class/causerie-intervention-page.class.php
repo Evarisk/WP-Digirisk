@@ -74,6 +74,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 			'name'         => 'former_id',
 			'value'        => ! empty( $former ) ? $former->data->display_name : '',
 			'hidden_value' => ! empty( $former ) ? (int) $former->data->ID : 0,
+			'icon' => 'fa-search',
 		);
 
 		$eo_search->register_search( 'causerie_former', $args_causerie_former );
@@ -81,6 +82,7 @@ class Causerie_Intervention_Page_Class extends \eoxia\Singleton_Util {
 		$args_causerie_participants = array(
 			'type'  => 'user',
 			'name'  => 'participant_id',
+			'icon'  => 'fa-search',
 		);
 
 		$eo_search->register_search( 'causerie_participants', $args_causerie_participants );
