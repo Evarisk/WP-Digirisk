@@ -36,8 +36,17 @@
 	textarea {
 		width: 100%;
 	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		width: auto;
+	}
+
+	.wpeo-autocomplete .autocomplete-label {
+		padding: 0 1em;
+	}
 }
 
+@import "advanced";
 @import "avatar";
 @import "comments";
 @import "dropdown-add";

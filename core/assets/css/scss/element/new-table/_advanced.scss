@@ -1,0 +1,58 @@
+.wpeo-table .table-row-advanced {
+	background: #fff;
+
+	&:nth-of-type(odd) {
+		background: rgba(0, 0, 0, 0.03);
+	}
+
+	.table-row {
+		background: none !important;
+	}
+
+	.advanced {
+		padding: 1em;
+
+		.form-element {
+			margin: 0.5em 0;
+
+			.form-element {
+				margin: 0;
+			}
+		}
+		.wpeo-autocomplete .autocomplete-search-input {
+			padding: 1em;
+		}
+
+		.comment-container {
+			width: 100%;
+
+			textarea {
+				background: #ececec;
+				border-radius: 0;
+			}
+		}
+
+		.list-stopping-day {
+			.comment {
+				margin: 0.5em 0;
+			}
+			input[type="text"] {
+				padding: 0.6em;
+				line-height: 1;
+				background: #ececec;
+				box-shadow: none;
+				transition: all 0.2s ease-out;
+			}
+			.wpeo-media, .media {
+				margin: 0 1em;
+			}
+			.wpeo-button {
+				margin: auto 0;
+			}
+		}
+
+		.table-action {
+			text-align: right;
+		}
+	}
+}

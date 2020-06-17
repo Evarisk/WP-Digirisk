@@ -1227,6 +1227,77 @@ le responsive sera activé manuellement.
   width: 100%;
 }
 
+.wpeo-wrap .wpeo-table.table-flex input[type="checkbox"],
+.wpeo-wrap .wpeo-table.table-flex input[type="radio"] {
+  width: auto;
+}
+
+.wpeo-wrap .wpeo-table.table-flex .wpeo-autocomplete .autocomplete-label {
+  padding: 0 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced {
+  background: #fff;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced:nth-of-type(odd) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .table-row {
+  background: none !important;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced {
+  padding: 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .form-element {
+  margin: 0.5em 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .form-element .form-element {
+  margin: 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .wpeo-autocomplete .autocomplete-search-input {
+  padding: 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .comment-container {
+  width: 100%;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .comment-container textarea {
+  background: #ececec;
+  border-radius: 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .comment {
+  margin: 0.5em 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day input[type="text"] {
+  padding: 0.6em;
+  line-height: 1;
+  background: #ececec;
+  box-shadow: none;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .wpeo-media, .wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .media {
+  margin: 0 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .wpeo-button {
+  margin: auto 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .table-action {
+  text-align: right;
+}
+
 .wpeo-wrap .wpeo-table .avatar {
   display: inline-block;
   width: 50px;
