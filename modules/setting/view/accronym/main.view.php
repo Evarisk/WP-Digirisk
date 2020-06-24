@@ -13,29 +13,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table">
-	<thead>
-		<tr>
-			<th class="padding"><?php esc_html_e( 'Element', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Prefix', 'digirisk' ); ?></th>
-			<th class="w100 padding"><?php esc_html_e( 'Accéder', 'digirisk' ); ?></th>
-		</tr>
-	</thead>
-	<tbody>
-		<ul>
-			<?php
-			if ( ! empty( $list_accronym ) ) :
-				foreach ( $list_accronym as $key => $element ) :
-					\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/item-prefix', array(
-						'key'     => $key,
-						'element' => $element,
-					) );
-				endforeach;
-			endif;
-			?>
-		</ul>
-	</tbody>
-</table>
+<div class="wpeo-table table-flex">
+	<div class="table-row table-header">
+		<div class="table-cell"><?php esc_html_e( 'Element', 'digirisk' ); ?></div>
+		<div class="table-cell table-150"><?php esc_html_e( 'Prefix', 'digirisk' ); ?></div>
+		<div class="table-cell table-50 table-end"><?php esc_html_e( 'Accéder', 'digirisk' ); ?></div>
+	</div>
+	<?php
+	if ( ! empty( $list_accronym ) ) :
+		foreach ( $list_accronym as $key => $element ) :
+			\eoxia\View_Util::exec( 'digirisk', 'setting', 'accronym/item-prefix', array(
+				'key'     => $key,
+				'element' => $element,
+			) );
+		endforeach;
+	endif;
+	?>
+</div>
 
 <a href="#" class="margin wpeo-button button-disable action-input save-prefix"
 data-action="update_accronym"
