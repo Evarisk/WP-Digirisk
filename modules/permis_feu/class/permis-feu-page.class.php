@@ -143,6 +143,7 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 			'value'        => ! empty( $permis_feu->data['maitre_oeuvre']['user_id'] ) ? $permis_feu->data['maitre_oeuvre']['data']->last_name : '',
 			'hidden_value' => $permis_feu->data['maitre_oeuvre']['user_id'],
 			'class'        => ! empty( $permis_feu->data['maitre_oeuvre']['user_id'] ) ? 'form-element-disable' : '',
+			'icon'         => 'fa-search',
 		);
 
 		$eo_search->register_search( 'maitre_oeuvre', $args_permis_feu_maitreoeuvre );
@@ -178,6 +179,7 @@ class Permis_Feu_Page_Class extends \eoxia\Singleton_Util {
 			'value'        => ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? $permis_feu->data['intervenant_exterieur']['data']->last_name : '',
 			'hidden_value' => $permis_feu->data['intervenant_exterieur']['user_id'],
 			'class'        => ! empty( $permis_feu->data['intervenant_exterieur']['user_id'] ) ? 'form-element-disable' : '',
+			'icon'         => 'fa-search',
 		);
 
 		$eo_search->register_search( 'intervenant_exterieur', $args_permis_feu_intervenant );
