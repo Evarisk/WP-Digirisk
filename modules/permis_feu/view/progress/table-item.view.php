@@ -15,21 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="item" data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>">
+<div class="table-row item" data-id="<?php echo esc_attr( $permis_feu->data['id'] ); ?>">
 
-	<td class="padding causerie-description">
+	<div class="table-cell causerie-description">
 		<span class="row-title"><?php echo esc_html( $permis_feu->data['title'] ); ?></span>
 		<span class="row-subtitle"><?php echo esc_html( $permis_feu->data['content'] ); ?></span>
-	</td>
+	</div>
 
-	<td class="padding">
+	<div class="table-cell table-100">
 		<span>
 			<?php echo esc_attr( date( 'd-m-Y', strtotime( $permis_feu->data[ 'date_start' ][ 'rendered' ][ 'mysql' ] ) ) ); ?>
 		</span>
-	</td>
+	</div>
 
 	<?php if( ! empty( $permis_feu->data[ 'maitre_oeuvre' ] ) && $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] != 0 ): ?>
-		<td class="padding avatar-info-prevention">
+		<div class="table-cell table-50 avatar-info-prevention">
 			<?php $name_and_phone = $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->last_name . ' (' . $permis_feu->data[ 'maitre_oeuvre' ][ 'data' ]->phone . ')'; ?>
 			<?php if( $permis_feu->data[ 'maitre_oeuvre' ][ 'user_id' ] > 0 ) : ?>
 				<div class="avatar tooltip hover wpeo-tooltip-event"
@@ -45,16 +45,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php else: ?>
 				<?php esc_html_e( 'Aucun maitre oeuvre', 'digirisk' ); ?>
 			<?php endif; ?>
-		</td>
+		</div>
 	<?php else: ?>
-		<td class="padding">
+		<div class="table-cell table-100">
 			<span>
 				<?php esc_html_e( 'Aucun', 'digirisk' ); ?>
 			</span>
-		</td>
+		</div>
 	<?php endif; ?>
 
-	<td class="padding">
+	<div class="table-cell table-100">
 		<span>
 			<?php if( $permis_feu->data[ 'intervenant_exterieur' ][ 'firstname' ] != "" ): ?>
 				<?php echo esc_attr( $permis_feu->data[ 'intervenant_exterieur' ][ 'firstname' ] ); ?> -
@@ -64,28 +64,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php esc_html_e( 'Non-Défini', 'digirisk' ); ?>
 			<?php endif; ?>
 		</span>
-	</td>
-	<td class="padding">
+	</div>
+	<div class="table-cell table-100">
 		<span>
 			<?php esc_html_e( sprintf( '%1$d Intervention(s)', count( $permis_feu->data[ 'intervention' ] ) ), 'digirisk' ); ?>
 		</span>
-	</td>
+	</div>
 
-	<td class="padding">
+	<div class="table-cell table-100">
 		<span>
 			<?php esc_html_e( sprintf( '%1$d Intervenant(s)', count( $permis_feu->data[ 'intervenants' ] ) ), 'digirisk' ); ?>
 		</span>
-	</td>
-	<td class="padding">
+	</div>
+	<div class="table-cell table-100">
 		<span>
 			<?php echo esc_attr( $permis_feu->data[ 'step' ] ); ?> /5
 		</span>
-	</td>
-	<td class="padding">
+	</div>
+	<div class="table-cell table-50 table-end">
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-permis-feu&id=' . $permis_feu->data[ 'id' ] ) ); ?>">
-			<div class="wpeo-button button-blue">
+			<div class="wpeo-button button-transparent edit button-square-50">
 				<i class="fas fa-pen"></i>
 			</div>
 		</a>
-	</td>
-</tr>
+	</div>
+</div>
