@@ -21,14 +21,14 @@ window.eoxiaJS.digirisk.userDashboard.init = function() {
  */
 window.eoxiaJS.digirisk.userDashboard.event = function() {
 	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr input', window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row:last input.lastname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row:last input.firstname', window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row input', window.eoxiaJS.digirisk.userDashboard.keyEnterSendForm );
 	jQuery( document ).on( 'keyup', '.user-dashboard .input-domain-mail', window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail );
 
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.lastname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.firstname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
-	jQuery( document ).on( 'keyup', '.user-dashboard table.users tr:last input.email', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row:last input.lastname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row:last input.firstname', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
+	jQuery( document ).on( 'keyup', '.user-dashboard .wpeo-table.users .table-row:last input.email', window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit );
 
 	jQuery( document ).on( 'click', '.user-dashboard .wp-digi-action-save-domain-mail', window.eoxiaJS.digirisk.userDashboard.save_domain_mail );
 };
@@ -87,13 +87,13 @@ window.eoxiaJS.digirisk.userDashboard.save_domain_mail = function( event ) {
  * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.keyupUpdateEmail = function( event ) {
-	var email = jQuery( '.user-dashboard table.users tr:last .email' ).val();
-	var firstname = jQuery( '.user-dashboard table.users tr:last .firstname' ).val();
-	var lastname = jQuery( '.user-dashboard table.users tr:last .lastname' ).val();
+	var email = jQuery( '.user-dashboard .wpeo-table.users .table-row:last .email' ).val();
+	var firstname = jQuery( '.user-dashboard .wpeo-table.users .table-row:last .firstname' ).val();
+	var lastname = jQuery( '.user-dashboard .wpeo-table.users .table-row:last .lastname' ).val();
 	var domainMail = jQuery( '.input-domain-mail' ).val();
 	var together = window.eoxiaJS.global.removeDiacritics( firstname + '.' + lastname + '@' + domainMail ).toLowerCase();
 
-	jQuery( '.user-dashboard table.users tr:last input[name="email"]' ).val( together );
+	jQuery( '.user-dashboard .wpeo-table.users .table-row:last input[name="email"]' ).val( together );
 
 	// Vérifie que l'évènement n'est pas déclenché dans le champ de texte du domaine de l'email.
 	if ( 'input-domain-mail' !== event.target.className ) {
@@ -147,7 +147,7 @@ window.eoxiaJS.digirisk.userDashboard.keyEnterSendFormDomainMail = function( eve
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event ) {
-	var row = jQuery( this ).closest( 'tr' );
+	var row = jQuery( this ).closest( '.table-row' );
 
 	if ( row.find( 'input[name="firstname"]' ).val() && row.find( 'input[name="lastname"]' ).val() && row.find( 'input[name="email"]' ).val() ) {
 		row.find( '.action .wpeo-button.button-disable' ).removeClass( 'button-disable' );
@@ -167,7 +167,7 @@ window.eoxiaJS.digirisk.userDashboard.changeColorInputSubmit = function( event )
  * @return {boolean}                True ou false.
  */
 window.eoxiaJS.digirisk.userDashboard.checkData = function( element ) {
-	var row = element.closest( 'tr' );
+	var row = element.closest( '.table-row' );
 
 	row.find( '.tooltip.active' ).removeClass( 'active' );
 
@@ -201,7 +201,7 @@ window.eoxiaJS.digirisk.userDashboard.checkData = function( element ) {
  * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.deletedUserSuccess = function( element, response ) {
-	element.closest( 'tr' ).fadeOut();
+	element.closest( '.table-row' ).fadeOut();
 };
 
 /**
@@ -216,7 +216,7 @@ window.eoxiaJS.digirisk.userDashboard.deletedUserSuccess = function( element, re
  * @version 6.2.5
  */
 window.eoxiaJS.digirisk.userDashboard.loadedUserSuccess = function( element, response ) {
-  element.closest( 'tr' ).replaceWith( response.data.template );
+  element.closest( '.table-row' ).replaceWith( response.data.template );
 };
 
 /**
@@ -233,12 +233,12 @@ window.eoxiaJS.digirisk.userDashboard.loadedUserSuccess = function( element, res
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.userDashboard.savedUserSuccess = function( element, response ) {
-	jQuery( '.user-dashboard table.users .email-already-used' ).hide();
+	jQuery( '.user-dashboard .wpeo-table.users .email-already-used' ).hide();
 
 	if ( response.data.error ) {
-		jQuery( '.user-dashboard table.users .email-already-used' ).show();
+		jQuery( '.user-dashboard .wpeo-table.users .email-already-used' ).show();
 	} else {
-		jQuery( '.user-dashboard table.users' ).html( response.data.template );
-		jQuery( '.user-dashboard table.users tr:last input.lastname' ).focus();
+		jQuery( '.user-dashboard .wpeo-table.users' ).html( response.data.template );
+		jQuery( '.user-dashboard .wpeo-table.users .table-row:last input.lastname' ).focus();
 	}
 };
