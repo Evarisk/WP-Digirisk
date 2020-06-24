@@ -16,21 +16,21 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<tr class="risk-row">
-	<td data-title="Ref." class="padding">
+<div class="table-row risk-row">
+	<div class="table-cell table-50" data-title="Ref.">
 		<span><strong><?php echo esc_html( $evaluation->data['unique_identifier'] ); ?></strong></span>
-	</td>
-	<td data-title="Date" class="w50 padding">
+	</div>
+	<div class="table-cell table-150" data-title="Date">
 		<?php echo esc_html( $evaluation->data['date']['rendered']['date_time'] ); ?>
-	</td>
-	<td data-title="Cot." class="w50">
+	</div>
+	<div class="table-cell table-50" data-title="Cot.">
 		<div class="cotation-container grid">
 			<div class="action cotation default-cotation level<?php echo esc_attr( $evaluation->data['scale'] ); ?>">
 				<span><?php echo esc_html( $evaluation->data['equivalence'] ); ?></span>
 			</div>
 		</div>
-	</td>
-	<td data-title="Commentaire" class="padding">
+	</div>
+	<div class="table-cell" data-title="Commentaire">
 		<ul class="comment-container">
 			<?php
 			if ( ! empty( $evaluation->comments ) ) :
@@ -52,5 +52,5 @@ defined( 'ABSPATH' ) || exit; ?>
 			endif;
 			?>
 		</ul>
-	</td>
-</tr>
+	</div>
+</div>

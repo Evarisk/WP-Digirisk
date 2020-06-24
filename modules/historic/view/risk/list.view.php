@@ -19,23 +19,19 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<table class="table risk">
-	<thead>
-		<tr>
-			<th class="w50 padding"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th><?php esc_html_e( 'Date', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Cot', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex risk">
+	<div class="table-row table-header">
+		<div class="table-cell table-50"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
+		<div class="table-cell table-150"><?php esc_html_e( 'Date', 'digirisk' ); ?></div>
+		<div class="table-cell table-50"><?php esc_html_e( 'Cot', 'digirisk' ); ?></div>
+		<div class="table-cell"><?php esc_html_e( 'Commentaire', 'digirisk' ); ?></div>
+	</div>
 
-	<tbody>
-		<?php if ( ! empty( $evaluations ) ) :
-			foreach ( $evaluations as $evaluation ) :
-				\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/list-item', array(
-					'evaluation' => $evaluation,
-				) );
-			endforeach;
-		endif; ?>
-	</tbody>
-</table>
+	<?php if ( ! empty( $evaluations ) ) :
+		foreach ( $evaluations as $evaluation ) :
+			\eoxia\View_Util::exec( 'digirisk', 'historic', 'risk/list-item', array(
+				'evaluation' => $evaluation,
+			) );
+		endforeach;
+	endif; ?>
+</div>
