@@ -19,21 +19,21 @@ global $eo_search;
 ?>
 
 <?php if( isset( $new_line ) && $new_line ): ?>
-	<tr class="intervention-row edit unite-de-travail-class new-line-intervention" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>" style="display : none">
+	<div class="table-row intervention-row edit unite-de-travail-class new-line-intervention" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>" style="display : none">
 <?php else: ?>
-	<tr class="intervention-row edit unite-de-travail-class" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
+	<div class="table-row intervention-row edit unite-de-travail-class" data-id="<?php echo esc_attr( $prevention->data['id'] ); ?>">
 <?php endif; ?>
 	<?php if ( isset( $intervention ) ) : ?>
 		<input type="hidden" name="unite-travail-hidden" class="form-field" value="<?php echo esc_attr( $intervention->data[ 'unite_travail' ] ); ?>">
 	<?php endif; ?>
-	<td class="w100 padding" data-title="<?php esc_html_e( 'IdRPP', 'digirisk' ); ?>" style="padding: 30px;">
+	<div class="table-cell table-100" data-title="<?php esc_html_e( 'IdRPP', 'digirisk' ); ?>">
 		<?php if ( isset( $intervention ) ) : ?>
 			<?php echo esc_attr( $intervention->data['key_unique'] ); ?>
 		<?php else: ?>
 			-
 		<?php endif; ?>
-	</td>
-	<td class="w150 padding unite-de-travail-element" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
+	</div>
+	<div class="table-cell table-150 unite-de-travail-element" data-title="<?php esc_html_e( 'Unité de travail', 'digirisk' ); ?>">
 		<div class="wpeo-form">
 			<div class="form-element">
 				<?php
@@ -47,9 +47,8 @@ global $eo_search;
 				?>
 			</div>
 		</div>
-
-	</td>
-	<td data-title="Description des actions">
+	</div>
+	<div class="table-cell" data-title="Description des actions">
 		<div class="wpeo-form">
 			<div class="form-element">
 				<label class="form-field-container">
@@ -61,11 +60,11 @@ global $eo_search;
 				</label>
 			</div>
 		</div>
-	</td>
-	<td class="w100 padding" data-title="Risque"> <!-- class="w50" -->
-		<div class="wpeo-form risque-element" style="padding: 0px !important;">
+	</div>
+	<div class="table-cell table-50" data-title="Risque"> <!-- class="w50" -->
+		<div class="wpeo-form risque-element">
 			<div class="form-element">
-				<div class="form-field-container" style="margin-left:2%">
+				<div class="form-field-container">
 					<?php if( isset( $intervention ) ): ?>
 						<?php do_shortcode( '[digi_dropdown_categories_risk id="' . $intervention->data['id'] . '" type="causerie" display="edit" category_risk_id="' . $intervention->data[ 'risk' ] . '"]' ); ?>
 					<?php else: ?>
@@ -74,8 +73,8 @@ global $eo_search;
 				</div>
 			</div>
 		</div>
-	</td>
-	<td class="padding" data-title="Moyen de prévention">
+	</div>
+	<div class="table-cell table-200" data-title="Moyen de prévention">
 		<div class="wpeo-form">
 			<div class="form-element">
 				<label class="form-field-container">
@@ -87,18 +86,14 @@ global $eo_search;
 				</label>
 			</div>
 		</div>
-	</td>
-	<td></td>
-	<td></td>
-
-	<td class="w50 padding" data-title="action">
+	</div>
+	<div class="table-cell table-150 table-end" data-title="action">
 		<div class="intervention-action">
-			<div class="wpeo-button button-add-row-intervention <?php echo ( ! empty( $intervention->data['id'] ) ) ? '' : 'button-disable'; ?>"
+			<div class="wpeo-button button-square-50 <?php echo ( isset( $intervention ) ) ? 'button-green' : ''; ?> button-add-row-intervention <?php echo ( ! empty( $intervention->data['id'] ) ) ? '' : 'button-disable'; ?>"
 			data-parentid="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>"
 			data-id="<?php echo esc_attr( isset( $intervention ) ? $intervention->data[ 'id' ] : 0 ); ?>"
 			data-action="<?php echo esc_attr( 'add_intervention_line' ); ?>"
-			data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervention_line' ) ); ?>"
-			style="margin-right: 20px;">
+			data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervention_line' ) ); ?>">
 			<?php if( isset( $intervention ) ): ?>
 				<span><i class="fas fa-save"></i></span>
 			<?php else: ?>
@@ -106,5 +101,5 @@ global $eo_search;
 			<?php endif; ?>
 			</div>
 		</div>
-	</td>
-</tr>
+	</div>
+</div>

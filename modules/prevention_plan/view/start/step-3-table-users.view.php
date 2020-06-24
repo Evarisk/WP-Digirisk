@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
  <div class="wpeo-table table-flex table-4">
  	<div class="table-row table-header">
- 		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Nom', 'task-manager' ); ?></div>
- 		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Prenom', 'task-manager' ); ?></div>
-		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Email', 'task-manager' ); ?></div>
-		<div class="table-cell" style="text-align : center"><?php esc_html_e( 'Phone', 'task-manager' ); ?></div>
- 		<div class="table-cell" style="text-align : center"></div>
+ 		<div class="table-cell"><?php esc_html_e( 'Nom', 'task-manager' ); ?></div>
+ 		<div class="table-cell"><?php esc_html_e( 'Prenom', 'task-manager' ); ?></div>
+		<div class="table-cell"><?php esc_html_e( 'Email', 'task-manager' ); ?></div>
+		<div class="table-cell"><?php esc_html_e( 'Phone', 'task-manager' ); ?></div>
+ 		<div class="table-cell table-50 table-end"></div>
  	</div>
 
 	<?php if( ! empty( $prevention->data[ 'intervenants' ] ) ):
@@ -70,13 +70,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 			</div>
 
-	 		<div class="table-cell table-end">
-	 			<div class="wpeo-button button-main button-bordered action-attribute"
+	 		<div class="table-cell table-50 table-end">
+	 			<div class="wpeo-button button-transparent edit button-square-50 action-attribute"
 	 				data-key="<?php echo esc_attr( $key ); ?>"
 					data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>"
 					data-action="<?php echo esc_attr( 'edit_intervenant_prevention' ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'edit_intervenant_prevention' ) ); ?>">
-	 				<i class="fas fa-pen" style="color : white"></i>
+	 				<i class="fas fa-pen""></i>
 	 			</div>
 	 		</div>
 	 	</div>
@@ -123,13 +123,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 
- 		<div class="table-cell table-end">
- 			<div class="wpeo-button button-main button-bordered action-input"
+ 		<div class="table-cell table-50 table-end">
+ 			<div class="wpeo-button button-main button-square-50 action-input"
 				data-id="<?php echo esc_attr( $prevention->data[ 'id' ] ); ?>"
  				data-parent="table-row"
 				data-action="add_intervenant_to_prevention"
 				data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_prevention' ) ); ?>">
- 				<i class="fas fa-plus" style="color: white;"></i>
+ 				<i class="fas fa-plus"></i>
  			</div>
  		</div>
  	</div>
