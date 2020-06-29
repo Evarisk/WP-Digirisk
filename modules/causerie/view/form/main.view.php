@@ -27,12 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<h2 style="float:left">
 		<?php esc_html_e( 'Bibliothèque des causeries', 'digirisk' ); ?>
 	</h2>
-	<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-setting&tab=digi-define-prefix' ) ); ?>"
-		class="wpeo-tooltip-event" aria-label="<?php esc_html_e( 'Modifier la référence des permis de feu', 'digirisk' ); ?>" >
-		<div class="wpeo-button button-main" style="float: right;">
-			<span><i class="icon fa fa-cog"></i></span>
-		</div>
-	</a>
 
 	<div class="wpeo-table table-flex table-causerie add-causerie">
 		<div class="table-row table-header">
