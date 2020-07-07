@@ -26,11 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>
 	</td>
 	<td class="w100 padding">
-		<?php if( $prevention->data[ 'date_end__is_define' ] == "undefined" ): ?>
-			<?php esc_html_e( 'En cours', 'digirisk' ); ?>
-		<?php else: ?>
 			<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>
-		<?php endif; ?>
 	</td>
 	<td class="padding avatar-info-prevention">
 		<?php $name_and_phone = $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->first_name . ' ' . $prevention->data[ 'maitre_oeuvre' ][ 'data' ]->last_name;

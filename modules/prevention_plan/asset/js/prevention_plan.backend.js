@@ -63,6 +63,8 @@ window.eoxiaJS.digirisk.preventionPlan.event = function() {
 
 	jQuery( document ).on( 'click', '.digi-prevention-plan-parent .end-date-element .action-button-end-date', window.eoxiaJS.digirisk.preventionPlan.updateEndDatePrevention );
 
+	jQuery( document ).on( 'change', '.start-date', window.eoxiaJS.digirisk.preventionPlan.updateStartDatePrevention ); 
+	
 	jQuery( document ).on( 'click', '.digi-prevention-plan-parent .title-information-option .action-button-title', window.eoxiaJS.digirisk.preventionPlan.updateTitleOption );
 };
 
@@ -385,6 +387,23 @@ window.eoxiaJS.digirisk.preventionPlan.updateEndDatePrevention = function( event
 		form_element.removeClass( 'form-element-disable' );
 	}
 }
+
+window.eoxiaJS.digirisk.preventionPlan.updateStartDatePrevention = function( event ){ 
+	const date = event.target.value.split('/') 
+	const maximalDate = new Date(date[2], date[1]-1, date[0]) 
+	maximalDate.setFullYear(maximalDate.getFullYear() + 1) 
+
+	const formatMaxDate = (date) => `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
+	const formatValue = (date) => new Intl.DateTimeFormat('fr-FR').format(date)
+	const formatValueSql = (date) => `${maximalDate.getFullYear()}-${maximalDate.getMonth()+1}-${maximalDate.getDate()}`
+	
+	const endDateElementLimit = jQuery(document).find('.maximal-date-prevention')
+	endDateElementLimit.attr('max-date', formatMaxDate(maximalDate)) 
+	endDateElementLimit.attr('value', formatValue(maximalDate)) 
+
+	const endDateElementLimitSql = jQuery(document).find('.maximal-date-prevention-sql') 
+	endDateElementLimitSql.attr('value', formatValueSql(maximalDate))
+} 
 
 window.eoxiaJS.digirisk.preventionPlan.updateTitleOption = function( event ){
 	// jQuery( this ).closest( '.title-information-option' ).find( '.wpeo-button' ).removeClass( 'button-blue' ).addClass( 'button-grey' );3

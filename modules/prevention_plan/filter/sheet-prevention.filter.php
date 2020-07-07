@@ -148,11 +148,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		}
 
 		$date_end = "";
-		if( $prevention->data[ 'date_end__is_define' ] == "defined" ){
-			$date_end = date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
-		}else{
-			$date_end = esc_html__( 'En cours', 'digirisk' );
-		}
+		$date_end = date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
+		
 
 		$raison_du_plan_de_prevention = "";
 		if( $prevention->data['more_than_400_hours'] ){
