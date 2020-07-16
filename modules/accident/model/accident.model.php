@@ -73,6 +73,15 @@ class Accident_Model extends \eoxia\Post_Model {
 			'field'     => '_wpdigi_registration_date_in_register',
 		);
 
+		$this->schema['work_stopping_communication'] = array(
+			'since'     => '6.3.0',
+			'version'   => '6.3.0',
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'default'   => '',
+			'field'     => '_work_stopping_communication',
+		);
+
 		$this->schema['location_of_lesions'] = array(
 			'since'     => '6.3.0',
 			'version'   => '6.3.0',

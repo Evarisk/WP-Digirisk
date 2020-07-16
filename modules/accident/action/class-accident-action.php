@@ -54,15 +54,18 @@ class Accident_Action {
 	public function ajax_edit_accident() {
 		check_ajax_referer( 'edit_accident' );
 
-		$accident                   = ! empty( $_POST['accident'] ) ? (array) $_POST['accident'] : array();
-		$signature_of_the_caregiver = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
-		$signature_of_the_victim    = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
-		$accident_investigation     = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
-		$accident_stopping_days     = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
+		$accident                                  = ! empty( $_POST['accident'] ) ? (array) $_POST['accident'] : array();
+		$signature_of_the_caregiver                = ! empty( $_POST['signature_of_the_caregiver'] ) ? $_POST['signature_of_the_caregiver'] : '';
+		$signature_of_the_victim                   = ! empty( $_POST['signature_of_the_victim'] ) ? $_POST['signature_of_the_victim'] : '';
+		$accident_investigation                    = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
+		$accident_stopping_days                    = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
+		$accident_work_stopping_communications     = ! empty( $_POST['work_stopping_communication'] ) ? $_POST['work_stopping_communication'] : '';
 
 		$add = isset( $_POST['add'] ) ? true : false;
 
 		Accident_Travail_Stopping_Day_Class::g()->save_stopping_day( $accident_stopping_days );
+
+		$accident->data['work_stopping_communication']	= $accident_work_stopping_communications;
 
 		if ( ! empty( $accident['have_investigation'] ) ) {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;

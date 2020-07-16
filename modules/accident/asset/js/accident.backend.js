@@ -35,6 +35,7 @@ window.eoxiaJS.digirisk.accident.event = function() {
 	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
 	jQuery( document ).on( 'keyup', '.wpeo-table.table-accident .table-row-advanced.table-add input, textarea', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
 	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced.table-add .autocomplete-search-list li', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
+	jQuery( document ).on( 'click', '.flex-table.accident .col.advanced .edit-work-stopping-communication-link', window.eoxiaJS.digirisk.accident.editAccidentWorkStoppingCommunication );
 
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };
@@ -54,6 +55,11 @@ window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation = function( e
 	}
 };
 
+window.eoxiaJS.digirisk.accident.editAccidentWorkStoppingCommunication = function( event ) {
+		jQuery( this ).closest('.work-stopping-communication').find( '.work-stop' ).removeClass( 'hidden' );
+		jQuery( this ).closest('.work-stopping-communication').find( '.work-stop' ).addClass( 'text' );
+		jQuery( this ).remove();
+};
 /**
  * Clear le canvas.
  *

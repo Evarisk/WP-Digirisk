@@ -177,6 +177,10 @@ class Accident_Filter extends Identifier_Filter {
 			$number_field_completed++;
 		}
 
+		if ( ! empty( $object->data['work_stopping_communication'] ) ) {
+			$number_field_completed++;
+		}
+
 		if ( ! empty( $object->data['nature_of_lesions'] ) ) {
 			$number_field_completed++;
 		}
