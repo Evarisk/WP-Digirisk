@@ -18,37 +18,29 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<table class="table duer">
-	<thead>
-		<tr>
-			<th class="padding w50"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</th>
-			<th class="w100 padding"><i class="fas fa-calendar-alt"></i> <?php esc_html_e( 'Début', 'digirisk' ); ?></th>
-			<th class="w100 padding"><i class="fas fa-calendar-alt"></i> <?php esc_html_e( 'Fin', 'digirisk' ); ?></th>
-			<th class="w100 padding"><?php esc_html_e( 'Destinataire', 'digirisk' ); ?></th>
-			<th class="w100 padding"><?php esc_html_e( 'Méthodologie', 'digirisk' ); ?></th>
-			<th class="w100 padding"><?php esc_html_e( 'Sources', 'digirisk' ); ?></th>
-			<th class="w100 padding"><?php esc_html_e( 'Localisation', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Notes', 'digirisk' ); ?></th>
-			<th class="w100"></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex table-duer">
+	<div class="table-row table-header">
+		<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
+		<div class="table-cell table-75"><i class="fas fa-calendar-alt"></i> <?php esc_html_e( 'Début', 'digirisk' ); ?></div>
+		<div class="table-cell table-75"><i class="fas fa-calendar-alt"></i> <?php esc_html_e( 'Fin', 'digirisk' ); ?></div>
+		<div class="table-cell table-75"><?php esc_html_e( 'Destinataire', 'digirisk' ); ?></div>
+		<div class="table-cell table-100"><?php esc_html_e( 'Méthodologie', 'digirisk' ); ?></div>
+		<div class="table-cell table-75"><?php esc_html_e( 'Sources', 'digirisk' ); ?></div>
+		<div class="table-cell table-75"><?php esc_html_e( 'Localisation', 'digirisk' ); ?></div>
+		<div class="table-cell table-75"><?php esc_html_e( 'Notes', 'digirisk' ); ?></div>
+		<div class="table-cell table-100 table-end"></div>
+	</div>
 
-	<tbody>
-		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
-			'documents' => $documents,
-		) );
-		?>
-	</tbody>
+	<?php
+	\eoxia\View_Util::exec( 'digirisk', 'duer', 'list', array(
+		'documents' => $documents,
+	) );
 
-	<tfoot>
-		<?php
-		\eoxia\View_Util::exec( 'digirisk', 'duer', 'item-edit', array(
-			'element'    => $element,
-			'element_id' => $element_id,
-		) );
-		?>
-	</tfoot>
-</table>
+	\eoxia\View_Util::exec( 'digirisk', 'duer', 'item-edit', array(
+		'element'    => $element,
+		'element_id' => $element_id,
+	) );
+	?>
+</div>
 
 <?php \eoxia\View_Util::exec( 'digirisk', 'duer', 'popup' ); ?>

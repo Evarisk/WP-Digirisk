@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			data-color="red"
 			aria-label="<?php esc_html_e( 'Vous devez choisir un type de travaux', 'digirisk' ); ?>">
 
-	<div class="dropdown-toggle wpeo-button button-transparent">
-		<span class="<?php echo ! empty( $select_category_worktype ) && ! empty( $select_category_worktype ) ? 'hidden' : ''; ?>"><?php esc_html_e( 'Type de travaux', 'digirisk' ); ?></span>
+	<div class="dropdown-toggle dropdown-add-button wpeo-button button-transparent">
+		<span class="<?php echo ! empty( $select_category_worktype ) && ! empty( $select_category_worktype ) ? 'hidden' : ''; ?>"><i class="fas fa-exclamation-triangle"></i></span>
 		<img class="<?php echo ! empty( $select_category_worktype ) ? '' : 'hidden'; ?> tooltip hover" src="<?php echo ! empty( $select_category_worktype ) ? esc_attr( wp_get_attachment_url( $select_category_worktype->data['thumbnail_id'] ) ) : ''; ?>" aria-label="" />
-		<i class="button-icon fas fa-angle-down"></i>
+		<i class="fas fa-plus-circle icon-add"></i>
 	</div>
 
 	<ul class="dropdown-content wpeo-grid grid-5">

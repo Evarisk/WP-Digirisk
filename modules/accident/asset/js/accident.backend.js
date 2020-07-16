@@ -31,10 +31,10 @@ window.eoxiaJS.digirisk.accident.refresh = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.accident.event = function() {
-	jQuery( document ).on( 'change', '.flex-table.accident .col.advanced input[type="checkbox"]', window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation );
-	jQuery( document ).on( 'click', '.flex-table.accident .col.advanced .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
-	jQuery( document ).on( 'keyup', '.flex-table.accident .col.add input, textarea', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
-	jQuery( document ).on( 'click', '.flex-table.accident .col.add .autocomplete-search-list li', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
+	jQuery( document ).on( 'change', '.wpeo-table.table-accident .table-row-advanced input[type="checkbox"]', window.eoxiaJS.digirisk.accident.changeSelectAccidentInvestigation );
+	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
+	jQuery( document ).on( 'keyup', '.wpeo-table.table-accident .table-row-advanced.table-add input, textarea', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
+	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced.table-add .autocomplete-search-list li', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
 
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };
@@ -71,7 +71,7 @@ window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd = function( event ) {
 	window.eoxiaJS.digirisk.accident.checkCanAdd( jQuery( this ) );
 }
 window.eoxiaJS.digirisk.accident.checkCanAdd = function( element ) {
-	var accidentRow = element.closest( '.col' );
+	var accidentRow = element.closest( '.table-row-advanced' );
 	if ( accidentRow.find( 'input[name="accident[victim_identity_id]"]' ).val() && accidentRow.find( 'input[name="accident[parent_id]"]' ).val() && accidentRow.find( 'textarea' ).val() ) {
 		accidentRow.find( '.action-input' ).removeClass( 'button-disable' );
 	} else {
@@ -110,8 +110,9 @@ window.eoxiaJS.digirisk.accident.resizeCanvas = function( event ) {
  */
 window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElement, response ) {
 	if ( response.data.add ) {
-		triggeredElement.closest( '.flex-table.accident' ).find( '.table-body' ).prepend( response.data.view );
-		jQuery( '.flex-table.accident .col.advanced:first input[type="text"]:first' ).focus();
+		// console.log(triggeredElement.closest( '.wpeo-table.table-accident' ).find( '.table-row-advanced' ));
+		triggeredElement.closest( '.wpeo-table.table-accident' ).find( '.table-row-advanced' ).first().prepend( response.data.view );
+		jQuery( '.wpeo-table.table-accident .table-row-advanced:first input[type="text"]:first' ).focus();
 	} else {
 		triggeredElement.closest( '.digirisk-wrap' ).replaceWith( response.data.view );
 	}
@@ -129,9 +130,9 @@ window.eoxiaJS.digirisk.accident.editedAccidentSuccess = function( triggeredElem
  * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElement, response ) {
-	triggeredElement.closest( '.col' ).replaceWith( response.data.view );
+	triggeredElement.closest( '.table-row-advanced' ).replaceWith( response.data.view );
 	// window.eoxiaJS.digirisk.accident.refresh();
-	jQuery( '.col.advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
+	jQuery( '.table-row-advanced[data-id=' + response.data.id + '] canvas' ).each( function() {
 		jQuery( this )[0].signaturePad.clear();
 		if ( jQuery( this ).closest( 'div' ).find( '.url' ).val() ) {
 			jQuery( this )[0].signaturePad.fromDataURL( jQuery( this ).closest( 'div' ).find( '.url' ).val() );
@@ -150,7 +151,7 @@ window.eoxiaJS.digirisk.accident.loadedAccidentSuccess = function( triggeredElem
  * @since 6.1.5
  */
 window.eoxiaJS.digirisk.accident.deletedAccidentSuccess = function( triggeredElement, response ) {
-	triggeredElement.closest( '.col' ).fadeOut();
+	triggeredElement.closest( '.table-row-advanced' ).fadeOut();
 };
 
 /**
@@ -210,10 +211,12 @@ window.eoxiaJS.digirisk.accident.deletedStoppingDay = function( triggeredElement
 };
 
 window.eoxiaJS.digirisk.accident.checkStoppingDayData = function( element ) {
-	element.closest( '.tooltip.active' ).removeClass( 'active' );
+	// element.closest( '.wpeo-tooltip-eventtooltip.active' ).removeClass( 'active' );
+	window.eoxiaJS.tooltip.remove( jQuery( element.closest( '.wpeo-tooltip-event' ) ) );
 
 	if ( isNaN( element.closest( '.comment' ).find( '.is-number' ).val() ) || '' == element.closest( '.comment' ).find( '.is-number' ).val() ) {
-		element.closest( '.tooltip' ).addClass( 'active' );
+		// element.closest( '.tooltip' ).addClass( 'active' );
+		window.eoxiaJS.tooltip.display( jQuery( element.closest( '.wpeo-tooltip-event' ) ) );
 		return false;
 	}
 
@@ -221,7 +224,7 @@ window.eoxiaJS.digirisk.accident.checkStoppingDayData = function( element ) {
 }
 
 window.eoxiaJS.digirisk.accident.checkDataBeforeAdd = function( element ) {
-	var accidentRow = element.closest( '.col' );
+	var accidentRow = element.closest( '.table-row-advanced' );
 
 	accidentRow.find( '.tooltip' ).removeClass( 'active' );
 
@@ -245,16 +248,16 @@ window.eoxiaJS.digirisk.accident.checkDataBeforeAdd = function( element ) {
 
 window.eoxiaJS.digirisk.accident.checkAllData = function( element ) {
 	var isNumber = true;
-	jQuery( '.accident.flex-table .tooltip.active' ).removeClass( 'active' );
+	jQuery( '.wpeo-table.table-accident .tooltip.active' ).removeClass( 'active' );
 
-	jQuery( '.accident.flex-table .comment:not(.new) .is-number' ).each( function() {
+	jQuery( '.wpeo-table.table-accident .comment:not(.new) .is-number' ).each( function() {
 		if ( isNaN( jQuery( this ).val() ) || '' == jQuery( this ).val() ) {
 			jQuery( this ).closest( '.tooltip' ).addClass( 'active' );
 			isNumber = false;
 		}
 	} );
 
-	jQuery( '.accident.flex-table .comment.new .is-number' ).each( function() {
+	jQuery( '.wpeo-table.table-accident .comment.new .is-number' ).each( function() {
 		if ( isNaN( jQuery( this ).val() ) ) {
 			jQuery( this ).closest( '.tooltip' ).addClass( 'active' );
 			isNumber = false;
@@ -265,8 +268,8 @@ window.eoxiaJS.digirisk.accident.checkAllData = function( element ) {
 		return false;
 	}
 
-	var id = jQuery( element ).closest( '.col.advanced' ).attr( 'data-id' );
-	var accidentRow = jQuery( element ).closest( '.col.advanced[data-id="' + id + '"]' );
+	var id = jQuery( element ).closest( '.table-row-advanced' ).attr( 'data-id' );
+	var accidentRow = jQuery( element ).closest( '.table-row-advanced[data-id="' + id + '"]' );
 
 	accidentRow.find( 'canvas' ).each( function() {
 		if ( ! jQuery( this )[0].signaturePad.isEmpty() ) {

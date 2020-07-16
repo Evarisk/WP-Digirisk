@@ -18,19 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div>
 	<h2 style="font-size: 20px; font-weight: normal; margin-bottom: 10px;"><?php esc_html_e( 'Listes des permis de feu en cours', 'digirisk' ); ?> (<?php echo esc_attr( $nbr ); ?>)</h2>
 
-	<table class="table closed-permis-feu">
-		<thead>
-			<tr>
-				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Date début', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
-				<td class="w150 padding"><?php esc_html_e( 'Intervention(s)	', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Progression', 'digirisk' ); ?></td>
-				<td class="w50"></td>
-			</tr>
-		</thead>
+	<div class="wpeo-table table-flex closed-permis-feu">
+		<div class="table-row table-header">
+			<div class="table-cell"><?php esc_html_e( 'Titre', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Date début', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Maitre oeuvre', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervention(s)	', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Progression', 'digirisk' ); ?></div>
+			<div class="table-cell table-50 table-end"></div>
+		</div>
 		<?php
 		if ( ! empty( $permis_feu ) ) :
 			foreach ( $permis_feu as $permis_feu_single ) :
@@ -40,11 +38,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		else :
 			?>
-			<tr>
-				<td colspan="9" style="text-align: center;"><?php esc_html_e( 'Aucun plan de prévention réalisé pour le moment.', 'digirisk' ); ?></td>
-			</tr>
+			<div class="table-row">
+				<div class="table-cell" style="text-align: center;"><?php esc_html_e( 'Aucun plan de prévention réalisé pour le moment.', 'digirisk' ); ?></div>
+			</div>
 			<?php
 		endif;
 		?>
-	</table>
+	</div>
 </div>

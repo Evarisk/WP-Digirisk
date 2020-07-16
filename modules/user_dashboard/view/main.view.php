@@ -20,9 +20,9 @@ defined( 'ABSPATH' ) || exit; ?>
 	<input class="input-domain-mail" name="domain_mail" type="hidden" value="<?php echo esc_attr( get_option( 'digirisk_domain_mail', 'demo.com' ) ); ?>" />
 
 	<!-- Liste les utilisateurs -->
-	<table class="table users">
+	<div class="wpeo-table table-flex users">
 		<?php User_Dashboard_Class::g()->display_list_user(); ?>
-	</table>
+	</div>
 
 	<?php if ( ! empty( $from_install ) ) : ?>
 		<a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk' ) ); ?>" type="button" class="wpeo-button button-main alignright margin">

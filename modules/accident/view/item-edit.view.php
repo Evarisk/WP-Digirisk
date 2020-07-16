@@ -16,33 +16,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $eo_search; ?>
-<div class="col advanced" data-id="<?php echo esc_attr( $accident->data['id'] ); ?>">
+<div class="table-row-advanced" data-id="<?php echo esc_attr( $accident->data['id'] ); ?>">
 	<input type="hidden" name="action" value="edit_accident" />
 	<?php wp_nonce_field( 'edit_accident' ); ?>
 	<input type="hidden" name="accident[id]" value="<?php echo esc_attr( $accident->data['id'] ); ?>" />
 	<input type="hidden" name="accident[parent_id]" value="<?php echo esc_attr( $accident->data['parent_id'] ); ?>" />
-	<div class="col">
-		<div data-title="Ref." class="cell padding w150">
-			<ul>
-				<li><strong><?php echo esc_attr( $accident->data['unique_identifier'] ); ?></strong></li>
-				<li><?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?></li>
-			</ul>
+
+	<div class="table-row">
+		<div data-title="Ref." class="table-cell table-150">
+			<strong><?php echo esc_attr( $accident->data['unique_identifier'] ); ?></strong><br>
+			<?php echo esc_attr( $accident->data['registration_date_in_register']['rendered']['date'] ); ?>
 		</div>
-		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="cell padding w200"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
-		<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="cell padding w150"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="cell padding w200"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="cell padding"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="cell padding w70"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
-		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="cell w150">
+		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="table-cell table-150"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
+		<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="table-cell table-100"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="table-cell table-150"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="table-cell"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="table-cell table-75"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
+		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="table-cell table-150 table-end">
 			<div class="action">
-				<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
+				<div data-parent="table-row-advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="table-flex" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
 			</div>
 		</div>
 	</div>
 
 	<div class="advanced">
 		<div class="wpeo-form">
-			<div class="wpeo-gridlayout padding grid-3">
+			<div class="wpeo-gridlayout grid-3">
 				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Name., Surname.. victime', 'digirisk' ); ?></span>
 					<div class="form-field-container">
@@ -53,7 +52,7 @@ global $eo_search; ?>
 				<div class="form-element group-date">
 					<span class="form-label"><?php esc_html_e( 'Date & hour', 'digirisk' ); ?></span>
 					<label class="form-field-container">
-						<span class="form-field-icon-prev"><i class="fal fa-calendar-alt"></i></span>
+						<span class="form-field-icon-prev"><i class="far fa-calendar-alt"></i></span>
 						<input type="hidden" class="mysql-date" name="accident[accident_date]" value="<?php echo esc_attr( $accident->data['accident_date']['raw'] ); ?>" />
 						<input type="text" class="form-field date" value="<?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?>" />
 					</label>
@@ -74,7 +73,7 @@ global $eo_search; ?>
 				</label>
 			</div>
 
-			<div class="wpeo-gridlayout padding grid-2">
+			<div class="wpeo-gridlayout grid-2">
 				<?php
 				\eoxia\View_Util::exec( 'digirisk', 'accident', 'list-stopping-day', array(
 					'accident' => $accident,
@@ -98,7 +97,7 @@ global $eo_search; ?>
 				</div>
 			</div>
 
-			<div class="wpeo-gridlayout padding grid-2">
+			<div class="wpeo-gridlayout grid-2">
 				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Seat lesions (specify right or left)', 'digirisk' ); ?></span>
 					<label class="form-field-container">
@@ -114,7 +113,7 @@ global $eo_search; ?>
 				</div>
 			</div>
 
-			<div class="wpeo-gridlayout padding grid-2">
+			<div class="wpeo-gridlayout grid-2">
 				<div class="form-element">
 					<span class="form-label"><?php esc_html_e( 'Name and address of witnesses', 'digirisk' ); ?></span>
 					<label class="form-field-container">
@@ -130,7 +129,7 @@ global $eo_search; ?>
 				</div>
 			</div>
 
-			<div class="wpeo-gridlayout padding grid-2">
+			<div class="wpeo-gridlayout grid-2">
 				<div class="form-element">
 					<?php echo do_shortcode( '[digi_signature title="' . __( 'Signature du soignant', 'digirisk' ) . '" key="signature_of_the_caregiver_id" id="' . $accident->data['id'] . '"]' ); ?>
 				</div>
@@ -146,7 +145,9 @@ global $eo_search; ?>
 				</label>
 			</div>
 
-			<div data-parent="advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="flex-table" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input alignright"><i class="button-icon fas fa-save"></i></div>
+			<div class="table-action">
+				<div data-parent="table-row-advanced[data-id='<?php echo esc_attr( $accident->data['id'] ); ?>']" data-loader="table-flex" data-namespace="digirisk" data-module="accident" data-before-method="checkAllData" class="wpeo-button button-square-50 button-green save action-input"><i class="button-icon fas fa-save"></i></div>
+			</div>
 		</div>
 	</div>
 </div>

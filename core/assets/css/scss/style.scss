@@ -170,11 +170,6 @@ canvas {
 	display: flex;
 }
 
-.wpeo-wrap .wpeo-button-pulse {
-	height: 47px!important;
-	width: 47px!important;
-}
-
 .document-unique_page_digirisk-causerie .wpeo-wrap .wpeo-button-pulse {
 	height: 36px!important;
 	width: 36px!important;
@@ -238,7 +233,7 @@ canvas {
 
 .digirisk_page_digirisk-permis-feu, .digirisk_page_digirisk-prevention {
 	.wpeo-form .wpeo-autocomplete .autocomplete-label {
-		padding: 0!important;
+		//padding: 0!important;
 	}
 
 	.wpeo-autocomplete .autocomplete-search-input {

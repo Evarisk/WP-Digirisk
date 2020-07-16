@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<tr class="item" data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>">
-	<td class="w50 padding">
+<div class="table-row item" data-id="<?php echo esc_attr( $causerie->data['id'] ); ?>">
+	<div class="table-cell table-50">
 		<strong>
 			<span><?php echo esc_html( $causerie->data['unique_identifier'] ); ?></span>
 			<?php
@@ -27,26 +27,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endif;
 			?>
 		</strong>
-	</td>
+	</div>
 
-	<td data-title="Photo" class="padding">
+	<div data-title="Photo" class="table-cell table-50">
 		<?php echo do_shortcode( '[wpeo_upload id="' . $causerie->data['id'] . '" model_name="' . $causerie->get_class() . '" mode="view" single="false" field_name="image" ]' ); ?>
-	</td>
+	</div>
 
-	<td data-title="Catégorie" class="padding">
+	<div data-title="Catégorie" class="table-cell table-50">
 		<?php
 		if ( ! empty( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) ) :
 			do_shortcode( '[digi_dropdown_categories_risk id="' . $causerie->data['id'] . '" type="causerie" display="view" category_risk_id="' . max( $causerie->data['taxonomy'][ Risk_Category_Class::g()->get_type() ] ) . '"]' );
 		endif;
 		?>
-	</td>
+	</div>
 
-	<td class="padding causerie-description">
+	<div class="table-cell causerie-description">
 		<span class="row-title"><?php echo esc_html( $causerie->data['title'] ); ?></span>
 		<span class="row-subtitle"><?php echo esc_html( $causerie->data['content'] ); ?></span>
-	</td>
+	</div>
 
-	<td data-title="Date début" class="padding">
+	<div data-title="Date début" class="table-cell table-100">
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
@@ -66,9 +66,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 		endif;
 		?>
-	</td>
+	</div>
 
-	<td data-title="Date cloture" class="padding">
+	<div data-title="Date cloture" class="table-cell table-100">
 		<?php
 		if ( \eoxia\Config_Util::$init['digirisk']->causerie->steps->CAUSERIE_CLOSED === $causerie->data['current_step'] ) :
 			?>
@@ -88,9 +88,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 		endif;
 		?>
-	</td>
+	</div>
 
-	<td data-title="Formateur" class="padding">
+	<div data-title="Formateur" class="table-cell table-50">
 		<?php
 		if ( ! empty( $causerie->data['former']['user_id'] ) && ! empty( $causerie->data['former']['rendered'] ) ) :
 			$causerie->data['former']['rendered'] = (array) $causerie->data['former']['rendered'];
@@ -107,8 +107,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 	endif;
 	?>
-	</td>
-	<td data-title="Participant(s)" class="padding" style="display : flex">
+	</div>
+	<div data-title="Participant(s)" class="table-cell table-50" style="display : flex">
 		<div class="wpeo-modal-event wpeo-button-pulse tooltip hover"
 			aria-label="<?php echo esc_attr_e( 'Voir les participants', 'digirisk' ); ?>"
 			data-title="<?php echo esc_attr_e( 'Liste des participants', 'digirisk' ); ?>"
@@ -122,9 +122,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i style="margin-top: 10px">
 			( <?php echo esc_attr( count( $causerie->data[ 'participants' ] ) ); ?> )
 		</i>
-	</td>
+	</div>
 
-	<td>
+	<div class="table-cell table-50 table-end">
 		<div class="action">
 			<?php if ( isset( $causerie->data['sheet_intervention']->data['file_generated'] ) && $causerie->data['sheet_intervention']->data['file_generated'] ) : ?>
 				<a class="wpeo-button button-purple button-square-50" href="<?php echo esc_attr( $causerie->data['sheet_intervention']->data['link'] ); ?>">
@@ -144,5 +144,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>
-	</td>
-</tr>
+	</div>
+</div>

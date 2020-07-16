@@ -75,11 +75,8 @@
 .wpeo-wrap.causerie-wrap .step-2 .owl-nav {
   height: 100%;
   width: 100%;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
-  display: -webkit-box;
+  justify-content: center;
+  align-items: center;
   display: flex;
   position: absolute;
   top: 0;
@@ -120,7 +117,6 @@
 
 .wpeo-wrap.causerie-wrap .step .step-list {
   width: 100%;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -144,7 +140,6 @@
   top: 8px;
   background: #d6d6d6;
   border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -400,12 +395,9 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .main-header .unit-header {
   position: relative;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-flex: 0;
-          flex: 0 1 auto;
+  flex: 0 1 auto;
   height: 50px;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -436,12 +428,10 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .main-header .edit {
   margin-left: auto;
-  -webkit-transition: none;
   transition: none;
 }
 
 .wpeo-wrap .main-header .edit .button-icon {
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   color: rgba(255, 255, 255, 0.4);
 }
@@ -455,7 +445,6 @@ le responsive sera activé manuellement.
   position: absolute;
   right: -5px;
   pointer-events: none;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -475,7 +464,6 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .main-header .mobile-navigation .icon {
   color: rgba(255, 255, 255, 0.4);
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   line-height: 1;
   font-size: 18px;
@@ -591,7 +579,6 @@ le responsive sera activé manuellement.
   height: 50px;
   line-height: 50px;
   text-align: center;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -689,10 +676,8 @@ le responsive sera activé manuellement.
   bottom: 0.4em;
   left: 0.4em;
   background: rgba(0, 0, 0, 0.1);
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   opacity: 0;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -701,8 +686,7 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell.can-select:hover::after {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
   opacity: 1;
 }
 
@@ -711,8 +695,7 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .wpeo-table.evaluation-method .table-cell.can-select.active::after {
-  -webkit-transform: scale(1) !important;
-          transform: scale(1) !important;
+  transform: scale(1) !important;
   opacity: 1 !important;
   background: #3495f0;
   z-index: -1;
@@ -751,7 +734,6 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .navigation-container .society-header {
   background: #3d4152;
-  display: -webkit-box;
   display: flex;
   height: 50px;
   padding: 0 1em;
@@ -787,8 +769,7 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .navigation-container .society-header > .add-container {
   top: 50% !important;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   right: 0;
 }
 
@@ -812,7 +793,6 @@ le responsive sera activé manuellement.
   display: inline-block;
   color: rgba(255, 255, 255, 0.4);
   margin-right: 0.4em;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -839,7 +819,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .navigation-container .workunit-list .unit > .unit-container {
-  display: -webkit-box;
   display: flex;
   position: relative;
 }
@@ -885,7 +864,6 @@ le responsive sera activé manuellement.
   min-width: 30px;
   width: 30px;
   text-align: center;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -919,7 +897,6 @@ le responsive sera activé manuellement.
 .wpeo-wrap .navigation-container .unit > .unit-container .title {
   width: 100%;
   padding-left: 1em;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -934,7 +911,6 @@ le responsive sera activé manuellement.
 .wpeo-wrap .navigation-container .unit > .unit-container .title .ref, .wpeo-wrap .navigation-container .unit > .unit-container .title .name {
   display: block;
   line-height: 1;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -961,14 +937,12 @@ le responsive sera activé manuellement.
   right: 0;
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .wpeo-wrap .navigation-container .add-container .wpeo-button {
   float: left;
   margin-left: 2px;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -981,7 +955,6 @@ le responsive sera activé manuellement.
 .wpeo-wrap .navigation-container .add-container .wpeo-button .button-add {
   position: absolute;
   color: rgba(255, 255, 255, 0.6);
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   top: 6px;
   right: 6px;
@@ -1006,7 +979,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .navigation-container .unit.new.active {
-  display: -webkit-box;
   display: flex;
 }
 
@@ -1087,7 +1059,6 @@ le responsive sera activé manuellement.
   min-width: 32px;
   width: 32px;
   text-align: center;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1125,7 +1096,6 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .navigation-container .mobile-add-container .action {
   font-size: 18px;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1134,7 +1104,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .navigation-container .close-popup .icon {
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   font-size: 16px;
 }
@@ -1153,8 +1122,7 @@ le responsive sera activé manuellement.
   .wpeo-wrap .navigation-container {
     opacity: 0;
     pointer-events: none;
-    -webkit-transform: scale(0.95);
-            transform: scale(0.95);
+    transform: scale(0.95);
     position: fixed;
     top: 0;
     left: 0;
@@ -1162,15 +1130,13 @@ le responsive sera activé manuellement.
     height: 100%;
     z-index: 99999;
     background: #272a35;
-    -webkit-transition: 0.2s ease-out;
     transition: 0.2s ease-out;
     overflow-y: auto;
   }
   .wpeo-wrap .navigation-container.active {
     opacity: 1;
     pointer-events: all;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -1227,6 +1193,76 @@ le responsive sera activé manuellement.
   width: 100%;
 }
 
+.wpeo-wrap .wpeo-table.table-flex input[type="checkbox"],
+.wpeo-wrap .wpeo-table.table-flex input[type="radio"] {
+  width: auto;
+}
+
+.wpeo-wrap .wpeo-table.table-flex .wpeo-autocomplete .autocomplete-label {
+  padding: 0 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced {
+  background: #fff;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced:nth-of-type(odd) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .table-row {
+  background: none !important;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced {
+  padding: 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .form-element {
+  margin: 0.5em 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .form-element .form-element {
+  margin: 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .wpeo-autocomplete .autocomplete-search-input {
+  padding: 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .comment-container {
+  width: 100%;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .comment-container textarea {
+  background: #ececec;
+  border-radius: 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .comment {
+  margin: 0.5em 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day input[type="text"] {
+  padding: 0.6em;
+  line-height: 1;
+  background: #ececec;
+  box-shadow: none;
+  transition: all 0.2s ease-out;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .wpeo-media, .wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .media {
+  margin: 0 1em;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .list-stopping-day .wpeo-button {
+  margin: auto 0;
+}
+
+.wpeo-wrap .wpeo-table .table-row-advanced .advanced .table-action {
+  text-align: right;
+}
+
 .wpeo-wrap .wpeo-table .avatar {
   display: inline-block;
   width: 50px;
@@ -1244,7 +1280,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .wpeo-table.table-flex .comment-container .comment {
-  display: -webkit-box;
   display: flex;
   margin-top: 0.2em;
 }
@@ -1326,8 +1361,8 @@ le responsive sera activé manuellement.
   line-height: 50px;
   position: relative;
   text-align: center;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  padding: 0 !important;
 }
 
 .wpeo-wrap .dropdown-add-button .icon-add {
@@ -1336,7 +1371,6 @@ le responsive sera activé manuellement.
   right: 8px;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.3);
-  -webkit-transition: color 0.2s ease-out;
   transition: color 0.2s ease-out;
 }
 
@@ -1362,9 +1396,7 @@ le responsive sera activé manuellement.
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) {
     flex-wrap: wrap;
-    -webkit-box-orient: horizontal !important;
-    -webkit-box-direction: normal !important;
-            flex-direction: row !important;
+    flex-direction: row !important;
     background: #fff !important;
     margin-bottom: 2em;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1375,28 +1407,22 @@ le responsive sera activé manuellement.
     box-sizing: border-box;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-reference {
-    -webkit-box-ordinal-group: 2;
-            order: 1;
+    order: 1;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-risk {
-    -webkit-box-ordinal-group: 4;
-            order: 3;
+    order: 3;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-cotation {
-    -webkit-box-ordinal-group: 5;
-            order: 4;
+    order: 4;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-photo {
-    -webkit-box-ordinal-group: 6;
-            order: 5;
+    order: 5;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-comment {
-    -webkit-box-ordinal-group: 7;
-            order: 6;
+    order: 6;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-action {
-    -webkit-box-ordinal-group: 3;
-            order: 2;
+    order: 2;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-reference {
     width: 30%;
@@ -1405,7 +1431,6 @@ le responsive sera activé manuellement.
     width: 70%;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-action .wpeo-gridlayout {
-    display: -webkit-box !important;
     display: flex !important;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row:not(.table-header) .cell-action .wpeo-gridlayout .wpeo-button:first-child {
@@ -1428,8 +1453,7 @@ le responsive sera activé manuellement.
     width: 100%;
   }
   .wpeo-wrap .wpeo-table.table-risk .table-row.edit .cell-action {
-    -webkit-box-ordinal-group: 11;
-            order: 10;
+    order: 10;
   }
 }
 
@@ -1553,10 +1577,8 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .table .comment-container .comment {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-flex: 0;
-          flex: 0 1 auto;
+  flex: 0 1 auto;
   line-height: 1.8;
   margin-top: 4px;
 }
@@ -1593,7 +1615,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .table .comment-container .comment .delete i, .wpeo-wrap .table .comment-container .comment .add i {
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -1783,7 +1804,6 @@ le responsive sera activé manuellement.
     display: none;
   }
   .wpeo-wrap .table.risk .risk-row {
-    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 1em !important;
@@ -1793,7 +1813,6 @@ le responsive sera activé manuellement.
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
     width: 40% !important;
-    display: -webkit-box;
     display: flex;
     padding: 1em 0 !important;
   }
@@ -1879,28 +1898,22 @@ le responsive sera activé manuellement.
     width: 33.333333%;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(1) {
-    -webkit-box-ordinal-group: 2;
-            order: 1;
+    order: 1;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(2) {
-    -webkit-box-ordinal-group: 4;
-            order: 3;
+    order: 3;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(3) {
-    -webkit-box-ordinal-group: 5;
-            order: 4;
+    order: 4;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(4) {
-    -webkit-box-ordinal-group: 6;
-            order: 5;
+    order: 5;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(5) {
-    -webkit-box-ordinal-group: 6;
-            order: 5;
+    order: 5;
   }
   .wpeo-wrap .table.risk .risk-row > td:nth-of-type(6) {
-    -webkit-box-ordinal-group: 3;
-            order: 2;
+    order: 2;
   }
   .wpeo-wrap .table.risk > tfoot {
     background: #f1f1f1;
@@ -1913,7 +1926,6 @@ le responsive sera activé manuellement.
     display: none;
   }
   .wpeo-wrap .table.risk .risk-row:not(.edit) .comment-container .comment:nth-of-type(1) {
-    display: -webkit-box;
     display: flex;
   }
 }
@@ -1958,7 +1970,6 @@ le responsive sera activé manuellement.
     display: none;
   }
   .wpeo-wrap .table.evaluators tbody > tr, .wpeo-wrap .table.affected-evaluator tbody > tr {
-    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 1em;
@@ -1975,8 +1986,7 @@ le responsive sera activé manuellement.
     position: absolute;
     left: 10px;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
   .wpeo-wrap .table.evaluators tbody td:nth-of-type(2), .wpeo-wrap .table.evaluators tbody td:nth-of-type(3), .wpeo-wrap .table.evaluators tbody td:nth-of-type(4), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(2), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(3), .wpeo-wrap .table.affected-evaluator tbody td:nth-of-type(4) {
     width: auto;
@@ -2000,8 +2010,7 @@ le responsive sera activé manuellement.
     position: absolute;
     right: 10px;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
   .wpeo-wrap .table.affected-evaluator tbody tr {
     background: rgba(0, 0, 0, 0.1) !important;
@@ -2034,8 +2043,7 @@ le responsive sera activé manuellement.
     position: absolute;
     right: 10px;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
 
@@ -2058,7 +2066,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .flex-table .col {
-  display: -webkit-box;
   display: flex;
   min-height: 50px;
   flex-wrap: nowrap;
@@ -2138,7 +2145,6 @@ le responsive sera activé manuellement.
   line-height: 1;
   background: #ececec;
   box-shadow: none;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2151,10 +2157,8 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-flex: 0;
-          flex: 0 1 auto;
+  flex: 0 1 auto;
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment > * {
@@ -2182,7 +2186,6 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .flex-table > .table-body .comment-container .comment .delete i, .wpeo-wrap .flex-table > .table-body .comment-container .comment .add i {
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2238,7 +2241,6 @@ le responsive sera activé manuellement.
 
 .wpeo-wrap .flex-table > .table-body .canvas-eraser .fa-circle {
   color: rgba(0, 0, 0, 0.4);
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2433,7 +2435,6 @@ le responsive sera activé manuellement.
     display: none;
   }
   .wpeo-wrap .table.closed-causerie tr.item {
-    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
     padding: 0.4em !important;
@@ -2452,40 +2453,31 @@ le responsive sera activé manuellement.
     padding-bottom: 0.4em;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(1) {
-    -webkit-box-ordinal-group: 2;
-            order: 1;
+    order: 1;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(2) {
-    -webkit-box-ordinal-group: 5;
-            order: 4;
+    order: 4;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(3) {
-    -webkit-box-ordinal-group: 6;
-            order: 5;
+    order: 5;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(4) {
-    -webkit-box-ordinal-group: 4;
-            order: 3;
+    order: 3;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(5) {
-    -webkit-box-ordinal-group: 7;
-            order: 6;
+    order: 6;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(6) {
-    -webkit-box-ordinal-group: 8;
-            order: 7;
+    order: 7;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(7) {
-    -webkit-box-ordinal-group: 9;
-            order: 8;
+    order: 8;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(8) {
-    -webkit-box-ordinal-group: 10;
-            order: 9;
+    order: 9;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(9) {
-    -webkit-box-ordinal-group: 3;
-            order: 2;
+    order: 2;
   }
   .wpeo-wrap .table.closed-causerie tr.item > td:nth-of-type(1) {
     width: 30% !important;
@@ -2675,7 +2667,6 @@ le responsive sera activé manuellement.
   background: rgba(255, 255, 255, 0.6);
   padding: 30px;
   border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
 }
@@ -2683,7 +2674,6 @@ le responsive sera activé manuellement.
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before, .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
   position: relative;
   display: block;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2738,7 +2728,6 @@ le responsive sera activé manuellement.
   background: #fff;
   border-radius: 50%;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2769,8 +2758,7 @@ le responsive sera activé manuellement.
 .wpeo-wrap.wpdigi-installer .society-form .society-label {
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   left: 20px;
   color: rgba(0, 0, 0, 0.3);
   pointer-events: none;
@@ -2799,13 +2787,11 @@ le responsive sera activé manuellement.
 .wpeo-wrap .step .bar .loader {
   width: 0%;
   background: #47e58e;
-  -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
 }
 
 .wpeo-wrap .step .step-list {
   width: 100%;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -2819,7 +2805,6 @@ le responsive sera activé manuellement.
   height: 14px;
   background: #d6d6d6;
   border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -2832,7 +2817,6 @@ le responsive sera activé manuellement.
   max-width: 160px;
   font-weight: 600;
   padding-bottom: 10px;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   min-height: 45px;
 }
@@ -3511,28 +3495,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: scale3d(1.4, 1.4, 1.4);
-            transform: scale3d(1.4, 1.4, 1.4);
+    transform: scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-            transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2);
-            transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-            transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3542,28 +3520,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: scale3d(1.4, 1.4, 1.4);
-            transform: scale3d(1.4, 1.4, 1.4);
+    transform: scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-            transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2);
-            transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-            transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3578,28 +3550,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2);
-            transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
   }
   40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-            transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1);
-            transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
   }
   80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-            transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3609,28 +3575,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2);
-            transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
   }
   40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-            transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1);
-            transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
   }
   80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-            transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -3641,23 +3601,19 @@ le responsive sera activé manuellement.
 
 @-webkit-keyframes rotate {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
+    transform: rotate(90deg);
   }
 }
 
 @keyframes rotate {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
+    transform: rotate(90deg);
   }
 }
 
@@ -3668,31 +3624,25 @@ le responsive sera activé manuellement.
 
 @-webkit-keyframes downAndUp {
   0% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
+    transform: translateY(0px);
   }
   50% {
-    -webkit-transform: translateY(4px);
-            transform: translateY(4px);
+    transform: translateY(4px);
   }
   100% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
 
 @keyframes downAndUp {
   0% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
+    transform: translateY(0px);
   }
   50% {
-    -webkit-transform: translateY(4px);
-            transform: translateY(4px);
+    transform: translateY(4px);
   }
   100% {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
 
@@ -3703,23 +3653,19 @@ le responsive sera activé manuellement.
 
 @-webkit-keyframes spin {
   0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    -webkit-transform: translate(-50%, -50%) rotate(360deg);
-            transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 @keyframes spin {
   0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    -webkit-transform: translate(-50%, -50%) rotate(360deg);
-            transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -3729,28 +3675,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
-            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
-            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+    transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
-            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+    transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
-            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+    transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
-            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+    transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
-            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
 }
 
@@ -3760,28 +3700,22 @@ le responsive sera activé manuellement.
             animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
-            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
   20% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
-            transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
+    transform: translate(-50%, -50%) scale3d(1.4, 1.4, 1.4);
   }
   40% {
-    -webkit-transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
-            transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
+    transform: translate(-50%, -50%) scale3d(0.9, 0.9, 0.9);
   }
   60% {
-    -webkit-transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
-            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+    transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
   }
   80% {
-    -webkit-transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
-            transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
+    transform: translate(-50%, -50%) scale3d(0.97, 0.97, 0.97);
   }
   to {
-    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
-            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
   }
 }
 
@@ -3792,63 +3726,49 @@ le responsive sera activé manuellement.
 
 @-webkit-keyframes progressError {
   from {
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   15% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
   30% {
-    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
   45% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
   60% {
-    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
   75% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
   to {
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
 
 @keyframes progressError {
   from {
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   15% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-            transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate(-50%, -50%) translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
   30% {
-    -webkit-transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-            transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate(-50%, -50%) translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
   45% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-            transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate(-50%, -50%) translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
   60% {
-    -webkit-transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-            transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate(-50%, -50%) translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
   75% {
-    -webkit-transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-            transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate(-50%, -50%) translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
   to {
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -3866,17 +3786,16 @@ le responsive sera activé manuellement.
 }
 
 .wpeo-wrap .wpeo-button-pulse {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
   background: rgba(0, 0, 0, 0.1);
   display: block;
   text-align: center;
   border-radius: 4px;
   padding: 0 !important;
   position: relative;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -3929,6 +3848,15 @@ le responsive sera activé manuellement.
 
 .owl-carousel .owl-dots .owl-dot.active span {
   background: #3495f0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto !important;
+}
+
+.wpeo-form .wpeo-autocomplete .autocomplete-label {
+  padding: 0 1.5em;
 }
 
 /*--------------------------------------------------------------
@@ -4119,7 +4047,6 @@ le responsive sera activé manuellement.
 .toplevel_page_digirisk-dashboard-model .content-wrap,
 .admin_page_digirisk-dashboard-duer .content-wrap,
 .admin_page_digirisk-dashboard-model .content-wrap {
-  -webkit-transition: margin-left 0.2s ease-in;
   transition: margin-left 0.2s ease-in;
 }
 
@@ -4184,7 +4111,6 @@ le responsive sera activé manuellement.
   left: 0;
   top: 0;
   bottom: 0px;
-  -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
 }
 
@@ -4506,7 +4432,6 @@ le responsive sera activé manuellement.
 .toplevel_page_digirisk-dashboard-model .nav-wrap #logo,
 .admin_page_digirisk-dashboard-duer .nav-wrap #logo,
 .admin_page_digirisk-dashboard-model .nav-wrap #logo {
-  -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
   margin: auto;
   text-align: center;
@@ -4538,7 +4463,6 @@ le responsive sera activé manuellement.
 .toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu,
 .admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu,
 .admin_page_digirisk-dashboard-model .nav-wrap .nav-menu {
-  -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
   overflow: hidden;
 }
@@ -4569,10 +4493,8 @@ le responsive sera activé manuellement.
 .toplevel_page_digirisk-dashboard-model .nav-wrap .nav-menu .item,
 .admin_page_digirisk-dashboard-duer .nav-wrap .nav-menu .item,
 .admin_page_digirisk-dashboard-model .nav-wrap .nav-menu .item {
-  -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
   display: block;
-  -webkit-transition: background .1s ease,box-shadow .1s ease,color .1s ease;
   transition: background .1s ease,box-shadow .1s ease,color .1s ease;
   text-decoration: none;
 }
@@ -5197,7 +5119,6 @@ canvas {
   top: 8px;
   background: #d6d6d6;
   border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
@@ -5211,18 +5132,11 @@ canvas {
   height: 14px;
   background: #d6d6d6;
   border-radius: 50%;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .phone-bloc {
-  display: -webkit-box;
   display: flex;
-}
-
-.wpeo-wrap .wpeo-button-pulse {
-  height: 47px !important;
-  width: 47px !important;
 }
 
 .document-unique_page_digirisk-causerie .wpeo-wrap .wpeo-button-pulse {
@@ -5279,10 +5193,6 @@ canvas {
 .sorter-page table.treetable tbody tr td:hover {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
-}
-
-.digirisk_page_digirisk-permis-feu .wpeo-form .wpeo-autocomplete .autocomplete-label, .digirisk_page_digirisk-prevention .wpeo-form .wpeo-autocomplete .autocomplete-label {
-  padding: 0 !important;
 }
 
 .digirisk_page_digirisk-permis-feu .wpeo-autocomplete .autocomplete-search-input, .digirisk_page_digirisk-prevention .wpeo-autocomplete .autocomplete-search-input {

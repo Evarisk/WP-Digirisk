@@ -15,32 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<table class="table causerie causerie-step-4">
-	<thead>
-		<tr>
-			<th class="padding"><?php esc_html_e( 'Participant', 'digirisk' ); ?></th>
-			<th class="w50 padding"><?php esc_html_e( 'Signature', 'digirisk' ); ?></th>
-			<th class="w50"><?php esc_html_e( 'Actions', 'digirisk' ); ?></th>
-		</tr>
-	</thead>
+<div class="wpeo-table table-flex table-causerie causerie causerie-step-4">
+	<div class="table-row">
+		<div class="table-cell"><?php esc_html_e( 'Participant', 'digirisk' ); ?></div>
+		<div class="table-cell table-100"><?php esc_html_e( 'Signature', 'digirisk' ); ?></div>
+		<div class="table-cell table-50 table-end"><?php esc_html_e( 'Actions', 'digirisk' ); ?></div>
+	</div>
 
-	<tbody>
-		<?php
-		if ( ! empty( $final_causerie->data['participants'] ) ) :
-			foreach ( $final_causerie->data['participants'] as $participant ) :
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item', array(
-					'final_causerie' => $final_causerie,
-					'participant'    => $participant,
-				) );
-			endforeach;
-		endif;
+	<?php
+	if ( ! empty( $final_causerie->data['participants'] ) ) :
+		foreach ( $final_causerie->data['participants'] as $participant ) :
+			\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item', array(
+				'final_causerie' => $final_causerie,
+				'participant'    => $participant,
+			) );
+		endforeach;
+	endif;
 
-		\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item-new', array(
-			'final_causerie' => $final_causerie,
-		) );
-		?>
-	</tbody>
-</table>
+	\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/step-4-item-new', array(
+		'final_causerie' => $final_causerie,
+	) );
+	?>
+</div>
 
 <a href="<?php echo Causerie_Intervention_Class::g()->get_link( $final_causerie, 3 ); ?>" class="wpeo-button button-grey">
 	<i class="fas fa-arrow-left"></i>

@@ -15,27 +15,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<thead>
-	<tr>
-		<td class="w100 padding"><?php esc_html_e( 'Parent', 'digirisk' ); ?></td>
-		<td>&nbsp;</td>
-		<td class="w50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="fas fa-chart-line"></i></a></td>
-		<td class="w50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
-		<td class="w50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></td>
-		<td><?php esc_html_e( 'Comment', 'digirisk' ); ?></td>
-		<td>&nbsp;</td>
-	</tr>
-</thead>
+<div class="table-row table-header">
+	<div class="table-cell table-150"><?php esc_html_e( 'Parent', 'digirisk' ); ?>.</div>
+	<div class="table-cell table-50"><i class="far fa-image"></i></div>
+	<div class="table-cell table-50"><a href="<?php echo esc_attr( admin_url( 'admin.php?page=digirisk-handle-risk' . $url_ref_order ) ); ?>"><i class="fas fa-chart-line"></i></a></div>
+	<div class="table-cell table-50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
+	<div class="table-cell table-50"><?php esc_html_e( 'Risque', 'digirisk' ); ?></div>
+	<div class="table-cell"><?php esc_html_e( 'Comment', 'digirisk' ); ?></div>
+	<div class="table-cell table-50 table-end"></div>
+</div>
 
-<tbody>
-	<?php $i = 1; ?>
-	<?php if ( ! empty( $risk_list ) ) : ?>
-		<?php foreach ( $risk_list as $risk ) : ?>
-			<?php
-			\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
-				'risk' => $risk,
-			) );
-			?>
-		<?php endforeach; ?>
-	<?php endif; ?>
-</tbody>
+<?php $i = 1; ?>
+<?php if ( ! empty( $risk_list ) ) : ?>
+	<?php foreach ( $risk_list as $risk ) : ?>
+		<?php
+		\eoxia\View_Util::exec( 'digirisk', 'risk', 'page/item-edit', array(
+			'risk' => $risk,
+		) );
+		?>
+	<?php endforeach; ?>
+<?php endif; ?>

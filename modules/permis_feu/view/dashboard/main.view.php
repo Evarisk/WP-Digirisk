@@ -20,22 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php esc_html_e( sprintf( 'Liste des permis de feu réalisés (%1$d)', ! empty( $list_permis_feu ) ? count( $list_permis_feu ) : '0' ), 'digirisk' ); ?>
 	</h2>
 
-	<table class="table closed-permis-feu">
-		<thead>
-			<tr>
-				<td class="w50 padding"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Titre', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Début intervention', 'digirisk' ); ?></td>
-				<td class="w100 padding"><?php esc_html_e( 'Fin intervention', 'digirisk' ); ?></td>
-				<!-- <td class="padding"><?php esc_html_e( 'Formateur', 'digirisk' ); ?></td> -->
-				<td class="w50 padding"><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'P de prévention', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></td>
-				<td class="w50"></td>
-			</tr>
-		</thead>
+	<div class="wpeo-table table-flex closed-permis-feu">
+		<div class="table-row table-header">
+			<div class="table-cell table-50"><?php esc_html_e( 'Ref.', 'digirisk' ); ?></div>
+			<div class="table-cell"><?php esc_html_e( 'Titre', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Début intervention', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Fin intervention', 'digirisk' ); ?></div>
+			<!-- <div class=""><?php esc_html_e( 'Formateur', 'digirisk' ); ?></div> -->
+			<div class="table-cell table-50 "><?php esc_html_e( 'Maitre d\'oeuvre', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervenant (Exterieur)', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'P de prévention', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervenant(s)', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Intervention(s)', 'digirisk' ); ?></div>
+			<div class="table-cell table-150 table-end"></div>
+		</div>
 		<?php
 
 		if ( ! empty( $list_permis_feu ) ) :
@@ -46,11 +44,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		else :
 			?>
-			<tr>
-				<td colspan="9" style="text-align: center;"><?php esc_html_e( 'Aucun permis de feu réalisé pour le moment.', 'digirisk' ); ?></td>
-			</tr>
+			<div class="table-row">
+				<div class="table-cell" style="text-align: center;"><?php esc_html_e( 'Aucun permis de feu réalisé pour le moment.', 'digirisk' ); ?></div>
+			</div>
 			<?php
 		endif;
 		?>
-	</table>
+	</div>
 </div>

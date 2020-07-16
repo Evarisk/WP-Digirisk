@@ -45,12 +45,12 @@ window.eoxiaJS.digirisk.DUER.modalOpened = function( event, triggeredElement ) {
 	jQuery( this ).find( '.modal-content' ).html( '' );
 
 	if ( 'view' !== jQuery( triggeredElement ).data( 'type' ) ) {
-		var textareaContent = jQuery( triggeredElement ).closest( 'tr' ).find( '.textarea-content-' + jQuery( triggeredElement ).data( 'src' ) ).val();
+		var textareaContent = jQuery( triggeredElement ).closest( '.table-row' ).find( '.textarea-content-' + jQuery( triggeredElement ).data( 'src' ) ).val();
 		jQuery( this ).find( '.modal-content' ).html( '<textarea data-to="' + jQuery( triggeredElement ).data( 'src' ) + '" rows="8" style="width: 100%; display: inline-block;"></textarea>' );
 
 		jQuery( '.duer-modal' ).find( 'textarea' ).val( textareaContent );
 	} else {
-		var content = jQuery( triggeredElement ).closest( 'tr' ).find( '.text-content-' + jQuery( triggeredElement ).data( 'src' ) ).html();
+		var content = jQuery( triggeredElement ).closest( '.table-row' ).find( '.text-content-' + jQuery( triggeredElement ).data( 'src' ) ).html();
 		jQuery( this ).find( '.modal-content' ).html( '<p></p>' );
 
 		jQuery( '.duer-modal' ).find( 'p' ).html( content );
@@ -76,7 +76,7 @@ window.eoxiaJS.digirisk.DUER.viewInPopup = function( triggeredElement ) {
 window.eoxiaJS.digirisk.DUER.applyValueToTextarea = function( event ) {
 	var textarea =  jQuery( '.duer-modal' ).find( 'textarea' );
 
-	jQuery( '.table.duer tfoot .textarea-content-' + textarea.attr( 'data-to' ) ).val( textarea.val() );
+	jQuery( '.wpeo-table.table-duer .table-edit .textarea-content-' + textarea.attr( 'data-to' ) ).val( textarea.val() );
 };
 
 window.eoxiaJS.digirisk.DUER.generateDUERModalOpened = function( event, triggeredElement ) {
@@ -101,7 +101,7 @@ window.eoxiaJS.digirisk.DUER.generateDUER = function( triggeredElement, preData 
 	var data = {};
 	var i = 0;
 	var key;
-	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( 'tr' ) );
+	var listInput = window.eoxiaJS.arrayForm.getInput( triggeredElement.closest( '.table-row' ) );
 
 	for ( i = 0; i < listInput.length; i++ ) {
 		if ( listInput[i].name ) {

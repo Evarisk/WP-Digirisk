@@ -16,28 +16,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <div class="settings-users-content">
-	<table class="table users">
-		<thead>
-			<tr>
-				<td class="w50"></td>
-				<td class="w50 padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Email', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Rôle', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Tous', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'DU', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Accidents', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Causeries', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Prevention plan', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Permis feu', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Listing risque', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Organisation UT', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Utilisateurs', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Outils', 'digirisk' ); ?></td>
-				<td class="padding"><?php esc_html_e( 'Réglages', 'digirisk' ); ?></td>
-			</tr>
-		</thead>
+	<div class="wpeo-table table-flex users">
+		<div class="table-row table-header">
+			<div class="table-cell table-50"></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'ID', 'digirisk' ); ?></div>
+			<div class="table-cell table-75"><?php esc_html_e( 'Nom', 'digirisk' ); ?></div>
+			<div class="table-cell table-75"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></div>
+			<div class="table-cell table-200"><?php esc_html_e( 'Email', 'digirisk' ); ?></div>
+			<div class="table-cell table-100"><?php esc_html_e( 'Rôle', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Tous', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'DU', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Accidents', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Causeries', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Prevention plan', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Permis feu', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Listing risque', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Organisation UT', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Utilisateurs', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Outils', 'digirisk' ); ?></div>
+			<div class="table-cell table-50"><?php esc_html_e( 'Réglages', 'digirisk' ); ?></div>
+		</div>
 		<?php
 		if ( ! empty( $users ) ) :
 			foreach ( $users as $user ) :
@@ -48,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endforeach;
 		endif;
 		?>
-	</table>
+	</div>
 
 	<!-- Pagination -->
 	<?php if ( ! empty( $current_page ) && ! empty( $number_page ) ) : ?>

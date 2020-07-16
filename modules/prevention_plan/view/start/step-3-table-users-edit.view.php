@@ -53,14 +53,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	  </div>
    </div>
 
-   <div class="table-cell table-end">
-	   <div class="wpeo-button button-main button-bordered action-input"
+   <div class="table-cell table-50 table-end">
+	   <div class="wpeo-button button-green save button-square-50 action-input"
 		   data-key="<?php echo esc_attr( $key ); ?>"
 		   data-id="<?php echo esc_attr( $id ); ?>"
 		   data-parent="table-row"
 		   data-action="add_intervenant_to_prevention"
 		   data-nonce="<?php echo esc_attr( wp_create_nonce( 'add_intervenant_to_prevention' ) ); ?>">
-		   <i class="fas fa-save" style="color: white;"></i>
+		   <i class="fas fa-save"></i>
 	   </div>
    </div>
 </div>
