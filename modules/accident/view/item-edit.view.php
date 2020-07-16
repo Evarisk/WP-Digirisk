@@ -79,9 +79,45 @@ global $eo_search; ?>
 					'accident' => $accident,
 				) );
 				?>
-
-				<div class="investigation-group">
+				<div class="work-stopping-communication">
 					<div class="form-element">
+						<span class="form-label">
+							<?php esc_html_e( 'Add a Work Stopping Communication', 'digirisk' ); ?>
+						</span>
+						<?php if (! empty( $accident->data['work_stopping_communication'] )): ?>
+							<span class="content"> <?php echo "Lien vers votre déclaration d'arrêt de travail : ";?>
+								<div class="wpeo-button button-blue button-square-30 goto-work-stopping-communication-link" >
+									<a href="<?php echo ( $accident->data['work_stopping_communication'] );?>" target="_blank"><i class="button-icon fas fa-external-link-alt" style="color:#FFFFFF" ></i></a>
+								</div>
+								<div class="wpeo-button button-grey button-square-30 edit-work-stopping-communication-link" data-action="editAccidentWorkStoppingCommunication">
+										<i class="button-icon fas fa-pencil-alt" ></i>
+								</div>	
+							</span>
+						<?php else : ?>
+							<span class="content"> 
+								<?php echo "Renseignez un lien vers votre déclaration d'arrêt de travail : ";?>	
+							</span>
+						<?php endif ; ?>
+							
+						<label class="form-field-container">
+							<ul class="comment-container">
+								<li class="comment tooltip red">
+									<div class="work-stop-field">
+										<?php if ( empty( $accident->data['work_stopping_communication'] )): ?>
+											<input type="text" class="form-field" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+										<?php else : ?>
+											<input class="form-field work-stop hidden" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+										<?php endif ; ?>
+									</div>
+								</li>
+							</ul>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="investigation-group">
+				<div class="form-element">
 						<span class="form-label"><?php esc_html_e( 'Accident investigation', 'digirisk' ); ?></span>
 						<label class="form-field-container">
 							<div class="form-field-inline">
