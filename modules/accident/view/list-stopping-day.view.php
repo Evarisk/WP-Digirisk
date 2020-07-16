@@ -30,7 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->data['id'] ); ?>" />
 						<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( $stopping_day->data['date']['raw'] ); ?>" />
 						<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" value="<?php echo esc_attr( $stopping_day->data['content'] ); ?>" />
-						<?php echo do_shortcode( '[wpeo_upload id="' . $stopping_day->data['id'] . '" field_name="document" single="true" mime_type="application" title="' . $accident->data['unique_identifier'] . ' : ' . __( "jour d'arrêt", 'digirisk' ) . '" model_name="/digi/Accident_Travail_Stopping_Day_Class"]' ); ?>
 						<span class="delete action-delete wpeo-button button-square-30 button-grey button-rounded"
 									data-id="<?php echo esc_attr( $stopping_day->data['id'] ); ?>"
 									data-nonce="<?php echo esc_attr( wp_create_nonce( 'delete_stopping_day' ) ); ?>"
@@ -46,7 +45,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->data['id'] ); ?>" />
 				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
 				<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" />
-				<?php echo do_shortcode( '[wpeo_upload id="0" model_name="/digi/Accident_Travail_Stopping_Day_Class" field_name="document" mime_type="application" single="false"]' ); ?>
 				<span data-namespace="digirisk"
 					  data-module="accident"
 					  data-before-method="checkStoppingDayData"

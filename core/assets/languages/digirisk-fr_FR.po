@@ -2475,7 +2475,7 @@ msgstr ""
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:25
 #, fuzzy
 #| msgid "Risque"
-msgid "Risque IRNF"
+msgid "Risque INRS"
 msgstr "Risque"
 
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:26

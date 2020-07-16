@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="table-cell table-100"><?php esc_html_e( 'IdRPP', 'digirisk' ); ?></div> <!--  class="w50 " -->
 		<div class="table-cell table-150"><?php esc_html_e( 'Unité de travail', 'digirisk' ); ?></div> <!--  class="w50 " -->
 		<div class="table-cell"><?php esc_html_e( 'Description des actions réalisées', 'digirisk' ); ?></div>
-		<div class="table-cell table-50" ><?php esc_html_e( 'Risque IRNF', 'digirisk' ); ?></div>
+		<div class="table-cell table-50" ><?php esc_html_e( 'Risque INRS', 'digirisk' ); ?></div>
 		<div class="table-cell table-150"><?php esc_html_e( 'Matériels utilisés', 'digirisk' ); ?></div> <!--  class="w50" -->
-		<div class="table-cell table-150 tbale-end"></div>
+		<div class="table-cell table-150 table-end"></div>
 	</div>
 	<?php
 	if ( ! empty( $interventions ) ) :

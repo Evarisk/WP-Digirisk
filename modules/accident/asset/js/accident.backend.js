@@ -35,7 +35,7 @@ window.eoxiaJS.digirisk.accident.event = function() {
 	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced .fa-eraser', window.eoxiaJS.digirisk.accident.clearCanvas );
 	jQuery( document ).on( 'keyup', '.wpeo-table.table-accident .table-row-advanced.table-add input, textarea', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
 	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced.table-add .autocomplete-search-list li', window.eoxiaJS.digirisk.accident.callFunctionCheckCanAdd );
-	jQuery( document ).on( 'click', '.flex-table.accident .col.advanced .edit-work-stopping-communication-link', window.eoxiaJS.digirisk.accident.editAccidentWorkStoppingCommunication );
+	jQuery( document ).on( 'click', '.wpeo-table.table-accident .table-row-advanced .edit-work-stopping-communication-link', window.eoxiaJS.digirisk.accident.editAccidentWorkStoppingCommunication );
 
 	window.addEventListener( "resize", window.eoxiaJS.digirisk.accident.resizeCanvas );
 };

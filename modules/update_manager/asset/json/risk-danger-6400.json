@@ -1,5 +1,5 @@
 {
-	"accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
+	"accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-perturbation-du-mouvement",
 	"activite-physique": "risques-lies-a-la-charge-physique-de-travail",
 	"manutention-mecanique": "risques-lies-a-la-manutention-mecanique",
 	"circulation-deplacements": "risques-routiers-en-mission",
@@ -61,8 +61,8 @@
 	"divers-amiante": "risques-lies-a-lamiante",
 	"divers-electricite": "risques-lies-a-lelectricite",
 
-	"divers-accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
-	"divers-chute-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-pertubation-du-mouvement",
+	"divers-accident-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-perturbation-du-mouvement",
+	"divers-chute-de-plain-pied": "risques-de-trebuchement-heurt-ou-autre-perturbation-du-mouvement",
 
 	"divers-effrondrements-chute-dobjet": "risques-lies-aux-effondrements-et-aux-chutes-dobjets",
 	"divers-effondrements-chute-dobjet": "risques-lies-aux-effondrements-et-aux-chutes-dobjets",
