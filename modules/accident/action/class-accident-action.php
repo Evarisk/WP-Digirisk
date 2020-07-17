@@ -65,7 +65,7 @@ class Accident_Action {
 
 		Accident_Travail_Stopping_Day_Class::g()->save_stopping_day( $accident_stopping_days );
 
-		$accident->data['work_stopping_communication']	= $accident_work_stopping_communications;
+		//$accident->data['work_stopping_communication']	= $accident_work_stopping_communications;
 
 		if ( ! empty( $accident['have_investigation'] ) ) {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;

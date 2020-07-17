@@ -65,7 +65,6 @@ global $eo_search; ?>
 					</div>
 				</div>
 			</div>
-
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Detailed circumstances', 'digirisk' ); ?></span>
 				<label class="form-field-container">
@@ -91,27 +90,28 @@ global $eo_search; ?>
 								</div>
 								<div class="wpeo-button button-grey button-square-30 edit-work-stopping-communication-link" data-action="editAccidentWorkStoppingCommunication">
 										<i class="button-icon fas fa-pencil-alt" ></i>
-								</div>	
+								</div>
 							</span>
 						<?php else : ?>
-							<span class="content"> 
-								<?php echo "Renseignez un lien vers votre déclaration d'arrêt de travail : ";?>	
+							<span class="content">
+								<?php echo "Renseignez un lien vers votre déclaration d'arrêt de travail : ";?>
 							</span>
 						<?php endif ; ?>
-							
-						<label class="form-field-container">
 							<ul class="comment-container">
 								<li class="comment tooltip red">
-									<div class="work-stop-field">
+									<div class="work-stop-field form-element">
+										<label class="form-field-container">
 										<?php if ( empty( $accident->data['work_stopping_communication'] )): ?>
-											<input type="text" class="form-field" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+											<span class="form-field-icon-prev"><i class="fas fa-book-reader" ></i></span>
+											<input type="text" placeholder="https:// ..." class="form-field" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
 										<?php else : ?>
-											<input class="form-field work-stop hidden" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+											<span class="form-field-icon-prev work-stop hidden"><i class="fas fa-book-reader" ></i></span>
+											<input class="form-field work-stop hidden" placeholder="https:// ..." id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
 										<?php endif ; ?>
+										</label>
 									</div>
 								</li>
 							</ul>
-						</label>
 					</div>
 				</div>
 			</div>

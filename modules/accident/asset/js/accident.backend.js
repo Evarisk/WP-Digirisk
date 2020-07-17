@@ -59,6 +59,7 @@ window.eoxiaJS.digirisk.accident.editAccidentWorkStoppingCommunication = functio
 		jQuery( this ).closest('.work-stopping-communication').find( '.work-stop' ).removeClass( 'hidden' );
 		jQuery( this ).closest('.work-stopping-communication').find( '.work-stop' ).addClass( 'text' );
 		jQuery( this ).remove();
+		console.log("k");
 };
 /**
  * Clear le canvas.

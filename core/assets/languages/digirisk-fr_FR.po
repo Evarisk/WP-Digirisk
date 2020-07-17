@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Digirisk V2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-12 17:24+0100\n"
-"PO-Revision-Date: 2020-03-12 17:27+0100\n"
+"PO-Revision-Date: 2020-07-17 10:09+0200\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: .git\n"
@@ -52,9 +52,7 @@ msgid "Completed"
 msgstr ""
 
 #: core/assets/js/define-string.js.php:8
-msgid ""
-"Be careful, before doing this, make a backup of your database unless you "
-"believe in unicorns."
+msgid "Be careful, before doing this, make a backup of your database unless you believe in unicorns."
 msgstr ""
 
 #: core/class/class-digirisk.php:100
@@ -137,13 +135,11 @@ msgid "List of updates for version %s"
 msgstr "Dernière mise à jour le %s"
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:29
-msgid ""
-"Be careful, before using this data update manager, please back up your datas"
+msgid "Be careful, before using this data update manager, please back up your datas"
 msgstr ""
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:30
-msgid ""
-"You may loose data if you quit this page until the update is in progress"
+msgid "You may loose data if you quit this page until the update is in progress"
 msgstr ""
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:42
@@ -286,7 +282,7 @@ msgstr ""
 #: modules/accident/view/item-edit.view.php:35
 #: modules/accident/view/list-item.view.php:29
 msgid "Indicators"
-msgstr "Indiquateurs"
+msgstr "Indicateurs"
 
 #: modules/accident/view/item-edit.view.php:36
 #: modules/accident/view/list-item.view.php:30
@@ -330,7 +326,7 @@ msgstr ""
 
 #: modules/accident/view/item-edit.view.php:119
 msgid "Name and address of witnesses"
-msgstr ""
+msgstr "Noms et adresses des témoins"
 
 #: modules/accident/view/item-edit.view.php:126
 msgid "Name and address of third parties involved"
@@ -866,9 +862,7 @@ msgid "Participant"
 msgstr ""
 
 #: modules/causerie/view/intervention/step-4.view.php:52
-msgid ""
-"Veuillez ajouter des participants et les faire signer avant de cloturer la "
-"causerie"
+msgid "Veuillez ajouter des participants et les faire signer avant de cloturer la causerie"
 msgstr ""
 
 #: modules/causerie/view/intervention/step-4.view.php:54
@@ -970,10 +964,7 @@ msgid "OK"
 msgstr "OK"
 
 #: modules/corrective_task/view/need-task-manager.view.php:18
-msgid ""
-"Il faut installer l'extension <a href=\"https://wordpress.org/plugins/task-"
-"manager/\" target=\"_blank\">Task Manager</a> pour créer des actions "
-"correctives."
+msgid "Il faut installer l'extension <a href=\"https://wordpress.org/plugins/task-manager/\" target=\"_blank\">Task Manager</a> pour créer des actions correctives."
 msgstr ""
 
 #: modules/corrective_task/view/popup.view.php:22
@@ -1045,9 +1036,7 @@ msgid "Nom"
 msgstr "Non"
 
 #: modules/diffusion_informations/view/list.view.php:34
-msgid ""
-"Le formulaire ci-dessous permet la génération d'une diffusion d'information "
-"au format A3 et A4"
+msgid "Le formulaire ci-dessous permet la génération d'une diffusion d'information au format A3 et A4"
 msgstr ""
 
 #: modules/duer/action/class-duer-action.php:42
@@ -1259,9 +1248,7 @@ msgid "Exporter"
 msgstr "Exporter"
 
 #: modules/export_import/view/export-form.view.php:26
-msgid ""
-"Réalisez une exportation de vos données DigiRisk. Vous pouvez par la suite "
-"les importer dans une autre instance du logiciel."
+msgid "Réalisez une exportation de vos données DigiRisk. Vous pouvez par la suite les importer dans une autre instance du logiciel."
 msgstr ""
 
 #: modules/export_import/view/export-form.view.php:30
@@ -1294,9 +1281,7 @@ msgid "Importer"
 msgstr "Importer"
 
 #: modules/export_import/view/import-form.view.php:26
-msgid ""
-"Ne commencez pas de zéro! Importez un modèle prédéfini en cliquant sur le "
-"bouton ci-dessous."
+msgid "Ne commencez pas de zéro! Importez un modèle prédéfini en cliquant sur le bouton ci-dessous."
 msgstr ""
 
 #: modules/export_import/view/import-form.view.php:32
@@ -1388,9 +1373,7 @@ msgstr ""
 
 #: modules/informations/view/main.view.php:28
 #, php-format
-msgid ""
-"Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>"
-"%s</strong> jours"
+msgid "Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>%s</strong> jours"
 msgstr ""
 
 #: modules/informations/view/main.view.php:31
@@ -1669,9 +1652,7 @@ msgid "La méthode d'évaluation des risques simplifiée"
 msgstr ""
 
 #: modules/installer/view/bloc-5.view.php:22
-msgid ""
-"Cette méthode permet cependant de noter les résultats d’autres méthodes plus "
-"complexes comme"
+msgid "Cette méthode permet cependant de noter les résultats d’autres méthodes plus complexes comme"
 msgstr ""
 
 #: modules/installer/view/bloc-5.view.php:24
@@ -1788,8 +1769,7 @@ msgid "L’INRS met à votre disposition 2 guides pour la signalisation :"
 msgstr ""
 
 #: modules/installer/view/bloc-8.view.php:23
-msgid ""
-"ED 777 : Signalisation de santé et de sécurité au travail. Réglementation"
+msgid "ED 777 : Signalisation de santé et de sécurité au travail. Réglementation"
 msgstr ""
 
 #: modules/installer/view/bloc-8.view.php:24
@@ -1809,9 +1789,7 @@ msgid "DigiRisk génère aussi l'affichage légal !"
 msgstr ""
 
 #: modules/installer/view/bloc-9.view.php:22
-msgid ""
-"Remplissez les champs, téléchargez votre affichage légal gratuitement au "
-"format libreoffice A3 ou A4"
+msgid "Remplissez les champs, téléchargez votre affichage légal gratuitement au format libreoffice A3 ou A4"
 msgstr ""
 
 #: modules/installer/view/bloc-9.view.php:25
@@ -1856,9 +1834,7 @@ msgid "Digirisk est prêt"
 msgstr "Digirisk : import"
 
 #: modules/installer/view/installer.view.php:48
-msgid ""
-"Bienvenue sur DigiRisk. Avant de commencer l'installation, veuillez entrer "
-"le nom de votre société."
+msgid "Bienvenue sur DigiRisk. Avant de commencer l'installation, veuillez entrer le nom de votre société."
 msgstr ""
 
 #: modules/installer/view/installer.view.php:51
@@ -2473,10 +2449,8 @@ msgid "Description des actions réalisées"
 msgstr ""
 
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:25
-#, fuzzy
-#| msgid "Risque"
 msgid "Risque INRS"
-msgstr "Risque"
+msgstr ""
 
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:26
 msgid "Matériels utilisés"
@@ -2653,10 +2627,8 @@ msgid "Description des actions"
 msgstr "Description"
 
 #: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:25
-#, fuzzy
-#| msgid "Risque"
 msgid "Risque INRS"
-msgstr "Risque"
+msgstr ""
 
 #: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:26
 #, fuzzy
@@ -2851,16 +2823,11 @@ msgid " Aucune modification n'a était apporté"
 msgstr ""
 
 #: modules/setting/class/class-setting-class.php:191
-msgid ""
-"Par précaution veuillez être sur de posséder les identifiants FTP de votre "
-"site. Cette interface modifie votre fichier htaccess."
+msgid "Par précaution veuillez être sur de posséder les identifiants FTP de votre site. Cette interface modifie votre fichier htaccess."
 msgstr ""
 
 #: modules/setting/class/class-setting-class.php:208
-msgid ""
-"Un htpasswd est déjà présent sur votre instance DigiRisk. Cette interface "
-"vous permet de modifier l'identifiant et le mot de passe de celui-ci. Êtes "
-"vous sur de vouloir faire celà ?"
+msgid "Un htpasswd est déjà présent sur votre instance DigiRisk. Cette interface vous permet de modifier l'identifiant et le mot de passe de celui-ci. Êtes vous sur de vouloir faire celà ?"
 msgstr ""
 
 #: modules/setting/view/accronym/item-prefix.view.php:28
@@ -2881,10 +2848,7 @@ msgid "Accéder"
 msgstr ""
 
 #: modules/setting/view/capability/has-cap.view.php:20
-msgid ""
-"La capacité \"manage_digirisk\" est appliqué sur tous les utilisateurs dont "
-"le rôle est abonnés. Vous devez supprimer la capacité \"manage_digirisk\" "
-"sur celui-ci pour pouvoir gérer manuellement par utilisateur ce droit."
+msgid "La capacité \"manage_digirisk\" est appliqué sur tous les utilisateurs dont le rôle est abonnés. Vous devez supprimer la capacité \"manage_digirisk\" sur celui-ci pour pouvoir gérer manuellement par utilisateur ce droit."
 msgstr ""
 
 #: modules/setting/view/capability/list.view.php:27
@@ -3121,9 +3085,7 @@ msgstr ""
 #: modules/society/view/dashboard/bloc-information-society-more.view.php:40
 #: modules/society/view/dashboard/bloc-information-staff-representatives.view.php:40
 #: modules/society/view/dashboard/bloc-information-working-hours.view.php:40
-msgid ""
-"Données complémentaires à la société, possiblement utilisé dans la "
-"réalisation de Causerie/ Plan de prévention"
+msgid "Données complémentaires à la société, possiblement utilisé dans la réalisation de Causerie/ Plan de prévention"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-emergency-service.view.php:37
@@ -3131,8 +3093,7 @@ msgid "Service d'urgence et Consigne de Sécurité"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-others-informations.view.php:38
-msgid ""
-"Convention Collective - Reglement Interieur - DUER - Accord de participation"
+msgid "Convention Collective - Reglement Interieur - DUER - Accord de participation"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-society-more.view.php:37
@@ -3144,9 +3105,7 @@ msgid "Information primaire de la société"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-society.view.php:41
-msgid ""
-"Données primaires de la société, indispensable pour la réalisation de "
-"Causerie/ Plan de prévention"
+msgid "Données primaires de la société, indispensable pour la réalisation de Causerie/ Plan de prévention"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-staff-representatives.view.php:37
@@ -3282,23 +3241,15 @@ msgstr "Digirisk"
 
 #: modules/transfer_data/action/transfert.action.php:53
 #: modules/transfer_data/class/TransferData_components.class.php:634
-msgid ""
-"A required parameter is missing, please check your request and try again"
-msgstr ""
-"Un paramètres requis est manquant, veuillez vérifier votre requêtes et "
-"réessayez"
+msgid "A required parameter is missing, please check your request and try again"
+msgstr "Un paramètres requis est manquant, veuillez vérifier votre requêtes et réessayez"
 
 #: modules/transfer_data/action/transfert.action.php:73
-msgid ""
-"Import will automatically continue while all elements won't be transfered "
-"into database"
+msgid "Import will automatically continue while all elements won't be transfered into database"
 msgstr ""
 
 #: modules/transfer_data/action/transfert.action.php:113
-msgid ""
-"All elements have been transfered to new storage way into wordpress "
-"database. Please wait a minute we are redirecting you to digirisk main "
-"interface"
+msgid "All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface"
 msgstr ""
 
 #: modules/transfer_data/action/transfert.action.php:238
@@ -3339,9 +3290,7 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:297
 #, php-format
-msgid ""
-"%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l'élément "
-"%4$s "
+msgid "%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l'élément %4$s "
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:340
@@ -3350,16 +3299,12 @@ msgstr "Modèle document"
 
 #: modules/transfer_data/class/TransferData_common.class.php:343
 #, php-format
-msgid ""
-"%s could not being transfered to wordpress element. Filename: %s. Wordpress "
-"element: %d. Evarisk old element: %s"
+msgid "%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:347
 #, php-format
-msgid ""
-"%1$s could not being transfered to wordpress element because it is not a "
-"file. Path: %2$s."
+msgid "%1$s could not being transfered to wordpress element because it is not a file. Path: %2$s."
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:378
@@ -3384,22 +3329,17 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:132
 #, php-format
-msgid ""
-"Error transferring danger category %s from evarisk to taxonomy. Error: %s"
+msgid "Error transferring danger category %s from evarisk to taxonomy. Error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:216
 #, php-format
-msgid ""
-"Evaluation method variable %s transfered from evarisk on taxonomy having id. "
-"%d"
+msgid "Evaluation method variable %s transfered from evarisk on taxonomy having id. %d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:222
 #, php-format
-msgid ""
-"Error transferring evaluation method variable %s from evarisk to taxonomy. "
-"error: %s"
+msgid "Error transferring evaluation method variable %s from evarisk to taxonomy. error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:327
@@ -3409,14 +3349,12 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:334
 #, php-format
-msgid ""
-"Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s"
+msgid "Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:411
 #, php-format
-msgid ""
-"Recommendation category %s transfered from evarisk on taxonomy having id. %d"
+msgid "Recommendation category %s transfered from evarisk on taxonomy having id. %d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:453
@@ -3426,23 +3364,17 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:461
 #, php-format
-msgid ""
-"Error while transferring recommendation %s from Evarisk to taxonomy. Error: "
-"%s"
+msgid "Error while transferring recommendation %s from Evarisk to taxonomy. Error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:467
 #, php-format
-msgid ""
-"Error transferring recommendation category from evarisk to taxonomy. Error: "
-"%s"
+msgid "Error transferring recommendation category from evarisk to taxonomy. Error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:514
 #, php-format
-msgid ""
-"Error transferring model named %s from evarisk to wordpress media under id. "
-"%d"
+msgid "Error transferring model named %s from evarisk to wordpress media under id. %d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:728
@@ -3453,9 +3385,7 @@ msgstr ""
 #, fuzzy
 #| msgid "An error occured while getting element for association"
 msgid "An error occured while transfering the element to wordpress"
-msgstr ""
-"Une erreur est survenue lors de la récupération de l'élément pour "
-"l'assocation"
+msgstr "Une erreur est survenue lors de la récupération de l'élément pour l'assocation"
 
 #: modules/transfer_data/class/TransferData_groupement.class.php:183
 #, php-format
@@ -3622,56 +3552,32 @@ msgid "Gravite"
 msgstr "Gravite"
 
 #: modules/transfer_data/include/config.php:199
-msgid ""
-"0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 "
-"jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;"
-"versible\\n4 : Menace sur la vie"
-msgstr ""
-"0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 "
-"jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;"
-"versible\\n4 : Menace sur la vie"
+msgid "0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;versible\\n4 : Menace sur la vie"
+msgstr "0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;versible\\n4 : Menace sur la vie"
 
 #: modules/transfer_data/include/config.php:200
 msgid "Exposition"
 msgstr "Exposition"
 
 #: modules/transfer_data/include/config.php:200
-msgid ""
-"0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois "
-"par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 "
-"fois par jour"
-msgstr ""
-"0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois "
-"par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 "
-"fois par jour"
+msgid "0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 fois par jour"
+msgstr "0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 fois par jour"
 
 #: modules/transfer_data/include/config.php:201
 msgid "Occurence"
 msgstr "Occurence"
 
 #: modules/transfer_data/include/config.php:201
-msgid ""
-"1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des "
-"circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : "
-"Se produit tous les mois"
-msgstr ""
-"1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des "
-"circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : "
-"Se produit tous les mois"
+msgid "1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : Se produit tous les mois"
+msgstr "1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : Se produit tous les mois"
 
 #: modules/transfer_data/include/config.php:202
 msgid "Formation"
 msgstr "Formation"
 
 #: modules/transfer_data/include/config.php:202
-msgid ""
-"1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle "
-"obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas "
-"de formation ni de pr&eacute;vention"
-msgstr ""
-"1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle "
-"obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas "
-"de formation ni de pr&eacute;vention"
+msgid "1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas de formation ni de pr&eacute;vention"
+msgstr "1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas de formation ni de pr&eacute;vention"
 
 #: modules/transfer_data/include/config.php:203
 msgid "Protection"
@@ -3977,10 +3883,7 @@ msgid "Transfert des données d'Evarisk 5 vers DigiRisk 6"
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:6
-msgid ""
-"La version 6 et ultérieur de DigiRisk vont utiliser les fonctionnalités de "
-"WordPress de manière plus avancée. Pour cela nous allons effectuer le "
-"transfert des données de votre version 5.X.X.X."
+msgid "La version 6 et ultérieur de DigiRisk vont utiliser les fonctionnalités de WordPress de manière plus avancée. Pour cela nous allons effectuer le transfert des données de votre version 5.X.X.X."
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:8
@@ -3988,9 +3891,7 @@ msgid "Note importante : "
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:8
-msgid ""
-"Veillez a bien sauvegarder vos données avant de lancer le transfert des "
-"données"
+msgid "Veillez a bien sauvegarder vos données avant de lancer le transfert des données"
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:29
@@ -4033,9 +3934,7 @@ msgstr ""
 
 #: modules/update_manager/action/class-update-manager-action.php:83
 #, php-format
-msgid ""
-"Vous allez être redirigé vers DigiRisk.. %1$sCliquez ici si rien ne se passe."
-"%2$s"
+msgid "Vous allez être redirigé vers DigiRisk.. %1$sCliquez ici si rien ne se passe.%2$s"
 msgstr ""
 
 #: modules/update_manager/data/update-62100-data.php:22
@@ -4386,6 +4285,7 @@ msgstr ""
 #~| msgid ""
 #~| "Attention, avant cette opération, il est recommendé de faire une "
 #~| "sauvegarde de votre base de donnée."
+
 #~ msgid ""
 #~ "Attention, avant cette opération, il vous est recommandé de faire une "
 #~ "sauvegarde de votre base de donnée."
@@ -4395,21 +4295,25 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "No dangers found."
+
 #~ msgid "No services found."
 #~ msgstr "Aucun danger trouvé"
 
 #, fuzzy
 #~| msgid "Morning"
+
 #~ msgid "Warnings"
 #~ msgstr "Matin"
 
 #, fuzzy
 #~| msgid "View risk"
+
 #~ msgid "View"
 #~ msgstr "Voir le risque"
 
 #, fuzzy
 #~| msgid "Add New Danger"
+
 #~ msgid "Add New"
 #~ msgstr "Ajouter un nouveau danger"
 
@@ -4418,6 +4322,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Associate"
+
 #~ msgid "Dissociate"
 #~ msgstr "Associer"
 
@@ -4456,11 +4361,13 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Cotation du risque"
+
 #~ msgid "Choisir un risque"
 #~ msgstr "Cotation du risque"
 
 #, fuzzy
 #~| msgid "An error occured while getting element to generate sheet for."
+
 #~ msgid "An error occured while trying to generate the document"
 #~ msgstr ""
 #~ "Une erreur est survenue lors de la récupération de l'élément pour la "
@@ -4534,6 +4441,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
+
 #~ msgid "Édition de la méthode d'évaluation Evarisk"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4566,11 +4474,13 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Confirm delete ?"
+
 #~ msgid "Confirmer"
 #~ msgstr "Confirmer la suppression ?"
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
+
 #~ msgid "Installation des méthodes d'évaluation effectués"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4579,6 +4489,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Organisationnelles"
+
 #~ msgid "Organisation des établissements"
 #~ msgstr "Organisationnelles"
 
@@ -4644,6 +4555,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Professional qualification"
+
 #~ msgid "Les signalisation"
 #~ msgstr "Qualification professionnelle"
 
@@ -4652,11 +4564,13 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Digirisk risk"
+
 #~ msgid "Digirisk settings"
 #~ msgstr "Risques pour Digirisk"
 
 #, fuzzy
 #~| msgid "Fiches de groupement"
+
 #~ msgid "Fiche de groupement"
 #~ msgstr "Fiches de groupement"
 
@@ -4676,6 +4590,7 @@ msgstr ""
 #~| msgid ""
 #~| "Attention, avant cette opération, il est recommendé de faire une "
 #~| "sauvegarde de votre base de donnée."
+
 #~ msgid ""
 #~ "Attention, veuillez faire une sauvegarde de votre base de donnée avant "
 #~ "toutes actions."
@@ -4685,6 +4600,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
+
 #~ msgid "Méthode d'évaluation d'Evarisk"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4700,6 +4616,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Popular recommendations"
+
 #~ msgid "Problèmes de recommendation"
 #~ msgstr "Préconisations populaires"
 
@@ -4707,6 +4624,7 @@ msgstr ""
 #~| msgid ""
 #~| "Cliquer sur ce bouton pour que recompiler les risques, si vous "
 #~| "rencontrez des problèmes d'affichage"
+
 #~ msgid "Cliquer sur ce bouton pour résoudre les problèmes de recommendation"
 #~ msgstr ""
 #~ "Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez "
@@ -4714,6 +4632,7 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Circulation, d&eacute;placements"
+
 #~ msgid "Migration de document"
 #~ msgstr "Circulation, d&eacute;placements"
 
@@ -4735,16 +4654,19 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Digirisk installer"
+
 #~ msgid "DigiRisk mise à jour"
 #~ msgstr "Installation de Digirisk"
 
 #, fuzzy
 #~| msgid "Work unit"
+
 #~ msgid "Nom unité"
 #~ msgstr "Unité de travail"
 
 #, fuzzy
 #~| msgid "Groupements"
+
 #~ msgid "Groupement lié"
 #~ msgstr "Groupements"
 
