@@ -169,7 +169,7 @@ class Digirisk_Action {
 
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_container( 'DigiRisk', 'DigiRisk', 'read', 'digirisk' );
+			CMH::register_container( 'DigiRisk', 'DigiRisk', 'read', 'digirisk', '', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon2.png', 21 );
 			CMH::add_logo( 'digirisk', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk' ) );
 			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 			CMH::register_others_menu( 'others', 'digirisk-dashboard', __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', 'bottom' );
