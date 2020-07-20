@@ -20,8 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div><?php esc_html_e( 'Total des jours d\'arrêt:', 'digirisk' ); ?>&nbsp;<strong><?php echo esc_html( $accident->data['compiled_stopping_days'] ); ?></strong></div>
 	<label class="form-field-container">
 		<ul class="comment-container list-stopping-day">
+			<?php $i = 0 ?>
+			<li class="new comment wpeo-tooltip-event" data-tooltip-persist="true" data-color="red" aria-label="<?php esc_attr_e( 'Le champ doit être au format numérique', 'digirisk-epi' ); ?>">
+				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->data['id'] ); ?>" />
+				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
+				<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" />
+				<span data-namespace="digirisk"
+					  data-module="accident"
+					  data-before-method="checkStoppingDayData"
+					  data-parent="comment"
+					  data-accident-id="<?php echo esc_attr( $accident->data['id'] ); ?>"
+					  data-action="save_stopping_day"
+					  class="add action-input wpeo-button button-square-30 button-main button-rounded"><i class="icon fas fa-plus"></i></span>
+			</li>
 			<?php
-			$i = 0;
 			if ( ! empty( $accident->data['stopping_days'] ) ) :
 				foreach ( $accident->data['stopping_days'] as $i => $stopping_day ) :
 					?>
@@ -41,18 +53,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			endif;
 			$i++;
 			?>
-			<li class="new comment wpeo-tooltip-event" data-tooltip-persist="true" data-color="red" aria-label="<?php esc_attr_e( 'Le champ doit être au format numérique', 'digirisk-epi' ); ?>">
-				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][parent_id]" value="<?php echo esc_attr( $accident->data['id'] ); ?>" />
-				<input type="hidden" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][date]" value="<?php echo esc_attr( current_time( 'mysql' ) ); ?>" />
-				<input class="is-number" type="text" name="accident_stopping_day[<?php echo esc_attr( $i ); ?>][content]" />
-				<span data-namespace="digirisk"
-					  data-module="accident"
-					  data-before-method="checkStoppingDayData"
-					  data-parent="comment"
-					  data-accident-id="<?php echo esc_attr( $accident->data['id'] ); ?>"
-					  data-action="save_stopping_day"
-					  class="add action-input wpeo-button button-square-30 button-main button-rounded"><i class="icon fas fa-plus"></i></span>
-			</li>
 		</ul>
 	</label>
 </div>

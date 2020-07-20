@@ -84,10 +84,7 @@ class Comment_Action {
 		$type         = ! empty( $_POST['type'] ) ? $_POST['type'] : '';
 		$namespace    = ! empty( $_POST['namespace'] ) ? $_POST['namespace'] : '';
 		$model_name   = '\\' . $namespace . '\\' . $type . '_class';
-		echo '<pre>';
-		print_r($model_name);
-		echo '</pre>';
-		exit;
+
 		if ( empty( $id ) ) {
 			wp_send_json_error();
 		}
