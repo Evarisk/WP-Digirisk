@@ -35,7 +35,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Corps -->
 		<div class="modal-content">
-			<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 			<input type="hidden" name="signature_data" />
 			<input type="hidden" class="url" value="" />
 			<canvas></canvas>

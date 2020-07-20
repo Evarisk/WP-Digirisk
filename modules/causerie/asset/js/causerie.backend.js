@@ -115,8 +115,8 @@ window.eoxiaJS.digirisk.causerie.updateModalTitle = function( event, data ) {
 	if ( data && data.element ) {
 		var request_data = {};
 		request_data.action  = 'causerie_save_former';
-		request_data.id      = jQuery( this ).closest( 'tr' ).find( 'input[name="causerie_id"]' ).val();
-		request_data.user_id = jQuery( this ).closest( 'tr' ).find( 'input[name="former_id"]' ).val();
+		request_data.id      = jQuery( this ).closest( '.table-row' ).find( 'input[name="causerie_id"]' ).val();
+		request_data.user_id = jQuery( this ).closest( '.table-row' ).find( 'input[name="former_id"]' ).val();
 
 		window.eoxiaJS.loader.display( jQuery( this ) );
 		window.eoxiaJS.request.send( jQuery( this ), request_data, function( triggeredElement, response ) {
@@ -342,7 +342,7 @@ window.eoxiaJS.digirisk.causerie.checkParticipantsSignature = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.savedSignature = function( element, response ) {
-	element.closest( 'tr' ).replaceWith( response.data.view );
+	element.closest( '.table-row' ).replaceWith( response.data.view );
 
 	window.eoxiaJS.digirisk.causerie.checkParticipantsSignature();
 
@@ -365,7 +365,7 @@ window.eoxiaJS.digirisk.causerie.savedSignature = function( element, response ) 
  * @return {void}
  */
 window.eoxiaJS.digirisk.causerie.savedFormerSignature = function( element, response ) {
-	element.closest( 'tr' ).find( 'td.signature' ).replaceWith( response.data.view );
+	element.closest( '.table-row' ).find( '.signature' ).replaceWith( response.data.view );
 
 	// window.eoxiaJS.digirisk.causerie.refresh();
 };
