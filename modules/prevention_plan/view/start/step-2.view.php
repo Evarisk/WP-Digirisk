@@ -159,9 +159,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<div style="height : 200px">
-
-</div>
 <style>
 .button-prevention-title{
 	padding-top: 2px;
