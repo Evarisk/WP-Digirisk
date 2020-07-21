@@ -145,12 +145,6 @@ global $eo_search;
 
 </div>
 
-
-
-<div style="height : 200px">
-
-</div>
-
 <style>
 .button-permis-feu-title{
 	padding-top: 2px;
