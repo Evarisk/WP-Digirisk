@@ -67,6 +67,7 @@ class Digirisk_Action {
 	public function callback_before_admin_enqueue_scripts_js() {
 		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'jquery-form' );
+		//wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
@@ -83,6 +84,7 @@ class Digirisk_Action {
 
 	 */
 	public function callback_admin_enqueue_scripts_js() {
+		//wp_enqueue_script( 'digi-datetimepicker-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/jquery.datetimepicker.full.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'signature-pad', PLUGIN_DIGIRISK_URL . 'core/assets/js/signature-pad.min.js', array( 'jquery' ), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-autosize-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/autosize.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
 		wp_enqueue_script( 'digi-script', PLUGIN_DIGIRISK_URL . 'core/assets/js/backend.min.js', array(), \eoxia\Config_Util::$init['digirisk']->version, false );
@@ -113,6 +115,7 @@ class Digirisk_Action {
 	 */
 	public function callback_admin_enqueue_scripts_css() {
 		wp_enqueue_style( 'digi-style', PLUGIN_DIGIRISK_URL . 'core/assets/css/style.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
+		//wp_enqueue_style( 'digi-datepicker', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.datetimepicker.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-treetable', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.treetable.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-treetable-default', PLUGIN_DIGIRISK_URL . 'core/assets/css/jquery.treetable.theme.default.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
 		wp_enqueue_style( 'digi-owl-carousel', PLUGIN_DIGIRISK_URL . 'core/assets/css/owl.carousel.min.css', array(), \eoxia\Config_Util::$init['digirisk']->version );
@@ -169,7 +172,7 @@ class Digirisk_Action {
 
 
 		if ( ! empty( $digirisk_core['installed'] ) ) {
-			CMH::register_container( 'DigiRisk', 'DigiRisk', 'read', 'digirisk', '', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon2.png', 21 );
+			CMH::register_container( 'DigiRisk', 'DigiRisk', 'read', 'digirisk', '', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon2.png', null );
 			CMH::add_logo( 'digirisk', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk' ) );
 			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 			CMH::register_others_menu( 'others', 'digirisk-dashboard', __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', 'bottom' );
