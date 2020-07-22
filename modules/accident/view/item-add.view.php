@@ -32,7 +32,7 @@ global $eo_search; ?>
 			<?php $eo_search->display( 'accident_post' ); ?>
 		</div>
 		<div class="table-cell padding tooltip red" aria-label="<?php esc_html_e( 'This field is required', 'digirisk' ); ?>">
-			<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+			<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="digi" type="accident_comment" display="edit" display_date="false" display_user="false"]' ); ?>
 		</div>
 		<div class="table-cell table-75"></div>
 		<div class="table-cell table-150 table-end" data-title="action">

@@ -62,7 +62,7 @@ $user = User_Class::g()->get( array(
 					data-id="<?php echo esc_attr( $comment->data['id'] ); ?>"
 					data-nonce="<?php echo esc_attr( wp_create_nonce( 'ajax_delete_comment' ) ); ?>"
 					data-type="<?php echo esc_attr( $type ); ?>"
-					data-namespace="eoxia"
+					data-namespace="digi"
 					data-action="delete_comment"
 					data-message-delete="<?php echo esc_attr_e( 'Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?', 'digirisk' ); ?>"><i class="button-icon fas fa-times"></i></span>
 	<?php else : ?>

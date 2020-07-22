@@ -32,6 +32,7 @@ class Accident_Action {
 
 		add_action( 'wp_ajax_edit_accident', array( $this, 'ajax_edit_accident' ) );
 		add_action( 'wp_ajax_load_accident', array( $this, 'ajax_load_accident' ) );
+		add_action( 'wp_ajax_delete_comment', array( $this, 'callback_delete_comment' ) );
 		add_action( 'wp_ajax_delete_accident', array( $this, 'ajax_delete_accident' ) );
 	}
 
@@ -60,12 +61,14 @@ class Accident_Action {
 		$accident_investigation                    = ! empty( $_POST['accident_investigation'] ) ? $_POST['accident_investigation'] : 0;
 		$accident_stopping_days                    = ! empty( $_POST['accident_stopping_day'] ) ? (array) $_POST['accident_stopping_day'] : array();
 		$accident_work_stopping_communications     = ! empty( $_POST['work_stopping_communication'] ) ? $_POST['work_stopping_communication'] : '';
+		$from_preset                               = ! empty( $_POST['from_preset'] ) ? (int) $_POST['from_preset'] : 0;
+		$comments                                  = ! empty( $_POST['list_comment'] ) ? (array) $_POST['list_comment'] : array();
 
 		$add = isset( $_POST['add'] ) ? true : false;
 
 		Accident_Travail_Stopping_Day_Class::g()->save_stopping_day( $accident_stopping_days );
 
-		$accident->data['work_stopping_communication']	= $accident_work_stopping_communications;
+		$accident['work_stopping_communication']   = $accident_work_stopping_communications;
 
 		if ( ! empty( $accident['have_investigation'] ) ) {
 			$accident['have_investigation'] = ( 'true' == $accident['have_investigation'] ) ? true : false;
@@ -111,20 +114,19 @@ class Accident_Action {
 		}
 
 		// Associations des commentaires.
-		if ( ! empty( $_POST['list_comment'] ) ) {
-			foreach ( $_POST['list_comment'] as $comment ) {
-				if ( ! empty( $comment['content'] ) ) {
-					$comment['id']        = (int) $comment['id'];
-					$comment['parent_id'] = (int) $comment['parent_id'];
-					$comment['author_id'] = (int) $comment['author_id'];
-					$comment['post_id']   = (int) $accident->data['id'];
-					\eoxia\Comment_Class::g()->update( $comment );
+		if ( $from_preset ) {
+			if ( ! empty( $comments ) ) {
+				foreach ( $comments as &$comment ) {
+					$comment['id']      = 0;
+					$comment['post_id'] = $accident->data['id'];
 				}
 			}
 		}
 
 		$accident = Accident_Class::g()->update( $accident->data );
 
+		Accident_Comment_Class::g()->save( $accident, $comments );
+		
 		if ( ! $add ) {
 			do_action( 'generate_accident_benin', $accident->data['id'] );
 		}
@@ -239,6 +241,23 @@ class Accident_Action {
 			'callback_success' => 'deletedAccidentSuccess',
 		) );
 	}
+
+
+public function callback_delete_comment() {
+	check_ajax_referer( 'ajax_delete_accident_comment' );
+
+	$id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; // WPCS: input var ok.
+
+	if ( empty( $id ) ) {
+		wp_send_json_error();
+	}
+
+	$accident_comment                 = Accident_Comment_Class::g()->get( array( 'id' => $id ), true );
+	$accident_comment->data['status'] = 'trash';
+	Accident_Comment_Class::g()->update( $accident_comment->data );
+
+	wp_send_json_success();
 }
 
+}
 new Accident_Action();
