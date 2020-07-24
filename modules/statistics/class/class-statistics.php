@@ -88,9 +88,9 @@ class Statistics_Class extends Singleton_Util {
 			'numberposts' => -1,
 			'post_status' => array( 'publish', 'inherit' ),
 		) );
-		
+
 		$societies[ $parent_id ] = $current_societies;
-		
+
 		if ( ! empty( $current_societies ) ) {
 			foreach ( $current_societies as $society ) {
 				$societies = $this->get_recursive_societies( $society->ID, $societies );
@@ -188,8 +188,8 @@ class Statistics_Class extends Singleton_Util {
 							}
 							$societies_array_filter[$society['post_parent']][] = $society;
 						}
-					}						
-				}	
+					}
+				}
 			}
 			return $societies_array_filter;
 		}
@@ -205,7 +205,7 @@ class Statistics_Class extends Singleton_Util {
 		$filepath     = $this->statistics_directory . $current_time . '_statistics.csv';
 		$filename     = $current_time . '_statistics.csv';
 		$url_to_file  = $upload_dir['baseurl'] . '/digirisk/statistics/' . $current_time . '_statistics.csv';
-		
+
 		$societies = $this->get_recursive_risks( $society_id );
 		$data_header = array (
 			 'Name',
@@ -214,7 +214,7 @@ class Statistics_Class extends Singleton_Util {
 			'Red Risk',
 			'Black Risk',
 		);
-	
+
 		$data_csv = array();
 		$risk_level       = array();
 
@@ -233,16 +233,16 @@ class Statistics_Class extends Singleton_Util {
 						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
 						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
 						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
-											
+
 						$data_csv[] = $data;
 					}
-				
+
 				}
 			}
 		}
 		else {
 			$societies = $this->get_recursive_risks( $element->post_parent );
-		
+
 			foreach ( $societies as $post_id => $sub_societies ) {
 				if ( ! empty( $sub_societies ) ) {
 					foreach ( $sub_societies as &$society ) {
@@ -250,25 +250,28 @@ class Statistics_Class extends Singleton_Util {
 							if ( ! empty( $society['risks']) ) {
 								foreach ( $society['risks'] as &$risk ) {
 									$risk_level[ $society['post_name'] ][ $risk['scale'] ][]   = $society['risks'];
-									$data_all[ $society['post_name'] ][ $risk['scale'] ]       = count( $risk_level[ $society['post_name'] ][ $risk['scale'] ] );	
+									$data_all[ $society['post_name'] ][ $risk['scale'] ]       = count( $risk_level[ $society['post_name'] ][ $risk['scale'] ] );
 								}
-							}	
-						
+							}
+
 						$data['Name']        = $society['post_title'];
 						$data['Grey Risk']   = isset( $data_all[ $society['post_name'] ]['1'] ) ? $data_all[ $society['post_name'] ]['1'] : 0;
 						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
 						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
 						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
-						
+
 						$data_csv[] = $data;
 						}
 					}
 				}
 			}
 		}
-		
-		if ($element->post_parent == 80) { //$element->post_parent == 80 à remplacer par le post_parent générique
-		
+		$id_main_society = get_posts(array(
+			'post_type'  => 'digi-society',
+		));
+
+		if ($element->post_parent == $id_main_society[0]->ID) { //$element->post_parent == 80 à remplacer par le post_parent générique
+
 			$societies = Statistics_Class::g()->get_recursive_risks( $element->post_parent );
 			$unique_identifier = implode( ',', get_post_meta( $element_id, '_wpdigi_unique_identifier' ) );
 
@@ -281,7 +284,7 @@ class Statistics_Class extends Singleton_Util {
 							}
 							if ( ! empty( $society['risks'] ) ) {
 								foreach ( $society['risks'] as &$risk ) {
-									
+
 									$risk_data[ $society['post_name'] ][ $risk['scale'] ][]    						= $risk;
 									$risk_data[ $society['post_name'] ][ $risk['post_title'] ][ $risk['scale'] ][] 	= $risk;
 									$data_all[ $society['post_name'] ][ $risk['scale'] ]       						= count( $risk_data[ $society['post_name'] ][ $risk['scale'] ] );
@@ -307,10 +310,10 @@ class Statistics_Class extends Singleton_Util {
 			$data_value['Orange Risk']  = isset( $data_all[ $element->post_name ]['2'] ) ? $data_all[ $element->post_name ]['2'] : 0;
 			$data_value['Red Risk']     = isset( $data_all[ $element->post_name ]['3'] ) ? $data_all[ $element->post_name ]['3'] : 0;
 			$data_value['Black Risk']   = isset( $data_all[ $element->post_name ]['4'] ) ? $data_all[ $element->post_name ]['4'] : 0;
-			
+
 			array_push($data_csv, $data_value);
 		}
-	
+
 		$this->write_data_to_csv( $data_header, $data_csv, $filepath, $filename, $delimiter = ';', $enclosure = '"' );
 
 		$args = array(
