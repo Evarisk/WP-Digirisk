@@ -33,3 +33,4 @@ DigiRisk peut être associé à d'autres plugins :
 
 # Open Source
 Vous souhaitez participez au projet faites un tour sur [opensource.guide](https://opensource.guide/ "OpenSource.Guide")
+Vous souhaitez partipez et proposer des commits nous suivons : [Commits Conventionnels](https://www.conventionalcommits.org/ "Commits Conventionnels")
