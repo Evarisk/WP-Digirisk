@@ -131,9 +131,8 @@ class Statistics_Class extends Singleton_Util {
 
 	public function get_recursive_risks (  $society_id ) {
 		global $wpdb;
-
 		$societies = $this->get_recursive_societies( $society_id );
-
+		$societies_array_filter = array();
 		if ( ! empty( $societies ) ) {
 			foreach ( $societies as $parent_id => $sub_societies ) {
 				if ( ! empty( $sub_societies ) ) {
@@ -187,17 +186,19 @@ class Statistics_Class extends Singleton_Util {
 
 								$risk['scale'] = $wpdb->get_var( $wpdb->prepare( $query, $risk['ID'] ), 0,  $count - 1 );
 							}
+							$societies_array_filter[$society['post_parent']][] = $society;
 						}
-						$societies_array_filter[$society['post_parent']][] = $society;
 					}
 				}
 			}
+			return $societies_array_filter;
 		}
-
-		return $societies_array_filter;
 	}
 
 	public function  generate_csv_file( $society_id ) {
+
+		$element_id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0;
+		$element = get_post( $element_id );
 
 		$upload_dir   = wp_upload_dir();
 		$current_time = current_time( 'YmdHis' );
@@ -206,13 +207,12 @@ class Statistics_Class extends Singleton_Util {
 		$url_to_file  = $upload_dir['baseurl'] . '/digirisk/statistics/' . $current_time . '_statistics.csv';
 
 		$societies = $this->get_recursive_risks( $society_id );
-
 		$data_header = array (
 			 'Name',
-			'Black Risk',
-			'Red Risk',
-			'Orange Risk',
 			'Grey Risk',
+			'Orange Risk',
+			'Red Risk',
+			'Black Risk',
 		);
 
 		$data_csv = array();
@@ -229,14 +229,89 @@ class Statistics_Class extends Singleton_Util {
 							}
 						}
 						$data['Name']        = $society['post_title'];
-						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
-						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
-						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
 						$data['Grey Risk']   = isset( $data_all[ $society['post_name'] ]['1'] ) ? $data_all[ $society['post_name'] ]['1'] : 0;
+						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
+						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
+						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
+
 						$data_csv[] = $data;
+					}
+
+				}
+			}
+		}
+		else {
+			$societies = $this->get_recursive_risks( $element->post_parent );
+
+			foreach ( $societies as $post_id => $sub_societies ) {
+				if ( ! empty( $sub_societies ) ) {
+					foreach ( $sub_societies as &$society ) {
+						if ($society['ID'] == $element_id) {
+							if ( ! empty( $society['risks']) ) {
+								foreach ( $society['risks'] as &$risk ) {
+									$risk_level[ $society['post_name'] ][ $risk['scale'] ][]   = $society['risks'];
+									$data_all[ $society['post_name'] ][ $risk['scale'] ]       = count( $risk_level[ $society['post_name'] ][ $risk['scale'] ] );
+								}
+							}
+
+						$data['Name']        = $society['post_title'];
+						$data['Grey Risk']   = isset( $data_all[ $society['post_name'] ]['1'] ) ? $data_all[ $society['post_name'] ]['1'] : 0;
+						$data['Orange Risk'] = isset( $data_all[ $society['post_name'] ]['2'] ) ? $data_all[ $society['post_name'] ]['2'] : 0;
+						$data['Red Risk']    = isset( $data_all[ $society['post_name'] ]['3'] ) ? $data_all[ $society['post_name'] ]['3'] : 0;
+						$data['Black Risk']  = isset( $data_all[ $society['post_name'] ]['4'] ) ? $data_all[ $society['post_name'] ]['4'] : 0;
+
+						$data_csv[] = $data;
+						}
 					}
 				}
 			}
+		}
+		$id_main_society = get_posts(array(
+			'post_type'  => 'digi-society',
+		));
+
+		if ($element->post_parent == $id_main_society[0]->ID) { //$element->post_parent == 80 à remplacer par le post_parent générique
+
+			$societies = Statistics_Class::g()->get_recursive_risks( $element->post_parent );
+			$unique_identifier = implode( ',', get_post_meta( $element_id, '_wpdigi_unique_identifier' ) );
+
+			if ( ! empty( $societies ) ) {
+				foreach ( $societies as $parent_id => $sub_societies ) {
+					if ( ! empty( $sub_societies ) ) {
+						foreach ( $sub_societies as &$society ) {
+							if ( ! isset( $data_all[ $society['post_name'] ] ) ) {
+								$data_all[ $society['post_name'] ] = array();
+							}
+							if ( ! empty( $society['risks'] ) ) {
+								foreach ( $society['risks'] as &$risk ) {
+
+									$risk_data[ $society['post_name'] ][ $risk['scale'] ][]    						= $risk;
+									$risk_data[ $society['post_name'] ][ $risk['post_title'] ][ $risk['scale'] ][] 	= $risk;
+									$data_all[ $society['post_name'] ][ $risk['scale'] ]       						= count( $risk_data[ $society['post_name'] ][ $risk['scale'] ] );
+									$data_type[ $society['post_name'] ][ $risk['scale'] ][ $risk['post_title'] ] 	= count( $risk_data[ $society['post_name'] ][ $risk['post_title'] ][ $risk['scale'] ] );
+
+									$labels_type[] = $risk['post_title'];
+									$labels_type   = array_values( array_unique( $labels_type ) );
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$labels           			= array( 'Risque inacceptable', 'Risque à traiter', 'Risque à planifier', 'Risque sans risque' );
+			$label           			= $element->post_title;
+			$text             			= 'Ensemble des Risques sur ' . $unique_identifier . ' ' . $element->post_title;
+			$background_color 			= array( 30, 144, 255, 0.5 );
+			$border_color     			= array( 30, 144, 255, 1 );
+
+			$data_value['Name']   		= $element->post_title;
+			$data_value['Grey Risk']    = isset( $data_all[ $element->post_name ]['1'] ) ? $data_all[ $element->post_name ]['1'] : 0;
+			$data_value['Orange Risk']  = isset( $data_all[ $element->post_name ]['2'] ) ? $data_all[ $element->post_name ]['2'] : 0;
+			$data_value['Red Risk']     = isset( $data_all[ $element->post_name ]['3'] ) ? $data_all[ $element->post_name ]['3'] : 0;
+			$data_value['Black Risk']   = isset( $data_all[ $element->post_name ]['4'] ) ? $data_all[ $element->post_name ]['4'] : 0;
+
+			array_push($data_csv, $data_value);
 		}
 
 		$this->write_data_to_csv( $data_header, $data_csv, $filepath, $filename, $delimiter = ';', $enclosure = '"' );
@@ -248,7 +323,7 @@ class Statistics_Class extends Singleton_Util {
 		);
 
 		return $args;
-	}
+}
 
 	public function load_data_chart_society () {
 
@@ -262,6 +337,5 @@ class Statistics_Class extends Singleton_Util {
 
 	}
 }
-
 Statistics_Class::g();
 
