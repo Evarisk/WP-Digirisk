@@ -173,6 +173,9 @@ class Digirisk_Action {
 			CMH::add_logo( 'digirisk', PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', admin_url( 'admin.php?page=digirisk' ) );
 			CMH::register_menu( 'digirisk', __( 'Bienvenue sur DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), 'fa fa-home', 'bottom' );
 			CMH::register_others_menu( 'others', 'digirisk-dashboard', __( 'DigiRisk', 'digirisk' ), __( 'DigiRisk', 'digirisk' ), 'read', 'digirisk', array( Digirisk::g(), 'display' ), PLUGIN_DIGIRISK_URL . '/core/assets/images/favicon_hd.png', 'bottom' );
+			if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
+			CMH::register_others_menu( 'others', 'digirisk', __( 'Task Manager', 'task-manager' ), __( 'Task Manager', 'task-manager' ), 'manage_task_manager', 'wpeomtm-dashboard', array( \task_manager\Task_Manager_Class::g(), 'display' ),  PLUGIN_TASK_MANAGER_URL . '/core/assets/images/icone-16-16-couleur.png', '' );
+			}
 		}
 	}
 
