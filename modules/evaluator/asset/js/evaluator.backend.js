@@ -55,9 +55,7 @@ window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
-	jQuery( 'table-row.evaluator-row' ).replaceWith( response.data.template );
-	window.eoxiaJS.digirisk.search.renderChanged();
-;
+	triggeredElement.closest( '.table-row.evaluator-row' ).prepend( response.data.view );
 };
 
 /**

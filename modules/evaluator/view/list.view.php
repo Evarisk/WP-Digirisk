@@ -14,10 +14,6 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-echo '<pre>';
-print_r($evaluators);
-echo '</pre>';
-exit;
 ?>
 
 <div class="wpeo-table table-flex table-evaluator">
