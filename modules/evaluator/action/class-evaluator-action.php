@@ -94,50 +94,15 @@ class Evaluator_Action {
 		$evaluator->data['affectation_date'] = $affectation_date;
 		$evaluator->data['affectation_duration'] = $affectation_duration;
 		$evaluator->data['id'] = $user_id;
-		$evaluators = User_Class::g()->get('');
+
 		$evaluator = User_Class::g()->update($evaluator->data);
+		// $evaluator bien à jour mais il faut mettre à jour evaluators pour la suite
+		$evaluators = User_Class::g()->get(''); // ne récupère pas la màj de evaluator
 
-		/*if ( isset($affectation_date ) ) {
-
-			foreach ( $evaluators as  $evaluator ) {
-				$evaluator['affectation_date'] = $affectation_date;
-				$evaluator['affectation_duration'] = $affectation_duration;
-				$evaluator['id'] = $evaluator_name;
-
-				/*if ( isset( $evaluator['affectation_date']) ) {
-
-					$user['on']       = current_time( 'mysql' );
-					$user['duration'] = ! empty( $user['duration'] ) ? (int) $user['duration'] : 0;
-
-					$affected_evaluators[] = Evaluator_Class::g()->affect_user( $society, $user_id, $user );
-				}
-
-			}
-		}	*/
-/*
-		if ( 0 < count( $affected_evaluators ) ) {
-			$content  = __( 'Mise à jour des évaluateurs', 'digirisk' );
-			$content .= '<br />';
-
-			foreach ( $affected_evaluators as $evaluator ) {
-				$content .= __( 'Ajout de l\'évaluateur', 'digirisk' ) . ' ' . Evaluator_Class::g()->element_prefix . $evaluator->data['id'] . ' ' . $evaluator->data['lastname'] . ' ' . $evaluator->data['firstname'];
-				$content .= '<br />';
-			}
-
-			do_action( 'digi_add_historic', array(
-				'parent_id' => $society_id,
-				'id'        => 'Indisponible',
-				'content'   => $content,
-			) );
-		}
-
-		*/$society = Society_Class::g()->show_by_type( $society_id );
+		$society = Society_Class::g()->show_by_type( $society_id );
 		/*$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
 		*/
-		echo '<pre>';
-		print_r($evaluators);
-		echo '</pre>';
-		exit;
+
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element'                 => $society,
