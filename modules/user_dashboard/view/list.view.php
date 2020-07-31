@@ -17,10 +17,8 @@ namespace digi;
 defined( 'ABSPATH' ) || exit; ?>
 
 <div class="table-row table-header">
-	<div class="table-cell table-50"></div>
-	<div class="table-cell table-50 ">
-		<?php esc_html_e( 'ID', 'digirisk' ); ?>
-	</div>
+	<div class="table-cell table-50"><?php esc_html_e( 'Initiale', 'digirisk' ); ?></div>
+	<div class="table-cell table-50"><?php esc_html_e( 'ID', 'digirisk' ); ?></div>
 	<div class="table-cell table-150">
 		<?php esc_html_e( 'Lastname', 'digirisk' ); ?>
 		<span class="tooltip hover red required" aria-label="<?php esc_attr_e( 'This field is required', 'digirisk' ); ?>">*</span>
