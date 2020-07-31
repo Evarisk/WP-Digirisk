@@ -55,11 +55,9 @@ window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
-	jQuery( 'table.affected-evaluator' ).replaceWith( response.data.template );
+	jQuery( 'table-row.evaluator-row' ).replaceWith( response.data.template );
 	window.eoxiaJS.digirisk.search.renderChanged();
-
-	jQuery( '.form-edit-evaluator-assign input[type="checkbox"]' ).attr( 'checked', false );
-	jQuery( '.form-edit-evaluator-assign .affect:not(:first)' ).val( '' );
+;
 };
 
 /**
@@ -107,3 +105,27 @@ window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
 		window.eoxiaJS.digirisk.search.renderChanged();
 	} );
 };
+
+window.eoxiaJS.digirisk.evaluator.checkCanAdd = function( element ) {
+	var evaluatorRow = element.closest( '.table-row-advanced' );
+	if ( evaluatorRow.find( 'input[name="evaluator[name]"]' ).val() && evaluatorRow.find( 'input[name="evaluator[parent_id]"]' ).val() && evaluatorRow.find( 'textarea' ).val() ) {
+		evaluatorRow.find( '.action-input' ).removeClass( 'button-disable' );
+	} else {
+		evaluatorRow.find( '.action-input' ).addClass( 'button-disable' );
+	}
+};
+
+window.eoxiaJS.digirisk.evaluator.checkDataBeforeAdd = function( element ) {
+	var evaluatorRow = element.closest( '.table-row-advanced' );
+
+	evaluatorRow.find( '.tooltip' ).removeClass( 'active' );
+
+	if ( '' === evaluatorRow.find( 'input[name="evaluator[name]"]' ).val() ) {
+		evaluatorRow.find( 'input[name="accident[name]"]' ).closest( '.tooltip' ).addClass( 'active' );
+		return false;
+	}
+
+
+	return true;
+};
+

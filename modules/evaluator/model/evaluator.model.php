@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Définition des champs d'un utilisateur DigiRisk.
  */
-class User_Model extends \eoxia\User_Model {
+class Evaluator_Model extends \eoxia\User_Model {
 
 	/**
 	 * Définition des champs d'un utilisateur DigiRisk.
@@ -30,15 +30,16 @@ class User_Model extends \eoxia\User_Model {
 	 * @param mixed $req_method Peut être "GET", "POST", "PUT" ou null.
 	 */
 	public function __construct( $data = null, $req_method = null ) {
-		$this->schema['hiring_date'] = array(
-			'type'      => 'string',
+
+		$this->schema['ID'] = array(
+			'type'      => 'integer',
 			'meta_type' => 'multiple',
-			'bydefault' => 'Pas configuré',
+			'bydefault' => '',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
 
-		$this->schema['social_security_number'] = array(
+		$this->schema['firstname'] = array(
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'bydefault' => '',
@@ -46,47 +47,7 @@ class User_Model extends \eoxia\User_Model {
 			'version'   => '6.0.0',
 		);
 
-		$this->schema['job'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'bydefault' => '',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-		);
-
-		$this->schema['release_date_of_society'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'bydefault' => '',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-		);
-
-		$this->schema['professional_qualification'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'bydefault' => '',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-		);
-
-		$this->schema['sexe'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'bydefault' => '',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-		);
-
-		$this->schema['nationality'] = array(
-			'type'      => 'string',
-			'meta_type' => 'multiple',
-			'bydefault' => '',
-			'since'     => '6.0.0',
-			'version'   => '6.0.0',
-		);
-
-		$this->schema['insurance_compagny'] = array(
+		$this->schema['lastname'] = array(
 			'type'      => 'string',
 			'meta_type' => 'multiple',
 			'bydefault' => '',

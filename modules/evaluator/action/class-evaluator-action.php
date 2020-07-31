@@ -30,34 +30,38 @@ class Evaluator_Action {
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
 		add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
+		add_action( 'wp_ajax_add_evaluator', array( $this, 'callback_add_evaluator' ) );
 
 		add_action( 'display_evaluator_affected', array( $this, 'callback_display_evaluator_affected' ), 10, 1 );
 		add_action( 'display_evaluator_to_assign', array( $this, 'callback_display_evaluator_to_assign' ), 10, 1 );
 	}
 
-	/**
-	 * Assignes un évaluateur à element_id dans la base de donnée
-	 *
-	 * @since   6.0.0
-	 */
-	public function callback_edit_evaluator_assign() {
-		check_ajax_referer( 'edit_evaluator_assign' );
 
-		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
-		$users      = ! empty( $_POST['list_user'] ) ? (array) $_POST['list_user'] : array();
+	public function callback_add_evaluator() {
+		check_ajax_referer('add_evaluator') ;
 
-		if ( empty( $users ) || empty( $society_id ) ) {
-			wp_send_json_error();
-		}
+		$evaluators = User_Class::g()->get( '' );
 
-		$society = Society_Class::g()->show_by_type( $society_id );
+		$firstname =  ! empty( $_POST['firstname'] ) ? $_POST['firstname'] : '';
+		$lastname =  ! empty( $_POST['lastname'] ) ? $_POST['lastname'] : '';
+		$affectation_date                = ! empty( $_POST['affectation_date'] ) ? $_POST['affectation_date'] : '';
+		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? $_POST['affectation_duration'] : '';
 
 		$affected_evaluators = array();
 
-		if ( ! empty( $users ) ) {
-			foreach ( $users as $user_id => $user ) {
-				$user['affect'] = ( isset( $user['affect'] ) && $user['affect'] == 'true' ) ? true : false;
-				if ( $user['affect'] ) {
+		if ( ! empty( $evaluators ) ) {
+			foreach ( $evaluators as  $evaluator ) {
+		
+				$evaluator['affectation_date'] = $affectation_date;
+				$evaluator['affectation_duration'] = $affectation_duration;
+				$evaluator['firstname'] = $firstname; 
+				$evaluator['lastname'] = $lastname;
+				$evaluator['id'] = $id ;
+				echo '<pre>';
+				print_r($evaluator);
+				echo '</pre>';
+				exit;
+				if ( isset( $evaluator->data['affectation_date']) ) {
 
 					$user['on']       = current_time( 'mysql' );
 					$user['duration'] = ! empty( $user['duration'] ) ? (int) $user['duration'] : 0;
@@ -67,7 +71,48 @@ class Evaluator_Action {
 
 			}
 		}
+	}
+	
+	/**
+	 * Assignes un évaluateur à element_id dans la base de donnée
+	 *
+	 * @since   6.0.0
+	 */
+	public function callback_edit_evaluator_assign() {
+		check_ajax_referer( 'edit_evaluator_assign' );
+		
+		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
+		$users      = ! empty( $_POST['list_user'] ) ? (array) $_POST['list_user'] : array() ;
+		$society = Society_Class::g()->show_by_type( $society_id );
 
+		$evaluators = User_Class::g()->get( '' );
+
+		$affectation_date                = ! empty( $_POST['affectation_date'] ) ? $_POST['affectation_date'] : '';
+		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? $_POST['affectation_duration'] : '';
+		$evaluator_id                = ! empty( $_POST['user_id'] ) ? $_POST['user_id'] : '';
+
+		$evaluators[$evaluator_id]['affectation_date'] = $affectation_date;				//evaluator id renvoie pas l'id du tableau users
+		$evaluators[$evaluator_id]['affectation_duration'] = $affectation_duration;
+		$evaluators[$evaluator_id]['id'] = $evaluator_id;
+
+		/*if ( isset($affectation_date ) ) {
+			
+			foreach ( $evaluators as  $evaluator ) {
+				$evaluator['affectation_date'] = $affectation_date;
+				$evaluator['affectation_duration'] = $affectation_duration;
+				$evaluator['id'] = $evaluator_name;
+			
+				/*if ( isset( $evaluator['affectation_date']) ) {
+
+					$user['on']       = current_time( 'mysql' );
+					$user['duration'] = ! empty( $user['duration'] ) ? (int) $user['duration'] : 0;
+
+					$affected_evaluators[] = Evaluator_Class::g()->affect_user( $society, $user_id, $user );
+				}
+
+			}
+		}	*/ 
+/*
 		if ( 0 < count( $affected_evaluators ) ) {
 			$content  = __( 'Mise à jour des évaluateurs', 'digirisk' );
 			$content .= '<br />';
@@ -84,17 +129,21 @@ class Evaluator_Action {
 			) );
 		}
 
-		$society = Society_Class::g()->show_by_type( $society_id );
-		$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
-
+		*/$society = Society_Class::g()->show_by_type( $society_id );
+		/*$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
+		*/
 		ob_start();
-
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
+		echo '<pre>';
+		print_r($evaluators);
+		echo '</pre>';
+		exit; 
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
 			'element'                 => $society,
-			'element_id'              => $society->data['id'],
-			'list_affected_evaluator' => $affected_evaluators,
+		//	'element_id'              => $society->data['id'],
+			'evaluators' 			  => $evaluators,
+			'evaluator_id'            => $evaluator_id,
 		) );
-
+		
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'evaluator',
@@ -217,7 +266,7 @@ class Evaluator_Action {
 		}
 
 		ob_start();
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-evaluator-affected', array(
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 			'element'                 => $element,
 			'element_id'              => $element->data['id'],
 			'list_affected_evaluator' => $list_affected_evaluator,
@@ -237,6 +286,7 @@ class Evaluator_Action {
 	 * @param  integer $id           L'ID de la société.
 	 * @param  array   $list_user_id Le tableau des ID des évalateurs trouvés par la recherche.
 	 */
+
 	public function callback_display_evaluator_to_assign( $data ) {
 		$list_user_id = array();
 
@@ -285,5 +335,6 @@ class Evaluator_Action {
 		) );
 	}
 }
+
 
 	new Evaluator_Action();

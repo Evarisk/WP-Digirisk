@@ -15,7 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $eo_search; ?>
+global $eo_search;echo '<pre>';
+print_r($accident);
+echo '</pre>';
+exit;?>
+?>
+
 <div class="table-row-advanced" data-id="<?php echo esc_attr( $accident->data['id'] ); ?>">
 	<input type="hidden" name="action" value="edit_accident" />
 	<?php wp_nonce_field( 'edit_accident' ); ?>
