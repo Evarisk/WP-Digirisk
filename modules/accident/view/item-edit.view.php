@@ -30,7 +30,7 @@ global $eo_search; ?>
 		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="table-cell table-150"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
 		<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="table-cell table-100"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="table-cell table-150"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="table-cell"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="table-cell"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="digi" type="accident_comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="table-cell table-75"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="table-cell table-150 table-end">
 			<div class="action">
@@ -68,7 +68,7 @@ global $eo_search; ?>
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Detailed circumstances', 'digirisk' ); ?></span>
 				<label class="form-field-container">
-					<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+					<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="digi" type="accident_comment" display="edit" display_date="false" display_user="false"]' ); ?>
 				</label>
 			</div>
 
