@@ -27,29 +27,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 
 	<?php
-		
+
 	if ( ! empty( $evaluators ) ) :
-	
+
 		foreach( $evaluators as $evaluator ) :
-			
-			if( isset($evaluator['affectation_date'])) {
+
+			if( $evaluator->data['affectation_date'] !== 'undefined') {
 				\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 					'element'    => $element,
-					//'element_id' => $element->data['id'],
-					'evaluator'  => $evaluator,		
+					'element_id' => $element->data['id'],
+					'evaluator'  => $evaluator,
+					'user_id'     => $user_id,
 					) );
-						
+
 			}
-						
-		
+
+
 		endforeach;
-		
+
 	endif;
-	
+
 	\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'item-edit', array(
 		'element'    => $element,
-		//'element_id' => $element->data['id'],
-		'evaluator'  => $evaluator
+		'element_id' => $element->data['id'],
+		'evaluator'  => $evaluator,
 	) );
 
 	?>

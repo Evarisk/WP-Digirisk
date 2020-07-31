@@ -51,10 +51,10 @@ class Evaluator_Action {
 
 		if ( ! empty( $evaluators ) ) {
 			foreach ( $evaluators as  $evaluator ) {
-		
+
 				$evaluator['affectation_date'] = $affectation_date;
 				$evaluator['affectation_duration'] = $affectation_duration;
-				$evaluator['firstname'] = $firstname; 
+				$evaluator['firstname'] = $firstname;
 				$evaluator['lastname'] = $lastname;
 				$evaluator['id'] = $id ;
 				echo '<pre>';
@@ -72,7 +72,7 @@ class Evaluator_Action {
 			}
 		}
 	}
-	
+
 	/**
 	 * Assignes un évaluateur à element_id dans la base de donnée
 	 *
@@ -80,28 +80,30 @@ class Evaluator_Action {
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
-		
+
 		$society_id = ! empty( $_POST['element_id'] ) ? (int) $_POST['element_id'] : 0;
 		$users      = ! empty( $_POST['list_user'] ) ? (array) $_POST['list_user'] : array() ;
 		$society = Society_Class::g()->show_by_type( $society_id );
 
-		$evaluators = User_Class::g()->get( '' );
-
 		$affectation_date                = ! empty( $_POST['affectation_date'] ) ? $_POST['affectation_date'] : '';
-		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? $_POST['affectation_duration'] : '';
-		$evaluator_id                = ! empty( $_POST['user_id'] ) ? $_POST['user_id'] : '';
+		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? (int)  $_POST['affectation_duration'] : '0';
+		$user_id                = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 
-		$evaluators[$evaluator_id]['affectation_date'] = $affectation_date;				//evaluator id renvoie pas l'id du tableau users
-		$evaluators[$evaluator_id]['affectation_duration'] = $affectation_duration;
-		$evaluators[$evaluator_id]['id'] = $evaluator_id;
+////
+		$evaluator = User_Class::g()->get( array( 'id' => $user_id ), true );
+		$evaluator->data['affectation_date'] = $affectation_date;
+		$evaluator->data['affectation_duration'] = $affectation_duration;
+		$evaluator->data['id'] = $user_id;
+		$evaluators = User_Class::g()->get('');
+		$evaluator = User_Class::g()->update($evaluator->data);
 
 		/*if ( isset($affectation_date ) ) {
-			
+
 			foreach ( $evaluators as  $evaluator ) {
 				$evaluator['affectation_date'] = $affectation_date;
 				$evaluator['affectation_duration'] = $affectation_duration;
 				$evaluator['id'] = $evaluator_name;
-			
+
 				/*if ( isset( $evaluator['affectation_date']) ) {
 
 					$user['on']       = current_time( 'mysql' );
@@ -111,7 +113,7 @@ class Evaluator_Action {
 				}
 
 			}
-		}	*/ 
+		}	*/
 /*
 		if ( 0 < count( $affected_evaluators ) ) {
 			$content  = __( 'Mise à jour des évaluateurs', 'digirisk' );
@@ -132,18 +134,18 @@ class Evaluator_Action {
 		*/$society = Society_Class::g()->show_by_type( $society_id );
 		/*$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
 		*/
-		ob_start();
 		echo '<pre>';
 		print_r($evaluators);
 		echo '</pre>';
-		exit; 
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
+		exit;
+		ob_start();
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element'                 => $society,
-		//	'element_id'              => $society->data['id'],
+			'element_id'              => $society->data['id'],
 			'evaluators' 			  => $evaluators,
-			'evaluator_id'            => $evaluator_id,
+			'user_id'                 => $user_id,
 		) );
-		
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'evaluator',

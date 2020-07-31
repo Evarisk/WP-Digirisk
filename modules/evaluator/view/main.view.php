@@ -20,9 +20,9 @@ global $eo_search; ?>
 \eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
 	'element'                 => $element,
 	'element_id'              => $element->data['id'],
-	'current_page'            => $current_page,
-	'number_page'             => $number_page,
-	'list_affected_evaluator' => $list_affected_evaluator,
+	//'current_page'            => $current_page,
+	//'number_page'             => $number_page,
+	//'list_affected_evaluator' => $list_affected_evaluator,
 	'evaluators'              => $evaluators,
 ) );
 ?>

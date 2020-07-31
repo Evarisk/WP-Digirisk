@@ -32,7 +32,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $meta_key = '_wpeo_evaluator_info';
+	protected $meta_key = '_wpeo_user_info';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
@@ -74,7 +74,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 		global $eo_search;
 
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-		
+
 		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
 
 		$args_where_evaluator = array(
@@ -83,20 +83,20 @@ class Evaluator_Class extends \eoxia\User_Class {
 			'number'     => $this->limit_evaluator,
 			'meta_query' => array(
 				'relation' => 'OR',),
-		
+
 		);
-		$autocomplete = array( 
+		$autocomplete = array(
 		'type'         => 'user',
 		'name'         => 'user_id',
 		);
 		$eo_search->register_search( 'evaluator', $autocomplete );
-		
+
 		$evaluators = User_Class::g()->get(); //ici evaluators contient l'ensemble des users, il faudrait qu'il ne contienne que les
 											 // évaluateurs que l'on a rajouté
-		
+
 		$tableau_test = array();
-	
-	
+
+
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
@@ -111,7 +111,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 			'action'  => 'display_evaluator_affected',
 			'post_id' => $element->data['id'],
 		) );
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element'                 => $element,
 			'evaluators'              => $evaluators,
 			'list_affected_evaluator' => $list_affected_evaluator,
@@ -132,12 +132,12 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 */
 	public function get_list_affected_evaluator( $society ) {
 		if ( 0 === $society->data['id'] || empty( $society->data['user_info'] )   ) {
-	
+
 			return false;
 		}
 		$evaluators = User_Class::g()->get( '' );
 
-	
+
 		$list_evaluator = array();
 
 		if ( ! empty( $society->data['user_info']['affected_id']['evaluator'] ) ) {

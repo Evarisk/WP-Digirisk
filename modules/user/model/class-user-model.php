@@ -103,9 +103,9 @@ class User_Model extends \eoxia\User_Model {
 		);
 
 		$this->schema['affectation_duration'] = array(
-			'type'      => 'integer',
-			'meta_type' => 'multiple',
-			'default'   => 'undefined',
+			'type'      => 'string',
+			'meta_type' => 'single',
+			'default'   => '0',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
