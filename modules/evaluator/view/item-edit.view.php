@@ -49,7 +49,7 @@ global $eo_search;
 	<div class="table-cell table-50 duration-container">
 		<label class="form-field-container">
 			<input type="hidden"  value="<?php echo (int) esc_attr( ($evaluator->data['affectation_duration']) ); ?>">
-			<input type="number" name="affectation_duration" value=15>
+			<input type="number" name="affectation_duration" value="<?php echo $default_duration ?>">
 		</label>
 	</div>
 

@@ -47,9 +47,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	endif;
 
 	\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'item-edit', array(
-		'element'    => $element,
-		'element_id' => $element->data['id'],
-		'evaluator'  => $evaluator,
+		'element'          => $element,
+		'element_id'       => $element->data['id'],
+		'evaluator'        => $evaluator,
+		'default_duration' => $default_duration,
 	) );
 
 	?>

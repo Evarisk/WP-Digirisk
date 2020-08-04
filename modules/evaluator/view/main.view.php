@@ -24,5 +24,6 @@ global $eo_search; ?>
 	//'number_page'             => $number_page,
 	//'list_affected_evaluator' => $list_affected_evaluator,
 	'evaluators'              => $evaluators,
+	'default_duration'        => $default_duration,
 ) );
 ?>

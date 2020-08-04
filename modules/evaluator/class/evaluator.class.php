@@ -68,7 +68,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 
 		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
 		$evaluators = User_Class::g()->get();
-
+		$default_duration = 15;
 		$args_where_evaluator = array(
 			'type'         => 'user',
 			'name'         => 'user_id',
@@ -88,6 +88,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 			'element'                 => $element,
 			'evaluators'              => $evaluators,
 			'current_page'            => $current_page,
+			'default_duration'        => $default_duration,
 		) );
 	}
 }
