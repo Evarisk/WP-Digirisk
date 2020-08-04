@@ -27,24 +27,6 @@ window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
 };
 
 /**
- * Lorsque que l'utilisateur coche la checkbox "affecter", la valeur dans le champ de texte du header du tableau est remplis dans le champs à gauche de la checkbox.
- *
- * @param {MouseEvent} event Le clique de la souris.
- *
- * @since 6.0.0
- * @version 6.3.1
- */
-window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
-	var element = jQuery( this );
-	if ( element.is( ':checked' ) ) {
-		element.closest( 'tr' ).find( 'input.affect' ).val( jQuery( '.table.evaluators input[type="text"]' ).val() );
-	} else {
-		element.closest( 'tr' ).find( 'input.affect' ).val( '' );
-	}
-};
-
-
-/**
  * Le callback en cas de réussite à la requête Ajax "edit_evaluator_assign".
  * Remplaces le contenu du tableau "affected-evaluator" par le template renvoyé par la requête Ajax.
  *
@@ -56,11 +38,12 @@ window.eoxiaJS.digirisk.evaluator.setTime = function( event ) {
  * @version 6.4.0
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
-	triggeredElement.closest( '.table-row.evaluator-row.edit' ).before( response.data.template );
+	triggeredElement.closest( '.table-row.evaluator-row.edit' ).before( response.data.view );
+	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click();
 };
 
 /**
- * Gestion de la pagination des évalateurs.
+ * Gestion de la suppression des évaluateurs.
  *
  * @param  {ClickEvent} event [description]
  * @return {void}
@@ -72,56 +55,5 @@ window.eoxiaJS.digirisk.evaluator.callback_detach_evaluator_success = function( 
 	element.closest( '.table-row' ).fadeOut();
 };
 
-/**
- * Gestion de la pagination des évalateurs.
- *
- * @param  {ClickEvent} event [description]
- * @return {void}
- *
- * @since 6.0.0
- * @version 6.2.5
- */
-window.eoxiaJS.digirisk.evaluator.pagination = function( event ) {
-	var href = jQuery( this ).attr( 'href' ).split( '&' );
-	var nextPage = href[1].replace( 'current_page=', '' );
-	var elementId = href[2].replace( 'element_id=', '' );
 
-	window.eoxiaJS.loader.display( jQuery( '.tab-content .form-edit-evaluator-assign' ) );
-
-	var data = {
-		action: 'paginate_evaluator',
-		element_id: elementId,
-		next_page: nextPage
-	};
-
-	event.preventDefault();
-
-	jQuery.post( window.ajaxurl, data, function( view ) {
-		jQuery( '.tab-content .wpeo-gridlayout' ).replaceWith( view );
-		window.eoxiaJS.digirisk.search.renderChanged();
-	} );
-};
-
-window.eoxiaJS.digirisk.evaluator.checkCanAdd = function( element ) {
-	var evaluatorRow = element.closest( '.table-row-advanced' );
-	if ( evaluatorRow.find( 'input[name="evaluator[name]"]' ).val() && evaluatorRow.find( 'input[name="evaluator[parent_id]"]' ).val() && evaluatorRow.find( 'textarea' ).val() ) {
-		evaluatorRow.find( '.action-input' ).removeClass( 'button-disable' );
-	} else {
-		evaluatorRow.find( '.action-input' ).addClass( 'button-disable' );
-	}
-};
-
-window.eoxiaJS.digirisk.evaluator.checkDataBeforeAdd = function( element ) {
-	var evaluatorRow = element.closest( '.table-row-advanced' );
-
-	evaluatorRow.find( '.tooltip' ).removeClass( 'active' );
-
-	if ( '' === evaluatorRow.find( 'input[name="evaluator[name]"]' ).val() ) {
-		evaluatorRow.find( 'input[name="accident[name]"]' ).closest( '.tooltip' ).addClass( 'active' );
-		return false;
-	}
-
-
-	return true;
-};
 

@@ -30,7 +30,7 @@ global $eo_search;
 	</div>
 	<div class="table-cell name-container" name="user_id" >
 		<label class="form-field-container form-element">
-			<?php $eo_search->display( 'evaluator') ?>
+			<?php $eo_search->display('evaluator') ?>
 		</label>
 	</div>
 	<div class="table-cell table-125 date-container">
@@ -38,8 +38,8 @@ global $eo_search;
 			<div class="form-element group-date">
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-					<input type="hidden" class="mysql-date" name="affectation_date" value="<?php echo esc_html( mysql2date( 'd/m/Y', $evaluator->data['affectation_date'] ) ); ?>">
-					<input type="text" class="form-field date" value=''>
+					<input type="hidden" class="mysql-date" value="<?php echo esc_html( mysql2date( 'd/m/Y', $evaluator->data['affectation_date'] ) ); ?>">
+					<input type="text" class="form-field date" name="affectation_date" value="<?php echo date('d/m/Y', time( ) )?>" >
 				</label>
 			</div>
 		</div>
@@ -48,7 +48,8 @@ global $eo_search;
 
 	<div class="table-cell table-50 duration-container">
 		<label class="form-field-container">
-			<input type="number" name="affectation_duration" value="<?php echo (int) esc_attr( ($evaluator->data['affectation_duration']) ); ?>">
+			<input type="hidden"  value="<?php echo (int) esc_attr( ($evaluator->data['affectation_duration']) ); ?>">
+			<input type="number" name="affectation_duration" value=15>
 		</label>
 	</div>
 

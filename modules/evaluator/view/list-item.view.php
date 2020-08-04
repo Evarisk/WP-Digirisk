@@ -14,7 +14,6 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 ?>
 
 <div class="table-row evaluator-row user-<?php echo esc_attr( $evaluator->data['id'] ); ?>">
@@ -27,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $evaluator->data['initial'] ); ?></span></div>
 		<?php echo esc_html( $evaluator->data['displayname'] ); ?>
 	</div>
-	<div class="table-cell table-125"><?php echo esc_html( mysql2date( 'd/m/Y', $evaluator->data['affectation_date'], true ) ); ?></div>
+	<div class="table-cell table-125"><?php echo esc_html( date( $evaluator->data['affectation_date'] ) ); ?></div>
 	<div class="table-cell table-50"><?php echo esc_html(  $evaluator->data['affectation_duration']  ); ?></div>
 	<div class="table-cell table-50 table-end">
 		<div class="action wpeo-gridlayout grid-gap-0 grid-1">

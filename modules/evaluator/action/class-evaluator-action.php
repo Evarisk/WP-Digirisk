@@ -39,12 +39,12 @@ class Evaluator_Action {
 	 */
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
-
+		
 		$affectation_date     = ! empty( $_POST['affectation_date'] ) ? (string) $_POST['affectation_date'] : '';
-		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? (int)  $_POST['affectation_duration'] : 0;
+		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? (int)  $_POST['affectation_duration'] : 15;
 		$user_id              = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
 		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-
+		
 		$element = Society_Class::g()->show_by_type( $parent_id );
 		$evaluator = User_Class::g()->get( array( 'id' => $user_id ), true );
 
@@ -68,7 +68,7 @@ class Evaluator_Action {
 			'module'           => 'evaluator',
 			'evaluator'        => $evaluator->data,
 			'callback_success' => 'callback_edit_evaluator_assign_success',
-			'template'         => $view,
+			'view'         => $view,
 		) );
 	}
 

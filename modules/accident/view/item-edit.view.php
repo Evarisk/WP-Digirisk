@@ -15,10 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $eo_search;echo '<pre>';
-print_r($accident);
-echo '</pre>';
-exit;?>
+global $eo_search;
 ?>
 
 <div class="table-row-advanced" data-id="<?php echo esc_attr( $accident->data['id'] ); ?>">
