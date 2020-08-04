@@ -14,6 +14,7 @@ namespace digi;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 ?>
 
 <div class="wpeo-table table-flex table-evaluator">
@@ -31,12 +32,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		foreach( $evaluators as $evaluator ) :
 
-			if( $evaluator->data['affectation_date'] !== 'undefined') {
+			if( $evaluator->data['affectation_date'] !== 'undefined' && $evaluator->data['parent_id'] == $element->data['id'] ) {
 				\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 					'element'    => $element,
 					'element_id' => $element->data['id'],
 					'evaluator'  => $evaluator,
-					'user_id'     => $user_id,
 					) );
 
 			}

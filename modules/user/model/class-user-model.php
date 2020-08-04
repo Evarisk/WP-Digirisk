@@ -96,16 +96,30 @@ class User_Model extends \eoxia\User_Model {
 
 		$this->schema['affectation_date'] = array(
 			'type'      => 'string',
-			'meta_type' => 'single',
+			'meta_type' => 'multiple',
 			'default'   => 'undefined',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
 
 		$this->schema['affectation_duration'] = array(
-			'type'      => 'string',
-			'meta_type' => 'single',
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
 			'default'   => '0',
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+		);
+
+		$this->schema['id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'single',
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+		);
+
+		$this->schema['parent_id'] = array(
+			'type'      => 'integer',
+			'meta_type' => 'multiple',
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 		);
@@ -117,7 +131,6 @@ class User_Model extends \eoxia\User_Model {
 			'version'   => '6.0.0',
 			'child'     => array(),
 		);
-
 		$this->schema['dashboard_compiled_data']['child']['last_evaluation_date'] = array(
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',

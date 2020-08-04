@@ -30,7 +30,6 @@ class Evaluator_Action {
 		add_action( 'wp_ajax_edit_evaluator_assign', array( $this, 'callback_edit_evaluator_assign' ) );
 		add_action( 'wp_ajax_detach_evaluator', array( $this, 'callback_detach_evaluator' ) );
 		add_action( 'wp_ajax_paginate_evaluator', array( $this, 'callback_paginate_evaluator' ) );
-		add_action( 'wp_ajax_add_evaluator', array( $this, 'callback_add_evaluator' ) );
 
 		add_action( 'display_evaluator_affected', array( $this, 'callback_display_evaluator_affected' ), 10, 1 );
 		add_action( 'display_evaluator_to_assign', array( $this, 'callback_display_evaluator_to_assign' ), 10, 1 );
@@ -44,35 +43,36 @@ class Evaluator_Action {
 	public function callback_edit_evaluator_assign() {
 		check_ajax_referer( 'edit_evaluator_assign' );
 
-		$affectation_date                = ! empty( $_POST['affectation_date'] ) ? $_POST['affectation_date'] : '';
-		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? (int)  $_POST['affectation_duration'] : '0';
-		$user_id                = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
+	
 
-////
+		$affectation_date     = ! empty( $_POST['affectation_date'] ) ? (string) $_POST['affectation_date'] : '';
+		$affectation_duration = ! empty( $_POST['affectation_duration'] ) ? (int)  $_POST['affectation_duration'] : 0;
+		$user_id              = ! empty( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
+		$parent_id            = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
+		$element = Society_Class::g()->show_by_type( $parent_id );
+
 		$evaluator = User_Class::g()->get( array( 'id' => $user_id ), true );
 		$evaluator->data['affectation_date'] = $affectation_date;
 		$evaluator->data['affectation_duration'] = $affectation_duration;
 		$evaluator->data['id'] = $user_id;
+		$evaluator->data['parent_id'] = $parent_id;
 
-		//$evaluator = User_Class::g()->update($evaluator->data);
-		// $evaluator bien à jour mais il faut mettre à jour evaluators pour la suit
-		// ne récupère pas la màj de evaluator
-
-		/*$affected_evaluators = Evaluator_Class::g()->get_list_affected_evaluator( $society );
-		*/
+		$evaluator = User_Class::g()->update($evaluator->data);
 
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 			'evaluator' 			  => $evaluator,
-			'user_id'                 => $user_id,
+			'element'                 => $element,
 		) );
+	
 		$view = ob_get_clean();
 
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'evaluator',
+			'evaluator' => $evaluator->data,
 			'callback_success' => 'callback_edit_evaluator_assign_success',
-			'view'             => $view,
+			'template'         => $view,
 		) );
 	}
 
@@ -90,7 +90,7 @@ class Evaluator_Action {
 		} else {
 			$element_id = (int) $_POST['id'];
 		}
-
+/*
 		if ( ! isset( $_POST['affectation_id'] ) ) {
 			wp_send_json_error();
 		} else {
@@ -102,37 +102,32 @@ class Evaluator_Action {
 		} else {
 			$user_id = (int) $_POST['user_id'];
 		}
-
-		$element = Society_Class::g()->show_by_type( $element_id );
+*/
+		/*$element = Society_Class::g()->show_by_type( $element_id );
 
 		if ( empty( $element ) ) {
 			wp_send_json_error();
-		}
+		}*/
 
-		$element->data['user_info']['affected_id']['evaluator'][ $user_id ][ $affectation_data_id ]['status'] = 'deleted';
+		$evaluator = Evaluator_Class::g()->get( array( 'id' => $element_id ), true );
+		$evaluator->data[ 'parent_id' ] = 0;
+		User_Class::g()->update($evaluator->data);
 
-		do_action( 'digi_add_historic', array(
-			'parent_id' => $element->data['id'],
-			'id'        => 'Indisponible',
-			'content'   => 'Mise à jour des évaluateurs',
-		) );
-
-		Society_Class::g()->update_by_type( $element );
-
-		$list_affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
 		ob_start();
-
-		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list', array(
-			'element'                 => $element,
-			'element_id'              => $element->data['id'],
-			'list_affected_evaluator' => $list_affected_evaluator,
+		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
+			'evaluator' 			  => $evaluator,
 		) );
+	
+		$view = ob_get_clean();
+
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'evaluator',
 			'callback_success' => 'callback_detach_evaluator_success',
-			'template'         => ob_get_clean(),
+			'template'             => $view,
 		) );
+
+	
 	}
 
 	/**

@@ -76,33 +76,24 @@ class Evaluator_Class extends \eoxia\User_Class {
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 
 		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
-
+		$evaluators = User_Class::g()->get(); 
+	
 		$args_where_evaluator = array(
-			'offset'     => ( $current_page - 1 ) * $this->limit_evaluator,
-			'exclude'    => array( 1 ),
-			'number'     => $this->limit_evaluator,
-			'meta_query' => array(
-				'relation' => 'OR',),
-
+			'type'         => 'user',
+			'name'         => 'user_id',
+			'icon' => 'fa-search',
+			'class' => 'evaluator',
 		);
-		$autocomplete = array(
-		'type'         => 'user',
-		'name'         => 'user_id',
-		);
-		$eo_search->register_search( 'evaluator', $autocomplete );
 
-		$evaluators = User_Class::g()->get(); //ici evaluators contient l'ensemble des users, il faudrait qu'il ne contienne que les
-											 // évaluateurs que l'on a rajouté
-
-		$tableau_test = array();
-
+		$eo_search->register_search( 'evaluator', $args_where_evaluator );
 
 		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
 		unset( $args_where_evaluator['offset'] );
 		unset( $args_where_evaluator['number'] );
 		$args_where_evaluator['fields'] = array( 'ID' );
+		
 		$count_evaluator                = count( User_Class::g()->get( $args_where_evaluator ) );
-
+	
 		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
 		$eo_search->register_search( 'item-edit', array(
 			'icon'    => 'fa-search',
