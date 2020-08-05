@@ -124,6 +124,13 @@ class User_Model extends \eoxia\User_Model {
 			'version'   => '6.0.0',
 		);
 
+		$this->schema['affectation_infos'] = array(
+			'type'      => 'array',
+			'meta_type' => 'multiple',
+			'since'     => '6.0.0',
+			'version'   => '6.0.0',
+		);
+
 		$this->schema['dashboard_compiled_data'] = array(
 			'type'      => 'array',
 			'meta_type' => 'multiple',

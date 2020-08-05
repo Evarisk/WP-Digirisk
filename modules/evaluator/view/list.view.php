@@ -28,20 +28,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 
-	if ( ! empty( $evaluators ) ) :
+	if ( ! empty ($element->data['affected_users']) ) : 
+		
+		foreach( $element->data['affected_users'] as $evaluator) :
 
+			\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
+				'element'    => $element,
+				'element_id' => $element->data['id'],
+				'evaluator'  => $evaluator,
+				) );
+
+
+
+
+
+	/*if ( ! empty( $evaluators ) ) :
 		foreach( $evaluators as $evaluator ) :
-
-			if( $evaluator->data['affectation_date'] !== 'undefined' && $evaluator->data['parent_id'] == $element->data['id'] ) {
-				\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
-					'element'    => $element,
-					'element_id' => $element->data['id'],
-					'evaluator'  => $evaluator,
-					) );
-
-			}
-
-
+			if( !empty ( $evaluator->data['affectation_infos']) ) :
+				foreach($evaluator->data['affectation_infos'] as $affected_evaluator) :
+					
+					if ( $affected_evaluator['parent_id'] == $element->data['id'] ) :
+						
+						\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
+							'element'    => $element,
+							'element_id' => $element->data['id'],
+							'evaluator'  => $evaluator,
+							) );
+						
+					endif;
+				endforeach;
+			endif;*/
 		endforeach;
 
 	endif;

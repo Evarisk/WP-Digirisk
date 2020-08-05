@@ -39,7 +39,7 @@ window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
  */
 window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
 	triggeredElement.closest( '.table-row.evaluator-row.edit' ).before( response.data.view );
-	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click();
+	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click(); 
 };
 
 /**
