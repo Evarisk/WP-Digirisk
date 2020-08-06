@@ -72,9 +72,10 @@ class Evaluator_Class extends \eoxia\User_Class {
 		$args_where_evaluator = array(
 			'type'         => 'user',
 			'name'         => 'user_id',
-			'icon' => 'fa-search',
-			'class' => 'evaluator',
+			'icon'         => 'fa-search',
+			'class'        => 'evaluator',
 		);
+		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 
 		$eo_search->register_search( 'evaluator', $args_where_evaluator );
 		$args_where_evaluator['fields'] = array( 'ID' );
@@ -88,7 +89,68 @@ class Evaluator_Class extends \eoxia\User_Class {
 			'element'                 => $element,
 			'evaluators'              => $evaluators,
 			'current_page'            => $current_page,
+			'list_affected_evaluator' => $list_affected_evaluator,
 			'default_duration'        => $default_duration,
 		) );
+	}
+
+	public function get_list_affected_evaluator( $society ) {
+		if ( 0 === $society->data['id'] || empty( $society->data['user_info'] ) || empty( $society->data['user_info']['affected_id'] ) ) {
+			return false;
+		}
+
+		$list_evaluator = array();
+		if ( ! empty( $society->data['user_info']['affected_id']['evaluator'] ) ) {
+			foreach ( $society->data['user_info']['affected_id']['evaluator'] as $evaluator_id => $array_value ) {
+				if ( ! empty( $array_value ) ) {
+					foreach ( $array_value as $index => $sub_array_value ) {
+						if ( ! empty( $sub_array_value['status'] ) && 'valid' === $sub_array_value['status'] ) {
+							$evaluator = User_Class::g()->get( array( 'id' => $evaluator_id ), true );
+							$list_evaluator[ $evaluator_id ][ $index ]['user_info']              = $evaluator;
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']       = $sub_array_value;
+							$list_evaluator[ $evaluator_id ][ $index ]['affectation_info']['id'] = $index;
+						}
+					}
+				}
+			}
+		}
+
+		$list_evaluator_affected = array();
+
+		foreach ( $list_evaluator as $evaluator_id => $array_evaluator ) {
+			if ( ! empty( $array_evaluator ) ) {
+				foreach ( $array_evaluator as $index => $evaluator ) {
+					$list_evaluator_affected[ $evaluator['affectation_info']['start']['date'] ][] = $evaluator;
+				}
+			}
+		}
+
+		krsort( $list_evaluator_affected );
+
+		return $list_evaluator_affected;
+	}
+	public function affect_user( $society, $user_id, $data ) {
+		$end_date = new \DateTime( $data['affectation_date'] );
+		$end_date->add( new \DateInterval( 'PT' . $data['affectation_duration'] . 'M' ) );
+
+		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
+
+		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
+			'status' => 'valid',
+			'start'  => array(
+				'date' => $data['affectation_date'],
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+			'end'    => array(
+				'date' => sanitize_text_field( $end_date->format( 'Y-m-d H:i:s' ) ),
+				'by'   => get_current_user_id(),
+				'on'   => current_time( 'mysql' ),
+			),
+		);
+
+		Society_Class::g()->update_by_type( $society );
+
+		return $evaluator;
 	}
 }

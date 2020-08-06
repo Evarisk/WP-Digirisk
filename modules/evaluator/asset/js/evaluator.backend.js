@@ -37,9 +37,11 @@ window.eoxiaJS.digirisk.evaluator.tabChanged = function() {
  * @since 6.0.0
  * @version 6.4.0
  */
-window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( triggeredElement, response ) {
+window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = function( element, response ) {
+	console.log('kk');
+
 	triggeredElement.closest( '.table-row.evaluator-row.edit' ).before( response.data.view );
-	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click(); 
+	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click();
 };
 
 /**

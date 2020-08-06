@@ -25,48 +25,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="table-cell table-50"><?php esc_html_e( 'Durée', 'digirisk' ); ?></div>
 		<div class="table-cell table-50 table-end"></div>
 	</div>
+	<?php if ( ! empty( $list_affected_evaluator ) ) : ?>
+		<?php foreach ( $list_affected_evaluator as $sub_list_affected_evaluator ) : ?>
+			<?php if ( ! empty( $sub_list_affected_evaluator ) ) : ?>
+				<?php foreach ( $sub_list_affected_evaluator as $evaluator ) : ?>
 
+					<?php \eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
+					'element'    => $element,
+					'element_id' => $element->data['id'],
+					'evaluator'  => $evaluator,
+					) );
+					?>
+
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
 	<?php
-
-	if ( ! empty ($element->data['affected_users']) ) : 
-		
-		foreach( $element->data['affected_users'] as $evaluator) :
-
-			\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
-				'element'    => $element,
-				'element_id' => $element->data['id'],
-				'evaluator'  => $evaluator,
-				) );
-
-
-
-
-
-	/*if ( ! empty( $evaluators ) ) :
+/*
+	if ( ! empty( $evaluators ) ) :
 		foreach( $evaluators as $evaluator ) :
 			if( !empty ( $evaluator->data['affectation_infos']) ) :
 				foreach($evaluator->data['affectation_infos'] as $affected_evaluator) :
-					
+
 					if ( $affected_evaluator['parent_id'] == $element->data['id'] ) :
-						
+
 						\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 							'element'    => $element,
 							'element_id' => $element->data['id'],
 							'evaluator'  => $evaluator,
 							) );
-						
+
 					endif;
 				endforeach;
-			endif;*/
+			endif;
 		endforeach;
 
 	endif;
-
+*/
 	\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'item-edit', array(
 		'element'          => $element,
 		'element_id'       => $element->data['id'],
-		'evaluator'        => $evaluator,
-		'default_duration' => $default_duration,
+		'list_affected_evaluator' => $list_affected_evaluator,
+	//	'default_duration' => $default_duration,
 	) );
 
 	?>

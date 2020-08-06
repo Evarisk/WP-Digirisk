@@ -155,7 +155,7 @@ class Society_Model extends \eoxia\Post_Model {
 			'child'     => array(),
 		);
 
-		$this->schema['user_info']['child']['affected_users'] = array(
+		$this->schema['user_info']['child']['affected_id'] = array(
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
 			'type'      => 'array',

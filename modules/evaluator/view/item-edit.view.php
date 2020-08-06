@@ -38,7 +38,7 @@ global $eo_search;
 			<div class="form-element group-date">
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-					<input type="hidden" class="mysql-date" value="<?php echo esc_html( mysql2date( 'd/m/Y', $evaluator['affectation_date'] ) ); ?>">
+					<input type="hidden" class="mysql-date" value="">
 					<input type="text" class="form-field date" name="affectation_date" value="<?php echo date('d/m/Y', time( ) )?>" >
 				</label>
 			</div>
@@ -48,8 +48,8 @@ global $eo_search;
 
 	<div class="table-cell table-50 duration-container">
 		<label class="form-field-container">
-			<input type="hidden"  value="<?php echo (int) esc_attr( ($evaluator['affectation_duration']) ); ?>">
-			<input type="number" name="affectation_duration" value="<?php echo $default_duration ?>">
+			<input type="hidden"  value="">
+			<input type="number" name="affectation_duration" value=" 15 <?php /* echo $default_duration */?>">
 		</label>
 	</div>
 
