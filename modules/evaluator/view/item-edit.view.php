@@ -24,7 +24,6 @@ global $eo_search;
 	<?php wp_nonce_field( 'edit_evaluator_assign' ); ?>
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $element->data['id'] ); ?>" />
 
-
 	<div class="table-cell table-50">
 		-
 	</div>
@@ -45,11 +44,10 @@ global $eo_search;
 		</div>
 	</div>
 
-
 	<div class="table-cell table-50 duration-container">
 		<label class="form-field-container">
 			<input type="hidden"  value="">
-			<input type="number" name="affectation_duration" value=" 15 <?php /* echo $default_duration */?>">
+			<input type="number" name="affectation_duration" value="<?php  echo $default_duration ?>">
 		</label>
 	</div>
 
@@ -60,7 +58,8 @@ global $eo_search;
 			     data-loader="table-evaluator"
 			     data-parent="evaluator-row"
 			     class="wpeo-button button-square-50 button-event add action-input button-progress">
-				<i class="button-icon fas fa-plus"></i></div>
+				<i class="button-icon fas fa-plus"></i>
+			</div>
 		</div>
 	</div>
 
