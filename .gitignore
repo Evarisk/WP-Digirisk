@@ -4,5 +4,3 @@ test
 phpunit.xml
 .idea
 vendor
-
-core/external/eo-framework

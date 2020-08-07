@@ -69,11 +69,11 @@ class Evaluator_Action {
 
 		Society_Class::g()->update($element->data);
 		User_Class::g()->update($evaluator->data);
-
+		
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 			'default_duration' => $default_duration,
-			'element'          => $element,
+      'element'          => $element,
 			'evaluator'        => end($affected_evaluator[$affectation_date]),
 
 		) );

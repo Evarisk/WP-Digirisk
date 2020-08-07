@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php echo esc_html( $evaluator['user_info']->data['displayname'] ); ?>
 		</div>
 		<div class="table-cell table-125"><?php echo esc_html( date( $evaluator['affectation_info']['start']['date'] ) ); ?></div>
-		<div class="table-cell table-50"><?php echo esc_html( isset( $evaluator['affectation_info']['duration'] ) ? $evaluator['affectation_info']['duration'] : Evaluator_Class::g()->get_duration($evaluator['affectation_info'])  ); ?></div>
+		<div class="table-cell table-50"><?php echo esc_html( Evaluator_Class::g()->get_duration($evaluator['affectation_info']) ); ?></div>
 		<div class="table-cell table-50 table-end">
 			<div 	class="action-delete wpeo-button button-square-50 button-grey delete"
 					data-id="<?php echo esc_attr( $element->data['id'] ); ?>"
