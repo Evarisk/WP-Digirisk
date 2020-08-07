@@ -16,6 +16,8 @@
 
 namespace digi;
 
+use eoxia\Custom_Menu_Handler as CMH;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -29,12 +31,18 @@ class Society_Action {
 	 * @since 6.0.0
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 19 );
 		add_action( 'wp_ajax_save_society', array( $this, 'callback_save_society' ) );
 		add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
 		add_action( 'wp_ajax_search_establishment', array( $this, 'callback_search_establishment' ) );
 		add_action( 'wp_ajax_display_edit_view', array( $this, 'callback_display_edit_view' ) );
 	}
 
+	public function admin_menu() {
+		if ( user_can( get_current_user_id(), 'manage_setting' ) ) {
+			CMH::register_menu('digirisk', __('Société & Organisation', 'digirisk'), __('Société & Organisation', 'digirisk'), 'manage_setting', 'digirisk-society', array(Society_Class::g(), 'display_page'), 'fa fa-building', 4);
+		}
+	}
 	/**
 	 * Sauvegardes les données d'une societé
 	 *

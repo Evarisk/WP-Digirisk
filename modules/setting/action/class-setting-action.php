@@ -157,6 +157,8 @@ class Setting_Action {
 
 		$list_accronym = $_POST['list_accronym'];
 		$list_prefix   = $_POST['list_prefix'];
+		$jsonString = file_get_contents('assets/json/default.json');
+		$data = json_decode($jsonString, true);
 
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
@@ -167,7 +169,9 @@ class Setting_Action {
 		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
 
 		Setting_Class::g()->save_prefix_settings_digirisk( $list_prefix );
-
+		$newJsonString = json_encode($data);
+		file_put_contents('assets/json/default.json', $newJsonString);
+// or if you want to change all entries with activity_code "1"
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'setting',

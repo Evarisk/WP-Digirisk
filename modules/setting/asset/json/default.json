@@ -1,7 +1,7 @@
 {
 	"A": {
 		"description": "Identifiant des accidents",
-		"to": "A"
+		"to": "DA"
 	},
 	"AL": {
 		"description": "Identifiant de l'affichage légal",

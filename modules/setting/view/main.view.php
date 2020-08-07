@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<li class="tab-element <?php echo ( 'digi-accronym' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-accronym" ><?php esc_html_e( 'Accronymes', 'digirisk' ); ?></li>
 			<li class="tab-element <?php echo ( 'digi-danger-preset' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-danger-preset" ><?php esc_html_e( 'Danger preset', 'digirisk' ); ?></li>
 			<li class="tab-element <?php echo ( 'digi-child' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-child" ><?php esc_html_e( 'Enfant', 'digirisk' ); ?></li>
-			<li class="tab-element <?php echo ( 'digi-configuration' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-configuration" ><?php esc_html_e( 'Configuration', 'digirisk' ); ?></li>
+			<li class="tab-element <?php echo ( 'digi-child' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-data" ><?php esc_html_e( 'Données', 'digirisk' ); ?></li>
 			<li class="tab-element <?php echo ( 'digi-htpasswd' === $default_tab ) ? 'tab-active' : ''; ?>" href="#" data-target="digi-htpasswd" ><?php esc_html_e( 'Htpasswd', 'digirisk' ); ?></li>
 		</ul>
 			<?php /* <a class="nav-tab <?php echo ( 'digi-define-prefix' === $default_tab ) ? 'nav-tab-active' : ''; ?>" href="#" data-id="digi-define-prefix" ><?php esc_html_e( 'Prefix ODT', 'digirisk' ); ?></a> */ ?>
@@ -69,22 +69,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					) );
 					?>
 			</div>
-
-			<div id="digi-configuration" class="tab-content <?php echo ( 'digi-configuration' === $default_tab ) ? 'tab-active' : ''; ?>">
-				<div class="">
-					<?php
-					$element    = Society_Class::g()->get_societies_in( 0 );
-					Society_Configuration_Class::g()->display( $element[0] );
-					?>
-				</div>
-				<style media="screen">
-					.main-information-society .wpeo-notice{
-						border : solid #c1b5b5 1px;
-						background-color : #c3c3c366;
-					}
-				</style>
+			<div id="digi-data" class="tab-content <?php echo ( 'digi-data' === $default_tab ) ? 'tab-active' : ''; ?>">
+				<?php
+				\eoxia\View_Util::exec( 'digirisk', 'setting', 'data/form', array(
+					'list_accronym' => $list_accronym,
+				) );
+				?>
 			</div>
-
 			<div id="digi-htpasswd" class="tab-content <?php echo ( 'digi-htpasswd' === $default_tab ) ? 'tab-active' : ''; ?>">
 				<?php Setting_Class::g()->display_htpasswd(); ?>
 			</div>
