@@ -17,7 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="table-row listing-risk-row">
 	<div class="table-cell table-75"><strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong></div>
-	<div class="table-cell"><?php echo esc_html( $element->data['title'] ); ?></div>
+	<div class="table-cell table-500"><?php echo esc_html( $element->data['title'] ); ?></div>
+	<div class="table-cell"><?php echo esc_html( $element->data['date']['raw'] ); ?></div>
+
 	<div class="table-cell table-50 table-end">
 		<div class="action alignright">
 			<?php if ( $element->data['file_generated'] ) : ?>
