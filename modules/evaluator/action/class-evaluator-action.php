@@ -56,7 +56,7 @@ class Evaluator_Action {
 
 		$element = Society_Class::g()->show_by_type( $parent_id );
 		$evaluator = User_Class::g()->get( array( 'id' => $user_id ), true );
-		
+
 		$evaluator_infos = array(
 			'affectation_date' => $affectation_date,
 			'affectation_duration' => $affectation_duration,
@@ -73,8 +73,8 @@ class Evaluator_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 			'default_duration' => $default_duration,
-			'element'                 => $element,
-			'evaluator' => end($affected_evaluator[$affectation_date]),
+      'element'          => $element,
+			'evaluator'        => end($affected_evaluator[$affectation_date]),
 
 		) );
 

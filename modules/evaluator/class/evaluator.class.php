@@ -173,6 +173,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 
 		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
 			'status' => 'valid',
+			'duration' => $data['affectation_duration'] ,
 			'start'  => array(
 				'date' => $data['affectation_date'],
 				'by'   => get_current_user_id(),
