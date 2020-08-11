@@ -55,7 +55,7 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	 */
 	public function init_option() {
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, array() );
-
+		
 		if ( empty( $list_accronym ) ) {
 			$request = wp_remote_get( \eoxia\Config_Util::$init['digirisk']->setting->url . 'asset/json/default.json' );
 
@@ -287,11 +287,42 @@ class Setting_Class extends \eoxia\Singleton_Util {
 	}
 
 	public function save_prefix_settings_digirisk( $list_prefix ){
-
+	
 		$prefix = Setting_Class::g()->get_all_prefix();
+		
 		foreach( $prefix as $key => $element ){
 			if( isset( $list_prefix[ $element[ 'element' ] ] ) && ! empty( $list_prefix[ $element[ 'element' ] ] ) ){
 				update_option( 'edit_prefix_' . $prefix[ $key ][ 'element' ], $list_prefix[ $element[ 'element' ] ][ 'to' ] );
+			}
+		}
+
+	}
+	public function get_all_default_values(){
+		$default_values = array();
+
+		$default_values[] = array( // Causerie
+			'value'   => $this->get_evaluation_default_duration(),
+			'element' => 'evaluation_default_duration',
+			'title'   => esc_html__( 'Durée d\'évaluation par défaut', 'digirisk' ),
+		);
+
+		return $default_values;
+	}
+	
+	public function get_evaluation_default_duration(){
+	
+		$evaluation_default_duration = \eoxia\Config_Util::$init['digirisk']->setting->default_settings->evaluation_default_duration;
+		return get_option( 'edit_value_evaluation_default_duration', $evaluation_default_duration );
+	}
+
+	public function save_default_values_settings_digirisk( $list_default_values ){
+
+		$default_values = Setting_Class::g()->get_all_default_values();
+		
+		foreach( $default_values as $key => $element ){
+			if( isset( $list_default_values[ $element[ 'element' ] ] ) && ! empty( $list_default_values[ $element[ 'element' ] ] ) ){
+				
+				update_option( 'edit_value_' . $default_values[ $key ][ 'element' ], $list_default_values[ $element[ 'element' ] ][ 'to' ] );
 			}
 		}
 

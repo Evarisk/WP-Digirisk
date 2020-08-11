@@ -32,6 +32,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'edit'    => isset( $focus_bloc ) && $focus_bloc == "society-more-edit" ? true : false
  		) );
   	?>
+	<style media="screen">
+		.main-information-society .wpeo-notice{
+			border : solid #c1b5b5 1px;
+			background-color : #c3c3c366;
+		}
+	</style>
 
 	<?php
   		\eoxia\View_Util::exec( 'digirisk', 'society', 'dashboard/bloc-information-detective-work', array(

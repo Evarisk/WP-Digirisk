@@ -2,7 +2,7 @@
 	"name": "Setting",
 	"slug": "setting",
 	"version": "6.5.0",
-	"description": "Le module gérant les configuration de Digirisk",
+	"description": "Le module gérant les configurations de Digirisk",
 	"path": "modules/setting/",
 	"state": true,
 	"dependencies": {
@@ -16,5 +16,8 @@
     "CAUSERIE_INTERVENTION" : "F_",
     "PLAN_PREVENTION" : "PP_",
     "PERMIS_FEU" : "PF_"
+  },
+  "default_settings":{
+	  "evaluation_default_duration" : 15
   }
 }
