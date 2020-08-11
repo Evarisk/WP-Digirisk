@@ -41,6 +41,8 @@ class Setting_Action {
 
 		add_action( 'wp_ajax_update_accronym', array( $this, 'callback_update_accronym' ) );
 
+		add_action( 'wp_ajax_update_default_values', array( $this, 'callback_update_default_values' ) );
+
 		add_action( 'display_user_capacity', array( $this, 'callback_display_user_capacity' ), 10, 1 );
 
 		add_action( 'wp_ajax_save_htpasswd', array( $this, 'callback_save_htpasswd' ) );
@@ -83,6 +85,7 @@ class Setting_Action {
 
 		$list_accronym = get_option( \eoxia\Config_Util::$init['digirisk']->accronym_option );
 		$list_accronym = ! empty( $list_accronym ) ? json_decode( $list_accronym, true ) : array();
+		$list_default_values = array();
 
 		global $wpdb;
 
@@ -121,18 +124,30 @@ class Setting_Action {
 		$parent_sites               = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
 
 		$prefix = Setting_Class::g()->get_all_prefix();
-
+		
 		foreach ( $prefix as $element ) {
 			$list_accronym[ $element['element'] ] = array(
 				'description' => $element['title'],
 				'to'          => $element['value'],
 				'element'     => $element['element'],
 				'page'        => $element['page'],
+				
 			);
 		}
-
+		
+		$default_values = Setting_Class::g()->get_all_default_values();
+		
+		foreach ( $default_values as $element ) {
+			$list_default_values[ $element['element'] ] = array(
+				'description' => $element['title'],
+				'to'          => $element['value'],
+				'element'     => $element['element'],
+			);
+		}
+		
 		\eoxia\View_Util::exec( 'digirisk', 'setting', 'main', array(
 			'list_accronym'              => $list_accronym,
+			'list_default_values'		 => $list_default_values,
 			'dangers_preset'             => $dangers_preset,
 			'default_tab'                => $default_tab,
 			'can_edit_risk_category'     => $can_edit_risk_category,
@@ -157,9 +172,7 @@ class Setting_Action {
 
 		$list_accronym = $_POST['list_accronym'];
 		$list_prefix   = $_POST['list_prefix'];
-		$jsonString = file_get_contents('assets/json/default.json');
-		$data = json_decode($jsonString, true);
-
+		
 		if ( ! empty( $list_accronym ) ) {
 			foreach ( $list_accronym as &$element ) {
 				$element['to']          = sanitize_text_field( $element['to'] );
@@ -167,15 +180,38 @@ class Setting_Action {
 			}
 		}
 		update_option( \eoxia\Config_Util::$init['digirisk']->accronym_option, wp_json_encode( $list_accronym ) );
-
+	
 		Setting_Class::g()->save_prefix_settings_digirisk( $list_prefix );
-		$newJsonString = json_encode($data);
-		file_put_contents('assets/json/default.json', $newJsonString);
+	
 // or if you want to change all entries with activity_code "1"
 		wp_send_json_success( array(
 			'namespace'        => 'digirisk',
 			'module'           => 'setting',
 			'callback_success' => 'savePrefixSettingsDigiriskSuccess',
+			'text_info'        => esc_html__( 'Sauvegardé avec succés', 'digirisk' )
+		) );
+	}
+
+	public function callback_update_default_values() {
+		
+		check_ajax_referer( 'update_default_values' );
+		
+		$list_default_values = $_POST['list_default_values'];
+
+		if ( ! empty( $list_default_values ) ) {
+			foreach ( $list_default_values as &$element ) {
+				$element['to']          = sanitize_text_field( $element['to'] );
+				$element['description'] = sanitize_text_field( stripslashes( $element['description'] ) );
+			}
+		}
+
+		Setting_Class::g()->save_default_values_settings_digirisk( $list_default_values );
+		
+// or if you want to change all entries with activity_code "1"
+		wp_send_json_success( array(
+			'namespace'        => 'digirisk',
+			'module'           => 'setting',
+			'callback_success' => 'saveDefaultValuesSettingsDigiriskSuccess',
 			'text_info'        => esc_html__( 'Sauvegardé avec succés', 'digirisk' )
 		) );
 	}

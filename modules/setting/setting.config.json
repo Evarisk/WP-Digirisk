@@ -16,5 +16,8 @@
     "CAUSERIE_INTERVENTION" : "F_",
     "PLAN_PREVENTION" : "PP_",
     "PERMIS_FEU" : "PF_"
+  },
+  "default_settings":{
+	  "evaluation_default_duration" : 15
   }
 }
