@@ -115,14 +115,14 @@ class Statistics_Action {
 											$data_value[]     = isset( $data_all[ $society['post_name'] ]['1'] ) ? $data_all[ $society['post_name'] ]['1'] : 0;
 											break;
 										case 4:
-											$label            = 'Nombre de Risques';
-											$text             = 'Nombre de Risques sur la societé ' . strtoupper( $info_society->data['title'] );
+											$label            = 'Nombre de risques';
+											$text             = 'Nombre de risques sur la societé ' . strtoupper( $info_society->data['title'] );
 											$background_color = array( 30, 144, 255, 0.5 );
 											$border_color     = array( 30, 144, 255, 1 );
 											$data_value[]     = array_sum( $data_all[ $society['post_name'] ] );
 											break;
 										case 5:
-											$text = 'Ensemble des Risques sur la societé ' . strtoupper( $info_society->data['title'] );
+											$text = 'Ensemble des risques sur la societé ' . strtoupper( $info_society->data['title'] );
 											break;
 										case 6:
 //											$label            = 'Risque inacceptable';
@@ -243,7 +243,7 @@ class Statistics_Action {
 
 					switch ( $i ) {
 						case 0:
-							$labels           = array( 'Risque inacepptable', 'Risque à traiter', 'Risque à plannifier', 'Risque sans risques' );
+							$labels           = array( 'Risque inacceptable', 'Risque à traiter', 'Risque à planifier', 'Risque sans risque' );
 							$label            = $element->post_title;
 							$text             = 'Ensemble des Risques sur ' . $unique_identifier . ' ' . $element->post_title;
 							$background_color = array( 30, 144, 255, 0.5 );
@@ -252,6 +252,7 @@ class Statistics_Action {
 							$data_value[1]    = isset( $data_all[ $element->post_name ]['3'] ) ? $data_all[ $element->post_name ]['3'] : 0;
 							$data_value[2]    = isset( $data_all[ $element->post_name ]['2'] ) ? $data_all[ $element->post_name ]['2'] : 0;
 							$data_value[3]    = isset( $data_all[ $element->post_name ]['1'] ) ? $data_all[ $element->post_name ]['1'] : 0;
+							
 							break;
 						case 1:
 							$labels           = array( 'RTHPM', 'RCH', 'RCIV', 'RRM', 'RCPT', 'RMN', 'RPED', 'RAB', 'RET', 'RECO', 'RNB', 'RAT', 'RIE', 'RE', 'RAL', 'RR', 'RP', 'RA', 'RA2' );
@@ -347,9 +348,9 @@ class Statistics_Action {
 									}
 									switch ( $i ) {
 										case 0:
-											$labels           = array( 'Risque inacepptable', 'Risque à traiter', 'Risque à plannifier', 'Risque sans risques' );
+											$labels           = array( 'Risque inacceptable', 'Risque à traiter', 'Risque à planifier', 'Risque sans risque' );
 											$label            = $element->post_title;
-											$text             = 'Ensemble des Risques sur ' . $unique_identifier . ' ' . $element->post_title;
+											$text             = 'Ensemble des risques sur ' . $unique_identifier . ' ' . $element->post_title;
 											$background_color = array( 30, 144, 255, 0.5 );
 											$border_color     = array( 30, 144, 255, 1 );
 											$data_value[0]    = isset( $data_all[ $element->post_name ]['4'] ) ? $data_all[ $element->post_name ]['4'] : 0;

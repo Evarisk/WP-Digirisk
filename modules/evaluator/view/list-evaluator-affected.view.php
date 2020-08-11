@@ -16,18 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 <table class="table affected-evaluator">
-	<thead>
-		<tr>
-			<th class="w50"></th>
-			<th class="padding"><?php esc_html_e( 'ID', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Nom', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Prénom', 'digirisk' ); ?></th>
-			<th><?php esc_html_e( 'Date d\'affectation', 'digirisk' ); ?></th>
-			<th class="padding"><?php esc_html_e( 'Durée', 'digirisk' ); ?></th>
-			<th class="w50"></th>
-		</tr>
-	</thead>
-
+	
 	<tbody>
 		<?php if ( ! empty( $list_affected_evaluator ) ) : ?>
 			<?php foreach ( $list_affected_evaluator as $sub_list_affected_evaluator ) : ?>

@@ -109,6 +109,8 @@ class Accident_Filter extends Identifier_Filter {
 
 		$object->data['number_field_completed'] = $this->accident_calcul_completed_field( $object, array() );
 
+		$object->data['comment'] = Accident_Comment_Class::g()->get( array( 'post_id' => $object->data['id'] ) );
+
 		return $object;
 	}
 

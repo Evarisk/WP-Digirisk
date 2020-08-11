@@ -25,7 +25,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\digi\User_Model';
+	protected $model_name = '\digi\User_Model'; // CHANGER CHEMIN d'accès pour voir
 
 	/**
 	 * La clé principale du modèle
@@ -56,13 +56,6 @@ class Evaluator_Class extends \eoxia\User_Class {
 	public $element_prefix = 'U';
 
 	/**
-	 * La limite des risques a afficher par page
-	 *
-	 * @var integer
-	 */
-	public $limit_evaluator = 5;
-
-	/**
 	 * Fait le rendu des evaluateurs
 	 *
 	 * @since 6.0.0
@@ -73,62 +66,34 @@ class Evaluator_Class extends \eoxia\User_Class {
 	public function render( $element, $current_page = 1 ) {
 		global $eo_search;
 
-		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 		$current_page            = ! empty( $_POST['next_page'] ) ? (int) $_POST['next_page'] : 1; // WPCS: input var ok.
-
+		$evaluators = User_Class::g()->get();
+		$default_duration = 15;
 		$args_where_evaluator = array(
-			'offset'     => ( $current_page - 1 ) * $this->limit_evaluator,
-			'exclude'    => array( 1 ),
-			'number'     => $this->limit_evaluator,
-			'meta_query' => array(
-				'relation' => 'OR',
-			),
+			'type'         => 'user',
+			'name'         => 'user_id',
+			'icon'         => 'fa-search',
+			'class'        => 'evaluator',
 		);
+		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
 
-		$evaluators = User_Class::g()->get( $args_where_evaluator );
-
-		// Pour compter le nombre d'utilisateur en enlevant la limit et l'offset.
-		unset( $args_where_evaluator['offset'] );
-		unset( $args_where_evaluator['number'] );
+		$eo_search->register_search( 'evaluator', $args_where_evaluator );
 		$args_where_evaluator['fields'] = array( 'ID' );
-		$count_evaluator                = count( User_Class::g()->get( $args_where_evaluator ) );
-
-		$number_page = ceil( $count_evaluator / $this->limit_evaluator );
-
-		$eo_search->register_search( 'evaluator_to_assign', array(
-			'icon'        => 'fa-search',
-			'type'        => 'user',
-			'name'        => 'evaluator',
-			'next_action' => 'display_evaluator_to_assign',
-			'post_id'     => $element->data['id'],
+		$eo_search->register_search( 'item-edit', array(
+			'icon'    => 'fa-search',
+			'type'    => 'user',
+			'name'    => 'evaluator',
+			'post_id' => $element->data['id'],
 		) );
-
-		$eo_search->register_search( 'evaluator_affected', array(
-			'icon'        => 'fa-search',
-			'type'        => 'user',
-			'name'        => 'evaluator',
-			'next_action' => 'display_evaluator_affected',
-			'post_id'     => $element->data['id'],
-		) );
-
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'main', array(
 			'element'                 => $element,
 			'evaluators'              => $evaluators,
-			'list_affected_evaluator' => $list_affected_evaluator,
-			'number_page'             => $number_page,
 			'current_page'            => $current_page,
+			'list_affected_evaluator' => $list_affected_evaluator,
+			'default_duration'        => $default_duration,
 		) );
 	}
 
-	/**
-	 * Récupère la liste des évaluateurs affectés avec ses informations d'affectations à ce groupement
-	 *
-	 * @param Group_Model $society La société.
-	 * @return array
-	 *
-	 * @since 6.0.0
-	 * @version 6.5.0
-	 */
 	public function get_list_affected_evaluator( $society ) {
 		if ( 0 === $society->data['id'] || empty( $society->data['user_info'] ) || empty( $society->data['user_info']['affected_id'] ) ) {
 			return false;
@@ -201,15 +166,16 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @return Evaluator_Model   Les données de l'évaluateur.
 	 */
 	public function affect_user( $society, $user_id, $data ) {
-		$end_date = new \DateTime( $data['on'] );
-		$end_date->add( new \DateInterval( 'PT' . $data['duration'] . 'M' ) );
-
+		
+		$end_date = new \DateTime( mysql2date('Y-m-d H:i:s', $data['affectation_date']) );
+		$end_date->add( new \DateInterval( 'PT' . $data['affectation_duration'] . 'M' ) );
 		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
 
 		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
 			'status' => 'valid',
+			'duration' => $data['affectation_duration'] ,
 			'start'  => array(
-				'date' => $data['on'],
+				'date' => $data['affectation_date'],
 				'by'   => get_current_user_id(),
 				'on'   => current_time( 'mysql' ),
 			),
@@ -224,5 +190,4 @@ class Evaluator_Class extends \eoxia\User_Class {
 
 		return $evaluator;
 	}
-
 }
