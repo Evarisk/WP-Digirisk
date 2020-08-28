@@ -101,7 +101,6 @@ class User_Model extends \eoxia\User_Model {
 			'version'   => '6.0.0',
 			'child'     => array(),
 		);
-
 		$this->schema['dashboard_compiled_data']['child']['last_evaluation_date'] = array(
 			'since'     => '6.0.0',
 			'version'   => '6.0.0',
