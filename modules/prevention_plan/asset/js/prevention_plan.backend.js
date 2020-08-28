@@ -432,11 +432,11 @@ window.eoxiaJS.digirisk.preventionPlan.regexPhoneNumber = function(event) {
 
 	if(/^((\+)33|0)[1-9](\d{2}){4}$/.test(event.target.value) == false) {
 		jQuery(document).find('.form-element.element-phone').addClass("form-element-error")
-		jQuery(document).find('.form-element.element-phone').addClass("wpeo-tooltip-event")
+		jQuery(document).find('.wpeo-button.prevention-start').addClass("button-disable")
 	}
 	else if (jQuery(document).find('.form-element.element-phone').hasClass("form-element-error")) {
 		jQuery(document).find('.form-element.element-phone').removeClass("form-element-error")
-		jQuery(document).find('.form-element.element-phone').removeClass("wpeo-tooltip-event")
+		jQuery(document).find('.wpeo-button.prevention-start').removeClass("button-disable")
 
 	}
 }

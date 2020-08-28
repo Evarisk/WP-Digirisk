@@ -143,14 +143,15 @@ class Evaluator_Class extends \eoxia\User_Class {
 		if ( empty( $user_affectation_info['start']['date'] ) || empty( $user_affectation_info['end']['date'] ) ) {
 			return 0;
 		}
-
-		$start_date = new \DateTime( $user_affectation_info['start']['date'] );
-		$end_date   = new \DateTime( $user_affectation_info['end']['date'] );
+		
+		$start_date = str_replace('/', '-', $user_affectation_info['start']['date']);
+		$start_date = new \DateTime( $start_date );
+		$end_date   = new \DateTime( $user_affectation_info['end']['date']);
 		$interval   = $start_date->diff( $end_date );
-
+		
 		$minutes  = $interval->format( '%h' ) * 60;
 		$minutes += $interval->format( '%i' );
-
+		
 		return $minutes;
 	}
 
@@ -166,11 +167,13 @@ class Evaluator_Class extends \eoxia\User_Class {
 	 * @return Evaluator_Model   Les données de l'évaluateur.
 	 */
 	public function affect_user( $society, $user_id, $data ) {
-		
-		$end_date = new \DateTime( mysql2date('Y-m-d H:i:s', $data['affectation_date']) );
-		$end_date->add( new \DateInterval( 'PT' . $data['affectation_duration'] . 'M' ) );
-		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
 
+		$evaluator = Evaluator_Class::g()->get( array( 'id' => $user_id ), true );
+		$start_date = str_replace('/', '-', $data['affectation_date']);
+		$end_date = new \DateTime(date('Y-m-d', strtotime( $start_date ) ) );
+		$end_date->add( new \DateInterval( 'PT' . $data['affectation_duration'] . 'M' ) );
+		$formated_end_date = $end_date->format('Y-m-d H:i:s');
+		
 		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
 			'status' => 'valid',
 			'duration' => $data['affectation_duration'] ,
@@ -180,7 +183,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 				'on'   => current_time( 'mysql' ),
 			),
 			'end'    => array(
-				'date' => sanitize_text_field( $end_date->format( 'Y-m-d H:i:s' ) ),
+				'date' => $formated_end_date,
 				'by'   => get_current_user_id(),
 				'on'   => current_time( 'mysql' ),
 			),

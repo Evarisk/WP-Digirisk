@@ -60,12 +60,15 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			$accident = $accidents[0];
 		}
 
-		$last_accident = \DateTime::createFromFormat('d/m/Y', $accident->data['date']['rendered']['date']);
-		$last_accident = $last_accident->format('Y-m-d');
-		$last_accident = new \DateTime($last_accident);
-		$current_date = new \DateTime(date('Y-m-d',time()));
-		$days_without_accident = date_diff($last_accident,$current_date)->format('%a');
-
+		$days_without_accident = 'N/A';
+		if ( ! empty ($accident)) {
+			$last_accident = \DateTime::createFromFormat('d/m/Y', $accident->data['accident_date']['rendered']['date']);
+			$last_accident = $last_accident->format('Y-m-d');
+			$last_accident = new \DateTime($last_accident);
+			$current_date = new \DateTime(date('Y-m-d',time()));
+			$days_without_accident = date_diff($last_accident,$current_date)->format('%a');	
+		}
+	
 		$count_users = count_users();
 
 		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );

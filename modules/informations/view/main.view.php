@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		<p>
 			<span><?php esc_html_e( 'Date du dernier accident:', 'digirisk' ); ?></span>
 
-			<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
+			<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['accident_date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
 		</p>
 
 		<p>
