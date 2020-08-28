@@ -89,7 +89,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </form>
 */ ?>
 
-<button data-action="generate_legal_display" class="wpeo-button button-main action-input" data-parent="form">
+<button data-action="generate_legal_display" class="wpeo-button button-main action-attribute" data-parent="form" data-parent-id="<?php echo esc_attr( $element_id ); ?>">
 	<i class="button-icon fas fa-sync-alt"></i>
 	<span><?php esc_html_e( 'Générer les affichages légaux A3 et A4', 'digirisk' ); ?></span>
 </button>

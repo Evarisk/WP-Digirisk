@@ -95,10 +95,13 @@ class Legal_Display_Action {
 
 	public function callback_generate_legal_display() {
 		$parent_id = ! empty( $_POST['parent_id'] ) ? (int) $_POST['parent_id'] : 0;
-		$legal_display = Legal_Display_Class::g()->get( array(
-			'parent_id'      => $parent_id,
-			'posts_per_page' => 1,
-		), true );
+
+//		$legal_display = Legal_Display_Class::g()->get_legal_display( array(
+//			'ID'    => $parent_id,
+//			'posts_per_page' => 1,
+//		), true );
+
+		$legal_display = Legal_Display_Class::g()->get_legal_display( $parent_id );
 
 		$society = Society_Class::g()->show_by_type( $parent_id );
 

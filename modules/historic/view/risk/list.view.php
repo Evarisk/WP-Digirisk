@@ -19,7 +19,7 @@ namespace digi;
 
 defined( 'ABSPATH' ) || exit; ?>
 
-<div class="wpeo-table table-flex risk">
+<div class="wpeo-table table-flex table-risk">
 	<div class="table-row table-header">
 		<div class="table-cell table-50"><?php esc_html_e( 'Ref', 'digirisk' ); ?>.</div>
 		<div class="table-cell table-150"><?php esc_html_e( 'Date', 'digirisk' ); ?></div>

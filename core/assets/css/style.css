@@ -275,9 +275,9 @@ le responsive sera activé manuellement.
 .wpeo-wrap .fa,
 .wpeo-wrap .fas,
 .wpeo-wrap .navigation-container .unit > .unit-container .toggle-unit .icon,
-.wpeo-wrap .far,
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev,
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next,
+.wpeo-wrap .far,
 .wpeo-wrap .fal,
 .wpeo-wrap .unit.toggled > .unit-container .toggle-unit .icon,
 .wpeo-wrap .fab {
@@ -2700,12 +2700,14 @@ le responsive sera activé manuellement.
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-prev:before {
   left: 16px;
   font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+  font-weight: 900;
   content: "\f104";
 }
 
 .wpeo-wrap.wpdigi-installer .wpdigi-components .owl-nav .owl-next:before {
   right: 16px;
   font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro";
+  font-weight: 900;
   content: "\f105";
 }
 
