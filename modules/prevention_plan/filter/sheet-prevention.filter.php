@@ -148,6 +148,8 @@ class Sheet_Prevention_Filter extends Identifier_Filter {
 		}
 
 		$date_end = "";
+		$date_end = date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
+		
 		if( $prevention->data[ 'date_end__is_define' ] == "defined" ){
 			$date_end = date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'rendered' ][ 'mysql' ] ) );
 		}else{
