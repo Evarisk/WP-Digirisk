@@ -112,7 +112,10 @@ class Document_Util_Class extends \eoxia\Singleton_Util {
 
 		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'http' ), ABSPATH, $picture_definition[0] ) );
 		$picture_final_path = str_replace( '\\', '/', str_replace( site_url( '/', 'https' ), ABSPATH, $picture_final_path ) );
-		$picture_final_path = preg_replace( '/\pM+/u', $picture_final_path);
+		if ( preg_match( '/\pM+/u', $picture_final_path ) ) {
+			return 'Erreur : Le nom de cette image contient des accents et/ou des caractères spéciaux';
+		}
+		
 		$picture = array();
 
 		if ( is_file( $picture_final_path ) ) {
