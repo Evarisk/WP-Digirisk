@@ -20,8 +20,11 @@ defined( 'ABSPATH' ) || exit; ?>
 	<div class="table-cell table-75">
 		<strong><?php echo esc_html( $element->data['unique_identifier'] ); ?></strong>
 	</div>
-	<div class="table-cell">
+	<div class="table-cell table-500">
 		<?php echo esc_html( $element->data['title'] ); ?>
+	</div>
+	<div class="table-cell">
+		<?php echo esc_html( $element->data['date']['raw'] ); ?>
 	</div>
 	<div class="table-cell table-end table-50">
 		<div class="action">

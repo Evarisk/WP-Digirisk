@@ -15,7 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $eo_search; ?>
+global $eo_search;
+?>
+
 <div class="table-row-advanced" data-id="<?php echo esc_attr( $accident->data['id'] ); ?>">
 	<input type="hidden" name="action" value="edit_accident" />
 	<?php wp_nonce_field( 'edit_accident' ); ?>
@@ -30,7 +32,7 @@ global $eo_search; ?>
 		<div data-title="<?php esc_attr_e( 'Name., Surname.. victime', 'digirisk' ); ?>" class="table-cell table-150"><?php echo ! empty( $accident->data['victim_identity']->data['id'] ) ? User_Class::g()->element_prefix . $accident->data['victim_identity']->data['id'] . ' ' . $accident->data['victim_identity']->data['login'] : ''; ?></div>
 		<div data-title="<?php esc_attr_e( 'Date & hour', 'digirisk' ); ?>" class="table-cell table-100"><?php echo esc_html( $accident->data['accident_date']['rendered']['date_time'] ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Place', 'digirisk' ); ?>" class="table-cell table-150"><?php echo esc_attr( $accident->data['place']->data['unique_identifier'] . ' ' . $accident->data['place']->data['title'] ); ?></div>
-		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="table-cell"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="view" display_date="false" display_user="false"]' ); ?></div>
+		<div data-title="<?php esc_attr_e( 'Circumstance', 'digirisk' ); ?>" class="table-cell"><?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="digi" type="accident_comment" display="view" display_date="false" display_user="false"]' ); ?></div>
 		<div data-title="<?php esc_attr_e( 'Indicators', 'digirisk' ); ?>" class="table-cell table-75"><span class="number-field"><?php echo esc_attr( $accident->data['number_field_completed'] ); ?></span>/13</div>
 		<div data-title="<?php esc_attr_e( 'Actions', 'digirisk' ); ?>" class="table-cell table-150 table-end">
 			<div class="action">
@@ -65,11 +67,10 @@ global $eo_search; ?>
 					</div>
 				</div>
 			</div>
-
 			<div class="form-element">
 				<span class="form-label"><?php esc_html_e( 'Detailed circumstances', 'digirisk' ); ?></span>
 				<label class="form-field-container">
-					<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="eoxia" type="comment" display="edit" display_date="false" display_user="false"]' ); ?>
+					<?php do_shortcode( '[digi_comment id="' . $accident->data['id'] . '" namespace="digi" type="accident_comment" display="edit" display_date="false" display_user="false"]' ); ?>
 				</label>
 			</div>
 
@@ -91,27 +92,28 @@ global $eo_search; ?>
 								</div>
 								<div class="wpeo-button button-grey button-square-30 edit-work-stopping-communication-link" data-action="editAccidentWorkStoppingCommunication">
 										<i class="button-icon fas fa-pencil-alt" ></i>
-								</div>	
+								</div>
 							</span>
 						<?php else : ?>
-							<span class="content"> 
-								<?php echo "Renseignez un lien vers votre déclaration d'arrêt de travail : ";?>	
+							<span class="content">
+								<?php echo "Renseignez un lien vers votre déclaration d'arrêt de travail : ";?>
 							</span>
 						<?php endif ; ?>
-							
-						<label class="form-field-container">
 							<ul class="comment-container">
 								<li class="comment tooltip red">
-									<div class="work-stop-field">
+									<div class="work-stop-field form-element">
+										<label class="form-field-container">
 										<?php if ( empty( $accident->data['work_stopping_communication'] )): ?>
-											<input type="text" class="form-field" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+											<span class="form-field-icon-prev"><i class="fas fa-book-reader" ></i></span>
+											<input type="text" placeholder="https:// ..." class="form-field" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
 										<?php else : ?>
-											<input class="form-field work-stop hidden" id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
+											<span class="form-field-icon-prev work-stop hidden"><i class="fas fa-book-reader" ></i></span>
+											<input class="form-field work-stop hidden" placeholder="https:// ..." id="work_stopping_communication" name="accident[work_stopping_communication]" value="<?php echo ( $accident->data['work_stopping_communication'] ); ?>">
 										<?php endif ; ?>
+										</label>
 									</div>
 								</li>
 							</ul>
-						</label>
 					</div>
 				</div>
 			</div>

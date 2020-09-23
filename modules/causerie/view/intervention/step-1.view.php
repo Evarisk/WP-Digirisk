@@ -11,6 +11,8 @@
 
 namespace digi;
 
+use eoxia\View_Util;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -53,7 +55,7 @@ global $eo_search; ?>
 					<span><?php esc_html_e( 'Signer', 'digirisk' ); ?></span>
 				</div>
 				<?php
-				\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+				View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
 					'action' => 'causerie_save_signature',
 					'id' => get_current_user_id(),
 				) );
@@ -67,13 +69,13 @@ global $eo_search; ?>
 					aria-label="Modifier la signature"
 					data-parent="signature"
 					data-target="modal-signature"
-					data-title="<?php esc_html_e( 'Signature de l\'utilisateur: ' . $user->data->display_name, 'task-manager' ); ?>">
+					data-title="<?php esc_html_e( 'Signature de l\'utilisateur: '  , 'task-manager' ); ?>">
 					<img class="signature" src="<?php echo esc_attr( wp_get_attachment_url( $final_causerie->data['former']['signature_id'] ) ); ?>">
 					<span class="button-float-icon animated wpeo-tooltip-event" aria-label="Modifier la signature"><i class="fas fa-pencil-alt"></i></span>
 					<?php
-//						\eoxia\View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
-//							'action' => 'causerie_save_signature',
-//						) );
+						View_Util::exec( 'digirisk', 'causerie', 'intervention/modal', array(
+							'action' => 'causerie_save_signature',
+						) );
 					?>
 				</div>
 			</div>

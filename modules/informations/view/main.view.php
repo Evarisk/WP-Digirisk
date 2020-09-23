@@ -33,9 +33,15 @@ defined( 'ABSPATH' ) || exit; ?>
 	<div class="wpeo-gridlayout grid-3">
 		<p>
 			<span><?php esc_html_e( 'Date du dernier accident:', 'digirisk' ); ?></span>
-			<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
+
+			<span><strong><?php echo ( ! empty( $accident ) ) ? $accident->data['accident_date']['rendered']['date'] : __( 'N/A', 'digirisk' ); ?></strong></span>
 		</p>
-		<p><?php _e( 'Nombre de jour sans Accident: <strong>N/A</strong> jours', 'digirisk' ); ?></p>
+
+		<p>
+			<span><?php esc_html_e( 'Nombre de jour sans accident:', 'digirisk' ); ?></span>
+
+			<span><strong><?php echo isset($days_without_accident) ? $days_without_accident : __( 'N/A', 'digirisk' ); ?></strong></span>
+		</p>
 		<p><?php printf( __( 'Unité de Travail concernée: <strong>%s</strong>', 'digirisk' ), ! empty( $accident ) ? $accident->data['place']->data['unique_identifier'] . ' - ' . $accident->data['place']->data['title'] : 'N/A' ); ?></p>
 	</div>
 <?php endif; ?>

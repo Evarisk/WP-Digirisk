@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
 					<input type="text" class="mysql-date" name="start_date"
 					value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
-					<input type="text" class="form-field date"
+					<input type="text" class="form-field date start-date"
 					value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) ) ); ?>">
 				</label>
 			</div>
@@ -63,6 +63,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span class="form-label">
 							<?php esc_html_e( 'Fin d\'intervention', 'digirisk' ); ?>
 						</span>
+						<span class="wpeo-tooltip-event"
+ 						aria-label="<?php esc_html_e( 'La durée maximale d\'un plan de prévention est de 1 an', 'digirisk' ); ?>"
+ 						style="color : dodgerblue; cursor : pointer">
+ 							<i class="fas fa-info-circle"></i>
+ 						</span>
 						<div class="" style="margin-left: 2%; display: flex;">
 							<?php if( $prevention->data[ 'date_end__is_define' ] == "defined" ): ?>
 								<div class="wpeo-button button-blue action-button-end-date button-radius-3 button-prevention-title" data-action="defined">
@@ -85,14 +90,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php if( $prevention->data[ 'date_end__is_define' ] == "defined" ): ?>
 						<label class="form-field-container">
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
-							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_end' ][ 'raw' ] ) ) ); ?>">
-						</label>
+							<input type="text" class="mysql-date maximal-date-prevention-sql" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>">
+							<input type="text" class="form-field date maximal-date-prevention" max-date="<?php echo esc_attr( date( 'Y/m/d', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>">						</label>
 					<?php else: ?>
 						<label class="form-field-container">
 							<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-							<input type="text" class="mysql-date" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
-							<input type="text" class="form-field date" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( $prevention->data[ 'date_start' ][ 'raw' ] ) + 86400 ) ); ?>">
+							<input type="text" class="mysql-date maximal-date-prevention-sql" name="end_date" value="<?php echo esc_attr( date( 'Y-m-d', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>">
+							<input type="text" class="form-field date maximal-date-prevention"  max-date="<?php echo esc_attr( date( 'Y/m/d', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>" value="<?php echo esc_attr( date( 'd/m/Y', strtotime( '1 year', strtotime($prevention->data[ 'date_start' ][ 'raw' ] ) ) ) ); ?>">
 						</label>
 					<?php endif; ?>
 				</div>
@@ -159,9 +163,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
-<div style="height : 200px">
-
-</div>
 <style>
 .button-prevention-title{
 	padding-top: 2px;

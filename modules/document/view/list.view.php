@@ -18,7 +18,9 @@ defined( 'ABSPATH' ) || exit; ?>
 
 <div class="table-row table-header">
 	<div class="table-cell table-75"><?php esc_html_e( 'Ref', 'digirisk' ); ?></div>
-	<div class="table-cell"><?php esc_html_e( 'Nom', 'digirisk' ); ?></div>
+	<div class="table-cell table-500"><?php esc_html_e( 'Nom', 'digirisk' ); ?></div>
+	<div class="table-cell"><?php esc_html_e( 'Date de génération', 'digirisk' ); ?></div>
+
 	<div class="table-cell table-50 table-end"></div>
 </div>
 

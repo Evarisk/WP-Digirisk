@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 5.4
-Stable tag: 7.5.4
+Stable tag: 7.6.0
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,21 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.6.0 =
+
+- Autres: Corrections orthographiques, ajout du picto Digirisk au menu de WordPress
+- Evaluateur: Changement de l'interface utilisateur 
+- Accident: Changement de l'interface utilisateur, correction de l'erreur lors de la suppression d'un commentaire
+- Documents: Correction de l'erreur lors de la génération d'un document contenant des images encodées avec un accent 
+- Task-manager: Le lien entre Digirisk et Task Manager est rétabli
+- Permis de feu: Amélioration de l'interface utilisateur
+- Plan de prévention: Amélioration de l'interface utilisateur, ajout d'une limite d'un an aux plan de prévention
+- Statistiques: Correction des statistiques affichées, correction de l'erreur lors de la génération des csv liés aux statistiques
+- Réglages: Changement de l'interface utilisateur
+- Causerie: Changement de l'interface utilisateur, correction de l'erreur lors de la signature d'une causerie empêchant de passer à l'étape suivante
+- Documents Générés: Ajout de la date et de l'heure de génération des documents (Fiche GP, UT, listing des risques, etc.)
+- GP/UT: Report de la date du dernier accident et du nombre de jours sans accident sur la page d'accueil
 
 = Version 7.5.4 =
 

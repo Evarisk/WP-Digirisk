@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					data-loader="table-risk"
 					data-action="load_risk"><i class="button-icon fas fa-pencil-alt"></i></div>
 
-			<div    class="wpeo-button button-square-50 button-transparent w50 action-corrective action-delete"
+			<div    class="wpeo-modal-event wpeo-button button-square-50 button-transparent w50 action-corrective"
 			        data-parent="risk-row"
 			        data-class="wpeo-wrap corrective-task tm-wrap"
 			        data-action="open_task"

@@ -89,7 +89,7 @@ class Accident_Travail_Stopping_Day_Class extends \eoxia\Post_Class {
 					$associate_file_args = array(
 						'id'         => (int) $stopping_day->data['id'],
 						'field_name' => 'document',
-						'file_id'    => $_POST['document'], // WPCS: CSRF ok.
+						//'file_id'    => $_POST['document'], // WPCS: CSRF ok.
 						'model_name' => '\digi\Accident_Travail_Stopping_Day_Class',
 					);
 

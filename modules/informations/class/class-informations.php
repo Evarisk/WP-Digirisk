@@ -50,15 +50,25 @@ class Informations_Class extends \eoxia\Singleton_Util {
 		}
 
 		$accident  = null;
-		$accidents = get_posts( array(
+		/*$accidents = get_posts( array(
 			'posts_per_page' => 1,
 			'post_type'      => Accident_Class::g()->get_type(),
-		) );
+		) );*/
+		$accidents = Accident_Class::g()->get();
 
 		if ( count( $accidents ) > 0 ) {
 			$accident = $accidents[0];
 		}
 
+		$days_without_accident = 'N/A';
+		if ( ! empty ($accident)) {
+			$last_accident = \DateTime::createFromFormat('d/m/Y', $accident->data['accident_date']['rendered']['date']);
+			$last_accident = $last_accident->format('Y-m-d');
+			$last_accident = new \DateTime($last_accident);
+			$current_date = new \DateTime(date('Y-m-d',time()));
+			$days_without_accident = date_diff($last_accident,$current_date)->format('%a');	
+		}
+	
 		$count_users = count_users();
 
 		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
@@ -156,6 +166,7 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			'general_options'       => $general_options,
 			'date_before_next_duer' => $date_before_next_duer,
 			'type'                  => $element->data['type'],
+			'days_without_accident' => $days_without_accident,
 		) );
 	}
 

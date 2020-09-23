@@ -80,8 +80,9 @@ class Sheet_Causerie_Filter extends Identifier_Filter {
 
 		if ( isset( $args['causerie'] ) ) {
 			$causerie              = $args['causerie'];
-			$causerie_intervention = $args['parent'];
 		}
+
+		$causerie_intervention = $args['parent'];
 		$causerie = apply_filters( 'digi_add_custom_key_to_causerie', $causerie );
 
 		$data = array(

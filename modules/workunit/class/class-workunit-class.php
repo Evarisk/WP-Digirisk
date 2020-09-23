@@ -67,7 +67,7 @@ class Workunit_Class extends \eoxia\Post_Class {
 	 *
 	 * @var string
 	 */
-	protected $post_type_name = 'Unitée de travail';
+	protected $post_type_name = 'Unité de travail';
 
 }
 

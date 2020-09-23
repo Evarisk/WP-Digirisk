@@ -27,6 +27,7 @@ class User_Filter {
 	 */
 	public function __construct() {
 		add_filter( 'eo_search_results_accident_user', array( $this, 'callback_eo_search' ) );
+		add_filter( 'eo_search_results_evaluator', array( $this, 'callback_eo_search' ) );
 		add_filter( 'eo_search_results_society_information_owner', array( $this, 'callback_eo_search' ) );
 	}
 
