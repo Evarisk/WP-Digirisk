@@ -76,7 +76,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 			'class'        => 'evaluator',
 		);
 		$list_affected_evaluator = $this->get_list_affected_evaluator( $element );
-
+	
 		$eo_search->register_search( 'evaluator', $args_where_evaluator );
 		$args_where_evaluator['fields'] = array( 'ID' );
 		$eo_search->register_search( 'item-edit', array(
@@ -120,11 +120,12 @@ class Evaluator_Class extends \eoxia\User_Class {
 		foreach ( $list_evaluator as $evaluator_id => $array_evaluator ) {
 			if ( ! empty( $array_evaluator ) ) {
 				foreach ( $array_evaluator as $index => $evaluator ) {
+					$evaluator['affectation_info']['start']['date'] = str_replace('/', '-', $evaluator['affectation_info']['start']['date']);
 					$list_evaluator_affected[ $evaluator['affectation_info']['start']['date'] ][] = $evaluator;
 				}
 			}
 		}
-
+		
 		krsort( $list_evaluator_affected );
 
 		return $list_evaluator_affected;
@@ -173,7 +174,7 @@ class Evaluator_Class extends \eoxia\User_Class {
 		$end_date = new \DateTime(date('Y-m-d', strtotime( $start_date ) ) );
 		$end_date->add( new \DateInterval( 'PT' . $data['affectation_duration'] . 'M' ) );
 		$formated_end_date = $end_date->format('Y-m-d H:i:s');
-		
+				
 		$society->data['user_info']['affected_id']['evaluator'][ $user_id ][] = array(
 			'status' => 'valid',
 			'duration' => $data['affectation_duration'] ,

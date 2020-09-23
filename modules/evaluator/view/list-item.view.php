@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="avatar" style="background-color: #<?php echo esc_attr( $evaluator['user_info']->data['avatar_color'] ); ?>;"><span><?php echo esc_html( $evaluator['user_info']->data['initial'] ); ?></span></div>
 			<?php echo esc_html( $evaluator['user_info']->data['displayname'] ); ?>
 		</div>
-		<div class="table-cell table-125"><?php echo esc_html( date( $evaluator['affectation_info']['start']['date'] ) ); ?></div>
+		<div class="table-cell table-125"><?php echo esc_html( mysql2date( 'd/m/Y', $evaluator['affectation_info']['start']['date'], true ) ); ?></div>
 		<div class="table-cell table-50"><?php echo esc_html( Evaluator_Class::g()->get_duration($evaluator['affectation_info']) ); ?></div>
 		<div class="table-cell table-50 table-end">
 			<div 	class="action-delete wpeo-button button-square-50 button-grey delete"

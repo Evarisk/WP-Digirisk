@@ -37,8 +37,8 @@ global $eo_search;
 			<div class="form-element group-date">
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-calendar-alt"></i></span>
-					<input type="hidden" class="mysql-date" value="">
-					<input type="text" class="form-field date" name="affectation_date" value="<?php echo date('d/m/Y', time( ) )?>" >
+					<input type="hidden" class="mysql-date" name="affectation_date" value="<?php echo date('d-m-Y', time( ) )?>">
+					<input type="text" class="form-field date" value="<?php echo date('d/m/Y', time( ) )?>" >
 				</label>
 			</div>
 		</div>

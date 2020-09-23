@@ -66,6 +66,7 @@ class Evaluator_Action {
 
 		$affected_evaluator[] = Evaluator_Class::g()->affect_user( $element, $user_id, $evaluator_infos );
 		$affected_evaluator = Evaluator_Class::g()->get_list_affected_evaluator( $element );
+		$new_evaluator = end($affected_evaluator[$affectation_date]);
 
 		Society_Class::g()->update($element->data);
 		User_Class::g()->update($evaluator->data);
@@ -73,11 +74,11 @@ class Evaluator_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'digirisk', 'evaluator', 'list-item', array(
 			'default_duration' => $default_duration,
-      'element'          => $element,
-			'evaluator'        => end($affected_evaluator[$affectation_date]),
+      		'element'          => $element,
+			'evaluator'        => $new_evaluator,
 
 		) );
-
+		
 		$view = ob_get_clean();
 
 		wp_send_json_success( array(
