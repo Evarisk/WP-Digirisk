@@ -15,10 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<div class="table-row">
+<div class="table-row listing-risk risk-row edit" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>">
 	<input type="hidden" name="action" value="edit_risk" />
 	<input type="hidden" name="page" value="all_risk" />
 	<input type="hidden" name="parent_id" value="<?php echo esc_attr( $risk->data['parent_id'] ); ?>" />
+	<input type="hidden" name="can_update" value="true"/>
+	<input name="id" type="hidden" value="<?php echo esc_attr( $risk->data['id'] ); ?>" />
 	<input name="risk[id]" type="hidden" value="<?php echo esc_attr( $risk->data['id'] ); ?>" />
 	<?php wp_nonce_field( 'edit_risk' ); ?>
 
@@ -38,8 +40,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="table-cell table-50 table-end">
 		<input type="checkbox" name="can_update" />
 		<a href="#" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
-		   data-parent="risk-row"
-		   data-loader="table"
+		   data-parent="listing-risk"
+		   data-loader="table-listing-risk"
 		   class="edit-risk action-input fas fa-save" aria-hidden="true" style="display: none;" ></a>
 	</div>
 </div>
