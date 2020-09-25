@@ -109,7 +109,7 @@ window.eoxiaJS.digirisk.setting.savedCapability = function( triggeredElement, re
  * @since 6.4.0
  */
 window.eoxiaJS.digirisk.setting.generalSettingsSaved = function( triggeredElement, response ) {
-	document.location.href = response.data.url;
+	//document.location.href = response.data.url;
 };
 
 window.eoxiaJS.digirisk.setting.activeSave = function( event ) {

@@ -116,6 +116,7 @@ class Setting_Action {
 
 		$can_edit_risk_category     = (bool) get_option( 'edit_risk_category', false );
 		$can_edit_type_cotation     = (bool) get_option( 'edit_type_cotation', false );
+		$can_mask_number_GP_UT      = (bool) get_option( 'mask_number_GP_UT', false );
 		$require_unique_security_id = (bool) get_option( 'require_unique_security_id', false );
 		$unique_security_id         = get_option( \eoxia\Config_Util::$init['digirisk']->child->security_id_key, false );
 		$parent_sites               = get_option( \eoxia\Config_Util::$init['digirisk']->child->site_parent_key, array() );
@@ -137,6 +138,7 @@ class Setting_Action {
 			'default_tab'                => $default_tab,
 			'can_edit_risk_category'     => $can_edit_risk_category,
 			'can_edit_type_cotation'     => $can_edit_type_cotation,
+			'can_mask_number_GP_UT'      => $can_mask_number_GP_UT,
 			'require_unique_security_id' => $require_unique_security_id,
 			'unique_security_id'         => $unique_security_id,
 			'parent_sites'               => $parent_sites,
@@ -247,16 +249,18 @@ class Setting_Action {
 	public function ajax_save_general_settings_digirisk() {
 		check_ajax_referer( 'save_general_settings_digirisk' );
 
-		$domain_mail                = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
-		$can_edit_risk_category     = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
-		$can_edit_type_cotation     = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
-		$general_data_options       = ! empty( $_POST['general_options'] ) ? (array) $_POST['general_options'] : array();
+		$domain_mail            = ! empty( $_POST['domain_mail'] ) ? sanitize_text_field( $_POST['domain_mail'] ) : '';
+		$can_edit_risk_category = ( isset( $_POST['edit_risk_category'] ) && 'true' == $_POST['edit_risk_category'] ) ? true : false;
+		$can_edit_type_cotation = ( isset( $_POST['edit_type_cotation'] ) && 'true' == $_POST['edit_type_cotation'] ) ? true : false;
+		$can_mask_number_GP_UT  = ( isset( $_POST['mask_number_GP_UT'] ) && 'true' == $_POST['mask_number_GP_UT'] ) ? true : false;
+		$general_data_options   = ! empty( $_POST['general_options'] ) ? (array) $_POST['general_options'] : array();
 
 		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
 		update_option( 'digirisk_domain_mail', $domain_mail );
 		update_option( 'edit_risk_category', $can_edit_risk_category );
 		update_option( 'edit_type_cotation', $can_edit_type_cotation );
+		update_option( 'mask_number_GP_UT', $can_mask_number_GP_UT );
 
 		$general_options['required_duer_day'] = $general_data_options['required_duer_day'];
 
@@ -266,7 +270,7 @@ class Setting_Action {
 			'namespace'        => 'digirisk',
 			'module'           => 'setting',
 			'callback_success' => 'generalSettingsSaved',
-			'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
+			//'url'              => admin_url( 'options-general.php?page=digirisk-setting' ),
 		) );
 	}
 

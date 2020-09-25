@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Digirisk V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-12 17:24+0100\n"
-"PO-Revision-Date: 2020-07-17 10:09+0200\n"
+"POT-Creation-Date: 2020-09-25 17:37+0200\n"
+"PO-Revision-Date: 2020-09-25 17:38+0200\n"
 "Last-Translator: Equipe de développement de digirisk <dev@digirisk.com>\n"
 "Language-Team: Evarisk <contact@evarisk.com>\n"
 "Language: fr_FR\n"
@@ -14,19 +14,19 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: .git\n"
 
-#: core/action/class-digirisk-action.php:174
+#: core/action/class-digirisk-action.php:177
 #, fuzzy
 #| msgid "Utilisateurs"
 msgid "Bienvenue sur DigiRisk"
 msgstr "Utilisateurs"
 
-#: core/action/class-digirisk-action.php:174
-#: core/action/class-digirisk-action.php:175
+#: core/action/class-digirisk-action.php:177
+#: core/action/class-digirisk-action.php:178
 #: modules/installer/action/class-installer-action.php:53
 #: modules/installer/view/installer.view.php:23
 #: modules/installer/view/installer.view.php:24
@@ -34,6 +34,12 @@ msgstr "Utilisateurs"
 #| msgid "Digirisk"
 msgid "DigiRisk"
 msgstr "Digirisk"
+
+#: core/action/class-digirisk-action.php:180
+#, fuzzy
+#| msgid "Update Danger"
+msgid "Task Manager"
+msgstr "Mettre à jour le danger"
 
 #: core/assets/js/define-string.js.php:4
 #, fuzzy
@@ -52,7 +58,9 @@ msgid "Completed"
 msgstr ""
 
 #: core/assets/js/define-string.js.php:8
-msgid "Be careful, before doing this, make a backup of your database unless you believe in unicorns."
+msgid ""
+"Be careful, before doing this, make a backup of your database unless you "
+"believe in unicorns."
 msgstr ""
 
 #: core/class/class-digirisk.php:100
@@ -91,6 +99,14 @@ msgstr ""
 #: core/external/eo-framework/core/util/class-module-util.php:51
 #, php-format
 msgid "Main config %s not init"
+msgstr ""
+
+#: core/external/eo-framework/modules/wpeo-custom-menu/action/class-custom-menu-action.php:61
+msgid "Tableau de bord"
+msgstr ""
+
+#: core/external/eo-framework/modules/wpeo-custom-menu/action/class-custom-menu-action.php:68
+msgid "Minimize menu"
 msgstr ""
 
 #: core/external/eo-framework/modules/wpeo-custom-menu/view/nav.view.php:72
@@ -135,11 +151,13 @@ msgid "List of updates for version %s"
 msgstr "Dernière mise à jour le %s"
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:29
-msgid "Be careful, before using this data update manager, please back up your datas"
+msgid ""
+"Be careful, before using this data update manager, please back up your datas"
 msgstr ""
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:30
-msgid "You may loose data if you quit this page until the update is in progress"
+msgid ""
+"You may loose data if you quit this page until the update is in progress"
 msgstr ""
 
 #: core/external/eo-framework/modules/wpeo-update-manager/view/main.view.php:42
@@ -199,7 +217,7 @@ msgstr ""
 msgid "Close"
 msgstr "Fermer"
 
-#: core/external/eo-framework/modules/wpeo-upload/view/list/button.view.php:33
+#: core/external/eo-framework/modules/wpeo-upload/view/list/button.view.php:32
 #, fuzzy
 #| msgid "Add a new picture"
 msgid "Add an attached file"
@@ -215,14 +233,25 @@ msgstr "Aucun fichier associé"
 msgid "Need to update DigiRisk data"
 msgstr ""
 
-#: modules/accident/action/class-accident-action.php:44
-#: modules/setting/view/capability/list.view.php:30
+#: modules/accident/action/class-accident-action.php:46
+#: modules/setting/view/capability/list.view.php:29
 msgid "Accidents"
 msgstr "Accidents"
 
 #: modules/accident/action/class-registre-at-travail-benins-action.php:57
 #, php-format
 msgid "Generation of minor work accidents register %s"
+msgstr ""
+
+#: modules/accident/class/class-accident-comment-class.php:84
+#, fuzzy
+#| msgid "Cotation du risque"
+msgid "Modification de l'accident "
+msgstr "Cotation du risque"
+
+#: modules/accident/class/class-accident-comment-class.php:84
+#: modules/risk/class/class-risk-evaluation-comment-class.php:89
+msgid "ajout du commentaire: "
 msgstr ""
 
 #: modules/accident/class/class-registre-at-benin.php:97
@@ -250,51 +279,51 @@ msgstr ""
 msgid "No"
 msgstr "Non"
 
-#: modules/accident/view/item-add.view.php:23
-#: modules/accident/view/item-add.view.php:30
-#: modules/accident/view/item-add.view.php:33
-#: modules/user_dashboard/view/list.view.php:27
-#: modules/user_dashboard/view/list.view.php:31
-#: modules/user_dashboard/view/list.view.php:35
+#: modules/accident/view/item-add.view.php:24
+#: modules/accident/view/item-add.view.php:31
+#: modules/accident/view/item-add.view.php:34
+#: modules/user_dashboard/view/list.view.php:24
+#: modules/user_dashboard/view/list.view.php:28
+#: modules/user_dashboard/view/list.view.php:32
 msgid "This field is required"
 msgstr "Ce champ est requis"
 
-#: modules/accident/view/item-edit.view.php:31
-#: modules/accident/view/item-edit.view.php:47
+#: modules/accident/view/item-edit.view.php:32
+#: modules/accident/view/item-edit.view.php:48
 msgid "Name., Surname.. victime"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:32
-#: modules/accident/view/item-edit.view.php:54
-#: modules/accident/view/list-item.view.php:26
+#: modules/accident/view/item-edit.view.php:33
+#: modules/accident/view/item-edit.view.php:55
+#: modules/accident/view/list-item.view.php:25
 msgid "Date & hour"
 msgstr "Date & heure"
 
-#: modules/accident/view/item-edit.view.php:33
-#: modules/accident/view/list-item.view.php:27
+#: modules/accident/view/item-edit.view.php:34
+#: modules/accident/view/list-item.view.php:26
 msgid "Place"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:34
+#: modules/accident/view/item-edit.view.php:35
 msgid "Circumstance"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:35
-#: modules/accident/view/list-item.view.php:29
+#: modules/accident/view/item-edit.view.php:36
+#: modules/accident/view/list-item.view.php:28
 msgid "Indicators"
 msgstr "Indicateurs"
 
-#: modules/accident/view/item-edit.view.php:36
-#: modules/accident/view/list-item.view.php:30
-#: modules/causerie/view/intervention/step-4.view.php:23
+#: modules/accident/view/item-edit.view.php:37
+#: modules/accident/view/list-item.view.php:29
+#: modules/causerie/view/intervention/step-4.view.php:22
 #, fuzzy
 #| msgid "location"
 msgid "Actions"
 msgstr "Lieux d'affichage"
 
-#: modules/accident/view/item-edit.view.php:63
-#: modules/accident/view/list.view.php:24
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:23
+#: modules/accident/view/item-edit.view.php:64
+#: modules/accident/view/list.view.php:23
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:22
 msgid "Lieu"
 msgstr ""
 
@@ -303,53 +332,57 @@ msgid "Detailed circumstances"
 msgstr ""
 
 #: modules/accident/view/item-edit.view.php:86
+msgid "Add a Work Stopping Communication"
+msgstr ""
+
+#: modules/accident/view/item-edit.view.php:123
 #, fuzzy
 #| msgid "Accident de travail"
 msgid "Accident investigation"
 msgstr "Accident de travail"
 
-#: modules/accident/view/item-edit.view.php:90
+#: modules/accident/view/item-edit.view.php:127
 msgid "Carry out an accident investigation"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:96
+#: modules/accident/view/item-edit.view.php:133
 msgid "enquête accident"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:103
+#: modules/accident/view/item-edit.view.php:140
 msgid "Seat lesions (specify right or left)"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:110
+#: modules/accident/view/item-edit.view.php:147
 msgid "Nature of lesions"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:119
+#: modules/accident/view/item-edit.view.php:156
 msgid "Name and address of witnesses"
 msgstr "Noms et adresses des témoins"
 
-#: modules/accident/view/item-edit.view.php:126
+#: modules/accident/view/item-edit.view.php:163
 msgid "Name and address of third parties involved"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:135
+#: modules/accident/view/item-edit.view.php:172
 msgid "Signature du soignant"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:138
+#: modules/accident/view/item-edit.view.php:175
 msgid "Signature de la victime"
 msgstr ""
 
-#: modules/accident/view/item-edit.view.php:143
+#: modules/accident/view/item-edit.view.php:180
 #: modules/causerie/view/form/modal/content-execute.view.php:23
 msgid "Note"
 msgstr ""
 
-#: modules/accident/view/list-item.view.php:25
+#: modules/accident/view/list-item.view.php:24
 msgid "Name., Surname.. victim"
 msgstr ""
 
-#: modules/accident/view/list-item.view.php:27
+#: modules/accident/view/list-item.view.php:26
 #: modules/causerie/filter/sheet-causerie.filter.php:90
 #: modules/causerie/filter/sheet-causerie.filter.php:94
 #: modules/causerie/filter/sheet-causerie.filter.php:95
@@ -358,24 +391,27 @@ msgstr ""
 #: modules/causerie/view/dashboard/list-item.view.php:65
 #: modules/causerie/view/dashboard/list-item.view.php:87
 #: modules/causerie/view/dashboard/list-item.view.php:106
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:49
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:58
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:46
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:55
 #: modules/comment/view/item-edit.view.php:40
 #: modules/informations/view/main.view.php:25
-#: modules/informations/view/main.view.php:36
+#: modules/informations/view/main.view.php:37
+#: modules/informations/view/main.view.php:43
 #: modules/risk/model/class-risk-evaluation-model.php:119
 msgid "N/A"
 msgstr ""
 
-#: modules/accident/view/list-item.view.php:28
-msgid "circumstances"
-msgstr ""
+#: modules/accident/view/list-item.view.php:27
+#, fuzzy
+#| msgid "Circulations internes"
+msgid "Circumstances"
+msgstr "Circulations internes"
 
-#: modules/accident/view/list-item.view.php:43
+#: modules/accident/view/list-item.view.php:42
 msgid "Corrupt. Click to regenerate."
 msgstr ""
 
-#: modules/accident/view/list-item.view.php:55
+#: modules/accident/view/list-item.view.php:54
 #, fuzzy
 #| msgid "Are you sure you want to dissociate this file?"
 msgid "Are you sure you want to delete this accident?"
@@ -389,49 +425,45 @@ msgstr ""
 msgid "Total des jours d'arrêt:"
 msgstr ""
 
-#: modules/accident/view/list-stopping-day.view.php:28
-#: modules/accident/view/list-stopping-day.view.php:45
+#: modules/accident/view/list-stopping-day.view.php:24
+#: modules/accident/view/list-stopping-day.view.php:40
 msgid "Le champ doit être au format numérique"
 msgstr ""
 
-#: modules/accident/view/list-stopping-day.view.php:33
-msgid "jour d'arrêt"
-msgstr ""
-
-#: modules/accident/view/list-stopping-day.view.php:38
+#: modules/accident/view/list-stopping-day.view.php:49
 msgid "Êtes-vous sur(e) de vouloir supprimer cet arrêt de travail ?"
 msgstr ""
 
-#: modules/accident/view/list.view.php:21
-#: modules/causerie/view/dashboard/main.view.php:30
-#: modules/permis_feu/view/dashboard/main.view.php:26
-#: modules/prevention_plan/view/dashboard/main.view.php:26
-#: modules/risk/view/page/list.view.php:23
+#: modules/accident/view/list.view.php:20
+#: modules/causerie/view/dashboard/main.view.php:23
+#: modules/permis_feu/view/dashboard/main.view.php:25
+#: modules/prevention_plan/view/dashboard/main.view.php:25
+#: modules/risk/view/page/list.view.php:22
 msgid "Ref."
 msgstr "Réf."
 
-#: modules/accident/view/list.view.php:22
+#: modules/accident/view/list.view.php:21
 msgid "Nom., Prénom.. victime"
 msgstr ""
 
-#: modules/accident/view/list.view.php:23
+#: modules/accident/view/list.view.php:22
 msgid "Date et heure"
 msgstr ""
 
-#: modules/accident/view/list.view.php:25
+#: modules/accident/view/list.view.php:24
 #, fuzzy
 #| msgid "Circulations internes"
 msgid "Circonstances"
 msgstr "Circulations internes"
 
-#: modules/accident/view/list.view.php:26
+#: modules/accident/view/list.view.php:25
 #, fuzzy
 #| msgid "Utilisateurs"
 msgid "Indicateurs"
 msgstr "Utilisateurs"
 
-#: modules/causerie/action/causerie-page.action.php:48
-#: modules/setting/view/capability/list.view.php:31
+#: modules/causerie/action/causerie-page.action.php:49
+#: modules/setting/view/capability/list.view.php:30
 msgid "Causeries"
 msgstr ""
 
@@ -440,12 +472,12 @@ msgstr ""
 msgid "Le contenu de l'import est vide"
 msgstr ""
 
-#: modules/causerie/class/causerie-intervention-page.class.php:208
+#: modules/causerie/class/causerie-intervention-page.class.php:210
 #: modules/causerie/view/form/modal/content.view.php:20
 msgid "Causerie"
 msgstr ""
 
-#: modules/causerie/class/causerie-intervention-page.class.php:208
+#: modules/causerie/class/causerie-intervention-page.class.php:210
 #, fuzzy
 #| msgid "Update"
 msgid "date"
@@ -492,7 +524,7 @@ msgid "Text vide"
 msgstr ""
 
 #: modules/causerie/filter/sheet-causerie.filter.php:243
-#: modules/prevention_plan/filter/sheet-prevention.filter.php:216
+#: modules/prevention_plan/filter/sheet-prevention.filter.php:218
 msgid "No picture defined"
 msgstr "Pas d'image définie"
 
@@ -505,10 +537,10 @@ msgid "Liste des participants"
 msgstr ""
 
 #: modules/causerie/view/dashboard/list-item.view.php:141
-#: modules/causerie/view/form/list-item.view.php:53
-#: modules/document/view/list-item.view.php:35
-#: modules/duer/view/list-item.view.php:109
-#: modules/listing-risk/view/list-item.view.php:34
+#: modules/causerie/view/form/list-item.view.php:51
+#: modules/document/view/list-item.view.php:42
+#: modules/duer/view/list-item.view.php:73
+#: modules/listing-risk/view/list-item.view.php:36
 #: modules/statistics/view/list-item.view.php:34
 msgid "Corrompu. Cliquer pour regénérer."
 msgstr ""
@@ -517,120 +549,112 @@ msgstr ""
 msgid "Dernières causeries réalisées"
 msgstr ""
 
-#: modules/causerie/view/dashboard/main.view.php:21
-msgid "Référence des causeries"
-msgstr ""
-
-#: modules/causerie/view/dashboard/main.view.php:31
-#: modules/causerie/view/form/main.view.php:41
-#: modules/causerie/view/start/main.view.php:24
-#: modules/causerie/view/start/main.view.php:58
-#: modules/recommendation/view/list.view.php:29
-#: modules/risk/view/list.view.php:24
+#: modules/causerie/view/dashboard/main.view.php:24
+#: modules/causerie/view/form/main.view.php:34
+#: modules/causerie/view/start/main.view.php:23
+#: modules/causerie/view/start/main.view.php:52
+#: modules/recommendation/view/list.view.php:28
+#: modules/risk/view/list.view.php:23
 #, fuzzy
 #| msgid "Photos"
 msgid "Photo"
 msgstr "Photos"
 
-#: modules/causerie/view/dashboard/main.view.php:32
+#: modules/causerie/view/dashboard/main.view.php:25
 msgid "Cat."
 msgstr ""
 
-#: modules/causerie/view/dashboard/main.view.php:33
-#: modules/causerie/view/form/main.view.php:43
-#: modules/causerie/view/start/main.view.php:26
-#: modules/causerie/view/start/main.view.php:60
+#: modules/causerie/view/dashboard/main.view.php:26
+#: modules/causerie/view/form/main.view.php:36
+#: modules/causerie/view/start/main.view.php:25
+#: modules/causerie/view/start/main.view.php:54
 #, fuzzy
 #| msgid "Description"
 msgid "Titre et description"
 msgstr "Description"
 
-#: modules/causerie/view/dashboard/main.view.php:34
-#: modules/permis_feu/view/progress/main.view.php:25
-#: modules/prevention_plan/view/outofdate/main.view.php:25
-#: modules/prevention_plan/view/progress/main.view.php:25
+#: modules/causerie/view/dashboard/main.view.php:27
+#: modules/permis_feu/view/progress/main.view.php:24
+#: modules/prevention_plan/view/outofdate/main.view.php:24
+#: modules/prevention_plan/view/progress/main.view.php:24
 #, fuzzy
 #| msgid "Manque de formation"
 msgid "Date début"
 msgstr "Manque de formation"
 
-#: modules/causerie/view/dashboard/main.view.php:35
+#: modules/causerie/view/dashboard/main.view.php:28
 msgid "Date cloture"
 msgstr ""
 
-#: modules/causerie/view/dashboard/main.view.php:36
-#: modules/causerie/view/intervention/step-1.view.php:32
-#: modules/causerie/view/intervention/step-1.view.php:37
-#: modules/permis_feu/view/dashboard/main.view.php:30
-#: modules/prevention_plan/view/dashboard/main.view.php:30
+#: modules/causerie/view/dashboard/main.view.php:29
+#: modules/causerie/view/intervention/step-1.view.php:34
+#: modules/causerie/view/intervention/step-1.view.php:38
+#: modules/permis_feu/view/dashboard/main.view.php:29
+#: modules/prevention_plan/view/dashboard/main.view.php:29
 #, fuzzy
 #| msgid "Formation"
 msgid "Formateur"
 msgstr "Formation"
 
-#: modules/causerie/view/dashboard/main.view.php:37
+#: modules/causerie/view/dashboard/main.view.php:30
 msgid "Participants"
 msgstr ""
 
-#: modules/causerie/view/dashboard/main.view.php:52
+#: modules/causerie/view/dashboard/main.view.php:44
 msgid "Aucune causerie réalisée pour le moment."
 msgstr ""
 
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:21
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:20
 msgid "Initial"
 msgstr ""
 
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:22
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:21
 msgid "Date signature"
 msgstr ""
 
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:23
-#: modules/causerie/view/intervention/step-1.view.php:38
-#: modules/causerie/view/intervention/step-4.view.php:22
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:22
+#: modules/causerie/view/intervention/step-1.view.php:39
+#: modules/causerie/view/intervention/step-4.view.php:21
 #: modules/permis_feu/view/start/step-4-intervenant-exterieur.view.php:78
 #: modules/signature/action/class-signature-action.php:45
 #: modules/signature/shortcode/class-signature-shortcode.php:30
 msgid "Signature"
 msgstr ""
 
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:65
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:62
 msgid "La signature du participant est obligatoire"
 msgstr ""
 
-#: modules/causerie/view/dashboard/modal-participants-list.view.php:69
+#: modules/causerie/view/dashboard/modal-participants-list.view.php:66
 msgid "Signé"
 msgstr ""
 
-#: modules/causerie/view/form/item-edit.view.php:37
+#: modules/causerie/view/form/item-edit.view.php:35
 msgid "Titre de la causerie"
 msgstr ""
 
-#: modules/causerie/view/form/item-edit.view.php:38
+#: modules/causerie/view/form/item-edit.view.php:36
 msgid "Description de la causerie"
 msgstr ""
 
-#: modules/causerie/view/form/list-item.view.php:68
+#: modules/causerie/view/form/list-item.view.php:66
 msgid "Supprimer cette causerie ?"
 msgstr ""
 
 #: modules/causerie/view/form/main.view.php:28
-#: modules/causerie/view/main.view.php:37
+#: modules/causerie/view/main.view.php:30
 msgid "Bibliothèque des causeries"
 msgstr ""
 
-#: modules/causerie/view/form/main.view.php:31
-msgid "Modifier la référence des permis de feu"
-msgstr ""
-
-#: modules/causerie/view/form/main.view.php:40
-#: modules/causerie/view/start/main.view.php:23
-#: modules/causerie/view/start/main.view.php:57
+#: modules/causerie/view/form/main.view.php:33
+#: modules/causerie/view/start/main.view.php:22
+#: modules/causerie/view/start/main.view.php:51
 #: modules/diffusion_informations/view/list.view.php:20
-#: modules/document/view/list.view.php:21 modules/duer/view/main.view.php:24
-#: modules/historic/view/risk/list.view.php:25
-#: modules/listing-risk/view/main.view.php:22
-#: modules/recommendation/view/list.view.php:27
-#: modules/risk/view/list.view.php:21
+#: modules/document/view/list.view.php:20 modules/duer/view/main.view.php:23
+#: modules/historic/view/risk/list.view.php:24
+#: modules/listing-risk/view/main.view.php:21
+#: modules/recommendation/view/list.view.php:26
+#: modules/risk/view/list.view.php:20
 #: modules/society/view/historic/table.view.php:22
 #: modules/statistics/view/main.view.php:21
 #, fuzzy
@@ -638,9 +662,9 @@ msgstr ""
 msgid "Ref"
 msgstr "Réf."
 
-#: modules/causerie/view/form/main.view.php:42
-#: modules/causerie/view/start/main.view.php:25
-#: modules/causerie/view/start/main.view.php:59
+#: modules/causerie/view/form/main.view.php:35
+#: modules/causerie/view/start/main.view.php:24
+#: modules/causerie/view/start/main.view.php:53
 #, fuzzy
 #| msgid "Cot"
 msgid "Cat"
@@ -656,12 +680,12 @@ msgstr ""
 
 #: modules/causerie/view/form/modal-content-git-foreach.view.php:23
 #: modules/causerie/view/form/modal-content-git-foreach.view.php:24
-#: modules/permis_feu/view/dashboard/main.view.php:27
-#: modules/permis_feu/view/progress/main.view.php:24
+#: modules/permis_feu/view/dashboard/main.view.php:26
+#: modules/permis_feu/view/progress/main.view.php:23
 #: modules/permis_feu/view/start/step-2.view.php:35
-#: modules/prevention_plan/view/dashboard/main.view.php:27
-#: modules/prevention_plan/view/outofdate/main.view.php:24
-#: modules/prevention_plan/view/progress/main.view.php:24
+#: modules/prevention_plan/view/dashboard/main.view.php:26
+#: modules/prevention_plan/view/outofdate/main.view.php:23
+#: modules/prevention_plan/view/progress/main.view.php:23
 #: modules/prevention_plan/view/start/step-2.view.php:34
 msgid "Titre"
 msgstr ""
@@ -766,7 +790,7 @@ msgid "Média"
 msgstr ""
 
 #: modules/causerie/view/form/modal/footer.view.php:28
-#: modules/causerie/view/intervention/step-1.view.php:88
+#: modules/causerie/view/intervention/step-1.view.php:87
 msgid "Retour"
 msgstr ""
 
@@ -783,13 +807,13 @@ msgid "Signature du formateur"
 msgstr ""
 
 #: modules/causerie/view/intervention/main.view.php:28
-#: modules/causerie/view/intervention/step-1.view.php:99
-#: modules/causerie/view/intervention/step-3.view.php:32
+#: modules/causerie/view/intervention/step-1.view.php:98
+#: modules/causerie/view/intervention/step-3.view.php:29
 msgid "Lecture de la causerie"
 msgstr ""
 
 #: modules/causerie/view/intervention/main.view.php:32
-#: modules/causerie/view/intervention/step-4.view.php:47
+#: modules/causerie/view/intervention/step-4.view.php:43
 msgid "Tâche liée"
 msgstr ""
 
@@ -807,22 +831,23 @@ msgstr ""
 msgid "Signature de "
 msgstr ""
 
-#: modules/causerie/view/intervention/step-1-signature.view.php:26
+#: modules/causerie/view/intervention/step-1-signature.view.php:28
 #: modules/causerie/view/intervention/step-1.view.php:72
+#: modules/signature/view/main.view.php:53
 #, fuzzy
 #| msgid "Identifiant de l'utilisateur"
 msgid "Signature de l'utilisateur: "
 msgstr "Identifiant de l'utilisateur"
 
-#: modules/causerie/view/intervention/step-1.view.php:26
+#: modules/causerie/view/intervention/step-1.view.php:28
 msgid "Réalisée pour la dernière fois le"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-1.view.php:44
+#: modules/causerie/view/intervention/step-1.view.php:43
 msgid "Veuillez renseigner le formateur"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-1.view.php:56
+#: modules/causerie/view/intervention/step-1.view.php:55
 #: modules/permis_feu/view/start/step-4-intervenant-exterieur.view.php:86
 #: modules/signature/view/main.view.php:40
 msgid "Signer"
@@ -840,11 +865,11 @@ msgstr ""
 msgid "Passer à l'étape des participants"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-3.view.php:25
+#: modules/causerie/view/intervention/step-3.view.php:23
 msgid "Veuillez activer Task-Manager pour cette interface"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-3.view.php:39
+#: modules/causerie/view/intervention/step-3.view.php:36
 msgid "Participant(s)"
 msgstr ""
 
@@ -857,15 +882,17 @@ msgstr ""
 msgid "Supprimer ce participant ?"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-4.view.php:21
+#: modules/causerie/view/intervention/step-4.view.php:20
 msgid "Participant"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-4.view.php:52
-msgid "Veuillez ajouter des participants et les faire signer avant de cloturer la causerie"
+#: modules/causerie/view/intervention/step-4.view.php:48
+msgid ""
+"Veuillez ajouter des participants et les faire signer avant de cloturer la "
+"causerie"
 msgstr ""
 
-#: modules/causerie/view/intervention/step-4.view.php:54
+#: modules/causerie/view/intervention/step-4.view.php:50
 msgid "Cloturer la causerie"
 msgstr ""
 
@@ -875,7 +902,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: modules/causerie/view/main.view.php:29
+#: modules/causerie/view/main.view.php:27
 msgid "Démarrer une causerie"
 msgstr ""
 
@@ -891,15 +918,15 @@ msgstr ""
 msgid "Causerie à démarrer"
 msgstr ""
 
-#: modules/causerie/view/start/main.view.php:44
+#: modules/causerie/view/start/main.view.php:40
 msgid "Aucune causerie à démarrer"
 msgstr ""
 
-#: modules/causerie/view/start/main.view.php:52
+#: modules/causerie/view/start/main.view.php:47
 msgid "Causerie en cours"
 msgstr ""
 
-#: modules/causerie/view/start/main.view.php:78
+#: modules/causerie/view/start/main.view.php:70
 msgid "Aucune causerie en cours"
 msgstr ""
 
@@ -909,12 +936,12 @@ msgid "Produit chimique"
 msgstr ""
 
 #: modules/chemical_product/view/list.view.php:5
-#: modules/evaluator/view/list-evaluator-affected.view.php:22
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:24
-#: modules/setting/view/capability/list.view.php:23
+#: modules/evaluator/view/list.view.php:21
+#: modules/setting/view/capability/list.view.php:22
 #: modules/user/view/list-user-affected.view.php:23
 #: modules/user/view/list-user-to-assign.view.php:25
-#: modules/user_dashboard/view/list.view.php:23
+#: modules/user_dashboard/view/list.view.php:21
 msgid "ID"
 msgstr "ID"
 
@@ -964,7 +991,10 @@ msgid "OK"
 msgstr "OK"
 
 #: modules/corrective_task/view/need-task-manager.view.php:18
-msgid "Il faut installer l'extension <a href=\"https://wordpress.org/plugins/task-manager/\" target=\"_blank\">Task Manager</a> pour créer des actions correctives."
+msgid ""
+"Il faut installer l'extension <a href=\"https://wordpress.org/plugins/task-"
+"manager/\" target=\"_blank\">Task Manager</a> pour créer des actions "
+"correctives."
 msgstr ""
 
 #: modules/corrective_task/view/popup.view.php:22
@@ -1011,19 +1041,18 @@ msgid "Corrompu"
 msgstr ""
 
 #: modules/diffusion_informations/view/list.view.php:21
-#: modules/document/view/list.view.php:22
-#: modules/evaluator/view/list-evaluator-affected.view.php:23
+#: modules/document/view/list.view.php:21
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:25
-#: modules/listing-risk/view/main.view.php:23
+#: modules/listing-risk/view/main.view.php:22
 #: modules/permis_feu/class/permis-feu-page.class.php:142
-#: modules/permis_feu/class/permis-feu-page.class.php:177
+#: modules/permis_feu/class/permis-feu-page.class.php:178
 #: modules/permis_feu/view/start/step-3-table-users.view.php:20
 #: modules/permis_feu/view/start/step-4-intervenant-exterieur.view.php:24
 #: modules/prevention_plan/class/prevention-page.class.php:151
 #: modules/prevention_plan/class/prevention-page.class.php:200
 #: modules/prevention_plan/view/start/step-3-table-users.view.php:20
 #: modules/prevention_plan/view/start/step-4.view.php:37
-#: modules/setting/view/capability/list.view.php:24
+#: modules/setting/view/capability/list.view.php:23
 #: modules/society/view/dashboard/edit/bloc-information-society.view.php:28
 #: modules/society/view/informations/configuration-form.view.php:30
 #: modules/statistics/view/main.view.php:22
@@ -1036,22 +1065,31 @@ msgid "Nom"
 msgstr "Non"
 
 #: modules/diffusion_informations/view/list.view.php:34
-msgid "Le formulaire ci-dessous permet la génération d'une diffusion d'information au format A3 et A4"
+msgid ""
+"Le formulaire ci-dessous permet la génération d'une diffusion d'information "
+"au format A3 et A4"
 msgstr ""
 
-#: modules/duer/action/class-duer-action.php:42
+#: modules/document/view/list.view.php:22
+#: modules/listing-risk/view/main.view.php:23
+#, fuzzy
+#| msgid "Manque de formation"
+msgid "Date de génération"
+msgstr "Manque de formation"
+
+#: modules/duer/action/class-duer-action.php:43
 #, fuzzy
 #| msgid "Documents unique"
 msgid "Document Unique"
 msgstr "Documents unique"
 
-#: modules/duer/action/class-duer-action.php:75
+#: modules/duer/action/class-duer-action.php:76
 #: modules/historic/view/risk/modal-button.view.php:20
 #: modules/user_dashboard/view/user-detail/modal/button.view.php:19
 msgid "Fermer"
 msgstr "Fermer"
 
-#: modules/duer/action/class-duer-action.php:262
+#: modules/duer/action/class-duer-action.php:263
 #, fuzzy, php-format
 #| msgid "Generate DUER"
 msgid "Génération du DUER %s"
@@ -1065,41 +1103,41 @@ msgstr "DUER"
 
 #: modules/duer/filter/duer.filter.php:52
 #: modules/duer/view/button-generate-duer.view.php:26
-#: modules/duer/view/list-item.view.php:98
+#: modules/duer/view/list-item.view.php:62
 #: modules/legal_display/view/form/DUER.view.php:19
 #: modules/society/view/dashboard/edit/bloc-information-others-informations.view.php:63
 msgid "DUER"
 msgstr "DUER"
 
-#: modules/duer/view/main.view.php:25
+#: modules/duer/view/main.view.php:24
 msgid "Début"
 msgstr ""
 
-#: modules/duer/view/main.view.php:26
+#: modules/duer/view/main.view.php:25
 msgid "Fin"
 msgstr ""
 
-#: modules/duer/view/main.view.php:27
+#: modules/duer/view/main.view.php:26
 msgid "Destinataire"
 msgstr ""
 
-#: modules/duer/view/main.view.php:28
+#: modules/duer/view/main.view.php:27
 #, fuzzy
 #| msgid "Methodology"
 msgid "Méthodologie"
 msgstr "Méthodologie"
 
-#: modules/duer/view/main.view.php:29
+#: modules/duer/view/main.view.php:28
 msgid "Sources"
 msgstr "Sources"
 
-#: modules/duer/view/main.view.php:30
+#: modules/duer/view/main.view.php:29
 #, fuzzy
 #| msgid "Location"
 msgid "Localisation"
 msgstr "Localisation"
 
-#: modules/duer/view/main.view.php:31
+#: modules/duer/view/main.view.php:30
 msgid "Notes"
 msgstr ""
 
@@ -1141,16 +1179,6 @@ msgstr "Date d'entrée"
 msgid "Cliquez sur les cases du tableau pour remplir votre évaluation"
 msgstr ""
 
-#: modules/evaluator/action/class-evaluator-action.php:72
-msgid "Mise à jour des évaluateurs"
-msgstr ""
-
-#: modules/evaluator/action/class-evaluator-action.php:76
-#, fuzzy
-#| msgid "Chute de hauteur"
-msgid "Ajout de l'évaluateur"
-msgstr "Chute de hauteur"
-
 #: modules/evaluator/filter/evaluator.filter.php:48
 #: modules/evaluator/filter/evaluator.filter.php:55
 #, fuzzy
@@ -1165,31 +1193,22 @@ msgstr "Evaluateurs"
 msgid "Les évaluateurs"
 msgstr "Enregistrer la cotation"
 
-#: modules/evaluator/view/list-evaluator-affected.view.php:24
+#: modules/evaluator/view/list-evaluator-affected.view.php:40
+#: modules/evaluator/view/list-item.view.php:41
+msgid "Dissocier l'évaluateur"
+msgstr ""
+
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:26
 #: modules/permis_feu/view/start/step-1.view.php:42
 #: modules/permis_feu/view/start/step-4-intervenant-exterieur.view.php:34
 #: modules/permis_feu/view/start/step-4.view.php:35
 #: modules/prevention_plan/view/start/step-1.view.php:62
 #: modules/prevention_plan/view/start/step-4.view.php:45
-#: modules/setting/view/capability/list.view.php:25
+#: modules/setting/view/capability/list.view.php:24
 #: modules/user/view/list-user-affected.view.php:25
 #: modules/user/view/list-user-to-assign.view.php:27
 #: modules/user_dashboard/view/item-edit.view.php:41
 msgid "Prénom"
-msgstr ""
-
-#: modules/evaluator/view/list-evaluator-affected.view.php:25
-#: modules/user/view/list-user-affected.view.php:26
-msgid "Date d'affectation"
-msgstr ""
-
-#: modules/evaluator/view/list-evaluator-affected.view.php:26
-msgid "Durée"
-msgstr ""
-
-#: modules/evaluator/view/list-evaluator-affected.view.php:51
-msgid "Dissocier l'évaluateur"
 msgstr ""
 
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:27
@@ -1206,7 +1225,7 @@ msgstr "Utilisateurs affectés"
 
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:63
 #: modules/risk/view/page/main.view.php:67
-#: modules/setting/view/capability/list.view.php:63
+#: modules/setting/view/capability/list.view.php:61
 #: modules/user/view/list-user-to-assign.view.php:65
 msgid "Page"
 msgstr "Page"
@@ -1214,6 +1233,19 @@ msgstr "Page"
 #: modules/evaluator/view/list-evaluator-to-assign.view.php:72
 #: modules/user/view/list-user-to-assign.view.php:53
 msgid "Mettre à jour"
+msgstr ""
+
+#: modules/evaluator/view/list.view.php:22
+msgid "Nom, Prénom"
+msgstr ""
+
+#: modules/evaluator/view/list.view.php:23
+#: modules/user/view/list-user-affected.view.php:26
+msgid "Date d'affectation"
+msgstr ""
+
+#: modules/evaluator/view/list.view.php:24
+msgid "Durée"
 msgstr ""
 
 #: modules/export_import/action/import.action.php:66
@@ -1248,7 +1280,9 @@ msgid "Exporter"
 msgstr "Exporter"
 
 #: modules/export_import/view/export-form.view.php:26
-msgid "Réalisez une exportation de vos données DigiRisk. Vous pouvez par la suite les importer dans une autre instance du logiciel."
+msgid ""
+"Réalisez une exportation de vos données DigiRisk. Vous pouvez par la suite "
+"les importer dans une autre instance du logiciel."
 msgstr ""
 
 #: modules/export_import/view/export-form.view.php:30
@@ -1263,7 +1297,7 @@ msgid "Unités de travail"
 msgstr "Unit&eacute;s de travail"
 
 #: modules/export_import/view/export-form.view.php:36
-#: modules/risk/action/class-risk-page-action.php:42
+#: modules/risk/action/class-risk-page-action.php:43
 #: modules/risk/filter/class-risk-filter.php:48
 #: modules/risk/filter/class-risk-filter.php:55
 #: modules/transfer_data/include/config.php:298
@@ -1281,7 +1315,9 @@ msgid "Importer"
 msgstr "Importer"
 
 #: modules/export_import/view/import-form.view.php:26
-msgid "Ne commencez pas de zéro! Importez un modèle prédéfini en cliquant sur le bouton ci-dessous."
+msgid ""
+"Ne commencez pas de zéro! Importez un modèle prédéfini en cliquant sur le "
+"bouton ci-dessous."
 msgstr ""
 
 #: modules/export_import/view/import-form.view.php:32
@@ -1317,6 +1353,7 @@ msgid "Les statistiques"
 msgstr "Risques"
 
 #: modules/group/filter/group.filter.php:96
+#: modules/risk/view/list-item.view.php:67
 #: modules/workunit/filter/class-workunit-filter.php:95
 msgid "Supprimer"
 msgstr ""
@@ -1337,20 +1374,20 @@ msgstr ""
 msgid "Aucun historique de modèle personnalisé."
 msgstr ""
 
-#: modules/historic/view/risk/list.view.php:26
+#: modules/historic/view/risk/list.view.php:25
 msgid "Date"
 msgstr ""
 
-#: modules/historic/view/risk/list.view.php:27
-#: modules/risk/view/list.view.php:23
-#: modules/setting/view/preset/main.view.php:22
+#: modules/historic/view/risk/list.view.php:26
+#: modules/risk/view/list.view.php:22
+#: modules/setting/view/preset/main.view.php:21
 msgid "Cot"
 msgstr "Cot"
 
-#: modules/historic/view/risk/list.view.php:28
-#: modules/recommendation/view/list.view.php:30
-#: modules/risk/view/list.view.php:25
-#: modules/setting/view/preset/main.view.php:23
+#: modules/historic/view/risk/list.view.php:27
+#: modules/recommendation/view/list.view.php:29
+#: modules/risk/view/list.view.php:24
+#: modules/setting/view/preset/main.view.php:22
 #, fuzzy
 #| msgid "Comment"
 msgid "Commentaire"
@@ -1373,7 +1410,9 @@ msgstr ""
 
 #: modules/informations/view/main.view.php:28
 #, php-format
-msgid "Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>%s</strong> jours"
+msgid ""
+"Nombre de jours restant avant la prochaine mise à jour obligatoire: <strong>"
+"%s</strong> jours"
 msgstr ""
 
 #: modules/informations/view/main.view.php:31
@@ -1386,51 +1425,53 @@ msgstr "Accidents"
 msgid "Date du dernier accident:"
 msgstr ""
 
-#: modules/informations/view/main.view.php:38
-msgid "Nombre de jour sans Accident: <strong>N/A</strong> jours"
-msgstr ""
+#: modules/informations/view/main.view.php:41
+#, fuzzy
+#| msgid "Cotation du risque"
+msgid "Nombre de jour sans accident:"
+msgstr "Cotation du risque"
 
-#: modules/informations/view/main.view.php:39
+#: modules/informations/view/main.view.php:45
 #, php-format
 msgid "Unité de Travail concernée: <strong>%s</strong>"
 msgstr ""
 
-#: modules/informations/view/main.view.php:43
+#: modules/informations/view/main.view.php:49
 #, fuzzy
 #| msgid "Accident de travail"
 msgid "Analyse par unité de travail ou GP"
 msgstr "Accident de travail"
 
-#: modules/informations/view/main.view.php:47
+#: modules/informations/view/main.view.php:53
 #, fuzzy
 #| msgid "Manque de formation"
 msgid "Date de l'action:"
 msgstr "Manque de formation"
 
-#: modules/informations/view/main.view.php:50
+#: modules/informations/view/main.view.php:56
 #, php-format
 msgid "UT ou GP: <strong>%s</strong>"
 msgstr ""
 
-#: modules/informations/view/main.view.php:51
+#: modules/informations/view/main.view.php:57
 #, php-format
 msgid "Description de l'action: <strong>%s</strong>"
 msgstr ""
 
-#: modules/informations/view/main.view.php:54
+#: modules/informations/view/main.view.php:60
 msgid "Analyse par personne"
 msgstr ""
 
-#: modules/informations/view/main.view.php:58
+#: modules/informations/view/main.view.php:64
 msgid "Nombre de personnes sur l'établissement:"
 msgstr ""
 
-#: modules/informations/view/main.view.php:61
+#: modules/informations/view/main.view.php:67
 #, php-format
 msgid "Nombre de personnes impliqués: <strong>%s évaluateur(s)</strong>"
 msgstr ""
 
-#: modules/informations/view/main.view.php:62
+#: modules/informations/view/main.view.php:68
 #, php-format
 msgid "Pourcentage: <strong>%s</strong>"
 msgstr ""
@@ -1475,9 +1516,9 @@ msgstr "Commentaire risque"
 
 #: modules/informations/view/risks.view.php:47
 #: modules/informations/view/risks.view.php:82
-#: modules/permis_feu/view/progress/main.view.php:30
-#: modules/prevention_plan/view/outofdate/main.view.php:30
-#: modules/prevention_plan/view/progress/main.view.php:30
+#: modules/permis_feu/view/progress/main.view.php:29
+#: modules/prevention_plan/view/outofdate/main.view.php:29
+#: modules/prevention_plan/view/progress/main.view.php:29
 msgid "Progression"
 msgstr ""
 
@@ -1652,7 +1693,9 @@ msgid "La méthode d'évaluation des risques simplifiée"
 msgstr ""
 
 #: modules/installer/view/bloc-5.view.php:22
-msgid "Cette méthode permet cependant de noter les résultats d’autres méthodes plus complexes comme"
+msgid ""
+"Cette méthode permet cependant de noter les résultats d’autres méthodes plus "
+"complexes comme"
 msgstr ""
 
 #: modules/installer/view/bloc-5.view.php:24
@@ -1675,10 +1718,9 @@ msgstr ""
 msgid "Elle est basée sur le modèle de classement de KINNEY"
 msgstr ""
 
-#: modules/installer/view/bloc-6.view.php:24
-#: modules/risk/view/category/dropdown.view.php:26
-#: modules/risk/view/list.view.php:22 modules/risk/view/page/list.view.php:24
-#: modules/setting/view/preset/main.view.php:21
+#: modules/installer/view/bloc-6.view.php:24 modules/risk/view/list.view.php:21
+#: modules/risk/view/page/list.view.php:23
+#: modules/setting/view/preset/main.view.php:20
 #: modules/society/view/historic/table.view.php:23
 msgid "Risque"
 msgstr "Risque"
@@ -1769,7 +1811,8 @@ msgid "L’INRS met à votre disposition 2 guides pour la signalisation :"
 msgstr ""
 
 #: modules/installer/view/bloc-8.view.php:23
-msgid "ED 777 : Signalisation de santé et de sécurité au travail. Réglementation"
+msgid ""
+"ED 777 : Signalisation de santé et de sécurité au travail. Réglementation"
 msgstr ""
 
 #: modules/installer/view/bloc-8.view.php:24
@@ -1789,7 +1832,9 @@ msgid "DigiRisk génère aussi l'affichage légal !"
 msgstr ""
 
 #: modules/installer/view/bloc-9.view.php:22
-msgid "Remplissez les champs, téléchargez votre affichage légal gratuitement au format libreoffice A3 ou A4"
+msgid ""
+"Remplissez les champs, téléchargez votre affichage légal gratuitement au "
+"format libreoffice A3 ou A4"
 msgstr ""
 
 #: modules/installer/view/bloc-9.view.php:25
@@ -1834,7 +1879,9 @@ msgid "Digirisk est prêt"
 msgstr "Digirisk : import"
 
 #: modules/installer/view/installer.view.php:48
-msgid "Bienvenue sur DigiRisk. Avant de commencer l'installation, veuillez entrer le nom de votre société."
+msgid ""
+"Bienvenue sur DigiRisk. Avant de commencer l'installation, veuillez entrer "
+"le nom de votre société."
 msgstr ""
 
 #: modules/installer/view/installer.view.php:51
@@ -2140,13 +2187,13 @@ msgstr ""
 msgid "Listing des risques photo"
 msgstr "Risques"
 
-#: modules/page_sorter/action/class-page-sorter-action.php:43
+#: modules/page_sorter/action/class-page-sorter-action.php:44
 #, fuzzy
 #| msgid "Organisationnelles"
 msgid "Organisation des UT"
 msgstr "Organisationnelles"
 
-#: modules/page_sorter/action/class-page-sorter-action.php:43
+#: modules/page_sorter/action/class-page-sorter-action.php:44
 msgid "Organiseur"
 msgstr ""
 
@@ -2158,14 +2205,14 @@ msgstr "Organisationnelles"
 
 #: modules/page_sorter/view/main.view.php:49
 #: modules/risk/view/page/main.view.php:55
-#: modules/setting/view/accronym/main.view.php:45
+#: modules/setting/view/accronym/main.view.php:39
 #: modules/setting/view/capability/main.view.php:34
 #: modules/setting/view/htpasswd/main.view.php:88
-#: modules/setting/view/preset/main.view.php:40
+#: modules/setting/view/preset/main.view.php:34
 msgid "Enregistrer"
 msgstr ""
 
-#: modules/permis_feu/action/permis-feu-page.action.php:41
+#: modules/permis_feu/action/permis-feu-page.action.php:42
 msgid "Permis de feu"
 msgstr ""
 
@@ -2177,7 +2224,7 @@ msgstr ""
 msgid "En cours"
 msgstr "En cours..."
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:49
+#: modules/permis_feu/view/dashboard/list-item.view.php:51
 #: modules/permis_feu/view/progress/table-item.view.php:46
 #: modules/prevention_plan/view/dashboard/list-item.view.php:48
 #: modules/prevention_plan/view/outofdate/table-item.view.php:45
@@ -2187,86 +2234,86 @@ msgstr "En cours..."
 msgid "Aucun maitre oeuvre"
 msgstr "Nom utilisateur"
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:67
+#: modules/permis_feu/view/dashboard/list-item.view.php:69
 #: modules/permis_feu/view/progress/table-item.view.php:52
 #: modules/prevention_plan/view/outofdate/table-item.view.php:51
 #: modules/prevention_plan/view/progress/table-item.view.php:51
 msgid "Aucun"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:71
+#: modules/permis_feu/view/dashboard/list-item.view.php:73
 #: modules/prevention_plan/view/dashboard/list-item.view.php:61
 #, fuzzy
 #| msgid "Maintenant"
 msgid "intervenant(s)"
 msgstr "Maintenant"
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:74
+#: modules/permis_feu/view/dashboard/list-item.view.php:76
 #: modules/prevention_plan/view/dashboard/list-item.view.php:64
 msgid "intervention(s)"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:82
-msgid "Modifier ce permis de feu"
-msgstr ""
-
-#: modules/permis_feu/view/dashboard/list-item.view.php:90
+#: modules/permis_feu/view/dashboard/list-item.view.php:84
 #: modules/permis_feu/view/start/step-2-prevention.view.php:39
-#: modules/prevention_plan/view/dashboard/list-item.view.php:80
+#: modules/prevention_plan/view/dashboard/list-item.view.php:72
 msgid "Générer le document"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:96
+#: modules/permis_feu/view/dashboard/list-item.view.php:92
+msgid "Modifier ce permis de feu"
+msgstr ""
+
+#: modules/permis_feu/view/dashboard/list-item.view.php:98
 msgid "Voulez-vous vraiment supprimer ce permis de feu ?"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/list-item.view.php:99
+#: modules/permis_feu/view/dashboard/list-item.view.php:101
 #: modules/prevention_plan/view/dashboard/list-item.view.php:89
 msgid "Supprimer le plan de prévention"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:28
-#: modules/prevention_plan/view/dashboard/main.view.php:28
+#: modules/permis_feu/view/dashboard/main.view.php:27
+#: modules/prevention_plan/view/dashboard/main.view.php:27
 msgid "Début intervention"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:29
-#: modules/prevention_plan/view/dashboard/main.view.php:29
+#: modules/permis_feu/view/dashboard/main.view.php:28
+#: modules/prevention_plan/view/dashboard/main.view.php:28
 msgid "Fin intervention"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:31
+#: modules/permis_feu/view/dashboard/main.view.php:30
 #: modules/permis_feu/view/start/step-1.view.php:29
-#: modules/prevention_plan/view/dashboard/main.view.php:31
+#: modules/prevention_plan/view/dashboard/main.view.php:30
 #: modules/prevention_plan/view/start/step-1.view.php:49
 msgid "Maitre d'oeuvre"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:32
-#: modules/permis_feu/view/progress/main.view.php:27
+#: modules/permis_feu/view/dashboard/main.view.php:31
+#: modules/permis_feu/view/progress/main.view.php:26
 msgid "Intervenant (Exterieur)"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:33
+#: modules/permis_feu/view/dashboard/main.view.php:32
 #, fuzzy
 #| msgid "Manque de formation"
 msgid "P de prévention"
 msgstr "Manque de formation"
 
-#: modules/permis_feu/view/dashboard/main.view.php:34
-#: modules/permis_feu/view/progress/main.view.php:28
-#: modules/prevention_plan/view/dashboard/main.view.php:33
-#: modules/prevention_plan/view/outofdate/main.view.php:28
-#: modules/prevention_plan/view/progress/main.view.php:28
+#: modules/permis_feu/view/dashboard/main.view.php:33
+#: modules/permis_feu/view/progress/main.view.php:27
+#: modules/prevention_plan/view/dashboard/main.view.php:32
+#: modules/prevention_plan/view/outofdate/main.view.php:27
+#: modules/prevention_plan/view/progress/main.view.php:27
 msgid "Intervenant(s)"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:35
-#: modules/prevention_plan/view/dashboard/main.view.php:34
+#: modules/permis_feu/view/dashboard/main.view.php:34
+#: modules/prevention_plan/view/dashboard/main.view.php:33
 msgid "Intervention(s)"
 msgstr ""
 
-#: modules/permis_feu/view/dashboard/main.view.php:50
+#: modules/permis_feu/view/dashboard/main.view.php:48
 msgid "Aucun permis de feu réalisé pour le moment."
 msgstr ""
 
@@ -2278,7 +2325,7 @@ msgstr ""
 #: modules/permis_feu/view/start/step-2.view.php:134
 #: modules/permis_feu/view/start/step-3.view.php:114
 #: modules/prevention_plan/view/new-button.view.php:25
-#: modules/prevention_plan/view/start/step-2.view.php:113
+#: modules/prevention_plan/view/start/step-2.view.php:117
 #: modules/prevention_plan/view/start/step-3.view.php:101
 msgid "Nouveau"
 msgstr ""
@@ -2287,23 +2334,23 @@ msgstr ""
 msgid "Listes des permis de feu en cours"
 msgstr ""
 
-#: modules/permis_feu/view/progress/main.view.php:26
+#: modules/permis_feu/view/progress/main.view.php:25
 #: modules/permis_feu/view/start/main.view.php:24
-#: modules/prevention_plan/view/outofdate/main.view.php:26
-#: modules/prevention_plan/view/progress/main.view.php:26
+#: modules/prevention_plan/view/outofdate/main.view.php:25
+#: modules/prevention_plan/view/progress/main.view.php:25
 #: modules/prevention_plan/view/start/main.view.php:24
 msgid "Maitre oeuvre"
 msgstr ""
 
-#: modules/permis_feu/view/progress/main.view.php:29
-#: modules/prevention_plan/view/outofdate/main.view.php:29
-#: modules/prevention_plan/view/progress/main.view.php:29
+#: modules/permis_feu/view/progress/main.view.php:28
+#: modules/prevention_plan/view/outofdate/main.view.php:28
+#: modules/prevention_plan/view/progress/main.view.php:28
 msgid "Intervention(s)\t"
 msgstr ""
 
-#: modules/permis_feu/view/progress/main.view.php:44
-#: modules/prevention_plan/view/dashboard/main.view.php:49
-#: modules/prevention_plan/view/progress/main.view.php:44
+#: modules/permis_feu/view/progress/main.view.php:42
+#: modules/prevention_plan/view/dashboard/main.view.php:47
+#: modules/prevention_plan/view/progress/main.view.php:42
 msgid "Aucun plan de prévention réalisé pour le moment."
 msgstr ""
 
@@ -2386,12 +2433,12 @@ msgid "Intervention du plan de prévention"
 msgstr ""
 
 #: modules/permis_feu/view/start/step-2-intervention-prevention-plan.view.php:26
-#: modules/prevention_plan/view/start/step-2.view.php:106
+#: modules/prevention_plan/view/start/step-2.view.php:110
 msgid "Listes des interventions associées aux risques"
 msgstr ""
 
 #: modules/permis_feu/view/start/step-2-prevention.view.php:24
-#: modules/prevention_plan/action/prevention-page.action.php:41
+#: modules/prevention_plan/action/prevention-page.action.php:42
 #: modules/prevention_plan/view/start/main.view.php:27
 #, fuzzy
 #| msgid "Manque de formation"
@@ -2414,10 +2461,10 @@ msgstr ""
 
 #: modules/permis_feu/view/start/step-2-table-intervention-edit.view.php:31
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:22
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:22
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:21
 #: modules/prevention_plan/view/start/step-2-table-intervention-edit.view.php:29
 #: modules/prevention_plan/view/start/step-2-table-intervention-foreach-item.view.php:22
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:22
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:21
 msgid "IdRPP"
 msgstr ""
 
@@ -2429,30 +2476,35 @@ msgid "Société"
 msgstr "Société"
 
 #: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:25
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:65
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:23
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:62
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:22
 #: modules/prevention_plan/view/start/step-2-table-intervention-edit.view.php:36
 #: modules/prevention_plan/view/start/step-2-table-intervention-foreach-item.view.php:63
+#: modules/sheet_workunit/filter/class-sheet-workunit-filter.php:54
+#: modules/sheet_workunit/filter/class-sheet-workunit-filter.php:55
 #: modules/transfer_data/view/transfert.view.php:37
 #, fuzzy
 #| msgid "Unit&eacute;s de travail"
 msgid "Unité de travail"
 msgstr "Unit&eacute;s de travail"
 
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:87
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach-item.view.php:87
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach-item.view.php:80
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach-item.view.php:82
 msgid "Voulez-vous supprimer cette intervention ?"
 msgstr ""
 
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:24
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:23
 msgid "Description des actions réalisées"
 msgstr ""
 
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:25
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:24
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:24
+#, fuzzy
+#| msgid "Risque"
 msgid "Risque INRS"
-msgstr ""
+msgstr "Risque"
 
-#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:26
+#: modules/permis_feu/view/start/step-2-table-intervention-foreach.view.php:25
 msgid "Matériels utilisés"
 msgstr ""
 
@@ -2476,15 +2528,15 @@ msgstr ""
 
 #: modules/permis_feu/view/start/step-2.view.php:71
 #: modules/permis_feu/view/start/step-2.view.php:78
-#: modules/prevention_plan/view/start/step-2.view.php:69
-#: modules/prevention_plan/view/start/step-2.view.php:76
+#: modules/prevention_plan/view/start/step-2.view.php:74
+#: modules/prevention_plan/view/start/step-2.view.php:81
 msgid "Défini"
 msgstr ""
 
 #: modules/permis_feu/view/start/step-2.view.php:74
 #: modules/permis_feu/view/start/step-2.view.php:81
-#: modules/prevention_plan/view/start/step-2.view.php:72
-#: modules/prevention_plan/view/start/step-2.view.php:79
+#: modules/prevention_plan/view/start/step-2.view.php:77
+#: modules/prevention_plan/view/start/step-2.view.php:84
 msgid "Sans limite"
 msgstr ""
 
@@ -2497,7 +2549,7 @@ msgid "Listes des interventions associées aux types de travaux"
 msgstr ""
 
 #: modules/permis_feu/view/start/step-2.view.php:132
-#: modules/prevention_plan/view/start/step-2.view.php:111
+#: modules/prevention_plan/view/start/step-2.view.php:115
 msgid "Ajouter une intervention"
 msgstr ""
 
@@ -2510,10 +2562,10 @@ msgstr ""
 #: modules/permis_feu/view/start/step-4-intervenant-exterieur.view.php:43
 #: modules/prevention_plan/view/start/step-3-table-users.view.php:22
 #: modules/prevention_plan/view/start/step-4.view.php:53
-#: modules/setting/view/capability/list.view.php:26
+#: modules/setting/view/capability/list.view.php:25
 #: modules/society/view/dashboard/edit/bloc-information-society-more.view.php:37
 #: modules/society/view/informations/configuration-form.view.php:103
-#: modules/user_dashboard/view/list.view.php:34
+#: modules/user_dashboard/view/list.view.php:31
 msgid "Email"
 msgstr "Email"
 
@@ -2582,7 +2634,7 @@ msgstr ""
 msgid "Responsable de la société intervenante"
 msgstr ""
 
-#: modules/prevention_plan/view/dashboard/list-item.view.php:72
+#: modules/prevention_plan/view/dashboard/list-item.view.php:80
 msgid "Modifier ce plan de prévention"
 msgstr ""
 
@@ -2590,9 +2642,9 @@ msgstr ""
 msgid "Voulez-vous vraiment supprimer ce plan de prévention"
 msgstr ""
 
-#: modules/prevention_plan/view/dashboard/main.view.php:32
-#: modules/prevention_plan/view/outofdate/main.view.php:27
-#: modules/prevention_plan/view/progress/main.view.php:27
+#: modules/prevention_plan/view/dashboard/main.view.php:31
+#: modules/prevention_plan/view/outofdate/main.view.php:26
+#: modules/prevention_plan/view/progress/main.view.php:26
 msgid "Responsable de la société extérieure"
 msgstr ""
 
@@ -2612,7 +2664,7 @@ msgstr ""
 msgid "Listes des plans de préventions périmés"
 msgstr ""
 
-#: modules/prevention_plan/view/outofdate/main.view.php:44
+#: modules/prevention_plan/view/outofdate/main.view.php:43
 msgid "Aucun plan de prévention périmé pour le moment."
 msgstr ""
 
@@ -2620,23 +2672,19 @@ msgstr ""
 msgid "Listes des plans de préventions brouillons"
 msgstr ""
 
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:24
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:23
 #, fuzzy
 #| msgid "Description"
 msgid "Description des actions"
 msgstr "Description"
 
 #: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:25
-msgid "Risque INRS"
-msgstr ""
-
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:26
 #, fuzzy
 #| msgid "Manque de formation"
 msgid "Moyens de prévention"
 msgstr "Manque de formation"
 
-#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:62
+#: modules/prevention_plan/view/start/step-2-table-intervention-foreach.view.php:53
 msgid "Aucunes interventions définies dans ce plan de prévention"
 msgstr ""
 
@@ -2654,17 +2702,21 @@ msgstr ""
 msgid "Information primaire du plan de prévention"
 msgstr ""
 
-#: modules/prevention_plan/view/start/step-2.view.php:104
+#: modules/prevention_plan/view/start/step-2.view.php:67
+msgid "La durée maximale d'un plan de prévention est de 1 an"
+msgstr ""
+
+#: modules/prevention_plan/view/start/step-2.view.php:108
 msgid "Intervention"
 msgstr ""
 
-#: modules/prevention_plan/view/start/step-2.view.php:125
-#: modules/prevention_plan/view/start/step-2.view.php:132
+#: modules/prevention_plan/view/start/step-2.view.php:129
+#: modules/prevention_plan/view/start/step-2.view.php:136
 msgid "Plus de 400 heures"
 msgstr ""
 
-#: modules/prevention_plan/view/start/step-2.view.php:140
-#: modules/prevention_plan/view/start/step-2.view.php:147
+#: modules/prevention_plan/view/start/step-2.view.php:144
+#: modules/prevention_plan/view/start/step-2.view.php:151
 msgid "Danger grave et imminent"
 msgstr ""
 
@@ -2696,13 +2748,12 @@ msgstr ""
 msgid "Vous devez choisir une signalisation."
 msgstr ""
 
-#: modules/recommendation/view/dropdown.view.php:26
-#: modules/recommendation/view/list.view.php:28
-msgid "Signalisation"
-msgstr ""
-
 #: modules/recommendation/view/list-item.view.php:46
 msgid "Êtes-vous sûr(e) de vouloir supprimer cette signalisation ?"
+msgstr ""
+
+#: modules/recommendation/view/list.view.php:27
+msgid "Signalisation"
 msgstr ""
 
 #: modules/risk/action/class-risk-action.php:130
@@ -2711,7 +2762,7 @@ msgstr ""
 msgid "Suppression du risque"
 msgstr "Cotation du risque"
 
-#: modules/risk/action/class-risk-page-action.php:42
+#: modules/risk/action/class-risk-page-action.php:43
 #, fuzzy
 #| msgid "Cotation du risque"
 msgid "Listing de risque"
@@ -2767,10 +2818,6 @@ msgstr "Nouvelle category de danger"
 msgid "Modification du risque "
 msgstr "Cotation du risque"
 
-#: modules/risk/class/class-risk-evaluation-comment-class.php:89
-msgid "ajout du commentaire: "
-msgstr ""
-
 #: modules/risk/filter/class-risk-filter.php:49
 #: modules/risk/filter/class-risk-filter.php:56
 #, fuzzy
@@ -2782,7 +2829,7 @@ msgstr "Risques"
 msgid "Vous devez choisir une catégorie de risque."
 msgstr ""
 
-#: modules/risk/view/list-item.view.php:61
+#: modules/risk/view/list-item.view.php:64
 msgid "Êtes-vous sûr(e) de vouloir supprimer ce risque ?"
 msgstr ""
 
@@ -2790,13 +2837,13 @@ msgstr ""
 msgid "Déplacer vers GP ou UT"
 msgstr ""
 
-#: modules/risk/view/page/list.view.php:20
+#: modules/risk/view/page/list.view.php:19
 #, fuzzy
 #| msgid "Parent Item:"
 msgid "Parent"
 msgstr "Parent du risque"
 
-#: modules/risk/view/page/list.view.php:25
+#: modules/risk/view/page/list.view.php:24
 msgid "Comment"
 msgstr "Commentaire"
 
@@ -2810,92 +2857,100 @@ msgstr ""
 msgid "Évaluation du risque corrompue"
 msgstr "Cotation du risque"
 
-#: modules/setting/action/class-setting-action.php:334
+#: modules/setting/action/class-setting-action.php:340
 msgid "Tous les champs doivent être renseignés."
 msgstr ""
 
-#: modules/setting/action/class-setting-action.php:338
+#: modules/setting/action/class-setting-action.php:344
 msgid "Les mots de passe ne sont pas identique."
 msgstr ""
 
-#: modules/setting/action/class-setting-action.php:342
+#: modules/setting/action/class-setting-action.php:348
 msgid " Aucune modification n'a était apporté"
 msgstr ""
 
 #: modules/setting/class/class-setting-class.php:191
-msgid "Par précaution veuillez être sur de posséder les identifiants FTP de votre site. Cette interface modifie votre fichier htaccess."
+msgid ""
+"Par précaution veuillez être sur de posséder les identifiants FTP de votre "
+"site. Cette interface modifie votre fichier htaccess."
 msgstr ""
 
 #: modules/setting/class/class-setting-class.php:208
-msgid "Un htpasswd est déjà présent sur votre instance DigiRisk. Cette interface vous permet de modifier l'identifiant et le mot de passe de celui-ci. Êtes vous sur de vouloir faire celà ?"
+msgid ""
+"Un htpasswd est déjà présent sur votre instance DigiRisk. Cette interface "
+"vous permet de modifier l'identifiant et le mot de passe de celui-ci. Êtes "
+"vous sur de vouloir faire celà ?"
 msgstr ""
 
-#: modules/setting/view/accronym/item-prefix.view.php:28
-#: modules/setting/view/accronym/item-prefix.view.php:47
+#: modules/setting/view/accronym/item-prefix.view.php:27
+#: modules/setting/view/accronym/item-prefix.view.php:46
 msgid "Accéder à la page"
 msgstr ""
 
-#: modules/setting/view/accronym/main.view.php:19
+#: modules/setting/view/accronym/main.view.php:18
 msgid "Element"
 msgstr ""
 
-#: modules/setting/view/accronym/main.view.php:20
+#: modules/setting/view/accronym/main.view.php:19
 msgid "Prefix"
 msgstr ""
 
-#: modules/setting/view/accronym/main.view.php:21
+#: modules/setting/view/accronym/main.view.php:20
 msgid "Accéder"
 msgstr ""
 
 #: modules/setting/view/capability/has-cap.view.php:20
-msgid "La capacité \"manage_digirisk\" est appliqué sur tous les utilisateurs dont le rôle est abonnés. Vous devez supprimer la capacité \"manage_digirisk\" sur celui-ci pour pouvoir gérer manuellement par utilisateur ce droit."
+msgid ""
+"La capacité \"manage_digirisk\" est appliqué sur tous les utilisateurs dont "
+"le rôle est abonnés. Vous devez supprimer la capacité \"manage_digirisk\" "
+"sur celui-ci pour pouvoir gérer manuellement par utilisateur ce droit."
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:27
+#: modules/setting/view/capability/list.view.php:26
 msgid "Rôle"
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:28
+#: modules/setting/view/capability/list.view.php:27
 msgid "Tous"
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:29
+#: modules/setting/view/capability/list.view.php:28
 #, fuzzy
 #| msgid "DUER"
 msgid "DU"
 msgstr "DUER"
 
-#: modules/setting/view/capability/list.view.php:32
+#: modules/setting/view/capability/list.view.php:31
 msgid "Prevention plan"
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:33
+#: modules/setting/view/capability/list.view.php:32
 msgid "Permis feu"
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:34
+#: modules/setting/view/capability/list.view.php:33
 #, fuzzy
 #| msgid "Risques"
 msgid "Listing risque"
 msgstr "Risques"
 
-#: modules/setting/view/capability/list.view.php:35
+#: modules/setting/view/capability/list.view.php:34
 #, fuzzy
 #| msgid "Organisationnelles"
 msgid "Organisation UT"
 msgstr "Organisationnelles"
 
-#: modules/setting/view/capability/list.view.php:36
+#: modules/setting/view/capability/list.view.php:35
 #: modules/transfer_data/include/config.php:298
-#: modules/user_dashboard/action/class-user-dashboard-action.php:50
+#: modules/user_dashboard/action/class-user-dashboard-action.php:51
 msgid "Utilisateurs"
 msgstr "Utilisateurs"
 
-#: modules/setting/view/capability/list.view.php:37
+#: modules/setting/view/capability/list.view.php:36
 msgid "Outils"
 msgstr ""
 
-#: modules/setting/view/capability/list.view.php:38
+#: modules/setting/view/capability/list.view.php:37
 msgid "Réglages"
 msgstr ""
 
@@ -2922,7 +2977,7 @@ msgid "Votre ID de sécurité unique est : "
 msgstr ""
 
 #: modules/setting/view/child/main.view.php:80
-#: modules/setting/view/general/main.view.php:59
+#: modules/setting/view/general/main.view.php:68
 #: modules/society/view/dashboard/edit/bloc-information-detective-work.view.php:66
 #: modules/society/view/dashboard/edit/bloc-information-emergency-service.view.php:94
 #: modules/society/view/dashboard/edit/bloc-information-health-service.view.php:66
@@ -2952,6 +3007,10 @@ msgstr ""
 #: modules/setting/view/general/main.view.php:53
 msgid "Autoriser la modification des types de cotation"
 msgstr ""
+
+#: modules/setting/view/general/main.view.php:62
+msgid "Hide GP and UT number"
+msgstr "Cacher le numéro des GP et des UT"
 
 #: modules/setting/view/htpasswd/main.view.php:22
 #, fuzzy
@@ -3033,18 +3092,6 @@ msgstr "Fiches de poste"
 msgid "Cliquer pour générer une fiche de poste"
 msgstr "Groupes de fiches de poste"
 
-#: modules/sheet_workunit/filter/class-sheet-workunit-filter.php:54
-#, fuzzy
-#| msgid "Fiches de poste"
-msgid "Fiche de Poste"
-msgstr "Fiches de poste"
-
-#: modules/sheet_workunit/filter/class-sheet-workunit-filter.php:55
-#, fuzzy
-#| msgid "Fiches de poste"
-msgid "Les fiches de poste"
-msgstr "Fiches de poste"
-
 #: modules/society/action/class-society-action.php:169
 #: modules/society/action/class-society-action.php:170
 #, fuzzy
@@ -3085,7 +3132,9 @@ msgstr ""
 #: modules/society/view/dashboard/bloc-information-society-more.view.php:40
 #: modules/society/view/dashboard/bloc-information-staff-representatives.view.php:40
 #: modules/society/view/dashboard/bloc-information-working-hours.view.php:40
-msgid "Données complémentaires à la société, possiblement utilisé dans la réalisation de Causerie/ Plan de prévention"
+msgid ""
+"Données complémentaires à la société, possiblement utilisé dans la "
+"réalisation de Causerie/ Plan de prévention"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-emergency-service.view.php:37
@@ -3093,7 +3142,8 @@ msgid "Service d'urgence et Consigne de Sécurité"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-others-informations.view.php:38
-msgid "Convention Collective - Reglement Interieur - DUER - Accord de participation"
+msgid ""
+"Convention Collective - Reglement Interieur - DUER - Accord de participation"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-society-more.view.php:37
@@ -3105,7 +3155,9 @@ msgid "Information primaire de la société"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-society.view.php:41
-msgid "Données primaires de la société, indispensable pour la réalisation de Causerie/ Plan de prévention"
+msgid ""
+"Données primaires de la société, indispensable pour la réalisation de "
+"Causerie/ Plan de prévention"
 msgstr ""
 
 #: modules/society/view/dashboard/bloc-information-staff-representatives.view.php:37
@@ -3241,15 +3293,23 @@ msgstr "Digirisk"
 
 #: modules/transfer_data/action/transfert.action.php:53
 #: modules/transfer_data/class/TransferData_components.class.php:634
-msgid "A required parameter is missing, please check your request and try again"
-msgstr "Un paramètres requis est manquant, veuillez vérifier votre requêtes et réessayez"
+msgid ""
+"A required parameter is missing, please check your request and try again"
+msgstr ""
+"Un paramètres requis est manquant, veuillez vérifier votre requêtes et "
+"réessayez"
 
 #: modules/transfer_data/action/transfert.action.php:73
-msgid "Import will automatically continue while all elements won't be transfered into database"
+msgid ""
+"Import will automatically continue while all elements won't be transfered "
+"into database"
 msgstr ""
 
 #: modules/transfer_data/action/transfert.action.php:113
-msgid "All elements have been transfered to new storage way into wordpress database. Please wait a minute we are redirecting you to digirisk main interface"
+msgid ""
+"All elements have been transfered to new storage way into wordpress "
+"database. Please wait a minute we are redirecting you to digirisk main "
+"interface"
 msgstr ""
 
 #: modules/transfer_data/action/transfert.action.php:238
@@ -3290,7 +3350,9 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:297
 #, php-format
-msgid "%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l'élément %4$s "
+msgid ""
+"%1$s #%2$d transférée dans les médias de WordPress vers #%3$d sur l'élément "
+"%4$s "
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:340
@@ -3299,12 +3361,16 @@ msgstr "Modèle document"
 
 #: modules/transfer_data/class/TransferData_common.class.php:343
 #, php-format
-msgid "%s could not being transfered to wordpress element. Filename: %s. Wordpress element: %d. Evarisk old element: %s"
+msgid ""
+"%s could not being transfered to wordpress element. Filename: %s. Wordpress "
+"element: %d. Evarisk old element: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:347
 #, php-format
-msgid "%1$s could not being transfered to wordpress element because it is not a file. Path: %2$s."
+msgid ""
+"%1$s could not being transfered to wordpress element because it is not a "
+"file. Path: %2$s."
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_common.class.php:378
@@ -3329,17 +3395,22 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:132
 #, php-format
-msgid "Error transferring danger category %s from evarisk to taxonomy. Error: %s"
+msgid ""
+"Error transferring danger category %s from evarisk to taxonomy. Error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:216
 #, php-format
-msgid "Evaluation method variable %s transfered from evarisk on taxonomy having id. %d"
+msgid ""
+"Evaluation method variable %s transfered from evarisk on taxonomy having id. "
+"%d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:222
 #, php-format
-msgid "Error transferring evaluation method variable %s from evarisk to taxonomy. error: %s"
+msgid ""
+"Error transferring evaluation method variable %s from evarisk to taxonomy. "
+"error: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:327
@@ -3349,12 +3420,14 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:334
 #, php-format
-msgid "Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s"
+msgid ""
+"Error transferring evaluation method %s from evarisk to taxonomy. ERROR: %s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:411
 #, php-format
-msgid "Recommendation category %s transfered from evarisk on taxonomy having id. %d"
+msgid ""
+"Recommendation category %s transfered from evarisk on taxonomy having id. %d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:453
@@ -3364,17 +3437,23 @@ msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:461
 #, php-format
-msgid "Error while transferring recommendation %s from Evarisk to taxonomy. Error: %s"
+msgid ""
+"Error while transferring recommendation %s from Evarisk to taxonomy. Error: "
+"%s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:467
 #, php-format
-msgid "Error transferring recommendation category from evarisk to taxonomy. Error: %s"
+msgid ""
+"Error transferring recommendation category from evarisk to taxonomy. Error: "
+"%s"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:514
 #, php-format
-msgid "Error transferring model named %s from evarisk to wordpress media under id. %d"
+msgid ""
+"Error transferring model named %s from evarisk to wordpress media under id. "
+"%d"
 msgstr ""
 
 #: modules/transfer_data/class/TransferData_components.class.php:728
@@ -3385,7 +3464,9 @@ msgstr ""
 #, fuzzy
 #| msgid "An error occured while getting element for association"
 msgid "An error occured while transfering the element to wordpress"
-msgstr "Une erreur est survenue lors de la récupération de l'élément pour l'assocation"
+msgstr ""
+"Une erreur est survenue lors de la récupération de l'élément pour "
+"l'assocation"
 
 #: modules/transfer_data/class/TransferData_groupement.class.php:183
 #, php-format
@@ -3552,32 +3633,56 @@ msgid "Gravite"
 msgstr "Gravite"
 
 #: modules/transfer_data/include/config.php:199
-msgid "0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;versible\\n4 : Menace sur la vie"
-msgstr "0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;versible\\n4 : Menace sur la vie"
+msgid ""
+"0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 "
+"jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;"
+"versible\\n4 : Menace sur la vie"
+msgstr ""
+"0 : Pas de blessure possible\\n1 : Blessure l&eacute;g&egrave;re\\n2 : ITT<5 "
+"jours ou effet r&eacute;versible\\n3 : ITT>5jours ou effet irr&eacute;"
+"versible\\n4 : Menace sur la vie"
 
 #: modules/transfer_data/include/config.php:200
 msgid "Exposition"
 msgstr "Exposition"
 
 #: modules/transfer_data/include/config.php:200
-msgid "0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 fois par jour"
-msgstr "0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 fois par jour"
+msgid ""
+"0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois "
+"par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 "
+"fois par jour"
+msgstr ""
+"0 : Jamais en contact\\n1 : Rare, 1 fois par an\\n2 : Inhabituelle, 1 fois "
+"par mois\\n3 : Occasionnelle, 1 fois par semaine\\n4 : Fr&eacute;quente, 1 "
+"fois par jour"
 
 #: modules/transfer_data/include/config.php:201
 msgid "Occurence"
 msgstr "Occurence"
 
 #: modules/transfer_data/include/config.php:201
-msgid "1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : Se produit tous les mois"
-msgstr "1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : Se produit tous les mois"
+msgid ""
+"1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des "
+"circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : "
+"Se produit tous les mois"
+msgstr ""
+"1 : Jamais arriv&eacute;\\n2 : Est d&eacute;j&agrave; arriv&eacute; dans des "
+"circonstances exeptionnelles\\n3 : D&eacute;j&agrave; produit 2 fois\\n4 : "
+"Se produit tous les mois"
 
 #: modules/transfer_data/include/config.php:202
 msgid "Formation"
 msgstr "Formation"
 
 #: modules/transfer_data/include/config.php:202
-msgid "1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas de formation ni de pr&eacute;vention"
-msgstr "1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas de formation ni de pr&eacute;vention"
+msgid ""
+"1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle "
+"obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas "
+"de formation ni de pr&eacute;vention"
+msgstr ""
+"1 : Pr&eacute;vention r&eacute;guli&egrave;re\\n2 : Formation individuelle "
+"obligatoire\\n3 : Formation obligatoire non r&eacute;alis&eacute;e\\n4 : Pas "
+"de formation ni de pr&eacute;vention"
 
 #: modules/transfer_data/include/config.php:203
 msgid "Protection"
@@ -3883,7 +3988,10 @@ msgid "Transfert des données d'Evarisk 5 vers DigiRisk 6"
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:6
-msgid "La version 6 et ultérieur de DigiRisk vont utiliser les fonctionnalités de WordPress de manière plus avancée. Pour cela nous allons effectuer le transfert des données de votre version 5.X.X.X."
+msgid ""
+"La version 6 et ultérieur de DigiRisk vont utiliser les fonctionnalités de "
+"WordPress de manière plus avancée. Pour cela nous allons effectuer le "
+"transfert des données de votre version 5.X.X.X."
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:8
@@ -3891,7 +3999,9 @@ msgid "Note importante : "
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:8
-msgid "Veillez a bien sauvegarder vos données avant de lancer le transfert des données"
+msgid ""
+"Veillez a bien sauvegarder vos données avant de lancer le transfert des "
+"données"
 msgstr ""
 
 #: modules/transfer_data/view/transfert.view.php:29
@@ -3934,7 +4044,9 @@ msgstr ""
 
 #: modules/update_manager/action/class-update-manager-action.php:83
 #, php-format
-msgid "Vous allez être redirigé vers DigiRisk.. %1$sCliquez ici si rien ne se passe.%2$s"
+msgid ""
+"Vous allez être redirigé vers DigiRisk.. %1$sCliquez ici si rien ne se passe."
+"%2$s"
 msgstr ""
 
 #: modules/update_manager/data/update-62100-data.php:22
@@ -4198,7 +4310,7 @@ msgstr "Date d'embauche"
 
 #: modules/user/view/user-profile.view.php:27
 msgid "Phone Number"
-msgstr ""
+msgstr "Téléphone portable"
 
 #: modules/user/view/user-profile.view.php:35
 msgid "Se connecter automatiquement à DigiRisk"
@@ -4212,15 +4324,19 @@ msgstr ""
 msgid "Adresse de messagerie déjà utilisée"
 msgstr ""
 
-#: modules/user_dashboard/view/item.view.php:50
+#: modules/user_dashboard/view/item.view.php:47
 msgid "Confirmer la suppression"
 msgstr ""
 
-#: modules/user_dashboard/view/list.view.php:26
+#: modules/user_dashboard/view/list.view.php:20
+msgid "Initiale"
+msgstr ""
+
+#: modules/user_dashboard/view/list.view.php:23
 msgid "Lastname"
 msgstr "Nom"
 
-#: modules/user_dashboard/view/list.view.php:30
+#: modules/user_dashboard/view/list.view.php:27
 msgid "Firtname"
 msgstr "Prénom"
 
@@ -4256,10 +4372,6 @@ msgstr ""
 msgid "Vous devez choisir un type de travaux"
 msgstr ""
 
-#: modules/worktype/view/category/dropdown.view.php:26
-msgid "Type de travaux"
-msgstr ""
-
 #: modules/workunit/filter/class-workunit-filter.php:50
 #, fuzzy
 #| msgid "Your informations"
@@ -4278,6 +4390,21 @@ msgstr ""
 msgid "ZIP Corrompu"
 msgstr ""
 
+#, fuzzy
+#~| msgid "Chute de hauteur"
+#~ msgid "Ajout de l'évaluateur"
+#~ msgstr "Chute de hauteur"
+
+#, fuzzy
+#~| msgid "Fiches de poste"
+#~ msgid "Fiche de Poste"
+#~ msgstr "Fiches de poste"
+
+#, fuzzy
+#~| msgid "Fiches de poste"
+#~ msgid "Les fiches de poste"
+#~ msgstr "Fiches de poste"
+
 #~ msgid "Terminé"
 #~ msgstr "Terminé"
 
@@ -4285,7 +4412,6 @@ msgstr ""
 #~| msgid ""
 #~| "Attention, avant cette opération, il est recommendé de faire une "
 #~| "sauvegarde de votre base de donnée."
-
 #~ msgid ""
 #~ "Attention, avant cette opération, il vous est recommandé de faire une "
 #~ "sauvegarde de votre base de donnée."
@@ -4295,25 +4421,21 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "No dangers found."
-
 #~ msgid "No services found."
 #~ msgstr "Aucun danger trouvé"
 
 #, fuzzy
 #~| msgid "Morning"
-
 #~ msgid "Warnings"
 #~ msgstr "Matin"
 
 #, fuzzy
 #~| msgid "View risk"
-
 #~ msgid "View"
 #~ msgstr "Voir le risque"
 
 #, fuzzy
 #~| msgid "Add New Danger"
-
 #~ msgid "Add New"
 #~ msgstr "Ajouter un nouveau danger"
 
@@ -4322,7 +4444,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Associate"
-
 #~ msgid "Dissociate"
 #~ msgstr "Associer"
 
@@ -4361,13 +4482,11 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Cotation du risque"
-
 #~ msgid "Choisir un risque"
 #~ msgstr "Cotation du risque"
 
 #, fuzzy
 #~| msgid "An error occured while getting element to generate sheet for."
-
 #~ msgid "An error occured while trying to generate the document"
 #~ msgstr ""
 #~ "Une erreur est survenue lors de la récupération de l'élément pour la "
@@ -4441,7 +4560,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
-
 #~ msgid "Édition de la méthode d'évaluation Evarisk"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4474,13 +4592,11 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Confirm delete ?"
-
 #~ msgid "Confirmer"
 #~ msgstr "Confirmer la suppression ?"
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
-
 #~ msgid "Installation des méthodes d'évaluation effectués"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4489,7 +4605,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Organisationnelles"
-
 #~ msgid "Organisation des établissements"
 #~ msgstr "Organisationnelles"
 
@@ -4555,7 +4670,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Professional qualification"
-
 #~ msgid "Les signalisation"
 #~ msgstr "Qualification professionnelle"
 
@@ -4564,13 +4678,11 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Digirisk risk"
-
 #~ msgid "Digirisk settings"
 #~ msgstr "Risques pour Digirisk"
 
 #, fuzzy
 #~| msgid "Fiches de groupement"
-
 #~ msgid "Fiche de groupement"
 #~ msgstr "Fiches de groupement"
 
@@ -4590,7 +4702,6 @@ msgstr ""
 #~| msgid ""
 #~| "Attention, avant cette opération, il est recommendé de faire une "
 #~| "sauvegarde de votre base de donnée."
-
 #~ msgid ""
 #~ "Attention, veuillez faire une sauvegarde de votre base de donnée avant "
 #~ "toutes actions."
@@ -4600,7 +4711,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Correction de la méthode d'évaluation Evarisk"
-
 #~ msgid "Méthode d'évaluation d'Evarisk"
 #~ msgstr "Correction de la méthode d'évaluation Evarisk"
 
@@ -4616,7 +4726,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Popular recommendations"
-
 #~ msgid "Problèmes de recommendation"
 #~ msgstr "Préconisations populaires"
 
@@ -4624,7 +4733,6 @@ msgstr ""
 #~| msgid ""
 #~| "Cliquer sur ce bouton pour que recompiler les risques, si vous "
 #~| "rencontrez des problèmes d'affichage"
-
 #~ msgid "Cliquer sur ce bouton pour résoudre les problèmes de recommendation"
 #~ msgstr ""
 #~ "Cliquer sur ce bouton pour que recompiler les risques, si vous rencontrez "
@@ -4632,7 +4740,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Circulation, d&eacute;placements"
-
 #~ msgid "Migration de document"
 #~ msgstr "Circulation, d&eacute;placements"
 
@@ -4654,19 +4761,16 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Digirisk installer"
-
 #~ msgid "DigiRisk mise à jour"
 #~ msgstr "Installation de Digirisk"
 
 #, fuzzy
 #~| msgid "Work unit"
-
 #~ msgid "Nom unité"
 #~ msgstr "Unité de travail"
 
 #, fuzzy
 #~| msgid "Groupements"
-
 #~ msgid "Groupement lié"
 #~ msgstr "Groupements"
 

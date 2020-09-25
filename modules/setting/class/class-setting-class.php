@@ -296,6 +296,11 @@ class Setting_Class extends \eoxia\Singleton_Util {
 		}
 
 	}
+
+	public function hide_GP_UT_number( ) {
+		$hide_GP_UT_number = get_option( 'mask_number_GP_UT' );
+		return $hide_GP_UT_number;
+	}
 }
 
 Setting_Class::g();

@@ -48,7 +48,9 @@ defined( 'ABSPATH' ) || exit; ?>
 				data-module="navigation"
 				data-before-method="setUnitActive">
 			<span class="title-container">
-				<span class="ref"><?php echo esc_html( $society->unique_identifier ); ?></span>
+				<?php if ( Setting_Class::g()->hide_GP_UT_number() == false ) : ?>
+					<span class="ref"><?php echo esc_html( $society->unique_identifier ); ?></span>
+				<?php endif; ?>
 				<span class="name"><?php echo esc_html( $society->post_title ); ?></span>
 			</span>
 		</div>
