@@ -37,6 +37,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="table-cell table-50"><?php echo esc_attr( $risk->data['unique_identifier'] ); ?> - <?php echo esc_attr( $risk->data['evaluation']->data['unique_identifier'] ); ?></div>
 	<div class="table-cell table-50"><?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" type="risk" display="view"]' ); ?></div>
 	<div class="table-cell"><?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" type="risk_evaluation_comment" display="edit"]' ); ?></div>
+	<div class="table-cell"><?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" type="risk_evaluation_comment" display="edit"]' ); ?></div>
+	<div class="wpeo-modal-event wpeo-button button-square-50 button-transparent w50 action-corrective"
+		data-parent="risk-row"
+		data-class="wpeo-wrap corrective-task tm-wrap"
+		data-action="open_task"
+		data-title="<?php echo 'Les actions correctives du risque: ' . $risk->data['unique_identifier']; ?>"
+		data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"><i class="fas fa-list-ul fa-fw"></i>
+	</div>
 	<div class="table-cell table-50 table-end">
 		<input type="checkbox" name="can_update" />
 		<a href="#" data-id="<?php echo esc_attr( $risk->data['id'] ); ?>"
