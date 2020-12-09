@@ -138,6 +138,7 @@ class Digirisk_Action {
 		if( isset( \eoxia\Config_Util::$init['task-manager'] ) ){
 			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk-causerie';
 			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk_page_digirisk-du';
+			\eoxia\Config_Util::$init['task-manager']->insert_scripts_pages[] = 'digirisk_page_digirisk-handle-risk';
 		}
 
 		load_plugin_textdomain( 'digirisk', false, PLUGIN_DIGIRISK_DIR . '/core/assets/languages/' );

@@ -55,6 +55,15 @@ defined( 'ABSPATH' ) || exit; ?>
 		</label>
 	</div>
 
+	<div class="form-element">
+		<label class="form-field-container">
+			<div class="form-field-inline">
+				<input type="checkbox" id="mask_number_GP_UT" class="form-field" name="mask_number_GP_UT" <?php echo $can_mask_number_GP_UT ? 'checked' : ''; ?> />
+				<label for="mask_number_GP_UT"><?php esc_html_e( 'Hide GP and UT number', 'digirisk' ); ?></label>
+			</div>
+		</label>
+	</div>
+
 	<div class="wpeo-button button-main action-input" data-parent="wpeo-form">
 		<span><?php esc_html_e( 'Enregistrer les modifications', 'digirisk' ); ?></span>
 	</div>
