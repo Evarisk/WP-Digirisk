@@ -12,8 +12,6 @@ window.eoxiaJS.digirisk.evaluator.init = function() {
 };
 
 window.eoxiaJS.digirisk.evaluator.event = function() {
-	jQuery( document ).on( 'click', '.digirisk-wrap table.evaluators input[type="checkbox"]', window.eoxiaJS.digirisk.evaluator.setTime );
-	jQuery( document ).on( 'click', '.form-edit-evaluator-assign .wp-digi-pagination a', window.eoxiaJS.digirisk.evaluator.pagination );
 };
 
 /**
@@ -41,7 +39,7 @@ window.eoxiaJS.digirisk.evaluator.callback_edit_evaluator_assign_success = funct
 	triggeredElement.closest( '.table-row.evaluator-row.edit' ).before( response.data.view );
 	triggeredElement.closest( '.table-row.evaluator-row.edit' ).find('.autocomplete-icon-after').click();
 };
- 
+
 /**
  * Gestion de la suppression des évaluateurs.
  *
