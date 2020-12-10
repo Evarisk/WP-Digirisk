@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 5.5.1
-Stable tag: 7.6.2
+Tested up to: 5.6
+Stable tag: 7.6.3
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,10 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.6.3 =
+
+- Fix : Correction d'un problème lié au JQuery depuis la mise à jour Wordpress 5.6.
 
 = Version 7.6.2 =
 
