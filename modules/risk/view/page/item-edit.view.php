@@ -37,7 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="table-cell table-50"><?php echo esc_attr( $risk->data['unique_identifier'] ); ?> - <?php echo esc_attr( $risk->data['evaluation']->data['unique_identifier'] ); ?></div>
 	<div class="table-cell table-50"><?php do_shortcode( '[digi_dropdown_categories_risk id="' . $risk->data['id'] . '" category_risk_id="' . $risk->data['risk_category']->data['id'] . '" type="risk" display="view"]' ); ?></div>
 	<div class="table-cell"><?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" type="risk_evaluation_comment" display="edit"]' ); ?></div>
-	<div class="table-cell"><?php do_shortcode( '[digi_comment id="' . $risk->data['id'] . '" type="risk_evaluation_comment" display="edit"]' ); ?></div>
 	<div class="wpeo-modal-event wpeo-button button-square-50 button-transparent w50 action-corrective"
 		data-parent="risk-row"
 		data-class="wpeo-wrap corrective-task tm-wrap"
