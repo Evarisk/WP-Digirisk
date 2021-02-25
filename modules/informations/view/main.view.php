@@ -51,7 +51,13 @@ defined( 'ABSPATH' ) || exit; ?>
 <?php if ( $id != 0  && ( ( $type == 'digi-group' ) || ( $type == 'digi-workunit' ) ) ) :
 	$society = Society_Class::g()->show_by_type($id) ?>
 
-	<h3><?php esc_html_e ('Description de la société' , 'digirisk') ;?></h3>
+
+	<?php if ( $type == 'digi-group' ) : ?>
+		<h3><?php esc_html_e ('Description d\'un GP' , 'digirisk') ;?></h3>
+	<?php endif; ?>
+	<?php if ( $type == 'digi-workunit' ) : ?>
+		<h3><?php esc_html_e ('Description d\'une UT' , 'digirisk') ;?></h3>
+	<?php endif; ?>
 	<div class="society-description">
 		<textarea type="text" style="width: 90% !important;" value="<?php printf($society->data['content']);?>" name="societyDescription"><?php printf($society->data['content']);?></textarea>
 		<input type="hidden" name="idSociety" value="<?php echo $society->data['id'] ;?>">
