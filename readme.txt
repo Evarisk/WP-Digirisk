@@ -4,7 +4,7 @@ Tags: Evaluation des risques, document unique, risques professionnels, audit ris
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
 Tested up to: 5.6.2
-Stable tag: 7.6.5
+Stable tag: 7.6.6
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,13 +77,17 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.6.6 =
+
+- Add : Ajout d'un champ description pour un GP ou une UT.
+
 = Version 7.6.5 =
 
-- Add : Ajout d'un champ description pour un GP ou une UT
+- Fix : Affichage des commentaires de risque dans le listing de risques.
 
 = Version 7.6.4 =
 
-- Fix : affichages des commentaires de risque dans le listing de risques
+- Fix : Fichier backend.min.js.
 
 = Version 7.6.3 =
 
