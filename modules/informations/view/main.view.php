@@ -46,21 +46,23 @@ defined( 'ABSPATH' ) || exit; ?>
     </div>
 <?php endif; ?>
 
-<h3><?php esc_html_e ('Description de la société' , 'digirisk') ;?></h3>
+<?php $id = ! empty( $_POST['id'] ) ? (int) $_POST['id'] : 0; ?>
 
-<?php $society = Society_Class::g()->show_by_type(9) ?>
+<?php if ( $id != 0  && ( ( $type == 'digi-group' ) || ( $type == 'digi-workunit' ) ) ) :
+	$society = Society_Class::g()->show_by_type($id) ?>
 
-<div class="society-description">
-    <textarea type="text" style="width: 100% !important;" value="<?php printf($society->data['content']);?>" name="societyDescription"><?php printf($society->data['content']);?></textarea>
-    <input type="hidden" name="idSociety" value="<?php echo $society->data['id'] ;?>">
-    <input type="hidden" name="action" value="save_society_description">
+	<h3><?php esc_html_e ('Description de la société' , 'digirisk') ;?></h3>
+	<div class="society-description">
+		<textarea type="text" style="width: 90% !important;" value="<?php printf($society->data['content']);?>" name="societyDescription"><?php printf($society->data['content']);?></textarea>
+		<input type="hidden" name="idSociety" value="<?php echo $society->data['id'] ;?>">
+		<input type="hidden" name="action" value="save_society_description">
 
-    <div class="wpeo-button button-green button-square-50 action-input save active"
-         data-parent="society-description">
-        <i class="button-icon fas fa-save"></i>
-    </div>
-
-</div>
+		<div class="wpeo-button button-green button-square-50 action-input save active"
+			 data-parent="society-description">
+			<i class="button-icon fas fa-save"></i>
+		</div>
+	</div>
+<?php endif; ?>
 
 <h3><?php esc_html_e( 'Analyse par unité de travail ou GP', 'digirisk' ); ?> </h3>
 

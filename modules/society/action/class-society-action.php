@@ -33,10 +33,7 @@ class Society_Action {
         add_action( 'wp_ajax_delete_society', array( $this, 'callback_delete_society' ) );
         add_action( 'wp_ajax_search_establishment', array( $this, 'callback_search_establishment' ) );
         add_action( 'wp_ajax_display_edit_view', array( $this, 'callback_display_edit_view' ) );
-
-        // ALLALALALALALALALA LALALA
         add_action( 'wp_ajax_save_society_description', array( $this, 'callback_save_society_description' ) );
-
     }
 
     /**
