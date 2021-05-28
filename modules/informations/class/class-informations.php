@@ -35,10 +35,12 @@ class Informations_Class extends \eoxia\Singleton_Util {
 	public function display( $element ) {
 		$general_options = get_option( \eoxia\Config_Util::$init['digirisk']->general_options, Setting_Class::g()->default_general_options );
 
-		$duers = DUER_Class::g()->get( array(
-			'posts_per_page' => 2,
-			'post_parent'    => $element->data['id'],
-		) );
+		if ($element->data['type'] == 'digi-society') {
+			$duers = DUER_Class::g()->get(array(
+				'posts_per_page' => 2,
+				'post_parent' => $element->data['id'],
+			));
+		}
 
 		$current_duer = null;
 
@@ -66,9 +68,9 @@ class Informations_Class extends \eoxia\Singleton_Util {
 			$last_accident = $last_accident->format('Y-m-d');
 			$last_accident = new \DateTime($last_accident);
 			$current_date = new \DateTime(date('Y-m-d',time()));
-			$days_without_accident = date_diff($last_accident,$current_date)->format('%a');	
+			$days_without_accident = date_diff($last_accident,$current_date)->format('%a');
 		}
-	
+
 		$count_users = count_users();
 
 		$historic_update = get_post_meta( $element->data['id'], \eoxia\Config_Util::$init['digirisk']->historic->key_historic, true );
