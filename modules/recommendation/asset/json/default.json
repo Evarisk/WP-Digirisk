@@ -5,7 +5,7 @@
   },
   {
     "name": "Champ magnétique important",
-    "name_thumbnail": "AVERTISSEMENT_DANGER/DANGER-champ-magnetique-important.jpg"
+    "name_thumbnail": "AVERTISSEMENT_DANGER/DANGER-champ-magnetique.jpg"
   },
   {
     "name": "Charges suspendues",
@@ -76,12 +76,16 @@
     "name_thumbnail": "AVERTISSEMENT_DANGER/DANGER-general.jpg"
   },
   {
+    "name": "Divers recommandations",
+    "name_thumbnail": "recommandations/recommandationsGenerale_s.png"
+  },
+  {
     "name": "Bande signalisation",
     "name_thumbnail": "AVERTISSEMENT_DANGER/DANGER-bande-signalisation.jpg"
   },
   {
     "name": "Divers équipement de protection collective",
-    "name_thumbnail": "epc/preconisations_epc.jpg"
+    "name_thumbnail": "epc/preconisations_epc_s.png"
   },
   {
     "name": "Protection individuelle obligatoire contre les chutes",
@@ -128,12 +132,16 @@
     "name_thumbnail": "OBLIGATION/OBLIGATION-consulter-notice.jpg"
   },
   {
+    "name": "Divers obligation",
+    "name_thumbnail": "OBLIGATION/OBLIGATION-general.jpg"
+  },
+  {
     "name": "Divers équipement de protection individuelle",
     "name_thumbnail": "OBLIGATION/preconisationEPI_s.png"
   },
   {
     "name": "Défense d'éteindre avec de l'eau",
-    "name_thumbnail": "INTERDICTION/INTERDIT-seau-eaux.jpg"
+    "name_thumbnail": "INTERDICTION/INTERDIT-seau-eau.jpg"
   },
   {
     "name": "Défense de fumer",
@@ -162,6 +170,10 @@
   {
     "name": "Ne pas toucher",
     "name_thumbnail": "INTERDICTION/INTERDIT-toucher.jpg"
+  },
+  {
+    "name": "Divers interdiction",
+    "name_thumbnail": "INTERDICTION/interdictionGenerale_s.png"
   },
   {
     "name": "Emplacement Alarme à incendie",
@@ -229,7 +241,7 @@
   },
   {
     "name": "Emplacement defibrilateur",
-    "name_thumbnail": "SECOURS/SECOURS-defibrilateur.jpg"
+    "name_thumbnail": "SECOURS/SECOURS-defibrillateur.jpg"
   },
   {
     "name": "Emplacement douche oeil",
@@ -290,17 +302,5 @@
   {
     "name": "Direction secours flèche haut gauche",
     "name_thumbnail": "SECOURS/SECOURS-fleche-haut-gauche.jpg"
-  },
-  {
-    "name": "Divers interdiction",
-    "name_thumbnail": "INTERDICTION/interdictionGenerale_s.png"
-  },
-  {
-    "name": "Divers obligation",
-    "name_thumbnail": "OBLIGATION/OGBLIGATION-general.jpg"
-  },
-  {
-    "name": "Divers recommandations",
-    "name_thumbnail": "recommandations/recommandationsGenerale.jpg"
   }
 ]
