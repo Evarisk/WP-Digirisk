@@ -90,7 +90,14 @@ class Recommendation extends \eoxia\Post_Class {
 	 */
 	public function display( $society_id ) {
 		$recommendation_schema = $this->get( array( 'schema' => true ), true );
-		$recommendations       = $this->get( array( 'post_parent' => $society_id ) );
+		$recommendations       = $this->get( array( 'post_parent' =>  $society_id) );
+
+		$update_recommendations = get_option('update_recommendations', 0);
+
+		if ( \eoxia\Config_Util::$init['digirisk']->version == '7.7.0' && $update_recommendations == 0) {
+			//Recommendation_Default_Data_Class::g()->create();
+			update_option('update_recommendations',1);
+		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list', array(
 			'society_id'            => $society_id,

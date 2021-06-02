@@ -22,5 +22,5 @@ defined( 'ABSPATH' ) || exit; ?>
 <input type="hidden" name="recommendation_category_id" value='<?php echo esc_attr( $recommendation->data['recommendation_category']->data['id'] ); ?>' />
 
 <div class="categorie-container padding wpeo-tooltip-event" aria-label="<?php echo esc_attr( $recommendation->data['recommendation_category']->data['name'] ); ?>">
-	<?php echo wp_get_attachment_image( $recommendation->data['recommendation_category']->data['thumbnail_id'], 'thumbnail', false ); ?>
+	<?php echo wp_get_attachment_image( $recommendation->data['recommendation_category']->data['thumbnail_id'], array(50,50), false ); ?>
 </div>
