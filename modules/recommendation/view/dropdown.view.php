@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit; ?>
 				?>
 				<li class="item dropdown-item wpeo-tooltip-event" aria-label="<?php echo esc_attr( $recommendation_category->data['name'] ); ?>"
 					data-id="<?php echo esc_attr( $recommendation_category->data['id'] ); ?>">
-					<?php echo wp_get_attachment_image( $recommendation_category->data['thumbnail_id'], 'thumbnail', false ); ?>
+					<?php echo wp_get_attachment_image( $recommendation_category->data['thumbnail_id'], array(50,50), false ); ?>
 				</li>
 				<?php
 			endforeach;
