@@ -80,7 +80,7 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 = Version 7.7.0 =
 
 - Add : Ajout des nouvelles signalisations en accord avec l'ed885 de l'INRS.
-- Fix : Problème lorsque l'on navigué sur la page information d'un GP ou d'un UT.
+- Fix : Problème d'affichage lorsque l'on navigué sur la page information d'un GP ou d'un UT.
 
 = Version 7.6.6 =
 
