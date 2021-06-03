@@ -77,6 +77,10 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
 
+= Version 7.7.2 =
+
+- Fix : Erreur duplication d'image pendant la création des nouvelles signalisations.
+
 = Version 7.7.1 =
 
 - Fix : Erreur pendant la création des nouvelles signalisations.

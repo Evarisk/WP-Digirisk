@@ -95,7 +95,6 @@ class Recommendation extends \eoxia\Post_Class {
 		$update_recommendations = get_option('update_recommendations', 0);
 
 		if ( \eoxia\Config_Util::$init['digirisk']->version == '7.7.2' && $update_recommendations <= 2) {
-
 			$terms = get_terms( array(
 				'taxonomy' => 'digi-recommendation-category',
 				'fields' => 'ids',
