@@ -94,9 +94,20 @@ class Recommendation extends \eoxia\Post_Class {
 
 		$update_recommendations = get_option('update_recommendations', 0);
 
-		if ( \eoxia\Config_Util::$init['digirisk']->version == '7.7.1' && $update_recommendations <= 1) {
+		if ( \eoxia\Config_Util::$init['digirisk']->version == '7.7.2' && $update_recommendations <= 2) {
+
+			$terms = get_terms( array(
+				'taxonomy' => 'digi-recommendation-category',
+				'fields' => 'ids',
+				'hide_empty' => false
+			) );
+
+			foreach( $terms as $term_id ) {
+				wp_delete_term( $term_id, 'digi-recommendation-category' );
+			}
+
 			Recommendation_Default_Data_Class::g()->create();
-			update_option('update_recommendations',2);
+			update_option('update_recommendations',3);
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'recommendation', 'list', array(
