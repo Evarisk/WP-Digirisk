@@ -89,8 +89,8 @@ class Recommendation_Action {
 			'status'    => 'inherit',
 		);
 
-		$recommendation_args['$push']['taxonomy'] = array(
-			'digi-recommendation-category' => $recommendation_term_id,
+		$recommendation_args['taxonomy'] = array(
+			'digi-recommendation-category' => (array) $recommendation_term_id,
 		);
 
 		$recommendation = Recommendation::g()->update( $recommendation_args );

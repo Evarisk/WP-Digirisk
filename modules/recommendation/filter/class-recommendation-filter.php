@@ -82,7 +82,11 @@ class Recommendation_Filter extends Identifier_Filter {
 		$args_recommendation_comment = array( 'schema' => true );
 
 		if ( ! empty( $object->data['taxonomy']['digi-recommendation-category'] ) ) {
-			$args_recommendation_term = array( 'id' => end( $object->data['taxonomy']['digi-recommendation-category'] ) );
+			if (count($object->data['taxonomy']['digi-recommendation-category']) <= 2 ){
+				$args_recommendation_term = array( 'id' => end( $object->data['taxonomy']['digi-recommendation-category'] ) );
+			} else {
+				$args_recommendation_term = array( 'id' => $object->data['taxonomy']['digi-recommendation-category'][1] );
+			}
 		}
 
 		if ( ! empty( $object->data['id'] ) ) {

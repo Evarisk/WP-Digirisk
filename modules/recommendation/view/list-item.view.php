@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit; ?>
 		<strong><?php echo esc_html( $recommendation->data['unique_identifier'] ); ?></strong>
 	</div>
 	<div class="table-cell table-100">
-		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation" display="view"]' ); ?>
+		<?php do_shortcode( '[dropdown_recommendation id="' . $recommendation->data['id'] . '" type="recommendation" display="item-dropdown"]' ); ?>
 	</div>
 	<div class="table-cell table-50">
 		<?php echo do_shortcode( '[wpeo_upload id="' . $recommendation->data['id'] . '" model_name="/digi/Recommendation" field_name="image" title="' . $recommendation->data['unique_identifier'] . '" ]' ); ?>

@@ -60,17 +60,18 @@ class Recommendation_Shortcode {
 	 */
 	public function callback_dropdown_recommendation( $param ) {
 		$id = ! empty( $param ) && ! empty( $param['id'] ) ? $param['id'] : 0;
+		$display = ! empty( $param ) && ! empty( $param['display'] ) ? $param['display'] : 'dropdown';
 
 		$recommendation            = array();
 		$recommendation_categories = Recommendation_Category::g()->get( array(
 			'orderby' => 'term_id',
 		) );
 
-		$display = 'dropdown';
+		//$display = 'dropdown';
 
 		if ( 0 !== $id ) {
 			$recommendation = Recommendation::g()->get( array( 'id' => $id ), true );
-			$display        = 'item-dropdown';
+			//$display        = 'item-dropdown';
 		}
 
 		\eoxia\View_Util::exec( 'digirisk', 'recommendation', $display, array(
