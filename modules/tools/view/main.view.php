@@ -43,6 +43,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php \eoxia\View_Util::exec( 'digirisk', 'export_import', 'export-csv' ); ?>
 					</div>
 				</div>
+
+				<div class="block">
+					<div class="container">
+						<?php echo do_shortcode( '[digi-export-tree]' ); ?>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="container">
+						<?php echo do_shortcode( '[digi-export-risks]' ); ?>
+					</div>
+				</div>
 			</div>
 
 

@@ -28,7 +28,8 @@ class Export_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_digi_export_data', array( $this, 'callback_export_data' ) );
-
+		add_action( 'wp_ajax_digi_export_tree_data', array( $this, 'callback_export_tree_data' ) );
+		add_action( 'wp_ajax_digi_export_risks_data', array( $this, 'callback_export_risks_data' ) );
 	}
 
 	/**
@@ -45,6 +46,33 @@ class Export_Action {
 		wp_send_json_success( $response );
 	}
 
+	/**
+	 * Fonction de rappel pour l'export des données
+	 *
+	 * @since 6.1.9
+	 * @version 6.1.9
+	 */
+	public function callback_export_tree_data() {
+		check_ajax_referer( 'digi_export_tree_data' );
+
+		$response = Export_Class::g()->exec_tree();
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Fonction de rappel pour l'export des données
+	 *
+	 * @since 6.1.9
+	 * @version 6.1.9
+	 */
+	public function callback_export_risks_data() {
+		check_ajax_referer( 'digi_export_risks_data' );
+
+		$response = Export_Class::g()->exec_risks();
+
+		wp_send_json_success( $response );
+	}
 }
 
 new export_action();

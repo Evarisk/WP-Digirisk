@@ -62,6 +62,32 @@ class Export_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
+	 * Appelles différentes méthodes pour récupérer toutes les données pour exporter le DigiRisk
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @return array
+	 */
+	public function exec_tree() {
+		$data_to_export = $this->export_groupments(0,false);
+		return $this->generate_zip( $data_to_export );
+	}
+
+	/**
+	 * Appelles différentes méthodes pour récupérer toutes les données pour exporter le DigiRisk
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @return array
+	 */
+	public function exec_risks() {
+		$data_to_export = $this->export_all_risks();
+		return $this->generate_zip( $data_to_export );
+	}
+
+	/**
 	 * Exportes tout le contenu d'un groupement
 	 *
 	 * @since 6.1.5
@@ -71,7 +97,42 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @return array
 	 */
-	public function export_groupments( $parent_id = 0 ) {
+	public function export_all_risks( $parent_id = 0) {
+		$society = Society_Class::get_current_society();
+
+		$risks = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_parent' => $society['id'],
+				'post_status' => array( 'publish', 'inherit' ),
+				'post_type'   => 'digi-risk',
+			)
+		);
+
+		$list_data_exported = array();
+
+		if ( ! empty( $risks ) ) {
+			foreach ( $risks as $element ) {
+				// Récupères les risques du groupement.
+				$element->list_risk = Risk_Class::g()->get( array( 'id' => $element->ID ) );
+				$list_data_exported[] = array_shift($this->export_risks( $element->list_risk ));
+			}
+		}
+
+		return $list_data_exported;
+	}
+
+	/**
+	 * Exportes tout le contenu d'un groupement
+	 *
+	 * @since 6.1.5
+	 * @version 6.5.0
+	 *
+	 * @param integer $parent_id (optional) Le groupement parent.
+	 *
+	 * @return array
+	 */
+	public function export_groupments( $parent_id = 0 , $risk = true) {
 		$list_group = Society_Class::g()->get( array(
 			'posts_per_page' => -1,
 			'post_type'      => array( 'digi-society', 'digi-group' ),
@@ -93,13 +154,15 @@ class Export_Class extends \eoxia\Singleton_Util {
 				$groupment_data_to_export = array(
 					'title'         => $element->data['title'],
 					'slug'          => $element->data['slug'],
+					'type'          => $element->data['type'],
 					'status'        => $element->data['status'],
 					'content'       => $element->data['content'],
 					'link'          => $element->data['link'],
+					'id'            => $element->data['id'],
 					'parent_id'     => $element->data['parent_id'],
-					'list_workunit' => $this->export_workunits( $element->list_workunit ),
-					'list_risk'     => $this->export_risks( $element->list_risk ),
-					'list_group'    => $this->export_groupments( $element->data['id'] ),
+					'list_workunit' => $this->export_workunits( $element->list_workunit, $risk),
+					'list_risk'     => ($risk) ? $this->export_risks( $element->list_risk ) : '',
+					'list_group'    => $this->export_groupments( $element->data['id'], $risk),
 				);
 
 				$list_data_exported[] = $groupment_data_to_export;
@@ -155,7 +218,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @param  array $workunits  Le tableau des unités de travail.
 	 * @return array
 	 */
-	public function export_workunits( $workunits ) {
+	public function export_workunits( $workunits, $risk = true ) {
 		$workunit_data_to_export = array();
 
 		if ( ! empty( $workunits ) ) {
@@ -163,11 +226,13 @@ class Export_Class extends \eoxia\Singleton_Util {
 				$tmp_workunit_data = array(
 					'title'     => $element->data['title'],
 					'slug'      => $element->data['slug'],
+					'type'      => $element->data['type'],
 					'status'    => $element->data['status'],
 					'content'   => $element->data['content'],
 					'link'      => $element->data['link'],
+					'id'        => $element->data['id'],
 					'parent_id' => $element->data['parent_id'],
-					'list_risk' => $this->export_risks( $element->list_risk ),
+					'list_risk' => ($risk) ? $this->export_risks( $element->list_risk ) : '',
 				);
 
 				$workunit_data_to_export[] = $tmp_workunit_data;
@@ -197,6 +262,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 					'status'              => $element->data['status'],
 					'content'             => $element->data['content'],
 					'link'                => $element->data['link'],
+					'id'                  => $element->data['id'],
 					'parent_id'           => $element->data['parent_id'],
 					'current_equivalence' => $element->data['current_equivalence'],
 					'danger_category'     => $this->export_danger_category( $element ), // Element car on a besoin $element->danger_category et $element->danger.

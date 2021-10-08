@@ -28,6 +28,8 @@ class export_shortcode {
 	public function __construct() {
 		add_shortcode( 'digi-export', array( $this, 'callback_export_interface' ) );
 		add_shortcode( 'digi-import', array( $this, 'callback_import_interface' ) );
+		add_shortcode( 'digi-export-tree', array( $this, 'callback_export_tree_interface' ) );
+		add_shortcode( 'digi-export-risks', array( $this, 'callback_export_risks_interface' ) );
 	}
 
 	/**
@@ -64,6 +66,39 @@ class export_shortcode {
 		\eoxia\View_Util::exec( 'digirisk', 'export_import', 'import-form', array( 'element_id' => $element_id, 'element' => $element ) );
 	}
 
+	/**
+	 * Interface d'export / Export Interface filter callback
+	 *
+	 * @param array $param Les paramètres du shortcode / Shortcode parameters
+	 */
+	public function callback_export_tree_interface( $param ) {
+		$element_id = $element = null;
+		/** On vérifie si il y a un élément défini pour l'affichage du shortcode / Check if there is an element specified for shortcode usage */
+		if ( !empty( $param ) && !empty( $param[ 'post_id' ] ) && is_int( (int)$param[ 'post_id' ] ) ) {
+			$element_id = $param[ 'post_id' ];
+			$element = society_class::g()->show_by_type( $element_id );
+		}
+
+		/** Affichage du formulaire d'export / Display export form */
+		\eoxia\View_Util::exec( 'digirisk', 'export_import', 'export-tree', array( 'element_id' => $element_id, 'element' => $element ) );
+	}
+
+	/**
+	 * Interface d'export / Export Interface filter callback
+	 *
+	 * @param array $param Les paramètres du shortcode / Shortcode parameters
+	 */
+	public function callback_export_risks_interface( $param ) {
+		$element_id = $element = null;
+		/** On vérifie si il y a un élément défini pour l'affichage du shortcode / Check if there is an element specified for shortcode usage */
+		if ( !empty( $param ) && !empty( $param[ 'post_id' ] ) && is_int( (int)$param[ 'post_id' ] ) ) {
+			$element_id = $param[ 'post_id' ];
+			$element = society_class::g()->show_by_type( $element_id );
+		}
+
+		/** Affichage du formulaire d'export / Display export form */
+		\eoxia\View_Util::exec( 'digirisk', 'export_import', 'export-risks', array( 'element_id' => $element_id, 'element' => $element ) );
+	}
 }
 
 new export_shortcode();
