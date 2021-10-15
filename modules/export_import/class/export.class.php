@@ -71,7 +71,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 */
 	public function exec_tree() {
 		$data_to_export = $this->export_groupments(0,false);
-		return $this->generate_zip( $data_to_export );
+		return $this->generate_zip( $data_to_export, 'arborescence');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 */
 	public function exec_risks() {
 		$data_to_export = $this->export_all_risks();
-		return $this->generate_zip( $data_to_export );
+		return $this->generate_zip( $data_to_export, 'risques');
 	}
 
 	/**
@@ -380,7 +380,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @param array $list_data_exported La liste des données à exporter.
 	 * @return array
 	 */
-	public function generate_zip( $list_data_exported ) {
+	public function generate_zip( $list_data_exported, $filename = 'global') {
 		$element = Society_Class::g()->get( array(
 			'posts_per_page' => 1,
 			'post_parent'    => 0,
@@ -389,7 +389,6 @@ class Export_Class extends \eoxia\Singleton_Util {
 		), true );
 
 		$current_time  = current_time( 'YmdHis' );
-		$filename      = 'global';
 		$export_base   = $this->export_directory . $current_time . '_' . $filename . '_export';
 		$json_filename = $export_base . '.json';
 
