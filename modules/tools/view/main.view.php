@@ -55,6 +55,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php echo do_shortcode( '[digi-export-risks]' ); ?>
 					</div>
 				</div>
+
+				<div class="block">
+					<div class="container">
+						<?php echo do_shortcode( '[digi-export-risksigns]' ); ?>
+					</div>
+				</div>
 			</div>
 
 

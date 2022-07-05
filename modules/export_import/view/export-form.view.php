@@ -35,6 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<li>
 				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Risk_Class::g()->get_type() ); ?>" checked="true" /><?php esc_html_e( 'Risques', 'digirisk' ); ?></label>
 			</li>
+			<li>
+				<label><input type="checkbox" name="type_to_export[]" value="<?php echo esc_attr( Recommendation::g()->get_type() ); ?>" checked="true" /><?php esc_html_e( 'Signalisations', 'digirisk' ); ?></label>
+			</li>
 		</ul>
 	</div>
 
