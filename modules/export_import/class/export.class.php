@@ -101,6 +101,21 @@ class Export_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
+	 * Appelles différentes méthodes pour récupérer toutes les données pour exporter le DigiRisk
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @return array
+	 */
+	public function exec_global() {
+		$data_to_export = $this->export_groupments(0,false);
+		$data_to_export[] = $this->export_all_risks();
+		$data_to_export[] = $this->export_all_risksigns();
+		return $this->generate_zip( $data_to_export, 'global');
+	}
+
+	/**
 	 * Exportes tout le contenu d'un groupement
 	 *
 	 * @since 6.1.5
