@@ -38,7 +38,7 @@ window.eoxiaJS.digirisk.export.init = function() {
  * @return {void}
  */
 window.eoxiaJS.digirisk.export.event = function() {
-	jQuery( document ).on( 'submit', '#digi-data-export #digi-export-form, #digi-data-export #digi-export-tree, #digi-data-export #digi-export-risks, #digi-data-export #digi-export-risksigns', window.eoxiaJS.digirisk.export.create_export );
+	jQuery( document ).on( 'submit', '#digi-data-export #digi-export-form, #digi-data-export #digi-export-tree, #digi-data-export #digi-export-risks, #digi-data-export #digi-export-risksigns, #digi-data-export #digi-export-global', window.eoxiaJS.digirisk.export.create_export );
 	jQuery( document ).on( 'change', '#digi-data-export #digi-import-form input[type="file"]', window.eoxiaJS.digirisk.export.make_import );
 };
 
