@@ -88,6 +88,34 @@ class Export_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
+	 * Appelles différentes méthodes pour récupérer toutes les données pour exporter le DigiRisk
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @return array
+	 */
+	public function exec_risksigns() {
+		$data_to_export = $this->export_all_risksigns();
+		return $this->generate_zip( $data_to_export, 'signalisations');
+	}
+
+	/**
+	 * Appelles différentes méthodes pour récupérer toutes les données pour exporter le DigiRisk
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @return array
+	 */
+	public function exec_global() {
+		$data_to_export = $this->export_groupments(0,false);
+		$data_to_export[] = $this->export_all_risks();
+		$data_to_export[] = $this->export_all_risksigns();
+		return $this->generate_zip( $data_to_export, 'global');
+	}
+
+	/**
 	 * Exportes tout le contenu d'un groupement
 	 *
 	 * @since 6.1.5
@@ -116,6 +144,41 @@ class Export_Class extends \eoxia\Singleton_Util {
 				// Récupères les risques du groupement.
 				$element->list_risk = Risk_Class::g()->get( array( 'id' => $element->ID ) );
 				$list_data_exported[] = array_shift($this->export_risks( $element->list_risk ));
+			}
+		}
+
+		return $list_data_exported;
+	}
+
+	/**
+	 * Exportes tout le contenu d'un groupement
+	 *
+	 * @since 6.1.5
+	 * @version 6.5.0
+	 *
+	 * @param integer $parent_id (optional) Le groupement parent.
+	 *
+	 * @return array
+	 */
+	public function export_all_risksigns( $parent_id = 0) {
+		$society = Society_Class::get_current_society();
+
+		$risksigns = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_parent' => $society['id'],
+				'post_status' => array( 'publish', 'inherit' ),
+				'post_type'   => 'digi-recommendation',
+			)
+		);
+
+		$list_data_exported = array();
+
+		if ( ! empty( $risksigns ) ) {
+			foreach ( $risksigns as $element ) {
+				// Récupères les signalisations du groupement.
+				$element->list_risksign = Recommendation::g()->get( array( 'id' => $element->ID ) );
+				$list_data_exported[] = array_shift($this->export_risksigns( $element->list_risksign ));
 			}
 		}
 
@@ -279,6 +342,39 @@ class Export_Class extends \eoxia\Singleton_Util {
 	}
 
 	/**
+	 * Exportes les champs nécessaires d'une signalisation.
+	 *
+	 * @since 7.7.5
+	 * @version 7.7.5
+	 *
+	 * @param  array $risksigns  Le tableau des signalisations.
+	 * @return array
+	 */
+	public function export_risksigns( $risksigns ) {
+		$data_risksigns_to_export = array();
+
+		if ( ! empty( $risksigns ) ) {
+			foreach ( $risksigns as $element ) {
+				$tmp_risksign_data = array(
+					'title'                   => $element->data['title'],
+					'slug'                    => $element->data['slug'],
+					'status'                  => $element->data['status'],
+					'content'                 => $element->data['content'],
+					'link'                    => $element->data['link'],
+					'id'                      => $element->data['id'],
+					'parent_id'               => $element->data['parent_id'],
+					'recommendation_category' => $this->export_risksign_category( $element ), // Element car on a besoin $element->recommendation_category et $element->recommendation.
+					'comment'                 => array_shift( $this->export_comments( $element->data['comment'] )),
+				);
+
+				$data_risksigns_to_export[] = $tmp_risksign_data;
+			}
+		}
+
+		return $data_risksigns_to_export;
+	}
+
+	/**
 	 * Exportes la catégorie de danger et le danger d'un risque.
 	 *
 	 * @since 6.1.5
@@ -295,6 +391,25 @@ class Export_Class extends \eoxia\Singleton_Util {
 		);
 
 		return $danger_category_data;
+	}
+
+	/**
+	 * Exportes la catégorie de danger et le danger d'un risque.
+	 *
+	 * @since 6.1.5
+	 * @version 6.4.1
+	 *
+	 * @param  Risk_Model $element Le risque.
+	 * @return array
+	 */
+	public function export_risksign_category( $element ) {
+		$risksign_category_data = array(
+			'name'      => $element->data['recommendation_category']->data['name'],
+			'slug'      => $element->data['recommendation_category']->data['slug'],
+			'parent_id' => $element->data['recommendation_category']->data['parent_id'],
+		);
+
+		return $risksign_category_data;
 	}
 
 	/**

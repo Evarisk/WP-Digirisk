@@ -15,15 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
-<form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" method="POST" id="digi-export-form" >
-	<h3><?php esc_html_e( 'Export', 'digirisk' ); ?></h3>
+<form action="<?php echo esc_attr( admin_url( 'admin-ajax.php' ) ); ?>" method="POST" id="digi-export-global" >
+	<h3><?php esc_html_e( 'Exporter l\'arborescence, les risques et les signalisations', 'digirisk' ); ?></h3>
 
 	<div class="content">
-		<input type="hidden" name="action" value="digi_export_data" />
-		<?php wp_nonce_field( 'digi_export_data' ); ?>
+		<input type="hidden" name="action" value="digi_export_global_data" />
+		<?php wp_nonce_field( 'digi_export_global_data' ); ?>
 		<input type="hidden" name="element_id" value="<?php echo esc_attr( $element_id ); ?>" />
 
-		<span class="digi-export-explanation" ><?php esc_html_e( 'Réalisez une exportation de vos données DigiRisk. Vous pouvez par la suite les importer dans une autre instance du logiciel.', 'digirisk' ); ?></span>
+		<span class="digi-export-explanation" ><?php esc_html_e( 'Réalisez une exportation de votre arborescence, de vos risques et de vos signalisations DigiRisk. Vous pouvez par la suite les importer dans DigiriskDolibarr.', 'digirisk' ); ?></span>
 
 		<ul class="hidden">
 			<li>

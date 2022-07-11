@@ -30,6 +30,8 @@ class Export_Action {
 		add_action( 'wp_ajax_digi_export_data', array( $this, 'callback_export_data' ) );
 		add_action( 'wp_ajax_digi_export_tree_data', array( $this, 'callback_export_tree_data' ) );
 		add_action( 'wp_ajax_digi_export_risks_data', array( $this, 'callback_export_risks_data' ) );
+		add_action( 'wp_ajax_digi_export_risksigns_data', array( $this, 'callback_export_risksigns_data' ) );
+		add_action( 'wp_ajax_digi_export_global_data', array( $this, 'callback_export_global_data' ) );
 	}
 
 	/**
@@ -70,6 +72,34 @@ class Export_Action {
 		check_ajax_referer( 'digi_export_risks_data' );
 
 		$response = Export_Class::g()->exec_risks();
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Fonction de rappel pour l'export des données des signalisations
+	 *
+	 * @since 7.7.5
+	 * @version 7.7.5
+	 */
+	public function callback_export_risksigns_data() {
+		check_ajax_referer( 'digi_export_risksigns_data' );
+
+		$response = Export_Class::g()->exec_risksigns();
+
+		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Fonction de rappel pour l'export des données des signalisations
+	 *
+	 * @since 7.7.5
+	 * @version 7.7.5
+	 */
+	public function callback_export_global_data() {
+		check_ajax_referer( 'digi_export_global_data' );
+
+		$response = Export_Class::g()->exec_global();
 
 		wp_send_json_success( $response );
 	}
