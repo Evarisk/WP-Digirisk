@@ -70,7 +70,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @return array
 	 */
 	public function exec_tree() {
-		$data_to_export = $this->export_groupments(0,false);
+		$data_to_export['digiriskelements'] = $this->export_groupments(0,false);
 		return $this->generate_zip( $data_to_export, 'arborescence');
 	}
 
@@ -83,7 +83,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @return array
 	 */
 	public function exec_risks() {
-		$data_to_export = $this->export_all_risks();
+		$data_to_export['risks'] = $this->export_all_risks();
 		return $this->generate_zip( $data_to_export, 'risques');
 	}
 
@@ -96,7 +96,7 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @return array
 	 */
 	public function exec_risksigns() {
-		$data_to_export = $this->export_all_risksigns();
+		$data_to_export['risksigns'] = $this->export_all_risksigns();
 		return $this->generate_zip( $data_to_export, 'signalisations');
 	}
 
@@ -109,9 +109,9 @@ class Export_Class extends \eoxia\Singleton_Util {
 	 * @return array
 	 */
 	public function exec_global() {
-		$data_to_export = $this->export_groupments(0,false);
-		$data_to_export[] = $this->export_all_risks();
-		$data_to_export[] = $this->export_all_risksigns();
+		$data_to_export['digiriskelements'] = $this->export_groupments(0,false);
+		$data_to_export['risks'] = $this->export_all_risks();
+		$data_to_export['risksigns'] = $this->export_all_risksigns();
 		return $this->generate_zip( $data_to_export, 'global');
 	}
 
@@ -228,7 +228,13 @@ class Export_Class extends \eoxia\Singleton_Util {
 					'list_group'    => $this->export_groupments( $element->data['id'], $risk),
 				);
 
-				$list_data_exported[] = $groupment_data_to_export;
+				if (($element->data['status'] == 'inherit' || $element->data['status'] == 'draft') && $element->data['parent_id'] == 0) {
+					$key = 'digiriskelements_archived';
+				} else {
+					$key = 'digiriskelements';
+				}
+
+				$list_data_exported[$key][] = $groupment_data_to_export;
 			}
 		}
 

@@ -3,8 +3,8 @@ Contributors: Evarisk
 Tags: Evaluation des risques, document unique, risques professionnels, audit risques, risques humains, digirisk, digi risk, evarisk, eva risk, risk, risks, risque, risques
 Donate link: http://www.evarisk.com/document-unique-logiciel
 Requires at least: 4.4
-Tested up to: 6.0.0
-Stable tag: 7.7.5
+Tested up to: 6.0.2
+Stable tag: 7.7.6
 License: AGPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,10 @@ Lors de l'installation de l'extension Digirisk si vous aviez déjà installé la
 == Changelog ==
 
 * Veillez à bien sauvegarder vos données avant d'effectuer une mise à jour du plugin
+
+= Version 7.7.6 =
+
+- Add : Archive GP/UT sur l'exportation + indexation du tableau pour construire l'export.
 
 = Version 7.7.5 =
 
