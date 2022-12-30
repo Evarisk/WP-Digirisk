@@ -34,7 +34,7 @@
     "gulp-sass": "latest",
     "gulp-uglify": "latest",
     "gulp-watch": "latest",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "nightmare": "^3.0.2",
     "should": "^13.2.1"
   }
