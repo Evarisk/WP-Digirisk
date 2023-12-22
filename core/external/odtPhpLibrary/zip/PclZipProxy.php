@@ -50,7 +50,7 @@ class digidigiPclZipProxy implements digiZipInterface
 			$this->close();
 		}
 		$this->filename = $filename;
-		$this->pclzip = new digiPclZip($this->filename);
+		$this->pclzip = new digiPclZip($this->filename, $this->tmpdir);
 		$this->openned = true;
 		return true;
 	}
